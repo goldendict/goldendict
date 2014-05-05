@@ -65,6 +65,7 @@ namespace {
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exNotXdxfFile, "The file is not an XDXF file:", Dictionary::Ex )
 DEF_EX( exCorruptedIndex, "The index file is corrupted", Dictionary::Ex )
+DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 
 enum
 {
@@ -223,10 +224,12 @@ XdxfDictionary::XdxfDictionary( string const & id,
 
   // Open the file
 
-  dz = dict_data_open( dictionaryFiles[ 0 ].c_str(), 0 );
+  DZ_ERRORS error;
+  dz = dict_data_open( dictionaryFiles[ 0 ].c_str(), &error, 0 );
 
   if ( !dz )
-    throw exCantReadFile( dictionaryFiles[ 0 ] );
+    throw exDictzipError( string( dz_error_str( error ) )
+                          + "(" + dictionaryFiles[ 0 ] + ")" );
 
   // Read the abrv, if any
 
@@ -716,8 +719,8 @@ GzippedFile::GzippedFile( char const * fileName ) throw( exCantReadFile )
   if ( !gz )
     throw exCantReadFile( fileName );
 
-  dz = dict_data_open( fileName, 0 );
-
+  DZ_ERRORS error;
+  dz = dict_data_open( fileName, &error, 0 );
 }
 
 GzippedFile::~GzippedFile()
@@ -1450,7 +1453,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
     }
     catch( std::exception & e )
     {
-      gdWarning( "Xdxf dictionary reading failed: %s, error: %s\n",
+      gdWarning( "Xdxf dictionary initializing failed: %s, error: %s\n",
                  i->c_str(), e.what() );
     }
   }

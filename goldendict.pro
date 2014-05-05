@@ -319,7 +319,8 @@ HEADERS += folding.hh \
     tiff.hh \
     dictheadwords.hh \
     fulltextsearch.hh \
-    ftshelpers.hh
+    ftshelpers.hh \
+    dictserver.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -438,7 +439,8 @@ SOURCES += folding.cc \
     tiff.cc \
     dictheadwords.cc \
     fulltextsearch.cc \
-    ftshelpers.cc
+    ftshelpers.cc \
+    dictserver.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

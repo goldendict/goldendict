@@ -204,7 +204,6 @@ void DictHeadwords::itemClicked( const QModelIndex & index )
   if ( value.canConvert< QString >() )
   {
     QString headword = value.toString();
-    headword.replace( QRegExp( "([\\*\\?\\[\\]])" ), "\\\\1" );
     emit headwordSelected( headword );
   }
 }

@@ -2101,7 +2101,7 @@ void MainWindow::translateInputChanged( QString const & newValue )
 
 void MainWindow::translateInputFinished( bool checkModifiers )
 {
-  QString word = translateLine->text();
+  QString word = Folding::unescapeWildcardSymbols( translateLine->text() );
 
   if ( word.size() )
   {
@@ -2523,9 +2523,9 @@ void MainWindow::showHistoryItem( QString const & word )
   history.enableAdd( false );
 
   if ( cfg.preferences.searchInDock )
-    translateLine->setText( word );
+    translateLine->setText( Folding::escapeWildcardSymbols( word ) );
   else
-    translateBox->setText( word, false );
+    translateBox->setText( Folding::escapeWildcardSymbols( word ), false );
 
   showTranslationFor( word );
 
@@ -3497,7 +3497,7 @@ ArticleView * MainWindow::getCurrentArticleView()
 void MainWindow::wordReceived( const QString & word)
 {
     toggleMainWindow( true );
-    translateLine->setText( word );
+    translateLine->setText( Folding::escapeWildcardSymbols( word ) );
     translateInputFinished( false );
 }
 
@@ -4002,7 +4002,7 @@ void MainWindow::showFullTextSearchDialog()
     connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
              this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
     connect( ftsDlg, SIGNAL( closeDialog() ),
-             this, SLOT( closeFullTextSearchDialog() ) );
+             this, SLOT( closeFullTextSearchDialog() ), Qt::QueuedConnection );
     connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
              ftsDlg, SLOT( updateDictionaries() ) );
   }

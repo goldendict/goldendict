@@ -68,7 +68,7 @@ void Indexing::run()
   {
     gdWarning( "Exception occured while full-text search: %s", ex.what() );
   }
-  emit sendNowIndexingName( "None" );
+  emit sendNowIndexingName( tr( "None" ) );
 }
 
 
@@ -143,6 +143,9 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   if( cfg.preferences.fts.dialogGeometry.size() > 0 )
     restoreGeometry( cfg.preferences.fts.dialogGeometry );
 
+  setAttribute( Qt::WA_DeleteOnClose, false );
+  setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
+
   setWindowTitle( tr( "Full-text search" ) );
 
   setNewIndexingName( ftsIdx.nowIndexingName() );
@@ -195,6 +198,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   connect( ui.headwordsView, SIGNAL( clicked( QModelIndex ) ),
            this, SLOT( itemClicked( QModelIndex ) ) );
 
+  connect( this, SIGNAL( finished( int ) ), this, SLOT( saveData() ) );
+
   connect( ui.OKButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
   connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
 
@@ -230,7 +235,6 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
 FullTextSearchDialog::~FullTextSearchDialog()
 {
-  saveData();
   if( delegate )
     delete delegate;
 
@@ -437,7 +441,10 @@ void FullTextSearchDialog::reject()
   if( !searchReqs.empty() )
     stopSearch();
   else
+  {
+    saveData();
     emit closeDialog();
+  }
 }
 
 void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
@@ -445,7 +452,6 @@ void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
   if( idx.isValid() && idx.row() < results.size() )
   {
     QString headword = results[ idx.row() ].headword;
-    headword.replace( QRegExp( "([\\*\\?\\[\\]])" ), "\\\\1" );
     emit showTranslationFor( headword, results[ idx.row() ].dictIDs, searchRegExp );
   }
 }

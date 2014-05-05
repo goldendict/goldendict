@@ -48,6 +48,16 @@ typedef struct dictCache {
    int           count;
 } dictCache;
 
+enum DZ_ERRORS {
+  DZ_NOERROR = 0,
+  DZ_ERR_INTERNAL,
+  DZ_ERR_OPENFILE,
+  DZ_ERR_READFILE,
+  DZ_ERR_UNSUPPORTED_FORMAT,
+  DZ_ERR_INVALID_FORMAT,
+  DZ_ERR_NOMEMORY
+};
+
 typedef struct dictData {
 #ifdef __WIN32
    HANDLE        fd;		/* file handle */
@@ -86,7 +96,7 @@ typedef struct dictData {
 
 /* initialize .data file */
 extern dictData *dict_data_open (
-   const char *filename, int computeCRC);
+   const char *filename, enum DZ_ERRORS * error, int computeCRC);
 /* */
 extern void dict_data_close (
    dictData *data);
@@ -98,6 +108,8 @@ extern char *dict_data_read_ (
    const char *postFilter );
 
 extern char *dict_error_str( dictData *data );
+
+extern const char *dz_error_str( enum DZ_ERRORS error );
 
 extern int        mmap_mode;
 

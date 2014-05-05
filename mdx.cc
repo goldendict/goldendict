@@ -273,7 +273,7 @@ private:
   void doDeferredInit();
 
   /// Loads an article with the given offset, filling the given strings.
-  void loadArticle( uint32_t offset, string & articleText );
+  void loadArticle( uint32_t offset, string & articleText, bool noFilter = false );
 
   /// Process resource links (images, audios, etc)
   QString & filterResource( QString const & articleId, QString & article );
@@ -508,7 +508,7 @@ void MdxDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     headword.clear();
     string articleText;
 
-    loadArticle( articleAddress, articleText );
+    loadArticle( articleAddress, articleText, true );
     text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
   }
   catch( std::exception &ex )
@@ -918,7 +918,7 @@ void MdxDictionary::loadIcon() throw()
   dictionaryIconLoaded = true;
 }
 
-void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
+void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noFilter )
 {
   vector< char > chunk;
   Mutex::Lock _( idxMutex );
@@ -946,7 +946,8 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText )
                                           recordInfo.recordSize );
 
   article = MdictParser::substituteStylesheet( article, styleSheets );
-  article = filterResource( articleId, article );
+  if( !noFilter )
+    article = filterResource( articleId, article );
   articleText = string( article.toUtf8().constData() );
 }
 

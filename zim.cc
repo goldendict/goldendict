@@ -322,6 +322,8 @@ bool indexIsOldOrBad( string const & indexFile )
 quint32 readArticle( ZimFile & file, ZIM_header & header, quint32 articleNumber, string & result,
                      set< quint32 > * loadedArticles = NULL )
 {
+  result.clear();
+
   while( 1 )
   {
     if( articleNumber >= header.articleCount )
@@ -410,7 +412,6 @@ quint32 readArticle( ZimFile & file, ZIM_header & header, quint32 articleNumber,
     memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 4, sizeof(offsets) );
     quint32 size = offsets[ 1 ] - offsets[ 0 ];
 
-    result.clear();
     result.append( decompressedData, offsets[ 0 ], size );
 
     return articleNumber;
@@ -497,7 +498,8 @@ private:
     /// Loads the article.
     quint32 loadArticle( quint32 address,
                          string & articleText,
-                         set< quint32 > * loadedArticles );
+                         set< quint32 > * loadedArticles,
+                         bool rawText = false );
 
     string convert( string const & in_data );
     friend class ZimArticleRequest;
@@ -590,14 +592,16 @@ void ZimDictionary::loadIcon() throw()
 
 quint32 ZimDictionary::loadArticle( quint32 address,
                                     string & articleText,
-                                    set< quint32 > * loadedArticles )
+                                    set< quint32 > * loadedArticles,
+                                    bool rawText )
 {
 quint32 ret;
   {
     Mutex::Lock _( zimMutex );
     ret = readArticle( df, zimHeader, address, articleText, loadedArticles );
   }
-  articleText = convert( articleText );
+  if( !rawText )
+    articleText = convert( articleText );
   return ret;
 }
 
@@ -809,7 +813,7 @@ void ZimDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     headword.clear();
     string articleText;
 
-    loadArticle( articleAddress, articleText, 0 );
+    loadArticle( articleAddress, articleText, 0, true );
     text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
   }
   catch( std::exception &ex )
@@ -827,7 +831,7 @@ quint32 ZimDictionary::getArticleText( uint32_t articleAddress, QString & headwo
     headword.clear();
     string articleText;
 
-    articleNumber = loadArticle( articleAddress, articleText, loadedArticles );
+    articleNumber = loadArticle( articleAddress, articleText, loadedArticles, true );
     text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
   }
   catch( std::exception &ex )
@@ -1396,21 +1400,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           idx.write( &idxHeader, sizeof( idxHeader ) );
         }
+
+        dictionaries.push_back( new ZimDictionary( dictId,
+                                                   indexFile,
+                                                   dictFiles ) );
       }
       catch( std::exception & e )
       {
-        gdWarning( "Zim dictionary indexing failed: %s, error: %s\n",
+        gdWarning( "Zim dictionary initializing failed: %s, error: %s\n",
                    i->c_str(), e.what() );
         continue;
       }
       catch( ... )
       {
-        qWarning( "Zim dictionary indexing failed\n" );
+        qWarning( "Zim dictionary initializing failed\n" );
         continue;
       }
-      dictionaries.push_back( new ZimDictionary( dictId,
-                                                 indexFile,
-                                                 dictFiles ) );
   }
   return dictionaries;
 }

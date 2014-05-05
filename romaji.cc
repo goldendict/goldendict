@@ -81,7 +81,8 @@ HepburnKatakana::HepburnKatakana()
   ins( "tsa", "ツァ" ); ins( "tse", "ツェ" ); ins( "tso", "ツォ" ); 
   ins( "fa", "ファ" ); ins( "fi", "フィ" ); ins( "fe", "フェ" ); ins( "fo", "フォ" ); 
   ins( "fyu", "フュ" ); 
-
+  // Long vowel mark
+  ins( "-", "ー" );
   // Double consonants
 
   ins( "kka", "ッカ" ); ins( "kki", "ッキ" ); ins( "kku", "ック" ); ins( "kke", "ッケ" ); ins( "kko", "ッコ" ); ins( "kkya", "ッキャ" ); ins( "kkyu", "ッキュ" ); ins( "kkyo", "ッキョ" );

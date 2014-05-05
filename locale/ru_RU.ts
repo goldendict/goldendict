@@ -42,62 +42,62 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="152"/>
+        <location filename="../article_maker.cc" line="153"/>
         <source>Expand article</source>
         <translation>Развернуть статью</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="158"/>
+        <location filename="../article_maker.cc" line="159"/>
         <source>Collapse article</source>
         <translation>Свернуть статью</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="187"/>
+        <location filename="../article_maker.cc" line="188"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>В группе &lt;b&gt;%2&lt;/b&gt; не найдено перевода для &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="192"/>
+        <location filename="../article_maker.cc" line="193"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>В группе &lt;b&gt;%1&lt;/b&gt; перевод не найден.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="211"/>
+        <location filename="../article_maker.cc" line="241"/>
         <source>Welcome!</source>
         <translation>Добро пожаловать!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="213"/>
+        <location filename="../article_maker.cc" line="243"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Добро пожаловать в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Если вы запустили программу в первый раз, укажите пути к словарям в &lt;b&gt;Правка|Словари&lt;/b&gt;. Там же Вы можете указать различные сайты Википедии или другие источники данных, настроить порядок просмотра словарей или создать словарные группы.&lt;p&gt;После этого Вы можете приступать к поиску слов. Слова можно искать в левой области данного окна. При работе в других приложениях можно искать слова, используя &lt;a href=&quot;Работа с всплывающим окном&quot;&gt;всплывающее окно&lt;/a&gt;. &lt;p&gt;В меню &lt;b&gt;Правка|Параметры&lt;/b&gt; Вы можете настроить приложение по своему вкусу. Все параметры имеют подсказки, показываемые при наведении курсора на них. Обращайте, пожалуйста, на них внимание, когда у Вас возникают затруднения с настройкой.&lt;p&gt;Если Вам требуется дополнительная помощь, возникли какие-то вопросы, пожелания и т.п., обращайтесь на &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форум программы&lt;/a&gt;.&lt;p&gt;Обновления программы доступны на её &lt;a href=&quot;http://goldendict.org/&quot;&gt;вебсайте&lt;/a&gt;.&lt;p&gt;© Константин Исаков (ikm@goldendict.org), 2008-2013. Лицензия: GNU GPLv3 или более поздняя версия.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="229"/>
+        <location filename="../article_maker.cc" line="259"/>
         <source>Working with popup</source>
         <translation>Работа с всплывающим окном</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="231"/>
+        <location filename="../article_maker.cc" line="261"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Всплывающее окно&lt;/h3&gt;Для поиска слов из других приложений, вам нужно включить &lt;i&gt;«Разрешить всплывающее окно»&lt;/i&gt; в &lt;b&gt;Параметрах&lt;/b&gt; и после этого включить всплывающее окно кнопкой «Сканировать» в основном окне или в контекстном меню значка в системном лотке.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="238"/>
+        <location filename="../article_maker.cc" line="268"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Теперь подведите курсор мыши к какому-либо слову в приложении, и появится всплывающее окно с переводом или значением этого слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="241"/>
+        <location filename="../article_maker.cc" line="271"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Теперь выделите какое-либо слово в приложении (двойным щелчком, или же проводя по ним курсором мыши при зажатой левой кнопке), и появится всплывающее окно с переводом или значением этого слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="322"/>
+        <location filename="../article_maker.cc" line="353"/>
         <source>(untitled)</source>
         <translation>(без имени)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="336"/>
+        <location filename="../article_maker.cc" line="367"/>
         <source>(picture)</source>
         <translation>(картинка)</translation>
     </message>
@@ -105,37 +105,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="603"/>
+        <location filename="../article_maker.cc" line="634"/>
         <source>Expand article</source>
         <translation>Развернуть статью</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="606"/>
+        <location filename="../article_maker.cc" line="637"/>
         <source>From </source>
         <translation>Из словаря </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="611"/>
+        <location filename="../article_maker.cc" line="642"/>
         <source>Collapse article</source>
         <translation>Свернуть статью</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="628"/>
+        <location filename="../article_maker.cc" line="659"/>
         <source>Query error: %1</source>
         <translation>Ошибка поиска: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="734"/>
+        <location filename="../article_maker.cc" line="765"/>
         <source>Close words: </source>
         <translation>Близкие слова: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="805"/>
+        <location filename="../article_maker.cc" line="836"/>
         <source>Compound expressions: </source>
         <translation>Составные выражения: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="833"/>
+        <location filename="../article_maker.cc" line="864"/>
         <source>Individual words: </source>
         <translation>Отдельные слова: </translation>
     </message>
@@ -143,180 +143,180 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="148"/>
+        <location filename="../articleview.cc" line="206"/>
         <source>Select Current Article</source>
         <translation>Выделить текущую статью</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="154"/>
+        <location filename="../articleview.cc" line="212"/>
         <source>Copy as text</source>
         <translation>Копировать как текст</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="160"/>
+        <location filename="../articleview.cc" line="218"/>
         <source>Inspect</source>
         <translation>Инспектор</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="755"/>
+        <location filename="../articleview.cc" line="889"/>
         <source>Resource</source>
         <translation>Ресурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="760"/>
+        <location filename="../articleview.cc" line="894"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="765"/>
+        <location filename="../articleview.cc" line="899"/>
         <source>TTS Voice</source>
         <translation>Синтезатор голоса</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="770"/>
+        <location filename="../articleview.cc" line="904"/>
         <source>Picture</source>
         <translation>Картинка</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="777"/>
+        <location filename="../articleview.cc" line="911"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="786"/>
+        <location filename="../articleview.cc" line="920"/>
         <source>Video: %1</source>
         <translation>Видео: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="803"/>
+        <location filename="../articleview.cc" line="937"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Определение из словаря «%1»: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="807"/>
+        <location filename="../articleview.cc" line="941"/>
         <source>Definition: %1</source>
         <translation>Определение: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
-        <location filename="../articleview.cc" line="1158"/>
+        <location filename="../articleview.cc" line="1156"/>
+        <location filename="../articleview.cc" line="1310"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запрошенный ресурс не найден.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1044"/>
+        <location filename="../articleview.cc" line="1196"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Указанная аудио-программа не найдена.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="964"/>
-        <location filename="../articleview.cc" line="1158"/>
+        <location filename="../articleview.cc" line="1116"/>
+        <location filename="../articleview.cc" line="1310"/>
         <source>ERROR: %1</source>
         <translation>ОШИБКА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1550"/>
+        <location filename="../articleview.cc" line="1702"/>
         <source>Save sound</source>
         <translation>Сохранить звук</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1552"/>
+        <location filename="../articleview.cc" line="1704"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Звуковые файлы (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1565"/>
+        <location filename="../articleview.cc" line="1717"/>
         <source>Save image</source>
         <translation>Сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1567"/>
+        <location filename="../articleview.cc" line="1719"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Файлы изображений (*.bmp *.jpg *.png *.tif);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1310"/>
+        <location filename="../articleview.cc" line="1462"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Открыть ссылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1468"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Открыть ссылку в новой &amp;вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1323"/>
+        <location filename="../articleview.cc" line="1475"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Открыть ссылку во внешнем &amp;браузере</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1365"/>
+        <location filename="../articleview.cc" line="1517"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Поиск «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1373"/>
+        <location filename="../articleview.cc" line="1525"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Поиск «%1» в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1378"/>
+        <location filename="../articleview.cc" line="1530"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Поместить «%1» в строку ввода</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1384"/>
-        <location filename="../articleview.cc" line="1416"/>
+        <location filename="../articleview.cc" line="1536"/>
+        <location filename="../articleview.cc" line="1568"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>Добавить «%1» в журнал</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1398"/>
+        <location filename="../articleview.cc" line="1550"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Поиск «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1406"/>
+        <location filename="../articleview.cc" line="1558"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Поиск «%1» в %2 в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1698"/>
+        <location filename="../articleview.cc" line="1850"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>ПРЕДУПРЕЖДЕНИЕ: Плейер FFMpeg: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1639"/>
+        <location filename="../articleview.cc" line="1791"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Невозможно запустить проигрыватель звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1657"/>
+        <location filename="../articleview.cc" line="1809"/>
         <source>Failed to create temporary file.</source>
         <translation>Ошибка создания временного файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1668"/>
+        <location filename="../articleview.cc" line="1820"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Ошибка открытия файла ресурса, попробуйте открыть вручную: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1691"/>
+        <location filename="../articleview.cc" line="1843"/>
         <source>The referenced resource failed to download.</source>
         <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1338"/>
+        <location filename="../articleview.cc" line="1490"/>
         <source>Save &amp;image...</source>
         <translation>Сохранить &amp;изображение...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1346"/>
+        <location filename="../articleview.cc" line="1498"/>
         <source>Save s&amp;ound...</source>
         <translation>Сохранить &amp;звук...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1691"/>
+        <location filename="../articleview.cc" line="1843"/>
         <source>WARNING: %1</source>
         <translation>ВНИМАНИЕ: %1</translation>
     </message>
@@ -326,42 +326,44 @@
         <translation>Form</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="36"/>
+        <location filename="../articleview.ui" line="54"/>
         <source>about:blank</source>
         <translation>about:blank</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="74"/>
+        <location filename="../articleview.ui" line="142"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="64"/>
+        <location filename="../articleview.ui" line="132"/>
         <source>Find:</source>
         <translation>Искать:</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="92"/>
+        <location filename="../articleview.ui" line="71"/>
+        <location filename="../articleview.ui" line="160"/>
         <source>&amp;Previous</source>
         <translation>&amp;Предыдущее</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="109"/>
+        <location filename="../articleview.ui" line="85"/>
+        <location filename="../articleview.ui" line="177"/>
         <source>&amp;Next</source>
         <translation>&amp;Следующее</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="116"/>
+        <location filename="../articleview.ui" line="184"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="152"/>
+        <location filename="../articleview.ui" line="220"/>
         <source>&amp;Case Sensitive</source>
         <translation>Учитывать &amp;регистр</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="129"/>
+        <location filename="../articleview.ui" line="197"/>
         <source>Highlight &amp;all</source>
         <translation>Пометить &amp;все</translation>
     </message>
@@ -530,7 +532,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation>Учёт регистра</translation>
+        <translation>Учитывать регистр</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
@@ -594,27 +596,27 @@ between classic and school orthography in cyrillic)</source>
         <translation>Рег. выражение</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="219"/>
+        <location filename="../dictheadwords.cc" line="218"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation>Неповторяющихся заголовков всего: %1, отфильтрованых: %2</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="236"/>
+        <location filename="../dictheadwords.cc" line="235"/>
         <source>Save headwords to file</source>
         <translation>Сохранить заголовки в файл</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="238"/>
+        <location filename="../dictheadwords.cc" line="237"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстовые файлы (*.txt);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Export headwords...</source>
         <translation>Экспортируются заголовки...</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="262"/>
+        <location filename="../dictheadwords.cc" line="261"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -687,6 +689,53 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <location filename="../sources.cc" line="762"/>
+        <source>Enabled</source>
+        <translation>Включено</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="764"/>
+        <source>Name</source>
+        <translation>Название</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="766"/>
+        <source>Address</source>
+        <translation>Адрес</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="768"/>
+        <source>Databases</source>
+        <translation>Базы</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="770"/>
+        <source>Strategies</source>
+        <translation>Стратегии</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="772"/>
+        <source>Icon</source>
+        <translation>Значок</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="805"/>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation>Список баз, разделённый запятыми
+(пустая строка или &quot;*&quot; соответствует всем базам сервера)</translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="808"/>
+        <source>Comma-delimited list of search strategies
+(empty string mean &quot;prefix&quot; strategy)</source>
+        <translation>Список стратегий поиска, разделённый запятыми
+(пустая строка означает стратегию &quot;prefix&quot;)</translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <location filename="../dictionarybar.cc" line="15"/>
@@ -733,13 +782,13 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="42"/>
-        <location filename="../editdictionaries.cc" line="225"/>
+        <location filename="../editdictionaries.cc" line="227"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Словари</translation>
     </message>
     <message>
         <location filename="../editdictionaries.cc" line="43"/>
-        <location filename="../editdictionaries.cc" line="228"/>
+        <location filename="../editdictionaries.cc" line="230"/>
         <source>&amp;Groups</source>
         <translation>&amp;Группы</translation>
     </message>
@@ -778,6 +827,87 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>FTS::FtsIndexing</name>
+    <message>
+        <location filename="../fulltextsearch.cc" line="69"/>
+        <source>None</source>
+        <translation>Нет</translation>
+    </message>
+</context>
+<context>
+    <name>FTS::FullTextSearchDialog</name>
+    <message>
+        <location filename="../fulltextsearch.cc" line="140"/>
+        <source>Full-text search</source>
+        <translation>Полнотекстовый поиск</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="147"/>
+        <source>Whole words</source>
+        <translation>Слова точно</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="148"/>
+        <source>Plain text</source>
+        <translation>Простой текст</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="149"/>
+        <source>Wildcards</source>
+        <translation>Шаблоны</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="150"/>
+        <source>RexExp</source>
+        <translation>Рег. выр.</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="155"/>
+        <source>Max distance between words (%1-%2):</source>
+        <translation>Промежуточных слов, не более (%1-%2):</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="164"/>
+        <source>Max articles per dictionary (%1-%2):</source>
+        <translation>Статей на словарь, не более (%1-%2):</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="187"/>
+        <location filename="../fulltextsearch.cc" line="292"/>
+        <location filename="../fulltextsearch.cc" line="366"/>
+        <source>Articles found: </source>
+        <translation>Статей найдено: </translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="261"/>
+        <source>Now indexing: </source>
+        <translation>Индексируется: </translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="301"/>
+        <source>The search line must contains at least one word contains </source>
+        <translation>Строка поиска должне включать как минимум одно слово из </translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="302"/>
+        <source> or more symbols</source>
+        <translation> или более символов</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="313"/>
+        <source>No dictionaries for full-text search</source>
+        <translation>Нет словарей для полнотекстового поиска</translation>
+    </message>
+</context>
+<context>
+    <name>FTS::Indexing</name>
+    <message>
+        <location filename="../fulltextsearch.cc" line="62"/>
+        <source>None</source>
+        <translation>Нет</translation>
+    </message>
+</context>
+<context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
         <location filename="../forvo.cc" line="224"/>
@@ -813,6 +943,65 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../forvo.cc" line="347"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Перейдите в Правка|Словари|Источники|Forvo и подайте заявку на свой собственный ключ API, чтобы устранить данную проблему.</translation>
+    </message>
+</context>
+<context>
+    <name>FullTextSearchDialog</name>
+    <message>
+        <location filename="../fulltextsearch.ui" line="26"/>
+        <location filename="../fulltextsearch.ui" line="203"/>
+        <source>Search</source>
+        <translation>Искать</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="37"/>
+        <source>Match case</source>
+        <translation>Учитывать регистр</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="46"/>
+        <source>Mode:</source>
+        <translation>Режим:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="94"/>
+        <source>Articles found:</source>
+        <translation>Статей найдено:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="116"/>
+        <source>Available dictionaries in group:</source>
+        <translation>Доступных словарей в группе:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="122"/>
+        <source>Wait for indexing:</source>
+        <translation>Ожидают индексации:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="136"/>
+        <source>Non-indexable:</source>
+        <translation>Неиндексируемых:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="150"/>
+        <source>Total:</source>
+        <translation>Всего:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="157"/>
+        <source>Indexed:</source>
+        <translation>Проиндексированных:</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="181"/>
+        <source>Now indexing: None</source>
+        <translation>Индексируется: Нет</translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="229"/>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -1045,12 +1234,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1131"/>
+        <location filename="../sources.cc" line="1340"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1133"/>
+        <location filename="../sources.cc" line="1342"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
@@ -2090,7 +2279,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="241"/>
+        <location filename="../loaddictionaries.cc" line="242"/>
         <source>Error loading dictionaries</source>
         <translation>Ошибка при загрузке словарей</translation>
     </message>
@@ -2106,548 +2295,573 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cc" line="137"/>
+        <location filename="../mainwindow.cc" line="144"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="139"/>
+        <location filename="../mainwindow.cc" line="146"/>
         <source>Forward</source>
         <translation>Вперёд</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="164"/>
+        <location filename="../mainwindow.cc" line="171"/>
         <source>Scan Popup</source>
         <translation>Сканировать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="323"/>
+        <location filename="../mainwindow.cc" line="333"/>
         <source>Show &amp;Main Window</source>
         <translation>Показать &amp;основное окно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="367"/>
-        <location filename="../mainwindow.cc" line="327"/>
+        <location filename="../mainwindow.ui" line="384"/>
+        <location filename="../mainwindow.cc" line="337"/>
         <source>&amp;Quit</source>
         <translation>В&amp;ыход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="551"/>
+        <location filename="../mainwindow.cc" line="571"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2811"/>
+        <location filename="../mainwindow.cc" line="2905"/>
         <source>Skip This Release</source>
         <translation>Пропустить данную версию</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2941"/>
+        <location filename="../mainwindow.cc" line="3035"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Вы скрыли главное меню. Чтобы вернуть его, используйте %1.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2942"/>
+        <location filename="../mainwindow.cc" line="3036"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3040"/>
+        <location filename="../mainwindow.cc" line="3134"/>
         <source>Page Setup</source>
         <translation>Параметры страницы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3041"/>
+        <location filename="../mainwindow.cc" line="3135"/>
         <source>No printer is available. Please install one first.</source>
         <translation>В системе не установлено ни одного принтера.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3059"/>
+        <location filename="../mainwindow.cc" line="3153"/>
         <source>Print Article</source>
         <translation>Печать статьи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3132"/>
+        <location filename="../mainwindow.cc" line="3226"/>
         <source>Save Article As</source>
         <translation>Сохранить статью как</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3146"/>
+        <location filename="../mainwindow.cc" line="3240"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3147"/>
+        <location filename="../mainwindow.cc" line="3241"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Невозможно сохранить статью: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1178"/>
+        <location filename="../mainwindow.cc" line="1209"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>Словарей: %1, статей: %2, слов: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2667"/>
+        <location filename="../mainwindow.cc" line="2761"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Ошибка инициализации механизма отслеживания горячих клавиш.&lt;br&gt;Убедитесь, что ваш XServer поддерживает расширение RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2804"/>
+        <location filename="../mainwindow.cc" line="2898"/>
         <source>New Release Available</source>
         <translation>Доступна новая версия</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2805"/>
+        <location filename="../mainwindow.cc" line="2899"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версия &lt;b&gt;%1&lt;/b&gt; программы GoldenDict доступа для загрузки.&lt;br&gt;
 Нажмите &lt;b&gt;Загрузить&lt;/b&gt;, чтобы перейти на страницу загрузки.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2810"/>
+        <location filename="../mainwindow.cc" line="2904"/>
         <source>Download</source>
         <translation>Загрузить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="241"/>
-        <location filename="../mainwindow.cc" line="1189"/>
+        <location filename="../mainwindow.cc" line="251"/>
+        <location filename="../mainwindow.cc" line="1220"/>
         <source>Look up in:</source>
         <translation>Поиск в:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="90"/>
+        <location filename="../mainwindow.cc" line="92"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Главное меню</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="279"/>
+        <location filename="../mainwindow.cc" line="289"/>
         <source>Found in Dictionaries:</source>
         <translation>Найдено в словарях:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="179"/>
+        <location filename="../mainwindow.cc" line="186"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Произнести слово (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="88"/>
+        <location filename="../mainwindow.cc" line="90"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>По&amp;казывать названия в панели словарей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="89"/>
+        <location filename="../mainwindow.cc" line="91"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>&amp;Маленькие значки в панели инструментов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="134"/>
+        <location filename="../mainwindow.cc" line="141"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Навигация</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="191"/>
+        <location filename="../mainwindow.cc" line="198"/>
         <source>Zoom In</source>
         <translation>Увеличить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="197"/>
+        <location filename="../mainwindow.cc" line="204"/>
         <source>Zoom Out</source>
         <translation>Уменьшить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="201"/>
+        <location filename="../mainwindow.cc" line="208"/>
         <source>Normal Size</source>
         <translation>Обычный размер</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="309"/>
+        <location filename="../mainwindow.cc" line="319"/>
         <source>Words Zoom In</source>
         <translation>Увеличить список слов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="313"/>
+        <location filename="../mainwindow.cc" line="323"/>
         <source>Words Zoom Out</source>
         <translation>Уменьшить список слов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="315"/>
+        <location filename="../mainwindow.cc" line="325"/>
         <source>Words Normal Size</source>
         <translation>Обычный размер для списка слов</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="384"/>
+        <location filename="../mainwindow.cc" line="404"/>
         <source>Close current tab</source>
         <translation>Закрыть текущую вкладку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="394"/>
+        <location filename="../mainwindow.cc" line="414"/>
         <source>Close all tabs</source>
         <translation>Закрыть все вкладки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="402"/>
+        <location filename="../mainwindow.cc" line="422"/>
         <source>Close all tabs except current</source>
         <translation>Закрыть все вкладки, кроме текущей</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1189"/>
+        <location filename="../mainwindow.cc" line="1220"/>
         <source>Look up:</source>
         <translation>Искать:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1207"/>
+        <location filename="../mainwindow.cc" line="1238"/>
         <source>All</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="795"/>
-        <location filename="../mainwindow.cc" line="2864"/>
+        <location filename="../mainwindow.cc" line="815"/>
+        <location filename="../mainwindow.cc" line="2958"/>
         <source>Accessibility API is not enabled</source>
         <translation>Интерфейс Accessibility не включён</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3233"/>
+        <location filename="../mainwindow.cc" line="3338"/>
         <source>The main window is set to be always on top.</source>
         <translation>Главное окно всегда поверх других окон.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3481"/>
+        <location filename="../mainwindow.cc" line="3586"/>
         <source>Import history from file</source>
         <translation>Импорт журнала из файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3530"/>
+        <location filename="../mainwindow.cc" line="3635"/>
         <source>Import error: invalid data in file</source>
         <translation>Ошибка импорта: некорректные данные в файле</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3534"/>
+        <location filename="../mainwindow.cc" line="3639"/>
         <source>History import complete</source>
         <translation>Импорт журнала завершён</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3537"/>
+        <location filename="../mainwindow.cc" line="3642"/>
         <source>Import error: </source>
         <translation>Ошибка импорта:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3772"/>
+        <location filename="../mainwindow.cc" line="3877"/>
         <source>Dictionary info</source>
         <translation>Информация о словаре</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3776"/>
+        <location filename="../mainwindow.cc" line="3881"/>
         <source>Dictionary headwords</source>
         <translation>Заголовки словаря</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3778"/>
+        <location filename="../mainwindow.cc" line="3883"/>
         <source>Open dictionary folder</source>
         <translation>Открыть папку словаря</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3784"/>
+        <location filename="../mainwindow.cc" line="3889"/>
         <source>Edit dictionary</source>
         <translation>Редактировать словарь</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="373"/>
+        <location filename="../mainwindow.cc" line="393"/>
         <source>Opened tabs</source>
         <translation>Открытые вкладки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="872"/>
+        <location filename="../mainwindow.cc" line="892"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation>Строка для поиска в словарях. Можно использовать шаблоны &apos;*&apos;, &apos;?&apos; и диапазоны символов &apos;[...]&apos;.
 Чтобы найти сами символы &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;, используйте &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; соответственно.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1362"/>
+        <location filename="../mainwindow.cc" line="1393"/>
         <source>Open Tabs List</source>
         <translation>Открыть список вкладок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1420"/>
+        <location filename="../mainwindow.cc" line="1451"/>
         <source>(untitled)</source>
         <translation>(без имени)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1633"/>
+        <location filename="../mainwindow.cc" line="1665"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3128"/>
+        <location filename="../mainwindow.cc" line="3222"/>
         <source>Article, Complete (*.html)</source>
         <translation>Статья полностью (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3129"/>
+        <location filename="../mainwindow.cc" line="3223"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Статья, только HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3184"/>
+        <location filename="../mainwindow.cc" line="3278"/>
         <source>Saving article...</source>
         <translation>Сохранение статьи...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3393"/>
+        <location filename="../mainwindow.cc" line="3498"/>
         <source>&amp;Hide</source>
         <translation>&amp;Спрятать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3419"/>
+        <location filename="../mainwindow.cc" line="3524"/>
         <source>Export history to file</source>
         <translation>Экспорт журнала в файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3421"/>
-        <location filename="../mainwindow.cc" line="3483"/>
+        <location filename="../mainwindow.cc" line="3526"/>
+        <location filename="../mainwindow.cc" line="3588"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстовые файлы (*.txt);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3460"/>
+        <location filename="../mainwindow.cc" line="3565"/>
         <source>History export complete</source>
         <translation>Экспорт журнала завершён</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3463"/>
+        <location filename="../mainwindow.cc" line="3568"/>
         <source>Export error: </source>
         <translation>Ошибка при экспорте: </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="736"/>
+        <location filename="../mainwindow.cc" line="756"/>
         <source>Welcome!</source>
         <translation>Добро пожаловать!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="69"/>
+        <location filename="../mainwindow.ui" line="78"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="86"/>
+        <location filename="../mainwindow.ui" line="95"/>
         <source>&amp;Edit</source>
         <translation>&amp;Правка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="93"/>
+        <location filename="../mainwindow.ui" line="102"/>
         <source>&amp;Help</source>
         <translation>&amp;Справка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="131"/>
+        <location filename="../mainwindow.ui" line="148"/>
         <source>&amp;Search Pane</source>
         <translation>Панель по&amp;иска</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="258"/>
+        <location filename="../mainwindow.ui" line="275"/>
         <source>&amp;Results Navigation Pane</source>
         <translation>Панель на&amp;вигации по переводу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="334"/>
+        <location filename="../mainwindow.ui" line="351"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Параметры...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="413"/>
+        <location filename="../mainwindow.ui" line="430"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="104"/>
+        <location filename="../mainwindow.ui" line="113"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="108"/>
+        <location filename="../mainwindow.ui" line="117"/>
         <source>&amp;Zoom</source>
         <translation>&amp;Масштаб</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="115"/>
+        <location filename="../mainwindow.ui" line="124"/>
         <source>H&amp;istory</source>
         <translation>&amp;Журнал</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="285"/>
+        <location filename="../mainwindow.ui" line="134"/>
+        <source>Search</source>
+        <translation>Поиск</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="302"/>
         <source>&amp;History Pane</source>
         <translation>Панель журнала</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="319"/>
+        <location filename="../mainwindow.ui" line="336"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Словари...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="322"/>
+        <location filename="../mainwindow.ui" line="339"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="337"/>
+        <location filename="../mainwindow.ui" line="354"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="345"/>
+        <location filename="../mainwindow.ui" line="362"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Веб-сайт</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="353"/>
+        <location filename="../mainwindow.ui" line="370"/>
         <source>&amp;About</source>
         <translation>&amp;О программе</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="356"/>
+        <location filename="../mainwindow.ui" line="373"/>
         <source>About GoldenDict</source>
         <translation>О программе GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="359"/>
+        <location filename="../mainwindow.ui" line="376"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="370"/>
+        <location filename="../mainwindow.ui" line="387"/>
         <source>Quit from application</source>
         <translation>Выйти из приложения</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="373"/>
+        <location filename="../mainwindow.ui" line="390"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="381"/>
+        <location filename="../mainwindow.ui" line="398"/>
         <source>&amp;Forum</source>
         <translation>&amp;Форум</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="406"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Свернуть в лоток</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="392"/>
+        <location filename="../mainwindow.ui" line="409"/>
         <source>Minimizes the window to tray</source>
         <translation>Свёртывает окно в лоток</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="395"/>
+        <location filename="../mainwindow.ui" line="412"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="407"/>
+        <location filename="../mainwindow.ui" line="424"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Сохранить статью</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="410"/>
+        <location filename="../mainwindow.ui" line="427"/>
         <source>Save Article</source>
         <translation>Сохранить статью</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="425"/>
+        <location filename="../mainwindow.ui" line="442"/>
         <source>&amp;Print</source>
         <translation>&amp;Печатать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="428"/>
+        <location filename="../mainwindow.ui" line="445"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="436"/>
+        <location filename="../mainwindow.ui" line="453"/>
         <source>Page Set&amp;up</source>
         <translation>П&amp;араметры страницы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="444"/>
+        <location filename="../mainwindow.ui" line="461"/>
         <source>Print Pre&amp;view</source>
         <translation>Пр&amp;едварительный просмотр</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.ui" line="469"/>
         <source>&amp;Rescan Files</source>
         <translation>Пе&amp;ресканировать файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="475"/>
+        <location filename="../mainwindow.ui" line="492"/>
         <source>&amp;New Tab</source>
         <translation>&amp;Новая вкладка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="527"/>
+        <location filename="../mainwindow.ui" line="544"/>
         <source>&amp;Always on Top</source>
         <translation>П&amp;оверх других окон</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="530"/>
+        <location filename="../mainwindow.ui" line="547"/>
         <source>Always on Top</source>
         <translation>Поверх других окон</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="533"/>
+        <location filename="../mainwindow.ui" line="550"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="542"/>
-        <location filename="../mainwindow.ui" line="545"/>
-        <location filename="../mainwindow.cc" line="233"/>
+        <location filename="../mainwindow.ui" line="559"/>
+        <location filename="../mainwindow.ui" line="562"/>
+        <location filename="../mainwindow.cc" line="243"/>
         <source>Menu Button</source>
         <translation>Кнопка меню</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="455"/>
+        <location filename="../mainwindow.ui" line="567"/>
+        <source>Search in page</source>
+        <translation>Поиск на странице</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="570"/>
+        <source>Ctrl+F</source>
+        <translation>Ctrl+F</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="578"/>
+        <source>Full-text search</source>
+        <translation>Полнотекстовый поиск</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="581"/>
+        <source>Ctrl+Shift+F</source>
+        <translation>Ctrl+Shift+F</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="472"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="463"/>
+        <location filename="../mainwindow.ui" line="480"/>
         <source>&amp;Clear</source>
         <translation>О&amp;чистить</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="561"/>
+        <location filename="../mainwindow.cc" line="581"/>
         <source>New Tab</source>
         <translation>Новая вкладка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="478"/>
+        <location filename="../mainwindow.ui" line="495"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="489"/>
+        <location filename="../mainwindow.ui" line="506"/>
         <source>&amp;Configuration Folder</source>
         <translation>&amp;Папка конфигурации</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="497"/>
-        <location filename="../mainwindow.cc" line="3397"/>
+        <location filename="../mainwindow.ui" line="514"/>
+        <location filename="../mainwindow.cc" line="3502"/>
         <source>&amp;Show</source>
         <translation>&amp;Показать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="500"/>
+        <location filename="../mainwindow.ui" line="517"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="508"/>
+        <location filename="../mainwindow.ui" line="525"/>
         <source>&amp;Export</source>
         <translation>&amp;Экспортировать</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="516"/>
+        <location filename="../mainwindow.ui" line="533"/>
         <source>&amp;Import</source>
         <translation>&amp;Импортировать</translation>
     </message>
@@ -2655,12 +2869,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="552"/>
+        <location filename="../mdx.cc" line="647"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Файл словаря искажён или повреждён</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="563"/>
+        <location filename="../mdx.cc" line="658"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>Ошибка загрузки статьи из %1, причина: %2</translation>
     </message>
@@ -2684,22 +2898,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="415"/>
+        <location filename="../sources.cc" line="449"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="417"/>
+        <location filename="../sources.cc" line="451"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="419"/>
+        <location filename="../sources.cc" line="453"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="421"/>
+        <location filename="../sources.cc" line="455"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>
@@ -2785,7 +2999,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Сортировать по языкам</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="268"/>
+        <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
         <translation>Заголовки словаря</translation>
     </message>
@@ -2793,12 +3007,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="913"/>
+        <location filename="../sources.cc" line="1122"/>
         <source>Path</source>
         <translation>Путь</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="915"/>
+        <location filename="../sources.cc" line="1124"/>
         <source>Recursive</source>
         <translation>Рекурсивно</translation>
     </message>
@@ -2917,7 +3131,7 @@ the program would always start with the scan popup active.</source>
         <translation>Включать или нет режим всплывающего окна при запуске программы.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="575"/>
+        <location filename="../preferences.ui" line="593"/>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
@@ -2933,22 +3147,22 @@ be pressed shortly after the selection is done.</source>
 того, как слово было выделено.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="665"/>
+        <location filename="../preferences.ui" line="683"/>
         <source>Hotkeys</source>
         <translation>Горячие клавиши</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="684"/>
+        <location filename="../preferences.ui" line="702"/>
         <source>Use the following hotkey to show or hide the main window:</source>
         <translation>Использовать следующую комбинацию для показа/скрытия основного окна:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="715"/>
+        <location filename="../preferences.ui" line="733"/>
         <source>Use the following hotkey to translate a word from clipboard:</source>
         <translation>Использовать следующую комбинацию для перевода слова из буфера обмена:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="762"/>
+        <location filename="../preferences.ui" line="780"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
         <translation>Горячие клавиши являются глобальными и работают из любой программы и в любом состоянии, до тех пор пока GoldenDict работает в фоне.</translation>
     </message>
@@ -3049,112 +3263,112 @@ in the pressed state when the word selection changes.</source>
         <translation>Показывать всплывающее окно только при зажатых клавишах:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="448"/>
+        <location filename="../preferences.ui" line="457"/>
         <source>Left Ctrl only</source>
         <translation>При зажатии левой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="451"/>
+        <location filename="../preferences.ui" line="460"/>
         <source>Left Ctrl</source>
         <translation>Левый Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="458"/>
+        <location filename="../preferences.ui" line="467"/>
         <source>Right Shift only</source>
         <translation>При зажатии правой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="461"/>
+        <location filename="../preferences.ui" line="470"/>
         <source>Right Shift</source>
         <translation>Правый Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="468"/>
+        <location filename="../preferences.ui" line="477"/>
         <source>Alt key</source>
         <translation>При зажатии любой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="471"/>
+        <location filename="../preferences.ui" line="480"/>
         <source>Alt</source>
         <translation>Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="478"/>
+        <location filename="../preferences.ui" line="487"/>
         <source>Ctrl key</source>
         <translation>При зажатии любой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="481"/>
+        <location filename="../preferences.ui" line="490"/>
         <source>Ctrl</source>
         <translation>Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="488"/>
+        <location filename="../preferences.ui" line="497"/>
         <source>Left Alt only</source>
         <translation>При зажатии левой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="491"/>
+        <location filename="../preferences.ui" line="500"/>
         <source>Left Alt</source>
         <translation>Левый Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="498"/>
+        <location filename="../preferences.ui" line="507"/>
         <source>Shift key</source>
         <translation>При зажатии любой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="501"/>
+        <location filename="../preferences.ui" line="510"/>
         <source>Shift</source>
         <translation>Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="508"/>
+        <location filename="../preferences.ui" line="517"/>
         <source>Right Alt only</source>
         <translation>При зажатии правой клавиши Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="511"/>
+        <location filename="../preferences.ui" line="520"/>
         <source>Right Alt</source>
         <translation>Правый Alt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="518"/>
+        <location filename="../preferences.ui" line="527"/>
         <source>Right Ctrl only</source>
         <translation>При зажатии правой клавиши Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="521"/>
+        <location filename="../preferences.ui" line="530"/>
         <source>Right Ctrl</source>
         <translation>Правый Ctrl</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="528"/>
+        <location filename="../preferences.ui" line="537"/>
         <source>Left Shift only</source>
         <translation>При зажатии левой клавиши Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="531"/>
+        <location filename="../preferences.ui" line="540"/>
         <source>Left Shift</source>
         <translation>Левый Shift</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="538"/>
+        <location filename="../preferences.ui" line="547"/>
         <source>Windows key or Meta key</source>
         <translation>При зажатии клавиши Windows или Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="541"/>
+        <location filename="../preferences.ui" line="550"/>
         <source>Win/Meta</source>
         <translation>Win или Meta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="581"/>
+        <location filename="../preferences.ui" line="599"/>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Задержка проверки модификаторов</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="588"/>
+        <location filename="../preferences.ui" line="606"/>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
@@ -3163,69 +3377,89 @@ seconds, which is specified here.</source>
 промежутка времени, который и задается здесь.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="612"/>
+        <location filename="../preferences.ui" line="630"/>
         <source>secs</source>
         <translation>секунд(ы)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="634"/>
+        <location filename="../preferences.ui" line="652"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
         <translation>Отправлять переводимое слово в главное окно программы вместо перевода его во всплывающем окне</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="637"/>
+        <location filename="../preferences.ui" line="655"/>
         <source>Send translated word to main window</source>
         <translation>Отправлять переводимое слово в главное окно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="858"/>
+        <location filename="../preferences.ui" line="876"/>
         <source>Play audio files via FFmpeg(libav) and libao</source>
         <translation>Воспроизведение звуков через FFmpeg(libav) и libao</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="861"/>
+        <location filename="../preferences.ui" line="879"/>
         <source>Use internal player</source>
         <translation>Использовать встроенный движок</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="945"/>
+        <location filename="../preferences.ui" line="963"/>
         <source>System proxy</source>
         <translation>Использовать системные настройки</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="952"/>
+        <location filename="../preferences.ui" line="970"/>
         <source>Custom proxy</source>
         <translation>Использовать свои настройки</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="959"/>
+        <location filename="../preferences.ui" line="977"/>
         <source>Custom settings</source>
         <translation>Свои настройки</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1080"/>
+        <location filename="../preferences.ui" line="1098"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation>Некоторые сайты опознают GoldenDict по заголовкам HTTP и блокируют запросы.
 Включите эту опцию, чтобы обойти проблему.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1084"/>
+        <location filename="../preferences.ui" line="1102"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation>Не указывать GoldenDict в заголовках HTTP</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1135"/>
+        <location filename="../preferences.ui" line="1157"/>
+        <source>Full-text search</source>
+        <translation>Полнотекстовый поиск</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1176"/>
+        <source>Allow full-text search for:</source>
+        <translation>Разрешить длнотекстовый поиск для:</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1253"/>
+        <source>Don&apos;t search in dictionaries contains more than</source>
+        <translation>Не искать в словарях, содержащих более чем</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1270"/>
+        <source>articles (0 - unlimited)</source>
+        <translation>статей (0 - неограниченно)</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1309"/>
         <source>Ad&amp;vanced</source>
         <translation>Дополнительно</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1141"/>
+        <location filename="../preferences.ui" line="1315"/>
         <source>ScanPopup extra technologies</source>
         <translation>Дополнительные методы определения слова под курсором</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1147"/>
+        <location filename="../preferences.ui" line="1321"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3236,12 +3470,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Если вы не пользуетесь такими программами, включать эту опцию не нужно.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1153"/>
+        <location filename="../preferences.ui" line="1327"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Использовать &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1160"/>
+        <location filename="../preferences.ui" line="1334"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3250,12 +3484,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Если вы не пользуетесь такими программами, включать эту опцию не нужно.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1165"/>
+        <location filename="../preferences.ui" line="1339"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Использовать &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1172"/>
+        <location filename="../preferences.ui" line="1346"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3264,88 +3498,88 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Если вы не пользуетесь такими программами, включать эту опцию не нужно.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1177"/>
+        <location filename="../preferences.ui" line="1351"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Использовать запрос &amp;GoldenDict</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1187"/>
+        <location filename="../preferences.ui" line="1361"/>
         <source>History</source>
         <translation>Журнал</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1193"/>
+        <location filename="../preferences.ui" line="1367"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Включите эту опцию, чтобы вести журнал переведённых слов</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1196"/>
+        <location filename="../preferences.ui" line="1370"/>
         <source>Store &amp;history</source>
         <translation>Вести журнал</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1211"/>
+        <location filename="../preferences.ui" line="1385"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Определяет максимальное количество записей в журнале</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1214"/>
+        <location filename="../preferences.ui" line="1388"/>
         <source>Maximum history size:</source>
         <translation>Максимальный размер журнала:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1251"/>
+        <location filename="../preferences.ui" line="1425"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Интервал сохранения журнала. Если он установлен в 0,
 журнал будет сохраняться только при выходе из программы.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1257"/>
+        <location filename="../preferences.ui" line="1431"/>
         <source>Save every</source>
         <translation>Сохранять каждые</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1274"/>
+        <location filename="../preferences.ui" line="1448"/>
         <source>minutes</source>
         <translation>минут</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1299"/>
+        <location filename="../preferences.ui" line="1473"/>
         <source>Articles</source>
         <translation>Статьи</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1305"/>
+        <location filename="../preferences.ui" line="1479"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Включите эту опцию, если хотите всегда раскрывать дополнительные области статей</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1308"/>
+        <location filename="../preferences.ui" line="1482"/>
         <source>Expand optional &amp;parts</source>
         <translation>Раскрывать дополнительные области</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1317"/>
+        <location filename="../preferences.ui" line="1491"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Включите эту опцию чтобы автоматически сворачивать большие статьи</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1320"/>
+        <location filename="../preferences.ui" line="1494"/>
         <source>Collapse articles more than</source>
         <translation>Сворачивать статьи более чем</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1327"/>
+        <location filename="../preferences.ui" line="1501"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Статьи размером более этой величины будут свёрнуты</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1343"/>
+        <location filename="../preferences.ui" line="1517"/>
         <source>symbols</source>
         <translation>символов</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="772"/>
+        <location filename="../preferences.ui" line="790"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3358,84 +3592,84 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Замечание: Кажется, Вы используете версию X.Org XServer, в которой отсутствует поддержка расширения RECORD. Вероятно, горячие клавиши в GoldenDict не заработают. Эта проблема должна быть исправлена на стороне XServer. Более подробную информацию смотрите на &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; и, если хотите, оставляйте там свои пожелания.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="810"/>
+        <location filename="../preferences.ui" line="828"/>
         <source>&amp;Audio</source>
         <translation>&amp;Аудио</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="829"/>
+        <location filename="../preferences.ui" line="847"/>
         <source>Pronunciation</source>
         <translation>Произношение</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="835"/>
+        <location filename="../preferences.ui" line="853"/>
         <source>Auto-pronounce words in main window</source>
         <translation>Автоматически произносить слова в главном окне</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="842"/>
+        <location filename="../preferences.ui" line="860"/>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Автоматически произносить слова во всплывающем окне</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="852"/>
+        <location filename="../preferences.ui" line="870"/>
         <source>Playback</source>
         <translation>Воспроизведение</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="870"/>
+        <location filename="../preferences.ui" line="888"/>
         <source>Use any external program to play audio files</source>
         <translation>Использовать любую внешнюю программу для проигрывания аудио-файлов</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="873"/>
+        <location filename="../preferences.ui" line="891"/>
         <source>Use external program:</source>
         <translation>Воспроизведение через внешнее приложение:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="910"/>
+        <location filename="../preferences.ui" line="928"/>
         <source>&amp;Network</source>
         <translation>&amp;Сеть</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="929"/>
+        <location filename="../preferences.ui" line="947"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Включите, если хотите использовать прокси-сервер
 для всех сетевых запросов программы.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="933"/>
+        <location filename="../preferences.ui" line="951"/>
         <source>Use proxy server</source>
         <translation>Использовать прокси-сервер</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="967"/>
+        <location filename="../preferences.ui" line="985"/>
         <source>Type:</source>
         <translation>Тип:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="977"/>
+        <location filename="../preferences.ui" line="995"/>
         <source>Host:</source>
         <translation>Сервер:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="987"/>
+        <location filename="../preferences.ui" line="1005"/>
         <source>Port:</source>
         <translation>Порт:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1008"/>
+        <location filename="../preferences.ui" line="1026"/>
         <source>User:</source>
         <translation>Имя пользователя:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1018"/>
+        <location filename="../preferences.ui" line="1036"/>
         <source>Password:</source>
         <translation>Пароль:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1056"/>
+        <location filename="../preferences.ui" line="1074"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -3445,12 +3679,12 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
 из-за этого функционировать, попробуйте запретить эту опцию.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1061"/>
+        <location filename="../preferences.ui" line="1079"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Запретить загрузку информации с других сайтов (убирает большую часть рекламы)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1068"/>
+        <location filename="../preferences.ui" line="1086"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -3459,12 +3693,12 @@ Plugin must be installed for this option to work.</source>
 Чтобы это работало, плагины должны быть установлены.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1073"/>
+        <location filename="../preferences.ui" line="1091"/>
         <source>Enable web plugins</source>
         <translation>Разрешить веб-плагины</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1107"/>
+        <location filename="../preferences.ui" line="1125"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -3477,7 +3711,7 @@ GoldenDict. Если новая версия появилась, програм�
 страницу загрузки.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1114"/>
+        <location filename="../preferences.ui" line="1132"/>
         <source>Check for new program releases periodically</source>
         <translation>Проверять наличие новой версии</translation>
     </message>
@@ -3517,12 +3751,12 @@ GoldenDict. Если новая версия появилась, програм�
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="386"/>
+        <location filename="../preferences.cc" line="469"/>
         <source>Changing Language</source>
         <translation>Смена языка</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="387"/>
+        <location filename="../preferences.cc" line="470"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Перезапустите программу, чтобы изменение языка вошло в силу.</translation>
     </message>
@@ -3530,27 +3764,27 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="1030"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="823"/>
+        <location filename="../sources.cc" line="1032"/>
         <source>Plain Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="825"/>
+        <location filename="../sources.cc" line="1034"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="827"/>
+        <location filename="../sources.cc" line="1036"/>
         <source>Prefix Match</source>
         <translation>По префиксу</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="829"/>
+        <location filename="../sources.cc" line="1038"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
@@ -3576,27 +3810,27 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="729"/>
+        <location filename="../sources.cc" line="938"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="731"/>
+        <location filename="../sources.cc" line="940"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="733"/>
+        <location filename="../sources.cc" line="942"/>
         <source>Name</source>
         <translation>Имя программы</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="735"/>
+        <location filename="../sources.cc" line="944"/>
         <source>Command Line</source>
         <translation>Командная строка</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="737"/>
+        <location filename="../sources.cc" line="946"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>
@@ -3604,13 +3838,13 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="392"/>
-        <location filename="../dsl.cc" line="1314"/>
+        <location filename="../aard.cc" line="429"/>
+        <location filename="../dsl.cc" line="1620"/>
         <source>Article loading error</source>
         <translation>Ошибка загрузки статьи</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="479"/>
+        <location filename="../aard.cc" line="521"/>
         <source>Article decoding error</source>
         <translation>Ошибка декодирования статьи</translation>
     </message>
@@ -3721,18 +3955,18 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2289"/>
-        <location filename="../articleview.cc" line="2296"/>
+        <location filename="../articleview.cc" line="2635"/>
+        <location filename="../articleview.cc" line="2642"/>
         <source>ERROR: %1</source>
         <translation>ОШИБКА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2289"/>
+        <location filename="../articleview.cc" line="2635"/>
         <source>Resource saving error: </source>
         <translation>Ошибка записи данных: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2296"/>
+        <location filename="../articleview.cc" line="2642"/>
         <source>The referenced resource failed to download.</source>
         <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>
@@ -3740,12 +3974,12 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>Romaji</name>
     <message>
-        <location filename="../romaji.cc" line="107"/>
+        <location filename="../romaji.cc" line="108"/>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Система Хэпбёрна (Хирагана)</translation>
     </message>
     <message>
-        <location filename="../romaji.cc" line="116"/>
+        <location filename="../romaji.cc" line="117"/>
         <source>Hepburn Romaji for Katakana</source>
         <translation>Система Хэпбёрна (Катакана)</translation>
     </message>
@@ -3817,8 +4051,8 @@ could be resized or managed in other ways.</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="501"/>
-        <location filename="../scanpopup.cc" line="846"/>
+        <location filename="../scanpopup.cc" line="505"/>
+        <location filename="../scanpopup.cc" line="850"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -3826,17 +4060,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1019"/>
+        <location filename="../sources.cc" line="1228"/>
         <source>Path</source>
         <translation>Путь</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1021"/>
+        <location filename="../sources.cc" line="1230"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1023"/>
+        <location filename="../sources.cc" line="1232"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>
@@ -3844,45 +4078,47 @@ could be resized or managed in other ways.</source>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="100"/>
+        <location filename="../sources.cc" line="110"/>
         <source>Text to Speech</source>
         <translation>Синтез речи</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="116"/>
+        <location filename="../sources.cc" line="126"/>
         <source>(not available in portable version)</source>
         <translation>(не реализовано в переносимой версии)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="153"/>
-        <location filename="../sources.cc" line="180"/>
-        <location filename="../sources.cc" line="207"/>
+        <location filename="../sources.cc" line="163"/>
+        <location filename="../sources.cc" line="190"/>
+        <location filename="../sources.cc" line="217"/>
         <source>Choose a directory</source>
         <translation>Выбор пути</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="167"/>
-        <location filename="../sources.cc" line="194"/>
-        <location filename="../sources.cc" line="234"/>
-        <location filename="../sources.cc" line="258"/>
-        <location filename="../sources.cc" line="282"/>
+        <location filename="../sources.cc" line="177"/>
+        <location filename="../sources.cc" line="204"/>
+        <location filename="../sources.cc" line="244"/>
+        <location filename="../sources.cc" line="268"/>
+        <location filename="../sources.cc" line="292"/>
+        <location filename="../sources.cc" line="316"/>
         <source>Confirm removal</source>
         <translation>Подтверждение удаления</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="168"/>
-        <location filename="../sources.cc" line="195"/>
+        <location filename="../sources.cc" line="178"/>
+        <location filename="../sources.cc" line="205"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Удалить путь &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="235"/>
-        <location filename="../sources.cc" line="259"/>
+        <location filename="../sources.cc" line="245"/>
+        <location filename="../sources.cc" line="269"/>
+        <location filename="../sources.cc" line="293"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Удалить веб-сайт &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="283"/>
+        <location filename="../sources.cc" line="317"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Удалить программу &lt;b&gt;%1&lt;/b&gt; из списка?</translation>
     </message>
@@ -3901,7 +4137,8 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="120"/>
         <location filename="../sources.ui" line="244"/>
         <location filename="../sources.ui" line="303"/>
-        <location filename="../sources.ui" line="370"/>
+        <location filename="../sources.ui" line="367"/>
+        <location filename="../sources.ui" line="426"/>
         <source>&amp;Add...</source>
         <translation>&amp;Добавить...</translation>
     </message>
@@ -3910,7 +4147,8 @@ could be resized or managed in other ways.</source>
         <location filename="../sources.ui" line="127"/>
         <location filename="../sources.ui" line="251"/>
         <location filename="../sources.ui" line="310"/>
-        <location filename="../sources.ui" line="377"/>
+        <location filename="../sources.ui" line="374"/>
+        <location filename="../sources.ui" line="433"/>
         <source>&amp;Remove</source>
         <translation>&amp;Удалить</translation>
     </message>
@@ -3986,36 +4224,46 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <location filename="../sources.ui" line="347"/>
+        <source>DICT servers</source>
+        <translation>Серверы DICT</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="353"/>
+        <source>DICT servers:</source>
+        <translation>Серверы DICT:</translation>
+    </message>
+    <message>
+        <location filename="../sources.ui" line="403"/>
         <source>Programs</source>
         <translation>Программы</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="353"/>
+        <location filename="../sources.ui" line="409"/>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
         <translation>Любые внешние программы. Строка %GDWORD% будет заменена на запрашиваемое слово. Если такой строки нет, слово будет отправлено в стандартный входной поток.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="406"/>
+        <location filename="../sources.ui" line="462"/>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="418"/>
+        <location filename="../sources.ui" line="474"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
         <translation>Живое произношение с сайта &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Сайт позволяет людям записывать и обмениваться произношениями слов. Вы можете прослушивать их из GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="431"/>
+        <location filename="../sources.ui" line="487"/>
         <source>Enable pronunciations from Forvo</source>
         <translation>Включить произношения с Forvo</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="461"/>
+        <location filename="../sources.ui" line="517"/>
         <source>API Key:</source>
         <translation>Ключ API:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="468"/>
+        <location filename="../sources.ui" line="524"/>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
@@ -4025,79 +4273,79 @@ in the future, or register on the site to get your own key.</source>
 сайте, чтобы получить свой собственный ключ.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="493"/>
+        <location filename="../sources.ui" line="549"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation>Получите ваш ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;здесь&lt;/a&gt;, или оставьте пустым для использования ключа по умолчанию.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="506"/>
+        <location filename="../sources.ui" line="562"/>
         <source>Language codes (comma-separated):</source>
         <translation>Список языковых кодов (через запятую):</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="513"/>
+        <location filename="../sources.ui" line="569"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
         <translation>Список кодов для языков, которые вы хотели бы использовать. Пример: &quot;en, ru&quot;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="536"/>
+        <location filename="../sources.ui" line="592"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
         <translation>Полный список языковых кодов доступен &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="578"/>
+        <location filename="../sources.ui" line="634"/>
         <source>Transliteration</source>
         <translation>Транслитерация</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="599"/>
+        <location filename="../sources.ui" line="655"/>
         <source>Russian transliteration</source>
         <translation>Транслитерация (Русский)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="610"/>
+        <location filename="../sources.ui" line="666"/>
         <source>Greek transliteration</source>
         <translation>Транслитерация (Греческий)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="634"/>
+        <location filename="../sources.ui" line="690"/>
         <source>German transliteration</source>
         <translation>Транслитерация (Немецкий)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="645"/>
+        <location filename="../sources.ui" line="701"/>
         <source>Belarusian transliteration</source>
         <translation>Транслитерация (Белорусский)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="671"/>
+        <location filename="../sources.ui" line="727"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Позволяет использовать латинский алфавит для ввода на Японском</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="674"/>
+        <location filename="../sources.ui" line="730"/>
         <source>Japanese Romaji</source>
         <translation>Ромадзи (Японский)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="686"/>
+        <location filename="../sources.ui" line="742"/>
         <source>Systems:</source>
         <translation>Системы:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="693"/>
+        <location filename="../sources.ui" line="749"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Наиболее популярный метод транскрибирования Японского,
 основанный на Английской фонологии</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="697"/>
+        <location filename="../sources.ui" line="753"/>
         <source>Hepburn</source>
         <translation>Хэпбёрн</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="707"/>
+        <location filename="../sources.ui" line="763"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4108,12 +4356,12 @@ Not implemented yet in GoldenDict.</source>
 В GoldenDict пока не реализована.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="713"/>
+        <location filename="../sources.ui" line="769"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="723"/>
+        <location filename="../sources.ui" line="779"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -4124,32 +4372,32 @@ Not implemented yet in GoldenDict.</source>
 В GoldenDict пока не реализована.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="729"/>
+        <location filename="../sources.ui" line="785"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="736"/>
+        <location filename="../sources.ui" line="792"/>
         <source>Syllabaries:</source>
         <translation>Слоговые азбуки:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="743"/>
+        <location filename="../sources.ui" line="799"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Слоговая азбука &quot;Хирагана&quot;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="746"/>
+        <location filename="../sources.ui" line="802"/>
         <source>Hiragana</source>
         <translation>Хирагана</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="809"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Слоговая азбука &quot;Катакана&quot;</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="756"/>
+        <location filename="../sources.ui" line="812"/>
         <source>Katakana</source>
         <translation>Катакана</translation>
     </message>
@@ -4290,22 +4538,22 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="572"/>
+        <location filename="../sources.cc" line="606"/>
         <source>Enabled</source>
         <translation>Включено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="574"/>
+        <location filename="../sources.cc" line="608"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="576"/>
+        <location filename="../sources.cc" line="610"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="578"/>
+        <location filename="../sources.cc" line="612"/>
         <source>Icon</source>
         <translation>Значок</translation>
     </message>

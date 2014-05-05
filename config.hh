@@ -289,6 +289,34 @@ struct WebSite
 /// All the WebSites
 typedef QVector< WebSite > WebSites;
 
+/// Any DICT server
+struct DictServer
+{
+  QString id, name, url;
+  bool enabled;
+  QString databases;
+  QString strategies;
+  QString iconFilename;
+
+  DictServer(): enabled( false )
+  {}
+
+  DictServer( QString const & id_, QString const & name_, QString const & url_,
+              bool enabled_, QString const & databases_, QString const & strategies_,
+              QString const & iconFilename_ ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), databases( databases_ ),
+    strategies( strategies_ ), iconFilename( iconFilename_ )  {}
+
+  bool operator == ( DictServer const & other ) const
+  { return id == other.id && name == other.name && url == other.url
+           && enabled == other.enabled && databases == other.databases
+           && strategies == other.strategies
+           && iconFilename == other.iconFilename; }
+};
+
+/// All the DictServers
+typedef QVector< DictServer > DictServers;
+
 /// Hunspell configuration
 struct Hunspell
 {
@@ -478,6 +506,7 @@ struct Class
   Preferences preferences;
   MediaWikis mediawikis;
   WebSites webSites;
+  DictServers dictServers;
   Hunspell hunspell;
   Transliteration transliteration;
   Forvo forvo;

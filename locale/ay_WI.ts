@@ -581,6 +581,43 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServersModel</name>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Suti</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Databases</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-delimited list of databases
+(empty string or &quot;*&quot; matches all databases)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strategies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Comma-delimited list of search strategies
+(empty string mean &quot;prefix&quot; strategy)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictionaryBar</name>
     <message>
         <source>Dictionary Bar</source>
@@ -658,6 +695,71 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>FTS::FtsIndexing</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ni maya</translation>
+    </message>
+</context>
+<context>
+    <name>FTS::FullTextSearchDialog</name>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Whole words</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plain text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wildcards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>RexExp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max distance between words (%1-%2):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Max articles per dictionary (%1-%2):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles found: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The search line must contains at least one word contains </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> or more symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No dictionaries for full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FTS::Indexing</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ni maya</translation>
+    </message>
+</context>
+<context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
@@ -686,6 +788,53 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Editar saram |aru pirwanaka |Fuentes|Forvo clave mayiña  API pantha chhaqañataki.</translation>
+    </message>
+</context>
+<context>
+    <name>FullTextSearchDialog</name>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Match case</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Articles found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Available dictionaries in group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wait for indexing:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Non-indexable:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Total:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indexed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing: None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Jan saña</translation>
     </message>
 </context>
 <context>
@@ -2963,6 +3112,26 @@ between classic and school orthography in cyrillic)</source>
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+Shift+F</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -3692,6 +3861,22 @@ Enable this option to workaround the problem.</source>
         <source>Custom settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow full-text search for:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t search in dictionaries contains more than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>articles (0 - unlimited)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -4255,6 +4440,14 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DICT servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DICT servers:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

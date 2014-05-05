@@ -17,6 +17,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   itemEditorFactory( new QItemEditorFactory() ),
   mediawikisModel( this, cfg.mediawikis ),
   webSitesModel( this, cfg.webSites ),
+  dictServersModel( this, cfg.dictServers ),
   programsModel( this, cfg.programs ),
   pathsModel( this, cfg.paths ),
   soundDirsModel( this, cfg.soundDirs ),
@@ -50,6 +51,15 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.webSites->resizeColumnToContents( 1 );
   ui.webSites->resizeColumnToContents( 2 );
   ui.webSites->resizeColumnToContents( 3 );
+
+  ui.dictServers->setTabKeyNavigation( true );
+  ui.dictServers->setModel( &dictServersModel );
+  ui.dictServers->resizeColumnToContents( 0 );
+  ui.dictServers->resizeColumnToContents( 1 );
+  ui.dictServers->resizeColumnToContents( 2 );
+  ui.dictServers->resizeColumnToContents( 3 );
+  ui.dictServers->resizeColumnToContents( 4 );
+  ui.dictServers->resizeColumnToContents( 5 );
 
   ui.programs->setTabKeyNavigation( true );
   ui.programs->setModel( &programsModel );
@@ -97,7 +107,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   // Text to speech
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
   textToSpeechSource = new TextToSpeechSource( this, cfg.voiceEngines );
-  ui.tabWidget->addTab( textToSpeechSource, tr( "Text to Speech" ) );
+  ui.tabWidget->addTab( textToSpeechSource, QIcon(":/icons/playsound_color.png"), tr( "Text to Speech" ) );
 #endif
 
   if ( Config::isPortableVersion() )
@@ -260,6 +270,30 @@ void Sources::on_removeWebSite_clicked()
                               QMessageBox::Ok,
                               QMessageBox::Cancel ) == QMessageBox::Ok )
     webSitesModel.removeSite( current.row() );
+}
+
+void Sources::on_addDictServer_clicked()
+{
+  dictServersModel.addNewServer();
+
+  QModelIndex result =
+    dictServersModel.index( dictServersModel.rowCount( QModelIndex() ) - 1,
+                            1, QModelIndex() );
+
+  ui.dictServers->scrollTo( result );
+  ui.dictServers->edit( result );
+}
+
+void Sources::on_removeDictServer_clicked()
+{
+  QModelIndex current = ui.dictServers->currentIndex();
+
+  if ( current.isValid() &&
+       QMessageBox::question( this, tr( "Confirm removal" ),
+                              tr( "Remove site <b>%1</b> from the list?" ).arg( dictServersModel.getCurrentDictServers()[ current.row() ].name ),
+                              QMessageBox::Ok,
+                              QMessageBox::Cancel ) == QMessageBox::Ok )
+    dictServersModel.removeServer( current.row() );
 }
 
 void Sources::on_addProgram_clicked()
@@ -640,6 +674,181 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
         return true;
       case 3:
         webSites[ index.row() ].iconFilename =  value.toString();
+        dataChanged( index, index );
+        return true;
+      default:
+        return false;
+    }
+
+  return false;
+}
+
+////////// DictServersModel
+
+DictServersModel::DictServersModel( QWidget * parent,
+                              Config::DictServers const & dictServers_ ):
+  QAbstractItemModel( parent ), dictServers( dictServers_ )
+{
+}
+void DictServersModel::removeServer( int index )
+{
+  beginRemoveRows( QModelIndex(), index, index );
+  dictServers.erase( dictServers.begin() + index );
+  endRemoveRows();
+}
+
+void DictServersModel::addNewServer()
+{
+  Config::DictServer d;
+
+  d.enabled = false;
+
+  d.id = Dictionary::generateRandomDictionaryId();
+
+  d.url = "dict://";
+
+  beginInsertRows( QModelIndex(), dictServers.size(), dictServers.size() );
+  dictServers.push_back( d );
+  endInsertRows();
+}
+
+QModelIndex DictServersModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
+{
+  return createIndex( row, column, 0 );
+}
+
+QModelIndex DictServersModel::parent( QModelIndex const & /*parent*/ ) const
+{
+  return QModelIndex();
+}
+
+Qt::ItemFlags DictServersModel::flags( QModelIndex const & index ) const
+{
+  Qt::ItemFlags result = QAbstractItemModel::flags( index );
+
+  if ( index.isValid() )
+  {
+    if ( !index.column() )
+      result |= Qt::ItemIsUserCheckable;
+    else
+      result |= Qt::ItemIsEditable;
+  }
+
+  return result;
+}
+
+int DictServersModel::rowCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return dictServers.size();
+}
+
+int DictServersModel::columnCount( QModelIndex const & parent ) const
+{
+  if ( parent.isValid() )
+    return 0;
+  else
+    return 6;
+}
+
+QVariant DictServersModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
+{
+  if ( role == Qt::DisplayRole )
+    switch( section )
+    {
+      case 0:
+        return tr( "Enabled" );
+      case 1:
+        return tr( "Name" );
+      case 2:
+        return tr( "Address" );
+      case 3:
+        return tr( "Databases" );
+      case 4:
+        return tr( "Strategies" );
+      case 5:
+        return tr( "Icon" );
+      default:
+        return QVariant();
+    }
+
+  return QVariant();
+}
+
+QVariant DictServersModel::data( QModelIndex const & index, int role ) const
+{
+  if ( index.row() >= dictServers.size() )
+    return QVariant();
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+  {
+    switch( index.column() )
+    {
+      case 1:
+        return dictServers[ index.row() ].name;
+      case 2:
+        return dictServers[ index.row() ].url;
+      case 3:
+        return dictServers[ index.row() ].databases;
+      case 4:
+        return dictServers[ index.row() ].strategies;
+      case 5:
+        return dictServers[ index.row() ].iconFilename;
+      default:
+        return QVariant();
+    }
+  }
+
+  if( role == Qt::ToolTipRole && index.column() == 3 )
+    return tr( "Comma-delimited list of databases\n(empty string or \"*\" matches all databases)" );
+
+  if( role == Qt::ToolTipRole && index.column() == 4 )
+    return tr( "Comma-delimited list of search strategies\n(empty string mean \"prefix\" strategy)" );
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+    return dictServers[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
+
+  return QVariant();
+}
+
+bool DictServersModel::setData( QModelIndex const & index, const QVariant & value,
+                               int role )
+{
+  if ( index.row() >= dictServers.size() )
+    return false;
+
+  if ( role == Qt::CheckStateRole && !index.column() )
+  {
+    // XXX it seems to be always passing Int( 2 ) as a value, so we just toggle
+    dictServers[ index.row() ].enabled = !dictServers[ index.row() ].enabled;
+
+    dataChanged( index, index );
+    return true;
+  }
+
+  if ( role == Qt::DisplayRole || role == Qt::EditRole )
+    switch( index.column() )
+    {
+      case 1:
+        dictServers[ index.row() ].name =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 2:
+        dictServers[ index.row() ].url =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 3:
+        dictServers[ index.row() ].databases =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 4:
+        dictServers[ index.row() ].strategies =  value.toString();
+        dataChanged( index, index );
+        return true;
+      case 5:
+        dictServers[ index.row() ].iconFilename =  value.toString();
         dataChanged( index, index );
         return true;
       default:
@@ -1195,4 +1404,3 @@ void Sources::on_rescan_clicked()
 {
   emit rescan();
 }
-

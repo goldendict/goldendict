@@ -47,7 +47,7 @@ using BtreeIndexing::IndexInfo;
 
 namespace {
 
-DEF_EX_STR( exNotDctFile, "Not an Sdictionary file", Dictionary::Ex )
+DEF_EX_STR( exNotAardFile, "Not an AARD file", Dictionary::Ex )
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exWordIsTooLarge, "Enountered a word that is too large:", Dictionary::Ex )
 DEF_EX_STR( exSuddenEndOfFile, "Sudden end of file", Dictionary::Ex )
@@ -287,7 +287,8 @@ private:
 
     /// Loads the article.
     void loadArticle( quint32 address,
-                      string & articleText );
+                      string & articleText,
+                      bool rawText = false );
     string convert( string const & in_data );
 
     friend class AardArticleRequest;
@@ -411,7 +412,8 @@ string AardDictionary::convert( const string & in )
 }
 
 void AardDictionary::loadArticle( quint32 address,
-                                   string & articleText )
+                                  string & articleText,
+                                  bool rawText )
 {
     quint32 articleOffset = address;
     quint32 articleSize;
@@ -509,7 +511,12 @@ void AardDictionary::loadArticle( quint32 address,
     }
 
     if( !articleText.empty() )
+    {
+      if( rawText )
+        return;
+
       articleText = convert( articleText );
+    }
     else
       articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
 
@@ -1046,9 +1053,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           continue;
         }
       } // if need to rebuild
-      dictionaries.push_back( new AardDictionary( dictId,
-                                                   indexFile,
-                                                   dictFiles ) );
+      try
+      {
+        dictionaries.push_back( new AardDictionary( dictId,
+                                                    indexFile,
+                                                    dictFiles ) );
+      }
+      catch( std::exception & e )
+      {
+        gdWarning( "Aard dictionary initializing failed: %s, error: %s\n",
+                  i->c_str(), e.what() );
+        continue;
+      }
   }
   return dictionaries;
 }

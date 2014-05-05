@@ -19,6 +19,9 @@ public:
   virtual void setTranslateLine(QLineEdit * line)
   { translateLine = line; }
 
+protected:
+  virtual void resizeEvent( QResizeEvent * ev );
+
 signals:
   void statusBarMessage(QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
   void contentChanged();
@@ -36,6 +39,8 @@ private:
   WordFinder * wordFinder;
   QLineEdit * translateLine;
   WordListItemDelegate listItemDelegate;
+
+  QVector< QSize > resizedSizes;
 };
 
 #endif // WORDLIST_HH

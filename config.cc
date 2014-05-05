@@ -201,6 +201,13 @@ WebSites makeDefaultWebSites()
   return ws;
 }
 
+DictServers makeDefaultDictServers()
+{
+  DictServers ds;
+
+  return ds;
+}
+
 Programs makeDefaultPrograms()
 {
   Programs programs;
@@ -371,6 +378,7 @@ Class load() throw( exError )
 
     c.mediawikis = makeDefaultMediaWikis( true );
     c.webSites = makeDefaultWebSites();
+    c.dictServers = makeDefaultDictServers();
 
     // Check if we have a template config file. If we do, load it instead
 
@@ -611,6 +619,35 @@ Class load() throw( exError )
   {
     // Upgrading
     c.webSites = makeDefaultWebSites();
+  }
+
+  QDomNode dss = root.namedItem( "dictservers" );
+
+  if ( !dss.isNull() )
+  {
+    QDomNodeList nl = dss.toElement().elementsByTagName( "server" );
+
+    for( unsigned x = 0; x < nl.length(); ++x )
+    {
+      QDomElement ds = nl.item( x ).toElement();
+
+      DictServer d;
+
+      d.id = ds.attribute( "id" );
+      d.name = ds.attribute( "name" );
+      d.url = ds.attribute( "url" );
+      d.enabled = ( ds.attribute( "enabled" ) == "1" );
+      d.databases = ds.attribute( "databases" );
+      d.strategies = ds.attribute( "strategies" );
+      d.iconFilename = ds.attribute( "icon" );
+
+      c.dictServers.push_back( d );
+    }
+  }
+  else
+  {
+    // Upgrading
+    c.dictServers = makeDefaultDictServers();
   }
 
   QDomNode ves = root.namedItem( "voiceEngines" );
@@ -1256,6 +1293,45 @@ void save( Class const & c ) throw( exError )
       QDomAttr icon = dd.createAttribute( "icon" );
       icon.setValue( i->iconFilename );
       ws.setAttributeNode( icon );
+    }
+  }
+
+  {
+    QDomElement dss = dd.createElement( "dictservers" );
+    root.appendChild( dss );
+
+    for( DictServers::const_iterator i = c.dictServers.begin(); i != c.dictServers.end(); ++i )
+    {
+      QDomElement ds = dd.createElement( "server" );
+      dss.appendChild( ds );
+
+      QDomAttr id = dd.createAttribute( "id" );
+      id.setValue( i->id );
+      ds.setAttributeNode( id );
+
+      QDomAttr name = dd.createAttribute( "name" );
+      name.setValue( i->name );
+      ds.setAttributeNode( name );
+
+      QDomAttr url = dd.createAttribute( "url" );
+      url.setValue( i->url );
+      ds.setAttributeNode( url );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( i->enabled ? "1" : "0" );
+      ds.setAttributeNode( enabled );
+
+      QDomAttr databases = dd.createAttribute( "databases" );
+      databases.setValue( i->databases );
+      ds.setAttributeNode( databases );
+
+      QDomAttr strategies = dd.createAttribute( "strategies" );
+      strategies.setValue( i->strategies );
+      ds.setAttributeNode( strategies );
+
+      QDomAttr icon = dd.createAttribute( "icon" );
+      icon.setValue( i->iconFilename );
+      ds.setAttributeNode( icon );
     }
   }
 

@@ -78,15 +78,12 @@ void BtreeIndex::openIndex( IndexInfo const & indexInfo,
   rootNode.clear();
 }
 
-vector< WordArticleLink > BtreeIndex::findArticles( wstring const & str )
+vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
 {
   vector< WordArticleLink > result;
 
   try
   {
-    // Exast search - unescape all wildcard symbols
-    wstring word = Folding::unescapeWildcardSymbols( str );
-
     wstring folded = Folding::apply( word );
     if( folded.empty() )
       folded = Folding::applyWhitespaceOnly( word );
@@ -217,11 +214,6 @@ void BtreeWordSearchRequest::run()
                      str.find( '?' ) != wstring::npos ||
                      str.find( '[' ) != wstring::npos ||
                      str.find( ']' ) != wstring::npos );
-  else
-  {
-    // Exast search - unescape all wildcard symbols
-    str = Folding::unescapeWildcardSymbols( str );
-  }
 
   wstring folded = Folding::apply( str );
 
@@ -1359,24 +1351,29 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
   // Read all chains
 
+  QList< uint32_t >::Iterator begOffsets = offsets.begin();
+  QList< uint32_t >::Iterator endOffsets = offsets.end();
+
   for( ; ; )
   {
     vector< WordArticleLink > result = readChain( chainPtr );
+
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      for( QList< uint32_t >::Iterator it = offsets.begin();
-           it != offsets.end(); ++it )
+      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
+                                                    result.at( i ).articleOffset );
+
+      if( it != offsets.end() )
       {
         if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
-        if( result.at( i ).articleOffset == *it )
-        {
-          headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
-          offsets.erase( it );
-          break;
-        }
+        headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+        offsets.erase( it );
+        begOffsets = offsets.begin();
+        endOffsets = offsets.end();
       }
+
       if( offsets.isEmpty() )
         break;
     }
@@ -1421,7 +1418,9 @@ bool BtreeDictionary::getHeadwords( QStringList &headwords )
 
     if( setOfHeadwords.size() )
     {
+#if QT_VERSION >= 0x040700
       headwords.reserve( setOfHeadwords.size() );
+#endif
 
       QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
       QSet< QString >::const_iterator end = setOfHeadwords.constEnd();

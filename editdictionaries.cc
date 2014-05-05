@@ -164,6 +164,7 @@ bool EditDictionaries::isSourcesChanged() const
          sources.getForvo() != cfg.forvo ||
          sources.getMediaWikis() != cfg.mediawikis ||
          sources.getWebSites() != cfg.webSites ||
+         sources.getDictServers() != cfg.dictServers ||
          sources.getPrograms() != cfg.programs ||
          sources.getVoiceEngines() != cfg.voiceEngines;
 }
@@ -183,6 +184,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   cfg.forvo = sources.getForvo();
   cfg.mediawikis = sources.getMediaWikis();
   cfg.webSites = sources.getWebSites();
+  cfg.dictServers = sources.getDictServers();
   cfg.programs = sources.getPrograms();
   cfg.voiceEngines = sources.getVoiceEngines();
 

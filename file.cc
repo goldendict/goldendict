@@ -133,7 +133,7 @@ size_t Class::readRecords( void * buf, qint64 size, size_t count ) throw( exWrit
   return result < 0 ? result : result / size;
 }
 
-void Class::write( void const * buf, qint64 size ) throw( exWriteError )
+void Class::write( void const * buf, qint64 size ) throw( exWriteError, exAllocation )
 {
   if ( !size )
     return;
@@ -155,6 +155,8 @@ void Class::write( void const * buf, qint64 size ) throw( exWriteError )
   {
     // Allocate the writing buffer since we don't have any yet
     writeBuffer = new char[ WriteBufferSize ];
+    if( !writeBuffer )
+      throw exAllocation();
     writeBufferLeft = WriteBufferSize;
   }
 

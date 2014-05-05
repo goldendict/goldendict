@@ -795,9 +795,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           continue;
         }
       } // if need to rebuild
-      dictionaries.push_back( new SdictDictionary( dictId,
-                                                   indexFile,
-                                                   dictFiles ) );
+      try
+      {
+        dictionaries.push_back( new SdictDictionary( dictId,
+                                                     indexFile,
+                                                     dictFiles ) );
+      }
+      catch( std::exception & e )
+      {
+        gdWarning( "Sdictionary dictionary initializing failed: %s, error: %s\n",
+                   i->c_str(), e.what() );
+      }
   }
   return dictionaries;
 }

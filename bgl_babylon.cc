@@ -34,6 +34,7 @@
 #include "htmlescape.hh"
 #include <QString>
 #include <QDebug>
+#include "dictionary.hh"
 
 #ifdef _WIN32
 #include <io.h>
@@ -43,6 +44,11 @@
 #endif
 
 using std::string;
+
+DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
+DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
+DEF_EX( exIconv, "Iconv library error", Dictionary::Ex )
+DEF_EX( exAllocation, "Error memory allocation", Dictionary::Ex )
 
 Babylon::Babylon( std::string filename ) :
 m_filename( filename )
@@ -141,6 +147,9 @@ bool Babylon::readBlock( bgl_block &block )
   if( block.length )
   {
     block.data = (char *)malloc( block.length );
+    if( !block.data )
+      throw exAllocation();
+
     unsigned res = gzread( file, block.data, block.length );
     if( block.length != res )
     {
@@ -786,10 +795,7 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
 
   iconv_t cd = iconv_open( "UTF-8", charset.c_str() );
   if( cd == (iconv_t)(-1) )
-  {
-    qFatal( "Error openning iconv library" );
-    exit(1);
-  }
+    throw exIconv();
 
   char *outbuf, *defbuf;
   size_t inbufbytes, outbufbytes;
@@ -800,6 +806,12 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   char *inbuf;
   inbuf = (char *)s.data();
   outbuf = (char*)malloc( outbufbytes + 1 );
+  if( !outbuf )
+  {
+    iconv_close( cd );
+    throw exAllocation();
+  }
+
   memset( outbuf, '\0', outbufbytes + 1 );
   defbuf = outbuf;
   while (inbufbytes) {

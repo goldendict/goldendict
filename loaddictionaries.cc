@@ -28,6 +28,7 @@
 #include "zipsounds.hh"
 #include "mdx.hh"
 #include "zim.hh"
+#include "dictserver.hh"
 
 #include <QMessageBox>
 #include <QDir>
@@ -318,6 +319,13 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  {
+    vector< sptr< Dictionary::Class > > dicts =
+      DictServer::makeDictionaries( cfg.dictServers );
+
+    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+  }
+
   DPRINTF( "Load done\n" );
 
   // Remove any stale index files
@@ -350,12 +358,14 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   for( QStringList::const_iterator i = allIdxFiles.constBegin();
        i != allIdxFiles.constEnd(); ++i )
   {
-    if ( ids.find( FsEncoding::encode( *i ) ) == ids.end() &&
-         i->size() == 32 )
-    {
+    if ( ids.find( FsEncoding::encode( *i ) ) == ids.end()
+         && i->size() == 32 )
       indexDir.remove( *i );
-      indexDir.remove( *i + "_FTS" );
-    }
+    else
+    if ( i->endsWith( "_FTS" )
+         && i->size() == 36
+         && ids.find( FsEncoding::encode( i->left( 32 ) ) ) == ids.end() )
+      indexDir.remove( *i );
   }
 
   // Run deferred inits

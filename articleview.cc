@@ -46,6 +46,60 @@
 using std::map;
 using std::list;
 
+/// AccentMarkHandler class
+///
+/// Remove accent marks from text
+/// and mirror position in normalized text to original text
+
+class AccentMarkHandler
+{
+  QString normalizedString;
+  QVector< int > accentMarkPos;
+public:
+  static QChar accentMark()
+  { return QChar( 0x301 ); }
+
+  /// Create text without accent marks
+  /// and store mark positions
+  void setText( QString const & baseString )
+  {
+    accentMarkPos.clear();
+    normalizedString.clear();
+    int pos = 0;
+    QChar mark = accentMark();
+
+    for( int x = 0; x < baseString.length(); x++ )
+    {
+      if( baseString.at( x ) == mark )
+      {
+        accentMarkPos.append( pos );
+        continue;
+      }
+      normalizedString.append( baseString.at( x ) );
+      pos++;
+    }
+  }
+
+  /// Return text without accent marks
+  QString const & normalizedText() const
+  { return normalizedString; }
+
+  /// Convert position into position in original text
+  int mirrorPosition( int const & pos ) const
+  {
+    int newPos = pos;
+    for( int x = 0; x < accentMarkPos.size(); x++ )
+    {
+      if( accentMarkPos.at( x ) < pos )
+        newPos++;
+      else
+        break;
+    }
+    return newPos;
+  }
+};
+
+/// End of DslAccentMark class
 
 static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
 {
@@ -2135,8 +2189,10 @@ void ArticleView::highlightFTSResults()
 {
   closeSearch();
 
+  AccentMarkHandler markHandler;
+
   const QUrl & url = ui.definition->url();
-  QRegExp regexp( Qt4x5::Url::queryItemValue( url, "regexp" ),
+  QRegExp regexp( Qt4x5::Url::queryItemValue( url, "regexp" ).remove( AccentMarkHandler::accentMark() ),
                   Qt4x5::Url::hasQueryItem( url, "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
                   Qt4x5::Url::hasQueryItem( url, "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
 
@@ -2153,20 +2209,26 @@ void ArticleView::highlightFTSResults()
   }
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
+  markHandler.setText( pageText );
+
   int pos = 0;
 
   while( pos >= 0 )
   {
-    pos = regexp.indexIn( pageText, pos );
+    pos = regexp.indexIn( markHandler.normalizedText(), pos );
     if( pos >= 0 )
     {
-      if( regexp.matchedLength() > FTS::MaxMatchLengthForHighlightResults )
+      // Mirror pos and matched length to original string
+      int spos = markHandler.mirrorPosition( pos );
+      int matched = markHandler.mirrorPosition( pos + regexp.matchedLength() ) - spos;
+
+      if( matched > FTS::MaxMatchLengthForHighlightResults )
       {
         gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
                    regexp.matchedLength(), FTS::MaxMatchLengthForHighlightResults );
       }
       else
-        allMatches.append( regexp.cap() );
+        allMatches.append( pageText.mid( spos, matched ) );
 
       pos += regexp.matchedLength();
     }
