@@ -714,7 +714,7 @@ void DictServersModel::addNewServer()
 
 QModelIndex DictServersModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex DictServersModel::parent( QModelIndex const & /*parent*/ ) const
