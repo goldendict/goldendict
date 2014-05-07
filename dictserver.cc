@@ -44,7 +44,8 @@ bool readLine( QTcpSocket & socket, QString & line,
 
     if( !socket.waitForReadyRead( 2000 ) )
     {
-      errorString = "Data reading error: " + socket.errorString();
+      errorString = "Data reading error: socket error " + QString::number( socket.error() )
+                    + ": \"" + socket.errorString() + "\"";
       break;
     }
   }
@@ -131,8 +132,9 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
   }
 
   if( !isCancelled )
-    errorString = QString( "Server connection fault, socket error %1" )
-                  .arg( QString::number( socket.error() ) );
+    errorString = QString( "Server connection fault, socket error %1: \"%2\"" )
+                  .arg( QString::number( socket.error() ) )
+                  .arg( socket.errorString() );
   return false;
 }
 
