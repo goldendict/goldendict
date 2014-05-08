@@ -439,6 +439,19 @@ namespace
       string headwordStr, displayedHeadwordStr, articleStr;
       loadArticle( articleAddress, headwordStr, displayedHeadwordStr, articleStr );
 
+      // Some headword normalization similar while indexing
+      trimWs( headwordStr );
+
+      if ( headwordStr.size() && headwordStr[ 0 ] == '/' )
+        headwordStr.erase(); // We will take headword from index later
+
+      if ( headwordStr.size()
+           && headwordStr[ headwordStr.size() - 1 ] == '$' )
+      {
+        headwordStr = removePostfix( headwordStr );
+        trimWs( headwordStr );
+      }
+
       headword = QString::fromUtf8( headwordStr.data(), headwordStr.size() );
 
       wstring wstr = Utf8::decode( articleStr );
