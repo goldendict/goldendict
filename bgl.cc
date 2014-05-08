@@ -314,22 +314,11 @@ namespace
 
     can_FTS = true;
 
-    Language::Id lang = getLangTo() & 0xFFFF;
-    if( lang == LangCoder::code2toInt( "zh" )
-        || lang == LangCoder::code2toInt( "ja" ) )
-    {
-      // Don't index articles in some languages which don't use spaces
-      can_FTS_index = false;
-    }
-    else
-    {
-      can_FTS_index = true;
-      ftsIdxName = indexFile + "_FTS";
+    ftsIdxName = indexFile + "_FTS";
 
-      if( !Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-          && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
-        FTS_index_completed.ref();
-    }
+    if( !Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      FTS_index_completed.ref();
   }
 
   void BglDictionary::loadIcon() throw()

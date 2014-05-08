@@ -20,7 +20,7 @@ namespace FtsHelpers
 enum
 {
   FtsSignature = 0x58535446, // FTSX on little-endian, XSTF on big-endian
-  CurrentFtsFormatVersion = 1 + BtreeIndexing::FormatVersion,
+  CurrentFtsFormatVersion = 2 + BtreeIndexing::FormatVersion,
 };
 
 #pragma pack(push,1)
@@ -47,12 +47,15 @@ bool parseSearchString( QString const & str, QStringList & IndexWords,
                         QStringList & searchWords,
                         QRegExp & searchRegExp, int searchMode,
                         bool matchCase,
-                        int distanceBetweenWords );
+                        int distanceBetweenWords,
+                        bool & hasCJK );
 
 void parseArticleForFts( uint32_t articleAddress, QString & articleText,
                          QMap< QString, QVector< uint32_t > > & words );
 
 void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancelled );
+
+bool isCJKChar( ushort ch );
 
 class FTSResultsRequest;
 
@@ -85,6 +88,7 @@ class FTSResultsRequest : public Dictionary::DataRequest
   bool matchCase;
   int distanceBetweenWords;
   int maxResults;
+  bool hasCJK;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -99,6 +103,12 @@ class FTSResultsRequest : public Dictionary::DataRequest
                     sptr< ChunkedStorage::Reader > chunks,
                     QStringList & indexWords,
                     QStringList & searchWords );
+
+  void combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
+                            sptr< ChunkedStorage::Reader > chunks,
+                            QStringList & indexWords,
+                            QStringList & searchWords,
+                            QRegExp & regexp );
 
   void fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                         sptr< ChunkedStorage::Reader > chunks,
@@ -117,7 +127,8 @@ public:
     searchMode( searchMode_ ),
     matchCase( matchCase_ ),
     distanceBetweenWords( distanceBetweenWords_ ),
-    maxResults( maxResults_ )
+    maxResults( maxResults_ ),
+    hasCJK( false )
   {
     foundHeadwords = new QList< FTS::FtsHeadword >;
     QThreadPool::globalInstance()->start(
