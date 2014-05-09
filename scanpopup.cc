@@ -429,10 +429,6 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
   definition->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
-  /// Too large strings make window expand which is probably not what user
-  /// wants
-  ui.translateBox->setText( inputWord, false );
- 
   if ( !isVisible() )
   {
     // Need to show the window
@@ -503,6 +499,10 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
   if ( ui.pinButton->isChecked() )
        setWindowTitle( tr( "%1 - %2" ).arg( elideInputWord(), "GoldenDict" ) );
+
+  /// Too large strings make window expand which is probably not what user
+  /// wants
+  ui.translateBox->setText( inputWord, false );
 
   showTranslationFor( inputWord );
 }
@@ -1001,6 +1001,9 @@ void ScanPopup::updateDictionaryBar()
 
 void ScanPopup::mutedDictionariesChanged()
 {
+  // Update suggestion list
+  translateInputChanged( ui.translateBox->translateLine()->text() );
+
   if ( dictionaryBar.toggleViewAction()->isChecked() )
     definition->updateMutedContents();
 }
