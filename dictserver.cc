@@ -236,9 +236,9 @@ QString const & DictServerDictionary::getDescription()
 {
   if( dictionaryDescription.isEmpty() )
   {
-    dictionaryDescription = "Url: " + url + "\n";
-    dictionaryDescription += "Databases: " + databases.join( ", " ) + "\n";
-    dictionaryDescription += "Strategies: " + strategies.join( ", " );
+    dictionaryDescription = QCoreApplication::translate( "DictServer", "Url: " ) + url + "\n";
+    dictionaryDescription += QCoreApplication::translate( "DictServer", "Databases: " ) + databases.join( ", " ) + "\n";
+    dictionaryDescription += QCoreApplication::translate( "DictServer", "Search strategies: " ) + strategies.join( ", " );
   }
   return dictionaryDescription;
 }
