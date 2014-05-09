@@ -562,6 +562,21 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServer</name>
+    <message>
+        <source>Url: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Databases: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search strategies: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictServersModel</name>
     <message>
         <source>Enabled</source>
@@ -732,6 +747,10 @@ between classic and school orthography in cyrillic)</source>
         <source>No dictionaries for full-text search</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FTS::Indexing</name>
@@ -795,10 +814,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Non-indexable:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

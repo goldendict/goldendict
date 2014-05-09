@@ -34,7 +34,8 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
                         QStringList & searchWords,
                         QRegExp & searchRegExp, int searchMode,
                         bool matchCase,
-                        int distanceBetweenWords )
+                        int distanceBetweenWords,
+                        bool & hasCJK )
 {
   searchWords.clear();
   indexWords.clear();
@@ -42,8 +43,19 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
   QRegExp wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}" );
   QRegExp setsRegExp( "\\[[^\\]]+\\]", Qt::CaseInsensitive, QRegExp::RegExp2 );
 
+  hasCJK = false;
+  for( int x = 0; x < str.size(); x++ )
+    if( isCJKChar( str.at( x ).unicode() ) )
+    {
+      hasCJK = true;
+      break;
+    }
+
   if( searchMode == FTS::WholeWords || searchMode == FTS::PlainText )
   {
+    if( hasCJK )
+      return false;
+
     // Make words list for search in article text
     searchWords = str.normalized( QString::NormalizationForm_C )
                      .split( spacesRegExp, QString::SkipEmptyParts );
@@ -93,8 +105,47 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     QStringList list = tmp.normalized( QString::NormalizationForm_C )
                           .toLower().split( spacesRegExp, QString::SkipEmptyParts );
-    indexWords = list.filter( wordRegExp );
-    indexWords.removeDuplicates();
+
+    if( hasCJK )
+    {
+      QStringList wordList, hieroglyphList;
+      for( int i = 0; i < list.size(); i ++ )
+      {
+        QString word = list.at( i );
+
+        // Check for CJK symbols in word
+        bool parsed = false;
+        QString hieroglyph;
+        for( int x = 0; x < word.size(); x++ )
+          if( isCJKChar( word.at( x ).unicode() ) )
+          {
+            parsed = true;
+            hieroglyph.append( word[ x ] );
+
+            if( QChar( word.at( x ) ).isHighSurrogate()
+                &&  QChar( word[ x + 1 ] ).isLowSurrogate() )
+              hieroglyph.append( word[ ++x ] );
+
+            hieroglyphList.append( hieroglyph );
+            hieroglyph.clear();
+          }
+
+        // If word don't contains CJK symbols put it in list as is
+        if( !parsed )
+          wordList.append( word );
+      }
+
+      indexWords = wordList.filter( wordRegExp );
+      indexWords.removeDuplicates();
+
+      hieroglyphList.removeDuplicates();
+      indexWords += hieroglyphList;
+    }
+    else
+    {
+      indexWords = list.filter( wordRegExp );
+      indexWords.removeDuplicates();
+    }
 
     searchRegExp = QRegExp( str, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
                             searchMode == FTS::Wildcards ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
@@ -118,13 +169,40 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   {
     QString word = articleWords.at( x ).toLower();
 
-    if( word.size() < FTS::MinimumWordSize )
-      continue;
+    bool hasCJK = false;
+    QString hieroglyph;
 
-    if( !setOfWords.contains( word ) )
+    // If word contains CJK symbols we add to index only these symbols separately
+    for( int y = 0; y < word.size(); y++ )
+      if( isCJKChar( word.at( y ).unicode() ) )
+      {
+        hasCJK = true;
+        hieroglyph.append( word[ y ] );
+
+        if( QChar( word.at( y ) ).isHighSurrogate()
+            &&  QChar( word[ y + 1 ] ).isLowSurrogate() )
+          hieroglyph.append( word[ ++y ] );
+
+        if( !setOfWords.contains( hieroglyph ) )
+        {
+          setOfWords.insert( hieroglyph );
+          words[ hieroglyph ].push_back( articleAddress );
+        }
+
+        hieroglyph.clear();
+      }
+
+    if( !hasCJK )
     {
-      setOfWords.insert( word );
-      words[ word ].push_back( articleAddress );
+      // Else we add word to index as is
+      if( word.size() < FTS::MinimumWordSize )
+        continue;
+
+      if( !setOfWords.contains( word ) )
+      {
+        setOfWords.insert( word );
+        words[ word ].push_back( articleAddress );
+      }
     }
   }
 }
@@ -230,6 +308,16 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
   ftsIdx.rewind();
   ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );
+}
+
+bool isCJKChar( ushort ch )
+{
+  if( ( ch >= 0x3400 && ch <= 0x9FFF )
+      || ( ch >= 0xF900 && ch <= 0xFAFF )
+      || ( ch >= 0xD800 && ch <= 0xDFFF ) )
+    return true;
+
+  return false;
 }
 
 void FTSResultsRequestRunnable::run()
@@ -418,6 +506,156 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
   checkArticles( offsets, searchWords );
 }
 
+void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
+                                             sptr< ChunkedStorage::Reader > chunks,
+                                             QStringList & indexWords,
+                                             QStringList & searchWords,
+                                             QRegExp & regexp )
+{
+  // Special case - combination of index search for hieroglyphs
+  // and full index search for other words
+
+  QSet< uint32_t > setOfOffsets;
+  uint32_t size;
+
+  if( isCancelled )
+    return;
+
+  if( indexWords.isEmpty() )
+    return;
+
+  QStringList wordsList, hieroglyphsList;
+
+  for( int x = 0; x < indexWords.size(); x++ )
+  {
+    QString const & word = indexWords.at( x );
+    if( isCJKChar( word[ 0 ].unicode() ) )
+      hieroglyphsList.append( word );
+    else
+      wordsList.append( word );
+  }
+
+  QVector< QSet< uint32_t > > allWordsLinks;
+
+  int n = wordsList.size();
+  if( !hieroglyphsList.isEmpty() )
+    n += 1;
+
+  allWordsLinks.resize( n );
+  int wordNom = 0;
+
+  if( !hieroglyphsList.empty() )
+  {
+    QSet< uint32_t > tmp;
+    vector< BtreeIndexing::WordArticleLink > links;
+
+    for( int i = 0; i < hieroglyphsList.size(); i++ )
+    {
+      links = ftsIndex.findArticles( gd::toWString( hieroglyphsList.at( i ) ) );
+      for( unsigned x = 0; x < links.size(); x++ )
+      {
+
+        if( isCancelled )
+          return;
+
+        vector< char > chunk;
+        char * linksPtr;
+        {
+          Mutex::Lock _( dict.getFtsMutex() );
+          linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
+        }
+
+        memcpy( &size, linksPtr, sizeof(uint32_t) );
+        linksPtr += sizeof(uint32_t);
+        for( uint32_t y = 0; y < size; y++ )
+        {
+          tmp.insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
+          linksPtr += sizeof(uint32_t);
+        }
+      }
+
+      links.clear();
+
+      if( i == 0 )
+        setOfOffsets = tmp;
+      else
+        setOfOffsets = setOfOffsets.intersect( tmp );
+    }
+
+    allWordsLinks[ wordNom ] = setOfOffsets;
+    setOfOffsets.clear();
+    wordNom += 1;
+  }
+
+  if( !wordsList.isEmpty() )
+  {
+    QVector< BtreeIndexing::WordArticleLink > links;
+    ftsIndex.findArticleLinks( &links, 0, 0 );
+
+    for( int x = 0; x < links.size(); x++ )
+    {
+      if( isCancelled )
+        return;
+
+      QString word = QString::fromUtf8( links[ x ].word.data(), links[ x ].word.size() );
+      for( int i = 0; i < wordsList.size(); i++ )
+      {
+        if( word.length() >= wordsList.at( i ).length() && word.contains( wordsList.at( i ) ) )
+        {
+          vector< char > chunk;
+          char * linksPtr;
+          {
+            Mutex::Lock _( dict.getFtsMutex() );
+            linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
+          }
+
+          memcpy( &size, linksPtr, sizeof(uint32_t) );
+          linksPtr += sizeof(uint32_t);
+          for( uint32_t y = 0; y < size; y++ )
+          {
+            allWordsLinks[ wordNom ].insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
+            linksPtr += sizeof(uint32_t);
+          }
+          wordNom += 1;
+          break;
+        }
+      }
+    }
+
+    links.clear();
+  }
+
+  for( int i = 0; i < allWordsLinks.size(); i++ )
+  {
+    if( i == 0 )
+      setOfOffsets = allWordsLinks.at( i );
+    else
+      setOfOffsets = setOfOffsets.intersect( allWordsLinks.at( i ) );
+  }
+
+  if( setOfOffsets.isEmpty() )
+    return;
+
+  allWordsLinks.clear();
+
+  QVector< uint32_t > offsets;
+  offsets.resize( setOfOffsets.size() );
+  uint32_t * ptr = &offsets.front();
+
+  for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
+       it != setOfOffsets.constEnd(); ++it )
+  {
+    *ptr = *it;
+    ptr++;
+  }
+
+  setOfOffsets.clear();
+
+  qSort( offsets );
+
+  checkArticles( offsets, searchWords, regexp );
+}
+
 void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                                          sptr< ChunkedStorage::Reader > chunks,
                                          QStringList & indexWords,
@@ -554,7 +792,7 @@ void FTSResultsRequest::run()
     QRegExp searchRegExp;
 
     if( !FtsHelpers::parseSearchString( searchString, indexWords, searchWords, searchRegExp,
-                                        searchMode, matchCase, distanceBetweenWords ) )
+                                        searchMode, matchCase, distanceBetweenWords, hasCJK ) )
     {
       finish();
       return;
@@ -580,10 +818,15 @@ void FTSResultsRequest::run()
         chunks = new ChunkedStorage::Reader( ftsIdx, ftsIdxHeader.chunksOffset );
       }
 
-      if( searchMode == FTS::WholeWords )
-        indexSearch( ftsIndex, chunks, indexWords, searchWords );
+      if( hasCJK )
+        combinedIndexSearch( ftsIndex, chunks, indexWords, searchWords, searchRegExp );
       else
-        fullIndexSearch( ftsIndex, chunks, indexWords, searchWords, searchRegExp );
+      {
+        if( searchMode == FTS::WholeWords )
+          indexSearch( ftsIndex, chunks, indexWords, searchWords );
+        else
+          fullIndexSearch( ftsIndex, chunks, indexWords, searchWords, searchRegExp );
+      }
     }
     else
     {

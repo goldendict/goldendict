@@ -703,6 +703,24 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServer</name>
+    <message>
+        <location filename="../dictserver.cc" line="239"/>
+        <source>Url: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictserver.cc" line="240"/>
+        <source>Databases: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictserver.cc" line="241"/>
+        <source>Search strategies: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictServersModel</name>
     <message>
         <location filename="../sources.cc" line="762"/>
@@ -845,7 +863,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FtsIndexing</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="69"/>
+        <location filename="../fulltextsearch.cc" line="67"/>
         <source>None</source>
         <translation>无</translation>
     </message>
@@ -853,64 +871,69 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="140"/>
+        <location filename="../fulltextsearch.cc" line="138"/>
         <source>Full-text search</source>
         <translation>全文搜索</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="147"/>
+        <location filename="../fulltextsearch.cc" line="145"/>
         <source>Whole words</source>
         <translation>全字匹配</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="148"/>
+        <location filename="../fulltextsearch.cc" line="146"/>
         <source>Plain text</source>
         <translation>纯文本</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="149"/>
+        <location filename="../fulltextsearch.cc" line="147"/>
         <source>Wildcards</source>
         <translation>通配符</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="150"/>
+        <location filename="../fulltextsearch.cc" line="148"/>
         <source>RexExp</source>
         <translation>正则表达式</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="155"/>
+        <location filename="../fulltextsearch.cc" line="153"/>
         <source>Max distance between words (%1-%2):</source>
         <translation>最大词间距 (%1-%2)：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="164"/>
+        <location filename="../fulltextsearch.cc" line="162"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation>每个词典最大词条数 (%1-%2)：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="187"/>
-        <location filename="../fulltextsearch.cc" line="292"/>
-        <location filename="../fulltextsearch.cc" line="366"/>
+        <location filename="../fulltextsearch.cc" line="185"/>
+        <location filename="../fulltextsearch.cc" line="284"/>
+        <location filename="../fulltextsearch.cc" line="372"/>
         <source>Articles found: </source>
         <translation>搜索到的词条：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="261"/>
+        <location filename="../fulltextsearch.cc" line="253"/>
         <source>Now indexing: </source>
         <translation>正在索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="301"/>
+        <location filename="../fulltextsearch.cc" line="297"/>
+        <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="306"/>
         <source>The search line must contains at least one word contains </source>
         <translation>搜索关键词至少包含</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="302"/>
+        <location filename="../fulltextsearch.cc" line="307"/>
         <source> or more symbols</source>
         <translation>个或更多字符</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="313"/>
+        <location filename="../fulltextsearch.cc" line="319"/>
         <source>No dictionaries for full-text search</source>
         <translation>没有可供全文搜索的词典</translation>
     </message>
@@ -918,7 +941,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::Indexing</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="62"/>
+        <location filename="../fulltextsearch.cc" line="60"/>
         <source>None</source>
         <translation>无</translation>
     </message>
@@ -965,7 +988,7 @@ between classic and school orthography in cyrillic)</source>
     <name>FullTextSearchDialog</name>
     <message>
         <location filename="../fulltextsearch.ui" line="26"/>
-        <location filename="../fulltextsearch.ui" line="203"/>
+        <location filename="../fulltextsearch.ui" line="189"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
@@ -995,27 +1018,26 @@ between classic and school orthography in cyrillic)</source>
         <translation>等候索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="136"/>
         <source>Non-indexable:</source>
-        <translation>不可索引：</translation>
+        <translation type="obsolete">不可索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="150"/>
+        <location filename="../fulltextsearch.ui" line="143"/>
         <source>Total:</source>
         <translation>总计：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="157"/>
+        <location filename="../fulltextsearch.ui" line="150"/>
         <source>Indexed:</source>
         <translation>已索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="181"/>
+        <location filename="../fulltextsearch.ui" line="167"/>
         <source>Now indexing: None</source>
         <translation>正在索引：无</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="229"/>
+        <location filename="../fulltextsearch.ui" line="215"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -2936,12 +2958,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="647"/>
+        <location filename="../mdx.cc" line="636"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>词典文件被修改或已损坏</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="658"/>
+        <location filename="../mdx.cc" line="647"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>从 %1 加载文章失败：%2</translation>
     </message>
@@ -3918,13 +3940,13 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="429"/>
-        <location filename="../dsl.cc" line="1620"/>
+        <location filename="../aard.cc" line="418"/>
+        <location filename="../dsl.cc" line="1609"/>
         <source>Article loading error</source>
         <translation>文章加载错误</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="521"/>
+        <location filename="../aard.cc" line="510"/>
         <source>Article decoding error</source>
         <translation>文章解码错误</translation>
     </message>

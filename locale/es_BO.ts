@@ -717,6 +717,24 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>DictServer</name>
+    <message>
+        <location filename="../dictserver.cc" line="239"/>
+        <source>Url: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictserver.cc" line="240"/>
+        <source>Databases: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictserver.cc" line="241"/>
+        <source>Search strategies: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DictServersModel</name>
     <message>
         <location filename="../sources.cc" line="762"/>
@@ -859,7 +877,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FtsIndexing</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="69"/>
+        <location filename="../fulltextsearch.cc" line="67"/>
         <source>None</source>
         <translation type="unfinished">Ningún</translation>
     </message>
@@ -867,64 +885,69 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="140"/>
+        <location filename="../fulltextsearch.cc" line="138"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="147"/>
+        <location filename="../fulltextsearch.cc" line="145"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="148"/>
+        <location filename="../fulltextsearch.cc" line="146"/>
         <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="149"/>
+        <location filename="../fulltextsearch.cc" line="147"/>
         <source>Wildcards</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="150"/>
+        <location filename="../fulltextsearch.cc" line="148"/>
         <source>RexExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="155"/>
+        <location filename="../fulltextsearch.cc" line="153"/>
         <source>Max distance between words (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="164"/>
+        <location filename="../fulltextsearch.cc" line="162"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="187"/>
-        <location filename="../fulltextsearch.cc" line="292"/>
-        <location filename="../fulltextsearch.cc" line="366"/>
+        <location filename="../fulltextsearch.cc" line="185"/>
+        <location filename="../fulltextsearch.cc" line="284"/>
+        <location filename="../fulltextsearch.cc" line="372"/>
         <source>Articles found: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="261"/>
+        <location filename="../fulltextsearch.cc" line="253"/>
         <source>Now indexing: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="301"/>
+        <location filename="../fulltextsearch.cc" line="297"/>
+        <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.cc" line="306"/>
         <source>The search line must contains at least one word contains </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="302"/>
+        <location filename="../fulltextsearch.cc" line="307"/>
         <source> or more symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="313"/>
+        <location filename="../fulltextsearch.cc" line="319"/>
         <source>No dictionaries for full-text search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -932,7 +955,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::Indexing</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="62"/>
+        <location filename="../fulltextsearch.cc" line="60"/>
         <source>None</source>
         <translation type="unfinished">Ningún</translation>
     </message>
@@ -979,7 +1002,7 @@ between classic and school orthography in cyrillic)</source>
     <name>FullTextSearchDialog</name>
     <message>
         <location filename="../fulltextsearch.ui" line="26"/>
-        <location filename="../fulltextsearch.ui" line="203"/>
+        <location filename="../fulltextsearch.ui" line="189"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1009,27 +1032,22 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="136"/>
-        <source>Non-indexable:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../fulltextsearch.ui" line="150"/>
+        <location filename="../fulltextsearch.ui" line="143"/>
         <source>Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="157"/>
+        <location filename="../fulltextsearch.ui" line="150"/>
         <source>Indexed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="181"/>
+        <location filename="../fulltextsearch.ui" line="167"/>
         <source>Now indexing: None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="229"/>
+        <location filename="../fulltextsearch.ui" line="215"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
@@ -3705,12 +3723,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="647"/>
+        <location filename="../mdx.cc" line="636"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="658"/>
+        <location filename="../mdx.cc" line="647"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4690,13 +4708,13 @@ la página web para descargarla.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="429"/>
-        <location filename="../dsl.cc" line="1620"/>
+        <location filename="../aard.cc" line="418"/>
+        <location filename="../dsl.cc" line="1609"/>
         <source>Article loading error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="521"/>
+        <location filename="../aard.cc" line="510"/>
         <source>Article decoding error</source>
         <translation type="unfinished"></translation>
     </message>

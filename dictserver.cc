@@ -44,7 +44,8 @@ bool readLine( QTcpSocket & socket, QString & line,
 
     if( !socket.waitForReadyRead( 2000 ) )
     {
-      errorString = "Data reading error: " + socket.errorString();
+      errorString = "Data reading error: socket error " + QString::number( socket.error() )
+                    + ": \"" + socket.errorString() + "\"";
       break;
     }
   }
@@ -131,8 +132,9 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
   }
 
   if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-    errorString = QString( "Server connection fault, socket error %1" )
-                  .arg( QString::number( socket.error() ) );
+    errorString = QString( "Server connection fault, socket error %1: \"%2\"" )
+                  .arg( QString::number( socket.error() ) )
+                  .arg( socket.errorString() );
   return false;
 }
 
@@ -234,9 +236,9 @@ QString const & DictServerDictionary::getDescription()
 {
   if( dictionaryDescription.isEmpty() )
   {
-    dictionaryDescription = "Url: " + url + "\n";
-    dictionaryDescription += "Databases: " + databases.join( ", " ) + "\n";
-    dictionaryDescription += "Strategies: " + strategies.join( ", " );
+    dictionaryDescription = QCoreApplication::translate( "DictServer", "Url: " ) + url + "\n";
+    dictionaryDescription += QCoreApplication::translate( "DictServer", "Databases: " ) + databases.join( ", " ) + "\n";
+    dictionaryDescription += QCoreApplication::translate( "DictServer", "Search strategies: " ) + strategies.join( ", " );
   }
   return dictionaryDescription;
 }

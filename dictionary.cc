@@ -124,7 +124,7 @@ vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
 
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
   id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
-  , can_FTS( false), can_FTS_index( false ), FTS_index_completed( false )
+  , can_FTS( false), FTS_index_completed( false )
 {
 }
 

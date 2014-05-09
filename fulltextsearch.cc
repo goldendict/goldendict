@@ -41,7 +41,6 @@ void Indexing::run()
         break;
 
       if( dictionaries.at( x )->canFTS()
-          && dictionaries.at( x )->canFTSIndex()
           &&!dictionaries.at( x )->haveFTSIndex() )
       {
         emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
@@ -56,7 +55,6 @@ void Indexing::run()
         break;
 
       if( dictionaries.at( x )->canFTS()
-          && dictionaries.at( x )->canFTSIndex()
           &&!dictionaries.at( x )->haveFTSIndex() )
       {
         emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
@@ -267,23 +265,17 @@ void FullTextSearchDialog::showDictNumbers()
 {
   ui.totalDicts->setText( QString::number( activeDicts.size() ) );
 
-  unsigned ready = 0, toIndex = 0, nonIndexable = 0;
+  unsigned ready = 0, toIndex = 0;
   for( unsigned x = 0; x < activeDicts.size(); x++ )
   {
-    if( activeDicts.at( x )->canFTSIndex() )
-    {
-      if( activeDicts.at( x )->haveFTSIndex() )
-        ready++;
-      else
-        toIndex++;
-    }
+    if( activeDicts.at( x )->haveFTSIndex() )
+      ready++;
     else
-      nonIndexable++;
+      toIndex++;
   }
 
   ui.readyDicts->setText( QString::number( ready ) );
   ui.toIndexDicts->setText( QString::number( toIndex ) );
-  ui.nonIndexableDicts->setText( QString::number( nonIndexable ) );
 }
 
 void FullTextSearchDialog::saveData()
@@ -333,18 +325,32 @@ void FullTextSearchDialog::accept()
   model->clear();
   ui.articlesFoundLabel->setText( tr( "Articles found: " ) + QString::number( results.size() ) );
 
+  bool hasCJK;
   if( !FtsHelpers::parseSearchString( ui.searchLine->text(), list1, list2,
                                       searchRegExp, mode,
                                       ui.matchCase->isChecked(),
-                                      distanceBetweenWords ) )
+                                      distanceBetweenWords,
+                                      hasCJK ) )
   {
-    QMessageBox message( QMessageBox::Warning,
-                         "GoldenDict",
-                         tr( "The search line must contains at least one word contains " )
-                         + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
-                         QMessageBox::Ok,
-                         this );
-    message.exec();
+    if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
+    {
+      QMessageBox message( QMessageBox::Warning,
+                           "GoldenDict",
+                           tr( "CJK symbols in search string are not compatible with search modes \"Whole words\" and \"Plain text\"" ),
+                           QMessageBox::Ok,
+                           this );
+      message.exec();
+    }
+    else
+    {
+      QMessageBox message( QMessageBox::Warning,
+                           "GoldenDict",
+                           tr( "The search line must contains at least one word contains " )
+                           + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
+                           QMessageBox::Ok,
+                           this );
+      message.exec();
+    }
     return;
   }
 

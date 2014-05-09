@@ -261,7 +261,7 @@ protected:
   QString dictionaryDescription;
   QIcon dictionaryIcon, dictionaryNativeIcon;
   bool dictionaryIconLoaded;
-  bool can_FTS, can_FTS_index;
+  bool can_FTS;
   QAtomicInt FTS_index_completed;
 
   // Load user icon if it exist
@@ -413,10 +413,6 @@ public:
   /// Dictionary can full-text search
   bool canFTS()
   { return can_FTS; }
-
-  /// Dictionary can be indexed for full-text search
-  bool canFTSIndex()
-  { return can_FTS_index; }
 
   /// Dictionary have index for full-text search
   bool haveFTSIndex()
