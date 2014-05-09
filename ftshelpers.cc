@@ -518,7 +518,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
   QSet< uint32_t > setOfOffsets;
   uint32_t size;
 
-  if( isCancelled )
+  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   if( indexWords.isEmpty() )
@@ -555,7 +555,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
       for( unsigned x = 0; x < links.size(); x++ )
       {
 
-        if( isCancelled )
+        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
           return;
 
         vector< char > chunk;
@@ -594,7 +594,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
     for( int x = 0; x < links.size(); x++ )
     {
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         return;
 
       QString word = QString::fromUtf8( links[ x ].word.data(), links[ x ].word.size() );
