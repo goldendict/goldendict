@@ -92,6 +92,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   toggleMenuBarAction( tr( "&Menubar" ), this ),
   switchExpandModeAction( this ),
   focusHeadwordsDlgAction( this ),
+  focusArticleViewAction( this ),
+  focusFullTextSearchAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -337,54 +339,24 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
            qApp, SLOT( quit() ) );
 
-  escAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addGlobalAction( &escAction, SLOT( handleEsc() ) );
   escAction.setShortcut( QKeySequence( "Esc" ) );
-  connect( &escAction, SIGNAL( triggered() ),
-           this, SLOT( handleEsc() ) );
 
-  focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addGlobalAction( &focusTranslateLineAction, SLOT( focusTranslateLine() ) );
   focusTranslateLineAction.setShortcuts( QList< QKeySequence >() <<
                                          QKeySequence( "Alt+D" ) <<
                                          QKeySequence( "Ctrl+L" ) );
 
-  connect( &focusTranslateLineAction, SIGNAL( triggered() ),
-           this, SLOT( focusTranslateLine() ) );
-
-  focusHeadwordsDlgAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addGlobalAction( &focusHeadwordsDlgAction, SLOT( focusHeadwordsDialog() ) );
   focusHeadwordsDlgAction.setShortcut( QKeySequence( "Ctrl+D" ) );
-
-  connect( &focusHeadwordsDlgAction, SIGNAL( triggered() ),
-           this, SLOT( focusHeadwordsDialog() ) );
-
-  ui.centralWidget->addAction( &escAction );
-  ui.dictsPane->addAction( &escAction );
-  ui.searchPaneWidget->addAction( &escAction );
-  ui.historyPane->addAction( &escAction );
-  groupList->addAction( &escAction );
-  translateBox->addAction( &escAction );
-
-  ui.centralWidget->addAction( &focusTranslateLineAction );
-  ui.dictsPane->addAction( &focusTranslateLineAction );
-  ui.searchPaneWidget->addAction( &focusTranslateLineAction );
-  ui.historyPane->addAction( &focusTranslateLineAction );
-  groupList->addAction( &focusTranslateLineAction );
-
-  ui.centralWidget->addAction( &focusHeadwordsDlgAction );
-  ui.dictsPane->addAction( &focusHeadwordsDlgAction );
-  ui.searchPaneWidget->addAction( &focusHeadwordsDlgAction );
-  ui.historyPane->addAction( &focusHeadwordsDlgAction );
-  groupList->addAction( &focusHeadwordsDlgAction );
-  translateBox->addAction( &focusHeadwordsDlgAction );
-
-  connect( ui.fullTextSearchAction, SIGNAL( triggered() ),
-           this, SLOT( showFullTextSearchDialog() ) );
-
-  ui.centralWidget->addAction( ui.fullTextSearchAction );
-  ui.dictsPane->addAction( ui.fullTextSearchAction );
-  ui.searchPaneWidget->addAction( ui.fullTextSearchAction );
-  ui.historyPane->addAction( ui.fullTextSearchAction );
-  groupList->addAction( ui.fullTextSearchAction );
-  translateBox->addAction( ui.fullTextSearchAction );
+           
+  addGlobalAction( &focusArticleViewAction, SLOT( focusArticleView() ) );
+  focusArticleViewAction.setShortcut( QKeySequence( "Ctrl+N" ) );
+  
+  addGlobalAction( &focusFullTextSearchAction, SLOT( focusFullTextSearch() ) );
+  focusFullTextSearchAction.setShortcut( QKeySequence( "Ctrl+U" ) );
+ 
+  addGlobalAction( ui.fullTextSearchAction, SLOT( showFullTextSearchDialog() ) );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -967,6 +939,28 @@ MainWindow::~MainWindow()
   }
 
   commitData();
+}
+
+void MainWindow::addGlobalAction( QAction * action, const char * slot )
+{
+  action->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  connect( action, SIGNAL( triggered() ), this, slot );
+
+  ui.centralWidget->addAction( action );
+  ui.dictsPane->addAction( action );
+  ui.searchPaneWidget->addAction( action );
+  ui.historyPane->addAction( action );
+  groupList->addAction( action );
+  translateBox->addAction( action ); 
+}
+
+void MainWindow::addGlobalActionsToDialog( QDialog * dialog )
+{
+  dialog->addAction( &focusTranslateLineAction );
+  dialog->addAction( &focusHeadwordsDlgAction );
+  dialog->addAction( &focusArticleViewAction );
+  dialog->addAction( &focusFullTextSearchAction );
+  dialog->addAction( ui.fullTextSearchAction );
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -3749,6 +3743,7 @@ void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
   if( headwordsDlg == 0 )
   {
     headwordsDlg = new DictHeadwords( this, cfg, dict );
+    addGlobalActionsToDialog( headwordsDlg );
     connect( headwordsDlg, SIGNAL( headwordSelected( QString ) ),
              this, SLOT( wordReceived( QString ) ) );
     connect( headwordsDlg, SIGNAL( closeDialog() ),
@@ -3773,6 +3768,23 @@ void MainWindow::focusHeadwordsDialog()
 {
   if( headwordsDlg )
     headwordsDlg->activateWindow();
+}
+
+void MainWindow::focusArticleView()
+{
+  ArticleView * view = getCurrentArticleView();
+  if ( view )
+  {
+    if ( !isActiveWindow() )
+      activateWindow();
+    view->focus();
+  }
+}
+
+void MainWindow::focusFullTextSearch()
+{
+  if ( ftsDlg )
+    ftsDlg->activateWindow();
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )
@@ -3988,6 +4000,8 @@ void MainWindow::showFullTextSearchDialog()
   if( !ftsDlg )
   {
     ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
+    
+    addGlobalActionsToDialog( ftsDlg );
 
     connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
              this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
