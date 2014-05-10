@@ -892,7 +892,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
-        <source>RexExp</source>
+        <source>RegExp</source>
         <translation>正则表达式</translation>
     </message>
     <message>

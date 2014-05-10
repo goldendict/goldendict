@@ -154,7 +154,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.searchMode->addItem( tr( "Whole words" ), WholeWords );
   ui.searchMode->addItem( tr( "Plain text"), PlainText );
   ui.searchMode->addItem( tr( "Wildcards" ), Wildcards );
-  ui.searchMode->addItem( tr( "RexExp" ), RegExp );
+  ui.searchMode->addItem( tr( "RegExp" ), RegExp );
   ui.searchMode->setCurrentIndex( cfg.preferences.fts.searchMode );
 
   ui.searchProgressBar->hide();

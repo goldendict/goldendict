@@ -904,7 +904,7 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
-        <source>RexExp</source>
+        <source>RegExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
