@@ -741,7 +741,7 @@ char *dict_data_read_ (
       readed = 0;
       if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
         ReadFile( h->fd, outBuffer, h->chunks[ i ], &readed, 0 );
-      if( h->chunks[ i ] != readed )
+      if( h->chunks[ i ] != (int)readed )
 #else
       if ( fseek( h->fd, h->offsets[ i ], SEEK_SET ) != 0 ||
            fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
