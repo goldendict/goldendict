@@ -328,7 +328,7 @@ void ScanPopup::editGroupRequested()
 
 void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 {
-  DPRINTF( "translating from clipboard or selection\n" );
+  GD_DPRINTF( "translating from clipboard or selection\n" );
 
   QString subtype = "plain";
 
@@ -364,7 +364,7 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
   if ( !isScanningEnabled )
     return;
   
-  DPRINTF( "clipboard changed\n" );
+  GD_DPRINTF( "clipboard changed\n" );
 
   QString subtype = "plain";
 

@@ -355,7 +355,7 @@ void FullTextSearchDialog::searchReqFinished()
     {
       if ( (*it)->isFinished() )
       {
-        DPRINTF( "one finished.\n" );
+        GD_DPRINTF( "one finished.\n" );
 
         QString errorString = (*it)->getErrorString();
 
@@ -384,9 +384,9 @@ void FullTextSearchDialog::searchReqFinished()
     }
     if( it != searchReqs.end() )
     {
-      DPRINTF( "erasing..\n" );
+      GD_DPRINTF( "erasing..\n" );
       searchReqs.erase( it );
-      DPRINTF( "erase done..\n" );
+      GD_DPRINTF( "erase done..\n" );
       continue;
     }
     else

@@ -1291,7 +1291,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         idxHeader.chunksOffset = chunks.finish();
 
-        DPRINTF( "Writing index...\n" );
+        GD_DPRINTF( "Writing index...\n" );
 
         // Good. Now build the index
 

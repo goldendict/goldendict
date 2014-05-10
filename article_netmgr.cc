@@ -126,9 +126,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
-  DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
+  GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
+  GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
+  GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {
@@ -286,7 +286,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
     if ( req->isFinished() )
     {
       emit finishedSignal();
-      DPRINTF( "In-place finish.\n" );
+      GD_DPRINTF( "In-place finish.\n" );
     }
   }
 }
@@ -324,7 +324,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   if ( maxSize == 0 )
     return 0;
 
-  DPRINTF( "====reading %d bytes\n", (int)maxSize );
+  GD_DPRINTF( "====reading %d bytes\n", (int)maxSize );
 
   bool finished = req->isFinished();
   

@@ -502,7 +502,7 @@ QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
       {
         QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
 
-        DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
+        GD_DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
 
         if ( cutStem.indexIn( suggestion ) != -1 )
         {

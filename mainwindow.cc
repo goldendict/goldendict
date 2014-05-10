@@ -1612,7 +1612,7 @@ void MainWindow::ctrlReleased()
 
 void MainWindow::backClicked()
 {
-  DPRINTF( "Back\n" );
+  GD_DPRINTF( "Back\n" );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -1621,7 +1621,7 @@ void MainWindow::backClicked()
 
 void MainWindow::forwardClicked()
 {
-  DPRINTF( "Forward\n" );
+  GD_DPRINTF( "Forward\n" );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -2877,7 +2877,7 @@ void MainWindow::latestReleaseReplyReady()
     // Failed -- reschedule to check in two hours
     newReleaseCheckTimer.start( 2 * 60 * 60 * 1000 );
 
-    DPRINTF( "Failed to check program version, retry in two hours\n" );
+    GD_DPRINTF( "Failed to check program version, retry in two hours\n" );
   }
   else
   {
@@ -2888,8 +2888,8 @@ void MainWindow::latestReleaseReplyReady()
 
     Config::save( cfg );
 
-    DPRINTF( "Program version's check successful, current version is %ls\n",
-            latestVersion.toStdWString().c_str() );
+    GD_DPRINTF( "Program version's check successful, current version is %ls\n",
+                latestVersion.toStdWString().c_str() );
   }
 
   if ( success && latestVersion > PROGRAM_VERSION && latestVersion != cfg.skippedRelease )

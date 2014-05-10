@@ -463,7 +463,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
   if ( stack.size() )
   {
-    FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
+    GD_FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
   }
 }
 
@@ -776,7 +776,7 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
       if ( !needExactEncoding )
       {
         // We don't need that!
-        FDPRINTF( stderr, "Warning: encoding was specified in a Unicode file, ignoring.\n" );
+        GD_FDPRINTF( stderr, "Warning: encoding was specified in a Unicode file, ignoring.\n" );
       }
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Latin" ) ) )
@@ -1023,7 +1023,7 @@ void processUnsortedParts( wstring & str, bool strip )
 
       if ( refCount < 0 )
       {
-        FDPRINTF( stderr, "Warning: an unmatched closing brace was encountered.\n" );
+        GD_FDPRINTF( stderr, "Warning: an unmatched closing brace was encountered.\n" );
         refCount = 0;
         // But we remove that thing either way
         str.erase( x, 1 );
@@ -1052,7 +1052,7 @@ void processUnsortedParts( wstring & str, bool strip )
 
   if ( strip && refCount )
   {
-    FDPRINTF( stderr, "Warning: unclosed brace(s) encountered.\n" );
+    GD_FDPRINTF( stderr, "Warning: unclosed brace(s) encountered.\n" );
     str.erase( startPos );
   }
 }

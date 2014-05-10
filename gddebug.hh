@@ -4,11 +4,11 @@
 #include <QFile>
 
 #ifdef NO_CONSOLE
-#define DPRINTF(...)
-#define FDPRINTF(...)
+#define GD_DPRINTF(...)
+#define GD_FDPRINTF(...)
 #else
-#define DPRINTF(...) printf(__VA_ARGS__)
-#define FDPRINTF(...) fprintf(__VA_ARGS__)
+#define GD_DPRINTF(...) printf(__VA_ARGS__)
+#define GD_FDPRINTF(...) fprintf(__VA_ARGS__)
 #endif
 
 void gdWarning(const char *, ...) /* print warning message */
