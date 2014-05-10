@@ -876,7 +876,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
-        <source>RexExp</source>
+        <source>RegExp</source>
         <translation>Рег. выр.</translation>
     </message>
     <message>

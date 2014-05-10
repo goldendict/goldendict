@@ -736,7 +736,7 @@ a školní ortografií v cyrilici)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>RexExp</source>
+        <source>RegExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

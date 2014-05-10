@@ -872,7 +872,7 @@ miž klasyčnym i školnym pravapisam)</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
-        <source>RexExp</source>
+        <source>RegExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

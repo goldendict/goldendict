@@ -874,7 +874,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
-        <source>RexExp</source>
+        <source>RegExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
