@@ -719,7 +719,7 @@ char *dict_data_read_ (
 	    inBuffer = h->cache[target].inBuffer;
 	    if( !inBuffer )
 	    {
-	      sprintf( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
+	      strcpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
 	      xfree( buffer );
 	      return 0;
 	    }
@@ -747,7 +747,7 @@ char *dict_data_read_ (
            fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
 #endif
       {
-        sprintf( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
+        strcpy( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
         xfree( buffer );
         return 0;
       }
