@@ -233,6 +233,18 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>searchLine</tabstop>
+  <tabstop>headwordsView</tabstop>
+  <tabstop>checkBoxDistanceBetweenWords</tabstop>
+  <tabstop>distanceBetweenWords</tabstop>
+  <tabstop>searchMode</tabstop>
+  <tabstop>checkBoxArticlesPerDictionary</tabstop>
+  <tabstop>articlesPerDictionary</tabstop>
+  <tabstop>matchCase</tabstop>
+  <tabstop>OKButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
