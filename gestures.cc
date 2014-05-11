@@ -313,6 +313,9 @@ QGestureRecognizer::Result GDSwipeGestureRecognizer::recognize( QGesture * state
   return result;
 }
 
+const qreal GDPinchGestureRecognizer::OUT_SCALE_LIMIT = 0.5;
+const qreal GDPinchGestureRecognizer::IN_SCALE_LIMIT = 2;
+
 bool handleGestureEvent( QObject * obj, QEvent * event, GestureResult & result,
                          QPoint & point )
 {
