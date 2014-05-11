@@ -303,7 +303,7 @@ void FullTextSearchDialog::accept()
     {
       QMessageBox message( QMessageBox::Warning,
                            "GoldenDict",
-                           tr( "The search line must contains at least one word contains " )
+                           tr( "The search line must contains at least one word containing " )
                            + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
                            QMessageBox::Ok,
                            this );

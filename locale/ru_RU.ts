@@ -908,8 +908,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
-        <source>The search line must contains at least one word contains </source>
-        <translation>Строка поиска должне включать как минимум одно слово из </translation>
+        <source>The search line must contains at least one word containing </source>
+        <translation>Строка поиска должна включать как минимум одно слово из </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="307"/>
@@ -3458,7 +3458,7 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
-        <source>Don&apos;t search in dictionaries contains more than</source>
+        <source>Don&apos;t search in dictionaries containing more than</source>
         <translation>Не искать в словарях, содержащих более чем</translation>
     </message>
     <message>

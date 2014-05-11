@@ -947,7 +947,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
-        <source>The search line must contains at least one word contains </source>
+        <source>The search line must contains at least one word containing </source>
         <translatorcomment>the source sentence is a bit weird...</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
@@ -3567,7 +3567,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
-        <source>Don&apos;t search in dictionaries contains more than</source>
+        <source>Don&apos;t search in dictionaries containing more than</source>
         <translatorcomment>typo in source sentence? *containing* more than</translatorcomment>
         <translation>Ne pas rechercher dans les dictionnaires contenant plus de</translation>
     </message>

@@ -933,7 +933,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
-        <source>The search line must contains at least one word contains </source>
+        <source>The search line must contains at least one word containing </source>
         <translation>Хати ҷустуҷӯ бояд ақаллан як калимаро бо </translation>
     </message>
     <message>
@@ -3563,7 +3563,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
-        <source>Don&apos;t search in dictionaries contains more than</source>
+        <source>Don&apos;t search in dictionaries containing more than</source>
         <translation>Ҷустуҷӯ накардан дар луғатҳо бо зиёда аз</translation>
     </message>
     <message>
