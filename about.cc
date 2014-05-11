@@ -25,6 +25,8 @@ About::About( QWidget * parent ): QDialog( parent )
                                .arg( GD_CXX_MSVC_MAJOR )
                                .arg( GD_CXX_MSVC_MINOR )
                                .arg( GD_CXX_MSVC_BUILD );
+#elif defined (__clang__) && defined (__clang_version__)
+  QString compilerVersion = QLatin1String( "Clang " ) + QLatin1String( __clang_version__ );
 #else
   QString compilerVersion = QLatin1String( "GCC " ) + QLatin1String( __VERSION__ );
 #endif
