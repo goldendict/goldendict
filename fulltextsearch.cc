@@ -366,6 +366,8 @@ void FullTextSearchDialog::searchReqFinished()
           {
             try
             {
+              if ( results.empty() ) // First results - allow user to choose entry.
+                ui.headwordsView->setFocus( Qt::OtherFocusReason );
               (*it)->getDataSlice( 0, sizeof( headwords ), &headwords );
               model->addResults( QModelIndex(), *headwords );
               delete headwords;
