@@ -481,7 +481,7 @@ void HotkeyWrapper::run() // Runs in a separate thread
   if ( !XRecordEnableContext( dataDisplay, recordContext,
                               recordEventCallback,
                               (XPointer) this ) )
-    DPRINTF( "Failed to enable record context\n" );
+    GD_DPRINTF( "Failed to enable record context\n" );
 }
 
 
