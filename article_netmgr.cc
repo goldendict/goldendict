@@ -130,9 +130,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
-  DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
+  GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
+  GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
+  GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {
@@ -291,7 +291,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
     if ( req->isFinished() )
     {
       emit finishedSignal();
-      DPRINTF( "In-place finish.\n" );
+      GD_DPRINTF( "In-place finish.\n" );
     }
   }
 }
@@ -314,12 +314,12 @@ void ArticleResourceReply::reqFinished()
 
 qint64 ArticleResourceReply::bytesAvailable() const
 {
-  long avail = req->dataSize();
+  qint64 avail = req->dataSize();
   
   if ( avail < 0 )
     return 0;
   
-  return (size_t) avail - alreadyRead +  QNetworkReply::bytesAvailable();
+  return avail - alreadyRead + QNetworkReply::bytesAvailable();
 }
 
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
@@ -329,18 +329,18 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   if ( maxSize == 0 )
     return 0;
 
-  DPRINTF( "====reading %d bytes\n", (int)maxSize );
+  GD_DPRINTF( "====reading %d bytes\n", (int)maxSize );
 
   bool finished = req->isFinished();
   
-  long avail = req->dataSize();
+  qint64 avail = req->dataSize();
 
   if ( avail < 0 )
     return finished ? -1 : 0;
 
-  size_t left = (size_t) avail - alreadyRead;
+  qint64 left = avail - alreadyRead;
   
-  size_t toRead = maxSize < left ? maxSize : left;
+  qint64 toRead = maxSize < left ? maxSize : left;
 
   try
   {

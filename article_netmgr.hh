@@ -53,7 +53,7 @@ class ArticleResourceReply: public QNetworkReply
   Q_OBJECT
 
   sptr< Dictionary::DataRequest > req;
-  size_t alreadyRead;
+  qint64 alreadyRead;
 
 public:
 

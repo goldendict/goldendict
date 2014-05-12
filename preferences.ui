@@ -1250,7 +1250,7 @@ download page.</string>
             <item>
              <widget class="QLabel" name="label_14">
               <property name="text">
-               <string>Don't search in dictionaries contains more than</string>
+               <string>Don't search in dictionaries containing more than</string>
               </property>
              </widget>
             </item>

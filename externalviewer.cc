@@ -29,7 +29,7 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
 
   tempFile.close();
 
-  DPRINTF( "%s\n", tempFile.fileName().toLocal8Bit().data() );
+  GD_DPRINTF( "%s\n", tempFile.fileName().toLocal8Bit().data() );
 }
 
 void ExternalViewer::start() throw( exCantRunViewer )

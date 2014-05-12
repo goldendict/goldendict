@@ -76,6 +76,8 @@ public slots:
   void setExpandMode( bool expand );
 
 private:
+  void addGlobalAction( QAction * action, const char * slot );
+  void addGlobalActionsToDialog( QDialog * dialog );
 
   void commitData();
   bool commitDataCompleted;
@@ -108,7 +110,7 @@ private:
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
           showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction,
-          switchExpandModeAction, focusHeadwordsDlgAction;
+          switchExpandModeAction, focusHeadwordsDlgAction, focusArticleViewAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -417,6 +419,8 @@ private slots:
   void closeHeadwordsDialog();
 
   void focusHeadwordsDialog();
+
+  void focusArticleView();
 
   void proxyAuthentication( const QNetworkProxy & proxy, QAuthenticator * authenticator );
 

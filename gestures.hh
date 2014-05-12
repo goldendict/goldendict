@@ -83,8 +83,8 @@ protected:
 class GDPinchGestureRecognizer : public QGestureRecognizer
 {
 public:
-  static const qreal OUT_SCALE_LIMIT = 0.5;
-  static const qreal IN_SCALE_LIMIT = 2;
+  static const qreal OUT_SCALE_LIMIT;
+  static const qreal IN_SCALE_LIMIT;
 
   GDPinchGestureRecognizer() {}
 private:

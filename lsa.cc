@@ -478,7 +478,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
     if ( result > left )
     {
-      FDPRINTF( stderr, "Warning: Vorbis decode returned more data than requested.\n" );
+      GD_FDPRINTF( stderr, "Warning: Vorbis decode returned more data than requested.\n" );
 
       result = left;
     }
@@ -576,7 +576,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         /// XXX handle big-endian machines here!
         uint32_t entriesCount = f.read< uint32_t >();
 
-        DPRINTF( "%s: %u entries\n", i->c_str(), entriesCount );
+        GD_DPRINTF( "%s: %u entries\n", i->c_str(), entriesCount );
 
         idxHeader.soundsCount = entriesCount;
 
@@ -592,7 +592,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           // Remove the extension, no need for that in the index
           e.name = stripExtension( e.name );
 
-          DPRINTF( "Read filename %s (%u at %u)<\n", e.name.c_str(), e.samplesLength, e.samplesOffset );
+          GD_DPRINTF( "Read filename %s (%u at %u)<\n", e.name.c_str(), e.samplesLength, e.samplesOffset );
 
           // Insert new entry into an index
 

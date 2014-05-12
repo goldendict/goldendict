@@ -39,7 +39,7 @@
 
 #include <QBuffer>
 
-#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #include "speechclient.hh"
 #endif
 
@@ -825,7 +825,9 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
            keyEvent->key() == Qt::Key_Tab ||
-           keyEvent->key() == Qt::Key_Backtab )
+           keyEvent->key() == Qt::Key_Backtab ||
+           keyEvent->key() == Qt::Key_Return ||
+           keyEvent->key() == Qt::Key_Enter )
         return false; // Those key have other uses than to start typing
 
       QString text = keyEvent->text();
@@ -1201,7 +1203,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   if ( url.scheme() == "gdtts" )
   {
 // TODO: Port TTS
-#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
     // Text to speech
     QString md5Id = Qt4x5::Url::queryItemValue( url, "engine" );
     QString text( url.path().mid( 1 ) );

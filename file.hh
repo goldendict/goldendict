@@ -37,7 +37,7 @@ class Class
 {
   QFile f;
   char * writeBuffer;
-  size_t writeBufferLeft;
+  qint64 writeBufferLeft;
 
   void open( char const * filename, char const * mode ) throw( exCantOpen );
 

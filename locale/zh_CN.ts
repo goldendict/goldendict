@@ -924,7 +924,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
-        <source>The search line must contains at least one word contains </source>
+        <source>The search line must contains at least one word containing </source>
         <translation>搜索关键词至少包含</translation>
     </message>
     <message>
@@ -3673,7 +3673,7 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
-        <source>Don&apos;t search in dictionaries contains more than</source>
+        <source>Don&apos;t search in dictionaries containing more than</source>
         <translation>不要在词条数多于</translation>
     </message>
     <message>

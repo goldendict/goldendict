@@ -1193,7 +1193,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       // Finish with the chunks
       idxHeader.chunksOffset = chunks.finish();
 
-      DPRINTF( "Writing index...\n" );
+      GD_DPRINTF( "Writing index...\n" );
 
       // Good. Now build the index
       IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );

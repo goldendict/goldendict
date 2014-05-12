@@ -49,14 +49,14 @@ BSTR bstr;
 RECT r = { 0, 0, 0, 0 };
 bool bGoUp;
 
-    DPRINTF("\nEntering getWordAtPoint\n");
+    GD_DPRINTF("\nEntering getWordAtPoint\n");
 
     if( pGDAutomation == NULL ) return false;
 
     buffer[0] = 0;
     pElement = NULL;
     hr = pGDAutomation->ElementFromPoint( pt, &pElement );
-    DPRINTF("ElementFromPoint return hr=%08lX, ptr=%p\n", hr, pElement);
+    GD_DPRINTF("ElementFromPoint return hr=%08lX, ptr=%p\n", hr, pElement);
     if( hr != S_OK || pElement == NULL )
         return false;
 

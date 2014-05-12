@@ -326,7 +326,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
-  DPRINTF( "Load done\n" );
+  GD_DPRINTF( "Load done\n" );
 
   // Remove any stale index files
 

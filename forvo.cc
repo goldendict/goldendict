@@ -181,7 +181,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
 void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 {
-  DPRINTF( "Finished.\n" );
+  GD_DPRINTF( "Finished.\n" );
 
   if ( isFinished() ) // Was cancelled
     return;
@@ -350,7 +350,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
           setErrorString( text );
         }
       }
-      DPRINTF( "done.\n" );
+      GD_DPRINTF( "done.\n" );
     }
     else
       setErrorString( netReply->errorString() );

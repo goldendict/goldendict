@@ -728,17 +728,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="239"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse : </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="240"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bases de données : </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="241"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Stratégies de recherche : </translation>
     </message>
 </context>
 <context>
@@ -746,44 +746,46 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="762"/>
         <source>Enabled</source>
-        <translation type="unfinished">Activé</translation>
+        <translation>Activé</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="764"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="766"/>
         <source>Address</source>
-        <translation type="unfinished">Adresse</translation>
+        <translation>Adresse</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="768"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Bases de données</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="770"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Stratégies</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="772"/>
         <source>Icon</source>
-        <translation type="unfinished">Icône</translation>
+        <translation>Icône</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="805"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste de bases de données, séparées par des virgules
+(une chaîne vide ou &quot;*&quot; sélectionne toutes les bases)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="808"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste de stratégies, séparées par des virgules
+(une chaîne vide impliquera une stratégie par &quot;préfixe&quot;)</translation>
     </message>
 </context>
 <context>
@@ -886,7 +888,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="67"/>
         <source>None</source>
-        <translation type="unfinished">Aucun</translation>
+        <translation>Aucun</translation>
     </message>
 </context>
 <context>
@@ -894,58 +896,59 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="138"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche en texte intégral</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="145"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Mots entiers</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="146"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte intégral</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
         <source>Wildcards</source>
-        <translation type="unfinished">Opérateurs de cardinalité</translation>
+        <translation>Opérateurs de cardinalité</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Expression régulière</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="153"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Distance max entre les mots (%1-%2) :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="162"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Articles max par dictionnaire (%1-%2) :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="185"/>
         <location filename="../fulltextsearch.cc" line="284"/>
         <location filename="../fulltextsearch.cc" line="372"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Articles trouvés :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="253"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>En cours d&apos;indexation : </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Les symboles CJK dans la chaîne de recherche ne sont pas compatibles avec les modes &quot;Mots entiers&quot; et &quot;Texte intégral&quot;</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
-        <source>The search line must contains at least one word contains </source>
+        <source>The search line must contains at least one word containing </source>
+        <translatorcomment>the source sentence is a bit weird...</translatorcomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -956,7 +959,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="319"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de dictionnaires pour la recherche en texte intégral</translation>
     </message>
 </context>
 <context>
@@ -964,7 +967,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="60"/>
         <source>None</source>
-        <translation type="unfinished">Aucun</translation>
+        <translation>Aucun</translation>
     </message>
 </context>
 <context>
@@ -1011,52 +1014,52 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="189"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished">Respecter la casse</translation>
+        <translation>Respecter la casse</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="94"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Articles trouvés :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="116"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dictionnaires disponibles dans le groupe :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="122"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indexation en cours :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="143"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Total :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indexés :</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="167"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>En cours d&apos;indexation : Aucun</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="215"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
@@ -2415,7 +2418,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="134"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="302"/>
@@ -2568,22 +2571,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="567"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher dans la page</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="570"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="578"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche en texte intégral</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="581"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3555,22 +3558,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1157"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche en texte intégral</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1176"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriser la recherche en texte intégral pour :</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
-        <source>Don&apos;t search in dictionaries contains more than</source>
-        <translation type="unfinished"></translation>
+        <source>Don&apos;t search in dictionaries containing more than</source>
+        <translatorcomment>typo in source sentence? *containing* more than</translatorcomment>
+        <translation>Ne pas rechercher dans les dictionnaires contenant plus de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1270"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>article(s) (0 - pas de limite)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1491"/>
@@ -4392,12 +4396,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveurs DICT</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveurs DICT :</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>

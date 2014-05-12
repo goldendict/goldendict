@@ -122,7 +122,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
                                                         QNetworkAccessManager & mgr ):
   livedLongEnough( false ), isCancelling( false )
 {
-  DPRINTF( "request begin\n" );
+  GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
   Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ) );
@@ -148,7 +148,7 @@ void MediaWikiWordSearchRequest::timerEvent( QTimerEvent * ev )
 
 MediaWikiWordSearchRequest::~MediaWikiWordSearchRequest()
 {
-  DPRINTF( "request end\n" );
+  GD_DPRINTF( "request end\n" );
 }
 
 void MediaWikiWordSearchRequest::cancel()
@@ -165,7 +165,7 @@ void MediaWikiWordSearchRequest::cancel()
   }
   else
   {
-    DPRINTF("not long enough\n" );
+    GD_DPRINTF("not long enough\n" );
   }
 }
 
@@ -200,7 +200,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }
-    DPRINTF( "done.\n" );
+    GD_DPRINTF( "done.\n" );
   }
   else
     setErrorString( netReply->errorString() );
@@ -268,7 +268,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
 void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 {
-  DPRINTF( "Finished.\n" );
+  GD_DPRINTF( "Finished.\n" );
 
   if ( isFinished() ) // Was cancelled
     return;
@@ -380,7 +380,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           }
         }
       }
-      DPRINTF( "done.\n" );
+      GD_DPRINTF( "done.\n" );
     }
     else
       setErrorString( netReply->errorString() );

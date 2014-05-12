@@ -610,7 +610,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 char * tab4 = strchr( tab3 + 1, '\t');
                 if ( tab4 )
                 {
-                  DPRINTF( "Warning: too many tabs present, skipping: %s\n", buf );
+                  GD_DPRINTF( "Warning: too many tabs present, skipping: %s\n", buf );
                   continue;
                 }
 
@@ -649,7 +649,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                       if ( endEol )
                         *endEol = 0;
 
-                      DPRINTF( "DICT NAME: '%s'\n", eol );
+                      GD_DPRINTF( "DICT NAME: '%s'\n", eol );
                       dictionaryName = eol;
                     }
                   }
@@ -662,13 +662,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             }
             else
             {
-              DPRINTF( "Warning: only a single tab present, skipping: %s\n", buf );
+              GD_DPRINTF( "Warning: only a single tab present, skipping: %s\n", buf );
               continue;
             }
           }
           else
           {
-            DPRINTF( "Warning: no tabs present, skipping: %s\n", buf );
+            GD_DPRINTF( "Warning: no tabs present, skipping: %s\n", buf );
             continue;
           }
 

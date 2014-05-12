@@ -345,7 +345,7 @@ void FullTextSearchDialog::accept()
     {
       QMessageBox message( QMessageBox::Warning,
                            "GoldenDict",
-                           tr( "The search line must contains at least one word contains " )
+                           tr( "The search line must contains at least one word containing " )
                            + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
                            QMessageBox::Ok,
                            this );
@@ -397,7 +397,7 @@ void FullTextSearchDialog::searchReqFinished()
     {
       if ( (*it)->isFinished() )
       {
-        DPRINTF( "one finished.\n" );
+        GD_DPRINTF( "one finished.\n" );
 
         QString errorString = (*it)->getErrorString();
 
@@ -426,9 +426,9 @@ void FullTextSearchDialog::searchReqFinished()
     }
     if( it != searchReqs.end() )
     {
-      DPRINTF( "erasing..\n" );
+      GD_DPRINTF( "erasing..\n" );
       searchReqs.erase( it );
-      DPRINTF( "erase done..\n" );
+      GD_DPRINTF( "erase done..\n" );
       continue;
     }
     else

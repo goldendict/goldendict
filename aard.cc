@@ -847,7 +847,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           {
             QFileInfo info( FsEncoding::decode( i->c_str() ) );
-            if( info.size() > ULONG_MAX )
+            if( static_cast< quint64 >( info.size() ) > ULONG_MAX )
             {
               gdWarning( "File %s is too large\n", i->c_str() );
               continue;

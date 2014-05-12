@@ -1155,7 +1155,7 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
   if ( btreeMaxElements > BtreeMaxElements )
     btreeMaxElements = BtreeMaxElements;
 
-  DPRINTF( "Building a tree of %u elements\n", (unsigned) btreeMaxElements );
+  GD_DPRINTF( "Building a tree of %u elements\n", (unsigned) btreeMaxElements );
 
 
   uint32_t lastLeafOffset = 0;

@@ -102,6 +102,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   toggleMenuBarAction( tr( "&Menubar" ), this ),
   switchExpandModeAction( this ),
   focusHeadwordsDlgAction( this ),
+  focusArticleViewAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -347,54 +348,21 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
            qApp, SLOT( quit() ) );
 
-  escAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addGlobalAction( &escAction, SLOT( handleEsc() ) );
   escAction.setShortcut( QKeySequence( "Esc" ) );
-  connect( &escAction, SIGNAL( triggered() ),
-           this, SLOT( handleEsc() ) );
 
-  focusTranslateLineAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addGlobalAction( &focusTranslateLineAction, SLOT( focusTranslateLine() ) );
   focusTranslateLineAction.setShortcuts( QList< QKeySequence >() <<
                                          QKeySequence( "Alt+D" ) <<
                                          QKeySequence( "Ctrl+L" ) );
 
-  connect( &focusTranslateLineAction, SIGNAL( triggered() ),
-           this, SLOT( focusTranslateLine() ) );
-
-  focusHeadwordsDlgAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  addGlobalAction( &focusHeadwordsDlgAction, SLOT( focusHeadwordsDialog() ) );
   focusHeadwordsDlgAction.setShortcut( QKeySequence( "Ctrl+D" ) );
 
-  connect( &focusHeadwordsDlgAction, SIGNAL( triggered() ),
-           this, SLOT( focusHeadwordsDialog() ) );
+  addGlobalAction( &focusArticleViewAction, SLOT( focusArticleView() ) );
+  focusArticleViewAction.setShortcut( QKeySequence( "Ctrl+N" ) );
 
-  ui.centralWidget->addAction( &escAction );
-  ui.dictsPane->addAction( &escAction );
-  ui.searchPaneWidget->addAction( &escAction );
-  ui.historyPane->addAction( &escAction );
-  groupList->addAction( &escAction );
-  translateBox->addAction( &escAction );
-
-  ui.centralWidget->addAction( &focusTranslateLineAction );
-  ui.dictsPane->addAction( &focusTranslateLineAction );
-  ui.searchPaneWidget->addAction( &focusTranslateLineAction );
-  ui.historyPane->addAction( &focusTranslateLineAction );
-  groupList->addAction( &focusTranslateLineAction );
-
-  ui.centralWidget->addAction( &focusHeadwordsDlgAction );
-  ui.dictsPane->addAction( &focusHeadwordsDlgAction );
-  ui.searchPaneWidget->addAction( &focusHeadwordsDlgAction );
-  ui.historyPane->addAction( &focusHeadwordsDlgAction );
-  groupList->addAction( &focusHeadwordsDlgAction );
-  translateBox->addAction( &focusHeadwordsDlgAction );
-
-  connect( ui.fullTextSearchAction, SIGNAL( triggered() ),
-           this, SLOT( showFullTextSearchDialog() ) );
-
-  ui.centralWidget->addAction( ui.fullTextSearchAction );
-  ui.dictsPane->addAction( ui.fullTextSearchAction );
-  ui.searchPaneWidget->addAction( ui.fullTextSearchAction );
-  ui.historyPane->addAction( ui.fullTextSearchAction );
-  groupList->addAction( ui.fullTextSearchAction );
-  translateBox->addAction( ui.fullTextSearchAction );
+  addGlobalAction( ui.fullTextSearchAction, SLOT( showFullTextSearchDialog() ) );
 
   addTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   addTabAction.setShortcut( QKeySequence( "Ctrl+T" ) );
@@ -820,7 +788,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   updateStatusLine();
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   if( cfg.preferences.startWithScanPopupOn && !MacMouseOver::isAXAPIEnabled() )
       mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                       QPixmap( ":/icons/error.png" ) );
@@ -977,6 +945,27 @@ MainWindow::~MainWindow()
   }
 
   commitData();
+}
+
+void MainWindow::addGlobalAction( QAction * action, const char * slot )
+{
+  action->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  connect( action, SIGNAL( triggered() ), this, slot );
+
+  ui.centralWidget->addAction( action );
+  ui.dictsPane->addAction( action );
+  ui.searchPaneWidget->addAction( action );
+  ui.historyPane->addAction( action );
+  groupList->addAction( action );
+  translateBox->addAction( action );
+}
+
+void MainWindow::addGlobalActionsToDialog( QDialog * dialog )
+{
+  dialog->addAction( &focusTranslateLineAction );
+  dialog->addAction( &focusHeadwordsDlgAction );
+  dialog->addAction( &focusArticleViewAction );
+  dialog->addAction( ui.fullTextSearchAction );
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -1622,7 +1611,7 @@ void MainWindow::ctrlReleased()
 
 void MainWindow::backClicked()
 {
-  DPRINTF( "Back\n" );
+  GD_DPRINTF( "Back\n" );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -1631,7 +1620,7 @@ void MainWindow::backClicked()
 
 void MainWindow::forwardClicked()
 {
-  DPRINTF( "Forward\n" );
+  GD_DPRINTF( "Forward\n" );
 
   ArticleView *view = getCurrentArticleView();
 
@@ -2887,7 +2876,7 @@ void MainWindow::latestReleaseReplyReady()
     // Failed -- reschedule to check in two hours
     newReleaseCheckTimer.start( 2 * 60 * 60 * 1000 );
 
-    DPRINTF( "Failed to check program version, retry in two hours\n" );
+    GD_DPRINTF( "Failed to check program version, retry in two hours\n" );
   }
   else
   {
@@ -2898,8 +2887,8 @@ void MainWindow::latestReleaseReplyReady()
 
     Config::save( cfg );
 
-    DPRINTF( "Program version's check successful, current version is %ls\n",
-            latestVersion.toStdWString().c_str() );
+    GD_DPRINTF( "Program version's check successful, current version is %ls\n",
+                latestVersion.toStdWString().c_str() );
   }
 
   if ( success && latestVersion > PROGRAM_VERSION && latestVersion != cfg.skippedRelease )
@@ -2963,7 +2952,7 @@ void MainWindow::scanEnableToggled( bool on )
     if ( on )
     {
       scanPopup->enableScanning();
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
       if( !MacMouseOver::isAXAPIEnabled() )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                           QPixmap( ":/icons/error.png" ) );
@@ -3759,6 +3748,7 @@ void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
   if( headwordsDlg == 0 )
   {
     headwordsDlg = new DictHeadwords( this, cfg, dict );
+    addGlobalActionsToDialog( headwordsDlg );
     connect( headwordsDlg, SIGNAL( headwordSelected( QString ) ),
              this, SLOT( wordReceived( QString ) ) );
     connect( headwordsDlg, SIGNAL( closeDialog() ),
@@ -3782,7 +3772,22 @@ void MainWindow::closeHeadwordsDialog()
 void MainWindow::focusHeadwordsDialog()
 {
   if( headwordsDlg )
+  {
     headwordsDlg->activateWindow();
+    if ( ftsDlg )
+      ftsDlg->lower();
+  }
+}
+
+void MainWindow::focusArticleView()
+{
+  ArticleView * view = getCurrentArticleView();
+  if ( view )
+  {
+    if ( !isActiveWindow() )
+      activateWindow();
+    view->focus();
+  }
 }
 
 void MainWindow::editDictionary( Dictionary::Class * dict )
@@ -3998,6 +4003,7 @@ void MainWindow::showFullTextSearchDialog()
   if( !ftsDlg )
   {
     ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
+    addGlobalActionsToDialog( ftsDlg );
 
     connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
              this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
@@ -4005,16 +4011,20 @@ void MainWindow::showFullTextSearchDialog()
              this, SLOT( closeFullTextSearchDialog() ), Qt::QueuedConnection );
     connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
              ftsDlg, SLOT( updateDictionaries() ) );
-  }
 
-  unsigned group = groupInstances.empty() ? 0
-                                          : groupInstances[ groupList->currentIndex() ].id;
-  ftsDlg->setCurrentGroup( group );
+    unsigned group = groupInstances.empty() ? 0
+                                            : groupInstances[ groupList->currentIndex() ].id;
+    ftsDlg->setCurrentGroup( group );
+  }
 
   if( !ftsDlg ->isVisible() )
     ftsDlg->show();
   else
+  {
     ftsDlg->activateWindow();
+    if ( headwordsDlg )
+      headwordsDlg->lower();
+  }
 }
 
 void MainWindow::closeFullTextSearchDialog()

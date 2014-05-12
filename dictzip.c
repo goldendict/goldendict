@@ -719,7 +719,7 @@ char *dict_data_read_ (
 	    inBuffer = h->cache[target].inBuffer;
 	    if( !inBuffer )
 	    {
-	      sprintf( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
+	      strcpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
 	      xfree( buffer );
 	      return 0;
 	    }
@@ -741,13 +741,13 @@ char *dict_data_read_ (
       readed = 0;
       if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
         ReadFile( h->fd, outBuffer, h->chunks[ i ], &readed, 0 );
-      if( h->chunks[ i ] != readed )
+      if( h->chunks[ i ] != (int)readed )
 #else
       if ( fseek( h->fd, h->offsets[ i ], SEEK_SET ) != 0 ||
            fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
 #endif
       {
-        sprintf( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
+        strcpy( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
         xfree( buffer );
         return 0;
       }

@@ -405,7 +405,7 @@ void DslDictionary::doDeferredInit()
         memcpy( &total, abrvBlock, sizeof( uint32_t ) );
         abrvBlock += sizeof( uint32_t );
 
-        DPRINTF( "Loading %u abbrv\n", total );
+        GD_DPRINTF( "Loading %u abbrv\n", total );
 
         while( total-- )
         {
@@ -534,7 +534,7 @@ void DslDictionary::loadArticle( uint32_t address,
     memcpy( &articleSize, articleProps + sizeof( articleOffset ),
             sizeof( articleSize ) );
 
-    DPRINTF( "offset = %x\n", articleOffset );
+    GD_DPRINTF( "offset = %x\n", articleOffset );
 
 
     char * articleBody;
@@ -1719,7 +1719,7 @@ void DslResourceRequest::run()
     FsEncoding::separator() +
     FsEncoding::encode( resourceName );
 
-  DPRINTF( "n is %s\n", n.c_str() );
+  GD_DPRINTF( "n is %s\n", n.c_str() );
 
   try
   {
@@ -2266,7 +2266,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( zipFileName.size() )
         {
-          DPRINTF( "Indexing zip file\n" );
+          GD_DPRINTF( "Indexing zip file\n" );
 
           idxHeader.hasZipFile = 1;
 

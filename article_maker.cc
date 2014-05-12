@@ -537,7 +537,7 @@ void ArticleRequest::bodyFinished()
   if ( bodyDone )
     return;
 
-  DPRINTF( "some body finished\n" );
+  GD_DPRINTF( "some body finished\n" );
 
   bool wasUpdated = false;
 
@@ -548,7 +548,7 @@ void ArticleRequest::bodyFinished()
     {
       // Good
 
-      DPRINTF( "one finished.\n" );
+      GD_DPRINTF( "one finished.\n" );
 
       Dictionary::DataRequest & req = *bodyRequests.front();
 
@@ -684,14 +684,14 @@ void ArticleRequest::bodyFinished()
 
         foundAnyDefinitions = true;
       }
-      DPRINTF( "erasing..\n" );
+      GD_DPRINTF( "erasing..\n" );
       bodyRequests.pop_front();
-      DPRINTF( "erase done..\n" );
+      GD_DPRINTF( "erase done..\n" );
     }
     else
     {
-        DPRINTF( "one not finished.\n" );
-        break;
+      GD_DPRINTF( "one not finished.\n" );
+      break;
     }
   }
 

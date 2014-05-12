@@ -13,7 +13,7 @@
 #include "gddebug.hh"
 #include "gestures.hh"
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
 #include "macmouseover.hh"
 #define MouseOver MacMouseOver
 #else
@@ -26,7 +26,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static Qt::WindowFlags popupWindowFlags =
 
-#if defined (Q_OS_WIN) || defined (Q_OS_MACX)
+#if defined (Q_OS_WIN) || defined (Q_OS_MAC)
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
@@ -327,7 +327,7 @@ void ScanPopup::editGroupRequested()
 
 void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 {
-  DPRINTF( "translating from clipboard or selection\n" );
+  GD_DPRINTF( "translating from clipboard or selection\n" );
 
   QString subtype = "plain";
 
@@ -363,7 +363,7 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
   if ( !isScanningEnabled )
     return;
   
-  DPRINTF( "clipboard changed\n" );
+  GD_DPRINTF( "clipboard changed\n" );
 
   QString subtype = "plain";
 

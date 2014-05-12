@@ -696,7 +696,7 @@ protected:
 
   virtual qint64 readData( char * data, qint64 maxSize );
 
-  virtual bool atEnd();
+  virtual bool atEnd() const;
 
   virtual qint64 writeData ( const char * /*data*/, qint64 /*maxSize*/ )
   { return -1; }
@@ -719,7 +719,7 @@ GzippedFile::~GzippedFile()
       dict_data_close( dz );
 }
 
-bool GzippedFile::atEnd()
+bool GzippedFile::atEnd() const
 {
   return gzeof( gz );
 }
@@ -1010,7 +1010,7 @@ void XdxfResourceRequest::run()
     FsEncoding::separator() +
     FsEncoding::encode( resourceName );
 
-  DPRINTF( "n is %s\n", n.c_str() );
+  GD_DPRINTF( "n is %s\n", n.c_str() );
 
   try
   {
@@ -1245,7 +1245,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     }
                     else
                     {
-                      DPRINTF( "Warning: duplicate full_name in %s\n", dictFiles[ 0 ].c_str() );
+                      GD_DPRINTF( "Warning: duplicate full_name in %s\n", dictFiles[ 0 ].c_str() );
                     }
                   }
                   else
@@ -1267,7 +1267,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     }
                     else
                     {
-                      DPRINTF( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
+                      GD_DPRINTF( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
                     }
                   }
                   else
@@ -1378,7 +1378,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               if ( zipFileName.size() )
               {
-                DPRINTF( "Indexing zip file\n" );
+                GD_DPRINTF( "Indexing zip file\n" );
 
                 idxHeader.hasZipFile = 1;
 

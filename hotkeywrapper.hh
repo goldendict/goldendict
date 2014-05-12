@@ -13,7 +13,7 @@
 
 #endif
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
 #define __SECURITYHI__
 #include <Carbon/Carbon.h>
 #endif
@@ -33,7 +33,7 @@ struct HotkeyStruct
   quint32 modifier;
   int handle;
   int id;
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   EventHotKeyRef hkRef, hkRef2;
 #endif
 };
@@ -70,7 +70,7 @@ protected slots:
 
   void waitKey2();
 
-#ifndef Q_OS_MACX
+#ifndef Q_OS_MAC
 private slots:
 
   bool checkState( quint32 vk, quint32 mod );
@@ -90,7 +90,7 @@ private:
   virtual bool winEvent ( MSG * message, long * result );
   HWND hwnd;
 
-#elif defined(Q_OS_MACX)
+#elif defined(Q_OS_MAC)
 
 public:
   void activated( int hkId );

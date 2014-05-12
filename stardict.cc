@@ -1137,7 +1137,7 @@ void StardictResourceRequest::run()
       FsEncoding::separator() +
       FsEncoding::encode( resourceName );
 
-    DPRINTF( "n is %s\n", n.c_str() );
+    GD_DPRINTF( "n is %s\n", n.c_str() );
 
     try
     {
@@ -1311,7 +1311,7 @@ static void handleIdxSynFile( string const & fileName,
                                            sizeof( uint32_t ) * 2 ) >
          &image.back() )
     {
-      FDPRINTF( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
+      GD_FDPRINTF( stderr, "Warning: sudden end of file %s\n", fileName.c_str() );
       break;
     }
 
@@ -1393,7 +1393,7 @@ static void handleIdxSynFile( string const & fileName,
     indexedWords.addWord( Utf8::decode( word ), offset );
   }
 
-  DPRINTF( "%u entires made\n", (unsigned) indexedWords.size() );
+  GD_DPRINTF( "%u entires made\n", (unsigned) indexedWords.size() );
 }
 
 
@@ -1461,21 +1461,21 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           if ( ifo.synwordcount )
           {
-            DPRINTF( "Warning: dictionary has synwordcount specified, but no "
-                    "corresponding .syn file was found\n" );
+            GD_DPRINTF( "Warning: dictionary has synwordcount specified, but no "
+                        "corresponding .syn file was found\n" );
             ifo.synwordcount = 0;  // Pretend it wasn't there
           }
         }
         else
         if ( !ifo.synwordcount )
         {
-          DPRINTF( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
-                  synFileName.c_str() );
+          GD_DPRINTF( "Warning: ignoring .syn file %s, since there's no synwordcount in .ifo specified\n",
+                      synFileName.c_str() );
         }
 
 
-        DPRINTF( "bookname = %s\n", ifo.bookname.c_str() );
-        DPRINTF( "wordcount = %u\n", ifo.wordcount );
+        GD_DPRINTF( "bookname = %s\n", ifo.bookname.c_str() );
+        GD_DPRINTF( "wordcount = %u\n", ifo.wordcount );
 
         initializing.indexingDictionary( ifo.bookname );
 
@@ -1552,7 +1552,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( zipFileName.size() )
         {
-          DPRINTF( "Indexing zip file\n" );
+          GD_DPRINTF( "Indexing zip file\n" );
 
           idxHeader.hasZipFile = 1;
 
