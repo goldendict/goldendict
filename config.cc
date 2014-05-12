@@ -627,7 +627,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = dss.toElement().elementsByTagName( "server" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ds = nl.item( x ).toElement();
 
