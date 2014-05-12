@@ -694,7 +694,7 @@ protected:
 
   virtual qint64 readData( char * data, qint64 maxSize );
 
-  virtual bool atEnd();
+  virtual bool atEnd() const;
 
   virtual qint64 writeData ( const char * /*data*/, qint64 /*maxSize*/ )
   { return -1; }
@@ -717,7 +717,7 @@ GzippedFile::~GzippedFile()
       dict_data_close( dz );
 }
 
-bool GzippedFile::atEnd()
+bool GzippedFile::atEnd() const
 {
   return gzeof( gz );
 }
