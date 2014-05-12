@@ -122,7 +122,7 @@ void MacMouseOver::timerShot()
     return;
   if( !pPref )
     return;
-  if( pPref->enableScanPopupModifiers && checkModifiersPressed( pPref->scanPopupModifiers ) )
+  if( !pPref->enableScanPopupModifiers || checkModifiersPressed( pPref->scanPopupModifiers ) )
     handlePosition();
 }
 
