@@ -778,7 +778,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   updateStatusLine();
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   if( cfg.preferences.startWithScanPopupOn && !MacMouseOver::isAXAPIEnabled() )
       mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                       QPixmap( ":/icons/error.png" ) );
@@ -2942,7 +2942,7 @@ void MainWindow::scanEnableToggled( bool on )
     if ( on )
     {
       scanPopup->enableScanning();
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
       if( !MacMouseOver::isAXAPIEnabled() )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                           QPixmap( ":/icons/error.png" ) );

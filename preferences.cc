@@ -151,7 +151,7 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.rightCtrl->hide();
   ui.leftShift->hide();
   ui.rightShift->hide();
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   ui.altKey->setText( "Opt" );
   ui.winKey->setText( "Ctrl" );
   ui.ctrlKey->setText( "Cmd" );

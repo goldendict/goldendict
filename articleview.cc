@@ -37,7 +37,7 @@
 
 #include <QBuffer>
 
-#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #include "speechclient.hh"
 #endif
 
@@ -1201,7 +1201,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   if ( url.scheme() == "gdtts" )
   {
 // TODO: Port TTS
-#if defined( Q_OS_WIN32 ) || defined( Q_OS_MACX )
+#if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
     // Text to speech
     QString md5Id = url.queryItemValue( "engine" );
     QString text( url.path().mid( 1 ) );

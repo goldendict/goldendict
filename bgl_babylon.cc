@@ -106,7 +106,7 @@ bool Babylon::open()
 
   fflush( f );
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   /* Under Mac OS X the above technique don't set reopen position properly */
   int fn = DUP( fileno( f ) );
   lseek( fn, i, SEEK_SET );

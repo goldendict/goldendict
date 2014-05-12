@@ -1,3 +1,4 @@
+#include <AppKit/NSWindow.h>
 #include "lionsupport.h"
 
 bool LionSupport::isLion()

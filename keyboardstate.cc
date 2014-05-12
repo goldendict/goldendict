@@ -10,7 +10,7 @@
 #include <QX11Info>
 #include <X11/X.h>
 #include <X11/XKBlib.h>
-#elif defined Q_OS_MACX
+#elif defined Q_OS_MAC
 #define __SECURITYHI__
 #include <Carbon/Carbon.h>
 #endif
@@ -32,7 +32,7 @@ bool KeyboardState::checkModifiersPressed( int mask )
     ( mask & LeftShift && !( GetAsyncKeyState( VK_LSHIFT ) & 0x8000 ) ) ||
     ( mask & RightShift && !( GetAsyncKeyState( VK_RSHIFT ) & 0x8000 ) ) );
 
-  #elif defined Q_OS_MACX
+  #elif defined Q_OS_MAC
   UInt32 keys = GetCurrentKeyModifiers();
   return !(
     ( mask & Alt && !( keys & ( 1 << optionKeyBit ) ) ) ||

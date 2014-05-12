@@ -70,7 +70,7 @@ HotkeyStruct::HotkeyStruct( quint32 key_, quint32 key2_, quint32 modifier_,
   modifier( modifier_ ),
   handle( handle_ ),
   id( id_ )
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
   , hkRef( 0 )
   , hkRef2( 0 )
 #endif
