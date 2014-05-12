@@ -309,12 +309,12 @@ void ArticleResourceReply::reqFinished()
 
 qint64 ArticleResourceReply::bytesAvailable() const
 {
-  long avail = req->dataSize();
+  qint64 avail = req->dataSize();
   
   if ( avail < 0 )
     return 0;
   
-  return (size_t) avail - alreadyRead +  QNetworkReply::bytesAvailable();
+  return avail - alreadyRead + QNetworkReply::bytesAvailable();
 }
 
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
@@ -328,14 +328,14 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 
   bool finished = req->isFinished();
   
-  long avail = req->dataSize();
+  qint64 avail = req->dataSize();
 
   if ( avail < 0 )
     return finished ? -1 : 0;
 
-  size_t left = (size_t) avail - alreadyRead;
+  qint64 left = avail - alreadyRead;
   
-  size_t toRead = maxSize < left ? maxSize : left;
+  qint64 toRead = maxSize < left ? maxSize : left;
 
   try
   {

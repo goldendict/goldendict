@@ -143,7 +143,7 @@ void Class::write( void const * buf, qint64 size ) throw( exWriteError, exAlloca
     // If the write is large, there's not much point in buffering
     flushWriteBuffer();
 
-    size_t result = f.write( reinterpret_cast<char const *>( buf ), size );
+    qint64 result = f.write( reinterpret_cast<char const *>( buf ), size );
 
     if ( result != size )
       throw exWriteError();
@@ -312,7 +312,7 @@ void Class::flushWriteBuffer() throw( exWriteError )
 {
   if ( writeBuffer && writeBufferLeft != WriteBufferSize )
   {
-    size_t result = f.write( writeBuffer, WriteBufferSize - writeBufferLeft );
+    qint64 result = f.write( writeBuffer, WriteBufferSize - writeBufferLeft );
 
     if ( result != WriteBufferSize - writeBufferLeft )
       throw exWriteError();
