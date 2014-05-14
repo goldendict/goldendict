@@ -6,5 +6,5 @@ Name=GoldenDict
 GenericName=Multiformat Dictionary
 Comment=GoldenDict
 Encoding=UTF-8
-Icon=/usr/local/share/pixmaps/goldendict.png
+Icon=goldendict
 Exec=goldendict
