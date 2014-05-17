@@ -4522,7 +4522,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="103"/>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation>Введите слово или словосочестание для поиска в словарях</translation>
+        <translation>Введите слово или словосочетание для поиска в словарях</translation>
     </message>
     <message>
         <location filename="../translatebox.cc" line="125"/>
