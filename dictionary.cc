@@ -432,6 +432,9 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
   {
     QFileInfo fileInfo( FsEncoding::decode( i->c_str() ) );
 
+    if( fileInfo.isDir() )
+      continue;
+
     if ( !fileInfo.exists() )
       return true;
 

@@ -445,6 +445,18 @@ CONFIG( zim_support ) {
   LIBS += -ltiff
 }
 
+CONFIG( no_epwing_support ) {
+  DEFINES += NO_EPWING_SUPPORT
+}
+
+!CONFIG( no_epwing_support ) {
+  HEADERS += epwing.hh \
+             epwing_book.hh
+  SOURCES += epwing.cc \
+             epwing_book.cc
+  LIBS += -leb
+}
+
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \

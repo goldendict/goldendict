@@ -30,6 +30,10 @@
 #include "zim.hh"
 #include "dictserver.hh"
 
+#ifndef NO_EPWING_SUPPORT
+#include "epwing.hh"
+#endif
+
 #include <QMessageBox>
 #include <QDir>
 
@@ -55,6 +59,9 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
               << "*.mdx"
 #ifdef MAKE_ZIM_SUPPORT
               << "*.zim" << "*.zimaa"
+#endif
+#ifndef NO_EPWING_SUPPORT
+              << "*catalogs"
 #endif
 ;
 }
@@ -199,6 +206,15 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
                          zimDictionaries.end() );
+  }
+#endif
+#ifndef NO_EPWING_SUPPORT
+  {
+    vector< sptr< Dictionary::Class > > epwingDictionaries =
+      Epwing::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), epwingDictionaries.begin(),
+                         epwingDictionaries.end() );
   }
 #endif
 }
