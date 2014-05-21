@@ -8,6 +8,9 @@
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
+#include "wstring.hh"
+#include "wstring_qt.hh"
+#include "folding.hh"
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #define _FILE_OFFSET_BITS 64
@@ -347,7 +350,7 @@ EB_Error_Code hook_narrow_font( EB_Book * book, EB_Appendix *, void * container,
 
   if( cn->textOnly )
   {
-    eb_write_text_byte1( book, '?' );
+//    eb_write_text_byte1( book, '?' );
     return EB_SUCCESS;
   }
 
@@ -365,7 +368,7 @@ EB_Error_Code hook_wide_font( EB_Book * book, EB_Appendix *, void * container,
 
   if( cn->textOnly )
   {
-    eb_write_text_byte1( book, '?' );
+//    eb_write_text_byte1( book, '?' );
     return EB_SUCCESS;
   }
 
@@ -524,6 +527,13 @@ bool EpwingBook::setSubBook( int book_nom )
     {
       setErrorString( "eb_set_appendix_subbook", ret );
     }
+  }
+
+  if( eb_have_font( &book, EB_FONT_16 ) )
+  {
+    ret = eb_set_font( &book, EB_FONT_16 );
+    if( ret != EB_SUCCESS )
+      setErrorString( "eb_set_font", ret );
   }
 
   // Load fonts list
@@ -802,6 +812,7 @@ void EpwingBook::getFirstHeadword( EpwingHeadword & head )
   }
 
   head.headword = QString::fromUtf8( buffer, head_length );
+  fixHeadword( head.headword );
 }
 
 bool EpwingBook::getNextHeadword( EpwingHeadword & head )
@@ -853,8 +864,70 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
   }
 
   head.headword = QString::fromUtf8( buffer, head_length );
+  fixHeadword( head.headword );
 
   return true;
+}
+
+bool EpwingBook::isHeadwordCorrect( QString const & headword )
+{
+  QByteArray buf, buf2;
+  EB_Hit hits[ 2 ];
+  int hit_count;
+  EB_Error_Code ret;
+
+  if( headword.isEmpty() )
+    return false;
+
+  if( book.character_code == EB_CHARCODE_ISO8859_1 && codec_ISO )
+    buf = codec_ISO->fromUnicode( headword );
+  else
+  if( ( book.character_code == EB_CHARCODE_JISX0208 || book.character_code == EB_CHARCODE_JISX0208_GB2312 )
+      && codec_Euc )
+    buf = codec_Euc->fromUnicode( headword );
+  else
+  if( book.character_code == EB_CHARCODE_JISX0208_GB2312 && codec_GB )
+    buf2 = codec_GB->fromUnicode( headword );
+
+  if( !buf.isEmpty() && eb_search_exactword( &book, buf.data() ) == EB_SUCCESS )
+  {
+    ret = eb_hit_list( &book, 2, hits, &hit_count );
+    if( ret == EB_SUCCESS && hit_count > 0 )
+      return true;
+  }
+
+  if( !buf2.isEmpty() && eb_search_exactword( &book, buf2.data() ) == EB_SUCCESS )
+  {
+    ret = eb_hit_list( &book, 2, hits, &hit_count );
+    if( ret == EB_SUCCESS && hit_count > 0 )
+      return true;
+  }
+
+  return false;
+}
+
+void EpwingBook::fixHeadword( QString & headword )
+{
+  if(headword.isEmpty() )
+    return;
+
+  if( isHeadwordCorrect( headword) )
+    return;
+
+  gd::wstring folded = Folding::applyPunctOnly( gd::toWString( headword ) );
+  QString fixed = gd::toQString( folded );
+
+  if( isHeadwordCorrect( fixed ) )
+  {
+    headword = fixed;
+    return;
+  }
+
+  folded = Folding::applyWhitespaceOnly( folded );
+  fixed = gd::toQString( folded );
+
+  if( isHeadwordCorrect( fixed ) )
+    headword = fixed;
 }
 
 void EpwingBook::getArticle( QString & headword, QString & articleText,
@@ -879,6 +952,8 @@ void EpwingBook::getArticle( QString & headword, QString & articleText,
   EContainer container( this, text_only );
   ssize_t length;
 
+  prepareToRead();
+
   ret = eb_read_heading( &book, &appendix, &hookSet, &container,
                          TextBufferSize, buffer, &length );
   if( ret != EB_SUCCESS )
@@ -887,7 +962,6 @@ void EpwingBook::getArticle( QString & headword, QString & articleText,
     throw exEbLibrary( error_string.toUtf8().data() );
   }
 
-  prepareToRead();
   headword = QString::fromUtf8( buffer, length );
   finalizeText( headword );
 
@@ -1007,7 +1081,11 @@ void EpwingBook::finalizeText( QString & text )
     EB_Error_Code ret = eb_read_heading( &book, &appendix, &hookSet, &cont,
                                          TextBufferSize, buf, &length );
     if( ret == EB_SUCCESS )
-      url.setPath( QString::fromUtf8( buf, length ) );
+    {
+      QString headword = QString::fromUtf8( buf, length );
+      fixHeadword( headword );
+      url.setPath( headword );
+    }
 
     QString link = "<a href=\"" + url.toEncoded() + "\">";
 
@@ -1357,33 +1435,25 @@ QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv )
   if( !eb_have_narrow_font( &book ) )
     return QByteArray( "?" );
 
-  fcode += ".bmp";
+  QString fname = fcode + ".png";
 
-  QByteArray link = "<img class=\"epwing_narrow_font\" src=\"" + fcode.toUtf8() + "/>";
+  if( cacheFontsDir.isEmpty() )
+    cacheFontsDir = createCacheDir( "fonts" );
 
-  if( fontsCacheList.contains( fcode, Qt::CaseSensitive ) )
+  QString fullName = cacheFontsDir + QDir::separator() + fname;
+
+  QByteArray link = "<img class=\"epwing_narrow_font\" src=\"" + fullName.toUtf8() + "\"/>";
+
+  if( fontsCacheList.contains( fname, Qt::CaseSensitive ) )
   {
     // We already have this image in cache
     return link;
   }
 
-  if( cacheFontsDir.isEmpty() )
-    cacheFontsDir = createCacheDir( "fonts" );
-
   if( !cacheFontsDir.isEmpty() )
   {
-    size_t fontsize;
-    EB_Error_Code ret = eb_narrow_font_bmp_size( *argv, &fontsize );
-    if( ret != EB_SUCCESS )
-    {
-      setErrorString( "eb_narrow_font_bmp_size", ret );
-      gdWarning( "Epwing: Font retrieve error: %s", error_string.toUtf8().data() );
-      return QByteArray( "?" );
-    }
-
-    QByteArray buffer;
-    buffer.resize( fontsize );
-    ret = eb_narrow_font_character_bitmap( &book, *argv, buffer.data() );
+    char bitmap[EB_SIZE_NARROW_FONT_16];
+    EB_Error_Code ret = eb_narrow_font_character_bitmap( &book, *argv, bitmap );
     if( ret != EB_SUCCESS )
     {
       setErrorString( "eb_narrow_font_character_bitmap", ret );
@@ -1391,14 +1461,23 @@ QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv )
       return QByteArray( "?" );
     }
 
-    QString fullName = cacheFontsDir + QDir::separator() + fcode;
+      size_t nlen;
+      char buff[EB_SIZE_NARROW_FONT_16_PNG];
+      ret = eb_bitmap_to_png( bitmap, 8, 16, buff, &nlen );
+      if( ret != EB_SUCCESS )
+      {
+        setErrorString( "eb_bitmap_to_png", ret );
+        gdWarning( "Epwing: Font retrieve error: %s", error_string.toUtf8().data() );
+        return QByteArray( "?" );
+      }
+
 
     QFile f( fullName );
     if( f.open( QFile::WriteOnly | QFile::Truncate ) )
     {
-      f.write( buffer );
+      f.write( buff, nlen );
       f.close();
-      fontsCacheList.append( fcode );
+      fontsCacheList.append( fname );
     }
   }
 
@@ -1419,33 +1498,25 @@ QByteArray EpwingBook::handleWideFont( const unsigned int * argv )
   if( !eb_have_wide_font( &book ) )
     return QByteArray( "?" );
 
-  fcode += ".bmp";
+  QString fname = fcode + ".png";
 
-  QByteArray link = "<img class=\"epwing_wide_font\" src=\"" + fcode.toUtf8() + "/>";
+  if( cacheFontsDir.isEmpty() )
+    cacheFontsDir = createCacheDir( "fonts" );
 
-  if( fontsCacheList.contains( fcode, Qt::CaseSensitive ) )
+  QString fullName = cacheFontsDir + QDir::separator() + fname;
+
+  QByteArray link = "<img class=\"epwing_wide_font\" src=\"" + fullName.toUtf8() + "\"/>";
+
+  if( fontsCacheList.contains( fname, Qt::CaseSensitive ) )
   {
     // We already have this image in cache
     return link;
   }
 
-  if( cacheFontsDir.isEmpty() )
-    cacheFontsDir = createCacheDir( "fonts" );
-
   if( !cacheFontsDir.isEmpty() )
   {
-    size_t fontsize;
-    EB_Error_Code ret = eb_wide_font_bmp_size( *argv, &fontsize );
-    if( ret != EB_SUCCESS )
-    {
-      setErrorString( "eb_wide_font_bmp_size", ret );
-      gdWarning( "Epwing: Font retrieve error: %s", error_string.toUtf8().data() );
-      return QByteArray( "?" );
-    }
-
-    QByteArray buffer;
-    buffer.resize( fontsize );
-    ret = eb_wide_font_character_bitmap( &book, *argv, buffer.data() );
+    char bitmap[EB_SIZE_WIDE_FONT_16];
+    EB_Error_Code ret = eb_wide_font_character_bitmap( &book, *argv, bitmap );
     if( ret != EB_SUCCESS )
     {
       setErrorString( "eb_wide_font_character_bitmap", ret );
@@ -1453,14 +1524,22 @@ QByteArray EpwingBook::handleWideFont( const unsigned int * argv )
       return QByteArray( "?" );
     }
 
-    QString fullName = cacheFontsDir + QDir::separator() + fcode;
+    size_t wlen;
+    char buff[EB_SIZE_WIDE_FONT_16_PNG];
+    ret = eb_bitmap_to_png( bitmap, 16, 16, buff, &wlen );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_bitmap_to_png", ret );
+      gdWarning( "Epwing: Font retrieve error: %s", error_string.toUtf8().data() );
+      return QByteArray( "?" );
+    }
 
     QFile f( fullName );
     if( f.open( QFile::WriteOnly | QFile::Truncate ) )
     {
-      f.write( buffer );
+      f.write( buff, wlen );
       f.close();
-      fontsCacheList.append( fcode );
+      fontsCacheList.append( fname );
     }
   }
 

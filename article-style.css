@@ -579,12 +579,14 @@ div.xdxf
 {
   width: 7px;
   height: 13px;
+  vertical-align: -15%;
 }
 
 .epwing_wide_font
 {
   width: 13px;
   height: 13px;
+  vertical-align: -15%;
 }
 
 /************* Websites *****************/

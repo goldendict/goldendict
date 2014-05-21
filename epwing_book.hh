@@ -155,6 +155,10 @@ public:
   // Find next headword and article position
   bool getNextHeadword( EpwingHeadword & head );
 
+  bool isHeadwordCorrect( QString const & headword );
+
+  void fixHeadword( QString & headword );
+
   // Retrieve article from dictionary
   void getArticle( QString & headword, QString & articleText,
                    int page, int offset, bool text_only );
