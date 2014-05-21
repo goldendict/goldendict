@@ -791,17 +791,22 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             for( ; ; )
             {
-              uint32_t offset = chunks.startNewBlock();
-              chunks.addToBlock( &head.page, sizeof( head.page ) );
-              chunks.addToBlock( &head.offset, sizeof( head.offset ) );
+              if( !head.headword.isEmpty() )
+              {
+                uint32_t offset = chunks.startNewBlock();
+                chunks.addToBlock( &head.page, sizeof( head.page ) );
+                chunks.addToBlock( &head.offset, sizeof( head.offset ) );
 
-              indexedWords.addWord( gd::toWString( head.headword ), offset );
+                indexedWords.addWord( gd::toWString( head.headword ), offset );
 
-              wordCount++;
+                wordCount++;
+              }
 
               if( !dict.getNextHeadword( head ) )
                 break;
             }
+
+            dict.clearBuffers();
 
             // Finish with the chunks
 

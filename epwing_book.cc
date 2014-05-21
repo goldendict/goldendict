@@ -88,6 +88,12 @@ const EB_Hook hooks[] = {
   { EB_HOOK_NULL, NULL }
 };
 
+const EB_Hook refHooks[] = {
+  { EB_HOOK_BEGIN_REFERENCE, hook_reference },
+  { EB_HOOK_END_REFERENCE, hook_reference },
+  { EB_HOOK_NULL, NULL }
+};
+
 #define EUC_TO_ASCII_TABLE_START	0xa0
 #define EUC_TO_ASCII_TABLE_END		0xff
 
@@ -405,8 +411,12 @@ EpwingBook::EpwingBook() :
 
   eb_initialize_book( &book );
   eb_initialize_appendix( &appendix );
+
   eb_initialize_hookset( &hookSet );
   eb_set_hooks( &hookSet, hooks );
+
+  eb_initialize_hookset( &refHookSet );
+  eb_set_hooks( &refHookSet, refHooks );
 }
 
 EpwingBook::~EpwingBook()
@@ -458,6 +468,9 @@ int EpwingBook::setBook( string const & directory )
     throw exEpwing( "No such directory" );
 
   currentPosition.page = 0;
+
+  indexHeadwordsPosition.page = 0;
+  indexHeadwordsPosition.offset = 0;
 
   currentSubBook = -1;
 
@@ -727,6 +740,49 @@ QString EpwingBook::getText( int page, int offset, bool text_only )
   return text;
 }
 
+void EpwingBook::getReferencesFromText( int page, int offset )
+{
+  error_string.clear();
+
+  EB_Position pos;
+  pos.page = page;
+  pos.offset = offset;
+
+  currentPosition = pos;
+
+  EB_Error_Code ret = eb_seek_text(&book, &pos);
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_seek_text", ret );
+    throw exEbLibrary( error_string.toUtf8().data() );
+  }
+
+  char buffer[ TextBufferSize + 1 ];
+  ssize_t buffer_length;
+
+  EContainer container( this, false );
+
+  prepareToRead();
+
+  for( ; ; )
+  {
+    ret = eb_read_text( &book, &appendix, &refHookSet, &container,
+                        TextBufferSize, buffer, &buffer_length );
+
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_read_text", ret );
+      break;
+    }
+
+    if( eb_is_text_stopped( &book ) )
+      break;
+  }
+
+  for( int x = 0; x < refPages.size(); x++ )
+    refPositions.enqueue( EWPos( refPages[ x ], refOffsets[ x ] ) );
+}
+
 EB_Error_Code EpwingBook::forwardText( EB_Position & startPos )
 {
   EB_Error_Code ret = eb_seek_text( &book, &startPos );
@@ -760,7 +816,6 @@ EB_Error_Code EpwingBook::forwardText( EB_Position & startPos )
 void EpwingBook::getFirstHeadword( EpwingHeadword & head )
 {
   error_string.clear();
-  char buffer[ TextBufferSize + 1 ];
 
   EB_Position pos;
 
@@ -788,84 +843,141 @@ void EpwingBook::getFirstHeadword( EpwingHeadword & head )
   }
 
   currentPosition = pos;
+  indexHeadwordsPosition = pos;
 
   head.page = pos.page;
   head.offset = pos.offset;
 
-  EContainer container( this, true );
-  ssize_t head_length;
-
-  ret = eb_seek_text( &book, &pos );
-  if( ret != EB_SUCCESS )
-  {
-    setErrorString( "eb_seek_text", ret );
+  if( !readHeadword( pos, head.headword, true ) )
     throw exEbLibrary( error_string.toUtf8().data() );
-  }
 
-  ret = eb_read_heading( &book, &appendix, &hookSet, &container,
-                         TextBufferSize, buffer, &head_length );
-
-  if( ret != EB_SUCCESS )
-  {
-    setErrorString( "eb_read_heading", ret );
-    throw exEbLibrary( error_string.toUtf8().data() );
-  }
-
-  head.headword = QString::fromUtf8( buffer, head_length );
   fixHeadword( head.headword );
+
+  allHeadwordPositions[ head.headword ]= EWPos( pos.page, pos.offset );
 }
 
 bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 {
-  char buffer[ TextBufferSize + 1 ];
+  EB_Position pos;
+
+  // At first we check references queue
+  while( !refPositions.isEmpty() )
+  {
+    EWPos epos = refPositions.dequeue();
+    pos.page = epos.first;
+    pos.offset = epos.second;
+
+    if( readHeadword( pos, head.headword, true ) )
+    {
+      fixHeadword( head.headword );
+
+      if( head.headword.contains( "#n1" )
+          || head.headword.contains( "#n2" )
+          || head.headword.contains( "#n3" ) )
+        continue;
+
+      head.page = pos.page;
+      head.offset = pos.offset;
+
+      if( allHeadwordPositions.contains( head.headword ) )
+      {
+        EWPos epos = allHeadwordPositions[ head.headword ];
+        if( pos.page != epos.first || abs( pos.offset - epos.second ) > 4 )
+          return true;
+      }
+      else
+      {
+        allHeadwordPositions[ head.headword ] = EWPos( pos.page, pos.offset );
+        return true;
+      }
+    }
+  }
+
+  // No queued positions - forward to next article
 
   error_string.clear();
 
-  EB_Position pos = currentPosition;
+  pos = indexHeadwordsPosition;
 
-  EB_Error_Code ret = forwardText( pos );
-  if( ret == EB_ERR_END_OF_CONTENT )
-    return false;
-  else
-  if( ret != EB_SUCCESS )
+  for( ; ; )
   {
-    setErrorString( "eb_forward_text", ret );
-    throw exEbLibrary( error_string.toUtf8().data() );
+    EB_Error_Code ret = forwardText( pos );
+
+    if( ret == EB_ERR_END_OF_CONTENT )
+      return false;
+    else
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_forward_text", ret );
+      throw exEbLibrary( error_string.toUtf8().data() );
+    }
+
+    ret = eb_tell_text( &book, &pos );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_tell_text", ret );
+      throw exEbLibrary( error_string.toUtf8().data() );
+    }
+
+    indexHeadwordsPosition = pos;
+
+    try
+    {
+      getReferencesFromText( pos.page, pos.offset );
+    }
+    catch( std::exception )
+    {
+    }
+
+    head.page = pos.page;
+    head.offset = pos.offset;
+
+    if( !readHeadword( pos, head.headword, true ) )
+      throw exEbLibrary( error_string.toUtf8().data() );
+
+    fixHeadword( head.headword );
+
+    if( allHeadwordPositions.contains( head.headword ) )
+    {
+      EWPos epos = allHeadwordPositions[ head.headword ];
+      if( pos.page != epos.first || abs( pos.offset - epos.second ) > 4 )
+        break;
+    }
+    else
+    {
+      allHeadwordPositions[ head.headword ] = EWPos( pos.page, pos.offset );
+      break;
+    }
   }
 
-  ret = eb_tell_text( &book, &pos );
-  if( ret != EB_SUCCESS )
-  {
-    setErrorString( "eb_tell_text", ret );
-    throw exEbLibrary( error_string.toUtf8().data() );
-  }
+  return true;
+}
 
-  currentPosition = pos;
-
-  head.page = pos.page;
-  head.offset = pos.offset;
-
-  EContainer container( this, true );
+bool EpwingBook::readHeadword( EB_Position const& pos,
+                               QString & headword,
+                               bool text_only )
+{
+  EContainer container( this, text_only );
   ssize_t head_length;
 
-  ret = eb_seek_text( &book, &pos );
+  EB_Error_Code ret = eb_seek_text( &book, &pos );
   if( ret != EB_SUCCESS )
   {
     setErrorString( "eb_seek_text", ret );
-    throw exEbLibrary( error_string.toUtf8().data() );
+    return false;
   }
+
+  char buffer[ TextBufferSize + 1 ];
 
   ret = eb_read_heading( &book, &appendix, &hookSet, &container,
                          TextBufferSize, buffer, &head_length );
   if( ret != EB_SUCCESS )
   {
     setErrorString( "eb_read_heading", ret );
-    throw exEbLibrary( error_string.toUtf8().data() );
+    return false;
   }
 
-  head.headword = QString::fromUtf8( buffer, head_length );
-  fixHeadword( head.headword );
-
+  headword = QString::fromUtf8( buffer, head_length );
   return true;
 }
 
@@ -971,6 +1083,9 @@ void EpwingBook::getArticle( QString & headword, QString & articleText,
 const char * EpwingBook::beginDecoration( unsigned int code )
 {
   const char * str = "";
+
+  code = normalizeDecorationCode( code );
+
   switch( code )
   {
     case ITALIC:      str = "<i>";
@@ -994,6 +1109,8 @@ const char * EpwingBook::beginDecoration( unsigned int code )
 const char * EpwingBook::endDecoration( unsigned int code )
 {
   const char * str = "";
+
+  code = normalizeDecorationCode( code );
 
   if( code != ITALIC && code != BOLD && code != EMPHASIS
       && code != SUBSCRIPT && code != SUPERSCRIPT )
@@ -1026,6 +1143,17 @@ const char * EpwingBook::endDecoration( unsigned int code )
   }
 
   return str;
+}
+
+unsigned int EpwingBook::normalizeDecorationCode( unsigned int code )
+{
+  // Some non-standard codes
+  switch( code )
+  {
+    case 0x1101: return BOLD;
+    case 0x1103: return ITALIC;
+  }
+  return code;
 }
 
 void EpwingBook::finalizeText( QString & text )
@@ -1065,8 +1193,6 @@ void EpwingBook::finalizeText( QString & text )
     if( pos < 0 )
       break;
 
-    QString str = reg1.cap();
-
     EB_Position ebpos;
     ebpos.page = refPages[ x ];
     ebpos.offset = refOffsets[ x ];
@@ -1074,6 +1200,8 @@ void EpwingBook::finalizeText( QString & text )
     QUrl url;
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
+
+    // Read headword
 
     eb_seek_text( &book, &ebpos );
 
@@ -1277,7 +1405,7 @@ QByteArray EpwingBook::handleWave( EB_Hook_Code code, const unsigned int * argv 
 {
 
   if( code == EB_HOOK_END_WAVE )
-    return QByteArray( "</a></span>" );
+    return QByteArray( "<img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>" );
 
   // Handle EB_HOOK_BEGIN_WAVE
 
@@ -1303,10 +1431,10 @@ QByteArray EpwingBook::handleWave( EB_Hook_Code code, const unsigned int * argv 
   url.setHost( dictID );
   url.setPath( name );
 
-  string ref = addAudioLink( url.toEncoded().data(), dictID.toUtf8().data() );
+  string ref = string( "\"" )+ url.toEncoded().data() + "\"";
+  QByteArray result = addAudioLink( ref , dictID.toUtf8().data() ).c_str();
 
-  QByteArray result = QByteArray( "<span class=\"epwing_wav\"><a href=" ) + ref.c_str()
-                      + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/>";
+  result += QByteArray( "<span class=\"epwing_wav\"><a href=" ) + ref.c_str() + ">";
 
   if( soundsCacheList.contains( name, Qt::CaseSensitive ) )
   {

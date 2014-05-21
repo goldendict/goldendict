@@ -15,6 +15,8 @@
 #include <QTextCodec>
 #include <QStack>
 #include <QMap>
+#include <QSet>
+#include <QQueue>
 #include <vector>
 #include <string>
 
@@ -48,14 +50,16 @@ struct EpwingHeadword
 
 class EpwingBook
 {
+  typedef QPair< int, int > EWPos;
+
   void setErrorString( QString const & func, EB_Error_Code code );
 
   EB_Book book;
   EB_Appendix appendix;
-  EB_Hookset hookSet;
+  EB_Hookset hookSet, refHookSet;
   EB_Subbook_Code subBookList[ EB_MAX_SUBBOOKS ];
   EB_Subbook_Code subAppendixList[ EB_MAX_SUBBOOKS ];
-  EB_Position currentPosition;
+  EB_Position currentPosition, indexHeadwordsPosition;
   int subBookCount, subAppendixCount;
   int currentSubBook;
   QString error_string;
@@ -68,6 +72,8 @@ class EpwingBook
   QStringList imageCacheList, soundsCacheList, moviesCacheList, fontsCacheList;
   QMap< QString, QString > fontsList;
   QVector< int > refPages, refOffsets;
+  QMap< QString, EWPos > allHeadwordPositions;
+  QQueue< EWPos > refPositions;
   int refOpenCount, refCloseCount;
   static Mutex libMutex;
 
@@ -78,6 +84,17 @@ class EpwingBook
 
   // Reset internal variables
   void prepareToRead();
+
+  // Retrieve references from article
+  void getReferencesFromText( int page, int offset );
+
+  // Move to next article
+  EB_Error_Code forwardText( EB_Position & startPos );
+
+  // Retrieve article text from dictionary
+  QString getText( int page, int offset, bool text_only );
+
+  unsigned int normalizeDecorationCode( unsigned int code );
 
 public:
 
@@ -123,6 +140,13 @@ public:
   QString const & getMoviesCacheDir()
   { return cacheMoviesDir; }
 
+  void clearBuffers()
+  {
+    refPositions.clear();
+    allHeadwordPositions.clear();
+  }
+
+
   // Make name for resource
   QString makeFName( QString const & ext, int page, int offset ) const;
 
@@ -143,17 +167,15 @@ public:
   QString copyright();
   QString title();
 
-  // Retrieve article text from dictionary
-  QString getText( int page, int offset, bool text_only );
-
-  // Move to next article
-  EB_Error_Code forwardText( EB_Position & startPos );
-
   // Seek to first article
   void getFirstHeadword( EpwingHeadword & head );
 
   // Find next headword and article position
   bool getNextHeadword( EpwingHeadword & head );
+
+  bool readHeadword( EB_Position const & pos,
+                     QString & headword,
+                     bool text_only );
 
   bool isHeadwordCorrect( QString const & headword );
 
