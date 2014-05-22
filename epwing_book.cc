@@ -5,12 +5,14 @@
 
 #include <QDir>
 #include <QTextStream>
+#include <QTextDocumentFragment>
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
 #include "wstring.hh"
 #include "wstring_qt.hh"
 #include "folding.hh"
+#include "epwing_charmap.hh"
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #define _FILE_OFFSET_BITS 64
@@ -354,13 +356,7 @@ EB_Error_Code hook_narrow_font( EB_Book * book, EB_Appendix *, void * container,
 {
   EContainer * cn = static_cast< EContainer * >( container );
 
-  if( cn->textOnly )
-  {
-//    eb_write_text_byte1( book, '?' );
-    return EB_SUCCESS;
-  }
-
-  QByteArray str = cn->book->handleNarrowFont( argv );
+  QByteArray str = cn->book->handleNarrowFont( argv, cn->textOnly );
   if( !str.isEmpty() )
     eb_write_text( book, str.data(), str.size() );
 
@@ -372,13 +368,7 @@ EB_Error_Code hook_wide_font( EB_Book * book, EB_Appendix *, void * container,
 {
   EContainer * cn = static_cast< EContainer * >( container );
 
-  if( cn->textOnly )
-  {
-//    eb_write_text_byte1( book, '?' );
-    return EB_SUCCESS;
-  }
-
-  QByteArray str = cn->book->handleWideFont( argv );
+  QByteArray str = cn->book->handleWideFont( argv, cn->textOnly );
   if( !str.isEmpty() )
     eb_write_text( book, str.data(), str.size() );
 
@@ -515,7 +505,7 @@ bool EpwingBook::setSubBook( int book_nom )
 {
   error_string.clear();
 
-  fontsList.clear();
+  customFontsMap.clear();
 
   currentPosition.page = 0;
 
@@ -565,7 +555,7 @@ bool EpwingBook::setSubBook( int book_nom )
     {
       QStringList list = line.remove( '\n' ).split( ' ', QString::SkipEmptyParts );
       if( list.count() == 2 )
-        fontsList[ list[ 0 ] ] = list[ 1 ];
+        customFontsMap[ list[ 0 ] ] = list[ 1 ];
       line = ts.readLine();
     }
 
@@ -780,7 +770,7 @@ void EpwingBook::getReferencesFromText( int page, int offset )
   }
 
   for( int x = 0; x < refPages.size(); x++ )
-    refPositions.enqueue( EWPos( refPages[ x ], refOffsets[ x ] ) );
+    LinksQueue.push_back( EWPos( refPages[ x ], refOffsets[ x ] ) );
 }
 
 EB_Error_Code EpwingBook::forwardText( EB_Position & startPos )
@@ -853,28 +843,32 @@ void EpwingBook::getFirstHeadword( EpwingHeadword & head )
 
   fixHeadword( head.headword );
 
-  allHeadwordPositions[ head.headword ]= EWPos( pos.page, pos.offset );
+  EWPos epos( pos.page, pos.offset );
+  allHeadwordPositions[ head.headword ] = epos;
 }
 
 bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 {
   EB_Position pos;
 
+  QRegExp badLinks( "#(v|n)\\d" );
+
   // At first we check references queue
-  while( !refPositions.isEmpty() )
+  while( !LinksQueue.isEmpty() )
   {
-    EWPos epos = refPositions.dequeue();
+    EWPos epos = LinksQueue.last();
+    LinksQueue.pop_back();
+
     pos.page = epos.first;
     pos.offset = epos.second;
 
     if( readHeadword( pos, head.headword, true ) )
     {
-      fixHeadword( head.headword );
-
-      if( head.headword.contains( "#n1" )
-          || head.headword.contains( "#n2" )
-          || head.headword.contains( "#n3" ) )
+      if( head.headword.isEmpty()
+          || head.headword.contains( badLinks ) )
         continue;
+
+      fixHeadword( head.headword );
 
       head.page = pos.page;
       head.offset = pos.offset;
@@ -902,6 +896,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
   for( ; ; )
   {
     EB_Error_Code ret = forwardText( pos );
+    indexHeadwordsPosition = pos;
 
     if( ret == EB_ERR_END_OF_CONTENT )
       return false;
@@ -935,6 +930,9 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
     if( !readHeadword( pos, head.headword, true ) )
       throw exEbLibrary( error_string.toUtf8().data() );
 
+    if( head.headword.isEmpty() )
+      continue;
+
     fixHeadword( head.headword );
 
     if( allHeadwordPositions.contains( head.headword ) )
@@ -960,7 +958,9 @@ bool EpwingBook::readHeadword( EB_Position const& pos,
   EContainer container( this, text_only );
   ssize_t head_length;
 
-  EB_Error_Code ret = eb_seek_text( &book, &pos );
+  EB_Position newPos = pos;
+
+  EB_Error_Code ret = eb_seek_text( &book, &newPos );
   if( ret != EB_SUCCESS )
   {
     setErrorString( "eb_seek_text", ret );
@@ -1023,11 +1023,31 @@ void EpwingBook::fixHeadword( QString & headword )
   if(headword.isEmpty() )
     return;
 
+  headword.remove( QChar( 0x30FB ) ); // Used in Japan transcription
+
   if( isHeadwordCorrect( headword) )
     return;
 
-  gd::wstring folded = Folding::applyPunctOnly( gd::toWString( headword ) );
-  QString fixed = gd::toQString( folded );
+  QString fixed = headword;
+  fixed.remove( QRegExp( "/[^/]+/", Qt::CaseSensitive ) );
+
+  if( isHeadwordCorrect( fixed ) )
+  {
+    headword = fixed;
+    return;
+  }
+
+  gd::wstring folded = Folding::applyPunctOnly( gd::toWString( fixed ) );
+  fixed = gd::toQString( folded );
+
+  if( isHeadwordCorrect( fixed ) )
+  {
+    headword = fixed;
+    return;
+  }
+
+  folded = Folding::applyDiacriticsOnly( folded );
+  fixed = gd::toQString( folded );
 
   if( isHeadwordCorrect( fixed ) )
   {
@@ -1326,8 +1346,8 @@ QByteArray EpwingBook::handleMonoImage( EB_Hook_Code code,
 
   if( code == EB_HOOK_BEGIN_MONO_GRAPHIC )
   {
-    monoWidth = argv[ 2 ];
-    monoHeight = argv[ 3 ];
+    monoHeight = argv[ 2 ];
+    monoWidth = argv[ 3 ];
     return QByteArray();
   }
 
@@ -1357,8 +1377,8 @@ QByteArray EpwingBook::handleMonoImage( EB_Hook_Code code,
   url.setScheme( "bres" );
   url.setHost( dictID );
   url.setPath( name );
-  QByteArray urlStr = "<p class=\"epwing_image\"><img src=\"" + url.toEncoded()
-                      + "\" alt=\"" + name.toUtf8() + "\"/></p>";
+  QByteArray urlStr = "<span class=\"epwing_image\"><img src=\"" + url.toEncoded()
+                      + "\" alt=\"" + name.toUtf8() + "\"/></span>";
 
   if( imageCacheList.contains( name, Qt::CaseSensitive ) )
   {
@@ -1549,14 +1569,30 @@ QByteArray EpwingBook::handleMpeg( EB_Hook_Code code, const unsigned int * argv 
   return result;
 }
 
-QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv )
+QByteArray EpwingBook::codeToUnicode( QString const & code )
+{
+  QString subst;
+
+  if( !customFontsMap.isEmpty() && customFontsMap.contains( code ) )
+  {
+    subst = QTextDocumentFragment::fromHtml( customFontsMap[ code ] )
+                                   .toPlainText();
+    return subst.toUtf8();
+  }
+
+  return EpwingCharmap::instance().mapToUtf8( code );
+}
+
+QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv,
+                                         bool text_only )
 {
   QString fcode = "n" + QString::number( *argv, 16 );
 
   // Check substitution list
 
-  if( !fontsList.isEmpty() && fontsList.contains( fcode ) )
-    return fontsList[ fcode ].toUtf8();
+  QByteArray b = codeToUnicode( fcode );
+  if( !b.isEmpty() || text_only )
+    return b;
 
   // Find font image in book
 
@@ -1570,7 +1606,12 @@ QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv )
 
   QString fullName = cacheFontsDir + QDir::separator() + fname;
 
-  QByteArray link = "<img class=\"epwing_narrow_font\" src=\"" + fullName.toUtf8() + "\"/>";
+  QUrl url;
+  url.setScheme( "file" );
+  url.setHost( "/");
+  url.setPath( fullName );
+
+  QByteArray link = "<img class=\"epwing_narrow_font\" src=\"" + url.toEncoded() + "\"/>";
 
   if( fontsCacheList.contains( fname, Qt::CaseSensitive ) )
   {
@@ -1612,14 +1653,16 @@ QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv )
   return link;
 }
 
-QByteArray EpwingBook::handleWideFont( const unsigned int * argv )
+QByteArray EpwingBook::handleWideFont( const unsigned int * argv,
+                                       bool text_only )
 {
   QString fcode = "w" + QString::number( *argv, 16 );
 
   // Check substitution list
 
-  if( !fontsList.isEmpty() && fontsList.contains( fcode ) )
-    return fontsList[ fcode ].toUtf8();
+  QByteArray b = codeToUnicode( fcode );
+  if( !b.isEmpty() || text_only )
+    return b;
 
   // Find font image in book
 
@@ -1633,7 +1676,12 @@ QByteArray EpwingBook::handleWideFont( const unsigned int * argv )
 
   QString fullName = cacheFontsDir + QDir::separator() + fname;
 
-  QByteArray link = "<img class=\"epwing_wide_font\" src=\"" + fullName.toUtf8() + "\"/>";
+  QUrl url;
+  url.setScheme( "file" );
+  url.setHost( "/");
+  url.setPath( fullName );
+
+  QByteArray link = "<img class=\"epwing_wide_font\" src=\"" + url.toEncoded() + "\"/>";
 
   if( fontsCacheList.contains( fname, Qt::CaseSensitive ) )
   {

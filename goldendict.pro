@@ -451,9 +451,11 @@ CONFIG( no_epwing_support ) {
 
 !CONFIG( no_epwing_support ) {
   HEADERS += epwing.hh \
-             epwing_book.hh
+             epwing_book.hh \
+             epwing_charmap.hh
   SOURCES += epwing.cc \
-             epwing_book.cc
+             epwing_book.cc \
+             epwing_charmap.cc
   LIBS += -leb
 }
 

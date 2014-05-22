@@ -13,10 +13,8 @@
 
 #include <QString>
 #include <QTextCodec>
-#include <QStack>
 #include <QMap>
-#include <QSet>
-#include <QQueue>
+#include <QVector>
 #include <vector>
 #include <string>
 
@@ -70,10 +68,10 @@ class EpwingBook
   QStack< unsigned int > decorationStack;
   int monoWidth, monoHeight;
   QStringList imageCacheList, soundsCacheList, moviesCacheList, fontsCacheList;
-  QMap< QString, QString > fontsList;
+  QMap< QString, QString > baseFontsMap, customFontsMap;
   QVector< int > refPages, refOffsets;
   QMap< QString, EWPos > allHeadwordPositions;
-  QQueue< EWPos > refPositions;
+  QVector< EWPos > LinksQueue;
   int refOpenCount, refCloseCount;
   static Mutex libMutex;
 
@@ -95,6 +93,8 @@ class EpwingBook
   QString getText( int page, int offset, bool text_only );
 
   unsigned int normalizeDecorationCode( unsigned int code );
+
+  QByteArray codeToUnicode( QString const & code );
 
 public:
 
@@ -142,8 +142,8 @@ public:
 
   void clearBuffers()
   {
-    refPositions.clear();
     allHeadwordPositions.clear();
+    LinksQueue.clear();
   }
 
 
@@ -200,9 +200,11 @@ public:
   QByteArray handleMpeg( EB_Hook_Code code,
                          const unsigned int * argv );
 
-  QByteArray handleNarrowFont( const unsigned int * argv );
+  QByteArray handleNarrowFont( const unsigned int * argv,
+                               bool text_only );
 
-  QByteArray handleWideFont( const unsigned int * argv );
+  QByteArray handleWideFont( const unsigned int * argv,
+                             bool text_only );
 
   QByteArray handleReference( EB_Hook_Code code,
                               const unsigned int * argv );

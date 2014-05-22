@@ -42,7 +42,7 @@ namespace {
 enum
 {
   Signature = 0x58575045, // EPWX on little-endian, XWPE on big-endian
-  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -221,18 +221,12 @@ void EpwingDictionary::loadIcon() throw()
   if ( dictionaryIconLoaded )
     return;
 
-  QString dirName =
-    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
-  QString fileName =
-    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 1 ].c_str() ) );
+  QString fileName = FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() )
+                     + QDir::separator()
+                     + eBook.getCurrentSubBookDirectory() + ".";
 
-  int pos = fileName.indexOf( '/', dirName.size(), Qt::CaseSensitive );
-
-  if( pos > 0 )
-  {
-    fileName = fileName.left( pos );
+  if( !fileName.isEmpty() )
     loadIconFromFile( fileName );
-  }
 
   if( dictionaryIcon.isNull() )
   {
@@ -749,6 +743,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           Epwing::Book::EpwingBook::collectFilenames( dir, dictFiles );
 
+          QString fontSubName = FsEncoding::decode( mainDirectory.c_str() )
+                                + QDir::separator()
+                                + "afonts_" + QString::number( sb );
+          QFileInfo info( fontSubName );
+          if( info.exists() && info.isFile() )
+            dictFiles.push_back( FsEncoding::encode( fontSubName ) );
+
           // Check if we need to rebuid the index
 
           string dictId = Dictionary::makeDictionaryId( dictFiles );
@@ -761,7 +762,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             gdDebug( "Epwing: Building the index for dictionary in directory %s\n", dir.toUtf8().data() );
 
             QString str = dict.title();
-//            QByteArray nameData = dict.title().toUtf8();
             QByteArray nameData = str.toUtf8();
             initializing.indexingDictionary( nameData.data() );
 
