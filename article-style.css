@@ -499,10 +499,14 @@ div.xdxf
 
 /************* Zim dictionaries **************/
 
+.zimdict
+{
+  font-size: 120%!important;
+}
+
 .zimdict_headword
 {
   font-weight: bold!important;
-/*  font-size: 150%; */
 }
 
 /************* Spelling suggestions *****************/

@@ -600,17 +600,89 @@ string ZimDictionary::convert( const string & in )
   text.replace( QRegExp( "<\\s*body\\s*([^>]*)background:([^;\"]*)" ),
                 QString( "<body \\1background: inherited;" ) );
 
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=\"/" ),
-                QString( "<\\1 \\2src=\"bres://%1/").arg( getId().c_str() ) );
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)/" ),
+                QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
+
+  // Fix links without '"'
+  text.replace( QRegExp( "href=/([^\\s>]+)" ), QString( "href=\"/\\1\"" ) );
 
   text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
-  text.replace( QRegExp( "<\\s*a\\s*([^>]*)href=\"/[^\"]*\"\\s*title=\"([^\"]*)\"" ),
-                QString( "<a href=\"gdlookup://localhost/\\2\" title=\"\\2\"") );
+  QRegExp linkRegexp1( "<\\s*a\\s*([^>]*)href=\"/[^\"]*\"\\s*title=\"([^\"]*)\"",
+                       Qt::CaseSensitive,
+                       QRegExp::RegExp2 );
 
-  text.replace( QRegExp( "<\\s*a\\s*([^>]*)href=\"/A/([^\"]*)\"" ),
-                QString( "<a \\1href=\"gdlookup://localhost/\\2\"") );
+  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"/A/([^\"]*)\"",
+                       Qt::CaseSensitive,
+                       QRegExp::RegExp2 );
+
+  QRegExp linkRegexp3( ".(s|)htm(l|)", Qt::CaseInsensitive );
+
+  int pos = 0;
+  while( pos >= 0 )
+  {
+    pos = linkRegexp1.indexIn( text, pos );
+    if( pos < 0 )
+      break;
+
+    QStringList list = linkRegexp1.capturedTexts();
+
+    QString tag = QString( "<a href=\"gdlookup://localhost/" );
+    QString link = list[ 2 ];
+
+    int nbeg = link.lastIndexOf( "/" );
+    if( nbeg < 0 )
+      nbeg = 0;
+    else
+      nbeg += 1;
+
+    int nend = link.lastIndexOf( "." );
+    if( nend < 0 || !link.mid( nend ).contains( linkRegexp3 ) )
+      nend = -1;
+
+    link = link.mid( nbeg, nend < 0 ? -1 : nend - nbeg );
+
+    link.replace( QChar( '_' ), "%20", Qt::CaseInsensitive );
+
+    tag += link + "\" title=\"" + link + "\"";
+    text.replace( pos, list[ 0 ].length(), tag );
+
+    pos += tag.length() + 1;
+  }
+
+  pos = 0;
+  while( pos >= 0 )
+  {
+    pos = linkRegexp2.indexIn( text, pos );
+    if( pos < 0 )
+      break;
+
+    QStringList list = linkRegexp2.capturedTexts();
+
+    QString tag = QString( "<a ") + list[ 1 ]
+                  + "href=\"gdlookup://localhost/";
+    QString link = list[ 2 ];
+
+    int nbeg = link.lastIndexOf( "/" );
+    if( nbeg <= 0 )
+      nbeg = 0;
+    else
+      nbeg += 1;
+
+    int nend = link.lastIndexOf( "." );
+    if( nend < 0 || !link.mid( nend ).contains( linkRegexp3 ) )
+      nend = -1;
+
+    link = link.mid( nbeg, nend < 0 ? -1 : nend - nbeg );
+
+    link.replace( QChar( '_' ), "%20", Qt::CaseInsensitive );
+
+    tag += link + "\"";
+    text.replace( pos, list[ 0 ].length(), tag );
+
+    pos += tag.length() + 1;
+  }
 
   // Fix outstanding elements
   text += "<br style=\"clear:both;\" />";
