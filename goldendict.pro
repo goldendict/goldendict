@@ -493,7 +493,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/sr_SR.ts \
     locale/sv_SE.ts \
     locale/tk_TM.ts \
-    locale/fa_IR.ts
+    locale/fa_IR.ts \
+    locale/mk_MK.ts
 
 # Build version file
 !isEmpty( hasGit ) {
