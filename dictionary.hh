@@ -154,6 +154,9 @@ public:
   bool isUncertain() const
   { return uncertain; }
 
+  /// Add match if one is not presented in matches list
+  void addMatch( WordMatch const & match );
+
 protected:
 
   // Subclasses should be filling up the 'matches' array, locking the mutex when
