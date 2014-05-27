@@ -834,7 +834,7 @@ Class load() throw( exError )
       c.preferences.fts.disabledTypes = fts.namedItem( "disabledTypes" ).toElement().text();
 
       if ( !fts.namedItem( "enabled" ).isNull() )
-        c.preferences.fts.useMaxDistanceBetweenWords = ( fts.namedItem( "enabled" ).toElement().text() == "1" );
+        c.preferences.fts.enabled = ( fts.namedItem( "enabled" ).toElement().text() == "1" );
 
       if ( !fts.namedItem( "maxDictionarySize" ).isNull() )
         c.preferences.fts.maxDictionarySize = fts.namedItem( "maxDictionarySize" ).toElement().text().toUInt();

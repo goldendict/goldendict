@@ -1286,6 +1286,13 @@ download page.</string>
             </item>
            </layout>
           </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="allowEpwing">
+            <property name="text">
+             <string notr="true">Epwing</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

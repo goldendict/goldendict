@@ -238,8 +238,12 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.allowStardict->setChecked( !p.fts.disabledTypes.contains( "STARDICT", Qt::CaseInsensitive ) );
   ui.allowXDXF->setChecked( !p.fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive ) );
   ui.allowZim->setChecked( !p.fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive ) );
+  ui.allowEpwing->setChecked( !p.fts.disabledTypes.contains( "EPWING", Qt::CaseInsensitive ) );
 #ifndef MAKE_ZIM_SUPPORT
   ui.allowZim->hide();
+#endif
+#ifdef NO_EPWING_SUPPORT
+  ui.allowEpwing->hide();
 #endif
   ui.maxDictionarySize->setValue( p.fts.maxDictionarySize );
 }
@@ -393,6 +397,13 @@ Config::Preferences Preferences::getPreferences()
     if( !p.fts.disabledTypes.isEmpty() )
       p.fts.disabledTypes += ',';
     p.fts.disabledTypes += "ZIM";
+  }
+
+  if( !ui.allowEpwing->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "EPWING";
   }
 
   return p;

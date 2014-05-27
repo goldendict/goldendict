@@ -537,12 +537,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">在这里可以选择过滤器字符串的执行方式</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>若勾选则大小写不同的词条均计入总数</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
@@ -572,7 +572,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="94"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>过滤</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="107"/>
@@ -582,7 +582,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="110"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>自动过滤</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
@@ -592,12 +592,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="124"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>过滤器字符串（可以是固定的字符串、通配符或者正则表达式）</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="29"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>纯文本</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="30"/>
@@ -612,17 +612,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.cc" line="218"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>总共有%1个不同的词条，已过滤%2个</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="235"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>保存词条至文件</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="237"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">文本文件 (*.txt);;所有文件 (*.*)</translation>
+        <translation>文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="261"/>
@@ -680,7 +680,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>显示所有不同的词条</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
@@ -920,7 +920,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">不能使用“全字匹配”模式或者“纯文本”模式搜索包含CJK字符的字符串</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
@@ -1119,7 +1119,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">群组标签页</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
@@ -4432,12 +4432,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>词典服务器</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>词典服务器：</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>

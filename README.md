@@ -19,7 +19,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
     sudo apt-get install git pkg-config build-essential qt4-qmake \
          libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
          libqt4-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
-         libao-dev libavutil-dev libavformat-dev libtiff5-dev
+         libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb-dev
 
 ## How to build
 
@@ -51,6 +51,13 @@ If you have problem building with libtiff5-dev package, you can pass
 (without such extra support some b/w tiff images will not be displayed):
 
     qmake "CONFIG+=no_extra_tiff_handler"
+
+### Building without Epwing format support
+
+If you have problem building with libeb-dev package, you can pass
+`"CONFIG+=no_epwing_support"` to `qmake` in order to disable Epwing format support
+
+    qmake "CONFIG+=no_epwing_support"
 
 ### Building without internal audio player
 

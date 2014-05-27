@@ -480,6 +480,20 @@ CONFIG( zim_support ) {
   LIBS += -ltiff
 }
 
+CONFIG( no_epwing_support ) {
+  DEFINES += NO_EPWING_SUPPORT
+}
+
+!CONFIG( no_epwing_support ) {
+  HEADERS += epwing.hh \
+             epwing_book.hh \
+             epwing_charmap.hh
+  SOURCES += epwing.cc \
+             epwing_book.cc \
+             epwing_charmap.cc
+  LIBS += -leb
+}
+
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \
@@ -514,7 +528,8 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/sr_SR.ts \
     locale/sv_SE.ts \
     locale/tk_TM.ts \
-    locale/fa_IR.ts
+    locale/fa_IR.ts \
+    locale/mk_MK.ts
 
 # Build version file
 !isEmpty( hasGit ) {

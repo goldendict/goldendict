@@ -1213,9 +1213,6 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   char * articleProps;
   wstring articleData;
 
-  headword.clear();
-  text.clear();
-
   {
     Mutex::Lock _( idxMutex );
     articleProps = chunks->getBlock( articleAddress, chunk );

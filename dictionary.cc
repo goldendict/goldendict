@@ -91,6 +91,17 @@ vector< WordMatch > & WordSearchRequest::getAllMatches() throw( exRequestUnfinis
   return matches;
 }
 
+void WordSearchRequest::addMatch( WordMatch const & match )
+{
+  unsigned n;
+  for( n = 0; n < matches.size(); n++ )
+    if( matches[ n ].word.compare( match.word ) == 0 )
+      break;
+
+  if( n >= matches.size() )
+    matches.push_back( match );
+}
+
 ////////////// DataRequest
 
 long DataRequest::dataSize()
@@ -433,6 +444,9 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
        i != dictionaryFiles.end(); ++i )
   {
     QFileInfo fileInfo( FsEncoding::decode( i->c_str() ) );
+
+    if( fileInfo.isDir() )
+      continue;
 
     if ( !fileInfo.exists() )
       return true;

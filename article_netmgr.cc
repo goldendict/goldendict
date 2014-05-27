@@ -136,6 +136,12 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
   if ( url.scheme() == "gdlookup" )
   {
+    if( !url.host().isEmpty() && url.host() != "localhost" )
+    {
+      // Strange request - ignore it
+      return new Dictionary::DataRequestInstant( false );
+    }
+
     contentType = "text/html";
 
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )

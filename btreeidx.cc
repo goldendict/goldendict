@@ -217,6 +217,8 @@ void BtreeWordSearchRequest::run()
 
   wstring folded = Folding::apply( str );
 
+  int minMatchLength = 0;
+
   if( useWildcards )
   {
     regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) );
@@ -231,37 +233,75 @@ void BtreeWordSearchRequest::run()
     else
       foldedWithWildcards = Folding::apply( str, useWildcards );
 
-    folded.clear();
-    folded.reserve( foldedWithWildcards.size() );
+    // Calculate minimum match length
+
+    bool insideSet = false;
+    bool escaped = false;
     for( wstring::size_type x = 0; x < foldedWithWildcards.size(); x++ )
     {
       wchar ch = foldedWithWildcards[ x ];
 
-      if( bNoLetters )
+      if( ch == L'\\' && !escaped )
       {
-        if( ch == '*' || ch == '?' || ch == '[' || ch == ']' )
-        {
-          // Store escaped symbols
-          wstring::size_type n = folded.size();
-          if( n && folded[ n - 1 ] == '\\' )
-          {
-            folded[ n - 1 ] = ch;
-            continue;
-          }
-          else
-            break;
-        }
+        escaped = true;
+        continue;
       }
-      else
+
+      if( ch == L']' && !escaped )
       {
-        if( ch == '\\' || ch == '*' || ch == '?' || ch == '[' || ch == ']' )
-        {
-          if( folded.empty() )
-            continue;
-          else
-            break;
-        }
+        insideSet = false;
+        continue;
       }
+
+      if( insideSet )
+      {
+        escaped = false;
+        continue;
+      }
+
+      if( ch == L'[' && !escaped )
+      {
+        minMatchLength += 1;
+        insideSet = true;
+        continue;
+      }
+
+      if( ch == L'*' && !escaped )
+        continue;
+
+      escaped = false;
+      minMatchLength += 1;
+    }
+
+    // Fill first match chars
+
+    folded.clear();
+    folded.reserve( foldedWithWildcards.size() );
+    escaped = false;
+    for( wstring::size_type x = 0; x < foldedWithWildcards.size(); x++ )
+    {
+      wchar ch = foldedWithWildcards[ x ];
+
+      if( escaped )
+      {
+        folded.push_back( ch );
+        escaped = false;
+        continue;
+      }
+
+      if( ch == L'\\' )
+      {
+        if( bNoLetters )
+        {
+          escaped = true;
+          continue;
+        }
+        else
+          break;
+      }
+
+      if( ch == '*' || ch == '?' || ch == '[' || ch == ']' )
+        break;
 
       folded.push_back( ch );
     }
@@ -316,7 +356,9 @@ void BtreeWordSearchRequest::run()
         if( resultFolded.empty() )
           resultFolded = Folding::applyWhitespaceOnly( chainHead );
 
-        if ( resultFolded.size() >= folded.size() && !resultFolded.compare( 0, folded.size(), folded ) )
+        if ( ( useWildcards && folded.empty() ) ||
+             ( resultFolded.size() >= folded.size()
+               && !resultFolded.compare( 0, folded.size(), folded ) ) )
         {
           // Exact or prefix match
 
@@ -326,10 +368,14 @@ void BtreeWordSearchRequest::run()
           {
             if( useWildcards )
             {
-              wstring fullword = Utf8::decode( chain[ x ].prefix + chain[ x ].word  );
-              wstring result = Folding::applyDiacriticsOnly( fullword );
-              if( regexp.indexIn( gd::toQString( result ) ) == 0 )
-                matches.push_back( fullword );
+              wstring word = Utf8::decode( chain[ x ].word );
+              wstring result = Folding::applyDiacriticsOnly( word );
+              if( result.size() >= (wstring::size_type)minMatchLength
+                  && regexp.indexIn( gd::toQString( result ) ) == 0
+                  && regexp.matchedLength() >= minMatchLength )
+              {
+                addMatch( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+              }
             }
             else
             {
@@ -337,7 +383,7 @@ void BtreeWordSearchRequest::run()
               // make sure the string isn't larger than requested.
               if ( ( allowMiddleMatches || Folding::apply( Utf8::decode( chain[ x ].prefix ) ).empty() ) &&
                    ( maxSuffixVariation < 0 || (int)resultFolded.size() - initialFoldedSize <= maxSuffixVariation ) )
-                  matches.push_back( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+                  addMatch( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
             }
           }
 

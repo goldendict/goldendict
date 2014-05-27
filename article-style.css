@@ -499,10 +499,14 @@ div.xdxf
 
 /************* Zim dictionaries **************/
 
+.zimdict
+{
+  font-size: 110%!important;
+}
+
 .zimdict_headword
 {
   font-weight: bold!important;
-/*  font-size: 150%; */
 }
 
 /************* Spelling suggestions *****************/
@@ -566,6 +570,22 @@ div.xdxf
 {
   font-size: 110%;
   font-weight: 600;
+}
+
+/************* Epwing dictionaries *****************/
+
+.epwing_narrow_font
+{
+  width: 7px;
+  height: 13px;
+  vertical-align: -15%;
+}
+
+.epwing_wide_font
+{
+  width: 13px;
+  height: 13px;
+  vertical-align: -15%;
 }
 
 /************* Websites *****************/
