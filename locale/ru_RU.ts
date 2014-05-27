@@ -3454,7 +3454,7 @@ Enable this option to workaround the problem.</source>
     <message>
         <location filename="../preferences.ui" line="1176"/>
         <source>Allow full-text search for:</source>
-        <translation>Разрешить длнотекстовый поиск для:</translation>
+        <translation>Разрешить полнотекстовый поиск для:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1253"/>
