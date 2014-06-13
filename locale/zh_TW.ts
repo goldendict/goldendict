@@ -430,7 +430,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation>假如在記號上勾選，就會在篩選時生效</translation>
+        <translation>勾選後，大小寫就會視為不同</translation>
     </message>
     <message>
         <source>Match case</source>
