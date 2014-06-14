@@ -83,7 +83,6 @@ int main( int argc, char ** argv )
 {
   #ifdef Q_OS_MAC
     setenv("LANG", "en_US.UTF-8", 1);
-    setenv("QT_GRAPHICSSYSTEM", "raster", 1);
   #endif
 
   // The following clause fixes a race in the MinGW runtime where throwing
