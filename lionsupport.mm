@@ -1,4 +1,5 @@
 #include <AppKit/NSWindow.h>
+#include <AppKit/NSScreen.h>
 #include "lionsupport.h"
 
 bool LionSupport::isLion()
@@ -19,5 +20,15 @@ void LionSupport::addFullscreen(MainWindow *window)
     }
 #else
 #warning No fullscreen support will be included in this build
+#endif
+}
+
+bool LionSupport::isRetinaDisplay()
+{
+#if defined(MAC_OS_X_VERSION_10_7) && MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_7
+  return( [ [ NSScreen mainScreen ] respondsToSelector:@selector( backingScaleFactor ) ]
+          && [ [ NSScreen mainScreen ] backingScaleFactor ] > 1.5 );
+#else
+  return false;
 #endif
 }

@@ -15,6 +15,9 @@ public:
      * Adds fullscreen button to window for Lion.
      */
     static void addFullscreen(MainWindow *window);
+
+    //Check for retina display
+    static bool isRetinaDisplay();
 };
 
 #endif // LIONSUPPORT_H
