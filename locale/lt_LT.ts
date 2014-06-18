@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="lt">
 <context>
-    <name></name>
-    <message>
-        <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">Ошибка обработки XML: %1 на строке %2, столбце %3</translation>
-    </message>
-</context>
-<context>
     <name>About</name>
     <message>
         <location filename="../about.ui" line="17"/>
@@ -726,17 +719,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="239"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Url: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="240"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Duombazės: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="241"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Paieškos strategijos: </translation>
     </message>
 </context>
 <context>
@@ -744,44 +737,46 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="762"/>
         <source>Enabled</source>
-        <translation type="unfinished">Įgalinta</translation>
+        <translation>Įgalinta</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="764"/>
         <source>Name</source>
-        <translation type="unfinished">Pavadinimas</translation>
+        <translation>Vardas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="766"/>
         <source>Address</source>
-        <translation type="unfinished">Adresas</translation>
+        <translation>Adresas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="768"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Duombazės</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="770"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Strategijos</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="772"/>
         <source>Icon</source>
-        <translation type="unfinished">Ženkliukas</translation>
+        <translation>Ženkliukas</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="805"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Duombazes atskirkite kableliais
+(tuščias įrašas ir * atitinka visas duomenų bazes)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="808"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Paieškos strategijas atskirkite kableliais
+(tuščias įrašas atitinka priešdėlio („prefix“) strategiją)</translation>
     </message>
 </context>
 <context>
@@ -892,7 +887,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="138"/>
         <source>Full-text search</source>
-        <translation>Paieška visuose tekstuose</translation>
+        <translation>Visatekstė paieška</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="145"/>
@@ -902,7 +897,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="146"/>
         <source>Plain text</source>
-        <translation>Tiesiog tekstas</translation>
+        <translation>Grynasis tekstas</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
@@ -912,7 +907,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
         <source>RegExp</source>
-        <translation>Reguliarusis reiškinys</translation>
+        <translation>Reguliar. reiškinys</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="153"/>
@@ -922,7 +917,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="162"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation>Viename žodyne surastų straipsnelių riba (%1-%2): </translation>
+        <translation>Straipsnelių riba vienam žodynui (%1-%2): </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="185"/>
@@ -939,17 +934,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="297"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinų, japonų ir korėjiečių rašto ženklų paieška nėra suderinama su paieškos veiksenomis „Ištisi žodžiai“ ir „Grynasis tekstas“</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="306"/>
         <source>The search line must contains at least one word containing </source>
-        <translation>Paieškos užklausoje įveskite bent vieną žodį ne mažiau kaip iš</translation>
+        <translation>Paieškos užklausoje įveskite bent vieną žodį, kurį sudarytų bent </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="307"/>
         <source> or more symbols</source>
-        <translation>simbolių</translation>
+        <translation> simboliai(-ių,-is)</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="319"/>
@@ -2913,7 +2908,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="578"/>
         <source>Full-text search</source>
-        <translation>Paieška visuose tekstuose</translation>
+        <translation>Visatekstė paieška</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="581"/>
@@ -3521,7 +3516,7 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="1157"/>
         <source>Full-text search</source>
-        <translation>Paieška visuose tekstuose</translation>
+        <translation>Visatekstė paieška</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1176"/>
@@ -4473,12 +4468,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT serveriai</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT serveriai:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
