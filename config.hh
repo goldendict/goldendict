@@ -225,6 +225,7 @@ struct Preferences
   bool hideGoldenDictHeader;
 
   qreal zoomFactor;
+  qreal helpZoomFactor;
   int wordsZoomLevel;
 
   unsigned maxStringsInHistory;
@@ -520,6 +521,8 @@ struct Class
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
   QByteArray inspectorGeometry; // Geometry of WebKit inspector window
+  QByteArray helpWindowGeometry; // Geometry of help window
+  QByteArray helpSplitterState; // Geometry of help splitter
 
   QString historyExportPath; // Path for export/import history
   QString resourceSavePath;  // Path to save images/audio

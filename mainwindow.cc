@@ -116,6 +116,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , headwordsDlg( 0 )
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
+, helpWindow( 0 )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -610,6 +611,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( openConfigFolder() ) );
   connect( ui.about, SIGNAL( triggered() ),
            this, SLOT( showAbout() ) );
+  connect( ui.showReference, SIGNAL( triggered() ),
+           this, SLOT( showGDHelp() ) );
 
   connect( groupListInDock, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
@@ -1900,6 +1903,7 @@ void MainWindow::editPreferences()
 
     // These parameters are not set in dialog
     p.zoomFactor = cfg.preferences.zoomFactor;
+    p.helpZoomFactor = cfg.preferences.helpZoomFactor;
     p.wordsZoomLevel = cfg.preferences.wordsZoomLevel;
     p.hideMenubar = cfg.preferences.hideMenubar;
     p.searchInDock = cfg.preferences.searchInDock;
@@ -2702,6 +2706,9 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 
     if( ftsDlg )
       ftsDlg->hide();
+
+    if( helpWindow )
+      helpWindow->hide();
   }
 
   if ( shown )
@@ -4037,6 +4044,29 @@ void MainWindow::closeFullTextSearchDialog()
     delete ftsDlg;
     ftsDlg = 0;
   }
+}
+
+void MainWindow::showGDHelp()
+{
+  if( !helpWindow )
+    helpWindow = new Help::HelpWindow( this, cfg );
+
+  if( helpWindow->getHelpEngine() )
+  {
+    connect( helpWindow, SIGNAL( needClose() ), this, SLOT( hideGDHelp() ) );
+    helpWindow->show();
+  }
+  else
+  {
+    delete helpWindow;
+    helpWindow = 0;
+  }
+}
+
+void MainWindow::hideGDHelp()
+{
+  if( helpWindow )
+    helpWindow->hide();
 }
 
 #ifdef Q_OS_WIN32

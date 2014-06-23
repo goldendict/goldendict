@@ -20,9 +20,11 @@ QT += webkit
 QT += xml
 QT += network
 QT += svg
+QT += sql
 CONFIG += exceptions \
     rtti \
-    stl
+    stl \
+    help
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
@@ -139,6 +141,9 @@ unix:!mac {
     desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
+    helps.path = $$PREFIX/share/goldendict/help/
+    helps.files = help/*.qch
+    INSTALLS += helps
 }
 mac {
     TARGET = GoldenDict
@@ -171,7 +176,9 @@ mac {
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
-                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/
+                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
+                      mkdir -p GoldenDict.app/Contents/MacOS/help & \
+                      cp -R help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
 }
@@ -285,7 +292,8 @@ HEADERS += folding.hh \
     dictheadwords.hh \
     fulltextsearch.hh \
     ftshelpers.hh \
-    dictserver.hh
+    dictserver.hh \
+    helpwindow.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -405,7 +413,8 @@ SOURCES += folding.cc \
     dictheadwords.cc \
     fulltextsearch.cc \
     ftshelpers.cc \
-    dictserver.cc
+    dictserver.cc \
+    helpwindow.cc
 
 win32 {
 	FORMS   += texttospeechsource.ui

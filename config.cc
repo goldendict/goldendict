@@ -122,6 +122,7 @@ Preferences::Preferences():
   enableWebPlugins( false ),
   hideGoldenDictHeader( false ),
   zoomFactor( 1 ),
+  helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 ),
   storeHistory( 1 ),
@@ -707,6 +708,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "zoomFactor" ).isNull() )
       c.preferences.zoomFactor = preferences.namedItem( "zoomFactor" ).toElement().text().toDouble();
 
+    if ( !preferences.namedItem( "helpZoomFactor" ).isNull() )
+      c.preferences.helpZoomFactor = preferences.namedItem( "helpZoomFactor" ).toElement().text().toDouble();
+
     if ( !preferences.namedItem( "wordsZoomLevel" ).isNull() )
       c.preferences.wordsZoomLevel = preferences.namedItem( "wordsZoomLevel" ).toElement().text().toInt();
 
@@ -865,6 +869,16 @@ Class load() throw( exError )
 
   if ( !mainWindowGeometry.isNull() )
     c.mainWindowGeometry = QByteArray::fromBase64( mainWindowGeometry.toElement().text().toLatin1() );
+
+  QDomNode helpWindowGeometry = root.namedItem( "helpWindowGeometry" );
+
+  if ( !helpWindowGeometry.isNull() )
+    c.helpWindowGeometry = QByteArray::fromBase64( helpWindowGeometry.toElement().text().toLatin1() );
+
+  QDomNode helpSplitterState = root.namedItem( "helpSplitterState" );
+
+  if ( !helpSplitterState.isNull() )
+    c.helpSplitterState = QByteArray::fromBase64( helpSplitterState.toElement().text().toLatin1() );
 
 #ifdef Q_OS_WIN
   QDomNode maximizedMainWindowGeometry = root.namedItem( "maximizedMainWindowGeometry" );
@@ -1480,6 +1494,10 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.zoomFactor ) ) );
     preferences.appendChild( opt );
 
+    opt = dd.createElement( "helpZoomFactor" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.helpZoomFactor ) ) );
+    preferences.appendChild( opt );
+
     opt = dd.createElement( "wordsZoomLevel" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.wordsZoomLevel ) ) );
     preferences.appendChild( opt );
@@ -1736,6 +1754,14 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "mainWindowGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.mainWindowGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "helpWindowGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.helpWindowGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "helpSplitterState" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.helpSplitterState.toBase64() ) ) );
     root.appendChild( opt );
 
 #ifdef Q_OS_WIN

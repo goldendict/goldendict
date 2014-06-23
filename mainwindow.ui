@@ -101,6 +101,8 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="showReference"/>
+    <addaction name="separator"/>
     <addaction name="visitHomepage"/>
     <addaction name="visitForum"/>
     <addaction name="separator"/>
@@ -372,9 +374,6 @@
    <property name="toolTip">
     <string>About GoldenDict</string>
    </property>
-   <property name="shortcut">
-    <string>F1</string>
-   </property>
    <property name="menuRole">
     <enum>QAction::AboutRole</enum>
    </property>
@@ -585,6 +584,14 @@
    </property>
    <property name="menuRole">
     <enum>QAction::TextHeuristicRole</enum>
+   </property>
+  </action>
+  <action name="showReference">
+   <property name="text">
+    <string>GoldenDict reference</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
    </property>
   </action>
  </widget>
