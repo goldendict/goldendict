@@ -949,12 +949,12 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.cc" line="306"/>
         <source>The search line must contains at least one word containing </source>
         <translatorcomment>the source sentence is a bit weird...</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation>La ligne de recherche doit contenir au moins un mot de </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="307"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> symboles ou plus</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="319"/>
