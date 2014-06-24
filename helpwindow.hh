@@ -57,6 +57,8 @@ public:
   QHelpEngine const * getHelpEngine()
   { return helpEngine; }
 
+  void showHelpFor( QString const & keyword );
+
 public slots:
   virtual void reject();
   virtual void accept();

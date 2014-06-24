@@ -69,6 +69,9 @@ public:
 
   virtual void commitData( QSessionManager & );
 
+  void showGDHelpForID( QString const & id );
+  void closeGDHelp();
+
 public slots:
 
   void messageFromAnotherInstanceReceived( QString const & );

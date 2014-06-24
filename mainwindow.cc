@@ -1893,7 +1893,7 @@ void MainWindow::editPreferences()
   ftsIndexing.stopIndexing();
   ftsIndexing.clearDictionaries();
 
-  Preferences preferences( this, cfg.preferences );
+  Preferences preferences( this, cfg );
 
   preferences.show();
 
@@ -4049,17 +4049,25 @@ void MainWindow::closeFullTextSearchDialog()
 void MainWindow::showGDHelp()
 {
   if( !helpWindow )
+  {
     helpWindow = new Help::HelpWindow( this, cfg );
 
-  if( helpWindow->getHelpEngine() )
-  {
-    connect( helpWindow, SIGNAL( needClose() ), this, SLOT( hideGDHelp() ) );
-    helpWindow->show();
+    if( helpWindow->getHelpEngine() )
+    {
+      connect( helpWindow, SIGNAL( needClose() ), this, SLOT( hideGDHelp() ) );
+      helpWindow->showHelpFor( "Content" );
+      helpWindow->show();
+    }
+    else
+    {
+      delete helpWindow;
+      helpWindow = 0;
+    }
   }
   else
   {
-    delete helpWindow;
-    helpWindow = 0;
+    helpWindow->show();
+    helpWindow->activateWindow();
   }
 }
 
@@ -4067,6 +4075,31 @@ void MainWindow::hideGDHelp()
 {
   if( helpWindow )
     helpWindow->hide();
+}
+
+void MainWindow::showGDHelpForID( QString const & id )
+{
+  if( !helpWindow )
+    showGDHelp();
+
+  if( helpWindow )
+  {
+    helpWindow->showHelpFor( id );
+    if( !helpWindow->isVisible() )
+    {
+      helpWindow->show();
+      helpWindow->activateWindow();
+    }
+  }
+}
+
+void MainWindow::closeGDHelp()
+{
+  if( helpWindow )
+  {
+    delete helpWindow;
+    helpWindow = 0;
+  }
 }
 
 #ifdef Q_OS_WIN32

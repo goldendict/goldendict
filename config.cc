@@ -1966,6 +1966,14 @@ QString getLocDir() throw()
     return QCoreApplication::applicationDirPath() + "/locale";
 }
 
+QString getHelpDir() throw()
+{
+  if ( QDir( getProgramDataDir() ).cd( "help" ) )
+    return getProgramDataDir() + "/help";
+  else
+    return QCoreApplication::applicationDirPath() + "/help";
+}
+
 bool isPortableVersion() throw()
 {
   struct IsPortable

@@ -200,6 +200,7 @@ private:
   QList< FtsHeadword > results;
   HeadwordsListModel * model;
   WordListItemDelegate * delegate;
+  QAction helpAction;
 
   void showDictNumbers();
 
@@ -212,6 +213,7 @@ private slots:
   void reject();
   void itemClicked( QModelIndex const & idx );
   void updateDictionaries();
+  void helpRequested();
 
 signals:
   void showTranslationFor( QString const &, QStringList const & dictIDs,

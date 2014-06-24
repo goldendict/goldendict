@@ -4,6 +4,7 @@
 #include "fulltextsearch.hh"
 #include "ftshelpers.hh"
 #include "gddebug.hh"
+#include "mainwindow.hh"
 
 #include <QThreadPool>
 #include <QIntValidator>
@@ -126,6 +127,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   groups( groups_ ),
   group( 0 ),
   ftsIdx( ftsidx )
+, helpAction( this )
 {
   ui.setupUi( this );
 
@@ -191,6 +193,17 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
   connect( ui.OKButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
   connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
+
+  connect( ui.helpButton, SIGNAL( clicked() ),
+           this, SLOT( helpRequested() ) );
+
+  helpAction.setShortcut( QKeySequence( "F1" ) );
+  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+
+  connect( &helpAction, SIGNAL( triggered() ),
+           this, SLOT( helpRequested() ) );
+
+  addAction( &helpAction );
 
   ui.headwordsView->installEventFilter( this );
 
@@ -481,6 +494,13 @@ bool FullTextSearchDialog::eventFilter( QObject * obj, QEvent * ev )
     }
   }
   return QDialog::eventFilter( obj, ev );
+}
+
+void FullTextSearchDialog::helpRequested()
+{
+  MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
+  if( mainWindow )
+    mainWindow->showGDHelpForID( "Full-text search" );
 }
 
 /// HeadwordsListModel

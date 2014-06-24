@@ -4,11 +4,16 @@
 #include "langcoder.hh"
 #include <QMessageBox>
 #include "broken_xrecord.hh"
+#include "mainwindow.hh"
 
 
-Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
+Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
+, helpWindow( 0 )
+, cfg( cfg_ )
+, helpAction( this )
 {
+  Config::Preferences const & p = cfg_.preferences;
   ui.setupUi( this );
 
   connect( ui.enableScanPopup, SIGNAL( toggled( bool ) ),
@@ -36,6 +41,17 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
            this, SLOT( sideShiftClicked( bool ) ) );
   connect( ui.rightShift, SIGNAL( clicked( bool ) ),
            this, SLOT( sideShiftClicked( bool ) ) );
+
+  connect( ui.buttonBox, SIGNAL( helpRequested() ),
+           this, SLOT( helpRequested() ) );
+
+  helpAction.setShortcut( QKeySequence( "F1" ) );
+  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+
+  connect( &helpAction, SIGNAL( triggered() ),
+           this, SLOT( helpRequested() ) );
+
+  addAction( &helpAction );
 
   // Load values into form
 
@@ -490,4 +506,39 @@ void Preferences::customProxyToggled( bool )
 {
   ui.customSettingsGroup->setEnabled( ui.customProxy->isChecked()
                                       && ui.useProxyServer->isChecked() );
+}
+
+void Preferences::helpRequested()
+{
+  if( !helpWindow )
+  {
+    MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
+    if( mainWindow )
+      mainWindow->closeGDHelp();
+
+    helpWindow = new Help::HelpWindow( this, cfg );
+
+    if( helpWindow )
+    {
+      helpWindow->setWindowFlags( Qt::Window );
+
+      connect( helpWindow, SIGNAL( needClose() ),
+               this, SLOT( closeHelp() ) );
+      helpWindow->showHelpFor( "Preferences" );
+      helpWindow->show();
+    }
+  }
+  else
+  {
+    if( !helpWindow->isVisible() )
+      helpWindow->show();
+
+    helpWindow->activateWindow();
+  }
+}
+
+void Preferences::closeHelp()
+{
+  if( helpWindow )
+    helpWindow->hide();
 }

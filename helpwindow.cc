@@ -93,11 +93,14 @@ HelpWindow::HelpWindow( QWidget * parent, Config::Class & cfg_ ) :
   if( localeName.isEmpty() )
     localeName = QLocale::system().name();
 
-  helpFile = QDir::toNativeSeparators( Config::getProgramDataDir() + "/help/gdhelp_"
-                                       + localeName.left( 2 ) + ".qch" );
+  QString helpDir = Config::getHelpDir();
+  helpFile = QDir::toNativeSeparators( helpDir + "/gdhelp_" + localeName + ".qch" );
 
   if( !QFileInfo( helpFile ).isFile() )
-    helpFile = QDir::toNativeSeparators( Config::getProgramDataDir() + "/help/gdhelp_en.qch" );
+    helpFile = QDir::toNativeSeparators( helpDir + "/gdhelp_" + localeName.left( 2 ) + ".qch" );
+
+  if( !QFileInfo( helpFile ).isFile() )
+    helpFile = QDir::toNativeSeparators( helpDir + "/gdhelp_en.qch" );
 
   helpCollectionFile = QDir::toNativeSeparators( Config::getConfigDir() + "gdhelp.qhc" );
 
@@ -193,6 +196,11 @@ void HelpWindow::accept()
   cfg.helpWindowGeometry = saveGeometry();
   cfg.helpSplitterState = splitter->saveState();
   emit needClose();
+}
+
+void HelpWindow::showHelpFor( QString const & keyword )
+{
+  helpBrowser->showHelpForKeyword( keyword );
 }
 
 void HelpWindow::forwardEnabled( bool enabled )

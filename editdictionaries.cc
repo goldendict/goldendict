@@ -4,6 +4,7 @@
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "dictinfo.hh"
+#include "mainwindow.hh"
 #include <QMessageBox>
 
 using std::vector;
@@ -23,6 +24,8 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   dictionariesChanged( false ),
   groupsChanged( false ),
   lastCurrentTab( 0 )
+, helpWindow( 0 )
+, helpAction( this )
 {
   // Some groups may have contained links to non-existnent dictionaries. We
   // would like to preserve them if no edits were done. To that end, we save
@@ -52,6 +55,18 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
   connect( orderAndProps.get(), SIGNAL( showDictionaryHeadwords( QString const & ) ),
            this, SIGNAL( showDictionaryHeadwords( QString const & ) ) );
+
+  connect( ui.buttons, SIGNAL( helpRequested() ),
+           this, SLOT( helpRequested() ) );
+
+  helpAction.setShortcut( QKeySequence( "F1" ) );
+  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+
+  connect( &helpAction, SIGNAL( triggered() ),
+           this, SLOT( helpRequested() ) );
+
+  addAction( &helpAction );
+
 }
 
 void EditDictionaries::editGroup( unsigned id )
@@ -240,4 +255,39 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
     if ( noInactiveEdits )
       origCfg.inactiveDictionaries = orderAndProps->getCurrentInactiveDictionaries();
   }
+}
+
+void EditDictionaries::helpRequested()
+{
+  if( !helpWindow )
+  {
+    MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
+    if( mainWindow )
+      mainWindow->closeGDHelp();
+
+    helpWindow = new Help::HelpWindow( this, cfg );
+
+    if( helpWindow )
+    {
+      helpWindow->setWindowFlags( Qt::Window );
+
+      connect( helpWindow, SIGNAL( needClose() ),
+               this, SLOT( closeHelp() ) );
+      helpWindow->showHelpFor( "Manage dictionaries" );
+      helpWindow->show();
+    }
+  }
+  else
+  {
+    if( !helpWindow->isVisible() )
+      helpWindow->show();
+
+    helpWindow->activateWindow();
+  }
+}
+
+void EditDictionaries::closeHelp()
+{
+  if( helpWindow )
+    helpWindow->hide();
 }

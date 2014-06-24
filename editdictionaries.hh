@@ -11,7 +11,9 @@
 #include "orderandprops.hh"
 #include "groups.hh"
 #include "instances.hh"
+#include "helpwindow.hh"
 #include <QNetworkAccessManager>
+#include <QAction>
 
 class EditDictionaries: public QDialog
 {
@@ -23,6 +25,9 @@ public:
                     std::vector< sptr< Dictionary::Class > > & dictionaries,
                     Instances::Groups & groupInstances, // We only clear those on rescan
                     QNetworkAccessManager & dictNetMgr );
+
+  ~EditDictionaries()
+  { if( helpWindow ) delete helpWindow; }
 
   /// Instructs the dialog to position itself on editing the given group.
   void editGroup( unsigned id );
@@ -46,6 +51,9 @@ private slots:
   void buttonBoxClicked( QAbstractButton * button );
 
   void rescanSources();
+
+  void helpRequested();
+  void closeHelp();
 
 signals:
 
@@ -79,7 +87,10 @@ private:
   bool dictionariesChanged;
   bool groupsChanged;
   
-  int lastCurrentTab;  
+  int lastCurrentTab;
+
+  Help::HelpWindow * helpWindow;
+  QAction helpAction;
 };
 
 #endif
