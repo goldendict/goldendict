@@ -504,6 +504,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>
@@ -834,6 +838,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -984,6 +992,45 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Open groups list</source>
         <translation>打開字典群組列表</translation>
+    </message>
+</context>
+<context>
+    <name>Help::HelpWindow</name>
+    <message>
+        <source>GoldenDict help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished">放大</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished">縮小</translation>
+    </message>
+    <message>
+        <source>Normal Size</source>
+        <translation type="unfinished">正常大小</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Index</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2362,6 +2409,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Ctrl+Shift+F</source>
         <translation>Ctrl+Shift+F</translation>
     </message>
+    <message>
+        <source>GoldenDict reference</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -3097,6 +3148,10 @@ Enable this option to workaround the problem.</source>
     <message>
         <source>articles (0 - unlimited)</source>
         <translation>條項目的字典中尋找(0 - 不限)</translation>
+    </message>
+    <message>
+        <source>Help language</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

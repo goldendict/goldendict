@@ -508,6 +508,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Cancel</source>
         <translation type="unfinished">Отхвърляне</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>
@@ -835,6 +839,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Cancel</source>
         <translation type="unfinished">Отхвърляне</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -984,6 +992,45 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open groups list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Help::HelpWindow</name>
+    <message>
+        <source>GoldenDict help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Назад</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Напред</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished">Увеличаване</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished">Намаляване</translation>
+    </message>
+    <message>
+        <source>Normal Size</source>
+        <translation type="unfinished">Нормален размер</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2367,6 +2414,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Ctrl+Shift+F</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>GoldenDict reference</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -3110,6 +3161,10 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help language</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
