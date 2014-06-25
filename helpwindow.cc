@@ -89,7 +89,11 @@ HelpWindow::HelpWindow( QWidget * parent, Config::Class & cfg_ ) :
 
   mainLayout->addWidget( navToolBar );
 
-  QString localeName = cfg.preferences.interfaceLanguage;
+  QString localeName = cfg.preferences.helpLanguage;
+
+  if( localeName.isEmpty() )
+    localeName = cfg.preferences.interfaceLanguage;
+
   if( localeName.isEmpty() )
     localeName = QLocale::system().name();
 

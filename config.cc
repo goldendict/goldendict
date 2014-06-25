@@ -683,6 +683,7 @@ Class load() throw( exError )
   if ( !preferences.isNull() )
   {
     c.preferences.interfaceLanguage = preferences.namedItem( "interfaceLanguage" ).toElement().text();
+    c.preferences.helpLanguage = preferences.namedItem( "helpLanguage" ).toElement().text();
     c.preferences.displayStyle = preferences.namedItem( "displayStyle" ).toElement().text();
     c.preferences.newTabsOpenAfterCurrentOne = ( preferences.namedItem( "newTabsOpenAfterCurrentOne" ).toElement().text() == "1" );
     c.preferences.newTabsOpenInBackground = ( preferences.namedItem( "newTabsOpenInBackground" ).toElement().text() == "1" );
@@ -1436,6 +1437,10 @@ void save( Class const & c ) throw( exError )
 
     QDomElement opt = dd.createElement( "interfaceLanguage" );
     opt.appendChild( dd.createTextNode( c.preferences.interfaceLanguage ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "helpLanguage" );
+    opt.appendChild( dd.createTextNode( c.preferences.helpLanguage ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "displayStyle" );

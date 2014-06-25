@@ -1826,6 +1826,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
+  hideGDHelp();
+
   { // Limit existence of newCfg
 
   Config::Class newCfg = cfg;
@@ -1895,6 +1897,8 @@ void MainWindow::editPreferences()
 
   Preferences preferences( this, cfg );
 
+  hideGDHelp();
+
   preferences.show();
 
   if ( preferences.exec() == QDialog::Accepted )
@@ -1945,6 +1949,10 @@ void MainWindow::editPreferences()
       // Signal setExpandOptionalParts reload all articles
       needReload = false;
     }
+
+    // See if we need to change help language
+    if( cfg.preferences.helpLanguage != p.helpLanguage )
+      closeGDHelp();
 
     for( int x = 0; x < ui.tabWidget->count(); ++x )
     {
