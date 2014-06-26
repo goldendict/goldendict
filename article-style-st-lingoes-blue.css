@@ -60,6 +60,7 @@ a:hover {
 {
   display:block;
   -webkit-box-ordinal-group: 1;
+  -webkit-box-flex: 1;
 }
 
 .gdactivearticle .gddictname {
