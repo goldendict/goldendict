@@ -161,6 +161,8 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
                                                         wstring const & )
       throw( std::exception );
 
+    virtual QString const & getDescription();
+
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
@@ -633,6 +635,71 @@ sptr< Dictionary::DataRequest > SdictDictionary::getArticle( wstring const & wor
   throw( std::exception )
 {
   return new SdictArticleRequest( word, alts, *this );
+}
+
+QString const& SdictDictionary::getDescription()
+{
+  if( !dictionaryDescription.isEmpty() )
+    return dictionaryDescription;
+
+  dictionaryDescription = QString::fromLatin1( "Title: " )
+                          + QString::fromUtf8( getName().c_str() );
+
+  try
+  {
+    Mutex::Lock _( sdictMutex );
+
+    DCT_header dictHeader;
+
+    df.seek( 0 );
+    if( df.readRecords( &dictHeader, sizeof(dictHeader), 1 ) != 1 )
+      throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
+
+    int compression = dictHeader.compression & 0x0F;
+
+    vector< char > data;
+    uint32_t size;
+    string str;
+
+    df.seek( dictHeader.copyrightOffset );
+    df.read( &size, sizeof( size ) );
+    data.resize( size );
+    df.read( &data.front(), size );
+
+    if( compression == 1 )
+      str = decompressZlib( data.data(), size );
+    else if( compression == 2 )
+      str = decompressBzip2( data.data(), size );
+    else
+      str = string( data.data(), size );
+
+    dictionaryDescription += QString::fromLatin1( "\n\nCopyright: " )
+                             + QString::fromUtf8( str.c_str(), str.size() );
+
+    df.seek( dictHeader.versionOffset );
+    df.read( &size, sizeof( size ) );
+    data.resize( size );
+    df.read( &data.front(), size );
+
+    if( compression == 1 )
+      str = decompressZlib( data.data(), size );
+    else if( compression == 2 )
+      str = decompressBzip2( data.data(), size );
+    else
+      str = string( data.data(), size );
+
+    dictionaryDescription += QString::fromLatin1( "\n\nVersion: " )
+                             + QString::fromUtf8( str.c_str(), str.size() );
+  }
+  catch( std::exception &ex )
+  {
+    gdWarning( "SDict: Failed description reading for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+  }
+
+  if( dictionaryDescription.isEmpty() )
+    dictionaryDescription = "NONE";
+
+  return dictionaryDescription;
 }
 
 } // anonymous namespace
