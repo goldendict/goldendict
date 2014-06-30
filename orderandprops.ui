@@ -170,6 +170,9 @@
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
             </property>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+            </property>
            </widget>
           </item>
           <item row="1" column="1">
