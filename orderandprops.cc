@@ -89,13 +89,6 @@ OrderAndProps::OrderAndProps( QWidget * parent,
 {
   ui.setupUi( this );
 
-  // For now we don't support arrows, so remove them until we get to that
-  delete ui.moveActiveUp;
-  delete ui.moveActiveDown;
-
-  delete ui.moveToActive;
-  delete ui.moveToInactive;
-
   Instances::Group order( dictionaryOrder, allDictionaries );
   Instances::Group inactive( inactiveDictionaries, allDictionaries );
 
@@ -125,6 +118,13 @@ OrderAndProps::OrderAndProps( QWidget * parent,
 
   connect (ui.searchLine, SIGNAL( filterChanged( QString const & ) ),
       this, SLOT( filterChanged( QString const &) ) );
+
+  connect( ui.dictionaryOrder->getModel(), SIGNAL( contentChanged() ),
+           this, SLOT( showDictNumbers() ) );
+  connect( ui.inactiveDictionaries->getModel(), SIGNAL( contentChanged() ),
+           this, SLOT( showDictNumbers() ) );
+
+  showDictNumbers();
 }
 
 Config::Group OrderAndProps::getCurrentDictionaryOrder() const
@@ -278,4 +278,11 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
   {
     emit showDictionaryHeadwords( QString::fromUtf8( dict->getId().c_str() ) );
   }
+}
+
+void OrderAndProps::showDictNumbers()
+{
+  ui.dictionariesNumber->setText( tr( "Dictionaries active: %1, inactive: %2" )
+                                  .arg( QString::number( ui.dictionaryOrder->getModel()->rowCount( QModelIndex() ) ) )
+                                  .arg( QString::number( ui.inactiveDictionaries->getModel()->rowCount( QModelIndex() ) ) ) );
 }
