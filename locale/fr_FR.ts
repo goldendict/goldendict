@@ -3099,65 +3099,61 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <translation>Formulaire</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="76"/>
+        <location filename="../orderandprops.ui" line="37"/>
         <source>Dictionary order:</source>
         <translation>Ordre des dictionnaires :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="41"/>
-        <location filename="../orderandprops.ui" line="51"/>
-        <location filename="../orderandprops.ui" line="101"/>
-        <location filename="../orderandprops.ui" line="111"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="139"/>
+        <location filename="../orderandprops.ui" line="53"/>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Dictionnaires inactifs :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="153"/>
+        <location filename="../orderandprops.ui" line="67"/>
         <source>Dictionary information</source>
         <translation>Informations sur le dictionnaire</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="161"/>
+        <location filename="../orderandprops.ui" line="75"/>
         <source>Name:</source>
         <translation>Nom :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="188"/>
+        <location filename="../orderandprops.ui" line="105"/>
         <source>Total articles:</source>
         <translation>Articles :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="195"/>
+        <location filename="../orderandprops.ui" line="112"/>
         <source>Total words:</source>
         <translation>Mots :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="212"/>
+        <location filename="../orderandprops.ui" line="129"/>
         <source>Translates from:</source>
         <translation>Traduit de :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="219"/>
+        <location filename="../orderandprops.ui" line="136"/>
         <source>Translates to:</source>
         <translation>Traduit vers :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="248"/>
+        <location filename="../orderandprops.ui" line="165"/>
         <source>Description:</source>
         <translation>Description :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="328"/>
+        <location filename="../orderandprops.ui" line="245"/>
         <source>Files comprising this dictionary:</source>
         <translation>Fichiers incluant ce dictionnaire :</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="408"/>
+        <location filename="../orderandprops.ui" line="325"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>Définissez l&apos;ordre des éléments en les déplaçant (glisser-déposer). Déposez les dictionnaires dans le groupe &apos;inactif&apos; pour désactiver leur utilisation.</translation>
     </message>
@@ -3175,6 +3171,11 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
         <translation>Vedettes du dictionnaire</translation>
+    </message>
+    <message>
+        <location filename="../orderandprops.cc" line="285"/>
+        <source>Dictionaries active: %1, inactive: %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

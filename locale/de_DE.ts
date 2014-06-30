@@ -3056,65 +3056,61 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Formular</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="76"/>
+        <location filename="../orderandprops.ui" line="37"/>
         <source>Dictionary order:</source>
         <translation>Reihenfolge der Wörterbücher:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="41"/>
-        <location filename="../orderandprops.ui" line="51"/>
-        <location filename="../orderandprops.ui" line="101"/>
-        <location filename="../orderandprops.ui" line="111"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="139"/>
+        <location filename="../orderandprops.ui" line="53"/>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Inaktive (deaktivierte) Wörterbücher:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="153"/>
+        <location filename="../orderandprops.ui" line="67"/>
         <source>Dictionary information</source>
         <translation>Informationen über das Wörterbuch</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="161"/>
+        <location filename="../orderandprops.ui" line="75"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="188"/>
+        <location filename="../orderandprops.ui" line="105"/>
         <source>Total articles:</source>
         <translation>Artikel insgesamt:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="195"/>
+        <location filename="../orderandprops.ui" line="112"/>
         <source>Total words:</source>
         <translation>Wörter insgesamt:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="212"/>
+        <location filename="../orderandprops.ui" line="129"/>
         <source>Translates from:</source>
         <translation>Übersetzt von:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="219"/>
+        <location filename="../orderandprops.ui" line="136"/>
         <source>Translates to:</source>
         <translation>Übersetzt nach:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="248"/>
+        <location filename="../orderandprops.ui" line="165"/>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="328"/>
+        <location filename="../orderandprops.ui" line="245"/>
         <source>Files comprising this dictionary:</source>
         <translation>Wörterbuch zusammengesetzt aus diesen Dateien:</translation>
     </message>
     <message>
-        <location filename="../orderandprops.ui" line="408"/>
+        <location filename="../orderandprops.ui" line="325"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>Verändern Sie die Reihenfolge mit Drag und Drop.  Lassen sie ein Wörterbuch mittels Drag und Drop in der inaktiven Gruppe fallen, um es zu deaktivieren.</translation>
     </message>
@@ -3131,6 +3127,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../orderandprops.cc" line="285"/>
+        <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

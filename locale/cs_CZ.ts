@@ -3252,7 +3252,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
@@ -3305,6 +3305,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
