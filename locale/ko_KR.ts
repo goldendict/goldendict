@@ -385,7 +385,7 @@
     <message>
         <location filename="../articleview.ui" line="197"/>
         <source>Highlight &amp;all</source>
-        <translation>전체 강조표시(&amp;a)</translation>
+        <translation>검색어 강조(&amp;a)</translation>
     </message>
 </context>
 <context>
@@ -413,22 +413,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시 인증이 필요함</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>프록시를 통해 접근하기 위해서는 사용자명과 암호를 입력해야 합니다</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 이름:</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">암호:</translation>
+        <translation>암호:</translation>
     </message>
 </context>
 <context>
@@ -536,112 +536,112 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>검색 모드</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>이 요소는 필터가 어떻게 해석될 것인지 결정합니다</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>체크하면 필터링시에 대소문자가 고려될 것입니다</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>대소문자 구분</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>표제어들을 파일로 저장합니다</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>내보내기</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>도움말</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="101"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>표제어목록에 필터를 적용하려면 이 버튼을 누르시오</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="104"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>적용</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>체크하면 필터 변경이 즉시 표제어목록에 적용될 것입니다</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="120"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>자동 적용</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="127"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>필터:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="134"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>필터 (고정문자열, 와일드카드 또는 정규식)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>텍스트</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="32"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>와일드카드</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="33"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>정규식</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="231"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>전체 표제어 수: %1, 필터링 후: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="248"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>표제어들을 파일로 저장합니다</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="250"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">텍스트파일(*.txt);;모든 파일(*.*)</translation>
+        <translation>텍스트파일(*.txt);;모든 파일(*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="274"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>표제어 내보내기...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="274"/>
         <source>Cancel</source>
-        <translation type="unfinished">취소</translation>
+        <translation>취소</translation>
     </message>
 </context>
 <context>
@@ -689,12 +689,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>사전의 모든 표제어들을 표시합니다</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>표제어</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -717,17 +717,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="239"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Url: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="240"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>데이터베이스:</translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="241"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>검색 조건:</translation>
     </message>
 </context>
 <context>
@@ -735,44 +735,46 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="762"/>
         <source>Enabled</source>
-        <translation type="unfinished">활성</translation>
+        <translation>활성</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="764"/>
         <source>Name</source>
-        <translation type="unfinished">이름</translation>
+        <translation>이름</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="766"/>
         <source>Address</source>
-        <translation type="unfinished">주소</translation>
+        <translation>주소</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="768"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>데이터베이스</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="770"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>조건</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="772"/>
         <source>Icon</source>
-        <translation type="unfinished">아이콘</translation>
+        <translation>아이콘</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="805"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>콤마로 구분된 데이터베이스 목록
+(공백 또는 &quot;*&quot; 는 데이터베이스 전체)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="808"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>콤마로 구분된 검색조건 목록
+(공백은 &quot;prefix&quot; 조건)</translation>
     </message>
 </context>
 <context>
@@ -800,7 +802,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 표제어</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -871,7 +873,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="68"/>
         <source>None</source>
-        <translation type="unfinished">없음</translation>
+        <translation>없음</translation>
     </message>
 </context>
 <context>
@@ -879,69 +881,69 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="140"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>전문검색</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>단어 단위로 찾기</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>텍스트</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="149"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>와일드카드</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="150"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>정규식</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="155"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>단어사이의 최대 거리 (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="164"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>사전당 최대 항목 (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="187"/>
         <location filename="../fulltextsearch.cc" line="297"/>
         <location filename="../fulltextsearch.cc" line="385"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>검색된 항목:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="266"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>목록작성중:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="310"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>검색어에 있는 CJK 기호들이 &quot;단어 단위로 찾기&quot;  &quot;텍스트&quot; 검색모드에 사용될 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="319"/>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>검색 줄은 적어도 한 개 단어를 포함해야 합니다</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="320"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>자 이상</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="332"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>전문검색을 위한 사전이 없음</translation>
     </message>
 </context>
 <context>
@@ -949,7 +951,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="61"/>
         <source>None</source>
-        <translation type="unfinished">없음</translation>
+        <translation>없음</translation>
     </message>
 </context>
 <context>
@@ -996,57 +998,57 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="189"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>검색</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>대소문자 구분</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>모드:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="94"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>검색된 항목:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="116"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>그룹에서 이용가능한 사전:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="122"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>목록작성을 위해 대기중:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="143"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>전체:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>목록작성완료:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="167"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>목록작성중: 없음</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="215"/>
         <source>Cancel</source>
-        <translation type="unfinished">취소</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="235"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>도움말</translation>
     </message>
 </context>
 <context>
@@ -1091,12 +1093,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>그룹 탭</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>그룹 목록을 엽니다</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -1240,47 +1242,47 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>골든딕 도움말</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>홈</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished">뒤로</translation>
+        <translation>뒤로</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished">앞으로</translation>
+        <translation>앞으로</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">확대</translation>
+        <translation>확대</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">축소</translation>
+        <translation>축소</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">보통 </translation>
+        <translation>보통 </translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>내용</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>목록</translation>
     </message>
 </context>
 <context>
@@ -2506,7 +2508,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="299"/>
         <source>Found in Dictionaries:</source>
-        <translation>사전 검색 결과:</translation>
+        <translation>검색된 사전:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="196"/>
@@ -2622,7 +2624,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3913"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 표제어</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3915"/>
@@ -2643,7 +2645,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="871"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>사전에서 찾을 문자열. 와일드카드 &apos;*&apos;, &apos;?&apos; 괄호문자 &apos;[...]&apos;가 허용됩니다.
+&apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; 기호를 찾으려면 각각 &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos;를 사용하십시오</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1397"/>
@@ -2760,7 +2763,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="136"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>검색</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="304"/>
@@ -2800,7 +2803,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="591"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>골든딕 도움말</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="594"/>
@@ -2902,22 +2905,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="566"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>페이지 내 검색</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="569"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="577"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>전문검색</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="580"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="471"/>
@@ -3097,12 +3100,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>사전 표제어</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="285"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>사용중: %1, 사용중지: %2</translation>
     </message>
 </context>
 <context>
@@ -3318,7 +3321,7 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>도움말 언어</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -3503,37 +3506,37 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="986"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>시스템 Proxy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="993"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 Proxy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1000"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>사용자 설정</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1180"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>전문검색</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1199"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>전문검색을 허용:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>항목수가 다음을 초과시 검색하지 않음 : </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1293"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>항목 (0 - 무제한)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1521"/>
@@ -3796,7 +3799,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <location filename="../preferences.ui" line="1102"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>사이트 외부 자료 허용 안함(대부분의 광고 차단)</translation>
+        <translation>사이트 외부 자료 허용 안함(대부분의 광고를 차단함)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1109"/>
@@ -4422,12 +4425,12 @@ GBK와 GB18030 → %GDGBK%, Shift-JIS → %GDSHIFTJIS%</translation>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT 서버</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT 서버:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
