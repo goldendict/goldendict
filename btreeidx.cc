@@ -283,14 +283,15 @@ void BtreeWordSearchRequest::run()
 
       if( escaped )
       {
-        folded.push_back( ch );
+        if( bNoLetters || ( ch != L'*' && ch != L'?' && ch != L'[' && ch != L']' ) )
+          folded.push_back( ch );
         escaped = false;
         continue;
       }
 
       if( ch == L'\\' )
       {
-        if( bNoLetters )
+        if( bNoLetters || folded.empty() )
         {
           escaped = true;
           continue;
@@ -368,13 +369,13 @@ void BtreeWordSearchRequest::run()
           {
             if( useWildcards )
             {
-              wstring word = Utf8::decode( chain[ x ].word );
+              wstring word = Utf8::decode( chain[ x ].prefix + chain[ x ].word );
               wstring result = Folding::applyDiacriticsOnly( word );
               if( result.size() >= (wstring::size_type)minMatchLength
                   && regexp.indexIn( gd::toQString( result ) ) == 0
                   && regexp.matchedLength() >= minMatchLength )
               {
-                addMatch( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) );
+                addMatch( word );
               }
             }
             else
