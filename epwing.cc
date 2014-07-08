@@ -42,7 +42,7 @@ namespace {
 enum
 {
   Signature = 0x58575045, // EPWX on little-endian, XWPE on big-endian
-  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -139,6 +139,12 @@ public:
               && !fts.disabledTypes.contains( "EPWING", Qt::CaseInsensitive )
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
+
+  static int japaneseWriting( gd::wchar ch );
+
+  static bool isSign( gd::wchar ch );
+
+  static bool isJapanesePunctiation( gd::wchar ch );
 
 protected:
 
@@ -691,6 +697,52 @@ sptr< Dictionary::DataRequest > EpwingDictionary::getSearchResults( QString cons
   return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
+int EpwingDictionary::japaneseWriting( gd::wchar ch )
+{
+  if( ( ch >= 0x30A0 && ch <= 0x30FF )
+      || ( ch >= 0x31F0 && ch <= 0x31FF )
+      || ( ch >= 0x3200 && ch <= 0x32FF )
+      || ( ch >= 0xFF00 && ch <= 0xFFEF )
+      || ( ch == 0x1B000 ) )
+    return 1; // Katakana
+  else
+  if( ( ch >= 0x3040 && ch <= 0x309F )
+      || ( ch == 0x1B001 ) )
+    return 2; // Hiragana
+  else
+  if( ( ch >= 0x4E00 && ch <= 0x9FAF )
+      || ( ch >= 0x3400 && ch <= 0x4DBF ) )
+    return 3; // Kanji
+
+  return 0;
+}
+
+bool EpwingDictionary::isSign( gd::wchar ch )
+{
+  switch( ch )
+  {
+    case 0x002B: // PLUS SIGN
+    case 0x003C: // LESS-THAN SIGN
+    case 0x003D: // EQUALS SIGN
+    case 0x003E: // GREATER-THAN SIGN
+    case 0x00AC: // NOT SIGN
+    case 0xFF0B: // FULLWIDTH PLUS SIGN
+    case 0xFF1C: // FULLWIDTH LESS-THAN SIGN
+    case 0xFF1D: // FULLWIDTH EQUALS SIGN
+    case 0xFF1E: // FULLWIDTH GREATER-THAN SIGN
+    case 0xFFE2: // FULLWIDTH NOT SIGN
+      return true;
+
+    default:
+      return false;
+  }
+}
+
+bool EpwingDictionary::isJapanesePunctiation( gd::wchar ch )
+{
+  return ch >= 0x3000 && ch <= 0x303F;
+}
+
 } // anonymous namespace
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
@@ -788,6 +840,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             dict.getFirstHeadword( head );
 
             int wordCount = 0;
+            int articleCount = 0;
 
             for( ; ; )
             {
@@ -797,11 +850,97 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 chunks.addToBlock( &head.page, sizeof( head.page ) );
                 chunks.addToBlock( &head.offset, sizeof( head.offset ) );
 
-                indexedWords.addWord( gd::toWString( head.headword ), offset );
+                wstring hw = gd::toWString( head.headword );
 
+                indexedWords.addWord( hw, offset );
                 wordCount++;
-              }
+                articleCount++;
 
+                vector< wstring > words;
+
+                // Parse combined kanji/katakana/hiragana headwords
+
+                int w_prev = 0;
+                wstring word;
+                for( wstring::size_type n = 0; n < hw.size(); n++ )
+                {
+                  gd::wchar ch = hw[ n ];
+
+                  if( Folding::isPunct( ch ) || Folding::isWhitespace( ch )
+                      || EpwingDictionary::isSign( ch ) || EpwingDictionary::isJapanesePunctiation( ch ) )
+                    continue;
+
+                  int w = EpwingDictionary::japaneseWriting( ch );
+
+                  if( w > 0 )
+                  {
+                    // Store only separated words
+                    gd::wchar ch_prev = 0;
+                    if( n )
+                      ch_prev = hw[ n - 1 ];
+                    bool needStore = ( n == 0
+                                       || Folding::isPunct( ch_prev )
+                                       || Folding::isWhitespace( ch_prev )
+                                       || EpwingDictionary::isJapanesePunctiation( ch ) );
+
+                    word.push_back( ch );
+                    w_prev = w;
+                    wstring::size_type i;
+                    for(  i = n + 1; i < hw.size(); i++ )
+                    {
+                      ch = hw[ i ];
+                      if( Folding::isPunct( ch ) || Folding::isWhitespace( ch )
+                          || EpwingDictionary::isJapanesePunctiation( ch ) )
+                        break;
+                      w = EpwingDictionary::japaneseWriting( ch );
+                      if( w != w_prev )
+                        break;
+                      word.push_back( ch );
+                    }
+
+                    if( needStore )
+                    {
+                      if( i >= hw.size() || Folding::isPunct( ch ) || Folding::isWhitespace( ch )
+                          || EpwingDictionary::isJapanesePunctiation( ch ) )
+                        words.push_back( word );
+                    }
+                    word.clear();
+
+                    if( i < hw.size() )
+                      n = i;
+                    else
+                      break;
+                  }
+                }
+
+                if( words.size() > 1 )
+                {
+                  // Allow only one word in every charset
+
+                  size_t n;
+                  int writings[ 4 ];
+                  memset( writings, 0, sizeof(writings) );
+
+                  for( n = 0; n < words.size(); n++ )
+                  {
+                    int w = EpwingDictionary::japaneseWriting( words[ n ][ 0 ] );
+                    if( writings[ w ] )
+                      break;
+                    else
+                      writings[ w ] = 1;
+                  }
+
+                  if( n >= words.size() )
+                  {
+                    for( n = 0; n < words.size(); n++ )
+                    {
+                      indexedWords.addWord( words[ n ], offset );
+                      wordCount++;
+                    }
+                  }
+                }
+
+              }
               if( !dict.getNextHeadword( head ) )
                 break;
             }
@@ -827,7 +966,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             idxHeader.formatVersion = CurrentFormatVersion;
 
             idxHeader.wordCount = wordCount;
-            idxHeader.articleCount = wordCount;
+            idxHeader.articleCount = articleCount;
 
             idx.rewind();
 
