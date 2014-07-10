@@ -119,8 +119,6 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
   return result;
 }
 
-class BtreeWordSearchRequest;
-  
 class BtreeWordSearchRunnable: public QRunnable
 {
   BtreeWordSearchRequest & r;
@@ -141,71 +139,33 @@ public:
   virtual void run();
 };
 
-class BtreeWordSearchRequest: public Dictionary::WordSearchRequest
-{
-  friend class BtreeWordSearchRunnable;
-
-  BtreeDictionary & dict;
-  wstring str;
-  unsigned long maxResults;
-  unsigned minLength;
-  int maxSuffixVariation;
-  bool allowMiddleMatches;
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
-
-public:
-
-  BtreeWordSearchRequest( BtreeDictionary & dict_,
-                          wstring const & str_,
-                          unsigned minLength_,
-                          int maxSuffixVariation_,
-                          bool allowMiddleMatches_,
-                          unsigned long maxResults_ ):
-    dict( dict_ ), str( str_ ),
-    maxResults( maxResults_ ),
-    minLength( minLength_ ),
-    maxSuffixVariation( maxSuffixVariation_ ),
-    allowMiddleMatches( allowMiddleMatches_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new BtreeWordSearchRunnable( *this, hasExited ) );
-  }
-
-  void run(); // Run from another thread by BtreeWordSearchRunnable
-
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
-  
-  ~BtreeWordSearchRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
-};
-
 void BtreeWordSearchRunnable::run()
 {
   r.run();
 }
 
-void BtreeWordSearchRequest::run()
+BtreeWordSearchRequest::BtreeWordSearchRequest( BtreeDictionary & dict_,
+                                                wstring const & str_,
+                                                unsigned minLength_,
+                                                int maxSuffixVariation_,
+                                                bool allowMiddleMatches_,
+                                                unsigned long maxResults_,
+                                                bool startRunnable ):
+  dict( dict_ ), str( str_ ),
+  maxResults( maxResults_ ),
+  minLength( minLength_ ),
+  maxSuffixVariation( maxSuffixVariation_ ),
+  allowMiddleMatches( allowMiddleMatches_ )
 {
-  if ( isCancelled )
+  if( startRunnable )
   {
-    finish();
-    return;
+    QThreadPool::globalInstance()->start(
+      new BtreeWordSearchRunnable( *this, hasExited ) );
   }
+}
 
-  if ( dict.ensureInitDone().size() )
-  {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
-    finish();
-    return;
-  }
-  
+void BtreeWordSearchRequest::findMatches()
+{
   QRegExp regexp;
   bool useWildcards = false;
   if( allowMiddleMatches )
@@ -455,8 +415,32 @@ void BtreeWordSearchRequest::run()
   {
     gdWarning( "Index searching failed: \"%s\"\n", dict.getName().c_str() );
   }
+}
+
+void BtreeWordSearchRequest::run()
+{
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  if ( dict.ensureInitDone().size() )
+  {
+    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    finish();
+    return;
+  }
+
+  findMatches();
 
   finish();
+}
+
+BtreeWordSearchRequest::~BtreeWordSearchRequest()
+{
+  isCancelled.ref();
+  hasExited.acquire();
 }
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(

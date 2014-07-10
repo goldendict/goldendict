@@ -6,6 +6,8 @@
 
 #include <QByteArray>
 #include <QDir>
+#include <QRunnable>
+#include <QSemaphore>
 
 #include <map>
 #include <set>
@@ -21,6 +23,7 @@
 #include "utf8.hh"
 #include "filetype.hh"
 #include "ftshelpers.hh"
+#include "btreeidx.hh"
 
 namespace Epwing {
 
@@ -146,6 +149,16 @@ public:
 
   static bool isJapanesePunctiation( gd::wchar ch );
 
+  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                             unsigned long )
+    throw( std::exception );
+
+  virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
+                                                              unsigned minLength,
+                                                              unsigned maxSuffixVariation,
+                                                              unsigned long maxResults )
+    throw( std::exception );
+
 protected:
 
   void loadIcon() throw();
@@ -154,6 +167,9 @@ private:
 
   /// Loads the article.
   void loadArticle( quint32 address, string & articleHeadword,
+                    string & articleText );
+
+  bool loadArticle( wstring const & word, string & articleHeadword,
                     string & articleText );
 
   void createCacheDirectory();
@@ -171,6 +187,7 @@ private:
 
   friend class EpwingArticleRequest;
   friend class EpwingResourceRequest;
+  friend class EpwingWordSearchRequest;
 };
 
 
@@ -298,6 +315,37 @@ void EpwingDictionary::loadArticle( quint32 address,
   string prefix( "<div class=\"epwing_text\">" );
 
   articleText = prefix + articleText + "</div>";
+}
+
+bool EpwingDictionary::loadArticle( wstring const & word,
+                                    string & articleHeadword,
+                                    string & articleText )
+{
+  int articlePage, articleOffset;
+
+  QString headword, text;
+
+  try
+  {
+    Mutex::Lock _( eBook.getLibMutex() );
+    if( !eBook.getArticlePos( gd::toQString( word ), articlePage, articleOffset ) )
+      return false;
+
+    eBook.getArticle( headword, text, articlePage, articleOffset, false );
+  }
+  catch( std::exception & e )
+  {
+    text = QString( "Article reading error: %1")
+           .arg( QString::fromUtf8( e.what() ) );
+  }
+
+  articleHeadword = string( headword.toUtf8().data() );
+  articleText = string( text.toUtf8().data() );
+
+  string prefix( "<div class=\"epwing_text\">" );
+
+  articleText = prefix + articleText + "</div>";
+  return true;
 }
 
 QString const& EpwingDictionary::getDescription()
@@ -514,9 +562,22 @@ void EpwingArticleRequest::run()
 
   if ( mainArticles.empty() && alternateArticles.empty() )
   {
-    // No such word
-    finish();
-    return;
+    // No such word, try to find it in the built-in dictionary index
+    try
+    {
+      string headword, articleText;
+      if( !dict.loadArticle( word, headword, articleText ) )
+      {
+        finish();
+        return;
+      }
+      mainArticles.insert( pair< wstring, pair< string, string > >(
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+        pair< string, string >( headword, articleText ) ) );
+    }
+    catch(...)
+    {
+    }
   }
 
   string result = "<span class=\"epwing_article\">";
@@ -741,6 +802,105 @@ bool EpwingDictionary::isSign( gd::wchar ch )
 bool EpwingDictionary::isJapanesePunctiation( gd::wchar ch )
 {
   return ch >= 0x3000 && ch <= 0x303F;
+}
+
+class EpwingWordSearchRequest;
+
+class EpwingWordSearchRunnable: public QRunnable
+{
+  EpwingWordSearchRequest & r;
+  QSemaphore & hasExited;
+
+public:
+
+  EpwingWordSearchRunnable( EpwingWordSearchRequest & r_,
+                            QSemaphore & hasExited_ ): r( r_ ),
+                                                       hasExited( hasExited_ )
+  {}
+
+  ~EpwingWordSearchRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run();
+};
+
+class EpwingWordSearchRequest: public BtreeIndexing::BtreeWordSearchRequest
+{
+  friend class EpwingWordSearchRunnable;
+
+  EpwingDictionary & edict;
+
+public:
+
+  EpwingWordSearchRequest( EpwingDictionary & dict_,
+                           wstring const & str_,
+                           unsigned minLength_,
+                           int maxSuffixVariation_,
+                           bool allowMiddleMatches_,
+                           unsigned long maxResults_ ):
+    BtreeWordSearchRequest( dict_, str_, minLength_, maxSuffixVariation_, allowMiddleMatches_, maxResults_, false ),
+    edict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new EpwingWordSearchRunnable( *this, hasExited ) );
+  }
+
+  virtual void findMatches();
+};
+
+void EpwingWordSearchRunnable::run()
+{
+  r.run();
+}
+
+void EpwingWordSearchRequest::findMatches()
+{
+  BtreeWordSearchRequest::findMatches();
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  while( matches.size() < maxResults )
+  {
+    QVector< QString > headwords;
+    {
+      Mutex::Lock _( edict.eBook.getLibMutex() );
+      if( isCancelled )
+        break;
+
+      if( !edict.eBook.getMatches( gd::toQString( str ), headwords ) )
+        break;
+    }
+
+    Mutex::Lock _( dataMutex );
+
+    for( int i = 0; i < headwords.size(); i++ )
+      addMatch( gd::toWString( headwords.at( i ) ) );
+
+    break;
+  }
+
+  finish();
+}
+
+sptr< Dictionary::WordSearchRequest > EpwingDictionary::prefixMatch(
+  wstring const & str, unsigned long maxResults )
+  throw( std::exception )
+{
+  return new EpwingWordSearchRequest( *this, str, 0, -1, true, maxResults );
+}
+
+sptr< Dictionary::WordSearchRequest > EpwingDictionary::stemmedMatch(
+  wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
+  unsigned long maxResults )
+  throw( std::exception )
+{
+  return new EpwingWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
+                                      false, maxResults );
 }
 
 } // anonymous namespace

@@ -1750,6 +1750,73 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
   return str.toUtf8();
 }
 
+bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
+{
+  QByteArray bword = codecEuc()->fromUnicode( word );
+  EB_Error_Code ret = eb_search_word( &book, bword.data() );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_search_word", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  EB_Hit hits[ 10 ];
+  int hitCount;
+  ret = eb_hit_list( &book, 10, hits, &hitCount );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_hit_list", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  for( int i = 0; i < hitCount; i++ )
+  {
+    QString headword;
+    if( readHeadword( hits[ i ].heading, headword, true ) )
+    {
+      fixHeadword( headword );
+      matches.push_back( headword );
+    }
+  }
+  return true;
+}
+
+bool EpwingBook::getArticlePos( QString word, int & page, int & offset )
+{
+  QByteArray bword = codecEuc()->fromUnicode( word );
+  EB_Error_Code ret = eb_search_exactword( &book, bword.data() );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_search_word", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  EB_Hit hits[ 10 ];
+  int hitCount;
+  ret = eb_hit_list( &book, 10, hits, &hitCount );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_hit_list", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  if( hitCount > 0 )
+  {
+    page = hits[ 0 ].text.page;
+    offset = hits[ 0 ].text.offset;
+    return true;
+  }
+  return false;
+}
+
 Mutex EpwingBook::libMutex;
 
 } // namespace Book
