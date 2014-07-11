@@ -325,19 +325,19 @@ between classic and school orthography in cyrillic)</source>
     <name>Dialog</name>
     <message>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>必須提供代理伺服器的驗證</translation>
     </message>
     <message>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>如果你要透過代理伺服器來存取，需要提供用戶名和密碼</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>用戶名：</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">密碼：</translation>
+        <translation>密碼：</translation>
     </message>
 </context>
 <context>
@@ -422,87 +422,91 @@ between classic and school orthography in cyrillic)</source>
     <name>DictHeadwords</name>
     <message>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋模式</translation>
     </message>
     <message>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>此部份決定如何解釋欲篩選的字串</translation>
     </message>
     <message>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>勾選後，大小寫就會視為不同</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>符合大小寫</translation>
     </message>
     <message>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>將標題字匯出至檔案</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>按下此按鈕，將篩選器套用至標題字列表</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>套用</translation>
     </message>
     <message>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>假如勾選的話，如果篩選器有任何變動，都會立即套用至標題字列表</translation>
     </message>
     <message>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>自動套用</translation>
     </message>
     <message>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>篩選器：</translation>
     </message>
     <message>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>篩選字串(固定字串、萬用字元或正規表達式)</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>文字</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>萬用字元</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>正規表達式</translation>
     </message>
     <message>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>獨特標題字總數： %1,已篩選： %2</translation>
     </message>
     <message>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>將標題字儲存成檔案</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">文字檔 (*.txt);;所有檔案 (*.*)</translation>
+        <translation>文字檔 (*.txt);;所有檔案 (*.*)</translation>
     </message>
     <message>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出標題字...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -547,11 +551,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示所有獨特的字典標題字</translation>
     </message>
     <message>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>標題字</translation>
     </message>
 </context>
 <context>
@@ -565,52 +569,54 @@ between classic and school orthography in cyrillic)</source>
     <name>DictServer</name>
     <message>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Url: </translation>
     </message>
     <message>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>資料庫：</translation>
     </message>
     <message>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋策略：</translation>
     </message>
 </context>
 <context>
     <name>DictServersModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">已啟用</translation>
+        <translation>已啟用</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">名稱</translation>
+        <translation>名稱</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished">位址</translation>
+        <translation>位址</translation>
     </message>
     <message>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>資料庫</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished">圖示</translation>
+        <translation>圖示</translation>
     </message>
     <message>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>資料庫的逗號分隔列表
+(空字串或&quot;*&quot;複合所有的資料庫)</translation>
     </message>
     <message>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>策略</translation>
     </message>
     <message>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋策略的的逗號分隔列表
+(空字串代表 &quot;prefix&quot; 策略)</translation>
     </message>
 </context>
 <context>
@@ -645,7 +651,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>字典標頭</translation>
     </message>
 </context>
 <context>
@@ -694,69 +700,69 @@ between classic and school orthography in cyrillic)</source>
     <name>FTS::FtsIndexing</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>全文搜尋</translation>
     </message>
     <message>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>全字(Whoe words)</translation>
     </message>
     <message>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>純文字</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>萬用字元</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>正規表達式</translation>
     </message>
     <message>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>文字間最大距離 (%1-%2)</translation>
     </message>
     <message>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>每個字典的條目上限(%1-%2)：</translation>
     </message>
     <message>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>找到的條目：</translation>
     </message>
     <message>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>索引中：</translation>
     </message>
     <message>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋列至少必須包括</translation>
     </message>
     <message>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>或更多文字</translation>
     </message>
     <message>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有字典可用於全文搜尋</translation>
     </message>
     <message>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋的字串中，如果有中日韓(CJK)字母，就無法相容&quot;全字(Whole words)&quot; 和 &quot;純文字&quot;的搜尋模式</translation>
     </message>
 </context>
 <context>
     <name>FTS::Indexing</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
@@ -794,43 +800,47 @@ between classic and school orthography in cyrillic)</source>
     <name>FullTextSearchDialog</name>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>符合大小寫</translation>
     </message>
     <message>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>模式：</translation>
     </message>
     <message>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>找到條目：</translation>
     </message>
     <message>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>群組中可用的字典：</translation>
     </message>
     <message>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>等候索引：</translation>
     </message>
     <message>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>總共：</translation>
     </message>
     <message>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>已索引：</translation>
     </message>
     <message>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>正在索引：無</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -977,10 +987,49 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>群組分頁</translation>
     </message>
     <message>
         <source>Open groups list</source>
+        <translation>打開字典群組列表</translation>
+    </message>
+</context>
+<context>
+    <name>Help::HelpWindow</name>
+    <message>
+        <source>GoldenDict help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished">放大</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished">縮小</translation>
+    </message>
+    <message>
+        <source>Normal Size</source>
+        <translation type="unfinished">正常大小</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1901,7 +1950,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>字典數：%1，文章數：%2，詞條數：%3</translation>
+        <translation>字典數：%1，條目數：%2，單字數：%3</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -1937,7 +1986,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Can&apos;t save article: %1</source>
-        <translation>無法儲存文章：%1</translation>
+        <translation>無法儲存條目：%1</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -1961,11 +2010,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Save Article</source>
-        <translation>儲存文章(&amp;S)</translation>
+        <translation>儲存條目(&amp;S)</translation>
     </message>
     <message>
         <source>Save Article As</source>
-        <translation>文章另存新檔</translation>
+        <translation>條目另存新檔</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
@@ -2084,7 +2133,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Save Article</source>
-        <translation>儲存文章</translation>
+        <translation>儲存條目</translation>
     </message>
     <message>
         <source>Skip This Release</source>
@@ -2100,7 +2149,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Print Article</source>
-        <translation>列印文章</translation>
+        <translation>列印條目</translation>
     </message>
     <message>
         <source>No printer is available. Please install one first.</source>
@@ -2332,31 +2381,36 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>字典標頭</translation>
     </message>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>欲搜尋的字串。可使用萬用字元  &apos;*&apos;，&apos;?&apos; 和字元集合&apos;[...]&apos;。
+若想尋找&apos;*&apos;、&apos;?&apos;、&apos;[&apos;、&apos;]&apos;等符號，請分別使用 &apos;*&apos;、&apos;?&apos;、&apos;[&apos;、&apos;]&apos;</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>搜尋</translation>
     </message>
     <message>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>在頁面中尋找</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>全文搜尋</translation>
     </message>
     <message>
         <source>Ctrl+Shift+F</source>
+        <translation>Ctrl+Shift+F</translation>
+    </message>
+    <message>
+        <source>GoldenDict reference</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2408,7 +2462,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <name>OrderAndProps</name>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Form</source>
@@ -2424,7 +2478,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Total articles:</source>
-        <translation>文章總數：</translation>
+        <translation>條目總數：</translation>
     </message>
     <message>
         <source>Translates from:</source>
@@ -2468,6 +2522,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary headwords</source>
+        <translation>字典標頭</translation>
+    </message>
+    <message>
+        <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3069,30 +3127,34 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>系統的代理伺服器</translation>
     </message>
     <message>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>自訂代理伺服器</translation>
     </message>
     <message>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>自訂設定</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>全文搜尋</translation>
     </message>
     <message>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>允許下列的全文搜尋：</translation>
     </message>
     <message>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>不要在超過</translation>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
+        <translation>條項目的字典中尋找(0 - 不限)</translation>
+    </message>
+    <message>
+        <source>Help language</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3631,11 +3693,11 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Dict 伺服器</translation>
     </message>
     <message>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT 伺服器</translation>
     </message>
 </context>
 <context>

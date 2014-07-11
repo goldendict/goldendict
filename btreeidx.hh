@@ -149,8 +149,6 @@ private:
                            // since all searches always start with it.
 };
 
-class BtreeWordSearchRequest;
-
 /// A base for the dictionary that utilizes a btree index build using
 /// buildIndex() function declared below.
 class BtreeDictionary: public Dictionary::Class, public BtreeIndex
@@ -163,7 +161,7 @@ public:
   virtual Dictionary::Features getFeatures() const throw()
   { return Dictionary::SuitableForCompoundSearching; }
 
-  /// This function does the search using the btree index. Derivatives
+  /// This function does the search using the btree index. Derivatives usually
   /// need not to implement this function.
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
@@ -201,6 +199,41 @@ protected:
 
   friend class BtreeWordSearchRequest;
   friend class FTSResultsRequest;
+};
+
+class BtreeWordSearchRequest: public Dictionary::WordSearchRequest
+{
+  friend class BtreeWordSearchRunnable;
+protected:
+  BtreeDictionary & dict;
+  wstring str;
+  unsigned long maxResults;
+  unsigned minLength;
+  int maxSuffixVariation;
+  bool allowMiddleMatches;
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  BtreeWordSearchRequest( BtreeDictionary & dict_,
+                          wstring const & str_,
+                          unsigned minLength_,
+                          int maxSuffixVariation_,
+                          bool allowMiddleMatches_,
+                          unsigned long maxResults_,
+                          bool startRunnable = true );
+
+  virtual void findMatches();
+
+  void run(); // Run from another thread by BtreeWordSearchRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+
+  ~BtreeWordSearchRequest();
 };
 
 // Everything below is for building the index data.

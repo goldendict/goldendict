@@ -29,6 +29,7 @@ private slots:
   void filterChanged( QString const & filterText );
   void dictListFocused();
   void inactiveDictListFocused();
+  void showDictNumbers();
 
 private:
 

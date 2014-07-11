@@ -176,6 +176,7 @@ struct FullTextSearch
 struct Preferences
 {
   QString interfaceLanguage; // Empty value corresponds to system default
+  QString helpLanguage; // Empty value corresponds to interface language
   QString displayStyle; // Empty value corresponds to the default one
   bool newTabsOpenAfterCurrentOne;
   bool newTabsOpenInBackground;
@@ -225,6 +226,7 @@ struct Preferences
   bool hideGoldenDictHeader;
 
   qreal zoomFactor;
+  qreal helpZoomFactor;
   int wordsZoomLevel;
 
   unsigned maxStringsInHistory;
@@ -520,6 +522,8 @@ struct Class
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
   QByteArray inspectorGeometry; // Geometry of WebKit inspector window
+  QByteArray helpWindowGeometry; // Geometry of help window
+  QByteArray helpSplitterState; // Geometry of help splitter
 
   QString historyExportPath; // Path for export/import history
   QString resourceSavePath;  // Path to save images/audio
@@ -637,6 +641,9 @@ QString getProgramDataDir() throw();
 
 /// Returns the directory storing program localizized files (.qm).
 QString getLocDir() throw();
+
+/// Returns the directory storing program help files (.qch).
+QString getHelpDir() throw();
 
 /// Returns true if the program is configured as a portable version. In that
 /// mode, all the settings and indices are kept in the program's directory.

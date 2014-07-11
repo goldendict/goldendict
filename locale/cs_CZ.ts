@@ -524,6 +524,10 @@ a školní ortografií v cyrilici)</translation>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>
@@ -852,6 +856,10 @@ a školní ortografií v cyrilici)</translation>
         <source>Cancel</source>
         <translation type="unfinished">Zrušit</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -1005,6 +1013,45 @@ a školní ortografií v cyrilici)</translation>
     </message>
     <message>
         <source>Open groups list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Help::HelpWindow</name>
+    <message>
+        <source>GoldenDict help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Zpět</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Vpřed</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished">Přiblížit</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished">Oddálit</translation>
+    </message>
+    <message>
+        <source>Normal Size</source>
+        <translation type="unfinished">Normální velikost</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3144,6 +3191,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Ctrl+Shift+F</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>GoldenDict reference</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -3201,7 +3252,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
@@ -3254,6 +3305,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3926,6 +3981,10 @@ Povolením této volby problém obejdete.</translation>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help language</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

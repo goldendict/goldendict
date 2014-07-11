@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "config.hh"
+#include "helpwindow.hh"
 #include "ui_preferences.h"
 
 /// Preferences dialog -- allows changing various program options.
@@ -12,9 +13,15 @@ class Preferences: public QDialog
 
   int prevInterfaceLanguage;
 
+  Help::HelpWindow * helpWindow;
+  Config::Class & cfg;
+  QAction helpAction;
+
 public:
 
-  Preferences( QWidget * parent, Config::Preferences const & );
+  Preferences( QWidget * parent, Config::Class & cfg_ );
+  ~Preferences()
+  { if( helpWindow ) delete helpWindow; }
 
   Config::Preferences getPreferences();
 
@@ -43,6 +50,9 @@ private slots:
   void on_useExternalPlayer_toggled( bool enabled );
 
   void customProxyToggled( bool );
+
+  void helpRequested();
+  void closeHelp();
 };
 
 #endif

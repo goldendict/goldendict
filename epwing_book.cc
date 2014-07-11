@@ -24,6 +24,8 @@
 #include <eb/binary.h>
 #include <eb/font.h>
 
+#define HitsBufferSize 512
+
 namespace Epwing {
 
 void initialize()
@@ -1748,6 +1750,105 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
   refCloseCount += 1;
 
   return str.toUtf8();
+}
+
+bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
+{
+  QByteArray bword = codecEuc()->fromUnicode( word );
+  EB_Error_Code ret = eb_search_word( &book, bword.data() );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_search_word", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  EB_Hit hits[ HitsBufferSize ];
+  int hitCount;
+  ret = eb_hit_list( &book, 10, hits, &hitCount );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_hit_list", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  QVector< int > pages, offsets;
+
+  for( int i = 0; i < hitCount; i++ )
+  {
+    bool same_article = false;
+    for( int n = 0; n < pages.size(); n++ )
+    {
+      if( pages.at( n ) == hits[ i ].text.page
+          && offsets.at( n ) == hits[ i ].text.offset )
+      {
+        same_article = true;
+        continue;
+      }
+    }
+    if( !same_article )
+    {
+      pages.push_back( hits[ i ].text.page );
+      offsets.push_back( hits[ i ].text.offset );
+
+      QString headword;
+      if( readHeadword( hits[ i ].heading, headword, true ) )
+      {
+        fixHeadword( headword );
+        matches.push_back( headword );
+      }
+    }
+  }
+  return true;
+}
+
+bool EpwingBook::getArticlePos( QString word, QVector< int > & pages, QVector< int > & offsets )
+{
+  QByteArray bword = codecEuc()->fromUnicode( word );
+  EB_Error_Code ret = eb_search_exactword( &book, bword.data() );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_search_word", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  EB_Hit hits[ HitsBufferSize ];
+  int hitCount;
+
+  ret = eb_hit_list( &book, HitsBufferSize, hits, &hitCount );
+  if( ret != EB_SUCCESS )
+  {
+    setErrorString( "eb_hit_list", ret );
+    gdWarning( "Epwing word search error: %s",
+                 error_string.toUtf8().data() );
+    return false;
+  }
+
+  for( int i = 0; i < hitCount; i++ )
+  {
+    bool same_article = false;
+    for( int n = 0; n < pages.size(); n++ )
+    {
+      if( pages.at( n ) == hits[ i ].text.page
+          && offsets.at( n ) == hits[ i ].text.offset )
+      {
+        same_article = true;
+        continue;
+      }
+    }
+    if( !same_article )
+    {
+      pages.push_back( hits[ i ].text.page );
+      offsets.push_back( hits[ i ].text.offset );
+    }
+  }
+
+  return !pages.empty();
 }
 
 Mutex EpwingBook::libMutex;

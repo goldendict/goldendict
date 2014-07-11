@@ -508,6 +508,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Cancel</source>
         <translation type="unfinished">Hủy bỏ</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictInfo</name>
@@ -835,6 +839,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Cancel</source>
         <translation type="unfinished">Hủy bỏ</translation>
     </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -984,6 +992,45 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open groups list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Help::HelpWindow</name>
+    <message>
+        <source>GoldenDict help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Trở lại</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Tiếp tục</translation>
+    </message>
+    <message>
+        <source>Zoom In</source>
+        <translation type="unfinished">Phóng to</translation>
+    </message>
+    <message>
+        <source>Zoom Out</source>
+        <translation type="unfinished">Thu nhỏ</translation>
+    </message>
+    <message>
+        <source>Normal Size</source>
+        <translation type="unfinished">Kích thước bình thường</translation>
+    </message>
+    <message>
+        <source>Content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Index</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2363,6 +2410,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Ctrl+Shift+F</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>GoldenDict reference</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -2419,10 +2470,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Sắp xếp Từ điển:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Các từ điển không hoạt động (đã tắt):</translation>
     </message>
@@ -2472,6 +2519,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary headwords</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3099,6 +3150,10 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help language</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

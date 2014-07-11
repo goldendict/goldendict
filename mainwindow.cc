@@ -126,6 +126,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , headwordsDlg( 0 )
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
+, helpWindow( 0 )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -620,6 +621,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( openConfigFolder() ) );
   connect( ui.about, SIGNAL( triggered() ),
            this, SLOT( showAbout() ) );
+  connect( ui.showReference, SIGNAL( triggered() ),
+           this, SLOT( showGDHelp() ) );
 
   connect( groupListInDock, SIGNAL( currentIndexChanged( QString const & ) ),
            this, SLOT( currentGroupChanged( QString const & ) ) );
@@ -1833,6 +1836,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
+  hideGDHelp();
+
   { // Limit existence of newCfg
 
   Config::Class newCfg = cfg;
@@ -1900,7 +1905,9 @@ void MainWindow::editPreferences()
   ftsIndexing.stopIndexing();
   ftsIndexing.clearDictionaries();
 
-  Preferences preferences( this, cfg.preferences );
+  Preferences preferences( this, cfg );
+
+  hideGDHelp();
 
   preferences.show();
 
@@ -1910,6 +1917,7 @@ void MainWindow::editPreferences()
 
     // These parameters are not set in dialog
     p.zoomFactor = cfg.preferences.zoomFactor;
+    p.helpZoomFactor = cfg.preferences.helpZoomFactor;
     p.wordsZoomLevel = cfg.preferences.wordsZoomLevel;
     p.hideMenubar = cfg.preferences.hideMenubar;
     p.searchInDock = cfg.preferences.searchInDock;
@@ -1951,6 +1959,10 @@ void MainWindow::editPreferences()
       // Signal setExpandOptionalParts reload all articles
       needReload = false;
     }
+
+    // See if we need to change help language
+    if( cfg.preferences.helpLanguage != p.helpLanguage )
+      closeGDHelp();
 
     for( int x = 0; x < ui.tabWidget->count(); ++x )
     {
@@ -2712,6 +2724,9 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 
     if( ftsDlg )
       ftsDlg->hide();
+
+    if( helpWindow )
+      helpWindow->hide();
   }
 
   if ( shown )
@@ -4046,6 +4061,62 @@ void MainWindow::closeFullTextSearchDialog()
     ftsDlg->stopSearch();
     delete ftsDlg;
     ftsDlg = 0;
+  }
+}
+
+void MainWindow::showGDHelp()
+{
+  if( !helpWindow )
+  {
+    helpWindow = new Help::HelpWindow( this, cfg );
+
+    if( helpWindow->getHelpEngine() )
+    {
+      connect( helpWindow, SIGNAL( needClose() ), this, SLOT( hideGDHelp() ) );
+      helpWindow->showHelpFor( "Content" );
+      helpWindow->show();
+    }
+    else
+    {
+      delete helpWindow;
+      helpWindow = 0;
+    }
+  }
+  else
+  {
+    helpWindow->show();
+    helpWindow->activateWindow();
+  }
+}
+
+void MainWindow::hideGDHelp()
+{
+  if( helpWindow )
+    helpWindow->hide();
+}
+
+void MainWindow::showGDHelpForID( QString const & id )
+{
+  if( !helpWindow )
+    showGDHelp();
+
+  if( helpWindow )
+  {
+    helpWindow->showHelpFor( id );
+    if( !helpWindow->isVisible() )
+    {
+      helpWindow->show();
+      helpWindow->activateWindow();
+    }
+  }
+}
+
+void MainWindow::closeGDHelp()
+{
+  if( helpWindow )
+  {
+    delete helpWindow;
+    helpWindow = 0;
   }
 }
 

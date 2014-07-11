@@ -29,6 +29,7 @@
 #include "wordlist.hh"
 #include "dictheadwords.hh"
 #include "fulltextsearch.hh"
+#include "helpwindow.hh"
 
 #ifdef HAVE_X11
 #include <fixx11h.h>
@@ -67,6 +68,9 @@ public:
   ~MainWindow();
 
   virtual void commitData( QSessionManager & );
+
+  void showGDHelpForID( QString const & id );
+  void closeGDHelp();
 
 public slots:
 
@@ -167,6 +171,8 @@ private:
   FTS::FtsIndexing ftsIndexing;
 
   FTS::FullTextSearchDialog * ftsDlg;
+
+  Help::HelpWindow * helpWindow;
 
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
@@ -426,6 +432,9 @@ private slots:
 
   void showFullTextSearchDialog();
   void closeFullTextSearchDialog();
+
+  void showGDHelp();
+  void hideGDHelp();
 
 signals:
   /// Set optional parts expand mode for all tabs

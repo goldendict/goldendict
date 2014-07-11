@@ -6,6 +6,8 @@
 
 #include <QByteArray>
 #include <QDir>
+#include <QRunnable>
+#include <QSemaphore>
 
 #include <map>
 #include <set>
@@ -21,6 +23,7 @@
 #include "utf8.hh"
 #include "filetype.hh"
 #include "ftshelpers.hh"
+#include "btreeidx.hh"
 
 namespace Epwing {
 
@@ -42,7 +45,7 @@ namespace {
 enum
 {
   Signature = 0x58575045, // EPWX on little-endian, XWPE on big-endian
-  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -140,6 +143,22 @@ public:
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
 
+  static int japaneseWriting( gd::wchar ch );
+
+  static bool isSign( gd::wchar ch );
+
+  static bool isJapanesePunctiation( gd::wchar ch );
+
+  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                             unsigned long )
+    throw( std::exception );
+
+  virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
+                                                              unsigned minLength,
+                                                              unsigned maxSuffixVariation,
+                                                              unsigned long maxResults )
+    throw( std::exception );
+
 protected:
 
   void loadIcon() throw();
@@ -148,6 +167,9 @@ private:
 
   /// Loads the article.
   void loadArticle( quint32 address, string & articleHeadword,
+                    string & articleText, int & articlePage, int & articleOffset );
+
+  void loadArticle( int articlePage, int articleOffset, string & articleHeadword,
                     string & articleText );
 
   void createCacheDirectory();
@@ -165,6 +187,7 @@ private:
 
   friend class EpwingArticleRequest;
   friend class EpwingResourceRequest;
+  friend class EpwingWordSearchRequest;
 };
 
 
@@ -256,7 +279,9 @@ void EpwingDictionary::removeDirectory( QString const & directory )
 
 void EpwingDictionary::loadArticle( quint32 address,
                                     string & articleHeadword,
-                                    string & articleText )
+                                    string & articleText,
+                                    int & articlePage,
+                                    int & articleOffset )
 {
   vector< char > chunk;
 
@@ -267,12 +292,36 @@ void EpwingDictionary::loadArticle( quint32 address,
     articleProps = chunks.getBlock( address, chunk );
   }
 
-  uint32_t articlePage, articleOffset;
-
   memcpy( &articlePage, articleProps, sizeof( articlePage ) );
   memcpy( &articleOffset, articleProps + sizeof( articlePage ),
           sizeof( articleOffset ) );
 
+  QString headword, text;
+
+  try
+  {
+    Mutex::Lock _( eBook.getLibMutex() );
+    eBook.getArticle( headword, text, articlePage, articleOffset, false );
+  }
+  catch( std::exception & e )
+  {
+    text = QString( "Article reading error: %1")
+           .arg( QString::fromUtf8( e.what() ) );
+  }
+
+  articleHeadword = string( headword.toUtf8().data() );
+  articleText = string( text.toUtf8().data() );
+
+  string prefix( "<div class=\"epwing_text\">" );
+
+  articleText = prefix + articleText + "</div>";
+}
+
+void EpwingDictionary::loadArticle( int articlePage,
+                                    int articleOffset,
+                                    string & articleHeadword,
+                                    string & articleText )
+{
   QString headword, text;
 
   try
@@ -464,6 +513,8 @@ void EpwingArticleRequest::run()
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
 
+  QVector< int > pages, offsets;
+
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
@@ -478,14 +529,19 @@ void EpwingArticleRequest::run()
     // Now grab that article
 
     string headword, articleText;
+    int articlePage, articleOffset;
 
     try
     {
-      dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
+      dict.loadArticle( chain[ x ].articleOffset, headword, articleText,
+                        articlePage, articleOffset );
     }
     catch(...)
     {
     }
+
+    pages.append( articlePage );
+    offsets.append( articleOffset );
 
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
@@ -504,6 +560,47 @@ void EpwingArticleRequest::run()
       pair< string, string >( headword, articleText ) ) );
 
     articlesIncluded.insert( chain[ x ].articleOffset );
+  }
+
+  // Also try to find word in the built-in dictionary index
+  try
+  {
+    string headword, articleText;
+
+    QVector< int > pg, off;
+    {
+      Mutex::Lock _( dict.eBook.getLibMutex() );
+      dict.eBook.getArticlePos( gd::toQString( word ), pg, off );
+    }
+
+    for( int i = 0; i < pg.size(); i++ )
+    {
+      bool already = false;
+      for( int n = 0; n < pages.size(); n++ )
+      {
+        if( pages.at( n ) == pg.at( i )
+            && abs( offsets.at( n ) - off.at( i ) ) <= 4 )
+        {
+          already = true;
+          break;
+        }
+      }
+
+      if( !already )
+      {
+        dict.loadArticle( pg.at( i ), off.at( i ), headword, articleText );
+
+        mainArticles.insert( pair< wstring, pair< string, string > >(
+          Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+          pair< string, string >( headword, articleText ) ) );
+
+        pages.append( pg.at( i ) );
+        offsets.append( off.at( i ) );
+      }
+    }
+  }
+  catch(...)
+  {
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
@@ -691,6 +788,151 @@ sptr< Dictionary::DataRequest > EpwingDictionary::getSearchResults( QString cons
   return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
 }
 
+int EpwingDictionary::japaneseWriting( gd::wchar ch )
+{
+  if( ( ch >= 0x30A0 && ch <= 0x30FF )
+      || ( ch >= 0x31F0 && ch <= 0x31FF )
+      || ( ch >= 0x3200 && ch <= 0x32FF )
+      || ( ch >= 0xFF00 && ch <= 0xFFEF )
+      || ( ch == 0x1B000 ) )
+    return 1; // Katakana
+  else
+  if( ( ch >= 0x3040 && ch <= 0x309F )
+      || ( ch == 0x1B001 ) )
+    return 2; // Hiragana
+  else
+  if( ( ch >= 0x4E00 && ch <= 0x9FAF )
+      || ( ch >= 0x3400 && ch <= 0x4DBF ) )
+    return 3; // Kanji
+
+  return 0;
+}
+
+bool EpwingDictionary::isSign( gd::wchar ch )
+{
+  switch( ch )
+  {
+    case 0x002B: // PLUS SIGN
+    case 0x003C: // LESS-THAN SIGN
+    case 0x003D: // EQUALS SIGN
+    case 0x003E: // GREATER-THAN SIGN
+    case 0x00AC: // NOT SIGN
+    case 0xFF0B: // FULLWIDTH PLUS SIGN
+    case 0xFF1C: // FULLWIDTH LESS-THAN SIGN
+    case 0xFF1D: // FULLWIDTH EQUALS SIGN
+    case 0xFF1E: // FULLWIDTH GREATER-THAN SIGN
+    case 0xFFE2: // FULLWIDTH NOT SIGN
+      return true;
+
+    default:
+      return false;
+  }
+}
+
+bool EpwingDictionary::isJapanesePunctiation( gd::wchar ch )
+{
+  return ch >= 0x3000 && ch <= 0x303F;
+}
+
+class EpwingWordSearchRequest;
+
+class EpwingWordSearchRunnable: public QRunnable
+{
+  EpwingWordSearchRequest & r;
+  QSemaphore & hasExited;
+
+public:
+
+  EpwingWordSearchRunnable( EpwingWordSearchRequest & r_,
+                            QSemaphore & hasExited_ ): r( r_ ),
+                                                       hasExited( hasExited_ )
+  {}
+
+  ~EpwingWordSearchRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run();
+};
+
+class EpwingWordSearchRequest: public BtreeIndexing::BtreeWordSearchRequest
+{
+  friend class EpwingWordSearchRunnable;
+
+  EpwingDictionary & edict;
+
+public:
+
+  EpwingWordSearchRequest( EpwingDictionary & dict_,
+                           wstring const & str_,
+                           unsigned minLength_,
+                           int maxSuffixVariation_,
+                           bool allowMiddleMatches_,
+                           unsigned long maxResults_ ):
+    BtreeWordSearchRequest( dict_, str_, minLength_, maxSuffixVariation_, allowMiddleMatches_, maxResults_, false ),
+    edict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new EpwingWordSearchRunnable( *this, hasExited ) );
+  }
+
+  virtual void findMatches();
+};
+
+void EpwingWordSearchRunnable::run()
+{
+  r.run();
+}
+
+void EpwingWordSearchRequest::findMatches()
+{
+  BtreeWordSearchRequest::findMatches();
+  if ( isCancelled )
+  {
+    finish();
+    return;
+  }
+
+  while( matches.size() < maxResults )
+  {
+    QVector< QString > headwords;
+    {
+      Mutex::Lock _( edict.eBook.getLibMutex() );
+      if( isCancelled )
+        break;
+
+      if( !edict.eBook.getMatches( gd::toQString( str ), headwords ) )
+        break;
+    }
+
+    Mutex::Lock _( dataMutex );
+
+    for( int i = 0; i < headwords.size(); i++ )
+      addMatch( gd::toWString( headwords.at( i ) ) );
+
+    break;
+  }
+
+  finish();
+}
+
+sptr< Dictionary::WordSearchRequest > EpwingDictionary::prefixMatch(
+  wstring const & str, unsigned long maxResults )
+  throw( std::exception )
+{
+  return new EpwingWordSearchRequest( *this, str, 0, -1, true, maxResults );
+}
+
+sptr< Dictionary::WordSearchRequest > EpwingDictionary::stemmedMatch(
+  wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
+  unsigned long maxResults )
+  throw( std::exception )
+{
+  return new EpwingWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
+                                      false, maxResults );
+}
+
 } // anonymous namespace
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
@@ -788,6 +1030,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             dict.getFirstHeadword( head );
 
             int wordCount = 0;
+            int articleCount = 0;
 
             for( ; ; )
             {
@@ -797,11 +1040,97 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 chunks.addToBlock( &head.page, sizeof( head.page ) );
                 chunks.addToBlock( &head.offset, sizeof( head.offset ) );
 
-                indexedWords.addWord( gd::toWString( head.headword ), offset );
+                wstring hw = gd::toWString( head.headword );
 
+                indexedWords.addWord( hw, offset );
                 wordCount++;
-              }
+                articleCount++;
 
+                vector< wstring > words;
+
+                // Parse combined kanji/katakana/hiragana headwords
+
+                int w_prev = 0;
+                wstring word;
+                for( wstring::size_type n = 0; n < hw.size(); n++ )
+                {
+                  gd::wchar ch = hw[ n ];
+
+                  if( Folding::isPunct( ch ) || Folding::isWhitespace( ch )
+                      || EpwingDictionary::isSign( ch ) || EpwingDictionary::isJapanesePunctiation( ch ) )
+                    continue;
+
+                  int w = EpwingDictionary::japaneseWriting( ch );
+
+                  if( w > 0 )
+                  {
+                    // Store only separated words
+                    gd::wchar ch_prev = 0;
+                    if( n )
+                      ch_prev = hw[ n - 1 ];
+                    bool needStore = ( n == 0
+                                       || Folding::isPunct( ch_prev )
+                                       || Folding::isWhitespace( ch_prev )
+                                       || EpwingDictionary::isJapanesePunctiation( ch ) );
+
+                    word.push_back( ch );
+                    w_prev = w;
+                    wstring::size_type i;
+                    for(  i = n + 1; i < hw.size(); i++ )
+                    {
+                      ch = hw[ i ];
+                      if( Folding::isPunct( ch ) || Folding::isWhitespace( ch )
+                          || EpwingDictionary::isJapanesePunctiation( ch ) )
+                        break;
+                      w = EpwingDictionary::japaneseWriting( ch );
+                      if( w != w_prev )
+                        break;
+                      word.push_back( ch );
+                    }
+
+                    if( needStore )
+                    {
+                      if( i >= hw.size() || Folding::isPunct( ch ) || Folding::isWhitespace( ch )
+                          || EpwingDictionary::isJapanesePunctiation( ch ) )
+                        words.push_back( word );
+                    }
+                    word.clear();
+
+                    if( i < hw.size() )
+                      n = i;
+                    else
+                      break;
+                  }
+                }
+
+                if( words.size() > 1 )
+                {
+                  // Allow only one word in every charset
+
+                  size_t n;
+                  int writings[ 4 ];
+                  memset( writings, 0, sizeof(writings) );
+
+                  for( n = 0; n < words.size(); n++ )
+                  {
+                    int w = EpwingDictionary::japaneseWriting( words[ n ][ 0 ] );
+                    if( writings[ w ] )
+                      break;
+                    else
+                      writings[ w ] = 1;
+                  }
+
+                  if( n >= words.size() )
+                  {
+                    for( n = 0; n < words.size(); n++ )
+                    {
+                      indexedWords.addWord( words[ n ], offset );
+                      wordCount++;
+                    }
+                  }
+                }
+
+              }
               if( !dict.getNextHeadword( head ) )
                 break;
             }
@@ -827,7 +1156,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             idxHeader.formatVersion = CurrentFormatVersion;
 
             idxHeader.wordCount = wordCount;
-            idxHeader.articleCount = wordCount;
+            idxHeader.articleCount = articleCount;
 
             idx.rewind();
 

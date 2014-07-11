@@ -3,6 +3,7 @@
 
 #include "dictheadwords.hh"
 #include "gddebug.hh"
+#include "mainwindow.hh"
 
 #include <QRegExp>
 #include <QDir>
@@ -17,6 +18,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   QDialog(parent)
 , cfg( cfg_ )
 , dict( dict_ )
+, helpAction( this )
 {
   ui.setupUi( this );
 
@@ -82,6 +84,17 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   connect( proxy, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
            this, SLOT( showHeadwordsNumber() ) );
+
+  connect( ui.helpButton, SIGNAL( clicked() ),
+           this, SLOT( helpRequested() ) );
+
+  helpAction.setShortcut( QKeySequence( "F1" ) );
+  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+
+  connect( &helpAction, SIGNAL( triggered() ),
+           this, SLOT( helpRequested() ) );
+
+  addAction( &helpAction );
 
   ui.headersListView->installEventFilter( this );
 
@@ -303,4 +316,11 @@ void DictHeadwords::saveHeadersToFile()
 
   gdWarning( "Headers export error: %s", file.errorString().toUtf8().data() );
   file.close();
+}
+
+void DictHeadwords::helpRequested()
+{
+  MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
+  if( mainWindow )
+    mainWindow->showGDHelpForID( "Dictionary headwords" );
 }

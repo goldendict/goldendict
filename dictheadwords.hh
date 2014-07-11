@@ -7,11 +7,13 @@
 #include <QStringList>
 #include <QStringListModel>
 #include <QSortFilterProxyModel>
+#include <QAction>
 
 #include "config.hh"
 #include "ui_dictheadwords.h"
 #include "dictionary.hh"
 #include "delegate.hh"
+#include "helpwindow.hh"
 
 class DictHeadwords : public QDialog
 {
@@ -32,6 +34,8 @@ protected:
   QSortFilterProxyModel * proxy;
   WordListItemDelegate * delegate;
 
+  QAction helpAction;
+
   void saveHeadersToFile();
   bool eventFilter( QObject * obj, QEvent * ev );
 
@@ -47,6 +51,7 @@ private slots:
   void autoApplyStateChanged( int state );
   void showHeadwordsNumber();
   virtual void reject();
+  void helpRequested();
 
 signals:
   void headwordSelected( QString const & );

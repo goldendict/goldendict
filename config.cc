@@ -123,6 +123,7 @@ Preferences::Preferences():
   enableWebPlugins( false ),
   hideGoldenDictHeader( false ),
   zoomFactor( 1 ),
+  helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
   maxStringsInHistory( 500 ),
   storeHistory( 1 ),
@@ -683,6 +684,7 @@ Class load() throw( exError )
   if ( !preferences.isNull() )
   {
     c.preferences.interfaceLanguage = preferences.namedItem( "interfaceLanguage" ).toElement().text();
+    c.preferences.helpLanguage = preferences.namedItem( "helpLanguage" ).toElement().text();
     c.preferences.displayStyle = preferences.namedItem( "displayStyle" ).toElement().text();
     c.preferences.newTabsOpenAfterCurrentOne = ( preferences.namedItem( "newTabsOpenAfterCurrentOne" ).toElement().text() == "1" );
     c.preferences.newTabsOpenInBackground = ( preferences.namedItem( "newTabsOpenInBackground" ).toElement().text() == "1" );
@@ -707,6 +709,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "zoomFactor" ).isNull() )
       c.preferences.zoomFactor = preferences.namedItem( "zoomFactor" ).toElement().text().toDouble();
+
+    if ( !preferences.namedItem( "helpZoomFactor" ).isNull() )
+      c.preferences.helpZoomFactor = preferences.namedItem( "helpZoomFactor" ).toElement().text().toDouble();
 
     if ( !preferences.namedItem( "wordsZoomLevel" ).isNull() )
       c.preferences.wordsZoomLevel = preferences.namedItem( "wordsZoomLevel" ).toElement().text().toInt();
@@ -866,6 +871,16 @@ Class load() throw( exError )
 
   if ( !mainWindowGeometry.isNull() )
     c.mainWindowGeometry = QByteArray::fromBase64( mainWindowGeometry.toElement().text().toLatin1() );
+
+  QDomNode helpWindowGeometry = root.namedItem( "helpWindowGeometry" );
+
+  if ( !helpWindowGeometry.isNull() )
+    c.helpWindowGeometry = QByteArray::fromBase64( helpWindowGeometry.toElement().text().toLatin1() );
+
+  QDomNode helpSplitterState = root.namedItem( "helpSplitterState" );
+
+  if ( !helpSplitterState.isNull() )
+    c.helpSplitterState = QByteArray::fromBase64( helpSplitterState.toElement().text().toLatin1() );
 
 #ifdef Q_OS_WIN
   QDomNode maximizedMainWindowGeometry = root.namedItem( "maximizedMainWindowGeometry" );
@@ -1425,6 +1440,10 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.interfaceLanguage ) );
     preferences.appendChild( opt );
 
+    opt = dd.createElement( "helpLanguage" );
+    opt.appendChild( dd.createTextNode( c.preferences.helpLanguage ) );
+    preferences.appendChild( opt );
+
     opt = dd.createElement( "displayStyle" );
     opt.appendChild( dd.createTextNode( c.preferences.displayStyle ) );
     preferences.appendChild( opt );
@@ -1479,6 +1498,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "zoomFactor" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.zoomFactor ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "helpZoomFactor" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.helpZoomFactor ) ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "wordsZoomLevel" );
@@ -1739,6 +1762,14 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.mainWindowGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
+    opt = dd.createElement( "helpWindowGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.helpWindowGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "helpSplitterState" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.helpSplitterState.toBase64() ) ) );
+    root.appendChild( opt );
+
 #ifdef Q_OS_WIN
     {
       QDomElement maximizedMainWindowGeometry = dd.createElement( "maximizedMainWindowGeometry" );
@@ -1939,6 +1970,14 @@ QString getLocDir() throw()
     return getProgramDataDir() + "/locale";
   else
     return QCoreApplication::applicationDirPath() + "/locale";
+}
+
+QString getHelpDir() throw()
+{
+  if ( QDir( getProgramDataDir() ).cd( "help" ) )
+    return getProgramDataDir() + "/help";
+  else
+    return QCoreApplication::applicationDirPath() + "/help";
 }
 
 bool isPortableVersion() throw()

@@ -4,11 +4,16 @@
 #include "langcoder.hh"
 #include <QMessageBox>
 #include "broken_xrecord.hh"
+#include "mainwindow.hh"
 
 
-Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
+Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
+, helpWindow( 0 )
+, cfg( cfg_ )
+, helpAction( this )
 {
+  Config::Preferences const & p = cfg_.preferences;
   ui.setupUi( this );
 
   connect( ui.enableScanPopup, SIGNAL( toggled( bool ) ),
@@ -36,6 +41,17 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
            this, SLOT( sideShiftClicked( bool ) ) );
   connect( ui.rightShift, SIGNAL( clicked( bool ) ),
            this, SLOT( sideShiftClicked( bool ) ) );
+
+  connect( ui.buttonBox, SIGNAL( helpRequested() ),
+           this, SLOT( helpRequested() ) );
+
+  helpAction.setShortcut( QKeySequence( "F1" ) );
+  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+
+  connect( &helpAction, SIGNAL( triggered() ),
+           this, SLOT( helpRequested() ) );
+
+  addAction( &helpAction );
 
   // Load values into form
 
@@ -74,6 +90,49 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
     {
       ui.interfaceLanguage->setCurrentIndex( x );
       prevInterfaceLanguage = x;
+      break;
+    }
+
+  // Fill help languages combobox
+
+  ui.helpLanguage->addItem( tr( "Default" ), QString() );
+
+  // See which helps do we have
+
+  QStringList availHelps = QDir( Config::getHelpDir() ).entryList( QStringList( "*.qch" ),
+                                                                 QDir::Files );
+
+  QMap< QString, QPair< QIcon, QString > > sortedHelps;
+
+  for( QStringList::iterator i = availHelps.begin(); i != availHelps.end(); ++i )
+  {
+    QString loc = i->mid( 7, i->length() - 11 );
+    QString lang = loc.mid( 0, 2 );
+    QString reg;
+    if(loc.length() >= 5 )
+      reg = loc.mid( 3, 2 ).toLower();
+    else
+    {
+      if( lang.compare( "en", Qt::CaseInsensitive ) == 0 )
+        reg = "US";
+      else
+        reg = lang.toUpper();
+    }
+
+    sortedHelps.insertMulti(
+      Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
+      QPair< QIcon, QString >(
+        QIcon( QString( ":/flags/%1.png" ).arg( reg.toLower() ) ), lang + "_" + reg ) );
+  }
+
+  for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedHelps.begin();
+       i != sortedHelps.end(); ++i )
+    ui.helpLanguage->addItem( i.value().first, i.key(), i.value().second );
+
+  for( int x = 0; x < ui.helpLanguage->count(); ++x )
+    if ( ui.helpLanguage->itemData( x ).toString() == p.helpLanguage )
+    {
+      ui.helpLanguage->setCurrentIndex( x );
       break;
     }
 
@@ -255,6 +314,10 @@ Config::Preferences Preferences::getPreferences()
   p.interfaceLanguage =
     ui.interfaceLanguage->itemData(
       ui.interfaceLanguage->currentIndex() ).toString();
+
+  p.helpLanguage =
+    ui.helpLanguage->itemData(
+      ui.helpLanguage->currentIndex() ).toString();
 
   p.displayStyle =
     ui.displayStyle->itemData(
@@ -490,4 +553,39 @@ void Preferences::customProxyToggled( bool )
 {
   ui.customSettingsGroup->setEnabled( ui.customProxy->isChecked()
                                       && ui.useProxyServer->isChecked() );
+}
+
+void Preferences::helpRequested()
+{
+  if( !helpWindow )
+  {
+    MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
+    if( mainWindow )
+      mainWindow->closeGDHelp();
+
+    helpWindow = new Help::HelpWindow( this, cfg );
+
+    if( helpWindow )
+    {
+      helpWindow->setWindowFlags( Qt::Window );
+
+      connect( helpWindow, SIGNAL( needClose() ),
+               this, SLOT( closeHelp() ) );
+      helpWindow->showHelpFor( "Preferences" );
+      helpWindow->show();
+    }
+  }
+  else
+  {
+    if( !helpWindow->isVisible() )
+      helpWindow->show();
+
+    helpWindow->activateWindow();
+  }
+}
+
+void Preferences::closeHelp()
+{
+  if( helpWindow )
+    helpWindow->hide();
 }

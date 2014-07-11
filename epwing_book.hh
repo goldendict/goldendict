@@ -208,6 +208,10 @@ public:
 
   QByteArray handleReference( EB_Hook_Code code,
                               const unsigned int * argv );
+
+  bool getMatches( QString word, QVector< QString > & matches );
+
+  bool getArticlePos( QString word, QVector< int > & pages, QVector< int > & offsets );
 };
 
 struct EContainer
