@@ -26,16 +26,17 @@ QT += core \
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \
           webkitwidgets \
-          printsupport
+          printsupport \
+          help
 } else {
     QT += webkit
+    CONFIG += help
 }
 
 QT += sql
 CONFIG += exceptions \
     rtti \
-    stl \
-    help
+    stl
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build

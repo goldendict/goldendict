@@ -429,7 +429,7 @@ void BtreeWordSearchRequest::findMatches()
 
 void BtreeWordSearchRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
