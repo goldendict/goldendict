@@ -999,7 +999,7 @@ bool EpwingBook::isHeadwordCorrect( QString const & headword )
   if( ( book.character_code == EB_CHARCODE_JISX0208 || book.character_code == EB_CHARCODE_JISX0208_GB2312 )
       && codec_Euc )
     buf = codec_Euc->fromUnicode( headword );
-  else
+
   if( book.character_code == EB_CHARCODE_JISX0208_GB2312 && codec_GB )
     buf2 = codec_GB->fromUnicode( headword );
 
@@ -1754,25 +1754,62 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
 
 bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
 {
-  QByteArray bword = codecEuc()->fromUnicode( word );
-  EB_Error_Code ret = eb_search_word( &book, bword.data() );
-  if( ret != EB_SUCCESS )
+  QByteArray bword, bword2;
+  EB_Hit hits[ HitsBufferSize ];
+  int hitCount = 0;
+
+  if( book.character_code == EB_CHARCODE_ISO8859_1 && codec_ISO )
+    bword = codec_ISO->fromUnicode( word );
+  else
+  if( ( book.character_code == EB_CHARCODE_JISX0208 || book.character_code == EB_CHARCODE_JISX0208_GB2312 )
+      && codec_Euc )
+    bword = codec_Euc->fromUnicode( word );
+
+  if( book.character_code == EB_CHARCODE_JISX0208_GB2312 && codec_GB )
+    bword2 = codec_GB->fromUnicode( word );
+
+  if( !bword.isEmpty() )
   {
-    setErrorString( "eb_search_word", ret );
-    gdWarning( "Epwing word search error: %s",
-                 error_string.toUtf8().data() );
-    return false;
+    EB_Error_Code ret = eb_search_word( &book, bword.data() );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_search_word", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
+
+    EB_Hit hits[ HitsBufferSize ];
+    int hitCount;
+    ret = eb_hit_list( &book, 10, hits, &hitCount );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_hit_list", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
   }
 
-  EB_Hit hits[ HitsBufferSize ];
-  int hitCount;
-  ret = eb_hit_list( &book, 10, hits, &hitCount );
-  if( ret != EB_SUCCESS )
+  if( hitCount == 0 && !bword2.isEmpty() )
   {
-    setErrorString( "eb_hit_list", ret );
-    gdWarning( "Epwing word search error: %s",
-                 error_string.toUtf8().data() );
-    return false;
+    EB_Error_Code ret = eb_search_word( &book, bword2.data() );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_search_word", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
+
+    ret = eb_hit_list( &book, 10, hits, &hitCount );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_hit_list", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
   }
 
   QVector< int > pages, offsets;
@@ -1807,26 +1844,60 @@ bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
 
 bool EpwingBook::getArticlePos( QString word, QVector< int > & pages, QVector< int > & offsets )
 {
-  QByteArray bword = codecEuc()->fromUnicode( word );
-  EB_Error_Code ret = eb_search_exactword( &book, bword.data() );
-  if( ret != EB_SUCCESS )
+  QByteArray bword, bword2;
+  EB_Hit hits[ HitsBufferSize ];
+  int hitCount = 0;
+
+  if( book.character_code == EB_CHARCODE_ISO8859_1 && codec_ISO )
+    bword = codec_ISO->fromUnicode( word );
+  else
+  if( ( book.character_code == EB_CHARCODE_JISX0208 || book.character_code == EB_CHARCODE_JISX0208_GB2312 )
+      && codec_Euc )
+    bword = codec_Euc->fromUnicode( word );
+
+  if( book.character_code == EB_CHARCODE_JISX0208_GB2312 && codec_GB )
+    bword2 = codec_GB->fromUnicode( word );
+
+  if( !bword.isEmpty() )
   {
-    setErrorString( "eb_search_word", ret );
-    gdWarning( "Epwing word search error: %s",
-                 error_string.toUtf8().data() );
-    return false;
+    EB_Error_Code ret = eb_search_exactword( &book, bword.data() );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_search_word", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
+
+    ret = eb_hit_list( &book, HitsBufferSize, hits, &hitCount );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_hit_list", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
   }
 
-  EB_Hit hits[ HitsBufferSize ];
-  int hitCount;
-
-  ret = eb_hit_list( &book, HitsBufferSize, hits, &hitCount );
-  if( ret != EB_SUCCESS )
+  if( hitCount == 0 && !bword2.isEmpty() )
   {
-    setErrorString( "eb_hit_list", ret );
-    gdWarning( "Epwing word search error: %s",
-                 error_string.toUtf8().data() );
-    return false;
+    EB_Error_Code ret = eb_search_exactword( &book, bword2.data() );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_search_word", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
+
+    ret = eb_hit_list( &book, HitsBufferSize, hits, &hitCount );
+    if( ret != EB_SUCCESS )
+    {
+      setErrorString( "eb_hit_list", ret );
+      gdWarning( "Epwing word search error: %s",
+                   error_string.toUtf8().data() );
+      return false;
+    }
   }
 
   for( int i = 0; i < hitCount; i++ )
