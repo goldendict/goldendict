@@ -24,6 +24,8 @@
 #include <eb/binary.h>
 #include <eb/font.h>
 
+#define HitsBufferSize 512
+
 namespace Epwing {
 
 void initialize()
@@ -1762,7 +1764,7 @@ bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
     return false;
   }
 
-  EB_Hit hits[ 10 ];
+  EB_Hit hits[ HitsBufferSize ];
   int hitCount;
   ret = eb_hit_list( &book, 10, hits, &hitCount );
   if( ret != EB_SUCCESS )
@@ -1773,19 +1775,37 @@ bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
     return false;
   }
 
+  QVector< int > pages, offsets;
+
   for( int i = 0; i < hitCount; i++ )
   {
-    QString headword;
-    if( readHeadword( hits[ i ].heading, headword, true ) )
+    bool same_article = false;
+    for( int n = 0; n < pages.size(); n++ )
     {
-      fixHeadword( headword );
-      matches.push_back( headword );
+      if( pages.at( n ) == hits[ i ].text.page
+          && offsets.at( n ) == hits[ i ].text.offset )
+      {
+        same_article = true;
+        continue;
+      }
+    }
+    if( !same_article )
+    {
+      pages.push_back( hits[ i ].text.page );
+      offsets.push_back( hits[ i ].text.offset );
+
+      QString headword;
+      if( readHeadword( hits[ i ].heading, headword, true ) )
+      {
+        fixHeadword( headword );
+        matches.push_back( headword );
+      }
     }
   }
   return true;
 }
 
-bool EpwingBook::getArticlePos( QString word, int & page, int & offset )
+bool EpwingBook::getArticlePos( QString word, QVector< int > & pages, QVector< int > & offsets )
 {
   QByteArray bword = codecEuc()->fromUnicode( word );
   EB_Error_Code ret = eb_search_exactword( &book, bword.data() );
@@ -1797,9 +1817,10 @@ bool EpwingBook::getArticlePos( QString word, int & page, int & offset )
     return false;
   }
 
-  EB_Hit hits[ 10 ];
+  EB_Hit hits[ HitsBufferSize ];
   int hitCount;
-  ret = eb_hit_list( &book, 10, hits, &hitCount );
+
+  ret = eb_hit_list( &book, HitsBufferSize, hits, &hitCount );
   if( ret != EB_SUCCESS )
   {
     setErrorString( "eb_hit_list", ret );
@@ -1808,13 +1829,26 @@ bool EpwingBook::getArticlePos( QString word, int & page, int & offset )
     return false;
   }
 
-  if( hitCount > 0 )
+  for( int i = 0; i < hitCount; i++ )
   {
-    page = hits[ 0 ].text.page;
-    offset = hits[ 0 ].text.offset;
-    return true;
+    bool same_article = false;
+    for( int n = 0; n < pages.size(); n++ )
+    {
+      if( pages.at( n ) == hits[ i ].text.page
+          && offsets.at( n ) == hits[ i ].text.offset )
+      {
+        same_article = true;
+        continue;
+      }
+    }
+    if( !same_article )
+    {
+      pages.push_back( hits[ i ].text.page );
+      offsets.push_back( hits[ i ].text.offset );
+    }
   }
-  return false;
+
+  return !pages.empty();
 }
 
 Mutex EpwingBook::libMutex;

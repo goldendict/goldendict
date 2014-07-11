@@ -211,7 +211,7 @@ public:
 
   bool getMatches( QString word, QVector< QString > & matches );
 
-  bool getArticlePos( QString word, int & page, int & offset );
+  bool getArticlePos( QString word, QVector< int > & pages, QVector< int > & offsets );
 };
 
 struct EContainer

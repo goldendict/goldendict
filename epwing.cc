@@ -167,9 +167,9 @@ private:
 
   /// Loads the article.
   void loadArticle( quint32 address, string & articleHeadword,
-                    string & articleText );
+                    string & articleText, int & articlePage, int & articleOffset );
 
-  bool loadArticle( wstring const & word, string & articleHeadword,
+  void loadArticle( int articlePage, int articleOffset, string & articleHeadword,
                     string & articleText );
 
   void createCacheDirectory();
@@ -279,7 +279,9 @@ void EpwingDictionary::removeDirectory( QString const & directory )
 
 void EpwingDictionary::loadArticle( quint32 address,
                                     string & articleHeadword,
-                                    string & articleText )
+                                    string & articleText,
+                                    int & articlePage,
+                                    int & articleOffset )
 {
   vector< char > chunk;
 
@@ -289,8 +291,6 @@ void EpwingDictionary::loadArticle( quint32 address,
     Mutex::Lock _( idxMutex );
     articleProps = chunks.getBlock( address, chunk );
   }
-
-  uint32_t articlePage, articleOffset;
 
   memcpy( &articlePage, articleProps, sizeof( articlePage ) );
   memcpy( &articleOffset, articleProps + sizeof( articlePage ),
@@ -317,20 +317,16 @@ void EpwingDictionary::loadArticle( quint32 address,
   articleText = prefix + articleText + "</div>";
 }
 
-bool EpwingDictionary::loadArticle( wstring const & word,
+void EpwingDictionary::loadArticle( int articlePage,
+                                    int articleOffset,
                                     string & articleHeadword,
                                     string & articleText )
 {
-  int articlePage, articleOffset;
-
   QString headword, text;
 
   try
   {
     Mutex::Lock _( eBook.getLibMutex() );
-    if( !eBook.getArticlePos( gd::toQString( word ), articlePage, articleOffset ) )
-      return false;
-
     eBook.getArticle( headword, text, articlePage, articleOffset, false );
   }
   catch( std::exception & e )
@@ -345,7 +341,6 @@ bool EpwingDictionary::loadArticle( wstring const & word,
   string prefix( "<div class=\"epwing_text\">" );
 
   articleText = prefix + articleText + "</div>";
-  return true;
 }
 
 QString const& EpwingDictionary::getDescription()
@@ -518,6 +513,8 @@ void EpwingArticleRequest::run()
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
 
+  QVector< int > pages, offsets;
+
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     if ( isCancelled )
@@ -532,14 +529,19 @@ void EpwingArticleRequest::run()
     // Now grab that article
 
     string headword, articleText;
+    int articlePage, articleOffset;
 
     try
     {
-      dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
+      dict.loadArticle( chain[ x ].articleOffset, headword, articleText,
+                        articlePage, articleOffset );
     }
     catch(...)
     {
     }
+
+    pages.append( articlePage );
+    offsets.append( articleOffset );
 
     // Ok. Now, does it go to main articles, or to alternate ones? We list
     // main ones first, and alternates after.
@@ -560,24 +562,52 @@ void EpwingArticleRequest::run()
     articlesIncluded.insert( chain[ x ].articleOffset );
   }
 
+  // Also try to find word in the built-in dictionary index
+  try
+  {
+    string headword, articleText;
+
+    QVector< int > pg, off;
+    {
+      Mutex::Lock _( dict.eBook.getLibMutex() );
+      dict.eBook.getArticlePos( gd::toQString( word ), pg, off );
+    }
+
+    for( int i = 0; i < pg.size(); i++ )
+    {
+      bool already = false;
+      for( int n = 0; n < pages.size(); n++ )
+      {
+        if( pages.at( n ) == pg.at( i )
+            && abs( offsets.at( n ) - off.at( i ) ) <= 4 )
+        {
+          already = true;
+          break;
+        }
+      }
+
+      if( !already )
+      {
+        dict.loadArticle( pg.at( i ), off.at( i ), headword, articleText );
+
+        mainArticles.insert( pair< wstring, pair< string, string > >(
+          Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+          pair< string, string >( headword, articleText ) ) );
+
+        pages.append( pg.at( i ) );
+        offsets.append( off.at( i ) );
+      }
+    }
+  }
+  catch(...)
+  {
+  }
+
   if ( mainArticles.empty() && alternateArticles.empty() )
   {
-    // No such word, try to find it in the built-in dictionary index
-    try
-    {
-      string headword, articleText;
-      if( !dict.loadArticle( word, headword, articleText ) )
-      {
-        finish();
-        return;
-      }
-      mainArticles.insert( pair< wstring, pair< string, string > >(
-        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-        pair< string, string >( headword, articleText ) ) );
-    }
-    catch(...)
-    {
-    }
+    // No such word
+    finish();
+    return;
   }
 
   string result = "<span class=\"epwing_article\">";
