@@ -1779,8 +1779,6 @@ bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
       return false;
     }
 
-    EB_Hit hits[ HitsBufferSize ];
-    int hitCount;
     ret = eb_hit_list( &book, 10, hits, &hitCount );
     if( ret != EB_SUCCESS )
     {
@@ -1834,8 +1832,8 @@ bool EpwingBook::getMatches( QString word, QVector< QString > & matches )
       QString headword;
       if( readHeadword( hits[ i ].heading, headword, true ) )
       {
-        fixHeadword( headword );
-        matches.push_back( headword );
+        if( isHeadwordCorrect( headword ) )
+          matches.push_back( headword );
       }
     }
   }
