@@ -356,11 +356,11 @@ bool DecoderContext::play( QString & errorString )
       do
       {
         int len = avcodec_decode_audio4( codecContext_, frame, &gotFrame, &pack );
-        if ( !isCancelled_ && gotFrame )
+        if ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) && gotFrame )
         {
           playFrame( frame );
         }
-        if( len <= 0 || isCancelled_ )
+        if( len <= 0 || Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) )
           break;
         pack.size -= len;
         pack.data += len;
