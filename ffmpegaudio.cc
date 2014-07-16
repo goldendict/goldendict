@@ -351,12 +351,21 @@ bool DecoderContext::play( QString & errorString )
   {
     if ( packet.stream_index == audioStream_->index )
     {
+      AVPacket pack = packet;
       int gotFrame = 0;
-      avcodec_decode_audio4( codecContext_, frame, &gotFrame, &packet );
-      if ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) && gotFrame )
+      do
       {
-        playFrame( frame );
+        int len = avcodec_decode_audio4( codecContext_, frame, &gotFrame, &pack );
+        if ( !isCancelled_ && gotFrame )
+        {
+          playFrame( frame );
+        }
+        if( len <= 0 || isCancelled_ )
+          break;
+        pack.size -= len;
+        pack.data += len;
       }
+      while( pack.size > 0 );
     }
     // av_free_packet() must be called after each call to av_read_frame()
     av_free_packet( &packet );

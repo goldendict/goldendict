@@ -385,7 +385,7 @@ void EpwingDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIterati
   }
   catch( std::exception &ex )
   {
-    gdWarning( "DSL: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    gdWarning( "Epwing: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
 }
