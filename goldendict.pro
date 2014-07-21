@@ -178,7 +178,7 @@ mac {
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
                       cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/help & \
-                      cp -R help/*.qch GoldenDict.app/Contents/MacOS/help/
+                      cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
 }
