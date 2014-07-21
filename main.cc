@@ -33,7 +33,7 @@
 
 #include "gddebug.hh"
 
-#ifdef Q_OS_MAC
+#if defined( Q_OS_MAC ) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include "lionsupport.h"
 #endif
 
@@ -101,11 +101,13 @@ int main( int argc, char ** argv )
   #ifdef Q_OS_MAC
     setenv("LANG", "en_US.UTF-8", 1);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
    // Check for retina display
    if( LionSupport::isRetinaDisplay() )
      QApplication::setGraphicsSystem( "native" );
    else
      QApplication::setGraphicsSystem( "raster" );
+#endif
   #endif
 
   // The following clause fixes a race in the MinGW runtime where throwing
