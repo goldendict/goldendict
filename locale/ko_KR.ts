@@ -2634,7 +2634,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="3921"/>
         <source>Edit dictionary</source>
-        <translation>Редактировать словарь</translation>
+        <translation>사전 편집</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="370"/>
