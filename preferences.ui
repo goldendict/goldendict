@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -1097,7 +1097,41 @@ It is not needed to select this option if you don't use such programs.</string>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer_17">
+        <widget class="QGroupBox" name="groupBox_AdvancedDictOptions">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>15</height>
+          </size>
+         </property>
+         <property name="accessibleName">
+          <string/>
+         </property>
+         <property name="title">
+          <string>Dictionary Options</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_14">
+          <item>
+           <widget class="QCheckBox" name="disableSynonyms">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="text">
+             <string>Disable Synonym Lookup</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_7">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

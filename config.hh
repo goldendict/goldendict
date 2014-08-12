@@ -177,6 +177,7 @@ struct Preferences
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
   bool disableWebDictsWhenOffline;
+  bool disableSynonyms;
   
   // How long to wait (in msecs) before we assume there
   // is no network connection available

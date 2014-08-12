@@ -234,7 +234,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
         unmutedDicts.push_back( activeDicts[ x ] );
 
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, unmutedDicts, header );
+                               contexts, unmutedDicts, header, cfg );
   } else if ( disableWebPlugins ) {
     std::vector< sptr< Dictionary::Class > > unmutedDicts;
 
@@ -244,11 +244,11 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
       if ( ! activeDicts[x]->needNetwork() )
         unmutedDicts.push_back( activeDicts[ x ] );
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, unmutedDicts, header );    
+                               contexts, unmutedDicts, header, cfg );
   }
   else
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
-                               contexts, activeDicts, header );
+                               contexts, activeDicts, header, cfg );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -285,11 +285,13 @@ ArticleRequest::ArticleRequest(
   QString const & word_, QString const & group_,
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
-  string const & header ):
+  string const & header,
+  Config::Class const & cfg_):
     word( word_ ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
-    closePrevSpan( false )
+    closePrevSpan( false ),
+    cfg(cfg_)
 {
   // No need to lock dataMutex on construction
 
@@ -300,14 +302,16 @@ ArticleRequest::ArticleRequest(
 
   // Accumulate main forms
 
-  for( unsigned x = 0; x < activeDicts.size(); ++x )
-  {
-    sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( gd::toWString( word ) );
+  if ( ! cfg.preferences.disableSynonyms ) {
+    for( unsigned x = 0; x < activeDicts.size(); ++x )
+    {
+        sptr< Dictionary::WordSearchRequest > s = activeDicts[ x ]->findHeadwordsForSynonym( gd::toWString( word ) );
 
-    connect( s.get(), SIGNAL( finished() ),
-             this, SLOT( altSearchFinished() ), Qt::QueuedConnection );
+        connect( s.get(), SIGNAL( finished() ),
+                this, SLOT( altSearchFinished() ), Qt::QueuedConnection );
 
-    altSearches.push_back( s );
+        altSearches.push_back( s );
+    }
   }
 
   altSearchFinished(); // Handle any ones which have already finished

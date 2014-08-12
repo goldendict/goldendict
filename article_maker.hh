@@ -108,12 +108,16 @@ class ArticleRequest: public Dictionary::DataRequest
   QString lastGoodCompoundResult;
   bool firstCompoundWasFound;
 
+  Config::Class const & cfg;
+
 public:
 
   ArticleRequest( QString const & word, QString const & group,
                   QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
-                  std::string const & header );
+                  std::string const & header,
+                  Config::Class const & cfg_
+                );
 
   virtual void cancel();
 //  { finish(); } // Add our own requests cancellation here

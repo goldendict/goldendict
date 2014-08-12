@@ -141,8 +141,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
 //Platform-specific options
 
 #ifndef Q_OS_WIN32
-  //  ui.groupBox_ScanPopupTechnologies->hide();
-  ui.tabWidget->removeTab( 5 );
+  ui.groupBox_ScanPopupTechnologies->hide();
+  //ui.tabWidget->removeTab( 5 );
 #endif
 
   // Sound
@@ -190,6 +190,8 @@ Preferences::Preferences( QWidget * parent, Config::Preferences const & p ):
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
   ui.disableWebDictsWhenOffline->setChecked( p.disableWebDictsWhenOffline );
+
+  ui.disableSynonyms->setChecked( p.disableSynonyms );
  
 }
 
@@ -265,6 +267,8 @@ Config::Preferences Preferences::getPreferences()
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
   p.enableWebPlugins = ui.enableWebPlugins->isChecked();
   p.disableWebDictsWhenOffline = ui.disableWebDictsWhenOffline->isChecked();
+
+  p.disableSynonyms = ui.disableSynonyms->isChecked();
 
   return p;
 }

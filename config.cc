@@ -122,6 +122,7 @@ Preferences::Preferences():
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
   disableWebDictsWhenOffline( true ),
+  disableSynonyms( false ),
   networkCheckTimeout( 300 ),
   zoomFactor( 1 ),
   wordsZoomLevel( 0 ),
@@ -653,6 +654,9 @@ Class load() throw( exError )
     
     if ( !preferences.namedItem( "disableWebDictsWhenOffline" ).isNull() )
       c.preferences.disableWebDictsWhenOffline = ( preferences.namedItem( "disableWebDictsWhenOffline" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "disableSynonyms" ).isNull() )
+        c.preferences.disableSynonyms = ( preferences.namedItem( "disableSynonyms" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
@@ -1218,6 +1222,10 @@ void save( Class const & c ) throw( exError )
     
     opt = dd.createElement( "disableWebDictsWhenOffline" );
     opt.appendChild( dd.createTextNode( c.preferences.disableWebDictsWhenOffline ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "disableSynonyms" );
+    opt.appendChild( dd.createTextNode( c.preferences.disableSynonyms ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxStringsInHistory" );
