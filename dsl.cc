@@ -1793,7 +1793,7 @@ void DslResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+    gdDebug( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
