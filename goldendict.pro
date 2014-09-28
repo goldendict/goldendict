@@ -23,7 +23,7 @@ isEmpty( hasGit ) {
 }
 
 CONFIG( release, debug|release ) {
-  DEFINES += NDEBUG
+  DEFINES += NDEBUG NO_GD_DPRINTF
 }
 
 # DEPENDPATH += . generators
