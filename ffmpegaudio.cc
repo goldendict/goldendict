@@ -210,9 +210,10 @@ bool DecoderContext::openCodec( QString & errorString )
     errorString = QObject::tr( "avcodec_open2() failed: %1." ).arg( avErrorString( ret ) );
     return false;
   }
-
+#ifndef NO_CONSOLE
   av_log( NULL, AV_LOG_INFO, "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec->long_name,
           codecContext_->channels, codecContext_->sample_rate, av_get_sample_fmt_name( codecContext_->sample_fmt ) );
+#endif
   return true;
 }
 
@@ -284,9 +285,10 @@ bool DecoderContext::openOutputDevice( QString & errorString )
     errorString = QObject::tr( "Unsupported sample format." );
     return false;
   }
-
+#ifndef NO_CONSOLE
   av_log( NULL, AV_LOG_INFO, "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
           aoDrvInfo->name, aoSampleFormat.channels, aoSampleFormat.rate, aoSampleFormat.bits );
+#endif
 
   aoDevice_ = ao_open_live( aoDriverId, &aoSampleFormat, NULL );
   if ( !aoDevice_ )
