@@ -299,8 +299,13 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             textNode = 0;
           }
 
+          wstring linkText = Folding::trimWhitespace( linkTo );
+          processUnsortedParts( linkText, true );
+          ArticleDom nodeDom( linkText, dictName, headword_ );
+
           Node link( Node::Tag(), GD_NATIVE_TO_WS( L"ref" ), wstring() );
-          link.push_back( Node( Node::Text(), linkTo ) );
+          for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
+            link.push_back( *n );
 
           if ( stack.empty() )
             root.push_back( link );
