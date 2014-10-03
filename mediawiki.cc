@@ -330,6 +330,30 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
                                    QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
 
+            // audio tag
+            QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
+            reg1.setMinimal( true );
+            QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
+            int pos = 0;
+            for( ; ; )
+            {
+              pos = reg1.indexIn( articleString, pos );
+              if( pos >= 0 )
+              {
+                QString tag = reg1.cap();
+                if( reg2.indexIn( tag ) >= 0 )
+                {
+                  QString ref = reg2.cap( 1 );
+                  QString audio_url = "<a href=\"" + ref
+                                      + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
+                  articleString.replace( pos, tag.length(), audio_url );
+                }
+                pos += 1;
+              }
+              else
+                break;
+            }
+
             // audio url
             articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
                                    QString::fromStdString( addAudioLink( "\"http:\\1\"",this->dictPtr->getId() )+ "<a href=\"http:\\1" ) );
