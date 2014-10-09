@@ -24,6 +24,7 @@ struct CentralDirEntry
 
   quint32 localHeaderOffset, compressedSize, uncompressedSize;
   CompressionMethod compressionMethod;
+  bool fileNameInUTF8;
 };
 
 /// Represents contents of the local file header -- that what CentralDirEntry::

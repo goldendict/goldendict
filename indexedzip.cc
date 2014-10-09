@@ -187,32 +187,35 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
           // Failed to decode
         }
 
-        // CP866
-        try
+        if( !entry.fileNameInUTF8 )
         {
-          wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
-                                              entry.fileName.size() );
+          // CP866
+          try
+          {
+            wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
+                                                entry.fileName.size() );
 
-          zipFileNames.addSingleWord( decoded,
-                                      entry.localHeaderOffset );
-        }
-        catch( Iconv::Ex )
-        {
+            zipFileNames.addSingleWord( decoded,
+                                        entry.localHeaderOffset );
+          }
+          catch( Iconv::Ex )
+          {
+              // Failed to decode
+          }
+
+          // CP1251
+          try
+          {
+            wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
+                                                entry.fileName.size() );
+
+            zipFileNames.addSingleWord( decoded,
+                                        entry.localHeaderOffset );
+          }
+          catch( Iconv::Ex )
+          {
             // Failed to decode
-        }
-
-        // CP1251
-        try
-        {
-          wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
-                                              entry.fileName.size() );
-
-          zipFileNames.addSingleWord( decoded,
-                                      entry.localHeaderOffset );
-        }
-        catch( Iconv::Ex )
-        {
-          // Failed to decode
+          }
         }
       }
     }

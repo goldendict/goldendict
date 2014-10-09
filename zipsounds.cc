@@ -44,7 +44,7 @@ DEF_EX( exInvalidData, "Invalid data encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x5350495a, // ZIPS on little-endian, SPIZ on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
