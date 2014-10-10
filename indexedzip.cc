@@ -123,7 +123,7 @@ bool IndexedZip::loadFile( uint32_t offset, vector< char > & data )
   }
 }
 
-bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
+bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 * filesCount )
 {
     if ( !zipIsOpen )
         return false;
@@ -136,6 +136,10 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
     QTextCodec * localeCodec = QTextCodec::codecForLocale();
 
     ZipFile::CentralDirEntry entry;
+
+    bool alreadyCounted;
+    if( filesCount )
+      *filesCount = 0;
 
     while( ZipFile::readNextEntry( zip, entry ) )
     {
@@ -165,12 +169,16 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
           break;
       }
 
+      alreadyCounted = false;
+
       if ( !hasNonAscii )
       {
         // Add entry as is
 
         zipFileNames.addSingleWord( Utf8::decode( entry.fileName.data() ),
                                     entry.localHeaderOffset );
+        if( filesCount )
+          *filesCount += 1;
       }
       else
       {
@@ -185,6 +193,11 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
 
           zipFileNames.addSingleWord( decoded,
                                       entry.localHeaderOffset );
+          if( filesCount != 0 && !alreadyCounted )
+          {
+            *filesCount += 1;
+            alreadyCounted = true;
+          }
         }
         catch( Utf8::exCantDecode )
         {
@@ -205,6 +218,12 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
             {
               zipFileNames.addSingleWord( nameInSystemLocale,
                                           entry.localHeaderOffset );
+
+              if( filesCount != 0 && !alreadyCounted )
+              {
+                *filesCount += 1;
+                alreadyCounted = true;
+              }
             }
           }
 
@@ -219,6 +238,12 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
             {
               zipFileNames.addSingleWord( decoded,
                                           entry.localHeaderOffset );
+
+              if( filesCount != 0 && !alreadyCounted )
+              {
+                *filesCount += 1;
+                alreadyCounted = true;
+              }
             }
           }
           catch( Iconv::Ex )
@@ -236,6 +261,12 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
             {
               zipFileNames.addSingleWord( decoded,
                                           entry.localHeaderOffset );
+
+              if( filesCount != 0 && !alreadyCounted )
+              {
+                *filesCount += 1;
+                alreadyCounted = true;
+              }
             }
           }
           catch( Iconv::Ex )

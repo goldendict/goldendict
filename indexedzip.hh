@@ -39,7 +39,7 @@ public:
   bool loadFile( uint32_t offset, std::vector< char > & );
 
   /// Index compressed files in zip file
-  bool indexFile( BtreeIndexing::IndexedWords &zipFileNames );
+  bool indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 * filesCount = 0 );
 };
 
 #endif
