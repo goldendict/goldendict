@@ -7,6 +7,7 @@
 #include "gddebug.hh"
 #include "utf8.hh"
 #include "iconv.hh"
+#include "wstring_qt.hh"
 
 #include <QDebug>
 
@@ -131,6 +132,9 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
 
     // File seems to be a valid zip file
 
+
+    QTextCodec * localeCodec = QTextCodec::codecForLocale();
+
     ZipFile::CentralDirEntry entry;
 
     while( ZipFile::readNextEntry( zip, entry ) )
@@ -170,7 +174,7 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
       }
       else
       {
-        // Try assuming different encodings. Those are UTF8 and two
+        // Try assuming different encodings. Those are UTF8, system locale and two
         // Russian ones (Windows and Windows OEM). Unfortunately, zip
         // files do not say which encoding they utilize.
 
@@ -189,14 +193,33 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
 
         if( !entry.fileNameInUTF8 )
         {
+          wstring nameInSystemLocale;
+
+          // System locale
+          if( localeCodec )
+          {
+            QString name = localeCodec->toUnicode( entry.fileName.constData(),
+                                                   entry.fileName.size() );
+            nameInSystemLocale = gd::toWString( name );
+            if( !nameInSystemLocale.empty() )
+            {
+              zipFileNames.addSingleWord( nameInSystemLocale,
+                                          entry.localHeaderOffset );
+            }
+          }
+
+
           // CP866
           try
           {
             wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
                                                 entry.fileName.size() );
 
-            zipFileNames.addSingleWord( decoded,
-                                        entry.localHeaderOffset );
+            if( nameInSystemLocale.compare( decoded ) != 0 )
+            {
+              zipFileNames.addSingleWord( decoded,
+                                          entry.localHeaderOffset );
+            }
           }
           catch( Iconv::Ex )
           {
@@ -209,8 +232,11 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
             wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
                                                 entry.fileName.size() );
 
-            zipFileNames.addSingleWord( decoded,
-                                        entry.localHeaderOffset );
+            if( nameInSystemLocale.compare( decoded ) != 0 )
+            {
+              zipFileNames.addSingleWord( decoded,
+                                          entry.localHeaderOffset );
+            }
           }
           catch( Iconv::Ex )
           {
