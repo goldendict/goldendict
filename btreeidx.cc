@@ -408,8 +408,8 @@ void BtreeWordSearchRequest::findMatches()
   }
   catch( std::exception & e )
   {
-    qWarning( "Index searching failed: \"%s\", error: %s\n", e.what(),
-              dict.getName().c_str() );
+    qWarning( "Index searching failed: \"%s\", error: %s\n",
+              dict.getName().c_str(), e.what() );
   }
   catch(...)
   {
