@@ -965,6 +965,13 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
          .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\\"" )
+         // javascripts
+         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1bres://" + id + "/\\2" )
+         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1\"bres://" + id + "/\\\"" )
          // images
          .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x1f\\x7f]*([^\"']*)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
