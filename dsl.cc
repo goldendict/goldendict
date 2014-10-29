@@ -827,7 +827,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"com" ) )
     result += "<span class=\"dsl_com\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
     string filename = Utf8::encode( node.renderAsText() );
     string n =

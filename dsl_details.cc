@@ -235,6 +235,11 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
           }
           openTag( name, attrs, stack );
+          if ( name == GD_NATIVE_TO_WS( L"br" ) )
+          {
+            // [br] tag don't have closing tag
+            closeTag( name, stack );
+          }
         }
         else
         {
@@ -572,9 +577,9 @@ void ArticleDom::closeTag( wstring const & name,
         nodesToReopen.push_back( Node( Node::Tag(), stack.back()->tagName,
                                        stack.back()->tagAttrs ) );
 
-      if ( stack.back()->empty() )
+      if ( stack.back()->empty() && stack.back()->tagName != GD_NATIVE_TO_WS( L"br" ) )
       {
-        // Empty nodes are deleted since they're no use
+        // Empty nodes except [br] tag are deleted since they're no use
 
         stack.pop_back();
 
