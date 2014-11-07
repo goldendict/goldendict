@@ -388,7 +388,9 @@ string AardDictionary::convert( const string & in )
     }
 
     QString text = QString::fromUtf8( inConverted.c_str() );
-    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*[\\\"'](w:|s:){0,1}([^#](?!ttp://)[^\\\"']*)(.)" ),
+    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)" ),
+                  "<a href=\"bword:\\2\"");
+    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)" ),
                   "<a href=\"bword:\\2\"");
 
     static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
