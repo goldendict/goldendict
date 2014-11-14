@@ -138,6 +138,8 @@ void DictHeadwords::setup( Dictionary::Class *dict_ )
 
   ui.applyButton->setEnabled( !ui.autoApply->isChecked() );
 
+  setWindowIcon( dict->getIcon() );
+
   QApplication::restoreOverrideCursor();
 }
 
