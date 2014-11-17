@@ -33,6 +33,7 @@ protected:
   QStringListModel * model;
   QSortFilterProxyModel * proxy;
   WordListItemDelegate * delegate;
+  QString dictId;
 
   QAction helpAction;
 
@@ -54,7 +55,7 @@ private slots:
   void helpRequested();
 
 signals:
-  void headwordSelected( QString const & );
+  void headwordSelected( QString const &, QString const & );
   void closeDialog();
 };
 

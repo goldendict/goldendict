@@ -2102,7 +2102,7 @@ void MainWindow::translateInputChanged( QString const & newValue )
   wordFinder.prefixMatch( req, getActiveDicts() );
 }
 
-void MainWindow::translateInputFinished( bool checkModifiers )
+void MainWindow::translateInputFinished( bool checkModifiers, QString const & dictID )
 {
   QString word = Folding::unescapeWildcardSymbols( translateLine->text() );
 
@@ -2112,7 +2112,7 @@ void MainWindow::translateInputFinished( bool checkModifiers )
     if ( checkModifiers && ( mods & (Qt::ControlModifier | Qt::ShiftModifier) ) )
       addNewTab();
 
-    showTranslationFor( word );
+    showTranslationFor( word, 0, dictID );
 
     if ( cfg.preferences.searchInDock )
     {
@@ -2536,7 +2536,8 @@ void MainWindow::showHistoryItem( QString const & word )
 }
 
 void MainWindow::showTranslationFor( QString const & inWord,
-                                     unsigned inGroup )
+                                     unsigned inGroup,
+                                     QString const & dictID )
 {
   ArticleView *view = getCurrentArticleView();
 
@@ -2546,7 +2547,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
                    ( groupInstances.empty() ? 0 :
                         groupInstances[ groupList->currentIndex() ].id );
 
-  view->showDefinition( inWord, group );
+  view->showDefinition( inWord, group, dictID );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -3507,6 +3508,13 @@ void MainWindow::wordReceived( const QString & word)
     translateInputFinished( false );
 }
 
+void MainWindow::headwordReceived( const QString & word, const QString & ID )
+{
+    toggleMainWindow( true );
+    translateLine->setText( Folding::escapeWildcardSymbols( word ) );
+    translateInputFinished( false, QString( "gdfrom-" )+ ID );
+}
+
 void MainWindow::updateHistoryMenu()
 {
   if ( ui.historyPane->toggleViewAction()->isChecked() )
@@ -3766,8 +3774,8 @@ void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
   {
     headwordsDlg = new DictHeadwords( this, cfg, dict );
     addGlobalActionsToDialog( headwordsDlg );
-    connect( headwordsDlg, SIGNAL( headwordSelected( QString ) ),
-             this, SLOT( wordReceived( QString ) ) );
+    connect( headwordsDlg, SIGNAL( headwordSelected( QString, QString ) ),
+             this, SLOT( headwordReceived( QString, QString ) ) );
     connect( headwordsDlg, SIGNAL( closeDialog() ),
              this, SLOT( closeHeadwordsDialog() ) );
   }
