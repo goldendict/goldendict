@@ -362,6 +362,7 @@ private slots:
                            QRegExp const & searchRegExp );
 
   void showHistoryItem( QString const & );
+  void loginHistoryItem();
 
   void trayIconActivated( QSystemTrayIcon::ActivationReason );
 

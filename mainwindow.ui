@@ -120,7 +120,8 @@
     <addaction name="separator"/>
     <addaction name="clearHistory"/>
     <addaction name="separator"/>
-    <addaction name="action_Login"/>
+    <addaction name="loginHistory"/>
+    <addaction name="synchronizeHistory"/>
    </widget>
    <widget class="QMenu" name="menuSearch">
     <property name="title">
@@ -580,9 +581,20 @@
     <enum>QAction::TextHeuristicRole</enum>
    </property>
   </action>
-  <action name="action_Login">
+  <action name="loginHistory">
    <property name="text">
     <string>&amp;Login</string>
+   </property>
+   <property name="toolTip">
+    <string>Login to server to synchronize</string>
+   </property>
+  </action>
+  <action name="synchronizeHistory">
+   <property name="text">
+    <string>S&amp;ynchronize...</string>
+   </property>
+   <property name="toolTip">
+    <string>Synchronize history looking words up</string>
    </property>
   </action>
  </widget>
