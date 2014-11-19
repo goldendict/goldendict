@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'articlewebview.hh'
 **
-** Created: Mon Apr 28 13:37:18 2014
+** Created: Wed Nov 19 16:06:43 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

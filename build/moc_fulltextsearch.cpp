@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'fulltextsearch.hh'
 **
-** Created: Mon Apr 28 13:37:44 2014
+** Created: Wed Nov 19 16:07:11 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

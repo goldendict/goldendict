@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferences.ui'
 **
-** Created: Mon Apr 28 13:32:14 2014
+** Created: Wed Nov 19 16:48:27 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -218,7 +218,7 @@ public:
     {
         if (Preferences->objectName().isEmpty())
             Preferences->setObjectName(QString::fromUtf8("Preferences"));
-        Preferences->resize(634, 403);
+        Preferences->resize(742, 456);
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/icons/configure.png"), QSize(), QIcon::Normal, QIcon::Off);
         Preferences->setWindowIcon(icon);
@@ -436,8 +436,8 @@ public:
         scanPopupModifiers->setFrameShadow(QFrame::Plain);
         scanPopupModifiers->setLineWidth(0);
         verticalLayout_5 = new QVBoxLayout(scanPopupModifiers);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -505,8 +505,8 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         frame->setLineWidth(0);
         verticalLayout_3 = new QVBoxLayout(frame);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
 
         horizontalLayout->addWidget(frame);
 
@@ -977,7 +977,7 @@ public:
         historyMaxSizeField->setObjectName(QString::fromUtf8("historyMaxSizeField"));
         historyMaxSizeField->setAccelerated(true);
         historyMaxSizeField->setMaximum(9999);
-        historyMaxSizeField->setValue(500);
+        historyMaxSizeField->setValue(1000);
 
         horizontalLayout_9->addWidget(historyMaxSizeField);
 
@@ -1103,7 +1103,7 @@ public:
         QObject::connect(buttonBox, SIGNAL(accepted()), Preferences, SLOT(accept()));
         QObject::connect(buttonBox, SIGNAL(rejected()), Preferences, SLOT(reject()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(Preferences);
