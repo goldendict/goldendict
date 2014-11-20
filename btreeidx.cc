@@ -1065,7 +1065,22 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
   // Safeguard us against various bugs here. Don't attempt adding words
   // which are freakishly huge.
   if ( wordSize > maxHeadwordSize )
+  {
+#define MAX_LOG_WORD_SIZE 500
+    string headword;
+    if( wordSize <= MAX_LOG_WORD_SIZE )
+      headword = Utf8::encode( word );
+    else
+    {
+      std::vector< char > buffer( MAX_LOG_WORD_SIZE * 4 );
+      headword = string( &buffer.front(),
+                         Utf8::encode( wordBegin, MAX_LOG_WORD_SIZE, &buffer.front() ) );
+      headword += "...";
+    }
+    gdWarning( "Skipped too long headword: \"%s\"", headword.c_str() );
     return;
+#undef MAX_LOG_WORD_SIZE
+  }
 
   // Skip any leading whitespace
   while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
