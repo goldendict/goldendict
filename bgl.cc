@@ -317,7 +317,7 @@ namespace
     ftsIdxName = indexFile + "_FTS";
 
     if( !Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
   }
 
@@ -476,7 +476,7 @@ namespace
   void BglDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
   {
     if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-           || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+           || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
       FTS_index_completed.ref();
 
     if( haveFTSIndex() )

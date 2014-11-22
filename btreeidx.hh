@@ -186,6 +186,9 @@ public:
   Mutex & getFtsMutex()
   { return ftsIdxMutex; }
 
+  virtual uint32_t getFtsIndexVersion()
+  { return 0; }
+
   /// Called before each matching operation to ensure that any child init
   /// has completed. Mainly used for deferred init. The default implementation
   /// does nothing.
