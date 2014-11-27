@@ -77,6 +77,7 @@ public slots:
   void messageFromAnotherInstanceReceived( QString const & );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
   void wordReceived( QString const & );
+  void headwordReceived( QString const &, QString const & );
   void setExpandMode( bool expand );
 
 private:
@@ -329,7 +330,7 @@ private slots:
 
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
-  void translateInputFinished( bool checkModifiers = true );
+  void translateInputFinished( bool checkModifiers = true, QString const & dictID = QString() );
 
   /// Closes any opened search in the article view, and focuses the translateLine/close main window to tray.
   void handleEsc();
@@ -364,7 +365,8 @@ private slots:
 
   void mutedDictionariesChanged();
 
-  void showTranslationFor( QString const &, unsigned inGroup = 0 );
+  void showTranslationFor( QString const &, unsigned inGroup = 0,
+                           QString const & dictID = QString() );
 
   void showTranslationFor( QString const &, QStringList const & dictIDs,
                            QRegExp const & searchRegExp );

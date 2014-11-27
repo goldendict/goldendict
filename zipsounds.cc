@@ -44,7 +44,7 @@ DEF_EX( exInvalidData, "Invalid data encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x5350495a, // ZIPS on little-endian, SPIZ on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
@@ -439,11 +439,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         IndexedWords names, zipFileNames;
         ChunkedStorage::Writer chunks( idx );
+        quint32 namesCount;
 
         IndexedZip zipFile;
         if( zipFile.openZipFile( QDir::fromNativeSeparators(
                                  FsEncoding::decode( i->c_str() ) ) ) )
-          zipFile.indexFile( zipFileNames );
+          zipFile.indexFile( zipFileNames, &namesCount );
 
         if( !zipFileNames.empty() )
         {
@@ -484,7 +485,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idxHeader.signature = Signature;
           idxHeader.formatVersion = CurrentFormatVersion;
 
-          idxHeader.soundsCount = names.size();
+          idxHeader.soundsCount = namesCount;
 
           idx.rewind();
 

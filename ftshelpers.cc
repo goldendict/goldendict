@@ -19,7 +19,8 @@ DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
 namespace FtsHelpers
 {
 
-bool ftsIndexIsOldOrBad( string const & indexFile )
+bool ftsIndexIsOldOrBad( string const & indexFile,
+                         BtreeIndexing::BtreeDictionary * dict )
 {
   File::Class idx( indexFile, "rb" );
 
@@ -27,7 +28,7 @@ bool ftsIndexIsOldOrBad( string const & indexFile )
 
   return idx.readRecords( &header, sizeof( header ), 1 ) != 1 ||
          header.signature != FtsSignature ||
-         header.formatVersion != CurrentFtsFormatVersion;
+         header.formatVersion != CurrentFtsFormatVersion + dict->getFtsIndexVersion();
 }
 
 bool parseSearchString( QString const & str, QStringList & indexWords,
@@ -304,7 +305,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   ftsIdxHeader.indexRootOffset = ftsIdxInfo.rootOffset;
 
   ftsIdxHeader.signature = FtsHelpers::FtsSignature;
-  ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion;
+  ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion + dict->getFtsIndexVersion();
 
   ftsIdx.rewind();
   ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );

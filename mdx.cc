@@ -315,7 +315,7 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   ftsIdxName = indexFile + "_FTS";
 
   if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
 }
 
@@ -463,7 +463,7 @@ void MdxDictionary::doDeferredInit()
 void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -965,6 +965,13 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1bres://" + id + "/\\2" )
          .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1\"bres://" + id + "/\\\"" )
+         // javascripts
+         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1bres://" + id + "/\\2" )
+         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\\"" )
          // images

@@ -151,6 +151,7 @@ bool readNextEntry( QFile & zip, CentralDirEntry & entry )
   entry.compressedSize = qFromLittleEndian( record.compressedSize );
   entry.uncompressedSize = qFromLittleEndian( record.uncompressedSize );
   entry.compressionMethod = getCompressionMethod( record.compressionMethod );
+  entry.fileNameInUTF8 = ( qFromLittleEndian( record.gpBits ) & 0x800 ) != 0;
 
   return true;
 }

@@ -138,6 +138,10 @@ void DictHeadwords::setup( Dictionary::Class *dict_ )
 
   ui.applyButton->setEnabled( !ui.autoApply->isChecked() );
 
+  setWindowIcon( dict->getIcon() );
+
+  dictId = QString( dict->getId().c_str() );
+
   QApplication::restoreOverrideCursor();
 }
 
@@ -217,7 +221,7 @@ void DictHeadwords::itemClicked( const QModelIndex & index )
   if ( value.canConvert< QString >() )
   {
     QString headword = value.toString();
-    emit headwordSelected( headword );
+    emit headwordSelected( headword, dictId );
   }
 }
 
