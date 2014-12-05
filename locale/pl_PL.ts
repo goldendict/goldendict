@@ -418,22 +418,22 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymagane uwierzytelnienie serwera proxy</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Aby uzyskać dostęp za pośrednictwem serwera proxy, należy podać nazwę użytkownika i hasło</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa użytkownika:</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">Hasło:</translation>
+        <translation>Hasło:</translation>
     </message>
 </context>
 <context>
@@ -541,112 +541,112 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb wyszukiwania</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta opcja decyduje o sposobie interpretacji ciągu znaków filtru</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznaczenie tej opcji powoduje, że podczas filtrowania uwzględniana jest wielkość liter</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgodna wielkość liter</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuje hasła do pliku</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuj</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="101"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij ten przycisk, aby zastosować filtr do listy haseł</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="104"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Zastosuj</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznaczenie tej opcji powoduje, że zmiany filtru są od razu stosowane do listy haseł</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="120"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Stosuj automatycznie</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="127"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtr:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="134"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciąg znaków filtru (ustalony ciąg znaków, symbole wieloznaczne lub wyrażenie regularne)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="31"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="32"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole wieloznaczne</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="33"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyrażenie regularne</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="231"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Unikalne hasła łącznie: %1, przefiltrowane: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="248"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz hasła do pliku</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="250"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)</translation>
+        <translation>Pliki tekstowe (*.txt);;Wszystkie pliki (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="274"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuj hasła...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="274"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
 </context>
 <context>
@@ -694,12 +694,12 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaż wszystkie unikalne hasła słownika</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasła</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -722,17 +722,17 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../dictserver.cc" line="239"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Adres URL:</translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="240"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bazy danych:</translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="241"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Strategie wyszukiwania:</translation>
     </message>
 </context>
 <context>
@@ -740,44 +740,46 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../sources.cc" line="762"/>
         <source>Enabled</source>
-        <translation type="unfinished">Włączone</translation>
+        <translation>Włączone</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="764"/>
         <source>Name</source>
-        <translation type="unfinished">Nazwa</translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="766"/>
         <source>Address</source>
-        <translation type="unfinished">Adres</translation>
+        <translation>Adres</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="768"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Bazy danych</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="770"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Strategie</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="772"/>
         <source>Icon</source>
-        <translation type="unfinished">Ikona</translation>
+        <translation>Ikona</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="805"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdzielona przecinkami lista baz danych
+(pusty ciąg znaków lub „*” oznacza wszystkie bazy danych)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="808"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdzielona przecinkami lista strategii wyszukiwania
+(pusty ciąg znaków oznacza strategię „prefiks”)</translation>
     </message>
 </context>
 <context>
@@ -809,7 +811,7 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasła słownika</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -880,7 +882,7 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../fulltextsearch.cc" line="68"/>
         <source>None</source>
-        <translation type="unfinished">Brak</translation>
+        <translation>Brak</translation>
     </message>
 </context>
 <context>
@@ -888,69 +890,69 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../fulltextsearch.cc" line="140"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyszukiwanie pełnotekstowe</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="147"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Całe słowa</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="148"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwykły tekst</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="149"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole wieloznaczne</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="150"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyrażenie regularne</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="155"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. odstęp między słowami (%1–%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="164"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. liczba art. w słowniku (%1–%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="187"/>
         <location filename="../fulltextsearch.cc" line="297"/>
         <location filename="../fulltextsearch.cc" line="385"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Znalezione artykuły: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="266"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Trwa indeksowanie: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="310"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbole CJK w ciągu znaków wyszukiwania nie są obsługiwane w trybach wyszukiwania „Całe słowa” i „Zwykły tekst”</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="319"/>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>Wiersz wyszukiwania musi zawierać przynajmniej jedno słowo zawierające</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="320"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>lub więcej symboli</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="332"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak słowników do wyszukiwania pełnotekstowego</translation>
     </message>
 </context>
 <context>
@@ -958,7 +960,7 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../fulltextsearch.cc" line="61"/>
         <source>None</source>
-        <translation type="unfinished">Brak</translation>
+        <translation>Brak</translation>
     </message>
 </context>
 <context>
@@ -1005,57 +1007,57 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="189"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Szukaj</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgodna wielkość liter</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryb:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="94"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znalezione artykuły:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="116"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostępne słowniki w grupie:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="122"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekują na indeksowanie:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="143"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Łącznie:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaindeksowane:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="167"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Trwa indeksowanie: Brak</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="215"/>
         <source>Cancel</source>
-        <translation type="unfinished">Anuluj</translation>
+        <translation>Anuluj</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="235"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc</translation>
     </message>
 </context>
 <context>
@@ -1100,12 +1102,12 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Karty grup</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Otwórz listę grup</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -1249,47 +1251,47 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc do programu GoldenDict</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Strona główna</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished">Wstecz</translation>
+        <translation>Wstecz</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished">Dalej</translation>
+        <translation>Dalej</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Zwiększ</translation>
+        <translation>Zwiększ</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Zmniejsz</translation>
+        <translation>Zmniejsz</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">Normalna wielkość</translation>
+        <translation>Normalna wielkość</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Spis treści</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeks</translation>
     </message>
 </context>
 <context>
@@ -2574,7 +2576,7 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
     <message>
         <location filename="../mainwindow.cc" line="3913"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasła słownika</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3915"/>
@@ -2642,7 +2644,8 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
         <location filename="../mainwindow.cc" line="871"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciągi znaków do wyszukiwania w słownikach. Dozwolone są symbole wieloznaczne „*”, „?” i zbiory symboli „[...]”.
+Aby odnaleźć symbole „*”, „?”, „[” i „]”, należy użyć odpowiednio ciągów „\*”, „\?”, „\[” i „\]”</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1397"/>
@@ -2810,7 +2813,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="136"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Wy&amp;szukiwanie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
@@ -2840,7 +2843,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="591"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc do programu GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="594"/>
@@ -2947,22 +2950,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="566"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Szukaj na stronie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="569"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="577"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyszukiwanie pełnotekstowe</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="580"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3150,12 +3153,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="261"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Hasła słownika</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="285"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Słowniki aktywne: %1, nieaktywne: %2</translation>
     </message>
 </context>
 <context>
@@ -3396,7 +3399,7 @@ Zaznaczenie tej opcji powoduje, że ukrywane jest okno główne.</translation>
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Język pomocy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -3560,37 +3563,37 @@ wybrane klawisze w momencie zaznaczania słowa. Włączenie tej opcji powoduje,
     <message>
         <location filename="../preferences.ui" line="986"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemowy serwer proxy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="993"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Niestandardowy serwer proxy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1000"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia niestandardowe</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1180"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyszukiwanie pełnotekstowe</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1199"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zezwalaj na wyszukiwanie pełnotekstowe w źródłach:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1276"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie wyszukuj w słownikach, w których liczba artykułów przekracza</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1293"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>(0 — bez ograniczenia)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1521"/>
@@ -4495,12 +4498,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwery DICT</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwery DICT:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
