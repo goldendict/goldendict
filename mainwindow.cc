@@ -1876,6 +1876,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   makeScanPopup();
   installHotKeys();
 
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
 }
