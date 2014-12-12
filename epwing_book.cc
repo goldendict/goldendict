@@ -1509,9 +1509,10 @@ QByteArray EpwingBook::handleMpeg( EB_Hook_Code code, const unsigned int * argv 
   char file[ EB_MAX_PATH_LENGTH + 1 ];
 
   unsigned int *p = (unsigned int *)( argv + 2 );
-  eb_decompose_movie_file_name( p, file );
+  eb_compose_movie_path_name( &book, p, file );
 
   QString name = QString::fromLocal8Bit( file );
+  name = QFileInfo( name ).fileName();
   name += ".mpg";
 
   eb_set_binary_mpeg( &book, argv + 2 );
@@ -1553,7 +1554,7 @@ QByteArray EpwingBook::handleMpeg( EB_Hook_Code code, const unsigned int * argv 
         if( ret != EB_SUCCESS )
         {
           setErrorString( "eb_read_binary", ret );
-          gdWarning( "Epwing sound retrieve error: %s",
+          gdWarning( "Epwing movie retrieve error: %s",
                      error_string.toUtf8().data() );
           break;
         }
