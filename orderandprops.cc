@@ -191,6 +191,8 @@ void OrderAndProps::disableDictionaryDescription()
   ui.dictionaryDescription->clear();
   ui.dictionaryDescription->setVisible( false );
   ui.dictionaryDescriptionLabel->setVisible( false );
+  ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  ui.infoVerticalLayout->invalidate();
 }
 
 void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const & idx )
@@ -233,12 +235,15 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
       ui.dictionaryDescription->setPlainText( descText );
       ui.dictionaryDescription->setVisible( true );
       ui.dictionaryDescriptionLabel->setVisible( true );
+      ui.infoVerticalSpacer->changeSize( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum );
     }
     else
     {
       ui.dictionaryDescription->setVisible( false );
       ui.dictionaryDescriptionLabel->setVisible( false );
+      ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
     }
+    ui.infoVerticalLayout->invalidate();
   }
 }
 
