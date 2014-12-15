@@ -33,6 +33,10 @@
 extern "C" {
 #endif
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 #include <sys/types.h>
 #include <time.h>
 
