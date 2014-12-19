@@ -600,24 +600,24 @@ string ZimDictionary::convert( const string & in )
   text.replace( QRegExp( "<\\s*body\\s*([^>]*)background:([^;\"]*)" ),
                 QString( "<body \\1background: inherited;" ) );
 
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)/" ),
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)(\\.\\.|)/" ),
                 QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
 
   // Fix links without '"'
-  text.replace( QRegExp( "href=/([^\\s>]+)" ), QString( "href=\"/\\1\"" ) );
+  text.replace( QRegExp( "href=(\\.\\.|)/([^\\s>]+)" ), QString( "href=\"\\1/\\2\"" ) );
 
-  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"/" ),
+  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(\\.\\.|)/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
-  QRegExp linkRegexp1( "<\\s*a\\s*([^>]*)href=\"/[^\"]*\"\\s*title=\"([^\"]*)\"",
+  QRegExp linkRegexp1( "<\\s*a\\s*([^>]*)href=\"(?!(http(s|)|ftp)://)(/|)[^\"]*\"\\s*title=\"([^\"]*)\"",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
 
-  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"/A/([^\"]*)\"",
+  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"(\\.\\.|)/A/([^\"]*)\"",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
 
-  QRegExp linkRegexp3( ".(s|)htm(l|)", Qt::CaseInsensitive );
+  QRegExp linkRegexp3( "\\.(s|)htm(l|)", Qt::CaseInsensitive );
 
   int pos = 0;
   while( pos >= 0 )
@@ -629,7 +629,7 @@ string ZimDictionary::convert( const string & in )
     QStringList list = linkRegexp1.capturedTexts();
 
     QString tag = QString( "<a href=\"gdlookup://localhost/" );
-    QString link = list[ 2 ];
+    QString link = list[ 3 ];
 
     int nbeg = link.lastIndexOf( "/" );
     if( nbeg < 0 )
@@ -662,7 +662,7 @@ string ZimDictionary::convert( const string & in )
 
     QString tag = QString( "<a ") + list[ 1 ]
                   + "href=\"gdlookup://localhost/";
-    QString link = list[ 2 ];
+    QString link = list[ 3 ];
 
     int nbeg = link.lastIndexOf( "/" );
     if( nbeg <= 0 )
