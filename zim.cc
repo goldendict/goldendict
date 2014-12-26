@@ -613,7 +613,7 @@ string ZimDictionary::convert( const string & in )
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
 
-  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"(\\.\\.|)/A/([^\"]*)\"",
+  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"(\\.\\.|)/([^\"]*)\"",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
 
