@@ -612,9 +612,11 @@ string ZimDictionary::convert( const string & in )
   text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(\\.\\.|)/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
-  // localize the en.wiki***.com|org series links
-  text.replace( QRegExp( "<\\s*a\\s+(class=\"external\"\\s+)href=\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|versity)|wiktionary)\\.(org|com)/wiki/" ),
-                QString( "<a href=\"gdlookup://localhost/" ) );
+  // localize the http://en.wiki***.com|org/wiki/<key> series links
+  // excluding those keywords that have ":" in it
+  QString urlWiki = "\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|voyage|versity)|wiktionary)\\.(org|com)/wiki/([^:\"]*)\"";
+  text.replace( QRegExp( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
+                QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
