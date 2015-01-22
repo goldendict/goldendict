@@ -29,6 +29,7 @@
 #include "mdx.hh"
 #include "zim.hh"
 #include "dictserver.hh"
+#include "slob.hh"
 
 #ifndef NO_EPWING_SUPPORT
 #include "epwing.hh"
@@ -58,7 +59,7 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
               << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
               << "*.mdx"
 #ifdef MAKE_ZIM_SUPPORT
-              << "*.zim" << "*.zimaa"
+              << "*.zim" << "*.zimaa" << "*.slob"
 #endif
 #ifndef NO_EPWING_SUPPORT
               << "*catalogs"
@@ -206,6 +207,13 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
                          zimDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > slobDictionaries =
+      Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), slobDictionaries.begin(),
+                         slobDictionaries.end() );
   }
 #endif
 #ifndef NO_EPWING_SUPPORT

@@ -37,7 +37,7 @@ Alternatively, you might want to load `goldendict.pro` file from within Qt Creat
 
 ### Building with Zim dictionaries support
 
-To add Zim format support you need at first install lzma-dev package:
+To add Zim and Slob formats support you need at first install lzma-dev package:
 
     sudo apt-get liblzma-dev
 

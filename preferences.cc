@@ -294,12 +294,14 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.allowDSL->setChecked( !p.fts.disabledTypes.contains( "DSL", Qt::CaseInsensitive ) );
   ui.allowMDict->setChecked( !p.fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive ) );
   ui.allowSDict->setChecked( !p.fts.disabledTypes.contains( "SDICT", Qt::CaseInsensitive ) );
+  ui.allowSlob->setChecked( !p.fts.disabledTypes.contains( "SLOB", Qt::CaseInsensitive ) );
   ui.allowStardict->setChecked( !p.fts.disabledTypes.contains( "STARDICT", Qt::CaseInsensitive ) );
   ui.allowXDXF->setChecked( !p.fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive ) );
   ui.allowZim->setChecked( !p.fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive ) );
   ui.allowEpwing->setChecked( !p.fts.disabledTypes.contains( "EPWING", Qt::CaseInsensitive ) );
 #ifndef MAKE_ZIM_SUPPORT
   ui.allowZim->hide();
+  ui.allowSlob->hide();
 #endif
 #ifdef NO_EPWING_SUPPORT
   ui.allowEpwing->hide();
@@ -439,6 +441,13 @@ Config::Preferences Preferences::getPreferences()
     if( !p.fts.disabledTypes.isEmpty() )
       p.fts.disabledTypes += ',';
     p.fts.disabledTypes += "SDICT";
+  }
+
+  if( !ui.allowSlob->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "SLOB";
   }
 
   if( !ui.allowStardict->isChecked() )
