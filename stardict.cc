@@ -562,7 +562,10 @@ QString const& StardictDictionary::getDescription()
     Ifo ifo( ifoFile );
 
     if( !ifo.copyright.empty() )
-      dictionaryDescription += "Copyright: " + QString::fromUtf8( ifo.copyright.c_str() ) + "\n\n";
+      dictionaryDescription += "Copyright: "
+                               + QString::fromUtf8( ifo.copyright.c_str() )
+                                 .replace( "<br>", "\n", Qt::CaseInsensitive )
+                               + "\n\n";
 
     if( !ifo.author.empty() )
       dictionaryDescription += "Author: " + QString::fromUtf8( ifo.author.c_str() ) + "\n\n";
@@ -574,7 +577,8 @@ QString const& StardictDictionary::getDescription()
     {
       QString desc = QString::fromUtf8( ifo.description.c_str() );
       desc.replace( "\t", "<br/>" );
-      desc.replace( "\\n", "<br/>" );
+      desc.replace( "\\n", "\n" );
+      desc.replace( "<br>", "\n", Qt::CaseInsensitive );
       dictionaryDescription += Html::unescape( desc );
     }
 

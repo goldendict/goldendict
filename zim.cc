@@ -598,92 +598,79 @@ string ZimDictionary::convert( const string & in )
 {
   QString text = QString::fromUtf8( in.c_str() );
 
+  // replace background
   text.replace( QRegExp( "<\\s*body\\s*([^>]*)background:([^;\"]*)" ),
                 QString( "<body \\1background: inherited;" ) );
 
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)/" ),
+  // pattern of img and script
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)(\\.\\.|)/" ),
                 QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
 
   // Fix links without '"'
-  text.replace( QRegExp( "href=/([^\\s>]+)" ), QString( "href=\"/\\1\"" ) );
+  text.replace( QRegExp( "href=(\\.\\.|)/([^\\s>]+)" ), QString( "href=\"\\1/\\2\"" ) );
 
-  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"/" ),
+  // pattern <link... href="..." ...>
+  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(\\.\\.|)/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
-  QRegExp linkRegexp1( "<\\s*a\\s*([^>]*)href=\"/[^\"]*\"\\s*title=\"([^\"]*)\"",
+  // localize the http://en.wiki***.com|org/wiki/<key> series links
+  // excluding those keywords that have ":" in it
+  QString urlWiki = "\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|voyage|versity)|wiktionary)\\.(org|com)/wiki/([^:\"]*)\"";
+  text.replace( QRegExp( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
+                QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
+
+  // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
+  // these links will be translated into local definitions
+  QRegExp rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
-
-  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"/A/([^\"]*)\"",
-                       Qt::CaseSensitive,
-                       QRegExp::RegExp2 );
-
-  QRegExp linkRegexp3( ".(s|)htm(l|)", Qt::CaseInsensitive );
-
   int pos = 0;
-  while( pos >= 0 )
+  while( (pos = rxLink.indexIn( text, pos )) >= 0 )
   {
-    pos = linkRegexp1.indexIn( text, pos );
-    if( pos < 0 )
-      break;
+    QStringList list = rxLink.capturedTexts();
+    QString tag = list[3];     // a url, ex: Precambrian_Chaotian.html
+    if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
+      tag = list[4].split("\"")[1];
 
-    QStringList list = linkRegexp1.capturedTexts();
+    tag.remove( QRegExp(".*/") ).
+        remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+        replace( "_", "%20" ).
+        prepend( "<a href=\"gdlookup://localhost/" ).
+        append( "\" " + list[4] + ">" );
 
-    QString tag = QString( "<a href=\"gdlookup://localhost/" );
-    QString link = list[ 2 ];
-
-    int nbeg = link.lastIndexOf( "/" );
-    if( nbeg < 0 )
-      nbeg = 0;
-    else
-      nbeg += 1;
-
-    int nend = link.lastIndexOf( "." );
-    if( nend < 0 || !link.mid( nend ).contains( linkRegexp3 ) )
-      nend = -1;
-
-    link = link.mid( nbeg, nend < 0 ? -1 : nend - nbeg );
-
-    link.replace( QChar( '_' ), "%20", Qt::CaseInsensitive );
-
-    tag += link + "\" title=\"" + link + "\"";
-    text.replace( pos, list[ 0 ].length(), tag );
-
+    text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
   }
 
+  // Occassionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
+  // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
+  QRegExp rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
+                       Qt::CaseSensitive,
+                       QRegExp::RegExp2 );
   pos = 0;
-  while( pos >= 0 )
+  while( (pos = rxBR.indexIn( text, pos )) >= 0 )
   {
-    pos = linkRegexp2.indexIn( text, pos );
-    if( pos < 0 )
-      break;
+    QStringList list = rxBR.capturedTexts();
+    QString tag = list[2];
+    tag.replace( QRegExp( "&lt;br( |)(\\\\|/|)&gt;", Qt::CaseInsensitive ) , "<br/>" ).
+        prepend( list[1] ).
+        append( "</a>" );
 
-    QStringList list = linkRegexp2.capturedTexts();
-
-    QString tag = QString( "<a ") + list[ 1 ]
-                  + "href=\"gdlookup://localhost/";
-    QString link = list[ 2 ];
-
-    int nbeg = link.lastIndexOf( "/" );
-    if( nbeg <= 0 )
-      nbeg = 0;
-    else
-      nbeg += 1;
-
-    int nend = link.lastIndexOf( "." );
-    if( nend < 0 || !link.mid( nend ).contains( linkRegexp3 ) )
-      nend = -1;
-
-    link = link.mid( nbeg, nend < 0 ? -1 : nend - nbeg );
-
-    link.replace( QChar( '_' ), "%20", Qt::CaseInsensitive );
-
-    tag += link + "\"";
-    text.replace( pos, list[ 0 ].length(), tag );
-
+    text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
   }
+
+  // // output all links in the page - only for analysis
+  // QRegExp rxPrintAllLinks( "<\\s*a\\s+[^>]*href=\"[^\"]*\"[^>]*>",
+  //                         Qt::CaseSensitive,
+  //                         QRegExp::RegExp2 );
+  // pos = 0;
+  // while( (pos = rxPrintAllLinks.indexIn( text, pos )) >= 0 )
+  // {
+  //   QStringList list = rxPrintAllLinks.capturedTexts();
+  //   qDebug() << "\n--Alllinks--" << list[0];
+  //   pos += list[0].length() + 1;
+  // }
 
   // Fix outstanding elements
   text += "<br style=\"clear:both;\" />";
