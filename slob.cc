@@ -1201,6 +1201,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           SlobFile sf;
 
+          gdDebug( "Slob: Building the index for dictionary: %s\n", i->c_str() );
+
           sf.open( firstName );
 
           initializing.indexingDictionary( sf.getDictionaryName().toUtf8().constData() );
