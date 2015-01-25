@@ -24,10 +24,13 @@
 
 #include <QString>
 #include <QFile>
+#include <QFileInfo>
+#include <QDir>
 #include <QTextCodec>
 #include <QMap>
 #include <QPair>
 #include <QRegExp>
+#include <QProcess>
 
 #include <string>
 #include <vector>
@@ -497,6 +500,7 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
     IdxHeader idxHeader;
     string dictionaryName;
     SlobFile sf;
+    QString texCgiPath, texCachePath;
 
   public:
 
@@ -563,9 +567,12 @@ private:
                       bool rawText = false );
 
     quint32 readArticle( quint32 address,
-                         string & articleText );
+                         string & articleText,
+                         RefEntry & entry );
 
-    string convert( string const & in_data );
+    string convert( string const & in_data, RefEntry const & entry );
+
+    void removeDirectory( QString const & directory );
 
     friend class SlobArticleRequest;
     friend class SlobResourceRequest;
@@ -619,10 +626,39 @@ SlobDictionary::SlobDictionary( string const & id,
     if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
         && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
+
+    texCgiPath = Config::getProgramDataDir() + "/mimetex.cgi";
+    if( QFileInfo( texCgiPath ).exists() )
+    {
+      QString dirName = QString::fromStdString( getId() );
+      QDir( QDir::tempPath() ).mkdir( dirName );
+      texCachePath = QDir::tempPath() + "/" + dirName;
+    }
+    else
+      texCgiPath.clear();
 }
 
 SlobDictionary::~SlobDictionary()
 {
+  if( !texCachePath.isEmpty() )
+    removeDirectory( texCachePath );
+}
+
+void SlobDictionary::removeDirectory( QString const & directory )
+{
+  QDir dir( directory );
+  Q_FOREACH( QFileInfo info, dir.entryInfoList( QDir::NoDotAndDotDot
+                                                | QDir::AllDirs
+                                                | QDir::Files,
+                                                QDir::DirsFirst))
+  {
+    if( info.isDir() )
+      removeDirectory( info.absoluteFilePath() );
+    else
+      QFile::remove( info.absoluteFilePath() );
+  }
+
+  dir.rmdir( directory );
 }
 
 void SlobDictionary::loadIcon() throw()
@@ -670,13 +706,15 @@ void SlobDictionary::loadArticle( quint32 address,
 {
   articleText.clear();
 
-  readArticle( address, articleText );
+  RefEntry entry;
+
+  readArticle( address, articleText, entry );
 
   if( !articleText.empty() )
   {
     if( rawText )
       return;
-    articleText = convert( articleText );
+    articleText = convert( articleText, entry );
   }
   else
     articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
@@ -696,13 +734,13 @@ void SlobDictionary::loadArticle( quint32 address,
   articleText = prefix + articleText + cleaner + "</div>";
 }
 
-string SlobDictionary::convert( const string & in )
+string SlobDictionary::convert( const string & in, RefEntry const & entry )
 {
   QString text = QString::fromUtf8( in.c_str() );
 
   // pattern of img and script
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"[^\"]*)" ),
-                QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=\"(|/)([^\"]*)\"" ),
+                QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
 
   // pattern <link... href="..." ...>
   text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"" ),
@@ -731,6 +769,56 @@ string SlobDictionary::convert( const string & in )
     pos += tag.length() + 1;
   }
 
+  // Handle TeX formulas via mimetex.cgi
+
+  if( !texCgiPath.isEmpty() )
+  {
+    QRegExp texImage( "<\\s*img\\s*class=\"([^\"]+)\"\\s*alt=\"([^\"]+)\"[^>]*>",
+                      Qt::CaseSensitive,
+                      QRegExp::RegExp2 );
+    pos = 0;
+    unsigned texCount = 0;
+    QString imgName;
+
+    QRegExp regFrac = QRegExp( "\\\\[dt]frac" );
+
+    while( (pos = texImage.indexIn( text, pos )) >= 0 )
+    {
+      QStringList list = texImage.capturedTexts();
+
+      if( list[ 1 ].compare( "tex" ) == 0
+          || list[ 1 ].endsWith( " tex" ) )
+      {
+        QString name;
+        name.sprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
+        imgName = texCachePath + "/" + name;
+
+        if( !QFileInfo( imgName ).exists() )
+        {
+          QString tex = list[ 2 ];
+          tex.replace( regFrac, "\\frac" );
+
+          QString command = texCgiPath + " -e " +  imgName
+                            + " \"" + tex + "\"";
+          QProcess::execute( command );
+        }
+
+        QString tag = QString( "<img class=\"imgtex\" src=\"file://" )
+#ifdef Q_OS_WIN32
+                      + "/"
+#endif
+                      + imgName + "\" alt=\"" + list[ 2 ] + "\">";
+
+        text.replace( pos, list[0].length(), tag );
+        pos += tag.length() + 1;
+
+        texCount += 1;
+      }
+      else
+        pos += list[ 0 ].length();
+    }
+  }
+
   // Fix outstanding elements
   text += "<br style=\"clear:both;\" />";
 
@@ -741,18 +829,19 @@ void SlobDictionary::loadResource( std::string & resourceName, string & data )
 {
   vector< WordArticleLink > link;
   string resData;
+  RefEntry entry;
 
   link = resourceIndex.findArticles( Utf8::decode( resourceName ) );
 
   if( link.empty() )
     return;
 
-  readArticle( link[ 0 ].articleOffset, data );
+  readArticle( link[ 0 ].articleOffset, data, entry );
 }
 
-quint32 SlobDictionary::readArticle( quint32 articleNumber, std::string & result )
+quint32 SlobDictionary::readArticle( quint32 articleNumber, std::string & result,
+                                     RefEntry & entry )
 {
-  RefEntry entry;
   string data;
   quint8 contentId;
 
