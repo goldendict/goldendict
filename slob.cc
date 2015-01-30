@@ -125,6 +125,7 @@ class SlobFile
   quint32 refsCount, itemsCount;
   quint64 itemsOffset, itemsDataOffset;
   quint32 currentItem;
+  quint32 contentTypesCount;
   string currentItemData;
 
   QString readTinyText();
@@ -145,6 +146,7 @@ public:
   , itemsOffset( 0 )
   , itemsDataOffset( 0 )
   , currentItem( 0xFFFFFFFF )
+  , contentTypesCount( 0 )
   {}
 
   ~SlobFile();
@@ -166,6 +168,9 @@ public:
 
   quint32 getRefsCount() const
   { return refsCount; }
+
+  quint32 getContentTypesCount() const
+  { return contentTypesCount; }
 
   QTextCodec * getCodec() const
   { return codec; }
@@ -322,6 +327,7 @@ QString error( name + ": " );
       QString type = readText();
       contentTypes.append( type );
     }
+    contentTypesCount = count;
 
     // Read data parameters
 
@@ -555,6 +561,9 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                 && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
     }
 
+    virtual uint32_t getFtsIndexVersion()
+    { return 1; }
+
 protected:
 
     virtual void loadIcon() throw();
@@ -563,8 +572,7 @@ private:
 
     /// Loads the article.
     void loadArticle( quint32 address,
-                      string & articleText,
-                      bool rawText = false );
+                      string & articleText );
 
     quint32 readArticle( quint32 address,
                          string & articleText,
@@ -701,8 +709,7 @@ QString const& SlobDictionary::getDescription()
 }
 
 void SlobDictionary::loadArticle( quint32 address,
-                                  string & articleText,
-                                  bool rawText )
+                                  string & articleText )
 {
   articleText.clear();
 
@@ -712,8 +719,6 @@ void SlobDictionary::loadArticle( quint32 address,
 
   if( !articleText.empty() )
   {
-    if( rawText )
-      return;
     articleText = convert( articleText, entry );
   }
   else
@@ -847,7 +852,8 @@ quint32 SlobDictionary::readArticle( quint32 articleNumber, std::string & result
 
   {
     Mutex::Lock _( slobMutex );
-    sf.getRefEntry( articleNumber, entry );
+    if( entry.key.isEmpty() )
+      sf.getRefEntry( articleNumber, entry );
     contentId = sf.getItem( entry, &data );
   }
 
@@ -892,7 +898,142 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
 
   try
   {
-    FtsHelpers::makeFTSIndex( this, isCancelled );
+    Mutex::Lock _( getFtsMutex() );
+
+    File::Class ftsIdx( ftsIndexName(), "wb" );
+
+    FtsHelpers::FtsIdxHeader ftsIdxHeader;
+    memset( &ftsIdxHeader, 0, sizeof( ftsIdxHeader ) );
+
+    // We write a dummy header first. At the end of the process the header
+    // will be rewritten with the right values.
+
+    ftsIdx.write( ftsIdxHeader );
+
+    ChunkedStorage::Writer chunks( ftsIdx );
+
+    BtreeIndexing::IndexedWords indexedWords;
+
+    QSet< uint32_t > setOfOffsets;
+
+    findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
+
+    if( isCancelled )
+      throw exUserAbort();
+
+    QVector< uint32_t > offsets;
+    offsets.resize( setOfOffsets.size() );
+    uint32_t * ptr = &offsets.front();
+
+    for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
+         it != setOfOffsets.constEnd(); ++it )
+    {
+      *ptr = *it;
+      ptr++;
+    }
+
+    // Free memory
+    setOfOffsets.clear();
+
+    if( isCancelled )
+      throw exUserAbort();
+
+    qSort( offsets );
+
+    if( isCancelled )
+      throw exUserAbort();
+
+    QMap< QString, QVector< uint32_t > > ftsWords;
+
+    set< quint64 > indexedArticles;
+    RefEntry entry;
+    string articleText;
+    quint32 htmlType = 0xFFFFFFFF;
+
+    for( unsigned i = 0; i < sf.getContentTypesCount(); i++ )
+    {
+      if( sf.getContentType( i ).startsWith( "text/html", Qt::CaseInsensitive ) )
+      {
+        htmlType = i;
+        break;
+      }
+    }
+
+    // index articles for full-text search
+    for( int i = 0; i < offsets.size(); i++ )
+    {
+      if( isCancelled )
+        throw exUserAbort();
+
+      QString articleStr;
+      quint32 articleNom = offsets.at( i );
+
+      sf.getRefEntry( articleNom, entry );
+
+      quint64 articleID = ( ( (quint64)entry.itemIndex ) << 32 ) | entry.binIndex;
+
+      set< quint64 >::iterator it = indexedArticles.find( articleID );
+      if( it != indexedArticles.end() )
+        continue;
+
+      indexedArticles.insert( articleID );
+
+      quint32 type = readArticle( 0, articleText, entry );
+
+      articleStr = QString::fromUtf8( articleText.c_str(), articleText.length() );
+
+      if( type == htmlType )
+        articleStr = Html::unescape( articleStr );
+
+      FtsHelpers::parseArticleForFts( articleNom, articleStr, ftsWords );
+    }
+
+    // Free memory
+    offsets.clear();
+
+    QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
+    while( it != ftsWords.end() )
+    {
+      if( isCancelled )
+        throw exUserAbort();
+
+      uint32_t offset = chunks.startNewBlock();
+      uint32_t size = it.value().size();
+
+      chunks.addToBlock( &size, sizeof(uint32_t) );
+      chunks.addToBlock( it.value().data(), size * sizeof(uint32_t) );
+
+      indexedWords.addSingleWord( gd::toWString( it.key() ), offset );
+
+      it = ftsWords.erase( it );
+    }
+
+    // Free memory
+    ftsWords.clear();
+
+    if( isCancelled )
+      throw exUserAbort();
+
+    ftsIdxHeader.chunksOffset = chunks.finish();
+    ftsIdxHeader.wordCount = indexedWords.size();
+
+    if( isCancelled )
+      throw exUserAbort();
+
+    BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
+
+    // Free memory
+    indexedWords.clear();
+
+    ftsIdxHeader.indexBtreeMaxElements = ftsIdxInfo.btreeMaxElements;
+    ftsIdxHeader.indexRootOffset = ftsIdxInfo.rootOffset;
+
+    ftsIdxHeader.signature = FtsHelpers::FtsSignature;
+    ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion;
+
+    ftsIdx.rewind();
+    ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );
+
     FTS_index_completed.ref();
   }
   catch( std::exception &ex )
@@ -906,12 +1047,27 @@ void SlobDictionary::getArticleText( uint32_t articleAddress, QString & headword
 {
   try
   {
-    headword.clear();
+    RefEntry entry;
     string articleText;
 
-    loadArticle( articleAddress, articleText, true );
+    quint32 htmlType = 0xFFFFFFFF;
 
-    text = Html::unescape( QString::fromUtf8( articleText.data(), articleText.size() ) );
+    for( unsigned i = 0; i < sf.getContentTypesCount(); i++ )
+    {
+      if( sf.getContentType( i ).startsWith( "text/html", Qt::CaseInsensitive ) )
+      {
+        htmlType = i;
+        break;
+      }
+    }
+
+    quint32 type = readArticle( articleAddress, articleText, entry );
+    headword = entry.key;
+
+    text = QString::fromUtf8( articleText.data(), articleText.size() );
+
+    if( type == htmlType )
+      text = Html::unescape( text );
   }
   catch( std::exception &ex )
   {
