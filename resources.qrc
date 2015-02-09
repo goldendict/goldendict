@@ -78,5 +78,6 @@
         <file>icons/playsound_full.png</file>
         <file>icons/icon32_zim.png</file>
         <file>icons/icon32_epwing.png</file>
+        <file>icons/icon32_slob.png</file>
     </qresource>
 </RCC>

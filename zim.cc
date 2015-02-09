@@ -840,7 +840,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     ftsIdxHeader.indexRootOffset = ftsIdxInfo.rootOffset;
 
     ftsIdxHeader.signature = FtsHelpers::FtsSignature;
-    ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion;
+    ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion + getFtsIndexVersion();
 
     ftsIdx.rewind();
     ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );
