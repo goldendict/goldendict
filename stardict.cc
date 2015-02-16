@@ -38,6 +38,8 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QDebug>
+#include <QRegExp>
+#include <QStringList>
 
 #include "ufile.hh"
 
@@ -212,6 +214,8 @@ private:
 
   string handleResource( char type, char const * resource, size_t size );
 
+  void pangoToHtml( QString & text );
+
   friend class StardictResourceRequest;
   friend class StardictArticleRequest;
   friend class StardictHeadwordsRequest;
@@ -327,6 +331,7 @@ void StardictDictionary::getArticleProps( uint32_t articleAddress,
 /// 'type', contained in a block pointed to by 'resource', 'size' bytes long.
 string StardictDictionary::handleResource( char type, char const * resource, size_t size )
 {
+  QString text;
   switch( type )
   {
     case 'x': // Xdxf content
@@ -352,7 +357,9 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
                                                          isToLanguageRTL() )
                                       + "</div>";
     case 'g': // Pango markup.
-      return "<div class=\"sdct_g\">" + string( resource, size ) + "</div>";
+      text = QString::fromUtf8( resource, size );
+      pangoToHtml( text );
+      return "<div class=\"sdct_g\">" + string( text.toUtf8().data() ) + "</div>";
     case 't': // Transcription
       return "<div class=\"sdct_t\">" + Html::escape( string( resource, size ) ) + "</div>";
     case 'y': // Chinese YinBiao or Japanese KANA. Examples are needed. For now,
@@ -380,6 +387,303 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
   }
   else
     return string( "<b>Unknown blob entry type " ) + string( 1, type ) + "</b><br>";
+}
+
+void StardictDictionary::pangoToHtml( QString & text )
+{
+/*
+ * Partially support for Pango Markup Language
+ * Attributes "fallback", "lang", "gravity", "gravity_hint" just ignored
+ */
+
+  QRegExp spanRegex( "<span\\s*([^>]*)>", Qt::CaseInsensitive );
+  QRegExp styleRegex( "(\\w+)=\"([^\"]*)\"" );
+
+  text.replace( "\n", "<br>" );
+
+  int pos = 0;
+  do
+  {
+    pos = spanRegex.indexIn( text, pos );
+    if( pos >= 0 )
+    {
+      QString styles = spanRegex.cap( 1 );
+      QString newSpan( "<span style=\"" );
+      int stylePos = 0;
+      do
+      {
+        stylePos = styleRegex.indexIn( styles, stylePos );
+        QString style = styleRegex.cap( 1 );
+        if( stylePos >= 0 )
+        {
+          if( style.compare( "font_desc", Qt::CaseInsensitive ) == 0
+              || style.compare( "font", Qt::CaseInsensitive ) == 0 )
+          {
+            // Parse font description
+
+            QStringList list = styleRegex.cap( 2 ).split( " ", QString::SkipEmptyParts );
+            int n;
+            QString sizeStr, stylesStr, familiesStr;
+            for( n = list.size() - 1; n >= 0; n-- )
+            {
+              QString str = list.at( n );
+
+              // font size
+              if( str[ 0 ].isNumber() )
+              {
+                sizeStr = QString( "font-size:" ) + str + ";";
+                continue;
+              }
+
+              // font style
+              if( str.compare( "normal", Qt::CaseInsensitive ) == 0
+                  || str.compare( "oblique", Qt::CaseInsensitive ) == 0
+                  || str.compare( "italic", Qt::CaseInsensitive ) == 0 )
+              {
+                if( !stylesStr.contains( "font-style:" ) )
+                  stylesStr += QString( "font-style:" ) + str + ";";
+                continue;
+              }
+
+              // font variant
+              if( str.compare( "smallcaps", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-variant:small-caps" ) ;
+                continue;
+              }
+
+              // font weight
+              if( str.compare( "ultralight", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-weight:100;" );
+                continue;
+              }
+              if( str.compare( "light", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-weight:200;" );
+                continue;
+              }
+              if( str.compare( "bold", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-weight:bold;" );
+                continue;
+              }
+              if( str.compare( "ultrabold", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-weight:800;" );
+                continue;
+              }
+              if( str.compare( "heavy", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-weight:900" );
+                continue;
+              }
+
+              // font stretch
+              if( str.compare( "ultracondensed", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:ultra-condensed;" );
+                continue;
+              }
+              if( str.compare( "extracondensed", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:extra-condensed;" );
+                continue;
+              }
+              if( str.compare( "semicondensed", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:semi-condensed;" );
+                continue;
+              }
+              if( str.compare( "semiexpanded", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:semi-expanded;" );
+                continue;
+              }
+              if( str.compare( "extraexpanded", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:extra-expanded;" );
+                continue;
+              }
+              if( str.compare( "ultraexpanded", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:ultra-expanded;" );
+                continue;
+              }
+              if( str.compare( "condensed", Qt::CaseInsensitive ) == 0
+                  || str.compare( "expanded", Qt::CaseInsensitive ) == 0 )
+              {
+                stylesStr += QString( "font-stretch:" ) + str + ";";
+                continue;
+              }
+
+              // gravity
+              if( str.compare( "south", Qt::CaseInsensitive ) == 0
+                  || str.compare( "east", Qt::CaseInsensitive ) == 0
+                  || str.compare( "north", Qt::CaseInsensitive ) == 0
+                  || str.compare( "west", Qt::CaseInsensitive ) == 0
+                  || str.compare( "auto", Qt::CaseInsensitive ) == 0 )
+              {
+                continue;
+              }
+              break;
+            }
+
+            // last words is families list
+            if( n >= 0 )
+            {
+              familiesStr = QString( "font-family:" );
+              for( int i = 0; i <= n; i++ )
+              {
+                if( i > 0 && !familiesStr.endsWith( ',' ) )
+                  familiesStr += ",";
+                familiesStr += list.at( i );
+              }
+              familiesStr += ";";
+            }
+
+            newSpan += familiesStr + stylesStr + sizeStr;
+          }
+          else if( style.compare( "font_family", Qt::CaseInsensitive ) == 0
+                   || style.compare( "face", Qt::CaseInsensitive ) == 0 )
+            newSpan += QString( "font-family:" ) + styleRegex.cap( 2 ) + ";";
+          else if( style.compare( "font_size", Qt::CaseInsensitive ) == 0
+                   || style.compare( "size", Qt::CaseInsensitive ) == 0 )
+          {
+            if( styleRegex.cap( 2 )[ 0 ].isLetter()
+                || styleRegex.cap( 2 ).endsWith( "px", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "pt", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "em", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "%" ) )
+              newSpan += QString( "font-size:" ) + styleRegex.cap( 2 ) +";";
+            else
+            {
+              int size = styleRegex.cap( 2 ).toInt();
+              if( size )
+                newSpan += QString( "font-size:%1pt;" ).arg( size / 1024.0, 0, 'f', 3 );
+            }
+          }
+          else if( style.compare( "font_style", Qt::CaseInsensitive ) == 0
+                   || style.compare( "style", Qt::CaseInsensitive ) == 0)
+            newSpan += QString( "font-style:" ) + styleRegex.cap( 2 ) + ";";
+          else if( style.compare( "weight", Qt::CaseInsensitive ) == 0
+                   || style.compare( "weight", Qt::CaseInsensitive ) == 0)
+          {
+            QString str = styleRegex.cap( 2 );
+            if( str.compare( "ultralight", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-weight:100;" );
+            else if( str.compare( "light", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-weight:200;" );
+            else if( str.compare( "ultrabold", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-weight:800;" );
+            else if( str.compare( "heavy", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-weight:900" );
+            else
+              newSpan += QString( "font-weight:" ) + str + ";";
+          }
+          else if( style.compare( "font_variant", Qt::CaseInsensitive ) == 0
+                   || style.compare( "variant", Qt::CaseInsensitive ) == 0 )
+          {
+            if( styleRegex.cap( 2 ).compare( "smallcaps", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-variant:small-caps" );
+            else
+              newSpan += QString( "font-variant:" ) + styleRegex.cap( 2 ) + ";";
+          }
+          else if( style.compare( "font_stretch", Qt::CaseInsensitive ) == 0
+                   || style.compare( "stretch", Qt::CaseInsensitive ) == 0 )
+          {
+            QString str = styleRegex.cap( 2 );
+            if( str.compare( "ultracondensed", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-stretch:ultra-condensed;" );
+            else if( str.compare( "extracondensed", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-stretch:extra-condensed;" );
+            else if( str.compare( "semicondensed", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-stretch:semi-condensed;" );
+            else if( str.compare( "semiexpanded", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-stretch:semi-expanded;" );
+            else if( str.compare( "extraexpanded", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-stretch:extra-expanded;" );
+            else if( str.compare( "ultraexpanded", Qt::CaseInsensitive ) == 0 )
+              newSpan += QString( "font-stretch:ultra-expanded;" );
+            else
+              newSpan += QString( "font-stretch:" ) + str + ";";
+          }
+          else if( style.compare( "foreground", Qt::CaseInsensitive ) == 0
+                   || style.compare( "fgcolor", Qt::CaseInsensitive ) == 0
+                   || style.compare( "color", Qt::CaseInsensitive ) == 0 )
+            newSpan += QString( "color:" ) + styleRegex.cap( 2 ) + ";";
+          else if( style.compare( "background", Qt::CaseInsensitive ) == 0
+                   || style.compare( "bgcolor", Qt::CaseInsensitive ) == 0 )
+            newSpan += QString( "background-color:" ) + styleRegex.cap( 2 ) + ";";
+          else if( style.compare( "underline_color", Qt::CaseInsensitive ) == 0
+                   || style.compare( "strikethrough_color", Qt::CaseInsensitive ) == 0 )
+            newSpan += QString( "text-decoration-color:" ) + styleRegex.cap( 2 ) + ";";
+          else if( style.compare( "underline", Qt::CaseInsensitive ) == 0 )
+          {
+            if( styleRegex.cap( 2 ).compare( "none", Qt::CaseInsensitive ) )
+              newSpan += QString( "text-decoration-line:none;" );
+            else
+            {
+              newSpan += QString( "text-decoration-line:underline; " );
+              if( styleRegex.cap( 2 ).compare( "low", Qt::CaseInsensitive ) )
+                newSpan += QString( "text-decoration-style:dotted;" );
+              else if( styleRegex.cap( 2 ).compare( "single", Qt::CaseInsensitive ) )
+                newSpan += QString( "text-decoration-style:solid;" );
+              else if( styleRegex.cap( 2 ).compare( "error", Qt::CaseInsensitive ) )
+                newSpan += QString( "text-decoration-style:wavy;" );
+              else
+                newSpan += QString( "text-decoration-style:" ) + styleRegex.cap( 2 ) + ";";
+            }
+          }
+          else if( style.compare( "strikethrough", Qt::CaseInsensitive ) == 0 )
+          {
+            if( styleRegex.cap( 2 ).compare( "true", Qt::CaseInsensitive ) )
+              newSpan += QString( "text-decoration-line:line-through;" );
+            else
+              newSpan += QString( "text-decoration-line:none;" );
+          }
+          else if( style.compare( "rise", Qt::CaseInsensitive ) == 0 )
+          {
+            if( styleRegex.cap( 2 ).endsWith( "px", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "pt", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "em", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "%" ) )
+              newSpan += QString( "vertical-align:" ) + styleRegex.cap( 2 ) +";";
+            else
+            {
+              int riseValue = styleRegex.cap( 2 ).toInt();
+              if( riseValue )
+                newSpan += QString( "vertical-align:%1pt;" ).arg( riseValue / 1024.0, 0, 'f', 3 );
+            }
+          }
+          else if( style.compare( "letter_spacing", Qt::CaseInsensitive ) == 0 )
+          {
+            if( styleRegex.cap( 2 ).endsWith( "px", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "pt", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "em", Qt::CaseInsensitive )
+                || styleRegex.cap( 2 ).endsWith( "%" ) )
+              newSpan += QString( "letter-spacing:" ) + styleRegex.cap( 2 ) +";";
+            else
+            {
+              int spacing = styleRegex.cap( 2 ).toInt();
+              if( spacing )
+                newSpan += QString( "letter-spacing:%1pt;" ).arg( spacing / 1024.0, 0, 'f', 3 );
+            }
+          }
+
+          stylePos += styleRegex.matchedLength();
+        }
+      }
+      while( stylePos >= 0 );
+
+      newSpan += "\">";
+      text.replace( pos, spanRegex.matchedLength(), newSpan );
+      pos += newSpan.size();
+    }
+  }
+  while( pos >= 0 );
+
+  text.replace( "  ", "&nbsp;&nbsp;" );
 }
 
 void StardictDictionary::loadArticle( uint32_t address,
