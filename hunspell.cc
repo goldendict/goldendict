@@ -83,6 +83,8 @@ public:
   virtual bool isLocalDictionary()
   { return true; }
 
+  virtual vector< wstring > getAlternateWritings( const wstring & word ) throw();
+
 protected:
 
   virtual void loadIcon() throw();
@@ -109,6 +111,16 @@ string encodeToHunspell( Hunspell &, wstring const & );
 /// Decodes the given string returned by the hunspell object. May throw
 /// Iconv::Ex
 wstring decodeFromHunspell( Hunspell &, char const * );
+
+/// Generates suggestions via hunspell
+QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex,
+                            Hunspell & hunspell );
+
+/// Generates suggestions for compound expression
+void getSuggestionsForExpression( wstring const & expression,
+                                  vector< wstring > & suggestions,
+                                  Mutex & hunspellMutex,
+                                  Hunspell & hunspell );
 
 /// Returns true if the string contains whitespace, false otherwise
 bool containsWhitespace( wstring const & str )
@@ -140,6 +152,18 @@ void HunspellDictionary::loadIcon() throw()
   }
 
   dictionaryIconLoaded = true;
+}
+
+vector< wstring > HunspellDictionary::getAlternateWritings( wstring const & word ) throw()
+{
+  vector< wstring > results;
+
+  if( containsWhitespace( word ) )
+  {
+    getSuggestionsForExpression( word, results, getHunspellMutex(), hunspell );
+  }
+
+  return results;
 }
 
 /// HunspellDictionary::getArticle()
@@ -377,11 +401,6 @@ public:
     isCancelled.ref();
     hasExited.acquire();
   }
-
-private:
-
-  /// Generates suggestions via hunspell
-  QVector< wstring > suggest( wstring & word );
 };
 
 void HunspellHeadwordsRequestRunnable::run()
@@ -409,58 +428,18 @@ void HunspellHeadwordsRequest::run()
 
   if ( containsWhitespace( trimmedWord ) )
   {
-    // Analyze each word separately and use the first suggestion, if any.
-    // This is useful for compound expressions where one of the words is
-    // in different form, e.g. "dozing off" -> "doze off".
-    // In this mode, we only provide a single suggestion at most.
+    vector< wstring > results;
 
-    wstring result;
+    getSuggestionsForExpression( trimmedWord, results, hunspellMutex, hunspell );
 
-    wstring word;
+    Mutex::Lock _( dataMutex );
+    for( unsigned i = 0; i < results.size(); i++ )
+      matches.push_back( results[ i ] );
 
-    for( wchar const * c = trimmedWord.c_str(); ; ++c )
-    {
-      if ( !*c || Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
-      {
-        if ( word.size() )
-        {
-          QVector< wstring > suggestions = suggest( word );
-
-          if ( suggestions.size() )
-            result += suggestions[ 0 ];
-          else
-            result += word;
-
-          word.clear();
-        }
-        if ( *c )
-          result.push_back( *c );
-        else
-          break;
-      }
-      else
-        word.push_back( *c );
-    }
-
-    if ( word.size() )
-    {
-      QVector< wstring > suggestions = suggest( trimmedWord );
-
-      if ( suggestions.size() )
-        result += suggestions[ 0 ];
-      else
-        result += word;
-    }
-
-    if ( result != trimmedWord )
-    {
-      Mutex::Lock _( dataMutex );
-      matches.push_back( result );
-    }
   }
   else
   {
-    QVector< wstring > suggestions = suggest( trimmedWord );
+    QVector< wstring > suggestions = suggest( trimmedWord, hunspellMutex, hunspell );
 
     if ( !suggestions.empty() )
     {
@@ -474,7 +453,7 @@ void HunspellHeadwordsRequest::run()
   finish();
 }
 
-QVector< wstring > HunspellHeadwordsRequest::suggest( wstring & word )
+QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hunspell )
 {
   QVector< wstring > result;
 
@@ -656,6 +635,102 @@ sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
   return new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell );
 }
 
+void getSuggestionsForExpression( wstring const & expression,
+                                  vector<wstring> & suggestions,
+                                  Mutex & hunspellMutex,
+                                  Hunspell & hunspell )
+{
+  // Analyze each word separately and use the first two suggestions, if any.
+  // This is useful for compound expressions where some words is
+  // in different form, e.g. "dozing off" -> "doze off".
+
+  wstring trimmedWord = Folding::trimWhitespaceOrPunct( expression );
+  wstring word, punct;
+  QVector< wstring > words;
+
+  suggestions.clear();
+
+  // Parse string to separate words
+
+  for( wchar const * c = trimmedWord.c_str(); ; ++c )
+  {
+    if ( !*c || Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
+    {
+      if ( word.size() )
+      {
+        words.push_back( word );
+        word.clear();
+      }
+      if ( *c )
+        punct.push_back( *c );
+    }
+    else
+    {
+      if( punct.size() )
+      {
+        words.push_back( punct );
+        punct.clear();
+      }
+      if( *c )
+        word.push_back( *c );
+    }
+    if( !*c )
+      break;
+  }
+
+  if( words.size() > 21 )
+  {
+    // Too many words - no suggestions
+    return;
+  }
+
+  // Combine result strings from suggestions
+
+  QVector< wstring > results;
+
+  for( int i = 0; i < words.size(); i++ )
+  {
+    word = words.at( i );
+    if( Folding::isPunct( word[ 0 ] ) || Folding::isWhitespace( word[ 0 ] ) )
+    {
+      for( int j = 0; j < results.size(); j++ )
+        results[ j ].append( word );
+    }
+    else
+    {
+      QVector< wstring > sugg = suggest( word, hunspellMutex, hunspell );
+      int suggNum = sugg.size() + 1;
+      if( suggNum > 3 )
+        suggNum = 3;
+      int resNum = results.size();
+      wstring resultStr;
+
+      if( resNum == 0 )
+      {
+        for( int k = 0; k < suggNum; k++ )
+          results.push_back( k == 0 ? word : sugg.at( k - 1 ) );
+      }
+      else
+      {
+        for( int j = 0; j < resNum; j++ )
+        {
+          resultStr = results.at( j );
+          for( int k = 0; k < suggNum; k++ )
+          {
+            if( k == 0)
+              results[ j ].append( word );
+            else
+              results.push_back( resultStr + sugg.at( k - 1 ) );
+          }
+        }
+      }
+    }
+  }
+
+  for( int i = 0; i < results.size(); i++ )
+    if( results.at( i ) != trimmedWord )
+      suggestions.push_back( results.at( i ) );
+}
 
 string encodeToHunspell( Hunspell & hunspell, wstring const & str )
 {
