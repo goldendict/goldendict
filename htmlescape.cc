@@ -137,23 +137,26 @@ string escapeForJavaScript( string const & str )
   return result;
 }
 
-QString unescape( QString const & str )
+QString unescape( QString const & str, bool saveFormat )
 {
   // Does it contain HTML? If it does, we need to strip it
   if ( str.contains( '<' ) || str.contains( '&' ) )
   {
     QString tmp = str;
-    tmp.replace( QRegExp( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
-                          Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
-    tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
+    if( !saveFormat )
+    {
+      tmp.replace( QRegExp( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
+      tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
+    }
     return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
   }
   return str;
 }
 
-string unescapeUtf8( const string &str )
+string unescapeUtf8( const string &str, bool saveFormat )
 {
-  return string( unescape( QString::fromUtf8( str.c_str(), str.size() ) ).toUtf8().data() );
+  return string( unescape( QString::fromUtf8( str.c_str(), str.size() ) ).toUtf8().data(), saveFormat );
 }
 
 }

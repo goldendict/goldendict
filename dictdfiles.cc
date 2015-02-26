@@ -403,11 +403,7 @@ QString const& DictdDictionary::getDescription()
                                                       vector< wstring >(), wstring() );
 
     if( req->dataSize() > 0 )
-    {
-      dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ) );
-      dictionaryDescription.replace( "\r\n", "\n" );
-      dictionaryDescription.replace( '\r', '\n' );
-    }
+      dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ), true );
     else
       dictionaryDescription = "NONE";
 
