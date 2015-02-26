@@ -132,6 +132,13 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   connect( netReply.get(), SIGNAL( finished() ),
            this, SLOT( downloadFinished() ) );
 
+#ifndef QT_NO_OPENSSL
+
+  connect( netReply.get(), SIGNAL( sslErrors( QList< QSslError > ) ),
+           netReply.get(), SLOT( ignoreSslErrors() ) );
+
+#endif
+
   // We start a timer to postpone early destruction, so a rapid type won't make
   // unnecessary network load
   startTimer( 200 );
@@ -263,6 +270,13 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
+#ifndef QT_NO_OPENSSL
+
+  connect( netReply.get(), SIGNAL( sslErrors( QList< QSslError > ) ),
+           netReply.get(), SLOT( ignoreSslErrors() ) );
+
+#endif
+
   netReplies.push_back( std::make_pair( netReply, false ) );
 }
 

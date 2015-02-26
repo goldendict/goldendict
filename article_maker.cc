@@ -928,8 +928,8 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
 //  DPRINTF( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
 
-  stemmedWordFinder->prefixMatch( currentSplittedWordCompound, activeDicts, 40, // Would one be enough? Leave 40 to be safe.
-                                  Dictionary::SuitableForCompoundSearching );
+  stemmedWordFinder->expressionMatch( currentSplittedWordCompound, activeDicts, 40, // Would one be enough? Leave 40 to be safe.
+                                      Dictionary::SuitableForCompoundSearching );
 }
 
 QString ArticleRequest::makeSplittedWordCompound()
@@ -961,7 +961,6 @@ void ArticleRequest::individualWordFinished()
 
   if ( results.size() )
   {
-    // Check if the aliases are acceptable
     wstring source = Folding::applySimpleCaseOnly( gd::toWString( currentSplittedWordCompound ) );
 
     bool hadSomething = false;
@@ -969,7 +968,14 @@ void ArticleRequest::individualWordFinished()
     for( unsigned x = 0; x < results.size(); ++x )
     {
       if ( results[ x ].second )
-        continue; // We're not interested in suggestions
+      {
+        // Spelling suggestion match found. No need to continue.
+        hadSomething = true;
+        lastGoodCompoundResult = currentSplittedWordCompound;
+        break;
+      }
+
+      // Prefix match found. Check if the aliases are acceptable.
 
       wstring result( Folding::applySimpleCaseOnly( gd::toWString( results[ x ].first ) ) );
 

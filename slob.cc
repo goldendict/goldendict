@@ -56,6 +56,7 @@ DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
 DEF_EX_STR( exCantDecodeFile, "Can't decode file", Dictionary::Ex )
 DEF_EX_STR( exNoCodecFound, "No text codec found", Dictionary::Ex )
 DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
+DEF_EX( exNoResource, "No resource found", Dictionary::Ex )
 
 #pragma pack( push, 1 )
 
@@ -1345,7 +1346,7 @@ void SlobResourceRequest::run()
     string resource;
     dict.loadResource( resourceName, resource );
     if( resource.empty() )
-      throw File::Ex();
+      throw exNoResource();
 
     if( Filetype::isNameOfCSS( resourceName ) )
     {
