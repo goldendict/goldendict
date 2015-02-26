@@ -599,6 +599,10 @@ a školní ortografií v cyrilici)</translation>
         <source>Search strategies: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Server databases</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictServersModel</name>

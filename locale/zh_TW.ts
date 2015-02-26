@@ -579,6 +579,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Search strategies: </source>
         <translation>搜尋策略：</translation>
     </message>
+    <message>
+        <source>Server databases</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictServersModel</name>

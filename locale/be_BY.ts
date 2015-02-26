@@ -599,27 +599,27 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="231"/>
+        <location filename="../dictheadwords.cc" line="235"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="248"/>
+        <location filename="../dictheadwords.cc" line="252"/>
         <source>Save headwords to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="250"/>
+        <location filename="../dictheadwords.cc" line="254"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation type="unfinished">Тэкставыя файлы (*.txt);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="274"/>
+        <location filename="../dictheadwords.cc" line="278"/>
         <source>Export headwords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="274"/>
+        <location filename="../dictheadwords.cc" line="278"/>
         <source>Cancel</source>
         <translation type="unfinished">Скасаваць</translation>
     </message>
@@ -694,18 +694,23 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictServer</name>
     <message>
-        <location filename="../dictserver.cc" line="239"/>
+        <location filename="../dictserver.cc" line="248"/>
         <source>Url: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="240"/>
+        <location filename="../dictserver.cc" line="249"/>
         <source>Databases: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="241"/>
+        <location filename="../dictserver.cc" line="250"/>
         <source>Search strategies: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dictserver.cc" line="254"/>
+        <source>Server databases</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1293,12 +1298,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="253"/>
+        <location filename="../hunspell.cc" line="277"/>
         <source>Spelling suggestions: </source>
         <translation>Артаґрафічныя падказкі: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="793"/>
+        <location filename="../hunspell.cc" line="868"/>
         <source>%1 Morphology</source>
         <translation>Марфалёґія %1</translation>
     </message>
@@ -2351,7 +2356,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="258"/>
+        <location filename="../loaddictionaries.cc" line="266"/>
         <source>Error loading dictionaries</source>
         <translation>Памылка пры ладаваньні слоўнікаў</translation>
     </message>
@@ -2570,7 +2575,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3518"/>
+        <location filename="../mainwindow.cc" line="3529"/>
         <source>&amp;Show</source>
         <translation>&amp;Паказаць</translation>
     </message>
@@ -2778,33 +2783,33 @@ between classic and school orthography in cyrillic)</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2777"/>
+        <location filename="../mainwindow.cc" line="2781"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Памылка ініцыялізацыі цікаваньня клявішных скаротаў.&lt;br&gt;Пераканайся, што XServer мае ўлучанае пашырэньне RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2914"/>
+        <location filename="../mainwindow.cc" line="2918"/>
         <source>New Release Available</source>
         <translation>Дастуны новы выпуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2915"/>
+        <location filename="../mainwindow.cc" line="2919"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict вэрсіі &lt;b&gt;%1&lt;/b&gt; даступны для заладаваньня.&lt;br&gt;Пстрыкні па &lt;b&gt;Зладаваць&lt;/b&gt;, каб перайсьці на бачыну сьцягваньня.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2920"/>
+        <location filename="../mainwindow.cc" line="2924"/>
         <source>Download</source>
         <translation>Зладаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2921"/>
+        <location filename="../mainwindow.cc" line="2925"/>
         <source>Skip This Release</source>
         <translation>Прамінуць гэты выпуск</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="794"/>
-        <location filename="../mainwindow.cc" line="2974"/>
+        <location filename="../mainwindow.cc" line="2978"/>
         <source>Accessibility API is not enabled</source>
         <translation>Accessibility API ня ўлучаны</translation>
     </message>
@@ -2815,128 +2820,128 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3051"/>
+        <location filename="../mainwindow.cc" line="3055"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Паліца мэню ёсьць схаваная. Скарыстай %1, каб павараціць назад.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3052"/>
+        <location filename="../mainwindow.cc" line="3056"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3150"/>
+        <location filename="../mainwindow.cc" line="3154"/>
         <source>Page Setup</source>
         <translation>Налады бачыны</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3151"/>
+        <location filename="../mainwindow.cc" line="3155"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Няма дасяжных друкарак. Спачатку ўсталюй хоць адну.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3169"/>
+        <location filename="../mainwindow.cc" line="3173"/>
         <source>Print Article</source>
         <translation>Надрукаваць артыкул</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3238"/>
+        <location filename="../mainwindow.cc" line="3242"/>
         <source>Article, Complete (*.html)</source>
         <translation>Артыкул цалком (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3239"/>
+        <location filename="../mainwindow.cc" line="3243"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Артыкул, толькі HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3242"/>
+        <location filename="../mainwindow.cc" line="3246"/>
         <source>Save Article As</source>
         <translation>Захаваць артыкул як</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3256"/>
+        <location filename="../mainwindow.cc" line="3260"/>
         <source>Error</source>
         <translation>Памылка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3257"/>
+        <location filename="../mainwindow.cc" line="3261"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Няможна захаваць артыкул: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3294"/>
+        <location filename="../mainwindow.cc" line="3298"/>
         <source>Saving article...</source>
         <translation>Захоўваньне артыкула...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3354"/>
+        <location filename="../mainwindow.cc" line="3358"/>
         <source>The main window is set to be always on top.</source>
         <translation>Галоўнае акно цяпер заўсёды знаходзіцца вышэй іншых.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3514"/>
+        <location filename="../mainwindow.cc" line="3525"/>
         <source>&amp;Hide</source>
         <translation>С&amp;хаваць</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3540"/>
+        <location filename="../mainwindow.cc" line="3551"/>
         <source>Export history to file</source>
         <translation>Экспартаваньне гісторыі ў файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3542"/>
-        <location filename="../mainwindow.cc" line="3604"/>
+        <location filename="../mainwindow.cc" line="3553"/>
+        <location filename="../mainwindow.cc" line="3615"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Тэкставыя файлы (*.txt);;Усе файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3581"/>
+        <location filename="../mainwindow.cc" line="3592"/>
         <source>History export complete</source>
         <translation>Экспартаваньне гісторыі кончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3584"/>
+        <location filename="../mainwindow.cc" line="3595"/>
         <source>Export error: </source>
         <translation>Памылка экспарту: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3602"/>
+        <location filename="../mainwindow.cc" line="3613"/>
         <source>Import history from file</source>
         <translation>Імпартаваньне гісторыі з файла</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3651"/>
+        <location filename="../mainwindow.cc" line="3662"/>
         <source>Import error: invalid data in file</source>
         <translation>Памылка імпартаваньня: хібныя зьвесткі ў файле</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3655"/>
+        <location filename="../mainwindow.cc" line="3666"/>
         <source>History import complete</source>
         <translation>Імпартаваньне гісторыі кончылася</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3658"/>
+        <location filename="../mainwindow.cc" line="3669"/>
         <source>Import error: </source>
         <translation>Памылка імпартаваньня: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3909"/>
+        <location filename="../mainwindow.cc" line="3920"/>
         <source>Dictionary info</source>
         <translation>Інфармацыя пра слоўнік</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3913"/>
+        <location filename="../mainwindow.cc" line="3924"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3915"/>
+        <location filename="../mainwindow.cc" line="3926"/>
         <source>Open dictionary folder</source>
         <translation>Адчыніць слоўнікавы каталёґ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3921"/>
+        <location filename="../mainwindow.cc" line="3932"/>
         <source>Edit dictionary</source>
         <translation>Рэдаґаваць слоўнік</translation>
     </message>
@@ -2957,7 +2962,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="310"/>
+        <location filename="../mediawiki.cc" line="324"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Памылка разбору файла XML: %1 — радок %2, слупок %3</translation>
     </message>
@@ -2965,7 +2970,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="185"/>
+        <location filename="../mediawiki.cc" line="192"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Памылка разбору файла XML: %1 — радок %2, слупок %3</translation>
     </message>
@@ -3060,22 +3065,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Упарадкуй слоўнікі, разьмеркаваўшы іх мышшу. Каб не ўжываць слоўніка, перацягні яго ў ґрупу вылучаных слоўнікаў.</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="248"/>
+        <location filename="../orderandprops.cc" line="253"/>
         <source>Sort by name</source>
         <translation>Сартаваць паводле назвы</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="250"/>
+        <location filename="../orderandprops.cc" line="255"/>
         <source>Sort by languages</source>
         <translation>Сартаваць паводле мовы</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="261"/>
+        <location filename="../orderandprops.cc" line="266"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="285"/>
+        <location filename="../orderandprops.cc" line="290"/>
         <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3645,27 +3650,27 @@ download page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1276"/>
+        <location filename="../preferences.ui" line="1283"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1293"/>
+        <location filename="../preferences.ui" line="1300"/>
         <source>articles (0 - unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1339"/>
+        <location filename="../preferences.ui" line="1346"/>
         <source>Ad&amp;vanced</source>
         <translation>&amp;Дадаткова</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1345"/>
+        <location filename="../preferences.ui" line="1352"/>
         <source>ScanPopup extra technologies</source>
         <translation>Дадатковыя мэханізмы сканаваньня словаў для выплыўных вокнаў</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1351"/>
+        <location filename="../preferences.ui" line="1358"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3676,12 +3681,12 @@ Internet Explorer 9).
 Ня трэба ўлучаць гэтае опцыі, калі не карыстаешся такімі праґрамамі.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1357"/>
+        <location filename="../preferences.ui" line="1364"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Скарыстаць &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1364"/>
+        <location filename="../preferences.ui" line="1371"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3690,12 +3695,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Ня трэба ўлучаць гэтае опцыі, калі не карыстаешся такімі праґрамамі.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1369"/>
+        <location filename="../preferences.ui" line="1376"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Скарыстаць &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1376"/>
+        <location filename="../preferences.ui" line="1383"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3704,82 +3709,82 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 Ня трэба ўлучаць гэтае опцыі, калі не карыстаешся такімі праґрамамі.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1381"/>
+        <location filename="../preferences.ui" line="1388"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Скарыстаць запыты &amp;GoldenDict</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1391"/>
+        <location filename="../preferences.ui" line="1398"/>
         <source>History</source>
         <translation>Гісторыя</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1397"/>
+        <location filename="../preferences.ui" line="1404"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Улучы гэтую опцыю, каб захоўваць гісторыю перакладаных словаў</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1400"/>
+        <location filename="../preferences.ui" line="1407"/>
         <source>Store &amp;history</source>
         <translation>Захоўваць &amp;гісторыю</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1415"/>
+        <location filename="../preferences.ui" line="1422"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Пазначае максымальную колькасьць запісаў у гісторыі.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1418"/>
+        <location filename="../preferences.ui" line="1425"/>
         <source>Maximum history size:</source>
         <translation>Памер гісторыі:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1455"/>
+        <location filename="../preferences.ui" line="1462"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Інтэрвал захаваньня гісторыі. Калі 0, гісторыя будзе захоўвацца толькі перад выхадам.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1461"/>
+        <location filename="../preferences.ui" line="1468"/>
         <source>Save every</source>
         <translation>Захоўваць праз</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1478"/>
+        <location filename="../preferences.ui" line="1485"/>
         <source>minutes</source>
         <translation>хв</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1503"/>
+        <location filename="../preferences.ui" line="1510"/>
         <source>Articles</source>
         <translation>Артыкулы</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1509"/>
+        <location filename="../preferences.ui" line="1516"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Улучы гэтую опцыю, каб заўсёды разгортваць дадатковыя разьдзелы артыкулаў</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1512"/>
+        <location filename="../preferences.ui" line="1519"/>
         <source>Expand optional &amp;parts</source>
         <translation>Разгортваць дадатковыя &amp;разьдзелы</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1521"/>
+        <location filename="../preferences.ui" line="1528"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Улучы опцыю, каб аўтаматычна згартаць вялікія артыкулы</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1524"/>
+        <location filename="../preferences.ui" line="1531"/>
         <source>Collapse articles more than</source>
         <translation>Згартаць артыкулы, якія маюць больш за</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1531"/>
+        <location filename="../preferences.ui" line="1538"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Артыкулы большыя за гэта значэньне будуць згартацца</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1547"/>
+        <location filename="../preferences.ui" line="1554"/>
         <source>symbols</source>
         <translation>знакаў</translation>
     </message>
@@ -3820,12 +3825,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="543"/>
+        <location filename="../preferences.cc" line="552"/>
         <source>Changing Language</source>
         <translation>Зьмена мовы</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="544"/>
+        <location filename="../preferences.cc" line="553"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Перастартуй праґраму, каб ужыць новую мову.</translation>
     </message>
@@ -3907,13 +3912,14 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="418"/>
-        <location filename="../dsl.cc" line="1606"/>
+        <location filename="../aard.cc" line="420"/>
+        <location filename="../dsl.cc" line="1654"/>
         <source>Article loading error</source>
         <translation>Памылка ладаваньня артыкула</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="510"/>
+        <location filename="../aard.cc" line="512"/>
+        <location filename="../slob.cc" line="726"/>
         <source>Article decoding error</source>
         <translation>Памылка раскадоўваньня артыкула</translation>
     </message>
@@ -4624,7 +4630,7 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WordFinder</name>
     <message>
-        <location filename="../wordfinder.cc" line="178"/>
+        <location filename="../wordfinder.cc" line="203"/>
         <source>Failed to query some dictionaries.</source>
         <translation>Памылка запыту ў нейкіх слоўніках.</translation>
     </message>
