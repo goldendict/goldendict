@@ -155,6 +155,7 @@ class DictServerDictionary: public Dictionary::Class
   QTcpSocket socket;
   QStringList databases;
   QStringList strategies;
+  QStringList serverDatabases;
 
 public:
 
@@ -212,6 +213,8 @@ protected:
 
   virtual void loadIcon() throw();
 
+  void getServerDatabases();
+
   friend class DictServerWordSearchRequest;
   friend class DictServerArticleRequest;
 };
@@ -234,13 +237,88 @@ void DictServerDictionary::loadIcon() throw()
 
 QString const & DictServerDictionary::getDescription()
 {
+  if( serverDatabases.isEmpty() )
+  {
+    dictionaryDescription.clear();
+    getServerDatabases();
+  }
+
   if( dictionaryDescription.isEmpty() )
   {
     dictionaryDescription = QCoreApplication::translate( "DictServer", "Url: " ) + url + "\n";
     dictionaryDescription += QCoreApplication::translate( "DictServer", "Databases: " ) + databases.join( ", " ) + "\n";
     dictionaryDescription += QCoreApplication::translate( "DictServer", "Search strategies: " ) + strategies.join( ", " );
+    if( !serverDatabases.isEmpty() )
+    {
+      dictionaryDescription += "\n\n";
+      dictionaryDescription += QCoreApplication::translate( "DictServer", "Server databases" )
+                               + " (" + QString::number( serverDatabases.size()) + "):";
+      for( QStringList::const_iterator i = serverDatabases.begin(); i != serverDatabases.end(); ++i )
+        dictionaryDescription += "\n" + *i;
+    }
   }
   return dictionaryDescription;
+}
+
+void DictServerDictionary::getServerDatabases()
+{
+  QAtomicInt isCancelled;
+  QTcpSocket * socket = new QTcpSocket;
+
+  if( !socket )
+    return;
+
+  if( connectToServer( *socket, url, errorString, isCancelled ) )
+  {
+    for( ; ; )
+    {
+      QString req = QString( "SHOW DB\r\n" );
+      socket->write( req.toUtf8() );
+      socket->waitForBytesWritten( 1000 );
+
+      QString reply;
+
+      if( !readLine( *socket, reply, errorString, isCancelled ) )
+        return;
+
+      if( reply.left( 3 ) == "110" )
+      {
+        int countPos = reply.indexOf( ' ', 4 );
+        // Get databases count
+        int count = reply.mid( 4, countPos > 4 ? countPos - 4 : -1 ).toInt();
+
+        // Read databases
+        for( int x = 0; x < count; x++ )
+        {
+          if( !readLine( *socket, reply, errorString, isCancelled ) )
+             break;
+
+          if( reply[ 0 ] == '.' )
+            break;
+
+          while( reply.endsWith( '\r' ) || reply.endsWith( '\n' ) )
+            reply.chop( 1 );
+
+          if( !reply.isEmpty() )
+            serverDatabases.append( reply );
+        }
+
+        break;
+      }
+      else
+      {
+        gdWarning( "Retrieving databases from \"%s\" fault: %s\n",
+                   getName().c_str(), reply.toUtf8().data() );
+        break;
+      }
+    }
+    disconnectFromServer( *socket );
+  }
+
+  if( !errorString.isEmpty() )
+    gdWarning( "Retrieving databases from \"%s\" fault: %s\n",
+               getName().c_str(), errorString.toUtf8().data() );
+  delete socket;
 }
 
 class DictServerWordSearchRequest;
