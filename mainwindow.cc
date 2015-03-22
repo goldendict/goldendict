@@ -3224,7 +3224,12 @@ void MainWindow::on_saveArticle_triggered()
 {
   ArticleView *view = getCurrentArticleView();
 
-  QString fileName = view->getTitle() + ".html";
+  QString fileName = view->getTitle();
+
+  // Replace reserved filename characters
+  fileName.replace( QRegExp( "[/\\\\\\?\\*:\\|<>]" ), "_" );
+
+  fileName += ".html";
   QString savePath;
 
   if ( cfg.articleSavePath.isEmpty() )
