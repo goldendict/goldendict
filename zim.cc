@@ -598,8 +598,8 @@ string ZimDictionary::convert( const string & in )
   QString text = QString::fromUtf8( in.c_str() );
 
   // replace background
-  text.replace( QRegExp( "<\\s*body\\s*([^>]*)background:([^;\"]*)" ),
-                QString( "<body \\1background: inherited;" ) );
+  text.replace( QRegExp( "<\\s*body\\s*([^>]*)(background(|-color)):([^;\"]*(|;))" ),
+                QString( "<body \\1" ) );
 
   // pattern of img and script
   text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)(\\.\\.|)/" ),
