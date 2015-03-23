@@ -14,7 +14,7 @@
 #define AUTO_APPLY_LIMIT 150000
 
 DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
-                          Dictionary::Class * dict_ ) :
+                              Dictionary::Class * dict_ ) :
   QDialog(parent)
 , cfg( cfg_ )
 , dict( dict_ )
@@ -25,7 +25,11 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   if( cfg.headwordsDialog.headwordsDialogGeometry.size() > 0 )
     restoreGeometry( cfg.headwordsDialog.headwordsDialogGeometry );
 
-  setAttribute( Qt::WA_DeleteOnClose, false );
+  bool fromMainWindow = parent->objectName() == "MainWindow";
+
+  if( fromMainWindow )
+    setAttribute( Qt::WA_DeleteOnClose, false );
+
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   ui.searchModeCombo->addItem( tr( "Text" ), QRegExp::FixedString );
@@ -65,6 +69,25 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   connect( this, SIGNAL( finished( int ) ), this, SLOT( savePos() ) );
 
+  if( !fromMainWindow )
+  {
+    ui.helpButton->hide();
+    connect( this, SIGNAL( closeDialog() ), this, SLOT( accept() ) );
+  }
+  else
+  {
+    connect( ui.helpButton, SIGNAL( clicked() ),
+             this, SLOT( helpRequested() ) );
+
+    helpAction.setShortcut( QKeySequence( "F1" ) );
+    helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+
+    connect( &helpAction, SIGNAL( triggered() ),
+             this, SLOT( helpRequested() ) );
+
+    addAction( &helpAction );
+  }
+
   connect( ui.OKButton, SIGNAL( clicked( bool ) ), this, SLOT( okButtonClicked() ) );
   connect( ui.exportButton, SIGNAL( clicked( bool ) ), this, SLOT( exportButtonClicked() ) );
   connect( ui.applyButton, SIGNAL( clicked( bool ) ), this, SLOT( filterChanged() ) );
@@ -84,17 +107,6 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   connect( proxy, SIGNAL( dataChanged( QModelIndex, QModelIndex ) ),
            this, SLOT( showHeadwordsNumber() ) );
-
-  connect( ui.helpButton, SIGNAL( clicked() ),
-           this, SLOT( helpRequested() ) );
-
-  helpAction.setShortcut( QKeySequence( "F1" ) );
-  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
-
-  connect( &helpAction, SIGNAL( triggered() ),
-           this, SLOT( helpRequested() ) );
-
-  addAction( &helpAction );
 
   ui.headersListView->installEventFilter( this );
 
