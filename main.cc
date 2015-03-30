@@ -297,8 +297,5 @@ int main( int argc, char ** argv )
 
   app.removeDataCommiter( m );
 
-  if( logFile.isOpen() )
-    logFile.close();
-
   return r;
 }

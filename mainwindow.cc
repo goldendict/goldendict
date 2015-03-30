@@ -993,7 +993,14 @@ void MainWindow::commitData()
     scanPopup.reset();
 
     // Save any changes in last chosen groups etc
-    Config::save( cfg );
+    try
+    {
+      Config::save( cfg );
+    }
+    catch( std::exception & e )
+    {
+      gdWarning( "Configuration saving failed, error: %s\n", e.what() );
+    }
 
     history.save();
   }
