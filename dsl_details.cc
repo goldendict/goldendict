@@ -274,7 +274,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             nextChar();
           } while( Folding::isWhitespace( ch ) );
 
-          wstring linkTo;
+          wstring linkTo, linkText;
 
           for( ; ; nextChar() )
           {
@@ -289,10 +289,21 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               {
                 linkTo.push_back( L'>' );
                 linkTo.push_back( ch );
+
+                linkText.push_back( L'>' );
+                if( escaped )
+                  linkText.push_back( L'\\' );
+                linkText.push_back( ch );
               }
             }
             else
+            {
               linkTo.push_back( ch );
+
+              if( escaped )
+                linkText.push_back( L'\\' );
+              linkText.push_back( ch );
+            }
           }
 
           // Add the corresponding node
@@ -304,7 +315,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             textNode = 0;
           }
 
-          wstring linkText = Folding::trimWhitespace( linkTo );
+          linkText = Folding::trimWhitespace( linkText );
           processUnsortedParts( linkText, true );
           ArticleDom nodeDom( linkText, dictName, headword_ );
 
