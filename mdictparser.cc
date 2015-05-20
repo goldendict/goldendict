@@ -33,6 +33,7 @@
 #include <QRegExp>
 #include <QDomDocument>
 #include <QTextDocumentFragment>
+#include <QDataStream>
 
 #include <QDebug>
 

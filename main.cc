@@ -86,6 +86,15 @@ void gdMessageHandler( QtMsgType type, const char *msg )
       else
         fprintf(stderr, "Fatal: %s\n", msg);
       abort();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
+    case QtInfoMsg:
+      if( logFile.isOpen() )
+        message.insert( 0, "Info: " );
+      else
+        fprintf(stderr, "Info: %s\n", msg);
+      break;
+#endif
   }
 
   if( logFile.isOpen() )
@@ -315,6 +324,9 @@ int main( int argc, char ** argv )
   int r = app.exec();
 
   app.removeDataCommiter( m );
+
+  if( logFile.isOpen() )
+    logFile.close();
 
   return r;
 }
