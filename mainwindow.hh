@@ -237,7 +237,7 @@ private:
 
   void fillWordListFromHistory();
 
-  void showDictionaryHeadwords( Dictionary::Class * dict );
+  void showDictionaryHeadwords( QWidget * owner, Dictionary::Class * dict );
 
 private slots:
 

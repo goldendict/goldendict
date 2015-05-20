@@ -1003,7 +1003,14 @@ void MainWindow::commitData()
     scanPopup.reset();
 
     // Save any changes in last chosen groups etc
-    Config::save( cfg );
+    try
+    {
+      Config::save( cfg );
+    }
+    catch( std::exception & e )
+    {
+      gdWarning( "Configuration saving failed, error: %s\n", e.what() );
+    }
 
     history.save();
   }
@@ -3234,7 +3241,12 @@ void MainWindow::on_saveArticle_triggered()
 {
   ArticleView *view = getCurrentArticleView();
 
-  QString fileName = view->getTitle() + ".html";
+  QString fileName = view->getTitle();
+
+  // Replace reserved filename characters
+  fileName.replace( QRegExp( "[/\\\\\\?\\*:\\|<>]" ), "_" );
+
+  fileName += ".html";
   QString savePath;
 
   if ( cfg.articleSavePath.isEmpty() )
@@ -3743,6 +3755,14 @@ void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
 
 void MainWindow::showDictionaryInfo( const QString & id )
 {
+  QWidget * owner = 0;
+
+  if( sender()->objectName().compare( "EditDictionaries" ) == 0 )
+    owner = qobject_cast< QWidget * >( sender() );
+
+  if( owner == 0 )
+    owner = this;
+
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
     if( dictionaries[ x ]->getId() == id.toUtf8().data() )
@@ -3761,7 +3781,7 @@ void MainWindow::showDictionaryInfo( const QString & id )
       }
       else if( result == DictInfo::SHOW_HEADWORDS )
       {
-        showDictionaryHeadwords( dictionaries[x].get() );
+        showDictionaryHeadwords( owner, dictionaries[x].get() );
       }
 
       break;
@@ -3771,18 +3791,33 @@ void MainWindow::showDictionaryInfo( const QString & id )
 
 void MainWindow::showDictionaryHeadwords( const QString & id )
 {
+  QWidget * owner = 0;
+
+  if( sender()->objectName().compare( "EditDictionaries" ) == 0 )
+    owner = qobject_cast< QWidget * >( sender() );
+
+  if( owner == 0 )
+    owner = this;
+
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
     if( dictionaries[ x ]->getId() == id.toUtf8().data() )
     {
-      showDictionaryHeadwords( dictionaries[ x ].get() );
+      showDictionaryHeadwords( owner, dictionaries[ x ].get() );
       break;
     }
   }
 }
 
-void MainWindow::showDictionaryHeadwords( Dictionary::Class * dict )
+void MainWindow::showDictionaryHeadwords( QWidget * owner, Dictionary::Class * dict )
 {
+  if( owner && owner != this )
+  {
+    DictHeadwords headwords( owner, cfg, dict );
+    headwords.exec();
+    return;
+  }
+
   if( headwordsDlg == 0 )
   {
     headwordsDlg = new DictHeadwords( this, cfg, dict );
@@ -3956,7 +3991,7 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
       {
         if ( scanPopup )
           scanPopup.get()->blockSignals( true );
-        showDictionaryHeadwords( pDict );
+        showDictionaryHeadwords( this, pDict );
         if ( scanPopup )
           scanPopup.get()->blockSignals( false );
       }

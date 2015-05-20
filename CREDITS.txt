@@ -2,7 +2,7 @@
 Jennie Petoumenou <epetoumenou\gmail.com>: Greek transliteration and Greek translation
 Mindaugas Baranauskas <embar\super.lt>: Lithuanian translation
 Vit Pelcak <vit\pelcak.org>: Czech translation
-Hero Phương <herophuong93\gmail.com>: Vietnamese translation
+Hero Phương <herophuong93\gmail.com> , Trần Đình Anh Tuấn <tuantda.vn\gmail.com>: Vietnamese translation
 Daniele Di Pisa <daniele\systems.it>: Italian translation
 Daniel Kaneider: German translation
 Zhang Jinsong <zhangsong023\gmail.com>: Simplified Chinese translation

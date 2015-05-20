@@ -21,7 +21,7 @@ class DictHeadwords : public QDialog
 
 public:
   explicit DictHeadwords( QWidget * parent, Config::Class & cfg_,
-                        Dictionary::Class * dict_ );
+                          Dictionary::Class * dict_ );
   virtual ~DictHeadwords();
 
   void setup( Dictionary::Class * dict_ );
