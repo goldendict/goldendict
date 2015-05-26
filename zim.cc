@@ -631,8 +631,8 @@ string ZimDictionary::convert( const string & in )
     if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
       tag = list[4].split("\"")[1];
 
-    tag.remove( QRegExp(".*/") ).
-        remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+    // tag.remove( QRegExp(".*/") ).
+    tag.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
         replace( "_", "%20" ).
         prepend( "<a href=\"gdlookup://localhost/" ).
         append( "\" " + list[4] + ">" );
