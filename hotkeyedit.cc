@@ -10,6 +10,7 @@ HotKeyEdit::HotKeyEdit( QWidget * parent ):
   continuingCombo( false )
 {
   renderCurrentValue();
+  installEventFilter( this );
 }
 
 void HotKeyEdit::setHotKey( Config::HotKey const & hk )
@@ -117,3 +118,12 @@ void HotKeyEdit::keyReleaseEvent( QKeyEvent * event )
   QLineEdit::keyReleaseEvent( event );
 }
 
+bool HotKeyEdit::eventFilter( QObject *, QEvent * event )
+{
+  if( event->type() == QEvent::ShortcutOverride )
+  {
+    event->accept();
+    return true;
+  }
+  return false;
+}

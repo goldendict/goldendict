@@ -32,6 +32,7 @@ protected:
 private:
 
   void renderCurrentValue();
+  bool eventFilter( QObject *, QEvent * event );
 };
 
 #endif
