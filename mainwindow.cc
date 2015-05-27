@@ -2816,7 +2816,11 @@ void MainWindow::hotKeyActivated( int hk )
     toggleMainWindow();
   else
   if ( scanPopup.get() )
+#ifdef Q_OS_LINUX
+    scanPopup->translateWordFromSelection();
+#else
     scanPopup->translateWordFromClipboard();
+#endif
 }
 
 void MainWindow::prepareNewReleaseChecks()
