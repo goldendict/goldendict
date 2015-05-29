@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'initializing.ui'
 **
-** Created: Wed Nov 19 16:01:34 2014
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,14 +10,14 @@
 #define UI_INITIALIZING_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QProgressBar>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -33,20 +32,20 @@ public:
     void setupUi(QDialog *Initializing)
     {
         if (Initializing->objectName().isEmpty())
-            Initializing->setObjectName(QString::fromUtf8("Initializing"));
+            Initializing->setObjectName(QStringLiteral("Initializing"));
         Initializing->setWindowModality(Qt::ApplicationModal);
         Initializing->resize(326, 84);
         Initializing->setMinimumSize(QSize(326, 0));
         verticalLayout = new QVBoxLayout(Initializing);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         operation = new QLabel(Initializing);
-        operation->setObjectName(QString::fromUtf8("operation"));
+        operation->setObjectName(QStringLiteral("operation"));
         operation->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(operation);
 
         dictionary = new QLabel(Initializing);
-        dictionary->setObjectName(QString::fromUtf8("dictionary"));
+        dictionary->setObjectName(QStringLiteral("dictionary"));
         QFont font;
         font.setBold(true);
         font.setWeight(75);
@@ -58,7 +57,7 @@ public:
         verticalLayout->addWidget(dictionary);
 
         progressBar = new QProgressBar(Initializing);
-        progressBar->setObjectName(QString::fromUtf8("progressBar"));
+        progressBar->setObjectName(QStringLiteral("progressBar"));
         progressBar->setMaximum(0);
         progressBar->setValue(-1);
         progressBar->setAlignment(Qt::AlignCenter);
@@ -73,9 +72,9 @@ public:
 
     void retranslateUi(QDialog *Initializing)
     {
-        Initializing->setWindowTitle(QApplication::translate("Initializing", "GoldenDict - Initializing", 0, QApplication::UnicodeUTF8));
-        operation->setText(QApplication::translate("Initializing", "Please wait while indexing dictionary", 0, QApplication::UnicodeUTF8));
-        dictionary->setText(QApplication::translate("Initializing", "Dictionary Name", 0, QApplication::UnicodeUTF8));
+        Initializing->setWindowTitle(QApplication::translate("Initializing", "GoldenDict - Initializing", 0));
+        operation->setText(QApplication::translate("Initializing", "Please wait while indexing dictionary", 0));
+        dictionary->setText(QApplication::translate("Initializing", "Dictionary Name", 0));
     } // retranslateUi
 
 };

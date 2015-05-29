@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'editdictionaries.ui'
 **
-** Created: Wed Nov 19 16:01:34 2014
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,15 +10,15 @@
 #define UI_EDITDICTIONARIES_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QTabWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -34,21 +33,21 @@ public:
     void setupUi(QDialog *EditDictionaries)
     {
         if (EditDictionaries->objectName().isEmpty())
-            EditDictionaries->setObjectName(QString::fromUtf8("EditDictionaries"));
+            EditDictionaries->setObjectName(QStringLiteral("EditDictionaries"));
         EditDictionaries->resize(839, 532);
         verticalLayout = new QVBoxLayout(EditDictionaries);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tabs = new QTabWidget(EditDictionaries);
-        tabs->setObjectName(QString::fromUtf8("tabs"));
+        tabs->setObjectName(QStringLiteral("tabs"));
         dummy = new QWidget();
-        dummy->setObjectName(QString::fromUtf8("dummy"));
+        dummy->setObjectName(QStringLiteral("dummy"));
         tabs->addTab(dummy, QString());
-        tabs->setTabText(tabs->indexOf(dummy), QString::fromUtf8("Dummy"));
+        tabs->setTabText(tabs->indexOf(dummy), QStringLiteral("Dummy"));
 
         verticalLayout->addWidget(tabs);
 
         buttons = new QDialogButtonBox(EditDictionaries);
-        buttons->setObjectName(QString::fromUtf8("buttons"));
+        buttons->setObjectName(QStringLiteral("buttons"));
         buttons->setOrientation(Qt::Horizontal);
         buttons->setStandardButtons(QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
 
@@ -67,7 +66,7 @@ public:
 
     void retranslateUi(QDialog *EditDictionaries)
     {
-        EditDictionaries->setWindowTitle(QApplication::translate("EditDictionaries", "Dictionaries", 0, QApplication::UnicodeUTF8));
+        EditDictionaries->setWindowTitle(QApplication::translate("EditDictionaries", "Dictionaries", 0));
     } // retranslateUi
 
 };

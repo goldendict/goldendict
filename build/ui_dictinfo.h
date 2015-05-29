@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dictinfo.ui'
 **
-** Created: Wed Nov 19 16:01:34 2014
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,19 +10,19 @@
 #define UI_DICTINFO_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QPlainTextEdit>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -56,63 +55,63 @@ public:
     void setupUi(QDialog *DictInfo)
     {
         if (DictInfo->objectName().isEmpty())
-            DictInfo->setObjectName(QString::fromUtf8("DictInfo"));
+            DictInfo->setObjectName(QStringLiteral("DictInfo"));
         DictInfo->resize(600, 400);
         DictInfo->setModal(true);
         verticalLayout = new QVBoxLayout(DictInfo);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         groupBox = new QGroupBox(DictInfo);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         gridLayout = new QGridLayout(groupBox);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_2 = new QLabel(groupBox);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 0, 0, 1, 1);
 
         dictionaryTotalArticles = new QLabel(groupBox);
-        dictionaryTotalArticles->setObjectName(QString::fromUtf8("dictionaryTotalArticles"));
-        dictionaryTotalArticles->setText(QString::fromUtf8(""));
+        dictionaryTotalArticles->setObjectName(QStringLiteral("dictionaryTotalArticles"));
+        dictionaryTotalArticles->setText(QStringLiteral(""));
         dictionaryTotalArticles->setAlignment(Qt::AlignCenter);
 
         gridLayout->addWidget(dictionaryTotalArticles, 0, 1, 1, 1);
 
         label_4 = new QLabel(groupBox);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout->addWidget(label_4, 0, 2, 1, 1);
 
         dictionaryTranslatesFrom = new QLabel(groupBox);
-        dictionaryTranslatesFrom->setObjectName(QString::fromUtf8("dictionaryTranslatesFrom"));
-        dictionaryTranslatesFrom->setText(QString::fromUtf8(""));
+        dictionaryTranslatesFrom->setObjectName(QStringLiteral("dictionaryTranslatesFrom"));
+        dictionaryTranslatesFrom->setText(QStringLiteral(""));
 
         gridLayout->addWidget(dictionaryTranslatesFrom, 0, 3, 1, 1);
 
         label_6 = new QLabel(groupBox);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
+        label_6->setObjectName(QStringLiteral("label_6"));
 
         gridLayout->addWidget(label_6, 1, 0, 1, 1);
 
         dictionaryTotalWords = new QLabel(groupBox);
-        dictionaryTotalWords->setObjectName(QString::fromUtf8("dictionaryTotalWords"));
-        dictionaryTotalWords->setText(QString::fromUtf8(""));
+        dictionaryTotalWords->setObjectName(QStringLiteral("dictionaryTotalWords"));
+        dictionaryTotalWords->setText(QStringLiteral(""));
         dictionaryTotalWords->setAlignment(Qt::AlignCenter);
 
         gridLayout->addWidget(dictionaryTotalWords, 1, 1, 1, 1);
 
         label_8 = new QLabel(groupBox);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         gridLayout->addWidget(label_8, 1, 2, 1, 1);
 
         dictionaryTranslatesTo = new QLabel(groupBox);
-        dictionaryTranslatesTo->setObjectName(QString::fromUtf8("dictionaryTranslatesTo"));
-        dictionaryTranslatesTo->setText(QString::fromUtf8(""));
+        dictionaryTranslatesTo->setObjectName(QStringLiteral("dictionaryTranslatesTo"));
+        dictionaryTranslatesTo->setText(QStringLiteral(""));
 
         gridLayout->addWidget(dictionaryTranslatesTo, 1, 3, 1, 1);
 
         openFolder = new QPushButton(groupBox);
-        openFolder->setObjectName(QString::fromUtf8("openFolder"));
+        openFolder->setObjectName(QStringLiteral("openFolder"));
         openFolder->setAutoDefault(false);
         openFolder->setDefault(false);
         openFolder->setFlat(false);
@@ -120,7 +119,7 @@ public:
         gridLayout->addWidget(openFolder, 0, 4, 1, 1);
 
         editDictionary = new QPushButton(groupBox);
-        editDictionary->setObjectName(QString::fromUtf8("editDictionary"));
+        editDictionary->setObjectName(QStringLiteral("editDictionary"));
         editDictionary->setEnabled(true);
 
         gridLayout->addWidget(editDictionary, 1, 4, 1, 1);
@@ -129,12 +128,12 @@ public:
         verticalLayout->addWidget(groupBox);
 
         label = new QLabel(DictInfo);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         verticalLayout->addWidget(label);
 
         dictionaryFileList = new QPlainTextEdit(DictInfo);
-        dictionaryFileList->setObjectName(QString::fromUtf8("dictionaryFileList"));
+        dictionaryFileList->setObjectName(QStringLiteral("dictionaryFileList"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(70);
@@ -152,29 +151,29 @@ public:
         palette.setBrush(QPalette::Disabled, QPalette::Base, brush1);
         dictionaryFileList->setPalette(palette);
 #ifndef QT_NO_TOOLTIP
-        dictionaryFileList->setToolTip(QString::fromUtf8(""));
+        dictionaryFileList->setToolTip(QStringLiteral(""));
 #endif // QT_NO_TOOLTIP
         dictionaryFileList->setUndoRedoEnabled(false);
         dictionaryFileList->setLineWrapMode(QPlainTextEdit::NoWrap);
         dictionaryFileList->setReadOnly(true);
-        dictionaryFileList->setPlainText(QString::fromUtf8(""));
+        dictionaryFileList->setPlainText(QStringLiteral(""));
 
         verticalLayout->addWidget(dictionaryFileList);
 
         dictionaryDescriptionLabel = new QLabel(DictInfo);
-        dictionaryDescriptionLabel->setObjectName(QString::fromUtf8("dictionaryDescriptionLabel"));
+        dictionaryDescriptionLabel->setObjectName(QStringLiteral("dictionaryDescriptionLabel"));
 
         verticalLayout->addWidget(dictionaryDescriptionLabel);
 
         infoLabel = new QPlainTextEdit(DictInfo);
-        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
+        infoLabel->setObjectName(QStringLiteral("infoLabel"));
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::Base, brush);
         palette1.setBrush(QPalette::Inactive, QPalette::Base, brush);
         palette1.setBrush(QPalette::Disabled, QPalette::Base, brush1);
         infoLabel->setPalette(palette1);
 #ifndef QT_NO_TOOLTIP
-        infoLabel->setToolTip(QString::fromUtf8(""));
+        infoLabel->setToolTip(QStringLiteral(""));
 #endif // QT_NO_TOOLTIP
         infoLabel->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         infoLabel->setUndoRedoEnabled(false);
@@ -183,9 +182,9 @@ public:
         verticalLayout->addWidget(infoLabel);
 
         buttonsLayout = new QHBoxLayout();
-        buttonsLayout->setObjectName(QString::fromUtf8("buttonsLayout"));
+        buttonsLayout->setObjectName(QStringLiteral("buttonsLayout"));
         headwordsButton = new QPushButton(DictInfo);
-        headwordsButton->setObjectName(QString::fromUtf8("headwordsButton"));
+        headwordsButton->setObjectName(QStringLiteral("headwordsButton"));
         headwordsButton->setAutoDefault(false);
 
         buttonsLayout->addWidget(headwordsButton);
@@ -195,8 +194,8 @@ public:
         buttonsLayout->addItem(horizontalSpacer);
 
         OKButton = new QPushButton(DictInfo);
-        OKButton->setObjectName(QString::fromUtf8("OKButton"));
-        OKButton->setText(QString::fromUtf8("OK"));
+        OKButton->setObjectName(QStringLiteral("OKButton"));
+        OKButton->setText(QStringLiteral("OK"));
         OKButton->setDefault(true);
 
         buttonsLayout->addWidget(OKButton);
@@ -218,18 +217,18 @@ public:
     {
         DictInfo->setWindowTitle(QString());
         groupBox->setTitle(QString());
-        label_2->setText(QApplication::translate("DictInfo", "Total articles:", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("DictInfo", "Translates from:", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("DictInfo", "Total words:", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("DictInfo", "Translates to:", 0, QApplication::UnicodeUTF8));
-        openFolder->setText(QApplication::translate("DictInfo", "Open folder", 0, QApplication::UnicodeUTF8));
-        editDictionary->setText(QApplication::translate("DictInfo", "Edit dictionary", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("DictInfo", "Files comprising this dictionary:", 0, QApplication::UnicodeUTF8));
-        dictionaryDescriptionLabel->setText(QApplication::translate("DictInfo", "Description:", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("DictInfo", "Total articles:", 0));
+        label_4->setText(QApplication::translate("DictInfo", "Translates from:", 0));
+        label_6->setText(QApplication::translate("DictInfo", "Total words:", 0));
+        label_8->setText(QApplication::translate("DictInfo", "Translates to:", 0));
+        openFolder->setText(QApplication::translate("DictInfo", "Open folder", 0));
+        editDictionary->setText(QApplication::translate("DictInfo", "Edit dictionary", 0));
+        label->setText(QApplication::translate("DictInfo", "Files comprising this dictionary:", 0));
+        dictionaryDescriptionLabel->setText(QApplication::translate("DictInfo", "Description:", 0));
 #ifndef QT_NO_TOOLTIP
-        headwordsButton->setToolTip(QApplication::translate("DictInfo", "Show all unique dictionary headwords", 0, QApplication::UnicodeUTF8));
+        headwordsButton->setToolTip(QApplication::translate("DictInfo", "Show all unique dictionary headwords", 0));
 #endif // QT_NO_TOOLTIP
-        headwordsButton->setText(QApplication::translate("DictInfo", "Headwords", 0, QApplication::UnicodeUTF8));
+        headwordsButton->setText(QApplication::translate("DictInfo", "Headwords", 0));
     } // retranslateUi
 
 };

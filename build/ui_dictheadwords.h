@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'dictheadwords.ui'
 **
-** Created: Wed Nov 19 16:01:34 2014
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,21 +10,21 @@
 #define UI_DICTHEADWORDS_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListView>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -52,31 +51,31 @@ public:
     void setupUi(QDialog *DictHeadwords)
     {
         if (DictHeadwords->objectName().isEmpty())
-            DictHeadwords->setObjectName(QString::fromUtf8("DictHeadwords"));
+            DictHeadwords->setObjectName(QStringLiteral("DictHeadwords"));
         DictHeadwords->resize(458, 550);
-        DictHeadwords->setWindowTitle(QString::fromUtf8(""));
+        DictHeadwords->setWindowTitle(QStringLiteral(""));
         verticalLayout_3 = new QVBoxLayout(DictHeadwords);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         gridLayout = new QGridLayout();
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         headersListView = new QListView(DictHeadwords);
-        headersListView->setObjectName(QString::fromUtf8("headersListView"));
+        headersListView->setObjectName(QStringLiteral("headersListView"));
 
         gridLayout->addWidget(headersListView, 3, 0, 1, 1);
 
         verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         groupBox = new QGroupBox(DictHeadwords);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         verticalLayout = new QVBoxLayout(groupBox);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         searchModeCombo = new QComboBox(groupBox);
-        searchModeCombo->setObjectName(QString::fromUtf8("searchModeCombo"));
+        searchModeCombo->setObjectName(QStringLiteral("searchModeCombo"));
 
         verticalLayout->addWidget(searchModeCombo);
 
         matchCase = new QCheckBox(groupBox);
-        matchCase->setObjectName(QString::fromUtf8("matchCase"));
+        matchCase->setObjectName(QStringLiteral("matchCase"));
 
         verticalLayout->addWidget(matchCase);
 
@@ -84,7 +83,7 @@ public:
         verticalLayout_2->addWidget(groupBox);
 
         exportButton = new QPushButton(DictHeadwords);
-        exportButton->setObjectName(QString::fromUtf8("exportButton"));
+        exportButton->setObjectName(QStringLiteral("exportButton"));
         exportButton->setAutoDefault(false);
 
         verticalLayout_2->addWidget(exportButton);
@@ -94,7 +93,7 @@ public:
         verticalLayout_2->addItem(verticalSpacer);
 
         OKButton = new QPushButton(DictHeadwords);
-        OKButton->setObjectName(QString::fromUtf8("OKButton"));
+        OKButton->setObjectName(QStringLiteral("OKButton"));
         OKButton->setAutoDefault(false);
 
         verticalLayout_2->addWidget(OKButton);
@@ -103,24 +102,24 @@ public:
         gridLayout->addLayout(verticalLayout_2, 3, 1, 1, 1);
 
         applyButton = new QPushButton(DictHeadwords);
-        applyButton->setObjectName(QString::fromUtf8("applyButton"));
+        applyButton->setObjectName(QStringLiteral("applyButton"));
         applyButton->setAutoDefault(false);
         applyButton->setDefault(true);
 
         gridLayout->addWidget(applyButton, 2, 1, 1, 1);
 
         autoApply = new QCheckBox(DictHeadwords);
-        autoApply->setObjectName(QString::fromUtf8("autoApply"));
+        autoApply->setObjectName(QStringLiteral("autoApply"));
 
         gridLayout->addWidget(autoApply, 1, 1, 1, 1);
 
         label = new QLabel(DictHeadwords);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 1, 0, 1, 1);
 
         filterLine = new QLineEdit(DictHeadwords);
-        filterLine->setObjectName(QString::fromUtf8("filterLine"));
+        filterLine->setObjectName(QStringLiteral("filterLine"));
 
         gridLayout->addWidget(filterLine, 2, 0, 1, 1);
 
@@ -128,7 +127,7 @@ public:
         verticalLayout_3->addLayout(gridLayout);
 
         headersNumber = new QLabel(DictHeadwords);
-        headersNumber->setObjectName(QString::fromUtf8("headersNumber"));
+        headersNumber->setObjectName(QStringLiteral("headersNumber"));
 
         verticalLayout_3->addWidget(headersNumber);
 
@@ -140,30 +139,30 @@ public:
 
     void retranslateUi(QDialog *DictHeadwords)
     {
-        groupBox->setTitle(QApplication::translate("DictHeadwords", "Search mode", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("DictHeadwords", "Search mode", 0));
 #ifndef QT_NO_TOOLTIP
-        searchModeCombo->setToolTip(QApplication::translate("DictHeadwords", "This element determines how filter string will be interpreted", 0, QApplication::UnicodeUTF8));
+        searchModeCombo->setToolTip(QApplication::translate("DictHeadwords", "This element determines how filter string will be interpreted", 0));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
-        matchCase->setToolTip(QApplication::translate("DictHeadwords", "If checked on the symbols case will be take in account when filtering", 0, QApplication::UnicodeUTF8));
+        matchCase->setToolTip(QApplication::translate("DictHeadwords", "If checked on the symbols case will be take in account when filtering", 0));
 #endif // QT_NO_TOOLTIP
-        matchCase->setText(QApplication::translate("DictHeadwords", "Match case", 0, QApplication::UnicodeUTF8));
+        matchCase->setText(QApplication::translate("DictHeadwords", "Match case", 0));
 #ifndef QT_NO_TOOLTIP
-        exportButton->setToolTip(QApplication::translate("DictHeadwords", "Exports headwords to file", 0, QApplication::UnicodeUTF8));
+        exportButton->setToolTip(QApplication::translate("DictHeadwords", "Exports headwords to file", 0));
 #endif // QT_NO_TOOLTIP
-        exportButton->setText(QApplication::translate("DictHeadwords", "Export", 0, QApplication::UnicodeUTF8));
-        OKButton->setText(QApplication::translate("DictHeadwords", "OK", 0, QApplication::UnicodeUTF8));
+        exportButton->setText(QApplication::translate("DictHeadwords", "Export", 0));
+        OKButton->setText(QApplication::translate("DictHeadwords", "OK", 0));
 #ifndef QT_NO_TOOLTIP
-        applyButton->setToolTip(QApplication::translate("DictHeadwords", "Press this button to apply filter to headwords list", 0, QApplication::UnicodeUTF8));
+        applyButton->setToolTip(QApplication::translate("DictHeadwords", "Press this button to apply filter to headwords list", 0));
 #endif // QT_NO_TOOLTIP
-        applyButton->setText(QApplication::translate("DictHeadwords", "Apply", 0, QApplication::UnicodeUTF8));
+        applyButton->setText(QApplication::translate("DictHeadwords", "Apply", 0));
 #ifndef QT_NO_TOOLTIP
-        autoApply->setToolTip(QApplication::translate("DictHeadwords", "If checked any filter changes will we immediately applied to headwords list", 0, QApplication::UnicodeUTF8));
+        autoApply->setToolTip(QApplication::translate("DictHeadwords", "If checked any filter changes will we immediately applied to headwords list", 0));
 #endif // QT_NO_TOOLTIP
-        autoApply->setText(QApplication::translate("DictHeadwords", "Auto apply", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("DictHeadwords", "Filter:", 0, QApplication::UnicodeUTF8));
+        autoApply->setText(QApplication::translate("DictHeadwords", "Auto apply", 0));
+        label->setText(QApplication::translate("DictHeadwords", "Filter:", 0));
 #ifndef QT_NO_TOOLTIP
-        filterLine->setToolTip(QApplication::translate("DictHeadwords", "Filter string (fixed string, wildcards or regular expression)", 0, QApplication::UnicodeUTF8));
+        filterLine->setToolTip(QApplication::translate("DictHeadwords", "Filter string (fixed string, wildcards or regular expression)", 0));
 #endif // QT_NO_TOOLTIP
         headersNumber->setText(QString());
         Q_UNUSED(DictHeadwords);

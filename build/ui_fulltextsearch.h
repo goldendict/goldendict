@@ -1,8 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'fulltextsearch.ui'
 **
-** Created: Wed Nov 19 16:01:34 2014
-**      by: Qt User Interface Compiler version 4.8.1
+** Created by: Qt User Interface Compiler version 5.2.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -11,24 +10,24 @@
 #define UI_FULLTEXTSEARCH_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QDialog>
-#include <QtGui/QGridLayout>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QListView>
-#include <QtGui/QProgressBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QSpinBox>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
+#include <QtWidgets/QProgressBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
+#include <QtWidgets/QVBoxLayout>
 
 QT_BEGIN_NAMESPACE
 
@@ -73,36 +72,36 @@ public:
     void setupUi(QDialog *FullTextSearchDialog)
     {
         if (FullTextSearchDialog->objectName().isEmpty())
-            FullTextSearchDialog->setObjectName(QString::fromUtf8("FullTextSearchDialog"));
+            FullTextSearchDialog->setObjectName(QStringLiteral("FullTextSearchDialog"));
         FullTextSearchDialog->resize(492, 593);
         FullTextSearchDialog->setMinimumSize(QSize(430, 450));
         verticalLayout_2 = new QVBoxLayout(FullTextSearchDialog);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         groupBox = new QGroupBox(FullTextSearchDialog);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setObjectName(QStringLiteral("groupBox"));
         verticalLayout = new QVBoxLayout(groupBox);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         searchLine = new QLineEdit(groupBox);
-        searchLine->setObjectName(QString::fromUtf8("searchLine"));
+        searchLine->setObjectName(QStringLiteral("searchLine"));
 
         verticalLayout->addWidget(searchLine);
 
         gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         matchCase = new QCheckBox(groupBox);
-        matchCase->setObjectName(QString::fromUtf8("matchCase"));
+        matchCase->setObjectName(QStringLiteral("matchCase"));
 
         gridLayout_2->addWidget(matchCase, 1, 2, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         label_8 = new QLabel(groupBox);
-        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setObjectName(QStringLiteral("label_8"));
 
         horizontalLayout_2->addWidget(label_8);
 
         searchMode = new QComboBox(groupBox);
-        searchMode->setObjectName(QString::fromUtf8("searchMode"));
+        searchMode->setObjectName(QStringLiteral("searchMode"));
 
         horizontalLayout_2->addWidget(searchMode);
 
@@ -110,22 +109,22 @@ public:
         gridLayout_2->addLayout(horizontalLayout_2, 0, 2, 1, 1);
 
         articlesPerDictionary = new QSpinBox(groupBox);
-        articlesPerDictionary->setObjectName(QString::fromUtf8("articlesPerDictionary"));
+        articlesPerDictionary->setObjectName(QStringLiteral("articlesPerDictionary"));
 
         gridLayout_2->addWidget(articlesPerDictionary, 1, 1, 1, 1);
 
         distanceBetweenWords = new QSpinBox(groupBox);
-        distanceBetweenWords->setObjectName(QString::fromUtf8("distanceBetweenWords"));
+        distanceBetweenWords->setObjectName(QStringLiteral("distanceBetweenWords"));
 
         gridLayout_2->addWidget(distanceBetweenWords, 0, 1, 1, 1);
 
         checkBoxDistanceBetweenWords = new QCheckBox(groupBox);
-        checkBoxDistanceBetweenWords->setObjectName(QString::fromUtf8("checkBoxDistanceBetweenWords"));
+        checkBoxDistanceBetweenWords->setObjectName(QStringLiteral("checkBoxDistanceBetweenWords"));
 
         gridLayout_2->addWidget(checkBoxDistanceBetweenWords, 0, 0, 1, 1);
 
         checkBoxArticlesPerDictionary = new QCheckBox(groupBox);
-        checkBoxArticlesPerDictionary->setObjectName(QString::fromUtf8("checkBoxArticlesPerDictionary"));
+        checkBoxArticlesPerDictionary->setObjectName(QStringLiteral("checkBoxArticlesPerDictionary"));
 
         gridLayout_2->addWidget(checkBoxArticlesPerDictionary, 1, 0, 1, 1);
 
@@ -136,20 +135,20 @@ public:
         verticalLayout_2->addWidget(groupBox);
 
         headwordsView = new QListView(FullTextSearchDialog);
-        headwordsView->setObjectName(QString::fromUtf8("headwordsView"));
+        headwordsView->setObjectName(QStringLiteral("headwordsView"));
 
         verticalLayout_2->addWidget(headwordsView);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         articlesFoundLabel = new QLabel(FullTextSearchDialog);
-        articlesFoundLabel->setObjectName(QString::fromUtf8("articlesFoundLabel"));
+        articlesFoundLabel->setObjectName(QStringLiteral("articlesFoundLabel"));
         articlesFoundLabel->setMinimumSize(QSize(0, 21));
 
         horizontalLayout->addWidget(articlesFoundLabel);
 
         searchProgressBar = new QProgressBar(FullTextSearchDialog);
-        searchProgressBar->setObjectName(QString::fromUtf8("searchProgressBar"));
+        searchProgressBar->setObjectName(QStringLiteral("searchProgressBar"));
         searchProgressBar->setMaximum(0);
         searchProgressBar->setValue(-1);
         searchProgressBar->setAlignment(Qt::AlignCenter);
@@ -160,46 +159,46 @@ public:
         verticalLayout_2->addLayout(horizontalLayout);
 
         groupBox_2 = new QGroupBox(FullTextSearchDialog);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
         gridLayout = new QGridLayout(groupBox_2);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label_3 = new QLabel(groupBox_2);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setObjectName(QStringLiteral("label_3"));
 
         gridLayout->addWidget(label_3, 1, 0, 1, 2);
 
         totalDicts = new QLabel(groupBox_2);
-        totalDicts->setObjectName(QString::fromUtf8("totalDicts"));
+        totalDicts->setObjectName(QStringLiteral("totalDicts"));
 
         gridLayout->addWidget(totalDicts, 0, 2, 1, 1);
 
         label_4 = new QLabel(groupBox_2);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setObjectName(QStringLiteral("label_4"));
 
         gridLayout->addWidget(label_4, 1, 3, 1, 1);
 
         readyDicts = new QLabel(groupBox_2);
-        readyDicts->setObjectName(QString::fromUtf8("readyDicts"));
+        readyDicts->setObjectName(QStringLiteral("readyDicts"));
 
         gridLayout->addWidget(readyDicts, 0, 4, 1, 1);
 
         label = new QLabel(groupBox_2);
-        label->setObjectName(QString::fromUtf8("label"));
+        label->setObjectName(QStringLiteral("label"));
 
         gridLayout->addWidget(label, 0, 0, 1, 1);
 
         label_2 = new QLabel(groupBox_2);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 0, 3, 1, 1);
 
         nonIndexableDicts = new QLabel(groupBox_2);
-        nonIndexableDicts->setObjectName(QString::fromUtf8("nonIndexableDicts"));
+        nonIndexableDicts->setObjectName(QStringLiteral("nonIndexableDicts"));
 
         gridLayout->addWidget(nonIndexableDicts, 1, 4, 1, 1);
 
         toIndexDicts = new QLabel(groupBox_2);
-        toIndexDicts->setObjectName(QString::fromUtf8("toIndexDicts"));
+        toIndexDicts->setObjectName(QStringLiteral("toIndexDicts"));
 
         gridLayout->addWidget(toIndexDicts, 1, 2, 1, 1);
 
@@ -207,18 +206,18 @@ public:
         verticalLayout_2->addWidget(groupBox_2);
 
         nowIndexingLabel = new QLabel(FullTextSearchDialog);
-        nowIndexingLabel->setObjectName(QString::fromUtf8("nowIndexingLabel"));
+        nowIndexingLabel->setObjectName(QStringLiteral("nowIndexingLabel"));
 
         verticalLayout_2->addWidget(nowIndexingLabel);
 
         horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_2);
 
         OKButton = new QPushButton(FullTextSearchDialog);
-        OKButton->setObjectName(QString::fromUtf8("OKButton"));
+        OKButton->setObjectName(QStringLiteral("OKButton"));
         OKButton->setAutoDefault(false);
         OKButton->setDefault(true);
 
@@ -229,7 +228,7 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer_4);
 
         cancelButton = new QPushButton(FullTextSearchDialog);
-        cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
+        cancelButton->setObjectName(QStringLiteral("cancelButton"));
 
         horizontalLayout_3->addWidget(cancelButton);
 
@@ -249,24 +248,24 @@ public:
     void retranslateUi(QDialog *FullTextSearchDialog)
     {
         FullTextSearchDialog->setWindowTitle(QString());
-        groupBox->setTitle(QApplication::translate("FullTextSearchDialog", "Search", 0, QApplication::UnicodeUTF8));
-        matchCase->setText(QApplication::translate("FullTextSearchDialog", "Match case", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("FullTextSearchDialog", "Mode:", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("FullTextSearchDialog", "Search", 0));
+        matchCase->setText(QApplication::translate("FullTextSearchDialog", "Match case", 0));
+        label_8->setText(QApplication::translate("FullTextSearchDialog", "Mode:", 0));
         checkBoxDistanceBetweenWords->setText(QString());
         checkBoxArticlesPerDictionary->setText(QString());
-        articlesFoundLabel->setText(QApplication::translate("FullTextSearchDialog", "Articles found:", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("FullTextSearchDialog", "Available dictionaries in group:", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("FullTextSearchDialog", "Wait for indexing:", 0, QApplication::UnicodeUTF8));
+        articlesFoundLabel->setText(QApplication::translate("FullTextSearchDialog", "Articles found:", 0));
+        groupBox_2->setTitle(QApplication::translate("FullTextSearchDialog", "Available dictionaries in group:", 0));
+        label_3->setText(QApplication::translate("FullTextSearchDialog", "Wait for indexing:", 0));
         totalDicts->setText(QString());
-        label_4->setText(QApplication::translate("FullTextSearchDialog", "Non-indexable:", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("FullTextSearchDialog", "Non-indexable:", 0));
         readyDicts->setText(QString());
-        label->setText(QApplication::translate("FullTextSearchDialog", "Total:", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("FullTextSearchDialog", "Indexed:", 0, QApplication::UnicodeUTF8));
+        label->setText(QApplication::translate("FullTextSearchDialog", "Total:", 0));
+        label_2->setText(QApplication::translate("FullTextSearchDialog", "Indexed:", 0));
         nonIndexableDicts->setText(QString());
         toIndexDicts->setText(QString());
-        nowIndexingLabel->setText(QApplication::translate("FullTextSearchDialog", "Now indexing: None", 0, QApplication::UnicodeUTF8));
-        OKButton->setText(QApplication::translate("FullTextSearchDialog", "Search", 0, QApplication::UnicodeUTF8));
-        cancelButton->setText(QApplication::translate("FullTextSearchDialog", "Cancel", 0, QApplication::UnicodeUTF8));
+        nowIndexingLabel->setText(QApplication::translate("FullTextSearchDialog", "Now indexing: None", 0));
+        OKButton->setText(QApplication::translate("FullTextSearchDialog", "Search", 0));
+        cancelButton->setText(QApplication::translate("FullTextSearchDialog", "Cancel", 0));
     } // retranslateUi
 
 };
