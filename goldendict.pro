@@ -139,6 +139,12 @@ unix:!mac {
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
 
+    greaterThan(QT_MAJOR_VERSION, 4) {
+      greaterThan(QT_MINOR_VERSION, 0) {
+        QT += x11extras
+      }
+    }
+
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
     	vorbis \

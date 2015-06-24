@@ -6,14 +6,8 @@
 #include "hotkeywrapper.hh"
 #include "gddebug.hh"
 
-
 #include <QWidget>
 #include <QMainWindow>
-
-
-#ifdef HAVE_X11
-#include <X11/Xlibint.h>
-#endif
 
 #ifdef Q_OS_WIN32
 #include "mainwindow.hh"

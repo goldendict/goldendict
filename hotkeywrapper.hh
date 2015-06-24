@@ -10,6 +10,11 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
 #include <QX11Info>
+#include <X11/Xlibint.h>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#undef Bool
+#endif
 
 #endif
 
