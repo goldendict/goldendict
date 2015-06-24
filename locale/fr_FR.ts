@@ -748,7 +748,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="254"/>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Bases de données serveur</translation>
     </message>
 </context>
 <context>

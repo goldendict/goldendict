@@ -423,6 +423,8 @@ quint32 readArticle( ZimFile & file, ZIM_header & header, quint32 articleNumber,
 
 class ZimDictionary: public BtreeIndexing::BtreeDictionary
 {
+    enum LINKS_TYPE { UNKNOWN, SLASH, NO_SLASH };
+
     Mutex idxMutex;
     Mutex zimMutex, idxResourceMutex;
     File::Class idx;
@@ -432,6 +434,7 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
     ZimFile df;
     ZIM_header zimHeader;
     set< quint32 > articlesIndexedForFTS;
+    LINKS_TYPE linksType;
 
   public:
 
@@ -512,7 +515,8 @@ ZimDictionary::ZimDictionary( string const & id,
     BtreeDictionary( id, dictionaryFiles ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
-    df( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) )
+    df( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) ),
+    linksType( UNKNOWN )
 {
     // Open data file
 
@@ -632,11 +636,48 @@ string ZimDictionary::convert( const string & in )
     if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
       tag = list[4].split("\"")[1];
 
-    tag.remove( QRegExp(".*/") ).
-        remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
-        replace( "_", "%20" ).
-        prepend( "<a href=\"gdlookup://localhost/" ).
-        append( "\" " + list[4] + ">" );
+
+    // Check type of links inside articles
+    if( linksType == UNKNOWN && tag.indexOf( '/' ) >= 0 )
+    {
+      QString word = QUrl::fromPercentEncoding( tag.toLatin1() );
+      word.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+           replace( "_", " " );
+
+      vector< WordArticleLink > links;
+      links = findArticles( gd::toWString( word ) );
+
+      if( !links.empty() )
+      {
+        linksType = SLASH;
+      }
+      else
+      {
+        word.remove( QRegExp(".*/") );
+        links = findArticles( gd::toWString( word ) );
+        if( !links.empty() )
+        {
+          linksType = NO_SLASH;
+          links.clear();
+        }
+      }
+    }
+
+    if( linksType == SLASH || linksType == UNKNOWN )
+    {
+      tag.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+          replace( "_", "%20" ).
+          prepend( "<a href=\"gdlookup://localhost/" ).
+          append( "\" " + list[4] + ">" );
+    }
+    else
+    {
+      tag.remove( QRegExp(".*/") ).
+          remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+          replace( "_", "%20" ).
+          prepend( "<a href=\"gdlookup://localhost/" ).
+          append( "\" " + list[4] + ">" );
+    }
 
     text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
