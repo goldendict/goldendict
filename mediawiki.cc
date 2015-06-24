@@ -369,10 +369,11 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // audio url
             articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
-                                   QString::fromStdString( addAudioLink( "\"http:\\1\"",this->dictPtr->getId() )+ "<a href=\"http:\\1" ) );
+                                   QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
+                                                                         this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1" ) );
 
-            // Add "http:" to image source urls
-            articleString.replace( " src=\"//", " src=\"http://" );
+            // Add url scheme to image source urls
+            articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );
             //fix src="/foo/bar/Baz.png"
             articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() +"/" );
 
@@ -380,9 +381,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
 
             //fix audio
-            articleString.replace( QRegExp("<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
-                                            QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictPtr->getId())+
-                                           "<a href=\"http://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>"));
+            articleString.replace( QRegExp( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
+                                            QString::fromStdString(addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + "://\\1\"", this->dictPtr->getId() ) +
+                                            "<a href=\"" + wikiUrl.scheme().toStdString() + "://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>" ) );
             // In those strings, change any underscores to spaces
             for( ; ; )
             {
