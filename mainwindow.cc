@@ -3279,6 +3279,19 @@ void MainWindow::on_saveArticle_triggered()
       QFileInfo fi( fileName );
       cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
 
+      // Convert internal links
+
+      QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
+      int pos = 0;
+      while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
+      {
+        QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
+        name.replace( rxName, "_" );
+        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html\"";
+        html.replace( pos, rx3.cap().length(), name );
+        pos += name.length();
+      }
+
       if ( complete )
       {
         QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
@@ -3306,19 +3319,6 @@ void MainWindow::on_saveArticle_triggered()
           {
             connect( *j, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
           }
-        }
-
-        // Convert internal links
-
-        QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
-        int pos = 0;
-        while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
-        {
-          QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
-          name.replace( rxName, "_" );
-          name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html\"";
-          html.replace( pos, rx3.cap().length(), name );
-          pos += name.length();
         }
 
         progressDialog->setLabelText( tr("Saving article...") );
