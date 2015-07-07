@@ -310,8 +310,12 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   {
     QDomElement el = nodes.at( 0 ).toElement();
 
+    QString ref = el.attribute( "href" );
+    if( ref.isEmpty() )
+      ref = el.text();
+
+    el.setAttribute( "href", ref );
     el.setTagName( "a" );
-    el.setAttribute( "href", el.text() );
   }
 
   // Abbreviations
