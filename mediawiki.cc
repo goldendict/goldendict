@@ -335,7 +335,36 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           if ( !textNode.isNull() )
           {
             QString articleString = textNode.toElement().text();
-  
+
+            // Replace all ":" in links, remove '#' part in links to other articles
+            int pos = 0;
+            QRegExp regLinks( "<a\\s+href=\"/([^\"]+)\"" );
+            for( ; ; )
+            {
+              pos = regLinks.indexIn( articleString, pos );
+              if( pos < 0 )
+                break;
+              QString link = regLinks.cap( 1 );
+
+              if( link.indexOf( "://" ) >= 0 )
+              {
+                // External link
+                pos += regLinks.cap().size();
+                continue;
+              }
+
+              if( link.indexOf( ':' ) >= 0 )
+                link.replace( ':', "%3A" );
+
+              int n = link.indexOf( '#', 1 );
+              if( n > 0 )
+                link.truncate( n );
+
+              QString newLink = QString( "<a href=\"/%1\"" ).arg( link );
+              articleString.replace( pos, regLinks.cap().size(), newLink );
+              pos += newLink.size();
+            }
+
             QUrl wikiUrl( url );
             wikiUrl.setPath( "" );
   
@@ -347,7 +376,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
             reg1.setMinimal( true );
             QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
-            int pos = 0;
+            pos = 0;
             for( ; ; )
             {
               pos = reg1.indexIn( articleString, pos );
@@ -395,7 +424,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
 
             //fix file: url
-            articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]+:[^/\"]+\")" ),
+            articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]*file%3A[^/\"]+\")", Qt::CaseInsensitive ),
                                    QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
 
             QByteArray articleBody = articleString.toUtf8();
