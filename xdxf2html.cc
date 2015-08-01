@@ -57,8 +57,8 @@ string convertToRoman( int input, int lower_case )
 }
 
 string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv,
-                Dictionary::Class *dictPtr, bool isLogicalFormat, unsigned revisionNumber,
-                QString * headword )
+                Dictionary::Class *dictPtr,  IndexedZip * resourceZip,
+                bool isLogicalFormat, unsigned revisionNumber, QString * headword )
 {
 //  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
@@ -510,15 +510,40 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
         }
         else if( Filetype::isNameOfSound( filename ) )
         {
-          QUrl url;
-          url.setScheme( "gdau" );
-          url.setHost( QString::fromUtf8( dictPtr->getId().c_str() ) );
-          url.setPath( QString::fromUtf8( filename.c_str() ) );
-
           QDomElement el_script = dd.createElement( "script" );
           QDomNode parent = el.parentNode();
           if( !parent.isNull() )
           {
+            bool search = false;
+            if( type == STARDICT )
+            {
+              string n = FsEncoding::dirname( dictPtr->getDictionaryFilenames()[ 0 ] ) +
+                         FsEncoding::separator() + string( "res" ) + FsEncoding::separator() +
+                         FsEncoding::encode( filename );
+              search = !File::exists( n ) &&
+                       ( !resourceZip ||
+                         !resourceZip->isOpen() ||
+                         !resourceZip->hasFile( Utf8::decode( filename ) ) );
+            }
+            else
+            {
+              string n = dictPtr->getDictionaryFilenames()[ 0 ] + ".files" +
+                         FsEncoding::separator() +
+                         FsEncoding::encode( filename );
+              search = !File::exists( n ) && !File::exists( FsEncoding::dirname( dictPtr->getDictionaryFilenames()[ 0 ] ) +
+                                                            FsEncoding::separator() +
+                                                            FsEncoding::encode( filename ) ) &&
+                       ( !resourceZip ||
+                         !resourceZip->isOpen() ||
+                         !resourceZip->hasFile( Utf8::decode( filename ) ) );
+            }
+
+
+            QUrl url;
+            url.setScheme( "gdau" );
+            url.setHost( QString::fromUtf8( search ? "search" : dictPtr->getId().c_str() ) );
+            url.setPath( QString::fromUtf8( filename.c_str() ) );
+
             el_script.setAttribute( "type", "text/javascript" );
             parent.replaceChild( el_script, el );
 

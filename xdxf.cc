@@ -659,7 +659,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   }
 
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
-                                    fType == Logical, idxHeader.revisionNumber, headword );
+                                    &resourceZip, fType == Logical, idxHeader.revisionNumber, headword );
 
   free( articleBody );
 }
