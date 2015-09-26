@@ -605,6 +605,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( ui.visitHomepage, SIGNAL( triggered() ),
            this, SLOT( visitHomepage() ) );
+
+  connect( ui.loginHistory, SIGNAL( triggered() ),
+           this, SLOT( loginHistoryItem() ));
   connect( ui.visitForum, SIGNAL( triggered() ),
            this, SLOT( visitForum() ) );
   connect( ui.openConfigFolder, SIGNAL( triggered() ),
@@ -2531,7 +2534,7 @@ void MainWindow::mutedDictionariesChanged()
 
 void MainWindow::showHistoryItem( QString const & word )
 {
-  // qDebug() << "Showing history item" << word;
+  qDebug() << "Showing history item" << word;
 
   history.enableAdd( false );
 
@@ -3011,6 +3014,11 @@ void MainWindow::openConfigFolder()
 void MainWindow::visitForum()
 {
   QDesktopServices::openUrl( QUrl( "http://goldendict.org/forum/" ) );
+}
+
+void MainWindow::loginHistoryItem()
+{
+    QDesktopServices::openUrl(QUrl("http://it4bus.vn/blog"));
 }
 
 void MainWindow::showAbout()
