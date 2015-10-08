@@ -165,8 +165,7 @@ public:
     return toUtf16( fromCode.toLatin1().constData(), from, fromSize );
   }
   static bool parseCompressedBlock( qint64 compressedBlockSize, const char * compressedBlockPtr,
-                                    qint64 decompressedBlockSize, QByteArray & decompressedBlock );
-
+                                    qint64 decompressedBlockSize, QByteArray & decompressedBlock);
   static QString & substituteStylesheet( QString & article, StyleSheets const & styleSheets );
   static inline string substituteStylesheet( string const & article, StyleSheets const & styleSheets )
   {
@@ -178,6 +177,8 @@ public:
 protected:
   qint64 readNumber( QDataStream & in );
   static quint32 readU8OrU16( QDataStream & in, bool isU16 );
+  static bool checkAdler32(const char * buffer, unsigned int len, quint32 checksum);
+  static bool decryptHeadWordIndex(char * buffer, qint64 len);
   bool readHeader( QDataStream & in );
   bool readHeadWordBlockInfos( QDataStream & in );
   bool readRecordBlockInfos();
@@ -207,9 +208,8 @@ protected:
 
   quint32 wordCount_;
   int numberTypeSize_;
+  int encrypted_;
   bool rtl_;
-  bool bruteForce_;
-  bool bruteForceEnd_;
 };
 
 }
