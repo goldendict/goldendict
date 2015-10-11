@@ -25,10 +25,6 @@
 #include <iconv.h>
 #include <lzo/lzo1x.h>
 
-extern "C" {
-#include <libavutil/ripemd.h>
-}
-
 #include <QtEndian>
 #include <QStringList>
 #include <QByteArray>
@@ -39,6 +35,7 @@ extern "C" {
 
 #include "decompress.hh"
 #include "gddebug.hh"
+#include "ripemd.hh"
 
 namespace Mdict
 {
@@ -218,14 +215,12 @@ QString MdictParser::toUtf16( const char * fromCode, const char * from, size_t f
 
 bool MdictParser::decryptHeadWordIndex(char * buffer, qint64 len)
 {
-  struct AVRIPEMD * ripemd = av_ripemd_alloc();
-  if ( av_ripemd_init( ripemd, 128 ) != 0 )
-    return false;
-  av_ripemd_update( ripemd, ( const uchar * ) buffer + 4, 4 );
-  av_ripemd_update( ripemd, ( const uchar * ) "\x95\x36\x00\x00", 4 );
+  RIPEMD128 ripemd;
+  ripemd.update( ( const uchar * ) buffer + 4, 4 );
+  ripemd.update( ( const uchar * ) "\x95\x36\x00\x00", 4 );
 
   uint8_t key[16];
-  av_ripemd_final( ripemd, key );
+  ripemd.digest( key );
 
   buffer += 8;
   len -= 8;

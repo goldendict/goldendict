@@ -1,8 +1,10 @@
 // https://bitbucket.org/xwang/mdict-analysis
+// https://github.com/zhansliu/writemdict/blob/master/fileformat.md
 // Octopus MDict Dictionary File (.mdx) and Resource File (.mdd) Analyser
 //
 // Copyright (C) 2012, 2013 Xiaoqiang Wang <xiaoqiangwang AT gmail DOT com>
 // Copyright (C) 2013 Timon Wong <timon86.wang AT gmail DOT com>
+// Copyright (C) 2015 Zhe Wang <0x1998 AT gmail DOT com>
 //
 // This program is a free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
