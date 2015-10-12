@@ -424,7 +424,8 @@ bool MdictParser::readHeader( QDataStream & in )
 
 bool MdictParser::readHeadWordBlockInfos( QDataStream & in )
 {
-  QByteArray header = file_->read( version_ >= 2.0 ? 40 : 32 );
+  QByteArray header = file_->read( version_ >= 2.0 ? ( numberTypeSize_ * 5 )
+                                                   : ( numberTypeSize_ * 4 ) );
   QDataStream stream( header );
 
   // number of headword blocks
@@ -448,7 +449,7 @@ bool MdictParser::readHeadWordBlockInfos( QDataStream & in )
   {
     quint32 checksum;
     in >> checksum;
-    if ( !checkAdler32( header.constData(), 40, checksum ) )
+    if ( !checkAdler32( header.constData(), numberTypeSize_ * 5, checksum ) )
       return false;
   }
 
