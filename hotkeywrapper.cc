@@ -304,7 +304,7 @@ bool HotkeyWrapper::winEvent ( MSG * message, long * result )
 quint32 HotkeyWrapper::nativeKey(int key)
 {
   if (key >= Qt::Key_0 && key <= Qt::Key_9)
-    return key;
+    return VK_NUMPAD0 + ( key - Qt::Key_0 );
 
   if (key >= Qt::Key_A && key <= Qt::Key_Z)
     return key;
@@ -359,6 +359,33 @@ quint32 HotkeyWrapper::nativeKey(int key)
     case Qt::Key_F22:       return VK_F22;
     case Qt::Key_F23:       return VK_F23;
     case Qt::Key_F24:       return VK_F24;
+    case Qt::Key_Colon:
+    case Qt::Key_Semicolon:    return VK_OEM_1;
+    case Qt::Key_Question:     return VK_OEM_2;
+    case Qt::Key_AsciiTilde:
+    case Qt::Key_QuoteLeft:    return VK_OEM_3;
+    case Qt::Key_BraceLeft:
+    case Qt::Key_BracketLeft:  return VK_OEM_4;
+    case Qt::Key_Bar:
+    case Qt::Key_Backslash:    return VK_OEM_5;
+    case Qt::Key_BraceRight:
+    case Qt::Key_BracketRight: return VK_OEM_6;
+    case Qt::Key_QuoteDbl:
+    case Qt::Key_Apostrophe:   return VK_OEM_7;
+    case Qt::Key_Less:         return VK_OEM_COMMA;
+    case Qt::Key_Greater:      return VK_OEM_PERIOD;
+    case Qt::Key_Equal:        return VK_OEM_PLUS;
+    case Qt::Key_ParenRight:   return 0x30;
+    case Qt::Key_Exclam:       return 0x31;
+    case Qt::Key_At:           return 0x32;
+    case Qt::Key_NumberSign:   return 0x33;
+    case Qt::Key_Dollar:       return 0x34;
+    case Qt::Key_Percent:      return 0x35;
+    case Qt::Key_AsciiCircum:  return 0x36;
+    case Qt::Key_Ampersand:    return 0x37;
+    case Qt::Key_copyright:    return 0x38;
+    case Qt::Key_ParenLeft:    return 0x39;
+    case Qt::Key_Underscore:   return VK_OEM_MINUS;
     default:;
   }
 
