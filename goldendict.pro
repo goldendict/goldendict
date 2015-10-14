@@ -147,7 +147,7 @@ unix:!mac {
 
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
-    	vorbis \
+        vorbis \
         ogg \
         hunspell
     isEmpty(DISABLE_INTERNAL_PLAYER) {
@@ -336,7 +336,8 @@ HEADERS += folding.hh \
     ftshelpers.hh \
     dictserver.hh \
     helpwindow.hh \
-    slob.hh
+    slob.hh \
+    ripemd.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -459,10 +460,11 @@ SOURCES += folding.cc \
     ftshelpers.cc \
     dictserver.cc \
     helpwindow.cc \
-    slob.cc
+    slob.cc \
+    ripemd.cc
 
 win32 {
-	FORMS   += texttospeechsource.ui
+    FORMS   += texttospeechsource.ui
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
                guids.c \

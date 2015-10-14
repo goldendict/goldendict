@@ -462,7 +462,7 @@ namespace
       {
         for ( unsigned int i = 0; i < wstr.size(); i++ )
         {
-          if ( wstr[ i ] >= 224 && wstr[ i ] <= 250 ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
+          if ( (wstr[ i ] >= 224 && wstr[ i ] <= 250) || (wstr[ i ] >= 192 && wstr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
             wstr[ i ] += 1488 - 224; // Convert to Hebrew unicode
         }
       }
@@ -731,7 +731,7 @@ void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - conver
 
   for (unsigned int i=0; i<hebWStr.size();i++)
   {
-    if (hebWStr[i]>=224 && hebWStr[i]<=250) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
+    if ( (hebWStr[ i ] >= 224 && hebWStr[ i ] <= 250) || (hebWStr[ i ] >= 192 && hebWStr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
         hebWStr[i]+=1488-224; // Convert to Hebrew unicode
   }
   hebStr=Utf8::encode(hebWStr);

@@ -38,6 +38,7 @@
 #include <QDir>
 #include <QPainter>
 #include <QDebug>
+#include <QRegExp>
 
 #include <QSemaphore>
 #include <QThreadPool>
@@ -660,7 +661,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   }
 
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
-                                    fType == Logical, idxHeader.revisionNumber, headword );
+                                    &resourceZip, fType == Logical, idxHeader.revisionNumber, headword );
 
   free( articleBody );
 }
@@ -1210,7 +1211,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
-              idxHeader.revisionNumber = stream.attributes().value( "revision" ).toString().toUInt();
+
+              QRegExp regNum( "\\d+" );
+              regNum.indexIn( stream.attributes().value( "revision" ).toString() );
+              idxHeader.revisionNumber = regNum.cap().toUInt();
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 

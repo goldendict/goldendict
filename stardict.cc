@@ -336,7 +336,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
   switch( type )
   {
     case 'x': // Xdxf content
-      return Xdxf2Html::convert( string( resource, size ), Xdxf2Html::STARDICT, NULL, this );
+      return Xdxf2Html::convert( string( resource, size ), Xdxf2Html::STARDICT, NULL, this, &resourceZip );
     case 'h': // Html content
     {
       string articleText = "<div class=\"sdct_h\">" + string( resource, size ) + "</div>";

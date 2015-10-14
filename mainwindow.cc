@@ -3241,10 +3241,11 @@ void MainWindow::on_saveArticle_triggered()
 {
   ArticleView *view = getCurrentArticleView();
 
-  QString fileName = view->getTitle();
+  QString fileName = view->getTitle().simplified();
 
   // Replace reserved filename characters
-  fileName.replace( QRegExp( "[/\\\\\\?\\*:\\|<>]" ), "_" );
+  QRegExp rxName( "[/\\\\\\?\\*:\\|<>]" );
+  fileName.replace( rxName, "_" );
 
   fileName += ".html";
   QString savePath;
@@ -3287,6 +3288,19 @@ void MainWindow::on_saveArticle_triggered()
       QString html = view->toHtml();
       QFileInfo fi( fileName );
       cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
+
+      // Convert internal links
+
+      QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
+      int pos = 0;
+      while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
+      {
+        QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
+        name.replace( rxName, "_" );
+        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html\"";
+        html.replace( pos, rx3.cap().length(), name );
+        pos += name.length();
+      }
 
       if ( complete )
       {
