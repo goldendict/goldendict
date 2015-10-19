@@ -473,6 +473,16 @@ CONFIG( no_epwing_support ) {
   LIBS += -leb
 }
 
+CONFIG( no_chinese_conversion_support ) {
+  DEFINES += NO_CHINESE_CONVERSION_SUPPORT
+}
+
+!CONFIG( no_chinese_conversion_support ) {
+  HEADERS += chinese.hh
+  SOURCES += chinese.cc
+  LIBS += -lopencc
+}
+
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \

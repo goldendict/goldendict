@@ -93,6 +93,9 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.enableGermanTransliteration->setChecked( trs.enableGermanTransliteration );
   ui.enableGreekTransliteration->setChecked( trs.enableGreekTransliteration );
   ui.enableBelarusianTransliteration->setChecked( trs.enableBelarusianTransliteration );
+  ui.enableChineseConversion->setChecked( trs.chinese.enable );
+  ui.enableSimpToTradConversion->setChecked( trs.chinese.enableSimpToTradConversion );
+  ui.enableTradToSimpConversion->setChecked( trs.chinese.enableTradToSimpConversion );
   ui.enableRomaji->setChecked( trs.romaji.enable );
   ui.enableHepburn->setChecked( trs.romaji.enableHepburn );
   ui.enableNihonShiki->setChecked( trs.romaji.enableNihonShiki );
@@ -349,6 +352,9 @@ Config::Transliteration Sources::getTransliteration() const
   tr.enableGermanTransliteration = ui.enableGermanTransliteration->isChecked();
   tr.enableGreekTransliteration = ui.enableGreekTransliteration->isChecked();
   tr.enableBelarusianTransliteration = ui.enableBelarusianTransliteration->isChecked();
+  tr.chinese.enable = ui.enableChineseConversion->isChecked();
+  tr.chinese.enableSimpToTradConversion = ui.enableSimpToTradConversion->isChecked();
+  tr.chinese.enableTradToSimpConversion = ui.enableTradToSimpConversion->isChecked();
   tr.romaji.enable = ui.enableRomaji->isChecked();
   tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
   tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();

@@ -339,6 +339,26 @@ struct Hunspell
 /// All the MediaWikis
 typedef QVector< MediaWiki > MediaWikis;
 
+/// Chinese transliteration configuration
+struct Chinese
+{
+  bool enable;
+
+  bool enableSimpToTradConversion;
+  bool enableTradToSimpConversion;
+
+  Chinese();
+
+  bool operator == ( Chinese const & other ) const
+  { return enable == other.enable &&
+           enableSimpToTradConversion == other.enableSimpToTradConversion &&
+           enableTradToSimpConversion == other.enableTradToSimpConversion; }
+
+  bool operator != ( Chinese const & other ) const
+  { return ! operator == ( other ); }
+
+};
+
 /// Romaji transliteration configuration
 struct Romaji
 {
@@ -371,14 +391,15 @@ struct Transliteration
   bool enableGermanTransliteration;
   bool enableGreekTransliteration;
   bool enableBelarusianTransliteration;
+  Chinese chinese;
   Romaji romaji;
 
   bool operator == ( Transliteration const & other ) const
   { return enableRussianTransliteration == other.enableRussianTransliteration &&
-           romaji == other.romaji &&
            enableGermanTransliteration == other.enableGermanTransliteration &&
            enableGreekTransliteration == other.enableGreekTransliteration &&
-           enableBelarusianTransliteration == other.enableBelarusianTransliteration;
+           enableBelarusianTransliteration == other.enableBelarusianTransliteration &&
+           chinese == other.chinese && romaji == other.romaji;
   }
 
   bool operator != ( Transliteration const & other ) const

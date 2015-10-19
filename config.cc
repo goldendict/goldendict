@@ -137,6 +137,13 @@ Preferences::Preferences():
 {
 }
 
+Chinese::Chinese():
+  enable( false ),
+  enableSimpToTradConversion( true ),
+  enableTradToSimpConversion( true )
+{
+}
+
 Romaji::Romaji():
   enable( false ),
   enableHepburn( true ),
@@ -514,6 +521,15 @@ Class load() throw( exError )
 
     applyBoolOption( c.transliteration.enableBelarusianTransliteration,
                      transliteration.namedItem( "enableBelarusianTransliteration" ) );
+
+    QDomNode chinese = transliteration.namedItem( "chinese" );
+
+    if ( !chinese.isNull() )
+    {
+      applyBoolOption( c.transliteration.chinese.enable, chinese.namedItem( "enable" ) );
+      applyBoolOption( c.transliteration.chinese.enableSimpToTradConversion, chinese.namedItem( "enableSimpToTradConversion" ) );
+      applyBoolOption( c.transliteration.chinese.enableTradToSimpConversion, chinese.namedItem( "enableTradToSimpConversion" ) );
+    }
 
     QDomNode romaji = transliteration.namedItem( "romaji" );
 
@@ -1198,6 +1214,23 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "enableBelarusianTransliteration" );
     opt.appendChild( dd.createTextNode( c.transliteration.enableBelarusianTransliteration ? "1":"0" ) );
     transliteration.appendChild( opt );
+
+    // Chinese
+
+    QDomElement chinese = dd.createElement( "chinese" );
+    transliteration.appendChild( chinese );
+
+    opt = dd.createElement( "enable" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enable ? "1":"0" ) );
+    chinese.appendChild( opt );
+
+    opt = dd.createElement( "enableSimpToTradConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSimpToTradConversion ? "1":"0" ) );
+    chinese.appendChild( opt );
+
+    opt = dd.createElement( "enableSimpToTradConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSimpToTradConversion ? "1":"0" ) );
+    chinese.appendChild( opt );
 
     // Romaji
 

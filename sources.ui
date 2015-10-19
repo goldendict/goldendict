@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>8</number>
      </property>
      <property name="iconSize">
       <size>
@@ -710,6 +710,54 @@ in the future, or register on the site to get your own key.</string>
        </item>
        <item>
         <spacer name="verticalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="enableChineseConversion">
+         <property name="toolTip">
+          <string>Enable conversion between simplified and traditional Chinese characters</string>
+         </property>
+         <property name="title">
+          <string>Chinese Conversion</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="enableTradToSimpConversion">
+            <property name="toolTip">
+             <string>Enable conversion from traditional characters to simplified characters</string>
+            </property>
+            <property name="text">
+             <string>Traditional to simplified conversion</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="enableSimpToTradConversion">
+            <property name="toolTip">
+             <string>Enable conversion from simplified characters to traditional characters</string>
+            </property>
+            <property name="text">
+             <string>Smplified to traditional conversion</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_13">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
