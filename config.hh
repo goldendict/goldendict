@@ -344,15 +344,17 @@ struct Chinese
 {
   bool enable;
 
-  bool enableSimpToTradConversion;
-  bool enableTradToSimpConversion;
+  bool enableSCToTWConversion;
+  bool enableSCToHKConversion;
+  bool enableTCToSCConversion;
 
   Chinese();
 
   bool operator == ( Chinese const & other ) const
   { return enable == other.enable &&
-           enableSimpToTradConversion == other.enableSimpToTradConversion &&
-           enableTradToSimpConversion == other.enableTradToSimpConversion; }
+           enableSCToTWConversion == other.enableSCToTWConversion &&
+           enableSCToHKConversion == other.enableSCToHKConversion &&
+           enableTCToSCConversion == other.enableTCToSCConversion; }
 
   bool operator != ( Chinese const & other ) const
   { return ! operator == ( other ); }

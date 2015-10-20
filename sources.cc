@@ -94,8 +94,9 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.enableGreekTransliteration->setChecked( trs.enableGreekTransliteration );
   ui.enableBelarusianTransliteration->setChecked( trs.enableBelarusianTransliteration );
   ui.enableChineseConversion->setChecked( trs.chinese.enable );
-  ui.enableSimpToTradConversion->setChecked( trs.chinese.enableSimpToTradConversion );
-  ui.enableTradToSimpConversion->setChecked( trs.chinese.enableTradToSimpConversion );
+  ui.enableSCToTWConversion->setChecked( trs.chinese.enableSCToTWConversion );
+  ui.enableSCToHKConversion->setChecked( trs.chinese.enableSCToHKConversion );
+  ui.enableTCToSCConversion->setChecked( trs.chinese.enableTCToSCConversion );
   ui.enableRomaji->setChecked( trs.romaji.enable );
   ui.enableHepburn->setChecked( trs.romaji.enableHepburn );
   ui.enableNihonShiki->setChecked( trs.romaji.enableNihonShiki );
@@ -353,8 +354,9 @@ Config::Transliteration Sources::getTransliteration() const
   tr.enableGreekTransliteration = ui.enableGreekTransliteration->isChecked();
   tr.enableBelarusianTransliteration = ui.enableBelarusianTransliteration->isChecked();
   tr.chinese.enable = ui.enableChineseConversion->isChecked();
-  tr.chinese.enableSimpToTradConversion = ui.enableSimpToTradConversion->isChecked();
-  tr.chinese.enableTradToSimpConversion = ui.enableTradToSimpConversion->isChecked();
+  tr.chinese.enableSCToTWConversion = ui.enableSCToTWConversion->isChecked();
+  tr.chinese.enableSCToHKConversion = ui.enableSCToHKConversion->isChecked();
+  tr.chinese.enableTCToSCConversion = ui.enableTCToSCConversion->isChecked();
   tr.romaji.enable = ui.enableRomaji->isChecked();
   tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
   tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();

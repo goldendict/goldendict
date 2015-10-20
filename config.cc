@@ -139,8 +139,9 @@ Preferences::Preferences():
 
 Chinese::Chinese():
   enable( false ),
-  enableSimpToTradConversion( true ),
-  enableTradToSimpConversion( true )
+  enableSCToTWConversion( true ),
+  enableSCToHKConversion( true ),
+  enableTCToSCConversion( true )
 {
 }
 
@@ -527,8 +528,9 @@ Class load() throw( exError )
     if ( !chinese.isNull() )
     {
       applyBoolOption( c.transliteration.chinese.enable, chinese.namedItem( "enable" ) );
-      applyBoolOption( c.transliteration.chinese.enableSimpToTradConversion, chinese.namedItem( "enableSimpToTradConversion" ) );
-      applyBoolOption( c.transliteration.chinese.enableTradToSimpConversion, chinese.namedItem( "enableTradToSimpConversion" ) );
+      applyBoolOption( c.transliteration.chinese.enableSCToTWConversion, chinese.namedItem( "enableSCToTWConversion" ) );
+      applyBoolOption( c.transliteration.chinese.enableSCToHKConversion, chinese.namedItem( "enableSCToHKConversion" ) );
+      applyBoolOption( c.transliteration.chinese.enableTCToSCConversion, chinese.namedItem( "enableTCToSCConversion" ) );
     }
 
     QDomNode romaji = transliteration.namedItem( "romaji" );
@@ -1224,12 +1226,16 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.transliteration.chinese.enable ? "1":"0" ) );
     chinese.appendChild( opt );
 
-    opt = dd.createElement( "enableSimpToTradConversion" );
-    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSimpToTradConversion ? "1":"0" ) );
+    opt = dd.createElement( "enableSCToTWConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSCToTWConversion ? "1":"0" ) );
     chinese.appendChild( opt );
 
-    opt = dd.createElement( "enableSimpToTradConversion" );
-    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSimpToTradConversion ? "1":"0" ) );
+    opt = dd.createElement( "enableSCToHKConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSCToHKConversion ? "1":"0" ) );
+    chinese.appendChild( opt );
+
+    opt = dd.createElement( "enableTCToSCConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableTCToSCConversion ? "1":"0" ) );
     chinese.appendChild( opt );
 
     // Romaji

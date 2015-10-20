@@ -733,23 +733,33 @@ in the future, or register on the site to get your own key.</string>
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="enableTradToSimpConversion">
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="enableTCToSCConversion">
             <property name="toolTip">
              <string>Enable conversion from traditional characters to simplified characters</string>
             </property>
             <property name="text">
-             <string>Traditional to simplified conversion</string>
+             <string>TC to SC</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="enableSCToHKConversion">
+            <property name="toolTip">
+             <string>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</string>
+            </property>
+            <property name="text">
+             <string>SC to TC (Hong Kong variant)</string>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QCheckBox" name="enableSimpToTradConversion">
+           <widget class="QCheckBox" name="enableSCToTWConversion">
             <property name="toolTip">
-             <string>Enable conversion from simplified characters to traditional characters</string>
+             <string>Enable conversion from simplified characters to traditional (Taiwan variant) characters</string>
             </property>
             <property name="text">
-             <string>Smplified to traditional conversion</string>
+             <string>SC to TC (Taiwan variant)</string>
             </property>
            </widget>
           </item>

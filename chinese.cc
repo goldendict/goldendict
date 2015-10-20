@@ -54,17 +54,24 @@ std::vector< sptr< Dictionary::Class > > makeDictionaries( Config::Chinese const
 
   if ( cfg.enable )
   {
-    if ( cfg.enableSimpToTradConversion )
+    if ( cfg.enableSCToTWConversion )
     {
-      result.push_back( new CharacterConversionDictionary( "abbd22460acb11992bb089b2ccda7a0c",
-                                                           QCoreApplication::translate( "Chinese", "Simplified to traditional Chinese conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/cn.png" ), "s2t.json" ) );
+      result.push_back( new CharacterConversionDictionary( "bf1c33a59cbacea8f39b5b5475787cfd",
+                                                           QCoreApplication::translate( "ChineseConversion", "Simplified to traditional Chinese (Taiwan variant) conversion" ).toUtf8().data(),
+                                                           QIcon( ":/flags/tw.png" ), "s2tw.json" ) );
     }
 
-    if ( cfg.enableTradToSimpConversion )
+    if ( cfg.enableSCToHKConversion )
     {
-      result.push_back( new CharacterConversionDictionary( "43d783892e6cd3fa973e4232287cce72",
-                                                           QCoreApplication::translate( "Chinese", "Traditional to simplified Chinese conversion" ).toUtf8().data(),
+      result.push_back( new CharacterConversionDictionary( "9e0681fb9e1c0b6c90e6fb46111d96b5",
+                                                           QCoreApplication::translate( "ChineseConversion", "Simplified to traditional Chinese (Hong Kong variant) conversion" ).toUtf8().data(),
+                                                           QIcon( ":/flags/hk.png" ), "s2hk.json" ) );
+    }
+
+    if ( cfg.enableTCToSCConversion )
+    {
+      result.push_back( new CharacterConversionDictionary( "0db536ce0bdc52ea30d11a82c5db4a27",
+                                                           QCoreApplication::translate( "ChineseConversion", "Traditional to simplified Chinese conversion" ).toUtf8().data(),
                                                            QIcon( ":/flags/cn.png" ), "t2s.json" ) );
     }
   }
