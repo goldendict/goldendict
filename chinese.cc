@@ -20,7 +20,7 @@ public:
   CharacterConversionDictionary( std::string const & id, std::string const & name,
                                  QIcon icon, std::string const & openccConfig);
 
-  std::vector< std::wstring > getAlternateWritings( std::wstring const & )
+  std::vector< gd::wstring > getAlternateWritings( gd::wstring const & )
     throw();
 };
 
@@ -33,13 +33,13 @@ CharacterConversionDictionary::CharacterConversionDictionary( std::string const 
 {
 }
 
-std::vector< std::wstring > CharacterConversionDictionary::getAlternateWritings( std::wstring const & str )
+std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( gd::wstring const & str )
   throw()
 {
-  std::vector< std::wstring > results;
+  std::vector< gd::wstring > results;
 
-  std::wstring folded = Folding::applySimpleCaseOnly( str );
-  std::wstring result = Utf8::decode( converter.Convert( Utf8::encode( folded ) ) );
+  gd::wstring folded = Folding::applySimpleCaseOnly( str );
+  gd::wstring result = Utf8::decode( converter.Convert( Utf8::encode( folded ) ) );
 
   if ( result != folded )
     results.push_back( result );
