@@ -17,7 +17,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>8</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -633,7 +633,7 @@ in the future, or register on the site to get your own key.</string>
       <attribute name="title">
        <string>Transliteration</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_9">
+      <layout class="QVBoxLayout" name="transliterationLayout">
        <item>
         <spacer name="verticalSpacer_5">
          <property name="orientation">
@@ -710,64 +710,6 @@ in the future, or register on the site to get your own key.</string>
        </item>
        <item>
         <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="enableChineseConversion">
-         <property name="toolTip">
-          <string>Enable conversion between simplified and traditional Chinese characters</string>
-         </property>
-         <property name="title">
-          <string>Chinese Conversion</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="0" column="3">
-           <widget class="QCheckBox" name="enableTCToSCConversion">
-            <property name="toolTip">
-             <string>Enable conversion from traditional characters to simplified characters</string>
-            </property>
-            <property name="text">
-             <string>TC to SC</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="enableSCToHKConversion">
-            <property name="toolTip">
-             <string>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</string>
-            </property>
-            <property name="text">
-             <string>SC to TC (Hong Kong variant)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="enableSCToTWConversion">
-            <property name="toolTip">
-             <string>Enable conversion from simplified characters to traditional (Taiwan variant) characters</string>
-            </property>
-            <property name="text">
-             <string>SC to TC (Taiwan variant)</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_13">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -882,7 +824,7 @@ Not implemented yet in GoldenDict.</string>
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>80</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>

@@ -35,7 +35,7 @@
 #include "epwing.hh"
 #endif
 
-#ifndef NO_CHINESE_CONVERSION_SUPPORT
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 #include "chinese.hh"
 #endif
 
@@ -277,6 +277,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
 
   ///// We create transliterations syncronously since they are very simple
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
   // Make Chinese conversion
   {
     vector< sptr< Dictionary::Class > > chineseDictionaries =
@@ -285,6 +286,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), chineseDictionaries.begin(),
                          chineseDictionaries.end() );
   }
+#endif
 
   // Make Romaji
   {

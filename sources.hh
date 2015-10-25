@@ -16,6 +16,11 @@
 #include "texttospeechsource.hh"
 #endif
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+// Forward declaration
+class ChineseConversion;
+#endif
+
 /// A model to be projected into the mediawikis view, according to Qt's MVC model
 class MediaWikisModel: public QAbstractItemModel
 {
@@ -283,6 +288,10 @@ signals:
 
 private:
   Ui::Sources ui;
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  ChineseConversion *chineseConversion;
+#endif
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
   TextToSpeechSource *textToSpeechSource;

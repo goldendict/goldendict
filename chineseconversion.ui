@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChineseConversion</class>
+ <widget class="QGroupBox" name="ChineseConversion">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>689</width>
+    <height>128</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>GroupBox</string>
+  </property>
+  <property name="toolTip">
+   <string>Enable conversion between simplified and traditional Chinese characters</string>
+  </property>
+  <property name="title">
+   <string>Chinese Con&amp;version</string>
+  </property>
+  <property name="checkable">
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="enableSCToTWConversion">
+     <property name="toolTip">
+      <string>Enable conversion from simplified characters to traditional (Taiwan variant) characters</string>
+     </property>
+     <property name="text">
+      <string>SC to TC (Taiwan variant)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="enableSCToHKConversion">
+     <property name="toolTip">
+      <string>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</string>
+     </property>
+     <property name="text">
+      <string>SC to TC (Hong Kong variant)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QCheckBox" name="enableTCToSCConversion">
+     <property name="toolTip">
+      <string>Enable conversion from traditional characters to simplified characters</string>
+     </property>
+     <property name="text">
+      <string>TC to SC</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

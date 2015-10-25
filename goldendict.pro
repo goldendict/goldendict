@@ -473,13 +473,13 @@ CONFIG( no_epwing_support ) {
   LIBS += -leb
 }
 
-CONFIG( no_chinese_conversion_support ) {
-  DEFINES += NO_CHINESE_CONVERSION_SUPPORT
-}
-
-!CONFIG( no_chinese_conversion_support ) {
-  HEADERS += chinese.hh
-  SOURCES += chinese.cc
+CONFIG( chinese_conversion_support ) {
+  DEFINES += MAKE_CHINESE_CONVERSION_SUPPORT
+  FORMS   += chineseconversion.ui
+  HEADERS += chinese.hh \
+             chineseconversion.hh
+  SOURCES += chinese.cc \
+             chineseconversion.cc
   LIBS += -lopencc
 }
 

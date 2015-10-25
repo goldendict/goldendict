@@ -2,10 +2,12 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "chinese.hh"
+#include <stdexcept>
 #include <QCoreApplication>
 #include <opencc/Export.hpp>
 #include <opencc/SimpleConverter.hpp>
 #include "folding.hh"
+#include "gddebug.hh"
 #include "transliteration.hh"
 #include "utf8.hh"
 
@@ -13,12 +15,13 @@ namespace Chinese {
 
 class CharacterConversionDictionary: public Transliteration::BaseTransliterationDictionary
 {
-  opencc::SimpleConverter converter;
+  opencc::SimpleConverter* converter;
 
 public:
 
   CharacterConversionDictionary( std::string const & id, std::string const & name,
                                  QIcon icon, std::string const & openccConfig);
+  ~CharacterConversionDictionary();
 
   std::vector< gd::wstring > getAlternateWritings( gd::wstring const & )
     throw();
@@ -29,8 +32,20 @@ CharacterConversionDictionary::CharacterConversionDictionary( std::string const 
                                                               QIcon icon_,
                                                               std::string const & openccConfig):
   Transliteration::BaseTransliterationDictionary( id, name_, icon_, false ),
-  converter(openccConfig)
+  converter( NULL )
 {
+  try {
+    converter = new opencc::SimpleConverter( openccConfig );
+  } catch ( std::runtime_error& e ) {
+    gdWarning( "CharacterConversionDictionary: failed to initialize OpenCC from config %s: %s\n",
+               openccConfig.c_str(), e.what() );
+  }
+}
+
+CharacterConversionDictionary::~CharacterConversionDictionary()
+{
+  if ( converter != NULL )
+    delete converter;
 }
 
 std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( gd::wstring const & str )
@@ -38,11 +53,22 @@ std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( 
 {
   std::vector< gd::wstring > results;
 
-  gd::wstring folded = Folding::applySimpleCaseOnly( str );
-  gd::wstring result = Utf8::decode( converter.Convert( Utf8::encode( folded ) ) );
+  if ( converter != NULL ) {
+    gd::wstring folded = Folding::applySimpleCaseOnly( str );
+    std::string input = Utf8::encode( folded );
+    std::string output;
+    gd::wstring result;
 
-  if ( result != folded )
-    results.push_back( result );
+    try {
+      output = converter->Convert( input );
+      result = Utf8::decode( output );
+    } catch ( std::exception& ex ) {
+      gdWarning( "OpenCC: convertion failed %s\n", ex.what() );
+    }
+
+    if ( !result.empty() && result != folded )
+      results.push_back( result );
+  }
 
   return results;
 }
