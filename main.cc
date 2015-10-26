@@ -183,6 +183,11 @@ int main( int argc, char ** argv )
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
   #endif
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  // OpenCC needs to load it's data files by relative path on Windows and OS X
+  QDir::setCurrent( Config::getProgramDataDir() );
+#endif
+
   // Load translations for system locale
 
   QTranslator qtTranslator;

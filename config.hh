@@ -675,6 +675,11 @@ QString getLocDir() throw();
 /// Returns the directory storing program help files (.qch).
 QString getHelpDir() throw();
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+/// Returns the directory storing OpenCC configuration and dictionary files (.json and .ocd).
+QString getOpenCCDir() throw();
+#endif
+
 /// Returns true if the program is configured as a portable version. In that
 /// mode, all the settings and indices are kept in the program's directory.
 bool isPortableVersion() throw();

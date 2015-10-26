@@ -2024,6 +2024,16 @@ QString getHelpDir() throw()
     return QCoreApplication::applicationDirPath() + "/help";
 }
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+QString getOpenCCDir() throw()
+{
+  if ( QDir( "opencc" ).exists() )
+    return "opencc";
+  else
+    return QCoreApplication::applicationDirPath() + "/opencc";
+}
+#endif
+
 bool isPortableVersion() throw()
 {
   struct IsPortable

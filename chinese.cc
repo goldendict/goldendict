@@ -20,7 +20,7 @@ class CharacterConversionDictionary: public Transliteration::BaseTransliteration
 public:
 
   CharacterConversionDictionary( std::string const & id, std::string const & name,
-                                 QIcon icon, std::string const & openccConfig);
+                                 QIcon icon, QString const & openccConfig);
   ~CharacterConversionDictionary();
 
   std::vector< gd::wstring > getAlternateWritings( gd::wstring const & )
@@ -30,15 +30,15 @@ public:
 CharacterConversionDictionary::CharacterConversionDictionary( std::string const & id,
                                                               std::string const & name_,
                                                               QIcon icon_,
-                                                              std::string const & openccConfig):
+                                                              QString const & openccConfig):
   Transliteration::BaseTransliterationDictionary( id, name_, icon_, false ),
   converter( NULL )
 {
   try {
-    converter = new opencc::SimpleConverter( openccConfig );
+    converter = new opencc::SimpleConverter( openccConfig.toLocal8Bit().constData() );
   } catch ( std::runtime_error& e ) {
     gdWarning( "CharacterConversionDictionary: failed to initialize OpenCC from config %s: %s\n",
-               openccConfig.c_str(), e.what() );
+               openccConfig.toLocal8Bit().constData(), e.what() );
   }
 }
 
@@ -78,27 +78,33 @@ std::vector< sptr< Dictionary::Class > > makeDictionaries( Config::Chinese const
 {
   std::vector< sptr< Dictionary::Class > > result;
 
+#ifdef Q_OS_LINUX
+  QString configDir = "";
+#else
+  QString configDir = Config::getOpenCCDir() + "/";
+#endif
+
   if ( cfg.enable )
   {
     if ( cfg.enableSCToTWConversion )
     {
       result.push_back( new CharacterConversionDictionary( "bf1c33a59cbacea8f39b5b5475787cfd",
                                                            QCoreApplication::translate( "ChineseConversion", "Simplified to traditional Chinese (Taiwan variant) conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/tw.png" ), "s2tw.json" ) );
+                                                           QIcon( ":/flags/tw.png" ), configDir + "s2tw.json" ) );
     }
 
     if ( cfg.enableSCToHKConversion )
     {
       result.push_back( new CharacterConversionDictionary( "9e0681fb9e1c0b6c90e6fb46111d96b5",
                                                            QCoreApplication::translate( "ChineseConversion", "Simplified to traditional Chinese (Hong Kong variant) conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/hk.png" ), "s2hk.json" ) );
+                                                           QIcon( ":/flags/hk.png" ), configDir + "s2hk.json" ) );
     }
 
     if ( cfg.enableTCToSCConversion )
     {
       result.push_back( new CharacterConversionDictionary( "0db536ce0bdc52ea30d11a82c5db4a27",
                                                            QCoreApplication::translate( "ChineseConversion", "Traditional to simplified Chinese conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/cn.png" ), "t2s.json" ) );
+                                                           QIcon( ":/flags/cn.png" ), configDir + "t2s.json" ) );
     }
   }
 
