@@ -97,6 +97,9 @@ win32 {
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
     CONFIG += zim_support
+    !CONFIG( no_chinese_conversion_support ) {
+        CONFIG += chinese_conversion_support
+    }
 }
 
 unix:!mac {
