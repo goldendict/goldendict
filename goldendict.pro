@@ -128,6 +128,10 @@ win32 {
 
     CONFIG += zim_support
 
+    !CONFIG( no_chinese_conversion_support ) {
+        CONFIG += chinese_conversion_support
+    }
+
     greaterThan(QT_MAJOR_VERSION, 4) {
       LIBS += -luxtheme
     }
@@ -513,6 +517,16 @@ CONFIG( no_epwing_support ) {
              epwing_book.cc \
              epwing_charmap.cc
   LIBS += -leb
+}
+
+CONFIG( chinese_conversion_support ) {
+  DEFINES += MAKE_CHINESE_CONVERSION_SUPPORT
+  FORMS   += chineseconversion.ui
+  HEADERS += chinese.hh \
+             chineseconversion.hh
+  SOURCES += chinese.cc \
+             chineseconversion.cc
+  LIBS += -lopencc
 }
 
 RESOURCES += resources.qrc \

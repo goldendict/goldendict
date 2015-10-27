@@ -35,11 +35,21 @@ And then invoke `qmake-qt4` and `make`:
 In case when qmake-qt4 does not exist, try using `qmake` but make sure it is indeed from the Qt 4 installation.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
+### Building with Chinese conversion support
+
+To add Chinese conversion support you need at first install libopencc-dev package:
+
+    sudo apt-get install libopencc-dev
+
+Then pass `"CONFIG+=chinese_conversion_support"` to `qmake`
+
+    qmake "CONFIG+=chinese_conversion_support"
+
 ### Building with Zim dictionaries support
 
 To add Zim and Slob formats support you need at first install lzma-dev package:
 
-    sudo apt-get liblzma-dev
+    sudo apt-get install liblzma-dev
 
 Then pass `"CONFIG+=zim_support"` to `qmake`
 

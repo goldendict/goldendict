@@ -10,52 +10,77 @@ namespace Transliteration {
 
 using gd::wchar;
 
-void Table::ins( char const * from, char const * to )
-{
-  wstring fr = Utf8::decode( std::string( from ) );
-
-  if ( fr.size() > maxEntrySize )
-    maxEntrySize = fr.size();
-  
-  insert( std::pair< wstring, wstring >( fr,
-                                         Utf8::decode( std::string( to ) ) ) );
-}
-  
-TransliterationDictionary::TransliterationDictionary( string const & id,
-                                                      string const & name_,
-                                                      QIcon icon_,
-                                                      Table const & table_,
-                                                      bool caseSensitive_ ):
+BaseTransliterationDictionary::BaseTransliterationDictionary( string const & id,
+                                                              string const & name_,
+                                                              QIcon icon_,
+                                                              bool caseSensitive_ ):
   Dictionary::Class( id, vector< string >() ),
-  name( name_ ), table( table_ ),
+  name( name_ ),
   caseSensitive( caseSensitive_ )
 {
   dictionaryIcon = dictionaryNativeIcon = icon_;
   dictionaryIconLoaded = true;
 }
 
-string TransliterationDictionary::getName() throw()
+string BaseTransliterationDictionary::getName() throw()
 { return name; }
 
-map< Dictionary::Property, string > TransliterationDictionary::getProperties() throw()
+map< Dictionary::Property, string > BaseTransliterationDictionary::getProperties() throw()
 { return map< Dictionary::Property, string >(); }
 
-unsigned long TransliterationDictionary::getArticleCount() throw()
+unsigned long BaseTransliterationDictionary::getArticleCount() throw()
 { return 0; }
 
-unsigned long TransliterationDictionary::getWordCount() throw()
+unsigned long BaseTransliterationDictionary::getWordCount() throw()
 { return 0; }
 
-sptr< Dictionary::WordSearchRequest > TransliterationDictionary::prefixMatch( wstring const &,
-                                                           unsigned long ) throw( std::exception )
+sptr< Dictionary::WordSearchRequest > BaseTransliterationDictionary::prefixMatch( wstring const &,
+                                                                                  unsigned long ) throw( std::exception )
 { return new Dictionary::WordSearchRequestInstant(); }
 
-sptr< Dictionary::DataRequest > TransliterationDictionary::getArticle( wstring const &,
-                                                                       vector< wstring > const &,
-                                                                       wstring const & )
+sptr< Dictionary::DataRequest > BaseTransliterationDictionary::getArticle( wstring const &,
+                                                                           vector< wstring > const &,
+                                                                           wstring const & )
   throw( std::exception )
 { return new Dictionary::DataRequestInstant( false ); }
 
+sptr< Dictionary::WordSearchRequest > BaseTransliterationDictionary::findHeadwordsForSynonym( wstring const & str )
+  throw( std::exception )
+{
+  sptr< Dictionary::WordSearchRequestInstant > result = new Dictionary::WordSearchRequestInstant();
+
+  vector< wstring > alts = getAlternateWritings( str );
+
+  GD_DPRINTF( "alts = %u\n", (unsigned) alts.size() );
+
+  for( unsigned x = 0; x < alts.size(); ++x )
+    result->getMatches().push_back( alts[ x ] );
+
+  return result;
+}
+
+
+void Table::ins( char const * from, char const * to )
+{
+  wstring fr = Utf8::decode( std::string( from ) );
+
+  if ( fr.size() > maxEntrySize )
+    maxEntrySize = fr.size();
+
+  insert( std::pair< wstring, wstring >( fr,
+                                         Utf8::decode( std::string( to ) ) ) );
+}
+
+
+TransliterationDictionary::TransliterationDictionary( string const & id,
+                                                      string const & name_,
+                                                      QIcon icon_,
+                                                      Table const & table_,
+                                                      bool caseSensitive_ ):
+  BaseTransliterationDictionary(id, name_, icon_, caseSensitive_),
+  table( table_ )
+{
+}
 
 vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const & str )
   throw()
@@ -80,17 +105,17 @@ vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const
   size_t left = target->size();
 
   Table::const_iterator i;
-  
+
   while( left )
   {
     unsigned x;
-    
+
     for( x = table.getMaxEntrySize(); x >= 1; --x )
     {
       if ( left >= x )
       {
         i = table.find( wstring( ptr, x ) );
-  
+
         if ( i != table.end() )
         {
           result.append( i->second );
@@ -108,26 +133,11 @@ vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const
       --left;
     }
   }
-  
+
   if ( result != *target )
     results.push_back( result );
 
   return results;
-}
-
-sptr< Dictionary::WordSearchRequest > TransliterationDictionary::findHeadwordsForSynonym( wstring const & str )
-  throw( std::exception )
-{
-  sptr< Dictionary::WordSearchRequestInstant > result = new Dictionary::WordSearchRequestInstant();
-
-  vector< wstring > alts = getAlternateWritings( str );
-
-  GD_DPRINTF( "alts = %u\n", (unsigned) alts.size() );
-  
-  for( unsigned x = 0; x < alts.size(); ++x )
-    result->getMatches().push_back( alts[ x ] );
-
-  return result;
 }
 
 }

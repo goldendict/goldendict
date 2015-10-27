@@ -7,9 +7,16 @@
 #include <QStandardItemModel>
 #include "gddebug.hh"
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+#include "chineseconversion.hh"
+#endif
+
 
 Sources::Sources( QWidget * parent, Config::Class const & cfg):
   QWidget( parent ),
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  chineseConversion( new ChineseConversion( this, cfg.transliteration.chinese ) ),
+#endif
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
   textToSpeechSource( NULL ),
 #endif
@@ -93,6 +100,12 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.enableGermanTransliteration->setChecked( trs.enableGermanTransliteration );
   ui.enableGreekTransliteration->setChecked( trs.enableGreekTransliteration );
   ui.enableBelarusianTransliteration->setChecked( trs.enableBelarusianTransliteration );
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  ui.transliterationLayout->addWidget(chineseConversion);
+  ui.transliterationLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
+#endif
+
   ui.enableRomaji->setChecked( trs.romaji.enable );
   ui.enableHepburn->setChecked( trs.romaji.enableHepburn );
   ui.enableNihonShiki->setChecked( trs.romaji.enableNihonShiki );
@@ -349,6 +362,9 @@ Config::Transliteration Sources::getTransliteration() const
   tr.enableGermanTransliteration = ui.enableGermanTransliteration->isChecked();
   tr.enableGreekTransliteration = ui.enableGreekTransliteration->isChecked();
   tr.enableBelarusianTransliteration = ui.enableBelarusianTransliteration->isChecked();
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  chineseConversion->getConfig( tr.chinese );
+#endif
   tr.romaji.enable = ui.enableRomaji->isChecked();
   tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
   tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();
