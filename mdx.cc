@@ -989,19 +989,15 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( pos < 0 )
       break;
 
-    if( wordCrossLink.cap( 3 ).isEmpty() )
-      pos += wordCrossLink.cap( 0 ).size();
-    else
-    {
-      QString newLink = wordCrossLink.cap( 1 )
-                        + "gdlookup://localhost/"
-                        + wordCrossLink.cap( 2 )
-                        + ( wordCrossLink.cap( 3 ).isEmpty() ? "" : QString( "?gdanchor=" )
-                                                                    + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 )
-                          );
-      article.replace( pos, wordCrossLink.cap( 0 ).size(), newLink );
-      pos += newLink.size();
-    }
+    QString newLink = wordCrossLink.cap( 1 )
+                      + "gdlookup://localhost/"
+                      + wordCrossLink.cap( 2 );
+
+    if( !wordCrossLink.cap( 3 ).isEmpty() )
+      newLink += QString( "?gdanchor=" ) + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 );
+
+    article.replace( pos, wordCrossLink.cap( 0 ).size(), newLink );
+    pos += newLink.size();
   }
 
   return article;
