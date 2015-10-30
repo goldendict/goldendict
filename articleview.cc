@@ -301,7 +301,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   Contexts::Iterator pos = contexts.find( "gdanchor" );
   if( pos != contexts.end() )
   {
-    req.addQueryItem( "gdanchor", contexts[ "gdanchor" ] );
+    Qt4x5::Url::addQueryItem( req, "gdanchor", contexts[ "gdanchor" ] );
     contexts.erase( pos );
   }
 
@@ -489,9 +489,9 @@ void ArticleView::loadFinished( bool )
   }
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-  if( !url.queryItemValue( "gdanchor" ).isEmpty() )
+  if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
-    QString anchor = QUrl::fromPercentEncoding( url.encodedQueryItemValue( "gdanchor" ) );
+    QString anchor = QUrl::fromPercentEncoding( Qt4x5::Url::encodedQueryItemValue( url, "gdanchor" ) );
 
     // Find GD anchor on page
     // Pattern: (dictionary ID (32 chars))_(articleID(quint64, hex))_(original anchor)
@@ -1087,8 +1087,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         }
       }
 
-      if( url.hasQueryItem( "gdanchor" ) )
-        contexts[ "gdanchor" ] = url.queryItemValue( "gdanchor" );
+      if( Qt4x5::Url::hasQueryItem( url, "gdanchor" ) )
+        contexts[ "gdanchor" ] = Qt4x5::Url::queryItemValue( url, "gdanchor" );
 
       showDefinition( url.path().mid( 1 ),
                       getGroup( ref ), newScrollTo, contexts );
