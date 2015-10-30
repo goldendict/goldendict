@@ -947,15 +947,14 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 
-  return article
+  QRegExp wordCrossLink( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)(#?[^\"']*)", Qt::CaseInsensitive );
+
+  article = article
          // anchors
          .replace( anchorLinkRe,
                    "\\1" + uniquePrefix )
          .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
                    "\\1#" + uniquePrefix )
-         // word cross links
-         .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)#?[^\"']*", Qt::CaseInsensitive ),
-                   "\\1gdlookup://localhost/\\2" )
          // sounds, and audio link script
          .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
                    QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
@@ -981,6 +980,31 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
          .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\2\"" );
+
+  // word cross links
+  int pos = 0;
+  while( pos >= 0 )
+  {
+    pos = wordCrossLink.indexIn( article, pos );
+    if( pos < 0 )
+      break;
+
+    if( wordCrossLink.cap( 3 ).isEmpty() )
+      pos += wordCrossLink.cap( 0 ).size();
+    else
+    {
+      QString newLink = wordCrossLink.cap( 1 )
+                        + "gdlookup://localhost/"
+                        + wordCrossLink.cap( 2 )
+                        + ( wordCrossLink.cap( 3 ).isEmpty() ? "" : QString( "?gdanchor=" )
+                                                                    + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 )
+                          );
+      article.replace( pos, wordCrossLink.cap( 0 ).size(), newLink );
+      pos += newLink.size();
+    }
+  }
+
+  return article;
 }
 
 static void addEntryToIndex( QString const & word, uint32_t offset, IndexedWords & indexedWords )

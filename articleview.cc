@@ -25,6 +25,7 @@
 
 #if QT_VERSION >= 0x040600
 #include <QWebElement>
+#include <QWebElementCollection>
 #endif
 
 #include "qt4x5.hh"
@@ -277,7 +278,7 @@ ArticleView::~ArticleView()
 
 void ArticleView::showDefinition( QString const & word, unsigned group,
                                   QString const & scrollTo,
-                                  Contexts const & contexts )
+                                  Contexts const & contexts_ )
 {
 
 #ifndef DISABLE_INTERNAL_PLAYER
@@ -287,6 +288,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 #endif
 
   QUrl req;
+  Contexts contexts( contexts_ );
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
@@ -295,6 +297,13 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   if ( scrollTo.size() )
     Qt4x5::Url::addQueryItem( req, "scrollto", scrollTo );
+
+  Contexts::Iterator pos = contexts.find( "gdanchor" );
+  if( pos != contexts.end() )
+  {
+    req.addQueryItem( "gdanchor", contexts[ "gdanchor" ] );
+    contexts.erase( pos );
+  }
 
   if ( contexts.size() )
   {
@@ -478,6 +487,47 @@ void ArticleView::loadFinished( bool )
     setCurrentArticle( articleToJump, true );
     articleToJump.clear();
   }
+
+#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  if( !url.queryItemValue( "gdanchor" ).isEmpty() )
+  {
+    QString anchor = QUrl::fromPercentEncoding( url.encodedQueryItemValue( "gdanchor" ) );
+
+    // Find GD anchor on page
+    // Pattern: (dictionary ID (32 chars))_(articleID(quint64, hex))_(original anchor)
+
+    int n = anchor.indexOf( '_' );
+    if( n > 0 )
+      n = anchor.indexOf( '_', n + 1 );
+
+    if( n > 0 )
+    {
+      QString originalAnchor = anchor.mid( n + 1 );
+
+      QRegExp rx;
+      rx.setMinimal( true );
+      rx.setPattern( anchor.left( 33 ) + "[0-9a-f]*_" + originalAnchor );
+
+      QWebElementCollection coll = ui.definition->page()->mainFrame()->findAllElements( "a[name]" );
+
+      for( QWebElementCollection::iterator it = coll.begin(); it != coll.end(); ++it )
+      {
+        QString name = (*it).attribute( "name" );
+        if( rx.indexIn( name ) >= 0 )
+        {
+          // Anchor found, jump to it
+
+          url.setFragment( rx.cap( 0 ) );
+
+          ui.definition->page()->mainFrame()->evaluateJavaScript(
+             QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
+
+          break;
+        }
+      }
+    }
+  }
+#endif
 
   emit pageLoaded( this );
 
@@ -980,9 +1030,11 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
-                            Contexts const & contexts )
+                            Contexts const & contexts_ )
 {
   qDebug() << "clicked" << url;
+
+  Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
     ui.definition->load( url );
@@ -1034,6 +1086,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
           }
         }
       }
+
+      if( url.hasQueryItem( "gdanchor" ) )
+        contexts[ "gdanchor" ] = url.queryItemValue( "gdanchor" );
+
       showDefinition( url.path().mid( 1 ),
                       getGroup( ref ), newScrollTo, contexts );
     }
