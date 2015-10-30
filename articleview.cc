@@ -492,11 +492,13 @@ void ArticleView::loadFinished( bool )
     QString anchor = QUrl::fromPercentEncoding( url.encodedQueryItemValue( "gdanchor" ) );
 
     // Find GD anchor on page
-    // Pattern: (dictionary ID (32 chars))_(articleID(quint64, hex))_(original anchor)
 
     int n = anchor.indexOf( '_' );
-    if( n > 0 )
+    if( n == 32 )
+      // MDict pattern: (dictionary ID (32 chars))_(articleID(quint64, hex))_(original anchor)
       n = anchor.indexOf( '_', n + 1 );
+    else
+      n = 0;
 
     if( n > 0 )
     {
@@ -523,6 +525,12 @@ void ArticleView::loadFinished( bool )
           break;
         }
       }
+    }
+    else
+    {
+      url.setFragment( anchor );
+      ui.definition->page()->mainFrame()->evaluateJavaScript(
+         QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
 #endif

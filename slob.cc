@@ -757,6 +757,9 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   QRegExp rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
+
+  QString anchor;
+
   int pos = 0;
   while( (pos = rxLink.indexIn( text, pos )) >= 0 )
   {
@@ -765,11 +768,18 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     if ( !list[4].isEmpty() )
       tag = list[4].split("\"")[1];
 
+    // Find anchor
+    int n = list[ 3 ].indexOf( '#' );
+    if( n > 0 )
+      anchor = QString( "?gdanchor=" ) + list[ 3 ].mid( n + 1 );
+    else
+      anchor.clear();
+
     tag.remove( QRegExp(".*/") ).
         remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
         replace( "_", "%20" ).
         prepend( "<a href=\"gdlookup://localhost/" ).
-        append( "\" " + list[4] + ">" );
+        append( anchor + "\" " + list[4] + ">" );
 
     text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
