@@ -23,6 +23,7 @@ signals:
 public slots:
   void showMessage(const QString & text, int timeout = 0, const QPixmap & pixmap = QPixmap());
   void clearMessage();
+  void setBackgroundMessage( QString const & message );
 
 protected:
   virtual void mousePressEvent(QMouseEvent * event);
@@ -35,6 +36,9 @@ private:
   QLabel * textWidget;
 
   QTimer * timer;
+  QString backgroungMessage;
+  QString message;
+
   bool eventFilter(QObject *obj, QEvent * event);
   void refresh();
   bool hasImage() const;

@@ -359,7 +359,11 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
               int n = link.indexOf( '#', 1 );
               if( n > 0 )
+              {
+                QString anchor = link.mid( n + 1 ).replace( '_', "%5F" );
                 link.truncate( n );
+                link += QString( "?gdanchor=%1" ).arg( anchor );
+              }
 
               QString newLink = QString( "<a href=\"/%1\"" ).arg( link );
               articleString.replace( pos, regLinks.cap().size(), newLink );
