@@ -143,7 +143,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   Gestures::registerRecognizers();
 #endif
 
-  // use our own, cutsom statusbar
+  // use our own, custom statusbar
   setStatusBar(0);
   mainStatusBar = new MainStatusBar( this );
 
@@ -673,6 +673,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->installEventFilter( this );
 
   ui.historyList->installEventFilter( this );
+
+  connect( &ftsIndexing, SIGNAL( newIndexingName( QString ) ), this, SLOT( showFTSIndexingName( QString ) ) );
 
 #ifdef Q_OS_WIN
   if( cfg.normalMainWindowGeometry.width() <= 0 )
@@ -1696,7 +1698,10 @@ void MainWindow::pageLoaded( ArticleView * view )
 
 void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
 {
-  mainStatusBar->showMessage( message, timeout, icon );
+  if( message.isEmpty() )
+    mainStatusBar->clearMessage();
+  else
+    mainStatusBar->showMessage( message, timeout, icon );
 }
 
 void MainWindow::tabSwitched( int )
@@ -4168,6 +4173,14 @@ void MainWindow::closeGDHelp()
     delete helpWindow;
     helpWindow = 0;
   }
+}
+
+void MainWindow::showFTSIndexingName( QString const & name )
+{
+  if( name.isEmpty() )
+    mainStatusBar->setBackgroundMessage( QString() );
+  else
+    mainStatusBar->setBackgroundMessage( tr( "Now indexing for full-text search: " ) + name );
 }
 
 #ifdef Q_OS_WIN32

@@ -269,6 +269,8 @@ private slots:
 
   void editDictionary ( Dictionary::Class * dict );
 
+  void showFTSIndexingName( QString const & name );
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button

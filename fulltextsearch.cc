@@ -58,14 +58,13 @@ void Indexing::run()
   {
     gdWarning( "Exception occured while full-text search: %s", ex.what() );
   }
-  emit sendNowIndexingName( tr( "None" ) );
+  emit sendNowIndexingName( QString() );
 }
 
 
 FtsIndexing::FtsIndexing( std::vector< sptr< Dictionary::Class > > const & dicts):
   dictionaries( dicts ),
-  started( false ),
-  nowIndexing( tr( "None" ) )
+  started( false )
 {
 }
 
@@ -98,6 +97,8 @@ void FtsIndexing::stopIndexing()
 
     indexingExited.acquire();
     started = false;
+
+    setNowIndexedName( QString() );
   }
 }
 
@@ -263,7 +264,8 @@ void FullTextSearchDialog::saveData()
 
 void FullTextSearchDialog::setNewIndexingName( QString name )
 {
-  ui.nowIndexingLabel->setText( tr( "Now indexing: " ) + name );
+  ui.nowIndexingLabel->setText( tr( "Now indexing: " )
+                                + ( name.isEmpty() ? tr( "None" ) : name ) );
   showDictNumbers();
 }
 
