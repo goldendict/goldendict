@@ -1545,6 +1545,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 void MainWindow::tabCloseRequested( int x )
 {
   QWidget * w = ui.tabWidget->widget( x );
+  const bool articleViewHadFocus = getCurrentArticleView()->viewHasFocus();
 
   mruList.removeOne(w);
 
@@ -1562,6 +1563,10 @@ void MainWindow::tabCloseRequested( int x )
   // if everything is closed, add a new tab
   if ( ui.tabWidget->count() == 0 )
     addNewTab();
+
+  // Prevent focus hijacking by dictsPane (or potentially by some other widget).
+  if ( articleViewHadFocus )
+    getCurrentArticleView()->focus();
 }
 
 void MainWindow::closeCurrentTab()
@@ -2743,7 +2748,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     if( ftsDlg )
       ftsDlg->show();
 
-    focusTranslateLine();
 #ifdef Q_WS_X11
     Window wh = 0;
     int rev = 0;

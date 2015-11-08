@@ -133,6 +133,10 @@ public slots:
 
 public:
 
+  /// Returns true if the view has focus.
+  bool viewHasFocus() const
+  { return ui.definition->hasFocus(); }
+
   /// Takes the focus to the view
   void focus()
   { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
