@@ -82,7 +82,7 @@ inline QByteArray encodedQueryItemValue( QUrl const & url, QString const & item 
 #if IS_QT_5
   return QUrlQuery( url ).queryItemValue( item, QUrl::FullyEncoded ).toLatin1();
 #else
-  return url.encodedQueryItemValue( item );
+  return url.encodedQueryItemValue( item.toLatin1() );
 #endif
 }
 
