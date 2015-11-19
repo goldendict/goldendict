@@ -19,6 +19,8 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
+  bool const & useCustomUAHttpHeader;
+  QString const & customUAHttpHeader;
 
 public:
 
@@ -27,11 +29,15 @@ public:
                                dictionaries_,
                                ArticleMaker const & articleMaker_,
                                bool const & disallowContentFromOtherSites_,
-                               bool const & hideGoldenDictHeader_ ):
+                               bool const & hideGoldenDictHeader_,
+                               bool const & useCustomUAHttpHeader_,
+                               QString const & customUAHttpHeader_):
     QNetworkAccessManager( parent ), dictionaries( dictionaries_ ),
     articleMaker( articleMaker_ ),
     disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
-    hideGoldenDictHeader( hideGoldenDictHeader_ )
+    hideGoldenDictHeader( hideGoldenDictHeader_ ),
+    useCustomUAHttpHeader(useCustomUAHttpHeader_),
+    customUAHttpHeader(customUAHttpHeader_)
   {}
 
   /// Tries handling any kind of internal resources referenced by dictionaries.
