@@ -63,7 +63,7 @@ DEF_EX( exNoResource, "No resource found", Dictionary::Ex )
 enum
 {
   Signature = 0x58424C53, // SLBX on little-endian, XBLS on big-endian
-  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -91,8 +91,8 @@ const char SLOB_MAGIC[ 8 ] = { 0x21, 0x2d, 0x31, 0x53, 0x4c, 0x4f, 0x42, 0x1f };
 struct RefEntry
 {
   QString key;
-  quint32 binIndex;
-  quint16 itemIndex;
+  quint32 itemIndex;
+  quint16 binIndex;
   QString fragment;
 };
 
@@ -206,7 +206,7 @@ QString SlobFile::readString( unsigned length )
 
   char term = 0;
   int n = str.indexOf( term );
-  if( n > 0 )
+  if( n >= 0 )
     str.resize( n );
 
   return str;
@@ -563,7 +563,7 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
     }
 
     virtual uint32_t getFtsIndexVersion()
-    { return 1; }
+    { return 2; }
 
 protected:
 
