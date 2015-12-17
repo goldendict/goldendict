@@ -811,8 +811,16 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
         if( !QFileInfo( imgName ).exists() )
         {
+
+          // Replace some TeX commands which don't support by mimetex.cgi
+
           QString tex = list[ 2 ];
           tex.replace( regFrac, "\\frac" );
+          tex.replace( "\\leqslant", "\\leq" );
+          tex.replace( "\\geqslant", "\\geq" );
+          tex.replace( "\\infin", "\\infty" );
+          tex.replace( "\\iff", "\\Longleftrightarrow" );
+          tex.replace( "\\tbinom", "\\binom" );
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
