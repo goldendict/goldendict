@@ -1565,6 +1565,13 @@ void MainWindow::tabCloseRequested( int x )
   if ( cfg.preferences.mruTabOrder && mruList.size() > 0 ) {
     ui.tabWidget->setCurrentWidget(mruList.at(0));
   }
+  else if( ui.tabWidget->count() > 1 )
+  {
+    //activate neighboring tab
+    int n = x >= ui.tabWidget->count() - 1 ? x - 1 : x + 1;
+    if( n >= 0 )
+      ui.tabWidget->setCurrentIndex( n );
+  }
 
   ui.tabWidget->removeTab( x );
   delete w;
