@@ -42,6 +42,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
   QRegExp spacesRegExp( "\\W+" );
   QRegExp wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}" );
   QRegExp setsRegExp( "\\[[^\\]]+\\]", Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", Qt::CaseSensitive, QRegExp::RegExp2 );
 
   hasCJK = false;
   for( int x = 0; x < str.size(); x++ )
@@ -99,6 +100,10 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
     // Make words list for index search
 
     QString tmp = str;
+
+    // Remove RegExp commands
+    if( searchMode == FTS::RegExp )
+      tmp.replace( regexRegExp, " " );
 
     // Remove all symbol sets
     tmp.replace( setsRegExp, " " );
