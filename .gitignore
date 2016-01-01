@@ -38,3 +38,8 @@ GoldenDict.xcodeproj/
 *.opensdf
 *.suo
 *.vcxproj.user
+
+# QT Creator files
+goldendict.files
+goldendict.creator*
+goldendict.config

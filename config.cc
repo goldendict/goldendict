@@ -121,6 +121,8 @@ Preferences::Preferences():
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
   hideGoldenDictHeader( false ),
+  useCustomUAHttpHeader(false),
+  customUAHttpHeader("Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4"),
   zoomFactor( 1 ),
   helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
@@ -801,6 +803,12 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "hideGoldenDictHeader" ).isNull() )
       c.preferences.hideGoldenDictHeader = ( preferences.namedItem( "hideGoldenDictHeader" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "useCustomUAHttpHeader" ).isNull() )
+      c.preferences.useCustomUAHttpHeader = ( preferences.namedItem( "useCustomUAHttpHeader" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "customUAHttpHeader" ).isNull() )
+      c.preferences.customUAHttpHeader = preferences.namedItem( "customUAHttpHeader" ).toElement().text();
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
@@ -1695,6 +1703,14 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "hideGoldenDictHeader" );
     opt.appendChild( dd.createTextNode( c.preferences.hideGoldenDictHeader ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "customUAHttpHeader" );
+    opt.appendChild( dd.createTextNode( c.preferences.customUAHttpHeader ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "useCustomUAHttpHeader" );
+    opt.appendChild( dd.createTextNode( c.preferences.useCustomUAHttpHeader ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxStringsInHistory" );

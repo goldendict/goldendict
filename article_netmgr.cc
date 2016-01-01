@@ -117,6 +117,10 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     QNetworkRequest newReq( req );
     newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
+    if(useCustomUAHttpHeader)
+    {
+        newReq.setRawHeader("User-Agent", customUAHttpHeader.toAscii());
+    }
     return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
   }
 

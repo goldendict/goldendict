@@ -53,6 +53,7 @@ private slots:
 
   void helpRequested();
   void closeHelp();
+  void on_useCustomUAHttpHeader_toggled(bool checked);
 };
 
 #endif

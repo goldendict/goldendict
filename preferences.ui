@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>634</width>
-    <height>403</height>
+    <width>747</width>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset>
     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
   </property>
   <property name="modal">
@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <property name="iconSize">
       <size>
@@ -40,7 +40,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/interface.png</normaloff>:/icons/interface.png</iconset>
       </attribute>
       <attribute name="title">
@@ -373,7 +373,7 @@ be the last ones.</string>
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/wizard.png</normaloff>:/icons/wizard.png</iconset>
       </attribute>
       <attribute name="title">
@@ -699,7 +699,7 @@ seconds, which is specified here.</string>
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/hotkeys.png</normaloff>:/icons/hotkeys.png</iconset>
       </attribute>
       <attribute name="title">
@@ -844,7 +844,7 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/playsound_color.png</normaloff>:/icons/playsound_color.png</iconset>
       </attribute>
       <attribute name="title">
@@ -944,7 +944,7 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
       </attribute>
       <attribute name="title">
@@ -1127,6 +1127,37 @@ Enable this option to workaround the problem.</string>
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="useCustomUAHttpHeader">
+         <property name="text">
+          <string>Use custom User-Agent HTTP header</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <widget class="QLabel" name="uaLabel">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>User-Agent:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="customUAHttpHeader">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string>Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <spacer name="verticalSpacer_10">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -1173,7 +1204,7 @@ download page.</string>
      </widget>
      <widget class="QWidget" name="tab_FTS">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset>
         <normaloff>:/icons/system-search.png</normaloff>:/icons/system-search.png</iconset>
       </attribute>
       <attribute name="title">
@@ -1645,9 +1676,7 @@ It is not needed to select this option if you don't use such programs.</string>
   <tabstop>proxyUser</tabstop>
   <tabstop>proxyPassword</tabstop>
  </tabstops>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

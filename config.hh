@@ -224,6 +224,8 @@ struct Preferences
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
   bool hideGoldenDictHeader;
+  bool useCustomUAHttpHeader;
+  QString customUAHttpHeader;
 
   qreal zoomFactor;
   qreal helpZoomFactor;

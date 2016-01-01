@@ -280,6 +280,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
   ui.hideGoldenDictHeader->setChecked( p.hideGoldenDictHeader );
+  ui.useCustomUAHttpHeader->setChecked( p.useCustomUAHttpHeader );
+  ui.customUAHttpHeader->setText( p.customUAHttpHeader );
 
   // Add-on styles
   ui.addonStylesLabel->setVisible( ui.addonStyles->count() > 1 );
@@ -395,6 +397,8 @@ Config::Preferences Preferences::getPreferences()
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
   p.enableWebPlugins = ui.enableWebPlugins->isChecked();
   p.hideGoldenDictHeader = ui.hideGoldenDictHeader->isChecked();
+  p.useCustomUAHttpHeader = ui.useCustomUAHttpHeader->isChecked();
+  p.customUAHttpHeader = ui.customUAHttpHeader->text();
 
   p.addonStyle = ui.addonStyles->getCurrentStyle();
 
@@ -597,4 +601,10 @@ void Preferences::closeHelp()
 {
   if( helpWindow )
     helpWindow->hide();
+}
+
+void Preferences::on_useCustomUAHttpHeader_toggled(bool checked)
+{
+    ui.uaLabel->setEnabled( ui.useCustomUAHttpHeader->isChecked());
+    ui.customUAHttpHeader->setEnabled( ui.useCustomUAHttpHeader->isChecked());
 }
