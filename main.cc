@@ -30,6 +30,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QString>
+#include <QSplashScreen>
 
 #include "gddebug.hh"
 
@@ -306,6 +307,10 @@ int main( int argc, char ** argv )
   QWebSecurityOrigin::addLocalScheme( "gdlookup" );
 #endif
 
+  QSplashScreen *splash=new QSplashScreen;
+  splash->setPixmap(QPixmap(":/icons/dictionary.jpg"));
+  splash->show();
+
   MainWindow m( cfg );
 
   app.addDataCommiter( m );
@@ -326,6 +331,8 @@ int main( int argc, char ** argv )
     m.wordReceived( QString::fromLocal8Bit( argv[1] ) );
 #endif
 
+  splash->finish(&m);
+  
   int r = app.exec();
 
   app.removeDataCommiter( m );
