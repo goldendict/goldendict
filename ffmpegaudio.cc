@@ -334,7 +334,11 @@ void DecoderContext::closeOutputDevice()
 
 bool DecoderContext::play( QString & errorString )
 {
+#if LIBAVCODEC_VERSION_MAJOR < 55 || ( LIBAVCODEC_VERSION_MAJOR == 55 && LIBAVCODEC_VERSION_MINOR < 28 )
   AVFrame * frame = avcodec_alloc_frame();
+#else
+  AVFrame * frame = av_frame_alloc();
+#endif
   if ( !frame )
   {
     errorString = QObject::tr( "avcodec_alloc_frame() failed." );
@@ -365,7 +369,11 @@ bool DecoderContext::play( QString & errorString )
       while( pack.size > 0 );
     }
     // av_free_packet() must be called after each call to av_read_frame()
+#if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 7 )
     av_free_packet( &packet );
+#else
+    av_packet_unref( &packet );
+#endif
   }
 
   if ( !isCancelled_ && codecContext_->codec->capabilities & CODEC_CAP_DELAY )
@@ -382,8 +390,10 @@ bool DecoderContext::play( QString & errorString )
 
 #if LIBAVCODEC_VERSION_MAJOR < 54
   av_free( frame );
-#else
+#elif LIBAVCODEC_VERSION_MAJOR < 55 || ( LIBAVCODEC_VERSION_MAJOR == 55 && LIBAVCODEC_VERSION_MINOR < 28 )
   avcodec_free_frame( &frame );
+#else
+  av_frame_free( &frame );
 #endif
 
   return true;
