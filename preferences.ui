@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>634</width>
+    <width>636</width>
     <height>403</height>
    </rect>
   </property>
@@ -1432,7 +1432,7 @@ It is not needed to select this option if you don't use such programs.</string>
                <bool>true</bool>
               </property>
               <property name="maximum">
-               <number>9999</number>
+               <number>99999</number>
               </property>
               <property name="value">
                <number>500</number>

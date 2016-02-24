@@ -26,7 +26,7 @@ bool dictNameLessThan( sptr< Dictionary::Class > const & dict1,
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
 
-  return str1.compare( str2, Qt::CaseInsensitive ) < 0;
+  return str1.localeAwareCompare( str2 ) < 0;
 }
 
 bool dictLessThan( sptr< Dictionary::Class > const & dict1,
@@ -56,7 +56,7 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
     return false;
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
-  int res = str1.compare( str2, Qt::CaseInsensitive );
+  int res = str1.localeAwareCompare( str2 );
   if( res )
     return res < 0;
 
@@ -66,7 +66,7 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
     return false;
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
-  res = str1.compare( str2, Qt::CaseInsensitive );
+  res = str1.localeAwareCompare( str2 );
   if( res )
     return res < 0;
 
@@ -77,7 +77,7 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
 
-  return str1.compare( str2, Qt::CaseInsensitive ) < 0;
+  return str1.localeAwareCompare( str2 ) < 0;
 }
 
 } // namespace
