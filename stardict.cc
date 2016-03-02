@@ -1507,6 +1507,32 @@ void StardictResourceRequest::run()
       Mutex::Lock _( dataMutex );
 
       QString css = QString::fromUtf8( data.data(), data.size() );
+
+      // Correct some url's
+
+      QRegExp links( "url\\(\\s*(['\"])([^'\"]*)(['\"])\\s*\\)");
+      QString id = QString::fromUtf8( dict.getId().c_str() );
+      int pos = 0;
+      for( ; ; )
+      {
+        pos = links.indexIn( css, pos );
+        if( pos < 0 )
+          break;
+        QString url = links.cap( 2 );
+
+        if( url.indexOf( "/" ) >= 0 )
+        {
+          // External link
+          pos += links.cap().size();
+          continue;
+        }
+
+        QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
+                                           + id + "/" + url + links.cap( 3 ) + ")";
+        css.replace( pos, links.cap().size(), newUrl );
+        pos += newUrl.size();
+      }
+
       dict.isolateCSS( css );
       QByteArray bytes = css.toUtf8();
       data.resize( bytes.size() );
