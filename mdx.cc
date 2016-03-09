@@ -967,9 +967,6 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\\"" )
          // javascripts
-         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                   "\\1bres://" + id + "/\\2" )
          .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\\"" )
@@ -997,6 +994,31 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
       newLink += QString( "?gdanchor=" ) + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 );
 
     article.replace( pos, wordCrossLink.cap( 0 ).size(), newLink );
+    pos += newLink.size();
+  }
+
+  // javascripts
+  QRegExp regScript( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                     Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp regDynamic( "\\Wreplace(" );
+  pos = 0;
+  while( pos >= 0 )
+  {
+    pos = wordCrossLink.indexIn( article, pos );
+    if( pos < 0 )
+      break;
+
+    if( regScript.cap( 1 ).indexOf( regDynamic ) >= 0 )
+    {
+      pos += regScript.cap( 0 ).size();
+      continue;
+    }
+
+    QString newLink = regScript.cap( 1 )
+                      + "bres://" + id + "/"
+                      + regScript.cap( 2 );
+
+    article.replace( pos, regScript.cap( 0 ).size(), newLink );
     pos += newLink.size();
   }
 
