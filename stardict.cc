@@ -338,14 +338,52 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       return Xdxf2Html::convert( string( resource, size ), Xdxf2Html::STARDICT, NULL, this, &resourceZip );
     case 'h': // Html content
     {
-      string articleText = "<div class=\"sdct_h\">" + string( resource, size ) + "</div>";
+      QString articleText = QString( "<div class=\"sdct_h\">" ) + QString::fromUtf8( resource, size ) + "</div>";
 
-      return ( QString::fromUtf8( articleText.c_str() )
-               .replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
-                         "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
-               .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
-                         "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
-               .toUtf8().data() );
+      articleText.replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
+                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
+                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
+                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" );
+
+      // Handle links to articles
+
+      QRegExp linksReg( "<a(\\s*[^>]*)href=['\"]([^'\"]+)['\"]" );
+
+      int pos = 0;
+      while( pos >= 0 )
+      {
+        pos = linksReg.indexIn( articleText, pos );
+        if( pos < 0 )
+          break;
+
+        QString link = linksReg.cap( 2 );
+        if( link.indexOf( ':' ) < 0 )
+        {
+          QString newLink;
+          if( link.indexOf( '#' ) < 0 )
+            newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"bword:" + link + "\"";
+
+          // Anchors
+
+          if( link.indexOf( '#' ) > 0 )
+          {
+            newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"gdlookup://localhost/" + link + "\"";
+            newLink.replace( "#", "?gdanchor=" );
+          }
+
+          if( !newLink.isEmpty() )
+          {
+            articleText.replace( pos, linksReg.cap( 0 ).size(), newLink );
+            pos += newLink.size();
+          }
+          else
+            pos += linksReg.cap( 0 ).size();
+        }
+        else
+          pos += linksReg.cap( 0 ).size();
+      }
+
+      return ( articleText.toUtf8().data() );
     }
     case 'm': // Pure meaning, usually means preformatted text
       return "<div class=\"sdct_m\">" + Html::preformat( string( resource, size ), isToLanguageRTL() ) + "</div>";
