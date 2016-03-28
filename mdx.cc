@@ -998,15 +998,15 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   // javascripts
   QRegExp regScript( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
                      Qt::CaseInsensitive, QRegExp::RegExp2 );
-  QRegExp regDynamic( "\\Wreplace(" );
+  QRegExp regDynamic( "<\\s*script\\s+src\\s*=\\s*[\"']+\\s*[\"']+\\s*\\+\\s*replace\\(" );
   pos = 0;
   while( pos >= 0 )
   {
-    pos = wordCrossLink.indexIn( article, pos );
+    pos = regScript.indexIn( article, pos );
     if( pos < 0 )
       break;
 
-    if( regScript.cap( 1 ).indexOf( regDynamic ) >= 0 )
+    if( regScript.cap( 0 ).indexOf( regDynamic ) >= 0 )
     {
       pos += regScript.cap( 0 ).size();
       continue;
