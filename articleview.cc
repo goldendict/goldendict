@@ -517,10 +517,10 @@ void ArticleView::loadFinished( bool )
         {
           // Anchor found, jump to it
 
+          url.clear();
           url.setFragment( rx.cap( 0 ) );
-
           ui.definition->page()->mainFrame()->evaluateJavaScript(
-             QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
+             QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
 
           break;
         }
@@ -528,9 +528,10 @@ void ArticleView::loadFinished( bool )
     }
     else
     {
+      url.clear();
       url.setFragment( anchor );
       ui.definition->page()->mainFrame()->evaluateJavaScript(
-         QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
+         QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
 #endif
@@ -543,7 +544,8 @@ void ArticleView::loadFinished( bool )
 
 void ArticleView::handleTitleChanged( QString const & title )
 {
-  emit titleChanged( this, title );
+  if( !title.isEmpty() ) // Qt 5.x WebKit raise signal titleChanges(QString()) while navigation within page
+    emit titleChanged( this, title );
 }
 
 void ArticleView::handleUrlChanged( QUrl const & url )
