@@ -1548,7 +1548,7 @@ void StardictResourceRequest::run()
 
       // Correct some url's
 
-      QRegExp links( "url\\(\\s*(['\"])([^'\"]*)(['\"])\\s*\\)");
+      QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", QRegExp::RegExp );
       QString id = QString::fromUtf8( dict.getId().c_str() );
       int pos = 0;
       for( ; ; )
