@@ -86,6 +86,17 @@ Then, invoke `make clean` before `make` because the setting change:
 
     make clean && make
 
+### Building under Windows with MS Visual Studio
+
+To build GoldenDict with Visual Studio take one of next library packs and unpack it to `"winlibs/lib/msvc"` folder in GoldenDict sources folder.  
+[GoldenDict_libs_VS2013_x86.7z](http://www.mediafire.com/download/d3jrbsnco6ox4d8/GoldenDict_libs_VS2013_x86.7z) - for MS Visual Studio 2013, 32 bit  
+[GoldenDict_libs_VS2013_x64.7z](http://www.mediafire.com/download/21lun6uj51hnk3s/GoldenDict_libs_VS2013_x64.7z) - for MS Visual Studio 2013, 64 bit  
+
+To create project files for Visual Studio you can pass `"-tp vc"` option to `qmake`.
+
+Note: In Qt 5.6.0 and later the `Webkit` module was removed from official release builds. You should to build it from sources to compile GoldenDict.
+
+
 ## Installation
 
 Installation is an optional step since the built binary can be used as-is without installation. But you can properly install via:

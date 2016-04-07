@@ -14,7 +14,7 @@
 #include <QSet>
 #include <QList>
 
-#ifdef _MSC_VER
+#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
 #include <stdint.h>

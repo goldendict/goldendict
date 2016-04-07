@@ -1,7 +1,7 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#ifdef _MSC_VER
+#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
 #include <stdint.h>

@@ -4,6 +4,10 @@
 #ifndef __HUNSPELL_HH_INCLUDED__
 #define __HUNSPELL_HH_INCLUDED__
 
+#ifdef _MSC_VER
+#define HUNSPELL_STATIC
+#endif
+
 #include "dictionary.hh"
 #include "config.hh"
 

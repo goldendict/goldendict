@@ -19,9 +19,13 @@
 #ifndef __RIPEMD_HH_INCLUDED__
 #define __RIPEMD_HH_INCLUDED__
 
-#include <stdint.h>
 #include <stddef.h>
 
+#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
+#include <stdint_msvc.h>
+#else
+#include <stdint.h>
+#endif
 
 class RIPEMD128
 {

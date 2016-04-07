@@ -18,6 +18,10 @@
 #include <vector>
 #include <string>
 
+#ifdef _MSC_VER
+#include <stub_msvc.h>
+#endif
+
 #include <eb/eb.h>
 
 namespace Epwing {

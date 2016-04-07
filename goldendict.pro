@@ -44,14 +44,14 @@ win32 {
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
-            LIBS += -L$${PWD}/winlibs/lib/msvc/x64
-        } else {
-            LIBS += -L$${PWD}/winlibs/lib/msvc
         }
+        LIBS += -L$${PWD}/winlibs/lib/msvc
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
-        QMAKE_LFLAGS_RELEASE += /LTCG /OPT:REF /OPT:ICF
+        QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
-        LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
+        LIBS += -lshell32 -luser32 -lsapi -lole32
+        Debug: LIBS+= -lhunspelld
+        Release: LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
         LIBS += -lhunspell-1.3.2
@@ -483,7 +483,12 @@ CONFIG( chinese_conversion_support ) {
              chineseconversion.hh
   SOURCES += chinese.cc \
              chineseconversion.cc
-  LIBS += -lopencc
+  win32-msvc* {
+    Debug:   LIBS += -lopenccd
+    Release: LIBS += -lopencc
+  } else {
+    LIBS += -lopencc
+  }
 }
 
 RESOURCES += resources.qrc \
