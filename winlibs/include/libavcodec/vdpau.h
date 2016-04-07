@@ -51,22 +51,41 @@
 
 #include <vdpau/vdpau.h>
 #include <vdpau/vdpau_x11.h>
+#include "libavutil/avconfig.h"
+#include "libavutil/attributes.h"
 
-union FFVdpPictureInfo {
+#include "avcodec.h"
+#include "version.h"
+
+#if FF_API_BUFS_VDPAU
+union AVVDPAUPictureInfo {
     VdpPictureInfoH264        h264;
     VdpPictureInfoMPEG1Or2    mpeg;
     VdpPictureInfoVC1          vc1;
     VdpPictureInfoMPEG4Part2 mpeg4;
 };
+#endif
+
+struct AVCodecContext;
+struct AVFrame;
+
+typedef int (*AVVDPAU_Render2)(struct AVCodecContext *, struct AVFrame *,
+                               const VdpPictureInfo *, uint32_t,
+                               const VdpBitstreamBuffer *);
 
 /**
  * This structure is used to share data between the libavcodec library and
  * the client video application.
- * The user shall zero-allocate the structure and make it available as
+ * The user shall allocate the structure via the av_alloc_vdpau_hwaccel
+ * function and make it available as
  * AVCodecContext.hwaccel_context. Members can be set by the user once
  * during initialization or through each AVCodecContext.get_buffer()
  * function call. In any case, they must be valid prior to calling
  * decoding functions.
+ *
+ * The size of this structure is not a part of the public ABI and must not
+ * be used outside of libavcodec. Use av_vdpau_alloc_context() to allocate an
+ * AVVDPAUContext.
  */
 typedef struct AVVDPAUContext {
     /**
@@ -83,18 +102,21 @@ typedef struct AVVDPAUContext {
      */
     VdpDecoderRender *render;
 
+#if FF_API_BUFS_VDPAU
     /**
      * VDPAU picture information
      *
      * Set by libavcodec.
      */
-    union FFVdpPictureInfo info;
+    attribute_deprecated
+    union AVVDPAUPictureInfo info;
 
     /**
      * Allocated size of the bitstream_buffers table.
      *
      * Set by libavcodec.
      */
+    attribute_deprecated
     int bitstream_buffers_allocated;
 
     /**
@@ -102,6 +124,7 @@ typedef struct AVVDPAUContext {
      *
      * Set by libavcodec.
      */
+    attribute_deprecated
     int bitstream_buffers_used;
 
    /**
@@ -110,10 +133,88 @@ typedef struct AVVDPAUContext {
      *
      * Set by libavcodec.
      */
+    attribute_deprecated
     VdpBitstreamBuffer *bitstream_buffers;
+#endif
+    AVVDPAU_Render2 render2;
 } AVVDPAUContext;
 
+/**
+ * @brief allocation function for AVVDPAUContext
+ *
+ * Allows extending the struct without breaking API/ABI
+ */
+AVVDPAUContext *av_alloc_vdpaucontext(void);
 
+AVVDPAU_Render2 av_vdpau_hwaccel_get_render2(const AVVDPAUContext *);
+void av_vdpau_hwaccel_set_render2(AVVDPAUContext *, AVVDPAU_Render2);
+
+/**
+ * Associate a VDPAU device with a codec context for hardware acceleration.
+ * This function is meant to be called from the get_format() codec callback,
+ * or earlier. It can also be called after avcodec_flush_buffers() to change
+ * the underlying VDPAU device mid-stream (e.g. to recover from non-transparent
+ * display preemption).
+ *
+ * @note get_format() must return AV_PIX_FMT_VDPAU if this function completes
+ * successfully.
+ *
+ * @param avctx decoding context whose get_format() callback is invoked
+ * @param device VDPAU device handle to use for hardware acceleration
+ * @param get_proc_address VDPAU device driver
+ * @param flags zero of more OR'd AV_HWACCEL_FLAG_* flags
+ *
+ * @return 0 on success, an AVERROR code on failure.
+ */
+int av_vdpau_bind_context(AVCodecContext *avctx, VdpDevice device,
+                          VdpGetProcAddress *get_proc_address, unsigned flags);
+
+/**
+ * Gets the parameters to create an adequate VDPAU video surface for the codec
+ * context using VDPAU hardware decoding acceleration.
+ *
+ * @note Behavior is undefined if the context was not successfully bound to a
+ * VDPAU device using av_vdpau_bind_context().
+ *
+ * @param avctx the codec context being used for decoding the stream
+ * @param type storage space for the VDPAU video surface chroma type
+ *              (or NULL to ignore)
+ * @param width storage space for the VDPAU video surface pixel width
+ *              (or NULL to ignore)
+ * @param height storage space for the VDPAU video surface pixel height
+ *              (or NULL to ignore)
+ *
+ * @return 0 on success, a negative AVERROR code on failure.
+ */
+int av_vdpau_get_surface_parameters(AVCodecContext *avctx, VdpChromaType *type,
+                                    uint32_t *width, uint32_t *height);
+
+/**
+ * Allocate an AVVDPAUContext.
+ *
+ * @return Newly-allocated AVVDPAUContext or NULL on failure.
+ */
+AVVDPAUContext *av_vdpau_alloc_context(void);
+
+#if FF_API_VDPAU_PROFILE
+/**
+ * Get a decoder profile that should be used for initializing a VDPAU decoder.
+ * Should be called from the AVCodecContext.get_format() callback.
+ *
+ * @deprecated Use av_vdpau_bind_context() instead.
+ *
+ * @param avctx the codec context being used for decoding the stream
+ * @param profile a pointer into which the result will be written on success.
+ *                The contents of profile are undefined if this function returns
+ *                an error.
+ *
+ * @return 0 on success (non-negative), a negative AVERROR on failure.
+ */
+attribute_deprecated
+int av_vdpau_get_profile(AVCodecContext *avctx, VdpDecoderProfile *profile);
+#endif
+
+#if FF_API_CAP_VDPAU
 /** @brief The videoSurface is used for rendering. */
 #define FF_VDPAU_STATE_USED_FOR_RENDER 1
 
@@ -135,16 +236,17 @@ struct vdpau_render_state {
 
     int state; ///< Holds FF_VDPAU_STATE_* values.
 
+    /** picture parameter information for all supported codecs */
+    union AVVDPAUPictureInfo info;
+
     /** Describe size/location of the compressed video data.
         Set to 0 when freeing bitstream_buffers. */
     int bitstream_buffers_allocated;
     int bitstream_buffers_used;
     /** The user is responsible for freeing this buffer using av_freep(). */
     VdpBitstreamBuffer *bitstream_buffers;
-
-    /** picture parameter information for all supported codecs */
-    union FFVdpPictureInfo info;
 };
+#endif
 
 /* @}*/
 

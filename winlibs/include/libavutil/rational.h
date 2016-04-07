@@ -46,6 +46,17 @@ typedef struct AVRational{
 } AVRational;
 
 /**
+ * Create a rational.
+ * Useful for compilers that do not support compound literals.
+ * @note  The return value is not reduced.
+ */
+static inline AVRational av_make_q(int num, int den)
+{
+    AVRational r = { num, den };
+    return r;
+}
+
+/**
  * Compare two rationals.
  * @param a first rational
  * @param b second rational
@@ -55,7 +66,7 @@ typedef struct AVRational{
 static inline int av_cmp_q(AVRational a, AVRational b){
     const int64_t tmp= a.num * (int64_t)b.den - b.num * (int64_t)a.den;
 
-    if(tmp) return ((tmp ^ a.den ^ b.den)>>63)|1;
+    if(tmp) return (int)((tmp ^ a.den ^ b.den)>>63)|1;
     else if(b.den && a.den) return 0;
     else if(a.num && b.num) return (a.num>>31) - (b.num>>31);
     else                    return INT_MIN;
@@ -147,6 +158,13 @@ int av_nearer_q(AVRational q, AVRational q1, AVRational q2);
  * @return the index of the nearest value found in the array
  */
 int av_find_nearest_q_idx(AVRational q, const AVRational* q_list);
+
+/**
+ * Converts a AVRational to a IEEE 32bit float.
+ *
+ * The float is returned in a uint32_t and its value is platform indepenant.
+ */
+uint32_t av_q2intfloat(AVRational q);
 
 /**
  * @}
