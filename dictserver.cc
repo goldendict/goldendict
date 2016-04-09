@@ -774,7 +774,7 @@ void DictServerArticleRequest::run()
               link.replace( tags, " " );
               link.replace( "&nbsp;", " " );
               articleText.replace( pos + 30, links.cap( 1 ).length(),
-                                   link.simplified() );
+                                   QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
               pos += 30;
             }
 
