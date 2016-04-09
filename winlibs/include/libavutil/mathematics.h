@@ -45,6 +45,9 @@
 #ifndef M_PI
 #define M_PI           3.14159265358979323846  /* pi */
 #endif
+#ifndef M_PI_2
+#define M_PI_2         1.57079632679489661923  /* pi/2 */
+#endif
 #ifndef M_SQRT1_2
 #define M_SQRT1_2      0.70710678118654752440  /* 1/sqrt(2) */
 #endif
@@ -74,9 +77,10 @@ enum AVRounding {
 };
 
 /**
- * Return the greatest common divisor of a and b.
- * If both a and b are 0 or either or both are <0 then behavior is
- * undefined.
+ * Compute the greatest common divisor of a and b.
+ *
+ * @return gcd of a and b up to sign; if a >= 0 and b >= 0, return value is >= 0;
+ * if a == 0 and b == 0, returns 0.
  */
 int64_t av_const av_gcd(int64_t a, int64_t b);
 
@@ -133,14 +137,28 @@ int64_t av_compare_mod(uint64_t a, uint64_t b, uint64_t mod);
  * Rescale a timestamp while preserving known durations.
  *
  * @param in_ts Input timestamp
- * @param in_tb Input timesbase
+ * @param in_tb Input timebase
  * @param fs_tb Duration and *last timebase
  * @param duration duration till the next call
- * @param out_tb Output timesbase
+ * @param out_tb Output timebase
  */
 int64_t av_rescale_delta(AVRational in_tb, int64_t in_ts,  AVRational fs_tb, int duration, int64_t *last, AVRational out_tb);
 
 /**
+ * Add a value to a timestamp.
+ *
+ * This function guarantees that when the same value is repeatly added that
+ * no accumulation of rounding errors occurs.
+ *
+ * @param ts Input timestamp
+ * @param ts_tb Input timestamp timebase
+ * @param inc value to add to ts
+ * @param inc_tb inc timebase
+ */
+int64_t av_add_stable(AVRational ts_tb, int64_t ts, AVRational inc_tb, int64_t inc);
+
+
+    /**
  * @}
  */
 
