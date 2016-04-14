@@ -861,9 +861,9 @@ void MddResourceRequest::run()
             break;
           QString url = links.cap( 2 );
 
-          if( url.indexOf( ":/" ) >= 0 )
+          if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0)
           {
-            // External link
+            // External link or base64-encoded data
             pos += links.cap().size();
             continue;
           }

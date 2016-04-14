@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include "gddebug.hh"
 #include "ftshelpers.hh"
+#include <QUrl>
 
 #include <QDebug>
 
@@ -331,6 +332,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
       {
         static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
         static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
+        static QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
+        static QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
 
         articleText = string( "<div class=\"dictd_article\"" );
         if( isToLanguageRTL() )
@@ -340,12 +343,31 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         string convertedText = Html::preformat( articleBody, isToLanguageRTL() );
         free( articleBody );
 
-        articleText += QString::fromUtf8( convertedText.c_str() )
-              .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
-              .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>")
-            .toUtf8().data();
-        articleText += "</div>";
+        QString articleString = QString::fromUtf8( convertedText.c_str() )
+                                .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
+                                .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>");
+        convertedText.erase();
+
+        int pos = 0;
+        for( ; ; )
+        {
+          pos = articleString.indexOf( links, pos );
+          if( pos < 0 )
+            break;
+
+          QString link = links.cap( 1 );
+          link.replace( tags, " " );
+          link.replace( "&nbsp;", " " );
+          articleString.replace( pos + 30, links.cap( 1 ).length(),
+                                 QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
+          pos += 30;
+        }
+
+        articleString += "</div>";
+
+        articleText += articleString.toUtf8().data();
       }
+
 
       // Ok. Now, does it go to main articles, or to alternate ones? We list
       // main ones first, and alternates after.
