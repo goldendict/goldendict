@@ -664,7 +664,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     char * eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
                     if ( eol )
                     {
-                      while( *eol && isspace( *eol ) ) ++eol; // skip spaces
+                      while( *eol && Utf8::isspace( *eol ) ) ++eol; // skip spaces
 
                       // use only the single line for the dictionary title
                       char * endEol = strchr( eol, '\n' );

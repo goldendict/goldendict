@@ -118,26 +118,6 @@ namespace
     return in;
   }
 
-  // Since the standard isspace() is locale-specific, we need something
-  // that would never mess up our utf8 input. The stock one worked fine under
-  // Linux but was messing up strings under Windows.
-  bool isspace_c( int c )
-  {
-    switch( c )
-    {
-      case ' ':
-      case '\f':
-      case '\n':
-      case '\r':
-      case '\t':
-      case '\v':
-        return true;
-
-      default:
-        return false;
-    }
-  }
-
   // Removes any leading or trailing whitespace
   void trimWs( string & word )
   {
@@ -145,7 +125,7 @@ namespace
     {
       unsigned begin = 0;
 
-      while( begin < word.size() && isspace_c( word[ begin ] ) )
+      while( begin < word.size() && Utf8::isspace( word[ begin ] ) )
         ++begin;
 
       if ( begin == word.size() ) // Consists of ws entirely?
@@ -156,7 +136,7 @@ namespace
 
         // Doesn't consist of ws entirely, so must end with just isspace()
         // condition.
-        while( isspace_c( word[ end - 1 ] ) )
+        while( Utf8::isspace( word[ end - 1 ] ) )
           --end;
 
         if ( end != word.size() || begin )

@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "filetype.hh"
+#include "utf8.hh"
 #include <ctype.h>
 
 namespace Filetype {
@@ -18,12 +19,12 @@ string simplifyString( string const & str )
 
   size_t beginPos = 0;
 
-  while( beginPos < str.size() && isspace( str[ beginPos ] ) )
+  while( beginPos < str.size() && Utf8::isspace( str[ beginPos ] ) )
     ++beginPos;
 
   size_t endPos = str.size();
 
-  while( endPos && isspace( str[ endPos - 1 ] ) )
+  while( endPos && Utf8::isspace( str[ endPos - 1 ] ) )
     --endPos;
 
   result.reserve( endPos - beginPos );
