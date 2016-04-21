@@ -184,6 +184,9 @@ mac {
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
+    !CONFIG( no_chinese_conversion_support ) {
+        CONFIG += chinese_conversion_support
+    }
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
@@ -487,7 +490,11 @@ CONFIG( chinese_conversion_support ) {
     Debug:   LIBS += -lopenccd
     Release: LIBS += -lopencc
   } else {
-    LIBS += -lopencc
+    mac {
+      LIBS += -lopencc.2
+    } else {
+      LIBS += -lopencc
+    }
   }
 }
 
