@@ -4,6 +4,9 @@
 #include "chinese.hh"
 #include <stdexcept>
 #include <QCoreApplication>
+#ifdef Q_OS_MAC
+#include <opencc/opencc.h>
+#endif
 #include <opencc/Export.hpp>
 #include <opencc/SimpleConverter.hpp>
 #include "folding.hh"
@@ -15,7 +18,11 @@ namespace Chinese {
 
 class CharacterConversionDictionary: public Transliteration::BaseTransliterationDictionary
 {
+#ifdef Q_OS_MAC
+  opencc_t converter;
+#else
   opencc::SimpleConverter* converter;
+#endif
 
 public:
 
@@ -35,7 +42,11 @@ CharacterConversionDictionary::CharacterConversionDictionary( std::string const 
   converter( NULL )
 {
   try {
+#ifdef Q_OS_MAC
+    converter = opencc_open( openccConfig.toLocal8Bit().constData() );
+#else
     converter = new opencc::SimpleConverter( openccConfig.toLocal8Bit().constData() );
+#endif
   } catch ( std::runtime_error& e ) {
     gdWarning( "CharacterConversionDictionary: failed to initialize OpenCC from config %s: %s\n",
                openccConfig.toLocal8Bit().constData(), e.what() );
@@ -44,8 +55,13 @@ CharacterConversionDictionary::CharacterConversionDictionary( std::string const 
 
 CharacterConversionDictionary::~CharacterConversionDictionary()
 {
+#ifdef Q_OS_MAC
+  if ( converter != NULL && converter != reinterpret_cast< opencc_t >( -1 ) )
+    opencc_close( converter );
+#else
   if ( converter != NULL )
     delete converter;
+#endif
 }
 
 std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( gd::wstring const & str )
@@ -60,7 +76,16 @@ std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( 
     gd::wstring result;
 
     try {
+#ifdef Q_OS_MAC
+      if ( converter != NULL && converter != reinterpret_cast< opencc_t >( -1 ) )
+      {
+        char * tmp = opencc_convert_utf8( converter, input.c_str(), input.length() );
+        output = std::string( tmp );
+        opencc_convert_utf8_free( tmp );
+      }
+#else
       output = converter->Convert( input );
+#endif
       result = Utf8::decode( output );
     } catch ( std::exception& ex ) {
       gdWarning( "OpenCC: convertion failed %s\n", ex.what() );
