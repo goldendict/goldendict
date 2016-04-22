@@ -44,6 +44,11 @@ CharacterConversionDictionary::CharacterConversionDictionary( std::string const 
   try {
 #ifdef Q_OS_MAC
     converter = opencc_open( openccConfig.toLocal8Bit().constData() );
+    if( converter == reinterpret_cast< opencc_t >( -1 ) )
+    {
+      gdWarning( "CharacterConversionDictionary: failed to initialize OpenCC from config %s: %s\n",
+                 openccConfig.toLocal8Bit().constData(), opencc_error() );
+    }
 #else
     converter = new opencc::SimpleConverter( openccConfig.toLocal8Bit().constData() );
 #endif
@@ -80,8 +85,13 @@ std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( 
       if ( converter != NULL && converter != reinterpret_cast< opencc_t >( -1 ) )
       {
         char * tmp = opencc_convert_utf8( converter, input.c_str(), input.length() );
-        output = std::string( tmp );
-        opencc_convert_utf8_free( tmp );
+        if( tmp )
+        {
+          output = std::string( tmp );
+          opencc_convert_utf8_free( tmp );
+        }
+        else
+          gdWarning( "OpenCC: convertion failed %s\n", opencc_error() );
       }
 #else
       output = converter->Convert( input );
