@@ -116,7 +116,9 @@ std::vector< sptr< Dictionary::Class > > makeDictionaries( Config::Chinese const
 #ifdef Q_OS_LINUX
   QString configDir = "";
 #else
-  QString configDir = Config::getOpenCCDir() + "/";
+  QString configDir = Config::getOpenCCDir();
+  if( !configDir.isEmpty() )
+    configDir += "/";
 #endif
 
   if ( cfg.enable )
