@@ -217,7 +217,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
 class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 {
-  typedef std::list< std::pair< sptr< QNetworkReply >, bool > > NetReplies;
+  typedef std::list< std::pair< QNetworkReply *, bool > > NetReplies;
   NetReplies netReplies;
   QString url;
 
@@ -268,12 +268,12 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ) );
 
-  sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  QNetworkReply * netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
 #ifndef QT_NO_OPENSSL
 
-  connect( netReply.get(), SIGNAL( sslErrors( QList< QSslError > ) ),
-           netReply.get(), SLOT( ignoreSslErrors() ) );
+  connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
+           netReply, SLOT( ignoreSslErrors() ) );
 
 #endif
 
@@ -293,7 +293,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
   
   for( NetReplies::iterator i = netReplies.begin(); i != netReplies.end(); ++i )
   {
-    if ( i->first.get() == r )
+    if ( i->first == r )
     {
       i->second = true; // Mark as finished
       found = true;
@@ -311,7 +311,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
   for( ; netReplies.size() && netReplies.front().second; netReplies.pop_front() )
   {
-    sptr< QNetworkReply > netReply = netReplies.front().first;
+    QNetworkReply * netReply = netReplies.front().first;
     
     if ( netReply->error() == QNetworkReply::NoError )
     {
@@ -320,7 +320,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
       QString errorStr;
       int errorLine, errorColumn;
   
-      if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
+      if ( !dd.setContent( netReply, false, &errorStr, &errorLine, &errorColumn  ) )
       {
         setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
                                  arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
@@ -456,6 +456,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
     }
     else
       setErrorString( netReply->errorString() );
+
+    netReply->deleteLater();
   }
 
   if ( netReplies.empty() )

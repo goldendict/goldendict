@@ -247,6 +247,9 @@ void MacMouseOver::handlePosition()
 void MacMouseOver::handleRetrievedString( QString & wordSeq, int wordSeqPos )
 {
 
+  if( wordSeq.isEmpty() )
+    return;
+
   // locate the word inside the sequence
 
   QString word;

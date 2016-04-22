@@ -2028,10 +2028,20 @@ QString getHelpDir() throw()
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 QString getOpenCCDir() throw()
 {
+#if defined( Q_OS_WIN )
   if ( QDir( "opencc" ).exists() )
     return "opencc";
   else
     return QCoreApplication::applicationDirPath() + "/opencc";
+#elif defined( Q_OS_MAC )
+  QString path = QCoreApplication::applicationDirPath() + "/opencc";
+  if ( QDir( path ).exists() )
+    return path;
+
+  return QString();
+#else
+  return QString();
+#endif
 }
 #endif
 
