@@ -211,6 +211,9 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   delegate = new WordListItemDelegate( ui.headwordsView->itemDelegate() );
   if( delegate )
     ui.headwordsView->setItemDelegate( delegate );
+
+  ui.searchLine->setText( static_cast< MainWindow * >( parent )->getTranslateLineText() );
+  ui.searchLine->selectAll();
 }
 
 FullTextSearchDialog::~FullTextSearchDialog()

@@ -71,6 +71,8 @@ public:
 
   void showGDHelpForID( QString const & id );
   void closeGDHelp();
+  QString getTranslateLineText() const
+  { return translateLine->text(); }
 
 public slots:
 
