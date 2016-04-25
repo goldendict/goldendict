@@ -70,7 +70,7 @@ About::About( QWidget * parent ): QDialog( parent )
       html += "<br>";
     }
 
-    html += "</body></html>";
+    html += "<font color='blue'>Modified: Nguyen V. N. Tung nvntung@gmail.com</font></body></html>";
 
     ui.credits->setHtml( html );
   }

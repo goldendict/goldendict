@@ -16,7 +16,7 @@ isEmpty( hasGit ) {
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
-QT += webkit
+QT += webkitwidgets
 QT += xml
 QT += network
 QT += svg
