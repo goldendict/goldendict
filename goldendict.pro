@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0+git
+VERSION = 1.5.0-RC2+git
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
