@@ -417,7 +417,7 @@ void MediaWikisModel::addNewWiki()
 
 QModelIndex MediaWikisModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex MediaWikisModel::parent( QModelIndex const & /*parent*/ ) const
@@ -574,7 +574,7 @@ void WebSitesModel::addNewSite()
 
 QModelIndex WebSitesModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex WebSitesModel::parent( QModelIndex const & /*parent*/ ) const
@@ -730,7 +730,7 @@ void DictServersModel::addNewServer()
 
 QModelIndex DictServersModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex DictServersModel::parent( QModelIndex const & /*parent*/ ) const
@@ -906,7 +906,7 @@ void ProgramsModel::addNewProgram()
 
 QModelIndex ProgramsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex ProgramsModel::parent( QModelIndex const & /*parent*/ ) const
@@ -1095,7 +1095,7 @@ void PathsModel::addNewPath( QString const & path )
 
 QModelIndex PathsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex PathsModel::parent( QModelIndex const & /*parent*/ ) const
@@ -1201,7 +1201,7 @@ void SoundDirsModel::addNewSoundDir( QString const & path, QString const & name 
 
 QModelIndex SoundDirsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex SoundDirsModel::parent( QModelIndex const & /*parent*/ ) const
@@ -1305,12 +1305,13 @@ HunspellDictsModel::HunspellDictsModel( QWidget * parent,
 void HunspellDictsModel::changePath( QString const & newPath )
 {
   dataFiles = HunspellMorpho::findDataFiles( newPath );
-  reset();
+  beginResetModel();
+  endResetModel();
 }
 
 QModelIndex HunspellDictsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex HunspellDictsModel::parent( QModelIndex const & /*parent*/ ) const

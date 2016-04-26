@@ -20,11 +20,12 @@
 
 #define OV_EXCLUDE_STATIC_CALLBACKS
 #include <vorbis/vorbisfile.h>
-
-#include <QUrl>
 #include <QDir>
+#include <QUrl>
 #include <QDebug>
 #include <QFile>
+
+#include "qt4x5.hh"
 
 namespace Lsa {
 
@@ -273,7 +274,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( i->second.c_str() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( i->second.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -291,7 +292,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( i->second.c_str() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( i->second.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 

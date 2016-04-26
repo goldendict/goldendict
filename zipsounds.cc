@@ -24,7 +24,7 @@
 #include <stub_msvc.h>
 #endif
 
-#include <QUrl>
+#include "qt4x5.hh"
 
 namespace ZipSounds {
 
@@ -267,7 +267,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( name.c_str() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( name.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -313,7 +313,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( QString::fromUtf8( name.c_str() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( name.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 

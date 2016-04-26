@@ -32,6 +32,7 @@
 #include <QRegExp>
 #include <QDomDocument>
 #include <QTextDocumentFragment>
+#include <QDataStream>
 
 #include "decompress.hh"
 #include "gddebug.hh"

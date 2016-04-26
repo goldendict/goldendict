@@ -42,6 +42,7 @@
 #include <QStringList>
 
 #include "ufile.hh"
+#include "qt4x5.hh"
 
 namespace Stardict {
 
@@ -1056,7 +1057,7 @@ void StardictHeadwordsRequestRunnable::run()
 
 void StardictHeadwordsRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1070,7 +1071,7 @@ void StardictHeadwordsRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( isCancelled )
+      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1176,7 +1177,7 @@ void StardictArticleRequestRunnable::run()
 
 void StardictArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1205,7 +1206,7 @@ void StardictArticleRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( isCancelled )
+      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1462,7 +1463,7 @@ void StardictResourceRequestRunnable::run()
 void StardictResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

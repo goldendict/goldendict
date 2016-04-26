@@ -10,10 +10,11 @@
 #include <string>
 #include <map>
 
-#include <QUrl>
 #include <QDir>
 #include <QFileInfo>
 #include <QCryptographicHash>
+
+#include "qt4x5.hh"
 
 namespace VoiceEngines
 {
@@ -90,10 +91,10 @@ sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
   QUrl url;
   url.setScheme( "gdtts" );
   url.setHost( "localhost" );
-  url.setPath( QString::fromUtf8( wordUtf8.c_str() ) );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
   QList< QPair<QString, QString> > query;
   query.push_back( QPair<QString, QString>( "engine", QString::fromStdString( getId() ) ) );
-  url.setQueryItems( query );
+  Qt4x5::Url::setQueryItems( url, query );
 
   string encodedUrl = url.toEncoded().data();
   string ref = string( "\"" ) + encodedUrl + "\"";

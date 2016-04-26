@@ -7,6 +7,8 @@
 #include "language.hh"
 #include "fsencoding.hh"
 #include <algorithm>
+
+#include <QMenu>
 #include <QPair>
 
 using std::vector;

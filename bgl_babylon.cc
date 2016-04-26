@@ -319,11 +319,11 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
     m_targetCharset = "UTF-8";
   }
 
-  convertToUtf8( m_title, TARGET_CHARSET );
-  convertToUtf8( m_author, TARGET_CHARSET );
-  convertToUtf8( m_email, TARGET_CHARSET );
-  convertToUtf8( m_copyright, TARGET_CHARSET );
-  convertToUtf8( m_description, TARGET_CHARSET );
+  convertToUtf8( m_title, BGL_TARGET_CHARSET );
+  convertToUtf8( m_author, BGL_TARGET_CHARSET );
+  convertToUtf8( m_email, BGL_TARGET_CHARSET );
+  convertToUtf8( m_copyright, BGL_TARGET_CHARSET );
+  convertToUtf8( m_description, BGL_TARGET_CHARSET );
   GD_DPRINTF("Default charset: %s\nSource Charset: %s\nTargetCharset: %s\n", m_defaultCharset.c_str(), m_sourceCharset.c_str(), m_targetCharset.c_str());
   return true;
 }
@@ -412,7 +412,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         for(unsigned int a=0;a<len;a++)
           headword += block.data[pos++];
 
-        convertToUtf8( headword, SOURCE_CHARSET );
+        convertToUtf8( headword, BGL_SOURCE_CHARSET );
 
         // Try to repair malformed headwords
         if( headword.find( "&#" ) != string::npos )
@@ -445,7 +445,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               break;
             alternate.reserve( len );
             for(unsigned int a=0;a<len;a++) alternate += block.data[pos++];
-            convertToUtf8( alternate, SOURCE_CHARSET );
+            convertToUtf8( alternate, BGL_SOURCE_CHARSET );
 
             // Try to repair malformed forms
             if( alternate.find( "&#" ) != string::npos )
@@ -678,12 +678,12 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
             }
           }else definition += block.data[pos++];
         }
-        convertToUtf8( definition, TARGET_CHARSET );
+        convertToUtf8( definition, BGL_TARGET_CHARSET );
         if( !transcription.empty() )
           definition = std::string( "<span class=\"bgltrn\">" ) +  transcription + "</span>" + definition;
 
         if ( displayedHeadword.size() )
-          convertToUtf8( displayedHeadword, TARGET_CHARSET );
+          convertToUtf8( displayedHeadword, BGL_TARGET_CHARSET );
 
         // Alternate forms
         while( pos < block.length )
@@ -692,7 +692,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           if( pos + len > block.length ) break;
           alternate.reserve( len );
           for(unsigned int a=0;a<len;a++) alternate += block.data[pos++];
-          convertToUtf8( alternate, SOURCE_CHARSET );
+          convertToUtf8( alternate, BGL_SOURCE_CHARSET );
 
           // Try to repair malformed forms
           if( alternate.find( "&#" ) != string::npos )
@@ -774,15 +774,15 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   std::string charset;
   switch( type )
   {
-    case DEFAULT_CHARSET:
+    case BGL_DEFAULT_CHARSET:
       if(!m_defaultCharset.empty()) charset = m_defaultCharset;
       else charset = m_sourceCharset;
       break;
-    case SOURCE_CHARSET:
+    case BGL_SOURCE_CHARSET:
       if(!m_sourceCharset.empty()) charset = m_sourceCharset;
       else charset = m_defaultCharset;
       break;
-    case TARGET_CHARSET:
+    case BGL_TARGET_CHARSET:
       if(!m_targetCharset.empty()) charset = m_targetCharset;
       else charset = m_defaultCharset;
       break;

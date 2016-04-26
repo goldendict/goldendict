@@ -5,8 +5,8 @@
 #define __ARTICLEVIEW_HH_INCLUDED__
 
 #include <QWebView>
-#include <QUrl>
 #include <QMap>
+#include <QUrl>
 #include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"

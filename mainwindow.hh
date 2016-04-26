@@ -31,7 +31,7 @@
 #include "fulltextsearch.hh"
 #include "helpwindow.hh"
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <fixx11h.h>
 #endif
 
@@ -215,7 +215,7 @@ private:
 
   /// Brings the main window to front if it's not currently, or hides it
   /// otherwise. The hiding part is omitted if onlyShow is true.
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
   void toggleMainWindow( bool onlyShow = false, bool byIconClick = false );
 #else
   void toggleMainWindow( bool onlyShow = false );

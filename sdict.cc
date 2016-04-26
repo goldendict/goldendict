@@ -30,6 +30,7 @@
 #include <QDebug>
 
 #include "ufile.hh"
+#include "qt4x5.hh"
 
 namespace Sdict {
 
@@ -517,7 +518,7 @@ void SdictArticleRequestRunnable::run()
 
 void SdictArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -544,7 +545,7 @@ void SdictArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

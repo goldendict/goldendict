@@ -6,9 +6,8 @@
 #include "hotkeywrapper.hh"
 #include "gddebug.hh"
 
-#ifdef Q_WS_X11
-#include <X11/Xlibint.h>
-#endif
+#include <QWidget>
+#include <QMainWindow>
 
 #ifdef Q_OS_WIN32
 #include "mainwindow.hh"
@@ -22,6 +21,9 @@ QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
 ,  mainWindow( 0 )
 #endif
 {
+#if defined( Q_OS_WIN ) && IS_QT_5
+  installNativeEventFilter( this );
+#endif
 }
 
 QHotkeyApplication::QHotkeyApplication( QString const & id,
@@ -31,6 +33,9 @@ QHotkeyApplication::QHotkeyApplication( QString const & id,
 ,  mainWindow( 0 )
 #endif
 {
+#if defined( Q_OS_WIN ) && IS_QT_5
+  installNativeEventFilter( this );
+#endif
 }
 
 void QHotkeyApplication::addDataCommiter( DataCommitter & d )
@@ -100,7 +105,7 @@ void HotkeyWrapper::waitKey2()
 {
   state2 = false;
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 
   if ( keyToUngrab != grabbedKeys.end() )
   {
@@ -131,7 +136,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
     if (hs.key == vk && hs.modifier == mod) {
 
-      #ifdef Q_WS_WIN32
+      #ifdef Q_OS_WIN32
 
       if( hs.key2 != 0 || ( mod == MOD_CONTROL && ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) ) )
       {
@@ -227,7 +232,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
       state2waiter = hs;
       QTimer::singleShot(500, this, SLOT(waitKey2()));
 
-      #ifdef Q_WS_X11
+      #ifdef HAVE_X11
 
       // Grab the second key, unless it's grabbed already
       // Note that we only grab the clipboard key only if
@@ -250,7 +255,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
 //////////////////////////////////////////////////////////////////////////
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
 
 void HotkeyWrapper::init()
 {
@@ -408,6 +413,31 @@ void HotkeyWrapper::unregister()
 }
 
 
+#if IS_QT_5
+
+bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, void * message, long * result )
+{
+  MSG * msg = reinterpret_cast< MSG * >( message );
+
+  if ( msg->message == WM_HOTKEY )
+  {
+    for (int i = 0; i < hotkeyWrappers.size(); i++)
+    {
+      if ( hotkeyWrappers.at(i)->winEvent( msg, result ) )
+        return true;
+    }
+  }
+
+  if( mainWindow )
+  {
+    if( ( static_cast< MainWindow * >( mainWindow ) )->handleGDMessage( msg, result ) )
+      return true;
+  }
+
+  return false;
+}
+
+#else // IS_QT_5
 
 bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
 {
@@ -428,6 +458,8 @@ bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
 
   return QApplication::winEventFilter( message, result );
 }
+
+#endif
 
 //////////////////////////////////////////////////////////////////////////
 

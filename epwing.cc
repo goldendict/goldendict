@@ -488,7 +488,7 @@ void EpwingArticleRequestRunnable::run()
 
 void EpwingArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -517,7 +517,7 @@ void EpwingArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -719,7 +719,7 @@ void EpwingResourceRequestRunnable::run()
 void EpwingResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -888,7 +888,7 @@ void EpwingWordSearchRunnable::run()
 void EpwingWordSearchRequest::findMatches()
 {
   BtreeWordSearchRequest::findMatches();
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -899,7 +899,7 @@ void EpwingWordSearchRequest::findMatches()
     QVector< QString > headwords;
     {
       Mutex::Lock _( edict.eBook.getLibMutex() );
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( !edict.eBook.getMatches( gd::toQString( str ), headwords ) )

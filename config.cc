@@ -18,6 +18,7 @@
 #endif
 
 #include "atomic_rename.hh"
+#include "qt4x5.hh"
 
 namespace Config {
 
@@ -223,7 +224,7 @@ Programs makeDefaultPrograms()
   Programs programs;
 
   // The following list doesn't make a lot of sense under Windows
-#ifndef Q_WS_WIN
+#ifndef Q_OS_WIN
   programs.push_back( Program( false, Program::Audio, "428b4c2b905ef568a43d9a16f59559b0", "Festival", "festival --tts", "" ) );
   programs.push_back( Program( false, Program::Audio, "2cf8b3a60f27e1ac812de0b57c148340", "Espeak", "espeak %GDWORD%", "" ) );
   programs.push_back( Program( false, Program::Html, "4f898f7582596cea518c6b0bfdceb8b3", "Manpages", "man -a --html=/bin/cat %GDWORD%", "" ) );
@@ -265,17 +266,17 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
 
-  for( unsigned y = 0; y < dicts.length(); ++y )
+  for( Qt4x5::Dom::size_type y = 0; y < dicts.length(); ++y )
     g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
                                              dicts.item( y ).toElement().attribute( "name" ) ) );
 
   QDomNode muted = grp.namedItem( "mutedDictionaries" );
   dicts = muted.toElement().elementsByTagName( "mutedDictionary" );
-  for( unsigned x = 0; x < dicts.length(); ++x )
+  for( Qt4x5::Dom::size_type x = 0; x < dicts.length(); ++x )
     g.mutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   dicts = muted.toElement().elementsByTagName( "popupMutedDictionary" );
-  for( unsigned x = 0; x < dicts.length(); ++x )
+  for( Qt4x5::Dom::size_type x = 0; x < dicts.length(); ++x )
     g.popupMutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   return g;
@@ -290,7 +291,7 @@ MutedDictionaries loadMutedDictionaries( QDomNode mutedDictionaries )
     QDomNodeList nl = mutedDictionaries.toElement().
                         elementsByTagName( "mutedDictionary" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       result.insert( nl.item( x ).toElement().text() );
   }
 
@@ -452,7 +453,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = paths.toElement().elementsByTagName( "path" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       c.paths.push_back(
         Path( nl.item( x ).toElement().text(),
               nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
@@ -464,7 +465,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = soundDirs.toElement().elementsByTagName( "sounddir" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       c.soundDirs.push_back(
         SoundDir( nl.item( x ).toElement().text(),
                   nl.item( x ).toElement().attribute( "name" ),
@@ -489,7 +490,7 @@ Class load() throw( exError )
 
     QDomNodeList nl = groups.toElement().elementsByTagName( "group" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement grp = nl.item( x ).toElement();
 
@@ -505,7 +506,7 @@ Class load() throw( exError )
 
     QDomNodeList nl = hunspell.toElement().elementsByTagName( "enabled" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       c.hunspell.enabledDictionaries.push_back( nl.item( x ).toElement().text() );
   }
 
@@ -569,7 +570,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = programs.toElement().elementsByTagName( "program" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement pr = nl.item( x ).toElement();
 
@@ -594,7 +595,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = mws.toElement().elementsByTagName( "mediawiki" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement mw = nl.item( x ).toElement();
 
@@ -622,7 +623,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = wss.toElement().elementsByTagName( "website" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ws = nl.item( x ).toElement();
 
@@ -649,7 +650,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = dss.toElement().elementsByTagName( "server" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ds = nl.item( x ).toElement();
 
@@ -678,7 +679,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = ves.toElement().elementsByTagName( "voiceEngine" );
 
-    for ( unsigned x = 0; x < nl.length(); ++x )
+    for ( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ve = nl.item( x ).toElement();
       VoiceEngine v;

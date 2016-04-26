@@ -38,6 +38,8 @@
 #include <QTextDocument>
 #include <QCryptographicHash>
 
+#include "qt4x5.hh"
+
 namespace Mdx
 {
 
@@ -355,11 +357,11 @@ public:
 
 void MdxDictionary::deferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -380,11 +382,11 @@ string const & MdxDictionary::ensureInitDone()
 
 void MdxDictionary::doDeferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     // Do deferred init
@@ -581,7 +583,7 @@ void MdxArticleRequestRunnable::run()
 
 void MdxArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -613,7 +615,7 @@ void MdxArticleRequest::run()
 
   for ( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -759,7 +761,7 @@ void MddResourceRequestRunnable::run()
 
 void MddResourceRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -778,7 +780,7 @@ void MddResourceRequest::run()
   for ( ;; )
   {
     // Some runnables linger enough that they are cancelled before they start
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

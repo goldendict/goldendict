@@ -4,6 +4,7 @@
 #ifndef __CONFIG_HH_INCLUDED__
 #define __CONFIG_HH_INCLUDED__
 
+#include <QObject>
 #include <QVector>
 #include <QString>
 #include <QSize>

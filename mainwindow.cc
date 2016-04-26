@@ -14,26 +14,36 @@
 #include "gestures.hh"
 #include "dictheadwords.hh"
 #include <limits.h>
+#include <QDebug>
+#include <QTextStream>
 #include <QDir>
+#include <QUrl>
 #include <QMessageBox>
 #include <QIcon>
 #include <QList>
 #include <QToolBar>
 #include <QCloseEvent>
 #include <QDesktopServices>
-#include <set>
-#include <map>
-#include "gddebug.hh"
-#include <QDebug>
-#include <QTextStream>
-#include "dictinfo.hh"
-#include "fsencoding.hh"
 #include <QProcess>
-#include "historypanewidget.hh"
 #include <QCryptographicHash>
+#include <QFileDialog>
+#include <QPrinter>
+#include <QPageSetupDialog>
+#include <QPrintPreviewDialog>
+#include <QPrintDialog>
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSslConfiguration>
+
+#include <limits.h>
+#include <set>
+#include <map>
+#include "gddebug.hh"
+
+#include "dictinfo.hh"
+#include "fsencoding.hh"
+#include "historypanewidget.hh"
+#include "qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
 
@@ -53,7 +63,7 @@
 
 #endif
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <QX11Info>
 #include <X11/Xlib.h>
 #endif
@@ -2690,7 +2700,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
   updateBackForwardButtons();
 }
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
 #else
 void MainWindow::toggleMainWindow( bool onlyShow )
@@ -2751,7 +2761,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       ftsDlg->show();
 
     focusTranslateLine();
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
     Window wh = 0;
     int rev = 0;
     XGetInputFocus( QX11Info::display(), &wh, &rev );
@@ -2866,16 +2876,16 @@ void MainWindow::checkForNewRelease()
   QNetworkRequest req(
     QUrl( "http://goldendict.org/latest_release.php?current="
           PROGRAM_VERSION "&platform="
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
           "x11"
 #endif
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
           "mac"
 #endif
 #ifdef Q_WS_QWS
           "qws"
 #endif
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
           "win"
 #endif
           ) );
@@ -2962,7 +2972,7 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
   switch(r) {
     case QSystemTrayIcon::Trigger:
       // Left click toggles the visibility of main window
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
       toggleMainWindow( false, true );
 #else
       toggleMainWindow();
@@ -3216,7 +3226,7 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
   {
     QUrl url( rx.cap( 1 ) );
     QString host = url.host();
-    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( url.path(), "/" ) );
+    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Qt4x5::Url::path( url ), "/" ) );
 
     if ( !host.startsWith( '/' ) )
       host.insert( 0, '/' );
@@ -4219,7 +4229,7 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {
-  return hwnd == winId() || hwnd == ui.centralWidget->winId();
+  return hwnd == (HWND)winId() || hwnd == (HWND)ui.centralWidget->winId();
 }
 
 #endif

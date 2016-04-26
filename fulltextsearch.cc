@@ -5,11 +5,20 @@
 #include "ftshelpers.hh"
 #include "gddebug.hh"
 #include "mainwindow.hh"
+#include "qt4x5.hh"
 
 #include <QThreadPool>
 #include <QIntValidator>
 #include <QMessageBox>
 #include <qalgorithms.h>
+
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+
+#include <QtWidgets/QStyleFactory>
+#include <qt_windows.h>
+#include <uxtheme.h>
+
+#endif
 
 namespace FTS
 {
@@ -29,7 +38,7 @@ void Indexing::run()
     // First iteration - dictionaries with no more MaxDictionarySizeForFastSearch articles
     for( size_t x = 0; x < dictionaries.size(); x++ )
     {
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( dictionaries.at( x )->canFTS()
@@ -43,7 +52,7 @@ void Indexing::run()
     // Second iteration - all remaining dictionaries
     for( size_t x = 0; x < dictionaries.size(); x++ )
     {
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( dictionaries.at( x )->canFTS()
@@ -75,7 +84,7 @@ void FtsIndexing::doIndexing()
 
   if( !started )
   {
-    while( isCancelled )
+    while( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       isCancelled.deref();
 
     Indexing *idx = new Indexing( isCancelled, dictionaries, indexingExited );
@@ -92,7 +101,7 @@ void FtsIndexing::stopIndexing()
 {
   if( started )
   {
-    if( !isCancelled )
+    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       isCancelled.ref();
 
     indexingExited.acquire();
@@ -212,6 +221,29 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   if( delegate )
     ui.headwordsView->setItemDelegate( delegate );
 
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+
+  // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
+  // We use simply "windows" style instead for this case
+
+  barStyle = 0;
+  oldBarStyle = 0;
+
+  if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA
+      && ( QSysInfo::windowsVersion() & QSysInfo::WV_NT_based )
+      && !IsThemeActive() )
+  {
+    barStyle = QStyleFactory::create( "windows" );
+
+    if( barStyle )
+    {
+      oldBarStyle = ui.searchProgressBar->style();
+      ui.searchProgressBar->setStyle( barStyle );
+    }
+  }
+
+#endif
+
   ui.searchLine->setText( static_cast< MainWindow * >( parent )->getTranslateLineText() );
   ui.searchLine->selectAll();
 }
@@ -220,6 +252,16 @@ FullTextSearchDialog::~FullTextSearchDialog()
 {
   if( delegate )
     delete delegate;
+
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+
+  if( barStyle )
+  {
+    ui.searchProgressBar->setStyle( oldBarStyle );
+    delete barStyle;
+  }
+
+#endif
 }
 
 void FullTextSearchDialog::stopSearch()

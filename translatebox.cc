@@ -20,7 +20,7 @@ namespace
 CompletionList::CompletionList(TranslateBox * parent) : WordList(parent),
   translateBox(parent)
 {
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
   setWindowFlags(Qt::ToolTip);
 #else
   setParent( parent->window() );

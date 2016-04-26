@@ -33,13 +33,26 @@
 
 #include "gddebug.hh"
 
-#ifdef Q_OS_MAC
+#if defined( Q_OS_MAC ) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include "lionsupport.h"
 #endif
+
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
+
+void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &mess )
+{
+  Q_UNUSED( context );
+  QString message( mess );
+  const char * msg = message.toUtf8().constData();
+
+#else
 
 void gdMessageHandler( QtMsgType type, const char *msg )
 {
   QString message = QString::fromUtf8( msg );
+
+#endif
+
   switch (type) {
 
     case QtDebugMsg:
@@ -73,6 +86,15 @@ void gdMessageHandler( QtMsgType type, const char *msg )
       else
         fprintf(stderr, "Fatal: %s\n", msg);
       abort();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
+    case QtInfoMsg:
+      if( logFile.isOpen() )
+        message.insert( 0, "Info: " );
+      else
+        fprintf(stderr, "Info: %s\n", msg);
+      break;
+#endif
   }
 
   if( logFile.isOpen() )
@@ -88,11 +110,13 @@ int main( int argc, char ** argv )
   #ifdef Q_OS_MAC
     setenv("LANG", "en_US.UTF-8", 1);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
    // Check for retina display
    if( LionSupport::isRetinaDisplay() )
      QApplication::setGraphicsSystem( "native" );
    else
      QApplication::setGraphicsSystem( "raster" );
+#endif
   #endif
 
   // The following clause fixes a race in the MinGW runtime where throwing
@@ -242,7 +266,11 @@ int main( int argc, char ** argv )
     logFile.write( line );
 
     // Install message handler
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
+    qInstallMessageHandler( gdMessageHandler );
+#else
     qInstallMsgHandler( gdMessageHandler );
+#endif
   }
 
   if ( Config::isPortableVersion() )
@@ -301,6 +329,9 @@ int main( int argc, char ** argv )
   int r = app.exec();
 
   app.removeDataCommiter( m );
+
+  if( logFile.isOpen() )
+    logFile.close();
 
   return r;
 }

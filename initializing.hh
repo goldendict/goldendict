@@ -14,6 +14,9 @@ class Initializing: public QDialog
 public:
 
   Initializing( QWidget * parent, bool showOnStartup );
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+  ~Initializing();
+#endif
 
 public slots:
 
@@ -23,7 +26,10 @@ private:
 
   virtual void closeEvent( QCloseEvent * );
   virtual void reject();
-  
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+  QStyle * barStyle, * oldBarStyle;
+#endif
+
   Ui::Initializing ui;
 };
 
