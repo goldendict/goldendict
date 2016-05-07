@@ -48,7 +48,8 @@ bool MainStatusBar::hasImage() const
 
 void MainStatusBar::clearMessage()
 {
-  textWidget->setText( QString() );
+  message.clear();
+  textWidget->setText( backgroungMessage );
   picWidget->setPixmap( QPixmap() );
   timer->stop();
   refresh();
@@ -56,12 +57,22 @@ void MainStatusBar::clearMessage()
 
 QString MainStatusBar::currentMessage() const
 {
-  return textWidget->text();
+  return message;
+}
+
+void MainStatusBar::setBackgroundMessage(const QString & bkg_message )
+{
+  backgroungMessage = bkg_message;
+  if( message.isEmpty() )
+  {
+    textWidget->setText( backgroungMessage );
+    refresh();
+  }
 }
 
 void MainStatusBar::showMessage(const QString & str, int timeout, const QPixmap & pixmap)
 {
-  textWidget->setText( str );
+  textWidget->setText( message = str );
   picWidget->setPixmap( pixmap );
 
   // reload stylesheet
@@ -77,7 +88,7 @@ void MainStatusBar::showMessage(const QString & str, int timeout, const QPixmap 
 
 void MainStatusBar::refresh()
 {
-  if ( !currentMessage().isEmpty() )
+  if ( !textWidget->text().isEmpty() )
   {
     adjustSize();
 

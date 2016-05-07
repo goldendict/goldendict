@@ -23,8 +23,8 @@ string preformat( string const &, bool baseRightToLeft = false );
 string escapeForJavaScript( string const & );
 
 // Replace html entities
-QString unescape( QString const & str );
-string unescapeUtf8( string const & str );
+QString unescape( QString const & str, bool saveFormat = false );
+string unescapeUtf8( string const & str, bool saveFormat = false );
 
 }
 

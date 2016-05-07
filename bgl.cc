@@ -33,6 +33,8 @@
 
 #include <QRegExp>
 
+#include "qt4x5.hh"
+
 namespace Bgl {
 
 using std::map;
@@ -118,26 +120,6 @@ namespace
     return in;
   }
 
-  // Since the standard isspace() is locale-specific, we need something
-  // that would never mess up our utf8 input. The stock one worked fine under
-  // Linux but was messing up strings under Windows.
-  bool isspace_c( int c )
-  {
-    switch( c )
-    {
-      case ' ':
-      case '\f':
-      case '\n':
-      case '\r':
-      case '\t':
-      case '\v':
-        return true;
-
-      default:
-        return false;
-    }
-  }
-
   // Removes any leading or trailing whitespace
   void trimWs( string & word )
   {
@@ -145,7 +127,7 @@ namespace
     {
       unsigned begin = 0;
 
-      while( begin < word.size() && isspace_c( word[ begin ] ) )
+      while( begin < word.size() && Utf8::isspace( word[ begin ] ) )
         ++begin;
 
       if ( begin == word.size() ) // Consists of ws entirely?
@@ -156,7 +138,7 @@ namespace
 
         // Doesn't consist of ws entirely, so must end with just isspace()
         // condition.
-        while( isspace_c( word[ end - 1 ] ) )
+        while( Utf8::isspace( word[ end - 1 ] ) )
           --end;
 
         if ( end != word.size() || begin )
@@ -317,7 +299,7 @@ namespace
     ftsIdxName = indexFile + "_FTS";
 
     if( !Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
   }
 
@@ -460,7 +442,7 @@ namespace
       {
         for ( unsigned int i = 0; i < wstr.size(); i++ )
         {
-          if ( wstr[ i ] >= 224 && wstr[ i ] <= 250 ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
+          if ( (wstr[ i ] >= 224 && wstr[ i ] <= 250) || (wstr[ i ] >= 192 && wstr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
             wstr[ i ] += 1488 - 224; // Convert to Hebrew unicode
         }
       }
@@ -476,7 +458,7 @@ namespace
   void BglDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
   {
     if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-           || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+           || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
       FTS_index_completed.ref();
 
     if( haveFTSIndex() )
@@ -565,7 +547,7 @@ void BglHeadwordsRequestRunnable::run()
 
 void BglHeadwordsRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -577,7 +559,7 @@ void BglHeadwordsRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -729,7 +711,7 @@ void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - conver
 
   for (unsigned int i=0; i<hebWStr.size();i++)
   {
-    if (hebWStr[i]>=224 && hebWStr[i]<=250) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8
+    if ( (hebWStr[ i ] >= 224 && hebWStr[ i ] <= 250) || (hebWStr[ i ] >= 192 && hebWStr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
         hebWStr[i]+=1488-224; // Convert to Hebrew unicode
   }
   hebStr=Utf8::encode(hebWStr);
@@ -750,7 +732,7 @@ void BglArticleRequest::fixHebArticle(string & hebArticle) // Hebrew support - r
 
 void BglArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -782,7 +764,7 @@ void BglArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1003,7 +985,7 @@ void BglResourceRequestRunnable::run()
 
 void BglResourceRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1021,7 +1003,7 @@ void BglResourceRequest::run()
 
   for( size_t count = resourcesCount; count--; )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       break;
 
     vector< char > nameData( idx.read< uint32_t >() );

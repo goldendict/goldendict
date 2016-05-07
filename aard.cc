@@ -26,11 +26,11 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QDomDocument>
-#include <QUrl>
 #include <QtEndian>
 
 #include "ufile.hh"
 #include "wstring_qt.hh"
+#include "qt4x5.hh"
 
 namespace Aard {
 
@@ -326,7 +326,7 @@ AardDictionary::AardDictionary( string const & id,
     ftsIdxName = indexFile + "_FTS";
 
     if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
 }
 
@@ -388,8 +388,14 @@ string AardDictionary::convert( const string & in )
     }
 
     QString text = QString::fromUtf8( inConverted.c_str() );
-    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*[\\\"'](w:|s:){0,1}([^#](?!ttp://)[^\\\"']*)(.)" ),
+    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)" ),
                   "<a href=\"bword:\\2\"");
+    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)" ),
+                  "<a href=\"bword:\\2\"");
+
+    // Anchors
+    text.replace( QRegExp( "<a href=\"bword:([^#\"]+)#([^\"]+)" ),
+                  "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
 
     static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
     text.replace( self_closing_divs, "\\1></div>" );
@@ -577,7 +583,7 @@ QString const& AardDictionary::getDescription()
 void AardDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -696,7 +702,7 @@ void AardArticleRequestRunnable::run()
 
 void AardArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -723,7 +729,7 @@ void AardArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

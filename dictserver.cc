@@ -32,7 +32,7 @@ bool readLine( QTcpSocket & socket, QString & line,
 
   for( ; ; )
   {
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( socket.canReadLine() )
@@ -61,7 +61,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
 
   for( ; ; )
   {
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     socket.connectToHost( serverUrl.host(), port );
@@ -72,7 +72,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
         break;
     }
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( !readLine( socket, reply, errorString, isCancelled ) )
@@ -88,7 +88,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
     if( !socket.waitForBytesWritten( 1000 ) )
       break;
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( !readLine( socket, reply, errorString, isCancelled ) )
@@ -109,13 +109,13 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
 
       socket.write( authCommand.toUtf8() );
 
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         return false;
 
       if( socket.waitForBytesWritten( 1000 ) )
         break;
 
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         return false;
 
       if( readLine( socket, reply, errorString, isCancelled ) )
@@ -131,7 +131,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
     return true;
   }
 
-  if( !isCancelled )
+  if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     errorString = QString( "Server connection fault, socket error %1: \"%2\"" )
                   .arg( QString::number( socket.error() ) )
                   .arg( socket.errorString() );
@@ -155,6 +155,7 @@ class DictServerDictionary: public Dictionary::Class
   QTcpSocket socket;
   QStringList databases;
   QStringList strategies;
+  QStringList serverDatabases;
 
 public:
 
@@ -212,6 +213,8 @@ protected:
 
   virtual void loadIcon() throw();
 
+  void getServerDatabases();
+
   friend class DictServerWordSearchRequest;
   friend class DictServerArticleRequest;
 };
@@ -234,13 +237,88 @@ void DictServerDictionary::loadIcon() throw()
 
 QString const & DictServerDictionary::getDescription()
 {
+  if( serverDatabases.isEmpty() )
+  {
+    dictionaryDescription.clear();
+    getServerDatabases();
+  }
+
   if( dictionaryDescription.isEmpty() )
   {
     dictionaryDescription = QCoreApplication::translate( "DictServer", "Url: " ) + url + "\n";
     dictionaryDescription += QCoreApplication::translate( "DictServer", "Databases: " ) + databases.join( ", " ) + "\n";
     dictionaryDescription += QCoreApplication::translate( "DictServer", "Search strategies: " ) + strategies.join( ", " );
+    if( !serverDatabases.isEmpty() )
+    {
+      dictionaryDescription += "\n\n";
+      dictionaryDescription += QCoreApplication::translate( "DictServer", "Server databases" )
+                               + " (" + QString::number( serverDatabases.size()) + "):";
+      for( QStringList::const_iterator i = serverDatabases.begin(); i != serverDatabases.end(); ++i )
+        dictionaryDescription += "\n" + *i;
+    }
   }
   return dictionaryDescription;
+}
+
+void DictServerDictionary::getServerDatabases()
+{
+  QAtomicInt isCancelled;
+  QTcpSocket * socket = new QTcpSocket;
+
+  if( !socket )
+    return;
+
+  if( connectToServer( *socket, url, errorString, isCancelled ) )
+  {
+    for( ; ; )
+    {
+      QString req = QString( "SHOW DB\r\n" );
+      socket->write( req.toUtf8() );
+      socket->waitForBytesWritten( 1000 );
+
+      QString reply;
+
+      if( !readLine( *socket, reply, errorString, isCancelled ) )
+        return;
+
+      if( reply.left( 3 ) == "110" )
+      {
+        int countPos = reply.indexOf( ' ', 4 );
+        // Get databases count
+        int count = reply.mid( 4, countPos > 4 ? countPos - 4 : -1 ).toInt();
+
+        // Read databases
+        for( int x = 0; x < count; x++ )
+        {
+          if( !readLine( *socket, reply, errorString, isCancelled ) )
+             break;
+
+          if( reply[ 0 ] == '.' )
+            break;
+
+          while( reply.endsWith( '\r' ) || reply.endsWith( '\n' ) )
+            reply.chop( 1 );
+
+          if( !reply.isEmpty() )
+            serverDatabases.append( reply );
+        }
+
+        break;
+      }
+      else
+      {
+        gdWarning( "Retrieving databases from \"%s\" fault: %s\n",
+                   getName().c_str(), reply.toUtf8().data() );
+        break;
+      }
+    }
+    disconnectFromServer( *socket );
+  }
+
+  if( !errorString.isEmpty() )
+    gdWarning( "Retrieving databases from \"%s\" fault: %s\n",
+               getName().c_str(), errorString.toUtf8().data() );
+  delete socket;
 }
 
 class DictServerWordSearchRequest;
@@ -304,7 +382,7 @@ void DictServerWordSearchRequestRunnable::run()
 
 void DictServerWordSearchRequest::run()
 {
-  if( isCancelled )
+  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -334,7 +412,7 @@ void DictServerWordSearchRequest::run()
         socket->write( matchReq.toUtf8() );
         socket->waitForBytesWritten( 1000 );
 
-        if( isCancelled )
+        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
         QString reply;
@@ -342,7 +420,7 @@ void DictServerWordSearchRequest::run()
         if( !readLine( *socket, reply, errorString, isCancelled ) )
           break;
 
-        if( isCancelled )
+        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
         if( reply.left( 3 ) == "250" )
@@ -351,7 +429,7 @@ void DictServerWordSearchRequest::run()
           if( !readLine( *socket, reply, errorString, isCancelled ) )
             break;
 
-          if( isCancelled )
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
             break;
         }
 
@@ -381,7 +459,7 @@ void DictServerWordSearchRequest::run()
           // Read matches
           for( int x = 0; x <= count; x++ )
           {
-            if( isCancelled )
+            if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
               break;
 
             if( !readLine( *socket, reply, errorString, isCancelled ) )
@@ -405,12 +483,12 @@ void DictServerWordSearchRequest::run()
               matchesList.append( word );
             }
           }
-          if( isCancelled || !errorString.isEmpty() )
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
             break;
         }
       }
 
-      if( isCancelled || !errorString.isEmpty() )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
         break;
 
       matchesList.removeDuplicates();
@@ -418,7 +496,7 @@ void DictServerWordSearchRequest::run()
         break;
     }
 
-    if( !isCancelled && errorString.isEmpty() )
+    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) && errorString.isEmpty() )
     {
       matchesList.removeDuplicates();
 
@@ -439,13 +517,13 @@ void DictServerWordSearchRequest::run()
     gdWarning( "Prefix find in \"%s\" fault: %s\n", dict.getName().c_str(),
                 errorString.toUtf8().data() );
 
-  if( isCancelled )
+  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     socket->abort();
   else
     disconnectFromServer( *socket );
 
   delete socket;
-  if( !isCancelled )
+  if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     finish();
 }
 
@@ -518,7 +596,7 @@ void DictServerArticleRequestRunnable::run()
 
 void DictServerArticleRequest::run()
 {
-  if( isCancelled )
+  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -546,13 +624,13 @@ void DictServerArticleRequest::run()
 
       QString reply;
 
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( !readLine( *socket, reply, errorString, isCancelled ) )
         break;
 
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( reply.left( 3 ) == "250" )
@@ -561,7 +639,7 @@ void DictServerArticleRequest::run()
         if( !readLine( *socket, reply, errorString, isCancelled ) )
           break;
 
-        if( isCancelled )
+        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
           break;
       }
 
@@ -593,7 +671,7 @@ void DictServerArticleRequest::run()
         // Read articles
         for( int x = 0; x < count; x++ )
         {
-          if( isCancelled )
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
             break;
 
           if( !readLine( *socket, reply, errorString, isCancelled ) )
@@ -673,7 +751,7 @@ void DictServerArticleRequest::run()
               articleText += reply;
             }
 
-            if( isCancelled || !errorString.isEmpty() )
+            if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
               break;
 
             QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
@@ -696,7 +774,7 @@ void DictServerArticleRequest::run()
               link.replace( tags, " " );
               link.replace( "&nbsp;", " " );
               articleText.replace( pos + 30, links.cap( 1 ).length(),
-                                   link.simplified() );
+                                   QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
               pos += 30;
             }
 
@@ -705,12 +783,12 @@ void DictServerArticleRequest::run()
                            + "<br></div>";
           }
 
-          if( isCancelled || !errorString.isEmpty() )
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
             break;
         }
       }
     }
-    if( !isCancelled && errorString.isEmpty() && !articleData.empty() )
+    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) && errorString.isEmpty() && !articleData.empty() )
     {
       Mutex::Lock _( dataMutex );
 
@@ -725,13 +803,13 @@ void DictServerArticleRequest::run()
     gdWarning( "Articles request from \"%s\" fault: %s\n", dict.getName().c_str(),
                 errorString.toUtf8().data() );
 
-  if( isCancelled )
+  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     socket->abort();
   else
     disconnectFromServer( *socket );
 
   delete socket;
-  if( !isCancelled )
+  if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     finish();
 }
 

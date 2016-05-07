@@ -49,7 +49,7 @@ bool WebMultimediaDownload::isAudioUrl( QUrl const & url )
 {
   // Note: we check for forvo sound links explicitly, as they don't have extensions
 
-  return url.scheme() == "http" && (
+  return ( url.scheme() == "http" || url.scheme() == "https" ) && (
       Filetype::isNameOfSound( url.path().toUtf8().data() ) || url.host() == "apifree.forvo.com" );
 }
 

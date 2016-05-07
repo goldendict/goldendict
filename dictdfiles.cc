@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include "gddebug.hh"
 #include "ftshelpers.hh"
+#include <QUrl>
 
 #include <QDebug>
 
@@ -178,7 +179,7 @@ DictdDictionary::DictdDictionary( string const & id,
   ftsIdxName = indexFile + "_FTS";
 
   if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
 }
 
@@ -331,6 +332,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
       {
         static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
         static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
+        static QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
+        static QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
 
         articleText = string( "<div class=\"dictd_article\"" );
         if( isToLanguageRTL() )
@@ -340,12 +343,31 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         string convertedText = Html::preformat( articleBody, isToLanguageRTL() );
         free( articleBody );
 
-        articleText += QString::fromUtf8( convertedText.c_str() )
-              .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
-              .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>")
-            .toUtf8().data();
-        articleText += "</div>";
+        QString articleString = QString::fromUtf8( convertedText.c_str() )
+                                .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>")
+                                .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>");
+        convertedText.erase();
+
+        int pos = 0;
+        for( ; ; )
+        {
+          pos = articleString.indexOf( links, pos );
+          if( pos < 0 )
+            break;
+
+          QString link = links.cap( 1 );
+          link.replace( tags, " " );
+          link.replace( "&nbsp;", " " );
+          articleString.replace( pos + 30, links.cap( 1 ).length(),
+                                 QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
+          pos += 30;
+        }
+
+        articleString += "</div>";
+
+        articleText += articleString.toUtf8().data();
       }
+
 
       // Ok. Now, does it go to main articles, or to alternate ones? We list
       // main ones first, and alternates after.
@@ -403,7 +425,7 @@ QString const& DictdDictionary::getDescription()
                                                       vector< wstring >(), wstring() );
 
     if( req->dataSize() > 0 )
-      dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ) );
+      dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ), true );
     else
       dictionaryDescription = "NONE";
 
@@ -413,7 +435,7 @@ QString const& DictdDictionary::getDescription()
 void DictdDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -642,7 +664,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     char * eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
                     if ( eol )
                     {
-                      while( *eol && isspace( *eol ) ) ++eol; // skip spaces
+                      while( *eol && Utf8::isspace( *eol ) ) ++eol; // skip spaces
 
                       // use only the single line for the dictionary title
                       char * endEol = strchr( eol, '\n' );

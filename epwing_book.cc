@@ -1234,7 +1234,7 @@ void EpwingBook::finalizeText( QString & text )
     {
       QString headword = QString::fromUtf8( buf, length );
       fixHeadword( headword );
-      url.setPath( headword );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( headword ) );
     }
 
     QString link = "<a href=\"" + url.toEncoded() + "\">";
@@ -1295,7 +1295,7 @@ QByteArray EpwingBook::handleColorImage( EB_Hook_Code code,
   QUrl url;
   url.setScheme( "bres" );
   url.setHost( dictID );
-  url.setPath( name );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( name ) );
   QByteArray urlStr = "<p class=\"epwing_image\"><img src=\"" + url.toEncoded()
                       + "\" alt=\"" + name.toUtf8() + "\"></p>";
 
@@ -1378,7 +1378,7 @@ QByteArray EpwingBook::handleMonoImage( EB_Hook_Code code,
   QUrl url;
   url.setScheme( "bres" );
   url.setHost( dictID );
-  url.setPath( name );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( name ) );
   QByteArray urlStr = "<span class=\"epwing_image\"><img src=\"" + url.toEncoded()
                       + "\" alt=\"" + name.toUtf8() + "\"/></span>";
 
@@ -1451,7 +1451,7 @@ QByteArray EpwingBook::handleWave( EB_Hook_Code code, const unsigned int * argv 
   QUrl url;
   url.setScheme( "gdau" );
   url.setHost( dictID );
-  url.setPath( name );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( name ) );
 
   string ref = string( "\"" )+ url.toEncoded().data() + "\"";
   QByteArray result = addAudioLink( ref , dictID.toUtf8().data() ).c_str();
@@ -1509,9 +1509,10 @@ QByteArray EpwingBook::handleMpeg( EB_Hook_Code code, const unsigned int * argv 
   char file[ EB_MAX_PATH_LENGTH + 1 ];
 
   unsigned int *p = (unsigned int *)( argv + 2 );
-  eb_decompose_movie_file_name( p, file );
+  eb_compose_movie_path_name( &book, p, file );
 
   QString name = QString::fromLocal8Bit( file );
+  name = QFileInfo( name ).fileName();
   name += ".mpg";
 
   eb_set_binary_mpeg( &book, argv + 2 );
@@ -1527,7 +1528,7 @@ QByteArray EpwingBook::handleMpeg( EB_Hook_Code code, const unsigned int * argv 
   QUrl url;
   url.setScheme( "gdvideo" );
   url.setHost( dictID );
-  url.setPath( name );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( name ) );
 
   QByteArray result = QByteArray( "<span class=\"epwing_mpeg\"><a href=" ) + url.toEncoded() + ">";
 
@@ -1553,7 +1554,7 @@ QByteArray EpwingBook::handleMpeg( EB_Hook_Code code, const unsigned int * argv 
         if( ret != EB_SUCCESS )
         {
           setErrorString( "eb_read_binary", ret );
-          gdWarning( "Epwing sound retrieve error: %s",
+          gdWarning( "Epwing movie retrieve error: %s",
                      error_string.toUtf8().data() );
           break;
         }
@@ -1611,7 +1612,7 @@ QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv,
   QUrl url;
   url.setScheme( "file" );
   url.setHost( "/");
-  url.setPath( fullName );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( fullName ) );
 
   QByteArray link = "<img class=\"epwing_narrow_font\" src=\"" + url.toEncoded() + "\"/>";
 
@@ -1681,7 +1682,7 @@ QByteArray EpwingBook::handleWideFont( const unsigned int * argv,
   QUrl url;
   url.setScheme( "file" );
   url.setHost( "/");
-  url.setPath( fullName );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( fullName ) );
 
   QByteArray link = "<img class=\"epwing_wide_font\" src=\"" + url.toEncoded() + "\"/>";
 

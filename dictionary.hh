@@ -15,6 +15,7 @@
 #include "wstring.hh"
 #include "langcoder.hh"
 #include "config.hh"
+#include "qt4x5.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -418,7 +419,7 @@ public:
 
   /// Dictionary have index for full-text search
   bool haveFTSIndex()
-  { return FTS_index_completed != 0; }
+  { return Qt4x5::AtomicInt::loadAcquire( FTS_index_completed ) != 0; }
 
   /// Make index for full-text search
   virtual void makeFTSIndex( QAtomicInt &, bool )

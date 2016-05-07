@@ -31,7 +31,7 @@
 #include "fulltextsearch.hh"
 #include "helpwindow.hh"
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
 #include <fixx11h.h>
 #endif
 
@@ -71,12 +71,15 @@ public:
 
   void showGDHelpForID( QString const & id );
   void closeGDHelp();
+  QString getTranslateLineText() const
+  { return translateLine->text(); }
 
 public slots:
 
   void messageFromAnotherInstanceReceived( QString const & );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
   void wordReceived( QString const & );
+  void headwordReceived( QString const &, QString const & );
   void setExpandMode( bool expand );
 
 private:
@@ -212,7 +215,7 @@ private:
 
   /// Brings the main window to front if it's not currently, or hides it
   /// otherwise. The hiding part is omitted if onlyShow is true.
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
   void toggleMainWindow( bool onlyShow = false, bool byIconClick = false );
 #else
   void toggleMainWindow( bool onlyShow = false );
@@ -236,7 +239,7 @@ private:
 
   void fillWordListFromHistory();
 
-  void showDictionaryHeadwords( Dictionary::Class * dict );
+  void showDictionaryHeadwords( QWidget * owner, Dictionary::Class * dict );
 
 private slots:
 
@@ -267,6 +270,8 @@ private slots:
   void openDictionaryFolder( QString const & id );
 
   void editDictionary ( Dictionary::Class * dict );
+
+  void showFTSIndexingName( QString const & name );
 
 private slots:
 
@@ -329,7 +334,7 @@ private slots:
 
   void currentGroupChanged( QString const & );
   void translateInputChanged( QString const & );
-  void translateInputFinished( bool checkModifiers = true );
+  void translateInputFinished( bool checkModifiers = true, QString const & dictID = QString() );
 
   /// Closes any opened search in the article view, and focuses the translateLine/close main window to tray.
   void handleEsc();
@@ -364,7 +369,8 @@ private slots:
 
   void mutedDictionariesChanged();
 
-  void showTranslationFor( QString const &, unsigned inGroup = 0 );
+  void showTranslationFor( QString const &, unsigned inGroup = 0,
+                           QString const & dictID = QString() );
 
   void showTranslationFor( QString const &, QStringList const & dictIDs,
                            QRegExp const & searchRegExp );

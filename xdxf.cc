@@ -38,10 +38,13 @@
 #include <QDir>
 #include <QPainter>
 #include <QDebug>
+#include <QRegExp>
 
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
+
+#include "qt4x5.hh"
 
 namespace Xdxf {
 
@@ -291,7 +294,7 @@ XdxfDictionary::XdxfDictionary( string const & id,
   ftsIdxName = indexFile + "_FTS";
 
   if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
 }
 
@@ -368,7 +371,7 @@ QString XdxfDictionary::getMainFilename()
 void XdxfDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -487,7 +490,7 @@ void XdxfArticleRequestRunnable::run()
 
 void XdxfArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -514,7 +517,7 @@ void XdxfArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -658,7 +661,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   }
 
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
-                                    fType == Logical, idxHeader.revisionNumber, headword );
+                                    &resourceZip, fType == Logical, idxHeader.revisionNumber, headword );
 
   free( articleBody );
 }
@@ -755,21 +758,21 @@ QString readXhtmlData( QXmlStreamReader & stream )
     {
       QString name = stream.name().toString();
 
-      result += "<" + Qt::escape( name ) + " ";
+      result += "<" + Qt4x5::escape( name ) + " ";
 
       QXmlStreamAttributes attrs = stream.attributes();
 
       for( int x = 0; x < attrs.size(); ++x )
       {
-        result += Qt::escape( attrs[ x ].name().toString() );
-        result += "=\"" + Qt::escape( attrs[ x ].value().toString() ) + "\"";
+        result += Qt4x5::escape( attrs[ x ].name().toString() );
+        result += "=\"" + Qt4x5::escape( attrs[ x ].value().toString() ) + "\"";
       }
 
       result += ">";
 
       result += readXhtmlData( stream );
 
-      result += "</" + Qt::escape( name ) + ">";
+      result += "</" + Qt4x5::escape( name ) + ">";
     }
     else
     if ( stream.isCharacters() || stream.isWhitespace() || stream.isCDATA() )
@@ -990,7 +993,7 @@ void XdxfResourceRequestRunnable::run()
 void XdxfResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1208,7 +1211,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
               bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
-              idxHeader.revisionNumber = stream.attributes().value( "revision" ).toString().toUInt();
+
+              QRegExp regNum( "\\d+" );
+              regNum.indexIn( stream.attributes().value( "revision" ).toString() );
+              idxHeader.revisionNumber = regNum.cap().toUInt();
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 

@@ -82,7 +82,8 @@ int res;
 
 #define BUFSIZE 0xFFFF
 
-string decompressLzma2( const char * bufptr, unsigned length )
+string decompressLzma2( const char * bufptr, unsigned length,
+                        bool raw_decoder )
 {
 string str;
 lzma_ret res;
@@ -92,9 +93,25 @@ char buf[BUFSIZE];
   strm.next_in = reinterpret_cast< const uint8_t * >( bufptr );
   strm.avail_in = length;
 
+  lzma_options_lzma opt;
+  lzma_filter filters[ 2 ];
+
+  if( raw_decoder )
+  {
+    lzma_lzma_preset(&opt, LZMA_PRESET_DEFAULT);
+
+    filters[ 0 ].id = LZMA_FILTER_LZMA2;
+    filters[ 0 ].options = &opt;
+    filters[ 1 ].id = LZMA_VLI_UNKNOWN;
+  }
+
   while( 1 )
   {
-    res = lzma_stream_decoder( &strm, UINT64_MAX, 0 );
+    if( raw_decoder )
+      res = lzma_raw_decoder( &strm, filters );
+    else
+      res = lzma_stream_decoder( &strm, UINT64_MAX, 0 );
+
     if( res != LZMA_OK )
       break;
 

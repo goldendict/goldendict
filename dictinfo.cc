@@ -51,6 +51,8 @@ void DictInfo::showInfo( sptr<Dictionary::Class> dict )
     ui.infoLabel->setPlainText( info );
   else
     ui.infoLabel->clear();
+
+  setWindowIcon( dict->getIcon() );
 }
 
 void DictInfo::savePos( int )

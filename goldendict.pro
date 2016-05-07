@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0+git
+VERSION = 1.5.0-RC2+git
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
@@ -16,15 +16,27 @@ isEmpty( hasGit ) {
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
-QT += webkit
-QT += xml
-QT += network
-QT += svg
+
+QT += core \
+      gui \
+      xml \
+      network \
+      svg
+
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += widgets \
+          webkitwidgets \
+          printsupport \
+          help
+} else {
+    QT += webkit
+    CONFIG += help
+}
+
 QT += sql
 CONFIG += exceptions \
     rtti \
-    stl \
-    help
+    stl
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
@@ -44,17 +56,17 @@ win32 {
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
-            LIBS += -L$${PWD}/winlibs/lib/msvc/x64
-        } else {
-            LIBS += -L$${PWD}/winlibs/lib/msvc
         }
+        LIBS += -L$${PWD}/winlibs/lib/msvc
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
-        QMAKE_LFLAGS_RELEASE += /LTCG /OPT:REF /OPT:ICF
+        QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
+        DEFINES += GD_NO_MANIFEST
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
-        LIBS += -lshell32 -luser32 -lsapi -lole32 -lhunspell
+        LIBS += -lshell32 -luser32 -lsapi -lole32
+        Debug: LIBS+= -lhunspelld
+        Release: LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
-        LIBS += -lhunspell-1.3.2
         CONFIG(gcc48) {
             x64 {
                 LIBS += -L$${PWD}/winlibs/lib64-48
@@ -67,6 +79,24 @@ win32 {
             LIBS += -L$${PWD}/winlibs/lib
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
+	
+	isEmpty(HUNSPELL_LIB) {
+          CONFIG(gcc48) {
+            LIBS += -lhunspell-1.3.2
+          } else {
+            greaterThan(QT_MAJOR_VERSION, 4) {
+              lessThan(QT_MINOR_VERSION, 1) {
+                LIBS += -lhunspell-1.3-sjlj
+              } else {
+                LIBS += -lhunspell-1.3-dw2
+              }
+            } else {
+              LIBS += -lhunspell-1.3.2
+            }
+          }
+        } else {
+          LIBS += -l$$HUNSPELL_LIB
+        }
     }
 
     LIBS += -liconv \
@@ -79,13 +109,14 @@ win32 {
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg
-
     isEmpty(DISABLE_INTERNAL_PLAYER) {
         LIBS += -lao \
             -lavutil-gd \
             -lavformat-gd \
             -lavcodec-gd
     }
+
+
     RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
 
@@ -95,16 +126,31 @@ win32 {
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
     CONFIG += zim_support
+
+    !CONFIG( no_chinese_conversion_support ) {
+        CONFIG += chinese_conversion_support
+    }
+
+    greaterThan(QT_MAJOR_VERSION, 4) {
+      LIBS += -luxtheme
+    }
 }
 
 unix:!mac {
+  DEFINES += HAVE_X11
   # This is to keep symbols for backtraces
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
 
+    greaterThan(QT_MAJOR_VERSION, 4) {
+      greaterThan(QT_MINOR_VERSION, 0) {
+        QT += x11extras
+      }
+    }
+
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
-    	vorbis \
+        vorbis \
         ogg \
         hunspell
     isEmpty(DISABLE_INTERNAL_PLAYER) {
@@ -179,6 +225,18 @@ mac {
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
+    !CONFIG( no_chinese_conversion_support ) {
+        CONFIG += chinese_conversion_support
+        CONFIG( x86 ) {
+            QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
+                                 cp -R $${PWD}/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+                                 cp -R $${PWD}/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+        } else {
+            QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
+                                 cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+                                 cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+        }
+    }
 }
 
 CONFIG(debug, debug|release): {
@@ -292,13 +350,16 @@ HEADERS += folding.hh \
     delegate.hh \
     zim.hh \
     gddebug.hh \
+    qt4x5.hh \
     gestures.hh \
     tiff.hh \
     dictheadwords.hh \
     fulltextsearch.hh \
     ftshelpers.hh \
     dictserver.hh \
-    helpwindow.hh
+    helpwindow.hh \
+    slob.hh \
+    ripemd.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -316,6 +377,7 @@ FORMS += groups.ui \
     dictheadwords.ui \
     authentication.ui \
     fulltextsearch.ui
+
 SOURCES += folding.cc \
     main.cc \
     dictionary.cc \
@@ -419,10 +481,12 @@ SOURCES += folding.cc \
     fulltextsearch.cc \
     ftshelpers.cc \
     dictserver.cc \
-    helpwindow.cc
+    helpwindow.cc \
+    slob.cc \
+    ripemd.cc
 
 win32 {
-	FORMS   += texttospeechsource.ui
+    FORMS   += texttospeechsource.ui
     SOURCES += mouseover_win32/ThTypes.c \
                wordbyauto.cc \
                guids.c \
@@ -473,6 +537,25 @@ CONFIG( no_epwing_support ) {
   LIBS += -leb
 }
 
+CONFIG( chinese_conversion_support ) {
+  DEFINES += MAKE_CHINESE_CONVERSION_SUPPORT
+  FORMS   += chineseconversion.ui
+  HEADERS += chinese.hh \
+             chineseconversion.hh
+  SOURCES += chinese.cc \
+             chineseconversion.cc
+  win32-msvc* {
+    Debug:   LIBS += -lopenccd
+    Release: LIBS += -lopencc
+  } else {
+    mac {
+      LIBS += -lopencc.2
+    } else {
+      LIBS += -lopencc
+    }
+  }
+}
+
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \
@@ -515,12 +598,13 @@ TRANSLATIONS += locale/ru_RU.ts \
   QMAKE_EXTRA_TARGETS += revtarget
   PRE_TARGETDEPS      += $$PWD/version.txt
   revtarget.target     = $$PWD/version.txt
-!win32 {
-  revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
-}
-win32 {
-  revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
-}
+
+  !win32 {
+    revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
+  } else {
+    revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
+  }
+
   ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
   for(src, ALL_SOURCES) {
     QUALIFIED_SOURCES += $${PWD}/$${src}

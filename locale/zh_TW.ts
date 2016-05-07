@@ -322,6 +322,57 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>ChineseConversion</name>
+    <message>
+        <source>GroupBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion between simplified and traditional Chinese characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chinese Con&amp;version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC to TC (Taiwan variant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC to TC (Hong Kong variant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion from traditional characters to simplified characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TC to SC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Traditional to simplified Chinese conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Dialog</name>
     <message>
         <source>Proxy authentication required</source>
@@ -579,6 +630,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Search strategies: </source>
         <translation>搜尋策略：</translation>
     </message>
+    <message>
+        <source>Server databases</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DictServersModel</name>
@@ -700,7 +755,7 @@ between classic and school orthography in cyrillic)</source>
     <name>FTS::FtsIndexing</name>
     <message>
         <source>None</source>
-        <translation>無</translation>
+        <translation type="obsolete">無</translation>
     </message>
 </context>
 <context>
@@ -757,12 +812,16 @@ between classic and school orthography in cyrillic)</source>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
         <translation>搜尋的字串中，如果有中日韓(CJK)字母，就無法相容&quot;全字(Whole words)&quot; 和 &quot;純文字&quot;的搜尋模式</translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">無</translation>
+    </message>
 </context>
 <context>
     <name>FTS::Indexing</name>
     <message>
         <source>None</source>
-        <translation>無</translation>
+        <translation type="obsolete">無</translation>
     </message>
 </context>
 <context>
@@ -2411,6 +2470,10 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>GoldenDict reference</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

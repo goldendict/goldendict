@@ -30,6 +30,7 @@
 #include <QDebug>
 
 #include "ufile.hh"
+#include "qt4x5.hh"
 
 namespace Sdict {
 
@@ -220,7 +221,7 @@ SdictDictionary::SdictDictionary( string const & id,
     ftsIdxName = indexFile + "_FTS";
 
     if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
 }
 
@@ -390,7 +391,7 @@ void SdictDictionary::loadArticle( uint32_t address,
 void SdictDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -517,7 +518,7 @@ void SdictArticleRequestRunnable::run()
 
 void SdictArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -544,7 +545,7 @@ void SdictArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

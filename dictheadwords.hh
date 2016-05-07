@@ -21,7 +21,7 @@ class DictHeadwords : public QDialog
 
 public:
   explicit DictHeadwords( QWidget * parent, Config::Class & cfg_,
-                        Dictionary::Class * dict_ );
+                          Dictionary::Class * dict_ );
   virtual ~DictHeadwords();
 
   void setup( Dictionary::Class * dict_ );
@@ -33,6 +33,7 @@ protected:
   QStringListModel * model;
   QSortFilterProxyModel * proxy;
   WordListItemDelegate * delegate;
+  QString dictId;
 
   QAction helpAction;
 
@@ -54,7 +55,7 @@ private slots:
   void helpRequested();
 
 signals:
-  void headwordSelected( QString const & );
+  void headwordSelected( QString const &, QString const & );
   void closeDialog();
 };
 

@@ -14,7 +14,7 @@
 #include <QSet>
 #include <QList>
 
-#ifdef _MSC_VER
+#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
 #include <stdint.h>
@@ -185,6 +185,9 @@ public:
 
   Mutex & getFtsMutex()
   { return ftsIdxMutex; }
+
+  virtual uint32_t getFtsIndexVersion()
+  { return 0; }
 
   /// Called before each matching operation to ensure that any child init
   /// has completed. Mainly used for deferred init. The default implementation

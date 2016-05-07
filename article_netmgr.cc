@@ -1,15 +1,19 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#ifdef _MSC_VER
+#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
 #include <stdint.h>
 #endif
 
+#include <QUrl>
+
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
+#include "qt4x5.hh"
+
 using std::string;
 
 namespace
@@ -103,7 +107,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     if( req.url().host().isEmpty() && articleMaker.adjustFilePath( fileName ) )
     {
       QUrl newUrl( req.url() );
-      newUrl.setPath( QUrl::fromLocalFile( fileName ).path() );
+      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( QUrl::fromLocalFile( fileName ).path() ) );
 
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
@@ -140,14 +144,15 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     contentType = "text/html";
 
-    if ( url.queryItemValue( "blank" ) == "1" )
+    if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
     bool groupIsValid = false;
 
-    QString word = url.queryItemValue( "word" );
-
-    QString dictIDs = url.queryItemValue( "dictionaries" );
+    QString word = Qt4x5::Url::queryItemValue( url, "word" );
+    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+   
+    QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
     if( !dictIDs.isEmpty() )
     {
       // Individual dictionaries set from full-text search
@@ -155,18 +160,18 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
     }
 
-    unsigned group = url.queryItemValue( "group" ).toUInt( &groupIsValid );
+   
 
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
-        QSet< QString >::fromList( url.queryItemValue( "muted" ).split( ',' ) );
+        QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
 
     // Unpack contexts
 
     QMap< QString, QString > contexts;
 
-    QString contextsEncoded = url.queryItemValue( "contexts" );
+    QString contextsEncoded = Qt4x5::Url::queryItemValue( url, "contexts" );
 
     if ( contextsEncoded.size() )
     {
@@ -214,7 +219,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
             try
             {
-              return  dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data() );
+              return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
             }
             catch( std::exception & e )
             {

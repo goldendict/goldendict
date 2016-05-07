@@ -86,6 +86,31 @@ void WordFinder::stemmedMatch( QString const & str,
     startSearch();
 }
 
+void WordFinder::expressionMatch( QString const & str,
+                                  std::vector< sptr< Dictionary::Class > > const & dicts,
+                                  unsigned long maxResults,
+                                  Dictionary::Features features )
+{
+  cancel();
+
+  searchQueued = true;
+  searchType = ExpressionMatch;
+  inputWord = str;
+  inputDicts = &dicts;
+  requestedMaxResults = maxResults;
+  requestedFeatures = features;
+
+  resultsArray.clear();
+  resultsIndex.clear();
+  searchResults.clear();
+
+  if ( queuedRequests.empty() )
+  {
+    // No requests are queued, no need to wait for them to finish.
+    startSearch();
+  }
+}
+
 void WordFinder::startSearch()
 {
   if ( !searchQueued )
@@ -127,7 +152,7 @@ void WordFinder::startSearch()
       try
       {
         sptr< Dictionary::WordSearchRequest > sr =
-          ( searchType == PrefixMatch ) ?
+          ( searchType == PrefixMatch || searchType == ExpressionMatch ) ?
             (*inputDicts)[ x ]->prefixMatch( allWordWritings[ y ], requestedMaxResults ) :
             (*inputDicts)[ x ]->stemmedMatch( allWordWritings[ y ], stemmedMinLength, stemmedMaxSuffixVariation, requestedMaxResults );
 
@@ -273,6 +298,8 @@ void WordFinder::updateResults()
   if ( updateResultsTimer.isActive() )
     updateResultsTimer.stop(); // Can happen when we were done before it'd expire
 
+  wstring original = Folding::applySimpleCaseOnly( allWordWritings[ 0 ] );
+
   for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
          finishedRequests.begin(); i != finishedRequests.end(); )
   {
@@ -282,6 +309,30 @@ void WordFinder::updateResults()
       int weight = (**i)[ x ].weight;
       wstring lowerCased = Folding::applySimpleCaseOnly( match );
 
+      if( searchType == ExpressionMatch )
+      {
+        unsigned ws;
+
+        for( ws = 0; ws < allWordWritings.size(); ws++ )
+        {
+          if( ws == 0 )
+          {
+            // Check for prefix match with original expression
+            if( lowerCased.compare( 0, original.size(), original ) == 0 )
+              break;
+          }
+          else
+          if( lowerCased == Folding::applySimpleCaseOnly( allWordWritings[ ws ] ) )
+            break;
+        }
+
+        if( ws >= allWordWritings.size() )
+        {
+          // No exact matches found
+          continue;
+        }
+        weight = ws;
+      }
       pair< ResultsIndex::iterator, bool > insertResult =
         resultsIndex.insert( pair< wstring, ResultsArray::iterator >( lowerCased,
                                                                       resultsArray.end() ) );
@@ -400,6 +451,7 @@ void WordFinder::updateResults()
       resultsArray.sort( SortByRank() );
     }
     else
+    if( searchType == StemmedMatch )
     {
       // Handling stemmed matches
 

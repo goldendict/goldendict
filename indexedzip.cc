@@ -7,6 +7,7 @@
 #include "gddebug.hh"
 #include "utf8.hh"
 #include "iconv.hh"
+#include "wstring_qt.hh"
 
 #include <QDebug>
 
@@ -122,7 +123,7 @@ bool IndexedZip::loadFile( uint32_t offset, vector< char > & data )
   }
 }
 
-bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
+bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 * filesCount )
 {
     if ( !zipIsOpen )
         return false;
@@ -131,7 +132,14 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
 
     // File seems to be a valid zip file
 
+
+    QTextCodec * localeCodec = QTextCodec::codecForLocale();
+
     ZipFile::CentralDirEntry entry;
+
+    bool alreadyCounted;
+    if( filesCount )
+      *filesCount = 0;
 
     while( ZipFile::readNextEntry( zip, entry ) )
     {
@@ -161,16 +169,20 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
           break;
       }
 
+      alreadyCounted = false;
+
       if ( !hasNonAscii )
       {
         // Add entry as is
 
         zipFileNames.addSingleWord( Utf8::decode( entry.fileName.data() ),
                                     entry.localHeaderOffset );
+        if( filesCount )
+          *filesCount += 1;
       }
       else
       {
-        // Try assuming different encodings. Those are UTF8 and two
+        // Try assuming different encodings. Those are UTF8, system locale and two
         // Russian ones (Windows and Windows OEM). Unfortunately, zip
         // files do not say which encoding they utilize.
 
@@ -181,38 +193,86 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames )
 
           zipFileNames.addSingleWord( decoded,
                                       entry.localHeaderOffset );
+          if( filesCount != 0 && !alreadyCounted )
+          {
+            *filesCount += 1;
+            alreadyCounted = true;
+          }
         }
         catch( Utf8::exCantDecode )
         {
           // Failed to decode
         }
 
-        // CP866
-        try
+        if( !entry.fileNameInUTF8 )
         {
-          wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
-                                              entry.fileName.size() );
+          wstring nameInSystemLocale;
 
-          zipFileNames.addSingleWord( decoded,
-                                      entry.localHeaderOffset );
-        }
-        catch( Iconv::Ex )
-        {
+          // System locale
+          if( localeCodec )
+          {
+            QString name = localeCodec->toUnicode( entry.fileName.constData(),
+                                                   entry.fileName.size() );
+            nameInSystemLocale = gd::toWString( name );
+            if( !nameInSystemLocale.empty() )
+            {
+              zipFileNames.addSingleWord( nameInSystemLocale,
+                                          entry.localHeaderOffset );
+
+              if( filesCount != 0 && !alreadyCounted )
+              {
+                *filesCount += 1;
+                alreadyCounted = true;
+              }
+            }
+          }
+
+
+          // CP866
+          try
+          {
+            wstring decoded = Iconv::toWstring( "CP866", entry.fileName.constData(),
+                                                entry.fileName.size() );
+
+            if( nameInSystemLocale.compare( decoded ) != 0 )
+            {
+              zipFileNames.addSingleWord( decoded,
+                                          entry.localHeaderOffset );
+
+              if( filesCount != 0 && !alreadyCounted )
+              {
+                *filesCount += 1;
+                alreadyCounted = true;
+              }
+            }
+          }
+          catch( Iconv::Ex )
+          {
+              // Failed to decode
+          }
+
+          // CP1251
+          try
+          {
+            wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
+                                                entry.fileName.size() );
+
+            if( nameInSystemLocale.compare( decoded ) != 0 )
+            {
+              zipFileNames.addSingleWord( decoded,
+                                          entry.localHeaderOffset );
+
+              if( filesCount != 0 && !alreadyCounted )
+              {
+                *filesCount += 1;
+                alreadyCounted = true;
+              }
+            }
+          }
+          catch( Iconv::Ex )
+          {
             // Failed to decode
-        }
-
-        // CP1251
-        try
-        {
-          wstring decoded = Iconv::toWstring( "CP1251", entry.fileName.constData(),
-                                              entry.fileName.size() );
-
-          zipFileNames.addSingleWord( decoded,
-                                      entry.localHeaderOffset );
-        }
-        catch( Iconv::Ex )
-        {
-          // Failed to decode
+          }
         }
       }
     }

@@ -5,13 +5,6 @@
 #include <zlib.h>
 #include <string.h>
 
-#ifdef _MSC_VER
-#include <stdint_msvc.h>
-#else
-#include <stdint.h>
-#endif
-
-
 namespace ChunkedStorage {
 
 enum

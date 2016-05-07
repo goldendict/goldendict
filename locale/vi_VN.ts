@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>Từ điển Vàng chương trình tra từ điển, phiên bản </translation>
+        <translation>Chương trình tra từ điển Từ điển Vàng, phiên bản </translation>
     </message>
     <message>
         <source>#.#</source>
@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>Credits:</source>
-        <translation></translation>
+        <translation>Công trạng:</translation>
     </message>
     <message>
         <source>[Unknown]</source>
@@ -29,11 +29,11 @@
     </message>
     <message>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bản quyền 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dựa trên Qt %1 (%2, %3 bit) </translation>
     </message>
 </context>
 <context>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Làm việc với popup&lt;/h3&gt;Để tra từ trong các ứng dụng đang hoạt động khác, trước tiên bạn cần kích hoạt &lt;i&gt;&quot;Chức năng popup quét&quot;&lt;/i&gt; trong &lt;b&gt;Tùy thích&lt;/b&gt;, sau đó bật lên bất cứ lúc nào bằng cách nhấn biểu tượng &apos;Popup&apos; , hay kích chuột phải vào biểu tượng trên khay hệ thống và chọn trong thực đơn hiện lên. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Làm việc với popup&lt;/h3&gt;Để tra từ trong các ứng dụng đang hoạt động khác, bạn cần kích hoạt &lt;i&gt;&quot;Chức năng quét popup&quot;&lt;/i&gt; trong &lt;b&gt;Tùy thích&lt;/b&gt;, sau đó bật lên bất cứ lúc nào bằng cách nhấn biểu tượng &apos;Popup&apos; , hay kích chuột phải vào biểu tượng trên khay hệ thống và chọn trong trình đơn hiện lên. </translation>
     </message>
     <message>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Sau đó chỉ cần chọn từ bạn muốn tra trong ứng dụng khác bởi con chuột (nhấp đúp chuột lên từ hay bôi đen nó bằng cách nhấn giữ chuột), và một cửa sổ sẽ bật ra để dịch nghĩa cho bạn.</translation>
+        <translation>Sau đó chỉ cần dùng chuột chọn từ bạn muốn tra trong ứng dụng khác (nhấp đúp chuột lên từ hay nhấn giữ chuột bôi đen), và một cửa sổ sẽ bật ra để dịch nghĩa cho bạn.</translation>
     </message>
     <message>
         <source>(untitled)</source>
@@ -72,19 +72,19 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, trước tiên hãy ghé thăm &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; sau đó thêm một vài đường dẫn chứa từ điển để tìm kiếm các tập tin từ điển, cài đặt thêm các trang Wikipedia hay các nguồn khác, sắp xếp từ điển hay tạo các nhóm từ điển.&lt;p&gt;Và cuối cùng bạn đã sẵn sàng để tra từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô ở bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt;tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau ở &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc xem những người khác đang nghĩ gì, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;forum&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;website&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Cấp phép theo GPLv3 hoặc mới hơn.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Chào mừng đến với &lt;b&gt;Từ điển Vàng&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Để bắt đầu làm việc với chương trình, hãy mở &lt;b&gt;Biên tập|Từ điển&lt;/b&gt; để thêm đường dẫn chứa các tệp từ điển, thiết lập các trang Wikipedia và các nguồn khác, sắp xếp hay tạo các nhóm từ điển.&lt;p&gt;Bạn đã sẵn sàng tra nghĩa của từ rồi đấy! Bạn có thể tra trong cửa sổ này bằng cách sử dụng ô bên trái, hoặc bạn có thể &lt;a href=&quot;Working with popup&quot;&gt;tra từ trong các ứng dụng khác&lt;/a&gt;. &lt;p&gt;Để tùy chỉnh chương trình, hãy thử các tùy chọn khác nhau trong &lt;b&gt;Biên tập|Tùy thích&lt;/b&gt;. Tất cả các cài đặt đều có các mẹo hiện lên, hãy đọc chúng nếu bạn đang phân vân về một chức năng nào đó.&lt;p&gt;Nếu như bạn cần thêm giúp đỡ, có một vài câu hỏi, gợi ý hay chỉ là thắc mắc xem những người khác đang nghĩ gì, bạn đều được chào mừng đến với &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diễn đàn&lt;/a&gt; của chương trình.&lt;p&gt;Hãy kiểm tra &lt;a href=&quot;http://goldendict.org/&quot;&gt;trang chủ&lt;/a&gt; của chương trình để cập nhật nếu muốn. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Cấp phép theo GPLv3 hoặc mới hơn.</translation>
     </message>
     <message>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(hình ảnh)</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở rộng bài viết</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Thu gọn bài viết</translation>
     </message>
 </context>
 <context>
@@ -111,11 +111,11 @@
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở rộng bài viết</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Thu gọn bài viết</translation>
     </message>
 </context>
 <context>
@@ -126,11 +126,11 @@
     </message>
     <message>
         <source>about:blank</source>
-        <translation></translation>
+        <translation>about:blank</translation>
     </message>
     <message>
         <source>x</source>
-        <translation></translation>
+        <translation>x</translation>
     </message>
     <message>
         <source>Find:</source>
@@ -146,7 +146,7 @@
     </message>
     <message>
         <source>Ctrl+G</source>
-        <translation></translation>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
@@ -158,11 +158,11 @@
     </message>
     <message>
         <source>The referenced resource doesn&apos;t exist.</source>
-        <translation>Nguồn đã tham chiếu không tồn tại.</translation>
+        <translation>Nguồn tham chiếu không tồn tại.</translation>
     </message>
     <message>
         <source>&amp;Open Link</source>
-        <translation>Mở &amp;liên kết</translation>
+        <translation>Mở &amp;Liên kết</translation>
     </message>
     <message>
         <source>Open Link in New &amp;Tab</source>
@@ -170,7 +170,7 @@
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Mở liên kết trong &amp;Trình duyệt ngoài</translation>
+        <translation>Mở liên kết trong &amp;Trình duyệt</translation>
     </message>
     <message>
         <source>&amp;Look up &quot;%1&quot;</source>
@@ -190,138 +190,189 @@
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Chạy một trình chơi nhạc để chơi tập tin âm thanh: %1 thất bại</translation>
+        <translation>Lỗi chạy trình chơi nhạc khi chơi tệp âm thanh: %1</translation>
     </message>
     <message>
         <source>Failed to create temporary file.</source>
-        <translation>Tạo tập tin tạm thất bại.</translation>
+        <translation>Lỗi tạo tệp tạm.</translation>
     </message>
     <message>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>Tự động mở tập tin nguồn thất bại, thử mở thủ công: %1.</translation>
+        <translation>Lỗi tự động mở tệp nguồn, thử mở thủ công: %1.</translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation>Tải xuống nguồn được tham chiếu thất bại.</translation>
+        <translation>Nguồn tham chiếu lỗi tải xuống.</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Chơi một tập tin không phải WAV</translation>
+        <translation type="obsolete">Chơi một tệp không phải WAV</translation>
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Để bật khả năng chơi các tập tin không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
+        <translation type="obsolete">Để bật khả năng chơi các tệp không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tô &amp;sáng từ cần tìm</translation>
     </message>
     <message>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Nguồn</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Âm thanh</translation>
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Định nghĩa: %1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chương trình âm thanh tham chiếu không có.</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">CẢNH BÁO: %1</translation>
+        <translation>CẢNH BÁO: %1</translation>
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Thêm &quot;%1&quot; vào lược sử</translation>
     </message>
     <message>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Định nghĩa trong từ điển &quot;%1&quot;: %2</translation>
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Gửi &quot;%1&quot; đến dòng đầu vào</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Hình ảnh</translation>
     </message>
     <message>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Chọn bài viết hiện tại</translation>
     </message>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>LỖI: %1</translation>
     </message>
     <message>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu âm thanh</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Các tệp âm thanh  (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tất cả tệp (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu hình ảnh</translation>
     </message>
     <message>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Các tệp hình ảnh (*.bmp *.jpg *.png *.tif);;Tất cả tệp (*.*)</translation>
     </message>
     <message>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu &amp;hình ảnh...</translation>
     </message>
     <message>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu â&amp;m thanh...</translation>
     </message>
     <message>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Giọng nói TTS</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>CẢNH BÁO: Trình chơi âm thanh FFmpeg: %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Chỉ sao chữ</translation>
     </message>
     <message>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspect</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chuyển tự sang chữ Belarus từ ký tự Latin sang ký tự Kirin (kiểu chính tả cổ điển)</translation>
     </message>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chuyển tự sang chữ Belarus từ ký tự Latin sang ký tự Kirin (kiểu chính tả chính thức)</translation>
     </message>
     <message>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
+        <translation>Chuyển tự sang chữ Belarus (pha trộn giữa kiểu chính tả cổ điển và chính thức trong ký tự Kirin)</translation>
+    </message>
+</context>
+<context>
+    <name>ChineseConversion</name>
+    <message>
+        <source>GroupBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion between simplified and traditional Chinese characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chinese Con&amp;version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC to TC (Taiwan variant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SC to TC (Hong Kong variant)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable conversion from traditional characters to simplified characters</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TC to SC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Traditional to simplified Chinese conversion</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -329,19 +380,19 @@ between classic and school orthography in cyrillic)</source>
     <name>Dialog</name>
     <message>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Yêu cầu xác thực proxy</translation>
     </message>
     <message>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Cung cấp Tài khoản và Mật khẩu truy cập proxy</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tài khoản:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Mật khẩu:</translation>
+        <translation>Mật khẩu:</translation>
     </message>
 </context>
 <context>
@@ -364,11 +415,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>From file...</source>
-        <translation>Từ tập tin...</translation>
+        <translation>Từ tệp...</translation>
     </message>
     <message>
         <source>Choose a file to use as group icon</source>
-        <translation>Chọn tập tin để sử dụng làm biểu tượng nhóm</translation>
+        <translation>Chọn tệp để sử dụng làm biểu tượng nhóm</translation>
     </message>
     <message>
         <source>Images</source>
@@ -376,7 +427,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>All files</source>
-        <translation>Tất cả tập tin</translation>
+        <translation>Tất cả tệp</translation>
     </message>
     <message>
         <source>Error</source>
@@ -384,7 +435,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Can&apos;t read the specified image file.</source>
-        <translation>Không thể đọc tập tin ảnh được chỉ định.</translation>
+        <translation>Không thể đọc tệp ảnh được chỉ định.</translation>
     </message>
 </context>
 <context>
@@ -395,170 +446,172 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>Bạn có chắc chắn muốn tạo một bộ các nhóm dựa trên các cặp ngôn ngữ?</translation>
+        <translation>Bạn có muốn tạo một bộ các nhóm dựa trên các cặp ngôn ngữ?</translation>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Từ điển:</translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kết hợp nhóm theo ngôn ngữ nguồn &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kết hợp nhóm theo ngôn ngữ đích &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tạo nhóm dịch song ngữ &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kết hợp nhóm với &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Không xác định</translation>
     </message>
 </context>
 <context>
     <name>DictHeadwords</name>
     <message>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiểu tìm kiếm</translation>
     </message>
     <message>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Xác định cách thức chuỗi bộ lọc sẽ được thể hiện</translation>
     </message>
     <message>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Phân biệt hoa thường khi lọc</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Khớp hoa thường</translation>
     </message>
     <message>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Trích xuất danh sách từ ra tệp</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Trích xuất</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Áp dụng kiểu lọc danh sách từ</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Áp dụng</translation>
     </message>
     <message>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Bộ lọc sẽ được áp dụng ngay vào danh sách từ</translation>
     </message>
     <message>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Tự động áp dụng</translation>
     </message>
     <message>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bộ lọc:</translation>
     </message>
     <message>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>wildcard hoặc regular expression</translatorcomment>
+        <translation>Chuỗi bộ lọc (chuỗi cố định, ký tự đại diện hoặc biểu thức chính quy)</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Chữ</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Wildcard</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tổng danh sách từ: %1, đã lọc: %2</translation>
     </message>
     <message>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu danh sách từ vào tệp</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Các tệp văn bản (*.txt);;Tất cả tệp (*.*)</translation>
     </message>
     <message>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Trích xuất danh sách từ...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Hủy bỏ</translation>
+        <translation>Hủy bỏ</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Trợ giúp</translation>
     </message>
 </context>
 <context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation type="unfinished">Tổng số bài viết:</translation>
+        <translation>Tổng số bài viết:</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation type="unfinished">Dịch từ:</translation>
+        <translation>Dịch từ:</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation type="unfinished">Tổng số từ:</translation>
+        <translation>Tổng số từ:</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation type="unfinished">Dịch sang:</translation>
+        <translation>Dịch sang:</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Tập tin chứa từ điển này:</translation>
+        <translation>Tệp chứa từ điển này:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mô tả:</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở thư mục</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Chỉnh sửa từ điển</translation>
     </message>
     <message>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Chỉnh sửa từ điển với lệnh:
+%1</translation>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện tất cả danh sách từ của từ điển</translation>
     </message>
     <message>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Danh sách từ</translation>
     </message>
 </context>
 <context>
@@ -572,52 +625,59 @@ between classic and school orthography in cyrillic)</source>
     <name>DictServer</name>
     <message>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Địa chỉ: </translation>
     </message>
     <message>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Cơ sở dữ liệu: </translation>
     </message>
     <message>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Cách tìm kiếm: </translation>
+    </message>
+    <message>
+        <source>Server databases</source>
+        <translation>Máy chủ cơ sở dữ liệu</translation>
     </message>
 </context>
 <context>
     <name>DictServersModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Bật</translation>
+        <translation>Bật</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Tên</translation>
+        <translation>Tên</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished">Địa chỉ</translation>
+        <translation>Địa chỉ</translation>
     </message>
     <message>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Cơ sở dữ liệu</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biểu tượng</translation>
     </message>
     <message>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ngăn cách cơ sở dữ liệu bằng dấu phẩy
+(để trống hoặc &quot;*&quot; khớp mọi cơ sở dữ liệu)</translation>
     </message>
     <message>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Cách thức</translation>
     </message>
     <message>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>prefix</translatorcomment>
+        <translation>Ngăn cách các cách thức tìm kiếm bằng dấu phẩy
+(để trống nghĩa là tìm theo &quot;tiền tố&quot;)</translation>
     </message>
 </context>
 <context>
@@ -632,27 +692,27 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Thông tin từ điển</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sửa đổi từ điển</translation>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Thanh Từ đ&amp;iển</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở thư mục từ điển</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở trình đơn với tất cả từ điển...</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Danh sách từ của từ điển</translation>
     </message>
 </context>
 <context>
@@ -694,83 +754,87 @@ between classic and school orthography in cyrillic)</source>
     <name>ExternalViewer</name>
     <message>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>tên chương xem đang trống</translation>
     </message>
 </context>
 <context>
     <name>FTS::FtsIndexing</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">Không</translation>
+        <translation type="obsolete">Không</translation>
     </message>
 </context>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm toàn văn</translation>
     </message>
     <message>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Toàn bộ từ</translation>
     </message>
     <message>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Văn bản thuần</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Ký tự đại diện</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Khoảng cách tối đa giữa các từ (%1-%2):</translation>
     </message>
     <message>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Số bài viết tối đa trên một từ điển (%1-%2):</translation>
     </message>
     <message>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Số bài viết tìm thấy: </translation>
     </message>
     <message>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Đang chỉ mục: </translation>
     </message>
     <message>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>Dòng tìm kiếm phải chứa tối thiểu một từ có nhiều hơn </translation>
     </message>
     <message>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> ký tự</translation>
     </message>
     <message>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Không có từ điển để tìm toàn văn</translation>
     </message>
     <message>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ký tự CJK trong chuỗi tìm không tương thích với kiểu tìm &quot;Toàn từ&quot; và &quot;Văn bản thuần&quot;</translation>
     </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
     <message>
         <source>None</source>
         <translation type="unfinished">Không</translation>
     </message>
 </context>
 <context>
+    <name>FTS::Indexing</name>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Không</translation>
+    </message>
+</context>
+<context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation>Lỗi phân tích XML: %1 ở %2,%3</translation>
+        <translation>Lỗi phân tích XML: %1 tại %2,%3</translation>
     </message>
     <message>
         <source>Added %1</source>
@@ -794,54 +858,54 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Hãy vào Biên tập|Từ điển|Nguồn|Forvo và nhập khóa API của riêng bạn để tắt lỗi này đi.</translation>
+        <translation>Hãy vào Biên tập|Từ điển|Nguồn|Forvo và nhập khóa API riêng để tắt lỗi này.</translation>
     </message>
 </context>
 <context>
     <name>FullTextSearchDialog</name>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Khớp hoa thường</translation>
     </message>
     <message>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiểu:</translation>
     </message>
     <message>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Số bài viết tìm thấy:</translation>
     </message>
     <message>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Từ điển có trong nhóm:</translation>
     </message>
     <message>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Chờ chỉ mục:</translation>
     </message>
     <message>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tổng:</translation>
     </message>
     <message>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Đã chỉ mục:</translation>
     </message>
     <message>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Đang chỉ mục: Không</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Hủy bỏ</translation>
+        <translation>Hủy bỏ</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Trợ giúp</translation>
     </message>
 </context>
 <context>
@@ -880,11 +944,11 @@ between classic and school orthography in cyrillic)</source>
     <name>Groups</name>
     <message>
         <source>Dictionaries available:</source>
-        <translation>Các từ điển có sẵn:</translation>
+        <translation>Các từ điển đã có:</translation>
     </message>
     <message>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>Thêm những từ điển đã chọn vào nhóm (Chèn)</translation>
+        <translation>Thêm những từ điển đã chọn vào nhóm (Ins)</translation>
     </message>
     <message>
         <source>&gt;</source>
@@ -892,11 +956,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ins</source>
-        <translation>Chèn</translation>
+        <translation>Ins</translation>
     </message>
     <message>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>Xóa những từ điển đã chọn ra khỏi nhóm (Xóa)</translation>
+        <translation>Xóa những từ điển đã chọn ra khỏi nhóm (Del)</translation>
     </message>
     <message>
         <source>&lt;</source>
@@ -904,11 +968,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Del</source>
-        <translation>Xóa</translation>
+        <translation>Del</translation>
     </message>
     <message>
         <source>Groups:</source>
-        <translation>Các nhóm:</translation>
+        <translation>Nhóm:</translation>
     </message>
     <message>
         <source>Tab 2</source>
@@ -948,7 +1012,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Kéo &amp;Thả các từ điển tới và từ các nhóm, di chuyển chúng vào trong các nhóm, sắp sếp lại các nhóm sử dụng con chuột của bạn.</translation>
+        <translation>Sử dụng chuột kéo &amp; thả các từ điển vào nhóm, khỏi nhóm và sắp sếp thứ tự trong nhóm.</translation>
     </message>
     <message>
         <source>Add group</source>
@@ -972,11 +1036,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>Bạn có chắc chắn muốn xóa nhóm &lt;b&gt;%1&lt;/b&gt;?</translation>
+        <translation>Bạn có muốn xóa nhóm &lt;b&gt;%1&lt;/b&gt;?</translation>
     </message>
     <message>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>Bạn có chắc chắn muốn xóa hết các nhóm?</translation>
+        <translation>Bạn có muốn xóa hết các nhóm?</translation>
     </message>
     <message>
         <source>Create language-based groups</source>
@@ -984,77 +1048,77 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Auto groups</source>
-        <translation>Các nhóm tự động</translation>
+        <translation>Tự động nhóm</translation>
     </message>
     <message>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ nhóm</translation>
     </message>
     <message>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở danh sách nhóm</translation>
     </message>
 </context>
 <context>
     <name>Help::HelpWindow</name>
     <message>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>Trợ giúp Từ điển Vàng</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Trang chủ</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Trở lại</translation>
+        <translation>Trở lại</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Tiếp tục</translation>
+        <translation>Tiếp tục</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished">Phóng to</translation>
+        <translation>Phóng to</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished">Thu nhỏ</translation>
+        <translation>Thu nhỏ</translation>
     </message>
     <message>
         <source>Normal Size</source>
-        <translation type="unfinished">Kích thước bình thường</translation>
+        <translation>Kích thước bình thường</translation>
     </message>
     <message>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Nội dung</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Chỉ mục</translation>
     </message>
 </context>
 <context>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Xoá</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Sao chép</translation>
     </message>
     <message>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lược sử:</translation>
     </message>
     <message>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Số lược sử: %1 mục trên tối đa %2</translation>
     </message>
 </context>
 <context>
@@ -1065,7 +1129,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>%1 Morphology</source>
-        <translation>%1 Hình thái học</translation>
+        <translation>Hình thái học %1</translation>
     </message>
 </context>
 <context>
@@ -1802,7 +1866,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Vietnamese</source>
-        <translation></translation>
+        <translation>Tiếng Việt</translation>
     </message>
     <message>
         <source>Volapuk</source>
@@ -1842,81 +1906,81 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Khác</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>LoadDictionaries</name>
     <message>
         <source>Error loading dictionaries</source>
-        <translation>Lỗi khi tải từ điển</translation>
+        <translation>Lỗi nạp từ điển</translation>
     </message>
 </context>
 <context>
     <name>Main</name>
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tệp cấu hình lỗi. Tiếp tục với thiết lập mặc định?</translation>
     </message>
 </context>
 <context>
@@ -1931,7 +1995,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Tập tin</translation>
+        <translation>&amp;Tệp</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -1951,7 +2015,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>H&amp;istory</source>
-        <translation>&amp;Lịch sử</translation>
+        <translation>&amp;Lược sử</translation>
     </message>
     <message>
         <source>Search Pane</source>
@@ -1963,7 +2027,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>&amp;Groups...</source>
@@ -2003,11 +2067,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+Q</source>
-        <translation></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <source>&amp;Forum</source>
-        <translation></translation>
+        <translation>&amp;Diễn đàn</translation>
     </message>
     <message>
         <source>&amp;Close To Tray</source>
@@ -2015,11 +2079,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Minimizes the window to tray</source>
-        <translation>Ẩn cửa sổ xuống khay hệ thống</translation>
+        <translation>Thu gọn cửa sổ xuống khay hệ thống</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
-        <translation></translation>
+        <translation>Ctrl+F4</translation>
     </message>
     <message>
         <source>&amp;Save Article</source>
@@ -2027,11 +2091,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Save Article</source>
-        <translation>Lưu bài viết</translation>
+        <translation>Lưu Bài viết</translation>
     </message>
     <message>
         <source>F2</source>
-        <translation></translation>
+        <translation>F2</translation>
     </message>
     <message>
         <source>&amp;Print</source>
@@ -2039,11 +2103,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+P</source>
-        <translation></translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <source>Page Set&amp;up</source>
-        <translation>&amp;Cài đặt Trang</translation>
+        <translation>&amp;Thiết lập Trang</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2051,11 +2115,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Rescan Files</source>
-        <translation type="obsolete">Quét lại các tập tin</translation>
+        <translation type="obsolete">Quét lại các tệp</translation>
     </message>
     <message>
         <source>Ctrl+F5</source>
-        <translation></translation>
+        <translation>Ctrl+F5</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
@@ -2083,11 +2147,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Scan Popup</source>
-        <translation>Popup Quét</translation>
+        <translation>Quét Popup</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Phát âm từ (Alt+S)</translation>
+        <translation>Phát âm (Alt+S)</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -2099,19 +2163,19 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Normal Size</source>
-        <translation>Kích thước bình thường</translation>
+        <translation>Cỡ bình thường</translation>
     </message>
     <message>
         <source>Words Zoom In</source>
-        <translation>Phóng to từ</translation>
+        <translation>Phóng to Từ</translation>
     </message>
     <message>
         <source>Words Zoom Out</source>
-        <translation>Thu nhỏ từ</translation>
+        <translation>Thu nhỏ Từ</translation>
     </message>
     <message>
         <source>Words Normal Size</source>
-        <translation>Kích thước bình thường của từ</translation>
+        <translation>Cỡ Từ bình thường</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -2143,7 +2207,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Khởi chạy cơ chế quản lý phím nóng thất bại. &lt;br&gt;Hãy chắc rằng XServer của bạn đã bật phần mở rộng RECORD.</translation>
+        <translation>Lỗi khởi chạy cơ chế quản lý phím tắt. &lt;br&gt;Hãy kiểm tra XServer đã bật phần mở rộng RECORD.</translation>
     </message>
     <message>
         <source>New Release Available</source>
@@ -2167,7 +2231,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Page Setup</source>
-        <translation>Cài đặt trang</translation>
+        <translation>Thiết lập Trang</translation>
     </message>
     <message>
         <source>No printer is available. Please install one first.</source>
@@ -2175,15 +2239,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Print Article</source>
-        <translation>In bài viết</translation>
+        <translation>In Bài viết</translation>
     </message>
     <message>
         <source>Save Article As</source>
-        <translation>Lưu bài viết như</translation>
+        <translation>Lưu Bài viết như</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Tập tin Html (*.html *.htm)</translation>
+        <translation type="obsolete">Tệp Html (*.html *.htm)</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2191,7 +2255,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Can&apos;t save article: %1</source>
-        <translation>Không thể lưu bài viết: %1</translation>
+        <translation>Không thể lưu Bài viết: %1</translation>
     </message>
     <message>
         <source>Close current tab</source>
@@ -2203,7 +2267,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation>Đóng hết thẻ trừ thẻ hiện tại</translation>
+        <translation>Đóng tất cả thẻ trừ thẻ hiện tại</translation>
     </message>
     <message>
         <source>Opened tabs</source>
@@ -2211,207 +2275,212 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ mới</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Thư mục &amp;cấu hình</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Thanh Trì&amp;nh đơn</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Từ điển tìm thấy:</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở danh sách Thẻ</translation>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bạn đã chọn ẩn thanh trình đơn. Dùng %1 để hiển thị lại.</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hiện</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Xuất</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>Ẩ&amp;n</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Xuất lược sử sang tệp</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tệp văn bản (*.txt);;Tất cả tệp (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoàn tất xuất lược sử</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi trích xuất: </translation>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Nhậ&amp;p</translation>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nhập lược sử từ tệp</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi nhập: dữ liệu tệp không đúng</translation>
     </message>
     <message>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoàn tất nhập lược sử</translation>
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi nhập: </translation>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Thông tin từ điển</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Chỉnh sửa từ điển</translation>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Ô Tìm &amp;kiếm</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Ô Điều hướng Kết &amp;quả</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>X&amp;em trước khi In</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Q&amp;uét lại các tệp</translation>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Thẻ &amp;mới</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Luôn hiện</translation>
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Luôn hiện</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Nút Trình đơn</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện tên từ điển trên Thanh &amp;Từ điển</translation>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện &amp;biểu tượng nhỏ trên Thanh công cụ</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Điều hướn&amp;g</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cửa sổ chính luôn hiện trên các trình khác.</translation>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Thanh Lược &amp;sử</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>API Khả năng truy cập không được bật</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bài viết, Toàn bộ (*.html)</translation>
     </message>
     <message>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bài viết, chỉ HTML (*.html)</translation>
     </message>
     <message>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu bài viết...</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở thư mục từ điển</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Danh sách từ của từ điển</translation>
     </message>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Chuỗi tìm trong từ điển. Ký tự đại diện &apos;*&apos;, &apos;?&apos; và bộ ký tự &apos;[...] được sử dụng.
+Để tìm &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; dùng tách riêng &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos;</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm kiếm</translation>
     </message>
     <message>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm trong trang</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm toàn văn</translation>
     </message>
     <message>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <source>GoldenDict reference</source>
+        <translation>Trợ giúp Từ điển Vàng</translation>
+    </message>
+    <message>
+        <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2419,11 +2488,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <name>Mdx::MdxArticleRequest</name>
     <message>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Tệp từ điển đã bị xáo trộn hoặc hỏng</translation>
     </message>
     <message>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi nạp bài viết từ %1, nguyên nhân: %2</translation>
     </message>
 </context>
 <context>
@@ -2456,7 +2525,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biểu tượng</translation>
     </message>
 </context>
 <context>
@@ -2471,7 +2540,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Các từ điển không hoạt động (đã tắt):</translation>
+        <translation>Các từ điển không hoạt động (đã vô hiệu hoá):</translation>
     </message>
     <message>
         <source>Dictionary information</source>
@@ -2499,31 +2568,31 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation>Tập tin chứa từ điển này:</translation>
+        <translation>Tệp chứa từ điển này:</translation>
     </message>
     <message>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Tùy chỉnh thứ tự bằng cách kéo và thả các mục trong nó. Thả các từ điển vào nhóm không hoạt động để tắt chúng.</translation>
+        <translation>Điều chỉnh thứ tự bằng cách kéo và thả các từ điển để di chuyển vị trí. Thả vào ô không hoạt động để vô hiệu hoá từ điển.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mô tả:</translation>
     </message>
     <message>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sắp xếp theo tên</translation>
     </message>
     <message>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Sắp xếp theo ngôn ngữ</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Danh sách từ của từ điển</translation>
     </message>
     <message>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Từ điển hoạt động:%1, không hoạt động: %2</translation>
     </message>
 </context>
 <context>
@@ -2555,7 +2624,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Thông thường, bạn sẽ chuyển sang thẻ mới ngay khi nó
+        <translation>Mặc định, bạn sẽ chuyển sang thẻ mới ngay khi nó
 được mở. Với tùy chọn này, các thẻ mới sẽ được mở mà
 không cần chuyển ngay sang chúng.</translation>
     </message>
@@ -2578,7 +2647,7 @@ thêm vào sau cùng.</translation>
     <message>
         <source>When enabled, an icon appears in the sytem tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Khi bật, một biểu tượng sẽ hiện trên khay hệ thống dùng để mở cửa sổ chính
+        <translation>Biểu tượng Từ điển Vàng sẽ hiện trên khay hệ thống dùng để mở cửa sổ chính
 và thực hiện một số tác vụ khác.</translation>
     </message>
     <message>
@@ -2588,8 +2657,7 @@ và thực hiện một số tác vụ khác.</translation>
     <message>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Nếu bật tùy chọn này, ứng dụng sẽ khởi động thẳng xuống khay hệ thống
-mà không hiện cửa sổ chính.</translation>
+        <translation>Khi khởi chạy, ứng dụng sẽ thu gọn xuống khay hệ thống mà không hiện cửa sổ chính.</translation>
     </message>
     <message>
         <source>Start to system tray</source>
@@ -2598,11 +2666,11 @@ mà không hiện cửa sổ chính.</translation>
     <message>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>Nếu bật tùy chọn này, khi tắt cửa sổ chính thì ứng dụng sẽ ẩn thay cho đóng hoàn toàn.</translation>
+        <translation>Ứng dụng sẽ thu gọn xuống khay hệ thống khi đóng cửa sổ chính.</translation>
     </message>
     <message>
         <source>Close to system tray</source>
-        <translation>Tắt xuống khay hệ thống</translation>
+        <translation>Đóng xuống khay hệ thống</translation>
     </message>
     <message>
         <source>Startup</source>
@@ -2630,7 +2698,7 @@ the application.</source>
     </message>
     <message>
         <source>&amp;Scan Popup</source>
-        <translation>Popup &amp;Quét</translation>
+        <translation>&amp;Quét Popup</translation>
     </message>
     <message>
         <source>When enabled, a translation popup window would be shown each time
@@ -2644,31 +2712,30 @@ chính hay biểu tượng trên khay hệ thống.</translation>
     </message>
     <message>
         <source>Enable scan popup functionality</source>
-        <translation>Kích hoạt chức năng popup quét</translation>
+        <translation>Kích hoạt chức năng quét popup</translation>
     </message>
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Lựa chọn chế độ popup quét được bật theo mặc định hoặc không. Nếu được chọn,
-chương trình sẽ luôn luôn khởi động với popup quét được bật.</translation>
+        <translation>Chọn bật chế độ quét popup mặc định. Nếu chọn, chương trình sẽ khởi động
+với tính năng quét popup được bật.</translation>
     </message>
     <message>
         <source>Start with scan popup turned on</source>
-        <translation>Khởi động với popup quét được bật</translation>
+        <translation>Khởi động với quét popup được bật</translation>
     </message>
     <message>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Với tùy chọn này được bật, popup sẽ chỉ hiện ra khi tất cả các phím đã
-chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</translation>
+        <translation>Khi chọn từ cần tra nghĩa, nhấn phím tắt đã chọn để hiện popup.</translation>
     </message>
     <message>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Chỉ hiện popup khi tất cả các phím đã chọn được nhấn giữ:</translation>
+        <translation>Chỉ hiện popup khi nhấn giữ phím tắt:</translation>
     </message>
     <message>
         <source>Left Ctrl only</source>
-        <translation>Chỉ Ctrl trái</translation>
+        <translation>Phím Ctrl trái</translation>
     </message>
     <message>
         <source>Left Ctrl</source>
@@ -2676,7 +2743,7 @@ chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</transla
     </message>
     <message>
         <source>Right Shift only</source>
-        <translation>Chỉ Shift phải</translation>
+        <translation>Phím Shift phải</translation>
     </message>
     <message>
         <source>Right Shift</source>
@@ -2700,7 +2767,7 @@ chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</transla
     </message>
     <message>
         <source>Left Alt only</source>
-        <translation>Chỉ Alt trái</translation>
+        <translation>Phím Alt trái</translation>
     </message>
     <message>
         <source>Left Alt</source>
@@ -2716,7 +2783,7 @@ chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</transla
     </message>
     <message>
         <source>Right Alt only</source>
-        <translation>Chỉ Alt phải</translation>
+        <translation>Phím Alt phải</translation>
     </message>
     <message>
         <source>Right Alt</source>
@@ -2724,7 +2791,7 @@ chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</transla
     </message>
     <message>
         <source>Right Ctrl only</source>
-        <translation>Chỉ Ctrl phải</translation>
+        <translation>Phím Ctrl phải</translation>
     </message>
     <message>
         <source>Right Ctrl</source>
@@ -2732,7 +2799,7 @@ chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</transla
     </message>
     <message>
         <source>Left Shift only</source>
-        <translation>Chỉ Shift trái</translation>
+        <translation>Phím Shift trái</translation>
     </message>
     <message>
         <source>Left Shift</source>
@@ -2744,29 +2811,28 @@ chọn ở trạng thái nhấn khi sự lựa chọn từ thay đổi.</transla
     </message>
     <message>
         <source>Win/Meta</source>
-        <translation></translation>
+        <translation>Win/Meta</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation>Thông thường, để kích hoạt một popup bạn phải nhấn
-giữ phím được chọn khi bạn chọn từ. Nếu bật tùy chọn
-này, những phím được chọn cũng có thể được nhấn trong
-khoảng thời gian ngắn sau khi lựa chọn xong để bật popup.</translation>
+        <translation>Mặc định, để bật popup bạn phải nhấn giữ phím tắt
+khi bạn chọn từ cần tra. Tùy chọn này xác định thời
+gian phím tắt được nhấn sau khi chọn từ để bật popup.</translation>
     </message>
     <message>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation>Các phím cũng có thể được ấn sau, trong khoảng</translation>
+        <translation>Phím tắt có thể được nhấn sau khi chọn từ</translation>
     </message>
     <message>
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Để tránh xác định nhầm, chương trình chỉ bắt phím
-sau khi lựa chọn xong trong khoảng giới hạn một vài
-giây được xác định ở đây.</translation>
+        <translation>Để tránh xác định nhầm, phím tắt chỉ được giám sát
+sau khi chọn từ hoàn tất trong vài giây giới hạn được
+xác định ở đây.</translation>
     </message>
     <message>
         <source>secs</source>
@@ -2774,19 +2840,19 @@ giây được xác định ở đây.</translation>
     </message>
     <message>
         <source>Hotkeys</source>
-        <translation>Phím nóng</translation>
+        <translation>Phím tắt</translation>
     </message>
     <message>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>Sử dụng phím nóng sau đây để hiện hay ẩn cửa sổ chính:</translation>
+        <translation>Sử dụng phím tắt sau đây để ẩn hiện cửa sổ chính:</translation>
     </message>
     <message>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>Sử dụng phím nóng sau đây để dịch từ clipboard:</translation>
+        <translation>Sử dụng phím tắt sau đây để dịch từ clipboard:</translation>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>Phím nóng hoạt động trên toàn bộ hệ thống và làm việc trên bất kỳ chương trình nào hay bên trong bất kỳ  phạm vi nào miễn là khi Từ điển Vàng đang chạy nền.</translation>
+        <translation>Phím tắt hoạt động toàn cục từ bất kỳ chương trình nào hay trong ngữ cảnh nào khi Từ điển Vàng đang chạy nền.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2798,7 +2864,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Chú ý: Có vẻ như bạn đang chạy một phiên bản X.Org X.Server có phần mở rộng RECORD bị lỗi. Phím nóng trong Từ điển Vàng có thể không hoạt động được. Điều này phải được sửa bên trong server. Hãy ghé thăm &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;mục bug&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; và để lại một phản hồi nếu bạn muốn.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Chú ý: Có vẻ như bạn đang chạy một phiên bản X.Org X.Server có phần mở rộng RECORD bị lỗi. phím tắt trong Từ điển Vàng có thể không hoạt động được. Điều này phải được sửa bên trong server. Hãy ghé thăm &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;mục bug&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; và để lại một phản hồi nếu bạn muốn.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&amp;Audio</source>
@@ -2810,11 +2876,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto-pronounce words in main window</source>
-        <translation>Tự động phát âm từ trong cửa sổ chính</translation>
+        <translation>Tự động phát âm trong cửa sổ chính</translation>
     </message>
     <message>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Tự động phát âm từ trong popup quét</translation>
+        <translation>Tự động phát âm trong quét popup</translation>
     </message>
     <message>
         <source>Playback</source>
@@ -2866,13 +2932,13 @@ cho tất cả các yêu cầu mạng của chương trình.</translation>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Bật tùy chọn này sẽ khiến Từ điển Vàng chặn hầu hết các quảng cáo
-bằng cách không cho phép nội dung (ảnh, khung) không bắt nguồn từ trang
-bạn đang xem. Nếu một vài trang bị lỗi bởi tùy chọn này, hãy thử tắt đi.</translation>
+        <translation>Với tùy chọn này, Từ điển Vàng sẽ chặn các quảng cáo bằng cách
+ không cho phép nội dung (ảnh, khung) không bắt nguồn từ trang
+đang xem. Nếu một vài trang bị lỗi bởi tùy chọn này, hãy thử tắt đi.</translation>
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>Không cho phép tải nội dung từ các trang khác (tắt hầu hết các quảng cáo)</translation>
+        <translation>Không cho phép tải nội dung từ các trang khác (tắt các quảng cáo)</translation>
     </message>
     <message>
         <source>When this is enabled, the program periodically
@@ -2880,10 +2946,8 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>Khi bật tùy chọn này, chương trình sẽ kiểm tra định kỳ
-các phiên bản mới cập nhật đã sẵn sàng để tải về hay
-chưa. Nếu có, chương trình sẽ báo cho người dùng biết
-và gợi ý mở trang tải về.</translation>
+        <translation>Chương trình sẽ kiểm tra định kỳ phiên bản cập nhật mới.
+ Nếu có, chương trình sẽ thông báo và gợi ý mở trang tải về.</translation>
     </message>
     <message>
         <source>Check for new program releases periodically</source>
@@ -2916,7 +2980,7 @@ và gợi ý mở trang tải về.</translation>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="obsolete">Sử dụng API phát lại của Windows. Giới hạn chỉ cho các tập tin .wav,
+        <translation type="obsolete">Sử dụng API phát lại của Windows. Giới hạn chỉ cho các tệp .wav,
 nhưng hoạt động rất tốt.</translation>
     </message>
     <message>
@@ -2931,411 +2995,421 @@ nhưng hỗ trợ nhiều định dạng âm thanh nhất.</translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
-        <translation>Sử dụng bất cứ chương trình ngoài nào để phát tập tin âm thanh</translation>
+        <translation>Sử dụng bất cứ chương trình ngoài nào để phát tệp âm thanh</translation>
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ẩn thẻ trên thanh thẻ chính nếu chỉ duy nhất một thẻ được mở.</translation>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Ẩn thẻ đơn nhất</translation>
     </message>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mặc định, nhấn phím ESC dùng để chuyển vào ô tìm kiếm.
+Tuỳ chọn này sẽ ẩn cửa sổ chính khi nhấn phím ESC.</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Nhấn phím ESC để ẩn cửa sổ chính</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện từ đã dịch trên cửa sổ chính thay vì cửa sổ popup</translation>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện từ đã dịch trên cửa sổ chính</translation>
     </message>
     <message>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cho phép nghe phát âm từ các từ điển trực tuyến dựa trên Flash
+hay các bổ trợ web khác. Phần bổ trợ phải được cài đặt.</translation>
     </message>
     <message>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Bật bổ trợ web</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nâng cao</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Kỹ thuật Quét Popup bổ sung</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng kỹ thuật IAccessibleEx để đọc từ dưới con trỏ.
+Kỹ thuật này chỉ làm việc với một vài chương trình hỗ trợ
+(VD: Internet Explorer 9).
+Không cần bật chức năng này nếu bạn không cần dùng.</translation>
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng &amp;IAccessibleEx</translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng kỹ thuật UI Automation để đọc từ dưới con trỏ.
+Kỹ thuật này chỉ làm việc với một vài chương trình hỗ trợ.
+Không cần bật chức năng này nếu bạn không cần dùng.</translation>
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng  &amp;UIAutomation</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng thông điệp Từ điển Vàng đặc biệt để đọc từ dưới con trỏ.
+Kỹ thuật này chỉ làm việc với một vài chương trình hỗ trợ.
+Không cần bật chức năng này nếu bạn không cần dùng.</translation>
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng thông điệp Từ điển &amp;Vàng</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-Tab điều hướng các thẻ theo trình tự MRU</translation>
     </message>
     <message>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Lược sử</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu lược sử các từ đã tra</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu &amp;Lược sử</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Bài viết</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Luôn mở rộng phần tuỳ chọn của bài viết</translation>
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Mở rộng phần tuỳ &amp;chọn</translation>
     </message>
     <message>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Chọn từ bằng cách nhấp chuột đơn</translation>
     </message>
     <message>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Chọn từ với nhấp chuột đơn</translation>
     </message>
     <message>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiểu bổ sung:</translation>
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Xác định tối đa số mục lưu trong lược sử.</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Số lược sử tối đa:</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tần suất lưu lược sử. Nếu đặt giá trị 0, lược sử sẽ được lưu khi thoát chương trình.</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Lưu mỗi</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>phút</translation>
     </message>
     <message>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Modern</translation>
     </message>
     <message>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Blue</translation>
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
+        <translation>Phát các tệp âm thanh thông qua FFmpeg(libav) và libao</translation>
     </message>
     <message>
         <source>Use internal player</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng trình phát âm thanh tích hợp</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Một vài trang mạng nhận ra Từ điển Vàng thông qua phần đầu giao thức HTTP
+và chặn truy vấn. Bật tính năng này để không chèn định danh vào truy vấn HTTP.</translation>
     </message>
     <message>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Không định danh Từ điển Vàng trong phần đầu giao thức HTTP</translation>
     </message>
     <message>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Tự động thu gọn các bài viết dài</translation>
     </message>
     <message>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Thu gọn bài viết dài hơn</translation>
     </message>
     <message>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>ký tự</translation>
     </message>
     <message>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Điều chỉnh giá trị này để tránh các trình đơn ngữ cảnh dài.</translation>
     </message>
     <message>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trình đơn ngữ cảnh các từ điển giới hạn:</translation>
     </message>
     <message>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Bài viết dài hơn cỡ này sẽ được thu gọn</translation>
     </message>
     <message>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy của hệ thống</translation>
     </message>
     <message>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy tuỳ chỉnh</translation>
     </message>
     <message>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Thiết lập tuỳ chỉnh</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm toàn văn</translation>
     </message>
     <message>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Các dạng cho phép tìm toàn văn:</translation>
     </message>
     <message>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Không tìm trong từ điển chứa nhiều hơn</translation>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>bài viết (0 - không giới hạn)</translation>
     </message>
     <message>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Ngôn ngữ trợ giúp</translation>
     </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Âm thanh</translation>
     </message>
     <message>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Văn bản thuần</translation>
     </message>
     <message>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>Khớp Tiền tố</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Không biết</translation>
     </message>
 </context>
 <context>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Không tên chương trình nào được gán.</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chương trình đã bị hỏng.</translation>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Chương trình trả về mã thoát %1.</translation>
     </message>
 </context>
 <context>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Bật</translation>
+        <translation>Bật</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Loại</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Tên</translation>
+        <translation>Tên</translation>
     </message>
     <message>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Dòng lệnh</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biểu tượng</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi nạp bài viết</translation>
     </message>
     <message>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi giải mã bài viết</translation>
     </message>
     <message>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_alloc_context() đã lỗi.</translation>
     </message>
     <message>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() đã lỗi.</translation>
     </message>
     <message>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() đã lỗi.</translation>
     </message>
     <message>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() đã lỗi: %1.</translation>
     </message>
     <message>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() đã lỗi: %1.</translation>
     </message>
     <message>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Không thể tìm luồng âm thanh.</translation>
     </message>
     <message>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bộ giải nén [id: %1] không tìm thấy.</translation>
     </message>
     <message>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_open2() đã lỗi: %1.</translation>
     </message>
     <message>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Không tìm thấy thiết bị xuất âm thanh.</translation>
     </message>
     <message>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Định dạng mẫu không hỗ trợ.</translation>
     </message>
     <message>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() đã lỗi: </translation>
     </message>
     <message>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Không có bộ điều khiển.</translation>
     </message>
     <message>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bộ điều khiển này không phải là thiết bị xuất trực tiếp.</translation>
     </message>
     <message>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Khoá tuỳ chọn đúng có một giá trị không xác định.</translation>
     </message>
     <message>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Không thể mở thiết bị: %1, kênh: %2, rate: %3, bits: %4.</translation>
     </message>
     <message>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lỗi không biết.</translation>
     </message>
     <message>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_frame() đã lỗi.</translation>
     </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm/lọc từ điển (Ctrl+F)</translation>
     </message>
     <message>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tìm Nhanh</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Xoá ô Tìm kiếm</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>LỖI: %1</translation>
     </message>
     <message>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nguồn lưu lỗi: </translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Tải xuống nguồn được tham chiếu thất bại.</translation>
+        <translation>Nguồn tham chiếu lỗi tải xuống.</translation>
     </message>
 </context>
 <context>
     <name>Romaji</name>
     <message>
         <source>Hepburn Romaji for Hiragana</source>
-        <translation>Hepburn Romaj cho Hiragana</translation>
+        <translation>Hệ Latinh hoá Hepburn của bảng chữ Hiragana</translation>
     </message>
     <message>
         <source>Hepburn Romaji for Katakana</source>
-        <translation>Hepburn Romaji cho Katakana</translation>
+        <translation>Hệ Latinh hoá Hepburn của bảng chữ Katakana</translation>
     </message>
 </context>
 <context>
@@ -3369,7 +3443,7 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Phát âm từ (Alt+S)</translation>
+        <translation>Phát âm (Alt+S)</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -3377,29 +3451,29 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Shows or hides the dictionary bar</source>
-        <translation>Hiện hay ẩn thanh từ điển</translation>
+        <translation>Ẩn/Hiện thanh Từ điển</translation>
     </message>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>Sử dụng để đính cửa sổ lại làm nó sẽ giữ trên màn hình, có thể
-thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translation>
+        <translation>Đính cửa sổ trên màn hình, có thể thay đổi kích thước hay
+quản lý theo nhiều cách khác.</translation>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiện từ đã tra trên cửa sổ chính (Atl+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Atl+W</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Trở lại</translation>
+        <translation>Trở lại</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Tiếp tục</translation>
+        <translation>Tiếp tục</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -3407,7 +3481,7 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
 </context>
 <context>
@@ -3422,18 +3496,18 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biểu tượng</translation>
     </message>
 </context>
 <context>
     <name>Sources</name>
     <message>
         <source>Files</source>
-        <translation>Tập tin</translation>
+        <translation>Tệp</translation>
     </message>
     <message>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Đường dẫn để tìm kiếm tập tin từ điển:</translation>
+        <translation>Đường dẫn chứa tệp từ điển:</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -3445,7 +3519,7 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
     </message>
     <message>
         <source>Re&amp;scan now</source>
-        <translation>&amp;Quét lại bây giờ</translation>
+        <translation>&amp;Quét lại</translation>
     </message>
     <message>
         <source>Sound Dirs</source>
@@ -3453,7 +3527,7 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
     </message>
     <message>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>Làm từ điển từ hàng tá các tập tin âm thanh bằng cách thêm đường dẫn ở đây:</translation>
+        <translation>Thêm đường dẫn chứa các tệp âm thanh để tạo từ điển âm thanh:</translation>
     </message>
     <message>
         <source>Morphology</source>
@@ -3461,7 +3535,7 @@ thay đổi kích thước hay quản lý theo cách khác tùy bạn.</translat
     </message>
     <message>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Đường dẫn đến thư mục chứa từ điển  Hunspell/Myspell:</translation>
+        <translation>Đường dẫn đến thư mục chứa từ điển Hunspell/Myspell:</translation>
     </message>
     <message>
         <source>&amp;Change...</source>
@@ -3498,7 +3572,7 @@ phù hợp để sử dụng chúng.</translation>
     </message>
     <message>
         <source>Any websites. A string %GDWORD% will be replaced with the query word:</source>
-        <translation>Bất kỳ trang nào. Một chuỗi %GDWORD% sẽ được thay thế bởi từ truy vấn:</translation>
+        <translation>Có thể dùng bất kỳ trang nào. Chuỗi %GDWORD% sẽ được thay thế bởi từ truy vấn:</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
@@ -3524,7 +3598,7 @@ phù hợp để sử dụng chúng.</translation>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>Sử dụng Forvo hiện tại cần khóa API. Để trống ô này để sử
+        <translation>Sử dụng Forvo yêu cầu một khóa API. Để trống ô này để sử
 dụng khóa mặc định mà có thể không còn hiệu lực trong tương
 lai, đăng ký trên trang chủ để lấy khóa của chính bạn.</translation>
     </message>
@@ -3580,7 +3654,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Japanese Romaji</source>
-        <translation>Phiên âm (Romaji) tiếng Nhật</translation>
+        <translation>Phiên âm Latinh tiếng Nhật</translation>
     </message>
     <message>
         <source>Systems:</source>
@@ -3601,7 +3675,7 @@ Nhật, dựa trên hệ thống âm vị Anh ngữ</translation>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Hệ thống thông thường nhất, có mối quan hệ một-đổi-một tới hệ viết kana. Tiêu chuẩn ISO 3602
+        <translation>Hệ thống thông dụng nhất, có mối quan hệ tương ứng tới hệ viết kana. Tiêu chuẩn ISO 3602
 
 Chưa được bổ sung trong Từ điển Vàng.</translation>
     </message>
@@ -3665,140 +3739,141 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     </message>
     <message>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Chương trình</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Xoá chương trình &lt;b&gt;%1&lt;/b&gt; khỏi danh sách?</translation>
     </message>
     <message>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Chuyển tự sang tiếng Belarus</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lấy khoá của bạn &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;tại đây&lt;/a&gt; hoặc để trống để dùng mặc định.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lựa chọn dùng %GD1251% for CP1251, %GDISO1%...%GDISO16% với ISO 8859-1...ISO 8859-16 tương ứng,
+%GDBIG5% với Big-5, %GDBIG5HKSCS% với Big5-HKSCS, %GDGBK% với GBK và GB18030, %GDSHIFTJIS% với Shift-JIS.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Text to Speech</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dùng mọi chương trình ngoài. Chuỗi %GDWORD% thay từ truy vấn. Nếu chuỗi không có, từ sẽ được đưa vào đầu vào tiêu chuẩn.</translation>
     </message>
     <message>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Máy chủ DICT</translation>
     </message>
     <message>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Máy chủ DICT:</translation>
     </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">Không</translation>
+        <translation>Không</translation>
     </message>
 </context>
 <context>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Thêm vào phương tiện giọng nói đã chọn:</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Thêm</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">Xóa &amp;bỏ</translation>
+        <translation>Xóa &amp;bỏ</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Xem trước</translation>
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Các phương tiện giọng nói có thể:</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Xem trước văn bản:</translation>
     </message>
     <message>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nhập văn bản ở đây.</translation>
     </message>
     <message>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Xem trước</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Không có giọng nói TTS</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation type="unfinished">Xác nhận xóa bỏ</translation>
+        <translation>Xác nhận xóa bỏ</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Xoá phương tiện giọng nói &lt;b&gt;%1&lt;/b&gt; khỏi danh sách?</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Không tìm thấy giọng nói TTS. &lt;br&gt;Hãy kiểm tra tối thiểu một phương tiện TTS được cài đặt.</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Tùy thích</translation>
+        <translation>Tùy thích</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Âm lượng:</translation>
     </message>
     <message>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tốc độ:</translation>
     </message>
 </context>
 <context>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Nhập một từ hoặc cụm từ để tra từ điển</translation>
     </message>
     <message>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nút xổ</translation>
     </message>
 </context>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Bật</translation>
+        <translation>Bật</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Tên</translation>
+        <translation>Tên</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biểu tượng</translation>
     </message>
 </context>
 <context>
@@ -3817,21 +3892,21 @@ Chưa được bổ sung trong Từ điển Vàng.</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Biểu tượng</translation>
     </message>
 </context>
 <context>
     <name>WordFinder</name>
     <message>
         <source>Failed to query some dictionaries.</source>
-        <translation>Truy vấn một vài từ điển thất bại.</translation>
+        <translation>Lỗi truy vấn một vài từ điểni.</translation>
     </message>
 </context>
 <context>
     <name>WordList</name>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">CẢNH BÁO: %1</translation>
+        <translation>CẢNH BÁO: %1</translation>
     </message>
 </context>
 </TS>

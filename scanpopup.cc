@@ -4,7 +4,6 @@
 #include "scanpopup.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
-#include <QUrl>
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>
@@ -27,7 +26,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static Qt::WindowFlags popupWindowFlags =
 
-#if defined (Q_OS_WIN) || defined (Q_OS_MAC)
+#if defined (Q_OS_WIN) || ( defined (Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK( 5, 3, 0 ) )
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
@@ -222,7 +221,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
 #else
@@ -350,7 +349,7 @@ void ScanPopup::translateWord( QString const & word )
 
   inputWord = str;
   engagePopup( false,
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
       true // We only focus popup under Windows when activated via Ctrl+C+C
            // -- on Linux it already has an implicit focus
 #else
@@ -793,7 +792,7 @@ void ScanPopup::requestWindowFocus()
   // One of the rare, actually working workarounds for requesting a user keyboard focus on X11,
   // works for Qt::Popup windows, exactly like our Scan Popup (in unpinned state).
   // Modern window managers actively resist to automatically focus pop-up windows.
-#ifdef Q_WS_X11
+#ifdef HAVE_X11
   if ( !ui.pinButton->isChecked() )
   {
     QMenu m( this );

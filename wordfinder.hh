@@ -41,7 +41,8 @@ private:
   enum SearchType
   {
     PrefixMatch,
-    StemmedMatch
+    StemmedMatch,
+    ExpressionMatch
   } searchType;
   unsigned long requestedMaxResults;
   Dictionary::Features requestedFeatures;
@@ -94,6 +95,13 @@ public:
                      unsigned long maxResults = 30,
                      Dictionary::Features = Dictionary::NoFeatures );
   
+  /// Do the expression-match search in the given list of dictionaries.
+  /// Function find exact matches for one of spelling suggestions.
+  void expressionMatch( QString const &,
+                        std::vector< sptr< Dictionary::Class > > const &,
+                        unsigned long maxResults = 40,
+                        Dictionary::Features = Dictionary::NoFeatures );
+
   /// Returns the vector containing search results from the last operation.
   /// If it didn't finish yet, the result is not final and may be changing
   /// over time.

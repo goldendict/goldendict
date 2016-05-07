@@ -4,6 +4,12 @@
 #include "initializing.hh"
 #include <QCloseEvent>
 
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#include <QtWidgets/QStyleFactory>
+#include <qt_windows.h>
+#include <uxtheme.h>
+#endif
+
 Initializing::Initializing( QWidget * parent, bool showOnStartup ): QDialog( parent )
 {
   ui.setupUi( this );
@@ -15,6 +21,29 @@ Initializing::Initializing( QWidget * parent, bool showOnStartup ): QDialog( par
   #else
     setWindowIcon( QIcon( ":/icons/macicon.png" ) );
   #endif
+
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+
+  // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
+  // We use simply "windows" style instead for this case
+
+  barStyle = 0;
+  oldBarStyle = 0;
+
+  if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA
+      && ( QSysInfo::windowsVersion() & QSysInfo::WV_NT_based )
+      && !IsThemeActive() )
+  {
+    barStyle = QStyleFactory::create( "windows" );
+
+    if( barStyle )
+    {
+      oldBarStyle = ui.progressBar->style();
+      ui.progressBar->setStyle( barStyle );
+    }
+  }
+
+#endif
 
   if ( showOnStartup )
   {
@@ -44,3 +73,15 @@ void Initializing::reject()
 {
 }
 
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+
+Initializing::~Initializing()
+{
+  if( barStyle )
+  {
+    ui.progressBar->setStyle( oldBarStyle );
+    delete barStyle;
+  }
+}
+
+#endif

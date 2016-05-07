@@ -11,6 +11,7 @@
 #include "gddebug.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
+#include "qt4x5.hh"
 
 namespace MediaWiki {
 
@@ -124,12 +125,19 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
-  reqUrl.addQueryItem( "apfrom", gd::toQString( str ) );
+  Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ) );
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
 
   connect( netReply.get(), SIGNAL( finished() ),
            this, SLOT( downloadFinished() ) );
+
+#ifndef QT_NO_OPENSSL
+
+  connect( netReply.get(), SIGNAL( sslErrors( QList< QSslError > ) ),
+           netReply.get(), SLOT( ignoreSslErrors() ) );
+
+#endif
 
   // We start a timer to postpone early destruction, so a rapid type won't make
   // unnecessary network load
@@ -195,7 +203,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
         Mutex::Lock _( dataMutex );
 
-        for( unsigned x = 0; x < nl.length(); ++x )
+        for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }
@@ -209,7 +217,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
 class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 {
-  typedef std::list< std::pair< sptr< QNetworkReply >, bool > > NetReplies;
+  typedef std::list< std::pair< QNetworkReply *, bool > > NetReplies;
   NetReplies netReplies;
   QString url;
 
@@ -258,10 +266,17 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
-  reqUrl.addQueryItem( "page", gd::toQString( str ) );
+  Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ) );
 
-  sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  QNetworkReply * netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
+#ifndef QT_NO_OPENSSL
+
+  connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
+           netReply, SLOT( ignoreSslErrors() ) );
+
+#endif
+
   netReplies.push_back( std::make_pair( netReply, false ) );
 }
 
@@ -278,7 +293,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
   
   for( NetReplies::iterator i = netReplies.begin(); i != netReplies.end(); ++i )
   {
-    if ( i->first.get() == r )
+    if ( i->first == r )
     {
       i->second = true; // Mark as finished
       found = true;
@@ -296,7 +311,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
   for( ; netReplies.size() && netReplies.front().second; netReplies.pop_front() )
   {
-    sptr< QNetworkReply > netReply = netReplies.front().first;
+    QNetworkReply * netReply = netReplies.front().first;
     
     if ( netReply->error() == QNetworkReply::NoError )
     {
@@ -305,7 +320,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
       QString errorStr;
       int errorLine, errorColumn;
   
-      if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
+      if ( !dd.setContent( netReply, false, &errorStr, &errorLine, &errorColumn  ) )
       {
         setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
                                  arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
@@ -321,9 +336,42 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           if ( !textNode.isNull() )
           {
             QString articleString = textNode.toElement().text();
-  
+
+            // Replace all ":" in links, remove '#' part in links to other articles
+            int pos = 0;
+            QRegExp regLinks( "<a\\s+href=\"/([^\"]+)\"" );
+            for( ; ; )
+            {
+              pos = regLinks.indexIn( articleString, pos );
+              if( pos < 0 )
+                break;
+              QString link = regLinks.cap( 1 );
+
+              if( link.indexOf( "://" ) >= 0 )
+              {
+                // External link
+                pos += regLinks.cap().size();
+                continue;
+              }
+
+              if( link.indexOf( ':' ) >= 0 )
+                link.replace( ':', "%3A" );
+
+              int n = link.indexOf( '#', 1 );
+              if( n > 0 )
+              {
+                QString anchor = link.mid( n + 1 ).replace( '_', "%5F" );
+                link.truncate( n );
+                link += QString( "?gdanchor=%1" ).arg( anchor );
+              }
+
+              QString newLink = QString( "<a href=\"/%1\"" ).arg( link );
+              articleString.replace( pos, regLinks.cap().size(), newLink );
+              pos += newLink.size();
+            }
+
             QUrl wikiUrl( url );
-            wikiUrl.setPath( "" );
+            wikiUrl.setPath( "/" );
   
             // Update any special index.php pages to be absolute
             articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
@@ -333,7 +381,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
             reg1.setMinimal( true );
             QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
-            int pos = 0;
+            pos = 0;
             for( ; ; )
             {
               pos = reg1.indexIn( articleString, pos );
@@ -355,20 +403,21 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // audio url
             articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
-                                   QString::fromStdString( addAudioLink( "\"http:\\1\"",this->dictPtr->getId() )+ "<a href=\"http:\\1" ) );
+                                   QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
+                                                                         this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1" ) );
 
-            // Add "http:" to image source urls
-            articleString.replace( " src=\"//", " src=\"http://" );
+            // Add url scheme to image source urls
+            articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );
             //fix src="/foo/bar/Baz.png"
-            articleString.replace( "src=\"/", "src=\"" + url +"/" );
+            articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() +"/" );
 
             // Replace the href="/foo/bar/Baz" to just href="Baz".
             articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
 
             //fix audio
-            articleString.replace( QRegExp("<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
-                                            QString::fromStdString(addAudioLink("\"http://\\1\"",this->dictPtr->getId())+
-                                           "<a href=\"http://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>"));
+            articleString.replace( QRegExp( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
+                                            QString::fromStdString(addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + "://\\1\"", this->dictPtr->getId() ) +
+                                            "<a href=\"" + wikiUrl.scheme().toStdString() + "://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>" ) );
             // In those strings, change any underscores to spaces
             for( ; ; )
             {
@@ -380,7 +429,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
 
             //fix file: url
-            articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]+:[^/\"]+\")" ),
+            articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]*file%3A[^/\"]+\")", Qt::CaseInsensitive ),
                                    QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
 
             QByteArray articleBody = articleString.toUtf8();
@@ -407,6 +456,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
     }
     else
       setErrorString( netReply->errorString() );
+
+    netReply->deleteLater();
   }
 
   if ( netReplies.empty() )

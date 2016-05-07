@@ -14,6 +14,7 @@
 #include "wstring_qt.hh"
 #include "filetype.hh"
 #include "file.hh"
+#include "qt4x5.hh"
 #include "tiff.hh"
 #include "ftshelpers.hh"
 #include "htmlescape.hh"
@@ -422,6 +423,8 @@ quint32 readArticle( ZimFile & file, ZIM_header & header, quint32 articleNumber,
 
 class ZimDictionary: public BtreeIndexing::BtreeDictionary
 {
+    enum LINKS_TYPE { UNKNOWN, SLASH, NO_SLASH };
+
     Mutex idxMutex;
     Mutex zimMutex, idxResourceMutex;
     File::Class idx;
@@ -431,6 +434,7 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
     ZimFile df;
     ZIM_header zimHeader;
     set< quint32 > articlesIndexedForFTS;
+    LINKS_TYPE linksType;
 
   public:
 
@@ -511,7 +515,8 @@ ZimDictionary::ZimDictionary( string const & id,
     BtreeDictionary( id, dictionaryFiles ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
-    df( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) )
+    df( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) ),
+    linksType( UNKNOWN )
 {
     // Open data file
 
@@ -549,7 +554,7 @@ ZimDictionary::ZimDictionary( string const & id,
     ftsIdxName = indexFile + "_FTS";
 
     if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
 }
 
@@ -597,92 +602,116 @@ string ZimDictionary::convert( const string & in )
 {
   QString text = QString::fromUtf8( in.c_str() );
 
-  text.replace( QRegExp( "<\\s*body\\s*([^>]*)background:([^;\"]*)" ),
-                QString( "<body \\1background: inherited;" ) );
+  // replace background
+  text.replace( QRegExp( "<\\s*body\\s*([^>]*)(background(|-color)):([^;\"]*(|;))" ),
+                QString( "<body \\1" ) );
 
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)/" ),
+  // pattern of img and script
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)(\\.\\.|)/" ),
                 QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
 
   // Fix links without '"'
-  text.replace( QRegExp( "href=/([^\\s>]+)" ), QString( "href=\"/\\1\"" ) );
+  text.replace( QRegExp( "href=(\\.\\.|)/([^\\s>]+)" ), QString( "href=\"\\1/\\2\"" ) );
 
-  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"/" ),
+  // pattern <link... href="..." ...>
+  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(\\.\\.|)/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
-  QRegExp linkRegexp1( "<\\s*a\\s*([^>]*)href=\"/[^\"]*\"\\s*title=\"([^\"]*)\"",
+  // localize the http://en.wiki***.com|org/wiki/<key> series links
+  // excluding those keywords that have ":" in it
+  QString urlWiki = "\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|voyage|versity)|wiktionary)\\.(org|com)/wiki/([^:\"]*)\"";
+  text.replace( QRegExp( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
+                QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
+
+  // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
+  // these links will be translated into local definitions
+  QRegExp rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
-
-  QRegExp linkRegexp2( "<\\s*a\\s*([^>]*)href=\"/A/([^\"]*)\"",
-                       Qt::CaseSensitive,
-                       QRegExp::RegExp2 );
-
-  QRegExp linkRegexp3( ".(s|)htm(l|)", Qt::CaseInsensitive );
-
   int pos = 0;
-  while( pos >= 0 )
+  while( (pos = rxLink.indexIn( text, pos )) >= 0 )
   {
-    pos = linkRegexp1.indexIn( text, pos );
-    if( pos < 0 )
-      break;
+    QStringList list = rxLink.capturedTexts();
+    QString tag = list[3];     // a url, ex: Precambrian_Chaotian.html
+    if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
+      tag = list[4].split("\"")[1];
 
-    QStringList list = linkRegexp1.capturedTexts();
 
-    QString tag = QString( "<a href=\"gdlookup://localhost/" );
-    QString link = list[ 2 ];
+    // Check type of links inside articles
+    if( linksType == UNKNOWN && tag.indexOf( '/' ) >= 0 )
+    {
+      QString word = QUrl::fromPercentEncoding( tag.toLatin1() );
+      word.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+           replace( "_", " " );
 
-    int nbeg = link.lastIndexOf( "/" );
-    if( nbeg < 0 )
-      nbeg = 0;
+      vector< WordArticleLink > links;
+      links = findArticles( gd::toWString( word ) );
+
+      if( !links.empty() )
+      {
+        linksType = SLASH;
+      }
+      else
+      {
+        word.remove( QRegExp(".*/") );
+        links = findArticles( gd::toWString( word ) );
+        if( !links.empty() )
+        {
+          linksType = NO_SLASH;
+          links.clear();
+        }
+      }
+    }
+
+    if( linksType == SLASH || linksType == UNKNOWN )
+    {
+      tag.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+          replace( "_", "%20" ).
+          prepend( "<a href=\"gdlookup://localhost/" ).
+          append( "\" " + list[4] + ">" );
+    }
     else
-      nbeg += 1;
+    {
+      tag.remove( QRegExp(".*/") ).
+          remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+          replace( "_", "%20" ).
+          prepend( "<a href=\"gdlookup://localhost/" ).
+          append( "\" " + list[4] + ">" );
+    }
 
-    int nend = link.lastIndexOf( "." );
-    if( nend < 0 || !link.mid( nend ).contains( linkRegexp3 ) )
-      nend = -1;
-
-    link = link.mid( nbeg, nend < 0 ? -1 : nend - nbeg );
-
-    link.replace( QChar( '_' ), "%20", Qt::CaseInsensitive );
-
-    tag += link + "\" title=\"" + link + "\"";
-    text.replace( pos, list[ 0 ].length(), tag );
-
+    text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
   }
 
+  // Occassionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
+  // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
+  QRegExp rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
+                       Qt::CaseSensitive,
+                       QRegExp::RegExp2 );
   pos = 0;
-  while( pos >= 0 )
+  while( (pos = rxBR.indexIn( text, pos )) >= 0 )
   {
-    pos = linkRegexp2.indexIn( text, pos );
-    if( pos < 0 )
-      break;
+    QStringList list = rxBR.capturedTexts();
+    QString tag = list[2];
+    tag.replace( QRegExp( "&lt;br( |)(\\\\|/|)&gt;", Qt::CaseInsensitive ) , "<br/>" ).
+        prepend( list[1] ).
+        append( "</a>" );
 
-    QStringList list = linkRegexp2.capturedTexts();
-
-    QString tag = QString( "<a ") + list[ 1 ]
-                  + "href=\"gdlookup://localhost/";
-    QString link = list[ 2 ];
-
-    int nbeg = link.lastIndexOf( "/" );
-    if( nbeg <= 0 )
-      nbeg = 0;
-    else
-      nbeg += 1;
-
-    int nend = link.lastIndexOf( "." );
-    if( nend < 0 || !link.mid( nend ).contains( linkRegexp3 ) )
-      nend = -1;
-
-    link = link.mid( nbeg, nend < 0 ? -1 : nend - nbeg );
-
-    link.replace( QChar( '_' ), "%20", Qt::CaseInsensitive );
-
-    tag += link + "\"";
-    text.replace( pos, list[ 0 ].length(), tag );
-
+    text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
   }
+
+  // // output all links in the page - only for analysis
+  // QRegExp rxPrintAllLinks( "<\\s*a\\s+[^>]*href=\"[^\"]*\"[^>]*>",
+  //                         Qt::CaseSensitive,
+  //                         QRegExp::RegExp2 );
+  // pos = 0;
+  // while( (pos = rxPrintAllLinks.indexIn( text, pos )) >= 0 )
+  // {
+  //   QStringList list = rxPrintAllLinks.capturedTexts();
+  //   qDebug() << "\n--Alllinks--" << list[0];
+  //   pos += list[0].length() + 1;
+  // }
 
   // Fix outstanding elements
   text += "<br style=\"clear:both;\" />";
@@ -726,7 +755,7 @@ QString const& ZimDictionary::getDescription()
 void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -763,7 +792,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 
     findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     QVector< uint32_t > offsets;
@@ -780,12 +809,12 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     setOfOffsets.clear();
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     qSort( offsets );
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     QMap< QString, QVector< uint32_t > > ftsWords;
@@ -796,7 +825,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // index articles for full-text search
     for( int i = 0; i < offsets.size(); i++ )
     {
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       QString headword, articleStr;
@@ -817,7 +846,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
     while( it != ftsWords.end() )
     {
-      if( isCancelled )
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       uint32_t offset = chunks.startNewBlock();
@@ -834,13 +863,13 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     ftsWords.clear();
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     ftsIdxHeader.chunksOffset = chunks.finish();
     ftsIdxHeader.wordCount = indexedWords.size();
 
-    if( isCancelled )
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
@@ -852,7 +881,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     ftsIdxHeader.indexRootOffset = ftsIdxInfo.rootOffset;
 
     ftsIdxHeader.signature = FtsHelpers::FtsSignature;
-    ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion;
+    ftsIdxHeader.formatVersion = FtsHelpers::CurrentFtsFormatVersion + getFtsIndexVersion();
 
     ftsIdx.rewind();
     ftsIdx.writeRecords( &ftsIdxHeader, sizeof(ftsIdxHeader), 1 );
@@ -976,7 +1005,7 @@ void ZimArticleRequestRunnable::run()
 
 void ZimArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1003,7 +1032,7 @@ void ZimArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1175,7 +1204,7 @@ void ZimResourceRequestRunnable::run()
 void ZimResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

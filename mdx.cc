@@ -38,6 +38,8 @@
 #include <QTextDocument>
 #include <QCryptographicHash>
 
+#include "qt4x5.hh"
+
 namespace Mdx
 {
 
@@ -313,7 +315,7 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   ftsIdxName = indexFile + "_FTS";
 
   if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
 }
 
@@ -355,11 +357,11 @@ public:
 
 void MdxDictionary::deferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -380,11 +382,11 @@ string const & MdxDictionary::ensureInitDone()
 
 void MdxDictionary::doDeferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     // Do deferred init
@@ -461,7 +463,7 @@ void MdxDictionary::doDeferredInit()
 void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
   if( haveFTSIndex() )
@@ -581,7 +583,7 @@ void MdxArticleRequestRunnable::run()
 
 void MdxArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -613,7 +615,7 @@ void MdxArticleRequest::run()
 
   for ( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -759,7 +761,7 @@ void MddResourceRequestRunnable::run()
 
 void MddResourceRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -778,7 +780,7 @@ void MddResourceRequest::run()
   for ( ;; )
   {
     // Some runnables linger enough that they are cancelled before they start
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -846,6 +848,32 @@ void MddResourceRequest::run()
       if ( Filetype::isNameOfCSS( u8ResourceName ) )
       {
         QString css = QString::fromUtf8( data.data(), data.size() );
+
+        // Correct some url's
+
+        QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", Qt::CaseInsensitive, QRegExp::RegExp );
+        QString id = QString::fromUtf8( dict.getId().c_str() );
+        int pos = 0;
+        for( ; ; )
+        {
+          pos = links.indexIn( css, pos );
+          if( pos < 0 )
+            break;
+          QString url = links.cap( 2 );
+
+          if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0)
+          {
+            // External link or base64-encoded data
+            pos += links.cap().size();
+            continue;
+          }
+
+          QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
+                                             + id + "/" + url + links.cap( 3 ) + ")";
+          css.replace( pos, links.cap().size(), newUrl );
+          pos += newUrl.size();
+        }
+
         dict.isolateCSS( css, ".mdict" );
         QByteArray bytes = css.toUtf8();
         data.resize( bytes.size() );
@@ -945,15 +973,14 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 
-  return article
+  QRegExp wordCrossLink( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)(#?[^\"']*)", Qt::CaseInsensitive );
+
+  article = article
          // anchors
          .replace( anchorLinkRe,
                    "\\1" + uniquePrefix )
          .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
                    "\\1#" + uniquePrefix )
-         // word cross links
-         .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)#?[^\"']*", Qt::CaseInsensitive ),
-                   "\\1gdlookup://localhost/\\2" )
          // sounds, and audio link script
          .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
                    QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
@@ -965,6 +992,10 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
          .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\\"" )
+         // javascripts
+         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
+                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
+                   "\\1\"bres://" + id + "/\\\"" )
          // images
          .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x1f\\x7f]*([^\"']*)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
@@ -972,6 +1003,52 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
          .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ),
                    "\\1\"bres://" + id + "/\\2\"" );
+
+  // word cross links
+  int pos = 0;
+  while( pos >= 0 )
+  {
+    pos = wordCrossLink.indexIn( article, pos );
+    if( pos < 0 )
+      break;
+
+    QString newLink = wordCrossLink.cap( 1 )
+                      + "gdlookup://localhost/"
+                      + wordCrossLink.cap( 2 );
+
+    if( !wordCrossLink.cap( 3 ).isEmpty() )
+      newLink += QString( "?gdanchor=" ) + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 );
+
+    article.replace( pos, wordCrossLink.cap( 0 ).size(), newLink );
+    pos += newLink.size();
+  }
+
+  // javascripts
+  QRegExp regScript( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+                     Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp regDynamic( "<\\s*script\\s+src\\s*=\\s*[\"']+\\s*[\"']+\\s*\\+\\s*replace\\(" );
+  pos = 0;
+  while( pos >= 0 )
+  {
+    pos = regScript.indexIn( article, pos );
+    if( pos < 0 )
+      break;
+
+    if( regScript.cap( 0 ).indexOf( regDynamic ) >= 0 )
+    {
+      pos += regScript.cap( 0 ).size();
+      continue;
+    }
+
+    QString newLink = regScript.cap( 1 )
+                      + "bres://" + id + "/"
+                      + regScript.cap( 2 );
+
+    article.replace( pos, regScript.cap( 0 ).size(), newLink );
+    pos += newLink.size();
+  }
+
+  return article;
 }
 
 static void addEntryToIndex( QString const & word, uint32_t offset, IndexedWords & indexedWords )

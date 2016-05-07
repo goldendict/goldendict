@@ -32,6 +32,10 @@ protected:
 private:
 
   void renderCurrentValue();
+  bool eventFilter( QObject *, QEvent * event );
+#ifdef Q_OS_WIN
+  int VkeyToQTkey( quint32 vkey );
+#endif
 };
 
 #endif

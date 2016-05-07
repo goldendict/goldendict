@@ -7,6 +7,8 @@
 #include "language.hh"
 #include "fsencoding.hh"
 #include <algorithm>
+
+#include <QMenu>
 #include <QPair>
 
 using std::vector;
@@ -24,7 +26,7 @@ bool dictNameLessThan( sptr< Dictionary::Class > const & dict1,
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
 
-  return str1.compare( str2, Qt::CaseInsensitive ) < 0;
+  return str1.localeAwareCompare( str2 ) < 0;
 }
 
 bool dictLessThan( sptr< Dictionary::Class > const & dict1,
@@ -54,7 +56,7 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
     return false;
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
-  int res = str1.compare( str2, Qt::CaseInsensitive );
+  int res = str1.localeAwareCompare( str2 );
   if( res )
     return res < 0;
 
@@ -64,7 +66,7 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
     return false;
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
-  res = str1.compare( str2, Qt::CaseInsensitive );
+  res = str1.localeAwareCompare( str2 );
   if( res )
     return res < 0;
 
@@ -75,7 +77,7 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
   if( !str1.isEmpty() && str2.isEmpty() )
     return true;
 
-  return str1.compare( str2, Qt::CaseInsensitive ) < 0;
+  return str1.localeAwareCompare( str2 ) < 0;
 }
 
 } // namespace
@@ -191,6 +193,8 @@ void OrderAndProps::disableDictionaryDescription()
   ui.dictionaryDescription->clear();
   ui.dictionaryDescription->setVisible( false );
   ui.dictionaryDescriptionLabel->setVisible( false );
+  ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
+  ui.infoVerticalLayout->invalidate();
 }
 
 void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const & idx )
@@ -233,12 +237,15 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
       ui.dictionaryDescription->setPlainText( descText );
       ui.dictionaryDescription->setVisible( true );
       ui.dictionaryDescriptionLabel->setVisible( true );
+      ui.infoVerticalSpacer->changeSize( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum );
     }
     else
     {
       ui.dictionaryDescription->setVisible( false );
       ui.dictionaryDescriptionLabel->setVisible( false );
+      ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
     }
+    ui.infoVerticalLayout->invalidate();
   }
 }
 

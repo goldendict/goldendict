@@ -7,7 +7,7 @@
 #include <QtXml>
 #include "gddebug.hh"
 
-#ifdef _MSC_VER
+#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
 #include <stdint.h>
@@ -18,6 +18,7 @@
 #endif
 
 #include "atomic_rename.hh"
+#include "qt4x5.hh"
 
 namespace Config {
 
@@ -137,6 +138,16 @@ Preferences::Preferences():
 {
 }
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+Chinese::Chinese():
+  enable( false ),
+  enableSCToTWConversion( true ),
+  enableSCToHKConversion( true ),
+  enableTCToSCConversion( true )
+{
+}
+#endif
+
 Romaji::Romaji():
   enable( false ),
   enableHepburn( true ),
@@ -174,16 +185,16 @@ MediaWikis makeDefaultMediaWikis( bool enable )
 {
   MediaWikis mw;
 
-  mw.push_back( MediaWiki( "ae6f89aac7151829681b85f035d54e48", "English Wikipedia", "http://en.wikipedia.org/w", enable, "" ) );
-  mw.push_back( MediaWiki( "affcf9678e7bfe701c9b071f97eccba3", "English Wiktionary", "http://en.wiktionary.org/w", false, ""  ) );
-  mw.push_back( MediaWiki( "8e0c1c2b6821dab8bdba8eb869ca7176", "Russian Wikipedia", "http://ru.wikipedia.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "b09947600ae3902654f8ad4567ae8567", "Russian Wiktionary", "http://ru.wiktionary.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "a8a66331a1242ca2aeb0b4aed361c41d", "German Wikipedia", "http://de.wikipedia.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "21c64bca5ec10ba17ff19f3066bc962a", "German Wiktionary", "http://de.wiktionary.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "96957cb2ad73a20c7a1d561fc83c253a", "Portuguese Wikipedia", "http://pt.wikipedia.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "ed4c3929196afdd93cc08b9a903aad6a", "Portuguese Wiktionary", "http://pt.wiktionary.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "f3b4ec8531e52ddf5b10d21e4577a7a2", "Greek Wikipedia", "http://el.wikipedia.org/w", false, "" ) );
-  mw.push_back( MediaWiki( "5d45232075d06e002dea72fe3e137da1", "Greek Wiktionary", "http://el.wiktionary.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "ae6f89aac7151829681b85f035d54e48", "English Wikipedia", "https://en.wikipedia.org/w", enable, "" ) );
+  mw.push_back( MediaWiki( "affcf9678e7bfe701c9b071f97eccba3", "English Wiktionary", "https://en.wiktionary.org/w", false, ""  ) );
+  mw.push_back( MediaWiki( "8e0c1c2b6821dab8bdba8eb869ca7176", "Russian Wikipedia", "https://ru.wikipedia.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "b09947600ae3902654f8ad4567ae8567", "Russian Wiktionary", "https://ru.wiktionary.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "a8a66331a1242ca2aeb0b4aed361c41d", "German Wikipedia", "https://de.wikipedia.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "21c64bca5ec10ba17ff19f3066bc962a", "German Wiktionary", "https://de.wiktionary.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "96957cb2ad73a20c7a1d561fc83c253a", "Portuguese Wikipedia", "https://pt.wikipedia.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "ed4c3929196afdd93cc08b9a903aad6a", "Portuguese Wiktionary", "https://pt.wiktionary.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "f3b4ec8531e52ddf5b10d21e4577a7a2", "Greek Wikipedia", "https://el.wikipedia.org/w", false, "" ) );
+  mw.push_back( MediaWiki( "5d45232075d06e002dea72fe3e137da1", "Greek Wiktionary", "https://el.wiktionary.org/w", false, "" ) );
 
   return mw;
 }
@@ -192,9 +203,9 @@ WebSites makeDefaultWebSites()
 {
   WebSites ws;
 
-  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "http://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false, "" ) );
-  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "http://www.urbandictionary.com/define.php?term=%GDWORD%", false, "" ) );
-  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "http://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "" ) );
+  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "https://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false, "" ) );
+  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "https://www.urbandictionary.com/define.php?term=%GDWORD%", false, "" ) );
+  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "https://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "" ) );
   ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "" ) );
   ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "" ) );
 
@@ -213,7 +224,7 @@ Programs makeDefaultPrograms()
   Programs programs;
 
   // The following list doesn't make a lot of sense under Windows
-#ifndef Q_WS_WIN
+#ifndef Q_OS_WIN
   programs.push_back( Program( false, Program::Audio, "428b4c2b905ef568a43d9a16f59559b0", "Festival", "festival --tts", "" ) );
   programs.push_back( Program( false, Program::Audio, "2cf8b3a60f27e1ac812de0b57c148340", "Espeak", "espeak %GDWORD%", "" ) );
   programs.push_back( Program( false, Program::Html, "4f898f7582596cea518c6b0bfdceb8b3", "Manpages", "man -a --html=/bin/cat %GDWORD%", "" ) );
@@ -255,17 +266,17 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
 
-  for( unsigned y = 0; y < dicts.length(); ++y )
+  for( Qt4x5::Dom::size_type y = 0; y < dicts.length(); ++y )
     g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
                                              dicts.item( y ).toElement().attribute( "name" ) ) );
 
   QDomNode muted = grp.namedItem( "mutedDictionaries" );
   dicts = muted.toElement().elementsByTagName( "mutedDictionary" );
-  for( unsigned x = 0; x < dicts.length(); ++x )
+  for( Qt4x5::Dom::size_type x = 0; x < dicts.length(); ++x )
     g.mutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   dicts = muted.toElement().elementsByTagName( "popupMutedDictionary" );
-  for( unsigned x = 0; x < dicts.length(); ++x )
+  for( Qt4x5::Dom::size_type x = 0; x < dicts.length(); ++x )
     g.popupMutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   return g;
@@ -280,7 +291,7 @@ MutedDictionaries loadMutedDictionaries( QDomNode mutedDictionaries )
     QDomNodeList nl = mutedDictionaries.toElement().
                         elementsByTagName( "mutedDictionary" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       result.insert( nl.item( x ).toElement().text() );
   }
 
@@ -442,7 +453,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = paths.toElement().elementsByTagName( "path" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       c.paths.push_back(
         Path( nl.item( x ).toElement().text(),
               nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
@@ -454,7 +465,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = soundDirs.toElement().elementsByTagName( "sounddir" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       c.soundDirs.push_back(
         SoundDir( nl.item( x ).toElement().text(),
                   nl.item( x ).toElement().attribute( "name" ),
@@ -479,7 +490,7 @@ Class load() throw( exError )
 
     QDomNodeList nl = groups.toElement().elementsByTagName( "group" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement grp = nl.item( x ).toElement();
 
@@ -495,7 +506,7 @@ Class load() throw( exError )
 
     QDomNodeList nl = hunspell.toElement().elementsByTagName( "enabled" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
       c.hunspell.enabledDictionaries.push_back( nl.item( x ).toElement().text() );
   }
 
@@ -514,6 +525,18 @@ Class load() throw( exError )
 
     applyBoolOption( c.transliteration.enableBelarusianTransliteration,
                      transliteration.namedItem( "enableBelarusianTransliteration" ) );
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+    QDomNode chinese = transliteration.namedItem( "chinese" );
+
+    if ( !chinese.isNull() )
+    {
+      applyBoolOption( c.transliteration.chinese.enable, chinese.namedItem( "enable" ) );
+      applyBoolOption( c.transliteration.chinese.enableSCToTWConversion, chinese.namedItem( "enableSCToTWConversion" ) );
+      applyBoolOption( c.transliteration.chinese.enableSCToHKConversion, chinese.namedItem( "enableSCToHKConversion" ) );
+      applyBoolOption( c.transliteration.chinese.enableTCToSCConversion, chinese.namedItem( "enableTCToSCConversion" ) );
+    }
+#endif
 
     QDomNode romaji = transliteration.namedItem( "romaji" );
 
@@ -547,7 +570,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = programs.toElement().elementsByTagName( "program" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement pr = nl.item( x ).toElement();
 
@@ -572,7 +595,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = mws.toElement().elementsByTagName( "mediawiki" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement mw = nl.item( x ).toElement();
 
@@ -600,7 +623,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = wss.toElement().elementsByTagName( "website" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ws = nl.item( x ).toElement();
 
@@ -627,7 +650,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = dss.toElement().elementsByTagName( "server" );
 
-    for( unsigned x = 0; x < nl.length(); ++x )
+    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ds = nl.item( x ).toElement();
 
@@ -656,7 +679,7 @@ Class load() throw( exError )
   {
     QDomNodeList nl = ves.toElement().elementsByTagName( "voiceEngine" );
 
-    for ( unsigned x = 0; x < nl.length(); ++x )
+    for ( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ve = nl.item( x ).toElement();
       VoiceEngine v;
@@ -1198,6 +1221,29 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "enableBelarusianTransliteration" );
     opt.appendChild( dd.createTextNode( c.transliteration.enableBelarusianTransliteration ? "1":"0" ) );
     transliteration.appendChild( opt );
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+    // Chinese
+
+    QDomElement chinese = dd.createElement( "chinese" );
+    transliteration.appendChild( chinese );
+
+    opt = dd.createElement( "enable" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enable ? "1":"0" ) );
+    chinese.appendChild( opt );
+
+    opt = dd.createElement( "enableSCToTWConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSCToTWConversion ? "1":"0" ) );
+    chinese.appendChild( opt );
+
+    opt = dd.createElement( "enableSCToHKConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableSCToHKConversion ? "1":"0" ) );
+    chinese.appendChild( opt );
+
+    opt = dd.createElement( "enableTCToSCConversion" );
+    opt.appendChild( dd.createTextNode( c.transliteration.chinese.enableTCToSCConversion ? "1":"0" ) );
+    chinese.appendChild( opt );
+#endif
 
     // Romaji
 
@@ -1978,6 +2024,26 @@ QString getHelpDir() throw()
   else
     return QCoreApplication::applicationDirPath() + "/help";
 }
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+QString getOpenCCDir() throw()
+{
+#if defined( Q_OS_WIN )
+  if ( QDir( "opencc" ).exists() )
+    return "opencc";
+  else
+    return QCoreApplication::applicationDirPath() + "/opencc";
+#elif defined( Q_OS_MAC )
+  QString path = QCoreApplication::applicationDirPath() + "/opencc";
+  if ( QDir( path ).exists() )
+    return path;
+
+  return QString();
+#else
+  return QString();
+#endif
+}
+#endif
 
 bool isPortableVersion() throw()
 {

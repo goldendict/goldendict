@@ -55,6 +55,8 @@
 // For SVG handling
 #include <QtSvg/QSvgRenderer>
 
+#include "qt4x5.hh"
+
 namespace Dsl {
 
 using namespace Details;
@@ -83,7 +85,8 @@ enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 21 + BtreeIndexing::FormatVersion + Folding::Version,
-  CurrentZipSupportVersion = 2
+  CurrentZipSupportVersion = 2,
+  CurrentFtsIndexVersion = 1
 };
 
 struct IdxHeader
@@ -233,6 +236,9 @@ public:
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
 
+  virtual uint32_t getFtsIndexVersion()
+  { return CurrentFtsIndexVersion; }
+
 protected:
 
   virtual void loadIcon() throw();
@@ -284,7 +290,7 @@ DslDictionary::DslDictionary( string const & id,
   ftsIdxName = indexFile + "_FTS";
 
   if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
-      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) )
+      && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
 
   // Read the dictionary name
@@ -337,11 +343,11 @@ public:
 
 void DslDictionary::deferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -365,11 +371,11 @@ string const & DslDictionary::ensureInitDone()
 
 void DslDictionary::doDeferredInit()
 {
-  if ( !deferredInitDone )
+  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( deferredInitDone )
+    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     // Do deferred init
@@ -827,7 +833,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"com" ) )
     result += "<span class=\"dsl_com\">" + processNodeChildren( node ) + "</span>";
   else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) )
+  if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
     string filename = Utf8::encode( node.renderAsText() );
     string n =
@@ -850,7 +856,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "gdau" );
       url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -865,7 +871,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       vector< char > imgdata;
       bool resize = false;
@@ -946,7 +952,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "gdvideo" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       result += string( "<a class=\"dsl_s dsl_video\" href=\"" ) + url.toEncoded().data() + "\">"
              + "<span class=\"img\"></span>"
@@ -959,7 +965,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( QString::fromUtf8( filename.c_str() ) );
+      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       result += string( "<a class=\"dsl_s\" href=\"" ) + url.toEncoded().data()
              + "\">" + processNodeChildren( node ) + "</a>";
@@ -1040,7 +1046,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
-    url.setPath( gd::toQString( node.renderAsText() ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( node.renderAsText() ) ) );
     if( !node.tagAttrs.empty() )
     {
       QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
@@ -1049,7 +1055,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
         QList< QPair< QString, QString > > query;
         query.append( QPair< QString, QString >( attr.left( n ), attr.mid( n + 1 ) ) );
-        url.setQueryItems( query );
+        Qt4x5::Url::setQueryItems( url, query );
       }
     }
 
@@ -1067,7 +1073,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
     normalizeHeadword( nodeStr );
-    url.setPath( gd::toQString( nodeStr ) );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
 
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
               + processNodeChildren( node ) + "</a>";
@@ -1173,7 +1179,7 @@ QString DslDictionary::getMainFilename()
 void DslDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName ) ) )
+         || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
     FTS_index_completed.ref();
 
 
@@ -1370,17 +1376,61 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
     // Parse article text
 
-    // Strip [!trs] areas
+    // Strip some areas
+
+    const int stripTagsNumber = 5;
+    static QString stripTags[ stripTagsNumber ] =
+                                                  {
+                                                    "s",
+                                                    "url",
+                                                    "!trs",
+                                                    "video",
+                                                    "preview"
+                                                  };
+    static QString stripEndTags[ stripTagsNumber ] =
+                                                  {
+                                                    "[/s]",
+                                                    "[/url]",
+                                                    "[/!trs]",
+                                                    "[/video]",
+                                                    "[/preview]"
+                                                  };
+
     int pos = 0;
     while( pos >= 0 )
     {
-      pos = text.indexOf( QLatin1String( "[!trs]" ), pos, Qt::CaseInsensitive );
+      pos = text.indexOf( '[', pos, Qt::CaseInsensitive );
       if( pos >= 0 )
       {
-        int pos2 = text.indexOf( QLatin1String( "[/!trs]" ), pos + 6, Qt::CaseInsensitive );
-        text.remove( pos, pos2 > 0 ? pos2 - pos + 7 : text.length() - pos );
+        if( ( pos > 0 && text[ pos - 1 ] == '\\' && ( pos < 2 || text[ pos - 2 ] != '\\' ) )
+              || ( pos > text.size() - 2 || text[ pos + 1 ] == '/' ) )
+        {
+          pos += 1;
+          continue;
+        }
+
+        int pos2 = text.indexOf( ']',  pos + 1, Qt::CaseInsensitive );
+        if( pos2 < 0 )
+          break;
+
+        QString tag = text.mid( pos + 1, pos2 - pos - 1 );
+
+        int n;
+        for( n = 0; n < stripTagsNumber; n++ )
+        {
+          if( tag.compare( stripTags[ n ], Qt::CaseInsensitive ) == 0 )
+          {
+            pos2 = text.indexOf( stripEndTags[ n ] , pos + stripTags[ n ].size() + 2, Qt::CaseInsensitive );
+            text.remove( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos );
+            break;
+          }
+        }
+
+        if( n >= stripTagsNumber )
+          pos += 1;
       }
     }
+
     // Strip tags
 
     text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
@@ -1494,7 +1544,7 @@ void DslArticleRequestRunnable::run()
 
 void DslArticleRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1529,7 +1579,7 @@ void DslArticleRequest::run()
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     // Check if we're cancelled occasionally
-    if ( isCancelled )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1696,7 +1746,7 @@ void DslResourceRequestRunnable::run()
 void DslResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

@@ -2876,3 +2876,11 @@ in bg url to hide it from iemac */
     vertical-align: text-bottom;
     background-image:url('qrcx://localhost/icons/downarrow.png');
 }
+
+/********** Slob dictionaries ***********/
+
+.slobdict img.imgtex
+{
+    vertical-align: baseline !important;
+}
+

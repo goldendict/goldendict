@@ -29,9 +29,14 @@
 #include "mdx.hh"
 #include "zim.hh"
 #include "dictserver.hh"
+#include "slob.hh"
 
 #ifndef NO_EPWING_SUPPORT
 #include "epwing.hh"
+#endif
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+#include "chinese.hh"
 #endif
 
 #include <QMessageBox>
@@ -58,7 +63,7 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
               << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
               << "*.mdx"
 #ifdef MAKE_ZIM_SUPPORT
-              << "*.zim" << "*.zimaa"
+              << "*.zim" << "*.zimaa" << "*.slob"
 #endif
 #ifndef NO_EPWING_SUPPORT
               << "*catalogs"
@@ -207,6 +212,13 @@ void LoadDictionaries::handlePath( Config::Path const & path )
     dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
                          zimDictionaries.end() );
   }
+  {
+    vector< sptr< Dictionary::Class > > slobDictionaries =
+      Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), slobDictionaries.begin(),
+                         slobDictionaries.end() );
+  }
 #endif
 #ifndef NO_EPWING_SUPPORT
   {
@@ -264,6 +276,17 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   dictionaries = loadDicts.getDictionaries();
 
   ///// We create transliterations syncronously since they are very simple
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  // Make Chinese conversion
+  {
+    vector< sptr< Dictionary::Class > > chineseDictionaries =
+      Chinese::makeDictionaries( cfg.transliteration.chinese );
+
+    dictionaries.insert( dictionaries.end(), chineseDictionaries.begin(),
+                         chineseDictionaries.end() );
+  }
+#endif
 
   // Make Romaji
   {
@@ -349,7 +372,9 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   set< string > ids;
   std::pair< std::set< string >::iterator, bool > ret;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
   QTextCodec::setCodecForCStrings( QTextCodec::codecForName( "UTF8" ) );
+#endif
 
   for( unsigned x = dictionaries.size(); x--; )
   {

@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include "gddebug.hh"
 #include "wstring_qt.hh"
+#include "qt4x5.hh"
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -166,6 +167,19 @@ BtreeWordSearchRequest::BtreeWordSearchRequest( BtreeDictionary & dict_,
 
 void BtreeWordSearchRequest::findMatches()
 {
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  {
+    finish();
+    return;
+  }
+
+  if ( dict.ensureInitDone().size() )
+  {
+    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    finish();
+    return;
+  }
+  
   QRegExp regexp;
   bool useWildcards = false;
   if( allowMiddleMatches )
@@ -292,7 +306,6 @@ void BtreeWordSearchRequest::findMatches()
     for( ; ; )
     {
       bool exactMatch;
-
       vector< char > leaf;
       uint32_t nextLeaf;
       char const * leafEnd;
@@ -304,7 +317,7 @@ void BtreeWordSearchRequest::findMatches()
       if ( chainOffset )
       for( ; ; )
       {
-        if ( isCancelled )
+        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
         //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
@@ -348,7 +361,7 @@ void BtreeWordSearchRequest::findMatches()
             }
           }
 
-          if( isCancelled )
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
             break;
 
           if ( matches.size() >= maxResults )
@@ -394,10 +407,7 @@ void BtreeWordSearchRequest::findMatches()
         }
       }
 
-      if ( isCancelled )
-        break;
-
-      if ( charsLeftToChop && !isCancelled )
+      if ( charsLeftToChop && !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       {
         --charsLeftToChop;
         folded.resize( folded.size() - 1 );
@@ -408,8 +418,8 @@ void BtreeWordSearchRequest::findMatches()
   }
   catch( std::exception & e )
   {
-    qWarning( "Index searching failed: \"%s\", error: %s\n", e.what(),
-              dict.getName().c_str() );
+    qWarning( "Index searching failed: \"%s\", error: %s\n",
+              dict.getName().c_str(), e.what() );
   }
   catch(...)
   {
@@ -419,7 +429,7 @@ void BtreeWordSearchRequest::findMatches()
 
 void BtreeWordSearchRequest::run()
 {
-  if ( isCancelled )
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1065,7 +1075,22 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
   // Safeguard us against various bugs here. Don't attempt adding words
   // which are freakishly huge.
   if ( wordSize > maxHeadwordSize )
+  {
+#define MAX_LOG_WORD_SIZE 500
+    string headword;
+    if( wordSize <= MAX_LOG_WORD_SIZE )
+      headword = Utf8::encode( word );
+    else
+    {
+      std::vector< char > buffer( MAX_LOG_WORD_SIZE * 4 );
+      headword = string( &buffer.front(),
+                         Utf8::encode( wordBegin, MAX_LOG_WORD_SIZE, &buffer.front() ) );
+      headword += "...";
+    }
+    gdWarning( "Skipped too long headword: \"%s\"", headword.c_str() );
     return;
+#undef MAX_LOG_WORD_SIZE
+  }
 
   // Skip any leading whitespace
   while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
@@ -1249,7 +1274,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && *isCancelled )
+    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1285,7 +1310,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
     vector< WordArticleLink > result = readChain( chainPtr );
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      if( isCancelled && *isCancelled )
+      if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
         return;
 
       if( headwords )
@@ -1354,7 +1379,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && *isCancelled )
+    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1399,6 +1424,9 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
       if( it != offsets.end() )
       {
+        if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+          return;
+
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
         offsets.erase( it );
         begOffsets = offsets.begin();

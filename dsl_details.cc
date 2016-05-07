@@ -235,6 +235,11 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
           }
           openTag( name, attrs, stack );
+          if ( name == GD_NATIVE_TO_WS( L"br" ) )
+          {
+            // [br] tag don't have closing tag
+            closeTag( name, stack );
+          }
         }
         else
         {
@@ -269,7 +274,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             nextChar();
           } while( Folding::isWhitespace( ch ) );
 
-          wstring linkTo;
+          wstring linkTo, linkText;
 
           for( ; ; nextChar() )
           {
@@ -284,10 +289,21 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               {
                 linkTo.push_back( L'>' );
                 linkTo.push_back( ch );
+
+                linkText.push_back( L'>' );
+                if( escaped )
+                  linkText.push_back( L'\\' );
+                linkText.push_back( ch );
               }
             }
             else
+            {
               linkTo.push_back( ch );
+
+              if( escaped )
+                linkText.push_back( L'\\' );
+              linkText.push_back( ch );
+            }
           }
 
           // Add the corresponding node
@@ -299,8 +315,13 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             textNode = 0;
           }
 
+          linkText = Folding::trimWhitespace( linkText );
+          processUnsortedParts( linkText, true );
+          ArticleDom nodeDom( linkText, dictName, headword_ );
+
           Node link( Node::Tag(), GD_NATIVE_TO_WS( L"ref" ), wstring() );
-          link.push_back( Node( Node::Text(), linkTo ) );
+          for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
+            link.push_back( *n );
 
           if ( stack.empty() )
             root.push_back( link );
@@ -567,9 +588,9 @@ void ArticleDom::closeTag( wstring const & name,
         nodesToReopen.push_back( Node( Node::Tag(), stack.back()->tagName,
                                        stack.back()->tagAttrs ) );
 
-      if ( stack.back()->empty() )
+      if ( stack.back()->empty() && stack.back()->tagName != GD_NATIVE_TO_WS( L"br" ) )
       {
-        // Empty nodes are deleted since they're no use
+        // Empty nodes except [br] tag are deleted since they're no use
 
         stack.pop_back();
 

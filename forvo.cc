@@ -5,7 +5,6 @@
 #include "wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QUrl>
 #include <QtXml>
 #include <list>
 #include "audiolink.hh"
@@ -15,6 +14,7 @@
 #include "langcoder.hh"
 #include "utf8.hh"
 #include "gddebug.hh"
+#include "qt4x5.hh"
 
 namespace Forvo {
 
@@ -244,7 +244,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 
             articleBody += "<table class=\"forvo_play\">";
 
-            for( unsigned x = 0; x < nl.length(); ++x )
+            for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
             {
               QDomElement item = nl.item( x ).toElement();
 

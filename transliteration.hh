@@ -13,7 +13,45 @@ using std::map;
 using gd::wstring;
 using std::string;
 using std::vector;
-  
+
+
+/// This is a base dictionary class for simple transliteratons
+class BaseTransliterationDictionary: public Dictionary::Class
+{
+  string name;
+
+protected:
+  bool caseSensitive;
+
+public:
+
+  BaseTransliterationDictionary( string const & id, string const & name,
+                                 QIcon icon, bool caseSensitive = true );
+
+  virtual string getName() throw();
+
+  virtual map< Dictionary::Property, string > getProperties() throw();
+
+  virtual unsigned long getArticleCount() throw();
+
+  virtual unsigned long getWordCount() throw();
+
+  virtual vector< wstring > getAlternateWritings( wstring const & )
+    throw() = 0;
+
+  virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
+    throw( std::exception );
+
+  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                             unsigned long ) throw( std::exception );
+
+  virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                      vector< wstring > const &,
+                                                      wstring const & )
+    throw( std::exception );
+};
+
+
 class Table: public map< wstring, wstring >
 {
   unsigned maxEntrySize;
@@ -25,7 +63,7 @@ public:
 
   unsigned getMaxEntrySize() const
   { return maxEntrySize; }
-  
+
 protected:
 
   /// Inserts new entry into index. from and to are UTF8-encoded strings.
@@ -33,13 +71,12 @@ protected:
   void ins( char const * from, char const * to );
 };
 
-/// This is a base dictionary class for simple transliteratons
-class TransliterationDictionary: public Dictionary::Class
+
+/// A base dictionary class for table based transliteratons
+class TransliterationDictionary: public BaseTransliterationDictionary
 {
-  string name;
   Table const & table;
-  bool caseSensitive;
-  
+
 public:
 
   TransliterationDictionary( string const & id, string const & name,
@@ -47,27 +84,8 @@ public:
                              Table const & table,
                              bool caseSensitive = true );
 
-  virtual string getName() throw();
-
-  virtual map< Dictionary::Property, string > getProperties() throw();
-  
-  virtual unsigned long getArticleCount() throw();
-
-  virtual unsigned long getWordCount() throw();
-  
   virtual vector< wstring > getAlternateWritings( wstring const & )
     throw();
-
-  virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception );
-  
-  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
-                                                             unsigned long ) throw( std::exception );
-  
-  virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const &,
-                                                      wstring const & )
-    throw( std::exception );
 };
 
 }

@@ -7,9 +7,16 @@
 #include <QStandardItemModel>
 #include "gddebug.hh"
 
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+#include "chineseconversion.hh"
+#endif
+
 
 Sources::Sources( QWidget * parent, Config::Class const & cfg):
   QWidget( parent ),
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  chineseConversion( new ChineseConversion( this, cfg.transliteration.chinese ) ),
+#endif
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
   textToSpeechSource( NULL ),
 #endif
@@ -93,6 +100,12 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.enableGermanTransliteration->setChecked( trs.enableGermanTransliteration );
   ui.enableGreekTransliteration->setChecked( trs.enableGreekTransliteration );
   ui.enableBelarusianTransliteration->setChecked( trs.enableBelarusianTransliteration );
+
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  ui.transliterationLayout->addWidget(chineseConversion);
+  ui.transliterationLayout->addItem(new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding));
+#endif
+
   ui.enableRomaji->setChecked( trs.romaji.enable );
   ui.enableHepburn->setChecked( trs.romaji.enableHepburn );
   ui.enableNihonShiki->setChecked( trs.romaji.enableNihonShiki );
@@ -349,6 +362,9 @@ Config::Transliteration Sources::getTransliteration() const
   tr.enableGermanTransliteration = ui.enableGermanTransliteration->isChecked();
   tr.enableGreekTransliteration = ui.enableGreekTransliteration->isChecked();
   tr.enableBelarusianTransliteration = ui.enableBelarusianTransliteration->isChecked();
+#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  chineseConversion->getConfig( tr.chinese );
+#endif
   tr.romaji.enable = ui.enableRomaji->isChecked();
   tr.romaji.enableHepburn = ui.enableHepburn->isChecked();
   tr.romaji.enableNihonShiki = ui.enableNihonShiki->isChecked();
@@ -401,7 +417,7 @@ void MediaWikisModel::addNewWiki()
 
 QModelIndex MediaWikisModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex MediaWikisModel::parent( QModelIndex const & /*parent*/ ) const
@@ -558,7 +574,7 @@ void WebSitesModel::addNewSite()
 
 QModelIndex WebSitesModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex WebSitesModel::parent( QModelIndex const & /*parent*/ ) const
@@ -714,7 +730,7 @@ void DictServersModel::addNewServer()
 
 QModelIndex DictServersModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex DictServersModel::parent( QModelIndex const & /*parent*/ ) const
@@ -890,7 +906,7 @@ void ProgramsModel::addNewProgram()
 
 QModelIndex ProgramsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex ProgramsModel::parent( QModelIndex const & /*parent*/ ) const
@@ -1079,7 +1095,7 @@ void PathsModel::addNewPath( QString const & path )
 
 QModelIndex PathsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex PathsModel::parent( QModelIndex const & /*parent*/ ) const
@@ -1185,7 +1201,7 @@ void SoundDirsModel::addNewSoundDir( QString const & path, QString const & name 
 
 QModelIndex SoundDirsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex SoundDirsModel::parent( QModelIndex const & /*parent*/ ) const
@@ -1289,12 +1305,13 @@ HunspellDictsModel::HunspellDictsModel( QWidget * parent,
 void HunspellDictsModel::changePath( QString const & newPath )
 {
   dataFiles = HunspellMorpho::findDataFiles( newPath );
-  reset();
+  beginResetModel();
+  endResetModel();
 }
 
 QModelIndex HunspellDictsModel::index( int row, int column, QModelIndex const & /*parent*/ ) const
 {
-  return createIndex( row, column, 0 );
+  return createIndex( row, column );
 }
 
 QModelIndex HunspellDictsModel::parent( QModelIndex const & /*parent*/ ) const

@@ -322,7 +322,7 @@ quint32 LangCoder::guessId( const QString & lang )
   {
     for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
     {
-      if ( lstr == QString( lc->lang ) )
+      if ( lstr == ( lstr.size() == 3 ? QString( lc->code3 ) : QString( lc->lang ) ) )
       {
         // We've got a match
         return code2toInt( lc->code );
