@@ -3308,11 +3308,24 @@ void MainWindow::on_saveArticle_triggered()
       while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
       {
         QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
+        QString anchor;
+        name.replace( "?gdanchor=", "#" );
+        int n = name.indexOf( '#' );
+        if( n > 0 )
+        {
+          anchor = name.mid( n );
+          name.truncate( n );
+          anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
+        }
         name.replace( rxName, "_" );
-        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html\"";
+        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
         html.replace( pos, rx3.cap().length(), name );
         pos += name.length();
       }
+
+      // MDict anchors
+      QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
+      html.replace( anchorLinkRe, "\\1" );
 
       if ( complete )
       {
