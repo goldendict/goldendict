@@ -963,6 +963,25 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
   article = MdictParser::substituteStylesheet( article, styleSheets );
   if( !noFilter )
     article = filterResource( articleId, article );
+
+  // Check for unclosed <span> and <div>
+
+  int openTags = article.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );
+  int closedTags = article.count( QRegExp( "<\\s*/span\\s*>", Qt::CaseInsensitive ) );
+  while( openTags > closedTags )
+  {
+    article += "</span>";
+    closedTags += 1;
+  }
+
+  openTags = article.count( QRegExp( "<\\s*div\\b", Qt::CaseInsensitive ) );
+  closedTags = article.count( QRegExp( "<\\s*/div\\s*>", Qt::CaseInsensitive ) );
+  while( openTags > closedTags )
+  {
+    article += "</div>";
+    closedTags += 1;
+  }
+
   articleText = string( article.toUtf8().constData() );
 }
 
