@@ -969,7 +969,7 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
 QString & MdxDictionary::filterResource( QString const & articleId, QString & article )
 {
   QString id = QString::fromStdString( getId() );
-  QString uniquePrefix = id + "_" + articleId + "_";
+  QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 

@@ -496,8 +496,8 @@ void ArticleView::loadFinished( bool )
     // Find GD anchor on page
 
     int n = anchor.indexOf( '_' );
-    if( n == 32 )
-      // MDict pattern: (dictionary ID (32 chars))_(articleID(quint64, hex))_(original anchor)
+    if( n == 33 )
+      // MDict pattern: ("g" + dictionary ID (33 chars total))_(articleID(quint64, hex))_(original anchor)
       n = anchor.indexOf( '_', n + 1 );
     else
       n = 0;
@@ -508,14 +508,17 @@ void ArticleView::loadFinished( bool )
 
       QRegExp rx;
       rx.setMinimal( true );
-      rx.setPattern( anchor.left( 33 ) + "[0-9a-f]*_" + originalAnchor );
+      rx.setPattern( anchor.left( 34 ) + "[0-9a-f]*_" + originalAnchor );
 
       QWebElementCollection coll = ui.definition->page()->mainFrame()->findAllElements( "a[name]" );
+      coll += ui.definition->page()->mainFrame()->findAllElements( "a[id]" );
 
       for( QWebElementCollection::iterator it = coll.begin(); it != coll.end(); ++it )
       {
         QString name = (*it).attribute( "name" );
-        if( rx.indexIn( name ) >= 0 )
+        QString id = (*it).attribute( "id" );
+        if( ( !name.isEmpty() && rx.indexIn( name ) >= 0 )
+            || ( !id.isEmpty() && rx.indexIn( id ) >= 0 ))
         {
           // Anchor found, jump to it
 
