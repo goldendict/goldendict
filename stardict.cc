@@ -919,9 +919,9 @@ QString const& StardictDictionary::getDescription()
     {
       QString desc = QString::fromUtf8( ifo.description.c_str() );
       desc.replace( "\t", "<br/>" );
-      desc.replace( "\\n", "\n" );
-      desc.replace( "<br>", "\n", Qt::CaseInsensitive );
-      dictionaryDescription += Html::unescape( desc );
+      desc.replace( "\\n", "<br/>" );
+      desc.replace( "<br>", "<br/>", Qt::CaseInsensitive );
+      dictionaryDescription += Html::unescape( desc, true );
     }
 
     if( dictionaryDescription.isEmpty() )
