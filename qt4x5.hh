@@ -53,10 +53,14 @@ namespace Url
 //       https://codereview.qt-project.org/#change,38257
 inline QString ensureLeadingSlash( const QString & path )
 {
+#if IS_QT_5
   QLatin1Char slash( '/' );
   if ( path.startsWith( slash ) )
     return path;
   return slash + path;
+#else
+  return path;
+#endif
 }
 
 inline bool hasQueryItem( QUrl const & url, QString const & key )
