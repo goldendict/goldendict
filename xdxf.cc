@@ -625,7 +625,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
 
   {
     Mutex::Lock _( idxMutex );
-  
+
     propertiesData = chunks->getBlock( address, chunk );
   }
 
@@ -736,7 +736,39 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
     maxSize = 1;
 
   // The returning value translates directly to QIODevice semantics
-  return gzread( gz, data, maxSize );
+  int size = gzread( gz, data, maxSize );
+
+  if ( size == 0 )
+    return 0;
+
+  // Since XDXF should be utf-8 encoded, we can treat the data as utf-8 string
+  const uchar u8LeadChar = *( ( const uchar * ) data );
+
+  if ( u8LeadChar < 0x80 )
+    return size;
+
+  // Seek forward if it seems an utf8 sequence
+  static const int u8MaxLen = 6;
+  static const uchar u8MaskTab[ u8MaxLen ] = { 0x80, 0xe0, 0xf0, 0xf8, 0xfc, 0xfe };
+  static const uchar u8ValTab[ u8MaxLen ] = { 0x00, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc };
+
+  int u8Len = 0;
+  for ( ; u8Len < u8MaxLen; u8Len++ )
+  {
+    if ( ( u8LeadChar & u8MaskTab[ u8Len ] ) == u8ValTab[ u8Len ] )
+      break;
+  }
+
+  u8Len++;
+
+  if ( u8Len > u8MaxLen )
+  {
+    // not a valid utf8 sequence
+    return size;
+  }
+
+  size += gzread( gz, data + 1, u8Len - 1 );
+  return size;
 }
 
 char * GzippedFile::readDataArray( unsigned long startPos, unsigned long size )
@@ -814,7 +846,7 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
   while( !stream.atEnd() )
   {
     stream.readNext();
-  
+
     if ( stream.isStartElement() )
       addAllKeyTags( stream, words );
     else
