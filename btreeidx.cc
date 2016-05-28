@@ -556,6 +556,9 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
       else
       {
         // A leaf
+        if( !leafEntries )
+          return 0;
+
         return leaf + sizeof( uint32_t );
       }
     }
