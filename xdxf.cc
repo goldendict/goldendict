@@ -71,7 +71,7 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -189,6 +189,9 @@ public:
               && !fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive )
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
+
+  virtual uint32_t getFtsIndexVersion()
+  { return 1; }
 
 protected:
 
@@ -736,7 +739,32 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
     maxSize = 1;
 
   // The returning value translates directly to QIODevice semantics
-  return gzread( gz, data, maxSize );
+  int n = gzread( gz, data, maxSize );
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+  // With QT 5.x QXmlStreamReader ask one byte instead of one UTF-8 char.
+  // We read and return all bytes for char.
+
+  if( n == 1 )
+  {
+    char ch = *data;
+    int addBytes = 0;
+    if( ch & 0x80 )
+    {
+      if( ( ch & 0xF8 ) == 0xF0 )
+        addBytes = 3;
+      else if( ( ch & 0xF0 ) == 0xE0 )
+        addBytes = 2;
+      else if( ( ch & 0xE0 ) == 0xC0 )
+        addBytes = 1;
+    }
+
+    if( addBytes )
+      n += gzread( gz, data + 1, addBytes );
+  }
+#endif
+
+  return n;
 }
 
 char * GzippedFile::readDataArray( unsigned long startPos, unsigned long size )
