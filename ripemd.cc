@@ -171,9 +171,16 @@ void RIPEMD128::update( const uint8_t * data, size_t len )
   memcpy( &buffer[j], &data[i], len - i );
 }
 
+#ifndef av_bswap64
+static inline uint64_t av_bswap64(uint64_t x)
+{
+  return (uint64_t)qFromLittleEndian<uint32_t>(x) << 32 | qFromLittleEndian<uint32_t>(x >> 32);
+}
+#endif
+
 void RIPEMD128::digest( uint8_t * digest )
 {
-  uint64_t finalcount = qFromLittleEndian( count << 3 );
+  uint64_t finalcount = av_bswap64( count << 3 );
   update( (const uint8_t *) "\200", 1 );
   while ( ( count & 63 ) != 56 )
     update( ( const uint8_t * ) "", 1 );
