@@ -20,6 +20,7 @@
 #define __RIPEMD_HH_INCLUDED__
 
 #include <stddef.h>
+#include <QtGlobal>
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
@@ -33,17 +34,17 @@ public:
   RIPEMD128();
 
   // Update hash value
-  void update( const uint8_t * data, size_t len );
+  void update( const uchar * data, size_t len );
 
   // Finish hashing and output digest value.
-  void digest( uint8_t * digest );
+  void digest( uchar * digest );
 
 private:
-  uint64_t count;       // number of bytes in buffer
-  uint8_t  buffer[64];  // 512-bit buffer of input values used in hash updating
-  uint32_t state[10];   // current hash value
+  quint64 count;       // number of bytes in buffer
+  uchar  buffer[64];  // 512-bit buffer of input values used in hash updating
+  quint32 state[10];   // current hash value
 
-  void transform( const uint8_t buffer[64] );
+  void transform( const uchar buffer[64] );
 };
 
 #endif // __RIPEMD_HH_INCLUDED__
