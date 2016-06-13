@@ -409,7 +409,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             // Add url scheme to image source urls
             articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );
             //fix src="/foo/bar/Baz.png"
-            articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() +"/" );
+            articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
 
             // Replace the href="/foo/bar/Baz" to just href="Baz".
             articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
