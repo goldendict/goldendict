@@ -249,6 +249,8 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     articleBody.prepend( divStr.toUtf8() );
     articleBody.append( "</div>" );
 
+    articleBody.prepend( "<div class=\"website_padding\"></div>" );
+
     Mutex::Lock _( dataMutex );
 
     size_t prevSize = data.size();

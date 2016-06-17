@@ -568,6 +568,8 @@ void WebSitesModel::addNewSite()
 
   w.url = "http://";
 
+  w.inside_iframe = true;
+
   beginInsertRows( QModelIndex(), webSites.size(), webSites.size() );
   webSites.push_back( w );
   endInsertRows();
