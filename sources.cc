@@ -58,6 +58,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.webSites->resizeColumnToContents( 1 );
   ui.webSites->resizeColumnToContents( 2 );
   ui.webSites->resizeColumnToContents( 3 );
+  ui.webSites->resizeColumnToContents( 4 );
 
   ui.dictServers->setTabKeyNavigation( true );
   ui.dictServers->setModel( &dictServersModel );
@@ -588,7 +589,7 @@ Qt::ItemFlags WebSitesModel::flags( QModelIndex const & index ) const
 
   if ( index.isValid() )
   {
-    if ( !index.column() )
+    if ( index.column() <= 1 )
       result |= Qt::ItemIsUserCheckable;
     else
       result |= Qt::ItemIsEditable;
@@ -615,16 +616,26 @@ int WebSitesModel::columnCount( QModelIndex const & parent ) const
 
 QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const
 {
+  if( role == Qt::ToolTipRole )
+  {
+    if( section == 1 )
+      return tr( "Insert article as link inside <iframe> tag" );
+
+    return QVariant();
+  }
+
   if ( role == Qt::DisplayRole )
     switch( section )
     {
       case 0:
         return tr( "Enabled" );
       case 1:
-        return tr( "Name" );
+        return tr( "As link" );
       case 2:
-        return tr( "Address" );
+        return tr( "Name" );
       case 3:
+        return tr( "Address" );
+      case 4:
         return tr( "Icon" );
       default:
         return QVariant();
@@ -638,15 +649,23 @@ QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
   if ( index.row() >= webSites.size() )
     return QVariant();
 
+  if( role == Qt::ToolTipRole )
+  {
+    if( index.column() == 1 )
+      return tr( "Insert article as link inside <iframe> tag" );
+
+    return QVariant();
+  }
+
   if ( role == Qt::DisplayRole || role == Qt::EditRole )
   {
     switch( index.column() )
     {
-      case 1:
-        return webSites[ index.row() ].name;
       case 2:
-        return webSites[ index.row() ].url;
+        return webSites[ index.row() ].name;
       case 3:
+        return webSites[ index.row() ].url;
+      case 4:
         return webSites[ index.row() ].iconFilename;
       default:
         return QVariant();
@@ -655,6 +674,9 @@ QVariant WebSitesModel::data( QModelIndex const & index, int role ) const
 
   if ( role == Qt::CheckStateRole && !index.column() )
     return webSites[ index.row() ].enabled ? Qt::Checked : Qt::Unchecked;
+
+  if ( role == Qt::CheckStateRole && index.column() == 1 )
+    return webSites[ index.row() ].inside_iframe ? Qt::Checked : Qt::Unchecked;
 
   return QVariant();
 }
@@ -677,18 +699,26 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
     return true;
   }
 
+  if ( role == Qt::CheckStateRole && index.column() == 1 )
+  {
+    webSites[ index.row() ].inside_iframe = !webSites[ index.row() ].inside_iframe;
+
+    dataChanged( index, index );
+    return true;
+  }
+
   if ( role == Qt::DisplayRole || role == Qt::EditRole )
     switch( index.column() )
     {
-      case 1:
+      case 2:
         webSites[ index.row() ].name =  value.toString();
         dataChanged( index, index );
         return true;
-      case 2:
+      case 3:
         webSites[ index.row() ].url =  value.toString();
         dataChanged( index, index );
         return true;
-      case 3:
+      case 4:
         webSites[ index.row() ].iconFilename =  value.toString();
         dataChanged( index, index );
         return true;

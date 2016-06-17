@@ -6,6 +6,8 @@
 
 #include "dictionary.hh"
 #include "config.hh"
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 /// Support for any web sites via a templated url.
 namespace WebSite {
@@ -13,8 +15,20 @@ namespace WebSite {
 using std::vector;
 using std::string;
 
-vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & )
+vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const &,
+                                                      QNetworkAccessManager & )
     throw( std::exception );
+
+/// Exposed here for moc
+class WebSiteDataRequestSlots: public Dictionary::DataRequest
+{
+  Q_OBJECT
+
+protected slots:
+
+  virtual void requestFinished( QNetworkReply * )
+  {}
+};
 
 }
 

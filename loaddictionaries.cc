@@ -328,7 +328,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   ///// WebSites are very simple, no need to create them asyncronously
   {
     vector< sptr< Dictionary::Class > > dicts =
-      WebSite::makeDictionaries( cfg.webSites );
+      WebSite::makeDictionaries( cfg.webSites, dictNetMgr );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }

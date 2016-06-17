@@ -276,17 +276,20 @@ struct WebSite
   QString id, name, url;
   bool enabled;
   QString iconFilename;
+  bool inside_iframe;
 
   WebSite(): enabled( false )
   {}
 
   WebSite( QString const & id_, QString const & name_, QString const & url_,
-           bool enabled_, QString const & iconFilename_ ):
-    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), iconFilename( iconFilename_ ) {}
+           bool enabled_, QString const & iconFilename_, bool inside_iframe_ ):
+    id( id_ ), name( name_ ), url( url_ ), enabled( enabled_ ), iconFilename( iconFilename_ ),
+    inside_iframe( inside_iframe_ ) {}
 
   bool operator == ( WebSite const & other ) const
   { return id == other.id && name == other.name && url == other.url &&
-           enabled == other.enabled && iconFilename == other.iconFilename; }
+           enabled == other.enabled && iconFilename == other.iconFilename &&
+           inside_iframe == other.inside_iframe; }
 };
 
 /// All the WebSites

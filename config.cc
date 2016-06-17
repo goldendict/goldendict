@@ -203,11 +203,11 @@ WebSites makeDefaultWebSites()
 {
   WebSites ws;
 
-  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "https://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false, "" ) );
-  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "https://www.urbandictionary.com/define.php?term=%GDWORD%", false, "" ) );
-  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "https://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "" ) );
-  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "" ) );
-  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "" ) );
+  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "https://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false, "", true ) );
+  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "https://www.urbandictionary.com/define.php?term=%GDWORD%", false, "", true ) );
+  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "https://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "", true ) );
+  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "", true ) );
+  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "", true ) );
 
   return ws;
 }
@@ -634,6 +634,7 @@ Class load() throw( exError )
       w.url = ws.attribute( "url" );
       w.enabled = ( ws.attribute( "enabled" ) == "1" );
       w.iconFilename = ws.attribute( "icon" );
+      w.inside_iframe = ( ws.attribute( "inside_iframe", "1" ) == "1" );
 
       c.webSites.push_back( w );
     }
@@ -1353,6 +1354,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr icon = dd.createAttribute( "icon" );
       icon.setValue( i->iconFilename );
       ws.setAttributeNode( icon );
+
+      QDomAttr inside_iframe = dd.createAttribute( "inside_iframe" );
+      inside_iframe.setValue( i->inside_iframe ? "1" : "0" );
+      ws.setAttributeNode( inside_iframe );
     }
   }
 
