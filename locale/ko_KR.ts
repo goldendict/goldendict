@@ -29,12 +29,12 @@
         <translation>Licensed under GNU GPLv3 or later</translation>
     </message>
     <message>
-        <location filename="../about.cc" line="17"/>
+        <location filename="../about.cc" line="19"/>
         <source>[Unknown]</source>
         <translation>[모름]</translation>
     </message>
     <message>
-        <location filename="../about.cc" line="34"/>
+        <location filename="../about.cc" line="36"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
         <translation>Based on Qt %1 (%2, %3 bit)</translation>
     </message>
@@ -42,62 +42,62 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="153"/>
+        <location filename="../article_maker.cc" line="154"/>
         <source>Expand article</source>
         <translation>사전 펼치기</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="159"/>
+        <location filename="../article_maker.cc" line="160"/>
         <source>Collapse article</source>
         <translation>사전 감추기</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="188"/>
+        <location filename="../article_maker.cc" line="189"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%2&lt;/b&gt;그룹에서 &lt;b&gt;%1&lt;/b&gt;에 대한 번역을 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="193"/>
+        <location filename="../article_maker.cc" line="194"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%1&lt;/b&gt;그룹에서 번역을 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="241"/>
+        <location filename="../article_maker.cc" line="242"/>
         <source>Welcome!</source>
         <translation>환영합니다!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="243"/>
+        <location filename="../article_maker.cc" line="244"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;&lt;b&gt;GoldenDict&lt;/b&gt;사용을 환영합니다!&lt;/h3&gt;&lt;p&gt;프로그램 사용을 위해서 먼저 &lt;b&gt;편집|사전&lt;/b&gt; 에서 사용할 사전의 경로, Wikipedia와 다른 온라인 검색사이트 등록를 등록하고 사전의 표시순서와 그룹을 지정하십시오. &lt;p&gt;그러면 사용을 위한 준비가 끝났습니다! 지금 창의 왼쪽에서 검색어를 입력하거나  실행중인 &lt;a href=&quot;팝업창 사용&quot;&gt;다른 프로그램에서 단어검색&lt;/a&gt;을 할 수 있습니다. &lt;p&gt;프로그램을 자신에 맞게 설정하려면 &lt;b&gt;편집|설정&lt;/b&gt;메뉴를 사용하십시오. 모든 설정항목은 말풍선 도움말이 있으니 기능을 잘 모르는 경우 꼭 확인하시기 바랍니다. &lt;p&gt;더 많은 도움이 필요하거나 질문, 제안사항이 있는 경우 또는 다른 사용자들의 생각이 궁금하면 프로그램의 &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;포럼&lt;/a&gt;을 방문하십시오.&lt;p&gt;프로그램 업데이트는 &lt;a href=&quot;http://goldendict.org/&quot;&gt;웹사이트&lt;/a&gt;를 방문하십시오.&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="259"/>
+        <location filename="../article_maker.cc" line="260"/>
         <source>Working with popup</source>
         <translation>팝업창 사용</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="261"/>
+        <location filename="../article_maker.cc" line="262"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;팝업창 사용&lt;/h3&gt;&lt;p style=&quot;text-indent:1em&quot;&gt;실행중인 프로그램에서 단어를 검색하려면 먼저 &lt;b&gt;설정&lt;/b&gt;에서 &lt;b&gt;스캔팝업기능&lt;/b&gt;을 활성화해야 합니다. 다음 아무때나 위의 팝업아이콘을 누르거나 혹은 작업표시줄의 아이콘을 우클릭한 뒤 선택하면 활성화할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="268"/>
+        <location filename="../article_maker.cc" line="269"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>이제 실행중인 다른 프로그램에서 검색할 단어 위에 커서를 옮기면 팝업창으로 사전이 나타납니다.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="271"/>
+        <location filename="../article_maker.cc" line="272"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>이제 다른 프로그램에서 검색할 단어를 선택하면(더블클릭 또는 마우스로 선택) 팝업창으로 사전이 나타납니다.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="353"/>
+        <location filename="../article_maker.cc" line="354"/>
         <source>(untitled)</source>
         <translation>(제목없음)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="367"/>
+        <location filename="../article_maker.cc" line="368"/>
         <source>(picture)</source>
         <translation>(그림)</translation>
     </message>
@@ -105,37 +105,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="634"/>
+        <location filename="../article_maker.cc" line="635"/>
         <source>Expand article</source>
         <translation>사전 펼치기</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="637"/>
+        <location filename="../article_maker.cc" line="638"/>
         <source>From </source>
         <translation>From </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="642"/>
+        <location filename="../article_maker.cc" line="643"/>
         <source>Collapse article</source>
         <translation>사전 감추기</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="659"/>
+        <location filename="../article_maker.cc" line="660"/>
         <source>Query error: %1</source>
         <translation>검색오류: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="765"/>
+        <location filename="../article_maker.cc" line="766"/>
         <source>Close words: </source>
         <translation>인접 어휘:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="836"/>
+        <location filename="../article_maker.cc" line="837"/>
         <source>Compound expressions: </source>
         <translation>복합 어구:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="864"/>
+        <location filename="../article_maker.cc" line="865"/>
         <source>Individual words: </source>
         <translation>개별 어휘:</translation>
     </message>
@@ -143,94 +143,94 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <location filename="../articleview.cc" line="207"/>
+        <location filename="../articleview.cc" line="209"/>
         <source>Select Current Article</source>
         <translation>현재 항목 선택</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="213"/>
+        <location filename="../articleview.cc" line="215"/>
         <source>Copy as text</source>
         <translation>텍스트로 복사</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="219"/>
+        <location filename="../articleview.cc" line="221"/>
         <source>Inspect</source>
         <translation>요소검사</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="949"/>
+        <location filename="../articleview.cc" line="956"/>
         <source>Resource</source>
         <translation>리소스</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="954"/>
+        <location filename="../articleview.cc" line="961"/>
         <source>Audio</source>
         <translation>오디오</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="959"/>
+        <location filename="../articleview.cc" line="966"/>
         <source>TTS Voice</source>
         <translation>TTS 음성</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="964"/>
+        <location filename="../articleview.cc" line="971"/>
         <source>Picture</source>
         <translation>그림</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="978"/>
         <source>Video</source>
         <translation>비디오</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="980"/>
+        <location filename="../articleview.cc" line="987"/>
         <source>Video: %1</source>
         <translation>비디오: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="997"/>
+        <location filename="../articleview.cc" line="1004"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>사전의 정의 &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1001"/>
+        <location filename="../articleview.cc" line="1008"/>
         <source>Definition: %1</source>
         <translation>정의: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1222"/>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1229"/>
+        <location filename="../articleview.cc" line="1383"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>참조할 리소스가 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1262"/>
+        <location filename="../articleview.cc" line="1269"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>참조할 오디오 프로그램이 존재하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1182"/>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1189"/>
+        <location filename="../articleview.cc" line="1383"/>
         <source>ERROR: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1772"/>
+        <location filename="../articleview.cc" line="1779"/>
         <source>Save sound</source>
         <translation>사운드 저장</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1774"/>
+        <location filename="../articleview.cc" line="1781"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>사운드 파일 (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;모든 파일 (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1787"/>
+        <location filename="../articleview.cc" line="1794"/>
         <source>Save image</source>
         <translation>이미지 저장</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1789"/>
+        <location filename="../articleview.cc" line="1796"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>이미지 파일 (*.bmp *.jpg *.png *.tif);;모든 파일 (*.*)</translation>
     </message>
@@ -239,53 +239,53 @@
         <translation type="obsolete">리소스 저장 오류: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1528"/>
+        <location filename="../articleview.cc" line="1535"/>
         <source>&amp;Open Link</source>
         <translation>링크 열기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1534"/>
+        <location filename="../articleview.cc" line="1541"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>새 탭에서 링크 열기(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1548"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>외부 브라우저에서 링크 열기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1590"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot; 검색(&amp;L)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1591"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>새 탭에서 &quot;%1&quot; 검색(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1596"/>
+        <location filename="../articleview.cc" line="1603"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>&quot;%1&quot;을 입력줄로 보냄</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1602"/>
-        <location filename="../articleview.cc" line="1638"/>
+        <location filename="../articleview.cc" line="1609"/>
+        <location filename="../articleview.cc" line="1645"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>검색기록에 &quot;%1&quot; 추가(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1616"/>
+        <location filename="../articleview.cc" line="1623"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2에서 &quot;%1&quot; 검색</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1624"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>새 탭을 열고 %2에서 &quot;%1&quot; 검색(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>경고: FFmpeg 오디오 플레이어: %1</translation>
     </message>
@@ -306,37 +306,37 @@
         <translation type="obsolete">Bass library가 이 사운드를 재생할 수 없습니다. </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1861"/>
+        <location filename="../articleview.cc" line="1868"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>사운드를 재생할 플레이어를 실행할 수 없습니다: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1879"/>
+        <location filename="../articleview.cc" line="1886"/>
         <source>Failed to create temporary file.</source>
         <translation>임시파일을 만들 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1890"/>
+        <location filename="../articleview.cc" line="1897"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>리소스파일을 여는데 실패했습니다. 수동으로 열어 보십시오: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1913"/>
+        <location filename="../articleview.cc" line="1920"/>
         <source>The referenced resource failed to download.</source>
         <translation>참조할 리소스를 다운로드하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1556"/>
+        <location filename="../articleview.cc" line="1563"/>
         <source>Save &amp;image...</source>
         <translation>이미지 저장(&amp;i)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1564"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save s&amp;ound...</source>
         <translation>사운드 저장(&amp;o)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1913"/>
+        <location filename="../articleview.cc" line="1920"/>
         <source>WARNING: %1</source>
         <translation>경고: %1</translation>
     </message>
@@ -456,17 +456,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chinese.cc" line="92"/>
+        <location filename="../chinese.cc" line="129"/>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chinese.cc" line="99"/>
+        <location filename="../chinese.cc" line="136"/>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chinese.cc" line="106"/>
+        <location filename="../chinese.cc" line="143"/>
         <source>Traditional to simplified Chinese conversion</source>
         <translation type="unfinished"></translation>
     </message>
@@ -512,37 +512,37 @@ between classic and school orthography in cyrillic)</source>
         <translation>단축키:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="38"/>
+        <location filename="../groups_widgets.cc" line="40"/>
         <source>None</source>
         <translation>없음</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="43"/>
+        <location filename="../groups_widgets.cc" line="45"/>
         <source>From file...</source>
         <translation>파일 지정...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="90"/>
+        <location filename="../groups_widgets.cc" line="92"/>
         <source>Choose a file to use as group icon</source>
         <translation>그룹아이콘으로 사용할 파일을 선택하십시오</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="94"/>
         <source>Images</source>
         <translation>이미지</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="93"/>
+        <location filename="../groups_widgets.cc" line="95"/>
         <source>All files</source>
         <translation>모든 파일</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="100"/>
+        <location filename="../groups_widgets.cc" line="102"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="100"/>
+        <location filename="../groups_widgets.cc" line="102"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>지정된 이미지파일을 읽을 수 없습니다.</translation>
     </message>
@@ -550,46 +550,46 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="590"/>
-        <location filename="../groups_widgets.cc" line="665"/>
-        <location filename="../groups_widgets.cc" line="838"/>
-        <location filename="../groups_widgets.cc" line="1013"/>
+        <location filename="../groups_widgets.cc" line="598"/>
+        <location filename="../groups_widgets.cc" line="673"/>
+        <location filename="../groups_widgets.cc" line="846"/>
+        <location filename="../groups_widgets.cc" line="1021"/>
         <source>Dictionaries: </source>
         <translation>사전: </translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="690"/>
+        <location filename="../groups_widgets.cc" line="698"/>
         <source>Confirmation</source>
         <translation>확인</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="691"/>
+        <location filename="../groups_widgets.cc" line="699"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>사전의 언어에 따라 그룹을 만들겠습니까?</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="716"/>
+        <location filename="../groups_widgets.cc" line="724"/>
         <source>Unassigned</source>
         <translation>미지정</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="854"/>
+        <location filename="../groups_widgets.cc" line="862"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>소스언어에 따라 그룹을 합칩니다  &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="871"/>
+        <location filename="../groups_widgets.cc" line="879"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation>번역언어에 따라 그룹을 합칩니다 &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="889"/>
+        <location filename="../groups_widgets.cc" line="897"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation>양방향 번역그룹을 만듭니다 &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="907"/>
-        <location filename="../groups_widgets.cc" line="926"/>
+        <location filename="../groups_widgets.cc" line="915"/>
+        <location filename="../groups_widgets.cc" line="934"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation>&quot;%1&quot;와 그룹을 합칩니다</translation>
     </message>
@@ -770,7 +770,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="233"/>
+        <location filename="../groups_widgets.cc" line="237"/>
         <source>%1 entries</source>
         <translation>%1 항목</translation>
     </message>
@@ -801,44 +801,44 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictServersModel</name>
     <message>
-        <location filename="../sources.cc" line="778"/>
+        <location filename="../sources.cc" line="810"/>
         <source>Enabled</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="780"/>
+        <location filename="../sources.cc" line="812"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="782"/>
+        <location filename="../sources.cc" line="814"/>
         <source>Address</source>
         <translation>주소</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="784"/>
+        <location filename="../sources.cc" line="816"/>
         <source>Databases</source>
         <translation>데이터베이스</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="786"/>
+        <location filename="../sources.cc" line="818"/>
         <source>Strategies</source>
         <translation>조건</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="788"/>
+        <location filename="../sources.cc" line="820"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="853"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
         <translation>콤마로 구분된 데이터베이스 목록
 (공백 또는 &quot;*&quot; 는 데이터베이스 전체)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="824"/>
+        <location filename="../sources.cc" line="856"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
         <translation>콤마로 구분된 검색조건 목록
@@ -946,74 +946,74 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="141"/>
+        <location filename="../fulltextsearch.cc" line="150"/>
         <source>Full-text search</source>
         <translation>전문검색</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="148"/>
+        <location filename="../fulltextsearch.cc" line="157"/>
         <source>Whole words</source>
         <translation>단어 단위로 찾기</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="149"/>
+        <location filename="../fulltextsearch.cc" line="158"/>
         <source>Plain text</source>
         <translation>텍스트</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="150"/>
+        <location filename="../fulltextsearch.cc" line="159"/>
         <source>Wildcards</source>
         <translation>와일드카드</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="151"/>
+        <location filename="../fulltextsearch.cc" line="160"/>
         <source>RegExp</source>
         <translation>정규식</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="156"/>
+        <location filename="../fulltextsearch.cc" line="165"/>
         <source>Max distance between words (%1-%2):</source>
         <translation>단어사이의 최대 거리 (%1-%2):</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="165"/>
+        <location filename="../fulltextsearch.cc" line="174"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation>사전당 최대 항목 (%1-%2):</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="188"/>
-        <location filename="../fulltextsearch.cc" line="299"/>
-        <location filename="../fulltextsearch.cc" line="387"/>
+        <location filename="../fulltextsearch.cc" line="197"/>
+        <location filename="../fulltextsearch.cc" line="344"/>
+        <location filename="../fulltextsearch.cc" line="432"/>
         <source>Articles found: </source>
         <translation>검색된 항목:</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="267"/>
+        <location filename="../fulltextsearch.cc" line="312"/>
         <source>Now indexing: </source>
         <translation>목록작성중:</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="268"/>
+        <location filename="../fulltextsearch.cc" line="313"/>
         <source>None</source>
         <translation type="unfinished">없음</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="312"/>
+        <location filename="../fulltextsearch.cc" line="357"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
         <translation>검색어에 있는 CJK 기호들이 &quot;단어 단위로 찾기&quot;  &quot;텍스트&quot; 검색모드에 사용될 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="321"/>
+        <location filename="../fulltextsearch.cc" line="366"/>
         <source>The search line must contains at least one word containing </source>
         <translation>검색 줄은 적어도 한 개 단어를 포함해야 합니다</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="322"/>
+        <location filename="../fulltextsearch.cc" line="367"/>
         <source> or more symbols</source>
         <translation>자 이상</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="334"/>
+        <location filename="../fulltextsearch.cc" line="379"/>
         <source>No dictionaries for full-text search</source>
         <translation>전문검색을 위한 사전이 없음</translation>
     </message>
@@ -1387,12 +1387,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="277"/>
+        <location filename="../hunspell.cc" line="280"/>
         <source>Spelling suggestions: </source>
         <translation>철자법 제안: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="868"/>
+        <location filename="../hunspell.cc" line="871"/>
         <source>%1 Morphology</source>
         <translation>%1 철자법사전</translation>
     </message>
@@ -1400,12 +1400,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1356"/>
+        <location filename="../sources.cc" line="1389"/>
         <source>Enabled</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1358"/>
+        <location filename="../sources.cc" line="1391"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
@@ -1413,13 +1413,13 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Initializing</name>
     <message>
-        <location filename="../initializing.cc" line="21"/>
+        <location filename="../initializing.cc" line="50"/>
         <source>Please wait...</source>
         <translation>기다려 주십시오...</translation>
     </message>
     <message>
         <location filename="../initializing.ui" line="28"/>
-        <location filename="../initializing.cc" line="30"/>
+        <location filename="../initializing.cc" line="59"/>
         <source>Please wait while indexing dictionary</source>
         <translation>사전색인을 만드는 동안 기다리십시오</translation>
     </message>
@@ -1437,1007 +1437,1007 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Language</name>
     <message>
-        <location filename="../language.cc" line="55"/>
+        <location filename="../language.cc" line="56"/>
         <source>Afar</source>
         <translation>아파르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="56"/>
+        <location filename="../language.cc" line="57"/>
         <source>Abkhazian</source>
         <translation>압하스어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="57"/>
+        <location filename="../language.cc" line="58"/>
         <source>Avestan</source>
         <translation>아베스타어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="58"/>
+        <location filename="../language.cc" line="59"/>
         <source>Afrikaans</source>
         <translation>아프리칸스어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="59"/>
+        <location filename="../language.cc" line="60"/>
         <source>Akan</source>
         <translation>아칸어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="60"/>
+        <location filename="../language.cc" line="61"/>
         <source>Amharic</source>
         <translation>암하라어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="61"/>
+        <location filename="../language.cc" line="62"/>
         <source>Aragonese</source>
         <translation>아라곤어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="62"/>
+        <location filename="../language.cc" line="63"/>
         <source>Arabic</source>
         <translation>아랍어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="63"/>
+        <location filename="../language.cc" line="64"/>
         <source>Assamese</source>
         <translation>아샘어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="64"/>
+        <location filename="../language.cc" line="65"/>
         <source>Avaric</source>
         <translation>아바르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="65"/>
+        <location filename="../language.cc" line="66"/>
         <source>Aymara</source>
         <translation>아이마라어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="66"/>
+        <location filename="../language.cc" line="67"/>
         <source>Azerbaijani</source>
         <translation>아제리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="67"/>
+        <location filename="../language.cc" line="68"/>
         <source>Bashkir</source>
         <translation>바슈키르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="68"/>
+        <location filename="../language.cc" line="69"/>
         <source>Belarusian</source>
         <translation>벨로루시어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="69"/>
+        <location filename="../language.cc" line="70"/>
         <source>Bulgarian</source>
         <translation>불가리아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="70"/>
+        <location filename="../language.cc" line="71"/>
         <source>Bihari</source>
         <translation>비하르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="71"/>
+        <location filename="../language.cc" line="72"/>
         <source>Bislama</source>
         <translation>비슐라마어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="72"/>
+        <location filename="../language.cc" line="73"/>
         <source>Bambara</source>
         <translation>밤바라어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="73"/>
+        <location filename="../language.cc" line="74"/>
         <source>Bengali</source>
         <translation>벵골어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="74"/>
+        <location filename="../language.cc" line="75"/>
         <source>Tibetan</source>
         <translation>티벳어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="75"/>
+        <location filename="../language.cc" line="76"/>
         <source>Breton</source>
         <translation>브르타뉴어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="76"/>
+        <location filename="../language.cc" line="77"/>
         <source>Bosnian</source>
         <translation>보스니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="77"/>
+        <location filename="../language.cc" line="78"/>
         <source>Catalan</source>
         <translation>카탈로니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="78"/>
+        <location filename="../language.cc" line="79"/>
         <source>Chechen</source>
         <translation>체첸어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="79"/>
+        <location filename="../language.cc" line="80"/>
         <source>Chamorro</source>
         <translation>차모로어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="80"/>
+        <location filename="../language.cc" line="81"/>
         <source>Corsican</source>
         <translation>코르시칸어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="81"/>
+        <location filename="../language.cc" line="82"/>
         <source>Cree</source>
         <translation>크리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="82"/>
+        <location filename="../language.cc" line="83"/>
         <source>Czech</source>
         <translation>체코어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="83"/>
+        <location filename="../language.cc" line="84"/>
         <source>Church Slavic</source>
         <translation>슬라브어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="84"/>
+        <location filename="../language.cc" line="85"/>
         <source>Chuvash</source>
         <translation>추바슈어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="85"/>
+        <location filename="../language.cc" line="86"/>
         <source>Welsh</source>
         <translation>웨일스어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="86"/>
+        <location filename="../language.cc" line="87"/>
         <source>Danish</source>
         <translation>덴마크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="87"/>
+        <location filename="../language.cc" line="88"/>
         <source>German</source>
         <translation>독일어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="88"/>
+        <location filename="../language.cc" line="89"/>
         <source>Divehi</source>
         <translation>디베히어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="89"/>
+        <location filename="../language.cc" line="90"/>
         <source>Dzongkha</source>
         <translation>종카어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="90"/>
+        <location filename="../language.cc" line="91"/>
         <source>Ewe</source>
         <translation>에웨어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="91"/>
+        <location filename="../language.cc" line="92"/>
         <source>Greek</source>
         <translation>그리스어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="92"/>
+        <location filename="../language.cc" line="93"/>
         <source>English</source>
         <translation>영어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="93"/>
+        <location filename="../language.cc" line="94"/>
         <source>Esperanto</source>
         <translation>에스페란토어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="94"/>
+        <location filename="../language.cc" line="95"/>
         <source>Spanish</source>
         <translation>스페인어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="95"/>
+        <location filename="../language.cc" line="96"/>
         <source>Estonian</source>
         <translation>에스토니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="96"/>
+        <location filename="../language.cc" line="97"/>
         <source>Basque</source>
         <translation>바스크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="97"/>
+        <location filename="../language.cc" line="98"/>
         <source>Persian</source>
         <translation>페르시아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="98"/>
+        <location filename="../language.cc" line="99"/>
         <source>Fulah</source>
         <translation>풀라어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="99"/>
+        <location filename="../language.cc" line="100"/>
         <source>Finnish</source>
         <translation>핀란드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="100"/>
+        <location filename="../language.cc" line="101"/>
         <source>Fijian</source>
         <translation>피지어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="101"/>
+        <location filename="../language.cc" line="102"/>
         <source>Faroese</source>
         <translation>페로어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="102"/>
+        <location filename="../language.cc" line="103"/>
         <source>French</source>
         <translation>프랑스어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="103"/>
+        <location filename="../language.cc" line="104"/>
         <source>Western Frisian</source>
         <translation>프리지아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="104"/>
+        <location filename="../language.cc" line="105"/>
         <source>Irish</source>
         <translation>아일랜드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="105"/>
+        <location filename="../language.cc" line="106"/>
         <source>Scottish Gaelic</source>
         <translation>게일어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="106"/>
+        <location filename="../language.cc" line="107"/>
         <source>Galician</source>
         <translation>갈리시아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="107"/>
+        <location filename="../language.cc" line="108"/>
         <source>Guarani</source>
         <translation>과라니어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="108"/>
+        <location filename="../language.cc" line="109"/>
         <source>Gujarati</source>
         <translation>구자라트어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="109"/>
+        <location filename="../language.cc" line="110"/>
         <source>Manx</source>
         <translation>맨 섬어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="110"/>
+        <location filename="../language.cc" line="111"/>
         <source>Hausa</source>
         <translation>하우사어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="111"/>
+        <location filename="../language.cc" line="112"/>
         <source>Hebrew</source>
         <translation>히브리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="112"/>
+        <location filename="../language.cc" line="113"/>
         <source>Hindi</source>
         <translation>힌두어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="113"/>
+        <location filename="../language.cc" line="114"/>
         <source>Hiri Motu</source>
         <translation>히리 모투어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="114"/>
+        <location filename="../language.cc" line="115"/>
         <source>Croatian</source>
         <translation>크로아티아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="115"/>
+        <location filename="../language.cc" line="116"/>
         <source>Haitian</source>
         <translation>아이티어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="116"/>
+        <location filename="../language.cc" line="117"/>
         <source>Hungarian</source>
         <translation>헝가리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="117"/>
+        <location filename="../language.cc" line="118"/>
         <source>Armenian</source>
         <translation>рмянский</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="118"/>
+        <location filename="../language.cc" line="119"/>
         <source>Herero</source>
         <translation>헤레로어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="119"/>
+        <location filename="../language.cc" line="120"/>
         <source>Interlingua</source>
         <translation>국제어(Interlingua)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="120"/>
+        <location filename="../language.cc" line="121"/>
         <source>Indonesian</source>
         <translation>인도네시아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="121"/>
+        <location filename="../language.cc" line="122"/>
         <source>Interlingue</source>
         <translation>국제어(Interlingue)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="122"/>
+        <location filename="../language.cc" line="123"/>
         <source>Igbo</source>
         <translation>이그보어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="123"/>
+        <location filename="../language.cc" line="124"/>
         <source>Sichuan Yi</source>
         <translation>쓰촨 이어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="124"/>
+        <location filename="../language.cc" line="125"/>
         <source>Inupiaq</source>
         <translation>이누피아크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="125"/>
+        <location filename="../language.cc" line="126"/>
         <source>Ido</source>
         <translation>이도어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="126"/>
+        <location filename="../language.cc" line="127"/>
         <source>Icelandic</source>
         <translation>아이슬란드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="127"/>
+        <location filename="../language.cc" line="128"/>
         <source>Italian</source>
         <translation>이탈리아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="128"/>
+        <location filename="../language.cc" line="129"/>
         <source>Inuktitut</source>
         <translation>이누크티투트어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="129"/>
+        <location filename="../language.cc" line="130"/>
         <source>Japanese</source>
         <translation>일본어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="130"/>
+        <location filename="../language.cc" line="131"/>
         <source>Javanese</source>
         <translation>자바어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="131"/>
+        <location filename="../language.cc" line="132"/>
         <source>Georgian</source>
         <translation>그루지야어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="132"/>
+        <location filename="../language.cc" line="133"/>
         <source>Kongo</source>
         <translation>콩고어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="133"/>
+        <location filename="../language.cc" line="134"/>
         <source>Kikuyu</source>
         <translation>키쿠유어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="134"/>
+        <location filename="../language.cc" line="135"/>
         <source>Kwanyama</source>
         <translation>콰냐마어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="135"/>
+        <location filename="../language.cc" line="136"/>
         <source>Kazakh</source>
         <translation>카자흐어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="136"/>
+        <location filename="../language.cc" line="137"/>
         <source>Kalaallisut</source>
         <translation>그린란드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="137"/>
+        <location filename="../language.cc" line="138"/>
         <source>Khmer</source>
         <translation>크메르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="138"/>
+        <location filename="../language.cc" line="139"/>
         <source>Kannada</source>
         <translation>칸나다어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="139"/>
+        <location filename="../language.cc" line="140"/>
         <source>Korean</source>
         <translation>한국어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="140"/>
+        <location filename="../language.cc" line="141"/>
         <source>Kanuri</source>
         <translation>카누리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="141"/>
+        <location filename="../language.cc" line="142"/>
         <source>Kashmiri</source>
         <translation>카시미르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="142"/>
+        <location filename="../language.cc" line="143"/>
         <source>Kurdish</source>
         <translation>쿠르드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="143"/>
+        <location filename="../language.cc" line="144"/>
         <source>Komi</source>
         <translation>코미어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="144"/>
+        <location filename="../language.cc" line="145"/>
         <source>Cornish</source>
         <translation>콘월어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="145"/>
+        <location filename="../language.cc" line="146"/>
         <source>Kirghiz</source>
         <translation>키르기스어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="146"/>
+        <location filename="../language.cc" line="147"/>
         <source>Latin</source>
         <translation>라틴어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="147"/>
+        <location filename="../language.cc" line="148"/>
         <source>Luxembourgish</source>
         <translation>룩셈부르크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="148"/>
+        <location filename="../language.cc" line="149"/>
         <source>Ganda</source>
         <translation>간다어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="149"/>
+        <location filename="../language.cc" line="150"/>
         <source>Limburgish</source>
         <translation>림뷔르흐어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="150"/>
+        <location filename="../language.cc" line="151"/>
         <source>Lingala</source>
         <translation>링갈라어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="151"/>
+        <location filename="../language.cc" line="152"/>
         <source>Lao</source>
         <translation>라오어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="152"/>
+        <location filename="../language.cc" line="153"/>
         <source>Lithuanian</source>
         <translation>리투아니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="153"/>
+        <location filename="../language.cc" line="154"/>
         <source>Luba-Katanga</source>
         <translation>루바카탕가어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="154"/>
+        <location filename="../language.cc" line="155"/>
         <source>Latvian</source>
         <translation>라트비아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="155"/>
+        <location filename="../language.cc" line="156"/>
         <source>Malagasy</source>
         <translation>마다가스카르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="156"/>
+        <location filename="../language.cc" line="157"/>
         <source>Marshallese</source>
         <translation>마셜어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="157"/>
+        <location filename="../language.cc" line="158"/>
         <source>Maori</source>
         <translation>마오리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="158"/>
+        <location filename="../language.cc" line="159"/>
         <source>Macedonian</source>
         <translation>마케도니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="159"/>
+        <location filename="../language.cc" line="160"/>
         <source>Malayalam</source>
         <translation>말라얄람어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="160"/>
+        <location filename="../language.cc" line="161"/>
         <source>Mongolian</source>
         <translation>몽골어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="161"/>
+        <location filename="../language.cc" line="162"/>
         <source>Marathi</source>
         <translation>마라티어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="162"/>
+        <location filename="../language.cc" line="163"/>
         <source>Malay</source>
         <translation>말레이어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="163"/>
+        <location filename="../language.cc" line="164"/>
         <source>Maltese</source>
         <translation>몰타어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="164"/>
+        <location filename="../language.cc" line="165"/>
         <source>Burmese</source>
         <translation>버마어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="165"/>
+        <location filename="../language.cc" line="166"/>
         <source>Nauru</source>
         <translation>나우루어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="166"/>
+        <location filename="../language.cc" line="167"/>
         <source>Norwegian Bokmal</source>
         <translation>노르웨이어, 복말</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="167"/>
+        <location filename="../language.cc" line="168"/>
         <source>North Ndebele</source>
         <translation>북부 은데벨레어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="168"/>
+        <location filename="../language.cc" line="169"/>
         <source>Nepali</source>
         <translation>네팔어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="169"/>
+        <location filename="../language.cc" line="170"/>
         <source>Ndonga</source>
         <translation>은동가어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="170"/>
+        <location filename="../language.cc" line="171"/>
         <source>Dutch</source>
         <translation>네덜란드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="171"/>
+        <location filename="../language.cc" line="172"/>
         <source>Norwegian Nynorsk</source>
         <translation>노르웨이어, 니노르스크</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="172"/>
+        <location filename="../language.cc" line="173"/>
         <source>Norwegian</source>
         <translation>노르웨이어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="173"/>
+        <location filename="../language.cc" line="174"/>
         <source>South Ndebele</source>
         <translation>남부 은데벨레어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="174"/>
+        <location filename="../language.cc" line="175"/>
         <source>Navajo</source>
         <translation>나바호어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="175"/>
+        <location filename="../language.cc" line="176"/>
         <source>Chichewa</source>
         <translation>니안자어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="176"/>
+        <location filename="../language.cc" line="177"/>
         <source>Occitan</source>
         <translation>오크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="177"/>
+        <location filename="../language.cc" line="178"/>
         <source>Ojibwa</source>
         <translation>오지브와어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="178"/>
+        <location filename="../language.cc" line="179"/>
         <source>Oromo</source>
         <translation>오로모어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="179"/>
+        <location filename="../language.cc" line="180"/>
         <source>Oriya</source>
         <translation>오리야어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="180"/>
+        <location filename="../language.cc" line="181"/>
         <source>Ossetian</source>
         <translation>오세트어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="181"/>
+        <location filename="../language.cc" line="182"/>
         <source>Panjabi</source>
         <translation>펀잡어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="182"/>
+        <location filename="../language.cc" line="183"/>
         <source>Pali</source>
         <translation>팔리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="183"/>
+        <location filename="../language.cc" line="184"/>
         <source>Polish</source>
         <translation>폴란드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="184"/>
+        <location filename="../language.cc" line="185"/>
         <source>Pashto</source>
         <translation>파슈토어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="185"/>
+        <location filename="../language.cc" line="186"/>
         <source>Portuguese</source>
         <translation>포르투갈어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="186"/>
+        <location filename="../language.cc" line="187"/>
         <source>Quechua</source>
         <translation>케추아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="187"/>
+        <location filename="../language.cc" line="188"/>
         <source>Raeto-Romance</source>
         <translation>로망슈어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="188"/>
+        <location filename="../language.cc" line="189"/>
         <source>Kirundi</source>
         <translation>룬디어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="189"/>
+        <location filename="../language.cc" line="190"/>
         <source>Romanian</source>
         <translation>루마니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="190"/>
+        <location filename="../language.cc" line="191"/>
         <source>Russian</source>
         <translation>러시아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="191"/>
+        <location filename="../language.cc" line="192"/>
         <source>Kinyarwanda</source>
         <translation>키냐르완다어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="192"/>
+        <location filename="../language.cc" line="193"/>
         <source>Sanskrit</source>
         <translation>산스크리트어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="193"/>
+        <location filename="../language.cc" line="194"/>
         <source>Sardinian</source>
         <translation>사르데냐어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="194"/>
+        <location filename="../language.cc" line="195"/>
         <source>Sindhi</source>
         <translation>신드어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="195"/>
+        <location filename="../language.cc" line="196"/>
         <source>Northern Sami</source>
         <translation>북부 사미어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="196"/>
+        <location filename="../language.cc" line="197"/>
         <source>Sango</source>
         <translation>상고어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="197"/>
+        <location filename="../language.cc" line="198"/>
         <source>Serbo-Croatian</source>
         <translation>세르보크로아티아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="198"/>
+        <location filename="../language.cc" line="199"/>
         <source>Sinhala</source>
         <translation>싱할라어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="199"/>
+        <location filename="../language.cc" line="200"/>
         <source>Slovak</source>
         <translation>슬로바키아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="200"/>
+        <location filename="../language.cc" line="201"/>
         <source>Slovenian</source>
         <translation>슬로베니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="201"/>
+        <location filename="../language.cc" line="202"/>
         <source>Samoan</source>
         <translation>사모아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="202"/>
+        <location filename="../language.cc" line="203"/>
         <source>Shona</source>
         <translation>쇼나어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="203"/>
+        <location filename="../language.cc" line="204"/>
         <source>Somali</source>
         <translation>소말리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="204"/>
+        <location filename="../language.cc" line="205"/>
         <source>Albanian</source>
         <translation>알바니아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="205"/>
+        <location filename="../language.cc" line="206"/>
         <source>Serbian</source>
         <translation>세르비아어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="206"/>
+        <location filename="../language.cc" line="207"/>
         <source>Swati</source>
         <translation>스와티어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="207"/>
+        <location filename="../language.cc" line="208"/>
         <source>Southern Sotho</source>
         <translation>남부 소토어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="208"/>
+        <location filename="../language.cc" line="209"/>
         <source>Sundanese</source>
         <translation>순다어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="209"/>
+        <location filename="../language.cc" line="210"/>
         <source>Swedish</source>
         <translation>스웨덴어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="210"/>
+        <location filename="../language.cc" line="211"/>
         <source>Swahili</source>
         <translation>스와힐리어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="211"/>
+        <location filename="../language.cc" line="212"/>
         <source>Tamil</source>
         <translation>타밀어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="212"/>
+        <location filename="../language.cc" line="213"/>
         <source>Telugu</source>
         <translation>텔루구어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="213"/>
+        <location filename="../language.cc" line="214"/>
         <source>Tajik</source>
         <translation>타지키스탄어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="214"/>
+        <location filename="../language.cc" line="215"/>
         <source>Thai</source>
         <translation>태국어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="215"/>
+        <location filename="../language.cc" line="216"/>
         <source>Tigrinya</source>
         <translation>티그리냐어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="216"/>
+        <location filename="../language.cc" line="217"/>
         <source>Turkmen</source>
         <translation>투르크멘어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="217"/>
+        <location filename="../language.cc" line="218"/>
         <source>Tagalog</source>
         <translation>타갈로그어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="218"/>
+        <location filename="../language.cc" line="219"/>
         <source>Tswana</source>
         <translation>츠와나어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="219"/>
+        <location filename="../language.cc" line="220"/>
         <source>Tonga</source>
         <translation>통가어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="220"/>
+        <location filename="../language.cc" line="221"/>
         <source>Turkish</source>
         <translation>터키어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="221"/>
+        <location filename="../language.cc" line="222"/>
         <source>Tsonga</source>
         <translation>총가어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="222"/>
+        <location filename="../language.cc" line="223"/>
         <source>Tatar</source>
         <translation>타타르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="223"/>
+        <location filename="../language.cc" line="224"/>
         <source>Twi</source>
         <translation>트위어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="224"/>
+        <location filename="../language.cc" line="225"/>
         <source>Tahitian</source>
         <translation>타히티어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="225"/>
+        <location filename="../language.cc" line="226"/>
         <source>Uighur</source>
         <translation>위구르어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="226"/>
+        <location filename="../language.cc" line="227"/>
         <source>Ukrainian</source>
         <translation>우크라이나어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="227"/>
+        <location filename="../language.cc" line="228"/>
         <source>Urdu</source>
         <translation>우르두어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="228"/>
+        <location filename="../language.cc" line="229"/>
         <source>Uzbek</source>
         <translation>우즈베크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="229"/>
+        <location filename="../language.cc" line="230"/>
         <source>Venda</source>
         <translation>벤다어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="230"/>
+        <location filename="../language.cc" line="231"/>
         <source>Vietnamese</source>
         <translation>베트남어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="231"/>
+        <location filename="../language.cc" line="232"/>
         <source>Volapuk</source>
         <translation>볼라퓌크어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="232"/>
+        <location filename="../language.cc" line="233"/>
         <source>Walloon</source>
         <translation>왈론어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="233"/>
+        <location filename="../language.cc" line="234"/>
         <source>Wolof</source>
         <translation>월로프어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="234"/>
+        <location filename="../language.cc" line="235"/>
         <source>Xhosa</source>
         <translation>코사어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="235"/>
+        <location filename="../language.cc" line="236"/>
         <source>Yiddish</source>
         <translation>이디시어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="236"/>
+        <location filename="../language.cc" line="237"/>
         <source>Yoruba</source>
         <translation>요루바어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="237"/>
+        <location filename="../language.cc" line="238"/>
         <source>Zhuang</source>
         <translation>좡어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="238"/>
+        <location filename="../language.cc" line="239"/>
         <source>Chinese</source>
         <translation>중국어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="239"/>
+        <location filename="../language.cc" line="240"/>
         <source>Zulu</source>
         <translation>줄루어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="240"/>
+        <location filename="../language.cc" line="241"/>
         <source>Lojban</source>
         <translation>로지반어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="375"/>
+        <location filename="../language.cc" line="376"/>
         <source>Traditional Chinese</source>
         <translation>중국어(번체)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="376"/>
+        <location filename="../language.cc" line="377"/>
         <source>Simplified Chinese</source>
         <translation>중국어(간체)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="377"/>
+        <location filename="../language.cc" line="378"/>
         <source>Other</source>
         <translation>기타 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="378"/>
+        <location filename="../language.cc" line="379"/>
         <source>Other Simplified Chinese dialects</source>
         <translation>기타 중국어(간체) 방언</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Traditional Chinese dialects</source>
         <translation>기타 중국어(번체) 방언</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Eastern-European languages</source>
         <translation>기타 동유럽 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Western-European languages</source>
         <translation>기타 서유럽 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Russian languages</source>
         <translation>기타 러시아 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Japanese languages</source>
         <translation>기타 일본 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Baltic languages</source>
         <translation>기타 발트 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Greek languages</source>
         <translation>기타 그리스 언어</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Korean dialects</source>
         <translation>기타 한국어 방언</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Turkish dialects</source>
         <translation>기타 터키어 방언</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Other Thai dialects</source>
         <translation>기타 태국어 방언</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="389"/>
+        <location filename="../language.cc" line="390"/>
         <source>Tamazight</source>
         <translation>타마지트어</translation>
     </message>
@@ -2453,7 +2453,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="219"/>
+        <location filename="../main.cc" line="243"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>설정파일 오류. 기본설정으로 계속하시겠습니까?</translation>
     </message>
@@ -2461,68 +2461,68 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cc" line="154"/>
+        <location filename="../mainwindow.cc" line="164"/>
         <source>Back</source>
         <translation>뒤로</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="156"/>
+        <location filename="../mainwindow.cc" line="166"/>
         <source>Forward</source>
         <translation>앞으로</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="181"/>
+        <location filename="../mainwindow.cc" line="191"/>
         <source>Scan Popup</source>
         <translation>스캔팝업</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="343"/>
+        <location filename="../mainwindow.cc" line="353"/>
         <source>Show &amp;Main Window</source>
         <translation>메인창 보이기(&amp;M)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
-        <location filename="../mainwindow.cc" line="347"/>
+        <location filename="../mainwindow.cc" line="357"/>
         <source>&amp;Quit</source>
         <translation>종료(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="548"/>
+        <location filename="../mainwindow.cc" line="558"/>
         <source>Loading...</source>
         <translation>불러오는 중...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2937"/>
+        <location filename="../mainwindow.cc" line="2954"/>
         <source>Skip This Release</source>
         <translation>이 버전을 무시합니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3067"/>
+        <location filename="../mainwindow.cc" line="3084"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>메뉴 모음 숨기기를 선택하셨습니다. 다시 보이게 하려면 %1을 사용하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3068"/>
+        <location filename="../mainwindow.cc" line="3085"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3166"/>
+        <location filename="../mainwindow.cc" line="3183"/>
         <source>Page Setup</source>
         <translation>페이지 설정</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3167"/>
+        <location filename="../mainwindow.cc" line="3184"/>
         <source>No printer is available. Please install one first.</source>
         <translation>프린터가 없습니다. 먼저 프린터를 설치하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3185"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>Print Article</source>
         <translation>항목 인쇄</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3264"/>
+        <location filename="../mainwindow.cc" line="3281"/>
         <source>Save Article As</source>
         <translation>다른 이름으로 항목 저장</translation>
     </message>
@@ -2531,258 +2531,258 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Html 파일(*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3278"/>
+        <location filename="../mainwindow.cc" line="3295"/>
         <source>Error</source>
         <translation>오류</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3279"/>
+        <location filename="../mainwindow.cc" line="3296"/>
         <source>Can&apos;t save article: %1</source>
         <translation>항목을 저장할 수 없습니다: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1222"/>
+        <location filename="../mainwindow.cc" line="1232"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>사전수: %1，항목수: %2，어휘수: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2793"/>
+        <location filename="../mainwindow.cc" line="2810"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>단축키 감시메커니즘을 시작할 수없습니다..&lt;br&gt;XServer에서 RECORD extension이 활성화 되어 있는지 확인하십시오.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2930"/>
+        <location filename="../mainwindow.cc" line="2947"/>
         <source>New Release Available</source>
         <translation>새 버전이 있습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2931"/>
+        <location filename="../mainwindow.cc" line="2948"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>골든딕 &lt;b&gt;%1&lt;/b&gt;버전을 다운로드할 수 있습니다.&lt;br&gt;&lt;b&gt;다운로드&lt;/b&gt;를 누르면 다운로드 페이지로 연결됩니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2936"/>
+        <location filename="../mainwindow.cc" line="2953"/>
         <source>Download</source>
         <translation>다운로드</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="261"/>
-        <location filename="../mainwindow.cc" line="1233"/>
+        <location filename="../mainwindow.cc" line="271"/>
+        <location filename="../mainwindow.cc" line="1243"/>
         <source>Look up in:</source>
         <translation>검색그룹:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="96"/>
+        <location filename="../mainwindow.cc" line="106"/>
         <source>&amp;Menubar</source>
         <translation>메뉴 모음(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="299"/>
+        <location filename="../mainwindow.cc" line="309"/>
         <source>Found in Dictionaries:</source>
         <translation>검색된 사전:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="196"/>
+        <location filename="../mainwindow.cc" line="206"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>발음 듣기(Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="94"/>
+        <location filename="../mainwindow.cc" line="104"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>사전모음에 이름 보이기(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="95"/>
+        <location filename="../mainwindow.cc" line="105"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>도구모음에 작은 아이콘(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="151"/>
+        <location filename="../mainwindow.cc" line="161"/>
         <source>&amp;Navigation</source>
         <translation>탐색 도구모음(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="208"/>
+        <location filename="../mainwindow.cc" line="218"/>
         <source>Zoom In</source>
         <translation>확대</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="214"/>
+        <location filename="../mainwindow.cc" line="224"/>
         <source>Zoom Out</source>
         <translation>축소</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="218"/>
+        <location filename="../mainwindow.cc" line="228"/>
         <source>Normal Size</source>
         <translation>보통 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="329"/>
+        <location filename="../mainwindow.cc" line="339"/>
         <source>Words Zoom In</source>
         <translation>검색어 확대</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="333"/>
+        <location filename="../mainwindow.cc" line="343"/>
         <source>Words Zoom Out</source>
         <translation>검색어 축소</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="335"/>
+        <location filename="../mainwindow.cc" line="345"/>
         <source>Words Normal Size</source>
         <translation>검색어 보통 </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="381"/>
+        <location filename="../mainwindow.cc" line="391"/>
         <source>Close current tab</source>
         <translation>현재 탭 닫기</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="391"/>
+        <location filename="../mainwindow.cc" line="401"/>
         <source>Close all tabs</source>
         <translation>모든 탭 닫기</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="399"/>
+        <location filename="../mainwindow.cc" line="409"/>
         <source>Close all tabs except current</source>
         <translation>다른 탭 닫기</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1233"/>
+        <location filename="../mainwindow.cc" line="1243"/>
         <source>Look up:</source>
         <translation>검색:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1251"/>
+        <location filename="../mainwindow.cc" line="1261"/>
         <source>All</source>
         <translation>All</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4183"/>
+        <location filename="../mainwindow.cc" line="4213"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="796"/>
-        <location filename="../mainwindow.cc" line="2990"/>
+        <location filename="../mainwindow.cc" line="806"/>
+        <location filename="../mainwindow.cc" line="3007"/>
         <source>Accessibility API is not enabled</source>
         <translation>Accessibility API가 활성화 되지 않았습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3389"/>
+        <location filename="../mainwindow.cc" line="3419"/>
         <source>The main window is set to be always on top.</source>
         <translation>메인창이 항상 위에 보이도록 설정합니다.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3644"/>
+        <location filename="../mainwindow.cc" line="3674"/>
         <source>Import history from file</source>
         <translation>검색기록을 파일에서 불러옵니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3693"/>
+        <location filename="../mainwindow.cc" line="3723"/>
         <source>Import error: invalid data in file</source>
         <translation>불러오기 오류: 파일의 데이타가 유효하지 않습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3697"/>
+        <location filename="../mainwindow.cc" line="3727"/>
         <source>History import complete</source>
         <translation>검색기록 불러오기를 완료했습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3700"/>
+        <location filename="../mainwindow.cc" line="3730"/>
         <source>Import error: </source>
         <translation>불러오기 오류: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3974"/>
+        <location filename="../mainwindow.cc" line="4004"/>
         <source>Dictionary info</source>
         <translation>사전 정보</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3978"/>
+        <location filename="../mainwindow.cc" line="4008"/>
         <source>Dictionary headwords</source>
         <translation>사전 표제어</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3980"/>
+        <location filename="../mainwindow.cc" line="4010"/>
         <source>Open dictionary folder</source>
         <translation>사전 폴더 열기</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3986"/>
+        <location filename="../mainwindow.cc" line="4016"/>
         <source>Edit dictionary</source>
         <translation>사전 편집</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="370"/>
+        <location filename="../mainwindow.cc" line="380"/>
         <source>Opened tabs</source>
         <translation>열린 탭</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="873"/>
+        <location filename="../mainwindow.cc" line="883"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation>사전에서 찾을 문자열. 와일드카드 &apos;*&apos;, &apos;?&apos; 괄호문자 &apos;[...]&apos;가 허용됩니다.
 &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; 기호를 찾으려면 각각 &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos;를 사용하십시오</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1406"/>
+        <location filename="../mainwindow.cc" line="1416"/>
         <source>Open Tabs List</source>
         <translation>탭 목록을 엽니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1464"/>
+        <location filename="../mainwindow.cc" line="1474"/>
         <source>(untitled)</source>
         <translation>(제목없음)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1678"/>
+        <location filename="../mainwindow.cc" line="1695"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3260"/>
+        <location filename="../mainwindow.cc" line="3277"/>
         <source>Article, Complete (*.html)</source>
         <translation>항목, 전부 (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3261"/>
+        <location filename="../mainwindow.cc" line="3278"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>항목, HTML 만 (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3329"/>
+        <location filename="../mainwindow.cc" line="3359"/>
         <source>Saving article...</source>
         <translation>항목 저장...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3556"/>
+        <location filename="../mainwindow.cc" line="3586"/>
         <source>&amp;Hide</source>
         <translation>숨기기(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3582"/>
+        <location filename="../mainwindow.cc" line="3612"/>
         <source>Export history to file</source>
         <translation>검색기록을 파일로 저장합니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3584"/>
-        <location filename="../mainwindow.cc" line="3646"/>
+        <location filename="../mainwindow.cc" line="3614"/>
+        <location filename="../mainwindow.cc" line="3676"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>텍스트파일(*.txt);;모든 파일(*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3623"/>
+        <location filename="../mainwindow.cc" line="3653"/>
         <source>History export complete</source>
         <translation>검색기록 저장을 완료했습니다</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3626"/>
+        <location filename="../mainwindow.cc" line="3656"/>
         <source>Export error: </source>
         <translation>저장 오류: </translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="737"/>
+        <location filename="../mainwindow.cc" line="747"/>
         <source>Welcome!</source>
         <translation>환영합니다!</translation>
     </message>
@@ -2974,7 +2974,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="558"/>
         <location filename="../mainwindow.ui" line="561"/>
-        <location filename="../mainwindow.cc" line="253"/>
+        <location filename="../mainwindow.cc" line="263"/>
         <source>Menu Button</source>
         <translation>메뉴 단추</translation>
     </message>
@@ -3009,7 +3009,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>기록 비우기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="558"/>
+        <location filename="../mainwindow.cc" line="568"/>
         <source>New Tab</source>
         <translation>새 탭</translation>
     </message>
@@ -3025,7 +3025,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3560"/>
+        <location filename="../mainwindow.cc" line="3590"/>
         <source>&amp;Show</source>
         <translation>보이기(&amp;S)</translation>
     </message>
@@ -3048,12 +3048,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="636"/>
+        <location filename="../mdx.cc" line="638"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>사전파일이 훼손되었습니다</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="647"/>
+        <location filename="../mdx.cc" line="649"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>%1에서 항목을 표시하지 못함, 이유: %2</translation>
     </message>
@@ -3061,7 +3061,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="324"/>
+        <location filename="../mediawiki.cc" line="325"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML 문법오류: %2행 %3열에서 %1</translation>
     </message>
@@ -3069,7 +3069,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="192"/>
+        <location filename="../mediawiki.cc" line="193"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML 문법오류: %2행 %3열에서 %1</translation>
     </message>
@@ -3077,22 +3077,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="465"/>
+        <location filename="../sources.cc" line="466"/>
         <source>Enabled</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="467"/>
+        <location filename="../sources.cc" line="468"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="469"/>
+        <location filename="../sources.cc" line="470"/>
         <source>Address</source>
         <translation>주소</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="471"/>
+        <location filename="../sources.cc" line="472"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
@@ -3164,22 +3164,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>마우스끌기로 순서를 조정하십시오. 사전을 사용하지 않으려면 비활성 그룹으로 옮기십시오.</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="253"/>
+        <location filename="../orderandprops.cc" line="255"/>
         <source>Sort by name</source>
         <translation>이름순 정렬</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="255"/>
+        <location filename="../orderandprops.cc" line="257"/>
         <source>Sort by languages</source>
         <translation>언어순 정렬</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="266"/>
+        <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
         <translation>사전 표제어</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="290"/>
+        <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
         <translation>사용중: %1, 사용중지: %2</translation>
     </message>
@@ -3187,12 +3187,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="1138"/>
+        <location filename="../sources.cc" line="1170"/>
         <source>Path</source>
         <translation>   경로</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1140"/>
+        <location filename="../sources.cc" line="1172"/>
         <source>Recursive</source>
         <translation>   하위 폴더 검색</translation>
     </message>
@@ -3973,27 +3973,27 @@ download page.</source>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="1046"/>
+        <location filename="../sources.cc" line="1078"/>
         <source>Audio</source>
         <translation>오디오</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1048"/>
+        <location filename="../sources.cc" line="1080"/>
         <source>Plain Text</source>
         <translation>텍스트</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1050"/>
+        <location filename="../sources.cc" line="1082"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1052"/>
+        <location filename="../sources.cc" line="1084"/>
         <source>Prefix Match</source>
         <translation>접두사 검색</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1054"/>
+        <location filename="../sources.cc" line="1086"/>
         <source>Unknown</source>
         <translation>모름</translation>
     </message>
@@ -4001,17 +4001,17 @@ download page.</source>
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="176"/>
+        <location filename="../programs.cc" line="177"/>
         <source>No program name was given.</source>
         <translation>프로그램 이름이 없습니다.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="192"/>
+        <location filename="../programs.cc" line="193"/>
         <source>The program has crashed.</source>
         <translation>프로그램이 다운되었습니다.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="195"/>
+        <location filename="../programs.cc" line="196"/>
         <source>The program has returned exit code %1.</source>
         <translation>프로그램이 종료코드 %1를 전송했습니다.</translation>
     </message>
@@ -4019,27 +4019,27 @@ download page.</source>
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="954"/>
+        <location filename="../sources.cc" line="986"/>
         <source>Enabled</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="956"/>
+        <location filename="../sources.cc" line="988"/>
         <source>Type</source>
         <translation>종류</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="958"/>
+        <location filename="../sources.cc" line="990"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="960"/>
+        <location filename="../sources.cc" line="992"/>
         <source>Command Line</source>
         <translation>명령행</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="962"/>
+        <location filename="../sources.cc" line="994"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
@@ -4047,99 +4047,99 @@ download page.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="420"/>
-        <location filename="../dsl.cc" line="1654"/>
+        <location filename="../aard.cc" line="424"/>
+        <location filename="../dsl.cc" line="1656"/>
         <source>Article loading error</source>
         <translation>사전항목 로딩 오류</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="512"/>
-        <location filename="../slob.cc" line="726"/>
+        <location filename="../aard.cc" line="516"/>
+        <location filename="../slob.cc" line="727"/>
         <source>Article decoding error</source>
         <translation>사전항목 디코딩 오류</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="140"/>
+        <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() failed.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="147"/>
+        <location filename="../ffmpegaudio.cc" line="149"/>
         <source>av_malloc() failed.</source>
         <translation>av_malloc() failed.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="156"/>
+        <location filename="../ffmpegaudio.cc" line="158"/>
         <source>avio_alloc_context() failed.</source>
         <translation>avio_alloc_context() failed.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="173"/>
+        <location filename="../ffmpegaudio.cc" line="175"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>avformat_open_input() failed: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="180"/>
+        <location filename="../ffmpegaudio.cc" line="182"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>avformat_find_stream_info() failed: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="195"/>
+        <location filename="../ffmpegaudio.cc" line="197"/>
         <source>Could not find audio stream.</source>
         <translation>오디오 스트림을 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="203"/>
+        <location filename="../ffmpegaudio.cc" line="205"/>
         <source>Codec [id: %1] not found.</source>
         <translation>[id: %1] 코덱을 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="210"/>
+        <location filename="../ffmpegaudio.cc" line="212"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>avcodec_open2() failed: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="271"/>
+        <location filename="../ffmpegaudio.cc" line="273"/>
         <source>Cannot find usable audio output device.</source>
         <translation>사용할 수 있는 오디오 장치를 찾을 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="284"/>
+        <location filename="../ffmpegaudio.cc" line="286"/>
         <source>Unsupported sample format.</source>
         <translation>지원되지 않는 샘플 포멧</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="294"/>
+        <location filename="../ffmpegaudio.cc" line="296"/>
         <source>ao_open_live() failed: </source>
         <translation>ao_open_live() failed: </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="299"/>
+        <location filename="../ffmpegaudio.cc" line="301"/>
         <source>No driver.</source>
         <translation>드라이버 없음.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="302"/>
+        <location filename="../ffmpegaudio.cc" line="304"/>
         <source>This driver is not a live output device.</source>
         <translation>이 드라이버는 라이브 출력장치가 아닙니다.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="305"/>
+        <location filename="../ffmpegaudio.cc" line="307"/>
         <source>A valid option key has an invalid value.</source>
         <translation>유효한 옵션키가 유효하지 않은 값을 가지고 있습니다.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="308"/>
+        <location filename="../ffmpegaudio.cc" line="310"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>장치를 열수 없습니다: %1, 채널: %2, 샘플레이트: %3, 비트: %4.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="315"/>
+        <location filename="../ffmpegaudio.cc" line="317"/>
         <source>Unknown error.</source>
         <translation>알 수 없는 오류.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="340"/>
+        <location filename="../ffmpegaudio.cc" line="346"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() failed.</translation>
     </message>
@@ -4147,17 +4147,17 @@ download page.</source>
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1023"/>
+        <location filename="../groups_widgets.cc" line="1031"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>사전 검색/필터 (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1032"/>
+        <location filename="../groups_widgets.cc" line="1040"/>
         <source>Quick Search</source>
         <translation>빠른 검색</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1037"/>
+        <location filename="../groups_widgets.cc" line="1045"/>
         <source>Clear Search</source>
         <translation>검색어 지우기</translation>
     </message>
@@ -4165,18 +4165,18 @@ download page.</source>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2705"/>
         <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2719"/>
         <source>ERROR: %1</source>
         <translation>오류: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2705"/>
+        <location filename="../articleview.cc" line="2712"/>
         <source>Resource saving error: </source>
         <translation>리소스 저장 오류: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2719"/>
         <source>The referenced resource failed to download.</source>
         <translation>참조할 리소스를 다운로드하지 못했습니다.</translation>
     </message>
@@ -4261,8 +4261,8 @@ could be resized or managed in other ways.</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="501"/>
-        <location filename="../scanpopup.cc" line="850"/>
+        <location filename="../scanpopup.cc" line="500"/>
+        <location filename="../scanpopup.cc" line="849"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -4270,17 +4270,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1244"/>
+        <location filename="../sources.cc" line="1276"/>
         <source>Path</source>
         <translation>경로</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1246"/>
+        <location filename="../sources.cc" line="1278"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1248"/>
+        <location filename="../sources.cc" line="1280"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>
@@ -4288,47 +4288,47 @@ could be resized or managed in other ways.</source>
 <context>
     <name>Sources</name>
     <message>
-        <location filename="../sources.cc" line="123"/>
+        <location filename="../sources.cc" line="124"/>
         <source>Text to Speech</source>
         <translation>음성 합성</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="139"/>
+        <location filename="../sources.cc" line="140"/>
         <source>(not available in portable version)</source>
         <translation>(포터블 버전에서는 설정할 수 없습니다)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="176"/>
-        <location filename="../sources.cc" line="203"/>
-        <location filename="../sources.cc" line="230"/>
+        <location filename="../sources.cc" line="177"/>
+        <location filename="../sources.cc" line="204"/>
+        <location filename="../sources.cc" line="231"/>
         <source>Choose a directory</source>
         <translation>폴더 선택</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="190"/>
-        <location filename="../sources.cc" line="217"/>
-        <location filename="../sources.cc" line="257"/>
-        <location filename="../sources.cc" line="281"/>
-        <location filename="../sources.cc" line="305"/>
-        <location filename="../sources.cc" line="329"/>
+        <location filename="../sources.cc" line="191"/>
+        <location filename="../sources.cc" line="218"/>
+        <location filename="../sources.cc" line="258"/>
+        <location filename="../sources.cc" line="282"/>
+        <location filename="../sources.cc" line="306"/>
+        <location filename="../sources.cc" line="330"/>
         <source>Confirm removal</source>
         <translation>삭제 확인</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="191"/>
-        <location filename="../sources.cc" line="218"/>
+        <location filename="../sources.cc" line="192"/>
+        <location filename="../sources.cc" line="219"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>&lt;b&gt;%1&lt;/b&gt;폴더를 목록에서 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="258"/>
-        <location filename="../sources.cc" line="282"/>
-        <location filename="../sources.cc" line="306"/>
+        <location filename="../sources.cc" line="259"/>
+        <location filename="../sources.cc" line="283"/>
+        <location filename="../sources.cc" line="307"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>&lt;b&gt;%1&lt;/b&gt;사이트를 목록에서 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="330"/>
+        <location filename="../sources.cc" line="331"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>프로그램 &lt;b&gt;%1&lt;/b&gt;을 목록에서 삭제하시겠습니까?</translation>
     </message>
@@ -4774,22 +4774,33 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="622"/>
+        <location filename="../sources.cc" line="624"/>
+        <location filename="../sources.cc" line="657"/>
+        <source>Insert article as link inside &lt;iframe&gt; tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="633"/>
         <source>Enabled</source>
         <translation>활성</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="624"/>
+        <location filename="../sources.cc" line="635"/>
+        <source>As link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="637"/>
         <source>Name</source>
         <translation>이름</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="626"/>
+        <location filename="../sources.cc" line="639"/>
         <source>Address</source>
         <translation>주소</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="628"/>
+        <location filename="../sources.cc" line="641"/>
         <source>Icon</source>
         <translation>아이콘</translation>
     </message>

@@ -3881,6 +3881,14 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
         <source>Icon</source>
         <translation>圖示</translation>
     </message>
+    <message>
+        <source>Insert article as link inside &lt;iframe&gt; tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>As link</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WordFinder</name>

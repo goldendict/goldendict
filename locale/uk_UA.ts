@@ -34,12 +34,12 @@
         <translation>Ліцензовано за GNU GPLv3 або пізніше</translation>
     </message>
     <message>
-        <location filename="../about.cc" line="17"/>
+        <location filename="../about.cc" line="19"/>
         <source>[Unknown]</source>
         <translation>[Невідомий]</translation>
     </message>
     <message>
-        <location filename="../about.cc" line="34"/>
+        <location filename="../about.cc" line="36"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
         <translation>Основано наQt %1 (%2, %3 біт) </translation>
     </message>
@@ -47,62 +47,62 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="153"/>
+        <location filename="../article_maker.cc" line="154"/>
         <source>Expand article</source>
         <translation>Розкрити статтю</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="159"/>
+        <location filename="../article_maker.cc" line="160"/>
         <source>Collapse article</source>
         <translation>Згорнути статтю</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="188"/>
+        <location filename="../article_maker.cc" line="189"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Нема перекладу для &lt;b&gt;%1&lt;/b&gt; в групі &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="193"/>
+        <location filename="../article_maker.cc" line="194"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Нема перекладу в групі &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="241"/>
+        <location filename="../article_maker.cc" line="242"/>
         <source>Welcome!</source>
         <translation>Ласкаво просимо!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="243"/>
+        <location filename="../article_maker.cc" line="244"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Ласкаво просимо до &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Щоб розпочати роботу з програмою, спочатку відвідайте &lt;b&gt;Зміни|Словники&lt;/b&gt;, та додайте деякі шляхи до словників, де їх можна знайти, вкажіть варіанти сайтів Wikipedia або інших джерел, встановити порядок словників або згрупувати словники.&lt;p&gt;І тоді ви зможете шукати самі слова! Ви можете це здійснити в цьому вікні, використовуючи панель зліва, або можете через &lt;a href=&quot;Контекстні вікна&quot;&gt;шукати слова з інших запущених програм&lt;/a&gt;. &lt;p&gt;Щоб налаштувати програму, перевірте доступність налаштувань в &lt;b&gt;Зміни|Налаштування&lt;/b&gt;. Всі параметри мають підказки, переконайтесь, що прочитали їх, якщо в чомусь не впевнені.&lt;p&gt;Якщо потрібна допомога, маєте якісь запитання, поради або просто бажаєте поділитись враженнями, ми будемо раді кожному на &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форумі&lt;/a&gt; програми.&lt;p&gt;Відвідайте &lt;a href=&quot;http://goldendict.org/&quot;&gt;сайт&lt;/a&gt; програми щодо оновлень. &lt;p&gt;© 2008–2013 Konstantin Isakov. Ліцензовано за GPLv3 або пізнішої версії.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="259"/>
+        <location filename="../article_maker.cc" line="260"/>
         <source>Working with popup</source>
         <translation>Контекстні вікна</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="261"/>
+        <location filename="../article_maker.cc" line="262"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Контекстні вікна&lt;/h3&gt;Для пошуку слів з інших запущених програм вам потрібно ввімкнути &lt;i&gt;«Контекстні вікна»&lt;/i&gt; в меню &lt;b&gt;Налаштування&lt;/b&gt; і потім може увімкнути його в будь-який момент натиснувши піктограму «Контекстне вікно» вище, або натиснувши піктограму в лотку нижче правим клацом мишки і вибравши його в контекстному меню. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="268"/>
+        <location filename="../article_maker.cc" line="269"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Потім наведіть курсор миші на слово, котре ви бажаєте перекласти, у сторонній програмі, тоді появиться контекстне вікно з потрібним описом слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="271"/>
+        <location filename="../article_maker.cc" line="272"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Тепер виберіть будь-яке слово,котре ви бажаєте перекласти, у сторонній програмі за допомогою мишки (подвійний клац або підвівши курсор при затиснутій лівій кнопці), тоді появиться контекстне вікно з потрібним описом слова.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="353"/>
+        <location filename="../article_maker.cc" line="354"/>
         <source>(untitled)</source>
         <translation>(без назви)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="367"/>
+        <location filename="../article_maker.cc" line="368"/>
         <source>(picture)</source>
         <translation>(зображення)</translation>
     </message>
@@ -110,37 +110,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="634"/>
+        <location filename="../article_maker.cc" line="635"/>
         <source>Expand article</source>
         <translation>Розкрити статтю</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="637"/>
+        <location filename="../article_maker.cc" line="638"/>
         <source>From </source>
         <translation>Зі словника</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="642"/>
+        <location filename="../article_maker.cc" line="643"/>
         <source>Collapse article</source>
         <translation>Згорнути статтю</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="659"/>
+        <location filename="../article_maker.cc" line="660"/>
         <source>Query error: %1</source>
         <translation>Помилка запиту: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="765"/>
+        <location filename="../article_maker.cc" line="766"/>
         <source>Close words: </source>
         <translation>Близькі за значенням: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="836"/>
+        <location filename="../article_maker.cc" line="837"/>
         <source>Compound expressions: </source>
         <translation>Словосполучення: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="864"/>
+        <location filename="../article_maker.cc" line="865"/>
         <source>Individual words: </source>
         <translation>Окремі слова: </translation>
     </message>
@@ -195,47 +195,47 @@
         <translation>Виділити &amp;все</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="207"/>
+        <location filename="../articleview.cc" line="209"/>
         <source>Select Current Article</source>
         <translation>Вибрати поточний об&apos;єкт</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="213"/>
+        <location filename="../articleview.cc" line="215"/>
         <source>Copy as text</source>
         <translation>Скопіювати як текст</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="219"/>
+        <location filename="../articleview.cc" line="221"/>
         <source>Inspect</source>
         <translation>Дослідити</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="949"/>
+        <location filename="../articleview.cc" line="956"/>
         <source>Resource</source>
         <translation>Ресурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="954"/>
+        <location filename="../articleview.cc" line="961"/>
         <source>Audio</source>
         <translation>Аудіо</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="959"/>
+        <location filename="../articleview.cc" line="966"/>
         <source>TTS Voice</source>
         <translation>Голос TTS</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="964"/>
+        <location filename="../articleview.cc" line="971"/>
         <source>Picture</source>
         <translation>Зображення</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="997"/>
+        <location filename="../articleview.cc" line="1004"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Визначення зі словника &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1001"/>
+        <location filename="../articleview.cc" line="1008"/>
         <source>Definition: %1</source>
         <translation>Визначення: %1</translation>
     </message>
@@ -244,100 +244,100 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1222"/>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1229"/>
+        <location filename="../articleview.cc" line="1383"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Вказаного ресурсу не існує.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1262"/>
+        <location filename="../articleview.cc" line="1269"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Вказана аудіо програма не існує.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1182"/>
-        <location filename="../articleview.cc" line="1376"/>
+        <location filename="../articleview.cc" line="1189"/>
+        <location filename="../articleview.cc" line="1383"/>
         <source>ERROR: %1</source>
         <translation>Помилка:%1 </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1772"/>
+        <location filename="../articleview.cc" line="1779"/>
         <source>Save sound</source>
         <translation>Зберегти звук</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1774"/>
+        <location filename="../articleview.cc" line="1781"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Звукові файли(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Усі файли (*.*) </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1787"/>
+        <location filename="../articleview.cc" line="1794"/>
         <source>Save image</source>
         <translation>Зберегти малюнок</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1789"/>
+        <location filename="../articleview.cc" line="1796"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Графічні файли (*.bmp *.jpg *.png *.tif);;Усі файли (*.*) </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1528"/>
+        <location filename="../articleview.cc" line="1535"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Відкрити посилання</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="978"/>
         <source>Video</source>
         <translation>Відеозапис</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="980"/>
+        <location filename="../articleview.cc" line="987"/>
         <source>Video: %1</source>
         <translation>Відеозапис: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1534"/>
+        <location filename="../articleview.cc" line="1541"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Відкрити посилання в новій в&amp;кладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1548"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Відкрити посилання у &amp;зовнішньому переглядачі</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1583"/>
+        <location filename="../articleview.cc" line="1590"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Пошук «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1591"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Пошук «%1» в &amp;новій вкладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1596"/>
+        <location filename="../articleview.cc" line="1603"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Послати &quot;%1&quot; до стрічки введення</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1602"/>
-        <location filename="../articleview.cc" line="1638"/>
+        <location filename="../articleview.cc" line="1609"/>
+        <location filename="../articleview.cc" line="1645"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Додати &quot;%1&quot; до історії</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1616"/>
+        <location filename="../articleview.cc" line="1623"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Пошук «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1624"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Пошук «%1»в %2 в &amp;новій вкладці</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>Попередження: звуковий програвач FFmpeg: %1</translation>
     </message>
@@ -358,37 +358,37 @@
         <translation type="obsolete">Басова бібліотека не взмозі відтворити цей звук.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1861"/>
+        <location filename="../articleview.cc" line="1868"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Не вдалось запустити програвач для відтворення звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1879"/>
+        <location filename="../articleview.cc" line="1886"/>
         <source>Failed to create temporary file.</source>
         <translation>Не вдалось створити тимчасовий файл.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1890"/>
+        <location filename="../articleview.cc" line="1897"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Не вдалось відкрити файл ресурсу, спробуйте відкрити вручну: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1913"/>
+        <location filename="../articleview.cc" line="1920"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не вдалось звантажити вказаний ресурс.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1556"/>
+        <location filename="../articleview.cc" line="1563"/>
         <source>Save &amp;image...</source>
         <translation>Зберегти &amp;зображення…</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1564"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save s&amp;ound...</source>
         <translation>Зберегти з&amp;вук</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1913"/>
+        <location filename="../articleview.cc" line="1920"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1s</translation>
     </message>
@@ -461,17 +461,17 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chinese.cc" line="92"/>
+        <location filename="../chinese.cc" line="129"/>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chinese.cc" line="99"/>
+        <location filename="../chinese.cc" line="136"/>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../chinese.cc" line="106"/>
+        <location filename="../chinese.cc" line="143"/>
         <source>Traditional to simplified Chinese conversion</source>
         <translation type="unfinished"></translation>
     </message>
@@ -517,37 +517,37 @@ between classic and school orthography in cyrillic)</source>
         <translation>Скорочення:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="38"/>
+        <location filename="../groups_widgets.cc" line="40"/>
         <source>None</source>
         <translation>Нема</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="43"/>
+        <location filename="../groups_widgets.cc" line="45"/>
         <source>From file...</source>
         <translation>З файла…</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="90"/>
+        <location filename="../groups_widgets.cc" line="92"/>
         <source>Choose a file to use as group icon</source>
         <translation>Виберіть файл, з якого братиметься групова піктограма</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="94"/>
         <source>Images</source>
         <translation>Зображення</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="93"/>
+        <location filename="../groups_widgets.cc" line="95"/>
         <source>All files</source>
         <translation>Усі файли</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="100"/>
+        <location filename="../groups_widgets.cc" line="102"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="100"/>
+        <location filename="../groups_widgets.cc" line="102"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Неможливо прочитати вказане зображення.</translation>
     </message>
@@ -555,46 +555,46 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="590"/>
-        <location filename="../groups_widgets.cc" line="665"/>
-        <location filename="../groups_widgets.cc" line="838"/>
-        <location filename="../groups_widgets.cc" line="1013"/>
+        <location filename="../groups_widgets.cc" line="598"/>
+        <location filename="../groups_widgets.cc" line="673"/>
+        <location filename="../groups_widgets.cc" line="846"/>
+        <location filename="../groups_widgets.cc" line="1021"/>
         <source>Dictionaries: </source>
         <translation>Словники: </translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="690"/>
+        <location filename="../groups_widgets.cc" line="698"/>
         <source>Confirmation</source>
         <translation>Підтвердження</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="691"/>
+        <location filename="../groups_widgets.cc" line="699"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Бажаєте створити групи, впорядковані за різними мовами?</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="716"/>
+        <location filename="../groups_widgets.cc" line="724"/>
         <source>Unassigned</source>
         <translation>Не призначений</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="854"/>
+        <location filename="../groups_widgets.cc" line="862"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>Об&apos;єднати групи за основною мовою у &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="871"/>
+        <location filename="../groups_widgets.cc" line="879"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation>Об&apos;єднати групи за бажаною мовою у &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="889"/>
+        <location filename="../groups_widgets.cc" line="897"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation>Зробити двох-бокову групу перекладу &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="907"/>
-        <location filename="../groups_widgets.cc" line="926"/>
+        <location filename="../groups_widgets.cc" line="915"/>
+        <location filename="../groups_widgets.cc" line="934"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation>Об&apos;єднати групи з &quot;%1&quot;</translation>
     </message>
@@ -775,7 +775,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="233"/>
+        <location filename="../groups_widgets.cc" line="237"/>
         <source>%1 entries</source>
         <translation>%1 статей</translation>
     </message>
@@ -806,43 +806,43 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictServersModel</name>
     <message>
-        <location filename="../sources.cc" line="778"/>
+        <location filename="../sources.cc" line="810"/>
         <source>Enabled</source>
         <translation type="unfinished">Увімкнено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="780"/>
+        <location filename="../sources.cc" line="812"/>
         <source>Name</source>
         <translation type="unfinished">Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="782"/>
+        <location filename="../sources.cc" line="814"/>
         <source>Address</source>
         <translation type="unfinished">Адреса</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="784"/>
+        <location filename="../sources.cc" line="816"/>
         <source>Databases</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="786"/>
+        <location filename="../sources.cc" line="818"/>
         <source>Strategies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="788"/>
+        <location filename="../sources.cc" line="820"/>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="821"/>
+        <location filename="../sources.cc" line="853"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="824"/>
+        <location filename="../sources.cc" line="856"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
         <translation type="unfinished"></translation>
@@ -946,74 +946,74 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="141"/>
+        <location filename="../fulltextsearch.cc" line="150"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="148"/>
+        <location filename="../fulltextsearch.cc" line="157"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="149"/>
+        <location filename="../fulltextsearch.cc" line="158"/>
         <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="150"/>
+        <location filename="../fulltextsearch.cc" line="159"/>
         <source>Wildcards</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="151"/>
+        <location filename="../fulltextsearch.cc" line="160"/>
         <source>RegExp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="156"/>
+        <location filename="../fulltextsearch.cc" line="165"/>
         <source>Max distance between words (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="165"/>
+        <location filename="../fulltextsearch.cc" line="174"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="188"/>
-        <location filename="../fulltextsearch.cc" line="299"/>
-        <location filename="../fulltextsearch.cc" line="387"/>
+        <location filename="../fulltextsearch.cc" line="197"/>
+        <location filename="../fulltextsearch.cc" line="344"/>
+        <location filename="../fulltextsearch.cc" line="432"/>
         <source>Articles found: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="267"/>
+        <location filename="../fulltextsearch.cc" line="312"/>
         <source>Now indexing: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="268"/>
+        <location filename="../fulltextsearch.cc" line="313"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="312"/>
+        <location filename="../fulltextsearch.cc" line="357"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="321"/>
+        <location filename="../fulltextsearch.cc" line="366"/>
         <source>The search line must contains at least one word containing </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="322"/>
+        <location filename="../fulltextsearch.cc" line="367"/>
         <source> or more symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="334"/>
+        <location filename="../fulltextsearch.cc" line="379"/>
         <source>No dictionaries for full-text search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1380,12 +1380,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="277"/>
+        <location filename="../hunspell.cc" line="280"/>
         <source>Spelling suggestions: </source>
         <translation>Орфографічні підказки: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="868"/>
+        <location filename="../hunspell.cc" line="871"/>
         <source>%1 Morphology</source>
         <translation>Морфологія %1</translation>
     </message>
@@ -1393,12 +1393,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HunspellDictsModel</name>
     <message>
-        <location filename="../sources.cc" line="1356"/>
+        <location filename="../sources.cc" line="1389"/>
         <source>Enabled</source>
         <translation>Увімкнено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1358"/>
+        <location filename="../sources.cc" line="1391"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
@@ -1412,7 +1412,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../initializing.ui" line="28"/>
-        <location filename="../initializing.cc" line="30"/>
+        <location filename="../initializing.cc" line="59"/>
         <source>Please wait while indexing dictionary</source>
         <translation>Заждіть, будь ласка, поки розпізнаються словники</translation>
     </message>
@@ -1422,7 +1422,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>Назва словника</translation>
     </message>
     <message>
-        <location filename="../initializing.cc" line="21"/>
+        <location filename="../initializing.cc" line="50"/>
         <source>Please wait...</source>
         <translation>Зачекайте, будь ласка…</translation>
     </message>
@@ -1430,1008 +1430,1008 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Language</name>
     <message>
-        <location filename="../language.cc" line="55"/>
+        <location filename="../language.cc" line="56"/>
         <source>Afar</source>
         <translation>Афар</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="56"/>
+        <location filename="../language.cc" line="57"/>
         <source>Abkhazian</source>
         <translation>Абхазька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="57"/>
+        <location filename="../language.cc" line="58"/>
         <source>Avestan</source>
         <translation>Авестан</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="58"/>
+        <location filename="../language.cc" line="59"/>
         <source>Afrikaans</source>
         <translation>Африкаанс</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="59"/>
+        <location filename="../language.cc" line="60"/>
         <source>Akan</source>
         <translation>Акан</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="60"/>
+        <location filename="../language.cc" line="61"/>
         <source>Amharic</source>
         <translation>Амхарська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="61"/>
+        <location filename="../language.cc" line="62"/>
         <source>Aragonese</source>
         <translation>Арагонська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="62"/>
+        <location filename="../language.cc" line="63"/>
         <source>Arabic</source>
         <translation>Арабська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="63"/>
+        <location filename="../language.cc" line="64"/>
         <source>Assamese</source>
         <translation>Асамійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="64"/>
+        <location filename="../language.cc" line="65"/>
         <source>Avaric</source>
         <translation>Аварська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="65"/>
+        <location filename="../language.cc" line="66"/>
         <source>Aymara</source>
         <translation>Аймарська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="66"/>
+        <location filename="../language.cc" line="67"/>
         <source>Azerbaijani</source>
         <translation>Азербайджанська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="67"/>
+        <location filename="../language.cc" line="68"/>
         <source>Bashkir</source>
         <translation>Башкирська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="68"/>
+        <location filename="../language.cc" line="69"/>
         <source>Belarusian</source>
         <translation>Білоруська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="69"/>
+        <location filename="../language.cc" line="70"/>
         <source>Bulgarian</source>
         <translation>Болгарська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="70"/>
+        <location filename="../language.cc" line="71"/>
         <source>Bihari</source>
         <translation>Біхарі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="71"/>
+        <location filename="../language.cc" line="72"/>
         <source>Bislama</source>
         <translation>Біслама</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="72"/>
+        <location filename="../language.cc" line="73"/>
         <source>Bambara</source>
         <translation>Бенгальська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="73"/>
+        <location filename="../language.cc" line="74"/>
         <source>Bengali</source>
         <translation>Бенгальська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="74"/>
+        <location filename="../language.cc" line="75"/>
         <source>Tibetan</source>
         <translation>Тибетська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="75"/>
+        <location filename="../language.cc" line="76"/>
         <source>Breton</source>
         <translation>Бретонська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="76"/>
+        <location filename="../language.cc" line="77"/>
         <source>Bosnian</source>
         <translation>Боснійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="77"/>
+        <location filename="../language.cc" line="78"/>
         <source>Catalan</source>
         <translation>Каталонська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="78"/>
+        <location filename="../language.cc" line="79"/>
         <source>Chechen</source>
         <translation>Чеченська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="79"/>
+        <location filename="../language.cc" line="80"/>
         <source>Chamorro</source>
         <translation>Чаморо</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="80"/>
+        <location filename="../language.cc" line="81"/>
         <source>Corsican</source>
         <translation>Корсиканська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="81"/>
+        <location filename="../language.cc" line="82"/>
         <source>Cree</source>
         <translation>Крі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="82"/>
+        <location filename="../language.cc" line="83"/>
         <source>Czech</source>
         <translation>Чеська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="83"/>
+        <location filename="../language.cc" line="84"/>
         <source>Church Slavic</source>
         <translation>Церковнослов&apos;янська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="84"/>
+        <location filename="../language.cc" line="85"/>
         <source>Chuvash</source>
         <translation>Чуваська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="85"/>
+        <location filename="../language.cc" line="86"/>
         <source>Welsh</source>
         <translation>Уельська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="86"/>
+        <location filename="../language.cc" line="87"/>
         <source>Danish</source>
         <translation>Данська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="87"/>
+        <location filename="../language.cc" line="88"/>
         <source>German</source>
         <translation>Німецька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="88"/>
+        <location filename="../language.cc" line="89"/>
         <source>Divehi</source>
         <translation>Дівехі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="89"/>
+        <location filename="../language.cc" line="90"/>
         <source>Dzongkha</source>
         <translation>Дзонг-ке</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="90"/>
+        <location filename="../language.cc" line="91"/>
         <source>Ewe</source>
         <translation>Еве</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="91"/>
+        <location filename="../language.cc" line="92"/>
         <source>Greek</source>
         <translation>Грецька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="92"/>
+        <location filename="../language.cc" line="93"/>
         <source>English</source>
         <translation>Англійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="93"/>
+        <location filename="../language.cc" line="94"/>
         <source>Esperanto</source>
         <translation>Есперанто</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="94"/>
+        <location filename="../language.cc" line="95"/>
         <source>Spanish</source>
         <translation>Іспанська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="95"/>
+        <location filename="../language.cc" line="96"/>
         <source>Estonian</source>
         <translation>Естонська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="96"/>
+        <location filename="../language.cc" line="97"/>
         <source>Basque</source>
         <translation>Баскська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="97"/>
+        <location filename="../language.cc" line="98"/>
         <source>Persian</source>
         <translation>Перська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="98"/>
+        <location filename="../language.cc" line="99"/>
         <source>Fulah</source>
         <translation>Фула</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="99"/>
+        <location filename="../language.cc" line="100"/>
         <source>Finnish</source>
         <translation>Фінська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="100"/>
+        <location filename="../language.cc" line="101"/>
         <source>Fijian</source>
         <translation>Фіджійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="101"/>
+        <location filename="../language.cc" line="102"/>
         <source>Faroese</source>
         <translation>Фарерська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="102"/>
+        <location filename="../language.cc" line="103"/>
         <source>French</source>
         <translation>Французька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="103"/>
+        <location filename="../language.cc" line="104"/>
         <source>Western Frisian</source>
         <translation>Фризька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="104"/>
+        <location filename="../language.cc" line="105"/>
         <source>Irish</source>
         <translation>Ірландська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="105"/>
+        <location filename="../language.cc" line="106"/>
         <source>Scottish Gaelic</source>
         <translation>Гаельська (Шотландія)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="106"/>
+        <location filename="../language.cc" line="107"/>
         <source>Galician</source>
         <translation>Галісійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="107"/>
+        <location filename="../language.cc" line="108"/>
         <source>Guarani</source>
         <translation>Гуарані</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="108"/>
+        <location filename="../language.cc" line="109"/>
         <source>Gujarati</source>
         <translation>Гуджараті</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="109"/>
+        <location filename="../language.cc" line="110"/>
         <source>Manx</source>
         <translation>Манкс</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="110"/>
+        <location filename="../language.cc" line="111"/>
         <source>Hausa</source>
         <translation>Гауса</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="111"/>
+        <location filename="../language.cc" line="112"/>
         <source>Hebrew</source>
         <translation>Єврейська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="112"/>
+        <location filename="../language.cc" line="113"/>
         <source>Hindi</source>
         <translation>Хінді</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="113"/>
+        <location filename="../language.cc" line="114"/>
         <source>Hiri Motu</source>
         <translation>Хірімоту</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="114"/>
+        <location filename="../language.cc" line="115"/>
         <source>Croatian</source>
         <translation>Хорватська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="115"/>
+        <location filename="../language.cc" line="116"/>
         <source>Haitian</source>
         <translation>Гаїтянська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="116"/>
+        <location filename="../language.cc" line="117"/>
         <source>Hungarian</source>
         <translation>Угорська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="117"/>
+        <location filename="../language.cc" line="118"/>
         <source>Armenian</source>
         <translation>Вірменська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="118"/>
+        <location filename="../language.cc" line="119"/>
         <source>Herero</source>
         <translation>Гереро</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="119"/>
+        <location filename="../language.cc" line="120"/>
         <source>Interlingua</source>
         <translation>Інтерлінгва</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="120"/>
+        <location filename="../language.cc" line="121"/>
         <source>Indonesian</source>
         <translation>Індонезійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="121"/>
+        <location filename="../language.cc" line="122"/>
         <source>Interlingue</source>
         <translation>Окциденталь</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="122"/>
+        <location filename="../language.cc" line="123"/>
         <source>Igbo</source>
         <translation>Ігбо</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="123"/>
+        <location filename="../language.cc" line="124"/>
         <source>Sichuan Yi</source>
         <translation>Сичуань</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="124"/>
+        <location filename="../language.cc" line="125"/>
         <source>Inupiaq</source>
         <translation>Інупіак</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="125"/>
+        <location filename="../language.cc" line="126"/>
         <source>Ido</source>
         <translation>Ідо</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="126"/>
+        <location filename="../language.cc" line="127"/>
         <source>Icelandic</source>
         <translation>Ісландська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="127"/>
+        <location filename="../language.cc" line="128"/>
         <source>Italian</source>
         <translation>Італійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="128"/>
+        <location filename="../language.cc" line="129"/>
         <source>Inuktitut</source>
         <translation>Інуктітут</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="129"/>
+        <location filename="../language.cc" line="130"/>
         <source>Japanese</source>
         <translation>Японська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="130"/>
+        <location filename="../language.cc" line="131"/>
         <source>Javanese</source>
         <translation>Яванська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="131"/>
+        <location filename="../language.cc" line="132"/>
         <source>Georgian</source>
         <translation>Грузинська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="132"/>
+        <location filename="../language.cc" line="133"/>
         <source>Kongo</source>
         <translation>Конґолезька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="133"/>
+        <location filename="../language.cc" line="134"/>
         <source>Kikuyu</source>
         <translation>Кікуйю</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="134"/>
+        <location filename="../language.cc" line="135"/>
         <source>Kwanyama</source>
         <translation>Кваньяма</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="135"/>
+        <location filename="../language.cc" line="136"/>
         <source>Kazakh</source>
         <translation>Казахська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="136"/>
+        <location filename="../language.cc" line="137"/>
         <source>Kalaallisut</source>
         <translation>Калаалісут</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="137"/>
+        <location filename="../language.cc" line="138"/>
         <source>Khmer</source>
         <translation>Кхмерська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="138"/>
+        <location filename="../language.cc" line="139"/>
         <source>Kannada</source>
         <translation>Каннада</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="139"/>
+        <location filename="../language.cc" line="140"/>
         <source>Korean</source>
         <translation>Корейська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="140"/>
+        <location filename="../language.cc" line="141"/>
         <source>Kanuri</source>
         <translation>Канурі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="141"/>
+        <location filename="../language.cc" line="142"/>
         <source>Kashmiri</source>
         <translation>Кашмірська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="142"/>
+        <location filename="../language.cc" line="143"/>
         <source>Kurdish</source>
         <translation>Курдська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="143"/>
+        <location filename="../language.cc" line="144"/>
         <source>Komi</source>
         <translation>Комі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="144"/>
+        <location filename="../language.cc" line="145"/>
         <source>Cornish</source>
         <translation>Корнійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="145"/>
+        <location filename="../language.cc" line="146"/>
         <source>Kirghiz</source>
         <translation>Киргизька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="146"/>
+        <location filename="../language.cc" line="147"/>
         <source>Latin</source>
         <translation>Латинська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="147"/>
+        <location filename="../language.cc" line="148"/>
         <source>Luxembourgish</source>
         <translation>Люксембурзька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="148"/>
+        <location filename="../language.cc" line="149"/>
         <source>Ganda</source>
         <translation>Ганда</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="149"/>
+        <location filename="../language.cc" line="150"/>
         <source>Limburgish</source>
         <translation>Лімбурганська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="150"/>
+        <location filename="../language.cc" line="151"/>
         <source>Lingala</source>
         <translation>Лінгала</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="151"/>
+        <location filename="../language.cc" line="152"/>
         <source>Lao</source>
         <translation>Лаоська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="152"/>
+        <location filename="../language.cc" line="153"/>
         <source>Lithuanian</source>
         <translation>Литовська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="153"/>
+        <location filename="../language.cc" line="154"/>
         <source>Luba-Katanga</source>
         <translation>Луба-катанга</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="154"/>
+        <location filename="../language.cc" line="155"/>
         <source>Latvian</source>
         <translation>Латвійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="155"/>
+        <location filename="../language.cc" line="156"/>
         <source>Malagasy</source>
         <translation>Малагасійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="156"/>
+        <location filename="../language.cc" line="157"/>
         <source>Marshallese</source>
         <translation>Маршальська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="157"/>
+        <location filename="../language.cc" line="158"/>
         <source>Maori</source>
         <translation>Маорі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="158"/>
+        <location filename="../language.cc" line="159"/>
         <source>Macedonian</source>
         <translation>Македонська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="159"/>
+        <location filename="../language.cc" line="160"/>
         <source>Malayalam</source>
         <translation>Малайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="160"/>
+        <location filename="../language.cc" line="161"/>
         <source>Mongolian</source>
         <translation>Монгольська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="161"/>
+        <location filename="../language.cc" line="162"/>
         <source>Marathi</source>
         <translation>Мараті</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="162"/>
+        <location filename="../language.cc" line="163"/>
         <source>Malay</source>
         <translation>Малайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="163"/>
+        <location filename="../language.cc" line="164"/>
         <source>Maltese</source>
         <translation>Мальтійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="164"/>
+        <location filename="../language.cc" line="165"/>
         <source>Burmese</source>
         <translation>Бірманська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="165"/>
+        <location filename="../language.cc" line="166"/>
         <source>Nauru</source>
         <translation>Науру</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="166"/>
+        <location filename="../language.cc" line="167"/>
         <source>Norwegian Bokmal</source>
         <translation>Норвезька (Букмол)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="167"/>
+        <location filename="../language.cc" line="168"/>
         <source>North Ndebele</source>
         <translation>Північна Ндебелє</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="168"/>
+        <location filename="../language.cc" line="169"/>
         <source>Nepali</source>
         <translation>Непальська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="169"/>
+        <location filename="../language.cc" line="170"/>
         <source>Ndonga</source>
         <translation>Ндонга</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="170"/>
+        <location filename="../language.cc" line="171"/>
         <source>Dutch</source>
         <translation>Голландська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="171"/>
+        <location filename="../language.cc" line="172"/>
         <source>Norwegian Nynorsk</source>
         <translation>Норвезька (Нюношк)</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="172"/>
+        <location filename="../language.cc" line="173"/>
         <source>Norwegian</source>
         <translation>Норвезька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="173"/>
+        <location filename="../language.cc" line="174"/>
         <source>South Ndebele</source>
         <translation>Південна Ндебелє</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="174"/>
+        <location filename="../language.cc" line="175"/>
         <source>Navajo</source>
         <translation>Навахо</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="175"/>
+        <location filename="../language.cc" line="176"/>
         <source>Chichewa</source>
         <translation>Чічеванська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="176"/>
+        <location filename="../language.cc" line="177"/>
         <source>Occitan</source>
         <translation>Оксітанська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="177"/>
+        <location filename="../language.cc" line="178"/>
         <source>Ojibwa</source>
         <translation>Оджібва</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="178"/>
+        <location filename="../language.cc" line="179"/>
         <source>Oromo</source>
         <translation>Оромо
 </translation>
     </message>
     <message>
-        <location filename="../language.cc" line="179"/>
+        <location filename="../language.cc" line="180"/>
         <source>Oriya</source>
         <translation>Орія</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="180"/>
+        <location filename="../language.cc" line="181"/>
         <source>Ossetian</source>
         <translation>Осетинська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="181"/>
+        <location filename="../language.cc" line="182"/>
         <source>Panjabi</source>
         <translation>Панджабська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="182"/>
+        <location filename="../language.cc" line="183"/>
         <source>Pali</source>
         <translation>Палі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="183"/>
+        <location filename="../language.cc" line="184"/>
         <source>Polish</source>
         <translation>Польська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="184"/>
+        <location filename="../language.cc" line="185"/>
         <source>Pashto</source>
         <translation>Пуштунська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="185"/>
+        <location filename="../language.cc" line="186"/>
         <source>Portuguese</source>
         <translation>Португальська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="186"/>
+        <location filename="../language.cc" line="187"/>
         <source>Quechua</source>
         <translation>Кечуа</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="187"/>
+        <location filename="../language.cc" line="188"/>
         <source>Raeto-Romance</source>
         <translation>Ретороманська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="188"/>
+        <location filename="../language.cc" line="189"/>
         <source>Kirundi</source>
         <translation>Рунді</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="189"/>
+        <location filename="../language.cc" line="190"/>
         <source>Romanian</source>
         <translation>Румунська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="190"/>
+        <location filename="../language.cc" line="191"/>
         <source>Russian</source>
         <translation>Російська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="191"/>
+        <location filename="../language.cc" line="192"/>
         <source>Kinyarwanda</source>
         <translation>Кіньяруанда</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="192"/>
+        <location filename="../language.cc" line="193"/>
         <source>Sanskrit</source>
         <translation>Санскрит</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="193"/>
+        <location filename="../language.cc" line="194"/>
         <source>Sardinian</source>
         <translation>Сардинська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="194"/>
+        <location filename="../language.cc" line="195"/>
         <source>Sindhi</source>
         <translation>Синдхі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="195"/>
+        <location filename="../language.cc" line="196"/>
         <source>Northern Sami</source>
         <translation>Північна Саамі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="196"/>
+        <location filename="../language.cc" line="197"/>
         <source>Sango</source>
         <translation>Санго</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="197"/>
+        <location filename="../language.cc" line="198"/>
         <source>Serbo-Croatian</source>
         <translation>Сербсько-хорватська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="198"/>
+        <location filename="../language.cc" line="199"/>
         <source>Sinhala</source>
         <translation>Сингала</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="199"/>
+        <location filename="../language.cc" line="200"/>
         <source>Slovak</source>
         <translation>Словацька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="200"/>
+        <location filename="../language.cc" line="201"/>
         <source>Slovenian</source>
         <translation>Словенська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="201"/>
+        <location filename="../language.cc" line="202"/>
         <source>Samoan</source>
         <translation>Самоанська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="202"/>
+        <location filename="../language.cc" line="203"/>
         <source>Shona</source>
         <translation>Шона</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="203"/>
+        <location filename="../language.cc" line="204"/>
         <source>Somali</source>
         <translation>Сомалійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="204"/>
+        <location filename="../language.cc" line="205"/>
         <source>Albanian</source>
         <translation>Албанська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="205"/>
+        <location filename="../language.cc" line="206"/>
         <source>Serbian</source>
         <translation>Сербська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="206"/>
+        <location filename="../language.cc" line="207"/>
         <source>Swati</source>
         <translation>Свазі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="207"/>
+        <location filename="../language.cc" line="208"/>
         <source>Southern Sotho</source>
         <translation>Південна Сото</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="208"/>
+        <location filename="../language.cc" line="209"/>
         <source>Sundanese</source>
         <translation>Сунданська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="209"/>
+        <location filename="../language.cc" line="210"/>
         <source>Swedish</source>
         <translation>Шведська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="210"/>
+        <location filename="../language.cc" line="211"/>
         <source>Swahili</source>
         <translation>Суахілі</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="211"/>
+        <location filename="../language.cc" line="212"/>
         <source>Tamil</source>
         <translation>Тамільська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="212"/>
+        <location filename="../language.cc" line="213"/>
         <source>Telugu</source>
         <translation>Телугу</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="213"/>
+        <location filename="../language.cc" line="214"/>
         <source>Tajik</source>
         <translation>Таджицька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="214"/>
+        <location filename="../language.cc" line="215"/>
         <source>Thai</source>
         <translation>Тайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="215"/>
+        <location filename="../language.cc" line="216"/>
         <source>Tigrinya</source>
         <translation>Тигринійська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="216"/>
+        <location filename="../language.cc" line="217"/>
         <source>Turkmen</source>
         <translation>Туркменська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="217"/>
+        <location filename="../language.cc" line="218"/>
         <source>Tagalog</source>
         <translation>Тсвана</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="218"/>
+        <location filename="../language.cc" line="219"/>
         <source>Tswana</source>
         <translation>Тсвана</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="219"/>
+        <location filename="../language.cc" line="220"/>
         <source>Tonga</source>
         <translation>Тонга</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="220"/>
+        <location filename="../language.cc" line="221"/>
         <source>Turkish</source>
         <translation>Турецька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="221"/>
+        <location filename="../language.cc" line="222"/>
         <source>Tsonga</source>
         <translation>Цонґа</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="222"/>
+        <location filename="../language.cc" line="223"/>
         <source>Tatar</source>
         <translation>Татарська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="223"/>
+        <location filename="../language.cc" line="224"/>
         <source>Twi</source>
         <translation>Тві</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="224"/>
+        <location filename="../language.cc" line="225"/>
         <source>Tahitian</source>
         <translation>Таїтянська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="225"/>
+        <location filename="../language.cc" line="226"/>
         <source>Uighur</source>
         <translation>Уйгур</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="226"/>
+        <location filename="../language.cc" line="227"/>
         <source>Ukrainian</source>
         <translation>Українська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="227"/>
+        <location filename="../language.cc" line="228"/>
         <source>Urdu</source>
         <translation>Урду</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="228"/>
+        <location filename="../language.cc" line="229"/>
         <source>Uzbek</source>
         <translation>Узбецька</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="229"/>
+        <location filename="../language.cc" line="230"/>
         <source>Venda</source>
         <translation>Венда</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="230"/>
+        <location filename="../language.cc" line="231"/>
         <source>Vietnamese</source>
         <translation>В&apos;єтнамська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="231"/>
+        <location filename="../language.cc" line="232"/>
         <source>Volapuk</source>
         <translation>Волапюк</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="232"/>
+        <location filename="../language.cc" line="233"/>
         <source>Walloon</source>
         <translation>Валлонська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="233"/>
+        <location filename="../language.cc" line="234"/>
         <source>Wolof</source>
         <translation>Волоф</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="234"/>
+        <location filename="../language.cc" line="235"/>
         <source>Xhosa</source>
         <translation>Хоза</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="235"/>
+        <location filename="../language.cc" line="236"/>
         <source>Yiddish</source>
         <translation>Ідиш</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="236"/>
+        <location filename="../language.cc" line="237"/>
         <source>Yoruba</source>
         <translation>Йоруба</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="237"/>
+        <location filename="../language.cc" line="238"/>
         <source>Zhuang</source>
         <translation>Чжуань</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="238"/>
+        <location filename="../language.cc" line="239"/>
         <source>Chinese</source>
         <translation>Китайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="239"/>
+        <location filename="../language.cc" line="240"/>
         <source>Zulu</source>
         <translation>Зулуська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="240"/>
+        <location filename="../language.cc" line="241"/>
         <source>Lojban</source>
         <translation>Ложбан</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="375"/>
+        <location filename="../language.cc" line="376"/>
         <source>Traditional Chinese</source>
         <translation>Традиційна китайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="376"/>
+        <location filename="../language.cc" line="377"/>
         <source>Simplified Chinese</source>
         <translation>Спрощена китайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="377"/>
+        <location filename="../language.cc" line="378"/>
         <source>Other</source>
         <translation>Інша</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="378"/>
+        <location filename="../language.cc" line="379"/>
         <source>Other Simplified Chinese dialects</source>
         <translation>Інша спрощена китайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Traditional Chinese dialects</source>
         <translation>Інша традиційна китайська</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Eastern-European languages</source>
         <translation>Інші східно-європейські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Western-European languages</source>
         <translation>Інші західно-європейські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Russian languages</source>
         <translation>Інші слов&apos;яньські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Japanese languages</source>
         <translation>Інш японські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Baltic languages</source>
         <translation>Інші балтійські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Greek languages</source>
         <translation>Інші грецькі мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Korean dialects</source>
         <translation>Інші корейські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Turkish dialects</source>
         <translation>Інші турецькі мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Other Thai dialects</source>
         <translation>Інші тайські мови</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="389"/>
+        <location filename="../language.cc" line="390"/>
         <source>Tamazight</source>
         <translation>Тамазит</translation>
     </message>
@@ -2447,7 +2447,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="219"/>
+        <location filename="../main.cc" line="243"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Помилка в файлі налаштувань. Продовжити з типовими параметрами?</translation>
     </message>
@@ -2460,7 +2460,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="737"/>
+        <location filename="../mainwindow.cc" line="747"/>
         <source>Welcome!</source>
         <translation>Ласкаво просимо!</translation>
     </message>
@@ -2569,7 +2569,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="383"/>
-        <location filename="../mainwindow.cc" line="347"/>
+        <location filename="../mainwindow.cc" line="357"/>
         <source>&amp;Quit</source>
         <translation>&amp;Вихід</translation>
     </message>
@@ -2666,7 +2666,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="558"/>
         <location filename="../mainwindow.ui" line="561"/>
-        <location filename="../mainwindow.cc" line="253"/>
+        <location filename="../mainwindow.cc" line="263"/>
         <source>Menu Button</source>
         <translation>Кнопка меню</translation>
     </message>
@@ -2709,7 +2709,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Очистити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="558"/>
+        <location filename="../mainwindow.cc" line="568"/>
         <source>New Tab</source>
         <translation>Нова вкладка</translation>
     </message>
@@ -2725,7 +2725,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3560"/>
+        <location filename="../mainwindow.cc" line="3590"/>
         <source>&amp;Show</source>
         <translation>&amp;Показати</translation>
     </message>
@@ -2749,18 +2749,18 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Показувати назви в панелі словника</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="96"/>
+        <location filename="../mainwindow.cc" line="106"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Лоток меню</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="261"/>
-        <location filename="../mainwindow.cc" line="1233"/>
+        <location filename="../mainwindow.cc" line="271"/>
+        <location filename="../mainwindow.cc" line="1243"/>
         <source>Look up in:</source>
         <translation>Пошук в:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="299"/>
+        <location filename="../mainwindow.cc" line="309"/>
         <source>Found in Dictionaries:</source>
         <translation>Знайдено у словниках:</translation>
     </message>
@@ -2769,132 +2769,132 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Навігація</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="154"/>
+        <location filename="../mainwindow.cc" line="164"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="156"/>
+        <location filename="../mainwindow.cc" line="166"/>
         <source>Forward</source>
         <translation>Вперед</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="181"/>
+        <location filename="../mainwindow.cc" line="191"/>
         <source>Scan Popup</source>
         <translation>Переглянути</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="196"/>
+        <location filename="../mainwindow.cc" line="206"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Вимовити слово (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="208"/>
+        <location filename="../mainwindow.cc" line="218"/>
         <source>Zoom In</source>
         <translation>Зблизити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="214"/>
+        <location filename="../mainwindow.cc" line="224"/>
         <source>Zoom Out</source>
         <translation>Віддалити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="218"/>
+        <location filename="../mainwindow.cc" line="228"/>
         <source>Normal Size</source>
         <translation>Нормальний розмір</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="329"/>
+        <location filename="../mainwindow.cc" line="339"/>
         <source>Words Zoom In</source>
         <translation>Зблизити слова</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="333"/>
+        <location filename="../mainwindow.cc" line="343"/>
         <source>Words Zoom Out</source>
         <translation>Віддалити слова</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="335"/>
+        <location filename="../mainwindow.cc" line="345"/>
         <source>Words Normal Size</source>
         <translation>Звичайний розмір слів</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="343"/>
+        <location filename="../mainwindow.cc" line="353"/>
         <source>Show &amp;Main Window</source>
         <translation>Показати &amp;головне вікно</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="381"/>
+        <location filename="../mainwindow.cc" line="391"/>
         <source>Close current tab</source>
         <translation>Закрити поточну вкладку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="391"/>
+        <location filename="../mainwindow.cc" line="401"/>
         <source>Close all tabs</source>
         <translation>Закрити всі вкладки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="399"/>
+        <location filename="../mainwindow.cc" line="409"/>
         <source>Close all tabs except current</source>
         <translation>Закрити всі вкладки заодно з поточною</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="548"/>
+        <location filename="../mainwindow.cc" line="558"/>
         <source>Loading...</source>
         <translation>Завантаження…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1222"/>
+        <location filename="../mainwindow.cc" line="1232"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 словників, %2 статей, %3 слів</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1233"/>
+        <location filename="../mainwindow.cc" line="1243"/>
         <source>Look up:</source>
         <translation>Шукати:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1251"/>
+        <location filename="../mainwindow.cc" line="1261"/>
         <source>All</source>
         <translation>Усьому</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4183"/>
+        <location filename="../mainwindow.cc" line="4213"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="370"/>
+        <location filename="../mainwindow.cc" line="380"/>
         <source>Opened tabs</source>
         <translation>Відкриті вкладки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="94"/>
+        <location filename="../mainwindow.cc" line="104"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>Відображувати назви у &amp;Рядку словника</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="95"/>
+        <location filename="../mainwindow.cc" line="105"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>Показувати малі налички у &amp;тулбарі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="151"/>
+        <location filename="../mainwindow.cc" line="161"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Навігація</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1406"/>
+        <location filename="../mainwindow.cc" line="1416"/>
         <source>Open Tabs List</source>
         <translation>Відчинити список вкладок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1464"/>
+        <location filename="../mainwindow.cc" line="1474"/>
         <source>(untitled)</source>
         <translation>(без назви)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1678"/>
+        <location filename="../mainwindow.cc" line="1695"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -2903,79 +2903,79 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Попередження: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2793"/>
+        <location filename="../mainwindow.cc" line="2810"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Не вдалось запустити механізм стеження за гарячими клавішами.&lt;br&gt;Переконайтесь, що ваш XServer має розширення RECORD увімкнутим.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2930"/>
+        <location filename="../mainwindow.cc" line="2947"/>
         <source>New Release Available</source>
         <translation>Доступний новий випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2931"/>
+        <location filename="../mainwindow.cc" line="2948"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версія &lt;b&gt;%1&lt;/b&gt; GoldenDict доступна до звантаження.&lt;br&gt;Натисніть &lt;b&gt;Звантажити&lt;/b&gt;, щоб перейти до сторінки звантаження.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2936"/>
+        <location filename="../mainwindow.cc" line="2953"/>
         <source>Download</source>
         <translation>Звантажити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2937"/>
+        <location filename="../mainwindow.cc" line="2954"/>
         <source>Skip This Release</source>
         <translation>Пропустити цей випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="796"/>
-        <location filename="../mainwindow.cc" line="2990"/>
+        <location filename="../mainwindow.cc" line="806"/>
+        <location filename="../mainwindow.cc" line="3007"/>
         <source>Accessibility API is not enabled</source>
         <translation>API доступності не ввімкнено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="873"/>
+        <location filename="../mainwindow.cc" line="883"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3067"/>
+        <location filename="../mainwindow.cc" line="3084"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Ви вирішили сховати лоток меню. Викор. %1 аби показувати його знову.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3068"/>
+        <location filename="../mainwindow.cc" line="3085"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3166"/>
+        <location filename="../mainwindow.cc" line="3183"/>
         <source>Page Setup</source>
         <translation>Параметри сторінки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3167"/>
+        <location filename="../mainwindow.cc" line="3184"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Не знайдено жодного принтера. Будь ласка, спершу встановіть хоч якийсь.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3185"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>Print Article</source>
         <translation>Надрукувати статтю</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3260"/>
+        <location filename="../mainwindow.cc" line="3277"/>
         <source>Article, Complete (*.html)</source>
         <translation>Стаття, Повна (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3261"/>
+        <location filename="../mainwindow.cc" line="3278"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Стаття, тільки HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3264"/>
+        <location filename="../mainwindow.cc" line="3281"/>
         <source>Save Article As</source>
         <translation>Зберегти статтю як</translation>
     </message>
@@ -2984,88 +2984,88 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">Файли HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3278"/>
+        <location filename="../mainwindow.cc" line="3295"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3279"/>
+        <location filename="../mainwindow.cc" line="3296"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Неможливо зберегти статтю: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3329"/>
+        <location filename="../mainwindow.cc" line="3359"/>
         <source>Saving article...</source>
         <translation>Збередення статті…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3389"/>
+        <location filename="../mainwindow.cc" line="3419"/>
         <source>The main window is set to be always on top.</source>
         <translation>Головне меню налаштовано аби завжди бути зверху.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3556"/>
+        <location filename="../mainwindow.cc" line="3586"/>
         <source>&amp;Hide</source>
         <translation>&amp;Сховати</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3582"/>
+        <location filename="../mainwindow.cc" line="3612"/>
         <source>Export history to file</source>
         <translation>Експортувати файл історії</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3584"/>
-        <location filename="../mainwindow.cc" line="3646"/>
+        <location filename="../mainwindow.cc" line="3614"/>
+        <location filename="../mainwindow.cc" line="3676"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстові файли (*.txt);;Всі файли (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3623"/>
+        <location filename="../mainwindow.cc" line="3653"/>
         <source>History export complete</source>
         <translation>Експорти історії завершено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3626"/>
+        <location filename="../mainwindow.cc" line="3656"/>
         <source>Export error: </source>
         <translation>Помилка експортування:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3644"/>
+        <location filename="../mainwindow.cc" line="3674"/>
         <source>Import history from file</source>
         <translation>Імпортувати історію з файлу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3693"/>
+        <location filename="../mainwindow.cc" line="3723"/>
         <source>Import error: invalid data in file</source>
         <translation>Помилка імпорту: недійсна дата у файлі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3697"/>
+        <location filename="../mainwindow.cc" line="3727"/>
         <source>History import complete</source>
         <translation>Імпорти історії завершено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3700"/>
+        <location filename="../mainwindow.cc" line="3730"/>
         <source>Import error: </source>
         <translation>Помилка імпортування:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3974"/>
+        <location filename="../mainwindow.cc" line="4004"/>
         <source>Dictionary info</source>
         <translation>Інфа про словник</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3978"/>
+        <location filename="../mainwindow.cc" line="4008"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3980"/>
+        <location filename="../mainwindow.cc" line="4010"/>
         <source>Open dictionary folder</source>
         <translation>Відкрити словникову теку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3986"/>
+        <location filename="../mainwindow.cc" line="4016"/>
         <source>Edit dictionary</source>
         <translation>Редагувати словник</translation>
     </message>
@@ -3073,12 +3073,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="636"/>
+        <location filename="../mdx.cc" line="638"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Словниковий файл пошкоджено</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="647"/>
+        <location filename="../mdx.cc" line="649"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>Не вдалося завантажити статтю з%1, причина: %2</translation>
     </message>
@@ -3086,7 +3086,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="324"/>
+        <location filename="../mediawiki.cc" line="325"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Помилка аналізу XML: %1 в %2,%3</translation>
     </message>
@@ -3094,7 +3094,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="192"/>
+        <location filename="../mediawiki.cc" line="193"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Помилка аналізу XML: %1 в %2,%3</translation>
     </message>
@@ -3102,22 +3102,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWikisModel</name>
     <message>
-        <location filename="../sources.cc" line="465"/>
+        <location filename="../sources.cc" line="466"/>
         <source>Enabled</source>
         <translation>Увімкнено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="467"/>
+        <location filename="../sources.cc" line="468"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="469"/>
+        <location filename="../sources.cc" line="470"/>
         <source>Address</source>
         <translation>Адреса</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="471"/>
+        <location filename="../sources.cc" line="472"/>
         <source>Icon</source>
         <translation>Наличка</translation>
     </message>
@@ -3189,22 +3189,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Впорядковуйте словники, переміщуючи пункти словників. Вимикайте словники, переносячи їх у відповідну групу.</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="253"/>
+        <location filename="../orderandprops.cc" line="255"/>
         <source>Sort by name</source>
         <translation>Сортувати за іменем</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="255"/>
+        <location filename="../orderandprops.cc" line="257"/>
         <source>Sort by languages</source>
         <translation>Сортувати за мовою</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="266"/>
+        <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="290"/>
+        <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3212,12 +3212,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>PathsModel</name>
     <message>
-        <location filename="../sources.cc" line="1138"/>
+        <location filename="../sources.cc" line="1170"/>
         <source>Path</source>
         <translation>Шлях</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1140"/>
+        <location filename="../sources.cc" line="1172"/>
         <source>Recursive</source>
         <translation>Рекурсивно</translation>
     </message>
@@ -4000,27 +4000,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramTypeEditor</name>
     <message>
-        <location filename="../sources.cc" line="1046"/>
+        <location filename="../sources.cc" line="1078"/>
         <source>Audio</source>
         <translation>Аудіо</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1048"/>
+        <location filename="../sources.cc" line="1080"/>
         <source>Plain Text</source>
         <translation>Звичайний текст</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1050"/>
+        <location filename="../sources.cc" line="1082"/>
         <source>Html</source>
         <translation>Html</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1052"/>
+        <location filename="../sources.cc" line="1084"/>
         <source>Prefix Match</source>
         <translation>Співпадання префіксу</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1054"/>
+        <location filename="../sources.cc" line="1086"/>
         <source>Unknown</source>
         <translation>Невідомий</translation>
     </message>
@@ -4028,17 +4028,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>Programs::RunInstance</name>
     <message>
-        <location filename="../programs.cc" line="176"/>
+        <location filename="../programs.cc" line="177"/>
         <source>No program name was given.</source>
         <translation>Назва програми не була надана.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="192"/>
+        <location filename="../programs.cc" line="193"/>
         <source>The program has crashed.</source>
         <translation>Програма зламалася.</translation>
     </message>
     <message>
-        <location filename="../programs.cc" line="195"/>
+        <location filename="../programs.cc" line="196"/>
         <source>The program has returned exit code %1.</source>
         <translation>Програма повідомила про код виходу %1.</translation>
     </message>
@@ -4046,27 +4046,27 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ProgramsModel</name>
     <message>
-        <location filename="../sources.cc" line="954"/>
+        <location filename="../sources.cc" line="986"/>
         <source>Enabled</source>
         <translation>Увімкнено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="956"/>
+        <location filename="../sources.cc" line="988"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="958"/>
+        <location filename="../sources.cc" line="990"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="960"/>
+        <location filename="../sources.cc" line="992"/>
         <source>Command Line</source>
         <translation>Командний рядок</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="962"/>
+        <location filename="../sources.cc" line="994"/>
         <source>Icon</source>
         <translation>Наличка</translation>
     </message>
@@ -4074,99 +4074,99 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="420"/>
-        <location filename="../dsl.cc" line="1654"/>
+        <location filename="../aard.cc" line="424"/>
+        <location filename="../dsl.cc" line="1656"/>
         <source>Article loading error</source>
         <translation>Помилка завантаження статті</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="512"/>
-        <location filename="../slob.cc" line="726"/>
+        <location filename="../aard.cc" line="516"/>
+        <location filename="../slob.cc" line="727"/>
         <source>Article decoding error</source>
         <translation>Помилка розкодування статті</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="140"/>
+        <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>Помилка: avformat_alloc_context().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="147"/>
+        <location filename="../ffmpegaudio.cc" line="149"/>
         <source>av_malloc() failed.</source>
         <translation>Помилка: av_malloc().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="156"/>
+        <location filename="../ffmpegaudio.cc" line="158"/>
         <source>avio_alloc_context() failed.</source>
         <translation>Помилка: avio_alloc_context().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="173"/>
+        <location filename="../ffmpegaudio.cc" line="175"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>Помилка: avformat_open_input() %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="180"/>
+        <location filename="../ffmpegaudio.cc" line="182"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>Помилка: avformat_find_stream_info() %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="195"/>
+        <location filename="../ffmpegaudio.cc" line="197"/>
         <source>Could not find audio stream.</source>
         <translation>Неможливо знайти аудіопотік.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="203"/>
+        <location filename="../ffmpegaudio.cc" line="205"/>
         <source>Codec [id: %1] not found.</source>
         <translation>Кодек [ід: %1] не знайдено.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="210"/>
+        <location filename="../ffmpegaudio.cc" line="212"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>Помилка: avcodec_open2() %1. </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="271"/>
+        <location filename="../ffmpegaudio.cc" line="273"/>
         <source>Cannot find usable audio output device.</source>
         <translation>Неможливо знайти зручний пристрій для аудіовиходу.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="284"/>
+        <location filename="../ffmpegaudio.cc" line="286"/>
         <source>Unsupported sample format.</source>
         <translation>Непідтримуваний формат проби.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="294"/>
+        <location filename="../ffmpegaudio.cc" line="296"/>
         <source>ao_open_live() failed: </source>
         <translation>Помилка: ao_open_live(): </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="299"/>
+        <location filename="../ffmpegaudio.cc" line="301"/>
         <source>No driver.</source>
         <translation>Немає носія.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="302"/>
+        <location filename="../ffmpegaudio.cc" line="304"/>
         <source>This driver is not a live output device.</source>
         <translation>Цей носій не є пристроєм потокового аудіовиходу.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="305"/>
+        <location filename="../ffmpegaudio.cc" line="307"/>
         <source>A valid option key has an invalid value.</source>
         <translation>Дійсний ключ має недійсне значення.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="308"/>
+        <location filename="../ffmpegaudio.cc" line="310"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>Неможливо відкрити пристрій: %1, канали: %2, частота: %3, бітів: %4.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="315"/>
+        <location filename="../ffmpegaudio.cc" line="317"/>
         <source>Unknown error.</source>
         <translation>Невідома помилка.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="340"/>
+        <location filename="../ffmpegaudio.cc" line="346"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>Помилка: avcodec_alloc_frame().</translation>
     </message>
@@ -4174,17 +4174,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1023"/>
+        <location filename="../groups_widgets.cc" line="1031"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>Словниковий пошук/фільтр (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1032"/>
+        <location filename="../groups_widgets.cc" line="1040"/>
         <source>Quick Search</source>
         <translation>Швидкий пошук</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1037"/>
+        <location filename="../groups_widgets.cc" line="1045"/>
         <source>Clear Search</source>
         <translation>Очистити пошук</translation>
     </message>
@@ -4192,18 +4192,18 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2705"/>
         <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2719"/>
         <source>ERROR: %1</source>
         <translation>Помилка: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2705"/>
+        <location filename="../articleview.cc" line="2712"/>
         <source>Resource saving error: </source>
         <translation>Помилка зберігання ресурсів: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2719"/>
         <source>The referenced resource failed to download.</source>
         <translation>Не вдалось звантажити поданий ресурс.</translation>
     </message>
@@ -4304,8 +4304,8 @@ could be resized or managed in other ways.</source>
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="501"/>
-        <location filename="../scanpopup.cc" line="850"/>
+        <location filename="../scanpopup.cc" line="500"/>
+        <location filename="../scanpopup.cc" line="849"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -4313,17 +4313,17 @@ could be resized or managed in other ways.</source>
 <context>
     <name>SoundDirsModel</name>
     <message>
-        <location filename="../sources.cc" line="1244"/>
+        <location filename="../sources.cc" line="1276"/>
         <source>Path</source>
         <translation>Шлях</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1246"/>
+        <location filename="../sources.cc" line="1278"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="1248"/>
+        <location filename="../sources.cc" line="1280"/>
         <source>Icon</source>
         <translation>Піктограма</translation>
     </message>
@@ -4639,47 +4639,47 @@ Not implemented yet in GoldenDict.</source>
         <translation>Катакана</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="123"/>
+        <location filename="../sources.cc" line="124"/>
         <source>Text to Speech</source>
         <translation>Текст для вимови</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="139"/>
+        <location filename="../sources.cc" line="140"/>
         <source>(not available in portable version)</source>
         <translation>(не доступно в портативній версії)</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="176"/>
-        <location filename="../sources.cc" line="203"/>
-        <location filename="../sources.cc" line="230"/>
+        <location filename="../sources.cc" line="177"/>
+        <location filename="../sources.cc" line="204"/>
+        <location filename="../sources.cc" line="231"/>
         <source>Choose a directory</source>
         <translation>Вибрати теку</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="190"/>
-        <location filename="../sources.cc" line="217"/>
-        <location filename="../sources.cc" line="257"/>
-        <location filename="../sources.cc" line="281"/>
-        <location filename="../sources.cc" line="305"/>
-        <location filename="../sources.cc" line="329"/>
+        <location filename="../sources.cc" line="191"/>
+        <location filename="../sources.cc" line="218"/>
+        <location filename="../sources.cc" line="258"/>
+        <location filename="../sources.cc" line="282"/>
+        <location filename="../sources.cc" line="306"/>
+        <location filename="../sources.cc" line="330"/>
         <source>Confirm removal</source>
         <translation>Підтвердження вилучення</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="191"/>
-        <location filename="../sources.cc" line="218"/>
+        <location filename="../sources.cc" line="192"/>
+        <location filename="../sources.cc" line="219"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Вилучити теку &lt;b&gt;%1&lt;/b&gt; з переліку?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="258"/>
-        <location filename="../sources.cc" line="282"/>
-        <location filename="../sources.cc" line="306"/>
+        <location filename="../sources.cc" line="259"/>
+        <location filename="../sources.cc" line="283"/>
+        <location filename="../sources.cc" line="307"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Вилучити сайт &lt;b&gt;%1&lt;/b&gt; з переліку?</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="330"/>
+        <location filename="../sources.cc" line="331"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Вилучити програму &lt;b&gt;%1&lt;/b&gt; зі списку?</translation>
     </message>
@@ -4809,22 +4809,33 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WebSitesModel</name>
     <message>
-        <location filename="../sources.cc" line="622"/>
+        <location filename="../sources.cc" line="624"/>
+        <location filename="../sources.cc" line="657"/>
+        <source>Insert article as link inside &lt;iframe&gt; tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="633"/>
         <source>Enabled</source>
         <translation>Увімкнено</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="624"/>
+        <location filename="../sources.cc" line="635"/>
+        <source>As link</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sources.cc" line="637"/>
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="626"/>
+        <location filename="../sources.cc" line="639"/>
         <source>Address</source>
         <translation>Адреса</translation>
     </message>
     <message>
-        <location filename="../sources.cc" line="628"/>
+        <location filename="../sources.cc" line="641"/>
         <source>Icon</source>
         <translation>Наличка</translation>
     </message>

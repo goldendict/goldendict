@@ -4706,6 +4706,14 @@ Not implemented yet in GoldenDict.</source>
         <source>Icon</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Insert article as link inside &lt;iframe&gt; tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>As link</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WordFinder</name>
