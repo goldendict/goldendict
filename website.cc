@@ -199,7 +199,8 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
       QString url = links.cap( 3 );
 
       if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0
-          || url.indexOf( "mailto:" ) >= 0 || url.startsWith( "#" ) )
+          || url.indexOf( "mailto:" ) >= 0 || url.startsWith( "#" )
+          || url.startsWith( "javascript:" ) )
       {
         // External link, anchor or base64-encoded data
         pos += tag.size();
