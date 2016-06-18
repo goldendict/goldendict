@@ -61,6 +61,10 @@ public:
                                           wstring const & context )
     throw( std::exception );
 
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) throw( std::exception );
+
+  void isolateWebCSS( QString & css );
+
 protected:
 
   virtual void loadIcon() throw();
@@ -76,9 +80,13 @@ sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & /*word
   return sr;
 }
 
+void WebSiteDictionary::isolateWebCSS( QString & css )
+{
+  isolateCSS( css, ".website" );
+}
+
 class WebSiteArticleRequest: public WebSiteDataRequestSlots
 {
-  typedef std::list< std::pair< QNetworkReply *, bool > > NetReplies;
   QNetworkReply * netReply;
   QString url;
   Class * dictPtr;
@@ -161,8 +169,6 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     else
       articleString = QString::fromUtf8( replyData );
 
-    QString divName = QString( "website_" ) + dictPtr->getId().c_str();
-
     // Change links from relative to absolute
 
     QString root = netReply->url().scheme() + "://" + netReply->url().host();
@@ -216,6 +222,24 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
       pos += tag.size();
     }
 
+    // Redirect CSS links to own handler
+
+    QString prefix = QString( "bres://" ) + dictPtr->getId().c_str() + "/";
+    QRegExp linkTags( "(<\\s*link\\s[^>]*rel\\s*=\\s*['\"]stylesheet['\"]\\s+[^>]*href\\s*=\\s*['\"])([^'\"]+)://([^'\"]+['\"][^>]+>)",
+                  Qt::CaseInsensitive, QRegExp::RegExp2 );
+    pos = 0;
+    while( pos >= 0 )
+    {
+      pos = articleString.indexOf( linkTags, pos );
+      if( pos < 0 )
+        break;
+
+      QString newTag = linkTags.cap( 1 ) + prefix + linkTags.cap( 2 )
+                       + "/" + linkTags.cap( 3 );
+      articleString.replace( pos, linkTags.cap().size(), newTag );
+      pos += newTag.size();
+    }
+
     // Check for unclosed <span> and <div>
 
     int openTags = articleString.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );
@@ -243,7 +267,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 
     QByteArray articleBody = articleString.toUtf8();
 
-    QString divStr = QString( "<div class=\"" ) + divName + "\"";
+    QString divStr = QString( "<div class=\"website\"" );
     divStr += dictPtr->isToLanguageRTL() ? " dir=\"rtl\">" : ">";
 
     articleBody.prepend( divStr.toUtf8() );
@@ -275,8 +299,6 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                                                    wstring const & context )
   throw( std::exception )
 {
-  sptr< DataRequestInstant > dr = new DataRequestInstant( true );
-
   QByteArray urlString;
 
   // Context contains the right url to go to
@@ -327,6 +349,8 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
   {
     // Just insert link in <iframe> tag
 
+    sptr< DataRequestInstant > dr = new DataRequestInstant( true );
+
     string result = "<div class=\"website_padding\"></div>";
 
     result += string( "<iframe id=\"gdexpandframe-" ) + getId() +
@@ -348,6 +372,115 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
   // To load data from site
 
   return new WebSiteArticleRequest( urlString, netMgr, this );
+}
+
+class WebSiteResourceRequest: public WebSiteDataRequestSlots
+{
+  QNetworkReply * netReply;
+  QString url;
+  WebSiteDictionary * dictPtr;
+  QNetworkAccessManager & mgr;
+
+public:
+
+  WebSiteResourceRequest( QString const & url_, QNetworkAccessManager & _mgr,
+                          WebSiteDictionary * dictPtr_ );
+  ~WebSiteResourceRequest()
+  {}
+
+  virtual void cancel();
+
+private:
+
+  virtual void requestFinished( QNetworkReply * );
+};
+
+WebSiteResourceRequest::WebSiteResourceRequest( QString const & url_,
+                                                QNetworkAccessManager & _mgr,
+                                                WebSiteDictionary * dictPtr_ ):
+  url( url_ ), dictPtr( dictPtr_ ), mgr( _mgr )
+{
+  connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
+           this, SLOT( requestFinished( QNetworkReply * ) ),
+           Qt::QueuedConnection );
+
+  QUrl reqUrl( url );
+
+  netReply = mgr.get( QNetworkRequest( reqUrl ) );
+
+#ifndef QT_NO_OPENSSL
+  connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
+           netReply, SLOT( ignoreSslErrors() ) );
+#endif
+}
+
+void WebSiteResourceRequest::cancel()
+{
+  finish();
+}
+
+void WebSiteResourceRequest::requestFinished( QNetworkReply * r )
+{
+  if ( isFinished() ) // Was cancelled
+    return;
+
+  if ( r != netReply )
+  {
+    // Well, that's not our reply, don't do anything
+    return;
+  }
+
+  if ( netReply->error() == QNetworkReply::NoError )
+  {
+    // Check for redirect reply
+
+    QVariant possibleRedirectUrl = netReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+    QUrl redirectUrl = possibleRedirectUrl.toUrl();
+    if( !redirectUrl.isEmpty() )
+    {
+      netReply->deleteLater();
+      netReply = mgr.get( QNetworkRequest( redirectUrl ) );
+#ifndef QT_NO_OPENSSL
+      connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
+               netReply, SLOT( ignoreSslErrors() ) );
+#endif
+      return;
+    }
+
+    // Handle reply data
+
+    QByteArray replyData = netReply->readAll();
+    QString cssString = QString::fromUtf8( replyData );
+
+    dictPtr->isolateWebCSS( cssString );
+
+    QByteArray cssData = cssString.toUtf8();
+
+    Mutex::Lock _( dataMutex );
+
+    size_t prevSize = data.size();
+
+    data.resize( prevSize + cssData.size() );
+
+    memcpy( &data.front() + prevSize, cssData.data(), cssData.size() );
+
+    hasAnyData = true;
+  }
+  else
+    setErrorString( netReply->errorString() );
+
+  netReply->deleteLater();
+
+  finish();
+}
+
+sptr< Dictionary::DataRequest > WebSiteDictionary::getResource( string const & name ) throw( std::exception )
+{
+  QString link = QString::fromUtf8( name.c_str() );
+  int pos = link.indexOf( '/' );
+  if( pos > 0 )
+    link.replace( pos, 1, "://" );
+  return new WebSiteResourceRequest( link, netMgr, this );
 }
 
 void WebSiteDictionary::loadIcon() throw()
