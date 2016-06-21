@@ -268,13 +268,13 @@ void HotkeyWrapper::sendCmdC()
 
   //press down
   ev = CGEventCreateKeyboardEvent( source, keyC, true );
-  CGEventSetFlags( ev, flags | CGEventGetFlags( ev ) ); //combine flags
+  CGEventSetFlags( ev, CGEventFlags( flags | CGEventGetFlags( ev ) ) ); //combine flags
   CGEventPost( kCGAnnotatedSessionEventTap, ev );
   CFRelease( ev );
 
   //press up
   ev = CGEventCreateKeyboardEvent( source, keyC, false );
-  CGEventSetFlags( ev, flags | CGEventGetFlags( ev ) ); //combine flags
+  CGEventSetFlags( ev, CGEventFlags( flags | CGEventGetFlags( ev ) ) ); //combine flags
   CGEventPost( kCGAnnotatedSessionEventTap, ev );
   CFRelease( ev );
 
