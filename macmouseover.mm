@@ -5,7 +5,7 @@
 #include <Foundation/NSAutoreleasePool.h>
 #include <Foundation/Foundation.h>
 
-#ifndef MAC_OS_X_VERSION_10_11
+#ifndef AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER
 #define kAXValueTypeCGPoint kAXValueCGPointType
 #define kAXValueTypeCFRange kAXValueCFRangeType
 #endif
