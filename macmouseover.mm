@@ -85,7 +85,7 @@ QString MacMouseOver::CFStringRefToQString( CFStringRef str )
 
   QString result = QString::fromUtf16( chars, length );
 
-  delete  chars;
+  delete[] chars;
   return result;
 }
 
