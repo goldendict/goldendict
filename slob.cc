@@ -454,7 +454,7 @@ quint8 SlobFile::getItem( RefEntry const & entry, string * data )
         if( compression == ZLIB )
           currentItemData = decompressZlib( compressedData.data(), length );
         else
-        if( compression == ZLIB )
+        if( compression == BZ2 )
           currentItemData = decompressBzip2( compressedData.data(), length );
         else
           currentItemData = decompressLzma2( compressedData.data(), length, true );
