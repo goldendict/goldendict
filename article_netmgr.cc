@@ -116,15 +116,28 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     }
   }
 
+  QNetworkReply *reply = 0;
+
   // spoof User-Agent
   if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
   {
     QNetworkRequest newReq( req );
     newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
-    return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+    reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
   }
 
-  return QNetworkAccessManager::createRequest( op, req, outgoingData );
+  if( !reply )
+    reply = QNetworkAccessManager::createRequest( op, req, outgoingData );
+
+  if( req.url().scheme() == "https")
+  {
+#ifndef QT_NO_OPENSSL
+    connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
+             reply, SLOT( ignoreSslErrors() ) );
+#endif
+  }
+
+  return reply;
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
