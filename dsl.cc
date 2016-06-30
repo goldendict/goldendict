@@ -977,6 +977,22 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     string link = Html::escape( Utf8::encode( node.renderAsText() ) );
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
       link = "http://" + link;
+
+    QUrl url( QString::fromUtf8( link.c_str() ) );
+    if( url.isLocalFile() && url.host().isEmpty() )
+    {
+      // Convert relative links to local files to absolute ones
+      QString name = QFileInfo( getMainFilename() ).absolutePath();
+      name += url.toLocalFile();
+      QFileInfo info( name );
+      if( info.isFile() )
+      {
+        name = info.canonicalFilePath();
+        url.setPath( Qt4x5::Url::ensureLeadingSlash( QUrl::fromLocalFile( name ).path() ) );
+        link = string( url.toEncoded().data() );
+      }
+    }
+
     result += "<a class=\"dsl_url\" href=\"" + link +"\">" + processNodeChildren( node ) + "</a>";
   }
   else
