@@ -964,8 +964,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       string mainDirectory = i->substr( 0, ndir );
 
       Epwing::Book::EpwingBook dict;
-
-      int subBooksNumber = dict.setBook( mainDirectory );
+      int subBooksNumber = 0;
+      try
+      {
+        subBooksNumber = dict.setBook( mainDirectory );
+      }
+      catch( std::exception & e )
+      {
+        gdWarning( "Epwing dictionary initializing failed: %s, error: %s\n",
+                   mainDirectory.c_str(), e.what() );
+        continue;
+      }
 
       for( int sb = 0; sb < subBooksNumber; sb++ )
       {
