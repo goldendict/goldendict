@@ -637,15 +637,13 @@ SlobDictionary::SlobDictionary( string const & id,
         && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
       FTS_index_completed.ref();
 
-    texCgiPath = Config::getProgramDataDir() + "/mimetex.cgi";
-    if( QFileInfo( texCgiPath ).exists() )
+    texCgiPath = Config::getTexCgiPath();
+    if( !texCgiPath.isEmpty() )
     {
       QString dirName = QString::fromStdString( getId() );
       QDir( QDir::tempPath() ).mkdir( dirName );
       texCachePath = QDir::tempPath() + "/" + dirName;
     }
-    else
-      texCgiPath.clear();
 }
 
 SlobDictionary::~SlobDictionary()

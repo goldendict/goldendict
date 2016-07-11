@@ -2050,6 +2050,49 @@ QString getOpenCCDir() throw()
 }
 #endif
 
+#ifdef MAKE_ZIM_SUPPORT
+QString getTexCgiPath() throw()
+{
+  // Look for mimetex.(cgi|exe) program in data dir then PATH
+
+  static QString texPath;
+  static bool cached = false;
+
+  if( cached ) return texPath;
+
+  QRegExp rx( "^PATH=(.*)", Qt::CaseInsensitive );
+  QProcess::systemEnvironment().indexOf( rx );
+
+#ifdef Q_OS_WIN32
+  QStringList paths = rx.cap( 1 ).split( ";" );
+#else
+  QStringList paths = rx.cap( 1 ).split( ":" );
+#endif
+
+  paths.prepend( getProgramDataDir() );
+
+  for( int i = 0; i < paths.size(); ++i ) {
+    QString filePath( paths[ i ] + QDir::separator() + "mimetex" );
+    QFileInfo texPathInfo( filePath + ".cgi" );
+
+    if( !texPathInfo.isExecutable() )
+    {
+#ifdef Q_OS_WIN32
+    texPathInfo.setFile( filePath + ".exe" );
+    if( !texPathInfo.isExecutable() )
+#endif
+      continue;
+    }
+
+    texPath = texPathInfo.absoluteFilePath();
+    gdDebug( "Slob: Found MimeTeX executable: %s", texPath.toUtf8().constData() );
+    break;
+  }
+  cached = true;
+  return texPath;
+}
+#endif
+
 bool isPortableVersion() throw()
 {
   struct IsPortable

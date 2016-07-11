@@ -684,6 +684,11 @@ QString getHelpDir() throw();
 QString getOpenCCDir() throw();
 #endif
 
+#ifdef MAKE_ZIM_SUPPORT
+/// Return the path of the MimeTex executable
+QString getTexCgiPath() throw();
+#endif
+
 /// Returns true if the program is configured as a portable version. In that
 /// mode, all the settings and indices are kept in the program's directory.
 bool isPortableVersion() throw();
