@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="lt">
+<TS version="2.1" language="lt">
 <context>
     <name>About</name>
     <message>
@@ -636,7 +636,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagalba</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
@@ -802,7 +802,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="254"/>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverio duombazės</translation>
     </message>
 </context>
 <context>
@@ -1006,7 +1006,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="313"/>
         <source>None</source>
-        <translation type="unfinished">Nieko</translation>
+        <translation>Nieko</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="357"/>
@@ -1110,7 +1110,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="235"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagalba</translation>
     </message>
     <message>
         <source>Non-indexable:</source>
@@ -1328,47 +1328,47 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict žinynas</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Pradžia</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished">Atgal</translation>
+        <translation>Atgal</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished">Pirmyn</translation>
+        <translation>Pirmyn</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Padidinti</translation>
+        <translation>Padidinti</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Sumažinti</translation>
+        <translation>Sumažinti</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">Įprastas dydis</translation>
+        <translation>Įprastas dydis</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Turinys</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyklė</translation>
     </message>
 </context>
 <context>
@@ -2704,7 +2704,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="4213"/>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Indeksuojama visatekstei paieškai: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="806"/>
@@ -2935,7 +2935,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="591"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict žinynas</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="594"/>
@@ -3249,7 +3249,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktyvių žodynų: %1. Neaktyvių: %2</translation>
     </message>
 </context>
 <context>
@@ -3420,7 +3420,7 @@ Tačiau įgalinus šią parinktį, būtų paslepiamas pagrindinis langas.</trans
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Žinyno kalba</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -4895,7 +4895,7 @@ Dar įtraukta į GoldenDict.</translation>
         <location filename="../sources.cc" line="624"/>
         <location filename="../sources.cc" line="657"/>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Straipsnelį tarp &lt;iframe&gt; gairių įterpti kaip nuorodą</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="633"/>
@@ -4905,7 +4905,7 @@ Dar įtraukta į GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="635"/>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaip nuorodą</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="637"/>
