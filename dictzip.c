@@ -629,7 +629,8 @@ char *dict_data_read_ (
    case DICT_TEXT:
    {
 #ifdef __WIN32
-     DWORD pos = SetFilePointer( h->fd, start, 0, FILE_BEGIN );
+     long hiPtr = 0;
+     DWORD pos = SetFilePointer( h->fd, start, &hiPtr, FILE_BEGIN );
      DWORD readed = 0;
      if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
        ReadFile( h->fd, buffer, size, &readed, 0 );
