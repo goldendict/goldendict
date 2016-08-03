@@ -348,6 +348,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             title.reserve( i->second.size() );
 
             for( char const * c = i->second.c_str(); *c; ++c )
+            {
               if ( *c == ' ' || *c == '\t' )
               {
                 // u00A0 in utf8
@@ -355,7 +356,15 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
                 title.push_back( 0xA0 );
               }
               else
+              if( *c == '-' ) // Change minus to non-breaking hyphen (uE28091 in utf8)
+              {
+                title.push_back( 0xE2 );
+                title.push_back( 0x80 );
+                title.push_back( 0x91 );
+              }
+              else
                 title.push_back( *c );
+            }
           }
           else
             title = i->second;
