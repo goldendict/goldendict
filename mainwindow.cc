@@ -3154,11 +3154,11 @@ void MainWindow::setAutostart(bool autostart)
     }
     reg.sync();
 #else
-    // this is for KDE
+    // this is for Linux
     QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-    QString lnk(QDir::homePath()+"/.kde/Autostart/"+app_fname);
+    QString lnk(QDir::homePath()+"/.config/autostart/"+"goldendict.desktop");
     if (autostart) {
-        QFile f(QCoreApplication::applicationFilePath());
+        QFile f("/usr/share/applications/goldendict.desktop");
         f.link(lnk);
     } else {
         QFile::remove(lnk);
