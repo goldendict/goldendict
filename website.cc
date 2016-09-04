@@ -104,6 +104,7 @@ public:
 private:
 
   virtual void requestFinished( QNetworkReply * );
+  static QTextCodec * codecForHtml( QByteArray const & ba );
 };
 
 void WebSiteArticleRequest::cancel()
@@ -127,6 +128,50 @@ WebSiteArticleRequest::WebSiteArticleRequest( QString const & url_,
 #ifndef QT_NO_OPENSSL
   connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
            netReply, SLOT( ignoreSslErrors() ) );
+#endif
+}
+
+QTextCodec * WebSiteArticleRequest::codecForHtml( QByteArray const & ba )
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  return QTextCodec::codecForHtml( ba, 0 );
+#else
+// Implementation taken from Qt 5 sources
+// Function from Qt 4 can't recognize charset name inside single quotes
+
+  QByteArray header = ba.left( 1024 ).toLower();
+  int pos = header.indexOf( "meta " );
+  if (pos != -1) {
+    pos = header.indexOf( "charset=", pos );
+    if (pos != -1) {
+      pos += qstrlen( "charset=" );
+
+      int pos2 = pos;
+      while ( ++pos2 < header.size() )
+      {
+        char ch = header.at( pos2 );
+        if( ch != '\"' && ch != '\'' && ch != ' ' )
+          break;
+      }
+
+      // The attribute can be closed with either """, "'", ">" or "/",
+      // none of which are valid charset characters.
+
+      while ( pos2++ < header.size() )
+      {
+        char ch = header.at( pos2 );
+        if( ch == '\"' || ch == '\'' || ch == '>' || ch == '/' )
+        {
+          QByteArray name = header.mid( pos, pos2 - pos );
+          if ( name == "unicode" )
+            name = QByteArray( "UTF-8" );
+
+          return QTextCodec::codecForName(name);
+        }
+      }
+    }
+  }
+  return 0;
 #endif
 }
 
@@ -163,7 +208,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     QByteArray replyData = netReply->readAll();
     QString articleString;
 
-    QTextCodec * codec = QTextCodec::codecForHtml( replyData, 0 );
+    QTextCodec * codec = WebSiteArticleRequest::codecForHtml( replyData );
     if( codec )
       articleString = codec->toUnicode( replyData );
     else
