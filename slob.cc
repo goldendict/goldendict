@@ -823,6 +823,8 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           tex.replace( "\\infin", "\\infty" );
           tex.replace( "\\iff", "\\Longleftrightarrow" );
           tex.replace( "\\tbinom", "\\binom" );
+          tex.replace( "\\implies", "\\Longrightarrow" );
+          tex.replace( "{aligned}", "{align*}" );
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
