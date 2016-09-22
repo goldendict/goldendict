@@ -790,7 +790,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
   if( !texCgiPath.isEmpty() )
   {
-    QRegExp texImage( "<\\s*img\\s*class=\"([^\"]+)\"\\s*alt=\"([^\"]+)\"[^>]*>",
+    QRegExp texImage( "<\\s*img\\s*class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
                       Qt::CaseSensitive,
                       QRegExp::RegExp2 );
     pos = 0;
@@ -804,6 +804,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
       QStringList list = texImage.capturedTexts();
 
       if( list[ 1 ].compare( "tex" ) == 0
+          || list[ 1 ].compare( "mwe-math-fallback-image-inline" ) == 0
           || list[ 1 ].endsWith( " tex" ) )
       {
         QString name;
@@ -815,7 +816,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
           // Replace some TeX commands which don't support by mimetex.cgi
 
-          QString tex = list[ 2 ];
+          QString tex = list[ 3 ];
           tex.replace( regFrac, "\\frac" );
           tex.replace( "\\leqslant", "\\leq" );
           tex.replace( "\\geqslant", "\\geq" );
@@ -832,7 +833,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 #ifdef Q_OS_WIN32
                       + "/"
 #endif
-                      + imgName + "\" alt=\"" + list[ 2 ] + "\">";
+                      + imgName + "\" alt=\"" + list[ 3 ] + "\">";
 
         text.replace( pos, list[0].length(), tag );
         pos += tag.length() + 1;
