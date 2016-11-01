@@ -992,7 +992,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 
-  QRegExp wordCrossLink( "(href\\s*=\\s*[\"'])entry://([^#\"'/]+)(#?[^\"']*)", Qt::CaseInsensitive );
+  QRegExp wordCrossLink( "(href\\s*=\\s*[\"'])entry://([^#\"']+)(#?[^\"']*)", Qt::CaseInsensitive );
 
   article = article
          // anchors
