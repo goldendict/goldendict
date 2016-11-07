@@ -989,82 +989,111 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 {
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
+
+  QRegExp allLinksRe("(<\\s*(a(?:rea)?|link|script|img)\\s+[^>]*>)", Qt::CaseInsensitive );
+  QRegExp wordCrossLink( "(href\\s*=\\s*[\"'])entry://([^#\"']+)(#?[^\"']*)", Qt::CaseInsensitive );
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*)(?=[^\"'])", Qt::CaseInsensitive );
   anchorLinkRe.setMinimal( true );
 
-  QRegExp wordCrossLink( "(href\\s*=\\s*[\"'])entry://([^#\"']+)(#?[^\"']*)", Qt::CaseInsensitive );
-
-  article = article
-         // anchors
-         .replace( anchorLinkRe,
-                   "\\1" + uniquePrefix )
-         .replace( QRegExp( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive ),
-                   "\\1#" + uniquePrefix )
-         // sounds, and audio link script
-         .replace( QRegExp( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive ),
-                   QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
-                   "\\1gdau://" + id + "/\\2" )
-         // stylesheets
-         .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                   "\\1bres://" + id + "/\\2" )
-         .replace( QRegExp( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                   "\\1\"bres://" + id + "/\\\"" )
-         // javascripts
-         .replace( QRegExp( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?([^\\s>]+)",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                   "\\1\"bres://" + id + "/\\\"" )
-         // images
-         .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?!http:|https:)(?:file://)?[\\x00-\\x1f\\x7f]*([^\"']*)",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                   "\\1bres://" + id + "/\\2" )
-         .replace( QRegExp( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:|http:|https:)(?:file://)?([^\\s>]+)",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ),
-                   "\\1\"bres://" + id + "/\\2\"" );
-
-  // word cross links
-  int pos = 0;
-  while( pos >= 0 )
-  {
-    pos = wordCrossLink.indexIn( article, pos );
-    if( pos < 0 )
-      break;
-
-    QString newLink = wordCrossLink.cap( 1 )
-                      + "gdlookup://localhost/"
-                      + wordCrossLink.cap( 2 );
-
-    if( !wordCrossLink.cap( 3 ).isEmpty() )
-      newLink += QString( "?gdanchor=" ) + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 );
-
-    article.replace( pos, wordCrossLink.cap( 0 ).size(), newLink );
-    pos += newLink.size();
-  }
-
-  // javascripts
-  QRegExp regScript( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?:file://)?[\\x00-\\x30\\x7f]*([^\"']*)",
+  QRegExp anchorLinkRe2( "(href\\s*=\\s*[\"'])entry://#", Qt::CaseInsensitive );
+  QRegExp audioRe( "(<\\s*(?:a|area)\\s+[^>]*\\bhref\\b\\s*=\\s*\")sound://([^\"']*)", Qt::CaseInsensitive );
+  QRegExp stylesRe( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*[\"']+)(?!bres:|data:)(?:file://)?[\\x00-\\x30\\x7f]*(?:/?)([^\"']*)",
+                    Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp stylesRe2( "(<\\s*link\\s+[^>]*\\bhref\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?(?:/?)([^\\s>]+)",
                      Qt::CaseInsensitive, QRegExp::RegExp2 );
-  QRegExp regDynamic( "<\\s*script\\s+src\\s*=\\s*[\"']+\\s*[\"']+\\s*\\+\\s*replace\\(" );
-  pos = 0;
-  while( pos >= 0 )
+  QRegExp inlineScriptRe( "<\\s*script\\s*>", Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp closeScriptTagRe( "<\\s*/script\\s*>", Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp scriptRe( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?!bres:|data:)(?:file://)?[\\x00-\\x30\\x7f]*(?:/?)([^\"']*)",
+                     Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp scriptRe2( "(<\\s*script\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:)(?:file://)?(?:/?)([^\\s>]+)",
+                    Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp imgRe( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*[\"']+)(?!bres:|data:|http:|https:)(?:file://)?[\\x00-\\x1f\\x7f]*(?:/?)([^\"']*)",
+                 Qt::CaseInsensitive, QRegExp::RegExp2 );
+  QRegExp imgRe2( "(<\\s*img\\s+[^>]*\\bsrc\\b\\s*=\\s*)(?!['\"]+)(?!bres:|data:|http:|https:)(?:file://)?(?:/?)([^\\s>]+)",
+                  Qt::CaseInsensitive, QRegExp::RegExp2 );
+
+  int linkPos = 0;
+  while( linkPos >= 0 )
   {
-    pos = regScript.indexIn( article, pos );
-    if( pos < 0 )
+    linkPos = article.indexOf( allLinksRe, linkPos );
+    if( linkPos < 0 )
       break;
 
-    if( regScript.cap( 0 ).indexOf( regDynamic ) >= 0 )
+    QString linkTxt = allLinksRe.cap( 0 );
+    QString linkType = allLinksRe.cap( 2 );
+    QString newLink;
+
+    if( !linkType.isEmpty() && linkType.at( 0 ).toLower() == 'a' )
     {
-      pos += regScript.cap( 0 ).size();
-      continue;
+      newLink = linkTxt
+                       // anchors
+                       .replace( anchorLinkRe, "\\1" + uniquePrefix )
+                       .replace( anchorLinkRe2, "\\1#" + uniquePrefix )
+                        // sounds, and audio link script
+                       .replace( audioRe,
+                                 QString::fromStdString( addAudioLink( "\"gdau://" + getId() + "/\\2\"", getId() ) ) +
+                                 "\\1gdau://" + id + "/\\2" );
+
+      int pos = wordCrossLink.indexIn( newLink );
+      if( pos >= 0 )
+      {
+        QString newTxt = wordCrossLink.cap( 1 )
+                         + "gdlookup://localhost/"
+                         + wordCrossLink.cap( 2 );
+
+        if( !wordCrossLink.cap( 3 ).isEmpty() )
+          newTxt += QString( "?gdanchor=" ) + uniquePrefix + wordCrossLink.cap( 3 ).mid( 1 );
+
+        newLink.replace( pos, wordCrossLink.cap( 0 ).size(), newTxt );
+      }
     }
-
-    QString newLink = regScript.cap( 1 )
-                      + "bres://" + id + "/"
-                      + regScript.cap( 2 );
-
-    article.replace( pos, regScript.cap( 0 ).size(), newLink );
-    pos += newLink.size();
+    else
+    if( linkType.toLower().compare( "link" ) == 0 )
+    {
+      // stylesheets
+      newLink = linkTxt
+                       .replace( stylesRe,
+                                 "\\1bres://" + id + "/\\2" )
+                       .replace( stylesRe2,
+                                 "\\1\"bres://" + id + "/\\2\"" );
+    }
+    else
+    if( linkType.toLower().compare( "script" ) == 0 )
+    {
+      // javascripts
+      if( inlineScriptRe.exactMatch( linkTxt ) )
+      {
+        // skip inline scripts
+        int pos = article.indexOf( closeScriptTagRe, linkPos );
+        linkPos += pos > 0 ? pos : linkTxt.length();
+        continue;
+      }
+      else
+      {
+        newLink = linkTxt
+                         .replace( scriptRe,
+                                   "\\1bres://" + id + "/\\2" )
+                         .replace( scriptRe2,
+                                   "\\1\"bres://" + id + "/\\2\"" );
+      }
+    }
+    else
+    if( linkType.toLower().compare( "img" ) == 0 )
+    {
+      // images
+      newLink = linkTxt
+                       .replace( imgRe,
+                                 "\\1bres://" + id + "/\\2" )
+                       .replace( imgRe2,
+                                 "\\1\"bres://" + id + "/\\2\"" );
+    }
+    if( !newLink.isEmpty() )
+    {
+      article.replace( linkPos, allLinksRe.cap().length(), newLink );
+      linkPos += newLink.length();
+    }
+    else
+      linkPos += allLinksRe.cap().length();
   }
 
   return article;
