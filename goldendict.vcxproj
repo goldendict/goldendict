@@ -974,6 +974,7 @@
     <QtTranslate Include="locale\zh_CN.ts" />
     <QtTranslate Include="locale\zh_TW.ts" />
     <QtTranslate Include="locale\eo_EO.ts" />
+    <QtTranslate Include="locale\fi_FI.ts" />
   </ItemGroup>
   <ItemGroup>
     <QtUICCompile Include="about.ui" />
