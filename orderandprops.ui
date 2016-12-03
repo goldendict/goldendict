@@ -264,7 +264,8 @@
            <size>
             <width>16777215</width>
             <height>70</height>
-           </size>          </property>
+           </size>
+          </property>
           <property name="palette">
            <palette>
             <active>
