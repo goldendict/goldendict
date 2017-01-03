@@ -908,22 +908,35 @@ QString const& StardictDictionary::getDescription()
     Ifo ifo( ifoFile );
 
     if( !ifo.copyright.empty() )
-      dictionaryDescription += "Copyright: "
-                               + QString::fromUtf8( ifo.copyright.c_str() )
-                                 .replace( "<br>", "\n", Qt::CaseInsensitive )
-                               + "\n\n";
+    {
+      QString copyright = QString::fromUtf8( ifo.copyright.c_str() )
+                          .replace( "<br>", "\n", Qt::CaseInsensitive );
+      dictionaryDescription += QString( QObject::tr( "Copyright: %1\n\n" ) ).arg( copyright );
+    }
 
     if( !ifo.author.empty() )
-      dictionaryDescription += "Author: " + QString::fromUtf8( ifo.author.c_str() ) + "\n\n";
+    {
+      QString author = QString::fromUtf8( ifo.author.c_str() );
+      dictionaryDescription += QString( QObject::tr( "Author: %1\n\n" ) ).arg( author );
+    }
 
     if( !ifo.email.empty() )
-      dictionaryDescription += "E-mail: " + QString::fromUtf8( ifo.email.c_str() ) + "\n\n";
+    {
+      QString email = QString::fromUtf8( ifo.email.c_str() );
+      dictionaryDescription += QString( QObject::tr( "E-mail: %1\n\n" ) ).arg( email );
+    }
 
     if( !ifo.website.empty() )
-      dictionaryDescription += "Website: " + QString::fromUtf8( ifo.website.c_str() ) + "\n\n";
+    {
+      QString website = QString::fromUtf8( ifo.website.c_str() );
+      dictionaryDescription += QString( QObject::tr( "Website: %1\n\n" ) ).arg( website );
+    }
 
     if( !ifo.date.empty() )
-      dictionaryDescription += "Date: " + QString::fromUtf8( ifo.date.c_str() ) + "\n\n";
+    {
+      QString date = QString::fromUtf8( ifo.date.c_str() );
+      dictionaryDescription += QString( QObject::tr( "Date: %1\n\n" ) ).arg( date );
+    }
 
     if( !ifo.description.empty() )
     {
