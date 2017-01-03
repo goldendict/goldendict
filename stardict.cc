@@ -82,7 +82,7 @@ struct Ifo
   string bookname;
   uint32_t wordcount, synwordcount, idxfilesize, idxoffsetbits;
   string sametypesequence, dicttype, description;
-  string copyright, author, email;
+  string copyright, author, email, website, date;
 
   Ifo( File::Class & );
 };
@@ -919,6 +919,12 @@ QString const& StardictDictionary::getDescription()
     if( !ifo.email.empty() )
       dictionaryDescription += "E-mail: " + QString::fromUtf8( ifo.email.c_str() ) + "\n\n";
 
+    if( !ifo.website.empty() )
+      dictionaryDescription += "Website: " + QString::fromUtf8( ifo.website.c_str() ) + "\n\n";
+
+    if( !ifo.date.empty() )
+      dictionaryDescription += "Date: " + QString::fromUtf8( ifo.date.c_str() ) + "\n\n";
+
     if( !ifo.description.empty() )
     {
       QString desc = QString::fromUtf8( ifo.description.c_str() );
@@ -1389,6 +1395,12 @@ Ifo::Ifo( File::Class & f ):
       else
       if ( char const * val = beginsWith( "email=", option ) )
         email = val;
+      else
+      if ( char const * val = beginsWith( "website=", option ) )
+        website = val;
+      else
+      if ( char const * val = beginsWith( "date=", option ) )
+        date = val;
     }
   }
   catch( File::exReadError & )
