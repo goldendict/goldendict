@@ -75,7 +75,7 @@ inline bool hasQueryItem( QUrl const & url, QString const & key )
 inline QString queryItemValue( QUrl const & url, QString const & item )
 {
 #if IS_QT_5
-  return QUrlQuery( url ).queryItemValue( item );
+  return QUrlQuery( url ).queryItemValue( item, QUrl::FullyDecoded );
 #else
   return url.queryItemValue( item );
 #endif
