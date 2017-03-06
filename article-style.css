@@ -2884,3 +2884,14 @@ in bg url to hide it from iemac */
     vertical-align: baseline !important;
 }
 
+/************* GLS dictionaries **************/
+
+.glsdict_headwords
+{
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 110%;
+}
+
+
