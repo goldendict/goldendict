@@ -30,7 +30,7 @@
 #include <QByteArray>
 #include <QBuffer>
 
-
+#include <string>
 #include <list>
 #include <map>
 #include <set>
@@ -44,6 +44,8 @@ namespace Gls {
 using std::list;
 using std::map;
 using std::set;
+using std::multimap;
+using std::pair;
 
 using gd::wstring;
 using gd::wchar;
@@ -461,6 +463,9 @@ public:
   inline virtual quint32 getLangTo() const
   { return idxHeader.langTo; }
 
+  virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
+    throw( std::exception );
+
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
@@ -497,7 +502,7 @@ private:
   /// Loads the article, storing its headword and formatting the data it has
   /// into an html.
   void loadArticle(  uint32_t address,
-                     list< string > & headwords,
+                     string & headword,
                      string & articleText );
 
   /// Loads the article
@@ -510,6 +515,7 @@ private:
 
   friend class GlsResourceRequest;
   friend class GlsArticleRequest;
+  friend class GlsHeadwordsRequest;
 };
 
 GlsDictionary::GlsDictionary( string const & id,
@@ -752,10 +758,11 @@ void GlsDictionary::loadArticleText( uint32_t address,
 }
 
 void GlsDictionary::loadArticle( uint32_t address,
-                                 list< string > & headwords,
+                                 string & headword,
                                  string & articleText )
 {
   string articleBody;
+  list< string > headwords;
   loadArticleText( address, headwords, articleBody );
 
   QString article = QString::fromLatin1( "<div class=\"glsdict\">" );
@@ -767,12 +774,9 @@ void GlsDictionary::loadArticle( uint32_t address,
       article += " dir=\"rtl\"";
     article += ">";
 
-    for( list< string >::iterator it = headwords.begin(); it != headwords.end(); ++it )
-    {
-      if( it != headwords.begin() )
-        article += ", ";
-      article += QString::fromUtf8( it->c_str(), it->size() );
-    }
+    headword = headwords.front();
+    article += QString::fromUtf8( headword.c_str(), headword.size() );
+
     article += "</div>";
   }
 
@@ -857,6 +861,124 @@ void GlsDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     gdWarning( "Gls: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
   }
 }
+
+/// GlsDictionary::findHeadwordsForSynonym()
+
+class GlsHeadwordsRequest;
+
+class GlsHeadwordsRequestRunnable: public QRunnable
+{
+  GlsHeadwordsRequest & r;
+  QSemaphore & hasExited;
+
+public:
+
+  GlsHeadwordsRequestRunnable( GlsHeadwordsRequest & r_,
+                               QSemaphore & hasExited_ ): r( r_ ),
+                                                          hasExited( hasExited_ )
+  {}
+
+  ~GlsHeadwordsRequestRunnable()
+  {
+    hasExited.release();
+  }
+
+  virtual void run();
+};
+
+class GlsHeadwordsRequest: public Dictionary::WordSearchRequest
+{
+  friend class GlsHeadwordsRequestRunnable;
+
+  wstring word;
+  GlsDictionary & dict;
+
+  QAtomicInt isCancelled;
+  QSemaphore hasExited;
+
+public:
+
+  GlsHeadwordsRequest( wstring const & word_, GlsDictionary & dict_ ):
+    word( word_ ), dict( dict_ )
+  {
+    QThreadPool::globalInstance()->start(
+      new GlsHeadwordsRequestRunnable( *this, hasExited ) );
+  }
+
+  void run(); // Run from another thread by StardictHeadwordsRequestRunnable
+
+  virtual void cancel()
+  {
+    isCancelled.ref();
+  }
+
+  ~GlsHeadwordsRequest()
+  {
+    isCancelled.ref();
+    hasExited.acquire();
+  }
+};
+
+void GlsHeadwordsRequestRunnable::run()
+{
+  r.run();
+}
+
+void GlsHeadwordsRequest::run()
+{
+  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  {
+    finish();
+    return;
+  }
+
+  try
+  {
+    vector< WordArticleLink > chain = dict.findArticles( word );
+
+    wstring caseFolded = Folding::applySimpleCaseOnly( word );
+
+    for( unsigned x = 0; x < chain.size(); ++x )
+    {
+      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      {
+        finish();
+        return;
+      }
+
+      string articleText;
+      list< string > headwords;
+
+      dict.loadArticleText( chain[ x ].articleOffset,
+                            headwords, articleText );
+
+      wstring headwordDecoded = Utf8::decode( headwords.front() );
+
+      if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) )
+      {
+        // The headword seems to differ from the input word, which makes the
+        // input word its synonym.
+        Mutex::Lock _( dataMutex );
+
+        matches.push_back( headwordDecoded );
+      }
+    }
+  }
+  catch( std::exception & e )
+  {
+    setErrorString( QString::fromUtf8( e.what() ) );
+  }
+
+  finish();
+}
+
+sptr< Dictionary::WordSearchRequest >
+  GlsDictionary::findHeadwordsForSynonym( wstring const & word )
+  throw( std::exception )
+{
+  return new GlsHeadwordsRequest( word, *this );
+}
+
 
 /// GlsDictionary::getArticle()
 
@@ -943,14 +1065,13 @@ void GlsArticleRequest::run()
       chain.insert( chain.end(), altChain.begin(), altChain.end() );
     }
 
-    // Some synonims make it that the articles appear several times. We combat this
-    // by only allowing them to appear once.
-    set< uint32_t > articlesIncluded;
-    string result;
-    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>";
+    multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
+
+    set< uint32_t > articlesIncluded; // Some synonims make it that the articles
+                                      // appear several times. We combat this
+                                      // by only allowing them to appear once.
+
+    wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
@@ -965,27 +1086,62 @@ void GlsArticleRequest::run()
 
       // Now grab that article
 
-      list< string > headwords;
-      string articleText;
+      string headword, articleText;
 
-      dict.loadArticle( chain[ x ].articleOffset, headwords, articleText );
+      dict.loadArticle( chain[ x ].articleOffset, headword, articleText );
 
-      result += articleText;
-      result += cleaner;
+      // Ok. Now, does it go to main articles, or to alternate ones? We list
+      // main ones first, and alternates after.
+
+      // We do the case-folded comparison here.
+
+      wstring headwordStripped =
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+
+      multimap< wstring, pair< string, string > > & mapToUse =
+        ( wordCaseFolded == headwordStripped ) ?
+          mainArticles : alternateArticles;
+
+      mapToUse.insert( pair< wstring, pair< string, string > >(
+        Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+        pair< string, string >( headword, articleText ) ) );
 
       articlesIncluded.insert( chain[ x ].articleOffset );
-
-      hasAnyData = true;
     }
 
-    if( hasAnyData )
+    if ( mainArticles.empty() && alternateArticles.empty() )
     {
-      Mutex::Lock _( dataMutex );
-
-      data.resize( result.size() );
-
-      memcpy( &data.front(), result.data(), result.size() );
+      // No such word
+      finish();
+      return;
     }
+
+    string result;
+
+    multimap< wstring, pair< string, string > >::const_iterator i;
+
+    for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
+    {
+        result += i->second.second;
+    }
+
+    for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
+    {
+        result += i->second.second;
+    }
+
+    result = QString::fromUtf8( result.c_str() )
+             .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                       "\\1bword:" )
+             .toUtf8().data();
+
+    Mutex::Lock _( dataMutex );
+
+    data.resize( result.size() );
+
+    memcpy( &data.front(), result.data(), result.size() );
+
+    hasAnyData = true;
   }
   catch( std::exception & e )
   {
