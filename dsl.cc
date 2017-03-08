@@ -1062,7 +1062,36 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"lang" ) )
   {
-    result += "<span class=\"dsl_lang\">" + processNodeChildren( node ) + "</span>";
+    result += "<span class=\"dsl_lang\"";
+    if( !node.tagAttrs.empty() )
+    {
+      // Find ISO 639-1 code
+      string langcode;
+      QString attr = gd::toQString( node.tagAttrs );
+      int n = attr.indexOf( "id=" );
+      if( n >= 0 )
+      {
+        int id = attr.mid( n + 3 ).toInt();
+        if( id )
+          langcode = findCodeForDslId( id );
+      }
+      else
+      {
+        n = attr.indexOf( "name=\"" );
+        if( n >= 0 )
+        {
+          int n2 = attr.indexOf( '\"', n + 6 );
+          if( n2 > 0 )
+          {
+            quint32 id = dslLanguageToId( gd::toWString( attr.mid( n + 6, n2 - n - 6 ) ) );
+            langcode = LangCoder::intToCode2( id ).toStdString();
+          }
+        }
+      }
+      if( !langcode.empty() )
+        result += " lang=\"" + langcode + "\"";
+    }
+    result += ">" + processNodeChildren( node ) + "</span>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )

@@ -23,7 +23,6 @@
 #include "utf8.hh"
 #include "filetype.hh"
 #include "ftshelpers.hh"
-#include "btreeidx.hh"
 
 namespace Epwing {
 

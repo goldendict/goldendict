@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QRegExp>
+#include "gddebug.hh"
 
 namespace WebSite {
 
@@ -333,7 +334,17 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 
   }
   else
-    setErrorString( netReply->errorString() );
+  {
+    if( netReply->url().scheme() == "file" )
+    {
+      gdWarning( "WebSites: Failed loading article from \"%s\", reason: %s\n", dictPtr->getName().c_str(),
+                 netReply->errorString().toUtf8().data() );
+    }
+    else
+    {
+      setErrorString( netReply->errorString() );
+    }
+  }
 
   netReply->deleteLater();
 

@@ -32,6 +32,13 @@ enum DslEncoding
   Utf8 // This is an extension. Detected solely by the UTF8 BOM.
 };
 
+struct DSLLangCode
+{
+  int code_id;
+  char code[ 3 ]; // ISO 639-1
+};
+
+string findCodeForDslId( int id );
 
 /// Parses the DSL language, representing it in its structural DOM form.
 struct ArticleDom
