@@ -197,6 +197,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
 
+  ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
+
   ui.maxDictsInContextMenu->setValue( p.maxDictionaryRefsInContextMenu );
 
   // Different platforms have different keys available
@@ -372,6 +374,8 @@ Config::Preferences Preferences::getPreferences()
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+
+  p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 
   p.maxDictionaryRefsInContextMenu = ui.maxDictsInContextMenu->text().toInt();
 

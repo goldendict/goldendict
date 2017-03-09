@@ -1209,7 +1209,10 @@ void MainWindow::makeDictionaries()
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -1906,7 +1909,10 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   installHotKeys();
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -2025,7 +2031,10 @@ void MainWindow::editPreferences()
     ui.historyPaneWidget->updateHistoryCounts();
 
     for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
       dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+      dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+    }
 
     ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
 
@@ -3390,7 +3399,10 @@ void MainWindow::on_rescanFiles_triggered()
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();

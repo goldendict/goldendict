@@ -596,7 +596,8 @@ sptr< Dictionary::WordSearchRequest >
   BglDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  return new BglHeadwordsRequest( word, *this );
+  return synonymSearchEnabled ? new BglHeadwordsRequest( word, *this ) :
+                                Class::findHeadwordsForSynonym( word );
 }
 
 // Converts a $1$-like postfix to a <sup>1</sup> one

@@ -976,7 +976,8 @@ sptr< Dictionary::WordSearchRequest >
   GlsDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  return new GlsHeadwordsRequest( word, *this );
+  return synonymSearchEnabled ? new GlsHeadwordsRequest( word, *this ) :
+                                Class::findHeadwordsForSynonym( word );
 }
 
 

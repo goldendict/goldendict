@@ -135,6 +135,7 @@ Preferences::Preferences():
 #ifndef Q_WS_X11
 , trackClipboardChanges( false )
 #endif
+, synonymSearchEnabled( true )
 {
 }
 
@@ -832,6 +833,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "trackClipboardChanges" ).isNull() )
       c.preferences.trackClipboardChanges = ( preferences.namedItem( "trackClipboardChanges" ).toElement().text() == "1" );
 #endif
+
+    if ( !preferences.namedItem( "synonymSearchEnabled" ).isNull() )
+      c.preferences.synonymSearchEnabled = ( preferences.namedItem( "synonymSearchEnabled" ).toElement().text() == "1" );
 
     QDomNode fts = preferences.namedItem( "fullTextSearch" );
 
@@ -1736,6 +1740,11 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.trackClipboardChanges ? "1" : "0" ) );
     preferences.appendChild( opt );
 #endif
+
+    opt = dd.createElement( "synonymSearchEnabled" );
+    opt.appendChild( dd.createTextNode( c.preferences.synonymSearchEnabled ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
     {
       QDomNode hd = dd.createElement( "fullTextSearch" );
       preferences.appendChild( hd );

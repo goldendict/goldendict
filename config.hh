@@ -244,6 +244,8 @@ struct Preferences
   bool trackClipboardChanges;
 #endif
 
+  bool synonymSearchEnabled;
+
   QString addonStyle;
 
   FullTextSearch fts;

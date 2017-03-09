@@ -1106,7 +1106,8 @@ sptr< Dictionary::WordSearchRequest >
   StardictDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  return new StardictHeadwordsRequest( word, *this );
+  return synonymSearchEnabled ? new StardictHeadwordsRequest( word, *this ) :
+                                Class::findHeadwordsForSynonym( word );
 }
 
 
