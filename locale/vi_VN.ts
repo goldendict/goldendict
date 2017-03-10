@@ -3230,6 +3230,15 @@ và chặn truy vấn. Bật tính năng này để không chèn định danh v�
         <source>Help language</source>
         <translation>Ngôn ngữ trợ giúp</translation>
     </message>
+    <message>
+        <source>Turn this option on to enable extra articles search via synonym lists
+from Stardict, Babylon and GLS dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extra search via synonyms</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>

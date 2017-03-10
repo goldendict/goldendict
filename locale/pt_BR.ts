@@ -42,63 +42,63 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="154"/>
+        <location filename="../article_maker.cc" line="210"/>
         <source>Expand article</source>
         <translation>Expandir artigo</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="160"/>
+        <location filename="../article_maker.cc" line="216"/>
         <source>Collapse article</source>
         <translation>Recolher artigo</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="189"/>
+        <location filename="../article_maker.cc" line="245"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Não achei nenhuma definição ou tradução da palavra/expressão &lt;b&gt;%1&lt;/b&gt; no grupo &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="194"/>
+        <location filename="../article_maker.cc" line="250"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Não achei a palavra no grupo &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="242"/>
+        <location filename="../article_maker.cc" line="298"/>
         <source>Welcome!</source>
         <translation>Bem-vindo!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="244"/>
+        <location filename="../article_maker.cc" line="300"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Bem vindo ao &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Para começar a trabalhar com o programa, primeiro visite &lt;b&gt;Editar|Dicionários&lt;/b&gt; para adicionar alguns caminhos de diretório, onde procuram os arquivos de dicionários, configurar vários sites da Wikipedia ou outras fontes, ajustar a ordem de dicionário ou criar grupos de dicionários.&lt;p&gt;E então você estará pronto para visualizar suas palavras! Você pode fazer isso nesta janela usando o painel à esquerda, ou você pode &lt;a href=&quot;Trabalhando com pop-up&quot;&gt;procurar palavras a partir de outras aplicações ativas&lt;/a&gt;. &lt;p&gt;Para personalizar o programa, confira as preferências disponíveis no &lt;b&gt;Editar|Preferências&lt;/b&gt;. Todas as configurações tem dicas, não deixe de lê-las, se você estiver em dúvida sobre qualquer coisa.&lt;p&gt;Se você precisar de mais ajuda, têm qualquer dúvida, sugestões ou apenas saber o que os outros pensam, você é bem-vindo ao programa de &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Confira o programa do &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; para atualizações. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licenciado sob GPLv3 ou posterior.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="260"/>
+        <location filename="../article_maker.cc" line="316"/>
         <source>Working with popup</source>
         <translation>Trabalhando com janelas de definições/tradução semiautomáticas</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="262"/>
+        <location filename="../article_maker.cc" line="318"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Trabalhando com janelas de definições/tradução semiautomáticas&lt;/h3&gt;Para fazer consultas/tradução de palavras da janela de outros aplicativos abertos, primeiramente é necessário habilitar a função de janelas secundárias seguindo estes passos a partir da janela principal:&lt;p&gt;&lt;OL&gt;&lt;LI&gt;Clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;;
 &lt;LI&gt;Clique na guia &lt;b&gt;&lt;i&gt;&quot;Janela de Definições Semiautomáticas&quot;&lt;/b&gt;&lt;/i&gt;;&lt;LI&gt;Marque a opção &lt;i&gt;&quot;Ativar funcionalidades de janelas secundárias de definições semiautomáticas&quot;&lt;/i&gt;;&lt;LI&gt;Em seguida, clique em &quot;OK&quot; para salvar as configurações.&lt;/OL&gt;&lt;p&gt;Com esta opção ativada, você pode marcar ou desmarcar a exibição das janelas secundárias quando quiser. Para fazê-lo, há duas formas:&lt;UL&gt;&lt;LI&gt;Na janela principal, clique no botão de &lt;b&gt;Definições Semiautomáticas&lt;/b&gt;, cujo botão assemelha-se a uma varinha;&lt;LI&gt;No ícone do programa exibido na Área de Notificação (perto do relógio), clique com o botão direito do mouse e marque a opção &lt;b&gt;&lt;i&gt;Definições Semiautomáticas&lt;/b&gt;&lt;/i&gt;.&lt;/UL&gt;&lt;p&gt;Uma vez habilitada esta função, qualquer palavra ou expressão selecionada terá suas definições exibidas (se a palavra/expressão da consulta existir em algum dos dicionários especificados na configuração) imediatamente nos resultados da consulta. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="269"/>
+        <location filename="../article_maker.cc" line="325"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Basta pairar o ponteiro do mouse sobre a palavra/expressão exibida em uma janela qualquer e que desejar consultar que será exibida uma janela com as definições/tradução.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="272"/>
+        <location filename="../article_maker.cc" line="328"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Com isso, você pode consultar ou traduzir palavra/expressão da janela de qualquer programa que seja selecionável ou em que se possa clicar duplamente. Alás, um clique duplo do mouse, por exemplo, seleciona uma palavra, ao passo que um clique triplo, uma frase inteira.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="354"/>
+        <location filename="../article_maker.cc" line="410"/>
         <source>(untitled)</source>
         <translation>(sem título)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="368"/>
+        <location filename="../article_maker.cc" line="424"/>
         <source>(picture)</source>
         <translation>(imagem)</translation>
     </message>
@@ -106,37 +106,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="635"/>
+        <location filename="../article_maker.cc" line="691"/>
         <source>Expand article</source>
         <translation>Expandir artigo</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="638"/>
+        <location filename="../article_maker.cc" line="694"/>
         <source>From </source>
         <translation>Resultados de </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="643"/>
+        <location filename="../article_maker.cc" line="699"/>
         <source>Collapse article</source>
         <translation>Recolher artigo</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="660"/>
+        <location filename="../article_maker.cc" line="716"/>
         <source>Query error: %1</source>
         <translation>Erro de Consulta: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="766"/>
+        <location filename="../article_maker.cc" line="822"/>
         <source>Close words: </source>
         <translation>Palavras semelhantes: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="837"/>
+        <location filename="../article_maker.cc" line="893"/>
         <source>Compound expressions: </source>
         <translation>Termos compostos: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="865"/>
+        <location filename="../article_maker.cc" line="921"/>
         <source>Individual words: </source>
         <translation>Palavras independentes: </translation>
     </message>
@@ -2424,7 +2424,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="270"/>
+        <location filename="../loaddictionaries.cc" line="278"/>
         <source>Error loading dictionaries</source>
         <translation>Erro ao carregar dicionários</translation>
     </message>
@@ -2432,7 +2432,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="243"/>
+        <location filename="../main.cc" line="345"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Erro no arquivo de configuração. Continuar com as configurações padrão?</translation>
     </message>
@@ -2690,7 +2690,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3590"/>
+        <location filename="../mainwindow.cc" line="3615"/>
         <source>&amp;Show</source>
         <translation>E&amp;xibir</translation>
     </message>
@@ -2716,7 +2716,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="271"/>
-        <location filename="../mainwindow.cc" line="1243"/>
+        <location filename="../mainwindow.cc" line="1246"/>
         <source>Look up in:</source>
         <translation>Procurar em:</translation>
     </message>
@@ -2807,17 +2807,17 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1232"/>
+        <location filename="../mainwindow.cc" line="1235"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 dicionário, %2 verbetes, %3 palavras</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1243"/>
+        <location filename="../mainwindow.cc" line="1246"/>
         <source>Look up:</source>
         <translation>Procurar:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1261"/>
+        <location filename="../mainwindow.cc" line="1264"/>
         <source>All</source>
         <translation>Todos os Dicionários</translation>
     </message>
@@ -2842,179 +2842,179 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>&amp;Navegação</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1416"/>
+        <location filename="../mainwindow.cc" line="1422"/>
         <source>Open Tabs List</source>
         <translation>Abrir a lista de guias</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1474"/>
+        <location filename="../mainwindow.cc" line="1480"/>
         <source>(untitled)</source>
         <translation>(sem título)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1695"/>
+        <location filename="../mainwindow.cc" line="1701"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2810"/>
+        <location filename="../mainwindow.cc" line="2822"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Não foi possível acionar o mecanismo de monitoramento por atalho.&lt;br&gt;Veja se seu XServer está com a extensão RECORD ativada.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2947"/>
+        <location filename="../mainwindow.cc" line="2959"/>
         <source>New Release Available</source>
         <translation>Nova Versão Disponível</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2948"/>
+        <location filename="../mainwindow.cc" line="2960"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>A versão &lt;b&gt;%1&lt;/b&gt; do GoldenDict está disponível para download.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2953"/>
+        <location filename="../mainwindow.cc" line="2965"/>
         <source>Download</source>
         <translation>Baixar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2954"/>
+        <location filename="../mainwindow.cc" line="2966"/>
         <source>Skip This Release</source>
         <translation>Ignorar esta versão</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="806"/>
-        <location filename="../mainwindow.cc" line="3007"/>
+        <location filename="../mainwindow.cc" line="3019"/>
         <source>Accessibility API is not enabled</source>
         <translation>Acessibilidade a API não está habilitada</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3084"/>
+        <location filename="../mainwindow.cc" line="3096"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Você optou por ocultar a barra de menus. Use %1 para exibi-la de novo.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3085"/>
+        <location filename="../mainwindow.cc" line="3097"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3183"/>
+        <location filename="../mainwindow.cc" line="3195"/>
         <source>Page Setup</source>
         <translation>Configuração de Página</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3184"/>
+        <location filename="../mainwindow.cc" line="3196"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Não achei nenhuma impressora. Favor instalar uma.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3214"/>
         <source>Print Article</source>
         <translation>Imprimir Verbete</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3277"/>
+        <location filename="../mainwindow.cc" line="3289"/>
         <source>Article, Complete (*.html)</source>
         <translation>Artigo, Completo (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3278"/>
+        <location filename="../mainwindow.cc" line="3290"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Artigo, Apenas HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3281"/>
+        <location filename="../mainwindow.cc" line="3293"/>
         <source>Save Article As</source>
         <translation>Salvar Verbete como</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3295"/>
+        <location filename="../mainwindow.cc" line="3307"/>
         <source>Error</source>
         <translation>Erro!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3296"/>
+        <location filename="../mainwindow.cc" line="3308"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Não foi possível salvar o verbete: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3359"/>
+        <location filename="../mainwindow.cc" line="3371"/>
         <source>Saving article...</source>
         <translation>Salvando artigo...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3419"/>
+        <location filename="../mainwindow.cc" line="3434"/>
         <source>The main window is set to be always on top.</source>
         <translation>A janela principal está definida para estar sempre no topo.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3586"/>
+        <location filename="../mainwindow.cc" line="3611"/>
         <source>&amp;Hide</source>
         <translation>&amp;Ocultar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3612"/>
+        <location filename="../mainwindow.cc" line="3637"/>
         <source>Export history to file</source>
         <translation>Exportar o histórico</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3614"/>
-        <location filename="../mainwindow.cc" line="3676"/>
+        <location filename="../mainwindow.cc" line="3639"/>
+        <location filename="../mainwindow.cc" line="3701"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Arquivos de texto (*.txt);;Todos os arquivos (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3653"/>
+        <location filename="../mainwindow.cc" line="3678"/>
         <source>History export complete</source>
         <translation>Feita a exportação do histórico</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3656"/>
+        <location filename="../mainwindow.cc" line="3681"/>
         <source>Export error: </source>
         <translation>Erro de exportação:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3674"/>
+        <location filename="../mainwindow.cc" line="3699"/>
         <source>Import history from file</source>
         <translation>Importar histórico de arquivo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3723"/>
+        <location filename="../mainwindow.cc" line="3748"/>
         <source>Import error: invalid data in file</source>
         <translation>Erro ao tentar importar: dados inválidos no arquivo.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3727"/>
+        <location filename="../mainwindow.cc" line="3752"/>
         <source>History import complete</source>
         <translation>Feita a importação do histórico.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3730"/>
+        <location filename="../mainwindow.cc" line="3755"/>
         <source>Import error: </source>
         <translation>Erro de importação:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4004"/>
+        <location filename="../mainwindow.cc" line="4029"/>
         <source>Dictionary info</source>
         <translation>Inform. do Dicionário</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4008"/>
+        <location filename="../mainwindow.cc" line="4033"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4010"/>
+        <location filename="../mainwindow.cc" line="4035"/>
         <source>Open dictionary folder</source>
         <translation>Abrir pasta de dicionário</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4016"/>
+        <location filename="../mainwindow.cc" line="4041"/>
         <source>Edit dictionary</source>
         <translation>Editar dicionário</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4213"/>
+        <location filename="../mainwindow.cc" line="4238"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3627,34 +3627,45 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1283"/>
+        <location filename="../preferences.ui" line="1297"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1300"/>
+        <location filename="../preferences.ui" line="1314"/>
         <source>articles (0 - unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1528"/>
+        <location filename="../preferences.ui" line="1535"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Selecione essa opção para automaticamente recolher grandes artigos</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1531"/>
+        <location filename="../preferences.ui" line="1538"/>
         <source>Collapse articles more than</source>
         <translation>Recolher artigos mais de</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1538"/>
+        <location filename="../preferences.ui" line="1545"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Artigos mais longos que esse tamanho vai ser recolhido</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1554"/>
+        <location filename="../preferences.ui" line="1561"/>
         <source>symbols</source>
         <translation>símbolos</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1586"/>
+        <source>Turn this option on to enable extra articles search via synonym lists
+from Stardict, Babylon and GLS dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1590"/>
+        <source>Extra search via synonyms</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="911"/>
@@ -3766,17 +3777,17 @@ e pergunta se ele deseja visitar a página de download.</translation>
         <translation>Procurar atualizações do programa periodicamente</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1346"/>
+        <location filename="../preferences.ui" line="1353"/>
         <source>Ad&amp;vanced</source>
         <translation>A&amp;vançada</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1352"/>
+        <location filename="../preferences.ui" line="1359"/>
         <source>ScanPopup extra technologies</source>
         <translation>Tecnologias exibição de definições/tradução semiautomáticas extras</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1358"/>
+        <location filename="../preferences.ui" line="1365"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3787,12 +3798,12 @@ palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a 
 Não é necessário habilitar esta opção se você não usa programas desse tipo.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1364"/>
+        <location filename="../preferences.ui" line="1371"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Usar &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1371"/>
+        <location filename="../preferences.ui" line="1378"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3801,12 +3812,12 @@ palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a 
 Não é necessário habilitar esta opção se você não usa esses tipos de programa.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1376"/>
+        <location filename="../preferences.ui" line="1383"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Usar &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1383"/>
+        <location filename="../preferences.ui" line="1390"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -3815,62 +3826,62 @@ palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a 
 Não é necessário habilitar esta opção se você não usa esses tipos de programas.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1388"/>
+        <location filename="../preferences.ui" line="1395"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Usar o comando especial de consulta do &amp;GoldenDict</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1398"/>
+        <location filename="../preferences.ui" line="1405"/>
         <source>History</source>
         <translation>Histórico</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1404"/>
+        <location filename="../preferences.ui" line="1411"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Habilite esta opção se quiser gravar o histórico das palavras traduzidas/pesquisadas.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1407"/>
+        <location filename="../preferences.ui" line="1414"/>
         <source>Store &amp;history</source>
         <translation>Gravar o &amp;histórico</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1422"/>
+        <location filename="../preferences.ui" line="1429"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Especifique o número máximo de entradas para manter no histórico.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1425"/>
+        <location filename="../preferences.ui" line="1432"/>
         <source>Maximum history size:</source>
         <translation>Tamanho máximo do histórico:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1462"/>
+        <location filename="../preferences.ui" line="1469"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Intervalo ao salvar o histórico. Se definido histórico como 0, será salvo apenas durante a saída.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1468"/>
+        <location filename="../preferences.ui" line="1475"/>
         <source>Save every</source>
         <translation>Salvar tudo</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1485"/>
+        <location filename="../preferences.ui" line="1492"/>
         <source>minutes</source>
         <translation>minutos</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1510"/>
+        <location filename="../preferences.ui" line="1517"/>
         <source>Articles</source>
         <translation>Artigos</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1516"/>
+        <location filename="../preferences.ui" line="1523"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Habilite esta opção se quise expandir sempre partes opcionais de artigos.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1519"/>
+        <location filename="../preferences.ui" line="1526"/>
         <source>Expand optional &amp;parts</source>
         <translation>E&amp;xpandir partes opcionais</translation>
     </message>
@@ -3911,12 +3922,12 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="552"/>
+        <location filename="../preferences.cc" line="564"/>
         <source>Changing Language</source>
         <translation>Modificando Idioma</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="553"/>
+        <location filename="../preferences.cc" line="565"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Reinicie o programa para aplicar a mudança de idioma.</translation>
     </message>
@@ -3999,7 +4010,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <name>QObject</name>
     <message>
         <location filename="../aard.cc" line="424"/>
-        <location filename="../dsl.cc" line="1656"/>
+        <location filename="../dsl.cc" line="1710"/>
         <source>Article loading error</source>
         <translation>Erro ao carregar Artigo</translation>
     </message>
