@@ -1364,6 +1364,9 @@ void MainWindow::makeScanPopup()
   connect( scanPopup.get(), SIGNAL( sendWordToHistory( QString ) ),
            this, SLOT( addWordToHistory( QString ) ) );
 
+  connect( this, SIGNAL( setPopupGroupByName( QString ) ),
+           scanPopup.get(), SLOT( setGroupByName( QString ) ) );
+
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
            this, SLOT( isGoldenDictWindow( HWND ) ) );
@@ -3565,6 +3568,16 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
       wordReceived( message.mid( 15 ) );
   }
   else
+  if( message.left( 10 ) == "setGroup: " )
+  {
+    setGroupByName( message.mid( 10 ), true );
+  }
+  else
+  if( message.left( 15 ) == "setPopupGroup: " )
+  {
+    setGroupByName( message.mid( 15 ), false );
+  }
+  else
     qWarning() << "Unknown message received from another instance: " << message;
 }
 
@@ -4223,6 +4236,28 @@ void MainWindow::showFTSIndexingName( QString const & name )
     mainStatusBar->setBackgroundMessage( QString() );
   else
     mainStatusBar->setBackgroundMessage( tr( "Now indexing for full-text search: " ) + name );
+}
+
+void MainWindow::setGroupByName( QString const & name, bool main_window )
+{
+  if( main_window )
+  {
+    int i;
+    for( i = 0; i < groupList->count(); i++ )
+    {
+      if( groupList->itemText( i ) == name )
+      {
+        groupList->setCurrentIndex( i );
+        break;
+      }
+    }
+    if( i >= groupList->count() )
+      gdWarning( "Group \"%s\" for main window is not found\n", name.toUtf8().data() );
+  }
+  else
+  {
+    emit setPopupGroupByName( name );
+  }
 }
 
 #ifdef Q_OS_WIN32

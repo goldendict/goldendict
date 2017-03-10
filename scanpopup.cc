@@ -1048,3 +1048,18 @@ void ScanPopup::setDictionaryIconSize()
                21;
   dictionaryBar.setDictionaryIconSize( extent );
 }
+
+void ScanPopup::setGroupByName( QString const & name )
+{
+  int i;
+  for( i = 0; i < ui.groupList->count(); i++ )
+  {
+    if( ui.groupList->itemText( i ) == name )
+    {
+      ui.groupList->setCurrentIndex( i );
+      break;
+    }
+  }
+  if( i >= ui.groupList->count() )
+    gdWarning( "Group \"%s\" for popup window is not found\n", name.toUtf8().data() );
+}

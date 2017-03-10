@@ -105,6 +105,97 @@ void gdMessageHandler( QtMsgType type, const char *msg )
   }
 }
 
+class GDCommandLine
+{
+  bool crashReport, logFile;
+  QString word, groupName, popupGroupName, errFileName;
+  QVector< QString > arguments;
+public:
+  GDCommandLine( int argc, char **argv );
+
+  inline bool needCrashReport()
+  { return crashReport; }
+
+  inline QString errorFileName()
+  { return errFileName; }
+
+  inline bool needSetGroup()
+  { return !groupName.isEmpty(); }
+
+  inline QString getGroupName()
+  { return groupName; }
+
+  inline bool needSetPopupGroup()
+  { return !popupGroupName.isEmpty(); }
+
+  inline QString getPopupGroupName()
+  { return popupGroupName; }
+
+  inline bool needLogFile()
+  { return logFile; }
+
+  inline bool needTranslateWord()
+  { return !word.isEmpty(); }
+
+  inline QString wordToTranslate()
+  { return word; }
+};
+
+GDCommandLine::GDCommandLine( int argc, char **argv ):
+crashReport( false ),
+logFile( false )
+{
+  if( argc > 1 )
+  {
+#ifdef Q_OS_WIN32
+    (void) argv;
+    int num;
+    LPWSTR *pstr = CommandLineToArgvW( GetCommandLineW(), &num );
+    if( pstr && num > 1 )
+    {
+      for( int i = 1; i < num; i++ )
+        arguments.push_back( QString::fromWCharArray( pstr[ i ] ) );
+    }
+#else
+    for( int i = 1; i < argc; i++ )
+      arguments.push_back( QString::fromLocal8Bit( argv[ i ] ) );
+#endif
+    // Parse command line
+    for( int i = 0; i < arguments.size(); i++ )
+    {
+      if( arguments[ i ].compare( "--show-error-file" ) == 0 )
+      {
+        if( i < arguments.size() - 1 )
+        {
+          errFileName = arguments[ ++i ];
+          crashReport = true;
+        }
+        continue;
+      }
+      else
+      if( arguments[ i ].compare( "--log-to-file" ) == 0 )
+      {
+        logFile = true;
+        continue;
+      }
+      else
+      if( arguments[ i ].startsWith( "--group-name=" ) )
+      {
+        groupName = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 );
+        continue;
+      }
+      else
+      if( arguments[ i ].startsWith( "--popup-group-name=" ) )
+      {
+        popupGroupName = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 );
+        continue;
+      }
+      else
+        word = arguments[ i ];
+    }
+  }
+}
+
 int main( int argc, char ** argv )
 {
   #ifdef Q_OS_MAC
@@ -132,13 +223,15 @@ int main( int argc, char ** argv )
     {}
   }
 
-  if ( argc == 3 && strcmp( argv[ 1 ], "--show-error-file" ) == 0 )
+   GDCommandLine gdcl( argc, argv );
+
+  if ( gdcl.needCrashReport() )
   {
     // The program has crashed -- show a message about it
 
     QApplication app( argc, argv );
 
-    QFile errFile( argv[ 2 ] );
+    QFile errFile( gdcl.errorFileName() );
 
     QString errorText;
 
@@ -180,20 +273,29 @@ int main( int argc, char ** argv )
 
   if ( app.isRunning() )
   {
-    if( argc == 2 && strcmp( argv[ 1 ], LOG_TO_FILE_KEY ) != 0 )
-#ifdef Q_OS_WIN32
+    bool wasMessage = false;
+
+    if( gdcl.needSetGroup() )
     {
-      LPWSTR * pstr;
-      int num;
-      pstr = CommandLineToArgvW( GetCommandLineW(), &num );
-      if( pstr && num > 0 )
-        app.sendMessage( QString( "translateWord: " ) + QString::fromWCharArray( pstr[1] ) );
+      app.sendMessage( QString( "setGroup: " ) + gdcl.getGroupName() );
+      wasMessage = true;
     }
-#else
-      app.sendMessage( QString( "translateWord: " ) + QString::fromLocal8Bit( argv[1] ) );
-#endif
-    else
+
+    if( gdcl.needSetPopupGroup() )
+    {
+      app.sendMessage( QString( "setPopupGroup: " ) + gdcl.getPopupGroupName() );
+      wasMessage = true;
+    }
+
+    if( gdcl.needTranslateWord() )
+    {
+      app.sendMessage( QString( "translateWord: " ) + gdcl.wordToTranslate() );
+      wasMessage = true;
+    }
+
+    if( !wasMessage )
       app.sendMessage("bringToFront");
+
     return 0; // Another instance is running
   }
 
@@ -253,7 +355,7 @@ int main( int argc, char ** argv )
     break;
   }
 
-  if( argc == 2 && strcmp( argv[ 1 ], LOG_TO_FILE_KEY ) == 0 )
+  if( gdcl.needLogFile() )
   {
     // Open log file
     logFile.setFileName( Config::getConfigDir() + "gd_log.txt" );
@@ -313,18 +415,14 @@ int main( int argc, char ** argv )
   QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
     &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
 
-  if( argc == 2 && strcmp( argv[ 1 ], LOG_TO_FILE_KEY ) != 0)
-#ifdef Q_OS_WIN32
-  {
-    LPWSTR * pstr;
-    int num;
-    pstr = CommandLineToArgvW( GetCommandLineW(), &num );
-    if( pstr && num > 0 )
-      m.wordReceived( QString::fromWCharArray( pstr[1] ) );
-  }
-#else
-    m.wordReceived( QString::fromLocal8Bit( argv[1] ) );
-#endif
+  if( gdcl.needSetGroup() )
+    m.setGroupByName( gdcl.getGroupName(), true );
+
+  if( gdcl.needSetPopupGroup() )
+    m.setGroupByName( gdcl.getPopupGroupName(), false );
+
+  if( gdcl.needTranslateWord() )
+    m.wordReceived( gdcl.wordToTranslate() );
 
   int r = app.exec();
 
