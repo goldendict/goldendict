@@ -104,7 +104,7 @@ struct IdxHeader
   uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
                                      // resource index.
   uint32_t zipIndexRootOffset;
-  uint32_t revisionNumber; // Format revision 
+  uint32_t revisionNumber; // Format revision
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -323,6 +323,12 @@ void XdxfDictionary::loadIcon() throw()
   if( !info.isFile() )
   {
       fileName = baseInfo.absoluteDir().absoluteFilePath( "icon16.png" );
+      info = QFileInfo( fileName );
+  }
+
+  if( !info.isFile() )
+  {
+      fileName = baseInfo.absoluteDir().absoluteFilePath( "dict.bmp" );
       info = QFileInfo( fileName );
   }
 
@@ -628,7 +634,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
 
   {
     Mutex::Lock _( idxMutex );
-  
+
     propertiesData = chunks->getBlock( address, chunk );
   }
 
@@ -832,7 +838,7 @@ QString readElementText( QXmlStreamReader & stream )
 
 void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 {
-  // todo implement support for tag <srt>, that overrides the article sorting order 
+  // todo implement support for tag <srt>, that overrides the article sorting order
   if ( stream.name() == "k" )
   {
     words.push_back( readElementText( stream ) );
@@ -842,7 +848,7 @@ void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
   while( !stream.atEnd() )
   {
     stream.readNext();
-  
+
     if ( stream.isStartElement() )
       addAllKeyTags( stream, words );
     else
@@ -888,7 +894,7 @@ void indexArticle( GzippedFile & gzFile,
   if ( formatValue == "l" )
     format = Logical;
   if( format == Default )
-    format = defaultFormat; 
+    format = defaultFormat;
   size_t articleOffset = gzFile.pos() - 1; // stream.characterOffset() is loony
 
   // uint32_t lineNumber = stream.lineNumber();
@@ -1283,7 +1289,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   else
                   if ( stream.name() == "description" )
                   {
-                    // todo implement adding other information to the description like <publisher>, <authors>, <file_ver>, <creation_date>, <last_edited_date>, <dict_edition>, <publishing_date>, <dict_src_url> 
+                    // todo implement adding other information to the description like <publisher>, <authors>, <file_ver>, <creation_date>, <last_edited_date>, <dict_edition>, <publishing_date>, <dict_src_url>
                     QString desc = readXhtmlData( stream );
 
                     if ( dictionaryDescription.isEmpty() )
@@ -1311,7 +1317,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
                     {
                       stream.readNext();
-                      // abbreviations tag set switch at format revision = 30 
+                      // abbreviations tag set switch at format revision = 30
                       if( idxHeader.revisionNumber >= 30 )
                       {
                         while ( !( stream.isEndElement() && stream.name() == "abbr_def" ) || !stream.atEnd() )

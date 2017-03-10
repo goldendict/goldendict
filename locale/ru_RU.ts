@@ -2768,12 +2768,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>&amp;Search Pane</source>
-        <translation>Панель по&amp;иска</translation>
+        <translation type="unfinished">Панель поиска</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="277"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation>Панель на&amp;вигации по переводу</translation>
+        <translation type="unfinished">Панель навигации по переводу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="353"/>
