@@ -796,14 +796,14 @@ void GlsDictionary::loadArticle( uint32_t address,
 
 QString & GlsDictionary::filterResource( QString & article )
 {
-  article.replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
+  article.replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!(data|https?|ftp):)[^\"']*)", Qt::CaseInsensitive ),
                    "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
-         .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
+         .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!(data|https?|ftp):)[^\"']*)", Qt::CaseInsensitive ),
                    "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" );
 
   // Handle links to articles
 
-  QRegExp linksReg( "<a(\\s*[^>]*)href=['\"]([^'\"]+)['\"]" );
+  QRegExp linksReg( "<a(\\s*[^>]*)href=['\"](bword://)?([^'\"]+)['\"]" );
 
   int pos = 0;
   while( pos >= 0 )
@@ -812,7 +812,7 @@ QString & GlsDictionary::filterResource( QString & article )
     if( pos < 0 )
       break;
 
-    QString link = linksReg.cap( 2 );
+    QString link = linksReg.cap( 3 );
     if( link.indexOf( ':' ) < 0 )
     {
       QString newLink;
