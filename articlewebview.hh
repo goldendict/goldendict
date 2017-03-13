@@ -41,7 +41,7 @@ signals:
   /// after the event was processed by the view -- that's the difference from
   /// installing an event filter. This is used for translating the double-clicked
   /// word, which gets selected by the view in response to double-click.
-  void doubleClicked();
+  void doubleClicked( QPoint pos );
 
 protected:
 

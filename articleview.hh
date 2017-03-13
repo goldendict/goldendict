@@ -7,6 +7,7 @@
 #include <QWebView>
 #include <QMap>
 #include <QUrl>
+#include <QSet>
 #include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"
@@ -46,7 +47,7 @@ class ArticleView: public QFrame
   QUrl resourceDownloadUrl;
 
   /// For resources opened via desktop services
-  QString desktopOpenedTempFile;
+  QSet< QString > desktopOpenedTempFiles;
 
   QAction * dictionaryBarToggled;
   GroupComboBox const * groupComboBox;
@@ -281,7 +282,7 @@ private slots:
   void on_ftsSearchNext_clicked();
 
   /// Handles the double-click from the definition.
-  void doubleClicked();
+  void doubleClicked( QPoint pos );
 
   /// Handles audio player error message
   void audioPlayerError( QString const & message );
