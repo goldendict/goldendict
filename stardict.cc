@@ -341,14 +341,18 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
     {
       QString articleText = QString( "<div class=\"sdct_h\">" ) + QString::fromUtf8( resource, size ) + "</div>";
 
-      articleText.replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!(data|https?|ftp):)[^\"']*)", Qt::CaseInsensitive ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
-                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!(data|https?|ftp):)[^\"']*)", Qt::CaseInsensitive ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" );
+      QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
+      imgRe.setMinimal( true );
+      QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
+      linkRe.setMinimal( true );
+
+      articleText.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
+                 .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
 
       // Handle links to articles
 
-      QRegExp linksReg( "<a(\\s*[^>]*)href=['\"]([^'\"]+)['\"]" );
+      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](?:bword://)?([^'\"]+)['\"]" );
+      linksReg.setMinimal( true );
 
       int pos = 0;
       while( pos >= 0 )
@@ -1282,10 +1286,6 @@ void StardictArticleRequest::run()
         if( dict.isToLanguageRTL() )
           result += "</span>";
     }
-    result = QString::fromUtf8( result.c_str() )
-             .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                       "\\1bword:" )
-             .toUtf8().data();
 
     Mutex::Lock _( dataMutex );
 

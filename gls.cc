@@ -796,14 +796,18 @@ void GlsDictionary::loadArticle( uint32_t address,
 
 QString & GlsDictionary::filterResource( QString & article )
 {
-  article.replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!(data|https?|ftp):)[^\"']*)", Qt::CaseInsensitive ),
-                   "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
-         .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!(data|https?|ftp):)[^\"']*)", Qt::CaseInsensitive ),
-                   "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" );
+  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
+  imgRe.setMinimal( true );
+  QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
+  linkRe.setMinimal( true );
+
+  article.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
+         .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
 
   // Handle links to articles
 
-  QRegExp linksReg( "<a(\\s*[^>]*)href=['\"](bword://)?([^'\"]+)['\"]" );
+  QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](?:bword://)?([^'\"]+)['\"]" );
+  linksReg.setMinimal( true );
 
   int pos = 0;
   while( pos >= 0 )
@@ -812,7 +816,7 @@ QString & GlsDictionary::filterResource( QString & article )
     if( pos < 0 )
       break;
 
-    QString link = linksReg.cap( 3 );
+    QString link = linksReg.cap( 2 );
     if( link.indexOf( ':' ) < 0 )
     {
       QString newLink;
