@@ -746,11 +746,11 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   QString text = QString::fromUtf8( in.c_str() );
 
   // pattern of img and script
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=\"(|/)([^\"]*)\"" ),
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
                 QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
 
   // pattern <link... href="..." ...>
-  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"" ),
+  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
