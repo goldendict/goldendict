@@ -1025,6 +1025,12 @@ void ArticleView::attachToJavaScript()
 
 void ArticleView::linkClicked( QUrl const & url_ )
 {
+  Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+
+  // Lock jump on links while Alt key is pressed
+  if( kmod & Qt::AltModifier )
+    return;
+
   updateCurrentArticleFromCurrentFrame();
 
   QUrl url( url_ );
@@ -1032,7 +1038,6 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
   tryMangleWebsiteClickedUrl( url, contexts );
 
-  Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
   if ( !popupView &&
        ( ui.definition->isMidButtonPressed() ||
          ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
