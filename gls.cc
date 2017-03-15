@@ -452,7 +452,7 @@ public:
   { return map< Dictionary::Property, string >(); }
 
   virtual unsigned long getArticleCount() throw()
-  { return idxHeader.wordCount; }
+  { return idxHeader.articleCount; }
 
   virtual unsigned long getWordCount() throw()
   { return idxHeader.wordCount; }
