@@ -223,7 +223,11 @@ int main( int argc, char ** argv )
     {}
   }
 
-   GDCommandLine gdcl( argc, argv );
+#if defined( Q_OS_UNIX )
+  setlocale( LC_ALL, "" ); // use correct char set mapping
+#endif
+
+  GDCommandLine gdcl( argc, argv );
 
   if ( gdcl.needCrashReport() )
   {
