@@ -3697,12 +3697,12 @@ po to, kai pasikeis pažymėtas žodis.</translation>
         <location filename="../preferences.ui" line="1586"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Papildomai ieškoti straipsnelių, kuriuose aprašyti sinonimai Stardict, Babylon ir GLS žodynuose.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1590"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Papildomai ieškoti sinonimų</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
@@ -4178,13 +4178,13 @@ ir pasiūlys atverti parsisiuntimo puslapį.
         <location filename="../sdict.cc" line="678"/>
         <location filename="../stardict.cc" line="914"/>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorinės teisės: %1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="565"/>
         <location filename="../sdict.cc" line="694"/>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Versija: %1%2</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
@@ -4276,28 +4276,28 @@ ir pasiūlys atverti parsisiuntimo puslapį.
         <location filename="../gls.cc" line="619"/>
         <location filename="../stardict.cc" line="922"/>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoriai: %1%2</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="410"/>
         <location filename="../stardict.cc" line="930"/>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>El. paštas: %1%2</translation>
     </message>
     <message>
         <location filename="../sdict.cc" line="646"/>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavadinimas: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="938"/>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Svetainė: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="946"/>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Data: %1%2</translation>
     </message>
 </context>
 <context>
