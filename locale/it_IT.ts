@@ -158,32 +158,32 @@
         <translation>Ispeziona</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="956"/>
+        <location filename="../articleview.cc" line="959"/>
         <source>Resource</source>
         <translation>Risorsa</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="961"/>
+        <location filename="../articleview.cc" line="964"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="966"/>
+        <location filename="../articleview.cc" line="969"/>
         <source>TTS Voice</source>
         <translation>Voce sintetizzata (TTS)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Picture</source>
         <translation>Immagine</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1007"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definizione dal dizionario &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1008"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition: %1</source>
         <translation>Definizione: %1</translation>
     </message>
@@ -192,100 +192,100 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1229"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>La risorsa di riferimento non esiste.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1269"/>
+        <location filename="../articleview.cc" line="1277"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Il programma audio di riferimento non esiste.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1189"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>ERROR: %1</source>
         <translation>Errore: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1779"/>
+        <location filename="../articleview.cc" line="1787"/>
         <source>Save sound</source>
         <translation>Salva suono</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1781"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>File sonori (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tutti i file (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1794"/>
+        <location filename="../articleview.cc" line="1802"/>
         <source>Save image</source>
         <translation>Salva immagine</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1796"/>
+        <location filename="../articleview.cc" line="1804"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>File d&apos;immagine (*.bmp *.jpg *.png *.tif);;Tutti i file (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1535"/>
+        <location filename="../articleview.cc" line="1543"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Apri collegamento</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="978"/>
+        <location filename="../articleview.cc" line="981"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="987"/>
+        <location filename="../articleview.cc" line="990"/>
         <source>Video: %1</source>
         <translation>Video: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Apri collegamento in una nuova &amp;scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1548"/>
+        <location filename="../articleview.cc" line="1556"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Apri collegamento in un programma di &amp;navigazione web esterno</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1590"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Cerca «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Cerca &quot;%1&quot; in una &amp;nuova scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1603"/>
+        <location filename="../articleview.cc" line="1611"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Invia &quot;%1&quot; alla linea di comando</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1609"/>
-        <location filename="../articleview.cc" line="1645"/>
+        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1653"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Aggiungi &quot;%1&quot; alla cronologia</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Cerca &quot;%1&quot; in %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Cerca &quot;%1&quot; in %2 in una &amp;nuova scheda</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1934"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>ATTENZIONE: Lettore audio FFmpeg: %1</translation>
     </message>
@@ -306,37 +306,37 @@
         <translation type="obsolete">La libreria Bass non è in grado di riprodurre questo suono.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1868"/>
+        <location filename="../articleview.cc" line="1876"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>L&apos;esecuzione del file sonoro è fallita: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1886"/>
+        <location filename="../articleview.cc" line="1893"/>
         <source>Failed to create temporary file.</source>
         <translation>La creazione del file temporaneo è fallita.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1897"/>
+        <location filename="../articleview.cc" line="1904"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>L&apos;apertura automatica del file di risorsa è fallita. Provare ad aprire il file manualmente: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>The referenced resource failed to download.</source>
         <translation>Lo scaricamento della risorsa di riferimento è fallita.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1563"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save &amp;image...</source>
         <translation>Salva &amp;immagine...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save s&amp;ound...</source>
         <translation>Salva s&amp;uono...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: %1</source>
         <translation>ATTENZIONE: %1</translation>
     </message>
@@ -2457,7 +2457,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="345"/>
+        <location filename="../main.cc" line="349"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Errore nel file di configurazione. Continuare con le impostazioni preimpostate?</translation>
     </message>
@@ -4125,6 +4125,20 @@ e si collega al sito del programma.</translation>
         <translation>Errore di decodifica del file di traduzione</translation>
     </message>
     <message>
+        <location filename="../aard.cc" line="561"/>
+        <location filename="../bgl.cc" line="396"/>
+        <location filename="../sdict.cc" line="678"/>
+        <location filename="../stardict.cc" line="914"/>
+        <source>Copyright: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aard.cc" line="565"/>
+        <location filename="../sdict.cc" line="694"/>
+        <source>Version: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() fallito.</translation>
@@ -4209,6 +4223,34 @@ e si collega al sito del programma.</translation>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() fallito.</translation>
     </message>
+    <message>
+        <location filename="../bgl.cc" line="403"/>
+        <location filename="../gls.cc" line="619"/>
+        <location filename="../stardict.cc" line="922"/>
+        <source>Author: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../bgl.cc" line="410"/>
+        <location filename="../stardict.cc" line="930"/>
+        <source>E-mail: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sdict.cc" line="646"/>
+        <source>Title: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="938"/>
+        <source>Website: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="946"/>
+        <source>Date: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
@@ -4231,18 +4273,18 @@ e si collega al sito del programma.</translation>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>ERROR: %1</source>
         <translation>Errore: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2790"/>
         <source>Resource saving error: </source>
         <translation>Errore di salvataggio risorsa:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>The referenced resource failed to download.</source>
         <translation>Lo scaricamento della risorsa di riferimento è fallita.</translation>
     </message>

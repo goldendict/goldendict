@@ -158,165 +158,165 @@
         <translation>Инспектор</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="956"/>
+        <location filename="../articleview.cc" line="959"/>
         <source>Resource</source>
         <translation>Ресурс</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="961"/>
+        <location filename="../articleview.cc" line="964"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="966"/>
+        <location filename="../articleview.cc" line="969"/>
         <source>TTS Voice</source>
         <translation>Синтезатор голоса</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Picture</source>
         <translation>Картинка</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="978"/>
+        <location filename="../articleview.cc" line="981"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="987"/>
+        <location filename="../articleview.cc" line="990"/>
         <source>Video: %1</source>
         <translation>Видео: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1007"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Определение из словаря «%1»: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1008"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition: %1</source>
         <translation>Определение: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1229"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Запрошенный ресурс не найден.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1269"/>
+        <location filename="../articleview.cc" line="1277"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Указанная аудио-программа не найдена.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1189"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>ERROR: %1</source>
         <translation>ОШИБКА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1779"/>
+        <location filename="../articleview.cc" line="1787"/>
         <source>Save sound</source>
         <translation>Сохранить звук</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1781"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Звуковые файлы (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1794"/>
+        <location filename="../articleview.cc" line="1802"/>
         <source>Save image</source>
         <translation>Сохранить изображение</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1796"/>
+        <location filename="../articleview.cc" line="1804"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Файлы изображений (*.bmp *.jpg *.png *.tif);;Все файлы (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1535"/>
+        <location filename="../articleview.cc" line="1543"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Открыть ссылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Открыть ссылку в новой &amp;вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1548"/>
+        <location filename="../articleview.cc" line="1556"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Открыть ссылку во внешнем &amp;браузере</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1590"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Поиск «%1»</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Поиск «%1» в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1603"/>
+        <location filename="../articleview.cc" line="1611"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Поместить «%1» в строку ввода</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1609"/>
-        <location filename="../articleview.cc" line="1645"/>
+        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1653"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>Добавить «%1» в журнал</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Поиск «%1» в %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Поиск «%1» в %2 в &amp;новой вкладке</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1934"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>ПРЕДУПРЕЖДЕНИЕ: Плейер FFMpeg: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1868"/>
+        <location filename="../articleview.cc" line="1876"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Невозможно запустить проигрыватель звукового файла: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1886"/>
+        <location filename="../articleview.cc" line="1893"/>
         <source>Failed to create temporary file.</source>
         <translation>Ошибка создания временного файла.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1897"/>
+        <location filename="../articleview.cc" line="1904"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Ошибка открытия файла ресурса, попробуйте открыть вручную: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>The referenced resource failed to download.</source>
         <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1563"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save &amp;image...</source>
         <translation>Сохранить &amp;изображение...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save s&amp;ound...</source>
         <translation>Сохранить &amp;звук...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: %1</source>
         <translation>ВНИМАНИЕ: %1</translation>
     </message>
@@ -2420,7 +2420,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="345"/>
+        <location filename="../main.cc" line="349"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Ошибка в файле конфигурации. Продолжить с настройками по умолчанию?</translation>
     </message>
@@ -4008,6 +4008,20 @@ GoldenDict. Если новая версия появилась, програм�
         <translation>Ошибка декодирования статьи</translation>
     </message>
     <message>
+        <location filename="../aard.cc" line="561"/>
+        <location filename="../bgl.cc" line="396"/>
+        <location filename="../sdict.cc" line="678"/>
+        <location filename="../stardict.cc" line="914"/>
+        <source>Copyright: %1%2</source>
+        <translation>Копирайт: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../aard.cc" line="565"/>
+        <location filename="../sdict.cc" line="694"/>
+        <source>Version: %1%2</source>
+        <translation>Версия: %1%2</translation>
+    </message>
+    <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>Ошибка avformat_alloc_context().</translation>
@@ -4092,6 +4106,34 @@ GoldenDict. Если новая версия появилась, програм�
         <source>avcodec_alloc_frame() failed.</source>
         <translation>Ошибка avcodec_alloc_frame().</translation>
     </message>
+    <message>
+        <location filename="../bgl.cc" line="403"/>
+        <location filename="../gls.cc" line="619"/>
+        <location filename="../stardict.cc" line="922"/>
+        <source>Author: %1%2</source>
+        <translation>Автор: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../bgl.cc" line="410"/>
+        <location filename="../stardict.cc" line="930"/>
+        <source>E-mail: %1%2</source>
+        <translation>E-mail: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../sdict.cc" line="646"/>
+        <source>Title: %1%2</source>
+        <translation>Название: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="938"/>
+        <source>Website: %1%2</source>
+        <translation>Сайт: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="946"/>
+        <source>Date: %1%2</source>
+        <translation>Дата: %1%2</translation>
+    </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
@@ -4114,18 +4156,18 @@ GoldenDict. Если новая версия появилась, програм�
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>ERROR: %1</source>
         <translation>ОШИБКА: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2790"/>
         <source>Resource saving error: </source>
         <translation>Ошибка записи данных: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>The referenced resource failed to download.</source>
         <translation>Невозможно загрузить указанный ресурс.</translation>
     </message>

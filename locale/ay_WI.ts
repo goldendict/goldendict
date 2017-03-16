@@ -4163,6 +4163,34 @@ from Stardict, Babylon and GLS dictionaries</source>
         <source>avcodec_alloc_frame() failed.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Copyright: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E-mail: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QuickFilterLine</name>

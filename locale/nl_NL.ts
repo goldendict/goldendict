@@ -161,42 +161,42 @@
         <translation>Inspecteren</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="956"/>
+        <location filename="../articleview.cc" line="959"/>
         <source>Resource</source>
         <translation>Bron</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="961"/>
+        <location filename="../articleview.cc" line="964"/>
         <source>Audio</source>
         <translation>Geluid</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="966"/>
+        <location filename="../articleview.cc" line="969"/>
         <source>TTS Voice</source>
         <translation>TTS Stem</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Picture</source>
         <translation>Afbeelding</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="978"/>
+        <location filename="../articleview.cc" line="981"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="987"/>
+        <location filename="../articleview.cc" line="990"/>
         <source>Video: %1</source>
         <translation>Video: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1007"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definitie uit woordenboek &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1008"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition: %1</source>
         <translation>Definitie: %1</translation>
     </message>
@@ -205,39 +205,39 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1229"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>De bron waarnaar wordt verwezen bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1269"/>
+        <location filename="../articleview.cc" line="1277"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Dit programma voor afspelen van geluiden bestaat niet.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1189"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>ERROR: %1</source>
         <translation>FOUT: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1779"/>
+        <location filename="../articleview.cc" line="1787"/>
         <source>Save sound</source>
         <translation>Geluid opslaan</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1781"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Geluidsbestanden (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Alle bestanden (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1794"/>
+        <location filename="../articleview.cc" line="1802"/>
         <source>Save image</source>
         <translation>Afbeelding opslaan</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1796"/>
+        <location filename="../articleview.cc" line="1804"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Afbeeldingsbestanden (*.bmp *.jpg *.png *.tif);;Alle bestanden (*.*)</translation>
     </message>
@@ -246,53 +246,53 @@
         <translation type="obsolete">Fout bij opslaan bron:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1535"/>
+        <location filename="../articleview.cc" line="1543"/>
         <source>&amp;Open Link</source>
         <translation>Koppeling &amp;openen</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Koppeling openen in nieuw&amp;tabblad</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1548"/>
+        <location filename="../articleview.cc" line="1556"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Koppeling openen in &amp;externe browser</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1590"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Zoeken naar &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Zoeken naar &quot;%1&quot; in een &amp;nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1603"/>
+        <location filename="../articleview.cc" line="1611"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Verzend &quot;%1&quot; naar zoekveld</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1609"/>
-        <location filename="../articleview.cc" line="1645"/>
+        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1653"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>Voeg &quot;%1&quot; &amp;toe aan geschiedenis</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Zoeken naar &quot;%1&quot; in %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Zoeken naar &quot;%1&quot; in %2 in een &amp;nieuw tabblad</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1934"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>WAARSCHUWING:FFmpeg audiospeler: %1</translation>
     </message>
@@ -313,37 +313,37 @@
         <translation type="obsolete">Bass bibliotheek kan dit geluid niet afspelen.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1868"/>
+        <location filename="../articleview.cc" line="1876"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Kan geen mediaspeler starten om het geluidsbestand af te spelen: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1886"/>
+        <location filename="../articleview.cc" line="1893"/>
         <source>Failed to create temporary file.</source>
         <translation>Tijdelijk bestand kan niet worden aangemaakt.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1897"/>
+        <location filename="../articleview.cc" line="1904"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Kan bronbestand niet automatisch openen, probeer het handmatig te openen: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>The referenced resource failed to download.</source>
         <translation>Kan de bron waarnaar wordt verwezen niet downloaden.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1563"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save &amp;image...</source>
         <translation>&amp;Afbeelding opslaan...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save s&amp;ound...</source>
         <translation>&amp;Geluid opslaan...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: %1</source>
         <translation>WAARSCHUWING: %1</translation>
     </message>
@@ -2462,7 +2462,7 @@ traditionele en hedendaagse spelling in het cyrillisch)</translation>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="345"/>
+        <location filename="../main.cc" line="349"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Fout in configuratiebestand. Doorgaan met standaardinstellingen?</translation>
     </message>
@@ -4110,6 +4110,20 @@ gevraagd een downloadpagina te openen.</translation>
         <translation>Fout bij decoderen artikel</translation>
     </message>
     <message>
+        <location filename="../aard.cc" line="561"/>
+        <location filename="../bgl.cc" line="396"/>
+        <location filename="../sdict.cc" line="678"/>
+        <location filename="../stardict.cc" line="914"/>
+        <source>Copyright: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aard.cc" line="565"/>
+        <location filename="../sdict.cc" line="694"/>
+        <source>Version: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() mislukt.</translation>
@@ -4194,6 +4208,34 @@ gevraagd een downloadpagina te openen.</translation>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() mislukt.</translation>
     </message>
+    <message>
+        <location filename="../bgl.cc" line="403"/>
+        <location filename="../gls.cc" line="619"/>
+        <location filename="../stardict.cc" line="922"/>
+        <source>Author: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../bgl.cc" line="410"/>
+        <location filename="../stardict.cc" line="930"/>
+        <source>E-mail: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sdict.cc" line="646"/>
+        <source>Title: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="938"/>
+        <source>Website: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="946"/>
+        <source>Date: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
@@ -4216,18 +4258,18 @@ gevraagd een downloadpagina te openen.</translation>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>ERROR: %1</source>
         <translation>FOUT: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2790"/>
         <source>Resource saving error: </source>
         <translation>Fout bij opslaan bron:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>The referenced resource failed to download.</source>
         <translation>Kan de bron waarnaar wordt verwezen niet downloaden.</translation>
     </message>

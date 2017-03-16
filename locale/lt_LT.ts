@@ -166,32 +166,32 @@
         <translation>Tyrinėti</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="956"/>
+        <location filename="../articleview.cc" line="959"/>
         <source>Resource</source>
         <translation>Šaltinis</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="961"/>
+        <location filename="../articleview.cc" line="964"/>
         <source>Audio</source>
         <translation>Garsas</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="966"/>
+        <location filename="../articleview.cc" line="969"/>
         <source>TTS Voice</source>
         <translation>TTS balsas</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Picture</source>
         <translation>Paveikslėlis</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1007"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>„%1“ žodyne esantis apibrėžimas: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1008"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition: %1</source>
         <translation>Apibrėžimas: %1</translation>
     </message>
@@ -200,100 +200,100 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1229"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Nurodyto šaltinio nėra.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1269"/>
+        <location filename="../articleview.cc" line="1277"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Nėra nurodytos garso programos.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1189"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>ERROR: %1</source>
         <translation>Klaida: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1779"/>
+        <location filename="../articleview.cc" line="1787"/>
         <source>Save sound</source>
         <translation>Įrašyti garsą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1781"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Garsai (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Visos rinkmenos (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1794"/>
+        <location filename="../articleview.cc" line="1802"/>
         <source>Save image</source>
         <translation>Įrašyti paveikslą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1796"/>
+        <location filename="../articleview.cc" line="1804"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Paveikslai (*.bmp *.jpg *.png *.tif);;Visi failai (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1535"/>
+        <location filename="../articleview.cc" line="1543"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Atverti nuorodą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="978"/>
+        <location filename="../articleview.cc" line="981"/>
         <source>Video</source>
         <translation>Vaizdo klipas</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="987"/>
+        <location filename="../articleview.cc" line="990"/>
         <source>Video: %1</source>
         <translation>Vaizdo klipas: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Atverti nuorodą naujoje &amp;kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1548"/>
+        <location filename="../articleview.cc" line="1556"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Atv&amp;erti nuorodą naršyklėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1590"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Ieškoti „%1“</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Ieškoti „%1“ &amp;naujoje kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1603"/>
+        <location filename="../articleview.cc" line="1611"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>„%1“ siųsti į įvedimo eilutę</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1609"/>
-        <location filename="../articleview.cc" line="1645"/>
+        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1653"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>žodį „%1“ į&amp;traukti į žurnalą</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Ieškoti „%1“ grupėje %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Ieškoti „%1“ grupėje %2 &amp;naujoje kortelėje</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1934"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>Įspėjimas: FFmpeg garso grutuvė: %1</translation>
     </message>
@@ -314,37 +314,37 @@
         <translation type="obsolete">„Bass“ biblioteka negali groti šio garso.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1868"/>
+        <location filename="../articleview.cc" line="1876"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Nepavyko paleisti grotuvo garso failui atkurti: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1886"/>
+        <location filename="../articleview.cc" line="1893"/>
         <source>Failed to create temporary file.</source>
         <translation>Nepavyko sukurti laikinojo failo.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1897"/>
+        <location filename="../articleview.cc" line="1904"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Nepavyko automatiškai atverti šaltinio failo, mėginkite rankiniu būdu: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nepavyko parsiųsti nurodytų šaltinių.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1563"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save &amp;image...</source>
         <translation>Įrašti pa&amp;veikslą...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save s&amp;ound...</source>
         <translation>Įrašyti g&amp;arsą...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: %1</source>
         <translation>ĮSPĖJIMAS: %1</translation>
     </message>
@@ -2468,7 +2468,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="345"/>
+        <location filename="../main.cc" line="349"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Klaida konfgūracijoje. Tęsti naudojant numatytąsias nuostatas?</translation>
     </message>
@@ -4173,6 +4173,20 @@ ir pasiūlys atverti parsisiuntimo puslapį.
         <translation>Straipsnio dekodavimo klaida</translation>
     </message>
     <message>
+        <location filename="../aard.cc" line="561"/>
+        <location filename="../bgl.cc" line="396"/>
+        <location filename="../sdict.cc" line="678"/>
+        <location filename="../stardict.cc" line="914"/>
+        <source>Copyright: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aard.cc" line="565"/>
+        <location filename="../sdict.cc" line="694"/>
+        <source>Version: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() klaida.</translation>
@@ -4257,6 +4271,34 @@ ir pasiūlys atverti parsisiuntimo puslapį.
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() klaida.</translation>
     </message>
+    <message>
+        <location filename="../bgl.cc" line="403"/>
+        <location filename="../gls.cc" line="619"/>
+        <location filename="../stardict.cc" line="922"/>
+        <source>Author: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../bgl.cc" line="410"/>
+        <location filename="../stardict.cc" line="930"/>
+        <source>E-mail: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sdict.cc" line="646"/>
+        <source>Title: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="938"/>
+        <source>Website: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="946"/>
+        <source>Date: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
@@ -4279,18 +4321,18 @@ ir pasiūlys atverti parsisiuntimo puslapį.
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>ERROR: %1</source>
         <translation>Klaida: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2790"/>
         <source>Resource saving error: </source>
         <translation>Šaltinių įrašymo klaida: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>The referenced resource failed to download.</source>
         <translation>Nepavyko parsiųsti nurodytų šaltinių.</translation>
     </message>
