@@ -616,7 +616,9 @@ QString const& GlsDictionary::getDescription()
     GlsScanner scanner( getDictionaryFilenames()[ 0 ] );
     string str = Utf8::encode( scanner.getDictionaryAuthor() );
     if( !str.empty() )
-      dictionaryDescription = QString::fromLatin1( "Author: " ) + QString::fromUtf8( str.c_str() ) + "\n\n";
+      dictionaryDescription = QString( QObject::tr( "Author: %1%2" ) )
+                              .arg( QString::fromUtf8( str.c_str() ) )
+                              .arg( "\n\n" );
     str = Utf8::encode( scanner.getDictionaryDescription() );
     if( !str.empty() )
     {

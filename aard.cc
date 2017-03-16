@@ -558,11 +558,11 @@ QString const& AardDictionary::getDescription()
     {
         map< string, string >::const_iterator iter = meta.find( "copyright" );
         if( iter != meta.end() )
-          dictionaryDescription = "Copyright: " + QString::fromUtf8( iter->second.c_str() ) + "\n\n";
+          dictionaryDescription = QString( QObject::tr( "Copyright: %1%2" ) ).arg( QString::fromUtf8( iter->second.c_str() ) ).arg( "\n\n" );
 
         iter = meta.find( "version" );
         if( iter != meta.end() )
-          dictionaryDescription = "Version: " + QString::fromUtf8( iter->second.c_str() ) + "\n\n";
+          dictionaryDescription = QString( QObject::tr( "Version: %1%2" ) ).arg( QString::fromUtf8( iter->second.c_str() ) ).arg( "\n\n" );
 
         iter = meta.find( "description" );
         if( iter != meta.end() )
