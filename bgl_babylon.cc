@@ -391,14 +391,10 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
         if( block.type == 11 )
         {
           pos = 1;
-          len = 0;
           if( pos + 4 > block.length )
             break;
-          for( int i = 0; i < 4; i++ )
-          {
-            len = len << 8;
-            len |= (unsigned char)block.data[ pos++ ];
-          }
+          len = qFromBigEndian( *reinterpret_cast< quint32 * >( block.data + pos ) );
+          pos += 4;
         }
         else
         {
@@ -424,23 +420,16 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           if( pos + 4 >= block.length )
             break;
 
-          alts_num = 0;
-          for( int i = 0; i < 4; i++ )
-          {
-            alts_num = alts_num << 8;
-            alts_num |= (unsigned char)block.data[ pos++ ];
-          }
+          alts_num = qFromBigEndian( *reinterpret_cast< quint32 * >( block.data + pos ) );
+          pos += 4;
 
           for( unsigned j = 0; j < alts_num; j++ )
           {
-            len = 0;
             if( pos + 4 > block.length )
               break;
-            for( int i = 0; i < 4; i++ )
-            {
-              len = len << 8;
-              len |= (unsigned char)block.data[ pos++ ];
-            }
+            len = qFromBigEndian( *reinterpret_cast< quint32 * >( block.data + pos ) );
+            pos += 4;
+
             if( pos + len >= block.length )
               break;
             alternate.reserve( len );
@@ -460,19 +449,15 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
         if( block.type == 11 )
         {
-          len = 0;
           if( pos + 4 > block.length )
             break;
-          for( int i = 0; i < 4; i++ )
-          {
-            len = len << 8;
-            len |= (unsigned char)block.data[ pos++ ];
-          }
+          len = qFromBigEndian( *reinterpret_cast< quint32 * >( block.data + pos ) );
+          pos += 4;
         }
         else
         {
-          len = (unsigned char)block.data[pos++] << 8;
-          len |= (unsigned char)block.data[pos++];
+          len = qFromBigEndian( *reinterpret_cast< quint16 * >( block.data + pos ) );
+          pos += 2;
         }
 
         if( pos + len > block.length )
@@ -533,9 +518,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
                len - a >= 3 )
           {
             // 2-byte sized displayed headword
-            unsigned length = (unsigned char)block.data[ pos + 1 ];
-            length <<= 8;
-            length += (unsigned char)block.data[ pos + 2 ];
+            unsigned length = qFromBigEndian( *reinterpret_cast< quint16 * >( block.data + pos + 1 ) );
 
             if ( length > len - a - 3 )
             {
@@ -584,9 +567,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
                     (unsigned char)block.data[pos + 1 ] == 0x1B )
           {
             // 2-byte-sized transcription
-            unsigned length = (unsigned char)block.data[pos + 2 ];
-            length <<= 8;
-            length += (unsigned char)block.data[pos + 3 ];
+            unsigned length = qFromBigEndian( *reinterpret_cast< quint16 * >( block.data + pos + 2 ) );
 
             if ( length > len - a - 4)
             {
