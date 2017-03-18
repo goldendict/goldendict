@@ -79,7 +79,7 @@ win32 {
             LIBS += -L$${PWD}/winlibs/lib
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-	
+
 	isEmpty(HUNSPELL_LIB) {
           CONFIG(gcc48) {
             LIBS += -lhunspell-1.3.2
@@ -275,6 +275,7 @@ HEADERS += folding.hh \
     instances.hh \
     article_maker.hh \
     scanpopup.hh \
+    scanflag.hh \
     articleview.hh \
     externalviewer.hh \
     wordfinder.hh \
@@ -364,6 +365,7 @@ FORMS += groups.ui \
     initializing.ui \
     groupselectorwidget.ui \
     scanpopup.ui \
+    scanflag.ui \
     articleview.ui \
     preferences.ui \
     about.ui \
@@ -403,6 +405,7 @@ SOURCES += folding.cc \
     instances.cc \
     article_maker.cc \
     scanpopup.cc \
+    scanflag.cc \
     articleview.cc \
     externalviewer.cc \
     wordfinder.cc \

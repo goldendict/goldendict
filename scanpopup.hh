@@ -15,6 +15,7 @@
 #include "history.hh"
 #include "dictionarybar.hh"
 #include "mainstatusbar.hh"
+#include "scanflag.hh"
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
@@ -68,6 +69,8 @@ signals:
   /// Put translated word into history
   void sendWordToHistory( QString const & word );
 
+  void showScanFlag( bool forcePopup );
+
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab
   bool isGoldenDictWindow( HWND hwnd );
@@ -84,6 +87,8 @@ public slots:
   void editGroupRequested();
 
   void setGroupByName( QString const & name );
+
+  void showEngagePopup();
 
 private:
 
@@ -115,6 +120,8 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
+
+  ScanFlag * scanFlag;
 
   bool mouseEnteredOnce;
   bool mouseIntercepted;
