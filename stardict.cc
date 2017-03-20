@@ -351,7 +351,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
 
       // Handle links to articles
 
-      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](?:bword://)?([^'\"]+)['\"]" );
+      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]" );
       linksReg.setMinimal( true );
 
       int pos = 0;
@@ -361,7 +361,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
         if( pos < 0 )
           break;
 
-        QString link = linksReg.cap( 2 );
+        QString link = linksReg.cap( 3 );
         if( link.indexOf( ':' ) < 0 )
         {
           QString newLink;
