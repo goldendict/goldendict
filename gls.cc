@@ -507,7 +507,7 @@ private:
 
   /// Loads the article
   void loadArticleText(  uint32_t address,
-                         list< string > & headwords,
+                         vector< string > & headwords,
                          string & articleText );
 
   /// Process resource links (images, audios, etc)
@@ -677,7 +677,7 @@ void GlsDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 }
 
 void GlsDictionary::loadArticleText( uint32_t address,
-                                     list< string > & headwords,
+                                     vector< string > & headwords,
                                      string & articleText )
 {
   vector< char > chunk;
@@ -764,7 +764,7 @@ void GlsDictionary::loadArticle( uint32_t address,
                                  string & articleText )
 {
   string articleBody;
-  list< string > headwords;
+  vector< string > headwords;
   loadArticleText( address, headwords, articleBody );
 
   QString article = QString::fromLatin1( "<div class=\"glsdict\">" );
@@ -774,6 +774,17 @@ void GlsDictionary::loadArticle( uint32_t address,
     article += "<div class=\"glsdict_headwords\"";
     if( isFromLanguageRTL() )
       article += " dir=\"rtl\"";
+    if( headwords.size() > 1 )
+    {
+      QString altHeadwords;
+      for( vector< string >::size_type i = 1; i < headwords.size(); i++ )
+      {
+        if( i > 1 )
+          altHeadwords += ", ";
+        altHeadwords += QString::fromUtf8( headwords[ i ].c_str(), headwords[ i ].size() );
+      }
+      article += " title=\"" + altHeadwords + "\"";
+    }
     article += ">";
 
     headword = headwords.front();
@@ -851,7 +862,7 @@ void GlsDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 {
   try
   {
-    list< string > headwords;
+    vector< string > headwords;
     string articleStr;
     loadArticleText( articleAddress, headwords, articleStr );
 
@@ -953,7 +964,7 @@ void GlsHeadwordsRequest::run()
       }
 
       string articleText;
-      list< string > headwords;
+      vector< string > headwords;
 
       dict.loadArticleText( chain[ x ].articleOffset,
                             headwords, articleText );
