@@ -41,6 +41,7 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
     QUrl redirectUrl = possibleRedirectUrl.toUrl();
     if( !redirectUrl.isEmpty() )
     {
+      disconnect( reply, 0, 0, 0 );
       reply->deleteLater();
 
       if( ++redirectCount > MAX_REDIRECTS )
@@ -73,6 +74,7 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
   else
     setErrorString( r->errorString() );
 
+  disconnect( r, 0, 0, 0 );
   r->deleteLater();
   reply = NULL;
 

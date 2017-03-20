@@ -2882,7 +2882,10 @@ void MainWindow::prepareNewReleaseChecks()
 void MainWindow::checkForNewRelease()
 {
   if( latestReleaseReply )
+  {
+    disconnect( latestReleaseReply, 0, 0, 0 );
     latestReleaseReply->deleteLater();
+  }
   latestReleaseReply = 0;
 
   QNetworkRequest req(
@@ -2930,6 +2933,7 @@ void MainWindow::latestReleaseReplyReady()
     }
   }
 
+  disconnect( latestReleaseReply, 0, 0, 0 );
   latestReleaseReply->deleteLater();
   latestReleaseReply = 0;
 

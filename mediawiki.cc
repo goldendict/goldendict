@@ -457,6 +457,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
     else
       setErrorString( netReply->errorString() );
 
+    disconnect( netReply, 0, 0, 0 );
     netReply->deleteLater();
   }
 
