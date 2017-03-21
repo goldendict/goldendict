@@ -5,6 +5,14 @@
 #define __ARTICLE_NETMGR_HH_INCLUDED__
 
 #include <QtNetwork>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+#include <QWebSecurityOrigin>
+#include <QSet>
+#include <QMap>
+#include <QPair>
+#endif
+
 #include "dictionary.hh"
 #include "article_maker.hh"
 
@@ -13,13 +21,89 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+
+// White lists for QWebSecurityOrigin
+struct SecurityWhiteList
+{
+  QWebSecurityOrigin * origin;
+  QString originUri;
+  QSet< QPair< QString, QString > > hostsToAccess;
+
+  SecurityWhiteList() :
+    origin( 0 )
+  {}
+
+  ~SecurityWhiteList()
+  {
+    swlDelete();
+  }
+  SecurityWhiteList( SecurityWhiteList const & swl ) :
+    origin( 0 )
+  {
+    swlCopy( swl );
+  }
+
+  SecurityWhiteList & operator=( SecurityWhiteList const & swl )
+  {
+    swlDelete();
+    swlCopy( swl );
+    return *this;
+  }
+
+  QWebSecurityOrigin * setOrigin( QUrl const & url )
+  {
+    swlDelete();
+    originUri = url.toString( QUrl::FullyDecoded );
+    origin = new QWebSecurityOrigin( url );
+    return origin;
+  }
+
+private:
+
+  void swlCopy( SecurityWhiteList const & swl )
+  {
+    if( swl.origin )
+    {
+      hostsToAccess = swl.hostsToAccess;
+      originUri = swl.originUri;
+      origin = new QWebSecurityOrigin( QUrl( originUri ) );
+
+      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
+           it != hostsToAccess.end(); ++it )
+        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
+    }
+  }
+
+  void swlDelete()
+  {
+    if( origin )
+    {
+      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
+           it != hostsToAccess.end(); ++it )
+        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
+
+      delete origin;
+      origin = 0;
+    }
+    hostsToAccess.clear();
+    originUri.clear();
+  }
+};
+
+  typedef QMap< QString, SecurityWhiteList > Origins;
+
+#endif
+
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-
+#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+  Origins allOrigins;
+#endif
 public:
 
   ArticleNetworkAccessManager( QObject * parent,

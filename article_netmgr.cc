@@ -69,6 +69,40 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+    // Workaround of same-origin policy
+    if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
+        && req.hasRawHeader( "Referer" ) )
+    {
+      QByteArray referer = req.rawHeader( "Referer" );
+      QUrl refererUrl = QUrl::fromEncoded( referer );
+
+      if( refererUrl.scheme().startsWith( "http") || refererUrl.scheme() == "ftp" )
+      {
+        // Only for pages from network resources
+        if ( !req.url().host().endsWith( refererUrl.host() ) )
+        {
+          QUrl frameUrl;
+          frameUrl.setScheme( refererUrl.scheme() );
+          frameUrl.setHost( refererUrl.host() );
+          QString frameStr = frameUrl.toString( QUrl::FullyDecoded );
+
+          SecurityWhiteList & value = allOrigins[ frameStr ];
+          if( !value.origin )
+            value.setOrigin( frameUrl );
+
+          QPair< QString, QString > target( req.url().scheme(), req.url().host() );
+          if( value.hostsToAccess.find( target ) == value.hostsToAccess.end() )
+          {
+            value.hostsToAccess.insert( target );
+            value.origin->addAccessWhitelistEntry( target.first, target.second,
+                                                   QWebSecurityOrigin::AllowSubdomains );
+          }
+        }
+      }
+    }
+#endif
+
     QString contentType;
 
     sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );

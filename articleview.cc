@@ -226,6 +226,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
+  QWebSettings * settings = ui.definition->page()->settings();
+  settings->setAttribute( QWebSettings::LocalContentCanAccessRemoteUrls, true );
+  settings->setAttribute( QWebSettings::LocalContentCanAccessFileUrls, true );
+
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
