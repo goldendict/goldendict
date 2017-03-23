@@ -6,7 +6,7 @@
 
 #include <QtNetwork>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+#if QT_VERSION >= 0x050200  // Qt 5.2+
 #include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
@@ -21,7 +21,7 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+#if QT_VERSION >= 0x050200  // Qt 5.2+
 
 // White lists for QWebSecurityOrigin
 struct SecurityWhiteList
@@ -35,64 +35,92 @@ struct SecurityWhiteList
   {}
 
   ~SecurityWhiteList()
-  {
-    swlDelete();
-  }
+  { swlDelete(); }
+
   SecurityWhiteList( SecurityWhiteList const & swl ) :
     origin( 0 )
-  {
-    swlCopy( swl );
-  }
+  { swlCopy( swl ); }
 
-  SecurityWhiteList & operator=( SecurityWhiteList const & swl )
-  {
-    swlDelete();
-    swlCopy( swl );
-    return *this;
-  }
-
-  QWebSecurityOrigin * setOrigin( QUrl const & url )
-  {
-    swlDelete();
-    originUri = url.toString( QUrl::FullyDecoded );
-    origin = new QWebSecurityOrigin( url );
-    return origin;
-  }
+  SecurityWhiteList & operator=( SecurityWhiteList const & swl );
+  QWebSecurityOrigin * setOrigin( QUrl const & url );
 
 private:
-
-  void swlCopy( SecurityWhiteList const & swl )
-  {
-    if( swl.origin )
-    {
-      hostsToAccess = swl.hostsToAccess;
-      originUri = swl.originUri;
-      origin = new QWebSecurityOrigin( QUrl( originUri ) );
-
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-    }
-  }
-
-  void swlDelete()
-  {
-    if( origin )
-    {
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-
-      delete origin;
-      origin = 0;
-    }
-    hostsToAccess.clear();
-    originUri.clear();
-  }
+  void swlCopy( SecurityWhiteList const & swl );
+  void swlDelete();
 };
 
-  typedef QMap< QString, SecurityWhiteList > Origins;
+typedef QMap< QString, SecurityWhiteList > Origins;
 
+// Proxy class for QNetworkReply to remove X-Frame-Options header
+// It allow to show websites in <iframe> tag like Qt 4.x
+
+class AllowFrameReply : public QNetworkReply
+{
+  Q_OBJECT
+private:
+  QNetworkReply * baseReply;
+
+  AllowFrameReply();
+  AllowFrameReply( AllowFrameReply const & );
+
+public:
+  explicit AllowFrameReply( QNetworkReply * _reply );
+  ~AllowFrameReply()
+  { delete baseReply; }
+
+  // QNetworkReply virtual functions
+  void setReadBufferSize( qint64 size )
+  { baseReply->setReadBufferSize( size ); }
+  void close()
+  { baseReply->close(); }
+
+  // QIODevice virtual functions
+  bool atEnd() const
+  { return baseReply->atEnd(); }
+  qint64 bytesAvailable() const
+  { return baseReply->bytesAvailable(); }
+  qint64 bytesToWrite() const
+  { return baseReply->bytesToWrite(); }
+  bool canReadLine() const
+  { return baseReply->canReadLine(); }
+  bool isSequential() const
+  { return baseReply->isSequential(); }
+  bool waitForReadyRead( int msecs )
+  { return baseReply->waitForReadyRead( msecs ); }
+  bool waitForBytesWritten( int msecs )
+  { return baseReply->waitForBytesWritten( msecs ); }
+  bool reset()
+  { return baseReply->reset(); }
+
+public slots:
+
+  // Own AllowFrameReply slots
+  void applyMetaData();
+  void applyError( QNetworkReply::NetworkError code );
+
+  // Redirect QNetworkReply slots
+  virtual void abort()
+  { baseReply->abort(); }
+  virtual void ignoreSslErrors()
+  { baseReply->ignoreSslErrors(); }
+
+protected:
+  // QNetworkReply virtual functions
+  void ignoreSslErrorsImplementation( const QList< QSslError > & errors )
+  { baseReply->ignoreSslErrors( errors ); }
+  void setSslConfigurationImplementation( const QSslConfiguration & configuration )
+  { baseReply->setSslConfiguration( configuration ); }
+  void sslConfigurationImplementation( QSslConfiguration & configuration ) const
+  { configuration = baseReply->sslConfiguration(); }
+
+  // QIODevice virtual functions
+  qint64 readData( char * data, qint64 maxSize )
+  { return baseReply->read( data, maxSize ); }
+  qint64 readLineData( char * data, qint64 maxSize )
+  { return baseReply->readLine( data, maxSize ); }
+  qint64 writeData( const char * data, qint64 maxSize )
+  { return baseReply->write( data, maxSize ); }
+};
 #endif
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
@@ -101,7 +129,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+#if QT_VERSION >= 0x050200  // Qt 5.2+
   Origins allOrigins;
 #endif
 public:

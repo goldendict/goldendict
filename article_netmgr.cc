@@ -16,6 +16,165 @@
 
 using std::string;
 
+#if QT_VERSION >= 0x050200 // Qt 5.2+
+
+  // SecurityWhiteList
+
+  SecurityWhiteList & SecurityWhiteList::operator=( SecurityWhiteList const & swl )
+  {
+    swlDelete();
+    swlCopy( swl );
+    return *this;
+  }
+
+  QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
+  {
+    swlDelete();
+    originUri = url.toString( QUrl::FullyDecoded );
+    origin = new QWebSecurityOrigin( url );
+    return origin;
+  }
+
+  void SecurityWhiteList::swlCopy( SecurityWhiteList const & swl )
+  {
+    if( swl.origin )
+    {
+      hostsToAccess = swl.hostsToAccess;
+      originUri = swl.originUri;
+      origin = new QWebSecurityOrigin( QUrl( originUri ) );
+
+      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
+           it != hostsToAccess.end(); ++it )
+        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
+    }
+  }
+
+  void SecurityWhiteList::swlDelete()
+  {
+    if( origin )
+    {
+      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
+           it != hostsToAccess.end(); ++it )
+        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
+
+      delete origin;
+      origin = 0;
+    }
+    hostsToAccess.clear();
+    originUri.clear();
+  }
+
+  // AllowFrameReply
+
+  AllowFrameReply::AllowFrameReply( QNetworkReply * _reply ) :
+    baseReply( _reply )
+  {
+    // Set base data
+
+    setOperation( baseReply->operation() );
+    setRequest( baseReply->request() );
+    setUrl( baseReply->url() );
+
+    // Signals to own slots
+
+    connect( baseReply, SIGNAL( metaDataChanged() ), this, SLOT( applyMetaData() ) );
+
+    connect( baseReply, SIGNAL( error( QNetworkReply::NetworkError) ),
+             this, SLOT( applyError( QNetworkReply::NetworkError ) ) );
+
+    // Redirect QNetworkReply signals
+
+    connect( baseReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
+             this, SIGNAL( downloadProgress( qint64, qint64 ) ) );
+
+    connect( baseReply, SIGNAL( encrypted() ), this, SIGNAL( encrypted() ) );
+
+    connect( baseReply, SIGNAL( finished() ), this, SIGNAL( finished() ) );
+
+    connect( baseReply, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ),
+             this, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ) );
+
+    connect( baseReply, SIGNAL( redirected( const QUrl & ) ), this, SIGNAL( redirected( const QUrl & ) ) );
+
+    connect( baseReply, SIGNAL( sslErrors( const QList< QSslError > & ) ),
+             this, SIGNAL( sslErrors( const QList< QSslError > & ) ) );
+
+    connect( baseReply, SIGNAL( uploadProgress( qint64, qint64 ) ),
+             this, SIGNAL( uploadProgress( qint64, qint64 ) ) );
+
+    // Redirect QIODevice signals
+
+    connect( baseReply, SIGNAL( aboutToClose() ), this, SIGNAL( aboutToClose() ) );
+
+    connect( baseReply, SIGNAL( bytesWritten( qint64 ) ), this, SIGNAL( bytesWritten( qint64 ) ) );
+
+    connect( baseReply, SIGNAL( readChannelFinished() ), this, SIGNAL( readChannelFinished() ) );
+
+    connect( baseReply, SIGNAL( readyRead() ), this, SIGNAL( readyRead() ) );
+
+
+    setOpenMode( QIODevice::ReadOnly );
+  }
+
+  void AllowFrameReply::applyMetaData()
+  {
+    // Set raw headers except X-Frame-Options
+    QList< QByteArray > rawHeaders = baseReply->rawHeaderList();
+    for( QList< QByteArray >::iterator it = rawHeaders.begin(); it != rawHeaders.end(); ++it )
+    {
+      if( it->toLower() != "x-frame-options" )
+        setRawHeader( *it, baseReply->rawHeader( *it ) );
+    }
+
+    // Set known headers
+    setHeader( QNetworkRequest::ContentDispositionHeader,
+               baseReply->header( QNetworkRequest::ContentDispositionHeader ) );
+    setHeader( QNetworkRequest::ContentTypeHeader,
+               baseReply->header( QNetworkRequest::ContentTypeHeader ) );
+    setHeader( QNetworkRequest::ContentLengthHeader,
+               baseReply->header( QNetworkRequest::ContentLengthHeader ) );
+    setHeader( QNetworkRequest::LocationHeader,
+               baseReply->header( QNetworkRequest::LocationHeader ) );
+    setHeader( QNetworkRequest::LastModifiedHeader,
+               baseReply->header( QNetworkRequest::LastModifiedHeader ) );
+    setHeader( QNetworkRequest::CookieHeader,
+               baseReply->header( QNetworkRequest::CookieHeader ) );
+    setHeader( QNetworkRequest::SetCookieHeader,
+               baseReply->header( QNetworkRequest::SetCookieHeader ) );
+    setHeader( QNetworkRequest::UserAgentHeader,
+               baseReply->header( QNetworkRequest::UserAgentHeader ) );
+    setHeader( QNetworkRequest::ServerHeader,
+               baseReply->header( QNetworkRequest::ServerHeader ) );
+
+    // Set attributes
+    setAttribute( QNetworkRequest::HttpStatusCodeAttribute,
+                  baseReply->attribute( QNetworkRequest::HttpStatusCodeAttribute ) );
+    setAttribute( QNetworkRequest::HttpReasonPhraseAttribute,
+                  baseReply->attribute( QNetworkRequest::HttpReasonPhraseAttribute ) );
+    setAttribute( QNetworkRequest::RedirectionTargetAttribute,
+                  baseReply->attribute( QNetworkRequest::RedirectionTargetAttribute ) );
+    setAttribute( QNetworkRequest::ConnectionEncryptedAttribute,
+                  baseReply->attribute( QNetworkRequest::ConnectionEncryptedAttribute ) );
+    setAttribute( QNetworkRequest::SourceIsFromCacheAttribute,
+                  baseReply->attribute( QNetworkRequest::SourceIsFromCacheAttribute ) );
+    setAttribute( QNetworkRequest::HttpPipeliningWasUsedAttribute,
+                  baseReply->attribute( QNetworkRequest::HttpPipeliningWasUsedAttribute ) );
+    setAttribute( QNetworkRequest::BackgroundRequestAttribute,
+                  baseReply->attribute( QNetworkRequest::BackgroundRequestAttribute ) );
+    setAttribute( QNetworkRequest::SpdyWasUsedAttribute,
+                  baseReply->attribute( QNetworkRequest::SpdyWasUsedAttribute ) );
+
+    emit metaDataChanged();
+  }
+
+  void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
+  {
+    setError( code, baseReply->errorString() );
+    emit error( code );
+  }
+
+#endif
+
 namespace
 {
   /// Uses some heuristics to chop off the first domain name from the host name,
@@ -69,7 +228,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= QT_VERSION_CHECK(5,2,0)
+#if QT_VERSION >= 0x050200 // Qt 5.2+
     // Workaround of same-origin policy
     if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
         && req.hasRawHeader( "Referer" ) )
@@ -171,7 +330,11 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
+#if QT_VERSION >= 0x050200 // Qt 5.2+
+  return new AllowFrameReply( reply );
+#else
   return reply;
+#endif
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
