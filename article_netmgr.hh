@@ -59,6 +59,7 @@ class AllowFrameReply : public QNetworkReply
   Q_OBJECT
 private:
   QNetworkReply * baseReply;
+  QByteArray buffer;
 
   AllowFrameReply();
   AllowFrameReply( AllowFrameReply const & );
@@ -69,16 +70,14 @@ public:
   { delete baseReply; }
 
   // QNetworkReply virtual functions
-  void setReadBufferSize( qint64 size )
-  { baseReply->setReadBufferSize( size ); }
+  void setReadBufferSize( qint64 size );
   void close()
   { baseReply->close(); }
 
   // QIODevice virtual functions
+  qint64 bytesAvailable() const;
   bool atEnd() const
   { return baseReply->atEnd(); }
-  qint64 bytesAvailable() const
-  { return baseReply->bytesAvailable(); }
   qint64 bytesToWrite() const
   { return baseReply->bytesToWrite(); }
   bool canReadLine() const
@@ -97,6 +96,7 @@ public slots:
   // Own AllowFrameReply slots
   void applyMetaData();
   void applyError( QNetworkReply::NetworkError code );
+  void readDataFromBase();
 
   // Redirect QNetworkReply slots
   virtual void abort()
@@ -114,8 +114,7 @@ protected:
   { configuration = baseReply->sslConfiguration(); }
 
   // QIODevice virtual functions
-  qint64 readData( char * data, qint64 maxSize )
-  { return baseReply->read( data, maxSize ); }
+  qint64 readData( char * data, qint64 maxSize );
   qint64 readLineData( char * data, qint64 maxSize )
   { return baseReply->readLine( data, maxSize ); }
   qint64 writeData( const char * data, qint64 maxSize )

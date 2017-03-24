@@ -82,6 +82,8 @@ using std::string;
     connect( baseReply, SIGNAL( error( QNetworkReply::NetworkError) ),
              this, SLOT( applyError( QNetworkReply::NetworkError ) ) );
 
+    connect( baseReply, SIGNAL( readyRead() ), this, SLOT( readDataFromBase() ) );
+
     // Redirect QNetworkReply signals
 
     connect( baseReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
@@ -109,9 +111,6 @@ using std::string;
     connect( baseReply, SIGNAL( bytesWritten( qint64 ) ), this, SIGNAL( bytesWritten( qint64 ) ) );
 
     connect( baseReply, SIGNAL( readChannelFinished() ), this, SIGNAL( readChannelFinished() ) );
-
-    connect( baseReply, SIGNAL( readyRead() ), this, SIGNAL( readyRead() ) );
-
 
     setOpenMode( QIODevice::ReadOnly );
   }
@@ -167,10 +166,36 @@ using std::string;
     emit metaDataChanged();
   }
 
+  void AllowFrameReply::setReadBufferSize( qint64 size )
+  {
+    QNetworkReply::setReadBufferSize( size );
+    baseReply->setReadBufferSize( size );
+  }
+
+  qint64 AllowFrameReply::bytesAvailable() const
+  {
+    return buffer.size() + QNetworkReply::bytesAvailable();
+  }
+
   void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
   {
     setError( code, baseReply->errorString() );
     emit error( code );
+  }
+
+  void AllowFrameReply::readDataFromBase()
+  {
+    QByteArray data = baseReply->readAll();
+    buffer += data;
+    emit readyRead();
+  }
+
+  qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
+  {
+    qint64 size = qMin( maxSize, qint64( buffer.size() ) );
+    memcpy( data, buffer.data(), size );
+    buffer.remove( 0, size );
+    return size;
   }
 
 #endif
@@ -331,7 +356,8 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   }
 
 #if QT_VERSION >= 0x050200 // Qt 5.2+
-  return new AllowFrameReply( reply );
+  return op == QNetworkAccessManager::GetOperation
+         || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else
   return reply;
 #endif
