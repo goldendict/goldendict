@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="300"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Хуш омадед ба луғати &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Барои оғози кор бо луғат, пеш аз ҳама ба &lt;b&gt;Танзимот|Луғатҳо&lt;/b&gt; гузаред ва файлҳои луғатҳои лозимиро илова кунед, сайтҳои Wikipedia ё сайтҳои дигарро насб кунед, тартиби луғатҳоро таъин кунед ё гурӯҳҳои луғатро эҷод кунед.&lt;p&gt;Баъд аз ин шумо метавонед калимаҳоро тарҷума кунед! Шумо метавонед калимаҳоро бо истифодаи лавҳаи чапи ин равзана тарҷума кунед, ё шумо метавонед &lt;a href=&quot;Тарҷума бо равзанаи пайдошаванда&quot;&gt;калимаҳоро дар барномаҳои дигар тарҷума кунед&lt;/a&gt;. &lt;p&gt;Барои насб кардани танзимоти шахсӣ, хусусиятҳои дастрасиро дар &lt;b&gt;Танзимот|Хусусиятҳо&lt;/b&gt; истифода баред. Ҳамаи танзимоти ин барнома дорои маслиҳат мебошанд. Агар ягон мушкилӣ дошта бошед, мутмаин шавед, ки он маслиҳатҳоро хонед.&lt;p&gt;Барои маълумоти муфассал, гирифтани кӯмак, ҷавобу саволҳо, маслиҳатҳо ё ҳалли масъалаҳои дигар, шумо метавонед &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форуми луғатро&lt;/a&gt; истифода баред.&lt;p&gt;Барои гирифтани навсозиҳои барнома &lt;a href=&quot;http://goldendict.org/&quot;&gt;вебсайти луғатро&lt;/a&gt; истифода баред. &lt;p&gt;(c) 2008-2013 Константин Исаков. Иҷозатномаи GPLv3 ё навтар.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Хуш омадед ба луғати &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Барои оғози кор бо луғат, пеш аз ҳама ба &lt;b&gt;Танзимот|Луғатҳо&lt;/b&gt; гузаред ва файлҳои луғатҳои лозимиро илова кунед, сайтҳои Wikipedia ё сайтҳои дигарро насб кунед, тартиби луғатҳоро таъин кунед ё гурӯҳҳои луғатро эҷод кунед.&lt;p&gt;Баъд аз ин шумо метавонед калимаҳоро тарҷума кунед! Шумо метавонед калимаҳоро бо истифодаи лавҳаи чапи ин равзана тарҷума кунед, ё шумо метавонед &lt;a href=&quot;Тарҷума бо равзанаи пайдошаванда&quot;&gt;калимаҳоро дар барномаҳои дигар тарҷума кунед&lt;/a&gt;. &lt;p&gt;Барои насб кардани танзимоти шахсӣ, хусусиятҳои дастрасиро дар &lt;b&gt;Танзимот|Хусусиятҳо&lt;/b&gt; истифода баред. Ҳамаи танзимоти ин барнома дорои маслиҳат мебошанд. Агар ягон мушкилӣ дошта бошед, мутмаин шавед, ки он маслиҳатҳоро хонед.&lt;p&gt;Барои маълумоти муфассал, гирифтани кумак, ҷавобу саволҳо, маслиҳатҳо ё ҳалли масъалаҳои дигар, шумо метавонед &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;форуми луғатро&lt;/a&gt; истифода баред.&lt;p&gt;Барои гирифтани навсозиҳои барнома &lt;a href=&quot;http://goldendict.org/&quot;&gt;вебсайти луғатро&lt;/a&gt; истифода баред. &lt;p&gt;(c) 2008-2013 Константин Исаков. Иҷозатномаи GPLv3 ё навтар.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="316"/>
@@ -417,62 +417,62 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Қуттии гурӯҳӣ</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="23"/>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Фаъол кардани табдил байни аломатҳои хитоии оддӣ ва анъанавӣ</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="26"/>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Табдилдиҳии хитоӣ</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="35"/>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Фаъол кардани табдил аз аломатҳои оддӣ ба анъанавӣ (Варианти тайванӣ)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="38"/>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>ХО ба ХА (Варианти тайванӣ)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="45"/>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Фаъол кардани табдил аз аломатҳои оддӣ ба анъанавӣ (Варианти ҳонконгӣ)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="48"/>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>ХО ба ХА (Варианти ҳонконгӣ)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="55"/>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Фаъол кардани табдил аз аломатҳои оддӣ ба аломатҳои анъанавӣ</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="58"/>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>ХА ба ХО</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="129"/>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Табдилдиҳӣ аз хитоии оддӣ ба анъанавӣ (Варианти тайванӣ)</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="136"/>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Табдилдиҳӣ аз хитоии анъанавӣ ба оддӣ (Варианти ҳонконгӣ)</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="143"/>
         <source>Traditional to simplified Chinese conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Табдилдиҳӣ аз хитоии оддӣ ба анъанавӣ</translation>
     </message>
 </context>
 <context>
@@ -633,7 +633,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Кумак</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
@@ -784,22 +784,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="248"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Суроғаи URL: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="249"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Пойгоҳи иттилоотӣ: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="250"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Стратегияҳои ҷустуҷӯ: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="254"/>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Пойгоҳи иттилоотии сервер</translation>
     </message>
 </context>
 <context>
@@ -807,44 +807,46 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="810"/>
         <source>Enabled</source>
-        <translation type="unfinished">Фаъолшуда</translation>
+        <translation>Фаъол аст</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="812"/>
         <source>Name</source>
-        <translation type="unfinished">Ном</translation>
+        <translation>Ном</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="814"/>
         <source>Address</source>
-        <translation type="unfinished">Суроға</translation>
+        <translation>Суроға</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="816"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Пойгоҳи иттилоотӣ</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="818"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Стратегияҳо</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="820"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Нишон</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="853"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Рӯйхати пойгоҳи иттилоотӣ бо вергул ҷудошуда
+(сатри холӣ ё &quot;*&quot; ба ҳамаи пойгоҳҳои иттилоотӣ мутобиқат мекунад)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="856"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Рӯйхати стратегияҳои ҷустуҷӯ бо вергул ҷудошуда
+(сатри холӣ маънои стратегияи &quot;префикс&quot; дорад)</translation>
     </message>
 </context>
 <context>
@@ -1001,12 +1003,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="313"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳеҷ</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="357"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Аломатҳои CJK дар сатри ҷустуҷӯ ба реҷаҳои ҷустуҷӯи &quot;Калимаҳои пурра&quot; ва &quot;Матни оддӣ&quot; мувофиқат намекунад</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="366"/>
@@ -1105,7 +1107,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="235"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Кумак</translation>
     </message>
     <message>
         <source>Non-indexable:</source>
@@ -1323,47 +1325,47 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>Кумаки GoldenDict</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Саҳифаи асосӣ</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished">Ба қафо</translation>
+        <translation>Ба қафо</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished">Ба пеш</translation>
+        <translation>Ба пеш</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Бузург кардан</translation>
+        <translation>Бузург кардан</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Хурд кардан</translation>
+        <translation>Хурд кардан</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">Андозаи муқаррарӣ</translation>
+        <translation>Андозаи муқаррарӣ</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Мундариҷа</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Индекс</translation>
     </message>
 </context>
 <context>
@@ -2493,7 +2495,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="102"/>
         <source>&amp;Help</source>
-        <translation>&amp;Кӯмак</translation>
+        <translation>&amp;Кумак</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="115"/>
@@ -2580,7 +2582,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="591"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Маълумоти GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="594"/>
@@ -2920,7 +2922,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="4238"/>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Дар ҳоли таҳияи индекси ҷустуҷӯ бо матни пурра: </translation>
     </message>
     <message>
         <source>WARNING: %1</source>
@@ -3240,7 +3242,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Луғатҳои фаъол: %1, ғайрифаъол: %2</translation>
     </message>
 </context>
 <context>
@@ -3412,7 +3414,7 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Забони кумак</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -3735,12 +3737,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="1586"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Барои фаъол кардани ҷустуҷӯи мақолаҳои иловагӣ тавассути рӯйхатҳои калимаҳои муродиф
+аз луғатҳои Stardict, Babylon ва GLS, ин имконро фаъол кунед</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1590"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҷустуҷӯи иловагӣ тавассути калимаҳои муродиф</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
@@ -4144,13 +4147,13 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../sdict.cc" line="678"/>
         <location filename="../stardict.cc" line="914"/>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳуқуқи муаллиф: %1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="565"/>
         <location filename="../sdict.cc" line="694"/>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия: %1%2</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
@@ -4242,28 +4245,28 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../gls.cc" line="619"/>
         <location filename="../stardict.cc" line="922"/>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Муаллиф: %1%2</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="410"/>
         <location filename="../stardict.cc" line="930"/>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Почтаи электронӣ: %1%2</translation>
     </message>
     <message>
         <location filename="../sdict.cc" line="646"/>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Унвон: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="938"/>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Саҳифаи веб: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="946"/>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Сана: %1%2</translation>
     </message>
 </context>
 <context>
@@ -4600,12 +4603,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Серверҳои DICT</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Серверҳои DICT:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
@@ -4910,7 +4913,7 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="624"/>
         <location filename="../sources.cc" line="657"/>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Дарҷ кардани мақола ҳамчун пайванди дохили барчаспи &lt;iframe&gt;</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="633"/>
@@ -4920,7 +4923,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="635"/>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Ҳамчун пайванд</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="637"/>
