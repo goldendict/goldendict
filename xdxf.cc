@@ -1164,10 +1164,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( File::tryPossibleName( baseName + ".xdxf.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".xdxf.dz.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".XDXF.FILES.ZIP", zipFileName ) ||
-           File::tryPossibleName( baseName + ".XDXF.DZ.FILES.ZIP", zipFileName ) )
+      if ( File::tryPossibleZipName( baseName + ".xdxf.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".xdxf.dz.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".XDXF.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".XDXF.DZ.FILES.ZIP", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );

@@ -4,6 +4,7 @@
 #include "zipfile.hh"
 #include <QtEndian>
 #include <QByteArray>
+#include <QFileInfo>
 
 namespace ZipFile {
 
@@ -67,7 +68,7 @@ static CompressionMethod getCompressionMethod( quint16 compressionMethod )
   }
 }
 
-bool positionAtCentralDir( QFile & zip )
+bool positionAtCentralDir( SplitZipFile & zip )
 {
   // Find the end-of-central-directory record
 
@@ -93,6 +94,8 @@ bool positionAtCentralDir( QFile & zip )
 
   EndOfCdirRecord endOfCdirRecord;
 
+  quint32 cdir_offset;
+
   for( ; ; --lastIndex )
   {
     lastIndex = eocBuffer.lastIndexOf( endOfCdirRecordSignature, lastIndex );
@@ -106,7 +109,10 @@ bool positionAtCentralDir( QFile & zip )
 
     /// Sanitize the record by checking the offset
 
-    if ( !zip.seek( qFromLittleEndian( endOfCdirRecord.offset ) ) )
+    cdir_offset = zip.calcAbsoluteOffset( qFromLittleEndian( endOfCdirRecord.offset ),
+                                          qFromLittleEndian( endOfCdirRecord.numDiskCd ) );
+
+    if ( !zip.seek( cdir_offset ) )
       continue;
 
     quint32 signature;
@@ -120,10 +126,10 @@ bool positionAtCentralDir( QFile & zip )
 
   // Found cdir -- position the file on the first header
 
-  return zip.seek( qFromLittleEndian( endOfCdirRecord.offset ) );
+  return zip.seek( cdir_offset );
 }
 
-bool readNextEntry( QFile & zip, CentralDirEntry & entry )
+bool readNextEntry( SplitZipFile & zip, CentralDirEntry & entry )
 {
   CentralFileHeaderRecord record;
 
@@ -147,7 +153,8 @@ bool readNextEntry( QFile & zip, CentralDirEntry & entry )
                   qFromLittleEndian( record.fileCommentLength ) ) )
     return false;
 
-  entry.localHeaderOffset = qFromLittleEndian( record.offsetOfLocalHeader );
+  entry.localHeaderOffset = zip.calcAbsoluteOffset( qFromLittleEndian( record.offsetOfLocalHeader ),
+                                                    qFromLittleEndian( record.diskNumberStart ) );
   entry.compressedSize = qFromLittleEndian( record.compressedSize );
   entry.uncompressedSize = qFromLittleEndian( record.uncompressedSize );
   entry.compressionMethod = getCompressionMethod( record.compressionMethod );
@@ -156,7 +163,7 @@ bool readNextEntry( QFile & zip, CentralDirEntry & entry )
   return true;
 }
 
-bool readLocalHeader( QFile & zip, LocalFileHeader & entry )
+bool readLocalHeader( SplitZipFile & zip, LocalFileHeader & entry )
 {
   LocalFileHeaderRecord record;
 
@@ -184,6 +191,61 @@ bool readLocalHeader( QFile & zip, LocalFileHeader & entry )
   entry.compressionMethod = getCompressionMethod( record.compressionMethod );
 
   return true;
+}
+
+SplitZipFile::SplitZipFile( const QString & name )
+{
+  setFileName( name );
+}
+
+void SplitZipFile::setFileName( const QString & name )
+{
+  if( !name.toLower().endsWith( ".zip" ) )
+    return;
+
+  if( QFileInfo( name ).isFile() )
+  {
+    for( int i = 1; i < 100; i++ )
+    {
+      QString name2 = name.left( name.size() - 2 ) + QString( "%1" ).arg( i, 2, 10, QChar( '0' ) );
+      if( QFileInfo( name2 ).isFile() )
+        appendFile( name2 );
+      else
+        break;
+    }
+    appendFile( name );
+  }
+  else
+  {
+    for( int i = 1; i < 1000; i++ )
+    {
+      QString name2 = name + QString( ".%1" ).arg( i, 3, 10, QChar( '0' ) );
+      if( QFileInfo( name2 ).isFile() )
+        appendFile( name2 );
+      else
+        break;
+    }
+  }
+}
+
+QDateTime SplitZipFile::lastModified() const
+{
+  unsigned long ts = 0;
+  for( QVector< QFile * >::const_iterator i = files.begin(); i != files.end(); ++i )
+  {
+    unsigned long t = QFileInfo( (*i)->fileName() ).lastModified().toTime_t();
+    if( t > ts )
+      ts = t;
+  }
+  return QDateTime::fromTime_t( ts );
+}
+
+qint64 SplitZipFile::calcAbsoluteOffset( qint64 offset, quint16 partNo )
+{
+  if( partNo >= offsets.size() )
+    return 0;
+
+  return offsets.at( partNo ) + offset;
 }
 
 }

@@ -355,7 +355,8 @@ HEADERS += folding.hh \
     helpwindow.hh \
     slob.hh \
     ripemd.hh \
-    gls.hh
+    gls.hh \
+    splitfile.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -480,7 +481,8 @@ SOURCES += folding.cc \
     helpwindow.cc \
     slob.cc \
     ripemd.cc \
-    gls.cc
+    gls.cc \
+    splitfile.cc
 
 win32 {
     FORMS   += texttospeechsource.ui

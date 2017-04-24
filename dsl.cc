@@ -2016,10 +2016,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( File::tryPossibleName( baseName + ".dsl.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
-           File::tryPossibleName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
+      if ( File::tryPossibleZipName( baseName + ".dsl.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".dsl.dz.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".DSL.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".DSL.DZ.FILES.ZIP", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string indexFile = indicesDir + dictId;

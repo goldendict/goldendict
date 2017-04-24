@@ -25,6 +25,7 @@
 #include <QRegExp>
 
 #include "qt4x5.hh"
+#include "zipfile.hh"
 
 namespace Dictionary {
 
@@ -443,15 +444,26 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
   for( std::vector< string >::const_iterator i = dictionaryFiles.begin();
        i != dictionaryFiles.end(); ++i )
   {
-    QFileInfo fileInfo( FsEncoding::decode( i->c_str() ) );
+    QString name = FsEncoding::decode( i->c_str() );
+    QFileInfo fileInfo( name );
+    unsigned long ts;
 
     if( fileInfo.isDir() )
       continue;
 
-    if ( !fileInfo.exists() )
-      return true;
-
-    unsigned long ts = fileInfo.lastModified().toTime_t();
+    if( name.toLower().endsWith( ".zip" ) )
+    {
+      ZipFile::SplitZipFile zf( name );
+      if( !zf.exists() )
+        return true;
+      ts = zf.lastModified().toTime_t();
+    }
+    else
+    {
+      if ( !fileInfo.exists() )
+        return true;
+      ts = fileInfo.lastModified().toTime_t();
+    }
 
     if ( ts > lastModified )
       lastModified = ts;

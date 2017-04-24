@@ -1423,10 +1423,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( File::tryPossibleName( baseName + ".gls.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".gls.dz.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".GLS.FILES.ZIP", zipFileName ) ||
-           File::tryPossibleName( baseName + ".GLS.DZ.FILES.ZIP", zipFileName ) )
+      if ( File::tryPossibleZipName( baseName + ".gls.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".gls.dz.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".GLS.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".GLS.DZ.FILES.ZIP", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string indexFile = indicesDir + dictId;

@@ -26,6 +26,8 @@ DEF_EX( exAllocation, "Memory allocation error", Ex )
 
 bool tryPossibleName( std::string const & name, std::string & copyTo );
 
+bool tryPossibleZipName( std::string const & name, std::string & copyTo );
+
 void loadFromFile( std::string const & n, std::vector< char > & data );
 
 bool exists( char const * filename ) throw();

@@ -1839,9 +1839,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       string zipFileName;
       string baseName = FsEncoding::dirname( idxFileName ) + FsEncoding::separator();
 
-      if ( File::tryPossibleName( baseName + "res.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + "RES.ZIP", zipFileName ) ||
-           File::tryPossibleName( baseName + "res" + FsEncoding::separator() + "res.zip", zipFileName ) )
+      if ( File::tryPossibleZipName( baseName + "res.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + "RES.ZIP", zipFileName ) ||
+           File::tryPossibleZipName( baseName + "res" + FsEncoding::separator() + "res.zip", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
