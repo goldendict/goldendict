@@ -1586,13 +1586,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 #endif
 
   QString selectedText = ui.definition->selectedText();
+  QString text = selectedText.trimmed();
 
-  if ( selectedText.size() && selectedText.size() < 60 )
+  if ( text.size() && text.size() < 60 )
   {
     // We don't prompt for selections larger or equal to 60 chars, since
     // it ruins the menu and it's hardly a single word anyway.
 
-    QString text = ui.definition->selectedText();
     if( text.isRightToLeft() )
     {
       text.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
@@ -1633,7 +1633,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
                    QIcon();
 
       lookupSelectionGr = new QAction( icon, tr( "Look up \"%1\" in %2" ).
-                                       arg( ui.definition->selectedText() ).
+                                       arg( text ).
                                        arg( altGroup->name ), &menu );
       menu.addAction( lookupSelectionGr );
 
@@ -1641,14 +1641,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       {
         lookupSelectionNewTabGr = new QAction( QIcon( ":/icons/addtab.png" ),
                                                tr( "Look up \"%1\" in %2 in &New Tab" ).
-                                               arg( ui.definition->selectedText() ).
+                                               arg( text ).
                                                arg( altGroup->name ), &menu );
         menu.addAction( lookupSelectionNewTabGr );
       }
     }
   }
 
-  if( selectedText.isEmpty() && !cfg.preferences.storeHistory)
+  if( text.isEmpty() && !cfg.preferences.storeHistory)
   {
     QString txt = ui.definition->title();
     if( txt.size() > 60 )
