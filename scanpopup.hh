@@ -83,6 +83,8 @@ public slots:
   /// From the dictionary bar.
   void editGroupRequested();
 
+  void setGroupByName( QString const & name );
+
 private:
 
   // Translates the word from the clipboard or the clipboard selection

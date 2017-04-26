@@ -18,6 +18,7 @@
 #include "tiff.hh"
 #include "ftshelpers.hh"
 #include "htmlescape.hh"
+#include "splitfile.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -146,52 +147,35 @@ __attribute__((packed))
 
 // Class for support of split zim files
 
-class ZimFile
+class ZimFile : public SplitFile::SplitFile
 {
-  QVector< QFile * > files;
-  QVector< quint64 > offsets;
-  int currentFile;
-
 public:
 
   ZimFile();
   ZimFile( const QString & name );
   ~ZimFile();
 
-  void setFileName( const QString & name );
-  void getFilenames( vector< string > & names );
-  bool open( QFile::OpenMode mode );
-  void close();
-  bool seek( quint64 pos );
-  qint64 read(  char * data, qint64 maxSize );
-  QByteArray read( qint64 maxSize );
-  bool getChar( char * c );
-  qint64 size()
-  { return files.isEmpty() ? 0 : offsets.last() + files.last()->size(); }
+  virtual void setFileName( const QString & name );
 };
 
-ZimFile::ZimFile() :
-  currentFile( 0 )
+ZimFile::ZimFile()
 {
 }
 
-ZimFile::ZimFile( const QString & name ) :
-  currentFile( 0 )
+ZimFile::ZimFile( const QString & name )
 {
   setFileName( name );
 }
 
 ZimFile::~ZimFile()
 {
-  close();
 }
 
 void ZimFile::setFileName( const QString & name )
 {
   close();
 
-  files.append( new QFile( name ) );
-  offsets.append( 0 );
+  appendFile( name );
 
   if( name.endsWith( ".zimaa", Qt::CaseInsensitive ) )
   {
@@ -208,102 +192,13 @@ void ZimFile::setFileName( const QString & name )
         if( !QFileInfo( fname ).isFile() )
           break;
 
-        quint64 offset = offsets.last() + files.last()->size();
-
-        files.append( new QFile( fname ) );
-        offsets.append( offset );
+        appendFile( fname );
       }
 
       if( j < 26 )
         break;
     }
   }
-}
-
-void ZimFile::close()
-{
-  for( QVector< QFile * >::const_iterator i = files.begin(); i != files.end(); ++i )
-  {
-    (*i)->close();
-    delete (*i);
-  }
-
-  files.clear();
-  offsets.clear();
-
-  currentFile = 0;
-}
-
-void ZimFile::getFilenames( vector< string > &names )
-{
-  for( QVector< QFile const * >::const_iterator i = files.begin(); i != files.end(); ++i )
-    names.push_back( FsEncoding::encode( (*i)->fileName() ) );
-}
-
-bool ZimFile::open( QFile::OpenMode mode )
-{
-  for( QVector< QFile * >::iterator i = files.begin(); i != files.end(); ++i )
-    if( !(*i)->open( mode ) )
-    {
-      close();
-      return false;
-    }
-
-  return true;
-}
-
-bool ZimFile::seek( quint64 pos )
-{
-  int fileNom;
-
-  for( fileNom = 0; fileNom < offsets.size() - 1; fileNom++ )
-    if( pos < offsets.at( fileNom + 1 ) )
-      break;
-
-  pos -= offsets.at( fileNom );
-
-  currentFile = fileNom;
-  return files.at( fileNom )->seek( pos );
-}
-
-qint64 ZimFile::read( char *data, qint64 maxSize )
-{
-  quint64 bytesReaded = 0;
-  for( int i = currentFile; i < files.size(); i++ )
-  {
-    if( i != currentFile )
-      files.at( i )->seek( 0 );
-
-    qint64 ret = files.at( i )->read( data + bytesReaded, maxSize );
-    if( ret < 0 )
-      break;
-
-    bytesReaded += ret;
-    maxSize -= ret;
-
-    if( maxSize <= 0 )
-      break;
-  }
-  return bytesReaded;
-}
-
-QByteArray ZimFile::read( qint64 maxSize )
-{
-  QByteArray data;
-  data.resize( maxSize );
-
-  qint64 ret = read( data.data(), maxSize );
-
-  if( ret != maxSize )
-    data.resize( ret );
-
-  return data;
-}
-
-bool ZimFile::getChar( char *c )
-{
-  char ch;
-  return read( c ? c : &ch, 1 ) == 1;
 }
 
 // Some supporting functions

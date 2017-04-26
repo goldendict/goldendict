@@ -3255,6 +3255,15 @@ Enable this option to workaround the problem.</source>
         <source>Help language</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Turn this option on to enable extra articles search via synonym lists
+from Stardict, Babylon and GLS dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Extra search via synonyms</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -3393,6 +3402,34 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>avcodec_alloc_frame() failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>E-mail: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Website: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

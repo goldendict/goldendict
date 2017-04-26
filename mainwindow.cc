@@ -1209,7 +1209,10 @@ void MainWindow::makeDictionaries()
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -1360,6 +1363,9 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( sendWordToHistory( QString ) ),
            this, SLOT( addWordToHistory( QString ) ) );
+
+  connect( this, SIGNAL( setPopupGroupByName( QString ) ),
+           scanPopup.get(), SLOT( setGroupByName( QString ) ) );
 
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
@@ -1906,7 +1912,10 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   installHotKeys();
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -2025,7 +2034,10 @@ void MainWindow::editPreferences()
     ui.historyPaneWidget->updateHistoryCounts();
 
     for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
       dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+      dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+    }
 
     ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
 
@@ -2870,7 +2882,10 @@ void MainWindow::prepareNewReleaseChecks()
 void MainWindow::checkForNewRelease()
 {
   if( latestReleaseReply )
+  {
+    disconnect( latestReleaseReply, 0, 0, 0 );
     latestReleaseReply->deleteLater();
+  }
   latestReleaseReply = 0;
 
   QNetworkRequest req(
@@ -2918,6 +2933,7 @@ void MainWindow::latestReleaseReplyReady()
     }
   }
 
+  disconnect( latestReleaseReply, 0, 0, 0 );
   latestReleaseReply->deleteLater();
   latestReleaseReply = 0;
 
@@ -3390,7 +3406,10 @@ void MainWindow::on_rescanFiles_triggered()
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -3551,6 +3570,16 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
       scanPopup->translateWord( message.mid( 15 ) );
     else
       wordReceived( message.mid( 15 ) );
+  }
+  else
+  if( message.left( 10 ) == "setGroup: " )
+  {
+    setGroupByName( message.mid( 10 ), true );
+  }
+  else
+  if( message.left( 15 ) == "setPopupGroup: " )
+  {
+    setGroupByName( message.mid( 15 ), false );
   }
   else
     qWarning() << "Unknown message received from another instance: " << message;
@@ -4211,6 +4240,28 @@ void MainWindow::showFTSIndexingName( QString const & name )
     mainStatusBar->setBackgroundMessage( QString() );
   else
     mainStatusBar->setBackgroundMessage( tr( "Now indexing for full-text search: " ) + name );
+}
+
+void MainWindow::setGroupByName( QString const & name, bool main_window )
+{
+  if( main_window )
+  {
+    int i;
+    for( i = 0; i < groupList->count(); i++ )
+    {
+      if( groupList->itemText( i ) == name )
+      {
+        groupList->setCurrentIndex( i );
+        break;
+      }
+    }
+    if( i >= groupList->count() )
+      gdWarning( "Group \"%s\" for main window is not found\n", name.toUtf8().data() );
+  }
+  else
+  {
+    emit setPopupGroupByName( name );
+  }
 }
 
 #ifdef Q_OS_WIN32

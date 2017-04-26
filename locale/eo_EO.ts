@@ -54,12 +54,12 @@
     <message>
         <location filename="../article_maker.cc" line="245"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neniu traduko por &lt;b&gt;%1&lt;/b&gt; estis trovita en grupo &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="250"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neniu traduko estis trovita en grupo &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="298"/>
@@ -112,7 +112,7 @@
     <message>
         <location filename="../article_maker.cc" line="694"/>
         <source>From </source>
-        <translation type="unfinished"></translation>
+        <translation>El </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="699"/>
@@ -125,19 +125,19 @@
         <translation>Informpeta eraro: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="823"/>
+        <location filename="../article_maker.cc" line="822"/>
         <source>Close words: </source>
-        <translation type="unfinished"></translation>
+        <translation>Proksimaj vortoj: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="894"/>
+        <location filename="../article_maker.cc" line="893"/>
         <source>Compound expressions: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kompundaj esprimoj: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="922"/>
+        <location filename="../article_maker.cc" line="921"/>
         <source>Individual words: </source>
-        <translation type="unfinished"></translation>
+        <translation>Apartaj vortoj: </translation>
     </message>
 </context>
 <context>
@@ -145,7 +145,7 @@
     <message>
         <location filename="../articleview.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formularo</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="54"/>
@@ -182,190 +182,190 @@
     <message>
         <location filename="../articleview.ui" line="197"/>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Emfazi ĉi&amp;ujn</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="220"/>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Usklecodistinga</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="209"/>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Elekti aktualan artikolon</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="215"/>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopii kiel teksto</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="221"/>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Inspekti</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="956"/>
+        <location filename="../articleview.cc" line="959"/>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Risurco</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="961"/>
+        <location filename="../articleview.cc" line="964"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="966"/>
+        <location filename="../articleview.cc" line="969"/>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolsintezo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="971"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Picture</source>
         <translation>Bildo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="978"/>
+        <location filename="../articleview.cc" line="981"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="987"/>
+        <location filename="../articleview.cc" line="990"/>
         <source>Video: %1</source>
         <translation>Video: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1007"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Difino el vortaro &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1008"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition: %1</source>
         <translation>Difino: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1189"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1197"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>ERROR: %1</source>
         <translation>ERARO: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1229"/>
-        <location filename="../articleview.cc" line="1383"/>
+        <location filename="../articleview.cc" line="1237"/>
+        <location filename="../articleview.cc" line="1391"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1269"/>
+        <location filename="../articleview.cc" line="1277"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1535"/>
+        <location filename="../articleview.cc" line="1543"/>
         <source>&amp;Open Link</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Malfermi ligilon</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1541"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Malfermi ligilon en nova &amp;tabo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1548"/>
+        <location filename="../articleview.cc" line="1556"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Malfermi ligilon en &amp;ekstera retumilo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1563"/>
+        <location filename="../articleview.cc" line="1571"/>
         <source>Save &amp;image...</source>
         <translation>Konservi &amp;bildon...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Konservi s&amp;onon...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1590"/>
+        <location filename="../articleview.cc" line="1598"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1603"/>
+        <location filename="../articleview.cc" line="1611"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1609"/>
-        <location filename="../articleview.cc" line="1645"/>
+        <location filename="../articleview.cc" line="1617"/>
+        <location filename="../articleview.cc" line="1653"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1623"/>
+        <location filename="../articleview.cc" line="1631"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1779"/>
+        <location filename="../articleview.cc" line="1787"/>
         <source>Save sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1781"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Sondosieroj (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Ĉiuj dosieroj (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1794"/>
+        <location filename="../articleview.cc" line="1802"/>
         <source>Save image</source>
         <translation>Konservi bildon</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1796"/>
+        <location filename="../articleview.cc" line="1804"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Bildodosieroj (*.bmp *.jpg *.png *.tif);;Ĉiuj dosieroj (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1868"/>
+        <location filename="../articleview.cc" line="1876"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1886"/>
+        <location filename="../articleview.cc" line="1893"/>
         <source>Failed to create temporary file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1897"/>
+        <location filename="../articleview.cc" line="1904"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>WARNING: %1</source>
         <translation>AVERTO: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1920"/>
+        <location filename="../articleview.cc" line="1927"/>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1934"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTO: FFmpeg Audio Player: %1</translation>
     </message>
 </context>
 <context>
@@ -478,12 +478,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictgroupwidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formularo</translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="37"/>
         <source>Group icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupon bildsimbolo:</translation>
     </message>
     <message>
         <location filename="../dictgroupwidget.ui" line="85"/>
@@ -491,37 +491,37 @@ between classic and school orthography in cyrillic)</source>
         <translation>Fulmoklavo:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="42"/>
+        <location filename="../groups_widgets.cc" line="40"/>
         <source>None</source>
         <translation>Nenio</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="47"/>
+        <location filename="../groups_widgets.cc" line="45"/>
         <source>From file...</source>
-        <translation type="unfinished"></translation>
+        <translation>El dosiero...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="94"/>
+        <location filename="../groups_widgets.cc" line="92"/>
         <source>Choose a file to use as group icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="96"/>
+        <location filename="../groups_widgets.cc" line="94"/>
         <source>Images</source>
         <translation>Bildoj</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="97"/>
+        <location filename="../groups_widgets.cc" line="95"/>
         <source>All files</source>
         <translation>Ĉiuj dosieroj</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="104"/>
+        <location filename="../groups_widgets.cc" line="102"/>
         <source>Error</source>
         <translation>Eraro</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="104"/>
+        <location filename="../groups_widgets.cc" line="102"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -529,46 +529,46 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="600"/>
-        <location filename="../groups_widgets.cc" line="675"/>
-        <location filename="../groups_widgets.cc" line="849"/>
-        <location filename="../groups_widgets.cc" line="1024"/>
+        <location filename="../groups_widgets.cc" line="598"/>
+        <location filename="../groups_widgets.cc" line="673"/>
+        <location filename="../groups_widgets.cc" line="846"/>
+        <location filename="../groups_widgets.cc" line="1021"/>
         <source>Dictionaries: </source>
         <translation>Vortaroj: </translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="700"/>
+        <location filename="../groups_widgets.cc" line="698"/>
         <source>Confirmation</source>
         <translation>Konfirmo</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="701"/>
+        <location filename="../groups_widgets.cc" line="699"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="726"/>
+        <location filename="../groups_widgets.cc" line="724"/>
         <source>Unassigned</source>
         <translation>Neatribuita</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="865"/>
+        <location filename="../groups_widgets.cc" line="862"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="882"/>
+        <location filename="../groups_widgets.cc" line="879"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="900"/>
+        <location filename="../groups_widgets.cc" line="897"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="918"/>
-        <location filename="../groups_widgets.cc" line="937"/>
+        <location filename="../groups_widgets.cc" line="915"/>
+        <location filename="../groups_widgets.cc" line="934"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -593,7 +593,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Atenti usklecon</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
@@ -653,7 +653,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.cc" line="36"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Ĵokeroj</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="37"/>
@@ -696,7 +696,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="46"/>
         <source>Translates from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduki el:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="60"/>
@@ -706,7 +706,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="77"/>
         <source>Translates to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduki en:</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="91"/>
@@ -748,7 +748,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="239"/>
+        <location filename="../groups_widgets.cc" line="237"/>
         <source>%1 entries</source>
         <translation>%1 artikoloj</translation>
     </message>
@@ -933,12 +933,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="159"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Ĵokeroj</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="160"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegEsp</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="165"/>
@@ -993,12 +993,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="224"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation>XML-analizeraro: %1 at %2,%3</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="300"/>
         <source>Added %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Aldonita %1</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="303"/>
@@ -1018,7 +1018,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../forvo.cc" line="309"/>
         <source>from</source>
-        <translation type="unfinished"></translation>
+        <translation>el</translation>
     </message>
     <message>
         <location filename="../forvo.cc" line="347"/>
@@ -1037,7 +1037,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Atenti usklecon</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
@@ -1067,7 +1067,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="150"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indeksita:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="167"/>
@@ -1114,7 +1114,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formularo</translation>
     </message>
     <message>
         <location filename="../groupselectorwidget.ui" line="19"/>
@@ -1276,22 +1276,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict-helpo</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Hejmo</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Malantaŭen</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Antaŭen</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
@@ -1311,12 +1311,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Enhavo</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Indekso</translation>
     </message>
 </context>
 <context>
@@ -1334,7 +1334,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Historio:</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="219"/>
@@ -2408,7 +2408,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="270"/>
+        <location filename="../loaddictionaries.cc" line="278"/>
         <source>Error loading dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2416,7 +2416,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="243"/>
+        <location filename="../main.cc" line="349"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2457,7 +2457,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="126"/>
         <source>H&amp;istory</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Historio</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="136"/>
@@ -2467,7 +2467,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Serĉa panelo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="277"/>
@@ -2477,7 +2477,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="304"/>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Historia panelo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="338"/>
@@ -2588,7 +2588,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="468"/>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reskani dosierojn</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="471"/>
@@ -2617,7 +2617,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3592"/>
+        <location filename="../mainwindow.cc" line="3615"/>
         <source>&amp;Show</source>
         <translation>&amp;Montri</translation>
     </message>
@@ -2711,12 +2711,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="164"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Malantaŭen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="166"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Antaŭen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="191"/>
@@ -2745,7 +2745,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="271"/>
-        <location filename="../mainwindow.cc" line="1244"/>
+        <location filename="../mainwindow.cc" line="1246"/>
         <source>Look up in:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2806,7 +2806,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="806"/>
-        <location filename="../mainwindow.cc" line="3009"/>
+        <location filename="../mainwindow.cc" line="3019"/>
         <source>Accessibility API is not enabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2817,188 +2817,188 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1232"/>
+        <location filename="../mainwindow.cc" line="1235"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 vortaroj, %2 artikoloj, %3 vortoj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1244"/>
+        <location filename="../mainwindow.cc" line="1246"/>
         <source>Look up:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1262"/>
+        <location filename="../mainwindow.cc" line="1264"/>
         <source>All</source>
         <translation>Ĉiuj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1417"/>
+        <location filename="../mainwindow.cc" line="1422"/>
         <source>Open Tabs List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1475"/>
+        <location filename="../mainwindow.cc" line="1480"/>
         <source>(untitled)</source>
         <translation>(sentitola)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1696"/>
+        <location filename="../mainwindow.cc" line="1701"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2812"/>
+        <location filename="../mainwindow.cc" line="2822"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2949"/>
+        <location filename="../mainwindow.cc" line="2959"/>
         <source>New Release Available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2950"/>
+        <location filename="../mainwindow.cc" line="2960"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2955"/>
+        <location filename="../mainwindow.cc" line="2965"/>
         <source>Download</source>
         <translation>Elŝuti</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2956"/>
+        <location filename="../mainwindow.cc" line="2966"/>
         <source>Skip This Release</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3086"/>
+        <location filename="../mainwindow.cc" line="3096"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3087"/>
+        <location filename="../mainwindow.cc" line="3097"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3185"/>
+        <location filename="../mainwindow.cc" line="3195"/>
         <source>Page Setup</source>
         <translation>Paĝo-agordoj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3186"/>
+        <location filename="../mainwindow.cc" line="3196"/>
         <source>No printer is available. Please install one first.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3204"/>
+        <location filename="../mainwindow.cc" line="3214"/>
         <source>Print Article</source>
         <translation>Presi artikolon</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3279"/>
+        <location filename="../mainwindow.cc" line="3289"/>
         <source>Article, Complete (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3280"/>
+        <location filename="../mainwindow.cc" line="3290"/>
         <source>Article, HTML Only (*.html)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3283"/>
+        <location filename="../mainwindow.cc" line="3293"/>
         <source>Save Article As</source>
         <translation>Konservi artikolon kiel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3297"/>
+        <location filename="../mainwindow.cc" line="3307"/>
         <source>Error</source>
         <translation>Eraro</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3298"/>
+        <location filename="../mainwindow.cc" line="3308"/>
         <source>Can&apos;t save article: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne eblas konservi artikolon: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3361"/>
+        <location filename="../mainwindow.cc" line="3371"/>
         <source>Saving article...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3421"/>
+        <location filename="../mainwindow.cc" line="3434"/>
         <source>The main window is set to be always on top.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3588"/>
+        <location filename="../mainwindow.cc" line="3611"/>
         <source>&amp;Hide</source>
         <translation>&amp;Kaŝi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3614"/>
+        <location filename="../mainwindow.cc" line="3637"/>
         <source>Export history to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3616"/>
-        <location filename="../mainwindow.cc" line="3678"/>
+        <location filename="../mainwindow.cc" line="3639"/>
+        <location filename="../mainwindow.cc" line="3701"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekstaj dosieroj (*.txt);;Ĉiuj dosieroj (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3655"/>
+        <location filename="../mainwindow.cc" line="3678"/>
         <source>History export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3658"/>
+        <location filename="../mainwindow.cc" line="3681"/>
         <source>Export error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3676"/>
+        <location filename="../mainwindow.cc" line="3699"/>
         <source>Import history from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3725"/>
+        <location filename="../mainwindow.cc" line="3748"/>
         <source>Import error: invalid data in file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3729"/>
+        <location filename="../mainwindow.cc" line="3752"/>
         <source>History import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3732"/>
+        <location filename="../mainwindow.cc" line="3755"/>
         <source>Import error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4006"/>
+        <location filename="../mainwindow.cc" line="4029"/>
         <source>Dictionary info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4010"/>
+        <location filename="../mainwindow.cc" line="4033"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4012"/>
+        <location filename="../mainwindow.cc" line="4035"/>
         <source>Open dictionary folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4018"/>
+        <location filename="../mainwindow.cc" line="4041"/>
         <source>Edit dictionary</source>
         <translation>Redakti vortaron</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4215"/>
+        <location filename="../mainwindow.cc" line="4238"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3021,7 +3021,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mediawiki.cc" line="325"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">XML-analizeraro: %1 at %2,%3</translation>
     </message>
 </context>
 <context>
@@ -3029,7 +3029,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mediawiki.cc" line="193"/>
         <source>XML parse error: %1 at %2,%3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">XML-analizeraro: %1 at %2,%3</translation>
     </message>
 </context>
 <context>
@@ -3060,7 +3060,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formularo</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="37"/>
@@ -3095,12 +3095,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.ui" line="129"/>
         <source>Translates from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduki el:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="136"/>
         <source>Translates to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Traduki en:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="165"/>
@@ -3120,12 +3120,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="255"/>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordigi laŭ nomo</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="257"/>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordigi laŭ lingvoj</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="268"/>
@@ -3143,12 +3143,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../sources.cc" line="1170"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Vojo</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1172"/>
         <source>Recursive</source>
-        <translation type="unfinished"></translation>
+        <translation>Rikure</translation>
     </message>
 </context>
 <context>
@@ -3676,27 +3676,27 @@ download page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1283"/>
+        <location filename="../preferences.ui" line="1297"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1300"/>
+        <location filename="../preferences.ui" line="1314"/>
         <source>articles (0 - unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1346"/>
+        <location filename="../preferences.ui" line="1353"/>
         <source>Ad&amp;vanced</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1352"/>
+        <location filename="../preferences.ui" line="1359"/>
         <source>ScanPopup extra technologies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1358"/>
+        <location filename="../preferences.ui" line="1365"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -3704,108 +3704,119 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1364"/>
+        <location filename="../preferences.ui" line="1371"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1371"/>
+        <location filename="../preferences.ui" line="1378"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1376"/>
+        <location filename="../preferences.ui" line="1383"/>
         <source>Use &amp;UIAutomation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1383"/>
+        <location filename="../preferences.ui" line="1390"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1388"/>
+        <location filename="../preferences.ui" line="1395"/>
         <source>Use &amp;GoldenDict message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1398"/>
+        <location filename="../preferences.ui" line="1405"/>
         <source>History</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1404"/>
+        <location filename="../preferences.ui" line="1411"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1407"/>
+        <location filename="../preferences.ui" line="1414"/>
         <source>Store &amp;history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1422"/>
+        <location filename="../preferences.ui" line="1429"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1425"/>
+        <location filename="../preferences.ui" line="1432"/>
         <source>Maximum history size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1462"/>
+        <location filename="../preferences.ui" line="1469"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1468"/>
+        <location filename="../preferences.ui" line="1475"/>
         <source>Save every</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1485"/>
+        <location filename="../preferences.ui" line="1492"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minutoj</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1510"/>
+        <location filename="../preferences.ui" line="1517"/>
         <source>Articles</source>
         <translation>Artikoloj</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1516"/>
+        <location filename="../preferences.ui" line="1523"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1519"/>
+        <location filename="../preferences.ui" line="1526"/>
         <source>Expand optional &amp;parts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1528"/>
+        <location filename="../preferences.ui" line="1535"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1531"/>
+        <location filename="../preferences.ui" line="1538"/>
         <source>Collapse articles more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1538"/>
+        <location filename="../preferences.ui" line="1545"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1554"/>
+        <location filename="../preferences.ui" line="1561"/>
         <source>symbols</source>
         <translation>simboloj</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1586"/>
+        <source>Turn this option on to enable extra articles search via synonym lists
+from Stardict, Babylon and GLS dictionaries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1590"/>
+        <source>Extra search via synonyms</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="58"/>
@@ -3844,12 +3855,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="552"/>
+        <location filename="../preferences.cc" line="564"/>
         <source>Changing Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="553"/>
+        <location filename="../preferences.cc" line="565"/>
         <source>Restart the program to apply the language change.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3932,7 +3943,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <name>QObject</name>
     <message>
         <location filename="../aard.cc" line="424"/>
-        <location filename="../dsl.cc" line="1681"/>
+        <location filename="../dsl.cc" line="1710"/>
         <source>Article loading error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3943,6 +3954,20 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../aard.cc" line="561"/>
+        <location filename="../bgl.cc" line="396"/>
+        <location filename="../sdict.cc" line="678"/>
+        <location filename="../stardict.cc" line="914"/>
+        <source>Copyright: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aard.cc" line="565"/>
+        <location filename="../sdict.cc" line="694"/>
+        <source>Version: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
         <source>avformat_alloc_context() failed.</source>
         <translation type="unfinished"></translation>
@@ -3950,22 +3975,22 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="149"/>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>av_malloc() fiaskis.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="158"/>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avio_alloc_context() fiaskis.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="175"/>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_open_input() fiaskis: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="182"/>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>avformat_find_stream_info() fiaskis: %1.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="197"/>
@@ -3995,7 +4020,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="296"/>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() fiaskis: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="301"/>
@@ -4025,23 +4050,51 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../ffmpegaudio.cc" line="346"/>
         <source>avcodec_alloc_frame() failed.</source>
+        <translation>avcodec_alloc_frame() fiaskis.</translation>
+    </message>
+    <message>
+        <location filename="../bgl.cc" line="403"/>
+        <location filename="../gls.cc" line="619"/>
+        <location filename="../stardict.cc" line="922"/>
+        <source>Author: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../bgl.cc" line="410"/>
+        <location filename="../stardict.cc" line="930"/>
+        <source>E-mail: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../sdict.cc" line="646"/>
+        <source>Title: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="938"/>
+        <source>Website: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../stardict.cc" line="946"/>
+        <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1034"/>
+        <location filename="../groups_widgets.cc" line="1031"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1043"/>
+        <location filename="../groups_widgets.cc" line="1040"/>
         <source>Quick Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1048"/>
+        <location filename="../groups_widgets.cc" line="1045"/>
         <source>Clear Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4049,18 +4102,18 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>ERROR: %1</source>
         <translation>ERARO: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2712"/>
+        <location filename="../articleview.cc" line="2790"/>
         <source>Resource saving error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2719"/>
+        <location filename="../articleview.cc" line="2797"/>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4096,7 +4149,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="113"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Malantaŭen</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="116"/>
@@ -4110,7 +4163,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../scanpopup.ui" line="127"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Antaŭen</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="141"/>
@@ -4155,7 +4208,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.cc" line="1276"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Vojo</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1278"/>
@@ -4274,12 +4327,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT-serviloj</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT-serviloj:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="403"/>
@@ -4443,7 +4496,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="124"/>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolsintezo</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="140"/>
@@ -4582,28 +4635,28 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../translatebox.cc" line="125"/>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallisto</translation>
     </message>
 </context>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
-        <location filename="../texttospeechsource.cc" line="234"/>
+        <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
         <translation>Ebligita</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="236"/>
+        <location filename="../texttospeechsource.cc" line="235"/>
         <source>Name</source>
         <translation>Nomo</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="238"/>
+        <location filename="../texttospeechsource.cc" line="237"/>
         <source>Id</source>
         <translation>Id</translation>
     </message>
     <message>
-        <location filename="../texttospeechsource.cc" line="240"/>
+        <location filename="../texttospeechsource.cc" line="239"/>
         <source>Icon</source>
         <translation>Bildsimbolo</translation>
     </message>
@@ -4624,7 +4677,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../sources.cc" line="635"/>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiel ligilo</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="637"/>
@@ -4653,7 +4706,7 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>WordList</name>
     <message>
-        <location filename="../wordlist.cc" line="116"/>
+        <location filename="../wordlist.cc" line="113"/>
         <source>WARNING: %1</source>
         <translation>AVERTO: %1</translation>
     </message>

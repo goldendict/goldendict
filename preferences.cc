@@ -197,6 +197,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
 
+  ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
+
   ui.maxDictsInContextMenu->setValue( p.maxDictionaryRefsInContextMenu );
 
   // Different platforms have different keys available
@@ -299,6 +301,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.allowXDXF->setChecked( !p.fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive ) );
   ui.allowZim->setChecked( !p.fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive ) );
   ui.allowEpwing->setChecked( !p.fts.disabledTypes.contains( "EPWING", Qt::CaseInsensitive ) );
+  ui.allowGls->setChecked( !p.fts.disabledTypes.contains( "GLS", Qt::CaseInsensitive ) );
 #ifndef MAKE_ZIM_SUPPORT
   ui.allowZim->hide();
   ui.allowSlob->hide();
@@ -371,6 +374,8 @@ Config::Preferences Preferences::getPreferences()
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+
+  p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 
   p.maxDictionaryRefsInContextMenu = ui.maxDictsInContextMenu->text().toInt();
 
@@ -476,6 +481,13 @@ Config::Preferences Preferences::getPreferences()
     if( !p.fts.disabledTypes.isEmpty() )
       p.fts.disabledTypes += ',';
     p.fts.disabledTypes += "EPWING";
+  }
+
+  if( !ui.allowGls->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "GLS";
   }
 
   return p;

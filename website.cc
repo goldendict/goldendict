@@ -195,6 +195,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     QUrl redirectUrl = possibleRedirectUrl.toUrl();
     if( !redirectUrl.isEmpty() )
     {
+      disconnect( netReply, 0, 0, 0 );
       netReply->deleteLater();
       netReply = mgr.get( QNetworkRequest( redirectUrl ) );
 #ifndef QT_NO_OPENSSL
@@ -346,6 +347,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     }
   }
 
+  disconnect( netReply, 0, 0, 0 );
   netReply->deleteLater();
 
   finish();
@@ -495,6 +497,7 @@ void WebSiteResourceRequest::requestFinished( QNetworkReply * r )
     QUrl redirectUrl = possibleRedirectUrl.toUrl();
     if( !redirectUrl.isEmpty() )
     {
+      disconnect( netReply, 0, 0, 0 );
       netReply->deleteLater();
       netReply = mgr.get( QNetworkRequest( redirectUrl ) );
 #ifndef QT_NO_OPENSSL
@@ -526,6 +529,7 @@ void WebSiteResourceRequest::requestFinished( QNetworkReply * r )
   else
     setErrorString( netReply->errorString() );
 
+  disconnect( netReply, 0, 0, 0 );
   netReply->deleteLater();
 
   finish();

@@ -82,7 +82,7 @@ struct Ifo
   string bookname;
   uint32_t wordcount, synwordcount, idxfilesize, idxoffsetbits;
   string sametypesequence, dicttype, description;
-  string copyright, author, email;
+  string copyright, author, email, website, date;
 
   Ifo( File::Class & );
 };
@@ -341,14 +341,18 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
     {
       QString articleText = QString( "<div class=\"sdct_h\">" ) + QString::fromUtf8( resource, size ) + "</div>";
 
-      articleText.replace( QRegExp( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" )
-                 .replace( QRegExp( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)((?!data:)[^\"']*)", Qt::CaseInsensitive ),
-                           "\\1bres://" + QString::fromStdString( getId() ) + "/\\2" );
+      QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
+      imgRe.setMinimal( true );
+      QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
+      linkRe.setMinimal( true );
+
+      articleText.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
+                 .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
 
       // Handle links to articles
 
-      QRegExp linksReg( "<a(\\s*[^>]*)href=['\"]([^'\"]+)['\"]" );
+      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]" );
+      linksReg.setMinimal( true );
 
       int pos = 0;
       while( pos >= 0 )
@@ -357,7 +361,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
         if( pos < 0 )
           break;
 
-        QString link = linksReg.cap( 2 );
+        QString link = linksReg.cap( 3 );
         if( link.indexOf( ':' ) < 0 )
         {
           QString newLink;
@@ -904,16 +908,45 @@ QString const& StardictDictionary::getDescription()
     Ifo ifo( ifoFile );
 
     if( !ifo.copyright.empty() )
-      dictionaryDescription += "Copyright: "
-                               + QString::fromUtf8( ifo.copyright.c_str() )
-                                 .replace( "<br>", "\n", Qt::CaseInsensitive )
-                               + "\n\n";
+    {
+      QString copyright = QString::fromUtf8( ifo.copyright.c_str() )
+                          .replace( "<br>", "\n", Qt::CaseInsensitive );
+      dictionaryDescription += QString( QObject::tr( "Copyright: %1%2" ) )
+                              .arg( copyright )
+                              .arg( "\n\n" );
+    }
 
     if( !ifo.author.empty() )
-      dictionaryDescription += "Author: " + QString::fromUtf8( ifo.author.c_str() ) + "\n\n";
+    {
+      QString author = QString::fromUtf8( ifo.author.c_str() );
+      dictionaryDescription += QString( QObject::tr( "Author: %1%2" ) )
+                              .arg( author )
+                              .arg( "\n\n" );
+    }
 
     if( !ifo.email.empty() )
-      dictionaryDescription += "E-mail: " + QString::fromUtf8( ifo.email.c_str() ) + "\n\n";
+    {
+      QString email = QString::fromUtf8( ifo.email.c_str() );
+      dictionaryDescription += QString( QObject::tr( "E-mail: %1%2" ) )
+                               .arg( email )
+                               .arg( "\n\n" );
+    }
+
+    if( !ifo.website.empty() )
+    {
+      QString website = QString::fromUtf8( ifo.website.c_str() );
+      dictionaryDescription += QString( QObject::tr( "Website: %1%2" ) )
+                               .arg( website )
+                               .arg( "\n\n" );
+    }
+
+    if( !ifo.date.empty() )
+    {
+      QString date = QString::fromUtf8( ifo.date.c_str() );
+      dictionaryDescription += QString( QObject::tr( "Date: %1%2" ) )
+                               .arg( date )
+                               .arg( "\n\n" );
+    }
 
     if( !ifo.description.empty() )
     {
@@ -1106,7 +1139,8 @@ sptr< Dictionary::WordSearchRequest >
   StardictDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  return new StardictHeadwordsRequest( word, *this );
+  return synonymSearchEnabled ? new StardictHeadwordsRequest( word, *this ) :
+                                Class::findHeadwordsForSynonym( word );
 }
 
 
@@ -1281,10 +1315,6 @@ void StardictArticleRequest::run()
         if( dict.isToLanguageRTL() )
           result += "</span>";
     }
-    result = QString::fromUtf8( result.c_str() )
-             .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                       "\\1bword:" )
-             .toUtf8().data();
 
     Mutex::Lock _( dataMutex );
 
@@ -1388,6 +1418,12 @@ Ifo::Ifo( File::Class & f ):
       else
       if ( char const * val = beginsWith( "email=", option ) )
         email = val;
+      else
+      if ( char const * val = beginsWith( "website=", option ) )
+        website = val;
+      else
+      if ( char const * val = beginsWith( "date=", option ) )
+        date = val;
     }
   }
   catch( File::exReadError & )
@@ -1803,9 +1839,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       string zipFileName;
       string baseName = FsEncoding::dirname( idxFileName ) + FsEncoding::separator();
 
-      if ( File::tryPossibleName( baseName + "res.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + "RES.ZIP", zipFileName ) ||
-           File::tryPossibleName( baseName + "res" + FsEncoding::separator() + "res.zip", zipFileName ) )
+      if ( File::tryPossibleZipName( baseName + "res.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + "RES.ZIP", zipFileName ) ||
+           File::tryPossibleZipName( baseName + "res" + FsEncoding::separator() + "res.zip", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );

@@ -30,6 +30,7 @@
 #include "zim.hh"
 #include "dictserver.hh"
 #include "slob.hh"
+#include "gls.hh"
 
 #ifndef NO_EPWING_SUPPORT
 #include "epwing.hh"
@@ -61,7 +62,7 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
               << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
               << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
-              << "*.mdx"
+              << "*.mdx" << "*.gls" << "*.gls.dz"
 #ifdef MAKE_ZIM_SUPPORT
               << "*.zim" << "*.zimaa" << "*.slob"
 #endif
@@ -203,6 +204,13 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), mdxDictionaries.begin(),
                          mdxDictionaries.end() );
+  }
+  {
+    vector< sptr< Dictionary::Class > > glsDictionaries =
+      Gls::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), glsDictionaries.begin(),
+                         glsDictionaries.end() );
   }
 #ifdef MAKE_ZIM_SUPPORT
   {

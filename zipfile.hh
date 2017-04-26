@@ -5,10 +5,29 @@
 #define __ZIPFILE_HH_INCLUDED__
 
 #include <QFile>
+#include <QDateTime>
+#include "splitfile.hh"
 
 /// Support for zip files in GoldenDict. Note that the implementation is
 /// strictly tailored to GoldenDict needs only.
 namespace ZipFile {
+
+// Support for split zip files
+class SplitZipFile : public SplitFile::SplitFile
+{
+public:
+  SplitZipFile()
+  {}
+  SplitZipFile( const QString & name );
+
+  virtual void setFileName( const QString & name );
+
+  // Latest modified time for all parts
+  QDateTime lastModified() const;
+
+  // Calc absolute offset by relative offset in part and part nom
+  qint64 calcAbsoluteOffset( qint64 offset, quint16 partNo );
+};
 
 enum CompressionMethod
 {
@@ -42,17 +61,17 @@ struct LocalFileHeader
 /// zip file or other error).
 /// Once the file is positioned, entries may be read by constructing Entry
 /// objects.
-bool positionAtCentralDir( QFile & );
+bool positionAtCentralDir( SplitZipFile & );
 
 /// Reads entry from the zip at its current offset. The file gets advanced
 /// by the size of entry, so it points to the next entry.
 /// Returns true on success, false otherwise.
-bool readNextEntry( QFile &, CentralDirEntry & );
+bool readNextEntry( SplitZipFile &, CentralDirEntry & );
 
 /// Reads loca file header from the zip at its current offset. The file gets
 /// advanced by the size of entry and starts pointing to file data.
 /// Returns true on success, false otherwise.
-bool readLocalHeader( QFile &, LocalFileHeader & );
+bool readLocalHeader( SplitZipFile &, LocalFileHeader & );
 
 }
 

@@ -613,7 +613,7 @@ int WebSitesModel::columnCount( QModelIndex const & parent ) const
   if ( parent.isValid() )
     return 0;
   else
-    return 4;
+    return 5;
 }
 
 QVariant WebSitesModel::headerData( int section, Qt::Orientation /*orientation*/, int role ) const

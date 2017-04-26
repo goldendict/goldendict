@@ -74,6 +74,9 @@ public:
   QString getTranslateLineText() const
   { return translateLine->text(); }
 
+  /// Set group for main/popup window
+  void setGroupByName( QString const & name, bool main_window );
+
 public slots:
 
   void messageFromAnotherInstanceReceived( QString const & );
@@ -448,6 +451,9 @@ signals:
 
   /// Retranslate Ctrl(Shift) + Click on dictionary pane to dictionary toolbar
   void clickOnDictPane( QString const & id );
+
+  /// Set group for popup window
+  void setPopupGroupByName( QString const & name );
 
 #ifdef Q_OS_WIN32
   /// For receiving message from scan libraries

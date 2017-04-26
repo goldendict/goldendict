@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>636</width>
-    <height>403</height>
+    <height>427</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1275,6 +1275,20 @@ download page.</string>
             </property>
            </widget>
           </item>
+          <item row="4" column="1">
+           <widget class="QCheckBox" name="allowEpwing">
+            <property name="text">
+             <string notr="true">Epwing</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QCheckBox" name="allowGls">
+            <property name="text">
+             <string notr="true">GLS</string>
+            </property>
+           </widget>
+          </item>
           <item row="6" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
@@ -1315,13 +1329,6 @@ download page.</string>
              </spacer>
             </item>
            </layout>
-          </item>
-          <item row="4" column="1">
-           <widget class="QCheckBox" name="allowEpwing">
-            <property name="text">
-             <string notr="true">Epwing</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
@@ -1571,6 +1578,17 @@ It is not needed to select this option if you don't use such programs.</string>
            </layout>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="synonymSearchEnabled">
+         <property name="toolTip">
+          <string>Turn this option on to enable extra articles search via synonym lists
+from Stardict, Babylon and GLS dictionaries</string>
+         </property>
+         <property name="text">
+          <string>Extra search via synonyms</string>
+         </property>
         </widget>
        </item>
        <item>
