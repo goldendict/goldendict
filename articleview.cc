@@ -2419,7 +2419,7 @@ void ArticleView::highlightFTSResults()
 
   ui.ftsSearchFrame->show();
   ui.ftsSearchPrevious->setEnabled( false );
-  ui.ftsSearchNext->setEnabled( !allMatches.isEmpty() );
+  ui.ftsSearchNext->setEnabled( allMatches.size()>1 );
 
   ftsSearchIsOpened = true;
 }
