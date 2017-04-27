@@ -177,8 +177,8 @@ public:
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
 
-  std::vector< ResourceToSaveHandler * > saveResource( const QUrl & url, const QString & fileName );
-  std::vector< ResourceToSaveHandler * > saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
+  ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
+  ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
 
 signals:
 
@@ -365,20 +365,22 @@ class ResourceToSaveHandler: public QObject
   Q_OBJECT
 
 public:
-  explicit ResourceToSaveHandler( ArticleView * view, sptr< Dictionary::DataRequest > req,
-                                  QString const & fileName, bool search = false );
+  explicit ResourceToSaveHandler( ArticleView * view, QString const & fileName );
+  void addRequest( sptr< Dictionary::DataRequest > req );
+  bool isEmpty()
+  { return downloadRequests.empty(); }
 
 signals:
   void done();
   void statusBarMessage( QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap() );
 
-private slots:
+public slots:
   void downloadFinished();
 
 private:
-  sptr< Dictionary::DataRequest > req;
+  std::list< sptr< Dictionary::DataRequest > > downloadRequests;
   QString fileName;
-  bool search_req;
+  bool alreadyDone;
 };
 
 #endif

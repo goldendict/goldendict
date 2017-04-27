@@ -3362,13 +3362,11 @@ void MainWindow::on_saveArticle_triggered()
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
               i != downloadResources.end(); i++ )
         {
-          vector< ResourceToSaveHandler * > handlerss = view->saveResource( i->first, i->second );
-          maxVal += handlerss.size();
-
-          for ( vector< ResourceToSaveHandler * >::iterator j = handlerss.begin();
-                j != handlerss.end(); j++ )
+          ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
+          if( !handler->isEmpty() )
           {
-            connect( *j, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
+            maxVal += 1;
+            connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
           }
         }
 
