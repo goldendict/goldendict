@@ -1324,7 +1324,7 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
   vector< ResourceToSaveHandler * > handlers;
   sptr< Dictionary::DataRequest > req;
 
-  if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau")
+  if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" )
   {
     if ( url.host() == "search" )
     {
@@ -1357,8 +1357,14 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
             req = (*activeDicts)[ x ]->getResource(
                     Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
 
-            ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName );
+            ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, req, fileName, true );
             handlers.push_back( handler );
+
+            if( req.get()->isFinished() && req.get()->dataSize() > 0 )
+            {
+              // A request was instantly finished with success. Stop search.
+              return handlers;
+            }
           }
           catch( std::exception & e )
           {
@@ -2743,10 +2749,11 @@ QString ArticleView::wordAtPoint( int x, int y )
 
 ResourceToSaveHandler::ResourceToSaveHandler(
     ArticleView * view, sptr< Dictionary::DataRequest > req,
-    QString const & fileName ) :
+    QString const & fileName, bool search ) :
   QObject( view ),
   req( req ),
-  fileName( fileName )
+  fileName( fileName ),
+  search_req( search )
 {
   connect( this, SIGNAL( statusBarMessage( QString, int, QPixmap ) ),
            view, SIGNAL( statusBarMessage( QString, int, QPixmap ) ) );
@@ -2797,9 +2804,12 @@ void ResourceToSaveHandler::downloadFinished()
   }
   else
   {
-    emit statusBarMessage(
-          tr( "ERROR: %1" ).arg( tr( "The referenced resource failed to download." ) ),
-          10000, QPixmap( ":/icons/error.png" ) );
+    if( !search_req )
+    {
+      emit statusBarMessage(
+            tr( "ERROR: %1" ).arg( tr( "The referenced resource failed to download." ) ),
+            10000, QPixmap( ":/icons/error.png" ) );
+    }
   }
 
   emit done();

@@ -366,7 +366,7 @@ class ResourceToSaveHandler: public QObject
 
 public:
   explicit ResourceToSaveHandler( ArticleView * view, sptr< Dictionary::DataRequest > req,
-                                  QString const & fileName );
+                                  QString const & fileName, bool search = false );
 
 signals:
   void done();
@@ -378,6 +378,7 @@ private slots:
 private:
   sptr< Dictionary::DataRequest > req;
   QString fileName;
+  bool search_req;
 };
 
 #endif
