@@ -60,6 +60,9 @@ bool SplitFile::open( QFile::OpenMode mode )
 
 bool SplitFile::seek( quint64 pos )
 {
+  if( offsets.isEmpty() )
+    return false;
+
   int fileNom;
 
   for( fileNom = 0; fileNom < offsets.size() - 1; fileNom++ )
@@ -74,6 +77,9 @@ bool SplitFile::seek( quint64 pos )
 
 qint64 SplitFile::read( char *data, qint64 maxSize )
 {
+  if( offsets.isEmpty() )
+    return 0;
+
   quint64 bytesReaded = 0;
   for( int i = currentFile; i < files.size(); i++ )
   {
@@ -117,7 +123,7 @@ bool SplitFile::getChar( char *c )
 
 qint64 SplitFile::pos() const
 {
-  if( files.isEmpty() )
+  if( offsets.isEmpty() )
     return 0;
 
   return offsets.at( currentFile ) + files.at( currentFile )->pos();
