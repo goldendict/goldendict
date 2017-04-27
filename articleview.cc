@@ -1324,7 +1324,7 @@ vector< ResourceToSaveHandler * > ArticleView::saveResource( const QUrl & url, c
   vector< ResourceToSaveHandler * > handlers;
   sptr< Dictionary::DataRequest > req;
 
-  if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" )
+  if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" || url.scheme() == "gdvideo" )
   {
     if ( url.host() == "search" )
     {
