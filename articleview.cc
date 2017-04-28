@@ -1178,8 +1178,18 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
             if ( !req->isFinished() )
             {
+              // Queued loading
               connect( req.get(), SIGNAL( finished() ),
                        this, SLOT( resourceDownloadFinished() ) );
+            }
+            else
+            {
+              // Immediate loading
+              if( req->dataSize() > 0 )
+              {
+                // Resource already found, stop next search
+                break;
+              }
             }
           }
           catch( std::exception & e )
@@ -1346,6 +1356,12 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
                     Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
 
             handler->addRequest( req );
+
+            if( req->isFinished() && req->dataSize() > 0 )
+            {
+              // Resource already found, stop next search
+              break;
+            }
           }
           catch( std::exception & e )
           {
