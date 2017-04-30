@@ -56,6 +56,13 @@ string convertToRoman( int input, int lower_case )
     return romanvalue;
 }
 
+QDomElement fakeElement( QDomDocument & dom )
+{
+  // Create element which will be removed after
+  // We will insert it to empty elements to avoid output ones in <xxx/> form
+  return dom.createElement( "b" );
+}
+
 string convert( string const & in, DICT_TYPE type, map < string, string > const * pAbrv,
                 Dictionary::Class *dictPtr,  IndexedZip * resourceZip,
                 bool isLogicalFormat, unsigned revisionNumber, QString * headword )
@@ -107,10 +114,6 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
   // We build a dom representation of the given xml, then do some transforms
   QDomDocument dd;
 
-  // Empty element which will be removed after
-  // We will insert it to other empty elements to avoid output ones in <xxx/> form
-  QDomElement fakeElement = dd.createElement( "b" );
-
   QString errorStr;
   int errorLine, errorColumn;
 
@@ -141,7 +144,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     if( isLogicalFormat )
@@ -157,7 +160,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_ex_markd" );
@@ -173,7 +176,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     if( type == STARDICT )
     {
@@ -293,7 +296,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_opt" );
@@ -306,7 +309,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "a" );
     el.setAttribute( "href", QString( "bword:" ) + el.text() );
@@ -330,7 +333,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     QString ref = el.attribute( "href" );
     if( ref.isEmpty() )
@@ -351,7 +354,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_abbr" );
@@ -405,7 +408,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     el.setAttribute( "class", "xdxf_dtrn" );
@@ -418,7 +421,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
 
@@ -438,7 +441,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     if( isLogicalFormat )
@@ -454,7 +457,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     if( isLogicalFormat )
@@ -468,7 +471,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     if( isLogicalFormat )
@@ -482,7 +485,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     if( isLogicalFormat )
@@ -499,7 +502,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     el.setTagName( "span" );
     if( isLogicalFormat )
@@ -519,7 +522,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( i ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
     if ( el.hasAttribute( "src" ) )
     {
@@ -544,7 +547,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     QDomElement el = nodes.at( 0 ).toElement();
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
-      el.appendChild( fakeElement );
+      el.appendChild( fakeElement( dd ) );
 
 //    if( type == XDXF && dictPtr != NULL && !el.hasAttribute( "start" ) )
     if( dictPtr != NULL && !el.hasAttribute( "start" ) )
