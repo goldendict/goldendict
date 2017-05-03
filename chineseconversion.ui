@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>GroupBox</string>
+   <string>Chinese Conversion</string>
   </property>
   <property name="toolTip">
    <string>Enable conversion between simplified and traditional Chinese characters</string>
