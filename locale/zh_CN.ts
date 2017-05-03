@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -408,63 +408,63 @@ between classic and school orthography in cyrillic)</source>
     <name>ChineseConversion</name>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
-        <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <source>Chinese Conversion</source>
+        <translation>中文转换</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="23"/>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>启用简体中文与繁体/正体中文字符之间的转换</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="26"/>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>中文转换(&amp;V)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="35"/>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>启用从简体中文字符转换为正体中文（台湾）字符</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="38"/>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>简体转正体（台湾）</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="45"/>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>启用从简体中文字符转换为繁体中文（香港）字符</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="48"/>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>简体转繁体（香港）</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="55"/>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation type="unfinished"></translation>
+        <translation>启用从繁体中文字符转换为简体中文字符</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="58"/>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>繁体转简体</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="129"/>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>简体中文至正体中文（台湾）转换</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="136"/>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>简体中文至繁体中文（香港）转换</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="143"/>
         <source>Traditional to simplified Chinese conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>繁体中文至简体中文转换</translation>
     </message>
 </context>
 <context>
@@ -600,7 +600,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished">在这里可以选择过滤器字符串的执行方式</translation>
+        <translation>在这里可以选择过滤器字符串的执行方式</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
@@ -625,7 +625,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
@@ -775,22 +775,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictserver.cc" line="248"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>URL：</translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="249"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>数据库：</translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="250"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>搜索策略：</translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="254"/>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>服务器数据库</translation>
     </message>
 </context>
 <context>
@@ -798,44 +798,46 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../sources.cc" line="810"/>
         <source>Enabled</source>
-        <translation type="unfinished">已启用</translation>
+        <translation>已启用</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="812"/>
         <source>Name</source>
-        <translation type="unfinished">名称</translation>
+        <translation>名称</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="814"/>
         <source>Address</source>
-        <translation type="unfinished">地址</translation>
+        <translation>地址</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="816"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>数据库</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="818"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>策略</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="820"/>
         <source>Icon</source>
-        <translation type="unfinished">图标</translation>
+        <translation>图标</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="853"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>逗号分隔的数据库列表
+（使用空字符串或者“*”可以匹配所有数据库）</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="856"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>逗号分隔的搜索策略列表
+（使用空字符串意味着使用“prefix”策略）</translation>
     </message>
 </context>
 <context>
@@ -992,12 +994,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="313"/>
         <source>None</source>
-        <translation type="unfinished">无</translation>
+        <translation>无</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="357"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished">不能使用“全字匹配”模式或者“纯文本”模式搜索包含CJK字符的字符串</translation>
+        <translation>不能使用“全字匹配”模式或者“纯文本”模式搜索包含CJK字符的字符串</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="366"/>
@@ -1096,7 +1098,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="235"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助</translation>
     </message>
     <message>
         <source>Non-indexable:</source>
@@ -1200,7 +1202,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished">群组标签页</translation>
+        <translation>群组标签页</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
@@ -1314,47 +1316,47 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict 帮助</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished">回退</translation>
+        <translation>回退</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished">前进</translation>
+        <translation>前进</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">放大</translation>
+        <translation>放大</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">缩小</translation>
+        <translation>缩小</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">正常大小</translation>
+        <translation>正常大小</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>上下文</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>索引</translation>
     </message>
 </context>
 <context>
@@ -2857,7 +2859,8 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="883"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>词典搜索中的字符串：可以使用通配符“*”、“?”和符号分组“[...]”。
+如需查找“*”、“?”、“[”和“]”字符，请对应使用“\*”、“\?”、“\[”和“\]”</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1422"/>
@@ -2973,7 +2976,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4238"/>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>正在为全文搜索进行索引：</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="150"/>
@@ -3045,7 +3048,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="591"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict 帮助</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="104"/>
@@ -3230,7 +3233,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>激活的词典：%1，未激活的词典：%2</translation>
     </message>
 </context>
 <context>
@@ -3749,7 +3752,7 @@ Plugin must be installed for this option to work.</source>
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>帮助语言</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -3909,12 +3912,13 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../preferences.ui" line="1586"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>启用该选项可以激活基于同义词列表的额外搜索功能
+列表可以来源于星际翻王、Babylon 和 GLS 的词典</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1590"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>基于同义词的额外搜索</translation>
     </message>
     <message>
         <source>Artiles longer than this size will be collapsed</source>
@@ -4114,13 +4118,13 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <location filename="../sdict.cc" line="678"/>
         <location filename="../stardict.cc" line="914"/>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>版权：%1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="565"/>
         <location filename="../sdict.cc" line="694"/>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>版本：%1%2</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
@@ -4212,28 +4216,28 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <location filename="../gls.cc" line="619"/>
         <location filename="../stardict.cc" line="922"/>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>作者：%1%2</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="410"/>
         <location filename="../stardict.cc" line="930"/>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>电子邮件：%1%2</translation>
     </message>
     <message>
         <location filename="../sdict.cc" line="646"/>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>标题：%1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="938"/>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>网站：%1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="946"/>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>日期：%1%2</translation>
     </message>
 </context>
 <context>
@@ -4890,12 +4894,12 @@ p, li { white-space: pre-wrap; }
         <location filename="../sources.cc" line="624"/>
         <location filename="../sources.cc" line="657"/>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>将文章在 &lt;iframe&gt; 标签中作为链接插入</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="635"/>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>作为链接</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="641"/>
