@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>About</name>
     <message>
@@ -325,7 +325,7 @@ between classic and school orthography in cyrillic)</source>
     <name>ChineseConversion</name>
     <message>
         <source>GroupBox</source>
-        <translation>群組框</translation>
+        <translation type="vanished">群組框</translation>
     </message>
     <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
@@ -370,6 +370,10 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Traditional to simplified Chinese conversion</source>
         <translation>繁體字轉換為簡體字</translation>
+    </message>
+    <message>
+        <source>Chinese Conversion</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2450,11 +2454,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Search</source>
-        <translation>搜尋</translation>
+        <translation type="vanished">搜尋</translation>
     </message>
     <message>
         <source>Search in page</source>
-        <translation>在頁面中尋找</translation>
+        <translation type="vanished">在頁面中尋找</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
@@ -2462,7 +2466,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Full-text search</source>
-        <translation>全文搜尋</translation>
+        <translation type="vanished">全文搜尋</translation>
     </message>
     <message>
         <source>Ctrl+Shift+F</source>
@@ -2475,6 +2479,18 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <source>Now indexing for full-text search: </source>
         <translation>正在建立全文搜尋用的索引：</translation>
+    </message>
+    <message>
+        <source>&amp;Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search &amp;in page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Full-text search</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3435,6 +3451,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>The referenced resource failed to download.</source>
         <translation>所引用的資源下載失敗。</translation>
+    </message>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">警告： %1</translation>
     </message>
 </context>
 <context>
