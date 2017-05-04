@@ -645,7 +645,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
 //  GD_DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray( 0 ).data() );
 
-  return dd.toString( 0 ).remove('\n').remove( QRegExp( "<(b|i)/>" ) ).toUtf8().data();
+  return dd.toString( 1 ).remove('\n').remove( QRegExp( "<(b|i)/>" ) ).toUtf8().data();
 }
 
 }
