@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<TS version="2.1" language="bg_BG">
 <context>
     <name>About</name>
     <message>
@@ -328,10 +328,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>ChineseConversion</name>
     <message>
-        <source>GroupBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,6 +369,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional to simplified Chinese conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chinese Conversion</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2454,19 +2454,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search in page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2479,6 +2467,18 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Now indexing for full-text search: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search &amp;in page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3440,6 +3440,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished">Указаният ресурс не успя да се свали.</translation>
+    </message>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">Внимание: %1</translation>
     </message>
 </context>
 <context>
