@@ -63,6 +63,8 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 
   ui.shortcut->setHotKey( Config::HotKey( group.shortcut ) );
 
+  ui.favoritesFolder->setText( group.favoritesFolder );
+
   connect( ui.groupIcon, SIGNAL(activated(int)),this,SLOT(groupIconActivated(int)),
            Qt::QueuedConnection );
 
@@ -128,6 +130,8 @@ Config::Group DictGroupWidget::makeGroup() const
   g.icon = ui.groupIcon->itemData( currentIndex ).toString();
 
   g.shortcut = ui.shortcut->getHotKey().toKeySequence();
+
+  g.favoritesFolder = ui.favoritesFolder->text().replace( '\\', '/' );
 
   return g.makeConfigGroup();
 }

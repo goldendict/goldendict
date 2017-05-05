@@ -87,6 +87,7 @@ struct Group
   QString name, icon;
   QByteArray iconData;
   QKeySequence shortcut;
+  QString favoritesFolder;
   QVector< DictionaryRef > dictionaries;
   Config::MutedDictionaries mutedDictionaries; // Disabled via dictionary bar
   Config::MutedDictionaries popupMutedDictionaries; // Disabled via dictionary bar in popup
@@ -95,6 +96,7 @@ struct Group
 
   bool operator == ( Group const & other ) const
   { return id == other.id && name == other.name && icon == other.icon &&
+           favoritesFolder == other.favoritesFolder &&
            dictionaries == other.dictionaries && shortcut == other.shortcut &&
            mutedDictionaries == other.mutedDictionaries &&
            popupMutedDictionaries == other.popupMutedDictionaries &&
@@ -661,6 +663,9 @@ QString getPidFileName() throw( exError );
 
 /// Returns the filename of a history file which stores search history.
 QString getHistoryFileName() throw( exError );
+
+/// Returns the filename of a favorities file.
+QString getFavoritiesFileName() throw( exError );
 
 /// Returns the user .css file name.
 QString getUserCssFileName() throw( exError );

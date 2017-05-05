@@ -14,18 +14,6 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="leftMargin">
-    <number>2</number>
-   </property>
-   <property name="topMargin">
-    <number>4</number>
-   </property>
-   <property name="rightMargin">
-    <number>2</number>
-   </property>
-   <property name="bottomMargin">
-    <number>3</number>
-   </property>
    <item>
     <widget class="DictListWidget" name="dictionaries"/>
    </item>
@@ -88,6 +76,20 @@
      </item>
      <item>
       <widget class="HotKeyEdit" name="shortcut"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Favorites folder:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="favoritesFolder"/>
      </item>
     </layout>
    </item>

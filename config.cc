@@ -258,6 +258,7 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   g.name = grp.attribute( "name" );
   g.icon = grp.attribute( "icon" );
+  g.favoritesFolder = grp.attribute( "favoritesFolder" );
 
   if ( !grp.attribute( "iconData" ).isEmpty() )
     g.iconData = QByteArray::fromBase64( grp.attribute( "iconData" ).toLatin1() );
@@ -1028,6 +1029,13 @@ void saveGroup( Group const & data, QDomElement & group )
   name.setValue( data.name );
 
   group.setAttributeNode( name );
+
+  if( data.favoritesFolder.size() )
+  {
+    QDomAttr folder = dd.createAttribute( "favoritesFolder" );
+    folder.setValue( data.favoritesFolder );
+    group.setAttributeNode( folder );
+  }
 
   if ( data.icon.size() )
   {
@@ -1994,6 +2002,11 @@ QString getPidFileName() throw( exError )
 QString getHistoryFileName() throw( exError )
 {
   return getHomeDir().filePath( "history" );
+}
+
+QString getFavoritiesFileName() throw( exError )
+{
+  return getHomeDir().filePath( "favorites" );
 }
 
 QString getUserCssFileName() throw( exError )

@@ -21,7 +21,7 @@ using std::vector;
 struct Group
 {
   unsigned id;
-  QString name, icon;
+  QString name, icon, favoritesFolder;
   QIcon iconData;
   QKeySequence shortcut;
   vector< sptr< Dictionary::Class > > dictionaries;

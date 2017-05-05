@@ -80,5 +80,7 @@
         <file>icons/icon32_epwing.png</file>
         <file>icons/icon32_slob.png</file>
         <file>icons/icon32_gls.png</file>
+        <file>icons/star.png</file>
+        <file>icons/folder.png</file>
     </qresource>
 </RCC>

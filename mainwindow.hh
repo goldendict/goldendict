@@ -84,6 +84,7 @@ public slots:
   void wordReceived( QString const & );
   void headwordReceived( QString const &, QString const & );
   void setExpandMode( bool expand );
+  void headwordFromFavorites( QString const &, QString const & );
 
 private:
   void addGlobalAction( QAction * action, const char * slot );
@@ -127,6 +128,7 @@ private:
   QAction * beforeScanPopupSeparator, * afterScanPopupSeparator, * beforeOptionsSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
+  QAction * addToFavorites, * beforeAddToFavoritesSeparator;
   QMenu trayIconMenu;
   QMenu * tabMenu;
   QAction * menuButtonAction;
@@ -276,6 +278,8 @@ private slots:
 
   void showFTSIndexingName( QString const & name );
 
+  void addCurrentTabToFavorites();
+
 private slots:
 
   // Executed in response to a user click on an 'add tab' tool button
@@ -412,14 +416,20 @@ private slots:
 
   void on_rescanFiles_triggered();
 
+  void on_showHideFavorites_triggered();
   void on_showHideHistory_triggered();
   void on_exportHistory_triggered();
   void on_importHistory_triggered();
   void on_alwaysOnTop_triggered( bool checked );
   void focusWordList();
 
+  void on_exportFavorites_triggered();
+  void on_importFavorites_triggered();
+  void on_ExportFavoritesToList_triggered();
+
   void updateSearchPaneAndBar( bool searchInDock );
 
+  void updateFavoritesMenu();
   void updateHistoryMenu();
 
   /// Add word to history

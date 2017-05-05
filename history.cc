@@ -9,6 +9,8 @@
 
 History::History( unsigned size, unsigned maxItemLength_ ): maxSize( size ),
   maxItemLength( maxItemLength_ ), addingEnabled( true )
+, dirty( false )
+, timerId ( 0 )
 {
 }
 
