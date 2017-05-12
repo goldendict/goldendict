@@ -43,6 +43,9 @@ public:
   void getDataInPlainText( QString & dataStr );
   bool setDataFromXml( QString const & dataStr );
 
+  void setFocusOnTree()
+  { m_favoritesTree->setFocus(); }
+
 signals:
   void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
 

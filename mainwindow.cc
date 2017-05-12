@@ -4477,13 +4477,25 @@ void MainWindow::headwordFromFavorites( QString const & headword,
       {
         // Group found. Select it and stop search.
         if( groupList->currentIndex() != (int)i )
+        {
           groupList->setCurrentIndex( i );
+
+          // Restore focus on Favorites tree
+          ui.favoritesPaneWidget->setFocusOnTree();
+        }
         break;
       }
     }
   }
 
-  wordReceived( headword );
+  // Show headword without lost of focus on Favorites tree
+
+  if ( cfg.preferences.searchInDock )
+    translateLine->setText( Folding::escapeWildcardSymbols( headword ) );
+  else
+    translateBox->setText( Folding::escapeWildcardSymbols( headword ), false );
+
+  showTranslationFor(headword );
 }
 
 #ifdef Q_OS_WIN32

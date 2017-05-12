@@ -78,7 +78,13 @@ void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
 
   // Favorites tree
   m_favoritesModel = new FavoritesModel( Config::getFavoritiesFileName(), this );
+
+  listItemDelegate = new WordListItemDelegate( m_favoritesTree->itemDelegate() );
+  m_favoritesTree->setItemDelegate( listItemDelegate );
+
+  QItemSelectionModel * oldModel = m_favoritesTree->selectionModel();
   m_favoritesTree->setModel( m_favoritesModel );
+  oldModel->deleteLater();
 
   connect( m_favoritesTree, SIGNAL( expanded( QModelIndex ) ),
            m_favoritesModel, SLOT( itemExpanded( QModelIndex ) ) );
@@ -101,7 +107,7 @@ void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
   m_favoritesTree->setContextMenuPolicy( Qt::CustomContextMenu );
   m_favoritesTree->setSelectionMode( QAbstractItemView::ExtendedSelection );
 
-  m_favoritesTree->setEditTriggers( QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed );
+  m_favoritesTree->setEditTriggers( QAbstractItemView::SelectedClicked | QAbstractItemView::EditKeyPressed );
 
   m_favoritesTree->installEventFilter( this );
   m_favoritesTree->viewport()->installEventFilter( this );
@@ -115,9 +121,6 @@ void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
 
   connect( m_favoritesTree, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( showCustomMenu( QPoint const & ) ) );
-
-  listItemDelegate = new WordListItemDelegate( m_favoritesTree->itemDelegate() );
-  m_favoritesTree->setItemDelegate( listItemDelegate );
 }
 
 FavoritesPaneWidget::~FavoritesPaneWidget()
@@ -186,9 +189,10 @@ void FavoritesPaneWidget::showCustomMenu(QPoint const & pos)
     m_favoritesMenu->insertAction( m_separator, m_deleteSelectedAction );
   }
 
-  if( selectedIdxs.size() == 1 )
+  if( selectedIdxs.size() <= 1 )
   {
     m_favoritesMenu->insertAction( m_separator, m_addFolder );
+    m_separator->setVisible( true );
   }
 
   m_favoritesMenu->exec( m_favoritesTree->mapToGlobal( pos ) );
@@ -196,7 +200,7 @@ void FavoritesPaneWidget::showCustomMenu(QPoint const & pos)
 
 void FavoritesPaneWidget::onSelectionChanged( QItemSelection const & selection )
 {
-  if ( selection.size() != 1 )
+  if ( m_favoritesTree->selectionModel()->selectedIndexes().size() != 1 )
     return;
 
   itemSelectionChanged = true;
@@ -231,11 +235,17 @@ void FavoritesPaneWidget::emitFavoritesItemRequested( QModelIndex const & idx )
 void FavoritesPaneWidget::addFolder()
 {
   QModelIndexList selectedIdx = m_favoritesTree->selectionModel()->selectedIndexes();
-  if( selectedIdx.size() != 1 )
+  if( selectedIdx.size() > 1 )
     return;
 
   FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  QModelIndex folderIdx = md->addNewFolder( selectedIdx.front() );
+
+  QModelIndex folderIdx;
+  if( selectedIdx.size() )
+    folderIdx = md->addNewFolder( selectedIdx.front() );
+  else
+    folderIdx = md->addNewFolder( QModelIndex() );
+
   if( folderIdx.isValid() )
     m_favoritesTree->edit( folderIdx );
 }
@@ -954,7 +964,12 @@ void FavoritesModel::removeItemsForIndexes( const QModelIndexList & idxList )
 
 QModelIndex FavoritesModel::addNewFolder( const QModelIndex & idx )
 {
-  QModelIndex parentIdx = parent( idx );
+  QModelIndex parentIdx;
+  if( idx.isValid() )
+    parentIdx = parent( idx );
+  else
+    parentIdx = idx;
+
   QString baseName = QString::fromLatin1( "New folder" );
 
   // Create unique name
@@ -976,7 +991,18 @@ QModelIndex FavoritesModel::addNewFolder( const QModelIndex & idx )
   // Create folder with unique name
 
   TreeItem *parentItem = getItem( parentIdx );
-  int row = idx.row() + 1;
+  int row;
+
+  if( idx.isValid() )
+  {
+    // Insert after selected element
+    row = idx.row() + 1;
+  }
+  else
+  {
+    // No selected element - add to end of root folder
+    row = parentItem->childCount();
+  }
 
   beginInsertRows( parentIdx, row, row );
   TreeItem * newFolder = new TreeItem( name, parentItem, TreeItem::Folder );
