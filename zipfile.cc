@@ -200,8 +200,17 @@ SplitZipFile::SplitZipFile( const QString & name )
 
 void SplitZipFile::setFileName( const QString & name )
 {
-  if( !name.toLower().endsWith( ".zip" ) )
-    return;
+  {
+    QString lname = name.toLower();
+    if( lname.endsWith( ".zips" ) )
+    {
+      appendFile( name );
+      return;
+    }
+
+    if( !lname.endsWith( ".zip" ) )
+      return;
+  }
 
   if( QFileInfo( name ).isFile() )
   {

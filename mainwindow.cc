@@ -3346,8 +3346,8 @@ void MainWindow::on_saveArticle_triggered()
       if ( complete )
       {
         QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx)://[^\"]+)\"" );
-        QRegExp rx2( "'((?:bres|gico|gdau|qrcx)://[^']+)'" );
+        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
+        QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
         set< QByteArray > resourceIncluded;
         vector< pair< QUrl, QString > > downloadResources;
 
@@ -3362,13 +3362,11 @@ void MainWindow::on_saveArticle_triggered()
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
               i != downloadResources.end(); i++ )
         {
-          vector< ResourceToSaveHandler * > handlerss = view->saveResource( i->first, i->second );
-          maxVal += handlerss.size();
-
-          for ( vector< ResourceToSaveHandler * >::iterator j = handlerss.begin();
-                j != handlerss.end(); j++ )
+          ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
+          if( !handler->isEmpty() )
           {
-            connect( *j, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
+            maxVal += 1;
+            connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
           }
         }
 
