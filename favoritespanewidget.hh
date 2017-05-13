@@ -47,6 +47,7 @@ public:
   void setFocusOnTree()
   { m_favoritesTree->setFocus(); }
 
+  // Set interval for periodical save
   void setSaveInterval( unsigned interval );
 
 signals:

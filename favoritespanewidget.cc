@@ -198,7 +198,8 @@ void FavoritesPaneWidget::showCustomMenu(QPoint const & pos)
 
 void FavoritesPaneWidget::onSelectionChanged( QItemSelection const & selection )
 {
-  if ( m_favoritesTree->selectionModel()->selectedIndexes().size() != 1 )
+  if ( m_favoritesTree->selectionModel()->selectedIndexes().size() != 1
+       || selection.indexes().isEmpty() )
     return;
 
   itemSelectionChanged = true;

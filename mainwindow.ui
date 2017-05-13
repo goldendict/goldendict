@@ -140,7 +140,7 @@
    </widget>
    <widget class="QMenu" name="menuFavorites">
     <property name="title">
-     <string>Fa&amp;vorites</string>
+     <string>Favo&amp;rites</string>
     </property>
     <addaction name="showHideFavorites"/>
     <addaction name="exportFavorites"/>
@@ -657,6 +657,9 @@
    </property>
    <property name="statusTip">
     <string>Add current tab to Favorites</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="ExportFavoritesToList">
