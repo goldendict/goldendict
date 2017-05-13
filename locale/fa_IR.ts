@@ -205,165 +205,165 @@
         <translation>بازرسی کردن</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="959"/>
+        <location filename="../articleview.cc" line="963"/>
         <source>Resource</source>
         <translation>منبع</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="964"/>
+        <location filename="../articleview.cc" line="968"/>
         <source>Audio</source>
         <translation>شنیداری</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="969"/>
+        <location filename="../articleview.cc" line="973"/>
         <source>TTS Voice</source>
         <translation>گفتار TTS</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="974"/>
+        <location filename="../articleview.cc" line="978"/>
         <source>Picture</source>
         <translation>عکس</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="981"/>
+        <location filename="../articleview.cc" line="985"/>
         <source>Video</source>
         <translation>ویدیو</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="990"/>
+        <location filename="../articleview.cc" line="994"/>
         <source>Video: %1</source>
         <translation>ویدیوی: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1007"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>تعریف از واژه‌نامه &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1011"/>
+        <location filename="../articleview.cc" line="1015"/>
         <source>Definition: %1</source>
         <translation>تعریف: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1237"/>
-        <location filename="../articleview.cc" line="1391"/>
+        <location filename="../articleview.cc" line="1239"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>منبع ارجاع شده وجود ندارد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1277"/>
+        <location filename="../articleview.cc" line="1279"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>برنامه شنیداری ارجاع شده وجود ندارد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1197"/>
-        <location filename="../articleview.cc" line="1391"/>
+        <location filename="../articleview.cc" line="1198"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>ERROR: %1</source>
         <translation>خطای: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1543"/>
+        <location filename="../articleview.cc" line="1551"/>
         <source>&amp;Open Link</source>
         <translation>&amp;باز کردن پیوند</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1549"/>
+        <location filename="../articleview.cc" line="1557"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>باز کردن پیوند در &amp;زیانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1556"/>
+        <location filename="../articleview.cc" line="1564"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>باز کردن پیوند در &amp;مرورگر بیرونی</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save &amp;image...</source>
         <translation>ذخیره &amp;تصویر...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1579"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Save s&amp;ound...</source>
         <translation>ذخیره آ&amp;وا...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;یافتن &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1606"/>
+        <location filename="../articleview.cc" line="1614"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>یافتن &quot;%1&quot; در &amp;زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1611"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>فرستادن &quot;%1&quot; به خط ورودی</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1617"/>
-        <location filename="../articleview.cc" line="1653"/>
+        <location filename="../articleview.cc" line="1625"/>
+        <location filename="../articleview.cc" line="1661"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;افزودن &quot;%1&quot; به پیشینه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>یافتن &quot;%1&quot; در %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1639"/>
+        <location filename="../articleview.cc" line="1647"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>یافتن &quot;%1&quot; در %2 در &amp;زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1787"/>
+        <location filename="../articleview.cc" line="1795"/>
         <source>Save sound</source>
         <translation>ذخیره کردن آوا</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1789"/>
+        <location filename="../articleview.cc" line="1797"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>پرونده‌های آوا (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1802"/>
+        <location filename="../articleview.cc" line="1810"/>
         <source>Save image</source>
         <translation>ذخیره کردن تصویر</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1804"/>
+        <location filename="../articleview.cc" line="1812"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>پرونده‌های تصویر (*.bmp *.jpg *.png *.tif);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1876"/>
+        <location filename="../articleview.cc" line="1884"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>خطا در اجرای یک پخش‌کننده برای پخش پرونده آوا: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1893"/>
+        <location filename="../articleview.cc" line="1901"/>
         <source>Failed to create temporary file.</source>
         <translation>ساخت پرونده موقت شکست خورد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1904"/>
+        <location filename="../articleview.cc" line="1912"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>باز کردن خودکار پرونده منبع شکست خورد، تلاش کنید به‌صورت دستی بازکنید: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1935"/>
         <source>WARNING: %1</source>
         <translation>هشدار: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1935"/>
         <source>The referenced resource failed to download.</source>
         <translation>بارگیری منبع ارجاع شده شکست خورد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1934"/>
+        <location filename="../articleview.cc" line="1942"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>هشدار: پخش‌کننده شنیداری FFmpeg : %1</translation>
     </message>
@@ -392,7 +392,7 @@ between classic and school orthography in cyrillic)</source>
     <name>ChineseConversion</name>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
-        <source>GroupBox</source>
+        <source>Chinese Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -482,14 +482,19 @@ between classic and school orthography in cyrillic)</source>
         <translation>فرم</translation>
     </message>
     <message>
-        <location filename="../dictgroupwidget.ui" line="37"/>
+        <location filename="../dictgroupwidget.ui" line="25"/>
         <source>Group icon:</source>
         <translation>نشانه گروه:</translation>
     </message>
     <message>
-        <location filename="../dictgroupwidget.ui" line="85"/>
+        <location filename="../dictgroupwidget.ui" line="73"/>
         <source>Shortcut:</source>
         <translation>میان‌بر:</translation>
+    </message>
+    <message>
+        <location filename="../dictgroupwidget.ui" line="87"/>
+        <source>Favorites folder:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
@@ -502,27 +507,27 @@ between classic and school orthography in cyrillic)</source>
         <translation>از پرونده...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="94"/>
         <source>Choose a file to use as group icon</source>
         <translation>یک پرونده را برای نشانه گروه برگزینید</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="94"/>
+        <location filename="../groups_widgets.cc" line="96"/>
         <source>Images</source>
         <translation>تصویرها</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="95"/>
+        <location filename="../groups_widgets.cc" line="97"/>
         <source>All files</source>
         <translation>همه پرونده‌ها</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="102"/>
+        <location filename="../groups_widgets.cc" line="104"/>
         <source>Error</source>
         <translation>خطا</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="102"/>
+        <location filename="../groups_widgets.cc" line="104"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>پرونده تصویری مشخص شده را نمی‌تواند بخواند.</translation>
     </message>
@@ -530,46 +535,46 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="598"/>
-        <location filename="../groups_widgets.cc" line="673"/>
-        <location filename="../groups_widgets.cc" line="846"/>
-        <location filename="../groups_widgets.cc" line="1021"/>
+        <location filename="../groups_widgets.cc" line="602"/>
+        <location filename="../groups_widgets.cc" line="677"/>
+        <location filename="../groups_widgets.cc" line="850"/>
+        <location filename="../groups_widgets.cc" line="1025"/>
         <source>Dictionaries: </source>
         <translation>واژه‌نامه‌ها:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="698"/>
+        <location filename="../groups_widgets.cc" line="702"/>
         <source>Confirmation</source>
         <translation>تایید</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="699"/>
+        <location filename="../groups_widgets.cc" line="703"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>آیا شما از درخواست ایجاد یک مجموعه از گروه‌ها برپایه جفت‌های زبان اطمینان دارید؟</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="724"/>
+        <location filename="../groups_widgets.cc" line="728"/>
         <source>Unassigned</source>
         <translation>واگذار نشده</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="862"/>
+        <location filename="../groups_widgets.cc" line="866"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>گروه‌ها را با زبان منبع ترکیب کنید به &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="879"/>
+        <location filename="../groups_widgets.cc" line="883"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation>گروه‌ها را با زبان هدف ترکیب کنید به &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="897"/>
+        <location filename="../groups_widgets.cc" line="901"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation>گروه ترجمه دوطرفه بسازید &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="915"/>
-        <location filename="../groups_widgets.cc" line="934"/>
+        <location filename="../groups_widgets.cc" line="919"/>
+        <location filename="../groups_widgets.cc" line="938"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation>گروه‌ها را ترکیب کنید با &quot;%1&quot;</translation>
     </message>
@@ -749,7 +754,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="237"/>
+        <location filename="../groups_widgets.cc" line="241"/>
         <source>%1 entries</source>
         <translation>%1 ورودی</translation>
     </message>
@@ -985,6 +990,42 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="379"/>
         <source>No dictionaries for full-text search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesModel</name>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="629"/>
+        <source>Error in favorities file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesPaneWidget</name>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="30"/>
+        <source>&amp;Delete Selected</source>
+        <translation type="unfinished">&amp;حذف برگزیده‌ها</translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="39"/>
+        <source>Copy Selected</source>
+        <translation type="unfinished">رونوشت برگزیده‌ها</translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="48"/>
+        <source>Add folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="62"/>
+        <source>Favorites:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="165"/>
+        <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2425,7 +2466,7 @@ between classic and school orthography in cyrillic)</source>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="747"/>
+        <location filename="../mainwindow.cc" line="772"/>
         <source>Welcome!</source>
         <translation>خوش آمدید!</translation>
     </message>
@@ -2465,227 +2506,269 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="150"/>
+        <location filename="../mainwindow.ui" line="162"/>
         <source>&amp;Search Pane</source>
         <translation>قاب &amp;جست‌وجو</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="277"/>
+        <location filename="../mainwindow.ui" line="289"/>
         <source>&amp;Results Navigation Pane</source>
         <translation>قاب &amp;ناوبری نتایج</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="304"/>
+        <location filename="../mainwindow.ui" line="343"/>
         <source>&amp;History Pane</source>
         <translation>قاب &amp;پیشینه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="338"/>
+        <location filename="../mainwindow.ui" line="377"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;واژه‌نامه‌ها...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="380"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="353"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;ترجیحات...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="356"/>
+        <location filename="../mainwindow.ui" line="395"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="364"/>
+        <location filename="../mainwindow.ui" line="403"/>
         <source>&amp;Homepage</source>
         <translation>&amp;برگه آغازین</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="372"/>
+        <location filename="../mainwindow.ui" line="411"/>
         <source>&amp;About</source>
         <translation>&amp;درباره</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="375"/>
+        <location filename="../mainwindow.ui" line="414"/>
         <source>About GoldenDict</source>
         <translation>درباره گلدن‌دیکت</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="591"/>
+        <location filename="../mainwindow.ui" line="630"/>
         <source>GoldenDict reference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="594"/>
+        <location filename="../mainwindow.ui" line="633"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="383"/>
-        <location filename="../mainwindow.cc" line="357"/>
+        <location filename="../mainwindow.ui" line="422"/>
+        <location filename="../mainwindow.cc" line="366"/>
         <source>&amp;Quit</source>
         <translation>&amp;ترک کردن</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="143"/>
+        <source>Fa&amp;vorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="316"/>
+        <source>Favor&amp;ites Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="425"/>
         <source>Quit from application</source>
         <translation>ترک کردن برنامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="428"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="397"/>
+        <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;Forum</source>
         <translation>&amp;انجمن</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="405"/>
+        <location filename="../mainwindow.ui" line="444"/>
         <source>&amp;Close To Tray</source>
         <translation>بستن به &amp;سینی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="408"/>
+        <location filename="../mainwindow.ui" line="447"/>
         <source>Minimizes the window to tray</source>
         <translation>کمینه کردن پنجره به سینی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="411"/>
+        <location filename="../mainwindow.ui" line="450"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="423"/>
+        <location filename="../mainwindow.ui" line="462"/>
         <source>&amp;Save Article</source>
         <translation>&amp;ذخیره بند</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="426"/>
+        <location filename="../mainwindow.ui" line="465"/>
         <source>Save Article</source>
         <translation>ذخیره بند</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="429"/>
+        <location filename="../mainwindow.ui" line="468"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="441"/>
+        <location filename="../mainwindow.ui" line="480"/>
         <source>&amp;Print</source>
         <translation>&amp;چاپ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="444"/>
+        <location filename="../mainwindow.ui" line="483"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.ui" line="491"/>
         <source>Page Set&amp;up</source>
         <translation>&amp;برپایی برگه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="460"/>
+        <location filename="../mainwindow.ui" line="499"/>
         <source>Print Pre&amp;view</source>
         <translation>&amp;پیش‌نمایش چاپ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="468"/>
+        <location filename="../mainwindow.ui" line="507"/>
         <source>&amp;Rescan Files</source>
         <translation>پویش &amp;دوباره پرونده‌ها</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="471"/>
+        <location filename="../mainwindow.ui" line="510"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="479"/>
+        <location filename="../mainwindow.ui" line="518"/>
         <source>&amp;Clear</source>
         <translation>&amp;پاک کردن</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="491"/>
+        <location filename="../mainwindow.ui" line="530"/>
         <source>&amp;New Tab</source>
         <translation>&amp;زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="494"/>
+        <location filename="../mainwindow.ui" line="533"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="505"/>
+        <location filename="../mainwindow.ui" line="544"/>
         <source>&amp;Configuration Folder</source>
         <translation>&amp;پوشه پیکربندی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3615"/>
+        <location filename="../mainwindow.ui" line="552"/>
+        <location filename="../mainwindow.cc" line="3655"/>
+        <location filename="../mainwindow.cc" line="3667"/>
         <source>&amp;Show</source>
         <translation>&amp;نمایش</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="516"/>
+        <location filename="../mainwindow.ui" line="555"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="524"/>
+        <location filename="../mainwindow.ui" line="563"/>
         <source>&amp;Export</source>
         <translation>&amp;صادر کردن</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="532"/>
+        <location filename="../mainwindow.ui" line="571"/>
         <source>&amp;Import</source>
         <translation>&amp;وارد کردن</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="543"/>
+        <location filename="../mainwindow.ui" line="582"/>
         <source>&amp;Always on Top</source>
         <translation>&amp;همیشه در بالا</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="546"/>
+        <location filename="../mainwindow.ui" line="585"/>
         <source>Always on Top</source>
         <translation>همیشه در بالا</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="549"/>
+        <location filename="../mainwindow.ui" line="588"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="558"/>
-        <location filename="../mainwindow.ui" line="561"/>
-        <location filename="../mainwindow.cc" line="263"/>
+        <location filename="../mainwindow.ui" line="597"/>
+        <location filename="../mainwindow.ui" line="600"/>
+        <location filename="../mainwindow.cc" line="272"/>
         <source>Menu Button</source>
         <translation>کلید منو</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="566"/>
+        <location filename="../mainwindow.ui" line="605"/>
         <source>Search in page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="569"/>
+        <location filename="../mainwindow.ui" line="608"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="577"/>
+        <location filename="../mainwindow.ui" line="616"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="580"/>
+        <location filename="../mainwindow.ui" line="619"/>
         <source>Ctrl+Shift+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="638"/>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="646"/>
+        <source>Export</source>
+        <translation type="unfinished">صادر کردن</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="651"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="656"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="659"/>
+        <location filename="../mainwindow.cc" line="243"/>
+        <source>Add current tab to Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="664"/>
+        <source>Export to list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2744,262 +2827,304 @@ between classic and school orthography in cyrillic)</source>
         <translation>اندازه عادی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="271"/>
-        <location filename="../mainwindow.cc" line="1246"/>
+        <location filename="../mainwindow.cc" line="280"/>
+        <location filename="../mainwindow.cc" line="1272"/>
         <source>Look up in:</source>
         <translation>یافتن در:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="309"/>
+        <location filename="../mainwindow.cc" line="318"/>
         <source>Found in Dictionaries:</source>
         <translation>در این واژه‌نامه‌ها یافت شد:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="339"/>
+        <location filename="../mainwindow.cc" line="348"/>
         <source>Words Zoom In</source>
         <translation>بزرگ‌نمایی به درون واژه‌ها</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="343"/>
+        <location filename="../mainwindow.cc" line="352"/>
         <source>Words Zoom Out</source>
         <translation>بزرگ‌نمایی به بیرون واژه‌ها</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="345"/>
+        <location filename="../mainwindow.cc" line="354"/>
         <source>Words Normal Size</source>
         <translation>اندازه عادی واژه‌ها</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="353"/>
+        <location filename="../mainwindow.cc" line="362"/>
         <source>Show &amp;Main Window</source>
         <translation>&amp;نمایش پنجره اصلی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="380"/>
+        <location filename="../mainwindow.cc" line="389"/>
         <source>Opened tabs</source>
         <translation>زبانه‌های باز شده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="391"/>
+        <location filename="../mainwindow.cc" line="400"/>
         <source>Close current tab</source>
         <translation>بستن زبانه جاری</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="401"/>
+        <location filename="../mainwindow.cc" line="410"/>
         <source>Close all tabs</source>
         <translation>بستن همه زبانه‌ها</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="409"/>
+        <location filename="../mainwindow.cc" line="418"/>
         <source>Close all tabs except current</source>
         <translation>بستن همه زبانه‌ها مگر زبانه جاری</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="558"/>
+        <location filename="../mainwindow.cc" line="583"/>
         <source>Loading...</source>
         <translation>بارگیری...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="568"/>
+        <location filename="../mainwindow.cc" line="593"/>
         <source>New Tab</source>
         <translation>زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="806"/>
-        <location filename="../mainwindow.cc" line="3019"/>
+        <location filename="../mainwindow.cc" line="831"/>
+        <location filename="../mainwindow.cc" line="3061"/>
         <source>Accessibility API is not enabled</source>
         <translation>API دست‌رسی به‌کار نیفتاده است</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="883"/>
+        <location filename="../mainwindow.cc" line="908"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation>رشته‌ای که باید در واژه‌نامه‌ها جست‌وجو شود. نویسه‌های عام &apos;*&apos;، &apos;?&apos; و گروه‌هایی از نمادهای &apos;[...]&apos; مجاز هستند.
 برای یافتن نمادهای &apos;*&apos;، &apos;?&apos;، &apos;[&apos;، &apos;]&apos; به ترتیب &apos;\*&apos;، &apos;\?&apos;، &apos;\[&apos;، &apos;\]&apos; را به‌کار ببرید</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1235"/>
+        <location filename="../mainwindow.cc" line="1261"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 واژه‌نامه، %2 بند، %3 واژه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1246"/>
+        <location filename="../mainwindow.cc" line="1272"/>
         <source>Look up:</source>
         <translation>یافتن:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1264"/>
+        <location filename="../mainwindow.cc" line="1290"/>
         <source>All</source>
         <translation>همه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1422"/>
+        <location filename="../mainwindow.cc" line="1448"/>
         <source>Open Tabs List</source>
         <translation>باز کردن لیست زبانه‌ها</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1480"/>
+        <location filename="../mainwindow.cc" line="1506"/>
         <source>(untitled)</source>
         <translation>(بی‌عنوان)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1701"/>
+        <location filename="../mainwindow.cc" line="1727"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2822"/>
+        <location filename="../mainwindow.cc" line="2860"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>برپاسازی سازوکار بازبینی کلیدهای میان‌بر شکست خورد.&lt;br&gt;مطمئن شوید که افزونه RECORD مربوط به XServer روشن شده است.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2959"/>
+        <location filename="../mainwindow.cc" line="3001"/>
         <source>New Release Available</source>
         <translation>نسخه تازه موجود است</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2960"/>
+        <location filename="../mainwindow.cc" line="3002"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>نسخه &lt;b&gt;%1&lt;/b&gt; گلدن‌دیکت برای بارگیری آماده است &lt;br&gt; برای به‌دست آوردن برگه بارگیری &lt;b&gt;بارگیری&lt;/b&gt; را کلیک کنید.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2965"/>
+        <location filename="../mainwindow.cc" line="3007"/>
         <source>Download</source>
         <translation>بارگیری</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2966"/>
+        <location filename="../mainwindow.cc" line="3008"/>
         <source>Skip This Release</source>
         <translation>پرش از این نسخه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3096"/>
+        <location filename="../mainwindow.cc" line="3138"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>شما پنهان کردن نوار منو را برگزیده‌اید. %1 را به‌کار ببرید تا دوباره نمایش داده شود.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3097"/>
+        <location filename="../mainwindow.cc" line="3139"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3195"/>
+        <location filename="../mainwindow.cc" line="3237"/>
         <source>Page Setup</source>
         <translation>برپایی برگه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3196"/>
+        <location filename="../mainwindow.cc" line="3238"/>
         <source>No printer is available. Please install one first.</source>
         <translation>چاپ‌گری موجود نیست. لطفاً نخست یکی نصب کنید.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3214"/>
+        <location filename="../mainwindow.cc" line="3256"/>
         <source>Print Article</source>
         <translation>چاپ بند</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3289"/>
+        <location filename="../mainwindow.cc" line="3331"/>
         <source>Article, Complete (*.html)</source>
         <translation>بند، کامل (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3290"/>
+        <location filename="../mainwindow.cc" line="3332"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>بند HTML تنها (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3293"/>
+        <location filename="../mainwindow.cc" line="3335"/>
         <source>Save Article As</source>
         <translation>ذخیره بند به‌عنوان</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3307"/>
+        <location filename="../mainwindow.cc" line="3349"/>
         <source>Error</source>
         <translation>خطا</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3308"/>
+        <location filename="../mainwindow.cc" line="3350"/>
         <source>Can&apos;t save article: %1</source>
         <translation>نمی‌تواند بند: %1 را ذخیره کند</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3371"/>
+        <location filename="../mainwindow.cc" line="3411"/>
         <source>Saving article...</source>
         <translation>درحال ذخیره بند...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3434"/>
+        <location filename="../mainwindow.cc" line="3474"/>
         <source>The main window is set to be always on top.</source>
         <translation>پنجره اصلی تنظیم می‌شود تا همیشه در بالا باشد.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3611"/>
+        <location filename="../mainwindow.cc" line="3651"/>
+        <location filename="../mainwindow.cc" line="3663"/>
         <source>&amp;Hide</source>
         <translation>پنهان&amp;سازی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3637"/>
+        <location filename="../mainwindow.cc" line="3695"/>
         <source>Export history to file</source>
         <translation>صادر کردن پیشینه به پرونده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3639"/>
-        <location filename="../mainwindow.cc" line="3701"/>
+        <location filename="../mainwindow.cc" line="3697"/>
+        <location filename="../mainwindow.cc" line="3759"/>
+        <location filename="../mainwindow.cc" line="3873"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>پرونده‌های متنی (*.txt);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3678"/>
+        <location filename="../mainwindow.cc" line="3736"/>
         <source>History export complete</source>
         <translation>صادر کردن پیشینه کامل شد</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3681"/>
+        <location filename="../mainwindow.cc" line="3739"/>
+        <location filename="../mainwindow.cc" line="3854"/>
+        <location filename="../mainwindow.cc" line="3903"/>
         <source>Export error: </source>
         <translation>خطا در صادر کردن:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3699"/>
+        <location filename="../mainwindow.cc" line="3757"/>
         <source>Import history from file</source>
         <translation>وارد کردن پیشینه از پرونده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3748"/>
+        <location filename="../mainwindow.cc" line="3806"/>
         <source>Import error: invalid data in file</source>
         <translation>خطا در وارد کردن: داده نامعتبر در پرونده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3752"/>
+        <location filename="../mainwindow.cc" line="3810"/>
         <source>History import complete</source>
         <translation>وارد کردن پیشینه کامل شد</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3755"/>
+        <location filename="../mainwindow.cc" line="3813"/>
+        <location filename="../mainwindow.cc" line="3949"/>
         <source>Import error: </source>
         <translation>خطا در وارد کردن:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4029"/>
+        <location filename="../mainwindow.cc" line="3830"/>
+        <source>Export Favorites to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3832"/>
+        <location filename="../mainwindow.cc" line="3922"/>
+        <source>XML files (*.xml);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3851"/>
+        <location filename="../mainwindow.cc" line="3900"/>
+        <source>Favorites export complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3871"/>
+        <source>Export Favorites to file as plain list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3920"/>
+        <source>Import Favorites from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3945"/>
+        <source>Favorites import complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3951"/>
+        <source>Data parsing error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="4226"/>
         <source>Dictionary info</source>
         <translation>اطلاعات واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4033"/>
+        <location filename="../mainwindow.cc" line="4230"/>
         <source>Dictionary headwords</source>
         <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4035"/>
+        <location filename="../mainwindow.cc" line="4232"/>
         <source>Open dictionary folder</source>
         <translation>باز کردن پوشه واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4041"/>
+        <location filename="../mainwindow.cc" line="4238"/>
         <source>Edit dictionary</source>
         <translation>ویرایش واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4238"/>
+        <location filename="../mainwindow.cc" line="4435"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3774,88 +3899,100 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>به‌کار بردن پیام &amp;گلدن‌دیکت</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1405"/>
+        <location filename="../preferences.ui" line="1407"/>
         <source>History</source>
         <translation>پیشینه</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1411"/>
+        <location filename="../preferences.ui" line="1413"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>برای نگه‌داری پیشینه واژه‌های ترجمه شده این گزینه را روشن کنید</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1414"/>
+        <location filename="../preferences.ui" line="1416"/>
         <source>Store &amp;history</source>
         <translation>نگه‌داری &amp;پیشینه</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1429"/>
+        <location filename="../preferences.ui" line="1431"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>بیشینه شمار ورودی برای نگه‌داری در پیشینه را تعیین می‌کند.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1432"/>
+        <location filename="../preferences.ui" line="1434"/>
         <source>Maximum history size:</source>
         <translation>بیشینه اندازه پیشینه:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1469"/>
+        <location filename="../preferences.ui" line="1471"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>وقفه ذخیره پیشینه. اگر ۰ قرار داده شود پیشینه تنها هنگام ترک برنامه ذخیره خواهد شد.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1475"/>
+        <location filename="../preferences.ui" line="1477"/>
+        <location filename="../preferences.ui" line="1530"/>
         <source>Save every</source>
         <translation>ذخیره کن هر</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1492"/>
+        <location filename="../preferences.ui" line="1494"/>
+        <location filename="../preferences.ui" line="1544"/>
         <source>minutes</source>
         <translation>دقیقه</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1517"/>
+        <location filename="../preferences.ui" line="1519"/>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1527"/>
+        <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1571"/>
         <source>Articles</source>
         <translation>بندها</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1523"/>
+        <location filename="../preferences.ui" line="1577"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>برای گستراندن همیشگی بخش‌های اختیاری بندها این گزینه را روشن کنید</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1526"/>
+        <location filename="../preferences.ui" line="1580"/>
         <source>Expand optional &amp;parts</source>
         <translation>&amp;بخش‌های اختیاری را بگستران</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1535"/>
+        <location filename="../preferences.ui" line="1589"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>برای جمع کردن خودکار بندهای بزرگ این گزینه را برگزینید</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1538"/>
+        <location filename="../preferences.ui" line="1592"/>
         <source>Collapse articles more than</source>
         <translation>بندهای بیش از این را جمع کن</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1545"/>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>بندهای کشیده‌تر از این اندازه جمع می‌شوند</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1561"/>
+        <location filename="../preferences.ui" line="1615"/>
         <source>symbols</source>
         <translation>نماد</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1586"/>
+        <location filename="../preferences.ui" line="1640"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1590"/>
+        <location filename="../preferences.ui" line="1644"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3896,12 +4033,12 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>لینگوز-آبی</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="564"/>
+        <location filename="../preferences.cc" line="568"/>
         <source>Changing Language</source>
         <translation>تغییر دادن زبان</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="565"/>
+        <location filename="../preferences.cc" line="569"/>
         <source>Restart the program to apply the language change.</source>
         <translation>برای به‌کار برده شدن تغییر زبان برنامه را دوباره راه‌اندازی کنید.</translation>
     </message>
@@ -4125,17 +4262,17 @@ from Stardict, Babylon and GLS dictionaries</source>
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1031"/>
+        <location filename="../groups_widgets.cc" line="1035"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>جست‌وجو/پالایه واژه‌نامه (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1040"/>
+        <location filename="../groups_widgets.cc" line="1044"/>
         <source>Quick Search</source>
         <translation>جست‌وجوی تند</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1045"/>
+        <location filename="../groups_widgets.cc" line="1049"/>
         <source>Clear Search</source>
         <translation>پاک کردن جست‌وجو</translation>
     </message>
@@ -4143,20 +4280,24 @@ from Stardict, Babylon and GLS dictionaries</source>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2790"/>
-        <location filename="../articleview.cc" line="2797"/>
+        <location filename="../articleview.cc" line="2802"/>
         <source>ERROR: %1</source>
         <translation>خطای: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2802"/>
         <source>Resource saving error: </source>
         <translation>خطا در ذخیره منبع: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2797"/>
+        <location filename="../articleview.cc" line="2828"/>
         <source>The referenced resource failed to download.</source>
         <translation>بارگیری منبع ارجاع شده شکست خورد.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2828"/>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">هشدار: %1</translation>
     </message>
 </context>
 <context>

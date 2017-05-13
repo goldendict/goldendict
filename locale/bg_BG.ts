@@ -328,10 +328,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>ChineseConversion</name>
     <message>
-        <source>GroupBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -373,6 +369,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional to simplified Chinese conversion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chinese Conversion</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -436,6 +436,10 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Посоченият файл с изображение не може да бъде прочетен.</translation>
+    </message>
+    <message>
+        <source>Favorites folder:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -823,6 +827,36 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>None</source>
         <translation type="obsolete">Без</translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesModel</name>
+    <message>
+        <source>Error in favorities file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesPaneWidget</name>
+    <message>
+        <source>&amp;Delete Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy Selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All selected items will be deleted. Continue?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2481,6 +2515,66 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Fa&amp;vorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favor&amp;ites Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add current tab to Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export to list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Favorites to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>XML files (*.xml);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites export complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Favorites to file as plain list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Import Favorites from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites import complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data parsing error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
@@ -3243,6 +3337,14 @@ from Stardict, Babylon and GLS dictionaries</source>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -3440,6 +3542,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished">Указаният ресурс не успя да се свали.</translation>
+    </message>
+    <message>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">Внимание: %1</translation>
     </message>
 </context>
 <context>

@@ -190,42 +190,42 @@
         <translation>Zvýr&amp;azniť všetko</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="959"/>
+        <location filename="../articleview.cc" line="963"/>
         <source>Resource</source>
         <translation>Zdroj</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="964"/>
+        <location filename="../articleview.cc" line="968"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="969"/>
+        <location filename="../articleview.cc" line="973"/>
         <source>TTS Voice</source>
         <translation>TTS Hlas</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="974"/>
+        <location filename="../articleview.cc" line="978"/>
         <source>Picture</source>
         <translation>Obrázok</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="981"/>
+        <location filename="../articleview.cc" line="985"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="990"/>
+        <location filename="../articleview.cc" line="994"/>
         <source>Video: %1</source>
         <translation>Video: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1007"/>
+        <location filename="../articleview.cc" line="1011"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definícia zo slovníka &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1011"/>
+        <location filename="../articleview.cc" line="1015"/>
         <source>Definition: %1</source>
         <translation>Definícia: %1</translation>
     </message>
@@ -234,39 +234,39 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1237"/>
-        <location filename="../articleview.cc" line="1391"/>
+        <location filename="../articleview.cc" line="1239"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Referencovaný zdroj neexistuje.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1277"/>
+        <location filename="../articleview.cc" line="1279"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Odkazovaný audio program neexistuje.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1197"/>
-        <location filename="../articleview.cc" line="1391"/>
+        <location filename="../articleview.cc" line="1198"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>ERROR: %1</source>
         <translation>CHYBA: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1787"/>
+        <location filename="../articleview.cc" line="1795"/>
         <source>Save sound</source>
         <translation>Uložiť zvuk</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1789"/>
+        <location filename="../articleview.cc" line="1797"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Zvukové súbory (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Všetky súbory (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1802"/>
+        <location filename="../articleview.cc" line="1810"/>
         <source>Save image</source>
         <translation>Uložiť obrázok</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1804"/>
+        <location filename="../articleview.cc" line="1812"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Uložiť obrázky (*.bmp *.jpg *.png *.tif);;Všetky súbory (*.*)</translation>
     </message>
@@ -275,63 +275,63 @@
         <translation type="obsolete">Chyba ukladania zdroja: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1543"/>
+        <location filename="../articleview.cc" line="1551"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Otvoriť odkaz</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1549"/>
+        <location filename="../articleview.cc" line="1557"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Otvoriť odkaz v nove kar&amp;te</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1556"/>
+        <location filename="../articleview.cc" line="1564"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Otvoriť odkaz v &amp;externom prehliadači</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1571"/>
+        <location filename="../articleview.cc" line="1579"/>
         <source>Save &amp;image...</source>
         <translation>Uložiť &amp;obrázok…</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1579"/>
+        <location filename="../articleview.cc" line="1587"/>
         <source>Save s&amp;ound...</source>
         <translation>Uložiť &amp;zvuk…</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1598"/>
+        <location filename="../articleview.cc" line="1606"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Hľadať &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1606"/>
+        <location filename="../articleview.cc" line="1614"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Hľadať &quot;%1&quot; v &amp;novej karte</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1611"/>
+        <location filename="../articleview.cc" line="1619"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Odoslať &quot;%1&quot; do vstupného riadku</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1617"/>
-        <location filename="../articleview.cc" line="1653"/>
+        <location filename="../articleview.cc" line="1625"/>
+        <location filename="../articleview.cc" line="1661"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>Prid&amp;ať &quot;%1&quot; do histórie</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1631"/>
+        <location filename="../articleview.cc" line="1639"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Hľadať &quot;%1&quot; v %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1639"/>
+        <location filename="../articleview.cc" line="1647"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Hľadať &quot;%1&quot; v %2 v &amp;novej karte</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1934"/>
+        <location filename="../articleview.cc" line="1942"/>
         <source>WARNING: FFmpeg Audio Player: %1</source>
         <translation>VAROVANIE: FFmpeg Audio Player: %1</translation>
     </message>
@@ -352,22 +352,22 @@
         <translation type="obsolete">Knižnica Bass nevie prehrať tento zvuk.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1876"/>
+        <location filename="../articleview.cc" line="1884"/>
         <source>Failed to run a player to play sound file: %1</source>
         <translation>Nepodarilo sa spustiť prehrávač pre prehrávanie zvukových súborov: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1893"/>
+        <location filename="../articleview.cc" line="1901"/>
         <source>Failed to create temporary file.</source>
         <translation>Nepodarilo sa vytvoriť dočasný súbor.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1904"/>
+        <location filename="../articleview.cc" line="1912"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Nepodarilo sa automaticky otvoriť súbor so zdrojmi. Pokúste sa ho otvoriť ručne: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1935"/>
         <source>WARNING: %1</source>
         <translation>VAROVANIE: %1</translation>
     </message>
@@ -387,7 +387,7 @@
         <translation>Kontrolovať</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1927"/>
+        <location filename="../articleview.cc" line="1935"/>
         <source>The referenced resource failed to download.</source>
         <translation>Referencovaný zdroj sa nepodarilo stiahnuť.</translation>
     </message>
@@ -416,7 +416,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <name>ChineseConversion</name>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
-        <source>GroupBox</source>
+        <source>Chinese Conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -506,14 +506,19 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation>Formulár</translation>
     </message>
     <message>
-        <location filename="../dictgroupwidget.ui" line="37"/>
+        <location filename="../dictgroupwidget.ui" line="25"/>
         <source>Group icon:</source>
         <translation>Ikona skupiny:</translation>
     </message>
     <message>
-        <location filename="../dictgroupwidget.ui" line="85"/>
+        <location filename="../dictgroupwidget.ui" line="73"/>
         <source>Shortcut:</source>
         <translation>Skratky:</translation>
+    </message>
+    <message>
+        <location filename="../dictgroupwidget.ui" line="87"/>
+        <source>Favorites folder:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
@@ -526,27 +531,27 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation>Zo súboru ...</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="92"/>
+        <location filename="../groups_widgets.cc" line="94"/>
         <source>Choose a file to use as group icon</source>
         <translation>Vyberte súbor, ktorý chcete použiť ako ikonu skupiny</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="94"/>
+        <location filename="../groups_widgets.cc" line="96"/>
         <source>Images</source>
         <translation>Obrázky</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="95"/>
+        <location filename="../groups_widgets.cc" line="97"/>
         <source>All files</source>
         <translation>Všetky súbory</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="102"/>
+        <location filename="../groups_widgets.cc" line="104"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="102"/>
+        <location filename="../groups_widgets.cc" line="104"/>
         <source>Can&apos;t read the specified image file.</source>
         <translation>Nemožno prečítať zadaný súbor s obrázkom.</translation>
     </message>
@@ -554,46 +559,46 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="598"/>
-        <location filename="../groups_widgets.cc" line="673"/>
-        <location filename="../groups_widgets.cc" line="846"/>
-        <location filename="../groups_widgets.cc" line="1021"/>
+        <location filename="../groups_widgets.cc" line="602"/>
+        <location filename="../groups_widgets.cc" line="677"/>
+        <location filename="../groups_widgets.cc" line="850"/>
+        <location filename="../groups_widgets.cc" line="1025"/>
         <source>Dictionaries: </source>
         <translation>Slovníky:</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="698"/>
+        <location filename="../groups_widgets.cc" line="702"/>
         <source>Confirmation</source>
         <translation>Potvrdenie</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="699"/>
+        <location filename="../groups_widgets.cc" line="703"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Ste si istí, že chcete vytvoriť sadu skupín na základe jazykových párov?</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="724"/>
+        <location filename="../groups_widgets.cc" line="728"/>
         <source>Unassigned</source>
         <translation>Nepriradené</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="862"/>
+        <location filename="../groups_widgets.cc" line="866"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>Kombinovať skupiny podľa zdrojového jazyka do &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="879"/>
+        <location filename="../groups_widgets.cc" line="883"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation>Kombinovať skupiny podľa cieľového jazyka do &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="897"/>
+        <location filename="../groups_widgets.cc" line="901"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation>Urobiť dvojstrannú prekladovú skupinu &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="915"/>
-        <location filename="../groups_widgets.cc" line="934"/>
+        <location filename="../groups_widgets.cc" line="919"/>
+        <location filename="../groups_widgets.cc" line="938"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation>Kombinovať skupiny s &quot;%1&quot;</translation>
     </message>
@@ -774,7 +779,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
 <context>
     <name>DictListModel</name>
     <message>
-        <location filename="../groups_widgets.cc" line="237"/>
+        <location filename="../groups_widgets.cc" line="241"/>
         <source>%1 entries</source>
         <translation>%1 položiek</translation>
     </message>
@@ -1029,6 +1034,42 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <source>None</source>
         <translation type="obsolete">Žiadny</translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesModel</name>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="629"/>
+        <source>Error in favorities file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesPaneWidget</name>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="30"/>
+        <source>&amp;Delete Selected</source>
+        <translation type="unfinished">&amp;Zmazať označené</translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="39"/>
+        <source>Copy Selected</source>
+        <translation type="unfinished">Kopírovať označené</translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="48"/>
+        <source>Add folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="62"/>
+        <source>Favorites:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../favoritespanewidget.cc" line="165"/>
+        <source>All selected items will be deleted. Continue?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2472,7 +2513,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="747"/>
+        <location filename="../mainwindow.cc" line="772"/>
         <source>Welcome!</source>
         <translation>Vitajte!</translation>
     </message>
@@ -2515,17 +2556,17 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation type="obsolete">Výsledky navigačného panela</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="150"/>
+        <location filename="../mainwindow.ui" line="162"/>
         <source>&amp;Search Pane</source>
         <translation>Vy&amp;hľadávací panel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="277"/>
+        <location filename="../mainwindow.ui" line="289"/>
         <source>&amp;Results Navigation Pane</source>
         <translation>&amp;Panel výsledkov</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="304"/>
+        <location filename="../mainwindow.ui" line="343"/>
         <source>&amp;History Pane</source>
         <translation>Panel &amp;histórie</translation>
     </message>
@@ -2539,171 +2580,212 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="338"/>
+        <location filename="../mainwindow.ui" line="377"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Slovníky...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="341"/>
+        <location filename="../mainwindow.ui" line="380"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="353"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Nastavenia...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="356"/>
+        <location filename="../mainwindow.ui" line="395"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="364"/>
+        <location filename="../mainwindow.ui" line="403"/>
         <source>&amp;Homepage</source>
         <translation>&amp;Domovská stránka</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="372"/>
+        <location filename="../mainwindow.ui" line="411"/>
         <source>&amp;About</source>
         <translation>&amp;O programe</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="375"/>
+        <location filename="../mainwindow.ui" line="414"/>
         <source>About GoldenDict</source>
         <translation>O GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="591"/>
+        <location filename="../mainwindow.ui" line="630"/>
         <source>GoldenDict reference</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="594"/>
+        <location filename="../mainwindow.ui" line="633"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="383"/>
-        <location filename="../mainwindow.cc" line="357"/>
+        <location filename="../mainwindow.ui" line="422"/>
+        <location filename="../mainwindow.cc" line="366"/>
         <source>&amp;Quit</source>
         <translation>&amp;Koniec</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="386"/>
+        <location filename="../mainwindow.ui" line="143"/>
+        <source>Fa&amp;vorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="316"/>
+        <source>Favor&amp;ites Pane</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="425"/>
         <source>Quit from application</source>
         <translation>Odísť z aplikácie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="428"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="397"/>
+        <location filename="../mainwindow.ui" line="436"/>
         <source>&amp;Forum</source>
         <translation>&amp;Fórum</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="405"/>
+        <location filename="../mainwindow.ui" line="444"/>
         <source>&amp;Close To Tray</source>
         <translation>&amp;Minimalizovať do lišty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="408"/>
+        <location filename="../mainwindow.ui" line="447"/>
         <source>Minimizes the window to tray</source>
         <translation>Minimalizuje okno do lišty okien</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="411"/>
+        <location filename="../mainwindow.ui" line="450"/>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="423"/>
+        <location filename="../mainwindow.ui" line="462"/>
         <source>&amp;Save Article</source>
         <translation>&amp;Uložiť článok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="426"/>
+        <location filename="../mainwindow.ui" line="465"/>
         <source>Save Article</source>
         <translation>Uložiť článok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="429"/>
+        <location filename="../mainwindow.ui" line="468"/>
         <source>F2</source>
         <translation>F2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="441"/>
+        <location filename="../mainwindow.ui" line="480"/>
         <source>&amp;Print</source>
         <translation>&amp;Tlač</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="444"/>
+        <location filename="../mainwindow.ui" line="483"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="452"/>
+        <location filename="../mainwindow.ui" line="491"/>
         <source>Page Set&amp;up</source>
         <translation>Nastavenie s&amp;trany</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="460"/>
+        <location filename="../mainwindow.ui" line="499"/>
         <source>Print Pre&amp;view</source>
         <translation>Náhľad pred &amp;tlačou</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="468"/>
+        <location filename="../mainwindow.ui" line="507"/>
         <source>&amp;Rescan Files</source>
         <translation>&amp;Znovu vyhľadať súbory</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="491"/>
+        <location filename="../mainwindow.ui" line="530"/>
         <source>&amp;New Tab</source>
         <translation>&amp;Nová karta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="543"/>
+        <location filename="../mainwindow.ui" line="582"/>
         <source>&amp;Always on Top</source>
         <translation>&amp;Vždy na vrchu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="546"/>
+        <location filename="../mainwindow.ui" line="585"/>
         <source>Always on Top</source>
         <translation>Vždy na vrchu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="549"/>
+        <location filename="../mainwindow.ui" line="588"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="558"/>
-        <location filename="../mainwindow.ui" line="561"/>
-        <location filename="../mainwindow.cc" line="263"/>
+        <location filename="../mainwindow.ui" line="597"/>
+        <location filename="../mainwindow.ui" line="600"/>
+        <location filename="../mainwindow.cc" line="272"/>
         <source>Menu Button</source>
         <translation>Tlačidlo Menu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="566"/>
+        <location filename="../mainwindow.ui" line="605"/>
         <source>Search in page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="569"/>
+        <location filename="../mainwindow.ui" line="608"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="577"/>
+        <location filename="../mainwindow.ui" line="616"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="580"/>
+        <location filename="../mainwindow.ui" line="619"/>
         <source>Ctrl+Shift+F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="638"/>
+        <source>Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="646"/>
+        <source>Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="651"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="656"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="659"/>
+        <location filename="../mainwindow.cc" line="243"/>
+        <source>Add current tab to Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="664"/>
+        <source>Export to list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2715,48 +2797,49 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation type="obsolete">Znovu vyhľadať súbory</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="471"/>
+        <location filename="../mainwindow.ui" line="510"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="479"/>
+        <location filename="../mainwindow.ui" line="518"/>
         <source>&amp;Clear</source>
         <translation>&amp;Vymazať</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="568"/>
+        <location filename="../mainwindow.cc" line="593"/>
         <source>New Tab</source>
         <translation>Nová karta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="494"/>
+        <location filename="../mainwindow.ui" line="533"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="505"/>
+        <location filename="../mainwindow.ui" line="544"/>
         <source>&amp;Configuration Folder</source>
         <translation>&amp;Konfiguračný priečinok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="513"/>
-        <location filename="../mainwindow.cc" line="3615"/>
+        <location filename="../mainwindow.ui" line="552"/>
+        <location filename="../mainwindow.cc" line="3655"/>
+        <location filename="../mainwindow.cc" line="3667"/>
         <source>&amp;Show</source>
         <translation>&amp;Zobraziť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="516"/>
+        <location filename="../mainwindow.ui" line="555"/>
         <source>Ctrl+H</source>
         <translation>Ctrl+H</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="524"/>
+        <location filename="../mainwindow.ui" line="563"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportovať</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="532"/>
+        <location filename="../mainwindow.ui" line="571"/>
         <source>&amp;Import</source>
         <translation>&amp;Importovať</translation>
     </message>
@@ -2774,13 +2857,13 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation>&amp;Panel s ponukou</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="271"/>
-        <location filename="../mainwindow.cc" line="1246"/>
+        <location filename="../mainwindow.cc" line="280"/>
+        <location filename="../mainwindow.cc" line="1272"/>
         <source>Look up in:</source>
         <translation>Hľadať v:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="309"/>
+        <location filename="../mainwindow.cc" line="318"/>
         <source>Found in Dictionaries:</source>
         <translation>Nájdené v slovníkoch:</translation>
     </message>
@@ -2824,67 +2907,104 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation>Normálna veľkosť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="339"/>
+        <location filename="../mainwindow.cc" line="348"/>
         <source>Words Zoom In</source>
         <translation>Zväčšiť slová</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="343"/>
+        <location filename="../mainwindow.cc" line="352"/>
         <source>Words Zoom Out</source>
         <translation>Zmenšiť slová</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="345"/>
+        <location filename="../mainwindow.cc" line="354"/>
         <source>Words Normal Size</source>
         <translation>Bežná veľkosť slov</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="353"/>
+        <location filename="../mainwindow.cc" line="362"/>
         <source>Show &amp;Main Window</source>
         <translation>Zobraziť &amp;hlavné okno</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="391"/>
+        <location filename="../mainwindow.cc" line="400"/>
         <source>Close current tab</source>
         <translation>Zatvoriť aktuálnu kartu</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="401"/>
+        <location filename="../mainwindow.cc" line="410"/>
         <source>Close all tabs</source>
         <translation>Zatvoriť všetky karty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="409"/>
+        <location filename="../mainwindow.cc" line="418"/>
         <source>Close all tabs except current</source>
         <translation>Zatvoriť všetky karty okrem aktuálnej</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="558"/>
+        <location filename="../mainwindow.cc" line="583"/>
         <source>Loading...</source>
         <translation>Načítavanie ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1235"/>
+        <location filename="../mainwindow.cc" line="1261"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>Slovníky: %1, články: %2, slová: %3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1246"/>
+        <location filename="../mainwindow.cc" line="1272"/>
         <source>Look up:</source>
         <translation>Hľadať:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1264"/>
+        <location filename="../mainwindow.cc" line="1290"/>
         <source>All</source>
         <translation>Všetko</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4238"/>
+        <location filename="../mainwindow.cc" line="3830"/>
+        <source>Export Favorites to file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3832"/>
+        <location filename="../mainwindow.cc" line="3922"/>
+        <source>XML files (*.xml);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3851"/>
+        <location filename="../mainwindow.cc" line="3900"/>
+        <source>Favorites export complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3871"/>
+        <source>Export Favorites to file as plain list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3920"/>
+        <source>Import Favorites from file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3945"/>
+        <source>Favorites import complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="3951"/>
+        <source>Data parsing error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="4435"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="380"/>
+        <location filename="../mainwindow.cc" line="389"/>
         <source>Opened tabs</source>
         <translation>Otvorené karty</translation>
     </message>
@@ -2904,17 +3024,17 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation>&amp;Navigácia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1422"/>
+        <location filename="../mainwindow.cc" line="1448"/>
         <source>Open Tabs List</source>
         <translation>Otvorí zoznam kariet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1480"/>
+        <location filename="../mainwindow.cc" line="1506"/>
         <source>(untitled)</source>
         <translation>(Bez názvu)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1701"/>
+        <location filename="../mainwindow.cc" line="1727"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -2923,80 +3043,80 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation type="obsolete">VAROVANIE: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2822"/>
+        <location filename="../mainwindow.cc" line="2860"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Nepodarilo sa inicializovať monitorovací mechanizmus klávesových skratiek.&lt;br&gt; Uistite sa, že X server má zapnuté rozšírenie RECORD.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2959"/>
+        <location filename="../mainwindow.cc" line="3001"/>
         <source>New Release Available</source>
         <translation>Je dostupná nová verzia</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2960"/>
+        <location filename="../mainwindow.cc" line="3002"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>GoldenDict verzia &lt;b&gt;%1&lt;/b&gt; je dostupná na stiahnutie.
 &lt;br&gt;Kliknutím na &lt;b&gt;Stiahnuť&lt;/b&gt; sa dostane na stránku, kde je možné program stiahnuť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2965"/>
+        <location filename="../mainwindow.cc" line="3007"/>
         <source>Download</source>
         <translation>Stiahnuť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2966"/>
+        <location filename="../mainwindow.cc" line="3008"/>
         <source>Skip This Release</source>
         <translation>Preskočiť toto vydanie</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="806"/>
-        <location filename="../mainwindow.cc" line="3019"/>
+        <location filename="../mainwindow.cc" line="831"/>
+        <location filename="../mainwindow.cc" line="3061"/>
         <source>Accessibility API is not enabled</source>
         <translation>API Dostupnosti nie je povolené</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="883"/>
+        <location filename="../mainwindow.cc" line="908"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3096"/>
+        <location filename="../mainwindow.cc" line="3138"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vybrali ste si skrytie panelu s ponukou. Použite %1 ak ho chcete znova zobraziť.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3097"/>
+        <location filename="../mainwindow.cc" line="3139"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3195"/>
+        <location filename="../mainwindow.cc" line="3237"/>
         <source>Page Setup</source>
         <translation>Nastavenie strany</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3196"/>
+        <location filename="../mainwindow.cc" line="3238"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Žiadna tlačiareň nie je k dispozícii. Prosím, nainštalujte aspoň jednu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3214"/>
+        <location filename="../mainwindow.cc" line="3256"/>
         <source>Print Article</source>
         <translation>Vytlačiť článok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3289"/>
+        <location filename="../mainwindow.cc" line="3331"/>
         <source>Article, Complete (*.html)</source>
         <translation>Článok, Kompletný (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3290"/>
+        <location filename="../mainwindow.cc" line="3332"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Článok, iba HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3293"/>
+        <location filename="../mainwindow.cc" line="3335"/>
         <source>Save Article As</source>
         <translation>Uložiť článok ako</translation>
     </message>
@@ -3005,88 +3125,93 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">Html súbory (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3307"/>
+        <location filename="../mainwindow.cc" line="3349"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3308"/>
+        <location filename="../mainwindow.cc" line="3350"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Nie je možné uložiť článok: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3371"/>
+        <location filename="../mainwindow.cc" line="3411"/>
         <source>Saving article...</source>
         <translation>Ukladanie článku…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3434"/>
+        <location filename="../mainwindow.cc" line="3474"/>
         <source>The main window is set to be always on top.</source>
         <translation>Hlavné okno je nastavené, aby bolo vždy na vrchu.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3611"/>
+        <location filename="../mainwindow.cc" line="3651"/>
+        <location filename="../mainwindow.cc" line="3663"/>
         <source>&amp;Hide</source>
         <translation>S&amp;kryť</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3637"/>
+        <location filename="../mainwindow.cc" line="3695"/>
         <source>Export history to file</source>
         <translation>Exportovať históriu do súboru</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3639"/>
-        <location filename="../mainwindow.cc" line="3701"/>
+        <location filename="../mainwindow.cc" line="3697"/>
+        <location filename="../mainwindow.cc" line="3759"/>
+        <location filename="../mainwindow.cc" line="3873"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Textové súbory (*.txt);;Všetky súbory (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3678"/>
+        <location filename="../mainwindow.cc" line="3736"/>
         <source>History export complete</source>
         <translation>Export histórie ukončený</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3681"/>
+        <location filename="../mainwindow.cc" line="3739"/>
+        <location filename="../mainwindow.cc" line="3854"/>
+        <location filename="../mainwindow.cc" line="3903"/>
         <source>Export error: </source>
         <translation>Chyba exportu:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3699"/>
+        <location filename="../mainwindow.cc" line="3757"/>
         <source>Import history from file</source>
         <translation>Import histórie zo súboru</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3748"/>
+        <location filename="../mainwindow.cc" line="3806"/>
         <source>Import error: invalid data in file</source>
         <translation>Chyba importu: neplatné dáta v súbore</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3752"/>
+        <location filename="../mainwindow.cc" line="3810"/>
         <source>History import complete</source>
         <translation>Import histórie je ukončený</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3755"/>
+        <location filename="../mainwindow.cc" line="3813"/>
+        <location filename="../mainwindow.cc" line="3949"/>
         <source>Import error: </source>
         <translation>Chyba importu:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4029"/>
+        <location filename="../mainwindow.cc" line="4226"/>
         <source>Dictionary info</source>
         <translation>Info o slovníku</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4033"/>
+        <location filename="../mainwindow.cc" line="4230"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4035"/>
+        <location filename="../mainwindow.cc" line="4232"/>
         <source>Open dictionary folder</source>
         <translation>Otvoriť slovníkový priečinok</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4041"/>
+        <location filename="../mainwindow.cc" line="4238"/>
         <source>Edit dictionary</source>
         <translation>Upraviť slovník</translation>
     </message>
@@ -3690,33 +3815,43 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1535"/>
+        <location filename="../preferences.ui" line="1519"/>
+        <source>Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1527"/>
+        <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1589"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Vyberte túto ponuku pre automatické skrátenie dlhých článkov</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1538"/>
+        <location filename="../preferences.ui" line="1592"/>
         <source>Collapse articles more than</source>
         <translation>Skrátiť články väčšie než</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1545"/>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Články dlhšie než je táto veľkosť budú skrátené</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1561"/>
+        <location filename="../preferences.ui" line="1615"/>
         <source>symbols</source>
         <translation>symboly</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1586"/>
+        <location filename="../preferences.ui" line="1640"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1590"/>
+        <location filename="../preferences.ui" line="1644"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3910,57 +4045,59 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation>Použiť &amp;GoldenDict správu</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1405"/>
+        <location filename="../preferences.ui" line="1407"/>
         <source>History</source>
         <translation>História</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1411"/>
+        <location filename="../preferences.ui" line="1413"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Zapnite túto voľbu pre uchovanie histórie preložených slov</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1414"/>
+        <location filename="../preferences.ui" line="1416"/>
         <source>Store &amp;history</source>
         <translation>Uchovať &amp;históriu</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1429"/>
+        <location filename="../preferences.ui" line="1431"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Nastaví maximálny počet položiek pre uchovanie v histórií.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1432"/>
+        <location filename="../preferences.ui" line="1434"/>
         <source>Maximum history size:</source>
         <translation>Maximálna veľkosť histórie:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1469"/>
+        <location filename="../preferences.ui" line="1471"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Interval ukladania histórie. Ak je nastavený na 0, história sa bude ukladať pri ukončení.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1475"/>
+        <location filename="../preferences.ui" line="1477"/>
+        <location filename="../preferences.ui" line="1530"/>
         <source>Save every</source>
         <translation>Uložiť každých</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1492"/>
+        <location filename="../preferences.ui" line="1494"/>
+        <location filename="../preferences.ui" line="1544"/>
         <source>minutes</source>
         <translation>minút</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1517"/>
+        <location filename="../preferences.ui" line="1571"/>
         <source>Articles</source>
         <translation>Články</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1523"/>
+        <location filename="../preferences.ui" line="1577"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Zapnite túto voľbu, aby sa vždy vždy rozbalili voliteľné časti článkov</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1526"/>
+        <location filename="../preferences.ui" line="1580"/>
         <source>Expand optional &amp;parts</source>
         <translation>Rozbaliť voliteľné &amp;časti</translation>
     </message>
@@ -4005,12 +4142,12 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <translation type="obsolete">Hrať cez DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="564"/>
+        <location filename="../preferences.cc" line="568"/>
         <source>Changing Language</source>
         <translation>Zmena jazyka</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="565"/>
+        <location filename="../preferences.cc" line="569"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Reštartovať program pre aplikovanie zmeny jazyka.</translation>
     </message>
@@ -4234,17 +4371,17 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1031"/>
+        <location filename="../groups_widgets.cc" line="1035"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>Vyhľadávanie/filter v slovníku (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1040"/>
+        <location filename="../groups_widgets.cc" line="1044"/>
         <source>Quick Search</source>
         <translation>Rýchle hľadanie</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1045"/>
+        <location filename="../groups_widgets.cc" line="1049"/>
         <source>Clear Search</source>
         <translation>Vymazať hľadanie</translation>
     </message>
@@ -4252,20 +4389,24 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2790"/>
-        <location filename="../articleview.cc" line="2797"/>
+        <location filename="../articleview.cc" line="2802"/>
         <source>ERROR: %1</source>
         <translation>CHYBA: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2790"/>
+        <location filename="../articleview.cc" line="2802"/>
         <source>Resource saving error: </source>
         <translation>Chyba ukladania zdroja: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2797"/>
+        <location filename="../articleview.cc" line="2828"/>
         <source>The referenced resource failed to download.</source>
         <translation>Referencovaný zdroj sa nepodarilo stiahnuť.</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2828"/>
+        <source>WARNING: %1</source>
+        <translation type="unfinished">VAROVANIE: %1</translation>
     </message>
 </context>
 <context>
