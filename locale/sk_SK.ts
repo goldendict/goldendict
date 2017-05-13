@@ -1039,7 +1039,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="629"/>
+        <location filename="../favoritespanewidget.cc" line="630"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2580,6 +2580,11 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="143"/>
+        <source>Favo&amp;rites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="377"/>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Slovníky...</translation>
@@ -2629,11 +2634,6 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <location filename="../mainwindow.cc" line="366"/>
         <source>&amp;Quit</source>
         <translation>&amp;Koniec</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="143"/>
-        <source>Fa&amp;vorites</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="316"/>
@@ -2784,7 +2784,12 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="664"/>
+        <location filename="../mainwindow.ui" line="662"/>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
         <translation type="unfinished"></translation>
     </message>

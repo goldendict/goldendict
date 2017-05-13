@@ -3296,10 +3296,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fa&amp;vorites</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Favor&amp;ites Pane</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3353,6 +3349,14 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Data parsing error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Favo&amp;rites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

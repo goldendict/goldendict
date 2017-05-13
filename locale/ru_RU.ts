@@ -2,6 +2,9 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru">
 <context>
+    <name></name>
+</context>
+<context>
     <name>About</name>
     <message>
         <location filename="../about.ui" line="17"/>
@@ -389,6 +392,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>ChineseConversion</name>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
         <source>Chinese Conversion</source>
@@ -999,7 +1003,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="629"/>
+        <location filename="../favoritespanewidget.cc" line="630"/>
         <source>Error in favorities file</source>
         <translation>Ошибка в файле избранного</translation>
     </message>
@@ -2888,6 +2892,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Поиск</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="143"/>
+        <source>Favo&amp;rites</source>
+        <translation>Избранное</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="343"/>
         <source>&amp;History Pane</source>
         <translation>Панель журнала</translation>
@@ -2936,11 +2945,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.ui" line="425"/>
         <source>Quit from application</source>
         <translation>Выйти из приложения</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="143"/>
-        <source>Fa&amp;vorites</source>
-        <translation>Избранное</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="316"/>
@@ -3081,7 +3085,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Добавить текущую вкладку в Избранное</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="664"/>
+        <location filename="../mainwindow.ui" line="662"/>
+        <source>Ctrl+E</source>
+        <translation>Ctrl+E</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
         <translation>Экспортировать в простой список</translation>
     </message>

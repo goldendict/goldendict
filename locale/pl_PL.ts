@@ -1042,7 +1042,7 @@ między ortografią klasyczną i szkolną w cyrylicy)</translation>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="629"/>
+        <location filename="../favoritespanewidget.cc" line="630"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2975,6 +2975,11 @@ Aby odnaleźć symbole „*”, „?”, „[” i „]”, należy użyć odpow
         <translation>Wy&amp;szukiwanie</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="143"/>
+        <source>Favo&amp;rites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Preferencje...</translation>
@@ -3013,11 +3018,6 @@ Aby odnaleźć symbole „*”, „?”, „[” i „]”, należy użyć odpow
         <location filename="../mainwindow.ui" line="425"/>
         <source>Quit from application</source>
         <translation>Zakończ aplikację</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="143"/>
-        <source>Fa&amp;vorites</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="316"/>
@@ -3163,7 +3163,12 @@ Aby odnaleźć symbole „*”, „?”, „[” i „]”, należy użyć odpow
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="664"/>
+        <location filename="../mainwindow.ui" line="662"/>
+        <source>Ctrl+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
         <translation type="unfinished"></translation>
     </message>
