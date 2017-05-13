@@ -27,6 +27,7 @@ public:
     itemSelectionChanged( false )
   , listItemDelegate( 0 )
   , m_favoritesModel( 0 )
+  , timerId( 0 )
   {}
 
   virtual ~FavoritesPaneWidget();
@@ -46,8 +47,13 @@ public:
   void setFocusOnTree()
   { m_favoritesTree->setFocus(); }
 
+  void setSaveInterval( unsigned interval );
+
 signals:
   void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
+
+protected:
+  virtual void timerEvent( QTimerEvent * ev );
 
 private slots:
   void emitFavoritesItemRequested(QModelIndex const &);
@@ -79,6 +85,8 @@ private:
 
   WordListItemDelegate * listItemDelegate;
   FavoritesModel * m_favoritesModel;
+
+  int timerId;
 };
 
 
@@ -193,6 +201,8 @@ public:
   void getDataInPlainText( QString & dataStr );
   bool setDataFromXml( QString const & dataStr );
 
+  void saveData();
+
 public slots:
   void itemCollapsed ( const QModelIndex & index );
   void itemExpanded ( const QModelIndex & index );
@@ -202,7 +212,6 @@ signals:
 
 protected:
   void readData();
-  void saveData();
   void addFolder( TreeItem * parent, QDomNode & node );
   void storeFolder( TreeItem * folder, QDomNode & node );
 
@@ -234,6 +243,7 @@ private:
   QString m_favoritesFilename;
   TreeItem * rootItem;
   QDomDocument dom;
+  bool dirty;
 };
 
 #endif // __FAVORITIESPANEWIDGET_HH__INCLUDED__

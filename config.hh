@@ -237,6 +237,7 @@ struct Preferences
   bool alwaysExpandOptionalParts;
 
   unsigned historyStoreInterval;
+  unsigned favoritesStoreInterval;
 
   bool collapseBigArticles;
   int articleSizeLimit;

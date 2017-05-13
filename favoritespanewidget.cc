@@ -146,8 +146,7 @@ void FavoritesPaneWidget::copySelectedItems()
     return;
   }
 
-  FavoritesModel * model = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  QStringList selectedStrings = model->getTextForIndexes( selectedIdxs );
+  QStringList selectedStrings = m_favoritesModel->getTextForIndexes( selectedIdxs );
 
   QApplication::clipboard()->setText( selectedStrings.join( QString::fromLatin1( "\n" ) ) );
 }
@@ -169,8 +168,7 @@ void FavoritesPaneWidget::deleteSelectedItems()
   if( mb.result() != QMessageBox::Yes )
     return;
 
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  md->removeItemsForIndexes( selectedIdxs );
+  m_favoritesModel->removeItemsForIndexes( selectedIdxs );
 }
 
 void FavoritesPaneWidget::showCustomMenu(QPoint const & pos)
@@ -218,15 +216,14 @@ void FavoritesPaneWidget::onItemClicked( QModelIndex const & idx )
 
 void FavoritesPaneWidget::emitFavoritesItemRequested( QModelIndex const & idx )
 {
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  if( md->itemType( idx ) != TreeItem::Word )
+  if( m_favoritesModel->itemType( idx ) != TreeItem::Word )
   {
     // Item is not headword
     return;
   }
 
-  QString headword = md->data( idx, Qt::DisplayRole ).toString();
-  QString path = md->pathToItem( idx );
+  QString headword = m_favoritesModel->data( idx, Qt::DisplayRole ).toString();
+  QString path = m_favoritesModel->pathToItem( idx );
 
   if( !headword.isEmpty() )
     emit favoritesItemRequested( headword, path );
@@ -238,13 +235,11 @@ void FavoritesPaneWidget::addFolder()
   if( selectedIdx.size() > 1 )
     return;
 
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-
   QModelIndex folderIdx;
   if( selectedIdx.size() )
-    folderIdx = md->addNewFolder( selectedIdx.front() );
+    folderIdx = m_favoritesModel->addNewFolder( selectedIdx.front() );
   else
-    folderIdx = md->addNewFolder( QModelIndex() );
+    folderIdx = m_favoritesModel->addNewFolder( QModelIndex() );
 
   if( folderIdx.isValid() )
     m_favoritesTree->edit( folderIdx );
@@ -252,26 +247,42 @@ void FavoritesPaneWidget::addFolder()
 
 void FavoritesPaneWidget::addHeadword( QString const & path, QString const & headword )
 {
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  md->addNewHeadword( path, headword );
+  m_favoritesModel->addNewHeadword( path, headword );
 }
 
 void FavoritesPaneWidget::getDataInXml( QByteArray & dataStr )
 {
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  md->getDataInXml( dataStr );
+  m_favoritesModel->getDataInXml( dataStr );
 }
 
 void FavoritesPaneWidget::getDataInPlainText( QString & dataStr )
 {
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  md->getDataInPlainText( dataStr );
+  m_favoritesModel->getDataInPlainText( dataStr );
 }
 
 bool FavoritesPaneWidget::setDataFromXml( QString const & dataStr )
 {
-  FavoritesModel * md = static_cast< FavoritesModel * >( m_favoritesTree->model() );
-  return md->setDataFromXml( dataStr );
+  return m_favoritesModel->setDataFromXml( dataStr );
+}
+
+void FavoritesPaneWidget::setSaveInterval( unsigned interval )
+{
+  if( timerId )
+  {
+    killTimer( timerId );
+    timerId = 0;
+  }
+  if( interval )
+  {
+    m_favoritesModel->saveData();
+    timerId = startTimer( interval * 60000 );
+  }
+}
+
+void FavoritesPaneWidget::timerEvent( QTimerEvent * ev )
+{
+  Q_UNUSED( ev )
+  m_favoritesModel->saveData();
 }
 
 /************************************************** TreeItem *********************************************/
@@ -438,9 +449,11 @@ QStringList TreeItem::getTextFromAllChilds() const
 FavoritesModel::FavoritesModel( QString favoritesFilename, QObject * parent ) :
   QAbstractItemModel( parent ),
   m_favoritesFilename( favoritesFilename ),
-  rootItem( 0 )
+  rootItem( 0 ),
+  dirty( false )
 {
   readData();
+  dirty = false;
 }
 
 FavoritesModel::~FavoritesModel()
@@ -521,6 +534,8 @@ bool FavoritesModel::removeRows( int row, int count, const QModelIndex &parent )
 
   endRemoveRows();
 
+  dirty = true;
+
   return true;
 }
 
@@ -538,6 +553,8 @@ bool FavoritesModel::setData( const QModelIndex & index, const QVariant & value,
 
   TreeItem * item = getItem( index );
   item->setData( value );
+
+  dirty = true;
 
   return true;
 }
@@ -625,10 +642,14 @@ void FavoritesModel::readData()
   dom.clear();
 
   endResetModel();
+  dirty = false;
 }
 
 void FavoritesModel::saveData()
 {
+  if( !dirty )
+    return;
+
   QFile tmpFile( m_favoritesFilename + ".tmp" );
   if( !tmpFile.open( QFile::WriteOnly ) )
   {
@@ -652,7 +673,8 @@ void FavoritesModel::saveData()
 
   tmpFile.close();
 
-  renameAtomically( tmpFile.fileName(), m_favoritesFilename );
+  if( renameAtomically( tmpFile.fileName(), m_favoritesFilename ) )
+    dirty = false;
 
   dom.clear();
 }
@@ -678,6 +700,7 @@ void FavoritesModel::addFolder( TreeItem *parent, QDomNode &node )
       parent->appendChild( new TreeItem( word, parent, TreeItem::Word ) );
     }
   }
+  dirty = true;
 }
 
 void FavoritesModel::storeFolder( TreeItem * folder, QDomNode & node )
@@ -807,6 +830,8 @@ bool FavoritesModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
       parentItem->insertChild( row + i, newItem );
     }
     endInsertRows();
+
+    dirty = true;
 
     return true;
   }
@@ -1009,6 +1034,8 @@ QModelIndex FavoritesModel::addNewFolder( const QModelIndex & idx )
   parentItem->insertChild( row, newFolder );
   endInsertRows();
 
+  dirty = true;
+
   return createIndex( row, 0, newFolder );
 }
 
@@ -1043,6 +1070,8 @@ QModelIndex FavoritesModel::forceFolder( QString const & name, const QModelIndex
   parentItem->appendChild( newItem );
   endInsertRows();
 
+  dirty = true;
+
   return createIndex( row, 0, newItem );
 }
 
@@ -1060,6 +1089,8 @@ bool FavoritesModel::addHeadword( const QString & word, const QModelIndex & pare
   beginInsertRows( parentIdx, row, row );
   parentItem->appendChild( newItem );
   endInsertRows();
+
+  dirty = true;
 
   return true;
 }
@@ -1140,5 +1171,6 @@ bool FavoritesModel::setDataFromXml( QString const & dataStr )
   endResetModel();
 
   dom.clear();
+  dirty = true;
   return true;
 }

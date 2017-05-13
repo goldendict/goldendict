@@ -194,6 +194,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.historySaveIntervalField->setValue( p.historyStoreInterval );
   ui.alwaysExpandOptionalParts->setChecked( p.alwaysExpandOptionalParts );
 
+  ui.favoritesSaveIntervalField->setValue( p.favoritesStoreInterval );
+
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
 
@@ -371,6 +373,8 @@ Config::Preferences Preferences::getPreferences()
   p.maxStringsInHistory = ui.historyMaxSizeField->text().toUInt();
   p.historyStoreInterval = ui.historySaveIntervalField->text().toUInt();
   p.alwaysExpandOptionalParts = ui.alwaysExpandOptionalParts->isChecked();
+
+  p.favoritesStoreInterval = ui.favoritesSaveIntervalField->text().toUInt();
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();

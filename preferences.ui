@@ -1400,116 +1400,170 @@ It is not needed to select this option if you don't use such programs.</string>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="historyBox">
-         <property name="title">
-          <string>History</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_14">
-          <item>
-           <widget class="QCheckBox" name="storeHistory">
-            <property name="toolTip">
-             <string>Turn this option on to store history of the translated words</string>
-            </property>
-            <property name="text">
-             <string>Store &amp;history</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <property name="topMargin">
-             <number>0</number>
-            </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <widget class="QGroupBox" name="historyBox">
+           <property name="title">
+            <string>History</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_14">
             <item>
-             <widget class="QLabel" name="historySizeLabel">
+             <widget class="QCheckBox" name="storeHistory">
               <property name="toolTip">
-               <string>Specify the maximum number of entries to keep in history.</string>
+               <string>Turn this option on to store history of the translated words</string>
               </property>
               <property name="text">
-               <string>Maximum history size:</string>
+               <string>Store &amp;history</string>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="historyMaxSizeField">
-              <property name="accelerated">
+              <property name="checked">
                <bool>true</bool>
               </property>
-              <property name="maximum">
-               <number>99999</number>
-              </property>
-              <property name="value">
-               <number>500</number>
-              </property>
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_8">
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="historySizeLabel">
+                <property name="toolTip">
+                 <string>Specify the maximum number of entries to keep in history.</string>
+                </property>
+                <property name="text">
+                 <string>Maximum history size:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="historyMaxSizeField">
+                <property name="accelerated">
+                 <bool>true</bool>
+                </property>
+                <property name="maximum">
+                 <number>99999</number>
+                </property>
+                <property name="value">
+                 <number>500</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <widget class="QLabel" name="label_10">
+                <property name="toolTip">
+                 <string>History saving interval. If set to 0 history will be saved only during exit.</string>
+                </property>
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="text">
+                 <string>Save every</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="historySaveIntervalField">
+                <property name="statusTip">
+                 <string/>
+                </property>
+                <property name="maximum">
+                 <number>120</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>minutes</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_9">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="favoritesBox">
+           <property name="title">
+            <string>Favorites</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_21">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_16">
+              <item>
+               <widget class="QLabel" name="label_17">
+                <property name="toolTip">
+                 <string>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</string>
+                </property>
+                <property name="text">
+                 <string>Save every</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSpinBox" name="favoritesSaveIntervalField">
+                <property name="maximum">
+                 <number>120</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_18">
+                <property name="text">
+                 <string>minutes</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer_15">
               <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+               <enum>Qt::Vertical</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
-                <width>40</width>
-                <height>20</height>
+                <width>20</width>
+                <height>40</height>
                </size>
               </property>
              </spacer>
             </item>
            </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <item>
-             <widget class="QLabel" name="label_10">
-              <property name="toolTip">
-               <string>History saving interval. If set to 0 history will be saved only during exit.</string>
-              </property>
-              <property name="statusTip">
-               <string/>
-              </property>
-              <property name="text">
-               <string>Save every</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="historySaveIntervalField">
-              <property name="statusTip">
-               <string/>
-              </property>
-              <property name="maximum">
-               <number>120</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>minutes</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_9">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
         <widget class="QGroupBox" name="groupBox_6">

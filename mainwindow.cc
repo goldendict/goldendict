@@ -550,6 +550,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Favorites
 
   ui.favoritesPaneWidget->setUp( &cfg, ui.menuFavorites );
+  ui.favoritesPaneWidget->setSaveInterval( cfg.preferences.favoritesStoreInterval );
 
   connect( ui.favoritesPane, SIGNAL( visibilityChanged( bool ) ),
            this, SLOT( updateFavoritesMenu() ) );
@@ -2033,6 +2034,9 @@ void MainWindow::editPreferences()
 
     if( cfg.preferences.historyStoreInterval != p.historyStoreInterval )
       history.setSaveInterval( p.historyStoreInterval );
+
+    if( cfg.preferences.favoritesStoreInterval != p.favoritesStoreInterval )
+      ui.favoritesPaneWidget->setSaveInterval( p.favoritesStoreInterval );
 
     cfg.preferences = p;
 
