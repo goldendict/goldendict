@@ -4444,6 +4444,14 @@ void MainWindow::addCurrentTabToFavorites()
 
   QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
 
+  // Reset table header to original headword
+
+  headword.replace( "&&", "&" );
+  if( headword.startsWith( QChar( 0x202E ) ) )
+    headword = headword.mid( 1 );
+  if( headword.endsWith( QChar( 0x202C ) ) )
+    headword.chop( 1 );
+
   ui.favoritesPaneWidget->addHeadword( folder, headword );
 }
 
