@@ -437,6 +437,8 @@ private slots:
   /// Add word to history even if history is disabled in options
   void forceAddWordToHistory( const QString & word);
 
+  void addWordToFavorites( QString const & word, unsigned groupId );
+
   void sendWordToInputLine( QString const & word );
 
   void storeResourceSavePath( QString const & );

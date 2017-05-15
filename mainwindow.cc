@@ -1393,6 +1393,9 @@ void MainWindow::makeScanPopup()
   connect( this, SIGNAL( setPopupGroupByName( QString ) ),
            scanPopup.get(), SLOT( setGroupByName( QString ) ) );
 
+  connect( scanPopup.get(), SIGNAL( sendWordToFavorites( QString, uint ) ),
+           this, SLOT( addWordToFavorites( QString, uint ) ) );
+
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
            this, SLOT( isGoldenDictWindow( HWND ) ) );
@@ -4453,6 +4456,16 @@ void MainWindow::addCurrentTabToFavorites()
     headword.chop( 1 );
 
   ui.favoritesPaneWidget->addHeadword( folder, headword );
+}
+
+void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( groupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  ui.favoritesPaneWidget->addHeadword( folder, word );
 }
 
 void MainWindow::setGroupByName( QString const & name, bool main_window )

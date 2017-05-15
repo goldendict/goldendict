@@ -1019,6 +1019,13 @@ void ScanPopup::on_sendWordButton_clicked()
   emit sendWordToMainWindow( definition->getTitle() );
 }
 
+void ScanPopup::on_sendWordToFavoritesButton_clicked()
+{
+  if ( !isVisible() )
+    return;
+  emit sendWordToFavorites( definition->getTitle(), cfg.lastPopupGroupId );
+}
+
 void ScanPopup::switchExpandOptionalPartsMode()
 {
   if( isVisible() )

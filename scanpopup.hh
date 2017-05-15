@@ -67,6 +67,8 @@ signals:
   void openDictionaryFolder( QString const & id );
   /// Put translated word into history
   void sendWordToHistory( QString const & word );
+  /// Put translated word into Favorites
+  void sendWordToFavorites( QString const & word, unsigned groupId );
 
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab
@@ -164,6 +166,7 @@ private slots:
   void on_showDictionaryBar_clicked( bool checked );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
   void on_sendWordButton_clicked();
+  void on_sendWordToFavoritesButton_clicked();
   void on_goBackButton_clicked();
   void on_goForwardButton_clicked();
 

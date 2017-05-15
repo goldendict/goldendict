@@ -173,6 +173,23 @@
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="sendWordToFavoritesButton">
+             <property name="toolTip">
+              <string>Add word to Favorites (Ctrl+E)</string>
+             </property>
+             <property name="text">
+              <string notr="true">...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/star.png</normaloff>:/icons/star.png</iconset>
+             </property>
+             <property name="shortcut">
+              <string notr="true">Ctrl+E</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
