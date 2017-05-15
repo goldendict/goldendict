@@ -2812,8 +2812,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3655"/>
-        <location filename="../mainwindow.cc" line="3667"/>
+        <location filename="../mainwindow.cc" line="3658"/>
+        <location filename="../mainwindow.cc" line="3670"/>
         <source>&amp;Show</source>
         <translation>&amp;Показати</translation>
     </message>
@@ -2947,44 +2947,44 @@ between classic and school orthography in cyrillic)</source>
         <translation>Усьому</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3830"/>
+        <location filename="../mainwindow.cc" line="3833"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3832"/>
-        <location filename="../mainwindow.cc" line="3922"/>
+        <location filename="../mainwindow.cc" line="3835"/>
+        <location filename="../mainwindow.cc" line="3925"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3851"/>
-        <location filename="../mainwindow.cc" line="3900"/>
+        <location filename="../mainwindow.cc" line="3854"/>
+        <location filename="../mainwindow.cc" line="3903"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3871"/>
+        <location filename="../mainwindow.cc" line="3874"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3920"/>
+        <location filename="../mainwindow.cc" line="3923"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3945"/>
+        <location filename="../mainwindow.cc" line="3948"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3951"/>
+        <location filename="../mainwindow.cc" line="3954"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4435"/>
+        <location filename="../mainwindow.cc" line="4438"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3009,17 +3009,17 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Навігація</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1448"/>
+        <location filename="../mainwindow.cc" line="1451"/>
         <source>Open Tabs List</source>
         <translation>Відчинити список вкладок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1506"/>
+        <location filename="../mainwindow.cc" line="1509"/>
         <source>(untitled)</source>
         <translation>(без назви)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1727"/>
+        <location filename="../mainwindow.cc" line="1730"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -3028,33 +3028,33 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Попередження: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2860"/>
+        <location filename="../mainwindow.cc" line="2863"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Не вдалось запустити механізм стеження за гарячими клавішами.&lt;br&gt;Переконайтесь, що ваш XServer має розширення RECORD увімкнутим.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3001"/>
+        <location filename="../mainwindow.cc" line="3004"/>
         <source>New Release Available</source>
         <translation>Доступний новий випуск</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3002"/>
+        <location filename="../mainwindow.cc" line="3005"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Версія &lt;b&gt;%1&lt;/b&gt; GoldenDict доступна до звантаження.&lt;br&gt;Натисніть &lt;b&gt;Звантажити&lt;/b&gt;, щоб перейти до сторінки звантаження.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3007"/>
+        <location filename="../mainwindow.cc" line="3010"/>
         <source>Download</source>
         <translation>Звантажити</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3008"/>
+        <location filename="../mainwindow.cc" line="3011"/>
         <source>Skip This Release</source>
         <translation>Пропустити цей випуск</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="831"/>
-        <location filename="../mainwindow.cc" line="3061"/>
+        <location filename="../mainwindow.cc" line="3064"/>
         <source>Accessibility API is not enabled</source>
         <translation>API доступності не ввімкнено</translation>
     </message>
@@ -3065,42 +3065,42 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3138"/>
+        <location filename="../mainwindow.cc" line="3141"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Ви вирішили сховати лоток меню. Викор. %1 аби показувати його знову.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3139"/>
+        <location filename="../mainwindow.cc" line="3142"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3237"/>
+        <location filename="../mainwindow.cc" line="3240"/>
         <source>Page Setup</source>
         <translation>Параметри сторінки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3238"/>
+        <location filename="../mainwindow.cc" line="3241"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Не знайдено жодного принтера. Будь ласка, спершу встановіть хоч якийсь.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3256"/>
+        <location filename="../mainwindow.cc" line="3259"/>
         <source>Print Article</source>
         <translation>Надрукувати статтю</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3331"/>
+        <location filename="../mainwindow.cc" line="3334"/>
         <source>Article, Complete (*.html)</source>
         <translation>Стаття, Повна (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3332"/>
+        <location filename="../mainwindow.cc" line="3335"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Стаття, тільки HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3338"/>
         <source>Save Article As</source>
         <translation>Зберегти статтю як</translation>
     </message>
@@ -3109,93 +3109,93 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">Файли HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3349"/>
+        <location filename="../mainwindow.cc" line="3352"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3350"/>
+        <location filename="../mainwindow.cc" line="3353"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Неможливо зберегти статтю: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3411"/>
+        <location filename="../mainwindow.cc" line="3414"/>
         <source>Saving article...</source>
         <translation>Збередення статті…</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3474"/>
+        <location filename="../mainwindow.cc" line="3477"/>
         <source>The main window is set to be always on top.</source>
         <translation>Головне меню налаштовано аби завжди бути зверху.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3651"/>
-        <location filename="../mainwindow.cc" line="3663"/>
+        <location filename="../mainwindow.cc" line="3654"/>
+        <location filename="../mainwindow.cc" line="3666"/>
         <source>&amp;Hide</source>
         <translation>&amp;Сховати</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3695"/>
+        <location filename="../mainwindow.cc" line="3698"/>
         <source>Export history to file</source>
         <translation>Експортувати файл історії</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3697"/>
-        <location filename="../mainwindow.cc" line="3759"/>
-        <location filename="../mainwindow.cc" line="3873"/>
+        <location filename="../mainwindow.cc" line="3700"/>
+        <location filename="../mainwindow.cc" line="3762"/>
+        <location filename="../mainwindow.cc" line="3876"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Текстові файли (*.txt);;Всі файли (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3736"/>
+        <location filename="../mainwindow.cc" line="3739"/>
         <source>History export complete</source>
         <translation>Експорти історії завершено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3739"/>
-        <location filename="../mainwindow.cc" line="3854"/>
-        <location filename="../mainwindow.cc" line="3903"/>
+        <location filename="../mainwindow.cc" line="3742"/>
+        <location filename="../mainwindow.cc" line="3857"/>
+        <location filename="../mainwindow.cc" line="3906"/>
         <source>Export error: </source>
         <translation>Помилка експортування:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3757"/>
+        <location filename="../mainwindow.cc" line="3760"/>
         <source>Import history from file</source>
         <translation>Імпортувати історію з файлу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3806"/>
+        <location filename="../mainwindow.cc" line="3809"/>
         <source>Import error: invalid data in file</source>
         <translation>Помилка імпорту: недійсна дата у файлі</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3810"/>
+        <location filename="../mainwindow.cc" line="3813"/>
         <source>History import complete</source>
         <translation>Імпорти історії завершено</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3813"/>
-        <location filename="../mainwindow.cc" line="3949"/>
+        <location filename="../mainwindow.cc" line="3816"/>
+        <location filename="../mainwindow.cc" line="3952"/>
         <source>Import error: </source>
         <translation>Помилка імпортування:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4226"/>
+        <location filename="../mainwindow.cc" line="4229"/>
         <source>Dictionary info</source>
         <translation>Інфа про словник</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4230"/>
+        <location filename="../mainwindow.cc" line="4233"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4232"/>
+        <location filename="../mainwindow.cc" line="4235"/>
         <source>Open dictionary folder</source>
         <translation>Відкрити словникову теку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4238"/>
+        <location filename="../mainwindow.cc" line="4241"/>
         <source>Edit dictionary</source>
         <translation>Редагувати словник</translation>
     </message>
@@ -4447,8 +4447,8 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../scanpopup.ui" line="116"/>
         <location filename="../scanpopup.ui" line="130"/>
         <location filename="../scanpopup.ui" line="144"/>
-        <location filename="../scanpopup.ui" line="194"/>
-        <location filename="../scanpopup.ui" line="218"/>
+        <location filename="../scanpopup.ui" line="211"/>
+        <location filename="../scanpopup.ui" line="235"/>
         <source>...</source>
         <translation>…</translation>
     </message>
@@ -4487,12 +4487,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Alt+W</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="191"/>
+        <location filename="../scanpopup.ui" line="178"/>
+        <source>Add word to Favorites (Ctrl+E)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../scanpopup.ui" line="208"/>
         <source>Shows or hides the dictionary bar</source>
         <translation>Показує або ховає панель словника</translation>
     </message>
     <message>
-        <location filename="../scanpopup.ui" line="214"/>
+        <location filename="../scanpopup.ui" line="231"/>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
         <translation>Використайте шпильку, щоб вікно залишалось на екрані,

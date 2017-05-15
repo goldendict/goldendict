@@ -4466,6 +4466,10 @@ Lze měnit jeho velikost a může s ním být i jinak manipulováno.</translatio
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
+    <message>
+        <source>Add word to Favorites (Ctrl+E)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>

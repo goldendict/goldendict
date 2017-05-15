@@ -4425,6 +4425,10 @@ could be resized or managed in other ways.</source>
         <source>%1 - %2</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add word to Favorites (Ctrl+E)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>

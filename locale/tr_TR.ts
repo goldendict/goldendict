@@ -3655,6 +3655,10 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
         <source>%1 - %2</source>
         <translation type="unfinished">%1 - %2</translation>
     </message>
+    <message>
+        <source>Add word to Favorites (Ctrl+E)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
