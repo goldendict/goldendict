@@ -1035,7 +1035,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="630"/>
+        <location filename="../favoritespanewidget.cc" line="633"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1063,7 +1063,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="165"/>
+        <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3911,48 +3911,58 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1571"/>
+        <location filename="../preferences.ui" line="1553"/>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1556"/>
+        <source>Confirmation for items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1581"/>
         <source>Articles</source>
         <translation>Чланци</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1577"/>
+        <location filename="../preferences.ui" line="1587"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Укључите ову могућност да увек прошири необавезне делове чланака</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1580"/>
+        <location filename="../preferences.ui" line="1590"/>
         <source>Expand optional &amp;parts</source>
         <translation>Могућност проширења &amp;делова</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1589"/>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Изаберите ову могућност да бисте аутоматски урушити велике чланке</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1592"/>
+        <location filename="../preferences.ui" line="1602"/>
         <source>Collapse articles more than</source>
         <translation>Уруши чланке опширније од</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1599"/>
+        <location filename="../preferences.ui" line="1609"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Чланци дужи него ове величине ће бити срушени</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1615"/>
+        <location filename="../preferences.ui" line="1625"/>
         <source>symbols</source>
         <translation>симболи</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1640"/>
+        <location filename="../preferences.ui" line="1650"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1644"/>
+        <location filename="../preferences.ui" line="1654"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4154,12 +4164,12 @@ GoldenDict. Ако се појавила нова верзија, програм
         <translation type="obsolete">Репродукуј преко DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="568"/>
+        <location filename="../preferences.cc" line="570"/>
         <source>Changing Language</source>
         <translation>Промена језика</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="569"/>
+        <location filename="../preferences.cc" line="571"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Поново покрените програм за промену језика.</translation>
     </message>

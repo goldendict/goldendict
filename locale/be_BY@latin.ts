@@ -1010,7 +1010,7 @@ miž klasyčnym i školnym pravapisam)</translation>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="630"/>
+        <location filename="../favoritespanewidget.cc" line="633"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1038,7 +1038,7 @@ miž klasyčnym i školnym pravapisam)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="165"/>
+        <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3967,48 +3967,58 @@ Nia treba ŭłučać hetaje opcyi, kali nie karystaješsia takimi pragramami.</t
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1571"/>
+        <location filename="../preferences.ui" line="1553"/>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1556"/>
+        <source>Confirmation for items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1581"/>
         <source>Articles</source>
         <translation>Artykuły</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1577"/>
+        <location filename="../preferences.ui" line="1587"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Ułučy hetuju opcyju, kab zaŭsiody razhortvać dadatkovyja raździeły artykułaŭ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1580"/>
+        <location filename="../preferences.ui" line="1590"/>
         <source>Expand optional &amp;parts</source>
         <translation>Razhortvać dadatkovyja &amp;raździeły</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1589"/>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Ułučy opcyju, kab aŭtamatyčna zhartać vialikija artykuły</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1592"/>
+        <location filename="../preferences.ui" line="1602"/>
         <source>Collapse articles more than</source>
         <translation>Zhartać artykuły, jakija majuć bolš za</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1599"/>
+        <location filename="../preferences.ui" line="1609"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Artykuły bolšyja za heta značeńnie buduć zhartacca</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1615"/>
+        <location filename="../preferences.ui" line="1625"/>
         <source>symbols</source>
         <translation>znakaŭ</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1640"/>
+        <location filename="../preferences.ui" line="1650"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1644"/>
+        <location filename="../preferences.ui" line="1654"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4049,12 +4059,12 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>Lingoes-Blue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="568"/>
+        <location filename="../preferences.cc" line="570"/>
         <source>Changing Language</source>
         <translation>Źmiena movy</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="569"/>
+        <location filename="../preferences.cc" line="571"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Pierastartuj pragramu, kab užyć novuju movu.</translation>
     </message>

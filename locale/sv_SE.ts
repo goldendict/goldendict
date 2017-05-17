@@ -1011,7 +1011,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="630"/>
+        <location filename="../favoritespanewidget.cc" line="633"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1039,7 +1039,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="165"/>
+        <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3769,33 +3769,43 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1589"/>
+        <location filename="../preferences.ui" line="1553"/>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1556"/>
+        <source>Confirmation for items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Välj detta alternativ för att automatiskt dölja stora artiklar.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1592"/>
+        <location filename="../preferences.ui" line="1602"/>
         <source>Collapse articles more than</source>
         <translation>Dölj artiklar längre än</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1599"/>
+        <location filename="../preferences.ui" line="1609"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Artiklar som är längre än följande antal tecken kommer att komprimeras.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1615"/>
+        <location filename="../preferences.ui" line="1625"/>
         <source>symbols</source>
         <translation>tecken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1640"/>
+        <location filename="../preferences.ui" line="1650"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1644"/>
+        <location filename="../preferences.ui" line="1654"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4012,17 +4022,17 @@ du inte aktivera det här alternativet.</translation>
         <translation>minut</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1571"/>
+        <location filename="../preferences.ui" line="1581"/>
         <source>Articles</source>
         <translation>Artiklar</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1577"/>
+        <location filename="../preferences.ui" line="1587"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Aktivera detta alternativ för att alltid visa valfria delar av artiklar.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1580"/>
+        <location filename="../preferences.ui" line="1590"/>
         <source>Expand optional &amp;parts</source>
         <translation>Visa valfria &amp;delar</translation>
     </message>
@@ -4063,12 +4073,12 @@ du inte aktivera det här alternativet.</translation>
         <translation>Lingoes (blå)</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="568"/>
+        <location filename="../preferences.cc" line="570"/>
         <source>Changing Language</source>
         <translation>Språkbyte</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="569"/>
+        <location filename="../preferences.cc" line="571"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Starta om programmet för att verkställa bytet av språk.</translation>
     </message>

@@ -3341,6 +3341,14 @@ from Stardict, Babylon and GLS dictionaries</source>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirmation for items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>

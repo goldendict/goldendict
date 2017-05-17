@@ -1010,7 +1010,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="630"/>
+        <location filename="../favoritespanewidget.cc" line="633"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1038,7 +1038,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="165"/>
+        <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3760,33 +3760,43 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1589"/>
+        <location filename="../preferences.ui" line="1553"/>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1556"/>
+        <source>Confirmation for items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Kur e ndez, artikujt e mëdhenj do të mblidhen automatikisht.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1592"/>
+        <location filename="../preferences.ui" line="1602"/>
         <source>Collapse articles more than</source>
         <translation>Mbledh artikujt me më shumë se</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1599"/>
+        <location filename="../preferences.ui" line="1609"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Artikujt mbi këtë përmasë do të mblidhen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1615"/>
+        <location filename="../preferences.ui" line="1625"/>
         <source>symbols</source>
         <translation>simbole</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1640"/>
+        <location filename="../preferences.ui" line="1650"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1644"/>
+        <location filename="../preferences.ui" line="1654"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3995,17 +4005,17 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
         <translation>minuta</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1571"/>
+        <location filename="../preferences.ui" line="1581"/>
         <source>Articles</source>
         <translation>Artikujt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1577"/>
+        <location filename="../preferences.ui" line="1587"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Kur e ndez, pjesët fakultative të artikujve zgjerohen gjithmonë.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1580"/>
+        <location filename="../preferences.ui" line="1590"/>
         <source>Expand optional &amp;parts</source>
         <translation>Zgjeroj &amp;pjesët fakultative</translation>
     </message>
@@ -4046,12 +4056,12 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
         <translation>Lingoes Blu</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="568"/>
+        <location filename="../preferences.cc" line="570"/>
         <source>Changing Language</source>
         <translation>Ndryshimi i Gjuhës</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="569"/>
+        <location filename="../preferences.cc" line="571"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Riniseni programin për të zbatuar ndryshimin e gjuhës.</translation>
     </message>

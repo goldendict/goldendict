@@ -1026,7 +1026,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="630"/>
+        <location filename="../favoritespanewidget.cc" line="633"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1054,7 +1054,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="165"/>
+        <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3818,33 +3818,43 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1589"/>
+        <location filename="../preferences.ui" line="1553"/>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1556"/>
+        <source>Confirmation for items deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1599"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Виберіть це, щоб автоматично згортати великі статті</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1592"/>
+        <location filename="../preferences.ui" line="1602"/>
         <source>Collapse articles more than</source>
         <translation>Згортати статті з понад</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1599"/>
+        <location filename="../preferences.ui" line="1609"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Статті довші за цей розмір буде згорнуто</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1615"/>
+        <location filename="../preferences.ui" line="1625"/>
         <source>symbols</source>
         <translation>символів</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1640"/>
+        <location filename="../preferences.ui" line="1650"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1644"/>
+        <location filename="../preferences.ui" line="1654"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4085,17 +4095,17 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>хвилин</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1571"/>
+        <location filename="../preferences.ui" line="1581"/>
         <source>Articles</source>
         <translation>Статей</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1577"/>
+        <location filename="../preferences.ui" line="1587"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Увімкніть цю опцію аби завжди додаткові частини статтей</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1580"/>
+        <location filename="../preferences.ui" line="1590"/>
         <source>Expand optional &amp;parts</source>
         <translation>Показувати додаткові &amp;частини</translation>
     </message>
@@ -4140,12 +4150,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="obsolete">Програвати через DirectShow</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="568"/>
+        <location filename="../preferences.cc" line="570"/>
         <source>Changing Language</source>
         <translation>Зміна мови</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="569"/>
+        <location filename="../preferences.cc" line="571"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Перезапустіть програму, щоб змінити мову.</translation>
     </message>
