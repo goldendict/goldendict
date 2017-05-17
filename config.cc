@@ -130,6 +130,7 @@ Preferences::Preferences():
   alwaysExpandOptionalParts( false )
 , historyStoreInterval( 0 )
 , favoritesStoreInterval( 0 )
+, confirmFavoritesDeletion( true )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
 , maxDictionaryRefsInContextMenu ( 20 )
@@ -824,6 +825,9 @@ Class load() throw( exError )
 
     if ( !preferences.namedItem( "favoritesStoreInterval" ).isNull() )
       c.preferences.favoritesStoreInterval = preferences.namedItem( "favoritesStoreInterval" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "confirmFavoritesDeletion" ).isNull() )
+      c.preferences.confirmFavoritesDeletion = ( preferences.namedItem( "confirmFavoritesDeletion" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "collapseBigArticles" ).isNull() )
       c.preferences.collapseBigArticles = ( preferences.namedItem( "collapseBigArticles" ).toElement().text() == "1" );
@@ -1664,6 +1668,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "favoritesStoreInterval" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.favoritesStoreInterval ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "confirmFavoritesDeletion" );
+    opt.appendChild( dd.createTextNode( c.preferences.confirmFavoritesDeletion ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     {

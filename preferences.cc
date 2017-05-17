@@ -195,6 +195,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.alwaysExpandOptionalParts->setChecked( p.alwaysExpandOptionalParts );
 
   ui.favoritesSaveIntervalField->setValue( p.favoritesStoreInterval );
+  ui.confirmFavoritesDeletion->setChecked( p.confirmFavoritesDeletion );
 
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
@@ -375,6 +376,7 @@ Config::Preferences Preferences::getPreferences()
   p.alwaysExpandOptionalParts = ui.alwaysExpandOptionalParts->isChecked();
 
   p.favoritesStoreInterval = ui.favoritesSaveIntervalField->text().toUInt();
+  p.confirmFavoritesDeletion = ui.confirmFavoritesDeletion->isChecked();
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();

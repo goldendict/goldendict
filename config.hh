@@ -239,6 +239,8 @@ struct Preferences
   unsigned historyStoreInterval;
   unsigned favoritesStoreInterval;
 
+  bool confirmFavoritesDeletion;
+
   bool collapseBigArticles;
   int articleSizeLimit;
 

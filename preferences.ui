@@ -1548,6 +1548,16 @@ It is not needed to select this option if you don't use such programs.</string>
              </layout>
             </item>
             <item>
+             <widget class="QCheckBox" name="confirmFavoritesDeletion">
+              <property name="toolTip">
+               <string>Turn this option on to confirm every operation of items deletion</string>
+              </property>
+              <property name="text">
+               <string>Confirmation for items deletion</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacer_15">
               <property name="orientation">
                <enum>Qt::Vertical</enum>

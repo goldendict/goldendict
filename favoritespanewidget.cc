@@ -161,12 +161,15 @@ void FavoritesPaneWidget::deleteSelectedItems()
     return;
   }
 
-  QMessageBox mb( QMessageBox::Warning, "GoldenDict",
-                  tr( "All selected items will be deleted. Continue?" ),
-                  QMessageBox::Yes | QMessageBox::No );
-  mb.exec();
-  if( mb.result() != QMessageBox::Yes )
-    return;
+  if( m_cfg->preferences.confirmFavoritesDeletion )
+  {
+    QMessageBox mb( QMessageBox::Warning, "GoldenDict",
+                    tr( "All selected items will be deleted. Continue?" ),
+                    QMessageBox::Yes | QMessageBox::No );
+    mb.exec();
+    if( mb.result() != QMessageBox::Yes )
+      return;
+  }
 
   m_favoritesModel->removeItemsForIndexes( selectedIdxs );
 }
