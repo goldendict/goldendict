@@ -625,9 +625,7 @@ void FavoritesModel::readData()
   if ( !dom.setContent( &favoritesFile, false, &errorStr, &errorLine, &errorColumn  ) )
   {
     // Mailformed file
-    QString errStr;
-    errStr.sprintf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
-    gdWarning( errStr.toUtf8().data() );
+    gdWarning( "Favorites file parsing error: %s at %d,%d\n", errorStr.toUtf8().data(),  errorLine,  errorColumn );
 
     QMessageBox mb( QMessageBox::Warning, "GoldenDict",
                       tr( "Error in favorities file" ),
@@ -1155,9 +1153,7 @@ bool FavoritesModel::setDataFromXml( QString const & dataStr )
   if ( !dom.setContent( dataStr, false, &errorStr, &errorLine, &errorColumn  ) )
   {
     // Mailformed data
-    QString errStr;
-    errStr.sprintf( "Error: %s at %d,%d\n", errorStr.toLocal8Bit().constData(),  errorLine,  errorColumn );
-    gdWarning( errStr.toUtf8().data() );
+    gdWarning( "XML parsing error: %s at %d,%d\n", errorStr.toUtf8().data(),  errorLine,  errorColumn );
     dom.clear();
     return false;
   }
