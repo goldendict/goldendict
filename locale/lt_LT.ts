@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="lt">
+<TS version="2.1" language="lt">
 <context>
     <name>About</name>
     <message>
@@ -420,17 +420,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
         <source>Chinese Conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinų kalbos rašto ženklų konvertavimas</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="23"/>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Įgalinti konvertavimą tarp supaprastintos ir tradicinės kinų kalbos ženklų</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="26"/>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kinų kalbos rašto ženklų konvertavimas</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="35"/>
@@ -440,7 +440,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../chineseconversion.ui" line="38"/>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš supaprastintos į Taivano</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="45"/>
@@ -450,7 +450,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../chineseconversion.ui" line="48"/>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš supaprastintos į Honkongo</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="55"/>
@@ -460,7 +460,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../chineseconversion.ui" line="58"/>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>Iš tradicinės į supaprastintą</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="129"/>
@@ -521,7 +521,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictgroupwidget.ui" line="87"/>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelių aplankas:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
@@ -1046,7 +1046,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="633"/>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelių faile yra klaida</translation>
     </message>
 </context>
 <context>
@@ -1054,27 +1054,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="30"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">Ša&amp;linti pasirinktus</translation>
+        <translation>Ša&amp;linti pasirinktas</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="39"/>
         <source>Copy Selected</source>
-        <translation type="unfinished">Kopijuoti pasirinktus</translation>
+        <translation>Kopijuoti pasirinktas</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="48"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti aplanką</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="62"/>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelės:</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ištrinsimos visos pažymėtos žymelės. Tęsti?</translation>
     </message>
 </context>
 <context>
@@ -2745,39 +2745,39 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="3833"/>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti žymeles</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3835"/>
         <location filename="../mainwindow.cc" line="3925"/>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>XML failai (*.xml);;Visi failai (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3854"/>
         <location filename="../mainwindow.cc" line="3903"/>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelių eksportavimas baigtas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3874"/>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti žymeles kaip sąrašą į paprastą tekstinį failą</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3923"/>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti žymeles iš failo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3948"/>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelių importavimas baigtas</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3954"/>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaida nagrinėjant duomenis</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4438"/>
@@ -2988,7 +2988,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="143"/>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>Žy&amp;melės</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="289"/>
@@ -3038,7 +3038,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="316"/>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymel&amp;ių polangis</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
@@ -3150,38 +3150,38 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.ui" line="638"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodyti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation type="unfinished">Eksportuoti</translation>
+        <translation>Eksportuoti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importuoti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridėti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
         <location filename="../mainwindow.cc" line="243"/>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Veikiamąją kortelę įtraukti į žymeles</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Vald+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuoti paprastai</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3811,22 +3811,22 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="1519"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelės</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1527"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Žymelių įsiminimo dažnumas. Jei 0, žymelės įrašysimos tik užveriant programą.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1553"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Įjunkite, jei norite patvirtinti kiekvieną pašalinimą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1556"/>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Patvirtinti šalinimą iš sąrašo</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1599"/>
@@ -4490,7 +4490,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../articleview.cc" line="2828"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ĮSPĖJIMAS: %1</translation>
     </message>
 </context>
 <context>
@@ -4566,7 +4566,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../scanpopup.ui" line="178"/>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Įtraukti į žymeles (Vald+E)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
