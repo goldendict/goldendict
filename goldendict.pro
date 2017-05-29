@@ -79,7 +79,7 @@ win32 {
             LIBS += -L$${PWD}/winlibs/lib
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-	
+
 	isEmpty(HUNSPELL_LIB) {
           CONFIG(gcc48) {
             LIBS += -lhunspell-1.3.2
@@ -641,4 +641,3 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
-
