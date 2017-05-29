@@ -13,6 +13,7 @@
 #include <QMenu>
 #include <QDomNode>
 #include <QList>
+#include <QMimeData>
 
 #include <config.hh>
 #include "delegate.hh"
@@ -220,14 +221,6 @@ protected:
   QModelIndex findItemInFolder( QString const & itemName, int itemType,
                                 QModelIndex const & parentIdx );
 
-  // Find item by it params
-  QModelIndex findItem( QString const & path,
-                        QString const & headword,
-                        int type );
-
-  // Create items list from mime "plait/text" data
-  QList< QModelIndex > itemsListFromText( QString const & text );
-
   TreeItem *getItem( const QModelIndex &index ) const;
 
   // Find folder with given name or create it if folder not exist
@@ -245,6 +238,32 @@ private:
   TreeItem * rootItem;
   QDomDocument dom;
   bool dirty;
+};
+
+#define FAVORITES_MIME_TYPE "application/x-goldendict-tree-items"
+
+class FavoritesMimeData : public QMimeData
+{
+  Q_OBJECT
+public:
+  FavoritesMimeData() : QMimeData()
+  {}
+
+  virtual QStringList formats() const
+  { return QStringList( QString::fromLatin1( FAVORITES_MIME_TYPE ) ); }
+
+  virtual bool hasFormat(const QString & mimetype) const
+  { return mimetype.compare( QString::fromLatin1( FAVORITES_MIME_TYPE ) ) == 0; }
+
+  void setIndexesList( QModelIndexList const & list )
+  { indexes.clear(); indexes = list; }
+
+  QModelIndexList const & getIndexesList() const
+  { return indexes; }
+
+private:
+  QStringList mimeFormats;
+  QModelIndexList indexes;
 };
 
 #endif // __FAVORITIESPANEWIDGET_HH__INCLUDED__

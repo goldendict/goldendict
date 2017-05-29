@@ -8,7 +8,6 @@
 #include <QClipboard>
 #include <QDomDocument>
 #include <QMessageBox>
-#include <QMimeData>
 #include <QtAlgorithms>
 #include <QMap>
 
@@ -771,71 +770,66 @@ void FavoritesModel::checkNodeForExpand( const TreeItem * item, const QModelInde
 
 QStringList FavoritesModel::mimeTypes() const
 {
-  return QStringList( QString::fromLatin1( "text/plain" ) );
+  return QStringList( QString::fromLatin1( FAVORITES_MIME_TYPE ) );
 }
 
-QMimeData *FavoritesModel::mimeData( const QModelIndexList &indexes ) const
+QMimeData *FavoritesModel::mimeData( const QModelIndexList & indexes ) const
 {
-  QString headwords;
-
-  QList< QModelIndex >::const_iterator it = indexes.begin();
-  for ( ; it != indexes.end(); ++it )
-  {
-    TreeItem *item = getItem( *it );
-    headwords += item->fullPath() + "\n\r";
-    headwords += item->data().toString() + "\n\r";
-    headwords += QString::number( item->type() ) + "\n\r";
-  }
-
-  QMimeData *data = new QMimeData();
-  data->setText( headwords );
+  FavoritesMimeData *data = new FavoritesMimeData();
+  data->setIndexesList( indexes );
   return data;
 }
 
-bool FavoritesModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
-                                  int row, int, const QModelIndex &par)
+bool FavoritesModel::dropMimeData( const QMimeData *data, Qt::DropAction action,
+                                   int row, int, const QModelIndex &par )
 {
   if( action == Qt::MoveAction || action == Qt::CopyAction )
   {
-    QList< QModelIndex > list;
-    list = itemsListFromText( data->text() );
-
-    if( list.isEmpty() )
-      return false;
-
-    TreeItem * parentItem = getItem( par );
-    QModelIndex parentIdx = par;
-
-    if( row < 0 )
-      row = 0;
-
-    QList< QModelIndex >::const_iterator it = list.begin();
-    QList< TreeItem * > movedItems;
-    for( ; it != list.end(); ++it )
+    if( data->hasFormat( FAVORITES_MIME_TYPE ) )
     {
-      TreeItem * item = getItem( *it );
+      FavoritesMimeData const * mimeData = qobject_cast< FavoritesMimeData const * >( data );
+      if( mimeData )
+      {
+        QModelIndexList const & list = mimeData->getIndexesList();
 
-      // Check if we can copy/move this item
-      if( parentItem->haveAncestor( item ) || parentItem->haveSameItem( item, action == Qt::MoveAction ) )
-        return false;
+        if( list.isEmpty() )
+          return false;
 
-      movedItems.append( item );
+        TreeItem * parentItem = getItem( par );
+        QModelIndex parentIdx = par;
+
+        if( row < 0 )
+          row = 0;
+
+        QList< QModelIndex >::const_iterator it = list.begin();
+        QList< TreeItem * > movedItems;
+        for( ; it != list.end(); ++it )
+        {
+          TreeItem * item = getItem( *it );
+
+          // Check if we can copy/move this item
+          if( parentItem->haveAncestor( item ) || parentItem->haveSameItem( item, action == Qt::MoveAction ) )
+            return false;
+
+          movedItems.append( item );
+        }
+
+        // Insert items to new place
+
+        beginInsertRows( parentIdx, row, row + movedItems.count() - 1 );
+        for( int i = 0; i < movedItems.count(); i++ )
+        {
+          TreeItem * item = movedItems.at( i );
+          TreeItem *newItem = item->duplicateItem( parentItem );
+          parentItem->insertChild( row + i, newItem );
+        }
+        endInsertRows();
+
+        dirty = true;
+
+        return true;
+      }
     }
-
-    // Insert items to new place
-
-    beginInsertRows( parentIdx, row, row + movedItems.count() - 1 );
-    for( int i = 0; i < movedItems.count(); i++ )
-    {
-      TreeItem * item = movedItems.at( i );
-      TreeItem *newItem = item->duplicateItem( parentItem );
-      parentItem->insertChild( row + i, newItem );
-    }
-    endInsertRows();
-
-    dirty = true;
-
-    return true;
   }
   return false;
 }
@@ -851,85 +845,6 @@ QModelIndex FavoritesModel::findItemInFolder( const QString & itemName, int item
       return createIndex( i, 0, item );
   }
   return QModelIndex();
-}
-
-QModelIndex FavoritesModel::findItem( const QString & path,
-                                      const QString & headword,
-                                      int type )
-{
-  TreeItem *par = rootItem;
-
-  if( !path.isEmpty() )
-  {
-    // Find target folder
-
-    QStringList folders = path.split( "/", QString::SkipEmptyParts );
-    QStringList::const_iterator it = folders.begin();
-    for( ; it != folders.end(); ++it )
-    {
-      int i;
-      for( i = 0; i < par->childCount(); i++ )
-      {
-        TreeItem * item = par->child( i );
-        QString name = item->data().toString();
-        if( *it == name && item->type() == TreeItem::Folder )
-          break;
-      }
-      if( i >= par->childCount() ) // Folder not found
-        return QModelIndex();
-
-      par = par->child( i );
-    }
-  }
-
-  // Find headword/folder in target folder
-
-  for( int i = 0; i < par->childCount(); i++ )
-  {
-    TreeItem * item = par->child( i );
-    QString name = item->data().toString();
-    if( name == headword && item->type() == type )
-    {
-      // Item found, create index
-      return createIndex( i, 0, item );
-    }
-  }
-  return QModelIndex();
-}
-
-QList< QModelIndex > FavoritesModel::itemsListFromText( const QString & text )
-{
-  int pos = 0;
-  QString delim = QString::fromLatin1( "\n\r" );
-  QList< QModelIndex > list;
-
-  for( ; ; )
-  {
-    int delimPos = text.indexOf( delim, pos );
-    if( delimPos < 0 )
-      break;
-    QString path = text.mid( pos, delimPos - pos );
-
-    pos = delimPos + 2;
-    delimPos = text.indexOf( delim, pos );
-    if( delimPos < 0 )
-      break;
-    QString headword = text.mid( pos, delimPos - pos );
-
-    pos = delimPos + 2;
-    delimPos = text.indexOf( delim, pos );
-    if( delimPos < 0 )
-      break;
-    int type = text.mid( pos, delimPos - pos ).toInt();
-
-    QModelIndex idx = findItem( path, headword, type );
-    if( idx.isValid() )
-      list.append( idx );
-
-    pos = delimPos + 2;
-  }
-
-  return list;
 }
 
 TreeItem *FavoritesModel::getItem( const QModelIndex &index ) const
