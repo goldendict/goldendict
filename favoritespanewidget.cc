@@ -81,9 +81,10 @@ void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
   listItemDelegate = new WordListItemDelegate( m_favoritesTree->itemDelegate() );
   m_favoritesTree->setItemDelegate( listItemDelegate );
 
-  QItemSelectionModel * oldModel = m_favoritesTree->selectionModel();
+  QAbstractItemModel * oldModel = m_favoritesTree->model();
   m_favoritesTree->setModel( m_favoritesModel );
-  oldModel->deleteLater();
+  if( oldModel )
+    oldModel->deleteLater();
 
   connect( m_favoritesTree, SIGNAL( expanded( QModelIndex ) ),
            m_favoritesModel, SLOT( itemExpanded( QModelIndex ) ) );
