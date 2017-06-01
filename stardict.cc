@@ -351,7 +351,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
 
       // Handle links to articles
 
-      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]" );
+      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]", Qt::CaseInsensitive );
       linksReg.setMinimal( true );
 
       int pos = 0;
