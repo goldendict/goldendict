@@ -71,9 +71,9 @@ signals:
   /// Put translated word into Favorites
   void sendWordToFavorites( QString const & word, unsigned groupId );
 
+#ifdef HAVE_X11
   void showScanFlag( bool forcePopup );
-
-  void showScanFlag( bool forcePopup );
+#endif
 
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab
@@ -92,7 +92,9 @@ public slots:
 
   void setGroupByName( QString const & name );
 
+#ifdef HAVE_X11
   void showEngagePopup();
+#endif
 
 private:
 
@@ -125,7 +127,9 @@ private:
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
 
+#ifdef HAVE_X11
   ScanFlag * scanFlag;
+#endif
 
   bool mouseEnteredOnce;
   bool mouseIntercepted;

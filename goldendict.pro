@@ -80,7 +80,7 @@ win32 {
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
-	isEmpty(HUNSPELL_LIB) {
+        isEmpty(HUNSPELL_LIB) {
           CONFIG(gcc48) {
             LIBS += -lhunspell-1.3.2
           } else {

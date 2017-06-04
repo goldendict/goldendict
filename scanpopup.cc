@@ -271,13 +271,15 @@ ScanPopup::ScanPopup( QWidget * parent,
   grabGesture( Gestures::GDSwipeGestureType );
 #endif
 
+#ifdef HAVE_X11
   scanFlag = new ScanFlag( 0 );
 
   connect( this, SIGNAL( showScanFlag( bool ) ),
-	scanFlag, SLOT( showScanFlag() ) );
+           scanFlag, SLOT( showScanFlag() ) );
 
   connect( scanFlag, SIGNAL( showScanPopup() ),
-	this, SLOT( showEngagePopup() ) );
+           this, SLOT( showEngagePopup() ) );
+#endif
 }
 
 ScanPopup::~ScanPopup()
@@ -422,14 +424,20 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
   }
 
   inputWord = pendingInputWord;
-
-  emit showScanFlag( forcePopup );
+#ifdef HAVE_X11
+  if ( cfg.preferences.showScanFlag )
+    emit showScanFlag( forcePopup );
+  else
+#endif
+    engagePopup( forcePopup );
 }
 
+#ifdef HAVE_X11
 void ScanPopup::showEngagePopup()
 {
-	engagePopup(false);
+  engagePopup(false);
 }
+#endif
 
 void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 {

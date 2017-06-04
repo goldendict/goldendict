@@ -4,6 +4,8 @@
 #include "scanflag.hh"
 #include "ui_scanflag.h"
 
+#ifdef HAVE_X11
+
 static Qt::WindowFlags popupWindowFlags =
 
 Qt::ToolTip | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
@@ -88,3 +90,5 @@ void ScanFlag::showScanFlag()
   show();
   hideTimer.start();
 }
+
+#endif // HAVE_X11

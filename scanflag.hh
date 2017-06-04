@@ -1,9 +1,12 @@
 #ifndef SCAN_FLAG_H
 #define SCAN_FLAG_H
 
+#include "config.hh"
 #include <QMainWindow>
 #include <QTimer>
 #include "ui_scanflag.h"
+
+#ifdef HAVE_X11
 
 class ScanFlag : public QMainWindow
 {
@@ -27,5 +30,7 @@ private slots:
   void hideWindow();
 
 };
+
+#endif // HAVE_X11
 
 #endif // SCAN_FLAG_H

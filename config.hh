@@ -214,6 +214,7 @@ struct Preferences
   bool scanPopupUseIAccessibleEx;
   bool scanPopupUseGDMessage;
   bool scanToMainWindow;
+  bool showScanFlag;
 
   // Whether the word should be pronounced on page load, in main window/popup
   bool pronounceOnLoadMain, pronounceOnLoadPopup;

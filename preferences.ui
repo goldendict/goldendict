@@ -679,6 +679,16 @@ seconds, which is specified here.</string>
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="showScanFlag">
+            <property name="toolTip">
+             <string>Show scan flag when word is selected</string>
+            </property>
+            <property name="text">
+             <string>Show scan flag when word is selected</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
