@@ -73,6 +73,8 @@ signals:
 
   void showScanFlag( bool forcePopup );
 
+  void showScanFlag( bool forcePopup );
+
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab
   bool isGoldenDictWindow( HWND hwnd );
