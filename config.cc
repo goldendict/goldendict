@@ -109,6 +109,9 @@ Preferences::Preferences():
   scanPopupUseIAccessibleEx( true ),
   scanPopupUseGDMessage( true ),
   scanToMainWindow( false ),
+#ifdef HAVE_X11
+  showScanFlag( false ),
+#endif
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
 #ifndef DISABLE_INTERNAL_PLAYER
@@ -758,6 +761,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "scanPopupAltModeSecs" ).isNull() )
       c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
     c.preferences.scanToMainWindow = ( preferences.namedItem( "scanToMainWindow" ).toElement().text() == "1" );
+#ifdef HAVE_X11
+    c.preferences.showScanFlag= ( preferences.namedItem( "showScanFlag" ).toElement().text() == "1" );
+#endif
     c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
     c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
     c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
@@ -1621,6 +1627,12 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "scanToMainWindow" );
     opt.appendChild( dd.createTextNode( c.preferences.scanToMainWindow ? "1":"0" ) );
     preferences.appendChild( opt );
+
+#ifdef HAVE_X11
+    opt = dd.createElement( "showScanFlag" );
+    opt.appendChild( dd.createTextNode( c.preferences.showScanFlag? "1":"0" ) );
+    preferences.appendChild( opt );
+#endif
 
     opt = dd.createElement( "scanPopupUseUIAutomation" );
     opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseUIAutomation ? "1":"0" ) );

@@ -35,7 +35,7 @@ Qt::Popup
 
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
-                      ArticleNetworkAccessManager & articleNetMgr,                      
+                      ArticleNetworkAccessManager & articleNetMgr,
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_,
                       History & history_ ):
@@ -92,7 +92,7 @@ ScanPopup::ScanPopup( QWidget * parent,
            this, SLOT( typingEvent( QString const & ) ) );
 
   applyZoomFactor();
-  
+
   ui.mainLayout->addWidget( definition );
 
   ui.translateBox->wordList()->attachFinder( &wordFinder );
@@ -270,6 +270,16 @@ ScanPopup::ScanPopup( QWidget * parent,
   grabGesture( Gestures::GDPinchGestureType );
   grabGesture( Gestures::GDSwipeGestureType );
 #endif
+
+#ifdef HAVE_X11
+  scanFlag = new ScanFlag( 0 );
+
+  connect( this, SIGNAL( showScanFlag( bool ) ),
+           scanFlag, SLOT( showScanFlag() ) );
+
+  connect( scanFlag, SIGNAL( showScanPopup() ),
+           this, SLOT( showEngagePopup() ) );
+#endif
 }
 
 ScanPopup::~ScanPopup()
@@ -362,7 +372,7 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   if ( !isScanningEnabled )
     return;
-  
+
   GD_DPRINTF( "clipboard changed\n" );
 
   QString subtype = "plain";
@@ -400,6 +410,14 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
     return;
   }
 
+#ifdef HAVE_X11
+  if ( cfg.preferences.showScanFlag ) {
+    inputWord = pendingInputWord;
+    emit showScanFlag( forcePopup );
+    return;
+  }
+#endif
+
   // Check key modifiers
 
   if ( cfg.preferences.enableScanPopupModifiers && !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
@@ -416,6 +434,13 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
   inputWord = pendingInputWord;
   engagePopup( forcePopup );
 }
+
+#ifdef HAVE_X11
+void ScanPopup::showEngagePopup()
+{
+  engagePopup(false);
+}
+#endif
 
 void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 {
@@ -745,7 +770,7 @@ void ScanPopup::mouseMoveEvent( QMouseEvent * event )
 
     move( pos() + delta );
   }
- 
+
   QMainWindow::mouseMoveEvent( event );
 }
 
@@ -808,7 +833,7 @@ void ScanPopup::showEvent( QShowEvent * ev )
   QMainWindow::showEvent( ev );
 
   QTimer::singleShot(100, this, SLOT( requestWindowFocus() ) );
-  
+
   if ( groups.size() <= 1 ) // Only the default group? Hide then.
     ui.groupList->hide();
 
