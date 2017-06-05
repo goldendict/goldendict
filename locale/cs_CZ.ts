@@ -4173,6 +4173,14 @@ from Stardict, Babylon and GLS dictionaries</source>
         <source>Confirmation for items deletion</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show scan flag when word is selected</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
@@ -4392,6 +4400,13 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>Russian Transliteration</source>
         <translation>Ruský přepis</translation>
+    </message>
+</context>
+<context>
+    <name>ScanFlag</name>
+    <message>
+        <source>MainWindow</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
