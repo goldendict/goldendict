@@ -410,6 +410,14 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
     return;
   }
 
+#ifdef HAVE_X11
+  if ( cfg.preferences.showScanFlag ) {
+    inputWord = pendingInputWord;
+    emit showScanFlag( forcePopup );
+    return;
+  }
+#endif
+
   // Check key modifiers
 
   if ( cfg.preferences.enableScanPopupModifiers && !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
@@ -424,12 +432,7 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
   }
 
   inputWord = pendingInputWord;
-#ifdef HAVE_X11
-  if ( cfg.preferences.showScanFlag )
-    emit showScanFlag( forcePopup );
-  else
-#endif
-    engagePopup( forcePopup );
+  engagePopup( forcePopup );
 }
 
 #ifdef HAVE_X11

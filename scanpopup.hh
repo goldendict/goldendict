@@ -15,7 +15,9 @@
 #include "history.hh"
 #include "dictionarybar.hh"
 #include "mainstatusbar.hh"
+#ifdef HAVE_X11
 #include "scanflag.hh"
+#endif
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.

@@ -80,7 +80,7 @@ win32 {
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
-        isEmpty(HUNSPELL_LIB) {
+    isEmpty(HUNSPELL_LIB) {
           CONFIG(gcc48) {
             LIBS += -lhunspell-1.3.2
           } else {
@@ -275,7 +275,6 @@ HEADERS += folding.hh \
     instances.hh \
     article_maker.hh \
     scanpopup.hh \
-    scanflag.hh \
     articleview.hh \
     externalviewer.hh \
     wordfinder.hh \
@@ -367,7 +366,6 @@ FORMS += groups.ui \
     initializing.ui \
     groupselectorwidget.ui \
     scanpopup.ui \
-    scanflag.ui \
     articleview.ui \
     preferences.ui \
     about.ui \
@@ -407,7 +405,6 @@ SOURCES += folding.cc \
     instances.cc \
     article_maker.cc \
     scanpopup.cc \
-    scanflag.cc \
     articleview.cc \
     externalviewer.cc \
     wordfinder.cc \
@@ -515,6 +512,12 @@ mac {
                speechclient.hh
     FORMS   += texttospeechsource.ui
     SOURCES += texttospeechsource.cc
+}
+
+unix:!mac {
+    HEADERS += scanflag.hh
+    FORMS   += scanflag.ui
+    SOURCES += scanflag.cc
 }
 
 CONFIG( zim_support ) {

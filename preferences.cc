@@ -22,6 +22,9 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   connect( ui.enableScanPopupModifiers, SIGNAL( toggled( bool ) ),
            this, SLOT( enableScanPopupModifiersToggled( bool ) ) );
 
+  connect( ui.showScanFlag, SIGNAL( toggled( bool ) ),
+           this, SLOT( showScanFlagToggled( bool ) ) );
+
   connect( ui.altKey, SIGNAL( clicked( bool ) ),
            this, SLOT( wholeAltClicked( bool ) ) );
   connect( ui.ctrlKey, SIGNAL( clicked( bool ) ),
@@ -185,7 +188,6 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
   ui.scanToMainWindow->setChecked( p.scanToMainWindow );
-  ui.showScanFlag->setChecked( p.showScanFlag);
   ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
@@ -228,6 +230,12 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 #ifndef Q_OS_WIN32
   ui.groupBox_ScanPopupTechnologies->hide();
 //  ui.tabWidget->removeTab( 5 );
+#endif
+
+#ifdef HAVE_X11
+  ui.showScanFlag->setChecked( p.showScanFlag);
+#else
+  ui.showScanFlag->hide();
 #endif
 
   // Sound
@@ -367,7 +375,9 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
   p.scanToMainWindow = ui.scanToMainWindow->isChecked();
+#ifdef HAVE_X11
   p.showScanFlag= ui.showScanFlag->isChecked();
+#endif
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
@@ -509,6 +519,14 @@ void Preferences::enableScanPopupToggled( bool b )
 void Preferences::enableScanPopupModifiersToggled( bool b )
 {
   ui.scanPopupModifiers->setEnabled( b && ui.enableScanPopup->isChecked() );
+  if( b )
+    ui.showScanFlag->setChecked( false );
+}
+
+void Preferences::showScanFlagToggled( bool b )
+{
+  if( b )
+    ui.enableScanPopupModifiers->setChecked( false );
 }
 
 void Preferences::wholeAltClicked( bool b )

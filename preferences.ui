@@ -682,7 +682,7 @@ seconds, which is specified here.</string>
           <item>
            <widget class="QCheckBox" name="showScanFlag">
             <property name="toolTip">
-             <string>Show scan flag when word is selected</string>
+             <string>Show a flag window before showing popup window, click the flag to show popup window. </string>
             </property>
             <property name="text">
              <string>Show scan flag when word is selected</string>

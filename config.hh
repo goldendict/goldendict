@@ -214,7 +214,9 @@ struct Preferences
   bool scanPopupUseIAccessibleEx;
   bool scanPopupUseGDMessage;
   bool scanToMainWindow;
+#ifdef HAVE_X11
   bool showScanFlag;
+#endif
 
   // Whether the word should be pronounced on page load, in main window/popup
   bool pronounceOnLoadMain, pronounceOnLoadPopup;
