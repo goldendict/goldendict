@@ -79,8 +79,8 @@ win32 {
             LIBS += -L$${PWD}/winlibs/lib
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-	
-	isEmpty(HUNSPELL_LIB) {
+
+    isEmpty(HUNSPELL_LIB) {
           CONFIG(gcc48) {
             LIBS += -lhunspell-1.3.2
           } else {
@@ -512,6 +512,12 @@ mac {
                speechclient.hh
     FORMS   += texttospeechsource.ui
     SOURCES += texttospeechsource.cc
+}
+
+unix:!mac {
+    HEADERS += scanflag.hh
+    FORMS   += scanflag.ui
+    SOURCES += scanflag.cc
 }
 
 CONFIG( zim_support ) {

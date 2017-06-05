@@ -15,6 +15,9 @@
 #include "history.hh"
 #include "dictionarybar.hh"
 #include "mainstatusbar.hh"
+#ifdef HAVE_X11
+#include "scanflag.hh"
+#endif
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
@@ -70,6 +73,10 @@ signals:
   /// Put translated word into Favorites
   void sendWordToFavorites( QString const & word, unsigned groupId );
 
+#ifdef HAVE_X11
+  void showScanFlag( bool forcePopup );
+#endif
+
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab
   bool isGoldenDictWindow( HWND hwnd );
@@ -86,6 +93,10 @@ public slots:
   void editGroupRequested();
 
   void setGroupByName( QString const & name );
+
+#ifdef HAVE_X11
+  void showEngagePopup();
+#endif
 
 private:
 
@@ -117,6 +128,10 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
+
+#ifdef HAVE_X11
+  ScanFlag * scanFlag;
+#endif
 
   bool mouseEnteredOnce;
   bool mouseIntercepted;
