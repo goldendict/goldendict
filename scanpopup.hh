@@ -74,7 +74,9 @@ signals:
   void sendWordToFavorites( QString const & word, unsigned groupId );
 
 #ifdef HAVE_X11
+  /// Interaction with scan flag window
   void showScanFlag( bool forcePopup );
+  void hideScanFlag();
 #endif
 
 #ifdef Q_OS_WIN32

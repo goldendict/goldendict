@@ -272,10 +272,13 @@ ScanPopup::ScanPopup( QWidget * parent,
 #endif
 
 #ifdef HAVE_X11
-  scanFlag = new ScanFlag( 0 );
+  scanFlag = new ScanFlag( this );
 
   connect( this, SIGNAL( showScanFlag( bool ) ),
            scanFlag, SLOT( showScanFlag() ) );
+
+  connect( this, SIGNAL( hideScanFlag() ),
+           scanFlag, SLOT( hideWindow() ) );
 
   connect( scanFlag, SIGNAL( showScanPopup() ),
            this, SLOT( showEngagePopup() ) );
@@ -356,6 +359,10 @@ void ScanPopup::translateWord( QString const & word )
   // In case we had any timers engaged before, cancel them now.
   altModePollingTimer.stop();
   altModeExpirationTimer.stop();
+
+#ifdef HAVE_X11
+  emit hideScanFlag();
+#endif
 
   inputWord = str;
   engagePopup( false,
