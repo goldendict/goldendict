@@ -3196,32 +3196,32 @@ void MainWindow::on_newTab_triggered()
   addNewTab();
 }
 
-void MainWindow::setAutostart(bool autostart)
-{
-#ifdef Q_OS_WIN32
-    QSettings reg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
-                  QSettings::NativeFormat);
-    if (autostart) {
-        QString app_fname = QString("\"%1\"").arg( QCoreApplication::applicationFilePath() );
-        app_fname.replace("/", "\\");
-        reg.setValue(QCoreApplication::applicationName(), app_fname);
-    }
-    else {
-        reg.remove(QCoreApplication::applicationName());
-    }
-    reg.sync();
-#else
-    // this is for KDE
-    QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-    QString lnk(QDir::homePath()+"/.kde/Autostart/"+app_fname);
-    if (autostart) {
-        QFile f(QCoreApplication::applicationFilePath());
-        f.link(lnk);
-    } else {
-        QFile::remove(lnk);
-    }
-#endif
-}
+        void MainWindow::setAutostart(bool autostart)
+        {
+        #ifdef Q_OS_WIN32
+            QSettings reg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+                          QSettings::NativeFormat);
+            if (autostart) {
+                QString app_fname = QString("\"%1\"").arg( QCoreApplication::applicationFilePath() );
+                app_fname.replace("/", "\\");
+                reg.setValue(QCoreApplication::applicationName(), app_fname);
+            }
+            else {
+                reg.remove(QCoreApplication::applicationName());
+            }
+            reg.sync();
+        #else
+            // this is for Linux
+            QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
+            QString lnk(QDir::homePath()+"/.config/autostart/"+"goldendict.desktop");
+            if (autostart) {
+                QFile f("/usr/share/applications/goldendict.desktop");
+                f.link(lnk);
+            } else {
+                QFile::remove(lnk);
+            }
+        #endif
+        }
 
 void MainWindow::on_actionCloseToTray_triggered()
 {
