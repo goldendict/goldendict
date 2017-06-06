@@ -2856,7 +2856,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="289"/>
         <source>&amp;Results Navigation Pane</source>
-        <translation>Панель на&amp;вигации по переводу</translation>
+        <translation>Панель навигации по переводу</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
