@@ -643,4 +643,37 @@ int HeadwordsListModel::getDictIndex( QString const & id ) const
   return -1;
 }
 
+QString FtsHeadword::trimQuotes( QString const & str ) const
+{
+  QString trimmed( str );
+
+  int n = 0;
+  while( str[ n ] == '\"' || str[ n ] == '\'' )
+    n++;
+  if( n )
+    trimmed = trimmed.mid( n );
+
+  while( trimmed.endsWith( '\"' ) || trimmed.endsWith( '\'' ) )
+    trimmed.chop( 1 );
+
+  return trimmed;
+}
+
+bool FtsHeadword::operator <( FtsHeadword const & other ) const
+{
+  QString first = trimQuotes( headword );
+  QString second = trimQuotes( other.headword );
+
+  int result = first.localeAwareCompare( second );
+  if( result )
+    return result < 0;
+
+  // Headwords without quotes are equal
+
+  if( first.size() != headword.size() || second.size() != other.headword.size() )
+    return headword.localeAwareCompare( other.headword ) < 0;
+
+  return false;
+}
+
 } // namespace FTS

@@ -48,13 +48,9 @@ struct FtsHeadword
     dictIDs.append( dictid_ );
   }
 
-  bool operator <( FtsHeadword const & other ) const
-  {
-    if( headword[ 0 ] == '\"' || headword[ 0 ] == '\'' )
-      return headword.mid( 1 ).localeAwareCompare( other.headword ) < 0;
-    else
-      return headword.localeAwareCompare( other.headword ) < 0;
-  }
+  QString trimQuotes( QString const & ) const;
+
+  bool operator <( FtsHeadword const & other ) const;
 
   bool operator ==( FtsHeadword const & other ) const
   { return headword.compare( other.headword, Qt::CaseInsensitive ) == 0; }
