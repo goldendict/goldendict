@@ -1296,11 +1296,11 @@ void StardictArticleRequest::run()
         result += i->second.first;
         result += "</h3>";
         if( dict.isToLanguageRTL() )
-          result += "<span dir=\"rtl\">";
+          result += "<div style=\"display:inline;\" dir=\"rtl\">";
         result += i->second.second;
         result += cleaner;
         if( dict.isToLanguageRTL() )
-          result += "</span>";
+          result += "</div>";
     }
 
     for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
@@ -1309,11 +1309,11 @@ void StardictArticleRequest::run()
         result += i->second.first;
         result += "</h3>";
         if( dict.isToLanguageRTL() )
-          result += "<span dir=\"rtl\">";
+          result += "<div style=\"display:inline;\" dir=\"rtl\">";
         result += i->second.second;
         result += cleaner;
         if( dict.isToLanguageRTL() )
-          result += "</span>";
+          result += "</div>";
     }
 
     Mutex::Lock _( dataMutex );

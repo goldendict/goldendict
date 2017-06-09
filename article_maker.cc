@@ -623,7 +623,7 @@ void ArticleRequest::bodyFinished()
 
         if ( closePrevSpan )
         {
-          head += "</span></span><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
+          head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
         else
         {
@@ -675,7 +675,7 @@ void ArticleRequest::bodyFinished()
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
 
-        head += string( "<span class=\"gdarticle" ) +
+        head += string( "<div style=\"display:inline;\" class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
                 ( collapse ? " gdcollapsedarticle" : "" ) +
                 "\" id=\"" + gdFrom +
@@ -701,7 +701,7 @@ void ArticleRequest::bodyFinished()
 
         head += "<div class=\"gddictnamebodyseparator\"></div>";
 
-        head += "<span class=\"gdarticlebody gdlangfrom-";
+        head += "<div class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();
         head += "\" lang=\"";
         head += LangCoder::intToCode2( activeDict->getLangTo() ).toLatin1().data();
@@ -762,7 +762,7 @@ void ArticleRequest::bodyFinished()
 
       if ( closePrevSpan )
       {
-        footer += "</span></span>";
+        footer += "</div></div>";
         closePrevSpan = false;
       }
 

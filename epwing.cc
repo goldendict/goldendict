@@ -609,7 +609,7 @@ void EpwingArticleRequest::run()
     return;
   }
 
-  string result = "<span class=\"epwing_article\">";
+  string result = "<div style=\"display:inline;\" class=\"epwing_article\">";
 
   multimap< wstring, pair< string, string > >::const_iterator i;
 
@@ -629,7 +629,7 @@ void EpwingArticleRequest::run()
       result += i->second.second;
   }
 
-  result += "</span>";
+  result += "</div>";
 
   Mutex::Lock _( dataMutex );
 

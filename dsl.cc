@@ -814,7 +814,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       string id = "O" + getId().substr( 0, 7 ) + "_" +
                 QString::number( articleNom ).toStdString() +
                 "_opt_" + QString::number( optionalPartNom++ ).toStdString();
-    result += "<div class=\"dsl_opt\" id=\"" + id + "\">" + processNodeChildren( node ) + "</div>";
+    result += "<span class=\"dsl_opt\" id=\"" + id + "\">" + processNodeChildren( node ) + "</span>";
   }
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"m" ) )
@@ -1662,7 +1662,7 @@ void DslArticleRequest::run()
       if( displayedHeadword.empty() || isDslWs( displayedHeadword[ 0 ] ) )
         displayedHeadword = word; // Special case - insided card
 
-      articleText += "<span class=\"dsl_article\">";
+      articleText += "<div style=\"display:inline;\" class=\"dsl_article\">";
       articleText += "<div class=\"dsl_headwords\"";
       if( dict.isFromLanguageRTL() )
         articleText += " dir=\"rtl\"";
@@ -1686,7 +1686,7 @@ void DslArticleRequest::run()
 
       articleAfter += dict.dslToHtml( articleBody, displayedHeadword );
       articleAfter += "</div>";
-      articleAfter += "</span>";
+      articleAfter += "</div>";
 
       if( dict.hasHiddenZones() )
       {

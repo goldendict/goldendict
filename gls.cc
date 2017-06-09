@@ -794,13 +794,13 @@ void GlsDictionary::loadArticle( uint32_t address,
   }
 
   if( isToLanguageRTL() )
-    article += "<span dir=\"rtl\">";
+    article += "<div style=\"display:inline;\" dir=\"rtl\">";
 
   QString text = QString::fromUtf8( articleBody.c_str(), articleBody.size() );
   article += filterResource( text );
 
   if( isToLanguageRTL() )
-    article += "</span>";
+    article += "</div>";
 
   article +="</div>";
 
