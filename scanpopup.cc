@@ -283,6 +283,12 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( scanFlag, SIGNAL( showScanPopup() ),
            this, SLOT( showEngagePopup() ) );
 #endif
+
+  delayTimer.setSingleShot( true );
+  delayTimer.setInterval( 300 );
+
+  connect( &delayTimer, SIGNAL( timeout() ),
+    this, SLOT( delayShow() ) );
 }
 
 ScanPopup::~ScanPopup()
@@ -375,6 +381,13 @@ void ScanPopup::translateWord( QString const & word )
       );
 }
 
+void ScanPopup::delayShow()
+{
+  QString subtype = "plain";
+
+  handleInputWord( QApplication::clipboard()->text( subtype, inputClipboard ) );
+}
+
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   if ( !isScanningEnabled )
@@ -382,9 +395,8 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
 
   GD_DPRINTF( "clipboard changed\n" );
 
-  QString subtype = "plain";
-
-  handleInputWord( QApplication::clipboard()->text( subtype, m ) );
+  inputClipboard = m;
+  delayTimer.start();
 }
 
 void ScanPopup::mouseHovered( QString const & str, bool forcePopup )
