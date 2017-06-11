@@ -2227,6 +2227,7 @@ void MainWindow::focusTranslateLine()
       activateWindow();
   }
 
+  translateLine->clearFocus();
   translateLine->setFocus();
   translateLine->selectAll();
 }
