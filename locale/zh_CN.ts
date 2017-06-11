@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -510,7 +510,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictgroupwidget.ui" line="87"/>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏文件夹：</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
@@ -1034,7 +1034,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="631"/>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏文件中存在错误</translation>
     </message>
 </context>
 <context>
@@ -1042,27 +1042,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="29"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">删除(&amp;D)</translation>
+        <translation>删除选中内容(&amp;D)</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="38"/>
         <source>Copy Selected</source>
-        <translation type="unfinished">复制</translation>
+        <translation>复制选中内容</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="47"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>添加文件夹</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="61"/>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏：</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>所有选中项将被删除。是否继续？</translation>
     </message>
 </context>
 <context>
@@ -2517,7 +2517,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="143"/>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏(&amp;R)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="380"/>
@@ -3008,39 +3008,39 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3833"/>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>导出收藏记录到文件</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3835"/>
         <location filename="../mainwindow.cc" line="3925"/>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>XML 文件 (*.xml);;所有文件 (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3854"/>
         <location filename="../mainwindow.cc" line="3903"/>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏导出完成</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3874"/>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>以纯列表形式导出收藏列表到文件</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3923"/>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>导入收藏文件</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3948"/>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏导入完成</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3954"/>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>数据解析错误</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4229"/>
@@ -3080,7 +3080,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="316"/>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏面板(&amp;I)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="499"/>
@@ -3147,38 +3147,38 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="638"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>显示</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation type="unfinished">导出</translation>
+        <translation>导出</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>导入</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>添加</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
         <location filename="../mainwindow.cc" line="243"/>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>将当前标签页添加至收藏</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>导出至列表</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="104"/>
@@ -3907,12 +3907,12 @@ Plugin must be installed for this option to work.</source>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>显示弹出窗口之前先显示一个旗标窗口，点击旗标以显示弹出窗口。</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>单词被选中时显示扫描旗标</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="909"/>
@@ -4026,22 +4026,22 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1529"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1537"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>收藏内容保存周期。若为 0 则只在程序退出时保存。</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1563"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>开启此选项以在每次进行删除操作时进行确认</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1566"/>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>删除条目时确认</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1597"/>
@@ -4107,7 +4107,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../preferences.ui" line="1423"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>开启此选项已保存查询历史</translation>
+        <translation>开启此选项以保存查询历史</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1426"/>
@@ -4440,7 +4440,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../articleview.cc" line="2828"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">警告： %1</translation>
+        <translation>警告： %1</translation>
     </message>
 </context>
 <context>
@@ -4469,7 +4469,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../scanflag.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>主窗口</translation>
     </message>
 </context>
 <context>
@@ -4513,7 +4513,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../scanpopup.ui" line="178"/>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>将词条添加至收藏 (Ctrl+E)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
