@@ -102,6 +102,9 @@ public slots:
 
 private:
 
+  QTimer delayTimer;
+  QClipboard::Mode inputClipboard;
+
   // Translates the word from the clipboard or the clipboard selection
   void translateWordFromClipboard(QClipboard::Mode m);
 
@@ -190,6 +193,7 @@ private slots:
   void hideTimerExpired();
   void altModeExpired();
   void altModePoll();
+  void delayShow();
 
   /// Called repeatedly once the popup is initially engaged and we monitor the
   /// mouse as it may move away from the window. This simulates mouse grab, in
