@@ -133,6 +133,7 @@ private:
 
 #ifdef HAVE_X11
   ScanFlag * scanFlag;
+  QTimer delayTimer;
 #endif
 
   bool mouseEnteredOnce;
@@ -212,6 +213,10 @@ private slots:
   void focusTranslateLine();
 
   void typingEvent( QString const & );
+
+#ifdef HAVE_X11
+  void delayShow();
+#endif
 };
 
 #endif

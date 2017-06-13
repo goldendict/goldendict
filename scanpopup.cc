@@ -282,6 +282,12 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   connect( scanFlag, SIGNAL( showScanPopup() ),
            this, SLOT( showEngagePopup() ) );
+
+  delayTimer.setSingleShot( true );
+  delayTimer.setInterval( 200 );
+
+  connect( &delayTimer, SIGNAL( timeout() ),
+    this, SLOT( delayShow() ) );
 #endif
 }
 
@@ -375,12 +381,29 @@ void ScanPopup::translateWord( QString const & word )
       );
 }
 
+#ifdef HAVE_X11
+void ScanPopup::delayShow()
+{
+  QString subtype = "plain";
+  handleInputWord( QApplication::clipboard()->text( subtype, QClipboard::Selection ) );
+}
+#endif
+
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   if ( !isScanningEnabled )
     return;
 
   GD_DPRINTF( "clipboard changed\n" );
+
+#ifdef HAVE_X11
+  if( m == QClipboard::Selection )
+  {
+    // Use delay show to prevent multiple popups while selection in progress
+    delayTimer.start();
+    return;
+  }
+#endif
 
   QString subtype = "plain";
 
