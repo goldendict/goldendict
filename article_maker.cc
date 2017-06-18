@@ -675,7 +675,7 @@ void ArticleRequest::bodyFinished()
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
 
-        head += string( "<div style=\"display:inline;\" class=\"gdarticle" ) +
+        head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
                 ( collapse ? " gdcollapsedarticle" : "" ) +
                 "\" id=\"" + gdFrom +
