@@ -153,7 +153,7 @@ a:hover
 }
 
 /* The first headword in a (possibly) multi-headword DSL article */
-.gdarticlebody > span:first-child .dsl_headwords,
+.gdarticlebody > div:first-child .dsl_headwords,
 .gdarticlebody > h3:first-child
 {
   margin-top: -3px;

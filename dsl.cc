@@ -1662,7 +1662,7 @@ void DslArticleRequest::run()
       if( displayedHeadword.empty() || isDslWs( displayedHeadword[ 0 ] ) )
         displayedHeadword = word; // Special case - insided card
 
-      articleText += "<div style=\"display:inline;\" class=\"dsl_article\">";
+      articleText += "<div class=\"dsl_article\">";
       articleText += "<div class=\"dsl_headwords\"";
       if( dict.isFromLanguageRTL() )
         articleText += " dir=\"rtl\"";

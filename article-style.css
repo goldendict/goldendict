@@ -343,6 +343,11 @@ div.xdxf
   text-decoration: underline;
 }
 
+.dsl_article
+{
+  display:inline;
+}
+
 .dsl_article font[color=c_default_color]
 {
   color: green;
@@ -586,6 +591,11 @@ div.xdxf
   width: 13px;
   height: 13px;
   vertical-align: -15%;
+}
+
+.epwing_article
+{
+  display:inline;
 }
 
 /************* Websites *****************/
