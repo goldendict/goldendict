@@ -471,7 +471,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
 
     if ( result <= 0 )
     {
-      qWarning( "Warning: failed to read Vorbis data (code = %ld)\n", result );
+      gdWarning( "Failed to read Vorbis data (code = %ld)\n", result );
       memset( ptr, 0, left );
       break;
     }

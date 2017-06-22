@@ -717,7 +717,7 @@ HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
 
     if ( errorHandler.isError() )
     {
-      qDebug() << "Warning: Possible hotkeys conflict. Check your hotkeys options.";
+      gdWarning( "Possible hotkeys conflict. Check your hotkeys options." );
       ungrabKey( result.first );
     }
   }
@@ -734,7 +734,7 @@ void HotkeyWrapper::ungrabKey( GrabbedKeys::iterator i )
 
   if ( errorHandler.isError() )
   {
-    qDebug() << "Warning: Cannot ungrab the hotkey";
+    gdWarning( "Cannot ungrab the hotkey" );
   }
 }
 

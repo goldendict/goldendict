@@ -1259,7 +1259,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
           sptr< MdictParser > mddParser = new MdictParser();
           if ( !mddParser->open( mddIter->c_str() ) )
           {
-            gdWarning( "Warning: Broken mdd (resource) file: %s\n", mddIter->c_str() );
+            gdWarning( "Broken mdd (resource) file: %s\n", mddIter->c_str() );
             continue;
           }
           mddParsers.push_back( mddParser );

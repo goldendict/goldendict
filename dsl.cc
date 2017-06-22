@@ -2100,7 +2100,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
                 if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) || curString.empty() )
                 {
-                  gdWarning( "Warning: premature end of file %s\n", abrvFileName.c_str() );
+                  gdWarning( "Premature end of file %s\n", abrvFileName.c_str() );
                   eof = true;
                   break;
                 }
@@ -2186,7 +2186,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               if ( !isDslWs( curString[ x ] ) )
               {
-                gdWarning( "Warning: garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
+                gdWarning( "Garbage string in %s at offset 0x%lX\n", i->c_str(), (unsigned long) curOffset );
                 break;
               }
             }
@@ -2210,7 +2210,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           {
             if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) ) )
             {
-              gdWarning( "Warning: premature end of file %s\n", i->c_str() );
+              gdWarning( "Premature end of file %s\n", i->c_str() );
               break;
             }
 

@@ -724,11 +724,11 @@ void ArticleDom::closeTag( wstring const & name,
   if ( warn )
   {
     if( !dictionaryName.empty() )
-      gdWarning( "Warning: no corresponding opening tag for closing tag \"%s\" found in \"%s\", article \"%s\".",
+      gdWarning( "No corresponding opening tag for closing tag \"%s\" found in \"%s\", article \"%s\".",
                  gd::toQString( name ).toUtf8().data(), dictionaryName.c_str(),
                  gd::toQString( headword ).toUtf8().data() );
     else
-      gdWarning( "Warning: no corresponding opening tag for closing tag \"%s\" found.",
+      gdWarning( "No corresponding opening tag for closing tag \"%s\" found.",
                  gd::toQString( name ).toUtf8().data() );
   }
 }
