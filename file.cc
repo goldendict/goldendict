@@ -107,7 +107,7 @@ void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
   f.setFileName( FsEncoding::decode( filename ) );
 
   if ( !f.open( openMode ) )
-    throw exCantOpen( std::string( filename ) + ": " + strerror( errno ) );
+    throw exCantOpen( std::string( filename ) + ": " + f.errorString().toUtf8().data() );
 }
 
 Class::Class( char const * filename, char const * mode ) throw( exCantOpen ):
