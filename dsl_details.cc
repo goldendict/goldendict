@@ -260,11 +260,9 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               }
             }
 
-
-
             // Skip to next '@'
 
-            while( !( ch == L'@' && !escaped ) )
+            while( !( ch == L'@' && !escaped && firstInLine() ) )
               nextChar();
 
             stringPos--;

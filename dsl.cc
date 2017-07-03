@@ -716,6 +716,16 @@ void DslDictionary::loadArticle( uint32_t address,
         hpos = str.find( L'@');
         if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
           break;
+        else
+        {
+          // Check for unescaped '@' inside string
+          size_t i;
+          for( i = 0; i < hpos; i++ )
+            if( !isDslWs( str[ i ] ) )
+                break;
+          if( i < hpos )
+            break;
+        }
       }
       else
         break;
@@ -2298,6 +2308,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               if( !isEmbeddedCard )
               {
                 gdWarning( "Unescaped '@' symbol at line %i", scanner.getLinesRead() - 1 );
+
+                if( insideInsided )
+                  linesInsideCard++;
+
                 continue;
               }
             }
