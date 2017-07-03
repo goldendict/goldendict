@@ -82,7 +82,9 @@ private:
   void closeTag( wstring const & name, list< Node * > & stack,
                  bool warn = true );
 
-  wchar const * stringPos;
+  bool firstInLine();
+
+  wchar const * stringPos, * lineStartPos;
 
   class eot {};
 

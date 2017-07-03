@@ -165,6 +165,7 @@ static inline bool checkM( wstring const & dest, wstring const & src )
 ArticleDom::ArticleDom( wstring const & str, string const & dictName,
                         wstring const & headword_):
   root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() ),
+  lineStartPos( str.c_str() ),
   transcriptionCount( 0 ),
   dictionaryName( dictName ),
   headword( headword_ )
@@ -181,86 +182,96 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
       if ( ch == L'@' && !escaped )
       {
-        // Insided card
-        wstring linkTo;
-        nextChar();
-        for( ; ; nextChar() )
+        if( !firstInLine() )
         {
-          if( ch == L'\n' )
-            break;
-          if( ch != L'\r' )
-            linkTo.push_back( ch );
+          // Not insided card
+          if( dictName.empty() )
+            gdWarning( "Unescaped '@' symbol found" );
+          else
+            gdWarning( "Unescaped '@' symbol found in \"%s\"", dictName.c_str() );
         }
-        linkTo = Folding::trimWhitespace( linkTo );
-
-        if( !linkTo.empty() )
+        else
         {
-          list< wstring > allLinkEntries;
-          expandOptionalParts( linkTo, &allLinkEntries );
-
-          for( list< wstring >::iterator entry = allLinkEntries.begin();
-               entry != allLinkEntries.end(); )
+          // Insided card
+          wstring linkTo;
+          nextChar();
+          for( ; ; nextChar() )
           {
-            if ( !textNode )
+            if( ch == L'\n' )
+              break;
+            if( ch != L'\r' )
+              linkTo.push_back( ch );
+          }
+          linkTo = Folding::trimWhitespace( linkTo );
+
+          if( !linkTo.empty() )
+          {
+            list< wstring > allLinkEntries;
+            expandOptionalParts( linkTo, &allLinkEntries );
+
+            for( list< wstring >::iterator entry = allLinkEntries.begin();
+                 entry != allLinkEntries.end(); )
             {
-              Node text = Node( Node::Text(), wstring() );
+              if ( !textNode )
+              {
+                Node text = Node( Node::Text(), wstring() );
+
+                if ( stack.empty() )
+                {
+                  root.push_back( text );
+                  stack.push_back( &root.back() );
+                }
+                else
+                {
+                  stack.back()->push_back( text );
+                  stack.push_back( &stack.back()->back() );
+                }
+
+                textNode = stack.back();
+              }
+              textNode->text.push_back( L'-' );
+              textNode->text.push_back( L' ' );
+
+              // Close the currently opened text node
+              stack.pop_back();
+              textNode = 0;
+
+              wstring linkText = Folding::trimWhitespace( *entry );
+              processUnsortedParts( linkText, true );
+              ArticleDom nodeDom( linkText, dictName, headword_ );
+
+              Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
+              for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
+                link.push_back( *n );
+
+              ++entry;
 
               if ( stack.empty() )
               {
-                root.push_back( text );
-                stack.push_back( &root.back() );
+                root.push_back( link );
+                if( entry != allLinkEntries.end() ) // Add line break before next entry
+                  root.push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
               }
               else
               {
-                stack.back()->push_back( text );
-                stack.push_back( &stack.back()->back() );
+                stack.back()->push_back( link );
+                if( entry != allLinkEntries.end() )
+                  stack.back()->push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
               }
-
-              textNode = stack.back();
             }
-            textNode->text.push_back( L'-' );
-            textNode->text.push_back( L' ' );
 
-            // Close the currently opened text node
-            stack.pop_back();
-            textNode = 0;
 
-            wstring linkText = Folding::trimWhitespace( *entry );
-            processUnsortedParts( linkText, true );
-            ArticleDom nodeDom( linkText, dictName, headword_ );
 
-            Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
-            for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
-              link.push_back( *n );
+            // Skip to next '@'
 
-            ++entry;
+            while( !( ch == L'@' && !escaped ) )
+              nextChar();
 
-            if ( stack.empty() )
-            {
-              root.push_back( link );
-              if( entry != allLinkEntries.end() ) // Add line break before next entry
-                root.push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
-            }
-            else
-            {
-              stack.back()->push_back( link );
-              if( entry != allLinkEntries.end() )
-                stack.back()->push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
-            }
+            stringPos--;
+            ch = L'\n';
+            escaped = false;
           }
-
-
-
-          // Skip to next '@'
-
-          while( !( ch == L'@' && !escaped ) )
-            nextChar();
-
-          stringPos--;
-          ch = L'\n';
-          escaped = false;
         }
-
       } // if ( ch == L'@' )
 
       if ( ch == L'[' && !escaped )
@@ -763,8 +774,21 @@ void ArticleDom::nextChar() throw( eot )
   }
   else
     escaped = false;
+
+  if( ch == '\n' || ch == '\r' )
+    lineStartPos = stringPos;
 }
 
+bool ArticleDom::firstInLine()
+{
+  // Check if current position is first after '\n' and leading spaces
+  if( stringPos <= lineStartPos )
+    return true;
+  for( wchar const * pch = lineStartPos; pch < stringPos - 1; pch++ )
+    if( *pch != ' ' && *pch != '\t' )
+      return false;
+  return true;
+}
 
 /////////////// DslScanner
 

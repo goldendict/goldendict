@@ -2256,6 +2256,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           uint32_t offset = curOffset;
           QVector< wstring > insidedHeadwords;
           unsigned linesInsideCard = 0;
+          int dogLine = 0;
 
           // Skip the article's body
           for( ; ; )
@@ -2265,7 +2266,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                  || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
+              {
+                gdWarning( "Unclosed tag '@' at line %i", dogLine );
                 insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
+              }
               break;
             }
 
@@ -2279,6 +2283,26 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               continue;
             }
+            else
+            {
+              // Embedded card tag must be placed at first position in line after spaces
+              bool isEmbeddedCard = true;
+              for( wstring::size_type i = 0; i < n; i++ )
+              {
+                if( !isDslWs( curString[ i ] ) )
+                {
+                  isEmbeddedCard = false;
+                  break;
+                }
+              }
+              if( !isEmbeddedCard )
+              {
+                gdWarning( "Unescaped '@' symbol at line %i", scanner.getLinesRead() - 1 );
+                continue;
+              }
+            }
+
+            dogLine = scanner.getLinesRead() - 1;
 
             // Handle embedded card
 
