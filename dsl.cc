@@ -1412,6 +1412,16 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
         hpos = str.find( L'@');
         if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
           break;
+        else
+        {
+          // Check for unescaped '@' inside string
+          size_t i;
+          for( i = 0; i < hpos; i++ )
+            if( !isDslWs( str[ i ] ) )
+                break;
+          if( i < hpos )
+            break;
+        }
       }
       else
         break;
