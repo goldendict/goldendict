@@ -714,18 +714,8 @@ void DslDictionary::loadArticle( uint32_t address,
         wstring str = wstring( articleData, pos, hpos - pos );
 
         hpos = str.find( L'@');
-        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
+        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' || !isAtSignFirst( str ) )
           break;
-        else
-        {
-          // Check for unescaped '@' inside string
-          size_t i;
-          for( i = 0; i < hpos; i++ )
-            if( !isDslWs( str[ i ] ) )
-                break;
-          if( i < hpos )
-            break;
-        }
       }
       else
         break;
@@ -1410,18 +1400,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
         wstring str = wstring( articleData, pos, hpos - pos );
 
         hpos = str.find( L'@');
-        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' )
+        if( hpos == wstring::npos || str[ hpos - 1 ] == L'\\' || !isAtSignFirst( str ) )
           break;
-        else
-        {
-          // Check for unescaped '@' inside string
-          size_t i;
-          for( i = 0; i < hpos; i++ )
-            if( !isDslWs( str[ i ] ) )
-                break;
-          if( i < hpos )
-            break;
-        }
       }
       else
         break;
@@ -2306,16 +2286,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             else
             {
               // Embedded card tag must be placed at first position in line after spaces
-              bool isEmbeddedCard = true;
-              for( wstring::size_type i = 0; i < n; i++ )
-              {
-                if( !isDslWs( curString[ i ] ) )
-                {
-                  isEmbeddedCard = false;
-                  break;
-                }
-              }
-              if( !isEmbeddedCard )
+              if( !isAtSignFirst( curString ) )
               {
                 gdWarning( "Unescaped '@' symbol at line %i", scanner.getLinesRead() - 1 );
 

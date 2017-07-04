@@ -40,6 +40,8 @@ struct DSLLangCode
 
 string findCodeForDslId( int id );
 
+bool isAtSignFirst( wstring const & str );
+
 /// Parses the DSL language, representing it in its structural DOM form.
 struct ArticleDom
 {
@@ -82,7 +84,7 @@ private:
   void closeTag( wstring const & name, list< Node * > & stack,
                  bool warn = true );
 
-  bool firstInLine();
+  bool atSignFirstInLine();
 
   wchar const * stringPos, * lineStartPos;
 

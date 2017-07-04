@@ -139,6 +139,13 @@ string findCodeForDslId( int id )
   return string();
 }
 
+bool isAtSignFirst( wstring const & str )
+{
+  // Test if '@' is first in string except spaces and dsl tags
+  QRegExp reg( "[ \\t]*(?:\\[[^\\]]+\\][ \\t]*)*@", Qt::CaseInsensitive, QRegExp::RegExp2 );
+  return reg.indexIn( gd::toQString( str ) ) == 0;
+}
+
 /////////////// ArticleDom
 
 wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
@@ -182,7 +189,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
       if ( ch == L'@' && !escaped )
       {
-        if( !firstInLine() )
+        if( !atSignFirstInLine() )
         {
           // Not insided card
           if( dictName.empty() )
@@ -262,7 +269,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
             // Skip to next '@'
 
-            while( !( ch == L'@' && !escaped && firstInLine() ) )
+            while( !( ch == L'@' && !escaped && atSignFirstInLine() ) )
               nextChar();
 
             stringPos--;
@@ -777,15 +784,13 @@ void ArticleDom::nextChar() throw( eot )
     lineStartPos = stringPos;
 }
 
-bool ArticleDom::firstInLine()
+bool ArticleDom::atSignFirstInLine()
 {
-  // Check if current position is first after '\n' and leading spaces
+  // Check if '@' sign is first after '\n', leading spaces and dsl tags
   if( stringPos <= lineStartPos )
     return true;
-  for( wchar const * pch = lineStartPos; pch < stringPos - 1; pch++ )
-    if( *pch != ' ' && *pch != '\t' )
-      return false;
-  return true;
+
+  return isAtSignFirst( wstring( lineStartPos ) );
 }
 
 /////////////// DslScanner
