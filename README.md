@@ -102,10 +102,10 @@ Then, invoke `make clean` before `make` because the setting change:
 ### Building under Windows with MS Visual Studio
 
 To build GoldenDict with Visual Studio take one of next library packs and unpack it to `"winlibs/lib/msvc"` folder in GoldenDict sources folder.  
-[GoldenDict_libs_VS2013_x86_v3.7z](http://www.mediafire.com/file/ku992m6rw7ru4o9/GoldenDict_libs_VS2013_x86_v3.7z) - for MS Visual Studio 2013, 32 bit  
-[GoldenDict_libs_VS2013_x64_v3.7z](http://www.mediafire.com/file/hnb4cc89arutxaa/GoldenDict_libs_VS2013_x64_v3.7z) - for MS Visual Studio 2013, 64 bit  
-[GoldenDict_libs_VS2015_x86_v3.7z](http://www.mediafire.com/file/r6lgihicri074yw/GoldenDict_libs_VS2015_x86_v3.7z) - for MS Visual Studio 2015, 32 bit  
-[GoldenDict_libs_VS2015_x64_v3.7z](http://www.mediafire.com/file/digx5uozmwh4how/GoldenDict_libs_VS2015_x64_v3.7z) - for MS Visual Studio 2015, 64 bit  
+[GoldenDict_libs_VS2013_x86_v4.7z](http://www.mediafire.com/file/3il4vr1l8299nxn/GoldenDict_libs_VS2013_x86_v4.7z) - for MS Visual Studio 2013, 32 bit  
+[GoldenDict_libs_VS2013_x64_v4.7z](http://www.mediafire.com/file/2itgg8bafppg6lw/GoldenDict_libs_VS2013_x64_v4.7z) - for MS Visual Studio 2013, 64 bit  
+[GoldenDict_libs_VS2015_x86_v4.7z](http://www.mediafire.com/file/0a7ygy9rn99oevm/GoldenDict_libs_VS2015_x86_v4.7z) - for MS Visual Studio 2015, 32 bit  
+[GoldenDict_libs_VS2015_x64_v4.7z](http://www.mediafire.com/file/yoy2q8af0s1467m/GoldenDict_libs_VS2015_x64_v4.7z) - for MS Visual Studio 2015, 64 bit  
 
 To create project files for Visual Studio you can pass `"-tp vc"` option to `qmake`.
 
