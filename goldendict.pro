@@ -191,7 +191,7 @@ mac {
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.2 \
+        -lhunspell-1.6.1 \
         -llzo2
     isEmpty(DISABLE_INTERNAL_PLAYER) {
         LIBS += -lao \
