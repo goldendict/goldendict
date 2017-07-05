@@ -244,9 +244,13 @@ void HunspellArticleRequest::run()
     return;
   }
 
+#ifdef OLD_HUNSPELL_INTERFACE
   // We'd need to free this if it gets allocated and an exception shows up
   char ** suggestions = 0;
   int suggestionsCount = 0;
+#else
+  vector< string > suggestions;
+#endif
 
   try
   {
@@ -263,16 +267,24 @@ void HunspellArticleRequest::run()
 
     string encodedWord = encodeToHunspell( hunspell, trimmedWord );
 
+#ifdef OLD_HUNSPELL_INTERFACE
     if ( hunspell.spell( encodedWord.c_str() ) )
+#else
+    if ( hunspell.spell( encodedWord ) )
+#endif
     {
       // Good word -- no spelling suggestions then.
       finish();
       return;
     }
 
+#ifdef OLD_HUNSPELL_INTERFACE
     suggestionsCount = hunspell.suggest( &suggestions, encodedWord.c_str() );
-
     if ( suggestionsCount )
+#else
+    suggestions = hunspell.suggest( encodedWord );
+    if ( !suggestions.empty() )
+#endif
     {
       // There were some suggestions made for us. Make an appropriate output.
 
@@ -281,9 +293,15 @@ void HunspellArticleRequest::run()
 
       wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
 
+#ifdef OLD_HUNSPELL_INTERFACE
       for( int x = 0; x < suggestionsCount; ++x )
       {
         wstring suggestion = decodeFromHunspell( hunspell, suggestions[ x ] );
+#else
+      for( vector< string >::size_type x = 0; x < suggestions.size(); ++x )
+      {
+        wstring suggestion = decodeFromHunspell( hunspell, suggestions[ x ].c_str() );
+#endif
 
         if ( Folding::applySimpleCaseOnly( suggestion ) == lowercasedWord )
         {
@@ -293,7 +311,9 @@ void HunspellArticleRequest::run()
 
           finish();
 
+#ifdef OLD_HUNSPELL_INTERFACE
           hunspell.free_list( &suggestions, suggestionsCount );
+#endif
           return;
         }
         string suggestionUtf8 = Utf8::encode( suggestion );
@@ -302,7 +322,11 @@ void HunspellArticleRequest::run()
         result += Html::escape( suggestionUtf8 ) + "\">";
         result += Html::escape( suggestionUtf8 ) + "</a>";
 
+#ifdef OLD_HUNSPELL_INTERFACE
         if ( x != suggestionsCount - 1 )
+#else
+        if ( x != suggestions.size() - 1 )
+#endif
           result += ", ";
       }
 
@@ -326,12 +350,14 @@ void HunspellArticleRequest::run()
     gdWarning( "Hunspell: error: %s\n", e.what() );
   }
 
+#ifdef OLD_HUNSPELL_INTERFACE
   if ( suggestions )
   {
     Mutex::Lock _( hunspellMutex );
 
     hunspell.free_list( &suggestions, suggestionsCount );
   }
+#endif
 
   finish();
 }
@@ -460,9 +486,13 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 {
   QVector< wstring > result;
 
+#ifdef OLD_HUNSPELL_INTERFACE
   // We'd need to free this if it gets allocated and an exception shows up
   char ** suggestions = 0;
   int suggestionsCount = 0;
+#else
+  vector< string > suggestions;
+#endif
 
   try
   {
@@ -470,9 +500,13 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 
     string encodedWord = encodeToHunspell( hunspell, word );
 
+#ifdef OLD_HUNSPELL_INTERFACE
     suggestionsCount = hunspell.analyze( &suggestions, encodedWord.c_str() );
-
     if ( suggestionsCount )
+#else
+    suggestions = hunspell.analyze( encodedWord );
+    if ( !suggestions.empty() )
+#endif
     {
       // There were some suggestions made for us. Make an appropriate output.
 
@@ -480,9 +514,15 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 
       static QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:))|\\S+)+)" );
 
+#ifdef OLD_HUNSPELL_INTERFACE
       for( int x = 0; x < suggestionsCount; ++x )
       {
         QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
+#else
+      for( vector< string >::size_type x = 0; x < suggestions.size(); ++x )
+      {
+        QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ].c_str() ) );
+#endif
 
         GD_DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
 
@@ -506,12 +546,14 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
     gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
   }
 
+#ifdef OLD_HUNSPELL_INTERFACE
   if ( suggestions )
   {
     Mutex::Lock _( hunspellMutex );
 
     hunspell.free_list( &suggestions, suggestionsCount );
   }
+#endif
 
   return result;
 }
@@ -614,7 +656,11 @@ void HunspellPrefixMatchRequest::run()
 
     string encodedWord = encodeToHunspell( hunspell, trimmedWord );
 
+#ifdef OLD_HUNSPELL_INTERFACE
     if ( hunspell.spell( encodedWord.c_str() ) )
+#else
+    if ( hunspell.spell( encodedWord ) )
+#endif
     {
       // Known word -- add it to the result
 

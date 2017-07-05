@@ -80,20 +80,8 @@ win32 {
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
-    isEmpty(HUNSPELL_LIB) {
-          CONFIG(gcc48) {
-            LIBS += -lhunspell-1.3.2
-          } else {
-            greaterThan(QT_MAJOR_VERSION, 4) {
-              lessThan(QT_MINOR_VERSION, 1) {
-                LIBS += -lhunspell-1.3-sjlj
-              } else {
-                LIBS += -lhunspell-1.3-dw2
-              }
-            } else {
-              LIBS += -lhunspell-1.3.2
-            }
-          }
+        isEmpty(HUNSPELL_LIB) {
+          LIBS += -lhunspell-1.6.1
         } else {
           LIBS += -l$$HUNSPELL_LIB
         }
@@ -561,6 +549,10 @@ CONFIG( chinese_conversion_support ) {
       LIBS += -lopencc
     }
   }
+}
+
+CONFIG( old_hunspell ) {
+  DEFINES += OLD_HUNSPELL_INTERFACE
 }
 
 RESOURCES += resources.qrc \

@@ -46,6 +46,8 @@ On the other hand, if you want to use `qt5`, make sure that `qmake` is from Qt 5
 finding it at a path like `/usr/lib/x86_64-linux-gnu/qt5/bin/qmake`.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
+Note: To compile with `libhunspell` older than 1.5 pass `"CONFIG+=old_hunspell"` to `qmake`.
+
 ### Building with Chinese conversion support
 
 To add Chinese conversion support you need at first install libopencc-dev package:
