@@ -797,7 +797,7 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   defbuf = outbuf;
   while (inbufbytes) {
     if (iconv(cd, &inbuf, &inbufbytes, &outbuf, &outbufbytes) == (size_t)-1) {
-      gdWarning( "\"%s\" - error in iconv conversion\n", inbuf );
+      gdWarning( "\"%s\" - error in iconv conversion (%s)\n", inbuf, strerror( errno ) );
       break;
 //      inbuf++;
 //      inbufbytes--;
