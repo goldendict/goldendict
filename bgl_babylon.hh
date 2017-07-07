@@ -120,7 +120,7 @@ const std::string bgl_charsetname[] = {
 const std::string bgl_charset[] = {
 	"WINDOWS-1252", /*Default*/
 	"WINDOWS-1252", /*Latin*/
-	"ISO-8859-2", /*Eastern European*/
+	"WINDOWS-1250", /*Eastern European*/
 	"WINDOWS-1251", /*Cyriilic*/
 	"CP932", /*Japanese*/
 	"BIG5", /*Traditional Chinese*/
