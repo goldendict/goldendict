@@ -884,6 +884,7 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
     bool isName = false;
     bool isLangFrom = false;
     bool isLangTo = false;
+    bool isSoundDict = false;
 
     if ( !str.compare( 0, 5, GD_NATIVE_TO_WS( L"#NAME" ), 5 ) )
       isName = true;
@@ -893,6 +894,9 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
     else
     if ( !str.compare( 0, 18, GD_NATIVE_TO_WS( L"#CONTENTS_LANGUAGE" ), 18 ) )
       isLangTo = true;
+    else
+    if ( !str.compare( 0, 17, GD_NATIVE_TO_WS( L"#SOUND_DICTIONARY" ), 17 ) )
+      isSoundDict = true;
     else
     if ( str.compare( 0, 17, GD_NATIVE_TO_WS( L"#SOURCE_CODE_PAGE" ), 17 ) )
       continue;
@@ -917,6 +921,8 @@ DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
       langFrom = arg;
     else if ( isLangTo )
       langTo = arg;
+    else if ( isSoundDict )
+      soundDictionary = arg;
     else
     {
       // The encoding

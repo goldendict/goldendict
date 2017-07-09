@@ -132,6 +132,24 @@ inline QString path( QUrl const & url )
 #endif
 }
 
+inline void setFragment( QUrl & url, const QString & fragment )
+{
+#if IS_QT_5
+  url.setFragment( fragment, QUrl::DecodedMode );
+#else
+  url.setFragment( fragment );
+#endif
+}
+
+inline QString fragment( const QUrl & url )
+{
+#if IS_QT_5
+  return url.fragment( QUrl::FullyDecoded );
+#else
+  return url.fragment();
+#endif
+}
+
 }
 
 namespace Dom

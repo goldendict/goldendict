@@ -1166,10 +1166,58 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
       if ( activeDicts )
       {
+        unsigned preferred = UINT_MAX;
+        if( url.hasFragment() )
+        {
+          // Find sound in the preferred dictionary
+          QString preferredName = Qt4x5::Url::fragment( url );
+          try
+          {
+            for( unsigned x = 0; x < activeDicts->size(); ++x )
+            {
+              if( preferredName.compare( QString::fromUtf8( (*activeDicts)[ x ]->getName().c_str() ) ) == 0 )
+              {
+                preferred = x;
+                sptr< Dictionary::DataRequest > req =
+                  (*activeDicts)[ x ]->getResource(
+                    url.path().mid( 1 ).toUtf8().data() );
+
+                resourceDownloadRequests.push_back( req );
+
+                if ( !req->isFinished() )
+                {
+                  // Queued loading
+                  connect( req.get(), SIGNAL( finished() ),
+                           this, SLOT( resourceDownloadFinished() ) );
+                }
+                else
+                {
+                  // Immediate loading
+                  if( req->dataSize() > 0 )
+                  {
+                    // Resource already found, stop next search
+                    resourceDownloadFinished();
+                    return;
+                  }
+                }
+                break;
+              }
+            }
+          }
+          catch( std::exception & e )
+          {
+            emit statusBarMessage(
+                  tr( "ERROR: %1" ).arg( e.what() ),
+                  10000, QPixmap( ":/icons/error.png" ) );
+          }
+        }
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
           try
           {
+            if( x == preferred )
+              continue;
+
             sptr< Dictionary::DataRequest > req =
               (*activeDicts)[ x ]->getResource(
                 url.path().mid( 1 ).toUtf8().data() );

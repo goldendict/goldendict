@@ -84,7 +84,7 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 21 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
   CurrentFtsIndexVersion = 1
 };
@@ -108,6 +108,7 @@ struct IdxHeader
   uint32_t langTo;    // Target language
   uint32_t hasZipFile; // Non-zero means there's a zip file with resources
                        // present
+  uint32_t hasSoundDictionaryName;
   uint32_t zipIndexBtreeMaxElements; // Two fields from IndexInfo of the zip
                                      // resource index.
   uint32_t zipIndexRootOffset;
@@ -152,6 +153,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   IdxHeader idxHeader;
   sptr< ChunkedStorage::Reader > chunks;
   string dictionaryName;
+  string preferredSoundDictionary;
   map< string, string > abrv;
   Mutex dzMutex;
   dictData * dz;
@@ -300,6 +302,10 @@ DslDictionary::DslDictionary( string const & id,
   vector< char > dName( idx.read< uint32_t >() );
   idx.read( &dName.front(), dName.size() );
   dictionaryName = string( &dName.front(), dName.size() );
+
+  vector< char > sName( idx.read< uint32_t >() );
+  idx.read( &sName.front(), sName.size() );
+  preferredSoundDictionary = string( &sName.front(), sName.size() );
 
   // Everything else would be done in deferred init
 }
@@ -857,6 +863,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       url.setScheme( "gdau" );
       url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
       url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
+      if( search && idxHeader.hasSoundDictionaryName )
+        Qt4x5::Url::setFragment( url, QString::fromUtf8( preferredSoundDictionary.c_str() ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -2056,6 +2064,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         idx.write( (uint32_t) dictionaryName.size() );
         idx.write( dictionaryName.data(), dictionaryName.size() );
+
+        string soundDictName = Utf8::encode( scanner.getSoundDictionaryName() );
+        if( !soundDictName.empty() )
+        {
+          idxHeader.hasSoundDictionaryName = 1;
+          idx.write( (uint32_t) soundDictName.size() );
+          idx.write( soundDictName.data(), soundDictName.size() );
+        }
 
         idxHeader.dslEncoding = scanner.getEncoding();
 

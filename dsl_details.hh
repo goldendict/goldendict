@@ -121,6 +121,7 @@ class DslScanner
   DslIconv iconv;
   wstring dictionaryName;
   wstring langFrom, langTo;
+  wstring soundDictionary;
   char readBuffer[ 65536 ];
   char * readBufferPtr;
   size_t readBufferLeft;
@@ -154,6 +155,10 @@ public:
   /// Returns the dictionary's target language, as was read from file's headers.
   wstring const & getLangTo() const
   { return langTo; }
+
+  /// Returns the preferred external dictionary with sounds, as was read from file's headers.
+  wstring const & getSoundDictionaryName() const
+  { return soundDictionary; }
 
   /// Reads next line from the file. Returns true if reading succeeded --
   /// the string gets stored in the one passed, along with its physical
