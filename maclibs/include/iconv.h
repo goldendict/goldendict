@@ -13,15 +13,14 @@
 
    You should have received a copy of the GNU Library General Public
    License along with the GNU LIBICONV Library; see the file COPYING.LIB.
-   If not, write to the Free Software Foundation, Inc., 51 Franklin Street,
-   Fifth Floor, Boston, MA 02110-1301, USA.  */
+   If not, see <http://www.gnu.org/licenses/>.  */
 
 /* When installed, this file is called "iconv.h". */
 
 #ifndef _LIBICONV_H
 #define _LIBICONV_H
 
-#define _LIBICONV_VERSION 0x010E    /* version number: (major<<8) + minor */
+#define _LIBICONV_VERSION 0x010F    /* version number: (major<<8) + minor */
 
 #if 1 && BUILDING_LIBICONV
 #define LIBICONV_DLL_EXPORTED __attribute__((__visibility__("default")))
@@ -49,7 +48,7 @@ extern LIBICONV_DLL_EXPORTED  int _libiconv_version; /* Likewise */
 
 /* Define iconv_t ourselves. */
 #undef iconv_t
-#define iconv_t iconv_t
+#define iconv_t libiconv_t
 typedef void* iconv_t;
 
 /* Get size_t declaration.
@@ -74,7 +73,7 @@ extern "C" {
 /* Allocates descriptor for code conversion from encoding ‘fromcode’ to
    encoding ‘tocode’. */
 #ifndef LIBICONV_PLUG
-#define iconv_open iconv_open
+#define iconv_open libiconv_open
 #endif
 extern LIBICONV_DLL_EXPORTED iconv_t iconv_open (const char* tocode, const char* fromcode);
 
@@ -84,13 +83,13 @@ extern LIBICONV_DLL_EXPORTED iconv_t iconv_open (const char* tocode, const char*
    Decrements ‘*inbytesleft’ and increments ‘*inbuf’ by the same amount.
    Decrements ‘*outbytesleft’ and increments ‘*outbuf’ by the same amount. */
 #ifndef LIBICONV_PLUG
-#define iconv iconv
+#define iconv libiconv
 #endif
 extern LIBICONV_DLL_EXPORTED size_t iconv (iconv_t cd,  char* * inbuf, size_t *inbytesleft, char* * outbuf, size_t *outbytesleft);
 
 /* Frees resources allocated for conversion descriptor ‘cd’. */
 #ifndef LIBICONV_PLUG
-#define iconv_close iconv_close
+#define iconv_close libiconv_close
 #endif
 extern LIBICONV_DLL_EXPORTED int iconv_close (iconv_t cd);
 
