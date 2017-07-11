@@ -798,6 +798,8 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     QString imgName;
 
     QRegExp regFrac = QRegExp( "\\\\[dt]frac" );
+    QString arrayDesc( "\\begin{array}{" );
+    QRegExp regSpaces = QRegExp( "\\s+([\\{\\(\\[\\}\\)\\]])", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     while( (pos = texImage.indexIn( text, pos )) >= 0 )
     {
@@ -817,6 +819,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           // Replace some TeX commands which don't support by mimetex.cgi
 
           QString tex = list[ 3 ];
+          tex.replace( regSpaces, "\\1" );
           tex.replace( regFrac, "\\frac" );
           tex.replace( "\\leqslant", "\\leq" );
           tex.replace( "\\geqslant", "\\geq" );
@@ -825,6 +828,69 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           tex.replace( "\\tbinom", "\\binom" );
           tex.replace( "\\implies", "\\Longrightarrow" );
           tex.replace( "{aligned}", "{align*}" );
+          tex.replace( "\\Subset", "\\subset" );
+          tex.replace( "\\xrightarrow", "\\longrightarrow^" );
+          tex.remove( "\\scriptstyle" );
+          tex.remove( "\\mathop" );
+          tex.replace( "\\bigg|", "|" );
+
+          // Format array descriptions (mimetex now don't support *{N}x constructions in it)
+
+          int pos1 = 0;
+          while( pos1 >= 0 )
+          {
+            pos1 = tex.indexOf( arrayDesc, pos1, Qt::CaseInsensitive );
+            if( pos1 >= 0 )
+            {
+              // Retrieve array description
+              QString desc, newDesc;
+              int n = 0;
+              int nstart = pos1 + arrayDesc.size();
+              int i;
+              for( i = 0; i + nstart < tex.size(); i++ )
+              {
+                if( tex[ i + nstart ] == '{' )
+                  n += 1;
+                if( tex[ i + nstart ] == '}' )
+                  n -= 1;
+                if( n < 0 )
+                  break;
+              }
+              if( i > 0 && i + nstart + 1 < tex.size() )
+                desc = tex.mid( nstart, i );
+
+              if( !desc.isEmpty() )
+              {
+                // Expand multipliers: "*{5}x" -> "xxxxx"
+
+                newDesc = desc;
+                QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
+                QString newStr;
+                int pos2 = 0;
+                while( pos2 >= 0 )
+                {
+                  pos2 = multReg.indexIn( newDesc, pos2 );
+                  if( pos2 >= 0 )
+                  {
+                    QStringList list = multReg.capturedTexts();
+                    int n = list[ 1 ].toInt();
+                    for( int i = 0; i < n; i++ )
+                      newStr += list[ 3 ].isEmpty() ? list[ 2 ] : list[ 3 ];
+                    newDesc.replace( pos2, list[ 0 ].size(), newStr );
+                    pos2 += newStr.size();
+                  }
+                  else
+                    break;
+                }
+                tex.replace( pos1 + arrayDesc.size(), desc.size(), newDesc );
+                pos1 += arrayDesc.size() + newDesc.size();
+              }
+              else
+                pos1 += arrayDesc.size();
+            }
+            else
+              break;
+          }
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
