@@ -912,6 +912,18 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
         pos += list[ 0 ].length();
     }
   }
+#ifdef Q_OS_WIN32
+  else
+  {
+    // Increase equations scale
+    text = QString::fromLatin1( "<script type=\"text/x-mathjax-config\">MathJax.Hub.Config({" )
+           + " SVG: { scale: 170, linebreaks: { automatic:true } }"
+           + ", \"HTML-CSS\": { scale: 210, linebreaks: { automatic:true } }"
+           + ", CommonHTML: { scale: 210, linebreaks: { automatic:true } }"
+           + " });</script>"
+           + text;
+  }
+#endif
 
   // Fix outstanding elements
   text += "<br style=\"clear:both;\" />";
@@ -922,7 +934,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 void SlobDictionary::loadResource( std::string & resourceName, string & data )
 {
   vector< WordArticleLink > link;
-  string resData;
   RefEntry entry;
 
   link = resourceIndex.findArticles( Utf8::decode( resourceName ) );
