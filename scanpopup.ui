@@ -226,6 +226,26 @@
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="onTopButton">
+             <property name="toolTip">
+              <string>Always stay on top of all other windows</string>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/ontop.png</normaloff>:/icons/ontop.png</iconset>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="autoRaise">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QToolButton" name="pinButton">
              <property name="toolTip">
               <string>Use this to pin down the window so it would stay on screen,

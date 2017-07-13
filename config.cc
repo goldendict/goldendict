@@ -904,6 +904,8 @@ Class load() throw( exError )
 
   c.pinPopupWindow = ( root.namedItem( "pinPopupWindow" ).toElement().text() == "1" );
 
+  c.popupWindowAlwaysOnTop = ( root.namedItem( "popupWindowAlwaysOnTop" ).toElement().text() == "1" );
+
   QDomNode mainWindowState = root.namedItem( "mainWindowState" );
 
   if ( !mainWindowState.isNull() )
@@ -1847,6 +1849,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "pinPopupWindow" );
     opt.appendChild( dd.createTextNode( c.pinPopupWindow ? "1" : "0" ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "popupWindowAlwaysOnTop" );
+    opt.appendChild( dd.createTextNode( c.popupWindowAlwaysOnTop ? "1" : "0" ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "mainWindowState" );

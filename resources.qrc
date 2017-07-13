@@ -82,5 +82,6 @@
         <file>icons/icon32_gls.png</file>
         <file>icons/star.png</file>
         <file>icons/folder.png</file>
+        <file>icons/ontop.png</file>
     </qresource>
 </RCC>

@@ -574,6 +574,7 @@ struct Class
   QString articleSavePath;   // Path to save articles
 
   bool pinPopupWindow; // Last pin status
+  bool popupWindowAlwaysOnTop; // Last status of pinned popup window
 
   QByteArray mainWindowState; // Binary state saved by QMainWindow
   QByteArray mainWindowGeometry; // Geometry saved by QMainWindow

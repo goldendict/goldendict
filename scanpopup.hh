@@ -214,6 +214,8 @@ private slots:
 
   void typingEvent( QString const & );
 
+  void alwaysOnTopClicked( bool checked );
+
 #ifdef HAVE_X11
   void delayShow();
 #endif

@@ -153,12 +153,19 @@ ScanPopup::ScanPopup( QWidget * parent,
   if ( cfg.popupWindowState.size() )
     restoreState( cfg.popupWindowState, 1 );
 
+  ui.onTopButton->setChecked( cfg.popupWindowAlwaysOnTop );
+  ui.onTopButton->setVisible( cfg.pinPopupWindow );
+  connect( ui.onTopButton, SIGNAL( clicked( bool ) ), this, SLOT( alwaysOnTopClicked( bool ) ) );
+
   ui.pinButton->setChecked( cfg.pinPopupWindow );
 
   if ( cfg.pinPopupWindow )
   {
     dictionaryBar.setMovable( true );
-    setWindowFlags( Qt::Dialog );
+    Qt::WindowFlags flags = Qt::Dialog;
+    if( cfg.popupWindowAlwaysOnTop )
+      flags |= Qt::WindowStaysOnTopHint;
+    setWindowFlags( flags );
   }
   else
   {
@@ -297,6 +304,7 @@ ScanPopup::~ScanPopup()
   cfg.popupWindowState = saveState( 1 );
   cfg.popupWindowGeometry = saveGeometry();
   cfg.pinPopupWindow = ui.pinButton->isChecked();
+  cfg.popupWindowAlwaysOnTop = ui.onTopButton->isChecked();
 
   disableScanning();
 
@@ -900,13 +908,19 @@ void ScanPopup::pinButtonClicked( bool checked )
   {
     uninterceptMouse();
 
-    setWindowFlags( Qt::Dialog );
+    ui.onTopButton->setVisible( true );
+    Qt::WindowFlags flags = Qt::Dialog;
+    if( ui.onTopButton->isChecked() )
+      flags |= Qt::WindowStaysOnTopHint;
+    setWindowFlags( flags );
+
     setWindowTitle( tr( "%1 - %2" ).arg( elideInputWord(), "GoldenDict" ) );
     dictionaryBar.setMovable( true );
     hideTimer.stop();
   }
   else
   {
+    ui.onTopButton->setVisible( false );
     dictionaryBar.setMovable( false );
     setWindowFlags( popupWindowFlags );
 
@@ -1124,4 +1138,19 @@ void ScanPopup::setGroupByName( QString const & name )
   }
   if( i >= ui.groupList->count() )
     gdWarning( "Group \"%s\" for popup window is not found\n", name.toUtf8().data() );
+}
+
+void ScanPopup::alwaysOnTopClicked( bool checked )
+{
+  bool wasVisible = isVisible();
+  if( ui.pinButton->isChecked() )
+  {
+    Qt::WindowFlags flags = this->windowFlags();
+    if( checked )
+      setWindowFlags(flags | Qt::WindowStaysOnTopHint );
+    else
+      setWindowFlags(flags ^ Qt::WindowStaysOnTopHint );
+    if( wasVisible )
+      show();
+  }
 }
