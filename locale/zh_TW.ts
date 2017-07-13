@@ -3659,6 +3659,10 @@ could be resized or managed in other ways.</source>
         <source>Add word to Favorites (Ctrl+E)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Always stay on top of all other windows</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
