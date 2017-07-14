@@ -3595,6 +3595,9 @@ void MainWindow::applyWordsZoomLevel()
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
   // groupList->setFixedHeight(translateLine->height());
   groupList->parentWidget()->layout()->activate();
+
+  if ( scanPopup.get() )
+    scanPopup->applyWordsZoomLevel();
 }
 
 void MainWindow::messageFromAnotherInstanceReceived( QString const & message )

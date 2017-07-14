@@ -45,6 +45,7 @@ public:
   /// Applies current zoom factor to the popup's view. Should be called when
   /// it's changed.
   void applyZoomFactor();
+  void applyWordsZoomLevel();
   /// Translate the word
   void translateWord( QString const & word );
 
@@ -130,6 +131,8 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
+  /// Fonts saved before words zooming is in effect, so it could be reset back.
+  QFont wordListDefaultFont, translateLineDefaultFont;
 
 #ifdef HAVE_X11
   ScanFlag * scanFlag;

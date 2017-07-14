@@ -91,7 +91,11 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
 
+  wordListDefaultFont = ui.translateBox->wordList()->font();
+  translateLineDefaultFont = ui.translateBox->font();
+
   applyZoomFactor();
+  applyWordsZoomLevel();
 
   ui.mainLayout->addWidget( definition );
 
@@ -335,6 +339,41 @@ void ScanPopup::disableScanning()
 void ScanPopup::applyZoomFactor()
 {
   definition->setZoomFactor( cfg.preferences.zoomFactor );
+}
+
+void ScanPopup::applyWordsZoomLevel()
+{
+  QFont font( wordListDefaultFont );
+  int ps = font.pointSize();
+
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+    if ( ps < 1 )
+      ps = 1;
+    font.setPointSize( ps );
+  }
+
+  if ( ui.translateBox->wordList()->font().pointSize() != ps )
+    ui.translateBox->wordList()->setFont( font );
+
+  font = translateLineDefaultFont;
+  ps = font.pointSize();
+
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+    if ( ps < 1 )
+      ps = 1;
+    font.setPointSize( ps );
+  }
+
+  if ( ui.translateBox->translateLine()->font().pointSize() != ps )
+    ui.translateBox->translateLine()->setFont( font );
+
+  ui.groupList->setFont(font);
+
+  ui.groupList->parentWidget()->layout()->activate();
 }
 
 void ScanPopup::translateWordFromClipboard()
