@@ -23,6 +23,7 @@
 
 #include "bgl_babylon.hh"
 #include <algorithm>
+#include <cerrno>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
