@@ -160,6 +160,7 @@ struct FullTextSearch
   bool useMaxDistanceBetweenWords;
   bool useMaxArticlesPerDictionary;
   bool enabled;
+  bool ignoreWordsOrder;
   quint32 maxDictionarySize;
   QByteArray dialogGeometry;
   QString disabledTypes;
@@ -171,6 +172,7 @@ struct FullTextSearch
     useMaxDistanceBetweenWords( true ),
     useMaxArticlesPerDictionary( false ),
     enabled( true ),
+    ignoreWordsOrder( false ),
     maxDictionarySize( 0 )
   {}
 };

@@ -481,7 +481,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
-                                                            int maxResults );
+                                                            int maxResults,
+                                                            bool ignoreWordsOrder );
 
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
@@ -1382,9 +1383,10 @@ sptr< Dictionary::DataRequest > GlsDictionary::getResource( string const & name 
 sptr< Dictionary::DataRequest > GlsDictionary::getSearchResults( QString const & searchString,
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
-                                                                 int maxResults )
+                                                                 int maxResults,
+                                                                 bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 } // anonymous namespace

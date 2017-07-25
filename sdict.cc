@@ -167,7 +167,8 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
-                                                              int maxResults );
+                                                              int maxResults,
+                                                              bool ignoreWordsOrder );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -446,9 +447,10 @@ void SdictDictionary::getArticleText( uint32_t articleAddress, QString & headwor
 sptr< Dictionary::DataRequest > SdictDictionary::getSearchResults( QString const & searchString,
                                                                    int searchMode, bool matchCase,
                                                                    int distanceBetweenWords,
-                                                                   int maxResults )
+                                                                   int maxResults,
+                                                                   bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 /// SdictDictionary::getArticle()

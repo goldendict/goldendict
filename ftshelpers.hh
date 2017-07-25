@@ -90,6 +90,7 @@ class FTSResultsRequest : public Dictionary::DataRequest
   int distanceBetweenWords;
   int maxResults;
   bool hasCJK;
+  bool ignoreWordsOrder;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -122,14 +123,16 @@ class FTSResultsRequest : public Dictionary::DataRequest
 public:
 
   FTSResultsRequest( BtreeIndexing::BtreeDictionary & dict_, QString const & searchString_,
-                     int searchMode_, bool matchCase_, int distanceBetweenWords_, int maxResults_ ):
+                     int searchMode_, bool matchCase_, int distanceBetweenWords_, int maxResults_,
+                     bool ignoreWordsOrder_ ):
     dict( dict_ ),
     searchString( searchString_ ),
     searchMode( searchMode_ ),
     matchCase( matchCase_ ),
     distanceBetweenWords( distanceBetweenWords_ ),
     maxResults( maxResults_ ),
-    hasCJK( false )
+    hasCJK( false ),
+    ignoreWordsOrder( ignoreWordsOrder_ )
   {
     foundHeadwords = new QList< FTS::FtsHeadword >;
     QThreadPool::globalInstance()->start(

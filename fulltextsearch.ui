@@ -74,6 +74,13 @@
         </item>
        </layout>
       </item>
+      <item>
+       <widget class="QCheckBox" name="checkBoxIgnoreWordOrder">
+        <property name="text">
+         <string>Ignore words order</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>

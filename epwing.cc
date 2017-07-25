@@ -127,7 +127,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
-                                                            int maxResults );
+                                                            int maxResults,
+                                                            bool ignoreWordsOrder );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -782,9 +783,10 @@ sptr< Dictionary::DataRequest > EpwingDictionary::getResource( string const & na
 sptr< Dictionary::DataRequest > EpwingDictionary::getSearchResults( QString const & searchString,
                                                                     int searchMode, bool matchCase,
                                                                     int distanceBetweenWords,
-                                                                    int maxResults )
+                                                                    int maxResults,
+                                                                    bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 int EpwingDictionary::japaneseWriting( gd::wchar ch )

@@ -171,7 +171,7 @@ sptr< DataRequest > Class::getResource( string const & /*name*/ )
   return new DataRequestInstant( false );
 }
 
-sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int )
+sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool )
 {
   return new DataRequestInstant( false );
 }

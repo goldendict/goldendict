@@ -883,6 +883,9 @@ Class load() throw( exError )
       if ( !fts.namedItem( "enabled" ).isNull() )
         c.preferences.fts.enabled = ( fts.namedItem( "enabled" ).toElement().text() == "1" );
 
+      if ( !fts.namedItem( "ignoreWordsOrder" ).isNull() )
+        c.preferences.fts.ignoreWordsOrder = ( fts.namedItem( "ignoreWordsOrder" ).toElement().text() == "1" );
+
       if ( !fts.namedItem( "maxDictionarySize" ).isNull() )
         c.preferences.fts.maxDictionarySize = fts.namedItem( "maxDictionarySize" ).toElement().text().toUInt();
     }
@@ -1821,6 +1824,10 @@ void save( Class const & c ) throw( exError )
 
       opt = dd.createElement( "enabled" );
       opt.appendChild( dd.createTextNode( c.preferences.fts.enabled ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "ignoreWordsOrder" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.ignoreWordsOrder ? "1" : "0" ) );
       hd.appendChild( opt );
 
       opt = dd.createElement( "maxDictionarySize" );

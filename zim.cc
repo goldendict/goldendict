@@ -372,7 +372,8 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
-                                                              int maxResults );
+                                                              int maxResults,
+                                                              bool ignoreWordsOrder );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     quint32 getArticleText( uint32_t articleAddress, QString & headword, QString & text,
@@ -828,9 +829,10 @@ quint32 ZimDictionary::getArticleText( uint32_t articleAddress, QString & headwo
 sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const & searchString,
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
-                                                                 int maxResults )
+                                                                 int maxResults,
+                                                                 bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 /// ZimDictionary::getArticle()

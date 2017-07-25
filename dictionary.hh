@@ -396,7 +396,8 @@ public:
   virtual sptr< DataRequest > getSearchResults( QString const & searchString,
                                                 int searchMode, bool matchCase,
                                                 int distanceBetweenWords,
-                                                int maxArticlesPerDictionary );
+                                                int maxArticlesPerDictionary,
+                                                bool ignoreWordsOrder );
 
   // Return dictionary description if presented
   virtual QString const& getDescription();

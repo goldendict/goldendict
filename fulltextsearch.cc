@@ -136,6 +136,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   dictionaries( dictionaries_ ),
   groups( groups_ ),
   group( 0 ),
+  ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
   ftsIdx( ftsidx )
 , helpAction( this )
 {
@@ -180,6 +181,18 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.articlesPerDictionary->setMaximum( MaxArticlesPerDictionary );
   ui.articlesPerDictionary->setValue( cfg.preferences.fts.maxArticlesPerDictionary );
 
+  int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
+  if( mode == WholeWords || mode == PlainText )
+  {
+    ui.checkBoxIgnoreWordOrder->setChecked( ignoreWordsOrder );
+    ui.checkBoxIgnoreWordOrder->setEnabled( true );
+  }
+  else
+  {
+    ui.checkBoxIgnoreWordOrder->setChecked( false );
+    ui.checkBoxIgnoreWordOrder->setEnabled( false );
+  }
+
   ui.matchCase->setChecked( cfg.preferences.fts.matchCase );
 
   setLimitsUsing();
@@ -190,6 +203,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
            this, SLOT( setLimitsUsing() ) );
   connect( ui.searchMode, SIGNAL( currentIndexChanged( int ) ),
            this, SLOT( setLimitsUsing() ) );
+  connect( ui.checkBoxIgnoreWordOrder, SIGNAL( stateChanged( int ) ),
+           this, SLOT( ignoreWordsOrderClicked() ) );
 
   model = new HeadwordsListModel( this, results, activeDicts );
   ui.headwordsView->setModel( model );
@@ -303,6 +318,7 @@ void FullTextSearchDialog::saveData()
   cfg.preferences.fts.maxDistanceBetweenWords = ui.distanceBetweenWords->text().toInt();
   cfg.preferences.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
   cfg.preferences.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
+  cfg.preferences.fts.ignoreWordsOrder = ignoreWordsOrder;
 
   cfg.preferences.fts.dialogGeometry = saveGeometry();
 }
@@ -321,13 +337,22 @@ void FullTextSearchDialog::setLimitsUsing()
   {
     ui.checkBoxDistanceBetweenWords->setEnabled( true );
     ui.distanceBetweenWords->setEnabled( ui.checkBoxDistanceBetweenWords->isChecked() );
+    ui.checkBoxIgnoreWordOrder->setChecked( ignoreWordsOrder );
+    ui.checkBoxIgnoreWordOrder->setEnabled( true );
   }
   else
   {
+    ui.checkBoxIgnoreWordOrder->setEnabled( false );
+    ui.checkBoxIgnoreWordOrder->setChecked( false );
     ui.checkBoxDistanceBetweenWords->setEnabled( false );
     ui.distanceBetweenWords->setEnabled( false );
   }
   ui.articlesPerDictionary->setEnabled( ui.checkBoxArticlesPerDictionary->isChecked() );
+}
+
+void FullTextSearchDialog::ignoreWordsOrderClicked()
+{
+  ignoreWordsOrder = ui.checkBoxIgnoreWordOrder->isChecked();
 }
 
 void FullTextSearchDialog::accept()
@@ -395,7 +420,8 @@ void FullTextSearchDialog::accept()
                                                               mode,
                                                               ui.matchCase->isChecked(),
                                                               distanceBetweenWords,
-                                                              maxResultsPerDict
+                                                              maxResultsPerDict,
+                                                              ignoreWordsOrder
                                                             );
     connect( req.get(), SIGNAL( finished() ),
              this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
@@ -476,7 +502,17 @@ void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
   if( idx.isValid() && idx.row() < results.size() )
   {
     QString headword = results[ idx.row() ].headword;
-    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, searchRegExp );
+    QRegExp reg;
+    if( !results[ idx.row() ].foundHiliteRegExps.isEmpty() )
+    {
+      reg = QRegExp( results[ idx.row() ].foundHiliteRegExps.join( "|"),
+                     results[ idx.row() ].matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                     QRegExp::RegExp2 );
+      reg.setMinimal( true );
+    }
+    else
+      reg = searchRegExp;
+    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg );
   }
 }
 
@@ -607,7 +643,15 @@ Q_UNUSED( parent );
   {
     QList< FtsHeadword >::iterator it = qBinaryFind( headwords.begin(), headwords.end(), hws.at( x ) );
     if( it != headwords.end() )
+    {
       it->dictIDs.push_back( hws.at( x ).dictIDs.front() );
+      for( QStringList::const_iterator itr = it->foundHiliteRegExps.constBegin();
+           itr != it->foundHiliteRegExps.constEnd(); ++itr )
+      {
+        if( !it->foundHiliteRegExps.contains( *itr ) )
+          it->foundHiliteRegExps.append( *itr );
+      }
+    }
     else
       temp.append( hws.at( x ) );
   }

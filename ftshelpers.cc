@@ -11,6 +11,8 @@
 #include <vector>
 #include <string>
 
+#include <QVector>
+
 using std::vector;
 using std::string;
 
@@ -29,6 +31,31 @@ bool ftsIndexIsOldOrBad( string const & indexFile,
   return idx.readRecords( &header, sizeof( header ), 1 ) != 1 ||
          header.signature != FtsSignature ||
          header.formatVersion != CurrentFtsFormatVersion + dict->getFtsIndexVersion();
+}
+
+static QString makeHiliteRegExpString( QStringList const & words,
+                                       int searchMode,
+                                       int distanceBetweenWords )
+{
+  QString searchString( "(" );
+
+  QString stripWords( "(?:\\W+\\w+){0," );
+  if( distanceBetweenWords >= 0 )
+    stripWords += QString::number( distanceBetweenWords );
+  stripWords += "}\\W+";
+
+  QString boundWord( searchMode == FTS::WholeWords ? "\\b" : "(?:\\w*)");
+
+  for( int x = 0; x < words.size(); x++ )
+  {
+    if( x )
+      searchString += stripWords;
+
+    searchString += boundWord + words[ x ] + boundWord;
+  }
+
+  searchString += ")";
+  return searchString;
 }
 
 bool parseSearchString( QString const & str, QStringList & indexWords,
@@ -71,24 +98,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
     // Make regexp for results hilite
 
     QStringList allWords = str.split( spacesRegExp, QString::SkipEmptyParts );
-    QString searchString( "(" );
-
-    QString stripWords( "(?:\\W+\\w+){0," );
-    if( distanceBetweenWords >= 0 )
-      stripWords += QString::number( distanceBetweenWords );
-    stripWords += "}\\W+";
-
-    QString boundWord( searchMode == FTS::WholeWords ? "\\b" : "(?:\\w*)");
-
-    for( int x = 0; x < allWords.size(); x++ )
-    {
-      if( x )
-        searchString += stripWords;
-
-      searchString += boundWord + allWords[ x ] + boundWord;
-    }
-
-    searchString += ")";
+    QString searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords );
 
     searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
                             QRegExp::RegExp2 );
@@ -338,6 +348,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   int results = 0;
   QString headword, articleText;
   QList< uint32_t > offsetsForHeadwords;
+  QVector< QStringList > hiliteRegExps;
 
   QString id = QString::fromUtf8( dict.getId().c_str() );
 
@@ -357,7 +368,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
         if( headword.isEmpty() )
           offsetsForHeadwords.append( offsets.at( i ) );
         else
-          foundHeadwords->append( FTS::FtsHeadword( headword, id ) );
+          foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
 
         results++;
         if( maxResults > 0 && results >= maxResults )
@@ -371,6 +382,12 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 
     QRegExp regex( "\\b\\w+\\b" );
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
+    QVector< QPair< QString, bool > > wordsList;
+    if( ignoreWordsOrder )
+    {
+      for( QStringList::const_iterator it = words.begin(); it != words.end(); ++it )
+        wordsList.append( QPair< QString, bool >( *it, true ) );
+    }
 
     for( int i = 0; i < offsets.size(); i++ )
     {
@@ -381,6 +398,15 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       int matchWordNom = 0;
       int unmatchWordNom = 0;
 
+      QVector< QStringList > allOrders;
+      QStringList order;
+
+      if( ignoreWordsOrder )
+      {
+        for( int i = 0; i < wordsList.size(); i++ )
+          wordsList[ i ].second = true;
+      }
+
       dict.getArticleText( offsets.at( i ), headword, articleText );
 
       int articleLength = articleText.length();
@@ -390,36 +416,118 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
         if( pos >= 0 )
         {
           QString s = regex.cap().normalized( QString::NormalizationForm_C );
-          if( ( searchMode == FTS::WholeWords && s.compare( words.at( matchWordNom ), cs ) == 0 )
-              || ( searchMode == FTS::PlainText && s.contains( words.at( matchWordNom ), cs ) ) )
+
+          if( ignoreWordsOrder )
           {
-            matchWordNom += 1;
+            int i;
+            for( i = 0; i < wordsList.size(); i++ )
+            {
+              if( wordsList.at( i ).second )
+              {
+                if( ( searchMode == FTS::WholeWords && s.compare( wordsList.at( i ).first, cs ) == 0 )
+                    || ( searchMode == FTS::PlainText && s.contains( wordsList.at( i ).first, cs ) ) )
+                {
+                  wordsList[ i ].second = false;
+                  order.append( wordsList.at( i ).first );
+                  break;
+                }
+              }
+            }
+            if( i < wordsList.size() )
+            {
+              // Word found
+              matchWordNom += 1;
 
-            if( matchWordNom >= words.size() )
-              break;  // All words are found
+              if( matchWordNom >= words.size() )
+              {
+                // All words are found
+                // Store found words sequence and continue search
+                // It's nesessary for hilite search results
 
-            unmatchWordNom = 0;
+                // Check if such sequence already presented
+                int x;
+                for( x = 0; x < allOrders.size(); x++ )
+                {
+                  if( allOrders[ x ] == order )
+                    break;
+                }
+                if( x >= allOrders.size() )
+                  allOrders.append( order );
+
+                order.clear();
+
+                matchWordNom = 0;
+                unmatchWordNom = 0;
+                for( int i = 0; i < wordsList.size(); i++ )
+                  wordsList[ i ].second = true;
+
+                pos += s.isEmpty() ? 1 : s.length();
+                continue;
+              }
+
+              unmatchWordNom = 0;
+            }
+            else
+            if( matchWordNom > 0 )
+            {
+              unmatchWordNom += 1;
+              if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
+              {
+                // Sequence broken, clear all counters
+                matchWordNom = 0;
+                unmatchWordNom = 0;
+                for( int i = 0; i < wordsList.size(); i++ )
+                  wordsList[ i ].second = true;
+                order.clear();
+              }
+            }
           }
           else
-          if( matchWordNom > 0 )
           {
-            unmatchWordNom += 1;
-            if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
+            if( ( searchMode == FTS::WholeWords && s.compare( words.at( matchWordNom ), cs ) == 0 )
+                || ( searchMode == FTS::PlainText && s.contains( words.at( matchWordNom ), cs ) ) )
             {
-              matchWordNom = 0;
+              matchWordNom += 1;
+
+              if( matchWordNom >= words.size() )
+                break;  // All words are found
+
               unmatchWordNom = 0;
+            }
+            else
+            if( matchWordNom > 0 )
+            {
+              unmatchWordNom += 1;
+              if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
+              {
+                matchWordNom = 0;
+                unmatchWordNom = 0;
+              }
             }
           }
           pos += s.isEmpty() ? 1 : s.length();
         }
       }
 
-      if( matchWordNom >= words.size() )
+      if( !allOrders.isEmpty() || matchWordNom >= words.size() )
       {
+        QStringList hiliteReg;
+        if( !allOrders.isEmpty() )
+        {
+          for( int i = 0; i < allOrders.size(); i++ )
+          {
+            QString hiliteStr = makeHiliteRegExpString( allOrders.at( i ), searchMode, distanceBetweenWords );
+            hiliteReg.append( hiliteStr );
+          }
+          allOrders.clear();
+        }
         if( headword.isEmpty() )
+        {
           offsetsForHeadwords.append( offsets.at( i ) );
+          hiliteRegExps.append( hiliteReg );
+        }
         else
-          foundHeadwords->append( FTS::FtsHeadword( headword, id ) );
+          foundHeadwords->append( FTS::FtsHeadword( headword, id, hiliteReg, matchCase ) );
 
         results++;
         if( maxResults > 0 && results >= maxResults )
@@ -432,7 +540,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     QVector< QString > headwords;
     dict.getHeadwordsFromOffsets( offsetsForHeadwords, headwords, &isCancelled );
     for( int x = 0; x < headwords.size(); x++ )
-      foundHeadwords->append( FTS::FtsHeadword( headwords.at( x ), id ) );
+      foundHeadwords->append( FTS::FtsHeadword( headwords.at( x ), id, x < hiliteRegExps.size() ? hiliteRegExps.at( x ) : QStringList(), matchCase ) );
   }
 }
 
