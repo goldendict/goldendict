@@ -172,13 +172,17 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 }
 
 void parseArticleForFts( uint32_t articleAddress, QString & articleText,
-                         QMap< QString, QVector< uint32_t > > & words )
+                         QMap< QString, QVector< uint32_t > > & words,
+                         bool handleRoundBrackets )
 {
   if( articleText.isEmpty() )
     return;
 
+  QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
+  QRegExp regSplit = QRegExp( "\\W+" );
+
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                        .split( QRegExp( "\\W+" ), QString::SkipEmptyParts );
+                                        .split( QRegExp( handleRoundBrackets ? "[^\\w\\(\\)]+" : "\\W+" ), QString::SkipEmptyParts );
   QSet< QString > setOfWords;
 
   for( int x = 0; x < articleWords.size(); x++ )
@@ -214,6 +218,45 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
       if( word.size() < FTS::MinimumWordSize )
         continue;
 
+      if( handleRoundBrackets && ( word.indexOf( '(' ) >= 0 || word.indexOf( ')' ) >= 0 ) )
+      {
+        // Special handle for words with round brackets - DSL feature
+        QStringList list;
+
+        QStringList oldVariant = word.split( regSplit, QString::SkipEmptyParts );
+        for( QStringList::iterator it = oldVariant.begin(); it != oldVariant.end(); ++it )
+          if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
+            list.append( *it );
+
+        int pos = regBrackets.indexIn( word );
+        if( pos >= 0 )
+        {
+          QStringList parts = regBrackets.capturedTexts();
+          QString parsedWord = parts[ 2 ] + parts[ 4 ]; // Brackets removed
+
+          if( parsedWord.size() >= FTS::MinimumWordSize && !list.contains( parsedWord ) )
+            list.append( parsedWord );
+
+          parsedWord = parts[ 1 ].remove( '(' ).remove( ')' )
+                       + parts[ 2 ]
+                       + parts[ 3 ].remove( '(' ).remove( ')' )
+                       + parts[ 4 ]
+                       + parts[ 5 ].remove( '(' ).remove( ')' ); // Brackets expansed
+
+          if( parsedWord.size() >= FTS::MinimumWordSize && !list.contains( parsedWord ) )
+            list.append( parsedWord );
+        }
+
+        for( QStringList::iterator it = list.begin(); it != list.end(); ++it )
+        {
+          if( !setOfWords.contains( *it ) )
+          {
+            setOfWords.insert( *it );
+            words[ *it ].push_back( articleAddress );
+          }
+        }
+      }
+      else
       if( !setOfWords.contains( word ) )
       {
         setOfWords.insert( word );
@@ -272,6 +315,12 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
   QMap< QString, QVector< uint32_t > > ftsWords;
 
+  bool needHandleBrackets;
+  {
+    QString name = QString::fromUtf8( dict->getDictionaryFilenames()[ 0 ].c_str() ).toLower();
+    needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( "dsl.dz" );
+  }
+
   // index articles for full-text search
   for( int i = 0; i < offsets.size(); i++ )
   {
@@ -282,7 +331,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
     dict->getArticleText( offsets.at( i ), headword, articleStr );
 
-    parseArticleForFts( offsets.at( i ), articleStr, ftsWords );
+    parseArticleForFts( offsets.at( i ), articleStr, ftsWords, needHandleBrackets );
   }
 
   // Free memory
@@ -351,6 +400,14 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   QVector< QStringList > hiliteRegExps;
 
   QString id = QString::fromUtf8( dict.getId().c_str() );
+  bool needHandleBrackets;
+  {
+    QString name = QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ).toLower();
+    needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
+  }
+
+  QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
+  QRegExp regSplit = QRegExp( "\\W+" );
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
@@ -380,7 +437,12 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   {
     // Words mode
 
-    QRegExp regex( "\\b\\w+\\b" );
+    QRegExp regex;
+    if( needHandleBrackets )
+      regex = QRegExp( "[\\w\\(\\)]+" );
+    else
+      regex = QRegExp( "\\b\\w+\\b" );
+
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;
     if( ignoreWordsOrder )
@@ -417,94 +479,179 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
         {
           QString s = regex.cap().normalized( QString::NormalizationForm_C );
 
-          if( ignoreWordsOrder )
+          bool breakSearch = false;
+
+          QStringList parsedWords;
+          if( needHandleBrackets && ( s.indexOf( '(' ) >= 0 || s.indexOf( ')' ) >= 0 ) )
           {
-            int i;
-            for( i = 0; i < wordsList.size(); i++ )
+            // Handle brackets
+            int pos = regBrackets.indexIn( s );
+            if( pos >= 0 )
             {
-              if( wordsList.at( i ).second )
-              {
-                if( ( searchMode == FTS::WholeWords && s.compare( wordsList.at( i ).first, cs ) == 0 )
-                    || ( searchMode == FTS::PlainText && s.contains( wordsList.at( i ).first, cs ) ) )
-                {
-                  wordsList[ i ].second = false;
-                  order.append( wordsList.at( i ).first );
-                  break;
-                }
-              }
-            }
-            if( i < wordsList.size() )
-            {
-              // Word found
-              matchWordNom += 1;
+              QStringList parts = regBrackets.capturedTexts();
+              QString word = parts[ 2 ] + parts[ 4 ]; // Brackets removed
+              parsedWords.append( word );
 
-              if( matchWordNom >= words.size() )
-              {
-                // All words are found
-                // Store found words sequence and continue search
-                // It's nesessary for hilite search results
-
-                // Check if such sequence already presented
-                int x;
-                for( x = 0; x < allOrders.size(); x++ )
-                {
-                  if( allOrders[ x ] == order )
-                    break;
-                }
-                if( x >= allOrders.size() )
-                  allOrders.append( order );
-
-                order.clear();
-
-                matchWordNom = 0;
-                unmatchWordNom = 0;
-                for( int i = 0; i < wordsList.size(); i++ )
-                  wordsList[ i ].second = true;
-
-                pos += s.isEmpty() ? 1 : s.length();
-                continue;
-              }
-
-              unmatchWordNom = 0;
+              word = parts[ 1 ].remove( '(' ).remove( ')' )
+                     + parts[ 2 ]
+                     + parts[ 3 ].remove( '(' ).remove( ')' )
+                     + parts[ 4 ]
+                     + parts[ 5 ].remove( '(' ).remove( ')' ); // Brackets expansed
+              parsedWords.append( word );
             }
             else
-            if( matchWordNom > 0 )
-            {
-              unmatchWordNom += 1;
-              if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
-              {
-                // Sequence broken, clear all counters
-                matchWordNom = 0;
-                unmatchWordNom = 0;
-                for( int i = 0; i < wordsList.size(); i++ )
-                  wordsList[ i ].second = true;
-                order.clear();
-              }
-            }
+              parsedWords = s.split( regSplit, QString::SkipEmptyParts );
           }
           else
+            parsedWords.append( s );
+
+          int n;
+          for( n = 0; n < parsedWords.size(); n++ )
           {
-            if( ( searchMode == FTS::WholeWords && s.compare( words.at( matchWordNom ), cs ) == 0 )
-                || ( searchMode == FTS::PlainText && s.contains( words.at( matchWordNom ), cs ) ) )
+            if( ignoreWordsOrder )
             {
-              matchWordNom += 1;
+              int i;
+              for( i = 0; i < wordsList.size(); i++ )
+              {
+                if( wordsList.at( i ).second )
+                {
+                  if( ( searchMode == FTS::WholeWords && parsedWords.at( n ).compare( wordsList.at( i ).first, cs ) == 0 )
+                      || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( wordsList.at( i ).first, cs ) ) )
+                  {
+                    wordsList[ i ].second = false;
 
-              if( matchWordNom >= words.size() )
-                break;  // All words are found
+                    if( parsedWords.size() > 1 )
+                    {
+                      QString wordToHilite = s;
+                      while( !wordToHilite.isEmpty() && ( wordToHilite.at( 0 ) == '(' || wordToHilite.at( 0 ) == ')' ) )
+                        wordToHilite.remove( 0, 1 );
+                      while( !wordToHilite.isEmpty() && ( wordToHilite.endsWith( '(' ) || wordToHilite.endsWith( ')' ) ) )
+                        wordToHilite.chop( 1 );
+                      order.append( wordToHilite.replace( '(', "\\(" ).replace( ')', "\\)" ) );
+                    }
+                    else
+                      order.append( wordsList.at( i ).first );
 
-              unmatchWordNom = 0;
+                    break;
+                  }
+                }
+              }
+              if( i < wordsList.size() )
+              {
+                // Word found
+                matchWordNom += 1;
+
+                if( matchWordNom >= words.size() )
+                {
+                  // All words are found
+                  // Store found words sequence and continue search
+                  // It's nesessary for hilite search results
+
+                  // Check if such sequence already presented
+                  int x;
+                  for( x = 0; x < allOrders.size(); x++ )
+                  {
+                    if( allOrders[ x ] == order )
+                      break;
+                  }
+                  if( x >= allOrders.size() )
+                    allOrders.append( order );
+
+                  order.clear();
+
+                  matchWordNom = 0;
+                  unmatchWordNom = 0;
+                  for( int i = 0; i < wordsList.size(); i++ )
+                    wordsList[ i ].second = true;
+
+                  break;
+                }
+
+                unmatchWordNom = 0;
+                break;
+              }
+              else
+              if( matchWordNom > 0 && n >= parsedWords.size() - 1 )
+              {
+                unmatchWordNom += 1;
+                if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
+                {
+                  // Sequence broken, clear all counters
+                  matchWordNom = 0;
+                  unmatchWordNom = 0;
+                  for( int i = 0; i < wordsList.size(); i++ )
+                    wordsList[ i ].second = true;
+                  order.clear();
+                }
+              }
             }
             else
-            if( matchWordNom > 0 )
             {
-              unmatchWordNom += 1;
-              if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
+              if( ( searchMode == FTS::WholeWords && parsedWords.at( n ).compare( words.at( matchWordNom ), cs ) == 0 )
+                  || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( words.at( matchWordNom ), cs ) ) )
               {
-                matchWordNom = 0;
+                matchWordNom += 1;
+
+                if( needHandleBrackets )
+                {
+                  if( parsedWords.size() > 1 )
+                  {
+                    QString wordToHilite = s;
+                    while( !wordToHilite.isEmpty() && ( wordToHilite.at( 0 ) == '(' || wordToHilite.at( 0 ) == ')' ) )
+                      wordToHilite.remove( 0, 1 );
+                    while( !wordToHilite.isEmpty() && ( wordToHilite.endsWith( '(' ) || wordToHilite.endsWith( ')' ) ) )
+                      wordToHilite.chop( 1 );
+                    order.append( wordToHilite.replace( '(', "\\(" ).replace( ')', "\\)" ) );
+                  }
+                  else
+                    order.append( words.at( matchWordNom - 1 ) );
+                }
+
+                if( matchWordNom >= words.size() )
+                {
+                  // All words are found
+                  if( needHandleBrackets )
+                  {
+                    if( allOrders.isEmpty() )
+                      allOrders.append( words );
+
+                    // Check if such sequence already presented
+                    int x;
+                    for( x = 0; x < allOrders.size(); x++ )
+                    {
+                      if( allOrders[ x ] == order )
+                        break;
+                    }
+                    if( x >= allOrders.size() )
+                      allOrders.append( order );
+
+                    matchWordNom = 0;
+                    unmatchWordNom = 0;
+                    order.clear();
+                  }
+                  else
+                    breakSearch = true;
+                  break;
+                }
                 unmatchWordNom = 0;
+                break;
+              }
+              else
+              if( matchWordNom > 0 && n >= parsedWords.size() - 1 )
+              {
+                unmatchWordNom += 1;
+                if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
+                {
+                  matchWordNom = 0;
+                  unmatchWordNom = 0;
+                  if( needHandleBrackets )
+                    order.clear();
+                }
               }
             }
           }
+          if( breakSearch )
+            break;
           pos += s.isEmpty() ? 1 : s.length();
         }
       }
