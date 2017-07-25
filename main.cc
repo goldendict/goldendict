@@ -29,6 +29,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
+#include <QByteArray>
 #include <QString>
 
 #include "gddebug.hh"
@@ -43,13 +44,14 @@ void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const 
 {
   Q_UNUSED( context );
   QString message( mess );
-  const char * msg = message.toUtf8().constData();
+  QByteArray msg = message.toUtf8().constData();
 
 #else
 
-void gdMessageHandler( QtMsgType type, const char *msg )
+void gdMessageHandler( QtMsgType type, const char *msg_ )
 {
-  QString message = QString::fromUtf8( msg );
+  QString message = QString::fromUtf8( msg_ );
+  QByteArray msg = QByteArray::fromRawData( msg_, strlen( msg_ ) );
 
 #endif
 
@@ -59,21 +61,21 @@ void gdMessageHandler( QtMsgType type, const char *msg )
       if( logFile.isOpen() )
         message.insert( 0, "Debug: " );
       else
-        fprintf(stderr, "Debug: %s\n", msg);
+        fprintf(stderr, "Debug: %s\n", msg.constData());
       break;
 
     case QtWarningMsg:
       if( logFile.isOpen() )
         message.insert( 0, "Warning: " );
       else
-        fprintf(stderr, "Warning: %s\n", msg);
+        fprintf(stderr, "Warning: %s\n", msg.constData());
       break;
 
     case QtCriticalMsg:
       if( logFile.isOpen() )
         message.insert( 0, "Critical: " );
       else
-        fprintf(stderr, "Critical: %s\n", msg);
+        fprintf(stderr, "Critical: %s\n", msg.constData());
       break;
 
     case QtFatalMsg:
@@ -84,7 +86,7 @@ void gdMessageHandler( QtMsgType type, const char *msg )
         logFile.flush();
       }
       else
-        fprintf(stderr, "Fatal: %s\n", msg);
+        fprintf(stderr, "Fatal: %s\n", msg.constData());
       abort();
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
@@ -92,7 +94,7 @@ void gdMessageHandler( QtMsgType type, const char *msg )
       if( logFile.isOpen() )
         message.insert( 0, "Info: " );
       else
-        fprintf(stderr, "Info: %s\n", msg);
+        fprintf(stderr, "Info: %s\n", msg.constData());
       break;
 #endif
   }
