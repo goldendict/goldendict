@@ -939,6 +939,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Help</source>
         <translation>說明</translation>
     </message>
+    <message>
+        <source>Ignore words order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>

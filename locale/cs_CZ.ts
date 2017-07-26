@@ -953,6 +953,10 @@ a školní ortografií v cyrilici)</translation>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ignore words order</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
