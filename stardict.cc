@@ -40,9 +40,11 @@
 #include <QDebug>
 #include <QRegExp>
 #include <QStringList>
-
+#include <QDomDocument>
+#include <QDomNode>
 #include "ufile.hh"
 #include "qt4x5.hh"
+#include <sstream>
 
 namespace Stardict {
 
@@ -329,6 +331,96 @@ void StardictDictionary::getArticleProps( uint32_t articleAddress,
   headword = articleData;
 }
 
+class PowerWordDataProcessor{
+    class PWSyntaxTranslate{
+    public:
+        PWSyntaxTranslate(const char* re, const char* replacement)
+            : _re(re)
+            , _replacement(replacement)
+        {
+        }
+        const QRegExp& re() const {
+            return _re;
+        }
+        const QString & replacement() const {
+            return _replacement;
+        }
+    private:
+        QRegExp _re;
+        QString _replacement;
+    };
+public:
+    PowerWordDataProcessor(const char* resource, size_t size)
+        : _data(QString::fromUtf8(resource, size))
+    {
+    }
+
+    string process() {
+        QDomDocument doc;
+        std::stringstream ss;
+        ss << "<div class=\"sdct_k\">";
+        if (!doc.setContent(_data)) {
+            ss << _data.toStdString();
+        } else {
+            QStringList sl;
+            walkNode(doc.firstChild(), sl);
+
+            QStringListIterator itr(sl);
+            while (itr.hasNext()) {
+                QString s = itr.next();
+                translatePW(s);
+                ss << s.toStdString() << "<br>";
+            }
+        }
+        ss << "</div>";
+        return ss.str();
+    }
+private:
+    void walkNode(const QDomNode& e, QStringList& sl) {
+        if (e.isNull()) {
+            return;
+        }
+        if (e.isText()) {
+            sl.append(e.toText().data());
+        } else {
+            QDomNodeList l = e.childNodes();
+            for (int i = 0; i < l.size(); ++i) {
+                QDomNode n = l.at(i);
+                if (n.isText()) {
+                    sl.append(n.toText().data());
+                } else {
+                    walkNode(n, sl);
+                }
+            }
+        }
+    }
+
+    void translatePW(QString& s){
+        const int TRANSLATE_TBL_SIZE=5;
+        static PWSyntaxTranslate t[TRANSLATE_TBL_SIZE]={
+            PWSyntaxTranslate("&[bB]\\s*\\{([^\\{}&]+)\\}", "<B>\\1</B>"),
+            PWSyntaxTranslate("&[iI]\\s*\\{([^\\{}&]+)\\}", "<I>\\1</I>"),
+            PWSyntaxTranslate("&[uU]\\s*\\{([^\\{}&]+)\\}", "<U>\\1</U>"),
+            PWSyntaxTranslate("&[lL]\\s*\\{([^\\{}&]+)\\}", "<SPAN style=\"color:#0000ff\">\\1</SPAN>"),
+            PWSyntaxTranslate("&[2]\\s*\\{([^\\{}&]+)\\}", "<SPAN style=\"color:#0000ff\">\\1</SPAN>")
+        };
+
+        QString old;
+        while (s.compare(old) != 0) {
+            for (int i = 0; i < TRANSLATE_TBL_SIZE; ++i) {
+                PWSyntaxTranslate& a = t[i];
+                s.replace(a.re(), a.replacement());
+            }
+            old = s;
+        }
+        s.replace(QRegExp("&.\\s*\\{"), "");
+        s.replace("}", "");
+    }
+private:
+    QString _data;
+};
+
+
 /// This function tries to make an html of the Stardict's resource typed
 /// 'type', contained in a block pointed to by 'resource', 'size' bytes long.
 string StardictDictionary::handleResource( char type, char const * resource, size_t size )
@@ -410,7 +502,10 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
               // just output as pure escaped utf8.
       return "<div class=\"sdct_y\">" + Html::escape( string( resource, size ) ) + "</div>";
     case 'k': // KingSoft PowerWord data. We don't know how to handle that.
-      return "<div class=\"sdct_k\">" + Html::escape( string( resource, size ) ) + "</div>";
+    {
+      PowerWordDataProcessor pwdp(resource, size);
+      return pwdp.process();
+    }
     case 'w': // MediaWiki markup. We don't handle this right now.
       return "<div class=\"sdct_w\">" + Html::escape( string( resource, size ) ) + "</div>";
     case 'n': // WordNet data. We don't know anything about it.
