@@ -373,7 +373,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Chinese Conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>中文轉換</translation>
     </message>
 </context>
 <context>
@@ -439,7 +439,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛資料夾：</translation>
     </message>
 </context>
 <context>
@@ -836,30 +836,30 @@ between classic and school orthography in cyrillic)</source>
     <name>FavoritesModel</name>
     <message>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛檔案發生錯誤</translation>
     </message>
 </context>
 <context>
     <name>FavoritesPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">刪除選擇的部分(&amp;D)</translation>
+        <translation>刪除選擇的部分(&amp;D)</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished">複製選擇的部分</translation>
+        <translation>複製選擇的部分</translation>
     </message>
     <message>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>新增資料夾</translation>
     </message>
     <message>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛：</translation>
     </message>
     <message>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>所有選擇的項目都會被刪除。是否繼續？</translation>
     </message>
 </context>
 <context>
@@ -941,7 +941,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略單字排序</translation>
     </message>
 </context>
 <context>
@@ -2520,67 +2520,67 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛窗格(&amp;I)</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">匯出</translation>
+        <translation>匯出</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>匯入</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>新增</translation>
     </message>
     <message>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>新增目前分頁到我的最愛</translation>
     </message>
     <message>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出到清單</translation>
     </message>
     <message>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出我的最愛</translation>
     </message>
     <message>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>XML 檔案 (*.xml);;所有檔案 (*.*)</translation>
     </message>
     <message>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛匯出完成</translation>
     </message>
     <message>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>以純文字清單方式匯出我的最愛</translation>
     </message>
     <message>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>從檔案匯入我的最愛</translation>
     </message>
     <message>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛匯入完成</translation>
     </message>
     <message>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>資料解析錯誤</translation>
     </message>
     <message>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛(&amp;R)</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
 </context>
 <context>
@@ -3224,7 +3224,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation>設定歷史記錄最多保存的詞條數量。</translation>
+        <translation>設定歷史記錄最多儲存的詞條數量。</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
@@ -3331,35 +3331,36 @@ Enable this option to workaround the problem.</source>
     <message>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項可以透過同義詞清單開啟額外搜尋功能，
+清單來自 Stardict、Babylon 和 GLS 的字典</translation>
     </message>
     <message>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>同義詞額外搜尋功能</translation>
     </message>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛</translation>
     </message>
     <message>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>我的最愛內容儲存間隔。若設定為 0 則只在程式結束時儲存。</translation>
     </message>
     <message>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用此選項以在每次進行刪除操作時進行確認</translation>
     </message>
     <message>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除項目時進行確認</translation>
     </message>
     <message>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>顯示彈出視窗之前先顯示一個旗標視窗，點選旗標以顯示彈出視窗。</translation>
     </message>
     <message>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>單字被選取時顯示掃描旗標</translation>
     </message>
 </context>
 <context>
@@ -3378,7 +3379,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation>前綴符合</translation>
+        <translation>字首符合</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -3503,31 +3504,31 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright: %1%2</translation>
     </message>
     <message>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>版本: %1%2</translation>
     </message>
     <message>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>作者: %1%2</translation>
     </message>
     <message>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>電子郵件: %1%2</translation>
     </message>
     <message>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>標題: %1%2</translation>
     </message>
     <message>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>網站: %1%2</translation>
     </message>
     <message>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>日期: %1%2</translation>
     </message>
 </context>
 <context>
@@ -3568,7 +3569,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">警告： %1</translation>
+        <translation>警告： %1</translation>
     </message>
 </context>
 <context>
@@ -3593,7 +3594,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <name>ScanFlag</name>
     <message>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>主視窗</translation>
     </message>
 </context>
 <context>
@@ -3628,12 +3629,13 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Shows or hides the dictionary bar</source>
-        <translation>顯示或隱藏字典欄</translation>
+        <translation>顯示或隱藏字典列</translation>
     </message>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>使用此按鈕可以固定視窗，以便它能停留在螢幕上進行改變大小等相關視窗管理操作。</translation>
+        <translation>使用此按鈕可以釘選視窗，以便它能停留在螢幕上，
+調整大小等相關視窗管理操作。</translation>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
@@ -3661,11 +3663,11 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>新增單字到我的最愛 (Ctrl+E)</translation>
     </message>
     <message>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>最上層顯示在其他所有視窗</translation>
     </message>
 </context>
 <context>
