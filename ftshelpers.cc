@@ -459,6 +459,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       int pos = 0;
       int matchWordNom = 0;
       int unmatchWordNom = 0;
+      int nextNotFoundPos = 0;
 
       QVector< QStringList > allOrders;
       QStringList order;
@@ -539,7 +540,14 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               if( i < wordsList.size() )
               {
                 // Word found
+
                 matchWordNom += 1;
+
+                if( matchWordNom == 1 )
+                {
+                  // Store position to remake search if sequence will not be found
+                  nextNotFoundPos = pos + ( s.isEmpty() ? 1 : s.length() );
+                }
 
                 if( matchWordNom >= words.size() )
                 {
@@ -563,6 +571,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                   unmatchWordNom = 0;
                   for( int i = 0; i < wordsList.size(); i++ )
                     wordsList[ i ].second = true;
+                  nextNotFoundPos = 0;
 
                   break;
                 }
@@ -591,6 +600,12 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                   || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( words.at( matchWordNom ), cs ) ) )
               {
                 matchWordNom += 1;
+
+                if( matchWordNom == 1 )
+                {
+                  // Store position to remake search if sequence will not be found
+                  nextNotFoundPos = pos + ( s.isEmpty() ? 1 : s.length() );
+                }
 
                 if( needHandleBrackets )
                 {
@@ -628,6 +643,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                     matchWordNom = 0;
                     unmatchWordNom = 0;
                     order.clear();
+                    nextNotFoundPos = 0;
                   }
                   else
                     breakSearch = true;
@@ -652,7 +668,13 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           }
           if( breakSearch )
             break;
-          pos += s.isEmpty() ? 1 : s.length();
+          if( nextNotFoundPos > 0 && matchWordNom == 0 )
+          {
+            pos = nextNotFoundPos;
+            nextNotFoundPos = 0;
+          }
+          else
+            pos += s.isEmpty() ? 1 : s.length();
         }
       }
 
