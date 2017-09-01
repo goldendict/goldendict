@@ -1153,6 +1153,10 @@ void MainWindow::closeEvent( QCloseEvent * ev )
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
   {
     ev->ignore();
+
+    if( !cfg.preferences.searchInDock )
+      translateBox->setPopupEnabled( false );
+
     hide();
   }
   else
@@ -2761,6 +2765,9 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 #endif
 {
   bool shown = false;
+
+  if( !cfg.preferences.searchInDock )
+    translateBox->setPopupEnabled( false );
 
   if ( !isVisible() )
   {
