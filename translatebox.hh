@@ -6,6 +6,7 @@
 
 #include "extlineedit.hh"
 #include "wordlist.hh"
+#include "mutex.hh"
 
 #include <QWidget>
 #include <QListWidget>
@@ -63,6 +64,7 @@ private:
   CompletionList * word_list;
   ExtLineEdit * translate_line;
   bool m_popupEnabled;
+  Mutex translateBoxMutex;
   // QCompleter * completer; // disabled for now
 };
 
