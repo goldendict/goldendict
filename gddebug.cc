@@ -29,6 +29,8 @@ QTextCodec *localeCodec = 0;
   {
     QTextCodec::setCodecForLocale( localeCodec );
   }
+
+  va_end(ap);
 }
 
 void gdDebug(const char *msg, ...)
@@ -52,4 +54,6 @@ QTextCodec *localeCodec = 0;
   {
     QTextCodec::setCodecForLocale( localeCodec );
   }
+
+  va_end(ap);
 }
