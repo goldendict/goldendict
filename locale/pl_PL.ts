@@ -3481,7 +3481,7 @@ aktywną. W przeciwnym razie są one dodawane na końcu.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Włączenie tej opcji powoduje, że na pasku zadań obecna jest ikona umożliwiająca
 otwieranie okna głównego i wykonywanie innych zadań.</translation>

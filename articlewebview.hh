@@ -9,7 +9,7 @@
 
 class ArticleInspector;
 
-/// A thin wrapper around QWebView to accomodate to some ArticleView's needs.
+/// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
 ///    to the view's current state. This is used to open links in new tabs when

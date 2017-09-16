@@ -2749,7 +2749,7 @@ be the last ones.</source>
         <translation>Отваряне на новите подпрозорци след текущия</translation>
     </message>
     <message>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Когато това е включено, в системната област за уведомяване се показва икона, чрез
 която може да се отваря главния прозорец или да се извършнат други дейности.</translation>

@@ -197,7 +197,7 @@ private slots:
 
   /// Called repeatedly once the popup is initially engaged and we monitor the
   /// mouse as it may move away from the window. This simulates mouse grab, in
-  /// essense, but seems more reliable. Once the mouse enters the window, the
+  /// essence, but seems more reliable. Once the mouse enters the window, the
   /// polling stops.
   void mouseGrabPoll();
 

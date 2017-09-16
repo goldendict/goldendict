@@ -91,14 +91,14 @@ std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( 
           opencc_convert_utf8_free( tmp );
         }
         else
-          gdWarning( "OpenCC: convertion failed %s\n", opencc_error() );
+          gdWarning( "OpenCC: conversion failed %s\n", opencc_error() );
       }
 #else
       output = converter->Convert( input );
 #endif
       result = Utf8::decode( output );
     } catch ( std::exception& ex ) {
-      gdWarning( "OpenCC: convertion failed %s\n", ex.what() );
+      gdWarning( "OpenCC: conversion failed %s\n", ex.what() );
     }
 
     if ( !result.empty() && result != folded )

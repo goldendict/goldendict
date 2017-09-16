@@ -2979,7 +2979,7 @@ Aksi takdirde sekmelerin sonuna eklenecektir.</translation>
         <translation>Sistem Varsayılanı</translation>
     </message>
     <message>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Etkinleştirildiğinde, ana pencereyi açın, diğer görevleri gerçekleştirmek
 ve kullanabilmek için sistem tepsisinde bir simge belirir.</translation>

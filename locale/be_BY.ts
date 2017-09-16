@@ -3367,7 +3367,7 @@ be the last ones.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Калі ўлучана, у сыстэмным лотку зьявіцца значак, які можна
 карыстаць для выкліканьня галоўнага акна ды іншых дзеяньняў.</translation>

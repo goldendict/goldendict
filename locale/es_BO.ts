@@ -4209,7 +4209,7 @@ abiertas al lado de la pestaña actual.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Cuando activado un icono aparece en la bandeja del sistema que puede ser utilizado para abrir la ventana principal y realizar otras tareas. </translation>
     </message>

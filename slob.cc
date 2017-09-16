@@ -133,7 +133,7 @@ class SlobFile
   QString readTinyText();
   QString readText();
   QString readLargeText();
-  QString readString( unsigned lenght );
+  QString readString( unsigned length );
 
 public:
   SlobFile() :

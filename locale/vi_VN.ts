@@ -2747,7 +2747,7 @@ thêm vào sau cùng.</translation>
         <translation>Mở thẻ mới ngay sau thẻ hiện tại</translation>
     </message>
     <message>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Biểu tượng Từ điển Vàng sẽ hiện trên khay hệ thống dùng để mở cửa sổ chính
 và thực hiện một số tác vụ khác.</translation>

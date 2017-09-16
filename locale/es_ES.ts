@@ -3411,7 +3411,7 @@ justo después de la actual. Si no, se situarán las últimas.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Al activar esta opción, aparece un icono en el área de la bandeja del sistema que se puede usar
 para abrir la ventana actual y realizar otras tareas.</translation>

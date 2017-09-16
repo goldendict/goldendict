@@ -3379,7 +3379,7 @@ be the last ones.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>이 항목을 선택하면 시스템트레이에 아이콘을 만들어 
 메인창을 열거나 다른 작업을 할 수 있습니다.</translation>

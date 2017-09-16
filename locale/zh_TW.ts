@@ -2913,7 +2913,7 @@ be the last ones.</source>
         <translation>系統預設</translation>
     </message>
     <message>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>啟用此選項，將會啟用系統匣圖示。
 可用來顯示主視窗以及執行其他工作。</translation>
