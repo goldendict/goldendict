@@ -3406,7 +3406,7 @@ be the last ones.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation type="unfinished">Кога е овозможено, икона се појавува во сист.палета која можеда се користи,
 да се отвори главен прозорец и да се извршат други задачи.</translation>

@@ -3469,7 +3469,7 @@ Indien uitgeschakeld worden ze als laatste toegevoegd.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Indien ingeschakeld wordt een pictogram in het systeemvak weergegeven
 waarmee u het hoofdvenster kunt openen en andere taken uit kunt voeren.</translation>

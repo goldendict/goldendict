@@ -1777,7 +1777,7 @@ void MainWindow::tabSwitched( int )
 
 void MainWindow::tabMenuRequested(QPoint pos)
 {
-//  // dont show this menu for single tab
+//  // do not show this menu for single tab
 //  if ( ui.tabWidget->count() < 2 )
 //    return;
 

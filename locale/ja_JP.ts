@@ -3403,7 +3403,7 @@ be the last ones.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>有効だと、メイン ウィンドウを開いたりするのに使われる
 アイコンがシステム トレイ領域に表示されます。</translation>

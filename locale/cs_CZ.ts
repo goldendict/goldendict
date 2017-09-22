@@ -3525,7 +3525,7 @@ kartou. Jinak jsou otevřeny jako poslední.</translation>
         <translation>Otevírat nové karty za současnou</translation>
     </message>
     <message>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>Pokud zapnuto, zobrazí se v systémovém panelu ikona, která pak může 
 být použita pro otevření hlavního okna a k provádění jiných úloh.</translation>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -1125,7 +1125,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="80"/>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略单词顺序</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="101"/>
@@ -3636,7 +3636,7 @@ be the last ones.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
         <translation>启用此选项，将会启用系统托盘图标。</translation>
     </message>
@@ -4529,7 +4529,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../scanpopup.ui" line="231"/>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>总是位于其它窗口上方</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="251"/>
@@ -4706,7 +4706,7 @@ GoldenDict 尚不支持此方案。</translation>
     <message>
         <location filename="../sources.ui" line="178"/>
         <source>&amp;Change...</source>
-        <translation>变更...(&amp;C)</translation>
+        <translation>变更(&amp;C)...</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="812"/>
