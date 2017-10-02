@@ -1338,6 +1338,7 @@ void stripComments( wstring & str, bool & nextLine )
 
 void expandTildes( wstring & str, wstring const & tildeReplacement )
 {
+  wstring tildeValue = Folding::trimWhitespace( tildeReplacement );
   for( size_t x = 0; x < str.size(); )
     if ( str[ x ] == L'\\' )
       x+=2;
@@ -1346,15 +1347,15 @@ void expandTildes( wstring & str, wstring const & tildeReplacement )
     {
       if( x > 0 && str[ x - 1 ] == '^' && ( x < 2 || str[ x - 2 ] != '\\' ) )
       {
-        str.replace( x - 1, 2, tildeReplacement );
+        str.replace( x - 1, 2, tildeValue );
         str[ x - 1 ] = QChar( str[ x - 1 ] ).isUpper() ? QChar::toLower( (uint)str[ x - 1 ] )
                                                        : QChar::toUpper( (uint)str[ x - 1 ] );
-        x = x - 1 + tildeReplacement.size();
+        x = x - 1 + tildeValue.size();
       }
       else
       {
-        str.replace( x, 1, tildeReplacement );
-        x += tildeReplacement.size();
+        str.replace( x, 1, tildeValue );
+        x += tildeValue.size();
       }
     }
     else
