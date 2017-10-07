@@ -275,9 +275,6 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
 
 void Class::isolateCSS( QString & css, QString const & wrapperSelector )
 {
-  QRegExp namespaceRegExp( "(\\w+|\\*)\\|" );
-  namespaceRegExp.setMinimal( true );
-
   if( css.isEmpty() )
     return;
 
@@ -363,19 +360,24 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
       if( ch.isLetter() || ch == '*' )
       {
         // Check for namespace prefix
-        int n = css.indexOf( '\n', currentPos );
-        if( n > currentPos || n < 0 )
+        QChar chr;
+        for( int i = currentPos; i < css.length(); i++ )
         {
-          QString str = css.mid( currentPos, n < 0 ? -1 : n - currentPos );
-          if( str.indexOf( namespaceRegExp ) == 0 )
-          {
-            // Copy prefix as is
-            QString space = namespaceRegExp.cap( 0 );
-            newCSS.append( space );
-            currentPos += space.length();
+          chr = css[ i ];
+          if( chr.isLetterOrNumber() || chr.isMark() || chr == '_' || chr == '-'
+              || ( chr == '*' && i == currentPos ) )
             continue;
+
+          if( chr == '|' )
+          {
+            // Namespace prefix found, copy it as is
+            newCSS.append( css.mid( currentPos, i - currentPos + 1 ) );
+            currentPos = i + 1;
           }
+          break;
         }
+        if ( chr == '|' )
+          continue;
       }
 
       // This is some selector.
