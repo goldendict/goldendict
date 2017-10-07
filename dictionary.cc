@@ -275,6 +275,9 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
 
 void Class::isolateCSS( QString & css, QString const & wrapperSelector )
 {
+  QRegExp namespaceRegExp( "(\\w+|\\*)\\|" );
+  namespaceRegExp.setMinimal( true );
+
   if( css.isEmpty() )
     return;
 
@@ -299,7 +302,10 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
       // @ rules
 
       int n = currentPos;
-      if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0 )
+      if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0
+          || css.mid( currentPos, 10 ).compare( "@font-face", Qt::CaseInsensitive ) == 0
+          || css.mid( currentPos, 10 ).compare( "@namespace", Qt::CaseInsensitive ) == 0
+          || css.mid( currentPos, 8 ).compare( "@charset", Qt::CaseInsensitive ) == 0 )
       {
         // Copy rule as is.
         n = css.indexOf( ';', currentPos );
@@ -352,8 +358,26 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
       continue;
     }
 
-    if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' )
+    if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' || ch == ':' )
     {
+      if( ch.isLetter() || ch == '*' )
+      {
+        // Check for namespace prefix
+        int n = css.indexOf( '\n', currentPos );
+        if( n > currentPos || n < 0 )
+        {
+          QString str = css.mid( currentPos, n < 0 ? -1 : n - currentPos );
+          if( str.indexOf( namespaceRegExp ) == 0 )
+          {
+            // Copy prefix as is
+            QString space = namespaceRegExp.cap( 0 );
+            newCSS.append( space );
+            currentPos += space.length();
+            continue;
+          }
+        }
+      }
+
       // This is some selector.
       // We must to add the isolate prefix to it.
 
