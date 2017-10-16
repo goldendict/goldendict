@@ -2904,4 +2904,8 @@ in bg url to hide it from iemac */
   font-size: 116%;
 }
 
-
+.gls_wav img
+{
+  /* Ugly hack since "vertical-align: middle;" looks _terrible_ in Qt4's webkit: */
+  vertical-align: -30%;
+}

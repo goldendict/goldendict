@@ -20,6 +20,7 @@
 #include "htmlescape.hh"
 #include "filetype.hh"
 #include "tiff.hh"
+#include "audiolink.hh"
 
 #include <QString>
 #include <QSemaphore>
@@ -856,6 +857,37 @@ QString & GlsDictionary::filterResource( QString & article )
     else
       pos += linksReg.cap( 0 ).size();
   }
+
+  // Handle "audio" tags
+
+  QRegExp audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
+  audioRe.setMinimal( true );
+
+  pos = 0;
+
+  while( pos >= 0 )
+  {
+    pos = audioRe.indexIn( article, pos );
+    if( pos < 0 )
+      break;
+
+    QString src = audioRe.cap( 2 );
+    if( src.indexOf( "://" ) >= 0 )
+      pos += audioRe.cap( 0 ).length();
+    else
+    {
+      std::string href = "\"gdau://" + getId() + "/" + src.toUtf8().data() + "\"";
+      QString newTag = QString::fromUtf8( ( addAudioLink( href, getId() ) + "<span class=\"gls_wav\"><a href=" + href + ">" ).c_str() );
+      newTag += audioRe.cap( 4 );
+      if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
+        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
+      newTag += "</a></span>";
+
+      article.replace( pos, audioRe.cap( 0 ).length(), newTag );
+      pos += newTag.length();
+    }
+  }
+
   return article;
 }
 
