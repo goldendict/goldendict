@@ -115,6 +115,12 @@ div.sdct_h
 {
 }
 
+.sdict_h_wav img
+{
+  /* Ugly hack since "vertical-align: middle;" looks _terrible_ in Qt4's webkit: */
+  vertical-align: -30%;
+}
+
 /* StarDict type 'm' -- Pure meaning. Presented as <pre> */
 pre.sdct_m
 {
