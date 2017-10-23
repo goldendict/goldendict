@@ -182,6 +182,8 @@ private:
 
   Help::HelpWindow * helpWindow;
 
+  QIcon starIcon, blueStarIcon;
+
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
 
@@ -438,6 +440,8 @@ private slots:
   void forceAddWordToHistory( const QString & word);
 
   void addWordToFavorites( QString const & word, unsigned groupId );
+
+  bool isWordPresentedInFavorites( QString const & word, unsigned groupId );
 
   void sendWordToInputLine( QString const & word );
 

@@ -53,7 +53,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
-  hideTimer( this )
+  hideTimer( this ),
+  starIcon( ":/icons/star.png" ),
+  blueStarIcon( ":/icons/star_blue.png" )
 {
   ui.setupUi( this );
 
@@ -690,8 +692,14 @@ void ScanPopup::showTranslationFor( QString const & inputWord )
 {
   ui.pronounceButton->hide();
 
-  definition->showDefinition( inputWord, ui.groupList->getCurrentGroup() );
+  unsigned groupId = ui.groupList->getCurrentGroup();
+  definition->showDefinition( inputWord, groupId );
   definition->focus();
+
+  // Set icon for "Add to Favorites" button
+  ui.sendWordToFavoritesButton->setIcon( isWordPresentedInFavorites( inputWord, groupId ) ?
+                                         blueStarIcon : starIcon );
+
 
   // Add to history
   emit sendWordToHistory( inputWord.trimmed() );
@@ -1132,6 +1140,8 @@ void ScanPopup::on_sendWordToFavoritesButton_clicked()
   if ( !isVisible() )
     return;
   emit sendWordToFavorites( definition->getTitle(), cfg.lastPopupGroupId );
+
+  ui.sendWordToFavoritesButton->setIcon( blueStarIcon );
 }
 
 void ScanPopup::switchExpandOptionalPartsMode()

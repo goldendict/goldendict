@@ -127,6 +127,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
 , helpWindow( 0 )
+, starIcon( ":/icons/star.png" )
+, blueStarIcon( ":/icons/star_blue.png" )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -240,7 +242,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeAddToFavorites" );
 
-  addToFavorites = navToolbar->addAction( QIcon( ":/icons/star.png" ), tr( "Add current tab to Favorites" ) );
+  addToFavorites = navToolbar->addAction( starIcon, tr( "Add current tab to Favorites" ) );
   navToolbar->widgetForAction( addToFavorites )->setObjectName( "addToFavoritesButton" );
 
   connect( addToFavorites, SIGNAL( triggered() ), this, SLOT( addCurrentTabToFavorites() ) );
@@ -1399,6 +1401,9 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( sendWordToFavorites( QString, uint ) ),
            this, SLOT( addWordToFavorites( QString, uint ) ) );
+
+  connect( scanPopup.get(), SIGNAL( isWordPresentedInFavorites( QString, uint ) ),
+           this, SLOT( isWordPresentedInFavorites( QString, uint ) ) );
 
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
@@ -2638,6 +2643,9 @@ void MainWindow::showTranslationFor( QString const & inWord,
                         groupInstances[ groupList->currentIndex() ].id );
 
   view->showDefinition( inWord, group, dictID );
+
+  // Set icon for "Add to Favorites" action
+  addToFavorites->setIcon( isWordPresentedInFavorites( inWord, group ) ? blueStarIcon : starIcon );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -4467,6 +4475,8 @@ void MainWindow::addCurrentTabToFavorites()
     headword.chop( 1 );
 
   ui.favoritesPaneWidget->addHeadword( folder, headword );
+
+  addToFavorites->setIcon( blueStarIcon );
 }
 
 void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
@@ -4477,6 +4487,16 @@ void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
     folder = igrp->favoritesFolder;
 
   ui.favoritesPaneWidget->addHeadword( folder, word );
+}
+
+bool MainWindow::isWordPresentedInFavorites( QString const & word, unsigned groupId )
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( groupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  return ui.favoritesPaneWidget->isHeadwordPresent( folder, word );
 }
 
 void MainWindow::setGroupByName( QString const & name, bool main_window )

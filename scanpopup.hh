@@ -73,6 +73,8 @@ signals:
   void sendWordToHistory( QString const & word );
   /// Put translated word into Favorites
   void sendWordToFavorites( QString const & word, unsigned groupId );
+  /// Check is word already presented in Favorites
+  bool isWordPresentedInFavorites( QString const & word, unsigned groupId );
 
 #ifdef HAVE_X11
   /// Interaction with scan flag window
@@ -150,6 +152,8 @@ private:
   QTimer altModeExpirationTimer, altModePollingTimer; // Timers for alt mode
 
   QTimer mouseGrabPollTimer;
+
+  QIcon starIcon, blueStarIcon;
 
   void handleInputWord( QString const & , bool forcePopup = false );
   void engagePopup( bool forcePopup, bool giveFocus = false );

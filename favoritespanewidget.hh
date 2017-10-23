@@ -51,6 +51,9 @@ public:
   // Set interval for periodical save
   void setSaveInterval( unsigned interval );
 
+  // Return true if headwors is already presented in Favorites
+  bool isHeadwordPresent( QString const & path, QString const & headword );
+
 signals:
   void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
 
@@ -191,6 +194,9 @@ public:
   // Add new headword to given folder
   // return false if it already exists there
   bool addNewHeadword( QString const & path, QString const & headword );
+
+  // Return true if headwors is already presented in Favorites
+  bool isHeadwordPresent( QString const & path, QString const & headword );
 
   // Return path in the tree to item
   QString pathToItem( QModelIndex const & idx );
