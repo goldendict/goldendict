@@ -1518,7 +1518,8 @@ sptr< Dictionary::DataRequest > SlobDictionary::getResource( string const & name
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      unsigned maxHeadwordsToExpand )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1583,7 +1584,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 || contentType.startsWith( "text/plain", Qt::CaseInsensitive ) )
             {
               //Article
-              indexedWords.addWord( gd::toWString( refEntry.key ), i );
+              if( maxHeadwordsToExpand && entries > maxHeadwordsToExpand )
+                indexedWords.addSingleWord( gd::toWString( refEntry.key ), i );
+              else
+                indexedWords.addWord( gd::toWString( refEntry.key ), i );
 
               wordCount += 1;
 

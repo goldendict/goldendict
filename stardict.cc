@@ -1804,7 +1804,7 @@ static void handleIdxSynFile( string const & fileName,
                               IndexedWords & indexedWords,
                               ChunkedStorage::Writer & chunks,
                               vector< uint32_t > * articleOffsets,
-                              bool isSynFile )
+                              bool isSynFile, bool parseHeadwords )
 {
   gzFile stardictIdx = gd_gzopen( fileName.c_str() );
   if ( !stardictIdx )
@@ -1927,7 +1927,10 @@ static void handleIdxSynFile( string const & fileName,
 
     // Insert new entry into an index
 
-    indexedWords.addWord( Utf8::decode( word ), offset );
+    if( parseHeadwords )
+      indexedWords.addWord( Utf8::decode( word ), offset );
+    else
+      indexedWords.addSingleWord( Utf8::decode( word ), offset );
   }
 
   GD_DPRINTF( "%u entires made\n", (unsigned) indexedWords.size() );
@@ -1937,7 +1940,8 @@ static void handleIdxSynFile( string const & fileName,
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      unsigned maxHeadwordsToExpand )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -2036,7 +2040,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         // Load indices
         if ( !ifo.synwordcount )
-          handleIdxSynFile( idxFileName, indexedWords, chunks, 0, false );
+          handleIdxSynFile( idxFileName, indexedWords, chunks, 0, false,
+                            !maxHeadwordsToExpand || ifo.wordcount < maxHeadwordsToExpand );
         else
         {
           vector< uint32_t > articleOffsets;
@@ -2044,10 +2049,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           articleOffsets.reserve( ifo.wordcount );
 
           handleIdxSynFile( idxFileName, indexedWords, chunks, &articleOffsets,
-                            false );
+                            false,
+                            !maxHeadwordsToExpand || ( ifo.wordcount + ifo.synwordcount ) < maxHeadwordsToExpand );
 
           handleIdxSynFile( synFileName, indexedWords, chunks, &articleOffsets,
-                            true );
+                            true,
+                            !maxHeadwordsToExpand || ( ifo.wordcount + ifo.synwordcount ) < maxHeadwordsToExpand );
         }
 
         // Finish with the chunks

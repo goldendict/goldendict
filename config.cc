@@ -1009,6 +1009,9 @@ Class load() throw( exError )
     }
   }
 
+  if ( !root.namedItem( "maxHeadwordsToExpand" ).isNull() )
+    c.maxHeadwordsToExpand = root.namedItem( "maxHeadwordsToExpand" ).toElement().text().toUInt();
+
   QDomNode headwordsDialog = root.namedItem( "headwordsDialog" );
 
   if ( !headwordsDialog.isNull() )
@@ -1975,6 +1978,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "maxHeadwordSize" );
     opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordSize ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "maxHeadwordsToExpand" );
+    opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordsToExpand ) ) );
     root.appendChild( opt );
   }
 

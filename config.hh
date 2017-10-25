@@ -598,6 +598,8 @@ struct Class
   /// Bigger headwords won't be indexed. For now, only in DSL.
   unsigned int maxHeadwordSize;
 
+  unsigned int maxHeadwordsToExpand;
+
   HeadwordsDialog headwordsDialog;
 
 #ifdef Q_OS_WIN
@@ -610,7 +612,8 @@ struct Class
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),
            pinPopupWindow( false ), showingDictBarNames( false ),
            usingSmallIconsInToolbars( false ),
-           maxPictureWidth( 0 ), maxHeadwordSize ( 256U )
+           maxPictureWidth( 0 ), maxHeadwordSize ( 256U ),
+           maxHeadwordsToExpand( 0 )
   {}
   Group * getGroup( unsigned id );
   Group const * getGroup( unsigned id ) const;

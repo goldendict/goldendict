@@ -823,7 +823,8 @@ sptr< Dictionary::DataRequest > AardDictionary::getArticle( wstring const & word
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      unsigned maxHeadwordsToExpand )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -995,7 +996,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 articleOffsets.insert( articleOffset );
 
             // Insert new entry
-            indexedWords.addWord( Utf8::decode( string( data.data(), wordSize ) ), articleOffset);
+            wstring word = Utf8::decode( string( data.data(), wordSize ) );
+            if( maxHeadwordsToExpand && dictHeader.wordsCount >= maxHeadwordsToExpand )
+              indexedWords.addSingleWord( word, articleOffset);
+            else
+              indexedWords.addWord( word, articleOffset);
 
             pos += has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement );
           }

@@ -55,7 +55,8 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
   transliteration( cfg.transliteration ),
   exceptionText( "Load did not finish" ), // Will be cleared upon success
   maxPictureWidth( cfg.maxPictureWidth ),
-  maxHeadwordSize( cfg.maxHeadwordSize )
+  maxHeadwordSize( cfg.maxHeadwordSize ),
+  maxHeadwordToExpand( cfg.maxHeadwordsToExpand )
 {
   // Populate name filters
 
@@ -140,7 +141,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > stardictDictionaries =
-      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
 
     dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
                          stardictDictionaries.end() );
@@ -186,7 +187,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   }
   {
     vector< sptr< Dictionary::Class > > aardDictionaries =
-      Aard::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Aard::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
 
     dictionaries.insert( dictionaries.end(), aardDictionaries.begin(),
                          aardDictionaries.end() );
@@ -215,14 +216,14 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 #ifdef MAKE_ZIM_SUPPORT
   {
     vector< sptr< Dictionary::Class > > zimDictionaries =
-      Zim::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Zim::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
 
     dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
                          zimDictionaries.end() );
   }
   {
     vector< sptr< Dictionary::Class > > slobDictionaries =
-      Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+      Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
 
     dictionaries.insert( dictionaries.end(), slobDictionaries.begin(),
                          slobDictionaries.end() );

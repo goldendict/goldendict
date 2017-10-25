@@ -1184,7 +1184,8 @@ sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      unsigned maxHeadwordsToExpand )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1316,10 +1317,16 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             if( nameSpace == 'A' )
             {
+              wstring word;
               if( !title.empty() )
-                indexedWords.addWord( Utf8::decode( title ), n );
+                word = Utf8::decode( title );
               else
-                indexedWords.addWord( Utf8::decode( url ), n );
+                word = Utf8::decode( url );
+
+              if( maxHeadwordsToExpand && zh.articleCount >= maxHeadwordsToExpand )
+                indexedWords.addSingleWord( word, n );
+              else
+                indexedWords.addWord( word, n );
               wordCount++;
             }
             else
