@@ -2275,6 +2275,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           QVector< wstring > insidedHeadwords;
           unsigned linesInsideCard = 0;
           int dogLine = 0;
+          bool wasEmptyLine = false;
 
           // Skip the article's body
           for( ; ; )
@@ -2289,6 +2290,16 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
               }
               break;
+            }
+
+            if( curString.empty() )
+              wasEmptyLine = true;
+            else if( wasEmptyLine )
+            {
+              if( !curString.empty() )
+              {
+                gdWarning( "Orphan string at line %i", scanner.getLinesRead() - 1 );
+              }
             }
 
             // Find embedded cards
