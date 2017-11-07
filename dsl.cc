@@ -2294,15 +2294,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             // Check for orphan strings
 
-            wstring folded = Folding::applyWhitespaceOnly( curString );
-            if( folded.empty() )
+            if( curString.empty() )
             {
               wasEmptyLine = true;
               continue;
             }
             else
             {
-              if( wasEmptyLine )
+              if( wasEmptyLine && !Folding::applyWhitespaceOnly( curString ).empty() )
                 gdWarning( "Orphan string at line %i", scanner.getLinesRead() - 1 );
             }
 
