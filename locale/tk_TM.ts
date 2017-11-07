@@ -1035,7 +1035,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="631"/>
+        <location filename="../favoritespanewidget.cc" line="636"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1071,37 +1071,37 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="224"/>
+        <location filename="../forvo.cc" line="229"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML analizinde ýalňyşlyk: %1 at %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="300"/>
+        <location filename="../forvo.cc" line="305"/>
         <source>Added %1</source>
         <translation>Goşuldy %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="303"/>
+        <location filename="../forvo.cc" line="308"/>
         <source>by</source>
         <translation> -</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="307"/>
+        <location filename="../forvo.cc" line="312"/>
         <source>Male</source>
         <translation>Erkek</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="307"/>
+        <location filename="../forvo.cc" line="312"/>
         <source>Female</source>
         <translation>Aýal</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="309"/>
+        <location filename="../forvo.cc" line="314"/>
         <source>from</source>
         <translation>kimden</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="347"/>
+        <location filename="../forvo.cc" line="352"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Redkatirle|Dictionaries|Çeşmeler|Forvo açyň we öz API açaryňyzy soraň, şeýlelikde bu ýalňyşlyk ýok bolar.</translation>
     </message>
@@ -2493,7 +2493,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="278"/>
+        <location filename="../loaddictionaries.cc" line="279"/>
         <source>Error loading dictionaries</source>
         <translation>Sözlük ýüklenende ýalňyşlyk çykdy</translation>
     </message>
@@ -2514,7 +2514,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="772"/>
+        <location filename="../mainwindow.cc" line="783"/>
         <source>Welcome!</source>
         <translation>Hoş geldiňiz!</translation>
     </message>
@@ -2632,7 +2632,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
-        <location filename="../mainwindow.cc" line="366"/>
+        <location filename="../mainwindow.cc" line="369"/>
         <source>&amp;Quit</source>
         <translation>&amp;Çyk</translation>
     </message>
@@ -2718,8 +2718,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3662"/>
-        <location filename="../mainwindow.cc" line="3674"/>
+        <location filename="../mainwindow.cc" line="3691"/>
+        <location filename="../mainwindow.cc" line="3703"/>
         <source>&amp;Show</source>
         <translation>&amp;Görkez</translation>
     </message>
@@ -2756,7 +2756,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="597"/>
         <location filename="../mainwindow.ui" line="600"/>
-        <location filename="../mainwindow.cc" line="272"/>
+        <location filename="../mainwindow.cc" line="275"/>
         <source>Menu Button</source>
         <translation>Menýu düwmesi</translation>
     </message>
@@ -2802,7 +2802,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
-        <location filename="../mainwindow.cc" line="243"/>
+        <location filename="../mainwindow.cc" line="246"/>
         <source>Add current tab to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2835,7 +2835,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Arassala</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="593"/>
+        <location filename="../mainwindow.cc" line="604"/>
         <source>New Tab</source>
         <translation>Täze wkladka</translation>
     </message>
@@ -2863,13 +2863,13 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Menýu zolagy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="280"/>
-        <location filename="../mainwindow.cc" line="1272"/>
+        <location filename="../mainwindow.cc" line="283"/>
+        <location filename="../mainwindow.cc" line="1287"/>
         <source>Look up in:</source>
         <translation>Tap şu ýerde:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="318"/>
+        <location filename="../mainwindow.cc" line="321"/>
         <source>Found in Dictionaries:</source>
         <translation>Sözlüklerden tapylan:</translation>
     </message>
@@ -2878,226 +2878,231 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Nawigasiýa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="164"/>
+        <location filename="../mainwindow.cc" line="167"/>
         <source>Back</source>
         <translation>Yza gaýt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="166"/>
+        <location filename="../mainwindow.cc" line="169"/>
         <source>Forward</source>
         <translation>Ugrukdyr</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="191"/>
+        <location filename="../mainwindow.cc" line="194"/>
         <source>Scan Popup</source>
         <translation>Skan popup</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="206"/>
+        <location filename="../mainwindow.cc" line="209"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Sözi eşitdirmek (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="218"/>
+        <location filename="../mainwindow.cc" line="221"/>
         <source>Zoom In</source>
         <translation>Ulalt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="224"/>
+        <location filename="../mainwindow.cc" line="227"/>
         <source>Zoom Out</source>
         <translation>Kiçelt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="228"/>
+        <location filename="../mainwindow.cc" line="231"/>
         <source>Normal Size</source>
         <translation>Normal ululygy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="348"/>
+        <location filename="../mainwindow.cc" line="351"/>
         <source>Words Zoom In</source>
         <translation>Sözleri ulalt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="352"/>
+        <location filename="../mainwindow.cc" line="355"/>
         <source>Words Zoom Out</source>
         <translation>Sözleri kiçelt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="354"/>
+        <location filename="../mainwindow.cc" line="357"/>
         <source>Words Normal Size</source>
         <translation>Sözleriň normal ululygy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="362"/>
+        <location filename="../mainwindow.cc" line="365"/>
         <source>Show &amp;Main Window</source>
         <translation>Görkez &amp;Esasy penjiräni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="400"/>
+        <location filename="../mainwindow.cc" line="403"/>
         <source>Close current tab</source>
         <translation>Şu wagtky wkladkany ýap</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="410"/>
+        <location filename="../mainwindow.cc" line="413"/>
         <source>Close all tabs</source>
         <translation>Ähli açyk wkladkalary ýap</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="418"/>
+        <location filename="../mainwindow.cc" line="421"/>
         <source>Close all tabs except current</source>
         <translation>Şu wagtky açylandan daşary ähli başga wkladkalary ýap</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="583"/>
+        <location filename="../mainwindow.cc" line="455"/>
+        <source>Add all tabs to Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="594"/>
         <source>Loading...</source>
         <translation>Ýüklenip alynýar...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="831"/>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="842"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>Accessibility API is not enabled</source>
         <translation>API elýeterli edilmedik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1261"/>
+        <location filename="../mainwindow.cc" line="1276"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 sözlükler, %2 makalalar, %3 sözler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1272"/>
+        <location filename="../mainwindow.cc" line="1287"/>
         <source>Look up:</source>
         <translation>Tap:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1290"/>
+        <location filename="../mainwindow.cc" line="1305"/>
         <source>All</source>
         <translation>Ählisi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3415"/>
+        <location filename="../mainwindow.cc" line="3444"/>
         <source>Saving article...</source>
         <translation>Makala ýatda saklanýar...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3478"/>
+        <location filename="../mainwindow.cc" line="3507"/>
         <source>The main window is set to be always on top.</source>
         <translation>Baş penjire mydama ýokarda durar ýaly edilen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3658"/>
-        <location filename="../mainwindow.cc" line="3670"/>
+        <location filename="../mainwindow.cc" line="3687"/>
+        <location filename="../mainwindow.cc" line="3699"/>
         <source>&amp;Hide</source>
         <translation>&amp;Gizle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3702"/>
+        <location filename="../mainwindow.cc" line="3731"/>
         <source>Export history to file</source>
         <translation>Geçmişi faýl görnüşinde eksport et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3704"/>
-        <location filename="../mainwindow.cc" line="3766"/>
-        <location filename="../mainwindow.cc" line="3880"/>
+        <location filename="../mainwindow.cc" line="3733"/>
+        <location filename="../mainwindow.cc" line="3795"/>
+        <location filename="../mainwindow.cc" line="3909"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekst faýllary (*.txt);;Ähli faýllar (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3743"/>
+        <location filename="../mainwindow.cc" line="3772"/>
         <source>History export complete</source>
         <translation>Geşmiş eksport edildi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3746"/>
-        <location filename="../mainwindow.cc" line="3861"/>
-        <location filename="../mainwindow.cc" line="3910"/>
+        <location filename="../mainwindow.cc" line="3775"/>
+        <location filename="../mainwindow.cc" line="3890"/>
+        <location filename="../mainwindow.cc" line="3939"/>
         <source>Export error: </source>
         <translation>Eksport ýalnyşlygy:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3764"/>
+        <location filename="../mainwindow.cc" line="3793"/>
         <source>Import history from file</source>
         <translation>Faýldan geçmişi import et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3813"/>
+        <location filename="../mainwindow.cc" line="3842"/>
         <source>Import error: invalid data in file</source>
         <translation>Import ýalňyşlygy: faýlda nädogry maglumatlar bar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3817"/>
+        <location filename="../mainwindow.cc" line="3846"/>
         <source>History import complete</source>
         <translation>Geçmiş import edildi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3820"/>
-        <location filename="../mainwindow.cc" line="3956"/>
+        <location filename="../mainwindow.cc" line="3849"/>
+        <location filename="../mainwindow.cc" line="3985"/>
         <source>Import error: </source>
         <translation>Import ýalňyşlygy:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3837"/>
+        <location filename="../mainwindow.cc" line="3866"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3839"/>
-        <location filename="../mainwindow.cc" line="3929"/>
+        <location filename="../mainwindow.cc" line="3868"/>
+        <location filename="../mainwindow.cc" line="3958"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3858"/>
-        <location filename="../mainwindow.cc" line="3907"/>
+        <location filename="../mainwindow.cc" line="3887"/>
+        <location filename="../mainwindow.cc" line="3936"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3878"/>
+        <location filename="../mainwindow.cc" line="3907"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3927"/>
+        <location filename="../mainwindow.cc" line="3956"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3952"/>
+        <location filename="../mainwindow.cc" line="3981"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3958"/>
+        <location filename="../mainwindow.cc" line="3987"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4233"/>
+        <location filename="../mainwindow.cc" line="4262"/>
         <source>Dictionary info</source>
         <translation>Sözlük barada maglumat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4237"/>
+        <location filename="../mainwindow.cc" line="4266"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4239"/>
+        <location filename="../mainwindow.cc" line="4268"/>
         <source>Open dictionary folder</source>
         <translation>Sözlügiň bukjasyny aç</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4245"/>
+        <location filename="../mainwindow.cc" line="4274"/>
         <source>Edit dictionary</source>
         <translation>Sözlügi üýtget</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4442"/>
+        <location filename="../mainwindow.cc" line="4471"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="389"/>
+        <location filename="../mainwindow.cc" line="392"/>
         <source>Opened tabs</source>
         <translation>Açyk wkladkalar</translation>
     </message>
@@ -3112,28 +3117,28 @@ between classic and school orthography in cyrillic)</source>
         <translation>Kiçi nyşanlary görkez &amp;gurallar-tagtasynda</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="161"/>
+        <location filename="../mainwindow.cc" line="164"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Nawigasiýa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="908"/>
+        <location filename="../mainwindow.cc" line="919"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1451"/>
+        <location filename="../mainwindow.cc" line="1469"/>
         <source>Open Tabs List</source>
         <translation>Açyk wkladkalaryň sanawy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1509"/>
+        <location filename="../mainwindow.cc" line="1527"/>
         <source>(untitled)</source>
         <translation>(atsyz)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1730"/>
+        <location filename="../mainwindow.cc" line="1752"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -3142,67 +3147,67 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">ÄGÄ BOLUŇ %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2864"/>
+        <location filename="../mainwindow.cc" line="2893"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3005"/>
+        <location filename="../mainwindow.cc" line="3034"/>
         <source>New Release Available</source>
         <translation>Täze neşir elýeterli</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3006"/>
+        <location filename="../mainwindow.cc" line="3035"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3011"/>
+        <location filename="../mainwindow.cc" line="3040"/>
         <source>Download</source>
         <translation>Ýükläp almak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3012"/>
+        <location filename="../mainwindow.cc" line="3041"/>
         <source>Skip This Release</source>
         <translation>Şu neşiri böküp geç</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3142"/>
+        <location filename="../mainwindow.cc" line="3171"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Siz menýu zolagyny gizlemägi saýladyňyz. %1 ulanyp ýenede çykaryp görkez.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3143"/>
+        <location filename="../mainwindow.cc" line="3172"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3241"/>
+        <location filename="../mainwindow.cc" line="3270"/>
         <source>Page Setup</source>
         <translation>Sahypany sazlamak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3242"/>
+        <location filename="../mainwindow.cc" line="3271"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Printer ýok. Ilki bilen gurna ony.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3260"/>
+        <location filename="../mainwindow.cc" line="3289"/>
         <source>Print Article</source>
         <translation>Makalany çap et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3364"/>
         <source>Article, Complete (*.html)</source>
         <translation>Makala, taýýar (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3365"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Makala, HTML diňe (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3339"/>
+        <location filename="../mainwindow.cc" line="3368"/>
         <source>Save Article As</source>
         <translation>Makalany şular ýaly ýatda sakla</translation>
     </message>
@@ -3211,12 +3216,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">Html faýllar (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3353"/>
+        <location filename="../mainwindow.cc" line="3382"/>
         <source>Error</source>
         <translation>Ýalňyş</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3354"/>
+        <location filename="../mainwindow.cc" line="3383"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Makalany ýatda saklap bolmady %1</translation>
     </message>
@@ -4274,7 +4279,7 @@ It is not needed to select this option if you don&apos;t use such programs.</tra
         <location filename="../aard.cc" line="562"/>
         <location filename="../bgl.cc" line="397"/>
         <location filename="../sdict.cc" line="680"/>
-        <location filename="../stardict.cc" line="915"/>
+        <location filename="../stardict.cc" line="1042"/>
         <source>Copyright: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4371,14 +4376,14 @@ It is not needed to select this option if you don&apos;t use such programs.</tra
     </message>
     <message>
         <location filename="../bgl.cc" line="404"/>
-        <location filename="../gls.cc" line="620"/>
-        <location filename="../stardict.cc" line="923"/>
+        <location filename="../gls.cc" line="621"/>
+        <location filename="../stardict.cc" line="1050"/>
         <source>Author: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="411"/>
-        <location filename="../stardict.cc" line="931"/>
+        <location filename="../stardict.cc" line="1058"/>
         <source>E-mail: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4388,12 +4393,12 @@ It is not needed to select this option if you don&apos;t use such programs.</tra
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="939"/>
+        <location filename="../stardict.cc" line="1066"/>
         <source>Website: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="947"/>
+        <location filename="../stardict.cc" line="1074"/>
         <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4549,8 +4554,8 @@ could be resized or managed in other ways.</source>
 could be resized or managed in other ways.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="602"/>
-        <location filename="../scanpopup.cc" line="956"/>
+        <location filename="../scanpopup.cc" line="607"/>
+        <location filename="../scanpopup.cc" line="962"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -5015,12 +5020,12 @@ Entek GoldenDict-de edilmedik.</translation>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="103"/>
+        <location filename="../translatebox.cc" line="104"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Sözlükleri ýa-da söz düzümleri gözlemek üçin söz giriz</translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="125"/>
+        <location filename="../translatebox.cc" line="126"/>
         <source>Drop-down</source>
         <translation>Gaçyrma</translation>
     </message>

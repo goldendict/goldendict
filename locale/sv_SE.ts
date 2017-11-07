@@ -1012,7 +1012,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="631"/>
+        <location filename="../favoritespanewidget.cc" line="636"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1048,37 +1048,37 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="224"/>
+        <location filename="../forvo.cc" line="229"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML-tolkningsfel: %1 vid %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="300"/>
+        <location filename="../forvo.cc" line="305"/>
         <source>Added %1</source>
         <translation>Lade till %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="303"/>
+        <location filename="../forvo.cc" line="308"/>
         <source>by</source>
         <translation>av</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="307"/>
+        <location filename="../forvo.cc" line="312"/>
         <source>Male</source>
         <translation>Man</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="307"/>
+        <location filename="../forvo.cc" line="312"/>
         <source>Female</source>
         <translation>Kvinna</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="309"/>
+        <location filename="../forvo.cc" line="314"/>
         <source>from</source>
         <translation>från</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="347"/>
+        <location filename="../forvo.cc" line="352"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Gå till Redigera|Ordlistor|Källor|Forvo och ansök om att få vår egen API-nyckel för att få problemet att försvinna.</translation>
     </message>
@@ -2471,7 +2471,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>LoadDictionaries</name>
     <message>
-        <location filename="../loaddictionaries.cc" line="278"/>
+        <location filename="../loaddictionaries.cc" line="279"/>
         <source>Error loading dictionaries</source>
         <translation>Fel vid inläsning av ordlistorna</translation>
     </message>
@@ -2488,7 +2488,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="772"/>
+        <location filename="../mainwindow.cc" line="783"/>
         <source>Welcome!</source>
         <translation>Välkommen!</translation>
     </message>
@@ -2594,7 +2594,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
-        <location filename="../mainwindow.cc" line="366"/>
+        <location filename="../mainwindow.cc" line="369"/>
         <source>&amp;Quit</source>
         <translation>&amp;Avsluta</translation>
     </message>
@@ -2696,7 +2696,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.ui" line="597"/>
         <location filename="../mainwindow.ui" line="600"/>
-        <location filename="../mainwindow.cc" line="272"/>
+        <location filename="../mainwindow.cc" line="275"/>
         <source>Menu Button</source>
         <translation>Menyknapp</translation>
     </message>
@@ -2742,7 +2742,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
-        <location filename="../mainwindow.cc" line="243"/>
+        <location filename="../mainwindow.cc" line="246"/>
         <source>Add current tab to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2767,7 +2767,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation>&amp;Rensa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="593"/>
+        <location filename="../mainwindow.cc" line="604"/>
         <source>New Tab</source>
         <translation>Ny flik</translation>
     </message>
@@ -2783,8 +2783,8 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3662"/>
-        <location filename="../mainwindow.cc" line="3674"/>
+        <location filename="../mainwindow.cc" line="3691"/>
+        <location filename="../mainwindow.cc" line="3703"/>
         <source>&amp;Show</source>
         <translation>&amp;Visa</translation>
     </message>
@@ -2819,338 +2819,343 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation>Visa små ikoner i &amp;verktygsfält</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="161"/>
+        <location filename="../mainwindow.cc" line="164"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Navigeringsfältet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="164"/>
+        <location filename="../mainwindow.cc" line="167"/>
         <source>Back</source>
         <translation>Bakåt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="166"/>
+        <location filename="../mainwindow.cc" line="169"/>
         <source>Forward</source>
         <translation>Framåt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="191"/>
+        <location filename="../mainwindow.cc" line="194"/>
         <source>Scan Popup</source>
         <translation>Sökpopupruta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="206"/>
+        <location filename="../mainwindow.cc" line="209"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Läs upp ord (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="218"/>
+        <location filename="../mainwindow.cc" line="221"/>
         <source>Zoom In</source>
         <translation>Zooma in</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="224"/>
+        <location filename="../mainwindow.cc" line="227"/>
         <source>Zoom Out</source>
         <translation>Zooma ut</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="228"/>
+        <location filename="../mainwindow.cc" line="231"/>
         <source>Normal Size</source>
         <translation>Normal storlek</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="280"/>
-        <location filename="../mainwindow.cc" line="1272"/>
+        <location filename="../mainwindow.cc" line="283"/>
+        <location filename="../mainwindow.cc" line="1287"/>
         <source>Look up in:</source>
         <translation>Slå upp i:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="318"/>
+        <location filename="../mainwindow.cc" line="321"/>
         <source>Found in Dictionaries:</source>
         <translation>Träffar hittades i följande ordlistor:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="348"/>
+        <location filename="../mainwindow.cc" line="351"/>
         <source>Words Zoom In</source>
         <translation>Zooma in ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="352"/>
+        <location filename="../mainwindow.cc" line="355"/>
         <source>Words Zoom Out</source>
         <translation>Zooma ut ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="354"/>
+        <location filename="../mainwindow.cc" line="357"/>
         <source>Words Normal Size</source>
         <translation>Normal storlek på ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="362"/>
+        <location filename="../mainwindow.cc" line="365"/>
         <source>Show &amp;Main Window</source>
         <translation>Visa &amp;huvudfönstret</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="389"/>
+        <location filename="../mainwindow.cc" line="392"/>
         <source>Opened tabs</source>
         <translation>Öppnade flikar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="400"/>
+        <location filename="../mainwindow.cc" line="403"/>
         <source>Close current tab</source>
         <translation>Stäng aktuell flik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="410"/>
+        <location filename="../mainwindow.cc" line="413"/>
         <source>Close all tabs</source>
         <translation>Stäng alla flikar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="418"/>
+        <location filename="../mainwindow.cc" line="421"/>
         <source>Close all tabs except current</source>
         <translation>Stäng alla flikar utom aktuell flik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="583"/>
+        <location filename="../mainwindow.cc" line="455"/>
+        <source>Add all tabs to Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="594"/>
         <source>Loading...</source>
         <translation>Läser in …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1261"/>
+        <location filename="../mainwindow.cc" line="1276"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 ordlistor, %2 artiklar, %3 ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1272"/>
+        <location filename="../mainwindow.cc" line="1287"/>
         <source>Look up:</source>
         <translation>Slå upp:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1290"/>
+        <location filename="../mainwindow.cc" line="1305"/>
         <source>All</source>
         <translation>Alla</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1451"/>
+        <location filename="../mainwindow.cc" line="1469"/>
         <source>Open Tabs List</source>
         <translation>Öppna lista över flikar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1509"/>
+        <location filename="../mainwindow.cc" line="1527"/>
         <source>(untitled)</source>
         <translation>(namnlös)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1730"/>
+        <location filename="../mainwindow.cc" line="1752"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2864"/>
+        <location filename="../mainwindow.cc" line="2893"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Det gick inte att initiera övervakningsmekanismen för kortkommandon.&lt;br&gt;Säkerställ att tillägget RECORD för din XServer är aktiverat.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3005"/>
+        <location filename="../mainwindow.cc" line="3034"/>
         <source>New Release Available</source>
         <translation>Ny version tillgänglig</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3006"/>
+        <location filename="../mainwindow.cc" line="3035"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; av GoldenDict finns nu tillgänglig för hämtning.&lt;br&gt;Klicka på &lt;b&gt;Hämta&lt;/b&gt; för att gå till hämtningssidan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3011"/>
+        <location filename="../mainwindow.cc" line="3040"/>
         <source>Download</source>
         <translation>Hämta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3012"/>
+        <location filename="../mainwindow.cc" line="3041"/>
         <source>Skip This Release</source>
         <translation>Hoppa över denna version</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3837"/>
+        <location filename="../mainwindow.cc" line="3866"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3839"/>
-        <location filename="../mainwindow.cc" line="3929"/>
+        <location filename="../mainwindow.cc" line="3868"/>
+        <location filename="../mainwindow.cc" line="3958"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3858"/>
-        <location filename="../mainwindow.cc" line="3907"/>
+        <location filename="../mainwindow.cc" line="3887"/>
+        <location filename="../mainwindow.cc" line="3936"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3878"/>
+        <location filename="../mainwindow.cc" line="3907"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3927"/>
+        <location filename="../mainwindow.cc" line="3956"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3952"/>
+        <location filename="../mainwindow.cc" line="3981"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3958"/>
+        <location filename="../mainwindow.cc" line="3987"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4442"/>
+        <location filename="../mainwindow.cc" line="4471"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="831"/>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="842"/>
+        <location filename="../mainwindow.cc" line="3094"/>
         <source>Accessibility API is not enabled</source>
         <translation>API för hjälpmedel har inte aktiverats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="908"/>
+        <location filename="../mainwindow.cc" line="919"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3142"/>
+        <location filename="../mainwindow.cc" line="3171"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Du har valt att dölja en menyrad. Använd %1 för att visa den igen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3143"/>
+        <location filename="../mainwindow.cc" line="3172"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3241"/>
+        <location filename="../mainwindow.cc" line="3270"/>
         <source>Page Setup</source>
         <translation>Utskriftsformat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3242"/>
+        <location filename="../mainwindow.cc" line="3271"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Inga tillgängliga skrivare. Du måste installera eller ansluta dig till en.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3260"/>
+        <location filename="../mainwindow.cc" line="3289"/>
         <source>Print Article</source>
         <translation>Skriv ut artikel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3335"/>
+        <location filename="../mainwindow.cc" line="3364"/>
         <source>Article, Complete (*.html)</source>
         <translation>Artikel, fullständig (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3336"/>
+        <location filename="../mainwindow.cc" line="3365"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Artikel, endast HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3339"/>
+        <location filename="../mainwindow.cc" line="3368"/>
         <source>Save Article As</source>
         <translation>Spara artikel som</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3353"/>
+        <location filename="../mainwindow.cc" line="3382"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3354"/>
+        <location filename="../mainwindow.cc" line="3383"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Det gick inte att spara artikeln: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3415"/>
+        <location filename="../mainwindow.cc" line="3444"/>
         <source>Saving article...</source>
         <translation>Sparar artikel …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3478"/>
+        <location filename="../mainwindow.cc" line="3507"/>
         <source>The main window is set to be always on top.</source>
         <translation>Huvudfönstret har ställts in att alltid ligga överst.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3658"/>
-        <location filename="../mainwindow.cc" line="3670"/>
+        <location filename="../mainwindow.cc" line="3687"/>
+        <location filename="../mainwindow.cc" line="3699"/>
         <source>&amp;Hide</source>
         <translation>&amp;Dölj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3702"/>
+        <location filename="../mainwindow.cc" line="3731"/>
         <source>Export history to file</source>
         <translation>Exportera historik till fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3704"/>
-        <location filename="../mainwindow.cc" line="3766"/>
-        <location filename="../mainwindow.cc" line="3880"/>
+        <location filename="../mainwindow.cc" line="3733"/>
+        <location filename="../mainwindow.cc" line="3795"/>
+        <location filename="../mainwindow.cc" line="3909"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Textfiler (*.txt);;Alla filer (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3743"/>
+        <location filename="../mainwindow.cc" line="3772"/>
         <source>History export complete</source>
         <translation>Historiken har exporterats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3746"/>
-        <location filename="../mainwindow.cc" line="3861"/>
-        <location filename="../mainwindow.cc" line="3910"/>
+        <location filename="../mainwindow.cc" line="3775"/>
+        <location filename="../mainwindow.cc" line="3890"/>
+        <location filename="../mainwindow.cc" line="3939"/>
         <source>Export error: </source>
         <translation>Fel vid export: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3764"/>
+        <location filename="../mainwindow.cc" line="3793"/>
         <source>Import history from file</source>
         <translation>Importera historik från fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3813"/>
+        <location filename="../mainwindow.cc" line="3842"/>
         <source>Import error: invalid data in file</source>
         <translation>Fel vid import: felaktiga data i fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3817"/>
+        <location filename="../mainwindow.cc" line="3846"/>
         <source>History import complete</source>
         <translation>Historiken har importerats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3820"/>
-        <location filename="../mainwindow.cc" line="3956"/>
+        <location filename="../mainwindow.cc" line="3849"/>
+        <location filename="../mainwindow.cc" line="3985"/>
         <source>Import error: </source>
         <translation>Fel vid import: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4233"/>
+        <location filename="../mainwindow.cc" line="4262"/>
         <source>Dictionary info</source>
         <translation>Information om ordlista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4237"/>
+        <location filename="../mainwindow.cc" line="4266"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4239"/>
+        <location filename="../mainwindow.cc" line="4268"/>
         <source>Open dictionary folder</source>
         <translation>Öppna ordlistans mapp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4245"/>
+        <location filename="../mainwindow.cc" line="4274"/>
         <source>Edit dictionary</source>
         <translation>Redigera ordlista</translation>
     </message>
@@ -4191,7 +4196,7 @@ du inte aktivera det här alternativet.</translation>
         <location filename="../aard.cc" line="562"/>
         <location filename="../bgl.cc" line="397"/>
         <location filename="../sdict.cc" line="680"/>
-        <location filename="../stardict.cc" line="915"/>
+        <location filename="../stardict.cc" line="1042"/>
         <source>Copyright: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4288,14 +4293,14 @@ du inte aktivera det här alternativet.</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="404"/>
-        <location filename="../gls.cc" line="620"/>
-        <location filename="../stardict.cc" line="923"/>
+        <location filename="../gls.cc" line="621"/>
+        <location filename="../stardict.cc" line="1050"/>
         <source>Author: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="411"/>
-        <location filename="../stardict.cc" line="931"/>
+        <location filename="../stardict.cc" line="1058"/>
         <source>E-mail: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4305,12 +4310,12 @@ du inte aktivera det här alternativet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="939"/>
+        <location filename="../stardict.cc" line="1066"/>
         <source>Website: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="947"/>
+        <location filename="../stardict.cc" line="1074"/>
         <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4454,8 +4459,8 @@ could be resized or managed in other ways.</source>
 Rutan kan storleksändras och hanteras på andra sätt.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="602"/>
-        <location filename="../scanpopup.cc" line="956"/>
+        <location filename="../scanpopup.cc" line="607"/>
+        <location filename="../scanpopup.cc" line="962"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -4901,12 +4906,12 @@ Har ännu inte implementerats i  GoldenDict.</translation>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="103"/>
+        <location filename="../translatebox.cc" line="104"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Ange ett ord eller en fras för att söka i ordlistor</translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="125"/>
+        <location filename="../translatebox.cc" line="126"/>
         <source>Drop-down</source>
         <translation>Rullgardinsmeny</translation>
     </message>
