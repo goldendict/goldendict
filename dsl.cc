@@ -2292,14 +2292,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               break;
             }
 
-            if( curString.empty() )
-              wasEmptyLine = true;
-            else if( wasEmptyLine )
+            // Check for orphan strings
+
+            wstring folded = Folding::applyWhitespaceOnly( curString );
+            if( folded.empty() )
             {
-              if( !curString.empty() )
-              {
+              wasEmptyLine = true;
+              continue;
+            }
+            else
+            {
+              if( wasEmptyLine )
                 gdWarning( "Orphan string at line %i", scanner.getLinesRead() - 1 );
-              }
             }
 
             // Find embedded cards
