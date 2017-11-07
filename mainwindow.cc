@@ -107,6 +107,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   switchExpandModeAction( this ),
   focusHeadwordsDlgAction( this ),
   focusArticleViewAction( this ),
+  addAllTabToFavoritesAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -451,11 +452,19 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addAction( &switchExpandModeAction );
 
+  addAllTabToFavoritesAction.setText( tr( "Add all tabs to Favorites" ) );
+
+  connect( &addAllTabToFavoritesAction, SIGNAL( triggered() ),
+           this, SLOT( addAllTabsToFavorites() ) );
+
   tabMenu = new QMenu(this);
   tabMenu->addAction( &closeCurrentTabAction );
   tabMenu->addAction( &closeRestTabAction );
   tabMenu->addSeparator();
   tabMenu->addAction( &closeAllTabAction );
+  tabMenu->addSeparator();
+  tabMenu->addAction( addToFavorites );
+  tabMenu->addAction( &addAllTabToFavoritesAction );
 
   // Dictionary bar names
 
@@ -4487,6 +4496,30 @@ void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
     folder = igrp->favoritesFolder;
 
   ui.favoritesPaneWidget->addHeadword( folder, word );
+}
+
+void MainWindow::addAllTabsToFavorites()
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  for( int i = 0; i < ui.tabWidget->count(); i++ )
+  {
+    QString headword = ui.tabWidget->tabText( i );
+
+    // Reset table header to original headword
+
+    headword.replace( "&&", "&" );
+    if( headword.startsWith( QChar( 0x202E ) ) )
+      headword = headword.mid( 1 );
+    if( headword.endsWith( QChar( 0x202C ) ) )
+      headword.chop( 1 );
+
+    ui.favoritesPaneWidget->addHeadword( folder, headword );
+  }
+  addToFavorites->setIcon( blueStarIcon );
 }
 
 bool MainWindow::isWordPresentedInFavorites( QString const & word, unsigned groupId )

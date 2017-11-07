@@ -121,7 +121,8 @@ private:
           closeAllTabAction, closeRestTabAction,
           switchToNextTabAction, switchToPrevTabAction,
           showDictBarNamesAction, useSmallIconsInToolbarsAction, toggleMenuBarAction,
-          switchExpandModeAction, focusHeadwordsDlgAction, focusArticleViewAction;
+          switchExpandModeAction, focusHeadwordsDlgAction, focusArticleViewAction,
+          addAllTabToFavoritesAction;
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
@@ -281,6 +282,8 @@ private slots:
   void showFTSIndexingName( QString const & name );
 
   void addCurrentTabToFavorites();
+
+  void addAllTabsToFavorites();
 
 private slots:
 
