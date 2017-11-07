@@ -249,6 +249,8 @@ private:
 
   void showDictionaryHeadwords( QWidget * owner, Dictionary::Class * dict );
 
+  QString unescapeTabHeader( QString const & header );
+
 private slots:
 
   void hotKeyActivated( int );

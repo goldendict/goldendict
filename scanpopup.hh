@@ -223,6 +223,8 @@ private slots:
 
   void alwaysOnTopClicked( bool checked );
 
+  void titleChanged( ArticleView *, QString const & title );
+
 #ifdef HAVE_X11
   void delayShow();
 #endif

@@ -1723,6 +1723,10 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   }
 
   ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
+
+  // Set icon for "Add to Favorites" action
+  addToFavorites->setIcon( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) ? blueStarIcon : starIcon );
+
   updateWindowTitle();
 }
 
@@ -1787,6 +1791,10 @@ void MainWindow::tabSwitched( int )
     if ( from > 0)
       mruList.move( from, 0 );
   }
+
+  // Set icon for "Add to Favorites" action
+  QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
+  addToFavorites->setIcon( isWordPresentedInFavorites( unescapeTabHeader( headword ), cfg.lastMainGroupId ) ? blueStarIcon : starIcon );
 }
 
 void MainWindow::tabMenuRequested(QPoint pos)
@@ -2652,9 +2660,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
                         groupInstances[ groupList->currentIndex() ].id );
 
   view->showDefinition( inWord, group, dictID );
-
-  // Set icon for "Add to Favorites" action
-  addToFavorites->setIcon( isWordPresentedInFavorites( inWord, group ) ? blueStarIcon : starIcon );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -4466,6 +4471,20 @@ void MainWindow::showFTSIndexingName( QString const & name )
     mainStatusBar->setBackgroundMessage( tr( "Now indexing for full-text search: " ) + name );
 }
 
+QString MainWindow::unescapeTabHeader(QString const & header )
+{
+  // Reset table header to original headword
+
+  QString escaped = header;
+  escaped.replace( "&&", "&" );
+  if( escaped.startsWith( QChar( 0x202E ) ) )
+    escaped = escaped.mid( 1 );
+  if( escaped.endsWith( QChar( 0x202C ) ) )
+    escaped.chop( 1 );
+
+  return escaped;
+}
+
 void MainWindow::addCurrentTabToFavorites()
 {
   QString folder;
@@ -4475,15 +4494,7 @@ void MainWindow::addCurrentTabToFavorites()
 
   QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
 
-  // Reset table header to original headword
-
-  headword.replace( "&&", "&" );
-  if( headword.startsWith( QChar( 0x202E ) ) )
-    headword = headword.mid( 1 );
-  if( headword.endsWith( QChar( 0x202C ) ) )
-    headword.chop( 1 );
-
-  ui.favoritesPaneWidget->addHeadword( folder, headword );
+  ui.favoritesPaneWidget->addHeadword( folder, unescapeTabHeader( headword ) );
 
   addToFavorites->setIcon( blueStarIcon );
 }
@@ -4508,16 +4519,7 @@ void MainWindow::addAllTabsToFavorites()
   for( int i = 0; i < ui.tabWidget->count(); i++ )
   {
     QString headword = ui.tabWidget->tabText( i );
-
-    // Reset table header to original headword
-
-    headword.replace( "&&", "&" );
-    if( headword.startsWith( QChar( 0x202E ) ) )
-      headword = headword.mid( 1 );
-    if( headword.endsWith( QChar( 0x202C ) ) )
-      headword.chop( 1 );
-
-    ui.favoritesPaneWidget->addHeadword( folder, headword );
+    ui.favoritesPaneWidget->addHeadword( folder, unescapeTabHeader( headword ) );
   }
   addToFavorites->setIcon( blueStarIcon );
 }

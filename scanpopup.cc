@@ -234,6 +234,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
+  connect( definition, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
+           this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
+
 #ifdef HAVE_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
@@ -695,11 +698,6 @@ void ScanPopup::showTranslationFor( QString const & inputWord )
   unsigned groupId = ui.groupList->getCurrentGroup();
   definition->showDefinition( inputWord, groupId );
   definition->focus();
-
-  // Set icon for "Add to Favorites" button
-  ui.sendWordToFavoritesButton->setIcon( isWordPresentedInFavorites( inputWord, groupId ) ?
-                                         blueStarIcon : starIcon );
-
 
   // Add to history
   emit sendWordToHistory( inputWord.trimmed() );
@@ -1202,4 +1200,13 @@ void ScanPopup::alwaysOnTopClicked( bool checked )
     if( wasVisible )
       show();
   }
+}
+
+void ScanPopup::titleChanged( ArticleView *, QString const & title )
+{
+  unsigned groupId = ui.groupList->getCurrentGroup();
+
+  // Set icon for "Add to Favorites" button
+  ui.sendWordToFavoritesButton->setIcon( isWordPresentedInFavorites( title, groupId ) ?
+                                         blueStarIcon : starIcon );
 }
