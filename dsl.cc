@@ -2276,11 +2276,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           unsigned linesInsideCard = 0;
           int dogLine = 0;
           bool wasEmptyLine = false;
+          int headwordLine = scanner.getLinesRead() - 2;
+          bool noSignificantLines = Folding::applyWhitespaceOnly( curString ).empty();
 
           // Skip the article's body
           for( ; ; )
           {
-
             if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
                  || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
@@ -2289,6 +2290,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 gdWarning( "Unclosed tag '@' at line %i", dogLine );
                 insidedCards.append( InsidedCard( offset, curOffset - offset, insidedHeadwords ) );
               }
+              if( noSignificantLines )
+                gdWarning( "Orphan headword at line %i", headwordLine );
+
               break;
             }
 
@@ -2304,6 +2308,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               if( wasEmptyLine && !Folding::applyWhitespaceOnly( curString ).empty() )
                 gdWarning( "Orphan string at line %i", scanner.getLinesRead() - 1 );
             }
+
+            if( noSignificantLines )
+              noSignificantLines = Folding::applyWhitespaceOnly( curString ).empty();
 
             // Find embedded cards
 
