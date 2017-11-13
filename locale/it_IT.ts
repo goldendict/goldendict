@@ -418,7 +418,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
         <source>Chinese Conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversione cinese</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="23"/>
@@ -519,7 +519,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictgroupwidget.ui" line="87"/>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartella preferiti:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
@@ -1044,7 +1044,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../favoritespanewidget.cc" line="636"/>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore ne file dei preferiti</translation>
     </message>
 </context>
 <context>
@@ -1052,27 +1052,27 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../favoritespanewidget.cc" line="29"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">&amp;Elimina voce selezionata</translation>
+        <translation>&amp;Elimina voce selezionata</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="38"/>
         <source>Copy Selected</source>
-        <translation type="unfinished">Copia voce selezionata</translation>
+        <translation>Copia voce selezionata</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="47"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi cartella</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="61"/>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferiti:</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutti gli elementi selezionati verranno eliminati. Continuare?</translation>
     </message>
 </context>
 <context>
@@ -1134,7 +1134,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../fulltextsearch.ui" line="80"/>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora ordine parole</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="101"/>
@@ -2744,7 +2744,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi ogni scheda ai preferiti</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1287"/>
@@ -2759,39 +2759,39 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.cc" line="3866"/>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta preferiti in  un file</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3868"/>
         <location filename="../mainwindow.cc" line="3958"/>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>File XML (*.xml);;Tutti i file (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3887"/>
         <location filename="../mainwindow.cc" line="3936"/>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Esportazione dei preferiti completata</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3907"/>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta preferiti in un file come un  semplice elenco</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3956"/>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa preferiti da file</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3981"/>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Importazione dei preferiti completata</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3987"/>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore di analisi dati</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4471"/>
@@ -2940,7 +2940,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="143"/>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Preferiti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="162"/>
@@ -3038,7 +3038,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="316"/>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Pannello dei preferiti</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
@@ -3150,38 +3150,38 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.ui" line="638"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation type="unfinished">Esporta</translation>
+        <translation>Esporta</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
         <location filename="../mainwindow.cc" line="246"/>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi ai preferiti la pagina contenuta nella scheda corrente</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta come elenco</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3772,12 +3772,12 @@ entro il limite di secondi qui specificato.</translation>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra un pulsante a comparsa prima di mostrare la finestra con la traduzione, cliccando il pulsante viene quindi mostrata la traduzione.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>mostra un pulsante a comparsa per accedere ai risultati non appena avviene la scansione della parola da tradurre</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="909"/>
@@ -3827,22 +3827,22 @@ entro il limite di secondi qui specificato.</translation>
     <message>
         <location filename="../preferences.ui" line="1529"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferiti</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1537"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervallo di salvataggio dei preferiti. Impostando il valore 0 i preferiti verranno salvatati soltanto alla chiusura del programma.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1563"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntando questa casella, verrà domandata conferma per ogni tentativo di rimozione di un elemento</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1566"/>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>richiedi conferma prima di eliminare un elemento</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1609"/>
@@ -3868,12 +3868,13 @@ entro il limite di secondi qui specificato.</translation>
         <location filename="../preferences.ui" line="1660"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntando questa casella, verrà abilitata la ricerca di articoli extra da un elenco di sinonimi
+dai dizionari di Stardict, Babylon e GLS</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1664"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>ricerca extra via sinonimi</translation>
     </message>
     <message>
         <source>Play audio via Bass library. Optimal choice. To use this mode
@@ -3967,7 +3968,7 @@ Non è necessario attivare questa opzione se non si usano tali programmi.</trans
     <message>
         <location filename="../preferences.ui" line="1481"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>Intervallo di salvattaggio della cronologia. Impostando il valore 0 la cronologia verrà salvata soltanto alla chiusura del programma.</translation>
+        <translation>Intervallo di salvataggio della cronologia. Impostando il valore 0 la cronologia verrà salvata soltanto alla chiusura del programma.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1487"/>
@@ -4307,13 +4308,13 @@ e si collega al sito del programma.</translation>
         <location filename="../sdict.cc" line="680"/>
         <location filename="../stardict.cc" line="1042"/>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Diritti d&apos;autore: %1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="566"/>
         <location filename="../sdict.cc" line="696"/>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Versione: %1%2</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="142"/>
@@ -4405,28 +4406,28 @@ e si collega al sito del programma.</translation>
         <location filename="../gls.cc" line="621"/>
         <location filename="../stardict.cc" line="1050"/>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Autore: %1%2</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="411"/>
         <location filename="../stardict.cc" line="1058"/>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail: %1%2</translation>
     </message>
     <message>
         <location filename="../sdict.cc" line="648"/>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Titolo: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="1066"/>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Website: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="1074"/>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Data: %1%2</translation>
     </message>
 </context>
 <context>
@@ -4467,7 +4468,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../articleview.cc" line="2876"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">ATTENZIONE: %1</translation>
+        <translation>ATTENZIONE: %1</translation>
     </message>
 </context>
 <context>
@@ -4496,7 +4497,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../scanflag.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Finestra principale</translation>
     </message>
 </context>
 <context>
@@ -4551,7 +4552,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../scanpopup.ui" line="178"/>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi parola ai preferiti (Ctrl+E)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
@@ -4561,7 +4562,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../scanpopup.ui" line="231"/>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra sempre in primo piano rispetto alle altre finestre</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="251"/>
