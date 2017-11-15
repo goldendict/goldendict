@@ -327,6 +327,12 @@ void XdxfDictionary::loadIcon() throw()
       info = QFileInfo( fileName );
   }
 
+  if( !info.isFile() )
+  {
+      fileName = baseInfo.absoluteDir().absoluteFilePath( "dict.bmp" );
+      info = QFileInfo( fileName );
+  }
+
   if ( info.isFile() )
     loadIconFromFile( fileName, true );
 
