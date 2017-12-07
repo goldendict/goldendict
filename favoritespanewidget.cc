@@ -254,6 +254,11 @@ void FavoritesPaneWidget::addHeadword( QString const & path, QString const & hea
   m_favoritesModel->addNewHeadword( path, headword );
 }
 
+bool FavoritesPaneWidget::removeHeadword( QString const & path, QString const & headword )
+{
+  return m_favoritesModel->removeHeadword( path, headword );
+}
+
 bool FavoritesPaneWidget::isHeadwordPresent( const QString & path, const QString & headword )
 {
   return m_favoritesModel->isHeadwordPresent( path, headword );
@@ -978,11 +983,41 @@ bool FavoritesModel::addNewHeadword( const QString & path, const QString & headw
   return addHeadword( headword, parentIdx );
 }
 
+bool FavoritesModel::removeHeadword( const QString & path, const QString & headword )
+{
+  QModelIndex idx;
+
+  // Find target folder
+
+  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList::const_iterator it = folders.begin();
+  for( ; it != folders.end(); ++it )
+  {
+    idx = findItemInFolder( *it, TreeItem::Folder, idx );
+    if( !idx.isValid() )
+      break;
+  }
+
+  if( path.isEmpty() || idx.isValid() )
+  {
+    idx = findItemInFolder( headword, TreeItem::Word, idx );
+    if( idx.isValid() )
+    {
+      QModelIndexList list;
+      list.append( idx );
+      removeItemsForIndexes( list );
+      return true;
+    }
+  }
+
+  return false;
+}
+
 bool FavoritesModel::isHeadwordPresent( const QString & path, const QString & headword )
 {
   QModelIndex idx;
 
-  // Find or create target folder
+  // Find target folder
 
   QStringList folders = path.split( "/", QString::SkipEmptyParts );
   QStringList::const_iterator it = folders.begin();

@@ -283,6 +283,8 @@ private slots:
 
   void showFTSIndexingName( QString const & name );
 
+  void handleAddToFavoritesButton();
+
   void addCurrentTabToFavorites();
 
   void addAllTabsToFavorites();

@@ -40,6 +40,8 @@ public:
 
   void addHeadword( QString const & path, QString const & headword );
 
+  bool removeHeadword( QString const & path, QString const & headword );
+
   // Export/import Favorites
   void getDataInXml( QByteArray & dataStr );
   void getDataInPlainText( QString & dataStr );
@@ -194,6 +196,10 @@ public:
   // Add new headword to given folder
   // return false if it already exists there
   bool addNewHeadword( QString const & path, QString const & headword );
+
+  // Remove headword from given folder
+  // return false if failed
+  bool removeHeadword( QString const & path, QString const & headword );
 
   // Return true if headwors is already presented in Favorites
   bool isHeadwordPresent( QString const & path, QString const & headword );
