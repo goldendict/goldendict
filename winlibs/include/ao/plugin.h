@@ -42,7 +42,7 @@ int ao_plugin_play(ao_device *device, const char *output_samples,
 		uint_32 num_bytes);
 int ao_plugin_close(ao_device *device);
 void ao_plugin_device_clear(ao_device *device);
-char *ao_plugin_file_extension();
+const char *ao_plugin_file_extension();
 
 #ifdef __cplusplus
 }
