@@ -624,7 +624,7 @@ void FavoritesModel::readData()
   QFile favoritesFile( m_favoritesFilename );
   if( !favoritesFile.open( QFile::ReadOnly ) )
   {
-    gdWarning( "No favorities file found" );
+    gdDebug( "No favorites file found" );
     return;
   }
 
