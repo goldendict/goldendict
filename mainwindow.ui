@@ -138,11 +138,23 @@
     <addaction name="searchInPageAction"/>
     <addaction name="fullTextSearchAction"/>
    </widget>
+   <widget class="QMenu" name="menuFavorites">
+    <property name="title">
+     <string>Favo&amp;rites</string>
+    </property>
+    <addaction name="showHideFavorites"/>
+    <addaction name="exportFavorites"/>
+    <addaction name="ExportFavoritesToList"/>
+    <addaction name="importFavorites"/>
+    <addaction name="separator"/>
+    <addaction name="actionAddToFavorites"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menu_Edit"/>
    <addaction name="menuSearch"/>
    <addaction name="menuHistory"/>
+   <addaction name="menuFavorites"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QDockWidget" name="searchPane">
@@ -299,6 +311,33 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="favoritesPane">
+   <property name="windowTitle">
+    <string>Favor&amp;ites Pane</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="FavoritesPaneWidget" name="favoritesPaneWidget">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <property name="leftMargin">
+      <number>2</number>
+     </property>
+     <property name="topMargin">
+      <number>1</number>
+     </property>
+     <property name="rightMargin">
+      <number>2</number>
+     </property>
+     <property name="bottomMargin">
+      <number>1</number>
+     </property>
+     <item>
+      <widget class="QTreeView" name="favoritesTree"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
   <widget class="QDockWidget" name="historyPane">
    <property name="windowTitle">
     <string>&amp;History Pane</string>
@@ -307,7 +346,7 @@
     <number>2</number>
    </attribute>
    <widget class="HistoryPaneWidget" name="historyPaneWidget">
-    <layout class="QVBoxLayout" name="verticalLayout_3">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
      <property name="spacing">
       <number>2</number>
      </property>
@@ -594,6 +633,40 @@
     <string>F1</string>
    </property>
   </action>
+  <action name="showHideFavorites">
+   <property name="text">
+    <string>Show</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+I</string>
+   </property>
+  </action>
+  <action name="exportFavorites">
+   <property name="text">
+    <string>Export</string>
+   </property>
+  </action>
+  <action name="importFavorites">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionAddToFavorites">
+   <property name="text">
+    <string>Add</string>
+   </property>
+   <property name="statusTip">
+    <string>Add current tab to Favorites</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="ExportFavoritesToList">
+   <property name="text">
+    <string>Export to list</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -624,6 +697,12 @@
    <class>WordList</class>
    <extends>QListWidget</extends>
    <header>wordlist.hh</header>
+  </customwidget>
+  <customwidget>
+   <class>FavoritesPaneWidget</class>
+   <extends>QWidget</extends>
+   <header>favoritespanewidget.hh</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

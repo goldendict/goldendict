@@ -39,7 +39,7 @@ pre
   /*background: #ffffdd;*/
 }
 
-/* The 'From ' string which preceeds dictionary name in the heading */
+/* The 'From ' string which precedes dictionary name in the heading */
 .gdfromprefix
 {
 }
@@ -50,7 +50,7 @@ pre
 {
   display: block;
   padding-top: 1px;
-  margin-top: -9px;
+  margin-top: -8px;
   margin-bottom: 8px;
   background: #fefdeb;
 /*fix for invalid blg*/
@@ -113,6 +113,12 @@ pre
 /* StarDict type 'h' -- Html content. We don't normally do anything here. */
 div.sdct_h
 {
+}
+
+.sdict_h_wav img
+{
+  /* Ugly hack since "vertical-align: middle;" looks _terrible_ in Qt4's webkit: */
+  vertical-align: -30%;
 }
 
 /* StarDict type 'm' -- Pure meaning. Presented as <pre> */
@@ -341,6 +347,11 @@ div.xdxf
 .dsl_u
 {
   text-decoration: underline;
+}
+
+.dsl_article
+{
+  display:inline;
 }
 
 .dsl_article font[color=c_default_color]
@@ -586,6 +597,11 @@ div.xdxf
   width: 13px;
   height: 13px;
   vertical-align: -15%;
+}
+
+.epwing_article
+{
+  display:inline;
 }
 
 /************* Websites *****************/
@@ -2884,3 +2900,18 @@ in bg url to hide it from iemac */
     vertical-align: baseline !important;
 }
 
+/************* GLS dictionaries **************/
+
+.glsdict_headwords
+{
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 116%;
+}
+
+.gls_wav img
+{
+  /* Ugly hack since "vertical-align: middle;" looks _terrible_ in Qt4's webkit: */
+  vertical-align: -30%;
+}

@@ -123,7 +123,7 @@ void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
   if ( ( event->x() < width() - scrollBarWidth ) &&
        ( event->y() < height() - scrollBarHeight ) )
   {
-    emit doubleClicked();
+    emit doubleClicked( event->pos() );
   }
 
 }

@@ -1612,7 +1612,7 @@ QByteArray EpwingBook::handleNarrowFont( const unsigned int * argv,
   QUrl url;
   url.setScheme( "file" );
   url.setHost( "/");
-  url.setPath( Qt4x5::Url::ensureLeadingSlash( fullName ) );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( QDir::fromNativeSeparators( fullName ) ) );
 
   QByteArray link = "<img class=\"epwing_narrow_font\" src=\"" + url.toEncoded() + "\"/>";
 
@@ -1682,7 +1682,7 @@ QByteArray EpwingBook::handleWideFont( const unsigned int * argv,
   QUrl url;
   url.setScheme( "file" );
   url.setHost( "/");
-  url.setPath( Qt4x5::Url::ensureLeadingSlash( fullName ) );
+  url.setPath( Qt4x5::Url::ensureLeadingSlash( QDir::fromNativeSeparators( fullName ) ) );
 
   QByteArray link = "<img class=\"epwing_wide_font\" src=\"" + url.toEncoded() + "\"/>";
 

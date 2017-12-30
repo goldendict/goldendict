@@ -63,6 +63,8 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
 
   ui.shortcut->setHotKey( Config::HotKey( group.shortcut ) );
 
+  ui.favoritesFolder->setText( group.favoritesFolder );
+
   connect( ui.groupIcon, SIGNAL(activated(int)),this,SLOT(groupIconActivated(int)),
            Qt::QueuedConnection );
 
@@ -128,6 +130,8 @@ Config::Group DictGroupWidget::makeGroup() const
   g.icon = ui.groupIcon->itemData( currentIndex ).toString();
 
   g.shortcut = ui.shortcut->getHotKey().toKeySequence();
+
+  g.favoritesFolder = ui.favoritesFolder->text().replace( '\\', '/' );
 
   return g.makeConfigGroup();
 }
@@ -408,21 +412,13 @@ void DictListModel::addSelectedUniqueFromModel( QItemSelectionModel * source )
   if ( list.empty() )
     return;
 
-  for ( unsigned i = 0; i < allDicts->size(); i++ )
+  for ( int j = 0; j < list.size(); j++ )
   {
-    for ( int j = 0; j < list.size(); j++ )
+    for ( unsigned i = 0; i < allDicts->size(); i++ )
     {
       if ( allDicts->at( i )->getId() == list.at( j ) )
       {
         dictionaries.push_back( allDicts->at( i ) );
-        list.remove( j );
-        if ( list.isEmpty() )
-        {
-          beginResetModel();
-          endResetModel();
-          emit contentChanged();
-          return;
-        }
         break;
       }
     }

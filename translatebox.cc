@@ -41,7 +41,8 @@ CompletionList::CompletionList(TranslateBox * parent) : WordList(parent),
 bool CompletionList::eventFilter( QObject * obj, QEvent * ev )
 {
   // when the main window is moved or resized, hide the word list suggestions
-  if ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize )
+  if ( obj != this && !isAncestorOf( qobject_cast< QWidget * >( obj ) )
+       && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
   {
     translateBox->setPopupEnabled( false );
     return false;
@@ -244,6 +245,13 @@ void TranslateBox::showPopup()
   // completer->setCompletionPrefix( m_fileLineEdit->text() );
   // qDebug() << "COMPLETION:" << completer->currentCompletion();
 
+  // Don't allow recursive call
+  if( translateBoxMutex.tryLock() )
+    translateBoxMutex.unlock();
+  else
+    return;
+  Mutex::Lock _( translateBoxMutex );
+
   if (translate_line->text().trimmed().isEmpty() || word_list->count() == 0)
   {
     // nothing to show
@@ -252,7 +260,6 @@ void TranslateBox::showPopup()
       word_list->hide();
       translate_line->setFocus();
     }
-
     return;
   }
 

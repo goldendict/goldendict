@@ -107,6 +107,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   switchExpandModeAction( this ),
   focusHeadwordsDlgAction( this ),
   focusArticleViewAction( this ),
+  addAllTabToFavoritesAction( this ),
   trayIconMenu( this ),
   addTab( this ),
   cfg( cfg_ ),
@@ -127,6 +128,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
 , helpWindow( 0 )
+, starIcon( ":/icons/star.png" )
+, blueStarIcon( ":/icons/star_blue.png" )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -238,6 +241,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar->addAction( ui.print );
   navToolbar->widgetForAction( ui.print )->setObjectName( "printButton" );
 
+  navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeAddToFavorites" );
+
+  addToFavorites = navToolbar->addAction( starIcon, tr( "Add current tab to Favorites" ) );
+  navToolbar->widgetForAction( addToFavorites )->setObjectName( "addToFavoritesButton" );
+
+  connect( addToFavorites, SIGNAL( triggered() ), this, SLOT( handleAddToFavoritesButton() ) );
+  connect( ui.actionAddToFavorites, SIGNAL( triggered() ), this, SLOT( addCurrentTabToFavorites() ) );
+
   beforeOptionsSeparator = navToolbar->addSeparator();
   navToolbar->widgetForAction( beforeOptionsSeparator )->setObjectName( "beforeOptionsSeparator" );
   beforeOptionsSeparator->setVisible( cfg.preferences.hideMenubar);
@@ -246,6 +257,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   buttonMenu->addAction( ui.dictionaries );
   buttonMenu->addAction( ui.preferences );
   buttonMenu->addSeparator();
+  buttonMenu->addMenu( ui.menuFavorites );
   buttonMenu->addMenu( ui.menuHistory );
   buttonMenu->addSeparator();
   buttonMenu->addMenu( ui.menuFile );
@@ -440,11 +452,19 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addAction( &switchExpandModeAction );
 
+  addAllTabToFavoritesAction.setText( tr( "Add all tabs to Favorites" ) );
+
+  connect( &addAllTabToFavoritesAction, SIGNAL( triggered() ),
+           this, SLOT( addAllTabsToFavorites() ) );
+
   tabMenu = new QMenu(this);
   tabMenu->addAction( &closeCurrentTabAction );
   tabMenu->addAction( &closeRestTabAction );
   tabMenu->addSeparator();
   tabMenu->addAction( &closeAllTabAction );
+  tabMenu->addSeparator();
+  tabMenu->addAction( addToFavorites );
+  tabMenu->addAction( &addAllTabToFavoritesAction );
 
   // Dictionary bar names
 
@@ -478,6 +498,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+S" ) );
   ui.menuView->addAction( ui.dictsPane->toggleViewAction() );
   ui.dictsPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+R" ) );
+  ui.menuView->addAction( ui.favoritesPane->toggleViewAction() );
+  ui.favoritesPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+I" ) );
   ui.menuView->addAction( ui.historyPane->toggleViewAction() );
   ui.historyPane->toggleViewAction()->setShortcut( QKeySequence( "Ctrl+H" ) );
   ui.menuView->addSeparator();
@@ -535,6 +557,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
            this, SLOT( openDictionaryFolder( QString const & ) ) );
+
+  // Favorites
+
+  ui.favoritesPaneWidget->setUp( &cfg, ui.menuFavorites );
+  ui.favoritesPaneWidget->setSaveInterval( cfg.preferences.favoritesStoreInterval );
+
+  connect( ui.favoritesPane, SIGNAL( visibilityChanged( bool ) ),
+           this, SLOT( updateFavoritesMenu() ) );
+
+  connect( ui.menuFavorites, SIGNAL( aboutToShow() ),
+           this, SLOT( updateFavoritesMenu() ) );
+
+  connect( ui.favoritesPaneWidget, SIGNAL( favoritesItemRequested( QString, QString ) ),
+           this, SLOT( headwordFromFavorites( QString, QString ) ) );
 
   // History
   ui.historyPaneWidget->setUp( &cfg, &history, ui.menuHistory );
@@ -972,6 +1008,7 @@ void MainWindow::addGlobalAction( QAction * action, const char * slot )
   ui.centralWidget->addAction( action );
   ui.dictsPane->addAction( action );
   ui.searchPaneWidget->addAction( action );
+  ui.favoritesPane->addAction( action );
   ui.historyPane->addAction( action );
   groupList->addAction( action );
   translateBox->addAction( action );
@@ -1127,6 +1164,10 @@ void MainWindow::closeEvent( QCloseEvent * ev )
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
   {
     ev->ignore();
+
+    if( !cfg.preferences.searchInDock )
+      translateBox->setPopupEnabled( false );
+
     hide();
   }
   else
@@ -1209,7 +1250,10 @@ void MainWindow::makeDictionaries()
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -1360,6 +1404,15 @@ void MainWindow::makeScanPopup()
 
   connect( scanPopup.get(), SIGNAL( sendWordToHistory( QString ) ),
            this, SLOT( addWordToHistory( QString ) ) );
+
+  connect( this, SIGNAL( setPopupGroupByName( QString ) ),
+           scanPopup.get(), SLOT( setGroupByName( QString ) ) );
+
+  connect( scanPopup.get(), SIGNAL( sendWordToFavorites( QString, uint ) ),
+           this, SLOT( addWordToFavorites( QString, uint ) ) );
+
+  connect( scanPopup.get(), SIGNAL( isWordPresentedInFavorites( QString, uint ) ),
+           this, SLOT( isWordPresentedInFavorites( QString, uint ) ) );
 
 #ifdef Q_OS_WIN32
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
@@ -1670,6 +1723,19 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   }
 
   ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
+
+  // Set icon for "Add to Favorites" action
+  if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+  {
+    addToFavorites->setIcon( blueStarIcon );
+    addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+  }
+  else
+  {
+    addToFavorites->setIcon( starIcon );
+    addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
+  }
+
   updateWindowTitle();
 }
 
@@ -1734,11 +1800,24 @@ void MainWindow::tabSwitched( int )
     if ( from > 0)
       mruList.move( from, 0 );
   }
+
+  // Set icon for "Add to Favorites" action
+  QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
+  if( isWordPresentedInFavorites( unescapeTabHeader( headword ), cfg.lastMainGroupId ) )
+  {
+    addToFavorites->setIcon( blueStarIcon );
+    addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+  }
+  else
+  {
+    addToFavorites->setIcon( starIcon );
+    addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
+  }
 }
 
 void MainWindow::tabMenuRequested(QPoint pos)
 {
-//  // dont show this menu for single tab
+//  // do not show this menu for single tab
 //  if ( ui.tabWidget->count() < 2 )
 //    return;
 
@@ -1906,7 +1985,10 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   installHotKeys();
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -2000,6 +2082,9 @@ void MainWindow::editPreferences()
     if( cfg.preferences.historyStoreInterval != p.historyStoreInterval )
       history.setSaveInterval( p.historyStoreInterval );
 
+    if( cfg.preferences.favoritesStoreInterval != p.favoritesStoreInterval )
+      ui.favoritesPaneWidget->setSaveInterval( p.favoritesStoreInterval );
+
     cfg.preferences = p;
 
     beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
@@ -2025,7 +2110,10 @@ void MainWindow::editPreferences()
     ui.historyPaneWidget->updateHistoryCounts();
 
     for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
       dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+      dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+    }
 
     ui.fullTextSearchAction->setEnabled( cfg.preferences.fts.enabled );
 
@@ -2183,6 +2271,7 @@ void MainWindow::focusTranslateLine()
       activateWindow();
   }
 
+  translateLine->clearFocus();
   translateLine->setFocus();
   translateLine->selectAll();
 }
@@ -2245,6 +2334,15 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
     {
       if( ev->type() == QEvent::KeyPress )
         on_showHideHistory_triggered();
+      ev->accept();
+      return true;
+    }
+
+    // Handle Ctrl+I to show the Favorities Pane.
+    if ( ke->key() == Qt::Key_I && ke->modifiers() == Qt::ControlModifier )
+    {
+      if( ev->type() == QEvent::KeyPress )
+        on_showHideFavorites_triggered();
       ev->accept();
       return true;
     }
@@ -2708,6 +2806,9 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 {
   bool shown = false;
 
+  if( !cfg.preferences.searchInDock )
+    translateBox->setPopupEnabled( false );
+
   if ( !isVisible() )
   {
     show();
@@ -2870,7 +2971,10 @@ void MainWindow::prepareNewReleaseChecks()
 void MainWindow::checkForNewRelease()
 {
   if( latestReleaseReply )
+  {
+    disconnect( latestReleaseReply, 0, 0, 0 );
     latestReleaseReply->deleteLater();
+  }
   latestReleaseReply = 0;
 
   QNetworkRequest req(
@@ -2918,6 +3022,7 @@ void MainWindow::latestReleaseReplyReady()
     }
   }
 
+  disconnect( latestReleaseReply, 0, 0, 0 );
   latestReleaseReply->deleteLater();
   latestReleaseReply = 0;
 
@@ -3308,17 +3413,30 @@ void MainWindow::on_saveArticle_triggered()
       while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
       {
         QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
+        QString anchor;
+        name.replace( "?gdanchor=", "#" );
+        int n = name.indexOf( '#' );
+        if( n > 0 )
+        {
+          anchor = name.mid( n );
+          name.truncate( n );
+          anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
+        }
         name.replace( rxName, "_" );
-        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html\"";
+        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
         html.replace( pos, rx3.cap().length(), name );
         pos += name.length();
       }
 
+      // MDict anchors
+      QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
+      html.replace( anchorLinkRe, "\\1" );
+
       if ( complete )
       {
         QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx)://[^\"]+)\"" );
-        QRegExp rx2( "'((?:bres|gico|gdau|qrcx)://[^']+)'" );
+        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
+        QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
         set< QByteArray > resourceIncluded;
         vector< pair< QUrl, QString > > downloadResources;
 
@@ -3333,13 +3451,11 @@ void MainWindow::on_saveArticle_triggered()
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
               i != downloadResources.end(); i++ )
         {
-          vector< ResourceToSaveHandler * > handlerss = view->saveResource( i->first, i->second );
-          maxVal += handlerss.size();
-
-          for ( vector< ResourceToSaveHandler * >::iterator j = handlerss.begin();
-                j != handlerss.end(); j++ )
+          ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
+          if( !handler->isEmpty() )
           {
-            connect( *j, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
+            maxVal += 1;
+            connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
           }
         }
 
@@ -3377,7 +3493,10 @@ void MainWindow::on_rescanFiles_triggered()
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -3523,6 +3642,9 @@ void MainWindow::applyWordsZoomLevel()
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
   // groupList->setFixedHeight(translateLine->height());
   groupList->parentWidget()->layout()->activate();
+
+  if ( scanPopup.get() )
+    scanPopup->applyWordsZoomLevel();
 }
 
 void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
@@ -3538,6 +3660,16 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
       scanPopup->translateWord( message.mid( 15 ) );
     else
       wordReceived( message.mid( 15 ) );
+  }
+  else
+  if( message.left( 10 ) == "setGroup: " )
+  {
+    setGroupByName( message.mid( 10 ), true );
+  }
+  else
+  if( message.left( 15 ) == "setPopupGroup: " )
+  {
+    setGroupByName( message.mid( 15 ), false );
   }
   else
     qWarning() << "Unknown message received from another instance: " << message;
@@ -3566,6 +3698,18 @@ void MainWindow::headwordReceived( const QString & word, const QString & ID )
     translateInputFinished( false, QString( "gdfrom-" )+ ID );
 }
 
+void MainWindow::updateFavoritesMenu()
+{
+  if ( ui.favoritesPane->toggleViewAction()->isChecked() )
+  {
+    ui.showHideFavorites->setText( tr( "&Hide" ) );
+  }
+  else
+  {
+    ui.showHideFavorites->setText( tr( "&Show" ) );
+  }
+}
+
 void MainWindow::updateHistoryMenu()
 {
   if ( ui.historyPane->toggleViewAction()->isChecked() )
@@ -3576,6 +3720,12 @@ void MainWindow::updateHistoryMenu()
   {
     ui.showHideHistory->setText( tr( "&Show" ) );
   }
+}
+
+void MainWindow::on_showHideFavorites_triggered()
+{
+  ui.favoritesPane->toggleViewAction()->trigger();
+  ui.favoritesPane->raise(); // useful when the Pane is tabbed.
 }
 
 void MainWindow::on_showHideHistory_triggered()
@@ -3717,6 +3867,145 @@ void MainWindow::on_importHistory_triggered()
     errStr = QString( tr( "Import error: " ) ) + file.errorString();
     file.close();
     mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+}
+
+void MainWindow::on_exportFavorites_triggered()
+{
+  QString exportPath;
+  if( cfg.historyExportPath.isEmpty() )
+    exportPath = QDir::homePath();
+  else
+  {
+    exportPath = QDir::fromNativeSeparators( cfg.historyExportPath );
+    if( !QDir( exportPath ).exists() )
+      exportPath = QDir::homePath();
+  }
+
+  QString fileName = QFileDialog::getSaveFileName( this, tr( "Export Favorites to file" ),
+                                                   exportPath,
+                                                   tr( "XML files (*.xml);;All files (*.*)" ) );
+  if( fileName.size() == 0)
+    return;
+
+  cfg.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
+  QFile file( fileName );
+
+  for(;;)
+  {
+    if ( !file.open( QFile::WriteOnly | QIODevice::Text ) )
+      break;
+
+    QByteArray data;
+    ui.favoritesPaneWidget->getDataInXml( data );
+
+    if( file.write( data ) != data.size() )
+      break;
+
+    file.close();
+    mainStatusBar->showMessage( tr( "Favorites export complete" ), 5000 );
+    return;
+  }
+  QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
+  file.close();
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+}
+
+void MainWindow::on_ExportFavoritesToList_triggered()
+{
+  QString exportPath;
+  if( cfg.historyExportPath.isEmpty() )
+    exportPath = QDir::homePath();
+  else
+  {
+    exportPath = QDir::fromNativeSeparators( cfg.historyExportPath );
+    if( !QDir( exportPath ).exists() )
+      exportPath = QDir::homePath();
+  }
+
+  QString fileName = QFileDialog::getSaveFileName( this, tr( "Export Favorites to file as plain list" ),
+                                                   exportPath,
+                                                   tr( "Text files (*.txt);;All files (*.*)" ) );
+  if( fileName.size() == 0)
+    return;
+
+  cfg.historyExportPath = QDir::toNativeSeparators( QFileInfo( fileName ).absoluteDir().absolutePath() );
+  QFile file( fileName );
+
+  for(;;)
+  {
+    if ( !file.open( QFile::WriteOnly | QIODevice::Text ) )
+      break;
+
+    // Write UTF-8 BOM
+    QByteArray line;
+    line.append( 0xEF ).append( 0xBB ).append( 0xBF );
+    if ( file.write( line ) != line.size() )
+      break;
+
+    // Write Favorites
+    QString data;
+    ui.favoritesPaneWidget->getDataInPlainText( data );
+
+    line = data.toUtf8();
+    if( file.write( line ) != line.size() )
+      break;
+
+    file.close();
+    mainStatusBar->showMessage( tr( "Favorites export complete" ), 5000 );
+    return;
+  }
+  QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
+  file.close();
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+}
+
+void MainWindow::on_importFavorites_triggered()
+{
+  QString importPath;
+  if( cfg.historyExportPath.isEmpty() )
+    importPath = QDir::homePath();
+  else
+  {
+    importPath = QDir::fromNativeSeparators( cfg.historyExportPath );
+    if( !QDir( importPath ).exists() )
+      importPath = QDir::homePath();
+  }
+
+  QString fileName = QFileDialog::getOpenFileName( this, tr( "Import Favorites from file" ),
+                                                   importPath,
+                                                   tr( "XML files (*.xml);;All files (*.*)" ) );
+  if( fileName.size() == 0)
+    return;
+
+  QFileInfo fileInfo( fileName );
+  cfg.historyExportPath = QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() );
+  QString errStr;
+  QFile file( fileName );
+
+  for(;;)
+  {
+    if ( !file.open( QFile::ReadOnly | QIODevice::Text ) )
+      break;
+
+    if( file.error() != QFile::NoError )
+        break;
+
+    QByteArray data = file.readAll();
+
+    if( !ui.favoritesPaneWidget->setDataFromXml( QString::fromUtf8( data.data(), data.size() ) ) )
+      break;
+
+    file.close();
+    mainStatusBar->showMessage( tr( "Favorites import complete" ), 5000 );
+    return;
+  }
+  if( file.error() != QFile::NoError )
+    errStr = QString( tr( "Import error: " ) ) + file.errorString();
+  else
+    errStr = QString( tr( "Data parsing error" ) );
+
+  file.close();
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
 }
 
 void MainWindow::fillWordListFromHistory()
@@ -4198,6 +4487,155 @@ void MainWindow::showFTSIndexingName( QString const & name )
     mainStatusBar->setBackgroundMessage( QString() );
   else
     mainStatusBar->setBackgroundMessage( tr( "Now indexing for full-text search: " ) + name );
+}
+
+QString MainWindow::unescapeTabHeader(QString const & header )
+{
+  // Reset table header to original headword
+
+  QString escaped = header;
+  escaped.replace( "&&", "&" );
+  if( escaped.startsWith( QChar( 0x202E ) ) )
+    escaped = escaped.mid( 1 );
+  if( escaped.endsWith( QChar( 0x202C ) ) )
+    escaped.chop( 1 );
+
+  return escaped;
+}
+
+void MainWindow::addCurrentTabToFavorites()
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
+
+  ui.favoritesPaneWidget->addHeadword( folder, unescapeTabHeader( headword ) );
+
+  addToFavorites->setIcon( blueStarIcon );
+  addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+}
+
+void MainWindow::handleAddToFavoritesButton()
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+  QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
+
+  if( ui.favoritesPaneWidget->isHeadwordPresent( folder, headword ) )
+  {
+    QMessageBox mb( QMessageBox::Question, "GoldenDict", tr( "Remove headword \"%1\" from Favorites?" ).arg( headword ),
+                    QMessageBox::Yes | QMessageBox::No, this );
+    if( mb.exec() == QMessageBox::Yes )
+    {
+      if( ui.favoritesPaneWidget->removeHeadword( folder, headword ) )
+      {
+        addToFavorites->setIcon( starIcon );
+        addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
+      }
+    }
+  }
+  else
+  {
+    ui.favoritesPaneWidget->addHeadword( folder, headword );
+    addToFavorites->setIcon( blueStarIcon );
+    addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+  }
+}
+
+void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( groupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  ui.favoritesPaneWidget->addHeadword( folder, word );
+}
+
+void MainWindow::addAllTabsToFavorites()
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  for( int i = 0; i < ui.tabWidget->count(); i++ )
+  {
+    QString headword = ui.tabWidget->tabText( i );
+    ui.favoritesPaneWidget->addHeadword( folder, unescapeTabHeader( headword ) );
+  }
+  addToFavorites->setIcon( blueStarIcon );
+  addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+}
+
+bool MainWindow::isWordPresentedInFavorites( QString const & word, unsigned groupId )
+{
+  QString folder;
+  Instances::Group const * igrp = groupInstances.findGroup( groupId );
+  if( igrp )
+    folder = igrp->favoritesFolder;
+
+  return ui.favoritesPaneWidget->isHeadwordPresent( folder, word );
+}
+
+void MainWindow::setGroupByName( QString const & name, bool main_window )
+{
+  if( main_window )
+  {
+    int i;
+    for( i = 0; i < groupList->count(); i++ )
+    {
+      if( groupList->itemText( i ) == name )
+      {
+        groupList->setCurrentIndex( i );
+        break;
+      }
+    }
+    if( i >= groupList->count() )
+      gdWarning( "Group \"%s\" for main window is not found\n", name.toUtf8().data() );
+  }
+  else
+  {
+    emit setPopupGroupByName( name );
+  }
+}
+
+void MainWindow::headwordFromFavorites( QString const & headword,
+                                        QString const & favoritesFolder )
+{
+  if( !favoritesFolder.isEmpty() )
+  {
+    // Find group by it Favorites folder
+    for( Instances::Groups::size_type i = 0; i < groupInstances.size(); i++ )
+    {
+      if( groupInstances[ i ].favoritesFolder == favoritesFolder )
+      {
+        // Group found. Select it and stop search.
+        if( groupList->currentIndex() != (int)i )
+        {
+          groupList->setCurrentIndex( i );
+
+          // Restore focus on Favorites tree
+          ui.favoritesPaneWidget->setFocusOnTree();
+        }
+        break;
+      }
+    }
+  }
+
+  // Show headword without lost of focus on Favorites tree
+
+  if ( cfg.preferences.searchInDock )
+    translateLine->setText( Folding::escapeWildcardSymbols( headword ) );
+  else
+    translateBox->setText( Folding::escapeWildcardSymbols( headword ), false );
+
+  showTranslationFor(headword );
 }
 
 #ifdef Q_OS_WIN32

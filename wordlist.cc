@@ -59,6 +59,7 @@ void WordList::updateMatchResults( bool finished )
     if ( !i )
     {
       i = new QListWidgetItem( results[ x ].first, this );
+      i->setToolTip( results[ x ].first );
 
       if ( results[ x ].second )
       {
@@ -71,7 +72,10 @@ void WordList::updateMatchResults( bool finished )
     else
     {
       if ( i->text() != results[ x ].first )
+      {
         i->setText( results[ x ].first );
+        i->setToolTip( results[ x ].first );
+      }
 
       QFont f = i->font();
       if ( f.italic() != results[ x ].second )

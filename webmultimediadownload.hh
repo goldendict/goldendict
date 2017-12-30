@@ -13,6 +13,8 @@ class WebMultimediaDownload: public DataRequest
   Q_OBJECT
 
   QNetworkReply * reply;
+  QNetworkAccessManager & mgr;
+  int redirectCount;
 
 public:
 

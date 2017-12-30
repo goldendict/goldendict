@@ -237,7 +237,8 @@ namespace
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
-                                                              int maxResults );
+                                                              int maxResults,
+                                                              bool ignoreWordsOrder );
     virtual QString const& getDescription();
 
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
@@ -393,17 +394,23 @@ namespace
       char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
       string str( dictDescription );
       if( !str.empty() )
-        dictionaryDescription += "Copyright: " + Html::unescape( QString::fromUtf8( str.data(), str.size() ) ) + "\n\n";
+        dictionaryDescription += QString( QObject::tr( "Copyright: %1%2" ) )
+                                 .arg( Html::unescape( QString::fromUtf8( str.data(), str.size() ) ) )
+                                 .arg( "\n\n" );
       dictDescription += str.size() + 1;
 
       str = string( dictDescription );
       if( !str.empty() )
-        dictionaryDescription += "Author: " + QString::fromUtf8( str.data(), str.size() ) + "\n\n";
+        dictionaryDescription += QString( QObject::tr( "Author: %1%2" ) )
+                                 .arg( QString::fromUtf8( str.data(), str.size() ) )
+                                 .arg( "\n\n" );
       dictDescription += str.size() + 1;
 
       str = string( dictDescription );
       if( !str.empty() )
-        dictionaryDescription += "E-mail: " + QString::fromUtf8( str.data(), str.size() ) + "\n\n";
+        dictionaryDescription += QString( QObject::tr( "E-mail: %1%2" ) )
+                                 .arg( QString::fromUtf8( str.data(), str.size() ) )
+                                 .arg( "\n\n" );
       dictDescription += str.size() + 1;
 
       str = string( dictDescription );
@@ -596,7 +603,8 @@ sptr< Dictionary::WordSearchRequest >
   BglDictionary::findHeadwordsForSynonym( wstring const & word )
   throw( std::exception )
 {
-  return new BglHeadwordsRequest( word, *this );
+  return synonymSearchEnabled ? new BglHeadwordsRequest( word, *this ) :
+                                Class::findHeadwordsForSynonym( word );
 }
 
 // Converts a $1$-like postfix to a <sup>1</sup> one
@@ -1132,9 +1140,10 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
 sptr< Dictionary::DataRequest > BglDictionary::getSearchResults( QString const & searchString,
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
-                                                                 int maxResults )
+                                                                 int maxResults,
+                                                                 bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 

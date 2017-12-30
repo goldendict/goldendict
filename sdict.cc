@@ -167,7 +167,8 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
-                                                              int maxResults );
+                                                              int maxResults,
+                                                              bool ignoreWordsOrder );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -446,9 +447,10 @@ void SdictDictionary::getArticleText( uint32_t articleAddress, QString & headwor
 sptr< Dictionary::DataRequest > SdictDictionary::getSearchResults( QString const & searchString,
                                                                    int searchMode, bool matchCase,
                                                                    int distanceBetweenWords,
-                                                                   int maxResults )
+                                                                   int maxResults,
+                                                                   bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 /// SdictDictionary::getArticle()
@@ -643,8 +645,9 @@ QString const& SdictDictionary::getDescription()
   if( !dictionaryDescription.isEmpty() )
     return dictionaryDescription;
 
-  dictionaryDescription = QString::fromLatin1( "Title: " )
-                          + QString::fromUtf8( getName().c_str() );
+  dictionaryDescription = QString( QObject::tr( "Title: %1%2" ) )
+                          .arg( QString::fromUtf8( getName().c_str() ) )
+                          .arg( "\n\n" );
 
   try
   {
@@ -674,8 +677,9 @@ QString const& SdictDictionary::getDescription()
     else
       str = string( data.data(), size );
 
-    dictionaryDescription += QString::fromLatin1( "\n\nCopyright: " )
-                             + QString::fromUtf8( str.c_str(), str.size() );
+    dictionaryDescription += QString( QObject::tr( "Copyright: %1%2" ) )
+                             .arg( QString::fromUtf8( str.c_str(), str.size() ) )
+                             .arg( "\n\n" );
 
     df.seek( dictHeader.versionOffset );
     df.read( &size, sizeof( size ) );
@@ -689,8 +693,9 @@ QString const& SdictDictionary::getDescription()
     else
       str = string( data.data(), size );
 
-    dictionaryDescription += QString::fromLatin1( "\n\nVersion: " )
-                             + QString::fromUtf8( str.c_str(), str.size() );
+    dictionaryDescription += QString( QObject::tr( "Version: %1%2" ) )
+                             .arg( QString::fromUtf8( str.c_str(), str.size() ) )
+                             .arg( "\n\n" );
   }
   catch( std::exception &ex )
   {

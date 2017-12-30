@@ -19,6 +19,7 @@
 
 #include "ufile.hh"
 #include "fsencoding.hh"
+#include "zipfile.hh"
 
 namespace File {
 
@@ -32,6 +33,17 @@ enum
 bool tryPossibleName( std::string const & name, std::string & copyTo )
 {
   if ( File::exists( name ) )
+  {
+    copyTo = name;
+    return true;
+  }
+  else
+    return false;
+}
+
+bool tryPossibleZipName( std::string const & name, std::string & copyTo )
+{
+  if ( ZipFile::SplitZipFile( FsEncoding::decode( name.c_str() ) ).exists() )
   {
     copyTo = name;
     return true;
@@ -95,7 +107,7 @@ void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
   f.setFileName( FsEncoding::decode( filename ) );
 
   if ( !f.open( openMode ) )
-    throw exCantOpen( std::string( filename ) + ": " + strerror( errno ) );
+    throw exCantOpen( std::string( filename ) + ": " + f.errorString().toUtf8().data() );
 }
 
 Class::Class( char const * filename, char const * mode ) throw( exCantOpen ):

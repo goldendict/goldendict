@@ -267,7 +267,8 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
-                                                              int maxResults );
+                                                              int maxResults,
+                                                              bool ignoreWordsOrder );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -558,11 +559,11 @@ QString const& AardDictionary::getDescription()
     {
         map< string, string >::const_iterator iter = meta.find( "copyright" );
         if( iter != meta.end() )
-          dictionaryDescription = "Copyright: " + QString::fromUtf8( iter->second.c_str() ) + "\n\n";
+          dictionaryDescription = QString( QObject::tr( "Copyright: %1%2" ) ).arg( QString::fromUtf8( iter->second.c_str() ) ).arg( "\n\n" );
 
         iter = meta.find( "version" );
         if( iter != meta.end() )
-          dictionaryDescription = "Version: " + QString::fromUtf8( iter->second.c_str() ) + "\n\n";
+          dictionaryDescription = QString( QObject::tr( "Version: %1%2" ) ).arg( QString::fromUtf8( iter->second.c_str() ) ).arg( "\n\n" );
 
         iter = meta.find( "description" );
         if( iter != meta.end() )
@@ -630,9 +631,10 @@ void AardDictionary::getArticleText( uint32_t articleAddress, QString & headword
 sptr< Dictionary::DataRequest > AardDictionary::getSearchResults( QString const & searchString,
                                                                   int searchMode, bool matchCase,
                                                                   int distanceBetweenWords,
-                                                                  int maxResults )
+                                                                  int maxResults,
+                                                                  bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 /// AardDictionary::getArticle()
@@ -821,7 +823,8 @@ sptr< Dictionary::DataRequest > AardDictionary::getArticle( wstring const & word
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      unsigned maxHeadwordsToExpand )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -993,7 +996,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 articleOffsets.insert( articleOffset );
 
             // Insert new entry
-            indexedWords.addWord( Utf8::decode( string( data.data(), wordSize ) ), articleOffset);
+            wstring word = Utf8::decode( string( data.data(), wordSize ) );
+            if( maxHeadwordsToExpand && dictHeader.wordsCount >= maxHeadwordsToExpand )
+              indexedWords.addSingleWord( word, articleOffset);
+            else
+              indexedWords.addWord( word, articleOffset);
 
             pos += has64bitIndex ? sizeof( IndexElement64 ) : sizeof( IndexElement );
           }

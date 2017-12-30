@@ -173,6 +173,23 @@
             </widget>
            </item>
            <item>
+            <widget class="QToolButton" name="sendWordToFavoritesButton">
+             <property name="toolTip">
+              <string>Add word to Favorites (Ctrl+E)</string>
+             </property>
+             <property name="text">
+              <string notr="true">...</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/star.png</normaloff>:/icons/star.png</iconset>
+             </property>
+             <property name="shortcut">
+              <string notr="true">Ctrl+E</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -202,6 +219,26 @@
              </property>
              <property name="checked">
               <bool>false</bool>
+             </property>
+             <property name="autoRaise">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="onTopButton">
+             <property name="toolTip">
+              <string>Always stay on top of all other windows</string>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/ontop.png</normaloff>:/icons/ontop.png</iconset>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
              </property>
              <property name="autoRaise">
               <bool>true</bool>

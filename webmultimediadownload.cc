@@ -3,13 +3,22 @@
 
 namespace Dictionary {
 
+#define MAX_REDIRECTS 10
+
 WebMultimediaDownload::WebMultimediaDownload( QUrl const & url,
-                                              QNetworkAccessManager & mgr )
+                                              QNetworkAccessManager & _mgr ) :
+mgr( _mgr ),
+redirectCount( 0 )
 {
   connect( &mgr, SIGNAL(finished(QNetworkReply*)),
            this, SLOT(replyFinished(QNetworkReply*)), Qt::QueuedConnection );
 
   reply = mgr.get( QNetworkRequest( url ) );
+
+#ifndef QT_NO_OPENSSL
+  connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
+           reply, SLOT( ignoreSslErrors() ) );
+#endif
 }
 
 void WebMultimediaDownload::cancel()
@@ -26,6 +35,32 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
 
   if ( r->error() == QNetworkReply::NoError )
   {
+    // Check for redirect reply
+
+    QVariant possibleRedirectUrl = reply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+    QUrl redirectUrl = possibleRedirectUrl.toUrl();
+    if( !redirectUrl.isEmpty() )
+    {
+      disconnect( reply, 0, 0, 0 );
+      reply->deleteLater();
+
+      if( ++redirectCount > MAX_REDIRECTS )
+      {
+        setErrorString( "Too many redirects detected" );
+        finish();
+        return;
+      }
+
+      reply = mgr.get( QNetworkRequest( redirectUrl ) );
+#ifndef QT_NO_OPENSSL
+      connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
+               reply, SLOT( ignoreSslErrors() ) );
+#endif
+      return;
+    }
+
+    // Handle reply data
+
     QByteArray all = r->readAll();
 
     Mutex::Lock _( dataMutex );
@@ -39,6 +74,7 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
   else
     setErrorString( r->errorString() );
 
+  disconnect( r, 0, 0, 0 );
   r->deleteLater();
   reply = NULL;
 

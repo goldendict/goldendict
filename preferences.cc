@@ -22,6 +22,9 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   connect( ui.enableScanPopupModifiers, SIGNAL( toggled( bool ) ),
            this, SLOT( enableScanPopupModifiersToggled( bool ) ) );
 
+  connect( ui.showScanFlag, SIGNAL( toggled( bool ) ),
+           this, SLOT( showScanFlagToggled( bool ) ) );
+
   connect( ui.altKey, SIGNAL( clicked( bool ) ),
            this, SLOT( wholeAltClicked( bool ) ) );
   connect( ui.ctrlKey, SIGNAL( clicked( bool ) ),
@@ -194,8 +197,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.historySaveIntervalField->setValue( p.historyStoreInterval );
   ui.alwaysExpandOptionalParts->setChecked( p.alwaysExpandOptionalParts );
 
+  ui.favoritesSaveIntervalField->setValue( p.favoritesStoreInterval );
+  ui.confirmFavoritesDeletion->setChecked( p.confirmFavoritesDeletion );
+
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
+
+  ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
 
   ui.maxDictsInContextMenu->setValue( p.maxDictionaryRefsInContextMenu );
 
@@ -222,6 +230,12 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 #ifndef Q_OS_WIN32
   ui.groupBox_ScanPopupTechnologies->hide();
 //  ui.tabWidget->removeTab( 5 );
+#endif
+
+#ifdef HAVE_X11
+  ui.showScanFlag->setChecked( p.showScanFlag);
+#else
+  ui.showScanFlag->hide();
 #endif
 
   // Sound
@@ -299,6 +313,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.allowXDXF->setChecked( !p.fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive ) );
   ui.allowZim->setChecked( !p.fts.disabledTypes.contains( "ZIM", Qt::CaseInsensitive ) );
   ui.allowEpwing->setChecked( !p.fts.disabledTypes.contains( "EPWING", Qt::CaseInsensitive ) );
+  ui.allowGls->setChecked( !p.fts.disabledTypes.contains( "GLS", Qt::CaseInsensitive ) );
 #ifndef MAKE_ZIM_SUPPORT
   ui.allowZim->hide();
   ui.allowSlob->hide();
@@ -360,6 +375,9 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
   p.scanToMainWindow = ui.scanToMainWindow->isChecked();
+#ifdef HAVE_X11
+  p.showScanFlag= ui.showScanFlag->isChecked();
+#endif
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
@@ -369,8 +387,13 @@ Config::Preferences Preferences::getPreferences()
   p.historyStoreInterval = ui.historySaveIntervalField->text().toUInt();
   p.alwaysExpandOptionalParts = ui.alwaysExpandOptionalParts->isChecked();
 
+  p.favoritesStoreInterval = ui.favoritesSaveIntervalField->text().toUInt();
+  p.confirmFavoritesDeletion = ui.confirmFavoritesDeletion->isChecked();
+
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+
+  p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 
   p.maxDictionaryRefsInContextMenu = ui.maxDictsInContextMenu->text().toInt();
 
@@ -478,6 +501,13 @@ Config::Preferences Preferences::getPreferences()
     p.fts.disabledTypes += "EPWING";
   }
 
+  if( !ui.allowGls->isChecked() )
+  {
+    if( !p.fts.disabledTypes.isEmpty() )
+      p.fts.disabledTypes += ',';
+    p.fts.disabledTypes += "GLS";
+  }
+
   return p;
 }
 
@@ -489,6 +519,14 @@ void Preferences::enableScanPopupToggled( bool b )
 void Preferences::enableScanPopupModifiersToggled( bool b )
 {
   ui.scanPopupModifiers->setEnabled( b && ui.enableScanPopup->isChecked() );
+  if( b )
+    ui.showScanFlag->setChecked( false );
+}
+
+void Preferences::showScanFlagToggled( bool b )
+{
+  if( b )
+    ui.enableScanPopupModifiers->setChecked( false );
 }
 
 void Preferences::wholeAltClicked( bool b )

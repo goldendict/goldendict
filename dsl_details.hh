@@ -32,6 +32,15 @@ enum DslEncoding
   Utf8 // This is an extension. Detected solely by the UTF8 BOM.
 };
 
+struct DSLLangCode
+{
+  int code_id;
+  char code[ 3 ]; // ISO 639-1
+};
+
+string findCodeForDslId( int id );
+
+bool isAtSignFirst( wstring const & str );
 
 /// Parses the DSL language, representing it in its structural DOM form.
 struct ArticleDom
@@ -75,7 +84,9 @@ private:
   void closeTag( wstring const & name, list< Node * > & stack,
                  bool warn = true );
 
-  wchar const * stringPos;
+  bool atSignFirstInLine();
+
+  wchar const * stringPos, * lineStartPos;
 
   class eot {};
 
@@ -110,6 +121,7 @@ class DslScanner
   DslIconv iconv;
   wstring dictionaryName;
   wstring langFrom, langTo;
+  wstring soundDictionary;
   char readBuffer[ 65536 ];
   char * readBufferPtr;
   size_t readBufferLeft;
@@ -143,6 +155,10 @@ public:
   /// Returns the dictionary's target language, as was read from file's headers.
   wstring const & getLangTo() const
   { return langTo; }
+
+  /// Returns the preferred external dictionary with sounds, as was read from file's headers.
+  wstring const & getSoundDictionaryName() const
+  { return soundDictionary; }
 
   /// Reads next line from the file. Returns true if reading succeeded --
   /// the string gets stored in the one passed, along with its physical

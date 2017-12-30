@@ -22,11 +22,11 @@
 #include <QtEndian>
 
 
-static const uint32_t KA[4] = {
+static const quint32 KA[4] = {
     0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xa953fd4e
 };
 
-static const uint32_t KB[4] = {
+static const quint32 KB[4] = {
     0x50a28be6, 0x5c4dd124, 0x6d703ef3, 0x7a6d76e9
 };
 
@@ -120,10 +120,10 @@ RIPEMD128::RIPEMD128()
   state[3] = 0x10325476;
 }
 
-void RIPEMD128::transform( const uint8_t buffer[64] )
+void RIPEMD128::transform( const uchar buffer[64] )
 {
-    uint32_t a, b, c, d, e, f, g, h;
-    uint32_t block[16];
+    quint32 a, b, c, d, e, f, g, h;
+    quint32 block[16];
     int n;
 
     a = e = state[0];
@@ -132,7 +132,7 @@ void RIPEMD128::transform( const uint8_t buffer[64] )
     d = h = state[3];
 
     for (n = 0; n < 16; n++)
-      block[n] = qFromLittleEndian<uint32_t>( buffer + 4 * n );
+      block[n] = qFromLittleEndian<quint32>( buffer + 4 * n );
     n = 0;
 
     R128_0; R128_0; R128_0; R128_0;
@@ -150,7 +150,7 @@ void RIPEMD128::transform( const uint8_t buffer[64] )
     state[0] = h;
 }
 
-void RIPEMD128::update( const uint8_t * data, size_t len )
+void RIPEMD128::update( const uchar * data, size_t len )
 {
   size_t i, j;
 
@@ -171,13 +171,13 @@ void RIPEMD128::update( const uint8_t * data, size_t len )
   memcpy( &buffer[j], &data[i], len - i );
 }
 
-void RIPEMD128::digest( uint8_t * digest )
+void RIPEMD128::digest( uchar * digest )
 {
-  uint64_t finalcount = qFromLittleEndian( count << 3 );
-  update( (const uint8_t *) "\200", 1 );
+  quint64 finalcount = qFromLittleEndian( count << 3 );
+  update( (const uchar *) "\200", 1 );
   while ( ( count & 63 ) != 56 )
-    update( ( const uint8_t * ) "", 1 );
-  update( ( uint8_t * ) &finalcount, 8 ); /* Should cause a transform() */
+    update( ( const uchar * ) "", 1 );
+  update( ( uchar * ) &finalcount, 8 ); /* Should cause a transform() */
   for ( int i = 0; i < 4; i++ )
     qToLittleEndian( state[i], digest + i*4 );
 }

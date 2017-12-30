@@ -23,7 +23,6 @@
 #include "utf8.hh"
 #include "filetype.hh"
 #include "ftshelpers.hh"
-#include "btreeidx.hh"
 
 namespace Epwing {
 
@@ -128,7 +127,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
-                                                            int maxResults );
+                                                            int maxResults,
+                                                            bool ignoreWordsOrder );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -610,7 +610,7 @@ void EpwingArticleRequest::run()
     return;
   }
 
-  string result = "<span class=\"epwing_article\">";
+  string result = "<div class=\"epwing_article\">";
 
   multimap< wstring, pair< string, string > >::const_iterator i;
 
@@ -630,7 +630,7 @@ void EpwingArticleRequest::run()
       result += i->second.second;
   }
 
-  result += "</span>";
+  result += "</div>";
 
   Mutex::Lock _( dataMutex );
 
@@ -783,9 +783,10 @@ sptr< Dictionary::DataRequest > EpwingDictionary::getResource( string const & na
 sptr< Dictionary::DataRequest > EpwingDictionary::getSearchResults( QString const & searchString,
                                                                     int searchMode, bool matchCase,
                                                                     int distanceBetweenWords,
-                                                                    int maxResults )
+                                                                    int maxResults,
+                                                                    bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 int EpwingDictionary::japaneseWriting( gd::wchar ch )
@@ -964,8 +965,17 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       string mainDirectory = i->substr( 0, ndir );
 
       Epwing::Book::EpwingBook dict;
-
-      int subBooksNumber = dict.setBook( mainDirectory );
+      int subBooksNumber = 0;
+      try
+      {
+        subBooksNumber = dict.setBook( mainDirectory );
+      }
+      catch( std::exception & e )
+      {
+        gdWarning( "Epwing dictionary initializing failed: %s, error: %s\n",
+                   mainDirectory.c_str(), e.what() );
+        continue;
+      }
 
       for( int sb = 0; sb < subBooksNumber; sb++ )
       {

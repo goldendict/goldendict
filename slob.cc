@@ -133,7 +133,7 @@ class SlobFile
   QString readTinyText();
   QString readText();
   QString readLargeText();
-  QString readString( unsigned lenght );
+  QString readString( unsigned length );
 
 public:
   SlobFile() :
@@ -454,7 +454,7 @@ quint8 SlobFile::getItem( RefEntry const & entry, string * data )
         if( compression == ZLIB )
           currentItemData = decompressZlib( compressedData.data(), length );
         else
-        if( compression == ZLIB )
+        if( compression == BZ2 )
           currentItemData = decompressBzip2( compressedData.data(), length );
         else
           currentItemData = decompressLzma2( compressedData.data(), length, true );
@@ -551,7 +551,8 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
-                                                              int maxResults );
+                                                              int maxResults,
+                                                              bool ignoreWordsOrder );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -746,11 +747,11 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   QString text = QString::fromUtf8( in.c_str() );
 
   // pattern of img and script
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=\"(|/)([^\"]*)\"" ),
+  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
                 QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
 
   // pattern <link... href="..." ...>
-  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"" ),
+  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
@@ -790,7 +791,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
   if( !texCgiPath.isEmpty() )
   {
-    QRegExp texImage( "<\\s*img\\s*class=\"([^\"]+)\"\\s*alt=\"([^\"]+)\"[^>]*>",
+    QRegExp texImage( "<\\s*img\\s*class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
                       Qt::CaseSensitive,
                       QRegExp::RegExp2 );
     pos = 0;
@@ -798,12 +799,15 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     QString imgName;
 
     QRegExp regFrac = QRegExp( "\\\\[dt]frac" );
+    QString arrayDesc( "\\begin{array}{" );
+    QRegExp regSpaces = QRegExp( "\\s+([\\{\\(\\[\\}\\)\\]])", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     while( (pos = texImage.indexIn( text, pos )) >= 0 )
     {
       QStringList list = texImage.capturedTexts();
 
       if( list[ 1 ].compare( "tex" ) == 0
+          || list[ 1 ].compare( "mwe-math-fallback-image-inline" ) == 0
           || list[ 1 ].endsWith( " tex" ) )
       {
         QString name;
@@ -815,13 +819,79 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
           // Replace some TeX commands which don't support by mimetex.cgi
 
-          QString tex = list[ 2 ];
+          QString tex = list[ 3 ];
+          tex.replace( regSpaces, "\\1" );
           tex.replace( regFrac, "\\frac" );
           tex.replace( "\\leqslant", "\\leq" );
           tex.replace( "\\geqslant", "\\geq" );
           tex.replace( "\\infin", "\\infty" );
           tex.replace( "\\iff", "\\Longleftrightarrow" );
           tex.replace( "\\tbinom", "\\binom" );
+          tex.replace( "\\implies", "\\Longrightarrow" );
+          tex.replace( "{aligned}", "{align*}" );
+          tex.replace( "\\Subset", "\\subset" );
+          tex.replace( "\\xrightarrow", "\\longrightarrow^" );
+          tex.remove( "\\scriptstyle" );
+          tex.remove( "\\mathop" );
+          tex.replace( "\\bigg|", "|" );
+
+          // Format array descriptions (mimetex now don't support *{N}x constructions in it)
+
+          int pos1 = 0;
+          while( pos1 >= 0 )
+          {
+            pos1 = tex.indexOf( arrayDesc, pos1, Qt::CaseInsensitive );
+            if( pos1 >= 0 )
+            {
+              // Retrieve array description
+              QString desc, newDesc;
+              int n = 0;
+              int nstart = pos1 + arrayDesc.size();
+              int i;
+              for( i = 0; i + nstart < tex.size(); i++ )
+              {
+                if( tex[ i + nstart ] == '{' )
+                  n += 1;
+                if( tex[ i + nstart ] == '}' )
+                  n -= 1;
+                if( n < 0 )
+                  break;
+              }
+              if( i > 0 && i + nstart + 1 < tex.size() )
+                desc = tex.mid( nstart, i );
+
+              if( !desc.isEmpty() )
+              {
+                // Expand multipliers: "*{5}x" -> "xxxxx"
+
+                newDesc = desc;
+                QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
+                QString newStr;
+                int pos2 = 0;
+                while( pos2 >= 0 )
+                {
+                  pos2 = multReg.indexIn( newDesc, pos2 );
+                  if( pos2 >= 0 )
+                  {
+                    QStringList list = multReg.capturedTexts();
+                    int n = list[ 1 ].toInt();
+                    for( int i = 0; i < n; i++ )
+                      newStr += list[ 3 ].isEmpty() ? list[ 2 ] : list[ 3 ];
+                    newDesc.replace( pos2, list[ 0 ].size(), newStr );
+                    pos2 += newStr.size();
+                  }
+                  else
+                    break;
+                }
+                tex.replace( pos1 + arrayDesc.size(), desc.size(), newDesc );
+                pos1 += arrayDesc.size() + newDesc.size();
+              }
+              else
+                pos1 += arrayDesc.size();
+            }
+            else
+              break;
+          }
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
@@ -832,7 +902,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 #ifdef Q_OS_WIN32
                       + "/"
 #endif
-                      + imgName + "\" alt=\"" + list[ 2 ] + "\">";
+                      + imgName + "\" alt=\"" + list[ 3 ] + "\">";
 
         text.replace( pos, list[0].length(), tag );
         pos += tag.length() + 1;
@@ -843,6 +913,18 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
         pos += list[ 0 ].length();
     }
   }
+#ifdef Q_OS_WIN32
+  else
+  {
+    // Increase equations scale
+    text = QString::fromLatin1( "<script type=\"text/x-mathjax-config\">MathJax.Hub.Config({" )
+           + " SVG: { scale: 170, linebreaks: { automatic:true } }"
+           + ", \"HTML-CSS\": { scale: 210, linebreaks: { automatic:true } }"
+           + ", CommonHTML: { scale: 210, linebreaks: { automatic:true } }"
+           + " });</script>"
+           + text;
+  }
+#endif
 
   // Fix outstanding elements
   text += "<br style=\"clear:both;\" />";
@@ -853,7 +935,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 void SlobDictionary::loadResource( std::string & resourceName, string & data )
 {
   vector< WordArticleLink > link;
-  string resData;
   RefEntry entry;
 
   link = resourceIndex.findArticles( Utf8::decode( resourceName ) );
@@ -1099,9 +1180,10 @@ void SlobDictionary::getArticleText( uint32_t articleAddress, QString & headword
 sptr< Dictionary::DataRequest > SlobDictionary::getSearchResults( QString const & searchString,
                                                                   int searchMode, bool matchCase,
                                                                   int distanceBetweenWords,
-                                                                  int maxResults )
+                                                                  int maxResults,
+                                                                  bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 
@@ -1436,7 +1518,8 @@ sptr< Dictionary::DataRequest > SlobDictionary::getResource( string const & name
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
+                                      Dictionary::Initializing & initializing,
+                                      unsigned maxHeadwordsToExpand )
   throw( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
@@ -1501,7 +1584,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 || contentType.startsWith( "text/plain", Qt::CaseInsensitive ) )
             {
               //Article
-              indexedWords.addWord( gd::toWString( refEntry.key ), i );
+              if( maxHeadwordsToExpand && entries > maxHeadwordsToExpand )
+                indexedWords.addSingleWord( gd::toWString( refEntry.key ), i );
+              else
+                indexedWords.addWord( gd::toWString( refEntry.key ), i );
 
               wordCount += 1;
 

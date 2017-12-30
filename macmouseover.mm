@@ -5,6 +5,11 @@
 #include <Foundation/NSAutoreleasePool.h>
 #include <Foundation/Foundation.h>
 
+#ifndef AVAILABLE_MAC_OS_X_VERSION_10_11_AND_LATER
+#define kAXValueTypeCGPoint kAXValueCGPointType
+#define kAXValueTypeCFRange kAXValueCFRangeType
+#endif
+
 const int mouseOverInterval = 300;
 
 CGEventRef eventCallback( CGEventTapProxy proxy, CGEventType type, CGEventRef event, void *refcon )
@@ -80,7 +85,7 @@ QString MacMouseOver::CFStringRefToQString( CFStringRef str )
 
   QString result = QString::fromUtf16( chars, length );
 
-  delete  chars;
+  delete[] chars;
   return result;
 }
 
@@ -146,7 +151,7 @@ void MacMouseOver::handlePosition()
 
   for( ; ; )
   {
-    CFTypeRef parameter = AXValueCreate( kAXValueCGPointType, &pt );
+    CFTypeRef parameter = AXValueCreate( kAXValueTypeCGPoint, &pt );
     CFTypeRef rangeValue;
     err = AXUIElementCopyParameterizedAttributeNames( elem, &names );
     if( err != kAXErrorSuccess )
@@ -165,7 +170,7 @@ void MacMouseOver::handlePosition()
       CFStringRef stringValue;
 
       CFRange decodedRange = CFRangeMake( 0, 0 );
-      bool b = AXValueGetValue( (AXValueRef)rangeValue, kAXValueCFRangeType, &decodedRange );
+      bool b = AXValueGetValue( (AXValueRef)rangeValue, kAXValueTypeCFRange, &decodedRange );
       CFRelease( rangeValue );
       if( b )
       {
@@ -175,7 +180,7 @@ void MacMouseOver::handlePosition()
         int wordPos = decodedRange.location - fromPos;  // Cursor position in result string
 
         CFRange range = CFRangeMake( fromPos, wordPos + 1 );
-        parameter = AXValueCreate( kAXValueCFRangeType, &range );
+        parameter = AXValueCreate( kAXValueTypeCFRange, &range );
         err = AXUIElementCopyParameterizedAttributeValue( elem, kAXStringForRangeParameterizedAttribute,
                                                             parameter, (CFTypeRef *)&stringValue );
         CFRelease( parameter );
@@ -189,7 +194,7 @@ void MacMouseOver::handlePosition()
         for( int i = 1; i < 128; i++ )
         {
           range = CFRangeMake( decodedRange.location + i, 1 );
-          parameter = AXValueCreate( kAXValueCFRangeType, &range );
+          parameter = AXValueCreate( kAXValueTypeCFRange, &range );
           err = AXUIElementCopyParameterizedAttributeValue( elem, kAXStringForRangeParameterizedAttribute,
                                                               parameter, (CFTypeRef *)&stringValue );
           CFRelease( parameter );

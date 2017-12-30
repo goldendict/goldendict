@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>GoldenDict 查字典程式，版本 </translation>
+        <translation>GoldenDict 字典查詢程式，版本 </translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
@@ -29,14 +29,14 @@
     </message>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation>基於 QT %1(%2, %3 bit)</translation>
+        <translation>基於 QT %1 (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
     <name>ArticleMaker</name>
     <message>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>然後只要將滑鼠游標停留在你想要進行查詢的單字上，程式就會在彈出式視窗中顯示釋義。</translation>
+        <translation>然後只要將滑鼠游標停留在您想要進行查詢的單字上，程式就會在彈出式視窗中顯示釋義。</translation>
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>在 &lt;b&gt;%2&lt;/b&gt; 群組中找不到 &lt;b&gt;%1&lt;/b&gt; 的可用翻譯。</translation>
+        <translation>在 &lt;b&gt;%2&lt;/b&gt; 群組中找不到 &lt;b&gt;%1&lt;/b&gt; 的翻譯。</translation>
     </message>
     <message>
         <source>Working with popup</source>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>(untitled)</source>
-        <translation>（未命名）</translation>
+        <translation>(未命名)</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>然後只要用滑鼠游標選定你要進行抓詞查詢的詞（按兩下單字或是用滑鼠拖拉選定），程式就會在彈出式視窗中顯示釋義。</translation>
+        <translation>然後只要用滑鼠游標選定您要進行抓詞查詢的字詞 (按兩下單字或是用滑鼠拖拉選定)，程式就會在彈出式視窗中顯示釋義。</translation>
     </message>
     <message>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;歡迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 查字典程式！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用時請首先開啟&lt;b&gt;編輯 | 字典&lt;/b&gt;功能表以新增並掃描含有字典檔案的資料夾，然後新增維基百科網站查詢或其它資源，再調整字典排序或建立新的字典群組。&lt;p style=&quot;text-indent:2em&quot;&gt;這些設定都完成以後，就可以開始使用了。你可以使用左側的查詢面板，或是&lt;a href=&quot;使用螢幕取詞功能&quot;&gt;直接從其它程式中抓詞查詢&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需自訂本程式，可以在&lt;b&gt;編輯 | 偏好設定&lt;/b&gt;功能表中檢視可用的設定。所有的設定都有滑鼠游標提示資訊，如果有不明之處，請看一下提示。&lt;p style=&quot;text-indent:2em&quot;&gt;如果你需要更多說明、有任何疑問、建議，或是想了解其他人的想法，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方論壇&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要取得程式更新，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方網站&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2013 Konstantin Isakov. 授權基於 GPLv3 或更高版本。</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;歡迎使用 &lt;b&gt;GoldenDict&lt;/b&gt; 字典查詢程式！&lt;/h3&gt;&lt;p style=&quot;text-indent:2em&quot;&gt;使用時請先開啟 &lt;b&gt;編輯 | 字典&lt;/b&gt; 功能表以新增並掃描含有字典檔案的資料夾，然後新增維基百科網站查詢或其它資源，再調整字典排序或建立新的字典群組。&lt;p style=&quot;text-indent:2em&quot;&gt;這些設定都完成以後，就可以開始使用了。您可以使用左側的查詢窗格，或是&lt;a href=&quot;使用螢幕取詞功能&quot;&gt;直接從其它程式中抓詞查詢&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需自訂本程式，可以在 &lt;b&gt;編輯 | 偏好設定&lt;/b&gt; 功能表中檢視可用的設定。所有的設定都有工具提示，如果有不明之處，請先看一下工具提示。&lt;p style=&quot;text-indent:2em&quot;&gt;如果您需要更多說明、有任何疑問、建議，或是想了解其他人的想法，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;官方論壇&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;如需要取得程式更新，歡迎拜訪此程式的&lt;a href=&quot;http://goldendict.org/&quot;&gt;官方網站&lt;/a&gt;。&lt;p style=&quot;text-indent:2em&quot;&gt;(c) 2008-2013 Konstantin Isakov. 授權基於 GPLv3 或更高版本。</translation>
     </message>
     <message>
         <source>(picture)</source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Collapse article</source>
-        <translation>收縮條目</translation>
+        <translation>摺疊條目</translation>
     </message>
 </context>
 <context>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Close words: </source>
-        <translation>相近詞條：</translation>
+        <translation>近似字詞：</translation>
     </message>
     <message>
         <source>Compound expressions: </source>
@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>Collapse article</source>
-        <translation>收縮條目</translation>
+        <translation>摺疊條目</translation>
     </message>
 </context>
 <context>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>&amp;Next</source>
-        <translation>後一個(&amp;N)</translation>
+        <translation>下一個(&amp;N)</translation>
     </message>
     <message>
         <source>Find:</source>
@@ -150,7 +150,7 @@
     </message>
     <message>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>尋找 &quot;%1&quot;(&amp;L)</translation>
+        <translation>查詢 &quot;%1&quot;(&amp;L)</translation>
     </message>
     <message>
         <source>about:blank</source>
@@ -158,11 +158,11 @@
     </message>
     <message>
         <source>&amp;Previous</source>
-        <translation>前一個(&amp;P)</translation>
+        <translation>上一個(&amp;P)</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>在新分頁中尋找 &quot;%1&quot;(&amp;N)</translation>
+        <translation>在新分頁中查詢 &quot;%1&quot;(&amp;N)</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -182,15 +182,15 @@
     </message>
     <message>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
-        <translation>自動開啟資源檔時失敗，請嘗試手動開啟：%1.</translation>
+        <translation>自動開啟資源檔時失敗，請嘗試手動開啟：%1。</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2</source>
-        <translation>在 %2 中尋找 &quot;%1&quot;</translation>
+        <translation>在 %2 中查詢 &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>在 %2 中尋找 &quot;%1&quot; 並使用新分頁(&amp;N)</translation>
+        <translation>在 %2 中查詢 &quot;%1&quot; 並使用新分頁(&amp;N)</translation>
     </message>
     <message>
         <source>Open Link in New &amp;Tab</source>
@@ -210,7 +210,7 @@
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation>全部醒目提示(&amp;a)</translation>
+        <translation>全部醒目提示(&amp;A)</translation>
     </message>
     <message>
         <source>Resource</source>
@@ -222,7 +222,7 @@
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation>定義： %1</translation>
+        <translation>查詢釋義：%1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
@@ -234,7 +234,7 @@
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation>將 &quot;%1&quot; 新增至歷史紀錄(&amp;A) </translation>
+        <translation>將 &quot;%1&quot; 新增至歷史記錄(&amp;A) </translation>
     </message>
     <message>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
@@ -258,11 +258,11 @@
     </message>
     <message>
         <source>Save sound</source>
-        <translation>儲存發音</translation>
+        <translation>儲存音訊</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>發音檔(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有檔案 (*.*)</translation>
+        <translation>音訊檔(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有檔案 (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
@@ -274,11 +274,11 @@
     </message>
     <message>
         <source>Save &amp;image...</source>
-        <translation>儲存圖片...(&amp;i)</translation>
+        <translation>儲存圖片(&amp;I)...</translation>
     </message>
     <message>
         <source>Save s&amp;ound...</source>
-        <translation>儲存發音...(&amp;o)</translation>
+        <translation>儲存音訊(&amp;O)...</translation>
     </message>
     <message>
         <source>TTS Voice</source>
@@ -325,51 +325,55 @@ between classic and school orthography in cyrillic)</source>
     <name>ChineseConversion</name>
     <message>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">群組框</translation>
     </message>
     <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用簡繁轉換</translation>
     </message>
     <message>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>中文轉換(&amp;V)</translation>
     </message>
     <message>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用簡體字轉換為台灣繁體字</translation>
     </message>
     <message>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>簡體轉為台灣繁體</translation>
     </message>
     <message>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用簡體字轉換為香港繁體字</translation>
     </message>
     <message>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>簡體轉為香港繁體</translation>
     </message>
     <message>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation type="unfinished"></translation>
+        <translation>啟用繁體字轉換為簡體字</translation>
     </message>
     <message>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>繁體轉為簡體</translation>
     </message>
     <message>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>簡體字轉換為台灣繁體字</translation>
     </message>
     <message>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>簡體字轉換為香港繁體字</translation>
     </message>
     <message>
         <source>Traditional to simplified Chinese conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>繁體字轉換為簡體字</translation>
+    </message>
+    <message>
+        <source>Chinese Conversion</source>
+        <translation>中文轉換</translation>
     </message>
 </context>
 <context>
@@ -380,11 +384,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation>如果你要透過代理伺服器來存取，需要提供用戶名和密碼</translation>
+        <translation>如果您要透過代理伺服器來存取，需要提供使用者名稱和密碼</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>用戶名：</translation>
+        <translation>使用者名稱：</translation>
     </message>
     <message>
         <source>Password:</source>
@@ -433,6 +437,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Can&apos;t read the specified image file.</source>
         <translation>無法讀取指定的影像檔案。</translation>
     </message>
+    <message>
+        <source>Favorites folder:</source>
+        <translation>我的最愛資料夾：</translation>
+    </message>
 </context>
 <context>
     <name>DictGroupsWidget</name>
@@ -442,11 +450,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>你確定要產生基於語言配對的群組嗎？</translation>
+        <translation>您確定要依據語言別來產生群組嗎？</translation>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation>字典： </translation>
+        <translation>字典數：</translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
@@ -477,7 +485,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>This element determines how filter string will be interpreted</source>
-        <translation>此部份決定如何解釋欲篩選的字串</translation>
+        <translation>此部份決定程式如何解析欲篩選的字串</translation>
     </message>
     <message>
         <source>If checked on the symbols case will be take in account when filtering</source>
@@ -489,7 +497,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Exports headwords to file</source>
-        <translation>將標題字匯出至檔案</translation>
+        <translation>將詞條清單匯出至檔案</translation>
     </message>
     <message>
         <source>Export</source>
@@ -497,11 +505,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>確定</translation>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
-        <translation>按下此按鈕，將篩選器套用至標題字列表</translation>
+        <translation>按下此按鈕，讓篩選器套用至詞條清單</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -509,7 +517,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation>假如勾選的話，如果篩選器有任何變動，都會立即套用至標題字列表</translation>
+        <translation>假如勾選的話，如果篩選器有任何變更，都會立即套用至詞條清單</translation>
     </message>
     <message>
         <source>Auto apply</source>
@@ -521,7 +529,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation>篩選字串(固定字串、萬用字元或正規表達式)</translation>
+        <translation>篩選字串 (固定字串、萬用字元或正規表達式)</translation>
     </message>
     <message>
         <source>Text</source>
@@ -537,11 +545,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation>獨特標題字總數： %1,已篩選： %2</translation>
+        <translation>詞條總數：%1，已篩選出：%2</translation>
     </message>
     <message>
         <source>Save headwords to file</source>
-        <translation>將標題字儲存成檔案</translation>
+        <translation>將詞條清單儲存成檔案</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
@@ -549,7 +557,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Export headwords...</source>
-        <translation>匯出標題字...</translation>
+        <translation>匯出詞條清單...</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -557,7 +565,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>說明</translation>
     </message>
 </context>
 <context>
@@ -568,15 +576,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation>翻譯自：</translation>
+        <translation>詞條語言：</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation>總字數：</translation>
+        <translation>詞條總數：</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation>翻譯至：</translation>
+        <translation>釋義語言：</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
@@ -588,7 +596,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open folder</source>
-        <translation>打開資料夾</translation>
+        <translation>開啟資料夾</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
@@ -602,18 +610,18 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
-        <translation>顯示所有獨特的字典標題字</translation>
+        <translation>顯示所有的詞條清單</translation>
     </message>
     <message>
         <source>Headwords</source>
-        <translation>標題字</translation>
+        <translation>詞條清單</translation>
     </message>
 </context>
 <context>
     <name>DictListModel</name>
     <message>
         <source>%1 entries</source>
-        <translation>%1 條記錄</translation>
+        <translation>%1 詞條</translation>
     </message>
 </context>
 <context>
@@ -632,14 +640,14 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>伺服器資料庫</translation>
     </message>
 </context>
 <context>
     <name>DictServersModel</name>
     <message>
         <source>Enabled</source>
-        <translation>已啟用</translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <source>Name</source>
@@ -660,7 +668,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation>資料庫的逗號分隔列表
+        <translation>資料庫的逗號分隔清單
 (空字串或&quot;*&quot;複合所有的資料庫)</translation>
     </message>
     <message>
@@ -670,7 +678,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation>搜尋策略的的逗號分隔列表
+        <translation>搜尋策略的的逗號分隔清單
 (空字串代表 &quot;prefix&quot; 策略)</translation>
     </message>
 </context>
@@ -694,11 +702,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation>字典欄(&amp;D)</translation>
+        <translation>字典列(&amp;D)</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation>打開字典資料夾</translation>
+        <translation>開啟字典資料夾</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
@@ -706,7 +714,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation>字典標頭</translation>
+        <translation>詞條清單</translation>
     </message>
 </context>
 <context>
@@ -741,7 +749,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Some sources were changed. Would you like to accept the changes?</source>
-        <translation>某些字典檔案的所在資料夾已變更，是否接受變更？</translation>
+        <translation>某些字典檔案的所在資料夾已變更，您是否接受變更？</translation>
     </message>
 </context>
 <context>
@@ -766,7 +774,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Whole words</source>
-        <translation>全字(Whoe words)</translation>
+        <translation>整個字(Whoe words)</translation>
     </message>
     <message>
         <source>Plain text</source>
@@ -786,7 +794,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation>每個字典的條目上限(%1-%2)：</translation>
+        <translation>每個字典的條目上限 (%1-%2)：</translation>
     </message>
     <message>
         <source>Articles found: </source>
@@ -794,7 +802,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Now indexing: </source>
-        <translation>索引中：</translation>
+        <translation>建立索引中：</translation>
     </message>
     <message>
         <source>The search line must contains at least one word containing </source>
@@ -806,15 +814,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>No dictionaries for full-text search</source>
-        <translation>沒有字典可用於全文搜尋</translation>
+        <translation>沒有可用於全文搜尋的字典</translation>
     </message>
     <message>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation>搜尋的字串中，如果有中日韓(CJK)字母，就無法相容&quot;全字(Whole words)&quot; 和 &quot;純文字&quot;的搜尋模式</translation>
+        <translation>搜尋的字串中，如果有中日韓(CJK)字母，就無法相容&quot;整個字(Whole words)&quot; 和 &quot;純文字&quot;的搜尋模式</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">無</translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
@@ -822,6 +830,36 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>None</source>
         <translation type="obsolete">無</translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesModel</name>
+    <message>
+        <source>Error in favorities file</source>
+        <translation>我的最愛檔案發生錯誤</translation>
+    </message>
+</context>
+<context>
+    <name>FavoritesPaneWidget</name>
+    <message>
+        <source>&amp;Delete Selected</source>
+        <translation>刪除選擇的部分(&amp;D)</translation>
+    </message>
+    <message>
+        <source>Copy Selected</source>
+        <translation>複製選擇的部分</translation>
+    </message>
+    <message>
+        <source>Add folder</source>
+        <translation>新增資料夾</translation>
+    </message>
+    <message>
+        <source>Favorites:</source>
+        <translation>我的最愛：</translation>
+    </message>
+    <message>
+        <source>All selected items will be deleted. Continue?</source>
+        <translation>所有選擇的項目都會被刪除。是否繼續？</translation>
     </message>
 </context>
 <context>
@@ -879,7 +917,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Wait for indexing:</source>
-        <translation>等候索引：</translation>
+        <translation>等候建立索引：</translation>
     </message>
     <message>
         <source>Total:</source>
@@ -887,11 +925,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Indexed:</source>
-        <translation>已索引：</translation>
+        <translation>已建立索引：</translation>
     </message>
     <message>
         <source>Now indexing: None</source>
-        <translation>正在索引：無</translation>
+        <translation>正在建立索引：無</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -899,7 +937,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>說明</translation>
+    </message>
+    <message>
+        <source>Ignore words order</source>
+        <translation>忽略單字排序</translation>
     </message>
 </context>
 <context>
@@ -958,11 +1000,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Are you sure you want to remove all the groups?</source>
-        <translation>確定移除全部群組嗎？</translation>
+        <translation>您確定要移除全部群組嗎？</translation>
     </message>
     <message>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>確定要移除&lt;b&gt;%1&lt;/b&gt;群組嗎？</translation>
+        <translation>您確定要移除&lt;b&gt;%1&lt;/b&gt;群組嗎？</translation>
     </message>
     <message>
         <source>Remove group</source>
@@ -974,11 +1016,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Give a new name for the group:</source>
-        <translation>為群組起一個新名字：</translation>
+        <translation>為群組取一個新名字：</translation>
     </message>
     <message>
         <source>Dictionaries available:</source>
-        <translation>可用字典：</translation>
+        <translation>可用的字典：</translation>
     </message>
     <message>
         <source>&amp;Add group</source>
@@ -994,15 +1036,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>可以用滑鼠拖曳字典以改變其群組設定或排序(&amp;D)。</translation>
+        <translation>使用您的滑鼠將字典拖曳到群組，或是拖曳群組來改變其排序。</translation>
     </message>
     <message>
         <source>Rename current dictionary group</source>
-        <translation>重新命名當前字典群組</translation>
+        <translation>重新命名目前的字典群組</translation>
     </message>
     <message>
         <source>Remove current dictionary group</source>
-        <translation>移除字典群組</translation>
+        <translation>移除目前的字典群組</translation>
     </message>
     <message>
         <source>Give a name for the new group:</source>
@@ -1018,7 +1060,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>將所選字典新增進群組(Ins)</translation>
+        <translation>將所選字典新增至群組(Ins)</translation>
     </message>
     <message>
         <source>&amp;Remove group</source>
@@ -1038,7 +1080,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Create language-based groups</source>
-        <translation>建立基於語言的群組</translation>
+        <translation>依語言來建立群組</translation>
     </message>
     <message>
         <source>Auto groups</source>
@@ -1050,46 +1092,46 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open groups list</source>
-        <translation>打開字典群組列表</translation>
+        <translation>開啟字典群組清單</translation>
     </message>
 </context>
 <context>
     <name>Help::HelpWindow</name>
     <message>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict 說明</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>首頁</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>上一頁</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>下一頁</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished">放大</translation>
+        <translation>放大</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished">縮小</translation>
+        <translation>縮小</translation>
     </message>
     <message>
         <source>Normal Size</source>
-        <translation type="unfinished">正常大小</translation>
+        <translation>正常大小</translation>
     </message>
     <message>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>內容</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>索引</translation>
     </message>
 </context>
 <context>
@@ -1104,7 +1146,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>History:</source>
-        <translation>歷史紀錄：</translation>
+        <translation>歷史記錄：</translation>
     </message>
     <message>
         <source>%1/%2</source>
@@ -1112,7 +1154,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation>歷史紀錄的大小： %1 個條目，最多 %2 個</translation>
+        <translation>歷史記錄的大小： %1 個詞條，最多 %2 個</translation>
     </message>
 </context>
 <context>
@@ -1134,7 +1176,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Enabled</source>
-        <translation>已啟用</translation>
+        <translation>啟用</translation>
     </message>
 </context>
 <context>
@@ -1149,7 +1191,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Please wait while indexing dictionary</source>
-        <translation>正在索引字典，請稍候</translation>
+        <translation>正在建立字典索引，請稍候</translation>
     </message>
     <message>
         <source>Please wait...</source>
@@ -1172,7 +1214,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Twi</source>
-        <translation>維特語（迦納）</translation>
+        <translation>維特語(迦納)</translation>
     </message>
     <message>
         <source>Afar</source>
@@ -1248,7 +1290,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Khmer</source>
-        <translation>高棉語（柬埔寨語）</translation>
+        <translation>高棉語(柬埔寨語)</translation>
     </message>
     <message>
         <source>Kongo</source>
@@ -1340,7 +1382,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dzongkha</source>
-        <translation>宗喀語（不丹文）</translation>
+        <translation>宗喀語(不丹文)</translation>
     </message>
     <message>
         <source>Kannada</source>
@@ -1484,7 +1526,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Korean</source>
-        <translation>韓國語（韓文）</translation>
+        <translation>韓國語(韓文)</translation>
     </message>
     <message>
         <source>Navajo</source>
@@ -1692,7 +1734,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Norwegian Bokmal</source>
-        <translation>波克默爾語（挪威）</translation>
+        <translation>波克默爾語(挪威)</translation>
     </message>
     <message>
         <source>Croatian</source>
@@ -1760,7 +1802,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Tagalog</source>
-        <translation>他加祿語（菲律賓）</translation>
+        <translation>他加祿語(菲律賓)</translation>
     </message>
     <message>
         <source>Assamese</source>
@@ -1868,7 +1910,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Norwegian Nynorsk</source>
-        <translation>尼諾斯克語（挪威）</translation>
+        <translation>尼諾斯克語(挪威)</translation>
     </message>
     <message>
         <source>Guarani</source>
@@ -1967,7 +2009,7 @@ between classic and school orthography in cyrillic)</source>
     <name>LoadDictionaries</name>
     <message>
         <source>Error loading dictionaries</source>
-        <translation>讀取字典時出錯</translation>
+        <translation>讀取字典時發生錯誤</translation>
     </message>
 </context>
 <context>
@@ -2001,7 +2043,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Back</source>
-        <translation>回退</translation>
+        <translation>上一頁</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -2053,7 +2095,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
-        <translation>字典...(&amp;D)</translation>
+        <translation>字典(&amp;D)...</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -2105,7 +2147,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Look up:</source>
-        <translation>尋找：</translation>
+        <translation>查詢：</translation>
     </message>
     <message>
         <source>Zoom Out</source>
@@ -2133,7 +2175,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Look up in:</source>
-        <translation>尋找於：</translation>
+        <translation>查詢範圍：</translation>
     </message>
     <message>
         <source>Normal Size</source>
@@ -2141,12 +2183,12 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>初始化熱鍵監視機制失敗。&lt;br&gt;請確保你的 XServer 已啟用 RECORD 延伸。</translation>
+        <translation>快速鍵監視機制初始化失敗。&lt;br&gt;請確保您的 XServer 已啟用 RECORD 延伸。</translation>
     </message>
     <message>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
-        <translation>有新版 GoldenDict 可用，版本為 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
-按&lt;b&gt;下載&lt;/b&gt;，開啟下載頁面。</translation>
+        <translation>有新版的 GoldenDict 可以下載，版本為 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
+按 &lt;b&gt;下載&lt;/b&gt; 以開啟下載頁面。</translation>
     </message>
     <message>
         <source>Search Pane</source>
@@ -2172,11 +2214,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>(untitled)</source>
-        <translation>（未命名）</translation>
+        <translation>(未命名)</translation>
     </message>
     <message>
         <source>&amp;Preferences...</source>
-        <translation>偏好設定...(&amp;P)</translation>
+        <translation>偏好設定(&amp;P)...</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
@@ -2200,7 +2242,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Forward</source>
-        <translation>前進</translation>
+        <translation>下一頁</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
@@ -2252,7 +2294,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Close current tab</source>
-        <translation>關閉當前分頁</translation>
+        <translation>關閉目前分頁</translation>
     </message>
     <message>
         <source>Close all tabs</source>
@@ -2268,7 +2310,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>New Tab</source>
-        <translation>新分頁</translation>
+        <translation>新增分頁</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
@@ -2288,7 +2330,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation>打開分頁列表</translation>
+        <translation>開啟分頁清單</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -2316,7 +2358,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation>匯出歷史紀錄</translation>
+        <translation>匯出歷史記錄</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
@@ -2324,7 +2366,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>History export complete</source>
-        <translation>成功匯出歷史紀錄</translation>
+        <translation>成功匯出歷史記錄</translation>
     </message>
     <message>
         <source>Export error: </source>
@@ -2340,7 +2382,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation>匯入歷史紀錄</translation>
+        <translation>匯入歷史記錄</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
@@ -2348,7 +2390,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>History import complete</source>
-        <translation>成功匯入歷史紀錄</translation>
+        <translation>成功匯入歷史記錄</translation>
     </message>
     <message>
         <source>Import error: </source>
@@ -2364,15 +2406,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation>搜尋列(&amp;S)</translation>
+        <translation>查詢窗格(&amp;S)</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation>結果導覽列(&amp;R)</translation>
+        <translation>結果導航窗格(&amp;R)</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation>預覽列印(&amp;v)</translation>
+        <translation>預覽列印(&amp;V)</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
@@ -2380,7 +2422,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation>新分頁(&amp;N)</translation>
+        <translation>新增分頁(&amp;N)</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
@@ -2404,11 +2446,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation>在工具列中顯示小圖示(&amp;T)</translation>
+        <translation>在工具列中顯示小型圖示(&amp;T)</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation>導覽(&amp;N)</translation>
+        <translation>導航列(&amp;N)</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
@@ -2416,7 +2458,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation>歷史紀錄(&amp;H)</translation>
+        <translation>歷史記錄窗格(&amp;H)</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
@@ -2436,17 +2478,17 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation>打開字典資料夾</translation>
+        <translation>開啟字典資料夾</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation>字典標頭</translation>
+        <translation>詞條清單</translation>
     </message>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation>欲搜尋的字串。可使用萬用字元  &apos;*&apos;，&apos;?&apos; 和字元集合&apos;[...]&apos;。
-若想尋找&apos;*&apos;、&apos;?&apos;、&apos;[&apos;、&apos;]&apos;等符號，請分別使用 &apos;*&apos;、&apos;?&apos;、&apos;[&apos;、&apos;]&apos;</translation>
+        <translation>輸入想要在字典中搜尋的字串。可以使用萬用字元  &apos;*&apos;，&apos;?&apos; 和字元集合&apos;[...]&apos;。
+如果想尋找&apos;*&apos;、&apos;?&apos;、&apos;[&apos;、&apos;]&apos;等符號，請分別使用 &apos;*&apos;、&apos;?&apos;、&apos;[&apos;、&apos;]&apos;</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2470,10 +2512,86 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict 參考資料</translation>
     </message>
     <message>
         <source>Now indexing for full-text search: </source>
+        <translation>正在建立全文搜尋用的索引：</translation>
+    </message>
+    <message>
+        <source>Favor&amp;ites Pane</source>
+        <translation>我的最愛窗格(&amp;I)</translation>
+    </message>
+    <message>
+        <source>Show</source>
+        <translation>顯示</translation>
+    </message>
+    <message>
+        <source>Export</source>
+        <translation>匯出</translation>
+    </message>
+    <message>
+        <source>Import</source>
+        <translation>匯入</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>新增</translation>
+    </message>
+    <message>
+        <source>Add current tab to Favorites</source>
+        <translation>新增目前分頁到我的最愛</translation>
+    </message>
+    <message>
+        <source>Export to list</source>
+        <translation>匯出到清單</translation>
+    </message>
+    <message>
+        <source>Export Favorites to file</source>
+        <translation>匯出我的最愛</translation>
+    </message>
+    <message>
+        <source>XML files (*.xml);;All files (*.*)</source>
+        <translation>XML 檔案 (*.xml);;所有檔案 (*.*)</translation>
+    </message>
+    <message>
+        <source>Favorites export complete</source>
+        <translation>我的最愛匯出完成</translation>
+    </message>
+    <message>
+        <source>Export Favorites to file as plain list</source>
+        <translation>以純文字清單方式匯出我的最愛</translation>
+    </message>
+    <message>
+        <source>Import Favorites from file</source>
+        <translation>從檔案匯入我的最愛</translation>
+    </message>
+    <message>
+        <source>Favorites import complete</source>
+        <translation>我的最愛匯入完成</translation>
+    </message>
+    <message>
+        <source>Data parsing error</source>
+        <translation>資料解析錯誤</translation>
+    </message>
+    <message>
+        <source>Favo&amp;rites</source>
+        <translation>我的最愛(&amp;R)</translation>
+    </message>
+    <message>
+        <source>Ctrl+E</source>
+        <translation>Ctrl+E</translation>
+    </message>
+    <message>
+        <source>Add all tabs to Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove current tab from Favorites</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2510,11 +2628,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Address</source>
-        <translation>位址</translation>
+        <translation>網址</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation>已啟用</translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <source>Icon</source>
@@ -2533,7 +2651,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>未啟用（已禁用）的字典：</translation>
+        <translation>未啟用 (已停用) 的字典：</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -2557,7 +2675,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>可以透過拖曳改變項目的排序。將字典放入未啟用的群組以禁用。</translation>
+        <translation>可以透過拖曳改變項目的排序。也可將字典放入未啟用的群組以停用。</translation>
     </message>
     <message>
         <source>Dictionary order:</source>
@@ -2585,11 +2703,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation>字典標頭</translation>
+        <translation>詞條清單</translation>
     </message>
     <message>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>字典已啟用：%1，未啟用：%2</translation>
     </message>
 </context>
 <context>
@@ -2600,7 +2718,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Recursive</source>
-        <translation>遞迴搜尋</translation>
+        <translation>搜尋子資料夾(遞迴搜尋)</translation>
     </message>
 </context>
 <context>
@@ -2670,7 +2788,7 @@ switching to them.</source>
     </message>
     <message>
         <source>Use the following hotkey to translate a word from clipboard:</source>
-        <translation>使用下列熱鍵翻譯剪貼簿中的單字：</translation>
+        <translation>使用下列快速鍵翻譯剪貼簿中的單字：</translation>
     </message>
     <message>
         <source>Windows key or Meta key</source>
@@ -2713,7 +2831,7 @@ the application.</source>
     <message>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>如果你希望透過Proxy伺服器執行程式的網路查
+        <translation>如果您希望透過Proxy伺服器執行程式的網路查
 詢功能，啟用此選項。</translation>
     </message>
     <message>
@@ -2767,7 +2885,7 @@ in the pressed state when the word selection changes.</source>
     </message>
     <message>
         <source>Open new tabs after the current one</source>
-        <translation>在當前頁之後開啟新分頁</translation>
+        <translation>在目前分頁之後開啟新分頁</translation>
     </message>
     <message>
         <source>Restart the program to apply the language change.</source>
@@ -2782,10 +2900,10 @@ in the pressed state when the word selection changes.</source>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>啟用後，用滑鼠游標指向一個單字（Windows下），或是
-選定一個單字（Linux下）的時候，都會出現一個彈出式
-視窗來顯示釋義。啟用此功能後，可以從主視窗或系統
-匣功能表中選擇是否啟動螢幕取詞功能。</translation>
+        <translation>啟用後，用滑鼠游標指向一個單字(Windows下)，或是
+選定一個單字(Linux下)的時候，都會出現一個彈出式
+視窗來顯示釋義。啟用此功能後，可以從主視窗或系統匣
+功能表中選擇是否啟動螢幕取詞功能。</translation>
     </message>
     <message>
         <source>Check for new program releases periodically</source>
@@ -2795,8 +2913,8 @@ off from main window or tray icon.</source>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>開啟此選項，新分頁將會在當前頁面後開啟；不
-開啟此選項，新分頁將會自動新增到末尾。</translation>
+        <translation>啟用此選項，新分頁將會在目前頁面之後開啟；
+不啟用此選項，新分頁將會自動新增到最後面。</translation>
     </message>
     <message>
         <source>Close to system tray</source>
@@ -2807,9 +2925,10 @@ be the last ones.</source>
         <translation>系統預設</translation>
     </message>
     <message>
-        <source>When enabled, an icon appears in the sytem tray area which can be used
+        <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>啟用此選項，將會啟用系統匣圖示。</translation>
+        <translation>啟用此選項，將會啟用系統匣圖示。
+可用來顯示主視窗以及執行其他工作。</translation>
     </message>
     <message>
         <source>When this is enabled, the program periodically
@@ -2817,9 +2936,9 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>當啟用此選項時，程式將會自動檢查 GoldenDict 的可
-用更新。如有新版本，程式將會提醒使用者開啟下載
-頁面。</translation>
+        <translation>當啟用此選項時，程式將會自動檢查 GoldenDict 的可用更新。
+如有新版本，程式將會提醒使用者開啟下載頁面。
+</translation>
     </message>
     <message>
         <source>Startup</source>
@@ -2842,7 +2961,7 @@ download page.</source>
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
         <translation>為了防止誤按，僅僅在滑鼠選詞後的幾秒之內才會
-被監視。熱鍵監視的秒數可以在這裡設定。</translation>
+被監視。快速鍵監視的秒數可以在這裡設定。</translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -2854,7 +2973,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Use the following hotkey to show or hide the main window:</source>
-        <translation>使用下列熱鍵顯示或隱藏主視窗：</translation>
+        <translation>使用下列快速鍵顯示或隱藏主視窗：</translation>
     </message>
     <message>
         <source>Left Alt</source>
@@ -2882,7 +3001,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>熱鍵均為全域鍵，只要 GoldenDict 在背景執行，熱鍵就可以在任何程式中使用。</translation>
+        <translation>快速鍵均為全域鍵，只要 GoldenDict 在背景執行，快速鍵就可以在任何程式中使用。</translation>
     </message>
     <message>
         <source>Right Ctrl</source>
@@ -2890,7 +3009,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Hotkeys</source>
-        <translation>熱鍵</translation>
+        <translation>快速鍵</translation>
     </message>
     <message>
         <source>Start with scan popup turned on</source>
@@ -2907,7 +3026,7 @@ its main window.</source>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>開機自動啟動 GoldenDict.</translation>
+        <translation>開機自動啟動 GoldenDict。</translation>
     </message>
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
@@ -2933,19 +3052,19 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;注意： 你正在執行的 X.Org XServer 版本 RECORD 延伸功能不能正常工作。GoldenDict 中的熱鍵可能因此而失效。問題的解決依賴於 xserver 自身的恢復。請參照如下連結： &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug 記錄&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; 並留下評論。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;注意： 您正在執行的 X.Org XServer 版本 RECORD 延伸功能不能正常工作。GoldenDict 中的快速鍵可能因此而失效。問題的解決依賴於 xserver 自身的恢復。請參照如下連結： &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug 記錄&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; 並留下評論。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>啟用此選項後，GoldenDict 將會阻擋你所瀏覽的站台中來自其它站台的
-內容（圖片、框架）以便封殺廣告。如果某些網站因此而出現錯誤，可以試著禁
-用此選項。</translation>
+        <translation>啟用此選項後，GoldenDict 將會阻擋您所瀏覽的網站中來自其它網站的
+內容(圖片、框架)以便阻擋廣告。如果某些網站因此出現錯誤，可以
+試著停用此選項。</translation>
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>禁止載入來自其它站台的內容（封殺廣告）</translation>
+        <translation>禁止載入來自其它網站的內容 (隱藏大多數廣告)</translation>
     </message>
     <message>
         <source>Pronunciation</source>
@@ -2969,7 +3088,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
-        <translation>按兩下翻譯詞條（在主介面中）</translation>
+        <translation>按兩下翻譯字詞(在主介面中)</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3000,7 +3119,8 @@ but should support most audio file formats.</source>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation>一般而言，按下 ESC 鍵會將游標移至翻譯列。啟用此選項後，按下 ESC 鍵會隱藏主視窗。</translation>
+        <translation>一般而言，按下 ESC 鍵會將游標移至翻譯列。
+啟用此選項後，按下 ESC 鍵會隱藏主視窗。</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
@@ -3027,7 +3147,7 @@ Plugin must be installed for this option to work.</source>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation>進階設定(&amp;v)</translation>
+        <translation>進階設定(&amp;V)</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
@@ -3039,7 +3159,7 @@ This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>嘗試使用 IAccessibleEx 技術來取得滑鼠游標下的單字。
-本技術僅適用支援該技術的程式(如 Internet Explorer 9 )。
+本技術僅適用支援該技術的程式 (如 Internet Explorer 9 )。
 若您不使用這類程式的話，就不須勾選此選項。</translation>
     </message>
     <message>
@@ -3076,19 +3196,19 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Babylon</source>
-        <translation>Babylon</translation>
+        <translation>巴比倫</translation>
     </message>
     <message>
         <source>History</source>
-        <translation>歷史紀錄</translation>
+        <translation>歷史記錄</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>啟用此選項以儲存查詢單字的歷史紀錄</translation>
+        <translation>啟用此選項以儲存查詢單字的歷史記錄</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation>儲存歷史紀錄(&amp;h)</translation>
+        <translation>儲存歷史記錄(&amp;H)</translation>
     </message>
     <message>
         <source>Articles</source>
@@ -3096,11 +3216,11 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>啟用此選項以後會打開條目額外的部分</translation>
+        <translation>啟用此選項以後會展開條目額外的部分</translation>
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
-        <translation>展開額外的部分(&amp;p)</translation>
+        <translation>展開額外的部分(&amp;P)</translation>
     </message>
     <message>
         <source>Turn this option on if you want to select words by single mouse click</source>
@@ -3116,15 +3236,15 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation>設定歷史紀錄的最大條目數量。</translation>
+        <translation>設定歷史記錄最多儲存的詞條數量。</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation>歷史紀錄最大為：</translation>
+        <translation>歷史記錄最大為：</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>多久一次儲存歷史紀錄。如果設定為 0 就代表只在離開時儲存。</translation>
+        <translation>多久一次儲存歷史記錄。如果設定為 0 就代表只在離開時儲存。</translation>
     </message>
     <message>
         <source>Save every</source>
@@ -3140,11 +3260,11 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Lingoes</source>
-        <translation>Lingoes</translation>
+        <translation>靈格斯</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation>Lingoes-Blue</translation>
+        <translation>靈格斯-藍</translation>
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
@@ -3157,7 +3277,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation>有些網站會偵測 GoldenDict 的HTTP 標頭檔，所以阻擋其請求。
+        <translation>有些網站會偵測 GoldenDict 的 HTTP 標頭檔，所以阻擋其請求。
 啟用此選項能應付此問題。</translation>
     </message>
     <message>
@@ -3166,11 +3286,11 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Select this option to automatic collapse big articles</source>
-        <translation>啟用此選項能自動收縮較長的條目</translation>
+        <translation>啟用此選項能自動摺疊較長的條目</translation>
     </message>
     <message>
         <source>Collapse articles more than</source>
-        <translation>收縮超過</translation>
+        <translation>摺疊超過</translation>
     </message>
     <message>
         <source>symbols</source>
@@ -3178,15 +3298,15 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation>調整此數值來避免超長的字典選單。</translation>
+        <translation>調整此數值以避免過長的字典快顯功能表。</translation>
     </message>
     <message>
         <source>Context menu dictionaries limit:</source>
-        <translation>內文選單的字典上限：</translation>
+        <translation>快顯功能表的字典上限：</translation>
     </message>
     <message>
         <source>Articles longer than this size will be collapsed</source>
-        <translation>超過此大小的條目將被收縮</translation>
+        <translation>超過此大小的條目將被摺疊</translation>
     </message>
     <message>
         <source>System proxy</source>
@@ -3214,11 +3334,45 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
-        <translation>條項目的字典中尋找(0 - 不限)</translation>
+        <translation>條目的字典中尋找 (0 - 不限)</translation>
     </message>
     <message>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>說明語言</translation>
+    </message>
+    <message>
+        <source>Turn this option on to enable extra articles search via synonym lists
+from Stardict, Babylon and GLS dictionaries</source>
+        <translation>啟用此選項可以透過同義詞清單開啟額外搜尋功能，
+清單來自 Stardict、Babylon 和 GLS 的字典</translation>
+    </message>
+    <message>
+        <source>Extra search via synonyms</source>
+        <translation>同義詞額外搜尋功能</translation>
+    </message>
+    <message>
+        <source>Favorites</source>
+        <translation>我的最愛</translation>
+    </message>
+    <message>
+        <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
+        <translation>我的最愛內容儲存間隔。若設定為 0 則只在程式結束時儲存。</translation>
+    </message>
+    <message>
+        <source>Turn this option on to confirm every operation of items deletion</source>
+        <translation>啟用此選項以在每次進行刪除操作時進行確認</translation>
+    </message>
+    <message>
+        <source>Confirmation for items deletion</source>
+        <translation>刪除項目時進行確認</translation>
+    </message>
+    <message>
+        <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
+        <translation>顯示彈出視窗之前先顯示一個旗標視窗，點選旗標以顯示彈出視窗。</translation>
+    </message>
+    <message>
+        <source>Show scan flag when word is selected</source>
+        <translation>單字被選取時顯示掃描旗標</translation>
     </message>
 </context>
 <context>
@@ -3237,7 +3391,7 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation>前綴符合</translation>
+        <translation>字首符合</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -3263,7 +3417,7 @@ Enable this option to workaround the problem.</source>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation>已啟用</translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <source>Type</source>
@@ -3360,6 +3514,41 @@ Enable this option to workaround the problem.</source>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() failed.</translation>
     </message>
+    <message>
+        <source>Copyright: %1%2</source>
+        <translation>Copyright: %1%2</translation>
+    </message>
+    <message>
+        <source>Version: %1%2</source>
+        <translation>版本: %1%2</translation>
+    </message>
+    <message>
+        <source>Author: %1%2</source>
+        <translation>作者: %1%2</translation>
+    </message>
+    <message>
+        <source>E-mail: %1%2</source>
+        <translation>電子郵件: %1%2</translation>
+    </message>
+    <message>
+        <source>Title: %1%2</source>
+        <translation>標題: %1%2</translation>
+    </message>
+    <message>
+        <source>Website: %1%2</source>
+        <translation>網站: %1%2</translation>
+    </message>
+    <message>
+        <source>Date: %1%2</source>
+        <translation>日期: %1%2</translation>
+    </message>
+</context>
+<context>
+    <name>QWebPage</name>
+    <message>
+        <source>Select All</source>
+        <translation type="obsolete">全選</translation>
+    </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
@@ -3390,16 +3579,20 @@ Enable this option to workaround the problem.</source>
         <source>The referenced resource failed to download.</source>
         <translation>所引用的資源下載失敗。</translation>
     </message>
+    <message>
+        <source>WARNING: %1</source>
+        <translation>警告： %1</translation>
+    </message>
 </context>
 <context>
     <name>Romaji</name>
     <message>
         <source>Hepburn Romaji for Katakana</source>
-        <translation>黑本式羅馬字（片假名）</translation>
+        <translation>黑本式羅馬字(片假名)</translation>
     </message>
     <message>
         <source>Hepburn Romaji for Hiragana</source>
-        <translation>黑本式羅馬字（平假名）</translation>
+        <translation>黑本式羅馬字(平假名)</translation>
     </message>
 </context>
 <context>
@@ -3407,6 +3600,13 @@ Enable this option to workaround the problem.</source>
     <message>
         <source>Russian Transliteration</source>
         <translation>俄文轉寫</translation>
+    </message>
+</context>
+<context>
+    <name>ScanFlag</name>
+    <message>
+        <source>MainWindow</source>
+        <translation>主視窗</translation>
     </message>
 </context>
 <context>
@@ -3441,12 +3641,13 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Shows or hides the dictionary bar</source>
-        <translation>顯示或隱藏字典欄</translation>
+        <translation>顯示或隱藏字典列</translation>
     </message>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation>使用此按鈕可以固定視窗，以便它能停留在螢幕上進行改變大小等相關視窗管理操作。</translation>
+        <translation>使用此按鈕可以釘選視窗，以便它能停留在螢幕上，
+調整大小等相關視窗管理操作。</translation>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
@@ -3471,6 +3672,14 @@ could be resized or managed in other ways.</source>
     <message>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
+    </message>
+    <message>
+        <source>Add word to Favorites (Ctrl+E)</source>
+        <translation>新增單字到我的最愛 (Ctrl+E)</translation>
+    </message>
+    <message>
+        <source>Always stay on top of all other windows</source>
+        <translation>最上層顯示在其他所有視窗</translation>
     </message>
 </context>
 <context>
@@ -3512,7 +3721,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>確定要將&lt;b&gt;%1&lt;/b&gt;網站從清單中移除嗎？</translation>
+        <translation>確定要將 &lt;b&gt;%1&lt;/b&gt; 網站從清單中移除嗎？</translation>
     </message>
     <message>
         <source>Wikipedia</source>
@@ -3528,7 +3737,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>確定要將&lt;b&gt;%1&lt;/b&gt;資料夾從清單中移除嗎？</translation>
+        <translation>確定要將 &lt;b&gt;%1&lt;/b&gt; 資料夾從清單中移除嗎？</translation>
     </message>
     <message>
         <source>Japanese Romaji</source>
@@ -3546,11 +3755,11 @@ GoldenDict 尚不支援此方案。</translation>
     </message>
     <message>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>維基百科（MediaWik）站台：</translation>
+        <translation>維基百科 (MediaWik) 網站：</translation>
     </message>
     <message>
         <source>Sound Dirs</source>
-        <translation>音訊檔案資料夾</translation>
+        <translation>音訊檔資料夾</translation>
     </message>
     <message>
         <source>The most widely used method of transcription of Japanese,
@@ -3585,7 +3794,7 @@ GoldenDict 尚不支援此方案。</translation>
     </message>
     <message>
         <source>&amp;Change...</source>
-        <translation>變更...(&amp;C)</translation>
+        <translation>變更(&amp;C)...</translation>
     </message>
     <message>
         <source>Katakana</source>
@@ -3609,7 +3818,7 @@ GoldenDict 尚不支援此方案。</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
-        <translation>新增...(&amp;A)</translation>
+        <translation>新增(&amp;A)...</translation>
     </message>
     <message>
         <source>Choose a directory</source>
@@ -3669,7 +3878,7 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>從 &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt; 獲取即時發音。這個網站使得人們可以記錄並分享單字發音。你可以從 GoldenDict 中聽這些發音。</translation>
+        <translation>從 &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt; 獲取即時發音。這個網站可以讓人們記錄並分享單字發音。您可以從 GoldenDict 中聆聽這些發音。</translation>
     </message>
     <message>
         <source>Enable pronunciations from Forvo</source>
@@ -3683,8 +3892,8 @@ of the appropriate groups to use them.</source>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>當前，使用 Forvo 需要一個 API key。若此處空白將使用以後可能
-失效的預設 key，否則請在該網站註冊以獲取你自己的 key.</translation>
+        <translation>目前使用 Forvo 需要一個 API key。若此處空白將使用未來可能
+會失效的預設 key，或者請在該網站註冊以獲取您自己的 key。</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3702,15 +3911,15 @@ p, li { white-space: pre-wrap; }
 &lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;從&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;這裡&lt;/span&gt;&lt;/a&gt;獲取屬於你的 key, 或是保持空白以使用預設 key.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;從&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;這裡&lt;/span&gt;&lt;/a&gt;獲取屬於您的 key, 或是保持空白以使用預設 key.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>
-        <translation>語言程式碼（用逗號分隔）：</translation>
+        <translation>語言程式碼 (用逗號分隔)：</translation>
     </message>
     <message>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>你所需要的語言程式碼清單。例如：&quot;en, ru&quot;.</translation>
+        <translation>您所需要的語言程式碼清單。例如：&quot;en, ru&quot;。</translation>
     </message>
     <message>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
@@ -3722,7 +3931,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>(not available in portable version)</source>
-        <translation>（免安裝版中不可用）</translation>
+        <translation>(免安裝版中不可用)</translation>
     </message>
     <message>
         <source>Programs</source>
@@ -3730,7 +3939,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>將程式&lt;b&gt;%1&lt;/b&gt; 從清單移除？</translation>
+        <translation>將程式 &lt;b&gt;%1&lt;/b&gt; 從清單移除？</translation>
     </message>
     <message>
         <source>Belarusian transliteration</source>
@@ -3738,7 +3947,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation>在&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;此&lt;/a&gt;取得個人金鑰，或是留白以使用預設值。</translation>
+        <translation>可以從&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;這裡&lt;/a&gt;取得您的個人金鑰，或是留白以使用預設值。</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
@@ -3756,7 +3965,7 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>DICT servers</source>
-        <translation>Dict 伺服器</translation>
+        <translation>DICT 伺服器</translation>
     </message>
     <message>
         <source>DICT servers:</source>
@@ -3774,7 +3983,7 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation>選擇音訊引擎：</translation>
+        <translation>選擇語音引擎：</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -3790,7 +3999,7 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation>可用的音訊引擎：</translation>
+        <translation>可用的語音引擎：</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
@@ -3806,7 +4015,7 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation>沒有可用的文字轉語音聲音</translation>
+        <translation>沒有可用的 TTS 文字轉語音引擎</translation>
     </message>
     <message>
         <source>Confirm removal</source>
@@ -3814,11 +4023,11 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>確定要將&lt;b&gt;%1&lt;/b&gt;音訊引擎從清單中移除嗎？</translation>
+        <translation>確定要將 &lt;b&gt;%1&lt;/b&gt; 語音引擎從清單中移除嗎？</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation>找不到可用的文字轉語音聲音。&lt;br&gt;請檢查您的電腦是否已經安裝文字轉語音引擎。</translation>
+        <translation>找不到可用的 TTS 文字轉語音引擎。&lt;br&gt;請檢查您的電腦是否已經安裝 TTS 文字轉語音引擎。</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -3848,7 +4057,7 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation>已啟用</translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <source>Name</source>
@@ -3871,15 +4080,23 @@ Big-5 使用%GDBIG5%，Big5-HKSCS 使用 %GDBIG5HKSCS% ，GBK 和 GB18030 使用
     </message>
     <message>
         <source>Address</source>
-        <translation>位址</translation>
+        <translation>網址</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation>已啟用</translation>
+        <translation>啟用</translation>
     </message>
     <message>
         <source>Icon</source>
         <translation>圖示</translation>
+    </message>
+    <message>
+        <source>Insert article as link inside &lt;iframe&gt; tag</source>
+        <translation>在框架標籤內顯示條目(優先模式)</translation>
+    </message>
+    <message>
+        <source>As link</source>
+        <translation>連結</translation>
     </message>
 </context>
 <context>

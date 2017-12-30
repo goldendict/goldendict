@@ -266,6 +266,7 @@ protected:
   bool dictionaryIconLoaded;
   bool can_FTS;
   QAtomicInt FTS_index_completed;
+  bool synonymSearchEnabled;
 
   // Load user icon if it exist
   // By default set icon to empty
@@ -395,7 +396,8 @@ public:
   virtual sptr< DataRequest > getSearchResults( QString const & searchString,
                                                 int searchMode, bool matchCase,
                                                 int distanceBetweenWords,
-                                                int maxArticlesPerDictionary );
+                                                int maxArticlesPerDictionary,
+                                                bool ignoreWordsOrder );
 
   // Return dictionary description if presented
   virtual QString const& getDescription();
@@ -432,6 +434,10 @@ public:
   /// Retrieve all dictionary headwords
   virtual bool getHeadwords( QStringList & )
   { return false; }
+
+  /// Enable/disable search via synonyms
+  void setSynonymSearchEnabled( bool enabled )
+  { synonymSearchEnabled = enabled; }
 
   virtual ~Class()
   {}

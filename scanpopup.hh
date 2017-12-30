@@ -15,6 +15,9 @@
 #include "history.hh"
 #include "dictionarybar.hh"
 #include "mainstatusbar.hh"
+#ifdef HAVE_X11
+#include "scanflag.hh"
+#endif
 
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
@@ -42,6 +45,7 @@ public:
   /// Applies current zoom factor to the popup's view. Should be called when
   /// it's changed.
   void applyZoomFactor();
+  void applyWordsZoomLevel();
   /// Translate the word
   void translateWord( QString const & word );
 
@@ -67,6 +71,16 @@ signals:
   void openDictionaryFolder( QString const & id );
   /// Put translated word into history
   void sendWordToHistory( QString const & word );
+  /// Put translated word into Favorites
+  void sendWordToFavorites( QString const & word, unsigned groupId );
+  /// Check is word already presented in Favorites
+  bool isWordPresentedInFavorites( QString const & word, unsigned groupId );
+
+#ifdef HAVE_X11
+  /// Interaction with scan flag window
+  void showScanFlag( bool forcePopup );
+  void hideScanFlag();
+#endif
 
 #ifdef Q_OS_WIN32
   /// Ask for source window is current translate tab
@@ -82,6 +96,12 @@ public slots:
   void translateWordFromSelection();
   /// From the dictionary bar.
   void editGroupRequested();
+
+  void setGroupByName( QString const & name );
+
+#ifdef HAVE_X11
+  void showEngagePopup();
+#endif
 
 private:
 
@@ -113,6 +133,13 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
+  /// Fonts saved before words zooming is in effect, so it could be reset back.
+  QFont wordListDefaultFont, translateLineDefaultFont;
+
+#ifdef HAVE_X11
+  ScanFlag * scanFlag;
+  QTimer delayTimer;
+#endif
 
   bool mouseEnteredOnce;
   bool mouseIntercepted;
@@ -125,6 +152,8 @@ private:
   QTimer altModeExpirationTimer, altModePollingTimer; // Timers for alt mode
 
   QTimer mouseGrabPollTimer;
+
+  QIcon starIcon, blueStarIcon;
 
   void handleInputWord( QString const & , bool forcePopup = false );
   void engagePopup( bool forcePopup, bool giveFocus = false );
@@ -162,6 +191,7 @@ private slots:
   void on_showDictionaryBar_clicked( bool checked );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
   void on_sendWordButton_clicked();
+  void on_sendWordToFavoritesButton_clicked();
   void on_goBackButton_clicked();
   void on_goForwardButton_clicked();
 
@@ -171,7 +201,7 @@ private slots:
 
   /// Called repeatedly once the popup is initially engaged and we monitor the
   /// mouse as it may move away from the window. This simulates mouse grab, in
-  /// essense, but seems more reliable. Once the mouse enters the window, the
+  /// essence, but seems more reliable. Once the mouse enters the window, the
   /// polling stops.
   void mouseGrabPoll();
 
@@ -190,6 +220,14 @@ private slots:
   void focusTranslateLine();
 
   void typingEvent( QString const & );
+
+  void alwaysOnTopClicked( bool checked );
+
+  void titleChanged( ArticleView *, QString const & title );
+
+#ifdef HAVE_X11
+  void delayShow();
+#endif
 };
 
 #endif

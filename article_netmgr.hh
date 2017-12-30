@@ -5,6 +5,14 @@
 #define __ARTICLE_NETMGR_HH_INCLUDED__
 
 #include <QtNetwork>
+
+#if QT_VERSION >= 0x050200  // Qt 5.2+
+#include <QWebSecurityOrigin>
+#include <QSet>
+#include <QMap>
+#include <QPair>
+#endif
+
 #include "dictionary.hh"
 #include "article_maker.hh"
 
@@ -13,13 +21,116 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
+#if QT_VERSION >= 0x050200  // Qt 5.2+
+
+// White lists for QWebSecurityOrigin
+struct SecurityWhiteList
+{
+  QWebSecurityOrigin * origin;
+  QString originUri;
+  QSet< QPair< QString, QString > > hostsToAccess;
+
+  SecurityWhiteList() :
+    origin( 0 )
+  {}
+
+  ~SecurityWhiteList()
+  { swlDelete(); }
+
+  SecurityWhiteList( SecurityWhiteList const & swl ) :
+    origin( 0 )
+  { swlCopy( swl ); }
+
+  SecurityWhiteList & operator=( SecurityWhiteList const & swl );
+  QWebSecurityOrigin * setOrigin( QUrl const & url );
+
+private:
+  void swlCopy( SecurityWhiteList const & swl );
+  void swlDelete();
+};
+
+typedef QMap< QString, SecurityWhiteList > Origins;
+
+// Proxy class for QNetworkReply to remove X-Frame-Options header
+// It allow to show websites in <iframe> tag like Qt 4.x
+
+class AllowFrameReply : public QNetworkReply
+{
+  Q_OBJECT
+private:
+  QNetworkReply * baseReply;
+  QByteArray buffer;
+
+  AllowFrameReply();
+  AllowFrameReply( AllowFrameReply const & );
+
+public:
+  explicit AllowFrameReply( QNetworkReply * _reply );
+  ~AllowFrameReply()
+  { delete baseReply; }
+
+  // QNetworkReply virtual functions
+  void setReadBufferSize( qint64 size );
+  void close()
+  { baseReply->close(); }
+
+  // QIODevice virtual functions
+  qint64 bytesAvailable() const;
+  bool atEnd() const
+  { return baseReply->atEnd(); }
+  qint64 bytesToWrite() const
+  { return baseReply->bytesToWrite(); }
+  bool canReadLine() const
+  { return baseReply->canReadLine(); }
+  bool isSequential() const
+  { return baseReply->isSequential(); }
+  bool waitForReadyRead( int msecs )
+  { return baseReply->waitForReadyRead( msecs ); }
+  bool waitForBytesWritten( int msecs )
+  { return baseReply->waitForBytesWritten( msecs ); }
+  bool reset()
+  { return baseReply->reset(); }
+
+public slots:
+
+  // Own AllowFrameReply slots
+  void applyMetaData();
+  void applyError( QNetworkReply::NetworkError code );
+  void readDataFromBase();
+
+  // Redirect QNetworkReply slots
+  virtual void abort()
+  { baseReply->abort(); }
+  virtual void ignoreSslErrors()
+  { baseReply->ignoreSslErrors(); }
+
+protected:
+  // QNetworkReply virtual functions
+  void ignoreSslErrorsImplementation( const QList< QSslError > & errors )
+  { baseReply->ignoreSslErrors( errors ); }
+  void setSslConfigurationImplementation( const QSslConfiguration & configuration )
+  { baseReply->setSslConfiguration( configuration ); }
+  void sslConfigurationImplementation( QSslConfiguration & configuration ) const
+  { configuration = baseReply->sslConfiguration(); }
+
+  // QIODevice virtual functions
+  qint64 readData( char * data, qint64 maxSize );
+  qint64 readLineData( char * data, qint64 maxSize )
+  { return baseReply->readLine( data, maxSize ); }
+  qint64 writeData( const char * data, qint64 maxSize )
+  { return baseReply->write( data, maxSize ); }
+};
+#endif
+
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-
+#if QT_VERSION >= 0x050200  // Qt 5.2+
+  Origins allOrigins;
+#endif
 public:
 
   ArticleNetworkAccessManager( QObject * parent,

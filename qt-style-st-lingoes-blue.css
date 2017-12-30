@@ -73,7 +73,7 @@ QMainWindow::separator {
   margin: 2px;
 } 
 
-MainWindow #historyPane #historyList {
+MainWindow #historyPane #historyList, MainWindow #favoritesPane #favoritesTree {
    background: 	#EAF0F8; 
    color: #52627C;
 }

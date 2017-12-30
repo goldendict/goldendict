@@ -25,6 +25,7 @@
 #include <QRegExp>
 
 #include "qt4x5.hh"
+#include "zipfile.hh"
 
 namespace Dictionary {
 
@@ -170,7 +171,7 @@ sptr< DataRequest > Class::getResource( string const & /*name*/ )
   return new DataRequestInstant( false );
 }
 
-sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int )
+sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool )
 {
   return new DataRequestInstant( false );
 }
@@ -298,7 +299,10 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
       // @ rules
 
       int n = currentPos;
-      if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0 )
+      if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0
+          || css.mid( currentPos, 10 ).compare( "@font-face", Qt::CaseInsensitive ) == 0
+          || css.mid( currentPos, 10 ).compare( "@namespace", Qt::CaseInsensitive ) == 0
+          || css.mid( currentPos, 8 ).compare( "@charset", Qt::CaseInsensitive ) == 0 )
       {
         // Copy rule as is.
         n = css.indexOf( ';', currentPos );
@@ -351,8 +355,31 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
       continue;
     }
 
-    if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' )
+    if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' || ch == ':' )
     {
+      if( ch.isLetter() || ch == '*' )
+      {
+        // Check for namespace prefix
+        QChar chr;
+        for( int i = currentPos; i < css.length(); i++ )
+        {
+          chr = css[ i ];
+          if( chr.isLetterOrNumber() || chr.isMark() || chr == '_' || chr == '-'
+              || ( chr == '*' && i == currentPos ) )
+            continue;
+
+          if( chr == '|' )
+          {
+            // Namespace prefix found, copy it as is
+            newCSS.append( css.mid( currentPos, i - currentPos + 1 ) );
+            currentPos = i + 1;
+          }
+          break;
+        }
+        if ( chr == '|' )
+          continue;
+      }
+
       // This is some selector.
       // We must to add the isolate prefix to it.
 
@@ -443,15 +470,26 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
   for( std::vector< string >::const_iterator i = dictionaryFiles.begin();
        i != dictionaryFiles.end(); ++i )
   {
-    QFileInfo fileInfo( FsEncoding::decode( i->c_str() ) );
+    QString name = FsEncoding::decode( i->c_str() );
+    QFileInfo fileInfo( name );
+    unsigned long ts;
 
     if( fileInfo.isDir() )
       continue;
 
-    if ( !fileInfo.exists() )
-      return true;
-
-    unsigned long ts = fileInfo.lastModified().toTime_t();
+    if( name.toLower().endsWith( ".zip" ) )
+    {
+      ZipFile::SplitZipFile zf( name );
+      if( !zf.exists() )
+        return true;
+      ts = zf.lastModified().toTime_t();
+    }
+    else
+    {
+      if ( !fileInfo.exists() )
+        return true;
+      ts = fileInfo.lastModified().toTime_t();
+    }
 
     if ( ts > lastModified )
       lastModified = ts;

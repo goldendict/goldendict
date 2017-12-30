@@ -126,7 +126,7 @@ int              ao_driver_id(const char *short_name);
 int      ao_default_driver_id(void);
 ao_info       *ao_driver_info(int driver_id);
 ao_info **ao_driver_info_list(int *driver_count);
-char       *ao_file_extension(int driver_id);
+const char *ao_file_extension(int driver_id);
 
 /* miscellaneous */
 int          ao_is_big_endian(void);

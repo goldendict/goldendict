@@ -28,6 +28,8 @@ GroupComboBox::GroupComboBox( QWidget * parent ): QComboBox( parent ),
   connect( &selectPreviousAction, SIGNAL( triggered() ),
            this, SLOT( selectPreviousGroup() ) );
   addAction( &selectPreviousAction );
+
+  setMaxVisibleItems( 30 );
 }
 
 void GroupComboBox::fill( Instances::Groups const & groups )

@@ -7,6 +7,7 @@
 #include <QWebView>
 #include <QMap>
 #include <QUrl>
+#include <QSet>
 #include <list>
 #include "article_netmgr.hh"
 #include "instances.hh"
@@ -46,7 +47,7 @@ class ArticleView: public QFrame
   QUrl resourceDownloadUrl;
 
   /// For resources opened via desktop services
-  QString desktopOpenedTempFile;
+  QSet< QString > desktopOpenedTempFiles;
 
   QAction * dictionaryBarToggled;
   GroupComboBox const * groupComboBox;
@@ -176,8 +177,8 @@ public:
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
 
-  std::vector< ResourceToSaveHandler * > saveResource( const QUrl & url, const QString & fileName );
-  std::vector< ResourceToSaveHandler * > saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
+  ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
+  ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
 
 signals:
 
@@ -281,7 +282,7 @@ private slots:
   void on_ftsSearchNext_clicked();
 
   /// Handles the double-click from the definition.
-  void doubleClicked();
+  void doubleClicked( QPoint pos );
 
   /// Handles audio player error message
   void audioPlayerError( QString const & message );
@@ -364,19 +365,22 @@ class ResourceToSaveHandler: public QObject
   Q_OBJECT
 
 public:
-  explicit ResourceToSaveHandler( ArticleView * view, sptr< Dictionary::DataRequest > req,
-                                  QString const & fileName );
+  explicit ResourceToSaveHandler( ArticleView * view, QString const & fileName );
+  void addRequest( sptr< Dictionary::DataRequest > req );
+  bool isEmpty()
+  { return downloadRequests.empty(); }
 
 signals:
   void done();
   void statusBarMessage( QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap() );
 
-private slots:
+public slots:
   void downloadFinished();
 
 private:
-  sptr< Dictionary::DataRequest > req;
+  std::list< sptr< Dictionary::DataRequest > > downloadRequests;
   QString fileName;
+  bool alreadyDone;
 };
 
 #endif

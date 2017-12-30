@@ -79,21 +79,9 @@ win32 {
             LIBS += -L$${PWD}/winlibs/lib
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-	
-	isEmpty(HUNSPELL_LIB) {
-          CONFIG(gcc48) {
-            LIBS += -lhunspell-1.3.2
-          } else {
-            greaterThan(QT_MAJOR_VERSION, 4) {
-              lessThan(QT_MINOR_VERSION, 1) {
-                LIBS += -lhunspell-1.3-sjlj
-              } else {
-                LIBS += -lhunspell-1.3-dw2
-              }
-            } else {
-              LIBS += -lhunspell-1.3.2
-            }
-          }
+
+        isEmpty(HUNSPELL_LIB) {
+          LIBS += -lhunspell-1.6.1
         } else {
           LIBS += -l$$HUNSPELL_LIB
         }
@@ -201,7 +189,7 @@ mac {
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.2 \
+        -lhunspell-1.6.1 \
         -llzo2
     isEmpty(DISABLE_INTERNAL_PLAYER) {
         LIBS += -lao \
@@ -359,7 +347,10 @@ HEADERS += folding.hh \
     dictserver.hh \
     helpwindow.hh \
     slob.hh \
-    ripemd.hh
+    ripemd.hh \
+    gls.hh \
+    splitfile.hh \
+    favoritespanewidget.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -483,7 +474,10 @@ SOURCES += folding.cc \
     dictserver.cc \
     helpwindow.cc \
     slob.cc \
-    ripemd.cc
+    ripemd.cc \
+    gls.cc \
+    splitfile.cc \
+    favoritespanewidget.cc
 
 win32 {
     FORMS   += texttospeechsource.ui
@@ -511,6 +505,12 @@ mac {
                speechclient.hh
     FORMS   += texttospeechsource.ui
     SOURCES += texttospeechsource.cc
+}
+
+unix:!mac {
+    HEADERS += scanflag.hh
+    FORMS   += scanflag.ui
+    SOURCES += scanflag.cc
 }
 
 CONFIG( zim_support ) {
@@ -556,6 +556,10 @@ CONFIG( chinese_conversion_support ) {
   }
 }
 
+CONFIG( old_hunspell ) {
+  DEFINES += OLD_HUNSPELL_INTERFACE
+}
+
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \
@@ -591,7 +595,9 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/sv_SE.ts \
     locale/tk_TM.ts \
     locale/fa_IR.ts \
-    locale/mk_MK.ts
+    locale/mk_MK.ts \
+    locale/eo_EO.ts \
+    locale/fi_FI.ts
 
 # Build version file
 !isEmpty( hasGit ) {

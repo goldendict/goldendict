@@ -71,7 +71,7 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -178,7 +178,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
-                                                            int maxResults );
+                                                            int maxResults,
+                                                            bool ignoreWordsOrder );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -189,6 +190,9 @@ public:
               && !fts.disabledTypes.contains( "XDXF", Qt::CaseInsensitive )
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
+
+  virtual uint32_t getFtsIndexVersion()
+  { return 1; }
 
 protected:
 
@@ -418,9 +422,10 @@ void XdxfDictionary::getArticleText( uint32_t articleAddress, QString & headword
 sptr< Dictionary::DataRequest > XdxfDictionary::getSearchResults( QString const & searchString,
                                                                   int searchMode, bool matchCase,
                                                                   int distanceBetweenWords,
-                                                                  int maxResults )
+                                                                  int maxResults,
+                                                                  bool ignoreWordsOrder )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
 }
 
 /// XdxfDictionary::getArticle()
@@ -736,7 +741,32 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
     maxSize = 1;
 
   // The returning value translates directly to QIODevice semantics
-  return gzread( gz, data, maxSize );
+  int n = gzread( gz, data, maxSize );
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+  // With QT 5.x QXmlStreamReader ask one byte instead of one UTF-8 char.
+  // We read and return all bytes for char.
+
+  if( n == 1 )
+  {
+    char ch = *data;
+    int addBytes = 0;
+    if( ch & 0x80 )
+    {
+      if( ( ch & 0xF8 ) == 0xF0 )
+        addBytes = 3;
+      else if( ( ch & 0xF0 ) == 0xE0 )
+        addBytes = 2;
+      else if( ( ch & 0xE0 ) == 0xC0 )
+        addBytes = 1;
+    }
+
+    if( addBytes )
+      n += gzread( gz, data + 1, addBytes );
+  }
+#endif
+
+  return n;
 }
 
 char * GzippedFile::readDataArray( unsigned long startPos, unsigned long size )
@@ -880,7 +910,7 @@ void indexArticle( GzippedFile & gzFile,
       if ( words.empty() )
       {
         // Nothing to index, this article didn't have any tags
-        qWarning( "Warning: no <k> tags found in an article at offset 0x%x, article skipped.\n",
+        gdWarning( "No <k> tags found in an article at offset 0x%x, article skipped.\n",
                   (unsigned) articleOffset );
       }
       else
@@ -1136,10 +1166,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       string zipFileName;
 
-      if ( File::tryPossibleName( baseName + ".xdxf.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".xdxf.dz.files.zip", zipFileName ) ||
-           File::tryPossibleName( baseName + ".XDXF.FILES.ZIP", zipFileName ) ||
-           File::tryPossibleName( baseName + ".XDXF.DZ.FILES.ZIP", zipFileName ) )
+      if ( File::tryPossibleZipName( baseName + ".xdxf.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".xdxf.dz.files.zip", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".XDXF.FILES.ZIP", zipFileName ) ||
+           File::tryPossibleZipName( baseName + ".XDXF.DZ.FILES.ZIP", zipFileName ) )
         dictFiles.push_back( zipFileName );
 
       string dictId = Dictionary::makeDictionaryId( dictFiles );
@@ -1434,7 +1464,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
         if ( stream.hasError() )
         {
-          gdWarning( "Warning: %s had a parse error %s at line %lu, and therefore was indexed only up to the point of error.",
+          gdWarning( "%s had a parse error %s at line %lu, and therefore was indexed only up to the point of error.",
                       dictFiles[ 0 ].c_str(), stream.errorString().toUtf8().data(),
                       (unsigned long) stream.lineNumber() );
         }

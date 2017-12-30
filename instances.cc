@@ -15,6 +15,7 @@ Group::Group( Config::Group const & cfgGroup,
   id( cfgGroup.id ),
   name( cfgGroup.name ),
   icon( cfgGroup.icon ),
+  favoritesFolder( cfgGroup.favoritesFolder ),
   shortcut( cfgGroup.shortcut )
 {
   if ( !cfgGroup.iconData.isEmpty() )
@@ -82,6 +83,7 @@ Config::Group Group::makeConfigGroup()
   result.name = name;
   result.icon = icon;
   result.shortcut = shortcut;
+  result.favoritesFolder = favoritesFolder;
 
   if ( !iconData.isNull() )
   {

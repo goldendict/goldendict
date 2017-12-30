@@ -1,6 +1,5 @@
-/* libtiff/tiffconf.h.  Generated from tiffconf.h.in by configure.  */
 /*
-  Configuration defines for installed libtiff.
+  Configuration defines for Qt.
   This file maintained for backward compatibility. Do not use definitions
   from this file in your programs.
 */
@@ -8,32 +7,38 @@
 #ifndef _TIFFCONF_
 #define _TIFFCONF_
 
+#include <qglobal.h>
+
 /* Signed 16-bit type */
-#define TIFF_INT16_T signed short
+#define TIFF_INT16_T qint16
 
 /* Signed 32-bit type */
-#define TIFF_INT32_T signed int
+#define TIFF_INT32_T qint32
 
 /* Signed 64-bit type */
-#define TIFF_INT64_T signed long long
+#define TIFF_INT64_T qint64
 
 /* Signed 8-bit type */
-#define TIFF_INT8_T signed char
+#define TIFF_INT8_T qint8
 
 /* Unsigned 16-bit type */
-#define TIFF_UINT16_T unsigned short
+#define TIFF_UINT16_T quint16
 
 /* Unsigned 32-bit type */
-#define TIFF_UINT32_T unsigned int
+#define TIFF_UINT32_T quint32
 
 /* Unsigned 64-bit type */
-#define TIFF_UINT64_T unsigned long long
+#define TIFF_UINT64_T quint64
 
 /* Unsigned 8-bit type */
-#define TIFF_UINT8_T unsigned char
+#define TIFF_UINT8_T quint8
 
 /* Signed size type */
-#define TIFF_SSIZE_T signed long
+#if QT_POINTER_SIZE == 4
+#define TIFF_SSIZE_T qint32
+#else
+#define TIFF_SSIZE_T qint64
+#endif
 
 /* Pointer difference type */
 #define TIFF_PTRDIFF_T ptrdiff_t
@@ -58,16 +63,17 @@
 
 /* Native cpu byte order: 1 if big-endian (Motorola) or 0 if little-endian
    (Intel) */
+#if (Q_BYTE_ORDER == Q_BIG_ENDIAN)
+#define HOST_BIGENDIAN 1
+#else
 #define HOST_BIGENDIAN 0
+#endif
 
 /* Support CCITT Group 3 & 4 algorithms */
 #define CCITT_SUPPORT 1
 
 /* Support JPEG compression (requires IJG JPEG library) */
 /* #undef JPEG_SUPPORT */
-
-/* Support JBIG compression (requires JBIG-KIT library) */
-/* #undef JBIG_SUPPORT */
 
 /* Support LogLuv high dynamic range encoding */
 #define LOGLUV_SUPPORT 1

@@ -57,18 +57,42 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     builtInCssFile.open( QFile::ReadOnly );
     QByteArray css = builtInCssFile.readAll();
 
+    if( !css.isEmpty() )
+    {
+      result += "\n<!-- Built-in css -->\n";
+      result += "<style type=\"text/css\" media=\"all\">\n";
+      result += css.data();
+      result += "</style>\n";
+    }
+
     if ( displayStyle.size() )
     {
       // Load an additional stylesheet
       QFile builtInCssFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
       builtInCssFile.open( QFile::ReadOnly );
-      css += builtInCssFile.readAll();
+      css = builtInCssFile.readAll();
+      if( !css.isEmpty() )
+      {
+        result += "<!-- Built-in style css -->\n";
+        result += "<style type=\"text/css\" media=\"all\">\n";
+        result += css.data();
+        result += "</style>\n";
+      }
     }
 
     QFile cssFile( Config::getUserCssFileName() );
 
     if ( cssFile.open( QFile::ReadOnly ) )
-      css += cssFile.readAll();
+    {
+      css = cssFile.readAll();
+      if( !css.isEmpty() )
+      {
+        result += "<!-- User css -->\n";
+        result += "<style type=\"text/css\" media=\"all\">\n";
+        result += css.data();
+        result += "</style>\n";
+      }
+    }
 
     if( !addonStyle.isEmpty() )
     {
@@ -76,17 +100,27 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
                      + QDir::separator() + "article-style.css";
       QFile addonCss( name );
       if( addonCss.open( QFile::ReadOnly ) )
-        css += addonCss.readAll();
+      {
+        css = addonCss.readAll();
+        if( !css.isEmpty() )
+        {
+          result += "<!-- Addon style css -->\n";
+          result += "<style type=\"text/css\" media=\"all\">\n";
+          result += css.data();
+          result += "</style>\n";
+        }
+      }
     }
-
-    result += "<style type=\"text/css\" media=\"all\">\n";
-    result += css.data();
 
     // Turn on/off expanding of article optional parts
     if( expandOptionalParts )
+    {
+      result += "<!-- Expand optional parts css -->\n";
+      result += "<style type=\"text/css\" media=\"all\">\n";
       result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none;\n}\n";
+      result += "</style>\n";
+    }
 
-    result += "</style>\n";
   }
 
   // Add print-only css
@@ -95,11 +129,28 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     QFile builtInCssFile( ":/article-style-print.css" );
     builtInCssFile.open( QFile::ReadOnly );
     QByteArray css = builtInCssFile.readAll();
+    if( !css.isEmpty() )
+    {
+      result += "<!-- Built-in print css -->\n";
+      result += "<style type=\"text/css\" media=\"print\">\n";
+      result += css.data();
+      result += "</style>\n";
+    }
 
     QFile cssFile( Config::getUserCssPrintFileName() );
 
     if ( cssFile.open( QFile::ReadOnly ) )
-      css += cssFile.readAll();
+    {
+      css = cssFile.readAll();
+      if( !css.isEmpty() )
+      {
+        result += "<!-- User print css -->\n";
+        result += "<style type=\"text/css\" media=\"print\">\n";
+        result += css.data();
+        result += "</style>\n";
+        css.clear();
+      }
+    }
 
     if( !addonStyle.isEmpty() )
     {
@@ -107,12 +158,17 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
                      + QDir::separator() + "article-style-print.css";
       QFile addonCss( name );
       if( addonCss.open( QFile::ReadOnly ) )
-        css += addonCss.readAll();
+      {
+        css = addonCss.readAll();
+        if( !css.isEmpty() )
+        {
+          result += "<!-- Addon style print css -->\n";
+          result += "<style type=\"text/css\" media=\"print\">\n";
+          result += css.data();
+          result += "</style>\n";
+        }
+      }
     }
-
-    result += "<style type=\"text/css\" media=\"print\">\n";
-    result += css.data();
-    result += "</style>\n";
   }
 
   result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
@@ -567,7 +623,7 @@ void ArticleRequest::bodyFinished()
 
         if ( closePrevSpan )
         {
-          head += "</span></span><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
+          head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
         else
         {
@@ -619,7 +675,7 @@ void ArticleRequest::bodyFinished()
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
 
-        head += string( "<span class=\"gdarticle" ) +
+        head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
                 ( collapse ? " gdcollapsedarticle" : "" ) +
                 "\" id=\"" + gdFrom +
@@ -645,7 +701,7 @@ void ArticleRequest::bodyFinished()
 
         head += "<div class=\"gddictnamebodyseparator\"></div>";
 
-        head += "<span class=\"gdarticlebody gdlangfrom-";
+        head += "<div class=\"gdarticlebody gdlangfrom-";
         head += LangCoder::intToCode2( activeDict->getLangFrom() ).toLatin1().data();
         head += "\" lang=\"";
         head += LangCoder::intToCode2( activeDict->getLangTo() ).toLatin1().data();
@@ -706,7 +762,7 @@ void ArticleRequest::bodyFinished()
 
       if ( closePrevSpan )
       {
-        footer += "</span></span>";
+        footer += "</div></div>";
         closePrevSpan = false;
       }
 

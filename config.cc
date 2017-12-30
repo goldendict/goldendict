@@ -109,6 +109,9 @@ Preferences::Preferences():
   scanPopupUseIAccessibleEx( true ),
   scanPopupUseGDMessage( true ),
   scanToMainWindow( false ),
+#ifdef HAVE_X11
+  showScanFlag( false ),
+#endif
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
 #ifndef DISABLE_INTERNAL_PLAYER
@@ -129,12 +132,15 @@ Preferences::Preferences():
   storeHistory( 1 ),
   alwaysExpandOptionalParts( false )
 , historyStoreInterval( 0 )
+, favoritesStoreInterval( 0 )
+, confirmFavoritesDeletion( true )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
 , maxDictionaryRefsInContextMenu ( 20 )
 #ifndef Q_WS_X11
 , trackClipboardChanges( false )
 #endif
+, synonymSearchEnabled( true )
 {
 }
 
@@ -203,11 +209,11 @@ WebSites makeDefaultWebSites()
 {
   WebSites ws;
 
-  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "https://www.google.com/dictionary?aq=f&langpair=en|en&q=%GDWORD%&hl=en", false, "" ) );
-  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "https://www.urbandictionary.com/define.php?term=%GDWORD%", false, "" ) );
-  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "https://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "" ) );
-  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "" ) );
-  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "" ) );
+  ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "https://www.google.com/search?q=define:%GDWORD%&hl=en", false, "", true ) );
+  ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "https://www.urbandictionary.com/define.php?term=%GDWORD%", false, "", true ) );
+  ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "https://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "", true ) );
+  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "", true ) );
+  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "", true ) );
 
   return ws;
 }
@@ -257,6 +263,7 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   g.name = grp.attribute( "name" );
   g.icon = grp.attribute( "icon" );
+  g.favoritesFolder = grp.attribute( "favoritesFolder" );
 
   if ( !grp.attribute( "iconData" ).isEmpty() )
     g.iconData = QByteArray::fromBase64( grp.attribute( "iconData" ).toLatin1() );
@@ -634,6 +641,7 @@ Class load() throw( exError )
       w.url = ws.attribute( "url" );
       w.enabled = ( ws.attribute( "enabled" ) == "1" );
       w.iconFilename = ws.attribute( "icon" );
+      w.inside_iframe = ( ws.attribute( "inside_iframe", "1" ) == "1" );
 
       c.webSites.push_back( w );
     }
@@ -753,6 +761,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "scanPopupAltModeSecs" ).isNull() )
       c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
     c.preferences.scanToMainWindow = ( preferences.namedItem( "scanToMainWindow" ).toElement().text() == "1" );
+#ifdef HAVE_X11
+    c.preferences.showScanFlag= ( preferences.namedItem( "showScanFlag" ).toElement().text() == "1" );
+#endif
     c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
     c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
     c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
@@ -818,6 +829,12 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "historyStoreInterval" ).isNull() )
       c.preferences.historyStoreInterval = preferences.namedItem( "historyStoreInterval" ).toElement().text().toUInt() ;
 
+    if ( !preferences.namedItem( "favoritesStoreInterval" ).isNull() )
+      c.preferences.favoritesStoreInterval = preferences.namedItem( "favoritesStoreInterval" ).toElement().text().toUInt() ;
+
+    if ( !preferences.namedItem( "confirmFavoritesDeletion" ).isNull() )
+      c.preferences.confirmFavoritesDeletion = ( preferences.namedItem( "confirmFavoritesDeletion" ).toElement().text() == "1" );
+
     if ( !preferences.namedItem( "collapseBigArticles" ).isNull() )
       c.preferences.collapseBigArticles = ( preferences.namedItem( "collapseBigArticles" ).toElement().text() == "1" );
 
@@ -831,6 +848,9 @@ Class load() throw( exError )
     if ( !preferences.namedItem( "trackClipboardChanges" ).isNull() )
       c.preferences.trackClipboardChanges = ( preferences.namedItem( "trackClipboardChanges" ).toElement().text() == "1" );
 #endif
+
+    if ( !preferences.namedItem( "synonymSearchEnabled" ).isNull() )
+      c.preferences.synonymSearchEnabled = ( preferences.namedItem( "synonymSearchEnabled" ).toElement().text() == "1" );
 
     QDomNode fts = preferences.namedItem( "fullTextSearch" );
 
@@ -863,6 +883,9 @@ Class load() throw( exError )
       if ( !fts.namedItem( "enabled" ).isNull() )
         c.preferences.fts.enabled = ( fts.namedItem( "enabled" ).toElement().text() == "1" );
 
+      if ( !fts.namedItem( "ignoreWordsOrder" ).isNull() )
+        c.preferences.fts.ignoreWordsOrder = ( fts.namedItem( "ignoreWordsOrder" ).toElement().text() == "1" );
+
       if ( !fts.namedItem( "maxDictionarySize" ).isNull() )
         c.preferences.fts.maxDictionarySize = fts.namedItem( "maxDictionarySize" ).toElement().text().toUInt();
     }
@@ -883,6 +906,8 @@ Class load() throw( exError )
     c.popupWindowGeometry = QByteArray::fromBase64( popupWindowGeometry.toElement().text().toLatin1() );
 
   c.pinPopupWindow = ( root.namedItem( "pinPopupWindow" ).toElement().text() == "1" );
+
+  c.popupWindowAlwaysOnTop = ( root.namedItem( "popupWindowAlwaysOnTop" ).toElement().text() == "1" );
 
   QDomNode mainWindowState = root.namedItem( "mainWindowState" );
 
@@ -984,6 +1009,9 @@ Class load() throw( exError )
     }
   }
 
+  if ( !root.namedItem( "maxHeadwordsToExpand" ).isNull() )
+    c.maxHeadwordsToExpand = root.namedItem( "maxHeadwordsToExpand" ).toElement().text().toUInt();
+
   QDomNode headwordsDialog = root.namedItem( "headwordsDialog" );
 
   if ( !headwordsDialog.isNull() )
@@ -1023,6 +1051,13 @@ void saveGroup( Group const & data, QDomElement & group )
   name.setValue( data.name );
 
   group.setAttributeNode( name );
+
+  if( data.favoritesFolder.size() )
+  {
+    QDomAttr folder = dd.createAttribute( "favoritesFolder" );
+    folder.setValue( data.favoritesFolder );
+    group.setAttributeNode( folder );
+  }
 
   if ( data.icon.size() )
   {
@@ -1353,6 +1388,10 @@ void save( Class const & c ) throw( exError )
       QDomAttr icon = dd.createAttribute( "icon" );
       icon.setValue( i->iconFilename );
       ws.setAttributeNode( icon );
+
+      QDomAttr inside_iframe = dd.createAttribute( "inside_iframe" );
+      inside_iframe.setValue( i->inside_iframe ? "1" : "0" );
+      ws.setAttributeNode( inside_iframe );
     }
   }
 
@@ -1597,6 +1636,12 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.scanToMainWindow ? "1":"0" ) );
     preferences.appendChild( opt );
 
+#ifdef HAVE_X11
+    opt = dd.createElement( "showScanFlag" );
+    opt.appendChild( dd.createTextNode( c.preferences.showScanFlag? "1":"0" ) );
+    preferences.appendChild( opt );
+#endif
+
     opt = dd.createElement( "scanPopupUseUIAutomation" );
     opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseUIAutomation ? "1":"0" ) );
     preferences.appendChild( opt );
@@ -1639,6 +1684,14 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "historyStoreInterval" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.historyStoreInterval ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "favoritesStoreInterval" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.favoritesStoreInterval ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "confirmFavoritesDeletion" );
+    opt.appendChild( dd.createTextNode( c.preferences.confirmFavoritesDeletion ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     {
@@ -1731,6 +1784,11 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.trackClipboardChanges ? "1" : "0" ) );
     preferences.appendChild( opt );
 #endif
+
+    opt = dd.createElement( "synonymSearchEnabled" );
+    opt.appendChild( dd.createTextNode( c.preferences.synonymSearchEnabled ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
     {
       QDomNode hd = dd.createElement( "fullTextSearch" );
       preferences.appendChild( hd );
@@ -1771,6 +1829,10 @@ void save( Class const & c ) throw( exError )
       opt.appendChild( dd.createTextNode( c.preferences.fts.enabled ? "1" : "0" ) );
       hd.appendChild( opt );
 
+      opt = dd.createElement( "ignoreWordsOrder" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.ignoreWordsOrder ? "1" : "0" ) );
+      hd.appendChild( opt );
+
       opt = dd.createElement( "maxDictionarySize" );
       opt.appendChild( dd.createTextNode( QString::number( c.preferences.fts.maxDictionarySize ) ) );
       hd.appendChild( opt );
@@ -1797,6 +1859,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "pinPopupWindow" );
     opt.appendChild( dd.createTextNode( c.pinPopupWindow ? "1" : "0" ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "popupWindowAlwaysOnTop" );
+    opt.appendChild( dd.createTextNode( c.popupWindowAlwaysOnTop ? "1" : "0" ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "mainWindowState" );
@@ -1913,6 +1979,10 @@ void save( Class const & c ) throw( exError )
     opt = dd.createElement( "maxHeadwordSize" );
     opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordSize ) ) );
     root.appendChild( opt );
+
+    opt = dd.createElement( "maxHeadwordsToExpand" );
+    opt.appendChild( dd.createTextNode( QString::number( c.maxHeadwordsToExpand ) ) );
+    root.appendChild( opt );
   }
 
   {
@@ -1980,6 +2050,11 @@ QString getPidFileName() throw( exError )
 QString getHistoryFileName() throw( exError )
 {
   return getHomeDir().filePath( "history" );
+}
+
+QString getFavoritiesFileName() throw( exError )
+{
+  return getHomeDir().filePath( "favorites" );
 }
 
 QString getUserCssFileName() throw( exError )
