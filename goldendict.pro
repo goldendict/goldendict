@@ -461,6 +461,7 @@ SOURCES += folding.cc \
     delegate.cc \
     zim.cc \
     gddebug.cc \
+    qt4x5.cc \
     gestures.cc \
     tiff.cc \
     dictheadwords.cc \
