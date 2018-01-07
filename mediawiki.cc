@@ -345,17 +345,25 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             // Replace all ":" in links, remove '#' part in links to other articles
             int pos = 0;
             QRegExp regLinks( "<a\\s+href=\"/([^\"]+)\"" );
+            QString articleWithReplacements;
             for( ; ; )
             {
+              int prevPos = pos;
               pos = regLinks.indexIn( articleString, pos );
               if( pos < 0 )
+              {
+                articleWithReplacements += articleString.midRef( prevPos );
                 break;
+              }
+              articleWithReplacements += articleString.midRef( prevPos, pos - prevPos );
               QString link = regLinks.cap( 1 );
 
               if( link.indexOf( "://" ) >= 0 )
               {
                 // External link
+                prevPos = pos;
                 pos += regLinks.cap().size();
+                articleWithReplacements += articleString.midRef( prevPos, pos - prevPos );
                 continue;
               }
 
@@ -370,10 +378,10 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
                 link += QString( "?gdanchor=%1" ).arg( anchor );
               }
 
-              QString newLink = QString( "<a href=\"/%1\"" ).arg( link );
-              articleString.replace( pos, regLinks.cap().size(), newLink );
-              pos += newLink.size();
+              articleWithReplacements += QString( "<a href=\"/%1\"" ).arg( link );
+              pos += regLinks.cap().size();
             }
+            articleString = articleWithReplacements;
 
             QUrl wikiUrl( url );
             wikiUrl.setPath( "/" );
