@@ -7,11 +7,16 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QtXml>
+#include <algorithm>
 #include <list>
 #include "gddebug.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
 #include "qt4x5.hh"
+
+#if IS_QT_5
+#include <QRegularExpression>
+#endif
 
 namespace MediaWiki {
 
@@ -422,6 +427,21 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
                                             QString::fromStdString(addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + "://\\1\"", this->dictPtr->getId() ) +
                                             "<a href=\"" + wikiUrl.scheme().toStdString() + "://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>" ) );
             // In those strings, change any underscores to spaces
+#if IS_QT_5
+            // This implementation outperforms the alternative code below
+            // by an order of magnitude, but does not compile with Qt4.
+            {
+              const QRegularExpression linkRegex( "<a\\s+href=\"[^/:\">#]+" );
+              QRegularExpressionMatchIterator it = linkRegex.globalMatch( articleString );
+              while( it.hasNext() )
+              {
+                const QRegularExpressionMatch match = it.next();
+                std::replace( articleString.begin() + match.capturedStart(),
+                              articleString.begin() + match.capturedEnd(),
+                              '_', ' ' );
+              }
+            }
+#else
             for( ; ; )
             {
               QString before = articleString;
@@ -430,6 +450,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               if ( articleString == before )
                 break;
             }
+#endif
 
             //fix file: url
             Qt4x5::Regex::replace( articleString, "<a\\s+href=\"([^:/\"]*file%3A[^/\"]+\")",
