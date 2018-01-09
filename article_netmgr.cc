@@ -30,7 +30,7 @@ using std::string;
   QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
   {
     swlDelete();
-    originUri = url.toString( QUrl::FullyDecoded );
+    originUri = url.toString( QUrl::PrettyDecoded );
     origin = new QWebSecurityOrigin( url );
     return origin;
   }
@@ -269,7 +269,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
           QUrl frameUrl;
           frameUrl.setScheme( refererUrl.scheme() );
           frameUrl.setHost( refererUrl.host() );
-          QString frameStr = frameUrl.toString( QUrl::FullyDecoded );
+          QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
 
           SecurityWhiteList & value = allOrigins[ frameStr ];
           if( !value.origin )
