@@ -220,6 +220,67 @@ void MediaWikiWordSearchRequest::downloadFinished()
   finish();
 }
 
+class RootBasedUrlFixer
+{
+public:
+  /// Replaces all ":" in links, removes '#' part in links to other articles.
+  static QString fixedArticle( const QString & article );
+
+private:
+  static void fixUrl( QString & url );
+};
+
+QString RootBasedUrlFixer::fixedArticle( const QString & article )
+{
+  QString result;
+  int pos = 0;
+  const QRegExp linkPrefix( "<a\\s+href=\"/" );
+  for( ; ; )
+  {
+    int nextPos = linkPrefix.indexIn( article, pos );
+    if( nextPos < 0 )
+      break;
+    nextPos += linkPrefix.matchedLength();
+    result += article.midRef( pos, nextPos - pos );
+    pos = nextPos;
+
+    nextPos = article.indexOf( '"', pos );
+    if( nextPos < 0 )
+    {
+      gdWarning( "Unterminated link in a MediaWiki article." );
+      break;
+    }
+    QString url = article.mid( pos, nextPos - pos );
+    pos = nextPos;
+
+    fixUrl( url );
+    result += url;
+  }
+  if( pos == 0 )
+    return article; // no links -> article remains unchanged.
+  result += article.midRef( pos );
+
+  return result;
+}
+
+void RootBasedUrlFixer::fixUrl( QString & url )
+{
+  if( url.indexOf( "://" ) >= 0 )
+    return; // External link
+
+  if( url.indexOf( ':' ) >= 0 )
+    url.replace( ':', "%3A" );
+
+  const int n = url.indexOf( '#', 1 );
+  if( n > 0 )
+  {
+    QString anchor = url.mid( n + 1 ).replace( '_', "%5F" );
+    url.truncate( n );
+    url += "?gdanchor=";
+    url += anchor;
+  }
+}
+
 class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 {
   typedef std::list< std::pair< QNetworkReply *, bool > > NetReplies;
@@ -342,46 +403,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
           {
             QString articleString = textNode.toElement().text();
 
-            // Replace all ":" in links, remove '#' part in links to other articles
-            int pos = 0;
-            QRegExp regLinks( "<a\\s+href=\"/([^\"]+)\"" );
-            QString articleWithReplacements;
-            for( ; ; )
-            {
-              int prevPos = pos;
-              pos = regLinks.indexIn( articleString, pos );
-              if( pos < 0 )
-              {
-                articleWithReplacements += articleString.midRef( prevPos );
-                break;
-              }
-              articleWithReplacements += articleString.midRef( prevPos, pos - prevPos );
-              QString link = regLinks.cap( 1 );
-
-              if( link.indexOf( "://" ) >= 0 )
-              {
-                // External link
-                prevPos = pos;
-                pos += regLinks.cap().size();
-                articleWithReplacements += articleString.midRef( prevPos, pos - prevPos );
-                continue;
-              }
-
-              if( link.indexOf( ':' ) >= 0 )
-                link.replace( ':', "%3A" );
-
-              int n = link.indexOf( '#', 1 );
-              if( n > 0 )
-              {
-                QString anchor = link.mid( n + 1 ).replace( '_', "%5F" );
-                link.truncate( n );
-                link += QString( "?gdanchor=%1" ).arg( anchor );
-              }
-
-              articleWithReplacements += QString( "<a href=\"/%1\"" ).arg( link );
-              pos += regLinks.cap().size();
-            }
-            articleString = articleWithReplacements;
+            articleString = RootBasedUrlFixer::fixedArticle( articleString );
 
             QUrl wikiUrl( url );
             wikiUrl.setPath( "/" );
@@ -395,7 +417,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
             reg1.setMinimal( true );
             QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
-            pos = 0;
+            int pos = 0;
             for( ; ; )
             {
               pos = reg1.indexIn( articleString, pos );
