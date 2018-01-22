@@ -54,6 +54,11 @@ using std::pair;
 using std::set;
 using std::string;
 using gd::wstring;
+//( begin: search alternatives 
+using gd::toQString;
+using gd::toWString;
+//) end: search alternatives 
+
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
@@ -1210,12 +1215,265 @@ public:
     isCancelled.ref();
     hasExited.acquire();
   }
+
+//( begin: search alternatives 
+private:
+  vector< wstring > splitIntoWords( wstring const & );
+  vector< WordArticleLink > searchAlternativesSingleWord( wstring const & );
+  vector< WordArticleLink > searchAlternativesPhrasalVerb( vector< wstring > );
+  vector< WordArticleLink > searchAlternatives( wstring const & );
+//) end: search alternatives 
 };
 
 void StardictHeadwordsRequestRunnable::run()
 {
   r.run();
 }
+
+//( begin: search alternatives 
+vector< WordArticleLink > StardictHeadwordsRequest::searchAlternativesSingleWord( wstring const & word )
+{
+  vector< WordArticleLink > chain;
+
+  wstring folded = Folding::apply( word );
+  int lenWord = folded.size();
+
+  if ( 1 < lenWord && folded[lenWord - 1] == L's' )
+  {
+    // books --> book
+    wstring folded_noS = folded.substr( 0, lenWord - 1 );
+    chain = dict.findArticles( folded_noS );
+
+    if ( chain.size() == 0 && 3 < lenWord )
+    {
+      // parties --> party
+      if (folded.substr( lenWord - 3, 3 ) == L"ies" )
+      {
+        wstring folded_noIES = folded.substr( 0, lenWord - 3 ) + L"y";
+        chain = dict.findArticles( folded_noIES );      
+      }
+      if ( chain.size() == 0 && folded.substr( lenWord - 3, 3 ) == L"ves" )
+      {
+        // knives --> knife
+        wstring folded_noVES = folded.substr( 0, lenWord - 3 ) + L"fe";
+        chain = dict.findArticles( folded_noVES );      
+        if ( chain.size() == 0 )
+        {
+          // wolves --> wolf
+          folded_noVES = folded.substr( 0, lenWord - 3 ) + L"f";
+          chain = dict.findArticles( folded_noVES );      
+        }
+      }
+    }
+
+    // classes --> class
+    if ( chain.size() == 0 )
+    {
+      if ( 2 < lenWord && folded.substr( lenWord - 2, 2 ) == L"es" )
+      {
+        wstring folded_noES = folded.substr( 0, lenWord - 2 );
+        chain = dict.findArticles( folded_noES );      
+      }
+    }
+  } 
+  else if ( 2 < lenWord && folded.substr( lenWord - 2, 2 ) == L"ed" )
+  {
+    // worked --> work
+    wstring folded_noED = folded.substr( 0, lenWord - 2 );
+    chain = dict.findArticles( folded_noED );      
+
+    //leveraged --> leverage
+    if ( chain.size() == 0 )
+    {
+    //  if ( 1 < lenWord && folded.substr( lenWord - 1, 1 ) == L"d" )
+    //  {
+      wstring folded_noD = folded.substr( 0, lenWord - 1 );
+      chain = dict.findArticles( folded_noD );      
+    //  }
+    }
+  }
+  else if ( 3 < lenWord && folded.substr( lenWord - 3, 3 ) == L"ing" )
+  {
+    //clanging --> clang
+    wstring folded_noING = folded.substr( 0, lenWord - 3 );
+    chain = dict.findArticles( folded_noING );    
+
+    //icing --> ice
+    if ( chain.size() == 0 )
+    {
+      folded_noING = folded_noING + L"e";
+      chain = dict.findArticles( folded_noING );      
+    }
+  }
+
+  return chain;  
+}
+
+vector< WordArticleLink > StardictHeadwordsRequest::searchAlternativesPhrasalVerb( vector< wstring > words )
+{
+  vector< WordArticleLink > chain;
+
+  wstring wordPV = words[0];
+  wstring wordAdd = L" " + words[words.size()-1];
+
+  wstring folded = Folding::apply( wordPV );
+  int lenWord = folded.size();
+
+  if ( 1 < lenWord && folded[lenWord - 1] == L's' )
+  {
+    // books --> book
+    wstring folded_noS = folded.substr( 0, lenWord - 1 );
+    chain = dict.findArticles( folded_noS + wordAdd );
+/*
+    if ( chain.size() == 0 && 3 < lenWord )
+    {
+      // parties --> party
+      if (folded.substr( lenWord - 3, 3 ) == L"ies" )
+      {
+        wstring folded_noIES = folded.substr( 0, lenWord - 3 ) + L"y";
+        chain = dict.findArticles( folded_noIES );      
+      }
+      if ( chain.size() == 0 && folded.substr( lenWord - 3, 3 ) == L"ves" )
+      {
+        // knives --> knife
+        wstring folded_noVES = folded.substr( 0, lenWord - 3 ) + L"fe";
+        chain = dict.findArticles( folded_noVES );      
+        if ( chain.size() == 0 )
+        {
+          // wolves --> wolf
+          folded_noVES = folded.substr( 0, lenWord - 3 ) + L"f";
+          chain = dict.findArticles( folded_noVES );      
+        }
+      }
+    }
+*/
+    // classes --> class
+    if ( chain.size() == 0 )
+    {
+      if ( 2 < lenWord && folded.substr( lenWord - 2, 2 ) == L"es" )
+      {
+        wstring folded_noES = folded.substr( 0, lenWord - 2 );
+        chain = dict.findArticles( folded_noES + wordAdd );      
+      }
+    }
+  } 
+  else if ( 2 < lenWord && folded.substr( lenWord - 2, 2 ) == L"ed" )
+  {
+    // worked --> work
+    wstring folded_noED = folded.substr( 0, lenWord - 2 );
+    chain = dict.findArticles( folded_noED + wordAdd );      
+
+    //leveraged --> leverage
+    if ( chain.size() == 0 )
+    {
+    //  if ( 1 < lenWord && folded.substr( lenWord - 1, 1 ) == L"d" )
+    //  {
+      wstring folded_noD = folded.substr( 0, lenWord - 1 );
+      chain = dict.findArticles( folded_noD + wordAdd );      
+    //  }
+    }
+  }
+  else if ( 3 < lenWord && folded.substr( lenWord - 3, 3 ) == L"ing" )
+  {
+    //clanging --> clang
+    wstring folded_noING = folded.substr( 0, lenWord - 3 );
+    chain = dict.findArticles( folded_noING + wordAdd );    
+
+    //icing --> ice
+    if ( chain.size() == 0 )
+    {
+      folded_noING = folded_noING + L"e";
+      chain = dict.findArticles( folded_noING + wordAdd );      
+    }
+  }
+
+  return chain;
+}
+
+
+vector< wstring > StardictHeadwordsRequest::splitIntoWords( wstring const & input )
+{
+  vector< wstring > result;
+
+  QString inputQ = toQString(input);
+  QChar const * ptr = inputQ.data();
+
+  for( ; ; )
+  {
+//    QString spacing;
+    QString puncting = toQString(L"");
+    for( ; ptr->unicode() && ( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+    {
+//      spacing.append( *ptr );      
+      if (Folding::isPunct( ptr->unicode() )) 
+      {
+        puncting.append( *ptr );
+      }
+    }
+/*
+    for( ; ptr->unicode() && ( Folding::isPunct( ptr->unicode() ) ); ++ptr )
+      puncting.append( *ptr );
+*/
+
+    if ( (0 < result.size()) && (! puncting.isEmpty()) )
+      break;
+
+    QString word77 = toQString(L"");
+    for( ; ptr->unicode() && !( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+      word77.append( *ptr );
+
+    if ( word77.isEmpty() )
+      break;
+
+//    result.append( toWString(word) );
+    result.push_back( toWString(word77) );
+  }
+
+  return result;
+}
+
+// only for Language_From==English and Format_Of_Dictionary=StarDict
+// useful when search with scan popup: 
+// search alternatives 
+//    for plural or 
+//    for Past tense of regular verbs, 
+//    for -ing,
+//    for Phrasal Verbs
+//
+//
+//    (not in dictionary): books --> book (in dictionary),
+//    (not in dictionary): classes --> class (in dictionary),
+//    (not in dictionary): parties --> party (in dictionary),
+//        ?shelves --> shelve or (shelf)
+        // knives --> knife
+        // wolves --> wolf
+//
+//    (not in dictionary): worked --> work (in dictionary)
+//    (not in dictionary): leveraged --> leverage (in dictionary)
+//
+//    (not in dictionary): clanging --> clang (in dictionary)
+//    (not in dictionary): icing --> ice (in dictionary)
+//
+//    (not in dictionary): reaching out --> reach out (in dictionary)
+//    (not in dictionary): pushes out --> push out (in dictionary)
+//    (not in dictionary): pushed out --> push out (in dictionary)
+//    
+vector< WordArticleLink > StardictHeadwordsRequest::searchAlternatives( wstring const & word )
+{  
+  vector< wstring > words = splitIntoWords( word );
+
+  if ( 1 < words.size() ) 
+  {
+//    wcout << "words *" << words.size() << "*" << words[0] << "*" << words[1] << "*\n";
+    return searchAlternativesPhrasalVerb( words );
+  }
+  else
+  {
+//    wcout << "1 word *" << words.size() << "*" << words[0] << "*\n";
+    return searchAlternativesSingleWord( word );
+  }
+}
+//) end: search alternatives 
 
 void StardictHeadwordsRequest::run()
 {
@@ -1229,73 +1487,12 @@ void StardictHeadwordsRequest::run()
   {
     vector< WordArticleLink > chain = dict.findArticles( word );
 
-//( search alternatives for plural or for Past tense of regular verbs, 
-//  useful when search with scan popup: 
-//  only for Language_From==English and Format_Of_Dictionary=StarDict
-//    (not in dictionary): books --> book (in dictionary),
-//    (not in dictionary): classes --> class (in dictionary),
-//    (not in dictionary): parties --> party (in dictionary),
-//
-//    (not in dictionary): worked --> work (in dictionary)
-//    (not in dictionary): leveraged --> leverage (in dictionary)
-
+//( begin: search alternatives 
     if ( (chain.size() == 0) && (dict.getLangFrom() == 28261) ) // "en"
     {
-      wstring folded = Folding::apply( word );
-      int lenWord = folded.size();
-
-      // books --> book
-      //if ( chain.size() == 0 )
-      //{
-      if ( 1 < lenWord && folded[lenWord - 1] == L's' )
-      {
-        wstring folded_noS = folded.substr( 0, lenWord - 1 );
-        chain = dict.findArticles( folded_noS );
-
-        // parties --> party
-        if ( chain.size() == 0 )
-        {
-          if ( 3 < lenWord && folded.substr( lenWord - 3, 3 ) == L"ies" )
-          {
-            wstring folded_noIES = folded.substr( 0, lenWord - 3 ) + L"y";
-            chain = dict.findArticles( folded_noIES );      
-          }
-        }
-
-        // classes --> class
-        if ( chain.size() == 0 )
-        {
-          if ( 2 < lenWord && folded.substr( lenWord - 2, 2 ) == L"es" )
-          {
-            wstring folded_noES = folded.substr( 0, lenWord - 2 );
-            chain = dict.findArticles( folded_noES );      
-          }
-        }
-      }
-      //}
-
-
-      // worked --> work
-      if ( chain.size() == 0 )
-      {
-        if ( 2 < lenWord && folded.substr( lenWord - 2, 2 ) == L"ed" )
-        {
-          wstring folded_noED = folded.substr( 0, lenWord - 2 );
-          chain = dict.findArticles( folded_noED );      
-        }
-
-        //leveraged --> leverage
-        if ( chain.size() == 0 )
-        {
-          if ( 1 < lenWord && folded.substr( lenWord - 1, 1 ) == L"d" )
-          {
-            wstring folded_noD = folded.substr( 0, lenWord - 1 );
-            chain = dict.findArticles( folded_noD );      
-          }
-        }
-      }
+      chain = searchAlternatives( word );
     }
-//)
+//) end: search alternatives 
 
     wstring caseFolded = Folding::applySimpleCaseOnly( word );
 
