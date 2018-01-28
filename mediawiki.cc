@@ -411,8 +411,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             //fix src="/foo/bar/Baz.png"
             articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
 
-            // Replace the href="/foo/bar/Baz" to just href="Baz".
-            articleString.replace( QRegExp( "<a\\shref=\"/([\\w\\.]*/)*" ), "<a href=\"" );
+            // Remove the /wiki/ prefix from links
+            articleString.replace( QRegExp( "<a\\shref=\"/wiki/" ), "<a href=\"" );
 
             //fix audio
             articleString.replace( QRegExp( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
