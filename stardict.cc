@@ -1371,6 +1371,9 @@ wstring StardictHeadwordsRequest::getVerbFormOne(wstring const & folded)
   //       { L"gone", L"go" }
   //     };
   map<wstring, wstring> wordMap;
+  wordMap[ L"am" ] = L"be";
+  wordMap[ L"is" ] = L"be";
+  wordMap[ L"are" ] = L"be";
   wordMap[ L"was" ] = L"be";
   wordMap[ L"were" ] = L"be";
   wordMap[ L"been" ] = L"be";
@@ -1485,19 +1488,27 @@ vector< WordArticleLink > StardictHeadwordsRequest::searchAlternativesPhrasalVer
   return chain;
 }
 
-
+//You'ra --> You are
+//dont, don't --> do not
+//'em --> them'
 vector< wstring > StardictHeadwordsRequest::splitIntoWords( wstring const & input )
 {
   vector< wstring > result;
 
   QString inputQ = toQString(input);
+//  inputQ.replace( "'ra", " are" );
+  inputQ.replace( "'em", " them" );
+//  inputQ.replace( "don't", "do not" );
+
   QChar const * ptr = inputQ.data();
+//  QString signAp = toQString(L"'");
 
   for( ; ; )
   {
 //    QString spacing;
     QString puncting = toQString(L"");
-    for( ; ptr->unicode() && ( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+//    for( ; ptr->unicode() && ( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+    for( ; ptr->unicode() && ( (Folding::isPunct( ptr->unicode() ) && ptr->unicode() != 0x0027) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
     {
 //      spacing.append( *ptr );      
       if (Folding::isPunct( ptr->unicode() )) 
@@ -1510,18 +1521,30 @@ vector< wstring > StardictHeadwordsRequest::splitIntoWords( wstring const & inpu
       puncting.append( *ptr );
 */
 
+//    if ( (0 < result.size()) && (! puncting.isEmpty()) && (puncting!=signAp) )
     if ( (0 < result.size()) && (! puncting.isEmpty()) )
       break;
 
     QString word77 = toQString(L"");
-    for( ; ptr->unicode() && !( Folding::isPunct( ptr->unicode() ) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
+    for( ; ptr->unicode() && !( ( Folding::isPunct( ptr->unicode() ) && ptr->unicode() != 0x0027) || Folding::isWhitespace( ptr->unicode() ) ); ++ptr )
       word77.append( *ptr );
 
     if ( word77.isEmpty() )
       break;
 
 //    result.append( toWString(word) );
-    result.push_back( toWString(word77) );
+    wstring wsWord = toWString(word77);
+    wstring wsword = Folding::apply( wsWord );
+    if (wsword == L"dont") 
+    {
+      result.push_back( L"do" );
+      result.push_back( L"not" );
+    }
+    else
+    {
+      result.push_back( wsWord );
+    };
+
   }
 
   return result;
@@ -1554,6 +1577,7 @@ vector< wstring > StardictHeadwordsRequest::splitIntoWords( wstring const & inpu
 //    (not in dictionary): pushed out --> push out (in dictionary)
 //    
 //    (not in dictionary): turn them on --> turn on
+//    (not in dictionary): turn 'em on --> turn on
 //    (not in dictionary): pulled him a face --> pull a face
 //    (not in dictionary): got at --> get at
   
@@ -1561,14 +1585,15 @@ vector< WordArticleLink > StardictHeadwordsRequest::searchAlternatives( wstring 
 {  
   vector< wstring > words = splitIntoWords( word );
 
+//  std::wcout << "words in *" << word << "*\n";
   if ( 1 < words.size() ) 
   {
-//    wcout << "words *" << words.size() << "*" << words[0] << "*" << words[1] << "*\n";
+//    std::wcout << "words *" << words.size() << "*" << words[0] << "*" << words[1] << "*\n";
     return searchAlternativesPhrasalVerb( words );
   }
   else
   {
-//    wcout << "1 word *" << words.size() << "*" << words[0] << "*\n";
+//    std::wcout << "1 word *" << words.size() << "*" << words[0] << "*\n";
     return searchAlternativesSingleWord( word );
   }
 }
