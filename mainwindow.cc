@@ -4060,8 +4060,9 @@ void MainWindow::switchExpandOptionalPartsMode()
 
 void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
 {
-  if ( QApplication::keyboardModifiers() &
-       ( Qt::ControlModifier | Qt::ShiftModifier ) )
+  Qt::KeyboardModifiers m = QApplication::keyboardModifiers();
+  if ( ( m & ( Qt::ControlModifier | Qt::ShiftModifier ) )
+       || ( m == Qt::AltModifier ) )
   {
     QString id = item->data( Qt::UserRole ).toString();
     emit clickOnDictPane( id );
