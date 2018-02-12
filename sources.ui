@@ -272,6 +272,16 @@ of the appropriate groups to use them.</string>
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>When Address ends with &quot;.wikia.com&quot;, articles are parsed in a FANDOM-specific way. If you want to use generic MediaWiki parsing, append a slash at the end of Address (...wikia.com/).</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_4">
