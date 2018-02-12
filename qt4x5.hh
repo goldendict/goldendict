@@ -3,6 +3,8 @@
 #ifndef QT4X5_HH
 #define QT4X5_HH
 
+#include <QtGlobal>
+
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 # define IS_QT_5    0
 #else
@@ -160,6 +162,15 @@ typedef int size_type;
 #else
 typedef uint size_type;
 #endif
+
+}
+
+namespace Regex
+{
+
+QString & replace( QString & text, const QString & pattern, const QString & after,
+                   Qt::CaseSensitivity cs = Qt::CaseSensitive,
+                   bool useUnicodeProperties = false );
 
 }
 
