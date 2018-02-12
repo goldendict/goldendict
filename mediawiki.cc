@@ -231,21 +231,21 @@ class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 
 public:
 
-  MediaWikiArticleRequest( wstring const & word, vector< wstring > const & alts,
-                           QString const & url, QNetworkAccessManager & mgr,
+  MediaWikiArticleRequest( QString const & url, QNetworkAccessManager & mgr,
                            Class * dictPtr_ );
+
+  void addQuery( wstring const & word );
 
   virtual void cancel();
 
 private:
-
-  void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
 
   void processArticle( QString & articleString ) const;
   void appendArticleToData( QString const & articleString );
 
+  QNetworkAccessManager & netMgr;
   Class * dictPtr;
 };
 
@@ -254,26 +254,20 @@ void MediaWikiArticleRequest::cancel()
   finish();
 }
 
-MediaWikiArticleRequest::MediaWikiArticleRequest( wstring const & str,
-                                                  vector< wstring > const & alts,
-                                                  QString const & url_,
+MediaWikiArticleRequest::MediaWikiArticleRequest( QString const & url_,
                                                   QNetworkAccessManager & mgr,
                                                   Class * dictPtr_ ):
-  url( url_ ), dictPtr( dictPtr_ )
+  url( url_ ), netMgr( mgr ), dictPtr( dictPtr_ )
 {
-  connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
+  connect( &netMgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
            Qt::QueuedConnection );
-  
-  addQuery(  mgr, str );
-
-  for( unsigned x = 0; x < alts.size(); ++x )
-    addQuery( mgr, alts[ x ] );
 }
 
-void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
-                                        wstring const & str )
+void MediaWikiArticleRequest::addQuery( wstring const & str )
 {
+  Q_ASSERT( !isFinished() && "Finished request should not make queries!" );
+
   gdDebug( "MediaWiki: requesting article %s\n", gd::toQString( str ).toUtf8().data() );
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
@@ -284,7 +278,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
   reqUrl.addEncodedQueryItem( "page", QUrl::toPercentEncoding( gd::toQString( str ) ) );
 #endif
 
-  QNetworkReply * netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  QNetworkReply * netReply = netMgr.get( QNetworkRequest( reqUrl ) );
   
 #ifndef QT_NO_OPENSSL
 
@@ -606,7 +600,16 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new MediaWikiArticleRequest( word, alts, url, netMgr, this );
+  {
+    sptr< MediaWikiArticleRequest > request(
+          new MediaWikiArticleRequest( url, netMgr, this ) );
+
+    request->addQuery( word );
+    for( std::size_t i = 0; i < alts.size(); ++i )
+      request->addQuery( alts[ i ] );
+
+    return request;
+  }
 }
 
 }
