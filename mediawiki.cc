@@ -798,6 +798,17 @@ void SuffixAddingArticleRequest::replyHandled( QNetworkReply const * reply, bool
   replacements.pop();
 }
 
+/// Ensures that Wookieepedia era icons are visible at the top of the article.
+/// The most important "era icon" is the Canon or Legends indicator.
+/// It is not immediately obvious whether the current article is
+/// the Canon or the Legends version of the subject without this indicator.
+void makeEraIconsVisible( QString & article )
+{
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  article.replace( QRegExp( "(id=\"title-eraicons\" style=\"[^\"]*)display:none;?" ),
+                            "\\1" );
+}
+
 /// This class displays the Wookieepedia Legends definition of the requested
 /// word if it exists. If there is no Legends version of the article,
 /// the Wookieepedia Canon definition is displayed.
@@ -821,7 +832,19 @@ public:
       // and relatively quick parsing of the missing /Legends page reply.
       L"/Legends" )
   {}
+
+protected:
+
+  virtual bool preprocessArticle( QString & articleString );
 };
+
+bool WookieepediaLegendsArticleRequest::preprocessArticle( QString & articleString )
+{
+  if( !SuffixAddingArticleRequest::preprocessArticle( articleString ) )
+    return false;
+  makeEraIconsVisible( articleString );
+  return true;
+}
 
 class WookieepediaLegendsFactory: public FandomFactory
 {
