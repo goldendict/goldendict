@@ -15,6 +15,10 @@
 #include "qt4x5.hh"
 #include <QDebug>
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#endif
+
 namespace Xdxf2Html {
 
 static void fixLink( QDomElement & el, string const & dictId, const char *attrName )
@@ -645,7 +649,11 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
 //  GD_DPRINTF( "Result>>>>>>>>>>: %s\n\n\n", dd.toByteArray( 0 ).data() );
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  return dd.toString( 1 ).remove('\n').remove( QRegularExpression( "<(b|i)/>" ) ).toUtf8().data();
+#else
   return dd.toString( 1 ).remove('\n').remove( QRegExp( "<(b|i)/>" ) ).toUtf8().data();
+#endif
 }
 
 }

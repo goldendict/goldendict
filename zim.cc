@@ -35,6 +35,10 @@
 #include <QDir>
 #include <QDebug>
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#endif
+
 #include <string>
 #include <set>
 #include <map>
@@ -491,6 +495,7 @@ quint32 ret;
   }
   if( !rawText )
     articleText = convert( articleText );
+
   return ret;
 }
 
@@ -498,19 +503,46 @@ string ZimDictionary::convert( const string & in )
 {
   QString text = QString::fromUtf8( in.c_str() );
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // replace background
-  text.replace( QRegExp( "<\\s*body\\s*([^>]*)(background(|-color)):([^;\"]*(|;))" ),
+  text.replace( QRegularExpression( "<\\s*body\\s+([^>]*)(background(|-color)):([^;\"]*(;|))",
+                                    QRegularExpression::UseUnicodePropertiesOption ),
                 QString( "<body \\1" ) );
 
   // pattern of img and script
-  text.replace( QRegExp( "<\\s*(img|script)\\s*([^>]*)src=(\"|)(\\.\\.|)/" ),
+  text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=(\"|)(\\.\\.|)/",
+                                    QRegularExpression::UseUnicodePropertiesOption ),
+                QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
+
+  // Fix links without '"'
+  text.replace( QRegularExpression( "href=(\\.\\.|)/([^\\s>]+)", QRegularExpression::UseUnicodePropertiesOption ),
+                QString( "href=\"\\1/\\2\"" ) );
+
+  // pattern <link... href="..." ...>
+  text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(\\.\\.|)/",
+                                    QRegularExpression::UseUnicodePropertiesOption ),
+                QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
+
+  // localize the http://en.wiki***.com|org/wiki/<key> series links
+  // excluding those keywords that have ":" in it
+  QString urlWiki = "\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|voyage|versity)|wiktionary)\\.(org|com)/wiki/([^:\"]*)\"";
+  text.replace( QRegularExpression( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki,
+                                    QRegularExpression::UseUnicodePropertiesOption ),
+                QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
+#else
+  // replace background
+  text.replace( QRegExp( "<\\s*body\\s+([^>]*)(background(|-color)):([^;\"]*(|;))" ),
+                QString( "<body \\1" ) );
+
+  // pattern of img and script
+  text.replace( QRegExp( "<\\s*(img|script)\\s+([^>]*)src=(\"|)(\\.\\.|)/" ),
                 QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
 
   // Fix links without '"'
   text.replace( QRegExp( "href=(\\.\\.|)/([^\\s>]+)" ), QString( "href=\"\\1/\\2\"" ) );
 
   // pattern <link... href="..." ...>
-  text.replace( QRegExp( "<\\s*link\\s*([^>]*)href=\"(\\.\\.|)/" ),
+  text.replace( QRegExp( "<\\s*link\\s+([^>]*)href=\"(\\.\\.|)/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
   // localize the http://en.wiki***.com|org/wiki/<key> series links
@@ -518,9 +550,28 @@ string ZimDictionary::convert( const string & in )
   QString urlWiki = "\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|voyage|versity)|wiktionary)\\.(org|com)/wiki/([^:\"]*)\"";
   text.replace( QRegExp( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
                 QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
+#endif
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
+                             QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
+  int pos = 0;
+  QString newText;
+  while( it.hasNext() )
+  {
+    QRegularExpressionMatch match = it.next();
+
+    newText += text.mid( pos, match.capturedStart() - pos );
+    pos = match.capturedEnd();
+
+    QStringList list = match.capturedTexts();
+    // Add empty strings for compatibility with QRegExp behaviour
+    for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
+      list.append( QString() );
+#else
   QRegExp rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
@@ -528,6 +579,7 @@ string ZimDictionary::convert( const string & in )
   while( (pos = rxLink.indexIn( text, pos )) >= 0 )
   {
     QStringList list = rxLink.capturedTexts();
+#endif
     QString tag = list[3];     // a url, ex: Precambrian_Chaotian.html
     if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
       tag = list[4].split("\"")[1];
@@ -575,12 +627,54 @@ string ZimDictionary::convert( const string & in )
           append( "\" " + list[4] + ">" );
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    newText += tag;
+  }
+  if( pos )
+  {
+    newText += text.mid( pos );
+    text = newText;
+  }
+  newText.clear();
+#else
     text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
   }
+#endif
 
   // Occassionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
   // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
+                           QRegularExpression::UseUnicodePropertiesOption );
+  pos = 0;
+  QRegularExpressionMatchIterator it2 = rxLink.globalMatch( text );
+  while( it2.hasNext() )
+  {
+    QRegularExpressionMatch match = it.next();
+
+    newText += text.mid( pos, match.capturedStart() - pos );
+    pos = match.capturedEnd();
+
+    QStringList list = match.capturedTexts();
+    // Add empty strings for compatibility with QRegExp behaviour
+    for( int i = match.lastCapturedIndex() + 1; i < 3; i++ )
+      list.append( QString() );
+
+    QString tag = list[2];
+    tag.replace( QRegExp( "&lt;br( |)(\\\\|/|)&gt;", Qt::CaseInsensitive ) , "<br/>" ).
+        prepend( list[1] ).
+        append( "</a>" );
+
+    newText += tag;
+  }
+  if( pos )
+  {
+    newText += text.mid( pos );
+    text = newText;
+  }
+  newText.clear();
+#else
   QRegExp rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
                        Qt::CaseSensitive,
                        QRegExp::RegExp2 );
@@ -596,6 +690,7 @@ string ZimDictionary::convert( const string & in )
     text.replace( pos, list[0].length(), tag );
     pos += tag.length() + 1;
   }
+#endif
 
   // // output all links in the page - only for analysis
   // QRegExp rxPrintAllLinks( "<\\s*a\\s+[^>]*href=\"[^\"]*\"[^>]*>",

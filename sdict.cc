@@ -26,8 +26,12 @@
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
-#include <QRegExp>
 #include <QDebug>
+#include <QRegExp>
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#endif
 
 #include "ufile.hh"
 #include "qt4x5.hh"
@@ -286,6 +290,37 @@ string SdictDictionary::convert( string const & in )
 
     QString result = QString::fromUtf8( inConverted.c_str(), inConverted.size() );
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    result.replace( QRegularExpression( "<\\s*(p|br)\\s*>",
+                                        QRegularExpression::UseUnicodePropertiesOption
+                                        | QRegularExpression::CaseInsensitiveOption ),
+                    "<br/>" );
+    result.remove( QRegularExpression( "<\\s*/p\\s*>",
+                                       QRegularExpression::UseUnicodePropertiesOption
+                                       | QRegularExpression::CaseInsensitiveOption ) );
+
+    result.replace( QRegularExpression( "<\\s*t\\s*>",
+                                        QRegularExpression::UseUnicodePropertiesOption
+                                        | QRegularExpression::CaseInsensitiveOption ),
+                    "<span class=\"sdict_tr\" dir=\"ltr\">" );
+    result.replace( QRegularExpression( "<\\s*f\\s*>",
+                                        QRegularExpression::UseUnicodePropertiesOption
+                                        | QRegularExpression::CaseInsensitiveOption ),
+                    "<span class=\"sdict_forms\">" );
+    result.replace( QRegularExpression( "<\\s*/(t|f)\\s*>",
+                                        QRegularExpression::UseUnicodePropertiesOption
+                                        | QRegularExpression::CaseInsensitiveOption ),
+                    "</span>" );
+
+    result.replace( QRegularExpression( "<\\s*l\\s*>",
+                                        QRegularExpression::UseUnicodePropertiesOption
+                                        | QRegularExpression::CaseInsensitiveOption ),
+                    "<ul>" );
+    result.replace( QRegularExpression( "<\\s*/l\\s*>",
+                                        QRegularExpression::UseUnicodePropertiesOption
+                                        | QRegularExpression::CaseInsensitiveOption ),
+                    "</ul>" );
+#else
     result.replace( QRegExp( "<\\s*(p|br)\\s*>", Qt::CaseInsensitive ), "<br/>" );
     result.remove( QRegExp( "<\\s*/p\\s*>", Qt::CaseInsensitive ) );
 
@@ -295,14 +330,15 @@ string SdictDictionary::convert( string const & in )
 
     result.replace( QRegExp( "<\\s*l\\s*>", Qt::CaseInsensitive ), "<ul>" );
     result.replace( QRegExp( "<\\s*/l\\s*>", Qt::CaseInsensitive ), "</ul>" );
+#endif
 
     // Links handling
 
     int n = 0;
     for( ; ; )
     {
-      static QRegExp start_link_tag( "<\\s*r\\s*>", Qt::CaseInsensitive );
-      static QRegExp end_link_tag( "<\\s*/r\\s*>", Qt::CaseInsensitive );
+      QRegExp start_link_tag( "<\\s*r\\s*>", Qt::CaseInsensitive );
+      QRegExp end_link_tag( "<\\s*/r\\s*>", Qt::CaseInsensitive );
 
       n = result.indexOf( start_link_tag, n );
       if( n < 0 )

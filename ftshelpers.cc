@@ -13,6 +13,11 @@
 
 #include <QVector>
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#include "wildcard.hh"
+#endif
+
 using std::vector;
 using std::string;
 
@@ -178,11 +183,23 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   if( articleText.isEmpty() )
     return;
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
+                                  QRegularExpression::UseUnicodePropertiesOption);
+  QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
+
+  QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
+                                        .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
+                                                                    QRegularExpression::UseUnicodePropertiesOption ),
+                                                QString::SkipEmptyParts );
+#else
   QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
   QRegExp regSplit = QRegExp( "\\W+" );
 
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
                                         .split( QRegExp( handleRoundBrackets ? "[^\\w\\(\\)]+" : "\\W+" ), QString::SkipEmptyParts );
+#endif
+
   QSet< QString > setOfWords;
 
   for( int x = 0; x < articleWords.size(); x++ )
@@ -228,10 +245,20 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
           if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
             list.append( *it );
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+        QRegularExpressionMatch match = regBrackets.match( word );
+        if( match.hasMatch() )
+        {
+          QStringList parts = match.capturedTexts();
+          // Add empty strings for compatibility with QRegExp behaviour
+          for( int i = match.lastCapturedIndex() + 1; i < 6; i++ )
+            parts.append( QString() );
+#else
         int pos = regBrackets.indexIn( word );
         if( pos >= 0 )
         {
           QStringList parts = regBrackets.capturedTexts();
+#endif
           QString parsedWord = parts[ 2 ] + parts[ 4 ]; // Brackets removed
 
           if( parsedWord.size() >= FTS::MinimumWordSize && !list.contains( parsedWord ) )
@@ -406,21 +433,48 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
   }
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression regBrackets( "(\\([\\w\\p{M}]\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
+                                  QRegularExpression::UseUnicodePropertiesOption);
+  QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
+#else
   QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
   QRegExp regSplit = QRegExp( "\\W+" );
+#endif
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
     // RegExp mode
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    QRegularExpression searchRegularExpression;
+    if( searchMode == FTS::Wildcards )
+      searchRegularExpression.setPattern( wildcardsToRegexp( searchRegexp.pattern() ) );
+    else
+      searchRegularExpression.setPattern( searchRegexp.pattern() );
+    QRegularExpression::PatternOptions patternOptions = QRegularExpression::DotMatchesEverythingOption
+                                                        | QRegularExpression::UseUnicodePropertiesOption
+                                                        | QRegularExpression::MultilineOption
+                                                        | QRegularExpression::InvertedGreedinessOption;
+    if( searchRegexp.caseSensitivity() == Qt::CaseInsensitive )
+      patternOptions |= QRegularExpression::CaseInsensitiveOption;
+    searchRegularExpression.setPatternOptions( patternOptions );
+    if( !searchRegularExpression.isValid() )
+      searchRegularExpression.setPattern( "" );
+#endif
     for( int i = 0; i < offsets.size(); i++ )
     {
       if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       dict.getArticleText( offsets.at( i ), headword, articleText );
+      articleText = articleText.normalized( QString::NormalizationForm_C );
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+      if( articleText.contains( searchRegularExpression ) )
+#else
       if( articleText.contains( searchRegexp ) )
+#endif
       {
         if( headword.isEmpty() )
           offsetsForHeadwords.append( offsets.at( i ) );
@@ -436,12 +490,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   else
   {
     // Words mode
-
-    QRegExp regex;
-    if( needHandleBrackets )
-      regex = QRegExp( "[\\w\\(\\)]+" );
-    else
-      regex = QRegExp( "\\b\\w+\\b" );
 
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;
@@ -471,25 +519,42 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       }
 
       dict.getArticleText( offsets.at( i ), headword, articleText );
+      articleText = articleText.normalized( QString::NormalizationForm_C );
 
-      int articleLength = articleText.length();
-      while ( pos >= 0 && pos < articleLength )
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+      QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
+                                            .split( QRegularExpression( needHandleBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
+                                                                        QRegularExpression::UseUnicodePropertiesOption ),
+                                                    QString::SkipEmptyParts );
+#else
+      QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
+                                            .split( QRegExp( needHandleBrackets ? "[^\\w\\(\\)]+" : "\\W+" ), QString::SkipEmptyParts );
+#endif
+
+      int wordsNum = articleWords.length();
+      while ( pos < wordsNum )
       {
-        pos = articleText.indexOf( regex, pos );
-        if( pos >= 0 )
-        {
-          QString s = regex.cap().normalized( QString::NormalizationForm_C );
-
+          QString s = articleWords[ pos ];
           bool breakSearch = false;
 
           QStringList parsedWords;
           if( needHandleBrackets && ( s.indexOf( '(' ) >= 0 || s.indexOf( ')' ) >= 0 ) )
           {
             // Handle brackets
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            QRegularExpressionMatch match_brackets = regBrackets.match( s );
+            if( match_brackets.hasMatch() )
+            {
+              QStringList parts = match_brackets.capturedTexts();
+              // Add empty strings for compatibility with QRegExp behaviour
+              for( int i = match_brackets.lastCapturedIndex() + 1; i < 6; i++ )
+                parts.append( QString() );
+#else
             int pos = regBrackets.indexIn( s );
             if( pos >= 0 )
             {
               QStringList parts = regBrackets.capturedTexts();
+#endif
               QString word = parts[ 2 ] + parts[ 4 ]; // Brackets removed
               parsedWords.append( word );
 
@@ -546,7 +611,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                 if( matchWordNom == 1 )
                 {
                   // Store position to remake search if sequence will not be found
-                  nextNotFoundPos = pos + ( s.isEmpty() ? 1 : s.length() );
+                  nextNotFoundPos = pos + 1;
                 }
 
                 if( matchWordNom >= words.size() )
@@ -604,7 +669,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                 if( matchWordNom == 1 )
                 {
                   // Store position to remake search if sequence will not be found
-                  nextNotFoundPos = pos + ( s.isEmpty() ? 1 : s.length() );
+                  nextNotFoundPos = pos + 1;
                 }
 
                 if( needHandleBrackets )
@@ -674,8 +739,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
             nextNotFoundPos = 0;
           }
           else
-            pos += s.isEmpty() ? 1 : s.length();
-        }
+            pos += 1;
       }
 
       if( !allOrders.isEmpty() || matchWordNom >= words.size() )

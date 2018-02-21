@@ -508,6 +508,11 @@ unix:!mac {
     SOURCES += scanflag.cc
 }
 
+greaterThan(QT_MAJOR_VERSION, 4) {
+    HEADERS += wildcard.hh
+    SOURCES += wildcard.cc
+}
+
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
   LIBS += -llzma

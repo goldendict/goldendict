@@ -22,7 +22,11 @@
 
 #include <QImage>
 #include <QPainter>
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#else
 #include <QRegExp>
+#endif
 
 #include "qt4x5.hh"
 #include "zipfile.hh"
@@ -278,6 +282,16 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
   if( css.isEmpty() )
     return;
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression reg1( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" );
+  QRegularExpression reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
+  QRegularExpression reg3( "[,;\\{]" );
+#else
+  QRegExp reg1( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" );
+  QRegExp reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
+  QRegExp reg3( "[,;\\{]" );
+#endif
+
   int currentPos = 0;
   QString newCSS;
   QString prefix( "#gdfrom-" );
@@ -286,7 +300,7 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
     prefix += " " + wrapperSelector;
 
   // Strip comments
-  css.replace( QRegExp( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" ), QString() );
+  css.replace( reg1, QString() );
 
   for( ; ; )
   {
@@ -383,7 +397,7 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
       // This is some selector.
       // We must to add the isolate prefix to it.
 
-      int n = css.indexOf( QRegExp( "[ \\*\\>\\+,;:\\[\\{\\]]" ), currentPos + 1 );
+      int n = css.indexOf( reg2, currentPos + 1 );
       QString s = css.mid( currentPos, n < 0 ? n : n - currentPos );
       if( n < 0 )
       {
@@ -402,7 +416,7 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
         newCSS.append( prefix + " " );
       }
 
-      n = css.indexOf( QRegExp( "[,;\\{]" ), currentPos );
+      n = css.indexOf( reg3, currentPos );
       s = css.mid( currentPos, n < 0 ? n : n - currentPos );
       newCSS.append( s );
       if( n < 0 )

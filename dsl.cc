@@ -45,7 +45,12 @@
 #include <QPainter>
 #include <QMap>
 #include <QStringList>
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#else
 #include <QRegExp>
+#endif
 
 // For TIFF conversion
 #include <QImage>
@@ -1496,7 +1501,11 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
     // Strip tags
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
+#else
     text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+#endif
 
     // Chech for insided cards
 

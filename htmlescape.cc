@@ -3,7 +3,13 @@
 
 #include <QString>
 #include <QTextDocumentFragment>
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#else
 #include <QRegExp>
+#endif
+
 #include "htmlescape.hh"
 
 namespace Html {
@@ -145,9 +151,15 @@ QString unescape( QString const & str, bool saveFormat )
     QString tmp = str;
     if( !saveFormat )
     {
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+        tmp.replace( QRegularExpression( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
+                                         QRegularExpression::CaseInsensitiveOption ), " " );
+        tmp.remove( QRegularExpression( "<[^>]*>" ) );
+#else
       tmp.replace( QRegExp( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
       tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
+#endif
     }
     return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
   }
