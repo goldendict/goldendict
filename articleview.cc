@@ -1012,7 +1012,12 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
     }
 
     if( msg.isEmpty() )
-      msg = tr( "Definition: %1").arg( def );
+    {
+      if( def.isEmpty() && url.hasFragment() )
+        msg = '#' + url.fragment(); // this must be a citation, footnote or backlink
+      else
+        msg = tr( "Definition: %1").arg( def );
+    }
   }
   else
   {
