@@ -202,7 +202,11 @@ MediaWikis makeDefaultMediaWikis( bool enable )
   mw.push_back( MediaWiki( "f3b4ec8531e52ddf5b10d21e4577a7a2", "Greek Wikipedia", "https://el.wikipedia.org/w", false, "" ) );
   mw.push_back( MediaWiki( "5d45232075d06e002dea72fe3e137da1", "Greek Wiktionary", "https://el.wiktionary.org/w", false, "" ) );
 
-  mw.push_back( MediaWiki( "e2c2a102bde11c2e98c4743a0e8ca521", "Wookieepedia", "http://starwars.wikia.com", false, "" ) );
+  const MediaWiki wookieepedia( "e2c2a102bde11c2e98c4743a0e8ca521", "Wookieepedia", "http://starwars.wikia.com", false, "" );
+  mw.push_back( wookieepedia );
+
+  const QString legendsSuffix = " (Legends)";
+  mw.push_back( MediaWiki( "c32f89ebaee81353400243a255753469", wookieepedia.name + legendsSuffix, wookieepedia.url + legendsSuffix, false, "" ) );
 
   return mw;
 }

@@ -798,6 +798,43 @@ void SuffixAddingArticleRequest::replyHandled( QNetworkReply const * reply, bool
   replacements.pop();
 }
 
+/// This class displays the Wookieepedia Legends definition of the requested
+/// word if it exists. If there is no Legends version of the article,
+/// the Wookieepedia Canon definition is displayed.
+class WookieepediaLegendsArticleRequest: public SuffixAddingArticleRequest
+{
+public:
+
+  explicit WookieepediaLegendsArticleRequest( InitData const & data ):
+    SuffixAddingArticleRequest(
+      data,
+
+      // Detect inactive Legends tab. If found, discard the current article
+      // and ask for its Legends version instead.
+      "title=\"Click here for Wookieepedia&#39;s article on the Legends version of this subject.\"",
+
+      // Before searching for the original word, send a request for the word
+      // with the /Legends suffix. In case of success, this saves waiting for,
+      // then parsing the Canon reply (which may contain a long article),
+      // and detecting the inactive Legends tab.
+      // In case of failure, the penalty is smaller: one extra network request
+      // and relatively quick parsing of the missing /Legends page reply.
+      L"/Legends" )
+  {}
+};
+
+class WookieepediaLegendsFactory: public FandomFactory
+{
+public:
+
+  virtual QIcon defaultIcon() const { return QIcon( ":/icons/icon32_wookieepedia.png" ); }
+
+  virtual sptr< MediaWikiArticleRequest > articleRequest( InitData const & data ) const
+  {
+    return new WookieepediaLegendsArticleRequest( data );
+  }
+};
+
 sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word,
                                                             unsigned long maxResults )
   throw( std::exception )
@@ -855,7 +892,13 @@ void MediaWikiDictionary::loadIcon() throw()
 
 void MediaWikiDictionary::initializeFactory()
 {
-  if( url.endsWith( ".wikia.com" ) )
+  if( url.endsWith( "/starwars.wikia.com (Legends)" ) )
+  {
+    const int legendsSuffixLength = 10;
+    url.chop( legendsSuffixLength );
+    factory.reset( new WookieepediaLegendsFactory );
+  }
+  else if( url.endsWith( ".wikia.com" ) )
     factory.reset( new FandomFactory );
   else
     factory.reset( new MediaWikiFactory );
