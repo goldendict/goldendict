@@ -809,6 +809,39 @@ void makeEraIconsVisible( QString & article )
                             "\\1" );
 }
 
+/// This class displays the default Wookieepedia tab for the requested word.
+class WookieepediaArticleRequest: public FandomArticleRequest
+{
+public:
+
+  explicit WookieepediaArticleRequest( InitData const & data ):
+    FandomArticleRequest( data ) {}
+
+protected:
+
+  virtual bool preprocessArticle( QString & articleString );
+};
+
+bool WookieepediaArticleRequest::preprocessArticle( QString & articleString )
+{
+  if( !FandomArticleRequest::preprocessArticle( articleString ) )
+    return false;
+  makeEraIconsVisible( articleString );
+  return true;
+}
+
+class WookieepediaFactory: public FandomFactory
+{
+public:
+
+  virtual QIcon defaultIcon() const { return QIcon( ":/icons/icon32_wookieepedia.png" ); }
+
+  virtual sptr< MediaWikiArticleRequest > articleRequest( InitData const & data ) const
+  {
+    return new WookieepediaArticleRequest( data );
+  }
+};
+
 /// This class displays the Wookieepedia Legends definition of the requested
 /// word if it exists. If there is no Legends version of the article,
 /// the Wookieepedia Canon definition is displayed.
@@ -846,11 +879,9 @@ bool WookieepediaLegendsArticleRequest::preprocessArticle( QString & articleStri
   return true;
 }
 
-class WookieepediaLegendsFactory: public FandomFactory
+class WookieepediaLegendsFactory: public WookieepediaFactory
 {
 public:
-
-  virtual QIcon defaultIcon() const { return QIcon( ":/icons/icon32_wookieepedia.png" ); }
 
   virtual sptr< MediaWikiArticleRequest > articleRequest( InitData const & data ) const
   {
@@ -921,6 +952,8 @@ void MediaWikiDictionary::initializeFactory()
     url.chop( legendsSuffixLength );
     factory.reset( new WookieepediaLegendsFactory );
   }
+  else if( url.endsWith( "/starwars.wikia.com" ) )
+    factory.reset( new WookieepediaFactory );
   else if( url.endsWith( ".wikia.com" ) )
     factory.reset( new FandomFactory );
   else
