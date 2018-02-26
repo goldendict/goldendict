@@ -283,11 +283,12 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
     return;
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression reg1( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" );
+  QRegularExpression reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/",
+                           QRegularExpression::DotMatchesEverythingOption );
   QRegularExpression reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
   QRegularExpression reg3( "[,;\\{]" );
 #else
-  QRegExp reg1( "\\/\\*[^*]*\\*+([^/][^*]*\\*+)*\\/" );
+  QRegExp reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/" );
   QRegExp reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
   QRegExp reg3( "[,;\\{]" );
 #endif
