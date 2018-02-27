@@ -38,6 +38,10 @@
 #include <QTextDocument>
 #include <QCryptographicHash>
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#endif
+
 #include "qt4x5.hh"
 
 namespace Mdx
@@ -851,38 +855,70 @@ void MddResourceRequest::run()
       {
         QString css = QString::fromUtf8( data.data(), data.size() );
 
-        // Correct some url's
-
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+        QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
+                                  QRegularExpression::UseUnicodePropertiesOption
+                                  | QRegularExpression::CaseInsensitiveOption );
+#else
         QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", Qt::CaseInsensitive, QRegExp::RegExp );
+#endif
         QString id = QString::fromUtf8( dict.getId().c_str() );
         int pos = 0;
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+        QString newCSS;
+        QRegularExpressionMatchIterator it = links.globalMatch( css );
+        while ( it.hasNext() )
+        {
+          QRegularExpressionMatch match = it.next();
+          newCSS += css.midRef( pos, match.capturedStart() - pos );
+          pos = match.capturedEnd();
+          QString url = match.captured( 2 );
+#else
         for( ; ; )
         {
           pos = links.indexIn( css, pos );
           if( pos < 0 )
             break;
           QString url = links.cap( 2 );
+#endif
 
           if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0)
           {
             // External link or base64-encoded data
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            newCSS += match.captured();
+#else
             pos += links.cap().size();
+#endif
             continue;
           }
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+          QString newUrl = QString( "url(" ) + match.captured( 1 ) + "bres://"
+                                             + id + "/" + url + match.captured( 3 ) + ")";
+          newCSS += newUrl;
+#else
           QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
                                              + id + "/" + url + links.cap( 3 ) + ")";
           css.replace( pos, links.cap().size(), newUrl );
           pos += newUrl.size();
+#endif
         }
-
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+        if( pos )
+        {
+          newCSS += css.midRef( pos );
+          css = newCSS;
+          newCSS.clear();
+        }
+#endif
         dict.isolateCSS( css, ".mdict" );
         QByteArray bytes = css.toUtf8();
         data.resize( bytes.size() );
         memcpy( &data.front(), bytes.constData(), bytes.size() );
       }
     }
-
     break;
   }
 
@@ -963,6 +999,7 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
                                           recordInfo.recordSize );
 
   article = MdictParser::substituteStylesheet( article, styleSheets );
+
   if( !noFilter )
     article = filterResource( articleId, article );
 
@@ -987,6 +1024,172 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
   articleText = string( article.toUtf8().constData() );
 }
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+QString & MdxDictionary::filterResource( QString const & articleId, QString & article )
+{
+  QString id = QString::fromStdString( getId() );
+  QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
+
+  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)",
+                                 QRegularExpression::CaseInsensitiveOption
+                                 | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*)((?:#[^>]*)?)\\2",
+                                    QRegularExpression::CaseInsensitiveOption
+                                    | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)",
+                                 QRegularExpression::CaseInsensitiveOption
+                                 | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)",
+                                  QRegularExpression::CaseInsensitiveOption
+                                  | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#",
+                                   QRegularExpression::CaseInsensitiveOption
+                                   | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
+                              QRegularExpression::CaseInsensitiveOption
+                              | QRegularExpression::UseUnicodePropertiesOption
+                              | QRegularExpression::InvertedGreedinessOption );
+  QRegularExpression stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
+                               QRegularExpression::CaseInsensitiveOption
+                               | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
+                                QRegularExpression::CaseInsensitiveOption
+                                | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
+                                     QRegularExpression::CaseInsensitiveOption
+                                     | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression closeScriptTagRe( "<\\s*/script\\s*>",
+                                       QRegularExpression::CaseInsensitiveOption
+                                       | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
+                            QRegularExpression::CaseInsensitiveOption
+                            | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
+                             QRegularExpression::CaseInsensitiveOption
+                             | QRegularExpression::UseUnicodePropertiesOption );
+
+  QString articleNewText;
+  int linkPos = 0;
+  QRegularExpressionMatchIterator it = allLinksRe.globalMatch( article );
+  while( it.hasNext() )
+  {
+    QRegularExpressionMatch allLinksMatch = it.next();
+
+    if( allLinksMatch.capturedEnd() < linkPos )
+      continue;
+
+    articleNewText += article.midRef( linkPos, allLinksMatch.capturedStart() - linkPos );
+    linkPos = allLinksMatch.capturedEnd();
+
+    QString linkTxt = allLinksMatch.captured();
+    QString linkType = allLinksMatch.captured( 1 ).toLower();
+    QString newLink;
+
+    if( !linkType.isEmpty() && linkType.at( 0 ) == 'a' )
+    {
+      QRegularExpressionMatch match = anchorIdRe.match( linkTxt );
+      if( match.hasMatch() )
+      {
+        QString newText = match.captured( 1 ) + match.captured( 2 ) + uniquePrefix;
+        newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
+      }
+      else
+        newLink = linkTxt.replace( anchorIdRe2, "\\1\"" + uniquePrefix + "\\2\"" );
+
+      newLink = newLink.replace( anchorLinkRe, "\\1#" + uniquePrefix );
+
+      match = audioRe.match( newLink );
+      if( match.hasMatch() )
+      {
+        // sounds and audio link script
+        QString newTxt = match.captured( 1 ) + match.captured( 2 )
+                         + "gdau://" + id + "/"
+                         + match.captured( 3 ) + match.captured( 2 );
+        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + match.captured( 3 ).toUtf8().data() + "\"", getId() ).c_str() )
+                  + newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
+      }
+
+      match = wordCrossLink.match( newLink );
+      if( match.hasMatch() )
+      {
+        QString newTxt = match.captured( 1 ) + match.captured( 2 )
+                         + "gdlookup://localhost/"
+                         + match.captured( 3 );
+
+        if( match.lastCapturedIndex() >= 4 )
+          newTxt += QString( "?gdanchor=" ) + uniquePrefix + match.captured( 4 ).mid( 1 );
+
+        newTxt += match.captured( 2 );
+        newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
+      }
+    }
+    else
+    if( linkType.compare( "link" ) == 0 )
+    {
+      // stylesheets
+      QRegularExpressionMatch match = stylesRe.match( linkTxt );
+      if( match.hasMatch() )
+      {
+        QString newText = match.captured( 1 ) + match.captured( 2 )
+                          + "bres://" + id + "/"
+                          + match.captured( 3 ) + match.captured( 2 );
+        newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
+      }
+      else
+        newLink = linkTxt.replace( stylesRe2,
+                                   "\\1\"bres://" + id + "/\\2\"" );
+    }
+    else
+    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0 )
+    {
+      // javascripts and images
+      QRegularExpressionMatch match;
+      if( linkType.at( 0 ) == 's'
+          && linkTxt.indexOf( inlineScriptRe, 0, &match ) == 0
+          && match.capturedLength() == linkTxt.length() )
+      {
+        // skip inline scripts
+        articleNewText += linkTxt;
+        int pos = article.indexOf( closeScriptTagRe, linkPos, &match );
+        if( pos > 0 )
+        {
+          pos += match.capturedLength();
+          articleNewText += article.midRef( linkPos, pos - linkPos );
+          linkPos = pos;
+        }
+        continue;
+      }
+      else
+      {
+        match = srcRe.match( linkTxt );
+        if( match.hasMatch() )
+        {
+          QString newText = match.captured( 1 ) + match.captured( 2 )
+                            + "bres://" + id + "/"
+                            + match.captured( 3 ) + match.captured( 2 );
+          newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
+        }
+        else
+          newLink = linkTxt.replace( srcRe2,
+                                     "\\1\"bres://" + id + "/\\2\"" );
+      }
+    }
+    if( !newLink.isEmpty() )
+    {
+      articleNewText += newLink;
+    }
+    else
+      articleNewText += allLinksMatch.captured();
+  }
+  if( linkPos )
+  {
+    articleNewText += article.midRef( linkPos );
+    article = articleNewText;
+  }
+
+  return article;
+}
+#else
 QString & MdxDictionary::filterResource( QString const & articleId, QString & article )
 {
   QString id = QString::fromStdString( getId() );
@@ -1119,6 +1322,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 
   return article;
 }
+#endif
 
 static void addEntryToIndex( QString const & word, uint32_t offset, IndexedWords & indexedWords )
 {

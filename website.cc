@@ -8,8 +8,13 @@
 #include <QTextCodec>
 #include <QDir>
 #include <QFileInfo>
-#include <QRegExp>
 #include "gddebug.hh"
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#else
+#include <QRegExp>
+#endif
 
 namespace WebSite {
 
@@ -223,6 +228,87 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     while( !base.isEmpty() && !base.endsWith( "/" ) )
       base.chop( 1 );
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    QRegularExpression tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
+                             QRegularExpression::UseUnicodePropertiesOption
+                             | QRegularExpression::CaseInsensitiveOption );
+    QRegularExpression links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
+                              QRegularExpression::UseUnicodePropertiesOption
+                              | QRegularExpression::CaseInsensitiveOption );
+    int pos = 0;
+    QString articleNewString;
+    QRegularExpressionMatchIterator it = tags.globalMatch( articleString );
+    while( it.hasNext() )
+    {
+      QRegularExpressionMatch match = it.next();
+      articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+      pos = match.capturedEnd();
+
+      QString tag = match.captured();
+
+      QRegularExpressionMatch match_links = links.match( tag );
+      if( !match_links.hasMatch() )
+      {
+        articleNewString += tag;
+        continue;
+      }
+
+      QString url = match_links.captured( 3 );
+
+      if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0
+          || url.indexOf( "mailto:" ) >= 0 || url.startsWith( "#" )
+          || url.startsWith( "javascript:" ) )
+      {
+        // External link, anchor or base64-encoded data
+        articleNewString += tag;
+        continue;
+      }
+
+      QString newUrl = match_links.captured( 1 ) + "=" + match_links.captured( 2 );
+      if( url.startsWith( "//" ) )
+        newUrl += netReply->url().scheme() + ":";
+      else
+      if( url.startsWith( "/" ) )
+        newUrl += root;
+      else
+        newUrl += base;
+      newUrl += match_links.captured( 3 );
+
+      tag.replace( match_links.capturedStart(), match_links.capturedLength(), newUrl );
+      articleNewString += tag;
+    }
+    if( pos )
+    {
+      articleNewString += articleString.midRef( pos );
+      articleString = articleNewString;
+      articleNewString.clear();
+    }
+
+    // Redirect CSS links to own handler
+
+    QString prefix = QString( "bres://" ) + dictPtr->getId().c_str() + "/";
+    QRegularExpression linkTags( "(<\\s*link\\s[^>]*rel\\s*=\\s*['\"]stylesheet['\"]\\s+[^>]*href\\s*=\\s*['\"])([^'\"]+)://([^'\"]+['\"][^>]+>)",
+                                 QRegularExpression::UseUnicodePropertiesOption
+                                 | QRegularExpression::CaseInsensitiveOption );
+    pos = 0;
+    it = linkTags.globalMatch( articleString );
+    while( it.hasNext() )
+    {
+      QRegularExpressionMatch match = it.next();
+      articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+      pos = match.capturedEnd();
+
+      QString newTag = match.captured( 1 ) + prefix + match.captured( 2 )
+                       + "/" + match.captured( 3 );
+      articleNewString += newTag;
+    }
+    if( pos )
+    {
+      articleNewString += articleString.midRef( pos );
+      articleString = articleNewString;
+      articleNewString.clear();
+    }
+#else
     QRegExp tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
                   Qt::CaseInsensitive, QRegExp::RegExp2 );
     QRegExp links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
@@ -287,7 +373,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
       articleString.replace( pos, linkTags.cap().size(), newTag );
       pos += newTag.size();
     }
-
+#endif
     // Check for unclosed <span> and <div>
 
     int openTags = articleString.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );

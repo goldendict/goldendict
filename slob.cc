@@ -783,7 +783,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   {
     QRegularExpressionMatch match = it.next();
 
-    newText += text.mid( pos, match.capturedStart() - pos );
+    newText += text.midRef( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QStringList list = match.capturedTexts();
@@ -822,7 +822,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   }
   if( pos )
   {
-    newText += text.mid( pos );
+    newText += text.midRef( pos );
     text = newText;
   }
   newText.clear();
@@ -842,16 +842,14 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
       QRegularExpression regFrac( "\\\\[dt]frac" );
       QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])",
                                     QRegularExpression::UseUnicodePropertiesOption );
-      QRegularExpression multReg( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})",
-                                  QRegularExpression::UseUnicodePropertiesOption );
 #else
     QRegExp texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
                       Qt::CaseSensitive,
                       QRegExp::RegExp2 );
     QRegExp regFrac = QRegExp( "\\\\[dt]frac" );
     QRegExp regSpaces = QRegExp( "\\s+([\\{\\(\\[\\}\\)\\]])", Qt::CaseSensitive, QRegExp::RegExp2 );
-    QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
 #endif
+    QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     QString arrayDesc( "\\begin{array}{" );
     pos = 0;
@@ -865,13 +863,10 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     {
       QRegularExpressionMatch match = it.next();
 
-      newText += text.mid( pos, match.capturedStart() - pos );
+      newText += text.midRef( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QStringList list = match.capturedTexts();
-      // Add empty strings for compatibility with QRegExp behaviour
-      for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
-        list.append( QString() );
 #else
     while( (pos = texImage.indexIn( text, pos )) >= 0 )
     {
@@ -941,22 +936,10 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
                 int pos2 = 0;
                 while( pos2 >= 0 )
                 {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-                  QRegularExpressionMatch matchM = multReg.match( newDesc, pos2 );
-                  pos2 = matchM.capturedStart();
-#else
                   pos2 = multReg.indexIn( newDesc, pos2 );
-#endif
                   if( pos2 >= 0 )
                   {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-                    QStringList list = matchM.capturedTexts();
-                    // Add empty strings for compatibility with QRegExp behaviour
-                    for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
-                      list.append( QString() );
-#else
                     QStringList list = multReg.capturedTexts();
-#endif
                     int n = list[ 1 ].toInt();
                     for( int i = 0; i < n; i++ )
                       newStr += list[ 3 ].isEmpty() ? list[ 2 ] : list[ 3 ];
@@ -1006,7 +989,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     if( pos )
     {
-      newText += text.mid( pos );
+      newText += text.midRef( pos );
       text = newText;
     }
     newText.clear();

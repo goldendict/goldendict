@@ -366,19 +366,28 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
         int pos = 0;
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-        for( ; ; )
+        QString articleNewString;
+        QRegularExpressionMatchIterator it = links.globalMatch( articleString );
+        while( it.hasNext() )
         {
-          QRegularExpressionMatch match;
-          pos = articleString.indexOf( links, pos, &match );
-          if( pos < 0 )
-            break;
+          QRegularExpressionMatch match = it.next();
+          articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+          pos = match.capturedEnd();
 
           QString link = match.captured( 1 );
           link.replace( tags, " " );
           link.replace( "&nbsp;", " " );
-          articleString.replace( pos + 30, match.captured( 1 ).length(),
-                                 QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
-          pos += 30;
+
+          QString newLink = match.captured();
+          newLink.replace( 30, match.capturedLength( 1 ),
+                           QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
+          articleNewString += newLink;
+        }
+        if( pos )
+        {
+          articleNewString += articleString.midRef( pos );
+          articleString = articleNewString;
+          articleNewString.clear();
         }
 #else
         for( ; ; )
