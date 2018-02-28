@@ -1146,7 +1146,10 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
       QString articleStr;
       quint32 articleNom = offsets.at( i );
 
-      sf.getRefEntry( articleNom, entry );
+      {
+        Mutex::Lock _( slobMutex );
+        sf.getRefEntry( articleNom, entry );
+      }
 
       quint64 articleID = ( ( (quint64)entry.itemIndex ) << 32 ) | entry.binIndex;
 
