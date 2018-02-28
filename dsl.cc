@@ -91,7 +91,7 @@ enum
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 2
+  CurrentFtsIndexVersion = 3
 };
 
 struct IdxHeader
@@ -1373,12 +1373,11 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
       {
         list< wstring > lst;
 
+        processUnsortedParts( articleHeadword, true );
         expandOptionalParts( articleHeadword, &lst );
 
         if ( lst.size() ) // Should always be
           articleHeadword = lst.front();
-
-        processUnsortedParts( articleHeadword, true );
       }
     }
 
