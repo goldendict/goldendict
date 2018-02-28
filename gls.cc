@@ -974,6 +974,14 @@ QString & GlsDictionary::filterResource( QString & article )
 #endif
     }
   }
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  if( pos )
+  {
+    articleNewText += article.midRef( pos );
+    article = articleNewText;
+    articleNewText.clear();
+  }
+#endif
 
   return article;
 }
