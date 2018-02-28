@@ -230,11 +230,9 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
-                             QRegularExpression::UseUnicodePropertiesOption
-                             | QRegularExpression::CaseInsensitiveOption );
+                             QRegularExpression::CaseInsensitiveOption );
     QRegularExpression links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
-                              QRegularExpression::UseUnicodePropertiesOption
-                              | QRegularExpression::CaseInsensitiveOption );
+                              QRegularExpression::CaseInsensitiveOption );
     int pos = 0;
     QString articleNewString;
     QRegularExpressionMatchIterator it = tags.globalMatch( articleString );
@@ -288,8 +286,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 
     QString prefix = QString( "bres://" ) + dictPtr->getId().c_str() + "/";
     QRegularExpression linkTags( "(<\\s*link\\s[^>]*rel\\s*=\\s*['\"]stylesheet['\"]\\s+[^>]*href\\s*=\\s*['\"])([^'\"]+)://([^'\"]+['\"][^>]+>)",
-                                 QRegularExpression::UseUnicodePropertiesOption
-                                 | QRegularExpression::CaseInsensitiveOption );
+                                 QRegularExpression::CaseInsensitiveOption );
     pos = 0;
     it = linkTags.globalMatch( articleString );
     while( it.hasNext() )

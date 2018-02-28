@@ -505,29 +505,25 @@ string ZimDictionary::convert( const string & in )
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // replace background
-  text.replace( QRegularExpression( "<\\s*body\\s+([^>]*)(background(|-color)):([^;\"]*(;|))",
-                                    QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "<\\s*body\\s+([^>]*)(background(|-color)):([^;\"]*(;|))" ),
                 QString( "<body \\1" ) );
 
   // pattern of img and script
-  text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=(\"|)(\\.\\.|)/",
-                                    QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=(\"|)(\\.\\.|)/" ),
                 QString( "<\\1 \\2src=\\3bres://%1/").arg( getId().c_str() ) );
 
   // Fix links without '"'
-  text.replace( QRegularExpression( "href=(\\.\\.|)/([^\\s>]+)", QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "href=(\\.\\.|)/([^\\s>]+)" ),
                 QString( "href=\"\\1/\\2\"" ) );
 
   // pattern <link... href="..." ...>
-  text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(\\.\\.|)/",
-                                    QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(\\.\\.|)/" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 
   // localize the http://en.wiki***.com|org/wiki/<key> series links
   // excluding those keywords that have ":" in it
   QString urlWiki = "\"http(s|)://en\\.(wiki(pedia|books|news|quote|source|voyage|versity)|wiktionary)\\.(org|com)/wiki/([^:\"]*)\"";
-  text.replace( QRegularExpression( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki,
-                                    QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
                 QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
 #else
   // replace background
@@ -555,8 +551,7 @@ string ZimDictionary::convert( const string & in )
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
-                             QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
   QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
   int pos = 0;
   QString newText;

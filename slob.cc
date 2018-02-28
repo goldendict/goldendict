@@ -752,13 +752,11 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // pattern of img and script
-  text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"",
-                                    QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
                 QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
 
   // pattern <link... href="..." ...>
-  text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(?!(?:data|https?|ftp):)",
-                                    QRegularExpression::UseUnicodePropertiesOption ),
+  text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
 #else
   // pattern of img and script
@@ -774,8 +772,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   // these links will be translated into local definitions
   QString anchor;
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
-                             QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
   QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
   int pos = 0;
   QString newText;
@@ -837,11 +834,9 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   if( !texCgiPath.isEmpty() )
   {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-      QRegularExpression texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
-                                   QRegularExpression::UseUnicodePropertiesOption );
+      QRegularExpression texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>" );
       QRegularExpression regFrac( "\\\\[dt]frac" );
-      QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])",
-                                    QRegularExpression::UseUnicodePropertiesOption );
+      QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])" );
 #else
     QRegExp texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
                       Qt::CaseSensitive,

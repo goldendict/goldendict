@@ -395,22 +395,19 @@ string AardDictionary::convert( const string & in )
     QString text = QString::fromUtf8( inConverted.c_str() );
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    text.replace( QRegularExpression( "<\\s*a\\s*href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)",
-                                      QRegularExpression::DotMatchesEverythingOption
-                                      | QRegularExpression::UseUnicodePropertiesOption ),
+    text.replace( QRegularExpression( "<\\s*a\\s+href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)",
+                                      QRegularExpression::DotMatchesEverythingOption ),
                   "<a href=\"bword:\\2\"");
-    text.replace( QRegularExpression( "<\\s*a\\s*href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)",
-                                      QRegularExpression::DotMatchesEverythingOption
-                                      | QRegularExpression::UseUnicodePropertiesOption ),
+    text.replace( QRegularExpression( "<\\s*a\\s+href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)",
+                                      QRegularExpression::DotMatchesEverythingOption ),
                   "<a href=\"bword:\\2\"");
 
     // Anchors
-    text.replace( QRegularExpression( "<a href=\"bword:([^#\"]+)#([^\"]+)" ),
+    text.replace( QRegularExpression( "<a\s+href=\"bword:([^#\"]+)#([^\"]+)" ),
                   "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
 
-    static QRegularExpression self_closing_divs( "(<div\\s[^>]*)/>",
-                                                 QRegularExpression::UseUnicodePropertiesOption
-                                                 | QRegularExpression::CaseInsensitiveOption );  // <div ... />
+    static QRegularExpression self_closing_divs( "(<div\\s+[^>]*)/>",
+                                                 QRegularExpression::CaseInsensitiveOption );  // <div ... />
     text.replace( self_closing_divs, "\\1></div>" );
 #else
     text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)" ),

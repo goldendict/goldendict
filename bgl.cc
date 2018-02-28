@@ -892,25 +892,20 @@ void BglArticleRequest::run()
   result = QString::fromUtf8( result.c_str() )
           // onclick location to link
           .replace( QRegularExpression( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>",
-                                        QRegularExpression::CaseInsensitiveOption
-                                        | QRegularExpression::UseUnicodePropertiesOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "<a href=\"\\2\">\\3</a>")
            .replace( QRegularExpression( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://",
-                                         QRegularExpression::CaseInsensitiveOption
-                                         | QRegularExpression::UseUnicodePropertiesOption ),
+                                         QRegularExpression::CaseInsensitiveOption ),
                      "\\1bword:" )
           //remove invalid width, height attrs
-          .replace( QRegularExpression( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']",
-                                        QRegularExpression::UseUnicodePropertiesOption ),
+          .replace( QRegularExpression( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
                    "" )
           //remove invalid <br> tag
           .replace( QRegularExpression( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)",
-                                        QRegularExpression::CaseInsensitiveOption
-                                        | QRegularExpression::UseUnicodePropertiesOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "\\1" )
           .replace( QRegularExpression( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>",
-                                        QRegularExpression::CaseInsensitiveOption
-                                        | QRegularExpression::UseUnicodePropertiesOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     " \\1 " )
            .toUtf8().data();
 #else
@@ -1103,10 +1098,9 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
                                    QRegularExpression::CaseInsensitiveOption
-                                   | QRegularExpression::UseUnicodePropertiesOption
                                    | QRegularExpression::InvertedGreedinessOption );
 
-    QRegularExpression oneValueExp( "\\s*([0-9a-fA-F]+)\\s*;", QRegularExpression::UseUnicodePropertiesOption );
+    QRegularExpression oneValueExp( "\\s*([0-9a-fA-F]+)\\s*;" );
     QString result;
     int pos = 0;
 

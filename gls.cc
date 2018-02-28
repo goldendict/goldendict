@@ -518,7 +518,6 @@ private:
 
   /// Process resource links (images, audios, etc)
   QString & filterResource( QString & article );
-  QString & filterResource2( QString & article );
 
   friend class GlsResourceRequest;
   friend class GlsArticleRequest;
@@ -820,11 +819,9 @@ QString & GlsDictionary::filterResource( QString & article )
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)",
                             QRegularExpression::CaseInsensitiveOption
-                            | QRegularExpression::UseUnicodePropertiesOption
                             | QRegularExpression::InvertedGreedinessOption );
   QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                              QRegularExpression::CaseInsensitiveOption
-                             | QRegularExpression::UseUnicodePropertiesOption
                              | QRegularExpression::InvertedGreedinessOption );
 #else
   QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)", Qt::CaseInsensitive );
@@ -838,9 +835,8 @@ QString & GlsDictionary::filterResource( QString & article )
   // Handle links to articles
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]",
-                               QRegularExpression::CaseInsensitiveOption
-                               | QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression linksReg( "<a(\\s+[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]",
+                               QRegularExpression::CaseInsensitiveOption );
 #else
   QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]" );
   linksReg.setMinimal( true );
@@ -922,12 +918,11 @@ QString & GlsDictionary::filterResource( QString & article )
   // Handle "audio" tags
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
+  QRegularExpression audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
                               QRegularExpression::CaseInsensitiveOption
-                              | QRegularExpression::UseUnicodePropertiesOption
                               | QRegularExpression::InvertedGreedinessOption );
 #else
-  QRegExp audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
+  QRegExp audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
   audioRe.setMinimal( true );
 #endif
 
@@ -977,87 +972,6 @@ QString & GlsDictionary::filterResource( QString & article )
       article.replace( pos, audioRe.cap( 0 ).length(), newTag );
       pos += newTag.length();
 #endif
-    }
-  }
-
-  return article;
-}
-
-QString & GlsDictionary::filterResource2( QString & article )
-{
-  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)", Qt::CaseInsensitive );
-  imgRe.setMinimal( true );
-  QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-  linkRe.setMinimal( true );
-  article.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
-         .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
-
-  // Handle links to articles
-
-  QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]" );
-  linksReg.setMinimal( true );
-
-  int pos = 0;
-  while( pos >= 0 )
-  {
-    pos = linksReg.indexIn( article, pos );
-    if( pos < 0 )
-      break;
-
-    QString link = linksReg.cap( 3 );
-    if( link.indexOf( ':' ) < 0 )
-    {
-      QString newLink;
-      if( link.indexOf( '#' ) < 0 )
-        newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"bword:" + link + "\"";
-
-      // Anchors
-
-      if( link.indexOf( '#' ) > 0 )
-      {
-        newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"gdlookup://localhost/" + link + "\"";
-        newLink.replace( "#", "?gdanchor=" );
-      }
-
-      if( !newLink.isEmpty() )
-      {
-        article.replace( pos, linksReg.cap( 0 ).size(), newLink );
-        pos += newLink.size();
-      }
-      else
-        pos += linksReg.cap( 0 ).size();
-    }
-    else
-      pos += linksReg.cap( 0 ).size();
-  }
-
-  // Handle "audio" tags
-
-  QRegExp audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
-  audioRe.setMinimal( true );
-
-  pos = 0;
-
-  while( pos >= 0 )
-  {
-    pos = audioRe.indexIn( article, pos );
-    if( pos < 0 )
-      break;
-
-    QString src = audioRe.cap( 2 );
-    if( src.indexOf( "://" ) >= 0 )
-      pos += audioRe.cap( 0 ).length();
-    else
-    {
-      std::string href = "\"gdau://" + getId() + "/" + src.toUtf8().data() + "\"";
-      QString newTag = QString::fromUtf8( ( addAudioLink( href, getId() ) + "<span class=\"gls_wav\"><a href=" + href + ">" ).c_str() );
-      newTag += audioRe.cap( 4 );
-      if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
-        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
-      newTag += "</a></span>";
-
-      article.replace( pos, audioRe.cap( 0 ).length(), newTag );
-      pos += newTag.length();
     }
   }
 
@@ -1543,8 +1457,7 @@ void GlsResourceRequest::run()
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
-                                QRegularExpression::CaseInsensitiveOption
-                                | QRegularExpression::UseUnicodePropertiesOption );
+                                QRegularExpression::CaseInsensitiveOption );
 
       QString newCSS;
       QRegularExpressionMatchIterator it = links.globalMatch( css );

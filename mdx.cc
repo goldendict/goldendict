@@ -857,8 +857,7 @@ void MddResourceRequest::run()
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
-                                  QRegularExpression::UseUnicodePropertiesOption
-                                  | QRegularExpression::CaseInsensitiveOption );
+                                  QRegularExpression::CaseInsensitiveOption );
 #else
         QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", Qt::CaseInsensitive, QRegExp::RegExp );
 #endif
@@ -1031,42 +1030,30 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
   QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)",
-                                 QRegularExpression::CaseInsensitiveOption
-                                 | QRegularExpression::UseUnicodePropertiesOption );
+                                 QRegularExpression::CaseInsensitiveOption );
   QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*)((?:#[^>]*)?)\\2",
-                                    QRegularExpression::CaseInsensitiveOption
-                                    | QRegularExpression::UseUnicodePropertiesOption );
+                                    QRegularExpression::CaseInsensitiveOption );
   QRegularExpression anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)",
-                                 QRegularExpression::CaseInsensitiveOption
-                                 | QRegularExpression::UseUnicodePropertiesOption );
+                                 QRegularExpression::CaseInsensitiveOption );
   QRegularExpression anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)",
-                                  QRegularExpression::CaseInsensitiveOption
-                                  | QRegularExpression::UseUnicodePropertiesOption );
+                                  QRegularExpression::CaseInsensitiveOption );
   QRegularExpression anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#",
-                                   QRegularExpression::CaseInsensitiveOption
-                                   | QRegularExpression::UseUnicodePropertiesOption );
+                                   QRegularExpression::CaseInsensitiveOption );
   QRegularExpression audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
                               QRegularExpression::CaseInsensitiveOption
-                              | QRegularExpression::UseUnicodePropertiesOption
                               | QRegularExpression::InvertedGreedinessOption );
   QRegularExpression stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-                               QRegularExpression::CaseInsensitiveOption
-                               | QRegularExpression::UseUnicodePropertiesOption );
+                               QRegularExpression::CaseInsensitiveOption );
   QRegularExpression stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-                                QRegularExpression::CaseInsensitiveOption
-                                | QRegularExpression::UseUnicodePropertiesOption );
+                                QRegularExpression::CaseInsensitiveOption );
   QRegularExpression inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
-                                     QRegularExpression::CaseInsensitiveOption
-                                     | QRegularExpression::UseUnicodePropertiesOption );
+                                     QRegularExpression::CaseInsensitiveOption );
   QRegularExpression closeScriptTagRe( "<\\s*/script\\s*>",
-                                       QRegularExpression::CaseInsensitiveOption
-                                       | QRegularExpression::UseUnicodePropertiesOption );
+                                       QRegularExpression::CaseInsensitiveOption );
   QRegularExpression srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-                            QRegularExpression::CaseInsensitiveOption
-                            | QRegularExpression::UseUnicodePropertiesOption );
+                            QRegularExpression::CaseInsensitiveOption );
   QRegularExpression srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-                             QRegularExpression::CaseInsensitiveOption
-                             | QRegularExpression::UseUnicodePropertiesOption );
+                             QRegularExpression::CaseInsensitiveOption );
 
   QString articleNewText;
   int linkPos = 0;

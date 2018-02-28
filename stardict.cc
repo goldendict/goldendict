@@ -462,11 +462,9 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                                 QRegularExpression::CaseInsensitiveOption
-                                | QRegularExpression::UseUnicodePropertiesOption
                                 | QRegularExpression::InvertedGreedinessOption );
       QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                                  QRegularExpression::CaseInsensitiveOption
-                                 | QRegularExpression::UseUnicodePropertiesOption
                                  | QRegularExpression::InvertedGreedinessOption );
 #else
       QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
@@ -482,8 +480,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]",
-                                   QRegularExpression::CaseInsensitiveOption
-                                   | QRegularExpression::UseUnicodePropertiesOption );
+                                   QRegularExpression::CaseInsensitiveOption );
 #else
       QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]", Qt::CaseInsensitive );
       linksReg.setMinimal( true );
@@ -567,7 +564,6 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
                                   QRegularExpression::CaseInsensitiveOption
-                                  | QRegularExpression::UseUnicodePropertiesOption
                                   | QRegularExpression::InvertedGreedinessOption );
 #else
       QRegExp audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
@@ -1837,8 +1833,7 @@ void StardictResourceRequest::run()
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
-                                QRegularExpression::CaseInsensitiveOption
-                                | QRegularExpression::UseUnicodePropertiesOption );
+                                QRegularExpression::CaseInsensitiveOption );
 
       QString newCSS;
       QRegularExpressionMatchIterator it = links.globalMatch( css );

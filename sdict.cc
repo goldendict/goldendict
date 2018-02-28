@@ -292,33 +292,26 @@ string SdictDictionary::convert( string const & in )
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     result.replace( QRegularExpression( "<\\s*(p|br)\\s*>",
-                                        QRegularExpression::UseUnicodePropertiesOption
-                                        | QRegularExpression::CaseInsensitiveOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "<br/>" );
     result.remove( QRegularExpression( "<\\s*/p\\s*>",
-                                       QRegularExpression::UseUnicodePropertiesOption
-                                       | QRegularExpression::CaseInsensitiveOption ) );
+                                       QRegularExpression::CaseInsensitiveOption ) );
 
     result.replace( QRegularExpression( "<\\s*t\\s*>",
-                                        QRegularExpression::UseUnicodePropertiesOption
-                                        | QRegularExpression::CaseInsensitiveOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "<span class=\"sdict_tr\" dir=\"ltr\">" );
     result.replace( QRegularExpression( "<\\s*f\\s*>",
-                                        QRegularExpression::UseUnicodePropertiesOption
-                                        | QRegularExpression::CaseInsensitiveOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "<span class=\"sdict_forms\">" );
     result.replace( QRegularExpression( "<\\s*/(t|f)\\s*>",
-                                        QRegularExpression::UseUnicodePropertiesOption
-                                        | QRegularExpression::CaseInsensitiveOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "</span>" );
 
     result.replace( QRegularExpression( "<\\s*l\\s*>",
-                                        QRegularExpression::UseUnicodePropertiesOption
-                                        | QRegularExpression::CaseInsensitiveOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "<ul>" );
     result.replace( QRegularExpression( "<\\s*/l\\s*>",
-                                        QRegularExpression::UseUnicodePropertiesOption
-                                        | QRegularExpression::CaseInsensitiveOption ),
+                                        QRegularExpression::CaseInsensitiveOption ),
                     "</ul>" );
 #else
     result.replace( QRegExp( "<\\s*(p|br)\\s*>", Qt::CaseInsensitive ), "<br/>" );
