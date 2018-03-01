@@ -937,7 +937,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
   if( !wordsList.isEmpty() )
   {
     QVector< BtreeIndexing::WordArticleLink > links;
-    ftsIndex.findArticleLinks( &links, 0, 0 );
+    ftsIndex.findArticleLinks( &links, 0, 0, &isCancelled );
 
     for( int x = 0; x < links.size(); x++ )
     {
@@ -1019,7 +1019,7 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
   if( indexWords.isEmpty() )
     return;
 
-  ftsIndex.findArticleLinks( &links, 0, 0 );
+  ftsIndex.findArticleLinks( &links, 0, 0, &isCancelled );
 
   QVector< QSet< uint32_t > > allWordsLinks;
   allWordsLinks.resize( indexWords.size() );
@@ -1095,7 +1095,7 @@ void FTSResultsRequest::fullSearch( QStringList & searchWords, QRegExp & regexp 
 
   QSet< uint32_t > setOfOffsets;
   setOfOffsets.reserve( dict.getArticleCount() );
-  dict.findArticleLinks( 0, &setOfOffsets, 0 );
+  dict.findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
   if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     return;
