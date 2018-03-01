@@ -1093,6 +1093,7 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
     BtreeIndexing::IndexedWords indexedWords;
 
     QSet< uint32_t > setOfOffsets;
+    setOfOffsets.reserve( getWordCount() );
 
     findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 

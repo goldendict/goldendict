@@ -201,6 +201,7 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
 #endif
 
   QSet< QString > setOfWords;
+  setOfWords.reserve( articleWords.size() );
 
   for( int x = 0; x < articleWords.size(); x++ )
   {
@@ -315,6 +316,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   BtreeIndexing::IndexedWords indexedWords;
 
   QSet< uint32_t > setOfOffsets;
+  setOfOffsets.reserve( dict->getArticleCount() );
 
   dict->findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
@@ -937,6 +939,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
   if( !wordsList.isEmpty() )
   {
     QVector< BtreeIndexing::WordArticleLink > links;
+    links.reserve( wordsInIndex );
     ftsIndex.findArticleLinks( &links, 0, 0, &isCancelled );
 
     for( int x = 0; x < links.size(); x++ )
@@ -1019,6 +1022,7 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
   if( indexWords.isEmpty() )
     return;
 
+  links.reserve( wordsInIndex );
   ftsIndex.findArticleLinks( &links, 0, 0, &isCancelled );
 
   QVector< QSet< uint32_t > > allWordsLinks;
@@ -1157,6 +1161,8 @@ void FTSResultsRequest::run()
         Mutex::Lock _( dict.getFtsMutex() );
 
         ftsIdxHeader = ftsIdx.read< FtsIdxHeader >();
+
+        wordsInIndex = ftsIdxHeader.wordCount;
 
         ftsIndex.openIndex( BtreeIndexing::IndexInfo( ftsIdxHeader.indexBtreeMaxElements,
                                                       ftsIdxHeader.indexRootOffset ),

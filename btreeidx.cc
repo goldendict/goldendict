@@ -1343,6 +1343,25 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
   for( ; ; )
   {
     vector< WordArticleLink > result = readChain( chainPtr );
+
+    if( headwords && static_cast< vector< WordArticleLink >::size_type >( headwords->capacity() ) < headwords->size() + result.size() )
+    {
+      int n = headwords->capacity();
+      headwords->reserve( n + n / 10 );
+    }
+
+    if( offsets && static_cast< vector< WordArticleLink >::size_type >( offsets->capacity() ) < offsets->size() + result.size() )
+    {
+      int n = offsets->capacity();
+      offsets->reserve( n + n / 10 );
+    }
+
+    if( articleLinks && static_cast< vector< WordArticleLink >::size_type >( articleLinks->capacity() ) < articleLinks->size() + result.size() )
+    {
+      int n = articleLinks->capacity();
+      articleLinks->reserve( n + n / 10 );
+    }
+
     for( unsigned i = 0; i < result.size(); i++ )
     {
       if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
