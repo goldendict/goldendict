@@ -157,6 +157,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
   ui.searchMode->addItem( tr( "Whole words" ), WholeWords );
   ui.searchMode->addItem( tr( "Plain text"), PlainText );
+  ui.searchMode->addItem( tr( "Enumeration" ), Enumeration );
   ui.searchMode->addItem( tr( "Wildcards" ), Wildcards );
   ui.searchMode->addItem( tr( "RegExp" ), RegExp );
   ui.searchMode->setCurrentIndex( cfg.preferences.fts.searchMode );
@@ -333,7 +334,7 @@ void FullTextSearchDialog::setNewIndexingName( QString name )
 void FullTextSearchDialog::setLimitsUsing()
 {
   int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
-  if( mode == WholeWords || mode == PlainText )
+  if( mode == WholeWords || mode == PlainText  || mode == Enumeration )
   {
     ui.checkBoxDistanceBetweenWords->setEnabled( true );
     ui.distanceBetweenWords->setEnabled( ui.checkBoxDistanceBetweenWords->isChecked() );
