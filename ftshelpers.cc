@@ -493,6 +493,14 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   {
     // Words mode
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    QRegularExpression splitWithBrackets( "[^\\w\\(\\)\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
+    QRegularExpression splitWithoutBrackets( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
+#else
+    QRegExp splitWithBrackets( "[^\\w\\(\\)]+" );
+    QRegExp splitWithoutBrackets( "\\W+" );
+#endif
+
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;
     if( ignoreWordsOrder )
@@ -521,17 +529,10 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       }
 
       dict.getArticleText( offsets.at( i ), headword, articleText );
-      articleText = articleText.normalized( QString::NormalizationForm_C );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                            .split( QRegularExpression( needHandleBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
-                                                                        QRegularExpression::UseUnicodePropertiesOption ),
+                                            .split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
                                                     QString::SkipEmptyParts );
-#else
-      QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                            .split( QRegExp( needHandleBrackets ? "[^\\w\\(\\)]+" : "\\W+" ), QString::SkipEmptyParts );
-#endif
 
       int wordsNum = articleWords.length();
       while ( pos < wordsNum )
