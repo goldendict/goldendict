@@ -401,6 +401,48 @@ bool indexIsOldOrBad( string const & indexFile )
          header.formatVersion != CurrentFormatVersion;
 }
 
+quint32 getArticleCluster( ZimFile & file, quint32 articleNumber )
+{
+  while( 1 )
+  {
+    ZIM_header const & header = file.header();
+    if( articleNumber >= header.articleCount )
+      break;
+
+    file.seek( header.urlPtrPos + (quint64)articleNumber * 8 );
+    quint64 pos;
+    if( file.read( reinterpret_cast< char * >( &pos ), sizeof(pos) ) != sizeof(pos) )
+      break;
+
+    // Read article info
+
+    quint16 mimetype;
+
+    file.seek( pos );
+    if( file.read( reinterpret_cast< char * >( &mimetype ), sizeof(mimetype) ) != sizeof(mimetype) )
+      break;
+
+    if( mimetype == 0xFFFF ) // Redirect to other article
+    {
+      RedirectEntry redEntry;
+      if( file.read( reinterpret_cast< char * >( &redEntry ) + 2, sizeof(redEntry) - 2 ) != sizeof(redEntry) - 2 )
+        break;
+      if( articleNumber == redEntry.redirectIndex )
+        break;
+      articleNumber = redEntry.redirectIndex;
+      continue;
+    }
+
+    ArticleEntry artEntry;
+    artEntry.mimetype = mimetype;
+    if( file.read( reinterpret_cast< char * >( &artEntry ) + 2, sizeof(artEntry) - 2 ) != sizeof(artEntry) - 2 )
+      break;
+
+    return artEntry.clusterNumber;
+  }
+  return 0xFFFFFFFF;
+}
+
 quint32 readArticle( ZimFile & file, quint32 articleNumber, string & result,
                      set< quint32 > * loadedArticles = NULL )
 {
@@ -930,15 +972,18 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
-    QVector< uint32_t > offsets;
-    offsets.resize( setOfOffsets.size() );
-    uint32_t * ptr = &offsets.front();
+    // We should sort articles order by cluster number
+    // to effective use clusters data caching
+
+    QVector< QPair< quint32, uint32_t > > offsetsWithClusters;
+    offsetsWithClusters.reserve( setOfOffsets.size() );
 
     for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
          it != setOfOffsets.constEnd(); ++it )
     {
-      *ptr = *it;
-      ptr++;
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        throw exUserAbort();
+      offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
     }
 
     // Free memory
@@ -947,7 +992,15 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
-    qSort( offsets );
+    qSort( offsetsWithClusters );
+
+    QVector< uint32_t > offsets;
+    offsets.resize( offsetsWithClusters.size() );
+    for( int i = 0; i < offsetsWithClusters.size(); i++ )
+      offsets[ i ] = offsetsWithClusters.at( i ).second;
+
+    // Free memory
+    offsetsWithClusters.clear();
 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
