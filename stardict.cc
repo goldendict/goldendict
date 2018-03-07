@@ -1535,7 +1535,7 @@ void StardictArticleRequest::run()
 
     for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
     {
-        result += dict.isFromLanguageRTL() ? "<h3 dir=\"rtl\">" : "<h3>";
+        result += dict.isFromLanguageRTL() ? "<h3 class=\"sdct_headwords\" dir=\"rtl\">" : "<h3 class=\"sdct_headwords\">";
         result += i->second.first;
         result += "</h3>";
         if( dict.isToLanguageRTL() )
@@ -1548,7 +1548,7 @@ void StardictArticleRequest::run()
 
     for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
     {
-        result += dict.isFromLanguageRTL() ? "<h3 dir=\"rtl\">" : "<h3>";
+        result += dict.isFromLanguageRTL() ? "<h3 class=\"sdct_headwords\" dir=\"rtl\">" : "<h3 class=\"sdct_headwords\">";
         result += i->second.first;
         result += "</h3>";
         if( dict.isToLanguageRTL() )
