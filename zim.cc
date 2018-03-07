@@ -584,6 +584,8 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
                 && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
     }
 
+    virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets );
+
 protected:
 
     virtual void loadIcon() throw();
@@ -1081,6 +1083,21 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     gdWarning( "Zim: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
+}
+
+void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets )
+{
+  QVector< QPair< quint32, uint32_t > > offsetsWithClusters;
+  offsetsWithClusters.reserve( offsets.size() );
+
+  for( QVector< uint32_t >::ConstIterator it = offsets.constBegin();
+       it != offsets.constEnd(); ++it )
+    offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
+
+  qSort( offsetsWithClusters );
+
+  for( int i = 0; i < offsetsWithClusters.size(); i++ )
+    offsets[ i ] = offsetsWithClusters.at( i ).second;
 }
 
 void ZimDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
