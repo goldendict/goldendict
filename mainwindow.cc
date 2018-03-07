@@ -3259,12 +3259,14 @@ void MainWindow::setAutostart(bool autostart)
     }
     reg.sync();
 #else
-    // this is for KDE
+    // this is for Linux
     QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-    QString lnk(QDir::homePath()+"/.kde/Autostart/"+app_fname);
+    QString ShareDataPath = Config::getProgramDataDir() + "../applications/";
+    QString lnk(QDir::homePath() + "/.config/autostart/" + app_fname + ".desktop");
     if (autostart) {
-        QFile f(QCoreApplication::applicationFilePath());
-        f.link(lnk);
+//        QFile f(ShareDataPath+app_fname+".desktop");
+//        f.link(lnk);
+        QFile::copy(ShareDataPath + app_fname + ".desktop", lnk);
     } else {
         QFile::remove(lnk);
     }
