@@ -985,6 +985,8 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     {
       if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
+
+      Mutex::Lock _( zimMutex );
       offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
     }
 
@@ -1096,6 +1098,8 @@ void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
   {
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       return;
+
+    Mutex::Lock _( zimMutex );
     offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
   }
 
