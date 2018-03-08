@@ -74,6 +74,8 @@ public:
   QString getTranslateLineText() const
   { return translateLine->text(); }
 
+  void toggleScanPopup();
+
   /// Set group for main/popup window
   void setGroupByName( QString const & name, bool main_window );
 
