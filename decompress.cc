@@ -80,14 +80,12 @@ int res;
 
 #ifdef MAKE_ZIM_SUPPORT
 
-#define BUFSIZE 0xFFFF
-
 string decompressLzma2( const char * bufptr, unsigned length,
                         bool raw_decoder )
 {
 string str;
 lzma_ret res;
-char buf[BUFSIZE];
+char buf[CHUNK_SIZE];
 
   lzma_stream strm = LZMA_STREAM_INIT;
   strm.next_in = reinterpret_cast< const uint8_t * >( bufptr );
@@ -118,9 +116,9 @@ char buf[BUFSIZE];
     while ( res != LZMA_STREAM_END )
     {
       strm.next_out = reinterpret_cast< uint8_t * >( buf );
-      strm.avail_out = BUFSIZE;
+      strm.avail_out = CHUNK_SIZE;
       res = lzma_code( &strm, LZMA_RUN );
-      str.append( buf, BUFSIZE - strm.avail_out );
+      str.append( buf, CHUNK_SIZE - strm.avail_out );
       if( res != LZMA_OK && res != LZMA_STREAM_END )
         break;
     }
