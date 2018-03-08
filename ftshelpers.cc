@@ -340,7 +340,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     throw exUserAbort();
 
-  dict->sortArticlesOffsetsForFTS( offsets );
+  dict->sortArticlesOffsetsForFTS( offsets, isCancelled );
 
   QMap< QString, QVector< uint32_t > > ftsWords;
 
@@ -851,7 +851,7 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
   setOfOffsets.clear();
 
-  dict.sortArticlesOffsetsForFTS( offsets );
+  dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
   checkArticles( offsets, searchWords );
 }
@@ -1002,7 +1002,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
   setOfOffsets.clear();
 
-  dict.sortArticlesOffsetsForFTS( offsets );
+  dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
   checkArticles( offsets, searchWords, regexp );
 }
@@ -1086,7 +1086,7 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
   setOfOffsets.clear();
 
-  dict.sortArticlesOffsetsForFTS( offsets );
+  dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
   checkArticles( offsets, searchWords, regexp );
 }
@@ -1121,7 +1121,7 @@ void FTSResultsRequest::fullSearch( QStringList & searchWords, QRegExp & regexp 
 
   setOfOffsets.clear();
 
-  dict.sortArticlesOffsetsForFTS( offsets );
+  dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
   if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     return;

@@ -192,8 +192,9 @@ public:
   // Sort articles offsets for full-text search in dictionary-specific order
   // to increase of articles retrieving speed
   // Default - simple sorting in increase order
-  virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets )
-  { qSort( offsets ); }
+  virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
+                                          QAtomicInt & isCancelled )
+  { Q_UNUSED( isCancelled ); qSort( offsets ); }
 
   /// Called before each matching operation to ensure that any child init
   /// has completed. Mainly used for deferred init. The default implementation

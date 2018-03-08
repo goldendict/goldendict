@@ -584,7 +584,7 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
                 && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
     }
 
-    virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets );
+    virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets, QAtomicInt & isCancelled );
 
 protected:
 
@@ -1085,14 +1085,19 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   }
 }
 
-void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets )
+void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
+                                               QAtomicInt & isCancelled )
 {
   QVector< QPair< quint32, uint32_t > > offsetsWithClusters;
   offsetsWithClusters.reserve( offsets.size() );
 
   for( QVector< uint32_t >::ConstIterator it = offsets.constBegin();
        it != offsets.constEnd(); ++it )
+  {
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      return;
     offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
+  }
 
   qSort( offsetsWithClusters );
 
