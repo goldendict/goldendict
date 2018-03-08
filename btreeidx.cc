@@ -1412,6 +1412,8 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   uint32_t nextLeaf = 0;
   uint32_t leafEntries;
 
+  qSort( offsets );
+
   Mutex::Lock _( *idxFileMutex );
 
   if ( !rootNodeLoaded )
