@@ -91,7 +91,7 @@ enum
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 3
+  CurrentFtsIndexVersion = 4
 };
 
 struct IdxHeader
@@ -1331,7 +1331,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   // Skip headword
 
   size_t pos = 0;
-  wstring articleHeadword;
+  wstring articleHeadword, tildeValue;
 
   // Check if we retrieve insided card
   bool insidedCard = isDslWs( articleData.at( 0 ) );
@@ -1372,6 +1372,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
       if( !articleHeadword.empty() )
       {
         list< wstring > lst;
+
+        tildeValue = articleHeadword;
 
         processUnsortedParts( articleHeadword, true );
         expandOptionalParts( articleHeadword, &lst );
@@ -1434,6 +1436,14 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     articleText = wstring( articleData, pos );
   else
     articleText.clear();
+
+  if( !tildeValue.empty() )
+  {
+    list< wstring > lst;
+    expandOptionalParts( tildeValue, &lst );
+    if ( lst.size() ) // Should always be
+      expandTildes( articleText, lst.front() );
+  }
 
   if( !articleText.empty() )
   {
