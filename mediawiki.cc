@@ -479,7 +479,8 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
   // audio tag
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression reg1( "<audio\\s.+?</audio>",
-                           QRegularExpression::CaseInsensitiveOption );
+                           QRegularExpression::CaseInsensitiveOption
+                           | QRegularExpression::DotMatchesEverythingOption );
   QRegularExpression reg2( "<source\\s+src=\"([^\"]+)",
                            QRegularExpression::CaseInsensitiveOption );
   pos = 0;
@@ -534,12 +535,12 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
 #endif
   // audio url
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
+  articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
 #else
-  articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)" ),
+  articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
 #endif
                          QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
-                                                               this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1" ) );
+                                                               this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
 
   // Add url scheme to image source urls
   articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );
@@ -591,6 +592,9 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
   articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]*file%3A[^/\"]+\")", Qt::CaseInsensitive ),
 #endif
                          QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
+
+  // Add url scheme to other urls like  "//xxx"
+  articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
 }
 
 void MediaWikiArticleRequest::appendArticleToData( QString const & articleString )
