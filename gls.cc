@@ -920,6 +920,7 @@ QString & GlsDictionary::filterResource( QString & article )
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
                               QRegularExpression::CaseInsensitiveOption
+                              | QRegularExpression::DotMatchesEverythingOption
                               | QRegularExpression::InvertedGreedinessOption );
 #else
   QRegExp audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
