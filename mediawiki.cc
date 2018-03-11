@@ -538,8 +538,11 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 #endif
                                    QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
 
+            // Add url scheme to other urls like  "//xxx"
+            articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
+
             QByteArray articleBody = articleString.toUtf8();
-  
+
             articleBody.prepend( dictPtr->isToLanguageRTL() ? "<div class=\"mwiki\" dir=\"rtl\">" :
                                                               "<div class=\"mwiki\">" );
             articleBody.append( "</div>" );
