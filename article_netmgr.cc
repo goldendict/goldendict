@@ -1,6 +1,8 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
+#include <algorithm>
+
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
@@ -174,7 +176,7 @@ using std::string;
 
   qint64 AllowFrameReply::bytesAvailable() const
   {
-    return buffer.size() + QNetworkReply::bytesAvailable();
+    return qint64( buffer.size() ) + QNetworkReply::bytesAvailable();
   }
 
   void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
@@ -186,15 +188,16 @@ using std::string;
   void AllowFrameReply::readDataFromBase()
   {
     QByteArray data = baseReply->readAll();
-    buffer += data;
+    buffer.insert( buffer.end(), data.cbegin(), data.cend() );
     emit readyRead();
   }
 
   qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
   {
     qint64 size = qMin( maxSize, qint64( buffer.size() ) );
-    memcpy( data, buffer.data(), size );
-    buffer.remove( 0, size );
+    const std::deque< char >::iterator end = buffer.begin() + size;
+    std::copy( buffer.begin(), end, data );
+    buffer.erase( buffer.begin(), end );
     return size;
   }
 
