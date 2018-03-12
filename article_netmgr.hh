@@ -4,6 +4,8 @@
 #ifndef __ARTICLE_NETMGR_HH_INCLUDED__
 #define __ARTICLE_NETMGR_HH_INCLUDED__
 
+#include <deque>
+
 #include <QtNetwork>
 
 #if QT_VERSION >= 0x050200  // Qt 5.2+
@@ -59,7 +61,7 @@ class AllowFrameReply : public QNetworkReply
   Q_OBJECT
 private:
   QNetworkReply * baseReply;
-  QByteArray buffer;
+  std::deque< char > buffer;
 
   AllowFrameReply();
   AllowFrameReply( AllowFrameReply const & );
