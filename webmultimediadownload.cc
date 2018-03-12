@@ -61,13 +61,11 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
 
     // Handle reply data
 
-    QByteArray all = r->readAll();
-
     Mutex::Lock _( dataMutex );
 
-    data.resize( all.size() );
+    data.resize( r->bytesAvailable() );
 
-    memcpy( data.data(), all.data(), all.size() );
+    r->read( data.data(), data.size() );
 
     hasAnyData = true;
   }

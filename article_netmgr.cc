@@ -185,7 +185,9 @@ using std::string;
 
   void AllowFrameReply::readDataFromBase()
   {
-    QByteArray data = baseReply->readAll();
+    QByteArray data;
+    data.resize( baseReply->bytesAvailable() );
+    baseReply->read( data.data(), data.size() );
     buffer += data;
     emit readyRead();
   }
