@@ -49,7 +49,7 @@ using std::pair;
 enum
 {
   BtreeMinElements = 64,
-  BtreeMaxElements = 2048
+  BtreeMaxElements = 4096
 };
 
 BtreeIndex::BtreeIndex():
