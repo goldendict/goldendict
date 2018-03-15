@@ -1142,7 +1142,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                this, SLOT( resourceDownloadFinished() ) );
     }
     else
-    if ( url.scheme() == "gdau" && url.host() == "search" )
+    if ( url.scheme() == "gdau" && Dictionary::ResourceSearch::isSearchHost( url.host() ) )
     {
       // Since searches should be limited to current group, we just do them
       // here ourselves since otherwise we'd need to pass group id to netmgr
@@ -1211,6 +1211,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                   10000, QPixmap( ":/icons/error.png" ) );
           }
         }
+        const Dictionary::ResourceSearch::Type resourceSearchType = Dictionary::ResourceSearch::hostType( url.host() );
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
           try
@@ -1218,8 +1219,12 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
             if( x == preferred )
               continue;
 
+            Dictionary::Class * const dict = (*activeDicts)[ x ].get();
+            if( dict->getResourceSearchType() != resourceSearchType )
+              continue;
+
             sptr< Dictionary::DataRequest > req =
-              (*activeDicts)[ x ]->getResource(
+              dict->getResource(
                 url.path().mid( 1 ).toUtf8().data() );
 
             resourceDownloadRequests.push_back( req );
@@ -1374,7 +1379,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
 
   if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" || url.scheme() == "gdvideo" )
   {
-    if ( url.host() == "search" )
+    if ( Dictionary::ResourceSearch::isSearchHost( url.host() ) ) /// TODO: distinguish search types!
     {
       // Since searches should be limited to current group, we just do them
       // here ourselves since otherwise we'd need to pass group id to netmgr

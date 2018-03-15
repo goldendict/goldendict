@@ -610,7 +610,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
             QUrl url;
             url.setScheme( "gdau" );
-            url.setHost( QString::fromUtf8( search ? "search" : dictPtr->getId().c_str() ) );
+            url.setHost( QString::fromUtf8( search ? Dictionary::ResourceSearch::xdxfTypeName() : dictPtr->getId().c_str() ) );
             url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
             el_script.setAttribute( "type", "text/javascript" );
