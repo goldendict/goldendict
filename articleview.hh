@@ -110,7 +110,7 @@ public:
   /// contexts is an optional map of context values to be passed for dictionaries.
   /// The only values to pass here are ones obtained from showDefinitionInNewTab()
   /// signal or none at all.
-  void openLink( QUrl const & url, QUrl const & referrer,
+  bool openLink( QUrl const & url, QUrl const & referrer,
                  QString const & scrollTo = QString(),
                  Contexts const & contexts = Contexts() );
 
@@ -258,7 +258,7 @@ private slots:
   void linkHovered( const QString & link, const QString & title, const QString & textContent );
   void contextMenuRequested( QPoint const & );
 
-  void resourceDownloadFinished();
+  bool resourceDownloadFinished();
 
   /// We handle pasting by attempting to define the word in clipboard.
   void pasteTriggered();

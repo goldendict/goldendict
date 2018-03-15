@@ -1053,7 +1053,7 @@ void ArticleView::linkClicked( QUrl const & url_ )
     openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
 }
 
-void ArticleView::openLink( QUrl const & url, QUrl const & ref,
+bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
@@ -1062,8 +1062,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
+  {
     ui.definition->load( url );
-  else
+    return true;
+  }
   if ( url.scheme().compare( "bword" ) == 0 )
   {
     if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
@@ -1076,8 +1078,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     else
       showDefinition( url.path(),
                       getGroup( ref ), scrollTo, contexts );
+    return true;
   }
-  else
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
   {
     if ( url.hasFragment() )
@@ -1094,7 +1096,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                                             .split( ",", QString::SkipEmptyParts );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ) );
-        return;
+        return true;
       }
 
       QString newScrollTo( scrollTo );
@@ -1118,8 +1120,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       showDefinition( url.path().mid( 1 ),
                       getGroup( ref ), newScrollTo, contexts );
     }
+    return true;
   }
-  else
   if ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" ||
        Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
@@ -1196,8 +1198,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                   if( req->dataSize() > 0 )
                   {
                     // Resource already found, stop next search
-                    resourceDownloadFinished();
-                    return;
+                    return resourceDownloadFinished();
                   }
                 }
                 break;
@@ -1271,9 +1272,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       {
         // Have data ready, handle it
         resourceDownloadRequests.push_back( req );
-        resourceDownloadFinished();
-
-        return;
+        return resourceDownloadFinished();
       }
       else
       if ( !req->isFinished() )
@@ -1292,12 +1291,11 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       emit statusBarMessage(
             tr( "WARNING: %1" ).arg( tr( "The referenced resource doesn't exist." ) ),
             10000, QPixmap( ":/icons/error.png" ) );
-      return;
+      return false;
     }
     else
-      resourceDownloadFinished(); // Check any requests finished already
+      return resourceDownloadFinished(); // Check any requests finished already
   }
-  else
   if ( url.scheme() == "gdprg" )
   {
     // Program. Run it.
@@ -1323,17 +1321,18 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
           QMessageBox::critical( this, "GoldenDict",
                                  error );
+          return false;
         }
 
-        return;
+        return true;
       }
     }
 
     // Still here? No such program exists.
     QMessageBox::critical( this, "GoldenDict",
                            tr( "The referenced audio program doesn't exist." ) );
+    return false;
   }
-  else
   if ( url.scheme() == "gdtts" )
   {
 // TODO: Port TTS
@@ -1354,17 +1353,18 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         SpeechClient * speechClient = new SpeechClient( *i, this );
         connect( speechClient, SIGNAL( finished() ), speechClient, SLOT( deleteLater() ) );
         speechClient->tell( text );
-        break;
+        return true;
       }
     }
 #endif
+    return false;
   }
-  else
   if ( isExternalLink( url ) )
   {
     // Use the system handler for the conventional external links
-    QDesktopServices::openUrl( url );
+    return QDesktopServices::openUrl( url );
   }
+  return false;
 }
 
 ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QString & fileName )
@@ -1534,24 +1534,21 @@ bool ArticleView::hasSound()
 
 void ArticleView::playSound()
 {
-  QVariant v;
-  QString soundScript;
+  QWebFrame * const frame = ui.definition->page()->mainFrame();
 
-  v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
+  QVariant jsResult = frame->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
+  QString soundScript = jsResult.toString();
+  if( !soundScript.isEmpty() && openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() ) )
+    return;
 
-  if ( v.type() == QVariant::String )
-    soundScript = v.toString();
-
-  // fallback to the first one
-  if ( soundScript.isEmpty() )
+  jsResult = frame->evaluateJavaScript( "gdAudioLinks.all" );
+  const QList<QVariant> linkList = jsResult.toList();
+  Q_FOREACH( QVariant link, linkList )
   {
-    v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-    if ( v.type() == QVariant::String )
-      soundScript = v.toString();
+    soundScript = link.toString();
+    if( !soundScript.isEmpty() && openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() ) )
+      return;
   }
-
-  if ( !soundScript.isEmpty() )
-    openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }
 
 QString ArticleView::toHtml()
@@ -1895,10 +1892,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 #endif
 }
 
-void ArticleView::resourceDownloadFinished()
+bool ArticleView::resourceDownloadFinished()
 {
   if ( resourceDownloadRequests.empty() )
-    return; // Stray signal
+    return false; // Stray signal
 
   // Find any finished resources
   for( list< sptr< Dictionary::DataRequest > >::iterator i =
@@ -1954,7 +1951,7 @@ void ArticleView::resourceDownloadFinished()
             if ( !tmp.open() || (size_t) tmp.write( &data.front(), data.size() ) != data.size() )
             {
               QMessageBox::critical( this, "GoldenDict", tr( "Failed to create temporary file." ) );
-              return;
+              return false;
             }
 
             tmp.setAutoRemove( false );
@@ -1972,7 +1969,7 @@ void ArticleView::resourceDownloadFinished()
 
         resourceDownloadRequests.clear();
 
-        return;
+        return true;
       }
       else
       {
@@ -1989,7 +1986,9 @@ void ArticleView::resourceDownloadFinished()
     emit statusBarMessage(
           tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
           10000, QPixmap( ":/icons/error.png" ) );
+    return false;
   }
+  return true; // Wait for async resource download and hope for success.
 }
 
 void ArticleView::audioPlayerError( QString const & message )

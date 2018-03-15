@@ -35,5 +35,6 @@ std::string makeAudioLinkScript( std::string const & url,
 
   std::string audioLinkForDict = "gdAudioLinks['" + dictionaryId + "']";
   return "gdAudioLinks.first = gdAudioLinks.first || " + ref + ";" +
-         audioLinkForDict + " = " + audioLinkForDict + " || " + ref + ";";
+         audioLinkForDict + " = " + audioLinkForDict + " || " + ref + ";" +
+         "gdAudioLinks.all.push(" + ref + ");";
 }
