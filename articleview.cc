@@ -1284,7 +1284,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
     if ( resourceDownloadRequests.empty() ) // No requests were queued
     {
-      QMessageBox::critical( this, "GoldenDict", tr( "The referenced resource doesn't exist." ) );
+      emit statusBarMessage(
+            tr( "WARNING: %1" ).arg( tr( "The referenced resource doesn't exist." ) ),
+            10000, QPixmap( ":/icons/error.png" ) );
       return;
     }
     else
