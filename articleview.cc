@@ -1352,8 +1352,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
       {
         SpeechClient * speechClient = new SpeechClient( *i, this );
         connect( speechClient, SIGNAL( finished() ), speechClient, SLOT( deleteLater() ) );
-        speechClient->tell( text );
-        return true;
+        return speechClient->tell( text );
       }
     }
 #endif
