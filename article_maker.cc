@@ -179,7 +179,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
-            "gdAudioLinks = { first: null, current: null, all: [] };"
+            "gdAudioLinks = { current: null, all: [] };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"

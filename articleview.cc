@@ -1525,10 +1525,8 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-  if ( v.type() == QVariant::String )
-    return !v.toString().isEmpty();
-  return false;
+  const QVariant jsResult = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.all" );
+  return !jsResult.toList().isEmpty();
 }
 
 void ArticleView::playSound()
