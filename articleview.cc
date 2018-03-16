@@ -1378,7 +1378,8 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
 
   if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" || url.scheme() == "gdvideo" )
   {
-    if ( Dictionary::ResourceSearch::isSearchHost( url.host() ) ) /// TODO: distinguish search types!
+    const Dictionary::ResourceSearch::Type resourceSearchType = Dictionary::ResourceSearch::hostType( url.host() );
+    if ( resourceSearchType != Dictionary::ResourceSearch::NoSearch )
     {
       // Since searches should be limited to current group, we just do them
       // here ourselves since otherwise we'd need to pass group id to netmgr
@@ -1406,7 +1407,11 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
         {
           try
           {
-            req = (*activeDicts)[ x ]->getResource(
+            Dictionary::Class * const dict = (*activeDicts)[ x ].get();
+            if( dict->getResourceSearchType() != resourceSearchType )
+              continue;
+
+            req = dict->getResource(
                     Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
 
             handler->addRequest( req );
