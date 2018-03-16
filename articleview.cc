@@ -1533,20 +1533,28 @@ bool ArticleView::hasSound()
 
 void ArticleView::playSound()
 {
+  QSet< QString > visitedLinks;
   QWebFrame * const frame = ui.definition->page()->mainFrame();
 
   QVariant jsResult = frame->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
   QString soundScript = jsResult.toString();
-  if( !soundScript.isEmpty() && openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() ) )
-    return;
+  if( !soundScript.isEmpty() )
+  {
+    if( openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() ) )
+      return;
+    visitedLinks.insert( soundScript );
+  }
 
   jsResult = frame->evaluateJavaScript( "gdAudioLinks.all" );
-  const QList<QVariant> linkList = jsResult.toList();
+  const QList< QVariant > linkList = jsResult.toList();
   Q_FOREACH( QVariant link, linkList )
   {
     soundScript = link.toString();
-    if( !soundScript.isEmpty() && openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() ) )
+    if( soundScript.isEmpty() || visitedLinks.contains( soundScript ) )
+      continue;
+    if( openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() ) )
       return;
+    visitedLinks.insert( soundScript );
   }
 }
 
