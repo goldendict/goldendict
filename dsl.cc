@@ -177,6 +177,8 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   quint8 articleNom;
   int maxPictureWidth;
 
+  wstring currentHeadword;
+
 public:
 
   DslDictionary( string const & id, string const & indexFile,
@@ -754,6 +756,7 @@ string DslDictionary::dslToHtml( wstring const & str, wstring const & headword )
 {
  // Normalize the string
   wstring normalizedStr = gd::normalize( str );
+  currentHeadword = headword;
 
   ArticleDom dom( normalizedStr, getName(), headword );
 
@@ -1167,7 +1170,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += "<br />";
   }
   else
+  {
+    gdWarning( "DSL: Unknown tag \"%s\" with attributes \"%s\" found in \"%s\", article \"%s\".",
+               gd::toQString( node.tagName ).toUtf8().data(), gd::toQString( node.tagAttrs ).toUtf8().data(),
+               getName().c_str(), gd::toQString( currentHeadword ).toUtf8().data() );
+
     result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
+  }
 
   return result;
 }

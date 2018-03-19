@@ -282,42 +282,56 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
       if ( ch == L'[' && !escaped )
       {
         // Beginning of a tag.
-        do
-        {
-          nextChar();
-        } while( Folding::isWhitespace( ch ) );
-
         bool isClosing;
-
-        if ( ch == L'/' && !escaped )
-        {
-          // A closing tag.
-          isClosing = true;
-          nextChar();
-        }
-        else
-          isClosing = false;
-
-        // Read tag's name
         wstring name;
-
-        while( ( ch != L']' || escaped ) && !Folding::isWhitespace( ch ) )
-        {
-          name.push_back( ch );
-          nextChar();
-        }
-
-        while( Folding::isWhitespace( ch ) )
-          nextChar();
-
-        // Read attrs
-
         wstring attrs;
 
-        while( ch != L']' || escaped )
+        try
         {
-          attrs.push_back( ch );
-          nextChar();
+          do
+          {
+            nextChar();
+          } while( Folding::isWhitespace( ch ) );
+
+          if ( ch == L'/' && !escaped )
+          {
+            // A closing tag.
+            isClosing = true;
+            nextChar();
+          }
+          else
+            isClosing = false;
+
+          // Read tag's name
+
+          while( ( ch != L']' || escaped ) && !Folding::isWhitespace( ch ) )
+          {
+            name.push_back( ch );
+            nextChar();
+          }
+
+          while( Folding::isWhitespace( ch ) )
+            nextChar();
+
+          // Read attrs
+
+          while( ch != L']' || escaped )
+          {
+            attrs.push_back( ch );
+            nextChar();
+          }
+        }
+        catch( eot )
+        {
+          if( !dictionaryName.empty() )
+            gdWarning( "DSL: Unfinished tag \"%s\" with attributes \"%s\" found in \"%s\", article \"%s\".",
+                       gd::toQString( name ).toUtf8().data(), gd::toQString( attrs ).toUtf8().data(),
+                       dictionaryName.c_str(), gd::toQString( headword ).toUtf8().data() );
+          else
+            gdWarning( "DSL: Unfinished tag \"%s\" with attributes \"%s\" found",
+                       gd::toQString( name ).toUtf8().data(), gd::toQString( attrs ).toUtf8().data() );
+
+          throw eot();
         }
 
         // Add the tag, or close it
