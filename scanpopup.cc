@@ -36,6 +36,7 @@ Qt::Popup
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,
+                      AudioPlayerPtr const & audioPlayer_,
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_,
                       History & history_ ):
@@ -72,8 +73,8 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.queryError->hide();
 
-  definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
-                                groups, true, cfg,
+  definition = new ArticleView( ui.outerFrame, articleNetMgr, audioPlayer_,
+                                allDictionaries, groups, true, cfg,
                                 openSearchAction,
                                 dictionaryBar.toggleViewAction()
                                 );

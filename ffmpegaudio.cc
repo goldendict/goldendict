@@ -43,25 +43,25 @@ static inline QString avErrorString( int errnum )
   return QString::fromLatin1( buf );
 }
 
-AudioPlayer & AudioPlayer::instance()
+AudioService & AudioService::instance()
 {
-  static AudioPlayer a;
+  static AudioService a;
   return a;
 }
 
-AudioPlayer::AudioPlayer()
+AudioService::AudioService()
 {
   av_register_all();
   ao_initialize();
 }
 
-AudioPlayer::~AudioPlayer()
+AudioService::~AudioService()
 {
   emit cancelPlaying( true );
   ao_shutdown();
 }
 
-void AudioPlayer::playMemory( const char * ptr, int size )
+void AudioService::playMemory( const char * ptr, int size )
 {
   emit cancelPlaying( false );
   QByteArray audioData( ptr, size );
@@ -74,7 +74,7 @@ void AudioPlayer::playMemory( const char * ptr, int size )
   thread->start();
 }
 
-void AudioPlayer::stop()
+void AudioService::stop()
 {
   emit cancelPlaying( false );
 }

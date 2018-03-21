@@ -17,7 +17,6 @@
 #include "webmultimediadownload.hh"
 #include "programs.hh"
 #include "gddebug.hh"
-#include "ffmpegaudio.hh"
 #include <QDebug>
 #include <QCryptographicHash>
 #include "gestures.hh"
@@ -110,6 +109,7 @@ static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString
 }
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
+                          AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
                           Config::Class const & cfg_,
@@ -118,6 +118,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           GroupComboBox const * groupComboBox_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
+  audioPlayer( audioPlayer_ ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   popupView( popupView_ ),
@@ -270,8 +271,8 @@ ArticleView::~ArticleView()
   cleanupTemp();
 
 #ifndef DISABLE_INTERNAL_PLAYER
-  if ( cfg.preferences.useInternalPlayer )
-    Ffmpeg::AudioPlayer::instance().stop();
+  if ( audioPlayer )
+    audioPlayer->stop();
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
@@ -287,8 +288,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
 #ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  if ( cfg.preferences.useInternalPlayer )
-    Ffmpeg::AudioPlayer::instance().stop();
+  if ( audioPlayer )
+    audioPlayer->stop();
 #endif
 
   QUrl req;
@@ -355,8 +356,8 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
 #ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  if ( cfg.preferences.useInternalPlayer )
-    Ffmpeg::AudioPlayer::instance().stop();
+  if ( audioPlayer )
+    audioPlayer->stop();
 #endif
 
   QUrl req;
@@ -1910,11 +1911,10 @@ void ArticleView::resourceDownloadFinished()
         {
           // Audio data
 #ifndef DISABLE_INTERNAL_PLAYER
-          if ( cfg.preferences.useInternalPlayer )
+          if ( audioPlayer )
           {
-            Ffmpeg::AudioPlayer & player = Ffmpeg::AudioPlayer::instance();
-            connect( &player, SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
-            player.playMemory( data.data(), data.size() );
+            connect( audioPlayer.data(), SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
+            audioPlayer->play( data.data(), data.size() );
           }
           else
 #endif
