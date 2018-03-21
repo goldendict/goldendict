@@ -61,10 +61,10 @@ AudioPlayer::~AudioPlayer()
   ao_shutdown();
 }
 
-void AudioPlayer::playMemory( const void * ptr, int size )
+void AudioPlayer::playMemory( const char * ptr, int size )
 {
   emit cancelPlaying( false );
-  QByteArray audioData( ( char * )ptr, size );
+  QByteArray audioData( ptr, size );
   DecoderThread * thread = new DecoderThread( audioData, this );
 
   connect( thread, SIGNAL( error( QString ) ), this, SIGNAL( error( QString ) ) );

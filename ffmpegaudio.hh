@@ -18,7 +18,7 @@ class AudioPlayer : public QObject
 
 public:
   static AudioPlayer & instance();
-  void playMemory( const void * ptr, int size );
+  void playMemory( const char * ptr, int size );
   void stop();
 
 signals:
