@@ -22,9 +22,10 @@ public:
              this, SIGNAL( error( QString ) ) );
   }
 
-  virtual void play( const char * data, int size )
+  virtual QString play( const char * data, int size )
   {
     AudioService::instance().playMemory( data, size );
+    return QString();
   }
 
   virtual void stop()

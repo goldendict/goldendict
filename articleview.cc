@@ -2,7 +2,6 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articleview.hh"
-#include "externalviewer.hh"
 #include <map>
 #include <QMessageBox>
 #include <QWebHitTestResult>
@@ -269,11 +268,7 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
-
-#ifndef DISABLE_INTERNAL_PLAYER
-  if ( audioPlayer )
-    audioPlayer->stop();
-#endif
+  audioPlayer->stop();
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
@@ -285,12 +280,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
-
-#ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  if ( audioPlayer )
-    audioPlayer->stop();
-#endif
+  audioPlayer->stop();
 
   QUrl req;
   Contexts contexts( contexts_ );
@@ -354,11 +345,8 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( dictIDs.isEmpty() )
     return;
 
-#ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  if ( audioPlayer )
-    audioPlayer->stop();
-#endif
+  audioPlayer->stop();
 
   QUrl req;
 
@@ -1910,28 +1898,10 @@ void ArticleView::resourceDownloadFinished()
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
           // Audio data
-#ifndef DISABLE_INTERNAL_PLAYER
-          if ( audioPlayer )
-          {
-            connect( audioPlayer.data(), SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
-            audioPlayer->play( data.data(), data.size() );
-          }
-          else
-#endif
-          {
-            // Use external viewer to play the file
-            try
-            {
-              ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
-
-              // Once started, it will erase itself
-              viewer->start();
-            }
-            catch( ExternalViewer::Ex & e )
-            {
-              QMessageBox::critical( this, "GoldenDict", tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
-            }
-          }
+          connect( audioPlayer.data(), SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
+          QString errorMessage = audioPlayer->play( data.data(), data.size() );
+          if( !errorMessage.isEmpty() )
+            QMessageBox::critical( this, "GoldenDict", tr( "Failed to play sound file: %1" ).arg( errorMessage ) );
         }
         else
         {
@@ -1987,7 +1957,7 @@ void ArticleView::resourceDownloadFinished()
 
 void ArticleView::audioPlayerError( QString const & message )
 {
-  emit statusBarMessage( tr( "WARNING: FFmpeg Audio Player: %1" ).arg( message ),
+  emit statusBarMessage( tr( "WARNING: Audio Player: %1" ).arg( message ),
                          10000, QPixmap( ":/icons/error.png" ) );
 }
 
