@@ -2540,7 +2540,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Add current tab to Favorites</source>
-        <translation>新增目前分頁到我的最愛</translation>
+        <translation>將目前分頁新增到我的最愛</translation>
     </message>
     <message>
         <source>Export to list</source>
@@ -2584,15 +2584,15 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>將所有分頁新增到我的最愛</translation>
     </message>
     <message>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>將目前分頁從我的最愛中移除</translation>
     </message>
     <message>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>確定要將詞條 &quot;%1&quot; 從我的最愛中移除嗎？</translation>
     </message>
 </context>
 <context>
