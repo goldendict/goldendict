@@ -250,7 +250,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     ui.useInternalPlayer->setChecked( true );
   else
 #endif
-    ui.useExternalPlayer->setChecked( p.useExternalPlayer );
+    ui.useExternalPlayer->setChecked( true );
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
@@ -399,7 +399,6 @@ Config::Preferences Preferences::getPreferences()
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
-  p.useExternalPlayer = ui.useExternalPlayer->isChecked();
   p.useInternalPlayer = ui.useInternalPlayer->isChecked();
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 

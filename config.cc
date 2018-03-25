@@ -115,10 +115,8 @@ Preferences::Preferences():
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
 #ifndef DISABLE_INTERNAL_PLAYER
-  useExternalPlayer( false ),
   useInternalPlayer( true ),
 #else
-  useExternalPlayer( true ),
   useInternalPlayer( false ),
 #endif
   checkForNewReleases( true ),
@@ -771,15 +769,11 @@ Class load() throw( exError )
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
 
-    if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
-      c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
-
 #ifndef DISABLE_INTERNAL_PLAYER
     if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
       c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
 #else
     c.preferences.useInternalPlayer = false;
-    c.preferences.useExternalPlayer = true;
 #endif
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
@@ -1660,10 +1654,6 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "pronounceOnLoadPopup" );
     opt.appendChild( dd.createTextNode( c.preferences.pronounceOnLoadPopup ? "1" : "0" ) );
-    preferences.appendChild( opt );
-
-    opt = dd.createElement( "useExternalPlayer" );
-    opt.appendChild( dd.createTextNode( c.preferences.useExternalPlayer ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "useInternalPlayer" );
