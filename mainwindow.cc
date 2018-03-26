@@ -118,6 +118,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites, cfg.preferences.hideGoldenDictHeader ),
   dictNetMgr( this ),
+  audioPlayerFactory( cfg.preferences ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),
   latestReleaseReply( 0 ),
@@ -1373,8 +1374,8 @@ void MainWindow::makeScanPopup()
        !cfg.preferences.enableClipboardHotkey )
     return;
 
-  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances,
-                             history );
+  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
+                             dictionaries, groupInstances, history );
 
   scanPopup->setStyleSheet( styleSheet() );
 
@@ -1530,8 +1531,8 @@ void MainWindow::addNewTab()
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
-  ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
-                                        groupInstances, false, cfg,
+  ArticleView * view = new ArticleView( this, articleNetMgr, audioPlayerFactory.player(),
+                                        dictionaries, groupInstances, false, cfg,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
@@ -2086,6 +2087,8 @@ void MainWindow::editPreferences()
       ui.favoritesPaneWidget->setSaveInterval( p.favoritesStoreInterval );
 
     cfg.preferences = p;
+
+    audioPlayerFactory.setPreferences( cfg.preferences );
 
     beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );

@@ -9,7 +9,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 ### External Deps
 
 * Make, GCC, Git
-* Qt framework. Minimum required version is 4.6 for Windows, 4.5 for all other platforms. But Qt 4.7 or 4.8 is recommended.
+* Qt framework. Minimum required version is 4.6. But Qt 4.7 or 4.8 is recommended.
 * If you want to use Qt 5.x then use branch qt4x5
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)

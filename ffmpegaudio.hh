@@ -12,13 +12,13 @@
 namespace Ffmpeg
 {
 
-class AudioPlayer : public QObject
+class AudioService : public QObject
 {
   Q_OBJECT
 
 public:
-  static AudioPlayer & instance();
-  void playMemory( const void * ptr, int size );
+  static AudioService & instance();
+  void playMemory( const char * ptr, int size );
   void stop();
 
 signals:
@@ -26,10 +26,8 @@ signals:
   void error( QString const & message );
 
 private:
-  AudioPlayer();
-  ~AudioPlayer();
-  AudioPlayer( AudioPlayer const & );
-  AudioPlayer & operator=( AudioPlayer const & );
+  AudioService();
+  ~AudioService();
 };
 
 class DecoderThread: public QThread

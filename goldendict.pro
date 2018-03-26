@@ -264,6 +264,10 @@ HEADERS += folding.hh \
     article_maker.hh \
     scanpopup.hh \
     articleview.hh \
+    audioplayerinterface.hh \
+    audioplayerfactory.hh \
+    ffmpegaudioplayer.hh \
+    externalaudioplayer.hh \
     externalviewer.hh \
     wordfinder.hh \
     groupcombobox.hh \
@@ -394,6 +398,8 @@ SOURCES += folding.cc \
     article_maker.cc \
     scanpopup.cc \
     articleview.cc \
+    audioplayerfactory.cc \
+    externalaudioplayer.cc \
     externalviewer.cc \
     wordfinder.cc \
     groupcombobox.cc \

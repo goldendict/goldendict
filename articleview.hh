@@ -10,6 +10,7 @@
 #include <QSet>
 #include <list>
 #include "article_netmgr.hh"
+#include "audioplayerinterface.hh"
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
@@ -23,6 +24,7 @@ class ArticleView: public QFrame
   Q_OBJECT
 
   ArticleNetworkAccessManager & articleNetMgr;
+  AudioPlayerPtr const & audioPlayer;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   Instances::Groups const & groups;
   bool popupView;
@@ -68,6 +70,7 @@ public:
   /// The groups aren't copied -- rather than that, the reference is kept
   ArticleView( QWidget * parent,
                ArticleNetworkAccessManager &,
+               AudioPlayerPtr const &,
                std::vector< sptr< Dictionary::Class > > const & allDictionaries,
                Instances::Groups const &,
                bool popupView,
