@@ -686,15 +686,17 @@ wstring findWikiLink( QString const & article, QString const & linkDistinction )
   // Since the first search just below probably fails in most cases,
   // it should be optimized instead of trying to squeeze the entire regexp into it.
   const int distinctionPosition = article.indexOf( linkDistinction );
-  if( distinctionPosition >= 0 )
-  {
-    const int linkPosition = article.lastIndexOf( QRegExp( "[<>]" ), distinctionPosition );
-    const QString linkForepart = article.mid( linkPosition,
-                                              distinctionPosition - linkPosition );
-    const QRegExp linkPattern( "<a href=\"/wiki/([^\"]+)\".*" );
-    if( linkPattern.exactMatch( linkForepart ) )
-      return gd::toWString( linkPattern.cap( 1 ) );
-  }
+  if( distinctionPosition < 0 )
+    return wstring();
+  const int linkPosition = article.lastIndexOf( QRegExp( "[<>]" ), distinctionPosition );
+  if( linkPosition < 0 )
+    return wstring();
+
+  const QString linkForepart = article.mid( linkPosition,
+                                            distinctionPosition - linkPosition );
+  const QRegExp linkPattern( "<a href=\"/wiki/([^\"]+)\".*" );
+  if( linkPattern.exactMatch( linkForepart ) )
+    return gd::toWString( linkPattern.cap( 1 ) );
   return wstring();
 }
 
