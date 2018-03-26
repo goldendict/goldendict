@@ -1053,6 +1053,8 @@ void MainWindow::commitData()
     }
 
     history.save();
+
+    ui.favoritesPaneWidget->saveData();
   }
 }
 
