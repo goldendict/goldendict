@@ -764,6 +764,8 @@ private:
 
   virtual void replyHandled( QNetworkReply const * reply, bool textFound );
 
+  bool endsWithPreferableSuffix( wstring const & word ) const;
+
   const wstring preferableSuffix;
 
   struct Replacement
@@ -777,12 +779,8 @@ private:
 
 QNetworkReply const * SuffixAddingArticleRequest::doAddQuery( wstring const & word )
 {
-  if( std::equal( word.end() - static_cast< wstring::difference_type >( preferableSuffix.size() ),
-                  word.end(), preferableSuffix.begin() ) )
-  {
+  if( endsWithPreferableSuffix( word ) )
     return RedirectingArticleRequest::doAddQuery( word );
-  }
-
   // Try the corresponding preferable article first.
   QNetworkReply const * const reply = RedirectingArticleRequest::doAddQuery( word + preferableSuffix );
   Replacement replacement = { reply, word };
@@ -800,6 +798,14 @@ void SuffixAddingArticleRequest::replyHandled( QNetworkReply const * reply, bool
     prependQuery( replacements.front().originalWord );
   }
   replacements.pop();
+}
+
+bool SuffixAddingArticleRequest::endsWithPreferableSuffix( wstring const & word ) const
+{
+  if( word.size() < preferableSuffix.size() )
+    return false;
+  return std::equal( word.end() - static_cast< wstring::difference_type >( preferableSuffix.size() ),
+                     word.end(), preferableSuffix.begin() );
 }
 
 /// Ensures that Wookieepedia era icons are visible at the top of the article.
