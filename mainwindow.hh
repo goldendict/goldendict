@@ -92,7 +92,7 @@ private:
   void addGlobalAction( QAction * action, const char * slot );
   void addGlobalActionsToDialog( QDialog * dialog );
 
-  void commitData( bool init_popup );
+  void commitData();
 
   QSystemTrayIcon * trayIcon;
 

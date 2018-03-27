@@ -52,6 +52,8 @@ public:
 
   void setDictionaryIconSize();
 
+  void saveConfigData();
+
 signals:
 
   /// Forwarded from the dictionary bar, so that main window could act on this.

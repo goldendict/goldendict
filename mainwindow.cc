@@ -1022,10 +1022,10 @@ void MainWindow::addGlobalActionsToDialog( QDialog * dialog )
 
 void MainWindow::commitData( QSessionManager & )
 {
-  commitData( true );
+  commitData();
 }
 
-void MainWindow::commitData( bool init_popup )
+void MainWindow::commitData()
 {
   try
   {
@@ -1033,9 +1033,10 @@ void MainWindow::commitData( bool init_popup )
     cfg.mainWindowState = saveState( 1 );
     cfg.mainWindowGeometry = saveGeometry();
 
-    // Close the popup, so it would save its geometry to config
+    // Save popup window state and geometry
 
-    scanPopup.reset();
+    if( scanPopup.get() )
+      scanPopup->saveConfigData();
 
     // Save any changes in last chosen groups etc
     try
@@ -1052,10 +1053,6 @@ void MainWindow::commitData( bool init_popup )
 
     // Save favorites
     ui.favoritesPaneWidget->saveData();
-
-    // Reinit popup window if necessary (when called from session manager)
-    if( init_popup )
-      makeScanPopup();
   }
   catch( std::exception & e )
   {
@@ -1187,7 +1184,7 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::quitApp()
 {
-  commitData( false );
+  commitData();
   qApp->quit();
 }
 

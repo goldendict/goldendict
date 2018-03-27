@@ -310,11 +310,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
 ScanPopup::~ScanPopup()
 {
-  // Save state, geometry and pin status
-  cfg.popupWindowState = saveState( 1 );
-  cfg.popupWindowGeometry = saveGeometry();
-  cfg.pinPopupWindow = ui.pinButton->isChecked();
-  cfg.popupWindowAlwaysOnTop = ui.onTopButton->isChecked();
+  saveConfigData();
 
   disableScanning();
 
@@ -322,6 +318,15 @@ ScanPopup::~ScanPopup()
   ungrabGesture( Gestures::GDPinchGestureType );
   ungrabGesture( Gestures::GDSwipeGestureType );
 #endif
+}
+
+void ScanPopup::saveConfigData()
+{
+  // Save state, geometry and pin status
+  cfg.popupWindowState = saveState( 1 );
+  cfg.popupWindowGeometry = saveGeometry();
+  cfg.pinPopupWindow = ui.pinButton->isChecked();
+  cfg.popupWindowAlwaysOnTop = ui.onTopButton->isChecked();
 }
 
 void ScanPopup::enableScanning()
