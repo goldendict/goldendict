@@ -86,13 +86,13 @@ public slots:
   void headwordReceived( QString const &, QString const & );
   void setExpandMode( bool expand );
   void headwordFromFavorites( QString const &, QString const & );
+  void quitApp();
 
 private:
   void addGlobalAction( QAction * action, const char * slot );
   void addGlobalActionsToDialog( QDialog * dialog );
 
-  void commitData();
-  bool commitDataCompleted;
+  void commitData( bool init_popup );
 
   QSystemTrayIcon * trayIcon;
 

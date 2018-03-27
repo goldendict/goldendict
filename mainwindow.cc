@@ -89,7 +89,6 @@ class InitSSLRunnable : public QRunnable
 #endif
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
-  commitDataCompleted( false ),
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   foundInDictsLabel( &dictsPaneTitleBar ),
@@ -368,7 +367,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu.addAction( enableScanPopup );
   trayIconMenu.addSeparator();
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
-           qApp, SLOT( quit() ) );
+           this, SLOT( quitApp() ) );
 
   addGlobalAction( &escAction, SLOT( handleEsc() ) );
   escAction.setShortcut( QKeySequence( "Esc" ) );
@@ -642,7 +641,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #endif
 
   connect( ui.quit, SIGNAL( triggered() ),
-           qApp, SLOT( quit() ) );
+           this, SLOT( quitApp() ) );
 
   connect( ui.dictionaries, SIGNAL( triggered() ),
            this, SLOT( editDictionaries() ) );
@@ -997,8 +996,6 @@ MainWindow::~MainWindow()
 #ifndef NO_EPWING_SUPPORT
   Epwing::finalize();
 #endif
-
-  commitData();
 }
 
 void MainWindow::addGlobalAction( QAction * action, const char * slot )
@@ -1025,15 +1022,13 @@ void MainWindow::addGlobalActionsToDialog( QDialog * dialog )
 
 void MainWindow::commitData( QSessionManager & )
 {
-  commitData();
+  commitData( true );
 }
 
-void MainWindow::commitData()
+void MainWindow::commitData( bool init_popup )
 {
-  if ( !commitDataCompleted )
+  try
   {
-    commitDataCompleted = true;
-
     // Save MainWindow state and geometry
     cfg.mainWindowState = saveState( 1 );
     cfg.mainWindowGeometry = saveGeometry();
@@ -1052,9 +1047,19 @@ void MainWindow::commitData()
       gdWarning( "Configuration saving failed, error: %s\n", e.what() );
     }
 
+    // Save history
     history.save();
 
+    // Save favorites
     ui.favoritesPaneWidget->saveData();
+
+    // Reinit popup window if necessary (when called from session manager)
+    if( init_popup )
+      makeScanPopup();
+  }
+  catch( std::exception & e )
+  {
+    gdWarning( "Commit data failed, error: %s\n", e.what() );
   }
 }
 
@@ -1176,8 +1181,14 @@ void MainWindow::closeEvent( QCloseEvent * ev )
   else
   {
     ev->accept();
-    qApp->quit();
+    quitApp();
   }
+}
+
+void MainWindow::quitApp()
+{
+  commitData( false );
+  qApp->quit();
 }
 
 void MainWindow::applyProxySettings()
