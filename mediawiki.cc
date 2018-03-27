@@ -645,12 +645,15 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
 {
   // Lazy loading does not work in goldendict -> display these images
   // by switching to the simpler alternative format under <noscript> tag.
+  const QString lzyImgTag = "<img\\s[^>]+lzy lzyPlcHld[^>]+>";
+  const QString noscriptImgTag = "<noscript>\\s*(<img\\s[^<]+)</noscript>";
   #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    articleString.replace( QRegularExpression( "<img\\s[^>]+lzy lzyPlcHld[^>]+>\\s*<noscript>\\s*(<img\\s[^<]+)</noscript>" ),
+    articleString.replace( QRegularExpression( lzyImgTag + "\\s*" + noscriptImgTag ), "\\1" );
+    articleString.replace( QRegularExpression( noscriptImgTag + "\\s*" + lzyImgTag ), "\\1" );
   #else
-    articleString.replace( QRegExp( "<img\\s[^>]+lzy lzyPlcHld[^>]+>\\s*<noscript>\\s*(<img\\s[^<]+)</noscript>" ),
+    articleString.replace( QRegExp( lzyImgTag + "\\s*" + noscriptImgTag ), "\\1" );
+    articleString.replace( QRegExp( noscriptImgTag + "\\s*" + lzyImgTag ), "\\1" );
   #endif
-                           "\\1" );
 
   // audio url
   // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
