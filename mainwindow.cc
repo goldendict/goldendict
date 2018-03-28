@@ -1306,11 +1306,11 @@ void MainWindow::updateGroupList()
 
   // Add dictionaryOrder first, as the 'All' group.
   {
-    Instances::Group g( cfg.dictionaryOrder, dictionaries );
+    Instances::Group g( cfg.dictionaryOrder, dictionaries, Config::Group() );
 
     // Add any missing entries to dictionary order
     Instances::complementDictionaryOrder( g,
-                                          Instances::Group( cfg.inactiveDictionaries, dictionaries ),
+                                          Instances::Group( cfg.inactiveDictionaries, dictionaries, Config::Group() ),
                                           dictionaries );
 
     g.name = tr( "All" );
@@ -1321,7 +1321,7 @@ void MainWindow::updateGroupList()
   }
 
   for( int x  = 0; x < cfg.groups.size(); ++x )
-    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
+    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries, cfg.inactiveDictionaries ) );
 
   // Update names for dictionaries that are present, so that they could be
   // found in case they got moved.
