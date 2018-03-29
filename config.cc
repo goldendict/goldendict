@@ -78,6 +78,56 @@ QKeySequence HotKey::toKeySequence() const
   return QKeySequence( key1 | modifiers, v2 );
 }
 
+bool InternalPlayerBackend::anyAvailable()
+{
+#if defined( MAKE_FFMPEG_PLAYER ) || defined( MAKE_QTMULTIMEDIA_PLAYER )
+  return true;
+#else
+  return false;
+#endif
+}
+
+InternalPlayerBackend InternalPlayerBackend::defaultBackend()
+{
+#if defined( MAKE_FFMPEG_PLAYER )
+  return ffmpeg();
+#elif defined( MAKE_QTMULTIMEDIA_PLAYER )
+  return qtmultimedia();
+#else
+  return InternalPlayerBackend( QString() );
+#endif
+}
+
+QStringList InternalPlayerBackend::nameList()
+{
+  QStringList result;
+#ifdef MAKE_FFMPEG_PLAYER
+  result.push_back( ffmpeg().uiName() );
+#endif
+#ifdef MAKE_QTMULTIMEDIA_PLAYER
+  result.push_back( qtmultimedia().uiName() );
+#endif
+  return result;
+}
+
+bool InternalPlayerBackend::isFfmpeg() const
+{
+#ifdef MAKE_FFMPEG_PLAYER
+  return *this == ffmpeg();
+#else
+  return false;
+#endif
+}
+
+bool InternalPlayerBackend::isQtmultimedia() const
+{
+#ifdef MAKE_QTMULTIMEDIA_PLAYER
+  return *this == qtmultimedia();
+#else
+  return false;
+#endif
+}
+
 Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
@@ -114,11 +164,8 @@ Preferences::Preferences():
 #endif
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
-#ifndef DISABLE_INTERNAL_PLAYER
-  useInternalPlayer( true ),
-#else
-  useInternalPlayer( false ),
-#endif
+  useInternalPlayer( InternalPlayerBackend::anyAvailable() ),
+  internalPlayerBackend( InternalPlayerBackend::defaultBackend() ),
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
@@ -769,12 +816,16 @@ Class load() throw( exError )
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
 
-#ifndef DISABLE_INTERNAL_PLAYER
-    if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
-      c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
-#else
-    c.preferences.useInternalPlayer = false;
-#endif
+    if ( InternalPlayerBackend::anyAvailable() )
+    {
+      if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
+        c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
+    }
+    else
+      c.preferences.useInternalPlayer = false;
+
+    if ( !preferences.namedItem( "internalPlayerBackend" ).isNull() )
+      c.preferences.internalPlayerBackend.setUiName( preferences.namedItem( "internalPlayerBackend" ).toElement().text() );
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
@@ -1658,6 +1709,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "useInternalPlayer" );
     opt.appendChild( dd.createTextNode( c.preferences.useInternalPlayer ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "internalPlayerBackend" );
+    opt.appendChild( dd.createTextNode( c.preferences.internalPlayerBackend.uiName() ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "audioPlaybackProgram" );

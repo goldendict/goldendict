@@ -5,11 +5,13 @@
 #include <QObject>
 #include "audioplayerfactory.hh"
 #include "ffmpegaudioplayer.hh"
+#include "multimediaaudioplayer.hh"
 #include "externalaudioplayer.hh"
 #include "gddebug.hh"
 
 AudioPlayerFactory::AudioPlayerFactory( Config::Preferences const & p ) :
   useInternalPlayer( p.useInternalPlayer ),
+  internalPlayerBackend( p.internalPlayerBackend ),
   audioPlaybackProgram( p.audioPlaybackProgram )
 {
   reset();
@@ -20,7 +22,14 @@ void AudioPlayerFactory::setPreferences( Config::Preferences const & p )
   if( p.useInternalPlayer != useInternalPlayer )
   {
     useInternalPlayer = p.useInternalPlayer;
+    internalPlayerBackend = p.internalPlayerBackend;
     audioPlaybackProgram = p.audioPlaybackProgram;
+    reset();
+  }
+  else
+  if( useInternalPlayer && p.internalPlayerBackend != internalPlayerBackend )
+  {
+    internalPlayerBackend = p.internalPlayerBackend;
     reset();
   }
   else
@@ -38,16 +47,35 @@ void AudioPlayerFactory::setPreferences( Config::Preferences const & p )
 
 void AudioPlayerFactory::reset()
 {
-#ifndef DISABLE_INTERNAL_PLAYER
   if( useInternalPlayer )
-    playerPtr.reset( new Ffmpeg::AudioPlayer );
-  else
-#endif
   {
-    QScopedPointer< ExternalAudioPlayer > externalPlayer( new ExternalAudioPlayer );
-    setAudioPlaybackProgram( *externalPlayer );
-    playerPtr.reset( externalPlayer.take() );
+    // qobject_cast checks below account for the case when an unsupported backend
+    // is stored in config. After this backend is replaced with the default one
+    // upon preferences saving, the code below does not reset playerPtr with
+    // another object of the same type.
+
+#ifdef MAKE_FFMPEG_PLAYER
+    Q_ASSERT( Config::InternalPlayerBackend::defaultBackend().isFfmpeg()
+              && "Adjust the code below after changing the default backend." );
+
+    if( !internalPlayerBackend.isQtmultimedia() )
+    {
+      if( qobject_cast< Ffmpeg::AudioPlayer * >( playerPtr.data() ) == 0 )
+        playerPtr.reset( new Ffmpeg::AudioPlayer );
+      return;
+    }
+#endif
+
+#ifdef MAKE_QTMULTIMEDIA_PLAYER
+    if( qobject_cast< MultimediaAudioPlayer * >( playerPtr.data() ) == 0 )
+      playerPtr.reset( new MultimediaAudioPlayer );
+    return;
+#endif
   }
+
+  QScopedPointer< ExternalAudioPlayer > externalPlayer( new ExternalAudioPlayer );
+  setAudioPlaybackProgram( *externalPlayer );
+  playerPtr.reset( externalPlayer.take() );
 }
 
 void AudioPlayerFactory::setAudioPlaybackProgram( ExternalAudioPlayer & externalPlayer )

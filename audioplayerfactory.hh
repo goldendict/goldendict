@@ -25,6 +25,7 @@ private:
   void setAudioPlaybackProgram( ExternalAudioPlayer & externalPlayer );
 
   bool useInternalPlayer;
+  Config::InternalPlayerBackend internalPlayerBackend;
   QString audioPlaybackProgram;
   AudioPlayerPtr playerPtr;
 };

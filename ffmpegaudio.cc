@@ -1,4 +1,4 @@
-#ifndef DISABLE_INTERNAL_PLAYER
+#ifdef MAKE_FFMPEG_PLAYER
 
 #include "ffmpegaudio.hh"
 
@@ -589,4 +589,4 @@ void DecoderThread::cancel( bool waitUntilFinished )
 
 }
 
-#endif //DISABLE_INTERNAL_PLAYER
+#endif // MAKE_FFMPEG_PLAYER
