@@ -7,7 +7,7 @@
 #include "audioplayerinterface.hh"
 #include "ffmpegaudio.hh"
 
-#ifndef DISABLE_INTERNAL_PLAYER
+#ifdef MAKE_FFMPEG_PLAYER
 
 namespace Ffmpeg
 {
@@ -36,6 +36,6 @@ public:
 
 }
 
-#endif // DISABLE_INTERNAL_PLAYER
+#endif // MAKE_FFMPEG_PLAYER
 
 #endif // FFMPEGAUDIOPLAYER_HH_INCLUDED

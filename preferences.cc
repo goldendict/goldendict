@@ -243,14 +243,28 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
 
-#ifdef DISABLE_INTERNAL_PLAYER
-  ui.useInternalPlayer->hide();
-#else
-  if ( p.useInternalPlayer )
-    ui.useInternalPlayer->setChecked( true );
+  ui.internalPlayerBackend->addItems( Config::InternalPlayerBackend::nameList() );
+
+  // Make sure that exactly one radio button in the group is checked and that
+  // on_useExternalPlayer_toggled() is called.
+  ui.useExternalPlayer->setChecked( true );
+
+  if( ui.internalPlayerBackend->count() > 0 )
+  {
+    // Checking ui.useInternalPlayer automatically unchecks ui.useExternalPlayer.
+    ui.useInternalPlayer->setChecked( p.useInternalPlayer );
+
+    int index = ui.internalPlayerBackend->findText( p.internalPlayerBackend.uiName() );
+    if( index < 0 ) // The specified backend is unavailable.
+      index = ui.internalPlayerBackend->findText( Config::InternalPlayerBackend::defaultBackend().uiName() );
+    Q_ASSERT( index >= 0 && "Logic error: the default backend must be present in the backend name list." );
+    ui.internalPlayerBackend->setCurrentIndex( index );
+  }
   else
-#endif
-    ui.useExternalPlayer->setChecked( p.useExternalPlayer );
+  {
+    ui.useInternalPlayer->hide();
+    ui.internalPlayerBackend->hide();
+  }
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
@@ -399,8 +413,8 @@ Config::Preferences Preferences::getPreferences()
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
-  p.useExternalPlayer = ui.useExternalPlayer->isChecked();
   p.useInternalPlayer = ui.useInternalPlayer->isChecked();
+  p.internalPlayerBackend.setUiName( ui.internalPlayerBackend->currentText() );
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();
@@ -593,6 +607,7 @@ void Preferences::on_buttonBox_accepted()
 
 void Preferences::on_useExternalPlayer_toggled( bool enabled )
 {
+  ui.internalPlayerBackend->setEnabled( !enabled );
   ui.audioPlaybackProgram->setEnabled( enabled );
 }
 

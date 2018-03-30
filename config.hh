@@ -177,6 +177,52 @@ struct FullTextSearch
   {}
 };
 
+/// This class encapsulates supported backend preprocessor logic,
+/// discourages duplicating backend names in code, which is error-prone.
+class InternalPlayerBackend
+{
+public:
+  /// Returns true if at least one backend is available.
+  static bool anyAvailable();
+  /// Returns the default backend or null backend if none is available.
+  static InternalPlayerBackend defaultBackend();
+  /// Returns the name list of supported backends.
+  static QStringList nameList();
+
+  /// Returns true if built with FFmpeg player support and the name matches.
+  bool isFfmpeg() const;
+  /// Returns true if built with Qt Multimedia player support and the name matches.
+  bool isQtmultimedia() const;
+
+  QString const & uiName() const
+  { return name; }
+
+  void setUiName( QString const & name_ )
+  { name = name_; }
+
+  bool operator == ( InternalPlayerBackend const & other ) const
+  { return name == other.name; }
+
+  bool operator != ( InternalPlayerBackend const & other ) const
+  { return ! operator == ( other ); }
+
+private:
+#ifdef MAKE_FFMPEG_PLAYER
+  static InternalPlayerBackend ffmpeg()
+  { return InternalPlayerBackend( "FFmpeg+libao" ); }
+#endif
+
+#ifdef MAKE_QTMULTIMEDIA_PLAYER
+  static InternalPlayerBackend qtmultimedia()
+  { return InternalPlayerBackend( "Qt Multimedia" ); }
+#endif
+
+  explicit InternalPlayerBackend( QString const & name_ ) : name( name_ )
+  {}
+
+  QString name;
+};
+
 /// Various user preferences
 struct Preferences
 {
@@ -222,9 +268,9 @@ struct Preferences
 
   // Whether the word should be pronounced on page load, in main window/popup
   bool pronounceOnLoadMain, pronounceOnLoadPopup;
-  QString audioPlaybackProgram;
-  bool useExternalPlayer;
   bool useInternalPlayer;
+  InternalPlayerBackend internalPlayerBackend;
+  QString audioPlaybackProgram;
 
   ProxyServer proxyServer;
 

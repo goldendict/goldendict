@@ -1,7 +1,7 @@
 #ifndef __FFMPEGAUDIO_HH_INCLUDED__
 #define __FFMPEGAUDIO_HH_INCLUDED__
 
-#ifndef DISABLE_INTERNAL_PLAYER
+#ifdef MAKE_FFMPEG_PLAYER
 
 #include <QObject>
 #include <QMutex>
@@ -52,6 +52,6 @@ signals:
 
 }
 
-#endif // DISABLE_INTERNAL_PLAYER
+#endif // MAKE_FFMPEG_PLAYER
 
 #endif // __FFMPEGAUDIO_HH_INCLUDED__
