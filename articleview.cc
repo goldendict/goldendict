@@ -1610,6 +1610,11 @@ void ArticleView::playSound()
     openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }
 
+void ArticleView::stopPlayback()
+{
+  audioPlayer->stop();
+}
+
 QString ArticleView::toHtml()
 {
   return ui.definition->page()->mainFrame()->toHtml();

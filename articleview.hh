@@ -152,6 +152,9 @@ public:
   /// Plays the first audio reference on the page, if any.
   void playSound();
 
+  /// Stops current playback if any.
+  void stopPlayback();
+
   void setZoomFactor( qreal factor )
   { ui.definition->setZoomFactor( factor ); }
 

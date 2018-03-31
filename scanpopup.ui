@@ -150,6 +150,9 @@
              <property name="shortcut">
               <string>Alt+S</string>
              </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
              <property name="autoRaise">
               <bool>false</bool>
              </property>

@@ -5,6 +5,7 @@
 #define __SCANPOPUP_HH_INCLUDED__
 
 #include "article_netmgr.hh"
+#include "audioplayerinterface.hh"
 #include "articleview.hh"
 #include "wordfinder.hh"
 #include "keyboardstate.hh"
@@ -49,6 +50,8 @@ public:
   void applyWordsZoomLevel();
   /// Translate the word
   void translateWord( QString const & word );
+
+  void setPlaybackState( AudioPlayerInterface::State state );
 
   void setDictionaryIconSize();
 
@@ -191,7 +194,7 @@ private slots:
   void mouseHovered( QString const & , bool forcePopup);
   void currentGroupChanged( QString const & );
   void prefixMatchFinished();
-  void on_pronounceButton_clicked();
+  void on_pronounceButton_clicked( bool checked );
   void pinButtonClicked( bool checked );
   void on_showDictionaryBar_clicked( bool checked );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );

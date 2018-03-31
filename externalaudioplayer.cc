@@ -10,6 +10,9 @@ ExternalAudioPlayer::ExternalAudioPlayer() : exitingViewer( 0 )
 
 ExternalAudioPlayer::~ExternalAudioPlayer()
 {
+  if( !exitingViewer && !viewer )
+    return;
+
   // Destroy viewers immediately to prevent memory and temporary file leaks
   // at application exit.
 
@@ -18,6 +21,8 @@ ExternalAudioPlayer::~ExternalAudioPlayer()
   stopAndDestroySynchronously( viewer.take() );
 
   stopAndDestroySynchronously( exitingViewer );
+
+  emit stateChanged( StoppedState );
 }
 
 void ExternalAudioPlayer::setPlayerCommandLine( QString const & playerCommandLine_ )
@@ -43,8 +48,16 @@ QString ExternalAudioPlayer::play( const char * data, int size )
   }
 
   if( exitingViewer )
-    return QString(); // Will start later.
-  return startViewer();
+  {
+    // Logically we are playing, but will actually start \p data playback later.
+    emit stateChanged( PlayingState );
+    return QString();
+  }
+
+  QString errorMessage = startViewer();
+  if( errorMessage.isEmpty() )
+    emit stateChanged( PlayingState );
+  return errorMessage;
 }
 
 void ExternalAudioPlayer::stop()
@@ -62,23 +75,34 @@ void ExternalAudioPlayer::stop()
   }
   else // viewer is either not started or already stopped -> simply destroy it.
     viewer.reset();
+
+  // Logically we are stopped. Leftover exitingViewer is an implementation detail.
+  emit stateChanged( StoppedState );
 }
 
 void ExternalAudioPlayer::onViewerDestroyed( QObject * destroyedViewer )
 {
   if( exitingViewer == destroyedViewer )
   {
+    // This condition is not a logical state change. It is a pure implementation
+    // detail. So we emit the stateChanged signal only in case of an error.
     exitingViewer = 0;
     if( viewer )
     {
       QString errorMessage = startViewer();
       if( !errorMessage.isEmpty() )
+      {
+        emit stateChanged( StoppedState );
         emit error( errorMessage );
+      }
     }
   }
   else
   if( viewer.data() == destroyedViewer )
+  {
     viewer.take(); // viewer finished and died -> release ownership.
+    emit stateChanged( StoppedState );
+  }
 }
 
 QString ExternalAudioPlayer::startViewer()

@@ -49,7 +49,7 @@ AudioService & AudioService::instance()
   return a;
 }
 
-AudioService::AudioService()
+AudioService::AudioService() : runningThreadCount( 0 )
 {
   av_register_all();
   ao_initialize();
@@ -70,13 +70,23 @@ void AudioService::playMemory( const char * ptr, int size )
   connect( thread, SIGNAL( error( QString ) ), this, SIGNAL( error( QString ) ) );
   connect( this, SIGNAL( cancelPlaying( bool ) ), thread, SLOT( cancel( bool ) ), Qt::DirectConnection );
   connect( thread, SIGNAL( finished() ), thread, SLOT( deleteLater() ) );
+  connect( thread, SIGNAL( destroyed() ), this, SLOT( onThreadDestroyed() ) );
 
+  ++runningThreadCount;
   thread->start();
 }
 
 void AudioService::stop()
 {
   emit cancelPlaying( false );
+}
+
+void AudioService::onThreadDestroyed()
+{
+  --runningThreadCount;
+  Q_ASSERT( runningThreadCount >= 0 && "The number of threads can't be negative." );
+  if( runningThreadCount == 0 )
+    emit playbackStopped();
 }
 
 struct DecoderContext

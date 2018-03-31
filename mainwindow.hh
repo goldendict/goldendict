@@ -15,6 +15,7 @@
 #include "config.hh"
 #include "dictionary.hh"
 #include "article_netmgr.hh"
+#include "audioplayerinterface.hh"
 #include "audioplayerfactory.hh"
 #include "instances.hh"
 #include "article_maker.hh"
@@ -253,6 +254,8 @@ private:
 
   QString unescapeTabHeader( QString const & header );
 
+  void connectToAudioPlayer();
+
 private slots:
 
   void hotKeyActivated( int );
@@ -328,10 +331,9 @@ private slots:
 
   void dictionaryBarToggled( bool checked );
 
-  /// Pronounces the currently displayed word by playing its first audio
-  /// reference, if it has any.
-  /// If view is 0, the operation is done for the currently open tab.
-  void pronounce( ArticleView * view = 0 );
+  void onPronounceTriggered( bool checked );
+
+  void onAudioPlayerStateChanged( AudioPlayerInterface::State state );
 
   void zoomin();
   void zoomout();

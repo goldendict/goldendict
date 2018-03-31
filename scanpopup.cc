@@ -479,6 +479,11 @@ void ScanPopup::translateWord( QString const & word )
       );
 }
 
+void ScanPopup::setPlaybackState( AudioPlayerInterface::State state )
+{
+  ui.pronounceButton->setChecked( state == AudioPlayerInterface::PlayingState );
+}
+
 #ifdef HAVE_X11
 void ScanPopup::delayShow()
 {
@@ -1009,9 +1014,12 @@ void ScanPopup::prefixMatchFinished()
   }
 }
 
-void ScanPopup::on_pronounceButton_clicked()
+void ScanPopup::on_pronounceButton_clicked( bool checked )
 {
-  definition->playSound();
+  if( checked )
+    definition->playSound();
+  else
+    definition->stopPlayback();
 }
 
 void ScanPopup::pinButtonClicked( bool checked )

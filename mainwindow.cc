@@ -208,11 +208,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // sound
   navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound_full.png" ), tr( "Pronounce Word (Alt+S)" ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
+  navPronounce->setCheckable( true );
   navPronounce->setEnabled( false );
   navToolbar->widgetForAction( navPronounce )->setObjectName( "soundButton" );
 
-  connect( navPronounce, SIGNAL( triggered() ),
-           this, SLOT( pronounce() ) );
+  connect( navPronounce, SIGNAL( triggered( bool ) ),
+           this, SLOT( onPronounceTriggered( bool ) ) );
+
+  connectToAudioPlayer();
 
   // zooming
   // named separator (to be able to hide it via CSS)
@@ -1391,6 +1394,10 @@ void MainWindow::makeScanPopup()
   if ( cfg.preferences.enableScanPopup && enableScanPopup->isChecked() )
     scanPopup->enableScanning();
 
+  scanPopup->setPlaybackState( navPronounce->isChecked() ?
+                                 AudioPlayerInterface::PlayingState
+                               : AudioPlayerInterface::StoppedState );
+
   connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned ) ),
            this, SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
 
@@ -1784,7 +1791,7 @@ void MainWindow::pageLoaded( ArticleView * view )
   updatePronounceAvailability();
 
   if ( cfg.preferences.pronounceOnLoadMain )
-    pronounce( view );
+    view->playSound();
 
   updateFoundInDictsList();
 }
@@ -1844,12 +1851,27 @@ void MainWindow::dictionaryBarToggled( bool )
   applyMutedDictionariesState(); // Visibility change affects searches and results
 }
 
-void MainWindow::pronounce( ArticleView * view )
+void MainWindow::onPronounceTriggered( bool checked )
 {
-  if ( view )
+  ArticleView * const view = getCurrentArticleView();
+  Q_ASSERT( view );
+  if( checked )
     view->playSound();
   else
-    getCurrentArticleView()->playSound();
+    view->stopPlayback();
+}
+
+void MainWindow::connectToAudioPlayer()
+{
+  connect( audioPlayerFactory.player().data(), SIGNAL( stateChanged( AudioPlayerInterface::State ) ),
+           this, SLOT( onAudioPlayerStateChanged( AudioPlayerInterface::State ) ), Qt::UniqueConnection );
+}
+
+void MainWindow::onAudioPlayerStateChanged( AudioPlayerInterface::State state )
+{
+  navPronounce->setChecked( state == AudioPlayerInterface::PlayingState );
+  if( scanPopup )
+    scanPopup->setPlaybackState( state );
 }
 
 void MainWindow::showDictsPane( )
@@ -2098,6 +2120,7 @@ void MainWindow::editPreferences()
     cfg.preferences = p;
 
     audioPlayerFactory.setPreferences( cfg.preferences );
+    connectToAudioPlayer();
 
     beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
