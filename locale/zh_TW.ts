@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>沒有可用的播放器，無法開啟音訊檔案：%1</translation>
+        <translation type="obsolete">沒有可用的播放器，無法開啟音訊檔案：%1</translation>
     </message>
     <message>
         <source>&amp;Next</source>
@@ -286,7 +286,7 @@
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation>警告： FFmpeg 音訊撥放程式： %1</translation>
+        <translation type="obsolete">警告： FFmpeg 音訊撥放程式： %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
@@ -303,6 +303,14 @@
     <message>
         <source>Video: %1</source>
         <translation>影像： %1</translation>
+    </message>
+    <message>
+        <source>Failed to play sound file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: Audio Player: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2640,6 +2648,13 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
 </context>
 <context>
+    <name>MultimediaAudioPlayer</name>
+    <message>
+        <source>Couldn&apos;t open audio buffer for reading.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OrderAndProps</name>
     <message>
         <source>...</source>
@@ -3268,11 +3283,11 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation>使用 FFmpeg(libav) 和 libao 播放音訊檔案。</translation>
+        <translation type="obsolete">使用 FFmpeg(libav) 和 libao 播放音訊檔案。</translation>
     </message>
     <message>
         <source>Use internal player</source>
-        <translation>使用內部播放器</translation>
+        <translation type="obsolete">使用內部播放器</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
@@ -3373,6 +3388,22 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>Show scan flag when word is selected</source>
         <translation>單字被選取時顯示掃描旗標</translation>
+    </message>
+    <message>
+        <source>Play audio files via built-in audio support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose audio back end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter audio player command line</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3541,6 +3572,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>Date: %1%2</source>
         <translation>日期: %1%2</translation>
+    </message>
+    <message>
+        <source>avcodec_alloc_context3() failed.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

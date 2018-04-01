@@ -182,7 +182,7 @@
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Audio ist&apos;añataki panthatawa: %1</translation>
+        <translation type="obsolete">Audio ist&apos;añataki panthatawa: %1</translation>
     </message>
     <message>
         <source>Failed to create temporary file.</source>
@@ -305,10 +305,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy as text</source>
         <translation type="unfinished"></translation>
     </message>
@@ -322,6 +318,14 @@
     </message>
     <message>
         <source>Video: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to play sound file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3421,6 +3425,13 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
 </context>
 <context>
+    <name>MultimediaAudioPlayer</name>
+    <message>
+        <source>Couldn&apos;t open audio buffer for reading.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OrderAndProps</name>
     <message>
         <source>Form</source>
@@ -4056,14 +4067,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use internal player</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation type="unfinished"></translation>
@@ -4159,6 +4162,22 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Show scan flag when word is selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio files via built-in audio support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose audio back end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter audio player command line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4327,6 +4346,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Date: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avcodec_alloc_context3() failed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
