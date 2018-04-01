@@ -22,6 +22,11 @@ public:
              this, SIGNAL( error( QString ) ) );
   }
 
+  ~AudioPlayer()
+  {
+    stop();
+  }
+
   virtual QString play( const char * data, int size )
   {
     AudioService::instance().playMemory( data, size );
