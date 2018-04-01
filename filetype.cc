@@ -88,6 +88,7 @@ bool isNameOfVideo( string const & name )
     endsWith( s, ".flv" ) ||
     endsWith( s, ".divx" ) ||
     endsWith( s, ".3gp" ) ||
+    endsWith( s, ".webm" ) ||
     endsWith( s, ".mov" );
 }
 
