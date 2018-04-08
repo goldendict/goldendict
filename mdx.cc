@@ -65,7 +65,7 @@ using namespace Mdict;
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 10 + BtreeIndexing::FormatVersion + Folding::Version
+  kCurrentFormatVersion = 11 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
@@ -1509,12 +1509,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       {
         sptr< MdictParser > mddParser = mddParsers.front();
         sptr< IndexedWords > mddIndexedWords = new IndexedWords();
+        MdictParser::HeadWordIndex resourcesIndex;
         ResourceHandler resourceHandler( chunks, *mddIndexedWords );
 
         while ( mddParser->readNextHeadWordIndex( headWordIndex ) )
         {
-          mddParser->readRecordBlock( headWordIndex, resourceHandler );
+          resourcesIndex.insert( resourcesIndex.end(), headWordIndex.begin(), headWordIndex.end() );
         }
+        mddParser->readRecordBlock( resourcesIndex, resourceHandler );
 
         mddIndices.push_back( mddIndexedWords );
         // Save filename for .mdd files only
