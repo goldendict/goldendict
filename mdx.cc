@@ -1130,19 +1130,17 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0 )
     {
       // javascripts and images
-      QRegularExpressionMatch match;
+      QRegularExpressionMatch match = inlineScriptRe.match( linkTxt );
       if( linkType.at( 0 ) == 's'
-          && linkTxt.indexOf( inlineScriptRe, 0, &match ) == 0
-          && match.capturedLength() == linkTxt.length() )
+          && match.hasMatch() && match.capturedLength() == linkTxt.length() )
       {
         // skip inline scripts
         articleNewText += linkTxt;
-        int pos = article.indexOf( closeScriptTagRe, linkPos, &match );
-        if( pos > 0 )
+        match = closeScriptTagRe.match( article, linkPos );
+        if( match.hasMatch() )
         {
-          pos += match.capturedLength();
-          articleNewText += article.midRef( linkPos, pos - linkPos );
-          linkPos = pos;
+          articleNewText += article.midRef( linkPos, match.capturedEnd() - linkPos );
+          linkPos = match.capturedEnd();
         }
         continue;
       }

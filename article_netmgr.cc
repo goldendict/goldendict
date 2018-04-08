@@ -16,7 +16,7 @@
 
 using std::string;
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
 
   // SecurityWhiteList
 
