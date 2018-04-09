@@ -108,6 +108,8 @@ public slots:
 
 private:
 
+  Qt::WindowFlags unpinnedWindowFlags() const;
+
   // Translates the word from the clipboard or the clipboard selection
   void translateWordFromClipboard(QClipboard::Mode m);
 

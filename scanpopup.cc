@@ -24,7 +24,7 @@ using std::wstring;
 
 /// We use different window flags under Windows and X11 due to slight differences
 /// in their behavior on those platforms.
-static Qt::WindowFlags popupWindowFlags =
+static const Qt::WindowFlags defaultUnpinnedWindowFlags =
 
 #if defined (Q_OS_WIN) || ( defined (Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK( 5, 3, 0 ) )
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
@@ -177,7 +177,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   else
   {
     dictionaryBar.setMovable( false );
-    setWindowFlags( popupWindowFlags );
+    setWindowFlags( unpinnedWindowFlags() );
   }
 
   connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
@@ -387,6 +387,27 @@ void ScanPopup::applyWordsZoomLevel()
   ui.groupList->parentWidget()->layout()->activate();
 }
 
+Qt::WindowFlags ScanPopup::unpinnedWindowFlags() const
+{
+#ifdef ENABLE_SPWF_CUSTOMIZATION
+  const Config::ScanPopupWindowFlags spwf = cfg.preferences.scanPopupUnpinnedWindowFlags;
+  Qt::WindowFlags result;
+  if( spwf == Config::SPWF_Popup )
+    result = Qt::Popup;
+  else
+  if( spwf == Config::SPWF_Tool )
+    result = Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint;
+  else
+    return defaultUnpinnedWindowFlags; // Ignore BypassWMHint option.
+
+  if( cfg.preferences.scanPopupUnpinnedBypassWMHint )
+    result |= Qt::X11BypassWindowManagerHint;
+  return result;
+#else
+  return defaultUnpinnedWindowFlags;
+#endif
+}
+
 void ScanPopup::translateWordFromClipboard()
 {
 	return translateWordFromClipboard(QClipboard::Clipboard);
@@ -584,6 +605,14 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
     show();
 
+#ifdef ENABLE_SPWF_CUSTOMIZATION
+    // Ensure that the window always has focus on X11 with Qt::Tool flag.
+    // This also often prevents the window from disappearing prematurely with Qt::Popup flag,
+    // especially when combined with Qt::X11BypassWindowManagerHint flag.
+    if ( !ui.pinButton->isChecked() )
+      giveFocus = true;
+#endif
+
     if ( giveFocus )
     {
       activateWindow();
@@ -608,6 +637,15 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
     activateWindow();
     raise();
   }
+#ifdef ENABLE_SPWF_CUSTOMIZATION
+  else
+  if ( ( windowFlags() & Qt::Tool ) == Qt::Tool )
+  {
+    // Ensure that the window with Qt::Tool flag always has focus on X11.
+    activateWindow();
+    raise();
+  }
+#endif
 
   if ( ui.pinButton->isChecked() )
        setWindowTitle( tr( "%1 - %2" ).arg( elideInputWord(), "GoldenDict" ) );
@@ -973,7 +1011,7 @@ void ScanPopup::pinButtonClicked( bool checked )
   {
     ui.onTopButton->setVisible( false );
     dictionaryBar.setMovable( false );
-    setWindowFlags( popupWindowFlags );
+    setWindowFlags( unpinnedWindowFlags() );
 
     mouseEnteredOnce = true;
   }

@@ -128,6 +128,18 @@ bool InternalPlayerBackend::isQtmultimedia() const
 #endif
 }
 
+ScanPopupWindowFlags spwfFromInt( int id )
+{
+  if( id == SPWF_Popup )
+    return SPWF_Popup;
+  if( id == SPWF_Tool )
+    return SPWF_Tool;
+
+  if( id != SPWF_default )
+    gdWarning( "Invalid ScanPopup unpinned window flags: %d\n", id );
+  return SPWF_default;
+}
+
 Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
@@ -158,6 +170,8 @@ Preferences::Preferences():
   scanPopupUseUIAutomation( true ),
   scanPopupUseIAccessibleEx( true ),
   scanPopupUseGDMessage( true ),
+  scanPopupUnpinnedWindowFlags( SPWF_default ),
+  scanPopupUnpinnedBypassWMHint( false ),
   scanToMainWindow( false ),
 #ifdef HAVE_X11
   showScanFlag( false ),
@@ -812,6 +826,8 @@ Class load() throw( exError )
     c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
     c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
     c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
+    c.preferences.scanPopupUnpinnedWindowFlags = spwfFromInt( preferences.namedItem( "scanPopupUnpinnedWindowFlags" ).toElement().text().toInt() );
+    c.preferences.scanPopupUnpinnedBypassWMHint = ( preferences.namedItem( "scanPopupUnpinnedBypassWMHint" ).toElement().text() == "1" );
 
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
@@ -1700,6 +1716,14 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "scanPopupUseGDMessage" );
     opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseGDMessage ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupUnpinnedWindowFlags" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupUnpinnedWindowFlags ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "scanPopupUnpinnedBypassWMHint" );
+    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUnpinnedBypassWMHint ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "pronounceOnLoadMain" );
