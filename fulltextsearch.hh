@@ -6,6 +6,7 @@
 #include <QRegExp>
 #include <QAbstractListModel>
 #include <QList>
+#include <QAction>
 
 #include "dictionary.hh"
 #include "ui_fulltextsearch.h"
