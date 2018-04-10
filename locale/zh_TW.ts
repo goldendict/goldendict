@@ -951,6 +951,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Ignore words order</source>
         <translation>忽略單字排序</translation>
     </message>
+    <message>
+        <source>Ignore diacritics</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>

@@ -190,161 +190,161 @@
         <translation>&amp;حساس به کوچکی و بزرگی</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="209"/>
+        <location filename="../articleview.cc" line="280"/>
         <source>Select Current Article</source>
         <translation>برگزیدن بند جاری</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="215"/>
+        <location filename="../articleview.cc" line="286"/>
         <source>Copy as text</source>
         <translation>رونوشت مانند متن</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="221"/>
+        <location filename="../articleview.cc" line="292"/>
         <source>Inspect</source>
         <translation>بازرسی کردن</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="952"/>
+        <location filename="../articleview.cc" line="1026"/>
         <source>Resource</source>
         <translation>منبع</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="957"/>
+        <location filename="../articleview.cc" line="1031"/>
         <source>Audio</source>
         <translation>شنیداری</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="962"/>
+        <location filename="../articleview.cc" line="1036"/>
         <source>TTS Voice</source>
         <translation>گفتار TTS</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="967"/>
+        <location filename="../articleview.cc" line="1041"/>
         <source>Picture</source>
         <translation>عکس</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="974"/>
+        <location filename="../articleview.cc" line="1048"/>
         <source>Video</source>
         <translation>ویدیو</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="983"/>
+        <location filename="../articleview.cc" line="1057"/>
         <source>Video: %1</source>
         <translation>ویدیوی: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1000"/>
+        <location filename="../articleview.cc" line="1074"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>تعریف از واژه‌نامه &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1078"/>
         <source>Definition: %1</source>
         <translation>تعریف: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1276"/>
-        <location filename="../articleview.cc" line="1433"/>
+        <location filename="../articleview.cc" line="1350"/>
+        <location filename="../articleview.cc" line="1507"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>منبع ارجاع شده وجود ندارد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>برنامه شنیداری ارجاع شده وجود ندارد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1199"/>
-        <location filename="../articleview.cc" line="1235"/>
-        <location filename="../articleview.cc" line="1433"/>
+        <location filename="../articleview.cc" line="1273"/>
+        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1507"/>
         <source>ERROR: %1</source>
         <translation>خطای: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1662"/>
         <source>&amp;Open Link</source>
         <translation>&amp;باز کردن پیوند</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1594"/>
+        <location filename="../articleview.cc" line="1668"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>باز کردن پیوند در &amp;زیانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1601"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>باز کردن پیوند در &amp;مرورگر بیرونی</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1616"/>
+        <location filename="../articleview.cc" line="1690"/>
         <source>Save &amp;image...</source>
         <translation>ذخیره &amp;تصویر...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1624"/>
+        <location filename="../articleview.cc" line="1698"/>
         <source>Save s&amp;ound...</source>
         <translation>ذخیره آ&amp;وا...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1643"/>
+        <location filename="../articleview.cc" line="1717"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;یافتن &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1651"/>
+        <location filename="../articleview.cc" line="1725"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>یافتن &quot;%1&quot; در &amp;زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1656"/>
+        <location filename="../articleview.cc" line="1730"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>فرستادن &quot;%1&quot; به خط ورودی</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1662"/>
-        <location filename="../articleview.cc" line="1698"/>
+        <location filename="../articleview.cc" line="1736"/>
+        <location filename="../articleview.cc" line="1772"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;افزودن &quot;%1&quot; به پیشینه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1676"/>
+        <location filename="../articleview.cc" line="1750"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>یافتن &quot;%1&quot; در %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1684"/>
+        <location filename="../articleview.cc" line="1758"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>یافتن &quot;%1&quot; در %2 در &amp;زبانه تازه</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1832"/>
+        <location filename="../articleview.cc" line="1906"/>
         <source>Save sound</source>
         <translation>ذخیره کردن آوا</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1834"/>
+        <location filename="../articleview.cc" line="1908"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>پرونده‌های آوا (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1847"/>
+        <location filename="../articleview.cc" line="1921"/>
         <source>Save image</source>
         <translation>ذخیره کردن تصویر</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1849"/>
+        <location filename="../articleview.cc" line="1923"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>پرونده‌های تصویر (*.bmp *.jpg *.png *.tif);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1904"/>
+        <location filename="../articleview.cc" line="1978"/>
         <source>Failed to play sound file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1960"/>
+        <location filename="../articleview.cc" line="2034"/>
         <source>WARNING: Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -353,22 +353,22 @@
         <translation type="obsolete">خطا در اجرای یک پخش‌کننده برای پخش پرونده آوا: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1919"/>
+        <location filename="../articleview.cc" line="1993"/>
         <source>Failed to create temporary file.</source>
         <translation>ساخت پرونده موقت شکست خورد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1930"/>
+        <location filename="../articleview.cc" line="2004"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>باز کردن خودکار پرونده منبع شکست خورد، تلاش کنید به‌صورت دستی بازکنید: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1953"/>
+        <location filename="../articleview.cc" line="2027"/>
         <source>WARNING: %1</source>
         <translation>هشدار: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1953"/>
+        <location filename="../articleview.cc" line="2027"/>
         <source>The referenced resource failed to download.</source>
         <translation>بارگیری منبع ارجاع شده شکست خورد.</translation>
     </message>
@@ -930,74 +930,74 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="151"/>
+        <location filename="../fulltextsearch.cc" line="152"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="158"/>
+        <location filename="../fulltextsearch.cc" line="159"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="159"/>
+        <location filename="../fulltextsearch.cc" line="160"/>
         <source>Plain text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="160"/>
+        <location filename="../fulltextsearch.cc" line="161"/>
         <source>Wildcards</source>
         <translation type="unfinished">نویسه‌های عام</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="161"/>
+        <location filename="../fulltextsearch.cc" line="162"/>
         <source>RegExp</source>
         <translation type="unfinished">RegExp</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="166"/>
+        <location filename="../fulltextsearch.cc" line="167"/>
         <source>Max distance between words (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="175"/>
+        <location filename="../fulltextsearch.cc" line="176"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="212"/>
-        <location filename="../fulltextsearch.cc" line="369"/>
-        <location filename="../fulltextsearch.cc" line="458"/>
+        <location filename="../fulltextsearch.cc" line="217"/>
+        <location filename="../fulltextsearch.cc" line="380"/>
+        <location filename="../fulltextsearch.cc" line="470"/>
         <source>Articles found: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="328"/>
+        <location filename="../fulltextsearch.cc" line="334"/>
         <source>Now indexing: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="329"/>
+        <location filename="../fulltextsearch.cc" line="335"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="382"/>
+        <location filename="../fulltextsearch.cc" line="393"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="391"/>
+        <location filename="../fulltextsearch.cc" line="402"/>
         <source>The search line must contains at least one word containing </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="392"/>
+        <location filename="../fulltextsearch.cc" line="403"/>
         <source> or more symbols</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="404"/>
+        <location filename="../fulltextsearch.cc" line="415"/>
         <source>No dictionaries for full-text search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1080,7 +1080,7 @@ between classic and school orthography in cyrillic)</source>
     <name>FullTextSearchDialog</name>
     <message>
         <location filename="../fulltextsearch.ui" line="26"/>
-        <location filename="../fulltextsearch.ui" line="196"/>
+        <location filename="../fulltextsearch.ui" line="207"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1095,47 +1095,52 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="80"/>
+        <location filename="../fulltextsearch.ui" line="82"/>
         <source>Ignore words order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="101"/>
+        <location filename="../fulltextsearch.ui" line="89"/>
+        <source>Ignore diacritics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="112"/>
         <source>Articles found:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="123"/>
+        <location filename="../fulltextsearch.ui" line="134"/>
         <source>Available dictionaries in group:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="129"/>
+        <location filename="../fulltextsearch.ui" line="140"/>
         <source>Wait for indexing:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="150"/>
+        <location filename="../fulltextsearch.ui" line="161"/>
         <source>Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="157"/>
+        <location filename="../fulltextsearch.ui" line="168"/>
         <source>Indexed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="174"/>
+        <location filename="../fulltextsearch.ui" line="185"/>
         <source>Now indexing: None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="222"/>
+        <location filename="../fulltextsearch.ui" line="233"/>
         <source>Cancel</source>
         <translation type="unfinished">لغو</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="242"/>
+        <location filename="../fulltextsearch.ui" line="253"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2692,8 +2697,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3722"/>
-        <location filename="../mainwindow.cc" line="3734"/>
+        <location filename="../mainwindow.cc" line="3724"/>
+        <location filename="../mainwindow.cc" line="3736"/>
         <source>&amp;Show</source>
         <translation>&amp;نمایش</translation>
     </message>
@@ -2779,7 +2784,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="246"/>
         <location filename="../mainwindow.cc" line="1747"/>
         <location filename="../mainwindow.cc" line="1825"/>
-        <location filename="../mainwindow.cc" line="4552"/>
+        <location filename="../mainwindow.cc" line="4554"/>
         <source>Add current tab to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2916,7 +2921,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="842"/>
-        <location filename="../mainwindow.cc" line="3125"/>
+        <location filename="../mainwindow.cc" line="3127"/>
         <source>Accessibility API is not enabled</source>
         <translation>API دست‌رسی به‌کار نیفتاده است</translation>
     </message>
@@ -2955,9 +2960,9 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="1742"/>
         <location filename="../mainwindow.cc" line="1820"/>
-        <location filename="../mainwindow.cc" line="4532"/>
-        <location filename="../mainwindow.cc" line="4560"/>
-        <location filename="../mainwindow.cc" line="4587"/>
+        <location filename="../mainwindow.cc" line="4534"/>
+        <location filename="../mainwindow.cc" line="4562"/>
+        <location filename="../mainwindow.cc" line="4589"/>
         <source>Remove current tab from Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2967,205 +2972,205 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2924"/>
+        <location filename="../mainwindow.cc" line="2926"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>برپاسازی سازوکار بازبینی کلیدهای میان‌بر شکست خورد.&lt;br&gt;مطمئن شوید که افزونه RECORD مربوط به XServer روشن شده است.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="3067"/>
         <source>New Release Available</source>
         <translation>نسخه تازه موجود است</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
+        <location filename="../mainwindow.cc" line="3068"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>نسخه &lt;b&gt;%1&lt;/b&gt; گلدن‌دیکت برای بارگیری آماده است &lt;br&gt; برای به‌دست آوردن برگه بارگیری &lt;b&gt;بارگیری&lt;/b&gt; را کلیک کنید.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3071"/>
+        <location filename="../mainwindow.cc" line="3073"/>
         <source>Download</source>
         <translation>بارگیری</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3072"/>
+        <location filename="../mainwindow.cc" line="3074"/>
         <source>Skip This Release</source>
         <translation>پرش از این نسخه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>شما پنهان کردن نوار منو را برگزیده‌اید. %1 را به‌کار ببرید تا دوباره نمایش داده شود.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3203"/>
+        <location filename="../mainwindow.cc" line="3205"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3301"/>
+        <location filename="../mainwindow.cc" line="3303"/>
         <source>Page Setup</source>
         <translation>برپایی برگه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3302"/>
+        <location filename="../mainwindow.cc" line="3304"/>
         <source>No printer is available. Please install one first.</source>
         <translation>چاپ‌گری موجود نیست. لطفاً نخست یکی نصب کنید.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3320"/>
+        <location filename="../mainwindow.cc" line="3322"/>
         <source>Print Article</source>
         <translation>چاپ بند</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3395"/>
+        <location filename="../mainwindow.cc" line="3397"/>
         <source>Article, Complete (*.html)</source>
         <translation>بند، کامل (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3396"/>
+        <location filename="../mainwindow.cc" line="3398"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>بند HTML تنها (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3399"/>
+        <location filename="../mainwindow.cc" line="3401"/>
         <source>Save Article As</source>
         <translation>ذخیره بند به‌عنوان</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3413"/>
+        <location filename="../mainwindow.cc" line="3415"/>
         <source>Error</source>
         <translation>خطا</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3414"/>
+        <location filename="../mainwindow.cc" line="3416"/>
         <source>Can&apos;t save article: %1</source>
         <translation>نمی‌تواند بند: %1 را ذخیره کند</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3475"/>
+        <location filename="../mainwindow.cc" line="3477"/>
         <source>Saving article...</source>
         <translation>درحال ذخیره بند...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3538"/>
+        <location filename="../mainwindow.cc" line="3540"/>
         <source>The main window is set to be always on top.</source>
         <translation>پنجره اصلی تنظیم می‌شود تا همیشه در بالا باشد.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3718"/>
-        <location filename="../mainwindow.cc" line="3730"/>
+        <location filename="../mainwindow.cc" line="3720"/>
+        <location filename="../mainwindow.cc" line="3732"/>
         <source>&amp;Hide</source>
         <translation>پنهان&amp;سازی</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3762"/>
+        <location filename="../mainwindow.cc" line="3764"/>
         <source>Export history to file</source>
         <translation>صادر کردن پیشینه به پرونده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3764"/>
-        <location filename="../mainwindow.cc" line="3826"/>
-        <location filename="../mainwindow.cc" line="3940"/>
+        <location filename="../mainwindow.cc" line="3766"/>
+        <location filename="../mainwindow.cc" line="3828"/>
+        <location filename="../mainwindow.cc" line="3942"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>پرونده‌های متنی (*.txt);;همه پرونده‌ها (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3803"/>
+        <location filename="../mainwindow.cc" line="3805"/>
         <source>History export complete</source>
         <translation>صادر کردن پیشینه کامل شد</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3806"/>
-        <location filename="../mainwindow.cc" line="3921"/>
-        <location filename="../mainwindow.cc" line="3970"/>
+        <location filename="../mainwindow.cc" line="3808"/>
+        <location filename="../mainwindow.cc" line="3923"/>
+        <location filename="../mainwindow.cc" line="3972"/>
         <source>Export error: </source>
         <translation>خطا در صادر کردن:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3824"/>
+        <location filename="../mainwindow.cc" line="3826"/>
         <source>Import history from file</source>
         <translation>وارد کردن پیشینه از پرونده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3873"/>
+        <location filename="../mainwindow.cc" line="3875"/>
         <source>Import error: invalid data in file</source>
         <translation>خطا در وارد کردن: داده نامعتبر در پرونده</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3877"/>
+        <location filename="../mainwindow.cc" line="3879"/>
         <source>History import complete</source>
         <translation>وارد کردن پیشینه کامل شد</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3880"/>
-        <location filename="../mainwindow.cc" line="4016"/>
+        <location filename="../mainwindow.cc" line="3882"/>
+        <location filename="../mainwindow.cc" line="4018"/>
         <source>Import error: </source>
         <translation>خطا در وارد کردن:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3897"/>
+        <location filename="../mainwindow.cc" line="3899"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3899"/>
-        <location filename="../mainwindow.cc" line="3989"/>
+        <location filename="../mainwindow.cc" line="3901"/>
+        <location filename="../mainwindow.cc" line="3991"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3918"/>
-        <location filename="../mainwindow.cc" line="3967"/>
+        <location filename="../mainwindow.cc" line="3920"/>
+        <location filename="../mainwindow.cc" line="3969"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3938"/>
+        <location filename="../mainwindow.cc" line="3940"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3987"/>
+        <location filename="../mainwindow.cc" line="3989"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4012"/>
+        <location filename="../mainwindow.cc" line="4014"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4018"/>
+        <location filename="../mainwindow.cc" line="4020"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4294"/>
+        <location filename="../mainwindow.cc" line="4296"/>
         <source>Dictionary info</source>
         <translation>اطلاعات واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4298"/>
+        <location filename="../mainwindow.cc" line="4300"/>
         <source>Dictionary headwords</source>
         <translation>سرواژه‌های واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4300"/>
+        <location filename="../mainwindow.cc" line="4302"/>
         <source>Open dictionary folder</source>
         <translation>باز کردن پوشه واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4306"/>
+        <location filename="../mainwindow.cc" line="4308"/>
         <source>Edit dictionary</source>
         <translation>ویرایش واژه‌نامه</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4503"/>
+        <location filename="../mainwindow.cc" line="4505"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4545"/>
+        <location filename="../mainwindow.cc" line="4547"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3173,12 +3178,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="644"/>
+        <location filename="../mdx.cc" line="646"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>پرونده واژه‌نامه دست‌کاری یا خراب شده است</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="655"/>
+        <location filename="../mdx.cc" line="657"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>بارگیری بند از %1 شکست خورد، دلیل: %2</translation>
     </message>
@@ -4207,28 +4212,28 @@ from Stardict, Babylon and GLS dictionaries</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="447"/>
-        <location filename="../dsl.cc" line="1749"/>
+        <location filename="../aard.cc" line="448"/>
+        <location filename="../dsl.cc" line="1750"/>
         <source>Article loading error</source>
         <translation>خطا در بارگیری بند</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="539"/>
-        <location filename="../slob.cc" line="732"/>
+        <location filename="../aard.cc" line="540"/>
+        <location filename="../slob.cc" line="733"/>
         <source>Article decoding error</source>
         <translation>خطا در رمزگشایی بند</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="584"/>
-        <location filename="../bgl.cc" line="401"/>
-        <location filename="../sdict.cc" line="709"/>
-        <location filename="../stardict.cc" line="1157"/>
+        <location filename="../aard.cc" line="585"/>
+        <location filename="../bgl.cc" line="402"/>
+        <location filename="../sdict.cc" line="711"/>
+        <location filename="../stardict.cc" line="1158"/>
         <source>Copyright: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="588"/>
-        <location filename="../sdict.cc" line="725"/>
+        <location filename="../aard.cc" line="589"/>
+        <location filename="../sdict.cc" line="727"/>
         <source>Version: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4324,30 +4329,30 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>avcodec_alloc_frame() شکست خورد.</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="408"/>
-        <location filename="../gls.cc" line="625"/>
-        <location filename="../stardict.cc" line="1165"/>
+        <location filename="../bgl.cc" line="409"/>
+        <location filename="../gls.cc" line="626"/>
+        <location filename="../stardict.cc" line="1166"/>
         <source>Author: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="415"/>
-        <location filename="../stardict.cc" line="1173"/>
+        <location filename="../bgl.cc" line="416"/>
+        <location filename="../stardict.cc" line="1174"/>
         <source>E-mail: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sdict.cc" line="677"/>
+        <location filename="../sdict.cc" line="679"/>
         <source>Title: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1181"/>
+        <location filename="../stardict.cc" line="1182"/>
         <source>Website: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1189"/>
+        <location filename="../stardict.cc" line="1190"/>
         <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4373,22 +4378,22 @@ from Stardict, Babylon and GLS dictionaries</source>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2820"/>
+        <location filename="../articleview.cc" line="2910"/>
         <source>ERROR: %1</source>
         <translation>خطای: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2820"/>
+        <location filename="../articleview.cc" line="2910"/>
         <source>Resource saving error: </source>
         <translation>خطا در ذخیره منبع: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2846"/>
+        <location filename="../articleview.cc" line="2936"/>
         <source>The referenced resource failed to download.</source>
         <translation>بارگیری منبع ارجاع شده شکست خورد.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2846"/>
+        <location filename="../articleview.cc" line="2936"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">هشدار: %1</translation>
     </message>

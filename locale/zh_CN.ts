@@ -168,12 +168,12 @@
         <translation>查找：</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1953"/>
+        <location filename="../articleview.cc" line="2027"/>
         <source>The referenced resource failed to download.</source>
         <translation>所引用的资源下载失败。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1919"/>
+        <location filename="../articleview.cc" line="1993"/>
         <source>Failed to create temporary file.</source>
         <translation>创建临时文件失败。</translation>
     </message>
@@ -183,7 +183,7 @@
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1643"/>
+        <location filename="../articleview.cc" line="1717"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>查找 &quot;%1&quot;(&amp;L)</translation>
     </message>
@@ -199,7 +199,7 @@
         <translation>前一个(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1651"/>
+        <location filename="../articleview.cc" line="1725"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>在新标签页中查找 &quot;%1&quot;(&amp;N)</translation>
     </message>
@@ -208,13 +208,13 @@
         <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1276"/>
-        <location filename="../articleview.cc" line="1433"/>
+        <location filename="../articleview.cc" line="1350"/>
+        <location filename="../articleview.cc" line="1507"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>所引用的资源不存在。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1588"/>
+        <location filename="../articleview.cc" line="1662"/>
         <source>&amp;Open Link</source>
         <translation>打开链接(&amp;O)</translation>
     </message>
@@ -224,42 +224,42 @@
         <translation>区分大小写(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1930"/>
+        <location filename="../articleview.cc" line="2004"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>自动打开资源文件时失败，请尝试手动打开：%1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1676"/>
+        <location filename="../articleview.cc" line="1750"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>在 %2 中查找 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="209"/>
+        <location filename="../articleview.cc" line="280"/>
         <source>Select Current Article</source>
         <translation>选择当前文章</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="215"/>
+        <location filename="../articleview.cc" line="286"/>
         <source>Copy as text</source>
         <translation>复制为文本</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="221"/>
+        <location filename="../articleview.cc" line="292"/>
         <source>Inspect</source>
         <translation>审查元素</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1684"/>
+        <location filename="../articleview.cc" line="1758"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>在 %2 中查找 &quot;%1&quot; 并使用新标签页(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1594"/>
+        <location filename="../articleview.cc" line="1668"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>在新标签页中打开链接(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1601"/>
+        <location filename="../articleview.cc" line="1675"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>在外部浏览器中打开链接(&amp;E)</translation>
     </message>
@@ -277,80 +277,80 @@
         <translation>高亮所有结果(&amp;a)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="952"/>
+        <location filename="../articleview.cc" line="1026"/>
         <source>Resource</source>
         <translation>资源</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="957"/>
+        <location filename="../articleview.cc" line="1031"/>
         <source>Audio</source>
         <translation>音频</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="962"/>
+        <location filename="../articleview.cc" line="1036"/>
         <source>TTS Voice</source>
         <translation>TTS 音频</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="967"/>
+        <location filename="../articleview.cc" line="1041"/>
         <source>Picture</source>
         <translation>图片</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="974"/>
+        <location filename="../articleview.cc" line="1048"/>
         <source>Video</source>
         <translatorcomment>视频: %1</translatorcomment>
         <translation>视频</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="983"/>
+        <location filename="../articleview.cc" line="1057"/>
         <source>Video: %1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1000"/>
+        <location filename="../articleview.cc" line="1074"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>定义：&quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1004"/>
+        <location filename="../articleview.cc" line="1078"/>
         <source>Definition: %1</source>
         <translation>定义：%1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1316"/>
+        <location filename="../articleview.cc" line="1390"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>引用的音频播放程序不存在。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1960"/>
+        <location filename="../articleview.cc" line="2034"/>
         <source>WARNING: Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1199"/>
-        <location filename="../articleview.cc" line="1235"/>
-        <location filename="../articleview.cc" line="1433"/>
+        <location filename="../articleview.cc" line="1273"/>
+        <location filename="../articleview.cc" line="1309"/>
+        <location filename="../articleview.cc" line="1507"/>
         <source>ERROR: %1</source>
         <translation>错误： %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1832"/>
+        <location filename="../articleview.cc" line="1906"/>
         <source>Save sound</source>
         <translation>保存音频文件</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1834"/>
+        <location filename="../articleview.cc" line="1908"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>音频文件 (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有文件 (*.*) </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1847"/>
+        <location filename="../articleview.cc" line="1921"/>
         <source>Save image</source>
         <translation>保存图片</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1849"/>
+        <location filename="../articleview.cc" line="1923"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>图片文件 (*.bmp *.jpg *.png *.tif);;所有文件 (*.*)</translation>
     </message>
@@ -359,33 +359,33 @@
         <translation type="obsolete">资源保存失败：</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1616"/>
+        <location filename="../articleview.cc" line="1690"/>
         <source>Save &amp;image...</source>
         <translation>保存图片(&amp;I)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1624"/>
+        <location filename="../articleview.cc" line="1698"/>
         <source>Save s&amp;ound...</source>
         <translation>保存音频文件(&amp;O)...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1656"/>
+        <location filename="../articleview.cc" line="1730"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>将 &quot;%1&quot; 发送到输入框</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1662"/>
-        <location filename="../articleview.cc" line="1698"/>
+        <location filename="../articleview.cc" line="1736"/>
+        <location filename="../articleview.cc" line="1772"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>将 &quot;%1&quot; 添加到历史(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1904"/>
+        <location filename="../articleview.cc" line="1978"/>
         <source>Failed to play sound file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1953"/>
+        <location filename="../articleview.cc" line="2027"/>
         <source>WARNING: %1</source>
         <translation>警告： %1</translation>
     </message>
@@ -959,74 +959,74 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="151"/>
+        <location filename="../fulltextsearch.cc" line="152"/>
         <source>Full-text search</source>
         <translation>全文搜索</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="158"/>
+        <location filename="../fulltextsearch.cc" line="159"/>
         <source>Whole words</source>
         <translation>全字匹配</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="159"/>
+        <location filename="../fulltextsearch.cc" line="160"/>
         <source>Plain text</source>
         <translation>纯文本</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="160"/>
+        <location filename="../fulltextsearch.cc" line="161"/>
         <source>Wildcards</source>
         <translation>通配符</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="161"/>
+        <location filename="../fulltextsearch.cc" line="162"/>
         <source>RegExp</source>
         <translation>正则表达式</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="166"/>
+        <location filename="../fulltextsearch.cc" line="167"/>
         <source>Max distance between words (%1-%2):</source>
         <translation>最大词间距 (%1-%2)：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="175"/>
+        <location filename="../fulltextsearch.cc" line="176"/>
         <source>Max articles per dictionary (%1-%2):</source>
         <translation>每个词典最大词条数 (%1-%2)：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="212"/>
-        <location filename="../fulltextsearch.cc" line="369"/>
-        <location filename="../fulltextsearch.cc" line="458"/>
+        <location filename="../fulltextsearch.cc" line="217"/>
+        <location filename="../fulltextsearch.cc" line="380"/>
+        <location filename="../fulltextsearch.cc" line="470"/>
         <source>Articles found: </source>
         <translation>搜索到的词条：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="328"/>
+        <location filename="../fulltextsearch.cc" line="334"/>
         <source>Now indexing: </source>
         <translation>正在索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="329"/>
+        <location filename="../fulltextsearch.cc" line="335"/>
         <source>None</source>
         <translation>无</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="382"/>
+        <location filename="../fulltextsearch.cc" line="393"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
         <translation>不能使用“全字匹配”模式或者“纯文本”模式搜索包含CJK字符的字符串</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="391"/>
+        <location filename="../fulltextsearch.cc" line="402"/>
         <source>The search line must contains at least one word containing </source>
         <translation>搜索关键词至少包含</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="392"/>
+        <location filename="../fulltextsearch.cc" line="403"/>
         <source> or more symbols</source>
         <translation>个或更多字符</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="404"/>
+        <location filename="../fulltextsearch.cc" line="415"/>
         <source>No dictionaries for full-text search</source>
         <translation>没有可供全文搜索的词典</translation>
     </message>
@@ -1116,7 +1116,7 @@ between classic and school orthography in cyrillic)</source>
     <name>FullTextSearchDialog</name>
     <message>
         <location filename="../fulltextsearch.ui" line="26"/>
-        <location filename="../fulltextsearch.ui" line="196"/>
+        <location filename="../fulltextsearch.ui" line="207"/>
         <source>Search</source>
         <translation>搜索</translation>
     </message>
@@ -1131,27 +1131,32 @@ between classic and school orthography in cyrillic)</source>
         <translation>模式：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="80"/>
+        <location filename="../fulltextsearch.ui" line="82"/>
         <source>Ignore words order</source>
         <translation>忽略单词顺序</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="101"/>
+        <location filename="../fulltextsearch.ui" line="89"/>
+        <source>Ignore diacritics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../fulltextsearch.ui" line="112"/>
         <source>Articles found:</source>
         <translation>搜索到的词条：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="123"/>
+        <location filename="../fulltextsearch.ui" line="134"/>
         <source>Available dictionaries in group:</source>
         <translation>群组中的可用词典：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="129"/>
+        <location filename="../fulltextsearch.ui" line="140"/>
         <source>Wait for indexing:</source>
         <translation>等候索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="242"/>
+        <location filename="../fulltextsearch.ui" line="253"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>
@@ -1160,22 +1165,22 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">不可索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="150"/>
+        <location filename="../fulltextsearch.ui" line="161"/>
         <source>Total:</source>
         <translation>总计：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="157"/>
+        <location filename="../fulltextsearch.ui" line="168"/>
         <source>Indexed:</source>
         <translation>已索引：</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="174"/>
+        <location filename="../fulltextsearch.ui" line="185"/>
         <source>Now indexing: None</source>
         <translation>正在索引：无</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.ui" line="222"/>
+        <location filename="../fulltextsearch.ui" line="233"/>
         <source>Cancel</source>
         <translation>取消</translation>
     </message>
@@ -2589,7 +2594,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>退出(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3413"/>
+        <location filename="../mainwindow.cc" line="3415"/>
         <source>Error</source>
         <translation>错误</translation>
     </message>
@@ -2609,7 +2614,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>关闭至系统托盘(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3414"/>
+        <location filename="../mainwindow.cc" line="3416"/>
         <source>Can&apos;t save article: %1</source>
         <translation>无法保存文章：%1</translation>
     </message>
@@ -2644,7 +2649,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3399"/>
+        <location filename="../mainwindow.cc" line="3401"/>
         <source>Save Article As</source>
         <translation>文章另存为</translation>
     </message>
@@ -2678,7 +2683,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>主页(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="3067"/>
         <source>New Release Available</source>
         <translation>有新版本可用</translation>
     </message>
@@ -2707,12 +2712,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>关于 GoldenDict</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3071"/>
+        <location filename="../mainwindow.cc" line="3073"/>
         <source>Download</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3301"/>
+        <location filename="../mainwindow.cc" line="3303"/>
         <source>Page Setup</source>
         <translation>页面设置</translation>
     </message>
@@ -2728,12 +2733,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>正常大小</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2924"/>
+        <location filename="../mainwindow.cc" line="2926"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>初始化热键监视机制失败。&lt;br&gt;请确保你的 XServer 已启用 RECORD 扩展。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
+        <location filename="../mainwindow.cc" line="3068"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>有新版 GoldenDict 可用，版本为 &lt;b&gt;%1&lt;/b&gt;。&lt;br&gt;
 点击&lt;b&gt;下载&lt;/b&gt;，打开下载页面。</translation>
@@ -2792,7 +2797,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>保存文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3072"/>
+        <location filename="../mainwindow.cc" line="3074"/>
         <source>Skip This Release</source>
         <translation>忽略此次升级</translation>
     </message>
@@ -2806,12 +2811,12 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">警告： %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3320"/>
+        <location filename="../mainwindow.cc" line="3322"/>
         <source>Print Article</source>
         <translation>打印文章</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3302"/>
+        <location filename="../mainwindow.cc" line="3304"/>
         <source>No printer is available. Please install one first.</source>
         <translation>找不到可用的打印机，请先安装一个打印机。</translation>
     </message>
@@ -2935,9 +2940,9 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="1742"/>
         <location filename="../mainwindow.cc" line="1820"/>
-        <location filename="../mainwindow.cc" line="4532"/>
-        <location filename="../mainwindow.cc" line="4560"/>
-        <location filename="../mainwindow.cc" line="4587"/>
+        <location filename="../mainwindow.cc" line="4534"/>
+        <location filename="../mainwindow.cc" line="4562"/>
+        <location filename="../mainwindow.cc" line="4589"/>
         <source>Remove current tab from Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2947,19 +2952,19 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3204"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>你选择了隐藏菜单栏，使用 %1 再次显示。</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3203"/>
+        <location filename="../mainwindow.cc" line="3205"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3722"/>
-        <location filename="../mainwindow.cc" line="3734"/>
+        <location filename="../mainwindow.cc" line="3724"/>
+        <location filename="../mainwindow.cc" line="3736"/>
         <source>&amp;Show</source>
         <translation>显示(&amp;S)</translation>
     </message>
@@ -2969,8 +2974,8 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>导出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3718"/>
-        <location filename="../mainwindow.cc" line="3730"/>
+        <location filename="../mainwindow.cc" line="3720"/>
+        <location filename="../mainwindow.cc" line="3732"/>
         <source>&amp;Hide</source>
         <translation>隐藏(&amp;H)</translation>
     </message>
@@ -2979,26 +2984,26 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">历史记录查看模式</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3762"/>
+        <location filename="../mainwindow.cc" line="3764"/>
         <source>Export history to file</source>
         <translation>导出历史记录到文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3764"/>
-        <location filename="../mainwindow.cc" line="3826"/>
-        <location filename="../mainwindow.cc" line="3940"/>
+        <location filename="../mainwindow.cc" line="3766"/>
+        <location filename="../mainwindow.cc" line="3828"/>
+        <location filename="../mainwindow.cc" line="3942"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>文本文件 (*.txt);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3803"/>
+        <location filename="../mainwindow.cc" line="3805"/>
         <source>History export complete</source>
         <translation>历史记录导出完成</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3806"/>
-        <location filename="../mainwindow.cc" line="3921"/>
-        <location filename="../mainwindow.cc" line="3970"/>
+        <location filename="../mainwindow.cc" line="3808"/>
+        <location filename="../mainwindow.cc" line="3923"/>
+        <location filename="../mainwindow.cc" line="3972"/>
         <source>Export error: </source>
         <translation>导出错误：</translation>
     </message>
@@ -3013,90 +3018,90 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>导入(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3824"/>
+        <location filename="../mainwindow.cc" line="3826"/>
         <source>Import history from file</source>
         <translation>导入历史文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3873"/>
+        <location filename="../mainwindow.cc" line="3875"/>
         <source>Import error: invalid data in file</source>
         <translation>导入失败：无效数据</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3877"/>
+        <location filename="../mainwindow.cc" line="3879"/>
         <source>History import complete</source>
         <translation>历史导入成功</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3880"/>
-        <location filename="../mainwindow.cc" line="4016"/>
+        <location filename="../mainwindow.cc" line="3882"/>
+        <location filename="../mainwindow.cc" line="4018"/>
         <source>Import error: </source>
         <translation>导入错误：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3897"/>
+        <location filename="../mainwindow.cc" line="3899"/>
         <source>Export Favorites to file</source>
         <translation>导出收藏记录到文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3899"/>
-        <location filename="../mainwindow.cc" line="3989"/>
+        <location filename="../mainwindow.cc" line="3901"/>
+        <location filename="../mainwindow.cc" line="3991"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation>XML 文件 (*.xml);;所有文件 (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3918"/>
-        <location filename="../mainwindow.cc" line="3967"/>
+        <location filename="../mainwindow.cc" line="3920"/>
+        <location filename="../mainwindow.cc" line="3969"/>
         <source>Favorites export complete</source>
         <translation>收藏导出完成</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3938"/>
+        <location filename="../mainwindow.cc" line="3940"/>
         <source>Export Favorites to file as plain list</source>
         <translation>以纯列表形式导出收藏列表到文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3987"/>
+        <location filename="../mainwindow.cc" line="3989"/>
         <source>Import Favorites from file</source>
         <translation>导入收藏文件</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4012"/>
+        <location filename="../mainwindow.cc" line="4014"/>
         <source>Favorites import complete</source>
         <translation>收藏导入完成</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4018"/>
+        <location filename="../mainwindow.cc" line="4020"/>
         <source>Data parsing error</source>
         <translation>数据解析错误</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4294"/>
+        <location filename="../mainwindow.cc" line="4296"/>
         <source>Dictionary info</source>
         <translation>词典信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4298"/>
+        <location filename="../mainwindow.cc" line="4300"/>
         <source>Dictionary headwords</source>
         <translation>词典词条</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4300"/>
+        <location filename="../mainwindow.cc" line="4302"/>
         <source>Open dictionary folder</source>
         <translation>打开词典文件夹</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4306"/>
+        <location filename="../mainwindow.cc" line="4308"/>
         <source>Edit dictionary</source>
         <translation>编辑词典信息</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4503"/>
+        <location filename="../mainwindow.cc" line="4505"/>
         <source>Now indexing for full-text search: </source>
         <translation>正在为全文搜索进行索引：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4545"/>
+        <location filename="../mainwindow.cc" line="4547"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3202,7 +3207,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="246"/>
         <location filename="../mainwindow.cc" line="1747"/>
         <location filename="../mainwindow.cc" line="1825"/>
-        <location filename="../mainwindow.cc" line="4552"/>
+        <location filename="../mainwindow.cc" line="4554"/>
         <source>Add current tab to Favorites</source>
         <translation>将当前标签页添加至收藏</translation>
     </message>
@@ -3232,22 +3237,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>导航栏(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3395"/>
+        <location filename="../mainwindow.cc" line="3397"/>
         <source>Article, Complete (*.html)</source>
         <translation>文章, 完整 (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3396"/>
+        <location filename="../mainwindow.cc" line="3398"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>文章, 仅 HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3475"/>
+        <location filename="../mainwindow.cc" line="3477"/>
         <source>Saving article...</source>
         <translation>文章保存中……</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3538"/>
+        <location filename="../mainwindow.cc" line="3540"/>
         <source>The main window is set to be always on top.</source>
         <translation>主窗口已设置为总在最前。</translation>
     </message>
@@ -3258,7 +3263,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <location filename="../mainwindow.cc" line="842"/>
-        <location filename="../mainwindow.cc" line="3125"/>
+        <location filename="../mainwindow.cc" line="3127"/>
         <source>Accessibility API is not enabled</source>
         <translation>无障碍API未启用</translation>
     </message>
@@ -3266,12 +3271,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="644"/>
+        <location filename="../mdx.cc" line="646"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>词典文件被修改或已损坏</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="655"/>
+        <location filename="../mdx.cc" line="657"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>从 %1 加载文章失败：%2</translation>
     </message>
@@ -4325,28 +4330,28 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="447"/>
-        <location filename="../dsl.cc" line="1749"/>
+        <location filename="../aard.cc" line="448"/>
+        <location filename="../dsl.cc" line="1750"/>
         <source>Article loading error</source>
         <translation>文章加载错误</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="539"/>
-        <location filename="../slob.cc" line="732"/>
+        <location filename="../aard.cc" line="540"/>
+        <location filename="../slob.cc" line="733"/>
         <source>Article decoding error</source>
         <translation>文章解码错误</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="584"/>
-        <location filename="../bgl.cc" line="401"/>
-        <location filename="../sdict.cc" line="709"/>
-        <location filename="../stardict.cc" line="1157"/>
+        <location filename="../aard.cc" line="585"/>
+        <location filename="../bgl.cc" line="402"/>
+        <location filename="../sdict.cc" line="711"/>
+        <location filename="../stardict.cc" line="1158"/>
         <source>Copyright: %1%2</source>
         <translation>版权：%1%2</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="588"/>
-        <location filename="../sdict.cc" line="725"/>
+        <location filename="../aard.cc" line="589"/>
+        <location filename="../sdict.cc" line="727"/>
         <source>Version: %1%2</source>
         <translation>版本：%1%2</translation>
     </message>
@@ -4442,30 +4447,30 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
         <translation>avcodec_alloc_frame() 调用失败。</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="408"/>
-        <location filename="../gls.cc" line="625"/>
-        <location filename="../stardict.cc" line="1165"/>
+        <location filename="../bgl.cc" line="409"/>
+        <location filename="../gls.cc" line="626"/>
+        <location filename="../stardict.cc" line="1166"/>
         <source>Author: %1%2</source>
         <translation>作者：%1%2</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="415"/>
-        <location filename="../stardict.cc" line="1173"/>
+        <location filename="../bgl.cc" line="416"/>
+        <location filename="../stardict.cc" line="1174"/>
         <source>E-mail: %1%2</source>
         <translation>电子邮件：%1%2</translation>
     </message>
     <message>
-        <location filename="../sdict.cc" line="677"/>
+        <location filename="../sdict.cc" line="679"/>
         <source>Title: %1%2</source>
         <translation>标题：%1%2</translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1181"/>
+        <location filename="../stardict.cc" line="1182"/>
         <source>Website: %1%2</source>
         <translation>网站：%1%2</translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1189"/>
+        <location filename="../stardict.cc" line="1190"/>
         <source>Date: %1%2</source>
         <translation>日期：%1%2</translation>
     </message>
@@ -4491,22 +4496,22 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2820"/>
+        <location filename="../articleview.cc" line="2910"/>
         <source>ERROR: %1</source>
         <translation>错误： %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2820"/>
+        <location filename="../articleview.cc" line="2910"/>
         <source>Resource saving error: </source>
         <translation>资源保存失败：</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2846"/>
+        <location filename="../articleview.cc" line="2936"/>
         <source>The referenced resource failed to download.</source>
         <translation>所引用的资源下载失败。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2846"/>
+        <location filename="../articleview.cc" line="2936"/>
         <source>WARNING: %1</source>
         <translation>警告： %1</translation>
     </message>
