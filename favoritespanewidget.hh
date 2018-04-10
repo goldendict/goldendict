@@ -56,6 +56,8 @@ public:
   // Return true if headwors is already presented in Favorites
   bool isHeadwordPresent( QString const & path, QString const & headword );
 
+  void saveData();
+
 signals:
   void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
 

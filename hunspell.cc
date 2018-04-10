@@ -343,7 +343,7 @@ void HunspellArticleRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
   }
   catch( std::exception & e )
   {
@@ -524,9 +524,14 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
         QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ].c_str() ) );
 #endif
 
+        // Strip comments
+        int n = suggestion.indexOf( '#' );
+        if( n >= 0 )
+          suggestion.chop( suggestion.length() - n );
+
         GD_DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
 
-        if ( cutStem.indexIn( suggestion ) != -1 )
+        if ( cutStem.indexIn( suggestion.trimmed() ) != -1 )
         {
           wstring alt = gd::toWString( cutStem.cap( 1 ) );
 
@@ -543,7 +548,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
   }
   catch( Iconv::Ex & e )
   {
-    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
   }
 
 #ifdef OLD_HUNSPELL_INTERFACE
@@ -671,7 +676,7 @@ void HunspellPrefixMatchRequest::run()
   }
   catch( Iconv::Ex & e )
   {
-    gdWarning( "Hunspell: charset convertion error, no processing's done: %s\n", e.what() );
+    gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
   }
 
   finish();

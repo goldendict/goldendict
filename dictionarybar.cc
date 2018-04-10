@@ -348,6 +348,9 @@ void DictionaryBar::actionWasTriggered( QAction * action )
 
 void DictionaryBar::dictsPaneClicked( const QString & id )
 {
+  if ( !isVisible() )
+    return;
+
   for( QList< QAction * >::iterator i = dictActions.begin();
        i != dictActions.end(); ++i )
   {

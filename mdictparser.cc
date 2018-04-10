@@ -29,7 +29,11 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QFileInfo>
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#else
 #include <QRegExp>
+#endif
 #include <QDomDocument>
 #include <QTextDocumentFragment>
 #include <QDataStream>
@@ -384,7 +388,11 @@ bool MdictParser::readHeader( QDataStream & in )
   if ( headerAttributes.contains( "StyleSheet" ) )
   {
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), QString::KeepEmptyParts );
+#else
     QStringList lines = styleSheets.split( QRegExp( "[\r\n]" ), QString::KeepEmptyParts );
+#endif
     for ( int i = 0; i < lines.size() - 3; i += 3 )
     {
       styleSheets_[lines[i].toInt()] = pair<QString, QString>( lines[i + 1], lines[i + 2] );
@@ -608,7 +616,7 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
   // cache the index, the headWordIndex is already sorted
   size_t idx = 0;
 
-  for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); i++ )
+  for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); ++i )
   {
     if ( recordBlockInfos_[idx].endPos <= i->first )
       idx = RecordIndex::bsearch( recordBlockInfos_, i->first );
@@ -639,29 +647,60 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
 
 QString & MdictParser::substituteStylesheet( QString & article, MdictParser::StyleSheets const & styleSheets )
 {
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression rx( "`(\\d+)`", QRegularExpression::UseUnicodePropertiesOption );
+  QString articleNewText;
+#else
   QRegExp rx( "`(\\d+)`" );
+#endif
   QString endStyle;
   int pos = 0;
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpressionMatchIterator it = rx.globalMatch( article );
+  while ( it.hasNext() )
+  {
+    QRegularExpressionMatch match = it.next();
+    int styleId = match.captured( 1 ).toInt();
+    articleNewText += article.midRef( pos, match.capturedStart() - pos );
+    pos = match.capturedEnd();
+#else
   while ( ( pos = rx.indexIn( article, pos ) ) != -1 )
   {
     int styleId = rx.cap( 1 ).toInt();
+#endif
     StyleSheets::const_iterator iter = styleSheets.find( styleId );
 
     if ( iter != styleSheets.end() )
     {
       QString rep = endStyle + iter->second.first;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+      articleNewText += rep;
+#else
       article.replace( pos, rx.cap( 0 ).length(), rep );
       pos += rep.length();
+#endif
       endStyle = iter->second.second;
     }
     else
     {
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+      articleNewText += endStyle;
+#else
       article.replace( pos, rx.cap( 0 ).length(), endStyle );
       pos += endStyle.length();
+#endif
       endStyle = "";
     }
   }
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  if( pos )
+  {
+    articleNewText += article.midRef( pos );
+    article = articleNewText;
+    articleNewText.clear();
+  }
+#endif
   article += endStyle;
   return article;
 }

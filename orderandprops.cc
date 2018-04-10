@@ -91,8 +91,8 @@ OrderAndProps::OrderAndProps( QWidget * parent,
 {
   ui.setupUi( this );
 
-  Instances::Group order( dictionaryOrder, allDictionaries );
-  Instances::Group inactive( inactiveDictionaries, allDictionaries );
+  Instances::Group order( dictionaryOrder, allDictionaries, Config::Group() );
+  Instances::Group inactive( inactiveDictionaries, allDictionaries, Config::Group() );
 
   Instances::complementDictionaryOrder( order, inactive, allDictionaries );
 

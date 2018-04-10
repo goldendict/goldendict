@@ -549,7 +549,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               }
               catch( Iconv::Ex & e )
               {
-                qWarning( "Bgl: charset convertion error, no trancription processing's done: %s\n", e.what() );
+                qWarning( "Bgl: charset conversion error, no trancription processing's done: %s\n", e.what() );
                 transcription = std::string( block.data + pos + 3, length );
               }
             }
@@ -580,7 +580,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
               }
               catch( Iconv::Ex & e )
               {
-                qWarning( "Bgl: charset convertion error, no trancription processing's done: %s\n", e.what() );
+                qWarning( "Bgl: charset conversion error, no trancription processing's done: %s\n", e.what() );
                 transcription = std::string( block.data + pos + 4, length );
               }
             }

@@ -404,7 +404,7 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
 
       *pt = '\0';
       header->comment = NULL;//str_find( buffer );
-      header->headerLength += strlen( header->comment ) + 1;
+      header->headerLength += strlen( buffer ) + 1;
    } else {
       header->comment = NULL;
    }

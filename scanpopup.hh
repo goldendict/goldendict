@@ -30,6 +30,7 @@ public:
   ScanPopup( QWidget * parent,
              Config::Class & cfg,
              ArticleNetworkAccessManager &,
+             AudioPlayerPtr const &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const &,
              History & );
@@ -50,6 +51,8 @@ public:
   void translateWord( QString const & word );
 
   void setDictionaryIconSize();
+
+  void saveConfigData();
 
 signals:
 

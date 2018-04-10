@@ -45,7 +45,12 @@
 #include <QPainter>
 #include <QMap>
 #include <QStringList>
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#else
 #include <QRegExp>
+#endif
 
 // For TIFF conversion
 #include <QImage>
@@ -86,7 +91,7 @@ enum
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 2
+  CurrentFtsIndexVersion = 5
 };
 
 struct IdxHeader
@@ -171,6 +176,8 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   int optionalPartNom;
   quint8 articleNom;
   int maxPictureWidth;
+
+  wstring currentHeadword;
 
 public:
 
@@ -749,6 +756,7 @@ string DslDictionary::dslToHtml( wstring const & str, wstring const & headword )
 {
  // Normalize the string
   wstring normalizedStr = gd::normalize( str );
+  currentHeadword = headword;
 
   ArticleDom dom( normalizedStr, getName(), headword );
 
@@ -1162,7 +1170,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += "<br />";
   }
   else
+  {
+    gdWarning( "DSL: Unknown tag \"%s\" with attributes \"%s\" found in \"%s\", article \"%s\".",
+               gd::toQString( node.tagName ).toUtf8().data(), gd::toQString( node.tagAttrs ).toUtf8().data(),
+               getName().c_str(), gd::toQString( currentHeadword ).toUtf8().data() );
+
     result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
+  }
 
   return result;
 }
@@ -1326,7 +1340,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   // Skip headword
 
   size_t pos = 0;
-  wstring articleHeadword;
+  wstring articleHeadword, tildeValue;
 
   // Check if we retrieve insided card
   bool insidedCard = isDslWs( articleData.at( 0 ) );
@@ -1368,12 +1382,13 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
       {
         list< wstring > lst;
 
+        tildeValue = articleHeadword;
+
+        processUnsortedParts( articleHeadword, true );
         expandOptionalParts( articleHeadword, &lst );
 
         if ( lst.size() ) // Should always be
           articleHeadword = lst.front();
-
-        processUnsortedParts( articleHeadword, true );
       }
     }
 
@@ -1430,6 +1445,17 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     articleText = wstring( articleData, pos );
   else
     articleText.clear();
+
+  if( !tildeValue.empty() )
+  {
+    list< wstring > lst;
+
+    processUnsortedParts( tildeValue, false );
+    expandOptionalParts( tildeValue, &lst );
+
+    if ( lst.size() ) // Should always be
+      expandTildes( articleText, lst.front() );
+  }
 
   if( !articleText.empty() )
   {
@@ -1496,7 +1522,11 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
     // Strip tags
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
+#else
     text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+#endif
 
     // Chech for insided cards
 

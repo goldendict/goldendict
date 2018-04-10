@@ -198,17 +198,17 @@
         <translation>Belle&amp;hemmesini</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="963"/>
+        <location filename="../articleview.cc" line="952"/>
         <source>Resource</source>
         <translation>Çeşme</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="968"/>
+        <location filename="../articleview.cc" line="957"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1015"/>
+        <location filename="../articleview.cc" line="1004"/>
         <source>Definition: %1</source>
         <translation>Kesgitleme: %1</translation>
     </message>
@@ -232,128 +232,137 @@
         <translation>Gözden geçir</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="973"/>
+        <location filename="../articleview.cc" line="962"/>
         <source>TTS Voice</source>
         <translation>TTS sesi</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="978"/>
+        <location filename="../articleview.cc" line="967"/>
         <source>Picture</source>
         <translation>Surat</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="985"/>
+        <location filename="../articleview.cc" line="974"/>
         <source>Video</source>
         <translation>Wideo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="994"/>
+        <location filename="../articleview.cc" line="983"/>
         <source>Video: %1</source>
         <translation>Wideo: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1011"/>
+        <location filename="../articleview.cc" line="1000"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Adalga şu sözlükden alyndy - &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1287"/>
-        <location filename="../articleview.cc" line="1444"/>
+        <location filename="../articleview.cc" line="1276"/>
+        <location filename="../articleview.cc" line="1433"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Salgylanan çeşme ýok.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1327"/>
+        <location filename="../articleview.cc" line="1316"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Salgylanan audio programa ýok.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1210"/>
-        <location filename="../articleview.cc" line="1246"/>
-        <location filename="../articleview.cc" line="1444"/>
+        <location filename="../articleview.cc" line="1199"/>
+        <location filename="../articleview.cc" line="1235"/>
+        <location filename="../articleview.cc" line="1433"/>
         <source>ERROR: %1</source>
         <translation>ÝALŇYŞLYK: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1599"/>
+        <location filename="../articleview.cc" line="1588"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Linki aç</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1605"/>
+        <location filename="../articleview.cc" line="1594"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Linki täze aç &amp;Tab-dan</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1612"/>
+        <location filename="../articleview.cc" line="1601"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Linki &amp;Daşky Brauzerden aç</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1627"/>
+        <location filename="../articleview.cc" line="1616"/>
         <source>Save &amp;image...</source>
         <translation>Surady &amp;ýatda sakla - ...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1635"/>
+        <location filename="../articleview.cc" line="1624"/>
         <source>Save s&amp;ound...</source>
         <translation>Ýatda sakla s&amp;esi - ...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1654"/>
+        <location filename="../articleview.cc" line="1643"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Tap &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1662"/>
+        <location filename="../articleview.cc" line="1651"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Tap &quot;%1&quot; in &amp;New Tab</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1667"/>
+        <location filename="../articleview.cc" line="1656"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Iber &quot;%1&quot; girizme setire</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1673"/>
-        <location filename="../articleview.cc" line="1709"/>
+        <location filename="../articleview.cc" line="1662"/>
+        <location filename="../articleview.cc" line="1698"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Goş &quot;%1&quot; geçmişe</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1687"/>
+        <location filename="../articleview.cc" line="1676"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Tap &quot;%1&quot; in %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1695"/>
+        <location filename="../articleview.cc" line="1684"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Tap &quot;%1&quot; in %2 in &amp;New Tab</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1843"/>
+        <location filename="../articleview.cc" line="1832"/>
         <source>Save sound</source>
         <translation>Ýatda sakla sesini</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1845"/>
+        <location filename="../articleview.cc" line="1834"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>Ses faýllary (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Ähli faýllar (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1858"/>
+        <location filename="../articleview.cc" line="1847"/>
         <source>Save image</source>
         <translation>Surady ýatda sakla</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1860"/>
+        <location filename="../articleview.cc" line="1849"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Surat faýllary (*.bmp *.jpg *.png *.tif);;All files (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1990"/>
+        <location filename="../articleview.cc" line="1904"/>
+        <source>Failed to play sound file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1960"/>
+        <source>WARNING: Audio Player: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation>DUÝDURYŞ: FFmpeg Audio Player: %1</translation>
+        <translation type="obsolete">DUÝDURYŞ: FFmpeg Audio Player: %1</translation>
     </message>
     <message>
         <source>Wav </source>
@@ -364,27 +373,26 @@
         <translation type="obsolete">WAV-dan daşaryfaýllaryň oýnadylmagy üçin, Redaktirle|Saýlamalar baryň, Audio wkladkasyny saýlaň we şol ýerden DirectShow arkaly oýnatmagy saýlaň.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1932"/>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Şu ses faýly açmak üçin gerek bolan pleýeri işledip bolmady: %1</translation>
+        <translation type="obsolete">Şu ses faýly açmak üçin gerek bolan pleýeri işledip bolmady: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1949"/>
+        <location filename="../articleview.cc" line="1919"/>
         <source>Failed to create temporary file.</source>
         <translation>Wagtlaýyn faýly döredip bolmady.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1960"/>
+        <location filename="../articleview.cc" line="1930"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Çeşme faýly awtomat açyp bolmady, özbaşdak açmaga synanşyň: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1983"/>
+        <location filename="../articleview.cc" line="1953"/>
         <source>WARNING: %1</source>
         <translation>ÄGÄ BOLUŇ %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1983"/>
+        <location filename="../articleview.cc" line="1953"/>
         <source>The referenced resource failed to download.</source>
         <translation>Salgylanýan çeşmäni ýükläp almak bolmady.</translation>
     </message>
@@ -783,22 +791,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictServer</name>
     <message>
-        <location filename="../dictserver.cc" line="248"/>
+        <location filename="../dictserver.cc" line="252"/>
         <source>Url: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="249"/>
+        <location filename="../dictserver.cc" line="253"/>
         <source>Databases: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="250"/>
+        <location filename="../dictserver.cc" line="254"/>
         <source>Search strategies: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="254"/>
+        <location filename="../dictserver.cc" line="258"/>
         <source>Server databases</source>
         <translation type="unfinished"></translation>
     </message>
@@ -938,7 +946,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>ExternalViewer</name>
     <message>
-        <location filename="../externalviewer.cc" line="54"/>
+        <location filename="../externalviewer.cc" line="53"/>
         <source>the viewer program name is empty</source>
         <translation>Görmek üçin programanyň ady boş</translation>
     </message>
@@ -1035,7 +1043,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="641"/>
+        <location filename="../favoritespanewidget.cc" line="643"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1440,7 +1448,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>Dürs ýazuw kadalary hödürlemek: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="917"/>
+        <location filename="../hunspell.cc" line="922"/>
         <source>%1 Morphology</source>
         <translation>%1 Morfologiýa</translation>
     </message>
@@ -2718,8 +2726,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3709"/>
-        <location filename="../mainwindow.cc" line="3721"/>
+        <location filename="../mainwindow.cc" line="3722"/>
+        <location filename="../mainwindow.cc" line="3734"/>
         <source>&amp;Show</source>
         <translation>&amp;Görkez</translation>
     </message>
@@ -2803,9 +2811,9 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
         <location filename="../mainwindow.cc" line="246"/>
-        <location filename="../mainwindow.cc" line="1736"/>
-        <location filename="../mainwindow.cc" line="1814"/>
-        <location filename="../mainwindow.cc" line="4538"/>
+        <location filename="../mainwindow.cc" line="1747"/>
+        <location filename="../mainwindow.cc" line="1825"/>
+        <location filename="../mainwindow.cc" line="4552"/>
         <source>Add current tab to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2861,13 +2869,13 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Gurallar zolagynda nyşanlary kiçi et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="106"/>
+        <location filename="../mainwindow.cc" line="105"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Menýu zolagy</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="283"/>
-        <location filename="../mainwindow.cc" line="1287"/>
+        <location filename="../mainwindow.cc" line="1298"/>
         <source>Look up in:</source>
         <translation>Tap şu ýerde:</translation>
     </message>
@@ -2962,159 +2970,159 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="842"/>
-        <location filename="../mainwindow.cc" line="3112"/>
+        <location filename="../mainwindow.cc" line="3125"/>
         <source>Accessibility API is not enabled</source>
         <translation>API elýeterli edilmedik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1276"/>
+        <location filename="../mainwindow.cc" line="1287"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 sözlükler, %2 makalalar, %3 sözler</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1287"/>
+        <location filename="../mainwindow.cc" line="1298"/>
         <source>Look up:</source>
         <translation>Tap:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1305"/>
+        <location filename="../mainwindow.cc" line="1316"/>
         <source>All</source>
         <translation>Ählisi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1731"/>
-        <location filename="../mainwindow.cc" line="1809"/>
-        <location filename="../mainwindow.cc" line="4518"/>
-        <location filename="../mainwindow.cc" line="4546"/>
-        <location filename="../mainwindow.cc" line="4573"/>
+        <location filename="../mainwindow.cc" line="1742"/>
+        <location filename="../mainwindow.cc" line="1820"/>
+        <location filename="../mainwindow.cc" line="4532"/>
+        <location filename="../mainwindow.cc" line="4560"/>
+        <location filename="../mainwindow.cc" line="4587"/>
         <source>Remove current tab from Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3462"/>
+        <location filename="../mainwindow.cc" line="3475"/>
         <source>Saving article...</source>
         <translation>Makala ýatda saklanýar...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3525"/>
+        <location filename="../mainwindow.cc" line="3538"/>
         <source>The main window is set to be always on top.</source>
         <translation>Baş penjire mydama ýokarda durar ýaly edilen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3705"/>
-        <location filename="../mainwindow.cc" line="3717"/>
+        <location filename="../mainwindow.cc" line="3718"/>
+        <location filename="../mainwindow.cc" line="3730"/>
         <source>&amp;Hide</source>
         <translation>&amp;Gizle</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3749"/>
+        <location filename="../mainwindow.cc" line="3762"/>
         <source>Export history to file</source>
         <translation>Geçmişi faýl görnüşinde eksport et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3751"/>
-        <location filename="../mainwindow.cc" line="3813"/>
-        <location filename="../mainwindow.cc" line="3927"/>
+        <location filename="../mainwindow.cc" line="3764"/>
+        <location filename="../mainwindow.cc" line="3826"/>
+        <location filename="../mainwindow.cc" line="3940"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Tekst faýllary (*.txt);;Ähli faýllar (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3790"/>
+        <location filename="../mainwindow.cc" line="3803"/>
         <source>History export complete</source>
         <translation>Geşmiş eksport edildi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3793"/>
-        <location filename="../mainwindow.cc" line="3908"/>
-        <location filename="../mainwindow.cc" line="3957"/>
+        <location filename="../mainwindow.cc" line="3806"/>
+        <location filename="../mainwindow.cc" line="3921"/>
+        <location filename="../mainwindow.cc" line="3970"/>
         <source>Export error: </source>
         <translation>Eksport ýalnyşlygy:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3811"/>
+        <location filename="../mainwindow.cc" line="3824"/>
         <source>Import history from file</source>
         <translation>Faýldan geçmişi import et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3860"/>
+        <location filename="../mainwindow.cc" line="3873"/>
         <source>Import error: invalid data in file</source>
         <translation>Import ýalňyşlygy: faýlda nädogry maglumatlar bar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3864"/>
+        <location filename="../mainwindow.cc" line="3877"/>
         <source>History import complete</source>
         <translation>Geçmiş import edildi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3867"/>
-        <location filename="../mainwindow.cc" line="4003"/>
+        <location filename="../mainwindow.cc" line="3880"/>
+        <location filename="../mainwindow.cc" line="4016"/>
         <source>Import error: </source>
         <translation>Import ýalňyşlygy:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3884"/>
+        <location filename="../mainwindow.cc" line="3897"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3886"/>
-        <location filename="../mainwindow.cc" line="3976"/>
+        <location filename="../mainwindow.cc" line="3899"/>
+        <location filename="../mainwindow.cc" line="3989"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3905"/>
-        <location filename="../mainwindow.cc" line="3954"/>
+        <location filename="../mainwindow.cc" line="3918"/>
+        <location filename="../mainwindow.cc" line="3967"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3925"/>
+        <location filename="../mainwindow.cc" line="3938"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3974"/>
+        <location filename="../mainwindow.cc" line="3987"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3999"/>
+        <location filename="../mainwindow.cc" line="4012"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4005"/>
+        <location filename="../mainwindow.cc" line="4018"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4280"/>
+        <location filename="../mainwindow.cc" line="4294"/>
         <source>Dictionary info</source>
         <translation>Sözlük barada maglumat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4284"/>
+        <location filename="../mainwindow.cc" line="4298"/>
         <source>Dictionary headwords</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4286"/>
+        <location filename="../mainwindow.cc" line="4300"/>
         <source>Open dictionary folder</source>
         <translation>Sözlügiň bukjasyny aç</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4292"/>
+        <location filename="../mainwindow.cc" line="4306"/>
         <source>Edit dictionary</source>
         <translation>Sözlügi üýtget</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4489"/>
+        <location filename="../mainwindow.cc" line="4503"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4531"/>
+        <location filename="../mainwindow.cc" line="4545"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3124,12 +3132,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>Açyk wkladkalar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="104"/>
+        <location filename="../mainwindow.cc" line="103"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>Sözlük &amp;tagtasynda atlary görkez</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="105"/>
+        <location filename="../mainwindow.cc" line="104"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>Kiçi nyşanlary görkez &amp;gurallar-tagtasynda</translation>
     </message>
@@ -3145,17 +3153,17 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1469"/>
+        <location filename="../mainwindow.cc" line="1480"/>
         <source>Open Tabs List</source>
         <translation>Açyk wkladkalaryň sanawy</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1527"/>
+        <location filename="../mainwindow.cc" line="1538"/>
         <source>(untitled)</source>
         <translation>(atsyz)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1761"/>
+        <location filename="../mainwindow.cc" line="1772"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -3164,67 +3172,67 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">ÄGÄ BOLUŇ %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2911"/>
+        <location filename="../mainwindow.cc" line="2924"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3052"/>
+        <location filename="../mainwindow.cc" line="3065"/>
         <source>New Release Available</source>
         <translation>Täze neşir elýeterli</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3053"/>
+        <location filename="../mainwindow.cc" line="3066"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3058"/>
+        <location filename="../mainwindow.cc" line="3071"/>
         <source>Download</source>
         <translation>Ýükläp almak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3059"/>
+        <location filename="../mainwindow.cc" line="3072"/>
         <source>Skip This Release</source>
         <translation>Şu neşiri böküp geç</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3189"/>
+        <location filename="../mainwindow.cc" line="3202"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Siz menýu zolagyny gizlemägi saýladyňyz. %1 ulanyp ýenede çykaryp görkez.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3190"/>
+        <location filename="../mainwindow.cc" line="3203"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3288"/>
+        <location filename="../mainwindow.cc" line="3301"/>
         <source>Page Setup</source>
         <translation>Sahypany sazlamak</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3289"/>
+        <location filename="../mainwindow.cc" line="3302"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Printer ýok. Ilki bilen gurna ony.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3307"/>
+        <location filename="../mainwindow.cc" line="3320"/>
         <source>Print Article</source>
         <translation>Makalany çap et</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3382"/>
+        <location filename="../mainwindow.cc" line="3395"/>
         <source>Article, Complete (*.html)</source>
         <translation>Makala, taýýar (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3383"/>
+        <location filename="../mainwindow.cc" line="3396"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Makala, HTML diňe (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3386"/>
+        <location filename="../mainwindow.cc" line="3399"/>
         <source>Save Article As</source>
         <translation>Makalany şular ýaly ýatda sakla</translation>
     </message>
@@ -3233,12 +3241,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation type="obsolete">Html faýllar (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3400"/>
+        <location filename="../mainwindow.cc" line="3413"/>
         <source>Error</source>
         <translation>Ýalňyş</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3401"/>
+        <location filename="../mainwindow.cc" line="3414"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Makalany ýatda saklap bolmady %1</translation>
     </message>
@@ -3246,12 +3254,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="640"/>
+        <location filename="../mdx.cc" line="644"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Sözlük faýly bozuldy ýa-da zaýa boldy</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="651"/>
+        <location filename="../mdx.cc" line="655"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation> %1-den/dan makalany ýükläp bolmady, sebäbi: %2</translation>
     </message>
@@ -3259,7 +3267,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="325"/>
+        <location filename="../mediawiki.cc" line="337"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML analizinde ýalňyşlyk: %1 at %2,%3</translation>
     </message>
@@ -3267,7 +3275,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="193"/>
+        <location filename="../mediawiki.cc" line="201"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML analizinde ýalňyşlyk: %1 at %2,%3</translation>
     </message>
@@ -3293,6 +3301,14 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../sources.cc" line="472"/>
         <source>Icon</source>
         <translation>Nyşan</translation>
+    </message>
+</context>
+<context>
+    <name>MultimediaAudioPlayer</name>
+    <message>
+        <location filename="../multimediaaudioplayer.cc" line="24"/>
+        <source>Couldn&apos;t open audio buffer for reading.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3818,154 +3834,167 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../preferences.ui" line="909"/>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation>Audio faýllary FFmpeg(libav) we libao arkaly oýnat</translation>
+        <source>Play audio files via built-in audio support</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="912"/>
-        <source>Use internal player</source>
-        <translation>Içerki pleýeri ulan</translation>
+        <source>Use internal player:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="996"/>
+        <location filename="../preferences.ui" line="919"/>
+        <source>Choose audio back end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio files via FFmpeg(libav) and libao</source>
+        <translation type="obsolete">Audio faýllary FFmpeg(libav) we libao arkaly oýnat</translation>
+    </message>
+    <message>
+        <source>Use internal player</source>
+        <translation type="obsolete">Içerki pleýeri ulan</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1002"/>
         <source>System proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1003"/>
+        <location filename="../preferences.ui" line="1009"/>
         <source>Custom proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1010"/>
+        <location filename="../preferences.ui" line="1016"/>
         <source>Custom settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1190"/>
+        <location filename="../preferences.ui" line="1196"/>
         <source>Full-text search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1209"/>
+        <location filename="../preferences.ui" line="1215"/>
         <source>Allow full-text search for:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1307"/>
+        <location filename="../preferences.ui" line="1313"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1324"/>
+        <location filename="../preferences.ui" line="1330"/>
         <source>articles (0 - unlimited)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1417"/>
+        <location filename="../preferences.ui" line="1423"/>
         <source>History</source>
         <translation>Geçmiş</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1423"/>
+        <location filename="../preferences.ui" line="1429"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Şuny aç eger-de geçmişde terjime edilen sözleri ýatda saklajak bolsaň</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1426"/>
+        <location filename="../preferences.ui" line="1432"/>
         <source>Store &amp;history</source>
         <translation>Saklanma &amp;geçmiş</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1441"/>
+        <location filename="../preferences.ui" line="1447"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Geçmişde iň köp saklanjak girizmeleriň sany.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1444"/>
+        <location filename="../preferences.ui" line="1450"/>
         <source>Maximum history size:</source>
         <translation>Geçmişiň maksimum sany:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1481"/>
+        <location filename="../preferences.ui" line="1487"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Geçmişi ýatda saklanmagyň döwri. Eger 0 goýulsa, geçmiş diňe çykan wagty ýatda saklanar.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1487"/>
-        <location filename="../preferences.ui" line="1540"/>
+        <location filename="../preferences.ui" line="1493"/>
+        <location filename="../preferences.ui" line="1546"/>
         <source>Save every</source>
         <translation>Ýatda sakla her</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1504"/>
-        <location filename="../preferences.ui" line="1554"/>
+        <location filename="../preferences.ui" line="1510"/>
+        <location filename="../preferences.ui" line="1560"/>
         <source>minutes</source>
         <translation>minut</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1529"/>
+        <location filename="../preferences.ui" line="1535"/>
         <source>Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1537"/>
+        <location filename="../preferences.ui" line="1543"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1563"/>
+        <location filename="../preferences.ui" line="1569"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1566"/>
+        <location filename="../preferences.ui" line="1572"/>
         <source>Confirmation for items deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1591"/>
+        <location filename="../preferences.ui" line="1597"/>
         <source>Articles</source>
         <translation>makalalar</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1597"/>
+        <location filename="../preferences.ui" line="1603"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Makalalaryň goşmaça ýerlerini giňeldip görkezmek üçin şuny saýlaň</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1600"/>
+        <location filename="../preferences.ui" line="1606"/>
         <source>Expand optional &amp;parts</source>
         <translation>Goşmaça &amp;ýerlerini giňeldip görkez</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1609"/>
+        <location filename="../preferences.ui" line="1615"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Uly makalalaryň awtomat kiçi edilip görkezilmegi üçin şuny saýlaň</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1612"/>
+        <location filename="../preferences.ui" line="1618"/>
         <source>Collapse articles more than</source>
         <translation>Makalalary kiçelt şundan köp - </translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1619"/>
+        <location filename="../preferences.ui" line="1625"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Şundan uly bolan makalalar kiçi edilip görkeziljek</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1635"/>
+        <location filename="../preferences.ui" line="1641"/>
         <source>symbols</source>
         <translation>nyşanlar</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1660"/>
+        <location filename="../preferences.ui" line="1666"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1664"/>
+        <location filename="../preferences.ui" line="1670"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3990,59 +4019,64 @@ but should support most audio file formats.</translation>
         <translation type="obsolete">Phonon arkaly oýnatmak</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="921"/>
+        <location filename="../preferences.ui" line="926"/>
         <source>Use any external program to play audio files</source>
         <translation>Audio faýllary oýnatmak üçin islendik özge programmany ulan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="924"/>
+        <location filename="../preferences.ui" line="929"/>
         <source>Use external program:</source>
         <translation>Daşky programmany ulan:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="961"/>
+        <location filename="../preferences.ui" line="939"/>
+        <source>Enter audio player command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="967"/>
         <source>&amp;Network</source>
         <translation>&amp;Baglanyşyk ulgamy</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="980"/>
+        <location filename="../preferences.ui" line="986"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
         <translation>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="984"/>
+        <location filename="../preferences.ui" line="990"/>
         <source>Use proxy server</source>
         <translation>Proksi serweri ulan</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1018"/>
+        <location filename="../preferences.ui" line="1024"/>
         <source>Type:</source>
         <translation>Tip:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1028"/>
+        <location filename="../preferences.ui" line="1034"/>
         <source>Host:</source>
         <translation>Öy eyesi:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1038"/>
+        <location filename="../preferences.ui" line="1044"/>
         <source>Port:</source>
         <translation>Port:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1059"/>
+        <location filename="../preferences.ui" line="1065"/>
         <source>User:</source>
         <translation>Ulanyjy:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1069"/>
+        <location filename="../preferences.ui" line="1075"/>
         <source>Password:</source>
         <translation>Parol:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1107"/>
+        <location filename="../preferences.ui" line="1113"/>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
@@ -4051,12 +4085,12 @@ by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1112"/>
+        <location filename="../preferences.ui" line="1118"/>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
         <translation>Özge saýtlardan zat ýüklemegi gadagan et (köp sanly reklama/mahabt gizlemgegini üpjün edýär)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1119"/>
+        <location filename="../preferences.ui" line="1125"/>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
@@ -4065,24 +4099,24 @@ online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1124"/>
+        <location filename="../preferences.ui" line="1130"/>
         <source>Enable web plugins</source>
         <translation>Web plugin-leri işlet</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1131"/>
+        <location filename="../preferences.ui" line="1137"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation>Käbir websaýtlar GoldenDict programmany HTTP ady arkaly görýärler we olara ýüz tutmaga rugsat berenoklar. 
 Şeýle meseläni çözmek üçin, şuny işlediň.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1135"/>
+        <location filename="../preferences.ui" line="1141"/>
         <source>Do not identify GoldenDict in HTTP headers</source>
         <translation>GoldenDict HTTP ady arkaly görkezme</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1158"/>
+        <location filename="../preferences.ui" line="1164"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -4095,22 +4129,22 @@ informs the user about it and prompts to open a
 download page.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1165"/>
+        <location filename="../preferences.ui" line="1171"/>
         <source>Check for new program releases periodically</source>
         <translation>Programmanyň täze neşirlerini wagtal-wagtal barlap dur</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1363"/>
+        <location filename="../preferences.ui" line="1369"/>
         <source>Ad&amp;vanced</source>
         <translation>Has &amp;çylşyrymly</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1369"/>
+        <location filename="../preferences.ui" line="1375"/>
         <source>ScanPopup extra technologies</source>
         <translation>SkanPopup goşmaça tehnologiýalary</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1375"/>
+        <location filename="../preferences.ui" line="1381"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -4121,12 +4155,12 @@ This technology works only with some programs that support it
 It is not needed to select this option if you don&apos;t use such programs.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1381"/>
+        <location filename="../preferences.ui" line="1387"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>Ulan &amp;IAccessibleEx</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1388"/>
+        <location filename="../preferences.ui" line="1394"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -4135,12 +4169,12 @@ This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1393"/>
+        <location filename="../preferences.ui" line="1399"/>
         <source>Use &amp;UIAutomation</source>
         <translation>Ulan &amp;UIAutomation</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1400"/>
+        <location filename="../preferences.ui" line="1406"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -4149,7 +4183,7 @@ This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1405"/>
+        <location filename="../preferences.ui" line="1411"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>Ulan &amp;GoldenDict habarlary</translation>
     </message>
@@ -4194,12 +4228,12 @@ It is not needed to select this option if you don&apos;t use such programs.</tra
         <translation type="obsolete">DirectShow arkaly oýnatmak</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="590"/>
+        <location filename="../preferences.cc" line="604"/>
         <source>Changing Language</source>
         <translation>Dili çalşmak</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="591"/>
+        <location filename="../preferences.cc" line="605"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Diliň çalşmagyny işe girizmek üçin programmany täzeden işlet.</translation>
     </message>
@@ -4281,141 +4315,147 @@ It is not needed to select this option if you don&apos;t use such programs.</tra
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="425"/>
-        <location filename="../dsl.cc" line="1719"/>
+        <location filename="../aard.cc" line="447"/>
+        <location filename="../dsl.cc" line="1749"/>
         <source>Article loading error</source>
         <translation>Makala ýüklenende ýalňyşlyk ýüze çykdy</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="517"/>
-        <location filename="../slob.cc" line="728"/>
+        <location filename="../aard.cc" line="539"/>
+        <location filename="../slob.cc" line="732"/>
         <source>Article decoding error</source>
         <translation>Makala dekodirlenen wagty ýalňyşlyk ýüze çykdy</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="562"/>
-        <location filename="../bgl.cc" line="397"/>
-        <location filename="../sdict.cc" line="680"/>
-        <location filename="../stardict.cc" line="1042"/>
+        <location filename="../aard.cc" line="584"/>
+        <location filename="../bgl.cc" line="401"/>
+        <location filename="../sdict.cc" line="709"/>
+        <location filename="../stardict.cc" line="1157"/>
         <source>Copyright: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="566"/>
-        <location filename="../sdict.cc" line="696"/>
+        <location filename="../aard.cc" line="588"/>
+        <location filename="../sdict.cc" line="725"/>
         <source>Version: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="142"/>
+        <location filename="../ffmpegaudio.cc" line="144"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() bolmady.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="149"/>
+        <location filename="../ffmpegaudio.cc" line="155"/>
         <source>av_malloc() failed.</source>
         <translation>av_malloc() bolmady.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="158"/>
+        <location filename="../ffmpegaudio.cc" line="164"/>
         <source>avio_alloc_context() failed.</source>
         <translation>avio_alloc_context() bolmady.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="175"/>
+        <location filename="../ffmpegaudio.cc" line="181"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>avformat_open_input() bomady: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="182"/>
+        <location filename="../ffmpegaudio.cc" line="188"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>avformat_find_stream_info() bolmady: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="197"/>
+        <location filename="../ffmpegaudio.cc" line="207"/>
         <source>Could not find audio stream.</source>
         <translation>Audio akymy tapylmady.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="205"/>
+        <location filename="../ffmpegaudio.cc" line="216"/>
+        <location filename="../ffmpegaudio.cc" line="223"/>
         <source>Codec [id: %1] not found.</source>
         <translation>Kodek [id: %1] tapylmady.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="212"/>
+        <location filename="../ffmpegaudio.cc" line="229"/>
+        <source>avcodec_alloc_context3() failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ffmpegaudio.cc" line="238"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>avcodec_open2() tapylmady: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="273"/>
+        <location filename="../ffmpegaudio.cc" line="302"/>
         <source>Cannot find usable audio output device.</source>
         <translation>Ulanyp boljak audio çykaryjy enjam tapylanok.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="286"/>
+        <location filename="../ffmpegaudio.cc" line="315"/>
         <source>Unsupported sample format.</source>
         <translation>Nusga format näbelli.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="296"/>
+        <location filename="../ffmpegaudio.cc" line="325"/>
         <source>ao_open_live() failed: </source>
         <translation>ao_open_live() bolmady: </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="301"/>
+        <location filename="../ffmpegaudio.cc" line="330"/>
         <source>No driver.</source>
         <translation>Draýwer ýok.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="304"/>
+        <location filename="../ffmpegaudio.cc" line="333"/>
         <source>This driver is not a live output device.</source>
         <translation>Bu draýwer janly çukaryş enjam däl.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="307"/>
+        <location filename="../ffmpegaudio.cc" line="336"/>
         <source>A valid option key has an invalid value.</source>
         <translation>Dogry sazlama açaryň bahasy nädogry.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="310"/>
+        <location filename="../ffmpegaudio.cc" line="339"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>Şu enjamy açyp bolanok: %1, kanallar: %2, reýt: %3, bit: %4.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="317"/>
+        <location filename="../ffmpegaudio.cc" line="346"/>
         <source>Unknown error.</source>
         <translation>Näbelli ýalňyşlyk.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="346"/>
+        <location filename="../ffmpegaudio.cc" line="375"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() bolmady.</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="404"/>
-        <location filename="../gls.cc" line="621"/>
-        <location filename="../stardict.cc" line="1050"/>
+        <location filename="../bgl.cc" line="408"/>
+        <location filename="../gls.cc" line="625"/>
+        <location filename="../stardict.cc" line="1165"/>
         <source>Author: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="411"/>
-        <location filename="../stardict.cc" line="1058"/>
+        <location filename="../bgl.cc" line="415"/>
+        <location filename="../stardict.cc" line="1173"/>
         <source>E-mail: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sdict.cc" line="648"/>
+        <location filename="../sdict.cc" line="677"/>
         <source>Title: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1066"/>
+        <location filename="../stardict.cc" line="1181"/>
         <source>Website: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1074"/>
+        <location filename="../stardict.cc" line="1189"/>
         <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4441,22 +4481,22 @@ It is not needed to select this option if you don&apos;t use such programs.</tra
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2850"/>
+        <location filename="../articleview.cc" line="2820"/>
         <source>ERROR: %1</source>
         <translation>ÝALŇYŞLYK: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2850"/>
+        <location filename="../articleview.cc" line="2820"/>
         <source>Resource saving error: </source>
         <translation>Çeşmäni ýatda saklamagyň ýalňyşlygy:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2876"/>
+        <location filename="../articleview.cc" line="2846"/>
         <source>The referenced resource failed to download.</source>
         <translation>Salgylanýan çeşmäni ýükläp almak bolmady.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2876"/>
+        <location filename="../articleview.cc" line="2846"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">ÄGÄ BOLUŇ %1</translation>
     </message>
@@ -4571,8 +4611,8 @@ could be resized or managed in other ways.</source>
 could be resized or managed in other ways.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="607"/>
-        <location filename="../scanpopup.cc" line="962"/>
+        <location filename="../scanpopup.cc" line="613"/>
+        <location filename="../scanpopup.cc" line="968"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

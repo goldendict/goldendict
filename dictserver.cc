@@ -10,6 +10,10 @@
 #include "gddebug.hh"
 #include "htmlescape.hh"
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#endif
+
 namespace DictServer {
 
 using namespace Dictionary;
@@ -754,16 +758,52 @@ void DictServerArticleRequest::run()
             if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
               break;
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
+                                                QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
+            static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
+                                            QRegularExpression::CaseInsensitiveOption );     // links: {stuff}
+            static QRegularExpression links( "<a href=\"gdlookup://localhost/([^\"]*)\">",
+                                             QRegularExpression::CaseInsensitiveOption );
+            static QRegularExpression tags( "<[^>]*>",
+                                            QRegularExpression::CaseInsensitiveOption );
+#else
             QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
             QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
             QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
             QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
-
+#endif
             string articleStr = Html::preformat( articleText.toUtf8().data() );
             articleText = QString::fromUtf8( articleStr.c_str(), articleStr.size() )
                           .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>" )
                           .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>" );
+
             pos = 0;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            QString articleNewText;
+            QRegularExpressionMatchIterator it = links.globalMatch( articleText );
+            while( it.hasNext() )
+            {
+              QRegularExpressionMatch match = it.next();
+              articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+              pos = match.capturedEnd();
+
+              QString link = match.captured( 1 );
+              link.replace( tags, " " );
+              link.replace( "&nbsp;", " " );
+
+              QString newLink = match.captured();
+              newLink.replace( 30, match.capturedLength( 1 ),
+                               QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
+              articleNewText += newLink;
+            }
+            if( pos )
+            {
+              articleNewText += articleText.midRef( pos );
+              articleText = articleNewText;
+              articleNewText.clear();
+            }
+#else
             for( ; ; )
             {
               pos = articleText.indexOf( links, pos );
@@ -777,6 +817,7 @@ void DictServerArticleRequest::run()
                                    QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
               pos += 30;
             }
+#endif
 
             articleData += string( "<div class=\"dictd_article\">" )
                            + articleText.toUtf8().data()

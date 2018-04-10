@@ -28,6 +28,10 @@
 #include <QDomDocument>
 #include <QtEndian>
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QRegularExpression>
+#endif
+
 #include "ufile.hh"
 #include "wstring_qt.hh"
 #include "qt4x5.hh"
@@ -389,17 +393,35 @@ string AardDictionary::convert( const string & in )
     }
 
     QString text = QString::fromUtf8( inConverted.c_str() );
-    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)" ),
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.replace( QRegularExpression( "<\\s*a\\s+href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)",
+                                      QRegularExpression::DotMatchesEverythingOption ),
                   "<a href=\"bword:\\2\"");
-    text.replace( QRegExp( "<\\s*a\\s*href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)" ),
+    text.replace( QRegularExpression( "<\\s*a\\s+href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)",
+                                      QRegularExpression::DotMatchesEverythingOption ),
                   "<a href=\"bword:\\2\"");
 
     // Anchors
-    text.replace( QRegExp( "<a href=\"bword:([^#\"]+)#([^\"]+)" ),
+    text.replace( QRegularExpression( "<a\\s+href=\"bword:([^#\"]+)#([^\"]+)" ),
+                  "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
+
+    static QRegularExpression self_closing_divs( "(<div\\s+[^>]*)/>",
+                                                 QRegularExpression::CaseInsensitiveOption );  // <div ... />
+    text.replace( self_closing_divs, "\\1></div>" );
+#else
+    text.replace( QRegExp( "<\\s*a\\s+href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)" ),
+                  "<a href=\"bword:\\2\"");
+    text.replace( QRegExp( "<\\s*a\\s+href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)" ),
+                  "<a href=\"bword:\\2\"");
+
+    // Anchors
+    text.replace( QRegExp( "<a\\s+href=\"bword:([^#\"]+)#([^\"]+)" ),
                   "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
 
     static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
     text.replace( self_closing_divs, "\\1></div>" );
+#endif
 
     // Fix outstanding elements
     text += "<br style=\"clear:both;\" />";

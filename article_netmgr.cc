@@ -16,7 +16,7 @@
 
 using std::string;
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
 
   // SecurityWhiteList
 
@@ -30,7 +30,7 @@ using std::string;
   QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
   {
     swlDelete();
-    originUri = url.toString( QUrl::FullyDecoded );
+    originUri = url.toString( QUrl::PrettyDecoded );
     origin = new QWebSecurityOrigin( url );
     return origin;
   }
@@ -185,7 +185,9 @@ using std::string;
 
   void AllowFrameReply::readDataFromBase()
   {
-    QByteArray data = baseReply->readAll();
+    QByteArray data;
+    data.resize( baseReply->bytesAvailable() );
+    baseReply->read( data.data(), data.size() );
     buffer += data;
     emit readyRead();
   }
@@ -253,7 +255,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
     // Workaround of same-origin policy
     if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
         && req.hasRawHeader( "Referer" ) )
@@ -269,7 +271,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
           QUrl frameUrl;
           frameUrl.setScheme( refererUrl.scheme() );
           frameUrl.setHost( refererUrl.host() );
-          QString frameStr = frameUrl.toString( QUrl::FullyDecoded );
+          QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
 
           SecurityWhiteList & value = allOrigins[ frameStr ];
           if( !value.origin )
@@ -355,7 +357,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else

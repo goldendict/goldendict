@@ -6,7 +6,7 @@
 
 #include <QtNetwork>
 
-#if QT_VERSION >= 0x050200  // Qt 5.2+
+#if QT_VERSION >= 0x050300  // Qt 5.3+
 #include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
@@ -21,7 +21,7 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
-#if QT_VERSION >= 0x050200  // Qt 5.2+
+#if QT_VERSION >= 0x050300  // Qt 5.3+
 
 // White lists for QWebSecurityOrigin
 struct SecurityWhiteList
@@ -128,7 +128,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= 0x050200  // Qt 5.2+
+#if QT_VERSION >= 0x050300  // Qt 5.3+
   Origins allOrigins;
 #endif
 public:

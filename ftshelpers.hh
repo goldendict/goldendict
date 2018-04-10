@@ -92,6 +92,7 @@ class FTSResultsRequest : public Dictionary::DataRequest
   int maxResults;
   bool hasCJK;
   bool ignoreWordsOrder;
+  int wordsInIndex;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -133,7 +134,8 @@ public:
     distanceBetweenWords( distanceBetweenWords_ ),
     maxResults( maxResults_ ),
     hasCJK( false ),
-    ignoreWordsOrder( ignoreWordsOrder_ )
+    ignoreWordsOrder( ignoreWordsOrder_ ),
+    wordsInIndex( 0 )
   {
     foundHeadwords = new QList< FTS::FtsHeadword >;
     QThreadPool::globalInstance()->start(

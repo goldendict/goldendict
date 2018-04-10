@@ -36,6 +36,7 @@ Qt::Popup
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,
+                      AudioPlayerPtr const & audioPlayer_,
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_,
                       History & history_ ):
@@ -72,8 +73,8 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.queryError->hide();
 
-  definition = new ArticleView( ui.outerFrame, articleNetMgr, allDictionaries,
-                                groups, true, cfg,
+  definition = new ArticleView( ui.outerFrame, articleNetMgr, audioPlayer_,
+                                allDictionaries, groups, true, cfg,
                                 openSearchAction,
                                 dictionaryBar.toggleViewAction()
                                 );
@@ -309,11 +310,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
 ScanPopup::~ScanPopup()
 {
-  // Save state, geometry and pin status
-  cfg.popupWindowState = saveState( 1 );
-  cfg.popupWindowGeometry = saveGeometry();
-  cfg.pinPopupWindow = ui.pinButton->isChecked();
-  cfg.popupWindowAlwaysOnTop = ui.onTopButton->isChecked();
+  saveConfigData();
 
   disableScanning();
 
@@ -321,6 +318,15 @@ ScanPopup::~ScanPopup()
   ungrabGesture( Gestures::GDPinchGestureType );
   ungrabGesture( Gestures::GDSwipeGestureType );
 #endif
+}
+
+void ScanPopup::saveConfigData()
+{
+  // Save state, geometry and pin status
+  cfg.popupWindowState = saveState( 1 );
+  cfg.popupWindowGeometry = saveGeometry();
+  cfg.pinPopupWindow = ui.pinButton->isChecked();
+  cfg.popupWindowAlwaysOnTop = ui.onTopButton->isChecked();
 }
 
 void ScanPopup::enableScanning()

@@ -15,6 +15,7 @@
 #include "config.hh"
 #include "dictionary.hh"
 #include "article_netmgr.hh"
+#include "audioplayerfactory.hh"
 #include "instances.hh"
 #include "article_maker.hh"
 #include "scanpopup.hh"
@@ -85,13 +86,13 @@ public slots:
   void headwordReceived( QString const &, QString const & );
   void setExpandMode( bool expand );
   void headwordFromFavorites( QString const &, QString const & );
+  void quitApp();
 
 private:
   void addGlobalAction( QAction * action, const char * slot );
   void addGlobalActionsToDialog( QDialog * dialog );
 
   void commitData();
-  bool commitDataCompleted;
 
   QSystemTrayIcon * trayIcon;
 
@@ -151,6 +152,7 @@ private:
   QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
                                     // since their requests can be destroyed
                                     // in a separate thread
+  AudioPlayerFactory audioPlayerFactory;
 
   WordList * wordList;
   QLineEdit * translateLine;
