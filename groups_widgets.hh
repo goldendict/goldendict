@@ -8,6 +8,7 @@
 
 #include <vector>
 
+#include <QAction>
 #include <QListWidget>
 #include <QSortFilterProxyModel>
 
