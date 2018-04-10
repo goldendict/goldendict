@@ -391,7 +391,7 @@ private slots:
                            QString const & dictID = QString() );
 
   void showTranslationFor( QString const &, QStringList const & dictIDs,
-                           QRegExp const & searchRegExp );
+                           QRegExp const & searchRegExp, bool ignoreDiacritics );
 
   void showHistoryItem( QString const & );
 

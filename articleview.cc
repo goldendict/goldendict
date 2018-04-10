@@ -52,15 +52,20 @@ using std::list;
 
 class AccentMarkHandler
 {
+protected:
   QString normalizedString;
   QVector< int > accentMarkPos;
 public:
+  AccentMarkHandler()
+  {}
+  virtual ~AccentMarkHandler()
+  {}
   static QChar accentMark()
   { return QChar( 0x301 ); }
 
   /// Create text without accent marks
   /// and store mark positions
-  void setText( QString const & baseString )
+  virtual void setText( QString const & baseString )
   {
     accentMarkPos.clear();
     normalizedString.clear();
@@ -99,6 +104,72 @@ public:
 };
 
 /// End of DslAccentMark class
+
+/// DiacriticsHandler class
+///
+/// Remove diacritics from text
+/// and mirror position in normalized text to original text
+
+class DiacriticsHandler : public AccentMarkHandler
+{
+public:
+  DiacriticsHandler()
+  {}
+  ~DiacriticsHandler()
+  {}
+
+  /// Create text without diacriticss
+  /// and store diacritic marks positions
+  virtual void setText( QString const & baseString )
+  {
+    accentMarkPos.clear();
+    normalizedString.clear();
+
+    gd::wstring baseText = gd::toWString( baseString );
+    gd::wstring normText;
+
+    int pos = 0;
+    normText.reserve( baseText.size() );
+
+    gd::wchar const * nextChar = baseText.data();
+    size_t consumed;
+
+    for( size_t left = baseText.size(); left; )
+    {
+      if( *nextChar >= 0x10000U )
+      {
+        // Will be translated into surrogate pair
+        normText.push_back( *nextChar );
+        pos += 2;
+        nextChar++; left--;
+        continue;
+      }
+
+      gd::wchar ch = Folding::foldedDiacritic( nextChar, left, consumed );
+
+      if( Folding::isCombiningMark( ch ) )
+      {
+        accentMarkPos.append( pos );
+        nextChar++; left--;
+        continue;
+      }
+
+      if( consumed > 1 )
+      {
+        for( size_t i = 1; i < consumed; i++ )
+          accentMarkPos.append( pos );
+      }
+
+      normText.push_back( ch );
+      pos += 1;
+      nextChar += consumed;
+      left -= consumed;
+    }
+    normalizedString = gd::toQString( normText );
+  }
+};
+
+/// End of DiacriticsHandler class
 
 static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
 {
@@ -340,7 +411,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 }
 
 void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
-                                  QRegExp const & searchRegExp, unsigned group )
+                                  QRegExp const & searchRegExp, unsigned group,
+                                  bool ignoreDiacritics )
 {
   if( dictIDs.isEmpty() )
     return;
@@ -360,6 +432,8 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
   Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+  if( ignoreDiacritics )
+    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -1060,7 +1134,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
                                           .split( ",", QString::SkipEmptyParts );
 
-      showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ) );
+      showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
     else
       showDefinition( url.path(),
@@ -1082,7 +1156,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
                                             .split( ",", QString::SkipEmptyParts );
 
-        showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ) );
+        showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return;
       }
 
@@ -2200,7 +2274,7 @@ void ArticleView::doubleClicked( QPoint pos )
         {
           QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
                                               .split( ",", QString::SkipEmptyParts );
-          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ) );
+          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else
           showDefinition( selectedText, getGroup( ref ), getCurrentArticle() );
@@ -2368,17 +2442,28 @@ void ArticleView::highlightFTSResults()
 {
   closeSearch();
 
-  AccentMarkHandler markHandler;
-
   const QUrl & url = ui.definition->url();
-  QRegExp regexp( Qt4x5::Url::queryItemValue( url, "regexp" ).remove( AccentMarkHandler::accentMark() ),
+
+  bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
+
+  QString regString = Qt4x5::Url::queryItemValue( url, "regexp" );
+  if( ignoreDiacritics )
+    regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
+  else
+    regString = regString.remove( AccentMarkHandler::accentMark() );
+
+  QRegExp regexp( regString,
                   Qt4x5::Url::hasQueryItem( url, "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
                   Qt4x5::Url::hasQueryItem( url, "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+
 
   if( regexp.pattern().isEmpty() )
     return;
 
   regexp.setMinimal( true );
+
+  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
+                                           new DiacriticsHandler : new AccentMarkHandler;
 
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
@@ -2388,18 +2473,23 @@ void ArticleView::highlightFTSResults()
   }
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
-  markHandler.setText( pageText );
+  marksHandler->setText( pageText );
 
   int pos = 0;
 
   while( pos >= 0 )
   {
-    pos = regexp.indexIn( markHandler.normalizedText(), pos );
+    pos = regexp.indexIn( marksHandler->normalizedText(), pos );
     if( pos >= 0 )
     {
       // Mirror pos and matched length to original string
-      int spos = markHandler.mirrorPosition( pos );
-      int matched = markHandler.mirrorPosition( pos + regexp.matchedLength() ) - spos;
+      int spos = marksHandler->mirrorPosition( pos );
+      int matched = marksHandler->mirrorPosition( pos + regexp.matchedLength() ) - spos;
+
+      // Add mark pos (if presented)
+      while( spos + matched < pageText.length()
+             && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
+        matched++;
 
       if( matched > FTS::MaxMatchLengthForHighlightResults )
       {

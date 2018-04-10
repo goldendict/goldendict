@@ -161,6 +161,7 @@ struct FullTextSearch
   bool useMaxArticlesPerDictionary;
   bool enabled;
   bool ignoreWordsOrder;
+  bool ignoreDiacritics;
   quint32 maxDictionarySize;
   QByteArray dialogGeometry;
   QString disabledTypes;
@@ -173,6 +174,7 @@ struct FullTextSearch
     useMaxArticlesPerDictionary( false ),
     enabled( true ),
     ignoreWordsOrder( false ),
+    ignoreDiacritics( false ),
     maxDictionarySize( 0 )
   {}
 };

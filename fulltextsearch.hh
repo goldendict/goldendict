@@ -175,6 +175,7 @@ class FullTextSearchDialog : public QDialog
   unsigned group;
   std::vector< sptr< Dictionary::Class > > activeDicts;
   bool ignoreWordsOrder;
+  bool ignoreDiacritics;
 
   std::list< sptr< Dictionary::DataRequest > > searchReqs;
 
@@ -217,6 +218,7 @@ private slots:
   void accept();
   void setLimitsUsing();
   void ignoreWordsOrderClicked();
+  void ignoreDiacriticsClicked();
   void searchReqFinished();
   void reject();
   void itemClicked( QModelIndex const & idx );
@@ -225,7 +227,7 @@ private slots:
 
 signals:
   void showTranslationFor( QString const &, QStringList const & dictIDs,
-                           QRegExp const & searchRegExp );
+                           QRegExp const & searchRegExp, bool ignoreDiacritics );
   void closeDialog();
 };
 

@@ -84,7 +84,7 @@ public:
 
   /// Finds articles that match the given string. A case-insensitive search
   /// is performed.
-  vector< WordArticleLink > findArticles( wstring const & );
+  vector< WordArticleLink > findArticles( wstring const &, bool ignoreDiacritics = false );
 
   /// Find all unique article links in the index
   void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
@@ -133,7 +133,7 @@ protected:
 
   /// Drops any alises which arose due to folding. Only case-folded aliases
   /// are left.
-  void antialias( wstring const &, vector< WordArticleLink > & );
+  void antialias( wstring const &, vector< WordArticleLink > &, bool ignoreDiactitics );
 
 protected:
 

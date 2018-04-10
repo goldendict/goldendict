@@ -179,7 +179,8 @@ public:
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
                                                             int maxResults,
-                                                            bool ignoreWordsOrder );
+                                                            bool ignoreWordsOrder,
+                                                            bool ignoreDiacritics );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -423,9 +424,10 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getSearchResults( QString const 
                                                                   int searchMode, bool matchCase,
                                                                   int distanceBetweenWords,
                                                                   int maxResults,
-                                                                  bool ignoreWordsOrder )
+                                                                  bool ignoreWordsOrder,
+                                                                  bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 /// XdxfDictionary::getArticle()

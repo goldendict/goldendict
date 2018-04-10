@@ -2792,14 +2792,16 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
 void MainWindow::showTranslationFor( QString const & inWord,
                                      QStringList const & dictIDs,
-                                     QRegExp const & searchRegExp )
+                                     QRegExp const & searchRegExp,
+                                     bool ignoreDiacritics )
 {
   ArticleView *view = getCurrentArticleView();
 
   navPronounce->setEnabled( false );
 
   view->showDefinition( inWord, dictIDs, searchRegExp,
-                        groupInstances[ groupList->currentIndex() ].id );
+                        groupInstances[ groupList->currentIndex() ].id,
+                        ignoreDiacritics );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -4407,8 +4409,8 @@ void MainWindow::showFullTextSearchDialog()
     ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
     addGlobalActionsToDialog( ftsDlg );
 
-    connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
-             this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
+    connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp, bool ) ),
+             this, SLOT( showTranslationFor( QString, QStringList, QRegExp, bool ) ) );
     connect( ftsDlg, SIGNAL( closeDialog() ),
              this, SLOT( closeFullTextSearchDialog() ), Qt::QueuedConnection );
     connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),
