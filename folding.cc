@@ -10,24 +10,21 @@
 
 namespace Folding {
 
-namespace
-{
-  #include "inc_case_folding.hh"
-  #include "inc_diacritic_folding.hh"
+#include "inc_case_folding.hh"
+#include "inc_diacritic_folding.hh"
 
-  /// Tests if the given char is one of the Unicode combining marks. Some are
-  /// caught by the diacritics folding table, but they are only handled there
-  /// when they come with their main characters, not by themselves. The rest
-  /// are caught here.
-  bool isCombiningMark( wchar ch )
-  {
-    return (
-             ( ch >= 0x300 && ch <= 0x36F ) ||
-             ( ch >= 0x1DC0 && ch <= 0x1DFF ) ||
-             ( ch >= 0x20D0 && ch <= 0x20FF ) ||
-             ( ch >= 0xFE20 && ch <= 0xFE2F )
-           );
-  }
+/// Tests if the given char is one of the Unicode combining marks. Some are
+/// caught by the diacritics folding table, but they are only handled there
+/// when they come with their main characters, not by themselves. The rest
+/// are caught here.
+bool isCombiningMark( wchar ch )
+{
+  return (
+           ( ch >= 0x300 && ch <= 0x36F ) ||
+           ( ch >= 0x1DC0 && ch <= 0x1DFF ) ||
+           ( ch >= 0x20D0 && ch <= 0x20FF ) ||
+           ( ch >= 0xFE20 && ch <= 0xFE2F )
+         );
 }
 
 wstring apply( wstring const & in, bool preserveWildcards )
@@ -690,5 +687,11 @@ QString unescapeWildcardSymbols( const QString & str )
 #endif
   return unescaped;
 }
+
+wchar foldedDiacritic( wchar const * in, size_t size, size_t & consumed )
+{
+  return foldDiacritic( in, size, consumed );
+}
+
 
 }

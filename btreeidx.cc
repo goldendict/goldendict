@@ -83,7 +83,7 @@ void BtreeIndex::openIndex( IndexInfo const & indexInfo,
   rootNode.clear();
 }
 
-vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
+vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word, bool ignoreDiacritics )
 {
   vector< WordArticleLink > result;
 
@@ -108,7 +108,7 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
     {
       result = readChain( chainOffset );
 
-      antialias( word, result );
+      antialias( word, result, ignoreDiacritics );
     }
   }
   catch( std::exception & e )
@@ -910,7 +910,8 @@ vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
 }
 
 void BtreeIndex::antialias( wstring const & str,
-                            vector< WordArticleLink > & chain )
+                            vector< WordArticleLink > & chain,
+                            bool ignoreDiacritics )
 {
   wstring caseFolded = Folding::applySimpleCaseOnly( gd::normalize( str ) );
 
@@ -918,8 +919,11 @@ void BtreeIndex::antialias( wstring const & str,
   {
     // If after applying case folding to each word they wouldn't match, we
     // drop the entry.
-    if ( Folding::applySimpleCaseOnly( gd::normalize( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) ) !=
-         caseFolded )
+    wstring entry = Folding::applySimpleCaseOnly( gd::normalize( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) );
+    if( ignoreDiacritics )
+      entry = Folding::applyDiacriticsOnly( entry );
+
+    if ( entry != caseFolded )
       chain.erase( chain.begin() + x );
     else
     if ( chain[ x ].prefix.size() ) // If there's a prefix, merge it with the word,

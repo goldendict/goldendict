@@ -85,6 +85,12 @@ QString unescapeWildcardSymbols( QString const & );
 /// Escape all wildcard symbols (for place word to input line)
 QString escapeWildcardSymbols( QString const & );
 
+/// Return result of foldDiacritic() from "inc_diacritic_folding.hh"
+wchar foldedDiacritic( wchar const * in, size_t size, size_t & consumed );
+
+/// Tests if the given char is one of the Unicode combining marks.
+bool isCombiningMark( wchar ch );
+
 }
 
 #endif

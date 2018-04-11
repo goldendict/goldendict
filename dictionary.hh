@@ -418,7 +418,8 @@ public:
                                                 int searchMode, bool matchCase,
                                                 int distanceBetweenWords,
                                                 int maxArticlesPerDictionary,
-                                                bool ignoreWordsOrder );
+                                                bool ignoreWordsOrder,
+                                                bool ignoreDiacritics );
 
   // Return dictionary description if presented
   virtual QString const& getDescription();

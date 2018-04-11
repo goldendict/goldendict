@@ -1,7 +1,7 @@
 #ifndef __FFMPEGAUDIO_HH_INCLUDED__
 #define __FFMPEGAUDIO_HH_INCLUDED__
 
-#ifndef DISABLE_INTERNAL_PLAYER
+#ifdef MAKE_FFMPEG_PLAYER
 
 #include <QObject>
 #include <QMutex>
@@ -12,13 +12,13 @@
 namespace Ffmpeg
 {
 
-class AudioPlayer : public QObject
+class AudioService : public QObject
 {
   Q_OBJECT
 
 public:
-  static AudioPlayer & instance();
-  void playMemory( const void * ptr, int size );
+  static AudioService & instance();
+  void playMemory( const char * ptr, int size );
   void stop();
 
 signals:
@@ -26,10 +26,8 @@ signals:
   void error( QString const & message );
 
 private:
-  AudioPlayer();
-  ~AudioPlayer();
-  AudioPlayer( AudioPlayer const & );
-  AudioPlayer & operator=( AudioPlayer const & );
+  AudioService();
+  ~AudioService();
 };
 
 class DecoderThread: public QThread
@@ -54,6 +52,6 @@ signals:
 
 }
 
-#endif // DISABLE_INTERNAL_PLAYER
+#endif // MAKE_FFMPEG_PLAYER
 
 #endif // __FFMPEGAUDIO_HH_INCLUDED__

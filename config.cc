@@ -78,6 +78,56 @@ QKeySequence HotKey::toKeySequence() const
   return QKeySequence( key1 | modifiers, v2 );
 }
 
+bool InternalPlayerBackend::anyAvailable()
+{
+#if defined( MAKE_FFMPEG_PLAYER ) || defined( MAKE_QTMULTIMEDIA_PLAYER )
+  return true;
+#else
+  return false;
+#endif
+}
+
+InternalPlayerBackend InternalPlayerBackend::defaultBackend()
+{
+#if defined( MAKE_FFMPEG_PLAYER )
+  return ffmpeg();
+#elif defined( MAKE_QTMULTIMEDIA_PLAYER )
+  return qtmultimedia();
+#else
+  return InternalPlayerBackend( QString() );
+#endif
+}
+
+QStringList InternalPlayerBackend::nameList()
+{
+  QStringList result;
+#ifdef MAKE_FFMPEG_PLAYER
+  result.push_back( ffmpeg().uiName() );
+#endif
+#ifdef MAKE_QTMULTIMEDIA_PLAYER
+  result.push_back( qtmultimedia().uiName() );
+#endif
+  return result;
+}
+
+bool InternalPlayerBackend::isFfmpeg() const
+{
+#ifdef MAKE_FFMPEG_PLAYER
+  return *this == ffmpeg();
+#else
+  return false;
+#endif
+}
+
+bool InternalPlayerBackend::isQtmultimedia() const
+{
+#ifdef MAKE_QTMULTIMEDIA_PLAYER
+  return *this == qtmultimedia();
+#else
+  return false;
+#endif
+}
+
 Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
@@ -114,13 +164,8 @@ Preferences::Preferences():
 #endif
   pronounceOnLoadMain( false ),
   pronounceOnLoadPopup( false ),
-#ifndef DISABLE_INTERNAL_PLAYER
-  useExternalPlayer( false ),
-  useInternalPlayer( true ),
-#else
-  useExternalPlayer( true ),
-  useInternalPlayer( false ),
-#endif
+  useInternalPlayer( InternalPlayerBackend::anyAvailable() ),
+  internalPlayerBackend( InternalPlayerBackend::defaultBackend() ),
   checkForNewReleases( true ),
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
@@ -771,16 +816,16 @@ Class load() throw( exError )
     c.preferences.pronounceOnLoadMain = ( preferences.namedItem( "pronounceOnLoadMain" ).toElement().text() == "1" );
     c.preferences.pronounceOnLoadPopup = ( preferences.namedItem( "pronounceOnLoadPopup" ).toElement().text() == "1" );
 
-    if ( !preferences.namedItem( "useExternalPlayer" ).isNull() )
-      c.preferences.useExternalPlayer = ( preferences.namedItem( "useExternalPlayer" ).toElement().text() == "1" );
+    if ( InternalPlayerBackend::anyAvailable() )
+    {
+      if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
+        c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
+    }
+    else
+      c.preferences.useInternalPlayer = false;
 
-#ifndef DISABLE_INTERNAL_PLAYER
-    if ( !preferences.namedItem( "useInternalPlayer" ).isNull() )
-      c.preferences.useInternalPlayer = ( preferences.namedItem( "useInternalPlayer" ).toElement().text() == "1" );
-#else
-    c.preferences.useInternalPlayer = false;
-    c.preferences.useExternalPlayer = true;
-#endif
+    if ( !preferences.namedItem( "internalPlayerBackend" ).isNull() )
+      c.preferences.internalPlayerBackend.setUiName( preferences.namedItem( "internalPlayerBackend" ).toElement().text() );
 
     if ( !preferences.namedItem( "audioPlaybackProgram" ).isNull() )
       c.preferences.audioPlaybackProgram = preferences.namedItem( "audioPlaybackProgram" ).toElement().text();
@@ -885,6 +930,9 @@ Class load() throw( exError )
 
       if ( !fts.namedItem( "ignoreWordsOrder" ).isNull() )
         c.preferences.fts.ignoreWordsOrder = ( fts.namedItem( "ignoreWordsOrder" ).toElement().text() == "1" );
+
+      if ( !fts.namedItem( "ignoreDiacritics" ).isNull() )
+        c.preferences.fts.ignoreDiacritics = ( fts.namedItem( "ignoreDiacritics" ).toElement().text() == "1" );
 
       if ( !fts.namedItem( "maxDictionarySize" ).isNull() )
         c.preferences.fts.maxDictionarySize = fts.namedItem( "maxDictionarySize" ).toElement().text().toUInt();
@@ -1662,12 +1710,12 @@ void save( Class const & c ) throw( exError )
     opt.appendChild( dd.createTextNode( c.preferences.pronounceOnLoadPopup ? "1" : "0" ) );
     preferences.appendChild( opt );
 
-    opt = dd.createElement( "useExternalPlayer" );
-    opt.appendChild( dd.createTextNode( c.preferences.useExternalPlayer ? "1" : "0" ) );
-    preferences.appendChild( opt );
-
     opt = dd.createElement( "useInternalPlayer" );
     opt.appendChild( dd.createTextNode( c.preferences.useInternalPlayer ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "internalPlayerBackend" );
+    opt.appendChild( dd.createTextNode( c.preferences.internalPlayerBackend.uiName() ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "audioPlaybackProgram" );
@@ -1831,6 +1879,10 @@ void save( Class const & c ) throw( exError )
 
       opt = dd.createElement( "ignoreWordsOrder" );
       opt.appendChild( dd.createTextNode( c.preferences.fts.ignoreWordsOrder ? "1" : "0" ) );
+      hd.appendChild( opt );
+
+      opt = dd.createElement( "ignoreDiacritics" );
+      opt.appendChild( dd.createTextNode( c.preferences.fts.ignoreDiacritics ? "1" : "0" ) );
       hd.appendChild( opt );
 
       opt = dd.createElement( "maxDictionarySize" );

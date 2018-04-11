@@ -89,7 +89,6 @@ class InitSSLRunnable : public QRunnable
 #endif
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
-  commitDataCompleted( false ),
   trayIcon( 0 ),
   groupLabel( &searchPaneTitleBar ),
   foundInDictsLabel( &dictsPaneTitleBar ),
@@ -118,6 +117,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites, cfg.preferences.hideGoldenDictHeader ),
   dictNetMgr( this ),
+  audioPlayerFactory( cfg.preferences ),
   wordFinder( this ),
   newReleaseCheckTimer( this ),
   latestReleaseReply( 0 ),
@@ -367,7 +367,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIconMenu.addAction( enableScanPopup );
   trayIconMenu.addSeparator();
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
-           qApp, SLOT( quit() ) );
+           this, SLOT( quitApp() ) );
 
   addGlobalAction( &escAction, SLOT( handleEsc() ) );
   escAction.setShortcut( QKeySequence( "Esc" ) );
@@ -641,7 +641,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #endif
 
   connect( ui.quit, SIGNAL( triggered() ),
-           qApp, SLOT( quit() ) );
+           this, SLOT( quitApp() ) );
 
   connect( ui.dictionaries, SIGNAL( triggered() ),
            this, SLOT( editDictionaries() ) );
@@ -996,8 +996,6 @@ MainWindow::~MainWindow()
 #ifndef NO_EPWING_SUPPORT
   Epwing::finalize();
 #endif
-
-  commitData();
 }
 
 void MainWindow::addGlobalAction( QAction * action, const char * slot )
@@ -1029,17 +1027,16 @@ void MainWindow::commitData( QSessionManager & )
 
 void MainWindow::commitData()
 {
-  if ( !commitDataCompleted )
+  try
   {
-    commitDataCompleted = true;
-
     // Save MainWindow state and geometry
     cfg.mainWindowState = saveState( 1 );
     cfg.mainWindowGeometry = saveGeometry();
 
-    // Close the popup, so it would save its geometry to config
+    // Save popup window state and geometry
 
-    scanPopup.reset();
+    if( scanPopup.get() )
+      scanPopup->saveConfigData();
 
     // Save any changes in last chosen groups etc
     try
@@ -1051,7 +1048,15 @@ void MainWindow::commitData()
       gdWarning( "Configuration saving failed, error: %s\n", e.what() );
     }
 
+    // Save history
     history.save();
+
+    // Save favorites
+    ui.favoritesPaneWidget->saveData();
+  }
+  catch( std::exception & e )
+  {
+    gdWarning( "Commit data failed, error: %s\n", e.what() );
   }
 }
 
@@ -1173,8 +1178,14 @@ void MainWindow::closeEvent( QCloseEvent * ev )
   else
   {
     ev->accept();
-    qApp->quit();
+    quitApp();
   }
+}
+
+void MainWindow::quitApp()
+{
+  commitData();
+  qApp->quit();
 }
 
 void MainWindow::applyProxySettings()
@@ -1295,11 +1306,11 @@ void MainWindow::updateGroupList()
 
   // Add dictionaryOrder first, as the 'All' group.
   {
-    Instances::Group g( cfg.dictionaryOrder, dictionaries );
+    Instances::Group g( cfg.dictionaryOrder, dictionaries, Config::Group() );
 
     // Add any missing entries to dictionary order
     Instances::complementDictionaryOrder( g,
-                                          Instances::Group( cfg.inactiveDictionaries, dictionaries ),
+                                          Instances::Group( cfg.inactiveDictionaries, dictionaries, Config::Group() ),
                                           dictionaries );
 
     g.name = tr( "All" );
@@ -1310,7 +1321,7 @@ void MainWindow::updateGroupList()
   }
 
   for( int x  = 0; x < cfg.groups.size(); ++x )
-    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries ) );
+    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries, cfg.inactiveDictionaries ) );
 
   // Update names for dictionaries that are present, so that they could be
   // found in case they got moved.
@@ -1373,8 +1384,8 @@ void MainWindow::makeScanPopup()
        !cfg.preferences.enableClipboardHotkey )
     return;
 
-  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, dictionaries, groupInstances,
-                             history );
+  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
+                             dictionaries, groupInstances, history );
 
   scanPopup->setStyleSheet( styleSheet() );
 
@@ -1530,8 +1541,8 @@ void MainWindow::addNewTab()
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
-  ArticleView * view = new ArticleView( this, articleNetMgr, dictionaries,
-                                        groupInstances, false, cfg,
+  ArticleView * view = new ArticleView( this, articleNetMgr, audioPlayerFactory.player(),
+                                        dictionaries, groupInstances, false, cfg,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
@@ -2086,6 +2097,8 @@ void MainWindow::editPreferences()
       ui.favoritesPaneWidget->setSaveInterval( p.favoritesStoreInterval );
 
     cfg.preferences = p;
+
+    audioPlayerFactory.setPreferences( cfg.preferences );
 
     beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
     enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
@@ -2779,14 +2792,16 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
 void MainWindow::showTranslationFor( QString const & inWord,
                                      QStringList const & dictIDs,
-                                     QRegExp const & searchRegExp )
+                                     QRegExp const & searchRegExp,
+                                     bool ignoreDiacritics )
 {
   ArticleView *view = getCurrentArticleView();
 
   navPronounce->setEnabled( false );
 
   view->showDefinition( inWord, dictIDs, searchRegExp,
-                        groupInstances[ groupList->currentIndex() ].id );
+                        groupInstances[ groupList->currentIndex() ].id,
+                        ignoreDiacritics );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -4394,8 +4409,8 @@ void MainWindow::showFullTextSearchDialog()
     ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
     addGlobalActionsToDialog( ftsDlg );
 
-    connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp ) ),
-             this, SLOT( showTranslationFor( QString, QStringList, QRegExp ) ) );
+    connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp, bool ) ),
+             this, SLOT( showTranslationFor( QString, QStringList, QRegExp, bool ) ) );
     connect( ftsDlg, SIGNAL( closeDialog() ),
              this, SLOT( closeFullTextSearchDialog() ), Qt::QueuedConnection );
     connect( &configEvents, SIGNAL( mutedDictionariesChanged() ),

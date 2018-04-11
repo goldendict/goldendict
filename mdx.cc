@@ -65,7 +65,7 @@ using namespace Mdict;
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 10 + BtreeIndexing::FormatVersion + Folding::Version
+  kCurrentFormatVersion = 11 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
@@ -254,7 +254,8 @@ public:
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
                                                             int maxResults,
-                                                            bool ignoreWordsOrder );
+                                                            bool ignoreWordsOrder,
+                                                            bool ignoreDiacritics );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -515,9 +516,10 @@ sptr< Dictionary::DataRequest > MdxDictionary::getSearchResults( QString const &
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
-                                                                 bool ignoreWordsOrder )
+                                                                 bool ignoreWordsOrder,
+                                                                 bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 /// MdxDictionary::getArticle
@@ -1130,19 +1132,17 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0 )
     {
       // javascripts and images
-      QRegularExpressionMatch match;
+      QRegularExpressionMatch match = inlineScriptRe.match( linkTxt );
       if( linkType.at( 0 ) == 's'
-          && linkTxt.indexOf( inlineScriptRe, 0, &match ) == 0
-          && match.capturedLength() == linkTxt.length() )
+          && match.hasMatch() && match.capturedLength() == linkTxt.length() )
       {
         // skip inline scripts
         articleNewText += linkTxt;
-        int pos = article.indexOf( closeScriptTagRe, linkPos, &match );
-        if( pos > 0 )
+        match = closeScriptTagRe.match( article, linkPos );
+        if( match.hasMatch() )
         {
-          pos += match.capturedLength();
-          articleNewText += article.midRef( linkPos, pos - linkPos );
-          linkPos = pos;
+          articleNewText += article.midRef( linkPos, match.capturedEnd() - linkPos );
+          linkPos = match.capturedEnd();
         }
         continue;
       }
@@ -1511,12 +1511,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       {
         sptr< MdictParser > mddParser = mddParsers.front();
         sptr< IndexedWords > mddIndexedWords = new IndexedWords();
+        MdictParser::HeadWordIndex resourcesIndex;
         ResourceHandler resourceHandler( chunks, *mddIndexedWords );
 
         while ( mddParser->readNextHeadWordIndex( headWordIndex ) )
         {
-          mddParser->readRecordBlock( headWordIndex, resourceHandler );
+          resourcesIndex.insert( resourcesIndex.end(), headWordIndex.begin(), headWordIndex.end() );
         }
+        mddParser->readRecordBlock( resourcesIndex, resourceHandler );
 
         mddIndices.push_back( mddIndexedWords );
         // Save filename for .mdd files only

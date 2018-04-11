@@ -2,7 +2,6 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articleview.hh"
-#include "externalviewer.hh"
 #include <map>
 #include <QMessageBox>
 #include <QWebHitTestResult>
@@ -17,7 +16,6 @@
 #include "webmultimediadownload.hh"
 #include "programs.hh"
 #include "gddebug.hh"
-#include "ffmpegaudio.hh"
 #include <QDebug>
 #include <QCryptographicHash>
 #include "gestures.hh"
@@ -54,15 +52,20 @@ using std::list;
 
 class AccentMarkHandler
 {
+protected:
   QString normalizedString;
   QVector< int > accentMarkPos;
 public:
+  AccentMarkHandler()
+  {}
+  virtual ~AccentMarkHandler()
+  {}
   static QChar accentMark()
   { return QChar( 0x301 ); }
 
   /// Create text without accent marks
   /// and store mark positions
-  void setText( QString const & baseString )
+  virtual void setText( QString const & baseString )
   {
     accentMarkPos.clear();
     normalizedString.clear();
@@ -102,6 +105,72 @@ public:
 
 /// End of DslAccentMark class
 
+/// DiacriticsHandler class
+///
+/// Remove diacritics from text
+/// and mirror position in normalized text to original text
+
+class DiacriticsHandler : public AccentMarkHandler
+{
+public:
+  DiacriticsHandler()
+  {}
+  ~DiacriticsHandler()
+  {}
+
+  /// Create text without diacriticss
+  /// and store diacritic marks positions
+  virtual void setText( QString const & baseString )
+  {
+    accentMarkPos.clear();
+    normalizedString.clear();
+
+    gd::wstring baseText = gd::toWString( baseString );
+    gd::wstring normText;
+
+    int pos = 0;
+    normText.reserve( baseText.size() );
+
+    gd::wchar const * nextChar = baseText.data();
+    size_t consumed;
+
+    for( size_t left = baseText.size(); left; )
+    {
+      if( *nextChar >= 0x10000U )
+      {
+        // Will be translated into surrogate pair
+        normText.push_back( *nextChar );
+        pos += 2;
+        nextChar++; left--;
+        continue;
+      }
+
+      gd::wchar ch = Folding::foldedDiacritic( nextChar, left, consumed );
+
+      if( Folding::isCombiningMark( ch ) )
+      {
+        accentMarkPos.append( pos );
+        nextChar++; left--;
+        continue;
+      }
+
+      if( consumed > 1 )
+      {
+        for( size_t i = 1; i < consumed; i++ )
+          accentMarkPos.append( pos );
+      }
+
+      normText.push_back( ch );
+      pos += 1;
+      nextChar += consumed;
+      left -= consumed;
+    }
+    normalizedString = gd::toQString( normText );
+  }
+};
+
+/// End of DiacriticsHandler class
+
 static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
 {
   return frame->evaluateJavaScript(
@@ -110,6 +179,7 @@ static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString
 }
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
+                          AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
                           Config::Class const & cfg_,
@@ -118,6 +188,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           GroupComboBox const * groupComboBox_ ):
   QFrame( parent ),
   articleNetMgr( nm ),
+  audioPlayer( audioPlayer_ ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   popupView( popupView_ ),
@@ -268,11 +339,7 @@ void ArticleView::setGroupComboBox( GroupComboBox const * g )
 ArticleView::~ArticleView()
 {
   cleanupTemp();
-
-#ifndef DISABLE_INTERNAL_PLAYER
-  if ( cfg.preferences.useInternalPlayer )
-    Ffmpeg::AudioPlayer::instance().stop();
-#endif
+  audioPlayer->stop();
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
@@ -284,12 +351,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
-
-#ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  if ( cfg.preferences.useInternalPlayer )
-    Ffmpeg::AudioPlayer::instance().stop();
-#endif
+  audioPlayer->stop();
 
   QUrl req;
   Contexts contexts( contexts_ );
@@ -348,16 +411,14 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 }
 
 void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
-                                  QRegExp const & searchRegExp, unsigned group )
+                                  QRegExp const & searchRegExp, unsigned group,
+                                  bool ignoreDiacritics )
 {
   if( dictIDs.isEmpty() )
     return;
 
-#ifndef DISABLE_INTERNAL_PLAYER
   // first, let's stop the player
-  if ( cfg.preferences.useInternalPlayer )
-    Ffmpeg::AudioPlayer::instance().stop();
-#endif
+  audioPlayer->stop();
 
   QUrl req;
 
@@ -371,6 +432,8 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
   Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+  if( ignoreDiacritics )
+    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -1073,7 +1136,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
       QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
                                           .split( ",", QString::SkipEmptyParts );
 
-      showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ) );
+      showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
     else
       showDefinition( url.path(),
@@ -1095,7 +1158,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
         QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
                                             .split( ",", QString::SkipEmptyParts );
 
-        showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ) );
+        showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return true;
       }
 
@@ -1923,29 +1986,10 @@ bool ArticleView::resourceDownloadFinished()
              Dictionary::WebMultimediaDownload::isAudioUrl( resourceDownloadUrl ) )
         {
           // Audio data
-#ifndef DISABLE_INTERNAL_PLAYER
-          if ( cfg.preferences.useInternalPlayer )
-          {
-            Ffmpeg::AudioPlayer & player = Ffmpeg::AudioPlayer::instance();
-            connect( &player, SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
-            player.playMemory( data.data(), data.size() );
-          }
-          else
-#endif
-          {
-            // Use external viewer to play the file
-            try
-            {
-              ExternalViewer * viewer = new ExternalViewer( this, data, "wav", cfg.preferences.audioPlaybackProgram.trimmed() );
-
-              // Once started, it will erase itself
-              viewer->start();
-            }
-            catch( ExternalViewer::Ex & e )
-            {
-              QMessageBox::critical( this, "GoldenDict", tr( "Failed to run a player to play sound file: %1" ).arg( e.what() ) );
-            }
-          }
+          connect( audioPlayer.data(), SIGNAL( error( QString ) ), this, SLOT( audioPlayerError( QString ) ), Qt::UniqueConnection );
+          QString errorMessage = audioPlayer->play( data.data(), data.size() );
+          if( !errorMessage.isEmpty() )
+            QMessageBox::critical( this, "GoldenDict", tr( "Failed to play sound file: %1" ).arg( errorMessage ) );
         }
         else
         {
@@ -2003,7 +2047,7 @@ bool ArticleView::resourceDownloadFinished()
 
 void ArticleView::audioPlayerError( QString const & message )
 {
-  emit statusBarMessage( tr( "WARNING: FFmpeg Audio Player: %1" ).arg( message ),
+  emit statusBarMessage( tr( "WARNING: Audio Player: %1" ).arg( message ),
                          10000, QPixmap( ":/icons/error.png" ) );
 }
 
@@ -2246,7 +2290,7 @@ void ArticleView::doubleClicked( QPoint pos )
         {
           QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
                                               .split( ",", QString::SkipEmptyParts );
-          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ) );
+          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else
           showDefinition( selectedText, getGroup( ref ), getCurrentArticle() );
@@ -2414,17 +2458,28 @@ void ArticleView::highlightFTSResults()
 {
   closeSearch();
 
-  AccentMarkHandler markHandler;
-
   const QUrl & url = ui.definition->url();
-  QRegExp regexp( Qt4x5::Url::queryItemValue( url, "regexp" ).remove( AccentMarkHandler::accentMark() ),
+
+  bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
+
+  QString regString = Qt4x5::Url::queryItemValue( url, "regexp" );
+  if( ignoreDiacritics )
+    regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
+  else
+    regString = regString.remove( AccentMarkHandler::accentMark() );
+
+  QRegExp regexp( regString,
                   Qt4x5::Url::hasQueryItem( url, "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
                   Qt4x5::Url::hasQueryItem( url, "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
+
 
   if( regexp.pattern().isEmpty() )
     return;
 
   regexp.setMinimal( true );
+
+  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
+                                           new DiacriticsHandler : new AccentMarkHandler;
 
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
@@ -2434,18 +2489,23 @@ void ArticleView::highlightFTSResults()
   }
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
-  markHandler.setText( pageText );
+  marksHandler->setText( pageText );
 
   int pos = 0;
 
   while( pos >= 0 )
   {
-    pos = regexp.indexIn( markHandler.normalizedText(), pos );
+    pos = regexp.indexIn( marksHandler->normalizedText(), pos );
     if( pos >= 0 )
     {
       // Mirror pos and matched length to original string
-      int spos = markHandler.mirrorPosition( pos );
-      int matched = markHandler.mirrorPosition( pos + regexp.matchedLength() ) - spos;
+      int spos = marksHandler->mirrorPosition( pos );
+      int matched = marksHandler->mirrorPosition( pos + regexp.matchedLength() ) - spos;
+
+      // Add mark pos (if presented)
+      while( spos + matched < pageText.length()
+             && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
+        matched++;
 
       if( matched > FTS::MaxMatchLengthForHighlightResults )
       {

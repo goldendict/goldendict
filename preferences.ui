@@ -902,37 +902,43 @@ p, li { white-space: pre-wrap; }
          <property name="title">
           <string>Playback</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_16">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_audioPlayer">
+          <item row="0" column="0">
            <widget class="QRadioButton" name="useInternalPlayer">
             <property name="toolTip">
-             <string>Play audio files via FFmpeg(libav) and libao</string>
+             <string>Play audio files via built-in audio support</string>
             </property>
             <property name="text">
-             <string>Use internal player</string>
+             <string>Use internal player:</string>
             </property>
            </widget>
           </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_12">
-            <item>
-             <widget class="QRadioButton" name="useExternalPlayer">
-              <property name="toolTip">
-               <string>Use any external program to play audio files</string>
-              </property>
-              <property name="text">
-               <string>Use external program:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="audioPlaybackProgram">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="internalPlayerBackend">
+            <property name="toolTip">
+             <string>Choose audio back end</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QRadioButton" name="useExternalPlayer">
+            <property name="toolTip">
+             <string>Use any external program to play audio files</string>
+            </property>
+            <property name="text">
+             <string>Use external program:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="audioPlaybackProgram">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="toolTip">
+             <string>Enter audio player command line</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
