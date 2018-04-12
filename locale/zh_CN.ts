@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -325,7 +325,7 @@
     <message>
         <location filename="../articleview.cc" line="2034"/>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>警告：音频播放器：%1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1273"/>
@@ -382,7 +382,7 @@
     <message>
         <location filename="../articleview.cc" line="1978"/>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>播放音频文件失败：%1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2027"/>
@@ -1138,7 +1138,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="89"/>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略变音符号</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="112"/>
@@ -2923,7 +2923,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>将全部标签页添加至收藏</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="919"/>
@@ -2944,7 +2944,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="4562"/>
         <location filename="../mainwindow.cc" line="4589"/>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>从收藏中删除当前标签页</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1772"/>
@@ -3103,7 +3103,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4547"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>从收藏中删除标题字“%1”？</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="162"/>
@@ -3325,7 +3325,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../multimediaaudioplayer.cc" line="24"/>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>无法打开音频缓冲以进行读取。</translation>
     </message>
 </context>
 <context>
@@ -3836,22 +3836,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="909"/>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>使用内建音频支持播放音频文件</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="912"/>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>使用内部播放器：</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="919"/>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>选择音频后端</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="939"/>
         <source>Enter audio player command line</source>
-        <translation type="unfinished"></translation>
+        <translation>输入音频播放器命令行</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1113"/>
@@ -4394,7 +4394,7 @@ you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source
     <message>
         <location filename="../ffmpegaudio.cc" line="229"/>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_context3() 失败。</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="238"/>
