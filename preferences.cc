@@ -191,6 +191,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
+  ui.scanPopupUnpinnedWindowFlags->setCurrentIndex( p.scanPopupUnpinnedWindowFlags );
+  ui.scanPopupUnpinnedBypassWMHint->setChecked( p.scanPopupUnpinnedBypassWMHint );
 
   ui.storeHistory->setChecked( p.storeHistory );
   ui.historyMaxSizeField->setValue( p.maxStringsInHistory );
@@ -230,6 +232,10 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 #ifndef Q_OS_WIN32
   ui.groupBox_ScanPopupTechnologies->hide();
 //  ui.tabWidget->removeTab( 5 );
+#endif
+
+#ifndef ENABLE_SPWF_CUSTOMIZATION
+  ui.groupBox_ScanPopupWindowFlags->hide();
 #endif
 
 #ifdef HAVE_X11
@@ -395,6 +401,8 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
+  p.scanPopupUnpinnedWindowFlags = Config::spwfFromInt( ui.scanPopupUnpinnedWindowFlags->currentIndex() );
+  p.scanPopupUnpinnedBypassWMHint = ui.scanPopupUnpinnedBypassWMHint->isChecked();
 
   p.storeHistory = ui.storeHistory->isChecked();
   p.maxStringsInHistory = ui.historyMaxSizeField->text().toUInt();
@@ -541,6 +549,11 @@ void Preferences::showScanFlagToggled( bool b )
 {
   if( b )
     ui.enableScanPopupModifiers->setChecked( false );
+}
+
+void Preferences::on_scanPopupUnpinnedWindowFlags_currentIndexChanged( int index )
+{
+  ui.scanPopupUnpinnedBypassWMHint->setEnabled( Config::spwfFromInt( index ) != Config::SPWF_default );
 }
 
 void Preferences::wholeAltClicked( bool b )
