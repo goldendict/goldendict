@@ -689,6 +689,16 @@ seconds, which is specified here.</string>
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="ignoreOwnClipboardChanges">
+            <property name="toolTip">
+             <string>Do not show popup when selection or clipboard in one of Goldendict's own windows changes</string>
+            </property>
+            <property name="text">
+             <string>Ignore Goldendict's own selection and clipboard changes</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>

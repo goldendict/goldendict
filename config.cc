@@ -167,6 +167,7 @@ Preferences::Preferences():
   scanPopupModifiers( 0 ),
   scanPopupAltMode( false ),
   scanPopupAltModeSecs( 3 ),
+  ignoreOwnClipboardChanges( false ),
   scanPopupUseUIAutomation( true ),
   scanPopupUseIAccessibleEx( true ),
   scanPopupUseGDMessage( true ),
@@ -819,6 +820,7 @@ Class load() throw( exError )
     c.preferences.scanPopupAltMode = ( preferences.namedItem( "scanPopupAltMode" ).toElement().text() == "1" );
     if ( !preferences.namedItem( "scanPopupAltModeSecs" ).isNull() )
       c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
+    c.preferences.ignoreOwnClipboardChanges = ( preferences.namedItem( "ignoreOwnClipboardChanges" ).toElement().text() == "1" );
     c.preferences.scanToMainWindow = ( preferences.namedItem( "scanToMainWindow" ).toElement().text() == "1" );
 #ifdef HAVE_X11
     c.preferences.showScanFlag= ( preferences.namedItem( "showScanFlag" ).toElement().text() == "1" );
@@ -1694,6 +1696,10 @@ void save( Class const & c ) throw( exError )
 
     opt = dd.createElement( "scanPopupAltModeSecs" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupAltModeSecs ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "ignoreOwnClipboardChanges" );
+    opt.appendChild( dd.createTextNode( c.preferences.ignoreOwnClipboardChanges ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "scanToMainWindow" );

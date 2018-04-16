@@ -33,6 +33,23 @@ Qt::Popup
 #endif
 ;
 
+static bool ownsClipboardMode( QClipboard::Mode mode )
+{
+  const QClipboard & clipboard = *QApplication::clipboard();
+  switch( mode )
+  {
+    case QClipboard::Clipboard:
+      return clipboard.ownsClipboard();
+    case QClipboard::Selection:
+      return clipboard.ownsSelection();
+    case QClipboard::FindBuffer:
+      return clipboard.ownsFindBuffer();
+  }
+
+  gdWarning( "Unknown clipboard mode: %d\n", static_cast< int >( mode ) );
+  return false;
+}
+
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,
@@ -472,6 +489,10 @@ void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   if ( !isScanningEnabled )
     return;
+#ifdef HAVE_X11
+  if( cfg.preferences.ignoreOwnClipboardChanges && ownsClipboardMode( m ) )
+    return;
+#endif
 
   GD_DPRINTF( "clipboard changed\n" );
 
