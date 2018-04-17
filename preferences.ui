@@ -670,16 +670,6 @@ seconds, which is specified here.</string>
            </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="scanToMainWindow">
-            <property name="toolTip">
-             <string>Send translated word to main window instead of to show it in popup window</string>
-            </property>
-            <property name="text">
-             <string>Send translated word to main window</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QCheckBox" name="showScanFlag">
             <property name="toolTip">
              <string>Show a flag window before showing popup window, click the flag to show popup window. </string>
@@ -700,6 +690,16 @@ seconds, which is specified here.</string>
            </widget>
           </item>
          </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="scanToMainWindow">
+         <property name="toolTip">
+          <string>Send translated word to main window instead of to show it in popup window</string>
+         </property>
+         <property name="text">
+          <string>Send translated word to main window</string>
+         </property>
         </widget>
        </item>
        <item>
