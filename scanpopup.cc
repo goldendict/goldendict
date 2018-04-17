@@ -33,6 +33,7 @@ Qt::Popup
 #endif
 ;
 
+#ifdef HAVE_X11
 static bool ownsClipboardMode( QClipboard::Mode mode )
 {
   const QClipboard & clipboard = *QApplication::clipboard();
@@ -49,6 +50,7 @@ static bool ownsClipboardMode( QClipboard::Mode mode )
   gdWarning( "Unknown clipboard mode: %d\n", static_cast< int >( mode ) );
   return false;
 }
+#endif
 
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
