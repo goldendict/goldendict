@@ -187,6 +187,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
+  ui.ignoreOwnClipboardChanges->setChecked( p.ignoreOwnClipboardChanges );
   ui.scanToMainWindow->setChecked( p.scanToMainWindow );
   ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
@@ -242,6 +243,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.showScanFlag->setChecked( p.showScanFlag);
 #else
   ui.showScanFlag->hide();
+  ui.ignoreOwnClipboardChanges->hide();
 #endif
 
   // Sound
@@ -394,6 +396,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
+  p.ignoreOwnClipboardChanges = ui.ignoreOwnClipboardChanges->isChecked();
   p.scanToMainWindow = ui.scanToMainWindow->isChecked();
 #ifdef HAVE_X11
   p.showScanFlag= ui.showScanFlag->isChecked();
