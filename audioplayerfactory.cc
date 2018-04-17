@@ -60,14 +60,14 @@ void AudioPlayerFactory::reset()
 
     if( !internalPlayerBackend.isQtmultimedia() )
     {
-      if( qobject_cast< Ffmpeg::AudioPlayer * >( playerPtr.data() ) == 0 )
+      if( !playerPtr || !qobject_cast< Ffmpeg::AudioPlayer * >( playerPtr.data() ) )
         playerPtr.reset( new Ffmpeg::AudioPlayer );
       return;
     }
 #endif
 
 #ifdef MAKE_QTMULTIMEDIA_PLAYER
-    if( qobject_cast< MultimediaAudioPlayer * >( playerPtr.data() ) == 0 )
+    if( !playerPtr || !qobject_cast< MultimediaAudioPlayer * >( playerPtr.data() ) )
       playerPtr.reset( new MultimediaAudioPlayer );
     return;
 #endif
