@@ -2109,7 +2109,6 @@ void MainWindow::editPreferences()
     updateTrayIcon();
     applyProxySettings();
     applyWebSettings();
-    makeScanPopup();
 
     ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
 
