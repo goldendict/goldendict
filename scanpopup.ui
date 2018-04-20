@@ -137,9 +137,6 @@
            </item>
            <item>
             <widget class="QToolButton" name="pronounceButton">
-             <property name="toolTip">
-              <string>Pronounce Word (Alt+S)</string>
-             </property>
              <property name="text">
               <string>...</string>
              </property>

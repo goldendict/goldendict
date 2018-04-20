@@ -206,7 +206,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar->widgetForAction( afterScanPopupSeparator )->setObjectName( "afterScanPopupSeparator" );
 
   // sound
-  navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound_full.png" ), tr( "Pronounce Word (Alt+S)" ) );
+  navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound_full.png" ),
+                                        pronounceActionText( AudioPlayerInterface::StoppedState ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
   navPronounce->setCheckable( true );
   navToolbar->widgetForAction( navPronounce )->setObjectName( "soundButton" );
@@ -1870,6 +1871,7 @@ void MainWindow::connectToAudioPlayer()
 void MainWindow::onAudioPlayerStateChanged( AudioPlayerInterface::State state )
 {
   audioPlayerUi->setPlaybackState( state );
+  navPronounce->setText( pronounceActionText( state ) );
   if( scanPopup )
     scanPopup->setPlaybackState( state );
 }

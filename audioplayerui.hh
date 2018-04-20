@@ -4,6 +4,8 @@
 #ifndef AUDIOPLAYERUI_HH_INCLUDED
 #define AUDIOPLAYERUI_HH_INCLUDED
 
+#include <QString>
+#include <QCoreApplication>
 #include "audioplayerinterface.hh"
 
 /// This class template ensures that its managed checkable audio UI element
@@ -52,5 +54,12 @@ private:
   const SetInteractablePtr setInteractable;
   bool interactableWhenUnchecked;
 };
+
+inline QString pronounceActionText( AudioPlayerInterface::State state )
+{
+  return state == AudioPlayerInterface::PlayingState ?
+        QCoreApplication::translate( "AudioPlayerUi", "Stop Pronouncing (Alt+S)" )
+      : QCoreApplication::translate( "AudioPlayerUi", "Pronounce Word (Alt+S)" );
+}
 
 #endif // AUDIOPLAYERUI_HH_INCLUDED

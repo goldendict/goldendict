@@ -140,6 +140,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
+  ui.pronounceButton->setToolTip( pronounceActionText( AudioPlayerInterface::StoppedState ) );
   audioPlayerUi.reset( new AudioPlayerUi< QToolButton >( *ui.pronounceButton, &QToolButton::setVisible ) );
   audioPlayerUi->setPlayable( false );
 
@@ -483,6 +484,7 @@ void ScanPopup::translateWord( QString const & word )
 void ScanPopup::setPlaybackState( AudioPlayerInterface::State state )
 {
   audioPlayerUi->setPlaybackState( state );
+  ui.pronounceButton->setToolTip( pronounceActionText( state ) );
 }
 
 #ifdef HAVE_X11
