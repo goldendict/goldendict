@@ -140,7 +140,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
-  ui.pronounceButton->hide();
+  audioPlayerUi.reset( new AudioPlayerUi< QToolButton >( *ui.pronounceButton, &QToolButton::setVisible ) );
+  audioPlayerUi->setPlayable( false );
 
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
@@ -481,7 +482,7 @@ void ScanPopup::translateWord( QString const & word )
 
 void ScanPopup::setPlaybackState( AudioPlayerInterface::State state )
 {
-  ui.pronounceButton->setChecked( state == AudioPlayerInterface::PlayingState );
+  audioPlayerUi->setPlaybackState( state );
 }
 
 #ifdef HAVE_X11
@@ -765,7 +766,7 @@ void ScanPopup::translateInputFinished()
 
 void ScanPopup::showTranslationFor( QString const & inputWord )
 {
-  ui.pronounceButton->hide();
+  audioPlayerUi->setPlayable( false );
 
   unsigned groupId = ui.groupList->getCurrentGroup();
   definition->showDefinition( inputWord, groupId );
@@ -1099,7 +1100,7 @@ void ScanPopup::altModePoll()
 
 void ScanPopup::pageLoaded( ArticleView * )
 {
-  ui.pronounceButton->setVisible( definition->hasSound() );
+  audioPlayerUi->setPlayable( definition->hasSound() );
 
   updateBackForwardButtons();
 

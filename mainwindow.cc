@@ -209,11 +209,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navPronounce = navToolbar->addAction( QIcon( ":/icons/playsound_full.png" ), tr( "Pronounce Word (Alt+S)" ) );
   navPronounce->setShortcut( QKeySequence( "Alt+S" ) );
   navPronounce->setCheckable( true );
-  navPronounce->setEnabled( false );
   navToolbar->widgetForAction( navPronounce )->setObjectName( "soundButton" );
 
   connect( navPronounce, SIGNAL( triggered( bool ) ),
            this, SLOT( onPronounceTriggered( bool ) ) );
+
+  audioPlayerUi.reset( new AudioPlayerUi< QAction >( *navPronounce, &QAction::setEnabled ) );
+  audioPlayerUi->setPlayable( false );
 
   connectToAudioPlayer();
 
@@ -1394,9 +1396,7 @@ void MainWindow::makeScanPopup()
   if ( cfg.preferences.enableScanPopup && enableScanPopup->isChecked() )
     scanPopup->enableScanning();
 
-  scanPopup->setPlaybackState( navPronounce->isChecked() ?
-                                 AudioPlayerInterface::PlayingState
-                               : AudioPlayerInterface::StoppedState );
+  scanPopup->setPlaybackState( audioPlayerUi->playbackState() );
 
   connect( scanPopup.get(), SIGNAL(editGroupRequested( unsigned ) ),
            this, SLOT(editDictionaries( unsigned )), Qt::QueuedConnection );
@@ -1869,7 +1869,7 @@ void MainWindow::connectToAudioPlayer()
 
 void MainWindow::onAudioPlayerStateChanged( AudioPlayerInterface::State state )
 {
-  navPronounce->setChecked( state == AudioPlayerInterface::PlayingState );
+  audioPlayerUi->setPlaybackState( state );
   if( scanPopup )
     scanPopup->setPlaybackState( state );
 }
@@ -1950,7 +1950,7 @@ void MainWindow::updatePronounceAvailability()
   bool pronounceEnabled = ui.tabWidget->count() > 0 &&
     getCurrentArticleView()->hasSound();
 
-  navPronounce->setEnabled( pronounceEnabled );
+  audioPlayerUi->setPlayable( pronounceEnabled );
 }
 
 void MainWindow::editDictionaries( unsigned editDictionaryGroup )
@@ -2705,7 +2705,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
 {
   ArticleView *view = getCurrentArticleView();
 
-  navPronounce->setEnabled( false );
+  audioPlayerUi->setPlayable( false );
 
   unsigned group = inGroup ? inGroup :
                    ( groupInstances.empty() ? 0 :
@@ -2818,7 +2818,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
 {
   ArticleView *view = getCurrentArticleView();
 
-  navPronounce->setEnabled( false );
+  audioPlayerUi->setPlayable( false );
 
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,

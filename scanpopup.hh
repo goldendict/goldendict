@@ -6,11 +6,14 @@
 
 #include "article_netmgr.hh"
 #include "audioplayerinterface.hh"
+#include "audioplayerui.hh"
 #include "articleview.hh"
 #include "wordfinder.hh"
 #include "keyboardstate.hh"
 #include "config.hh"
 #include "ui_scanpopup.h"
+#include <QScopedPointer>
+#include <QToolButton>
 #include <QDialog>
 #include <QClipboard>
 #include "history.hh"
@@ -141,6 +144,7 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
+  QScopedPointer< AudioPlayerUi< QToolButton > > audioPlayerUi;
   /// Fonts saved before words zooming is in effect, so it could be reset back.
   QFont wordListDefaultFont, translateLineDefaultFont;
 

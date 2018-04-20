@@ -272,6 +272,7 @@ HEADERS += folding.hh \
     article_maker.hh \
     scanpopup.hh \
     articleview.hh \
+    audioplayerui.hh \
     audioplayerinterface.hh \
     audioplayerfactory.hh \
     ffmpegaudioplayer.hh \

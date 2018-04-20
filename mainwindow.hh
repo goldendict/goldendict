@@ -5,6 +5,7 @@
 #define __MAINWINDOW_HH_INCLUDED__
 
 #include <QMainWindow>
+#include <QScopedPointer>
 #include <QThread>
 #include <QToolButton>
 #include <QSystemTrayIcon>
@@ -16,6 +17,7 @@
 #include "dictionary.hh"
 #include "article_netmgr.hh"
 #include "audioplayerinterface.hh"
+#include "audioplayerui.hh"
 #include "audioplayerfactory.hh"
 #include "instances.hh"
 #include "article_maker.hh"
@@ -153,6 +155,10 @@ private:
   QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
                                     // since their requests can be destroyed
                                     // in a separate thread
+
+  // audioPlayerUi must be destroyed after audioPlayerFactory because
+  // AudioPlayerInterface::stateChanged() may be emitted from its destructor.
+  QScopedPointer< AudioPlayerUi< QAction > > audioPlayerUi;
   AudioPlayerFactory audioPlayerFactory;
 
   WordList * wordList;
