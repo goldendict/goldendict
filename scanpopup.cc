@@ -140,7 +140,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
-  ui.pronounceButton->setToolTip( pronounceActionText( AudioPlayerInterface::StoppedState ) );
+  ui.pronounceButton->setToolTip( pronounceActionTexts.textFor( AudioPlayerInterface::StoppedState ) );
   audioPlayerUi.reset( new AudioPlayerUi< QToolButton >( *ui.pronounceButton, &QToolButton::setVisible ) );
   audioPlayerUi->setPlayable( false );
 
@@ -484,7 +484,13 @@ void ScanPopup::translateWord( QString const & word )
 void ScanPopup::setPlaybackState( AudioPlayerInterface::State state )
 {
   audioPlayerUi->setPlaybackState( state );
-  ui.pronounceButton->setToolTip( pronounceActionText( state ) );
+
+  QString const & newToolTip = pronounceActionTexts.textFor( state );
+  // The same state - Stopped - is often set repeatedly.
+  // Unfortunately QWidget::setToolTip() doesn't check for string equality and
+  // always sends a ToolTipChange event. Let us optimize for our use case manually.
+  if( ui.pronounceButton->toolTip() != newToolTip )
+    ui.pronounceButton->setToolTip( newToolTip );
 }
 
 #ifdef HAVE_X11

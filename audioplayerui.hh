@@ -55,11 +55,20 @@ private:
   bool interactableWhenUnchecked;
 };
 
-inline QString pronounceActionText( AudioPlayerInterface::State state )
+/// This class caches two frequently swapped texts/tooltips for pronounce actions/buttons.
+class PronounceActionTexts
 {
-  return state == AudioPlayerInterface::PlayingState ?
-        QCoreApplication::translate( "AudioPlayerUi", "Stop Pronouncing (Alt+S)" )
-      : QCoreApplication::translate( "AudioPlayerUi", "Pronounce Word (Alt+S)" );
-}
+public:
+  PronounceActionTexts() :
+    stoppedText( QCoreApplication::translate( "AudioPlayerUi", "Pronounce Word (Alt+S)" ) ),
+    playingText( QCoreApplication::translate( "AudioPlayerUi", "Stop Pronouncing (Alt+S)" ) )
+  {}
+
+  QString const & textFor( AudioPlayerInterface::State state ) const
+  { return state == AudioPlayerInterface::PlayingState ? playingText : stoppedText; }
+
+private:
+  const QString stoppedText, playingText;
+};
 
 #endif // AUDIOPLAYERUI_HH_INCLUDED

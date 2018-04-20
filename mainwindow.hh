@@ -156,9 +156,10 @@ private:
                                     // since their requests can be destroyed
                                     // in a separate thread
 
-  // audioPlayerUi must be destroyed after audioPlayerFactory because
+  // audioPlayerUi and pronounceActionTexts must be destroyed after audioPlayerFactory because
   // AudioPlayerInterface::stateChanged() may be emitted from its destructor.
   QScopedPointer< AudioPlayerUi< QAction > > audioPlayerUi;
+  PronounceActionTexts pronounceActionTexts;
   AudioPlayerFactory audioPlayerFactory;
 
   WordList * wordList;
