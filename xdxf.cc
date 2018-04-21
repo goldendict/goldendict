@@ -308,7 +308,6 @@ XdxfDictionary::~XdxfDictionary()
   if ( dz )
     dict_data_close( dz );
 }
-
 void XdxfDictionary::loadIcon() throw()
 {
   if ( dictionaryIconLoaded )
@@ -325,6 +324,12 @@ void XdxfDictionary::loadIcon() throw()
   if( !info.isFile() )
   {
       fileName = baseInfo.absoluteDir().absoluteFilePath( "icon16.png" );
+      info = QFileInfo( fileName );
+  }
+
+    if( !info.isFile() )
+  {
+      fileName = baseInfo.absoluteDir().absoluteFilePath( "dict.bmp" );
       info = QFileInfo( fileName );
   }
 

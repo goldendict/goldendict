@@ -252,22 +252,23 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
 void OrderAndProps::contextMenuRequested( const QPoint & pos )
 {
   QMenu menu( this );
-  QAction * sortNameAction = new QAction( tr( "Sort by name" ), &menu );
-  menu.addAction( sortNameAction );
-  QAction * sortLangAction = new QAction( tr( "Sort by languages" ), &menu );
-  menu.addAction( sortLangAction );
-
-  QAction * showHeadwordsAction = NULL;
-
   QModelIndex idx = ui.searchLine->mapToSource( ui.dictionaryOrder->indexAt( pos ) );
   sptr< Dictionary::Class > dict;
   if( idx.isValid() && (unsigned)idx.row() < ui.dictionaryOrder->getCurrentDictionaries().size() )
     dict = ui.dictionaryOrder->getCurrentDictionaries()[ idx.row() ];
+
+  QAction * showHeadwordsAction = NULL;
   if ( dict && dict->getWordCount() > 0 )
   {
     showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
     menu.addAction( showHeadwordsAction );
   }
+
+  QAction * sortNameAction = new QAction( tr( "Sort by name" ), &menu );
+  menu.addAction( sortNameAction );
+  QAction * sortLangAction = new QAction( tr( "Sort by languages" ), &menu );
+  menu.addAction( sortLangAction );
+
 
   QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
 
