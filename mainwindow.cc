@@ -1857,7 +1857,10 @@ void MainWindow::onPronounceTriggered( bool checked )
   ArticleView * const view = getCurrentArticleView();
   Q_ASSERT( view );
   if( checked )
-    view->playSound();
+  {
+    if( !view->playSound() ) // This pronunciation request failed before reaching the audio player.
+      navPronounce->setChecked( false ); // This is the only opportunity to fix the checked state.
+  }
   else
     view->stopPlayback();
 }

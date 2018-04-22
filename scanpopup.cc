@@ -1026,7 +1026,10 @@ void ScanPopup::prefixMatchFinished()
 void ScanPopup::on_pronounceButton_clicked( bool checked )
 {
   if( checked )
-    definition->playSound();
+  {
+    if( !definition->playSound() ) // This pronunciation request failed before reaching the audio player.
+      ui.pronounceButton->setChecked( false ); // This is the only opportunity to fix the checked state.
+  }
   else
     definition->stopPlayback();
 }
