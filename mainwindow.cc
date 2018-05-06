@@ -3259,7 +3259,7 @@ void MainWindow::on_newTab_triggered()
 
 void MainWindow::setAutostart(bool autostart)
 {
-#ifdef Q_OS_WIN32
+#if defined Q_OS_WIN32
     QSettings reg("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                   QSettings::NativeFormat);
     if (autostart) {
@@ -3271,16 +3271,17 @@ void MainWindow::setAutostart(bool autostart)
         reg.remove(QCoreApplication::applicationName());
     }
     reg.sync();
-#else
-    // this is for Linux
-    QString app_fname = QFileInfo(QCoreApplication::applicationFilePath()).baseName();
-    QString ShareDataPath = Config::getProgramDataDir() + "../applications/";
-    QString lnk(QDir::homePath() + "/.config/autostart/" + app_fname + ".desktop");
-    if (autostart) {
-        QFile::copy(ShareDataPath + app_fname + ".desktop", lnk);
-    } else {
-        QFile::remove(lnk);
-    }
+#elif defined HAVE_X11
+  const QString destinationPath = QDir::homePath() + "/.config/autostart/goldendict-owned-by-preferences.desktop";
+  if( autostart == QFile::exists( destinationPath ) )
+    return; // Nothing to do.
+  if( autostart )
+  {
+    const QString sourcePath = Config::getProgramDataDir() + "../applications/goldendict.desktop";
+    QFile::copy( sourcePath, destinationPath );
+  }
+  else
+    QFile::remove( destinationPath );
 #endif
 }
 
