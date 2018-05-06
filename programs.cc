@@ -7,6 +7,7 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include "parsecmdline.hh"
+#include "iconv.hh"
 #include "qt4x5.hh"
 
 #include <QDir>
@@ -223,6 +224,7 @@ ProgramDataRequest::ProgramDataRequest( QString const & word,
 
 void ProgramDataRequest::instanceFinished( QByteArray output, QString error )
 {
+  QString prog_output;
   if ( !isFinished() )
   {
     if ( !output.isEmpty() )
@@ -233,12 +235,80 @@ void ProgramDataRequest::instanceFinished( QByteArray output, QString error )
       {
       case Config::Program::PlainText:
         result += "plaintext'>";
-        result += Html::preformat( QString::fromLocal8Bit( output ).toUtf8().data() );
+        try
+        {
+          // Check BOM if present
+          unsigned char * uchars = reinterpret_cast< unsigned char * >( output.data() );
+          if( output.length() >= 2 && uchars[ 0 ] == 0xFF && uchars[ 1 ] == 0xFE )
+          {
+            int size = output.length() - 2;
+            if( size & 1 )
+              size -= 1;
+            string res= Iconv::toUtf8( "UTF-16LE", output.data() + 2, size );
+            prog_output = QString::fromUtf8( res.c_str(), res.size() );
+          }
+          else
+          if( output.length() >= 2 && uchars[ 0 ] == 0xFE && uchars[ 1 ] == 0xFF )
+          {
+            int size = output.length() - 2;
+            if( size & 1 )
+              size -= 1;
+            string res = Iconv::toUtf8( "UTF-16BE", output.data() + 2, size );
+            prog_output = QString::fromUtf8( res.c_str(), res.size() );
+          }
+          else
+          if( output.length() >= 3 && uchars[ 0 ] == 0xEF && uchars[ 1 ] == 0xBB && uchars[ 2 ] == 0xBF )
+          {
+            prog_output = QString::fromUtf8( output.data() + 3, output.length() - 3 );
+          }
+          else
+          {
+            // No BOM, assume local 8-bit encoding
+            prog_output = QString::fromLocal8Bit( output );
+          }
+        }
+        catch( std::exception & e )
+        {
+          error = e.what();
+        }
+        result += Html::preformat( prog_output.toUtf8().data() );
         break;
       default:
         result += "html'>";
-        // We assume html data is in utf8 encoding already.
-        result += output.data();
+        try
+        {
+          // Check BOM if present
+          unsigned char * uchars = reinterpret_cast< unsigned char * >( output.data() );
+          if( output.length() >= 2 && uchars[ 0 ] == 0xFF && uchars[ 1 ] == 0xFE )
+          {
+            int size = output.length() - 2;
+            if( size & 1 )
+              size -= 1;
+            result += Iconv::toUtf8( "UTF-16LE", output.data() + 2, size );
+          }
+          else
+          if( output.length() >= 2 && uchars[ 0 ] == 0xFE && uchars[ 1 ] == 0xFF )
+          {
+            int size = output.length() - 2;
+            if( size & 1 )
+              size -= 1;
+            result += Iconv::toUtf8( "UTF-16BE", output.data() + 2, size );
+          }
+          else
+          if( output.length() >= 3 && uchars[ 0 ] == 0xEF && uchars[ 1 ] == 0xBB && uchars[ 2 ] == 0xBF )
+          {
+            result += output.data() + 3;
+          }
+          else
+          {
+            // We assume html data is in utf8 encoding already.
+            result += output.data();
+          }
+        }
+        catch( std::exception & e )
+        {
+          error = e.what();
+        }
       }
 
       result += "</div>";
