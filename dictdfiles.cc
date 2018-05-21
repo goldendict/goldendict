@@ -125,7 +125,7 @@ public:
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -255,7 +255,7 @@ uint32_t decodeBase64( string const & str )
 sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & word,
                                                              vector< wstring > const & alts,
                                                              wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   try
   {
@@ -601,7 +601,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

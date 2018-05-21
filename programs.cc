@@ -44,12 +44,12 @@ public:
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long maxResults )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
                                           wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 protected:
 
@@ -58,7 +58,7 @@ protected:
 
 sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   if ( prg.type == Config::Program::PrefixMatch )
     return new ProgramWordSearchRequest( gd::toQString( word ), prg );
@@ -74,7 +74,7 @@ sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
 
 sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
   wstring const & word, vector< wstring > const &, wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   switch( prg.type )
   {
@@ -372,7 +372,7 @@ void ProgramWordSearchRequest::cancel()
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
   Config::Programs const & programs )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
 

@@ -8,6 +8,7 @@
 #include <QTemporaryFile>
 #include <QProcess>
 #include "ex.hh"
+#include "cpp_features.hh"
 
 /// An external viewer, opens resources in other programs
 class ExternalViewer: public QObject
@@ -28,11 +29,11 @@ public:
   ExternalViewer( const char * data, int size,
                   QString const & extension, QString const & viewerCmdLine,
                   QObject * parent = 0 )
-    throw( exCantCreateTempFile );
+    THROW_SPEC( exCantCreateTempFile );
 
   // Once this is called, the object will be deleted when it's done, even if
   // the function throws.
-  void start() throw( exCantRunViewer );
+  void start() THROW_SPEC( exCantRunViewer );
 
   /// If the external process is running, requests its termination and returns
   /// false - expect the QObject::destroyed() signal to be emitted soon.

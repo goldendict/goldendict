@@ -94,6 +94,7 @@ win32 {
           LIBS += -l$$HUNSPELL_LIB
         }
     }
+    QMAKE_CXXFLAGS += -Wextra -Wempty-body
 
     LIBS += -liconv \
         -lwsock32 \
@@ -358,7 +359,8 @@ HEADERS += folding.hh \
     ripemd.hh \
     gls.hh \
     splitfile.hh \
-    favoritespanewidget.hh
+    favoritespanewidget.hh \
+    cpp_features.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \

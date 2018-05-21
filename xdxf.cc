@@ -166,10 +166,10 @@ public:
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -615,7 +615,7 @@ void XdxfArticleRequest::run()
 sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word,
                                                             vector< wstring > const & alts,
                                                             wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new XdxfArticleRequest( word, alts, *this );
 }
@@ -679,11 +679,11 @@ class GzippedFile: public QIODevice
 
 public:
 
-  GzippedFile( char const * fileName ) throw( exCantReadFile );
+  GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile );
 
   ~GzippedFile();
 
-  size_t gzTell();
+//  size_t gzTell();
 
   char * readDataArray( unsigned long startPos, unsigned long size );
 
@@ -710,7 +710,7 @@ protected:
   { return -1; }
 };
 
-GzippedFile::GzippedFile( char const * fileName ) throw( exCantReadFile )
+GzippedFile::GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile )
 {
   gz = gd_gzopen( fileName );
   if ( !gz )
@@ -732,10 +732,12 @@ bool GzippedFile::atEnd() const
   return gzeof( gz );
 }
 
+/*
 size_t GzippedFile::gzTell()
 {
   return gztell( gz );
 }
+*/
 
 qint64 GzippedFile::readData( char * data, qint64 maxSize )
 {
@@ -1131,7 +1133,7 @@ void XdxfResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new XdxfResourceRequest( *this, name );
 }
@@ -1143,7 +1145,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

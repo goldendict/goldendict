@@ -90,7 +90,7 @@ public:
   DEF_EX_STR( exMalformedGlsFile, "The .gls file is malformed:", Ex )
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
-  GlsScanner( string const & fileName ) throw( Ex, Iconv::Ex );
+  GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex );
   ~GlsScanner() throw();
 
   /// Returns the detected encoding of this file.
@@ -123,7 +123,7 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which end
   /// by the "### Glossary section:" line).
-  bool readNextLine( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
@@ -145,7 +145,7 @@ public:
   }
 };
 
-GlsScanner::GlsScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
+GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Utf8 ), iconv( Iconv::GdWchar, Iconv::Utf8 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
 {
@@ -266,7 +266,7 @@ GlsScanner::GlsScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
   }
 }
 
-bool GlsScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
+bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
   offset = (size_t)( gztell( f ) - readBufferLeft );
@@ -469,15 +469,15 @@ public:
   { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -1121,7 +1121,7 @@ void GlsHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   GlsDictionary::findHeadwordsForSynonym( wstring const & word )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return synonymSearchEnabled ? new GlsHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -1297,7 +1297,7 @@ void GlsArticleRequest::run()
 sptr< Dictionary::DataRequest > GlsDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new GlsArticleRequest( word, alts, *this );
 }
@@ -1538,7 +1538,7 @@ void GlsResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > GlsDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new GlsResourceRequest( *this, name );
 }
@@ -1561,7 +1561,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

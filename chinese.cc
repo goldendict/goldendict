@@ -109,7 +109,7 @@ std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( 
 }
 
 std::vector< sptr< Dictionary::Class > > makeDictionaries( Config::Chinese const & cfg )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   std::vector< sptr< Dictionary::Class > > result;
 

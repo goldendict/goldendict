@@ -94,7 +94,7 @@ private:
   bool escaped;
   unsigned transcriptionCount; // >0 = inside a [t] tag
 
-  void nextChar() throw( eot );
+  void nextChar() THROW_SPEC( eot );
 
   /// Infomation for diagnostic purposes
   string dictionaryName;
@@ -105,8 +105,8 @@ private:
 class DslIconv: public Iconv
 {
 public:
-  DslIconv( DslEncoding ) throw( Iconv::Ex );
-  void reinit( DslEncoding ) throw( Iconv::Ex );
+  DslIconv( DslEncoding ) THROW_SPEC( Iconv::Ex );
+  void reinit( DslEncoding ) THROW_SPEC( Iconv::Ex );
 
   /// Returns a name to be passed to iconv for the given dsl encoding.
   static char const * getEncodingNameFor( DslEncoding );
@@ -137,7 +137,7 @@ public:
   DEF_EX( exUnknownCodePage, "The .dsl file specified an unknown code page", Ex )
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
-  DslScanner( string const & fileName ) throw( Ex, Iconv::Ex );
+  DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex );
   ~DslScanner() throw();
 
   /// Returns the detected encoding of this file.
@@ -166,10 +166,10 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which start
   /// with #).
-  bool readNextLine( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Similar readNextLine but strip all DSL comments {{...}}
-  bool readNextLineWithoutComments( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
+  bool readNextLineWithoutComments( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const

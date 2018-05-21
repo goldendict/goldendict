@@ -119,10 +119,10 @@ public:
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
@@ -152,13 +152,13 @@ public:
 
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
                                                               unsigned minLength,
                                                               unsigned maxSuffixVariation,
                                                               unsigned long maxResults )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 protected:
 
@@ -647,7 +647,7 @@ void EpwingArticleRequest::run()
 sptr< Dictionary::DataRequest > EpwingDictionary::getArticle( wstring const & word,
                                                               vector< wstring > const & alts,
                                                               wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingArticleRequest( word, alts, *this );
 }
@@ -775,7 +775,7 @@ void EpwingResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > EpwingDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingResourceRequest( *this, name );
 }
@@ -922,7 +922,7 @@ void EpwingWordSearchRequest::findMatches()
 
 sptr< Dictionary::WordSearchRequest > EpwingDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -930,7 +930,7 @@ sptr< Dictionary::WordSearchRequest > EpwingDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > EpwingDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                       false, maxResults );
@@ -942,7 +942,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

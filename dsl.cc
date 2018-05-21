@@ -209,7 +209,7 @@ public:
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception )
+    THROW_SPEC( std::exception )
   {
     return vector< wstring >();
   }
@@ -218,10 +218,10 @@ public:
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
@@ -1767,7 +1767,7 @@ void DslArticleRequest::run()
 sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new DslArticleRequest( word, alts, *this );
 }
@@ -1946,7 +1946,7 @@ void DslResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new DslResourceRequest( *this, name );
 }
@@ -2007,7 +2007,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       int maxPictureWidth, unsigned int maxHeadwordSize )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

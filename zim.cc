@@ -555,10 +555,10 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
                                                         wstring const & )
-      throw( std::exception );
+      THROW_SPEC( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      throw( std::exception );
+      THROW_SPEC( std::exception );
 
     virtual QString const& getDescription();
 
@@ -1348,7 +1348,7 @@ void ZimArticleRequest::run()
 sptr< Dictionary::DataRequest > ZimDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new ZimArticleRequest( word, alts, *this );
 }
@@ -1494,7 +1494,7 @@ void ZimResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new ZimResourceRequest( *this, name );
 }
@@ -1506,7 +1506,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

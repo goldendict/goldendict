@@ -246,8 +246,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const & word,
                                                       vector< wstring > const & alts,
-                                                      wstring const & ) throw( std::exception );
-  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) throw( std::exception );
+                                                      wstring const & ) THROW_SPEC( std::exception );
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
   virtual QString const & getDescription();
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
@@ -700,7 +700,7 @@ void MdxArticleRequest::run()
 }
 
 sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, const vector<wstring> & alts,
-                                                         const wstring & ) throw( std::exception )
+                                                         const wstring & ) THROW_SPEC( std::exception )
 {
   return new MdxArticleRequest( word, alts, *this );
 }
@@ -926,7 +926,7 @@ void MddResourceRequest::run()
   finish();
 }
 
-sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) throw( std::exception )
+sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) THROW_SPEC( std::exception )
 {
   return new MddResourceRequest( *this, name );
 }
@@ -1411,7 +1411,7 @@ static void findResourceFiles( string const & mdx, vector< string > & dictFiles 
 
 vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
                                                       string const & indicesDir,
-                                                      Dictionary::Initializing & initializing ) throw( std::exception )
+                                                      Dictionary::Initializing & initializing ) THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

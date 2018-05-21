@@ -99,7 +99,7 @@ RussianTable::RussianTable()
   ins( "Ya", "Я" );
 }
   
-sptr< Dictionary::Class > makeDictionary() throw( std::exception )
+sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
   static RussianTable t;
 

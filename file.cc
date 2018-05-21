@@ -80,7 +80,7 @@ bool exists( char const * filename ) throw()
 #endif
 }
 
-void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
+void Class::open( char const * filename, char const * mode ) THROW_SPEC( exCantOpen )
 {
   QFile::OpenMode openMode = QIODevice::Text;
   const char * pch = mode;
@@ -110,19 +110,19 @@ void Class::open( char const * filename, char const * mode ) throw( exCantOpen )
     throw exCantOpen( std::string( filename ) + ": " + f.errorString().toUtf8().data() );
 }
 
-Class::Class( char const * filename, char const * mode ) throw( exCantOpen ):
+Class::Class( char const * filename, char const * mode ) THROW_SPEC( exCantOpen ):
   writeBuffer( 0 )
 {
   open( filename, mode );
 }
 
 Class::Class( std::string const & filename, char const * mode )
-  throw( exCantOpen ): writeBuffer( 0 )
+  THROW_SPEC( exCantOpen ): writeBuffer( 0 )
 {
   open( filename.c_str(), mode );
 }
 
-void Class::read( void * buf, qint64 size ) throw( exReadError, exWriteError )
+void Class::read( void * buf, qint64 size ) THROW_SPEC( exReadError, exWriteError )
 {
   if ( !size )
     return;
@@ -136,7 +136,7 @@ void Class::read( void * buf, qint64 size ) throw( exReadError, exWriteError )
     throw exReadError();
 }
 
-size_t Class::readRecords( void * buf, qint64 size, size_t count ) throw( exWriteError )
+size_t Class::readRecords( void * buf, qint64 size, size_t count ) THROW_SPEC( exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -145,7 +145,7 @@ size_t Class::readRecords( void * buf, qint64 size, size_t count ) throw( exWrit
   return result < 0 ? result : result / size;
 }
 
-void Class::write( void const * buf, qint64 size ) throw( exWriteError, exAllocation )
+void Class::write( void const * buf, qint64 size ) THROW_SPEC( exWriteError, exAllocation )
 {
   if ( !size )
     return;
@@ -193,7 +193,7 @@ void Class::write( void const * buf, qint64 size ) throw( exWriteError, exAlloca
 }
 
 size_t Class::writeRecords( void const * buf, qint64 size, size_t count )
-  throw( exWriteError )
+  THROW_SPEC( exWriteError )
 {
   flushWriteBuffer();
 
@@ -202,7 +202,7 @@ size_t Class::writeRecords( void const * buf, qint64 size, size_t count )
 }
 
 char * Class::gets( char * s, int size, bool stripNl )
-  throw( exWriteError )
+  THROW_SPEC( exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -229,7 +229,7 @@ char * Class::gets( char * s, int size, bool stripNl )
   return result;
 }
 
-std::string Class::gets( bool stripNl ) throw( exReadError, exWriteError )
+std::string Class::gets( bool stripNl ) THROW_SPEC( exReadError, exWriteError )
 {
   char buf[ 1024 ];
 
@@ -239,7 +239,7 @@ std::string Class::gets( bool stripNl ) throw( exReadError, exWriteError )
   return std::string( buf );
 }
 
-void Class::seek( long offset ) throw( exSeekError, exWriteError )
+void Class::seek( long offset ) THROW_SPEC( exSeekError, exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -248,7 +248,7 @@ void Class::seek( long offset ) throw( exSeekError, exWriteError )
     throw exSeekError();
 }
 
-void Class::seekCur( long offset ) throw( exSeekError, exWriteError )
+void Class::seekCur( long offset ) THROW_SPEC( exSeekError, exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -257,7 +257,7 @@ void Class::seekCur( long offset ) throw( exSeekError, exWriteError )
     throw exSeekError();
 }
 
-void Class::seekEnd( long offset ) throw( exSeekError, exWriteError )
+void Class::seekEnd( long offset ) THROW_SPEC( exSeekError, exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -266,12 +266,12 @@ void Class::seekEnd( long offset ) throw( exSeekError, exWriteError )
     throw exSeekError();
 }
 
-void Class::rewind() throw( exSeekError, exWriteError )
+void Class::rewind() THROW_SPEC( exSeekError, exWriteError )
 {
   seek( 0 );
 }
 
-size_t Class::tell() throw( exSeekError )
+size_t Class::tell() THROW_SPEC( exSeekError )
 {
   qint64 result = f.pos();
 
@@ -284,7 +284,7 @@ size_t Class::tell() throw( exSeekError )
   return ( size_t ) result;
 }
 
-bool Class::eof() throw( exWriteError )
+bool Class::eof() THROW_SPEC( exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -292,14 +292,14 @@ bool Class::eof() throw( exWriteError )
   return f.atEnd();
 }
 
-QFile & Class::file() throw( exWriteError )
+QFile & Class::file() THROW_SPEC( exWriteError )
 {
   flushWriteBuffer();
 
   return f;
 }
 
-void Class::close() throw( exWriteError )
+void Class::close() THROW_SPEC( exWriteError )
 {
   releaseWriteBuffer();
   f.close();
@@ -320,7 +320,7 @@ Class::~Class() throw()
   }
 }
 
-void Class::flushWriteBuffer() throw( exWriteError )
+void Class::flushWriteBuffer() THROW_SPEC( exWriteError )
 {
   if ( writeBuffer && writeBufferLeft != WriteBufferSize )
   {
@@ -333,7 +333,7 @@ void Class::flushWriteBuffer() throw( exWriteError )
   }
 }
 
-void Class::releaseWriteBuffer() throw( exWriteError )
+void Class::releaseWriteBuffer() THROW_SPEC( exWriteError )
 {
   flushWriteBuffer();
 

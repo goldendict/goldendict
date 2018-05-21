@@ -482,7 +482,7 @@ BtreeWordSearchRequest::~BtreeWordSearchRequest()
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -490,7 +490,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                      false, maxResults );

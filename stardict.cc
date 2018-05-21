@@ -172,15 +172,15 @@ public:
   { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -1383,7 +1383,7 @@ void StardictHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   StardictDictionary::findHeadwordsForSynonym( wstring const & word )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return synonymSearchEnabled ? new StardictHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -1581,7 +1581,7 @@ void StardictArticleRequest::run()
 sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & word,
                                                                 vector< wstring > const & alts,
                                                                 wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new StardictArticleRequest( word, alts, *this );
 }
@@ -1910,7 +1910,7 @@ void StardictResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > StardictDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new StardictResourceRequest( *this, name );
 }
@@ -2093,7 +2093,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

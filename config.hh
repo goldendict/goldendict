@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
+#include "cpp_features.hh"
 #include "ex.hh"
 
 #ifdef Q_OS_WIN
@@ -723,38 +724,38 @@ DEF_EX( exCantWriteConfigFile, "Can't write the configuration file", exError )
 DEF_EX( exMalformedConfigFile, "The configuration file is malformed", exError )
 
 /// Loads the configuration, or creates the default one if none is present
-Class load() throw( exError );
+Class load() THROW_SPEC( exError );
 
 /// Saves the configuration
-void save( Class const & ) throw( exError );
+void save( Class const & ) THROW_SPEC( exError );
 
 /// Returns the configuration file name.
 QString getConfigFileName();
 
 /// Returns the main configuration directory.
-QString getConfigDir() throw( exError );
+QString getConfigDir() THROW_SPEC( exError );
 
 /// Returns the index directory, where the indices are to be stored.
-QString getIndexDir() throw( exError );
+QString getIndexDir() THROW_SPEC( exError );
 
 /// Returns the filename of a .pid file which should store current pid of
 /// the process.
-QString getPidFileName() throw( exError );
+QString getPidFileName() THROW_SPEC( exError );
 
 /// Returns the filename of a history file which stores search history.
-QString getHistoryFileName() throw( exError );
+QString getHistoryFileName() THROW_SPEC( exError );
 
 /// Returns the filename of a favorities file.
-QString getFavoritiesFileName() throw( exError );
+QString getFavoritiesFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name.
-QString getUserCssFileName() throw( exError );
+QString getUserCssFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name used for printing only.
-QString getUserCssPrintFileName() throw( exError );
+QString getUserCssPrintFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name for the Qt interface customization.
-QString getUserQtCssFileName() throw( exError );
+QString getUserQtCssFileName() THROW_SPEC( exError );
 
 /// Returns the program's data dir. Under Linux that would be something like
 /// /usr/share/apps/goldendict, under Windows C:/Program Files/GoldenDict.
