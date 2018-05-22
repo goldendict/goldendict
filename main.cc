@@ -347,7 +347,7 @@ int main( int argc, char ** argv )
     {
       cfg = Config::load();
     }
-    catch( Config::exError )
+    catch( Config::exError & )
     {
       QMessageBox mb( QMessageBox::Warning, app.applicationName(),
                       app.translate( "Main", "Error in configuration file. Continue with default settings?" ),

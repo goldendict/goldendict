@@ -357,7 +357,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & 
 
     return dr;
   }
-  catch( File::Ex )
+  catch( File::Ex & )
   {
     return new Dictionary::DataRequestInstant( false ); // No such resource
   }

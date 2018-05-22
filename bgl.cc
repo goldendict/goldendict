@@ -587,7 +587,7 @@ void BglHeadwordsRequest::run()
     {
       headwordDecoded = Utf8::decode( removePostfix(  headword ) );
     }
-    catch( Utf8::exCantDecode )
+    catch( Utf8::exCantDecode & )
     {
     }
 
@@ -716,7 +716,7 @@ void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - conver
   {
     hebWStr = Utf8::decode(hebStr);
   }
-  catch( Utf8::exCantDecode )
+  catch( Utf8::exCantDecode & )
   {
     hebStr = "Utf-8 decoding error";
     return;

@@ -79,7 +79,7 @@ wstring stripExtension( string const & str )
   {
     name = Utf8::decode( str );
   }
-  catch( Utf8::exCantDecode )
+  catch( Utf8::exCantDecode & )
   {
     return name;
   }

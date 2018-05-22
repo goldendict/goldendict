@@ -1773,7 +1773,7 @@ void StardictResourceRequest::run()
 
       File::loadFromFile( n, data );
     }
-    catch( File::exCantOpen )
+    catch( File::exCantOpen & )
     {
       // Try reading from zip file
 

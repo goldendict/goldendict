@@ -922,7 +922,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
     {
       getReferencesFromText( pos.page, pos.offset );
     }
-    catch( std::exception )
+    catch( std::exception & )
     {
     }
 
