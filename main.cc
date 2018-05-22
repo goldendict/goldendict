@@ -58,32 +58,32 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
   switch (type) {
 
     case QtDebugMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Debug: " );
       else
         fprintf(stderr, "Debug: %s\n", msg.constData());
       break;
 
     case QtWarningMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Warning: " );
       else
         fprintf(stderr, "Warning: %s\n", msg.constData());
       break;
 
     case QtCriticalMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Critical: " );
       else
         fprintf(stderr, "Critical: %s\n", msg.constData());
       break;
 
     case QtFatalMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
       {
-        logFile.write( "Fatal: " );
-        logFile.write( msg );
-        logFile.flush();
+        logFilePtr->write( "Fatal: " );
+        logFilePtr->write( msg );
+        logFilePtr->flush();
       }
       else
         fprintf(stderr, "Fatal: %s\n", msg.constData());
@@ -91,7 +91,7 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
     case QtInfoMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Info: " );
       else
         fprintf(stderr, "Info: %s\n", msg.constData());
@@ -99,11 +99,11 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 #endif
   }
 
-  if( logFile.isOpen() )
+  if( logFilePtr && logFilePtr->isOpen() )
   {
     message.append( "\n" );
-    logFile.write( message.toUtf8() );
-    logFile.flush();
+    logFilePtr->write( message.toUtf8() );
+    logFilePtr->flush();
   }
 }
 
@@ -276,6 +276,8 @@ int main( int argc, char ** argv )
 #endif
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
+  QFile logFile;
+  logFilePtr = &logFile;
 
   if ( app.isRunning() )
   {

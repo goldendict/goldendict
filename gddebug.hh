@@ -23,6 +23,6 @@ void gdDebug(const char *, ...)
 #endif
 ;
 
-extern QFile logFile;
+extern QFile * logFilePtr;
 
 #endif // __GDDEBUG_HH_INCLUDED__

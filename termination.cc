@@ -26,8 +26,8 @@ using std::string;
 
 static void termHandler()
 {
-  if( logFile.isOpen() )
-    logFile.close();
+  if( logFilePtr && logFilePtr->isOpen() )
+    logFilePtr->close();
 
   std::string message( "GoldenDict has crashed with an unexpected exception\n\n" );
 
