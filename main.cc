@@ -198,6 +198,15 @@ logFile( false )
   }
 }
 
+class LogFilePtrGuard
+{
+  QFile logFile;
+  Q_DISABLE_COPY( LogFilePtrGuard )  
+public:
+  LogFilePtrGuard() { logFilePtr = &logFile; }
+  ~LogFilePtrGuard() { logFilePtr = 0; }
+};
+
 int main( int argc, char ** argv )
 {
   #ifdef Q_OS_MAC
@@ -276,8 +285,7 @@ int main( int argc, char ** argv )
 #endif
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
-  QFile logFile;
-  logFilePtr = &logFile;
+  LogFilePtrGuard logFilePtrGuard;
 
   if ( app.isRunning() )
   {
@@ -366,14 +374,14 @@ int main( int argc, char ** argv )
   if( gdcl.needLogFile() )
   {
     // Open log file
-    logFile.setFileName( Config::getConfigDir() + "gd_log.txt" );
-    logFile.remove();
-    logFile.open( QFile::ReadWrite );
+    logFilePtr->setFileName( Config::getConfigDir() + "gd_log.txt" );
+    logFilePtr->remove();
+    logFilePtr->open( QFile::ReadWrite );
 
     // Write UTF-8 BOM
     QByteArray line;
     line.append( 0xEF ).append( 0xBB ).append( 0xBF );
-    logFile.write( line );
+    logFilePtr->write( line );
 
     // Install message handler
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
@@ -436,8 +444,8 @@ int main( int argc, char ** argv )
 
   app.removeDataCommiter( m );
 
-  if( logFile.isOpen() )
-    logFile.close();
+  if( logFilePtr->isOpen() )
+    logFilePtr->close();
 
   return r;
 }
