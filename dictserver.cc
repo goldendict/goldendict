@@ -761,6 +761,8 @@ void DictServerArticleRequest::run()
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                                 QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
+            static QRegularExpression divs_inside_phonetic( "</div([^>]*)><div([^>]*)>",
+                                                            QRegularExpression::CaseInsensitiveOption );
             static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
                                             QRegularExpression::CaseInsensitiveOption );     // links: {stuff}
             static QRegularExpression links( "<a href=\"gdlookup://localhost/([^\"]*)\">",
@@ -769,19 +771,44 @@ void DictServerArticleRequest::run()
                                             QRegularExpression::CaseInsensitiveOption );
 #else
             QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
+            QRegExp divs_inside_phonetic( "</div([^>]*)><div([^>]*)>", Qt::CaseInsensitive );
             QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
             QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
             QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
 #endif
             string articleStr = Html::preformat( articleText.toUtf8().data() );
             articleText = QString::fromUtf8( articleStr.c_str(), articleStr.size() )
-                          .replace(phonetic, "<span class=\"dictd_phonetic\">\\1</span>" )
                           .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>" );
 
             pos = 0;
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QString articleNewText;
-            QRegularExpressionMatchIterator it = links.globalMatch( articleText );
+
+            // Handle phonetics
+
+            QRegularExpressionMatchIterator it = phonetic.globalMatch( articleText );
+            while( it.hasNext() )
+            {
+              QRegularExpressionMatch match = it.next();
+              articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+              pos = match.capturedEnd();
+
+              QString phonetic_text = match.captured( 1 );
+              phonetic_text.replace( divs_inside_phonetic, "</span></div\\1><div\\2><span class=\"dictd_phonetic\">" );
+
+              articleNewText += "<span class=\"dictd_phonetic\">" + phonetic_text + "</span>";
+            }
+            if( pos )
+            {
+              articleNewText += articleText.midRef( pos );
+              articleText = articleNewText;
+              articleNewText.clear();
+            }
+
+            // Handle links
+
+            pos = 0;
+            it = links.globalMatch( articleText );
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
@@ -804,6 +831,24 @@ void DictServerArticleRequest::run()
               articleNewText.clear();
             }
 #else
+            // Handle phonetics
+
+            for( ; ; )
+            {
+              pos = articleText.indexOf( phonetic, pos );
+              if( pos < 0 )
+                break;
+
+              QString phonetic_text = phonetic.cap( 1 );
+              phonetic_text.replace( divs_inside_phonetic, "</span></div\\1><div\\2><span class=\"dictd_phonetic\">" );
+              phonetic_text = "<span class=\"dictd_phonetic\">" + phonetic_text + "</span>";
+              articleText.replace( pos, phonetic.cap().length(), phonetic_text );
+              pos += phonetic_text.length();
+            }
+
+            // Handle links
+
+            pos = 0;
             for( ; ; )
             {
               pos = articleText.indexOf( links, pos );
