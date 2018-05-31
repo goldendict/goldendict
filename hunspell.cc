@@ -512,7 +512,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 
       wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
 
-      static QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:))|\\S+)+)" );
+      static QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:)(?!-)(?!\\+))|\\S+)+)" );
 
 #ifdef OLD_HUNSPELL_INTERFACE
       for( int x = 0; x < suggestionsCount; ++x )
