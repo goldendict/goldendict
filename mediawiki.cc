@@ -643,6 +643,14 @@ protected:
 
 bool FandomArticleRequest::preprocessArticle( QString & articleString )
 {
+  // Remove the apparently unused style class from links. This class attribute
+  // prevents essential MediaWikiArticleRequest::processArticle() replacements
+  // that start with "<a\\s+href" or "<a href". For example, when the
+  // "fix file: url" replacement is not triggered for book cover and film poster
+  // image links, they become broken links.
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  articleString.replace( QRegExp( "<a class=\"image lightbox\"" ), "<a" );
+
   // Lazy loading does not work in goldendict -> display these images
   // by switching to the simpler alternative format under <noscript> tag.
   const QString lzyImgTag = "<img\\s[^>]+lzy lzyPlcHld[^>]+>";
