@@ -3934,12 +3934,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <location filename="../preferences.ui" line="1737"/>
-        <source>Turn this option on to ignore diacritics while search articles</source>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
         <translation>Включите эту опцию, чтобы игнорировать диакритику при поиске статей</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
-        <source>Ignore diacritics while search</source>
+        <source>Ignore diacritics while searching</source>
         <translation>Игнорировать диакритику при поиске</translation>
     </message>
     <message>

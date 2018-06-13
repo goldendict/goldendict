@@ -3954,12 +3954,12 @@ kunnen de toetsen ook kort erna ingedrukt worden.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1737"/>
-        <source>Turn this option on to ignore diacritics while search articles</source>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
-        <source>Ignore diacritics while search</source>
+        <source>Ignore diacritics while searching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
