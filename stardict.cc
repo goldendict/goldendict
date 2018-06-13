@@ -176,7 +176,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
     THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
@@ -1421,6 +1422,7 @@ class StardictArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   StardictDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1429,8 +1431,9 @@ public:
 
   StardictArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     StardictDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     StardictDictionary & dict_,
+                     bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new StardictArticleRequestRunnable( *this, hasExited ) );
@@ -1465,13 +1468,13 @@ void StardictArticleRequest::run()
 
   try
   {
-    vector< WordArticleLink > chain = dict.findArticles( word );
+    vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
     for( unsigned x = 0; x < alts.size(); ++x )
     {
       /// Make an additional query for each alt
 
-      vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+      vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
       chain.insert( chain.end(), altChain.begin(), altChain.end() );
     }
@@ -1483,6 +1486,8 @@ void StardictArticleRequest::run()
                                       // by only allowing them to appear once.
 
     wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+    if( ignoreDiacritics )
+      wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
@@ -1508,6 +1513,8 @@ void StardictArticleRequest::run()
 
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+      if( ignoreDiacritics )
+        headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
       multimap< wstring, pair< string, string > > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
@@ -1580,10 +1587,11 @@ void StardictArticleRequest::run()
 
 sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & word,
                                                                 vector< wstring > const & alts,
-                                                                wstring const & )
+                                                                wstring const &,
+                                                                bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new StardictArticleRequest( word, alts, *this );
+  return new StardictArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 

@@ -203,7 +203,7 @@ public:
                                                  unsigned long maxResults ) THROW_SPEC( std::exception );
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const & )
+                                          wstring const &, bool )
     THROW_SPEC( std::exception );
 
   virtual quint32 getLangFrom() const
@@ -924,7 +924,7 @@ sptr< WordSearchRequest > DictServerDictionary::prefixMatch( wstring const & wor
 
 sptr< DataRequest > DictServerDictionary::getArticle( wstring const & word,
                                                       vector< wstring > const &,
-                                                      wstring const & )
+                                                      wstring const &, bool )
   THROW_SPEC( std::exception )
 {
   if ( word.size() > 80 )

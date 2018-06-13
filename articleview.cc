@@ -361,6 +361,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   req.setHost( "localhost" );
   Qt4x5::Url::addQueryItem( req, "word", word );
   Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+  if( cfg.preferences.ignoreDiacritics )
+    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   if ( scrollTo.size() )
     Qt4x5::Url::addQueryItem( req, "scrollto", scrollTo );

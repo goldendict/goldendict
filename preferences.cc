@@ -205,6 +205,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
+  ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
 
@@ -417,6 +418,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+  p.ignoreDiacritics = ui.ignoreDiacritics->isChecked();
 
   p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 

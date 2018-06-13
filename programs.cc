@@ -48,7 +48,7 @@ public:
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
-                                          wstring const & )
+                                          wstring const &, bool )
     THROW_SPEC( std::exception );
 
 protected:
@@ -73,7 +73,7 @@ sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
 }
 
 sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
-  wstring const & word, vector< wstring > const &, wstring const & )
+  wstring const & word, vector< wstring > const &, wstring const &, bool )
   THROW_SPEC( std::exception )
 {
   switch( prg.type )

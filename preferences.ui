@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>636</width>
-    <height>427</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1680,18 +1680,8 @@ It is not needed to select this option if you don't use such programs.</string>
          <property name="title">
           <string>Articles</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_17">
-          <item>
-           <widget class="QCheckBox" name="alwaysExpandOptionalParts">
-            <property name="toolTip">
-             <string>Turn this option on to always expand optional parts of articles</string>
-            </property>
-            <property name="text">
-             <string>Expand optional &amp;parts</string>
-            </property>
-           </widget>
-          </item>
-          <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="1" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
              <widget class="QCheckBox" name="collapseBigArticles">
@@ -1740,6 +1730,39 @@ It is not needed to select this option if you don't use such programs.</string>
              </spacer>
             </item>
            </layout>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="ignoreDiacritics">
+            <property name="toolTip">
+             <string>Turn this option on to ignore diacritics while search articles</string>
+            </property>
+            <property name="text">
+             <string>Ignore diacritics while search</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="alwaysExpandOptionalParts">
+            <property name="toolTip">
+             <string>Turn this option on to always expand optional parts of articles</string>
+            </property>
+            <property name="text">
+             <string>Expand optional &amp;parts</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

@@ -217,7 +217,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
     THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
@@ -1602,6 +1603,7 @@ class DslArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   DslDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1610,8 +1612,8 @@ public:
 
   DslArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     DslDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     DslDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new DslArticleRequestRunnable( *this, hasExited ) );
@@ -1651,13 +1653,13 @@ void DslArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -1766,10 +1768,11 @@ void DslArticleRequest::run()
 
 sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new DslArticleRequest( word, alts, *this );
+  return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// DslDictionary::getResource()

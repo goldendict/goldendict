@@ -40,7 +40,7 @@ sptr< Dictionary::WordSearchRequest > BaseTransliterationDictionary::prefixMatch
 
 sptr< Dictionary::DataRequest > BaseTransliterationDictionary::getArticle( wstring const &,
                                                                            vector< wstring > const &,
-                                                                           wstring const & )
+                                                                           wstring const &, bool )
   THROW_SPEC( std::exception )
 { return new Dictionary::DataRequestInstant( false ); }
 

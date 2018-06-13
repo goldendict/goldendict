@@ -383,7 +383,8 @@ public:
   /// 'Websites' feature.
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
-                                          wstring const & context = wstring() )
+                                          wstring const & context = wstring(),
+                                          bool ignoreDiacritics = false )
     THROW_SPEC( std::exception )=0;
 
   /// Loads contents of a resource named 'name' into the 'data' vector. This is

@@ -124,7 +124,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
     THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
@@ -254,18 +255,19 @@ uint32_t decodeBase64( string const & str )
 
 sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & word,
                                                              vector< wstring > const & alts,
-                                                             wstring const & )
+                                                             wstring const &,
+                                                             bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
   try
   {
-    vector< WordArticleLink > chain = findArticles( word );
+    vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
     for( unsigned x = 0; x < alts.size(); ++x )
     {
       /// Make an additional query for each alt
 
-      vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+      vector< WordArticleLink > altChain = findArticles( alts[ x ], ignoreDiacritics );
 
       chain.insert( chain.end(), altChain.begin(), altChain.end() );
     }
@@ -277,6 +279,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
                                       // by only allowing them to appear once.
 
     wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+    if( ignoreDiacritics )
+      wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
     char buf[ 16384 ];
 
@@ -418,6 +422,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
+      if( ignoreDiacritics )
+        headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
       multimap< wstring, string > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
@@ -464,7 +470,7 @@ QString const& DictdDictionary::getDescription()
         return dictionaryDescription;
 
     sptr< Dictionary::DataRequest > req = getArticle( GD_NATIVE_TO_WS( L"00databaseinfo" ),
-                                                      vector< wstring >(), wstring() );
+                                                      vector< wstring >(), wstring(), false );
 
     if( req->dataSize() > 0 )
       dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ), true );

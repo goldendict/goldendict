@@ -285,6 +285,7 @@ struct Preferences
   ScanPopupWindowFlags scanPopupUnpinnedWindowFlags;
   bool scanPopupUnpinnedBypassWMHint;
   bool scanToMainWindow;
+  bool ignoreDiacritics;
 #ifdef HAVE_X11
   bool showScanFlag;
 #endif

@@ -47,7 +47,7 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const &,
-                                                      wstring const & )
+                                                      wstring const &, bool )
     THROW_SPEC( std::exception );
 };
 

@@ -246,7 +246,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const & word,
                                                       vector< wstring > const & alts,
-                                                      wstring const & ) THROW_SPEC( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics ) THROW_SPEC( std::exception );
   virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
   virtual QString const & getDescription();
 
@@ -554,6 +555,7 @@ class MdxArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   MdxDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -562,10 +564,12 @@ public:
 
   MdxArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     MdxDictionary & dict_ ):
+                     MdxDictionary & dict_,
+                     bool ignoreDiacritics_ ):
     word( word_ ),
     alts( alts_ ),
-    dict( dict_ )
+    dict( dict_ ),
+    ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
   }
@@ -604,12 +608,12 @@ void MdxArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for ( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
 
@@ -700,9 +704,9 @@ void MdxArticleRequest::run()
 }
 
 sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, const vector<wstring> & alts,
-                                                         const wstring & ) THROW_SPEC( std::exception )
+                                                         const wstring &, bool ignoreDiacritics ) THROW_SPEC( std::exception )
 {
-  return new MdxArticleRequest( word, alts, *this );
+  return new MdxArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 /// MdxDictionary::getResource

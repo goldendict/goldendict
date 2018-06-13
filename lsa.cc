@@ -177,7 +177,8 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
     THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
@@ -214,16 +215,17 @@ LsaDictionary::LsaDictionary( string const & id,
 
 sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  vector< WordArticleLink > chain = findArticles( word );
+  vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -235,6 +237,8 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -248,6 +252,8 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, string > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?

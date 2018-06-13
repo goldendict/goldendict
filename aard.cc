@@ -263,7 +263,8 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
-                                                        wstring const & )
+                                                        wstring const &,
+                                                        bool ignoreDiacritics )
       THROW_SPEC( std::exception );
 
     virtual QString const& getDescription();
@@ -692,6 +693,7 @@ class AardArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   AardDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -700,8 +702,8 @@ public:
 
   AardArticleRequest( wstring const & word_,
                       vector< wstring > const & alts_,
-                      AardDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                      AardDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new AardArticleRequestRunnable( *this, hasExited ) );
@@ -734,13 +736,13 @@ void AardArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -752,6 +754,8 @@ void AardArticleRequest::run()
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -784,6 +788,8 @@ void AardArticleRequest::run()
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
@@ -836,10 +842,11 @@ void AardArticleRequest::run()
 
 sptr< Dictionary::DataRequest > AardDictionary::getArticle( wstring const & word,
                                                             vector< wstring > const & alts,
-                                                            wstring const & )
+                                                            wstring const &,
+                                                            bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new AardArticleRequest( word, alts, *this );
+  return new AardArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 } // anonymous namespace

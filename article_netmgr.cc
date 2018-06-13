@@ -398,8 +398,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
     }
 
-   
-
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
@@ -424,8 +422,12 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       stream >> contexts;
     }
 
+    // See for ignore diacritics
+
+    bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
+
     if ( groupIsValid && word.size() ) // Require group and word to be passed
-      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
+      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&

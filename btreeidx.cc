@@ -914,6 +914,8 @@ void BtreeIndex::antialias( wstring const & str,
                             bool ignoreDiacritics )
 {
   wstring caseFolded = Folding::applySimpleCaseOnly( gd::normalize( str ) );
+  if( ignoreDiacritics )
+    caseFolded = Folding::applyDiacriticsOnly( caseFolded );
 
   for( unsigned x = chain.size(); x--; )
   {

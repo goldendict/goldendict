@@ -65,7 +65,7 @@ public:
   }
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const & )
+                                          wstring const &, bool )
     THROW_SPEC( std::exception );
 
 protected:
@@ -76,7 +76,7 @@ protected:
 
 sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
                                                  vector< wstring > const & alts,
-                                                 wstring const & )
+                                                 wstring const &, bool )
   THROW_SPEC( std::exception )
 {
   if ( word.size() > 80 )

@@ -174,6 +174,7 @@ Preferences::Preferences():
   scanPopupUnpinnedWindowFlags( SPWF_default ),
   scanPopupUnpinnedBypassWMHint( false ),
   scanToMainWindow( false ),
+  ignoreDiacritics( false ),
 #ifdef HAVE_X11
   showScanFlag( false ),
 #endif
@@ -822,6 +823,7 @@ Class load() THROW_SPEC( exError )
       c.preferences.scanPopupAltModeSecs = preferences.namedItem( "scanPopupAltModeSecs" ).toElement().text().toUInt();
     c.preferences.ignoreOwnClipboardChanges = ( preferences.namedItem( "ignoreOwnClipboardChanges" ).toElement().text() == "1" );
     c.preferences.scanToMainWindow = ( preferences.namedItem( "scanToMainWindow" ).toElement().text() == "1" );
+    c.preferences.ignoreDiacritics = ( preferences.namedItem( "ignoreDiacritics" ).toElement().text() == "1" );
 #ifdef HAVE_X11
     c.preferences.showScanFlag= ( preferences.namedItem( "showScanFlag" ).toElement().text() == "1" );
 #endif
@@ -1704,6 +1706,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "scanToMainWindow" );
     opt.appendChild( dd.createTextNode( c.preferences.scanToMainWindow ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "ignoreDiacritics" );
+    opt.appendChild( dd.createTextNode( c.preferences.ignoreDiacritics ? "1":"0" ) );
     preferences.appendChild( opt );
 
 #ifdef HAVE_X11

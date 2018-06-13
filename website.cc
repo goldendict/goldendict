@@ -64,7 +64,7 @@ public:
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
-                                          wstring const & context )
+                                          wstring const & context, bool )
     THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
@@ -438,7 +438,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 
 sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                                                    vector< wstring > const &,
-                                                   wstring const & context )
+                                                   wstring const & context, bool )
   THROW_SPEC( std::exception )
 {
   QByteArray urlString;
