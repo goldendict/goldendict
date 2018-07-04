@@ -1037,7 +1037,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 
   QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)",
                                  QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*)((?:#[^>]*)?)\\2",
+  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#\\g{2}]*?)((?:#[^>]*)?)\\2",
                                     QRegularExpression::CaseInsensitiveOption );
   QRegularExpression anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)",
                                  QRegularExpression::CaseInsensitiveOption );
@@ -1109,7 +1109,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                          + "gdlookup://localhost/"
                          + match.captured( 3 );
 
-        if( match.lastCapturedIndex() >= 4 )
+        if( match.lastCapturedIndex() >= 4 && !match.captured( 4 ).isEmpty() )
           newTxt += QString( "?gdanchor=" ) + uniquePrefix + match.captured( 4 ).mid( 1 );
 
         newTxt += match.captured( 2 );
