@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_CN">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>About</name>
     <message>
@@ -3823,12 +3823,12 @@ be pressed shortly after the selection is done.</source>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation type="unfinished"></translation>
+        <translation>在 Goldendict 自身窗口口内选择或进行剪贴板操作时不要弹出窗口</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略 Goldendict 自身的选择和剪贴板变更</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="833"/>
@@ -4103,37 +4103,37 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1433"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>扫描——弹出非固定窗口的选项</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1439"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>实验性选项，用来处理扫描——弹出窗口行为错误的情况</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1443"/>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;默认&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1448"/>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>弹出</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1453"/>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>工具</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>该提示可与非默认窗口选项共同使用</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1467"/>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>绕过窗口管理器提示（hint）</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1619"/>
@@ -4158,12 +4158,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1737"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
-        <translation type="unfinished"></translation>
+        <translation>启用该选项以在搜索文章时忽略变音符号</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
         <source>Ignore diacritics while searching</source>
-        <translation type="unfinished"></translation>
+        <translation>搜索时忽略变音符号</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
