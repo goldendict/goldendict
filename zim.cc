@@ -831,7 +831,7 @@ string ZimDictionary::convert( const string & in )
   }
 #endif
 
-  // Occassionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
+  // Occasionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
   // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",

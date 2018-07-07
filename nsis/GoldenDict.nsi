@@ -403,7 +403,7 @@ Section "Uninstall"
 
   StrCmp $2 "1" skip_cfg
 
-  MessageBox MB_YESNO "Delete all configuration data and index? This will save a lot of space, but at the expense of reconfiguring and reindexing everyting if GoldenDict is ever installed again." IDNO skip_cfg
+  MessageBox MB_YESNO "Delete all configuration data and index? This will save a lot of space, but at the expense of reconfiguring and reindexing everything if GoldenDict is ever installed again." IDNO skip_cfg
  
   RMDir /r $APPDATA\GoldenDict
 

@@ -96,7 +96,7 @@ private:
 
   void nextChar() THROW_SPEC( eot );
 
-  /// Infomation for diagnostic purposes
+  /// Information for diagnostic purposes
   string dictionaryName;
   wstring headword;
 };

@@ -209,7 +209,7 @@ protected:
 
 private:
 
-  /// Retrives the article's offset/size in .dict file, and its headword.
+  /// Retrieves the article's offset/size in .dict file, and its headword.
   void getArticleProps( uint32_t articleAddress,
                         string & headword,
                         uint32_t & offset, uint32_t & size );

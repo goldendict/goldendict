@@ -29,7 +29,7 @@
 /// compatibility instead. It's stuck in the middle of nowhere, really.
 /// 
 /// The question is, what are we going to do with all this? When we do Unicode
-/// processing in GoldenDict, we want to use real Unicode charaters, not some
+/// processing in GoldenDict, we want to use real Unicode characters, not some
 /// UTF-16 encoded ones. To that end, we have two options under Windows: first,
 /// use QString, and second, use basic_string< unsigned int >.
 /// While we use QStrings for the GUI and other non-critical code, there is a

@@ -771,7 +771,7 @@ void ArticleRequest::bodyFinished()
       {
         // No definitions were ever found, say so to the user.
 
-        // Larger words are usually whole sentences - don't clutter the ouput
+        // Larger words are usually whole sentences - don't clutter the output
         // with their full bodies.
         footer += ArticleMaker::makeNotFoundBody( word.size() < 40 ? word : "", group );
 

@@ -162,7 +162,7 @@ inline HRESULT SpGetDescription(ISpObjectToken * pObjToken, WCHAR ** ppszDescrip
         {
             LONG   lErrorCode = ERROR_SUCCESS;
 
-            pRegKeyPath = wcschr(pszTemp, L'\\');   // Find the first occurance of '\\' in the absolute registry key path
+            pRegKeyPath = wcschr(pszTemp, L'\\');   // Find the first occurrence of '\\' in the absolute registry key path
             if(pRegKeyPath)
             {
                 *pRegKeyPath = L'\0';
