@@ -409,7 +409,7 @@ div.xdxf
   padding-left: 81px;
 }
 
-.dsl_p, .dsl_p :not(a) /* DSL Feature: Enforce the style even if the childen tags say otherwise, except links */
+.dsl_p, .dsl_p :not(a) /* DSL Feature: Enforce the style even if the children tags say otherwise, except links */
 {
   color: green !important; /* DSL label color must have highest priority */
   font-style: italic;
@@ -453,7 +453,7 @@ div.xdxf
 .dsl_opt,
 .dsl_opt .dsl_ex,
 .dsl_opt .dsl_ex :not(a),
-.dsl_opt .dsl_ex font[color] /* DSL Feature: Enforce the optional zone color even if the childen tags say otherwise */
+.dsl_opt .dsl_ex font[color] /* DSL Feature: Enforce the optional zone color even if the children tags say otherwise */
 {
   color: gray;
 }

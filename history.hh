@@ -20,7 +20,7 @@ public:
   /// An item in history
   struct Item
   {
-    /// Group the search was perfomed in
+    /// Group the search was performed in
     unsigned groupId;
     /// The word that was searched
     QString word;

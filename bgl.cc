@@ -1098,7 +1098,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
                                  idxHeader.resourcesCount, name );
 }
 
-  /// Replaces <CHARSET c="t">1234;</CHARSET> occurences with &#x1234;
+  /// Replaces <CHARSET c="t">1234;</CHARSET> occurrences with &#x1234;
   void BglDictionary::replaceCharsetEntities( string & text )
   {
     QString str = QString::fromUtf8( text.c_str() );

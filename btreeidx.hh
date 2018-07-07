@@ -99,7 +99,7 @@ public:
                          QSet< QString > * headwords,
                          QAtomicInt * isCancelled = 0 );
 
-  /// Retrieve headwords for presented article adresses
+  /// Retrieve headwords for presented article addresses
   void getHeadwordsFromOffsets( QList< uint32_t > & offsets,
                                 QVector< QString > & headwords,
                                 QAtomicInt * isCancelled = 0 );

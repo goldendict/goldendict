@@ -13,7 +13,7 @@
 #include <QRunnable>
 #include "dictionary.hh"
 
-/// This component takes care of finding words. The search is asyncronous.
+/// This component takes care of finding words. The search is asynchronous.
 /// This means the GUI doesn't get blocked during the sometimes lenghtly
 /// process of finding words.
 class WordFinder: public QObject

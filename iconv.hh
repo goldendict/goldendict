@@ -20,7 +20,7 @@ public:
   DEF_EX_STR( exCantInit, "Can't initialize iconv conversion:", Ex )
   DEF_EX( exIncorrectSeq, "Invalid character sequence encountered during character conversion", Ex )
   DEF_EX( exPrematureEnd, "Character sequence ended prematurely during character conversion", Ex )
-  DEF_EX_STR( exOther, "An error has occured during character conversion:", Ex )
+  DEF_EX_STR( exOther, "An error has occurred during character conversion:", Ex )
 
   // Some predefined character sets' names
 
