@@ -4200,6 +4200,11 @@ void MainWindow::editDictionary( Dictionary::Class * dict )
   {
     QString command( cfg.editDictionaryCommandLine );
     command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
+    if( command.contains( "%GDWORD%" ) )
+    {
+      QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
+      command.replace( "%GDWORD%", headword );
+    }
     if( !QProcess::startDetached( command ) )
       QApplication::beep();
   }
