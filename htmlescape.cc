@@ -152,11 +152,11 @@ QString unescape( QString const & str, bool saveFormat )
     if( !saveFormat )
     {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-        tmp.replace( QRegularExpression( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
+        tmp.replace( QRegularExpression( "<(?:\\s*(?:div|h[1-6]|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
                                          QRegularExpression::CaseInsensitiveOption ), " " );
         tmp.remove( QRegularExpression( "<[^>]*>" ) );
 #else
-      tmp.replace( QRegExp( "<(?:\\s*(?:div|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
+      tmp.replace( QRegExp( "<(?:\\s*(?:div|h[1-6]|p(?![alr])|br|li(?![ns])|td|blockquote|/ol))[^>]{0,}>",
                             Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
       tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
 #endif
