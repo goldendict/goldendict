@@ -117,7 +117,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   for( QFileInfoList::const_iterator i = entries.constBegin();
        i != entries.constEnd(); ++i )
   {
-    QString fullName = i->canonicalFilePath();
+    QString fullName = i->absoluteFilePath();
 
     if ( path.recursive && i->isDir() )
     {
