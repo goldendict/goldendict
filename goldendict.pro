@@ -360,7 +360,8 @@ HEADERS += folding.hh \
     gls.hh \
     splitfile.hh \
     favoritespanewidget.hh \
-    cpp_features.hh
+    cpp_features.hh \
+    treeview.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -490,7 +491,8 @@ SOURCES += folding.cc \
     ripemd.cc \
     gls.cc \
     splitfile.cc \
-    favoritespanewidget.cc
+    favoritespanewidget.cc \
+    treeview.cc
 
 win32 {
     FORMS   += texttospeechsource.ui
