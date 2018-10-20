@@ -132,6 +132,26 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
       }
     }
 
+    socket.write( QByteArray( "OPTION MIME\r\n" ) );
+
+    if( !socket.waitForBytesWritten( 1000 ) )
+      break;
+
+    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      return false;
+
+    if( !readLine( socket, reply, errorString, isCancelled ) )
+      break;
+
+    if( reply.left( 3 ) != "250" )
+    {
+      // RFC 2229, 3.10.1.1:
+      // OPTION MIME is a REQUIRED server capability,
+      // all DICT servers MUST implement this command.
+      errorString = "Server doesn't support mime capability: " + reply;
+      return false;
+    }
+
     return true;
   }
 
@@ -620,10 +640,10 @@ void DictServerArticleRequest::run()
 
     for( int i = 0; i < dict.databases.size(); i++ )
     {
-      QString matchReq = QString( "DEFINE " )
+      QString defineReq = QString( "DEFINE " )
                          + dict.databases.at( i )
                          + " \"" + gd::toQString( word ) + "\"\r\n";
-      socket->write( matchReq.toUtf8() );
+      socket->write( defineReq.toUtf8() );
       socket->waitForBytesWritten( 1000 );
 
       QString reply;
@@ -741,6 +761,28 @@ void DictServerArticleRequest::run()
                            + " [" + dbID.toUtf8().data() + "]:"
                            + "</div>";
 
+            // Retreive MIME headers if any
+
+            QString contentType = QString( "text/plain" );
+            for( ; ; )
+            {
+              if( !readLine( *socket, reply, errorString, isCancelled ) )
+                break;
+
+              if( reply == "\r\n" )
+                break;
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+              static QRegularExpression contentTypeExpr( "Content-Type\\s*:\\s*text/html(.*)",
+                                                         QRegularExpression::CaseInsensitiveOption );
+#else
+              QRegExp contentTypeExpr( "Content-Type\\s*:\\s*text/html(.*)", Qt::CaseInsensitive );
+#endif
+              QRegularExpressionMatch match = contentTypeExpr.match( reply );
+              if( match.hasMatch() )
+                contentType = QString( "text/html" );
+            }
+
             // Retrieve article text
 
             articleText.clear();
@@ -776,7 +818,12 @@ void DictServerArticleRequest::run()
             QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
             QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
 #endif
-            string articleStr = Html::preformat( articleText.toUtf8().data() );
+            string articleStr;
+            if( contentType != "text/html" )
+              articleStr = Html::preformat( articleText.toUtf8().data() );
+            else
+              articleStr = articleText.toUtf8().data();
+
             articleText = QString::fromUtf8( articleStr.c_str(), articleStr.size() )
                           .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>" );
 
