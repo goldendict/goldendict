@@ -763,7 +763,13 @@ void DictServerArticleRequest::run()
 
             // Retreive MIME headers if any
 
-            QString contentType = QString( "text/plain" );
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            static QRegularExpression contentTypeExpr( "Content-Type\\s*:\\s*text/html",
+                                                       QRegularExpression::CaseInsensitiveOption );
+#else
+            QRegExp contentTypeExpr( "Content-Type\\s*:\\s*text/html", Qt::CaseInsensitive );
+#endif
+            bool contentInHtml = false;
             for( ; ; )
             {
               if( !readLine( *socket, reply, errorString, isCancelled ) )
@@ -773,14 +779,13 @@ void DictServerArticleRequest::run()
                 break;
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-              static QRegularExpression contentTypeExpr( "Content-Type\\s*:\\s*text/html(.*)",
-                                                         QRegularExpression::CaseInsensitiveOption );
-#else
-              QRegExp contentTypeExpr( "Content-Type\\s*:\\s*text/html(.*)", Qt::CaseInsensitive );
-#endif
               QRegularExpressionMatch match = contentTypeExpr.match( reply );
               if( match.hasMatch() )
-                contentType = QString( "text/html" );
+                contentInHtml = true;
+#else
+              if( contentTypeExpr.indexIn( reply ) >= 0 )
+                contentInHtml = true;
+#endif
             }
 
             // Retrieve article text
@@ -819,10 +824,10 @@ void DictServerArticleRequest::run()
             QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
 #endif
             string articleStr;
-            if( contentType != "text/html" )
-              articleStr = Html::preformat( articleText.toUtf8().data() );
-            else
+            if( contentInHtml )
               articleStr = articleText.toUtf8().data();
+            else
+              articleStr = Html::preformat( articleText.toUtf8().data() );
 
             articleText = QString::fromUtf8( articleStr.c_str(), articleStr.size() )
                           .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>" );
