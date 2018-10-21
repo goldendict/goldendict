@@ -88,6 +88,8 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
       return false;
     }
 
+    QString msgId = reply.mid( reply.lastIndexOf(" ") ).trimmed();
+
     socket.write( QByteArray( "CLIENT GoldenDict\r\n") );
     if( !socket.waitForBytesWritten( 1000 ) )
       break;
@@ -101,28 +103,30 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
     if( !serverUrl.userInfo().isEmpty() )
     {
       QString authCommand = QString( "AUTH " );
+      QString authString = msgId;
 
       int pos = serverUrl.userInfo().indexOf( QRegExp( "[:;]" ) );
       if( pos > 0 )
-        authCommand += serverUrl.userInfo().left( pos )
-                       + " " + serverUrl.userInfo().mid( pos + 1 );
+      {
+        authCommand += serverUrl.userInfo().left( pos );
+        authString += serverUrl.userInfo().mid( pos + 1 );
+      }
       else
         authCommand += serverUrl.userInfo();
 
+      authCommand += " ";
+      authCommand += QCryptographicHash::hash( authString.toUtf8(), QCryptographicHash::Md5 ).toHex();
       authCommand += "\r\n";
 
       socket.write( authCommand.toUtf8() );
 
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-        return false;
-
-      if( socket.waitForBytesWritten( 1000 ) )
+      if( !socket.waitForBytesWritten( 1000 ) )
         break;
 
       if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
         return false;
 
-      if( readLine( socket, reply, errorString, isCancelled ) )
+      if( !readLine( socket, reply, errorString, isCancelled ) )
         break;
 
       if( reply.left( 3 ) != "230" )
