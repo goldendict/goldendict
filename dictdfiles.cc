@@ -718,7 +718,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
                   if ( articleBody )
                   {
-                    char * eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
+                    char * eol;
+                    if ( !strncmp( articleBody, "00databaseshort", 15 ) || !strncmp( articleBody, "00-database-short", 17 ) )
+                      eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
+                    else
+                      eol = articleBody; // No headword itself
                     if ( eol )
                     {
                       while( *eol && Utf8::isspace( *eol ) ) ++eol; // skip spaces
