@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>About</name>
     <message>
@@ -16,7 +16,7 @@
     <message>
         <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation>(c) 2008-2016 Konstantin Isakov (ikm@goldendict.org)</translation>
+        <translation>(c) 2008-2018 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="125"/>
@@ -288,7 +288,7 @@
     <message>
         <location filename="../articleview.cc" line="2036"/>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENZIONE: Lettore audio: %1</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
@@ -342,7 +342,7 @@
     <message>
         <location filename="../articleview.cc" line="1980"/>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile riprodurre il file audio: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2029"/>
@@ -637,7 +637,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation>Esporta voci in un file</translation>
+        <translation>Esporta lemmi in un file</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
@@ -657,7 +657,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictheadwords.ui" line="101"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation>Premi questo pulsante per applicare il filtro all&apos;elenco di voci</translation>
+        <translation>Premi questo pulsante per applicare il filtro all&apos;elenco dei lemmi</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="104"/>
@@ -667,7 +667,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation>Spuntanto questa casella ogni filtro modificato verrà immediatamente applicato all&apos;elenco delle voci</translation>
+        <translation>Spuntanto questa casella ogni filtro modificato verrà immediatamente applicato all&apos;elenco dei lemmi</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="120"/>
@@ -702,12 +702,12 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictheadwords.cc" line="247"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation>Voci uniche totali: %1, filtrate: %2</translation>
+        <translation>Lemmi unici totali: %1, filtrati: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="264"/>
         <source>Save headwords to file</source>
-        <translation>Salva voci in un file</translation>
+        <translation>Salva lemmi in un file</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="266"/>
@@ -717,7 +717,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictheadwords.cc" line="290"/>
         <source>Export headwords...</source>
-        <translation>Esporta voci...</translation>
+        <translation>Esporta lemmi...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="290"/>
@@ -770,12 +770,12 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation>Mostra tutte le voci univoche del dizionario</translation>
+        <translation>Mostra tutti i lemmi univoci del dizionario</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation>Voci</translation>
+        <translation>Lemmi</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -892,7 +892,7 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation>Voci del dizionario</translation>
+        <translation>Lemmi del dizionario</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -1147,12 +1147,12 @@ tra l&apos;ortografia classica e scolastica in cirillico)</translation>
     <message>
         <location filename="../fulltextsearch.ui" line="89"/>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora caratteri diacritici</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="112"/>
         <source>Articles found:</source>
-        <translation>Voci trovate: </translation>
+        <translation>Voci trovate:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="134"/>
@@ -2776,7 +2776,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
         <location filename="../mainwindow.cc" line="4561"/>
         <location filename="../mainwindow.cc" line="4588"/>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi la scheda corrente dai Preferiti</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3898"/>
@@ -2823,7 +2823,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.cc" line="4546"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovere il  lemma  &quot;%1&quot; dai Preferiti?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="842"/>
@@ -2864,7 +2864,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../mainwindow.cc" line="4299"/>
         <source>Dictionary headwords</source>
-        <translation>Voci del dizionario</translation>
+        <translation>Lemmi del dizionario</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4301"/>
@@ -3330,7 +3330,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../multimediaaudioplayer.cc" line="24"/>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile aprire il buffer audio per la lettura.</translation>
     </message>
 </context>
 <context>
@@ -3412,7 +3412,7 @@ Clicca &lt;b&gt;Scarica&lt;/b&gt; per accedere alla pagina di scaricamento.</tra
     <message>
         <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
-        <translation>Voci del dizionario</translation>
+        <translation>Lemmi del dizionario</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="292"/>
@@ -3541,7 +3541,8 @@ ne causerà soltanto l&apos;iconizzazione nella barra di notifica.</translation>
         <location filename="../preferences.ui" line="417"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Spuntando questa casella, si attiva sin dall&apos;inizio l&apos;attività di scansione e traduzione delle parole puntate. 
+        <translation>Spuntando questa casella, si attiva sin dall&apos;inizio l&apos;attività di scansione e traduzione delle parole puntate.
+Le parole tradotte verranno mostrate in una finestra di dialogo a comparsa.
 Al contrario se si deseleziona questa casella, scansione e traduzione vengono disabilitate.</translation>
     </message>
     <message>
@@ -3651,6 +3652,7 @@ you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
         <translation>Spuntando questa casella, si abilita l&apos;attività di scansione e traduzione delle parole puntate. 
+Le parole tradotte verranno mostrate in una finestra di dialogo a comparsa. 
 Al contrario se si deseleziona questa casella, scansione e traduzione vengono disabilitate. 
 In altre parole, attivando questa modalità, per tradurre una parola sarà sufficiente puntarla col mouse. 
 Opzionalmente, è anche possibile avviare scansione e traduzione, soltanto se contemporaneamente 
@@ -3671,7 +3673,8 @@ si premono i tasti prescelti.</translation>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
         <translation>Spuntando questa casella, si attiva l&apos;attività di scansione e traduzione 
-delle parole puntate quando i tasti scelti vengono effettivamente premuti.</translation>
+delle parole puntate quando i tasti scelti vengono effettivamente premuti.
+Le parole tradotte verranno mostrate in una finestra di dialogo a comparsa.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="432"/>
@@ -3800,12 +3803,12 @@ entro il limite di secondi qui specificato.</translation>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Non mostrare alcuna finestra a comparsa se la selezione del testo all&apos;interno della finestra di dialogo di GoldenDict o negli Appunti di Windows sono cambiate</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>ignora se la selezione del testo all&apos;interno di GoldenDict o degli Appunti di Windows vengono modificate</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="698"/>
@@ -3830,17 +3833,17 @@ entro il limite di secondi qui specificato.</translation>
     <message>
         <location filename="../preferences.ui" line="919"/>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>Riproduce i file audio mediante il supporto audio incorporato</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="922"/>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizza lettore interno</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli l&apos;applicazione per la riproduzione dell&apos;audio</translation>
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
@@ -4004,37 +4007,37 @@ Non è necessario attivare questa opzione se non si usano tali programmi.</trans
     <message>
         <location filename="../preferences.ui" line="1433"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Finestre a comparsa (non fissate sullo schermo) dei risultati tradotti</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1439"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperimento con le finestre a comparsa non predefinite da usare in caso la finestra dei risultati tradotti che non è stata fissata sullo schermo, non funzionasse correttamente</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1443"/>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;preimpostato&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1448"/>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Finestra a comparsa</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1453"/>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Strumento</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Questo suggerimento può essere combinato con le finestre a comparsa non predefinite</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1467"/>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Suggerimento per raggirare il gestore finestre</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1507"/>
@@ -4086,12 +4089,12 @@ Non è necessario attivare questa opzione se non si usano tali programmi.</trans
     <message>
         <location filename="../preferences.ui" line="1737"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Spuntare questa casella per ignorare i caratteri diacritici durante la ricerca dei lemmi</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
         <source>Ignore diacritics while searching</source>
-        <translation type="unfinished"></translation>
+        <translation>ignora i caratteri diacritici durante la ricerca</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
@@ -4174,7 +4177,7 @@ essere instabile, ma dovrebbe supportare una maggiore scelta di formati audio.</
     <message>
         <location filename="../preferences.ui" line="949"/>
         <source>Enter audio player command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserire la riga di comando per il lettore audio</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
@@ -4466,7 +4469,7 @@ e si collega al sito del programma.</translation>
     <message>
         <location filename="../ffmpegaudio.cc" line="229"/>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_context3() fallito.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="238"/>
