@@ -93,8 +93,8 @@ win32 {
         } else {
           LIBS += -l$$HUNSPELL_LIB
         }
+        QMAKE_CXXFLAGS += -Wextra -Wempty-body
     }
-    QMAKE_CXXFLAGS += -Wextra -Wempty-body
 
     LIBS += -liconv \
         -lwsock32 \
