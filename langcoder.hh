@@ -35,8 +35,6 @@ public:
 
   static QString intToCode2( quint32 );
 
-  static quint32 code3toInt(const std::string& code3);
-
   /// Finds the id for the given language name, written in english. The search
   /// is case- and punctuation insensitive.
   static quint32 findIdForLanguage( gd::wstring const & );

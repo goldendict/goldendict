@@ -1061,12 +1061,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idxHeader.wordCount = wordCount;
 
           if( langFrom.size() == 3)
-              idxHeader.langFrom = LangCoder::code3toInt( langFrom.c_str() );
+              idxHeader.langFrom = LangCoder::findIdForLanguageCode3( langFrom.c_str() );
           else if( langFrom.size() == 2 )
               idxHeader.langFrom = LangCoder::code2toInt( langFrom.c_str() );
 
           if( langTo.size() == 3)
-              idxHeader.langTo = LangCoder::code3toInt( langTo.c_str() );
+              idxHeader.langTo = LangCoder::findIdForLanguageCode3( langTo.c_str() );
           else if( langTo.size() == 2 )
               idxHeader.langTo = LangCoder::code2toInt( langTo.c_str() );
 
