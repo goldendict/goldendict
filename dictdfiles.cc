@@ -161,8 +161,11 @@ DictdDictionary::DictdDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   // Open the .dict file
 

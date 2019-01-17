@@ -289,11 +289,14 @@ namespace
 
     size_t len = idx.read< uint32_t >();
 
-    vector< char > nameBuf( len );
+    if( len )
+    {
+      vector< char > nameBuf( len );
 
-    idx.read( &nameBuf.front(), len );
+      idx.read( &nameBuf.front(), len );
 
-    dictionaryName = string( &nameBuf.front(), len );
+      dictionaryName = string( &nameBuf.front(), len );
+    }
 
     // Initialize the index
 

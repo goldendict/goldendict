@@ -310,12 +310,18 @@ DslDictionary::DslDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   vector< char > sName( idx.read< uint32_t >() );
-  idx.read( &sName.front(), sName.size() );
-  preferredSoundDictionary = string( &sName.front(), sName.size() );
+  if( sName.size() > 0 )
+  {
+    idx.read( &sName.front(), sName.size() );
+    preferredSoundDictionary = string( &sName.front(), sName.size() );
+  }
 
   // Everything else would be done in deferred init
 }

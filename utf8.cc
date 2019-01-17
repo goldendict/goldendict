@@ -133,6 +133,9 @@ long decode( char const * in_, size_t inSize, wchar * out_ )
 
 string encode( wstring const & in ) throw()
 {
+  if( in.size() == 0 )
+    return string();
+
   std::vector< char > buffer( in.size() * 4 );
 
   return string( &buffer.front(),

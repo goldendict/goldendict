@@ -204,8 +204,11 @@ EpwingDictionary::EpwingDictionary( string const & id,
 {
   vector< char > data( idxHeader.nameSize );
   idx.seek( sizeof( idxHeader ) );
-  idx.read( &data.front(), idxHeader.nameSize );
-  bookName = string( &data.front(), idxHeader.nameSize );
+  if( data.size() > 0 )
+  {
+    idx.read( &data.front(), idxHeader.nameSize );
+    bookName = string( &data.front(), idxHeader.nameSize );
+  }
 
   // Initialize eBook
 
