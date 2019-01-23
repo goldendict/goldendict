@@ -28,9 +28,19 @@ greaterThan(QT_MAJOR_VERSION, 4) {
           webkitwidgets \
           printsupport \
           help
+
+    # QMediaPlayer is not available in Qt4.
+    !CONFIG( no_qtmultimedia_player ) {
+      QT += multimedia
+      DEFINES += MAKE_QTMULTIMEDIA_PLAYER
+    }
 } else {
     QT += webkit
     CONFIG += help
+}
+
+!CONFIG( no_ffmpeg_player ) {
+  DEFINES += MAKE_FFMPEG_PLAYER
 }
 
 QT += sql
@@ -45,8 +55,6 @@ LIBS += \
         -lz \
         -lbz2 \
         -llzo2
-
-!isEmpty(DISABLE_INTERNAL_PLAYER): DEFINES += DISABLE_INTERNAL_PLAYER
 
 win32 {
     TARGET = GoldenDict
@@ -85,6 +93,7 @@ win32 {
         } else {
           LIBS += -l$$HUNSPELL_LIB
         }
+        QMAKE_CXXFLAGS += -Wextra -Wempty-body
     }
 
     LIBS += -liconv \
@@ -97,7 +106,7 @@ win32 {
     LIBS += -lvorbisfile \
         -lvorbis \
         -logg
-    isEmpty(DISABLE_INTERNAL_PLAYER) {
+    !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
             -lavutil-gd \
             -lavformat-gd \
@@ -143,7 +152,7 @@ unix:!mac {
         vorbis \
         ogg \
         hunspell
-    isEmpty(DISABLE_INTERNAL_PLAYER) {
+    !CONFIG( no_ffmpeg_player ) {
         PKGCONFIG += ao \
             libavutil \
             libavformat \
@@ -193,7 +202,7 @@ mac {
         -logg \
         -lhunspell-1.6.1 \
         -llzo2
-    isEmpty(DISABLE_INTERNAL_PLAYER) {
+    !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
             -lavutil-gd \
             -lavformat-gd \
@@ -264,6 +273,11 @@ HEADERS += folding.hh \
     article_maker.hh \
     scanpopup.hh \
     articleview.hh \
+    audioplayerinterface.hh \
+    audioplayerfactory.hh \
+    ffmpegaudioplayer.hh \
+    multimediaaudioplayer.hh \
+    externalaudioplayer.hh \
     externalviewer.hh \
     wordfinder.hh \
     groupcombobox.hh \
@@ -345,7 +359,9 @@ HEADERS += folding.hh \
     ripemd.hh \
     gls.hh \
     splitfile.hh \
-    favoritespanewidget.hh
+    favoritespanewidget.hh \
+    cpp_features.hh \
+    treeview.hh
 
 FORMS += groups.ui \
     dictgroupwidget.ui \
@@ -394,6 +410,9 @@ SOURCES += folding.cc \
     article_maker.cc \
     scanpopup.cc \
     articleview.cc \
+    audioplayerfactory.cc \
+    multimediaaudioplayer.cc \
+    externalaudioplayer.cc \
     externalviewer.cc \
     wordfinder.cc \
     groupcombobox.cc \
@@ -472,7 +491,8 @@ SOURCES += folding.cc \
     ripemd.cc \
     gls.cc \
     splitfile.cc \
-    favoritespanewidget.cc
+    favoritespanewidget.cc \
+    treeview.cc
 
 win32 {
     FORMS   += texttospeechsource.ui

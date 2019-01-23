@@ -190,7 +190,7 @@
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
-        <translation>Lỗi chạy trình chơi nhạc khi chơi tệp âm thanh: %1</translation>
+        <translation type="obsolete">Lỗi chạy trình chơi nhạc khi chơi tệp âm thanh: %1</translation>
     </message>
     <message>
         <source>Failed to create temporary file.</source>
@@ -290,7 +290,7 @@
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation>CẢNH BÁO: Trình chơi âm thanh FFmpeg: %1</translation>
+        <translation type="obsolete">CẢNH BÁO: Trình chơi âm thanh FFmpeg: %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
@@ -307,6 +307,14 @@
     <message>
         <source>Video: %1</source>
         <translation>Video: %1</translation>
+    </message>
+    <message>
+        <source>Failed to play sound file: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WARNING: Audio Player: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -943,6 +951,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ignore words order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore diacritics</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2643,6 +2655,13 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
 </context>
 <context>
+    <name>MultimediaAudioPlayer</name>
+    <message>
+        <source>Couldn&apos;t open audio buffer for reading.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OrderAndProps</name>
     <message>
         <source>Form</source>
@@ -3272,11 +3291,11 @@ Không cần bật chức năng này nếu bạn không cần dùng.</translatio
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation>Phát các tệp âm thanh thông qua FFmpeg(libav) và libao</translation>
+        <translation type="obsolete">Phát các tệp âm thanh thông qua FFmpeg(libav) và libao</translation>
     </message>
     <message>
         <source>Use internal player</source>
-        <translation>Dùng trình phát âm thanh tích hợp</translation>
+        <translation type="obsolete">Dùng trình phát âm thanh tích hợp</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
@@ -3375,6 +3394,66 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Show scan flag when word is selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play audio files via built-in audio support</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use internal player:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose audio back end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter audio player command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ScanPopup unpinned window flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;default&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Popup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This hint can be combined with non-default window flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bypass window manager hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore diacritics while searching</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3543,6 +3622,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Date: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>avcodec_alloc_context3() failed.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

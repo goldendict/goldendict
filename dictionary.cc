@@ -78,7 +78,7 @@ size_t WordSearchRequest::matchesCount()
   return matches.size();
 }
 
-WordMatch WordSearchRequest::operator [] ( size_t index ) throw( exIndexOutOfRange )
+WordMatch WordSearchRequest::operator [] ( size_t index ) THROW_SPEC( exIndexOutOfRange )
 {
   Mutex::Lock _( dataMutex );
   
@@ -88,7 +88,7 @@ WordMatch WordSearchRequest::operator [] ( size_t index ) throw( exIndexOutOfRan
   return matches[ index ];
 }
 
-vector< WordMatch > & WordSearchRequest::getAllMatches() throw( exRequestUnfinished )
+vector< WordMatch > & WordSearchRequest::getAllMatches() THROW_SPEC( exRequestUnfinished )
 {
   if ( !isFinished() )
     throw exRequestUnfinished();
@@ -117,7 +117,7 @@ long DataRequest::dataSize()
 }
 
 void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
-  throw( exSliceOutOfRange )
+  THROW_SPEC( exSliceOutOfRange )
 {
   if ( size == 0 )
     return;
@@ -130,7 +130,7 @@ void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
   memcpy( buffer, &data[ offset ], size );
 }
 
-vector< char > & DataRequest::getFullData() throw( exRequestUnfinished )
+vector< char > & DataRequest::getFullData() THROW_SPEC( exRequestUnfinished )
 {
   if ( !isFinished() )
     throw exRequestUnfinished();
@@ -152,13 +152,13 @@ sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
                                                unsigned /*minLength*/,
                                                unsigned /*maxSuffixVariation*/,
                                                unsigned long /*maxResults*/ )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new WordSearchRequestInstant();
 }
 
 sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new WordSearchRequestInstant();
 }
@@ -170,12 +170,12 @@ vector< wstring > Class::getAlternateWritings( wstring const & )
 }
 
 sptr< DataRequest > Class::getResource( string const & /*name*/ )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new DataRequestInstant( false );
 }
 
-sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool )
+sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool, bool )
 {
   return new DataRequestInstant( false );
 }

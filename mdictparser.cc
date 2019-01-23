@@ -616,7 +616,7 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
   // cache the index, the headWordIndex is already sorted
   size_t idx = 0;
 
-  for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); i++ )
+  for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); ++i )
   {
     if ( recordBlockInfos_[idx].endPos <= i->first )
       idx = RecordIndex::bsearch( recordBlockInfos_, i->first );

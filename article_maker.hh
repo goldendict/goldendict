@@ -54,7 +54,8 @@ public:
                                                      QMap< QString, QString > const & contexts,
                                                      QSet< QString > const & mutedDicts =
                                                        QSet< QString >(),
-                                                     QStringList const & dictIDs = QStringList() ) const;
+                                                     QStringList const & dictIDs = QStringList(),
+                                                     bool ignoreDiacritics = false ) const;
 
   /// Makes up a text which states that no translation for the given word
   /// was found. Sometimes it's better to call this directly when it's already
@@ -124,6 +125,7 @@ class ArticleRequest: public Dictionary::DataRequest
   bool firstCompoundWasFound;
   int articleSizeLimit;
   bool needExpandOptionalParts;
+  bool ignoreDiacritics;
 
 public:
 
@@ -131,7 +133,8 @@ public:
                   QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
                   std::string const & header,
-                  int sizeLimit, bool needExpandOptionalParts_ );
+                  int sizeLimit, bool needExpandOptionalParts_,
+                  bool ignoreDiacritics = false );
 
   virtual void cancel();
 //  { finish(); } // Add our own requests cancellation here

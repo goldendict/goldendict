@@ -163,8 +163,9 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
-                                                        wstring const & )
-      throw( std::exception );
+                                                        wstring const &,
+                                                        bool ignoreDiacritics )
+      THROW_SPEC( std::exception );
 
     virtual QString const & getDescription();
 
@@ -172,7 +173,8 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
                                                               int maxResults,
-                                                              bool ignoreWordsOrder );
+                                                              bool ignoreWordsOrder,
+                                                              bool ignoreDiacritics );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -210,8 +212,11 @@ SdictDictionary::SdictDictionary( string const & id,
 
     idx.seek( sizeof( idxHeader ) );
     vector< char > dName( idx.read< uint32_t >() );
-    idx.read( &dName.front(), dName.size() );
-    dictionaryName = string( &dName.front(), dName.size() );
+    if( dName.size() > 0 )
+    {
+      idx.read( &dName.front(), dName.size() );
+      dictionaryName = string( &dName.front(), dName.size() );
+    }
 
     // Initialize the index
 
@@ -477,9 +482,10 @@ sptr< Dictionary::DataRequest > SdictDictionary::getSearchResults( QString const
                                                                    int searchMode, bool matchCase,
                                                                    int distanceBetweenWords,
                                                                    int maxResults,
-                                                                   bool ignoreWordsOrder )
+                                                                   bool ignoreWordsOrder,
+                                                                   bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 /// SdictDictionary::getArticle()
@@ -513,6 +519,7 @@ class SdictArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   SdictDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -521,8 +528,8 @@ public:
 
   SdictArticleRequest( wstring const & word_,
                        vector< wstring > const & alts_,
-                       SdictDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                       SdictDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new SdictArticleRequestRunnable( *this, hasExited ) );
@@ -555,13 +562,13 @@ void SdictArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -573,6 +580,8 @@ void SdictArticleRequest::run()
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -602,6 +611,8 @@ void SdictArticleRequest::run()
 
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+      if( ignoreDiacritics )
+        headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
       multimap< wstring, pair< string, string > > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
@@ -663,10 +674,11 @@ void SdictArticleRequest::run()
 
 sptr< Dictionary::DataRequest > SdictDictionary::getArticle( wstring const & word,
                                                              vector< wstring > const & alts,
-                                                             wstring const & )
-  throw( std::exception )
+                                                             wstring const &,
+                                                             bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new SdictArticleRequest( word, alts, *this );
+  return new SdictArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 QString const& SdictDictionary::getDescription()
@@ -743,7 +755,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

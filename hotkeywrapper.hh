@@ -192,11 +192,28 @@ public:
   {}
 };
 
-class QHotkeyApplication : public QtSingleApplication
+// Intermediate class to avoid misunderstanding of #ifdef's
+// by Qt meta-object compiler
+
+class QIntermediateApplication : public QtSingleApplication
 #if defined( Q_OS_WIN ) && IS_QT_5
-    , public QAbstractNativeEventFilter
+        , public QAbstractNativeEventFilter
 #endif
 {
+public:
+  QIntermediateApplication( int & argc, char ** argv ) :
+    QtSingleApplication( argc, argv )
+  {}
+
+  QIntermediateApplication( QString const & id, int & argc, char ** argv ) :
+    QtSingleApplication( id, argc, argv )
+  {}
+};
+
+class QHotkeyApplication : public QIntermediateApplication
+{
+  Q_OBJECT
+
   friend class HotkeyWrapper;
 
   QList< DataCommitter * > dataCommitters;
@@ -208,8 +225,11 @@ public:
   void addDataCommiter( DataCommitter & );
   void removeDataCommiter( DataCommitter & );
 
+private slots:
   /// This calls all data committers.
-  virtual void commitData( QSessionManager & );
+  void hotkeyAppCommitData( QSessionManager & );
+
+  void hotkeyAppSaveState( QSessionManager & );
 
 protected:
   void registerWrapper(HotkeyWrapper *wrapper);

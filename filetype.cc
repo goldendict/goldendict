@@ -27,6 +27,9 @@ string simplifyString( string const & str )
   while( endPos && Utf8::isspace( str[ endPos - 1 ] ) )
     --endPos;
 
+  if( endPos <= beginPos )
+    return string();
+
   result.reserve( endPos - beginPos );
 
   while( beginPos < endPos )
@@ -85,6 +88,7 @@ bool isNameOfVideo( string const & name )
     endsWith( s, ".flv" ) ||
     endsWith( s, ".divx" ) ||
     endsWith( s, ".3gp" ) ||
+    endsWith( s, ".webm" ) ||
     endsWith( s, ".mov" );
 }
 

@@ -55,7 +55,7 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
-                                                 unsigned long /*maxResults*/ ) throw( std::exception )
+                                                 unsigned long /*maxResults*/ ) THROW_SPEC( std::exception )
   {
     sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
 
@@ -65,8 +65,8 @@ public:
   }
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const & )
-    throw( std::exception );
+                                          wstring const &, bool )
+    THROW_SPEC( std::exception );
 
 protected:
 
@@ -76,8 +76,8 @@ protected:
 
 sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
                                                  vector< wstring > const & alts,
-                                                 wstring const & )
-  throw( std::exception )
+                                                 wstring const &, bool )
+  THROW_SPEC( std::exception )
 {
   if ( word.size() > 80 )
   {
@@ -372,7 +372,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::Forvo const & forvo,
                                       QNetworkAccessManager & mgr )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
 

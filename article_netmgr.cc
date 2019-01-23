@@ -16,7 +16,7 @@
 
 using std::string;
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
 
   // SecurityWhiteList
 
@@ -185,7 +185,9 @@ using std::string;
 
   void AllowFrameReply::readDataFromBase()
   {
-    QByteArray data = baseReply->readAll();
+    QByteArray data;
+    data.resize( baseReply->bytesAvailable() );
+    baseReply->read( data.data(), data.size() );
     buffer += data;
     emit readyRead();
   }
@@ -253,7 +255,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
     // Workaround of same-origin policy
     if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
         && req.hasRawHeader( "Referer" ) )
@@ -355,7 +357,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050200 // Qt 5.2+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else
@@ -396,8 +398,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
     }
 
-   
-
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
@@ -422,8 +422,12 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
       stream >> contexts;
     }
 
+    // See for ignore diacritics
+
+    bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
+
     if ( groupIsValid && word.size() ) // Require group and word to be passed
-      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts );
+      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&

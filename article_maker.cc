@@ -256,11 +256,10 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
   return result;
 }
 
-sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
-  QString const & inWord, unsigned groupId,
+sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & inWord, unsigned groupId,
   QMap< QString, QString > const & contexts,
   QSet< QString > const & mutedDicts,
-  QStringList const & dictIDs ) const
+  QStringList const & dictIDs , bool ignoreDiacritics ) const
 {
   if( !dictIDs.isEmpty() )
   {
@@ -382,13 +381,13 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, unmutedDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
-                               needExpandOptionalParts );
+                               needExpandOptionalParts, ignoreDiacritics );
   }
   else
     return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, activeDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
-                               needExpandOptionalParts );
+                               needExpandOptionalParts, ignoreDiacritics );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -471,13 +470,14 @@ ArticleRequest::ArticleRequest(
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
   string const & header,
-  int sizeLimit, bool needExpandOptionalParts_ ):
+  int sizeLimit, bool needExpandOptionalParts_, bool ignoreDiacritics_ ):
     word( word_ ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
 ,   articleSizeLimit( sizeLimit )
 ,   needExpandOptionalParts( needExpandOptionalParts_ )
+,   ignoreDiacritics( ignoreDiacritics_ )
 {
   // No need to lock dataMutex on construction
 
@@ -552,7 +552,8 @@ void ArticleRequest::altSearchFinished()
       {
         sptr< Dictionary::DataRequest > r =
           activeDicts[ x ]->getArticle( wordStd, altsVector,
-                                        gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
+                                        gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ),
+                                        ignoreDiacritics );
 
         connect( r.get(), SIGNAL( finished() ),
                  this, SLOT( bodyFinished() ), Qt::QueuedConnection );
@@ -770,7 +771,7 @@ void ArticleRequest::bodyFinished()
       {
         // No definitions were ever found, say so to the user.
 
-        // Larger words are usually whole sentences - don't clutter the ouput
+        // Larger words are usually whole sentences - don't clutter the output
         // with their full bodies.
         footer += ArticleMaker::makeNotFoundBody( word.size() < 40 ? word : "", group );
 

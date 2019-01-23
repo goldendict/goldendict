@@ -266,18 +266,6 @@ QString LangCoder::intToCode2( quint32 val )
   return QString::fromLatin1( code, 2 );
 }
 
-quint32 LangCoder::code3toInt(const std::string& code3)
-{
-  if (code3.length() < 2)
-    return 0;
-
-  // this is temporary
-  char code1 = tolower( code3.at(1) );
-  char code0 = tolower( code3.at(0) );
-
-  return ( ((quint32)code1) << 8 ) + (quint32)code0;
-}
-
 quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 {
   gd::wstring langFolded = Folding::apply( lang );

@@ -157,7 +157,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
       el.setAttribute( "class", "xdxf_ex_old" );
   }
   
-  nodes = dd.elementsByTagName( "mrkd" ); // marked out words in tranlations/examples of usage
+  nodes = dd.elementsByTagName( "mrkd" ); // marked out words in translations/examples of usage
 
   while( nodes.size() )
   {

@@ -13,6 +13,7 @@
 #include <QVector>
 #include <QSet>
 #include <QList>
+#include "cpp_features.hh"
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
@@ -84,7 +85,7 @@ public:
 
   /// Finds articles that match the given string. A case-insensitive search
   /// is performed.
-  vector< WordArticleLink > findArticles( wstring const & );
+  vector< WordArticleLink > findArticles( wstring const &, bool ignoreDiacritics = false );
 
   /// Find all unique article links in the index
   void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
@@ -98,7 +99,7 @@ public:
                          QSet< QString > * headwords,
                          QAtomicInt * isCancelled = 0 );
 
-  /// Retrieve headwords for presented article adresses
+  /// Retrieve headwords for presented article addresses
   void getHeadwordsFromOffsets( QList< uint32_t > & offsets,
                                 QVector< QString > & headwords,
                                 QAtomicInt * isCancelled = 0 );
@@ -133,7 +134,7 @@ protected:
 
   /// Drops any alises which arose due to folding. Only case-folded aliases
   /// are left.
-  void antialias( wstring const &, vector< WordArticleLink > & );
+  void antialias( wstring const &, vector< WordArticleLink > &, bool ignoreDiactitics );
 
 protected:
 
@@ -165,13 +166,13 @@ public:
   /// need not to implement this function.
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
                                                               unsigned minLength,
                                                               unsigned maxSuffixVariation,
                                                               unsigned long maxResults )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual bool isLocalDictionary()
   { return true; }

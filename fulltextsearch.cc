@@ -137,6 +137,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   groups( groups_ ),
   group( 0 ),
   ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
+  ignoreDiacritics( cfg_.preferences.fts.ignoreDiacritics ),
   ftsIdx( ftsidx )
 , helpAction( this )
 {
@@ -193,6 +194,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
     ui.checkBoxIgnoreWordOrder->setEnabled( false );
   }
 
+  ui.checkBoxIgnoreDiacritics->setChecked( ignoreDiacritics );
+
   ui.matchCase->setChecked( cfg.preferences.fts.matchCase );
 
   setLimitsUsing();
@@ -205,6 +208,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
            this, SLOT( setLimitsUsing() ) );
   connect( ui.checkBoxIgnoreWordOrder, SIGNAL( stateChanged( int ) ),
            this, SLOT( ignoreWordsOrderClicked() ) );
+  connect( ui.checkBoxIgnoreDiacritics, SIGNAL( stateChanged( int ) ),
+           this, SLOT( ignoreDiacriticsClicked() ) );
 
   model = new HeadwordsListModel( this, results, activeDicts );
   ui.headwordsView->setModel( model );
@@ -319,6 +324,7 @@ void FullTextSearchDialog::saveData()
   cfg.preferences.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
   cfg.preferences.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
   cfg.preferences.fts.ignoreWordsOrder = ignoreWordsOrder;
+  cfg.preferences.fts.ignoreDiacritics = ignoreDiacritics;
 
   cfg.preferences.fts.dialogGeometry = saveGeometry();
 }
@@ -353,6 +359,11 @@ void FullTextSearchDialog::setLimitsUsing()
 void FullTextSearchDialog::ignoreWordsOrderClicked()
 {
   ignoreWordsOrder = ui.checkBoxIgnoreWordOrder->isChecked();
+}
+
+void FullTextSearchDialog::ignoreDiacriticsClicked()
+{
+  ignoreDiacritics = ui.checkBoxIgnoreDiacritics->isChecked();
 }
 
 void FullTextSearchDialog::accept()
@@ -421,7 +432,8 @@ void FullTextSearchDialog::accept()
                                                               ui.matchCase->isChecked(),
                                                               distanceBetweenWords,
                                                               maxResultsPerDict,
-                                                              ignoreWordsOrder
+                                                              ignoreWordsOrder,
+                                                              ignoreDiacritics
                                                             );
     connect( req.get(), SIGNAL( finished() ),
              this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
@@ -512,7 +524,7 @@ void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
     }
     else
       reg = searchRegExp;
-    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg );
+    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg, ignoreDiacritics );
   }
 }
 

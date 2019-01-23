@@ -7,7 +7,6 @@
 #include <QWidget>
 #include <QSize>
 #include <QAbstractItemModel>
-#include <QTreeView>
 #include <QLabel>
 #include <QHBoxLayout>
 #include <QMenu>
@@ -17,6 +16,7 @@
 
 #include <config.hh>
 #include "delegate.hh"
+#include "treeview.hh"
 
 class FavoritesModel;
 
@@ -56,6 +56,8 @@ public:
   // Return true if headwors is already presented in Favorites
   bool isHeadwordPresent( QString const & path, QString const & headword );
 
+  void saveData();
+
 signals:
   void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
 
@@ -75,7 +77,7 @@ private:
   virtual bool eventFilter( QObject *, QEvent * );
 
   Config::Class * m_cfg ;
-  QTreeView * m_favoritesTree;
+  TreeView * m_favoritesTree;
   QMenu * m_favoritesMenu;
   QAction * m_deleteSelectedAction;
   QAction * m_separator;

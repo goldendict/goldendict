@@ -49,7 +49,7 @@ using std::pair;
 enum
 {
   BtreeMinElements = 64,
-  BtreeMaxElements = 2048
+  BtreeMaxElements = 4096
 };
 
 BtreeIndex::BtreeIndex():
@@ -83,7 +83,7 @@ void BtreeIndex::openIndex( IndexInfo const & indexInfo,
   rootNode.clear();
 }
 
-vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
+vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word, bool ignoreDiacritics )
 {
   vector< WordArticleLink > result;
 
@@ -108,7 +108,7 @@ vector< WordArticleLink > BtreeIndex::findArticles( wstring const & word )
     {
       result = readChain( chainOffset );
 
-      antialias( word, result );
+      antialias( word, result, ignoreDiacritics );
     }
   }
   catch( std::exception & e )
@@ -482,7 +482,7 @@ BtreeWordSearchRequest::~BtreeWordSearchRequest()
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -490,7 +490,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                      false, maxResults );
@@ -797,7 +797,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         if ( wcharBuffer.size() <= wordSize )
           wcharBuffer.resize( wordSize + 1 );
   
-        //DPRINTF( "checking agaist word %s, left = %u\n", ptr, leafEntries );
+        //DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
   
         long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
   
@@ -910,16 +910,22 @@ vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
 }
 
 void BtreeIndex::antialias( wstring const & str,
-                            vector< WordArticleLink > & chain )
+                            vector< WordArticleLink > & chain,
+                            bool ignoreDiacritics )
 {
   wstring caseFolded = Folding::applySimpleCaseOnly( gd::normalize( str ) );
+  if( ignoreDiacritics )
+    caseFolded = Folding::applyDiacriticsOnly( caseFolded );
 
   for( unsigned x = chain.size(); x--; )
   {
     // If after applying case folding to each word they wouldn't match, we
     // drop the entry.
-    if ( Folding::applySimpleCaseOnly( gd::normalize( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) ) !=
-         caseFolded )
+    wstring entry = Folding::applySimpleCaseOnly( gd::normalize( Utf8::decode( chain[ x ].prefix + chain[ x ].word ) ) );
+    if( ignoreDiacritics )
+      entry = Folding::applyDiacriticsOnly( entry );
+
+    if ( entry != caseFolded )
       chain.erase( chain.begin() + x );
     else
     if ( chain[ x ].prefix.size() ) // If there's a prefix, merge it with the word,

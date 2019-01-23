@@ -29,7 +29,8 @@ struct Group
   /// Instantiates the given group from its configuration. If some dictionary
   /// wasn't found, it just skips it.
   Group( Config::Group const & cfgGroup,
-         vector< sptr< Dictionary::Class > > const & allDictionaries );
+         vector< sptr< Dictionary::Class > > const & allDictionaries,
+         Config::Group const & inactiveGroup );
 
   /// Creates an empty group.
   Group( QString const & name_ );

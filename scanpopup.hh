@@ -30,6 +30,7 @@ public:
   ScanPopup( QWidget * parent,
              Config::Class & cfg,
              ArticleNetworkAccessManager &,
+             AudioPlayerPtr const &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const &,
              History & );
@@ -50,6 +51,8 @@ public:
   void translateWord( QString const & word );
 
   void setDictionaryIconSize();
+
+  void saveConfigData();
 
 signals:
 
@@ -104,6 +107,8 @@ public slots:
 #endif
 
 private:
+
+  Qt::WindowFlags unpinnedWindowFlags() const;
 
   // Translates the word from the clipboard or the clipboard selection
   void translateWordFromClipboard(QClipboard::Mode m);

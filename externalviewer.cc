@@ -2,22 +2,21 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <QDir>
+#include <QTimer>
 #include "externalviewer.hh"
 #include "parsecmdline.hh"
 #include "gddebug.hh"
 
-using std::vector;
-
-ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
-                                QString const & extension,
-                                QString const & viewerCmdLine_ )
-    throw( exCantCreateTempFile ):
+ExternalViewer::ExternalViewer( const char * data, int size,
+                                QString const & extension, QString const & viewerCmdLine_,
+                                QObject * parent)
+    THROW_SPEC( exCantCreateTempFile ):
   QObject( parent ),
   tempFile( QDir::temp().filePath( QString( "gd-XXXXXXXX." ) + extension ) ),
   viewer( this ),
   viewerCmdLine( viewerCmdLine_ )
 {
-  if ( !tempFile.open() || (size_t) tempFile.write( &data.front(), data.size() ) != data.size() )
+  if ( !tempFile.open() || tempFile.write( data, size ) != size )
     throw exCantCreateTempFile();
 
   tempFileName = tempFile.fileName(); // For some reason it loses it after it was closed()
@@ -32,7 +31,7 @@ ExternalViewer::ExternalViewer( QObject * parent, vector< char > const & data,
   GD_DPRINTF( "%s\n", tempFile.fileName().toLocal8Bit().data() );
 }
 
-void ExternalViewer::start() throw( exCantRunViewer )
+void ExternalViewer::start() THROW_SPEC( exCantRunViewer )
 {
   connect( &viewer, SIGNAL( finished( int, QProcess::ExitStatus ) ),
            this, SLOT( deleteLater() ) );
@@ -52,4 +51,30 @@ void ExternalViewer::start() throw( exCantRunViewer )
   }
   else
     throw exCantRunViewer( tr( "the viewer program name is empty" ).toUtf8().data() );
+}
+
+bool ExternalViewer::stop()
+{
+  if( viewer.state() == QProcess::NotRunning )
+    return true;
+  viewer.terminate();
+  QTimer::singleShot( 1000, &viewer, SLOT( kill() ) ); // In case terminate() fails.
+  return false;
+}
+
+void ExternalViewer::stopSynchronously()
+{
+  // This implementation comes straight from QProcess::~QProcess().
+  if( viewer.state() == QProcess::NotRunning )
+    return;
+  viewer.kill();
+  viewer.waitForFinished();
+}
+
+void stopAndDestroySynchronously( ExternalViewer * viewer )
+{
+  if( !viewer )
+    return;
+  viewer->stopSynchronously();
+  delete viewer;
 }

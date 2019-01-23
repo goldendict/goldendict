@@ -18,7 +18,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
                                       QNetworkAccessManager & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 /// Exposed here for moc
 class MediaWikiWordSearchRequestSlots: public Dictionary::WordSearchRequest

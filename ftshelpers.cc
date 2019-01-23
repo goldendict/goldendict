@@ -6,6 +6,7 @@
 #include "wstring_qt.hh"
 #include "file.hh"
 #include "gddebug.hh"
+#include "folding.hh"
 #include "qt4x5.hh"
 
 #include <vector>
@@ -472,6 +473,9 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       dict.getArticleText( offsets.at( i ), headword, articleText );
       articleText = articleText.normalized( QString::NormalizationForm_C );
 
+      if( ignoreDiacritics )
+        articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
+
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       if( articleText.contains( searchRegularExpression ) )
 #else
@@ -530,8 +534,12 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 
       dict.getArticleText( offsets.at( i ), headword, articleText );
 
-      QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                            .split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
+      articleText = articleText.normalized( QString::NormalizationForm_C );
+
+      if( ignoreDiacritics )
+        articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
+
+      QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
                                                     QString::SkipEmptyParts );
 
       int wordsNum = articleWords.length();
@@ -802,7 +810,7 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
     tmp.clear();
 
-    links = ftsIndex.findArticles( gd::toWString( indexWords.at( i ) ) );
+    links = ftsIndex.findArticles( gd::toWString( indexWords.at( i ) ), ignoreDiacritics );
     for( unsigned x = 0; x < links.size(); x++ )
     {
 
@@ -949,6 +957,10 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
         return;
 
       QString word = QString::fromUtf8( links[ x ].word.data(), links[ x ].word.size() );
+
+      if( ignoreDiacritics )
+        word = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( word ) ) );
+
       for( int i = 0; i < wordsList.size(); i++ )
       {
         if( word.length() >= wordsList.at( i ).length() && word.contains( wordsList.at( i ) ) )
@@ -1035,6 +1047,10 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
       return;
 
     QString word = QString::fromUtf8( links[ x ].word.data(), links[ x ].word.size() );
+
+    if( ignoreDiacritics )
+      word = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( word ) ) );
+
     for( int i = 0; i < indexWords.size(); i++ )
     {
       if( word.length() >= indexWords.at( i ).length() && word.contains( indexWords.at( i ) ) )

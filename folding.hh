@@ -73,7 +73,7 @@ void normalizeWhitespace( wstring & );
 
 /// Same as apply( wstring ), but without any heap operations, therefore
 /// preferable when there're many strings to process. Returns -1 if the
-/// operation succeded, or otherwise the minimum value of outSize required
+/// operation succeeded, or otherwise the minimum value of outSize required
 /// to succeed.
 /// Currently commented out, consider implementing it in case indices'
 /// generation would be too slow.
@@ -84,6 +84,12 @@ QString unescapeWildcardSymbols( QString const & );
 
 /// Escape all wildcard symbols (for place word to input line)
 QString escapeWildcardSymbols( QString const & );
+
+/// Return result of foldDiacritic() from "inc_diacritic_folding.hh"
+wchar foldedDiacritic( wchar const * in, size_t size, size_t & consumed );
+
+/// Tests if the given char is one of the Unicode combining marks.
+bool isCombiningMark( wchar ch );
 
 }
 

@@ -554,11 +554,12 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
-                                                        wstring const & )
-      throw( std::exception );
+                                                        wstring const &,
+                                                        bool ignoreDiacritics )
+      THROW_SPEC( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      throw( std::exception );
+      THROW_SPEC( std::exception );
 
     virtual QString const& getDescription();
 
@@ -569,7 +570,8 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
                                                               int searchMode, bool matchCase,
                                                               int distanceBetweenWords,
                                                               int maxResults,
-                                                              bool ignoreWordsOrder );
+                                                              bool ignoreWordsOrder,
+                                                              bool ignoreDiacritics );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     quint32 getArticleText( uint32_t articleAddress, QString & headword, QString & text,
@@ -829,7 +831,7 @@ string ZimDictionary::convert( const string & in )
   }
 #endif
 
-  // Occassionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
+  // Occasionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
   // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
@@ -1148,9 +1150,10 @@ sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const &
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
-                                                                 bool ignoreWordsOrder )
+                                                                 bool ignoreWordsOrder,
+                                                                 bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 /// ZimDictionary::getArticle()
@@ -1184,6 +1187,7 @@ class ZimArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   ZimDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1192,8 +1196,8 @@ public:
 
   ZimArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     ZimDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     ZimDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new ZimArticleRequestRunnable( *this, hasExited ) );
@@ -1226,13 +1230,13 @@ void ZimArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -1244,6 +1248,8 @@ void ZimArticleRequest::run()
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -1281,6 +1287,8 @@ void ZimArticleRequest::run()
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
@@ -1345,10 +1353,11 @@ void ZimArticleRequest::run()
 
 sptr< Dictionary::DataRequest > ZimDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new ZimArticleRequest( word, alts, *this );
+  return new ZimArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// ZimDictionary::getResource()
@@ -1492,7 +1501,7 @@ void ZimResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new ZimResourceRequest( *this, name );
 }
@@ -1504,7 +1513,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -1665,7 +1674,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   idxHeader.langFrom = LangCoder::code2toInt( lang.c_str() );
                 else
                 if( lang.size() == 3 )
-                  idxHeader.langFrom = LangCoder::code3toInt( lang.c_str() );
+                  idxHeader.langFrom = LangCoder::findIdForLanguageCode3( lang.c_str() );
                 idxHeader.langTo = idxHeader.langFrom;
               }
             }

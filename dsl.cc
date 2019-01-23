@@ -177,6 +177,8 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   quint8 articleNom;
   int maxPictureWidth;
 
+  wstring currentHeadword;
+
 public:
 
   DslDictionary( string const & id, string const & indexFile,
@@ -207,7 +209,7 @@ public:
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception )
+    THROW_SPEC( std::exception )
   {
     return vector< wstring >();
   }
@@ -215,17 +217,19 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
                                                             int maxResults,
-                                                            bool ignoreWordsOrder );
+                                                            bool ignoreWordsOrder,
+                                                            bool ignoreDiacritics );
   virtual QString const& getDescription();
 
   virtual QString getMainFilename();
@@ -306,12 +310,18 @@ DslDictionary::DslDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   vector< char > sName( idx.read< uint32_t >() );
-  idx.read( &sName.front(), sName.size() );
-  preferredSoundDictionary = string( &sName.front(), sName.size() );
+  if( sName.size() > 0 )
+  {
+    idx.read( &sName.front(), sName.size() );
+    preferredSoundDictionary = string( &sName.front(), sName.size() );
+  }
 
   // Everything else would be done in deferred init
 }
@@ -754,6 +764,7 @@ string DslDictionary::dslToHtml( wstring const & str, wstring const & headword )
 {
  // Normalize the string
   wstring normalizedStr = gd::normalize( str );
+  currentHeadword = headword;
 
   ArticleDom dom( normalizedStr, getName(), headword );
 
@@ -1167,7 +1178,13 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += "<br />";
   }
   else
+  {
+    gdWarning( "DSL: Unknown tag \"%s\" with attributes \"%s\" found in \"%s\", article \"%s\".",
+               gd::toQString( node.tagName ).toUtf8().data(), gd::toQString( node.tagAttrs ).toUtf8().data(),
+               getName().c_str(), gd::toQString( currentHeadword ).toUtf8().data() );
+
     result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
+  }
 
   return result;
 }
@@ -1592,6 +1609,7 @@ class DslArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   DslDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1600,8 +1618,8 @@ public:
 
   DslArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     DslDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     DslDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new DslArticleRequestRunnable( *this, hasExited ) );
@@ -1641,13 +1659,13 @@ void DslArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -1756,10 +1774,11 @@ void DslArticleRequest::run()
 
 sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new DslArticleRequest( word, alts, *this );
+  return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// DslDictionary::getResource()
@@ -1936,7 +1955,7 @@ void DslResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new DslResourceRequest( *this, name );
 }
@@ -1982,9 +2001,10 @@ sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const &
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
-                                                                 bool ignoreWordsOrder )
+                                                                 bool ignoreWordsOrder,
+                                                                 bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 } // anonymous namespace
@@ -1996,7 +2016,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       int maxPictureWidth, unsigned int maxHeadwordSize )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

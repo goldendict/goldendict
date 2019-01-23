@@ -118,17 +118,19 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
                                                             int maxResults,
-                                                            bool ignoreWordsOrder );
+                                                            bool ignoreWordsOrder,
+                                                            bool ignoreDiacritics );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -151,13 +153,13 @@ public:
 
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
                                                               unsigned minLength,
                                                               unsigned maxSuffixVariation,
                                                               unsigned long maxResults )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 protected:
 
@@ -202,8 +204,11 @@ EpwingDictionary::EpwingDictionary( string const & id,
 {
   vector< char > data( idxHeader.nameSize );
   idx.seek( sizeof( idxHeader ) );
-  idx.read( &data.front(), idxHeader.nameSize );
-  bookName = string( &data.front(), idxHeader.nameSize );
+  if( data.size() > 0 )
+  {
+    idx.read( &data.front(), idxHeader.nameSize );
+    bookName = string( &data.front(), idxHeader.nameSize );
+  }
 
   // Initialize eBook
 
@@ -452,6 +457,7 @@ class EpwingArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   EpwingDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -460,8 +466,8 @@ public:
 
   EpwingArticleRequest( wstring const & word_,
                         vector< wstring > const & alts_,
-                        EpwingDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                        EpwingDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new EpwingArticleRequestRunnable( *this, hasExited ) );
@@ -494,13 +500,13 @@ void EpwingArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -512,6 +518,8 @@ void EpwingArticleRequest::run()
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   QVector< int > pages, offsets;
 
@@ -550,6 +558,8 @@ void EpwingArticleRequest::run()
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
@@ -645,10 +655,11 @@ void EpwingArticleRequest::run()
 
 sptr< Dictionary::DataRequest > EpwingDictionary::getArticle( wstring const & word,
                                                               vector< wstring > const & alts,
-                                                              wstring const & )
-  throw( std::exception )
+                                                              wstring const &,
+                                                              bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new EpwingArticleRequest( word, alts, *this );
+  return new EpwingArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// EpwingDictionary::getResource()
@@ -774,7 +785,7 @@ void EpwingResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > EpwingDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingResourceRequest( *this, name );
 }
@@ -784,9 +795,10 @@ sptr< Dictionary::DataRequest > EpwingDictionary::getSearchResults( QString cons
                                                                     int searchMode, bool matchCase,
                                                                     int distanceBetweenWords,
                                                                     int maxResults,
-                                                                    bool ignoreWordsOrder )
+                                                                    bool ignoreWordsOrder,
+                                                                    bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 int EpwingDictionary::japaneseWriting( gd::wchar ch )
@@ -920,7 +932,7 @@ void EpwingWordSearchRequest::findMatches()
 
 sptr< Dictionary::WordSearchRequest > EpwingDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -928,7 +940,7 @@ sptr< Dictionary::WordSearchRequest > EpwingDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > EpwingDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new EpwingWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                       false, maxResults );
@@ -940,7 +952,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

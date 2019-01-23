@@ -20,7 +20,7 @@
 void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
 {
   m_cfg = cfg;
-  m_favoritesTree = findChild< QTreeView * >( "favoritesTree" );
+  m_favoritesTree = findChild< TreeView * >( "favoritesTree" );
   QDockWidget * favoritesPane = qobject_cast< QDockWidget * >( parentWidget() );
   m_favoritesTree->setHeaderHidden( true );
 
@@ -299,6 +299,11 @@ void FavoritesPaneWidget::timerEvent( QTimerEvent * ev )
   m_favoritesModel->saveData();
 }
 
+void FavoritesPaneWidget::saveData()
+{
+  m_favoritesModel->saveData();
+}
+
 /************************************************** TreeItem *********************************************/
 
 TreeItem::TreeItem( const QVariant &data, TreeItem *parent, Type type ) :
@@ -473,10 +478,7 @@ FavoritesModel::FavoritesModel( QString favoritesFilename, QObject * parent ) :
 FavoritesModel::~FavoritesModel()
 {
   if( rootItem )
-  {
-    saveData();
     delete rootItem;
-  }
 }
 
 Qt::ItemFlags FavoritesModel::flags( const QModelIndex &idx ) const

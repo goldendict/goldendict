@@ -68,7 +68,6 @@ QGestureRecognizer::Result GDPinchGestureRecognizer::recognize( QGesture * state
                                                                 QObject *,
                                                                 QEvent * event)
 {
-  const QTouchEvent *ev = static_cast< const QTouchEvent * >( event );
   QGestureRecognizer::Result result = QGestureRecognizer::Ignore;
   GDPinchGesture * gest = static_cast< GDPinchGesture * >( state );
 
@@ -92,6 +91,7 @@ QGestureRecognizer::Result GDPinchGestureRecognizer::recognize( QGesture * state
     case QEvent::TouchUpdate:
       {
         gest->scaleChanged = false;
+        const QTouchEvent * const ev = static_cast< const QTouchEvent * >( event );
         fewTouchPointsPresented = ( ev->touchPoints().size() > 1 );
         if ( ev->touchPoints().size() == 2 )
         {
@@ -211,7 +211,6 @@ QGestureRecognizer::Result GDSwipeGestureRecognizer::recognize( QGesture * state
                                                                 QEvent * event)
 {
   GDSwipeGesture * swipe = static_cast< GDSwipeGesture * >( state );
-  const QTouchEvent * ev = static_cast< const QTouchEvent * >( event );
   QGestureRecognizer::Result result = QGestureRecognizer::Ignore;
 
   switch( event->type() )
@@ -235,6 +234,7 @@ QGestureRecognizer::Result GDSwipeGestureRecognizer::recognize( QGesture * state
       }
     case QEvent::TouchUpdate:
       {
+        const QTouchEvent * const ev = static_cast< const QTouchEvent * >( event );
         fewTouchPointsPresented = ( ev->touchPoints().size() > 1 );
         if( !swipe->started )
           result = QGestureRecognizer::CancelGesture;

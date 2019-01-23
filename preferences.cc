@@ -187,10 +187,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
+  ui.ignoreOwnClipboardChanges->setChecked( p.ignoreOwnClipboardChanges );
   ui.scanToMainWindow->setChecked( p.scanToMainWindow );
   ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
+  ui.scanPopupUnpinnedWindowFlags->setCurrentIndex( p.scanPopupUnpinnedWindowFlags );
+  ui.scanPopupUnpinnedBypassWMHint->setChecked( p.scanPopupUnpinnedBypassWMHint );
 
   ui.storeHistory->setChecked( p.storeHistory );
   ui.historyMaxSizeField->setValue( p.maxStringsInHistory );
@@ -202,6 +205,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
+  ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
 
@@ -232,10 +236,15 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 //  ui.tabWidget->removeTab( 5 );
 #endif
 
+#ifndef ENABLE_SPWF_CUSTOMIZATION
+  ui.groupBox_ScanPopupWindowFlags->hide();
+#endif
+
 #ifdef HAVE_X11
   ui.showScanFlag->setChecked( p.showScanFlag);
 #else
   ui.showScanFlag->hide();
+  ui.ignoreOwnClipboardChanges->hide();
 #endif
 
   // Sound
@@ -243,14 +252,28 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
   ui.pronounceOnLoadPopup->setChecked( p.pronounceOnLoadPopup );
 
-#ifdef DISABLE_INTERNAL_PLAYER
-  ui.useInternalPlayer->hide();
-#else
-  if ( p.useInternalPlayer )
-    ui.useInternalPlayer->setChecked( true );
+  ui.internalPlayerBackend->addItems( Config::InternalPlayerBackend::nameList() );
+
+  // Make sure that exactly one radio button in the group is checked and that
+  // on_useExternalPlayer_toggled() is called.
+  ui.useExternalPlayer->setChecked( true );
+
+  if( ui.internalPlayerBackend->count() > 0 )
+  {
+    // Checking ui.useInternalPlayer automatically unchecks ui.useExternalPlayer.
+    ui.useInternalPlayer->setChecked( p.useInternalPlayer );
+
+    int index = ui.internalPlayerBackend->findText( p.internalPlayerBackend.uiName() );
+    if( index < 0 ) // The specified backend is unavailable.
+      index = ui.internalPlayerBackend->findText( Config::InternalPlayerBackend::defaultBackend().uiName() );
+    Q_ASSERT( index >= 0 && "Logic error: the default backend must be present in the backend name list." );
+    ui.internalPlayerBackend->setCurrentIndex( index );
+  }
   else
-#endif
-    ui.useExternalPlayer->setChecked( p.useExternalPlayer );
+  {
+    ui.useInternalPlayer->hide();
+    ui.internalPlayerBackend->hide();
+  }
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
@@ -374,6 +397,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
+  p.ignoreOwnClipboardChanges = ui.ignoreOwnClipboardChanges->isChecked();
   p.scanToMainWindow = ui.scanToMainWindow->isChecked();
 #ifdef HAVE_X11
   p.showScanFlag= ui.showScanFlag->isChecked();
@@ -381,6 +405,8 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
+  p.scanPopupUnpinnedWindowFlags = Config::spwfFromInt( ui.scanPopupUnpinnedWindowFlags->currentIndex() );
+  p.scanPopupUnpinnedBypassWMHint = ui.scanPopupUnpinnedBypassWMHint->isChecked();
 
   p.storeHistory = ui.storeHistory->isChecked();
   p.maxStringsInHistory = ui.historyMaxSizeField->text().toUInt();
@@ -392,6 +418,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+  p.ignoreDiacritics = ui.ignoreDiacritics->isChecked();
 
   p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 
@@ -399,8 +426,8 @@ Config::Preferences Preferences::getPreferences()
 
   p.pronounceOnLoadMain = ui.pronounceOnLoadMain->isChecked();
   p.pronounceOnLoadPopup = ui.pronounceOnLoadPopup->isChecked();
-  p.useExternalPlayer = ui.useExternalPlayer->isChecked();
   p.useInternalPlayer = ui.useInternalPlayer->isChecked();
+  p.internalPlayerBackend.setUiName( ui.internalPlayerBackend->currentText() );
   p.audioPlaybackProgram = ui.audioPlaybackProgram->text();
 
   p.proxyServer.enabled = ui.useProxyServer->isChecked();
@@ -529,6 +556,11 @@ void Preferences::showScanFlagToggled( bool b )
     ui.enableScanPopupModifiers->setChecked( false );
 }
 
+void Preferences::on_scanPopupUnpinnedWindowFlags_currentIndexChanged( int index )
+{
+  ui.scanPopupUnpinnedBypassWMHint->setEnabled( Config::spwfFromInt( index ) != Config::SPWF_default );
+}
+
 void Preferences::wholeAltClicked( bool b )
 {
   if ( b )
@@ -593,6 +625,7 @@ void Preferences::on_buttonBox_accepted()
 
 void Preferences::on_useExternalPlayer_toggled( bool enabled )
 {
+  ui.internalPlayerBackend->setEnabled( !enabled );
   ui.audioPlaybackProgram->setEnabled( enabled );
 }
 
