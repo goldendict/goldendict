@@ -116,7 +116,7 @@ private:
   TranslateBox * translateBox;
 
   /// Fonts saved before words zooming is in effect, so it could be reset back.
-  QFont wordListDefaultFont, translateLineDefaultFont;
+  QFont wordListDefaultFont, translateLineDefaultFont, groupListDefaultFont;
 
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,

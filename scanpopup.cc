@@ -115,6 +115,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   wordListDefaultFont = ui.translateBox->wordList()->font();
   translateLineDefaultFont = ui.translateBox->font();
+  groupListDefaultFont = ui.groupList->font();
 
   applyZoomFactor();
   applyWordsZoomLevel();
@@ -406,9 +407,31 @@ void ScanPopup::applyWordsZoomLevel()
   if ( ui.translateBox->translateLine()->font().pointSize() != ps )
     ui.translateBox->translateLine()->setFont( font );
 
-  ui.groupList->setFont(font);
+  font = groupListDefaultFont;
+  ps = font.pointSize();
 
-  ui.groupList->parentWidget()->layout()->activate();
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+    if ( ps < 1 )
+      ps = 1;
+    font.setPointSize( ps );
+  }
+
+  if ( ui.groupList->font().pointSize() != ps )
+  {
+    disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+                this, SLOT( currentGroupChanged( QString const & ) ) );
+    int n = ui.groupList->currentIndex();
+    ui.groupList->clear();
+    ui.groupList->setFont( font );
+    ui.groupList->fill( groups );
+    ui.groupList->setCurrentIndex( n );
+    connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+             this, SLOT( currentGroupChanged( QString const & ) ) );
+  }
+
+  ui.outerFrame->layout()->activate();
 }
 
 Qt::WindowFlags ScanPopup::unpinnedWindowFlags() const

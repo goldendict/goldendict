@@ -316,6 +316,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   wordListDefaultFont = wordList->font();
   translateLineDefaultFont = translateLine->font();
+  groupListDefaultFont = groupList->font();
 
   // Make the dictionaries pane's titlebar
   foundInDictsLabel.setText( tr( "Found in Dictionaries:" ) );
@@ -3651,7 +3652,32 @@ void MainWindow::applyWordsZoomLevel()
   if ( translateLine->font().pointSize() != ps )
     translateLine->setFont( font );
 
-  groupList->setFont(font);
+  font = groupListDefaultFont;
+
+  ps = font.pointSize();
+
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+
+    if ( ps < 1 )
+      ps = 1;
+
+    font.setPointSize( ps );
+  }
+
+  if ( groupList->font().pointSize() != ps )
+  {
+    disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+                this, SLOT( currentGroupChanged( QString const & ) ) );
+    int n = groupList->currentIndex();
+    groupList->clear();
+    groupList->setFont( font );
+    groupList->fill( groupInstances );
+    groupList->setCurrentIndex( n );
+    connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+             this, SLOT( currentGroupChanged( QString const & ) ) );
+  }
 
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
   // groupList->setFixedHeight(translateLine->height());
