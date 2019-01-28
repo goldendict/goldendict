@@ -12,9 +12,9 @@
 #include <QX11Info>
 #include <X11/Xlibint.h>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #undef Bool
-#endif
+#undef min
+#undef max
 
 #endif
 

@@ -66,6 +66,7 @@
 #ifdef HAVE_X11
 #include <QX11Info>
 #include <X11/Xlib.h>
+#include <fixx11h.h>
 #endif
 
 #define MIN_THREAD_COUNT 4

@@ -23,7 +23,6 @@
 #include "wordfinder.hh"
 #include "dictionarybar.hh"
 #include "history.hh"
-#include "hotkeywrapper.hh"
 #include "mainstatusbar.hh"
 #include "mruqmenu.hh"
 #include "translatebox.hh"
@@ -32,6 +31,7 @@
 #include "fulltextsearch.hh"
 #include "helpwindow.hh"
 
+#include "hotkeywrapper.hh"
 #ifdef HAVE_X11
 #include <fixx11h.h>
 #endif

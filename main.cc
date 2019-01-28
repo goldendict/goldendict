@@ -9,6 +9,9 @@
 
 #include "processwrapper.hh"
 #include "hotkeywrapper.hh"
+#ifdef HAVE_X11
+#include <fixx11h.h>
+#endif
 
 //#define __DO_DEBUG
 
