@@ -117,9 +117,6 @@ ScanPopup::ScanPopup( QWidget * parent,
   translateLineDefaultFont = ui.translateBox->font();
   groupListDefaultFont = ui.groupList->font();
 
-  applyZoomFactor();
-  applyWordsZoomLevel();
-
   ui.mainLayout->addWidget( definition );
 
   ui.translateBox->wordList()->attachFinder( &wordFinder );
@@ -331,6 +328,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &delayTimer, SIGNAL( timeout() ),
     this, SLOT( delayShow() ) );
 #endif
+
+  applyZoomFactor();
+  applyWordsZoomLevel();
 }
 
 ScanPopup::~ScanPopup()
