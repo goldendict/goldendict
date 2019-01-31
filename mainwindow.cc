@@ -803,7 +803,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   updateTrayIcon();
 
   // Update zoomers
-  applyZoomFactor();
+  adjustCurrentZoomFactor();
+  scaleArticlesByCurrentZoomFactor();
   applyWordsZoomLevel();
 
   // Update autostart info
@@ -3616,6 +3617,32 @@ void MainWindow::unzoom()
 
 void MainWindow::applyZoomFactor()
 {
+  // Always call this function synchronously to potentially disable a zoom action,
+  // which is being repeatedly triggered. When the action is disabled, its
+  // triggered() signal is no longer emitted, which in turn improves performance.
+  adjustCurrentZoomFactor();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  // Scaling article views asynchronously dramatically improves performance when
+  // a zoom action is triggered repeatedly while many or large articles are open
+  // in the main window or in scan popup.
+  // Multiple zoom action signals are processed before (often slow) article view
+  // scaling is requested. Multiple scaling requests then ask for the same zoom factor,
+  // so all of them except for the first one don't change anything and run very fast.
+  // In effect, some intermediate zoom factors are skipped when scaling is slow.
+  // The slower the scaling, the more steps are skipped.
+  QTimer::singleShot( 0, this, SLOT( scaleArticlesByCurrentZoomFactor() ) );
+#else
+  // The timer trick above usually doesn't improve performance with Qt4
+  // due to a different ordering of keyboard and timer events.
+  // Sometimes, unpredictably, it does work like with Qt5.
+  // Scale article views synchronously to avoid inconsistent or unexpected behavior.
+  scaleArticlesByCurrentZoomFactor();
+#endif
+}
+
+void MainWindow::adjustCurrentZoomFactor()
+{
   if ( cfg.preferences.zoomFactor >= 5 )
     cfg.preferences.zoomFactor = 5;
   else if ( cfg.preferences.zoomFactor <= 0.1 )
@@ -3624,7 +3651,10 @@ void MainWindow::applyZoomFactor()
   zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
   zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.1 );
   zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
+}
 
+void MainWindow::scaleArticlesByCurrentZoomFactor()
+{
   for ( int i = 0; i < ui.tabWidget->count(); i++ )
   {
     ArticleView & view =

@@ -235,6 +235,7 @@ private:
   void installHotKeys();
 
   void applyZoomFactor();
+  void adjustCurrentZoomFactor();
 
   void mousePressEvent ( QMouseEvent * event );
 
@@ -336,6 +337,8 @@ private slots:
   void zoomin();
   void zoomout();
   void unzoom();
+
+  void scaleArticlesByCurrentZoomFactor();
 
   void doWordsZoomIn();
   void doWordsZoomOut();
