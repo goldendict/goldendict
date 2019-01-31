@@ -27,6 +27,10 @@
 #include "qtsingleapplication.h"
 #include "qt4x5.hh"
 
+#ifdef Q_OS_WIN32
+#include "hotkeys.h"
+#endif
+
 //////////////////////////////////////////////////////////////////////////
 
 struct HotkeyStruct
@@ -67,6 +71,9 @@ public:
   /// Unregisters everything
   void unregister();
 
+  bool handleViaDLL()
+  { return dllHandler.hDLLHandle != 0; }
+
 signals:
 
   void hotkeyActivated( int );
@@ -94,6 +101,17 @@ private:
 #ifdef Q_OS_WIN32
   virtual bool winEvent ( MSG * message, long * result );
   HWND hwnd;
+
+  struct DLL_HANDLER
+  {
+    HMODULE hDLLHandle;
+    setHookProc setHook;
+    removeHookProc removeHook;
+    setHotkeysProc setHotkeys;
+    clearHotkeysProc clearHotkeys;
+  };
+
+  DLL_HANDLER dllHandler;
 
 #elif defined(Q_OS_MAC)
 
