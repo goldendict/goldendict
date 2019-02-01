@@ -70,9 +70,10 @@ public:
 
   /// Unregisters everything
   void unregister();
-
+#ifdef Q_OS_WIN32
   bool handleViaDLL()
   { return dllHandler.hDLLHandle != 0; }
+#endif
 
 signals:
 

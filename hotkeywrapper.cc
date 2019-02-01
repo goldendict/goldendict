@@ -137,8 +137,10 @@ HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
 HotkeyWrapper::~HotkeyWrapper()
 {
   unregister();
+#ifdef Q_OS_WIN32
   if( dllHandler.hDLLHandle )
     FreeLibrary( dllHandler.hDLLHandle );
+#endif
 }
 
 void HotkeyWrapper::waitKey2()

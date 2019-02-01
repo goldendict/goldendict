@@ -2980,7 +2980,11 @@ void MainWindow::installHotKeys()
 
     connect( hotkeyWrapper.get(), SIGNAL( hotkeyActivated( int ) ),
              this, SLOT( hotKeyActivated( int ) ),
+#ifdef Q_OS_WIN32
              hotkeyWrapper->handleViaDLL() ? Qt::QueuedConnection : Qt::AutoConnection );
+#else
+             Qt::AutoConnection );
+#endif
   }
 }
 
