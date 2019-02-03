@@ -27,8 +27,6 @@ CompletionList::CompletionList(TranslateBox * parent) : WordList(parent),
   setAutoFillBackground( true );
 #endif
 
-  setMaximumWidth(1000);
-
   connect(this, SIGNAL( activated( QModelIndex ) ),
           this, SLOT( acceptCurrentEntry() ) );
 

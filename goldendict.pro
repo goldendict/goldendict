@@ -368,7 +368,6 @@ FORMS += groups.ui \
     mainwindow.ui \
     sources.ui \
     initializing.ui \
-    groupselectorwidget.ui \
     scanpopup.ui \
     articleview.ui \
     preferences.ui \
