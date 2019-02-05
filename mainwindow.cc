@@ -825,7 +825,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Update zoomers
   adjustCurrentZoomFactor();
   scaleArticlesByCurrentZoomFactor();
-  applyWordsZoomLevel();
 
   // Update autostart info
   setAutostart(cfg.preferences.autoStart);
