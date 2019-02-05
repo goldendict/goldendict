@@ -3828,22 +3828,36 @@ void MainWindow::on_alwaysOnTop_triggered( bool checked )
     installHotKeys();
 }
 
+void MainWindow::setZoomFactorImmediately( double factor )
+{
+  if( cfg.preferences.zoomFactor == factor )
+    return;
+  cfg.preferences.zoomFactor = factor;
+  adjustCurrentZoomFactor();
+  scaleArticlesByCurrentZoomFactor();
+}
+
+void MainWindow::setZoomFactor( double factor )
+{
+  if( cfg.preferences.zoomFactor == factor )
+    return;
+  cfg.preferences.zoomFactor = factor;
+  applyZoomFactor();
+}
+
 void MainWindow::zoomin()
 {
-  cfg.preferences.zoomFactor += 0.1;
-  applyZoomFactor();
+  setZoomFactor( cfg.preferences.zoomFactor + 0.1 );
 }
 
 void MainWindow::zoomout()
 {
-  cfg.preferences.zoomFactor -= 0.1;
-  applyZoomFactor();
+  setZoomFactor( cfg.preferences.zoomFactor - 0.1 );
 }
 
 void MainWindow::unzoom()
 {
-  cfg.preferences.zoomFactor = 1;
-  applyZoomFactor();
+  setZoomFactor( 1 );
 }
 
 void MainWindow::applyZoomFactor()
@@ -3897,25 +3911,27 @@ void MainWindow::scaleArticlesByCurrentZoomFactor()
     scanPopup->applyZoomFactor();
 }
 
+void MainWindow::setWordsZoomLevel( int level )
+{
+  if( cfg.preferences.wordsZoomLevel == level )
+    return;
+  cfg.preferences.wordsZoomLevel = level;
+  applyWordsZoomLevel();
+}
+
 void MainWindow::doWordsZoomIn()
 {
-  ++cfg.preferences.wordsZoomLevel;
-
-  applyWordsZoomLevel();
+  setWordsZoomLevel( cfg.preferences.wordsZoomLevel + 1 );
 }
 
 void MainWindow::doWordsZoomOut()
 {
-  --cfg.preferences.wordsZoomLevel;
-
-  applyWordsZoomLevel();
+  setWordsZoomLevel( cfg.preferences.wordsZoomLevel - 1 );
 }
 
 void MainWindow::doWordsZoomBase()
 {
-  cfg.preferences.wordsZoomLevel = 0;
-
-  applyWordsZoomLevel();
+  setWordsZoomLevel( 0 );
 }
 
 void MainWindow::applyWordsZoomLevel()
@@ -4004,6 +4020,16 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
   if( message == "toggleScanPopup" )
   {
     toggleScanPopup();
+    return;
+  }
+  if( message.leftRef( 19 ) == "setWordsZoomLevel: " )
+  {
+    setWordsZoomLevel( message.mid( 19 ).toInt() );
+    return;
+  }
+  if( message.leftRef( 15 ) == "setZoomFactor: " )
+  {
+    setZoomFactor( message.mid( 15 ).toDouble() );
     return;
   }
   if( message.left( 15 ) == "translateWord: " )
