@@ -115,9 +115,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   wordListDefaultFont = ui.translateBox->wordList()->font();
   translateLineDefaultFont = ui.translateBox->font();
-
-  applyZoomFactor();
-  applyWordsZoomLevel();
+  groupListDefaultFont = ui.groupList->font();
 
   ui.mainLayout->addWidget( definition );
 
@@ -330,6 +328,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &delayTimer, SIGNAL( timeout() ),
     this, SLOT( delayShow() ) );
 #endif
+
+  applyZoomFactor();
+  applyWordsZoomLevel();
 }
 
 ScanPopup::~ScanPopup()
@@ -406,9 +407,31 @@ void ScanPopup::applyWordsZoomLevel()
   if ( ui.translateBox->translateLine()->font().pointSize() != ps )
     ui.translateBox->translateLine()->setFont( font );
 
-  ui.groupList->setFont(font);
+  font = groupListDefaultFont;
+  ps = font.pointSize();
 
-  ui.groupList->parentWidget()->layout()->activate();
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+    if ( ps < 1 )
+      ps = 1;
+    font.setPointSize( ps );
+  }
+
+  if ( ui.groupList->font().pointSize() != ps )
+  {
+    disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+                this, SLOT( currentGroupChanged( QString const & ) ) );
+    int n = ui.groupList->currentIndex();
+    ui.groupList->clear();
+    ui.groupList->setFont( font );
+    ui.groupList->fill( groups );
+    ui.groupList->setCurrentIndex( n );
+    connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+             this, SLOT( currentGroupChanged( QString const & ) ) );
+  }
+
+  ui.outerFrame->layout()->activate();
 }
 
 Qt::WindowFlags ScanPopup::unpinnedWindowFlags() const
@@ -824,15 +847,29 @@ void ScanPopup::typingEvent( QString const & t )
 
 bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 {
-  if ( event->type() == QEvent::FocusIn && watched == ui.translateBox->translateLine() )
+  if ( watched == ui.translateBox->translateLine() )
   {
-    QFocusEvent * focusEvent = static_cast< QFocusEvent * >( event );
+    if ( event->type() == QEvent::FocusIn )
+    {
+      QFocusEvent * focusEvent = static_cast< QFocusEvent * >( event );
 
-    // select all on mouse click
-    if ( focusEvent->reason() == Qt::MouseFocusReason ) {
-      QTimer::singleShot(0, this, SLOT(focusTranslateLine()));
+      // select all on mouse click
+      if ( focusEvent->reason() == Qt::MouseFocusReason ) {
+        QTimer::singleShot(0, this, SLOT(focusTranslateLine()));
+      }
+      return false;
     }
-    return false;
+
+    if ( event->type() == QEvent::Resize )
+    {
+      // The UI looks ugly when group combobox is higher than translate line.
+      // Make the height of the combobox the same as the line edit's height.
+      // The fonts of these UI items should be kept in sync by applyWordsZoomLevel()
+      // so that text in the combobox is not clipped.
+      const QResizeEvent * const resizeEvent = static_cast< const QResizeEvent * >( event );
+      ui.groupList->setFixedHeight( resizeEvent->size().height() );
+      return false;
+    }
   }
 
   if ( mouseIntercepted )

@@ -595,6 +595,43 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
 
   // Add url scheme to other urls like  "//xxx"
   articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
+
+  // Fix urls in "srcset" attribute
+  pos = 0;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QRegularExpression regSrcset( " srcset\\s*=\\s*\"/[^\"]+\"" );
+  it = regSrcset.globalMatch( articleString );
+  while( it.hasNext() )
+  {
+    QRegularExpressionMatch match = it.next();
+    articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+    pos = match.capturedEnd();
+
+    QString srcset = match.captured();
+#else
+  QRegExp regSrcset( " srcset\\s*=\\s*\"/([^\"]+)\"" );
+  for( ; ; )
+  {
+    pos = regSrcset.indexIn( articleString, pos );
+    if( pos < 0 )
+      break;
+    QString srcset = regSrcset.cap();
+#endif
+    QString newSrcset = srcset.replace( "//", wikiUrl.scheme() + "://" );
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    articleNewString += newSrcset;
+  }
+  if( pos )
+  {
+    articleNewString += articleString.midRef( pos );
+    articleString = articleNewString;
+    articleNewString.clear();
+  }
+#else
+    articleString.replace( pos, regSrcset.cap().size(), newSrcset );
+    pos += newSrcset.size();
+  }
+#endif
 }
 
 void MediaWikiArticleRequest::appendArticleToData( QString const & articleString )
