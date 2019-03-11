@@ -1,5 +1,6 @@
+/* libtiff/tiffconf.h.  Generated from tiffconf.h.in by configure.  */
 /*
-  Configuration defines for Qt.
+  Configuration defines for installed libtiff.
   This file maintained for backward compatibility. Do not use definitions
   from this file in your programs.
 */
@@ -7,50 +8,35 @@
 #ifndef _TIFFCONF_
 #define _TIFFCONF_
 
-#include <qglobal.h>
-
 /* Signed 16-bit type */
-#define TIFF_INT16_T qint16
+#define TIFF_INT16_T signed short
 
 /* Signed 32-bit type */
-#define TIFF_INT32_T qint32
+#define TIFF_INT32_T signed int
 
 /* Signed 64-bit type */
-#define TIFF_INT64_T qint64
+#define TIFF_INT64_T signed long long
 
 /* Signed 8-bit type */
-#define TIFF_INT8_T qint8
+#define TIFF_INT8_T signed char
 
 /* Unsigned 16-bit type */
-#define TIFF_UINT16_T quint16
+#define TIFF_UINT16_T unsigned short
 
 /* Unsigned 32-bit type */
-#define TIFF_UINT32_T quint32
+#define TIFF_UINT32_T unsigned int
 
 /* Unsigned 64-bit type */
-#define TIFF_UINT64_T quint64
+#define TIFF_UINT64_T unsigned long long
 
 /* Unsigned 8-bit type */
-#define TIFF_UINT8_T quint8
+#define TIFF_UINT8_T unsigned char
 
 /* Signed size type */
-#if QT_POINTER_SIZE == 4
-#define TIFF_SSIZE_T qint32
-#else
-#define TIFF_SSIZE_T qint64
-#endif
+#define TIFF_SSIZE_T signed int
 
 /* Pointer difference type */
 #define TIFF_PTRDIFF_T ptrdiff_t
-
-/* Define to 1 if the system has the type `int16'. */
-/* #undef HAVE_INT16 */
-
-/* Define to 1 if the system has the type `int32'. */
-/* #undef HAVE_INT32 */
-
-/* Define to 1 if the system has the type `int8'. */
-/* #undef HAVE_INT8 */
 
 /* Compatibility stuff. */
 
@@ -63,17 +49,16 @@
 
 /* Native cpu byte order: 1 if big-endian (Motorola) or 0 if little-endian
    (Intel) */
-#if (Q_BYTE_ORDER == Q_BIG_ENDIAN)
-#define HOST_BIGENDIAN 1
-#else
 #define HOST_BIGENDIAN 0
-#endif
 
 /* Support CCITT Group 3 & 4 algorithms */
 #define CCITT_SUPPORT 1
 
 /* Support JPEG compression (requires IJG JPEG library) */
 /* #undef JPEG_SUPPORT */
+
+/* Support JBIG compression (requires JBIG-KIT library) */
+/* #undef JBIG_SUPPORT */
 
 /* Support LogLuv high dynamic range encoding */
 #define LOGLUV_SUPPORT 1

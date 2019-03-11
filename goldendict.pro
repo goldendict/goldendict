@@ -75,21 +75,11 @@ win32 {
         Release: LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
-        CONFIG(gcc48) {
-            x64 {
-                LIBS += -L$${PWD}/winlibs/lib64-48
-                QMAKE_CXXFLAGS += -m64
-                QMAKE_CFLAGS += -m64
-            } else {
-                LIBS += -L$${PWD}/winlibs/lib32-48
-            }
-        } else {
-            LIBS += -L$${PWD}/winlibs/lib
-        }
+        LIBS += -L$${PWD}/winlibs/lib
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
         isEmpty(HUNSPELL_LIB) {
-          LIBS += -lhunspell-1.6.1
+          LIBS += -lhunspell
         } else {
           LIBS += -l$$HUNSPELL_LIB
         }
@@ -121,8 +111,6 @@ win32 {
     Debug:CONFIG += console
 
     Release:DEFINES += NO_CONSOLE
-
-    gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
     CONFIG += zim_support
 
@@ -194,14 +182,13 @@ mac {
     # You will need to use Xcode 3 and Qt Carbon SDK
     # if you want the support for PowerPC and/or Mac OS X 10.4
     # CONFIG += x86 x86_64 ppc
-    LIBS = -lz \
-        -lbz2 \
+    LIBS =  \
         -liconv \
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.6.1 \
-        -llzo2
+        -lhunspell-1.6.1
+
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
             -lavutil-gd \
