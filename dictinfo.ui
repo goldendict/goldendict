@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>514</width>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,16 +123,10 @@
    </item>
    <item>
     <widget class="QPlainTextEdit" name="dictionaryFileList">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>70</verstretch>
-      </sizepolicy>
-     </property>
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>70</height>
+       <height>80</height>
       </size>
      </property>
      <property name="maximumSize">

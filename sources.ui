@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>811</width>
-    <height>336</height>
+    <width>786</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,18 +16,6 @@
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <widget class="QTabWidget" name="tabWidget">
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>15</width>
-       <height>15</height>
-      </size>
-     </property>
-     <property name="usesScrollButtons">
-      <bool>false</bool>
-     </property>
      <widget class="QWidget" name="filesTab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
@@ -464,12 +452,6 @@ of the appropriate groups to use them.</string>
       <layout class="QVBoxLayout" name="verticalLayout_13">
        <item>
         <widget class="QLabel" name="label_11">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
          <property name="text">
           <string>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</string>
          </property>
@@ -493,19 +475,6 @@ of the appropriate groups to use them.</string>
           <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <spacer name="verticalSpacer_9">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item>
            <layout class="QFormLayout" name="formLayout">
             <property name="fieldGrowthPolicy">
@@ -556,21 +525,21 @@ in the future, or register on the site to get your own key.</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="0">
+            <item row="2" column="0">
              <widget class="QLabel" name="label_14">
               <property name="text">
                <string>Language codes (comma-separated):</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="2" column="1">
              <widget class="QLineEdit" name="forvoLanguageCodes">
               <property name="toolTip">
                <string>List of language codes you would like to have. Example: &quot;en, ru&quot;.</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="3" column="0">
              <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
@@ -586,7 +555,7 @@ in the future, or register on the site to get your own key.</string>
               </property>
              </spacer>
             </item>
-            <item row="4" column="1">
+            <item row="3" column="1">
              <widget class="QLabel" name="label_15">
               <property name="text">
                <string>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</string>
@@ -596,36 +565,23 @@ in the future, or register on the site to get your own key.</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <spacer name="verticalSpacer_11">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
            </layout>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_10">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -635,91 +591,57 @@ in the future, or register on the site to get your own key.</string>
       </attribute>
       <layout class="QVBoxLayout" name="transliterationLayout">
        <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Transliteration</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="enableRussianTransliteration">
-           <property name="text">
-            <string>Russian transliteration</string>
-           </property>
-           <property name="icon">
-            <iconset resource="flags.qrc">
-             <normaloff>:/flags/ru.png</normaloff>:/flags/ru.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QCheckBox" name="enableGreekTransliteration">
-           <property name="text">
-            <string>Greek transliteration</string>
-           </property>
-           <property name="icon">
-            <iconset resource="flags.qrc">
-             <normaloff>:/flags/gr.png</normaloff>:/flags/gr.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <spacer name="verticalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="enableGermanTransliteration">
-           <property name="text">
-            <string>German transliteration</string>
-           </property>
-           <property name="icon">
-            <iconset resource="flags.qrc">
-             <normaloff>:/flags/de.png</normaloff>:/flags/de.png</iconset>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QCheckBox" name="enableBelarusianTransliteration">
-           <property name="text">
-            <string>Belarusian transliteration</string>
-           </property>
-           <property name="icon">
-            <iconset resource="flags.qrc">
-             <normaloff>:/flags/by.png</normaloff>:/flags/by.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="enableRussianTransliteration">
+            <property name="text">
+             <string>Russian transliteration</string>
+            </property>
+            <property name="icon">
+             <iconset resource="flags.qrc">
+              <normaloff>:/flags/ru.png</normaloff>:/flags/ru.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="enableGreekTransliteration">
+            <property name="text">
+             <string>Greek transliteration</string>
+            </property>
+            <property name="icon">
+             <iconset resource="flags.qrc">
+              <normaloff>:/flags/gr.png</normaloff>:/flags/gr.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="enableGermanTransliteration">
+            <property name="text">
+             <string>German transliteration</string>
+            </property>
+            <property name="icon">
+             <iconset resource="flags.qrc">
+              <normaloff>:/flags/de.png</normaloff>:/flags/de.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="enableBelarusianTransliteration">
+            <property name="text">
+             <string>Belarusian transliteration</string>
+            </property>
+            <property name="icon">
+             <iconset resource="flags.qrc">
+              <normaloff>:/flags/by.png</normaloff>:/flags/by.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <widget class="QGroupBox" name="enableRomaji">
@@ -836,8 +758,6 @@ Not implemented yet in GoldenDict.</string>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>enableRussianTransliteration</tabstop>
-  <tabstop>enableGermanTransliteration</tabstop>
   <tabstop>enableRomaji</tabstop>
   <tabstop>enableHepburn</tabstop>
   <tabstop>enableNihonShiki</tabstop>
@@ -850,7 +770,6 @@ Not implemented yet in GoldenDict.</string>
   <tabstop>mediaWikis</tabstop>
   <tabstop>addMediaWiki</tabstop>
   <tabstop>removeMediaWiki</tabstop>
-  <tabstop>tabWidget</tabstop>
   <tabstop>addPath</tabstop>
   <tabstop>removePath</tabstop>
   <tabstop>rescan</tabstop>

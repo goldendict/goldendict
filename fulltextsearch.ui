@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>492</width>
-    <height>593</height>
+    <width>430</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -27,7 +27,14 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLineEdit" name="searchLine"/>
+       <widget class="QLineEdit" name="searchLine">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout_2">

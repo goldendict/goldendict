@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>606</width>
-    <height>585</height>
+    <width>528</width>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,23 +39,50 @@
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="DictListWidget" name="dictionaryOrder"/>
+          <widget class="DictListWidget" name="dictionaryOrder">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
          <item row="2" column="1">
           <layout class="QVBoxLayout" name="verticalLayout_2"/>
          </item>
          <item row="5" column="0">
-          <widget class="DictListWidget" name="inactiveDictionaries"/>
+          <widget class="DictListWidget" name="inactiveDictionaries">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
          <item row="4" column="0">
           <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Inactive (disabled) dictionaries:</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QuickFilterLine" name="searchLine"/>
+          <widget class="QuickFilterLine" name="searchLine">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -78,9 +105,6 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="dictionaryName">
-            <property name="text">
-             <string notr="true">TextLabel</string>
-            </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
             </property>
@@ -91,9 +115,6 @@
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="dictionaryTotalArticles">
-            <property name="text">
-             <string notr="true">TextLabel</string>
-            </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
             </property>
@@ -115,9 +136,6 @@
           </item>
           <item row="2" column="1">
            <widget class="QLabel" name="dictionaryTotalWords">
-            <property name="text">
-             <string notr="true">TextLabel</string>
-            </property>
             <property name="textFormat">
              <enum>Qt::PlainText</enum>
             </property>
@@ -139,9 +157,6 @@
           </item>
           <item row="3" column="1">
            <widget class="QLabel" name="dictionaryTranslatesFrom">
-            <property name="text">
-             <string notr="true">TextLabel</string>
-            </property>
             <property name="textFormat">
              <enum>Qt::RichText</enum>
             </property>
@@ -149,9 +164,6 @@
           </item>
           <item row="4" column="1">
            <widget class="QLabel" name="dictionaryTranslatesTo">
-            <property name="text">
-             <string notr="true">TextLabel</string>
-            </property>
             <property name="textFormat">
              <enum>Qt::RichText</enum>
             </property>
@@ -248,16 +260,10 @@
         </item>
         <item>
          <widget class="QPlainTextEdit" name="dictionaryFileList">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>65</height>
+            <height>90</height>
            </size>
           </property>
           <property name="maximumSize">
