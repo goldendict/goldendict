@@ -172,6 +172,9 @@ unix:!mac {
     desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
+    appdata.path = $$PREFIX/share/metainfo
+    appdata.files = redist/*.appdata.xml
+    INSTALLS += appdata
     helps.path = $$PREFIX/share/goldendict/help/
     helps.files = help/*.qch
     INSTALLS += helps
