@@ -143,13 +143,13 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 {
   ui.setupUi( this );
 
-  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
-    restoreGeometry( cfg.preferences.fts.dialogGeometry );
-
   setAttribute( Qt::WA_DeleteOnClose, false );
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   setWindowTitle( tr( "Full-text search" ) );
+
+  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
+    restoreGeometry( cfg.preferences.fts.dialogGeometry );
 
   setNewIndexingName( ftsIdx.nowIndexingName() );
 

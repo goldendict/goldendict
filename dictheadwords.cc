@@ -22,15 +22,15 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 {
   ui.setupUi( this );
 
-  if( cfg.headwordsDialog.headwordsDialogGeometry.size() > 0 )
-    restoreGeometry( cfg.headwordsDialog.headwordsDialogGeometry );
-
   bool fromMainWindow = parent->objectName() == "MainWindow";
 
   if( fromMainWindow )
     setAttribute( Qt::WA_DeleteOnClose, false );
 
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
+
+  if( cfg.headwordsDialog.headwordsDialogGeometry.size() > 0 )
+    restoreGeometry( cfg.headwordsDialog.headwordsDialogGeometry );
 
   ui.searchModeCombo->addItem( tr( "Text" ), QRegExp::FixedString );
   ui.searchModeCombo->addItem( tr( "Wildcards" ), QRegExp::WildcardUnix );
