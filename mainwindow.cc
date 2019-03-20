@@ -146,8 +146,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   Epwing::initialize();
 #endif
 
-  applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
-
   ui.setupUi( this );
 
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
@@ -788,6 +786,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   translateLine->setFocus();
+
+  applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
   if ( trayIcon )
   {
