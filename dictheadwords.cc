@@ -116,7 +116,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 DictHeadwords::~DictHeadwords()
 {
   if( delegate )
-    delete delegate;
+    delegate->deleteLater();
 }
 
 void DictHeadwords::setup( Dictionary::Class *dict_ )

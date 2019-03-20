@@ -185,7 +185,7 @@ class FullTextSearchDialog : public QDialog
   QRegExp searchRegExp;
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
-  QStyle * barStyle, * oldBarStyle;
+  QStyle * oldBarStyle;
 #endif
 
 public:
