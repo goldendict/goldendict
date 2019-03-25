@@ -11,6 +11,12 @@
 #include <QTimer>
 #include <QProgressDialog>
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
+#include <QRegularExpression>
+#include "wildcard.hh"
+#include "gddebug.hh"
+#endif
+
 #define AUTO_APPLY_LIMIT 150000
 
 DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
@@ -212,14 +218,43 @@ void DictHeadwords::filterChanged()
           QRegExp::PatternSyntax( ui.searchModeCombo->itemData(
                   ui.searchModeCombo->currentIndex()).toInt() );
 
-  Qt::CaseSensitivity caseSensitivity = ui.matchCase->isChecked() ? Qt::CaseSensitive
-                                                                    : Qt::CaseInsensitive;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
+  QRegularExpression::PatternOptions options = QRegularExpression::UseUnicodePropertiesOption;
+  if( !ui.matchCase->isChecked() )
+    options |= QRegularExpression::CaseInsensitiveOption;
 
+  QString pattern;
+  switch( syntax )
+  {
+    case QRegExp::FixedString:  pattern = QRegularExpression::escape( ui.filterLine->text() );
+                                break;
+    case QRegExp::WildcardUnix: pattern = wildcardsToRegexp( ui.filterLine->text() );
+                                break;
+    default:                    pattern = ui.filterLine->text();
+                                break;
+  }
+
+  QRegularExpression regExp( pattern, options );
+
+  if( !regExp.isValid() )
+  {
+    gdWarning( "Invalid regexp pattern: %s\n", pattern.toUtf8().data() );
+    regExp.setPattern( QString::fromLatin1( "\1" ) );
+  }
+
+  QApplication::setOverrideCursor( Qt::WaitCursor );
+
+  proxy->setFilterRegularExpression( regExp );
+#else
+  Qt::CaseSensitivity caseSensitivity = ui.matchCase->isChecked() ? Qt::CaseSensitive
+                                                                  : Qt::CaseInsensitive;
   QRegExp regExp( ui.filterLine->text(), caseSensitivity, syntax );
 
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
   proxy->setFilterRegExp( regExp );
+#endif
+
   proxy->sort( 0 );
 
   QApplication::restoreOverrideCursor();
