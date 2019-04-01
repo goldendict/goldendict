@@ -255,6 +255,25 @@ div.xdxf
     color: #808080;
 }
 
+.xdxf_ex_source:before
+{
+    content:"["
+}
+.xdxf_ex_source:after
+{
+    content:"]"
+}
+
+.xdxf_ex_tran:before
+{
+    content:"— "
+}
+
+.xdxf_ex_tran
+{
+    font-style: italic;
+}
+
 /* Direct translation */
 .xdxf_dtrn
 {

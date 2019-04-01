@@ -145,7 +145,46 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
   while( nodes.size() )
   {
+    QString author, source;
     QDomElement el = nodes.at( 0 ).toElement();
+
+    author = el.attribute( "author", QString() );
+    source = el.attribute( "source", QString() );
+
+    if( el.hasChildNodes() )
+    {
+      QDomNodeList lst = el.childNodes();
+      for( int i = 0; i < lst.count(); ++i )
+      {
+        QDomElement el2 = el.childNodes().at( i ).toElement();
+        if( el2.tagName().compare( "ex_orig", Qt::CaseInsensitive ) == 0 )
+        {
+          el2.setTagName( "span" );
+          el2.setAttribute( "class", "xdxf_ex_orig" );
+        }
+        else if( el2.tagName().compare( "ex_tran", Qt::CaseInsensitive ) == 0 )
+        {
+          el2.setTagName( "span" );
+          el2.setAttribute( "class", "xdxf_ex_tran" );
+        }
+      }
+    }
+    if( ( !author.isEmpty() || !source.isEmpty() )
+        && ( !el.text().isEmpty() || !el.childNodes().isEmpty() ) )
+    {
+      QDomElement el2 = dd.createElement( "span" );
+      el2.setAttribute( "class", "xdxf_ex_source" );
+      QString text = author;
+      if( !source.isEmpty() )
+      {
+        if( !text.isEmpty() )
+          text += ", ";
+        text += source;
+      }
+      QDomText txtNode = dd.createTextNode( text );
+      el2.appendChild( txtNode );
+      el.appendChild( el2 );
+    }
 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
       el.appendChild( fakeElement( dd ) );
