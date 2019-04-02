@@ -4252,7 +4252,7 @@ void MainWindow::showDictionaryHeadwords( QWidget * owner, Dictionary::Class * d
     connect( headwordsDlg, SIGNAL( headwordSelected( QString, QString ) ),
              this, SLOT( headwordReceived( QString, QString ) ) );
     connect( headwordsDlg, SIGNAL( closeDialog() ),
-             this, SLOT( closeHeadwordsDialog() ) );
+             this, SLOT( closeHeadwordsDialog() ), Qt::QueuedConnection );
   }
   else
     headwordsDlg->setup( dict );
