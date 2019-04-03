@@ -4,6 +4,7 @@
 #include "dictheadwords.hh"
 #include "gddebug.hh"
 #include "mainwindow.hh"
+#include "delegate.hh"
 
 #include <QRegExp>
 #include <QDir>
@@ -67,9 +68,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
   // very important call, for performance reasons:
   ui.headersListView->setUniformItemSizes( true );
 
-  delegate = new WordListItemDelegate( ui.headersListView->itemDelegate() );
-  if( delegate )
-    ui.headersListView->setItemDelegate( delegate );
+  WordListItemDelegate *delegate = new WordListItemDelegate( ui.headersListView);
 
   ui.autoApply->setChecked( cfg.headwordsDialog.autoApply );
 
@@ -121,8 +120,6 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
 DictHeadwords::~DictHeadwords()
 {
-  if( delegate )
-    delegate->deleteLater();
 }
 
 void DictHeadwords::setup( Dictionary::Class *dict_ )

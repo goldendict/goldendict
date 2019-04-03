@@ -4,13 +4,13 @@
 #include <QDebug>
 
 #include "wordlist.hh"
+#include "delegate.hh"
 
 WordList::WordList( QWidget * parent ) : QListWidget( parent )
-, listItemDelegate( itemDelegate() )
 {
   wordFinder = 0;
   translateLine = 0;
-  setItemDelegate( &listItemDelegate );
+  WordListItemDelegate *listItemDelegate = new WordListItemDelegate(this);
 }
 
 void WordList::attachFinder( WordFinder * finder )

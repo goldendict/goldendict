@@ -15,7 +15,6 @@
 #include <QMimeData>
 
 #include <config.hh>
-#include "delegate.hh"
 #include "treeview.hh"
 
 class FavoritesModel;
@@ -26,7 +25,6 @@ class FavoritesPaneWidget : public QWidget
 public:
   FavoritesPaneWidget( QWidget * parent = 0 ): QWidget( parent ),
     itemSelectionChanged( false )
-  , listItemDelegate( 0 )
   , m_favoritesModel( 0 )
   , timerId( 0 )
   {}
@@ -92,7 +90,6 @@ private:
   /// when selecting items via mouse and keyboard
   bool itemSelectionChanged;
 
-  WordListItemDelegate * listItemDelegate;
   FavoritesModel * m_favoritesModel;
 
   int timerId;

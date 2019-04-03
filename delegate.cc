@@ -1,11 +1,12 @@
 #include <QStyleOptionViewItemV4>
-
+#include <QAbstractItemView>
 #include "delegate.hh"
 
-WordListItemDelegate::WordListItemDelegate(  QAbstractItemDelegate * delegate  ) :
-QStyledItemDelegate()
+WordListItemDelegate::WordListItemDelegate(QAbstractItemView *parent) :
+QStyledItemDelegate(parent)
 {
-  mainDelegate = static_cast< QStyledItemDelegate * >( delegate );
+    mainDelegate = qobject_cast< QStyledItemDelegate * >( parent->itemDelegate());
+    parent->setItemDelegate( this );
 }
 
 void WordListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const

@@ -15,25 +15,29 @@ ArticleWebView::ArticleWebView( QWidget *parent ):
   QWebView( parent ),
 #if QT_VERSION >= 0x040600
   inspector( NULL ),
+  showInspectorDirectly( true ),
 #endif
   midButtonPressed( false ),
-  selectionBySingleClick( false ),
-  showInspectorDirectly( true )
+  selectionBySingleClick( false )
 {
 }
 
 ArticleWebView::~ArticleWebView()
 {
-#if QT_VERSION >= 0x040600
-  if ( inspector )
-    inspector->deleteLater();
-#endif
 }
 
 void ArticleWebView::setUp( Config::Class * cfg )
 {
   this->cfg = cfg;
 }
+
+#if QT_VERSION >= 0x040600
+void ArticleWebView::beforeClosed()
+{
+    cfg->inspectorGeometry = inspector->saveGeometry();
+    inspector = 0;
+}
+#endif
 
 void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked )
 {
@@ -43,9 +47,12 @@ void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked
     // Get or create inspector instance for current view.
     if ( !inspector )
     {
-      inspector = new ArticleInspector( cfg );
+      inspector = new ArticleInspector();
       inspector->setPage( page() );
-      connect( this, SIGNAL( destroyed() ), inspector, SLOT( beforeClosed() ) );
+      connect( this, SIGNAL( destroyed() ), inspector, SLOT( close() ) );
+      connect( inspector, SIGNAL( destroyed() ), this, SLOT( beforeClosed() ) );
+      inspector->restoreGeometry( cfg->inspectorGeometry );
+      inspector->setAttribute(Qt::WA_DeleteOnClose);
     }
 
     if ( showInspectorDirectly )
@@ -67,6 +74,7 @@ bool ArticleWebView::event( QEvent * event )
 {
   switch ( event->type() )
   {
+#if QT_VERSION >= 0x040600
   case QEvent::MouseButtonRelease:
   case QEvent::MouseButtonDblClick:
     showInspectorDirectly = true;
@@ -75,7 +83,7 @@ bool ArticleWebView::event( QEvent * event )
   case QEvent::ContextMenu:
     showInspectorDirectly = false;
     break;
-
+#endif
   default:
     break;
   }

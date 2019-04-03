@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "fulltextsearch.hh"
+#include "delegate.hh"
 #include "ftshelpers.hh"
 #include "gddebug.hh"
 #include "mainwindow.hh"
@@ -237,9 +238,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
   ui.headwordsView->installEventFilter( this );
 
-  delegate = new WordListItemDelegate( ui.headwordsView->itemDelegate() );
-  if( delegate )
-    ui.headwordsView->setItemDelegate( delegate );
+  WordListItemDelegate *delegate = new WordListItemDelegate( ui.headwordsView);
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
@@ -269,9 +268,6 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
 FullTextSearchDialog::~FullTextSearchDialog()
 {
-  if( delegate )
-    delegate->deleteLater();
-
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
   if( oldBarStyle )

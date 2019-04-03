@@ -12,6 +12,7 @@
 #include <QMap>
 
 #include "favoritespanewidget.hh"
+#include "delegate.hh"
 #include "gddebug.hh"
 #include "atomic_rename.hh"
 
@@ -78,8 +79,7 @@ void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
   // Favorites tree
   m_favoritesModel = new FavoritesModel( Config::getFavoritiesFileName(), this );
 
-  listItemDelegate = new WordListItemDelegate( m_favoritesTree->itemDelegate() );
-  m_favoritesTree->setItemDelegate( listItemDelegate );
+  WordListItemDelegate *listItemDelegate = new WordListItemDelegate( m_favoritesTree);
 
   QAbstractItemModel * oldModel = m_favoritesTree->model();
   m_favoritesTree->setModel( m_favoritesModel );
@@ -125,8 +125,6 @@ void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
 
 FavoritesPaneWidget::~FavoritesPaneWidget()
 {
-  if( listItemDelegate )
-    delete listItemDelegate;
 }
 
 bool FavoritesPaneWidget::eventFilter( QObject * obj, QEvent * ev )

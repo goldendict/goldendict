@@ -7,7 +7,7 @@
 class WordListItemDelegate : public QStyledItemDelegate
 {
 public:
-  WordListItemDelegate( QAbstractItemDelegate * delegate );
+  WordListItemDelegate(QAbstractItemView *parent );
   virtual void paint( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const;
 
 private:

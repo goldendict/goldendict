@@ -14,7 +14,6 @@
 
 #include <config.hh>
 #include "history.hh"
-#include "delegate.hh"
 
 /// A widget holding the contents of the 'History' docklet.
 class HistoryPaneWidget : public QWidget
@@ -23,7 +22,6 @@ class HistoryPaneWidget : public QWidget
 public:
   explicit HistoryPaneWidget( QWidget * parent = 0 ): QWidget( parent ),
     itemSelectionChanged( false )
-  , listItemDelegate( 0 )
   {}
   virtual ~HistoryPaneWidget();
 
@@ -66,7 +64,6 @@ private:
   /// when selecting history items via mouse and keyboard
   bool itemSelectionChanged;
 
-  WordListItemDelegate * listItemDelegate;
 };
 
 class HistoryModel : public QAbstractListModel

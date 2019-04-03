@@ -12,7 +12,6 @@
 #include "config.hh"
 #include "ui_dictheadwords.h"
 #include "dictionary.hh"
-#include "delegate.hh"
 #include "helpwindow.hh"
 
 class DictHeadwords : public QDialog
@@ -32,7 +31,6 @@ protected:
   QStringList headers;
   QStringListModel * model;
   QSortFilterProxyModel * proxy;
-  WordListItemDelegate * delegate;
   QString dictId;
 
   QAction helpAction;

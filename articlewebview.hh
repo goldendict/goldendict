@@ -7,7 +7,7 @@
 #include <QWebView>
 #include "config.hh"
 
-class ArticleInspector;
+typedef class QWebInspector ArticleInspector;
 
 /// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
@@ -43,6 +43,10 @@ signals:
   /// word, which gets selected by the view in response to double-click.
   void doubleClicked( QPoint pos );
 
+protected slots:
+#if QT_VERSION >= 0x040600
+  void beforeClosed();
+#endif
 protected:
 
   bool event( QEvent * event );
@@ -55,11 +59,13 @@ protected:
 private:
 
   Config::Class * cfg;
+#if QT_VERSION >= 0x040600
   ArticleInspector * inspector;
+  bool showInspectorDirectly;
+#endif
 
   bool midButtonPressed;
   bool selectionBySingleClick;
-  bool showInspectorDirectly;
 };
 
 #endif

@@ -8,6 +8,7 @@
 #include <QClipboard>
 
 #include "historypanewidget.hh"
+#include "delegate.hh"
 
 void HistoryPaneWidget::setUp( Config::Class * cfg,  History * history, QMenu * menu )
 {
@@ -87,14 +88,11 @@ void HistoryPaneWidget::setUp( Config::Class * cfg,  History * history, QMenu * 
   connect( m_historyList, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( showCustomMenu( QPoint const & ) ) );
 
-  listItemDelegate = new WordListItemDelegate( m_historyList->itemDelegate() );
-  m_historyList->setItemDelegate( listItemDelegate );
+  WordListItemDelegate *listItemDelegate = new WordListItemDelegate( m_historyList);
 }
 
 HistoryPaneWidget::~HistoryPaneWidget()
 {
-  if( listItemDelegate )
-    delete listItemDelegate;
 }
 
 void HistoryPaneWidget::copySelectedItems()
