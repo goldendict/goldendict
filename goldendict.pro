@@ -179,6 +179,9 @@ unix:!mac {
     helps.files = help/*.qch
     INSTALLS += helps
 }
+freebsd {
+    LIBS += -liconv -lexecinfo
+}
 mac {
     TARGET = GoldenDict
     # Uncomment this line to make a universal binary.

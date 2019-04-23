@@ -45,7 +45,8 @@ QSwipeGesture::SwipeDirection getVerticalDirection( qreal angle )
   return QSwipeGesture::NoDirection;
 }
 
-GDPinchGesture::GDPinchGesture() :
+GDPinchGesture::GDPinchGesture( QObject * parent ) :
+QGesture( parent ),
 isNewSequence( true )
 {
 }
@@ -55,7 +56,7 @@ QGesture * GDPinchGestureRecognizer::create( QObject * pTarget )
   if ( pTarget && pTarget->isWidgetType()) {
     static_cast< QWidget * >( pTarget )->setAttribute( Qt::WA_AcceptTouchEvents );
   }
-  QGesture *pGesture = new GDPinchGesture;
+  QGesture *pGesture = new GDPinchGesture( pTarget );
   return pGesture;
 }
 
@@ -161,7 +162,8 @@ QGestureRecognizer::Result GDPinchGestureRecognizer::recognize( QGesture * state
 }
 
 
-GDSwipeGesture::GDSwipeGesture() :
+GDSwipeGesture::GDSwipeGesture( QObject * parent ) :
+QGesture( parent ),
 vertDirection( QSwipeGesture::NoDirection ),
 horizDirection( QSwipeGesture::NoDirection ),
 started( false )
@@ -173,7 +175,7 @@ QGesture * GDSwipeGestureRecognizer::create( QObject * pTarget )
   if ( pTarget && pTarget->isWidgetType() ) {
     static_cast< QWidget * >( pTarget )->setAttribute( Qt::WA_AcceptTouchEvents );
   }
-  QGesture *pGesture = new GDSwipeGesture;
+  QGesture *pGesture = new GDSwipeGesture( pTarget );
   return pGesture;
 }
 

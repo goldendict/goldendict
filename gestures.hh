@@ -36,7 +36,7 @@ class GDPinchGestureRecognizer;
 class GDPinchGesture : public QGesture
 {
 public:
-  GDPinchGesture();
+  GDPinchGesture( QObject * parent );
 
   bool isScaleChanged() const
   { return scaleChanged; }
@@ -65,7 +65,7 @@ class GDSwipeGestureRecognizer;
 class GDSwipeGesture : public QGesture
 {
 public:
-  GDSwipeGesture();
+  GDSwipeGesture( QObject * parent );
   QSwipeGesture::SwipeDirection getHorizDirection() const
   { return horizDirection; }
   QSwipeGesture::SwipeDirection getVertDirection() const
