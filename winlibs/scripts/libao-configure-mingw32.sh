@@ -2,4 +2,4 @@
  ./autogen.sh
 ./configure \
 	--prefix=$PREFIX \
-	--enable-shared
+	--enable-shared=yes

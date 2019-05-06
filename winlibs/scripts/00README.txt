@@ -35,8 +35,11 @@ Build
 
 * Build zlib:
   * /bin/make -f./win32/makefile.gcc && /bin/make -f./win32/makefile.gcc install
+* Build bzip2:
+  * /bin/make -f./Makefile && /bin/make -f./Makefile install
 
 * Build libOpenCC:
+  * notice: do not use the cmake from msys2
   * cmake . -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release 
   * /bin/make -j8 
   or
@@ -59,13 +62,13 @@ Build
   * ./configure --prefix=$PREFIX --enable-shared=no && /bin/make -j8 && /bin/make install
 
 * Build lzo:
-  * ./configure --prefix=$PREFIX --enable-shared=no  && /bin/make -j8 && /bin/make install
+  * ./configure --prefix=$PREFIX --enable-shared=yes  && /bin/make -j8 && /bin/make install
   
 * Build xz:
-  * ./autogen.sh && ./configure --prefix=$PREFIX --enable-shared=no && /bin/make -j8 && /bin/make install
+  * ./autogen.sh && ./configure --prefix=$PREFIX --enable-shared=yes && /bin/make -j8 && /bin/make install
 
 * Build tiff:
-  * ./configure --prefix=$PREFIX  && /bin/make -j8 && /bin/make install
+  * ./configure --prefix=$PREFIX --enable-shared=yes  && /bin/make -j8 && /bin/make install
   
 binaries (dlls):  ${PREFIX}/bin
 C headers:        ${PREFIX}/include
