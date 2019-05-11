@@ -33,6 +33,17 @@ Qt::Popup
 #endif
 ;
 
+static const Qt::WindowFlags pinnedWindowFlags =
+#ifdef HAVE_X11
+/// With the Qt::Dialog flag, scan popup is always on top of the main window
+/// on Linux/X11 with Qt 4, Qt 5 since version 5.12.1 (QTBUG-74309).
+/// Qt::Window allows to use the scan popup and the main window independently.
+Qt::Window
+#else
+Qt::Dialog
+#endif
+;
+
 #ifdef HAVE_X11
 static bool ownsClipboardMode( QClipboard::Mode mode )
 {
@@ -186,7 +197,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   if ( cfg.pinPopupWindow )
   {
     dictionaryBar.setMovable( true );
-    Qt::WindowFlags flags = Qt::Dialog;
+    Qt::WindowFlags flags = pinnedWindowFlags;
     if( cfg.popupWindowAlwaysOnTop )
       flags |= Qt::WindowStaysOnTopHint;
     setWindowFlags( flags );
@@ -1063,7 +1074,7 @@ void ScanPopup::pinButtonClicked( bool checked )
     uninterceptMouse();
 
     ui.onTopButton->setVisible( true );
-    Qt::WindowFlags flags = Qt::Dialog;
+    Qt::WindowFlags flags = pinnedWindowFlags;
     if( ui.onTopButton->isChecked() )
       flags |= Qt::WindowStaysOnTopHint;
     setWindowFlags( flags );
