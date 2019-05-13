@@ -789,6 +789,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
+  makeScanPopup();
+
   if ( trayIcon )
   {
     // Upgrade existing dummy tray icon into a full-functional one
