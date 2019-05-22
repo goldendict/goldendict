@@ -789,6 +789,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   applyQtStyleSheet( cfg.preferences.displayStyle, cfg.preferences.addonStyle );
 
+  makeScanPopup();
+
   if ( trayIcon )
   {
     // Upgrade existing dummy tray icon into a full-functional one
@@ -1251,7 +1253,8 @@ void MainWindow::applyWebSettings()
 
 void MainWindow::makeDictionaries()
 {
-  scanPopup.reset();
+  Q_ASSERT( !scanPopup && "Scan popup must not exist while dictionaries are initialized. "
+                          "It does not support dictionaries changes and must be constructed anew." );
 
   wordFinder.clear();
 
@@ -1273,7 +1276,6 @@ void MainWindow::makeDictionaries()
 
   updateStatusLine();
   updateGroupList();
-  makeScanPopup();
 }
 
 void MainWindow::updateStatusLine()
