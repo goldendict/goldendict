@@ -236,8 +236,10 @@ bool DecoderContext::openCodec( QString & errorString )
     return false;
   }
 
+#ifndef NO_CONSOLE
   av_log( NULL, AV_LOG_INFO, "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec_->long_name,
           codecContext_->channels, codecContext_->sample_rate, av_get_sample_fmt_name( codecContext_->sample_fmt ) );
+#endif
   return true;
 }
 
@@ -313,8 +315,10 @@ bool DecoderContext::openOutputDevice( QString & errorString )
     return false;
   }
 
+#ifndef NO_CONSOLE
   av_log( NULL, AV_LOG_INFO, "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
           aoDrvInfo->name, aoSampleFormat.channels, aoSampleFormat.rate, aoSampleFormat.bits );
+#endif
 
   aoDevice_ = ao_open_live( aoDriverId, &aoSampleFormat, NULL );
   if ( !aoDevice_ )

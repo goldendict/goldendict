@@ -123,6 +123,9 @@ win32 {
     }
 }
 
+Debug:DEFINES += GD_LOG_MSGOUT
+Release:DEFINES += QT_NO_WARNING_OUTPUT QT_NO_DEBUG QT_NO_DEBUG_OUTPUT
+
 unix:!mac {
   DEFINES += HAVE_X11
   # This is to keep symbols for backtraces

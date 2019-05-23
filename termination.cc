@@ -23,12 +23,16 @@
 #include <QtCore>
 
 using std::string;
+#ifdef GD_LOG_MSGOUT
+extern QFile * logFilePtr;
+#endif
 
 static void termHandler()
 {
+#ifdef GD_LOG_MSGOUT
   if( logFilePtr && logFilePtr->isOpen() )
     logFilePtr->close();
-
+#endif
   std::string message( "GoldenDict has crashed with an unexpected exception\n\n" );
 
   int status;

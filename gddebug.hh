@@ -11,6 +11,7 @@
 #define GD_FDPRINTF(...) fprintf(__VA_ARGS__)
 #endif
 
+#ifdef GD_LOG_MSGOUT
 void gdWarning(const char *, ...) /* print warning message */
 #if defined(Q_CC_GNU) && !defined(__INSURE__)
     __attribute__ ((format (printf, 1, 2)))
@@ -22,7 +23,10 @@ void gdDebug(const char *, ...)
     __attribute__ ((format (printf, 1, 2)))
 #endif
 ;
-
 extern QFile * logFilePtr;
+#else
+#define gdWarning(...)
+#define gdDebug(...)
+#endif
 
 #endif // __GDDEBUG_HH_INCLUDED__

@@ -41,6 +41,8 @@
 #include "lionsupport.h"
 #endif
 
+#ifdef GD_LOG_MSGOUT
+
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
 
 void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &mess )
@@ -109,6 +111,8 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
     logFilePtr->flush();
   }
 }
+
+#endif
 
 class GDCommandLine
 {
@@ -201,6 +205,7 @@ logFile( false )
   }
 }
 
+#ifdef GD_LOG_MSGOUT
 class LogFilePtrGuard
 {
   QFile logFile;
@@ -209,6 +214,7 @@ public:
   LogFilePtrGuard() { logFilePtr = &logFile; }
   ~LogFilePtrGuard() { logFilePtr = 0; }
 };
+#endif
 
 int main( int argc, char ** argv )
 {
@@ -288,8 +294,9 @@ int main( int argc, char ** argv )
 #endif
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
+#ifdef GD_LOG_MSGOUT
   LogFilePtrGuard logFilePtrGuard;
-
+#endif
   if ( app.isRunning() )
   {
     bool wasMessage = false;
@@ -374,6 +381,7 @@ int main( int argc, char ** argv )
     break;
   }
 
+#ifdef GD_LOG_MSGOUT
   if( gdcl.needLogFile() )
   {
     // Open log file
@@ -393,6 +401,7 @@ int main( int argc, char ** argv )
     qInstallMsgHandler( gdMessageHandler );
 #endif
   }
+#endif
 
   if ( Config::isPortableVersion() )
   {
@@ -447,8 +456,9 @@ int main( int argc, char ** argv )
 
   app.removeDataCommiter( m );
 
+#ifdef GD_LOG_MSGOUT
   if( logFilePtr->isOpen() )
     logFilePtr->close();
-
+#endif
   return r;
 }

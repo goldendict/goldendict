@@ -6,8 +6,6 @@
 
 #include <QFile>
 
-extern QFile * logFilePtr;
-
 // Installs the termination handler which attempts to pop Qt's dialog showing
 // the exception and backtrace, and then aborts.
 void installTerminationHandler();

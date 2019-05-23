@@ -1,11 +1,13 @@
 /* This file is (c) 2013 Abs62
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include <QTextCodec>
-#include <QString>
 #include "gddebug.hh"
 
-QFile * logFilePtr;
+#ifdef GD_LOG_MSGOUT
+#include <QTextCodec>
+#include <QString>
+
+QFile * logFilePtr = 0;
 static QTextCodec * utf8Codec;
 
 void gdWarning(const char *msg, ...)
@@ -57,3 +59,4 @@ QTextCodec *localeCodec = 0;
 
   va_end(ap);
 }
+#endif
