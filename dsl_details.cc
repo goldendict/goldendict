@@ -214,6 +214,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
           if( !linkTo.empty() )
           {
             list< wstring > allLinkEntries;
+            processUnsortedParts( linkTo, true );
             expandOptionalParts( linkTo, &allLinkEntries );
 
             for( list< wstring >::iterator entry = allLinkEntries.begin();
@@ -244,7 +245,6 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               textNode = 0;
 
               wstring linkText = Folding::trimWhitespace( *entry );
-              processUnsortedParts( linkText, true );
               ArticleDom nodeDom( linkText, dictName, headword_ );
 
               Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
