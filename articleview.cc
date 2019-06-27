@@ -1471,10 +1471,46 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
 
       if ( activeDicts )
       {
+        unsigned preferred = UINT_MAX;
+        if( url.hasFragment() && url.scheme() == "gdau" )
+        {
+          // Find sound in the preferred dictionary
+          QString preferredName = Qt4x5::Url::fragment( url );
+          for( unsigned x = 0; x < activeDicts->size(); ++x )
+          {
+            try
+            {
+              if( preferredName.compare( QString::fromUtf8( (*activeDicts)[ x ]->getName().c_str() ) ) == 0 )
+              {
+                preferred = x;
+                sptr< Dictionary::DataRequest > req =
+                  (*activeDicts)[ x ]->getResource(
+                    url.path().mid( 1 ).toUtf8().data() );
+
+                handler->addRequest( req );
+
+                if( req->isFinished() && req->dataSize() > 0 )
+                {
+                  handler->downloadFinished();
+                  return handler;
+                }
+                break;
+              }
+            }
+            catch( std::exception & e )
+            {
+              gdWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
+                         (*activeDicts)[ x ]->getName().c_str() );
+            }
+          }
+        }
         for( unsigned x = 0; x < activeDicts->size(); ++x )
         {
           try
           {
+            if( x == preferred )
+              continue;
+
             req = (*activeDicts)[ x ]->getResource(
                     Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
 
