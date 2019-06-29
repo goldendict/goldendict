@@ -51,28 +51,32 @@ OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 RCC_DIR = build
-LIBS += \
-        -lz \
-        -lbz2 \
-        -llzo2
+LIBS += -llzo2
 
 win32 {
-    TARGET = GoldenDict
+    LIBS += -lzlib -llibbz2
 
+    TARGET = GoldenDict
+    greaterThan(QT_MAJOR_VERSION, 4) {
+        TARGET_ARCH=$${QT_ARCH}
+    } else {
+        TARGET_ARCH=$${QMAKE_HOST.arch}
+    }
     win32-msvc* {
         VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
-        contains(QMAKE_TARGET.arch, x86_64) {
+        contains(TARGET_ARCH, x86_64) {
             DEFINES += NOMINMAX __WIN64
+            LIBS += -L$${PWD}/winlibs/lib/msvc_2019/x64
+        } else {
+            LIBS += -L$${PWD}/winlibs/lib/msvc
         }
-        LIBS += -L$${PWD}/winlibs/lib/msvc
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
         QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         DEFINES += GD_NO_MANIFEST
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
         LIBS += -lshell32 -luser32 -lsapi -lole32
-        Debug: LIBS+= -lhunspelld
-        Release: LIBS+= -lhunspell
+        LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
         LIBS += -L$${PWD}/winlibs/lib
@@ -121,6 +125,8 @@ win32 {
     greaterThan(QT_MAJOR_VERSION, 4) {
       LIBS += -luxtheme
     }
+} else {
+LIBS += -lz -lbz2
 }
 
 Debug:DEFINES += GD_LOG_MSGOUT

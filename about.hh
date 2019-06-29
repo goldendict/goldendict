@@ -17,7 +17,7 @@
 #  else
 #    define GD_CXX_MSVC_BUILD 0
 #  endif
-#  define GD_CXX_MSVC_MAJOR (_MSC_VER/100-6)
+#  define GD_CXX_MSVC_MAJOR (_MSC_VER/100-5)
 #  define GD_CXX_MSVC_MINOR (_MSC_VER%100)
 #endif
 

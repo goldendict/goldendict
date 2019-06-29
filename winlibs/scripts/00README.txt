@@ -8,6 +8,8 @@ Prerequisites
 Build
 =====
 
+pkg-config --list-all
+
 * Get source tarball for libspeex, ffmpeg, libao, zlib and extract them respectively:
   * libspeex: http://www.speex.org/downloads/
   * libao: http://www.xiph.org/downloads/
@@ -18,7 +20,7 @@ Build
   * NOTE: You may also want to define CPATH and LIBRARY_PATH:
     export CPATH=${CPATH}:${PREFIX}/include
     export LIBRARY_PATH=${LIBRARY_PATH}:${PREFIX}/lib
- 		export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig
+    export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${PREFIX}/lib/pkgconfig
  		
 * First, build the libspeex as static library:
   * ./configure --prefix=$PREFIX --enable-static --disable-shared
@@ -27,6 +29,8 @@ Build
 * Build ffmpeg:
   * Copy "ffmpeg-configure-mingw32.sh" to the ffmpeg source folder.
   * ./ffmpeg-configure-mingw32.sh && /bin/make -j8 && /bin/make install
+  msvc: configure +=  --toolchain=msvc  && /bin/make -j8 && /bin/make install
+
 
 * Build libao:
   * Copy "libao-configure-mingw32.sh" to the libao source folder.
@@ -43,7 +47,7 @@ Build
   * cmake . -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=$PREFIX -DCMAKE_BUILD_TYPE=Release 
   * /bin/make -j8 
   or
-  * cmake -H. -Bbuild -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX=$PREFIX
+  * cmake -H. -Bbuild -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release  -DCMAKE_INSTALL_PREFIX=$PREFIX
   * cmake --build build --config Release --target install
 
 * Build libeb:
@@ -63,7 +67,8 @@ Build
 
 * Build lzo:
   * ./configure --prefix=$PREFIX --enable-shared=yes  && /bin/make -j8 && /bin/make install
-  
+  * for vc: b\win64\vc_dll.bat          ||     b\win32\vc_dll.ba
+
 * Build xz:
   * ./autogen.sh && ./configure --prefix=$PREFIX --enable-shared=yes && /bin/make -j8 && /bin/make install
 
