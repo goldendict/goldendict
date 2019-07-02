@@ -12,7 +12,7 @@ isEmpty( hasGit ) {
   message(Failed to precisely describe the version via Git -- using the default version string)
   system(echo $$VERSION > version.txt)
 }
-
+DESTDIR = E:/MHDD/Media/GoldenDict
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 
