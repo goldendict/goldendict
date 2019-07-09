@@ -887,6 +887,11 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 {
   QString text = translateLine->text();
 
+  if( ftsDlg )
+    removeGroupComboBoxActionsFromDialog( ftsDlg, groupList );
+  if( headwordsDlg )
+    removeGroupComboBoxActionsFromDialog( headwordsDlg, groupList );
+
   if ( searchInDock )
   {
     cfg.preferences.searchInDock = true;
@@ -924,6 +929,11 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 
     translateBoxToolBarAction->setVisible( true );
   }
+
+  if( ftsDlg )
+    addGroupComboBoxActionsToDialog( ftsDlg, groupList );
+  if( headwordsDlg )
+    addGroupComboBoxActionsToDialog( headwordsDlg, groupList );
 
   translateLine->setToolTip( tr( "String to search in dictionaries. The wildcards '*', '?' and sets of symbols '[...]' are allowed.\nTo find '*', '?', '[', ']' symbols use '\\*', '\\?', '\\[', '\\]' respectively" ) );
 
@@ -1027,6 +1037,18 @@ void MainWindow::addGlobalActionsToDialog( QDialog * dialog )
   dialog->addAction( &focusHeadwordsDlgAction );
   dialog->addAction( &focusArticleViewAction );
   dialog->addAction( ui.fullTextSearchAction );
+}
+
+void MainWindow::addGroupComboBoxActionsToDialog( QDialog * dialog, GroupComboBox * pGroupComboBox )
+{
+  dialog->addActions( pGroupComboBox->getExternActions() );
+}
+
+void MainWindow::removeGroupComboBoxActionsFromDialog( QDialog * dialog, GroupComboBox * pGroupComboBox )
+{
+  QList< QAction * > actions = pGroupComboBox->getExternActions();
+  for( QList< QAction * >::iterator it = actions.begin(); it != actions.end(); ++it )
+    dialog->removeAction( *it );
 }
 
 void MainWindow::commitData( QSessionManager & )
@@ -4255,6 +4277,7 @@ void MainWindow::showDictionaryHeadwords( QWidget * owner, Dictionary::Class * d
   {
     headwordsDlg = new DictHeadwords( this, cfg, dict );
     addGlobalActionsToDialog( headwordsDlg );
+    addGroupComboBoxActionsToDialog( headwordsDlg, groupList );
     connect( headwordsDlg, SIGNAL( headwordSelected( QString, QString ) ),
              this, SLOT( headwordReceived( QString, QString ) ) );
     connect( headwordsDlg, SIGNAL( closeDialog() ),
@@ -4515,6 +4538,7 @@ void MainWindow::showFullTextSearchDialog()
   {
     ftsDlg = new FTS::FullTextSearchDialog( this, cfg, dictionaries, groupInstances, ftsIndexing );
     addGlobalActionsToDialog( ftsDlg );
+    addGroupComboBoxActionsToDialog( ftsDlg, groupList );
 
     connect( ftsDlg, SIGNAL( showTranslationFor( QString, QStringList, QRegExp, bool ) ),
              this, SLOT( showTranslationFor( QString, QStringList, QRegExp, bool ) ) );

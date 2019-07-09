@@ -7,6 +7,7 @@
 #include <QComboBox>
 #include <QAction>
 #include <QSize>
+#include <QList>
 #include "instances.hh"
 
 /// This is a combo box which is for choosing the dictionary group
@@ -28,6 +29,9 @@ public:
 
   /// Returns current group.
   unsigned getCurrentGroup() const;
+
+  /// Return actions which should be accessible from FTS and Headwords dialogs
+  QList< QAction * > getExternActions();
 
 protected:
 
