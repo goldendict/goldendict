@@ -55,8 +55,6 @@ RCC_DIR = build
 LIBS += -llzo2
 
 win32 {
-    LIBS += -lzlib -llibbz2
-
     TARGET = GoldenDict
     greaterThan(QT_MAJOR_VERSION, 4) {
         TARGET_ARCH=$${QT_ARCH}
@@ -64,8 +62,9 @@ win32 {
         TARGET_ARCH=$${QMAKE_HOST.arch}
     }
     win32-msvc* {
+        DESTDIR = E:/MHDD/Media/GoldenDict
         VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
-        DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
+        DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS GD_USEQSTRING_FOR_TR
         contains(TARGET_ARCH, x86_64) {
             DEFINES += NOMINMAX __WIN64
             LIBS += -L$${PWD}/winlibs/lib/msvc_2019/x64
@@ -77,10 +76,11 @@ win32 {
         DEFINES += GD_NO_MANIFEST
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
         LIBS += -lshell32 -luser32 -lsapi -lole32
-        LIBS+= -lhunspell
+        LIBS+= -lzlib -llibbz2 -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
-        LIBS += -L$${PWD}/winlibs/lib
+        DESTDIR = E:/MHDD/Media/GoldenDict/mignw32
+        LIBS += -L$${PWD}/winlibs/lib -lz -lbz2
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
         isEmpty(HUNSPELL_LIB) {
@@ -115,7 +115,7 @@ win32 {
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
-    Release:DEFINES += NO_CONSOLE
+    Release:DEFINES += NO_CONSOLE Gen_Transliteration
 
     CONFIG += zim_support
 

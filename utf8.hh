@@ -1,6 +1,7 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
-
+#ifndef GD_UTF8_code_HH
+#define GD_UTF8_code_HH
 #include <cstdio>
 #include <string>
 #include "cpp_features.hh"
@@ -41,3 +42,21 @@ wstring decode( string const & ) THROW_SPEC( exCantDecode );
 bool isspace( int c );
 
 }
+
+#if defined(Gen_Transliteration) && !defined (_MSC_VER)
+class QFile;
+extern void wirite_ins(QFile &ft, char const * from, char const * to);
+#define write_Table_UCS_FILE(fname, from, to) \
+    const char* basename = #fname ;\
+    QFile ft(QString("z:\\")+QString(basename));\
+    static bool first = true;\
+    if(first) {\
+        first=false;\
+        ft.open(QFile::WriteOnly | QFile::Truncate);\
+    } else {\
+        ft.open(QFile::WriteOnly | QFile::Append);\
+    }\
+    wirite_ins(ft, from, to);
+#endif
+
+#endif

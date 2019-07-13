@@ -176,3 +176,37 @@ bool isspace( int c )
 }
 
 }
+
+#if defined(Gen_Transliteration) && !defined (_MSC_VER)
+#include <QFile>
+void wirite_ins(QFile &ft, char const * from, char const * to) {
+    if(ft.isWritable())
+    {
+        /*ft.write("#ifndef _MSC_VER\r\n");
+
+        ft.write("    ins( \"");
+        ft.write(from);
+        ft.write("\", \"");
+        ft.write(to);
+        ft.write("\" );\r\n");
+
+        ft.write("#else\r\n");*/
+
+        ft.write("\tins(\"");
+        for(unsigned int i = 0; i < strlen(from); ++i)
+        {
+            ft.write("\\x");
+            ft.write(QString::number(*(from + i) & 0xff, 16).toLocal8Bit());
+        }
+        ft.write("\", \"");
+        for(unsigned int i = 0; i < strlen(to); ++i)
+        {
+            ft.write("\\x");
+            ft.write(QString::number(*(to + i) & 0xff, 16).toLocal8Bit());
+        }
+        ft.write("\");\r\n");
+
+        //ft.write("#endif\r\n\r\n");
+    }
+}
+#endif
