@@ -22,7 +22,7 @@ QT += core \
       network \
       svg
 
-win32:CONFIG += no_qtmultimedia_player
+#win32:CONFIG += no_qtmultimedia_player
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \
@@ -62,7 +62,6 @@ win32 {
         TARGET_ARCH=$${QMAKE_HOST.arch}
     }
     win32-msvc* {
-        DESTDIR = E:/MHDD/Media/GoldenDict
         VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS GD_USEQSTRING_FOR_TR
         contains(TARGET_ARCH, x86_64) {
@@ -79,7 +78,6 @@ win32 {
         LIBS+= -lzlib -llibbz2 -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
-        DESTDIR = E:/MHDD/Media/GoldenDict/mignw32
         LIBS += -L$${PWD}/winlibs/lib -lz -lbz2
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
@@ -115,7 +113,7 @@ win32 {
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
-    Release:DEFINES += NO_CONSOLE Gen_Transliteration
+    Release:DEFINES += NO_CONSOLE
 
     CONFIG += zim_support
 
