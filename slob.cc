@@ -1430,17 +1430,17 @@ void SlobArticleRequest::run()
 
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-      result += "<h3>";
+      result += "<div class=\"slobdict\"><h3 class=\"slobdict_headword\">";
       result += i->second.first;
-      result += "</h3>";
+      result += "</h3></div>";
       result += i->second.second;
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-      result += "<h3>";
+      result += "<div class=\"slobdict\"><h3 class=\"slobdict_headword\">";
       result += i->second.first;
-      result += "</h3>";
+      result += "</h3></div>";
       result += i->second.second;
   }
 
