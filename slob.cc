@@ -459,7 +459,7 @@ quint8 SlobFile::getItem( RefEntry const & entry, string * data )
         QByteArray compressedData = file.read( length );
 
         if( compression == NONE )
-          currentItemData = compressedData.toStdString();
+          currentItemData = string( compressedData.data(), compressedData.length() );
         else
         if( compression == ZLIB )
           currentItemData = decompressZlib( compressedData.data(), length );
