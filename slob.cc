@@ -116,7 +116,7 @@ bool indexIsOldOrBad( string const & indexFile )
 class SlobFile
 {
   enum Compressions
-  { UNKNOWN = 0, ZLIB, BZ2, LZMA2 };
+  { UNKNOWN = 0, NONE, ZLIB, BZ2, LZMA2 };
 
   QFile file;
   QString fileName, dictionaryName;
@@ -305,6 +305,9 @@ QString error( name + ": " );
     else
     if( compr.compare( "lzma2", Qt::CaseInsensitive ) == 0 )
       compression = LZMA2;
+    else
+    if( compr.isEmpty() || compr.compare( "none", Qt::CaseInsensitive ) == 0 )
+      compression = NONE;
 
     // Read tags
 
@@ -455,6 +458,9 @@ quint8 SlobFile::getItem( RefEntry const & entry, string * data )
 
         QByteArray compressedData = file.read( length );
 
+        if( compression == NONE )
+          currentItemData = compressedData.toStdString();
+        else
         if( compression == ZLIB )
           currentItemData = decompressZlib( compressedData.data(), length );
         else
