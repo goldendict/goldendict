@@ -567,6 +567,8 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                               bool ignoreDiacritics );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
+    quint64 getArticlePos(uint32_t articleNumber );
+
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
     virtual void setFTSParameters( Config::FullTextSearch const & fts )
@@ -1064,6 +1066,13 @@ quint32 SlobDictionary::readArticle( quint32 articleNumber, std::string & result
   return contentId;
 }
 
+quint64 SlobDictionary::getArticlePos( uint32_t articleNumber )
+{
+  RefEntry entry;
+  sf.getRefEntry( articleNumber, entry );
+  return ( ( (quint64)( entry.binIndex ) ) << 32 ) | entry.itemIndex;
+}
+
 void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
@@ -1364,7 +1373,7 @@ void SlobArticleRequest::run()
 
   multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
 
-  set< quint32 > articlesIncluded; // Some synonims make it that the articles
+  set< quint64 > articlesIncluded; // Some synonims make it that the articles
                                     // appear several times. We combat this
                                     // by only allowing them to appear once.
 
@@ -1380,7 +1389,9 @@ void SlobArticleRequest::run()
       return;
     }
 
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
+    quint64 pos = dict.getArticlePos( chain[ x ].articleOffset ); // Several "articleOffset" values may refer to one article
+
+    if ( articlesIncluded.find( pos ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
 
     // Now grab that article
@@ -1414,7 +1425,7 @@ void SlobArticleRequest::run()
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
       pair< string, string >( headword, articleText ) ) );
 
-    articlesIncluded.insert( chain[ x ].articleOffset );
+    articlesIncluded.insert( pos );
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
