@@ -40,10 +40,6 @@
 #include <map>
 #include <set>
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 namespace Gls {
 
 using std::list;

@@ -14,10 +14,6 @@
 #include <set>
 #include <string>
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 #define OV_EXCLUDE_STATIC_CALLBACKS
 #include <vorbis/vorbisfile.h>
 #include <QDir>

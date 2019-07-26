@@ -18,10 +18,6 @@
 #include <set>
 #include <string>
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 #include <QString>
 #include <QSemaphore>
 #include <QThreadPool>

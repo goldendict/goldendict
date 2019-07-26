@@ -3,10 +3,6 @@
 
 #include <qglobal.h>
 
-#if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
-#define _FILE_OFFSET_BITS 64
-#endif
-
 #include "dictionary.hh"
 #include "ex.hh"
 #include "mutex.hh"
@@ -18,10 +14,13 @@
 #include <vector>
 #include <string>
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
+#if defined(_MSC_VER) && (_MSC_VER >= 1600)
+#ifdef _WIN64
+  typedef __int64 ssize_t;
+#else
+  typedef int ssize_t;
 #endif
-
+#endif
 #include <eb/eb.h>
 
 namespace Epwing {

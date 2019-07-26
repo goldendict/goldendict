@@ -27,10 +27,6 @@
 #include "tiff.hh"
 #include "ftshelpers.hh"
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 #include <QIODevice>
 #include <QXmlStreamReader>
 #include <QTextDocument>

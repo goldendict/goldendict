@@ -7,7 +7,12 @@
 #include "language.hh"
 
 #ifdef _MSC_VER
+#if _MSC_VER >= 1600
+#define strcasecmp stricmp
+#define strncasecmp  strnicmp
+#else
 #include <stub_msvc.h>
+#endif
 #endif
 
 #include <cctype>

@@ -19,10 +19,6 @@
 #include "tiff.hh"
 #include "qt4x5.hh"
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 #include <QString>
 #include <QFile>
 #include <QFileInfo>

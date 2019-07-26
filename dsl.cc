@@ -31,10 +31,6 @@
 #include <list>
 #include <wctype.h>
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
