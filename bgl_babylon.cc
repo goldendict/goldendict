@@ -37,7 +37,7 @@
 #include <QDebug>
 #include "dictionary.hh"
 
-#ifdef _WIN32
+#ifdef __WIN32
 #include <io.h>
 #define DUP _dup
 #else
@@ -108,7 +108,7 @@ bool Babylon::open()
 
   fflush( f );
 
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC) || defined(_MSC_VER)
   /* Under Mac OS X the above technique don't set reopen position properly */
   int fn = DUP( fileno( f ) );
   lseek( fn, i, SEEK_SET );
