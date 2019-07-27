@@ -1,7 +1,7 @@
 #ifndef __SLOB_HH_INCLUDED__
 #define __SLOB_HH_INCLUDED__
 
-#ifdef MAKE_ZIM_SUPPORT
+#ifdef MAKE_SLOB_SUPPORT
 
 #include "dictionary.hh"
 

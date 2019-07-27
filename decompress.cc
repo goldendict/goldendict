@@ -2,7 +2,7 @@
 #include "zlib.h"
 #include "bzlib.h"
 
-#ifdef MAKE_ZIM_SUPPORT
+#if defined(MAKE_ZIM_SUPPORT) || defined(MAKE_SLOB_SUPPORT)
 #include "lzma.h"
 #endif
 
@@ -78,7 +78,7 @@ int res;
     return str;
 }
 
-#ifdef MAKE_ZIM_SUPPORT
+#if defined(MAKE_ZIM_SUPPORT) || defined(MAKE_SLOB_SUPPORT)
 
 string decompressLzma2( const char * bufptr, unsigned length,
                         bool raw_decoder )

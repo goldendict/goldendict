@@ -1,7 +1,7 @@
 /* This file is (c) 2015 Abs62
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#ifdef MAKE_ZIM_SUPPORT
+#ifdef MAKE_SLOB_SUPPORT
 
 #include "slob.hh"
 #include "btreeidx.hh"

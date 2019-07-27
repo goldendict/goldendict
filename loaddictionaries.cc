@@ -64,8 +64,11 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
               << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
               << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
               << "*.mdx" << "*.gls" << "*.gls.dz"
+#ifdef MAKE_SLOB_SUPPORT
+              << "*.slob"
+#endif
 #ifdef MAKE_ZIM_SUPPORT
-              << "*.zim" << "*.zimaa" << "*.slob"
+              << "*.zim" << "*.zimaa"
 #endif
 #ifndef NO_EPWING_SUPPORT
               << "*catalogs"
@@ -221,6 +224,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
     dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
                          zimDictionaries.end() );
   }
+#endif
+#ifdef MAKE_SLOB_SUPPORT
   {
     vector< sptr< Dictionary::Class > > slobDictionaries =
       Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
