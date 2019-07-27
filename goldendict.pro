@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0-RC2+git-nonwill
+VERSION = 1.5.0-RC2+git
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
 # rebuilt; and doing it here is required too since any other way the RCC
@@ -23,6 +23,7 @@ QT += core \
       svg
 
 #win32:CONFIG += no_qtmultimedia_player
+#DEFINES += MDX_LOCALVIDEO_CACHED
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \
@@ -63,33 +64,25 @@ win32 {
     }
     win32-msvc* {
         VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
-        DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS GD_USEQSTRING_FOR_TR
+        DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(TARGET_ARCH, x86_64) {
             DEFINES += NOMINMAX __WIN64
             LIBS += -L$${PWD}/winlibs/lib/msvc_2019/x64
         } else {
             LIBS += -L$${PWD}/winlibs/lib/msvc
         }
-        QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
-        QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
+        # QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
+        # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         DEFINES += GD_NO_MANIFEST
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
-        LIBS += -lshell32 -luser32 -lsapi -lole32
-        LIBS+= -lzlib -llibbz2 -lhunspell
-        HUNSPELL_LIB = hunspell
+        LIBS += -lshell32 -luser32 -lsapi -lole32 -lzlib -llibbz2
     } else {
         LIBS += -L$${PWD}/winlibs/lib -lz -lbz2
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-
-        isEmpty(HUNSPELL_LIB) {
-          LIBS += -lhunspell
-        } else {
-          LIBS += -l$$HUNSPELL_LIB
-        }
         QMAKE_CXXFLAGS += -Wextra -Wempty-body
     }
 
-    LIBS += -liconv \
+    LIBS += -lhunspell -liconv \
         -lwsock32 \
         -lpsapi \
         -lole32 \
@@ -534,8 +527,14 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     SOURCES += wildcard.cc
 }
 
+!CONFIG( no_slob_support ) {
+    DEFINES += MAKE_SLOB_SUPPORT
+}
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
+}
+
+if(contains(DEFINES,MAKE_SLOB_SUPPORT) || contains(DEFINES,MAKE_ZIM_SUPPORT)){
   LIBS += -llzma
 }
 
@@ -565,16 +564,12 @@ CONFIG( chinese_conversion_support ) {
              chineseconversion.hh
   SOURCES += chinese.cc \
              chineseconversion.cc
-  win32-msvc* {
-    Debug:   LIBS += -lopenccd
-    Release: LIBS += -lopencc
-  } else {
+
     mac {
       LIBS += -lopencc.2
     } else {
       LIBS += -lopencc
     }
-  }
 }
 
 CONFIG( old_hunspell ) {
