@@ -327,7 +327,10 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     if( req.url().host().isEmpty() && articleMaker.adjustFilePath( fileName ) )
     {
       QUrl newUrl( req.url() );
-      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( QUrl::fromLocalFile( fileName ).path() ) );
+      QUrl localUrl = QUrl::fromLocalFile( fileName );
+
+      newUrl.setHost( localUrl.host() );
+      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( localUrl.path() ) );
 
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
