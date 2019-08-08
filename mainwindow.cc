@@ -2858,7 +2858,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     show();
 
 #ifdef Q_OS_WIN32
-    if( hotkeyWrapper->handleViaDLL() )
+    if( !!( hotkeyWrapper ) && hotkeyWrapper->handleViaDLL() )
     {
       // Some dances with tambourine
       HWND wId = (HWND) winId();
@@ -2895,7 +2895,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   {
     qApp->setActiveWindow( this );
 #ifdef Q_OS_WIN32
-    if( hotkeyWrapper->handleViaDLL() )
+    if( !!( hotkeyWrapper ) && hotkeyWrapper->handleViaDLL() )
     {
       // Some dances with tambourine
       HWND wId = (HWND) winId();
