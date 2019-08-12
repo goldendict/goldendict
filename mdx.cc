@@ -26,10 +26,6 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-#ifdef _MSC_VER
-#include <stub_msvc.h>
-#endif
-
 #include <QDir>
 #include <QString>
 #include <QSemaphore>
@@ -37,6 +33,9 @@
 #include <QAtomicInt>
 #include <QTextDocument>
 #include <QCryptographicHash>
+#ifdef MDX_LOCALVIDEO_CACHED
+#include <QTemporaryDir>
+#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
@@ -206,6 +205,10 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
 
   string initError;
 
+#ifdef MDX_LOCALVIDEO_CACHED
+  QTemporaryDir *cacheDir;
+#endif
+
 public:
 
   MdxDictionary( string const & id, string const & indexFile, vector<string> const & dictionaryFiles );
@@ -285,6 +288,39 @@ private:
   /// Process resource links (images, audios, etc)
   QString & filterResource( QString const & articleId, QString & article );
 
+#ifdef MDX_LOCALVIDEO_CACHED
+  /// We need cache video files to local for html5 video player
+  const QString cacheFile(const QString &filename)
+  {
+      if(cacheDir==nullptr)
+          cacheDir = new QTemporaryDir(QDir::temp().absolutePath() + QDir::separator() + QString::fromStdString(getId()));
+      const QString ltFile = cacheDir->filePath(filename).replace("\\", "/");
+      if(!QFile::exists(ltFile))
+      {
+          QFile ftP(ltFile);
+          if(ftP.open(QFile::WriteOnly))
+          {
+              gd::wstring resourceName = FsEncoding::decode(filename.toStdString());
+              std::replace( resourceName.begin(), resourceName.end(), '/', '\\' );
+              if ( resourceName[ 0 ] != '\\' )
+                  resourceName.insert( 0, 1, '\\' );
+              vector< char > bD;
+              for ( vector< sptr< IndexedMdd > >::const_iterator i = mddResources.begin();
+                    i != mddResources.end(); i++  )
+              {
+                  sptr< IndexedMdd > mddResource = *i;
+                  if ( mddResource->loadFile( resourceName, bD ) )
+                      break;
+              }
+              if(!bD.empty())
+                  ftP.write(&bD[0], bD.size());
+              ftP.close();
+          }
+      }
+      return ltFile;
+  }
+#endif
+
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
   friend class MddResourceRequest;
@@ -298,6 +334,9 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   idxHeader( idx.read< IdxHeader >() ),
   chunks( idx, idxHeader.chunksOffset ),
   deferredInitRunnableStarted( false )
+#ifdef MDX_LOCALVIDEO_CACHED
+  ,cacheDir(nullptr)
+#endif
 {
   // Read the dictionary's name
   idx.seek( sizeof( idxHeader ) );
@@ -341,6 +380,10 @@ MdxDictionary::~MdxDictionary()
     deferredInitRunnableExited.acquire();
 
   dictFile.close();
+#ifdef MDX_LOCALVIDEO_CACHED
+  if(cacheDir!=nullptr)
+      delete cacheDir;
+#endif
 }
 
 //////// MdxDictionary::deferredInit()
@@ -1041,7 +1084,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
-  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)",
+  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|embed|source)(?:\\s+[^>]+|\\s*)>)",
                                  QRegularExpression::CaseInsensitiveOption );
   QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
                                     QRegularExpression::CaseInsensitiveOption );
@@ -1139,11 +1182,16 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                                    "\\1\"bres://" + id + "/\\2\"" );
     }
     else
-    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0 )
+    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0
+            || linkType.compare( "embed" ) == 0
+        #ifdef MDX_LOCALVIDEO_CACHED
+            || linkType.compare( "source" ) == 0
+        #endif
+            )
     {
       // javascripts and images
       QRegularExpressionMatch match = inlineScriptRe.match( linkTxt );
-      if( linkType.at( 0 ) == 's'
+      if( linkType.compare( "script" ) == 0
           && match.hasMatch() && match.capturedLength() == linkTxt.length() )
       {
         // skip inline scripts
@@ -1161,10 +1209,23 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         match = srcRe.match( linkTxt );
         if( match.hasMatch() )
         {
-          QString newText = match.captured( 1 ) + match.captured( 2 )
-                            + "bres://" + id + "/"
-                            + match.captured( 3 ) + match.captured( 2 );
-          newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
+#ifdef MDX_LOCALVIDEO_CACHED
+            if(linkType.compare( "source" ) == 0)  {
+                const QString filename = match.captured( 3 );
+                const QString tP = cacheFile(filename);
+                QString newTxt = match.captured( 1 ) + match.captured( 2 )
+                        //+ "gdvideo://" + id + "/" + filename + match.captured( 2 );
+                        + "file:///" + tP + match.captured( 2 );
+                newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newTxt );
+            }
+            else
+#endif
+            {
+              QString newText = match.captured( 1 ) + match.captured( 2 )
+                                  + "bres://" + id + "/"
+                                  + match.captured( 3 ) + match.captured( 2 );
+              newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
+            }
         }
         else
           newLink = linkTxt.replace( srcRe2,

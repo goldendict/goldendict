@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0-RC2+git
+VERSION = 1.5.0-RC2+nonwill
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
 # rebuilt; and doing it here is required too since any other way the RCC
@@ -23,7 +23,7 @@ QT += core \
       svg
 
 #win32:CONFIG += no_qtmultimedia_player
-#DEFINES += MDX_LOCALVIDEO_CACHED
+DEFINES += MDX_LOCALVIDEO_CACHED
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \

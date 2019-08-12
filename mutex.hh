@@ -13,7 +13,10 @@
 class Mutex: public QMutex
 {
 public:
-
+#ifdef MDX_LOCALVIDEO_CACHED
+  Mutex():QMutex(Recursive) {}
+  ~Mutex() {}
+#endif
   /// Locks the given mutex on construction and unlocks on destruction
   class Lock
   {
