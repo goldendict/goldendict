@@ -92,7 +92,7 @@ HepburnKatakana::HepburnKatakana()
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Romaji const & r )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
   

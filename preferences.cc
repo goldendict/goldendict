@@ -187,10 +187,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
+  ui.ignoreOwnClipboardChanges->setChecked( p.ignoreOwnClipboardChanges );
   ui.scanToMainWindow->setChecked( p.scanToMainWindow );
   ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
   ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
   ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
+  ui.scanPopupUnpinnedWindowFlags->setCurrentIndex( p.scanPopupUnpinnedWindowFlags );
+  ui.scanPopupUnpinnedBypassWMHint->setChecked( p.scanPopupUnpinnedBypassWMHint );
 
   ui.storeHistory->setChecked( p.storeHistory );
   ui.historyMaxSizeField->setValue( p.maxStringsInHistory );
@@ -202,6 +205,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
+  ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
 
@@ -232,10 +236,15 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 //  ui.tabWidget->removeTab( 5 );
 #endif
 
+#ifndef ENABLE_SPWF_CUSTOMIZATION
+  ui.groupBox_ScanPopupWindowFlags->hide();
+#endif
+
 #ifdef HAVE_X11
   ui.showScanFlag->setChecked( p.showScanFlag);
 #else
   ui.showScanFlag->hide();
+  ui.ignoreOwnClipboardChanges->hide();
 #endif
 
   // Sound
@@ -388,6 +397,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
+  p.ignoreOwnClipboardChanges = ui.ignoreOwnClipboardChanges->isChecked();
   p.scanToMainWindow = ui.scanToMainWindow->isChecked();
 #ifdef HAVE_X11
   p.showScanFlag= ui.showScanFlag->isChecked();
@@ -395,6 +405,8 @@ Config::Preferences Preferences::getPreferences()
   p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
   p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
   p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
+  p.scanPopupUnpinnedWindowFlags = Config::spwfFromInt( ui.scanPopupUnpinnedWindowFlags->currentIndex() );
+  p.scanPopupUnpinnedBypassWMHint = ui.scanPopupUnpinnedBypassWMHint->isChecked();
 
   p.storeHistory = ui.storeHistory->isChecked();
   p.maxStringsInHistory = ui.historyMaxSizeField->text().toUInt();
@@ -406,6 +418,7 @@ Config::Preferences Preferences::getPreferences()
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
   p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+  p.ignoreDiacritics = ui.ignoreDiacritics->isChecked();
 
   p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 
@@ -541,6 +554,11 @@ void Preferences::showScanFlagToggled( bool b )
 {
   if( b )
     ui.enableScanPopupModifiers->setChecked( false );
+}
+
+void Preferences::on_scanPopupUnpinnedWindowFlags_currentIndexChanged( int index )
+{
+  ui.scanPopupUnpinnedBypassWMHint->setEnabled( Config::spwfFromInt( index ) != Config::SPWF_default );
 }
 
 void Preferences::wholeAltClicked( bool b )

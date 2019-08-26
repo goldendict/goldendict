@@ -93,11 +93,12 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 protected:
 
@@ -125,16 +126,17 @@ SoundDirDictionary::SoundDirDictionary( string const & id,
 
 sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & word,
                                                                 vector< wstring > const & alts,
-                                                                wstring const & )
-  throw( std::exception )
+                                                                wstring const &,
+                                                                bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  vector< WordArticleLink > chain = findArticles( word );
+  vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -147,6 +149,8 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -160,6 +164,8 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, unsigned > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
@@ -300,7 +306,7 @@ void SoundDirDictionary::loadIcon() throw()
 }
 
 sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   bool isNumber = false;
 
@@ -357,7 +363,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & 
 
     return dr;
   }
-  catch( File::Ex )
+  catch( File::Ex & )
   {
     return new Dictionary::DataRequestInstant( false ); // No such resource
   }
@@ -402,7 +408,7 @@ void addDir( QDir const & baseDir, QDir const & dir, IndexedWords & indexedWords
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & soundDirs,
                                                       string const & indicesDir,
                                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

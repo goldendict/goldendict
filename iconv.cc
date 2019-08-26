@@ -17,14 +17,14 @@ char const * const Iconv::Utf8 = "UTF-8";
 
 using gd::wchar;
 
-Iconv::Iconv( char const * to, char const * from ) throw( exCantInit ):
+Iconv::Iconv( char const * to, char const * from ) THROW_SPEC( exCantInit ):
   state( iconv_open( to, from ) )
 {
   if ( state == (iconv_t) -1 )
     throw exCantInit( strerror( errno ) );
 }
 
-void Iconv::reinit( char const * to, char const * from ) throw( exCantInit )
+void Iconv::reinit( char const * to, char const * from ) THROW_SPEC( exCantInit )
 {
   iconv_close( state );
 
@@ -41,7 +41,7 @@ Iconv::~Iconv() throw()
 
 Iconv::Result Iconv::convert( void const * & inBuf, size_t  & inBytesLeft,
                               void * & outBuf, size_t & outBytesLeft )
-  throw( exIncorrectSeq, exOther )
+  THROW_SPEC( exIncorrectSeq, exOther )
 {
   size_t result = iconv( state,
 //                         #ifdef __WIN32
@@ -72,7 +72,7 @@ Iconv::Result Iconv::convert( void const * & inBuf, size_t  & inBytesLeft,
 
 gd::wstring Iconv::toWstring( char const * fromEncoding, void const * fromData,
                               size_t dataSize )
-  throw( exCantInit, exIncorrectSeq, exPrematureEnd, exOther )
+  THROW_SPEC( exCantInit, exIncorrectSeq, exPrematureEnd, exOther )
 {
   /// Special-case the dataSize == 0 to avoid any kind of iconv-specific
   /// behaviour in that regard.
@@ -113,7 +113,7 @@ gd::wstring Iconv::toWstring( char const * fromEncoding, void const * fromData,
 
 std::string Iconv::toUtf8( char const * fromEncoding, void const * fromData,
                            size_t dataSize )
-  throw( exCantInit, exIncorrectSeq, exPrematureEnd, exOther )
+  THROW_SPEC( exCantInit, exIncorrectSeq, exPrematureEnd, exOther )
 {
   // Similar to toWstring
 

@@ -49,7 +49,7 @@ using std::pair;
 enum
 {
   BtreeMinElements = 64,
-  BtreeMaxElements = 4096
+  BtreeMaxElements = 5120
 };
 
 BtreeIndex::BtreeIndex():
@@ -482,7 +482,7 @@ BtreeWordSearchRequest::~BtreeWordSearchRequest()
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -490,7 +490,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                      false, maxResults );
@@ -797,7 +797,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         if ( wcharBuffer.size() <= wordSize )
           wcharBuffer.resize( wordSize + 1 );
   
-        //DPRINTF( "checking agaist word %s, left = %u\n", ptr, leafEntries );
+        //DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
   
         long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
   
@@ -914,6 +914,8 @@ void BtreeIndex::antialias( wstring const & str,
                             bool ignoreDiacritics )
 {
   wstring caseFolded = Folding::applySimpleCaseOnly( gd::normalize( str ) );
+  if( ignoreDiacritics )
+    caseFolded = Folding::applyDiacriticsOnly( caseFolded );
 
   for( unsigned x = chain.size(); x--; )
   {

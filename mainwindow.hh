@@ -23,7 +23,6 @@
 #include "wordfinder.hh"
 #include "dictionarybar.hh"
 #include "history.hh"
-#include "hotkeywrapper.hh"
 #include "mainstatusbar.hh"
 #include "mruqmenu.hh"
 #include "translatebox.hh"
@@ -32,6 +31,7 @@
 #include "fulltextsearch.hh"
 #include "helpwindow.hh"
 
+#include "hotkeywrapper.hh"
 #ifdef HAVE_X11
 #include <fixx11h.h>
 #endif
@@ -91,6 +91,8 @@ public slots:
 private:
   void addGlobalAction( QAction * action, const char * slot );
   void addGlobalActionsToDialog( QDialog * dialog );
+  void addGroupComboBoxActionsToDialog( QDialog * dialog, GroupComboBox * pGroupComboBox );
+  void removeGroupComboBoxActionsFromDialog( QDialog * dialog, GroupComboBox * pGroupComboBox );
 
   void commitData();
 
@@ -116,7 +118,7 @@ private:
   TranslateBox * translateBox;
 
   /// Fonts saved before words zooming is in effect, so it could be reset back.
-  QFont wordListDefaultFont, translateLineDefaultFont;
+  QFont wordListDefaultFont, translateLineDefaultFont, groupListDefaultFont;
 
   QAction escAction, focusTranslateLineAction, addTabAction, closeCurrentTabAction,
           closeAllTabAction, closeRestTabAction,
@@ -235,6 +237,7 @@ private:
   void installHotKeys();
 
   void applyZoomFactor();
+  void adjustCurrentZoomFactor();
 
   void mousePressEvent ( QMouseEvent * event );
 
@@ -336,6 +339,8 @@ private slots:
   void zoomin();
   void zoomout();
   void unzoom();
+
+  void scaleArticlesByCurrentZoomFactor();
 
   void doWordsZoomIn();
   void doWordsZoomOut();

@@ -139,11 +139,11 @@ public slots:
   /// Goes forward in history
   void forward();
 
-public:
-
   /// Takes the focus to the view
   void focus()
   { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
+
+public:
 
   /// Reloads the view
   void reload()

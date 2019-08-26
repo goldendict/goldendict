@@ -73,7 +73,7 @@ void normalizeWhitespace( wstring & );
 
 /// Same as apply( wstring ), but without any heap operations, therefore
 /// preferable when there're many strings to process. Returns -1 if the
-/// operation succeded, or otherwise the minimum value of outSize required
+/// operation succeeded, or otherwise the minimum value of outSize required
 /// to succeed.
 /// Currently commented out, consider implementing it in case indices'
 /// generation would be too slow.

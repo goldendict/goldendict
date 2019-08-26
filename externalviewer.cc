@@ -10,7 +10,7 @@
 ExternalViewer::ExternalViewer( const char * data, int size,
                                 QString const & extension, QString const & viewerCmdLine_,
                                 QObject * parent)
-    throw( exCantCreateTempFile ):
+    THROW_SPEC( exCantCreateTempFile ):
   QObject( parent ),
   tempFile( QDir::temp().filePath( QString( "gd-XXXXXXXX." ) + extension ) ),
   viewer( this ),
@@ -31,7 +31,7 @@ ExternalViewer::ExternalViewer( const char * data, int size,
   GD_DPRINTF( "%s\n", tempFile.fileName().toLocal8Bit().data() );
 }
 
-void ExternalViewer::start() throw( exCantRunViewer )
+void ExternalViewer::start() THROW_SPEC( exCantRunViewer )
 {
   connect( &viewer, SIGNAL( finished( int, QProcess::ExitStatus ) ),
            this, SLOT( deleteLater() ) );

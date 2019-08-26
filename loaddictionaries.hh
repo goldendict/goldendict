@@ -36,7 +36,7 @@ public:
   std::vector< sptr< Dictionary::Class > > const & getDictionaries() const
   { return dictionaries; }
 
-  /// Empty string means to exception occured
+  /// Empty string means to exception occurred
   std::string const & getExceptionText() const
   { return exceptionText; }
 

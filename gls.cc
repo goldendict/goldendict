@@ -90,7 +90,7 @@ public:
   DEF_EX_STR( exMalformedGlsFile, "The .gls file is malformed:", Ex )
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
-  GlsScanner( string const & fileName ) throw( Ex, Iconv::Ex );
+  GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex );
   ~GlsScanner() throw();
 
   /// Returns the detected encoding of this file.
@@ -123,7 +123,7 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which end
   /// by the "### Glossary section:" line).
-  bool readNextLine( wstring &, size_t & offset ) throw( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
@@ -145,7 +145,7 @@ public:
   }
 };
 
-GlsScanner::GlsScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
+GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Utf8 ), iconv( Iconv::GdWchar, Iconv::Utf8 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
 {
@@ -266,7 +266,7 @@ GlsScanner::GlsScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
   }
 }
 
-bool GlsScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
+bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
   offset = (size_t)( gztell( f ) - readBufferLeft );
@@ -469,15 +469,16 @@ public:
   { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -548,8 +549,11 @@ GlsDictionary::GlsDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   // Initialize the index
 
@@ -1121,7 +1125,7 @@ void GlsHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   GlsDictionary::findHeadwordsForSynonym( wstring const & word )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return synonymSearchEnabled ? new GlsHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -1159,6 +1163,7 @@ class GlsArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   GlsDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1167,8 +1172,8 @@ public:
 
   GlsArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     GlsDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     GlsDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new GlsArticleRequestRunnable( *this, hasExited ) );
@@ -1202,13 +1207,13 @@ void GlsArticleRequest::run()
   }
   try
   {
-    vector< WordArticleLink > chain = dict.findArticles( word );
+    vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
     for( unsigned x = 0; x < alts.size(); ++x )
     {
       /// Make an additional query for each alt
 
-      vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+      vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
       chain.insert( chain.end(), altChain.begin(), altChain.end() );
     }
@@ -1220,6 +1225,8 @@ void GlsArticleRequest::run()
                                       // by only allowing them to appear once.
 
     wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+    if( ignoreDiacritics )
+      wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
@@ -1245,6 +1252,8 @@ void GlsArticleRequest::run()
 
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+      if( ignoreDiacritics )
+        headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
       multimap< wstring, pair< string, string > > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
@@ -1296,10 +1305,11 @@ void GlsArticleRequest::run()
 
 sptr< Dictionary::DataRequest > GlsDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new GlsArticleRequest( word, alts, *this );
+  return new GlsArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //////////////// GlsDictionary::getResource()
@@ -1538,7 +1548,7 @@ void GlsResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > GlsDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new GlsResourceRequest( *this, name );
 }
@@ -1561,7 +1571,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

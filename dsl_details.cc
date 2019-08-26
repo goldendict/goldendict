@@ -214,6 +214,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
           if( !linkTo.empty() )
           {
             list< wstring > allLinkEntries;
+            processUnsortedParts( linkTo, true );
             expandOptionalParts( linkTo, &allLinkEntries );
 
             for( list< wstring >::iterator entry = allLinkEntries.begin();
@@ -244,7 +245,6 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               textNode = 0;
 
               wstring linkText = Folding::trimWhitespace( *entry );
-              processUnsortedParts( linkText, true );
               ArticleDom nodeDom( linkText, dictName, headword_ );
 
               Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
@@ -763,7 +763,7 @@ void ArticleDom::closeTag( wstring const & name,
   }
 }
 
-void ArticleDom::nextChar() throw( eot )
+void ArticleDom::nextChar() THROW_SPEC( eot )
 {
   if ( !*stringPos )
     throw eot();
@@ -809,7 +809,7 @@ bool ArticleDom::atSignFirstInLine()
 
 /////////////// DslScanner
 
-DslScanner::DslScanner( string const & fileName ) throw( Ex, Iconv::Ex ):
+DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
 {
@@ -981,7 +981,7 @@ DslScanner::~DslScanner() throw()
   gzclose( f );
 }
 
-bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
+bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
   offset = (size_t)( gztell( f ) - readBufferLeft );
@@ -1087,7 +1087,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) throw( Ex,
 }
 
 bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
-                 throw( Ex, Iconv::Ex )
+                 THROW_SPEC( Ex, Iconv::Ex )
 {
   wstring str;
   bool commentToNextLine = false;
@@ -1117,12 +1117,12 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
 
 /////////////// DslScanner
 
-DslIconv::DslIconv( DslEncoding e ) throw( Iconv::Ex ):
+DslIconv::DslIconv( DslEncoding e ) THROW_SPEC( Iconv::Ex ):
   Iconv( Iconv::GdWchar, getEncodingNameFor( e ) )
 {
 }
 
-void DslIconv::reinit( DslEncoding e ) throw( Iconv::Ex )
+void DslIconv::reinit( DslEncoding e ) THROW_SPEC( Iconv::Ex )
 {
   Iconv::reinit( Iconv::GdWchar, getEncodingNameFor( e ) );
 }

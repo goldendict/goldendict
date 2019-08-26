@@ -41,6 +41,7 @@
 #include <io.h>
 #define DUP _dup
 #else
+#include <unistd.h>
 #define DUP dup
 #endif
 

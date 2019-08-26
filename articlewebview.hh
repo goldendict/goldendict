@@ -13,7 +13,7 @@ class ArticleInspector;
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
 ///    to the view's current state. This is used to open links in new tabs when
-///    they are clicked with middle button. There's also an added posibility to
+///    they are clicked with middle button. There's also an added possibility to
 ///    get double-click events after the fact with the doubleClicked() signal.
 /// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
 ///    use triggerPageAction( QWebPage::InspectElement ) instead.

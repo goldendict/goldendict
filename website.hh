@@ -17,7 +17,7 @@ using std::string;
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const &,
                                                       QNetworkAccessManager & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 /// Exposed here for moc
 class WebSiteDataRequestSlots: public Dictionary::DataRequest

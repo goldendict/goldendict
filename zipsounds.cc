@@ -79,7 +79,7 @@ wstring stripExtension( string const & str )
   {
     name = Utf8::decode( str );
   }
-  catch( Utf8::exCantDecode )
+  catch( Utf8::exCantDecode & )
   {
     return name;
   }
@@ -127,11 +127,12 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 protected:
 
@@ -175,16 +176,17 @@ string ZipSoundsDictionary::getName() throw()
 
 sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const & word,
                                                                  vector< wstring > const & alts,
-                                                                 wstring const & )
-  throw( std::exception )
+                                                                 wstring const &,
+                                                                 bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  vector< WordArticleLink > chain = findArticles( word );
+  vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -196,6 +198,8 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -209,6 +213,8 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, uint32_t > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
@@ -337,7 +343,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 }
 
 sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   // Remove extension for sound files (like in sound dirs)
 
@@ -404,7 +410,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   (void) initializing;
   vector< sptr< Dictionary::Class > > dictionaries;

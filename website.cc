@@ -60,14 +60,14 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
-                                                 unsigned long ) throw( std::exception );
+                                                 unsigned long ) THROW_SPEC( std::exception );
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
-                                          wstring const & context )
-    throw( std::exception );
+                                          wstring const & context, bool )
+    THROW_SPEC( std::exception );
 
-  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) throw( std::exception );
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
 
   void isolateWebCSS( QString & css );
 
@@ -77,7 +77,7 @@ protected:
 };
 
 sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & /*word*/,
-                                                          unsigned long ) throw( std::exception )
+                                                          unsigned long ) THROW_SPEC( std::exception )
 {
   sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
 
@@ -438,8 +438,8 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 
 sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                                                    vector< wstring > const &,
-                                                   wstring const & context )
-  throw( std::exception )
+                                                   wstring const & context, bool )
+  THROW_SPEC( std::exception )
 {
   QByteArray urlString;
 
@@ -618,7 +618,7 @@ void WebSiteResourceRequest::requestFinished( QNetworkReply * r )
   finish();
 }
 
-sptr< Dictionary::DataRequest > WebSiteDictionary::getResource( string const & name ) throw( std::exception )
+sptr< Dictionary::DataRequest > WebSiteDictionary::getResource( string const & name ) THROW_SPEC( std::exception )
 {
   QString link = QString::fromUtf8( name.c_str() );
   int pos = link.indexOf( '/' );
@@ -647,7 +647,7 @@ void WebSiteDictionary::loadIcon() throw()
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & ws,
                                                       QNetworkAccessManager & mgr )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
 

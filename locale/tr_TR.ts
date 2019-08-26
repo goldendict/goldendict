@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr_TR">
+<TS version="2.1" language="tr_TR">
 <context>
     <name>About</name>
     <message>
@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Qt baz alınmıştır (%2, %3 bit)</translation>
     </message>
 </context>
 <context>
@@ -86,15 +86,15 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(resim)</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaleyi genişlet</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaleyi daralt</translation>
     </message>
 </context>
 <context>
@@ -121,11 +121,11 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaleyi genişlet</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaleyi daralt</translation>
     </message>
 </context>
 <context>
@@ -249,165 +249,166 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tarihe &quot;%1&quot; ekle</translation>
     </message>
     <message>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; sözlüğündeki tanım: %2</translation>
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Giriş satırına &quot;%1&quot; gönder</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Resim</translation>
     </message>
     <message>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut Makaleyi Seç</translation>
     </message>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>HATA %1</translation>
     </message>
     <message>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesi kaydet</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses dosyaları (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tüm dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntüyü kaydet</translation>
     </message>
     <message>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Görüntü dosyaları (*.bmp *.jpg *.png *.tif);;Tüm dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Görüntüyü kaydet...</translation>
     </message>
     <message>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sesi kaydet...</translation>
     </message>
     <message>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>TTS Ses</translation>
     </message>
     <message>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Metin olarak kopyala</translation>
     </message>
     <message>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Denetle</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Video: %1</translation>
     </message>
     <message>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses dosyası çalınamadı:%1</translation>
     </message>
     <message>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>UYARI: Müzik Çalar: %1</translation>
     </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Latince&apos;den Kiril&apos;e Belarusça harf çevirisi (klasik yazım)</translation>
     </message>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Latince&apos;den kiril alfabesine Belarusça harf çevirisi (okul yazımı)</translation>
     </message>
     <message>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarusça harf çevirisi (klasik ve okul yazı ile Kiril alfabesi
+arasındaki farkı giderir)</translation>
     </message>
 </context>
 <context>
     <name>ChineseConversion</name>
     <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Basitleştirilmiş ve geleneksel Çince karakterler arasında dönüştürmeyi etkinleştir</translation>
     </message>
     <message>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>Çince &amp;Dönüşüm</translation>
     </message>
     <message>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Basitleştirilmiş karakterlerden geleneksel (Tayvan değişkeni) karakterlere dönüştürmeyi etkinleştir</translation>
     </message>
     <message>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>TC&apos;den SC&apos;ye (Tayvan varyantı)</translation>
     </message>
     <message>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Basitleştirilmiş karakterlerden geleneksel (Hong Kong değişken) karakterlere dönüştürmeyi etkinleştir</translation>
     </message>
     <message>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>TC&apos;den SC&apos;ye (Hong Kong değişkeni)</translation>
     </message>
     <message>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Geleneksel karakterlerden basitleştirilmiş karakterlere dönüştürmeyi etkinleştir</translation>
     </message>
     <message>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>TC&apos;den SC&apos;ye</translation>
     </message>
     <message>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Geleneksel Çince (Tayvan değişkeni) dönüşümüyle basitleştirildi</translation>
     </message>
     <message>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Geleneksel Çince (Hong Kong değişkeni) dönüşümüyle basitleştirildi</translation>
     </message>
     <message>
         <source>Traditional to simplified Chinese conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Basitleştirilmiş Çince dönüşümü için geleneksel</translation>
     </message>
     <message>
         <source>Chinese Conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Çince Dönüşüm</translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy kimlik doğrulaması gerekli</translation>
     </message>
     <message>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy üzerinden erişmek için bir Kullanıcı Adı ve Parola girmeniz gerekir</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanıcı adı:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Parola:</translation>
+        <translation>Parola:</translation>
     </message>
 </context>
 <context>
@@ -446,7 +447,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>All files</source>
-        <translation>Tüm Dosyalar</translation>
+        <translation>Tüm dosyalar</translation>
     </message>
     <message>
         <source>Choose a file to use as group icon</source>
@@ -454,7 +455,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sık kullanılan klasörü:</translation>
     </message>
 </context>
 <context>
@@ -469,42 +470,42 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlükler: </translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupları kaynak dile göre &quot;%1-&gt;&quot; ile birleştir</translation>
     </message>
     <message>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupları hedef dile göre birleştir &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>İki taraflı çeviri grubunu &quot;%1-%2-%1&quot; yap</translation>
     </message>
     <message>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; ile grupları birleştir</translation>
     </message>
     <message>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Atanmayanlar</translation>
     </message>
 </context>
 <context>
     <name>DictHeadwords</name>
     <message>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Arama kipi</translation>
     </message>
     <message>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu eleman süzgeç dizesinin nasıl yorumlanacağını belirler</translation>
     </message>
     <message>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Semboller işaretliyse süzgeçlemede durum dikkate alınacaktır</translation>
     </message>
     <message>
         <source>Match case</source>
@@ -512,47 +513,47 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Anahtar kelimeleri dosyaya ver</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Dışarı aktar</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Anahtar kelimeler listesine süzgeç uygulamak için bu düğmeye bas</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Onayla</translation>
     </message>
     <message>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Herhangi bir süzgeç değişikliğinin işaretlenmesi durumunda anahtar kelime listesine başvur</translation>
     </message>
     <message>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Otomatik onay</translation>
     </message>
     <message>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Süzgeç:</translation>
     </message>
     <message>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Süzgeç dizesi (sabit dize, joker karakterler veya normal ifade)</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Metin</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Joker karakterler</translation>
     </message>
     <message>
         <source>RegExp</source>
@@ -564,71 +565,72 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Anahtar kelimeleri dosyaya kaydet</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Metin Dosyaları (*.txt);;Tüm Dosyalar (*.*)</translation>
+        <translation>Metin dosyaları (*.txt);;Tüm dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Anahtar kelimeleri dışa aktar...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Yardım</translation>
     </message>
 </context>
 <context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation type="unfinished">Toplam Madde: </translation>
+        <translation>Toplam makale:</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation type="unfinished">Bu Dilden: </translation>
+        <translation>Bu dilden:</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation type="unfinished">Toplam sözcük: </translation>
+        <translation>Toplam sözcük:</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation type="unfinished">Bu Dile: </translation>
+        <translation>Bu dile:</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Bu sözlüğü içeren dosyalar:</translation>
+        <translation>Bu sözlüğü oluşturan dosyalar:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Açıklama:</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Klasörü aç</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlüğü düzenle</translation>
     </message>
     <message>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlüğü komut ile düzenleyin:
+%1</translation>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm eşsiz sözlük başlıklarını göster</translation>
     </message>
     <message>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Eşsiz başlıklar</translation>
     </message>
 </context>
 <context>
@@ -642,56 +644,58 @@ between classic and school orthography in cyrillic)</source>
     <name>DictServer</name>
     <message>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Url: </translation>
     </message>
     <message>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Veritabanları: </translation>
     </message>
     <message>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Arama stratejileri: </translation>
     </message>
     <message>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Sunucu veritabanları</translation>
     </message>
 </context>
 <context>
     <name>DictServersModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Etkin</translation>
+        <translation>Etkin</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">İsim</translation>
+        <translation>İsim</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished">Adres</translation>
+        <translation>Adres</translation>
     </message>
     <message>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Veritabanları</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
     <message>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Virgülle ayrılmış veritabanı listesi
+(boş dize veya &quot;*&quot; tüm veritabanlarıyla eşleşir)</translation>
     </message>
     <message>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Stratejiler</translation>
     </message>
     <message>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Virgülle ayrılmış arama stratejileri listesi
+(boş dize demek &quot;önek&quot; stratejisi)</translation>
     </message>
 </context>
 <context>
@@ -706,27 +710,27 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük bilgisi</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlüğü düzenle</translation>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sözlük Çubuğu</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük klasörünü aç</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm sözlüklerle genişletilmiş menü...</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük başlıkları</translation>
     </message>
 </context>
 <context>
@@ -782,19 +786,19 @@ between classic and school orthography in cyrillic)</source>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam metin araması</translation>
     </message>
     <message>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm kelimeler</translation>
     </message>
     <message>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Düz metin</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Joker karakterler</translation>
     </message>
     <message>
         <source>RegExp</source>
@@ -834,7 +838,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Yok</translation>
+        <translation>Yok</translation>
     </message>
 </context>
 <context>
@@ -848,30 +852,30 @@ between classic and school orthography in cyrillic)</source>
     <name>FavoritesModel</name>
     <message>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriler dosyasında hata</translation>
     </message>
 </context>
 <context>
     <name>FavoritesPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Seçilenleri Sil</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilenleri Kopyala</translation>
     </message>
     <message>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Klasöre ekle</translation>
     </message>
     <message>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriler:</translation>
     </message>
     <message>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilen tüm öğeler silinecek. Devam et?</translation>
     </message>
 </context>
 <context>
@@ -909,7 +913,7 @@ between classic and school orthography in cyrillic)</source>
     <name>FullTextSearchDialog</name>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ara</translation>
     </message>
     <message>
         <source>Match case</source>
@@ -933,31 +937,31 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Toplam:</translation>
     </message>
     <message>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>İndekslenen:</translation>
     </message>
     <message>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Şimdi indekslenen: Yok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">İptal</translation>
+        <translation>İptal</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Yardım</translation>
     </message>
     <message>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Kelime sırasını yoksay</translation>
     </message>
     <message>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Aksanları yoksay</translation>
     </message>
 </context>
 <context>
@@ -1036,11 +1040,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries available:</source>
-        <translation>Kullanılabilir Sözlükler:</translation>
+        <translation>Kullanılabilir sözlükler:</translation>
     </message>
     <message>
         <source>&amp;Add group</source>
-        <translation>Grup &amp;Ekle</translation>
+        <translation>Grup &amp;ekle</translation>
     </message>
     <message>
         <source>Add group</source>
@@ -1056,7 +1060,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Sözlükleri, grupların içine sürükleyin ve &amp;bırakın.</translation>
+        <translation>Sözlükleri, grupların içine sürükleyin ve &amp;bırakın, yeniden sıralayın.</translation>
     </message>
     <message>
         <source>Create language-based groups</source>
@@ -1088,7 +1092,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Remove group</source>
-        <translation>Grubu &amp;Kaldır</translation>
+        <translation>Grubu &amp;kaldır</translation>
     </message>
     <message>
         <source>Groups:</source>
@@ -1096,7 +1100,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Re&amp;name group</source>
-        <translation>Grubu &amp;Adlandır</translation>
+        <translation>Grubu &amp;adlandır</translation>
     </message>
     <message>
         <source>Remove all dictionary groups</source>
@@ -1104,80 +1108,80 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Grup sekmeleri</translation>
     </message>
     <message>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruplar listesini aç</translation>
     </message>
 </context>
 <context>
     <name>Help::HelpWindow</name>
     <message>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict yardım</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Başlangıç</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Önceki</translation>
+        <translation>Önceki</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Sonraki</translation>
+        <translation>Sonraki</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished">Yaklaş</translation>
+        <translation>Yaklaştır</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished">Uzaklaş</translation>
+        <translation>Uzaklaştır</translation>
     </message>
     <message>
         <source>Normal Size</source>
-        <translation type="unfinished">Normal Boyut</translation>
+        <translation>Normal Boyut</translation>
     </message>
     <message>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>İçerik</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>İndeks</translation>
     </message>
 </context>
 <context>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Seçilenleri Sil</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilenleri Kopyala</translation>
     </message>
     <message>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş:</translation>
     </message>
     <message>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş boyutu:%1 azami %2 giriş</translation>
     </message>
 </context>
 <context>
     <name>Hunspell</name>
     <message>
         <source>Spelling suggestions: </source>
-        <translation>Yazım Önerileri: </translation>
+        <translation>Yazım önerileri: </translation>
     </message>
     <message>
         <source>%1 Morphology</source>
@@ -1262,7 +1266,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Thai</source>
-        <translation>Thailändisch</translation>
+        <translation>Tayland</translation>
     </message>
     <message>
         <source>Urdu</source>
@@ -1274,11 +1278,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Tschechisch</translation>
+        <translation>Çek</translation>
     </message>
     <message>
         <source>Dutch</source>
-        <translation>Holländisch</translation>
+        <translation>Flemenkçe</translation>
     </message>
     <message>
         <source>Ganda</source>
@@ -1286,11 +1290,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Fulah</source>
-        <translation>Fulfulde</translation>
+        <translation>Fulah</translation>
     </message>
     <message>
         <source>Greek</source>
-        <translation>Griechisch</translation>
+        <translation>Yunanca</translation>
     </message>
     <message>
         <source>Hausa</source>
@@ -1302,7 +1306,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Irish</source>
-        <translation>Irisch</translation>
+        <translation>İrlanda</translation>
     </message>
     <message>
         <source>Khmer</source>
@@ -1314,11 +1318,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Latin</source>
-        <translation>Latein</translation>
+        <translation>Latin</translation>
     </message>
     <message>
         <source>Malay</source>
-        <translation>Malaysisch</translation>
+        <translation>Malaya</translation>
     </message>
     <message>
         <source>Maori</source>
@@ -1346,7 +1350,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Tajik</source>
-        <translation>Tadschikisch</translation>
+        <translation>Tacik</translation>
     </message>
     <message>
         <source>Tamil</source>
@@ -1366,7 +1370,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Inupiaq</source>
-        <translation>Inupiaq</translation>
+        <translation>İnyupikçe</translation>
     </message>
     <message>
         <source>Venda</source>
@@ -1374,11 +1378,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Uzbek</source>
-        <translation>Usbekisch</translation>
+        <translation>Özbek</translation>
     </message>
     <message>
         <source>Welsh</source>
-        <translation>Walisisch</translation>
+        <translation>Galce</translation>
     </message>
     <message>
         <source>Wolof</source>
@@ -1390,7 +1394,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Italian</source>
-        <translation>Italienisch</translation>
+        <translation>İtalyan</translation>
     </message>
     <message>
         <source>Raeto-Romance</source>
@@ -1402,11 +1406,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Kannada</source>
-        <translation>Kannada</translation>
+        <translation>Kanada</translation>
     </message>
     <message>
         <source>North Ndebele</source>
-        <translation>Nord-Ndebele</translation>
+        <translation>Kuzey Ndebele</translation>
     </message>
     <message>
         <source>Abkhazian</source>
@@ -1414,7 +1418,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Kirghiz</source>
-        <translation>Kirghizstan</translation>
+        <translation>Kırgız</translation>
     </message>
     <message>
         <source>Kirundi</source>
@@ -1670,7 +1674,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Azerbaijani</source>
-        <translation>Aserbaijanisch</translation>
+        <translation>Azerbaycan</translation>
     </message>
     <message>
         <source>Amharic</source>
@@ -1854,7 +1858,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Portuguese</source>
-        <translation>Portugiesisch</translation>
+        <translation>Portekizce</translation>
     </message>
     <message>
         <source>Turkish</source>
@@ -1862,7 +1866,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Turkmen</source>
-        <translation>Turkmenisch</translation>
+        <translation>Türkmence</translation>
     </message>
     <message>
         <source>Gujarati</source>
@@ -1958,67 +1962,67 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Geleneksel Çince</translation>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Basitleştirilmiş Çince</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Basitleştirilmiş Çince lehçeler</translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Geleneksel Çince lehçeler</translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Doğu Avrupa dilleri</translation>
     </message>
     <message>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Batı Avrupa dilleri</translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Rusça dilleri</translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Japon dilleri</translation>
     </message>
     <message>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Baltık dilleri</translation>
     </message>
     <message>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Yunan dilleri</translation>
     </message>
     <message>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Kore lehçeleri</translation>
     </message>
     <message>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Türkçe lehçeleri</translation>
     </message>
     <message>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Diğer Tay lehçeleri</translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamasih</translation>
     </message>
     <message>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
 </context>
 <context>
@@ -2032,7 +2036,7 @@ between classic and school orthography in cyrillic)</source>
     <name>Main</name>
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Yapılandırma dosyasında hata. Varsayılan ayarlara devam edilsin mi?</translation>
     </message>
 </context>
 <context>
@@ -2051,7 +2055,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>All</source>
-        <translation>Tüm Sözlükler</translation>
+        <translation>Tümü</translation>
     </message>
     <message>
         <source>Back</source>
@@ -2067,7 +2071,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Düzen</translation>
+        <translation>&amp;Düzenle</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -2087,7 +2091,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Zoom</source>
-        <translation>&amp;Yaklaş</translation>
+        <translation>&amp;Yaklaştır</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2103,7 +2107,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Close To Tray</source>
-        <translation>Kapatıldığında &amp;Görev Çubuğu&apos;na yerleş</translation>
+        <translation>&amp;Sistem Tepsisine Küçült</translation>
     </message>
     <message>
         <source>Can&apos;t save article: %1</source>
@@ -2111,11 +2115,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Yaklaş</translation>
+        <translation>Yaklaştır</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation>Tüm Sekmeleri Kapat</translation>
+        <translation>Tüm sekmeleri kapat</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -2155,7 +2159,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Minimizes the window to tray</source>
-        <translation>Küçültüldüğünde Görev Çubuğu&apos;na yerleş</translation>
+        <translation>Küçültüldüğünde sistem tepsisine yerleş</translation>
     </message>
     <message>
         <source>Words Zoom Out</source>
@@ -2175,7 +2179,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>New Release Available</source>
-        <translation>Yeni Sürüm Var</translation>
+        <translation>Yeni Sürüm Mevcut</translation>
     </message>
     <message>
         <source>Look up:</source>
@@ -2183,7 +2187,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Uzaklaş</translation>
+        <translation>Uzaklaştır</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -2335,7 +2339,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>Gön&amp;nder</translation>
+        <translation>&amp;Aktar</translation>
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
@@ -2391,7 +2395,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Import</source>
@@ -2415,15 +2419,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük bilgisi</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlüğü düzenle</translation>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Arama Bölmesi</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
@@ -2439,23 +2443,23 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Yeni Sekme</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Her zaman üstte</translation>
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Her zaman üstte</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü Düğmesi</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
@@ -2467,15 +2471,15 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gezinti</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ana pencere her zaman üstte olacak şekilde ayarlanmıştır.</translation>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Geçmiş Bölmesi</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
@@ -2516,23 +2520,23 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Ara</translation>
     </message>
     <message>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Sayfada ara</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam metin araması</translation>
     </message>
     <message>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <source>GoldenDict reference</source>
@@ -2540,15 +2544,15 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tam metin araması için dizin oluştur: </translation>
     </message>
     <message>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriler Bölmesi</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Göster</translation>
     </message>
     <message>
         <source>Export</source>
@@ -2560,11 +2564,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekle</translation>
     </message>
     <message>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçerli sekmeyi favorilere ekle</translation>
     </message>
     <message>
         <source>Export to list</source>
@@ -2576,7 +2580,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>XML dosyaları (*.xml);;Tüm dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Favorites export complete</source>
@@ -2596,38 +2600,38 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>Veri ayrıştırma hatası</translation>
     </message>
     <message>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Favoriler</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Tüm sekmeleri favorilere ekle</translation>
     </message>
     <message>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut sekmeyi favorilerden kaldır</translation>
     </message>
     <message>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;%1&quot; anahtar kelimesini favorilerden çıkar?</translation>
     </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük dosyası değiştirildi veya bozuldu</translation>
     </message>
     <message>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kaynağından yükleme başarısız, nedeni:%2</translation>
     </message>
 </context>
 <context>
@@ -2660,14 +2664,14 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
 </context>
 <context>
     <name>MultimediaAudioPlayer</name>
     <message>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses arabelleği okumak için açılamadı.</translation>
     </message>
 </context>
 <context>
@@ -2686,31 +2690,31 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Name:</source>
-        <translation>İsim: </translation>
+        <translation>İsim:</translation>
     </message>
     <message>
         <source>Total articles:</source>
-        <translation>Toplam Madde: </translation>
+        <translation>Toplam makale:</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation>Bu Dilden: </translation>
+        <translation>Bu dilden:</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation>Bu Dile: </translation>
+        <translation>Bu dile:</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation>Toplam sözcük: </translation>
+        <translation>Toplam sözcük:</translation>
     </message>
     <message>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
-        <translation>Öğeleri sürükleyip bırakarak sırasını ayarlayın. İstediğiniz sözlüklerin kullanımı devre dışı bırakmak için Pasifleştirilmiş Sözlükler Grubu&apos;na bırakın.</translation>
+        <translation>İçindeki öğeleri sürükleyip bırakarak sırayı ayarlayın. Kullanımlarını devre dışı bırakmak için sözlükleri aktif olmayan gruba bırakın.</translation>
     </message>
     <message>
         <source>Dictionary order:</source>
-        <translation>Sözlük Sırası:</translation>
+        <translation>Sözlük sırası:</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
@@ -2718,27 +2722,27 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary information</source>
-        <translation>Sözlük Bilgisi</translation>
+        <translation>Sözlük bilgisi</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Açıklama:</translation>
     </message>
     <message>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>İsme göre sırala</translation>
     </message>
     <message>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Dillere göre sırala</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük başlıkları</translation>
     </message>
     <message>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktif sözlükler: %1, pasif sözlükler: %2</translation>
     </message>
 </context>
 <context>
@@ -2760,7 +2764,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Start to system tray</source>
-        <translation>Görev Çubuğu&apos;nda başlat</translation>
+        <translation>Görev çubuğunda başlat</translation>
     </message>
     <message>
         <source>Left Shift only</source>
@@ -2815,7 +2819,7 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Use proxy server</source>
-        <translation>Proxy Sunucusu</translation>
+        <translation>Proxy sunucusu</translation>
     </message>
     <message>
         <source>Use the following hotkey to translate a word from clipboard:</source>
@@ -2823,7 +2827,7 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Windows key or Meta key</source>
-        <translation>Windows/Meta-Tuşu</translation>
+        <translation>Windows tuşu yada Veri tuşu</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
@@ -2831,16 +2835,15 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Sadece seçilen tüm tuşlar basılı tutulduğu zaman Açılır Pencere gösterilir
-(Sol Fare Tuşu ile kullanılacak tuşu seçin):</translation>
+        <translation>Sadece seçilen tüm tuşlara basıldığında açılan pencereyi göster:</translation>
     </message>
     <message>
         <source>Auto-pronounce words in main window</source>
-        <translation>Otomatik olarak ana pencerede sözcükleri seslendir</translation>
+        <translation>Ana penceredeki kelimeleri otomatik telaffuz et</translation>
     </message>
     <message>
         <source>Start with system</source>
-        <translation>Açılışta otomatik olarak başlat</translation>
+        <translation>Sistem ile başlat</translation>
     </message>
     <message>
         <source>Left Alt only</source>
@@ -2848,7 +2851,7 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Tabbed browsing</source>
-        <translation>Sekmeli Gözatma</translation>
+        <translation>Sekmeli gözat</translation>
     </message>
     <message>
         <source>Right Shift only</source>
@@ -2857,7 +2860,8 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     <message>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>Uygulama kapatıldığında ana pencereyi gizler.</translation>
+        <translation>Bu açık durumdayken, ana pencereyi kapatma denemesi, uygulamayı kapatmak
+yerine onu gizler.</translation>
     </message>
     <message>
         <source>Playback</source>
@@ -2875,7 +2879,7 @@ proxy sunucusu kullanmak istiyorsanız etkinleştirin.</translation>
     </message>
     <message>
         <source>Interface language:</source>
-        <translation>Arayüz Dili:</translation>
+        <translation>Arayüz dili:</translation>
     </message>
     <message>
         <source>Left Ctrl only</source>
@@ -2929,8 +2933,8 @@ yorum yapabilirsiniz.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translat
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Ekranda Kelime Yakala modunun varsayılan olarak etkin olup olmadığını gösterir.
-Etkinse, program her zaman aktif mod ile başlar.</translation>
+        <translation>Ekranda kelime yakala kipinin öntanımlı olarak etkin olup olmadığını gösterir.
+Etkinse, program her zaman aktif kip ile başlar.</translation>
     </message>
     <message>
         <source>Left Shift</source>
@@ -2944,11 +2948,11 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Display style:</source>
-        <translation>Görünüm:</translation>
+        <translation>Görüntüleme biçimi:</translation>
     </message>
     <message>
         <source>Auto-pronounce words in scan popup</source>
-        <translation>Ekranda Kelime Yakala&apos;rken kelimeleri otomatik seslendir</translation>
+        <translation>Ekranda Kelime Yakalarken kelimeleri otomatik seslendir</translation>
     </message>
     <message>
         <source>Enable scan popup functionality</source>
@@ -2964,14 +2968,13 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Alt key</source>
-        <translation>Alt Tuşu</translation>
+        <translation>Alt tuşu</translation>
     </message>
     <message>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Bunun etkinleştirilmesi birçok reklamları, içeriği (resim, kare) GoldenDict tarafından engellemeyi sağlar.
-Bazı siteler bu nedenle bozulursa, bunu devre dışı bırakmayı deneyin.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>When enabled, a translation popup window would be shown each time
@@ -2999,11 +3002,11 @@ Aksi takdirde sekmelerin sonuna eklenecektir.</translation>
     </message>
     <message>
         <source>Close to system tray</source>
-        <translation>Kapatılınca Görev Çubuğu&apos;na yerleş</translation>
+        <translation>Kapat ve görev çubuğuna yerleş</translation>
     </message>
     <message>
         <source>System default</source>
-        <translation>Sistem Varsayılanı</translation>
+        <translation>Sistem varsayılanı</translation>
     </message>
     <message>
         <source>When enabled, an icon appears in the system tray area which can be used
@@ -3052,11 +3055,11 @@ saniye boyunca izlenmektedir.</translation>
     </message>
     <message>
         <source>Changing Language</source>
-        <translation>Dilinizi Seçin</translation>
+        <translation>Dili Değiştir</translation>
     </message>
     <message>
         <source>Ctrl key</source>
-        <translation>Ctrl Tuşu</translation>
+        <translation>Ctrl tuşu</translation>
     </message>
     <message>
         <source>Use the following hotkey to show or hide the main window:</source>
@@ -3106,11 +3109,11 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation>Diğer sitelere (gizli birçok reklamlar) içerik yüklemeye izin verme</translation>
+        <translation>İçeriğin diğer sitelerden yüklenmesine izin verme (çoğu reklamı gizler)</translation>
     </message>
     <message>
         <source>Pronunciation</source>
-        <translation>Telaffuz (Seslendirme)</translation>
+        <translation>Telaffuz</translation>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
@@ -3126,7 +3129,7 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Hotkeys</source>
-        <translation>Kısayollar</translation>
+        <translation>Kısayol tuşu</translation>
     </message>
     <message>
         <source>Start with scan popup turned on</source>
@@ -3139,7 +3142,7 @@ its main window.</source>
     </message>
     <message>
         <source>Shift key</source>
-        <translation>Shift Tuşu</translation>
+        <translation>Shift tuşu</translation>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
@@ -3241,23 +3244,23 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Tercüme edilen kelimelerin geçmişini saklamak için bu seçeneği aç</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Geçmiş boyutu</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaleler</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
@@ -3285,7 +3288,7 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Azami geçmiş boyutu:</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
@@ -3330,7 +3333,7 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>semboller</translation>
     </message>
     <message>
         <source>Adjust this value to avoid huge context menus.</source>
@@ -3346,27 +3349,27 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Sistem vekil sunucu</translation>
     </message>
     <message>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel vekil sunucu</translation>
     </message>
     <message>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Özel ayarlar</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam metin araması</translation>
     </message>
     <message>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam metin aramaya izin ver:</translation>
     </message>
     <message>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Daha fazlasını içeren sözlüklerde arama yapılmasın</translation>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
@@ -3374,7 +3377,7 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Yardım dili</translation>
     </message>
     <message>
         <source>Turn this option on to enable extra articles search via synonym lists
@@ -3383,11 +3386,11 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Eş anlamlı sözcüklerle ek arama</translation>
     </message>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriler</translation>
     </message>
     <message>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
@@ -3423,6 +3426,50 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Enter audio player command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ScanPopup unpinned window flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;default&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Popup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This hint can be combined with non-default window flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bypass window manager hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore diacritics while searching</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3484,7 +3531,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
 </context>
 <context>
@@ -3559,7 +3606,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilinmeyen hata.</translation>
     </message>
     <message>
         <source>avcodec_alloc_frame() failed.</source>
@@ -3591,7 +3638,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarih:%1%2</translation>
     </message>
     <message>
         <source>avcodec_alloc_context3() failed.</source>
@@ -3602,34 +3649,34 @@ from Stardict, Babylon and GLS dictionaries</source>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük arama/süzgeç (Ctrl+F)</translation>
     </message>
     <message>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Hızlı Arama</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Aramayı Temizle</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>HATA: %1</translation>
     </message>
     <message>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kaynak kaydetme hatası: </translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">İlgili kaynak indirilmesi başarısız oldu.</translation>
+        <translation>Başvurulan kaynak indirilemedi.</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">UYARI: %1</translation>
+        <translation>UYARI: %1</translation>
     </message>
 </context>
 <context>
@@ -3654,7 +3701,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <name>ScanFlag</name>
     <message>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>AnaPencere</translation>
     </message>
 </context>
 <context>
@@ -3707,11 +3754,11 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Önceki</translation>
+        <translation>Önceki</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Sonraki</translation>
+        <translation>Sonraki</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -3719,15 +3766,15 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorilere kelime ekle (Ctrl+E)</translation>
     </message>
     <message>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Her zaman diğer tüm pencerelerin üstünde dur</translation>
     </message>
 </context>
 <context>
@@ -3742,7 +3789,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
 </context>
 <context>
@@ -3765,7 +3812,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Nihon-shiki</source>
-        <translation>Nippon</translation>
+        <translation>Nihon-shiki</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
@@ -3773,7 +3820,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Greek transliteration</source>
-        <translation>Yunanca Harf Çevirisi</translation>
+        <translation>Yunanca harf çevirisi</translation>
     </message>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -4000,11 +4047,11 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarusça harf çevirisi</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kendi anahtarınızı &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt; buradan &lt;/a&gt; alın veya varsayılanı kullanmak için boş bırakın.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
@@ -4021,111 +4068,111 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük sunucuları</translation>
     </message>
     <message>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük sunucuları:</translation>
     </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">Yok</translation>
+        <translation>Yok</translation>
     </message>
 </context>
 <context>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Seçilmiş ses motorları:</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ekle</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Kaldır</translation>
+        <translation>&amp;Kaldır</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Önizle</translation>
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mevcut ses motorları:</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Önizlenecek metin:</translation>
     </message>
     <message>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Önizlenecek metni buraya yazın.</translation>
     </message>
     <message>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Önizle</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>TTS sesi yok</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation type="unfinished">Kaldırmayı Onayla</translation>
+        <translation>Kaldırmayı onayla</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses motorunu &lt;b&gt;%1&lt;/b&gt; listeden kaldır?</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kullanılabilir TTS sesi bulunamıyor.&lt;br&gt;Lütfen bilgisayarınızda en az bir tane TTS motoru yüklü olduğundan emin olun.</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Tercihler</translation>
+        <translation>Tercihler</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ses:</translation>
     </message>
     <message>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Oran:</translation>
     </message>
 </context>
 <context>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlükleri aramak için bir kelime veya kelime öbeği yaz</translation>
     </message>
     <message>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Açılır menü</translation>
     </message>
 </context>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Etkin</translation>
+        <translation>Etkin</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">İsim</translation>
+        <translation>İsim</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Kimlik</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
 </context>
 <context>
@@ -4144,15 +4191,15 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Simge</translation>
     </message>
     <message>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Makaleyi &lt;iframe&gt; etiketinin içine bağlantı olarak ekle</translation>
     </message>
     <message>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Bağlantı olarak</translation>
     </message>
 </context>
 <context>
@@ -4166,7 +4213,7 @@ uygun grupların altlarına ekleyin.</translation>
     <name>WordList</name>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">UYARI: %1</translation>
+        <translation>UYARI: %1</translation>
     </message>
 </context>
 </TS>
