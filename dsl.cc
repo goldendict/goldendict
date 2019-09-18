@@ -91,7 +91,7 @@ enum
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 5
+  CurrentFtsIndexVersion = 6
 };
 
 struct IdxHeader
@@ -1518,7 +1518,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
           if( tag.compare( stripTags[ n ], Qt::CaseInsensitive ) == 0 )
           {
             pos2 = text.indexOf( stripEndTags[ n ] , pos + stripTags[ n ].size() + 2, Qt::CaseInsensitive );
-            text.remove( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos );
+            text.replace( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos, " " );
             break;
           }
         }
@@ -1531,9 +1531,13 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     // Strip tags
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.replace( QRegularExpression( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegularExpression( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
     text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
 #else
-    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+    text.replace( QRegExp( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegExp( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
+    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]" ) );
 #endif
 
     // Chech for insided cards
