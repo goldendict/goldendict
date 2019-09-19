@@ -89,7 +89,7 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 23 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
   CurrentFtsIndexVersion = 6
 };
@@ -2323,12 +2323,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           bool wasEmptyLine = false;
           int headwordLine = scanner.getLinesRead() - 2;
           bool noSignificantLines = Folding::applyWhitespaceOnly( curString ).empty();
+          bool haveLine = !noSignificantLines;
 
           // Skip the article's body
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
-                 || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
+            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset );
+            haveLine = false;
+
+            if ( !hasString || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
               {
