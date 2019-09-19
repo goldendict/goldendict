@@ -91,7 +91,7 @@ enum
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
   CurrentFormatVersion = 23 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 6
+  CurrentFtsIndexVersion = 7
 };
 
 struct IdxHeader
@@ -1539,6 +1539,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     text.replace( QRegExp( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
     text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]" ) );
 #endif
+    text.remove( QString::fromLatin1( "<<" ) );
+    text.remove( QString::fromLatin1( ">>" ) );
 
     // Chech for insided cards
 
