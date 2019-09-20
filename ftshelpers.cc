@@ -437,7 +437,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   }
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression regBrackets( "(\\([\\w\\p{M}]\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
+  QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
                                   QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 #else
