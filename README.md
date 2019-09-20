@@ -25,7 +25,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 
     sudo apt-get install git pkg-config build-essential qt5-qmake \
          libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
-         qtdeclarative5-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
+         qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev \
          libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev \
          qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins
