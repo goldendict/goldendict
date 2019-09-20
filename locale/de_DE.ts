@@ -115,7 +115,7 @@
     <message>
         <location filename="../article_maker.cc" line="695"/>
         <source>From </source>
-        <translation>Von</translation>
+        <translation>Von </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="700"/>
@@ -135,12 +135,12 @@
     <message>
         <location filename="../article_maker.cc" line="894"/>
         <source>Compound expressions: </source>
-        <translation>Zusammengesetzte Treffer:</translation>
+        <translation>Zusammengesetzte Treffer: </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="922"/>
         <source>Individual words: </source>
-        <translation>Einzelne Wörter:</translation>
+        <translation>Einzelne Wörter: </translation>
     </message>
 </context>
 <context>
@@ -203,7 +203,7 @@
     <message>
         <location filename="../articleview.cc" line="1392"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation>Die angegebene Audioprogramm existiert nicht.</translation>
+        <translation>Das angegebene Audioprogramm existiert nicht.</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1275"/>
@@ -265,7 +265,7 @@
     <message>
         <location filename="../articleview.cc" line="1727"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>Schlage &quot;%1&quot; in &amp;neuem Reiter nach</translation>
+        <translation>Schlage &quot;%1&quot; in &amp;neuem Tab nach</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1732"/>
@@ -276,7 +276,7 @@
         <location filename="../articleview.cc" line="1738"/>
         <location filename="../articleview.cc" line="1774"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation>Füge &quot;%1&quot;  zum Verlauf &amp;hinzu </translation>
+        <translation>Füge &quot;%1&quot; zum Verlauf &amp;hinzu </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1752"/>
@@ -286,12 +286,12 @@
     <message>
         <location filename="../articleview.cc" line="1760"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Schlage &quot;%1&quot; in %2 in &amp;neuem Reiter nach</translation>
+        <translation>Schlage &quot;%1&quot; in %2 in &amp;neuem Tab nach</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2036"/>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">WARNUNG: Audio Player: %1</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
@@ -303,7 +303,7 @@
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Um das Abspielen von Dateien anders als WAV zu akivieren, müssen Sie in Bearbeiten » Einstellungen, im Reiter Audio die Option &quot;Mit DirectShow abspielen&quot; auswählen.</translation>
+        <translation type="obsolete">Um das Abspielen von Dateien anders als WAV zu aktivieren, müssen Sie in Bearbeiten » Einstellungen, im Reiter Audio die Option &quot;Mit DirectShow abspielen&quot; auswählen.</translation>
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
@@ -337,7 +337,7 @@
     <message>
         <location filename="../articleview.cc" line="1980"/>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte folgende Audio Datei nicht abspielen: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2029"/>
@@ -408,7 +408,7 @@
         <location filename="../belarusiantranslit.cc" line="423"/>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation>Weißrussische Transliteration (glättet die Unterschiede zwischen klassicher und Schulrechtschreibung im kyrillischen)</translation>
+        <translation>Weißrussische Transliteration (glättet die Unterschiede zwischen klassischer und Schulrechtschreibung im kyrillischen)</translation>
     </message>
 </context>
 <context>
@@ -607,7 +607,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchmodus</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
@@ -627,17 +627,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter in Datei exportieren</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
@@ -647,32 +647,32 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="101"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Knopf drücken um den Suchfilter auf die Stichwortliste anzuwenden</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="104"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwenden</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Falls aktiviert, wird das Ergebnis des Suchfilters ständig aktuell gehalten</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="120"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto-Filter</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="127"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchfilter:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="134"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchfilter eingeben (als feststehende Zeichenfolge, Wildcards oder regulären Ausdruck)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="35"/>
@@ -692,22 +692,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.cc" line="247"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterschiedliche Stichwörter insgesamt: %1, gefiltert: %2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="264"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter in Datei speichern</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="266"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Textdateien(*.txt);;All Dateien(*.*)</translation>
+        <translation type="unfinished">Textdateien(*.txt);;Alle Dateien(*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="290"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter exportieren...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="290"/>
@@ -760,12 +760,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige alle Stichwörter des Wörterbuchs</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Stichwörter</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -880,7 +880,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Wörterbuch Stichwörter</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -943,7 +943,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../externalviewer.cc" line="53"/>
         <source>the viewer program name is empty</source>
-        <translation>Der Name des Betrachtungsprogrammes is leer</translation>
+        <translation>Der Name des Betrachtungsprogrammes ist leer</translation>
     </message>
 </context>
 <context>
@@ -951,17 +951,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="152"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Volltextsuche</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="159"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganze Wörter</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="160"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur Text</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="161"/>
@@ -976,19 +976,19 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="167"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Abstand zwischen Wörtern (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="176"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Max. Artikel pro Wörterbuch (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="217"/>
         <location filename="../fulltextsearch.cc" line="380"/>
         <location filename="../fulltextsearch.cc" line="470"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel gefunden: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="334"/>
@@ -998,7 +998,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="335"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="393"/>
@@ -1008,17 +1008,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.cc" line="402"/>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>Die Suchzeile muss zumindest ein Wort enthalten, bestehend aus </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="403"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> oder mehr Zeichen</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="415"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Wörterbücher für Volltextsuche</translation>
     </message>
 </context>
 <context>
@@ -1026,7 +1026,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="643"/>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler in Lesezeichen Datei</translation>
     </message>
 </context>
 <context>
@@ -1044,17 +1044,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="47"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner einfügen</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="61"/>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen:</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle ausgewählten Einträge werden entfernt. Fortfahren?</translation>
     </message>
 </context>
 <context>
@@ -1101,7 +1101,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="207"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Volltextsuche</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
@@ -1111,27 +1111,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modus:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="82"/>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Wortreihenfolge ignorieren</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="89"/>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Diakritika ignorieren</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="112"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gefundene Artikel:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="134"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügbare Wörterbücher in Gruppe:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="140"/>
@@ -1141,7 +1141,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="161"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamt:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="168"/>
@@ -1156,12 +1156,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="233"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="253"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
 </context>
 <context>
@@ -1297,7 +1297,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Reiter 2</translation>
+        <translation>Tab 2</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -2584,22 +2584,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="403"/>
         <source>Close current tab</source>
-        <translation>Aktuellen Reiter schließen</translation>
+        <translation>Aktuellen Tab schließen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="413"/>
         <source>Close all tabs</source>
-        <translation>Alle Reiter schließen</translation>
+        <translation>Alle Tabs schließen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="421"/>
         <source>Close all tabs except current</source>
-        <translation>Alle anderen Reiter schließen</translation>
+        <translation>Alle anderen Tabs schließen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Tabs als Lesezeichen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="842"/>
@@ -2614,7 +2614,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="4561"/>
         <location filename="../mainwindow.cc" line="4588"/>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuellen Tab von Lesezeichen entfernen</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3396"/>
@@ -2975,7 +2975,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="343"/>
         <source>&amp;History Pane</source>
-        <translation>&amp;Verlaufsformular</translation>
+        <translation>&amp;Verlaufsliste</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
@@ -3005,7 +3005,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="630"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict Referenz</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="633"/>
@@ -3020,7 +3020,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="316"/>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichenliste</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
@@ -3117,22 +3117,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="605"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab durchsuchen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="608"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="616"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Volltextsuche</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="619"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+Umschalt+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
@@ -3142,17 +3142,17 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importieren</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
@@ -3161,17 +3161,17 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="1824"/>
         <location filename="../mainwindow.cc" line="4553"/>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuellen Tab als Lesezeichen</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportieren als Liste</translation>
     </message>
     <message>
         <source>Print Preview</source>
@@ -3194,7 +3194,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="604"/>
         <source>New Tab</source>
-        <translation>Neuer Reiter</translation>
+        <translation>Neuer Tab</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="533"/>
@@ -3368,12 +3368,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="268"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Wörterbucheinträge</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Wörterbücher aktiv: %1, inaktiv: %2</translation>
     </message>
 </context>
 <context>
@@ -3832,7 +3832,7 @@ Tasten auch kurz nach der Markierung gedrückt werden.</translation>
     <message>
         <location filename="../preferences.ui" line="1206"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Volltextsuche</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1225"/>
@@ -3842,12 +3842,12 @@ Tasten auch kurz nach der Markierung gedrückt werden.</translation>
     <message>
         <location filename="../preferences.ui" line="1323"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht in Wörterbüchern suchen, die mehr als</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1340"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>Einträge enthalten (0 - unbegrenzt)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1433"/>
@@ -3887,22 +3887,22 @@ Tasten auch kurz nach der Markierung gedrückt werden.</translation>
     <message>
         <location filename="../preferences.ui" line="1619"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1627"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatischer Speicherintervall für Lesezeichen. Falls der Wert 0 eingetragen wird, erfolgt die Speicherung nur bei Beendigung des Programms.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1653"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Wird diese Option aktiviert, erfolgt jegliche Entfernung von Lesezeichen nur nach vorheriger Sicherheitsabfrage </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1656"/>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheitsabfrage</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1689"/>
@@ -3917,12 +3917,12 @@ Tasten auch kurz nach der Markierung gedrückt werden.</translation>
     <message>
         <location filename="../preferences.ui" line="1699"/>
         <source>Articles longer than this size will be collapsed</source>
-        <translation>Artikel länger als diese Größe werden eingeklappt</translation>
+        <translation>Artikel welche diese Größe überschreiten werden eingeklappt</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1715"/>
         <source>symbols</source>
-        <translation>Symbolen</translation>
+        <translation>Zeichen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1737"/>
@@ -3938,12 +3938,12 @@ Tasten auch kurz nach der Markierung gedrückt werden.</translation>
         <location filename="../preferences.ui" line="1773"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diese Option, falls sie eine Zusatzsuche mit den Synonymlisten von Stardict, Babylon und GLS Wörterbüchern wünschen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1777"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Zusatzsuche mithilfe von Synonymen</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
@@ -3994,7 +3994,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Es wird versucht die IAccessibleEx-Technologie zu benutzen, um das Wort unter dem Mauszeiger zu erkennen.
 Dies funktioniert nur mit jenen Programmen, welche es unterstützen (zum Beispiel
 Internet Explorer 9).
-Sollte solche Programme nicht verwendet werden, wird diese Option nicht gebraucht.</translation>
+Sollten solche Programme nicht verwendet werden, wird diese Option nicht gebraucht.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1399"/>
@@ -4008,7 +4008,7 @@ This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Es wird versucht die UI-Automation-Technologie zu benutzen, um das Wort unter dem Mauszeiger zu erkennen.
 Dies funktioniert nur mit jenen Programmen, welche es unterstützen.
-Sollte solche Programme nicht verwendet werden, wird diese Option nicht gebraucht.</translation>
+Sollten solche Programme nicht verwendet werden, wird diese Option nicht gebraucht.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1411"/>
@@ -4022,7 +4022,7 @@ This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Es wird versucht GoldenDict-Mitteilung zu benutzen, um das Wort unter dem Mauszeiger zu erkennen.
 Dies funktioniert nur mit jenen Programmen, welche es unterstützen.
-Sollte solche Programme nicht verwendet werden, wird diese Option nicht gebraucht.</translation>
+Sollten solche Programme nicht verwendet werden, wird diese Option nicht gebraucht.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1423"/>
@@ -4079,12 +4079,12 @@ Sollte solche Programme nicht verwendet werden, wird diese Option nicht gebrauch
     <message>
         <location filename="../preferences.ui" line="1747"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Aktivieren Sie diese Option, um optionale Abschnitte von Artikeln immer zu erweitern.</translation>
+        <translation>Aktivieren Sie diese Option, um optionale Abschnitte von Artikeln immer auszuklappen.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1750"/>
         <source>Expand optional &amp;parts</source>
-        <translation>Optionale &amp;Abschnitte erweitern</translation>
+        <translation>Optionale &amp;Abschnitte ausklappen</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="622"/>
