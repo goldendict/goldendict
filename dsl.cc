@@ -858,7 +858,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
-    string filename = Utf8::encode( node.renderAsText() );
+    string filename = Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false );
     string n =
       getDictionaryFilenames()[ 0 ] + ".files" +
       FsEncoding::separator() +
@@ -999,7 +999,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
   {
-    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    string link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
       link = "http://" + link;
 
