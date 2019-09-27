@@ -51,7 +51,9 @@ AudioService & AudioService::instance()
 
 AudioService::AudioService()
 {
+#if LIBAVFORMAT_VERSION_MAJOR < 58 || ( LIBAVFORMAT_VERSION_MAJOR == 58 && LIBAVFORMAT_VERSION_MINOR < 9 )
   av_register_all();
+#endif
   ao_initialize();
 }
 
@@ -438,6 +440,8 @@ bool DecoderContext::play( QString & errorString )
 #else
   /* flush the decoder */
   av_init_packet( &packet );
+  packet.data = NULL;
+  packet.size = 0;
   int ret = avcodec_send_packet(codecContext_, &packet );
   while( ret >= 0 )
   {
