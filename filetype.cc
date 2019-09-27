@@ -67,7 +67,8 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".ape" ) ||
     endsWith( s, ".spx" ) ||
     endsWith( s, ".opus" ) ||
-    endsWith( s, ".mpa" );
+    endsWith( s, ".mpa" ) ||
+    endsWith( s, ".mp2" );
 }
 
 bool isNameOfVideo( string const & name )
@@ -90,8 +91,7 @@ bool isNameOfVideo( string const & name )
     endsWith( s, ".divx" ) ||
     endsWith( s, ".3gp" ) ||
     endsWith( s, ".webm" ) ||
-    endsWith( s, ".mov" ) ||
-    endsWith( s, ".mp2" );
+    endsWith( s, ".mov" );
 }
 
 bool isNameOfPicture( string const & name )
