@@ -69,7 +69,7 @@ win32 {
             DEFINES += NOMINMAX __WIN64
             LIBS += -L$${PWD}/winlibs/lib/msvc_2019/x64
         } else {
-            LIBS += -L$${PWD}/winlibs/lib/msvc
+            LIBS += -L$${PWD}/winlibs/lib/msvc_2019/x86
         }
         # QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
         # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
