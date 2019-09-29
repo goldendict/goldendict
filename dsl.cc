@@ -85,9 +85,9 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 23 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 5
+  CurrentFtsIndexVersion = 7
 };
 
 struct IdxHeader
@@ -854,7 +854,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
-    string filename = Utf8::encode( node.renderAsText() );
+    string filename = Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false );
     string n =
       getDictionaryFilenames()[ 0 ] + ".files" +
       FsEncoding::separator() +
@@ -995,7 +995,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
   {
-    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    string link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
       link = "http://" + link;
 
@@ -1514,7 +1514,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
           if( tag.compare( stripTags[ n ], Qt::CaseInsensitive ) == 0 )
           {
             pos2 = text.indexOf( stripEndTags[ n ] , pos + stripTags[ n ].size() + 2, Qt::CaseInsensitive );
-            text.remove( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos );
+            text.replace( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos, " " );
             break;
           }
         }
@@ -1527,10 +1527,16 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     // Strip tags
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.replace( QRegularExpression( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegularExpression( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
     text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
 #else
-    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+    text.replace( QRegExp( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegExp( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
+    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]" ) );
 #endif
+    text.remove( QString::fromLatin1( "<<" ) );
+    text.remove( QString::fromLatin1( ">>" ) );
 
     // Chech for insided cards
 
@@ -2315,12 +2321,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           bool wasEmptyLine = false;
           int headwordLine = scanner.getLinesRead() - 2;
           bool noSignificantLines = Folding::applyWhitespaceOnly( curString ).empty();
+          bool haveLine = !noSignificantLines;
 
           // Skip the article's body
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
-                 || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
+            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset );
+            haveLine = false;
+
+            if ( !hasString || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
               {

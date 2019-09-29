@@ -45,7 +45,7 @@ typedef struct AVExpr AVExpr;
  * @param funcs2 NULL terminated array of function pointers for functions which take 2 arguments
  * @param opaque a pointer which will be passed to all functions from funcs1 and funcs2
  * @param log_ctx parent logging context
- * @return 0 in case of success, a negative value corresponding to an
+ * @return >= 0 in case of success, a negative value corresponding to an
  * AVERROR code otherwise
  */
 int av_expr_parse_and_eval(double *res, const char *s,
@@ -68,7 +68,7 @@ int av_expr_parse_and_eval(double *res, const char *s,
  * @param func2_names NULL terminated array of zero terminated strings of funcs2 identifiers
  * @param funcs2 NULL terminated array of function pointers for functions which take 2 arguments
  * @param log_ctx parent logging context
- * @return 0 in case of success, a negative value corresponding to an
+ * @return >= 0 in case of success, a negative value corresponding to an
  * AVERROR code otherwise
  */
 int av_expr_parse(AVExpr **expr, const char *s,
@@ -102,7 +102,7 @@ void av_expr_free(AVExpr *e);
  * @param numstr a string representing a number, may contain one of
  * the International System number postfixes, for example 'K', 'M',
  * 'G'. If 'i' is appended after the postfix, powers of 2 are used
- * instead of powers of 10. The 'B' postfix multiplies the value for
+ * instead of powers of 10. The 'B' postfix multiplies the value by
  * 8, and can be appended after another postfix or used alone. This
  * allows using for example 'KB', 'MiB', 'G' and 'B' as postfix.
  * @param tail if non-NULL puts here the pointer to the char next
