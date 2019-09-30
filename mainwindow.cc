@@ -743,13 +743,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
   else
 #endif
+#ifndef Q_OS_MAC
   {
     if ( cfg.mainWindowGeometry.size() )
       restoreGeometry( cfg.mainWindowGeometry );
     if ( cfg.mainWindowState.size() )
       restoreState( cfg.mainWindowState, 1 );
   }
-
+#endif
   updateSearchPaneAndBar( cfg.preferences.searchInDock );
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
@@ -768,6 +769,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 //  historyChanged();
 
   setWindowTitle( "GoldenDict" );
+
+#ifdef Q_OS_MAC
+  {
+    if ( cfg.mainWindowGeometry.size() )
+      restoreGeometry( cfg.mainWindowGeometry );
+    if ( cfg.mainWindowState.size() )
+      restoreState( cfg.mainWindowState, 1 );
+  }
+#endif
 
   blockUpdateWindowTitle = true;
   addNewTab();
