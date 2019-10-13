@@ -497,7 +497,7 @@ void MdxDictionary::doDeferredInit()
         if ( fi.fileName() != mddFileName || !fi.exists() )
           continue;
 
-        sptr< IndexedMdd > mdd = new IndexedMdd( idxMutex, chunks );
+        sptr< IndexedMdd > mdd ( new IndexedMdd( idxMutex, chunks ));
         mdd->openIndex( mddIndexInfos[ i - 1 ], idx, idxMutex );
         mdd->open( dictFiles[ i ].c_str() );
         mddResources.push_back( mdd );
@@ -569,7 +569,7 @@ sptr< Dictionary::DataRequest > MdxDictionary::getSearchResults( QString const &
                                                                  bool ignoreWordsOrder,
                                                                  bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 /// MdxDictionary::getArticle
@@ -755,7 +755,7 @@ void MdxArticleRequest::run()
 sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, const vector<wstring> & alts,
                                                          const wstring &, bool ignoreDiacritics ) THROW_SPEC( std::exception )
 {
-  return new MdxArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new MdxArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 /// MdxDictionary::getResource
@@ -981,7 +981,7 @@ void MddResourceRequest::run()
 
 sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) THROW_SPEC( std::exception )
 {
-  return new MddResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new MddResourceRequest( *this, name ));
 }
 
 const QString & MdxDictionary::getDescription()
@@ -1520,7 +1520,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       {
         if ( File::exists( *mddIter ) )
         {
-          sptr< MdictParser > mddParser = new MdictParser();
+          sptr< MdictParser > mddParser ( new MdictParser());
           if ( !mddParser->open( mddIter->c_str() ) )
           {
             gdWarning( "Broken mdd (resource) file: %s\n", mddIter->c_str() );
@@ -1581,7 +1581,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       while ( !mddParsers.empty() )
       {
         sptr< MdictParser > mddParser = mddParsers.front();
-        sptr< IndexedWords > mddIndexedWords = new IndexedWords();
+        sptr< IndexedWords > mddIndexedWords ( new IndexedWords());
         MdictParser::HeadWordIndex resourcesIndex;
         ResourceHandler resourceHandler( chunks, *mddIndexedWords );
 
@@ -1677,7 +1677,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       idx.write( &idxHeader, sizeof( idxHeader ) );
     }
 
-    dictionaries.push_back( new MdxDictionary( dictId, indexFile, dictFiles ) );
+    dictionaries.push_back( sptr< Dictionary::Class >(new MdxDictionary( dictId, indexFile, dictFiles )) );
   }
 
   return dictionaries;

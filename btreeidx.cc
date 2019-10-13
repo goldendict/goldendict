@@ -484,7 +484,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
   THROW_SPEC( std::exception )
 {
-  return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
+  return sptr< Dictionary::WordSearchRequest >(new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults ));
 }
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
@@ -492,8 +492,8 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
   unsigned long maxResults )
   THROW_SPEC( std::exception )
 {
-  return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
-                                     false, maxResults );
+  return sptr< Dictionary::WordSearchRequest >(new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
+                                     false, maxResults ));
 }
 
 void BtreeIndex::readNode( uint32_t offset, vector< char > & out )

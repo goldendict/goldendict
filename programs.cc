@@ -61,10 +61,10 @@ sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
   THROW_SPEC( std::exception )
 {
   if ( prg.type == Config::Program::PrefixMatch )
-    return new ProgramWordSearchRequest( gd::toQString( word ), prg );
+    return sptr< WordSearchRequest >(new ProgramWordSearchRequest( gd::toQString( word ), prg ));
   else
   {
-    sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
+    sptr< WordSearchRequestInstant > sr ( new WordSearchRequestInstant);
 
     sr->setUncertain( true );
 
@@ -101,7 +101,7 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
                 Html::escape( wordUtf8 ) + "</a></td>";
       result += "</tr></table>";
 
-      sptr< DataRequestInstant > ret = new DataRequestInstant( true );
+      sptr< DataRequestInstant > ret ( new DataRequestInstant( true ));
 
       ret->getData().resize( result.size() );
 
@@ -111,10 +111,10 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
 
     case Config::Program::Html:
     case Config::Program::PlainText:
-      return new ProgramDataRequest( gd::toQString( word ), prg );
+      return sptr< Dictionary::DataRequest >(new ProgramDataRequest( gd::toQString( word ), prg ));
 
     default:
-      return new DataRequestInstant( false );
+      return sptr< Dictionary::DataRequest >(new DataRequestInstant( false ));
   }
 }
 
@@ -379,7 +379,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   for( Config::Programs::const_iterator i = programs.begin();
        i != programs.end(); ++i )
     if ( i->enabled )
-      result.push_back( new ProgramsDictionary( *i ) );
+      result.push_back( sptr< Dictionary::Class >(new ProgramsDictionary( *i ) ) );
 
   return result;
 }

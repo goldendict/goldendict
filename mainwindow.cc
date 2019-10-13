@@ -1096,7 +1096,7 @@ QPrinter & MainWindow::getPrinter()
   if ( printer.get() )
     return *printer;
 
-  printer = new QPrinter( QPrinter::HighResolution );
+  printer = sptr< QPrinter >(new QPrinter( QPrinter::HighResolution ));
 
   return *printer;
 }
@@ -1414,8 +1414,8 @@ void MainWindow::makeScanPopup()
        !cfg.preferences.enableClipboardHotkey )
     return;
 
-  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
-                             dictionaries, groupInstances, history );
+  scanPopup = sptr< ScanPopup >(new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
+                             dictionaries, groupInstances, history ));
 
   scanPopup->setStyleSheet( styleSheet() );
 
@@ -2982,7 +2982,7 @@ void MainWindow::installHotKeys()
   {
     try
     {
-      hotkeyWrapper = new HotkeyWrapper( this );
+      hotkeyWrapper = sptr< HotkeyWrapper >(new HotkeyWrapper( this ));
     }
     catch( HotkeyWrapper::exInit & )
     {

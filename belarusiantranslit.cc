@@ -1762,16 +1762,16 @@ std::vector< sptr< Dictionary::Class > > makeDictionaries() THROW_SPEC( std::exc
   static BelarusianSchoolToClassicTable t2;
   std::vector< sptr< Dictionary::Class > > dicts;
 
-  dicts.push_back( new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1040",
+  dicts.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1040",
                    QCoreApplication::translate( "BelarusianTranslit", "Belarusian transliteration from latin to cyrillic (classic orthography)" ).toUtf8().data(),
-                   QIcon( ":/flags/by.png" ), t0, false ) );
-  dicts.push_back( new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1041",
+                   QIcon( ":/flags/by.png" ), t0, false ) ) );
+  dicts.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1041",
                    QCoreApplication::translate( "BelarusianTranslit", "Belarusian transliteration from latin to cyrillic (school orthography)" ).toUtf8().data(),
-                   QIcon( ":/flags/by.png" ), t1, false ) );
-  dicts.push_back( new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1042",
+                   QIcon( ":/flags/by.png" ), t1, false ) ) );
+  dicts.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1042",
                    QCoreApplication::translate( "BelarusianTranslit", "Belarusian transliteration (smoothes out the difference\n"
                                                 "between classic and school orthography in cyrillic)" ).toUtf8().data(),
-                   QIcon( ":/flags/by.png" ), t2, false ) );
+                   QIcon( ":/flags/by.png" ), t2, false ) ));
   return dicts;
 }
 

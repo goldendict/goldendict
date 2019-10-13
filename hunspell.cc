@@ -368,7 +368,7 @@ sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
                                                     wstring const &, bool )
   THROW_SPEC( std::exception )
 {
-  return new HunspellArticleRequest( word, getHunspellMutex(), hunspell );
+  return sptr< DataRequest >(new HunspellArticleRequest( word, getHunspellMutex(), hunspell ));
 }
 
 /// HunspellDictionary::findHeadwordsForSynonym()
@@ -568,7 +568,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
   THROW_SPEC( std::exception )
 {
-  return new HunspellHeadwordsRequest( word, getHunspellMutex(), hunspell );
+  return sptr< WordSearchRequest >(new HunspellHeadwordsRequest( word, getHunspellMutex(), hunspell ));
 }
 
 
@@ -687,7 +687,7 @@ sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
   THROW_SPEC( std::exception )
 {
-  return new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell );
+  return sptr< WordSearchRequest >(new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell ));
 }
 
 void getSuggestionsForExpression( wstring const & expression,
@@ -850,10 +850,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & c
         dictFiles.push_back(
           FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].dicFileName ) ) );
 
-        result.push_back(
+        result.push_back(sptr< Dictionary::Class >(
           new HunspellDictionary( Dictionary::makeDictionaryId( dictFiles ),
                                   dataFiles[ d ].dictName.toUtf8().data(),
-                                  dictFiles ) );
+                                  dictFiles ) ) );
         break;
       }
     }

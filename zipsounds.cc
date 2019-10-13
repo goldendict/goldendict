@@ -142,7 +142,7 @@ ZipSoundsDictionary::ZipSoundsDictionary( string const & id,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() )
 {
-  chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
+  chunks = sptr< ChunkedStorage::Reader >(new ChunkedStorage::Reader( idx, idxHeader.chunksOffset ));
 
   // Initialize the index
 
@@ -223,7 +223,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
-    return new Dictionary::DataRequestInstant( false ); // No such word
+    return sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( false )); // No such word
 
   string result;
 
@@ -335,7 +335,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 
   memcpy( &(ret->getData().front()), result.data(), result.size() );
 
-  return ret;
+  return sptr< Dictionary::DataRequest >(ret);
 }
 
 sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const & name )
@@ -348,7 +348,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const &
   vector< WordArticleLink > chain = findArticles( strippedName );
 
   if ( chain.empty() )
-    return new Dictionary::DataRequestInstant( false ); // No such resource
+    return sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( false )); // No such resource
 
   // Find sound
 
@@ -371,13 +371,13 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const &
       break;
   }
 
-  sptr< Dictionary::DataRequestInstant > dr = new
-    Dictionary::DataRequestInstant( true );
+  sptr< Dictionary::DataRequestInstant > dr ( new
+    Dictionary::DataRequestInstant( true ));
 
   if ( zipsFile.loadFile( dataOffset, dr->getData() ) )
     return dr;
 
-  return new Dictionary::DataRequestInstant( false );
+  return sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( false ));
 }
 
 void ZipSoundsDictionary::loadIcon() throw()
@@ -502,9 +502,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
       }
 
-      dictionaries.push_back( new ZipSoundsDictionary( dictId,
+      dictionaries.push_back( sptr< Dictionary::Class >(new ZipSoundsDictionary( dictId,
                                                        indexFile,
-                                                       dictFiles ) );
+                                                       dictFiles ) ) );
     }
     catch( std::exception & e )
     {

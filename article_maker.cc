@@ -284,9 +284,9 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
 
     string header = makeHtmlHeader( inWord.trimmed(), QString(), true );
 
-    return new ArticleRequest( inWord.trimmed(), "",
+    return sptr< Dictionary::DataRequest >(new ArticleRequest( inWord.trimmed(), "",
                                contexts, ftsDicts, header,
-                               -1, true );
+                               -1, true ));
   }
 
   if ( groupId == Instances::Group::HelpGroupId )
@@ -338,7 +338,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
 
     result += "</body></html>";
 
-    sptr< Dictionary::DataRequestInstant > r = new Dictionary::DataRequestInstant( true );
+    sptr< Dictionary::DataRequestInstant > r ( new Dictionary::DataRequestInstant( true ));
 
     r->getData().resize( result.size() );
     memcpy( &( r->getData().front() ), result.data(), result.size() );
@@ -378,16 +378,16 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
               QString::fromStdString( activeDicts[ x ]->getId() ) ) )
         unmutedDicts.push_back( activeDicts[ x ] );
 
-    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+    return sptr< Dictionary::DataRequest >(new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, unmutedDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
-                               needExpandOptionalParts, ignoreDiacritics );
+                               needExpandOptionalParts, ignoreDiacritics ));
   }
   else
-    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+    return sptr< Dictionary::DataRequest >(new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
                                contexts, activeDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
-                               needExpandOptionalParts, ignoreDiacritics );
+                               needExpandOptionalParts, ignoreDiacritics ));
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -396,7 +396,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
   string result = makeHtmlHeader( word, QString(), true ) + makeNotFoundBody( word, group ) +
     "</body></html>";
 
-  sptr< Dictionary::DataRequestInstant > r = new Dictionary::DataRequestInstant( true );
+  sptr< Dictionary::DataRequestInstant > r ( new Dictionary::DataRequestInstant( true ));
 
   r->getData().resize( result.size() );
   memcpy( &( r->getData().front() ), result.data(), result.size() );
@@ -409,8 +409,8 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
   string result = makeHtmlHeader( tr( "(untitled)" ), QString(), true ) +
     "</body></html>";
 
-  sptr< Dictionary::DataRequestInstant > r =
-      new Dictionary::DataRequestInstant( true );
+  sptr< Dictionary::DataRequestInstant > r (
+      new Dictionary::DataRequestInstant( true ));
 
   r->getData().resize( result.size() );
   memcpy( &( r->getData().front() ), result.data(), result.size() );
@@ -425,8 +425,8 @@ sptr< Dictionary::DataRequest > ArticleMaker::makePicturePage( string const & ur
                   + "<img src=\"" + url + "\" /></a>"
                   + "</body></html>";
 
-  sptr< Dictionary::DataRequestInstant > r =
-      new Dictionary::DataRequestInstant( true );
+  sptr< Dictionary::DataRequestInstant > r (
+      new Dictionary::DataRequestInstant( true ));
 
   r->getData().resize( result.size() );
   memcpy( &( r->getData().front() ), result.data(), result.size() );
@@ -776,7 +776,7 @@ void ArticleRequest::bodyFinished()
         footer += ArticleMaker::makeNotFoundBody( word.size() < 40 ? word : "", group );
 
         // When there were no definitions, we run stemmed search.
-        stemmedWordFinder = new WordFinder( this );
+        stemmedWordFinder = sptr< WordFinder >(new WordFinder( this ));
 
         connect( stemmedWordFinder.get(), SIGNAL( finished() ),
                  this, SLOT( stemmedSearchFinished() ), Qt::QueuedConnection );

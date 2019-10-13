@@ -1208,8 +1208,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
     if ( Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
     {
-      sptr< Dictionary::DataRequest > req =
-        new Dictionary::WebMultimediaDownload( url, articleNetMgr );
+      sptr< Dictionary::DataRequest > req (
+        new Dictionary::WebMultimediaDownload( url, articleNetMgr ));
 
       resourceDownloadRequests.push_back( req );
 
@@ -1544,7 +1544,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
   }
   else
   {
-    req = new Dictionary::WebMultimediaDownload( url, articleNetMgr );
+    req =  sptr< Dictionary::DataRequest >(new Dictionary::WebMultimediaDownload( url, articleNetMgr ));
 
     handler->addRequest( req );
   }
@@ -2248,7 +2248,7 @@ void ArticleView::doubleClicked( QPoint pos )
       if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
       {
         // Web resource
-        req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
+        req =  sptr< Dictionary::DataRequest >(new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr ));
       }
       else
       if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
@@ -2529,8 +2529,8 @@ void ArticleView::highlightFTSResults()
   regexp.setMinimal( true );
 #endif
 
-  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
-                                           new DiacriticsHandler : new AccentMarkHandler;
+  sptr< AccentMarkHandler > marksHandler ( ignoreDiacritics ?
+                                           new DiacriticsHandler : new AccentMarkHandler);
 
   // Clear any current selection
   if ( ui.definition->selectedText().size() )

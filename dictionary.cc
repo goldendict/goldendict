@@ -154,13 +154,13 @@ sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
                                                unsigned long /*maxResults*/ )
   THROW_SPEC( std::exception )
 {
-  return new WordSearchRequestInstant();
+  return sptr<WordSearchRequest>(new WordSearchRequestInstant());
 }
 
 sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
   THROW_SPEC( std::exception )
 {
-  return new WordSearchRequestInstant();
+  return sptr< WordSearchRequest >(new WordSearchRequestInstant());
 }
 
 vector< wstring > Class::getAlternateWritings( wstring const & )
@@ -172,12 +172,12 @@ vector< wstring > Class::getAlternateWritings( wstring const & )
 sptr< DataRequest > Class::getResource( string const & /*name*/ )
   THROW_SPEC( std::exception )
 {
-  return new DataRequestInstant( false );
+  return sptr< DataRequest >(new DataRequestInstant( false ));
 }
 
 sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool, bool )
 {
-  return new DataRequestInstant( false );
+  return sptr< DataRequest >(new DataRequestInstant( false ));
 }
 
 QString const& Class::getDescription()

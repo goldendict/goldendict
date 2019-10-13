@@ -215,7 +215,7 @@ XdxfDictionary::XdxfDictionary( string const & id,
 {
   // Read the dictionary name
 
-  chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
+  chunks =  sptr< ChunkedStorage::Reader >(new ChunkedStorage::Reader( idx, idxHeader.chunksOffset ));
 
   if ( idxHeader.nameSize )
   {
@@ -424,7 +424,7 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getSearchResults( QString const 
                                                                   bool ignoreWordsOrder,
                                                                   bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 /// XdxfDictionary::getArticle()
@@ -620,7 +620,7 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word
                                                             bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new XdxfArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new XdxfArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 void XdxfDictionary::loadArticle( uint32_t address,
@@ -1138,7 +1138,7 @@ void XdxfResourceRequest::run()
 sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name )
   THROW_SPEC( std::exception )
 {
-  return new XdxfResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new XdxfResourceRequest( *this, name ));
 }
 
 }
@@ -1478,9 +1478,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
       }
 
-      dictionaries.push_back( new XdxfDictionary( dictId,
+      dictionaries.push_back( sptr< Dictionary::Class >(new XdxfDictionary( dictId,
                                                   indexFile,
-                                                  dictFiles ) );
+                                                  dictFiles ) ));
     }
     catch( std::exception & e )
     {

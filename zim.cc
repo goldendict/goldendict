@@ -1149,7 +1149,7 @@ sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const &
                                                                  bool ignoreWordsOrder,
                                                                  bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 /// ZimDictionary::getArticle()
@@ -1353,7 +1353,7 @@ sptr< Dictionary::DataRequest > ZimDictionary::getArticle( wstring const & word,
                                                            bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new ZimArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new ZimArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 //// ZimDictionary::getResource()
@@ -1499,7 +1499,7 @@ void ZimResourceRequest::run()
 sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name )
   THROW_SPEC( std::exception )
 {
-  return new ZimResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new ZimResourceRequest( *this, name ));
 }
 
 //} // anonymous namespace
@@ -1713,9 +1713,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idx.write( &idxHeader, sizeof( idxHeader ) );
         }
 
-        dictionaries.push_back( new ZimDictionary( dictId,
+        dictionaries.push_back( sptr< Dictionary::Class >(new ZimDictionary( dictId,
                                                    indexFile,
-                                                   dictFiles ) );
+                                                   dictFiles )) );
       }
       catch( std::exception & e )
       {

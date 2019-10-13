@@ -44,9 +44,9 @@ sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
   static GermanTable t;
 
-  return new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1081",
+  return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1081",
                       QCoreApplication::translate( "GermanTranslit", "German Transliteration" ).toUtf8().data(),
-                      QIcon( ":/flags/de.png" ), t );
+                      QIcon( ":/flags/de.png" ), t ) );
 }
 
 

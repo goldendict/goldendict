@@ -238,10 +238,10 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
 
   if ( rebuildGroups )
   {
-    orderAndProps = new OrderAndProps( this, savedOrder, savedInactive, dictionaries );
+    orderAndProps = sptr< OrderAndProps >(new OrderAndProps( this, savedOrder, savedInactive, dictionaries ));
     ui.tabs->insertTab( 1, orderAndProps.get(), QIcon(":/icons/book.png"), tr( "&Dictionaries" ) );
 
-    groups = new Groups( this, dictionaries, savedGroups, orderAndProps->getCurrentDictionaryOrder() );
+    groups = sptr< Groups >(new Groups( this, dictionaries, savedGroups, orderAndProps->getCurrentDictionaryOrder() ));
     ui.tabs->insertTab( 2, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
 
     ui.tabs->setUpdatesEnabled( true );

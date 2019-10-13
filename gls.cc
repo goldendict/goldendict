@@ -1123,7 +1123,7 @@ sptr< Dictionary::WordSearchRequest >
   GlsDictionary::findHeadwordsForSynonym( wstring const & word )
   THROW_SPEC( std::exception )
 {
-  return synonymSearchEnabled ? new GlsHeadwordsRequest( word, *this ) :
+  return synonymSearchEnabled ? sptr< Dictionary::WordSearchRequest >(new GlsHeadwordsRequest( word, *this )) :
                                 Class::findHeadwordsForSynonym( word );
 }
 
@@ -1305,7 +1305,7 @@ sptr< Dictionary::DataRequest > GlsDictionary::getArticle( wstring const & word,
                                                            bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new GlsArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new GlsArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 //////////////// GlsDictionary::getResource()
@@ -1546,7 +1546,7 @@ void GlsResourceRequest::run()
 sptr< Dictionary::DataRequest > GlsDictionary::getResource( string const & name )
   THROW_SPEC( std::exception )
 {
-  return new GlsResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new GlsResourceRequest( *this, name ));
 }
 
 sptr< Dictionary::DataRequest > GlsDictionary::getSearchResults( QString const & searchString,
@@ -1556,7 +1556,7 @@ sptr< Dictionary::DataRequest > GlsDictionary::getSearchResults( QString const &
                                                                  bool ignoreWordsOrder,
                                                                  bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 } // anonymous namespace
@@ -1785,9 +1785,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         }
 
       } // if need to rebuild
-      dictionaries.push_back( new GlsDictionary( dictId,
+      dictionaries.push_back( sptr< Dictionary::Class >(new GlsDictionary( dictId,
                                                  indexFile,
-                                                 dictFiles ) );
+                                                 dictFiles ) ));
     }
     catch( std::exception & e )
     {

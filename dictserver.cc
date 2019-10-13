@@ -972,10 +972,10 @@ sptr< WordSearchRequest > DictServerDictionary::prefixMatch( wstring const & wor
   {
     // Don't make excessively large queries -- they're fruitless anyway
 
-    return new WordSearchRequestInstant();
+    return sptr< WordSearchRequest >(new WordSearchRequestInstant());
   }
   else
-    return new DictServerWordSearchRequest( word, *this );
+    return sptr< WordSearchRequest >(new DictServerWordSearchRequest( word, *this ));
 }
 
 sptr< DataRequest > DictServerDictionary::getArticle( wstring const & word,
@@ -987,10 +987,10 @@ sptr< DataRequest > DictServerDictionary::getArticle( wstring const & word,
   {
     // Don't make excessively large queries -- they're fruitless anyway
 
-    return new DataRequestInstant( false );
+    return sptr< DataRequest >(new DataRequestInstant( false ));
   }
   else
-    return new DictServerArticleRequest( word, *this );
+    return sptr< DataRequest >(new DictServerArticleRequest( word, *this ));
 }
 
 } // Anonimuos namespace
@@ -1003,12 +1003,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::DictServers const 
   for( int x = 0; x < servers.size(); ++x )
   {
     if ( servers[ x ].enabled )
-      result.push_back( new DictServerDictionary( servers[ x ].id.toStdString(),
+      result.push_back( sptr< Dictionary::Class >(new DictServerDictionary( servers[ x ].id.toStdString(),
                                                   servers[ x ].name.toUtf8().data(),
                                                   servers[ x ].url,
                                                   servers[ x ].databases,
                                                   servers[ x ].strategies,
-                                                  servers[ x ].iconFilename  ) );
+                                                  servers[ x ].iconFilename  ) ));
   }
 
   return result;

@@ -3,7 +3,14 @@
 
 #ifndef __SPTR_HH_INCLUDED__
 #define __SPTR_HH_INCLUDED__
-
+#if defined(__cplusplus) && (__cplusplus >= 201103L)
+// Use std::shared_ptr from C++11
+#include <memory>
+template <class T>
+using sptr = std::shared_ptr<T>;
+template <class T>
+using const_sptr = const sptr<T>;
+#else
 // A generic non-intrusive smart-pointer template. We could use boost::, tr1::
 // or whatever, but since there's no standard solution yet, it isn't worth
 // the dependency given the simplicity of the template.
@@ -151,7 +158,7 @@ public:
   T const & operator * ( void ) const
     { return * get(); }
 };
-
+#endif
 
 #endif
 

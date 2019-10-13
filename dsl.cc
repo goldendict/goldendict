@@ -404,7 +404,7 @@ void DslDictionary::doDeferredInit()
       // the init is complete.
       //Mutex::Lock _( idxMutex );
 
-      chunks = new ChunkedStorage::Reader( idx, idxHeader.chunksOffset );
+      chunks = sptr< ChunkedStorage::Reader >(new ChunkedStorage::Reader( idx, idxHeader.chunksOffset ));
 
       // Open the .dsl file
 
@@ -1780,7 +1780,7 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new DslArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 //// DslDictionary::getResource()
@@ -1959,7 +1959,7 @@ void DslResourceRequest::run()
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
   THROW_SPEC( std::exception )
 {
-  return new DslResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new DslResourceRequest( *this, name ));
 }
 
 #if 0
@@ -2006,7 +2006,7 @@ sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const &
                                                                  bool ignoreWordsOrder,
                                                                  bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 } // anonymous namespace
@@ -2524,10 +2524,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
       } // if need to rebuild
 
-      dictionaries.push_back( new DslDictionary( dictId,
+      dictionaries.push_back( sptr< Dictionary::Class >(new DslDictionary( dictId,
                                                  indexFile,
                                                  dictFiles,
-                                                 maxPictureWidth ) );
+                                                 maxPictureWidth ) ));
     }
     catch( std::exception & e )
     {

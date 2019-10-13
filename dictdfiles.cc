@@ -436,7 +436,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
     }
 
     if ( mainArticles.empty() && alternateArticles.empty() )
-      return new Dictionary::DataRequestInstant( false );
+      return sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( false ));
 
     string result;
 
@@ -448,8 +448,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
     for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
       result += i->second;
 
-    sptr< Dictionary::DataRequestInstant > ret =
-      new Dictionary::DataRequestInstant( true );
+    sptr< Dictionary::DataRequestInstant > ret (
+      new Dictionary::DataRequestInstant( true ));
 
     ret->getData().resize( result.size() );
 
@@ -459,7 +459,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
   }
   catch( std::exception & e )
   {
-    return new Dictionary::DataRequestInstant( QString( e.what() ) );
+    return  sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( QString( e.what() ) ));
   }
 }
 
@@ -597,7 +597,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getSearchResults( QString const
                                                                    bool ignoreWordsOrder,
                                                                    bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 } // anonymous namespace
@@ -794,9 +794,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idx.write( &idxHeader, sizeof( idxHeader ) );
       }
 
-      dictionaries.push_back( new DictdDictionary( dictId,
+      dictionaries.push_back( sptr< Dictionary::Class >(new DictdDictionary( dictId,
                                                    indexFile,
-                                                   dictFiles ) );
+                                                   dictFiles ) ));
     }
     catch( std::exception & e )
     {

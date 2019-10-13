@@ -1268,7 +1268,7 @@ sptr< Dictionary::DataRequest > StardictDictionary::getSearchResults( QString co
                                                                       bool ignoreWordsOrder,
                                                                       bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 /// StardictDictionary::findHeadwordsForSynonym()
@@ -1385,7 +1385,7 @@ sptr< Dictionary::WordSearchRequest >
   StardictDictionary::findHeadwordsForSynonym( wstring const & word )
   THROW_SPEC( std::exception )
 {
-  return synonymSearchEnabled ? new StardictHeadwordsRequest( word, *this ) :
+  return synonymSearchEnabled ? sptr< Dictionary::WordSearchRequest >(new  StardictHeadwordsRequest( word, *this )) :
                                 Class::findHeadwordsForSynonym( word );
 }
 
@@ -1590,7 +1590,7 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
                                                                 bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new StardictArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new StardictArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 
@@ -1919,7 +1919,7 @@ void StardictResourceRequest::run()
 sptr< Dictionary::DataRequest > StardictDictionary::getResource( string const & name )
   THROW_SPEC( std::exception )
 {
-  return new StardictResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new StardictResourceRequest( *this, name ));
 }
 
 } // anonymous namespace
@@ -2291,9 +2291,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         idx.write( &idxHeader, sizeof( idxHeader ) );
       }
 
-      dictionaries.push_back( new StardictDictionary( dictId,
+      dictionaries.push_back( sptr< Dictionary::Class >(new StardictDictionary( dictId,
                                                       indexFile,
-                                                      dictFiles ) );
+                                                      dictFiles ) ));
     }
     catch( std::exception & e )
     {

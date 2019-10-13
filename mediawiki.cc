@@ -135,7 +135,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   reqUrl.addEncodedQueryItem( "apfrom", QUrl::toPercentEncoding( gd::toQString( str ) ) );
 #endif
 
-  netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  netReply = sptr< QNetworkReply >(mgr.get( QNetworkRequest( reqUrl ) ));
 
   connect( netReply.get(), SIGNAL( finished() ),
            this, SLOT( downloadFinished() ) );
@@ -623,10 +623,10 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
   {
     // Don't make excessively large queries -- they're fruitless anyway
 
-    return new WordSearchRequestInstant();
+    return sptr< WordSearchRequest >(new WordSearchRequestInstant());
   }
   else
-    return new MediaWikiWordSearchRequest( word, url, netMgr );
+    return sptr< WordSearchRequest >(new MediaWikiWordSearchRequest( word, url, netMgr ));
 }
 
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
@@ -638,10 +638,10 @@ sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
   {
     // Don't make excessively large queries -- they're fruitless anyway
 
-    return new DataRequestInstant( false );
+    return sptr< Dictionary::DataRequest >(new DataRequestInstant( false ));
   }
   else
-    return new MediaWikiArticleRequest( word, alts, url, netMgr, this );
+    return sptr< Dictionary::DataRequest >(new MediaWikiArticleRequest( word, alts, url, netMgr, this ));
 }
 
 }
@@ -657,11 +657,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   for( int x = 0; x < wikis.size(); ++x )
   {
     if ( wikis[ x ].enabled )
-      result.push_back( new MediaWikiDictionary( wikis[ x ].id.toStdString(),
+      result.push_back( sptr< Dictionary::Class >(new MediaWikiDictionary( wikis[ x ].id.toStdString(),
                                                  wikis[ x ].name.toUtf8().data(),
                                                  wikis[ x ].url,
                                                  wikis[ x ].icon,
-                                                 mgr ) );
+                                                 mgr ) ));
   }
 
   return result;

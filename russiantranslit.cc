@@ -103,9 +103,9 @@ sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
   static RussianTable t;
 
-  return new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1086",
+  return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1086",
                       QCoreApplication::translate( "RussianTranslit", "Russian Transliteration" ).toUtf8().data(),
-                      QIcon( ":/flags/ru.png" ), t );
+                      QIcon( ":/flags/ru.png" ), t ) );
 }
 
 }

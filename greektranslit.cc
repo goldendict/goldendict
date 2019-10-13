@@ -1490,9 +1490,9 @@ sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
   static GreekTable t;
 
-  return new Transliteration::TransliterationDictionary( "baa9e37a1aa69cdb5daca14a48ffe5ae",
+  return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "baa9e37a1aa69cdb5daca14a48ffe5ae",
                       QCoreApplication::translate( "GreekTranslit", "Greek Transliteration" ).toUtf8().data(),
-                      QIcon( ":/flags/gr.png" ), t );
+                      QIcon( ":/flags/gr.png" ), t ) );
 }
 
 }

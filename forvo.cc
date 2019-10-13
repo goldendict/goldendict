@@ -57,7 +57,7 @@ public:
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
                                                  unsigned long /*maxResults*/ ) THROW_SPEC( std::exception )
   {
-    sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
+    sptr< WordSearchRequestInstant > sr ( new WordSearchRequestInstant);
 
     sr->setUncertain( true );
 
@@ -83,11 +83,11 @@ sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
   {
     // Don't make excessively large queries -- they're fruitless anyway
 
-    return new DataRequestInstant( false );
+    return sptr< Dictionary::DataRequest >(new DataRequestInstant( false ));
   }
   else
-    return new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
-                                    netMgr );
+    return sptr< Dictionary::DataRequest >(new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
+                                    netMgr ));
 }
 
 void ForvoDictionary::loadIcon() throw()
@@ -179,7 +179,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
 //  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
 
-  sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  sptr< QNetworkReply > netReply ( mgr.get( QNetworkRequest( reqUrl ) ));
   
   netReplies.push_back( NetReply( netReply, Utf8::encode( str ) ) );
 }
@@ -400,10 +400,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         if ( displayedCode.size() )
           displayedCode[ 0 ] = displayedCode[ 0 ].toUpper();
 
-        result.push_back(
+        result.push_back(sptr< Dictionary::Class >(
             new ForvoDictionary( hash.result().toHex().data(),
                                  QString( "Forvo (%1)" ).arg( displayedCode ).toUtf8().data(),
-                                 forvo.apiKey, code, mgr ) );
+                                 forvo.apiKey, code, mgr ) ) );
 
         usedCodes.insert( code );
       }

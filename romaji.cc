@@ -429,18 +429,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::Romaji const & r )
       {
         static HepburnHiragana t;
 
-        result.push_back( new Transliteration::TransliterationDictionary( "94eae5a5aaf5b0a900490f4d6b36aac0",
+        result.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "94eae5a5aaf5b0a900490f4d6b36aac0",
                             QCoreApplication::translate( "Romaji", "Hepburn Romaji for Hiragana" ).toUtf8().data(),
-                            QIcon( ":/flags/jp.png" ), t, false ) );
+                            QIcon( ":/flags/jp.png" ), t, false ) ) );
       }
       
       if ( r.enableKatakana )
       {
         static HepburnKatakana t;
 
-        result.push_back( new Transliteration::TransliterationDictionary( "3252a35767d3f6e85e3e39069800dd2f",
+        result.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "3252a35767d3f6e85e3e39069800dd2f",
                             QCoreApplication::translate( "Romaji", "Hepburn Romaji for Katakana" ).toUtf8().data(),
-                            QIcon( ":/flags/jp.png" ), t, false ) );
+                            QIcon( ":/flags/jp.png" ), t, false ) ) );
       }
     }
   }

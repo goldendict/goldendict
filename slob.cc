@@ -1341,7 +1341,7 @@ sptr< Dictionary::DataRequest > SlobDictionary::getSearchResults( QString const 
                                                                   bool ignoreWordsOrder,
                                                                   bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 
@@ -1531,7 +1531,7 @@ sptr< Dictionary::DataRequest > SlobDictionary::getArticle( wstring const & word
                                                             bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new SlobArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new SlobArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 //// SlobDictionary::getResource()
@@ -1677,7 +1677,7 @@ void SlobResourceRequest::run()
 sptr< Dictionary::DataRequest > SlobDictionary::getResource( string const & name )
   THROW_SPEC( std::exception )
 {
-  return new SlobResourceRequest( *this, name );
+  return  sptr< Dictionary::DataRequest >(new SlobResourceRequest( *this, name ));
 }
 
 
@@ -1810,9 +1810,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           idx.write( &idxHeader, sizeof( idxHeader ) );
 
         }
-        dictionaries.push_back( new SlobDictionary( dictId,
+        dictionaries.push_back( sptr< Dictionary::Class >(new SlobDictionary( dictId,
                                                     indexFile,
-                                                    dictFiles ) );
+                                                    dictFiles ) ));
       }
       catch( std::exception & e )
       {

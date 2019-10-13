@@ -481,7 +481,7 @@ sptr< Dictionary::DataRequest > SdictDictionary::getSearchResults( QString const
                                                                    bool ignoreWordsOrder,
                                                                    bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 /// SdictDictionary::getArticle()
@@ -674,7 +674,7 @@ sptr< Dictionary::DataRequest > SdictDictionary::getArticle( wstring const & wor
                                                              bool ignoreDiacritics )
   THROW_SPEC( std::exception )
 {
-  return new SdictArticleRequest( word, alts, *this, ignoreDiacritics );
+  return  sptr< Dictionary::DataRequest >(new SdictArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 QString const& SdictDictionary::getDescription()
@@ -895,9 +895,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
       } // if need to rebuild
       try
       {
-        dictionaries.push_back( new SdictDictionary( dictId,
+        dictionaries.push_back( sptr< Dictionary::Class >(new SdictDictionary( dictId,
                                                      indexFile,
-                                                     dictFiles ) );
+                                                     dictFiles ) ));
       }
       catch( std::exception & e )
       {

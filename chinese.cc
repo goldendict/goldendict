@@ -125,23 +125,23 @@ std::vector< sptr< Dictionary::Class > > makeDictionaries( Config::Chinese const
   {
     if ( cfg.enableSCToTWConversion )
     {
-      result.push_back( new CharacterConversionDictionary( "bf1c33a59cbacea8f39b5b5475787cfd",
+      result.push_back( sptr< Dictionary::Class >(new CharacterConversionDictionary( "bf1c33a59cbacea8f39b5b5475787cfd",
                                                            QCoreApplication::translate( "ChineseConversion", "Simplified to traditional Chinese (Taiwan variant) conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/tw.png" ), configDir + "s2tw.json" ) );
+                                                           QIcon( ":/flags/tw.png" ), configDir + "s2tw.json" ) ));
     }
 
     if ( cfg.enableSCToHKConversion )
     {
-      result.push_back( new CharacterConversionDictionary( "9e0681fb9e1c0b6c90e6fb46111d96b5",
+      result.push_back( sptr< Dictionary::Class >(new CharacterConversionDictionary( "9e0681fb9e1c0b6c90e6fb46111d96b5",
                                                            QCoreApplication::translate( "ChineseConversion", "Simplified to traditional Chinese (Hong Kong variant) conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/hk.png" ), configDir + "s2hk.json" ) );
+                                                           QIcon( ":/flags/hk.png" ), configDir + "s2hk.json" ) ));
     }
 
     if ( cfg.enableTCToSCConversion )
     {
-      result.push_back( new CharacterConversionDictionary( "0db536ce0bdc52ea30d11a82c5db4a27",
+      result.push_back( sptr< Dictionary::Class >(new CharacterConversionDictionary( "0db536ce0bdc52ea30d11a82c5db4a27",
                                                            QCoreApplication::translate( "ChineseConversion", "Traditional to simplified Chinese conversion" ).toUtf8().data(),
-                                                           QIcon( ":/flags/cn.png" ), configDir + "t2s.json" ) );
+                                                           QIcon( ":/flags/cn.png" ), configDir + "t2s.json" ) ));
     }
   }
 
