@@ -325,7 +325,7 @@ void DictHeadwords::saveHeadersToFile()
 
     // Write UTF-8 BOM
     QByteArray line;
-    line.append( 0xEF ).append( 0xBB ).append( 0xBF );
+    line.append( char(0xEF) ).append( char(0xBB) ).append( char(0xBF) );
     if ( file.write( line ) != line.size() )
       break;
 

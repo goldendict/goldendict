@@ -71,7 +71,9 @@ win32 {
         } else {
             LIBS += -L$${PWD}/winlibs/lib/msvc_2019/x86
         }
-        # QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
+        QMAKE_CXXFLAGS += /wd4101 \
+                          /wd4390 \ # silence the warning wd4390: ; ignored
+                          /wd4290 # silence the warning C4290: C++ exception specification ignored
         # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         DEFINES += GD_NO_MANIFEST
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
