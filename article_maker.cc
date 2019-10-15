@@ -993,8 +993,6 @@ QString ArticleRequest::makeSplittedWordCompound()
 {
   QString result;
 
-  result.clear();
-
   for( int x = currentSplittedWordStart; x <= currentSplittedWordEnd; ++x )
   {
     result.append( splittedWords.first[ x ] );
