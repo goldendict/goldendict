@@ -1164,6 +1164,17 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         newTxt += match.captured( 2 );
         newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
       }
+
+      match = srcRe.match( newLink );
+      if( match.hasMatch() )
+      {
+          QString newText = match.captured( 1 ) + match.captured( 2 )
+                  + "bres://" + id + "/"
+                  + match.captured( 3 ) + match.captured( 2 );
+          newLink.replace( match.capturedStart(), match.capturedLength(), newText );
+      }
+      else
+          newLink.replace( srcRe2, "\\1\"bres://" + id + "/\\2\"" );
     }
     else
     if( linkType.compare( "link" ) == 0 )
