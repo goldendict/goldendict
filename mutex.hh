@@ -3,7 +3,29 @@
 
 #ifndef __MUTEX_HH_INCLUDED__
 #define __MUTEX_HH_INCLUDED__
-
+#if defined(__cplusplus) && (__cplusplus >= 201103L)
+#include <mutex>
+class Mutex:
+#ifdef MDX_LOCALVIDEO_CACHED
+        public std::recursive_mutex
+#else
+        public std::mutex
+#endif
+{
+public:
+  bool tryLock();
+  /// Locks the given mutex on construction and unlocks on destruction
+  class Lock
+  {
+    std::lock_guard<Mutex> m;
+  public:
+    Lock( Mutex & _m): m(_m){};
+    ~Lock(){};
+  private:
+    Lock( Lock const & );
+  };
+};
+#else
 #include <QMutex>
 
 /// This provides a mutex class. As you can see, it's just a Qt one, but it
@@ -31,5 +53,5 @@ public:
     Lock( Lock const & );
   };
 };
-
+#endif
 #endif
