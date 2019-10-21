@@ -15,15 +15,7 @@ class Mutex:
 public:
   bool tryLock();
   /// Locks the given mutex on construction and unlocks on destruction
-  class Lock
-  {
-    std::lock_guard<Mutex> m;
-  public:
-    Lock( Mutex & _m): m(_m){};
-    ~Lock(){};
-  private:
-    Lock( Lock const & );
-  };
+  using Lock = std::lock_guard<Mutex>;
 };
 #else
 #include <QMutex>
