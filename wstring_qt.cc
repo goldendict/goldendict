@@ -26,10 +26,13 @@ namespace gd
     // Fix for QString instance which contains non-BMP characters
     // Qt will created unexpected null characters may confuse btree indexer.
     // Related: https://bugreports.qt-project.org/browse/QTBUG-25536
+    //          https://bugreports.qt.io/browse/QTBUG-25536
+#if QT_VERSION < QT_VERSION_CHECK( 5, 1, 0 )
     int n = v.size();
     while ( n > 0 && v[ n - 1 ] == 0 ) n--;
     if ( n != v.size() )
       v.resize( n );
+#endif
 
     return wstring( ( const wchar * ) v.constData(), v.size() );
   }
