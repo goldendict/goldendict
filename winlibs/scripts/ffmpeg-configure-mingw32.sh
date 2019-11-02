@@ -3,7 +3,6 @@
 ./configure \
 	--prefix=$PREFIX \
 	--build-suffix=-gd \
-	--enable-memalign-hack \
 	--enable-runtime-cpudetect \
 	--enable-shared \
 	--disable-static \
@@ -187,3 +186,4 @@
 	--enable-decoder=wmavoice \
 	--enable-decoder=xan_dpcm \
 	--enable-libspeex
+#	--enable-memalign-hack \

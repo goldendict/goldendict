@@ -1,0 +1,8 @@
+libdir=/f/svnRes/nwGoldenDict/winlibs/lib
+includedir=/f/svnRes/nwGoldenDict/winlibs/include
+
+Name: speex
+Description: libspeex
+Version: 1.2
+Cflags: -I${includedir} 
+Libs: -L${libdir} -lspeex
