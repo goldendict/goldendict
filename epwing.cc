@@ -83,7 +83,6 @@ class EpwingDictionary: public BtreeIndexing::BtreeDictionary
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
-  string bookName;
   ChunkedStorage::Reader chunks;
   Epwing::Book::EpwingBook eBook;
   QString cacheDirectory;
@@ -96,16 +95,10 @@ public:
 
   ~EpwingDictionary();
 
-  virtual string getName() throw()
-  { return bookName; }
-
-  virtual map< Dictionary::Property, string > getProperties() throw()
-  { return map< Dictionary::Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() const
   { return idxHeader.articleCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() const
   { return idxHeader.wordCount; }
 
   inline virtual quint32 getLangFrom() const
@@ -207,7 +200,7 @@ EpwingDictionary::EpwingDictionary( string const & id,
   if( data.size() > 0 )
   {
     idx.read( &data.front(), idxHeader.nameSize );
-    bookName = string( &data.front(), idxHeader.nameSize );
+    setDictionaryName(string( &data.front(), idxHeader.nameSize ));
   }
 
   // Initialize eBook

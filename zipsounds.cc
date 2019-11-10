@@ -110,15 +110,12 @@ public:
   ZipSoundsDictionary( string const & id, string const & indexFile,
                        vector< string > const & dictionaryFiles );
 
-  virtual string getName() throw();
+  string genName(const string & filename);
 
-  virtual map< Dictionary::Property, string > getProperties() throw()
-  { return map< Dictionary::Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() const
   { return idxHeader.soundsCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() const
   { return getArticleCount(); }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
@@ -142,6 +139,7 @@ ZipSoundsDictionary::ZipSoundsDictionary( string const & id,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() )
 {
+  setDictionaryName(genName(dictionaryFiles[ 0 ]));
   chunks = sptr< ChunkedStorage::Reader >(new ChunkedStorage::Reader( idx, idxHeader.chunksOffset ));
 
   // Initialize the index
@@ -160,9 +158,9 @@ ZipSoundsDictionary::ZipSoundsDictionary( string const & id,
 
 }
 
-string ZipSoundsDictionary::getName() throw()
+string ZipSoundsDictionary::genName(const string & filename)
 {
-  string result = FsEncoding::basename( getDictionaryFilenames()[ 0 ] );
+  string result = FsEncoding::basename( filename );
 
   // Strip the extension
   result.erase( result.rfind( '.' ) );

@@ -570,7 +570,6 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
     File::Class idx;
     BtreeIndex resourceIndex;
     IdxHeader idxHeader;
-    string dictionaryName;
     SlobFile sf;
     QString texCgiPath, texCachePath;
 
@@ -581,16 +580,10 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
 
     ~SlobDictionary();
 
-    virtual string getName() throw()
-    { return dictionaryName; }
-
-    virtual map< Dictionary::Property, string > getProperties() throw()
-    { return map< Dictionary::Property, string >(); }
-
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() const
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() const
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -688,13 +681,14 @@ SlobDictionary::SlobDictionary( string const & id,
 
     // Read dictionary name
 
-    dictionaryName = string( sf.getDictionaryName().toUtf8().constData() );
-    if( dictionaryName.empty() )
+    string dicname = string( sf.getDictionaryName().toUtf8().constData() );
+    if( dicname.empty() )
     {
       QString name = QDir::fromNativeSeparators( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) );
       int n = name.lastIndexOf( '/' );
-      dictionaryName = string( name.mid( n + 1 ).toUtf8().constData() );
+      dicname = string( name.mid( n + 1 ).toUtf8().constData() );
     }
+    setDictionaryName(dicname);
 
     // Full-text search parameters
 

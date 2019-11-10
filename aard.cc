@@ -229,7 +229,6 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
     File::Class idx;
     IdxHeader idxHeader;
     ChunkedStorage::Reader chunks;
-    string dictionaryName;
     File::Class df;
 
   public:
@@ -239,16 +238,10 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
 
     ~AardDictionary();
 
-    virtual string getName() throw()
-    { return dictionaryName; }
-
-    virtual map< Dictionary::Property, string > getProperties() throw()
-    { return map< Dictionary::Property, string >(); }
-
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() const
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() const
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -313,7 +306,7 @@ AardDictionary::AardDictionary( string const & id,
     if( dName.size() )
     {
         idx.read( &dName.front(), dName.size() );
-        dictionaryName = string( &dName.front(), dName.size() );
+        setDictionaryName(string( &dName.front(), dName.size() ));
     }
 
     // Initialize the index

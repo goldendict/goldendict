@@ -131,7 +131,6 @@ class XdxfDictionary: public BtreeIndexing::BtreeDictionary
   dictData * dz;
   Mutex resourceZipMutex;
   IndexedZip resourceZip;
-  string dictionaryName;
   map< string, string > abrv;
 
 public:
@@ -141,16 +140,10 @@ public:
 
   ~XdxfDictionary();
 
-  virtual string getName() throw()
-  { return dictionaryName; }
-
-  virtual map< Dictionary::Property, string > getProperties() throw()
-  { return map< Dictionary::Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() const
   { return idxHeader.articleCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() const
   { return idxHeader.wordCount; }
 
   inline virtual quint32 getLangFrom() const
@@ -221,8 +214,8 @@ XdxfDictionary::XdxfDictionary( string const & id,
   {
     vector< char > chunk;
 
-    dictionaryName = string( chunks->getBlock( idxHeader.nameAddress, chunk ),
-                             idxHeader.nameSize );
+    setDictionaryName(string( chunks->getBlock( idxHeader.nameAddress, chunk ),
+                             idxHeader.nameSize ));
   }
 
   // Open the file

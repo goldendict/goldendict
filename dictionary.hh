@@ -259,6 +259,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS( Features )
 class Class
 {
   string id;
+  string dictionaryName;
   vector< string > dictionaryFiles;
 
 protected:
@@ -280,6 +281,8 @@ protected:
   /// Make css content usable only for articles from this dictionary
   void isolateCSS( QString & css, QString const & wrapperSelector = QString() );
 
+  inline void setDictionaryName(string const & name) { dictionaryName = name; }
+
 public:
 
   /// Creates a dictionary. The id should be made using
@@ -296,39 +299,42 @@ public:
   virtual void deferredInit();
 
   /// Returns the dictionary's id.
-  string getId() throw()
+  string const & getId() const
   { return id; }
 
   /// Returns the list of file names the dictionary consists of.
-  vector< string > const & getDictionaryFilenames() throw()
+  vector< string > const & getDictionaryFilenames() const
   { return dictionaryFiles; }
 
   /// Returns the dictionary's full name, utf8.
-  virtual string getName() throw()=0;
+  inline string const & getName() const
+  { return dictionaryName; }
 
   /// Returns all the available properties, like the author's name, copyright,
   /// description etc. All strings are in utf8.
-  virtual map< Property, string > getProperties() throw()=0;
+//  virtual map< Property, string > getProperties() throw()=0;
 
   /// Returns the features the dictionary possess. See the Feature enum for
   /// their list.
-  virtual Features getFeatures() const throw()
+  virtual Features getFeatures() const
   { return NoFeatures; }
 
   /// Returns the number of articles in the dictionary.
-  virtual unsigned long getArticleCount() throw()=0;
+  virtual unsigned long getArticleCount() const
+  { return 0; }
 
   /// Returns the number of words in the dictionary. This can be equal to
   /// the number of articles, or can be larger if some synonyms are present.
-  virtual unsigned long getWordCount() throw()=0;
+  virtual unsigned long getWordCount() const
+  { return 0; }
 
   /// Returns the dictionary's icon.
-  virtual QIcon const & getIcon() throw();
+  virtual QIcon const & getIcon();
 
   /// Returns the dictionary's native icon. Dsl icons are usually rectangular,
   /// and are adapted by getIcon() to be square. This function allows getting
   /// the original icon with no geometry transformations applied.
-  virtual QIcon const & getNativeIcon() throw();
+  virtual QIcon const & getNativeIcon();
 
   /// Returns the dictionary's source language.
   virtual quint32 getLangFrom() const

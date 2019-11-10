@@ -88,7 +88,6 @@ class DictdDictionary: public BtreeIndexing::BtreeDictionary
   File::Class idx, indexFile; // The later is .index file
   IdxHeader idxHeader;
   dictData * dz;
-  string dictionaryName;
   Mutex indexFileMutex, dzMutex;
 
 public:
@@ -98,16 +97,10 @@ public:
 
   ~DictdDictionary();
 
-  virtual string getName() throw()
-  { return dictionaryName; }
-
-  virtual map< Dictionary::Property, string > getProperties() throw()
-  { return map< Dictionary::Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() const
   { return idxHeader.articleCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() const
   { return idxHeader.wordCount; }
 
   virtual void loadIcon() throw();
@@ -160,7 +153,7 @@ DictdDictionary::DictdDictionary( string const & id,
   if( dName.size() > 0 )
   {
     idx.read( &dName.front(), dName.size() );
-    dictionaryName = string( &dName.front(), dName.size() );
+    setDictionaryName(string( &dName.front(), dName.size() ));
   }
 
   // Open the .dict file

@@ -149,16 +149,10 @@ public:
 
   ~StardictDictionary();
 
-  virtual string getName() throw()
-  { return bookName; }
-
-  virtual map< Dictionary::Property, string > getProperties() throw()
-  { return map< Dictionary::Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() const
   { return idxHeader.wordCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() const
   { return idxHeader.wordCount + idxHeader.synWordCount; }
 
   inline virtual quint32 getLangFrom() const
@@ -237,6 +231,7 @@ StardictDictionary::StardictDictionary( string const & id,
   sameTypeSequence( loadString( idxHeader.sameTypeSequenceSize ) ),
   chunks( idx, idxHeader.chunksOffset )
 {
+  setDictionaryName(bookName);
   // Open the .dict file
 
   DZ_ERRORS error;

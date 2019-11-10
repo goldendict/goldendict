@@ -65,7 +65,6 @@ bool indexIsOldOrBad( string const & indexFile )
 
 class SoundDirDictionary: public BtreeIndexing::BtreeDictionary
 {
-  string name;
   Mutex idxMutex;
   File::Class idx;
   IdxHeader idxHeader;
@@ -79,16 +78,10 @@ public:
                       vector< string > const & dictionaryFiles,
                       QString const & iconFilename_ );
 
-  virtual string getName() throw()
-  { return name; }
-
-  virtual map< Dictionary::Property, string > getProperties() throw()
-  { return map< Dictionary::Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() const
   { return idxHeader.soundsCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() const
   { return getArticleCount(); }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
@@ -111,12 +104,12 @@ SoundDirDictionary::SoundDirDictionary( string const & id,
                                         vector< string > const & dictionaryFiles,
                                         QString const & iconFilename_ ):
   BtreeDictionary( id, dictionaryFiles ),
-  name( name_ ),
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
   chunks( idx, idxHeader.chunksOffset ),
   iconFilename( iconFilename_ )
 {
+  setDictionaryName(name_);
   // Initialize the index
 
   openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,

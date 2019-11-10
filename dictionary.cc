@@ -190,14 +190,14 @@ QString Class::getMainFilename()
   return QString();
 }
 
-QIcon const & Class::getIcon() throw()
+QIcon const & Class::getIcon()
 {
   if( !dictionaryIconLoaded )
     loadIcon();
   return dictionaryIcon;
 }
 
-QIcon const & Class::getNativeIcon() throw()
+QIcon const & Class::getNativeIcon()
 {
   if( !dictionaryIconLoaded )
     loadIcon();

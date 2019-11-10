@@ -4,14 +4,11 @@
 #ifndef __WORDFINDER_HH_INCLUDED__
 #define __WORDFINDER_HH_INCLUDED__
 
-#include <list>
-#include <map>
+#include "dictionary.hh"
 #include <QObject>
 #include <QTimer>
-#include <QMutex>
-#include <QWaitCondition>
-#include <QRunnable>
-#include "dictionary.hh"
+#include <list>
+#include <map>
 
 /// This component takes care of finding words. The search is asynchronous.
 /// This means the GUI doesn't get blocked during the sometimes lenghtly

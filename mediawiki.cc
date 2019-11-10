@@ -25,7 +25,6 @@ namespace {
 
 class MediaWikiDictionary: public Dictionary::Class
 {
-  string name;
   QString url, icon;
   QNetworkAccessManager & netMgr;
   quint32 langId;
@@ -37,28 +36,16 @@ public:
                        QString const & icon_,
                        QNetworkAccessManager & netMgr_ ):
     Dictionary::Class( id, vector< string >() ),
-    name( name_ ),
     url( url_ ),
     icon( icon_ ),
     netMgr( netMgr_ ),
     langId( 0 )
   {
+    setDictionaryName(name_);
     int n = url.indexOf( "." );
     if( n == 2 || ( n > 3 && url[ n-3 ] == '/' ) )
       langId = LangCoder::code2toInt( url.mid( n - 2, 2 ).toLatin1().data() );
   }
-
-  virtual string getName() throw()
-  { return name; }
-
-  virtual map< Property, string > getProperties() throw()
-  { return map< Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
-  { return 0; }
-
-  virtual unsigned long getWordCount() throw()
-  { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) THROW_SPEC( std::exception );

@@ -15,24 +15,12 @@ BaseTransliterationDictionary::BaseTransliterationDictionary( string const & id,
                                                               QIcon icon_,
                                                               bool caseSensitive_ ):
   Dictionary::Class( id, vector< string >() ),
-  name( name_ ),
   caseSensitive( caseSensitive_ )
 {
+  setDictionaryName(name_);
   dictionaryIcon = dictionaryNativeIcon = icon_;
   dictionaryIconLoaded = true;
 }
-
-string BaseTransliterationDictionary::getName() throw()
-{ return name; }
-
-map< Dictionary::Property, string > BaseTransliterationDictionary::getProperties() throw()
-{ return map< Dictionary::Property, string >(); }
-
-unsigned long BaseTransliterationDictionary::getArticleCount() throw()
-{ return 0; }
-
-unsigned long BaseTransliterationDictionary::getWordCount() throw()
-{ return 0; }
 
 sptr< Dictionary::WordSearchRequest > BaseTransliterationDictionary::prefixMatch( wstring const &,
                                                                                   unsigned long ) THROW_SPEC( std::exception )

@@ -24,7 +24,6 @@ namespace {
 
 class WebSiteDictionary: public Dictionary::Class
 {
-  string name;
   QByteArray urlTemplate;
   QString iconFilename;
   bool inside_iframe;
@@ -38,26 +37,14 @@ public:
                      bool inside_iframe_,
                      QNetworkAccessManager & netMgr_ ):
     Dictionary::Class( id, vector< string >() ),
-    name( name_ ),
     urlTemplate( QUrl( urlTemplate_ ).toEncoded() ),
     iconFilename( iconFilename_ ),
     inside_iframe( inside_iframe_ ),
     netMgr( netMgr_ )
   {
+    setDictionaryName(name_);
     dictionaryDescription = urlTemplate_;
   }
-
-  virtual string getName() throw()
-  { return name; }
-
-  virtual map< Property, string > getProperties() throw()
-  { return map< Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
-  { return 0; }
-
-  virtual unsigned long getWordCount() throw()
-  { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long ) THROW_SPEC( std::exception );

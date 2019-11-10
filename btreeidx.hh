@@ -159,7 +159,7 @@ public:
   BtreeDictionary( string const & id, vector< string > const & dictionaryFiles );
 
   /// Btree-indexed dictionaries are usually a good source for compound searches.
-  virtual Dictionary::Features getFeatures() const throw()
+  virtual Dictionary::Features getFeatures() const
   { return Dictionary::SuitableForCompoundSearching; }
 
   /// This function does the search using the btree index. Derivatives usually

@@ -176,7 +176,6 @@ void disconnectFromServer( QTcpSocket & socket )
 
 class DictServerDictionary: public Dictionary::Class
 {
-  string name;
   QString url, icon;
   quint32 langId;
   QString errorString;
@@ -193,11 +192,11 @@ public:
                         QString const & strategies_,
                         QString const & icon_ ):
     Dictionary::Class( id, vector< string >() ),
-    name( name_ ),
     url( url_ ),
     icon( icon_ ),
     langId( 0 )
   {
+    setDictionaryName(name_);
     int pos = url.indexOf( "://" );
     if( pos < 0 )
       url = "dict://" + url;
@@ -210,18 +209,6 @@ public:
     if( strategies.isEmpty() )
       strategies.append( "prefix" );
   }
-
-  virtual string getName() throw()
-  { return name; }
-
-  virtual map< Property, string > getProperties() throw()
-  { return map< Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
-  { return 0; }
-
-  virtual unsigned long getWordCount() throw()
-  { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) THROW_SPEC( std::exception );

@@ -34,7 +34,6 @@ namespace {
 
 class HunspellDictionary: public Dictionary::Class
 {
-  string name;
   Hunspell hunspell;
 
 #ifdef Q_OS_WIN32
@@ -50,26 +49,14 @@ public:
   HunspellDictionary( string const & id, string const & name_,
                       vector< string > const & files ):
     Dictionary::Class( id, files ),
-    name( name_ ),
 #ifdef Q_OS_WIN32
     hunspell( Utf8ToLocal8Bit( files[ 0 ] ).c_str(), Utf8ToLocal8Bit( files[ 1 ] ).c_str() )
 #else
     hunspell( files[ 0 ].c_str(), files[ 1 ].c_str() )
 #endif
   {
+      setDictionaryName(name_);
   }
-
-  virtual string getName() throw()
-  { return name; }
-
-  virtual map< Property, string > getProperties() throw()
-  { return map< Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
-  { return 0; }
-
-  virtual unsigned long getWordCount() throw()
-  { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults )

@@ -18,8 +18,6 @@ using std::vector;
 /// This is a base dictionary class for simple transliteratons
 class BaseTransliterationDictionary: public Dictionary::Class
 {
-  string name;
-
 protected:
   bool caseSensitive;
 
@@ -27,14 +25,6 @@ public:
 
   BaseTransliterationDictionary( string const & id, string const & name,
                                  QIcon icon, bool caseSensitive = true );
-
-  virtual string getName() throw();
-
-  virtual map< Dictionary::Property, string > getProperties() throw();
-
-  virtual unsigned long getArticleCount() throw();
-
-  virtual unsigned long getWordCount() throw();
 
   virtual vector< wstring > getAlternateWritings( wstring const & )
     throw() = 0;

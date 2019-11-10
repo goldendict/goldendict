@@ -36,25 +36,14 @@ private:
 
 public:
 
-  VoiceEnginesDictionary( Config::VoiceEngine const & voiceEngine ):
+  VoiceEnginesDictionary( Config::VoiceEngine const & voiceEngine_ ):
     Dictionary::Class(
-      toMd5( voiceEngine.id.toUtf8() ),
+      toMd5( voiceEngine_.id.toUtf8() ),
       vector< string >() ),
-    voiceEngine( voiceEngine )
+    voiceEngine( voiceEngine_ )
   {
+    setDictionaryName(voiceEngine_.name.toUtf8().data());
   }
-
-  virtual string getName() throw()
-  { return voiceEngine.name.toUtf8().data(); }
-
-  virtual map< Property, string > getProperties() throw()
-  { return map< Property, string >(); }
-
-  virtual unsigned long getArticleCount() throw()
-  { return 0; }
-
-  virtual unsigned long getWordCount() throw()
-  { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long maxResults )
