@@ -283,10 +283,10 @@ private:
   {
       if(cacheDir==nullptr)
           cacheDir = new QTemporaryDir(QDir::temp().absolutePath() + QDir::separator() + QString::fromStdString(getId()));
-      const QString tdPath = cacheDir->path();
       const QString ltFile = cacheDir->filePath(filename).replace("\\", "/");
       if(!QFile::exists(ltFile))
       {
+          const QString tdPath = cacheDir->path();
           const int lSep = ltFile.lastIndexOf("/");
           if(lSep > tdPath.length())
           {
