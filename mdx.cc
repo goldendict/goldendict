@@ -283,9 +283,15 @@ private:
   {
       if(cacheDir==nullptr)
           cacheDir = new QTemporaryDir(QDir::temp().absolutePath() + QDir::separator() + QString::fromStdString(getId()));
+      const QString tdPath = cacheDir->path();
       const QString ltFile = cacheDir->filePath(filename).replace("\\", "/");
       if(!QFile::exists(ltFile))
       {
+          const int lSep = ltFile.lastIndexOf("/");
+          if(lSep > tdPath.length())
+          {
+              QDir(tdPath).mkpath(filename.left(lSep - tdPath.length()));
+          }
           QFile ftP(ltFile);
           if(ftP.open(QFile::WriteOnly))
           {
