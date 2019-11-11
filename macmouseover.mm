@@ -121,7 +121,7 @@ void MacMouseOver::disableMouseOver()
 
 void MacMouseOver::timerShot()
 {
-  if( mouseMutex.tryLock( 0 ) )
+  if( mouseMutex.tryLock() )
     mouseMutex.unlock();
   else
     return;
