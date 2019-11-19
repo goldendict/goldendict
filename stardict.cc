@@ -1905,6 +1905,7 @@ void StardictResourceRequest::run()
       memcpy( &data.front(), bytes.constData(), bytes.size() );
     }
 
+    Mutex::Lock _( dataMutex );
     hasAnyData = true;
   }
   catch( std::exception &ex )
