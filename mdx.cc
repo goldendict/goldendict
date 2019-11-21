@@ -735,13 +735,13 @@ void MdxArticleRequest::run()
                      "</i></i></i></i></i></i></i></i>"
                      "</a></a></a></a></a></a></a></a>";
     articleText += "<div class=\"mdict\">" + articleBody + cleaner + "</div>\n";
-    hasAnyData = true;
   }
 
-  if ( hasAnyData )
+  if ( !articleText.empty() )
   {
     Mutex::Lock _( dataMutex );
     data.insert( data.end(), articleText.begin(), articleText.end() );
+    hasAnyData = true;
   }
 
   finish();

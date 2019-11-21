@@ -1437,6 +1437,8 @@ void ZimResourceRequest::run()
       QString css = QString::fromUtf8( resource.data(), resource.size() );
       dict.isolateCSS( css, ".zimdict" );
       QByteArray bytes = css.toUtf8();
+
+      Mutex::Lock _( dataMutex );
       data.resize( bytes.size() );
       memcpy( &data.front(), bytes.constData(), bytes.size() );
     }
@@ -1479,6 +1481,7 @@ void ZimResourceRequest::run()
       memcpy( &data.front(), resource.data(), data.size() );
     }
 
+    Mutex::Lock _( dataMutex );
     hasAnyData = true;
   }
   catch( std::exception &ex )

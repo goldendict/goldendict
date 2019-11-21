@@ -1739,7 +1739,10 @@ void MainWindow::ctrlReleased()
 {
     if (tabListMenu->actions().size() > 1)
     {
-	ui.tabWidget->setCurrentIndex(tabListMenu->activeAction()->data().toInt());
+        QAction *act = tabListMenu->activeAction();
+        if( act == 0 )
+          act = tabListMenu->actions().at( 1 );
+        ui.tabWidget->setCurrentIndex( act->data().toInt() );
     }
     tabListMenu->hide();
 }
