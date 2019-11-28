@@ -1,6 +1,7 @@
 /* This file is (c) 2019 nonwill <nonwill@hotmail.com>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file
- * FMOD NON-COMMERCIAL LICENSE */
+ * FMOD NON-COMMERCIAL LICENSE
+ * FMOD Sound System, copyright ? Firelight Technologies Pty, Ltd., 1994-2016. */
 
 #ifndef FMODEX_PLAYER_HH_INCLUDED
 #define FMODEX_PLAYER_HH_INCLUDED
