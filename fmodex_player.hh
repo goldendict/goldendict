@@ -1,5 +1,6 @@
-/* This file is (c) 2018 Igor Kushnir <igorkuo@gmail.com>
- * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
+/* This file is (c) 2019 nonwill <nonwill@hotmail.com>
+ * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file
+ * FMOD NON-COMMERCIAL LICENSE */
 
 #ifndef FMODEX_PLAYER_HH_INCLUDED
 #define FMODEX_PLAYER_HH_INCLUDED
