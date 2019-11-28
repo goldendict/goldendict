@@ -22,7 +22,7 @@ QT += core \
       network \
       svg
 
-#win32:CONFIG += no_qtmultimedia_player
+win32:CONFIG += no_qtmultimedia_player
 DEFINES += MDX_LOCALVIDEO_CACHED
 
 greaterThan(QT_MAJOR_VERSION, 4) {
@@ -663,3 +663,32 @@ PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
 
+!CONFIG( no_fmodex_player ) {
+  FMODEX_LIB = 0
+  FMODEX_EXT = 0
+  win32 {
+    win32-msvc* {
+        contains(TARGET_ARCH, x86_64) {
+            FMODEX_LIB = fmodex64_vc
+        } else {
+            FMODEX_LIB = fmodex_vc
+        }
+        FMODEX_EXT = lib
+    } else {
+        !x64 {
+            FMODEX_LIB = fmodex
+            FMODEX_EXT = a
+        }
+    }
+  }
+
+  FMODEX_FILE_PATH = $$PWD/fmodex/lib/$${FMODEX_LIB}.$${FMODEX_EXT}
+  FMODEX_FILE_PATH ~= s,/,\\,g
+  exists($${FMODEX_FILE_PATH}) {
+    DEFINES += MAKE_FMODEX_PLAYER
+    LIBS += -L$$PWD/fmodex/lib -l$${FMODEX_LIB}
+    INCLUDEPATH += $$PWD/fmodex/inc
+    HEADERS += fmodex_player.hh
+    SOURCES += fmodex_player.cc
+  }
+}

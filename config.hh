@@ -194,6 +194,7 @@ public:
 
   /// Returns true if built with FFmpeg player support and the name matches.
   bool isFfmpeg() const;
+  bool isFmodex() const;
   /// Returns true if built with Qt Multimedia player support and the name matches.
   bool isQtmultimedia() const;
 
@@ -214,7 +215,10 @@ private:
   static InternalPlayerBackend ffmpeg()
   { return InternalPlayerBackend( "FFmpeg+libao" ); }
 #endif
-
+#ifdef MAKE_FMODEX_PLAYER
+  static InternalPlayerBackend fmodex()
+  { return InternalPlayerBackend( "FMOD Ex" ); }
+#endif
 #ifdef MAKE_QTMULTIMEDIA_PLAYER
   static InternalPlayerBackend qtmultimedia()
   { return InternalPlayerBackend( "Qt Multimedia" ); }

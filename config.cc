@@ -80,7 +80,7 @@ QKeySequence HotKey::toKeySequence() const
 
 bool InternalPlayerBackend::anyAvailable()
 {
-#if defined( MAKE_FFMPEG_PLAYER ) || defined( MAKE_QTMULTIMEDIA_PLAYER )
+#if defined( MAKE_FFMPEG_PLAYER ) || defined( MAKE_QTMULTIMEDIA_PLAYER ) || defined( MAKE_FMODEX_PLAYER )
   return true;
 #else
   return false;
@@ -91,6 +91,8 @@ InternalPlayerBackend InternalPlayerBackend::defaultBackend()
 {
 #if defined( MAKE_FFMPEG_PLAYER )
   return ffmpeg();
+#elif defined( MAKE_FMODEX_PLAYER )
+  return fmodex();
 #elif defined( MAKE_QTMULTIMEDIA_PLAYER )
   return qtmultimedia();
 #else
@@ -103,6 +105,9 @@ QStringList InternalPlayerBackend::nameList()
   QStringList result;
 #ifdef MAKE_FFMPEG_PLAYER
   result.push_back( ffmpeg().uiName() );
+#endif
+#ifdef MAKE_FMODEX_PLAYER
+  result.push_back( fmodex().uiName() );
 #endif
 #ifdef MAKE_QTMULTIMEDIA_PLAYER
   result.push_back( qtmultimedia().uiName() );
@@ -123,6 +128,15 @@ bool InternalPlayerBackend::isQtmultimedia() const
 {
 #ifdef MAKE_QTMULTIMEDIA_PLAYER
   return *this == qtmultimedia();
+#else
+  return false;
+#endif
+}
+
+bool InternalPlayerBackend::isFmodex() const
+{
+#ifdef MAKE_FMODEX_PLAYER
+  return *this == fmodex();
 #else
   return false;
 #endif
