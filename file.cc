@@ -68,10 +68,18 @@ void loadFromFile( std::string const & n, std::vector< char > & data )
 bool exists( char const * filename ) throw()
 {
 #ifdef __WIN32
+#if defined(__WIN64) || defined(_MSC_VER)
+  struct _stat64 buf;
+#else
   struct _stat buf;
+#endif
   wchar_t wname[16384];
   MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 );
+#if defined(__WIN64) || defined(_MSC_VER)
+  return _wstat64( wname, &buf ) == 0;
+#else
   return _wstat( wname, &buf ) == 0;
+#endif
 #else
   struct stat buf;
 
