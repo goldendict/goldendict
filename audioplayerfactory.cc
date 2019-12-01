@@ -55,23 +55,32 @@ void AudioPlayerFactory::reset()
     // upon preferences saving, the code below does not reset playerPtr with
     // another object of the same type.
 
+#ifdef MAKE_FFMPEG_PLAYER
     Q_ASSERT( Config::InternalPlayerBackend::defaultBackend().isFfmpeg()
               && "Adjust the code below after changing the default backend." );
-
-    if( !internalPlayerBackend.isQtmultimedia() )
+    if( internalPlayerBackend.isFfmpeg() )
     {
-#ifdef MAKE_FFMPEG_PLAYER
-      if( internalPlayerBackend.isFfmpeg() && (!playerPtr || !qobject_cast< Ffmpeg::AudioPlayer * >( playerPtr.data() )) )
+      if( (!playerPtr || !qobject_cast< Ffmpeg::AudioPlayer * >( playerPtr.data() )) )
+      {
         playerPtr.reset( new Ffmpeg::AudioPlayer );
-#endif
-#ifdef MAKE_FMODEX_PLAYER
-      if( internalPlayerBackend.isFmodex() && (!playerPtr || !qobject_cast< FmodexAudioPlayer * >( playerPtr.data() )) )
-        playerPtr.reset( new FmodexAudioPlayer );
-#endif
-#if defined(MAKE_FFMPEG_PLAYER) || defined(MAKE_FMODEX_PLAYER)
+      }
       return;
-#endif
     }
+#endif
+
+#ifdef MAKE_FMODEX_PLAYER
+    if( internalPlayerBackend.isFmodex() )
+    {
+      if( FmodexAudioPlayer::available() )
+      {
+        if( (!playerPtr || !qobject_cast< FmodexAudioPlayer * >( playerPtr.data() )) )
+        {
+          playerPtr.reset( new FmodexAudioPlayer );
+        }
+      }
+      return;
+    }
+#endif
 
 #ifdef MAKE_QTMULTIMEDIA_PLAYER
     if( !playerPtr || !qobject_cast< MultimediaAudioPlayer * >( playerPtr.data() ) )

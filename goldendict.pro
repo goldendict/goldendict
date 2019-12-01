@@ -686,7 +686,7 @@ include( qtsingleapplication/src/qtsingleapplication.pri )
   FMODEX_FILE_PATH ~= s,/,\\,g
   exists($${FMODEX_FILE_PATH}) {
     DEFINES += MAKE_FMODEX_PLAYER
-    LIBS += -L$$PWD/fmodex/lib -l$${FMODEX_LIB}
+    #LIBS += -L$$PWD/fmodex/lib -l$${FMODEX_LIB}
     INCLUDEPATH += $$PWD/fmodex/inc
     HEADERS += fmodex_player.hh
     SOURCES += fmodex_player.cc

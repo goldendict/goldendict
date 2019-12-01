@@ -202,7 +202,10 @@ public:
   { return name; }
 
   void setUiName( QString const & name_ )
-  { name = name_; }
+  {
+      if(nameList().contains(name_)) name = name_;
+      else name = defaultBackend().uiName();
+  }
 
   bool operator == ( InternalPlayerBackend const & other ) const
   { return name == other.name; }

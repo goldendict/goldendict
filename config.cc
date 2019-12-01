@@ -6,7 +6,7 @@
 #include <QFile>
 #include <QtXml>
 #include "gddebug.hh"
-
+#include "fmodex_player.hh"
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
 #else
@@ -80,8 +80,10 @@ QKeySequence HotKey::toKeySequence() const
 
 bool InternalPlayerBackend::anyAvailable()
 {
-#if defined( MAKE_FFMPEG_PLAYER ) || defined( MAKE_QTMULTIMEDIA_PLAYER ) || defined( MAKE_FMODEX_PLAYER )
+#if defined( MAKE_FFMPEG_PLAYER ) || defined( MAKE_QTMULTIMEDIA_PLAYER )
   return true;
+#elif defined( MAKE_FMODEX_PLAYER )
+  return FmodexAudioPlayer::available();
 #else
   return false;
 #endif
@@ -92,8 +94,10 @@ InternalPlayerBackend InternalPlayerBackend::defaultBackend()
 #if defined( MAKE_FFMPEG_PLAYER )
   return ffmpeg();
 #elif defined( MAKE_FMODEX_PLAYER )
-  return fmodex();
-#elif defined( MAKE_QTMULTIMEDIA_PLAYER )
+  if(FmodexAudioPlayer::available())
+    return fmodex();
+#endif
+#if defined( MAKE_QTMULTIMEDIA_PLAYER )
   return qtmultimedia();
 #else
   return InternalPlayerBackend( QString() );
@@ -107,7 +111,8 @@ QStringList InternalPlayerBackend::nameList()
   result.push_back( ffmpeg().uiName() );
 #endif
 #ifdef MAKE_FMODEX_PLAYER
-  result.push_back( fmodex().uiName() );
+  if(FmodexAudioPlayer::available())
+      result.push_back( fmodex().uiName() );
 #endif
 #ifdef MAKE_QTMULTIMEDIA_PLAYER
   result.push_back( qtmultimedia().uiName() );
