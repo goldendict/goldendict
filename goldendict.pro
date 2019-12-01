@@ -676,8 +676,8 @@ include( qtsingleapplication/src/qtsingleapplication.pri )
         FMODEX_EXT = lib
     } else {
         !x64 {
-            FMODEX_LIB = fmodex
-            FMODEX_EXT = a
+    #        FMODEX_LIB = libfmodex
+    #        FMODEX_EXT = a
         }
     }
   }
