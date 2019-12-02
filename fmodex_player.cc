@@ -9,24 +9,25 @@
 #include "fmodex_player.hh"
 #include "fmod_errors.h"
 
-QString fmodex_dyl_name()
-{
 #ifdef __WIN32
+#ifdef _MSC_VER
 #ifdef __WIN64
-    return QString("fmodex64.dll");
+    static const QString fmodex_dyl_name = QString("fmodex64.dll");
 #else
-    return QString("fmodex.dll");
+    static const QString fmodex_dyl_name = QString("fmodex.dll");
+#endif
+#elif defined(__CYGWIN32__)
+    static const QString fmodex_dyl_name = QString("fmodex.dll");
+#else
+    static const QString fmodex_dyl_name;
 #endif
 #else
-    return QString();
+    static const QString fmodex_dyl_name;
 #endif
-
-}
 
 bool FmodexAudioPlayer::available()
 {
-    const QString fn = fmodex_dyl_name();
-    return QLibrary::isLibrary(fn) && QFile::exists(fn);
+    return QLibrary::isLibrary(fmodex_dyl_name) && QFile::exists(fmodex_dyl_name);
 }
 
 typedef FMOD_RESULT (*FMOD_SYSTEM_CREATE)(FMOD_SYSTEM **system);
@@ -37,6 +38,7 @@ typedef FMOD_RESULT (*FMOD_SYSTEM_CLOSE)(FMOD_SYSTEM *system);
 typedef FMOD_RESULT (*FMOD_SYSTEM_CREATESOUND)(FMOD_SYSTEM *system, const char *name_or_data, FMOD_MODE mode, FMOD_CREATESOUNDEXINFO *exinfo, FMOD_SOUND **sound);
 typedef FMOD_RESULT (*FMOD_SOUND_SETMODE)(FMOD_SOUND *sound, FMOD_MODE mode);
 typedef FMOD_RESULT (*FMOD_SYSTEM_PLAYSOUND)(FMOD_SYSTEM *system, FMOD_CHANNELINDEX channelid, FMOD_SOUND *sound, FMOD_BOOL paused, FMOD_CHANNEL **channel);
+typedef FMOD_RESULT (*FMOD_CHANNEL_ISPLAYING)(FMOD_CHANNEL *channel, FMOD_BOOL *isplaying);
 typedef FMOD_RESULT (*FMOD_CHANNEL_STOP)(FMOD_CHANNEL *channel);
 typedef FMOD_RESULT (*FMOD_SOUND_RELEASE)(FMOD_SOUND *sound);
 
@@ -53,6 +55,7 @@ struct FmodexAudioPlayer::FMOD_EX_API {
     FMOD_SYSTEM_CREATESOUND FMOD_System_CreateSound;
     FMOD_SOUND_SETMODE FMOD_Sound_SetMode;
     FMOD_SYSTEM_PLAYSOUND FMOD_System_PlaySound;
+    FMOD_CHANNEL_ISPLAYING FMOD_Channel_IsPlaying;
     FMOD_CHANNEL_STOP FMOD_Channel_Stop;
     FMOD_SOUND_RELEASE FMOD_Sound_Release;
 };
@@ -68,7 +71,7 @@ bool FmodexAudioPlayer::ERRCHECK(int result)
 }
 
 FmodexAudioPlayer::FmodexAudioPlayer()
-    : fmodex(0), fmodex_dl(fmodex_dyl_name())
+    : fmodex(0), fmodex_dl(fmodex_dyl_name)
 {
     if(!fmodex_dl.load())
     {
@@ -85,12 +88,13 @@ FmodexAudioPlayer::FmodexAudioPlayer()
     fmodex->FMOD_System_CreateSound = (FMOD_SYSTEM_CREATESOUND)fmodex_dl.resolve("FMOD_System_CreateSound");
     fmodex->FMOD_Sound_SetMode = (FMOD_SOUND_SETMODE)fmodex_dl.resolve("FMOD_Sound_SetMode");
     fmodex->FMOD_System_PlaySound = (FMOD_SYSTEM_PLAYSOUND)fmodex_dl.resolve("FMOD_System_PlaySound");
+    fmodex->FMOD_Channel_IsPlaying = (FMOD_CHANNEL_ISPLAYING)fmodex_dl.resolve("FMOD_Channel_IsPlaying");
     fmodex->FMOD_Channel_Stop = (FMOD_CHANNEL_STOP)fmodex_dl.resolve("FMOD_Channel_Stop");
     fmodex->FMOD_Sound_Release = (FMOD_SOUND_RELEASE)fmodex_dl.resolve("FMOD_Sound_Release");
 
     FMOD_RESULT result = fmodex->FMOD_System_Create(&fmodex->system);
     if(ERRCHECK(result))
-        fmodex->system = 0;
+        clean();
     else
     {
         unsigned int version = 0;
@@ -119,24 +123,28 @@ FmodexAudioPlayer::~FmodexAudioPlayer()
         stop();
         clean();
         fmodex_dl.unload();
-        delete fmodex;
     }
 }
 void FmodexAudioPlayer::clean()
 {
-    if(fmodex && fmodex->system)
+    if(fmodex)
     {
-        FMOD_RESULT result = fmodex->FMOD_System_Close(fmodex->system);
-        ERRCHECK(result);
-        result = fmodex->FMOD_System_Release(fmodex->system);
-        ERRCHECK(result);
+        if(fmodex->system)
+        {
+            FMOD_RESULT result = fmodex->FMOD_System_Close(fmodex->system);
+            ERRCHECK(result);
+            result = fmodex->FMOD_System_Release(fmodex->system);
+            ERRCHECK(result);
+        }
+        delete fmodex;
+        fmodex = 0;
     }
 }
 
 QString FmodexAudioPlayer::play( const char * data, int size )
 {
   if(fmodex==nullptr)
-      return tr( "FMOD Ex Library (%1) is not available!" ).arg(fmodex_dyl_name());
+      return tr( "FMOD Ex Library (%1) is not available!" ).arg(fmodex_dyl_name);
   stop();
   FMOD_CREATESOUNDEXINFO exinfo;
   memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
@@ -167,7 +175,10 @@ void FmodexAudioPlayer::stop()
     {
         if(fmodex->channel)
         {
-            FMOD_RESULT result = fmodex->FMOD_Channel_Stop(fmodex->channel);
+            FMOD_BOOL is_playing = false;
+            FMOD_RESULT result = fmodex->FMOD_Channel_IsPlaying(fmodex->channel, &is_playing);
+            if(is_playing)
+                result = fmodex->FMOD_Channel_Stop(fmodex->channel);
             ERRCHECK(result);
         }
         FMOD_RESULT result = fmodex->FMOD_Sound_Release(fmodex->sound);

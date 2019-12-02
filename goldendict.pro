@@ -675,10 +675,12 @@ include( qtsingleapplication/src/qtsingleapplication.pri )
         }
         FMODEX_EXT = lib
     } else {
-        !x64 {
+    # It crashes the app when playing sound,
+    # is it only working for cygwin or the dll is not the right one?
+    #    !x64 {
     #        FMODEX_LIB = libfmodex
     #        FMODEX_EXT = a
-        }
+    #    }
     }
   }
 
