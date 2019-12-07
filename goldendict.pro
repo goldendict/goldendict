@@ -22,7 +22,7 @@ QT += core \
       network \
       svg
 
-win32:CONFIG += no_qtmultimedia_player
+#win32:CONFIG += no_qtmultimedia_player
 DEFINES += MDX_LOCALVIDEO_CACHED
 
 greaterThan(QT_MAJOR_VERSION, 4) {

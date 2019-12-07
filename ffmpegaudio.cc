@@ -51,16 +51,25 @@ AudioService & AudioService::instance()
 
 AudioService::AudioService()
 {
+}
+
+AudioService::~AudioService()
+{
+    clean();
+}
+
+void AudioService::init()
+{
 #if LIBAVFORMAT_VERSION_MAJOR < 58 || ( LIBAVFORMAT_VERSION_MAJOR == 58 && LIBAVFORMAT_VERSION_MINOR < 9 )
   av_register_all();
 #endif
   ao_initialize();
 }
 
-AudioService::~AudioService()
+void AudioService::clean()
 {
-  emit cancelPlaying( true );
-  ao_shutdown();
+    emit cancelPlaying( true );
+    ao_shutdown();
 }
 
 void AudioService::playMemory( const char * ptr, int size )

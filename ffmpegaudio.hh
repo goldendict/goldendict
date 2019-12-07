@@ -21,6 +21,9 @@ public:
   void playMemory( const char * ptr, int size );
   void stop();
 
+  void init();
+  void clean();
+
 signals:
   void cancelPlaying( bool waitUntilFinished );
   void error( QString const & message );

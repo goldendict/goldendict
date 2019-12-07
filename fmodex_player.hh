@@ -8,9 +8,8 @@
 
 #ifdef MAKE_FMODEX_PLAYER
 
-#include <QLibrary>
-#include <QBuffer>
 #include "audioplayerinterface.hh"
+#include <QLibrary>
 
 class FmodexAudioPlayer : public AudioPlayerInterface
 {
@@ -28,6 +27,7 @@ private:
   void clean();
   bool ERRCHECK(int);
 private:
+  static const QString fmodex_dyl_name;
   struct FMOD_EX_API;
   FMOD_EX_API *fmodex;
   QLibrary fmodex_dl;

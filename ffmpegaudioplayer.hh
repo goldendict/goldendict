@@ -20,11 +20,12 @@ public:
   {
     connect( &AudioService::instance(), SIGNAL( error( QString ) ),
              this, SIGNAL( error( QString ) ) );
+    AudioService::instance().init();
   }
 
   ~AudioPlayer()
   {
-    stop();
+    AudioService::instance().clean();
   }
 
   virtual QString play( const char * data, int size )

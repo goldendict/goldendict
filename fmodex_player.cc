@@ -4,25 +4,24 @@
  * FMOD Sound System, copyright ? Firelight Technologies Pty, Ltd., 1994-2016. */
 
 #ifdef MAKE_FMODEX_PLAYER
-#include <QByteArray>
-#include <QFile>
 #include "fmodex_player.hh"
 #include "fmod_errors.h"
+#include <QFile>
 
 #ifdef __WIN32
 #ifdef _MSC_VER
 #ifdef __WIN64
-    static const QString fmodex_dyl_name = QString("fmodex64.dll");
+    const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex64.dll");
 #else
-    static const QString fmodex_dyl_name = QString("fmodex.dll");
+    const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex.dll");
 #endif
 #elif defined(__CYGWIN32__)
-    static const QString fmodex_dyl_name = QString("fmodex.dll");
+    const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex.dll");
 #else
-    static const QString fmodex_dyl_name;
+    const QString FmodexAudioPlayer::fmodex_dyl_name;
 #endif
 #else
-    static const QString fmodex_dyl_name;
+    const QString FmodexAudioPlayer::fmodex_dyl_name;
 #endif
 
 bool FmodexAudioPlayer::available()
