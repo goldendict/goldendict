@@ -43,11 +43,6 @@ static inline QString avErrorString( int errnum )
   return QString::fromLatin1( buf );
 }
 
-AudioService & AudioService::instance()
-{
-  static AudioService a;
-  return a;
-}
 
 AudioService::AudioService()
 {

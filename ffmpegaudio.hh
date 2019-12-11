@@ -17,7 +17,8 @@ class AudioService : public QObject
   Q_OBJECT
 
 public:
-  static AudioService & instance();
+  AudioService();
+  ~AudioService();
   void playMemory( const char * ptr, int size );
   void stop();
 
@@ -28,9 +29,6 @@ signals:
   void cancelPlaying( bool waitUntilFinished );
   void error( QString const & message );
 
-private:
-  AudioService();
-  ~AudioService();
 };
 
 class DecoderThread: public QThread

@@ -16,28 +16,30 @@ class AudioPlayer : public AudioPlayerInterface
 {
   Q_OBJECT
 public:
-  AudioPlayer()
+  AudioPlayer() : as(new AudioService)
   {
-    connect( &AudioService::instance(), SIGNAL( error( QString ) ),
+    connect( as, SIGNAL( error( QString ) ),
              this, SIGNAL( error( QString ) ) );
-    AudioService::instance().init();
+    as->init();
   }
 
   ~AudioPlayer()
   {
-    AudioService::instance().clean();
+    delete as;
   }
 
   virtual QString play( const char * data, int size )
   {
-    AudioService::instance().playMemory( data, size );
+    as->playMemory( data, size );
     return QString();
   }
 
   virtual void stop()
   {
-    AudioService::instance().stop();
+    as->stop();
   }
+private:
+  AudioService *as;
 };
 
 }
