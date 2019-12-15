@@ -5,12 +5,14 @@
 
 #include <QObject>
 #include <QMutex>
+#include <QSemaphore>
 #include <QAtomicInt>
 #include <QByteArray>
 #include <QThread>
 
 namespace Ffmpeg
 {
+class DecoderThread;
 
 class AudioService : public QObject
 {
@@ -23,11 +25,12 @@ public:
   void stop();
 
   void init();
-  void clean();
 
 signals:
-  void cancelPlaying( bool waitUntilFinished );
   void error( QString const & message );
+
+private:
+  DecoderThread *dt;
 
 };
 
@@ -35,17 +38,20 @@ class DecoderThread: public QThread
 {
   Q_OBJECT
 
-  static QMutex deviceMutex_;
-  QAtomicInt isCancelled_;
   QByteArray audioData_;
+  QMutex deviceMutex_;
+  QSemaphore deviceWC_;
+  QAtomicInt isCancelled_;
+  QAtomicInt isExit_;
 
 public:
-  DecoderThread( QByteArray const & audioData, QObject * parent );
+  DecoderThread( QObject * parent );
   virtual ~DecoderThread();
 
-public slots:
-  void run();
+  void play(const QByteArray &audioData);
   void cancel( bool waitUntilFinished );
+protected:
+  void run();
 
 signals:
   void error( QString const & message );
