@@ -14,6 +14,18 @@
    <string notr="true">Sources</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
+    <number>6</number>
+   </property>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <widget class="QWidget" name="filesTab">
@@ -25,6 +37,18 @@
        <string>Files</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
@@ -88,6 +112,18 @@
        <string>Sound Dirs</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -144,6 +180,18 @@
        <string>Morphology</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_8">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
@@ -212,6 +260,18 @@ of the appropriate groups to use them.</string>
        <string>Wikipedia</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
@@ -271,6 +331,18 @@ of the appropriate groups to use them.</string>
        <string>Websites</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_9">
          <property name="text">
@@ -335,6 +407,18 @@ of the appropriate groups to use them.</string>
        <string>DICT servers</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_16">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_116">
          <property name="text">
@@ -391,6 +475,18 @@ of the appropriate groups to use them.</string>
        <string>Programs</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_15">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_16">
          <property name="text">
@@ -450,6 +546,18 @@ of the appropriate groups to use them.</string>
        <string>Forvo</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_13">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QLabel" name="label_11">
          <property name="text">
@@ -590,6 +698,18 @@ in the future, or register on the site to get your own key.</string>
        <string>Transliteration</string>
       </attribute>
       <layout class="QVBoxLayout" name="transliterationLayout">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">

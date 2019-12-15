@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>761</width>
-    <height>455</height>
+    <width>670</width>
+    <height>413</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,6 +21,21 @@
    <bool>true</bool>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_8">
+   <property name="spacing">
+    <number>4</number>
+   </property>
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>4</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
+    <number>6</number>
+   </property>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -47,6 +62,18 @@
        <string>&amp;Interface</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_16">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
          <item row="0" column="0" colspan="2">
@@ -292,6 +319,18 @@ With this on however, it will hide the main window.</string>
        <string>&amp;Scan Popup</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_10">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="enableScanPopup">
          <property name="toolTip">
@@ -618,6 +657,18 @@ seconds, which is specified here.</string>
        <string>Hotkeys</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_12">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QCheckBox" name="enableMainWindowHotkey">
          <property name="text">
@@ -736,6 +787,18 @@ p, li { white-space: pre-wrap; }
        <string>&amp;Audio</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
@@ -829,6 +892,18 @@ p, li { white-space: pre-wrap; }
        <string>&amp;Network</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="useProxyServer">
          <property name="toolTip">
@@ -1033,6 +1108,18 @@ download page.</string>
        <string>Full-text search</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_19">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="ftsGroupBox">
          <property name="title">
@@ -1193,6 +1280,18 @@ download page.</string>
        <string>Ad&amp;vanced</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_20">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="0" column="0">

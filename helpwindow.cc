@@ -65,6 +65,8 @@ HelpWindow::HelpWindow( QWidget * parent, Config::Class & cfg_ ) :
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   QVBoxLayout * mainLayout = new QVBoxLayout( this );
+  mainLayout->setSpacing(4);
+  mainLayout->setContentsMargins(6, 4, 6, 6);
   setLayout( mainLayout );
 
   navToolBar = new QToolBar( this );
