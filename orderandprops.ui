@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>425</height>
+    <width>434</width>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -106,22 +106,34 @@
         <string>Dictionary information</string>
        </property>
        <layout class="QVBoxLayout" name="infoVerticalLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
         <item>
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_5">
+          <property name="horizontalSpacing">
+           <number>6</number>
+          </property>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_10">
             <property name="text">
-             <string>Name:</string>
+             <string>Translates to:</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="dictionaryName">
+          <item row="3" column="1">
+           <widget class="QLabel" name="dictionaryTranslatesFrom">
             <property name="textFormat">
-             <enum>Qt::PlainText</enum>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+             <enum>Qt::RichText</enum>
             </property>
            </widget>
           </item>
@@ -139,10 +151,10 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_7">
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_9">
             <property name="text">
-             <string>Total words:</string>
+             <string>Translates from:</string>
             </property>
            </widget>
           </item>
@@ -153,24 +165,10 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_9">
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_7">
             <property name="text">
-             <string>Translates from:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Translates to:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="dictionaryTranslatesFrom">
-            <property name="textFormat">
-             <enum>Qt::RichText</enum>
+             <string>Total words:</string>
             </property>
            </widget>
           </item>
@@ -178,6 +176,28 @@
            <widget class="QLabel" name="dictionaryTranslatesTo">
             <property name="textFormat">
              <enum>Qt::RichText</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="dictionaryName">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::PlainText</enum>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="margin">
+             <number>1</number>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
             </property>
            </widget>
           </item>
@@ -192,6 +212,12 @@
         </item>
         <item>
          <widget class="QPlainTextEdit" name="dictionaryDescription">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="palette">
            <palette>
             <active>
