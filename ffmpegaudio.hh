@@ -48,7 +48,7 @@ public:
   virtual ~DecoderThread();
 
   void play(const QByteArray &audioData);
-  void cancel( bool waitUntilFinished );
+  void cancel();
 protected:
   void run();
 

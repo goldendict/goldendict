@@ -70,7 +70,7 @@ void AudioService::playMemory( const char * ptr, int size )
 
 void AudioService::stop()
 {
-  dt->cancel(false);
+  dt->cancel();
 }
 
 struct DecoderContext
@@ -569,14 +569,18 @@ void DecoderContext::playFrame( AVFrame * frame )
 }
 
 DecoderThread::DecoderThread( QObject * parent ) :
-  QThread( parent ),
-  isCancelled_( 0 )
+  QThread( parent ), deviceWC_( 0 ), isCancelled_( 0 )
 {
 }
 
 DecoderThread::~DecoderThread()
 {
-  cancel(true);
+    if(QThread::isRunning())
+    {
+        isCancelled_.storeRelease(2);
+        deviceWC_.release();
+        QThread::wait();
+    }
 }
 
 void DecoderThread::run()
@@ -618,15 +622,9 @@ void DecoderThread::play(const QByteArray & audioData)
     bufferMutex_.unlock();
 }
 
-void DecoderThread::cancel( bool waitUntilFinished )
+void DecoderThread::cancel()
 {
-  if ( waitUntilFinished )
-  {
-    isCancelled_.storeRelease(2);
-    deviceWC_.release();
-    QThread::wait();
-  }
-  else
+  if(Qt4x5::AtomicInt::loadAcquire( isCancelled_) != 2)
   {
     isCancelled_.storeRelease(1);
   }
