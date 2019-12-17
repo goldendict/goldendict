@@ -39,10 +39,9 @@ class DecoderThread: public QThread
   Q_OBJECT
 
   QByteArray audioData_;
-  QMutex deviceMutex_;
+  QMutex bufferMutex_;
   QSemaphore deviceWC_;
   QAtomicInt isCancelled_;
-  QAtomicInt isExit_;
 
 public:
   DecoderThread( QObject * parent );

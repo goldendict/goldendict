@@ -570,7 +570,7 @@ void DecoderContext::playFrame( AVFrame * frame )
 
 DecoderThread::DecoderThread( QObject * parent ) :
   QThread( parent ),
-  isCancelled_( 0 ), isExit_(0)
+  isCancelled_( 0 )
 {
 }
 
@@ -581,16 +581,18 @@ DecoderThread::~DecoderThread()
 
 void DecoderThread::run()
 {
-    while(!Qt4x5::AtomicInt::loadAcquire( isExit_)) {
+    while(Qt4x5::AtomicInt::loadAcquire( isCancelled_) != 2) {
         if (!deviceWC_.tryAcquire(1, -1))
             continue;
-        if ( Qt4x5::AtomicInt::loadAcquire( isExit_ ) )
+        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) == 2 )
             break;
 
         QByteArray audioData;
-        deviceMutex_.lock();
+        bufferMutex_.lock();
         audioData.swap(audioData_);
-        deviceMutex_.unlock();
+        bufferMutex_.unlock();
+        if(audioData.isEmpty())
+            continue;
         isCancelled_.testAndSetRelease(1, 0);
 
         QString errorString;
@@ -610,20 +612,23 @@ void DecoderThread::run()
 void DecoderThread::play(const QByteArray & audioData)
 {
     isCancelled_.testAndSetRelease(0, 1);
-    deviceMutex_.lock();
+    bufferMutex_.lock();
     deviceWC_.release();
     audioData_ = audioData;
-    deviceMutex_.unlock();
+    bufferMutex_.unlock();
 }
 
 void DecoderThread::cancel( bool waitUntilFinished )
 {
-  isCancelled_.storeRelease(1);
   if ( waitUntilFinished )
   {
-    isExit_.ref();
+    isCancelled_.storeRelease(2);
     deviceWC_.release();
     QThread::wait();
+  }
+  else
+  {
+    isCancelled_.storeRelease(1);
   }
 }
 
