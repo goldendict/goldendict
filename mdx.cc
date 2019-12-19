@@ -677,7 +677,7 @@ void MdxArticleRequest::run()
       return;
     }
 
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
+    if ( !articlesIncluded.insert( chain[ x ].articleOffset ).second )
       continue; // We already have this article in the body.
 
     // Grab that article
@@ -708,9 +708,6 @@ void MdxArticleRequest::run()
       finish();
       return;
     }
-
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
-      continue; // We already have this article in the body.
 
     QCryptographicHash hash( QCryptographicHash::Md5 );
     hash.addData( articleBody.data(), articleBody.size() );
