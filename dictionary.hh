@@ -109,7 +109,7 @@ private:
 
   QAtomicInt isFinishedFlag;
 
-  Mutex errorStringMutex;
+  //Mutex errorStringMutex;
   QString errorString;
 };
 

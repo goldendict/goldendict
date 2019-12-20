@@ -56,14 +56,14 @@ void Request::finish()
 
 void Request::setErrorString( QString const & str )
 {
-  Mutex::Lock _( errorStringMutex );
+  //Mutex::Lock _( errorStringMutex );
 
   errorString = str;
 }
 
 QString Request::getErrorString()
 {
-  Mutex::Lock _( errorStringMutex );
+  //Mutex::Lock _( errorStringMutex );
 
   return errorString;
 }
