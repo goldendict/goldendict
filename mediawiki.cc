@@ -185,8 +185,8 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
     if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
     {
-      setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
-                               arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
+      setErrorString( tr( "XML parse error: %1 at %2,%3" ).
+                               arg( errorStr ).arg( errorLine ).arg( errorColumn ) );
     }
     else
     {
