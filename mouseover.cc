@@ -5,8 +5,8 @@
 #include <algorithm>
 
 #ifdef Q_OS_WIN32
-#undef WINVER
-#define WINVER 0x0500
+//#undef WINVER
+//#define WINVER 0x0500
 #include <sddl.h>
 #include <accctrl.h>
 #include <aclapi.h>

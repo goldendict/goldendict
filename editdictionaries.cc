@@ -55,6 +55,8 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
   connect( orderAndProps.get(), SIGNAL( showDictionaryHeadwords( QString const & ) ),
            this, SIGNAL( showDictionaryHeadwords( QString const & ) ) );
+  connect( orderAndProps.get(), SIGNAL( userDictNameChanged( QString const &, QString const & ) ),
+           this, SIGNAL( userDictNameChanged( QString const &, QString const & ) ) );
 
   connect( ui.buttons, SIGNAL( helpRequested() ),
            this, SLOT( helpRequested() ) );

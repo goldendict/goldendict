@@ -40,6 +40,7 @@ private:
 
 signals:
   void showDictionaryHeadwords( QString const & dictId );
+  void userDictNameChanged( QString const & dictId, QString const & uname );
 };
 
 #endif

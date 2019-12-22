@@ -9,6 +9,7 @@
 #include <algorithm>
 
 #include <QMenu>
+#include <QInputDialog>
 #include <QPair>
 
 using std::vector;
@@ -212,7 +213,7 @@ void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const 
 
     ui.dictionaryInformation->setEnabled( true );
 
-    ui.dictionaryName->setText( QString::fromUtf8( dict->getName().c_str() ) );
+    ui.dictionaryName->setText( QString::fromUtf8( dict->getDescName().c_str() ) );
 
     ui.dictionaryTotalArticles->setText( QString::number( dict->getArticleCount() ) );
     ui.dictionaryTotalWords->setText( QString::number( dict->getWordCount() ) );
@@ -253,13 +254,15 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
 {
   QMenu menu( this );
 
-  QAction * showHeadwordsAction = NULL;
+  QAction * showHeadwordsAction = NULL, *renameAction = nullptr;
   QModelIndex idx = ui.searchLine->mapToSource( ui.dictionaryOrder->indexAt( pos ) );
   sptr< Dictionary::Class > dict;
   if( idx.isValid() && (unsigned)idx.row() < ui.dictionaryOrder->getCurrentDictionaries().size() )
     dict = ui.dictionaryOrder->getCurrentDictionaries()[ idx.row() ];
   if ( dict && dict->getWordCount() > 0 )
   {
+    renameAction = new QAction( tr( "Rename" ), &menu );
+    menu.addAction( renameAction );
     showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
     menu.addAction( showHeadwordsAction );
   }
@@ -270,6 +273,8 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
   menu.addAction( sortLangAction );
 
   QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
+  if(result==nullptr)
+      return;
 
   if( result == sortNameAction || result == sortLangAction )
   {
@@ -280,10 +285,26 @@ void OrderAndProps::contextMenuRequested( const QPoint & pos )
       sort( sortedDicts.begin(), sortedDicts.end(), dictLessThan );
     ui.dictionaryOrder->populate( sortedDicts );
   }
-
-  if( result && result == showHeadwordsAction )
+  else if( result == showHeadwordsAction )
   {
     emit showDictionaryHeadwords( QString::fromUtf8( dict->getId().c_str() ) );
+  }
+  else if( result == renameAction )
+  {
+    const QString name = QString::fromUtf8( dict->getName().c_str() );
+    QString uname = QString::fromUtf8( dict->getDescName().c_str() );
+    bool ok = false;
+    uname = QInputDialog::getText(0, name, tr("New name:"), QLineEdit::Normal,
+                                                uname, &ok);
+    if(ok)
+    {
+        if(name == uname)
+            dict->setUserDictName();
+        else
+            dict->setUserDictName(uname.toUtf8().data());
+        ui.dictionaryName->setText(uname);
+        emit userDictNameChanged(QString::fromUtf8( dict->getId().c_str() ), uname );
+    }
   }
 }
 

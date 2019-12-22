@@ -260,6 +260,7 @@ class Class
 {
   string id;
   string dictionaryName;
+  string userDictName;
   vector< string > dictionaryFiles;
 
 protected:
@@ -285,6 +286,7 @@ protected:
 
 public:
 
+  inline void setUserDictName(string const & name = string()) { userDictName = name; }
   /// Creates a dictionary. The id should be made using
   /// Format::makeDictionaryId(), the dictionaryFiles is the file names the
   /// dictionary consists of.
@@ -309,6 +311,9 @@ public:
   /// Returns the dictionary's full name, utf8.
   inline string const & getName() const
   { return dictionaryName; }
+  /// Returns the dictionary's user-defined name, utf8.
+  inline string const & getDescName() const
+  { return userDictName.empty() ? dictionaryName : userDictName; }
 
   /// Returns all the available properties, like the author's name, copyright,
   /// description etc. All strings are in utf8.

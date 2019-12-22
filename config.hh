@@ -795,6 +795,7 @@ QString getPortableVersionMorphoDir() throw();
 /// Returns the add-on styles directory.
 QString getStylesDir() throw();
 
+QString getRenamesFileName() throw();
 }
 
 #endif

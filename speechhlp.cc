@@ -1,4 +1,4 @@
-#define WINVER 0x0500 // At least WinXP required
+//#define WINVER 0x0500 // At least WinXP required
 #include <windows.h>
 #include <limits.h>
 

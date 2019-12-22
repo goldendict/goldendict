@@ -693,7 +693,7 @@ void ArticleRequest::bodyFinished()
           + "><span class=\"gddicticon\"><img src=\"gico://" + Html::escape( dictId )
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span><span class=\"gddicttitle\">" +
-          Html::escape( activeDict->getName().c_str() ) + "</span>"
+          Html::escape( activeDict->getDescName().c_str() ) + "</span>"
           + "<span class=\"collapse_expand_area\"><img src=\"qrcx://localhost/icons/blank.png\" class=\""
           + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
           + "\" id=\"expandicon-" + Html::escape( dictId ) + "\""

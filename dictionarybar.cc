@@ -65,7 +65,7 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
     QIcon icon = dictionaries[ x ]->getNativeIcon();
 
     QString dictName = QString::fromUtf8( dictionaries[ x ]->
-                                            getName().c_str() );
+                                            getDescName().c_str() );
 
     QAction * action = addAction( icon, elideDictName( dictName ) );
 

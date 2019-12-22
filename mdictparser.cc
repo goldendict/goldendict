@@ -71,10 +71,10 @@ static QDomNamedNodeMap parseHeaderAttributes( const QString & headerText )
   QDomElement docElem = doc.documentElement();
   attributes = docElem.attributes();
 
-  for ( int i = 0; i < attributes.count(); i++ )
+  /*for ( int i = 0; i < attributes.count(); i++ )
   {
     QDomAttr attr = attributes.item( i ).toAttr();
-  }
+  }*/
 
   return attributes;
 }

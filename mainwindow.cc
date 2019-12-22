@@ -1300,7 +1300,7 @@ void MainWindow::makeDictionaries()
   ftsIndexing.clearDictionaries();
 
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
-
+  loadUserDictName();
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
@@ -1312,6 +1312,7 @@ void MainWindow::makeDictionaries()
 
   updateStatusLine();
   updateGroupList();
+
 }
 
 void MainWindow::updateStatusLine()
@@ -1934,7 +1935,7 @@ void MainWindow::updateFoundInDictsList()
       {
         if ( dictionaries[ x ]->getId() == i->toUtf8().data() )
         {
-          QString dictName = QString::fromUtf8( dictionaries[ x ]->getName().c_str() );
+          QString dictName = QString::fromUtf8( dictionaries[ x ]->getDescName().c_str() );
           QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
           QListWidgetItem * item =
               new QListWidgetItem(
@@ -1942,7 +1943,7 @@ void MainWindow::updateFoundInDictsList()
                 dictName,
                 ui.dictsList, QListWidgetItem::Type );
           item->setData(Qt::UserRole, QVariant( dictId ) );
-          item->setToolTip(dictName);
+          item->setToolTip(QString::fromUtf8( dictionaries[ x ]->getName().c_str() ));
 
           ui.dictsList->addItem( item );
           if (dictId == activeId)
@@ -2000,6 +2001,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   connect( &dicts, SIGNAL( showDictionaryHeadwords( QString const & ) ),
            this, SLOT( showDictionaryHeadwords( QString const & ) ) );
+  connect( &dicts, SIGNAL( userDictNameChanged( QString const &, QString const & ) ),
+           this, SLOT( userDictNameChanged( QString const &, QString const & ) ) );
 
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
@@ -3589,6 +3592,7 @@ void MainWindow::on_rescanFiles_triggered()
   dictionaryBar.setDictionaries( dictionaries );
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+  loadUserDictName();
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
@@ -4831,3 +4835,53 @@ bool MainWindow::isGoldenDictWindow( HWND hwnd )
 }
 
 #endif
+
+void MainWindow::userDictNameChanged(const QString & id , const QString &uname)
+{
+  if(dictionaries.empty())
+      return;
+  QDomDocument qdd;
+  QDomElement root = qdd.createElement("UName");
+  qdd.appendChild(root);
+
+  foreach (sptr< Dictionary::Class > dict, dictionaries) {
+      const string id = dict->getId();
+      const string name = dict->getName();
+      const string uname = dict->getDescName();
+      if(name!=uname)
+      {
+          QDomElement dn = qdd.createElement("map");
+          dn.setAttribute("id", QString::fromUtf8(id.c_str()));
+          dn.setAttribute("name", QString::fromUtf8(name.c_str()));
+          dn.setAttribute("uname", QString::fromUtf8(uname.c_str()));
+          root.appendChild(dn);
+      }
+  }
+  QString cfn = Config::getRenamesFileName();
+  QFile qdf(cfn);
+  if(qdf.open(QIODevice::Truncate | QIODevice::WriteOnly))
+    qdf.write(qdd.toByteArray());
+}
+
+void MainWindow::loadUserDictName()
+{
+    QDomDocument qdd;
+    QFile qdf(Config::getRenamesFileName());
+    if(!qdf.open(QIODevice::ReadOnly) || !qdd.setContent(&qdf))
+        return;
+    qdf.close();
+    QDomElement root = qdd.documentElement();
+    if(!root.hasChildNodes())
+        return;
+    QDomNodeList list=root.childNodes();
+    QMap<string, string> maps;
+    for(int i=0;i<list.count();i++){
+        QDomElement node=list.at(i).toElement();
+        maps.insert(node.attribute("id").toUtf8().data(), node.attribute("uname").toUtf8().data());
+    }
+    foreach (sptr< Dictionary::Class > dict, dictionaries) {
+        const string id = dict->getId();
+        if(maps.contains(id))
+            dict->setUserDictName(maps.value(id));
+    }
+}

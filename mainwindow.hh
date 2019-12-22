@@ -256,6 +256,8 @@ private:
 
   QString unescapeTabHeader( QString const & header );
 
+  void loadUserDictName();
+
 private slots:
 
   void hotKeyActivated( int );
@@ -281,6 +283,7 @@ private slots:
   void showDictionaryInfo( QString const & id );
 
   void showDictionaryHeadwords( QString const & id );
+  void userDictNameChanged( QString const & id, QString const & uname );
 
   void openDictionaryFolder( QString const & id );
 

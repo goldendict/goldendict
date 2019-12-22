@@ -2270,4 +2270,8 @@ QString getStylesDir() throw()
   return result.path() + QDir::separator();
 }
 
+QString getRenamesFileName() throw()
+{
+    return getHomeDir().filePath( "renames.xml" );
+}
 }
