@@ -256,7 +256,7 @@ void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw
 }
 
 
-void loadDictionaries( QWidget * parent, bool canHideParent,
+void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
                        Config::Class const & cfg,
                        std::vector< sptr< Dictionary::Class > > & dictionaries,
                        QNetworkAccessManager & dictNetMgr,
@@ -465,7 +465,7 @@ void loadDictionaries( QWidget * parent, bool canHideParent,
   splash.finish(parent);
 }
 
-void doDeferredInit( std::vector< sptr< Dictionary::Class > > & dictionaries )
+void LoadDictionaries::doDeferredInit( std::vector< sptr< Dictionary::Class > > & dictionaries )
 {
   for( unsigned x = 0; x < dictionaries.size(); ++x )
     dictionaries[ x ]->deferredInit();

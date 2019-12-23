@@ -852,7 +852,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   prepareNewReleaseChecks();
 
   // makeDictionaries() didn't do deferred init - we do it here, at the end.
-  doDeferredInit( dictionaries );
+  LoadDictionaries::doDeferredInit( dictionaries );
 
   updateStatusLine();
 
@@ -1299,7 +1299,7 @@ void MainWindow::makeDictionaries()
   ftsIndexing.stopIndexing();
   ftsIndexing.clearDictionaries();
 
-  loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
+  LoadDictionaries::loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
   loadUserDictName();
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
@@ -3591,7 +3591,7 @@ void MainWindow::on_rescanFiles_triggered()
   dictionariesUnmuted.clear();
   dictionaryBar.setDictionaries( dictionaries );
 
-  loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+  LoadDictionaries::loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
   loadUserDictName();
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )

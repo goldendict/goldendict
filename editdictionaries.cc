@@ -214,7 +214,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   groups.reset();
   orderAndProps.reset();
 
-  loadDictionaries( this, false, cfg, dictionaries, dictNetMgr );
+  LoadDictionaries::loadDictionaries( this, false, cfg, dictionaries, dictNetMgr );
 
   // If no changes to groups were made, update the original data
   bool noGroupEdits = ( origCfg.groups == savedGroups );
