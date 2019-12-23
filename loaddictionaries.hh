@@ -42,7 +42,8 @@ public:
 
 signals:
 
-  void indexingDictionarySignal( QString const & dictionaryName );
+  void showMessage(const QString &msg, int alignment = Qt::AlignCenter,
+                   const QColor &color = Qt::darkMagenta);
 
 public:
 
@@ -58,7 +59,7 @@ private:
 /// If showInitially is passed as true, the window will always popup.
 /// If doDeferredInit is true (default), doDeferredInit() is done on all
 /// dictionaries at the end.
-void loadDictionaries( QWidget * parent, bool showInitially,
+void loadDictionaries( QWidget * parent, bool canHideParent,
                        Config::Class const & cfg,
                        std::vector< sptr< Dictionary::Class > > &,
                        QNetworkAccessManager & dictNetMgr,

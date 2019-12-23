@@ -39,7 +39,7 @@
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 #include "chinese.hh"
 #endif
-
+#include <QSplashScreen>
 #include <QMessageBox>
 #include <QDir>
 
@@ -80,9 +80,11 @@ void LoadDictionaries::run()
 {
   try
   {
+    emit showMessage(tr("Handling User's Dictionaries ..."));
     for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
       handlePath( *i );
 
+    emit showMessage(tr("Making Sound Dictionaries ..."));
     // Make soundDirs
     {
       vector< sptr< Dictionary::Class > > soundDirDictionaries =
@@ -92,6 +94,7 @@ void LoadDictionaries::run()
                            soundDirDictionaries.end() );
     }
 
+    emit showMessage(tr("Making HunspellMorpho Dictionaries ..."));
     // Make hunspells
     {
       vector< sptr< Dictionary::Class > > hunspellDictionaries =
@@ -133,6 +136,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
     if ( !i->isDir() )
       allFiles.push_back( FsEncoding::encode( QDir::toNativeSeparators( fullName ) ) );
   }
+
+  emit showMessage(tr("Handling Dictionaries in Path:\n %1").arg(path.path));
 
   {
     vector< sptr< Dictionary::Class > > bglDictionaries =
@@ -247,26 +252,30 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
 void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
 {
-  emit indexingDictionarySignal( QString::fromUtf8( dictionaryName.c_str() ) );
+  emit showMessage( tr("Indexing Dictionary: %1").arg(QString::fromUtf8( dictionaryName.c_str() )) );
 }
 
 
-void loadDictionaries( QWidget * parent, bool showInitially,
+void loadDictionaries( QWidget * parent, bool canHideParent,
                        Config::Class const & cfg,
                        std::vector< sptr< Dictionary::Class > > & dictionaries,
                        QNetworkAccessManager & dictNetMgr,
                        bool doDeferredInit_ )
 {
-  dictionaries.clear();
+  if(canHideParent)
+    parent->hide();
+  QSplashScreen splash( QPixmap("./splash.png"), Qt::WindowStaysOnTopHint);
+  splash.show();
+  splash.showMessage(LoadDictionaries::tr("Start Loading Dictionaries"), Qt::AlignCenter);
+  qApp->processEvents();
 
-  ::Initializing init( parent, showInitially );
+  dictionaries.clear();
 
   // Start a thread to load all the dictionaries
 
   LoadDictionaries loadDicts( cfg );
-
-  QObject::connect( &loadDicts, SIGNAL( indexingDictionarySignal( QString const & ) ),
-                    &init, SLOT( indexing( QString const & ) ) );
+  QObject::connect(&loadDicts, SIGNAL(showMessage(const QString &, int, const QColor &)),
+                   &splash, SLOT(showMessage(const QString &, int, const QColor &)) );
 
   QEventLoop localLoop;
 
@@ -281,6 +290,9 @@ void loadDictionaries( QWidget * parent, bool showInitially,
 
   if ( loadDicts.getExceptionText().size() )
   {
+    if(canHideParent)
+      parent->show();
+    splash.finish(parent);
     QMessageBox::critical( parent, QCoreApplication::translate( "LoadDictionaries", "Error loading dictionaries" ),
                            QString::fromUtf8( loadDicts.getExceptionText().c_str() ) );
 
@@ -292,6 +304,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   ///// We create transliterations synchronously since they are very simple
 
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+  splash.showMessage(LoadDictionaries::tr("Making Chinese-conversion Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   // Make Chinese conversion
   {
     vector< sptr< Dictionary::Class > > chineseDictionaries =
@@ -302,6 +316,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   }
 #endif
 
+  splash.showMessage(LoadDictionaries::tr("Making Romaji Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   // Make Romaji
   {
     vector< sptr< Dictionary::Class > > romajiDictionaries =
@@ -311,6 +327,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
                          romajiDictionaries.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making transliteration Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   // Make Russian transliteration
   if ( cfg.transliteration.enableRussianTransliteration )
     dictionaries.push_back( RussianTranslit::makeDictionary() );
@@ -330,6 +348,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making MediaWiki Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   ///// We create MediaWiki dicts synchronously, since they use netmgr
 
   {
@@ -339,6 +359,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making WebSite Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   ///// WebSites are very simple, no need to create them asynchronously
   {
     vector< sptr< Dictionary::Class > > dicts =
@@ -347,6 +369,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making Forvo Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   //// Forvo dictionaries
 
   {
@@ -356,6 +380,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making Programs Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   //// Programs
   {
     vector< sptr< Dictionary::Class > > dicts =
@@ -364,6 +390,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making VoiceEngines Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   //// Text to Speech
   {
     vector< sptr< Dictionary::Class > > dicts =
@@ -372,6 +400,8 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
+  splash.showMessage(LoadDictionaries::tr("Making DictServer Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
   {
     vector< sptr< Dictionary::Class > > dicts =
       DictServer::makeDictionaries( cfg.dictServers );
@@ -422,9 +452,17 @@ void loadDictionaries( QWidget * parent, bool showInitially,
   }
 
   // Run deferred inits
+  splash.showMessage(LoadDictionaries::tr("Initing Dictionaries ..."), Qt::AlignCenter);
+  qApp->processEvents();
 
   if ( doDeferredInit_ )
     doDeferredInit( dictionaries );
+
+  if(canHideParent)
+    parent->show();
+  splash.showMessage(LoadDictionaries::tr("Loading Done."), Qt::AlignCenter);
+  qApp->processEvents();
+  splash.finish(parent);
 }
 
 void doDeferredInit( std::vector< sptr< Dictionary::Class > > & dictionaries )

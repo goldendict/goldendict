@@ -21,7 +21,7 @@ WindowsStyle & WindowsStyle::instance()
 }
 
 #endif
-
+/*
 Initializing::Initializing( QWidget * parent, bool showOnStartup ): QDialog( parent )
 {
   ui.setupUi( this );
@@ -91,5 +91,5 @@ Initializing::~Initializing()
   if( oldBarStyle )
     ui.progressBar->setStyle( oldBarStyle );
 }
-
 #endif
+*/

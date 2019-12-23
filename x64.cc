@@ -15,7 +15,7 @@ PROCESS_INFORMATION pInfo;
 #ifndef Q_OS_WIN64
 bool isWow64()
 {
-    static LPFN_ISWOW64PROCESS fnIsWow64Process;
+    static LPFN_ISWOW64PROCESS fnIsWow64Process = NULL;
     BOOL bIsWow64 = FALSE;
 
     if( NULL == fnIsWow64Process )

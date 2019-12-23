@@ -26,7 +26,7 @@ private:
 };
 
 #endif
-
+/*
 class Initializing: public QDialog
 {
   Q_OBJECT
@@ -52,6 +52,6 @@ private:
 
   Ui::Initializing ui;
 };
-
+*/
 #endif
 
