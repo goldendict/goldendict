@@ -15,17 +15,10 @@
 class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
   Q_OBJECT
-
+  Config::Class const & cfg_;
   QStringList nameFilters;
-  Config::Paths const & paths;
-  Config::SoundDirs const & soundDirs;
-  Config::Hunspell const & hunspell;
-  Config::Transliteration const & transliteration;
   std::vector< sptr< Dictionary::Class > > dictionaries;
   std::string exceptionText;
-  int maxPictureWidth;
-  unsigned int maxHeadwordSize;
-  unsigned int maxHeadwordToExpand;
 
 protected:
   virtual void run();

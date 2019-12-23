@@ -50,13 +50,8 @@ using std::set;
 using std::string;
 using std::vector;
 
-LoadDictionaries::LoadDictionaries( Config::Class const & cfg ):
-  paths( cfg.paths ), soundDirs( cfg.soundDirs ), hunspell( cfg.hunspell ),
-  transliteration( cfg.transliteration ),
-  exceptionText( "Load did not finish" ), // Will be cleared upon success
-  maxPictureWidth( cfg.maxPictureWidth ),
-  maxHeadwordSize( cfg.maxHeadwordSize ),
-  maxHeadwordToExpand( cfg.maxHeadwordsToExpand )
+LoadDictionaries::LoadDictionaries( Config::Class const & cfg ): cfg_(cfg),
+  exceptionText( "Load did not finish" ) // Will be cleared upon success
 {
   // Populate name filters
 
@@ -81,14 +76,14 @@ void LoadDictionaries::run()
   try
   {
     emit showMessage(tr("Handling User's Dictionaries ..."));
-    for( Config::Paths::const_iterator i = paths.begin(); i != paths.end(); ++i )
+    for( Config::Paths::const_iterator i = cfg_.paths.begin(); i != cfg_.paths.end(); ++i )
       handlePath( *i );
 
     emit showMessage(tr("Making Sound Dictionaries ..."));
     // Make soundDirs
     {
       vector< sptr< Dictionary::Class > > soundDirDictionaries =
-        SoundDir::makeDictionaries( soundDirs, FsEncoding::encode( Config::getIndexDir() ), *this );
+        SoundDir::makeDictionaries( cfg_.soundDirs, FsEncoding::encode( Config::getIndexDir() ), *this );
 
       dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
                            soundDirDictionaries.end() );
@@ -98,7 +93,7 @@ void LoadDictionaries::run()
     // Make hunspells
     {
       vector< sptr< Dictionary::Class > > hunspellDictionaries =
-        HunspellMorpho::makeDictionaries( hunspell );
+        HunspellMorpho::makeDictionaries( cfg_.hunspell );
 
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
@@ -149,7 +144,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   {
     vector< sptr< Dictionary::Class > > stardictDictionaries =
-      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
+      Stardict::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, cfg_.maxHeadwordsToExpand );
 
     dictionaries.insert( dictionaries.end(), stardictDictionaries.begin(),
                          stardictDictionaries.end() );
@@ -166,7 +161,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   {
     vector< sptr< Dictionary::Class > > dslDictionaries =
       Dsl::makeDictionaries(
-          allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxPictureWidth, maxHeadwordSize );
+          allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, cfg_.maxPictureWidth, cfg_.maxHeadwordSize );
 
     dictionaries.insert( dictionaries.end(), dslDictionaries.begin(),
                          dslDictionaries.end() );
@@ -195,7 +190,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   }
   {
     vector< sptr< Dictionary::Class > > aardDictionaries =
-      Aard::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
+      Aard::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, cfg_.maxHeadwordsToExpand );
 
     dictionaries.insert( dictionaries.end(), aardDictionaries.begin(),
                          aardDictionaries.end() );
@@ -224,7 +219,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 #ifdef MAKE_ZIM_SUPPORT
   {
     vector< sptr< Dictionary::Class > > zimDictionaries =
-      Zim::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
+      Zim::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, cfg_.maxHeadwordsToExpand );
 
     dictionaries.insert( dictionaries.end(), zimDictionaries.begin(),
                          zimDictionaries.end() );
@@ -233,7 +228,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 #ifdef MAKE_SLOB_SUPPORT
   {
     vector< sptr< Dictionary::Class > > slobDictionaries =
-      Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, maxHeadwordToExpand );
+      Slob::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this, cfg_.maxHeadwordsToExpand );
 
     dictionaries.insert( dictionaries.end(), slobDictionaries.begin(),
                          slobDictionaries.end() );
