@@ -28,11 +28,11 @@ signals:
                    const QColor &color = Qt::darkMagenta);
 
 public:
+  ~LoadDictionaries(){}
   virtual void indexingDictionary( std::string const & dictionaryName ) throw();
 
 private:
   LoadDictionaries( Config::Class const & cfg );
-
   std::vector< sptr< Dictionary::Class > > const & getDictionaries() const
   { return dictionaries; }
 
