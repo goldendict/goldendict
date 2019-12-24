@@ -363,7 +363,7 @@ FORMS += groups.ui \
     dictgroupwidget.ui \
     mainwindow.ui \
     sources.ui \
-    initializing.ui \
+#    initializing.ui \
     scanpopup.ui \
     articleview.ui \
     preferences.ui \

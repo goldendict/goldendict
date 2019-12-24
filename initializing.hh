@@ -3,7 +3,10 @@
 
 #ifndef __INITIALIZING_HH_INCLUDED__
 #define __INITIALIZING_HH_INCLUDED__
+#include <QSplashScreen>
+#include <QMouseEvent>
 
+/*
 #include <QDialog>
 #include "ui_initializing.h"
 
@@ -26,32 +29,28 @@ private:
 };
 
 #endif
-/*
-class Initializing: public QDialog
-{
-  Q_OBJECT
-
-public:
-
-  Initializing( QWidget * parent, bool showOnStartup );
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
-  ~Initializing();
-#endif
-
-public slots:
-
-  void indexing( QString const & dictionaryName );
-
-private:
-
-  virtual void closeEvent( QCloseEvent * );
-  virtual void reject();
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
-  QStyle * oldBarStyle;
-#endif
-
-  Ui::Initializing ui;
-};
 */
+
+class GDSplash : public QSplashScreen
+{
+    Q_OBJECT
+public:
+    GDSplash() : QSplashScreen(QPixmap("./splash.png"), Qt::WindowStaysOnTopHint)
+    {
+        setMinimumSize(QSize(600, 400));
+    }
+    ~GDSplash() {}
+
+    void showUiMsg(const QString &msg, const QColor &color = Qt::black);
+protected Q_SLOTS:
+    void showMessage(const QString &msg, const QColor &color = Qt::black);
+
+protected:
+    void mousePressEvent(QMouseEvent *e)
+    {
+        e->ignore();
+    }
+};
+
 #endif
 

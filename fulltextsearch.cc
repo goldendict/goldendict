@@ -239,7 +239,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.headwordsView->installEventFilter( this );
 
   WordListItemDelegate *delegate = new WordListItemDelegate( ui.headwordsView);
-
+/*
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
   // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
@@ -261,19 +261,21 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   }
 
 #endif
-
+*/
   ui.searchLine->setText( static_cast< MainWindow * >( parent )->getTranslateLineText() );
   ui.searchLine->selectAll();
 }
 
 FullTextSearchDialog::~FullTextSearchDialog()
 {
+    /*
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
   if( oldBarStyle )
     ui.searchProgressBar->setStyle( oldBarStyle );
 
 #endif
+*/
 }
 
 void FullTextSearchDialog::stopSearch()

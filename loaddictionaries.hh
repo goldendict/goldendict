@@ -7,25 +7,28 @@
 #include "initializing.hh"
 #include "config.hh"
 #include "dictionary.hh"
-
 #include <QThread>
 #include <QNetworkAccessManager>
-
+#include <Windows.h>
 /// Use loadDictionaries() function below -- this is a helper thread class
 class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
   Q_OBJECT
+private:
   Config::Class const & cfg_;
   QStringList nameFilters;
   std::vector< sptr< Dictionary::Class > > dictionaries;
   std::string exceptionText;
+  std::string exceptionText1;
+  QSemaphore sWait;
+  QMutex sMutex;
+  int ref_;
 
 protected:
   virtual void run();
 
 signals:
-  void showMessage(const QString &msg, int alignment = Qt::AlignCenter,
-                   const QColor &color = Qt::darkMagenta);
+  void showMessage(const QString &msg, const QColor &color = Qt::darkMagenta);
 
 public:
   ~LoadDictionaries(){}
@@ -42,6 +45,19 @@ private:
   void handlePath( Config::Path const & );
 
 public:
+  void addDictionaries(const std::vector< sptr< Dictionary::Class > > &dics, const std::string &e1) {
+      sMutex.lock();
+      if(!e1.empty())
+      exceptionText1.append(e1);
+      dictionaries.insert( dictionaries.end(), dics.begin(), dics.end() );
+      --ref_;
+      sMutex.unlock();
+      sWait.release();
+  }
+
+  void handleFiles(std::vector< sptr< Dictionary::Class > > &dictionaries,
+                   const std::vector< std::string > &allFiles);
+
   /// Loads all dictionaries mentioned in the configuration passed, into the
   /// supplied array. When necessary, a window would pop up describing the process.
   /// If showInitially is passed as true, the window will always popup.
@@ -57,6 +73,21 @@ public:
   /// loadDictionaries() was previously called with doDeferredInit = false.
   static void doDeferredInit( std::vector< sptr< Dictionary::Class > > & );
 
+};
+
+class LoadDictionariesRunnable : public QRunnable
+{
+public:
+       LoadDictionariesRunnable(LoadDictionaries & _ld, std::vector< std::string > &_allFiles)
+           : ld(_ld), allFiles(_allFiles)
+       {}
+       ~LoadDictionariesRunnable()
+       {}
+       void run();
+
+private:
+    LoadDictionaries &ld;
+    std::vector< std::string > allFiles;
 };
 
 #endif
