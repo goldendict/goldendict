@@ -50,8 +50,8 @@ using std::set;
 using std::string;
 using std::vector;
 
-LoadDictionaries::LoadDictionaries( Config::Class const & cfg ): cfg_(cfg),
-  exceptionText( "Load did not finish" ), // Will be cleared upon success
+LoadDictionaries::LoadDictionaries(Config::Class const & cfg , std::vector<sptr<Dictionary::Class> > &dicts, QElapsedTimer &timer_ )
+: dictionaries(dicts), timer(timer_), cfg_(cfg),
   sWait(0), ref_(0)
 {
   // Populate name filters
@@ -74,11 +74,9 @@ LoadDictionaries::LoadDictionaries( Config::Class const & cfg ): cfg_(cfg),
 
 void LoadDictionaries::run()
 {
-  QElapsedTimer timer;
-  timer.start();
+  emit showMessage(tr("Start Handling Dictionaries ..."));
   try
   {
-    emit showMessage(tr("Handling User's Dictionaries ..."));
     for( Config::Paths::const_iterator i = cfg_.paths.begin(); i != cfg_.paths.end(); ++i )
       handlePath( *i );
 
@@ -86,11 +84,13 @@ void LoadDictionaries::run()
     {
       int left = ref_;
       while(!sWait.tryAcquire(1, 1000))
-        emit showMessage(tr("Indexing Dictionary [ %1 ]\n Time elapsed: %2 s").arg(left).arg(timer.elapsed() / 1000));
+        emit showMessage(tr("Handling User's Dictionary [ %1 ]\nTime elapsed: %2 s").
+                         arg(left).arg(timer.elapsed() / 1000));
     };
-    if(!exceptionText1.empty())
+    if(!exceptionText.empty() && dictionaries.empty())
     {
-        exceptionText = exceptionText1;
+        emit showMessage(tr("Failed to Handle User's Dictionaries.\n%1").
+                         arg(QString::fromUtf8(exceptionText.c_str())));
         return;
     }
 
@@ -113,14 +113,13 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
     }
-
-    exceptionText.clear();
   }
   catch( std::exception & e )
   {
-    exceptionText = e.what();
+    exceptionText.append(e.what());
   }
-  emit showMessage(tr("Loading finished, Time elapsed: %2 s").arg(timer.elapsed() / 1000));
+  emit showMessage(tr("Finished Handling Dictionaries.\nTime elapsed: %2 s").
+                   arg(timer.elapsed() / 1000) );
 }
 
 void LoadDictionaries::handlePath( Config::Path const & path )
@@ -149,8 +148,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   }
   if(allFiles.empty())
      return;
-  emit showMessage(tr("Handling Dictionaries in Path:\n %1").arg(path.path));
 
+  emit showMessage(tr("Handling User's Dictionary in\n%1").arg(path.path));
   //handleFiles(dictionaries, allFiles);
   sMutex.lock();
   ++ref_;
@@ -299,6 +298,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
                        QNetworkAccessManager & dictNetMgr,
                        bool doDeferredInit_ )
 {
+  QElapsedTimer timer;
+  timer.start();
+  const int expiryTimeout = QThreadPool::globalInstance()->expiryTimeout();
+  QThreadPool::globalInstance()->setExpiryTimeout(-1);
+
   if(canHideParent)
     parent->hide();
   GDSplash splash;
@@ -309,7 +313,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   // Start a thread to load all the dictionaries
 
-  LoadDictionaries loadDicts( cfg );
+  LoadDictionaries loadDicts( cfg, dictionaries, timer );
   QObject::connect(&loadDicts, SIGNAL(showMessage(const QString &, const QColor &)),
                    &splash, SLOT(showMessage(const QString &, const QColor &)), Qt::QueuedConnection  );
 
@@ -324,18 +328,21 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   loadDicts.wait();
 
-  if ( loadDicts.getExceptionText().size() )
+  QThreadPool::globalInstance()->setExpiryTimeout(expiryTimeout);
+
+  const string &err = loadDicts.getExceptionText();
+  if ( !err.empty() )
   {
-    if(canHideParent)
-      parent->show();
-    splash.finish(parent);
-    QMessageBox::critical( parent, QCoreApplication::translate( "LoadDictionaries", "Error loading dictionaries" ),
-                           QString::fromUtf8( loadDicts.getExceptionText().c_str() ) );
-
-    return;
+    QMessageBox::critical( &splash, QCoreApplication::translate( "LoadDictionaries", "Error loading dictionaries" ),
+                           QString::fromUtf8( err.c_str() ) );
+    if( dictionaries.empty() )
+    {
+      if(canHideParent)
+        parent->show();
+      splash.finish(parent);
+      return;
+    }
   }
-
-  dictionaries = loadDicts.getDictionaries();
 
   ///// We create transliterations synchronously since they are very simple
 
@@ -383,7 +390,6 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   splash.showUiMsg(LoadDictionaries::tr("Making MediaWiki Dictionaries ..."));
   ///// We create MediaWiki dicts synchronously, since they use netmgr
-
   {
     vector< sptr< Dictionary::Class > > dicts =
       MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
@@ -402,7 +408,6 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   splash.showUiMsg(LoadDictionaries::tr("Making Forvo Dictionaries ..."));
   //// Forvo dictionaries
-
   {
     vector< sptr< Dictionary::Class > > dicts =
       Forvo::makeDictionaries( loadDicts, cfg.forvo, dictNetMgr );
@@ -486,7 +491,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   if(canHideParent)
     parent->show();
-  splash.showUiMsg(LoadDictionaries::tr("Loading Done."));
+  splash.showUiMsg(LoadDictionaries::tr("Loading Done.\nTime elapsed: %2 s").arg(timer.elapsed() / 1000));
   splash.finish(parent);
 }
 

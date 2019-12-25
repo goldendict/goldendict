@@ -14,11 +14,11 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
   Q_OBJECT
 private:
+  std::vector< sptr< Dictionary::Class > > &dictionaries;
+  QElapsedTimer &timer;
   Config::Class const & cfg_;
   QStringList nameFilters;
-  std::vector< sptr< Dictionary::Class > > dictionaries;
   std::string exceptionText;
-  std::string exceptionText1;
   QSemaphore sWait;
   QMutex sMutex;
   int ref_;
@@ -34,9 +34,9 @@ public:
   virtual void indexingDictionary( std::string const & dictionaryName ) throw();
 
 private:
-  LoadDictionaries( Config::Class const & cfg );
-  std::vector< sptr< Dictionary::Class > > const & getDictionaries() const
-  { return dictionaries; }
+  LoadDictionaries( Config::Class const & cfg, std::vector< sptr< Dictionary::Class > > &dicts, QElapsedTimer &timer );
+//  std::vector< sptr< Dictionary::Class > > const & getDictionaries() const
+//  { return dictionaries; }
 
   /// Empty string means to exception occurred
   std::string const & getExceptionText() const
@@ -47,7 +47,7 @@ public:
   void addDictionaries(const std::vector< sptr< Dictionary::Class > > &dics, const std::string &e1) {
       sMutex.lock();
       if(!e1.empty())
-      exceptionText1.append(e1);
+      exceptionText.append(e1);
       dictionaries.insert( dictionaries.end(), dics.begin(), dics.end() );
       --ref_;
       sMutex.unlock();
