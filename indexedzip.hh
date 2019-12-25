@@ -19,6 +19,7 @@ public:
 
   IndexedZip(): zipIsOpen( false )
   {}
+  virtual ~IndexedZip(){}
 
   /// Opens the index. The values are those previously returned by buildIndex().
   using BtreeIndexing::BtreeIndex::openIndex;

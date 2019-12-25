@@ -40,6 +40,7 @@ public:
   {
      setDictionaryName(name_);
   }
+  virtual ~ForvoDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
                                                  unsigned long /*maxResults*/ ) THROW_SPEC( std::exception )

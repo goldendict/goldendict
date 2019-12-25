@@ -45,6 +45,7 @@ public:
     setDictionaryName(name_);
     dictionaryDescription = urlTemplate_;
   }
+  virtual ~WebSiteDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long ) THROW_SPEC( std::exception );

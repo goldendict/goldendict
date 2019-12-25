@@ -35,6 +35,8 @@ struct Group
   /// Creates an empty group.
   Group( QString const & name_ );
 
+  virtual ~Group() {}
+
   /// Makes the configuration group from the current contents.
   Config::Group makeConfigGroup();
 
@@ -62,6 +64,8 @@ struct Groups: public vector< Group >
   /// 0 if there's no such group.
   Group * findGroup( unsigned id );
   Group const * findGroup( unsigned id ) const;
+
+  virtual ~Groups() {}
 };
 
 /// Adds any dictionaries not already present in the given group or in

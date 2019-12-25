@@ -179,10 +179,10 @@ public:
   DslDictionary( string const & id, string const & indexFile,
                  vector< string > const & dictionaryFiles,
                  int maxPictureWidth_ );
+  ~DslDictionary();
 
   virtual void deferredInit();
 
-  ~DslDictionary();
 
   virtual unsigned long getArticleCount() const
   { return idxHeader.articleCount; }

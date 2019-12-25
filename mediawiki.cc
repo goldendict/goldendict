@@ -46,6 +46,7 @@ public:
     if( n == 2 || ( n > 3 && url[ n-3 ] == '/' ) )
       langId = LangCoder::code2toInt( url.mid( n - 2, 2 ).toLatin1().data() );
   }
+  virtual ~MediaWikiDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) THROW_SPEC( std::exception );

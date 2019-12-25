@@ -77,6 +77,7 @@ public:
                       string const & indexFile,
                       vector< string > const & dictionaryFiles,
                       QString const & iconFilename_ );
+  ~SoundDirDictionary(){}
 
   virtual unsigned long getArticleCount() const
   { return idxHeader.soundsCount; }

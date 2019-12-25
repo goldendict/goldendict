@@ -209,6 +209,7 @@ public:
     if( strategies.isEmpty() )
       strategies.append( "prefix" );
   }
+  virtual ~DictServerDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults ) THROW_SPEC( std::exception );

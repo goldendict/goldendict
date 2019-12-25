@@ -30,6 +30,7 @@ public:
   {
      setDictionaryName(prg.name.toUtf8().data());
   }
+  virtual ~ProgramsDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long maxResults )

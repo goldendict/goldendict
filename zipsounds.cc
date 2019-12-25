@@ -109,6 +109,7 @@ public:
 
   ZipSoundsDictionary( string const & id, string const & indexFile,
                        vector< string > const & dictionaryFiles );
+  ~ZipSoundsDictionary(){}
 
   string genName(const string & filename);
 

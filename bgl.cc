@@ -203,6 +203,7 @@ namespace
 
     BglDictionary( string const & id, string const & indexFile,
                    string const & dictionaryFile );
+    ~BglDictionary(){}
 
     virtual unsigned long getArticleCount() const
     { return idxHeader.articleCount; }

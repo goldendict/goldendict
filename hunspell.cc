@@ -57,6 +57,7 @@ public:
   {
       setDictionaryName(name_);
   }
+  virtual ~HunspellDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults )

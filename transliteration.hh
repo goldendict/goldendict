@@ -25,6 +25,7 @@ public:
 
   BaseTransliterationDictionary( string const & id, string const & name,
                                  QIcon icon, bool caseSensitive = true );
+  virtual ~BaseTransliterationDictionary(){}
 
   virtual vector< wstring > getAlternateWritings( wstring const & )
     throw() = 0;
@@ -73,6 +74,7 @@ public:
                              QIcon icon,
                              Table const & table,
                              bool caseSensitive = true );
+  virtual ~TransliterationDictionary(){}
 
   virtual vector< wstring > getAlternateWritings( wstring const & )
     throw();

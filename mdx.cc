@@ -121,6 +121,7 @@ public:
     chunks( chunks ),
     isFileOpen( false )
   {}
+  virtual ~IndexedMdd(){}
 
   /// Opens the index. The values are those previously returned by buildIndex().
   using BtreeIndexing::BtreeIndex::openIndex;

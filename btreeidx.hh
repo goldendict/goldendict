@@ -157,6 +157,7 @@ class BtreeDictionary: public Dictionary::Class, public BtreeIndex
 public:
 
   BtreeDictionary( string const & id, vector< string > const & dictionaryFiles );
+  virtual ~BtreeDictionary(){}
 
   /// Btree-indexed dictionaries are usually a good source for compound searches.
   virtual Dictionary::Features getFeatures() const

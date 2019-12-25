@@ -159,6 +159,7 @@ public:
 
   LsaDictionary( string const & id, string const & indexFile,
                  vector< string > const & dictionaryFiles );
+  ~LsaDictionary(){}
 
   string genName(const string & filename);
 

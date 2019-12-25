@@ -44,6 +44,7 @@ public:
   {
     setDictionaryName(voiceEngine_.name.toUtf8().data());
   }
+  virtual ~VoiceEnginesDictionary(){}
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long maxResults )
