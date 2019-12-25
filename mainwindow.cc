@@ -135,9 +135,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , gdAskMessage( 0xFFFFFFFF )
 #endif
 {
-  if( QThreadPool::globalInstance()->maxThreadCount() < MIN_THREAD_COUNT )
-    QThreadPool::globalInstance()->setMaxThreadCount( MIN_THREAD_COUNT );
-  QThreadPool::globalInstance()->setExpiryTimeout(-1);
+//  if( QThreadPool::globalInstance()->maxThreadCount() < MIN_THREAD_COUNT )
+//    QThreadPool::globalInstance()->setMaxThreadCount( MIN_THREAD_COUNT );
 #ifndef QT_NO_OPENSSL
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
