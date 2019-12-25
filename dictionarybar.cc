@@ -120,13 +120,13 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
   QAction * dictAction = actionAt( event->x(), event->y() );
   if( dictAction )
   {
-    Dictionary::Class *pDict = NULL;
+    sptr< Dictionary::Class > pDict;
     QString id = dictAction->data().toString();
     for( unsigned i = 0; i < allDictionaries.size(); i++ )
     {
       if( id.compare( allDictionaries[ i ]->getId().c_str() ) == 0 )
       {
-        pDict = allDictionaries[ i ].get();
+        pDict = allDictionaries[ i ];
         break;
       }
     }

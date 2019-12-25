@@ -150,6 +150,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   if(allFiles.empty())
      return;
   emit showMessage(tr("Handling Dictionaries in Path:\n %1").arg(path.path));
+
+  //handleFiles(dictionaries, allFiles);
   sMutex.lock();
   ++ref_;
   sMutex.unlock();

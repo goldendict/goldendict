@@ -4249,11 +4249,11 @@ void MainWindow::showDictionaryInfo( const QString & id )
       }
       else if ( result == DictInfo::EDIT_DICTIONARY)
       {
-        editDictionary( dictionaries[x].get() );
+        editDictionary( dictionaries[x] );
       }
       else if( result == DictInfo::SHOW_HEADWORDS )
       {
-        showDictionaryHeadwords( owner, dictionaries[x].get() );
+        showDictionaryHeadwords( owner, dictionaries[x] );
       }
 
       break;
@@ -4275,13 +4275,13 @@ void MainWindow::showDictionaryHeadwords( const QString & id )
   {
     if( dictionaries[ x ]->getId() == id.toUtf8().data() )
     {
-      showDictionaryHeadwords( owner, dictionaries[ x ].get() );
+      showDictionaryHeadwords( owner, dictionaries[ x ] );
       break;
     }
   }
 }
 
-void MainWindow::showDictionaryHeadwords( QWidget * owner, Dictionary::Class * dict )
+void MainWindow::showDictionaryHeadwords( QWidget * owner, sptr< Dictionary::Class > dict )
 {
   if( owner && owner != this )
   {
@@ -4336,7 +4336,7 @@ void MainWindow::focusArticleView()
   }
 }
 
-void MainWindow::editDictionary( Dictionary::Class * dict )
+void MainWindow::editDictionary( sptr< Dictionary::Class > dict )
 {
   QString dictFilename = dict->getMainFilename();
   if( !cfg.editDictionaryCommandLine.isEmpty() && !dictFilename.isEmpty() )
@@ -4415,27 +4415,27 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
   if( item )
   {
     QString id = item->data( Qt::UserRole ).toString();
-    Dictionary::Class *pDict = NULL;
+    sptr< Dictionary::Class > pDict;
 
     for( unsigned i = 0; i < dictionaries.size(); i++ )
     {
       if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
       {
-        pDict = dictionaries[ i ].get();
+        pDict = dictionaries[ i ];
         break;
       }
     }
 
-    if( pDict == NULL )
+    if( !pDict )
       return;
 
     if( !pDict->isLocalDictionary() )
     {
       if ( scanPopup )
-        scanPopup.get()->blockSignals( true );
+        scanPopup->blockSignals( true );
       showDictionaryInfo( id );
       if ( scanPopup )
-        scanPopup.get()->blockSignals( false );
+        scanPopup->blockSignals( false );
     }
     else
     {
@@ -4844,7 +4844,7 @@ void MainWindow::userDictNameChanged(const QString & id , const QString &uname)
   QDomElement root = qdd.createElement("UName");
   qdd.appendChild(root);
 
-  foreach (sptr< Dictionary::Class > dict, dictionaries) {
+  foreach (const sptr< Dictionary::Class > &dict, dictionaries) {
       const string id = dict->getId();
       const string name = dict->getName();
       const string uname = dict->getDescName();
@@ -4879,7 +4879,7 @@ void MainWindow::loadUserDictName()
         QDomElement node=list.at(i).toElement();
         maps.insert(node.attribute("id").toUtf8().data(), node.attribute("uname").toUtf8().data());
     }
-    foreach (sptr< Dictionary::Class > dict, dictionaries) {
+    foreach (const sptr< Dictionary::Class > &dict, dictionaries) {
         const string id = dict->getId();
         if(maps.contains(id))
             dict->setUserDictName(maps.value(id));

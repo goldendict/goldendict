@@ -252,7 +252,7 @@ private:
 
   void fillWordListFromHistory();
 
-  void showDictionaryHeadwords( QWidget * owner, Dictionary::Class * dict );
+  void showDictionaryHeadwords( QWidget * owner, sptr<Dictionary::Class> dict );
 
   QString unescapeTabHeader( QString const & header );
 
@@ -287,7 +287,7 @@ private slots:
 
   void openDictionaryFolder( QString const & id );
 
-  void editDictionary ( Dictionary::Class * dict );
+  void editDictionary ( sptr<Dictionary::Class> dict );
 
   void showFTSIndexingName( QString const & name );
 

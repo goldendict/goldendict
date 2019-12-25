@@ -20,14 +20,14 @@ class DictHeadwords : public QDialog
 
 public:
   explicit DictHeadwords( QWidget * parent, Config::Class & cfg_,
-                          Dictionary::Class * dict_ );
+                          sptr< Dictionary::Class > dict_ );
   virtual ~DictHeadwords();
 
-  void setup( Dictionary::Class * dict_ );
+  void setup(sptr<Dictionary::Class> dict_ );
 
 protected:
   Config::Class & cfg;
-  Dictionary::Class * dict;
+  sptr< Dictionary::Class > dict;
   QStringList headers;
   QStringListModel * model;
   QSortFilterProxyModel * proxy;

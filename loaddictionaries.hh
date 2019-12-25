@@ -4,12 +4,11 @@
 #ifndef __LOADDICTIONARIES_HH_INCLUDED__
 #define __LOADDICTIONARIES_HH_INCLUDED__
 
-#include "initializing.hh"
 #include "config.hh"
 #include "dictionary.hh"
 #include <QThread>
-#include <QNetworkAccessManager>
-#include <Windows.h>
+class QNetworkAccessManager;
+
 /// Use loadDictionaries() function below -- this is a helper thread class
 class LoadDictionaries: public QThread, public Dictionary::Initializing
 {
