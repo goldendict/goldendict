@@ -88,13 +88,11 @@ private:
   // crashes were discovered later when using several Hunspell dictionaries
   // simultaneously, and we've switched to have a single mutex for all hunspell
   // calls - evidently it's not really reentrant.
-  static Mutex & getHunspellMutex()
-  {
-    static Mutex mutex;
-    return mutex;
-  }
-//  Mutex hunspellMutex;
+
+  static Mutex hunspellMutex;
 };
+
+Mutex HunspellDictionary::hunspellMutex;
 
 /// Encodes the given string to be passed to the hunspell object. May throw
 /// Iconv::Ex
@@ -152,7 +150,7 @@ vector< wstring > HunspellDictionary::getAlternateWritings( wstring const & word
 
   if( containsWhitespace( word ) )
   {
-    getSuggestionsForExpression( word, results, getHunspellMutex(), hunspell );
+    getSuggestionsForExpression( word, results, HunspellDictionary::hunspellMutex, hunspell );
   }
 
   return results;
@@ -356,7 +354,7 @@ sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
                                                     wstring const &, bool )
   THROW_SPEC( std::exception )
 {
-  return sptr< DataRequest >(new HunspellArticleRequest( word, getHunspellMutex(), hunspell ));
+  return sptr< DataRequest >(new HunspellArticleRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
 }
 
 /// HunspellDictionary::findHeadwordsForSynonym()
@@ -452,7 +450,7 @@ void HunspellHeadwordsRequest::run()
 
     Mutex::Lock _( dataMutex );
     for( unsigned i = 0; i < results.size(); i++ )
-      matches.push_back( results[ i ] );
+      matches.push_back( WordMatch(results[ i ]) );
 
   }
   else
@@ -464,7 +462,7 @@ void HunspellHeadwordsRequest::run()
       Mutex::Lock _( dataMutex );
 
       for( int x = 0; x < suggestions.size(); ++x )
-        matches.push_back( suggestions[ x ] );
+        matches.push_back( WordMatch(suggestions[ x ]) );
     }
   }
 
@@ -501,7 +499,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 
       wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
 
-      static QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:)(?!-)(?!\\+))|\\S+)+)" );
+      static const QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:)(?!-)(?!\\+))|\\S+)+)" );
 
 #ifdef OLD_HUNSPELL_INTERFACE
       for( int x = 0; x < suggestionsCount; ++x )
@@ -556,7 +554,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
   THROW_SPEC( std::exception )
 {
-  return sptr< WordSearchRequest >(new HunspellHeadwordsRequest( word, getHunspellMutex(), hunspell ));
+  return sptr< WordSearchRequest >(new HunspellHeadwordsRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
 }
 
 
@@ -675,7 +673,7 @@ sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
   THROW_SPEC( std::exception )
 {
-  return sptr< WordSearchRequest >(new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell ));
+  return sptr< WordSearchRequest >(new HunspellPrefixMatchRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
 }
 
 void getSuggestionsForExpression( wstring const & expression,
@@ -897,18 +895,15 @@ vector< DataFiles > findDataFiles( QString const & path )
     if ( dictBaseId.size() == 2 )
       localizedName = Language::localizedNameForId( LangCoder::code2toInt( dictBaseId.toLatin1().data() ) );
 
-    QString dictName = dictId;
-
     if ( localizedName.size() )
     {
-      dictName = localizedName;
-
       if ( dictId.size() > 2 && ( dictId[ 2 ] == '-' || dictId[ 2 ] == '_' ) &&
            dictId.mid( 3 ).toLower() != dictBaseId )
-        dictName += " (" + dictId.mid( 3 ) + ")";
+        localizedName += " (" + dictId.mid( 3 ) + ")";
     }
 
-    dictName = QCoreApplication::translate( "Hunspell", "%1 Morphology" ).arg( dictName );
+    const QString dictName = QCoreApplication::translate( "Hunspell", "%1 Morphology" ).
+            arg( localizedName.isEmpty() ? dictId : localizedName );
 
     if ( presentNames.insert( dictName ).second )
     {
