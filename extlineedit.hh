@@ -42,7 +42,7 @@ public:
     enum Side { Left = 0, Right = 1 };
 
     explicit ExtLineEdit(QWidget * parent = 0);
-    ~ExtLineEdit();
+    virtual ~ExtLineEdit();
 
     QPixmap buttonPixmap(Side side) const;
     void setButtonPixmap(Side side, const QPixmap &pixmap);

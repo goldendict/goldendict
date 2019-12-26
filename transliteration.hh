@@ -51,6 +51,7 @@ public:
 
   Table(): maxEntrySize( 0 )
   {}
+  virtual ~Table(){}
 
   unsigned getMaxEntrySize() const
   { return maxEntrySize; }

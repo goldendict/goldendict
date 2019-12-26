@@ -10,7 +10,7 @@
 class KeyboardState
 {
 public:
-
+  virtual ~KeyboardState(){}
   enum Modifier
   {
     Alt = 1,

@@ -135,7 +135,7 @@ unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip
 #endif
 
 
-ProcessWrapper::ProcessWrapper()
-{
-}
+//ProcessWrapper::ProcessWrapper()
+//{
+//}
 

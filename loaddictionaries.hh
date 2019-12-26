@@ -77,12 +77,12 @@ public:
 class LoadDictionariesRunnable : public QRunnable
 {
 public:
-       LoadDictionariesRunnable(LoadDictionaries & _ld, std::vector< std::string > &_allFiles)
-           : ld(_ld), allFiles(_allFiles)
-       {}
-       ~LoadDictionariesRunnable()
-       {}
-       void run();
+    LoadDictionariesRunnable(LoadDictionaries & _ld, std::vector< std::string > &_allFiles)
+        : ld(_ld), allFiles(_allFiles)
+    {}
+    ~LoadDictionariesRunnable()
+    {}
+    void run();
 
 private:
     LoadDictionaries &ld;

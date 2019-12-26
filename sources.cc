@@ -21,7 +21,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   textToSpeechSource( NULL ),
 #endif
   itemDelegate( new QItemDelegate( this ) ),
-  itemEditorFactory( new QItemEditorFactory() ),
+//  itemEditorFactory( new QItemEditorFactory() ),
   mediawikisModel( this, cfg.mediawikis ),
   webSitesModel( this, cfg.webSites ),
   dictServersModel( this, cfg.dictServers ),
@@ -41,6 +41,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   QItemEditorCreatorBase * programTypeEditorCreator =
          new QStandardItemEditorCreator< ProgramTypeEditor >();
 
+  QItemEditorFactory *itemEditorFactory = new QItemEditorFactory();
   itemEditorFactory->registerEditor( QVariant::Int, programTypeEditorCreator );
 
   itemDelegate->setItemEditorFactory( itemEditorFactory );

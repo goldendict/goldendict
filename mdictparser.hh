@@ -111,6 +111,7 @@ public:
   class RecordHandler
   {
   public:
+    virtual ~RecordHandler(){}
     virtual void handleRecord( QString const & name, RecordInfo const & recordInfo ) = 0;
   };
 

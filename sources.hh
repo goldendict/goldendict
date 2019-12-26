@@ -298,7 +298,7 @@ private:
 #endif
 
   QItemDelegate * itemDelegate;
-  QItemEditorFactory * itemEditorFactory;
+  //QItemEditorFactory * itemEditorFactory;
 
   MediaWikisModel mediawikisModel;
   WebSitesModel webSitesModel;

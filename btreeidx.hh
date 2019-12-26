@@ -77,6 +77,7 @@ class BtreeIndex
 public:
 
   BtreeIndex();
+  virtual ~BtreeIndex() {}
 
   /// Opens the index. The file reference is saved to be used for
   /// subsequent lookups.

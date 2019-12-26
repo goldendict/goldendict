@@ -4,7 +4,7 @@
 class ProcessWrapper
 {
 public:
-  ProcessWrapper();
+//  ProcessWrapper();
 
   static unsigned int findProcess(const char *name, unsigned int pid_skip = 0);
 	static unsigned int currentProcessId();

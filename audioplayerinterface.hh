@@ -12,6 +12,7 @@ class AudioPlayerInterface : public QObject
 {
   Q_OBJECT
 public:
+  virtual ~AudioPlayerInterface(){}
   /// Stops current playback if any, copies the audio buffer at [data, data + size),
   /// then plays this buffer. It is safe to invalidate \p data after this function call.
   /// Returns an error message in case of immediate failure; an empty string

@@ -29,7 +29,7 @@ protected:
 public:
 
   SplitFile();
-  ~SplitFile();
+  virtual ~SplitFile();
 
   virtual void setFileName( const QString & name ) = 0;
   void getFilenames( vector< string > & names ) const;

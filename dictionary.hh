@@ -137,6 +137,7 @@ public:
 
   WordSearchRequest(): uncertain( false )
   {}
+  virtual ~WordSearchRequest(){}
 
   /// Returns the number of matches found. The value can grow over time
   /// unless isFinished() is true.
@@ -177,7 +178,7 @@ class DataRequest: public Request
   Q_OBJECT
 
 public:
-
+  virtual ~DataRequest(){}
   /// Returns the number of bytes read, with a -1 meaning that so far it's
   /// uncertain whether resource even exists or not, and any non-negative value
   /// meaning that that amount of bytes is not available.
