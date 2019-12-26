@@ -4248,11 +4248,11 @@ void MainWindow::showDictionaryInfo( const QString & id )
       }
       else if ( result == DictInfo::EDIT_DICTIONARY)
       {
-        editDictionary( dictionaries[x] );
+        editDictionary( dictionaries[x].get() );
       }
       else if( result == DictInfo::SHOW_HEADWORDS )
       {
-        showDictionaryHeadwords( owner, dictionaries[x] );
+        showDictionaryHeadwords( owner, dictionaries[x].get() );
       }
 
       break;
@@ -4274,13 +4274,13 @@ void MainWindow::showDictionaryHeadwords( const QString & id )
   {
     if( dictionaries[ x ]->getId() == id.toUtf8().data() )
     {
-      showDictionaryHeadwords( owner, dictionaries[ x ] );
+      showDictionaryHeadwords( owner, dictionaries[ x ].get() );
       break;
     }
   }
 }
 
-void MainWindow::showDictionaryHeadwords( QWidget * owner, sptr< Dictionary::Class > dict )
+void MainWindow::showDictionaryHeadwords( QWidget * owner, Dictionary::Class *dict )
 {
   if( owner && owner != this )
   {
@@ -4335,7 +4335,7 @@ void MainWindow::focusArticleView()
   }
 }
 
-void MainWindow::editDictionary( sptr< Dictionary::Class > dict )
+void MainWindow::editDictionary( Dictionary::Class *dict )
 {
   QString dictFilename = dict->getMainFilename();
   if( !cfg.editDictionaryCommandLine.isEmpty() && !dictFilename.isEmpty() )
@@ -4414,13 +4414,13 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
   if( item )
   {
     QString id = item->data( Qt::UserRole ).toString();
-    sptr< Dictionary::Class > pDict;
+    Dictionary::Class *pDict = NULL;
 
     for( unsigned i = 0; i < dictionaries.size(); i++ )
     {
       if( id.compare( dictionaries[ i ]->getId().c_str() ) == 0 )
       {
-        pDict = dictionaries[ i ];
+        pDict = dictionaries[ i ].get();
         break;
       }
     }

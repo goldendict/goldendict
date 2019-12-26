@@ -21,7 +21,7 @@
 #define AUTO_APPLY_LIMIT 150000
 
 DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
-                              sptr<Dictionary::Class> dict_ ) :
+                              Dictionary::Class *dict_ ) :
   QDialog(parent)
 , cfg( cfg_ )
 , dict( dict_ )
@@ -122,7 +122,7 @@ DictHeadwords::~DictHeadwords()
 {
 }
 
-void DictHeadwords::setup( sptr< Dictionary::Class > dict_ )
+void DictHeadwords::setup( Dictionary::Class *dict_ )
 {
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
