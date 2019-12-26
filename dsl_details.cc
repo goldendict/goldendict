@@ -40,7 +40,7 @@ int wcscasecmp( const wchar *s1, const wchar *s2 )
 
 #endif
 
-static DSLLangCode LangCodes[] =
+static const DSLLangCode LangCodes[] =
 {
   { 1, "en" },
   { 1033, "en" },

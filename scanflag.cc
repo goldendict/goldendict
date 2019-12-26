@@ -4,7 +4,7 @@
 #include "scanflag.hh"
 #include "ui_scanflag.h"
 
-static Qt::WindowFlags popupWindowFlags =
+static const Qt::WindowFlags popupWindowFlags =
 
 Qt::ToolTip | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #if QT_VERSION >= 0x050000
