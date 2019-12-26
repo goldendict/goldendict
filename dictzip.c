@@ -144,9 +144,6 @@
 #define dict_data_filter( ... )
 #define PRINTF( ... )
 
-#define xmalloc malloc
-#define xfree free
-
 static const char * _err_programName = "GoldenDict";
 
 #define log_error( ... )
@@ -347,7 +344,7 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
 	    fclose( str );
 	    return DZ_ERR_INVALID_FORMAT;
 	 }
-	 header->chunks = xmalloc( sizeof( header->chunks[0] )
+     header->chunks = xmalloc( sizeof( int )
 				   * header->chunkCount );
 	 if( header->chunks == 0 ) {
 	   return DZ_ERR_NOMEMORY;
@@ -374,7 +371,7 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
 	       "too long FNAME field in dzip file \"%s\"\n", filename);
 	    fclose( str );
 	    if( header->chunks )
-	      free( header->chunks );
+          xfree( header->chunks );
 	    return DZ_ERR_INVALID_FORMAT;
 	 }
       }
@@ -397,7 +394,7 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
 	       "too long COMMENT field in dzip file \"%s\"\n", filename);
 	    fclose( str );
 	    if( header->chunks )
-	      free( header->chunks );
+          xfree( header->chunks );
 	    return DZ_ERR_INVALID_FORMAT;
 	 }
       }
@@ -422,7 +419,7 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
 		    ftell( str ), header->headerLength + 1 );
       fclose( str );
       if( header->chunks )
-        free( header->chunks );
+        xfree( header->chunks );
       return DZ_ERR_INVALID_FORMAT;
    }
 
@@ -438,11 +435,11 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
    header->compressedLength = ftell( str );
 
 				/* Compute offsets */
-   header->offsets = xmalloc( sizeof( header->offsets[0] )
+   header->offsets = xmalloc( sizeof( unsigned long )
 			      * header->chunkCount );
    if( header->offsets == 0 ) {
      if( header->chunks )
-       free( header->chunks );
+       xfree( header->chunks );
      return DZ_ERR_NOMEMORY;
    }
 
@@ -573,7 +570,7 @@ void dict_data_close( dictData *header )
 	 xfree (header -> cache [i].inBuffer);
    }
 
-   memset( header, 0, sizeof( struct dictData ) );
+   //memset( header, 0, sizeof( struct dictData ) );
    xfree( header );
 }
 

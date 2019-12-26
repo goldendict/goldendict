@@ -714,6 +714,7 @@ void GlsDictionary::loadArticleText( uint32_t address,
   else
   {
     string articleData = Iconv::toUtf8( GlsScanner::getEncodingNameFor( Encoding( idxHeader.glsEncoding ) ), articleBody, articleSize );
+    xfree(articleBody);
     string::size_type start_pos = 0, end_pos = 0;
 
     for( ; ; )

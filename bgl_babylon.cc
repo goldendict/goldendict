@@ -148,15 +148,22 @@ bool Babylon::readBlock( bgl_block &block )
   block.length = block.length < 4 ? bgl_readnum( block.length + 1 ) : block.length - 4 ;
   if( block.length )
   {
-    block.data = (char *)malloc( block.length );
+    if(block.length > block.capacity)
+    {
+      block.capacity = block.length;
+      block.data = (char *)realloc( block.data, block.length );
+    }
     if( !block.data )
+    {
+      block.capacity = 0;
       throw exAllocation();
+    }
 
     unsigned res = gzread( file, block.data, block.length );
     if( block.length != res )
     {
-      free( block.data );
-      block.length = 0;
+      //free( block.data );
+      //block.length = 0;
       gzclearerr( file );
       return false;
     }
@@ -191,6 +198,12 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
   if( file == NULL ) return false;
 
   bgl_block block;
+  memset(&block, 0, sizeof(bgl_block));
+  block.capacity = 1024 * 512;
+  block.data = (char *)malloc( block.capacity );
+  if( !block.data )
+    return false;
+
   unsigned int pos;
   unsigned int type;
   std::string headword;
@@ -304,8 +317,8 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
       default:
         ;
     }
-    if( block.length ) free( block.data );
   }
+  if( block.data ) free( block.data );
   gzseek( file, 0, SEEK_SET );
 
   if ( isUtf8File )
@@ -337,6 +350,12 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
   }
 
   bgl_block block;
+  memset(&block, 0, sizeof(bgl_block));
+  block.capacity = 1024 * 512;
+  block.data = (char *)malloc( block.capacity );
+  if( !block.data )
+    return entry;
+
   unsigned int len, pos;
   unsigned int alts_num;
   std::string headword, displayedHeadword;
@@ -720,7 +739,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
 
         entry.alternates = alternates;
 
-        if( block.length ) free( block.data );
+        if( block.data ) free( block.data );
 
         // Some dictionaries can in fact have an empty headword, so we
         // make it non-empty here to differentiate between the end of entries.
@@ -733,8 +752,8 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
       default:
         ;
     }
-    if( block.length ) free( block.data );
   }
+  if( block.data ) free( block.data );
   entry.headword = "";
   return entry;
 }

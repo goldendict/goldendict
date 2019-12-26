@@ -154,7 +154,7 @@ struct Cache
   char * data;
   quint32 clusterNumber;
   int stamp;
-  int count, size;
+  size_t count, size;
 
   Cache() :
     data( 0 ),
@@ -211,7 +211,7 @@ void ZimFile::setFileName( const QString & name )
 {
   close();
   memset( &zimHeader, 0, sizeof( zimHeader ) );
-  clearCache();
+  //clearCache();
 
   appendFile( name );
 
@@ -359,12 +359,13 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   if( blobCount > 1 )
   {
     // Fill cache
-    int size = decompressedData.size();
+    size_t size = decompressedData.size();
     if( cache[ target ].count < size )
     {
       if( cache[ target ].data )
-        free( cache[ target ].data );
-      cache[ target ].data = ( char * )malloc( size );
+        cache[ target ].data = (char*)realloc( cache[ target ].data, size );
+      else
+        cache[ target ].data = ( char * )malloc( size );
       if( cache[ target ].data )
         cache[ target ].size = size;
       else

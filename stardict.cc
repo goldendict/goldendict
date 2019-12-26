@@ -1135,7 +1135,7 @@ void StardictDictionary::loadArticle( uint32_t address,
     }
   }
 
-  free( articleBody );
+  xfree( articleBody );
 }
 
 QString const& StardictDictionary::getDescription()

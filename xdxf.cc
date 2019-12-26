@@ -666,7 +666,7 @@ void XdxfDictionary::loadArticle( uint32_t address,
   articleText = Xdxf2Html::convert( string( articleBody ), Xdxf2Html::XDXF, idxHeader.hasAbrv ? &abrv : NULL, this,
                                     &resourceZip, fType == Logical, idxHeader.revisionNumber, headword );
 
-  free( articleBody );
+  xfree( articleBody );
 }
 
 class GzippedFile: public QIODevice
@@ -861,7 +861,7 @@ void checkArticlePosition( GzippedFile & gzFile,
     if( data == NULL )
         return;
     QString s = QString::fromUtf8( data );
-    free( data );
+    xfree( data );
     int n = s.lastIndexOf( "</ar" );
     if( n > 0 )
         *pSize -= s.size() - n;

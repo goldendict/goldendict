@@ -36,6 +36,8 @@ extern "C"
 {
 #endif
 
+#define xmalloc malloc
+#define xfree free
 
 /* Excerpts from defs.h */
 

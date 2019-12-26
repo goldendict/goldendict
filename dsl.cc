@@ -573,7 +573,7 @@ void DslDictionary::loadArticle( uint32_t address,
           DslIconv::toWstring(
             DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
             articleBody, articleSize );
-        free( articleBody );
+        xfree( articleBody );
 
         // Strip DSL comments
         bool b = false;
@@ -581,7 +581,7 @@ void DslDictionary::loadArticle( uint32_t address,
       }
       catch( ... )
       {
-        free( articleBody );
+        xfree( articleBody );
         throw;
       }
     }
@@ -1321,7 +1321,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
         DslIconv::toWstring(
           DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
           articleBody, articleSize );
-      free( articleBody );
+      xfree( articleBody );
 
       // Strip DSL comments
       bool b = false;
@@ -1329,7 +1329,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     }
     catch( ... )
     {
-      free( articleBody );
+      xfree( articleBody );
       return;
     }
   }
