@@ -79,12 +79,11 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString &appId)
         prefix = id.section(QLatin1Char('/'), -1);
     }
     prefix.remove(QRegExp("[^a-zA-Z]"));
-    prefix.truncate(6);
+    prefix.truncate(appId.size());
 
     QByteArray idc = id.toUtf8();
     quint16 idNum = qChecksum(idc.constData(), idc.size());
-    socketName = QLatin1String("qtsingleapp-") + prefix
-                 + QLatin1Char('-') + QString::number(idNum, 16);
+    socketName = prefix + QLatin1Char('-') + QString::number(idNum, 16);
 
 #if defined(Q_OS_WIN)
     if (!pProcessIdToSessionId) {
