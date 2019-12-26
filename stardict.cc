@@ -411,7 +411,7 @@ private:
 
     void translatePW(QString& s){
         const int TRANSLATE_TBL_SIZE=5;
-        static PWSyntaxTranslate t[TRANSLATE_TBL_SIZE]={
+        static const PWSyntaxTranslate t[TRANSLATE_TBL_SIZE]={
             PWSyntaxTranslate("&[bB]\\s*\\{([^\\{}&]+)\\}", "<B>\\1</B>"),
             PWSyntaxTranslate("&[iI]\\s*\\{([^\\{}&]+)\\}", "<I>\\1</I>"),
             PWSyntaxTranslate("&[uU]\\s*\\{([^\\{}&]+)\\}", "<U>\\1</U>"),
@@ -422,7 +422,7 @@ private:
         QString old;
         while (s.compare(old) != 0) {
             for (int i = 0; i < TRANSLATE_TBL_SIZE; ++i) {
-                PWSyntaxTranslate& a = t[i];
+                const PWSyntaxTranslate& a = t[i];
                 s.replace(a.re(), a.replacement());
             }
             old = s;
@@ -1601,7 +1601,7 @@ Ifo::Ifo( File::Class & f ):
 {
   static string const versionEq( "version=" );
 
-  static string const booknameEq( "bookname=" );
+  //static string const booknameEq( "bookname=" );
 
   //DPRINTF( "%s<\n", f.gets().c_str() );
   //DPRINTF( "%s<\n", f.gets().c_str() );

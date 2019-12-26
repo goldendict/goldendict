@@ -42,7 +42,7 @@ GermanTable::GermanTable()
 
 sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
-  static GermanTable t;
+  static const GermanTable t;
 
   return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1081",
                       QCoreApplication::translate( "GermanTranslit", "German Transliteration" ).toUtf8().data(),

@@ -12,10 +12,10 @@ class EpwingCharmap
 public:
 
   /// The class is a singleton.
-  static EpwingCharmap & instance();
+  static const EpwingCharmap & instance();
 
   /// Map Epwing extra char to Utf-8
-  QByteArray mapToUtf8( QString const & code );
+  QByteArray mapToUtf8( QString const & code ) const;
 
 private:
   EpwingCharmap();

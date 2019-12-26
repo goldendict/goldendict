@@ -39,7 +39,7 @@ private:
 
 Db const & Db::instance()
 {
-  static Db v;
+  static const Db v;
 
   return v;
 }

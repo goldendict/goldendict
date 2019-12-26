@@ -13,7 +13,7 @@ namespace
   struct Database: public QMap< QString, QString >
   {
     static Database const & instance()
-    { static Database db; return db; }
+    { static const Database db; return db; }
 
   private:
 

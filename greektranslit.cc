@@ -1488,7 +1488,7 @@ GreekTable::GreekTable()
 
 sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
-  static GreekTable t;
+  static const GreekTable t;
 
   return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "baa9e37a1aa69cdb5daca14a48ffe5ae",
                       QCoreApplication::translate( "GreekTranslit", "Greek Transliteration" ).toUtf8().data(),

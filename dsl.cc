@@ -1465,7 +1465,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     // Strip some areas
 
     const int stripTagsNumber = 5;
-    static QString stripTags[ stripTagsNumber ] =
+    static const QString stripTags[ stripTagsNumber ] =
                                                   {
                                                     "s",
                                                     "url",
@@ -1473,7 +1473,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
                                                     "video",
                                                     "preview"
                                                   };
-    static QString stripEndTags[ stripTagsNumber ] =
+    static const QString stripEndTags[ stripTagsNumber ] =
                                                   {
                                                     "[/s]",
                                                     "[/url]",

@@ -397,7 +397,7 @@ string AardDictionary::convert( const string & in )
     text.replace( QRegularExpression( "<a\\s+href=\"bword:([^#\"]+)#([^\"]+)" ),
                   "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
 
-    static QRegularExpression self_closing_divs( "(<div\\s+[^>]*)/>",
+    static const QRegularExpression self_closing_divs( "(<div\\s+[^>]*)/>",
                                                  QRegularExpression::CaseInsensitiveOption );  // <div ... />
     text.replace( self_closing_divs, "\\1></div>" );
 #else
@@ -410,7 +410,7 @@ string AardDictionary::convert( const string & in )
     text.replace( QRegExp( "<a\\s+href=\"bword:([^#\"]+)#([^\"]+)" ),
                   "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
 
-    static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
+    static const QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
     text.replace( self_closing_divs, "\\1></div>" );
 #endif
 

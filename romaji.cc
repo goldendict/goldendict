@@ -427,7 +427,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::Romaji const & r )
     {
       if ( r.enableHiragana )
       {
-        static HepburnHiragana t;
+        static const HepburnHiragana t;
 
         result.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "94eae5a5aaf5b0a900490f4d6b36aac0",
                             QCoreApplication::translate( "Romaji", "Hepburn Romaji for Hiragana" ).toUtf8().data(),
@@ -436,7 +436,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( Config::Romaji const & r )
       
       if ( r.enableKatakana )
       {
-        static HepburnKatakana t;
+        static const HepburnKatakana t;
 
         result.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "3252a35767d3f6e85e3e39069800dd2f",
                             QCoreApplication::translate( "Romaji", "Hepburn Romaji for Katakana" ).toUtf8().data(),

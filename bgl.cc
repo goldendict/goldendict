@@ -748,7 +748,7 @@ void BglArticleRequest::run()
 
   vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
-  static Language::Id hebrew = LangCoder::code2toInt( "he" ); // Hebrew support
+  const Language::Id hebrew = LangCoder::code2toInt( "he" ); // Hebrew support
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {

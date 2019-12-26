@@ -2237,7 +2237,7 @@ bool isPortableVersion() throw()
     {}
   };
 
-  static IsPortable p;
+  static const IsPortable p;
 
   return p.isPortable;
 }

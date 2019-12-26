@@ -756,7 +756,7 @@ void DictServerArticleRequest::run()
             // Retreive MIME headers if any
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            static QRegularExpression contentTypeExpr( "Content-Type\\s*:\\s*text/html",
+            static const QRegularExpression contentTypeExpr( "Content-Type\\s*:\\s*text/html",
                                                        QRegularExpression::CaseInsensitiveOption );
 #else
             QRegExp contentTypeExpr( "Content-Type\\s*:\\s*text/html", Qt::CaseInsensitive );
@@ -798,15 +798,15 @@ void DictServerArticleRequest::run()
               break;
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
+            static const QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                                 QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
-            static QRegularExpression divs_inside_phonetic( "</div([^>]*)><div([^>]*)>",
+            static const QRegularExpression divs_inside_phonetic( "</div([^>]*)><div([^>]*)>",
                                                             QRegularExpression::CaseInsensitiveOption );
-            static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
+            static const QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
                                             QRegularExpression::CaseInsensitiveOption );     // links: {stuff}
-            static QRegularExpression links( "<a href=\"gdlookup://localhost/([^\"]*)\">",
+            static const QRegularExpression links( "<a href=\"gdlookup://localhost/([^\"]*)\">",
                                              QRegularExpression::CaseInsensitiveOption );
-            static QRegularExpression tags( "<[^>]*>",
+            static const QRegularExpression tags( "<[^>]*>",
                                             QRegularExpression::CaseInsensitiveOption );
 #else
             QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...

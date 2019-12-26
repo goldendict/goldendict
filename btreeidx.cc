@@ -65,7 +65,7 @@ BtreeDictionary::BtreeDictionary( string const & id,
 
 string const & BtreeDictionary::ensureInitDone()
 {
-  static string empty;
+  static const string empty;
 
   return empty;
 }

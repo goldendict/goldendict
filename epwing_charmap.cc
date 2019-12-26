@@ -5,13 +5,13 @@
 
 namespace Epwing {
 
-EpwingCharmap & EpwingCharmap::instance()
+const EpwingCharmap &EpwingCharmap::instance()
 {
-  static EpwingCharmap ec;
+  static const EpwingCharmap ec;
   return ec;
 }
 
-QByteArray EpwingCharmap::mapToUtf8( QString const & code )
+QByteArray EpwingCharmap::mapToUtf8( QString const & code ) const
 {
   if( charMap.contains( code ) )
     return QString( charMap[ code ] ).toUtf8();

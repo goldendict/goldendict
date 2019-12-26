@@ -333,19 +333,19 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
       else
       {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-        static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
+        static const QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                             QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
-        static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
+        static const QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
                                         QRegularExpression::CaseInsensitiveOption );     // links: {stuff}
-        static QRegularExpression links( "<a href=\"gdlookup://localhost/([^\"]*)\">",
+        static const QRegularExpression links( "<a href=\"gdlookup://localhost/([^\"]*)\">",
                                          QRegularExpression::CaseInsensitiveOption );
-        static QRegularExpression tags( "<[^>]*>",
+        static const QRegularExpression tags( "<[^>]*>",
                                         QRegularExpression::CaseInsensitiveOption );
 #else
-        static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
-        static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
-        static QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
-        static QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
+        static const QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
+        static const QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
+        static const QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
+        static const QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
 #endif
 
         articleText = string( "<div class=\"dictd_article\"" );
@@ -558,13 +558,13 @@ void DictdDictionary::getArticleText( uint32_t articleAddress, QString & headwor
     else
     {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-      static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
+      static const QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                           QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
-      static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
+      static const QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
                                       QRegularExpression::CaseInsensitiveOption );     // links: {stuff}
 #else
-      static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
-      static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
+      static const QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
+      static const QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
 #endif
 
       string convertedText = Html::preformat( articleBody, isToLanguageRTL() );

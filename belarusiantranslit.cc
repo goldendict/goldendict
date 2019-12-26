@@ -1757,9 +1757,9 @@ public:
 
 std::vector< sptr< Dictionary::Class > > makeDictionaries() THROW_SPEC( std::exception )
 {
-  static BelarusianLatinToClassicTable t0;
-  static BelarusianLatinToSchoolTable t1;
-  static BelarusianSchoolToClassicTable t2;
+  static const BelarusianLatinToClassicTable t0;
+  static const BelarusianLatinToSchoolTable t1;
+  static const BelarusianSchoolToClassicTable t2;
   std::vector< sptr< Dictionary::Class > > dicts;
 
   dicts.push_back( sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "c31b24abf412abc9b23bb40a898f1040",
