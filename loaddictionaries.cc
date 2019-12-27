@@ -51,8 +51,10 @@ using std::string;
 using std::vector;
 
 LoadDictionaries::LoadDictionaries(Config::Class const & cfg , std::vector<sptr<Dictionary::Class> > &dicts, QElapsedTimer &timer_ )
-: dictionaries(dicts), timer(timer_), cfg_(cfg),
-  sWait(0), ref_(0)
+: dictionaries(dicts), timer(timer_), cfg_(cfg)
+#ifdef DICTS_LOADING_CONCURRENT
+  ,sWait(0), ref_(0)
+#endif
 {
   // Populate name filters
 
@@ -74,27 +76,34 @@ LoadDictionaries::LoadDictionaries(Config::Class const & cfg , std::vector<sptr<
 
 void LoadDictionaries::run()
 {
-  emit showMessage(tr("Start Handling Dictionaries ..."));
+  emit showMessage(tr("Start Handling Dictionaries\n..."));
   try
   {
     for( Config::Paths::const_iterator i = cfg_.paths.begin(); i != cfg_.paths.end(); ++i )
       handlePath( *i );
-
+#ifdef DICTS_LOADING_CONCURRENT
     while(ref_)
     {
       int left = ref_;
       while(!sWait.tryAcquire(1, 1000))
-        emit showMessage(tr("Handling User's Dictionary [ %1 ]\nTime elapsed: %2 s").
+        emit showMessage(tr("Handling User's Dictionary: [ %1 ] left\nTime elapsed: %2 s").
                          arg(left).arg(timer.elapsed() / 1000));
     };
+#endif
     if(!exceptionText.empty() && dictionaries.empty())
     {
         emit showMessage(tr("Failed to Handle User's Dictionaries.\n%1").
                          arg(QString::fromUtf8(exceptionText.c_str())));
         return;
     }
+#ifndef DICTS_LOADING_CONCURRENT
+    else
+    {
+        emit showMessage(tr("[ %1 ] User's Dictionaries Handled.\nTime elapsed: %2 s").
+                         arg(dictionaries.size()).arg(timer.elapsed() / 1000) );
+    }
+#endif
 
-    emit showMessage(tr("Making SoundDir Dictionaries ..."));
     // Make soundDirs
     {
       vector< sptr< Dictionary::Class > > soundDirDictionaries =
@@ -102,9 +111,11 @@ void LoadDictionaries::run()
 
       dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
                            soundDirDictionaries.end() );
+      if(!soundDirDictionaries.empty())
+          emit showMessage(tr("[ %1 ] SoundDir Dictionaries Handled.\nTime elapsed: %2 s").
+                           arg(soundDirDictionaries.size()).arg(timer.elapsed() / 1000) );
     }
 
-    emit showMessage(tr("Making HunspellMorpho Dictionaries ..."));
     // Make hunspells
     {
       vector< sptr< Dictionary::Class > > hunspellDictionaries =
@@ -112,13 +123,17 @@ void LoadDictionaries::run()
 
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
+      if(!hunspellDictionaries.empty())
+          emit showMessage(tr("[ %1 ] HunspellMorpho Dictionaries Handled.\nTime elapsed: %2 s").
+                           arg(hunspellDictionaries.size()).arg(timer.elapsed() / 1000) );
     }
   }
   catch( std::exception & e )
   {
     exceptionText.append(e.what());
   }
-  emit showMessage(tr("Finished Handling Dictionaries.\nTime elapsed: %2 s").
+  emit showMessage(tr("Finished Handling Dictionaries [ %1 ].\nTime elapsed: %2 s").
+                   arg(dictionaries.size()).
                    arg(timer.elapsed() / 1000) );
 }
 
@@ -149,17 +164,24 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   if(allFiles.empty())
      return;
 
-  emit showMessage(tr("Handling User's Dictionary in\n%1").arg(path.path));
-  //handleFiles(dictionaries, allFiles);
+  emit showMessage(tr("Handling User's Dictionary.\n%1").arg(path.path));
+#ifdef DICTS_LOADING_CONCURRENT
   sMutex.lock();
   ++ref_;
   sMutex.unlock();
   QRunnable *r = new LoadDictionariesRunnable(*this, allFiles);
   QThreadPool::globalInstance()->start(r);
+#else
+  handleFiles(allFiles);
+#endif
 }
 
+#ifdef DICTS_LOADING_CONCURRENT
 void LoadDictionaries::handleFiles(std::vector< sptr< Dictionary::Class > > &dictionaries,
-                   const std::vector< std::string > &allFiles)
+                                   const std::vector< std::string > &allFiles)
+#else
+void LoadDictionaries::handleFiles(const std::vector< std::string > &allFiles)
+#endif
 {
   {
     vector< sptr< Dictionary::Class > > bglDictionaries =
@@ -274,9 +296,10 @@ void LoadDictionaries::handleFiles(std::vector< sptr< Dictionary::Class > > &dic
 
 void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
 {
-  emit showMessage( tr("Indexing Dictionary: %1").arg(QString::fromUtf8( dictionaryName.c_str() )) );
+  emit showMessage( tr("Indexing Dictionary.\n%1").arg(QString::fromUtf8( dictionaryName.c_str() )) );
 }
 
+#ifdef DICTS_LOADING_CONCURRENT
 void LoadDictionariesRunnable::run()
 {
     std::string exceptionText;
@@ -291,6 +314,7 @@ void LoadDictionariesRunnable::run()
     }
     ld.addDictionaries(dictionaries, exceptionText);
 }
+#endif
 
 void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
                        Config::Class const & cfg,
@@ -344,10 +368,10 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     }
   }
 
+  try{
   ///// We create transliterations synchronously since they are very simple
-
+  const QString hmsg("%1 Dictionaries Handled\n[ %3 ]");
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
-  splash.showUiMsg(LoadDictionaries::tr("Making Chinese-conversion Dictionaries ..."));
   // Make Chinese conversion
   {
     vector< sptr< Dictionary::Class > > chineseDictionaries =
@@ -355,10 +379,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
     dictionaries.insert( dictionaries.end(), chineseDictionaries.begin(),
                          chineseDictionaries.end() );
+    if(!chineseDictionaries.empty())
+        splash.showUiMsg(hmsg.arg("Chinese-conversion").arg(chineseDictionaries.size()));
   }
 #endif
 
-  splash.showUiMsg(LoadDictionaries::tr("Making Romaji Dictionaries ..."));
   // Make Romaji
   {
     vector< sptr< Dictionary::Class > > romajiDictionaries =
@@ -366,9 +391,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
     dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
                          romajiDictionaries.end() );
+    if(!romajiDictionaries.empty())
+        splash.showUiMsg(hmsg.arg("Romaji").arg(romajiDictionaries.size()));
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making transliteration Dictionaries ..."));
+  size_t transliteration_dc = dictionaries.size();
   // Make Russian transliteration
   if ( cfg.transliteration.enableRussianTransliteration )
     dictionaries.push_back( RussianTranslit::makeDictionary() );
@@ -388,63 +415,73 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making MediaWiki Dictionaries ..."));
+  transliteration_dc =  dictionaries.size() - transliteration_dc;
+  if(transliteration_dc)
+    splash.showUiMsg(hmsg.arg("Transliteration").arg(transliteration_dc));
+
   ///// We create MediaWiki dicts synchronously, since they use netmgr
   {
     vector< sptr< Dictionary::Class > > dicts =
       MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+        splash.showUiMsg(hmsg.arg("MediaWiki").arg(dicts.size()));
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making WebSite Dictionaries ..."));
   ///// WebSites are very simple, no need to create them asynchronously
   {
     vector< sptr< Dictionary::Class > > dicts =
       WebSite::makeDictionaries( cfg.webSites, dictNetMgr );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+        splash.showUiMsg(hmsg.arg("WebSite").arg(dicts.size()));
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making Forvo Dictionaries ..."));
   //// Forvo dictionaries
   {
     vector< sptr< Dictionary::Class > > dicts =
       Forvo::makeDictionaries( loadDicts, cfg.forvo, dictNetMgr );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+        splash.showUiMsg(hmsg.arg("Forvo").arg(dicts.size()));
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making Programs Dictionaries ..."));
   //// Programs
   {
     vector< sptr< Dictionary::Class > > dicts =
       Programs::makeDictionaries( cfg.programs );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+        splash.showUiMsg(hmsg.arg("Programs").arg(dicts.size()));
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making VoiceEngines Dictionaries ..."));
   //// Text to Speech
   {
     vector< sptr< Dictionary::Class > > dicts =
       VoiceEngines::makeDictionaries( cfg.voiceEngines );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+        splash.showUiMsg(hmsg.arg("Text-to-Speech").arg(dicts.size()));
   }
 
-  splash.showUiMsg(LoadDictionaries::tr("Making DictServer Dictionaries ..."));
   {
     vector< sptr< Dictionary::Class > > dicts =
       DictServer::makeDictionaries( cfg.dictServers );
 
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+        splash.showUiMsg(hmsg.arg("DictServer").arg(dicts.size()));
   }
 
   GD_DPRINTF( "Load done\n" );
 
   // Remove any stale index files
-
+  {
   set< string > ids;
   std::pair< std::set< string >::iterator, bool > ret;
 
@@ -463,6 +500,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
                  dictionaries[ x ]->getDictionaryFilenames().empty() ?
                    "" : dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str()
                 );
+//      splash.showUiMsg(tr("Duplicate Dictionary's ID=%1 found.\nname=\"%2\"\npath=\"%3\"").
+//                       arg(QString::fromUtf8(dictionaries[ x ]->getId().c_str())).
+//                       arg(QString::fromUtf8(dictionaries[ x ]->getName().c_str())).
+//                       arg(QString::fromUtf8(dictionaries[ x ]->getDictionaryFilenames().empty() ?
+//                                                 "" : dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str())) );
     }
   }
 
@@ -482,16 +524,24 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
          && ids.find( FsEncoding::encode( i->left( 32 ) ) ) == ids.end() )
       indexDir.remove( *i );
   }
-
+  }
   // Run deferred inits
-  splash.showUiMsg(LoadDictionaries::tr("Initing Dictionaries ..."));
 
   if ( doDeferredInit_ )
+  {
+    splash.showUiMsg(LoadDictionaries::tr("Init Dictionaries ..."));
     doDeferredInit( dictionaries );
+  }
+  }
+  catch( std::exception & e )
+  {
+  }
 
   if(canHideParent)
     parent->show();
-  splash.showUiMsg(LoadDictionaries::tr("Loading Done.\nTime elapsed: %2 s").arg(timer.elapsed() / 1000));
+  splash.showUiMsg(LoadDictionaries::tr("Loading Done.\n[ %1 ] Dictionaries Handled.\nTime elapsed: %2 s").
+                   arg(dictionaries.size()).
+                   arg(timer.elapsed() / 1000));
   splash.finish(parent);
 }
 

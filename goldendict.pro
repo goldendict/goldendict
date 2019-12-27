@@ -24,6 +24,7 @@ QT += core \
 
 #win32:CONFIG += no_qtmultimedia_player
 DEFINES += MDX_LOCALVIDEO_CACHED
+DEFINES += DICTS_LOADING_CONCURRENT
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \

@@ -19,9 +19,11 @@ private:
   Config::Class const & cfg_;
   QStringList nameFilters;
   std::string exceptionText;
+#ifdef DICTS_LOADING_CONCURRENT
   QSemaphore sWait;
   QMutex sMutex;
   int ref_;
+#endif
 
 protected:
   virtual void run();
@@ -44,6 +46,7 @@ private:
   void handlePath( Config::Path const & );
 
 public:
+#ifdef DICTS_LOADING_CONCURRENT
   void addDictionaries(const std::vector< sptr< Dictionary::Class > > &dics, const std::string &e1) {
       sMutex.lock();
       if(!e1.empty())
@@ -53,9 +56,13 @@ public:
       sMutex.unlock();
       sWait.release();
   }
-
+#endif
+#ifdef DICTS_LOADING_CONCURRENT
   void handleFiles(std::vector< sptr< Dictionary::Class > > &dictionaries,
                    const std::vector< std::string > &allFiles);
+#else
+  void handleFiles(const std::vector< std::string > &allFiles);
+#endif
 
   /// Loads all dictionaries mentioned in the configuration passed, into the
   /// supplied array. When necessary, a window would pop up describing the process.
@@ -74,6 +81,7 @@ public:
 
 };
 
+#ifdef DICTS_LOADING_CONCURRENT
 class LoadDictionariesRunnable : public QRunnable
 {
 public:
@@ -88,6 +96,7 @@ private:
     LoadDictionaries &ld;
     std::vector< std::string > allFiles;
 };
+#endif
 
 #endif
 
