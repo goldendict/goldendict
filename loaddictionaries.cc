@@ -50,28 +50,34 @@ using std::set;
 using std::string;
 using std::vector;
 
-LoadDictionaries::LoadDictionaries(Config::Class const & cfg , std::vector<sptr<Dictionary::Class> > &dicts, QElapsedTimer &timer_ )
+class DictNameFilter : public QStringList
+{
+public:
+    DictNameFilter() {
+        *this << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
+                      << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
+                      << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
+                      << "*.mdx" << "*.gls" << "*.gls.dz"
+        #ifdef MAKE_SLOB_SUPPORT
+                      << "*.slob"
+        #endif
+        #ifdef MAKE_ZIM_SUPPORT
+                      << "*.zim" << "*.zimaa"
+        #endif
+        #ifndef NO_EPWING_SUPPORT
+                      << "*catalogs"
+        #endif
+        ;
+    }
+    ~DictNameFilter(){}
+};
+
+LoadDictionaries::LoadDictionaries(Config::Class const & cfg , QElapsedTimer const & timer_ , std::vector<sptr<Dictionary::Class> > &dicts )
 : dictionaries(dicts), timer(timer_), cfg_(cfg)
 #ifdef DICTS_LOADING_CONCURRENT
-  ,sWait(0), ref_(0)
+  ,sWait(0), ref(0)
 #endif
 {
-  // Populate name filters
-
-  nameFilters << "*.bgl" << "*.ifo" << "*.lsa" << "*.dat"
-              << "*.dsl" << "*.dsl.dz"  << "*.index" << "*.xdxf"
-              << "*.xdxf.dz" << "*.dct" << "*.aar" << "*.zips"
-              << "*.mdx" << "*.gls" << "*.gls.dz"
-#ifdef MAKE_SLOB_SUPPORT
-              << "*.slob"
-#endif
-#ifdef MAKE_ZIM_SUPPORT
-              << "*.zim" << "*.zimaa"
-#endif
-#ifndef NO_EPWING_SUPPORT
-              << "*catalogs"
-#endif
-;
 }
 
 void LoadDictionaries::run()
@@ -82,13 +88,15 @@ void LoadDictionaries::run()
     for( Config::Paths::const_iterator i = cfg_.paths.begin(); i != cfg_.paths.end(); ++i )
       handlePath( *i );
 #ifdef DICTS_LOADING_CONCURRENT
-    while(ref_)
+    do
     {
-      int left = ref_;
+      int left = Qt4x5::AtomicInt::loadAcquire(ref);
+      if(left < 1)
+        break;
       while(!sWait.tryAcquire(1, 1000))
-        emit showMessage(tr("Handling User's Dictionary: [ %1 ] left\nTime elapsed: %2 s").
+        emit showMessage(tr("Handling User's Dictionary\n[ %1 ] left\nTime elapsed: %2 s").
                          arg(left).arg(timer.elapsed() / 1000));
-    };
+    }while(true);
 #endif
     if(!exceptionText.empty() && dictionaries.empty())
     {
@@ -139,6 +147,7 @@ void LoadDictionaries::run()
 
 void LoadDictionaries::handlePath( Config::Path const & path )
 {
+  static const DictNameFilter nameFilters;
   vector< string > allFiles;
 
   QDir dir( path.path );
@@ -166,11 +175,19 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
   emit showMessage(tr("Handling User's Dictionary.\n%1").arg(path.path));
 #ifdef DICTS_LOADING_CONCURRENT
-  sMutex.lock();
-  ++ref_;
-  sMutex.unlock();
+  QThreadPool *tp = QThreadPool::globalInstance();
+  int maxThreadCount = tp->maxThreadCount();
+  if(maxThreadCount <= 1 )
+  {
+      handleFiles(dictionaries, allFiles);
+      return;
+  }
+
   QRunnable *r = new LoadDictionariesRunnable(*this, allFiles);
-  QThreadPool::globalInstance()->start(r);
+  while( Qt4x5::AtomicInt::loadAcquire(ref) > maxThreadCount )
+    tp->waitForDone(100);
+  ++ref;
+  tp->start(r);
 #else
   handleFiles(allFiles);
 #endif
@@ -337,7 +354,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   // Start a thread to load all the dictionaries
 
-  LoadDictionaries loadDicts( cfg, dictionaries, timer );
+  LoadDictionaries loadDicts( cfg, timer, dictionaries );
   QObject::connect(&loadDicts, SIGNAL(showMessage(const QString &, const QColor &)),
                    &splash, SLOT(showMessage(const QString &, const QColor &)), Qt::QueuedConnection  );
 
@@ -377,10 +394,12 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > chineseDictionaries =
       Chinese::makeDictionaries( cfg.transliteration.chinese );
 
-    dictionaries.insert( dictionaries.end(), chineseDictionaries.begin(),
-                         chineseDictionaries.end() );
     if(!chineseDictionaries.empty())
+    {
+        dictionaries.insert( dictionaries.end(), chineseDictionaries.begin(),
+                             chineseDictionaries.end() );
         splash.showUiMsg(hmsg.arg("Chinese-conversion").arg(chineseDictionaries.size()));
+    }
   }
 #endif
 
@@ -389,10 +408,12 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > romajiDictionaries =
       Romaji::makeDictionaries( cfg.transliteration.romaji );
 
-    dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
-                         romajiDictionaries.end() );
     if(!romajiDictionaries.empty())
+    {
+        dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
+                             romajiDictionaries.end() );
         splash.showUiMsg(hmsg.arg("Romaji").arg(romajiDictionaries.size()));
+    }
   }
 
   size_t transliteration_dc = dictionaries.size();
@@ -412,7 +433,10 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
   if ( cfg.transliteration.enableBelarusianTransliteration )
   {
     vector< sptr< Dictionary::Class > > dicts = BelarusianTranslit::makeDictionaries();
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    if(!dicts.empty())
+    {
+      dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
+    }
   }
 
   transliteration_dc =  dictionaries.size() - transliteration_dc;
@@ -424,9 +448,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > dicts =
       MediaWiki::makeDictionaries( loadDicts, cfg.mediawikis, dictNetMgr );
 
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     if(!dicts.empty())
+    {
+        dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
         splash.showUiMsg(hmsg.arg("MediaWiki").arg(dicts.size()));
+    }
   }
 
   ///// WebSites are very simple, no need to create them asynchronously
@@ -434,9 +460,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > dicts =
       WebSite::makeDictionaries( cfg.webSites, dictNetMgr );
 
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     if(!dicts.empty())
+    {
+        dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
         splash.showUiMsg(hmsg.arg("WebSite").arg(dicts.size()));
+    }
   }
 
   //// Forvo dictionaries
@@ -444,9 +472,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > dicts =
       Forvo::makeDictionaries( loadDicts, cfg.forvo, dictNetMgr );
 
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     if(!dicts.empty())
+    {
+        dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
         splash.showUiMsg(hmsg.arg("Forvo").arg(dicts.size()));
+    }
   }
 
   //// Programs
@@ -454,9 +484,11 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > dicts =
       Programs::makeDictionaries( cfg.programs );
 
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     if(!dicts.empty())
+    {
+        dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
         splash.showUiMsg(hmsg.arg("Programs").arg(dicts.size()));
+    }
   }
 
   //// Text to Speech
@@ -464,18 +496,22 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     vector< sptr< Dictionary::Class > > dicts =
       VoiceEngines::makeDictionaries( cfg.voiceEngines );
 
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     if(!dicts.empty())
+    {
+        dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
         splash.showUiMsg(hmsg.arg("Text-to-Speech").arg(dicts.size()));
+    }
   }
 
   {
     vector< sptr< Dictionary::Class > > dicts =
       DictServer::makeDictionaries( cfg.dictServers );
 
-    dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
     if(!dicts.empty())
+    {
+        dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
         splash.showUiMsg(hmsg.arg("DictServer").arg(dicts.size()));
+    }
   }
 
   GD_DPRINTF( "Load done\n" );

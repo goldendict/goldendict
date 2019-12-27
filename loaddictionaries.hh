@@ -15,14 +15,13 @@ class LoadDictionaries: public QThread, public Dictionary::Initializing
   Q_OBJECT
 private:
   std::vector< sptr< Dictionary::Class > > &dictionaries;
-  QElapsedTimer &timer;
+  QElapsedTimer const & timer;
   Config::Class const & cfg_;
-  QStringList nameFilters;
   std::string exceptionText;
 #ifdef DICTS_LOADING_CONCURRENT
   QSemaphore sWait;
   QMutex sMutex;
-  int ref_;
+  QAtomicInt ref;
 #endif
 
 protected:
@@ -36,7 +35,7 @@ public:
   virtual void indexingDictionary( std::string const & dictionaryName ) throw();
 
 private:
-  LoadDictionaries( Config::Class const & cfg, std::vector< sptr< Dictionary::Class > > &dicts, QElapsedTimer &timer );
+  LoadDictionaries( Config::Class const & cfg, QElapsedTimer const & timer, std::vector< sptr< Dictionary::Class > > &dicts );
 //  std::vector< sptr< Dictionary::Class > > const & getDictionaries() const
 //  { return dictionaries; }
 
@@ -47,13 +46,13 @@ private:
 
 public:
 #ifdef DICTS_LOADING_CONCURRENT
-  void addDictionaries(const std::vector< sptr< Dictionary::Class > > &dics, const std::string &e1) {
+  void addDictionaries(const std::vector< sptr< Dictionary::Class > > &dics, const std::string &e1 = std::string()) {
       sMutex.lock();
       if(!e1.empty())
-      exceptionText.append(e1);
+        exceptionText.append(e1);
       dictionaries.insert( dictionaries.end(), dics.begin(), dics.end() );
-      --ref_;
       sMutex.unlock();
+      --ref;
       sWait.release();
   }
 #endif
