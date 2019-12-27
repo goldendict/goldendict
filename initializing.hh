@@ -41,9 +41,9 @@ public:
     }
     ~GDSplash() {}
 
-    void showUiMsg(const QString &msg, const QColor &color = Qt::black);
+    void showUiMsg(const QString &msg, const QColor &color = Qt::black, int align = Qt::AlignCenter);
 protected Q_SLOTS:
-    void showMessage(const QString &msg, const QColor &color = Qt::black);
+    void showMsg(const QString &msg, const QColor &color = Qt::black, int align = Qt::AlignCenter);
 
 protected:
     void mousePressEvent(QMouseEvent *e)

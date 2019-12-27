@@ -79,10 +79,12 @@ LoadDictionaries::LoadDictionaries(Config::Class const & cfg , QElapsedTimer con
 #endif
 {
 }
+static const QString rn("\n");
 
 void LoadDictionaries::run()
 {
-  emit showMessage(tr("Start Handling Dictionaries\n..."));
+  emit showMessage(tr("Start Handling Dictionaries ..."));
+  const QString tes = tr("Time elapsed: %2 s");
   try
   {
     for( Config::Paths::const_iterator i = cfg_.paths.begin(); i != cfg_.paths.end(); ++i )
@@ -94,21 +96,22 @@ void LoadDictionaries::run()
       if(left < 1)
         break;
       while(!sWait.tryAcquire(1, 1000))
-        emit showMessage(tr("Handling User's Dictionary\n[ %1 ] left\nTime elapsed: %2 s").
-                         arg(left).arg(timer.elapsed() / 1000));
+        emit showMessage(tr("Handling User's Dictionary%1%3%5%7").arg(rn).
+                         arg(tr("%1 left").arg(left)).arg(rn).
+                         arg(tes.arg(timer.elapsed() / 1000)) );
     }while(true);
 #endif
     if(!exceptionText.empty() && dictionaries.empty())
     {
-        emit showMessage(tr("Failed to Handle User's Dictionaries.\n%1").
+        emit showMessage(tr("Failed to Handle User's Dictionaries%1%3").arg(rn).
                          arg(QString::fromUtf8(exceptionText.c_str())));
         return;
     }
 #ifndef DICTS_LOADING_CONCURRENT
     else
     {
-        emit showMessage(tr("[ %1 ] User's Dictionaries Handled.\nTime elapsed: %2 s").
-                         arg(dictionaries.size()).arg(timer.elapsed() / 1000) );
+        emit showMessage(tr("%1 User's Dictionaries Handled%3%5").arg(rn).
+                         arg(tes.arg(timer.elapsed() / 1000)) );
     }
 #endif
 
@@ -120,8 +123,9 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), soundDirDictionaries.begin(),
                            soundDirDictionaries.end() );
       if(!soundDirDictionaries.empty())
-          emit showMessage(tr("[ %1 ] SoundDir Dictionaries Handled.\nTime elapsed: %2 s").
-                           arg(soundDirDictionaries.size()).arg(timer.elapsed() / 1000) );
+          emit showMessage(tr("%1 SoundDir Dictionaries Handled%3%5").
+                           arg(soundDirDictionaries.size()).arg(rn).
+                           arg(tes.arg(timer.elapsed() / 1000)) );
     }
 
     // Make hunspells
@@ -132,17 +136,18 @@ void LoadDictionaries::run()
       dictionaries.insert( dictionaries.end(), hunspellDictionaries.begin(),
                            hunspellDictionaries.end() );
       if(!hunspellDictionaries.empty())
-          emit showMessage(tr("[ %1 ] HunspellMorpho Dictionaries Handled.\nTime elapsed: %2 s").
-                           arg(hunspellDictionaries.size()).arg(timer.elapsed() / 1000) );
+          emit showMessage(tr("%1 HunspellMorpho Dictionaries Handled%3%5").
+                           arg(hunspellDictionaries.size()).arg(rn).
+                           arg(tes.arg(timer.elapsed() / 1000)) );
     }
   }
   catch( std::exception & e )
   {
     exceptionText.append(e.what());
   }
-  emit showMessage(tr("Finished Handling Dictionaries [ %1 ].\nTime elapsed: %2 s").
-                   arg(dictionaries.size()).
-                   arg(timer.elapsed() / 1000) );
+  emit showMessage(tr("Finished Handling Dictionaries: %1%3%5").
+                   arg(dictionaries.size()).arg(rn).
+                   arg(tes.arg(timer.elapsed() / 1000)) );
 }
 
 void LoadDictionaries::handlePath( Config::Path const & path )
@@ -173,7 +178,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   if(allFiles.empty())
      return;
 
-  emit showMessage(tr("Handling User's Dictionary.\n%1").arg(path.path));
+  emit showMessage(tr("Handling User's Dictionary%1%3").arg(rn).arg(path.path));
 #ifdef DICTS_LOADING_CONCURRENT
   QThreadPool *tp = QThreadPool::globalInstance();
   int maxThreadCount = tp->maxThreadCount();
@@ -313,7 +318,7 @@ void LoadDictionaries::handleFiles(const std::vector< std::string > &allFiles)
 
 void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
 {
-  emit showMessage( tr("Indexing Dictionary.\n%1").arg(QString::fromUtf8( dictionaryName.c_str() )) );
+  emit showMessage( tr("Indexing Dictionary%1%3").arg(rn).arg(QString::fromUtf8( dictionaryName.c_str() )) );
 }
 
 #ifdef DICTS_LOADING_CONCURRENT
@@ -356,7 +361,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   LoadDictionaries loadDicts( cfg, timer, dictionaries );
   QObject::connect(&loadDicts, SIGNAL(showMessage(const QString &, const QColor &)),
-                   &splash, SLOT(showMessage(const QString &, const QColor &)), Qt::QueuedConnection  );
+                   &splash, SLOT(showMsg(const QString &, const QColor &)), Qt::QueuedConnection  );
 
   QEventLoop localLoop;
 
@@ -387,7 +392,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   try{
   ///// We create transliterations synchronously since they are very simple
-  const QString hmsg("%1 Dictionaries Handled\n[ %3 ]");
+  const QString hmsg = tr("%1 %3 Dictionaries Handled");
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
   // Make Chinese conversion
   {
@@ -398,7 +403,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     {
         dictionaries.insert( dictionaries.end(), chineseDictionaries.begin(),
                              chineseDictionaries.end() );
-        splash.showUiMsg(hmsg.arg("Chinese-conversion").arg(chineseDictionaries.size()));
+        splash.showUiMsg(hmsg.arg(chineseDictionaries.size()).arg("Chinese-conversion"));
     }
   }
 #endif
@@ -412,7 +417,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     {
         dictionaries.insert( dictionaries.end(), romajiDictionaries.begin(),
                              romajiDictionaries.end() );
-        splash.showUiMsg(hmsg.arg("Romaji").arg(romajiDictionaries.size()));
+        splash.showUiMsg(hmsg.arg(romajiDictionaries.size()).arg("Romaji"));
     }
   }
 
@@ -441,7 +446,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   transliteration_dc =  dictionaries.size() - transliteration_dc;
   if(transliteration_dc)
-    splash.showUiMsg(hmsg.arg("Transliteration").arg(transliteration_dc));
+    splash.showUiMsg(hmsg.arg(transliteration_dc).arg("Transliteration"));
 
   ///// We create MediaWiki dicts synchronously, since they use netmgr
   {
@@ -451,7 +456,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     if(!dicts.empty())
     {
         dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-        splash.showUiMsg(hmsg.arg("MediaWiki").arg(dicts.size()));
+        splash.showUiMsg(hmsg.arg(dicts.size()).arg("MediaWiki"));
     }
   }
 
@@ -463,7 +468,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     if(!dicts.empty())
     {
         dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-        splash.showUiMsg(hmsg.arg("WebSite").arg(dicts.size()));
+        splash.showUiMsg(hmsg.arg(dicts.size()).arg("WebSite"));
     }
   }
 
@@ -475,7 +480,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     if(!dicts.empty())
     {
         dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-        splash.showUiMsg(hmsg.arg("Forvo").arg(dicts.size()));
+        splash.showUiMsg(hmsg.arg(dicts.size()).arg("Forvo"));
     }
   }
 
@@ -487,7 +492,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     if(!dicts.empty())
     {
         dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-        splash.showUiMsg(hmsg.arg("Programs").arg(dicts.size()));
+        splash.showUiMsg(hmsg.arg(dicts.size()).arg("Programs"));
     }
   }
 
@@ -499,7 +504,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     if(!dicts.empty())
     {
         dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-        splash.showUiMsg(hmsg.arg("Text-to-Speech").arg(dicts.size()));
+        splash.showUiMsg(hmsg.arg(dicts.size()).arg("Text-to-Speech"));
     }
   }
 
@@ -510,7 +515,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
     if(!dicts.empty())
     {
         dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
-        splash.showUiMsg(hmsg.arg("DictServer").arg(dicts.size()));
+        splash.showUiMsg(hmsg.arg(dicts.size()).arg("DictServer"));
     }
   }
 
@@ -575,9 +580,8 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 
   if(canHideParent)
     parent->show();
-  splash.showUiMsg(LoadDictionaries::tr("Loading Done.\n[ %1 ] Dictionaries Handled.\nTime elapsed: %2 s").
-                   arg(dictionaries.size()).
-                   arg(timer.elapsed() / 1000));
+  splash.showUiMsg(LoadDictionaries::tr("Loading Done.%1%3 Dictionaries Handled%5%7").
+                   arg(rn).arg(dictionaries.size()).arg(rn).arg(LoadDictionaries::tr("Time elapsed: %2 s").arg(timer.elapsed() / 1000)));
   splash.finish(parent);
 }
 

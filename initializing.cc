@@ -24,12 +24,12 @@ WindowsStyle & WindowsStyle::instance()
 #endif
 */
 
-void GDSplash::showUiMsg(const QString &msg, const QColor &color) {
-    showMessage(msg, color);
+void GDSplash::showUiMsg(const QString &msg, const QColor &color, int align) {
+    QSplashScreen::showMessage(msg, align, color);
     qApp->processEvents();
 }
 
-void GDSplash::showMessage(const QString &msg, const QColor &color)
+void GDSplash::showMsg(const QString &msg, const QColor &color, int align)
 {
-    QSplashScreen::showMessage(msg, Qt::AlignCenter, color);
+    QSplashScreen::showMessage(msg, align, color);
 }
