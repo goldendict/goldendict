@@ -1216,7 +1216,7 @@ void StardictDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstItera
   if( haveFTSIndex() )
     return;
 
-  if( ensureInitDone().size() )
+  if( !ensureInitDone() )
     return;
 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )

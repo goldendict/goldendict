@@ -1147,9 +1147,10 @@ void FTSResultsRequest::fullSearch( QStringList & searchWords, QRegExp & regexp 
 
 void FTSResultsRequest::run()
 {
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }

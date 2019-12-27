@@ -256,7 +256,7 @@ public:
 
   virtual void setFTSParameters( Config::FullTextSearch const & fts )
   {
-    if( ensureInitDone().size() )
+    if( !ensureInitDone() )
       return;
 
     can_FTS = fts.enabled
@@ -269,7 +269,7 @@ protected:
 
 private:
 
-  virtual string const & ensureInitDone();
+  virtual bool ensureInitDone(string *err=0);
   void doDeferredInit();
 
   /// Loads an article with the given offset, filling the given strings.
@@ -426,10 +426,14 @@ void MdxDictionary::deferredInit()
   }
 }
 
-string const & MdxDictionary::ensureInitDone()
+bool MdxDictionary::ensureInitDone(std::string *err)
 {
   doDeferredInit();
-  return initError;
+  if(initError.empty())
+      return true;
+  if(err)
+      *err = initError;
+  return false;
 }
 
 void MdxDictionary::doDeferredInit()
@@ -521,7 +525,7 @@ void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   if( haveFTSIndex() )
     return;
 
-  if( ensureInitDone().size() )
+  if( !ensureInitDone() )
     return;
 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
@@ -646,9 +650,10 @@ void MdxArticleRequest::run()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }
@@ -821,9 +826,10 @@ void MddResourceRequest::run()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }

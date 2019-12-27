@@ -656,7 +656,7 @@ void GlsDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   if( haveFTSIndex() )
     return;
 
-  if( ensureInitDone().size() )
+  if( !ensureInitDone() )
     return;
 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )

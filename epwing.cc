@@ -130,7 +130,7 @@ public:
 
   virtual void setFTSParameters( Config::FullTextSearch const & fts )
   {
-    if( ensureInitDone().size() )
+    if( !ensureInitDone() )
       return;
 
     can_FTS = fts.enabled

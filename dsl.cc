@@ -229,7 +229,7 @@ public:
 
   virtual void setFTSParameters( Config::FullTextSearch const & fts )
   {
-    if( ensureInitDone().size() )
+    if( !ensureInitDone() )
       return;
 
     can_FTS = fts.enabled
@@ -246,7 +246,7 @@ protected:
 
 private:
 
-  virtual string const & ensureInitDone();
+  virtual bool ensureInitDone(string *err = 0);
   void doDeferredInit();
 
   /// Loads the article. Does not process the DSL language.
@@ -372,12 +372,15 @@ void DslDictionary::deferredInit()
 }
 
 
-string const & DslDictionary::ensureInitDone()
+bool DslDictionary::ensureInitDone(string *err)
 {
   // Simple, really.
   doDeferredInit();
-
-  return initError;
+  if(initError.empty())
+    return true;
+  if(err)
+      *err = initError;
+  return false;
 }
 
 void DslDictionary::doDeferredInit()
@@ -1260,7 +1263,7 @@ void DslDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   if( haveFTSIndex() )
     return;
 
-  if( ensureInitDone().size() )
+  if( !ensureInitDone() )
     return;
 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
@@ -1647,9 +1650,10 @@ void DslArticleRequest::run()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }
@@ -1850,9 +1854,10 @@ void DslResourceRequest::run()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }

@@ -372,7 +372,7 @@ void XdxfDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
   if( haveFTSIndex() )
     return;
 
-  if( ensureInitDone().size() )
+  if( !ensureInitDone() )
     return;
 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
@@ -1029,9 +1029,10 @@ void XdxfResourceRequest::run()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }

@@ -204,7 +204,7 @@ public:
   /// does nothing.
   /// The function returns an empty string if the initialization is or was
   /// successful, or a human-readable error string otherwise.
-  virtual string const & ensureInitDone();
+  virtual bool ensureInitDone(string *err = 0) { return true; }
 
 protected:
   Mutex ftsIdxMutex;

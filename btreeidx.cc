@@ -63,12 +63,10 @@ BtreeDictionary::BtreeDictionary( string const & id,
 {
 }
 
-string const & BtreeDictionary::ensureInitDone()
-{
-  static const string empty;
-
-  return empty;
-}
+//bool BtreeDictionary::ensureInitDone(std::string *err)
+//{
+//  return true;
+//}
 
 void BtreeIndex::openIndex( IndexInfo const & indexInfo,
                             File::Class & file, Mutex & mutex )
@@ -178,9 +176,10 @@ void BtreeWordSearchRequest::findMatches()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( !dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }
@@ -462,9 +461,10 @@ void BtreeWordSearchRequest::run()
     return;
   }
 
-  if ( dict.ensureInitDone().size() )
+  string err;
+  if ( dict.ensureInitDone(&err) )
   {
-    setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );
+    setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
     return;
   }

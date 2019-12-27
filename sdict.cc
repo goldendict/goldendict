@@ -421,7 +421,7 @@ void SdictDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteratio
   if( haveFTSIndex() )
     return;
 
-  if( ensureInitDone().size() )
+  if( !ensureInitDone() )
     return;
 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
