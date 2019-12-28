@@ -177,8 +177,8 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   }
   if(allFiles.empty())
      return;
-
-  emit showMessage(tr("Handling User's Dictionary%1%3").arg(rn).arg(path.path));
+  emit showMessage(tr("Handling User's Dictionary%1%3").arg(rn).arg(path.path),
+                   Qt::AlignCenter, Qt::darkBlue);
 #ifdef DICTS_LOADING_CONCURRENT
   QThreadPool *tp = QThreadPool::globalInstance();
   int maxThreadCount = tp->maxThreadCount();
@@ -346,22 +346,24 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
 {
   QElapsedTimer timer;
   timer.start();
-  const int expiryTimeout = QThreadPool::globalInstance()->expiryTimeout();
-  QThreadPool::globalInstance()->setExpiryTimeout(-1);
 
-  if(canHideParent)
-    parent->hide();
   GDSplash splash;
   splash.show();
   splash.showUiMsg(LoadDictionaries::tr("Start Loading Dictionaries"));
+
+  if(canHideParent)
+    parent->hide();
+
+  const int expiryTimeout = QThreadPool::globalInstance()->expiryTimeout();
+  QThreadPool::globalInstance()->setExpiryTimeout(-1);
 
   dictionaries.clear();
 
   // Start a thread to load all the dictionaries
 
   LoadDictionaries loadDicts( cfg, timer, dictionaries );
-  QObject::connect(&loadDicts, SIGNAL(showMessage(const QString &, const QColor &)),
-                   &splash, SLOT(showMsg(const QString &, const QColor &)), Qt::QueuedConnection  );
+  QObject::connect(&loadDicts, SIGNAL(showMessage(const QString &, int, const QColor &)),
+                   &splash, SLOT(showMessage(const QString &, int, const QColor &)), Qt::QueuedConnection  );
 
   QEventLoop localLoop;
 
@@ -541,11 +543,6 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
                  dictionaries[ x ]->getDictionaryFilenames().empty() ?
                    "" : dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str()
                 );
-//      splash.showUiMsg(tr("Duplicate Dictionary's ID=%1 found.\nname=\"%2\"\npath=\"%3\"").
-//                       arg(QString::fromUtf8(dictionaries[ x ]->getId().c_str())).
-//                       arg(QString::fromUtf8(dictionaries[ x ]->getName().c_str())).
-//                       arg(QString::fromUtf8(dictionaries[ x ]->getDictionaryFilenames().empty() ?
-//                                                 "" : dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str())) );
     }
   }
 

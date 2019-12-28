@@ -28,7 +28,7 @@ protected:
   virtual void run();
 
 signals:
-  void showMessage(const QString &message, const QColor &color = Qt::darkMagenta);
+  void showMessage(const QString &message, int align=Qt::AlignCenter, const QColor &color = Qt::darkMagenta);
 
 public:
   ~LoadDictionaries(){}

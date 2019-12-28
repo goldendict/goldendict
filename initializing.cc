@@ -2,7 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "initializing.hh"
-#include <QCoreApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 /*
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 #include <qt_windows.h>
@@ -24,12 +25,12 @@ WindowsStyle & WindowsStyle::instance()
 #endif
 */
 
+GDSplash::GDSplash() : QSplashScreen(QPixmap("./splash.png").scaled(QApplication::desktop()->screenGeometry().size() * 0.4))
+{
+}
+
 void GDSplash::showUiMsg(const QString &msg, const QColor &color, int align) {
     QSplashScreen::showMessage(msg, align, color);
     qApp->processEvents();
 }
 
-void GDSplash::showMsg(const QString &msg, const QColor &color, int align)
-{
-    QSplashScreen::showMessage(msg, align, color);
-}

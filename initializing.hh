@@ -35,15 +35,10 @@ class GDSplash : public QSplashScreen
 {
     Q_OBJECT
 public:
-    GDSplash() : QSplashScreen(QPixmap("./splash.png"), Qt::WindowStaysOnTopHint)
-    {
-        setMinimumSize(QSize(600, 400));
-    }
+    GDSplash();
     ~GDSplash() {}
 
     void showUiMsg(const QString &msg, const QColor &color = Qt::black, int align = Qt::AlignCenter);
-protected Q_SLOTS:
-    void showMsg(const QString &msg, const QColor &color = Qt::black, int align = Qt::AlignCenter);
 
 protected:
     void mousePressEvent(QMouseEvent *e)
