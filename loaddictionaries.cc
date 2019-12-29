@@ -347,7 +347,7 @@ void LoadDictionaries::loadDictionaries( QWidget * parent, bool canHideParent,
   QElapsedTimer timer;
   timer.start();
 
-  GDSplash splash;
+  GDSplash splash(parent, !canHideParent ? Qt::WindowStaysOnTopHint : Qt::WindowFlags());
   splash.show();
   splash.showUiMsg(LoadDictionaries::tr("Start Loading Dictionaries"));
 

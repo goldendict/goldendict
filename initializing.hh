@@ -35,7 +35,7 @@ class GDSplash : public QSplashScreen
 {
     Q_OBJECT
 public:
-    GDSplash();
+    GDSplash(QWidget *parent=0, Qt::WindowFlags f = Qt::WindowFlags(), const QString &picpath = "./splash.png");
     ~GDSplash() {}
 
     void showUiMsg(const QString &msg, const QColor &color = Qt::black, int align = Qt::AlignCenter);

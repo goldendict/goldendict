@@ -25,8 +25,14 @@ WindowsStyle & WindowsStyle::instance()
 #endif
 */
 
-GDSplash::GDSplash() : QSplashScreen(QPixmap("./splash.png").scaled(QApplication::desktop()->screenGeometry().size() * 0.4))
+GDSplash::GDSplash(QWidget *parent, Qt::WindowFlags f, const QString &picpath) :
+    QSplashScreen(parent, QPixmap(), f)
 {
+    QPixmap qpm(picpath);
+    const QRect dr = QApplication::desktop()->screenGeometry();
+    int pw = dr.width();
+    int ph = dr.height();
+    QSplashScreen::setPixmap(qpm.scaled(pw * 0.4, (ph < pw ? ph : pw) * 0.25));
 }
 
 void GDSplash::showUiMsg(const QString &msg, const QColor &color, int align) {
