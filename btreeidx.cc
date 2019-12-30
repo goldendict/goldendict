@@ -462,7 +462,7 @@ void BtreeWordSearchRequest::run()
   }
 
   string err;
-  if ( dict.ensureInitDone(&err) )
+  if ( !dict.ensureInitDone(&err) )
   {
     setErrorString( QString::fromUtf8( err.c_str() ) );
     finish();
