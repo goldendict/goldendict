@@ -609,9 +609,9 @@ void ArticleRequest::bodyFinished()
 
       Dictionary::DataRequest & req = *bodyRequests.front();
 
-      QString errorString = req.getErrorString();
+      const QString &errorString = req.getErrorString();
 
-      if ( req.dataSize() >= 0 || errorString.size() )
+      if ( req.dataSize() >= 0 || !errorString.isEmpty() )
       {
         sptr< Dictionary::Class > const & activeDict =
             activeDicts[ activeDicts.size() - bodyRequests.size() ];
@@ -711,7 +711,7 @@ void ArticleRequest::bodyFinished()
         head += collapse ? "none" : "inline";
         head += string( "\" id=\"gdarticlefrom-" ) + Html::escape( dictId ) + "\">";
 
-        if ( errorString.size() )
+        if ( !errorString.isEmpty() )
         {
           head += "<div class=\"gderrordesc\">" +
             Html::escape( tr( "Query error: %1" ).arg( errorString ).toUtf8().data() )

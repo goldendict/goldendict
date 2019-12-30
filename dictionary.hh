@@ -66,7 +66,7 @@ public:
   /// Note that an empty result, such as a lack of word or of an article isn't
   /// an error -- but any kind of failure to connect to, or read the dictionary
   /// is.
-  QString getErrorString();
+  const QString & getErrorString() const;
 
   /// Cancels the ongoing request. This may make Request destruct faster some
   /// time in the future, Use this in preparation to destruct many Requests,

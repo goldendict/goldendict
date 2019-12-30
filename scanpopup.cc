@@ -1052,9 +1052,10 @@ void ScanPopup::prefixMatchFinished()
   // Check that there's a window there at all
   if ( isVisible() )
   {
-    if ( wordFinder.getErrorString().size() )
+    const QString &errString = wordFinder.getErrorString();
+    if ( !errString.isEmpty() )
     {
-      ui.queryError->setToolTip( wordFinder.getErrorString() );
+      ui.queryError->setToolTip( errString );
       ui.queryError->show();
     }
     else

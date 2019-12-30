@@ -61,7 +61,7 @@ void Request::setErrorString( QString const & str )
   errorString = str;
 }
 
-QString Request::getErrorString()
+const QString &Request::getErrorString() const
 {
   //Mutex::Lock _( errorStringMutex );
 

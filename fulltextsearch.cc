@@ -449,9 +449,9 @@ void FullTextSearchDialog::searchReqFinished()
       {
         GD_DPRINTF( "one finished.\n" );
 
-        QString errorString = (*it)->getErrorString();
+        const QString &errorString = (*it)->getErrorString();
 
-        if ( (*it)->dataSize() >= 0 || errorString.size() )
+        if ( (*it)->dataSize() >= 0 || !errorString.isEmpty() )
         {
           QList< FtsHeadword > * headwords;
           if( (unsigned)(*it)->dataSize() >= sizeof( headwords ) )
