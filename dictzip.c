@@ -149,6 +149,7 @@ static const char * _err_programName = "GoldenDict";
 #define log_error( ... )
 #define log_error_va( ... )
 
+#ifdef GD_LOG_MSGOUT
 static void err_fatal( const char *routine, const char *format, ... )
 {
    va_list ap;
@@ -172,12 +173,16 @@ static void err_fatal( const char *routine, const char *format, ... )
    fflush( stdout );
 //   exit ( 1 );
 }
+#else
+#define err_fatal( ... ) do {} while( 0 )
+#endif
 
 /* \doc |err_fatal_errno| flushes "stdout", prints a fatal error report on
    "stderr", prints the system error corresponding to |errno|, flushes
    "stderr" and "stdout", and calls |exit|.  |routine| is the name of the
    routine in which the error took place. */
 
+#ifdef GD_LOG_MSGOUT
 static void err_fatal_errno( const char *routine, const char *format, ... )
 {
    va_list ap;
@@ -211,11 +216,15 @@ static void err_fatal_errno( const char *routine, const char *format, ... )
    fflush( stdout );
 //   exit( 1 );
 }
+#else
+#define err_fatal_errno( ... ) do {} while( 0 )
+#endif
 
 /* \doc |err_internal| flushes "stdout", prints the fatal error message,
    flushes "stderr" and "stdout", and calls |abort| so that a core dump is
    generated. */
 
+#ifdef GD_LOG_MSGOUT
 static void err_internal( const char *routine, const char *format, ... )
 {
   va_list ap;
@@ -245,6 +254,9 @@ static void err_internal( const char *routine, const char *format, ... )
   fflush( stdout );
 //  abort();
 }
+#else
+#define err_internal( ... ) do {} while( 0 )
+#endif
 
 #ifndef __func__
 # ifdef __FUNCTION__
@@ -596,7 +608,7 @@ char *dict_data_read_ (
    buffer = xmalloc( size + 1 );
    if( !buffer )
    {
-     strcpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
+     strncpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ), ERR_STRING_SIZE );
      return 0;
    }
 
@@ -620,7 +632,7 @@ char *dict_data_read_ (
 		 " or dzip format (for space savings).\n" );
       break;
 */
-      strcpy( h->errorString, "Cannot seek on pure gzip format files" );
+      strncpy( h->errorString, "Cannot seek on pure gzip format files", ERR_STRING_SIZE );
       xfree( buffer );
       return 0;
    case DICT_TEXT:
@@ -637,7 +649,7 @@ char *dict_data_read_ (
           fread( buffer, size, 1, h->fd ) != 1 )
 #endif
      {
-       strcpy( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
+       strncpy( h->errorString, dz_error_str( DZ_ERR_READFILE ), ERR_STRING_SIZE );
        xfree( buffer );
        return 0;
      }
@@ -661,7 +673,7 @@ char *dict_data_read_ (
 			  h->zStream.msg );
 */
 	 {
-	   sprintf( h->errorString, "Cannot initialize inflation engine: %s", h->zStream.msg );
+       snprintf( h->errorString, ERR_STRING_SIZE, "Cannot initialize inflation engine: %s", h->zStream.msg );
 	   xfree( buffer );
 	   return 0;
 	 }
@@ -717,7 +729,7 @@ char *dict_data_read_ (
 	    inBuffer = h->cache[target].inBuffer;
 	    if( !inBuffer )
 	    {
-	      strcpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ) );
+          strncpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ), ERR_STRING_SIZE );
 	      xfree( buffer );
 	      return 0;
 	    }
@@ -728,7 +740,7 @@ char *dict_data_read_ (
 			     "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
 			     i, h->chunks[i], OUT_BUFFER_SIZE );
 */
-              sprintf( h->errorString, "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
+              snprintf( h->errorString, ERR_STRING_SIZE, "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
                        i, h->chunks[i], OUT_BUFFER_SIZE );
               xfree( buffer );
               return 0;
@@ -745,7 +757,7 @@ char *dict_data_read_ (
            fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
 #endif
       {
-        strcpy( h->errorString, dz_error_str( DZ_ERR_READFILE ) );
+        strncpy( h->errorString, dz_error_str( DZ_ERR_READFILE ), ERR_STRING_SIZE );
         xfree( buffer );
         return 0;
       }
@@ -759,7 +771,7 @@ char *dict_data_read_ (
 	    if (inflate( &h->zStream,  Z_PARTIAL_FLUSH ) != Z_OK)
 	    {
 //	       err_fatal( __func__, "inflate: %s\n", h->zStream.msg );
-	      sprintf( h->errorString, "inflate: %s\n", h->zStream.msg );
+          snprintf( h->errorString, ERR_STRING_SIZE, "inflate: %s\n", h->zStream.msg );
 	      xfree( buffer );
 	      return 0;
 	    }
@@ -770,7 +782,7 @@ char *dict_data_read_ (
 			     h->zStream.avail_in, h->zStream.avail_out );
 */
 	    {
-	      sprintf( h->errorString, "inflate did not flush (%d pending, %d avail)\n",
+          snprintf( h->errorString, ERR_STRING_SIZE, "inflate did not flush (%d pending, %d avail)\n",
 		       h->zStream.avail_in, h->zStream.avail_out );
 	      xfree( buffer );
 	      return 0;
@@ -795,7 +807,7 @@ char *dict_data_read_ (
 				count, h->chunkLength );
 */
 	       {
-		 sprintf( h->errorString, "Length = %d instead of %d\n",
+         snprintf( h->errorString, ERR_STRING_SIZE, "Length = %d instead of %d\n",
 			  count, h->chunkLength );
 		 xfree( buffer );
 		 return 0;
@@ -817,7 +829,7 @@ char *dict_data_read_ (
       break;
    case DICT_UNKNOWN:
 //      err_fatal( __func__, "Cannot read unknown file type\n" );
-      strcpy( h->errorString, "Cannot read unknown file type" );
+      strncpy( h->errorString, "Cannot read unknown file type", ERR_STRING_SIZE );
       xfree( buffer );
       return 0;
    }

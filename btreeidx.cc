@@ -1059,7 +1059,7 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
                          &compressedData.front(), &compressedSize, workMem )
        != LZO_E_OK )
   {
-    FDPRINTF( stderr, "Failed to compress btree node.\n" );
+    GD_FDPRINTF( stderr, "Failed to compress btree node.\n" );
     abort();
   }
 

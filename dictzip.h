@@ -42,6 +42,7 @@ extern "C"
 /* Excerpts from defs.h */
 
 #define DICT_CACHE_SIZE 5
+#define ERR_STRING_SIZE 128
 
 typedef struct dictCache {
    int           chunk;
@@ -92,7 +93,7 @@ typedef struct dictData {
    unsigned long compressedLength;
    int           stamp;
    dictCache     cache[DICT_CACHE_SIZE];
-   char          errorString[512];
+   char          errorString[ERR_STRING_SIZE];
 } dictData;
 
 

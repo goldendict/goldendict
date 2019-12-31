@@ -25,8 +25,8 @@ void gdDebug(const char *, ...)
 ;
 extern QFile * logFilePtr;
 #else
-#define gdWarning(...)
-#define gdDebug(...)
+#define gdWarning(...) do {} while( 0 )
+#define gdDebug(...) do {} while( 0 )
 #endif
 
 #endif // __GDDEBUG_HH_INCLUDED__

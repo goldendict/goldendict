@@ -323,7 +323,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
 
   if ( isUtf8File )
   {
-    //FDPRINTF( stderr, "%s: utf8 file.\n", m_title.c_str() );
+    //GD_FDPRINTF( stderr, "%s: utf8 file.\n", m_title.c_str() );
     m_defaultCharset = "UTF-8";
     m_sourceCharset = "UTF-8";
     m_targetCharset = "UTF-8";
