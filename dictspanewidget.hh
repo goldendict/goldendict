@@ -5,7 +5,6 @@
 #define __DICTSPANEWIDGET_HH_INCLUDED__
 
 #include <QWidget>
-#include <QSize>
 
 /// A widget holding the contents of the 'Dictionaries pane' docklet.
 class DictsPaneWidget: public QWidget

@@ -10,31 +10,31 @@
 // This widget allows grabbing a hotkey
 class HotKeyEdit: public QLineEdit
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  Qt::KeyboardModifiers currentModifiers;
-  int currentKey1, currentKey2;
+    Qt::KeyboardModifiers currentModifiers;
+    int currentKey1, currentKey2;
 
-  bool continuingCombo;
+    bool continuingCombo;
 
 public:
 
-  HotKeyEdit( QWidget * parent = 0 );
+    HotKeyEdit( QWidget * parent = 0 );
 
-  void setHotKey( Config::HotKey const & );
-  Config::HotKey getHotKey() const;
+    void setHotKey( Config::HotKey const & );
+    Config::HotKey getHotKey() const;
 
 protected:
 
-  void keyPressEvent( QKeyEvent * event );
-  void keyReleaseEvent( QKeyEvent * event );
+    void keyPressEvent( QKeyEvent * event );
+    void keyReleaseEvent( QKeyEvent * event );
 
 private:
 
-  void renderCurrentValue();
-  bool eventFilter( QObject *, QEvent * event );
+    void renderCurrentValue();
+    bool eventFilter( QObject *, QEvent * event );
 #ifdef Q_OS_WIN
-  int VkeyToQTkey( quint32 vkey );
+    int VkeyToQTkey( quint32 vkey );
 #endif
 };
 

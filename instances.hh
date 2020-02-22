@@ -20,52 +20,52 @@ using std::vector;
 
 struct Group
 {
-  unsigned id;
-  QString name, icon, favoritesFolder;
-  QIcon iconData;
-  QKeySequence shortcut;
-  vector< sptr< Dictionary::Class > > dictionaries;
+    unsigned id;
+    QString name, icon, favoritesFolder;
+    QIcon iconData;
+    QKeySequence shortcut;
+    vector< sptr< Dictionary::Class > > dictionaries;
 
-  /// Instantiates the given group from its configuration. If some dictionary
-  /// wasn't found, it just skips it.
-  Group( Config::Group const & cfgGroup,
-         vector< sptr< Dictionary::Class > > const & allDictionaries,
-         Config::Group const & inactiveGroup );
+    /// Instantiates the given group from its configuration. If some dictionary
+    /// wasn't found, it just skips it.
+    Group( Config::Group const & cfgGroup,
+           vector< sptr< Dictionary::Class > > const & allDictionaries,
+           Config::Group const & inactiveGroup );
 
-  /// Creates an empty group.
-  Group( QString const & name_ );
+    /// Creates an empty group.
+    Group( QString const & name_ );
 
-  virtual ~Group() {}
+    virtual ~Group() {}
 
-  /// Makes the configuration group from the current contents.
-  Config::Group makeConfigGroup();
+    /// Makes the configuration group from the current contents.
+    Config::Group makeConfigGroup();
 
-  /// Makes an icon object for this group, based on the icon's name or iconData.
-  QIcon makeIcon() const;
+    /// Makes an icon object for this group, based on the icon's name or iconData.
+    QIcon makeIcon() const;
 
-  /// Remove id's if not presented in group dictionaries
-  void checkMutedDictionaries( Config::MutedDictionaries * mutedDictionaries ) const;
+    /// Remove id's if not presented in group dictionaries
+    void checkMutedDictionaries( Config::MutedDictionaries * mutedDictionaries ) const;
 
-  // Some constants
+    // Some constants
 
-  /// The id of the 'All' group
-  static const unsigned AllGroupId = UINT_MAX - 1;
+    /// The id of the 'All' group
+    static const unsigned AllGroupId = UINT_MAX - 1;
 
-  /// The id of the fictious 'Help' group
-  static const unsigned HelpGroupId = UINT_MAX;
+    /// The id of the fictious 'Help' group
+    static const unsigned HelpGroupId = UINT_MAX;
 
-  /// Invalid value, used to specify that no group id is specified at all.
-  static const unsigned NoGroupId = 0;
+    /// Invalid value, used to specify that no group id is specified at all.
+    static const unsigned NoGroupId = 0;
 };
 
 struct Groups: public vector< Group >
 {
-  /// Tries finding the given group by its id. Returns the group found, or
-  /// 0 if there's no such group.
-  Group * findGroup( unsigned id );
-  Group const * findGroup( unsigned id ) const;
+    /// Tries finding the given group by its id. Returns the group found, or
+    /// 0 if there's no such group.
+    Group * findGroup( unsigned id );
+    Group const * findGroup( unsigned id ) const;
 
-  virtual ~Groups() {}
+    virtual ~Groups() {}
 };
 
 /// Adds any dictionaries not already present in the given group or in

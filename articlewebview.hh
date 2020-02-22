@@ -5,8 +5,8 @@
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
 #include <QWebView>
-#include "config.hh"
 
+namespace Config { struct Class; }
 typedef class QWebInspector ArticleInspector;
 
 /// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
@@ -19,53 +19,53 @@ typedef class QWebInspector ArticleInspector;
 ///    use triggerPageAction( QWebPage::InspectElement ) instead.
 class ArticleWebView: public QWebView
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 
-  ArticleWebView( QWidget * parent );
-  ~ArticleWebView();
+    ArticleWebView( QWidget * parent );
+    ~ArticleWebView();
 
-  void setUp( Config::Class * cfg );
+    void setUp( Config::Class * cfg );
 
-  bool isMidButtonPressed() const
-  { return midButtonPressed; }
-  void setSelectionBySingleClick( bool set )
-  { selectionBySingleClick = set; }
+    bool isMidButtonPressed() const
+    { return midButtonPressed; }
+    void setSelectionBySingleClick( bool set )
+    { selectionBySingleClick = set; }
 
-  void triggerPageAction( QWebPage::WebAction action, bool checked = false );
+    void triggerPageAction( QWebPage::WebAction action, bool checked = false );
 
 signals:
 
-  /// Signals that the user has just double-clicked. The signal is delivered
-  /// after the event was processed by the view -- that's the difference from
-  /// installing an event filter. This is used for translating the double-clicked
-  /// word, which gets selected by the view in response to double-click.
-  void doubleClicked( QPoint pos );
+    /// Signals that the user has just double-clicked. The signal is delivered
+    /// after the event was processed by the view -- that's the difference from
+    /// installing an event filter. This is used for translating the double-clicked
+    /// word, which gets selected by the view in response to double-click.
+    void doubleClicked( QPoint pos );
 
 protected slots:
 #if QT_VERSION >= 0x040600
-  void beforeClosed();
+    void beforeClosed();
 #endif
 protected:
 
-  bool event( QEvent * event );
-  void mousePressEvent( QMouseEvent * event );
-  void mouseReleaseEvent( QMouseEvent * event );
-  void mouseDoubleClickEvent( QMouseEvent * event );
-  void focusInEvent( QFocusEvent * event );
-  void wheelEvent( QWheelEvent * event );
+    bool event( QEvent * event );
+    void mousePressEvent( QMouseEvent * event );
+    void mouseReleaseEvent( QMouseEvent * event );
+    void mouseDoubleClickEvent( QMouseEvent * event );
+    void focusInEvent( QFocusEvent * event );
+    void wheelEvent( QWheelEvent * event );
 
 private:
 
-  Config::Class * cfg;
+    Config::Class * cfg;
 #if QT_VERSION >= 0x040600
-  ArticleInspector * inspector;
-  bool showInspectorDirectly;
+    ArticleInspector * inspector;
+    bool showInspectorDirectly;
 #endif
 
-  bool midButtonPressed;
-  bool selectionBySingleClick;
+    bool midButtonPressed;
+    bool selectionBySingleClick;
 };
 
 #endif

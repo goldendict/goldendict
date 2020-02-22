@@ -17,66 +17,66 @@ using std::string;
 using gd::wstring;
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Programs const & )
-  THROW_SPEC( std::exception );
+THROW_SPEC( std::exception );
 
 class RunInstance: public QObject
 {
-  Q_OBJECT
-  QProcess process;
+    Q_OBJECT
+    QProcess process;
 
 public:
 
-  RunInstance();
+    RunInstance();
 
-  // Starts the process. Should only be used once. The finished() signal will
-  // be emitted once it finishes. If there's an error, returns false and the
-  // description is saved to 'error'.
-  bool start( Config::Program const &, QString const & word, QString & error );
+    // Starts the process. Should only be used once. The finished() signal will
+    // be emitted once it finishes. If there's an error, returns false and the
+    // description is saved to 'error'.
+    bool start( Config::Program const &, QString const & word, QString & error );
 
 signals:
-  // Connect to this signal to get run results
-  void finished( QByteArray output, QString error );
+    // Connect to this signal to get run results
+    void finished( QByteArray output, QString error );
 
-  // Used internally only
+    // Used internally only
 signals:
-  void processFinished();
+    void processFinished();
 private slots:
 
-  void handleProcessFinished();
+    void handleProcessFinished();
 };
 
 class ProgramDataRequest: public Dictionary::DataRequest
 {
-  Q_OBJECT
-  Config::Program prg;
-  RunInstance instance;
+    Q_OBJECT
+    Config::Program prg;
+    RunInstance instance;
 
 public:
 
-  ProgramDataRequest( QString const & word, Config::Program const & );
+    ProgramDataRequest( QString const & word, Config::Program const & );
 
-  virtual void cancel();
+    virtual void cancel();
 
 private slots:
 
-  void instanceFinished( QByteArray output, QString error );
+    void instanceFinished( QByteArray output, QString error );
 };
 
 class ProgramWordSearchRequest: public Dictionary::WordSearchRequest
 {
-  Q_OBJECT
-  Config::Program prg;
-  RunInstance instance;
+    Q_OBJECT
+    Config::Program prg;
+    RunInstance instance;
 
 public:
 
-  ProgramWordSearchRequest( QString const & word, Config::Program const & );
+    ProgramWordSearchRequest( QString const & word, Config::Program const & );
 
-  virtual void cancel();
+    virtual void cancel();
 
 private slots:
 
-  void instanceFinished( QByteArray output, QString error );
+    void instanceFinished( QByteArray output, QString error );
 };
 
 }

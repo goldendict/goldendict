@@ -26,105 +26,105 @@ namespace FTS
 
 enum
 {
-  MinDistanceBetweenWords = 0,
-  MaxDistanceBetweenWords = 15,
-  MinArticlesPerDictionary = 1,
-  MaxArticlesPerDictionary = 10000
+    MinDistanceBetweenWords = 0,
+    MaxDistanceBetweenWords = 15,
+    MinArticlesPerDictionary = 1,
+    MaxArticlesPerDictionary = 10000
 };
 
 void Indexing::run()
 {
-  try
-  {
-    // First iteration - dictionaries with no more MaxDictionarySizeForFastSearch articles
-    for( size_t x = 0; x < dictionaries.size(); x++ )
+    try
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-        break;
+        // First iteration - dictionaries with no more MaxDictionarySizeForFastSearch articles
+        for( size_t x = 0; x < dictionaries.size(); x++ )
+        {
+            if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+                break;
 
-      if( dictionaries.at( x )->canFTS()
-          &&!dictionaries.at( x )->haveFTSIndex() )
-      {
-        emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
-        dictionaries.at( x )->makeFTSIndex( isCancelled, true );
-      }
+            if( dictionaries.at( x )->canFTS()
+                    &&!dictionaries.at( x )->haveFTSIndex() )
+            {
+                emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
+                dictionaries.at( x )->makeFTSIndex( isCancelled, true );
+            }
+        }
+
+        // Second iteration - all remaining dictionaries
+        for( size_t x = 0; x < dictionaries.size(); x++ )
+        {
+            if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+                break;
+
+            if( dictionaries.at( x )->canFTS()
+                    &&!dictionaries.at( x )->haveFTSIndex() )
+            {
+                emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
+                dictionaries.at( x )->makeFTSIndex( isCancelled, false );
+            }
+        }
     }
-
-    // Second iteration - all remaining dictionaries
-    for( size_t x = 0; x < dictionaries.size(); x++ )
+    catch( std::exception &ex )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-        break;
-
-      if( dictionaries.at( x )->canFTS()
-          &&!dictionaries.at( x )->haveFTSIndex() )
-      {
-        emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
-        dictionaries.at( x )->makeFTSIndex( isCancelled, false );
-      }
+        gdWarning( "Exception occured while full-text search: %s", ex.what() );
     }
-  }
-  catch( std::exception &ex )
-  {
-    gdWarning( "Exception occured while full-text search: %s", ex.what() );
-  }
-  emit sendNowIndexingName( QString() );
+    emit sendNowIndexingName( QString() );
 }
 
 
 FtsIndexing::FtsIndexing( std::vector< sptr< Dictionary::Class > > const & dicts):
-  dictionaries( dicts ),
-  started( false )
+    dictionaries( dicts ),
+    started( false )
 {
 }
 
 void FtsIndexing::doIndexing()
 {
-  if( started )
-    stopIndexing();
+    if( started )
+        stopIndexing();
 
-  if( !started )
-  {
-    while( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-      isCancelled.deref();
+    if( !started )
+    {
+        while( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+            isCancelled.deref();
 
-    Indexing *idx = new Indexing( isCancelled, dictionaries, indexingExited );
+        Indexing *idx = new Indexing( isCancelled, dictionaries, indexingExited );
 
-    connect( idx, SIGNAL( sendNowIndexingName( QString ) ), this, SLOT( setNowIndexedName( QString ) ) );
+        connect( idx, SIGNAL( sendNowIndexingName( QString ) ), this, SLOT( setNowIndexedName( QString ) ) );
 
-    QThreadPool::globalInstance()->start( idx );
+        QThreadPool::globalInstance()->start( idx );
 
-    started = true;
-  }
+        started = true;
+    }
 }
 
 void FtsIndexing::stopIndexing()
 {
-  if( started )
-  {
-    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-      isCancelled.ref();
+    if( started )
+    {
+        if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+            isCancelled.ref();
 
-    indexingExited.acquire();
-    started = false;
+        indexingExited.acquire();
+        started = false;
 
-    setNowIndexedName( QString() );
-  }
+        setNowIndexedName( QString() );
+    }
 }
 
 void FtsIndexing::setNowIndexedName( QString name )
 {
-  {
-    Mutex::Lock _( nameMutex );
-    nowIndexing = name;
-  }
-  emit newIndexingName( name );
+    {
+        Mutex::Lock _( nameMutex );
+        nowIndexing = name;
+    }
+    emit newIndexingName( name );
 }
 
 QString FtsIndexing::nowIndexingName()
 {
-  Mutex::Lock _( nameMutex );
-  return nowIndexing;
+    Mutex::Lock _( nameMutex );
+    return nowIndexing;
 }
 
 FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
@@ -132,114 +132,114 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
                                             std::vector< sptr< Dictionary::Class > > const & dictionaries_,
                                             std::vector< Instances::Group > const & groups_,
                                             FtsIndexing & ftsidx ) :
-  QDialog( parent ),
-  cfg( cfg_ ),
-  dictionaries( dictionaries_ ),
-  groups( groups_ ),
-  group( 0 ),
-  ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
-  ignoreDiacritics( cfg_.preferences.fts.ignoreDiacritics ),
-  ftsIdx( ftsidx )
-, helpAction( this )
+    QDialog( parent ),
+    cfg( cfg_ ),
+    dictionaries( dictionaries_ ),
+    groups( groups_ ),
+    group( 0 ),
+    ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
+    ignoreDiacritics( cfg_.preferences.fts.ignoreDiacritics ),
+    ftsIdx( ftsidx )
+  , helpAction( this )
 {
-  ui.setupUi( this );
+    ui.setupUi( this );
 
-  setAttribute( Qt::WA_DeleteOnClose, false );
-  setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
+    setAttribute( Qt::WA_DeleteOnClose, false );
+    setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
-  setWindowTitle( tr( "Full-text search" ) );
+    setWindowTitle( tr( "Full-text search" ) );
 
-  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
-    restoreGeometry( cfg.preferences.fts.dialogGeometry );
+    if( cfg.preferences.fts.dialogGeometry.size() > 0 )
+        restoreGeometry( cfg.preferences.fts.dialogGeometry );
 
-  setNewIndexingName( ftsIdx.nowIndexingName() );
+    setNewIndexingName( ftsIdx.nowIndexingName() );
 
-  connect( &ftsIdx, SIGNAL( newIndexingName( QString ) ),
-           this, SLOT( setNewIndexingName( QString ) ) );
+    connect( &ftsIdx, SIGNAL( newIndexingName( QString ) ),
+             this, SLOT( setNewIndexingName( QString ) ) );
 
-  ui.searchMode->addItem( tr( "Whole words" ), WholeWords );
-  ui.searchMode->addItem( tr( "Plain text"), PlainText );
-  ui.searchMode->addItem( tr( "Wildcards" ), Wildcards );
-  ui.searchMode->addItem( tr( "RegExp" ), RegExp );
-  ui.searchMode->setCurrentIndex( cfg.preferences.fts.searchMode );
+    ui.searchMode->addItem( tr( "Whole words" ), WholeWords );
+    ui.searchMode->addItem( tr( "Plain text"), PlainText );
+    ui.searchMode->addItem( tr( "Wildcards" ), Wildcards );
+    ui.searchMode->addItem( tr( "RegExp" ), RegExp );
+    ui.searchMode->setCurrentIndex( cfg.preferences.fts.searchMode );
 
-  ui.searchProgressBar->hide();
+    ui.searchProgressBar->hide();
 
-  ui.checkBoxDistanceBetweenWords->setText( tr( "Max distance between words (%1-%2):" )
-                                            .arg( QString::number( MinDistanceBetweenWords ) )
-                                            .arg( QString::number( MaxDistanceBetweenWords ) ) );
-  ui.checkBoxDistanceBetweenWords->setChecked( cfg.preferences.fts.useMaxDistanceBetweenWords );
+    ui.checkBoxDistanceBetweenWords->setText( tr( "Max distance between words (%1-%2):" )
+                                              .arg( QString::number( MinDistanceBetweenWords ) )
+                                              .arg( QString::number( MaxDistanceBetweenWords ) ) );
+    ui.checkBoxDistanceBetweenWords->setChecked( cfg.preferences.fts.useMaxDistanceBetweenWords );
 
-  ui.distanceBetweenWords->setMinimum( MinDistanceBetweenWords );
-  ui.distanceBetweenWords->setMaximum( MaxDistanceBetweenWords );
-  ui.distanceBetweenWords->setValue( cfg.preferences.fts.maxDistanceBetweenWords );
+    ui.distanceBetweenWords->setMinimum( MinDistanceBetweenWords );
+    ui.distanceBetweenWords->setMaximum( MaxDistanceBetweenWords );
+    ui.distanceBetweenWords->setValue( cfg.preferences.fts.maxDistanceBetweenWords );
 
-  ui.checkBoxArticlesPerDictionary->setText( tr( "Max articles per dictionary (%1-%2):" )
-                                             .arg( QString::number( MinArticlesPerDictionary ) )
-                                             .arg( QString::number( MaxArticlesPerDictionary ) ) );
-  ui.checkBoxArticlesPerDictionary->setChecked( cfg.preferences.fts.useMaxArticlesPerDictionary );
+    ui.checkBoxArticlesPerDictionary->setText( tr( "Max articles per dictionary (%1-%2):" )
+                                               .arg( QString::number( MinArticlesPerDictionary ) )
+                                               .arg( QString::number( MaxArticlesPerDictionary ) ) );
+    ui.checkBoxArticlesPerDictionary->setChecked( cfg.preferences.fts.useMaxArticlesPerDictionary );
 
-  ui.articlesPerDictionary->setMinimum( MinArticlesPerDictionary );
-  ui.articlesPerDictionary->setMaximum( MaxArticlesPerDictionary );
-  ui.articlesPerDictionary->setValue( cfg.preferences.fts.maxArticlesPerDictionary );
+    ui.articlesPerDictionary->setMinimum( MinArticlesPerDictionary );
+    ui.articlesPerDictionary->setMaximum( MaxArticlesPerDictionary );
+    ui.articlesPerDictionary->setValue( cfg.preferences.fts.maxArticlesPerDictionary );
 
-  int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
-  if( mode == WholeWords || mode == PlainText )
-  {
-    ui.checkBoxIgnoreWordOrder->setChecked( ignoreWordsOrder );
-    ui.checkBoxIgnoreWordOrder->setEnabled( true );
-  }
-  else
-  {
-    ui.checkBoxIgnoreWordOrder->setChecked( false );
-    ui.checkBoxIgnoreWordOrder->setEnabled( false );
-  }
+    int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
+    if( mode == WholeWords || mode == PlainText )
+    {
+        ui.checkBoxIgnoreWordOrder->setChecked( ignoreWordsOrder );
+        ui.checkBoxIgnoreWordOrder->setEnabled( true );
+    }
+    else
+    {
+        ui.checkBoxIgnoreWordOrder->setChecked( false );
+        ui.checkBoxIgnoreWordOrder->setEnabled( false );
+    }
 
-  ui.checkBoxIgnoreDiacritics->setChecked( ignoreDiacritics );
+    ui.checkBoxIgnoreDiacritics->setChecked( ignoreDiacritics );
 
-  ui.matchCase->setChecked( cfg.preferences.fts.matchCase );
+    ui.matchCase->setChecked( cfg.preferences.fts.matchCase );
 
-  setLimitsUsing();
+    setLimitsUsing();
 
-  connect( ui.checkBoxDistanceBetweenWords, SIGNAL( stateChanged( int ) ),
-           this, SLOT( setLimitsUsing() ) );
-  connect( ui.checkBoxArticlesPerDictionary, SIGNAL( stateChanged( int ) ),
-           this, SLOT( setLimitsUsing() ) );
-  connect( ui.searchMode, SIGNAL( currentIndexChanged( int ) ),
-           this, SLOT( setLimitsUsing() ) );
-  connect( ui.checkBoxIgnoreWordOrder, SIGNAL( stateChanged( int ) ),
-           this, SLOT( ignoreWordsOrderClicked() ) );
-  connect( ui.checkBoxIgnoreDiacritics, SIGNAL( stateChanged( int ) ),
-           this, SLOT( ignoreDiacriticsClicked() ) );
+    connect( ui.checkBoxDistanceBetweenWords, SIGNAL( stateChanged( int ) ),
+             this, SLOT( setLimitsUsing() ) );
+    connect( ui.checkBoxArticlesPerDictionary, SIGNAL( stateChanged( int ) ),
+             this, SLOT( setLimitsUsing() ) );
+    connect( ui.searchMode, SIGNAL( currentIndexChanged( int ) ),
+             this, SLOT( setLimitsUsing() ) );
+    connect( ui.checkBoxIgnoreWordOrder, SIGNAL( stateChanged( int ) ),
+             this, SLOT( ignoreWordsOrderClicked() ) );
+    connect( ui.checkBoxIgnoreDiacritics, SIGNAL( stateChanged( int ) ),
+             this, SLOT( ignoreDiacriticsClicked() ) );
 
-  model = new HeadwordsListModel( this, results, activeDicts );
-  ui.headwordsView->setModel( model );
+    model = new HeadwordsListModel( this, results, activeDicts );
+    ui.headwordsView->setModel( model );
 
-  ui.articlesFoundLabel->setText( tr( "Articles found: " ) + "0" );
+    ui.articlesFoundLabel->setText( tr( "Articles found: " ) + "0" );
 
-  connect( ui.headwordsView, SIGNAL( clicked( QModelIndex ) ),
-           this, SLOT( itemClicked( QModelIndex ) ) );
+    connect( ui.headwordsView, SIGNAL( clicked( QModelIndex ) ),
+             this, SLOT( itemClicked( QModelIndex ) ) );
 
-  connect( this, SIGNAL( finished( int ) ), this, SLOT( saveData() ) );
+    connect( this, SIGNAL( finished( int ) ), this, SLOT( saveData() ) );
 
-  connect( ui.OKButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
-  connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
+    connect( ui.OKButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
+    connect( ui.cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
 
-  connect( ui.helpButton, SIGNAL( clicked() ),
-           this, SLOT( helpRequested() ) );
+    connect( ui.helpButton, SIGNAL( clicked() ),
+             this, SLOT( helpRequested() ) );
 
-  helpAction.setShortcut( QKeySequence( "F1" ) );
-  helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
+    helpAction.setShortcut( QKeySequence( "F1" ) );
+    helpAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
 
-  connect( &helpAction, SIGNAL( triggered() ),
-           this, SLOT( helpRequested() ) );
+    connect( &helpAction, SIGNAL( triggered() ),
+             this, SLOT( helpRequested() ) );
 
-  addAction( &helpAction );
+    addAction( &helpAction );
 
-  ui.headwordsView->installEventFilter( this );
+    ui.headwordsView->installEventFilter( this );
 
-  WordListItemDelegate *delegate = new WordListItemDelegate( ui.headwordsView);
-/*
+    WordListItemDelegate *delegate = new WordListItemDelegate( ui.headwordsView);
+    /*
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
   // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
@@ -262,8 +262,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
 #endif
 */
-  ui.searchLine->setText( static_cast< MainWindow * >( parent )->getTranslateLineText() );
-  ui.searchLine->selectAll();
+    ui.searchLine->setText( static_cast< MainWindow * >( parent )->getTranslateLineText() );
+    ui.searchLine->selectAll();
 }
 
 FullTextSearchDialog::~FullTextSearchDialog()
@@ -280,450 +280,450 @@ FullTextSearchDialog::~FullTextSearchDialog()
 
 void FullTextSearchDialog::stopSearch()
 {
-  if( !searchReqs.empty() )
-  {
-    for( std::list< sptr< Dictionary::DataRequest > >::iterator it = searchReqs.begin();
-         it != searchReqs.end(); ++it )
-      if( !(*it)->isFinished() )
-        (*it)->cancel();
+    if( !searchReqs.empty() )
+    {
+        for( std::list< sptr< Dictionary::DataRequest > >::iterator it = searchReqs.begin();
+             it != searchReqs.end(); ++it )
+            if( !(*it)->isFinished() )
+                (*it)->cancel();
 
-    while( searchReqs.size() )
-      QApplication::processEvents();
-  }
+        while( searchReqs.size() )
+            QApplication::processEvents();
+    }
 }
 
 void FullTextSearchDialog::showDictNumbers()
 {
-  ui.totalDicts->setText( QString::number( activeDicts.size() ) );
+    ui.totalDicts->setText( QString::number( activeDicts.size() ) );
 
-  unsigned ready = 0, toIndex = 0;
-  for( unsigned x = 0; x < activeDicts.size(); x++ )
-  {
-    if( activeDicts.at( x )->haveFTSIndex() )
-      ready++;
-    else
-      toIndex++;
-  }
+    unsigned ready = 0, toIndex = 0;
+    for( unsigned x = 0; x < activeDicts.size(); x++ )
+    {
+        if( activeDicts.at( x )->haveFTSIndex() )
+            ready++;
+        else
+            toIndex++;
+    }
 
-  ui.readyDicts->setText( QString::number( ready ) );
-  ui.toIndexDicts->setText( QString::number( toIndex ) );
+    ui.readyDicts->setText( QString::number( ready ) );
+    ui.toIndexDicts->setText( QString::number( toIndex ) );
 }
 
 void FullTextSearchDialog::saveData()
 {
-  cfg.preferences.fts.searchMode = ui.searchMode->currentIndex();
-  cfg.preferences.fts.matchCase = ui.matchCase->isChecked();
-  cfg.preferences.fts.maxArticlesPerDictionary = ui.articlesPerDictionary->text().toInt();
-  cfg.preferences.fts.maxDistanceBetweenWords = ui.distanceBetweenWords->text().toInt();
-  cfg.preferences.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
-  cfg.preferences.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
-  cfg.preferences.fts.ignoreWordsOrder = ignoreWordsOrder;
-  cfg.preferences.fts.ignoreDiacritics = ignoreDiacritics;
+    cfg.preferences.fts.searchMode = ui.searchMode->currentIndex();
+    cfg.preferences.fts.matchCase = ui.matchCase->isChecked();
+    cfg.preferences.fts.maxArticlesPerDictionary = ui.articlesPerDictionary->text().toInt();
+    cfg.preferences.fts.maxDistanceBetweenWords = ui.distanceBetweenWords->text().toInt();
+    cfg.preferences.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
+    cfg.preferences.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
+    cfg.preferences.fts.ignoreWordsOrder = ignoreWordsOrder;
+    cfg.preferences.fts.ignoreDiacritics = ignoreDiacritics;
 
-  cfg.preferences.fts.dialogGeometry = saveGeometry();
+    cfg.preferences.fts.dialogGeometry = saveGeometry();
 }
 
 void FullTextSearchDialog::setNewIndexingName( QString name )
 {
-  ui.nowIndexingLabel->setText( tr( "Now indexing: " )
-                                + ( name.isEmpty() ? tr( "None" ) : name ) );
-  showDictNumbers();
+    ui.nowIndexingLabel->setText( tr( "Now indexing: " )
+                                  + ( name.isEmpty() ? tr( "None" ) : name ) );
+    showDictNumbers();
 }
 
 void FullTextSearchDialog::setLimitsUsing()
 {
-  int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
-  if( mode == WholeWords || mode == PlainText )
-  {
-    ui.checkBoxDistanceBetweenWords->setEnabled( true );
-    ui.distanceBetweenWords->setEnabled( ui.checkBoxDistanceBetweenWords->isChecked() );
-    ui.checkBoxIgnoreWordOrder->setChecked( ignoreWordsOrder );
-    ui.checkBoxIgnoreWordOrder->setEnabled( true );
-  }
-  else
-  {
-    ui.checkBoxIgnoreWordOrder->setEnabled( false );
-    ui.checkBoxIgnoreWordOrder->setChecked( false );
-    ui.checkBoxDistanceBetweenWords->setEnabled( false );
-    ui.distanceBetweenWords->setEnabled( false );
-  }
-  ui.articlesPerDictionary->setEnabled( ui.checkBoxArticlesPerDictionary->isChecked() );
+    int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
+    if( mode == WholeWords || mode == PlainText )
+    {
+        ui.checkBoxDistanceBetweenWords->setEnabled( true );
+        ui.distanceBetweenWords->setEnabled( ui.checkBoxDistanceBetweenWords->isChecked() );
+        ui.checkBoxIgnoreWordOrder->setChecked( ignoreWordsOrder );
+        ui.checkBoxIgnoreWordOrder->setEnabled( true );
+    }
+    else
+    {
+        ui.checkBoxIgnoreWordOrder->setEnabled( false );
+        ui.checkBoxIgnoreWordOrder->setChecked( false );
+        ui.checkBoxDistanceBetweenWords->setEnabled( false );
+        ui.distanceBetweenWords->setEnabled( false );
+    }
+    ui.articlesPerDictionary->setEnabled( ui.checkBoxArticlesPerDictionary->isChecked() );
 }
 
 void FullTextSearchDialog::ignoreWordsOrderClicked()
 {
-  ignoreWordsOrder = ui.checkBoxIgnoreWordOrder->isChecked();
+    ignoreWordsOrder = ui.checkBoxIgnoreWordOrder->isChecked();
 }
 
 void FullTextSearchDialog::ignoreDiacriticsClicked()
 {
-  ignoreDiacritics = ui.checkBoxIgnoreDiacritics->isChecked();
+    ignoreDiacritics = ui.checkBoxIgnoreDiacritics->isChecked();
 }
 
 void FullTextSearchDialog::accept()
 {
-  QStringList list1, list2;
-  int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
+    QStringList list1, list2;
+    int mode = ui.searchMode->itemData( ui.searchMode->currentIndex() ).toInt();
 
-  int maxResultsPerDict = ui.checkBoxArticlesPerDictionary->isChecked() ?
-                            ui.articlesPerDictionary->value() : -1;
-  int distanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked() ?
-                               ui.distanceBetweenWords->value() : -1;
+    int maxResultsPerDict = ui.checkBoxArticlesPerDictionary->isChecked() ?
+                ui.articlesPerDictionary->value() : -1;
+    int distanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked() ?
+                ui.distanceBetweenWords->value() : -1;
 
-  model->clear();
-  ui.articlesFoundLabel->setText( tr( "Articles found: " ) + QString::number( results.size() ) );
+    model->clear();
+    ui.articlesFoundLabel->setText( tr( "Articles found: " ) + QString::number( results.size() ) );
 
-  bool hasCJK;
-  if( !FtsHelpers::parseSearchString( ui.searchLine->text(), list1, list2,
-                                      searchRegExp, mode,
-                                      ui.matchCase->isChecked(),
-                                      distanceBetweenWords,
-                                      hasCJK ) )
-  {
-    if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
+    bool hasCJK;
+    if( !FtsHelpers::parseSearchString( ui.searchLine->text(), list1, list2,
+                                        searchRegExp, mode,
+                                        ui.matchCase->isChecked(),
+                                        distanceBetweenWords,
+                                        hasCJK ) )
     {
-      QMessageBox message( QMessageBox::Warning,
-                           "GoldenDict",
-                           tr( "CJK symbols in search string are not compatible with search modes \"Whole words\" and \"Plain text\"" ),
-                           QMessageBox::Ok,
-                           this );
-      message.exec();
+        if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
+        {
+            QMessageBox message( QMessageBox::Warning,
+                                 "GoldenDict",
+                                 tr( "CJK symbols in search string are not compatible with search modes \"Whole words\" and \"Plain text\"" ),
+                                 QMessageBox::Ok,
+                                 this );
+            message.exec();
+        }
+        else
+        {
+            QMessageBox message( QMessageBox::Warning,
+                                 "GoldenDict",
+                                 tr( "The search line must contains at least one word containing " )
+                                 + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
+                                 QMessageBox::Ok,
+                                 this );
+            message.exec();
+        }
+        return;
     }
-    else
+
+    if( activeDicts.empty() )
     {
-      QMessageBox message( QMessageBox::Warning,
-                           "GoldenDict",
-                           tr( "The search line must contains at least one word containing " )
-                           + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
-                           QMessageBox::Ok,
-                           this );
-      message.exec();
+        QMessageBox message( QMessageBox::Warning,
+                             "GoldenDict",
+                             tr( "No dictionaries for full-text search" ),
+                             QMessageBox::Ok,
+                             this );
+        message.exec();
+        return;
     }
-    return;
-  }
 
-  if( activeDicts.empty() )
-  {
-    QMessageBox message( QMessageBox::Warning,
-                         "GoldenDict",
-                         tr( "No dictionaries for full-text search" ),
-                         QMessageBox::Ok,
-                         this );
-    message.exec();
-    return;
-  }
+    ui.OKButton->setEnabled( false );
+    ui.searchProgressBar->show();
 
-  ui.OKButton->setEnabled( false );
-  ui.searchProgressBar->show();
+    // Make search requests
 
-  // Make search requests
+    for( unsigned x = 0; x < activeDicts.size(); ++x )
+    {
+        sptr< Dictionary::DataRequest > req = activeDicts[ x ]->getSearchResults(
+                    ui.searchLine->text(),
+                    mode,
+                    ui.matchCase->isChecked(),
+                    distanceBetweenWords,
+                    maxResultsPerDict,
+                    ignoreWordsOrder,
+                    ignoreDiacritics
+                    );
+        connect( req.get(), SIGNAL( finished() ),
+                 this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
 
-  for( unsigned x = 0; x < activeDicts.size(); ++x )
-  {
-    sptr< Dictionary::DataRequest > req = activeDicts[ x ]->getSearchResults(
-                                                              ui.searchLine->text(),
-                                                              mode,
-                                                              ui.matchCase->isChecked(),
-                                                              distanceBetweenWords,
-                                                              maxResultsPerDict,
-                                                              ignoreWordsOrder,
-                                                              ignoreDiacritics
-                                                            );
-    connect( req.get(), SIGNAL( finished() ),
-             this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
+        searchReqs.push_back( req );
+    }
 
-    searchReqs.push_back( req );
-  }
-
-  searchReqFinished(); // Handle any ones which have already finished
+    searchReqFinished(); // Handle any ones which have already finished
 }
 
 void FullTextSearchDialog::searchReqFinished()
 {
-  while ( searchReqs.size() )
-  {
-    std::list< sptr< Dictionary::DataRequest > >::iterator it;
-    for( it = searchReqs.begin(); it != searchReqs.end(); ++it )
+    while ( searchReqs.size() )
     {
-      if ( (*it)->isFinished() )
-      {
-        GD_DPRINTF( "one finished.\n" );
-
-        const QString &errorString = (*it)->getErrorString();
-
-        if ( (*it)->dataSize() >= 0 || !errorString.isEmpty() )
+        std::list< sptr< Dictionary::DataRequest > >::iterator it;
+        for( it = searchReqs.begin(); it != searchReqs.end(); ++it )
         {
-          QList< FtsHeadword > * headwords;
-          if( (unsigned)(*it)->dataSize() >= sizeof( headwords ) )
-          {
-            try
+            if ( (*it)->isFinished() )
             {
-              (*it)->getDataSlice( 0, sizeof( headwords ), &headwords );
-              model->addResults( QModelIndex(), *headwords );
-              delete headwords;
-              ui.articlesFoundLabel->setText( tr( "Articles found: " )
-                                              + QString::number( results.size() ) );
-            }
-            catch( std::exception & e )
-            {
-              gdWarning( "getDataSlice error: %s\n", e.what() );
-            }
-          }
+                GD_DPRINTF( "one finished.\n" );
 
+                const QString &errorString = (*it)->getErrorString();
+
+                if ( (*it)->dataSize() >= 0 || !errorString.isEmpty() )
+                {
+                    QList< FtsHeadword > * headwords;
+                    if( (unsigned)(*it)->dataSize() >= sizeof( headwords ) )
+                    {
+                        try
+                        {
+                            (*it)->getDataSlice( 0, sizeof( headwords ), &headwords );
+                            model->addResults( QModelIndex(), *headwords );
+                            delete headwords;
+                            ui.articlesFoundLabel->setText( tr( "Articles found: " )
+                                                            + QString::number( results.size() ) );
+                        }
+                        catch( std::exception & e )
+                        {
+                            gdWarning( "getDataSlice error: %s\n", e.what() );
+                        }
+                    }
+
+                }
+                break;
+            }
         }
-        break;
-      }
+        if( it != searchReqs.end() )
+        {
+            GD_DPRINTF( "erasing..\n" );
+            searchReqs.erase( it );
+            GD_DPRINTF( "erase done..\n" );
+            continue;
+        }
+        else
+            break;
     }
-    if( it != searchReqs.end() )
+    if ( searchReqs.empty() )
     {
-      GD_DPRINTF( "erasing..\n" );
-      searchReqs.erase( it );
-      GD_DPRINTF( "erase done..\n" );
-      continue;
+        ui.searchProgressBar->hide();
+        ui.OKButton->setEnabled( true );
+        QApplication::beep();
     }
-    else
-      break;
-  }
-  if ( searchReqs.empty() )
-  {
-    ui.searchProgressBar->hide();
-    ui.OKButton->setEnabled( true );
-    QApplication::beep();
-  }
 }
 
 void FullTextSearchDialog::reject()
 {
-  if( !searchReqs.empty() )
-    stopSearch();
-  else
-  {
-    saveData();
-    emit closeDialog();
-  }
+    if( !searchReqs.empty() )
+        stopSearch();
+    else
+    {
+        saveData();
+        emit closeDialog();
+    }
 }
 
 void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
 {
-  if( idx.isValid() && idx.row() < results.size() )
-  {
-    QString headword = results[ idx.row() ].headword;
-    QRegExp reg;
-    if( !results[ idx.row() ].foundHiliteRegExps.isEmpty() )
+    if( idx.isValid() && idx.row() < results.size() )
     {
-      reg = QRegExp( results[ idx.row() ].foundHiliteRegExps.join( "|"),
-                     results[ idx.row() ].matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                     QRegExp::RegExp2 );
-      reg.setMinimal( true );
+        QString headword = results[ idx.row() ].headword;
+        QRegExp reg;
+        if( !results[ idx.row() ].foundHiliteRegExps.isEmpty() )
+        {
+            reg = QRegExp( results[ idx.row() ].foundHiliteRegExps.join( "|"),
+                    results[ idx.row() ].matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
+                    QRegExp::RegExp2 );
+            reg.setMinimal( true );
+        }
+        else
+            reg = searchRegExp;
+        emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg, ignoreDiacritics );
     }
-    else
-      reg = searchRegExp;
-    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg, ignoreDiacritics );
-  }
 }
 
 void FullTextSearchDialog::updateDictionaries()
 {
-  activeDicts.clear();
+    activeDicts.clear();
 
-  // Find the given group
+    // Find the given group
 
-  Instances::Group const * activeGroup = 0;
+    Instances::Group const * activeGroup = 0;
 
-  for( unsigned x = 0; x < groups.size(); ++x )
-    if ( groups[ x ].id == group )
+    for( unsigned x = 0; x < groups.size(); ++x )
+        if ( groups[ x ].id == group )
+        {
+            activeGroup = &groups[ x ];
+            break;
+        }
+
+    // If we've found a group, use its dictionaries; otherwise, use the global
+    // heap.
+    std::vector< sptr< Dictionary::Class > > const & groupDicts =
+            activeGroup ? activeGroup->dictionaries : dictionaries;
+
+    // Exclude muted dictionaries
+
+    Config::Group const * grp = cfg.getGroup( group );
+    Config::MutedDictionaries const * mutedDicts;
+
+    if( group == Instances::Group::AllGroupId )
+        mutedDicts = &cfg.mutedDictionaries;
+    else
+        mutedDicts = grp ? &grp->mutedDictionaries : 0;
+
+    if( mutedDicts && !mutedDicts->isEmpty() )
     {
-      activeGroup = &groups[ x ];
-      break;
+        activeDicts.reserve( groupDicts.size() );
+        for( unsigned x = 0; x < groupDicts.size(); ++x )
+            if ( groupDicts[ x ]->canFTS()
+                 && !mutedDicts->contains( QString::fromStdString( groupDicts[ x ]->getId() ) )
+                 )
+                activeDicts.push_back( groupDicts[ x ] );
+    }
+    else
+    {
+        for( unsigned x = 0; x < groupDicts.size(); ++x )
+            if ( groupDicts[ x ]->canFTS() )
+                activeDicts.push_back( groupDicts[ x ] );
     }
 
-  // If we've found a group, use its dictionaries; otherwise, use the global
-  // heap.
-  std::vector< sptr< Dictionary::Class > > const & groupDicts =
-    activeGroup ? activeGroup->dictionaries : dictionaries;
-
-  // Exclude muted dictionaries
-
-  Config::Group const * grp = cfg.getGroup( group );
-  Config::MutedDictionaries const * mutedDicts;
-
-  if( group == Instances::Group::AllGroupId )
-    mutedDicts = &cfg.mutedDictionaries;
-  else
-    mutedDicts = grp ? &grp->mutedDictionaries : 0;
-
-  if( mutedDicts && !mutedDicts->isEmpty() )
-  {
-    activeDicts.reserve( groupDicts.size() );
-    for( unsigned x = 0; x < groupDicts.size(); ++x )
-      if ( groupDicts[ x ]->canFTS()
-           && !mutedDicts->contains( QString::fromStdString( groupDicts[ x ]->getId() ) )
-         )
-        activeDicts.push_back( groupDicts[ x ] );
-  }
-  else
-  {
-    for( unsigned x = 0; x < groupDicts.size(); ++x )
-      if ( groupDicts[ x ]->canFTS() )
-        activeDicts.push_back( groupDicts[ x ] );
-  }
-
-  showDictNumbers();
+    showDictNumbers();
 }
 
 bool FullTextSearchDialog::eventFilter( QObject * obj, QEvent * ev )
 {
-  if( obj == ui.headwordsView && ev->type() == QEvent::KeyPress )
-  {
-    QKeyEvent * kev = static_cast< QKeyEvent * >( ev );
-    if( kev->key() == Qt::Key_Return || kev->key() == Qt::Key_Enter )
+    if( obj == ui.headwordsView && ev->type() == QEvent::KeyPress )
     {
-      itemClicked( ui.headwordsView->currentIndex() );
-      return true;
+        QKeyEvent * kev = static_cast< QKeyEvent * >( ev );
+        if( kev->key() == Qt::Key_Return || kev->key() == Qt::Key_Enter )
+        {
+            itemClicked( ui.headwordsView->currentIndex() );
+            return true;
+        }
     }
-  }
-  return QDialog::eventFilter( obj, ev );
+    return QDialog::eventFilter( obj, ev );
 }
 
 void FullTextSearchDialog::helpRequested()
 {
-  MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
-  if( mainWindow )
-    mainWindow->showGDHelpForID( "Full-text search" );
+    MainWindow * mainWindow = qobject_cast< MainWindow * >( parentWidget() );
+    if( mainWindow )
+        mainWindow->showGDHelpForID( "Full-text search" );
 }
 
 /// HeadwordsListModel
 
 int HeadwordsListModel::rowCount( QModelIndex const & ) const
 {
-  return headwords.size();
+    return headwords.size();
 }
 
 QVariant HeadwordsListModel::data( QModelIndex const & index, int role ) const
 {
-  if( index.row() < 0 )
-    return QVariant();
+    if( index.row() < 0 )
+        return QVariant();
 
-  FtsHeadword const & head = headwords[ index.row() ];
+    FtsHeadword const & head = headwords[ index.row() ];
 
-  if ( head.headword.isEmpty() )
-    return QVariant();
+    if ( head.headword.isEmpty() )
+        return QVariant();
 
-  switch ( role )
-  {
+    switch ( role )
+    {
     case Qt::ToolTipRole:
     {
-      QString tt;
-      for( int x = 0; x < head.dictIDs.size(); x++ )
-      {
-        if( x != 0 )
-          tt += "<br>";
+        QString tt;
+        for( int x = 0; x < head.dictIDs.size(); x++ )
+        {
+            if( x != 0 )
+                tt += "<br>";
 
-        int n = getDictIndex( head.dictIDs[ x ] );
-        if( n != -1 )
-          tt += QString::fromUtf8( dictionaries[ n ]->getName().c_str() ) ;
-      }
-      return tt;
+            int n = getDictIndex( head.dictIDs[ x ] );
+            if( n != -1 )
+                tt += QString::fromUtf8( dictionaries[ n ]->getName().c_str() ) ;
+        }
+        return tt;
     }
 
     case Qt::DisplayRole :
-      return head.headword;
+        return head.headword;
 
     case Qt::EditRole :
-      return head.headword;
+        return head.headword;
 
     default:;
-  }
+    }
 
-  return QVariant();
+    return QVariant();
 }
 
 void HeadwordsListModel::addResults(const QModelIndex & parent, QList< FtsHeadword > const & hws )
 {
-Q_UNUSED( parent );
-  beginResetModel();
+    Q_UNUSED( parent );
+    beginResetModel();
 
-  QList< FtsHeadword > temp;
+    QList< FtsHeadword > temp;
 
-  for( int x = 0; x < hws.length(); x++ )
-  {
-    QList< FtsHeadword >::iterator it = qBinaryFind( headwords.begin(), headwords.end(), hws.at( x ) );
-    if( it != headwords.end() )
+    for( int x = 0; x < hws.length(); x++ )
     {
-      it->dictIDs.push_back( hws.at( x ).dictIDs.front() );
-      for( QStringList::const_iterator itr = it->foundHiliteRegExps.constBegin();
-           itr != it->foundHiliteRegExps.constEnd(); ++itr )
-      {
-        if( !it->foundHiliteRegExps.contains( *itr ) )
-          it->foundHiliteRegExps.append( *itr );
-      }
+        QList< FtsHeadword >::iterator it = qBinaryFind( headwords.begin(), headwords.end(), hws.at( x ) );
+        if( it != headwords.end() )
+        {
+            it->dictIDs.push_back( hws.at( x ).dictIDs.front() );
+            for( QStringList::const_iterator itr = it->foundHiliteRegExps.constBegin();
+                 itr != it->foundHiliteRegExps.constEnd(); ++itr )
+            {
+                if( !it->foundHiliteRegExps.contains( *itr ) )
+                    it->foundHiliteRegExps.append( *itr );
+            }
+        }
+        else
+            temp.append( hws.at( x ) );
     }
-    else
-      temp.append( hws.at( x ) );
-  }
 
-  headwords.append( temp );
-  qSort( headwords );
+    headwords.append( temp );
+    qSort( headwords );
 
-  endResetModel();
-  emit contentChanged();
+    endResetModel();
+    emit contentChanged();
 }
 
 bool HeadwordsListModel::clear()
 {
-  beginResetModel();
+    beginResetModel();
 
-  headwords.clear();
+    headwords.clear();
 
-  endResetModel();
+    endResetModel();
 
-  emit contentChanged();
+    emit contentChanged();
 
-  return true;
+    return true;
 }
 
 int HeadwordsListModel::getDictIndex( QString const & id ) const
 {
-  std::string dictID( id.toUtf8().data() );
-  for( unsigned x = 0; x < dictionaries.size(); x++ )
-  {
-    if( dictionaries[ x ]->getId().compare( dictID ) == 0 )
-      return x;
-  }
-  return -1;
+    std::string dictID( id.toUtf8().data() );
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
+        if( dictionaries[ x ]->getId().compare( dictID ) == 0 )
+            return x;
+    }
+    return -1;
 }
 
 QString FtsHeadword::trimQuotes( QString const & str ) const
 {
-  QString trimmed( str );
+    QString trimmed( str );
 
-  int n = 0;
-  while( str[ n ] == '\"' || str[ n ] == '\'' )
-    n++;
-  if( n )
-    trimmed = trimmed.mid( n );
+    int n = 0;
+    while( str[ n ] == '\"' || str[ n ] == '\'' )
+        n++;
+    if( n )
+        trimmed = trimmed.mid( n );
 
-  while( trimmed.endsWith( '\"' ) || trimmed.endsWith( '\'' ) )
-    trimmed.chop( 1 );
+    while( trimmed.endsWith( '\"' ) || trimmed.endsWith( '\'' ) )
+        trimmed.chop( 1 );
 
-  return trimmed;
+    return trimmed;
 }
 
 bool FtsHeadword::operator <( FtsHeadword const & other ) const
 {
-  QString first = trimQuotes( headword );
-  QString second = trimQuotes( other.headword );
+    QString first = trimQuotes( headword );
+    QString second = trimQuotes( other.headword );
 
-  int result = first.localeAwareCompare( second );
-  if( result )
-    return result < 0;
+    int result = first.localeAwareCompare( second );
+    if( result )
+        return result < 0;
 
-  // Headwords without quotes are equal
+    // Headwords without quotes are equal
 
-  if( first.size() != headword.size() || second.size() != other.headword.size() )
-    return headword.localeAwareCompare( other.headword ) < 0;
+    if( first.size() != headword.size() || second.size() != other.headword.size() )
+        return headword.localeAwareCompare( other.headword ) < 0;
 
-  return false;
+    return false;
 }
 
 } // namespace FTS

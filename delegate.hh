@@ -1,7 +1,6 @@
 #ifndef __DELEGATE_HH_INCLUDED__
 #define __DELEGATE_HH_INCLUDED__
 
-#include <QAbstractItemDelegate>
 #include <QStyledItemDelegate>
 
 class WordListItemDelegate : public QStyledItemDelegate

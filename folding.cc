@@ -19,161 +19,161 @@ namespace Folding {
 /// are caught here.
 bool isCombiningMark( wchar ch )
 {
-  return (
-           ( ch >= 0x300 && ch <= 0x36F ) ||
-           ( ch >= 0x1DC0 && ch <= 0x1DFF ) ||
-           ( ch >= 0x20D0 && ch <= 0x20FF ) ||
-           ( ch >= 0xFE20 && ch <= 0xFE2F )
-         );
+    return (
+                ( ch >= 0x300 && ch <= 0x36F ) ||
+                ( ch >= 0x1DC0 && ch <= 0x1DFF ) ||
+                ( ch >= 0x20D0 && ch <= 0x20FF ) ||
+                ( ch >= 0xFE20 && ch <= 0xFE2F )
+                );
 }
 
 wstring apply( wstring const & in, bool preserveWildcards )
 {
-  // First, strip diacritics and apply ws/punctuation removal
+    // First, strip diacritics and apply ws/punctuation removal
 
-  wstring withoutDiacritics;
+    wstring withoutDiacritics;
 
-  withoutDiacritics.reserve( in.size() );
+    withoutDiacritics.reserve( in.size() );
 
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  size_t consumed;
+    size_t consumed;
 
-  for( size_t left = in.size(); left; )
-  {
-    wchar ch = foldDiacritic( nextChar, left, consumed );
+    for( size_t left = in.size(); left; )
+    {
+        wchar ch = foldDiacritic( nextChar, left, consumed );
 
-    if ( !isCombiningMark( ch ) && !isWhitespace( ch )
-         && ( !isPunct( ch )
-              || ( preserveWildcards &&
-                   ( ch == '\\' || ch == '?' || ch == '*' || ch == '[' || ch == ']' ) )
-            )
-    )
-      withoutDiacritics.push_back( ch );
+        if ( !isCombiningMark( ch ) && !isWhitespace( ch )
+             && ( !isPunct( ch )
+                  || ( preserveWildcards &&
+                       ( ch == '\\' || ch == '?' || ch == '*' || ch == '[' || ch == ']' ) )
+                  )
+             )
+            withoutDiacritics.push_back( ch );
 
-    nextChar += consumed;
-    left -= consumed;
-  }
+        nextChar += consumed;
+        left -= consumed;
+    }
 
-  // Now, fold the case
+    // Now, fold the case
 
-  wstring caseFolded;
+    wstring caseFolded;
 
-  caseFolded.reserve( withoutDiacritics.size() * foldCaseMaxOut );
+    caseFolded.reserve( withoutDiacritics.size() * foldCaseMaxOut );
 
-  nextChar = withoutDiacritics.data();
+    nextChar = withoutDiacritics.data();
 
-  wchar buf[ foldCaseMaxOut ];
+    wchar buf[ foldCaseMaxOut ];
 
-  for( size_t left = withoutDiacritics.size(); left--; )
-    caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
+    for( size_t left = withoutDiacritics.size(); left--; )
+        caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
 
-  return caseFolded;
+    return caseFolded;
 }
 
 wstring applySimpleCaseOnly( wstring const & in )
 {
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  wstring out;
+    wstring out;
 
-  out.reserve( in.size() );
+    out.reserve( in.size() );
 
-  for( size_t left = in.size(); left--; )
-    out.push_back( foldCaseSimple( *nextChar++ ) );
+    for( size_t left = in.size(); left--; )
+        out.push_back( foldCaseSimple( *nextChar++ ) );
 
-  return out;
+    return out;
 }
 
 wstring applyFullCaseOnly( wstring const & in )
 {
-  wstring caseFolded;
+    wstring caseFolded;
 
-  caseFolded.reserve( in.size() * foldCaseMaxOut );
+    caseFolded.reserve( in.size() * foldCaseMaxOut );
 
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  wchar buf[ foldCaseMaxOut ];
+    wchar buf[ foldCaseMaxOut ];
 
-  for( size_t left = in.size(); left--; )
-    caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
+    for( size_t left = in.size(); left--; )
+        caseFolded.append( buf, foldCase(  *nextChar++, buf ) );
 
-  return caseFolded;
+    return caseFolded;
 }
 
 wstring applyDiacriticsOnly( wstring const & in )
 {
-  wstring withoutDiacritics;
+    wstring withoutDiacritics;
 
-  withoutDiacritics.reserve( in.size() );
+    withoutDiacritics.reserve( in.size() );
 
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  size_t consumed;
+    size_t consumed;
 
-  for( size_t left = in.size(); left; )
-  {
-    wchar ch = foldDiacritic( nextChar, left, consumed );
+    for( size_t left = in.size(); left; )
+    {
+        wchar ch = foldDiacritic( nextChar, left, consumed );
 
-    if ( !isCombiningMark( ch ) )
-      withoutDiacritics.push_back( ch );
+        if ( !isCombiningMark( ch ) )
+            withoutDiacritics.push_back( ch );
 
-    nextChar += consumed;
-    left -= consumed;
-  }
+        nextChar += consumed;
+        left -= consumed;
+    }
 
-  return withoutDiacritics;
+    return withoutDiacritics;
 }
 
 wstring applyPunctOnly( wstring const & in )
 {
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  wstring out;
+    wstring out;
 
-  out.reserve( in.size() );
+    out.reserve( in.size() );
 
-  for( size_t left = in.size(); left--; ++nextChar )
-    if ( !isPunct( *nextChar ) )
-      out.push_back( *nextChar );
+    for( size_t left = in.size(); left--; ++nextChar )
+        if ( !isPunct( *nextChar ) )
+            out.push_back( *nextChar );
 
-  return out;
+    return out;
 }
 
 wstring applyWhitespaceOnly( wstring const & in )
 {
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  wstring out;
+    wstring out;
 
-  out.reserve( in.size() );
+    out.reserve( in.size() );
 
-  for( size_t left = in.size(); left--; ++nextChar )
-    if ( !isWhitespace( *nextChar ) )
-      out.push_back( *nextChar );
+    for( size_t left = in.size(); left--; ++nextChar )
+        if ( !isWhitespace( *nextChar ) )
+            out.push_back( *nextChar );
 
-  return out;
+    return out;
 }
 
 wstring applyWhitespaceAndPunctOnly( wstring const & in )
 {
-  wchar const * nextChar = in.data();
+    wchar const * nextChar = in.data();
 
-  wstring out;
+    wstring out;
 
-  out.reserve( in.size() );
+    out.reserve( in.size() );
 
-  for( size_t left = in.size(); left--; ++nextChar )
-    if ( !isWhitespace( *nextChar ) && !isPunct( *nextChar ) )
-      out.push_back( *nextChar );
+    for( size_t left = in.size(); left--; ++nextChar )
+        if ( !isWhitespace( *nextChar ) && !isPunct( *nextChar ) )
+            out.push_back( *nextChar );
 
-  return out;
+    return out;
 }
 
 bool isWhitespace( wchar ch )
 {
-  switch( ch )
-  {
+    switch( ch )
+    {
     case '\n':
     case '\r':
     case '\t':
@@ -200,17 +200,17 @@ bool isWhitespace( wchar ch )
     case 0x202F: // Zs, NARROW NO-BREAK SPACE
     case 0x205F: // Zs, MEDIUM MATHEMATICAL SPACE
     case 0x3000: // Zs, IDEOGRAPHIC SPACE
-      return true;
+        return true;
 
     default:
-      return false;
-  }
+        return false;
+    }
 }
 
 bool isPunct( wchar ch )
 {
-  switch( ch )
-  {
+    switch( ch )
+    {
     // Pc
 
     case 0x005F: // LOW LINE
@@ -226,7 +226,7 @@ bool isPunct( wchar ch )
     case 0xFF3F: // FULLWIDTH LOW LINE
     case 0xFF65: // HALFWIDTH KATAKANA MIDDLE DOT
 
-    // Pd
+        // Pd
     case 0x002D: // HYPHEN-MINUS
     case 0x058A: // ARMENIAN HYPHEN
     case 0x1806: // MONGOLIAN TODO SOFT HYPHEN
@@ -245,7 +245,7 @@ bool isPunct( wchar ch )
     case 0xFE63: // SMALL HYPHEN-MINUS
     case 0xFF0D: // FULLWIDTH HYPHEN-MINUS
 
-    // Ps
+        // Ps
     case 0x0028: // LEFT PARENTHESIS
     case 0x005B: // LEFT SQUARE BRACKET
     case 0x007B: // LEFT CURLY BRACKET
@@ -319,7 +319,7 @@ bool isPunct( wchar ch )
     case 0xFF5F: // FULLWIDTH LEFT WHITE PARENTHESIS
     case 0xFF62: // HALFWIDTH LEFT CORNER BRACKET
 
-    // Pe
+        // Pe
     case 0x0029: // RIGHT PARENTHESIS
     case 0x005D: // RIGHT SQUARE BRACKET
     case 0x007D: // RIGHT CURLY BRACKET
@@ -385,20 +385,20 @@ bool isPunct( wchar ch )
     case 0xFF60: // FULLWIDTH RIGHT WHITE PARENTHESIS
     case 0xFF63: // HALFWIDTH RIGHT CORNER BRACKET
 
-    // Pf
+        // Pf
     case 0x00BB: // RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
     case 0x2019: // RIGHT SINGLE QUOTATION MARK
     case 0x201D: // RIGHT DOUBLE QUOTATION MARK
     case 0x203A: // SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
 
 
-    // Pi
+        // Pi
     case 0x00AB: // LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
     case 0x2018: // LEFT SINGLE QUOTATION MARK
     case 0x201C: // LEFT DOUBLE QUOTATION MARK
     case 0x2039: // SINGLE LEFT-POINTING ANGLE QUOTATION MARK
 
-    // Po
+        // Po
     case 0x0021: // EXCLAMATION MARK
     case 0x0022: // QUOTATION MARK
     case 0x0023: // NUMBER SIGN
@@ -598,99 +598,99 @@ bool isPunct( wchar ch )
     case 0xFF3C: // FULLWIDTH REVERSE SOLIDUS
     case 0xFF61: // HALFWIDTH IDEOGRAPHIC FULL STOP
     case 0xFF64: // HALFWIDTH IDEOGRAPHIC COMMA
-      return true;
+        return true;
     default:
-      return false;
-  }
+        return false;
+    }
 }
 
 wstring trimWhitespaceOrPunct( wstring const & in )
 {
-  wchar const * wordBegin = in.c_str();
-  wstring::size_type wordSize = in.size();
+    wchar const * wordBegin = in.c_str();
+    wstring::size_type wordSize = in.size();
 
-  // Skip any leading whitespace
-  while( *wordBegin && ( Folding::isWhitespace( *wordBegin ) || Folding::isPunct( *wordBegin ) ) )
-  {
-    ++wordBegin;
-    --wordSize;
-  }
+    // Skip any leading whitespace
+    while( *wordBegin && ( Folding::isWhitespace( *wordBegin ) || Folding::isPunct( *wordBegin ) ) )
+    {
+        ++wordBegin;
+        --wordSize;
+    }
 
-  // Skip any trailing whitespace
-  while( wordSize && ( Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) ||
-                       Folding::isPunct( wordBegin[ wordSize - 1 ] ) ) )
-    --wordSize;
+    // Skip any trailing whitespace
+    while( wordSize && ( Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) ||
+                         Folding::isPunct( wordBegin[ wordSize - 1 ] ) ) )
+        --wordSize;
 
-  return wstring( wordBegin, wordSize );
+    return wstring( wordBegin, wordSize );
 }
 
 wstring trimWhitespace( wstring const & in )
 {
-  wchar const * wordBegin = in.c_str();
-  wstring::size_type wordSize = in.size();
+    wchar const * wordBegin = in.c_str();
+    wstring::size_type wordSize = in.size();
 
-  // Skip any leading whitespace
-  while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
-  {
-    ++wordBegin;
-    --wordSize;
-  }
+    // Skip any leading whitespace
+    while( *wordBegin && Folding::isWhitespace( *wordBegin ) )
+    {
+        ++wordBegin;
+        --wordSize;
+    }
 
-  // Skip any trailing whitespace
-  while( wordSize && Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) )
-    --wordSize;
+    // Skip any trailing whitespace
+    while( wordSize && Folding::isWhitespace( wordBegin[ wordSize - 1 ] ) )
+        --wordSize;
 
-  return wstring( wordBegin, wordSize );
+    return wstring( wordBegin, wordSize );
 }
 
 void normalizeWhitespace( wstring & str )
 {
-  for( size_t x = str.size(); x-- > 1; ) // >1 -- Don't test the first char
-  {
-    if ( isWhitespace( str[ x ] ) )
+    for( size_t x = str.size(); x-- > 1; ) // >1 -- Don't test the first char
     {
-      size_t y;
-      for( y = x; y && ( isWhitespace( str[ y - 1 ] ) ) ; --y );
+        if ( isWhitespace( str[ x ] ) )
+        {
+            size_t y;
+            for( y = x; y && ( isWhitespace( str[ y - 1 ] ) ) ; --y );
 
-      if ( y != x )
-      {
-        // Remove extra spaces
+            if ( y != x )
+            {
+                // Remove extra spaces
 
-        str.erase( y, x - y );
+                str.erase( y, x - y );
 
-        x = y;
+                x = y;
 
-        str[ x ] = ' ';
-      }
+                str[ x ] = ' ';
+            }
+        }
     }
-  }
 }
 
 QString escapeWildcardSymbols( const QString & str )
 {
-  QString escaped( str );
+    QString escaped( str );
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  escaped.replace( QRegularExpression( "([\\[\\]\\?\\*])" ), "\\\\1" );
+    escaped.replace( QRegularExpression( "([\\[\\]\\?\\*])" ), "\\\\1" );
 #else
-  escaped.replace( QRegExp( "([\\[\\]\\?\\*])", Qt::CaseInsensitive ), "\\\\1" );
+    escaped.replace( QRegExp( "([\\[\\]\\?\\*])", Qt::CaseInsensitive ), "\\\\1" );
 #endif
-  return escaped;
+    return escaped;
 }
 
 QString unescapeWildcardSymbols( const QString & str )
 {
-  QString unescaped( str );
+    QString unescaped( str );
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  unescaped.replace( QRegularExpression( "\\\\([\\[\\]\\?\\*])" ), "\\1" );
+    unescaped.replace( QRegularExpression( "\\\\([\\[\\]\\?\\*])" ), "\\1" );
 #else
-  unescaped.replace( QRegExp( "\\\\([\\[\\]\\?\\*])", Qt::CaseInsensitive ), "\\1" );
+    unescaped.replace( QRegExp( "\\\\([\\[\\]\\?\\*])", Qt::CaseInsensitive ), "\\1" );
 #endif
-  return unescaped;
+    return unescaped;
 }
 
 wchar foldedDiacritic( wchar const * in, size_t size, size_t & consumed )
 {
-  return foldDiacritic( in, size, consumed );
+    return foldDiacritic( in, size, consumed );
 }
 
 

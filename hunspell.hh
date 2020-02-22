@@ -19,22 +19,22 @@ using std::string;
 
 struct DataFiles
 {
-  QString affFileName, dicFileName; // Absolute, with Qt separators
-  QString dictId; // Dictionary id, e.g. "en_US"
-  QString dictName; // Localized dictionary name to be displayed, e.g. "English(US) Morphology"
+    QString affFileName, dicFileName; // Absolute, with Qt separators
+    QString dictId; // Dictionary id, e.g. "en_US"
+    QString dictName; // Localized dictionary name to be displayed, e.g. "English(US) Morphology"
 
-  DataFiles( QString const & affFileName_, QString const & dicFileName_,
-             QString const & dictId_, QString const & dictName_ ):
-    affFileName( affFileName_ ), dicFileName( dicFileName_ ),
-    dictId( dictId_ ), dictName( dictName_ )
-  {}
+    DataFiles( QString const & affFileName_, QString const & dicFileName_,
+               QString const & dictId_, QString const & dictName_ ):
+        affFileName( affFileName_ ), dicFileName( dicFileName_ ),
+        dictId( dictId_ ), dictName( dictName_ )
+    {}
 };
 
 /// Finds all the DataFiles it can at the given path (with Qt separators).
 vector< DataFiles > findDataFiles( QString const & path );
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & )
-  THROW_SPEC( std::exception );
+THROW_SPEC( std::exception );
 
 }
 

@@ -107,7 +107,7 @@ void speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
             next = callback(spToken, engineId, engineName, userData);
 
         if( spToken )
-          spToken->Release();
+            spToken->Release();
 
         if (engineName)
             CoTaskMemFree(engineName);
@@ -116,7 +116,7 @@ void speechEnumerateAvailableEngines(EnumerateCallback callback, void *userData)
     }
 
     if( enumSpTokens )
-      enumSpTokens->Release();
+        enumSpTokens->Release();
 
     if (willInvokeCoUninitialize)
         CoUninitialize();
@@ -168,24 +168,24 @@ bool speechSay(SpeechHelper sp, const wchar_t *text)
 
 int setSpeechVolume( SpeechHelper sp, int newVolume )
 {
-  if( !sp || !sp->voice || newVolume < 0 || newVolume > 100 )
-    return -1;
-  unsigned short oldVolume;
-  HRESULT hr = sp->voice->GetVolume( &oldVolume );
-  if( !SUCCEEDED( hr ) )
-    return -1;
-  sp->voice->SetVolume( (unsigned short) newVolume );
-  return oldVolume;
+    if( !sp || !sp->voice || newVolume < 0 || newVolume > 100 )
+        return -1;
+    unsigned short oldVolume;
+    HRESULT hr = sp->voice->GetVolume( &oldVolume );
+    if( !SUCCEEDED( hr ) )
+        return -1;
+    sp->voice->SetVolume( (unsigned short) newVolume );
+    return oldVolume;
 }
 
 int setSpeechRate( SpeechHelper sp, int newRate )
 {
-  if( !sp || !sp->voice || newRate < 0 || newRate > 100 )
-    return -1;
-  long oldRate;
-  HRESULT hr = sp->voice->GetRate( &oldRate );
-  if( !SUCCEEDED( hr ) )
-    return -1;
-  sp->voice->SetRate( ( newRate - 50 ) / 5 );
-  return oldRate * 5 + 50;
+    if( !sp || !sp->voice || newRate < 0 || newRate > 100 )
+        return -1;
+    long oldRate;
+    HRESULT hr = sp->voice->GetRate( &oldRate );
+    if( !SUCCEEDED( hr ) )
+        return -1;
+    sp->voice->SetRate( ( newRate - 50 ) / 5 );
+    return oldRate * 5 + 50;
 }

@@ -102,7 +102,7 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString &appId)
     server = new QLocalServer(this);
     QString lockName = QDir(QDir::tempPath()).absolutePath()
                        + QLatin1Char('/') + socketName
-                       + QLatin1String("-lockfile");
+                       + QLatin1String("-lock-2A0");
     lockFile.setFileName(lockName);
     lockFile.open(QIODevice::ReadWrite);
 }

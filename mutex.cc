@@ -7,11 +7,11 @@ bool Mutex::tryLock() {return try_lock();}
 #else
 Mutex::Lock::Lock( Mutex & m_ ): m( m_ )
 {
-  m.lock();
+    m.lock();
 }
 
 Mutex::Lock::~Lock()
 {
-  m.unlock();
+    m.unlock();
 }
 #endif

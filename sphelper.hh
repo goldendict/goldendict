@@ -34,9 +34,9 @@ inline void SpHexFromUlong(WCHAR * psz, ULONG ul)
 }
 
 inline HRESULT SpGetTokenFromId(
-    const WCHAR * pszTokenId,
-    ISpObjectToken ** ppToken,
-    BOOL fCreateIfNotExist = FALSE)
+        const WCHAR * pszTokenId,
+        ISpObjectToken ** ppToken,
+        BOOL fCreateIfNotExist = FALSE)
 {
     HRESULT hr;
     ISpObjectToken * cpToken;
@@ -58,9 +58,9 @@ inline HRESULT SpGetTokenFromId(
 }
 
 inline HRESULT SpGetCategoryFromId(
-    const WCHAR * pszCategoryId,
-    ISpObjectTokenCategory ** ppCategory,
-    BOOL fCreateIfNotExist = FALSE)
+        const WCHAR * pszCategoryId,
+        ISpObjectTokenCategory ** ppCategory,
+        BOOL fCreateIfNotExist = FALSE)
 {
     HRESULT hr;
 
@@ -70,23 +70,23 @@ inline HRESULT SpGetCategoryFromId(
 
     if (SUCCEEDED(hr))
     {
-      hr = cpTokenCategory->SetId(pszCategoryId, fCreateIfNotExist);
-      if (SUCCEEDED(hr))
-      {
-        *ppCategory = cpTokenCategory;
-      }
-      else
-        cpTokenCategory->Release();
+        hr = cpTokenCategory->SetId(pszCategoryId, fCreateIfNotExist);
+        if (SUCCEEDED(hr))
+        {
+            *ppCategory = cpTokenCategory;
+        }
+        else
+            cpTokenCategory->Release();
     }
 
     return hr;
 }
 
 HRESULT SpEnumTokens(
-    const WCHAR * pszCategoryId,
-    const WCHAR * pszReqAttribs,
-    const WCHAR * pszOptAttribs,
-    IEnumSpObjectTokens ** ppEnum)
+        const WCHAR * pszCategoryId,
+        const WCHAR * pszReqAttribs,
+        const WCHAR * pszOptAttribs,
+        IEnumSpObjectTokens ** ppEnum)
 {
     HRESULT hr = S_OK;
 

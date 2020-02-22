@@ -13,24 +13,24 @@
 
 class FmodexAudioPlayer : public AudioPlayerInterface
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  FmodexAudioPlayer();
-  ~FmodexAudioPlayer();
+    FmodexAudioPlayer();
+    ~FmodexAudioPlayer();
 
-  virtual QString play( const char * data, int size );
-  virtual void stop();
-  static bool available();
+    virtual QString play( const char * data, int size );
+    virtual void stop();
+    static bool available();
 private slots:
 
 private:
-  void clean();
-  bool ERRCHECK(int);
+    void clean();
+    bool ERRCHECK(int);
 private:
-  static const QString fmodex_dyl_name;
-  struct FMOD_EX_API;
-  FMOD_EX_API *fmodex;
-  QLibrary fmodex_dl;
+    static const QString fmodex_dyl_name;
+    struct FMOD_EX_API;
+    FMOD_EX_API *fmodex;
+    QLibrary fmodex_dl;
 
 };
 

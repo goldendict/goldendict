@@ -8,8 +8,10 @@
 #endif
 
 #include <QUrl>
+#include <QWebSecurityOrigin>
 
 #include "article_netmgr.hh"
+#include "article_maker.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
 #include "qt4x5.hh"
@@ -18,57 +20,57 @@ using std::string;
 
 #if QT_VERSION >= 0x050300 // Qt 5.3+
 
-  // SecurityWhiteList
+// SecurityWhiteList
 
-  SecurityWhiteList & SecurityWhiteList::operator=( SecurityWhiteList const & swl )
-  {
+SecurityWhiteList & SecurityWhiteList::operator=( SecurityWhiteList const & swl )
+{
     swlDelete();
     swlCopy( swl );
     return *this;
-  }
+}
 
-  QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
-  {
+QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
+{
     swlDelete();
     originUri = url.toString( QUrl::PrettyDecoded );
     origin = new QWebSecurityOrigin( url );
     return origin;
-  }
+}
 
-  void SecurityWhiteList::swlCopy( SecurityWhiteList const & swl )
-  {
+void SecurityWhiteList::swlCopy( SecurityWhiteList const & swl )
+{
     if( swl.origin )
     {
-      hostsToAccess = swl.hostsToAccess;
-      originUri = swl.originUri;
-      origin = new QWebSecurityOrigin( QUrl( originUri ) );
+        hostsToAccess = swl.hostsToAccess;
+        originUri = swl.originUri;
+        origin = new QWebSecurityOrigin( QUrl( originUri ) );
 
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
+        for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
+             it != hostsToAccess.end(); ++it )
+            origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
     }
-  }
+}
 
-  void SecurityWhiteList::swlDelete()
-  {
+void SecurityWhiteList::swlDelete()
+{
     if( origin )
     {
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
+        for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
+             it != hostsToAccess.end(); ++it )
+            origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
 
-      delete origin;
-      origin = 0;
+        delete origin;
+        origin = 0;
     }
     hostsToAccess.clear();
     originUri.clear();
-  }
+}
 
-  // AllowFrameReply
+// AllowFrameReply
 
-  AllowFrameReply::AllowFrameReply( QNetworkReply * _reply ) :
+AllowFrameReply::AllowFrameReply( QNetworkReply * _reply ) :
     baseReply( _reply )
-  {
+{
     // Set base data
 
     setOperation( baseReply->operation() );
@@ -113,16 +115,16 @@ using std::string;
     connect( baseReply, SIGNAL( readChannelFinished() ), this, SIGNAL( readChannelFinished() ) );
 
     setOpenMode( QIODevice::ReadOnly );
-  }
+}
 
-  void AllowFrameReply::applyMetaData()
-  {
+void AllowFrameReply::applyMetaData()
+{
     // Set raw headers except X-Frame-Options
     QList< QByteArray > rawHeaders = baseReply->rawHeaderList();
     for( QList< QByteArray >::iterator it = rawHeaders.begin(); it != rawHeaders.end(); ++it )
     {
-      if( it->toLower() != "x-frame-options" )
-        setRawHeader( *it, baseReply->rawHeader( *it ) );
+        if( it->toLower() != "x-frame-options" )
+            setRawHeader( *it, baseReply->rawHeader( *it ) );
     }
 
     // Set known headers
@@ -164,50 +166,50 @@ using std::string;
                   baseReply->attribute( QNetworkRequest::SpdyWasUsedAttribute ) );
 
     emit metaDataChanged();
-  }
+}
 
-  void AllowFrameReply::setReadBufferSize( qint64 size )
-  {
+void AllowFrameReply::setReadBufferSize( qint64 size )
+{
     QNetworkReply::setReadBufferSize( size );
     baseReply->setReadBufferSize( size );
-  }
+}
 
-  qint64 AllowFrameReply::bytesAvailable() const
-  {
+qint64 AllowFrameReply::bytesAvailable() const
+{
     return buffer.size() + QNetworkReply::bytesAvailable();
-  }
+}
 
-  void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
-  {
+void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
+{
     setError( code, baseReply->errorString() );
     emit error( code );
-  }
+}
 
-  void AllowFrameReply::readDataFromBase()
-  {
+void AllowFrameReply::readDataFromBase()
+{
     QByteArray data;
     data.resize( baseReply->bytesAvailable() );
     baseReply->read( data.data(), data.size() );
     buffer += data;
     emit readyRead();
-  }
+}
 
-  qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
-  {
+qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
+{
     qint64 size = qMin( maxSize, qint64( buffer.size() ) );
     memcpy( data, buffer.data(), size );
     buffer.remove( 0, size );
     return size;
-  }
+}
 
 #endif
 
 namespace
 {
-  /// Uses some heuristics to chop off the first domain name from the host name,
-  /// but only if it's not too base. Returns the resulting host name.
-  QString getHostBase( QUrl const & url )
-  {
+/// Uses some heuristics to chop off the first domain name from the host name,
+/// but only if it's not too base. Returns the resulting host name.
+QString getHostBase( QUrl const & url )
+{
     QString host = url.host();
 
     QStringList domains = host.split( '.' );
@@ -216,424 +218,424 @@ namespace
 
     // Skip last <=3-letter domain name
     if ( left && domains[ left - 1 ].size() <= 3 )
-      --left;
+        --left;
 
     // Skip another <=3-letter domain name
     if ( left && domains[ left - 1 ].size() <= 3 )
-      --left;
+        --left;
 
     if ( left > 1 )
     {
-      // We've got something like www.foobar.co.uk -- we can chop off the first
-      // domain
+        // We've got something like www.foobar.co.uk -- we can chop off the first
+        // domain
 
-      return host.mid( domains[ 0 ].size() + 1 );
+        return host.mid( domains[ 0 ].size() + 1 );
     }
     else
-      return host;
-  }
+        return host;
+}
 }
 
 QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
                                                             QNetworkRequest const & req,
                                                             QIODevice * outgoingData )
 {
-  if ( op == GetOperation )
-  {
-    if ( req.url().scheme() == "qrcx" )
+    if ( op == GetOperation )
     {
-      // We have to override the local load policy for the qrc scheme, hence
-      // we use qrcx and redirect it here back to qrc
-      QUrl newUrl( req.url() );
-
-      newUrl.setScheme( "qrc" );
-      newUrl.setHost( "" );
-
-      QNetworkRequest newReq( req );
-      newReq.setUrl( newUrl );
-
-      return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
-    }
-
-#if QT_VERSION >= 0x050300 // Qt 5.3+
-    // Workaround of same-origin policy
-    if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
-        && req.hasRawHeader( "Referer" ) )
-    {
-      QByteArray referer = req.rawHeader( "Referer" );
-      QUrl refererUrl = QUrl::fromEncoded( referer );
-
-      if( refererUrl.scheme().startsWith( "http") || refererUrl.scheme() == "ftp" )
-      {
-        // Only for pages from network resources
-        if ( !req.url().host().endsWith( refererUrl.host() ) )
+        if ( req.url().scheme() == "qrcx" )
         {
-          QUrl frameUrl;
-          frameUrl.setScheme( refererUrl.scheme() );
-          frameUrl.setHost( refererUrl.host() );
-          QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
+            // We have to override the local load policy for the qrc scheme, hence
+            // we use qrcx and redirect it here back to qrc
+            QUrl newUrl( req.url() );
 
-          SecurityWhiteList & value = allOrigins[ frameStr ];
-          if( !value.origin )
-            value.setOrigin( frameUrl );
+            newUrl.setScheme( "qrc" );
+            newUrl.setHost( "" );
 
-          QPair< QString, QString > target( req.url().scheme(), req.url().host() );
-          if( value.hostsToAccess.find( target ) == value.hostsToAccess.end() )
-          {
-            value.hostsToAccess.insert( target );
-            value.origin->addAccessWhitelistEntry( target.first, target.second,
-                                                   QWebSecurityOrigin::AllowSubdomains );
-          }
+            QNetworkRequest newReq( req );
+            newReq.setUrl( newUrl );
+
+            return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
         }
-      }
-    }
-#endif
-
-    QString contentType;
-
-    sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
-
-    if ( dr.get() )
-      return new ArticleResourceReply( this, req, dr, contentType );
-  }
-
-  // Check the Referer. If the user has opted-in to block elements from external
-  // pages, we block them.
-
-  if ( disallowContentFromOtherSites && req.hasRawHeader( "Referer" ) )
-  {
-    QByteArray referer = req.rawHeader( "Referer" );
-
-    //DPRINTF( "Referer: %s\n", referer.data() );
-
-    QUrl refererUrl = QUrl::fromEncoded( referer );
-
-    //DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
-    //        getHostBase( refererUrl ).toUtf8().data() );
-
-    if ( !req.url().host().endsWith( refererUrl.host() ) &&
-         getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
-    {
-      gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
-
-      return new BlockedNetworkReply( this );
-    }
-  }
-
-  if( req.url().scheme() == "file" )
-  {
-    // Check file presence and adjust path if necessary
-    QString fileName = req.url().toLocalFile();
-    if( req.url().host().isEmpty() && articleMaker.adjustFilePath( fileName ) )
-    {
-      QUrl newUrl( req.url() );
-      QUrl localUrl = QUrl::fromLocalFile( fileName );
-
-      newUrl.setHost( localUrl.host() );
-      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( localUrl.path() ) );
-
-      QNetworkRequest newReq( req );
-      newReq.setUrl( newUrl );
-
-      return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
-    }
-  }
-
-  QNetworkReply *reply = 0;
-
-  // spoof User-Agent
-  if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
-  {
-    QNetworkRequest newReq( req );
-    newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
-    reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
-  }
-
-  if( !reply )
-    reply = QNetworkAccessManager::createRequest( op, req, outgoingData );
-
-  if( req.url().scheme() == "https")
-  {
-#ifndef QT_NO_OPENSSL
-    connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
-             reply, SLOT( ignoreSslErrors() ) );
-#endif
-  }
 
 #if QT_VERSION >= 0x050300 // Qt 5.3+
-  return op == QNetworkAccessManager::GetOperation
-         || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
+        // Workaround of same-origin policy
+        if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
+                && req.hasRawHeader( "Referer" ) )
+        {
+            QByteArray referer = req.rawHeader( "Referer" );
+            QUrl refererUrl = QUrl::fromEncoded( referer );
+
+            if( refererUrl.scheme().startsWith( "http") || refererUrl.scheme() == "ftp" )
+            {
+                // Only for pages from network resources
+                if ( !req.url().host().endsWith( refererUrl.host() ) )
+                {
+                    QUrl frameUrl;
+                    frameUrl.setScheme( refererUrl.scheme() );
+                    frameUrl.setHost( refererUrl.host() );
+                    QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
+
+                    SecurityWhiteList & value = allOrigins[ frameStr ];
+                    if( !value.origin )
+                        value.setOrigin( frameUrl );
+
+                    QPair< QString, QString > target( req.url().scheme(), req.url().host() );
+                    if( value.hostsToAccess.find( target ) == value.hostsToAccess.end() )
+                    {
+                        value.hostsToAccess.insert( target );
+                        value.origin->addAccessWhitelistEntry( target.first, target.second,
+                                                               QWebSecurityOrigin::AllowSubdomains );
+                    }
+                }
+            }
+        }
+#endif
+
+        QString contentType;
+
+        sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
+
+        if ( dr.get() )
+            return new ArticleResourceReply( this, req, dr, contentType );
+    }
+
+    // Check the Referer. If the user has opted-in to block elements from external
+    // pages, we block them.
+
+    if ( disallowContentFromOtherSites && req.hasRawHeader( "Referer" ) )
+    {
+        QByteArray referer = req.rawHeader( "Referer" );
+
+        //DPRINTF( "Referer: %s\n", referer.data() );
+
+        QUrl refererUrl = QUrl::fromEncoded( referer );
+
+        //DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
+        //        getHostBase( refererUrl ).toUtf8().data() );
+
+        if ( !req.url().host().endsWith( refererUrl.host() ) &&
+             getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
+        {
+            gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
+
+            return new BlockedNetworkReply( this );
+        }
+    }
+
+    if( req.url().scheme() == "file" )
+    {
+        // Check file presence and adjust path if necessary
+        QString fileName = req.url().toLocalFile();
+        if( req.url().host().isEmpty() && articleMaker.adjustFilePath( fileName ) )
+        {
+            QUrl newUrl( req.url() );
+            QUrl localUrl = QUrl::fromLocalFile( fileName );
+
+            newUrl.setHost( localUrl.host() );
+            newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( localUrl.path() ) );
+
+            QNetworkRequest newReq( req );
+            newReq.setUrl( newUrl );
+
+            return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+        }
+    }
+
+    QNetworkReply *reply = 0;
+
+    // spoof User-Agent
+    if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
+    {
+        QNetworkRequest newReq( req );
+        newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
+        reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+    }
+
+    if( !reply )
+        reply = QNetworkAccessManager::createRequest( op, req, outgoingData );
+
+    if( req.url().scheme() == "https")
+    {
+#ifndef QT_NO_OPENSSL
+        connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
+                 reply, SLOT( ignoreSslErrors() ) );
+#endif
+    }
+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
+    return op == QNetworkAccessManager::GetOperation
+            || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else
-  return reply;
+    return reply;
 #endif
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
-  QUrl const & url, QString & contentType )
+        QUrl const & url, QString & contentType )
 {
-  GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
+    GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
+    GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
+    GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
 
-  if ( url.scheme() == "gdlookup" )
-  {
-    if( !url.host().isEmpty() && url.host() != "localhost" )
+    if ( url.scheme() == "gdlookup" )
     {
-      // Strange request - ignore it
-      return sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( false ));
-    }
-
-    contentType = "text/html";
-
-    if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
-      return articleMaker.makeEmptyPage();
-
-    bool groupIsValid = false;
-
-    QString word = Qt4x5::Url::queryItemValue( url, "word" );
-    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
-   
-    QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
-    if( !dictIDs.isEmpty() )
-    {
-      // Individual dictionaries set from full-text search
-      QStringList dictIDList = dictIDs.split( "," );
-      return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
-    }
-
-    // See if we have some dictionaries muted
-
-    QSet< QString > mutedDicts =
-        QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
-
-    // Unpack contexts
-
-    QMap< QString, QString > contexts;
-
-    QString contextsEncoded = Qt4x5::Url::queryItemValue( url, "contexts" );
-
-    if ( contextsEncoded.size() )
-    {
-      QByteArray ba = QByteArray::fromBase64( contextsEncoded.toLatin1() );
-
-      QBuffer buf( & ba );
-
-      buf.open( QBuffer::ReadOnly );
-
-      QDataStream stream( &buf );
-
-      stream >> contexts;
-    }
-
-    // See for ignore diacritics
-
-    bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
-
-    if ( groupIsValid && word.size() ) // Require group and word to be passed
-      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
-  }
-
-  if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&
-       url.path().size() )
-  {
-    //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
-    //DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
-
-    string id = url.host().toStdString();
-
-    bool search = ( id == "search" );
-
-    if ( !search )
-    {
-      for( unsigned x = 0; x < dictionaries.size(); ++x )
-        if ( dictionaries[ x ]->getId() == id )
+        if( !url.host().isEmpty() && url.host() != "localhost" )
         {
-            if( url.scheme() == "gico" )
-            {
-                QByteArray bytes;
-                QBuffer buffer(&bytes);
-                buffer.open(QIODevice::WriteOnly);
-                dictionaries[ x ]->getIcon().pixmap( 16 ).save(&buffer, "PNG");
-                buffer.close();
-                sptr< Dictionary::DataRequestInstant > ico ( new Dictionary::DataRequestInstant( true ) );
-                ico->getData().resize( bytes.size() );
-                memcpy( &( ico->getData().front() ), bytes.data(), bytes.size() );
-                return ico;
-            }
-            try
-            {
-              return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
-            }
-            catch( std::exception & e )
-            {
-              gdWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
-                         dictionaries[ x ]->getName().c_str() );
-              return sptr< Dictionary::DataRequest >();
-            }
+            // Strange request - ignore it
+            return sptr< Dictionary::DataRequest >(new Dictionary::DataRequestInstant( false ));
         }
+
+        contentType = "text/html";
+
+        if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
+            return articleMaker.makeEmptyPage();
+
+        bool groupIsValid = false;
+
+        QString word = Qt4x5::Url::queryItemValue( url, "word" );
+        unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+
+        QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
+        if( !dictIDs.isEmpty() )
+        {
+            // Individual dictionaries set from full-text search
+            QStringList dictIDList = dictIDs.split( "," );
+            return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
+        }
+
+        // See if we have some dictionaries muted
+
+        QSet< QString > mutedDicts =
+                QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
+
+        // Unpack contexts
+
+        QMap< QString, QString > contexts;
+
+        QString contextsEncoded = Qt4x5::Url::queryItemValue( url, "contexts" );
+
+        if ( contextsEncoded.size() )
+        {
+            QByteArray ba = QByteArray::fromBase64( contextsEncoded.toLatin1() );
+
+            QBuffer buf( & ba );
+
+            buf.open( QBuffer::ReadOnly );
+
+            QDataStream stream( &buf );
+
+            stream >> contexts;
+        }
+
+        // See for ignore diacritics
+
+        bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
+
+        if ( groupIsValid && word.size() ) // Require group and word to be passed
+            return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
     }
-    else
+
+    if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&
+         url.path().size() )
     {
-      // We don't do search requests for now
+        //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
+        //DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
+
+        string id = url.host().toStdString();
+
+        bool search = ( id == "search" );
+
+        if ( !search )
+        {
+            for( unsigned x = 0; x < dictionaries.size(); ++x )
+                if ( dictionaries[ x ]->getId() == id )
+                {
+                    if( url.scheme() == "gico" )
+                    {
+                        QByteArray bytes;
+                        QBuffer buffer(&bytes);
+                        buffer.open(QIODevice::WriteOnly);
+                        dictionaries[ x ]->getIcon().pixmap( 16 ).save(&buffer, "PNG");
+                        buffer.close();
+                        sptr< Dictionary::DataRequestInstant > ico ( new Dictionary::DataRequestInstant( true ) );
+                        ico->getData().resize( bytes.size() );
+                        memcpy( &( ico->getData().front() ), bytes.data(), bytes.size() );
+                        return ico;
+                    }
+                    try
+                    {
+                        return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
+                    }
+                    catch( std::exception & e )
+                    {
+                        gdWarning( "getResource request error (%s) in \"%s\"\n", e.what(),
+                                   dictionaries[ x ]->getName().c_str() );
+                        return sptr< Dictionary::DataRequest >();
+                    }
+                }
+        }
+        else
+        {
+            // We don't do search requests for now
 #if 0
-      for( unsigned x = 0; x < dictionaries.size(); ++x )
-      {
-        if ( search || dictionaries[ x ]->getId() == id )
-        {
-          try
-          {
-            dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data(),
-                                            data );
+            for( unsigned x = 0; x < dictionaries.size(); ++x )
+            {
+                if ( search || dictionaries[ x ]->getId() == id )
+                {
+                    try
+                    {
+                        dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data(),
+                                                        data );
 
-            return true;
-          }
-          catch( Dictionary::exNoSuchResource & )
-          {
-            if ( !search )
-              break;
-          }
-        }
-      }
+                        return true;
+                    }
+                    catch( Dictionary::exNoSuchResource & )
+                    {
+                        if ( !search )
+                            break;
+                    }
+                }
+            }
 #endif      
+        }
     }
-  }
 
-  if ( url.scheme() == "gdpicture" )
-  {
-    contentType = "text/html";
-    QUrl imgUrl ( url );
-    imgUrl.setScheme( "bres" );
-    return articleMaker.makePicturePage( imgUrl.toEncoded().data() );
-  }
+    if ( url.scheme() == "gdpicture" )
+    {
+        contentType = "text/html";
+        QUrl imgUrl ( url );
+        imgUrl.setScheme( "bres" );
+        return articleMaker.makePicturePage( imgUrl.toEncoded().data() );
+    }
 
-  return sptr< Dictionary::DataRequest >();
+    return sptr< Dictionary::DataRequest >();
 }
 
 ArticleResourceReply::ArticleResourceReply( QObject * parent,
-  QNetworkRequest const & netReq,
-  sptr< Dictionary::DataRequest > const & req_,
-  QString const & contentType ):
-  QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
+                                            QNetworkRequest const & netReq,
+                                            sptr< Dictionary::DataRequest > const & req_,
+                                            QString const & contentType ):
+    QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
 {
-  setRequest( netReq );
+    setRequest( netReq );
 
-  setOpenMode( ReadOnly );
+    setOpenMode( ReadOnly );
 
-  if ( contentType.size() )
-    setHeader( QNetworkRequest::ContentTypeHeader, contentType );
+    if ( contentType.size() )
+        setHeader( QNetworkRequest::ContentTypeHeader, contentType );
 
-  connect( req.get(), SIGNAL( updated() ),
-           this, SLOT( reqUpdated() ) );
-  
-  connect( req.get(), SIGNAL( finished() ),
-           this, SLOT( reqFinished() ) );
-  
-  if ( req->isFinished() || req->dataSize() > 0 )
-  {
-    connect( this, SIGNAL( readyReadSignal() ),
-             this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
-    connect( this, SIGNAL( finishedSignal() ),
-             this, SLOT( finishedSlot() ), Qt::QueuedConnection );
+    connect( req.get(), SIGNAL( updated() ),
+             this, SLOT( reqUpdated() ) );
 
-    emit readyReadSignal();
+    connect( req.get(), SIGNAL( finished() ),
+             this, SLOT( reqFinished() ) );
 
-    if ( req->isFinished() )
+    if ( req->isFinished() || req->dataSize() > 0 )
     {
-      emit finishedSignal();
-      GD_DPRINTF( "In-place finish.\n" );
+        connect( this, SIGNAL( readyReadSignal() ),
+                 this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
+        connect( this, SIGNAL( finishedSignal() ),
+                 this, SLOT( finishedSlot() ), Qt::QueuedConnection );
+
+        emit readyReadSignal();
+
+        if ( req->isFinished() )
+        {
+            emit finishedSignal();
+            GD_DPRINTF( "In-place finish.\n" );
+        }
     }
-  }
 }
 
 ArticleResourceReply::~ArticleResourceReply()
 {
-  req->cancel();
+    req->cancel();
 }
 
 void ArticleResourceReply::reqUpdated()
 {
-  emit readyRead();
+    emit readyRead();
 }
 
 void ArticleResourceReply::reqFinished()
 {
-  emit readyRead();
-  finishedSlot();
+    emit readyRead();
+    finishedSlot();
 }
 
 qint64 ArticleResourceReply::bytesAvailable() const
 {
-  qint64 avail = req->dataSize();
-  
-  if ( avail < 0 )
-    return 0;
-  
-  return avail - alreadyRead + QNetworkReply::bytesAvailable();
+    qint64 avail = req->dataSize();
+
+    if ( avail < 0 )
+        return 0;
+
+    return avail - alreadyRead + QNetworkReply::bytesAvailable();
 }
 
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
-  // From the doc: "This function might be called with a maxSize of 0,
-  // which can be used to perform post-reading operations".
-  if ( maxSize == 0 )
-    return 0;
+    // From the doc: "This function might be called with a maxSize of 0,
+    // which can be used to perform post-reading operations".
+    if ( maxSize == 0 )
+        return 0;
 
-  GD_DPRINTF( "====reading %d bytes\n", (int)maxSize );
+    GD_DPRINTF( "====reading %d bytes\n", (int)maxSize );
 
-  bool finished = req->isFinished();
-  
-  qint64 avail = req->dataSize();
+    bool finished = req->isFinished();
 
-  if ( avail < 0 )
-    return finished ? -1 : 0;
+    qint64 avail = req->dataSize();
 
-  qint64 left = avail - alreadyRead;
-  
-  qint64 toRead = maxSize < left ? maxSize : left;
+    if ( avail < 0 )
+        return finished ? -1 : 0;
 
-  try
-  {
-    req->getDataSlice( alreadyRead, toRead, out );
-  }
-  catch( std::exception & e )
-  {
-    qWarning( "getDataSlice error: %s\n", e.what() );
-  }
+    qint64 left = avail - alreadyRead;
 
-  alreadyRead += toRead;
+    qint64 toRead = maxSize < left ? maxSize : left;
 
-  if ( !toRead && finished )
-    return -1;
-  else
-    return toRead;
+    try
+    {
+        req->getDataSlice( alreadyRead, toRead, out );
+    }
+    catch( std::exception & e )
+    {
+        qWarning( "getDataSlice error: %s\n", e.what() );
+    }
+
+    alreadyRead += toRead;
+
+    if ( !toRead && finished )
+        return -1;
+    else
+        return toRead;
 }
 
 void ArticleResourceReply::readyReadSlot()
 {
-  readyRead();
+    readyRead();
 }
 
 void ArticleResourceReply::finishedSlot()
 {
-  if ( req->dataSize() < 0 )
-    error( ContentNotFoundError );
+    if ( req->dataSize() < 0 )
+        error( ContentNotFoundError );
 
-  finished();
+    finished();
 }
 
 BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
 {
-  setError( QNetworkReply::ContentOperationNotPermittedError, "Content Blocked" );
+    setError( QNetworkReply::ContentOperationNotPermittedError, "Content Blocked" );
 
-  connect( this, SIGNAL( finishedSignal() ), this, SLOT( finishedSlot() ),
-           Qt::QueuedConnection );
+    connect( this, SIGNAL( finishedSignal() ), this, SLOT( finishedSlot() ),
+             Qt::QueuedConnection );
 
-  emit finishedSignal(); // This way we call readyRead()/finished() sometime later
+    emit finishedSignal(); // This way we call readyRead()/finished() sometime later
 }
 
 
 void BlockedNetworkReply::finishedSlot()
 {
-  emit readyRead();
-  emit finished();
+    emit readyRead();
+    emit finished();
 }

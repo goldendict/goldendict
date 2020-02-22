@@ -15,31 +15,31 @@ using std::vector;
 using std::string;
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-                                      Dictionary::Initializing &,
-                                      Config::MediaWikis const & wikis,
-                                      QNetworkAccessManager & )
-    THROW_SPEC( std::exception );
+        Dictionary::Initializing &,
+        Config::MediaWikis const & wikis,
+        QNetworkAccessManager & )
+THROW_SPEC( std::exception );
 
 /// Exposed here for moc
 class MediaWikiWordSearchRequestSlots: public Dictionary::WordSearchRequest
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected slots:
 
-  virtual void downloadFinished()
-  {}
+    virtual void downloadFinished()
+    {}
 };
 
 /// Exposed here for moc
 class MediaWikiDataRequestSlots: public Dictionary::DataRequest
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected slots:
 
-  virtual void requestFinished( QNetworkReply * )
-  {}
+    virtual void requestFinished( QNetworkReply * )
+    {}
 };
 
 }

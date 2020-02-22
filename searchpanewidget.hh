@@ -5,18 +5,17 @@
 #define __SEARCHPANEWIDGET_HH_INCLUDED__
 
 #include <QWidget>
-#include <QSize>
 
 /// A widget holding the contents of the 'Search pane' docklet.
 class SearchPaneWidget: public QWidget
 {
 public:
 
-  SearchPaneWidget( QWidget * parent = 0 ): QWidget( parent )
-  {}
+    SearchPaneWidget( QWidget * parent = 0 ): QWidget( parent )
+    {}
 
-  virtual QSize sizeHint() const
-  { return QSize( 204, 204 ); }
+    virtual QSize sizeHint() const
+    { return QSize( 204, 204 ); }
 
 };
 

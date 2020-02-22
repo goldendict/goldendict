@@ -5,7 +5,11 @@
 #include "wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
+#ifdef GD_PUGIXML_XSERIAL
+#include "pugixml_Qt.h"
+#else
 #include <QtXml>
+#endif
 #include <list>
 #include "audiolink.hh"
 #include "htmlescape.hh"
@@ -24,99 +28,99 @@ namespace {
 
 class ForvoDictionary: public Dictionary::Class
 {
-  QString apiKey, languageCode;
-  QNetworkAccessManager & netMgr;
+    QString apiKey, languageCode;
+    QNetworkAccessManager & netMgr;
 
 public:
 
-  ForvoDictionary( string const & id, string const & name_,
-                   QString const & apiKey_,
-                   QString const & languageCode_,
-                   QNetworkAccessManager & netMgr_ ):
-    Dictionary::Class( id, vector< string >() ),
-    apiKey( apiKey_ ),
-    languageCode( languageCode_ ),
-    netMgr( netMgr_ )
-  {
-     setDictionaryName(name_);
-  }
-  virtual ~ForvoDictionary(){}
+    ForvoDictionary( string const & id, string const & name_,
+                     QString const & apiKey_,
+                     QString const & languageCode_,
+                     QNetworkAccessManager & netMgr_ ):
+        Dictionary::Class( id, vector< string >() ),
+        apiKey( apiKey_ ),
+        languageCode( languageCode_ ),
+        netMgr( netMgr_ )
+    {
+        setDictionaryName(name_);
+    }
+    virtual ~ForvoDictionary(){}
 
-  virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
-                                                 unsigned long /*maxResults*/ ) THROW_SPEC( std::exception )
-  {
-    sptr< WordSearchRequestInstant > sr ( new WordSearchRequestInstant);
+    virtual sptr< WordSearchRequest > prefixMatch( wstring const & /*word*/,
+                                                   unsigned long /*maxResults*/ ) THROW_SPEC( std::exception )
+    {
+        sptr< WordSearchRequestInstant > sr ( new WordSearchRequestInstant);
 
-    sr->setUncertain( true );
+        sr->setUncertain( true );
 
-    return sr;
-  }
+        return sr;
+    }
 
-  virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const &, bool )
+    virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
+                                            wstring const &, bool )
     THROW_SPEC( std::exception );
 
 protected:
 
-  virtual void loadIcon() throw();
+    virtual void loadIcon() throw();
 
 };
 
 sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
                                                  vector< wstring > const & alts,
                                                  wstring const &, bool )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  if ( word.size() > 80 )
-  {
-    // Don't make excessively large queries -- they're fruitless anyway
+    if ( word.size() > 80 )
+    {
+        // Don't make excessively large queries -- they're fruitless anyway
 
-    return sptr< Dictionary::DataRequest >(new DataRequestInstant( false ));
-  }
-  else
-    return sptr< Dictionary::DataRequest >(new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
-                                    netMgr ));
+        return sptr< Dictionary::DataRequest >(new DataRequestInstant( false ));
+    }
+    else
+        return sptr< Dictionary::DataRequest >(new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
+                                                                        netMgr ));
 }
 
 void ForvoDictionary::loadIcon() throw()
 {
-  if ( dictionaryIconLoaded )
-    return;
+    if ( dictionaryIconLoaded )
+        return;
 
-// Experimental code to generate icon -- but the flags clutter the interface too
-// much and we're better with a single icon.
+    // Experimental code to generate icon -- but the flags clutter the interface too
+    // much and we're better with a single icon.
 #if 0
-  if ( languageCode.size() == 2 )
-  {
-    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toLatin1().data() ) );
-
-    if ( countryCode.size() )
+    if ( languageCode.size() == 2 )
     {
-      QImage flag( QString( ":/flags/%1.png" ).arg( countryCode.toLower() ) );
+        QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toLatin1().data() ) );
 
-      if ( !flag.isNull() )
-      {
-        QImage img( ":/icons/forvo_icon_base.png" );
-
+        if ( countryCode.size() )
         {
-          QPainter painter( &img );
-          painter.drawImage( QPoint( 5, 7 ), flag );
-        }
+            QImage flag( QString( ":/flags/%1.png" ).arg( countryCode.toLower() ) );
 
-        return QIcon( QPixmap::fromImage( img ) );
-      }
+            if ( !flag.isNull() )
+            {
+                QImage img( ":/icons/forvo_icon_base.png" );
+
+                {
+                    QPainter painter( &img );
+                    painter.drawImage( QPoint( 5, 7 ), flag );
+                }
+
+                return QIcon( QPixmap::fromImage( img ) );
+            }
+        }
     }
-  }
 #endif
-  dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/forvo.png" );
-  dictionaryIconLoaded = true;
+    dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/forvo.png" );
+    dictionaryIconLoaded = true;
 }
 
 }
 
 void ForvoArticleRequest::cancel()
 {
-  finish();
+    finish();
 }
 
 ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
@@ -125,280 +129,415 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
                                           QString const & languageCode_,
                                           string const & dictionaryId_,
                                           QNetworkAccessManager & mgr ):
-  apiKey( apiKey_ ), languageCode( languageCode_ ),
-  dictionaryId( dictionaryId_ )
+    apiKey( apiKey_ ), languageCode( languageCode_ ),
+    dictionaryId( dictionaryId_ )
 {
-  connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
-           this, SLOT( requestFinished( QNetworkReply * ) ),
-           Qt::QueuedConnection );
-  
-  addQuery(  mgr, str );
+    connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
+             this, SLOT( requestFinished( QNetworkReply * ) ),
+             Qt::QueuedConnection );
 
-  for( unsigned x = 0; x < alts.size(); ++x )
-    addQuery( mgr, alts[ x ] );
+    addQuery(  mgr, str );
+
+    for( unsigned x = 0; x < alts.size(); ++x )
+        addQuery( mgr, alts[ x ] );
 }
 
 void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                                     wstring const & str )
 {
-  gdDebug( "Forvo: requesting article %s\n", gd::toQString( str ).toUtf8().data() );
+    gdDebug( "Forvo: requesting article %s\n", gd::toQString( str ).toUtf8().data() );
 
-  QString key;
+    QString key;
 
-  if ( apiKey.simplified().isEmpty() )
-  {
-    // Use the default api key. That's the key I have just registered myself.
-    // It has a limit of 1000 requests a day, and may also get banned in the
-    // future. Can't do much about it. Get your own key, it is simple.
-    key = "5efa5d045a16d10ad9c4705bd5d8e56a";
-  }
-  else
-    key = apiKey;
+    if ( apiKey.simplified().isEmpty() )
+    {
+        // Use the default api key. That's the key I have just registered myself.
+        // It has a limit of 1000 requests a day, and may also get banned in the
+        // future. Can't do much about it. Get your own key, it is simple.
+        key = "5efa5d045a16d10ad9c4705bd5d8e56a";
+    }
+    else
+        key = apiKey;
 
-  QUrl reqUrl = QUrl::fromEncoded(
-      QString( "http://apifree.forvo.com"
-               "/key/" + key +
-               "/action/word-pronunciations"
-               "/format/xml"
-               "/word/" + QLatin1String( QUrl::toPercentEncoding( gd::toQString( str ) ) ) +
-               "/language/" + languageCode +
-               "/order/rate-desc"
-       ).toUtf8() );
+    QUrl reqUrl = QUrl::fromEncoded(
+                QString( "http://apifree.forvo.com"
+                         "/key/" + key +
+                         "/action/word-pronunciations"
+                         "/format/xml"
+                         "/word/" + QLatin1String( QUrl::toPercentEncoding( gd::toQString( str ) ) ) +
+                         "/language/" + languageCode +
+                         "/order/rate-desc"
+                         ).toUtf8() );
 
-//  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
+    //  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
 
-  sptr< QNetworkReply > netReply ( mgr.get( QNetworkRequest( reqUrl ) ));
-  
-  netReplies.push_back( NetReply( netReply, Utf8::encode( str ) ) );
+    sptr< QNetworkReply > netReply ( mgr.get( QNetworkRequest( reqUrl ) ));
+
+    netReplies.push_back( NetReply( netReply, Utf8::encode( str ) ) );
 }
 
 void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 {
-  GD_DPRINTF( "Finished.\n" );
+    GD_DPRINTF( "Finished.\n" );
 
-  if ( isFinished() ) // Was cancelled
-    return;
+    if ( isFinished() ) // Was cancelled
+        return;
 
-  // Find this reply
+    // Find this reply
 
-  bool found = false;
-  
-  for( NetReplies::iterator i = netReplies.begin(); i != netReplies.end(); ++i )
-  {
-    if ( i->reply.get() == r )
+    bool found = false;
+
+    for( NetReplies::iterator i = netReplies.begin(); i != netReplies.end(); ++i )
     {
-      i->finished = true; // Mark as finished
-      found = true;
-      break;
-    }
-  }
-
-  if ( !found )
-  {
-    // Well, that's not our reply, don't do anything
-    return;
-  }
-  
-  bool updated = false;
-
-  for( ; netReplies.size() && netReplies.front().finished; netReplies.pop_front() )
-  {
-    sptr< QNetworkReply > netReply = netReplies.front().reply;
-    
-    if ( netReply->error() == QNetworkReply::NoError )
-    {
-      QDomDocument dd;
-  
-      QString errorStr;
-      int errorLine, errorColumn;
-  
-      if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
-      {
-        setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
-                                 arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
-      }
-      else
-      {
-//        DPRINTF( "%s\n", dd.toByteArray().data() );
-
-        QDomNode items = dd.namedItem( "items" );
-  
-        if ( !items.isNull() )
+        if ( i->reply.get() == r )
         {
-          QDomNodeList nl = items.toElement().elementsByTagName( "item" );
+            i->finished = true; // Mark as finished
+            found = true;
+            break;
+        }
+    }
 
-          if ( nl.count() )
-          {
-            string articleBody;
+    if ( !found )
+    {
+        // Well, that's not our reply, don't do anything
+        return;
+    }
 
-            articleBody += "<div class='forvo_headword'>";
-            articleBody += Html::escape( netReplies.front().word );
-            articleBody += "</div>";
+    bool updated = false;
 
-            articleBody += "<table class=\"forvo_play\">";
+    for( ; netReplies.size() && netReplies.front().finished; netReplies.pop_front() )
+    {
+        sptr< QNetworkReply > netReply = netReplies.front().reply;
 
-            for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+        if ( netReply->error() == QNetworkReply::NoError )
+        {
+#ifdef GD_PUGIXML_XSERIAL
+            pugi::xml_document dd;
+            pugi::xml_parse_result xpr;
+            QByteArray bac = netReply->readAll();
+            if ( !(xpr = dd.load_buffer( bac.data(), bac.size() )) )
             {
-              QDomElement item = nl.item( x ).toElement();
+                setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
+                                         arg( bac.data() ).arg( xpr.status ).arg( xpr.description() ) ) );
+            }
+            else
+            {
+                pugi::xml_node items = dd.select_single_node( "items" ).node();
 
-              QDomNode mp3 = item.namedItem( "pathmp3" );
-
-              if ( !mp3.isNull() )
-              {
-                articleBody += "<tr>";
-
-                QUrl url( mp3.toElement().text() );
-
-                string ref = string( "\"" ) + url.toEncoded().data() + "\"";
-
-                articleBody += addAudioLink( ref, dictionaryId ).c_str();
-
-                bool isMale = ( item.namedItem( "sex" ).toElement().text().toLower() != "f" );
-
-                QString user = item.namedItem( "username" ).toElement().text();
-                QString country = item.namedItem( "country" ).toElement().text();
-
-                string userProfile = string( "http://www.forvo.com/user/" ) +
-                                     QUrl::toPercentEncoding( user ).data() + "/";
-
-                int totalVotes = item.namedItem( "num_votes" ).toElement().text().toInt();
-                int positiveVotes = item.namedItem( "num_positive_votes" ).toElement().text().toInt();
-                int negativeVotes = totalVotes - positiveVotes;
-
-                string votes;
-
-                if ( positiveVotes || negativeVotes )
+                if ( !items.empty() )
                 {
-                  votes += " ";
+                    pugi::xpath_node_set nl = items.select_nodes("item");
 
-                  if ( positiveVotes )
-                  {
-                    votes += "<span class='forvo_positive_votes'>+";
-                    votes += QByteArray::number( positiveVotes ).data();
-                    votes += "</span>";
-                  }
+                    if ( !nl.empty() )
+                    {
+                        string articleBody;
 
-                  if ( negativeVotes )
-                  {
-                    if ( positiveVotes )
-                      votes += " ";
+                        articleBody += "<div class='forvo_headword'>";
+                        articleBody += Html::escape( netReplies.front().word );
+                        articleBody += "</div>";
 
-                    votes += "<span class='forvo_negative_votes'>-";
-                    votes += QByteArray::number( negativeVotes ).data();
-                    votes += "</span>";
-                  }
+                        articleBody += "<table class=\"forvo_play\">";
+
+                        for( Qt4x5::Dom::size_type x = 0; x < nl.size(); ++x )
+                        {
+                            pugi::xml_node item = nl[x].node();
+
+                            pugi::xml_node mp3 = item.child( "pathmp3" );
+
+                            if ( !mp3.empty() )
+                            {
+                                articleBody += "<tr>";
+
+                                QUrl url( mp3.text().get() );
+
+                                string ref = string( "\"" ) + url.toEncoded().data() + "\"";
+
+                                articleBody += addAudioLink( ref, dictionaryId ).c_str();
+
+                                bool isMale = ( QString(item.child( "sex" ).text().get()).toLower() != "f" );
+
+                                QString user = item.child( "username" ).text().get();
+                                QString country = item.child( "country" ).text().get();
+
+                                string userProfile = string( "http://www.forvo.com/user/" ) +
+                                        QUrl::toPercentEncoding( user ).data() + "/";
+
+                                int totalVotes = item.child( "num_votes" ).text().as_int();
+                                int positiveVotes = item.child( "num_positive_votes" ).text().as_int();
+                                int negativeVotes = totalVotes - positiveVotes;
+
+                                string votes;
+
+                                if ( positiveVotes || negativeVotes )
+                                {
+                                    votes += " ";
+
+                                    if ( positiveVotes )
+                                    {
+                                        votes += "<span class='forvo_positive_votes'>+";
+                                        votes += QByteArray::number( positiveVotes ).data();
+                                        votes += "</span>";
+                                    }
+
+                                    if ( negativeVotes )
+                                    {
+                                        if ( positiveVotes )
+                                            votes += " ";
+
+                                        votes += "<span class='forvo_negative_votes'>-";
+                                        votes += QByteArray::number( negativeVotes ).data();
+                                        votes += "</span>";
+                                    }
+                                }
+
+                                string addTime =
+                                        tr( "Added %1" ).arg( item.child( "addtime" ).text().get() ).toUtf8().data();
+
+                                articleBody += "<td><a href=" + ref + " title=\"" + Html::escape( addTime ) + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+                                articleBody += string( "<td>" ) + tr( "by" ).toUtf8().data() + " <a class='forvo_user' href='"
+                                        + userProfile + "'>"
+                                        + Html::escape( user.toUtf8().data() )
+                                        + "</a> <span class='forvo_location'>("
+                                        + ( isMale ? tr( "Male" ) : tr( "Female" ) ).toUtf8().data()
+                                        + " "
+                                        + tr( "from" ).toUtf8().data()
+                                        + " "
+                                        + "<img src='qrcx://localhost/flags/" + Country::englishNametoIso2( country ).toUtf8().data()
+                                        + ".png'/> "
+                                        + Html::escape( country.toUtf8().data() )
+                                        + ")</span>"
+                                        + votes
+                                        + "</td>";
+                                articleBody += "</tr>";
+                            }
+                        }
+
+                        articleBody += "</table>";
+
+                        Mutex::Lock _( dataMutex );
+
+                        size_t prevSize = data.size();
+
+                        data.resize( prevSize + articleBody.size() );
+
+                        memcpy( &data.front() + prevSize, articleBody.data(), articleBody.size() );
+
+                        hasAnyData = true;
+
+                        updated = true;
+                    }
                 }
 
-                string addTime =
-                    tr( "Added %1" ).arg( item.namedItem( "addtime" ).toElement().text() ).toUtf8().data();
+                pugi::xml_node errors = dd.select_single_node( "errors" ).node();
 
-                articleBody += "<td><a href=" + ref + " title=\"" + Html::escape( addTime ) + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-                articleBody += string( "<td>" ) + tr( "by" ).toUtf8().data() + " <a class='forvo_user' href='"
-                               + userProfile + "'>"
-                               + Html::escape( user.toUtf8().data() )
-                               + "</a> <span class='forvo_location'>("
-                               + ( isMale ? tr( "Male" ) : tr( "Female" ) ).toUtf8().data()
-                               + " "
-                               + tr( "from" ).toUtf8().data()
-                               + " "
-                               + "<img src='qrcx://localhost/flags/" + Country::englishNametoIso2( country ).toUtf8().data()
-                               + ".png'/> "
-                               + Html::escape( country.toUtf8().data() )
-                               + ")</span>"
-                               + votes
-                               + "</td>";
-                articleBody += "</tr>";
-              }
+                if ( !errors.empty() )
+                {
+                    QString text( errors.child( "error" ).text().get() );
+
+                    if ( text == "Limit/day reached." && apiKey.simplified().isEmpty() )
+                    {
+                        // Give a hint that the user should apply for his own key.
+
+                        text += "\n" + tr( "Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear." );
+                    }
+
+                    setErrorString( text );
+                }
             }
+#else
+            QDomDocument dd;
 
-            articleBody += "</table>";
+            QString errorStr;
+            int errorLine, errorColumn;
 
-            Mutex::Lock _( dataMutex );
+            if ( !dd.setContent( netReply.get(), false, &errorStr, &errorLine, &errorColumn  ) )
+            {
+                setErrorString( QString( tr( "XML parse error: %1 at %2,%3" ).
+                                         arg( errorStr ).arg( errorLine ).arg( errorColumn ) ) );
+            }
+            else
+            {
+                //        DPRINTF( "%s\n", dd.toByteArray().data() );
 
-            size_t prevSize = data.size();
-            
-            data.resize( prevSize + articleBody.size() );
-  
-            memcpy( &data.front() + prevSize, articleBody.data(), articleBody.size() );
-  
-            hasAnyData = true;
+                QDomNode items = dd.namedItem( "items" );
 
-            updated = true;
-          }
+                if ( !items.isNull() )
+                {
+                    QDomNodeList nl = items.toElement().elementsByTagName( "item" );
+
+                    if ( nl.count() )
+                    {
+                        string articleBody;
+
+                        articleBody += "<div class='forvo_headword'>";
+                        articleBody += Html::escape( netReplies.front().word );
+                        articleBody += "</div>";
+
+                        articleBody += "<table class=\"forvo_play\">";
+
+                        for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+                        {
+                            QDomElement item = nl.item( x ).toElement();
+
+                            QDomNode mp3 = item.namedItem( "pathmp3" );
+
+                            if ( !mp3.isNull() )
+                            {
+                                articleBody += "<tr>";
+
+                                QUrl url( mp3.toElement().text() );
+
+                                string ref = string( "\"" ) + url.toEncoded().data() + "\"";
+
+                                articleBody += addAudioLink( ref, dictionaryId ).c_str();
+
+                                bool isMale = ( item.namedItem( "sex" ).toElement().text().toLower() != "f" );
+
+                                QString user = item.namedItem( "username" ).toElement().text();
+                                QString country = item.namedItem( "country" ).toElement().text();
+
+                                string userProfile = string( "http://www.forvo.com/user/" ) +
+                                        QUrl::toPercentEncoding( user ).data() + "/";
+
+                                int totalVotes = item.namedItem( "num_votes" ).toElement().text().toInt();
+                                int positiveVotes = item.namedItem( "num_positive_votes" ).toElement().text().toInt();
+                                int negativeVotes = totalVotes - positiveVotes;
+
+                                string votes;
+
+                                if ( positiveVotes || negativeVotes )
+                                {
+                                    votes += " ";
+
+                                    if ( positiveVotes )
+                                    {
+                                        votes += "<span class='forvo_positive_votes'>+";
+                                        votes += QByteArray::number( positiveVotes ).data();
+                                        votes += "</span>";
+                                    }
+
+                                    if ( negativeVotes )
+                                    {
+                                        if ( positiveVotes )
+                                            votes += " ";
+
+                                        votes += "<span class='forvo_negative_votes'>-";
+                                        votes += QByteArray::number( negativeVotes ).data();
+                                        votes += "</span>";
+                                    }
+                                }
+
+                                string addTime =
+                                        tr( "Added %1" ).arg( item.namedItem( "addtime" ).toElement().text() ).toUtf8().data();
+
+                                articleBody += "<td><a href=" + ref + " title=\"" + Html::escape( addTime ) + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+                                articleBody += string( "<td>" ) + tr( "by" ).toUtf8().data() + " <a class='forvo_user' href='"
+                                        + userProfile + "'>"
+                                        + Html::escape( user.toUtf8().data() )
+                                        + "</a> <span class='forvo_location'>("
+                                        + ( isMale ? tr( "Male" ) : tr( "Female" ) ).toUtf8().data()
+                                        + " "
+                                        + tr( "from" ).toUtf8().data()
+                                        + " "
+                                        + "<img src='qrcx://localhost/flags/" + Country::englishNametoIso2( country ).toUtf8().data()
+                                        + ".png'/> "
+                                        + Html::escape( country.toUtf8().data() )
+                                        + ")</span>"
+                                        + votes
+                                        + "</td>";
+                                articleBody += "</tr>";
+                            }
+                        }
+
+                        articleBody += "</table>";
+
+                        Mutex::Lock _( dataMutex );
+
+                        size_t prevSize = data.size();
+
+                        data.resize( prevSize + articleBody.size() );
+
+                        memcpy( &data.front() + prevSize, articleBody.data(), articleBody.size() );
+
+                        hasAnyData = true;
+
+                        updated = true;
+                    }
+                }
+
+                QDomNode errors = dd.namedItem( "errors" );
+
+                if ( !errors.isNull() )
+                {
+                    QString text( errors.namedItem( "error" ).toElement().text() );
+
+                    if ( text == "Limit/day reached." && apiKey.simplified().isEmpty() )
+                    {
+                        // Give a hint that the user should apply for his own key.
+
+                        text += "\n" + tr( "Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear." );
+                    }
+
+                    setErrorString( text );
+                }
+            }
+#endif
+            GD_DPRINTF( "done.\n" );
         }
-
-        QDomNode errors = dd.namedItem( "errors" );
-
-        if ( !errors.isNull() )
-        {
-          QString text( errors.namedItem( "error" ).toElement().text() );
-
-          if ( text == "Limit/day reached." && apiKey.simplified().isEmpty() )
-          {
-            // Give a hint that the user should apply for his own key.
-
-            text += "\n" + tr( "Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear." );
-          }
-
-          setErrorString( text );
-        }
-      }
-      GD_DPRINTF( "done.\n" );
+        else
+            setErrorString( netReply->errorString() );
     }
-    else
-      setErrorString( netReply->errorString() );
-  }
 
-  if ( netReplies.empty() )
-    finish();
-  else
-  if ( updated )
-    update();
+    if ( netReplies.empty() )
+        finish();
+    else
+        if ( updated )
+            update();
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-                                      Dictionary::Initializing &,
-                                      Config::Forvo const & forvo,
-                                      QNetworkAccessManager & mgr )
-  THROW_SPEC( std::exception )
+        Dictionary::Initializing &,
+        Config::Forvo const & forvo,
+        QNetworkAccessManager & mgr )
+THROW_SPEC( std::exception )
 {
-  vector< sptr< Dictionary::Class > > result;
+    vector< sptr< Dictionary::Class > > result;
 
-  if ( forvo.enable )
-  {
-    QStringList codes = forvo.languageCodes.split( ',', QString::SkipEmptyParts );
-
-    QSet< QString > usedCodes;
-
-    for( int x = 0; x < codes.size(); ++x )
+    if ( forvo.enable )
     {
-      QString code = codes[ x ].simplified();
+        QStringList codes = forvo.languageCodes.split( ',', QString::SkipEmptyParts );
 
-      if ( code.size() && !usedCodes.contains( code ) )
-      {
-        // Generate id
+        QSet< QString > usedCodes;
 
-        QCryptographicHash hash( QCryptographicHash::Md5 );
+        for( int x = 0; x < codes.size(); ++x )
+        {
+            QString code = codes[ x ].simplified();
 
-        hash.addData( "Forvo source version 1.0" );
-        hash.addData( code.toUtf8() );
+            if ( code.size() && !usedCodes.contains( code ) )
+            {
+                // Generate id
 
-        QString displayedCode( code.toLower() );
+                QCryptographicHash hash( QCryptographicHash::Md5 );
 
-        if ( displayedCode.size() )
-          displayedCode[ 0 ] = displayedCode[ 0 ].toUpper();
+                hash.addData( "Forvo source version 1.0" );
+                hash.addData( code.toUtf8() );
 
-        result.push_back(sptr< Dictionary::Class >(
-            new ForvoDictionary( hash.result().toHex().data(),
-                                 QString( "Forvo (%1)" ).arg( displayedCode ).toUtf8().data(),
-                                 forvo.apiKey, code, mgr ) ) );
+                QString displayedCode( code.toLower() );
 
-        usedCodes.insert( code );
-      }
+                if ( displayedCode.size() )
+                    displayedCode[ 0 ] = displayedCode[ 0 ].toUpper();
+
+                result.push_back(sptr< Dictionary::Class >(
+                                     new ForvoDictionary( hash.result().toHex().data(),
+                                                          QString( "Forvo (%1)" ).arg( displayedCode ).toUtf8().data(),
+                                                          forvo.apiKey, code, mgr ) ) );
+
+                usedCodes.insert( code );
+            }
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 }

@@ -43,22 +43,22 @@
 
 namespace gd
 {
-  #ifdef __WIN32
+#ifdef __WIN32
 
-  typedef unsigned int wchar;
-  typedef std::basic_string< wchar > wstring;
+typedef unsigned int wchar;
+typedef std::basic_string< wchar > wstring;
 
-  // GD_NATIVE_TO_WS is used to convert L"" strings to a const pointer to
-  // wchar.
-  wstring __nativeToWs( wchar_t const * );
-  #define GD_NATIVE_TO_WS( str ) ( gd::__nativeToWs( ( str ) ).c_str() )
+// GD_NATIVE_TO_WS is used to convert L"" strings to a const pointer to
+// wchar.
+wstring __nativeToWs( wchar_t const * );
+#define GD_NATIVE_TO_WS( str ) ( gd::__nativeToWs( ( str ) ).c_str() )
 
-  #else
+#else
 
-  typedef wchar_t wchar;
-  using std::wstring;
-  #define GD_NATIVE_TO_WS( str ) ( str )
-  #endif
+typedef wchar_t wchar;
+using std::wstring;
+#define GD_NATIVE_TO_WS( str ) ( str )
+#endif
 }
 
 #endif

@@ -19,65 +19,65 @@ using std::vector;
 class BaseTransliterationDictionary: public Dictionary::Class
 {
 protected:
-  bool caseSensitive;
+    bool caseSensitive;
 
 public:
 
-  BaseTransliterationDictionary( string const & id, string const & name,
-                                 QIcon icon, bool caseSensitive = true );
-  virtual ~BaseTransliterationDictionary(){}
+    BaseTransliterationDictionary( string const & id, string const & name,
+                                   QIcon icon, bool caseSensitive = true );
+    virtual ~BaseTransliterationDictionary(){}
 
-  virtual vector< wstring > getAlternateWritings( wstring const & )
+    virtual vector< wstring > getAlternateWritings( wstring const & )
     throw() = 0;
 
-  virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
+    virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     THROW_SPEC( std::exception );
 
-  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
-                                                             unsigned long ) THROW_SPEC( std::exception );
+    virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                               unsigned long ) THROW_SPEC( std::exception );
 
-  virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                      vector< wstring > const &,
-                                                      wstring const &, bool )
+    virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                        vector< wstring > const &,
+                                                        wstring const &, bool )
     THROW_SPEC( std::exception );
 };
 
 
 class Table: public map< wstring, wstring >
 {
-  unsigned maxEntrySize;
+    unsigned maxEntrySize;
 
 public:
 
-  Table(): maxEntrySize( 0 )
-  {}
-  virtual ~Table(){}
+    Table(): maxEntrySize( 0 )
+    {}
+    virtual ~Table(){}
 
-  unsigned getMaxEntrySize() const
-  { return maxEntrySize; }
+    unsigned getMaxEntrySize() const
+    { return maxEntrySize; }
 
 protected:
 
-  /// Inserts new entry into index. from and to are UTF8-encoded strings.
-  /// Also updates maxEntrySize.
-  void ins( char const * from, char const * to );
+    /// Inserts new entry into index. from and to are UTF8-encoded strings.
+    /// Also updates maxEntrySize.
+    void ins( char const * from, char const * to );
 };
 
 
 /// A base dictionary class for table based transliteratons
 class TransliterationDictionary: public BaseTransliterationDictionary
 {
-  Table const & table;
+    Table const & table;
 
 public:
 
-  TransliterationDictionary( string const & id, string const & name,
-                             QIcon icon,
-                             Table const & table,
-                             bool caseSensitive = true );
-  virtual ~TransliterationDictionary(){}
+    TransliterationDictionary( string const & id, string const & name,
+                               QIcon icon,
+                               Table const & table,
+                               bool caseSensitive = true );
+    virtual ~TransliterationDictionary(){}
 
-  virtual vector< wstring > getAlternateWritings( wstring const & )
+    virtual vector< wstring > getAlternateWritings( wstring const & )
     throw();
 };
 

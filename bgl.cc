@@ -22,12 +22,12 @@
 #include <ctype.h>
 #include <string.h>
 
-#include <QSemaphore>
+#include <QPainter>
 #include <QThreadPool>
-#include <QAtomicInt>
 #include <QDebug>
-
+#include <QDir>
 #include <QRegExp>
+#include <QCryptographicHash>
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
@@ -52,22 +52,22 @@ using BtreeIndexing::IndexInfo;
 
 namespace
 {
-  enum
-  {
+enum
+{
     Signature = 0x584c4742, // BGLX on little-endian, XLGB on big-endian
     CurrentFormatVersion = 19 + BtreeIndexing::FormatVersion
-  };
+};
 
-  struct IdxHeader
-  {
+struct IdxHeader
+{
     uint32_t signature; // First comes the signature, BGLX
     uint32_t formatVersion; // File format version, currently 1.
     uint32_t parserVersion; // Version of the parser used to parse the BGL file.
-                            // If it's lower than the current one, the file is to
-                            // be re-parsed.
+    // If it's lower than the current one, the file is to
+    // be re-parsed.
     uint32_t foldingVersion; // Version of the folding algorithm used when building
-                             // index. If it's different from the current one,
-                             // the file is to be rebuilt.
+    // index. If it's different from the current one,
+    // the file is to be rebuilt.
     uint32_t articleCount; // Total number of articles, for informative purposes only
     uint32_t wordCount; // Total number of words, for informative purposes only
     /// Add more fields here, like name, description, author and such.
@@ -82,76 +82,76 @@ namespace
     uint32_t iconSize; // Size of the icon in the chunks' storage, 0 = no icon
     uint32_t descriptionAddress; // Address of the dictionary description in the chunks' storage
     uint32_t descriptionSize; // Size of the description in the chunks' storage, 0 = no description
-  }
-  #ifndef _MSC_VER
-  __attribute__((packed))
-  #endif
-  ;
+}
+#ifndef _MSC_VER
+__attribute__((packed))
+#endif
+;
 
-  bool indexIsOldOrBad( string const & indexFile )
-  {
+bool indexIsOldOrBad( string const & indexFile )
+{
     File::Class idx( indexFile, "rb" );
 
     IdxHeader header;
 
     return idx.readRecords( &header, sizeof( header ), 1 ) != 1 ||
-           header.signature != Signature ||
-           header.formatVersion != CurrentFormatVersion ||
-           header.parserVersion != Babylon::ParserVersion ||
-           header.foldingVersion != Folding::Version;
-  }
+            header.signature != Signature ||
+            header.formatVersion != CurrentFormatVersion ||
+            header.parserVersion != Babylon::ParserVersion ||
+            header.foldingVersion != Folding::Version;
+}
 
-  // Removes the $1$-like postfix
-  string removePostfix( string const & in )
-  {
+// Removes the $1$-like postfix
+string removePostfix( string const & in )
+{
     if ( in.size() && in[ in.size() - 1 ] == '$' )
     {
-      // Find the end of it and cut it, barring any unexpectedness
-      for( long x = in.size() - 2; x >= 0; x-- )
-      {
-        if ( in[ x ] == '$' )
-          return in.substr( 0, x );
-        else
-        if ( !isdigit( in[ x ] ) )
-          break;
-      }
+        // Find the end of it and cut it, barring any unexpectedness
+        for( long x = in.size() - 2; x >= 0; x-- )
+        {
+            if ( in[ x ] == '$' )
+                return in.substr( 0, x );
+            else
+                if ( !isdigit( in[ x ] ) )
+                    break;
+        }
     }
 
     return in;
-  }
+}
 
-  // Removes any leading or trailing whitespace
-  void trimWs( string & word )
-  {
+// Removes any leading or trailing whitespace
+void trimWs( string & word )
+{
     if ( word.size() )
     {
-      unsigned begin = 0;
+        unsigned begin = 0;
 
-      while( begin < word.size() && Utf8::isspace( word[ begin ] ) )
-        ++begin;
+        while( begin < word.size() && Utf8::isspace( word[ begin ] ) )
+            ++begin;
 
-      if ( begin == word.size() ) // Consists of ws entirely?
-        word.clear();
-      else
-      {
-        unsigned end = word.size();
+        if ( begin == word.size() ) // Consists of ws entirely?
+            word.clear();
+        else
+        {
+            unsigned end = word.size();
 
-        // Doesn't consist of ws entirely, so must end with just isspace()
-        // condition.
-        while( Utf8::isspace( word[ end - 1 ] ) )
-          --end;
+            // Doesn't consist of ws entirely, so must end with just isspace()
+            // condition.
+            while( Utf8::isspace( word[ end - 1 ] ) )
+                --end;
 
-        if ( end != word.size() || begin )
-          word = string( word, begin, end - begin );
-      }
+            if ( end != word.size() || begin )
+                word = string( word, begin, end - begin );
+        }
     }
-  }
+}
 
-  void addEntryToIndex( string & word,
-                        uint32_t articleOffset,
-                        IndexedWords & indexedWords,
-                        vector< wchar > & wcharBuffer )
-  {
+void addEntryToIndex( string & word,
+                      uint32_t articleOffset,
+                      IndexedWords & indexedWords,
+                      vector< wchar > & wcharBuffer )
+{
     // Strip any leading or trailing whitespaces
     trimWs( word );
 
@@ -159,7 +159,7 @@ namespace
     // of them, and they all seem to be redudant duplicates.
 
     if ( word.size() && word[ 0 ] == '/' )
-      return;
+        return;
 
     // Check the input word for a superscript postfix ($1$, $2$ etc), which
     // signifies different meaning in Bgl files. We emit different meaning
@@ -167,112 +167,112 @@ namespace
 
     if ( word.size() && word[ word.size() - 1 ] == '$' )
     {
-      word = removePostfix( word );
-      trimWs( word );
+        word = removePostfix( word );
+        trimWs( word );
     }
 
     // Convert the word from utf8 to wide chars
 
     if ( wcharBuffer.size() <= word.size() )
-      wcharBuffer.resize( word.size() + 1 );
+        wcharBuffer.resize( word.size() + 1 );
 
     long result = Utf8::decode( word.c_str(), word.size(),
                                 &wcharBuffer.front() );
 
     if ( result < 0 )
     {
-      gdWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
-      return;
+        gdWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
+        return;
     }
 
     indexedWords.addWord( wstring( &wcharBuffer.front(), result ), articleOffset );
-  }
+}
 
 
-  DEF_EX( exFailedToDecompressArticle, "Failed to decompress article's body", Dictionary::Ex )
-  DEF_EX( exChunkIndexOutOfRange, "Chunk index is out of range", Dictionary::Ex )
+DEF_EX( exFailedToDecompressArticle, "Failed to decompress article's body", Dictionary::Ex )
+DEF_EX( exChunkIndexOutOfRange, "Chunk index is out of range", Dictionary::Ex )
 
-  class BglDictionary: public BtreeIndexing::BtreeDictionary
-  {
-    Mutex idxMutex;
-    File::Class idx;
-    IdxHeader idxHeader;
-    ChunkedStorage::Reader chunks;
+class BglDictionary: public BtreeIndexing::BtreeDictionary
+{
+                                Mutex idxMutex;
+File::Class idx;
+IdxHeader idxHeader;
+ChunkedStorage::Reader chunks;
 
-  public:
+public:
 
-    BglDictionary( string const & id, string const & indexFile,
-                   string const & dictionaryFile );
-    ~BglDictionary(){}
+BglDictionary( string const & id, string const & indexFile,
+               string const & dictionaryFile );
+~BglDictionary(){}
 
-    virtual unsigned long getArticleCount() const
-    { return idxHeader.articleCount; }
+virtual unsigned long getArticleCount() const
+{ return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() const
-    { return idxHeader.wordCount; }
+virtual unsigned long getWordCount() const
+{ return idxHeader.wordCount; }
 
-    inline virtual quint32 getLangFrom() const
-    { return idxHeader.langFrom; }
+inline virtual quint32 getLangFrom() const
+{ return idxHeader.langFrom; }
 
-    inline virtual quint32 getLangTo() const
-    { return idxHeader.langTo; }
+inline virtual quint32 getLangTo() const
+{ return idxHeader.langTo; }
 
-    virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-      THROW_SPEC( std::exception );
+virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
+THROW_SPEC( std::exception );
 
-    virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
-                                                        vector< wstring > const & alts,
-                                                        wstring const &,
-                                                        bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
+                                                    vector< wstring > const & alts,
+                                                    wstring const &,
+                                                    bool ignoreDiacritics )
+THROW_SPEC( std::exception );
 
-    virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+virtual sptr< Dictionary::DataRequest > getResource( string const & name )
+THROW_SPEC( std::exception );
 
-    virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
-                                                              int searchMode, bool matchCase,
-                                                              int distanceBetweenWords,
-                                                              int maxResults,
-                                                              bool ignoreWordsOrder,
-                                                              bool ignoreDiacritics );
-    virtual QString const& getDescription();
+virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
+                                                          int searchMode, bool matchCase,
+                                                          int distanceBetweenWords,
+                                                          int maxResults,
+                                                          bool ignoreWordsOrder,
+                                                          bool ignoreDiacritics );
+virtual QString const& getDescription();
 
-    virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
-    virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
+virtual void makeFTSIndex(AtomicInt32 & isCancelled, bool firstIteration );
 
-    virtual void setFTSParameters( Config::FullTextSearch const & fts )
-    {
-      can_FTS = fts.enabled
-                && !fts.disabledTypes.contains( "BGL", Qt::CaseInsensitive )
-                && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
-    }
+virtual void setFTSParameters( Config::FullTextSearch const & fts )
+{
+    can_FTS = fts.enabled
+            && !fts.disabledTypes.contains( "BGL", Qt::CaseInsensitive )
+            && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
+}
 
-  protected:
+protected:
 
-    virtual void loadIcon() throw();
+virtual void loadIcon() throw();
 
-  private:
+private:
 
 
-    /// Loads an article with the given offset, filling the given strings.
-    void loadArticle( uint32_t offset, string & headword,
-                      string & displayedHeadword, string & articleText );
+/// Loads an article with the given offset, filling the given strings.
+void loadArticle( uint32_t offset, string & headword,
+                  string & displayedHeadword, string & articleText );
 
-    static void replaceCharsetEntities( string & );
+static void replaceCharsetEntities( string & );
 
-    friend class BglHeadwordsRequest;
-    friend class BglArticleRequest;
-    friend class BglResourceRequest;
-  };
+friend class BglHeadwordsRequest;
+friend class BglArticleRequest;
+friend class BglResourceRequest;
+};
 
-  BglDictionary::BglDictionary( string const & id, string const & indexFile,
-                                string const & dictionaryFile ):
+BglDictionary::BglDictionary( string const & id, string const & indexFile,
+                              string const & dictionaryFile ):
     BtreeDictionary( id, vector< string >( 1, dictionaryFile ) ),
     idx( indexFile, "rb" ),
     idxHeader( idx.read< IdxHeader >() ),
     chunks( idx, idxHeader.chunksOffset )
-  {
+{
     idx.seek( sizeof( idxHeader ) );
 
     // Read the dictionary's name
@@ -281,17 +281,17 @@ namespace
 
     if( len )
     {
-      vector< char > nameBuf( len );
+        vector< char > nameBuf( len );
 
-      idx.read( &nameBuf.front(), len );
+        idx.read( &nameBuf.front(), len );
 
-      setDictionaryName(string( &nameBuf.front(), len ));
+        setDictionaryName(string( &nameBuf.front(), len ));
     }
 
     // Initialize the index
 
     openIndex( IndexInfo( idxHeader.indexBtreeMaxElements,
-                        idxHeader.indexRootOffset ),
+                          idxHeader.indexRootOffset ),
                idx, idxMutex );
 
     can_FTS = true;
@@ -299,71 +299,71 @@ namespace
     ftsIdxName = indexFile + "_FTS";
 
     if( !Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
-        && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
-      FTS_index_completed.ref();
-  }
+            && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
+        FTS_index_completed.ref();
+}
 
-  void BglDictionary::loadIcon() throw()
-  {
+void BglDictionary::loadIcon() throw()
+{
     if ( dictionaryIconLoaded )
-      return;
+        return;
 
     QString fileName =
-      QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+            QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
     // Remove the extension
     fileName.chop( 3 );
 
     if( !loadIconFromFile( fileName ) )
     {
-      if( idxHeader.iconSize )
-      {
-
-        // Try loading icon now
-
-        vector< char > chunk;
-
-        Mutex::Lock _( idxMutex );
-
-        char * iconData = chunks.getBlock( idxHeader.iconAddress, chunk );
-
-        QImage img;
-
-        if (img.loadFromData( ( unsigned char *) iconData, idxHeader.iconSize  ) )
+        if( idxHeader.iconSize )
         {
-          // Load successful
 
-          dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+            // Try loading icon now
 
-          // Transform it to be square
-          int max = img.width() > img.height() ? img.width() : img.height();
+            vector< char > chunk;
 
-          QImage result( max, max, QImage::Format_ARGB32 );
-          result.fill( 0 ); // Black transparent
+            Mutex::Lock _( idxMutex );
 
-          QPainter painter( &result );
+            char * iconData = chunks.getBlock( idxHeader.iconAddress, chunk );
 
-          painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                     img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                             img );
+            QImage img;
 
-          painter.end();
+            if (img.loadFromData( ( unsigned char *) iconData, idxHeader.iconSize  ) )
+            {
+                // Load successful
 
-          dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+                dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+
+                // Transform it to be square
+                int max = img.width() > img.height() ? img.width() : img.height();
+
+                QImage result( max, max, QImage::Format_ARGB32 );
+                result.fill( 0 ); // Black transparent
+
+                QPainter painter( &result );
+
+                painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                           img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                                   img );
+
+                painter.end();
+
+                dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+            }
         }
-      }
 
-      if ( dictionaryIcon.isNull() )
-        dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_bgl.png");
+        if ( dictionaryIcon.isNull() )
+            dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_bgl.png");
     }
 
     dictionaryIconLoaded = true;
-  }
+}
 
-  void BglDictionary::loadArticle( uint32_t offset, string & headword,
-                                   string & displayedHeadword,
-                                   string & articleText )
-  {
+void BglDictionary::loadArticle( uint32_t offset, string & headword,
+                                 string & displayedHeadword,
+                                 string & articleText )
+{
     vector< char > chunk;
 
     Mutex::Lock _( idxMutex );
@@ -375,118 +375,118 @@ namespace
     displayedHeadword = articleData + headword.size() + 1;
 
     articleText =
-      string( articleData + headword.size() +
-                displayedHeadword.size() + 2 );
-  }
+            string( articleData + headword.size() +
+                    displayedHeadword.size() + 2 );
+}
 
-  QString const& BglDictionary::getDescription()
-  {
+QString const& BglDictionary::getDescription()
+{
     if( !dictionaryDescription.isEmpty() )
-      return dictionaryDescription;
+        return dictionaryDescription;
 
     if( idxHeader.descriptionSize == 0 )
-      dictionaryDescription = "NONE";
+        dictionaryDescription = "NONE";
     else
     {
-      Mutex::Lock _( idxMutex );
-      vector< char > chunk;
-      char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
-      string str( dictDescription );
-      if( !str.empty() )
-        dictionaryDescription += QString( QObject::tr( "Copyright: %1%2" ) )
-                                 .arg( Html::unescape( QString::fromUtf8( str.data(), str.size() ) ) )
-                                 .arg( "\n\n" );
-      dictDescription += str.size() + 1;
+        Mutex::Lock _( idxMutex );
+        vector< char > chunk;
+        char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
+        string str( dictDescription );
+        if( !str.empty() )
+            dictionaryDescription += QString( QObject::tr( "Copyright: %1%2" ) )
+                    .arg( Html::unescape( QString::fromUtf8( str.data(), str.size() ) ) )
+                    .arg( "\n\n" );
+        dictDescription += str.size() + 1;
 
-      str = string( dictDescription );
-      if( !str.empty() )
-        dictionaryDescription += QString( QObject::tr( "Author: %1%2" ) )
-                                 .arg( QString::fromUtf8( str.data(), str.size() ) )
-                                 .arg( "\n\n" );
-      dictDescription += str.size() + 1;
+        str = string( dictDescription );
+        if( !str.empty() )
+            dictionaryDescription += QString( QObject::tr( "Author: %1%2" ) )
+                    .arg( QString::fromUtf8( str.data(), str.size() ) )
+                    .arg( "\n\n" );
+        dictDescription += str.size() + 1;
 
-      str = string( dictDescription );
-      if( !str.empty() )
-        dictionaryDescription += QString( QObject::tr( "E-mail: %1%2" ) )
-                                 .arg( QString::fromUtf8( str.data(), str.size() ) )
-                                 .arg( "\n\n" );
-      dictDescription += str.size() + 1;
+        str = string( dictDescription );
+        if( !str.empty() )
+            dictionaryDescription += QString( QObject::tr( "E-mail: %1%2" ) )
+                    .arg( QString::fromUtf8( str.data(), str.size() ) )
+                    .arg( "\n\n" );
+        dictDescription += str.size() + 1;
 
-      str = string( dictDescription );
-      if( !str.empty() )
-        dictionaryDescription += Html::unescape( QString::fromUtf8( str.data(), str.size() ) );
+        str = string( dictDescription );
+        if( !str.empty() )
+            dictionaryDescription += Html::unescape( QString::fromUtf8( str.data(), str.size() ) );
     }
 
     return dictionaryDescription;
-  }
+}
 
-  void BglDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
-  {
+void BglDictionary::getArticleText( uint32_t articleAddress, QString & headword, QString & text )
+{
     try
     {
-      string headwordStr, displayedHeadwordStr, articleStr;
-      loadArticle( articleAddress, headwordStr, displayedHeadwordStr, articleStr );
+        string headwordStr, displayedHeadwordStr, articleStr;
+        loadArticle( articleAddress, headwordStr, displayedHeadwordStr, articleStr );
 
-      // Some headword normalization similar while indexing
-      trimWs( headwordStr );
-
-      if ( headwordStr.size() && headwordStr[ 0 ] == '/' )
-        headwordStr.erase(); // We will take headword from index later
-
-      if ( headwordStr.size()
-           && headwordStr[ headwordStr.size() - 1 ] == '$' )
-      {
-        headwordStr = removePostfix( headwordStr );
+        // Some headword normalization similar while indexing
         trimWs( headwordStr );
-      }
 
-      headword = QString::fromUtf8( headwordStr.data(), headwordStr.size() );
+        if ( headwordStr.size() && headwordStr[ 0 ] == '/' )
+            headwordStr.erase(); // We will take headword from index later
 
-      wstring wstr = Utf8::decode( articleStr );
-
-      if ( getLangTo() == LangCoder::code2toInt( "he" ) )
-      {
-        for ( unsigned int i = 0; i < wstr.size(); i++ )
+        if ( headwordStr.size()
+             && headwordStr[ headwordStr.size() - 1 ] == '$' )
         {
-          if ( (wstr[ i ] >= 224 && wstr[ i ] <= 250) || (wstr[ i ] >= 192 && wstr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
-            wstr[ i ] += 1488 - 224; // Convert to Hebrew unicode
+            headwordStr = removePostfix( headwordStr );
+            trimWs( headwordStr );
         }
-      }
 
-      text = Html::unescape( gd::toQString( wstr ) );
+        headword = QString::fromUtf8( headwordStr.data(), headwordStr.size() );
+
+        wstring wstr = Utf8::decode( articleStr );
+
+        if ( getLangTo() == LangCoder::code2toInt( "he" ) )
+        {
+            for ( unsigned int i = 0; i < wstr.size(); i++ )
+            {
+                if ( (wstr[ i ] >= 224 && wstr[ i ] <= 250) || (wstr[ i ] >= 192 && wstr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
+                    wstr[ i ] += 1488 - 224; // Convert to Hebrew unicode
+            }
+        }
+
+        text = Html::unescape( gd::toQString( wstr ) );
     }
     catch( std::exception &ex )
     {
-      gdWarning( "BGL: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+        gdWarning( "BGL: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
     }
-  }
+}
 
-  void BglDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
-  {
+void BglDictionary::makeFTSIndex( AtomicInt32 & isCancelled, bool firstIteration )
+{
     if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
            || FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) ) )
-      FTS_index_completed.ref();
+        FTS_index_completed.ref();
 
     if( haveFTSIndex() )
-      return;
+        return;
 
     if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
-      return;
+        return;
 
     gdDebug( "Bgl: Building the full-text index for dictionary: %s\n",
              getName().c_str() );
 
     try
     {
-      FtsHelpers::makeFTSIndex( this, isCancelled );
-      FTS_index_completed.ref();
+        FtsHelpers::makeFTSIndex( this, isCancelled );
+        FTS_index_completed.ref();
     }
     catch( std::exception &ex )
     {
-      gdWarning( "Bgl: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
-      QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
+        gdWarning( "Bgl: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+        QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
     }
-  }
+}
 
 /// BglDictionary::findHeadwordsForSynonym()
 
@@ -494,144 +494,144 @@ class BglHeadwordsRequest;
 
 class BglHeadwordsRequestRunnable: public QRunnable
 {
-  BglHeadwordsRequest & r;
-  QSemaphore & hasExited;
+    BglHeadwordsRequest & r;
+    QSemaphore & hasExited;
 
 public:
 
-  BglHeadwordsRequestRunnable( BglHeadwordsRequest & r_,
-                               QSemaphore & hasExited_ ): r( r_ ),
-                                                          hasExited( hasExited_ )
-  {}
+    BglHeadwordsRequestRunnable( BglHeadwordsRequest & r_,
+                                 QSemaphore & hasExited_ ): r( r_ ),
+        hasExited( hasExited_ )
+    {}
 
-  ~BglHeadwordsRequestRunnable()
-  {
-    hasExited.release();
-  }
+    ~BglHeadwordsRequestRunnable()
+    {
+        hasExited.release();
+    }
 
-  virtual void run();
+    virtual void run();
 };
 
 class BglHeadwordsRequest: public Dictionary::WordSearchRequest
 {
-  friend class BglHeadwordsRequestRunnable;
+    friend class BglHeadwordsRequestRunnable;
 
-  wstring str;
-  BglDictionary & dict;
+    wstring str;
+    BglDictionary & dict;
 
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
 
 public:
 
-  BglHeadwordsRequest( wstring const & word_,
-                       BglDictionary & dict_ ):
-    str( word_ ), dict( dict_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new BglHeadwordsRequestRunnable( *this, hasExited ) );
-  }
+    BglHeadwordsRequest( wstring const & word_,
+                         BglDictionary & dict_ ):
+        str( word_ ), dict( dict_ )
+    {
+        QThreadPool::globalInstance()->start(
+                    new BglHeadwordsRequestRunnable( *this, hasExited ) );
+    }
 
-  void run(); // Run from another thread by BglHeadwordsRequestRunnable
+    void run(); // Run from another thread by BglHeadwordsRequestRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  ~BglHeadwordsRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
+    ~BglHeadwordsRequest()
+    {
+        isCancelled.ref();
+        hasExited.acquire();
+    }
 };
 
 void BglHeadwordsRequestRunnable::run()
 {
-  r.run();
+    r.run();
 }
 
 void BglHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-  {
-    finish();
-    return;
-  }
-
-  vector< WordArticleLink > chain = dict.findArticles( str );
-
-  wstring caseFolded = Folding::applySimpleCaseOnly( str );
-
-  for( unsigned x = 0; x < chain.size(); ++x )
-  {
     if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
-      finish();
-      return;
+        finish();
+        return;
     }
 
-    string headword, displayedHeadword, articleText;
+    vector< WordArticleLink > chain = dict.findArticles( str );
 
-    dict.loadArticle( chain[ x ].articleOffset,
-                      headword, displayedHeadword, articleText );
+    wstring caseFolded = Folding::applySimpleCaseOnly( str );
 
-    wstring headwordDecoded;
-    try
+    for( unsigned x = 0; x < chain.size(); ++x )
     {
-      headwordDecoded = Utf8::decode( removePostfix(  headword ) );
-    }
-    catch( Utf8::exCantDecode & )
-    {
+        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        {
+            finish();
+            return;
+        }
+
+        string headword, displayedHeadword, articleText;
+
+        dict.loadArticle( chain[ x ].articleOffset,
+                          headword, displayedHeadword, articleText );
+
+        wstring headwordDecoded;
+        try
+        {
+            headwordDecoded = Utf8::decode( removePostfix(  headword ) );
+        }
+        catch( Utf8::exCantDecode & )
+        {
+        }
+
+        if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) && !headwordDecoded.empty() )
+        {
+            // The headword seems to differ from the input word, which makes the
+            // input word its synonym.
+            Mutex::Lock _( dataMutex );
+
+            matches.push_back( headwordDecoded );
+        }
     }
 
-    if ( caseFolded != Folding::applySimpleCaseOnly( headwordDecoded ) && !headwordDecoded.empty() )
-    {
-      // The headword seems to differ from the input word, which makes the
-      // input word its synonym.
-      Mutex::Lock _( dataMutex );
-
-      matches.push_back( headwordDecoded );
-    }
-  }
-
-  finish();
+    finish();
 }
 
 sptr< Dictionary::WordSearchRequest >
-  BglDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+BglDictionary::findHeadwordsForSynonym( wstring const & word )
+THROW_SPEC( std::exception )
 {
-  return synonymSearchEnabled ? sptr< Dictionary::WordSearchRequest >(new BglHeadwordsRequest( word, *this )) :
-                                Class::findHeadwordsForSynonym( word );
+    return synonymSearchEnabled ? sptr< Dictionary::WordSearchRequest >(new BglHeadwordsRequest( word, *this )) :
+                                  Class::findHeadwordsForSynonym( word );
 }
 
 // Converts a $1$-like postfix to a <sup>1</sup> one
 string postfixToSuperscript( string const & in )
 {
-  if ( !in.size() || in[ in.size() - 1 ] != '$' )
-    return in;
+    if ( !in.size() || in[ in.size() - 1 ] != '$' )
+        return in;
 
-  for( long x = in.size() - 2; x >= 0; x-- )
-  {
-    if ( in[ x ] == '$' )
+    for( long x = in.size() - 2; x >= 0; x-- )
     {
-      if ( in.size() - x - 2 > 2 )
-      {
-        // Large postfixes seem like something we wouldn't want to show --
-        // some dictionaries seem to have each word numbered using the
-        // postfix.
-        return in.substr( 0, x );
-      }
-      else
-        return in.substr( 0, x ) + "<sup>" + in.substr( x + 1, in.size() - x - 2 ) + "</sup>";
+        if ( in[ x ] == '$' )
+        {
+            if ( in.size() - x - 2 > 2 )
+            {
+                // Large postfixes seem like something we wouldn't want to show --
+                // some dictionaries seem to have each word numbered using the
+                // postfix.
+                return in.substr( 0, x );
+            }
+            else
+                return in.substr( 0, x ) + "<sup>" + in.substr( x + 1, in.size() - x - 2 ) + "</sup>";
+        }
+        else
+            if ( !isdigit( in[ x ] ) )
+                break;
     }
-    else
-    if ( !isdigit( in[ x ] ) )
-      break;
-  }
 
-  return in;
+    return in;
 }
 
 
@@ -641,309 +641,309 @@ class BglArticleRequest;
 
 class BglArticleRequestRunnable: public QRunnable
 {
-  BglArticleRequest & r;
-  QSemaphore & hasExited;
+    BglArticleRequest & r;
+    QSemaphore & hasExited;
 
 public:
 
-  BglArticleRequestRunnable( BglArticleRequest & r_,
-                                  QSemaphore & hasExited_ ): r( r_ ),
-                                                             hasExited( hasExited_ )
-  {}
+    BglArticleRequestRunnable( BglArticleRequest & r_,
+                               QSemaphore & hasExited_ ): r( r_ ),
+        hasExited( hasExited_ )
+    {}
 
-  ~BglArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
+    ~BglArticleRequestRunnable()
+    {
+        hasExited.release();
+    }
 
-  virtual void run();
+    virtual void run();
 };
 
 class BglArticleRequest: public Dictionary::DataRequest
 {
-  friend class BglArticleRequestRunnable;
+    friend class BglArticleRequestRunnable;
 
-  wstring word;
-  vector< wstring > alts;
-  BglDictionary & dict;
+    wstring word;
+    vector< wstring > alts;
+    BglDictionary & dict;
 
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
-  bool ignoreDiacritics;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
+    bool ignoreDiacritics;
 
 public:
 
-  BglArticleRequest( wstring const & word_,
-                     vector< wstring > const & alts_,
-                     BglDictionary & dict_, bool ignoreDiacritics_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new BglArticleRequestRunnable( *this, hasExited ) );
-  }
+    BglArticleRequest( wstring const & word_,
+                       vector< wstring > const & alts_,
+                       BglDictionary & dict_, bool ignoreDiacritics_ ):
+        word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
+    {
+        QThreadPool::globalInstance()->start(
+                    new BglArticleRequestRunnable( *this, hasExited ) );
+    }
 
-  void run(); // Run from another thread by BglArticleRequestRunnable
+    void run(); // Run from another thread by BglArticleRequestRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  void fixHebString(string & hebStr); // Hebrew support
-  void fixHebArticle(string & hebArticle); // Hebrew support
+    void fixHebString(string & hebStr); // Hebrew support
+    void fixHebArticle(string & hebArticle); // Hebrew support
 
-  ~BglArticleRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
+    ~BglArticleRequest()
+    {
+        isCancelled.ref();
+        hasExited.acquire();
+    }
 };
 
 void BglArticleRequestRunnable::run()
 {
-  r.run();
+    r.run();
 }
 
 void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - convert non-unicode to unicode
 {
-  wstring hebWStr;
-  try
-  {
-    hebWStr = Utf8::decode(hebStr);
-  }
-  catch( Utf8::exCantDecode & )
-  {
-    hebStr = "Utf-8 decoding error";
-    return;
-  }
+    wstring hebWStr;
+    try
+    {
+        hebWStr = Utf8::decode(hebStr);
+    }
+    catch( Utf8::exCantDecode & )
+    {
+        hebStr = "Utf-8 decoding error";
+        return;
+    }
 
-  for (unsigned int i=0; i<hebWStr.size();i++)
-  {
-    if ( (hebWStr[ i ] >= 224 && hebWStr[ i ] <= 250) || (hebWStr[ i ] >= 192 && hebWStr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
-        hebWStr[i]+=1488-224; // Convert to Hebrew unicode
-  }
-  hebStr=Utf8::encode(hebWStr);
+    for (unsigned int i=0; i<hebWStr.size();i++)
+    {
+        if ( (hebWStr[ i ] >= 224 && hebWStr[ i ] <= 250) || (hebWStr[ i ] >= 192 && hebWStr[ i ] <= 210) ) // Hebrew chars encoded ecoded as windows-1255 or ISO-8859-8, or as vowel-points of windows-1255
+            hebWStr[i]+=1488-224; // Convert to Hebrew unicode
+    }
+    hebStr=Utf8::encode(hebWStr);
 }
 
 void BglArticleRequest::fixHebArticle(string & hebArticle) // Hebrew support - remove extra chars at the end
 {
-  unsigned nulls;
+    unsigned nulls;
 
-  for ( nulls = hebArticle.size(); nulls > 0 &&
-        ( ( hebArticle[ nulls - 1 ] <= 32 &&
-            hebArticle[ nulls - 1 ] >= 0 ) ||
-          ( hebArticle[ nulls - 1 ] >= 65 &&
-            hebArticle[ nulls - 1 ] <= 90 ) ); --nulls ) ; //special chars and A-Z
+    for ( nulls = hebArticle.size(); nulls > 0 &&
+          ( ( hebArticle[ nulls - 1 ] <= 32 &&
+              hebArticle[ nulls - 1 ] >= 0 ) ||
+            ( hebArticle[ nulls - 1 ] >= 65 &&
+              hebArticle[ nulls - 1 ] <= 90 ) ); --nulls ) ; //special chars and A-Z
 
-  hebArticle.resize( nulls );
+    hebArticle.resize( nulls );
 }
 
 void BglArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-  {
-    finish();
-    return;
-  }
-
-  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
-
-  const Language::Id hebrew = LangCoder::code2toInt( "he" ); // Hebrew support
-
-  for( unsigned x = 0; x < alts.size(); ++x )
-  {
-    /// Make an additional query for each alt
-
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
-
-    chain.insert( chain.end(), altChain.begin(), altChain.end() );
-  }
-
-  multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
-
-  set< uint32_t > articlesIncluded; // Some synonims make it that the articles
-                                    // appear several times. We combat this
-                                    // by only allowing them to appear once.
-  // Sometimes the articles are physically duplicated. We store hashes of
-  // the bodies to account for this.
-  set< QByteArray > articleBodiesIncluded;
-
-  wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
-  if( ignoreDiacritics )
-    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
-
-  for( unsigned x = 0; x < chain.size(); ++x )
-  {
     if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
-      finish();
-      return;
+        finish();
+        return;
     }
 
-    try
+    vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
+
+    const Language::Id hebrew = LangCoder::code2toInt( "he" ); // Hebrew support
+
+    for( unsigned x = 0; x < alts.size(); ++x )
     {
+        /// Make an additional query for each alt
 
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
-      continue; // We already have this article in the body.
+        vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
-    // Now grab that article
+        chain.insert( chain.end(), altChain.begin(), altChain.end() );
+    }
 
-    string headword, displayedHeadword, articleText;
+    multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
 
-    dict.loadArticle( chain[ x ].articleOffset,
-                      headword, displayedHeadword, articleText );
+    set< uint32_t > articlesIncluded; // Some synonims make it that the articles
+    // appear several times. We combat this
+    // by only allowing them to appear once.
+    // Sometimes the articles are physically duplicated. We store hashes of
+    // the bodies to account for this.
+    set< QByteArray > articleBodiesIncluded;
 
-    // Ok. Now, does it go to main articles, or to alternate ones? We list
-    // main ones first, and alternates after.
-
-    // We do the case-folded and postfix-less comparison here.
-
-    wstring headwordStripped =
-      Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
+    wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
     if( ignoreDiacritics )
-      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
+        wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
-    // Hebrew support - fix Hebrew text
-    if (dict.idxHeader.langFrom == hebrew)
+    for( unsigned x = 0; x < chain.size(); ++x )
     {
-        displayedHeadword= displayedHeadword.size() ? displayedHeadword : headword;
-        fixHebString(articleText);
-        fixHebArticle(articleText);
-        fixHebString(displayedHeadword);
+        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        {
+            finish();
+            return;
+        }
+
+        try
+        {
+
+            if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
+                continue; // We already have this article in the body.
+
+            // Now grab that article
+
+            string headword, displayedHeadword, articleText;
+
+            dict.loadArticle( chain[ x ].articleOffset,
+                              headword, displayedHeadword, articleText );
+
+            // Ok. Now, does it go to main articles, or to alternate ones? We list
+            // main ones first, and alternates after.
+
+            // We do the case-folded and postfix-less comparison here.
+
+            wstring headwordStripped =
+                    Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
+            if( ignoreDiacritics )
+                headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
+
+            // Hebrew support - fix Hebrew text
+            if (dict.idxHeader.langFrom == hebrew)
+            {
+                displayedHeadword= displayedHeadword.size() ? displayedHeadword : headword;
+                fixHebString(articleText);
+                fixHebArticle(articleText);
+                fixHebString(displayedHeadword);
+            }
+
+            string const & targetHeadword = displayedHeadword.size() ?
+                        displayedHeadword : headword;
+
+            QCryptographicHash hash( QCryptographicHash::Md5 );
+            hash.addData( targetHeadword.data(), targetHeadword.size() + 1 ); // with 0
+            hash.addData( articleText.data(), articleText.size() );
+
+            if ( !articleBodiesIncluded.insert( hash.result() ).second )
+                continue; // Already had this body
+
+            multimap< wstring, pair< string, string > > & mapToUse =
+                    ( wordCaseFolded == headwordStripped ) ?
+                        mainArticles : alternateArticles;
+
+            mapToUse.insert( pair< wstring, pair< string, string > >(
+                                 Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+                                 pair< string, string >( targetHeadword, articleText ) ) );
+
+            articlesIncluded.insert( chain[ x ].articleOffset );
+
+        } // try
+        catch( std::exception &ex )
+        {
+            gdWarning( "BGL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+        }
     }
 
-    string const & targetHeadword = displayedHeadword.size() ?
-                                    displayedHeadword : headword;
-
-    QCryptographicHash hash( QCryptographicHash::Md5 );
-    hash.addData( targetHeadword.data(), targetHeadword.size() + 1 ); // with 0
-    hash.addData( articleText.data(), articleText.size() );
-
-    if ( !articleBodiesIncluded.insert( hash.result() ).second )
-      continue; // Already had this body
-
-    multimap< wstring, pair< string, string > > & mapToUse =
-      ( wordCaseFolded == headwordStripped ) ?
-        mainArticles : alternateArticles;
-
-    mapToUse.insert( pair< wstring, pair< string, string > >(
-      Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-      pair< string, string >( targetHeadword, articleText ) ) );
-
-    articlesIncluded.insert( chain[ x ].articleOffset );
-
-    } // try
-    catch( std::exception &ex )
+    if ( mainArticles.empty() && alternateArticles.empty() )
     {
-      gdWarning( "BGL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
+        // No such word
+        finish();
+        return;
     }
-  }
 
-  if ( mainArticles.empty() && alternateArticles.empty() )
-  {
-    // No such word
-    finish();
-    return;
-  }
+    string result;
 
-  string result;
+    multimap< wstring, pair< string, string > >::const_iterator i;
 
-  multimap< wstring, pair< string, string > >::const_iterator i;
+    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>";
+    for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
+    {
+        if (dict.isFromLanguageRTL() ) // RTL support
+            result += "<h3 style=\"text-align:right;direction:rtl\">";
+        else
+            result += "<h3>";
+        result += postfixToSuperscript( i->second.first );
+        result += "</h3>";
+        if ( dict.isToLanguageRTL() )
+            result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
+        else
+            result += "<div>" + i->second.second + "</div>";
+        result += cleaner;
+    }
 
-  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</b></b></b></b></b></b></b></b>"
-                   "</i></i></i></i></i></i></i></i>";
-  for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
-  {
-      if (dict.isFromLanguageRTL() ) // RTL support
-        result += "<h3 style=\"text-align:right;direction:rtl\">";
-      else
-        result += "<h3>";
-      result += postfixToSuperscript( i->second.first );
-      result += "</h3>";
-      if ( dict.isToLanguageRTL() )
-        result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
-      else
-        result += "<div>" + i->second.second + "</div>";
-      result += cleaner;
-  }
 
- 
-  for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
-  {
-      if (dict.isFromLanguageRTL() ) // RTL support
-        result += "<h3 style=\"text-align:right;direction:rtl\">";
-      else
-        result += "<h3>";
-      result += postfixToSuperscript( i->second.first );
-      result += "</h3>";
-      if ( dict.isToLanguageRTL() )
-        result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
-      else
-        result += "<div>" + i->second.second + "</div>";
-      result += cleaner;
-  }
-  // Do some cleanups in the text
+    for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
+    {
+        if (dict.isFromLanguageRTL() ) // RTL support
+            result += "<h3 style=\"text-align:right;direction:rtl\">";
+        else
+            result += "<h3>";
+        result += postfixToSuperscript( i->second.first );
+        result += "</h3>";
+        if ( dict.isToLanguageRTL() )
+            result += "<div class=\"bglrtl\">" + i->second.second + "</div>";
+        else
+            result += "<div>" + i->second.second + "</div>";
+        result += cleaner;
+    }
+    // Do some cleanups in the text
 
-  BglDictionary::replaceCharsetEntities( result );
+    BglDictionary::replaceCharsetEntities( result );
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  result = QString::fromUtf8( result.c_str() )
-          // onclick location to link
-          .replace( QRegularExpression( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>",
-                                        QRegularExpression::CaseInsensitiveOption ),
-                    "<a href=\"\\2\">\\3</a>")
-           .replace( QRegularExpression( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://",
-                                         QRegularExpression::CaseInsensitiveOption ),
-                     "\\1bword:" )
-          //remove invalid width, height attrs
-          .replace( QRegularExpression( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
-                   "" )
-          //remove invalid <br> tag
-          .replace( QRegularExpression( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)",
-                                        QRegularExpression::CaseInsensitiveOption ),
-                    "\\1" )
-          .replace( QRegularExpression( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>",
-                                        QRegularExpression::CaseInsensitiveOption ),
-                    " \\1 " )
-           .toUtf8().data();
+    result = QString::fromUtf8( result.c_str() )
+            // onclick location to link
+            .replace( QRegularExpression( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>",
+                                          QRegularExpression::CaseInsensitiveOption ),
+                      "<a href=\"\\2\">\\3</a>")
+            .replace( QRegularExpression( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://",
+                                          QRegularExpression::CaseInsensitiveOption ),
+                      "\\1bword:" )
+            //remove invalid width, height attrs
+            .replace( QRegularExpression( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
+                      "" )
+            //remove invalid <br> tag
+            .replace( QRegularExpression( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)",
+                                          QRegularExpression::CaseInsensitiveOption ),
+                      "\\1" )
+            .replace( QRegularExpression( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>",
+                                          QRegularExpression::CaseInsensitiveOption ),
+                      " \\1 " )
+            .toUtf8().data();
 #else
-  result = QString::fromUtf8( result.c_str() )
-          // onclick location to link
-          .replace( QRegExp( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
-                    "<a href=\"\\2\">\\3</a>")
-           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                     "\\1bword:" )
-          //remove invalid width, height attrs
-          .replace(QRegExp( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
-                   "" )
-          //remove invalid <br> tag
-          .replace( QRegExp( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)", Qt::CaseInsensitive ),
-                    "\\1" )
-          .replace( QRegExp( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>", Qt::CaseInsensitive ),
-                    " \\1 " )
-           .toUtf8().data();
+    result = QString::fromUtf8( result.c_str() )
+            // onclick location to link
+            .replace( QRegExp( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
+                      "<a href=\"\\2\">\\3</a>")
+            .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
+                      "\\1bword:" )
+            //remove invalid width, height attrs
+            .replace(QRegExp( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
+                     "" )
+            //remove invalid <br> tag
+            .replace( QRegExp( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)", Qt::CaseInsensitive ),
+                      "\\1" )
+            .replace( QRegExp( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>", Qt::CaseInsensitive ),
+                      " \\1 " )
+            .toUtf8().data();
 #endif
 
-  Mutex::Lock _( dataMutex );
+    Mutex::Lock _( dataMutex );
 
-  data.resize( result.size() );
+    data.resize( result.size() );
 
-  memcpy( &data.front(), result.data(), result.size() );
+    memcpy( &data.front(), result.data(), result.size() );
 
-  hasAnyData = true;
+    hasAnyData = true;
 
-  finish();
+    finish();
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< Dictionary::DataRequest >(new BglArticleRequest( word, alts, *this, ignoreDiacritics ));
+    return sptr< Dictionary::DataRequest >(new BglArticleRequest( word, alts, *this, ignoreDiacritics ));
 }
 
 
@@ -953,147 +953,147 @@ class BglResourceRequest;
 
 class BglResourceRequestRunnable: public QRunnable
 {
-  BglResourceRequest & r;
-  QSemaphore & hasExited;
+    BglResourceRequest & r;
+    QSemaphore & hasExited;
 
 public:
 
-  BglResourceRequestRunnable( BglResourceRequest & r_,
-                              QSemaphore & hasExited_ ): r( r_ ),
-                                                         hasExited( hasExited_ )
-  {}
+    BglResourceRequestRunnable( BglResourceRequest & r_,
+                                QSemaphore & hasExited_ ): r( r_ ),
+        hasExited( hasExited_ )
+    {}
 
-  ~BglResourceRequestRunnable()
-  {
-    hasExited.release();
-  }
+    ~BglResourceRequestRunnable()
+    {
+        hasExited.release();
+    }
 
-  virtual void run();
+    virtual void run();
 };
 
 class BglResourceRequest: public Dictionary::DataRequest
 {
-  friend class BglResourceRequestRunnable;
+    friend class BglResourceRequestRunnable;
 
-  Mutex & idxMutex;
-  File::Class & idx;
-  uint32_t resourceListOffset, resourcesCount;
-  string name;
+    Mutex & idxMutex;
+    File::Class & idx;
+    uint32_t resourceListOffset, resourcesCount;
+    string name;
 
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
 
 public:
 
-  BglResourceRequest( Mutex & idxMutex_,
-                      File::Class & idx_,
-                      uint32_t resourceListOffset_,
-                      uint32_t resourcesCount_,
-                      string const & name_ ):
-    idxMutex( idxMutex_ ),
-    idx( idx_ ),
-    resourceListOffset( resourceListOffset_ ),
-    resourcesCount( resourcesCount_ ),
-    name( name_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new BglResourceRequestRunnable( *this, hasExited ) );
-  }
+    BglResourceRequest( Mutex & idxMutex_,
+                        File::Class & idx_,
+                        uint32_t resourceListOffset_,
+                        uint32_t resourcesCount_,
+                        string const & name_ ):
+        idxMutex( idxMutex_ ),
+        idx( idx_ ),
+        resourceListOffset( resourceListOffset_ ),
+        resourcesCount( resourcesCount_ ),
+        name( name_ )
+    {
+        QThreadPool::globalInstance()->start(
+                    new BglResourceRequestRunnable( *this, hasExited ) );
+    }
 
-  void run(); // Run from another thread by BglResourceRequestRunnable
+    void run(); // Run from another thread by BglResourceRequestRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  ~BglResourceRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
+    ~BglResourceRequest()
+    {
+        isCancelled.ref();
+        hasExited.acquire();
+    }
 };
 
 void BglResourceRequestRunnable::run()
 {
-  r.run();
+    r.run();
 }
 
 void BglResourceRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-  {
-    finish();
-    return;
-  }
-
-  string nameLowercased = name;
-
-  for( string::iterator i = nameLowercased.begin(); i != nameLowercased.end();
-       ++i )
-    *i = tolower( *i );
-
-  Mutex::Lock _( idxMutex );
-
-  idx.seek( resourceListOffset );
-
-  for( size_t count = resourcesCount; count--; )
-  {
     if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-      break;
-
-    vector< char > nameData( idx.read< uint32_t >() );
-    idx.read( &nameData.front(), nameData.size() );
-
-    for( size_t x = nameData.size(); x--; )
-      nameData[ x ] = tolower( nameData[ x ] );
-
-    uint32_t offset = idx.read< uint32_t >();
-
-    if ( string( &nameData.front(), nameData.size() ) == nameLowercased )
     {
-      // We have a match.
-
-      idx.seek( offset );
-
-      Mutex::Lock _( dataMutex );
-
-      data.resize( idx.read< uint32_t >() );
-
-      vector< unsigned char > compressedData( idx.read< uint32_t >() );
-
-      idx.read( &compressedData.front(), compressedData.size() );
-
-      unsigned long decompressedLength = data.size();
-
-      if ( uncompress( (unsigned char *) &data.front(),
-                       &decompressedLength,
-                       &compressedData.front(),
-                       compressedData.size() ) != Z_OK ||
-           decompressedLength != data.size() )
-      {
-        gdWarning( "Failed to decompress resource \"%s\", ignoring it.\n", name.c_str() );
-      }
-      else
-        hasAnyData = true;
-
-      break;
+        finish();
+        return;
     }
-  }
 
-  finish();
+    string nameLowercased = name;
+
+    for( string::iterator i = nameLowercased.begin(); i != nameLowercased.end();
+         ++i )
+        *i = tolower( *i );
+
+    Mutex::Lock _( idxMutex );
+
+    idx.seek( resourceListOffset );
+
+    for( size_t count = resourcesCount; count--; )
+    {
+        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+            break;
+
+        vector< char > nameData( idx.read< uint32_t >() );
+        idx.read( &nameData.front(), nameData.size() );
+
+        for( size_t x = nameData.size(); x--; )
+            nameData[ x ] = tolower( nameData[ x ] );
+
+        uint32_t offset = idx.read< uint32_t >();
+
+        if ( string( &nameData.front(), nameData.size() ) == nameLowercased )
+        {
+            // We have a match.
+
+            idx.seek( offset );
+
+            Mutex::Lock _( dataMutex );
+
+            data.resize( idx.read< uint32_t >() );
+
+            vector< unsigned char > compressedData( idx.read< uint32_t >() );
+
+            idx.read( &compressedData.front(), compressedData.size() );
+
+            unsigned long decompressedLength = data.size();
+
+            if ( uncompress( (unsigned char *) &data.front(),
+                             &decompressedLength,
+                             &compressedData.front(),
+                             compressedData.size() ) != Z_OK ||
+                 decompressedLength != data.size() )
+            {
+                gdWarning( "Failed to decompress resource \"%s\", ignoring it.\n", name.c_str() );
+            }
+            else
+                hasAnyData = true;
+
+            break;
+        }
+    }
+
+    finish();
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< Dictionary::DataRequest >(new BglResourceRequest( idxMutex, idx, idxHeader.resourceListOffset,
-                                 idxHeader.resourcesCount, name ));
+    return sptr< Dictionary::DataRequest >(new BglResourceRequest( idxMutex, idx, idxHeader.resourceListOffset,
+                                                                   idxHeader.resourcesCount, name ));
 }
 
-  /// Replaces <CHARSET c="t">1234;</CHARSET> occurrences with &#x1234;
-  void BglDictionary::replaceCharsetEntities( string & text )
-  {
+/// Replaces <CHARSET c="t">1234;</CHARSET> occurrences with &#x1234;
+void BglDictionary::replaceCharsetEntities( string & text )
+{
     QString str = QString::fromUtf8( text.c_str() );
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
@@ -1108,22 +1108,22 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     QRegularExpressionMatchIterator it = charsetExp.globalMatch( str );
     while( it.hasNext() )
     {
-      QRegularExpressionMatch match = it.next();
-      result += str.midRef( pos, match.capturedStart() - pos );
-      pos = match.capturedEnd();
+        QRegularExpressionMatch match = it.next();
+        result += str.midRef( pos, match.capturedStart() - pos );
+        pos = match.capturedEnd();
 
-      QRegularExpressionMatchIterator itValue = oneValueExp.globalMatch( match.captured( 1 ) );
-      while( itValue.hasNext() )
-      {
-        QRegularExpressionMatch matchValue = itValue.next();
-        result += "&#x" + matchValue.captured( 1 ) + ";";
-      }
+        QRegularExpressionMatchIterator itValue = oneValueExp.globalMatch( match.captured( 1 ) );
+        while( itValue.hasNext() )
+        {
+            QRegularExpressionMatch matchValue = itValue.next();
+            result += "&#x" + matchValue.captured( 1 ) + ";";
+        }
     }
 
     if( pos )
     {
-      result += str.midRef( pos );
-      str = result;
+        result += str.midRef( pos );
+        str = result;
     }
 #else
     QRegExp charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
@@ -1135,31 +1135,31 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
 
     for( int pos = 0; ( pos = charsetExp.indexIn( str, pos ) ) != -1; )
     {
-      //DPRINTF( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
-      
-      QString out;
+        //DPRINTF( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
 
-      for( int p = 0; ( p = oneValueExp.indexIn( charsetExp.cap( 1 ), p ) ) != -1; )
-      {
-        //DPRINTF( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
-        out += "&#x" + oneValueExp.cap( 1 ) + ";";
+        QString out;
 
-        p += oneValueExp.matchedLength();
-      }
+        for( int p = 0; ( p = oneValueExp.indexIn( charsetExp.cap( 1 ), p ) ) != -1; )
+        {
+            //DPRINTF( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
+            out += "&#x" + oneValueExp.cap( 1 ) + ";";
 
-      str.replace( pos, charsetExp.matchedLength(), out );
+            p += oneValueExp.matchedLength();
+        }
+
+        str.replace( pos, charsetExp.matchedLength(), out );
     }
 #endif
 
     text = str.toUtf8().data();
-  }
+}
 
-  class ResourceHandler: public Babylon::ResourceHandler
-  {
+class ResourceHandler: public Babylon::ResourceHandler
+{
     File::Class & idxFile;
     list< pair< string, uint32_t > > resources;
 
-  public:
+public:
 
     ResourceHandler( File::Class & idxFile_ ): idxFile( idxFile_ )
     {}
@@ -1167,14 +1167,14 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     list< pair< string, uint32_t > > const & getResources() const
     { return resources; }
 
-  protected:
+protected:
     virtual void handleBabylonResource( string const & filename,
                                         char const * data, size_t size );
-  };
+};
 
-  void ResourceHandler::handleBabylonResource( string const & filename,
-                                               char const * data, size_t size )
-  {
+void ResourceHandler::handleBabylonResource( string const & filename,
+                                             char const * data, size_t size )
+{
     //DPRINTF( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
 
     vector< unsigned char > compressedData( compressBound( size ) );
@@ -1184,8 +1184,8 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     if ( compress( &compressedData.front(), &compressedSize,
                    (unsigned char const *) data, size ) != Z_OK )
     {
-      gdWarning( "Failed to compress the body of resource \"%s\", dropping it.\n", filename.c_str() );
-      return;
+        gdWarning( "Failed to compress the body of resource \"%s\", dropping it.\n", filename.c_str() );
+        return;
     }
 
     resources.push_back( pair< string, uint32_t >( filename, idxFile.tell() ) );
@@ -1193,7 +1193,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     idxFile.write< uint32_t >( size );
     idxFile.write< uint32_t >( compressedSize );
     idxFile.write( &compressedData.front(), compressedSize );
-  }
+}
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getSearchResults( QString const & searchString,
@@ -1203,204 +1203,204 @@ sptr< Dictionary::DataRequest > BglDictionary::getSearchResults( QString const &
                                                                  bool ignoreWordsOrder,
                                                                  bool ignoreDiacritics )
 {
-  return sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
+    return sptr< Dictionary::DataRequest >(new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics ));
 }
 
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-                                      vector< string > const & fileNames,
-                                      string const & indicesDir,
-                                      Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+        vector< string > const & fileNames,
+        string const & indicesDir,
+        Dictionary::Initializing & initializing )
+THROW_SPEC( std::exception )
 {
-  vector< sptr< Dictionary::Class > > dictionaries;
+    vector< sptr< Dictionary::Class > > dictionaries;
 
-  for( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end();
-       ++i )
-  {
-    // Skip files with the extensions different to .bgl to speed up the
-    // scanning
-    if ( i->size() < 4 ||
-        strcasecmp( i->c_str() + ( i->size() - 4 ), ".bgl" ) != 0 )
-      continue;
-
-    // Got the file -- check if we need to rebuid the index
-
-    vector< string > dictFiles( 1, *i );
-
-    string dictId = Dictionary::makeDictionaryId( dictFiles );
-
-    string indexFile = indicesDir + dictId;
-
-    if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
-         indexIsOldOrBad( indexFile ) )
+    for( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end();
+         ++i )
     {
-      // Building the index
+        // Skip files with the extensions different to .bgl to speed up the
+        // scanning
+        if ( i->size() < 4 ||
+             strcasecmp( i->c_str() + ( i->size() - 4 ), ".bgl" ) != 0 )
+            continue;
 
-      gdDebug( "Bgl: Building the index for dictionary: %s\n", i->c_str() );
+        // Got the file -- check if we need to rebuid the index
 
-      try
-      {
-        Babylon b( *i );
+        vector< string > dictFiles( 1, *i );
 
-        if ( !b.open() )
-          continue;
+        string dictId = Dictionary::makeDictionaryId( dictFiles );
 
-        std::string sourceCharset, targetCharset;
+        string indexFile = indicesDir + dictId;
 
-        if ( !b.read( sourceCharset, targetCharset ) )
+        if ( Dictionary::needToRebuildIndex( dictFiles, indexFile ) ||
+             indexIsOldOrBad( indexFile ) )
         {
-          gdWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
-          continue;
+            // Building the index
+
+            gdDebug( "Bgl: Building the index for dictionary: %s\n", i->c_str() );
+
+            try
+            {
+                Babylon b( *i );
+
+                if ( !b.open() )
+                    continue;
+
+                std::string sourceCharset, targetCharset;
+
+                if ( !b.read( sourceCharset, targetCharset ) )
+                {
+                    gdWarning( "Failed to start reading from %s, skipping it\n", i->c_str() );
+                    continue;
+                }
+
+                initializing.indexingDictionary( b.title() );
+
+                File::Class idx( indexFile, "wb" );
+
+                IdxHeader idxHeader;
+
+                memset( &idxHeader, 0, sizeof( idxHeader ) );
+
+                // We write a dummy header first. At the end of the process the header
+                // will be rewritten with the right values.
+
+                idx.write( idxHeader );
+
+                idx.write< uint32_t >( b.title().size() );
+                idx.write( b.title().data(), b.title().size() );
+
+                // This is our index data that we accumulate during the loading process.
+                // For each new word encountered, we emit the article's body to the file
+                // immediately, inserting the word itself and its offset in this map.
+                // This map maps folded words to the original words and the corresponding
+                // articles' offsets.
+                IndexedWords indexedWords;
+
+                // We use this buffer to decode utf8 into it.
+                vector< wchar > wcharBuffer;
+
+                ChunkedStorage::Writer chunks( idx );
+
+                uint32_t articleCount = 0, wordCount = 0;
+
+                ResourceHandler resourceHandler( idx );
+
+                b.setResourcePrefix( string( "bres://" ) + dictId + "/" );
+
+                // Save icon if there's one
+                if ( size_t sz = b.getIcon().size() )
+                {
+                    idxHeader.iconAddress = chunks.startNewBlock();
+                    chunks.addToBlock( &b.getIcon().front(), sz );
+                    idxHeader.iconSize = sz;
+                }
+
+                // Save dictionary description if there's one
+                idxHeader.descriptionSize = 0;
+                idxHeader.descriptionAddress = chunks.startNewBlock();
+
+                chunks.addToBlock( b.copyright().c_str(), b.copyright().size() + 1 );
+                idxHeader.descriptionSize += b.copyright().size() + 1;
+
+                chunks.addToBlock( b.author().c_str(), b.author().size() + 1 );
+                idxHeader.descriptionSize += b.author().size() + 1;
+
+                chunks.addToBlock( b.email().c_str(), b.email().size() + 1 );
+                idxHeader.descriptionSize += b.email().size() + 1;
+
+                chunks.addToBlock( b.description().c_str(), b.description().size() + 1 );
+                idxHeader.descriptionSize += b.description().size() + 1;
+
+                for( ; ; )
+                {
+                    bgl_entry e = b.readEntry( &resourceHandler );
+
+                    if ( e.headword.empty() )
+                        break;
+
+                    // Save the article's body itself first
+
+                    uint32_t articleAddress = chunks.startNewBlock();
+
+                    chunks.addToBlock( e.headword.c_str(), e.headword.size() + 1 );
+                    chunks.addToBlock( e.displayedHeadword.c_str(), e.displayedHeadword.size() + 1 );
+                    chunks.addToBlock( e.definition.c_str(), e.definition.size() + 1 );
+
+                    // Add entries to the index
+
+                    addEntryToIndex( e.headword, articleAddress, indexedWords, wcharBuffer );
+
+                    for( unsigned x = 0; x < e.alternates.size(); ++x )
+                        addEntryToIndex( e.alternates[ x ], articleAddress, indexedWords, wcharBuffer );
+
+                    wordCount += 1 + e.alternates.size();
+                    ++articleCount;
+                }
+
+                // Finish with the chunks
+
+                idxHeader.chunksOffset = chunks.finish();
+
+                GD_DPRINTF( "Writing index...\n" );
+
+                // Good. Now build the index
+
+                IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
+
+                idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
+                idxHeader.indexRootOffset = idxInfo.rootOffset;
+
+                // Save the resource's list.
+
+                idxHeader.resourceListOffset = idx.tell();
+                idxHeader.resourcesCount = resourceHandler.getResources().size();
+
+                for( list< pair< string, uint32_t > >::const_iterator j =
+                     resourceHandler.getResources().begin();
+                     j != resourceHandler.getResources().end(); ++j )
+                {
+                    idx.write< uint32_t >( j->first.size() );
+                    idx.write( j->first.data(), j->first.size() );
+                    idx.write< uint32_t >( j->second );
+                }
+
+                // That concludes it. Update the header.
+
+                idxHeader.signature = Signature;
+                idxHeader.formatVersion = CurrentFormatVersion;
+                idxHeader.parserVersion = Babylon::ParserVersion;
+                idxHeader.foldingVersion = Folding::Version;
+                idxHeader.articleCount = articleCount;
+                idxHeader.wordCount = wordCount;
+                idxHeader.langFrom = b.sourceLang();//LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
+                idxHeader.langTo = b.targetLang();//LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
+
+                idx.rewind();
+
+                idx.write( &idxHeader, sizeof( idxHeader ) );
+            }
+            catch( std::exception & e )
+            {
+                gdWarning( "BGL dictionary indexing failed: %s, error: %s\n",
+                           i->c_str(), e.what() );
+            }
         }
 
-        initializing.indexingDictionary( b.title() );
-
-        File::Class idx( indexFile, "wb" );
-
-        IdxHeader idxHeader;
-
-        memset( &idxHeader, 0, sizeof( idxHeader ) );
-
-        // We write a dummy header first. At the end of the process the header
-        // will be rewritten with the right values.
-
-        idx.write( idxHeader );
-
-        idx.write< uint32_t >( b.title().size() );
-        idx.write( b.title().data(), b.title().size() );
-
-        // This is our index data that we accumulate during the loading process.
-        // For each new word encountered, we emit the article's body to the file
-        // immediately, inserting the word itself and its offset in this map.
-        // This map maps folded words to the original words and the corresponding
-        // articles' offsets.
-        IndexedWords indexedWords;
-
-        // We use this buffer to decode utf8 into it.
-        vector< wchar > wcharBuffer;
-
-        ChunkedStorage::Writer chunks( idx );
-
-        uint32_t articleCount = 0, wordCount = 0;
-
-        ResourceHandler resourceHandler( idx );
-
-        b.setResourcePrefix( string( "bres://" ) + dictId + "/" );
-
-        // Save icon if there's one
-        if ( size_t sz = b.getIcon().size() )
+        try
         {
-          idxHeader.iconAddress = chunks.startNewBlock();
-          chunks.addToBlock( &b.getIcon().front(), sz );
-          idxHeader.iconSize = sz;
+            dictionaries.push_back( sptr< Dictionary::Class >(new BglDictionary( dictId,
+                                                                                 indexFile,
+                                                                                 *i ) ));
         }
-
-        // Save dictionary description if there's one
-        idxHeader.descriptionSize = 0;
-        idxHeader.descriptionAddress = chunks.startNewBlock();
-
-        chunks.addToBlock( b.copyright().c_str(), b.copyright().size() + 1 );
-        idxHeader.descriptionSize += b.copyright().size() + 1;
-
-        chunks.addToBlock( b.author().c_str(), b.author().size() + 1 );
-        idxHeader.descriptionSize += b.author().size() + 1;
-
-        chunks.addToBlock( b.email().c_str(), b.email().size() + 1 );
-        idxHeader.descriptionSize += b.email().size() + 1;
-
-        chunks.addToBlock( b.description().c_str(), b.description().size() + 1 );
-        idxHeader.descriptionSize += b.description().size() + 1;
-
-        for( ; ; )
+        catch( std::exception & e )
         {
-          bgl_entry e = b.readEntry( &resourceHandler );
-
-          if ( e.headword.empty() )
-            break;
-
-          // Save the article's body itself first
-
-          uint32_t articleAddress = chunks.startNewBlock();
-
-          chunks.addToBlock( e.headword.c_str(), e.headword.size() + 1 );
-          chunks.addToBlock( e.displayedHeadword.c_str(), e.displayedHeadword.size() + 1 );
-          chunks.addToBlock( e.definition.c_str(), e.definition.size() + 1 );
-
-          // Add entries to the index
-
-          addEntryToIndex( e.headword, articleAddress, indexedWords, wcharBuffer );
-
-          for( unsigned x = 0; x < e.alternates.size(); ++x )
-            addEntryToIndex( e.alternates[ x ], articleAddress, indexedWords, wcharBuffer );
-
-          wordCount += 1 + e.alternates.size();
-          ++articleCount;
+            gdWarning( "BGL dictionary initializing failed: %s, error: %s\n",
+                       i->c_str(), e.what() );
         }
-
-        // Finish with the chunks
-
-        idxHeader.chunksOffset = chunks.finish();
-
-        GD_DPRINTF( "Writing index...\n" );
-
-        // Good. Now build the index
-
-        IndexInfo idxInfo = BtreeIndexing::buildIndex( indexedWords, idx );
-
-        idxHeader.indexBtreeMaxElements = idxInfo.btreeMaxElements;
-        idxHeader.indexRootOffset = idxInfo.rootOffset;
-
-        // Save the resource's list.
-
-        idxHeader.resourceListOffset = idx.tell();
-        idxHeader.resourcesCount = resourceHandler.getResources().size();
-
-        for( list< pair< string, uint32_t > >::const_iterator j =
-            resourceHandler.getResources().begin();
-             j != resourceHandler.getResources().end(); ++j )
-        {
-          idx.write< uint32_t >( j->first.size() );
-          idx.write( j->first.data(), j->first.size() );
-          idx.write< uint32_t >( j->second );
-        }
-
-        // That concludes it. Update the header.
-
-        idxHeader.signature = Signature;
-        idxHeader.formatVersion = CurrentFormatVersion;
-        idxHeader.parserVersion = Babylon::ParserVersion;
-        idxHeader.foldingVersion = Folding::Version;
-        idxHeader.articleCount = articleCount;
-        idxHeader.wordCount = wordCount;
-        idxHeader.langFrom = b.sourceLang();//LangCoder::findIdForLanguage( Utf8::decode( b.sourceLang() ) );
-        idxHeader.langTo = b.targetLang();//LangCoder::findIdForLanguage( Utf8::decode( b.targetLang() ) );
-
-        idx.rewind();
-
-        idx.write( &idxHeader, sizeof( idxHeader ) );
-      }
-      catch( std::exception & e )
-      {
-        gdWarning( "BGL dictionary indexing failed: %s, error: %s\n",
-                   i->c_str(), e.what() );
-      }
     }
 
-    try
-    {
-      dictionaries.push_back( sptr< Dictionary::Class >(new BglDictionary( dictId,
-                                                 indexFile,
-                                                 *i ) ));
-    }
-    catch( std::exception & e )
-    {
-      gdWarning( "BGL dictionary initializing failed: %s, error: %s\n",
-                 i->c_str(), e.what() );
-    }
-  }
-
-  return dictionaries;
+    return dictionaries;
 }
 
 }

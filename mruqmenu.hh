@@ -2,7 +2,7 @@
 #define MRUQMENU_HH
 
 #include <QMenu>
-#include <QEvent>
+class QEvent;
 
 //The only difference between this class and QMenu is that this class emits
 //a signal when Ctrl button is released

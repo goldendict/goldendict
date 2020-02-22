@@ -14,32 +14,32 @@ namespace Ffmpeg
 
 class AudioPlayer : public AudioPlayerInterface
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  AudioPlayer() : as(new AudioService)
-  {
-    connect( as, SIGNAL( error( QString ) ),
-             this, SIGNAL( error( QString ) ) );
-    as->init();
-  }
+    AudioPlayer() : as(new AudioService)
+    {
+        connect( as, SIGNAL( error( QString ) ),
+                 this, SIGNAL( error( QString ) ) );
+        as->init();
+    }
 
-  ~AudioPlayer()
-  {
-    delete as;
-  }
+    ~AudioPlayer()
+    {
+        delete as;
+    }
 
-  virtual QString play( const char * data, int size )
-  {
-    as->playMemory( data, size );
-    return QString();
-  }
+    virtual QString play( const char * data, int size )
+    {
+        as->playMemory( data, size );
+        return QString();
+    }
 
-  virtual void stop()
-  {
-    as->stop();
-  }
+    virtual void stop()
+    {
+        as->stop();
+    }
 private:
-  AudioService *as;
+    AudioService *as;
 };
 
 }

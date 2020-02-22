@@ -2,52 +2,52 @@
 
 QStringList parseCommandLine( QString const & commandLine )
 {
-  // Parse arguments. Handle quotes correctly.
-  QStringList args;
-  bool openQuote = false;
-  bool possibleDoubleQuote = false;
-  bool startNew = true;
-  for( QString::const_iterator c = commandLine.begin(),
-       e = commandLine.end(); c != e; )
-  {
-    if ( *c == '"' && !possibleDoubleQuote )
+    // Parse arguments. Handle quotes correctly.
+    QStringList args;
+    bool openQuote = false;
+    bool possibleDoubleQuote = false;
+    bool startNew = true;
+    for( QString::const_iterator c = commandLine.begin(),
+         e = commandLine.end(); c != e; )
     {
-      ++c;
-      if ( !openQuote )
-      {
-        openQuote = true;
-        if ( startNew )
+        if ( *c == '"' && !possibleDoubleQuote )
         {
-          args.push_back( QString() );
-          startNew = false;
+            ++c;
+            if ( !openQuote )
+            {
+                openQuote = true;
+                if ( startNew )
+                {
+                    args.push_back( QString() );
+                    startNew = false;
+                }
+            }
+            else
+                possibleDoubleQuote = true;
         }
-      }
-      else
-        possibleDoubleQuote = true;
+        else
+            if ( possibleDoubleQuote && *c != '"' )
+            {
+                openQuote = false;
+                possibleDoubleQuote = false;
+            }
+            else
+                if ( *c == ' ' && !openQuote )
+                {
+                    ++c;
+                    startNew = true;
+                }
+                else
+                {
+                    if ( startNew )
+                    {
+                        args.push_back( QString() );
+                        startNew = false;
+                    }
+                    args.last().push_back( *c++ );
+                    possibleDoubleQuote = false;
+                }
     }
-    else
-    if ( possibleDoubleQuote && *c != '"' )
-    {
-      openQuote = false;
-      possibleDoubleQuote = false;
-    }
-    else
-    if ( *c == ' ' && !openQuote )
-    {
-      ++c;
-      startNew = true;
-    }
-    else
-    {
-      if ( startNew )
-      {
-        args.push_back( QString() );
-        startNew = false;
-      }
-      args.last().push_back( *c++ );
-      possibleDoubleQuote = false;
-    }
-  }
 
-  return args;
+    return args;
 }

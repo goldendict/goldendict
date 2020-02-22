@@ -16,8 +16,8 @@ QString wildcardsToRegexp( const QString & wc_str )
     const QChar *wc = wc_str.unicode();
 
     while( i < wclen ) {
-      const QChar c = wc[ i++ ];
-      switch( c.unicode() ) {
+        const QChar c = wc[ i++ ];
+        switch( c.unicode() ) {
         case '\\':
             if( isEscaping ) {
                 rx += QLatin1String( "\\\\" );
@@ -63,7 +63,7 @@ QString wildcardsToRegexp( const QString & wc_str )
             rx += QLatin1Char( '\\' );
             rx += c;
             break;
-         case '[':
+        case '[':
             if(isEscaping) {
                 isEscaping = false;
                 rx += QLatin1String( "\\[" );
@@ -72,8 +72,8 @@ QString wildcardsToRegexp( const QString & wc_str )
                 tmp += c;
                 if( i < wclen && wc[ i ] == QLatin1Char( '!' ) )
                 {
-                  tmp += QLatin1Char( '^' );
-                  ++i;
+                    tmp += QLatin1Char( '^' );
+                    ++i;
                 }
                 while( i < wclen && wc[ i ] != QLatin1Char( ']' ) ) {
                     if( wc[ i ] == QLatin1Char( '\\' ) )
@@ -101,7 +101,7 @@ QString wildcardsToRegexp( const QString & wc_str )
                 rx += QLatin1String( "\\\\" );
             }
             rx += c;
-      }
+        }
     }
     return rx;
 }

@@ -12,19 +12,19 @@
 
 class MultimediaAudioPlayer : public AudioPlayerInterface
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  MultimediaAudioPlayer();
+    MultimediaAudioPlayer();
 
-  virtual QString play( const char * data, int size );
-  virtual void stop();
+    virtual QString play( const char * data, int size );
+    virtual void stop();
 
 private slots:
-  void onMediaPlayerError();
+    void onMediaPlayerError();
 
 private:
-  QBuffer audioBuffer;
-  QMediaPlayer player; ///< Depends on audioBuffer.
+    QBuffer audioBuffer;
+    QMediaPlayer player; ///< Depends on audioBuffer.
 };
 
 #endif // MAKE_QTMULTIMEDIA_PLAYER

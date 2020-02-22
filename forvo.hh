@@ -18,48 +18,48 @@ using std::string;
 using gd::wstring;
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-                                      Dictionary::Initializing &,
-                                      Config::Forvo const &,
-                                      QNetworkAccessManager & )
-    THROW_SPEC( std::exception );
+        Dictionary::Initializing &,
+        Config::Forvo const &,
+        QNetworkAccessManager & )
+THROW_SPEC( std::exception );
 
 /// Exposed here for moc
 class ForvoArticleRequest: public Dictionary::DataRequest
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  struct NetReply
-  {
-    sptr< QNetworkReply > reply;
-    string word;
-    bool finished;
+    struct NetReply
+    {
+        sptr< QNetworkReply > reply;
+        string word;
+        bool finished;
 
-    NetReply( sptr< QNetworkReply > const & reply_, string const & word_ ):
-      reply( reply_ ), word( word_ ), finished( false )
-    {}
-  };
+        NetReply( sptr< QNetworkReply > const & reply_, string const & word_ ):
+            reply( reply_ ), word( word_ ), finished( false )
+        {}
+    };
 
-  typedef std::list< NetReply > NetReplies;
-  NetReplies netReplies;
-  QString apiKey, languageCode;
-  string dictionaryId;
+    typedef std::list< NetReply > NetReplies;
+    NetReplies netReplies;
+    QString apiKey, languageCode;
+    string dictionaryId;
 
 public:
 
-  ForvoArticleRequest( wstring const & word, vector< wstring > const & alts,
-                       QString const & apiKey_,
-                       QString const & languageCode_,
-                       string const & dictionaryId_,
-                       QNetworkAccessManager & mgr );
+    ForvoArticleRequest( wstring const & word, vector< wstring > const & alts,
+                         QString const & apiKey_,
+                         QString const & languageCode_,
+                         string const & dictionaryId_,
+                         QNetworkAccessManager & mgr );
 
-  virtual void cancel();
+    virtual void cancel();
 
 private:
 
-  void addQuery( QNetworkAccessManager & mgr, wstring const & word );
+    void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
 private slots:
-  virtual void requestFinished( QNetworkReply * );
+    virtual void requestFinished( QNetworkReply * );
 };
 
 }

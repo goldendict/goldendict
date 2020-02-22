@@ -6,17 +6,17 @@
  * Created: Tue Jul 16 12:45:41 1996 by faith@dict.org
  * Revised: Sat Mar 30 10:46:06 2002 by faith@dict.org
  * Copyright 1996, 1997, 1998, 2000, 2002 Rickard E. Faith (faith@dict.org)
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; either version 1, or (at your option) any
  * later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Suite 500, Boston, MA 02110, USA.
@@ -41,11 +41,11 @@
 
 /* For gzip-compatible header, as defined in RFC 1952 */
 
-				/* Magic for GZIP (rfc1952)                */
+/* Magic for GZIP (rfc1952)                */
 #define GZ_MAGIC1     0x1f	/* First magic byte                        */
 #define GZ_MAGIC2     0x8b	/* Second magic byte                       */
 
-				/* FLaGs (bitmapped), from rfc1952         */
+/* FLaGs (bitmapped), from rfc1952         */
 #define GZ_FTEXT      0x01	/* Set for ASCII text                      */
 #define GZ_FHCRC      0x02	/* Header CRC16                            */
 #define GZ_FEXTRA     0x04	/* Optional field (random access index)    */
@@ -54,7 +54,7 @@
 #define GZ_MAX           2	/* Maximum compression                     */
 #define GZ_FAST          4	/* Fasted compression                      */
 
-				/* These are from rfc1952                  */
+/* These are from rfc1952                  */
 #define GZ_OS_FAT        0	/* FAT filesystem (MS-DOS, OS/2, NT/Win32) */
 #define GZ_OS_AMIGA      1	/* Amiga                                   */
 #define GZ_OS_VMS        2	/* VMS (or OpenVMS)                        */
@@ -152,26 +152,26 @@ static const char * _err_programName = "GoldenDict";
 #ifdef GD_LOG_MSGOUT
 static void err_fatal( const char *routine, const char *format, ... )
 {
-   va_list ap;
+    va_list ap;
 
-   fflush( stdout );
-   if (_err_programName) {
-      if (routine)
-	 fprintf( stderr, "%s (%s): ", _err_programName, routine );
-      else
-	 fprintf( stderr, "%s: ", _err_programName );
-   } else {
-      if (routine) fprintf( stderr, "%s: ", routine );
-   }
-   
-   va_start( ap, format );
-   vfprintf( stderr, format, ap );
-   log_error_va( routine, format, ap );
-   va_end( ap );
-   
-   fflush( stderr );
-   fflush( stdout );
-//   exit ( 1 );
+    fflush( stdout );
+    if (_err_programName) {
+        if (routine)
+            fprintf( stderr, "%s (%s): ", _err_programName, routine );
+        else
+            fprintf( stderr, "%s: ", _err_programName );
+    } else {
+        if (routine) fprintf( stderr, "%s: ", routine );
+    }
+
+    va_start( ap, format );
+    vfprintf( stderr, format, ap );
+    log_error_va( routine, format, ap );
+    va_end( ap );
+
+    fflush( stderr );
+    fflush( stdout );
+    //   exit ( 1 );
 }
 #else
 #define err_fatal( ... ) do {} while( 0 )
@@ -185,36 +185,36 @@ static void err_fatal( const char *routine, const char *format, ... )
 #ifdef GD_LOG_MSGOUT
 static void err_fatal_errno( const char *routine, const char *format, ... )
 {
-   va_list ap;
-   int     errorno = errno;
+    va_list ap;
+    int     errorno = errno;
 
-   fflush( stdout );
-   if (_err_programName) {
-      if (routine)
-	 fprintf( stderr, "%s (%s): ", _err_programName, routine );
-      else
-	 fprintf( stderr, "%s: ", _err_programName );
-   } else {
-      if (routine) fprintf( stderr, "%s: ", routine );
-   }
-   
-   va_start( ap, format );
-   vfprintf( stderr, format, ap );
-   log_error_va( routine, format, ap );
-   va_end( ap );
+    fflush( stdout );
+    if (_err_programName) {
+        if (routine)
+            fprintf( stderr, "%s (%s): ", _err_programName, routine );
+        else
+            fprintf( stderr, "%s: ", _err_programName );
+    } else {
+        if (routine) fprintf( stderr, "%s: ", routine );
+    }
+
+    va_start( ap, format );
+    vfprintf( stderr, format, ap );
+    log_error_va( routine, format, ap );
+    va_end( ap );
 
 #if HAVE_STRERROR
-   fprintf( stderr, "%s: %s\n", routine, strerror( errorno ) );
-   log_error( routine, "%s: %s\n", routine, strerror( errorno ) );
+    fprintf( stderr, "%s: %s\n", routine, strerror( errorno ) );
+    log_error( routine, "%s: %s\n", routine, strerror( errorno ) );
 #else
-   errno = errorno;
-   perror( routine );
-   log_error( routine, "%s: errno = %d\n", routine, errorno );
+    errno = errorno;
+    perror( routine );
+    log_error( routine, "%s: errno = %d\n", routine, errorno );
 #endif
-   
-   fflush( stderr );
-   fflush( stdout );
-//   exit( 1 );
+
+    fflush( stderr );
+    fflush( stdout );
+    //   exit( 1 );
 }
 #else
 #define err_fatal_errno( ... ) do {} while( 0 )
@@ -227,32 +227,32 @@ static void err_fatal_errno( const char *routine, const char *format, ... )
 #ifdef GD_LOG_MSGOUT
 static void err_internal( const char *routine, const char *format, ... )
 {
-  va_list ap;
+    va_list ap;
 
-  fflush( stdout );
-  if (_err_programName) {
-     if (routine)
-  fprintf( stderr, "%s (%s): Internal error\n     ",
-     _err_programName, routine );
-     else
-  fprintf( stderr, "%s: Internal error\n     ", _err_programName );
-  } else {
-     if (routine) fprintf( stderr, "%s: Internal error\n     ", routine );
-     else         fprintf( stderr, "Internal error\n     " );
-  }
+    fflush( stdout );
+    if (_err_programName) {
+        if (routine)
+            fprintf( stderr, "%s (%s): Internal error\n     ",
+                     _err_programName, routine );
+        else
+            fprintf( stderr, "%s: Internal error\n     ", _err_programName );
+    } else {
+        if (routine) fprintf( stderr, "%s: Internal error\n     ", routine );
+        else         fprintf( stderr, "Internal error\n     " );
+    }
 
-  va_start( ap, format );
-  vfprintf( stderr, format, ap );
-  log_error( routine, format, ap );
-  va_end( ap );
+    va_start( ap, format );
+    vfprintf( stderr, format, ap );
+    log_error( routine, format, ap );
+    va_end( ap );
 
-  if (_err_programName)
-     fprintf( stderr, "Aborting %s...\n", _err_programName );
-  else
-     fprintf( stderr, "Aborting...\n" );
-  fflush( stderr );
-  fflush( stdout );
-//  abort();
+    if (_err_programName)
+        fprintf( stderr, "Aborting %s...\n", _err_programName );
+    else
+        fprintf( stderr, "Aborting...\n" );
+    fflush( stderr );
+    fflush( stdout );
+    //  abort();
 }
 #else
 #define err_internal( ... ) do {} while( 0 )
@@ -267,585 +267,585 @@ static void err_internal( const char *routine, const char *format, ... )
 #endif
 
 static enum  DZ_ERRORS dict_read_header( const char *filename,
-					 dictData *header,
-					 int computeCRC )
+                                         dictData *header,
+                                         int computeCRC )
 {
-   FILE          *str;
-   int           id1, id2, si1, si2;
-   char          buffer[BUFFERSIZE];
-   int           extraLength, subLength;
-   int           i;
-   char          *pt;
-   int           c;
-   struct stat   sb;
-   unsigned long crc   = crc32( 0L, Z_NULL, 0 );
-   int           count;
-   unsigned long offset;
+    FILE          *str;
+    int           id1, id2, si1, si2;
+    char          buffer[BUFFERSIZE];
+    int           extraLength, subLength;
+    int           i;
+    char          *pt;
+    int           c;
+    struct stat   sb;
+    unsigned long crc   = crc32( 0L, Z_NULL, 0 );
+    int           count;
+    unsigned long offset;
 
-   if (!(str = gd_fopen( filename, "rb" )))
-   {
-      err_fatal_errno( __func__,
-		       "Cannot open data file \"%s\" for read\n", filename );
-      return DZ_ERR_OPENFILE;
-   }
+    if (!(str = gd_fopen( filename, "rb" )))
+    {
+        err_fatal_errno( __func__,
+                         "Cannot open data file \"%s\" for read\n", filename );
+        return DZ_ERR_OPENFILE;
+    }
 
-   header->filename     = NULL;//str_find( filename );
-   header->headerLength = GZ_XLEN - 1;
-   header->type         = DICT_UNKNOWN;
-   
-   id1                  = getc( str );
-   id2                  = getc( str );
+    header->filename     = NULL;//str_find( filename );
+    header->headerLength = GZ_XLEN - 1;
+    header->type         = DICT_UNKNOWN;
 
-   if (id1 != GZ_MAGIC1 || id2 != GZ_MAGIC2) {
-      header->type = DICT_TEXT;
-      fstat( fileno( str ), &sb );
-      header->compressedLength = header->length = sb.st_size;
-      header->origFilename     = NULL;//str_find( filename );
-      header->mtime            = sb.st_mtime;
-      if (computeCRC) {
-	 rewind( str );
-	 while (!feof( str )) {
-	    if ((count = fread( buffer, 1, BUFFERSIZE, str ))) {
-	       crc = crc32( crc, (Bytef *)buffer, count );
-	    }
-	 }
-      }
-      header->crc = crc;
-      fclose( str );
-      return DZ_NOERROR;
-   }
-   header->type = DICT_GZIP;
-   
-   header->method       = getc( str );
-   header->flags        = getc( str );
-   header->mtime        = getc( str ) <<  0;
-   header->mtime       |= getc( str ) <<  8;
-   header->mtime       |= getc( str ) << 16;
-   header->mtime       |= getc( str ) << 24;
-   header->extraFlags   = getc( str );
-   header->os           = getc( str );
-   
-   if (header->flags & GZ_FEXTRA) {
-      extraLength          = getc( str ) << 0;
-      extraLength         |= getc( str ) << 8;
-      header->headerLength += extraLength + 2;
-      si1                  = getc( str );
-      si2                  = getc( str );
-      
-      if (si1 == GZ_RND_S1 && si2 == GZ_RND_S2) {
-	 subLength            = getc( str ) << 0;
-	 subLength           |= getc( str ) << 8;
-	 header->version      = getc( str ) << 0;
-	 header->version     |= getc( str ) << 8;
-	 
-	 if (header->version != 1)
-	 {
-	    err_internal( __func__,
-			  "dzip header version %d not supported\n",
-			  header->version );
-	    fclose( str );
-	    return DZ_ERR_UNSUPPORTED_FORMAT;
-	 }
-   
-	 header->chunkLength  = getc( str ) << 0;
-	 header->chunkLength |= getc( str ) << 8;
-	 header->chunkCount   = getc( str ) << 0;
-	 header->chunkCount  |= getc( str ) << 8;
-	 
-	 if (header->chunkCount <= 0) {
-	    fclose( str );
-	    return DZ_ERR_INVALID_FORMAT;
-	 }
-     header->chunks = xmalloc( sizeof( int )
-				   * header->chunkCount );
-	 if( header->chunks == 0 ) {
-	   return DZ_ERR_NOMEMORY;
-	 }
+    id1                  = getc( str );
+    id2                  = getc( str );
 
-	 for (i = 0; i < header->chunkCount; i++) {
-	    header->chunks[i]  = getc( str ) << 0;
-	    header->chunks[i] |= getc( str ) << 8;
-	 }
-	 header->type = DICT_DZIP;
-      } else {
-	 fseek( str, header->headerLength, SEEK_SET );
-      }
-   }
-   
-   if (header->flags & GZ_FNAME) { /* FIXME! Add checking against header len */
-      pt = buffer;
-      while ((c = getc( str )) && c != EOF){
-	 *pt++ = c;
+    if (id1 != GZ_MAGIC1 || id2 != GZ_MAGIC2) {
+        header->type = DICT_TEXT;
+        fstat( fileno( str ), &sb );
+        header->compressedLength = header->length = sb.st_size;
+        header->origFilename     = NULL;//str_find( filename );
+        header->mtime            = sb.st_mtime;
+        if (computeCRC) {
+            rewind( str );
+            while (!feof( str )) {
+                if ((count = fread( buffer, 1, BUFFERSIZE, str ))) {
+                    crc = crc32( crc, (Bytef *)buffer, count );
+                }
+            }
+        }
+        header->crc = crc;
+        fclose( str );
+        return DZ_NOERROR;
+    }
+    header->type = DICT_GZIP;
 
-	 if (pt == buffer + sizeof (buffer)){
-	    err_fatal (
-	       __func__,
-	       "too long FNAME field in dzip file \"%s\"\n", filename);
-	    fclose( str );
-	    if( header->chunks )
-          xfree( header->chunks );
-	    return DZ_ERR_INVALID_FORMAT;
-	 }
-      }
+    header->method       = getc( str );
+    header->flags        = getc( str );
+    header->mtime        = getc( str ) <<  0;
+    header->mtime       |= getc( str ) <<  8;
+    header->mtime       |= getc( str ) << 16;
+    header->mtime       |= getc( str ) << 24;
+    header->extraFlags   = getc( str );
+    header->os           = getc( str );
 
-      *pt = '\0';
-      header->origFilename = NULL;//str_find( buffer );
-      header->headerLength += strlen( buffer ) + 1;
-   } else {
-      header->origFilename = NULL;
-   }
-   
-   if (header->flags & GZ_COMMENT) { /* FIXME! Add checking for header len */
-      pt = buffer;
-      while ((c = getc( str )) && c != EOF){
-	 *pt++ = c;
+    if (header->flags & GZ_FEXTRA) {
+        extraLength          = getc( str ) << 0;
+        extraLength         |= getc( str ) << 8;
+        header->headerLength += extraLength + 2;
+        si1                  = getc( str );
+        si2                  = getc( str );
 
-	 if (pt == buffer + sizeof (buffer)){
-	    err_fatal (
-	       __func__,
-	       "too long COMMENT field in dzip file \"%s\"\n", filename);
-	    fclose( str );
-	    if( header->chunks )
-          xfree( header->chunks );
-	    return DZ_ERR_INVALID_FORMAT;
-	 }
-      }
+        if (si1 == GZ_RND_S1 && si2 == GZ_RND_S2) {
+            subLength            = getc( str ) << 0;
+            subLength           |= getc( str ) << 8;
+            header->version      = getc( str ) << 0;
+            header->version     |= getc( str ) << 8;
 
-      *pt = '\0';
-      header->comment = NULL;//str_find( buffer );
-      header->headerLength += strlen( buffer ) + 1;
-   } else {
-      header->comment = NULL;
-   }
+            if (header->version != 1)
+            {
+                err_internal( __func__,
+                              "dzip header version %d not supported\n",
+                              header->version );
+                fclose( str );
+                return DZ_ERR_UNSUPPORTED_FORMAT;
+            }
 
-   if (header->flags & GZ_FHCRC) {
-      getc( str );
-      getc( str );
-      header->headerLength += 2;
-   }
+            header->chunkLength  = getc( str ) << 0;
+            header->chunkLength |= getc( str ) << 8;
+            header->chunkCount   = getc( str ) << 0;
+            header->chunkCount  |= getc( str ) << 8;
 
-   if (ftell( str ) != header->headerLength + 1)
-   {
-      err_internal( __func__,
-		    "File position (%lu) != header length + 1 (%d)\n",
-		    ftell( str ), header->headerLength + 1 );
-      fclose( str );
-      if( header->chunks )
-        xfree( header->chunks );
-      return DZ_ERR_INVALID_FORMAT;
-   }
+            if (header->chunkCount <= 0) {
+                fclose( str );
+                return DZ_ERR_INVALID_FORMAT;
+            }
+            header->chunks = xmalloc( sizeof( int )
+                                      * header->chunkCount );
+            if( header->chunks == 0 ) {
+                return DZ_ERR_NOMEMORY;
+            }
 
-   fseek( str, -8, SEEK_END );
-   header->crc     = getc( str ) <<  0;
-   header->crc    |= getc( str ) <<  8;
-   header->crc    |= getc( str ) << 16;
-   header->crc    |= getc( str ) << 24;
-   header->length  = getc( str ) <<  0;
-   header->length |= getc( str ) <<  8;
-   header->length |= getc( str ) << 16;
-   header->length |= getc( str ) << 24;
-   header->compressedLength = ftell( str );
+            for (i = 0; i < header->chunkCount; i++) {
+                header->chunks[i]  = getc( str ) << 0;
+                header->chunks[i] |= getc( str ) << 8;
+            }
+            header->type = DICT_DZIP;
+        } else {
+            fseek( str, header->headerLength, SEEK_SET );
+        }
+    }
 
-				/* Compute offsets */
-   header->offsets = xmalloc( sizeof( unsigned long )
-			      * header->chunkCount );
-   if( header->offsets == 0 ) {
-     if( header->chunks )
-       xfree( header->chunks );
-     return DZ_ERR_NOMEMORY;
-   }
+    if (header->flags & GZ_FNAME) { /* FIXME! Add checking against header len */
+        pt = buffer;
+        while ((c = getc( str )) && c != EOF){
+            *pt++ = c;
 
-   for (offset = header->headerLength + 1, i = 0;
-	i < header->chunkCount;
-	i++)
-   {
-      header->offsets[i] = offset;
-      offset += header->chunks[i];
-   }
+            if (pt == buffer + sizeof (buffer)){
+                err_fatal (
+                            __func__,
+                            "too long FNAME field in dzip file \"%s\"\n", filename);
+                fclose( str );
+                if( header->chunks )
+                    xfree( header->chunks );
+                return DZ_ERR_INVALID_FORMAT;
+            }
+        }
 
-   fclose( str );
-   return DZ_NOERROR;
+        *pt = '\0';
+        header->origFilename = NULL;//str_find( buffer );
+        header->headerLength += strlen( buffer ) + 1;
+    } else {
+        header->origFilename = NULL;
+    }
+
+    if (header->flags & GZ_COMMENT) { /* FIXME! Add checking for header len */
+        pt = buffer;
+        while ((c = getc( str )) && c != EOF){
+            *pt++ = c;
+
+            if (pt == buffer + sizeof (buffer)){
+                err_fatal (
+                            __func__,
+                            "too long COMMENT field in dzip file \"%s\"\n", filename);
+                fclose( str );
+                if( header->chunks )
+                    xfree( header->chunks );
+                return DZ_ERR_INVALID_FORMAT;
+            }
+        }
+
+        *pt = '\0';
+        header->comment = NULL;//str_find( buffer );
+        header->headerLength += strlen( buffer ) + 1;
+    } else {
+        header->comment = NULL;
+    }
+
+    if (header->flags & GZ_FHCRC) {
+        getc( str );
+        getc( str );
+        header->headerLength += 2;
+    }
+
+    if (ftell( str ) != header->headerLength + 1)
+    {
+        err_internal( __func__,
+                      "File position (%lu) != header length + 1 (%d)\n",
+                      ftell( str ), header->headerLength + 1 );
+        fclose( str );
+        if( header->chunks )
+            xfree( header->chunks );
+        return DZ_ERR_INVALID_FORMAT;
+    }
+
+    fseek( str, -8, SEEK_END );
+    header->crc     = getc( str ) <<  0;
+    header->crc    |= getc( str ) <<  8;
+    header->crc    |= getc( str ) << 16;
+    header->crc    |= getc( str ) << 24;
+    header->length  = getc( str ) <<  0;
+    header->length |= getc( str ) <<  8;
+    header->length |= getc( str ) << 16;
+    header->length |= getc( str ) << 24;
+    header->compressedLength = ftell( str );
+
+    /* Compute offsets */
+    header->offsets = xmalloc( sizeof( unsigned long )
+                               * header->chunkCount );
+    if( header->offsets == 0 ) {
+        if( header->chunks )
+            xfree( header->chunks );
+        return DZ_ERR_NOMEMORY;
+    }
+
+    for (offset = header->headerLength + 1, i = 0;
+         i < header->chunkCount;
+         i++)
+    {
+        header->offsets[i] = offset;
+        offset += header->chunks[i];
+    }
+
+    fclose( str );
+    return DZ_NOERROR;
 }
 
 dictData *dict_data_open( const char *filename,
                           enum DZ_ERRORS * error,
                           int computeCRC )
 {
-   dictData    *h = NULL;
-//   struct stat sb;
-   int         j;
+    dictData    *h = NULL;
+    //   struct stat sb;
+    int         j;
 
-   if (!filename)
-   {
-     *error = DZ_ERR_OPENFILE;
-     return NULL;
-   }
+    if (!filename)
+    {
+        *error = DZ_ERR_OPENFILE;
+        return NULL;
+    }
 
-   h = xmalloc( sizeof( struct dictData ) );
-   if( h == 0 )
-   {
-     *error = DZ_ERR_NOMEMORY;
-     return 0;
-   }
+    h = xmalloc( sizeof( struct dictData ) );
+    if( h == 0 )
+    {
+        *error = DZ_ERR_NOMEMORY;
+        return 0;
+    }
 
-   memset( h, 0, sizeof( struct dictData ) );
+    memset( h, 0, sizeof( struct dictData ) );
 #ifdef __WIN32
-   h->fd = INVALID_HANDLE_VALUE;
+    h->fd = INVALID_HANDLE_VALUE;
 #endif
-   h->initialized = 0;
+    h->initialized = 0;
 
-   for(;;)
-   {
+    for(;;)
+    {
 #ifdef __WIN32
-     wchar_t wname[16384];
+        wchar_t wname[16384];
 #endif
-     *error = dict_read_header( filename, h, computeCRC );
-     if ( *error != DZ_NOERROR ) {
-       break; /*
+        *error = dict_read_header( filename, h, computeCRC );
+        if ( *error != DZ_NOERROR ) {
+            break; /*
         err_fatal( __func__,
        "\"%s\" not in text or dzip format\n", filename );*/
-     }
+        }
 
 #ifdef __WIN32
-     if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
-     {
-       *error = DZ_ERR_OPENFILE;
-       break;
-     }
+        if( MultiByteToWideChar( CP_UTF8, 0, filename, -1, wname, 16384 ) == 0 )
+        {
+            *error = DZ_ERR_OPENFILE;
+            break;
+        }
 
-     h->fd = CreateFileW( wname, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
-                          OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, 0);
-     if( h->fd == INVALID_HANDLE_VALUE )
-     {
-       *error = DZ_ERR_OPENFILE;
-       break;
-     }
+        h->fd = CreateFileW( wname, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, 0,
+                             OPEN_EXISTING, FILE_FLAG_RANDOM_ACCESS, 0);
+        if( h->fd == INVALID_HANDLE_VALUE )
+        {
+            *error = DZ_ERR_OPENFILE;
+            break;
+        }
 
-     h->size = GetFileSize( h->fd, 0 );
+        h->size = GetFileSize( h->fd, 0 );
 #else
-     h->fd = gd_fopen( filename, "rb" );
+        h->fd = gd_fopen( filename, "rb" );
 
-     if ( !h->fd )
-     {
-       *error = DZ_ERR_OPENFILE;
-       break;
-        /*err_fatal_errno( __func__,
+        if ( !h->fd )
+        {
+            *error = DZ_ERR_OPENFILE;
+            break;
+            /*err_fatal_errno( __func__,
              "Cannot open data file \"%s\"\n", filename );*/
-      }
+        }
 
-     fseek( h->fd, 0, SEEK_END );
+        fseek( h->fd, 0, SEEK_END );
 
-     h->size = ftell( h->fd );
+        h->size = ftell( h->fd );
 #endif
 
-     for (j = 0; j < DICT_CACHE_SIZE; j++) {
-        h->cache[j].chunk    = -1;
-        h->cache[j].stamp    = -1;
-        h->cache[j].inBuffer = NULL;
-        h->cache[j].count    = 0;
-     }
+        for (j = 0; j < DICT_CACHE_SIZE; j++) {
+            h->cache[j].chunk    = -1;
+            h->cache[j].stamp    = -1;
+            h->cache[j].inBuffer = NULL;
+            h->cache[j].count    = 0;
+        }
 
-     *error = DZ_NOERROR;
-     return h;
-   }
-   dict_data_close( h );
-   return( 0 );
+        *error = DZ_NOERROR;
+        return h;
+    }
+    dict_data_close( h );
+    return( 0 );
 }
 
 void dict_data_close( dictData *header )
 {
-   int i;
+    int i;
 
-   if (!header)
-      return;
+    if (!header)
+        return;
 
 #ifdef __WIN32
-   if ( header->fd != INVALID_HANDLE_VALUE )
-     CloseHandle( header->fd );
+    if ( header->fd != INVALID_HANDLE_VALUE )
+        CloseHandle( header->fd );
 #else
-   if ( header->fd )
-     fclose( header->fd );
+    if ( header->fd )
+        fclose( header->fd );
 #endif
 
-   if (header->chunks)       xfree( header->chunks );
-   if (header->offsets)      xfree( header->offsets );
+    if (header->chunks)       xfree( header->chunks );
+    if (header->offsets)      xfree( header->offsets );
 
-   if (header->initialized) {
-      if (inflateEnd( &header->zStream ))
-	 err_internal( __func__,
-		       "Cannot shut down inflation engine: %s\n",
-		       header->zStream.msg );
-   }
+    if (header->initialized) {
+        if (inflateEnd( &header->zStream ))
+            err_internal( __func__,
+                          "Cannot shut down inflation engine: %s\n",
+                          header->zStream.msg );
+    }
 
-   for (i = 0; i < DICT_CACHE_SIZE; ++i){
-      if (header -> cache [i].inBuffer)
-	 xfree (header -> cache [i].inBuffer);
-   }
+    for (i = 0; i < DICT_CACHE_SIZE; ++i){
+        if (header -> cache [i].inBuffer)
+            xfree (header -> cache [i].inBuffer);
+    }
 
-   //memset( header, 0, sizeof( struct dictData ) );
-   xfree( header );
+    //memset( header, 0, sizeof( struct dictData ) );
+    xfree( header );
 }
 
 char *dict_data_read_ (
-   dictData *h, unsigned long start, unsigned long size,
-   const char *preFilter, const char *postFilter )
+        dictData *h, unsigned long start, unsigned long size,
+        const char *preFilter, const char *postFilter )
 {
-   char * buffer;
-   char * pt;
-   unsigned long end;
-   int           count;
-   char          *inBuffer;
-   char          outBuffer[OUT_BUFFER_SIZE];
-   int           firstChunk, lastChunk;
-   int           firstOffset, lastOffset;
-   int           i, j;
-   int           found, target, lastStamp;
-   (void) preFilter;
-   (void) postFilter;
+    char * buffer;
+    char * pt;
+    unsigned long end;
+    int           count;
+    char          *inBuffer;
+    char          outBuffer[OUT_BUFFER_SIZE];
+    int           firstChunk, lastChunk;
+    int           firstOffset, lastOffset;
+    int           i, j;
+    int           found, target, lastStamp;
+    (void) preFilter;
+    (void) postFilter;
 
-   end  = start + size;
+    end  = start + size;
 
-   buffer = xmalloc( size + 1 );
-   if( !buffer )
-   {
-     strncpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ), ERR_STRING_SIZE );
-     return 0;
-   }
+    buffer = xmalloc( size + 1 );
+    if( !buffer )
+    {
+        strncpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ), ERR_STRING_SIZE );
+        return 0;
+    }
 
-   if ( !size )
-   {
-     *buffer = 0;
-     return buffer;
-   }
+    if ( !size )
+    {
+        *buffer = 0;
+        return buffer;
+    }
 
-   PRINTF(DBG_UNZIP,
-	  ("dict_data_read( %p, %lu, %lu, %s, %s )\n",
-	   h, start, size, preFilter, postFilter ));
+    PRINTF(DBG_UNZIP,
+           ("dict_data_read( %p, %lu, %lu, %s, %s )\n",
+            h, start, size, preFilter, postFilter ));
 
-   assert( h != NULL);
-   switch (h->type) {
-   case DICT_GZIP:
-/*
+    assert( h != NULL);
+    switch (h->type) {
+    case DICT_GZIP:
+        /*
       err_fatal( __func__,
-		 "Cannot seek on pure gzip format files.\n"
-		 "Use plain text (for performance)"
-		 " or dzip format (for space savings).\n" );
+         "Cannot seek on pure gzip format files.\n"
+         "Use plain text (for performance)"
+         " or dzip format (for space savings).\n" );
       break;
 */
-      strncpy( h->errorString, "Cannot seek on pure gzip format files", ERR_STRING_SIZE );
-      xfree( buffer );
-      return 0;
-   case DICT_TEXT:
-   {
-#ifdef __WIN32
-     long hiPtr = 0;
-     DWORD pos = SetFilePointer( h->fd, start, &hiPtr, FILE_BEGIN );
-     DWORD readed = 0;
-     if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
-       ReadFile( h->fd, buffer, size, &readed, 0 );
-     if( size != readed )
-#else
-     if ( fseek( h->fd, start, SEEK_SET ) != 0 ||
-          fread( buffer, size, 1, h->fd ) != 1 )
-#endif
-     {
-       strncpy( h->errorString, dz_error_str( DZ_ERR_READFILE ), ERR_STRING_SIZE );
-       xfree( buffer );
-       return 0;
-     }
-
-     buffer[size] = '\0';
-   }
-   break;
-   case DICT_DZIP:
-      if (!h->initialized) {
-	 h->zStream.zalloc    = NULL;
-	 h->zStream.zfree     = NULL;
-	 h->zStream.opaque    = NULL;
-	 h->zStream.next_in   = 0;
-	 h->zStream.avail_in  = 0;
-	 h->zStream.next_out  = NULL;
-	 h->zStream.avail_out = 0;
-	 if (inflateInit2( &h->zStream, -15 ) != Z_OK)
-/*
-	    err_internal( __func__,
-			  "Cannot initialize inflation engine: %s\n",
-			  h->zStream.msg );
-*/
-	 {
-       snprintf( h->errorString, ERR_STRING_SIZE, "Cannot initialize inflation engine: %s", h->zStream.msg );
-	   xfree( buffer );
-	   return 0;
-	 }
-	 ++h->initialized;
-      }
-      firstChunk  = start / h->chunkLength;
-      firstOffset = start - firstChunk * h->chunkLength;
-      lastChunk   = end / h->chunkLength;
-      lastOffset  = end - lastChunk * h->chunkLength;
-      PRINTF(DBG_UNZIP,
-	     ("   start = %lu, end = %lu\n"
-	      "firstChunk = %d, firstOffset = %d,"
-	      " lastChunk = %d, lastOffset = %d\n",
-	      start, end, firstChunk, firstOffset, lastChunk, lastOffset ));
-      for (pt = buffer, i = firstChunk; i <= lastChunk; i++) {
-
-				/* Access cache */
-	 found  = 0;
-	 target = 0;
-	 lastStamp = INT_MAX;
-	 for (j = 0; j < DICT_CACHE_SIZE; j++) {
-#if USE_CACHE
-	    if (h->cache[j].chunk == i) {
-	       found  = 1;
-	       target = j;
-	       break;
-	    }
-#endif
-	    if (h->cache[j].stamp < lastStamp) {
-	       lastStamp = h->cache[j].stamp;
-	       target = j;
-	    }
-	 }
-
-	 h->cache[target].stamp = ++h->stamp;
-	 if( h->stamp < 0 )
-	 {
-	    h->stamp = 0;
-	    for (j = 0; j < DICT_CACHE_SIZE; j++)
-	      h->cache[j].stamp = -1;
-	 }
-	 if (found) {
-	    count = h->cache[target].count;
-	    inBuffer = h->cache[target].inBuffer;
-	 } else {
-#ifdef __WIN32
-        DWORD pos ;
-        DWORD readed;
-#endif
-	    h->cache[target].chunk = -1;
-	    if (!h->cache[target].inBuffer)
-	       h->cache[target].inBuffer = xmalloc( h->chunkLength );
-	    inBuffer = h->cache[target].inBuffer;
-	    if( !inBuffer )
-	    {
-          strncpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ), ERR_STRING_SIZE );
-	      xfree( buffer );
-	      return 0;
-	    }
-
-	    if (h->chunks[i] >= OUT_BUFFER_SIZE ) {
-/*
-	       err_internal( __func__,
-			     "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
-			     i, h->chunks[i], OUT_BUFFER_SIZE );
-*/
-              snprintf( h->errorString, ERR_STRING_SIZE, "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
-                       i, h->chunks[i], OUT_BUFFER_SIZE );
-              xfree( buffer );
-              return 0;
-	    }
-
-#ifdef __WIN32
-      pos = SetFilePointer( h->fd, h->offsets[ i ], 0, FILE_BEGIN );
-      readed = 0;
-      if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
-        ReadFile( h->fd, outBuffer, h->chunks[ i ], &readed, 0 );
-      if( h->chunks[ i ] != (int)readed )
-#else
-      if ( fseek( h->fd, h->offsets[ i ], SEEK_SET ) != 0 ||
-           fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
-#endif
-      {
-        strncpy( h->errorString, dz_error_str( DZ_ERR_READFILE ), ERR_STRING_SIZE );
+        strncpy( h->errorString, "Cannot seek on pure gzip format files", ERR_STRING_SIZE );
         xfree( buffer );
         return 0;
-      }
+    case DICT_TEXT:
+    {
+#ifdef __WIN32
+        long hiPtr = 0;
+        DWORD pos = SetFilePointer( h->fd, start, &hiPtr, FILE_BEGIN );
+        DWORD readed = 0;
+        if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
+            ReadFile( h->fd, buffer, size, &readed, 0 );
+        if( size != readed )
+#else
+        if ( fseek( h->fd, start, SEEK_SET ) != 0 ||
+             fread( buffer, size, 1, h->fd ) != 1 )
+#endif
+        {
+            strncpy( h->errorString, dz_error_str( DZ_ERR_READFILE ), ERR_STRING_SIZE );
+            xfree( buffer );
+            return 0;
+        }
 
-      dict_data_filter( outBuffer, &count, OUT_BUFFER_SIZE, preFilter );
-	 
-	    h->zStream.next_in   = (Bytef *)outBuffer;
-	    h->zStream.avail_in  = h->chunks[i];
-	    h->zStream.next_out  = (Bytef *)inBuffer;
-	    h->zStream.avail_out = h->chunkLength;
-	    if (inflate( &h->zStream,  Z_PARTIAL_FLUSH ) != Z_OK)
-	    {
-//	       err_fatal( __func__, "inflate: %s\n", h->zStream.msg );
-          snprintf( h->errorString, ERR_STRING_SIZE, "inflate: %s\n", h->zStream.msg );
-	      xfree( buffer );
-	      return 0;
-	    }
-	    if (h->zStream.avail_in)
-/*
-	       err_internal( __func__,
-			     "inflate did not flush (%d pending, %d avail)\n",
-			     h->zStream.avail_in, h->zStream.avail_out );
+        buffer[size] = '\0';
+    }
+        break;
+    case DICT_DZIP:
+        if (!h->initialized) {
+            h->zStream.zalloc    = NULL;
+            h->zStream.zfree     = NULL;
+            h->zStream.opaque    = NULL;
+            h->zStream.next_in   = 0;
+            h->zStream.avail_in  = 0;
+            h->zStream.next_out  = NULL;
+            h->zStream.avail_out = 0;
+            if (inflateInit2( &h->zStream, -15 ) != Z_OK)
+                /*
+        err_internal( __func__,
+              "Cannot initialize inflation engine: %s\n",
+              h->zStream.msg );
 */
-	    {
-          snprintf( h->errorString, ERR_STRING_SIZE, "inflate did not flush (%d pending, %d avail)\n",
-		       h->zStream.avail_in, h->zStream.avail_out );
-	      xfree( buffer );
-	      return 0;
-	    }
-	    
-	    count = h->chunkLength - h->zStream.avail_out;
-      dict_data_filter( inBuffer, &count, h->chunkLength, postFilter );
+            {
+                snprintf( h->errorString, ERR_STRING_SIZE, "Cannot initialize inflation engine: %s", h->zStream.msg );
+                xfree( buffer );
+                return 0;
+            }
+            ++h->initialized;
+        }
+        firstChunk  = start / h->chunkLength;
+        firstOffset = start - firstChunk * h->chunkLength;
+        lastChunk   = end / h->chunkLength;
+        lastOffset  = end - lastChunk * h->chunkLength;
+        PRINTF(DBG_UNZIP,
+               ("   start = %lu, end = %lu\n"
+                "firstChunk = %d, firstOffset = %d,"
+                " lastChunk = %d, lastOffset = %d\n",
+                start, end, firstChunk, firstOffset, lastChunk, lastOffset ));
+        for (pt = buffer, i = firstChunk; i <= lastChunk; i++) {
 
-	    h->cache[target].count = count;
-	    h->cache[target].chunk = i;
-	 }
-	 
-	 if (i == firstChunk) {
-	    if (i == lastChunk) {
-	       memcpy( pt, inBuffer + firstOffset, lastOffset-firstOffset);
-	       pt += lastOffset - firstOffset;
-	    } else {
-	       if (count != h->chunkLength )
-/*
-		  err_internal( __func__,
-				"Length = %d instead of %d\n",
-				count, h->chunkLength );
+            /* Access cache */
+            found  = 0;
+            target = 0;
+            lastStamp = INT_MAX;
+            for (j = 0; j < DICT_CACHE_SIZE; j++) {
+#if USE_CACHE
+                if (h->cache[j].chunk == i) {
+                    found  = 1;
+                    target = j;
+                    break;
+                }
+#endif
+                if (h->cache[j].stamp < lastStamp) {
+                    lastStamp = h->cache[j].stamp;
+                    target = j;
+                }
+            }
+
+            h->cache[target].stamp = ++h->stamp;
+            if( h->stamp < 0 )
+            {
+                h->stamp = 0;
+                for (j = 0; j < DICT_CACHE_SIZE; j++)
+                    h->cache[j].stamp = -1;
+            }
+            if (found) {
+                count = h->cache[target].count;
+                inBuffer = h->cache[target].inBuffer;
+            } else {
+#ifdef __WIN32
+                DWORD pos ;
+                DWORD readed;
+#endif
+                h->cache[target].chunk = -1;
+                if (!h->cache[target].inBuffer)
+                    h->cache[target].inBuffer = xmalloc( h->chunkLength );
+                inBuffer = h->cache[target].inBuffer;
+                if( !inBuffer )
+                {
+                    strncpy( h->errorString, dz_error_str( DZ_ERR_NOMEMORY ), ERR_STRING_SIZE );
+                    xfree( buffer );
+                    return 0;
+                }
+
+                if (h->chunks[i] >= OUT_BUFFER_SIZE ) {
+                    /*
+           err_internal( __func__,
+                 "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
+                 i, h->chunks[i], OUT_BUFFER_SIZE );
 */
-	       {
-         snprintf( h->errorString, ERR_STRING_SIZE, "Length = %d instead of %d\n",
-			  count, h->chunkLength );
-		 xfree( buffer );
-		 return 0;
-	       }
-	       memcpy( pt, inBuffer + firstOffset,
-		       h->chunkLength - firstOffset );
-	       pt += h->chunkLength - firstOffset;
-	    }
-	 } else if (i == lastChunk) {
-	    memcpy( pt, inBuffer, lastOffset );
-	    pt += lastOffset;
-	 } else {
-	    assert( count == h->chunkLength );
-	    memcpy( pt, inBuffer, h->chunkLength );
-	    pt += h->chunkLength;
-	 }
-      }
-      *pt = '\0';
-      break;
-   case DICT_UNKNOWN:
-//      err_fatal( __func__, "Cannot read unknown file type\n" );
-      strncpy( h->errorString, "Cannot read unknown file type", ERR_STRING_SIZE );
-      xfree( buffer );
-      return 0;
-   }
-   h->errorString[ 0 ] = 0;
-   return buffer;
+                    snprintf( h->errorString, ERR_STRING_SIZE, "h->chunks[%d] = %d >= %ld (OUT_BUFFER_SIZE)\n",
+                              i, h->chunks[i], OUT_BUFFER_SIZE );
+                    xfree( buffer );
+                    return 0;
+                }
+
+#ifdef __WIN32
+                pos = SetFilePointer( h->fd, h->offsets[ i ], 0, FILE_BEGIN );
+                readed = 0;
+                if( pos != INVALID_SET_FILE_POINTER || GetLastError() != NO_ERROR )
+                    ReadFile( h->fd, outBuffer, h->chunks[ i ], &readed, 0 );
+                if( h->chunks[ i ] != (int)readed )
+#else
+                if ( fseek( h->fd, h->offsets[ i ], SEEK_SET ) != 0 ||
+                     fread( outBuffer, h->chunks[ i ], 1, h->fd ) != 1 )
+#endif
+                {
+                    strncpy( h->errorString, dz_error_str( DZ_ERR_READFILE ), ERR_STRING_SIZE );
+                    xfree( buffer );
+                    return 0;
+                }
+
+                dict_data_filter( outBuffer, &count, OUT_BUFFER_SIZE, preFilter );
+
+                h->zStream.next_in   = (Bytef *)outBuffer;
+                h->zStream.avail_in  = h->chunks[i];
+                h->zStream.next_out  = (Bytef *)inBuffer;
+                h->zStream.avail_out = h->chunkLength;
+                if (inflate( &h->zStream,  Z_PARTIAL_FLUSH ) != Z_OK)
+                {
+                    //	       err_fatal( __func__, "inflate: %s\n", h->zStream.msg );
+                    snprintf( h->errorString, ERR_STRING_SIZE, "inflate: %s\n", h->zStream.msg );
+                    xfree( buffer );
+                    return 0;
+                }
+                if (h->zStream.avail_in)
+                    /*
+           err_internal( __func__,
+                 "inflate did not flush (%d pending, %d avail)\n",
+                 h->zStream.avail_in, h->zStream.avail_out );
+*/
+                {
+                    snprintf( h->errorString, ERR_STRING_SIZE, "inflate did not flush (%d pending, %d avail)\n",
+                              h->zStream.avail_in, h->zStream.avail_out );
+                    xfree( buffer );
+                    return 0;
+                }
+
+                count = h->chunkLength - h->zStream.avail_out;
+                dict_data_filter( inBuffer, &count, h->chunkLength, postFilter );
+
+                h->cache[target].count = count;
+                h->cache[target].chunk = i;
+            }
+
+            if (i == firstChunk) {
+                if (i == lastChunk) {
+                    memcpy( pt, inBuffer + firstOffset, lastOffset-firstOffset);
+                    pt += lastOffset - firstOffset;
+                } else {
+                    if (count != h->chunkLength )
+                        /*
+          err_internal( __func__,
+                "Length = %d instead of %d\n",
+                count, h->chunkLength );
+*/
+                    {
+                        snprintf( h->errorString, ERR_STRING_SIZE, "Length = %d instead of %d\n",
+                                  count, h->chunkLength );
+                        xfree( buffer );
+                        return 0;
+                    }
+                    memcpy( pt, inBuffer + firstOffset,
+                            h->chunkLength - firstOffset );
+                    pt += h->chunkLength - firstOffset;
+                }
+            } else if (i == lastChunk) {
+                memcpy( pt, inBuffer, lastOffset );
+                pt += lastOffset;
+            } else {
+                assert( count == h->chunkLength );
+                memcpy( pt, inBuffer, h->chunkLength );
+                pt += h->chunkLength;
+            }
+        }
+        *pt = '\0';
+        break;
+    case DICT_UNKNOWN:
+        //      err_fatal( __func__, "Cannot read unknown file type\n" );
+        strncpy( h->errorString, "Cannot read unknown file type", ERR_STRING_SIZE );
+        xfree( buffer );
+        return 0;
+    }
+    h->errorString[ 0 ] = 0;
+    return buffer;
 }
 
 char *dict_error_str( dictData *data )
 {
-  return data->errorString;
+    return data->errorString;
 }
 
 const char * dz_error_str( enum DZ_ERRORS error )
 {
-  switch( error )
-  {
+    switch( error )
+    {
     case DZ_NOERROR:                return "No error";
     case DZ_ERR_OPENFILE:           return "Open file error";
     case DZ_ERR_READFILE:           return "Read file error";
@@ -853,6 +853,6 @@ const char * dz_error_str( enum DZ_ERRORS error )
     case DZ_ERR_UNSUPPORTED_FORMAT: return "Unsupported file format";
     case DZ_ERR_NOMEMORY:           return "Memory allocation error";
     case DZ_ERR_INTERNAL:           return "Internal error";
-  }
-  return "Unknown error";
+    }
+    return "Unknown error";
 }

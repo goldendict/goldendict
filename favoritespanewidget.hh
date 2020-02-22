@@ -5,276 +5,282 @@
 #define __FAVORITIESPANEWIDGET_HH__INCLUDED__
 
 #include <QWidget>
-#include <QSize>
 #include <QAbstractItemModel>
 #include <QLabel>
 #include <QHBoxLayout>
-#include <QMenu>
-#include <QDomNode>
 #include <QList>
 #include <QMimeData>
 
-#include <config.hh>
+#include "config.hh"
 #include "treeview.hh"
 
+#ifndef GD_PUGIXML_XSERIAL
+class QDomNode;
+#endif
 class FavoritesModel;
+class QMenu;
 
 class FavoritesPaneWidget : public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  FavoritesPaneWidget( QWidget * parent = 0 ): QWidget( parent ),
-    itemSelectionChanged( false )
-  , m_favoritesModel( 0 )
-  , timerId( 0 )
-  {}
+    FavoritesPaneWidget( QWidget * parent = 0 ): QWidget( parent ),
+        itemSelectionChanged( false )
+      , m_favoritesModel( 0 )
+      , timerId( 0 )
+    {}
 
-  virtual ~FavoritesPaneWidget();
+    virtual ~FavoritesPaneWidget();
 
-  virtual QSize sizeHint() const
-  { return QSize( 204, 204 ); }
+    virtual QSize sizeHint() const
+    { return QSize( 204, 204 ); }
 
-  void setUp( Config::Class * cfg, QMenu * menu );
+    void setUp( Config::Class * cfg, QMenu * menu );
 
-  void addHeadword( QString const & path, QString const & headword );
+    void addHeadword( QString const & path, QString const & headword );
 
-  bool removeHeadword( QString const & path, QString const & headword );
+    bool removeHeadword( QString const & path, QString const & headword );
 
-  // Export/import Favorites
-  void getDataInXml( QByteArray & dataStr );
-  void getDataInPlainText( QString & dataStr );
-  bool setDataFromXml( QString const & dataStr );
+    // Export/import Favorites
+    void getDataInXml( QByteArray & dataStr );
+    void getDataInPlainText( QString & dataStr );
+    bool setDataFromXml( QString const & dataStr );
 
-  void setFocusOnTree()
-  { m_favoritesTree->setFocus(); }
+    void setFocusOnTree()
+    { m_favoritesTree->setFocus(); }
 
-  // Set interval for periodical save
-  void setSaveInterval( unsigned interval );
+    // Set interval for periodical save
+    void setSaveInterval( unsigned interval );
 
-  // Return true if headwors is already presented in Favorites
-  bool isHeadwordPresent( QString const & path, QString const & headword );
+    // Return true if headwors is already presented in Favorites
+    bool isHeadwordPresent( QString const & path, QString const & headword );
 
-  void saveData();
+    void saveData();
 
 signals:
-  void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
+    void favoritesItemRequested( QString const & word, QString const & faforitesFolder );
 
 protected:
-  virtual void timerEvent( QTimerEvent * ev );
+    virtual void timerEvent( QTimerEvent * ev );
 
 private slots:
-  void emitFavoritesItemRequested(QModelIndex const &);
-  void onSelectionChanged(QItemSelection const & selection);
-  void onItemClicked(QModelIndex const & idx);
-  void showCustomMenu(QPoint const & pos);
-  void deleteSelectedItems();
-  void copySelectedItems();
-  void addFolder();
+    void emitFavoritesItemRequested(QModelIndex const &);
+    void onSelectionChanged(QItemSelection const & selection);
+    void onItemClicked(QModelIndex const & idx);
+    void showCustomMenu(QPoint const & pos);
+    void deleteSelectedItems();
+    void copySelectedItems();
+    void addFolder();
 
 private:
-  virtual bool eventFilter( QObject *, QEvent * );
+    virtual bool eventFilter( QObject *, QEvent * );
 
-  Config::Class * m_cfg ;
-  TreeView * m_favoritesTree;
-  QMenu * m_favoritesMenu;
-  QAction * m_deleteSelectedAction;
-  QAction * m_separator;
-  QAction * m_copySelectedToClipboard;
-  QAction * m_addFolder;
+    Config::Class * m_cfg ;
+    TreeView * m_favoritesTree;
+    QMenu * m_favoritesMenu;
+    QAction * m_deleteSelectedAction;
+    QAction * m_separator;
+    QAction * m_copySelectedToClipboard;
+    QAction * m_addFolder;
 
-  QWidget favoritesPaneTitleBar;
-  QHBoxLayout favoritesPaneTitleBarLayout;
-  QLabel favoritesLabel;
+    QWidget favoritesPaneTitleBar;
+    QHBoxLayout favoritesPaneTitleBarLayout;
+    QLabel favoritesLabel;
 
-  /// needed to avoid multiple notifications
-  /// when selecting items via mouse and keyboard
-  bool itemSelectionChanged;
+    /// needed to avoid multiple notifications
+    /// when selecting items via mouse and keyboard
+    bool itemSelectionChanged;
 
-  FavoritesModel * m_favoritesModel;
+    FavoritesModel * m_favoritesModel;
 
-  int timerId;
+    int timerId;
 };
 
 
 class TreeItem
 {
 public:
-  enum Type { Word, Folder, Root };
+    enum Type { Word, Folder, Root };
 
-  TreeItem( const QVariant &data, TreeItem *parent = 0, Type type_ = Word );
-  ~TreeItem();
+    TreeItem( const QVariant &data, TreeItem *parent = 0, Type type_ = Word );
+    ~TreeItem();
 
-  void appendChild( TreeItem * child );
+    void appendChild( TreeItem * child );
 
-  void insertChild( int row, TreeItem * item );
+    void insertChild( int row, TreeItem * item );
 
-  // Remove child from list and delete it
-  void deleteChild( int row );
+    // Remove child from list and delete it
+    void deleteChild( int row );
+    void clear();
 
-  TreeItem * child( int row ) const;
-  int childCount() const;
-  QVariant data() const;
-  void setData( const QVariant & newData );
-  int row() const;
-  TreeItem * parent();
+    TreeItem * child( int row ) const;
+    int childCount() const;
+    QVariant data() const;
+    void setData( const QVariant & newData );
+    int row() const;
+    TreeItem * parent();
 
-  Type type() const
-  { return m_type; }
+    Type type() const
+    { return m_type; }
 
-  Qt::ItemFlags flags() const;
+    Qt::ItemFlags flags() const;
 
-  void setExpanded( bool expanded )
-  { m_expanded = expanded; }
+    void setExpanded( bool expanded )
+    { m_expanded = expanded; }
 
-  bool isExpanded() const
-  { return m_expanded; }
+    bool isExpanded() const
+    { return m_expanded; }
 
-  // Full path from root folder
-  QString fullPath() const;
+    // Full path from root folder
+    QString fullPath() const;
 
-  // Duplicate item with all childs
-  TreeItem * duplicateItem( TreeItem * newParent ) const;
+    // Duplicate item with all childs
+    TreeItem * duplicateItem( TreeItem * newParent ) const;
 
-  // Check if item is ancestor of this element
-  bool haveAncestor( TreeItem * item );
+    // Check if item is ancestor of this element
+    bool haveAncestor( TreeItem * item );
 
-  // Check if same item already presented between childs
-  bool haveSameItem( TreeItem * item, bool allowSelf );
+    // Check if same item already presented between childs
+    bool haveSameItem( TreeItem * item, bool allowSelf );
 
-  // Retrieve text from all childs
-  QStringList getTextFromAllChilds() const;
+    // Retrieve text from all childs
+    QStringList getTextFromAllChilds() const;
 
 private:
-  QList< TreeItem * > childItems;
-  QVariant itemData;
-  TreeItem *parentItem;
-  Type m_type;
-  bool m_expanded;
+    QList< TreeItem * > childItems;
+    QVariant itemData;
+    TreeItem *parentItem;
+    Type m_type;
+    bool m_expanded;
 };
 
 class FavoritesModel : public QAbstractItemModel
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit FavoritesModel( QString favoritesFilename, QObject * parent = 0 );
-  ~FavoritesModel();
+    explicit FavoritesModel( QString favoritesFilename, QObject * parent = 0 );
+    ~FavoritesModel();
 
-  QVariant data( const QModelIndex &index, int role ) const;
-  Qt::ItemFlags flags( const QModelIndex &index ) const;
-  QVariant headerData( int section, Qt::Orientation orientation,
-                       int role = Qt::DisplayRole ) const;
-  QModelIndex index( int row, int column,
-                     const QModelIndex &parent = QModelIndex() ) const;
-  QModelIndex parent( const QModelIndex &index ) const;
-  int rowCount( const QModelIndex &parent = QModelIndex() ) const;
-  int columnCount( const QModelIndex &parent = QModelIndex() ) const;
-  bool removeRows( int row, int count, const QModelIndex &parent );
-  bool setData( const QModelIndex &index, const QVariant &value, int role );
+    QVariant data( const QModelIndex &index, int role ) const;
+    Qt::ItemFlags flags( const QModelIndex &index ) const;
+    QVariant headerData( int section, Qt::Orientation orientation,
+                         int role = Qt::DisplayRole ) const;
+    QModelIndex index( int row, int column,
+                       const QModelIndex &parent = QModelIndex() ) const;
+    QModelIndex parent( const QModelIndex &index ) const;
+    int rowCount( const QModelIndex &parent = QModelIndex() ) const;
+    int columnCount( const QModelIndex &parent = QModelIndex() ) const;
+    bool removeRows( int row, int count, const QModelIndex &parent );
+    bool setData( const QModelIndex &index, const QVariant &value, int role );
 
-  // Drag & drop support
-  Qt::DropActions supportedDropActions() const;
-  QStringList mimeTypes() const;
-  QMimeData *mimeData(const QModelIndexList &indexes) const;
-  bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                    int row, int column, const QModelIndex &par);
+    // Drag & drop support
+    Qt::DropActions supportedDropActions() const;
+    QStringList mimeTypes() const;
+    QMimeData *mimeData(const QModelIndexList &indexes) const;
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action,
+                      int row, int column, const QModelIndex &par);
 
-  // Restore nodes expanded state after data loading
-  void checkNodeForExpand( const TreeItem * item, const QModelIndex &parent );
-  void checkAllNodesForExpand();
+    // Restore nodes expanded state after data loading
+    void checkNodeForExpand( const TreeItem * item, const QModelIndex &parent );
+    void checkAllNodesForExpand();
 
-  // Retrieve text data for indexes
-  QStringList getTextForIndexes( QModelIndexList const & idxList ) const;
+    // Retrieve text data for indexes
+    QStringList getTextForIndexes( QModelIndexList const & idxList ) const;
 
-  // Delete items for indexes
-  void removeItemsForIndexes( QModelIndexList const & idxList );
+    // Delete items for indexes
+    void removeItemsForIndexes( QModelIndexList const & idxList );
 
-  // Add new folder beside item and return its index
-  // or empty index if fail
-  QModelIndex addNewFolder( QModelIndex const & idx );
+    // Add new folder beside item and return its index
+    // or empty index if fail
+    QModelIndex addNewFolder( QModelIndex const & idx );
 
-  // Add new headword to given folder
-  // return false if it already exists there
-  bool addNewHeadword( QString const & path, QString const & headword );
+    // Add new headword to given folder
+    // return false if it already exists there
+    bool addNewHeadword( QString const & path, QString const & headword );
 
-  // Remove headword from given folder
-  // return false if failed
-  bool removeHeadword( QString const & path, QString const & headword );
+    // Remove headword from given folder
+    // return false if failed
+    bool removeHeadword( QString const & path, QString const & headword );
 
-  // Return true if headwors is already presented in Favorites
-  bool isHeadwordPresent( QString const & path, QString const & headword );
+    // Return true if headwors is already presented in Favorites
+    bool isHeadwordPresent( QString const & path, QString const & headword );
 
-  // Return path in the tree to item
-  QString pathToItem( QModelIndex const & idx );
+    // Return path in the tree to item
+    QString pathToItem( QModelIndex const & idx );
 
-  TreeItem::Type itemType( QModelIndex const & idx )
-  { return getItem( idx )->type(); }
+    TreeItem::Type itemType( QModelIndex const & idx )
+    { return getItem( idx )->type(); }
 
-  // Export/import Favorites
-  void getDataInXml( QByteArray & dataStr );
-  void getDataInPlainText( QString & dataStr );
-  bool setDataFromXml( QString const & dataStr );
+    // Export/import Favorites
+    void getDataInXml( QByteArray & dataStr );
+    void getDataInPlainText( QString & dataStr );
+    bool setDataFromXml( QString const & dataStr );
 
-  void saveData();
+    void saveData();
 
 public slots:
-  void itemCollapsed ( const QModelIndex & index );
-  void itemExpanded ( const QModelIndex & index );
+    void itemCollapsed ( const QModelIndex & index );
+    void itemExpanded ( const QModelIndex & index );
 
 signals:
-  void expandItem( const QModelIndex & index );
+    void expandItem( const QModelIndex & index );
 
 protected:
-  void readData();
-  void addFolder( TreeItem * parent, QDomNode & node );
-  void storeFolder( TreeItem * folder, QDomNode & node );
+    void readData();
+#ifdef GD_PUGIXML_XSERIAL
+    void addFolder( TreeItem * parent, pugi::xml_node & node );
+    void storeFolder( TreeItem * folder, pugi::xml_node & node );
+#else
+    void addFolder( TreeItem * parent, QDomNode & node );
+    void storeFolder( TreeItem * folder, QDomNode & node );
+#endif
 
-  // Find item in folder
-  QModelIndex findItemInFolder( QString const & itemName, int itemType,
-                                QModelIndex const & parentIdx );
+    // Find item in folder
+    QModelIndex findItemInFolder( QString const & itemName, int itemType,
+                                  QModelIndex const & parentIdx );
 
-  TreeItem *getItem( const QModelIndex &index ) const;
+    TreeItem *getItem( const QModelIndex &index ) const;
 
-  // Find folder with given name or create it if folder not exist
-  QModelIndex forceFolder( QString const & name, QModelIndex const & parentIdx );
+    // Find folder with given name or create it if folder not exist
+    QModelIndex forceFolder( QString const & name, QModelIndex const & parentIdx );
 
-  // Add headword to given folder
-  // return false if such headwordalready exists
-  bool addHeadword( QString const & word, QModelIndex const & parentIdx );
+    // Add headword to given folder
+    // return false if such headwordalready exists
+    bool addHeadword( QString const & word, QModelIndex const & parentIdx );
 
-  // Return tree level for item
-  int level( QModelIndex const & idx );
+    // Return tree level for item
+    int level( QModelIndex const & idx );
 
 private:
-  QString m_favoritesFilename;
-  TreeItem * rootItem;
-  QDomDocument dom;
-  bool dirty;
+    QString m_favoritesFilename;
+    TreeItem * rootItem;
+    bool dirty;
 };
 
 #define FAVORITES_MIME_TYPE "application/x-goldendict-tree-items"
 
 class FavoritesMimeData : public QMimeData
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  FavoritesMimeData() : QMimeData()
-  {}
+    FavoritesMimeData() : QMimeData()
+    {}
 
-  virtual QStringList formats() const
-  { return QStringList( QString::fromLatin1( FAVORITES_MIME_TYPE ) ); }
+    virtual QStringList formats() const
+    { return QStringList( QString::fromLatin1( FAVORITES_MIME_TYPE ) ); }
 
-  virtual bool hasFormat(const QString & mimetype) const
-  { return mimetype.compare( QString::fromLatin1( FAVORITES_MIME_TYPE ) ) == 0; }
+    virtual bool hasFormat(const QString & mimetype) const
+    { return mimetype.compare( QString::fromLatin1( FAVORITES_MIME_TYPE ) ) == 0; }
 
-  void setIndexesList( QModelIndexList const & list )
-  { indexes.clear(); indexes = list; }
+    void setIndexesList( QModelIndexList const & list )
+    { indexes.clear(); indexes = list; }
 
-  QModelIndexList const & getIndexesList() const
-  { return indexes; }
+    QModelIndexList const & getIndexesList() const
+    { return indexes; }
 
 private:
-  QStringList mimeFormats;
-  QModelIndexList indexes;
+    QStringList mimeFormats;
+    QModelIndexList indexes;
 };
 
 #endif // __FAVORITIESPANEWIDGET_HH__INCLUDED__

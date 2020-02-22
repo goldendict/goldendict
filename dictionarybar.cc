@@ -6,398 +6,399 @@
 #include <QProcess>
 #include "gddebug.hh"
 #include "fsencoding.hh"
+#include "dictionary.hh"
 #include <QDebug>
 
 using std::vector;
 
 DictionaryBar::DictionaryBar( QWidget * parent,
                               Config::Events & events, QString const & _editDictionaryCommand, unsigned short const & maxDictionaryRefsInContextMenu_ ):
-  QToolBar( tr( "&Dictionary Bar" ), parent ),
-  mutedDictionaries( 0 ),
-  configEvents( events ),
-  editDictionaryCommand( _editDictionaryCommand ),
-  maxDictionaryRefsInContextMenu(maxDictionaryRefsInContextMenu_),
-  use14x21( false ),
-  timerId( 0 )
+    QToolBar( tr( "&Dictionary Bar" ), parent ),
+    mutedDictionaries( 0 ),
+    configEvents( events ),
+    editDictionaryCommand( _editDictionaryCommand ),
+    maxDictionaryRefsInContextMenu(maxDictionaryRefsInContextMenu_),
+    use14x21( false ),
+    timerId( 0 )
 {
-  setObjectName( "dictionaryBar" );
+    setObjectName( "dictionaryBar" );
 
-  maxDictionaryRefsAction = new QAction(  QIcon(":/icons/expand_opt.png"), tr( "Extended menu with all dictionaries..." ), this );
+    maxDictionaryRefsAction = new QAction(  QIcon(":/icons/expand_opt.png"), tr( "Extended menu with all dictionaries..." ), this );
 
-  connect( &events, SIGNAL( mutedDictionariesChanged() ),
-           this, SLOT( mutedDictionariesChanged() ) );
+    connect( &events, SIGNAL( mutedDictionariesChanged() ),
+             this, SLOT( mutedDictionariesChanged() ) );
 
-  connect( this, SIGNAL(actionTriggered(QAction*)),
-           this, SLOT(actionWasTriggered(QAction*)) );
+    connect( this, SIGNAL(actionTriggered(QAction*)),
+             this, SLOT(actionWasTriggered(QAction*)) );
 
-  installEventFilter( this );
+    installEventFilter( this );
 }
 
 static QString elideDictName( QString const & name )
 {
-  // Some names are way too long -- we insert an ellipsis in the middle of those
+    // Some names are way too long -- we insert an ellipsis in the middle of those
 
-  int const maxSize = 33;
+    int const maxSize = 33;
 
-  if ( name.size() <= maxSize )
-    return name;
+    if ( name.size() <= maxSize )
+        return name;
 
-  int const pieceSize = maxSize / 2 - 1;
+    int const pieceSize = maxSize / 2 - 1;
 
-  return name.left( pieceSize ) + QChar( 0x2026 ) + name.right( pieceSize );
+    return name.left( pieceSize ) + QChar( 0x2026 ) + name.right( pieceSize );
 }
 
 void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
                                      const & dictionaries )
 {
-  setUpdatesEnabled( false );
+    setUpdatesEnabled( false );
 
-  allDictionaries.clear();
-  allDictionaries = dictionaries;
+    allDictionaries.clear();
+    allDictionaries = dictionaries;
 
-  clear();
-  dictActions.clear();
+    clear();
+    dictActions.clear();
 
-  use14x21 = false;
+    use14x21 = false;
 
-  for( unsigned x = 0; x < dictionaries.size(); ++x )
-  {
-    QIcon icon = dictionaries[ x ]->getNativeIcon();
+    for( unsigned x = 0; x < dictionaries.size(); ++x )
+    {
+        QIcon icon = dictionaries[ x ]->getNativeIcon();
 
-    QString dictName = QString::fromUtf8( dictionaries[ x ]->
-                                            getDescName().c_str() );
+        QString dictName = QString::fromUtf8( dictionaries[ x ]->
+                                              getDescName().c_str() );
 
-    QAction * action = addAction( icon, elideDictName( dictName ) );
+        QAction * action = addAction( icon, elideDictName( dictName ) );
 
-    action->setToolTip( dictName ); // Tooltip need not be shortened
+        action->setToolTip( dictName ); // Tooltip need not be shortened
 
-    QString id = QString::fromStdString( dictionaries[ x ]->getId() );
+        QString id = QString::fromStdString( dictionaries[ x ]->getId() );
 
-    action->setData( id );
+        action->setData( id );
 
-    action->setCheckable( true );
+        action->setCheckable( true );
 
-    action->setChecked( mutedDictionaries ? !mutedDictionaries->contains( id ) : true );
+        action->setChecked( mutedDictionaries ? !mutedDictionaries->contains( id ) : true );
 
-    QList< QSize > sizes = icon.availableSizes();
+        QList< QSize > sizes = icon.availableSizes();
 
-    for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
-         ++i )
-      if ( i->width() == 14 && i->height() == 21 )
-        use14x21 = true;
+        for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
+             ++i )
+            if ( i->width() == 14 && i->height() == 21 )
+                use14x21 = true;
 
-    dictActions.append( action );
-  }
+        dictActions.append( action );
+    }
 
-  setDictionaryIconSize( 21 );
+    setDictionaryIconSize( 21 );
 
-  setUpdatesEnabled( true );
+    setUpdatesEnabled( true );
 }
 
 void DictionaryBar::setDictionaryIconSize( int extent )
 {
-  setIconSize( QSize( use14x21 ? extent*2/3 : extent, extent  ) );
+    setIconSize( QSize( use14x21 ? extent*2/3 : extent, extent  ) );
 }
 
 void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )
 {
-  showContextMenu( event );
+    showContextMenu( event );
 }
 
 void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
 {
-  QMenu menu( this );
+    QMenu menu( this );
 
-  QAction * editAction =
-      menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
+    QAction * editAction =
+            menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
 
-  QAction * infoAction = NULL;
-  QAction * headwordsAction = NULL;
-  QAction * editDictAction = NULL;
-  QAction * openDictFolderAction = NULL;
-  QString dictFilename;
+    QAction * infoAction = NULL;
+    QAction * headwordsAction = NULL;
+    QAction * editDictAction = NULL;
+    QAction * openDictFolderAction = NULL;
+    QString dictFilename;
 
-  QAction * dictAction = actionAt( event->x(), event->y() );
-  if( dictAction )
-  {
-    Dictionary::Class *pDict = NULL;
-    QString id = dictAction->data().toString();
-    for( unsigned i = 0; i < allDictionaries.size(); i++ )
+    QAction * dictAction = actionAt( event->x(), event->y() );
+    if( dictAction )
     {
-      if( id.compare( allDictionaries[ i ]->getId().c_str() ) == 0 )
-      {
-        pDict = allDictionaries[ i ].get();
-        break;
-      }
-    }
-
-    if( pDict )
-    {
-      infoAction =  menu.addAction( tr( "Dictionary info" ) );
-
-      if( pDict->isLocalDictionary() )
-      {
-        if( pDict->getWordCount() > 0 )
-          headwordsAction = menu.addAction( tr( "Dictionary headwords" ) );
-
-        openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
-
-        if( !editDictionaryCommand.isEmpty() )
+        Dictionary::Class *pDict = NULL;
+        QString id = dictAction->data().toString();
+        for( unsigned i = 0; i < allDictionaries.size(); i++ )
         {
-          if( !pDict->getMainFilename().isEmpty() )
-          {
-            dictFilename = pDict->getMainFilename();
-            editDictAction = menu.addAction( tr( "Edit dictionary" ) );
-          }
+            if( id.compare( allDictionaries[ i ]->getId().c_str() ) == 0 )
+            {
+                pDict = allDictionaries[ i ].get();
+                break;
+            }
         }
-      }
+
+        if( pDict )
+        {
+            infoAction =  menu.addAction( tr( "Dictionary info" ) );
+
+            if( pDict->isLocalDictionary() )
+            {
+                if( pDict->getWordCount() > 0 )
+                    headwordsAction = menu.addAction( tr( "Dictionary headwords" ) );
+
+                openDictFolderAction = menu.addAction( tr( "Open dictionary folder" ) );
+
+                if( !editDictionaryCommand.isEmpty() )
+                {
+                    if( !pDict->getMainFilename().isEmpty() )
+                    {
+                        dictFilename = pDict->getMainFilename();
+                        editDictAction = menu.addAction( tr( "Edit dictionary" ) );
+                    }
+                }
+            }
+        }
     }
-  }
 
-  if ( !dictActions.empty() )
-    menu.addSeparator();
+    if ( !dictActions.empty() )
+        menu.addSeparator();
 
-  unsigned refsAdded = 0;
+    unsigned refsAdded = 0;
 
-  for( QList< QAction * >::iterator i = dictActions.begin();
-       i != dictActions.end(); ++i )
-  {
-
-    // Enough! Or the menu would become too large.
-    if ( refsAdded++ >= maxDictionaryRefsInContextMenu && !extended )
+    for( QList< QAction * >::iterator i = dictActions.begin();
+         i != dictActions.end(); ++i )
     {
-      menu.addSeparator();
-      menu.addAction( maxDictionaryRefsAction );
-      break;
+
+        // Enough! Or the menu would become too large.
+        if ( refsAdded++ >= maxDictionaryRefsInContextMenu && !extended )
+        {
+            menu.addSeparator();
+            menu.addAction( maxDictionaryRefsAction );
+            break;
+        }
+
+        // We need new action, since the one we have has text elided
+        QAction * action = menu.addAction( (*i)->icon(), (*i)->toolTip() );
+
+        action->setCheckable( true );
+        action->setChecked( (*i)->isChecked() );
+        action->setData( QVariant::fromValue( (void *)*i ) );
+        // Force "icon in menu" on all platforms, for
+        // usability reasons.
+        action->setIconVisibleInMenu( true );
     }
 
-    // We need new action, since the one we have has text elided
-    QAction * action = menu.addAction( (*i)->icon(), (*i)->toolTip() );
+    connect( this, SIGNAL( closePopupMenu() ), &menu, SLOT( close() ) );
 
-    action->setCheckable( true );
-    action->setChecked( (*i)->isChecked() );
-    action->setData( QVariant::fromValue( (void *)*i ) );
-    // Force "icon in menu" on all platforms, for
-    // usability reasons.
-    action->setIconVisibleInMenu( true );
-  }
+    QAction * result = menu.exec( event->globalPos() );
 
-  connect( this, SIGNAL( closePopupMenu() ), &menu, SLOT( close() ) );
+    if( result && result == infoAction )
+    {
+        QString id = dictAction->data().toString();
+        emit showDictionaryInfo( id );
+        return;
+    }
 
-  QAction * result = menu.exec( event->globalPos() );
+    if( result && result == headwordsAction )
+    {
+        QString id = dictAction->data().toString();
+        emit showDictionaryHeadwords( id );
+        return;
+    }
 
-  if( result && result == infoAction )
-  {
-    QString id = dictAction->data().toString();
-    emit showDictionaryInfo( id );
-    return;
-  }
+    if( result && result == openDictFolderAction )
+    {
+        QString id = dictAction->data().toString();
+        emit openDictionaryFolder( id );
+        return;
+    }
 
-  if( result && result == headwordsAction )
-  {
-    QString id = dictAction->data().toString();
-    emit showDictionaryHeadwords( id );
-    return;
-  }
+    if( result && result == editDictAction )
+    {
+        QString command( editDictionaryCommand );
+        command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
+        if( !QProcess::startDetached( command ) )
+            QApplication::beep();
+    }
 
-  if( result && result == openDictFolderAction )
-  {
-    QString id = dictAction->data().toString();
-    emit openDictionaryFolder( id );
-    return;
-  }
+    if( result && result == maxDictionaryRefsAction )
+    {
+        showContextMenu( event, true );
+    }
 
-  if( result && result == editDictAction )
-  {
-    QString command( editDictionaryCommand );
-    command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
-    if( !QProcess::startDetached( command ) )
-      QApplication::beep();
-  }
+    if ( result == editAction )
+        emit editGroupRequested();
+    else
+        if ( result && result->data().value< void * >() )
+            ( ( QAction * )( result->data().value< void * >() ) )->trigger();
 
-  if( result && result == maxDictionaryRefsAction )
-  {
-    showContextMenu( event, true );
-  }
-
-  if ( result == editAction )
-    emit editGroupRequested();
-  else
-  if ( result && result->data().value< void * >() )
-    ( ( QAction * )( result->data().value< void * >() ) )->trigger();
-
-  event->accept();
+    event->accept();
 }
 
 void DictionaryBar::mutedDictionariesChanged()
 {
-  //DPRINTF( "Muted dictionaries changed\n" );
+    //DPRINTF( "Muted dictionaries changed\n" );
 
-  if( !mutedDictionaries )
-    return;
+    if( !mutedDictionaries )
+        return;
 
-  // Update actions
+    // Update actions
 
-  setUpdatesEnabled( false );
+    setUpdatesEnabled( false );
 
-  for( QList< QAction * >::iterator i = dictActions.begin();
-       i != dictActions.end(); ++i )
-  {
-    bool isUnmuted = !mutedDictionaries->contains( (*i)->data().toString() );
+    for( QList< QAction * >::iterator i = dictActions.begin();
+         i != dictActions.end(); ++i )
+    {
+        bool isUnmuted = !mutedDictionaries->contains( (*i)->data().toString() );
 
-    if ( isUnmuted != (*i)->isChecked() )
-      (*i)->setChecked( isUnmuted );
-  }
+        if ( isUnmuted != (*i)->isChecked() )
+            (*i)->setChecked( isUnmuted );
+    }
 
-  setUpdatesEnabled( true );
+    setUpdatesEnabled( true );
 }
 
 void DictionaryBar::actionWasTriggered( QAction * action )
 {
-  if( !mutedDictionaries )
-    return;
+    if( !mutedDictionaries )
+        return;
 
-  QString id = action->data().toString();
+    QString id = action->data().toString();
 
-  if ( id.isEmpty() )
-    return; // Some weird action, not our button
+    if ( id.isEmpty() )
+        return; // Some weird action, not our button
 
-  if ( QApplication::keyboardModifiers() &
+    if ( QApplication::keyboardModifiers() &
          ( Qt::ControlModifier | Qt::ShiftModifier ) )
-  {
-    // Solo mode -- either use the dictionary exclusively, or toggle
-    // back all dictionaries if we do that already.
-
-    // Are we solo already?
-
-    bool isSolo = true;
-
-    // For solo, all dictionaries must be unchecked, since we're handling
-    // the result of the dictionary being (un)checked, and in case we were
-    // in solo, now we would end up with no dictionaries being checked at all.
-    for( QList< QAction * >::iterator i = dictActions.begin();
-         i != dictActions.end(); ++i )
     {
-      if ( (*i)->isChecked() )
-      {
-        isSolo = false;
-        break;
-      }
-    }
+        // Solo mode -- either use the dictionary exclusively, or toggle
+        // back all dictionaries if we do that already.
 
-    if ( isSolo )
-    {
-      // Restore or clear all the dictionaries
-      if ( QApplication::keyboardModifiers() & Qt::ShiftModifier )
-        *mutedDictionaries = storedMutedSet;
-      else
-      {
+        // Are we solo already?
+
+        bool isSolo = true;
+
+        // For solo, all dictionaries must be unchecked, since we're handling
+        // the result of the dictionary being (un)checked, and in case we were
+        // in solo, now we would end up with no dictionaries being checked at all.
         for( QList< QAction * >::iterator i = dictActions.begin();
              i != dictActions.end(); ++i )
-          mutedDictionaries->remove( (*i)->data().toString() );
-      }
-      storedMutedSet.clear();
-    }
-    else
-    {
-      // Save dictionaries state
-      storedMutedSet = *mutedDictionaries;
+        {
+            if ( (*i)->isChecked() )
+            {
+                isSolo = false;
+                break;
+            }
+        }
 
-      // Make dictionary solo
-      for( QList< QAction * >::iterator i = dictActions.begin();
-           i != dictActions.end(); ++i )
-      {
-        QString dictId = (*i)->data().toString();
-
-        if ( dictId == id )
-          mutedDictionaries->remove( dictId );
+        if ( isSolo )
+        {
+            // Restore or clear all the dictionaries
+            if ( QApplication::keyboardModifiers() & Qt::ShiftModifier )
+                *mutedDictionaries = storedMutedSet;
+            else
+            {
+                for( QList< QAction * >::iterator i = dictActions.begin();
+                     i != dictActions.end(); ++i )
+                    mutedDictionaries->remove( (*i)->data().toString() );
+            }
+            storedMutedSet.clear();
+        }
         else
-          mutedDictionaries->insert( dictId );
-      }
-    }  
-    configEvents.signalMutedDictionariesChanged();
-  }
-  else
-  {
-    // Normal mode
+        {
+            // Save dictionaries state
+            storedMutedSet = *mutedDictionaries;
 
-    storedMutedSet.clear();
+            // Make dictionary solo
+            for( QList< QAction * >::iterator i = dictActions.begin();
+                 i != dictActions.end(); ++i )
+            {
+                QString dictId = (*i)->data().toString();
 
-    if ( action->isChecked() )
-    {
-      // Unmute the dictionary
-
-      if ( mutedDictionaries->contains( id ) )
-      {
-        mutedDictionaries->remove( id );
+                if ( dictId == id )
+                    mutedDictionaries->remove( dictId );
+                else
+                    mutedDictionaries->insert( dictId );
+            }
+        }
         configEvents.signalMutedDictionariesChanged();
-      }
     }
     else
     {
-      // Mute the dictionary
+        // Normal mode
 
-      if ( !mutedDictionaries->contains( id ) )
-      {
-        mutedDictionaries->insert( id );
-        configEvents.signalMutedDictionariesChanged();
-      }
+        storedMutedSet.clear();
+
+        if ( action->isChecked() )
+        {
+            // Unmute the dictionary
+
+            if ( mutedDictionaries->contains( id ) )
+            {
+                mutedDictionaries->remove( id );
+                configEvents.signalMutedDictionariesChanged();
+            }
+        }
+        else
+        {
+            // Mute the dictionary
+
+            if ( !mutedDictionaries->contains( id ) )
+            {
+                mutedDictionaries->insert( id );
+                configEvents.signalMutedDictionariesChanged();
+            }
+        }
     }
-  }
 }
 
 void DictionaryBar::dictsPaneClicked( const QString & id )
 {
-  if ( !isVisible() )
-    return;
+    if ( !isVisible() )
+        return;
 
-  for( QList< QAction * >::iterator i = dictActions.begin();
-       i != dictActions.end(); ++i )
-  {
-    QString dictId = (*i)->data().toString();
-    if ( dictId == id )
+    for( QList< QAction * >::iterator i = dictActions.begin();
+         i != dictActions.end(); ++i )
     {
-      (*i)->activate( QAction::Trigger );
-      break;
+        QString dictId = (*i)->data().toString();
+        if ( dictId == id )
+        {
+            (*i)->activate( QAction::Trigger );
+            break;
+        }
     }
-  }
 }
 
 bool DictionaryBar::eventFilter( QObject * obj, QEvent * ev )
 {
-  if(obj == this && !isFloating() )
-  {
-    QPoint pt = parentWidget()->mapFromGlobal( QCursor::pos() );
-    switch( ev->type() )
+    if(obj == this && !isFloating() )
     {
-      case QEvent::Leave : if( geometry().contains( pt ) )
-                           {
-                             if( timerId )
-                               killTimer( timerId );
-                             timerId = startTimer( 500 );
-                             return true;
-                           }
-                           break;
-     case QEvent::Enter :  if( timerId != 0)
-                           {
-                             killTimer( timerId );
-                             timerId = 0;
-                           }
-                           break;
-      case QEvent::Timer:  if( static_cast< QTimerEvent * >( ev )->timerId() == timerId )
-                           {
-                             if( !geometry().contains( pt ) )
-                             {
-                               killTimer( timerId );
-                               timerId = 0;
-                               QEvent event( QEvent::Leave );
-                               QApplication::sendEvent( this, &event );
-                             }
-                             return true;
-                           }
-                           break;
-      default:             break;
+        QPoint pt = parentWidget()->mapFromGlobal( QCursor::pos() );
+        switch( ev->type() )
+        {
+        case QEvent::Leave : if( geometry().contains( pt ) )
+            {
+                if( timerId )
+                    killTimer( timerId );
+                timerId = startTimer( 500 );
+                return true;
+            }
+            break;
+        case QEvent::Enter :  if( timerId != 0)
+            {
+                killTimer( timerId );
+                timerId = 0;
+            }
+            break;
+        case QEvent::Timer:  if( static_cast< QTimerEvent * >( ev )->timerId() == timerId )
+            {
+                if( !geometry().contains( pt ) )
+                {
+                    killTimer( timerId );
+                    timerId = 0;
+                    QEvent event( QEvent::Leave );
+                    QApplication::sendEvent( this, &event );
+                }
+                return true;
+            }
+            break;
+        default:             break;
+        }
     }
-  }
-  return false;
+    return false;
 }

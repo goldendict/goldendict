@@ -6,12 +6,12 @@
 
 void TreeView::dropEvent( QDropEvent * event )
 {
-  QTreeView::dropEvent( event );
+    QTreeView::dropEvent( event );
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-  // Qt 4 don't check success of drop operation. Add turnaround.
+    // Qt 4 don't check success of drop operation. Add turnaround.
 
-  if( !event->isAccepted() )
-    event->setDropAction( Qt::IgnoreAction );
+    if( !event->isAccepted() )
+        event->setDropAction( Qt::IgnoreAction );
 #endif
 }

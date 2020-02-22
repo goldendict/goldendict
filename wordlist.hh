@@ -5,40 +5,39 @@
 #define WORDLIST_HH
 
 #include <QListWidget>
-#include <QLineEdit>
-
-#include "wordfinder.hh"
+class WordFinder;
+class QLineEdit;
 
 class WordList : public QListWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit WordList(QWidget * parent = 0);
-  void attachFinder(WordFinder * finder);
-  virtual void setTranslateLine(QLineEdit * line)
-  { translateLine = line; }
+    explicit WordList(QWidget * parent = 0);
+    void attachFinder(WordFinder * finder);
+    virtual void setTranslateLine(QLineEdit * line)
+    { translateLine = line; }
 
 protected:
-  virtual void resizeEvent( QResizeEvent * ev );
+    virtual void resizeEvent( QResizeEvent * ev );
 
 signals:
-  void statusBarMessage(QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
-  void contentChanged();
+    void statusBarMessage(QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap());
+    void contentChanged();
 
 public slots:
 
 private slots:
-  void prefixMatchUpdated();
-  void prefixMatchFinished();
-  void updateMatchResults( bool finished );
+    void prefixMatchUpdated();
+    void prefixMatchFinished();
+    void updateMatchResults( bool finished );
 
 private:
-  void refreshTranslateLine();
+    void refreshTranslateLine();
 
-  WordFinder * wordFinder;
-  QLineEdit * translateLine;
+    WordFinder * wordFinder;
+    QLineEdit * translateLine;
 
-  QVector< QSize > resizedSizes;
+    QVector< QSize > resizedSizes;
 };
 
 #endif // WORDLIST_HH

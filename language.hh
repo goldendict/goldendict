@@ -4,7 +4,6 @@
 #ifndef __LANGUAGE_HH_INCLUDED__
 #define __LANGUAGE_HH_INCLUDED__
 
-#include <QString>
 #include "wstring_qt.hh"
 /// Language-specific stuff - codes, names, ids etc.
 namespace Language {
@@ -15,10 +14,10 @@ typedef quint32 Id;
 
 enum
 {
-  /// Value for Id which signifies that the language is unknown or unspecified.
-  Unknown = 0,
-  /// Value for Id which signifies that the language can be any, or all of them.
-  Any =  0xFFffFFff
+    /// Value for Id which signifies that the language is unknown or unspecified.
+    Unknown = 0,
+    /// Value for Id which signifies that the language can be any, or all of them.
+    Any =  0xFFffFFff
 };
 
 /// Returns name in English for the given Id. If the Id is incorrect, or has

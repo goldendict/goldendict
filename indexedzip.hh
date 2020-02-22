@@ -5,43 +5,42 @@
 #define __INDEXEDZIP_HH_INCLUDED__
 
 #include "btreeidx.hh"
-#include <QFile>
 #include "zipfile.hh"
 
 /// Allows using a btree index to read zip files. Basically built on top of
 /// the base dictionary infrastructure adapted for zips.
 class IndexedZip: public BtreeIndexing::BtreeIndex
 {
-  ZipFile::SplitZipFile zip;
-  bool zipIsOpen;
+    ZipFile::SplitZipFile zip;
+    bool zipIsOpen;
 
 public:
 
-  IndexedZip(): zipIsOpen( false )
-  {}
-  virtual ~IndexedZip(){}
+    IndexedZip(): zipIsOpen( false )
+    {}
+    virtual ~IndexedZip(){}
 
-  /// Opens the index. The values are those previously returned by buildIndex().
-  using BtreeIndexing::BtreeIndex::openIndex;
+    /// Opens the index. The values are those previously returned by buildIndex().
+    using BtreeIndexing::BtreeIndex::openIndex;
 
-  /// Opens the zip file itself. Returns true if succeeded, false otherwise.
-  bool openZipFile( QString const & );
+    /// Opens the zip file itself. Returns true if succeeded, false otherwise.
+    bool openZipFile( QString const & );
 
-  /// Returns true if the zip is open, false otherwise.
-  bool isOpen() const
-  { return zipIsOpen; }
+    /// Returns true if the zip is open, false otherwise.
+    bool isOpen() const
+    { return zipIsOpen; }
 
-  /// Checks whether the given file exists in the zip file or not.
-  /// Note that this function is thread-safe, since it does not access zip file.
-  bool hasFile( gd::wstring const & name );
+    /// Checks whether the given file exists in the zip file or not.
+    /// Note that this function is thread-safe, since it does not access zip file.
+    bool hasFile( gd::wstring const & name );
 
-  /// Attempts loading the given file into the given vector. Returns true on
-  /// success, false otherwise.
-  bool loadFile( gd::wstring const & name, std::vector< char > & );
-  bool loadFile( uint32_t offset, std::vector< char > & );
+    /// Attempts loading the given file into the given vector. Returns true on
+    /// success, false otherwise.
+    bool loadFile( gd::wstring const & name, std::vector< char > & );
+    bool loadFile( uint32_t offset, std::vector< char > & );
 
-  /// Index compressed files in zip file
-  bool indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 * filesCount = 0 );
+    /// Index compressed files in zip file
+    bool indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 * filesCount = 0 );
 };
 
 #endif

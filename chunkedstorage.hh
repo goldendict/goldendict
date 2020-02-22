@@ -33,60 +33,60 @@ DEF_EX( exFailedToDecompressChunk, "Failed to decompress a chunk", Ex )
 /// This class writes data blocks in chunks.
 class Writer
 {
-  vector< uint32_t > offsets;
-  File::Class & file;
-  size_t scratchPadOffset, scratchPadSize;
+    vector< uint32_t > offsets;
+    File::Class & file;
+    size_t scratchPadOffset, scratchPadSize;
 
-public:
+    public:
 
-  Writer( File::Class & );
+    Writer( File::Class & );
 
-  /// Starts new block. Returns its address.
-  uint32_t startNewBlock();
+    /// Starts new block. Returns its address.
+    uint32_t startNewBlock();
 
-  /// Add data to the previously started block.
-  void addToBlock( void const * data, size_t size );
+    /// Add data to the previously started block.
+    void addToBlock( void const * data, size_t size );
 
-  /// Finishes writing chunks and returns the offset to the chunk table which
-  /// gets written at the moment of finishing.
-  uint32_t finish();
+    /// Finishes writing chunks and returns the offset to the chunk table which
+    /// gets written at the moment of finishing.
+    uint32_t finish();
 
-private:
+    private:
 
-  /// Indicates that an address was allocated, which would mean the writeout
-  /// of the pending chunk is required even if its size is zero.
-  bool chunkStarted;
+    /// Indicates that an address was allocated, which would mean the writeout
+    /// of the pending chunk is required even if its size is zero.
+    bool chunkStarted;
 
-  // This buffer accumulates the chunk data until either enough data is
-  // stored (>=ChunkMaxSize), or there's no more data left to store.
-  vector< unsigned char > buffer;
+    // This buffer accumulates the chunk data until either enough data is
+    // stored (>=ChunkMaxSize), or there's no more data left to store.
+    vector< unsigned char > buffer;
 
-  // Here we compress the chunk before writing it out to file.
-  vector< unsigned char > bufferCompressed;
+    // Here we compress the chunk before writing it out to file.
+    vector< unsigned char > bufferCompressed;
 
-  // The amount of data stored in buffer so far. We keep it separate
-  // from buffer.size() for performance reasons; the latter one only
-  // grows, but never shrinks.
-  size_t bufferUsed;
+    // The amount of data stored in buffer so far. We keep it separate
+    // from buffer.size() for performance reasons; the latter one only
+    // grows, but never shrinks.
+    size_t bufferUsed;
 
-  void saveCurrentChunk();
+    void saveCurrentChunk();
 };
 
 /// This class reads data blocks previously written by Writer.
 class Reader
 {
-  vector< uint32_t > offsets;
-  File::Class & file;
+    vector< uint32_t > offsets;
+    File::Class & file;
 
 public:
-  /// Creates reader by giving it a file to read from and the offset returned
-  /// by Writer::finish().
-  Reader( File::Class &, uint32_t );
+    /// Creates reader by giving it a file to read from and the offset returned
+    /// by Writer::finish().
+    Reader( File::Class &, uint32_t );
 
-  /// Reads the block previously written by Writer, identified by its address.
-  /// Uses the user-provided storage to load the entire chunk, and then to
-  /// return a pointer to the requested block inside it.
-  char * getBlock( uint32_t address, vector< char > & );
+    /// Reads the block previously written by Writer, identified by its address.
+    /// Uses the user-provided storage to load the entire chunk, and then to
+    /// return a pointer to the requested block inside it.
+    char * getBlock( uint32_t address, vector< char > & );
 };
 
 }

@@ -1,7 +1,8 @@
 #ifndef LANGCODER_H
 #define LANGCODER_H
 
-#include <QtGui>
+#include <QIcon>
+#include <QMap>
 #include "wstring.hh"
 
 struct GDLangCode
@@ -12,59 +13,59 @@ struct GDLangCode
     char const * lang; // Language name in English
 };
 
-                   
+
 template <typename T, int N>
 inline int arraySize(T (&)[N])   { return N; }
 
 
 struct LangStruct
 {
-  int order;
-  quint32 code;
-  QIcon icon;
-  QString lang;
+    int order;
+    quint32 code;
+    QIcon icon;
+    QString lang;
 };
 
 class LangCoder
 {
 public:
-  LangCoder();
+    LangCoder();
 
-  static quint32 code2toInt(const char code[2])
-  { return ( ((quint32)code[1]) << 8 ) + (quint32)code[0]; }
+    static quint32 code2toInt(const char code[2])
+    { return ( ((quint32)code[1]) << 8 ) + (quint32)code[0]; }
 
-  static QString intToCode2( quint32 );
+    static QString intToCode2( quint32 );
 
-  /// Finds the id for the given language name, written in english. The search
-  /// is case- and punctuation insensitive.
-  static quint32 findIdForLanguage( gd::wstring const & );
+    /// Finds the id for the given language name, written in english. The search
+    /// is case- and punctuation insensitive.
+    static quint32 findIdForLanguage( gd::wstring const & );
 
-  static quint32 findIdForLanguageCode3( const char * );
+    static quint32 findIdForLanguageCode3( const char * );
 
-  static QPair<quint32,quint32> findIdsForName( QString const & );
-  static QPair<quint32,quint32> findIdsForFilename( QString const & );
+    static QPair<quint32,quint32> findIdsForName( QString const & );
+    static QPair<quint32,quint32> findIdsForFilename( QString const & );
 
-  static quint32 guessId( const QString & lang );
+    static quint32 guessId( const QString & lang );
 
-  /// Returns decoded name of language or empty string if not found.
-  static QString decode(quint32 code);
-  /// Returns icon for language or empty string if not found.
-  static QIcon icon(quint32 code);
+    /// Returns decoded name of language or empty string if not found.
+    static QString decode(quint32 code);
+    /// Returns icon for language or empty string if not found.
+    static QIcon icon(quint32 code);
 
-  /// Return true for RTL languages
-  static bool isLanguageRTL(quint32 code);
+    /// Return true for RTL languages
+    static bool isLanguageRTL(quint32 code);
 
-  //const QMap<quint32, int>& codes() { return codeMap; }
+    //const QMap<quint32, int>& codes() { return codeMap; }
 
-  LangStruct langStruct(quint32 code);
+    LangStruct langStruct(quint32 code);
 
-//	QString CodeToHtml(const QString &code);
+    //	QString CodeToHtml(const QString &code);
 
-//	bool CheckCode(QString &code);
+    //	bool CheckCode(QString &code);
 
 private:
-  QMap<quint32, int> codeMap;
-//	LangStruct dummyLS;
+    QMap<quint32, int> codeMap;
+    //	LangStruct dummyLS;
 };
 
 //extern LangCoder langCoder;

@@ -17,38 +17,38 @@
 
 bool KeyboardState::checkModifiersPressed( int mask )
 {
-  #if defined(Q_WS_QWS)
+#if defined(Q_WS_QWS)
     return false;
-  #elif defined(Q_OS_WIN32)
+#elif defined(Q_OS_WIN32)
 
-  return !(
-    ( mask & Alt && !( GetAsyncKeyState( VK_MENU ) & 0x8000 ) ) ||
-    ( mask & Ctrl && !( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) ) ||
-    ( mask & Shift && !( GetAsyncKeyState( VK_SHIFT ) & 0x8000 ) ) ||
-    ( mask & LeftAlt && !( GetAsyncKeyState( VK_LMENU ) & 0x8000 ) ) ||
-    ( mask & RightAlt && !( GetAsyncKeyState( VK_RMENU ) & 0x8000 ) ) ||
-    ( mask & LeftCtrl && !( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) ) ||
-    ( mask & RightCtrl && !( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) ) ||
-    ( mask & LeftShift && !( GetAsyncKeyState( VK_LSHIFT ) & 0x8000 ) ) ||
-    ( mask & RightShift && !( GetAsyncKeyState( VK_RSHIFT ) & 0x8000 ) ) );
+    return !(
+                ( mask & Alt && !( GetAsyncKeyState( VK_MENU ) & 0x8000 ) ) ||
+                ( mask & Ctrl && !( GetAsyncKeyState( VK_CONTROL ) & 0x8000 ) ) ||
+                ( mask & Shift && !( GetAsyncKeyState( VK_SHIFT ) & 0x8000 ) ) ||
+                ( mask & LeftAlt && !( GetAsyncKeyState( VK_LMENU ) & 0x8000 ) ) ||
+                ( mask & RightAlt && !( GetAsyncKeyState( VK_RMENU ) & 0x8000 ) ) ||
+                ( mask & LeftCtrl && !( GetAsyncKeyState( VK_LCONTROL ) & 0x8000 ) ) ||
+                ( mask & RightCtrl && !( GetAsyncKeyState( VK_RCONTROL ) & 0x8000 ) ) ||
+                ( mask & LeftShift && !( GetAsyncKeyState( VK_LSHIFT ) & 0x8000 ) ) ||
+                ( mask & RightShift && !( GetAsyncKeyState( VK_RSHIFT ) & 0x8000 ) ) );
 
-  #elif defined Q_OS_MAC
-  UInt32 keys = GetCurrentKeyModifiers();
-  return !(
-    ( mask & Alt && !( keys & ( 1 << optionKeyBit ) ) ) ||
-    ( mask & Ctrl && !( keys & ( 1 << cmdKeyBit ) ) ) ||
-    ( mask & Shift && !( keys & ( 1 << shiftKeyBit ) ) ) ||
-    ( mask & Win && !( keys & ( 1 << controlKeyBit ) ) ) );
-  #else
-  XkbStateRec state;
+#elif defined Q_OS_MAC
+    UInt32 keys = GetCurrentKeyModifiers();
+    return !(
+                ( mask & Alt && !( keys & ( 1 << optionKeyBit ) ) ) ||
+                ( mask & Ctrl && !( keys & ( 1 << cmdKeyBit ) ) ) ||
+                ( mask & Shift && !( keys & ( 1 << shiftKeyBit ) ) ) ||
+                ( mask & Win && !( keys & ( 1 << controlKeyBit ) ) ) );
+#else
+    XkbStateRec state;
 
-  XkbGetState( QX11Info::display(), XkbUseCoreKbd, &state );
+    XkbGetState( QX11Info::display(), XkbUseCoreKbd, &state );
 
-  return !(
-    ( mask & Alt && !( state.base_mods & Mod1Mask ) ) ||
-    ( mask & Ctrl && !( state.base_mods & ControlMask ) ) ||
-    ( mask & Shift && !( state.base_mods & ShiftMask ) ) ||
-    ( mask & Win && !( state.base_mods & Mod4Mask ) ) );
-  #endif
+    return !(
+                ( mask & Alt && !( state.base_mods & Mod1Mask ) ) ||
+                ( mask & Ctrl && !( state.base_mods & ControlMask ) ) ||
+                ( mask & Shift && !( state.base_mods & ShiftMask ) ) ||
+                ( mask & Win && !( state.base_mods & Mod4Mask ) ) );
+#endif
 }
 

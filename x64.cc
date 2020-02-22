@@ -31,7 +31,7 @@ bool isWow64()
 
 bool installx64Hooks()
 {
-STARTUPINFO startup;
+    STARTUPINFO startup;
 #ifndef Q_OS_WIN64
     if( !isWow64() )
         return false;

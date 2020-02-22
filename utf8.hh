@@ -51,10 +51,10 @@ extern void wirite_ins(QFile &ft, char const * from, char const * to);
     QFile ft(QString("z:\\")+QString(basename));\
     static bool first = true;\
     if(first) {\
-        first=false;\
-        ft.open(QFile::WriteOnly | QFile::Truncate);\
+    first=false;\
+    ft.open(QFile::WriteOnly | QFile::Truncate);\
     } else {\
-        ft.open(QFile::WriteOnly | QFile::Append);\
+    ft.open(QFile::WriteOnly | QFile::Append);\
     }\
     wirite_ins(ft, from, to);
 #endif

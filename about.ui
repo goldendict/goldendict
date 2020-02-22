@@ -90,6 +90,9 @@
            <property name="text">
             <string notr="true">#.#</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
            <property name="textInteractionFlags">
             <set>Qt::TextEditorInteraction</set>
            </property>

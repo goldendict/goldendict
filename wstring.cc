@@ -6,10 +6,10 @@
 
 namespace gd
 {
-  wstring __nativeToWs( wchar_t const * str )
-  {
+wstring __nativeToWs( wchar_t const * str )
+{
     return Iconv::toWstring( "WCHAR_T", str, wcslen( str ) * sizeof( wchar_t ) );
-  }
+}
 }
 
 #endif

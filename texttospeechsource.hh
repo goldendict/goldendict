@@ -14,97 +14,97 @@
 /// A model to be projected into the text to speech view, according to Qt's MVC model
 class VoiceEnginesModel: public QAbstractItemModel
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 
-  enum {
-    kColumnEnabled  = 0,
-    kColumnEngineId,
-    kColumnEngineName,
-    kColumnIcon,
-    kColumnCount
-  };
+    enum {
+        kColumnEnabled  = 0,
+        kColumnEngineId,
+        kColumnEngineName,
+        kColumnIcon,
+        kColumnCount
+    };
 
-  VoiceEnginesModel( QWidget * parent, Config::VoiceEngines const & voiceEngines );
+    VoiceEnginesModel( QWidget * parent, Config::VoiceEngines const & voiceEngines );
 
-  void removeVoiceEngine( int index );
-  void addNewVoiceEngine( QString const & id, QString const & name,
-                          int volume, int rate );
+    void removeVoiceEngine( int index );
+    void addNewVoiceEngine( QString const & id, QString const & name,
+                            int volume, int rate );
 
-  Config::VoiceEngines const & getCurrentVoiceEngines() const
-  { return voiceEngines; }
-  void setEngineParams( QModelIndex idx, int volume, int rate );
+    Config::VoiceEngines const & getCurrentVoiceEngines() const
+    { return voiceEngines; }
+    void setEngineParams( QModelIndex idx, int volume, int rate );
 
-  QModelIndex index( int row, int column, QModelIndex const & parent ) const;
-  QModelIndex parent( QModelIndex const & parent ) const;
-  Qt::ItemFlags flags( QModelIndex const & index ) const;
-  int rowCount( QModelIndex const & parent ) const;
-  int columnCount( QModelIndex const & parent ) const;
-  QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
-  QVariant data( QModelIndex const & index, int role ) const;
-  bool setData( QModelIndex const & index, const QVariant & value, int role );
+    QModelIndex index( int row, int column, QModelIndex const & parent ) const;
+    QModelIndex parent( QModelIndex const & parent ) const;
+    Qt::ItemFlags flags( QModelIndex const & index ) const;
+    int rowCount( QModelIndex const & parent ) const;
+    int columnCount( QModelIndex const & parent ) const;
+    QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+    QVariant data( QModelIndex const & index, int role ) const;
+    bool setData( QModelIndex const & index, const QVariant & value, int role );
 
 private:
 
-  Config::VoiceEngines voiceEngines;
+    Config::VoiceEngines voiceEngines;
 };
 
 class VoiceEngineEditor: public QComboBox
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  VoiceEngineEditor( SpeechClient::Engines const & engines, QWidget * parent = 0 );
+    VoiceEngineEditor( SpeechClient::Engines const & engines, QWidget * parent = 0 );
 
 public:
-  QString engineName() const;
-  QString engineId() const;
-  void setEngineId( QString const & engineId );
+    QString engineName() const;
+    QString engineId() const;
+    void setEngineId( QString const & engineId );
 };
 
 class VoiceEngineItemDelegate: public QStyledItemDelegate
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  VoiceEngineItemDelegate( SpeechClient::Engines const & engines, QObject * parent = 0 );
+    VoiceEngineItemDelegate( SpeechClient::Engines const & engines, QObject * parent = 0 );
 
-  virtual QWidget * createEditor( QWidget *parent,
-                                  QStyleOptionViewItem const & option,
-                                  QModelIndex const & index ) const;
-  virtual void setEditorData( QWidget *uncastedEditor, const QModelIndex & index ) const;
-  virtual void setModelData( QWidget *uncastedEditor, QAbstractItemModel * model,
-                             const QModelIndex & index ) const;
+    virtual QWidget * createEditor( QWidget *parent,
+                                    QStyleOptionViewItem const & option,
+                                    QModelIndex const & index ) const;
+    virtual void setEditorData( QWidget *uncastedEditor, const QModelIndex & index ) const;
+    virtual void setModelData( QWidget *uncastedEditor, QAbstractItemModel * model,
+                               const QModelIndex & index ) const;
 
 private:
-  SpeechClient::Engines engines;
+    SpeechClient::Engines engines;
 };
 
 class TextToSpeechSource: public QWidget
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  TextToSpeechSource( QWidget * parent, Config::VoiceEngines voiceEngines );
+    TextToSpeechSource( QWidget * parent, Config::VoiceEngines voiceEngines );
 
-  const VoiceEnginesModel & getVoiceEnginesModel() const
-  { return voiceEnginesModel; }
+    const VoiceEnginesModel & getVoiceEnginesModel() const
+    { return voiceEnginesModel; }
 
 private slots:
-  void on_addVoiceEngine_clicked();
-  void on_removeVoiceEngine_clicked();
-  void on_previewVoice_clicked();
-  void previewVoiceFinished();
-  void slidersChanged();
-  void selectionChanged();
+    void on_addVoiceEngine_clicked();
+    void on_removeVoiceEngine_clicked();
+    void on_previewVoice_clicked();
+    void previewVoiceFinished();
+    void slidersChanged();
+    void selectionChanged();
 
 private:
-  Ui::TextToSpeechSource ui;
-  VoiceEnginesModel voiceEnginesModel;
+    Ui::TextToSpeechSource ui;
+    VoiceEnginesModel voiceEnginesModel;
 
-  void fitSelectedVoiceEnginesColumns();
-  void adjustSliders();
+    void fitSelectedVoiceEnginesColumns();
+    void adjustSliders();
 };
 
 #endif // __TEXTTOSPEECHSOURCE_HH_INCLUDED__

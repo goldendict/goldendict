@@ -45,70 +45,70 @@ extern "C"
 #define ERR_STRING_SIZE 128
 
 typedef struct dictCache {
-   int           chunk;
-   char          *inBuffer;
-   int           stamp;
-   int           count;
+    int           chunk;
+    char          *inBuffer;
+    int           stamp;
+    int           count;
 } dictCache;
 
 enum DZ_ERRORS {
-  DZ_NOERROR = 0,
-  DZ_ERR_INTERNAL,
-  DZ_ERR_OPENFILE,
-  DZ_ERR_READFILE,
-  DZ_ERR_UNSUPPORTED_FORMAT,
-  DZ_ERR_INVALID_FORMAT,
-  DZ_ERR_NOMEMORY
+    DZ_NOERROR = 0,
+    DZ_ERR_INTERNAL,
+    DZ_ERR_OPENFILE,
+    DZ_ERR_READFILE,
+    DZ_ERR_UNSUPPORTED_FORMAT,
+    DZ_ERR_INVALID_FORMAT,
+    DZ_ERR_NOMEMORY
 };
 
 typedef struct dictData {
 #ifdef __WIN32
-   HANDLE        fd;		/* file handle */
+    HANDLE        fd;		/* file handle */
 #else
-   FILE *        fd;		/* file descriptor */
+    FILE *        fd;		/* file descriptor */
 #endif
 
-   unsigned long size;		/* size of file */
-   
-   int           type;
-   const char    *filename;
-   z_stream      zStream;
-   int           initialized;
+    unsigned long size;		/* size of file */
 
-   int           headerLength;
-   int           method;
-   int           flags;
-   time_t        mtime;
-   int           extraFlags;
-   int           os;
-   int           version;
-   int           chunkLength;
-   int           chunkCount;
-   int           *chunks;
-   unsigned long *offsets;	/* Sum-scan of chunks. */
-   const char    *origFilename;
-   const char    *comment;
-   unsigned long crc;
-   unsigned long length;
-   unsigned long compressedLength;
-   int           stamp;
-   dictCache     cache[DICT_CACHE_SIZE];
-   char          errorString[ERR_STRING_SIZE];
+    int           type;
+    const char    *filename;
+    z_stream      zStream;
+    int           initialized;
+
+    int           headerLength;
+    int           method;
+    int           flags;
+    time_t        mtime;
+    int           extraFlags;
+    int           os;
+    int           version;
+    int           chunkLength;
+    int           chunkCount;
+    int           *chunks;
+    unsigned long *offsets;	/* Sum-scan of chunks. */
+    const char    *origFilename;
+    const char    *comment;
+    unsigned long crc;
+    unsigned long length;
+    unsigned long compressedLength;
+    int           stamp;
+    dictCache     cache[DICT_CACHE_SIZE];
+    char          errorString[ERR_STRING_SIZE];
 } dictData;
 
 
 /* initialize .data file */
 extern dictData *dict_data_open (
-   const char *filename, enum DZ_ERRORS * error, int computeCRC);
+        const char *filename, enum DZ_ERRORS * error, int computeCRC);
 /* */
 extern void dict_data_close (
-   dictData *data);
+        dictData *data);
 
 extern char *dict_data_read_ (
-   dictData *data,
-   unsigned long start, unsigned long end,
-   const char *preFilter,
-   const char *postFilter );
+        dictData *data,
+        unsigned long start, unsigned long end,
+        const char *preFilter,
+        const char *postFilter );
 
 extern char *dict_error_str( dictData *data );
 

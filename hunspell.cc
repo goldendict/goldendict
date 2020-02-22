@@ -12,7 +12,6 @@
 
 #include <QRunnable>
 #include <QThreadPool>
-#include <QSemaphore>
 #include <QRegExp>
 #include <QDir>
 #include <QCoreApplication>
@@ -34,62 +33,62 @@ namespace {
 
 class HunspellDictionary: public Dictionary::Class
 {
-  Hunspell hunspell;
+    Hunspell hunspell;
 
 #ifdef Q_OS_WIN32
-  static string Utf8ToLocal8Bit( string const & name )
-  {
-    return string( QString::fromUtf8( name.c_str() ).toLocal8Bit().data() );
-  }
+    static string Utf8ToLocal8Bit( string const & name )
+    {
+        return string( QString::fromUtf8( name.c_str() ).toLocal8Bit().data() );
+    }
 #endif
 
 public:
 
-  /// files[ 0 ] should be .aff file, files[ 1 ] should be .dic file.
-  HunspellDictionary( string const & id, string const & name_,
-                      vector< string > const & files ):
-    Dictionary::Class( id, files ),
-#ifdef Q_OS_WIN32
-    hunspell( Utf8ToLocal8Bit( files[ 0 ] ).c_str(), Utf8ToLocal8Bit( files[ 1 ] ).c_str() )
-#else
-    hunspell( files[ 0 ].c_str(), files[ 1 ].c_str() )
-#endif
-  {
-      setDictionaryName(name_);
-  }
-  virtual ~HunspellDictionary(){}
+    /// files[ 0 ] should be .aff file, files[ 1 ] should be .dic file.
+    HunspellDictionary( string const & id, string const & name_,
+                        vector< string > const & files ):
+        Dictionary::Class( id, files ),
+    #ifdef Q_OS_WIN32
+        hunspell( Utf8ToLocal8Bit( files[ 0 ] ).c_str(), Utf8ToLocal8Bit( files[ 1 ] ).c_str() )
+  #else
+        hunspell( files[ 0 ].c_str(), files[ 1 ].c_str() )
+  #endif
+    {
+        setDictionaryName(name_);
+    }
+    virtual ~HunspellDictionary(){}
 
-  virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults )
+    virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
+                                                   unsigned long maxResults )
     THROW_SPEC( std::exception );
 
-  virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
+    virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     THROW_SPEC( std::exception );
 
-  virtual sptr< DataRequest > getArticle( wstring const &,
-                                          vector< wstring > const & alts,
-                                          wstring const &,
-                                          bool )
+    virtual sptr< DataRequest > getArticle( wstring const &,
+                                            vector< wstring > const & alts,
+                                            wstring const &,
+                                            bool )
     THROW_SPEC( std::exception );
 
-  virtual bool isLocalDictionary()
-  { return true; }
+    virtual bool isLocalDictionary()
+    { return true; }
 
-  virtual vector< wstring > getAlternateWritings( const wstring & word ) throw();
+    virtual vector< wstring > getAlternateWritings( const wstring & word ) throw();
 
 protected:
 
-  virtual void loadIcon() throw();
+    virtual void loadIcon() throw();
 
 private:
 
-  // We used to have a separate mutex for each Hunspell instance, assuming
-  // that its code was reentrant (though probably not thread-safe). However,
-  // crashes were discovered later when using several Hunspell dictionaries
-  // simultaneously, and we've switched to have a single mutex for all hunspell
-  // calls - evidently it's not really reentrant.
+    // We used to have a separate mutex for each Hunspell instance, assuming
+    // that its code was reentrant (though probably not thread-safe). However,
+    // crashes were discovered later when using several Hunspell dictionaries
+    // simultaneously, and we've switched to have a single mutex for all hunspell
+    // calls - evidently it's not really reentrant.
 
-  static Mutex hunspellMutex;
+    static Mutex hunspellMutex;
 };
 
 Mutex HunspellDictionary::hunspellMutex;
@@ -115,45 +114,45 @@ void getSuggestionsForExpression( wstring const & expression,
 /// Returns true if the string contains whitespace, false otherwise
 bool containsWhitespace( wstring const & str )
 {
-  wchar const * next = str.c_str();
+    wchar const * next = str.c_str();
 
-  for( ; *next; ++next )
-    if ( Folding::isWhitespace( *next ) )
-      return true;
+    for( ; *next; ++next )
+        if ( Folding::isWhitespace( *next ) )
+            return true;
 
-  return false;
+    return false;
 }
 
 void HunspellDictionary::loadIcon() throw()
 {
-  if ( dictionaryIconLoaded )
-    return;
+    if ( dictionaryIconLoaded )
+        return;
 
-  QString fileName =
-    QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
+    QString fileName =
+            QDir::fromNativeSeparators( FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() ) );
 
-  // Remove the extension
-  fileName.chop( 3 );
+    // Remove the extension
+    fileName.chop( 3 );
 
-  if( !loadIconFromFile( fileName ) )
-  {
-    // Load failed -- use default icons
-    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_hunspell.png");
-  }
+    if( !loadIconFromFile( fileName ) )
+    {
+        // Load failed -- use default icons
+        dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_hunspell.png");
+    }
 
-  dictionaryIconLoaded = true;
+    dictionaryIconLoaded = true;
 }
 
 vector< wstring > HunspellDictionary::getAlternateWritings( wstring const & word ) throw()
 {
-  vector< wstring > results;
+    vector< wstring > results;
 
-  if( containsWhitespace( word ) )
-  {
-    getSuggestionsForExpression( word, results, HunspellDictionary::hunspellMutex, hunspell );
-  }
+    if( containsWhitespace( word ) )
+    {
+        getSuggestionsForExpression( word, results, HunspellDictionary::hunspellMutex, hunspell );
+    }
 
-  return results;
+    return results;
 }
 
 /// HunspellDictionary::getArticle()
@@ -162,199 +161,199 @@ class HunspellArticleRequest;
 
 class HunspellArticleRequestRunnable: public QRunnable
 {
-  HunspellArticleRequest & r;
-  QSemaphore & hasExited;
+    HunspellArticleRequest & r;
+    QSemaphore & hasExited;
 
 public:
 
-  HunspellArticleRequestRunnable( HunspellArticleRequest & r_,
-                                  QSemaphore & hasExited_ ): r( r_ ),
-                                                             hasExited( hasExited_ )
-  {}
+    HunspellArticleRequestRunnable( HunspellArticleRequest & r_,
+                                    QSemaphore & hasExited_ ): r( r_ ),
+        hasExited( hasExited_ )
+    {}
 
-  ~HunspellArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
+    ~HunspellArticleRequestRunnable()
+    {
+        hasExited.release();
+    }
 
-  virtual void run();
+    virtual void run();
 };
 
 class HunspellArticleRequest: public Dictionary::DataRequest
 {
-  friend class HunspellArticleRequestRunnable;
+    friend class HunspellArticleRequestRunnable;
 
-  Mutex & hunspellMutex;
-  Hunspell & hunspell;
-  wstring word;
+    Mutex & hunspellMutex;
+    Hunspell & hunspell;
+    wstring word;
 
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
 
 public:
 
-  HunspellArticleRequest( wstring const & word_,
-                          Mutex & hunspellMutex_,
-                          Hunspell & hunspell_ ):
-    hunspellMutex( hunspellMutex_ ),
-    hunspell( hunspell_ ),
-    word( word_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new HunspellArticleRequestRunnable( *this, hasExited ) );
-  }
+    HunspellArticleRequest( wstring const & word_,
+                            Mutex & hunspellMutex_,
+                            Hunspell & hunspell_ ):
+        hunspellMutex( hunspellMutex_ ),
+        hunspell( hunspell_ ),
+        word( word_ )
+    {
+        QThreadPool::globalInstance()->start(
+                    new HunspellArticleRequestRunnable( *this, hasExited ) );
+    }
 
-  void run(); // Run from another thread by HunspellArticleRequestRunnable
+    void run(); // Run from another thread by HunspellArticleRequestRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  ~HunspellArticleRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
+    ~HunspellArticleRequest()
+    {
+        isCancelled.ref();
+        hasExited.acquire();
+    }
 };
 
 void HunspellArticleRequestRunnable::run()
 {
-  r.run();
+    r.run();
 }
 
 void HunspellArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-  {
-    finish();
-    return;
-  }
-
-#ifdef OLD_HUNSPELL_INTERFACE
-  // We'd need to free this if it gets allocated and an exception shows up
-  char ** suggestions = 0;
-  int suggestionsCount = 0;
-#else
-  vector< string > suggestions;
-#endif
-
-  try
-  {
-    wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
-
-    if ( containsWhitespace( trimmedWord ) )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
-      // For now we don't analyze whitespace-containing phrases
-      finish();
-      return;
-    }
-
-    Mutex::Lock _( hunspellMutex );
-
-    string encodedWord = encodeToHunspell( hunspell, trimmedWord );
-
-#ifdef OLD_HUNSPELL_INTERFACE
-    if ( hunspell.spell( encodedWord.c_str() ) )
-#else
-    if ( hunspell.spell( encodedWord ) )
-#endif
-    {
-      // Good word -- no spelling suggestions then.
-      finish();
-      return;
+        finish();
+        return;
     }
 
 #ifdef OLD_HUNSPELL_INTERFACE
-    suggestionsCount = hunspell.suggest( &suggestions, encodedWord.c_str() );
-    if ( suggestionsCount )
+    // We'd need to free this if it gets allocated and an exception shows up
+    char ** suggestions = 0;
+    int suggestionsCount = 0;
 #else
-    suggestions = hunspell.suggest( encodedWord );
-    if ( !suggestions.empty() )
+    vector< string > suggestions;
 #endif
+
+    try
     {
-      // There were some suggestions made for us. Make an appropriate output.
+        wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
 
-      string result = "<div class=\"gdspellsuggestion\">" +
-        Html::escape( QCoreApplication::translate( "Hunspell", "Spelling suggestions: " ).toUtf8().data() );
-
-      wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
-
-#ifdef OLD_HUNSPELL_INTERFACE
-      for( int x = 0; x < suggestionsCount; ++x )
-      {
-        wstring suggestion = decodeFromHunspell( hunspell, suggestions[ x ] );
-#else
-      for( vector< string >::size_type x = 0; x < suggestions.size(); ++x )
-      {
-        wstring suggestion = decodeFromHunspell( hunspell, suggestions[ x ].c_str() );
-#endif
-
-        if ( Folding::applySimpleCaseOnly( suggestion ) == lowercasedWord )
+        if ( containsWhitespace( trimmedWord ) )
         {
-          // If among suggestions we see the same word just with the different
-          // case, we botch the search -- our searches are case-insensitive, and
-          // there's no need for suggestions on a good word.
-
-          finish();
-
-#ifdef OLD_HUNSPELL_INTERFACE
-          hunspell.free_list( &suggestions, suggestionsCount );
-#endif
-          return;
+            // For now we don't analyze whitespace-containing phrases
+            finish();
+            return;
         }
-        string suggestionUtf8 = Utf8::encode( suggestion );
 
-        result += "<a href=\"bword:";
-        result += Html::escape( suggestionUtf8 ) + "\">";
-        result += Html::escape( suggestionUtf8 ) + "</a>";
+        Mutex::Lock _( hunspellMutex );
+
+        string encodedWord = encodeToHunspell( hunspell, trimmedWord );
 
 #ifdef OLD_HUNSPELL_INTERFACE
-        if ( x != suggestionsCount - 1 )
+        if ( hunspell.spell( encodedWord.c_str() ) )
 #else
-        if ( x != suggestions.size() - 1 )
+        if ( hunspell.spell( encodedWord ) )
 #endif
-          result += ", ";
-      }
-
-      result += "</div>";
-
-      Mutex::Lock _( dataMutex );
-
-      data.resize( result.size() );
-
-      memcpy( &data.front(), result.data(), result.size() );
-
-      hasAnyData = true;
-    }
-  }
-  catch( Iconv::Ex & e )
-  {
-    gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
-  }
-  catch( std::exception & e )
-  {
-    gdWarning( "Hunspell: error: %s\n", e.what() );
-  }
+        {
+            // Good word -- no spelling suggestions then.
+            finish();
+            return;
+        }
 
 #ifdef OLD_HUNSPELL_INTERFACE
-  if ( suggestions )
-  {
-    Mutex::Lock _( hunspellMutex );
+        suggestionsCount = hunspell.suggest( &suggestions, encodedWord.c_str() );
+        if ( suggestionsCount )
+#else
+        suggestions = hunspell.suggest( encodedWord );
+        if ( !suggestions.empty() )
+#endif
+        {
+            // There were some suggestions made for us. Make an appropriate output.
 
-    hunspell.free_list( &suggestions, suggestionsCount );
-  }
+            string result = "<div class=\"gdspellsuggestion\">" +
+                    Html::escape( QCoreApplication::translate( "Hunspell", "Spelling suggestions: " ).toUtf8().data() );
+
+            wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
+
+#ifdef OLD_HUNSPELL_INTERFACE
+            for( int x = 0; x < suggestionsCount; ++x )
+            {
+                wstring suggestion = decodeFromHunspell( hunspell, suggestions[ x ] );
+#else
+            for( vector< string >::size_type x = 0; x < suggestions.size(); ++x )
+            {
+                wstring suggestion = decodeFromHunspell( hunspell, suggestions[ x ].c_str() );
 #endif
 
-  finish();
+                if ( Folding::applySimpleCaseOnly( suggestion ) == lowercasedWord )
+                {
+                    // If among suggestions we see the same word just with the different
+                    // case, we botch the search -- our searches are case-insensitive, and
+                    // there's no need for suggestions on a good word.
+
+                    finish();
+
+#ifdef OLD_HUNSPELL_INTERFACE
+                    hunspell.free_list( &suggestions, suggestionsCount );
+#endif
+                    return;
+                }
+                string suggestionUtf8 = Utf8::encode( suggestion );
+
+                result += "<a href=\"bword:";
+                result += Html::escape( suggestionUtf8 ) + "\">";
+                result += Html::escape( suggestionUtf8 ) + "</a>";
+
+#ifdef OLD_HUNSPELL_INTERFACE
+                if ( x != suggestionsCount - 1 )
+#else
+                if ( x != suggestions.size() - 1 )
+#endif
+                    result += ", ";
+            }
+
+            result += "</div>";
+
+            Mutex::Lock _( dataMutex );
+
+            data.resize( result.size() );
+
+            memcpy( &data.front(), result.data(), result.size() );
+
+            hasAnyData = true;
+        }
+    }
+    catch( Iconv::Ex & e )
+    {
+        gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
+    }
+    catch( std::exception & e )
+    {
+        gdWarning( "Hunspell: error: %s\n", e.what() );
+    }
+
+#ifdef OLD_HUNSPELL_INTERFACE
+    if ( suggestions )
+    {
+        Mutex::Lock _( hunspellMutex );
+
+        hunspell.free_list( &suggestions, suggestionsCount );
+    }
+#endif
+
+    finish();
 }
 
 sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
                                                     vector< wstring > const &,
                                                     wstring const &, bool )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< DataRequest >(new HunspellArticleRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
+    return sptr< DataRequest >(new HunspellArticleRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
 }
 
 /// HunspellDictionary::findHeadwordsForSynonym()
@@ -363,198 +362,198 @@ class HunspellHeadwordsRequest;
 
 class HunspellHeadwordsRequestRunnable: public QRunnable
 {
-  HunspellHeadwordsRequest & r;
-  QSemaphore & hasExited;
+    HunspellHeadwordsRequest & r;
+    QSemaphore & hasExited;
 
 public:
 
-  HunspellHeadwordsRequestRunnable( HunspellHeadwordsRequest & r_,
-                                  QSemaphore & hasExited_ ): r( r_ ),
-                                                             hasExited( hasExited_ )
-  {}
+    HunspellHeadwordsRequestRunnable( HunspellHeadwordsRequest & r_,
+                                      QSemaphore & hasExited_ ): r( r_ ),
+        hasExited( hasExited_ )
+    {}
 
-  ~HunspellHeadwordsRequestRunnable()
-  {
-    hasExited.release();
-  }
+    ~HunspellHeadwordsRequestRunnable()
+    {
+        hasExited.release();
+    }
 
-  virtual void run();
+    virtual void run();
 };
 
 class HunspellHeadwordsRequest: public Dictionary::WordSearchRequest
 {
-  friend class HunspellHeadwordsRequestRunnable;
+    friend class HunspellHeadwordsRequestRunnable;
 
-  Mutex & hunspellMutex;
-  Hunspell & hunspell;
-  wstring word;
+    Mutex & hunspellMutex;
+    Hunspell & hunspell;
+    wstring word;
 
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
 
 public:
 
-  HunspellHeadwordsRequest( wstring const & word_,
-                            Mutex & hunspellMutex_,
-                            Hunspell & hunspell_ ):
-    hunspellMutex( hunspellMutex_ ),
-    hunspell( hunspell_ ),
-    word( word_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new HunspellHeadwordsRequestRunnable( *this, hasExited ) );
-  }
+    HunspellHeadwordsRequest( wstring const & word_,
+                              Mutex & hunspellMutex_,
+                              Hunspell & hunspell_ ):
+        hunspellMutex( hunspellMutex_ ),
+        hunspell( hunspell_ ),
+        word( word_ )
+    {
+        QThreadPool::globalInstance()->start(
+                    new HunspellHeadwordsRequestRunnable( *this, hasExited ) );
+    }
 
-  void run(); // Run from another thread by HunspellHeadwordsRequestRunnable
+    void run(); // Run from another thread by HunspellHeadwordsRequestRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  ~HunspellHeadwordsRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
+    ~HunspellHeadwordsRequest()
+    {
+        isCancelled.ref();
+        hasExited.acquire();
+    }
 };
 
 void HunspellHeadwordsRequestRunnable::run()
 {
-  r.run();
+    r.run();
 }
 
 void HunspellHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-  {
-    finish();
-    return;
-  }
-
-  wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
-
-  if ( trimmedWord.size() > 80 )
-  {
-    // We won't do anything for overly long sentences since that would probably
-    // only waste time.
-    finish();
-    return;
-  }
-
-  if ( containsWhitespace( trimmedWord ) )
-  {
-    vector< wstring > results;
-
-    getSuggestionsForExpression( trimmedWord, results, hunspellMutex, hunspell );
-
-    Mutex::Lock _( dataMutex );
-    for( unsigned i = 0; i < results.size(); i++ )
-      matches.push_back( WordMatch(results[ i ]) );
-
-  }
-  else
-  {
-    QVector< wstring > suggestions = suggest( trimmedWord, hunspellMutex, hunspell );
-
-    if ( !suggestions.empty() )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
-      Mutex::Lock _( dataMutex );
-
-      for( int x = 0; x < suggestions.size(); ++x )
-        matches.push_back( WordMatch(suggestions[ x ]) );
+        finish();
+        return;
     }
-  }
 
-  finish();
+    wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
+
+    if ( trimmedWord.size() > 80 )
+    {
+        // We won't do anything for overly long sentences since that would probably
+        // only waste time.
+        finish();
+        return;
+    }
+
+    if ( containsWhitespace( trimmedWord ) )
+    {
+        vector< wstring > results;
+
+        getSuggestionsForExpression( trimmedWord, results, hunspellMutex, hunspell );
+
+        Mutex::Lock _( dataMutex );
+        for( unsigned i = 0; i < results.size(); i++ )
+            matches.push_back( WordMatch(results[ i ]) );
+
+    }
+    else
+    {
+        QVector< wstring > suggestions = suggest( trimmedWord, hunspellMutex, hunspell );
+
+        if ( !suggestions.empty() )
+        {
+            Mutex::Lock _( dataMutex );
+
+            for( int x = 0; x < suggestions.size(); ++x )
+                matches.push_back( WordMatch(suggestions[ x ]) );
+        }
+    }
+
+    finish();
 }
 
 QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hunspell )
 {
-  QVector< wstring > result;
+    QVector< wstring > result;
 
 #ifdef OLD_HUNSPELL_INTERFACE
-  // We'd need to free this if it gets allocated and an exception shows up
-  char ** suggestions = 0;
-  int suggestionsCount = 0;
+    // We'd need to free this if it gets allocated and an exception shows up
+    char ** suggestions = 0;
+    int suggestionsCount = 0;
 #else
-  vector< string > suggestions;
+    vector< string > suggestions;
 #endif
 
-  try
-  {
-    Mutex::Lock _( hunspellMutex );
-
-    string encodedWord = encodeToHunspell( hunspell, word );
-
-#ifdef OLD_HUNSPELL_INTERFACE
-    suggestionsCount = hunspell.analyze( &suggestions, encodedWord.c_str() );
-    if ( suggestionsCount )
-#else
-    suggestions = hunspell.analyze( encodedWord );
-    if ( !suggestions.empty() )
-#endif
+    try
     {
-      // There were some suggestions made for us. Make an appropriate output.
+        Mutex::Lock _( hunspellMutex );
 
-      wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
-
-      static const QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:)(?!-)(?!\\+))|\\S+)+)" );
+        string encodedWord = encodeToHunspell( hunspell, word );
 
 #ifdef OLD_HUNSPELL_INTERFACE
-      for( int x = 0; x < suggestionsCount; ++x )
-      {
-        QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
+        suggestionsCount = hunspell.analyze( &suggestions, encodedWord.c_str() );
+        if ( suggestionsCount )
 #else
-      for( vector< string >::size_type x = 0; x < suggestions.size(); ++x )
-      {
-        QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ].c_str() ) );
+        suggestions = hunspell.analyze( encodedWord );
+        if ( !suggestions.empty() )
 #endif
-
-        // Strip comments
-        int n = suggestion.indexOf( '#' );
-        if( n >= 0 )
-          suggestion.chop( suggestion.length() - n );
-
-        GD_DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
-
-        if ( cutStem.indexIn( suggestion.trimmed() ) != -1 )
         {
-          wstring alt = gd::toWString( cutStem.cap( 1 ) );
+            // There were some suggestions made for us. Make an appropriate output.
 
-          if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
-          {
-#ifdef QT_DEBUG
-            qDebug() << ">>>>>Alt:" << gd::toQString( alt );
-#endif
-            result.append( alt );
-          }
-        }
-      }
-    }
-  }
-  catch( Iconv::Ex & e )
-  {
-    gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
-  }
+            wstring lowercasedWord = Folding::applySimpleCaseOnly( word );
+
+            static const QRegExp cutStem( "^\\s*st:(((\\s+(?!\\w{2}:)(?!-)(?!\\+))|\\S+)+)" );
 
 #ifdef OLD_HUNSPELL_INTERFACE
-  if ( suggestions )
-  {
-    Mutex::Lock _( hunspellMutex );
-
-    hunspell.free_list( &suggestions, suggestionsCount );
-  }
+            for( int x = 0; x < suggestionsCount; ++x )
+            {
+                QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ] ) );
+#else
+            for( vector< string >::size_type x = 0; x < suggestions.size(); ++x )
+            {
+                QString suggestion = gd::toQString( decodeFromHunspell( hunspell, suggestions[ x ].c_str() ) );
 #endif
 
-  return result;
+                // Strip comments
+                int n = suggestion.indexOf( '#' );
+                if( n >= 0 )
+                    suggestion.chop( suggestion.length() - n );
+
+                GD_DPRINTF( ">>>Sugg: %s\n", suggestion.toLocal8Bit().data() );
+
+                if ( cutStem.indexIn( suggestion.trimmed() ) != -1 )
+                {
+                    wstring alt = gd::toWString( cutStem.cap( 1 ) );
+
+                    if ( Folding::applySimpleCaseOnly( alt ) != lowercasedWord ) // No point in providing same word
+                    {
+#ifdef QT_DEBUG
+                        qDebug() << ">>>>>Alt:" << gd::toQString( alt );
+#endif
+                        result.append( alt );
+                    }
+                }
+            }
+        }
+    }
+    catch( Iconv::Ex & e )
+    {
+        gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
+    }
+
+#ifdef OLD_HUNSPELL_INTERFACE
+    if ( suggestions )
+    {
+        Mutex::Lock _( hunspellMutex );
+
+        hunspell.free_list( &suggestions, suggestionsCount );
+    }
+#endif
+
+    return result;
 }
 
 
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< WordSearchRequest >(new HunspellHeadwordsRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
+    return sptr< WordSearchRequest >(new HunspellHeadwordsRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
 }
 
 
@@ -564,116 +563,116 @@ class HunspellPrefixMatchRequest;
 
 class HunspellPrefixMatchRequestRunnable: public QRunnable
 {
-  HunspellPrefixMatchRequest & r;
-  QSemaphore & hasExited;
+    HunspellPrefixMatchRequest & r;
+    QSemaphore & hasExited;
 
 public:
 
-  HunspellPrefixMatchRequestRunnable( HunspellPrefixMatchRequest & r_,
-                                      QSemaphore & hasExited_ ): r( r_ ),
-                                                                 hasExited( hasExited_ )
-  {}
+    HunspellPrefixMatchRequestRunnable( HunspellPrefixMatchRequest & r_,
+                                        QSemaphore & hasExited_ ): r( r_ ),
+        hasExited( hasExited_ )
+    {}
 
-  ~HunspellPrefixMatchRequestRunnable()
-  {
-    hasExited.release();
-  }
+    ~HunspellPrefixMatchRequestRunnable()
+    {
+        hasExited.release();
+    }
 
-  virtual void run();
+    virtual void run();
 };
 
 class HunspellPrefixMatchRequest: public Dictionary::WordSearchRequest
 {
-  friend class HunspellPrefixMatchRequestRunnable;
+    friend class HunspellPrefixMatchRequestRunnable;
 
-  Mutex & hunspellMutex;
-  Hunspell & hunspell;
-  wstring word;
+    Mutex & hunspellMutex;
+    Hunspell & hunspell;
+    wstring word;
 
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
 
 public:
 
-  HunspellPrefixMatchRequest( wstring const & word_,
-                              Mutex & hunspellMutex_,
-                              Hunspell & hunspell_ ):
-    hunspellMutex( hunspellMutex_ ),
-    hunspell( hunspell_ ),
-    word( word_ )
-  {
-    QThreadPool::globalInstance()->start(
-      new HunspellPrefixMatchRequestRunnable( *this, hasExited ) );
-  }
+    HunspellPrefixMatchRequest( wstring const & word_,
+                                Mutex & hunspellMutex_,
+                                Hunspell & hunspell_ ):
+        hunspellMutex( hunspellMutex_ ),
+        hunspell( hunspell_ ),
+        word( word_ )
+    {
+        QThreadPool::globalInstance()->start(
+                    new HunspellPrefixMatchRequestRunnable( *this, hasExited ) );
+    }
 
-  void run(); // Run from another thread by HunspellPrefixMatchRequestRunnable
+    void run(); // Run from another thread by HunspellPrefixMatchRequestRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  ~HunspellPrefixMatchRequest()
-  {
-    isCancelled.ref();
-    hasExited.acquire();
-  }
+    ~HunspellPrefixMatchRequest()
+    {
+        isCancelled.ref();
+        hasExited.acquire();
+    }
 };
 
 void HunspellPrefixMatchRequestRunnable::run()
 {
-  r.run();
+    r.run();
 }
 
 void HunspellPrefixMatchRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
-  {
-    finish();
-    return;
-  }
-
-  try
-  {
-    wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
-
-    if ( trimmedWord.empty() || containsWhitespace( trimmedWord ) )
+    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
     {
-      // For now we don't analyze whitespace-containing phrases
-      finish();
-      return;
+        finish();
+        return;
     }
 
-    Mutex::Lock _( hunspellMutex );
+    try
+    {
+        wstring trimmedWord = Folding::trimWhitespaceOrPunct( word );
 
-    string encodedWord = encodeToHunspell( hunspell, trimmedWord );
+        if ( trimmedWord.empty() || containsWhitespace( trimmedWord ) )
+        {
+            // For now we don't analyze whitespace-containing phrases
+            finish();
+            return;
+        }
+
+        Mutex::Lock _( hunspellMutex );
+
+        string encodedWord = encodeToHunspell( hunspell, trimmedWord );
 
 #ifdef OLD_HUNSPELL_INTERFACE
-    if ( hunspell.spell( encodedWord.c_str() ) )
+        if ( hunspell.spell( encodedWord.c_str() ) )
 #else
-    if ( hunspell.spell( encodedWord ) )
+        if ( hunspell.spell( encodedWord ) )
 #endif
-    {
-      // Known word -- add it to the result
+        {
+            // Known word -- add it to the result
 
-      Mutex::Lock _( dataMutex );
+            Mutex::Lock _( dataMutex );
 
-      matches.push_back( WordMatch( trimmedWord, 1 ) );
+            matches.push_back( WordMatch( trimmedWord, 1 ) );
+        }
     }
-  }
-  catch( Iconv::Ex & e )
-  {
-    gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
-  }
+    catch( Iconv::Ex & e )
+    {
+        gdWarning( "Hunspell: charset conversion error, no processing's done: %s\n", e.what() );
+    }
 
-  finish();
+    finish();
 }
 
 sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< WordSearchRequest >(new HunspellPrefixMatchRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
+    return sptr< WordSearchRequest >(new HunspellPrefixMatchRequest( word, HunspellDictionary::hunspellMutex, hunspell ));
 }
 
 void getSuggestionsForExpression( wstring const & expression,
@@ -681,240 +680,240 @@ void getSuggestionsForExpression( wstring const & expression,
                                   Mutex & hunspellMutex,
                                   Hunspell & hunspell )
 {
-  // Analyze each word separately and use the first two suggestions, if any.
-  // This is useful for compound expressions where some words is
-  // in different form, e.g. "dozing off" -> "doze off".
+    // Analyze each word separately and use the first two suggestions, if any.
+    // This is useful for compound expressions where some words is
+    // in different form, e.g. "dozing off" -> "doze off".
 
-  wstring trimmedWord = Folding::trimWhitespaceOrPunct( expression );
-  wstring word, punct;
-  QVector< wstring > words;
+    wstring trimmedWord = Folding::trimWhitespaceOrPunct( expression );
+    wstring word, punct;
+    QVector< wstring > words;
 
-  suggestions.clear();
+    suggestions.clear();
 
-  // Parse string to separate words
+    // Parse string to separate words
 
-  for( wchar const * c = trimmedWord.c_str(); ; ++c )
-  {
-    if ( !*c || Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
+    for( wchar const * c = trimmedWord.c_str(); ; ++c )
     {
-      if ( word.size() )
-      {
-        words.push_back( word );
-        word.clear();
-      }
-      if ( *c )
-        punct.push_back( *c );
-    }
-    else
-    {
-      if( punct.size() )
-      {
-        words.push_back( punct );
-        punct.clear();
-      }
-      if( *c )
-        word.push_back( *c );
-    }
-    if( !*c )
-      break;
-  }
-
-  if( words.size() > 21 )
-  {
-    // Too many words - no suggestions
-    return;
-  }
-
-  // Combine result strings from suggestions
-
-  QVector< wstring > results;
-
-  for( int i = 0; i < words.size(); i++ )
-  {
-    word = words.at( i );
-    if( Folding::isPunct( word[ 0 ] ) || Folding::isWhitespace( word[ 0 ] ) )
-    {
-      for( int j = 0; j < results.size(); j++ )
-        results[ j ].append( word );
-    }
-    else
-    {
-      QVector< wstring > sugg = suggest( word, hunspellMutex, hunspell );
-      int suggNum = sugg.size() + 1;
-      if( suggNum > 3 )
-        suggNum = 3;
-      int resNum = results.size();
-      wstring resultStr;
-
-      if( resNum == 0 )
-      {
-        for( int k = 0; k < suggNum; k++ )
-          results.push_back( k == 0 ? word : sugg.at( k - 1 ) );
-      }
-      else
-      {
-        for( int j = 0; j < resNum; j++ )
+        if ( !*c || Folding::isPunct( *c ) || Folding::isWhitespace( * c ) )
         {
-          resultStr = results.at( j );
-          for( int k = 0; k < suggNum; k++ )
-          {
-            if( k == 0)
-              results[ j ].append( word );
-            else
-              results.push_back( resultStr + sugg.at( k - 1 ) );
-          }
+            if ( word.size() )
+            {
+                words.push_back( word );
+                word.clear();
+            }
+            if ( *c )
+                punct.push_back( *c );
         }
-      }
+        else
+        {
+            if( punct.size() )
+            {
+                words.push_back( punct );
+                punct.clear();
+            }
+            if( *c )
+                word.push_back( *c );
+        }
+        if( !*c )
+            break;
     }
-  }
 
-  for( int i = 0; i < results.size(); i++ )
-    if( results.at( i ) != trimmedWord )
-      suggestions.push_back( results.at( i ) );
+    if( words.size() > 21 )
+    {
+        // Too many words - no suggestions
+        return;
+    }
+
+    // Combine result strings from suggestions
+
+    QVector< wstring > results;
+
+    for( int i = 0; i < words.size(); i++ )
+    {
+        word = words.at( i );
+        if( Folding::isPunct( word[ 0 ] ) || Folding::isWhitespace( word[ 0 ] ) )
+        {
+            for( int j = 0; j < results.size(); j++ )
+                results[ j ].append( word );
+        }
+        else
+        {
+            QVector< wstring > sugg = suggest( word, hunspellMutex, hunspell );
+            int suggNum = sugg.size() + 1;
+            if( suggNum > 3 )
+                suggNum = 3;
+            int resNum = results.size();
+            wstring resultStr;
+
+            if( resNum == 0 )
+            {
+                for( int k = 0; k < suggNum; k++ )
+                    results.push_back( k == 0 ? word : sugg.at( k - 1 ) );
+            }
+            else
+            {
+                for( int j = 0; j < resNum; j++ )
+                {
+                    resultStr = results.at( j );
+                    for( int k = 0; k < suggNum; k++ )
+                    {
+                        if( k == 0)
+                            results[ j ].append( word );
+                        else
+                            results.push_back( resultStr + sugg.at( k - 1 ) );
+                    }
+                }
+            }
+        }
+    }
+
+    for( int i = 0; i < results.size(); i++ )
+        if( results.at( i ) != trimmedWord )
+            suggestions.push_back( results.at( i ) );
 }
 
 string encodeToHunspell( Hunspell & hunspell, wstring const & str )
 {
-  Iconv conv( hunspell.get_dic_encoding(), Iconv::GdWchar );
+    Iconv conv( hunspell.get_dic_encoding(), Iconv::GdWchar );
 
-  void const * in = str.data();
-  size_t inLeft = str.size() * sizeof( wchar );
+    void const * in = str.data();
+    size_t inLeft = str.size() * sizeof( wchar );
 
-  vector< char > result( str.size() * 4 + 1 ); // +1 isn't actually needed,
-                                               // but then iconv complains on empty
-                                               // words
+    vector< char > result( str.size() * 4 + 1 ); // +1 isn't actually needed,
+    // but then iconv complains on empty
+    // words
 
-  void * out = &result.front();
-  size_t outLeft = result.size();
+    void * out = &result.front();
+    size_t outLeft = result.size();
 
-  if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
-    throw Iconv::Ex();
+    if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
+        throw Iconv::Ex();
 
-  return string( &result.front(), result.size() - outLeft );
+    return string( &result.front(), result.size() - outLeft );
 }
 
 wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
 {
-  Iconv conv( Iconv::GdWchar, hunspell.get_dic_encoding() );
+    Iconv conv( Iconv::GdWchar, hunspell.get_dic_encoding() );
 
-  void const * in = str;
-  size_t inLeft = strlen( str );
+    void const * in = str;
+    size_t inLeft = strlen( str );
 
-  vector< wchar > result( inLeft + 1 ); // +1 isn't needed, but see above
+    vector< wchar > result( inLeft + 1 ); // +1 isn't needed, but see above
 
-  void * out = &result.front();
-  size_t outLeft = result.size() * sizeof( wchar );
+    void * out = &result.front();
+    size_t outLeft = result.size() * sizeof( wchar );
 
-  if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
-    throw Iconv::Ex();
+    if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
+        throw Iconv::Ex();
 
-  return wstring( &result.front(), result.size() - outLeft/sizeof( wchar ) );
+    return wstring( &result.front(), result.size() - outLeft/sizeof( wchar ) );
 }
 
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & cfg )
-    THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  vector< sptr< Dictionary::Class > > result;
+    vector< sptr< Dictionary::Class > > result;
 
-  vector< DataFiles > dataFiles = findDataFiles( cfg.dictionariesPath );
+    vector< DataFiles > dataFiles = findDataFiles( cfg.dictionariesPath );
 
 
-  for( int x = 0; x < cfg.enabledDictionaries.size(); ++x )
-  {
-    for( unsigned d = dataFiles.size(); d--; )
+    for( int x = 0; x < cfg.enabledDictionaries.size(); ++x )
     {
-      if ( dataFiles[ d ].dictId == cfg.enabledDictionaries[ x ] )
-      {
-        // Found it
+        for( unsigned d = dataFiles.size(); d--; )
+        {
+            if ( dataFiles[ d ].dictId == cfg.enabledDictionaries[ x ] )
+            {
+                // Found it
 
-        vector< string > dictFiles;
+                vector< string > dictFiles;
 
-        dictFiles.push_back(
-          FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].affFileName ) ) );
-        dictFiles.push_back(
-          FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].dicFileName ) ) );
+                dictFiles.push_back(
+                            FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].affFileName ) ) );
+                dictFiles.push_back(
+                            FsEncoding::encode( QDir::toNativeSeparators( dataFiles[ d ].dicFileName ) ) );
 
-        result.push_back(sptr< Dictionary::Class >(
-          new HunspellDictionary( Dictionary::makeDictionaryId( dictFiles ),
-                                  dataFiles[ d ].dictName.toUtf8().data(),
-                                  dictFiles ) ) );
-        break;
-      }
+                result.push_back(sptr< Dictionary::Class >(
+                                     new HunspellDictionary( Dictionary::makeDictionaryId( dictFiles ),
+                                                             dataFiles[ d ].dictName.toUtf8().data(),
+                                                             dictFiles ) ) );
+                break;
+            }
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 vector< DataFiles > findDataFiles( QString const & path )
 {
-  // Empty path means unconfigured directory
-  if ( path.isEmpty() )
-    return vector< DataFiles >();
+    // Empty path means unconfigured directory
+    if ( path.isEmpty() )
+        return vector< DataFiles >();
 
-  QDir dir( path );
+    QDir dir( path );
 
-  // Find all affix files
+    // Find all affix files
 
-  QFileInfoList affixFiles = dir.entryInfoList( ( QStringList() << "*.aff" << "*.AFF" ), QDir::Files );
+    QFileInfoList affixFiles = dir.entryInfoList( ( QStringList() << "*.aff" << "*.AFF" ), QDir::Files );
 
-  vector< DataFiles > result;
-  std::set< QString > presentNames;
+    vector< DataFiles > result;
+    std::set< QString > presentNames;
 
-  for( QFileInfoList::const_iterator i = affixFiles.constBegin();
-       i != affixFiles.constEnd(); ++i )
-  {
-    QString affFileName = i->absoluteFilePath();
-
-    // See if there's a corresponding .dic file
-    QString dicFileNameBase = affFileName.mid( 0, affFileName.size() - 3 );
-
-    QString dicFileName = dicFileNameBase + "dic";
-
-    if ( !QFile( dicFileName ).exists() )
+    for( QFileInfoList::const_iterator i = affixFiles.constBegin();
+         i != affixFiles.constEnd(); ++i )
     {
-      dicFileName = dicFileNameBase + "DIC";
-      if ( !QFile( dicFileName ).exists() )
-        continue; // No dic file
+        QString affFileName = i->absoluteFilePath();
+
+        // See if there's a corresponding .dic file
+        QString dicFileNameBase = affFileName.mid( 0, affFileName.size() - 3 );
+
+        QString dicFileName = dicFileNameBase + "dic";
+
+        if ( !QFile( dicFileName ).exists() )
+        {
+            dicFileName = dicFileNameBase + "DIC";
+            if ( !QFile( dicFileName ).exists() )
+                continue; // No dic file
+        }
+
+        QString dictId = i->fileName();
+        dictId.chop( 4 );
+
+        QString dictBaseId = dictId.size() < 3 ? dictId :
+                                                 ( ( dictId[ 2 ] == '-' || dictId[ 2 ] == '_' ) ? dictId.mid( 0, 2 ) : QString() );
+
+        dictBaseId = dictBaseId.toLower();
+
+        // Try making up good readable name from dictBaseId
+
+        QString localizedName;
+
+        if ( dictBaseId.size() == 2 )
+            localizedName = Language::localizedNameForId( LangCoder::code2toInt( dictBaseId.toLatin1().data() ) );
+
+        if ( localizedName.size() )
+        {
+            if ( dictId.size() > 2 && ( dictId[ 2 ] == '-' || dictId[ 2 ] == '_' ) &&
+                 dictId.mid( 3 ).toLower() != dictBaseId )
+                localizedName += " (" + dictId.mid( 3 ) + ")";
+        }
+
+        const QString dictName = QCoreApplication::translate( "Hunspell", "%1 Morphology" ).
+                arg( localizedName.isEmpty() ? dictId : localizedName );
+
+        if ( presentNames.insert( dictName ).second )
+        {
+            // Only include dictionaries with unique names. This combats stuff
+            // like symlinks en-US->en_US and such
+
+            result.push_back( DataFiles( affFileName, dicFileName, dictId, dictName ) );
+        }
     }
 
-    QString dictId = i->fileName();
-    dictId.chop( 4 );
-
-    QString dictBaseId = dictId.size() < 3 ? dictId :
-      ( ( dictId[ 2 ] == '-' || dictId[ 2 ] == '_' ) ? dictId.mid( 0, 2 ) : QString() );
-
-    dictBaseId = dictBaseId.toLower();
-
-    // Try making up good readable name from dictBaseId
-
-    QString localizedName;
-
-    if ( dictBaseId.size() == 2 )
-      localizedName = Language::localizedNameForId( LangCoder::code2toInt( dictBaseId.toLatin1().data() ) );
-
-    if ( localizedName.size() )
-    {
-      if ( dictId.size() > 2 && ( dictId[ 2 ] == '-' || dictId[ 2 ] == '_' ) &&
-           dictId.mid( 3 ).toLower() != dictBaseId )
-        localizedName += " (" + dictId.mid( 3 ) + ")";
-    }
-
-    const QString dictName = QCoreApplication::translate( "Hunspell", "%1 Morphology" ).
-            arg( localizedName.isEmpty() ? dictId : localizedName );
-
-    if ( presentNames.insert( dictName ).second )
-    {
-      // Only include dictionaries with unique names. This combats stuff
-      // like symlinks en-US->en_US and such
-
-      result.push_back( DataFiles( affFileName, dicFileName, dictId, dictName ) );
-    }
-  }
-
-  return result;
+    return result;
 }
 
 }

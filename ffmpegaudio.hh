@@ -3,10 +3,7 @@
 
 #ifdef MAKE_FFMPEG_PLAYER
 
-#include <QObject>
-#include <QMutex>
-#include <QSemaphore>
-#include <QAtomicInt>
+#include "mutex.hh"
 #include <QByteArray>
 #include <QThread>
 
@@ -16,44 +13,44 @@ class DecoderThread;
 
 class AudioService : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  AudioService();
-  ~AudioService();
-  void playMemory( const char * ptr, int size );
-  void stop();
+    AudioService();
+    ~AudioService();
+    void playMemory( const char * ptr, int size );
+    void stop();
 
-  void init();
+    void init();
 
 signals:
-  void error( QString const & message );
+    void error( QString const & message );
 
 private:
-  DecoderThread *dt;
+    DecoderThread *dt;
 
 };
 
 class DecoderThread: public QThread
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  QByteArray audioData_;
-  QMutex bufferMutex_;
-  QSemaphore deviceWC_;
-  QAtomicInt isCancelled_;
+    QByteArray audioData_;
+    Mutex bufferMutex_;
+    QSemaphore deviceWC_;
+    AtomicInt32 isCancelled_;
 
 public:
-  DecoderThread( QObject * parent );
-  virtual ~DecoderThread();
+    DecoderThread( QObject * parent );
+    virtual ~DecoderThread();
 
-  void play(const QByteArray &audioData);
-  void cancel();
+    void play(const QByteArray &audioData);
+    void cancel();
 protected:
-  void run();
+    void run();
 
 signals:
-  void error( QString const & message );
+    void error( QString const & message );
 };
 
 }

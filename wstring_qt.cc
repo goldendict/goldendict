@@ -3,24 +3,24 @@
 
 namespace gd
 {
-  #ifdef __WIN32
+#ifdef __WIN32
 
-  QString toQString( wstring const & in )
-  {
+QString toQString( wstring const & in )
+{
     return QString::fromUcs4( in.c_str() );
-  }
+}
 
-  #else
+#else
 
-  QString toQString( wstring const & in )
-  {
+QString toQString( wstring const & in )
+{
     return QString::fromStdWString( in );
-  }
+}
 
-  #endif
+#endif
 
-  wstring toWString( QString const & in )
-  {
+wstring toWString( QString const & in )
+{
     QVector< unsigned int > v = in.toUcs4();
 
     // Fix for QString instance which contains non-BMP characters
@@ -31,15 +31,15 @@ namespace gd
     int n = v.size();
     while ( n > 0 && v[ n - 1 ] == 0 ) n--;
     if ( n != v.size() )
-      v.resize( n );
+        v.resize( n );
 #endif
 
     return wstring( ( const wchar * ) v.constData(), v.size() );
-  }
+}
 
-  wstring normalize( const wstring & str )
-  {
+wstring normalize( const wstring & str )
+{
     return gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
-  }
+}
 
 }

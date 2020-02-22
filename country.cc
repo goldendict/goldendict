@@ -3,30 +3,31 @@
 
 #include "country.hh"
 #include "folding.hh"
-#include <QtCore>
+#include <QMap>
 #include "wstring_qt.hh"
 
 namespace Country {
 
 namespace
 {
-  struct Database: public QMap< QString, QString >
-  {
+struct Database: public QMap< QString, QString >
+{
     static Database const & instance()
     { static const Database db; return db; }
-
-  private:
+public:
+    ~Database(){}
+private:
 
     Database();
 
     void addCountry( QString const & country, QString const & code )
     {
-      (*this)[ gd::toQString( Folding::apply( gd::toWString( country ) ) ) ] = code.toLower();
+        (*this)[ gd::toQString( Folding::apply( gd::toWString( country ) ) ) ] = code.toLower();
     }
-  };
+};
 
-  Database::Database()
-  {
+Database::Database()
+{
     addCountry( "Afghanistan", "AF" );
     addCountry( "Aland Islands", "AX" );
     addCountry( "Albania", "AL" );
@@ -282,17 +283,17 @@ namespace
     addCountry( "Yemen", "YE" );
     addCountry( "Zambia", "ZM" );
     addCountry( "Zimbabwe", "ZW" );
-  }
+}
 }
 
 QString englishNametoIso2( QString const & name )
 {
-  Database::const_iterator i = Database::instance().find( gd::toQString( Folding::apply( gd::toWString( name ) ) ) );
+    Database::const_iterator i = Database::instance().find( gd::toQString( Folding::apply( gd::toWString( name ) ) ) );
 
-  if ( i == Database::instance().end() )
-    return QString();
-  else
-    return i.value();
+    if ( i == Database::instance().end() )
+        return QString();
+    else
+        return i.value();
 }
 
 }

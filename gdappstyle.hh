@@ -4,29 +4,24 @@
 #ifndef GDAPPSTYLE_HH
 #define GDAPPSTYLE_HH
 
-#include <QtGlobal>
-
-#if QT_VERSION >= 0x040600
-
-#include <QStyle>
 #include <QProxyStyle>
-#include <QStyleOption>
+#if QT_VERSION >= 0x040600
 
 class GdAppStyle : public QProxyStyle
 {
     Q_OBJECT
 
 public:
-  explicit GdAppStyle(QProxyStyle *style = 0);
-  virtual int pixelMetric ( PixelMetric metric, const QStyleOption * option = 0, const QWidget * widget = 0 ) const;
+    explicit GdAppStyle(QProxyStyle *style = 0);
+    virtual int pixelMetric ( PixelMetric metric, const QStyleOption * option = 0, const QWidget * widget = 0 ) const;
 
 signals:
 
 public slots:
 
 private:
-  /// is this widget a tool button on the dictionary bar?
-  bool dictionaryBarButton(const QWidget * widget) const;
+    /// is this widget a tool button on the dictionary bar?
+    bool dictionaryBarButton(const QWidget * widget) const;
 
 };
 

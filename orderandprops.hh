@@ -5,42 +5,40 @@
 #define __ORDERANDPROPS_HH_INCLUDED__
 
 #include "ui_orderandprops.h"
-#include "groups_widgets.hh"
-#include <QSortFilterProxyModel>
 
 class OrderAndProps: public QWidget
 {
-  Q_OBJECT;
+    Q_OBJECT;
 
 public:
 
-  OrderAndProps( QWidget * parent, Config::Group const & dictionaryOrder,
-                 Config::Group const & inactiveDictionaries,
-                 std::vector< sptr< Dictionary::Class > > const & allDictionaries );
+    OrderAndProps( QWidget * parent, Config::Group const & dictionaryOrder,
+                   Config::Group const & inactiveDictionaries,
+                   std::vector< sptr< Dictionary::Class > > const & allDictionaries );
 
-  Config::Group getCurrentDictionaryOrder() const;
-  Config::Group getCurrentInactiveDictionaries() const;
+    Config::Group getCurrentDictionaryOrder() const;
+    Config::Group getCurrentInactiveDictionaries() const;
 
 private slots:
 
-  void dictionarySelectionChanged( const QItemSelection &current );
-  void inactiveDictionarySelectionChanged( const QItemSelection &current );
-  void contextMenuRequested( const QPoint & pos );
-  void filterChanged( QString const & filterText );
-  void dictListFocused();
-  void inactiveDictListFocused();
-  void showDictNumbers();
+    void dictionarySelectionChanged( const QItemSelection &current );
+    void inactiveDictionarySelectionChanged( const QItemSelection &current );
+    void contextMenuRequested( const QPoint & pos );
+    void filterChanged( QString const & filterText );
+    void dictListFocused();
+    void inactiveDictListFocused();
+    void showDictNumbers();
 
 private:
 
-  Ui::OrderAndProps ui;
+    Ui::OrderAndProps ui;
 
-  void disableDictionaryDescription();
-  void describeDictionary( DictListWidget *, QModelIndex const & );
+    void disableDictionaryDescription();
+    void describeDictionary( DictListWidget *, QModelIndex const & );
 
 signals:
-  void showDictionaryHeadwords( QString const & dictId );
-  void userDictNameChanged( QString const & dictId, QString const & uname );
+    void showDictionaryHeadwords( QString const & dictId );
+    void userDictNameChanged( QString const & dictId, QString const & uname );
 };
 
 #endif

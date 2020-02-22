@@ -9,12 +9,12 @@
 class TreeView : public QTreeView
 {
 public:
-  TreeView( QWidget * parent = 0 ) :
-    QTreeView( parent )
-  {}
+    TreeView( QWidget * parent = 0 ) :
+        QTreeView( parent )
+    {}
 
 protected:
-  virtual void dropEvent( QDropEvent * event );
+    virtual void dropEvent( QDropEvent * event );
 };
 
 #endif // TREEVIEW_HH

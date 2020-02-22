@@ -13,16 +13,16 @@ class ChineseConversion;
 
 class ChineseConversion : public QGroupBox
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
-  ChineseConversion( QWidget * parent, Config::Chinese const & );
-  ~ChineseConversion();
+    ChineseConversion( QWidget * parent, Config::Chinese const & );
+    ~ChineseConversion();
 
-  void getConfig( Config::Chinese & ) const;
+    void getConfig( Config::Chinese & ) const;
 
 private:
-  Ui::ChineseConversion *ui;
+    Ui::ChineseConversion *ui;
 };
 
 #endif // __CHINESE_CONVERSION_HH_INCLUDED__

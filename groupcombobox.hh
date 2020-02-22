@@ -6,53 +6,52 @@
 
 #include <QComboBox>
 #include <QAction>
-#include <QSize>
 #include <QList>
-#include "instances.hh"
+namespace Instances { struct Groups; }
 
 /// This is a combo box which is for choosing the dictionary group
 class GroupComboBox: public QComboBox
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 
-  GroupComboBox( QWidget * parent );
+    GroupComboBox( QWidget * parent );
 
-  /// Fills combo-box with the given groups
-  void fill( Instances::Groups const & );
+    /// Fills combo-box with the given groups
+    void fill( Instances::Groups const & );
 
-  /// Chooses the given group in the combobox. If there's no such group,
-  /// does nothing.
-  void setCurrentGroup( unsigned id );
+    /// Chooses the given group in the combobox. If there's no such group,
+    /// does nothing.
+    void setCurrentGroup( unsigned id );
 
 
-  /// Returns current group.
-  unsigned getCurrentGroup() const;
+    /// Returns current group.
+    unsigned getCurrentGroup() const;
 
-  /// Return actions which should be accessible from FTS and Headwords dialogs
-  QList< QAction * > getExternActions();
+    /// Return actions which should be accessible from FTS and Headwords dialogs
+    QList< QAction * > getExternActions();
 
 protected:
 
-  /// We handle shortcut events here.
-  virtual bool event( QEvent * event );
+    /// We handle shortcut events here.
+    virtual bool event( QEvent * event );
 
-  /// Work around the never-changing QComboBox::minimumSizeHint(), which prevents
-  /// reducing the width of a group combobox beyond the value at application start.
-  virtual QSize minimumSizeHint() const { return sizeHint(); }
+    /// Work around the never-changing QComboBox::minimumSizeHint(), which prevents
+    /// reducing the width of a group combobox beyond the value at application start.
+    virtual QSize minimumSizeHint() const { return sizeHint(); }
 
 private slots:
 
-  void popupGroups();
-  void selectNextGroup();
-  void selectPreviousGroup();
+    void popupGroups();
+    void selectNextGroup();
+    void selectPreviousGroup();
 
 private:
 
-  QAction popupAction;
-  QAction selectNextAction, selectPreviousAction;
-  QMap< int, int > shortcuts;
+    QAction popupAction;
+    QAction selectNextAction, selectPreviousAction;
+    QMap< int, int > shortcuts;
 };
 
 #endif

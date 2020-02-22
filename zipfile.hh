@@ -16,44 +16,44 @@ namespace ZipFile {
 class SplitZipFile : public SplitFile::SplitFile
 {
 public:
-  SplitZipFile()
-  {}
-  SplitZipFile( const QString & name );
+    SplitZipFile()
+    {}
+    SplitZipFile( const QString & name );
 
-  virtual void setFileName( const QString & name );
+    virtual void setFileName( const QString & name );
 
-  // Latest modified time for all parts
-  QDateTime lastModified() const;
+    // Latest modified time for all parts
+    QDateTime lastModified() const;
 
-  // Calc absolute offset by relative offset in part and part nom
-  qint64 calcAbsoluteOffset( qint64 offset, quint16 partNo );
+    // Calc absolute offset by relative offset in part and part nom
+    qint64 calcAbsoluteOffset( qint64 offset, quint16 partNo );
 };
 
 enum CompressionMethod
 {
-  Uncompressed,
-  Deflated,
-  Unsupported
+    Uncompressed,
+    Deflated,
+    Unsupported
 };
 
 /// Entry from central dir
 struct CentralDirEntry
 {
-  QByteArray fileName;
+    QByteArray fileName;
 
-  quint32 localHeaderOffset, compressedSize, uncompressedSize;
-  CompressionMethod compressionMethod;
-  bool fileNameInUTF8;
+    quint32 localHeaderOffset, compressedSize, uncompressedSize;
+    CompressionMethod compressionMethod;
+    bool fileNameInUTF8;
 };
 
 /// Represents contents of the local file header -- that what CentralDirEntry::
 /// localHeaderOffset points at.
 struct LocalFileHeader
 {
-  QByteArray fileName;
+    QByteArray fileName;
 
-  quint32 compressedSize, uncompressedSize;
-  CompressionMethod compressionMethod;
+    quint32 compressedSize, uncompressedSize;
+    CompressionMethod compressionMethod;
 };
 
 /// Finds the central directory in the given file and positions it at its

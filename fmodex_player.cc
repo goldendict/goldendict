@@ -11,17 +11,17 @@
 #ifdef __WIN32
 #ifdef _MSC_VER
 #ifdef __WIN64
-    const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex64.dll");
+const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex64.dll");
 #else
-    const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex.dll");
+const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex.dll");
 #endif
 #elif defined(__CYGWIN32__)
-    const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex.dll");
+const QString FmodexAudioPlayer::fmodex_dyl_name("fmodex.dll");
 #else
-    const QString FmodexAudioPlayer::fmodex_dyl_name;
+const QString FmodexAudioPlayer::fmodex_dyl_name;
 #endif
 #else
-    const QString FmodexAudioPlayer::fmodex_dyl_name;
+const QString FmodexAudioPlayer::fmodex_dyl_name;
 #endif
 
 bool FmodexAudioPlayer::available()
@@ -138,30 +138,30 @@ void FmodexAudioPlayer::clean()
 
 QString FmodexAudioPlayer::play( const char * data, int size )
 {
-  if(fmodex==nullptr)
-      return tr( "FMOD Ex Library (%1) is invalid or not available!" ).arg(fmodex_dyl_name);
-  stop();
-  FMOD_CREATESOUNDEXINFO exinfo;
-  memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
-  exinfo.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
-  exinfo.length = size;
+    if(fmodex==nullptr)
+        return tr( "FMOD Ex Library (%1) is invalid or not available!" ).arg(fmodex_dyl_name);
+    stop();
+    FMOD_CREATESOUNDEXINFO exinfo;
+    memset(&exinfo, 0, sizeof(FMOD_CREATESOUNDEXINFO));
+    exinfo.cbsize = sizeof(FMOD_CREATESOUNDEXINFO);
+    exinfo.length = size;
 
-  FMOD_RESULT result = fmodex->FMOD_System_CreateSound(fmodex->system, data,
-                                                       FMOD_HARDWARE | FMOD_OPENMEMORY,
-                                                       &exinfo, &fmodex->sound);
-  if(ERRCHECK(result))
-  {
-      return tr( "Failed to create sound. The sound type may not be supported by FMOD Ex." );
-  }
+    FMOD_RESULT result = fmodex->FMOD_System_CreateSound(fmodex->system, data,
+                                                         FMOD_HARDWARE | FMOD_OPENMEMORY,
+                                                         &exinfo, &fmodex->sound);
+    if(ERRCHECK(result))
+    {
+        return tr( "Failed to create sound. The sound type may not be supported by FMOD Ex." );
+    }
 
-  result = fmodex->FMOD_Sound_SetMode(fmodex->sound, FMOD_LOOP_OFF);
-  ERRCHECK(result);
-  result = fmodex->FMOD_System_PlaySound(fmodex->system,
-                                         fmodex->channel == 0 ? FMOD_CHANNEL_FREE : FMOD_CHANNEL_REUSE,
-                                         fmodex->sound, false, &fmodex->channel);
-  ERRCHECK(result);
+    result = fmodex->FMOD_Sound_SetMode(fmodex->sound, FMOD_LOOP_OFF);
+    ERRCHECK(result);
+    result = fmodex->FMOD_System_PlaySound(fmodex->system,
+                                           fmodex->channel == 0 ? FMOD_CHANNEL_FREE : FMOD_CHANNEL_REUSE,
+                                           fmodex->sound, false, &fmodex->channel);
+    ERRCHECK(result);
 
-  return QString();
+    return QString();
 }
 
 void FmodexAudioPlayer::stop()

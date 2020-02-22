@@ -1,8 +1,6 @@
 #ifndef __ZIM_HH_INCLUDED__
 #define __ZIM_HH_INCLUDED__
 
-#ifdef MAKE_ZIM_SUPPORT
-
 #include "dictionary.hh"
 
 /// Support for the Zim dictionaries.
@@ -19,7 +17,5 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   THROW_SPEC( std::exception );
 
 }
-
-#endif
 
 #endif

@@ -11,42 +11,42 @@ class GermanTable: public Transliteration::Table
 {
 public:
 
-  GermanTable();
+    GermanTable();
 };
 
 GermanTable::GermanTable()
 {
-  // Utf8
+    // Utf8
 
-  ins( "ue", "ü" );
-  ins( "ae", "ä" );
-  ins( "oe", "ö" );
-  ins( "ss", "ß" );
+    ins( "ue", "ü" );
+    ins( "ae", "ä" );
+    ins( "oe", "ö" );
+    ins( "ss", "ß" );
 
-  ins( "UE", "Ü" );
-  ins( "AE", "Ä" );
-  ins( "OE", "Ö" );
-  ins( "SS", "ß" );
+    ins( "UE", "Ü" );
+    ins( "AE", "Ä" );
+    ins( "OE", "Ö" );
+    ins( "SS", "ß" );
 
-  ins( "Ue", "Ü" );
-  ins( "Ae", "Ä" );
-  ins( "Oe", "Ö" );
-  ins( "Ss", "ß" );
+    ins( "Ue", "Ü" );
+    ins( "Ae", "Ä" );
+    ins( "Oe", "Ö" );
+    ins( "Ss", "ß" );
 
-//  ins( "ü", "ue" );
-//  ins( "ä", "ae" );
-//  ins( "ö", "oe" );
-//  ins( "ß", "ss" );
+    //  ins( "ü", "ue" );
+    //  ins( "ä", "ae" );
+    //  ins( "ö", "oe" );
+    //  ins( "ß", "ss" );
 
 }
 
 sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
-  static const GermanTable t;
+    static const GermanTable t;
 
-  return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1081",
-                      QCoreApplication::translate( "GermanTranslit", "German Transliteration" ).toUtf8().data(),
-                      QIcon( ":/flags/de.png" ), t ) );
+    return sptr< Dictionary::Class >(new Transliteration::TransliterationDictionary( "cf1b74acd98adea9b2bba16af38f1081",
+                                                                                     QCoreApplication::translate( "GermanTranslit", "German Transliteration" ).toUtf8().data(),
+                                                                                     QIcon( ":/flags/de.png" ), t ) );
 }
 
 

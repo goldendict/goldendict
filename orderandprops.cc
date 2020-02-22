@@ -20,65 +20,65 @@ namespace {
 bool dictNameLessThan( sptr< Dictionary::Class > const & dict1,
                        sptr< Dictionary::Class > const & dict2 )
 {
-  QString str1 = QString::fromUtf8( dict1->getName().c_str() );
-  QString str2 = QString::fromUtf8( dict2->getName().c_str() );
-  if( str1.isEmpty() && !str2.isEmpty() )
-    return false;
-  if( !str1.isEmpty() && str2.isEmpty() )
-    return true;
+    QString str1 = QString::fromUtf8( dict1->getName().c_str() );
+    QString str2 = QString::fromUtf8( dict2->getName().c_str() );
+    if( str1.isEmpty() && !str2.isEmpty() )
+        return false;
+    if( !str1.isEmpty() && str2.isEmpty() )
+        return true;
 
-  return str1.localeAwareCompare( str2 ) < 0;
+    return str1.localeAwareCompare( str2 ) < 0;
 }
 
 bool dictLessThan( sptr< Dictionary::Class > const & dict1,
                    sptr< Dictionary::Class > const & dict2 )
 {
-  int idFrom1 = dict1->getLangFrom();
-  int idTo1 = dict1->getLangTo();
-  if( idFrom1 == 0)
-  {
-    QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict1->getName().c_str() ) );
-    idFrom1 = ids.first;
-    idTo1 = ids.second;
-  }
+    int idFrom1 = dict1->getLangFrom();
+    int idTo1 = dict1->getLangTo();
+    if( idFrom1 == 0)
+    {
+        QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict1->getName().c_str() ) );
+        idFrom1 = ids.first;
+        idTo1 = ids.second;
+    }
 
-  int idFrom2 = dict2->getLangFrom();
-  int idTo2 = dict2->getLangTo();
-  if( idFrom2 == 0)
-  {
-    QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict2->getName().c_str() ) );
-    idFrom2 = ids.first;
-    idTo2 = ids.second;
-  }
+    int idFrom2 = dict2->getLangFrom();
+    int idTo2 = dict2->getLangTo();
+    if( idFrom2 == 0)
+    {
+        QPair<quint32,quint32> ids = LangCoder::findIdsForName( QString::fromUtf8( dict2->getName().c_str() ) );
+        idFrom2 = ids.first;
+        idTo2 = ids.second;
+    }
 
-  QString str1 = LangCoder::decode( idFrom1 );
-  QString str2 = LangCoder::decode( idFrom2 );
-  if( str1.isEmpty() && !str2.isEmpty() )
-    return false;
-  if( !str1.isEmpty() && str2.isEmpty() )
-    return true;
-  int res = str1.localeAwareCompare( str2 );
-  if( res )
-    return res < 0;
+    QString str1 = LangCoder::decode( idFrom1 );
+    QString str2 = LangCoder::decode( idFrom2 );
+    if( str1.isEmpty() && !str2.isEmpty() )
+        return false;
+    if( !str1.isEmpty() && str2.isEmpty() )
+        return true;
+    int res = str1.localeAwareCompare( str2 );
+    if( res )
+        return res < 0;
 
-  str1 = LangCoder::decode( idTo1 );
-  str2 = LangCoder::decode( idTo2 );
-  if( str1.isEmpty() && !str2.isEmpty() )
-    return false;
-  if( !str1.isEmpty() && str2.isEmpty() )
-    return true;
-  res = str1.localeAwareCompare( str2 );
-  if( res )
-    return res < 0;
+    str1 = LangCoder::decode( idTo1 );
+    str2 = LangCoder::decode( idTo2 );
+    if( str1.isEmpty() && !str2.isEmpty() )
+        return false;
+    if( !str1.isEmpty() && str2.isEmpty() )
+        return true;
+    res = str1.localeAwareCompare( str2 );
+    if( res )
+        return res < 0;
 
-  str1 = QString::fromUtf8( dict1->getName().c_str() );
-  str2 = QString::fromUtf8( dict2->getName().c_str() );
-  if( str1.isEmpty() && !str2.isEmpty() )
-    return false;
-  if( !str1.isEmpty() && str2.isEmpty() )
-    return true;
+    str1 = QString::fromUtf8( dict1->getName().c_str() );
+    str2 = QString::fromUtf8( dict2->getName().c_str() );
+    if( str1.isEmpty() && !str2.isEmpty() )
+        return false;
+    if( !str1.isEmpty() && str2.isEmpty() )
+        return true;
 
-  return str1.localeAwareCompare( str2 ) < 0;
+    return str1.localeAwareCompare( str2 ) < 0;
 }
 
 } // namespace
@@ -88,229 +88,229 @@ OrderAndProps::OrderAndProps( QWidget * parent,
                               Config::Group const & inactiveDictionaries,
                               std::vector< sptr< Dictionary::Class > > const &
                               allDictionaries ):
-  QWidget( parent )
+    QWidget( parent )
 {
-  ui.setupUi( this );
+    ui.setupUi( this );
 
-  Instances::Group order( dictionaryOrder, allDictionaries, Config::Group() );
-  Instances::Group inactive( inactiveDictionaries, allDictionaries, Config::Group() );
+    Instances::Group order( dictionaryOrder, allDictionaries, Config::Group() );
+    Instances::Group inactive( inactiveDictionaries, allDictionaries, Config::Group() );
 
-  Instances::complementDictionaryOrder( order, inactive, allDictionaries );
+    Instances::complementDictionaryOrder( order, inactive, allDictionaries );
 
-  ui.dictionaryOrder->populate( order.dictionaries, allDictionaries );
-  ui.inactiveDictionaries->populate( inactive.dictionaries, allDictionaries );
+    ui.dictionaryOrder->populate( order.dictionaries, allDictionaries );
+    ui.inactiveDictionaries->populate( inactive.dictionaries, allDictionaries );
 
-  ui.searchLine->applyTo( ui.dictionaryOrder );
-  addAction( ui.searchLine->getFocusAction() );
+    ui.searchLine->applyTo( ui.dictionaryOrder );
+    addAction( ui.searchLine->getFocusAction() );
 
-  disableDictionaryDescription();
+    disableDictionaryDescription();
 
-  ui.dictionaryOrder->setContextMenuPolicy( Qt::CustomContextMenu );
-  connect( ui.dictionaryOrder, SIGNAL( customContextMenuRequested( QPoint ) ),
-           this, SLOT( contextMenuRequested( QPoint ) ) );
+    ui.dictionaryOrder->setContextMenuPolicy( Qt::CustomContextMenu );
+    connect( ui.dictionaryOrder, SIGNAL( customContextMenuRequested( QPoint ) ),
+             this, SLOT( contextMenuRequested( QPoint ) ) );
 
-  connect( ui.dictionaryOrder, SIGNAL( gotFocus() ),
-           this, SLOT( dictListFocused() ) );
-  connect( ui.inactiveDictionaries, SIGNAL( gotFocus() ),
-           this, SLOT( inactiveDictListFocused() ) );
+    connect( ui.dictionaryOrder, SIGNAL( gotFocus() ),
+             this, SLOT( dictListFocused() ) );
+    connect( ui.inactiveDictionaries, SIGNAL( gotFocus() ),
+             this, SLOT( inactiveDictListFocused() ) );
 
-  connect ( ui.dictionaryOrder->selectionModel(), SIGNAL( selectionChanged ( const QItemSelection & , const QItemSelection & ) ),
-      this, SLOT( dictionarySelectionChanged( const QItemSelection & ) ) );
-  connect ( ui.inactiveDictionaries->selectionModel(), SIGNAL( selectionChanged( const QItemSelection &, const QItemSelection & ) ),
-      this, SLOT( inactiveDictionarySelectionChanged( QItemSelection const & ) ) );
+    connect ( ui.dictionaryOrder->selectionModel(), SIGNAL( selectionChanged ( const QItemSelection & , const QItemSelection & ) ),
+              this, SLOT( dictionarySelectionChanged( const QItemSelection & ) ) );
+    connect ( ui.inactiveDictionaries->selectionModel(), SIGNAL( selectionChanged( const QItemSelection &, const QItemSelection & ) ),
+              this, SLOT( inactiveDictionarySelectionChanged( QItemSelection const & ) ) );
 
-  connect (ui.searchLine, SIGNAL( filterChanged( QString const & ) ),
-      this, SLOT( filterChanged( QString const &) ) );
+    connect (ui.searchLine, SIGNAL( filterChanged( QString const & ) ),
+             this, SLOT( filterChanged( QString const &) ) );
 
-  connect( ui.dictionaryOrder->getModel(), SIGNAL( contentChanged() ),
-           this, SLOT( showDictNumbers() ) );
-  connect( ui.inactiveDictionaries->getModel(), SIGNAL( contentChanged() ),
-           this, SLOT( showDictNumbers() ) );
+    connect( ui.dictionaryOrder->getModel(), SIGNAL( contentChanged() ),
+             this, SLOT( showDictNumbers() ) );
+    connect( ui.inactiveDictionaries->getModel(), SIGNAL( contentChanged() ),
+             this, SLOT( showDictNumbers() ) );
 
-  showDictNumbers();
+    showDictNumbers();
 }
 
 Config::Group OrderAndProps::getCurrentDictionaryOrder() const
 {
-  Instances::Group g( "" );
+    Instances::Group g( "" );
 
-  g.dictionaries = ui.dictionaryOrder->getCurrentDictionaries();
+    g.dictionaries = ui.dictionaryOrder->getCurrentDictionaries();
 
-  return g.makeConfigGroup();
+    return g.makeConfigGroup();
 }
 
 Config::Group OrderAndProps::getCurrentInactiveDictionaries() const
 {
-  Instances::Group g( "" );
+    Instances::Group g( "" );
 
-  g.dictionaries = ui.inactiveDictionaries->getCurrentDictionaries();
+    g.dictionaries = ui.inactiveDictionaries->getCurrentDictionaries();
 
-  return g.makeConfigGroup();
+    return g.makeConfigGroup();
 }
 
 void OrderAndProps::filterChanged( QString const & filterText)
 {
-  // when the filter is active, disable the possibility
-  // to drop dictionaries to this filtered list
-  ui.dictionaryOrder->setAcceptDrops(filterText.isEmpty());
+    // when the filter is active, disable the possibility
+    // to drop dictionaries to this filtered list
+    ui.dictionaryOrder->setAcceptDrops(filterText.isEmpty());
 }
 
 void OrderAndProps::dictListFocused()
 {
-  describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( ui.dictionaryOrder->currentIndex() ) );
+    describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( ui.dictionaryOrder->currentIndex() ) );
 }
 
 void OrderAndProps::inactiveDictListFocused()
 {
-  describeDictionary( ui.inactiveDictionaries, ui.inactiveDictionaries->currentIndex() );
+    describeDictionary( ui.inactiveDictionaries, ui.inactiveDictionaries->currentIndex() );
 }
 
 void OrderAndProps::dictionarySelectionChanged( const QItemSelection & current )
 {
-  if ( current.empty() )
-    return;
+    if ( current.empty() )
+        return;
 
-  describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( current.front().topLeft() ) );
+    describeDictionary( ui.dictionaryOrder, ui.searchLine->mapToSource( current.front().topLeft() ) );
 }
 
 void OrderAndProps::inactiveDictionarySelectionChanged( QItemSelection const & current )
 {
-  if ( current.empty() )
-    return;
-  describeDictionary( ui.inactiveDictionaries, current.front().topLeft() );
+    if ( current.empty() )
+        return;
+    describeDictionary( ui.inactiveDictionaries, current.front().topLeft() );
 }
 
 void OrderAndProps::disableDictionaryDescription()
 {
-  ui.dictionaryInformation->setEnabled( false );
+    ui.dictionaryInformation->setEnabled( false );
 
-  ui.dictionaryName->clear();
-  ui.dictionaryTotalArticles->clear();
-  ui.dictionaryTotalWords->clear();
-  ui.dictionaryTranslatesFrom->clear();
-  ui.dictionaryTranslatesTo->clear();
-  ui.dictionaryFileList->clear();
+    ui.dictionaryName->clear();
+    ui.dictionaryTotalArticles->clear();
+    ui.dictionaryTotalWords->clear();
+    ui.dictionaryTranslatesFrom->clear();
+    ui.dictionaryTranslatesTo->clear();
+    ui.dictionaryFileList->clear();
 
-  ui.dictionaryDescription->clear();
-  ui.dictionaryDescription->setVisible( false );
-  ui.dictionaryDescriptionLabel->setVisible( false );
-  ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
-  ui.infoVerticalLayout->invalidate();
+    ui.dictionaryDescription->clear();
+    ui.dictionaryDescription->setVisible( false );
+    ui.dictionaryDescriptionLabel->setVisible( false );
+    ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    ui.infoVerticalLayout->invalidate();
 }
 
 void OrderAndProps::describeDictionary( DictListWidget * lst, QModelIndex const & idx )
 {
-  if ( !idx.isValid() || (unsigned) idx.row() >= lst->getCurrentDictionaries().size() )
-    disableDictionaryDescription();
-  else
-  {
-    sptr< Dictionary::Class > dict = lst->getCurrentDictionaries()[ idx.row() ];
-
-    if ( !dict )
-    {
-      return;
-    }
-
-    ui.dictionaryInformation->setEnabled( true );
-
-    ui.dictionaryName->setText( QString::fromUtf8( dict->getDescName().c_str() ) );
-
-    ui.dictionaryTotalArticles->setText( QString::number( dict->getArticleCount() ) );
-    ui.dictionaryTotalWords->setText( QString::number( dict->getWordCount() ) );
-    ui.dictionaryTranslatesFrom->setText( Language::localizedStringForId( dict->getLangFrom() ) );
-    ui.dictionaryTranslatesTo->setText( Language::localizedStringForId( dict->getLangTo() ) );
-
-    std::vector< std::string > const & filenames = dict->getDictionaryFilenames();
-
-    QString filenamesText;
-
-    for( unsigned x = 0; x < filenames.size(); x++ )
-    {
-      filenamesText += FsEncoding::decode( filenames[ x ].c_str() );
-      filenamesText += '\n';
-    }
-
-    ui.dictionaryFileList->setPlainText( filenamesText );
-
-    QString const& descText = dict->getDescription();
-    if( !descText.isEmpty() && descText.compare( "NONE" ) != 0 )
-    {
-      ui.dictionaryDescription->setPlainText( descText );
-      ui.dictionaryDescription->setVisible( true );
-      ui.dictionaryDescriptionLabel->setVisible( true );
-      ui.infoVerticalSpacer->changeSize( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum );
-    }
+    if ( !idx.isValid() || (unsigned) idx.row() >= lst->getCurrentDictionaries().size() )
+        disableDictionaryDescription();
     else
     {
-      ui.dictionaryDescription->setVisible( false );
-      ui.dictionaryDescriptionLabel->setVisible( false );
-      ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
+        sptr< Dictionary::Class > dict = lst->getCurrentDictionaries()[ idx.row() ];
+
+        if ( !dict )
+        {
+            return;
+        }
+
+        ui.dictionaryInformation->setEnabled( true );
+
+        ui.dictionaryName->setText( QString::fromUtf8( dict->getDescName().c_str() ) );
+
+        ui.dictionaryTotalArticles->setText( QString::number( dict->getArticleCount() ) );
+        ui.dictionaryTotalWords->setText( QString::number( dict->getWordCount() ) );
+        ui.dictionaryTranslatesFrom->setText( Language::localizedStringForId( dict->getLangFrom() ) );
+        ui.dictionaryTranslatesTo->setText( Language::localizedStringForId( dict->getLangTo() ) );
+
+        std::vector< std::string > const & filenames = dict->getDictionaryFilenames();
+
+        QString filenamesText;
+
+        for( unsigned x = 0; x < filenames.size(); x++ )
+        {
+            filenamesText += FsEncoding::decode( filenames[ x ].c_str() );
+            filenamesText += '\n';
+        }
+
+        ui.dictionaryFileList->setPlainText( filenamesText );
+
+        QString const& descText = dict->getDescription();
+        if( !descText.isEmpty() && descText.compare( "NONE" ) != 0 )
+        {
+            ui.dictionaryDescription->setPlainText( descText );
+            ui.dictionaryDescription->setVisible( true );
+            ui.dictionaryDescriptionLabel->setVisible( true );
+            ui.infoVerticalSpacer->changeSize( 0, 0, QSizePolicy::Minimum, QSizePolicy::Minimum );
+        }
+        else
+        {
+            ui.dictionaryDescription->setVisible( false );
+            ui.dictionaryDescriptionLabel->setVisible( false );
+            ui.infoVerticalSpacer->changeSize( 20, 5, QSizePolicy::Minimum, QSizePolicy::Expanding );
+        }
+        ui.infoVerticalLayout->invalidate();
     }
-    ui.infoVerticalLayout->invalidate();
-  }
 }
 
 void OrderAndProps::contextMenuRequested( const QPoint & pos )
 {
-  QMenu menu( this );
+    QMenu menu( this );
 
-  QAction * showHeadwordsAction = NULL, *renameAction = nullptr;
-  QModelIndex idx = ui.searchLine->mapToSource( ui.dictionaryOrder->indexAt( pos ) );
-  sptr< Dictionary::Class > dict;
-  if( idx.isValid() && (unsigned)idx.row() < ui.dictionaryOrder->getCurrentDictionaries().size() )
-    dict = ui.dictionaryOrder->getCurrentDictionaries()[ idx.row() ];
-  if ( dict && dict->getWordCount() > 0 )
-  {
-    renameAction = new QAction( tr( "Rename" ), &menu );
-    menu.addAction( renameAction );
-    showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
-    menu.addAction( showHeadwordsAction );
-  }
-
-  QAction * sortNameAction = new QAction( tr( "Sort by name" ), &menu );
-  menu.addAction( sortNameAction );
-  QAction * sortLangAction = new QAction( tr( "Sort by languages" ), &menu );
-  menu.addAction( sortLangAction );
-
-  QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
-  if(result==nullptr)
-      return;
-
-  if( result == sortNameAction || result == sortLangAction )
-  {
-    vector< sptr< Dictionary::Class > > sortedDicts = ui.dictionaryOrder->getCurrentDictionaries();
-    if( result == sortNameAction )
-      sort( sortedDicts.begin(), sortedDicts.end(), dictNameLessThan );
-    else
-      sort( sortedDicts.begin(), sortedDicts.end(), dictLessThan );
-    ui.dictionaryOrder->populate( sortedDicts );
-  }
-  else if( result == showHeadwordsAction )
-  {
-    emit showDictionaryHeadwords( QString::fromUtf8( dict->getId().c_str() ) );
-  }
-  else if( result == renameAction )
-  {
-    const QString name = QString::fromUtf8( dict->getName().c_str() );
-    QString uname = QString::fromUtf8( dict->getDescName().c_str() );
-    bool ok = false;
-    uname = QInputDialog::getText(0, name, tr("New name:"), QLineEdit::Normal,
-                                                uname, &ok);
-    if(ok)
+    QAction * showHeadwordsAction = NULL, *renameAction = nullptr;
+    QModelIndex idx = ui.searchLine->mapToSource( ui.dictionaryOrder->indexAt( pos ) );
+    sptr< Dictionary::Class > dict;
+    if( idx.isValid() && (unsigned)idx.row() < ui.dictionaryOrder->getCurrentDictionaries().size() )
+        dict = ui.dictionaryOrder->getCurrentDictionaries()[ idx.row() ];
+    if ( dict && dict->getWordCount() > 0 )
     {
-        if(name == uname)
-            dict->setUserDictName();
-        else
-            dict->setUserDictName(uname.toUtf8().data());
-        ui.dictionaryName->setText(uname);
-        emit userDictNameChanged(QString::fromUtf8( dict->getId().c_str() ), uname );
+        renameAction = new QAction( tr( "Rename" ), &menu );
+        menu.addAction( renameAction );
+        showHeadwordsAction = new QAction( tr( "Dictionary headwords" ), &menu );
+        menu.addAction( showHeadwordsAction );
     }
-  }
+
+    QAction * sortNameAction = new QAction( tr( "Sort by name" ), &menu );
+    menu.addAction( sortNameAction );
+    QAction * sortLangAction = new QAction( tr( "Sort by languages" ), &menu );
+    menu.addAction( sortLangAction );
+
+    QAction * result = menu.exec( ui.dictionaryOrder->mapToGlobal( pos ) );
+    if(result==nullptr)
+        return;
+
+    if( result == sortNameAction || result == sortLangAction )
+    {
+        vector< sptr< Dictionary::Class > > sortedDicts = ui.dictionaryOrder->getCurrentDictionaries();
+        if( result == sortNameAction )
+            sort( sortedDicts.begin(), sortedDicts.end(), dictNameLessThan );
+        else
+            sort( sortedDicts.begin(), sortedDicts.end(), dictLessThan );
+        ui.dictionaryOrder->populate( sortedDicts );
+    }
+    else if( result == showHeadwordsAction )
+    {
+        emit showDictionaryHeadwords( QString::fromUtf8( dict->getId().c_str() ) );
+    }
+    else if( result == renameAction )
+    {
+        const QString name = QString::fromUtf8( dict->getName().c_str() );
+        QString uname = QString::fromUtf8( dict->getDescName().c_str() );
+        bool ok = false;
+        uname = QInputDialog::getText(0, name, tr("New name:"), QLineEdit::Normal,
+                                      uname, &ok);
+        if(ok)
+        {
+            if(name == uname)
+                dict->setUserDictName();
+            else
+                dict->setUserDictName(uname.toUtf8().data());
+            ui.dictionaryName->setText(uname);
+            emit userDictNameChanged(QString::fromUtf8( dict->getId().c_str() ), uname );
+        }
+    }
 }
 
 void OrderAndProps::showDictNumbers()
 {
-  ui.dictionariesNumber->setText( tr( "Dictionaries active: %1, inactive: %2" )
-                                  .arg( QString::number( ui.dictionaryOrder->getModel()->rowCount( QModelIndex() ) ) )
-                                  .arg( QString::number( ui.inactiveDictionaries->getModel()->rowCount( QModelIndex() ) ) ) );
+    ui.dictionariesNumber->setText( tr( "Dictionaries active: %1, inactive: %2" )
+                                    .arg( QString::number( ui.dictionaryOrder->getModel()->rowCount( QModelIndex() ) ) )
+                                    .arg( QString::number( ui.inactiveDictionaries->getModel()->rowCount( QModelIndex() ) ) ) );
 }

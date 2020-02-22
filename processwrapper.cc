@@ -1,6 +1,6 @@
 #include "processwrapper.hh"
 
-#include <QtCore>
+#include <QString>
 
 #ifdef Q_OS_WIN32
 
@@ -10,7 +10,7 @@
 
 unsigned int ProcessWrapper::currentProcessId()
 {
-	return GetCurrentProcessId();
+    return GetCurrentProcessId();
 }
 
 bool ProcessWrapper::processExists(unsigned int pid)
@@ -24,9 +24,9 @@ bool ProcessWrapper::processExists(unsigned int pid)
     cProcesses = cbNeeded / sizeof(DWORD);
     for ( i = 0; i < cProcesses; i++ )
     {
-      unsigned int processID = aProcesses[i];
-      if ( processID == pid )
-        return true;
+        unsigned int processID = aProcesses[i];
+        if ( processID == pid )
+            return true;
     }
 
     return false;
@@ -68,18 +68,18 @@ unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip
                 DWORD cbNeeded;
 
                 if ( EnumProcessModules( hProcess, &hMod, sizeof(hMod),
-                     &cbNeeded) )
+                                         &cbNeeded) )
                 {
                     GetModuleBaseNameA( hProcess, hMod, szProcessName,
-                                       sizeof(szProcessName)/sizeof(TCHAR) );
+                                        sizeof(szProcessName)/sizeof(TCHAR) );
 
-					if (QString(szProcessName) == pname) {
-	                    CloseHandle( hProcess );
+                    if (QString(szProcessName) == pname) {
+                        CloseHandle( hProcess );
                         return processID;
-					}
+                    }
                 }
 
-				CloseHandle( hProcess );
+                CloseHandle( hProcess );
             }
 
             // Print the process name and identifier.
@@ -103,7 +103,7 @@ unsigned int ProcessWrapper::currentProcessId()
 
 bool ProcessWrapper::processExists(unsigned int pid)
 {
-  return QFile::exists(QString("/proc/%1").arg(pid));
+    return QFile::exists(QString("/proc/%1").arg(pid));
 }
 
 unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip)

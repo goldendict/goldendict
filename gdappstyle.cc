@@ -10,48 +10,49 @@
 #include <QWidget>
 #include <QToolButton>
 #include <QDebug>
+#include <QStyleOption>
 
 GdAppStyle::GdAppStyle(QProxyStyle * parent) : QProxyStyle(parent) {}
 
 int GdAppStyle::pixelMetric ( PixelMetric metric, const QStyleOption * option, const QWidget * widget) const
 {
-  int defaultVal = QProxyStyle::pixelMetric(metric, option, widget);
+    int defaultVal = QProxyStyle::pixelMetric(metric, option, widget);
 
-  if ( dictionaryBarButton( widget ) )
-  {
-    if ( metric == QStyle::PM_ButtonShiftVertical || metric == QStyle::PM_ButtonShiftHorizontal )
+    if ( dictionaryBarButton( widget ) )
     {
-      if (option ->state & State_Sunken ) {
-        return defaultVal;
-      }
+        if ( metric == QStyle::PM_ButtonShiftVertical || metric == QStyle::PM_ButtonShiftHorizontal )
+        {
+            if (option ->state & State_Sunken ) {
+                return defaultVal;
+            }
 
-      if ( option ->state & State_On ) {
-        // No shift for for the checked tool buttons on the dictionary bar,
-        // that's why the whole thing with QProxyStyle is neded, to achieve this.
-        return 0;
-      }
+            if ( option ->state & State_On ) {
+                // No shift for for the checked tool buttons on the dictionary bar,
+                // that's why the whole thing with QProxyStyle is neded, to achieve this.
+                return 0;
+            }
+        }
     }
-  }
 
-  // Qt don't upscale icons for high dpi scales
-  // We limit maximum small icon size to 21 pixel
-  // (standard icon size for Lingvo dictionaries)
-  if( metric == QStyle::PM_SmallIconSize )
-    return defaultVal < 21 ? defaultVal : 21;
+    // Qt don't upscale icons for high dpi scales
+    // We limit maximum small icon size to 21 pixel
+    // (standard icon size for Lingvo dictionaries)
+    if( metric == QStyle::PM_SmallIconSize )
+        return defaultVal < 21 ? defaultVal : 21;
 
-  return defaultVal;
+    return defaultVal;
 }
 
 bool GdAppStyle::dictionaryBarButton(const QWidget * widget) const {
-  if (widget) {
-    const QWidget * parent = widget->parentWidget();
-    if ( parent &&
-         qobject_cast<const DictionaryBar *>( parent ) &&
-         qobject_cast<const QToolButton *>( widget ) )
-      return true;
-  }
+    if (widget) {
+        const QWidget * parent = widget->parentWidget();
+        if ( parent &&
+             qobject_cast<const DictionaryBar *>( parent ) &&
+             qobject_cast<const QToolButton *>( widget ) )
+            return true;
+    }
 
-  return false;
+    return false;
 }
 
 #endif // QT_VERSION

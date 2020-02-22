@@ -16,6 +16,7 @@
 #endif
 
 #include <cctype>
+#include <QFileInfo>
 #include <QLocale>
 
 LangCoder langCoder;
@@ -216,158 +217,158 @@ static const GDLangCode LangCodes[] = {
 
 LangCoder::LangCoder()
 {
-  for (int i = 0; true; i++) {
-    const GDLangCode &lc = LangCodes[i];
-    if (lc.lang[0] == 0)
-      break;
-    codeMap[code2toInt(lc.code)] = i;
-  }
+    for (int i = 0; true; i++) {
+        const GDLangCode &lc = LangCodes[i];
+        if (lc.lang[0] == 0)
+            break;
+        codeMap[code2toInt(lc.code)] = i;
+    }
 }
 
 QString LangCoder::decode(quint32 code)
 {
-  if (langCoder.codeMap.contains(code))
-    return LangCodes[langCoder.codeMap[code]].lang;
+    if (langCoder.codeMap.contains(code))
+        return LangCodes[langCoder.codeMap[code]].lang;
 
-  return QString();
+    return QString();
 }
 
 QIcon LangCoder::icon(quint32 code)
 {
-  if (langCoder.codeMap.contains(code))
-  {
-    const GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
-    return QIcon( ":/flags/" + QString(lc.code) + ".png" );
-  }
+    if (langCoder.codeMap.contains(code))
+    {
+        const GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
+        return QIcon( ":/flags/" + QString(lc.code) + ".png" );
+    }
 
-  return QIcon();
+    return QIcon();
 }
 
 LangStruct LangCoder::langStruct(quint32 code)
 {
-  LangStruct ls;
-  ls.code = code;
-  ls.order = -1;
-  if (codeMap.contains(code)) {
-    int order = codeMap[code];
-    const GDLangCode &lc = LangCodes[order];
-    ls.order = order;
-    ls.lang = lc.lang;
-    ls.icon = QIcon(":/flags/" + QString(lc.code) + ".png");
-  }
-  return ls;
+    LangStruct ls;
+    ls.code = code;
+    ls.order = -1;
+    if (codeMap.contains(code)) {
+        int order = codeMap[code];
+        const GDLangCode &lc = LangCodes[order];
+        ls.order = order;
+        ls.lang = lc.lang;
+        ls.icon = QIcon(":/flags/" + QString(lc.code) + ".png");
+    }
+    return ls;
 }
 
 QString LangCoder::intToCode2( quint32 val )
 {
-  if ( !val || val == 0xFFffFFff )
-    return QString();
+    if ( !val || val == 0xFFffFFff )
+        return QString();
 
-  char code[ 2 ];
+    char code[ 2 ];
 
-  code[ 0 ] = val & 0xFF;
-  code[ 1 ] = ( val >> 8 ) & 0xFF;
+    code[ 0 ] = val & 0xFF;
+    code[ 1 ] = ( val >> 8 ) & 0xFF;
 
-  return QString::fromLatin1( code, 2 );
+    return QString::fromLatin1( code, 2 );
 }
 
 quint32 LangCoder::findIdForLanguage( gd::wstring const & lang )
 {
-  gd::wstring langFolded = Folding::apply( lang );
+    gd::wstring langFolded = Folding::apply( lang );
 
-  for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
-  {
-    if ( langFolded == Folding::apply( gd::toWString( lc->lang ) ) )
+    for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
     {
-      // We've got a match
-      return code2toInt( lc->code );
+        if ( langFolded == Folding::apply( gd::toWString( lc->lang ) ) )
+        {
+            // We've got a match
+            return code2toInt( lc->code );
+        }
     }
-  }
 
-  return Language::findBlgLangIDByEnglishName( lang );
-  //return 0;
+    return Language::findBlgLangIDByEnglishName( lang );
+    //return 0;
 }
 
 quint32 LangCoder::findIdForLanguageCode3( const char * code3 )
 {
-  for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
-  {
-    if ( strcasecmp( code3, lc->code3 ) == 0 )
+    for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
     {
-      // We've got a match
-      return code2toInt( lc->code );
+        if ( strcasecmp( code3, lc->code3 ) == 0 )
+        {
+            // We've got a match
+            return code2toInt( lc->code );
+        }
     }
-  }
 
-  return 0;
+    return 0;
 }
 
 quint32 LangCoder::guessId( const QString & lang )
 {
-  QString lstr = lang.simplified().toLower();
+    QString lstr = lang.simplified().toLower();
 
-  // too small to guess
-  if (lstr.size() < 2)
-    return 0;
+    // too small to guess
+    if (lstr.size() < 2)
+        return 0;
 
-  // check if it could be the whole language name
-  if (lstr.size() >= 3)
-  {
-    for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+    // check if it could be the whole language name
+    if (lstr.size() >= 3)
     {
-      if ( lstr == ( lstr.size() == 3 ? QString( lc->code3 ) : QString( lc->lang ) ) )
-      {
-        // We've got a match
-        return code2toInt( lc->code );
-      }
+        for( GDLangCode const * lc = LangCodes; lc->code[ 0 ]; ++lc )
+        {
+            if ( lstr == ( lstr.size() == 3 ? QString( lc->code3 ) : QString( lc->lang ) ) )
+            {
+                // We've got a match
+                return code2toInt( lc->code );
+            }
+        }
     }
-  }
 
-  // still not found - try to match by 2-symbol code
-  return code2toInt( lstr.left(2).toLatin1().data() );
+    // still not found - try to match by 2-symbol code
+    return code2toInt( lstr.left(2).toLatin1().data() );
 }
 
 QPair<quint32,quint32> LangCoder::findIdsForName( QString const & name )
 {
-  QString nameFolded = "|" + name.toCaseFolded() + "|";
-  QRegExp reg( "[^a-z]([a-z]{2,3})-([a-z]{2,3})[^a-z]" ); reg.setMinimal(true);
-  int off = 0;
+    QString nameFolded = "|" + name.toCaseFolded() + "|";
+    QRegExp reg( "[^a-z]([a-z]{2,3})-([a-z]{2,3})[^a-z]" ); reg.setMinimal(true);
+    int off = 0;
 
-  while ( reg.indexIn( nameFolded, off ) >= 0 )
-  {
-    quint32 from = guessId( reg.cap(1) );
-    quint32 to = guessId( reg.cap(2) );
-    if (from && to)
-      return QPair<quint32,quint32>(from, to);
+    while ( reg.indexIn( nameFolded, off ) >= 0 )
+    {
+        quint32 from = guessId( reg.cap(1) );
+        quint32 to = guessId( reg.cap(2) );
+        if (from && to)
+            return QPair<quint32,quint32>(from, to);
 
-    off += reg.matchedLength();
-  }
+        off += reg.matchedLength();
+    }
 
-  return QPair<quint32,quint32>(0, 0);
+    return QPair<quint32,quint32>(0, 0);
 }
 
 QPair<quint32,quint32> LangCoder::findIdsForFilename( QString const & name )
 {
-  return findIdsForName( QFileInfo( name ).fileName() );
+    return findIdsForName( QFileInfo( name ).fileName() );
 }
 
 bool LangCoder::isLanguageRTL( quint32 code )
 {
-  if ( langCoder.codeMap.contains( code ) )
-  {
-    const GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
-    if( lc.isRTL < 0 )
+    if ( langCoder.codeMap.contains( code ) )
     {
+        const GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
+        if( lc.isRTL < 0 )
+        {
 #if QT_VERSION >= 0x040700
-      return ( QLocale( lc.code ).textDirection() == Qt::RightToLeft );
+            return ( QLocale( lc.code ).textDirection() == Qt::RightToLeft );
 #else
-      return false;//lc.isRTL = 0;
+            return false;//lc.isRTL = 0;
 #endif
+        }
+        return lc.isRTL != 0;
     }
-    return lc.isRTL != 0;
-  }
 
-  return false;
+    return false;
 }
 
 /*

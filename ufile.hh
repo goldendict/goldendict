@@ -16,7 +16,7 @@ extern "C"
 #endif
 
 FILE *gd_fopen( const char *filename, const char *mode );
-int gd_open( const char *filename );
+//int gd_open( const char *filename );
 gzFile gd_gzopen( const char *filename );
 
 #ifdef __cplusplus

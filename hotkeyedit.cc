@@ -9,65 +9,65 @@
 #endif
 
 HotKeyEdit::HotKeyEdit( QWidget * parent ):
-  QLineEdit( parent ),
-  currentModifiers( 0 ), currentKey1( 0 ), currentKey2( 0 ),
-  continuingCombo( false )
+    QLineEdit( parent ),
+    currentModifiers( 0 ), currentKey1( 0 ), currentKey2( 0 ),
+    continuingCombo( false )
 {
-  renderCurrentValue();
-  installEventFilter( this );
+    renderCurrentValue();
+    installEventFilter( this );
 }
 
 void HotKeyEdit::setHotKey( Config::HotKey const & hk )
 {
-  currentModifiers = hk.modifiers;
-  currentKey1 = hk.key1;
-  currentKey2 = hk.key2;
+    currentModifiers = hk.modifiers;
+    currentKey1 = hk.key1;
+    currentKey2 = hk.key2;
 
-  renderCurrentValue();
+    renderCurrentValue();
 }
 
 Config::HotKey HotKeyEdit::getHotKey() const
 {
-  Config::HotKey hk;
+    Config::HotKey hk;
 
-  hk.modifiers = currentModifiers;
-  hk.key1 = currentKey1;
-  hk.key2 = currentKey2;
+    hk.modifiers = currentModifiers;
+    hk.key1 = currentKey1;
+    hk.key2 = currentKey2;
 
-  return hk;
+    return hk;
 }
 
 void HotKeyEdit::renderCurrentValue()
 {
-  QString result;
+    QString result;
 
-  if ( currentKey1 )
-  {
-    result = QKeySequence( currentKey1 | currentModifiers ).toString( QKeySequence::NativeText );
+    if ( currentKey1 )
+    {
+        result = QKeySequence( currentKey1 | currentModifiers ).toString( QKeySequence::NativeText );
 
-    if ( currentKey2 )
-     result += "+" + QKeySequence( currentKey2 ).toString( QKeySequence::NativeText );
-  }
+        if ( currentKey2 )
+            result += "+" + QKeySequence( currentKey2 ).toString( QKeySequence::NativeText );
+    }
 
-  setText( result );
+    setText( result );
 }
 
 void HotKeyEdit::keyPressEvent( QKeyEvent * event )
 {
-  int key = event->key();
-  Qt::KeyboardModifiers modifiers = event->modifiers() & ~Qt::KeypadModifier;
+    int key = event->key();
+    Qt::KeyboardModifiers modifiers = event->modifiers() & ~Qt::KeypadModifier;
 
 #ifdef Q_OS_WIN
-  if( objectName() == "mainWindowHotkey" || objectName() == "clipboardHotkey" )
-  {
-    int newkey = VkeyToQTkey( event->nativeVirtualKey() );
-    if( newkey )
-      key = newkey;
-  }
+    if( objectName() == "mainWindowHotkey" || objectName() == "clipboardHotkey" )
+    {
+        int newkey = VkeyToQTkey( event->nativeVirtualKey() );
+        if( newkey )
+            key = newkey;
+    }
 #endif
 
-  switch( key )
-  {
+    switch( key )
+    {
     case 0:
     case Qt::Key_unknown:
     case Qt::Key_Shift:
@@ -75,48 +75,48 @@ void HotKeyEdit::keyPressEvent( QKeyEvent * event )
     case Qt::Key_Meta:
     case Qt::Key_Alt:
     case Qt::Key_AltGr:
-      continuingCombo = false;
-      QLineEdit::keyPressEvent( event );
-    break;
+        continuingCombo = false;
+        QLineEdit::keyPressEvent( event );
+        break;
 
     default:
     {
-      if ( !modifiers &&
-           ( ( key == Qt::Key_Backspace ) || ( key == Qt::Key_Delete  ) ) )
-      {
-        // Delete current combo
-        currentKey1 = 0;
-        currentKey2 = 0;
-        currentModifiers = 0;
-        continuingCombo = false;
-      }
-      else
-      if ( !continuingCombo )
-      {
-        if ( modifiers || event->text().isEmpty() ) // Don't allow plain letters
+        if ( !modifiers &&
+             ( ( key == Qt::Key_Backspace ) || ( key == Qt::Key_Delete  ) ) )
         {
-          currentKey2 = 0;
-          currentKey1 = key;
-          currentModifiers = modifiers;
-          continuingCombo = true;
+            // Delete current combo
+            currentKey1 = 0;
+            currentKey2 = 0;
+            currentModifiers = 0;
+            continuingCombo = false;
         }
-      }
-      else
-      {
-        currentKey2 = key;
-        continuingCombo = false;
-      }
+        else
+            if ( !continuingCombo )
+            {
+                if ( modifiers || event->text().isEmpty() ) // Don't allow plain letters
+                {
+                    currentKey2 = 0;
+                    currentKey1 = key;
+                    currentModifiers = modifiers;
+                    continuingCombo = true;
+                }
+            }
+            else
+            {
+                currentKey2 = key;
+                continuingCombo = false;
+            }
 
-      renderCurrentValue();
+        renderCurrentValue();
     }
-    break;
-  }
+        break;
+    }
 }
 
 void HotKeyEdit::keyReleaseEvent( QKeyEvent * event )
 {
-  switch( event->key() )
-  {
+    switch( event->key() )
+    {
     case 0:
     case Qt::Key_unknown:
     case Qt::Key_Shift:
@@ -124,32 +124,32 @@ void HotKeyEdit::keyReleaseEvent( QKeyEvent * event )
     case Qt::Key_Meta:
     case Qt::Key_Alt:
     case Qt::Key_AltGr:
-      continuingCombo = false;
-    break;
-  }
+        continuingCombo = false;
+        break;
+    }
 
-  QLineEdit::keyReleaseEvent( event );
+    QLineEdit::keyReleaseEvent( event );
 }
 
 bool HotKeyEdit::eventFilter( QObject *, QEvent * event )
 {
-  if( event->type() == QEvent::ShortcutOverride )
-  {
-    event->accept();
-    return true;
-  }
-  return false;
+    if( event->type() == QEvent::ShortcutOverride )
+    {
+        event->accept();
+        return true;
+    }
+    return false;
 }
 
 #ifdef Q_OS_WIN
 
 int HotKeyEdit::VkeyToQTkey( quint32 vkey )
 {
-  if ( vkey >= Qt::Key_A && vkey <= Qt::Key_Z)
-    return vkey;
+    if ( vkey >= Qt::Key_A && vkey <= Qt::Key_Z)
+        return vkey;
 
-  switch( vkey )
-  {
+    switch( vkey )
+    {
     case VK_NUMPAD0:     return Qt::Key_0;
     case VK_NUMPAD1:     return Qt::Key_1;
     case VK_NUMPAD2:     return Qt::Key_2;
@@ -212,9 +212,9 @@ int HotKeyEdit::VkeyToQTkey( quint32 vkey )
     case VK_OEM_PERIOD:  return Qt::Key_Greater;
 
     default:;
-  }
+    }
 
-  return 0;
+    return 0;
 }
 
 #endif

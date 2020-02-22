@@ -4,8 +4,8 @@ enum { foldCaseMaxOut = 3 };
 
 size_t foldCase( wchar in, wchar * out )
 {
-  switch( in )
-  {
+    switch( in )
+    {
     case 0x41: *out = 0x61; return 1;
     case 0x42: *out = 0x62; return 1;
     case 0x43: *out = 0x63; return 1;
@@ -1124,13 +1124,13 @@ size_t foldCase( wchar in, wchar * out )
     case 0x10426: *out = 0x1044e; return 1;
     case 0x10427: *out = 0x1044f; return 1;
     default: *out = in; return 1;
-  }
+    }
 }
 
 wchar foldCaseSimple( wchar in )
 {
-  switch( in )
-  {
+    switch( in )
+    {
     case 0x41: return 0x61;
     case 0x42: return 0x62;
     case 0x43: return 0x63;
@@ -2173,5 +2173,5 @@ wchar foldCaseSimple( wchar in )
     case 0x10426: return 0x1044e;
     case 0x10427: return 0x1044f;
     default: return in;
-  }
+    }
 }

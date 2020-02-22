@@ -22,7 +22,7 @@ GDAutomationClient gdAuto;
 
 GDAutomationClient::GDAutomationClient()
 {
-HRESULT hr;
+    HRESULT hr;
     CoInitializeEx( NULL, COINIT_APARTMENTTHREADED );
     hr = CoCreateInstance( CLSID_CUIAutomation , NULL, CLSCTX_INPROC_SERVER, IID_IUIAutomation, (void**)&pGDAutomation );
     if( hr != S_OK ) pGDAutomation = NULL;
@@ -41,13 +41,13 @@ GDAutomationClient::~GDAutomationClient()
 
 bool GDAutomationClient::getWordAtPoint( POINT pt )
 {
-HRESULT hr;
-IUIAutomationTextPattern *pTextPattern;
-IUIAutomationTextRange *pTextRange;
-IUIAutomationElement *pElement, *pParent;
-BSTR bstr;
-RECT r = { 0, 0, 0, 0 };
-bool bGoUp;
+    HRESULT hr;
+    IUIAutomationTextPattern *pTextPattern;
+    IUIAutomationTextRange *pTextRange;
+    IUIAutomationElement *pElement, *pParent;
+    BSTR bstr;
+    RECT r = { 0, 0, 0, 0 };
+    bool bGoUp;
 
     GD_DPRINTF("\nEntering getWordAtPoint\n");
 

@@ -12,7 +12,7 @@ string decompressZlib( const char * bufptr, unsigned length );
 
 string decompressBzip2( const char * bufptr, unsigned length );
 
-#if defined(MAKE_ZIM_SUPPORT) || defined(MAKE_SLOB_SUPPORT)
+#if defined(GD_ZIM_SUPPORT) || defined(GD_SLOB_SUPPORT)
 
 string decompressLzma2( const char * bufptr, unsigned length,
                         bool raw_decoder = false );

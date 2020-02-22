@@ -1,7 +1,6 @@
 #ifndef __MACMOUSEOVER_HH_INCLUDED__
 #define __MACMOUSEOVER_HH_INCLUDED__
 
-#include <QObject>
 #include <QTimer>
 #include <ApplicationServices/ApplicationServices.h>
 #include "config.hh"
@@ -14,50 +13,50 @@
 
 class MacMouseOver: public QObject, public KeyboardState
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 
-  /// The class is a singleton.
-  static MacMouseOver & instance();
+    /// The class is a singleton.
+    static MacMouseOver & instance();
 
-  /// Enables mouseover. The mouseover is initially disabled.
-  void enableMouseOver();
-  /// Disables mouseover.
-  void disableMouseOver();
+    /// Enables mouseover. The mouseover is initially disabled.
+    void enableMouseOver();
+    /// Disables mouseover.
+    void disableMouseOver();
 
-  /// Set pointer to program configuration
-  void setPreferencesPtr( Config::Preferences const *ppref ) { pPref = ppref; };
+    /// Set pointer to program configuration
+    void setPreferencesPtr( Config::Preferences const *ppref ) { pPref = ppref; };
 
-  /// Called from event loop callback
-  void mouseMoved();
+    /// Called from event loop callback
+    void mouseMoved();
 
-  static bool isAXAPIEnabled();
-  
+    static bool isAXAPIEnabled();
+
 signals:
 
-  /// Emitted when there was some text under cursor which was hovered over.
-  void hovered( QString const &, bool forcePopup );
+    /// Emitted when there was some text under cursor which was hovered over.
+    void hovered( QString const &, bool forcePopup );
 
 private slots:
-  void timerShot();
+    void timerShot();
 
 private:
 
-  MacMouseOver();
-  ~MacMouseOver();
-  void handlePosition();
-  QString CFStringRefToQString( CFStringRef str );
-  void handleRetrievedString( QString & wordSeq, int wordSeqPos );
+    MacMouseOver();
+    ~MacMouseOver();
+    void handlePosition();
+    QString CFStringRefToQString( CFStringRef str );
+    void handleRetrievedString( QString & wordSeq, int wordSeqPos );
 
-  Config::Preferences const *pPref;
-  QTimer mouseTimer;
-  CFMachPortRef tapRef;
-  CFRunLoopSourceRef loop;
-  Mutex mouseMutex;
-  AXUIElementRef elementSystemWide;
+    Config::Preferences const *pPref;
+    QTimer mouseTimer;
+    CFMachPortRef tapRef;
+    CFRunLoopSourceRef loop;
+    Mutex mouseMutex;
+    AXUIElementRef elementSystemWide;
 
-  bool mouseOverEnabled;
+    bool mouseOverEnabled;
 
 };
 

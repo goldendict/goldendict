@@ -2,7 +2,8 @@
 #define WEBMULTIMEDIADOWNLOAD_HH
 
 #include "dictionary.hh"
-#include <QtNetwork>
+class QNetworkReply;
+class QNetworkAccessManager;
 
 namespace Dictionary {
 
@@ -10,24 +11,24 @@ namespace Dictionary {
 /// is useful for multimedia files, like sounds and pronunciations.
 class WebMultimediaDownload: public DataRequest
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  QNetworkReply * reply;
-  QNetworkAccessManager & mgr;
-  int redirectCount;
+    QNetworkReply * reply;
+    QNetworkAccessManager & mgr;
+    int redirectCount;
 
 public:
 
-  WebMultimediaDownload( QUrl const &, QNetworkAccessManager & );
+    WebMultimediaDownload( QUrl const &, QNetworkAccessManager & );
 
-  /// Checks if the given url is an http request for an audio file.
-  static bool isAudioUrl( QUrl const & );
+    /// Checks if the given url is an http request for an audio file.
+    static bool isAudioUrl( QUrl const & );
 
-  virtual void cancel();
+    virtual void cancel();
 
 private slots:
 
-  void replyFinished( QNetworkReply * );
+    void replyFinished( QNetworkReply * );
 };
 
 }

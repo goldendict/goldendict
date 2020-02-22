@@ -4,94 +4,93 @@
 #ifndef __EDITDICTIONARIES_HH_INCLUDED__
 #define __EDITDICTIONARIES_HH_INCLUDED__
 
-#include "dictionary.hh"
-#include "config.hh"
 #include "ui_editdictionaries.h"
 #include "sources.hh"
 #include "orderandprops.hh"
 #include "groups.hh"
 #include "instances.hh"
-#include "helpwindow.hh"
-#include <QNetworkAccessManager>
 #include <QAction>
+
+class QNetworkAccessManager;
+namespace Help { class HelpWindow; }
+namespace Config { struct Class; }
 
 class EditDictionaries: public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 
-  EditDictionaries( QWidget * parent, Config::Class & cfg,
-                    std::vector< sptr< Dictionary::Class > > & dictionaries,
-                    Instances::Groups & groupInstances, // We only clear those on rescan
-                    QNetworkAccessManager & dictNetMgr );
+    EditDictionaries( QWidget * parent, Config::Class & cfg,
+                      std::vector< sptr< Dictionary::Class > > & dictionaries,
+                      Instances::Groups & groupInstances, // We only clear those on rescan
+                      QNetworkAccessManager & dictNetMgr );
 
-  ~EditDictionaries()
-  { if( helpWindow ) delete helpWindow; }
+    ~EditDictionaries();
 
-  /// Instructs the dialog to position itself on editing the given group.
-  void editGroup( unsigned id );
+    /// Instructs the dialog to position itself on editing the given group.
+    void editGroup( unsigned id );
 
-  /// Returns true if any changes to the 'dictionaries' vector passed were done.
-  bool areDictionariesChanged() const
-  { return dictionariesChanged; }
+    /// Returns true if any changes to the 'dictionaries' vector passed were done.
+    bool areDictionariesChanged() const
+    { return dictionariesChanged; }
 
-  /// Returns true if groups were changed.
-  bool areGroupsChanged() const
-  { return groupsChanged; }
+    /// Returns true if groups were changed.
+    bool areGroupsChanged() const
+    { return groupsChanged; }
 
 protected:
 
-  virtual void accept();
-  
+    virtual void accept();
+
 private slots:
 
-  void on_tabs_currentChanged( int index );
+    void on_tabs_currentChanged( int index );
 
-  void buttonBoxClicked( QAbstractButton * button );
+    void buttonBoxClicked( QAbstractButton * button );
 
-  void rescanSources();
+    void rescanSources();
 
-  void helpRequested();
-  void closeHelp();
+    void helpRequested();
+    void closeHelp();
 
 signals:
 
-  void showDictionaryInfo( QString const & dictId );
+    void showDictionaryInfo( QString const & dictId );
 
-  void showDictionaryHeadwords( QString const & dictId );
-  void userDictNameChanged( QString const & dictId, QString const & uname );
+    void showDictionaryHeadwords( QString const & dictId );
+    void userDictNameChanged( QString const & dictId, QString const & uname );
 
 private:
 
-  bool isSourcesChanged() const;
+    bool isSourcesChanged() const;
 
-  void acceptChangedSources( bool rebuildGroups );
+    void acceptChangedSources( bool rebuildGroups );
 
-  void save();
-  
+    void save();
+
 private:
-   
-  Config::Class & cfg;
-  std::vector< sptr< Dictionary::Class > > & dictionaries;
-  Instances::Groups & groupInstances;
-  QNetworkAccessManager & dictNetMgr;
-  
-  // Backed up to decide later if something was changed or not
-  Config::Class origCfg;
 
-  Ui::EditDictionaries ui;
-  Sources sources;
-  sptr< OrderAndProps > orderAndProps;
-  sptr< Groups > groups;
+    Config::Class & cfg;
+    std::vector< sptr< Dictionary::Class > > & dictionaries;
+    Instances::Groups & groupInstances;
+    QNetworkAccessManager & dictNetMgr;
 
-  bool dictionariesChanged;
-  bool groupsChanged;
-  
-  int lastCurrentTab;
+    // Backed up to decide later if something was changed or not
+    Config::Class origCfg;
 
-  Help::HelpWindow * helpWindow;
-  QAction helpAction;
+    Ui::EditDictionaries ui;
+    Sources sources;
+    sptr< OrderAndProps > orderAndProps;
+    sptr< Groups > groups;
+
+    bool dictionariesChanged;
+    bool groupsChanged;
+
+    int lastCurrentTab;
+
+    Help::HelpWindow * helpWindow;
+    QAction helpAction;
 };
 
 #endif

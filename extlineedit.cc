@@ -13,13 +13,13 @@ ExtLineEdit::ExtLineEdit(QWidget *parent) :
     QLineEdit(parent)
 {
 
-  for (int i = 0; i < 2; ++i) {
-      iconButtons[i] = new IconButton(this);
-      iconButtons[i]->installEventFilter(this);
-      iconButtons[i]->hide();
-      iconButtons[i]->setAutoHide(false);
-      iconEnabled[i] = false;
-  }
+    for (int i = 0; i < 2; ++i) {
+        iconButtons[i] = new IconButton(this);
+        iconButtons[i]->installEventFilter(this);
+        iconButtons[i]->hide();
+        iconButtons[i]->setAutoHide(false);
+        iconEnabled[i] = false;
+    }
 
     ensurePolished();
     updateMargins();
@@ -52,25 +52,25 @@ void ExtLineEdit::setButtonAutoHide(Side side, bool autohide)
 
     if (autohide)
     {
-      iconButtons[side]->setOpacity( text().isEmpty() ? 0.0 : 1.0 );
+        iconButtons[side]->setOpacity( text().isEmpty() ? 0.0 : 1.0 );
     }
     else
     {
-      iconButtons[side]->setOpacity( 1.0 );
+        iconButtons[side]->setOpacity( 1.0 );
     }
 }
 
 void ExtLineEdit::updateButtons(QString text)
 {
-  if ( oldText.isEmpty() || text.isEmpty() ) {
-    for (int i = 0; i < 2; ++i) {
-      if ( iconButtons[i]->isAutoHide() )
-      {
-       iconButtons[i]->animate( !text.isEmpty() );
-      }
+    if ( oldText.isEmpty() || text.isEmpty() ) {
+        for (int i = 0; i < 2; ++i) {
+            if ( iconButtons[i]->isAutoHide() )
+            {
+                iconButtons[i]->animate( !text.isEmpty() );
+            }
+        }
+        oldText = text;
     }
-    oldText = text;
-  }
 }
 
 void ExtLineEdit::iconClicked()
@@ -85,9 +85,9 @@ void ExtLineEdit::iconClicked()
         return;
 
     if (index == Left)
-      emit leftButtonClicked();
+        emit leftButtonClicked();
     else if (index == Right)
-      emit rightButtonClicked();
+        emit rightButtonClicked();
 }
 
 void ExtLineEdit::updateMargins()
@@ -100,8 +100,8 @@ void ExtLineEdit::updateMargins()
     int rightMargin = iconButtons[realRight]->pixmap().width() + 8;
 
     setTextMargins(
-            (iconEnabled[realLeft] ? leftMargin : 0), 1,
-            (iconEnabled[realRight] ? rightMargin : 0), 1);
+                (iconEnabled[realLeft] ? leftMargin : 0), 1,
+                (iconEnabled[realRight] ? rightMargin : 0), 1);
 }
 
 void ExtLineEdit::updateButtonPositions()
@@ -171,7 +171,7 @@ void IconButton::paintEvent(QPaintEvent *)
 
     if (m_autohide)
     {
-      painter.setOpacity(m_opacity);
+        painter.setOpacity(m_opacity);
     }
 
     painter.drawPixmap(pixmapRect, m_pixmap);
@@ -180,18 +180,18 @@ void IconButton::paintEvent(QPaintEvent *)
 void IconButton::animate(bool visible)
 {
 #if QT_VERSION >= 0x040600
-  QPropertyAnimation *animation = new QPropertyAnimation(this, "opacity");
-  animation->setDuration(250);
-  if (visible)
-  {
-    animation->setEndValue(1.0);
-  }
-  else
-  {
-    animation->setEndValue(0.0);
-  }
-  animation->start(QAbstractAnimation::DeleteWhenStopped);
+    QPropertyAnimation *animation = new QPropertyAnimation(this, "opacity");
+    animation->setDuration(250);
+    if (visible)
+    {
+        animation->setEndValue(1.0);
+    }
+    else
+    {
+        animation->setEndValue(0.0);
+    }
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
 #else
-  setOpacity(visible ? 1.0 : 0.0);
+    setOpacity(visible ? 1.0 : 0.0);
 #endif
 }

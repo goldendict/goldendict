@@ -5,7 +5,6 @@
 #define __BTREEIDX_HH_INCLUDED__
 
 #include "dictionary.hh"
-#include "file.hh"
 
 #include <string>
 #include <vector>
@@ -20,6 +19,7 @@
 #else
 #include <stdint.h>
 #endif
+namespace File { class Class; }
 
 /// A base for the dictionary which creates a btree index to look up
 /// the words.
@@ -32,10 +32,10 @@ using std::map;
 
 enum
 {
-  /// This is to be bumped up each time the internal format changes.
-  /// The value isn't used here by itself, it is supposed to be added
-  /// to each dictionary's internal format version.
-  FormatVersion = 4
+    /// This is to be bumped up each time the internal format changes.
+    /// The value isn't used here by itself, it is supposed to be added
+    /// to each dictionary's internal format version.
+    FormatVersion = 4
 };
 
 // These exceptions which might be thrown during the index traversal
@@ -48,25 +48,25 @@ DEF_EX( exCorruptedChainData, "Corrupted chain data in the leaf of a btree encou
 /// translation is represented as an abstract 32-bit offset.
 struct WordArticleLink
 {
-  string word, prefix; // in utf8
-  uint32_t articleOffset;
+    string word, prefix; // in utf8
+    uint32_t articleOffset;
 
-  WordArticleLink()
-  {}
+    WordArticleLink()
+    {}
 
-  WordArticleLink( string const & word_, uint32_t articleOffset_, string const & prefix_ = string() ):
-    word( word_ ), prefix( prefix_ ), articleOffset( articleOffset_ )
-  {}
+    WordArticleLink( string const & word_, uint32_t articleOffset_, string const & prefix_ = string() ):
+        word( word_ ), prefix( prefix_ ), articleOffset( articleOffset_ )
+    {}
 };
 
 /// Information needed to open the index
 struct IndexInfo
 {
-  uint32_t btreeMaxElements, rootOffset;
+    uint32_t btreeMaxElements, rootOffset;
 
-  IndexInfo( uint32_t btreeMaxElements_, uint32_t rootOffset_ ):
-    btreeMaxElements( btreeMaxElements_ ), rootOffset( rootOffset_ )
-  {}
+    IndexInfo( uint32_t btreeMaxElements_, uint32_t rootOffset_ ):
+        btreeMaxElements( btreeMaxElements_ ), rootOffset( rootOffset_ )
+    {}
 };
 
 /// Base btree indexing class which allows using what buildIndex() function
@@ -76,79 +76,79 @@ class BtreeIndex
 {
 public:
 
-  BtreeIndex();
-  virtual ~BtreeIndex() {}
+    BtreeIndex();
+    virtual ~BtreeIndex() {}
 
-  /// Opens the index. The file reference is saved to be used for
-  /// subsequent lookups.
-  /// The mutex is the one to be locked when working with the file.
-  void openIndex( IndexInfo const &, File::Class &, Mutex & );
+    /// Opens the index. The file reference is saved to be used for
+    /// subsequent lookups.
+    /// The mutex is the one to be locked when working with the file.
+    void openIndex( IndexInfo const &, File::Class &, Mutex & );
 
-  /// Finds articles that match the given string. A case-insensitive search
-  /// is performed.
-  vector< WordArticleLink > findArticles( wstring const &, bool ignoreDiacritics = false );
+    /// Finds articles that match the given string. A case-insensitive search
+    /// is performed.
+    vector< WordArticleLink > findArticles( wstring const &, bool ignoreDiacritics = false );
 
-  /// Find all unique article links in the index
-  void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
+    /// Find all unique article links in the index
+    void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
 
-  /// Retrieve all unique headwors from index
-  void getAllHeadwords( QSet< QString > & headwords );
+    /// Retrieve all unique headwors from index
+    void getAllHeadwords( QSet< QString > & headwords );
 
-  /// Find all article links and/or headwords in the index
-  void findArticleLinks( QVector< WordArticleLink > * articleLinks,
-                         QSet< uint32_t > * offsets,
-                         QSet< QString > * headwords,
-                         QAtomicInt * isCancelled = 0 );
+    /// Find all article links and/or headwords in the index
+    void findArticleLinks( QVector< WordArticleLink > * articleLinks,
+                           QSet< uint32_t > * offsets,
+                           QSet< QString > * headwords,
+                           AtomicInt32 * isCancelled = 0 );
 
-  /// Retrieve headwords for presented article addresses
-  void getHeadwordsFromOffsets( QList< uint32_t > & offsets,
-                                QVector< QString > & headwords,
-                                QAtomicInt * isCancelled = 0 );
-
-protected:
-
-  /// Finds the offset in the btree leaf for the given word, either matching
-  /// by an exact match, or by finding the smallest entry that might match
-  /// by prefix. It can return zero if there isn't even a possible prefx
-  /// match. The input string must already be folded. The exactMatch is set
-  /// to true when an exact match is located, and to false otherwise.
-  /// The located leaf is loaded to 'leaf', and the pointer to the next
-  /// leaf is saved to 'nextLeaf'.
-  /// However, due to root node being permanently cached, the 'leaf' passed
-  /// might not get used at all if the root node was the terminal one. In that
-  /// case, the returned pointer wouldn't belong to 'leaf' at all. To that end,
-  /// the leafEnd pointer always holds the pointer to the first byte outside
-  /// the node data.
-  char const * findChainOffsetExactOrPrefix( wstring const & target,
-                                             bool & exactMatch,
-                                             vector< char > & leaf,
-                                             uint32_t & nextLeaf,
-                                             char const * & leafEnd );
-
-  /// Reads a node or leaf at the given offset. Just uncompresses its data
-  /// to the given vector and does nothing more.
-  void readNode( uint32_t offset, vector< char > & out );
-
-  /// Reads the word-article links' chain at the given offset. The pointer
-  /// is updated to point to the next chain, if there's any.
-  vector< WordArticleLink > readChain( char const * & );
-
-  /// Drops any alises which arose due to folding. Only case-folded aliases
-  /// are left.
-  void antialias( wstring const &, vector< WordArticleLink > &, bool ignoreDiactitics );
+    /// Retrieve headwords for presented article addresses
+    void getHeadwordsFromOffsets( QList< uint32_t > & offsets,
+                                  QVector< QString > & headwords,
+                                  AtomicInt32 * isCancelled = 0 );
 
 protected:
 
-  Mutex * idxFileMutex;
-  File::Class * idxFile;
+    /// Finds the offset in the btree leaf for the given word, either matching
+    /// by an exact match, or by finding the smallest entry that might match
+    /// by prefix. It can return zero if there isn't even a possible prefx
+    /// match. The input string must already be folded. The exactMatch is set
+    /// to true when an exact match is located, and to false otherwise.
+    /// The located leaf is loaded to 'leaf', and the pointer to the next
+    /// leaf is saved to 'nextLeaf'.
+    /// However, due to root node being permanently cached, the 'leaf' passed
+    /// might not get used at all if the root node was the terminal one. In that
+    /// case, the returned pointer wouldn't belong to 'leaf' at all. To that end,
+    /// the leafEnd pointer always holds the pointer to the first byte outside
+    /// the node data.
+    char const * findChainOffsetExactOrPrefix( wstring const & target,
+                                               bool & exactMatch,
+                                               vector< char > & leaf,
+                                               uint32_t & nextLeaf,
+                                               char const * & leafEnd );
+
+    /// Reads a node or leaf at the given offset. Just uncompresses its data
+    /// to the given vector and does nothing more.
+    void readNode( uint32_t offset, vector< char > & out );
+
+    /// Reads the word-article links' chain at the given offset. The pointer
+    /// is updated to point to the next chain, if there's any.
+    vector< WordArticleLink > readChain( char const * & );
+
+    /// Drops any alises which arose due to folding. Only case-folded aliases
+    /// are left.
+    void antialias( wstring const &, vector< WordArticleLink > &, bool ignoreDiactitics );
+
+protected:
+
+    Mutex * idxFileMutex;
+    File::Class * idxFile;
 
 private:
 
-  uint32_t indexNodeSize;
-  uint32_t rootOffset;
-  bool rootNodeLoaded;
-  vector< char > rootNode; // We load root note here and keep it at all times,
-                           // since all searches always start with it.
+    uint32_t indexNodeSize;
+    uint32_t rootOffset;
+    bool rootNodeLoaded;
+    vector< char > rootNode; // We load root note here and keep it at all times,
+    // since all searches always start with it.
 };
 
 /// A base for the dictionary that utilizes a btree index build using
@@ -157,96 +157,96 @@ class BtreeDictionary: public Dictionary::Class, public BtreeIndex
 {
 public:
 
-  BtreeDictionary( string const & id, vector< string > const & dictionaryFiles );
-  virtual ~BtreeDictionary(){}
+    BtreeDictionary( string const & id, vector< string > const & dictionaryFiles );
+    virtual ~BtreeDictionary(){}
 
-  /// Btree-indexed dictionaries are usually a good source for compound searches.
-  virtual Dictionary::Features getFeatures() const
-  { return Dictionary::SuitableForCompoundSearching; }
+    /// Btree-indexed dictionaries are usually a good source for compound searches.
+    virtual Dictionary::Features getFeatures() const
+    { return Dictionary::SuitableForCompoundSearching; }
 
-  /// This function does the search using the btree index. Derivatives usually
-  /// need not to implement this function.
-  virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
-                                                             unsigned long )
+    /// This function does the search using the btree index. Derivatives usually
+    /// need not to implement this function.
+    virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
+                                                               unsigned long )
     THROW_SPEC( std::exception );
 
-  virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
-                                                              unsigned minLength,
-                                                              unsigned maxSuffixVariation,
-                                                              unsigned long maxResults )
+    virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
+                                                                unsigned minLength,
+                                                                unsigned maxSuffixVariation,
+                                                                unsigned long maxResults )
     THROW_SPEC( std::exception );
 
-  virtual bool isLocalDictionary()
-  { return true; }
+    virtual bool isLocalDictionary()
+    { return true; }
 
-  virtual bool getHeadwords( QStringList &headwords );
+    virtual bool getHeadwords( QStringList &headwords );
 
-  virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+    virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
-  string const & ftsIndexName() const
-  { return ftsIdxName; }
+    string const & ftsIndexName() const
+    { return ftsIdxName; }
 
-  Mutex & getFtsMutex()
-  { return ftsIdxMutex; }
+    Mutex & getFtsMutex()
+    { return ftsIdxMutex; }
 
-  virtual uint32_t getFtsIndexVersion()
-  { return 0; }
+    virtual uint32_t getFtsIndexVersion()
+    { return 0; }
 
-  // Sort articles offsets for full-text search in dictionary-specific order
-  // to increase of articles retrieving speed
-  // Default - simple sorting in increase order
-  virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
-                                          QAtomicInt & isCancelled )
-  { Q_UNUSED( isCancelled ); qSort( offsets ); }
+    // Sort articles offsets for full-text search in dictionary-specific order
+    // to increase of articles retrieving speed
+    // Default - simple sorting in increase order
+    virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
+                                            AtomicInt32 & isCancelled )
+    { Q_UNUSED( isCancelled ); qSort( offsets ); }
 
-  /// Called before each matching operation to ensure that any child init
-  /// has completed. Mainly used for deferred init. The default implementation
-  /// does nothing.
-  /// The function returns an empty string if the initialization is or was
-  /// successful, or a human-readable error string otherwise.
-  virtual bool ensureInitDone(string *err = 0) { return true; }
+    /// Called before each matching operation to ensure that any child init
+    /// has completed. Mainly used for deferred init. The default implementation
+    /// does nothing.
+    /// The function returns an empty string if the initialization is or was
+    /// successful, or a human-readable error string otherwise.
+    virtual bool ensureInitDone(string *err = 0) { return true; }
 
 protected:
-  Mutex ftsIdxMutex;
-  string ftsIdxName;
+    Mutex ftsIdxMutex;
+    string ftsIdxName;
 
-  friend class BtreeWordSearchRequest;
-  friend class FTSResultsRequest;
+    friend class BtreeWordSearchRequest;
+    friend class FTSResultsRequest;
 };
 
 class BtreeWordSearchRequest: public Dictionary::WordSearchRequest
 {
-  friend class BtreeWordSearchRunnable;
+    friend class BtreeWordSearchRunnable;
 protected:
-  BtreeDictionary & dict;
-  wstring str;
-  unsigned long maxResults;
-  unsigned minLength;
-  int maxSuffixVariation;
-  bool allowMiddleMatches;
-  QAtomicInt isCancelled;
-  QSemaphore hasExited;
+    BtreeDictionary & dict;
+    wstring str;
+    unsigned long maxResults;
+    unsigned minLength;
+    int maxSuffixVariation;
+    bool allowMiddleMatches;
+    AtomicInt32 isCancelled;
+    QSemaphore hasExited;
 
 public:
 
-  BtreeWordSearchRequest( BtreeDictionary & dict_,
-                          wstring const & str_,
-                          unsigned minLength_,
-                          int maxSuffixVariation_,
-                          bool allowMiddleMatches_,
-                          unsigned long maxResults_,
-                          bool startRunnable = true );
+    BtreeWordSearchRequest( BtreeDictionary & dict_,
+                            wstring const & str_,
+                            unsigned minLength_,
+                            int maxSuffixVariation_,
+                            bool allowMiddleMatches_,
+                            unsigned long maxResults_,
+                            bool startRunnable = true );
 
-  virtual void findMatches();
+    virtual void findMatches();
 
-  void run(); // Run from another thread by BtreeWordSearchRunnable
+    void run(); // Run from another thread by BtreeWordSearchRunnable
 
-  virtual void cancel()
-  {
-    isCancelled.ref();
-  }
+    virtual void cancel()
+    {
+        isCancelled.ref();
+    }
 
-  ~BtreeWordSearchRequest();
+    ~BtreeWordSearchRequest();
 };
 
 // Everything below is for building the index data.
@@ -257,14 +257,14 @@ public:
 /// sorting, but conserves space.
 struct IndexedWords: public map< string, vector< WordArticleLink > >
 {
-  /// Instead of adding to the map directly, use this function. It does folding
-  /// itself, and for phrases/sentences it adds additional entries beginning with
-  /// each new word.
-  void addWord( wstring const & word, uint32_t articleOffset, unsigned int maxHeadwordSize = 256U );
+    /// Instead of adding to the map directly, use this function. It does folding
+    /// itself, and for phrases/sentences it adds additional entries beginning with
+    /// each new word.
+    void addWord( wstring const & word, uint32_t articleOffset, unsigned int maxHeadwordSize = 256U );
 
-  /// Differs from addWord() in that it only adds a single entry. We use this
-  /// for zip's file names.
-  void addSingleWord( wstring const & word, uint32_t articleOffset );
+    /// Differs from addWord() in that it only adds a single entry. We use this
+    /// for zip's file names.
+    void addSingleWord( wstring const & word, uint32_t articleOffset );
 };
 
 /// Builds the index, as a compressed btree. Returns IndexInfo.

@@ -716,7 +716,7 @@ in the future, or register on the site to get your own key.</string>
         <number>6</number>
        </property>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="groupBoxTransliteration">
          <property name="title">
           <string>Transliteration</string>
          </property>
@@ -904,8 +904,8 @@ Not implemented yet in GoldenDict.</string>
   <tabstop>paths</tabstop>
  </tabstops>
  <resources>
-  <include location="flags.qrc"/>
   <include location="resources.qrc"/>
+  <include location="flags.qrc"/>
  </resources>
  <connections/>
 </ui>

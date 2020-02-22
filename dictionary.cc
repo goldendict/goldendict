@@ -35,111 +35,111 @@ namespace Dictionary {
 
 bool Request::isFinished()
 {
-  return Qt4x5::AtomicInt::loadAcquire( isFinishedFlag );
+    return Qt4x5::AtomicInt::loadAcquire( isFinishedFlag );
 }
 
 void Request::update()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
-    emit updated();
+    if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
+        emit updated();
 }
 
 void Request::finish()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
-  {
-    isFinishedFlag.ref();
+    if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
+    {
+        isFinishedFlag.ref();
 
-    emit finished();
-  }
+        emit finished();
+    }
 }
 
-void Request::setErrorString( QString const & str )
-{
-  //Mutex::Lock _( errorStringMutex );
+//void Request::setErrorString( QString const & str )
+//{
+//  //Mutex::Lock _( errorStringMutex );
 
-  errorString = str;
-}
+//  errorString = str;
+//}
 
-const QString &Request::getErrorString() const
-{
-  //Mutex::Lock _( errorStringMutex );
+//const QString &Request::getErrorString() const
+//{
+//  //Mutex::Lock _( errorStringMutex );
 
-  return errorString;
-}
+//  return errorString;
+//}
 
 
 ///////// WordSearchRequest
-  
+
 size_t WordSearchRequest::matchesCount()
 {
-  Mutex::Lock _( dataMutex );
-  
-  return matches.size();
+    Mutex::Lock _( dataMutex );
+
+    return matches.size();
 }
 
 WordMatch WordSearchRequest::operator [] ( size_t index ) THROW_SPEC( exIndexOutOfRange )
 {
-  Mutex::Lock _( dataMutex );
-  
-  if ( index >= matches.size() )
-    throw exIndexOutOfRange();
-  
-  return matches[ index ];
+    Mutex::Lock _( dataMutex );
+
+    if ( index >= matches.size() )
+        throw exIndexOutOfRange();
+
+    return matches[ index ];
 }
 
 vector< WordMatch > & WordSearchRequest::getAllMatches() THROW_SPEC( exRequestUnfinished )
 {
-  if ( !isFinished() )
-    throw exRequestUnfinished();
+    if ( !isFinished() )
+        throw exRequestUnfinished();
 
-  return matches;
+    return matches;
 }
 
 void WordSearchRequest::addMatch( WordMatch const & match )
 {
-  unsigned n;
-  for( n = 0; n < matches.size(); n++ )
-    if( matches[ n ].word.compare( match.word ) == 0 )
-      break;
+    unsigned n;
+    for( n = 0; n < matches.size(); n++ )
+        if( matches[ n ].word.compare( match.word ) == 0 )
+            break;
 
-  if( n >= matches.size() )
-    matches.push_back( match );
+    if( n >= matches.size() )
+        matches.push_back( match );
 }
 
 ////////////// DataRequest
 
 long DataRequest::dataSize()
 {
-  Mutex::Lock _( dataMutex );
-  
-  return hasAnyData ? (long)data.size() : -1;
+    Mutex::Lock _( dataMutex );
+
+    return hasAnyData ? (long)data.size() : -1;
 }
 
 void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
-  THROW_SPEC( exSliceOutOfRange )
+THROW_SPEC( exSliceOutOfRange )
 {
-  if ( size == 0 )
-    return;
+    if ( size == 0 )
+        return;
 
-  Mutex::Lock _( dataMutex );
+    Mutex::Lock _( dataMutex );
 
-  if ( offset + size > data.size() || !hasAnyData )
-    throw exSliceOutOfRange();
+    if ( offset + size > data.size() || !hasAnyData )
+        throw exSliceOutOfRange();
 
-  memcpy( buffer, &data[ offset ], size );
+    memcpy( buffer, &data[ offset ], size );
 }
 
 vector< char > & DataRequest::getFullData() THROW_SPEC( exRequestUnfinished )
 {
-  if ( !isFinished() )
-    throw exRequestUnfinished();
+    if ( !isFinished() )
+        throw exRequestUnfinished();
 
-  return data;
+    return data;
 }
 
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
-  id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
+    id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
   , can_FTS( false), FTS_index_completed( false )
 {
 }
@@ -152,32 +152,32 @@ sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
                                                unsigned /*minLength*/,
                                                unsigned /*maxSuffixVariation*/,
                                                unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr<WordSearchRequest>(new WordSearchRequestInstant());
+    return sptr<WordSearchRequest>(new WordSearchRequestInstant());
 }
 
 sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< WordSearchRequest >(new WordSearchRequestInstant());
+    return sptr< WordSearchRequest >(new WordSearchRequestInstant());
 }
 
 vector< wstring > Class::getAlternateWritings( wstring const & )
-  throw()
+throw()
 {
-  return vector< wstring >();
+    return vector< wstring >();
 }
 
 sptr< DataRequest > Class::getResource( string const & /*name*/ )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  return sptr< DataRequest >(new DataRequestInstant( false ));
+    return sptr< DataRequest >(new DataRequestInstant( false ));
 }
 
 sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool, bool )
 {
-  return sptr< DataRequest >(new DataRequestInstant( false ));
+    return sptr< DataRequest >(new DataRequestInstant( false ));
 }
 
 QString const& Class::getDescription()
@@ -187,290 +187,290 @@ QString const& Class::getDescription()
 
 QString Class::getMainFilename()
 {
-  return QString();
+    return QString();
 }
 
 QIcon const & Class::getIcon()
 {
-  if( !dictionaryIconLoaded )
-    loadIcon();
-  return dictionaryIcon;
+    if( !dictionaryIconLoaded )
+        loadIcon();
+    return dictionaryIcon;
 }
 
 QIcon const & Class::getNativeIcon()
 {
-  if( !dictionaryIconLoaded )
-    loadIcon();
-  return dictionaryNativeIcon;
+    if( !dictionaryIconLoaded )
+        loadIcon();
+    return dictionaryNativeIcon;
 }
 
 void Class::loadIcon() throw()
 {
-  dictionaryIconLoaded = true;
+    dictionaryIconLoaded = true;
 }
 
 bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
 {
-  QFileInfo info;
-  QString fileName( _filename );
+    QFileInfo info;
+    QString fileName( _filename );
 
-  if( isFullName )
-    info = QFileInfo( fileName );
-  else
-  {
-    fileName += "bmp";
-    info = QFileInfo( fileName );
-    if ( !info.isFile() )
+    if( isFullName )
+        info = QFileInfo( fileName );
+    else
     {
-      fileName.chop( 3 );
-      fileName += "png";
-      info = QFileInfo( fileName );
+        fileName += "bmp";
+        info = QFileInfo( fileName );
+        if ( !info.isFile() )
+        {
+            fileName.chop( 3 );
+            fileName += "png";
+            info = QFileInfo( fileName );
+        }
+        if ( !info.isFile() )
+        {
+            fileName.chop( 3 );
+            fileName += "jpg";
+            info = QFileInfo( fileName );
+        }
+        if ( !info.isFile() )
+        {
+            fileName.chop( 3 );
+            fileName += "ico";
+            info = QFileInfo( fileName );
+        }
     }
-    if ( !info.isFile() )
+
+    if ( info.isFile() )
     {
-      fileName.chop( 3 );
-      fileName += "jpg";
-      info = QFileInfo( fileName );
+        QImage img( fileName );
+
+        if ( !img.isNull() )
+        {
+            // Load successful
+
+            // Apply the color key
+
+            img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
+                                                          Qt::MaskOutColor ) );
+
+            dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
+
+            // Transform it to be square
+            int max = img.width() > img.height() ? img.width() : img.height();
+
+            QImage result( max, max, QImage::Format_ARGB32 );
+            result.fill( 0 ); // Black transparent
+
+            QPainter painter( &result );
+
+            painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                                       img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                               img );
+
+            painter.end();
+
+            dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+
+            return !dictionaryIcon.isNull();
+        }
     }
-    if ( !info.isFile() )
-    {
-      fileName.chop( 3 );
-      fileName += "ico";
-      info = QFileInfo( fileName );
-    }
-  }
-
-  if ( info.isFile() )
-  {
-    QImage img( fileName );
-
-    if ( !img.isNull() )
-    {
-      // Load successful
-
-      // Apply the color key
-
-      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
-                                                    Qt::MaskOutColor ) );
-
-      dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ) );
-
-      // Transform it to be square
-      int max = img.width() > img.height() ? img.width() : img.height();
-
-      QImage result( max, max, QImage::Format_ARGB32 );
-      result.fill( 0 ); // Black transparent
-
-      QPainter painter( &result );
-
-      painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
-                                 img.height() == max ? 0 : ( max - img.height() ) / 2 ),
-                         img );
-
-      painter.end();
-
-      dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
-
-      return !dictionaryIcon.isNull();
-    }
-  }
-  return false;
+    return false;
 }
 
 void Class::isolateCSS( QString & css, QString const & wrapperSelector )
 {
-  if( css.isEmpty() )
-    return;
+    if( css.isEmpty() )
+        return;
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/",
-                           QRegularExpression::DotMatchesEverythingOption );
-  QRegularExpression reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
-  QRegularExpression reg3( "[,;\\{]" );
+    QRegularExpression reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/",
+                             QRegularExpression::DotMatchesEverythingOption );
+    QRegularExpression reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
+    QRegularExpression reg3( "[,;\\{]" );
 #else
-  QRegExp reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/" );
-  QRegExp reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
-  QRegExp reg3( "[,;\\{]" );
+    QRegExp reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/" );
+    QRegExp reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
+    QRegExp reg3( "[,;\\{]" );
 #endif
 
-  int currentPos = 0;
-  QString newCSS;
-  QString prefix( "#gdfrom-" );
-  prefix += QString::fromLatin1( getId().c_str() );
-  if ( !wrapperSelector.isEmpty() )
-    prefix += " " + wrapperSelector;
+    int currentPos = 0;
+    QString newCSS;
+    QString prefix( "#gdfrom-" );
+    prefix += QString::fromLatin1( getId().c_str() );
+    if ( !wrapperSelector.isEmpty() )
+        prefix += " " + wrapperSelector;
 
-  // Strip comments
-  css.replace( reg1, QString() );
+    // Strip comments
+    css.replace( reg1, QString() );
 
-  for( ; ; )
-  {
-    if( currentPos >= css.length() )
-      break;
-    QChar ch = css[ currentPos ];
-
-    if( ch == '@' )
+    for( ; ; )
     {
-      // @ rules
+        if( currentPos >= css.length() )
+            break;
+        QChar ch = css[ currentPos ];
 
-      int n = currentPos;
-      if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0
-          || css.mid( currentPos, 10 ).compare( "@font-face", Qt::CaseInsensitive ) == 0
-          || css.mid( currentPos, 10 ).compare( "@namespace", Qt::CaseInsensitive ) == 0
-          || css.mid( currentPos, 8 ).compare( "@charset", Qt::CaseInsensitive ) == 0 )
-      {
-        // Copy rule as is.
-        n = css.indexOf( ';', currentPos );
-        int n2 = css.indexOf( '{', currentPos );
-        if( n2 > 0 && n > n2 )
-          n = n2 - 1;
-      }
-      else
-      if( css.mid( currentPos, 6 ).compare( "@media", Qt::CaseInsensitive ) == 0 )
-      {
-        // We must to parse it content to isolate it.
-        // Copy all up to '{' and continue parse inside.
-        n = css.indexOf( '{', currentPos );
-      }
-      else
-      if( css.mid( currentPos, 5 ).compare( "@page", Qt::CaseInsensitive ) == 0 )
-      {
-        // Don't copy rule. GD use own page layout.
-        n = css.indexOf( '}', currentPos );
-        if( n < 0 )
-          break;
-        currentPos = n + 1;
-        continue;
-      }
-      else
-      {
-        // Copy rule as is.
-        n = css.indexOf( '}', currentPos );
-      }
-
-      newCSS.append( css.mid( currentPos, n < 0 ? n : n - currentPos + 1 ) );
-
-      if( n < 0 )
-        break;
-
-      currentPos = n + 1;
-      continue;
-    }
-
-    if( ch == '{' )
-    {
-      // Selector declaration block.
-      // We copy it up to '}' as is.
-
-      int n = css.indexOf( '}', currentPos );
-      newCSS.append( css.mid( currentPos, n == -1 ? n : n - currentPos + 1 ) );
-      if( n < 0 )
-        break;
-      currentPos = n + 1;
-      continue;
-    }
-
-    if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' || ch == ':' )
-    {
-      if( ch.isLetter() || ch == '*' )
-      {
-        // Check for namespace prefix
-        QChar chr;
-        for( int i = currentPos; i < css.length(); i++ )
+        if( ch == '@' )
         {
-          chr = css[ i ];
-          if( chr.isLetterOrNumber() || chr.isMark() || chr == '_' || chr == '-'
-              || ( chr == '*' && i == currentPos ) )
+            // @ rules
+
+            int n = currentPos;
+            if( css.mid( currentPos, 7 ).compare( "@import", Qt::CaseInsensitive ) == 0
+                    || css.mid( currentPos, 10 ).compare( "@font-face", Qt::CaseInsensitive ) == 0
+                    || css.mid( currentPos, 10 ).compare( "@namespace", Qt::CaseInsensitive ) == 0
+                    || css.mid( currentPos, 8 ).compare( "@charset", Qt::CaseInsensitive ) == 0 )
+            {
+                // Copy rule as is.
+                n = css.indexOf( ';', currentPos );
+                int n2 = css.indexOf( '{', currentPos );
+                if( n2 > 0 && n > n2 )
+                    n = n2 - 1;
+            }
+            else
+                if( css.mid( currentPos, 6 ).compare( "@media", Qt::CaseInsensitive ) == 0 )
+                {
+                    // We must to parse it content to isolate it.
+                    // Copy all up to '{' and continue parse inside.
+                    n = css.indexOf( '{', currentPos );
+                }
+                else
+                    if( css.mid( currentPos, 5 ).compare( "@page", Qt::CaseInsensitive ) == 0 )
+                    {
+                        // Don't copy rule. GD use own page layout.
+                        n = css.indexOf( '}', currentPos );
+                        if( n < 0 )
+                            break;
+                        currentPos = n + 1;
+                        continue;
+                    }
+                    else
+                    {
+                        // Copy rule as is.
+                        n = css.indexOf( '}', currentPos );
+                    }
+
+            newCSS.append( css.mid( currentPos, n < 0 ? n : n - currentPos + 1 ) );
+
+            if( n < 0 )
+                break;
+
+            currentPos = n + 1;
             continue;
-
-          if( chr == '|' )
-          {
-            // Namespace prefix found, copy it as is
-            newCSS.append( css.mid( currentPos, i - currentPos + 1 ) );
-            currentPos = i + 1;
-          }
-          break;
         }
-        if ( chr == '|' )
-          continue;
-      }
 
-      // This is some selector.
-      // We must to add the isolate prefix to it.
+        if( ch == '{' )
+        {
+            // Selector declaration block.
+            // We copy it up to '}' as is.
 
-      int n = css.indexOf( reg2, currentPos + 1 );
-      QString s = css.mid( currentPos, n < 0 ? n : n - currentPos );
-      if( n < 0 )
-      {
-        newCSS.append( s );
-        break;
-      }
-      QString trimmed = s.trimmed();
-      if( trimmed.compare( "body", Qt::CaseInsensitive ) == 0
-          || trimmed.compare( "html", Qt::CaseInsensitive ) == 0 )
-      {
-        newCSS.append( s + " " + prefix + " " );
-        currentPos += 4;
-      }
-      else
-      {
-        newCSS.append( prefix + " " );
-      }
+            int n = css.indexOf( '}', currentPos );
+            newCSS.append( css.mid( currentPos, n == -1 ? n : n - currentPos + 1 ) );
+            if( n < 0 )
+                break;
+            currentPos = n + 1;
+            continue;
+        }
 
-      n = css.indexOf( reg3, currentPos );
-      s = css.mid( currentPos, n < 0 ? n : n - currentPos );
-      newCSS.append( s );
-      if( n < 0 )
-        break;
-      currentPos = n;
-      continue;
+        if( ch.isLetter() || ch == '.' || ch == '#' || ch == '*' || ch == '\\' || ch == ':' )
+        {
+            if( ch.isLetter() || ch == '*' )
+            {
+                // Check for namespace prefix
+                QChar chr;
+                for( int i = currentPos; i < css.length(); i++ )
+                {
+                    chr = css[ i ];
+                    if( chr.isLetterOrNumber() || chr.isMark() || chr == '_' || chr == '-'
+                            || ( chr == '*' && i == currentPos ) )
+                        continue;
+
+                    if( chr == '|' )
+                    {
+                        // Namespace prefix found, copy it as is
+                        newCSS.append( css.mid( currentPos, i - currentPos + 1 ) );
+                        currentPos = i + 1;
+                    }
+                    break;
+                }
+                if ( chr == '|' )
+                    continue;
+            }
+
+            // This is some selector.
+            // We must to add the isolate prefix to it.
+
+            int n = css.indexOf( reg2, currentPos + 1 );
+            QString s = css.mid( currentPos, n < 0 ? n : n - currentPos );
+            if( n < 0 )
+            {
+                newCSS.append( s );
+                break;
+            }
+            QString trimmed = s.trimmed();
+            if( trimmed.compare( "body", Qt::CaseInsensitive ) == 0
+                    || trimmed.compare( "html", Qt::CaseInsensitive ) == 0 )
+            {
+                newCSS.append( s + " " + prefix + " " );
+                currentPos += 4;
+            }
+            else
+            {
+                newCSS.append( prefix + " " );
+            }
+
+            n = css.indexOf( reg3, currentPos );
+            s = css.mid( currentPos, n < 0 ? n : n - currentPos );
+            newCSS.append( s );
+            if( n < 0 )
+                break;
+            currentPos = n;
+            continue;
+        }
+
+        newCSS.append( ch );
+        ++currentPos;
     }
-
-    newCSS.append( ch );
-    ++currentPos;
-  }
-  css = newCSS;
+    css = newCSS;
 }
 
 string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 {
-  std::vector< string > sortedList;
+    std::vector< string > sortedList;
 
-  if ( Config::isPortableVersion() )
-  {
-    // For portable version, we use relative paths
-    sortedList.reserve( dictionaryFiles.size() );
-
-    QDir dictionariesDir( Config::getPortableVersionDictionaryDir() );
-
-    for( unsigned x = 0; x < dictionaryFiles.size(); ++x )
+    if ( Config::isPortableVersion() )
     {
-      string const & full( dictionaryFiles[ x ] );
+        // For portable version, we use relative paths
+        sortedList.reserve( dictionaryFiles.size() );
 
-      QFileInfo fileInfo( FsEncoding::decode( full.c_str() ) );
+        QDir dictionariesDir( Config::getPortableVersionDictionaryDir() );
 
-      if ( fileInfo.isAbsolute() )
-        sortedList.push_back( FsEncoding::encode( dictionariesDir.relativeFilePath( fileInfo.filePath() ) ) );
-      else
-      {
-        // Well, it's relative. We don't technically support those, but
-        // what the heck
-        sortedList.push_back( full );
-      }
+        for( unsigned x = 0; x < dictionaryFiles.size(); ++x )
+        {
+            string const & full( dictionaryFiles[ x ] );
+
+            QFileInfo fileInfo( FsEncoding::decode( full.c_str() ) );
+
+            if ( fileInfo.isAbsolute() )
+                sortedList.push_back( FsEncoding::encode( dictionariesDir.relativeFilePath( fileInfo.filePath() ) ) );
+            else
+            {
+                // Well, it's relative. We don't technically support those, but
+                // what the heck
+                sortedList.push_back( full );
+            }
+        }
     }
-  }
-  else
-    sortedList = dictionaryFiles;
+    else
+        sortedList = dictionaryFiles;
 
-  std::sort( sortedList.begin(), sortedList.end() );
+    std::sort( sortedList.begin(), sortedList.end() );
 
-  QCryptographicHash hash( QCryptographicHash::Md5 );
+    QCryptographicHash hash( QCryptographicHash::Md5 );
 
-  for( std::vector< string >::const_iterator i = sortedList.begin();
-       i != sortedList.end(); ++i )
-    hash.addData( i->c_str(), i->size() + 1 );
+    for( std::vector< string >::const_iterator i = sortedList.begin();
+         i != sortedList.end(); ++i )
+        hash.addData( i->c_str(), i->size() + 1 );
 
-  return hash.result().toHex().data();
+    return hash.result().toHex().data();
 }
 
 // While this file is not supposed to have any Qt stuff since it's used by
@@ -480,50 +480,50 @@ string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 bool needToRebuildIndex( vector< string > const & dictionaryFiles,
                          string const & indexFile ) throw()
 {
-  unsigned long lastModified = 0;
+    unsigned long lastModified = 0;
 
-  for( std::vector< string >::const_iterator i = dictionaryFiles.begin();
-       i != dictionaryFiles.end(); ++i )
-  {
-    QString name = FsEncoding::decode( i->c_str() );
-    QFileInfo fileInfo( name );
-    unsigned long ts;
-
-    if( fileInfo.isDir() )
-      continue;
-
-    if( name.toLower().endsWith( ".zip" ) )
+    for( std::vector< string >::const_iterator i = dictionaryFiles.begin();
+         i != dictionaryFiles.end(); ++i )
     {
-      ZipFile::SplitZipFile zf( name );
-      if( !zf.exists() )
-        return true;
-      ts = zf.lastModified().toTime_t();
+        QString name = FsEncoding::decode( i->c_str() );
+        QFileInfo fileInfo( name );
+        unsigned long ts;
+
+        if( fileInfo.isDir() )
+            continue;
+
+        if( name.toLower().endsWith( ".zip" ) )
+        {
+            ZipFile::SplitZipFile zf( name );
+            if( !zf.exists() )
+                return true;
+            ts = zf.lastModified().toTime_t();
+        }
+        else
+        {
+            if ( !fileInfo.exists() )
+                return true;
+            ts = fileInfo.lastModified().toTime_t();
+        }
+
+        if ( ts > lastModified )
+            lastModified = ts;
     }
-    else
-    {
-      if ( !fileInfo.exists() )
+
+    QFileInfo fileInfo( FsEncoding::decode( indexFile.c_str() ) );
+
+    if ( !fileInfo.exists() )
         return true;
-      ts = fileInfo.lastModified().toTime_t();
-    }
 
-    if ( ts > lastModified )
-      lastModified = ts;
-  }
-
-  QFileInfo fileInfo( FsEncoding::decode( indexFile.c_str() ) );
-
-  if ( !fileInfo.exists() )
-    return true;
-
-  return fileInfo.lastModified().toTime_t() < lastModified;
+    return fileInfo.lastModified().toTime_t() < lastModified;
 }
 
 QString generateRandomDictionaryId()
 {
-  return QString(
-    QCryptographicHash::hash(
-      QDateTime::currentDateTime().toString( "\"Random\"dd.MM.yyyy hh:mm:ss.zzz" ).toUtf8(),
-      QCryptographicHash::Md5 ).toHex() );
+    return QString(
+                QCryptographicHash::hash(
+                    QDateTime::currentDateTime().toString( "\"Random\"dd.MM.yyyy hh:mm:ss.zzz" ).toUtf8(),
+                    QCryptographicHash::Md5 ).toHex() );
 }
 
 

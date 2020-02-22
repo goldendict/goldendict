@@ -1,8 +1,6 @@
 #ifndef __TIFF_HH_INCLUDED__
 #define __TIFF_HH_INCLUDED__
 
-#ifdef MAKE_EXTRA_TIFF_HANDLER
-
 #include <QImage>
 
 namespace GdTiff
@@ -14,7 +12,5 @@ namespace GdTiff
 bool tiffToQImage( const char * data, int size, QImage & image );
 
 }
-
-#endif
 
 #endif // TIFF_HH

@@ -1,8 +1,6 @@
 #ifndef __SLOB_HH_INCLUDED__
 #define __SLOB_HH_INCLUDED__
 
-#ifdef MAKE_SLOB_SUPPORT
-
 #include "dictionary.hh"
 
 /// Support for the Slob dictionaries.
@@ -19,7 +17,5 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   THROW_SPEC( std::exception );
 
 }
-
-#endif
 
 #endif // __SLOB_HH_INCLUDED__

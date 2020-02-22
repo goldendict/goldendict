@@ -9,9 +9,8 @@
 # define IS_QT_5    1
 #endif
 
+#include <mutex.hh>
 #include <QString>
-#include <QAtomicInt>
-#include <QTextDocument>
 
 #include <QUrl>
 #if IS_QT_5
@@ -24,9 +23,9 @@ namespace Qt4x5
 inline QString escape( QString const & plain )
 {
 #if IS_QT_5
-  return plain.toHtmlEscaped();
+    return plain.toHtmlEscaped();
 #else
-  return Qt::escape( plain );
+    return Qt::escape( plain );
 #endif
 
 }
@@ -34,12 +33,12 @@ inline QString escape( QString const & plain )
 namespace AtomicInt
 {
 
-inline int loadAcquire( QAtomicInt const & ref )
+inline int loadAcquire( AtomicInt32 const & ref )
 {
 #if IS_QT_5
-  return ref.loadAcquire();
+    return ref.loadAcquire();
 #else
-  return ( int )ref;
+    return ( int )ref;
 #endif
 }
 
@@ -54,99 +53,99 @@ namespace Url
 inline QString ensureLeadingSlash( const QString & path )
 {
 #if IS_QT_5
-  QLatin1Char slash( '/' );
-  if ( path.startsWith( slash ) )
-    return path;
-  return slash + path;
+    QLatin1Char slash( '/' );
+    if ( path.startsWith( slash ) )
+        return path;
+    return slash + path;
 #else
-  return path;
+    return path;
 #endif
 }
 
 inline bool hasQueryItem( QUrl const & url, QString const & key )
 {
 #if IS_QT_5
-  return QUrlQuery( url ).hasQueryItem( key );
+    return QUrlQuery( url ).hasQueryItem( key );
 #else
-  return url.hasQueryItem( key );
+    return url.hasQueryItem( key );
 #endif
 }
 
 inline QString queryItemValue( QUrl const & url, QString const & item )
 {
 #if IS_QT_5
-  return QUrlQuery( url ).queryItemValue( item, QUrl::FullyDecoded );
+    return QUrlQuery( url ).queryItemValue( item, QUrl::FullyDecoded );
 #else
-  return url.queryItemValue( item );
+    return url.queryItemValue( item );
 #endif
 }
 
 inline QByteArray encodedQueryItemValue( QUrl const & url, QString const & item )
 {
 #if IS_QT_5
-  return QUrlQuery( url ).queryItemValue( item, QUrl::FullyEncoded ).toLatin1();
+    return QUrlQuery( url ).queryItemValue( item, QUrl::FullyEncoded ).toLatin1();
 #else
-  return url.encodedQueryItemValue( item.toLatin1() );
+    return url.encodedQueryItemValue( item.toLatin1() );
 #endif
 }
 
 inline void addQueryItem( QUrl & url, QString const & key, QString const & value )
 {
 #if IS_QT_5
-  QUrlQuery urlQuery( url );
-  urlQuery.addQueryItem( key, value );
-  url.setQuery( urlQuery );
+    QUrlQuery urlQuery( url );
+    urlQuery.addQueryItem( key, value );
+    url.setQuery( urlQuery );
 #else
-  url.addQueryItem( key, value );
+    url.addQueryItem( key, value );
 #endif
 }
 
 inline void removeQueryItem( QUrl & url, QString const & key )
 {
 #if IS_QT_5
-  QUrlQuery urlQuery( url );
-  urlQuery.removeQueryItem( key );
-  url.setQuery( urlQuery );
+    QUrlQuery urlQuery( url );
+    urlQuery.removeQueryItem( key );
+    url.setQuery( urlQuery );
 #else
-  url.removeQueryItem( key );
+    url.removeQueryItem( key );
 #endif
 }
 
 inline void setQueryItems( QUrl & url, QList< QPair< QString, QString > > const & query )
 {
 #if IS_QT_5
-  QUrlQuery urlQuery( url );
-  urlQuery.setQueryItems( query );
-  url.setQuery( urlQuery );
+    QUrlQuery urlQuery( url );
+    urlQuery.setQueryItems( query );
+    url.setQuery( urlQuery );
 #else
-  url.setQueryItems( query );
+    url.setQueryItems( query );
 #endif
 }
 
 inline QString path( QUrl const & url )
 {
 #if IS_QT_5
-  return url.path( QUrl::FullyDecoded );
+    return url.path( QUrl::FullyDecoded );
 #else
-  return url.path();
+    return url.path();
 #endif
 }
 
 inline void setFragment( QUrl & url, const QString & fragment )
 {
 #if IS_QT_5
-  url.setFragment( fragment, QUrl::DecodedMode );
+    url.setFragment( fragment, QUrl::DecodedMode );
 #else
-  url.setFragment( fragment );
+    url.setFragment( fragment );
 #endif
 }
 
 inline QString fragment( const QUrl & url )
 {
 #if IS_QT_5
-  return url.fragment( QUrl::FullyDecoded );
+    return url.fragment( QUrl::FullyDecoded );
 #else
-  return url.fragment();
+    return url.fragment();
 #endif
 }
 

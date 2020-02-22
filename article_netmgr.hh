@@ -3,19 +3,18 @@
 
 #ifndef __ARTICLE_NETMGR_HH_INCLUDED__
 #define __ARTICLE_NETMGR_HH_INCLUDED__
-
+#include "sptr.hh"
 #include <QtNetwork>
 
 #if QT_VERSION >= 0x050300  // Qt 5.3+
-#include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
 #include <QPair>
 #endif
 
-#include "dictionary.hh"
-#include "article_maker.hh"
-
+class QWebSecurityOrigin;
+class ArticleMaker;
+namespace Dictionary{ class Class; class DataRequest; }
 using std::vector;
 
 /// A custom QNetworkAccessManager version which fetches images from the
@@ -26,27 +25,27 @@ using std::vector;
 // White lists for QWebSecurityOrigin
 struct SecurityWhiteList
 {
-  QWebSecurityOrigin * origin;
-  QString originUri;
-  QSet< QPair< QString, QString > > hostsToAccess;
+    QWebSecurityOrigin * origin;
+    QString originUri;
+    QSet< QPair< QString, QString > > hostsToAccess;
 
-  SecurityWhiteList() :
-    origin( 0 )
-  {}
+    SecurityWhiteList() :
+        origin( 0 )
+    {}
 
-  ~SecurityWhiteList()
-  { swlDelete(); }
+    ~SecurityWhiteList()
+    { swlDelete(); }
 
-  SecurityWhiteList( SecurityWhiteList const & swl ) :
-    origin( 0 )
-  { swlCopy( swl ); }
+    SecurityWhiteList( SecurityWhiteList const & swl ) :
+        origin( 0 )
+    { swlCopy( swl ); }
 
-  SecurityWhiteList & operator=( SecurityWhiteList const & swl );
-  QWebSecurityOrigin * setOrigin( QUrl const & url );
+    SecurityWhiteList & operator=( SecurityWhiteList const & swl );
+    QWebSecurityOrigin * setOrigin( QUrl const & url );
 
 private:
-  void swlCopy( SecurityWhiteList const & swl );
-  void swlDelete();
+    void swlCopy( SecurityWhiteList const & swl );
+    void swlDelete();
 };
 
 typedef QMap< QString, SecurityWhiteList > Origins;
@@ -56,177 +55,177 @@ typedef QMap< QString, SecurityWhiteList > Origins;
 
 class AllowFrameReply : public QNetworkReply
 {
-  Q_OBJECT
+    Q_OBJECT
 private:
-  QNetworkReply * baseReply;
-  QByteArray buffer;
+    QNetworkReply * baseReply;
+    QByteArray buffer;
 
-  AllowFrameReply();
-  AllowFrameReply( AllowFrameReply const & );
+    AllowFrameReply();
+    AllowFrameReply( AllowFrameReply const & );
 
 public:
-  explicit AllowFrameReply( QNetworkReply * _reply );
-  ~AllowFrameReply()
-  { delete baseReply; }
+    explicit AllowFrameReply( QNetworkReply * _reply );
+    ~AllowFrameReply()
+    { delete baseReply; }
 
-  // QNetworkReply virtual functions
-  void setReadBufferSize( qint64 size );
-  void close()
-  { baseReply->close(); }
+    // QNetworkReply virtual functions
+    void setReadBufferSize( qint64 size );
+    void close()
+    { baseReply->close(); }
 
-  // QIODevice virtual functions
-  qint64 bytesAvailable() const;
-  bool atEnd() const
-  { return baseReply->atEnd(); }
-  qint64 bytesToWrite() const
-  { return baseReply->bytesToWrite(); }
-  bool canReadLine() const
-  { return baseReply->canReadLine(); }
-  bool isSequential() const
-  { return baseReply->isSequential(); }
-  bool waitForReadyRead( int msecs )
-  { return baseReply->waitForReadyRead( msecs ); }
-  bool waitForBytesWritten( int msecs )
-  { return baseReply->waitForBytesWritten( msecs ); }
-  bool reset()
-  { return baseReply->reset(); }
+    // QIODevice virtual functions
+    qint64 bytesAvailable() const;
+    bool atEnd() const
+    { return baseReply->atEnd(); }
+    qint64 bytesToWrite() const
+    { return baseReply->bytesToWrite(); }
+    bool canReadLine() const
+    { return baseReply->canReadLine(); }
+    bool isSequential() const
+    { return baseReply->isSequential(); }
+    bool waitForReadyRead( int msecs )
+    { return baseReply->waitForReadyRead( msecs ); }
+    bool waitForBytesWritten( int msecs )
+    { return baseReply->waitForBytesWritten( msecs ); }
+    bool reset()
+    { return baseReply->reset(); }
 
 public slots:
 
-  // Own AllowFrameReply slots
-  void applyMetaData();
-  void applyError( QNetworkReply::NetworkError code );
-  void readDataFromBase();
+    // Own AllowFrameReply slots
+    void applyMetaData();
+    void applyError( QNetworkReply::NetworkError code );
+    void readDataFromBase();
 
-  // Redirect QNetworkReply slots
-  virtual void abort()
-  { baseReply->abort(); }
-  virtual void ignoreSslErrors()
-  { baseReply->ignoreSslErrors(); }
+    // Redirect QNetworkReply slots
+    virtual void abort()
+    { baseReply->abort(); }
+    virtual void ignoreSslErrors()
+    { baseReply->ignoreSslErrors(); }
 
 protected:
-  // QNetworkReply virtual functions
-  void ignoreSslErrorsImplementation( const QList< QSslError > & errors )
-  { baseReply->ignoreSslErrors( errors ); }
-  void setSslConfigurationImplementation( const QSslConfiguration & configuration )
-  { baseReply->setSslConfiguration( configuration ); }
-  void sslConfigurationImplementation( QSslConfiguration & configuration ) const
-  { configuration = baseReply->sslConfiguration(); }
+    // QNetworkReply virtual functions
+    void ignoreSslErrorsImplementation( const QList< QSslError > & errors )
+    { baseReply->ignoreSslErrors( errors ); }
+    void setSslConfigurationImplementation( const QSslConfiguration & configuration )
+    { baseReply->setSslConfiguration( configuration ); }
+    void sslConfigurationImplementation( QSslConfiguration & configuration ) const
+    { configuration = baseReply->sslConfiguration(); }
 
-  // QIODevice virtual functions
-  qint64 readData( char * data, qint64 maxSize );
-  qint64 readLineData( char * data, qint64 maxSize )
-  { return baseReply->readLine( data, maxSize ); }
-  qint64 writeData( const char * data, qint64 maxSize )
-  { return baseReply->write( data, maxSize ); }
+    // QIODevice virtual functions
+    qint64 readData( char * data, qint64 maxSize );
+    qint64 readLineData( char * data, qint64 maxSize )
+    { return baseReply->readLine( data, maxSize ); }
+    qint64 writeData( const char * data, qint64 maxSize )
+    { return baseReply->write( data, maxSize ); }
 };
 #endif
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
-  vector< sptr< Dictionary::Class > > const & dictionaries;
-  ArticleMaker const & articleMaker;
-  bool const & disallowContentFromOtherSites;
-  bool const & hideGoldenDictHeader;
+    vector< sptr< Dictionary::Class > > const & dictionaries;
+    ArticleMaker const & articleMaker;
+    bool const & disallowContentFromOtherSites;
+    bool const & hideGoldenDictHeader;
 #if QT_VERSION >= 0x050300  // Qt 5.3+
-  Origins allOrigins;
+    Origins allOrigins;
 #endif
 public:
 
-  ArticleNetworkAccessManager( QObject * parent,
-                               vector< sptr< Dictionary::Class > > const &
-                               dictionaries_,
-                               ArticleMaker const & articleMaker_,
-                               bool const & disallowContentFromOtherSites_,
-                               bool const & hideGoldenDictHeader_ ):
-    QNetworkAccessManager( parent ), dictionaries( dictionaries_ ),
-    articleMaker( articleMaker_ ),
-    disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
-    hideGoldenDictHeader( hideGoldenDictHeader_ )
-  {}
+    ArticleNetworkAccessManager( QObject * parent,
+                                 vector< sptr< Dictionary::Class > > const &
+                                 dictionaries_,
+                                 ArticleMaker const & articleMaker_,
+                                 bool const & disallowContentFromOtherSites_,
+                                 bool const & hideGoldenDictHeader_ ):
+        QNetworkAccessManager( parent ), dictionaries( dictionaries_ ),
+        articleMaker( articleMaker_ ),
+        disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
+        hideGoldenDictHeader( hideGoldenDictHeader_ )
+    {}
 
-  /// Tries handling any kind of internal resources referenced by dictionaries.
-  /// If it succeeds, the result is a dictionary request object. Otherwise, an
-  /// empty pointer is returned.
-  /// The function can optionally set the Content-Type header correspondingly.
-  sptr< Dictionary::DataRequest > getResource( QUrl const & url,
-                                               QString & contentType );
+    /// Tries handling any kind of internal resources referenced by dictionaries.
+    /// If it succeeds, the result is a dictionary request object. Otherwise, an
+    /// empty pointer is returned.
+    /// The function can optionally set the Content-Type header correspondingly.
+    sptr< Dictionary::DataRequest > getResource( QUrl const & url,
+                                                 QString & contentType );
 
 protected:
 
-  virtual QNetworkReply * createRequest( Operation op,
-                                         QNetworkRequest const & req,
-                                         QIODevice * outgoingData );
+    virtual QNetworkReply * createRequest( Operation op,
+                                           QNetworkRequest const & req,
+                                           QIODevice * outgoingData );
 };
 
 class ArticleResourceReply: public QNetworkReply
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  sptr< Dictionary::DataRequest > req;
-  qint64 alreadyRead;
+    sptr< Dictionary::DataRequest > req;
+    qint64 alreadyRead;
 
 public:
 
-  ArticleResourceReply( QObject * parent,
-                        QNetworkRequest const &,
-                        sptr< Dictionary::DataRequest > const &,
-                        QString const & contentType );
+    ArticleResourceReply( QObject * parent,
+                          QNetworkRequest const &,
+                          sptr< Dictionary::DataRequest > const &,
+                          QString const & contentType );
 
-  ~ArticleResourceReply();
+    ~ArticleResourceReply();
 
 protected:
 
-  virtual qint64 bytesAvailable() const;
+    virtual qint64 bytesAvailable() const;
 
-  virtual void abort()
-  {}
-  virtual qint64 readData( char * data, qint64 maxSize );
+    virtual void abort()
+    {}
+    virtual qint64 readData( char * data, qint64 maxSize );
 
-  // We use the hackery below to work around the fact that we need to emit
-  // ready/finish signals after we've been constructed.
+    // We use the hackery below to work around the fact that we need to emit
+    // ready/finish signals after we've been constructed.
 signals:
 
-  void readyReadSignal();
-  void finishedSignal();
+    void readyReadSignal();
+    void finishedSignal();
 
 private slots:
 
-  void reqUpdated();
-  void reqFinished();
-  
-  void readyReadSlot();
-  void finishedSlot();
+    void reqUpdated();
+    void reqFinished();
+
+    void readyReadSlot();
+    void finishedSlot();
 };
 
 class BlockedNetworkReply: public QNetworkReply
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
 
-  BlockedNetworkReply( QObject * parent );
+    BlockedNetworkReply( QObject * parent );
 
-  virtual qint64 readData( char *, qint64 )
-  {
-    return -1;
-  }
+    virtual qint64 readData( char *, qint64 )
+    {
+        return -1;
+    }
 
-  virtual void abort()
-  {}
+    virtual void abort()
+    {}
 
 protected:
 
-  // We use the hackery below to work around the fact that we need to emit
-  // ready/finish signals after we've been constructed.
+    // We use the hackery below to work around the fact that we need to emit
+    // ready/finish signals after we've been constructed.
 
 signals:
 
-  void finishedSignal();
+    void finishedSignal();
 
 private slots:
 
-  void finishedSlot();
+    void finishedSlot();
 };
 
 #endif

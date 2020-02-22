@@ -16,159 +16,159 @@ namespace Html {
 
 string escape( string const & str )
 {
-  string result( str );
+    string result( str );
 
-  for( size_t x = result.size(); x--; )
-    switch ( result[ x ] )
-    {
-      case '&':
-        result.erase( x, 1 );
-        result.insert( x, "&amp;" );
-      break;
+    for( size_t x = result.size(); x--; )
+        switch ( result[ x ] )
+        {
+        case '&':
+            result.erase( x, 1 );
+            result.insert( x, "&amp;" );
+            break;
 
-      case '<':
-        result.erase( x, 1 );
-        result.insert( x, "&lt;" );
-      break;
+        case '<':
+            result.erase( x, 1 );
+            result.insert( x, "&lt;" );
+            break;
 
-      case '>':
-        result.erase( x, 1 );
-        result.insert( x, "&gt;" );
-      break;
+        case '>':
+            result.erase( x, 1 );
+            result.insert( x, "&gt;" );
+            break;
 
-      case '"':
-        result.erase( x, 1 );
-        result.insert( x, "&quot;" );
-      break;
+        case '"':
+            result.erase( x, 1 );
+            result.insert( x, "&quot;" );
+            break;
 
-      default:
-      break;
-    }
+        default:
+            break;
+        }
 
-  return result;
+    return result;
 }
 
 static void storeLineInDiv( string & result, string const & line, bool baseRightToLeft )
 {
-  result += "<div";
-  if( unescape( QString::fromUtf8( line.c_str(), line.size() ) ).isRightToLeft() != baseRightToLeft )
-  {
-    result += " dir=\"";
-    result += baseRightToLeft ? "ltr\"" : "rtl\"";
-  }
-  result += ">";
-  result += line + "</div>";
+    result += "<div";
+    if( unescape( QString::fromUtf8( line.c_str(), line.size() ) ).isRightToLeft() != baseRightToLeft )
+    {
+        result += " dir=\"";
+        result += baseRightToLeft ? "ltr\"" : "rtl\"";
+    }
+    result += ">";
+    result += line + "</div>";
 }
 
 string preformat(string const & str , bool baseRightToLeft )
 {
-  string escaped = escape( str ), result, line;
+    string escaped = escape( str ), result, line;
 
-  line.reserve( escaped.size() );
-  result.reserve( escaped.size() );
+    line.reserve( escaped.size() );
+    result.reserve( escaped.size() );
 
-  bool leading = true;
+    bool leading = true;
 
-  for( char const * nextChar = escaped.c_str(); *nextChar; ++nextChar )
-  {
-    if ( leading )
+    for( char const * nextChar = escaped.c_str(); *nextChar; ++nextChar )
     {
-      if ( *nextChar == ' ' )
-      {
-        line += "&nbsp;";
-        continue;
-      }
-      else
-      if ( *nextChar == '\t' )
-      {
-        line += "&nbsp;&nbsp;&nbsp;&nbsp;";
-        continue;
-      }
+        if ( leading )
+        {
+            if ( *nextChar == ' ' )
+            {
+                line += "&nbsp;";
+                continue;
+            }
+            else
+                if ( *nextChar == '\t' )
+                {
+                    line += "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    continue;
+                }
+        }
+
+        if ( *nextChar == '\n' )
+        {
+            storeLineInDiv( result, line, baseRightToLeft );
+            line.clear();
+            leading = true;
+            continue;
+        }
+
+        if ( *nextChar == '\r' )
+            continue; // Just skip all \r
+
+        line.push_back( *nextChar );
+
+        leading = false;
     }
 
-    if ( *nextChar == '\n' )
-    {
-      storeLineInDiv( result, line, baseRightToLeft );
-      line.clear();
-      leading = true;
-      continue;
-    }
+    if( !line.empty() )
+        storeLineInDiv( result, line, baseRightToLeft );
 
-    if ( *nextChar == '\r' )
-      continue; // Just skip all \r
-
-    line.push_back( *nextChar );
-
-    leading = false;
-  }
-
-  if( !line.empty() )
-    storeLineInDiv( result, line, baseRightToLeft );
-
-  return result;
+    return result;
 }
 
 string escapeForJavaScript( string const & str )
 {
-  string result( str );
+    string result( str );
 
-  for( size_t x = result.size(); x--; )
-    switch ( result[ x ] )
-    {
-      case '\\':
-      case '"':
-      case '\'':
-        result.insert( x, 1, '\\' );
-      break;
+    for( size_t x = result.size(); x--; )
+        switch ( result[ x ] )
+        {
+        case '\\':
+        case '"':
+        case '\'':
+            result.insert( x, 1, '\\' );
+            break;
 
-      case '\n':
-        result.erase( x, 1 );
-        result.insert( x, "\\n" );
-      break;
+        case '\n':
+            result.erase( x, 1 );
+            result.insert( x, "\\n" );
+            break;
 
-      case '\r':
-        result.erase( x, 1 );
-        result.insert( x, "\\r" );
-      break;
+        case '\r':
+            result.erase( x, 1 );
+            result.insert( x, "\\r" );
+            break;
 
-      case '\t':
-        result.erase( x, 1 );
-        result.insert( x, "\\t" );
-      break;
+        case '\t':
+            result.erase( x, 1 );
+            result.insert( x, "\\t" );
+            break;
 
-      default:
-      break;
-    }
+        default:
+            break;
+        }
 
-  return result;
+    return result;
 }
 
 QString unescape( QString const & str, bool saveFormat )
 {
-  // Does it contain HTML? If it does, we need to strip it
-  if ( str.contains( '<' ) || str.contains( '&' ) )
-  {
-    QString tmp = str;
-    if( !saveFormat )
+    // Does it contain HTML? If it does, we need to strip it
+    if ( str.contains( '<' ) || str.contains( '&' ) )
     {
+        QString tmp = str;
+        if( !saveFormat )
+        {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-        tmp.replace( QRegularExpression( "<(?:\\s*/?(?:div|h[1-6r]|q|p(?![alr])|br|li(?![ns])|td|blockquote|[uo]l|pre|d[dl]|nav|address))[^>]{0,}>",
-                                         QRegularExpression::CaseInsensitiveOption ), " " );
-        tmp.remove( QRegularExpression( "<[^>]*>" ) );
+            tmp.replace( QRegularExpression( "<(?:\\s*/?(?:div|h[1-6r]|q|p(?![alr])|br|li(?![ns])|td|blockquote|[uo]l|pre|d[dl]|nav|address))[^>]{0,}>",
+                                             QRegularExpression::CaseInsensitiveOption ), " " );
+            tmp.remove( QRegularExpression( "<[^>]*>" ) );
 #else
-      tmp.replace( QRegExp( "<(?:\\s*/?(?:div|h[1-6r]|q|p(?![alr])|br|li(?![ns])|td|blockquote|[uo]l|pre|d[dl]|nav|address))[^>]{0,}>",
-                            Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
-      tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
+            tmp.replace( QRegExp( "<(?:\\s*/?(?:div|h[1-6r]|q|p(?![alr])|br|li(?![ns])|td|blockquote|[uo]l|pre|d[dl]|nav|address))[^>]{0,}>",
+                                  Qt::CaseInsensitive, QRegExp::RegExp2 ), " " );
+            tmp.remove( QRegExp( "<[^>]*>", Qt::CaseSensitive, QRegExp::RegExp2 ) );
 #endif
+        }
+        return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
     }
-    return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
-  }
-  return str;
+    return str;
 }
 
 string unescapeUtf8( const string &str, bool saveFormat )
 {
-  return string( unescape( QString::fromUtf8( str.c_str(), str.size() ) ).toUtf8().data(), saveFormat );
+    return string( unescape( QString::fromUtf8( str.c_str(), str.size() ) ).toUtf8().data(), saveFormat );
 }
 
 }

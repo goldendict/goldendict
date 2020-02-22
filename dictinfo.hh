@@ -3,35 +3,36 @@
 
 #include <QDialog>
 #include "ui_dictinfo.h"
-#include "dictionary.hh"
-#include "config.hh"
+#include "sptr.hh"
+namespace Config { struct Class; }
+namespace Dictionary { class Class; }
 
 class DictInfo: public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
 
-  enum Actions
-  {
-    REJECTED,
-    ACCEPTED,
-    OPEN_FOLDER,
-    EDIT_DICTIONARY,
-    SHOW_HEADWORDS
-  };
+    enum Actions
+    {
+        REJECTED,
+        ACCEPTED,
+        OPEN_FOLDER,
+        EDIT_DICTIONARY,
+        SHOW_HEADWORDS
+    };
 
-  DictInfo( Config::Class &cfg_, QWidget * parent = 0 );
-  void showInfo( sptr< Dictionary::Class > dict );
+    DictInfo( Config::Class &cfg_, QWidget * parent = 0 );
+    void showInfo( sptr< Dictionary::Class > dict );
 
 private:
-  Ui::DictInfo ui;
-  Config::Class &cfg;
+    Ui::DictInfo ui;
+    Config::Class &cfg;
 private slots:
-  void savePos( int );
-  void on_editDictionary_clicked();
-  void on_openFolder_clicked();
-  void on_OKButton_clicked();
-  void on_headwordsButton_clicked();
+    void savePos( int );
+    void on_editDictionary_clicked();
+    void on_openFolder_clicked();
+    void on_OKButton_clicked();
+    void on_headwordsButton_clicked();
 };
 
 #endif // DICTINFO_HH

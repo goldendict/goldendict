@@ -17,17 +17,17 @@ using std::string;
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const &,
                                                       QNetworkAccessManager & )
-    THROW_SPEC( std::exception );
+THROW_SPEC( std::exception );
 
 /// Exposed here for moc
 class WebSiteDataRequestSlots: public Dictionary::DataRequest
 {
-  Q_OBJECT
+    Q_OBJECT
 
 protected slots:
 
-  virtual void requestFinished( QNetworkReply * )
-  {}
+    virtual void requestFinished( QNetworkReply * )
+    {}
 };
 
 }

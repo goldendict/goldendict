@@ -3,8 +3,6 @@
 
 #include "broken_xrecord.hh"
 
-#include <QtGui>
-
 #ifdef HAVE_X11
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
@@ -15,16 +13,16 @@ bool isRECORDBroken()
 {
 #ifdef HAVE_X11
 
- char const * vendor = ServerVendor( QX11Info::display() );
+    char const * vendor = ServerVendor( QX11Info::display() );
 
- if ( vendor && strstr( vendor, "X.Org" ) )
- {
-   int release = VendorRelease( QX11Info::display() );
+    if ( vendor && strstr( vendor, "X.Org" ) )
+    {
+        int release = VendorRelease( QX11Info::display() );
 
-   return release >= 10600000 && release < 10701000;
- }
+        return release >= 10600000 && release < 10701000;
+    }
 
 #endif
 
-  return false;
+    return false;
 }

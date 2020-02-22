@@ -102,62 +102,62 @@ const quint32 bgl_language[] = {
 
 
 const std::string bgl_charsetname[] = {
-	"Default" ,
-	"Latin",
-	"Eastern European",
-	"Cyrillic",
-	"Japanese",
-	"Traditional Chinese",
-	"Simplified Chinese",
-	"Baltic",
-	"Greek",
-	"Korean",
-	"Turkish",
-	"Hebrew",
-	"Arabic",
-	"Thai" };
+    "Default" ,
+    "Latin",
+    "Eastern European",
+    "Cyrillic",
+    "Japanese",
+    "Traditional Chinese",
+    "Simplified Chinese",
+    "Baltic",
+    "Greek",
+    "Korean",
+    "Turkish",
+    "Hebrew",
+    "Arabic",
+    "Thai" };
 
 const std::string bgl_charset[] = {
-	"WINDOWS-1252", /*Default*/
-	"WINDOWS-1252", /*Latin*/
-	"WINDOWS-1250", /*Eastern European*/
-	"WINDOWS-1251", /*Cyriilic*/
-	"CP932", /*Japanese*/
-	"BIG5", /*Traditional Chinese*/
-	"GB18030", /*Simplified Chinese*/
-	"CP1257", /*Baltic*/
-	"CP1253", /*Greek*/
-	"EUC-KR",  /*Korean*/
-	"ISO-8859-9", /*Turkish*/
-	"WINDOWS-1255", /*Hebrew*/
-	"CP1256", /*Arabic*/
-	"CP874"  /*Thai*/ };
+    "WINDOWS-1252", /*Default*/
+    "WINDOWS-1252", /*Latin*/
+    "WINDOWS-1250", /*Eastern European*/
+    "WINDOWS-1251", /*Cyriilic*/
+    "CP932", /*Japanese*/
+    "BIG5", /*Traditional Chinese*/
+    "GB18030", /*Simplified Chinese*/
+    "CP1257", /*Baltic*/
+    "CP1253", /*Greek*/
+    "EUC-KR",  /*Korean*/
+    "ISO-8859-9", /*Turkish*/
+    "WINDOWS-1255", /*Hebrew*/
+    "CP1256", /*Arabic*/
+    "CP874"  /*Thai*/ };
 
 const std::string partOfSpeech[] = {
-  "n.",
-  "adj.",
-  "v.",
-  "adv.",
-  "interj.",
-  "pron.",
-  "prep.",
-  "conj.",
-  "suff.",
-  "pref.",
-  "art." };
+    "n.",
+    "adj.",
+    "v.",
+    "adv.",
+    "interj.",
+    "pron.",
+    "prep.",
+    "conj.",
+    "suff.",
+    "pref.",
+    "art." };
 
 typedef struct {
-	unsigned type;
-	unsigned length;
+    unsigned type;
+    unsigned length;
     unsigned capacity;
-	char * data;
+    char * data;
 } bgl_block;
 
 typedef struct {
-        std::string headword;
-        std::string definition;
-        std::string displayedHeadword;
-        std::vector<std::string> alternates;
+    std::string headword;
+    std::string definition;
+    std::string displayedHeadword;
+    std::vector<std::string> alternates;
 } bgl_entry;
 
 class Babylon
@@ -171,11 +171,11 @@ public:
     {
     public:
 
-      virtual void handleBabylonResource( std::string const & filename,
-                                          char const * data, size_t size )=0;
+        virtual void handleBabylonResource( std::string const & filename,
+                                            char const * data, size_t size )=0;
 
-      virtual ~ResourceHandler()
-      {}
+        virtual ~ResourceHandler()
+        {}
     };
 
     /// Sets a prefix string to append to each resource reference in hyperlinks.
@@ -205,7 +205,7 @@ public:
 
     enum
     {
-      ParserVersion = 17
+        ParserVersion = 17
     };
 
 private:

@@ -14,13 +14,13 @@
 #ifdef GD_LOG_MSGOUT
 void gdWarning(const char *, ...) /* print warning message */
 #if defined(Q_CC_GNU) && !defined(__INSURE__)
-    __attribute__ ((format (printf, 1, 2)))
+__attribute__ ((format (printf, 1, 2)))
 #endif
 ;
 
 void gdDebug(const char *, ...)
 #if defined(Q_CC_GNU) && !defined(__INSURE__)
-    __attribute__ ((format (printf, 1, 2)))
+__attribute__ ((format (printf, 1, 2)))
 #endif
 ;
 extern QFile * logFilePtr;

@@ -25,110 +25,110 @@ using std::map;
 
 inline string toMd5( QByteArray const & b )
 {
-  return string( QCryptographicHash::hash( b, QCryptographicHash::Md5 ).toHex().constData() );
+    return string( QCryptographicHash::hash( b, QCryptographicHash::Md5 ).toHex().constData() );
 }
 
 class VoiceEnginesDictionary: public Dictionary::Class
 {
 private:
 
-  Config::VoiceEngine voiceEngine;
+    Config::VoiceEngine voiceEngine;
 
 public:
 
-  VoiceEnginesDictionary( Config::VoiceEngine const & voiceEngine_ ):
-    Dictionary::Class(
-      toMd5( voiceEngine_.id.toUtf8() ),
-      vector< string >() ),
-    voiceEngine( voiceEngine_ )
-  {
-    setDictionaryName(voiceEngine_.name.toUtf8().data());
-  }
-  virtual ~VoiceEnginesDictionary(){}
+    VoiceEnginesDictionary( Config::VoiceEngine const & voiceEngine_ ):
+        Dictionary::Class(
+            toMd5( voiceEngine_.id.toUtf8() ),
+            vector< string >() ),
+        voiceEngine( voiceEngine_ )
+    {
+        setDictionaryName(voiceEngine_.name.toUtf8().data());
+    }
+    virtual ~VoiceEnginesDictionary(){}
 
-  virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
-                                                 unsigned long maxResults )
+    virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
+                                                   unsigned long maxResults )
     THROW_SPEC( std::exception );
 
-  virtual sptr< DataRequest > getArticle( wstring const &,
-                                          vector< wstring > const & alts,
-                                          wstring const &, bool )
+    virtual sptr< DataRequest > getArticle( wstring const &,
+                                            vector< wstring > const & alts,
+                                            wstring const &, bool )
     THROW_SPEC( std::exception );
 
 protected:
 
-  virtual void loadIcon() throw();
+    virtual void loadIcon() throw();
 };
 
 sptr< WordSearchRequest > VoiceEnginesDictionary::prefixMatch( wstring const & /*word*/,
                                                                unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+THROW_SPEC( std::exception )
 {
-  WordSearchRequestInstant * sr = new WordSearchRequestInstant();
-  sr->setUncertain( true );
-  return sptr< WordSearchRequest >(sr);
+    WordSearchRequestInstant * sr = new WordSearchRequestInstant();
+    sr->setUncertain( true );
+    return sptr< WordSearchRequest >(sr);
 }
 
 sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
-  wstring const & word, vector< wstring > const &, wstring const &, bool )
-  THROW_SPEC( std::exception )
+        wstring const & word, vector< wstring > const &, wstring const &, bool )
+THROW_SPEC( std::exception )
 {
-  string result;
-  string wordUtf8( Utf8::encode( word ) );
+    string result;
+    string wordUtf8( Utf8::encode( word ) );
 
-  result += "<table class=\"voiceengines_play\"><tr>";
+    result += "<table class=\"voiceengines_play\"><tr>";
 
-  QUrl url;
-  url.setScheme( "gdtts" );
-  url.setHost( "localhost" );
-  url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
-  QList< QPair<QString, QString> > query;
-  query.push_back( QPair<QString, QString>( "engine", QString::fromStdString( getId() ) ) );
-  Qt4x5::Url::setQueryItems( url, query );
+    QUrl url;
+    url.setScheme( "gdtts" );
+    url.setHost( "localhost" );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
+    QList< QPair<QString, QString> > query;
+    query.push_back( QPair<QString, QString>( "engine", QString::fromStdString( getId() ) ) );
+    Qt4x5::Url::setQueryItems( url, query );
 
-  string encodedUrl = url.toEncoded().data();
-  string ref = string( "\"" ) + encodedUrl + "\"";
-  result += addAudioLink( ref, getId() );
+    string encodedUrl = url.toEncoded().data();
+    string ref = string( "\"" ) + encodedUrl + "\"";
+    result += addAudioLink( ref, getId() );
 
-  result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
-  result += "<td><a href=" + ref + ">" + Html::escape( wordUtf8 ) + "</a></td>";
-  result += "</tr></table>";
+    result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+    result += "<td><a href=" + ref + ">" + Html::escape( wordUtf8 ) + "</a></td>";
+    result += "</tr></table>";
 
-  sptr< DataRequestInstant > ret ( new DataRequestInstant( true ));
-  ret->getData().resize( result.size() );
-  memcpy( &( ret->getData().front() ), result.data(), result.size() );
-  return ret;
+    sptr< DataRequestInstant > ret ( new DataRequestInstant( true ));
+    ret->getData().resize( result.size() );
+    memcpy( &( ret->getData().front() ), result.data(), result.size() );
+    return ret;
 }
 
 void VoiceEnginesDictionary::loadIcon() throw()
 {
-  if ( dictionaryIconLoaded )
-    return;
+    if ( dictionaryIconLoaded )
+        return;
 
-  if ( !voiceEngine.iconFilename.isEmpty() )
-  {
-    QFileInfo fInfo(  QDir( Config::getConfigDir() ), voiceEngine.iconFilename );
-    if ( fInfo.isFile() )
-      loadIconFromFile( fInfo.absoluteFilePath(), true );
-  }
-  if ( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/playsound.png" );
-  dictionaryIconLoaded = true;
+    if ( !voiceEngine.iconFilename.isEmpty() )
+    {
+        QFileInfo fInfo(  QDir( Config::getConfigDir() ), voiceEngine.iconFilename );
+        if ( fInfo.isFile() )
+            loadIconFromFile( fInfo.absoluteFilePath(), true );
+    }
+    if ( dictionaryIcon.isNull() )
+        dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/playsound.png" );
+    dictionaryIconLoaded = true;
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
-  Config::VoiceEngines const & voiceEngines )
-  THROW_SPEC( std::exception )
+        Config::VoiceEngines const & voiceEngines )
+THROW_SPEC( std::exception )
 {
-  vector< sptr< Dictionary::Class > > result;
+    vector< sptr< Dictionary::Class > > result;
 
-  for ( Config::VoiceEngines::const_iterator i = voiceEngines.begin(); i != voiceEngines.end(); ++i )
-  {
-    if ( i->enabled )
-      result.push_back( sptr< Dictionary::Class > (new VoiceEnginesDictionary( *i ) ));
-  }
+    for ( Config::VoiceEngines::const_iterator i = voiceEngines.begin(); i != voiceEngines.end(); ++i )
+    {
+        if ( i->enabled )
+            result.push_back( sptr< Dictionary::Class > (new VoiceEnginesDictionary( *i ) ));
+    }
 
-  return result;
+    return result;
 }
 
 }

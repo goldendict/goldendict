@@ -14,26 +14,26 @@ std::string addAudioLink( std::string const & url,
 std::string makeAudioLinkScript( std::string const & url,
                                  std::string const & dictionaryId )
 {
-  /// Convert "'" to "\'" - this char broke autoplay of audiolinks
+    /// Convert "'" to "\'" - this char broke autoplay of audiolinks
 
-  std::string ref;
-  bool escaped = false;
-  for( unsigned x = 0; x < url.size(); x++ )
-  {
-    char ch = url[ x ];
-    if( escaped )
+    std::string ref;
+    bool escaped = false;
+    for( unsigned x = 0; x < url.size(); x++ )
     {
-      ref += ch;
-      escaped = false;
-      continue;
+        char ch = url[ x ];
+        if( escaped )
+        {
+            ref += ch;
+            escaped = false;
+            continue;
+        }
+        if( ch == '\'' )
+            ref += '\\';
+        ref += ch;
+        escaped = ( ch == '\\' );
     }
-    if( ch == '\'' )
-      ref += '\\';
-    ref += ch;
-    escaped = ( ch == '\\' );
-  }
 
-  std::string audioLinkForDict = "gdAudioLinks['" + dictionaryId + "']";
-  return "gdAudioLinks.first = gdAudioLinks.first || " + ref + ";" +
-         audioLinkForDict + " = " + audioLinkForDict + " || " + ref + ";";
+    std::string audioLinkForDict = "gdAudioLinks['" + dictionaryId + "']";
+    return "gdAudioLinks.first = gdAudioLinks.first || " + ref + ";" +
+            audioLinkForDict + " = " + audioLinkForDict + " || " + ref + ";";
 }

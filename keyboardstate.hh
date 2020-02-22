@@ -10,24 +10,24 @@
 class KeyboardState
 {
 public:
-  virtual ~KeyboardState(){}
-  enum Modifier
-  {
-    Alt = 1,
-    Ctrl = 2,
-    Shift = 4,
-    Win = 8, // Ironically, Linux only, since it's no use under Windows
-    LeftAlt = 16, // Those Left-Right are Windows-only, at least for now
-    RightAlt = 32,
-    LeftCtrl = 64,
-    RightCtrl = 128,
-    LeftShift = 256,
-    RightShift = 512
-  };
+    virtual ~KeyboardState(){}
+    enum Modifier
+    {
+        Alt = 1,
+        Ctrl = 2,
+        Shift = 4,
+        Win = 8, // Ironically, Linux only, since it's no use under Windows
+        LeftAlt = 16, // Those Left-Right are Windows-only, at least for now
+        RightAlt = 32,
+        LeftCtrl = 64,
+        RightCtrl = 128,
+        LeftShift = 256,
+        RightShift = 512
+    };
 
-  /// Returns true if all Modifiers present within the given mask are pressed
-  /// right now.
-  bool checkModifiersPressed( int mask );
+    /// Returns true if all Modifiers present within the given mask are pressed
+    /// right now.
+    bool checkModifiersPressed( int mask );
 };
 
 #endif
