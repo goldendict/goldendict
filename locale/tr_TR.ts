@@ -989,11 +989,11 @@ arasındaki farkı giderir)</translation>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation type="vanished">Form</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation>Ara</translation>
+        <translation type="vanished">Ara</translation>
     </message>
 </context>
 <context>
@@ -2507,11 +2507,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sözlük klasörünü aç</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sözlük başlıkları</translation>
     </message>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
@@ -2556,7 +2556,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dışarı aktar</translation>
     </message>
     <message>
         <source>Import</source>

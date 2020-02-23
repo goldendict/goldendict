@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ" sourcelanguage="cs_CZ">
+<TS version="2.1" language="cs_CZ" sourcelanguage="cs_CZ">
 <context>
     <name></name>
     <message>
@@ -995,11 +995,11 @@ a školní ortografií v cyrilici)</translation>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation>Formulář</translation>
+        <translation type="vanished">Formulář</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation>Vyhledat v</translation>
+        <translation type="vanished">Vyhledat v</translation>
     </message>
 </context>
 <context>
