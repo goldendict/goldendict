@@ -254,6 +254,7 @@
         <file>flags/en.png</file>
         <file>flags/uk.png</file>
         <file>flags/eo.png</file>
+        <file>flags/jb.png</file>
         <file>flags/other.png</file>
     </qresource>
 </RCC>
