@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
 <TS version="2.1" language="bg_BG">
-  <context>
     <name>About</name>
     <message>
       <source>About</source>
@@ -977,7 +976,7 @@ between classic and school orthography in cyrillic)</source>
       <translation>Търсене в</translation>
     </message>
   </context>
-  <context>
+  <context
     <name>Groups</name>
     <message>
       <source>Add group</source>

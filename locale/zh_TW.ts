@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>About</name>
     <message>
@@ -981,11 +981,11 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation>表單</translation>
+        <translation type="vanished">表單</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation>尋找於</translation>
+        <translation type="vanished">尋找於</translation>
     </message>
 </context>
 <context>

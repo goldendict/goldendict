@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ay">
+<TS version="2.1" language="ay">
 <context>
     <name>
         </name>
@@ -990,11 +990,11 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation>Formulario &quot;phuqhaña&quot;</translation>
+        <translation type="vanished">Formulario &quot;phuqhaña&quot;</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation>thaqhaña:</translation>
+        <translation type="vanished">thaqhaña:</translation>
     </message>
 </context>
 <context>
