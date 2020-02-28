@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<TS version="2.1" language="bg_BG">
 <context>
     <name>About</name>
     <message>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете &lt;a href=&quot;Работа с изскачащ прозорец&quot;&gt;да търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия.</translation>
     </message>
     <message>
         <source>(picture)</source>
@@ -326,7 +326,8 @@
     <message>
         <source>Belarusian transliteration (smoothes out the difference
 between classic and school orthography in cyrillic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Белоруска транслитерация (изгладени различия
+между класически и учебен правопис на кирилица)</translation>
     </message>
 </context>
 <context>
@@ -509,7 +510,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
@@ -609,7 +610,8 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Edit the dictionary via command:
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Редакция на речник чрез команда:
+%1</translation>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
@@ -671,7 +673,8 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделен от запетая списък база данни
+(празен ред или &quot;*&quot; съответства на всички бази данни)</translation>
     </message>
     <message>
         <source>Strategies</source>
@@ -680,7 +683,8 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Разделен от запетая списък стратегии търсене
+(празен ред означава стратегия &quot;плъгини&quot;)</translation>
     </message>
 </context>
 <context>
@@ -974,7 +978,7 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Look in</source>
-        <translation type="obsolete">Търсене в</translation>
+        <translation>Търсене в</translation>
     </message>
 </context>
 <context>
@@ -1139,7 +1143,7 @@ between classic and school orthography in cyrillic)</source>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation>Изтрий избраните</translation>
+        <translation>&amp;Изтрий избраните</translation>
     </message>
     <message>
         <source>Copy Selected</source>
@@ -1151,7 +1155,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>%1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1/%2</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
@@ -2184,7 +2188,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>F4</source>
@@ -2320,7 +2324,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+T</translation>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
@@ -2340,7 +2344,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
@@ -2348,7 +2352,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <source>&amp;Show</source>
@@ -2380,7 +2384,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+H</translation>
     </message>
     <message>
         <source>&amp;Import</source>
@@ -2440,7 +2444,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <source>Menu Button</source>
@@ -2493,7 +2497,8 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Ред за търсене в речници. wildcards &apos;*&apos;, &apos;?&apos; и зададени символи &apos;[...]&apos; са позволени.
+Намери &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;символи използвани &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; съответно</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2505,7 +2510,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <source>Full-text search</source>
@@ -2513,7 +2518,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <source>GoldenDict reference</source>
@@ -2585,7 +2590,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <source>Add all tabs to Favorites</source>
@@ -2807,7 +2812,7 @@ the application.</source>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation type="obsolete">Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
+        <translation>Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
     </message>
     <message>
         <source>Start with system</source>
@@ -2858,7 +2863,7 @@ off from main window or tray icon.</source>
     <message>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="obsolete">Избира дали изскачащият прозорец да е включен поначало или не. Ако е
+        <translation>Избира дали изскачащият прозорец да е включен поначало или не. Ако е
 включен, програмата винаги ще се стартира с активен изскачащ прозорец.</translation>
     </message>
     <message>
@@ -2960,7 +2965,7 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shorty after the selection is done.</source>
-        <translation type="obsolete">Обикновено, за да активирате изскачащ прозорец трябва да
+        <translation>Обикновено, за да активирате изскачащ прозорец трябва да
 задържите избраните клавиши докато избирате дума.
 Когато това е включено, избраните клавиши могат да бъдат
 натиснати и малко след като думата е избрана.</translation>
@@ -2995,7 +3000,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation type="obsolete">Програма да възпроизвеждане на звуковите файлове:</translation>
+        <translation>Програма да възпроизвеждане на звуковите файлове:</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -3052,11 +3057,11 @@ download page.</source>
     </message>
     <message>
         <source>English</source>
-        <translation type="obsolete">Английски</translation>
+        <translation>Английски</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation type="obsolete">Руски</translation>
+        <translation>Руски</translation>
     </message>
     <message>
         <source>Default</source>
@@ -3081,14 +3086,18 @@ download page.</source>
     <message>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избран ли е, Изкачащ прозорец по подразб. или не. Ако е проверено,
+програмата винаги ще стартира с активен Изкачащ прозорец.</translation>
     </message>
     <message>
         <source>Normally, in order to activate a popup you have to
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обикновено, за активиране на Изкачащ прозорец има
+поддръжка с избрани натиснати клавиши,при избор на дума
+Когато включите това, избраните клавиши може също
+да се натиснат веднага след селектиране.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3096,13 +3105,19 @@ be pressed shortly after the selection is done.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включване на опцията за GoldenDict ще блокира повечето реклами
+като забрани съдържанието им (изображения, фреймове) не идващи от сайта
+който разглеждате. Ако някой сайтове се повреждат от това изключете го.</translation>
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
@@ -3118,7 +3133,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation type="obsolete">Възпроизвеждане чрез Phonon</translation>
+        <translation>Възпроизвеждане чрез Phonon</translation>
     </message>
     <message>
         <source>Use external program:</source>
@@ -3126,7 +3141,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation type="obsolete">Възпроизвеждане чрез DirectShow</translation>
+        <translation>Възпроизвеждане чрез DirectShow</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
@@ -3147,7 +3162,8 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
 With this on however, it will hide the main window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обикновено натискайки ESC премества фокуса от преведения ред.
+С това даже,ще скрие главния прозорец.</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
@@ -3165,7 +3181,9 @@ With this on however, it will hide the main window.</source>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включването на опцията ще позволи изговаряне в онлайн
+речници които използват Flash или свои web плъгини.
+Плъгините трябва да са инсталирани за опцията.</translation>
     </message>
     <message>
         <source>Enable web plugins</source>
@@ -3184,7 +3202,10 @@ Plugin must be installed for this option to work.</source>
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Опитайте с IAccessibleEx technology да възстанови думата под курсора.
+Тази технология работи с някой програми които я поддържат
+ (например Internet Explorer 9).
+Ако не се нуждаете от такива програми ,не я използвайте.</translation>
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
@@ -3194,7 +3215,9 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвайте UI Automation технология да възстановите думата под курсора.
+Тази технология работи само с някои програми които я поддържат
+Ако не използвате такива програми не включвайте опцията.</translation>
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
@@ -3204,7 +3227,9 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвайте GoldenDict съобщение да възстанови думата под курсора.
+Тази технология работи само с някои програми които я поддържат
+Ако не използвате такива програми не включвайте опцията.</translation>
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
@@ -3216,7 +3241,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Babylon</source>
-        <translation type="unfinished"></translation>
+        <translation>Babylon</translation>
     </message>
     <message>
         <source>History</source>
@@ -3276,20 +3301,21 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Модерен</translation>
     </message>
     <message>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Син</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Някой сайтове идентифицират GoldenDict чрез HTTP хедери и блокират заявките.
+Включването на опцията може да реши проблема.</translation>
     </message>
     <message>
         <source>Do not identify GoldenDict in HTTP headers</source>
@@ -3354,7 +3380,8 @@ Enable this option to workaround the problem.</source>
     <message>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Включването на опцията разрешава търсене през списък синоними
+от Stardict, Babylon и GLS речници</translation>
     </message>
     <message>
         <source>Extra search via synonyms</source>
@@ -3410,31 +3437,31 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканиране нефиксиран прозорец флаг</translation>
     </message>
     <message>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Експериментално с флаг не по подразбир.,ако прозорец Сканиране пречи</translation>
     </message>
     <message>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;default&gt;</translation>
     </message>
     <message>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Отгоре</translation>
     </message>
     <message>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Тази подсказка може да се обедини с флаг прозорец не по подразб</translation>
     </message>
     <message>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорирай прозорец подсказки</translation>
     </message>
     <message>
         <source>Turn this option on to ignore diacritics while searching articles</source>
@@ -3457,7 +3484,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Html</translation>
     </message>
     <message>
         <source>Prefix Match</source>
@@ -3598,7 +3625,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail: %1%2</translation>
     </message>
     <message>
         <source>Title: %1%2</source>
@@ -3673,7 +3700,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <name>ScanFlag</name>
     <message>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>ГлавенПрозорец</translation>
     </message>
 </context>
 <context>
@@ -3685,6 +3712,10 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>word</source>
         <translation type="obsolete">дума</translation>
+    </message>
+    <message>
+        <source>List Matches (Alt+M)</source>
+        <translation>Списък съвпадение (Alt+M)</translation>
     </message>
     <message>
         <source>Alt+M</source>
@@ -3709,7 +3740,8 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>Use this to pin down the window so it would stay on screen,
 could be resized or managed in other ways.</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвайте да закрепи отдолу прозореца, да бъде на екрана,
+като променен или аранжиран по друг начин.</translation>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
@@ -3717,7 +3749,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Alt+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt+W</translation>
     </message>
     <message>
         <source>Back</source>
@@ -3733,7 +3765,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>%1 - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <source>Add word to Favorites (Ctrl+E)</source>
@@ -3849,7 +3881,7 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Може да използвате и %GD1251% за кодиране CP1251, %GDISO1% за кодиране ISO 8859-1.</translation>
+        <translation>Може да използвате и %GD1251% за кодиране CP1251, %GDISO1% за кодиране ISO 8859-1.</translation>
     </message>
     <message>
         <source>Transliteration</source>
@@ -3890,19 +3922,23 @@ based on English phonology</source>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>
+        <translation>Най използваната система, имаща непосредственно отношение към
+устройства за запис kana. Стандартизирано по ISO 3602
+
 В GoldenDict засега не реализирано.</translation>
     </message>
     <message>
         <source>Nihon-shiki</source>
-        <translation type="unfinished"></translation>
+        <translation>Nihon-shiki</translation>
     </message>
     <message>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>
+        <translation>Базирано на система Nihon-shiki, но осъвременено за стандарта на японски език.
+Стандартизирано по ISO 3602
+
 В GoldenDict засега не реализирано.</translation>
     </message>
     <message>
@@ -3957,7 +3993,9 @@ Not implemented yet in GoldenDict.</source>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Исползването на Forvo изисква ключ за програмния интерфейс.
+Оставете празно , за да използва ключа по подразб., който може
+да стане недостъпен или се регистрирайте за получаване на ключ.</translation>
     </message>
     <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -3968,7 +4006,7 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -4016,7 +4054,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
 %GDBIG5% for Big-5, %GDBIG5HKSCS% for Big5-HKSCS, %GDGBK% for GBK and GB18030, %GDSHIFTJIS% for Shift-JIS.</source>
-        <translation type="unfinished"></translation>
+        <translation>Алтернативно използва %GD1251% за CP1251, %GDISO1%...%GDISO16% за ISO 8859-1...ISO 8859-16 съответно,
+%GDBIG5% за Big-5, %GDBIG5HKSCS% за Big5-HKSCS, %GDGBK% за GBK и GB18030, %GDSHIFTJIS% за Shift-JIS.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
@@ -4128,7 +4167,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Icon</source>
