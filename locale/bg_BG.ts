@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="bg_BG">
+<TS version="2.0" language="bg_BG">
 <context>
     <name>About</name>
     <message>
@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>Програма за търсене в речници GoldenDict, версия </translation>
+        <translation>Речник GoldenDict, версия </translation>
     </message>
     <message>
         <source>#.#</source>
@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>Лицензирано под GNU GPLv3 или следваща версия</translation>
+        <translation>Лицензирана за GNU GPLv3 или следващи</translation>
     </message>
     <message>
         <source>Credits:</source>
@@ -29,11 +29,11 @@
     </message>
     <message>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="unfinished">© 2008-2013 Константин Исаков (ikm@goldendict.org)</translation>
+        <translation>© 2008-2019 Константин Исаков (ikm@goldendict.org)</translation>
     </message>
     <message>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation type="unfinished"></translation>
+        <translation>Базирана на Qt %1 (%2, %3 битова)</translation>
     </message>
 </context>
 <context>
@@ -72,19 +72,19 @@
     </message>
     <message>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="unfinished">&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Добре дошли в &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;За да започнете да работите с програмата, първо посетете &lt;b&gt;Редактиране|Речници&lt;/b&gt; за да добавите път за достъп до места, на които да се търсят речници, да настроите различни страници на Уикипедия или други ресруси, да подредите последователността на речниците или да създадете групи от речници.&lt;p&gt;Веднага след това сте готови да търсите думи! Можете да направите това в този прозорец, като използвате левия панел или можете да &lt;a href=&quot;Working with popup&quot;&gt;търсите думи от други активни приложения&lt;/a&gt;. &lt;p&gt;За да настроите програмата, погледнете наличните настройки в &lt;b&gt;Редактиране|Настройки&lt;/b&gt;. Всички настройки там имат подсказки - прочетете ги в случай, че се съмнявате за нещо.&lt;p&gt;Ако имате нужда от допълнителна помощ, имате въпроси, предложения или се чудите какво мислят останалите, сте добре дошли във &lt;a href=&quot;http://goldendict.berlios.de/forum/&quot;&gt;форума&lt;/a&gt; на програмата.&lt;p&gt;Проверете &lt;a href=&quot;http://goldendict.berlios.de/&quot;&gt;уеб страницата&lt;/a&gt; за обновления. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Лицензирано под GPLv3 или следваща версия.</translation>
     </message>
     <message>
         <source>(picture)</source>
-        <translation type="unfinished"></translation>
+        <translation>(картинка)</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Разгъни статията</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Свий статията</translation>
     </message>
 </context>
 <context>
@@ -103,19 +103,19 @@
     </message>
     <message>
         <source>Compound expressions: </source>
-        <translation>Сложни изрази:</translation>
+        <translation>Сложни изрази: </translation>
     </message>
     <message>
         <source>Individual words: </source>
-        <translation>Отделни думи:</translation>
+        <translation>Отделни думи: </translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation type="unfinished"></translation>
+        <translation>Разгъни статията</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation type="unfinished"></translation>
+        <translation>Свий статията</translation>
     </message>
 </context>
 <context>
@@ -170,7 +170,7 @@
     </message>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>about:blank</source>
@@ -214,114 +214,114 @@
     </message>
     <message>
         <source>Highlight &amp;all</source>
-        <translation type="unfinished"></translation>
+        <translation>Отбележи &amp;всички</translation>
     </message>
     <message>
         <source>Resource</source>
-        <translation type="unfinished"></translation>
+        <translation>Ресурс</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудио</translation>
     </message>
     <message>
         <source>Definition: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Определение: %1</translation>
     </message>
     <message>
         <source>The referenced audio program doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Указаната аудио-програма липсва.</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">Внимание: %1</translation>
+        <translation>Внимание: %1</translation>
     </message>
     <message>
         <source>&amp;Add &quot;%1&quot; to history</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Добави &quot;%1&quot; в История</translation>
     </message>
     <message>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Определение от речника «%1»: %2</translation>
     </message>
     <message>
         <source>Send &quot;%1&quot; to input line</source>
-        <translation type="unfinished"></translation>
+        <translation>Съвмести «%1» в реда на въвеждане</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Картинка</translation>
     </message>
     <message>
         <source>Select Current Article</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери текуща статия</translation>
     </message>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ГРЕШКА: %1</translation>
     </message>
     <message>
         <source>Save sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши звук</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Звукови файлове (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Все файлы (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши изображение</translation>
     </message>
     <message>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлови изображения (*.bmp *.jpg *.png *.tif);;Все файлы (*.*)</translation>
     </message>
     <message>
         <source>Save &amp;image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши &amp;изображение...</translation>
     </message>
     <message>
         <source>Save s&amp;ound...</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши &amp;звук...</translation>
     </message>
     <message>
         <source>TTS Voice</source>
-        <translation type="unfinished"></translation>
+        <translation>Синтезатор глас</translation>
     </message>
     <message>
         <source>Copy as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирай като текст</translation>
     </message>
     <message>
         <source>Inspect</source>
-        <translation type="unfinished"></translation>
+        <translation>Инспектор</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <source>Video: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Видео: %1</translation>
     </message>
     <message>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка възпроизвеждане на звуков файла: %1</translation>
     </message>
     <message>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ПРЕДУПРЕЖДЕНИЕ: Аудио-плеер: %1</translation>
     </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Белоруска транслитерация (класически правопис)</translation>
     </message>
     <message>
         <source>Belarusian transliteration from latin to cyrillic (school orthography)</source>
-        <translation type="unfinished"></translation>
+        <translation>Белоруска транслитерация (учебен правопис)</translation>
     </message>
     <message>
         <source>Belarusian transliteration (smoothes out the difference
@@ -333,77 +333,77 @@ between classic and school orthography in cyrillic)</source>
     <name>ChineseConversion</name>
     <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване между опростени и класически китайски иероглифи</translation>
     </message>
     <message>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>Прео&amp;бразуване на китайски иероглифи</translation>
     </message>
     <message>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на опростени иероглифи в класически (Тайвански вариант)</translation>
     </message>
     <message>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>Опростени в класически (Тайвански вариант)</translation>
     </message>
     <message>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на опростени иероглифи в класически (Хонконгски вариант)</translation>
     </message>
     <message>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>Опростени в класически (Хонконгски вариант)</translation>
     </message>
     <message>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на класически иероглифи в опростени</translation>
     </message>
     <message>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>Класически в опростени</translation>
     </message>
     <message>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на опростени иероглифи в класически (Тайвански вариант)</translation>
     </message>
     <message>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на опростени иероглифи в класические (Хонконгски вариант)</translation>
     </message>
     <message>
         <source>Traditional to simplified Chinese conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на класически иероглифи в опростени</translation>
     </message>
     <message>
         <source>Chinese Conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразуване на китайски иероглифи</translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Прокси-Сървъра изисква авторизация</translation>
     </message>
     <message>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>За достъп към прокси-Сървъра се въвежда име и парола</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Парола:</translation>
+        <translation>Парола:</translation>
     </message>
 </context>
 <context>
     <name>DictGroupWidget</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Group icon:</source>
@@ -435,7 +435,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Error</source>
-        <translation>ГрешкаГрешка</translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <source>Can&apos;t read the specified image file.</source>
@@ -443,7 +443,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка в Любими:</translation>
     </message>
 </context>
 <context>
@@ -458,54 +458,54 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionaries: </source>
-        <translation type="unfinished"></translation>
+        <translation>Речниците: </translation>
     </message>
     <message>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Комбинирай групите по език на източника до &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Комбинирай групите по целеви език до &quot;-&gt;%1&quot;</translation>
     </message>
     <message>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Направи двустранна група за превод &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
         <source>Combine groups with &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Комбинирайте групи с &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Unassigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочие</translation>
     </message>
 </context>
 <context>
     <name>DictHeadwords</name>
     <message>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим търсене</translation>
     </message>
     <message>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Този елемент определя, как ще интерпретира реда от филтъра</translation>
     </message>
     <message>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Ако този флаг е поставен, филтрацията ще се осъществява според регистър символи</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Регистър символи</translation>
     </message>
     <message>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортирай заглавията във файл</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортирай</translation>
     </message>
     <message>
         <source>OK</source>
@@ -513,98 +513,98 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Натисни този бутон да приложи филтъра  към списък заглавия</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Приложи</translation>
     </message>
     <message>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ако този флаг е поставен , всякакви промени на филтъра ще се приложат към списък заглавия веднага</translation>
     </message>
     <message>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоприлагане</translation>
     </message>
     <message>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Филтър:</translation>
     </message>
     <message>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ред на филтъра (обикн. текст, шаблон или регулярни изрази)</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Рег.изрази</translation>
     </message>
     <message>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Неповторящи се заглавия общо: %1, филтрирани: %2</translation>
     </message>
     <message>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Запиши заглавията в файл</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Текстовие файлове (*.txt);;Всички файлове (*.*)</translation>
     </message>
     <message>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортират се заглавията...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отхвърляне</translation>
+        <translation>Отказ</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощ</translation>
     </message>
 </context>
 <context>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation type="unfinished">Брой статии:</translation>
+        <translation>Брой статии:</translation>
     </message>
     <message>
         <source>Translates from:</source>
-        <translation type="unfinished">Превод от:</translation>
+        <translation>Превод от:</translation>
     </message>
     <message>
         <source>Total words:</source>
-        <translation type="unfinished">Брой думи:</translation>
+        <translation>Брой думи:</translation>
     </message>
     <message>
         <source>Translates to:</source>
-        <translation type="unfinished">Превод на:</translation>
+        <translation>Превод на:</translation>
     </message>
     <message>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished">Файлове, включващи се в речника:</translation>
+        <translation>Файлове, включени в речника:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание:</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори папката</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактирай речника</translation>
     </message>
     <message>
         <source>Edit the dictionary via command:
@@ -613,11 +613,11 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи всички неповтарящи се заглавия на речника</translation>
     </message>
     <message>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглавия</translation>
     </message>
 </context>
 <context>
@@ -631,42 +631,42 @@ between classic and school orthography in cyrillic)</source>
     <name>DictServer</name>
     <message>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес: </translation>
     </message>
     <message>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Бази данни: </translation>
     </message>
     <message>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Стратегии за търсене: </translation>
     </message>
     <message>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Бази данни на Сървъра</translation>
     </message>
 </context>
 <context>
     <name>DictServersModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Включено</translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Име</translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished">Адрес</translation>
+        <translation>Адрес</translation>
     </message>
     <message>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Бази</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
     <message>
         <source>Comma-delimited list of databases
@@ -675,7 +675,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Стратегии</translation>
     </message>
     <message>
         <source>Comma-delimited list of search strategies
@@ -695,27 +695,27 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация за речника</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактирай речника</translation>
     </message>
     <message>
         <source>&amp;Dictionary Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Панел речници</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори папката на речника</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
-        <translation type="unfinished"></translation>
+        <translation>Разширено Меню за всички речници...</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглавие на речника</translation>
     </message>
 </context>
 <context>
@@ -746,7 +746,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отхвърляне</translation>
+        <translation>Отмяна</translation>
     </message>
     <message>
         <source>Dictionaries</source>
@@ -757,7 +757,7 @@ between classic and school orthography in cyrillic)</source>
     <name>ExternalViewer</name>
     <message>
         <source>the viewer program name is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>името на програмата за гледане е празно</translation>
     </message>
 </context>
 <context>
@@ -771,59 +771,59 @@ between classic and school orthography in cyrillic)</source>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Цялотекстово търсене</translation>
     </message>
     <message>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Цели думи</translation>
     </message>
     <message>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Обикновен текст</translation>
     </message>
     <message>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблони</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Рег. изрази</translation>
     </message>
     <message>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимално разстояние между думите (%1-%2):</translation>
     </message>
     <message>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Статии за речник, не повече от (%1-%2):</translation>
     </message>
     <message>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Намерени статии: </translation>
     </message>
     <message>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Индексиращи се: </translation>
     </message>
     <message>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>Редът за търсене трябва да съдържа поне една дума </translation>
     </message>
     <message>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> или повече символи</translation>
     </message>
     <message>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Няма речници за цялотекстово търсене</translation>
     </message>
     <message>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Символите на CJK в низ за търсене са несъвместими с режимите на търсене „Цели думи“ и „Обикновен текст“</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Без</translation>
+        <translation>Няма</translation>
     </message>
 </context>
 <context>
@@ -837,30 +837,30 @@ between classic and school orthography in cyrillic)</source>
     <name>FavoritesModel</name>
     <message>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка в  избрания файл</translation>
     </message>
 </context>
 <context>
     <name>FavoritesPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Изтрий избраните</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирай избраните</translation>
     </message>
     <message>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави папка</translation>
     </message>
     <message>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Любими:</translation>
     </message>
     <message>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Всички избрани елементи ще бъдат изтрити. Да продължи?</translation>
     </message>
 </context>
 <context>
@@ -871,7 +871,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Added %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавено %1</translation>
     </message>
     <message>
         <source>by</source>
@@ -891,62 +891,62 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation type="unfinished"></translation>
+        <translation>Премини към Редакция|Речници|Източници|Forvo и ззаявете свой собствен ключ API, за решаване на проблема.</translation>
     </message>
 </context>
 <context>
     <name>FullTextSearchDialog</name>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Намери</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Отчитайки регистър</translation>
     </message>
     <message>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим:</translation>
     </message>
     <message>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Статии намерени:</translation>
     </message>
     <message>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Налични речници в групата:</translation>
     </message>
     <message>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Изчакващи индексация:</translation>
     </message>
     <message>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Всичко:</translation>
     </message>
     <message>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Индексирани:</translation>
     </message>
     <message>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Индексиращи се: Без</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Отхвърляне</translation>
+        <translation>Отмяна</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощ</translation>
     </message>
     <message>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорирайте реда на думите</translation>
     </message>
     <message>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорирай диакритика</translation>
     </message>
 </context>
 <context>
@@ -974,7 +974,7 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Look in</source>
-        <translation type="vanished">Търсене в</translation>
+        <translation type="obsolete">Търсене в</translation>
     </message>
 </context>
 <context>
@@ -1077,7 +1077,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Плъзгайте и пускайте речниците в и от групите, местете ги вътре в групите, пренареждайте групите, като използвате мишката.</translation>
+        <translation>Плъзгайте&amp;пускайте речниците в и от групите, местете ги вътре в групите, пренареждайте групите, като използвате мишката.</translation>
     </message>
     <message>
         <source>Create language-based groups</source>
@@ -1089,65 +1089,65 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Групa подпрозорци</translation>
     </message>
     <message>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори списък групи</translation>
     </message>
 </context>
 <context>
     <name>Help::HelpWindow</name>
     <message>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощ GoldenDict</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Домой</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Напред</translation>
+        <translation>Напред</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished">Увеличаване</translation>
+        <translation>Увеличаване</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished">Намаляване</translation>
+        <translation>Намаляване</translation>
     </message>
     <message>
         <source>Normal Size</source>
-        <translation type="unfinished">Нормален размер</translation>
+        <translation>Нормален размер</translation>
     </message>
     <message>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Съдържание</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Индекс</translation>
     </message>
 </context>
 <context>
     <name>HistoryPaneWidget</name>
     <message>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Изтрий избраните</translation>
     </message>
     <message>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирай избраните</translation>
     </message>
     <message>
         <source>History:</source>
-        <translation type="unfinished"></translation>
+        <translation>История:</translation>
     </message>
     <message>
         <source>%1/%2</source>
@@ -1155,7 +1155,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер История: %1 записи от %2 максимално допустими</translation>
     </message>
 </context>
 <context>
@@ -1263,7 +1263,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Belarusian</source>
-        <translation>Беларусски</translation>
+        <translation>Белоруски</translation>
     </message>
     <message>
         <source>Bulgarian</source>
@@ -1951,67 +1951,67 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Китайский</translation>
     </message>
     <message>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Опростен китайски</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Другой</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалекти опростен китайски</translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Китайски диалекти</translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Други източноевропейски езици</translation>
     </message>
     <message>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Други западноевропейски езици</translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Руски диалекти</translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Японски диалекти</translation>
     </message>
     <message>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Други прибалтийски езици</translation>
     </message>
     <message>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Гръцки диалекти</translation>
     </message>
     <message>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Корейски диалекти</translation>
     </message>
     <message>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Турски диалекти</translation>
     </message>
     <message>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Тайски диалекти</translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Берберски езици</translation>
     </message>
     <message>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Ложбан</translation>
     </message>
 </context>
 <context>
@@ -2025,7 +2025,7 @@ between classic and school orthography in cyrillic)</source>
     <name>Main</name>
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка в файл конфигурация. Да продължи с настройки по подразбиране?</translation>
     </message>
 </context>
 <context>
@@ -2280,7 +2280,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Clear</source>
-        <translation>Из&amp;чистване</translation>
+        <translation>Из&amp;чисти</translation>
     </message>
     <message>
         <source>&amp;Zoom</source>
@@ -2316,7 +2316,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов подпрозорец</translation>
     </message>
     <message>
         <source>Ctrl+T</source>
@@ -2324,19 +2324,19 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Configuration Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Папка конфигурации</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Главно меню</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation type="unfinished"></translation>
+        <translation>Намерено в речници:</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори списък подпрозорци</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -2344,7 +2344,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation type="unfinished"></translation>
+        <translation>Затворили сте главното меню. За да се върне, използвайте %1.</translation>
     </message>
     <message>
         <source>Ctrl+M</source>
@@ -2352,31 +2352,31 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Покажи</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Експортирай</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Скрий</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Експорт на История във файл</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Текстови файлове (*.txt);;Всички файлове (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Експорта на История приключи</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при експорт: </translation>
     </message>
     <message>
         <source>Ctrl+H</source>
@@ -2384,59 +2384,59 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Импортирай</translation>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорт История от файл</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка импорт: некоректни файлови данни</translation>
     </message>
     <message>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорта на История приключи</translation>
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка импорт: </translation>
     </message>
     <message>
         <source>Dictionary info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация за речника</translation>
     </message>
     <message>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактирай речник</translation>
     </message>
     <message>
         <source>&amp;Search Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Панел търсене</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Панел на&amp;вигация по превода</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Пр&amp;едварителен преглед</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Пр&amp;есканирай файлове</translation>
     </message>
     <message>
         <source>&amp;New Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Нов подпрозорец</translation>
     </message>
     <message>
         <source>&amp;Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Винаги отгоре</translation>
     </message>
     <message>
         <source>Always on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Винаги отгоре</translation>
     </message>
     <message>
         <source>Ctrl+O</source>
@@ -2444,51 +2444,51 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Бутон Меню</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>По&amp;казвай името в панел речници</translation>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Малки икони в панел инструменти</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Навигация</translation>
     </message>
     <message>
         <source>The main window is set to be always on top.</source>
-        <translation type="unfinished"></translation>
+        <translation>Главен прозорец винаги отгоре.</translation>
     </message>
     <message>
         <source>&amp;History Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Панел История</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Интерфейс Accessibility не включён</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Статията цялостно (*.html)</translation>
     </message>
     <message>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Статия, само в HTML (*.html)</translation>
     </message>
     <message>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Запази статията...</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори папката на речника</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглавия на речник</translation>
     </message>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
@@ -2497,11 +2497,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Търсене</translation>
     </message>
     <message>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Търси в страница</translation>
     </message>
     <message>
         <source>Ctrl+F</source>
@@ -2509,7 +2509,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Цялотекстово търсене</translation>
     </message>
     <message>
         <source>Ctrl+Shift+F</source>
@@ -2517,71 +2517,71 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощ за GoldenDict</translation>
     </message>
     <message>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Индексират се за Цялотекстово търсене: </translation>
     </message>
     <message>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Панел &amp;Любими</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортирай</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортирай</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави</translation>
     </message>
     <message>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави текущия подпрозорец към Любими</translation>
     </message>
     <message>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортирай в обикнов. списък</translation>
     </message>
     <message>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортирай Любими в файл</translation>
     </message>
     <message>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлове XML (*.xml);;Всички файлове (*.*)</translation>
     </message>
     <message>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Експорта на Любими завърши</translation>
     </message>
     <message>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>Експортирай Любими във файл като обикнов. списък</translation>
     </message>
     <message>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортирай Любими от файл</translation>
     </message>
     <message>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Импорта на Любими завърши</translation>
     </message>
     <message>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при анализ данни</translation>
     </message>
     <message>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>Люб&amp;ими</translation>
     </message>
     <message>
         <source>Ctrl+E</source>
@@ -2589,26 +2589,26 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави всички подпрозорци към Любими</translation>
     </message>
     <message>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Изтрий текущия подпрозорец от Любими</translation>
     </message>
     <message>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Да изтрие заглавието &quot;%1&quot; от Любими?</translation>
     </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation type="unfinished"></translation>
+        <translation>Речниковия файл е  повреден</translation>
     </message>
     <message>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при зареждане на статията от %1, причина: %2</translation>
     </message>
 </context>
 <context>
@@ -2641,21 +2641,21 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
 </context>
 <context>
     <name>MultimediaAudioPlayer</name>
     <message>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка отваряне на аудио-буфера за четене.</translation>
     </message>
 </context>
 <context>
     <name>OrderAndProps</name>
     <message>
         <source>Form</source>
-        <translation></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <source>Dictionary order:</source>
@@ -2703,23 +2703,23 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание:</translation>
     </message>
     <message>
         <source>Sort by name</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать по имени</translation>
     </message>
     <message>
         <source>Sort by languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортиране по езици</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглавие на речника</translation>
     </message>
     <message>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Активни речници:%1, неактивни:%2</translation>
     </message>
 </context>
 <context>
@@ -2877,7 +2877,7 @@ in the pressed state when the word selection changes.</source>
     </message>
     <message>
         <source>Left Ctrl only</source>
-        <translation>При натискане на ляв Ctrl </translation>
+        <translation>При натискане на ляв Ctrl</translation>
     </message>
     <message>
         <source>Left Ctrl</source>
@@ -3106,11 +3106,11 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Disallow loading content from other sites (hides most advertisements)</source>
-        <translation type="unfinished"></translation>
+        <translation>Забрани зареждане на съдържание от други сайтове (скрива повечето реклами)</translation>
     </message>
     <message>
         <source>Pronunciation</source>
-        <translation>Произношение</translation>
+        <translation>Произнасяне</translation>
     </message>
     <message>
         <source>Playback</source>
@@ -3138,11 +3138,11 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включи тази опция,, ако не желаете панел подпрозорци при само един отворен подпрозорец.</translation>
     </message>
     <message>
         <source>Hide single tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрий подпрозорците</translation>
     </message>
     <message>
         <source>Normally, pressing ESC key moves focus to the translation line.
@@ -3151,15 +3151,15 @@ With this on however, it will hide the main window.</source>
     </message>
     <message>
         <source>ESC key hides main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрий главния прозорец с ESC</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпрати превежданата дума в главния окно прозорец вместо превод в изскачащ</translation>
     </message>
     <message>
         <source>Send translated word to main window</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпращай превежданата дума към главния прозорец</translation>
     </message>
     <message>
         <source>Enabling this would allow to listen to sound pronunciations from
@@ -3169,15 +3169,15 @@ Plugin must be installed for this option to work.</source>
     </message>
     <message>
         <source>Enable web plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешаване на уеб плъгини</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Доп&amp;ълнително</translation>
     </message>
     <message>
         <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
+        <translation>Допълнителни методи за определяне думата под курсора</translation>
     </message>
     <message>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
@@ -3188,7 +3188,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай &amp;IAccessibleEx</translation>
     </message>
     <message>
         <source>Try to use UI Automation technology to retrieve word under cursor.
@@ -3198,7 +3198,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай &amp;UIAutomation</translation>
     </message>
     <message>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
@@ -3208,11 +3208,11 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>Use &amp;GoldenDict message</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай заявка &amp;GoldenDict</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl-Tab превключва подпрозорци в реда на използване</translation>
     </message>
     <message>
         <source>Babylon</source>
@@ -3220,59 +3220,59 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>История</translation>
     </message>
     <message>
         <source>Turn this option on to store history of the translated words</source>
-        <translation type="unfinished"></translation>
+        <translation>Включите эту опцию, чтобы вести журнал переведённых слов</translation>
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation type="unfinished"></translation>
+        <translation>Записвай  &amp;История</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Статии</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Включи тази опция, ако искате да отваря допълнителни области от статии</translation>
     </message>
     <message>
         <source>Expand optional &amp;parts</source>
-        <translation type="unfinished"></translation>
+        <translation>Раскривай допълнителни &amp;области</translation>
     </message>
     <message>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation type="unfinished"></translation>
+        <translation>Включете тази опция, ако искате да изберете думи с едно кликване на мишката</translation>
     </message>
     <message>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Избирай думата с еднократен клик</translation>
     </message>
     <message>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Допълнителен стил:</translation>
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation>Определя максимално количество записи в История.</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимален размер История:</translation>
     </message>
     <message>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал запазване на История. Ако не е 0, Историята ще се запазва само при Излизане.</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Запазвай на всеки</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>минути</translation>
     </message>
     <message>
         <source>Modern</source>
@@ -3293,63 +3293,63 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Do not identify GoldenDict in HTTP headers</source>
-        <translation type="unfinished"></translation>
+        <translation>Не посочвай GoldenDict в заглавия HTTP</translation>
     </message>
     <message>
         <source>Select this option to automatic collapse big articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Включи тази опция,автоматически да свива повече статии</translation>
     </message>
     <message>
         <source>Collapse articles more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Свивай статии по-големи от</translation>
     </message>
     <message>
         <source>symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>символи</translation>
     </message>
     <message>
         <source>Adjust this value to avoid huge context menus.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установете стойност,за избягване на голямо контекстно меню.</translation>
     </message>
     <message>
         <source>Context menu dictionaries limit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимален брой речници в контекстно меню:</translation>
     </message>
     <message>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation>Статии над този размер ще са свити</translation>
     </message>
     <message>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай системните настройки</translation>
     </message>
     <message>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай свои настройки</translation>
     </message>
     <message>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Потребителски настройки</translation>
     </message>
     <message>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Цялотекстово търсене</translation>
     </message>
     <message>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Разреши цялотекстово търсене за:</translation>
     </message>
     <message>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Не търси в речници, съдържащи повече от</translation>
     </message>
     <message>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>статии (0 - неограничено)</translation>
     </message>
     <message>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Език на Помощ</translation>
     </message>
     <message>
         <source>Turn this option on to enable extra articles search via synonym lists
@@ -3358,55 +3358,55 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Допълнително търсене за синоними</translation>
     </message>
     <message>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Любими</translation>
     </message>
     <message>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал сзапазване в Любими. Ако е 0, Историята ще се запише само при Излизане.</translation>
     </message>
     <message>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Включете тази опция, за потвърждаване на всяка операция за изтриване на елементи</translation>
     </message>
     <message>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Потвърждавай изтриване на елементи</translation>
     </message>
     <message>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>Показвай флаг  вместо изскачащ прозорец. Ако само изскачащ прозорец, кликнете по флага. </translation>
     </message>
     <message>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Показвай флаг, когато е избрана дума</translation>
     </message>
     <message>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизводить аудио-файлы через встроенный плеер</translation>
     </message>
     <message>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай встроен  плеер:</translation>
     </message>
     <message>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>Избор на плеер</translation>
     </message>
     <message>
         <source>Enter audio player command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Команден ред за старт на аудио-плеера</translation>
     </message>
     <message>
         <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Не показвай изскачащ прозорецо при избиране/копиране на текст в някой от подпрозорците на GoldenDict</translation>
     </message>
     <message>
         <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорирайте собствения избор и промени в клипборда на Goldendict</translation>
     </message>
     <message>
         <source>ScanPopup unpinned window flags</source>
@@ -3438,22 +3438,22 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Turn this option on to ignore diacritics while searching articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Включете тази опция, да се игнорира диакритика при търсене на статии</translation>
     </message>
     <message>
         <source>Ignore diacritics while searching</source>
-        <translation type="unfinished"></translation>
+        <translation>Игнорирай диакритика при търсене</translation>
     </message>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудио</translation>
     </message>
     <message>
         <source>Plain Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Html</source>
@@ -3461,140 +3461,140 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation type="unfinished"></translation>
+        <translation>По префиксу</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
 </context>
 <context>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програмата не е указана.</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програмата се затвори с грешка.</translation>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Програмата се върна след затваряне %1.</translation>
     </message>
 </context>
 <context>
     <name>ProgramsModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Включено</translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Име</translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Command Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Команден ред</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при зареждане на статия</translation>
     </message>
     <message>
         <source>Article decoding error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка декодиране на статия</translation>
     </message>
     <message>
         <source>avformat_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avformat_alloc_context().</translation>
     </message>
     <message>
         <source>av_malloc() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка av_malloc().</translation>
     </message>
     <message>
         <source>avio_alloc_context() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avio_alloc_context().</translation>
     </message>
     <message>
         <source>avformat_open_input() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avformat_open_input(): %1.</translation>
     </message>
     <message>
         <source>avformat_find_stream_info() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
         <source>Could not find audio stream.</source>
-        <translation type="unfinished"></translation>
+        <translation>Аудиопотока липсва.</translation>
     </message>
     <message>
         <source>Codec [id: %1] not found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Декодер [id: %1] липсва.</translation>
     </message>
     <message>
         <source>avcodec_open2() failed: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avcodec_open2(): %1.</translation>
     </message>
     <message>
         <source>Cannot find usable audio output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Липсва устройство за  звука.</translation>
     </message>
     <message>
         <source>Unsupported sample format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдържан звуков формат.</translation>
     </message>
     <message>
         <source>ao_open_live() failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>ao_open_live() Грешка: </translation>
     </message>
     <message>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Няма драйвер.</translation>
     </message>
     <message>
         <source>This driver is not a live output device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Дадения драйвер не е за извеждащо устройство.</translation>
     </message>
     <message>
         <source>A valid option key has an invalid value.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невалидна величина параметър.</translation>
     </message>
     <message>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
-        <translation type="unfinished"></translation>
+        <translation>Невъзможно е отваряне на устройство: %1, канали: %2, честота на дискретизация: %3, бит: %4.</translation>
     </message>
     <message>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестна Грешка.</translation>
     </message>
     <message>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avcodec_alloc_frame().</translation>
     </message>
     <message>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирайт: %1%2</translation>
     </message>
     <message>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия: %1%2</translation>
     </message>
     <message>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Автор: %1%2</translation>
     </message>
     <message>
         <source>E-mail: %1%2</source>
@@ -3602,53 +3602,53 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Название: %1%2</translation>
     </message>
     <message>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Сайт: %1%2</translation>
     </message>
     <message>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата: %1%2</translation>
     </message>
     <message>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка avcodec_alloc_context3().</translation>
     </message>
 </context>
 <context>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation type="unfinished"></translation>
+        <translation>Търси по име на речника (Ctrl+F)</translation>
     </message>
     <message>
         <source>Quick Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Бързо търсене</translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Изчисти</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
         <source>ERROR: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ГРЕШКА: %1</translation>
     </message>
     <message>
         <source>Resource saving error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка запис данни: </translation>
     </message>
     <message>
         <source>The referenced resource failed to download.</source>
-        <translation type="unfinished">Указаният ресурс не успя да се свали.</translation>
+        <translation>Указаният ресурс не успя да се свали.</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">Внимание: %1</translation>
+        <translation>Внимание: %1</translation>
     </message>
 </context>
 <context>
@@ -3687,10 +3687,6 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation type="obsolete">дума</translation>
     </message>
     <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Списък с резултати (Alt+M)</translation>
-    </message>
-    <message>
         <source>Alt+M</source>
         <translation type="obsolete">Alt+M</translation>
     </message>
@@ -3717,7 +3713,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпрати думата в главния прозорец (Alt+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -3725,11 +3721,11 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Назад</translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Напред</translation>
+        <translation>Напред</translation>
     </message>
     <message>
         <source>GoldenDict</source>
@@ -3741,11 +3737,11 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави думата към Любими</translation>
     </message>
     <message>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Над всички прозорци</translation>
     </message>
 </context>
 <context>
@@ -3760,7 +3756,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
 </context>
 <context>
@@ -3787,7 +3783,7 @@ could be resized or managed in other ways.</source>
     </message>
     <message>
         <source>Paths to search for the dictionary files:</source>
-        <translation>Пътища за търсене на файлове с речници:</translation>
+        <translation>Пътища за търсене на файлове в речници:</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -3865,7 +3861,7 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <source>German transliteration</source>
-        <translation>Транслитерация (Германски</translation>
+        <translation>Транслитерация (Германски)</translation>
     </message>
     <message>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
@@ -3895,11 +3891,11 @@ kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>
-В GoldenDict пока не реализована.</translation>
+В GoldenDict засега не реализирано.</translation>
     </message>
     <message>
         <source>Nihon-shiki</source>
-        <translation>Nihon-shiki</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
@@ -3907,7 +3903,7 @@ Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
         <translation>
-В GoldenDict пока не реализована.</translation>
+В GoldenDict засега не реализирано.</translation>
     </message>
     <message>
         <source>Kunrei-shiki</source>
@@ -3947,7 +3943,7 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation type="unfinished"></translation>
+        <translation>Онлайн произнасяне от сайта &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Сайта позволява да се записва и обменя произнасянето на думи. Може да ги прослушате в GoldenDict.</translation>
     </message>
     <message>
         <source>Enable pronunciations from Forvo</source>
@@ -3955,7 +3951,7 @@ Not implemented yet in GoldenDict.</source>
     </message>
     <message>
         <source>API Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ключ API:</translation>
     </message>
     <message>
         <source>Use of Forvo currently requires an API key. Leave this field
@@ -4003,19 +3999,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Програми</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Да изтрие програмата &lt;b&gt;%1&lt;/b&gt; от списъка?</translation>
     </message>
     <message>
         <source>Belarusian transliteration</source>
-        <translation type="unfinished"></translation>
+        <translation>Транслитерация (Белоруски)</translation>
     </message>
     <message>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Получете ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;тук&lt;/a&gt;, или оставете празно за използване на ключ по подразбиране.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1%...%GDISO16% for ISO 8859-1...ISO 8859-16 respectively,
@@ -4024,111 +4020,111 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Синтез говор</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
-        <translation type="unfinished"></translation>
+        <translation>Всички външни програми. Низа %GDWORD% ще бъде заменен с думата за търсене.Ако такъв низ липсва, думата ще бъде показана на стандартния вход.</translation>
     </message>
     <message>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Сървъри DICT</translation>
     </message>
     <message>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сървъри DICT:</translation>
     </message>
 </context>
 <context>
     <name>StylesComboBox</name>
     <message>
         <source>None</source>
-        <translation type="unfinished">Без</translation>
+        <translation>Няма</translation>
     </message>
 </context>
 <context>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Избор на глас:</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Добави</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished">&amp;Премахване</translation>
+        <translation>&amp;Премахване</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Прослушване</translation>
     </message>
     <message>
         <source>Available voice engines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Налични гласове:</translation>
     </message>
     <message>
         <source>Text to be previewed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст за прослушване:</translation>
     </message>
     <message>
         <source>Type text to be previewed here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Въведете текст за прослушване.</translation>
     </message>
     <message>
         <source>&amp;Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Прослушай</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation type="unfinished"></translation>
+        <translation>Няма TTS гласове</translation>
     </message>
     <message>
         <source>Confirm removal</source>
-        <translation type="unfinished">Потвърждаване на премахването</translation>
+        <translation>Потвърждаване на премахването</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Да изтрие гласа &lt;b&gt;%1&lt;/b&gt; от списъка?</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не може да намери наличния TTS глас.&lt;br&gt; Моля, уверете се, че поне един TTS вече е инсталиран на вашия компютър.</translation>
     </message>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished">Настройки</translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сила звук:</translation>
     </message>
     <message>
         <source>Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Темп:</translation>
     </message>
 </context>
 <context>
     <name>TranslateBox</name>
     <message>
         <source>Type a word or phrase to search dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Въведете дума или фраза за търсене на речници</translation>
     </message>
     <message>
         <source>Drop-down</source>
-        <translation type="unfinished"></translation>
+        <translation>Падащ списък</translation>
     </message>
 </context>
 <context>
     <name>VoiceEnginesModel</name>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Включено</translation>
+        <translation>Включено</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Име</translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Id</source>
@@ -4136,7 +4132,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
 </context>
 <context>
@@ -4155,15 +4151,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Иконка</translation>
     </message>
     <message>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Вмъквай статията като линк в тага &lt;iframe&gt;</translation>
     </message>
     <message>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Като линк</translation>
     </message>
 </context>
 <context>
@@ -4177,7 +4173,7 @@ p, li { white-space: pre-wrap; }
     <name>WordList</name>
     <message>
         <source>WARNING: %1</source>
-        <translation type="unfinished">Внимание: %1</translation>
+        <translation>Внимание: %1</translation>
     </message>
 </context>
 </TS>
