@@ -1032,27 +1032,27 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../favoritespanewidget.cc" line="29"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">Ta &amp;bort markerade</translation>
+        <translation>Ta &amp;bort markerade</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="38"/>
         <source>Copy Selected</source>
-        <translation type="unfinished">Kopiera markerade</translation>
+        <translation>Kopiera markerade</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="47"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till mapp</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="61"/>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriter:</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla markerade objekt tas bort. Fortsätt?</translation>
     </message>
 </context>
 <context>
@@ -1099,67 +1099,67 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="207"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Skiftlägeskänslig</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Läge:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="82"/>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorera ordordning</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="89"/>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorera diacritics</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="112"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hittade artiklar:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="134"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillgängliga ordlistor i grupp:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="140"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vänta på indexering:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="161"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Totalt:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="168"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indexerade:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="185"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nu indexering: Inga</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="233"/>
         <source>Cancel</source>
-        <translation type="unfinished">Avbryt</translation>
+        <translation>Avbryt</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="253"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjälp</translation>
     </message>
 </context>
 <context>
@@ -1304,12 +1304,12 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppflikar</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Öppna grupperlista</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -1352,47 +1352,47 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict hjälp</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Hem</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished">Bakåt</translation>
+        <translation>Bakåt</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished">Framåt</translation>
+        <translation>Framåt</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Zooma in</translation>
+        <translation>Zooma in</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Zooma ut</translation>
+        <translation>Zooma ut</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">Normal storlek</translation>
+        <translation>Normal storlek</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Innehåll</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Index</translation>
     </message>
 </context>
 <context>
@@ -2538,12 +2538,12 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.ui" line="136"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="143"/>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favo&amp;riter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="162"/>
@@ -2598,7 +2598,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.ui" line="630"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict-referens</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="633"/>
@@ -2614,7 +2614,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.ui" line="316"/>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Rutan Favor&amp;iter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="425"/>
@@ -2716,42 +2716,42 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.ui" line="605"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök på sidan</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="608"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="616"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Fulltextsökning</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="619"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Skift+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportera</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importera</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
@@ -2760,17 +2760,17 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <location filename="../mainwindow.cc" line="1868"/>
         <location filename="../mainwindow.cc" line="4698"/>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till aktuell flik i Favoriter</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportera till lista</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="510"/>
@@ -2928,7 +2928,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till alla flikar i Favoriter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="597"/>
@@ -2967,7 +2967,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <location filename="../mainwindow.cc" line="4706"/>
         <location filename="../mainwindow.cc" line="4733"/>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort aktuell flik från Favoriter</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1815"/>
@@ -3002,49 +3002,49 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.cc" line="4036"/>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportera Favoriter till fil</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4038"/>
         <location filename="../mainwindow.cc" line="4128"/>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>XML-filer (*.xml);;Alla filer (*.*)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4057"/>
         <location filename="../mainwindow.cc" line="4106"/>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriter exportera komplett</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4077"/>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportera Favoriter till fil som vanlig lista</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4126"/>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importera Favoriter från fil</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4151"/>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriter import komplett</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4157"/>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>Dataparseringsfel</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4649"/>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nu indexering för fulltextsökning: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4691"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort huvudord &quot;%1&quot; från Favoriter?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="861"/>
@@ -3056,7 +3056,8 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <location filename="../mainwindow.cc" line="948"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>Sträng för att söka i ordlistor. Jokertecken &apos;*&apos;, &apos;?&apos; och uppsättningar av symboler &apos;[...]&apos; är tillåtna.
+För att hitta &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symboler använder &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respektive</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3286"/>
@@ -3177,7 +3178,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4443"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished">Ordlistans huvudord</translation>
+        <translation>Ordlistans huvudord</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4445"/>
@@ -3247,7 +3248,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../multimediaaudioplayer.cc" line="24"/>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det gick inte att öppna ljudbuffert för läsning.</translation>
     </message>
 </context>
 <context>
@@ -3334,7 +3335,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordlistor aktiva: % 1, inaktiva: % 2</translation>
     </message>
 </context>
 <context>
@@ -3506,7 +3507,7 @@ Med detta alternativ aktiverat döljer den istället huvudfönstret.</translatio
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Hjälp språk</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -3707,12 +3708,12 @@ efter slutförd markering. Här anges den tidsperioden.</translation>
     <message>
         <location filename="../preferences.ui" line="675"/>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>Visa ett flaggfönster innan du visar popup-fönster klickar du på flaggan för att visa popup-fönster. </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="678"/>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa skanningsflagga när ord är markerat</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="726"/>
@@ -3783,57 +3784,57 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1012"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Systemproxy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1019"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassad proxy</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1026"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Anpassade inställningar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1206"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Fulltextsökning</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1225"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillåt fulltextsökning för:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1323"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Sök inte i ordlistor som innehåller mer än</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1340"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>artiklar (0 - obegränsat)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1619"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriter</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1627"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoriters sparningsintervall. Om inställd på 0 sparas Favoriter endast vid avslutning.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1653"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Slå på detta alternativ för att bekräfta varje operation av postborttagning</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1656"/>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekräftelse för borttagning av poster</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1689"/>
@@ -3859,12 +3860,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="1773"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera det här alternativet om du vill aktivera extra artiklar sök via synonymlistor
+från Stardict, Babylon och GLS ordböcker</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1777"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Extra sökning via synonymer</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="936"/>
@@ -3874,27 +3876,27 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa inte popup när markering eller urklipp i en av Goldendicts egna fönsterändringar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorera Goldendicts egen markering och urklippsförändringar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="919"/>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>Spela upp ljudfiler via inbyggt ljudstöd</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="922"/>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>Använd intern spelare:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj ljud-backend</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="939"/>
@@ -3904,7 +3906,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../preferences.ui" line="949"/>
         <source>Enter audio player command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Ange ljudspelarkommandoraden</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
@@ -4069,37 +4071,37 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../preferences.ui" line="1433"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>ScanPopup ofästa fönsterflaggor</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1439"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Experimentera med icke-standardflaggor om ofäst skannings popup-fönstret missköterer sig</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1443"/>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;standard&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1448"/>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Popup</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1453"/>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Verktyg</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Denna ledtråd kan kombineras med icke-standardfönsterflaggor</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1467"/>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoppa över fönsterhanterarens ledtråd</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1507"/>
@@ -4151,12 +4153,12 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../preferences.ui" line="1737"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera det här alternativet om du vill ignorera diacritics när du söker artiklar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
         <source>Ignore diacritics while searching</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorera diacritics medan du söker</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
@@ -4309,13 +4311,13 @@ du inte aktivera det här alternativet.</translation>
         <location filename="../sdict.cc" line="721"/>
         <location filename="../stardict.cc" line="1162"/>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright: %1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="590"/>
         <location filename="../sdict.cc" line="737"/>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Version: %1%2</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="146"/>
@@ -4356,7 +4358,7 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../ffmpegaudio.cc" line="231"/>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_context3() misslyckades.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="240"/>
@@ -4413,28 +4415,28 @@ du inte aktivera det här alternativet.</translation>
         <location filename="../gls.cc" line="630"/>
         <location filename="../stardict.cc" line="1170"/>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Författare: %1%2</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="420"/>
         <location filename="../stardict.cc" line="1178"/>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>E-post: %1%2</translation>
     </message>
     <message>
         <location filename="../sdict.cc" line="689"/>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="1186"/>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Webbplats: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="1194"/>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum: %1%2</translation>
     </message>
 </context>
 <context>
@@ -4475,7 +4477,7 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../articleview.cc" line="3029"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished">VARNING: %1</translation>
+        <translation>VARNING: %1</translation>
     </message>
 </context>
 <context>
@@ -4504,7 +4506,7 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../scanflag.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>MainWindow</translation>
     </message>
 </context>
 <context>
@@ -4556,7 +4558,7 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../scanpopup.ui" line="178"/>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till ord i Favoriter (Ctrl + E)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
@@ -4566,7 +4568,7 @@ du inte aktivera det här alternativet.</translation>
     <message>
         <location filename="../scanpopup.ui" line="231"/>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Alltid ovanpå alla andra fönster</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="251"/>
@@ -4752,12 +4754,12 @@ dig på webbplatsen för att få din egen nyckel.</translation>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT-servrar</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>DICT-servrar:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
@@ -5062,7 +5064,7 @@ Har ännu inte implementerats i  GoldenDict.</translation>
         <location filename="../sources.cc" line="624"/>
         <location filename="../sources.cc" line="657"/>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Infoga artikel som länk inuti &lt;iframe&gt; tagg</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="633"/>
@@ -5072,7 +5074,7 @@ Har ännu inte implementerats i  GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="635"/>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Som länk</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="637"/>
