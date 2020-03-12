@@ -278,7 +278,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
       // Grab the second key, unless it's grabbed already
       // Note that we only grab the clipboard key only if
-      // the sequence didn't begin with it
+      // the sequence begins with it
 
       if ( ( isCopyToClipboardKey( hs.key, hs.modifier ) ||
              !isCopyToClipboardKey( hs.key2, hs.modifier ) ) &&
