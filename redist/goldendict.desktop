@@ -5,6 +5,10 @@ Categories=Office;Dictionary;Education;Qt;
 Name=GoldenDict
 GenericName=Multiformat Dictionary
 Comment=GoldenDict
-Encoding=UTF-8
 Icon=goldendict
 Exec=goldendict
+Actions=X11;
+
+[Desktop Action X11]
+Name=GoldenDict (X11)
+Exec=env QT_QPA_PLATFORM=xcb goldendict
