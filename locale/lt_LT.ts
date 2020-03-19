@@ -296,7 +296,7 @@
     <message>
         <location filename="../articleview.cc" line="2082"/>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ĮSPĖJIMAS: Garso leistuvė: %1</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
@@ -350,7 +350,7 @@
     <message>
         <location filename="../articleview.cc" line="2026"/>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko pagroti garso kūrinio: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2075"/>
@@ -1145,12 +1145,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="82"/>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Bet kokia žodžių tvarka</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="89"/>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepaisyti diakrininių ženklų</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="112"/>
@@ -2752,7 +2752,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Visas korteles įtraukti į žymeles</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1338"/>
@@ -2771,7 +2771,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
         <location filename="../mainwindow.cc" line="4706"/>
         <location filename="../mainwindow.cc" line="4733"/>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Pašalinti veikiamąją kortelę iš žymelių</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4036"/>
@@ -2818,7 +2818,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../mainwindow.cc" line="4691"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Pašalinti antraštinį žodį „%1“ iš žymelių?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="861"/>
@@ -3339,7 +3339,7 @@ Norėdami atverti parsisiuntimo puslapį, spauskite &lt;b&gt;Parsisiųsti&lt;/b&
     <message>
         <location filename="../multimediaaudioplayer.cc" line="24"/>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepavyko skaitymui atverti garso buferio.</translation>
     </message>
 </context>
 <context>
@@ -3798,12 +3798,12 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nerodyti iškylančio lango, jei keičiasi pažymimas arba kopijuojamas tekstas viename iš Goldendict langų</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepaisyti žymėjimo ar kopijavimo pakeitimų GoldenDict languose</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="698"/>
@@ -3818,12 +3818,12 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="675"/>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>Pirmiausia rodyti ženkliuką, ir tik jį spragtelėjus rodyti iškylantį langą. </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="678"/>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Pažymėjus žodį, pirmiausia rodyti ženkliuką</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="913"/>
@@ -3833,17 +3833,17 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     <message>
         <location filename="../preferences.ui" line="919"/>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>Groti garso kūrinius naudojant integruotą garso sistemą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="922"/>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nautoti integruotą grotuvę:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasirinkite garso sąsają</translation>
     </message>
     <message>
         <source>Play audio files via FFmpeg(libav) and libao</source>
@@ -3986,7 +3986,7 @@ bass.dll (http://www.un4seen.com) nukopijavę į GoldenDict aplanką.</translati
     <message>
         <location filename="../preferences.ui" line="949"/>
         <source>Enter audio player command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Įveskite garso leistuvės komandą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1147"/>
@@ -4057,37 +4057,37 @@ Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translatio
     <message>
         <location filename="../preferences.ui" line="1433"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepisegto iškylančio lango vėliavos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1439"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei neprisegtas iškylantis langas netinkamai elgiasi, galite paeksterimentuoti su nestandartinėmis vėliavėlėmis</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1443"/>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;numatyta&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1448"/>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Iškylantis langas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1453"/>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Priemonė</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Ši užuomina gali būti susieta su nestandartinėmis langų vėliavėlėmis</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1467"/>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Apeiti langų tvarkyklės užuominą</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1507"/>
@@ -4139,12 +4139,12 @@ Nereikia šios parinkties rinktis, jei tokių programų nenaudojate.</translatio
     <message>
         <location filename="../preferences.ui" line="1737"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei norite nepaisyti diakritinių ženklų žodžių paieškoje, įjunkite šią parinktį</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
         <source>Ignore diacritics while searching</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieškant nepaisyti diakritinių ženklų</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
@@ -4507,7 +4507,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../ffmpegaudio.cc" line="231"/>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_context3() klaida.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="240"/>
@@ -4527,7 +4527,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../ffmpegaudio.cc" line="327"/>
         <source>ao_open_live() failed: </source>
-        <translation>ao_open_live() klaida:</translation>
+        <translation>ao_open_live() klaida: </translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="332"/>
@@ -4655,7 +4655,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../scanflag.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagrindinis langas</translation>
     </message>
 </context>
 <context>
@@ -4720,7 +4720,7 @@ ir pasiūlys atverti parsisiuntimo puslapį.
     <message>
         <location filename="../scanpopup.ui" line="231"/>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Visada rodyti virš kitų langų</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="251"/>
