@@ -7,8 +7,3 @@ GenericName=Multiformat Dictionary
 Comment=GoldenDict
 Icon=goldendict
 Exec=goldendict
-Actions=X11;
-
-[Desktop Action X11]
-Name=GoldenDict (X11)
-Exec=env QT_QPA_PLATFORM=xcb goldendict
