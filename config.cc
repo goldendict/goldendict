@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QtXml>
 #include "gddebug.hh"
+#include <QStandardPaths>
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
@@ -38,7 +39,7 @@ namespace
       char const * pathInHome = "GoldenDict";
       result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
     #else
-      char const * pathInHome = ".goldendict";
+      char const * pathInHome = QStandardPaths::locate(QStandardPaths::ConfigLocation, "goldendict", QStandardPaths::LocateDirectory).toStdString().c_str();
     #endif
 
     result.mkpath( pathInHome );
