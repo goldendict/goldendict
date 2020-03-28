@@ -113,13 +113,11 @@ void ExtLineEdit::updateButtonPositions()
             iconPos = (iconPos == Left ? Right : Left);
 
         if (iconPos == ExtLineEdit::Right) {
-            int right;
-            getTextMargins(0, 0, &right, 0);
+            int right = textMargins().right();
             const int iconoffset = right + 4;
             iconButtons[i]->setGeometry(contentRect.adjusted(width() - iconoffset, 0, 0, 0));
         } else {
-            int left;
-            getTextMargins(&left, 0, 0, 0);
+            int left = textMargins().left();
             const int iconoffset = left + 4;
             iconButtons[i]->setGeometry(contentRect.adjusted(0, 0, -width() + iconoffset, 0));
         }

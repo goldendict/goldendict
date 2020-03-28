@@ -137,7 +137,7 @@ void HistoryPaneWidget::deleteSelectedItems()
 
   // Need to sort indexes in the decreasing order so that
   // the first deletions won't affect the indexes for subsequent deletions.
-  qSort( idxsToDelete.begin(), idxsToDelete.end(), qGreater<int>() );
+  std::sort( idxsToDelete.begin(), idxsToDelete.end(), qGreater<int>() );
 
   QListIterator<int> idxs( idxsToDelete );
   while ( idxs.hasNext() )

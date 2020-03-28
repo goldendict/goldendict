@@ -1418,7 +1418,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   uint32_t nextLeaf = 0;
   uint32_t leafEntries;
 
-  qSort( offsets );
+  std::sort( offsets.begin(), offsets.end() );
 
   Mutex::Lock _( *idxFileMutex );
 
@@ -1481,10 +1481,10 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
+      QList< uint32_t >::Iterator it = std::lower_bound( begOffsets, endOffsets,
                                                     result.at( i ).articleOffset );
 
-      if( it != offsets.end() )
+      if( it != offsets.end() && *it == result.at( i ).articleOffset )
       {
         if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
           return;

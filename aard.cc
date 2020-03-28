@@ -959,7 +959,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           if( volumes > 1 )
           {
             QString ss;
-            ss.sprintf( " (%i/%i)", qFromBigEndian( dictHeader.volume ), volumes );
+            ss.asprintf( " (%i/%i)", qFromBigEndian( dictHeader.volume ), volumes );
             dictName += ss.toLocal8Bit().data();
           }
 

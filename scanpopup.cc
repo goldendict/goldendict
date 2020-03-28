@@ -8,6 +8,7 @@
 #include <QPixmap>
 #include <QBitmap>
 #include <QMenu>
+#include <QScreen>
 #include <QMouseEvent>
 #include <QDesktopWidget>
 #include "gddebug.hh"
@@ -634,7 +635,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
       QPoint currentPos = QCursor::pos();
 
-      QRect desktop = QApplication::desktop()->screenGeometry();
+      QRect desktop = QGuiApplication::screens().first()->geometry();
 
       QSize windowSize = geometry().size();
 
