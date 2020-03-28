@@ -1,6 +1,7 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
+#include <iostream>
 #include "config.hh"
 #include <QDir>
 #include <QFile>
@@ -39,12 +40,17 @@ namespace
       char const * pathInHome = "GoldenDict";
       result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
     #else
-      char const * pathInHome = QStandardPaths::locate(QStandardPaths::ConfigLocation, "goldendict", QStandardPaths::LocateDirectory).toStdString().c_str();
+      QString configPath = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+      if (configPath.isEmpty()) {
+          configPath = ".config";
+      }
+      configPath += "/goldendict";
+      std::string pathInHome = configPath.toStdString();
     #endif
 
-    result.mkpath( pathInHome );
+    result.mkpath( pathInHome.c_str() );
 
-    if ( !result.cd( pathInHome ) )
+    if ( !result.cd( pathInHome.c_str() ) )
       throw exCantUseHomeDir();
 
     return result;
