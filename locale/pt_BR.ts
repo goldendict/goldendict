@@ -151,7 +151,7 @@
     <message>
         <location filename="../articleview.ui" line="54"/>
         <source>about:blank</source>
-        <translation>sobre:branco</translation>
+        <translation>sobre:vazio</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="142"/>
@@ -281,7 +281,7 @@
     <message>
         <location filename="../articleview.cc" line="1723"/>
         <source>Open Link in &amp;External Browser</source>
-        <translation>Abrir Ligação em &amp;Navegador da Web Externo </translation>
+        <translation>Abrir link em &amp;Navegador da Web Externo</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1738"/>
@@ -327,7 +327,7 @@
     <message>
         <location filename="../articleview.cc" line="2082"/>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>AVISO: Reprodutor de áudio: %1</translation>
     </message>
     <message>
         <source>WARNING: FFmpeg Audio Player: %1</source>
@@ -370,7 +370,7 @@
     <message>
         <location filename="../articleview.cc" line="2026"/>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao reproduzir som do arquivo: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2075"/>
@@ -403,62 +403,62 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../chineseconversion.ui" line="20"/>
         <source>Chinese Conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversão para chinês</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="23"/>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar conversão entre caracteres de chinês simplificado e tradicional</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="26"/>
         <source>Chinese Con&amp;version</source>
-        <translation type="unfinished"></translation>
+        <translation>Con&amp;versão para chinês</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="35"/>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar conversão de caracteres de chinês simplificado para tradicional (variante de Taiwan)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="38"/>
         <source>SC to TC (Taiwan variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinês simplificado para chinês de Taiwan</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="45"/>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar conversão de caracteres de chinês simplificado para tradicional (variante de Hong Kong)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="48"/>
         <source>SC to TC (Hong Kong variant)</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinês simplificado para chinês de Hong Kong</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="55"/>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar conversão de caracteres de chinês tradicional para simplificado</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="58"/>
         <source>TC to SC</source>
-        <translation type="unfinished"></translation>
+        <translation>Chinês de Taiwan para chinês simplificado</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="129"/>
         <source>Simplified to traditional Chinese (Taiwan variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversão simplificada para chinês tradicional (variante de Taiwan)</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="136"/>
         <source>Simplified to traditional Chinese (Hong Kong variant) conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversão simplificada para chinês tradicional (variante de Hong Kong)</translation>
     </message>
     <message>
         <location filename="../chinese.cc" line="143"/>
         <source>Traditional to simplified Chinese conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversão tradicional para chinês simplificado</translation>
     </message>
 </context>
 <context>
@@ -466,22 +466,22 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../authentication.ui" line="14"/>
         <source>Proxy authentication required</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticação de proxy necessária</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Você precisa fornecer um nome de usuário e uma senha para acessar via proxy</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome de usuário:</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="40"/>
         <source>Password:</source>
-        <translation type="unfinished">Senha:</translation>
+        <translation>Senha:</translation>
     </message>
 </context>
 <context>
@@ -504,7 +504,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictgroupwidget.ui" line="87"/>
         <source>Favorites folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta de favoritos:</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="40"/>
@@ -550,7 +550,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../groups_widgets.cc" line="842"/>
         <location filename="../groups_widgets.cc" line="1017"/>
         <source>Dictionaries: </source>
-        <translation>Dicionários:</translation>
+        <translation>Dicionários: </translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="694"/>
@@ -594,112 +594,112 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictheadwords.ui" line="27"/>
         <source>Search mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de pesquisa</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="33"/>
         <source>This element determines how filter string will be interpreted</source>
-        <translation type="unfinished"></translation>
+        <translation>Este elemento determina como a sequência de filtros será interpretada</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="40"/>
         <source>If checked on the symbols case will be take in account when filtering</source>
-        <translation type="unfinished"></translation>
+        <translation>Se marcado na caixa de símbolos, será levado em consideração ao filtrar</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Diferenciar maiúsculas/minúsculas</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar palavras-chave em arquivo</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="89"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="101"/>
         <source>Press this button to apply filter to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Pressione este botão para aplicar o filtro à lista de palavras-chave</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="104"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="117"/>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation type="unfinished"></translation>
+        <translation>Se marcada alguma alteração no filtro, aplicaremos imediatamente à lista de palavras-chave</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="120"/>
         <source>Auto apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar automaticamente</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="127"/>
         <source>Filter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro:</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="134"/>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrar conjunto de caracteres (fixo, curingas ou expressão regular)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="41"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="42"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Curingas</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="43"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="282"/>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Total de palavras-chave únicas:%1, filtradas:%2</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="299"/>
         <source>Save headwords to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar palavras-chave em arquivo</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="301"/>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation type="unfinished">Arquivos de texto (*.txt);;Todos os arquivos (*.*)</translation>
+        <translation>Arquivos de texto (*.txt);;Todos os arquivos (*.*)</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="325"/>
         <source>Export headwords...</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar palavras-chave...</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="325"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
@@ -747,12 +747,12 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictinfo.ui" line="263"/>
         <source>Show all unique dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar todas as palavras-chave exclusivas do dicionário</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="266"/>
         <source>Headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavras-chave</translation>
     </message>
     <message>
         <location filename="../dictinfo.cc" line="29"/>
@@ -775,22 +775,22 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictserver.cc" line="276"/>
         <source>Url: </source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço (Url): </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="277"/>
         <source>Databases: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bancos de dados: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="278"/>
         <source>Search strategies: </source>
-        <translation type="unfinished"></translation>
+        <translation>Estratégias de pesquisa: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="282"/>
         <source>Server databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Bancos de dados do servidor</translation>
     </message>
 </context>
 <context>
@@ -798,44 +798,46 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../sources.cc" line="810"/>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitado</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="812"/>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="814"/>
         <source>Address</source>
-        <translation type="unfinished">Endereço</translation>
+        <translation>Endereço</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="816"/>
         <source>Databases</source>
-        <translation type="unfinished"></translation>
+        <translation>Bancos de dados</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="818"/>
         <source>Strategies</source>
-        <translation type="unfinished"></translation>
+        <translation>Estratégias</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="820"/>
         <source>Icon</source>
-        <translation type="unfinished">Ícone</translation>
+        <translation>Ícone</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="853"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de bancos de dados delimitada por vírgulas
+(cadeia vazia ou &quot;*&quot; corresponde a todos os bancos de dados)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="856"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista delimitada por vírgula de estratégias de pesquisa
+(cadeia vazia significa estratégia &quot;prefixo&quot;)</translation>
     </message>
 </context>
 <context>
@@ -858,12 +860,12 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../dictionarybar.cc" line="136"/>
         <source>Dictionary info</source>
-        <translation>Informs. do Dicionário</translation>
+        <translation>Informações do Dicionário</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="141"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavras-chave do dicionário</translation>
     </message>
     <message>
         <location filename="../dictionarybar.cc" line="143"/>
@@ -941,74 +943,74 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../fulltextsearch.cc" line="149"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisa de texto completo</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="159"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavras inteiras</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="160"/>
         <source>Plain text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto simples</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="161"/>
         <source>Wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Curingas</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="162"/>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>RegExp</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="167"/>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Distância máxima entre palavras (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="176"/>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo de artigos por dicionário (%1-%2):</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="217"/>
         <location filename="../fulltextsearch.cc" line="376"/>
         <location filename="../fulltextsearch.cc" line="466"/>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Artigos encontrados: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="330"/>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Agora indexando: </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="331"/>
         <source>None</source>
-        <translation type="unfinished">Nenhum</translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="389"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Os símbolos CJK na cadeia de pesquisa não são compatíveis com os modos de pesquisa &quot;Palavras inteiras&quot; e &quot;Texto sem formatação&quot;</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="398"/>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>A linha de pesquisa deve possuir pelo menos uma palavra que contenha </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="399"/>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> ou mais símbolos</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="411"/>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Não há dicionários para pesquisa de texto completo</translation>
     </message>
 </context>
 <context>
@@ -1023,7 +1025,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../favoritespanewidget.cc" line="643"/>
         <source>Error in favorities file</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro no arquivo de favoritos</translation>
     </message>
 </context>
 <context>
@@ -1031,27 +1033,27 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../favoritespanewidget.cc" line="29"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished">&amp;Remover Selecionado</translation>
+        <translation>&amp;Remover selecionado</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="38"/>
         <source>Copy Selected</source>
-        <translation type="unfinished">Copiar Selecionado</translation>
+        <translation>Copiar Selecionado</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="47"/>
         <source>Add folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar pasta</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="61"/>
         <source>Favorites:</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoritos:</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="167"/>
         <source>All selected items will be deleted. Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os itens selecionados serão excluídos. Continuar?</translation>
     </message>
 </context>
 <context>
@@ -1098,67 +1100,67 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../fulltextsearch.ui" line="26"/>
         <location filename="../fulltextsearch.ui" line="207"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisar</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="37"/>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Diferenciar maiúsculas/minúsculas</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="46"/>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="82"/>
         <source>Ignore words order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar ordem das palavras</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="89"/>
         <source>Ignore diacritics</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar diacríticos</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="112"/>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Artigos encontrados:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="134"/>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dicionários disponíveis no grupo:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="140"/>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aguarde a indexação:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="161"/>
         <source>Total:</source>
-        <translation type="unfinished"></translation>
+        <translation>Total:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="168"/>
         <source>Indexed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Indexado:</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="185"/>
         <source>Now indexing: None</source>
-        <translation type="unfinished"></translation>
+        <translation>A indexar agora: Nenhum</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="233"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../fulltextsearch.ui" line="253"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda</translation>
     </message>
 </context>
 <context>
@@ -1292,7 +1294,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../groups.ui" line="186"/>
         <location filename="../groups.cc" line="174"/>
         <source>Remove all groups</source>
-        <translation>Re&amp;mover todos</translation>
+        <translation>Remover todos os grupos</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="197"/>
@@ -1302,12 +1304,12 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo de guias</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
         <source>Open groups list</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir lista de grupos</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="123"/>
@@ -1350,47 +1352,47 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda GoldenDict</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Início</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Anterior</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguinte</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
         <source>Zoom In</source>
-        <translation type="unfinished">Aumentar as letras das definições</translation>
+        <translation>Aumentar as letras das definições</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation type="unfinished">Diminuir as letras das definições</translation>
+        <translation>Diminuir as letras das definições</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation type="unfinished">Restaurar as letras das definições</translation>
+        <translation>Restaurar as letras das definições</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
         <source>Content</source>
-        <translation type="unfinished"></translation>
+        <translation>Conteúdo</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="128"/>
         <source>Index</source>
-        <translation type="unfinished"></translation>
+        <translation>Índice</translation>
     </message>
 </context>
 <context>
@@ -2536,12 +2538,12 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.ui" line="136"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="143"/>
         <source>Favo&amp;rites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favo&amp;ritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="162"/>
@@ -2556,7 +2558,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.ui" line="343"/>
         <source>&amp;History Pane</source>
-        <translation>&amp; Painel Histórico</translation>
+        <translation>Painel &amp;Histórico</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="377"/>
@@ -2596,7 +2598,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.ui" line="630"/>
         <source>GoldenDict reference</source>
-        <translation type="unfinished"></translation>
+        <translation>Referência GoldenDict</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="633"/>
@@ -2612,7 +2614,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.ui" line="316"/>
         <source>Favor&amp;ites Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Painel de Favor&amp;itos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="425"/>
@@ -2714,42 +2716,42 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../mainwindow.ui" line="605"/>
         <source>Search in page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisar na página</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="608"/>
         <source>Ctrl+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="616"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisa de texto completo</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="619"/>
         <source>Ctrl+Shift+F</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+F</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="638"/>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
@@ -2758,17 +2760,17 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../mainwindow.cc" line="1868"/>
         <location filename="../mainwindow.cc" line="4698"/>
         <source>Add current tab to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar guia atual aos Favoritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar para lista</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="510"/>
@@ -2912,7 +2914,8 @@ entre clássico e ortografia escolar em cirílico)</translation>
         <location filename="../mainwindow.cc" line="948"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
-        <translation type="unfinished"></translation>
+        <translation>String para pesquisar em dicionários. Os curingas &apos;*&apos;, &apos;?&apos; e conjuntos de símbolos &apos;[...]&apos; são permitidos.
+Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; Use &apos;\ *&apos;, &apos;\?&apos;, &apos;\ [&apos;, &apos;\]&apos; Respectivamente</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1327"/>
@@ -2998,7 +3001,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar todas as guias aos Favoritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1785"/>
@@ -3007,7 +3010,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="4706"/>
         <location filename="../mainwindow.cc" line="4733"/>
         <source>Remove current tab from Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover a guia atual dos Favoritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3286"/>
@@ -3052,7 +3055,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3498"/>
         <source>Error</source>
-        <translation>Erro!</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3499"/>
@@ -3097,7 +3100,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="4060"/>
         <location filename="../mainwindow.cc" line="4109"/>
         <source>Export error: </source>
-        <translation>Erro de exportação:</translation>
+        <translation>Erro de exportação: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3963"/>
@@ -3107,55 +3110,55 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4012"/>
         <source>Import error: invalid data in file</source>
-        <translation>Erro ao tentar importar: dados inválidos no arquivo.</translation>
+        <translation>Erro ao tentar importar: dados inválidos no arquivo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4016"/>
         <source>History import complete</source>
-        <translation>Feita a importação do histórico.</translation>
+        <translation>Importação do histórico concluída</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4019"/>
         <location filename="../mainwindow.cc" line="4155"/>
         <source>Import error: </source>
-        <translation>Erro de importação:</translation>
+        <translation>Erro de importação: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4036"/>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Favoritos para arquivo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4038"/>
         <location filename="../mainwindow.cc" line="4128"/>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivos XML (* .xml) ;; Todos os arquivos (*. *)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4057"/>
         <location filename="../mainwindow.cc" line="4106"/>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportação de favoritos concluída</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4077"/>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Favoritos para arquivo como lista simples</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4126"/>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar Favoritos do arquivo</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4151"/>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Importação de favoritos concluída</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4157"/>
         <source>Data parsing error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de análise de dados</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4439"/>
@@ -3165,7 +3168,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4443"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavras-chave do dicionário</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4445"/>
@@ -3180,12 +3183,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4649"/>
         <source>Now indexing for full-text search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Indexando para pesquisa de texto completo: </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4691"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover a palavra-chave &quot;%1&quot; dos Favoritos?</translation>
     </message>
 </context>
 <context>
@@ -3245,7 +3248,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../multimediaaudioplayer.cc" line="24"/>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível abrir o buffer de áudio para leitura.</translation>
     </message>
 </context>
 <context>
@@ -3328,12 +3331,12 @@ Se quiser desativar dicionários, arraste-os para o grupo de desativados.</trans
     <message>
         <location filename="../orderandprops.cc" line="263"/>
         <source>Dictionary headwords</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavras-chave do dicionário</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dicionários ativos: %1, inativos: %2</translation>
     </message>
 </context>
 <context>
@@ -3429,10 +3432,8 @@ outros comandos.</translation>
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Se esta opção for habilitada, o programa será posto
-na Área de Notificação ao ser executado, em vez de
-exibir sua janela principal.
-</translation>
+        <translation>Com isso habilitado, o aplicativo inicia diretamente na bandeja do sistema sem mostrar
+sua janela principal.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="125"/>
@@ -3497,7 +3498,7 @@ pesquisa. Com isto, porém, a janela principal será ocultada.</translation>
     <message>
         <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation>Habilite esta opção se quiser selecionar palavras com um único clique do mouse.</translation>
+        <translation>Habilite esta opção se quiser selecionar palavras com um único clique do mouse</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="167"/>
@@ -3512,7 +3513,7 @@ pesquisa. Com isto, porém, a janela principal será ocultada.</translation>
     <message>
         <location filename="../preferences.ui" line="288"/>
         <source>Help language</source>
-        <translation type="unfinished"></translation>
+        <translation>Idioma de ajuda</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="334"/>
@@ -3682,7 +3683,7 @@ teclas de atalho podem ser premidas também pouco depois da seleção da palavra
     <message>
         <location filename="../preferences.ui" line="622"/>
         <source>Keys may also be pressed afterwards, within</source>
-        <translation>Permitir que as teclas sejam premidas depois também, após...</translation>
+        <translation>As teclas também podem ser pressionadas depois, dentro de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="629"/>
@@ -3701,8 +3702,7 @@ dentro do limite de tempo especificado aqui.</translation>
     <message>
         <location filename="../preferences.ui" line="698"/>
         <source>Send translated word to main window instead of to show it in popup window</source>
-        <translation>Envia a palavra traduzida/consultada para a janela principal,
-em vez de exibi-la numa janela secundária (popup).</translation>
+        <translation>Envia a palavra traduzida/consultada para a janela principal, em vez de exibi-la numa janela secundária (popup)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="701"/>
@@ -3712,12 +3712,12 @@ em vez de exibi-la numa janela secundária (popup).</translation>
     <message>
         <location filename="../preferences.ui" line="675"/>
         <source>Show a flag window before showing popup window, click the flag to show popup window. </source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar uma janela de sinalização antes de exibir a janela pop-up, clique na bandeira para mostrar a janela pop-up. </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="678"/>
         <source>Show scan flag when word is selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar sinalizador de verificação quando a palavra é selecionada</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="726"/>
@@ -3789,57 +3789,57 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1012"/>
         <source>System proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy do sistema</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1019"/>
         <source>Custom proxy</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy personalizado</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1026"/>
         <source>Custom settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações personalizadas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1206"/>
         <source>Full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisa de texto completo</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1225"/>
         <source>Allow full-text search for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Permitir pesquisa de texto completo para:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1323"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
-        <translation type="unfinished"></translation>
+        <translation>Não procure em dicionários que contenham mais de</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1340"/>
         <source>articles (0 - unlimited)</source>
-        <translation type="unfinished"></translation>
+        <translation>artigos (0 - ilimitado)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1619"/>
         <source>Favorites</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoritos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1627"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo para salvar Favoritos. Se definido como 0, os Favoritos serão salvos apenas durante a saída.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1653"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Ative esta opção para confirmar todas as operações de exclusão de itens</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1656"/>
         <source>Confirmation for items deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmação para exclusão de itens</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1689"/>
@@ -3865,12 +3865,13 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="1773"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation type="unfinished"></translation>
+        <translation>Ative esta opção para habilitar a pesquisa de artigos extras por meio de listas de sinônimos
+dos dicionários Stardict, Babylon e GLS</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1777"/>
         <source>Extra search via synonyms</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisa extra via sinônimos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="936"/>
@@ -3880,27 +3881,27 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Não mostrar pop-up quando a seleção ou a área de transferência em uma das janelas do Goldendict mudar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
         <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar as próprias alterações de seleção e área de transferência do Goldendict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="919"/>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproduzir arquivos de áudio via suporte de áudio embutido</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="922"/>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar player interno:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="929"/>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o back-end de áudio</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="939"/>
@@ -3910,7 +3911,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../preferences.ui" line="949"/>
         <source>Enter audio player command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Digite a linha de comando do reprodutor de áudio</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="977"/>
@@ -4068,37 +4069,37 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../preferences.ui" line="1433"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Pesquisador de janela secundária (popup) para janelas não selecionadas sinalizadas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1439"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Experimente com sinalizadores não padrão se a janela pop-up de verificação não fixada se comportar mal</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1443"/>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;default&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1448"/>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela secundária (popup)</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1453"/>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Ferramenta</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Essa dica pode ser combinada com sinalizadores de janela não padrão</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1467"/>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar dica do gerenciador de janelas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1507"/>
@@ -4108,7 +4109,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../preferences.ui" line="1513"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>Habilite esta opção se quiser gravar o histórico das palavras traduzidas/pesquisadas.</translation>
+        <translation>Habilite esta opção se quiser gravar o histórico das palavras traduzidas/pesquisadas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1516"/>
@@ -4150,17 +4151,17 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../preferences.ui" line="1737"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Ative esta opção para ignorar sinais diacríticos ao pesquisar artigos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1740"/>
         <source>Ignore diacritics while searching</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar diacríticos durante a pesquisa</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Habilite esta opção se quise expandir sempre partes opcionais de artigos.</translation>
+        <translation>Habilite esta opção se quise expandir sempre partes opcionais de artigos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1750"/>
@@ -4294,13 +4295,13 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <location filename="../aard.cc" line="449"/>
         <location filename="../dsl.cc" line="1764"/>
         <source>Article loading error</source>
-        <translation>Erro ao carregar Artigo</translation>
+        <translation>Erro ao carregar artigo</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="541"/>
         <location filename="../slob.cc" line="800"/>
         <source>Article decoding error</source>
-        <translation>Erro ao decodificar Artigo</translation>
+        <translation>Erro ao decodificar artigo</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="586"/>
@@ -4308,13 +4309,13 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
         <location filename="../sdict.cc" line="721"/>
         <location filename="../stardict.cc" line="1162"/>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Direitos autorais: %1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="590"/>
         <location filename="../sdict.cc" line="737"/>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Versão: %1%2</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="146"/>
@@ -4355,7 +4356,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../ffmpegaudio.cc" line="231"/>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_context3() falhou.</translation>
     </message>
     <message>
         <location filename="../ffmpegaudio.cc" line="240"/>
@@ -4405,35 +4406,35 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../ffmpegaudio.cc" line="377"/>
         <source>avcodec_alloc_frame() failed.</source>
-        <translation>avcodec_alloc_frame() falha.</translation>
+        <translation>avcodec_alloc_frame() falhou.</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="413"/>
         <location filename="../gls.cc" line="630"/>
         <location filename="../stardict.cc" line="1170"/>
         <source>Author: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor: %1%2</translation>
     </message>
     <message>
         <location filename="../bgl.cc" line="420"/>
         <location filename="../stardict.cc" line="1178"/>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail: %1%2</translation>
     </message>
     <message>
         <location filename="../sdict.cc" line="689"/>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Título: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="1186"/>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Website: %1%2</translation>
     </message>
     <message>
         <location filename="../stardict.cc" line="1194"/>
         <source>Date: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Data: %1%2</translation>
     </message>
 </context>
 <context>
@@ -4464,7 +4465,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../articleview.cc" line="3003"/>
         <source>Resource saving error: </source>
-        <translation>Erro ao salvar recurso:</translation>
+        <translation>Erro ao salvar recurso: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="3029"/>
@@ -4474,7 +4475,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../articleview.cc" line="3029"/>
         <source>WARNING: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>AVISO: %1</translation>
     </message>
 </context>
 <context>
@@ -4503,7 +4504,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../scanflag.ui" line="14"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Janela Principal</translation>
     </message>
 </context>
 <context>
@@ -4555,7 +4556,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../scanpopup.ui" line="178"/>
         <source>Add word to Favorites (Ctrl+E)</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar palavra aos favoritos (Ctrl + E)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="208"/>
@@ -4565,7 +4566,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../scanpopup.ui" line="231"/>
         <source>Always stay on top of all other windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficar sempre acima de todas as outras janelas</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="251"/>
@@ -4753,12 +4754,12 @@ obter sua própria chave.</translation>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores DICT</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores DICT:</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="409"/>
@@ -5065,7 +5066,7 @@ Ainda não implementado no GoldenDict.</translation>
         <location filename="../sources.cc" line="624"/>
         <location filename="../sources.cc" line="657"/>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir artigo como link dentro da tag &lt;iframe&gt;</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="633"/>
@@ -5075,7 +5076,7 @@ Ainda não implementado no GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="635"/>
         <source>As link</source>
-        <translation type="unfinished"></translation>
+        <translation>Como link</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="637"/>
