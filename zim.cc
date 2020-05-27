@@ -72,7 +72,7 @@ class ZimFile;
 
 enum CompressionType
 {
-  Default = 0, None, Zlib, Bzip2, Lzma2
+  Default = 0, None, Zlib, Bzip2, Lzma2, Zstd
 };
 
 /// Zim file header
@@ -350,6 +350,9 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   else
   if( compressionType == Lzma2 )
     decompressedData = decompressLzma2( data.constData(), data.size() );
+  else
+  if( compressionType == Zstd )
+    decompressedData = decompressZstd( data.constData(), data.size() );
   else
     return string();
 

@@ -4,6 +4,7 @@
 
 #ifdef MAKE_ZIM_SUPPORT
 #include "lzma.h"
+#include "zstd.h"
 #endif
 
 #define CHUNK_SIZE 2048
@@ -128,6 +129,48 @@ char buf[CHUNK_SIZE];
 
     break;
   }
+  return str;
+}
+
+string decompressZstd( const char *bufptr, unsigned length )
+{
+  string str;
+  char buf[CHUNK_SIZE];
+  size_t res;
+//  string err;
+  ZSTD_DStream *zds;
+  ZSTD_inBuffer in_buf = { bufptr, length, 0 };
+  ZSTD_outBuffer out_buf = { buf, CHUNK_SIZE, 0 };
+
+  zds = ZSTD_createDStream();
+  if( !zds )
+    return str;
+
+  res = ZSTD_initDStream( zds );
+  if( ZSTD_isError( res ) )
+  {
+//    err = string( ZSTD_getErrorName( res ) );
+    ZSTD_freeDStream( zds );
+    return str;
+  }
+
+  do
+  {
+    out_buf.pos = 0;
+    res = ZSTD_decompressStream( zds, &out_buf, &in_buf );
+    if( ZSTD_isError( res ) )
+    {
+//      err = string( ZSTD_getErrorName( res ) );
+      ZSTD_freeDStream( zds );
+      return string();
+    }
+
+    str.append( buf, out_buf.pos );
+  }
+  while( out_buf.pos >= out_buf.size );
+
+  ZSTD_freeDStream( zds );
+
   return str;
 }
 

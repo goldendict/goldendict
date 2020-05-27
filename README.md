@@ -59,9 +59,9 @@ Then pass `"CONFIG+=chinese_conversion_support"` to `qmake`
 
 ### Building with Zim dictionaries support
 
-To add Zim and Slob formats support you need at first install lzma-dev package:
+To add Zim and Slob formats support you need at first install lzma-dev and zstd-dev packages:
 
-    sudo apt-get install liblzma-dev
+    sudo apt-get install liblzma-dev libzstd-dev
 
 Then pass `"CONFIG+=zim_support"` to `qmake`
 

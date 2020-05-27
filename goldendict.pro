@@ -541,7 +541,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
-  LIBS += -llzma
+  LIBS += -llzma -lzstd
 }
 
 !CONFIG( no_extra_tiff_handler ) {
