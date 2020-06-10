@@ -3834,7 +3834,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1439"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation>Экспериментировать с флагами, отличными от флагов по умолчанию, при некорректной работе незакреплённого всплывающего окна</translation>
+        <translation>Экспериментируйте с флагами, отличными от флагов по умолчанию, при некорректной работе незакреплённого всплывающего окна</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1443"/>
