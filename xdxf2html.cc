@@ -354,13 +354,25 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
     if( el.text().isEmpty() && el.childNodes().isEmpty() )
       el.appendChild( fakeElement( dd ) );
 
+    QString bword = el.text();
+    if (bword.startsWith("bword://")) {
+      QString bwordOrig = bword;
+      bword = bword.mid(8);
+      for (QDomNode child = el.firstChild(); !child.isNull();) {
+        if (child.isText() && child.toText().data() == bwordOrig) {
+          el.replaceChild(dd.createTextNode(bword), child);
+          break;
+        }
+      }
+    }
+
     el.setTagName( "a" );
-    el.setAttribute( "href", QString( "bword:" ) + el.text() );
+    el.setAttribute( "href", QString( "bword:" ) + bword );
     el.setAttribute( "class", "xdxf_kref" );
     if ( el.hasAttribute( "idref" ) )
     {
       // todo implement support for referencing only specific parts of the article
-      el.setAttribute( "href", QString( "bword:" ) + el.text() + "#" + el.attribute( "idref" ));
+      el.setAttribute( "href", QString( "bword:" ) + bword + "#" + el.attribute( "idref" ));
     }
     if ( el.hasAttribute( "kcmt" ) )
     {
