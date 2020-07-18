@@ -19,7 +19,6 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
-#include "libavutil/opt.h"
 #include "libswresample/swresample.h"
 }
 
@@ -336,7 +335,7 @@ bool DecoderContext::openOutputDevice( QString & errorString )
   }
 
   ao_sample_format aoSampleFormat;
-  memset(&aoSampleFormat, 0, sizeof(aoSampleFormat));
+  memset (&aoSampleFormat, 0, sizeof(aoSampleFormat) );
   aoSampleFormat.channels = codecContext_->channels;
   aoSampleFormat.rate = codecContext_->sample_rate;
   aoSampleFormat.byte_format = AO_FMT_NATIVE;
