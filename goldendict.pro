@@ -108,6 +108,7 @@ win32 {
         -logg
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
+            -lswresample-gd \
             -lavutil-gd \
             -lavformat-gd \
             -lavcodec-gd
@@ -156,7 +157,8 @@ unix:!mac {
         PKGCONFIG += ao \
             libavutil \
             libavformat \
-            libavcodec
+            libavcodec \
+            libswresample \
     }
     arm {
         LIBS += -liconv
@@ -210,6 +212,7 @@ mac {
         -llzo2
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
+            -lswresample-gd \
             -lavutil-gd \
             -lavformat-gd \
             -lavcodec-gd
