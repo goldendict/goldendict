@@ -14,7 +14,7 @@
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
-#include <QtWidgets/QStyleFactory>
+#include "initializing.hh"
 #include <qt_windows.h>
 #include <uxtheme.h>
 
@@ -137,18 +137,19 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   groups( groups_ ),
   group( 0 ),
   ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
+  ignoreDiacritics( cfg_.preferences.fts.ignoreDiacritics ),
   ftsIdx( ftsidx )
 , helpAction( this )
 {
   ui.setupUi( this );
 
-  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
-    restoreGeometry( cfg.preferences.fts.dialogGeometry );
-
   setAttribute( Qt::WA_DeleteOnClose, false );
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   setWindowTitle( tr( "Full-text search" ) );
+
+  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
+    restoreGeometry( cfg.preferences.fts.dialogGeometry );
 
   setNewIndexingName( ftsIdx.nowIndexingName() );
 
@@ -193,6 +194,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
     ui.checkBoxIgnoreWordOrder->setEnabled( false );
   }
 
+  ui.checkBoxIgnoreDiacritics->setChecked( ignoreDiacritics );
+
   ui.matchCase->setChecked( cfg.preferences.fts.matchCase );
 
   setLimitsUsing();
@@ -205,6 +208,8 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
            this, SLOT( setLimitsUsing() ) );
   connect( ui.checkBoxIgnoreWordOrder, SIGNAL( stateChanged( int ) ),
            this, SLOT( ignoreWordsOrderClicked() ) );
+  connect( ui.checkBoxIgnoreDiacritics, SIGNAL( stateChanged( int ) ),
+           this, SLOT( ignoreDiacriticsClicked() ) );
 
   model = new HeadwordsListModel( this, results, activeDicts );
   ui.headwordsView->setModel( model );
@@ -241,14 +246,13 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
   // We use simply "windows" style instead for this case
 
-  barStyle = 0;
   oldBarStyle = 0;
 
   if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA
       && ( QSysInfo::windowsVersion() & QSysInfo::WV_NT_based )
       && !IsThemeActive() )
   {
-    barStyle = QStyleFactory::create( "windows" );
+    QStyle * barStyle = WindowsStyle::instance().getStyle();
 
     if( barStyle )
     {
@@ -266,15 +270,12 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 FullTextSearchDialog::~FullTextSearchDialog()
 {
   if( delegate )
-    delete delegate;
+    delegate->deleteLater();
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
-  if( barStyle )
-  {
+  if( oldBarStyle )
     ui.searchProgressBar->setStyle( oldBarStyle );
-    delete barStyle;
-  }
 
 #endif
 }
@@ -319,6 +320,7 @@ void FullTextSearchDialog::saveData()
   cfg.preferences.fts.useMaxDistanceBetweenWords = ui.checkBoxDistanceBetweenWords->isChecked();
   cfg.preferences.fts.useMaxArticlesPerDictionary = ui.checkBoxArticlesPerDictionary->isChecked();
   cfg.preferences.fts.ignoreWordsOrder = ignoreWordsOrder;
+  cfg.preferences.fts.ignoreDiacritics = ignoreDiacritics;
 
   cfg.preferences.fts.dialogGeometry = saveGeometry();
 }
@@ -353,6 +355,11 @@ void FullTextSearchDialog::setLimitsUsing()
 void FullTextSearchDialog::ignoreWordsOrderClicked()
 {
   ignoreWordsOrder = ui.checkBoxIgnoreWordOrder->isChecked();
+}
+
+void FullTextSearchDialog::ignoreDiacriticsClicked()
+{
+  ignoreDiacritics = ui.checkBoxIgnoreDiacritics->isChecked();
 }
 
 void FullTextSearchDialog::accept()
@@ -421,7 +428,8 @@ void FullTextSearchDialog::accept()
                                                               ui.matchCase->isChecked(),
                                                               distanceBetweenWords,
                                                               maxResultsPerDict,
-                                                              ignoreWordsOrder
+                                                              ignoreWordsOrder,
+                                                              ignoreDiacritics
                                                             );
     connect( req.get(), SIGNAL( finished() ),
              this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
@@ -512,7 +520,7 @@ void FullTextSearchDialog::itemClicked( const QModelIndex & idx )
     }
     else
       reg = searchRegExp;
-    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg );
+    emit showTranslationFor( headword, results[ idx.row() ].dictIDs, reg, ignoreDiacritics );
   }
 }
 

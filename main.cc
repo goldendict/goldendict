@@ -9,6 +9,9 @@
 
 #include "processwrapper.hh"
 #include "hotkeywrapper.hh"
+#ifdef HAVE_X11
+#include <fixx11h.h>
+#endif
 
 //#define __DO_DEBUG
 
@@ -58,32 +61,32 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
   switch (type) {
 
     case QtDebugMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Debug: " );
       else
         fprintf(stderr, "Debug: %s\n", msg.constData());
       break;
 
     case QtWarningMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Warning: " );
       else
         fprintf(stderr, "Warning: %s\n", msg.constData());
       break;
 
     case QtCriticalMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Critical: " );
       else
         fprintf(stderr, "Critical: %s\n", msg.constData());
       break;
 
     case QtFatalMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
       {
-        logFile.write( "Fatal: " );
-        logFile.write( msg );
-        logFile.flush();
+        logFilePtr->write( "Fatal: " );
+        logFilePtr->write( msg );
+        logFilePtr->flush();
       }
       else
         fprintf(stderr, "Fatal: %s\n", msg.constData());
@@ -91,7 +94,7 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
     case QtInfoMsg:
-      if( logFile.isOpen() )
+      if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Info: " );
       else
         fprintf(stderr, "Info: %s\n", msg.constData());
@@ -99,11 +102,11 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 #endif
   }
 
-  if( logFile.isOpen() )
+  if( logFilePtr && logFilePtr->isOpen() )
   {
     message.append( "\n" );
-    logFile.write( message.toUtf8() );
-    logFile.flush();
+    logFilePtr->write( message.toUtf8() );
+    logFilePtr->flush();
   }
 }
 
@@ -198,8 +201,28 @@ logFile( false )
   }
 }
 
+class LogFilePtrGuard
+{
+  QFile logFile;
+  Q_DISABLE_COPY( LogFilePtrGuard )  
+public:
+  LogFilePtrGuard() { logFilePtr = &logFile; }
+  ~LogFilePtrGuard() { logFilePtr = 0; }
+};
+
 int main( int argc, char ** argv )
 {
+#ifdef Q_OS_UNIX
+    // GoldenDict use lots of X11 functions and it currently cannot work
+    // natively on Wayland. This workaround will force GoldenDict to use
+    // XWayland.
+    char * xdg_envc = getenv("XDG_SESSION_TYPE");
+    QString xdg_session = xdg_envc ? QString::fromLatin1(xdg_envc) : QString();
+    if (!QString::compare(xdg_session, QString("wayland"), Qt::CaseInsensitive))
+    {
+        setenv("QT_QPA_PLATFORM", "xcb", 1);
+    }
+#endif
   #ifdef Q_OS_MAC
     setenv("LANG", "en_US.UTF-8", 1);
 
@@ -276,6 +299,7 @@ int main( int argc, char ** argv )
 #endif
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
+  LogFilePtrGuard logFilePtrGuard;
 
   if ( app.isRunning() )
   {
@@ -345,7 +369,7 @@ int main( int argc, char ** argv )
     {
       cfg = Config::load();
     }
-    catch( Config::exError )
+    catch( Config::exError & )
     {
       QMessageBox mb( QMessageBox::Warning, app.applicationName(),
                       app.translate( "Main", "Error in configuration file. Continue with default settings?" ),
@@ -364,14 +388,14 @@ int main( int argc, char ** argv )
   if( gdcl.needLogFile() )
   {
     // Open log file
-    logFile.setFileName( Config::getConfigDir() + "gd_log.txt" );
-    logFile.remove();
-    logFile.open( QFile::ReadWrite );
+    logFilePtr->setFileName( Config::getConfigDir() + "gd_log.txt" );
+    logFilePtr->remove();
+    logFilePtr->open( QFile::ReadWrite );
 
     // Write UTF-8 BOM
     QByteArray line;
     line.append( 0xEF ).append( 0xBB ).append( 0xBF );
-    logFile.write( line );
+    logFilePtr->write( line );
 
     // Install message handler
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
@@ -434,8 +458,8 @@ int main( int argc, char ** argv )
 
   app.removeDataCommiter( m );
 
-  if( logFile.isOpen() )
-    logFile.close();
+  if( logFilePtr->isOpen() )
+    logFilePtr->close();
 
   return r;
 }

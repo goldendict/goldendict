@@ -89,9 +89,9 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 23 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 5
+  CurrentFtsIndexVersion = 7
 };
 
 struct IdxHeader
@@ -209,7 +209,7 @@ public:
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception )
+    THROW_SPEC( std::exception )
   {
     return vector< wstring >();
   }
@@ -217,17 +217,19 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
                                                             int distanceBetweenWords,
                                                             int maxResults,
-                                                            bool ignoreWordsOrder );
+                                                            bool ignoreWordsOrder,
+                                                            bool ignoreDiacritics );
   virtual QString const& getDescription();
 
   virtual QString getMainFilename();
@@ -308,12 +310,18 @@ DslDictionary::DslDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   vector< char > sName( idx.read< uint32_t >() );
-  idx.read( &sName.front(), sName.size() );
-  preferredSoundDictionary = string( &sName.front(), sName.size() );
+  if( sName.size() > 0 )
+  {
+    idx.read( &sName.front(), sName.size() );
+    preferredSoundDictionary = string( &sName.front(), sName.size() );
+  }
 
   // Everything else would be done in deferred init
 }
@@ -850,7 +858,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
-    string filename = Utf8::encode( node.renderAsText() );
+    string filename = Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false );
     string n =
       getDictionaryFilenames()[ 0 ] + ".files" +
       FsEncoding::separator() +
@@ -991,7 +999,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
   {
-    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    string link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
       link = "http://" + link;
 
@@ -1510,7 +1518,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
           if( tag.compare( stripTags[ n ], Qt::CaseInsensitive ) == 0 )
           {
             pos2 = text.indexOf( stripEndTags[ n ] , pos + stripTags[ n ].size() + 2, Qt::CaseInsensitive );
-            text.remove( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos );
+            text.replace( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos, " " );
             break;
           }
         }
@@ -1523,10 +1531,16 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     // Strip tags
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.replace( QRegularExpression( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegularExpression( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
     text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
 #else
-    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+    text.replace( QRegExp( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegExp( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
+    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]" ) );
 #endif
+    text.remove( QString::fromLatin1( "<<" ) );
+    text.remove( QString::fromLatin1( ">>" ) );
 
     // Chech for insided cards
 
@@ -1601,6 +1615,7 @@ class DslArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   DslDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1609,8 +1624,8 @@ public:
 
   DslArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     DslDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     DslDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new DslArticleRequestRunnable( *this, hasExited ) );
@@ -1650,13 +1665,13 @@ void DslArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -1765,10 +1780,11 @@ void DslArticleRequest::run()
 
 sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new DslArticleRequest( word, alts, *this );
+  return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// DslDictionary::getResource()
@@ -1945,7 +1961,7 @@ void DslResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new DslResourceRequest( *this, name );
 }
@@ -1991,9 +2007,10 @@ sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const &
                                                                  int searchMode, bool matchCase,
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
-                                                                 bool ignoreWordsOrder )
+                                                                 bool ignoreWordsOrder,
+                                                                 bool ignoreDiacritics )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
 }
 
 } // anonymous namespace
@@ -2005,7 +2022,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       int maxPictureWidth, unsigned int maxHeadwordSize )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -2308,12 +2325,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           bool wasEmptyLine = false;
           int headwordLine = scanner.getLinesRead() - 2;
           bool noSignificantLines = Folding::applyWhitespaceOnly( curString ).empty();
+          bool haveLine = !noSignificantLines;
 
           // Skip the article's body
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
-                 || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
+            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset );
+            haveLine = false;
+
+            if ( !hasString || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
               {

@@ -291,6 +291,7 @@ Db::Db()
   iso2ToCountry[ "iu" ] = "ca";
   iso2ToCountry[ "iw" ] = "il";
   iso2ToCountry[ "ja" ] = "jp";
+  iso2ToCountry[ "jb" ] = "jb";
   iso2ToCountry[ "ka" ] = "ge";
   iso2ToCountry[ "kk" ] = "kz";
   iso2ToCountry[ "kl" ] = "gl";

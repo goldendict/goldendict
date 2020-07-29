@@ -13,7 +13,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 }
 
 #endif // __EPWING_HH__INCLUDED__

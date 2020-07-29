@@ -34,12 +34,12 @@
 
 #include "config.h"
 
-#if   ARCH_ARM
+#if   ARCH_AARCH64
+#   include "aarch64/bswap.h"
+#elif ARCH_ARM
 #   include "arm/bswap.h"
 #elif ARCH_AVR32
 #   include "avr32/bswap.h"
-#elif ARCH_BFIN
-#   include "bfin/bswap.h"
 #elif ARCH_SH4
 #   include "sh4/bswap.h"
 #elif ARCH_X86

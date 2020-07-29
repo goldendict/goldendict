@@ -40,7 +40,7 @@ GermanTable::GermanTable()
 
 }
 
-sptr< Dictionary::Class > makeDictionary() throw( std::exception )
+sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
 {
   static GermanTable t;
 

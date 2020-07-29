@@ -9,7 +9,7 @@
 // Support for Russian transliteration
 namespace RussianTranslit {
 
-sptr< Dictionary::Class > makeDictionary() throw( std::exception );
+sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception );
 
 }
 

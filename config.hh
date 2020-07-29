@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
+#include "cpp_features.hh"
 #include "ex.hh"
 
 #ifdef Q_OS_WIN
@@ -161,6 +162,7 @@ struct FullTextSearch
   bool useMaxArticlesPerDictionary;
   bool enabled;
   bool ignoreWordsOrder;
+  bool ignoreDiacritics;
   quint32 maxDictionarySize;
   QByteArray dialogGeometry;
   QString disabledTypes;
@@ -173,6 +175,7 @@ struct FullTextSearch
     useMaxArticlesPerDictionary( false ),
     enabled( true ),
     ignoreWordsOrder( false ),
+    ignoreDiacritics( false ),
     maxDictionarySize( 0 )
   {}
 };
@@ -223,6 +226,23 @@ private:
   QString name;
 };
 
+#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  // The ScanPopup window flags customization code has been tested
+  // only in X11 desktop environments and window managers.
+  // None of the window flags configurations I have tried works perfectly well
+  // in XFCE with Qt4. Let us enable customization code for Qt5 exclusively to
+  // avoid regressions with Qt4.
+  #define ENABLE_SPWF_CUSTOMIZATION
+#endif
+
+enum ScanPopupWindowFlags
+{
+  SPWF_default = 0,
+  SPWF_Popup,
+  SPWF_Tool
+};
+ScanPopupWindowFlags spwfFromInt( int id );
+
 /// Various user preferences
 struct Preferences
 {
@@ -258,10 +278,14 @@ struct Preferences
   unsigned long scanPopupModifiers; // Combination of KeyboardState::Modifier
   bool scanPopupAltMode; // When you press modifier shortly after the selection
   unsigned scanPopupAltModeSecs;
+  bool ignoreOwnClipboardChanges;
   bool scanPopupUseUIAutomation;
   bool scanPopupUseIAccessibleEx;
   bool scanPopupUseGDMessage;
+  ScanPopupWindowFlags scanPopupUnpinnedWindowFlags;
+  bool scanPopupUnpinnedBypassWMHint;
   bool scanToMainWindow;
+  bool ignoreDiacritics;
 #ifdef HAVE_X11
   bool showScanFlag;
 #endif
@@ -701,38 +725,38 @@ DEF_EX( exCantWriteConfigFile, "Can't write the configuration file", exError )
 DEF_EX( exMalformedConfigFile, "The configuration file is malformed", exError )
 
 /// Loads the configuration, or creates the default one if none is present
-Class load() throw( exError );
+Class load() THROW_SPEC( exError );
 
 /// Saves the configuration
-void save( Class const & ) throw( exError );
+void save( Class const & ) THROW_SPEC( exError );
 
 /// Returns the configuration file name.
 QString getConfigFileName();
 
 /// Returns the main configuration directory.
-QString getConfigDir() throw( exError );
+QString getConfigDir() THROW_SPEC( exError );
 
 /// Returns the index directory, where the indices are to be stored.
-QString getIndexDir() throw( exError );
+QString getIndexDir() THROW_SPEC( exError );
 
 /// Returns the filename of a .pid file which should store current pid of
 /// the process.
-QString getPidFileName() throw( exError );
+QString getPidFileName() THROW_SPEC( exError );
 
 /// Returns the filename of a history file which stores search history.
-QString getHistoryFileName() throw( exError );
+QString getHistoryFileName() THROW_SPEC( exError );
 
 /// Returns the filename of a favorities file.
-QString getFavoritiesFileName() throw( exError );
+QString getFavoritiesFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name.
-QString getUserCssFileName() throw( exError );
+QString getUserCssFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name used for printing only.
-QString getUserCssPrintFileName() throw( exError );
+QString getUserCssPrintFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name for the Qt interface customization.
-QString getUserQtCssFileName() throw( exError );
+QString getUserQtCssFileName() THROW_SPEC( exError );
 
 /// Returns the program's data dir. Under Linux that would be something like
 /// /usr/share/apps/goldendict, under Windows C:/Program Files/GoldenDict.

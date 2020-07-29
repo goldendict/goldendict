@@ -117,7 +117,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   for( QFileInfoList::const_iterator i = entries.constBegin();
        i != entries.constEnd(); ++i )
   {
-    QString fullName = i->canonicalFilePath();
+    QString fullName = i->absoluteFilePath();
 
     if ( path.recursive && i->isDir() )
     {
@@ -284,7 +284,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
 
   dictionaries = loadDicts.getDictionaries();
 
-  ///// We create transliterations syncronously since they are very simple
+  ///// We create transliterations synchronously since they are very simple
 
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
   // Make Chinese conversion
@@ -325,7 +325,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
-  ///// We create MediaWiki dicts syncronously, since they use netmgr
+  ///// We create MediaWiki dicts synchronously, since they use netmgr
 
   {
     vector< sptr< Dictionary::Class > > dicts =
@@ -334,7 +334,7 @@ void loadDictionaries( QWidget * parent, bool showInitially,
     dictionaries.insert( dictionaries.end(), dicts.begin(), dicts.end() );
   }
 
-  ///// WebSites are very simple, no need to create them asyncronously
+  ///// WebSites are very simple, no need to create them asynchronously
   {
     vector< sptr< Dictionary::Class > > dicts =
       WebSite::makeDictionaries( cfg.webSites, dictNetMgr );

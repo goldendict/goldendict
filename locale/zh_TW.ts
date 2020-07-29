@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>About</name>
     <message>
@@ -306,11 +306,11 @@
     </message>
     <message>
         <source>Failed to play sound file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>播放音訊檔案失敗：%1</translation>
     </message>
     <message>
         <source>WARNING: Audio Player: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>警告： 音訊播放程式： %1</translation>
     </message>
 </context>
 <context>
@@ -782,7 +782,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <source>Whole words</source>
-        <translation>整個字(Whoe words)</translation>
+        <translation>整個字(Whole words)</translation>
     </message>
     <message>
         <source>Plain text</source>
@@ -951,6 +951,10 @@ between classic and school orthography in cyrillic)</source>
         <source>Ignore words order</source>
         <translation>忽略單字排序</translation>
     </message>
+    <message>
+        <source>Ignore diacritics</source>
+        <translation>忽略變音符號</translation>
+    </message>
 </context>
 <context>
     <name>GermanTranslit</name>
@@ -977,11 +981,11 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation>表單</translation>
+        <translation type="vanished">表單</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation>尋找於</translation>
+        <translation type="vanished">尋找於</translation>
     </message>
 </context>
 <context>
@@ -2651,7 +2655,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <name>MultimediaAudioPlayer</name>
     <message>
         <source>Couldn&apos;t open audio buffer for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟音訊緩衝以進行讀取。</translation>
     </message>
 </context>
 <context>
@@ -3391,18 +3395,62 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Play audio files via built-in audio support</source>
-        <translation type="unfinished"></translation>
+        <translation>使用內建音訊支援播放音訊檔案</translation>
     </message>
     <message>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>使用內部播放器：</translation>
     </message>
     <message>
         <source>Choose audio back end</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇音訊後端</translation>
     </message>
     <message>
         <source>Enter audio player command line</source>
+        <translation>輸入音訊播放器命令列</translation>
+    </message>
+    <message>
+        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ScanPopup unpinned window flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;default&gt;</source>
+        <translation>&lt;預設&gt;</translation>
+    </message>
+    <message>
+        <source>Popup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This hint can be combined with non-default window flags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bypass window manager hint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore diacritics while searching</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3575,7 +3623,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>avcodec_alloc_context3() failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>avcodec_alloc_context3() 失敗。</translation>
     </message>
 </context>
 <context>

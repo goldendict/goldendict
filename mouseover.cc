@@ -113,7 +113,7 @@ ChangeWindowMessageFilterExFunc changeWindowMessageFilterExFunc = NULL;
   QDir::toNativeSeparators( QDir( QCoreApplication::applicationDirPath() ).filePath( "GdTextOutHook.dll" ) ).toWCharArray( GlobalData->LibName );
 #endif
 
-  // Create the window to recive spying results to
+  // Create the window to receive spying results to
 
   WNDCLASSEX wcex;
 

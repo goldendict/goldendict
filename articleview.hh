@@ -101,7 +101,8 @@ public:
                        Contexts const & contexts = Contexts() );
 
   void showDefinition( QString const & word, QStringList const & dictIDs,
-                       QRegExp const & searchRegExp, unsigned group );
+                       QRegExp const & searchRegExp, unsigned group,
+                       bool ignoreDiacritics );
 
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
@@ -135,11 +136,11 @@ public slots:
   /// Goes forward in history
   void forward();
 
-public:
-
   /// Takes the focus to the view
   void focus()
   { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
+
+public:
 
   /// Reloads the view
   void reload()

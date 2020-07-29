@@ -36,7 +36,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   Config::Transliteration const & trs = cfg.transliteration;
   Config::Forvo const & forvo = cfg.forvo;
 
-  // TODO: will programTypeEditorCreator and itemEditorFactory be destoryed by
+  // TODO: will programTypeEditorCreator and itemEditorFactory be destroyed by
   // anyone?
   QItemEditorCreatorBase * programTypeEditorCreator =
          new QStandardItemEditorCreator< ProgramTypeEditor >();

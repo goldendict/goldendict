@@ -61,11 +61,11 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults ) throw( std::exception );
+                                                 unsigned long maxResults ) THROW_SPEC( std::exception );
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const & )
-    throw( std::exception );
+                                          wstring const &, bool )
+    THROW_SPEC( std::exception );
 
   virtual quint32 getLangFrom() const
   { return langId; }
@@ -541,6 +541,43 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             // Add url scheme to other urls like  "//xxx"
             articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
 
+            // Fix urls in "srcset" attribute
+            pos = 0;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            QRegularExpression regSrcset( " srcset\\s*=\\s*\"/[^\"]+\"" );
+            it = regSrcset.globalMatch( articleString );
+            while( it.hasNext() )
+            {
+              QRegularExpressionMatch match = it.next();
+              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              pos = match.capturedEnd();
+
+              QString srcset = match.captured();
+#else
+            QRegExp regSrcset( " srcset\\s*=\\s*\"/([^\"]+)\"" );
+            for( ; ; )
+            {
+              pos = regSrcset.indexIn( articleString, pos );
+              if( pos < 0 )
+                break;
+              QString srcset = regSrcset.cap();
+#endif
+              QString newSrcset = srcset.replace( "//", wikiUrl.scheme() + "://" );
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+              articleNewString += newSrcset;
+            }
+            if( pos )
+            {
+              articleNewString += articleString.midRef( pos );
+              articleString = articleNewString;
+              articleNewString.clear();
+            }
+#else
+              articleString.replace( pos, regSrcset.cap().size(), newSrcset );
+              pos += newSrcset.size();
+            }
+#endif
+
             QByteArray articleBody = articleString.toUtf8();
 
             articleBody.prepend( dictPtr->isToLanguageRTL() ? "<div class=\"mwiki\" dir=\"rtl\">" :
@@ -579,7 +616,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
 sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word,
                                                             unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   (void) maxResults;
   if ( word.size() > 80 )
@@ -594,8 +631,8 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
 
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
                                                      vector< wstring > const & alts,
-                                                     wstring const & )
-  throw( std::exception )
+                                                     wstring const &, bool )
+  THROW_SPEC( std::exception )
 {
   if ( word.size() > 80 )
   {
@@ -613,7 +650,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
                                       QNetworkAccessManager & mgr )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
 

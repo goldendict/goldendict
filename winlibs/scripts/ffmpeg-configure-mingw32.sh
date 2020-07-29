@@ -12,7 +12,6 @@
 	--disable-network \
 	--disable-avdevice \
 	--disable-avfilter \
-	--disable-swresample \
 	--disable-swscale \
 	--disable-network \
 	--disable-muxers \
