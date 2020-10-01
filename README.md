@@ -124,6 +124,10 @@ Installation is an optional step since the built binary can be used as-is withou
 
 <b>NB:</b> Don't do that on Windows!
 
+You can uninstall via:
+
+    make uninstall
+
 ## License
 
 This project is licensed under the <b>GNU GPLv3+</b> license, a copy of which can be found in the `LICENSE.txt` file.
