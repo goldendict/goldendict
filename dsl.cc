@@ -1183,7 +1183,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
                gd::toQString( node.tagName ).toUtf8().data(), gd::toQString( node.tagAttrs ).toUtf8().data(),
                getName().c_str(), gd::toQString( currentHeadword ).toUtf8().data() );
 
-    result += "<span class=\"dsl_unknown\">[" + string( gd::toQString( node.tagName ).toUtf8().data() ) + "]" + processNodeChildren( node ) + "</span>";
+    result += "<span class=\"dsl_unknown\">[" + string( gd::toQString( node.tagName ).toUtf8().data() );
+    if( !node.tagAttrs.empty() )
+      result += " " + string( gd::toQString( node.tagAttrs ).toUtf8().data() );
+    result += "]" + processNodeChildren( node ) + "</span>";
   }
 
   return result;
