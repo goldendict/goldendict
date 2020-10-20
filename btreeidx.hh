@@ -70,7 +70,7 @@ struct IndexInfo
 };
 
 /// Base btree indexing class which allows using what buildIndex() function
-/// created. It's quite low-lovel and is basically a set of 'bulding blocks'
+/// created. It's quite low-lovel and is basically a set of 'building blocks'
 /// functions.
 class BtreeIndex
 {
@@ -90,7 +90,7 @@ public:
   /// Find all unique article links in the index
   void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
 
-  /// Retrieve all unique headwors from index
+  /// Retrieve all unique headwords from index
   void getAllHeadwords( QSet< QString > & headwords );
 
   /// Find all article links and/or headwords in the index
@@ -132,7 +132,7 @@ protected:
   /// is updated to point to the next chain, if there's any.
   vector< WordArticleLink > readChain( char const * & );
 
-  /// Drops any alises which arose due to folding. Only case-folded aliases
+  /// Drops any aliases which arose due to folding. Only case-folded aliases
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > &, bool ignoreDiactitics );
 
