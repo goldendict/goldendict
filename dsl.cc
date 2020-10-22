@@ -263,6 +263,7 @@ private:
   /// Loads the article. Does not process the DSL language.
   void loadArticle( uint32_t address,
                     wstring const & requestedHeadwordFolded,
+                    bool ignoreDiacritics,
                     wstring & tildeValue,
                     wstring & displayedHeadword,
                     unsigned & headwordIndex,
@@ -536,6 +537,7 @@ bool isDslWs( wchar ch )
 
 void DslDictionary::loadArticle( uint32_t address,
                                  wstring const & requestedHeadwordFolded,
+                                 bool ignoreDiacritics,
                                  wstring & tildeValue,
                                  wstring & displayedHeadword,
                                  unsigned & headwordIndex,
@@ -680,7 +682,13 @@ void DslDictionary::loadArticle( uint32_t address,
           unescapeDsl( *i );
           normalizeHeadword( *i );
 
-          if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
+          bool found;
+          if( ignoreDiacritics )
+            found = Folding::applyDiacriticsOnly( Folding::trimWhitespace( *i ) ) == Folding::applyDiacriticsOnly( requestedHeadwordFolded );
+          else
+            found = Folding::trimWhitespace( *i ) == requestedHeadwordFolded;
+
+          if ( found )
           {
             // Found it. Now we should make a displayed headword for it.
             if ( hadFirstHeadword )
@@ -1707,7 +1715,7 @@ void DslArticleRequest::run()
 
     try
     {
-      dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, tildeValue,
+      dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, ignoreDiacritics, tildeValue,
                         displayedHeadword, headwordIndex, articleBody );
 
       if ( !articlesIncluded.insert( std::make_pair( chain[ x ].articleOffset,
