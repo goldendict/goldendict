@@ -606,7 +606,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   addTab.setAutoRaise( true );
   addTab.setToolTip( tr( "New Tab"  ) );
-  addTab.setFocusPolicy(Qt::ClickFocus);
+  addTab.setFocusPolicy( Qt::NoFocus );
   addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
 
   ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
