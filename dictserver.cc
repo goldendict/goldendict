@@ -742,7 +742,6 @@ void DictServerArticleRequest::run()
 
             // Retrieve database ID
             pos = endPos + 1;
-            endPos = reply.indexOf( ' ', pos );
             if( reply[ pos ] == '\"' )
               endPos = reply.indexOf( '\"', pos + 1 ) + 1;
             else

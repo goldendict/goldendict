@@ -263,7 +263,6 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     nameBlock += sizeof( uint16_t );
 
     string name( nameBlock, sz );
-    nameBlock += sz;
 
     string displayedName = mainArticles.size() + alternateArticles.size() > 1 ?
            name : Utf8::encode( stripExtension( name ) );
@@ -309,7 +308,6 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     nameBlock += sizeof( uint16_t );
 
     string name( nameBlock, sz );
-    nameBlock += sz;
 
     string displayedName = mainArticles.size() + alternateArticles.size() > 1 ?
            name : Utf8::encode( stripExtension( name ) );

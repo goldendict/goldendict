@@ -753,7 +753,6 @@ void GlsDictionary::loadArticleText( uint32_t address,
     // Parse headwords
 
     start_pos = 0;
-    end_pos = 0;
     for( ; ; )
     {
       end_pos = headword.find( '|', start_pos );
