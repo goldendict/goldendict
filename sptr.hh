@@ -67,9 +67,6 @@ public:
     }
   }
 
-  unsigned use_count() const
-  { return count; }
-
   sptr_base & operator = ( sptr_base const & other )
   { if ( &other != this ) { reset(); p = other.p; count = other.count; increment(); }
     return * this; }

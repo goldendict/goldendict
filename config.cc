@@ -458,6 +458,7 @@ Class load() THROW_SPEC( exError )
     c.mediawikis = makeDefaultMediaWikis( true );
     c.webSites = makeDefaultWebSites();
     c.dictServers = makeDefaultDictServers();
+    c.programs = makeDefaultPrograms();
 
     // Check if we have a template config file. If we do, load it instead
 
@@ -655,7 +656,9 @@ Class load() THROW_SPEC( exError )
     }
   }
   else
+  {
     c.programs = makeDefaultPrograms();
+  }
 
   QDomNode mws = root.namedItem( "mediawikis" );
 

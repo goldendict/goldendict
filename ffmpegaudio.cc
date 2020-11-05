@@ -19,6 +19,7 @@ extern "C" {
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
+#include "libswresample/swresample.h"
 }
 
 #include <QString>
@@ -51,7 +52,9 @@ AudioService & AudioService::instance()
 
 AudioService::AudioService()
 {
+#if LIBAVFORMAT_VERSION_MAJOR < 58 || ( LIBAVFORMAT_VERSION_MAJOR == 58 && LIBAVFORMAT_VERSION_MINOR < 9 )
   av_register_all();
+#endif
   ao_initialize();
 }
 
@@ -98,6 +101,8 @@ struct DecoderContext
   ao_device * aoDevice_;
   bool avformatOpened_;
 
+  SwrContext *swr_;
+
   DecoderContext( QByteArray const & audioData, QAtomicInt & isCancelled );
   ~DecoderContext();
 
@@ -120,7 +125,8 @@ DecoderContext::DecoderContext( QByteArray const & audioData, QAtomicInt & isCan
   avioContext_( NULL ),
   audioStream_( NULL ),
   aoDevice_( NULL ),
-  avformatOpened_( false )
+  avformatOpened_( false ),
+  swr_( NULL )
 {
 }
 
@@ -241,11 +247,36 @@ bool DecoderContext::openCodec( QString & errorString )
 
   av_log( NULL, AV_LOG_INFO, "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec_->long_name,
           codecContext_->channels, codecContext_->sample_rate, av_get_sample_fmt_name( codecContext_->sample_fmt ) );
+
+  if ( codecContext_->sample_fmt == AV_SAMPLE_FMT_S32  ||
+       codecContext_->sample_fmt == AV_SAMPLE_FMT_S32P ||
+       codecContext_->sample_fmt == AV_SAMPLE_FMT_FLT  ||
+       codecContext_->sample_fmt == AV_SAMPLE_FMT_FLTP ||
+       codecContext_->sample_fmt == AV_SAMPLE_FMT_DBL  ||
+       codecContext_->sample_fmt == AV_SAMPLE_FMT_DBLP )
+  {
+    swr_ = swr_alloc_set_opts( NULL,
+        codecContext_->channel_layout,
+        AV_SAMPLE_FMT_S16,
+        codecContext_->sample_rate,
+        codecContext_->channel_layout,
+        codecContext_->sample_fmt,
+        codecContext_->sample_rate,
+        0,
+        NULL );
+    swr_init( swr_ );
+  }
+
   return true;
 }
 
 void DecoderContext::closeCodec()
 {
+  if ( swr_ )
+  {
+    swr_free( &swr_ );
+  }
+
   if ( !formatContext_ )
   {
     if ( avioContext_ )
@@ -304,11 +335,12 @@ bool DecoderContext::openOutputDevice( QString & errorString )
   }
 
   ao_sample_format aoSampleFormat;
+  memset (&aoSampleFormat, 0, sizeof(aoSampleFormat) );
   aoSampleFormat.channels = codecContext_->channels;
   aoSampleFormat.rate = codecContext_->sample_rate;
   aoSampleFormat.byte_format = AO_FMT_NATIVE;
   aoSampleFormat.matrix = 0;
-  aoSampleFormat.bits = qMin( 32, av_get_bytes_per_sample( codecContext_->sample_fmt ) << 3 );
+  aoSampleFormat.bits = qMin( 16, av_get_bytes_per_sample( codecContext_->sample_fmt ) << 3 );
 
   if ( aoSampleFormat.bits == 0 )
   {
@@ -438,6 +470,8 @@ bool DecoderContext::play( QString & errorString )
 #else
   /* flush the decoder */
   av_init_packet( &packet );
+  packet.data = NULL;
+  packet.size = 0;
   int ret = avcodec_send_packet(codecContext_, &packet );
   while( ret >= 0 )
   {
@@ -480,32 +514,9 @@ bool DecoderContext::normalizeAudio( AVFrame * frame, vector<char> & samples )
   {
     case AV_SAMPLE_FMT_U8:
     case AV_SAMPLE_FMT_S16:
-    case AV_SAMPLE_FMT_S32:
     {
       samples.resize( dataSize );
       memcpy( &samples.front(), frame->data[0], lineSize );
-    }
-    break;
-    case AV_SAMPLE_FMT_FLT:
-    {
-      samples.resize( dataSize );
-
-      int32_t * out = ( int32_t * )&samples.front();
-      for ( int i = 0; i < dataSize; i += sizeof( float ) )
-      {
-        *out++ = toInt32( *( float * )frame->data[i] );
-      }
-    }
-    break;
-    case AV_SAMPLE_FMT_DBL:
-    {
-      samples.resize( dataSize / 2 );
-
-      int32_t * out = ( int32_t * )&samples.front();
-      for ( int i = 0; i < dataSize; i += sizeof( double ) )
-      {
-        *out++ = toInt32( *( double * )frame->data[i] );
-      }
     }
     break;
     // Planar
@@ -537,48 +548,28 @@ bool DecoderContext::normalizeAudio( AVFrame * frame, vector<char> & samples )
       }
     }
     break;
+    case AV_SAMPLE_FMT_S32:
+    /* Pass through */
     case AV_SAMPLE_FMT_S32P:
-    {
-      samples.resize( dataSize );
-
-      int32_t * out = ( int32_t * )&samples.front();
-      for ( int i = 0; i < frame->nb_samples; i++ )
-      {
-        for ( int ch = 0; ch < codecContext_->channels; ch++ )
-        {
-          *out++ = ( ( int32_t * )frame->extended_data[ch] )[i];
-        }
-      }
-    }
-    break;
+    /* Pass through */
+    case AV_SAMPLE_FMT_FLT:
+    /* Pass through */
     case AV_SAMPLE_FMT_FLTP:
-    {
-      samples.resize( dataSize );
-
-      float ** data = ( float ** )frame->extended_data;
-      int32_t * out = ( int32_t * )&samples.front();
-      for ( int i = 0; i < frame->nb_samples; i++ )
-      {
-        for ( int ch = 0; ch < codecContext_->channels; ch++ )
-        {
-          *out++ = toInt32( data[ch][i] );
-        }
-      }
-    }
-    break;
-    case AV_SAMPLE_FMT_DBLP:
+    /* Pass through */
     {
       samples.resize( dataSize / 2 );
 
-      double ** data = ( double ** )frame->extended_data;
-      int32_t * out = ( int32_t * )&samples.front();
-      for ( int i = 0; i < frame->nb_samples; i++ )
-      {
-        for ( int ch = 0; ch < codecContext_->channels; ch++ )
-        {
-          *out++ = toInt32( data[ch][i] );
-        }
-      }
+      uint8_t *out = ( uint8_t * )&samples.front();
+      swr_convert( swr_, &out, frame->nb_samples, (const uint8_t**)frame->extended_data, frame->nb_samples );
+    }
+    break;
+    case AV_SAMPLE_FMT_DBL:
+    case AV_SAMPLE_FMT_DBLP:
+    {
+      samples.resize( dataSize / 4 );
+
+      uint8_t *out = ( uint8_t * )&samples.front();
+      swr_convert( swr_, &out, frame->nb_samples, (const uint8_t**)frame->extended_data, frame->nb_samples );
     }
     break;
     default:

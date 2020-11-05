@@ -26,6 +26,10 @@
 
 #include "common.h"
 
+#if defined(__cplusplus) && !defined(__STDC_FORMAT_MACROS) && !defined(PRId64)
+#error missing -D__STDC_FORMAT_MACROS / #define __STDC_FORMAT_MACROS
+#endif
+
 #define AV_TS_MAX_STRING_SIZE 32
 
 /**
@@ -39,7 +43,7 @@
 static inline char *av_ts_make_string(char *buf, int64_t ts)
 {
     if (ts == AV_NOPTS_VALUE) snprintf(buf, AV_TS_MAX_STRING_SIZE, "NOPTS");
-    else                      snprintf(buf, AV_TS_MAX_STRING_SIZE, "%"PRId64"", ts);
+    else                      snprintf(buf, AV_TS_MAX_STRING_SIZE, "%" PRId64, ts);
     return buf;
 }
 

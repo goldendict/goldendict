@@ -34,4 +34,6 @@
   </screenshots>
   <url type="homepage">http://goldendict.org</url>
   <update_contact>https://github.com/goldendict/goldendict</update_contact>
+  <launchable type="desktop-id">goldendict.desktop</launchable>
+  <content_rating type="oars-1.0" />
 </component>

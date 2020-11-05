@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="vi_VN" sourcelanguage="en">
+<TS version="2.1" language="vi_VN" sourcelanguage="en">
 <context>
     <name>About</name>
     <message>
@@ -983,11 +983,11 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation>Mẫu</translation>
+        <translation type="vanished">Mẫu</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation>Tìm trong</translation>
+        <translation type="vanished">Tìm trong</translation>
     </message>
 </context>
 <context>

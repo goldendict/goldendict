@@ -108,6 +108,7 @@ win32 {
         -logg
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
+            -lswresample-gd \
             -lavutil-gd \
             -lavformat-gd \
             -lavcodec-gd
@@ -156,7 +157,8 @@ unix:!mac {
         PKGCONFIG += ao \
             libavutil \
             libavformat \
-            libavcodec
+            libavcodec \
+            libswresample \
     }
     arm {
         LIBS += -liconv
@@ -210,6 +212,7 @@ mac {
         -llzo2
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
+            -lswresample-gd \
             -lavutil-gd \
             -lavformat-gd \
             -lavcodec-gd
@@ -541,7 +544,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
-  LIBS += -llzma
+  LIBS += -llzma -lzstd
 }
 
 !CONFIG( no_extra_tiff_handler ) {
@@ -623,7 +626,9 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/fa_IR.ts \
     locale/mk_MK.ts \
     locale/eo_EO.ts \
-    locale/fi_FI.ts
+    locale/fi_FI.ts \
+    locale/jb_JB.ts \
+    locale/ie_001.ts
 
 # Build version file
 !isEmpty( hasGit ) {

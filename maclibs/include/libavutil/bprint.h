@@ -21,6 +21,8 @@
 #ifndef AVUTIL_BPRINT_H
 #define AVUTIL_BPRINT_H
 
+#include <stdarg.h>
+
 #include "attributes.h"
 #include "avstring.h"
 
@@ -28,9 +30,13 @@
  * Define a structure with extra padding to a fixed size
  * This helps ensuring binary compatibility with future versions.
  */
-#define FF_PAD_STRUCTURE(size, ...) \
+
+#define FF_PAD_STRUCTURE(name, size, ...) \
+struct ff_pad_helper_##name { __VA_ARGS__ }; \
+typedef struct name { \
     __VA_ARGS__ \
-    char reserved_padding[size - sizeof(struct { __VA_ARGS__ })];
+    char reserved_padding[size - sizeof(struct ff_pad_helper_##name)]; \
+} name;
 
 /**
  * Buffer to print data progressively
@@ -72,15 +78,14 @@
  * internal buffer is large enough to hold a reasonable paragraph of text,
  * such as the current paragraph.
  */
-typedef struct AVBPrint {
-    FF_PAD_STRUCTURE(1024,
-    char *str;         /** string so far */
-    unsigned len;      /** length so far */
-    unsigned size;     /** allocated memory */
-    unsigned size_max; /** maximum allocated memory */
+
+FF_PAD_STRUCTURE(AVBPrint, 1024,
+    char *str;         /**< string so far */
+    unsigned len;      /**< length so far */
+    unsigned size;     /**< allocated memory */
+    unsigned size_max; /**< maximum allocated memory */
     char reserved_internal_buffer[1];
-    )
-} AVBPrint;
+)
 
 /**
  * Convenience macros for special values for av_bprint_init() size_max
@@ -122,9 +127,23 @@ void av_bprint_init_for_buffer(AVBPrint *buf, char *buffer, unsigned size);
 void av_bprintf(AVBPrint *buf, const char *fmt, ...) av_printf_format(2, 3);
 
 /**
+ * Append a formatted string to a print buffer.
+ */
+void av_vbprintf(AVBPrint *buf, const char *fmt, va_list vl_arg);
+
+/**
  * Append char c n times to a print buffer.
  */
 void av_bprint_chars(AVBPrint *buf, char c, unsigned n);
+
+/**
+ * Append data to a print buffer.
+ *
+ * param buf  bprint buffer to use
+ * param data pointer to data
+ * param size size of data
+ */
+void av_bprint_append_data(AVBPrint *buf, const char *data, unsigned size);
 
 struct tm;
 /**
@@ -163,7 +182,7 @@ void av_bprint_clear(AVBPrint *buf);
  * It may have been truncated due to a memory allocation failure
  * or the size_max limit (compare size and size_max if necessary).
  */
-static inline int av_bprint_is_complete(AVBPrint *buf)
+static inline int av_bprint_is_complete(const AVBPrint *buf)
 {
     return buf->len < buf->size;
 }

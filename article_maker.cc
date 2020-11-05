@@ -179,7 +179,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
-            "gdAudioLinks = { current: null, all: [] };"
+            "var gdAudioLinks = { current: null, all: [] };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
@@ -206,15 +206,15 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "elem.style.display='none'; ico.className='gdexpandicon';"
             "art.className = art.className+' gdcollapsedarticle';"
             "nm=document.getElementById('gddictname-'+id); nm.style.cursor='pointer';"
-            "if(ev) ev.stopPropagation(); ico.title=''; nm.title='";
+            "if(ev) ev.stopPropagation(); ico.title=''; nm.title=\"";
   result += tr( "Expand article" ).toUtf8().data();
-  result += "' } else if(elem.style.display=='none') {"
+  result += "\" } else if(elem.style.display=='none') {"
             "elem.style.display='inline'; ico.className='gdcollapseicon';"
             "art.className=art.className.replace(' gdcollapsedarticle','');"
             "nm=document.getElementById('gddictname-'+id); nm.style.cursor='default';"
-            "nm.title=''; ico.title='";
+            "nm.title=''; ico.title=\"";
   result += tr( "Collapse article").toUtf8().data();
-  result += "' } }"
+  result += "\" } }"
             "function gdCheckArticlesNumber() {"
             "elems=document.getElementsByClassName('gddictname');"
             "if(elems.length == 1) {"
