@@ -319,6 +319,10 @@ struct Preferences
   bool collapseBigArticles;
   int articleSizeLimit;
 
+  bool limitInputPhraseLength;
+  int inputPhraseLengthLimit;
+  QString sanitizeInputPhrase( QString const & inputPhrase ) const;
+
   unsigned short maxDictionaryRefsInContextMenu;
 #ifndef Q_WS_X11
   bool trackClipboardChanges;

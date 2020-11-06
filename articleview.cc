@@ -2085,11 +2085,7 @@ void ArticleView::audioPlayerError( QString const & message )
 
 void ArticleView::pasteTriggered()
 {
-  QString text =
-      gd::toQString(
-          Folding::trimWhitespaceOrPunct(
-              gd::toWString(
-                  QApplication::clipboard()->text() ) ) );
+  QString text = cfg.preferences.sanitizeInputPhrase( QApplication::clipboard()->text() );
 
   if ( text.size() )
   {

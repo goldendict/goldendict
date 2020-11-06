@@ -2,6 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "config.hh"
+#include "folding.hh"
+#include "wstring_qt.hh"
 #include <QDir>
 #include <QFile>
 #include <QtXml>
@@ -140,6 +142,17 @@ ScanPopupWindowFlags spwfFromInt( int id )
   return SPWF_default;
 }
 
+QString Preferences::sanitizeInputPhrase( QString const & inputPhrase ) const
+{
+  if( limitInputPhraseLength && inputPhrase.size() > inputPhraseLengthLimit )
+  {
+    gdWarning( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
+               inputPhrase.size(), inputPhraseLengthLimit );
+    return QString();
+  }
+  return gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( inputPhrase ) ) ).simplified();
+}
+
 Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
@@ -197,6 +210,8 @@ Preferences::Preferences():
 , confirmFavoritesDeletion( true )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
+, limitInputPhraseLength( true )
+, inputPhraseLengthLimit( 200 )
 , maxDictionaryRefsInContextMenu ( 20 )
 #ifndef Q_WS_X11
 , trackClipboardChanges( false )
@@ -908,6 +923,12 @@ Class load() THROW_SPEC( exError )
 
     if ( !preferences.namedItem( "articleSizeLimit" ).isNull() )
       c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toInt();
+
+    if ( !preferences.namedItem( "limitInputPhraseLength" ).isNull() )
+        c.preferences.limitInputPhraseLength = ( preferences.namedItem( "limitInputPhraseLength" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "inputPhraseLengthLimit" ).isNull() )
+      c.preferences.inputPhraseLengthLimit = preferences.namedItem( "inputPhraseLengthLimit" ).toElement().text().toInt();
 
     if ( !preferences.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
       c.preferences.maxDictionaryRefsInContextMenu = preferences.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
@@ -1860,6 +1881,14 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "articleSizeLimit" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.articleSizeLimit ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "limitInputPhraseLength" );
+    opt.appendChild( dd.createTextNode( c.preferences.limitInputPhraseLength ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "inputPhraseLengthLimit" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.inputPhraseLengthLimit ) ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxDictionaryRefsInContextMenu" );

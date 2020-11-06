@@ -2,8 +2,6 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "scanpopup.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>
@@ -494,7 +492,7 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 
 void ScanPopup::translateWord( QString const & word )
 {
-  QString str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( word ) ) ).simplified();
+  QString str = pendingInputWord = cfg.preferences.sanitizeInputPhrase( word );
 
   if ( !str.size() )
     return; // Nothing there
@@ -558,7 +556,7 @@ void ScanPopup::mouseHovered( QString const & str, bool forcePopup )
 
 void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
 {
-  QString sanitizedStr = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) ).simplified();
+  QString sanitizedStr = cfg.preferences.sanitizeInputPhrase( str );
 
   if ( isVisible() && sanitizedStr == inputWord )
   {
