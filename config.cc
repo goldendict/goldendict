@@ -907,7 +907,7 @@ Class load() THROW_SPEC( exError )
       c.preferences.collapseBigArticles = ( preferences.namedItem( "collapseBigArticles" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "articleSizeLimit" ).isNull() )
-      c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toUInt() ;
+      c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toInt();
 
     if ( !preferences.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
       c.preferences.maxDictionaryRefsInContextMenu = preferences.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
