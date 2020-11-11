@@ -138,6 +138,14 @@ vector< char > & DataRequest::getFullData() THROW_SPEC( exRequestUnfinished )
   return data;
 }
 
+QString & DataRequest::getMimeType() THROW_SPEC( exRequestUnfinished )
+{
+  if ( !isFinished() )
+    throw exRequestUnfinished();
+
+  return mimeType;
+}
+
 Class::Class( string const & id_, vector< string > const & dictionaryFiles_ ):
   id( id_ ), dictionaryFiles( dictionaryFiles_ ), dictionaryIconLoaded( false )
   , can_FTS( false), FTS_index_completed( false )

@@ -2033,8 +2033,15 @@ void ArticleView::resourceDownloadFinished()
           QString fileName;
 
           {
-            QTemporaryFile tmp(
-              QDir::temp().filePath( "XXXXXX-" + resourceDownloadUrl.path().section( '/', -1 ) ), this );
+            fileName = QDir::temp().filePath( "XXXXXX-" + resourceDownloadUrl.path().section( '/', -1 ) );
+
+            QString mimeType = (*i)->getMimeType();
+            if ( mimeType.startsWith("image/") )
+            {
+                fileName = fileName + "." + mimeType.remove(0, 6);
+            }
+
+            QTemporaryFile tmp( fileName, this );
 
             if ( !tmp.open() || (size_t) tmp.write( &data.front(), data.size() ) != data.size() )
             {

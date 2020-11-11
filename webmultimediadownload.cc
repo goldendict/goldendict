@@ -68,6 +68,9 @@ void WebMultimediaDownload::replyFinished( QNetworkReply * r )
     r->read( data.data(), data.size() );
 
     hasAnyData = true;
+
+    QVariant contentMimeType = r->header(QNetworkRequest::ContentTypeHeader);
+    mimeType = contentMimeType.toString();
   }
   else
     setErrorString( r->errorString() );

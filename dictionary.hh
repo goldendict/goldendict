@@ -196,6 +196,9 @@ public:
 
   DataRequest(): hasAnyData( false ) {}
 
+  /// Returns file format declared by webserver
+  QString & getMimeType() THROW_SPEC( exRequestUnfinished );
+
 protected:
 
   // Subclasses should be filling up the 'data' array, locking the mutex when
@@ -204,6 +207,7 @@ protected:
 
   bool hasAnyData; // With this being false, dataSize() always returns -1
   vector< char > data;
+  QString mimeType; // format of the downloaded file
 };
 
 /// A helper class for synchronous word search implementations.
