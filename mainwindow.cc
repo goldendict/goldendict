@@ -763,6 +763,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &articleNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
 
+  QNetworkDiskCache *diskCache = new QNetworkDiskCache(this);
+  diskCache->setCacheDirectory(QStandardPaths::writableLocation(QStandardPaths::CacheLocation));
+  articleNetMgr.setCache(diskCache);
+
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history

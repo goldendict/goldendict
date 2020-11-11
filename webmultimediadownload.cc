@@ -13,7 +13,9 @@ redirectCount( 0 )
   connect( &mgr, SIGNAL(finished(QNetworkReply*)),
            this, SLOT(replyFinished(QNetworkReply*)), Qt::QueuedConnection );
 
-  reply = mgr.get( QNetworkRequest( url ) );
+  QNetworkRequest request( url );
+  request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+  reply = mgr.get(request);
 
 #ifndef QT_NO_OPENSSL
   connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
