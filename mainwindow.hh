@@ -201,6 +201,7 @@ private:
 
   void applyProxySettings();
   void applyWebSettings();
+  void setupNetworkCache( int maxSize );
   void makeDictionaries();
   void updateStatusLine();
   void updateGroupList();

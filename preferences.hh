@@ -52,6 +52,7 @@ private slots:
   void on_useExternalPlayer_toggled( bool enabled );
 
   void customProxyToggled( bool );
+  void on_maxNetworkCacheSize_valueChanged( int value );
 
   void helpRequested();
   void closeHelp();

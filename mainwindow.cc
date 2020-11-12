@@ -763,6 +763,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( &articleNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
 
+  setupNetworkCache( cfg.preferences.maxNetworkCacheSize );
+
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history
@@ -1068,6 +1070,10 @@ void MainWindow::commitData( QSessionManager & )
 
 void MainWindow::commitData()
 {
+  if( cfg.preferences.clearNetworkCacheOnExit )
+    if( QAbstractNetworkCache * cache = articleNetMgr.cache() )
+      cache->clear();
+
   try
   {
     // Save MainWindow state and geometry
@@ -1285,6 +1291,33 @@ void MainWindow::applyWebSettings()
   QWebSettings *defaultSettings = QWebSettings::globalSettings();
   defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
+}
+
+void MainWindow::setupNetworkCache( int maxSize )
+{
+  // x << 20 == x * 2^20 converts mebibytes to bytes.
+  qint64 const maxCacheSizeInBytes = maxSize <= 0 ? qint64( 0 ) : static_cast< qint64 >( maxSize ) << 20;
+
+  if( QAbstractNetworkCache * abstractCache = articleNetMgr.cache() )
+  {
+    QNetworkDiskCache * const diskCache = qobject_cast< QNetworkDiskCache * >( abstractCache );
+    Q_ASSERT_X( diskCache, Q_FUNC_INFO, "Unexpected network cache type." );
+    diskCache->setMaximumCacheSize( maxCacheSizeInBytes );
+    return;
+  }
+  if( maxCacheSizeInBytes == 0 )
+    return; // There is currently no cache and it is not needed.
+
+  QString const cacheDirectory = Config::getNetworkCacheDir();
+  if( !QDir().mkpath( cacheDirectory ) )
+  {
+    gdWarning( "Cannot create a cache directory %s. Disabling network cache.", cacheDirectory.toUtf8().constData() );
+    return;
+  }
+  QNetworkDiskCache * const diskCache = new QNetworkDiskCache( this );
+  diskCache->setMaximumCacheSize( maxCacheSizeInBytes );
+  diskCache->setCacheDirectory( cacheDirectory );
+  articleNetMgr.setCache( diskCache );
 }
 
 void MainWindow::makeDictionaries()
@@ -2139,6 +2172,8 @@ void MainWindow::editPreferences()
     if( cfg.preferences.favoritesStoreInterval != p.favoritesStoreInterval )
       ui.favoritesPaneWidget->setSaveInterval( p.favoritesStoreInterval );
 
+    if( cfg.preferences.maxNetworkCacheSize != p.maxNetworkCacheSize )
+      setupNetworkCache( p.maxNetworkCacheSize );
     cfg.preferences = p;
 
     audioPlayerFactory.setPreferences( cfg.preferences );

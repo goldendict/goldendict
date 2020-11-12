@@ -1153,6 +1153,59 @@ Enable this option to workaround the problem.</string>
         </widget>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Maximum network cache size:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="maxNetworkCacheSize">
+           <property name="toolTip">
+            <string>Maximum disk space occupied by GoldenDict's network cache in
+%1
+If set to 0 the network disk cache will be disabled.</string>
+           </property>
+           <property name="suffix">
+            <string> MiB</string>
+           </property>
+           <property name="maximum">
+            <number>2000</number>
+           </property>
+           <property name="value">
+            <number>50</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="clearNetworkCacheOnExit">
+           <property name="toolTip">
+            <string>When this option is enabled, GoldenDict
+clears its network cache from disk during exit.</string>
+           </property>
+           <property name="text">
+            <string>Clear network cache on exit</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_15">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
         <spacer name="verticalSpacer_10">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

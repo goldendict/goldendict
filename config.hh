@@ -302,6 +302,8 @@ struct Preferences
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
   bool hideGoldenDictHeader;
+  int maxNetworkCacheSize;
+  bool clearNetworkCacheOnExit;
 
   qreal zoomFactor;
   qreal helpZoomFactor;
@@ -791,6 +793,12 @@ QString getPortableVersionMorphoDir() throw();
 
 /// Returns the add-on styles directory.
 QString getStylesDir() throw();
+
+/// Returns the directory where user-specific non-essential (cached) data should be written.
+QString getCacheDir() throw();
+
+/// Returns the article network disk cache directory.
+QString getNetworkCacheDir() throw();
 
 }
 

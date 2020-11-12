@@ -153,6 +153,12 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
       break;
     }
 
+#ifdef Q_OS_WIN32
+  // 1 MB stands for 2^20 bytes on Windows. "MiB" is never used by this OS.
+  ui.maxNetworkCacheSize->setSuffix( tr( " MB" ) );
+#endif
+  ui.maxNetworkCacheSize->setToolTip( ui.maxNetworkCacheSize->toolTip().arg( Config::getNetworkCacheDir() ) );
+
   ui.newTabsOpenAfterCurrentOne->setChecked( p.newTabsOpenAfterCurrentOne );
   ui.newTabsOpenInBackground->setChecked( p.newTabsOpenInBackground );
   ui.hideSingleTab->setChecked( p.hideSingleTab );
@@ -319,6 +325,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
   ui.hideGoldenDictHeader->setChecked( p.hideGoldenDictHeader );
+  ui.maxNetworkCacheSize->setValue( p.maxNetworkCacheSize );
+  ui.clearNetworkCacheOnExit->setChecked( p.clearNetworkCacheOnExit );
 
   // Add-on styles
   ui.addonStylesLabel->setVisible( ui.addonStyles->count() > 1 );
@@ -449,6 +457,8 @@ Config::Preferences Preferences::getPreferences()
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
   p.enableWebPlugins = ui.enableWebPlugins->isChecked();
   p.hideGoldenDictHeader = ui.hideGoldenDictHeader->isChecked();
+  p.maxNetworkCacheSize = ui.maxNetworkCacheSize->value();
+  p.clearNetworkCacheOnExit = ui.clearNetworkCacheOnExit->isChecked();
 
   p.addonStyle = ui.addonStyles->getCurrentStyle();
 
@@ -637,6 +647,11 @@ void Preferences::customProxyToggled( bool )
 {
   ui.customSettingsGroup->setEnabled( ui.customProxy->isChecked()
                                       && ui.useProxyServer->isChecked() );
+}
+
+void Preferences::on_maxNetworkCacheSize_valueChanged( int value )
+{
+    ui.clearNetworkCacheOnExit->setEnabled( value != 0 );
 }
 
 void Preferences::helpRequested()
