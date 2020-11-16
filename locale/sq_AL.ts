@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sq_AL">
+<TS version="2.0" language="sq_AL">
 <context>
     <name>About</name>
     <message>
@@ -1187,11 +1187,11 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">Form</translation>
+        <translation type="obsolete">Form</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation type="vanished">Shikoj në</translation>
+        <translation type="obsolete">Shikoj në</translation>
     </message>
 </context>
 <context>
@@ -2402,77 +2402,77 @@ between classic and school orthography in cyrillic)</source>
         <translation>Lojban</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="376"/>
+        <location filename="../language.cc" line="377"/>
         <source>Traditional Chinese</source>
         <translation>Kinezisht tradicionale</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="377"/>
+        <location filename="../language.cc" line="378"/>
         <source>Simplified Chinese</source>
         <translation>Kinezisht e thjeshtuar</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="378"/>
+        <location filename="../language.cc" line="379"/>
         <source>Other</source>
         <translation>Tjetër</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Simplified Chinese dialects</source>
         <translation>Dialekte të tjera të kinezishtes së thjeshtuar</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Traditional Chinese dialects</source>
         <translation>Dialekte të tjera të kinezishtes tradicionale</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Eastern-European languages</source>
         <translation>Gjuhë të tjera evropiano-lindore</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Western-European languages</source>
         <translation>Gjuhë të tjera evropiano-perëndimore</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Russian languages</source>
         <translation>Gjuhë të tjera ruse</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Japanese languages</source>
         <translation>Gjuhë të tjera japoneze</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Baltic languages</source>
         <translation>Gjuhë të tjera baltike</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Greek languages</source>
         <translation>Gjuhë të tjera greke</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Korean dialects</source>
         <translation>Dialekte të tjera koreane</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Other Turkish dialects</source>
         <translation>Dialekte të tjera turke</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="389"/>
+        <location filename="../language.cc" line="390"/>
         <source>Other Thai dialects</source>
         <translation>Dialekte të tjera tajlandeze</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="390"/>
+        <location filename="../language.cc" line="391"/>
         <source>Tamazight</source>
         <translation>Tamazight</translation>
     </message>
@@ -2488,7 +2488,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="364"/>
+        <location filename="../main.cc" line="375"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Gabim në skedën e konfiguracionit.Do vijoni me parametrat standardë?</translation>
     </message>
@@ -3825,33 +3825,34 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1689"/>
+        <location filename="../preferences.ui" line="1687"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Kur e ndez, artikujt e mëdhenj do të mblidhen automatikisht.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1692"/>
+        <location filename="../preferences.ui" line="1690"/>
         <source>Collapse articles more than</source>
         <translation>Mbledh artikujt me më shumë se</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1699"/>
+        <location filename="../preferences.ui" line="1697"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Artikujt mbi këtë përmasë do të mblidhen</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1715"/>
+        <location filename="../preferences.ui" line="1713"/>
+        <location filename="../preferences.ui" line="1763"/>
         <source>symbols</source>
         <translation>simbole</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1773"/>
+        <location filename="../preferences.ui" line="1806"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1777"/>
+        <location filename="../preferences.ui" line="1810"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4130,22 +4131,38 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
         <translation>Artikujt</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1737"/>
-        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <location filename="../preferences.ui" line="1733"/>
+        <source>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1740"/>
-        <source>Ignore diacritics while searching</source>
+        <location filename="../preferences.ui" line="1737"/>
+        <source>Ignore input phrases longer than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
+        <source>Input phrases longer than this size will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1770"/>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1773"/>
+        <source>Ignore diacritics while searching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1780"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Kur e ndez, pjesët fakultative të artikujve zgjerohen gjithmonë.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1750"/>
+        <location filename="../preferences.ui" line="1783"/>
         <source>Expand optional &amp;parts</source>
         <translation>Zgjeroj &amp;pjesët fakultative</translation>
     </message>
@@ -4186,12 +4203,12 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
         <translation>Lingoes Blu</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="622"/>
+        <location filename="../preferences.cc" line="626"/>
         <source>Changing Language</source>
         <translation>Ndryshimi i Gjuhës</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="623"/>
+        <location filename="../preferences.cc" line="627"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Riniseni programin për të zbatuar ndryshimin e gjuhës.</translation>
     </message>
@@ -4274,7 +4291,7 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
     <name>QObject</name>
     <message>
         <location filename="../aard.cc" line="449"/>
-        <location filename="../dsl.cc" line="1764"/>
+        <location filename="../dsl.cc" line="1775"/>
         <source>Article loading error</source>
         <translation>Gabim në hapjen e artikullit</translation>
     </message>
@@ -4299,93 +4316,93 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="146"/>
+        <location filename="../ffmpegaudio.cc" line="150"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>Dështoi avformat_alloc_context().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="157"/>
+        <location filename="../ffmpegaudio.cc" line="161"/>
         <source>av_malloc() failed.</source>
         <translation>Dështoi av_malloc().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="166"/>
+        <location filename="../ffmpegaudio.cc" line="170"/>
         <source>avio_alloc_context() failed.</source>
         <translation>Dështoi avio_alloc_context().</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="183"/>
+        <location filename="../ffmpegaudio.cc" line="187"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>Dështoi avformat_open_input(): %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="190"/>
+        <location filename="../ffmpegaudio.cc" line="194"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>Dështoi avformat_find_stream_info(): %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="209"/>
+        <location filename="../ffmpegaudio.cc" line="213"/>
         <source>Could not find audio stream.</source>
         <translation>Nuk gjen rrymën audio.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="218"/>
-        <location filename="../ffmpegaudio.cc" line="225"/>
+        <location filename="../ffmpegaudio.cc" line="222"/>
+        <location filename="../ffmpegaudio.cc" line="229"/>
         <source>Codec [id: %1] not found.</source>
         <translation>Nuk gjen kodekun [id: %1].</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="231"/>
+        <location filename="../ffmpegaudio.cc" line="235"/>
         <source>avcodec_alloc_context3() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="240"/>
+        <location filename="../ffmpegaudio.cc" line="244"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>Dështoi avcodec_open2(): %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="304"/>
+        <location filename="../ffmpegaudio.cc" line="333"/>
         <source>Cannot find usable audio output device.</source>
         <translation>Nuk gjen pajisje output të përdorshme për zërin.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="317"/>
+        <location filename="../ffmpegaudio.cc" line="347"/>
         <source>Unsupported sample format.</source>
         <translation>Format i pagarantuar.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="327"/>
+        <location filename="../ffmpegaudio.cc" line="357"/>
         <source>ao_open_live() failed: </source>
         <translation>Dështoi ao_open_live(): </translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="332"/>
+        <location filename="../ffmpegaudio.cc" line="362"/>
         <source>No driver.</source>
         <translation>Nuk ka drejtues.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="335"/>
+        <location filename="../ffmpegaudio.cc" line="365"/>
         <source>This driver is not a live output device.</source>
         <translation>Drejtuesi nuk është pajisje output e drejtërdrejtë.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="338"/>
+        <location filename="../ffmpegaudio.cc" line="368"/>
         <source>A valid option key has an invalid value.</source>
         <translation>Një tast i duhur ka vlerë të pasaktë.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="341"/>
+        <location filename="../ffmpegaudio.cc" line="371"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>Nuk mund të hapë pajisjen: %1, kanalet: %2, raporti: %3, bitet: %4.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="348"/>
+        <location filename="../ffmpegaudio.cc" line="378"/>
         <source>Unknown error.</source>
         <translation>Gabim i panjohur.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="377"/>
+        <location filename="../ffmpegaudio.cc" line="407"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>Dështoi avcodec_alloc_frame().</translation>
     </message>
@@ -4439,22 +4456,22 @@ Nuk keni pse ta aktivizoni nëse nuk i përdorni këto programe.</translation>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="3003"/>
+        <location filename="../articleview.cc" line="2999"/>
         <source>ERROR: %1</source>
         <translation>GABIM: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3003"/>
+        <location filename="../articleview.cc" line="2999"/>
         <source>Resource saving error: </source>
         <translation>Gabim në ruajtjen e resursit: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3029"/>
+        <location filename="../articleview.cc" line="3025"/>
         <source>The referenced resource failed to download.</source>
         <translation>Dështoi shkarkimi i resursit të referuar.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3029"/>
+        <location filename="../articleview.cc" line="3025"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">KUJDES: %1</translation>
     </message>
@@ -4557,8 +4574,8 @@ që të marrë një përmasë të re ose për mënyrat e tjera.</translation>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="713"/>
-        <location filename="../scanpopup.cc" line="1082"/>
+        <location filename="../scanpopup.cc" line="711"/>
+        <location filename="../scanpopup.cc" line="1080"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>

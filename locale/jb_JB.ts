@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="jb">
+<TS version="2.0" language="jb">
 <context>
     <name>About</name>
     <message>
@@ -21,12 +21,12 @@
     <message>
         <location filename="../about.ui" line="101"/>
         <source>Licensed under GNU GPLv3 or later</source>
-        <translation>.i la'o zoi. GNU GPLv3 .zoi ja ro bavla'i cu javni</translation>
+        <translation>.i la&apos;o zoi. GNU GPLv3 .zoi ja ro bavla&apos;i cu javni</translation>
     </message>
     <message>
         <location filename="../about.ui" line="125"/>
         <source>Credits:</source>
-        <translation>zanfu'e</translation>
+        <translation>zanfu&apos;e</translation>
     </message>
     <message>
         <location filename="../about.cc" line="19"/>
@@ -36,7 +36,7 @@
     <message>
         <location filename="../about.cc" line="36"/>
         <source>Based on Qt %1 (%2, %3 bit)</source>
-        <translation>.i jicmu fa lo %1 moi be la'i .kutis. (%2, bitmu li %3)</translation>
+        <translation>.i jicmu fa lo %1 moi be la&apos;i .kutis. (%2, bitmu li %3)</translation>
     </message>
 </context>
 <context>
@@ -54,12 +54,12 @@
     <message>
         <location filename="../article_maker.cc" line="245"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>.i pu facki lo du'u no cmima be la'o zoi. &lt;b&gt;%2&lt;/b&gt; .zoi cu xe fanva la'o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi</translation>
+        <translation>.i pu facki lo du&apos;u no cmima be la&apos;o zoi. &lt;b&gt;%2&lt;/b&gt; .zoi cu xe fanva la&apos;o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="250"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
-        <translation>.i pu facki lo du'u no cmima be la'o zoi. &lt;b&gt;%2&lt;/b&gt; .zoi cu xe fanva</translation>
+        <translation>.i pu facki lo du&apos;u no cmima be la&apos;o zoi. &lt;b&gt;%2&lt;/b&gt; .zoi cu xe fanva</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="297"/>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="299"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;.i fi'i do do pilno &lt;b&gt;la .goldendikt.&lt;/b&gt;&lt;/h3&gt;&lt;p&gt;.i sarcu pa nu do kakne lo ka pilno lo samtci kei kei fa pa se tadji be pa nu do cuxna &lt;b&gt;la vlacku&lt;/b&gt; pe &lt;b&gt;la binxo&lt;/b&gt; be'o poi nu do jmina pa judri be pa vlacku datnyveimei be'o ja pa samtcise'u be fi la .midiiauikis. be'o ja pa drata lo'i vreji ja cu basygau fo lo ka se porsi fi lo'i vlacku ja cu cupra pa vlacku selcmi&lt;p&gt;.i ba da do co'a kakne lo ka sisku fi lo'i valsi .i pa nu sisku cu se tadji pa nu do pilno lo cankyuidje poi zunle dei kei je pa nu &lt;a href=&quot;Working with popup&quot;&gt;do sisku tu'a pa valsi pe pa samtci poi drata&lt;/a&gt;&lt;p&gt;.i pa nu do cuxna &lt;b&gt;la te tcimi'e&lt;/b&gt; pe &lt;b&gt;la binxo&lt;/b&gt; cu tadji pa nu tcimi'e .i ro da poi kakne lo ka binxo cu ckini pa djunoi poi ga ja nai do bilga lo ka tcidu ke'a gi cfipu do&lt;p&gt;.i ga na ja do nitcu lo ka se sidju kei ja cu djica lo ka cusku pa preti ja cu stidi da kei ja cu kucli pa se jinvi be pa prenu poi na du do gi ko vitke &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;lo snustu&lt;/a&gt; be fi lo samtci&lt;p&gt;.i nuzba ro cnino &lt;a href=&quot;http://goldendict.org/&quot;&gt;lo kibystu&lt;/a&gt; pe lo samtci&lt;p&gt;(c) 2008-2013 Konstantin Isakov .i la'o zoi. GPL3 .zoi ja ro bavla'i be ri cu javni</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;.i fi&apos;i do do pilno &lt;b&gt;la .goldendikt.&lt;/b&gt;&lt;/h3&gt;&lt;p&gt;.i sarcu pa nu do kakne lo ka pilno lo samtci kei kei fa pa se tadji be pa nu do cuxna &lt;b&gt;la vlacku&lt;/b&gt; pe &lt;b&gt;la binxo&lt;/b&gt; be&apos;o poi nu do jmina pa judri be pa vlacku datnyveimei be&apos;o ja pa samtcise&apos;u be fi la .midiiauikis. be&apos;o ja pa drata lo&apos;i vreji ja cu basygau fo lo ka se porsi fi lo&apos;i vlacku ja cu cupra pa vlacku selcmi&lt;p&gt;.i ba da do co&apos;a kakne lo ka sisku fi lo&apos;i valsi .i pa nu sisku cu se tadji pa nu do pilno lo cankyuidje poi zunle dei kei je pa nu &lt;a href=&quot;Working with popup&quot;&gt;do sisku tu&apos;a pa valsi pe pa samtci poi drata&lt;/a&gt;&lt;p&gt;.i pa nu do cuxna &lt;b&gt;la te tcimi&apos;e&lt;/b&gt; pe &lt;b&gt;la binxo&lt;/b&gt; cu tadji pa nu tcimi&apos;e .i ro da poi kakne lo ka binxo cu ckini pa djunoi poi ga ja nai do bilga lo ka tcidu ke&apos;a gi cfipu do&lt;p&gt;.i ga na ja do nitcu lo ka se sidju kei ja cu djica lo ka cusku pa preti ja cu stidi da kei ja cu kucli pa se jinvi be pa prenu poi na du do gi ko vitke &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;lo snustu&lt;/a&gt; be fi lo samtci&lt;p&gt;.i nuzba ro cnino &lt;a href=&quot;http://goldendict.org/&quot;&gt;lo kibystu&lt;/a&gt; pe lo samtci&lt;p&gt;(c) 2008-2013 Konstantin Isakov .i la&apos;o zoi. GPL3 .zoi ja ro bavla&apos;i be ri cu javni</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="315"/>
@@ -122,7 +122,7 @@
     <message>
         <location filename="../article_maker.cc" line="717"/>
         <source>Query error: %1</source>
-        <translation>.i nabmi fi pa nu sisku kei fa la'o zoi. %1 .zoi</translation>
+        <translation>.i nabmi fi pa nu sisku kei fa la&apos;o zoi. %1 .zoi</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="823"/>
@@ -156,13 +156,13 @@
         <location filename="../articleview.ui" line="71"/>
         <location filename="../articleview.ui" line="160"/>
         <source>&amp;Previous</source>
-        <translation>prula'i</translation>
+        <translation>prula&apos;i</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="85"/>
         <location filename="../articleview.ui" line="177"/>
         <source>&amp;Next</source>
-        <translation>bavla'i</translation>
+        <translation>bavla&apos;i</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="132"/>
@@ -187,7 +187,7 @@
     <message>
         <location filename="../articleview.ui" line="220"/>
         <source>&amp;Case Sensitive</source>
-        <translation>lo ga'elto'a cu vajni</translation>
+        <translation>lo ga&apos;elto&apos;a cu vajni</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="285"/>
@@ -197,7 +197,7 @@
     <message>
         <location filename="../articleview.cc" line="291"/>
         <source>Copy as text</source>
-        <translation>fukra'e pa lerpoi</translation>
+        <translation>fukra&apos;e pa lerpoi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="297"/>
@@ -249,7 +249,7 @@
         <location filename="../articleview.cc" line="1321"/>
         <location filename="../articleview.cc" line="1555"/>
         <source>ERROR: %1</source>
-        <translation>.i nabmi fa la'o zoi. %1 .zoi</translation>
+        <translation>.i nabmi fa la&apos;o zoi. %1 .zoi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1362"/>
@@ -280,22 +280,22 @@
     <message>
         <location filename="../articleview.cc" line="1738"/>
         <source>Save &amp;image...</source>
-        <translation>co'a vreji fi pa pixra</translation>
+        <translation>co&apos;a vreji fi pa pixra</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1746"/>
         <source>Save s&amp;ound...</source>
-        <translation>co'a vreji fi pa se snavi</translation>
+        <translation>co&apos;a vreji fi pa se snavi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1765"/>
         <source>&amp;Look up &quot;%1&quot;</source>
-        <translation>sisku tu'a zoi zoi. %1 .zoi</translation>
+        <translation>sisku tu&apos;a zoi zoi. %1 .zoi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1773"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>cupra pa sepli poi vanbi pa nu sisku tu'a zoi zoi. %1 .zoi</translation>
+        <translation>cupra pa sepli poi vanbi pa nu sisku tu&apos;a zoi zoi. %1 .zoi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1778"/>
@@ -316,12 +316,12 @@
     <message>
         <location filename="../articleview.cc" line="1806"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>cupra pa sepli poi vanbi pa nu sisku tu'a zoi zoi. %1 .zoi da pe la'o zoi. %2 .zoi</translation>
+        <translation>cupra pa sepli poi vanbi pa nu sisku tu&apos;a zoi zoi. %1 .zoi da pe la&apos;o zoi. %2 .zoi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1954"/>
         <source>Save sound</source>
-        <translation>co'a vreji fi pa se snavi</translation>
+        <translation>co&apos;a vreji fi pa se snavi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1956"/>
@@ -331,7 +331,7 @@
     <message>
         <location filename="../articleview.cc" line="1969"/>
         <source>Save image</source>
-        <translation>co'a vreji fi pa pixra</translation>
+        <translation>co&apos;a vreji fi pa pixra</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1971"/>
@@ -356,7 +356,7 @@
     <message>
         <location filename="../articleview.cc" line="2075"/>
         <source>WARNING: %1</source>
-        <translation>.i kajde fi la'o zoi. %1 .zoi</translation>
+        <translation>.i kajde fi la&apos;o zoi. %1 .zoi</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2075"/>
@@ -609,7 +609,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
         <source>Export</source>
-        <translation>co'a vreji</translation>
+        <translation>co&apos;a vreji</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="79"/>
@@ -697,7 +697,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="29"/>
         <source>Total articles:</source>
-        <translation>se zilkancu lo'i notci</translation>
+        <translation>se zilkancu lo&apos;i notci</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="46"/>
@@ -707,7 +707,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="60"/>
         <source>Total words:</source>
-        <translation>se zilkancu lo'i valsi</translation>
+        <translation>se zilkancu lo&apos;i valsi</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="77"/>
@@ -722,12 +722,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictinfo.ui" line="110"/>
         <source>Edit dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pa vlacku cu binxo</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="120"/>
         <source>Files comprising this dictionary:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">datnyvei fi pa vlacku</translation>
     </message>
     <message>
         <location filename="../dictinfo.ui" line="201"/>
@@ -960,7 +960,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.cc" line="376"/>
         <location filename="../fulltextsearch.cc" line="466"/>
         <source>Articles found: </source>
-        <translation>lo'i notci poi jai se facki cu zilkancu li </translation>
+        <translation>lo&apos;i notci poi jai se facki cu zilkancu li </translation>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="330"/>
@@ -1006,12 +1006,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../favoritespanewidget.cc" line="29"/>
         <source>&amp;Delete Selected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ro ca se cuxna co&apos;u cmima</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="38"/>
         <source>Copy Selected</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">fukra&apos;e ro ca se cuxna</translation>
     </message>
     <message>
         <location filename="../favoritespanewidget.cc" line="47"/>
@@ -1133,7 +1133,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../fulltextsearch.ui" line="253"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sidju</translation>
     </message>
 </context>
 <context>
@@ -1141,7 +1141,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../german.cc" line="48"/>
         <source>German Transliteration</source>
-        <translation>bandu'e'u lerfanva</translation>
+        <translation>bandu&apos;e&apos;u lerfanva</translation>
     </message>
 </context>
 <context>
@@ -1157,7 +1157,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
-        <translation>cuxna fi lo'i selcmi (Alt+G)</translation>
+        <translation>cuxna fi lo&apos;i selcmi (Alt+G)</translation>
     </message>
 </context>
 <context>
@@ -1170,7 +1170,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="64"/>
         <source>Add selected dictionaries to group (Ins)</source>
-        <translation>ro vlacku poi ca se cuxna co'a cmima (Insert)</translation>
+        <translation>ro vlacku poi ca se cuxna co&apos;a cmima (Insert)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="67"/>
@@ -1185,7 +1185,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="89"/>
         <source>Remove selected dictionaries from group (Del)</source>
-        <translation>ro vlacku poi ca se cuxna co'u cmima (Delete)</translation>
+        <translation>ro vlacku poi ca se cuxna co&apos;u cmima (Delete)</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="92"/>
@@ -1205,7 +1205,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>re moi lo'i vanbi poi sepli</translation>
+        <translation>re moi lo&apos;i vanbi poi sepli</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -1281,7 +1281,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="124"/>
         <source>Give a name for the new group:</source>
-        <translation>.i ko samci'a pa ba cmene be lo selcmi poi cnino</translation>
+        <translation>.i ko samci&apos;a pa ba cmene be lo selcmi poi cnino</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="149"/>
@@ -1291,7 +1291,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="150"/>
         <source>Give a new name for the group:</source>
-        <translation>.i ko samci'a pa basti be fi lo ka cmene lo selcmi</translation>
+        <translation>.i ko samci&apos;a pa basti be fi lo ka cmene lo selcmi</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="161"/>
@@ -1301,7 +1301,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.cc" line="162"/>
         <source>Are you sure you want to remove the group &lt;b&gt;%1&lt;/b&gt;?</source>
-        <translation>.i xu do djica lo ka vimcu la'o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi noi selcmi</translation>
+        <translation>.i xu do djica lo ka vimcu la&apos;o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi noi selcmi</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="175"/>
@@ -1314,7 +1314,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="64"/>
         <source>GoldenDict help</source>
-        <translation>djunoi fo tu'a la .goldendikt.</translation>
+        <translation>djunoi fo tu&apos;a la .goldendikt.</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="71"/>
@@ -1324,12 +1324,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="73"/>
         <source>Back</source>
-        <translation>prula'i</translation>
+        <translation>prula&apos;i</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="75"/>
         <source>Forward</source>
-        <translation>bavla'i</translation>
+        <translation>bavla&apos;i</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="80"/>
@@ -1339,12 +1339,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../helpwindow.cc" line="82"/>
         <source>Zoom Out</source>
-        <translation>tolba'o</translation>
+        <translation>tolba&apos;o</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="84"/>
         <source>Normal Size</source>
-        <translation>no'e barda</translation>
+        <translation>no&apos;e barda</translation>
     </message>
     <message>
         <location filename="../helpwindow.cc" line="127"/>
@@ -1362,12 +1362,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../historypanewidget.cc" line="21"/>
         <source>&amp;Delete Selected</source>
-        <translation>ro ca se cuxna co'u cmima</translation>
+        <translation>ro ca se cuxna co&apos;u cmima</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="30"/>
         <source>Copy Selected</source>
-        <translation>fukra'e ro ca se cuxna</translation>
+        <translation>fukra&apos;e ro ca se cuxna</translation>
     </message>
     <message>
         <location filename="../historypanewidget.cc" line="47"/>
@@ -1432,7 +1432,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../initializing.cc" line="61"/>
         <source>Please wait...</source>
-        <translation>.i ca'o gunka</translation>
+        <translation>.i ca&apos;o gunka</translation>
     </message>
 </context>
 <context>
@@ -1440,7 +1440,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="56"/>
         <source>Afar</source>
-        <translation>banga'aru</translation>
+        <translation>banga&apos;aru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="57"/>
@@ -1450,7 +1450,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="58"/>
         <source>Avestan</source>
-        <translation>bangavu'e</translation>
+        <translation>bangavu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="59"/>
@@ -1460,7 +1460,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="60"/>
         <source>Akan</source>
-        <translation>bangaku'a</translation>
+        <translation>bangaku&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="61"/>
@@ -1475,7 +1475,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="63"/>
         <source>Arabic</source>
-        <translation>bangaru'a</translation>
+        <translation>bangaru&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="64"/>
@@ -1485,7 +1485,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="65"/>
         <source>Avaric</source>
-        <translation>bangavu'a</translation>
+        <translation>bangavu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="66"/>
@@ -1495,92 +1495,92 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="67"/>
         <source>Azerbaijani</source>
-        <translation>bangazu'e</translation>
+        <translation>bangazu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="68"/>
         <source>Bashkir</source>
-        <translation>banbu'aku</translation>
+        <translation>banbu&apos;aku</translation>
     </message>
     <message>
         <location filename="../language.cc" line="69"/>
         <source>Belarusian</source>
-        <translation>banbu'elu</translation>
+        <translation>banbu&apos;elu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="70"/>
         <source>Bulgarian</source>
-        <translation>banbu'ulu</translation>
+        <translation>banbu&apos;ulu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="71"/>
         <source>Bihari</source>
-        <translation>banbu'ixe</translation>
+        <translation>banbu&apos;ixe</translation>
     </message>
     <message>
         <location filename="../language.cc" line="72"/>
         <source>Bislama</source>
-        <translation>banbu'isu</translation>
+        <translation>banbu&apos;isu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="73"/>
         <source>Bambara</source>
-        <translation>banbu'amu</translation>
+        <translation>banbu&apos;amu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="74"/>
         <source>Bengali</source>
-        <translation>banbu'enu</translation>
+        <translation>banbu&apos;enu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="75"/>
         <source>Tibetan</source>
-        <translation>banbu'odu</translation>
+        <translation>banbu&apos;odu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="76"/>
         <source>Breton</source>
-        <translation>banburu'e</translation>
+        <translation>banburu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="77"/>
         <source>Bosnian</source>
-        <translation>banbu'osu</translation>
+        <translation>banbu&apos;osu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="78"/>
         <source>Catalan</source>
-        <translation>bancu'atu</translation>
+        <translation>bancu&apos;atu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="79"/>
         <source>Chechen</source>
-        <translation>bancuxe'e</translation>
+        <translation>bancuxe&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="80"/>
         <source>Chamorro</source>
-        <translation>bancuxe'a</translation>
+        <translation>bancuxe&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="81"/>
         <source>Corsican</source>
-        <translation>bancu'osu</translation>
+        <translation>bancu&apos;osu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="82"/>
         <source>Cree</source>
-        <translation>bancuru'e</translation>
+        <translation>bancuru&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="83"/>
         <source>Czech</source>
-        <translation>bancu'esu</translation>
+        <translation>bancu&apos;esu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="84"/>
         <source>Church Slavic</source>
-        <translation>bancuxe'u</translation>
+        <translation>bancuxe&apos;u</translation>
     </message>
     <message>
         <location filename="../language.cc" line="85"/>
@@ -1595,27 +1595,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="87"/>
         <source>Danish</source>
-        <translation>bandu'anu</translation>
+        <translation>bandu&apos;anu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="88"/>
         <source>German</source>
-        <translation>bandu'e'u</translation>
+        <translation>bandu&apos;e&apos;u</translation>
     </message>
     <message>
         <location filename="../language.cc" line="89"/>
         <source>Divehi</source>
-        <translation>bandu'ivu</translation>
+        <translation>bandu&apos;ivu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="90"/>
         <source>Dzongkha</source>
-        <translation>banduzu'o</translation>
+        <translation>banduzu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="91"/>
         <source>Ewe</source>
-        <translation>bangeve'e</translation>
+        <translation>bangeve&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="92"/>
@@ -1630,12 +1630,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="94"/>
         <source>Esperanto</source>
-        <translation>bangepu'o</translation>
+        <translation>bangepu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="95"/>
         <source>Spanish</source>
-        <translation>bansupu'a</translation>
+        <translation>bansupu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="96"/>
@@ -1645,37 +1645,37 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="97"/>
         <source>Basque</source>
-        <translation>bange'usu</translation>
+        <translation>bange&apos;usu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="98"/>
         <source>Persian</source>
-        <translation>banfu'asu</translation>
+        <translation>banfu&apos;asu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="99"/>
         <source>Fulah</source>
-        <translation>banfu'ulu</translation>
+        <translation>banfu&apos;ulu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="100"/>
         <source>Finnish</source>
-        <translation>banfu'inu</translation>
+        <translation>banfu&apos;inu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="101"/>
         <source>Fijian</source>
-        <translation>banfu'iju</translation>
+        <translation>banfu&apos;iju</translation>
     </message>
     <message>
         <location filename="../language.cc" line="102"/>
         <source>Faroese</source>
-        <translation>banfu'a'o</translation>
+        <translation>banfu&apos;a&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="103"/>
         <source>French</source>
-        <translation>banfuru'a</translation>
+        <translation>banfuru&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="104"/>
@@ -1685,12 +1685,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="105"/>
         <source>Irish</source>
-        <translation>baurgulu'e</translation>
+        <translation>baurgulu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="106"/>
         <source>Scottish Gaelic</source>
-        <translation>baurgulu'a</translation>
+        <translation>baurgulu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="107"/>
@@ -1705,7 +1705,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="109"/>
         <source>Gujarati</source>
-        <translation>baurgu'uju</translation>
+        <translation>baurgu&apos;uju</translation>
     </message>
     <message>
         <location filename="../language.cc" line="110"/>
@@ -1715,22 +1715,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="111"/>
         <source>Hausa</source>
-        <translation>banxe'a'u</translation>
+        <translation>banxe&apos;a&apos;u</translation>
     </message>
     <message>
         <location filename="../language.cc" line="112"/>
         <source>Hebrew</source>
-        <translation>banxe'ebu</translation>
+        <translation>banxe&apos;ebu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="113"/>
         <source>Hindi</source>
-        <translation>banxe'inu</translation>
+        <translation>banxe&apos;inu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="114"/>
         <source>Hiri Motu</source>
-        <translation>banxemu'o</translation>
+        <translation>banxemu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="115"/>
@@ -1740,27 +1740,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="116"/>
         <source>Haitian</source>
-        <translation>banxe'atu</translation>
+        <translation>banxe&apos;atu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="117"/>
         <source>Hungarian</source>
-        <translation>banxe'unu</translation>
+        <translation>banxe&apos;unu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="118"/>
         <source>Armenian</source>
-        <translation>banxeje'e</translation>
+        <translation>banxeje&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="119"/>
         <source>Herero</source>
-        <translation>banxe'eru</translation>
+        <translation>banxe&apos;eru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="120"/>
         <source>Interlingua</source>
-        <translation>banginu'a</translation>
+        <translation>banginu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="121"/>
@@ -1770,17 +1770,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="122"/>
         <source>Interlingue</source>
-        <translation>bangilu'e</translation>
+        <translation>bangilu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="123"/>
         <source>Igbo</source>
-        <translation>bangibu'o</translation>
+        <translation>bangibu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="124"/>
         <source>Sichuan Yi</source>
-        <translation>bangi'i'i</translation>
+        <translation>bangi&apos;i&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="125"/>
@@ -1790,7 +1790,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="126"/>
         <source>Ido</source>
-        <translation>bangidu'o</translation>
+        <translation>bangidu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="127"/>
@@ -1800,12 +1800,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="128"/>
         <source>Italian</source>
-        <translation>bangitu'a</translation>
+        <translation>bangitu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="129"/>
         <source>Inuktitut</source>
-        <translation>bangiku'u</translation>
+        <translation>bangiku&apos;u</translation>
     </message>
     <message>
         <location filename="../language.cc" line="130"/>
@@ -1815,37 +1815,37 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="131"/>
         <source>Javanese</source>
-        <translation>banju'avu</translation>
+        <translation>banju&apos;avu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="132"/>
         <source>Georgian</source>
-        <translation>banku'atu</translation>
+        <translation>banku&apos;atu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="133"/>
         <source>Kongo</source>
-        <translation>banku'onu</translation>
+        <translation>banku&apos;onu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="134"/>
         <source>Kikuyu</source>
-        <translation>banku'iku</translation>
+        <translation>banku&apos;iku</translation>
     </message>
     <message>
         <location filename="../language.cc" line="135"/>
         <source>Kwanyama</source>
-        <translation>banku'u'a</translation>
+        <translation>banku&apos;u&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="136"/>
         <source>Kazakh</source>
-        <translation>banku'azu</translation>
+        <translation>banku&apos;azu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="137"/>
         <source>Kalaallisut</source>
-        <translation>banku'alu</translation>
+        <translation>banku&apos;alu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="138"/>
@@ -1855,47 +1855,47 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="139"/>
         <source>Kannada</source>
-        <translation>banku'anu</translation>
+        <translation>banku&apos;anu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="140"/>
         <source>Korean</source>
-        <translation>banku'oru</translation>
+        <translation>banku&apos;oru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="141"/>
         <source>Kanuri</source>
-        <translation>banku'a'u</translation>
+        <translation>banku&apos;a&apos;u</translation>
     </message>
     <message>
         <location filename="../language.cc" line="142"/>
         <source>Kashmiri</source>
-        <translation>banku'asu</translation>
+        <translation>banku&apos;asu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="143"/>
         <source>Kurdish</source>
-        <translation>banku'uru</translation>
+        <translation>banku&apos;uru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="144"/>
         <source>Komi</source>
-        <translation>banku'omu</translation>
+        <translation>banku&apos;omu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="145"/>
         <source>Cornish</source>
-        <translation>bancu'oru</translation>
+        <translation>bancu&apos;oru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="146"/>
         <source>Kirghiz</source>
-        <translation>banku'iru</translation>
+        <translation>banku&apos;iru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="147"/>
         <source>Latin</source>
-        <translation>banlu'atu</translation>
+        <translation>banlu&apos;atu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="148"/>
@@ -1905,37 +1905,37 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="149"/>
         <source>Ganda</source>
-        <translation>banlu'ugu</translation>
+        <translation>banlu&apos;ugu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="150"/>
         <source>Limburgish</source>
-        <translation>banlu'imu</translation>
+        <translation>banlu&apos;imu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="151"/>
         <source>Lingala</source>
-        <translation>banlu'inu</translation>
+        <translation>banlu&apos;inu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="152"/>
         <source>Lao</source>
-        <translation>banlu'a'o</translation>
+        <translation>banlu&apos;a&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="153"/>
         <source>Lithuanian</source>
-        <translation>banlu'itu</translation>
+        <translation>banlu&apos;itu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="154"/>
         <source>Luba-Katanga</source>
-        <translation>banlu'ubu</translation>
+        <translation>banlu&apos;ubu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="155"/>
         <source>Latvian</source>
-        <translation>banlu'avu</translation>
+        <translation>banlu&apos;avu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="156"/>
@@ -1945,12 +1945,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="157"/>
         <source>Marshallese</source>
-        <translation>banmu'axe</translation>
+        <translation>banmu&apos;axe</translation>
     </message>
     <message>
         <location filename="../language.cc" line="158"/>
         <source>Maori</source>
-        <translation>banmuru'i</translation>
+        <translation>banmuru&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="159"/>
@@ -1960,22 +1960,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="160"/>
         <source>Malayalam</source>
-        <translation>banmu'alu</translation>
+        <translation>banmu&apos;alu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="161"/>
         <source>Mongolian</source>
-        <translation>banmu'onu</translation>
+        <translation>banmu&apos;onu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="162"/>
         <source>Marathi</source>
-        <translation>banmu'aru</translation>
+        <translation>banmu&apos;aru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="163"/>
         <source>Malay</source>
-        <translation>banmusu'a</translation>
+        <translation>banmusu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="164"/>
@@ -1985,32 +1985,32 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="165"/>
         <source>Burmese</source>
-        <translation>banmuje'a</translation>
+        <translation>banmuje&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="166"/>
         <source>Nauru</source>
-        <translation>baurnu'a'u</translation>
+        <translation>baurnu&apos;a&apos;u</translation>
     </message>
     <message>
         <location filename="../language.cc" line="167"/>
         <source>Norwegian Bokmal</source>
-        <translation>baurnu'obu</translation>
+        <translation>baurnu&apos;obu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="168"/>
         <source>North Ndebele</source>
-        <translation>baurnudu'e</translation>
+        <translation>baurnudu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="169"/>
         <source>Nepali</source>
-        <translation>baurnu'epu</translation>
+        <translation>baurnu&apos;epu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="170"/>
         <source>Ndonga</source>
-        <translation>baurnudu'o</translation>
+        <translation>baurnudu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="171"/>
@@ -2020,12 +2020,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="172"/>
         <source>Norwegian Nynorsk</source>
-        <translation>baurnunu'o</translation>
+        <translation>baurnunu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="173"/>
         <source>Norwegian</source>
-        <translation>baurnu'oru</translation>
+        <translation>baurnu&apos;oru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="174"/>
@@ -2035,22 +2035,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="175"/>
         <source>Navajo</source>
-        <translation>baurnu'avu</translation>
+        <translation>baurnu&apos;avu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="176"/>
         <source>Chichewa</source>
-        <translation>baurnuje'a</translation>
+        <translation>baurnuje&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="177"/>
         <source>Occitan</source>
-        <translation>bangocu'i</translation>
+        <translation>bangocu&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="178"/>
         <source>Ojibwa</source>
-        <translation>bangoju'i</translation>
+        <translation>bangoju&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="179"/>
@@ -2060,7 +2060,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="180"/>
         <source>Oriya</source>
-        <translation>bangoru'i</translation>
+        <translation>bangoru&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="181"/>
@@ -2070,32 +2070,32 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="182"/>
         <source>Panjabi</source>
-        <translation>banpu'anu</translation>
+        <translation>banpu&apos;anu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="183"/>
         <source>Pali</source>
-        <translation>banpulu'i</translation>
+        <translation>banpulu&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="184"/>
         <source>Polish</source>
-        <translation>banpu'olu</translation>
+        <translation>banpu&apos;olu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="185"/>
         <source>Pashto</source>
-        <translation>banpu'usu</translation>
+        <translation>banpu&apos;usu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="186"/>
         <source>Portuguese</source>
-        <translation>banpu'oru</translation>
+        <translation>banpu&apos;oru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="187"/>
         <source>Quechua</source>
-        <translation>banke'u'e</translation>
+        <translation>banke&apos;u&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="188"/>
@@ -2105,27 +2105,27 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="189"/>
         <source>Kirundi</source>
-        <translation>banru'unu</translation>
+        <translation>banru&apos;unu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="190"/>
         <source>Romanian</source>
-        <translation>banru'onu</translation>
+        <translation>banru&apos;onu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="191"/>
         <source>Russian</source>
-        <translation>banru'usu</translation>
+        <translation>banru&apos;usu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="192"/>
         <source>Kinyarwanda</source>
-        <translation>banku'inu</translation>
+        <translation>banku&apos;inu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="193"/>
         <source>Sanskrit</source>
-        <translation>bansu'anu</translation>
+        <translation>bansu&apos;anu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="194"/>
@@ -2140,12 +2140,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="196"/>
         <source>Northern Sami</source>
-        <translation>bansumu'e</translation>
+        <translation>bansumu&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="197"/>
         <source>Sango</source>
-        <translation>bansu'agu</translation>
+        <translation>bansu&apos;agu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="198"/>
@@ -2155,7 +2155,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="199"/>
         <source>Sinhala</source>
-        <translation>bansu'inu</translation>
+        <translation>bansu&apos;inu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="200"/>
@@ -2170,22 +2170,22 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="202"/>
         <source>Samoan</source>
-        <translation>bansumu'o</translation>
+        <translation>bansumu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="203"/>
         <source>Shona</source>
-        <translation>bansunu'a</translation>
+        <translation>bansunu&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="204"/>
         <source>Somali</source>
-        <translation>bansu'omu</translation>
+        <translation>bansu&apos;omu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="205"/>
         <source>Albanian</source>
-        <translation>bansuke'i</translation>
+        <translation>bansuke&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="206"/>
@@ -2200,17 +2200,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="208"/>
         <source>Southern Sotho</source>
-        <translation>bansu'otu</translation>
+        <translation>bansu&apos;otu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="209"/>
         <source>Sundanese</source>
-        <translation>bansu'unu</translation>
+        <translation>bansu&apos;unu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="210"/>
         <source>Swedish</source>
-        <translation>bansuve'e</translation>
+        <translation>bansuve&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="211"/>
@@ -2220,12 +2220,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="212"/>
         <source>Tamil</source>
-        <translation>bantu'amu</translation>
+        <translation>bantu&apos;amu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="213"/>
         <source>Telugu</source>
-        <translation>bantu'elu</translation>
+        <translation>bantu&apos;elu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="214"/>
@@ -2235,17 +2235,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="215"/>
         <source>Thai</source>
-        <translation>bantuxe'a</translation>
+        <translation>bantuxe&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="216"/>
         <source>Tigrinya</source>
-        <translation>bantu'iru</translation>
+        <translation>bantu&apos;iru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="217"/>
         <source>Turkmen</source>
-        <translation>bantu'uku</translation>
+        <translation>bantu&apos;uku</translation>
     </message>
     <message>
         <location filename="../language.cc" line="218"/>
@@ -2260,37 +2260,37 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="220"/>
         <source>Tonga</source>
-        <translation>bantu'onu</translation>
+        <translation>bantu&apos;onu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Turkish</source>
-        <translation>bantu'uru</translation>
+        <translation>bantu&apos;uru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
         <source>Tsonga</source>
-        <translation>bantusu'o</translation>
+        <translation>bantusu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="223"/>
         <source>Tatar</source>
-        <translation>bantu'atu</translation>
+        <translation>bantu&apos;atu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="224"/>
         <source>Twi</source>
-        <translation>bantuve'i</translation>
+        <translation>bantuve&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="225"/>
         <source>Tahitian</source>
-        <translation>bantu'axe</translation>
+        <translation>bantu&apos;axe</translation>
     </message>
     <message>
         <location filename="../language.cc" line="226"/>
         <source>Uighur</source>
-        <translation>bango'u'i</translation>
+        <translation>bango&apos;u&apos;i</translation>
     </message>
     <message>
         <location filename="../language.cc" line="227"/>
@@ -2310,17 +2310,17 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="230"/>
         <source>Venda</source>
-        <translation>banvu'enu</translation>
+        <translation>banvu&apos;enu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="231"/>
         <source>Vietnamese</source>
-        <translation>banvu'i'e</translation>
+        <translation>banvu&apos;i&apos;e</translation>
     </message>
     <message>
         <location filename="../language.cc" line="232"/>
         <source>Volapuk</source>
-        <translation>banvu'olu</translation>
+        <translation>banvu&apos;olu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="233"/>
@@ -2330,115 +2330,115 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Wolof</source>
-        <translation>banve'olu</translation>
+        <translation>banve&apos;olu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="235"/>
         <source>Xhosa</source>
-        <translation>banxuxe'o</translation>
+        <translation>banxuxe&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="236"/>
         <source>Yiddish</source>
-        <translation>banje'idu</translation>
+        <translation>banje&apos;idu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="237"/>
         <source>Yoruba</source>
-        <translation>banje'oru</translation>
+        <translation>banje&apos;oru</translation>
     </message>
     <message>
         <location filename="../language.cc" line="238"/>
         <source>Zhuang</source>
-        <translation>banzuxe'a</translation>
+        <translation>banzuxe&apos;a</translation>
     </message>
     <message>
         <location filename="../language.cc" line="239"/>
         <source>Chinese</source>
-        <translation>banzuxe'o</translation>
+        <translation>banzuxe&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Zulu</source>
-        <translation>banzu'ulu</translation>
+        <translation>banzu&apos;ulu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="241"/>
         <source>Lojban</source>
-        <translation>banjubu'o</translation>
-    </message>
-    <message>
-        <location filename="../language.cc" line="376"/>
-        <source>Traditional Chinese</source>
-        <translation>banzuxe'o je cu jai cacklu</translation>
+        <translation>banjubu&apos;o</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
-        <source>Simplified Chinese</source>
-        <translation>banzuxe'o je cu sampu</translation>
+        <source>Traditional Chinese</source>
+        <translation>banzuxe&apos;o je cu jai cacklu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
+        <source>Simplified Chinese</source>
+        <translation>banzuxe&apos;o je cu sampu</translation>
+    </message>
+    <message>
+        <location filename="../language.cc" line="379"/>
         <source>Other</source>
         <translation>drata</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Simplified Chinese dialects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Traditional Chinese dialects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Eastern-European languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Western-European languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Russian languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Japanese languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Baltic languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Greek languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Korean dialects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Other Turkish dialects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="389"/>
+        <location filename="../language.cc" line="390"/>
         <source>Other Thai dialects</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../language.cc" line="390"/>
+        <location filename="../language.cc" line="391"/>
         <source>Tamazight</source>
         <translation>.tamazixt.</translation>
     </message>
@@ -2454,7 +2454,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="364"/>
+        <location filename="../main.cc" line="375"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2540,7 +2540,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="392"/>
         <source>&amp;Preferences...</source>
-        <translation>te tcimi'e</translation>
+        <translation>te tcimi&apos;e</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="395"/>
@@ -2571,7 +2571,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="425"/>
         <source>Quit from application</source>
-        <translation>sisti tu'a lo samtci</translation>
+        <translation>sisti tu&apos;a lo samtci</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="428"/>
@@ -2601,12 +2601,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="462"/>
         <source>&amp;Save Article</source>
-        <translation>co'a vreji fi pa notci</translation>
+        <translation>co&apos;a vreji fi pa notci</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>Save Article</source>
-        <translation>co'a vreji fi pa notci</translation>
+        <translation>co&apos;a vreji fi pa notci</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="468"/>
@@ -2626,7 +2626,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="491"/>
         <source>Page Set&amp;up</source>
-        <translation>papri te tcimi'e</translation>
+        <translation>papri te tcimi&apos;e</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="499"/>
@@ -2636,7 +2636,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="507"/>
         <source>&amp;Rescan Files</source>
-        <translation>ca sisku fi lo'i datnyvei</translation>
+        <translation>ca sisku fi lo&apos;i datnyvei</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="510"/>
@@ -2661,7 +2661,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="544"/>
         <source>&amp;Configuration Folder</source>
-        <translation>te tcimi'e datnyveimei</translation>
+        <translation>te tcimi&apos;e datnyveimei</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
@@ -2678,12 +2678,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="563"/>
         <source>&amp;Export</source>
-        <translation>co'a vreji</translation>
+        <translation>co&apos;a vreji</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="571"/>
         <source>&amp;Import</source>
-        <translation>samymo'i</translation>
+        <translation>samymo&apos;i</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="582"/>
@@ -2730,7 +2730,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="630"/>
         <source>GoldenDict reference</source>
-        <translation>djunoi fo tu'a la .goldendikt.</translation>
+        <translation>djunoi fo tu&apos;a la .goldendikt.</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="633"/>
@@ -2745,12 +2745,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="646"/>
         <source>Export</source>
-        <translation>co'a vreji</translation>
+        <translation>co&apos;a vreji</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="651"/>
         <source>Import</source>
-        <translation>samymo'i</translation>
+        <translation>samymo&apos;i</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="656"/>
@@ -2764,7 +2764,7 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.cc" line="1868"/>
         <location filename="../mainwindow.cc" line="4698"/>
         <source>Add current tab to Favorites</source>
-        <translation>pa se vanbi be lo sepli poi ca se cuxna co'a nelci se tcita</translation>
+        <translation>pa se vanbi be lo sepli poi ca se cuxna co&apos;a nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
@@ -2774,7 +2774,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="667"/>
         <source>Export to list</source>
-        <translation>pa liste co'a vreji</translation>
+        <translation>pa liste co&apos;a vreji</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="104"/>
@@ -2799,12 +2799,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="166"/>
         <source>Back</source>
-        <translation>prula'i</translation>
+        <translation>prula&apos;i</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="168"/>
         <source>Forward</source>
-        <translation>bavla'i</translation>
+        <translation>bavla&apos;i</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="193"/>
@@ -2814,7 +2814,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="208"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>vlaba'u pa valsi (Alt+S)</translation>
+        <translation>vlaba&apos;u pa valsi (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="220"/>
@@ -2824,12 +2824,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="226"/>
         <source>Zoom Out</source>
-        <translation>tolba'o</translation>
+        <translation>tolba&apos;o</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="230"/>
         <source>Normal Size</source>
-        <translation>no'e barda</translation>
+        <translation>no&apos;e barda</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="282"/>
@@ -2850,12 +2850,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="355"/>
         <source>Words Zoom Out</source>
-        <translation>ro valsi cu tolba'o</translation>
+        <translation>ro valsi cu tolba&apos;o</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="357"/>
         <source>Words Normal Size</source>
-        <translation>ro valsi cu no'e barda</translation>
+        <translation>ro valsi cu no&apos;e barda</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="365"/>
@@ -2885,12 +2885,12 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.cc" line="455"/>
         <source>Add all tabs to Favorites</source>
-        <translation>ro se vanbi be pa sepli co'a nelci se tcita</translation>
+        <translation>ro se vanbi be pa sepli co&apos;a nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="597"/>
         <source>Loading...</source>
-        <translation>.i ca'o samymo'i</translation>
+        <translation>.i ca&apos;o samymo&apos;i</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="608"/>
@@ -2927,7 +2927,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="1520"/>
         <source>Open Tabs List</source>
-        <translation>liste lo'i ca vanbi poi sepli</translation>
+        <translation>liste lo&apos;i ca vanbi poi sepli</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1578"/>
@@ -2941,12 +2941,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="4706"/>
         <location filename="../mainwindow.cc" line="4733"/>
         <source>Remove current tab from Favorites</source>
-        <translation>pa se vanbi be lo sepli poi ca se cuxna co'u nelci se tcita</translation>
+        <translation>pa se vanbi be lo sepli poi ca se cuxna co&apos;u nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1815"/>
         <source>%1 - %2</source>
-        <translation>zoi zoi. %1 .zoi - la'o zoi. %2 .zoi</translation>
+        <translation>zoi zoi. %1 .zoi - la&apos;o zoi. %2 .zoi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3003"/>
@@ -2986,12 +2986,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3386"/>
         <source>Page Setup</source>
-        <translation>papri te tcimi'e</translation>
+        <translation>papri te tcimi&apos;e</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3387"/>
         <source>No printer is available. Please install one first.</source>
-        <translation>.i no da poi primi'i zo'u tcimi'e fi tu'a da .i ko tcimi'e fi tu'a pa primi'i</translation>
+        <translation>.i no da poi primi&apos;i zo&apos;u tcimi&apos;e fi tu&apos;a da .i ko tcimi&apos;e fi tu&apos;a pa primi&apos;i</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3405"/>
@@ -3011,7 +3011,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3484"/>
         <source>Save Article As</source>
-        <translation>pa drata co'a vreji fi pa notci</translation>
+        <translation>pa drata co&apos;a vreji fi pa notci</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3498"/>
@@ -3021,17 +3021,17 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3499"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>.i nabmi fi pa nu co'a vreji fi pa notci kei fa la'o zoi. %1 .zoi</translation>
+        <translation>.i nabmi fi pa nu co&apos;a vreji fi pa notci kei fa la&apos;o zoi. %1 .zoi</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3560"/>
         <source>Saving article...</source>
-        <translation>.i ca'o co'a vreji fi pa notci</translation>
+        <translation>.i ca&apos;o co&apos;a vreji fi pa notci</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3623"/>
         <source>The main window is set to be always on top.</source>
-        <translation>.i pa ralju be lo'i cankyuidje cu gapru ro da</translation>
+        <translation>.i pa ralju be lo&apos;i cankyuidje cu gapru ro da</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3857"/>
@@ -3042,7 +3042,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3901"/>
         <source>Export history to file</source>
-        <translation>co'a datnyvei fi pa purci</translation>
+        <translation>co&apos;a datnyvei fi pa purci</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3903"/>
@@ -3054,19 +3054,19 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="3942"/>
         <source>History export complete</source>
-        <translation>.i mo'u co'a vreji fi pa purci</translation>
+        <translation>.i mo&apos;u co&apos;a vreji fi pa purci</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3945"/>
         <location filename="../mainwindow.cc" line="4060"/>
         <location filename="../mainwindow.cc" line="4109"/>
         <source>Export error: </source>
-        <translation>.i nabmi fi pa nu co'a vreji </translation>
+        <translation>.i nabmi fi pa nu co&apos;a vreji </translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3963"/>
         <source>Import history from file</source>
-        <translation>samymo'i pa se datnyvei be fi pa purci</translation>
+        <translation>samymo&apos;i pa se datnyvei be fi pa purci</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4012"/>
@@ -3076,7 +3076,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4016"/>
         <source>History import complete</source>
-        <translation>.i mo'u co'a samymo'i pa datni be pa purci</translation>
+        <translation>.i mo&apos;u co&apos;a samymo&apos;i pa datni be pa purci</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4019"/>
@@ -3087,7 +3087,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4036"/>
         <source>Export Favorites to file</source>
-        <translation>co'a datnyvei fi lo'i nelci se tcita</translation>
+        <translation>co&apos;a datnyvei fi lo&apos;i nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4038"/>
@@ -3099,7 +3099,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <location filename="../mainwindow.cc" line="4057"/>
         <location filename="../mainwindow.cc" line="4106"/>
         <source>Favorites export complete</source>
-        <translation>.i mo'u co'a vreji fi lo'i nelci se tcita</translation>
+        <translation>.i mo&apos;u co&apos;a vreji fi lo&apos;i nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4077"/>
@@ -3109,12 +3109,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mainwindow.cc" line="4126"/>
         <source>Import Favorites from file</source>
-        <translation>samymo'i pa se datnyvei be fi lo'i nelci se tcita</translation>
+        <translation>samymo&apos;i pa se datnyvei be fi lo&apos;i nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4151"/>
         <source>Favorites import complete</source>
-        <translation>.i mo'u samymo'i pa datni be lo'i nelci se tcita</translation>
+        <translation>.i mo&apos;u samymo&apos;i pa datni be lo&apos;i nelci se tcita</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="4157"/>
@@ -3162,7 +3162,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../mdx.cc" line="667"/>
         <source>Failed loading article from %1, reason: %2</source>
-        <translation>.i nabmi fi pa nu samymo'i lo notci pe la'o zoi. %1 .zoi kei fa la'o zoi. %2 .zoi</translation>
+        <translation>.i nabmi fi pa nu samymo&apos;i lo notci pe la&apos;o zoi. %1 .zoi kei fa la&apos;o zoi. %2 .zoi</translation>
     </message>
 </context>
 <context>
@@ -3222,7 +3222,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.ui" line="37"/>
         <source>Dictionary order:</source>
-        <translation>porsi fi lo'i vlacku</translation>
+        <translation>porsi fi lo&apos;i vlacku</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="53"/>
@@ -3242,12 +3242,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.ui" line="105"/>
         <source>Total articles:</source>
-        <translation>se zilkancu lo'i notci</translation>
+        <translation>se zilkancu lo&apos;i notci</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="112"/>
         <source>Total words:</source>
-        <translation>se zilkancu lo'i valsi</translation>
+        <translation>se zilkancu lo&apos;i valsi</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="129"/>
@@ -3282,12 +3282,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../orderandprops.cc" line="267"/>
         <source>Sort by name</source>
-        <translation>porsi tu'a lo cmene</translation>
+        <translation>porsi tu&apos;a lo cmene</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="269"/>
         <source>Sort by languages</source>
-        <translation>porsi tu'a lo bangu</translation>
+        <translation>porsi tu&apos;a lo bangu</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="292"/>
@@ -3313,7 +3313,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../preferences.ui" line="14"/>
         <source>Preferences</source>
-        <translation>te tcimi'e</translation>
+        <translation>te tcimi&apos;e</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="47"/>
@@ -3323,17 +3323,17 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <message>
         <location filename="../preferences.ui" line="53"/>
         <source>Startup</source>
-        <translation>co'a katci</translation>
+        <translation>co&apos;a katci</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="59"/>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>.i zmiku lo ka gasnu pa nu la .goldendikt. co'a katci ba ro nu lo samcmu co'a katci</translation>
+        <translation>.i zmiku lo ka gasnu pa nu la .goldendikt. co&apos;a katci ba ro nu lo samcmu co&apos;a katci</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="62"/>
         <source>Start with system</source>
-        <translation>co'a katci ba ro nu lo samcmu co'a katci</translation>
+        <translation>co&apos;a katci ba ro nu lo samcmu co&apos;a katci</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="74"/>
@@ -3436,7 +3436,7 @@ be the last ones.</source>
     <message>
         <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
-        <translation>mipri pa vanbi kajna ca ro nu pa je nai za'u pa da vanbi je cu sepli</translation>
+        <translation>mipri pa vanbi kajna ca ro nu pa je nai za&apos;u pa da vanbi je cu sepli</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="227"/>
@@ -3700,7 +3700,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="890"/>
         <source>Pronunciation</source>
-        <translation>te vlaba'u</translation>
+        <translation>te vlaba&apos;u</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="896"/>
@@ -3750,7 +3750,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="977"/>
         <source>&amp;Network</source>
-        <translation>te samjo'e</translation>
+        <translation>te samjo&apos;e</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="996"/>
@@ -3988,7 +3988,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <location filename="../preferences.ui" line="1577"/>
         <location filename="../preferences.ui" line="1630"/>
         <source>Save every</source>
-        <translation>lo'i nu co'a vreji cu simxu lo ka pa mentu be li</translation>
+        <translation>lo&apos;i nu co&apos;a vreji cu simxu lo ka pa mentu be li</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1594"/>
@@ -4022,53 +4022,70 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>notci</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1689"/>
+        <location filename="../preferences.ui" line="1687"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1692"/>
+        <location filename="../preferences.ui" line="1690"/>
         <source>Collapse articles more than</source>
-        <translation>mipri ro notci poi pa lerpoi be fi ke'a cu se cmima za'u</translation>
+        <translation>mipri ro notci poi pa lerpoi be fi ke&apos;a cu se cmima za&apos;u</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1699"/>
+        <location filename="../preferences.ui" line="1697"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1715"/>
+        <location filename="../preferences.ui" line="1713"/>
+        <location filename="../preferences.ui" line="1763"/>
         <source>symbols</source>
         <translation>lerfu</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1737"/>
-        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <location filename="../preferences.ui" line="1733"/>
+        <source>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1740"/>
-        <source>Ignore diacritics while searching</source>
+        <location filename="../preferences.ui" line="1737"/>
+        <source>Ignore input phrases longer than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1747"/>
-        <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>.i pa nu katci cu rinka pa nu viska ro pagbu be lo notci be'o poi na vajni</translation>
+        <source>Input phrases longer than this size will be ignored</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1750"/>
+        <location filename="../preferences.ui" line="1770"/>
+        <source>Turn this option on to ignore diacritics while searching articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1773"/>
+        <source>Ignore diacritics while searching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1780"/>
+        <source>Turn this option on to always expand optional parts of articles</source>
+        <translation>.i pa nu katci cu rinka pa nu viska ro pagbu be lo notci be&apos;o poi na vajni</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1783"/>
         <source>Expand optional &amp;parts</source>
         <translation>viska ro pagbu poi na vajni</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1773"/>
+        <location filename="../preferences.ui" line="1806"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1777"/>
+        <location filename="../preferences.ui" line="1810"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4109,14 +4126,14 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>la blanu .lingos.</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="622"/>
+        <location filename="../preferences.cc" line="626"/>
         <source>Changing Language</source>
         <translation>basti fi lo ka bangu</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="623"/>
+        <location filename="../preferences.cc" line="627"/>
         <source>Restart the program to apply the language change.</source>
-        <translation>.i pa nu do za'u re'u katcygau lo samtci cu rinka pa nu mo'u basti fi lo ka bangu</translation>
+        <translation>.i pa nu do za&apos;u re&apos;u katcygau lo samtci cu rinka pa nu mo&apos;u basti fi lo ka bangu</translation>
     </message>
 </context>
 <context>
@@ -4124,7 +4141,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../sources.cc" line="1078"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">snavi</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1080"/>
@@ -4197,7 +4214,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <name>QObject</name>
     <message>
         <location filename="../aard.cc" line="449"/>
-        <location filename="../dsl.cc" line="1764"/>
+        <location filename="../dsl.cc" line="1775"/>
         <source>Article loading error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4235,93 +4252,93 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="146"/>
+        <location filename="../ffmpegaudio.cc" line="150"/>
         <source>avformat_alloc_context() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="157"/>
+        <location filename="../ffmpegaudio.cc" line="161"/>
         <source>av_malloc() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="166"/>
+        <location filename="../ffmpegaudio.cc" line="170"/>
         <source>avio_alloc_context() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="183"/>
+        <location filename="../ffmpegaudio.cc" line="187"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="190"/>
+        <location filename="../ffmpegaudio.cc" line="194"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="209"/>
+        <location filename="../ffmpegaudio.cc" line="213"/>
         <source>Could not find audio stream.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="218"/>
-        <location filename="../ffmpegaudio.cc" line="225"/>
+        <location filename="../ffmpegaudio.cc" line="222"/>
+        <location filename="../ffmpegaudio.cc" line="229"/>
         <source>Codec [id: %1] not found.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="231"/>
+        <location filename="../ffmpegaudio.cc" line="235"/>
         <source>avcodec_alloc_context3() failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="240"/>
+        <location filename="../ffmpegaudio.cc" line="244"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="304"/>
+        <location filename="../ffmpegaudio.cc" line="333"/>
         <source>Cannot find usable audio output device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="317"/>
+        <location filename="../ffmpegaudio.cc" line="347"/>
         <source>Unsupported sample format.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="327"/>
+        <location filename="../ffmpegaudio.cc" line="357"/>
         <source>ao_open_live() failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="332"/>
+        <location filename="../ffmpegaudio.cc" line="362"/>
         <source>No driver.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="335"/>
+        <location filename="../ffmpegaudio.cc" line="365"/>
         <source>This driver is not a live output device.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="338"/>
+        <location filename="../ffmpegaudio.cc" line="368"/>
         <source>A valid option key has an invalid value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="341"/>
+        <location filename="../ffmpegaudio.cc" line="371"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="348"/>
+        <location filename="../ffmpegaudio.cc" line="378"/>
         <source>Unknown error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="377"/>
+        <location filename="../ffmpegaudio.cc" line="407"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4346,7 +4363,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../groups_widgets.cc" line="1027"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
-        <translation>sisku fi lo'i vlacku (Ctrl+F)</translation>
+        <translation>sisku fi lo&apos;i vlacku (Ctrl+F)</translation>
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1036"/>
@@ -4362,22 +4379,22 @@ from Stardict, Babylon and GLS dictionaries</source>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="3003"/>
+        <location filename="../articleview.cc" line="2999"/>
         <source>ERROR: %1</source>
-        <translation>.i nabmi fa la'o zoi. %1 .zoi</translation>
+        <translation>.i nabmi fa la&apos;o zoi. %1 .zoi</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3003"/>
+        <location filename="../articleview.cc" line="2999"/>
         <source>Resource saving error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3029"/>
+        <location filename="../articleview.cc" line="3025"/>
         <source>WARNING: %1</source>
-        <translation>.i kajde fi la'o zoi. %1 .zoi</translation>
+        <translation>.i kajde fi la&apos;o zoi. %1 .zoi</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3029"/>
+        <location filename="../articleview.cc" line="3025"/>
         <source>The referenced resource failed to download.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4400,7 +4417,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../russiantranslit.cc" line="107"/>
         <source>Russian Transliteration</source>
-        <translation>banru'usu lerfanva</translation>
+        <translation>banru&apos;usu lerfanva</translation>
     </message>
 </context>
 <context>
@@ -4421,7 +4438,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../scanpopup.ui" line="113"/>
         <source>Back</source>
-        <translation>prula'i</translation>
+        <translation>prula&apos;i</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="116"/>
@@ -4435,12 +4452,12 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../scanpopup.ui" line="127"/>
         <source>Forward</source>
-        <translation>bavla'i</translation>
+        <translation>bavla&apos;i</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="141"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>vlaba'u (Alt+S)</translation>
+        <translation>vlaba&apos;u (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="151"/>
@@ -4479,10 +4496,10 @@ could be resized or managed in other ways.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="713"/>
-        <location filename="../scanpopup.cc" line="1082"/>
+        <location filename="../scanpopup.cc" line="711"/>
+        <location filename="../scanpopup.cc" line="1080"/>
         <source>%1 - %2</source>
-        <translation>zoi zoi. %1 .zoi - la'o zoi. %2 .zoi</translation>
+        <translation>zoi zoi. %1 .zoi - la&apos;o zoi. %2 .zoi</translation>
     </message>
 </context>
 <context>
@@ -4513,7 +4530,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="43"/>
         <source>Paths to search for the dictionary files:</source>
-        <translation>.i sisku lo ka datnyvei fi pa vlacku kei lo'i se judri</translation>
+        <translation>.i sisku lo ka datnyvei fi pa vlacku kei lo&apos;i se judri</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="57"/>
@@ -4548,12 +4565,12 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="106"/>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
-        <translation>.i cupra pa vlacku tu'a lo te snavi pe lo se judri</translation>
+        <translation>.i cupra pa vlacku tu&apos;a lo te snavi pe lo se judri</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="156"/>
         <source>Morphology</source>
-        <translation>vlaturge'a</translation>
+        <translation>vlaturge&apos;a</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="162"/>
@@ -4568,7 +4585,7 @@ could be resized or managed in other ways.</source>
     <message>
         <location filename="../sources.ui" line="187"/>
         <source>Available morphology dictionaries:</source>
-        <translation>vlaturge'a vlacku je cu jai se facki</translation>
+        <translation>vlaturge&apos;a vlacku je cu jai se facki</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="199"/>
@@ -4583,12 +4600,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="224"/>
         <source>Wikipedia</source>
-        <translation>la .uikipedi'as.</translation>
+        <translation>la .uikipedi&apos;as.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="230"/>
         <source>Wikipedia (MediaWiki) sites:</source>
-        <translation>samtcise'u fi la .midiiauikis. to mupli fa la .uikipedi'as. toi</translation>
+        <translation>samtcise&apos;u fi la .midiiauikis. to mupli fa la .uikipedi&apos;as. toi</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="283"/>
@@ -4609,12 +4626,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="347"/>
         <source>DICT servers</source>
-        <translation>samtcise'u fi la .dikt.</translation>
+        <translation>samtcise&apos;u fi la .dikt.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="353"/>
         <source>DICT servers:</source>
-        <translation>samtcise'u fi la .dikt.</translation>
+        <translation>samtcise&apos;u fi la .dikt.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="403"/>
@@ -4634,12 +4651,12 @@ of the appropriate groups to use them.</source>
     <message>
         <location filename="../sources.ui" line="474"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>te vlaba'u fi pa remna je cu se krasi &lt;a href=&quot;http://www.forvo.com/&quot;&gt;la .forvos.&lt;/a&gt; .i fy. samtcise'u da tu'a lo nu lo te vlaba'u co'a vreji je cu gubni .i do kakne lo ka pilno la .goldendikt. tu'a lo nu tirna</translation>
+        <translation>te vlaba&apos;u fi pa remna je cu se krasi &lt;a href=&quot;http://www.forvo.com/&quot;&gt;la .forvos.&lt;/a&gt; .i fy. samtcise&apos;u da tu&apos;a lo nu lo te vlaba&apos;u co&apos;a vreji je cu gubni .i do kakne lo ka pilno la .goldendikt. tu&apos;a lo nu tirna</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="487"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation>katci tu'a lo vlaba'u pe la .forvos.</translation>
+        <translation>katci tu&apos;a lo vlaba&apos;u pe la .forvos.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="517"/>
@@ -4661,17 +4678,17 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="562"/>
         <source>Language codes (comma-separated):</source>
-        <translation>bangu te mintu to sepli fi me'o slaka bu toi</translation>
+        <translation>bangu te mintu to sepli fi me&apos;o slaka bu toi</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="569"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>liste lo'i te mintu be pa bangu poi jai se djica do .i mupli fa zoi zoi. en, ru .zoi</translation>
+        <translation>liste lo&apos;i te mintu be pa bangu poi jai se djica do .i mupli fa zoi zoi. en, ru .zoi</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="592"/>
         <source>Full list of language codes is available &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;here&lt;/a&gt;.</source>
-        <translation>.i &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;da&lt;/a&gt; judri pa liste be lo'i bangu te mintu</translation>
+        <translation>.i &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;da&lt;/a&gt; judri pa liste be lo&apos;i bangu te mintu</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="634"/>
@@ -4681,7 +4698,7 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="655"/>
         <source>Russian transliteration</source>
-        <translation>banru'usu lerfanva</translation>
+        <translation>banru&apos;usu lerfanva</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="666"/>
@@ -4691,12 +4708,12 @@ in the future, or register on the site to get your own key.</source>
     <message>
         <location filename="../sources.ui" line="690"/>
         <source>German transliteration</source>
-        <translation>bandu'e'u lerfanva</translation>
+        <translation>bandu&apos;e&apos;u lerfanva</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="701"/>
         <source>Belarusian transliteration</source>
-        <translation>banbu'elu lerfanva</translation>
+        <translation>banbu&apos;elu lerfanva</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="727"/>
@@ -4790,7 +4807,7 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="204"/>
         <location filename="../sources.cc" line="231"/>
         <source>Choose a directory</source>
-        <translation>cuxna fi lo'i datnyveimei</translation>
+        <translation>cuxna fi lo&apos;i datnyveimei</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="191"/>
@@ -4800,25 +4817,25 @@ Not implemented yet in GoldenDict.</source>
         <location filename="../sources.cc" line="306"/>
         <location filename="../sources.cc" line="330"/>
         <source>Confirm removal</source>
-        <translation>birti tu'a lo du'u vimcu</translation>
+        <translation>birti tu&apos;a lo du&apos;u vimcu</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="192"/>
         <location filename="../sources.cc" line="219"/>
         <source>Remove directory &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>.i xu do djica lo du'u lo datnyveimei poi se judri zoi zoi. &lt;b&gt;%1&lt;/b&gt; .zoi co'u cmima lo se liste</translation>
+        <translation>.i xu do djica lo du&apos;u lo datnyveimei poi se judri zoi zoi. &lt;b&gt;%1&lt;/b&gt; .zoi co&apos;u cmima lo se liste</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="259"/>
         <location filename="../sources.cc" line="283"/>
         <location filename="../sources.cc" line="307"/>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>.i xu do djica lo du'u la'o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi noi kibystu co'u cmima lo se liste</translation>
+        <translation>.i xu do djica lo du&apos;u la&apos;o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi noi kibystu co&apos;u cmima lo se liste</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="331"/>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>.i xu do djica lo du'u la'o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi noi samtci co'u cmima lo se liste</translation>
+        <translation>.i xu do djica lo du&apos;u la&apos;o zoi. &lt;b&gt;%1&lt;/b&gt; .zoi noi samtci co&apos;u cmima lo se liste</translation>
     </message>
 </context>
 <context>
@@ -4849,7 +4866,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.ui" line="84"/>
         <source>Preferences</source>
-        <translation>te tcimi'e</translation>
+        <translation>te tcimi&apos;e</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.ui" line="90"/>
@@ -4899,7 +4916,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
         <source>Confirm removal</source>
-        <translation>birti tu'a lo du'u vimcu</translation>
+        <translation>birti tu&apos;a lo du&apos;u vimcu</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="80"/>
@@ -4990,7 +5007,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../wordlist.cc" line="117"/>
         <source>WARNING: %1</source>
-        <translation>.i kajde fi la'o zoi. %1 .zoi</translation>
+        <translation>.i kajde fi la&apos;o zoi. %1 .zoi</translation>
     </message>
 </context>
 </TS>

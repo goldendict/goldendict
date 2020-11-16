@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_TW">
+<TS version="2.0" language="zh_TW">
 <context>
     <name>About</name>
     <message>
@@ -981,11 +981,11 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Form</source>
-        <translation type="vanished">表單</translation>
+        <translation type="obsolete">表單</translation>
     </message>
     <message>
         <source>Look in</source>
-        <translation type="vanished">尋找於</translation>
+        <translation type="obsolete">尋找於</translation>
     </message>
 </context>
 <context>
@@ -3451,6 +3451,19 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Ignore diacritics while searching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore input phrases longer than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Input phrases longer than this size will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
