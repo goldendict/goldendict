@@ -210,8 +210,8 @@ Preferences::Preferences():
 , confirmFavoritesDeletion( true )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
-, limitInputPhraseLength( true )
-, inputPhraseLengthLimit( 200 )
+, limitInputPhraseLength( false )
+, inputPhraseLengthLimit( 1000 )
 , maxDictionaryRefsInContextMenu ( 20 )
 #ifndef Q_WS_X11
 , trackClipboardChanges( false )

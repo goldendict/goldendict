@@ -1737,7 +1737,7 @@ from mouse-over, selection, clipboard or command line</string>
              <string>Ignore input phrases longer than</string>
             </property>
             <property name="checked">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1753,7 +1753,7 @@ from mouse-over, selection, clipboard or command line</string>
              <number>5</number>
             </property>
             <property name="value">
-             <number>200</number>
+             <number>1000</number>
             </property>
            </widget>
           </item>
