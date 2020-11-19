@@ -210,9 +210,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.confirmFavoritesDeletion->setChecked( p.confirmFavoritesDeletion );
 
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
+  on_collapseBigArticles_toggled( ui.collapseBigArticles->isChecked() );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
+
   ui.limitInputPhraseLength->setChecked( p.limitInputPhraseLength );
+  on_limitInputPhraseLength_toggled( ui.limitInputPhraseLength->isChecked() );
   ui.inputPhraseLengthLimit->setValue( p.inputPhraseLengthLimit );
+
   ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
@@ -651,7 +655,17 @@ void Preferences::customProxyToggled( bool )
 
 void Preferences::on_maxNetworkCacheSize_valueChanged( int value )
 {
-    ui.clearNetworkCacheOnExit->setEnabled( value != 0 );
+  ui.clearNetworkCacheOnExit->setEnabled( value != 0 );
+}
+
+void Preferences::on_collapseBigArticles_toggled( bool checked )
+{
+  ui.articleSizeLimit->setEnabled( checked );
+}
+
+void Preferences::on_limitInputPhraseLength_toggled( bool checked )
+{
+  ui.inputPhraseLengthLimit->setEnabled( checked );
 }
 
 void Preferences::helpRequested()
