@@ -1803,7 +1803,7 @@ from mouse-over, selection, clipboard or command line</string>
              <number>10000</number>
             </property>
             <property name="singleStep">
-             <number>5</number>
+             <number>10</number>
             </property>
             <property name="value">
              <number>1000</number>
