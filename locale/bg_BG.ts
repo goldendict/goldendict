@@ -3428,12 +3428,12 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>Команден ред за старт на аудио-плеера</translation>
     </message>
     <message>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
         <translation>Не показвай изскачащ прозорецо при избиране/копиране на текст в някой от подпрозорците на GoldenDict</translation>
     </message>
     <message>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation>Игнорирайте собствения избор и промени в клипборда на Goldendict</translation>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
+        <translation>Игнорирайте собствения избор и промени в клипборда на GoldenDict</translation>
     </message>
     <message>
         <source>ScanPopup unpinned window flags</source>

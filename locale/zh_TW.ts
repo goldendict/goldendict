@@ -3410,11 +3410,11 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>輸入音訊播放器命令列</translation>
     </message>
     <message>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

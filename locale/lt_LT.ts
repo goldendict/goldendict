@@ -3797,12 +3797,12 @@ po to, kai pasikeis pažymėtas žodis.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation>Nerodyti iškylančio lango, jei keičiasi pažymimas arba kopijuojamas tekstas viename iš Goldendict langų</translation>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
+        <translation>Nerodyti iškylančio lango, jei keičiasi pažymimas arba kopijuojamas tekstas viename iš GoldenDict langų</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
         <translation>Nepaisyti žymėjimo ar kopijavimo pakeitimų GoldenDict languose</translation>
     </message>
     <message>

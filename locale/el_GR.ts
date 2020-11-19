@@ -3824,12 +3824,12 @@ be pressed shortly after the selection is done.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4098,7 +4098,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Προσπαθεί να χρησιμοποιήσει ειδικά μηνύματα του Goldendict για να εντοπίσει 
+        <translation>Προσπαθεί να χρησιμοποιήσει ειδικά μηνύματα του GoldenDict για να εντοπίσει 
 τη λέξη κάτω από τον δείκτη. Λειτουργεί μόνο με προγράμματα που υποστηρίζουν 
 αυτή την τεχνολογία. Αν δεν χρησιμοποιείτε κάποιο από αυτά τα προγράμματα, 
 δεν χρειάζεται να ενεργοποιήσετε την επιλογή.</translation>
@@ -4106,7 +4106,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1476"/>
         <source>Use &amp;GoldenDict message</source>
-        <translation>Χρήση &amp;μηνυμάτων Goldendict</translation>
+        <translation>Χρήση &amp;μηνυμάτων GoldenDict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1486"/>

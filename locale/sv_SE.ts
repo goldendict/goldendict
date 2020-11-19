@@ -3876,13 +3876,13 @@ från Stardict, Babylon och GLS ordböcker</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation>Visa inte popup när markering eller urklipp i en av Goldendicts egna fönsterändringar</translation>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
+        <translation>Visa inte popup när markering eller urklipp i en av GoldenDicts egna fönsterändringar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation>Ignorera Goldendicts egen markering och urklippsförändringar</translation>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
+        <translation>Ignorera GoldenDicts egen markering och urklippsförändringar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="919"/>

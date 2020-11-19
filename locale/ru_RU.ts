@@ -3697,12 +3697,12 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
         <translation>Не показывать всплывающее окно при выделении/копировании текста в одном из собственных окон GoldenDict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
         <translation>Игнорировать выделение/копирование в GoldenDict</translation>
     </message>
     <message>

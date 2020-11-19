@@ -3881,13 +3881,13 @@ dos dicionários Stardict, Babylon e GLS</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation>Não mostrar pop-up quando a seleção ou a área de transferência em uma das janelas do Goldendict mudar</translation>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
+        <translation>Não mostrar pop-up quando a seleção ou a área de transferência em uma das janelas do GoldenDict mudar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation>Ignorar as próprias alterações de seleção e área de transferência do Goldendict</translation>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
+        <translation>Ignorar as próprias alterações de seleção e área de transferência do GoldenDict</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="919"/>

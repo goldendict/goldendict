@@ -3820,13 +3820,13 @@ be pressed shortly after the selection is done.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
-        <translation>在 Goldendict 自身窗口口内选择或进行剪贴板操作时不要弹出窗口</translation>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
+        <translation>在 GoldenDict 自身窗口口内选择或进行剪贴板操作时不要弹出窗口</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation>忽略 Goldendict 自身的选择和剪贴板变更</translation>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
+        <translation>忽略 GoldenDict 自身的选择和剪贴板变更</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="833"/>
