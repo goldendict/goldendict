@@ -944,7 +944,7 @@ Class load() THROW_SPEC( exError )
       c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toInt();
 
     if ( !preferences.namedItem( "limitInputPhraseLength" ).isNull() )
-        c.preferences.limitInputPhraseLength = ( preferences.namedItem( "limitInputPhraseLength" ).toElement().text() == "1" );
+      c.preferences.limitInputPhraseLength = ( preferences.namedItem( "limitInputPhraseLength" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "inputPhraseLengthLimit" ).isNull() )
       c.preferences.inputPhraseLengthLimit = preferences.namedItem( "inputPhraseLengthLimit" ).toElement().text().toInt();
@@ -2322,7 +2322,7 @@ QString getCacheDir() throw()
 
 QString getNetworkCacheDir() throw()
 {
-    return getCacheDir() + "/network";
+  return getCacheDir() + "/network";
 }
 
 }

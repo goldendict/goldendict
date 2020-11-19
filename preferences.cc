@@ -651,7 +651,7 @@ void Preferences::customProxyToggled( bool )
 
 void Preferences::on_maxNetworkCacheSize_valueChanged( int value )
 {
-    ui.clearNetworkCacheOnExit->setEnabled( value != 0 );
+  ui.clearNetworkCacheOnExit->setEnabled( value != 0 );
 }
 
 void Preferences::helpRequested()
