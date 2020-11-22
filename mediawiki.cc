@@ -34,7 +34,11 @@ class MediaWikiDictionary: public Dictionary::Class
   QString url, icon;
   QNetworkAccessManager & netMgr;
   quint32 langId;
+#if __cplusplus > 199711L
+  std::unique_ptr< MediaWikiFactory > factory;
+#else
   std::auto_ptr< MediaWikiFactory > factory;
+#endif
 
 public:
 
