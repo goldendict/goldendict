@@ -493,11 +493,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
 
             // Remove the /wiki/ prefix from links
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<a\\s+href=\"/wiki/" ), "<a href=\"" );
-#else
-            articleString.replace( QRegExp( "<a\\s+href=\"/wiki/" ), "<a href=\"" );
-#endif
+            articleString.replace( "<a href=\"/wiki/", "<a href=\"" );
 
             //fix audio
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
