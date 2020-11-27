@@ -495,14 +495,6 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             // Remove the /wiki/ prefix from links
             articleString.replace( "<a href=\"/wiki/", "<a href=\"" );
 
-            //fix audio
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>" ),
-#else
-            articleString.replace( QRegExp( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
-#endif
-                                            QString::fromStdString(addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + "://\\1\"", this->dictPtr->getId() ) +
-                                            "<a href=\"" + wikiUrl.scheme().toStdString() + "://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>" ) );
             // In those strings, change any underscores to spaces
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpression rxLink( "<a\\s+href=\"[^/:\">#]+" );
