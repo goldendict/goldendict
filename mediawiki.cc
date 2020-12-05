@@ -266,6 +266,8 @@ private:
     Q_UNUSED( textFound )
   }
 
+  virtual bool needNonessentialReplacements() const { return true; }
+
   void processArticle( QString & articleString ) const;
   void appendArticleToData( QString const & articleString );
 
@@ -470,86 +472,90 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
 
   QUrl wikiUrl( url );
   wikiUrl.setPath( "/" );
+  const bool nonessentialReplacements = needNonessentialReplacements();
 
-  // Update any special index.php pages to be absolute
+  if( nonessentialReplacements )
+  {
+    // Update any special index.php pages to be absolute
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  articleString.replace( QRegularExpression( "<a\\shref=\"(/([\\w]*/)*index.php\\?)" ),
-                         QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
+    articleString.replace( QRegularExpression( "<a\\shref=\"(/([\\w]*/)*index.php\\?)" ),
+                           QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
 #else
-  articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
-                         QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
+    articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
+                           QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
 #endif
 
-  // audio tag
+    // audio tag
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression reg1( "<audio\\s.+?</audio>",
-                           QRegularExpression::CaseInsensitiveOption
-                           | QRegularExpression::DotMatchesEverythingOption );
-  QRegularExpression reg2( "<source\\s+src=\"([^\"]+)",
-                           QRegularExpression::CaseInsensitiveOption );
-  pos = 0;
-  it = reg1.globalMatch( articleString );
-  while( it.hasNext() )
-  {
-    QRegularExpressionMatch match = it.next();
-    articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
-    pos = match.capturedEnd();
+    QRegularExpression reg1( "<audio\\s.+?</audio>",
+                             QRegularExpression::CaseInsensitiveOption
+                             | QRegularExpression::DotMatchesEverythingOption );
+    QRegularExpression reg2( "<source\\s+src=\"([^\"]+)",
+                             QRegularExpression::CaseInsensitiveOption );
+    pos = 0;
+    it = reg1.globalMatch( articleString );
+    while( it.hasNext() )
+    {
+      QRegularExpressionMatch match = it.next();
+      articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+      pos = match.capturedEnd();
 
-    QString tag = match.captured();
-    QRegularExpressionMatch match2 = reg2.match( tag );
-    if( match2.hasMatch() )
-    {
-      QString ref = match2.captured( 1 );
-      QString audio_url = "<a href=\"" + ref
-                          + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
-      articleNewString += audio_url;
-    }
-    else
-      articleNewString += match.captured();
-  }
-  if( pos )
-  {
-    articleNewString += articleString.midRef( pos );
-    articleString = articleNewString;
-    articleNewString.clear();
-  }
-#else
-  QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
-  reg1.setMinimal( true );
-  QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
-  pos = 0;
-  for( ; ; )
-  {
-    pos = reg1.indexIn( articleString, pos );
-    if( pos >= 0 )
-    {
-      QString tag = reg1.cap();
-      if( reg2.indexIn( tag ) >= 0 )
+      QString tag = match.captured();
+      QRegularExpressionMatch match2 = reg2.match( tag );
+      if( match2.hasMatch() )
       {
-        QString ref = reg2.cap( 1 );
+        QString ref = match2.captured( 1 );
         QString audio_url = "<a href=\"" + ref
                             + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
-        articleString.replace( pos, tag.length(), audio_url );
+        articleNewString += audio_url;
       }
-      pos += 1;
+      else
+        articleNewString += match.captured();
     }
-    else
-      break;
-  }
-#endif
-  // audio url
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+    if( pos )
+    {
+      articleNewString += articleString.midRef( pos );
+      articleString = articleNewString;
+      articleNewString.clear();
+    }
 #else
-  articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+    QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
+    reg1.setMinimal( true );
+    QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
+    pos = 0;
+    for( ; ; )
+    {
+      pos = reg1.indexIn( articleString, pos );
+      if( pos >= 0 )
+      {
+        QString tag = reg1.cap();
+        if( reg2.indexIn( tag ) >= 0 )
+        {
+          QString ref = reg2.cap( 1 );
+          QString audio_url = "<a href=\"" + ref
+                              + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
+          articleString.replace( pos, tag.length(), audio_url );
+        }
+        pos += 1;
+      }
+      else
+        break;
+    }
 #endif
-                         QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
-                                                               this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
+    // audio url
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+#else
+    articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+#endif
+                           QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
+                                                   this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
 
-  // Add url scheme to image source urls
-  articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );
-  //fix src="/foo/bar/Baz.png"
-  articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
+    // Add url scheme to image source urls
+    articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );
+    //fix src="/foo/bar/Baz.png"
+    articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
+  }
 
   // Remove the /wiki/ prefix from links
   articleString.replace( "<a href=\"/wiki/", "<a href=\"" );
@@ -584,45 +590,48 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
 #endif
                          QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
 
-  // Add url scheme to other urls like  "//xxx"
-  articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
+  if( nonessentialReplacements )
+  {
+    // Add url scheme to other urls like  "//xxx"
+    articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
 
-  // Fix urls in "srcset" attribute
-  pos = 0;
+    // Fix urls in "srcset" attribute
+    pos = 0;
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression regSrcset( " srcset\\s*=\\s*\"/[^\"]+\"" );
-  it = regSrcset.globalMatch( articleString );
-  while( it.hasNext() )
-  {
-    QRegularExpressionMatch match = it.next();
-    articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
-    pos = match.capturedEnd();
+    QRegularExpression regSrcset( " srcset\\s*=\\s*\"/[^\"]+\"" );
+    it = regSrcset.globalMatch( articleString );
+    while( it.hasNext() )
+    {
+      QRegularExpressionMatch match = it.next();
+      articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+      pos = match.capturedEnd();
 
-    QString srcset = match.captured();
+      QString srcset = match.captured();
 #else
-  QRegExp regSrcset( " srcset\\s*=\\s*\"/([^\"]+)\"" );
-  for( ; ; )
-  {
-    pos = regSrcset.indexIn( articleString, pos );
-    if( pos < 0 )
-      break;
-    QString srcset = regSrcset.cap();
+    QRegExp regSrcset( " srcset\\s*=\\s*\"/([^\"]+)\"" );
+    for( ; ; )
+    {
+      pos = regSrcset.indexIn( articleString, pos );
+      if( pos < 0 )
+        break;
+      QString srcset = regSrcset.cap();
 #endif
-    QString newSrcset = srcset.replace( "//", wikiUrl.scheme() + "://" );
+      QString newSrcset = srcset.replace( "//", wikiUrl.scheme() + "://" );
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    articleNewString += newSrcset;
-  }
-  if( pos )
-  {
-    articleNewString += articleString.midRef( pos );
-    articleString = articleNewString;
-    articleNewString.clear();
-  }
+      articleNewString += newSrcset;
+    }
+    if( pos )
+    {
+      articleNewString += articleString.midRef( pos );
+      articleString = articleNewString;
+      articleNewString.clear();
+    }
 #else
-    articleString.replace( pos, regSrcset.cap().size(), newSrcset );
-    pos += newSrcset.size();
-  }
+      articleString.replace( pos, regSrcset.cap().size(), newSrcset );
+      pos += newSrcset.size();
+    }
 #endif
+  }
 }
 
 void MediaWikiArticleRequest::appendArticleToData( QString const & articleString )
@@ -667,6 +676,10 @@ public:
 protected:
 
   virtual bool preprocessArticle( QString & articleString );
+
+  // These replacements are never applicable to Fandom articles in practice
+  // -> disable them to improve performance.
+  virtual bool needNonessentialReplacements() const { return false; }
 };
 
 bool FandomArticleRequest::preprocessArticle( QString & articleString )
