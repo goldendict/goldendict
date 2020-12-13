@@ -814,6 +814,8 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
 
   // Remove absolute height from scrollbox lines to ensure that everything inside
   // the scrollable container is visible and does not overlap the contents below.
+  // The following line occurs multiple times in many (all?) Canon and Legends articles in English Wookieepedia:
+  // <table class="scrollbox" cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tbody><tr><td><div style="height:400px; width:100%;">
   // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
   articleString.replace( QRegExp( "(class=\"scrollbox\"[^\\n]*[^-])height:\\d+px;" ),
                          "\\1" );
@@ -971,6 +973,8 @@ bool SuffixAddingArticleRequest::endsWithPreferableSuffix( wstring const & word 
 /// the Canon or the Legends version of the subject without this indicator.
 void makeEraIconsVisible( QString & article )
 {
+  // The following line occurs once in many (all?) Canon and Legends articles in English Wookieepedia:
+  // <div id="title-eraicons" style="float:right;position:static;display:none">
   // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
   article.replace( QRegExp( "(id=\"title-eraicons\" style=\"[^\"]*)display:none;?" ),
                             "\\1" );
@@ -1022,6 +1026,8 @@ public:
 
       // Detect inactive Legends tab. If found, discard the current article
       // and ask for its Legends version instead.
+      // An example from the "Darth Sidious" Canon article in English Wookieepedia:
+      // <a href="/wiki/Palpatine/Legends" title="Click here for Wookieepedia&#39;s article on the Legends version of this subject."><img alt="Click here for Wookieepedia&#39;s article on the Legends version of this subject." src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" width="170" height="30" data-image-name="Tab-legends-black.png" data-image-key="Tab-legends-black.png" data-src="https://static.wikia.nocookie.net/starwars/images/2/28/Tab-legends-black.png/revision/latest/scale-to-width-down/170?cb=20140430180745" class="lazyload" /></a>
       "title=\"Click here for Wookieepedia&#39;s article on the Legends version of this subject.\"",
 
       // Before searching for the original word, send a request for the word
