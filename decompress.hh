@@ -17,6 +17,8 @@ string decompressBzip2( const char * bufptr, unsigned length );
 string decompressLzma2( const char * bufptr, unsigned length,
                         bool raw_decoder = false );
 
+string decompressZstd( const char * bufptr, unsigned length );
+
 #endif
 
 #endif // DECOMPRESS_HH

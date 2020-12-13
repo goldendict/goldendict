@@ -32,6 +32,8 @@
 #include <QPair>
 #include <QRegExp>
 #include <QProcess>
+#include <QVector>
+#include <QtAlgorithms>
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
@@ -115,8 +117,13 @@ bool indexIsOldOrBad( string const & indexFile )
 
 class SlobFile
 {
+public:
+  typedef QPair< quint64, quint32 > RefEntryOffsetItem;
+  typedef QVector< RefEntryOffsetItem > RefOffsetsVector;
+
+private:
   enum Compressions
-  { UNKNOWN = 0, ZLIB, BZ2, LZMA2 };
+  { UNKNOWN = 0, NONE, ZLIB, BZ2, LZMA2 };
 
   QFile file;
   QString fileName, dictionaryName;
@@ -133,6 +140,7 @@ class SlobFile
   quint32 currentItem;
   quint32 contentTypesCount;
   string currentItemData;
+  RefOffsetsVector refsOffsetVector;
 
   QString readTinyText();
   QString readText();
@@ -181,6 +189,11 @@ public:
   QTextCodec * getCodec() const
   { return codec; }
 
+  const RefOffsetsVector & getSortedRefOffsets();
+
+  void clearRefOffsets()
+  { refsOffsetVector.clear(); }
+
   QString getContentType( quint8 content_id ) const
   { return content_id < contentTypes.size() ? contentTypes[ content_id ] : QString(); }
 
@@ -189,7 +202,9 @@ public:
 
   void open( const QString & name );
 
-  void getRefEntry( quint32 ref_nom, RefEntry & entry );
+  void getRefEntryAtOffset(quint64 offset, RefEntry & entry );
+
+  void getRefEntry(quint32 ref_nom, RefEntry & entry );
 
   quint8 getItem( RefEntry const & entry, string * data );
 };
@@ -305,6 +320,9 @@ QString error( name + ": " );
     else
     if( compr.compare( "lzma2", Qt::CaseInsensitive ) == 0 )
       compression = LZMA2;
+    else
+    if( compr.isEmpty() || compr.compare( "none", Qt::CaseInsensitive ) == 0 )
+      compression = NONE;
 
     // Read tags
 
@@ -373,17 +391,40 @@ QString error( name + ": " );
   throw exCantReadFile( string( error.toUtf8().data() ) );
 }
 
-void SlobFile::getRefEntry( quint32 ref_nom, RefEntry & entry )
+const SlobFile::RefOffsetsVector & SlobFile::getSortedRefOffsets()
 {
-  quint64 pos = refsOffset + ref_nom * sizeof( quint64 );
-  quint64 offset, tmp;
+  quint64 tmp;
+  qint64 size = refsCount * sizeof( quint64 );
+  quint64 base = refsOffset + size;
+
+  refsOffsetVector.clear();
+  refsOffsetVector.reserve( refsCount );
 
   for( ; ; )
   {
-    if( !file.seek( pos ) || file.read( ( char * )&tmp, sizeof( tmp ) ) != sizeof( tmp ) )
-      break;
-    offset = qFromBigEndian( tmp ) + refsOffset + refsCount * sizeof( quint64 );
+    QByteArray offsets;
+    offsets.resize( size );
 
+    if( !file.seek( refsOffset ) || file.read( offsets.data(), size ) != size )
+      break;
+
+    for( quint32 i = 0; i < refsCount; i++ )
+    {
+      memcpy( &tmp, offsets.data() + i * sizeof( quint64 ), sizeof( tmp ) );
+      refsOffsetVector.append( RefEntryOffsetItem( base + qFromBigEndian( tmp ), i ) );
+    }
+
+    qSort( refsOffsetVector );
+    return refsOffsetVector;
+  }
+  QString error = fileName + ": " + file.errorString();
+  throw exCantReadFile( string( error.toUtf8().data() ) );
+}
+
+void SlobFile::getRefEntryAtOffset( quint64 offset, RefEntry & entry )
+{
+  for( ; ; )
+  {
     if( !file.seek( offset ) )
       break;
 
@@ -400,6 +441,26 @@ void SlobFile::getRefEntry( quint32 ref_nom, RefEntry & entry )
     entry.binIndex = qFromBigEndian( binIndex );
 
     entry.fragment = readTinyText();
+
+    return;
+  }
+  QString error = fileName + ": " + file.errorString();
+  throw exCantReadFile( string( error.toUtf8().data() ) );
+}
+
+void SlobFile::getRefEntry( quint32 ref_nom, RefEntry & entry )
+{
+  quint64 pos = refsOffset + ref_nom * sizeof( quint64 );
+  quint64 offset, tmp;
+
+  for( ; ; )
+  {
+    if( !file.seek( pos ) || file.read( ( char * )&tmp, sizeof( tmp ) ) != sizeof( tmp ) )
+      break;
+
+    offset = qFromBigEndian( tmp ) + refsOffset + refsCount * sizeof( quint64 );
+
+    getRefEntryAtOffset( offset, entry );
 
     return;
   }
@@ -455,6 +516,9 @@ quint8 SlobFile::getItem( RefEntry const & entry, string * data )
 
         QByteArray compressedData = file.read( length );
 
+        if( compression == NONE )
+          currentItemData = string( compressedData.data(), compressedData.length() );
+        else
         if( compression == ZLIB )
           currentItemData = decompressZlib( compressedData.data(), length );
         else
@@ -560,6 +624,8 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                               bool ignoreWordsOrder,
                                                               bool ignoreDiacritics );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
+
+    quint64 getArticlePos(uint32_t articleNumber );
 
     virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
 
@@ -1058,6 +1124,16 @@ quint32 SlobDictionary::readArticle( quint32 articleNumber, std::string & result
   return contentId;
 }
 
+quint64 SlobDictionary::getArticlePos( uint32_t articleNumber )
+{
+  RefEntry entry;
+  {
+    Mutex::Lock _( slobMutex );
+    sf.getRefEntry( articleNumber, entry );
+  }
+  return ( ( (quint64)( entry.binIndex ) ) << 32 ) | entry.itemIndex;
+}
+
 void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration )
 {
   if( !( Dictionary::needToRebuildIndex( getDictionaryFilenames(), ftsIdxName )
@@ -1103,23 +1179,25 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
       throw exUserAbort();
 
     QVector< uint32_t > offsets;
-    offsets.resize( setOfOffsets.size() );
-    uint32_t * ptr = &offsets.front();
+    offsets.reserve( setOfOffsets.size() );
 
-    for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
-         it != setOfOffsets.constEnd(); ++it )
+    slobMutex.lock();
+    SlobFile::RefOffsetsVector const & sortedOffsets = sf.getSortedRefOffsets();
+    slobMutex.unlock();
+
+    qint32 entries = sf.getRefsCount();
+    for( qint32 i = 0; i < entries; i++ )
     {
-      *ptr = *it;
-      ptr++;
+      if( setOfOffsets.find( sortedOffsets[ i ].second ) != setOfOffsets.end() )
+        offsets.append( sortedOffsets[ i ].second );
     }
 
     // Free memory
+    sf.clearRefOffsets();
     setOfOffsets.clear();
 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
-
-    qSort( offsets );
 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
@@ -1358,7 +1436,7 @@ void SlobArticleRequest::run()
 
   multimap< wstring, pair< string, string > > mainArticles, alternateArticles;
 
-  set< quint32 > articlesIncluded; // Some synonims make it that the articles
+  set< quint64 > articlesIncluded; // Some synonims make it that the articles
                                     // appear several times. We combat this
                                     // by only allowing them to appear once.
 
@@ -1374,7 +1452,9 @@ void SlobArticleRequest::run()
       return;
     }
 
-    if ( articlesIncluded.find( chain[ x ].articleOffset ) != articlesIncluded.end() )
+    quint64 pos = dict.getArticlePos( chain[ x ].articleOffset ); // Several "articleOffset" values may refer to one article
+
+    if ( articlesIncluded.find( pos ) != articlesIncluded.end() )
       continue; // We already have this article in the body.
 
     // Now grab that article
@@ -1408,7 +1488,7 @@ void SlobArticleRequest::run()
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
       pair< string, string >( headword, articleText ) ) );
 
-    articlesIncluded.insert( chain[ x ].articleOffset );
+    articlesIncluded.insert( pos );
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
@@ -1424,17 +1504,17 @@ void SlobArticleRequest::run()
 
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
-      result += "<h3>";
+      result += "<div class=\"slobdict\"><h3 class=\"slobdict_headword\">";
       result += i->second.first;
-      result += "</h3>";
+      result += "</h3></div>";
       result += i->second.second;
   }
 
   for( i = alternateArticles.begin(); i != alternateArticles.end(); ++i )
   {
-      result += "<h3>";
+      result += "<div class=\"slobdict\"><h3 class=\"slobdict_headword\">";
       result += i->second.first;
-      result += "</h3>";
+      result += "</h3></div>";
       result += i->second.second;
   }
 
@@ -1544,6 +1624,8 @@ void SlobResourceRequest::run()
       QString css = QString::fromUtf8( resource.data(), resource.size() );
       dict.isolateCSS( css, ".slobdict" );
       QByteArray bytes = css.toUtf8();
+
+      Mutex::Lock _( dataMutex );
       data.resize( bytes.size() );
       memcpy( &data.front(), bytes.constData(), bytes.size() );
     }
@@ -1586,6 +1668,7 @@ void SlobResourceRequest::run()
       memcpy( &data.front(), resource.data(), data.size() );
     }
 
+    Mutex::Lock _( dataMutex );
     hasAnyData = true;
   }
   catch( std::exception &ex )
@@ -1662,9 +1745,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           set< quint64 > articlesPos;
           quint32 articleCount = 0, wordCount = 0;
 
+          SlobFile::RefOffsetsVector const & offsets = sf.getSortedRefOffsets();
+
           for( quint32 i = 0; i < entries; i++ )
           {
-            sf.getRefEntry( i, refEntry );
+            sf.getRefEntryAtOffset( offsets[ i ].first, refEntry );
 
             quint8 type = sf.getItem( refEntry, 0 );
 
@@ -1675,9 +1760,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               //Article
               if( maxHeadwordsToExpand && entries > maxHeadwordsToExpand )
-                indexedWords.addSingleWord( gd::toWString( refEntry.key ), i );
+                indexedWords.addSingleWord( gd::toWString( refEntry.key ), offsets[ i ].second );
               else
-                indexedWords.addWord( gd::toWString( refEntry.key ), i );
+                indexedWords.addWord( gd::toWString( refEntry.key ), offsets[ i ].second );
 
               wordCount += 1;
 
@@ -1690,9 +1775,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             }
             else
             {
-              indexedResources.addSingleWord( gd::toWString( refEntry.key ), i );
+              indexedResources.addSingleWord( gd::toWString( refEntry.key ), offsets[ i ].second );
             }
           }
+          sf.clearRefOffsets();
 
           // Build index
 

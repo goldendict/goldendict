@@ -168,7 +168,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
     key = apiKey;
 
   QUrl reqUrl = QUrl::fromEncoded(
-      QString( "http://apifree.forvo.com"
+      QString( "https://apifree.forvo.com"
                "/key/" + key +
                "/action/word-pronunciations"
                "/format/xml"

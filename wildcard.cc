@@ -70,6 +70,11 @@ QString wildcardsToRegexp( const QString & wc_str )
             } else {
                 QString tmp;
                 tmp += c;
+                if( i < wclen && wc[ i ] == QLatin1Char( '!' ) )
+                {
+                  tmp += QLatin1Char( '^' );
+                  ++i;
+                }
                 while( i < wclen && wc[ i ] != QLatin1Char( ']' ) ) {
                     if( wc[ i ] == QLatin1Char( '\\' ) )
                         tmp += QLatin1Char( '\\' );

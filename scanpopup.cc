@@ -2,8 +2,6 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "scanpopup.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>
@@ -30,6 +28,17 @@ static const Qt::WindowFlags defaultUnpinnedWindowFlags =
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
+#endif
+;
+
+static const Qt::WindowFlags pinnedWindowFlags =
+#ifdef HAVE_X11
+/// With the Qt::Dialog flag, scan popup is always on top of the main window
+/// on Linux/X11 with Qt 4, Qt 5 since version 5.12.1 (QTBUG-74309).
+/// Qt::Window allows to use the scan popup and the main window independently.
+Qt::Window
+#else
+Qt::Dialog
 #endif
 ;
 
@@ -186,7 +195,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   if ( cfg.pinPopupWindow )
   {
     dictionaryBar.setMovable( true );
-    Qt::WindowFlags flags = Qt::Dialog;
+    Qt::WindowFlags flags = pinnedWindowFlags;
     if( cfg.popupWindowAlwaysOnTop )
       flags |= Qt::WindowStaysOnTopHint;
     setWindowFlags( flags );
@@ -483,7 +492,7 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 
 void ScanPopup::translateWord( QString const & word )
 {
-  QString str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( word ) ) ).simplified();
+  QString str = pendingInputWord = cfg.preferences.sanitizeInputPhrase( word );
 
   if ( !str.size() )
     return; // Nothing there
@@ -547,7 +556,7 @@ void ScanPopup::mouseHovered( QString const & str, bool forcePopup )
 
 void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
 {
-  QString sanitizedStr = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
+  QString sanitizedStr = cfg.preferences.sanitizeInputPhrase( str );
 
   if ( isVisible() && sanitizedStr == inputWord )
   {
@@ -1063,7 +1072,7 @@ void ScanPopup::pinButtonClicked( bool checked )
     uninterceptMouse();
 
     ui.onTopButton->setVisible( true );
-    Qt::WindowFlags flags = Qt::Dialog;
+    Qt::WindowFlags flags = pinnedWindowFlags;
     if( ui.onTopButton->isChecked() )
       flags |= Qt::WindowStaysOnTopHint;
     setWindowFlags( flags );

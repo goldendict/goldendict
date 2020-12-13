@@ -2,6 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "config.hh"
+#include "folding.hh"
+#include "wstring_qt.hh"
 #include <QDir>
 #include <QFile>
 #include <QtXml>
@@ -20,14 +22,25 @@
 #include "atomic_rename.hh"
 #include "qt4x5.hh"
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#include <QStandardPaths>
+#else
+#include <QDesktopServices>
+#endif
+
 namespace Config {
 
 namespace
 {
+  QString portableHomeDirPath()
+  {
+    return QCoreApplication::applicationDirPath() + "/portable";
+  }
+
   QDir getHomeDir()
   {
     if ( isPortableVersion() )
-      return QDir( QCoreApplication::applicationDirPath() + "/portable" );
+      return QDir( portableHomeDirPath() );
 
     QDir result;
 
@@ -140,6 +153,17 @@ ScanPopupWindowFlags spwfFromInt( int id )
   return SPWF_default;
 }
 
+QString Preferences::sanitizeInputPhrase( QString const & inputPhrase ) const
+{
+  if( limitInputPhraseLength && inputPhrase.size() > inputPhraseLengthLimit )
+  {
+    gdWarning( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
+               inputPhrase.size(), inputPhraseLengthLimit );
+    return QString();
+  }
+  return gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( inputPhrase ) ) ).simplified();
+}
+
 Preferences::Preferences():
   newTabsOpenAfterCurrentOne( false ),
   newTabsOpenInBackground( true ),
@@ -186,6 +210,8 @@ Preferences::Preferences():
   disallowContentFromOtherSites( false ),
   enableWebPlugins( false ),
   hideGoldenDictHeader( false ),
+  maxNetworkCacheSize( 50 ),
+  clearNetworkCacheOnExit( true ),
   zoomFactor( 1 ),
   helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
@@ -197,6 +223,8 @@ Preferences::Preferences():
 , confirmFavoritesDeletion( true )
 , collapseBigArticles( false )
 , articleSizeLimit( 2000 )
+, limitInputPhraseLength( false )
+, inputPhraseLengthLimit( 1000 )
 , maxDictionaryRefsInContextMenu ( 20 )
 #ifndef Q_WS_X11
 , trackClipboardChanges( false )
@@ -464,6 +492,7 @@ Class load() THROW_SPEC( exError )
     c.mediawikis = makeDefaultMediaWikis( true );
     c.webSites = makeDefaultWebSites();
     c.dictServers = makeDefaultDictServers();
+    c.programs = makeDefaultPrograms();
 
     // Check if we have a template config file. If we do, load it instead
 
@@ -661,7 +690,9 @@ Class load() THROW_SPEC( exError )
     }
   }
   else
+  {
     c.programs = makeDefaultPrograms();
+  }
 
   QDomNode mws = root.namedItem( "mediawikis" );
 
@@ -885,6 +916,12 @@ Class load() THROW_SPEC( exError )
     if ( !preferences.namedItem( "hideGoldenDictHeader" ).isNull() )
       c.preferences.hideGoldenDictHeader = ( preferences.namedItem( "hideGoldenDictHeader" ).toElement().text() == "1" );
 
+    if ( !preferences.namedItem( "maxNetworkCacheSize" ).isNull() )
+      c.preferences.maxNetworkCacheSize = preferences.namedItem( "maxNetworkCacheSize" ).toElement().text().toInt();
+
+    if ( !preferences.namedItem( "clearNetworkCacheOnExit" ).isNull() )
+      c.preferences.clearNetworkCacheOnExit = ( preferences.namedItem( "clearNetworkCacheOnExit" ).toElement().text() == "1" );
+
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
 
@@ -910,7 +947,13 @@ Class load() THROW_SPEC( exError )
       c.preferences.collapseBigArticles = ( preferences.namedItem( "collapseBigArticles" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "articleSizeLimit" ).isNull() )
-      c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toUInt() ;
+      c.preferences.articleSizeLimit = preferences.namedItem( "articleSizeLimit" ).toElement().text().toInt();
+
+    if ( !preferences.namedItem( "limitInputPhraseLength" ).isNull() )
+      c.preferences.limitInputPhraseLength = ( preferences.namedItem( "limitInputPhraseLength" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "inputPhraseLengthLimit" ).isNull() )
+      c.preferences.inputPhraseLengthLimit = preferences.namedItem( "inputPhraseLengthLimit" ).toElement().text().toInt();
 
     if ( !preferences.namedItem( "maxDictionaryRefsInContextMenu" ).isNull() )
       c.preferences.maxDictionaryRefsInContextMenu = preferences.namedItem( "maxDictionaryRefsInContextMenu" ).toElement().text().toUShort();
@@ -1841,6 +1884,14 @@ void save( Class const & c ) THROW_SPEC( exError )
     opt.appendChild( dd.createTextNode( c.preferences.hideGoldenDictHeader ? "1" : "0" ) );
     preferences.appendChild( opt );
 
+    opt = dd.createElement( "maxNetworkCacheSize" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxNetworkCacheSize ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "clearNetworkCacheOnExit" );
+    opt.appendChild( dd.createTextNode( c.preferences.clearNetworkCacheOnExit ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
     opt = dd.createElement( "maxStringsInHistory" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxStringsInHistory ) ) );
     preferences.appendChild( opt );
@@ -1863,6 +1914,14 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "articleSizeLimit" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.articleSizeLimit ) ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "limitInputPhraseLength" );
+    opt.appendChild( dd.createTextNode( c.preferences.limitInputPhraseLength ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "inputPhraseLengthLimit" );
+    opt.appendChild( dd.createTextNode( QString::number( c.preferences.inputPhraseLengthLimit ) ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxDictionaryRefsInContextMenu" );
@@ -2220,7 +2279,7 @@ bool isPortableVersion() throw()
   {
     bool isPortable;
 
-    IsPortable(): isPortable( QFileInfo( QCoreApplication::applicationDirPath() + "/portable" ).isDir() )
+    IsPortable(): isPortable( QFileInfo( portableHomeDirPath() ).isDir() )
     {}
   };
 
@@ -2255,6 +2314,21 @@ QString getStylesDir() throw()
     return QString();
 
   return result.path() + QDir::separator();
+}
+
+QString getCacheDir() throw()
+{
+  return isPortableVersion() ? portableHomeDirPath() + "/cache"
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+                             : QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
+#else
+                             : QDesktopServices::storageLocation( QDesktopServices::CacheLocation );
+#endif
+}
+
+QString getNetworkCacheDir() throw()
+{
+  return getCacheDir() + "/network";
 }
 
 }

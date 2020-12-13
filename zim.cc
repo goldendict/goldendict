@@ -72,7 +72,7 @@ class ZimFile;
 
 enum CompressionType
 {
-  Default = 0, None, Zlib, Bzip2, Lzma2
+  Default = 0, None, Zlib, Bzip2, Lzma2, Zstd
 };
 
 /// Zim file header
@@ -191,6 +191,7 @@ private:
   ZIM_header zimHeader;
   Cache cache[ CACHE_SIZE ];
   int stamp;
+  QVector< QPair< quint64, quint32 > > clusterOffsets;
 
   void clearCache();
 };
@@ -270,6 +271,27 @@ bool ZimFile::open()
   if( read( reinterpret_cast< char * >( &zimHeader ), sizeof( zimHeader ) ) != sizeof( zimHeader ) )
     return false;
 
+// Clusters in zim file may be placed in random order.
+// We create sorted offsets list to calculate clusters size.
+
+  clusterOffsets.resize( zimHeader.clusterCount );
+  QVector< quint64 > offs;
+  offs.resize( zimHeader.clusterCount );
+
+  seek( zimHeader.clusterPtrPos );
+  qint64 size = zimHeader.clusterCount * sizeof( quint64 );
+  if( read( reinterpret_cast< char * >( offs.data() ), size) != size )
+  {
+    vector< string > names;
+    getFilenames( names );
+    throw exCantReadFile( names[ 0 ] );
+  }
+
+  for( quint32 i = 0; i < zimHeader.clusterCount; i++ )
+    clusterOffsets[ i ] = QPair< quint64, quint32 >( offs.at( i ), i );
+
+  qSort( clusterOffsets );
+
   return true;
 }
 
@@ -312,24 +334,25 @@ string ZimFile::getClusterData( quint32 cluster_nom )
 
   // Cache miss, read data from file
 
-  // Read cluster pointers
-
-  quint64 clusters[ 2 ];
-  seek( zimHeader.clusterPtrPos + cluster_nom * 8 );
-  if( read( reinterpret_cast< char * >( clusters ), sizeof(clusters) ) != sizeof(clusters) )
-    return string();
-
   // Calculate cluster size
 
   quint64 clusterSize;
-  if( cluster_nom < zimHeader.clusterCount - 1 )
-    clusterSize = clusters[ 1 ] - clusters[ 0 ];
+  quint32 nom;
+  for( nom = 0; nom < zimHeader.clusterCount; nom++ )
+    if( clusterOffsets.at( nom ).second == cluster_nom )
+      break;
+
+  if( nom >= zimHeader.clusterCount ) // Invalid cluster nom
+    return string();
+
+  if( nom < zimHeader.clusterCount - 1 )
+    clusterSize = clusterOffsets.at( nom + 1 ).first - clusterOffsets.at( nom ).first;
   else
-    clusterSize = size() - clusters[ 0 ];
+    clusterSize = size() - clusterOffsets.at( nom ).first;
 
   // Read cluster data
 
-  seek( clusters[ 0 ] );
+  seek( clusterOffsets.at( nom ).first );
 
   char compressionType;
   if( !getChar( &compressionType ) )
@@ -351,6 +374,12 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   if( compressionType == Lzma2 )
     decompressedData = decompressLzma2( data.constData(), data.size() );
   else
+  if( compressionType == Zstd )
+    decompressedData = decompressZstd( data.constData(), data.size() );
+  else
+    return string();
+
+  if( decompressedData.empty() )
     return string();
 
   // Check BLOBs number in the cluster
@@ -1446,6 +1475,8 @@ void ZimResourceRequest::run()
       QString css = QString::fromUtf8( resource.data(), resource.size() );
       dict.isolateCSS( css, ".zimdict" );
       QByteArray bytes = css.toUtf8();
+
+      Mutex::Lock _( dataMutex );
       data.resize( bytes.size() );
       memcpy( &data.front(), bytes.constData(), bytes.size() );
     }
@@ -1488,6 +1519,7 @@ void ZimResourceRequest::run()
       memcpy( &data.front(), resource.data(), data.size() );
     }
 
+    Mutex::Lock _( dataMutex );
     hasAnyData = true;
   }
   catch( std::exception &ex )

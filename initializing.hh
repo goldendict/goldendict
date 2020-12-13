@@ -7,6 +7,26 @@
 #include <QDialog>
 #include "ui_initializing.h"
 
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+
+#include <QtWidgets/QStyleFactory>
+
+class WindowsStyle {
+public:
+  /// The class is a singleton.
+  static WindowsStyle & instance();
+
+  QStyle * getStyle()
+  { return style; }
+
+private:
+  WindowsStyle();
+
+  QStyle * style;
+};
+
+#endif
+
 class Initializing: public QDialog
 {
   Q_OBJECT
@@ -27,7 +47,7 @@ private:
   virtual void closeEvent( QCloseEvent * );
   virtual void reject();
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
-  QStyle * barStyle, * oldBarStyle;
+  QStyle * oldBarStyle;
 #endif
 
   Ui::Initializing ui;

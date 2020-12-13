@@ -1323,13 +1323,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     list < wstring > keys;
                     while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
                     {
-                      stream.readNext();
-                      // abbreviations tag set switch at format revision = 30 
+                      if( !stream.readNextStartElement() )
+                        break;
+                      // abbreviations tag set switch at format revision = 30
                       if( idxHeader.revisionNumber >= 30 )
                       {
                         while ( !( stream.isEndElement() && stream.name() == "abbr_def" ) || !stream.atEnd() )
                         {
-                          stream.readNext();
                           if ( stream.isStartElement() && stream.name() == "abbr_k" )
                           {
                             s = readElementText( stream );
@@ -1347,13 +1347,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                           }
                           else if ( stream.isEndElement() && stream.name() == "abbreviations" )
                             break;
+                          stream.readNext();
                         }
                       }
                       else
                       {
                         while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
                         {
-                          stream.readNext();
                           if ( stream.isStartElement() && stream.name() == "k" )
                           {
                             s = readElementText( stream );
@@ -1371,6 +1371,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                           }
                           else if ( stream.isEndElement() && stream.name() == "abbreviations" )
                             break;
+                          stream.readNext();
                         }
                       }
                     }

@@ -11,6 +11,8 @@ namespace Filetype {
 
 using std::string;
 
+/// Removes any trailing or leading spaces and may lowercases the string.
+string simplifyString( string const & str, bool lowercase = true );
 /// Returns true if the name resembles the one of a sound file (i.e. ends
 /// with .wav, .ogg and such).
 bool isNameOfSound( string const & );
