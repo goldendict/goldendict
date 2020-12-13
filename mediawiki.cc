@@ -817,7 +817,7 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
   // The following line occurs multiple times in many (all?) Canon and Legends articles in English Wookieepedia:
   // <table class="scrollbox" cellpadding="0" cellspacing="0" border="0" style="width:100%;"><tbody><tr><td><div style="height:400px; width:100%;">
   // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
-  articleString.replace( QRegExp( "(class=\"scrollbox\"[^\\n]*[^-])height:\\d+px;" ),
+  articleString.replace( QRegExp( "(<table class=\"scrollbox\"[^\\n]*[^-])height:\\d+px; ?" ),
                          "\\1" );
 
   return true;
