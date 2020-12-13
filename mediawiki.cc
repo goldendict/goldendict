@@ -671,30 +671,146 @@ protected:
 
 bool FandomArticleRequest::preprocessArticle( QString & articleString )
 {
-  // Remove the apparently unused style class from links. This class attribute
-  // prevents essential MediaWikiArticleRequest::processArticle() replacements
-  // that start with "<a\\s+href" or "<a href". For example, when the
-  // "fix file: url" replacement is not triggered for book cover and film poster
-  // image links, they become broken links.
-  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
-  articleString.replace( QRegExp( "<a class=\"image lightbox\"" ), "<a" );
+  QRegExp minimalRegExp;
+  minimalRegExp.setMinimal( true );
 
   // Lazy loading does not work in goldendict -> display these images
   // by switching to the simpler alternative format under <noscript> tag.
-  const QString lzyImgTag = "<img\\s[^>]+lzy lzyPlcHld[^>]+>";
-  const QString noscriptImgTag = "<noscript>\\s*(<img\\s[^<]+)</noscript>";
-  #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    articleString.replace( QRegularExpression( lzyImgTag + "\\s*" + noscriptImgTag ), "\\1" );
-    articleString.replace( QRegularExpression( noscriptImgTag + "\\s*" + lzyImgTag ), "\\1" );
-  #else
-    articleString.replace( QRegExp( lzyImgTag + "\\s*" + noscriptImgTag ), "\\1" );
-    articleString.replace( QRegExp( noscriptImgTag + "\\s*" + lzyImgTag ), "\\1" );
-  #endif
+  const QString lazyImgTag = "<img [^>]*class=\"thumbimage lazyload\"[^>]*>";
 
-  // audio url
+  // This "/wiki/File:..." link leads to the entire article, not the image that
+  // the user clicks on -> replace it with the img src link edited by removing the
+  // "scale-to-width-down" argument so as to show the full-size image in a browser.
+  // This regular expression takes care to preserve the "path-prefix=de" part of
+  // the link without which some links break.
+  // An example from the "Star Wars: Episode I The Phantom Menace" article in English Wookieepedia:
+  // <a class="image lightbox" href="/wiki/File:Farewell_to_Jira.JPG" title="Farewell to Jira.JPG (23 KB)" style="height:50px; width:120px;"><noscript><img style="" src="https://static.wikia.nocookie.net/starwars/images/e/e3/Farewell_to_Jira.JPG/revision/latest/scale-to-width-down/120?cb=20060605192302" title="Farewell to Jira.JPG (23 KB)" class="thumbimage" alt="Farewell to Jira" data-image-name="Farewell to Jira.JPG" data-image-key="Farewell_to_Jira.JPG" data-caption="Farewell to Jira"></noscript><img style="" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" title="Farewell to Jira.JPG (23 KB)" class="thumbimage lazyload" alt="Farewell to Jira" data-image-name="Farewell to Jira.JPG" data-image-key="Farewell_to_Jira.JPG" data-caption="Farewell to Jira" data-src="https://static.wikia.nocookie.net/starwars/images/e/e3/Farewell_to_Jira.JPG/revision/latest/scale-to-width-down/120?cb=20060605192302" /></a>
+  // A different example from the "Episode IX – Der Aufstieg Skywalkers" article in https://jedipedia.fandom.com (German):
+  // <a class="image lightbox" href="/wiki/Datei:The_Rise_of_Skywalker_Poster_D23_Expo.jpg" title="The Rise of Skywalker Poster D23 Expo.jpg (130 KB)" style="height:184px; width:124px;"><noscript><img style="" src="https://static.wikia.nocookie.net/jedipedia/images/6/6d/The_Rise_of_Skywalker_Poster_D23_Expo.jpg/revision/latest/scale-to-width-down/125?cb=20190824210240&amp;path-prefix=de" title="The Rise of Skywalker Poster D23 Expo.jpg (130 KB)" class="thumbimage" alt="The Rise of Skywalker Poster D23 Expo" data-image-name="The Rise of Skywalker Poster D23 Expo.jpg" data-image-key="The_Rise_of_Skywalker_Poster_D23_Expo.jpg"></noscript><img style="" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" title="The Rise of Skywalker Poster D23 Expo.jpg (130 KB)" class="thumbimage lazyload" alt="The Rise of Skywalker Poster D23 Expo" data-image-name="The Rise of Skywalker Poster D23 Expo.jpg" data-image-key="The_Rise_of_Skywalker_Poster_D23_Expo.jpg" data-src="https://static.wikia.nocookie.net/jedipedia/images/6/6d/The_Rise_of_Skywalker_Poster_D23_Expo.jpg/revision/latest/scale-to-width-down/125?cb=20190824210240&amp;path-prefix=de" /></a>
   // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
-  articleString.replace( QRegExp( "<a href=(\"https://vignette.wikia.nocookie.net/[^\"]+\\.ogg)(/revision/latest)?(\\?cb=\\d+)?\"" ),
-                         QString::fromStdString( addAudioLink( "\\1\"", this->dictPtr->getId() ) + "<a href=\\1\"" ) );
+  articleString.replace( QRegExp( "<a class=\"image lightbox\" href=\"/wiki/[^\"]+\"([^>]*>)"
+                                  "\\s*<noscript>\\s*(<img [^>]*src=)(\"[^\"]+/revision/latest)"
+                                  "(/scale-to-width-down/\\d+)?([^\"]*\")([^>]+>)\\s*</noscript>\\s*"
+                                  + lazyImgTag ),
+                         "<a href=\\3\\5\\1\\2\\3\\4\\5\\6" );
+
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // <a href="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest?cb=20190413205440" class="image"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" width="150" height="158" class="thumbimage lazyload" data-image-name="SwKOTOR25cropped.jpg" data-image-key="SwKOTOR25cropped.jpg" data-src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" /></a> 	<noscript><a href="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest?cb=20190413205440" class="image"><img alt="" src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" decoding="async" width="150" height="158" class="thumbimage" data-image-name="SwKOTOR25cropped.jpg" data-image-key="SwKOTOR25cropped.jpg" data-src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" /></a></noscript>
+  QString lazyLinkNoscript = "<a [^>]*class=\"image\">\\s*" + lazyImgTag
+                              + "\\s*</a>\\s*<noscript>(.*?)</noscript>";
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  articleString.replace( QRegularExpression( lazyLinkNoscript ), "\\1" );
+#else
+  minimalRegExp.setPattern( lazyLinkNoscript.remove( '?' ) );
+  articleString.replace( minimalRegExp, "\\1" );
+#endif
+
+  // data-src -> src for images of class="lazyload" to make era icons and other small icons visible.
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // <img alt="SWAJsmall.jpg" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" width="47" height="15" data-image-name="SWAJsmall.jpg" data-image-key="SWAJsmall.jpg" data-src="https://static.wikia.nocookie.net/starwars/images/e/ee/SWAJsmall.jpg/revision/latest/scale-to-width-down/47?cb=20070219044103" class="lazyload" />
+  const QString dataSrcLazyloadTag = " src=\"data:[^\"]*\"([^>]* )data-(src=\"[^\"]+\") class=\"lazyload\"";
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  articleString.replace( QRegularExpression( dataSrcLazyloadTag ),
+#else
+  articleString.replace( QRegExp( dataSrcLazyloadTag ),
+#endif
+                         "\\1\\2" );
+
+  // This "info-icon" link shows up in GoldenDict as a large empty space under
+  // most images -> remove it for compactness.
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // <a href="/wiki/File:AnakinShmi.jpg" class="info-icon"><svg><use xlink:href="#wds-icons-info-small"></use></svg></a>
+  QString infoIconTag = "<a [^>]*class=\"info-icon\">.*?</a>";
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  articleString.remove( QRegularExpression( infoIconTag ) );
+#else
+  minimalRegExp.setPattern( infoIconTag.remove( '?' ) );
+  articleString.remove( minimalRegExp );
+#endif
+
+  // The "wds-icon..." image inside this "wds-button..." link shows up in GoldenDict as a large
+  // empty space under a sequence of images -> remove the entire useless button as clicking on
+  // the link has no effect, and editing articles in GoldenDict does not make sense anyway.
+  // An example from the "Star Wars: Episode I The Phantom Menace" article in English Wookieepedia:
+  // <a class="wds-button wikia-photogallery-add"><svg class="wds-icon wds-icon-tiny"><use xlink:href="#wds-icons-image-small"></use></svg><span>Add a photo to this gallery</span></a>
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  minimalRegExp.setPattern( "<a class=\"wds-button wikia-photogallery-add\">.*</a>" );
+  articleString.remove( minimalRegExp );
+
+  // The "wds-icon..." image inside this "mw-editsection" span shows up in GoldenDict
+  // as a large empty space above most captions -> remove the entire useless span as
+  // the final GoldenDict's versions of the links uselessly point to the current
+  // article, and editing articles in GoldenDict does not make sense anyway.
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // <span class="mw-editsection"><span class="mw-editsection-bracket">[</span><a href="/wiki/Anakin_Skywalker/Legends?veaction=edit&amp;section=3" class="mw-editsection-visualeditor" title="Edit section: Early life">edit</a><span class="mw-editsection-divider"> | </span><a href="/wiki/Anakin_Skywalker/Legends?action=edit&amp;section=3" title="Edit section: Early life"><svg class="wds-icon wds-icon-tiny section-edit-pencil-icon"><use xlink:href="#wds-icons-pencil-tiny"></use></svg>edit source</a><span class="mw-editsection-bracket">]</span></span>
+  // Have to remove the entire span in two steps - first the inner spans, then the
+  // outer one, because the nested span tags are closed in the same way: "</span>".
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  articleString.remove( QRegExp( "<span class=\"mw-editsection-[^<]*</span>" ) );
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  minimalRegExp.setPattern( "<span class=\"mw-editsection\".*</span>" );
+  articleString.remove( minimalRegExp );
+
+  // Detect most audio links. This replacement chops the "/revision..." ending of the
+  // audio link beyond the audio file extension (usually or even always ".ogg") before
+  // passing the link to addAudioLink(). Otherwise, triggering the Pronounce Word
+  // action loads the audio file in a browser instead of playing it in GoldenDict.
+  // The "/wiki/Media:..." button links are broken and the "...Quote-audio.png..."
+  // button link leads to an uninteresting audio button image -> replace them with the
+  // link that is passed to addAudioLink(). Leave the "Listen" (and "Hear Han Solo")
+  // links intact to give the user an option of loading the audio file in a browser.
+  // NOTE: the examples for this replacement have been modified by the earlier
+  // {data-src -> src for images of class="lazyload"} replacement.
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // <a href="/wiki/Media:TheChoiceIsYours-TPM.ogg" title="(audio)"><img alt="(audio)" decoding="async" width="20" height="20" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/20?cb=20200426203158" /></a> <a href="https://static.wikia.nocookie.net/starwars/images/4/47/TheChoiceIsYours-TPM.ogg/revision/latest?cb=20090917130644" class="internal" title="TheChoiceIsYours-TPM.ogg">Listen</a>
+  // A different example from the "Obi-Wan Kenobi/Legends" article in English Wookieepedia:
+  // <a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20200426203158" class="image" title="(audio)"><img alt="(audio)" decoding="async" width="20" height="20" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/20?cb=20200426203158" /></a> <a href="https://static.wikia.nocookie.net/starwars/images/1/1f/BadFeelingAboutThis-TPM.ogg/revision/latest?cb=20090918153842" class="internal" title="BadFeelingAboutThis-TPM.ogg">Listen</a>
+  // A very rare (unique?) two-line example from the "Han Solo/Legends" article in English Wookieepedia:
+  /* <a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20200426203158" class="image" title="(audio)"><img alt="(audio)" decoding="async" width="30" height="30" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/30?cb=20200426203158" /></a>
+<a href="https://static.wikia.nocookie.net/starwars/images/d/d8/Han.ogg/revision/latest?cb=20051024183653" class="internal" title="Han.ogg">Hear Han Solo</a> */
+  const QString audioUrlTag = "<a href=\"(?:/wiki/Media:|https://static\\.wikia\\.nocookie\\.net"
+                              "/starwars/images/e/ee/Quote-audio\\.png)[^\"]*(\"[^>]*>\\s*<img [^>]*>"
+                              "\\s*</a>\\s*<a href=)(\"[^\"]+)(/revision/latest\\?cb=\\d+\")";
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  articleString.replace( QRegularExpression( audioUrlTag ),
+#else
+  articleString.replace( QRegExp( audioUrlTag ),
+#endif
+                         QString::fromStdString( addAudioLink( "\\2\"", this->dictPtr->getId() )
+                                                 + "<a href=\\2\\1\\2\\3" ) );
+
+  // Detect this rare audio link variant. Make the end result look very similar to
+  // and work exactly the same as the most common audio link variant (see above).
+  // The only visual difference is between the remote and local audio button image.
+  // The playsound.png HTML code is a slightly modified version of the code used
+  // by the "audio tag" replacement in MediaWikiArticleRequest::processArticle().
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // <span class="unicode audiolink"><a href="https://static.wikia.nocookie.net/starwars/images/8/84/AniObiDookuBanter-TGG.ogg/revision/latest?cb=20090725214441" class="internal" title="AniObiDookuBanter-TGG.ogg">Listen</a></span>
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  articleString.replace( QRegExp( "<span class=\"unicode audiolink\">\\s*<a href=(\"[^\"]+)"
+                                  "(/revision/latest\\?cb=\\d+\"[^<]+</a>)\\s*</span>" ),
+                         QString::fromStdString(
+                           addAudioLink( "\\1\"", this->dictPtr->getId() )
+                           + "<a href=\\1\"><img src=\"qrcx://localhost/icons/playsound.png\""
+                             " border=\"0\" alt=\"Play\"></a> <a href=\\1\\2" ) );
+
+  // This "/wiki/File:..." "(file info)" link occurs right after almost every audio link of
+  // the most common type. This link leads to the entire article or to a different article,
+  // but not to the information about the audio file -> remove the misleading link.
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  //  <small>(<a href="/wiki/File:TheChoiceIsYours-TPM.ogg" title="File:TheChoiceIsYours-TPM.ogg">file info</a>)</small>
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  articleString.remove( QRegExp( " <small>\\(<a href=\"/wiki/File:[^>]+>file info</a>\\)</small>" ) );
+
+  // This "/wiki/File:..." "info" link along with the preceding "help" link occur right
+  // after every audio link of the rare "unicode audiolink" type. The "info" link leads
+  // to the entire article, not to the information about the audio file -> remove the
+  // misleading link. The "help" link is not particularly useful either, but at least
+  // it leads to where it is supposed to -> leave it in.
+  // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
+  // &#160;<span class="metadata audiolinkinfo"><small>(<a href="http://en.wikipedia.org/wiki/Wikipedia:Media_help" class="extiw" title="wikipedia:Wikipedia:Media help">help</a>·<a href="/wiki/File:AniObiDookuBanter-TGG.ogg" title="File:AniObiDookuBanter-TGG.ogg">info</a>)</small></span>
+  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
+  articleString.remove( QRegExp( "\u00b7<a href=\"/wiki/File:[^>]+>info</a>" ) );
 
   // Remove absolute height from scrollbox lines to ensure that everything inside
   // the scrollable container is visible and does not overlap the contents below.
