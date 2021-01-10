@@ -90,11 +90,11 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation>Makaleyi genişlet</translation>
+        <translation>Maddeyi genişlet</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation>Makaleyi daralt</translation>
+        <translation>Maddeyi daralt</translation>
     </message>
 </context>
 <context>
@@ -121,11 +121,11 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Expand article</source>
-        <translation>Makaleyi genişlet</translation>
+        <translation>Maddeyi genişlet</translation>
     </message>
     <message>
         <source>Collapse article</source>
-        <translation>Makaleyi daralt</translation>
+        <translation>Maddeyi daralt</translation>
     </message>
 </context>
 <context>
@@ -152,7 +152,7 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Olmayan bir WAV dosyası oynatma</translation>
+        <translation>WAV uzantılı olmayan bir dosya oynatılıyor</translation>
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
@@ -265,7 +265,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Select Current Article</source>
-        <translation>Mevcut Makaleyi Seç</translation>
+        <translation>Mevcut Maddeyi Seç</translation>
     </message>
     <message>
         <source>ERROR: %1</source>
@@ -447,7 +447,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Tüm dosyalar</translation>
+        <translation>Bütün dosyalar</translation>
     </message>
     <message>
         <source>Choose a file to use as group icon</source>
@@ -462,11 +462,11 @@ arasındaki farkı giderir)</translation>
     <name>DictGroupsWidget</name>
     <message>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
-        <translation>Dil çiftlerine dayalı bir takım gruplar oluşturmak istediğiniz emin misiniz?</translation>
+        <translation>Dil çiftlerine dayalı sözlük grupları oluşturmak istediğinizden emin misiniz?</translation>
     </message>
     <message>
         <source>Confirmation</source>
-        <translation>Onayla</translation>
+        <translation>Onay</translation>
     </message>
     <message>
         <source>Dictionaries: </source>
@@ -509,11 +509,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Büyük/küçük harfleri eşleştir</translation>
     </message>
     <message>
         <source>Exports headwords to file</source>
-        <translation>Anahtar kelimeleri dosyaya ver</translation>
+        <translation>Madde başlarını dosyaya aktarır</translation>
     </message>
     <message>
         <source>Export</source>
@@ -525,19 +525,19 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Press this button to apply filter to headwords list</source>
-        <translation>Anahtar kelimeler listesine süzgeç uygulamak için bu düğmeye bas</translation>
+        <translation>Madde başları listesine süzgeç uygulamak için bu düğmeye bas</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation>Onayla</translation>
+        <translation>Uygula</translation>
     </message>
     <message>
         <source>If checked any filter changes will we immediately applied to headwords list</source>
-        <translation>Herhangi bir süzgeç değişikliğinin işaretlenmesi durumunda anahtar kelime listesine başvur</translation>
+        <translation>Herhangi bir süzgeç değişikliğinin işaretlenmesi durumunda madde başı listesine başvur</translation>
     </message>
     <message>
         <source>Auto apply</source>
-        <translation>Otomatik onay</translation>
+        <translation>Otomatik onayla</translation>
     </message>
     <message>
         <source>Filter:</source>
@@ -545,7 +545,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Filter string (fixed string, wildcards or regular expression)</source>
-        <translation>Süzgeç dizesi (sabit dize, joker karakterler veya normal ifade)</translation>
+        <translation>Süzgeç dizesi (sabit dize, joker karakterler veya düzenli ifade)</translation>
     </message>
     <message>
         <source>Text</source>
@@ -557,23 +557,23 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzenli İfade</translation>
     </message>
     <message>
         <source>Unique headwords total: %1, filtered: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bütün madde başları: %1 süzülmüş: %2</translation>
     </message>
     <message>
         <source>Save headwords to file</source>
-        <translation>Anahtar kelimeleri dosyaya kaydet</translation>
+        <translation>Madde başlarını dosyaya kaydet</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation>Metin dosyaları (*.txt);;Tüm dosyalar (*.*)</translation>
+        <translation>Metin dosyaları (*.txt);;Bütün dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Export headwords...</source>
-        <translation>Anahtar kelimeleri dışa aktar...</translation>
+        <translation>Madde başlarını dışa aktar...</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -588,7 +588,7 @@ arasındaki farkı giderir)</translation>
     <name>DictInfo</name>
     <message>
         <source>Total articles:</source>
-        <translation>Toplam makale:</translation>
+        <translation>Toplam madde:</translation>
     </message>
     <message>
         <source>Translates from:</source>
@@ -626,11 +626,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Show all unique dictionary headwords</source>
-        <translation>Tüm eşsiz sözlük başlıklarını göster</translation>
+        <translation>Bütün ayrı madde başlarını göster</translation>
     </message>
     <message>
         <source>Headwords</source>
-        <translation>Eşsiz başlıklar</translation>
+        <translation>Madde başları</translation>
     </message>
 </context>
 <context>
@@ -667,7 +667,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Address</source>
@@ -702,7 +702,7 @@ arasındaki farkı giderir)</translation>
     <name>DictionaryBar</name>
     <message>
         <source>Edit this group</source>
-        <translation>Grubu düzenle</translation>
+        <translation>Bu grubu düzenle</translation>
     </message>
     <message>
         <source>Dictionary Bar</source>
@@ -726,11 +726,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Extended menu with all dictionaries...</source>
-        <translation>Tüm sözlüklerle genişletilmiş menü...</translation>
+        <translation>Bütün sözlüklerle genişletilmiş menü...</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation>Sözlük başlıkları</translation>
+        <translation>Sözlük madde başları</translation>
     </message>
 </context>
 <context>
@@ -790,7 +790,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Whole words</source>
-        <translation>Tüm kelimeler</translation>
+        <translation>Bütün kelimeler</translation>
     </message>
     <message>
         <source>Plain text</source>
@@ -802,35 +802,35 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>RegExp</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzenli İfade</translation>
     </message>
     <message>
         <source>Max distance between words (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sözcükler arasındaki en fazla uzaklık (%1-%2):</translation>
     </message>
     <message>
         <source>Max articles per dictionary (%1-%2):</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük başına en fazla madde başı (%1-%2):</translation>
     </message>
     <message>
         <source>Articles found: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bulunan maddeler: </translation>
     </message>
     <message>
         <source>Now indexing: </source>
-        <translation type="unfinished"></translation>
+        <translation>Şimdi dizinleniyor: </translation>
     </message>
     <message>
         <source>The search line must contains at least one word containing </source>
-        <translation type="unfinished"></translation>
+        <translation>Arama metni en az </translation>
     </message>
     <message>
         <source> or more symbols</source>
-        <translation type="unfinished"></translation>
+        <translation> ya da daha fazla sembolden oluşmalıdır</translation>
     </message>
     <message>
         <source>No dictionaries for full-text search</source>
-        <translation type="unfinished"></translation>
+        <translation>Tam metin araması yapmaya sözlük yok</translation>
     </message>
     <message>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
@@ -875,7 +875,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>All selected items will be deleted. Continue?</source>
-        <translation>Seçilen tüm öğeler silinecek. Devam et?</translation>
+        <translation>Seçilen bütün öğeler silinecek. Devam edilsin mi?</translation>
     </message>
 </context>
 <context>
@@ -886,7 +886,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Bay</translation>
+        <translation>Erkek</translation>
     </message>
     <message>
         <source>from</source>
@@ -894,15 +894,15 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
-        <translation>Düzen|Sözlükler|Kaynaklar|Forvo seçeneğine gidin ve bu hatayı yok etmek için kendi API anahtarınızı uygulayın.</translation>
+        <translation> Bu hatanın gitmesi için Düzen|Sözlükler|Kaynaklar|Forvo seçeneğine gidip kendi API anahtarınızı uygulayın.</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Bayan</translation>
+        <translation>Kadın</translation>
     </message>
     <message>
         <source>Added %1</source>
-        <translation>Eklendi %1</translation>
+        <translation>%1 Eklendi</translation>
     </message>
     <message>
         <source>XML parse error: %1 at %2,%3</source>
@@ -917,23 +917,23 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Match case</source>
-        <translation type="unfinished"></translation>
+        <translation>Büyük/küçük harfleri eşleştir</translation>
     </message>
     <message>
         <source>Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kip:</translation>
     </message>
     <message>
         <source>Articles found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulunan maddeler:</translation>
     </message>
     <message>
         <source>Available dictionaries in group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruptaki kullanılabilir sözlükler:</translation>
     </message>
     <message>
         <source>Wait for indexing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dizinleme için bekleyin:</translation>
     </message>
     <message>
         <source>Total:</source>
@@ -941,11 +941,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Indexed:</source>
-        <translation>İndekslenen:</translation>
+        <translation>Dizinlenen:</translation>
     </message>
     <message>
         <source>Now indexing: None</source>
-        <translation>Şimdi indekslenen: Yok</translation>
+        <translation>Şimdi dizinlenen: Yok</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -961,7 +961,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Ignore diacritics</source>
-        <translation>Aksanları yoksay</translation>
+        <translation>Ayırıcı işaretleri yoksay</translation>
     </message>
 </context>
 <context>
@@ -1016,7 +1016,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Tab 2</source>
-        <translation>Sekme 2</translation>
+        <translation>2. Sekme</translation>
     </message>
     <message>
         <source>Are you sure you want to remove all the groups?</source>
@@ -1032,11 +1032,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Rename group</source>
-        <translation>Grubu adlandır</translation>
+        <translation>Grubu yeniden adlandır</translation>
     </message>
     <message>
         <source>Give a new name for the group:</source>
-        <translation>Gruba yeni bir isim verin:</translation>
+        <translation>Gruba yeni bir ad verin:</translation>
     </message>
     <message>
         <source>Dictionaries available:</source>
@@ -1064,11 +1064,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Create language-based groups</source>
-        <translation>Dil-tabanlı grupları oluştur</translation>
+        <translation>Dil tabanlı gruplar oluştur</translation>
     </message>
     <message>
         <source>Rename current dictionary group</source>
-        <translation>Geçerli grubu adlandır</translation>
+        <translation>Geçerli grubu yeniden adlandır</translation>
     </message>
     <message>
         <source>Remove current dictionary group</source>
@@ -1076,11 +1076,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Give a name for the new group:</source>
-        <translation>Yeni gruba bir isim verin:</translation>
+        <translation>Yeni gruba bir ad koyun:</translation>
     </message>
     <message>
         <source>Remove all groups</source>
-        <translation>Tüm grupları kaldır</translation>
+        <translation>Bütün grupları kaldır</translation>
     </message>
     <message>
         <source>Remove selected dictionaries from group (Del)</source>
@@ -1100,11 +1100,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Re&amp;name group</source>
-        <translation>Grubu &amp;adlandır</translation>
+        <translation>Grubu &amp; yeniden adlandır</translation>
     </message>
     <message>
         <source>Remove all dictionary groups</source>
-        <translation>Tüm sözlük gruplarını kaldır</translation>
+        <translation>Bütün sözlük gruplarını kaldır</translation>
     </message>
     <message>
         <source>Group tabs</source>
@@ -1123,7 +1123,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Başlangıç</translation>
+        <translation>Ana Sayfa</translation>
     </message>
     <message>
         <source>Back</source>
@@ -1151,7 +1151,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Index</source>
-        <translation>İndeks</translation>
+        <translation>Dizin</translation>
     </message>
 </context>
 <context>
@@ -1174,7 +1174,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>History size: %1 entries out of maximum %2</source>
-        <translation>Geçmiş boyutu:%1 azami %2 giriş</translation>
+        <translation>Geçmiş boyutu:En fazla %2 girdiden %1 tanesi</translation>
     </message>
 </context>
 <context>
@@ -1192,7 +1192,7 @@ arasındaki farkı giderir)</translation>
     <name>HunspellDictsModel</name>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -1203,7 +1203,7 @@ arasındaki farkı giderir)</translation>
     <name>Initializing</name>
     <message>
         <source>Dictionary Name</source>
-        <translation>Sözlük İsmi</translation>
+        <translation>Sözlük Adı</translation>
     </message>
     <message>
         <source>GoldenDict - Initializing</source>
@@ -1211,7 +1211,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Please wait while indexing dictionary</source>
-        <translation>Lütfen sözlükler indekslenirken bekleyin</translation>
+        <translation>Lütfen sözlükler dizinlenirken bekleyin</translation>
     </message>
     <message>
         <source>Please wait...</source>
@@ -1222,63 +1222,63 @@ arasındaki farkı giderir)</translation>
     <name>Language</name>
     <message>
         <source>Ewe</source>
-        <translation>Ewe</translation>
+        <translation>Evece</translation>
     </message>
     <message>
         <source>Ido</source>
-        <translation>Ido</translation>
+        <translation>İdoca</translation>
     </message>
     <message>
         <source>Lao</source>
-        <translation>Laotisch</translation>
+        <translation>Laoca</translation>
     </message>
     <message>
         <source>Twi</source>
-        <translation>Twi</translation>
+        <translation>Tivice</translation>
     </message>
     <message>
         <source>Afar</source>
-        <translation>Afar</translation>
+        <translation>Afarca</translation>
     </message>
     <message>
         <source>Akan</source>
-        <translation>Akan</translation>
+        <translation>Akanca</translation>
     </message>
     <message>
         <source>Cree</source>
-        <translation>Cree</translation>
+        <translation>Krice</translation>
     </message>
     <message>
         <source>Igbo</source>
-        <translation>Igbo</translation>
+        <translation>İgboca</translation>
     </message>
     <message>
         <source>Komi</source>
-        <translation>Komi</translation>
+        <translation>Komice</translation>
     </message>
     <message>
         <source>Manx</source>
-        <translation>Manx</translation>
+        <translation>Manksça</translation>
     </message>
     <message>
         <source>Pali</source>
-        <translation>Pali</translation>
+        <translation>Palice</translation>
     </message>
     <message>
         <source>Thai</source>
-        <translation>Tayland</translation>
+        <translation>Tayca</translation>
     </message>
     <message>
         <source>Urdu</source>
-        <translation>Urdu</translation>
+        <translation>Urduca</translation>
     </message>
     <message>
         <source>Zulu</source>
-        <translation>Zulu</translation>
+        <translation>Zuluca</translation>
     </message>
     <message>
         <source>Czech</source>
-        <translation>Çek</translation>
+        <translation>Çekçe</translation>
     </message>
     <message>
         <source>Dutch</source>
@@ -1286,11 +1286,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Ganda</source>
-        <translation>Ganda</translation>
+        <translation>Gandaca</translation>
     </message>
     <message>
         <source>Fulah</source>
-        <translation>Fulah</translation>
+        <translation>Fulahça</translation>
     </message>
     <message>
         <source>Greek</source>
@@ -1298,75 +1298,75 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Hausa</source>
-        <translation>Hausa</translation>
+        <translation>Hausaca</translation>
     </message>
     <message>
         <source>Hindi</source>
-        <translation>Hindi</translation>
+        <translation>Hintçe</translation>
     </message>
     <message>
         <source>Irish</source>
-        <translation>İrlanda</translation>
+        <translation>İrlandaca</translation>
     </message>
     <message>
         <source>Khmer</source>
-        <translation>Khmer</translation>
+        <translation>Kimerce</translation>
     </message>
     <message>
         <source>Kongo</source>
-        <translation>Kongo</translation>
+        <translation>Kongoca</translation>
     </message>
     <message>
         <source>Latin</source>
-        <translation>Latin</translation>
+        <translation>Latince</translation>
     </message>
     <message>
         <source>Malay</source>
-        <translation>Malaya</translation>
+        <translation>Malayca</translation>
     </message>
     <message>
         <source>Maori</source>
-        <translation>Maori</translation>
+        <translation>Maorice</translation>
     </message>
     <message>
         <source>Nauru</source>
-        <translation>Nauru</translation>
+        <translation>Nauruca</translation>
     </message>
     <message>
         <source>Oriya</source>
-        <translation>Oriya</translation>
+        <translation>Oriyaca</translation>
     </message>
     <message>
         <source>Oromo</source>
-        <translation>Oromo</translation>
+        <translation>Oromoca</translation>
     </message>
     <message>
         <source>Sango</source>
-        <translation>Sango</translation>
+        <translation>Sangoca</translation>
     </message>
     <message>
         <source>Shona</source>
-        <translation>Shona</translation>
+        <translation>Şonaca</translation>
     </message>
     <message>
         <source>Tajik</source>
-        <translation>Tacik</translation>
+        <translation>Tacikçe</translation>
     </message>
     <message>
         <source>Tamil</source>
-        <translation>Tamil</translation>
+        <translation>Tamilce</translation>
     </message>
     <message>
         <source>Tatar</source>
-        <translation>Tatar</translation>
+        <translation>Tatarca</translation>
     </message>
     <message>
         <source>Swati</source>
-        <translation>Swati</translation>
+        <translation>Sıvatice</translation>
     </message>
     <message>
         <source>Tonga</source>
-        <translation>Tongaisch</translation>
+        <translation>Tongaca</translation>
     </message>
     <message>
         <source>Inupiaq</source>
@@ -1374,11 +1374,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Venda</source>
-        <translation>Tshivenda</translation>
+        <translation>Vendaca</translation>
     </message>
     <message>
         <source>Uzbek</source>
-        <translation>Özbek</translation>
+        <translation>Özbekçe</translation>
     </message>
     <message>
         <source>Welsh</source>
@@ -1386,7 +1386,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Wolof</source>
-        <translation>Wolof</translation>
+        <translation>Volofça</translation>
     </message>
     <message>
         <source>Xhosa</source>
@@ -1394,7 +1394,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Italian</source>
-        <translation>İtalyan</translation>
+        <translation>İtalyanca</translation>
     </message>
     <message>
         <source>Raeto-Romance</source>
@@ -1406,7 +1406,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Kannada</source>
-        <translation>Kanada</translation>
+        <translation>Kannadaca</translation>
     </message>
     <message>
         <source>North Ndebele</source>
@@ -1414,87 +1414,87 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Abkhazian</source>
-        <translation>Abkhazisch</translation>
+        <translation>Abhazca</translation>
     </message>
     <message>
         <source>Kirghiz</source>
-        <translation>Kırgız</translation>
+        <translation>Kırgızca</translation>
     </message>
     <message>
         <source>Kirundi</source>
-        <translation>Kirundi</translation>
+        <translation>Kirundice</translation>
     </message>
     <message>
         <source>Scottish Gaelic</source>
-        <translation>Schottisch-Gälisch</translation>
+        <translation>İskoç Galcesi</translation>
     </message>
     <message>
         <source>Albanian</source>
-        <translation>Albanisch</translation>
+        <translation>Arnavutça</translation>
     </message>
     <message>
         <source>Latvian</source>
-        <translation>Litauisch</translation>
+        <translation>Letonca</translation>
     </message>
     <message>
         <source>Malayalam</source>
-        <translation>Malajalam</translation>
+        <translation>Malayalamca</translation>
     </message>
     <message>
         <source>Kurdish</source>
-        <translation>Kurdisch</translation>
+        <translation>Kürtçe</translation>
     </message>
     <message>
         <source>Bulgarian</source>
-        <translation>Bulgarisch</translation>
+        <translation>Bulgarca</translation>
     </message>
     <message>
         <source>Lingala</source>
-        <translation>Lingala</translation>
+        <translation>Lingalaca</translation>
     </message>
     <message>
         <source>Maltese</source>
-        <translation>Maltesisch</translation>
+        <translation>Maltaca</translation>
     </message>
     <message>
         <source>Marathi</source>
-        <translation>Marathi</translation>
+        <translation>Maratice</translation>
     </message>
     <message>
         <source>Arabic</source>
-        <translation>Arabisch</translation>
+        <translation>Arapça</translation>
     </message>
     <message>
         <source>Basque</source>
-        <translation>Baskisch</translation>
+        <translation>Baskça</translation>
     </message>
     <message>
         <source>Avaric</source>
-        <translation>Avarisch</translation>
+        <translation>Avarca</translation>
     </message>
     <message>
         <source>Bihari</source>
-        <translation>Magahi</translation>
+        <translation>Biharice</translation>
     </message>
     <message>
         <source>Aymara</source>
-        <translation>Aymara</translation>
+        <translation>Aymaraca</translation>
     </message>
     <message>
         <source>Breton</source>
-        <translation>Bretonisch</translation>
+        <translation>Bretonca</translation>
     </message>
     <message>
         <source>Sundanese</source>
-        <translation>Sundanesisch</translation>
+        <translation>Sundanca</translation>
     </message>
     <message>
         <source>Danish</source>
-        <translation>Dänisch</translation>
+        <translation>Danca</translation>
     </message>
     <message>
         <source>Divehi</source>
-        <translation>Divehi</translation>
+        <translation>Divehice</translation>
     </message>
     <message>
         <source>Luba-Katanga</source>
@@ -1502,55 +1502,55 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Fijian</source>
-        <translation>Fijianisch</translation>
+        <translation>Fijice</translation>
     </message>
     <message>
         <source>Hungarian</source>
-        <translation>Ungarisch</translation>
+        <translation>Macarca</translation>
     </message>
     <message>
         <source>French</source>
-        <translation>Französisch</translation>
+        <translation>Fransızca</translation>
     </message>
     <message>
         <source>German</source>
-        <translation>Deutsch</translation>
+        <translation>Almanca</translation>
     </message>
     <message>
         <source>Mongolian</source>
-        <translation>Mongolisch</translation>
+        <translation>Moğolca</translation>
     </message>
     <message>
         <source>Hebrew</source>
-        <translation>Hebräisch</translation>
+        <translation>İbranice</translation>
     </message>
     <message>
         <source>Herero</source>
-        <translation>Herero</translation>
+        <translation>Hereroca</translation>
     </message>
     <message>
         <source>Luxembourgish</source>
-        <translation>Luxemburgisch</translation>
+        <translation>Lüksemburgca</translation>
     </message>
     <message>
         <source>Kanuri</source>
-        <translation>Kanuri</translation>
+        <translation>Kanurice</translation>
     </message>
     <message>
         <source>Kazakh</source>
-        <translation>Kasachisch</translation>
+        <translation>Kazakça</translation>
     </message>
     <message>
         <source>Kikuyu</source>
-        <translation>Kikuyu</translation>
+        <translation>Kikuyuca</translation>
     </message>
     <message>
         <source>Korean</source>
-        <translation>Koreanisch</translation>
+        <translation>Korece</translation>
     </message>
     <message>
         <source>Navajo</source>
-        <translation>Navajo</translation>
+        <translation>Navahoca</translation>
     </message>
     <message>
         <source>Ndonga</source>
@@ -1558,143 +1558,143 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Nepali</source>
-        <translation>Nepali</translation>
+        <translation>Nepalce</translation>
     </message>
     <message>
         <source>Ojibwa</source>
-        <translation>Ojibwe</translation>
+        <translation>Ocibvece</translation>
     </message>
     <message>
         <source>Pashto</source>
-        <translation>Paschto</translation>
+        <translation>Peştuca</translation>
     </message>
     <message>
         <source>Polish</source>
-        <translation>Polnisch</translation>
+        <translation>Lehçe</translation>
     </message>
     <message>
         <source>Samoan</source>
-        <translation>Samoanisch</translation>
+        <translation>Samoaca</translation>
     </message>
     <message>
         <source>Occitan</source>
-        <translation>Okzitanisch</translation>
+        <translation>Okitçe</translation>
     </message>
     <message>
         <source>Sindhi</source>
-        <translation>Sindhi</translation>
+        <translation>Sintçe</translation>
     </message>
     <message>
         <source>Slovak</source>
-        <translation>Slowakisch</translation>
+        <translation>Slovakça</translation>
     </message>
     <message>
         <source>Somali</source>
-        <translation>Somali</translation>
+        <translation>Somalice</translation>
     </message>
     <message>
         <source>Telugu</source>
-        <translation>Telugu</translation>
+        <translation>Teluguca</translation>
     </message>
     <message>
         <source>Tsonga</source>
-        <translation>Xitsonga</translation>
+        <translation>Çongaca</translation>
     </message>
     <message>
         <source>Tswana</source>
-        <translation>Setswana</translation>
+        <translation>Çıvanaca</translation>
     </message>
     <message>
         <source>Uighur</source>
-        <translation>Uigurisch</translation>
+        <translation>Uygurca</translation>
     </message>
     <message>
         <source>Serbo-Croatian</source>
-        <translation>Serbokroatisch</translation>
+        <translation>Sırp-Hırvatça</translation>
     </message>
     <message>
         <source>Yoruba</source>
-        <translation>Yoruba</translation>
+        <translation>Yorubaca</translation>
     </message>
     <message>
         <source>Zhuang</source>
-        <translation>Zhuang</translation>
+        <translation>Çuangca</translation>
     </message>
     <message>
         <source>Romanian</source>
-        <translation>Rumänisch</translation>
+        <translation>Rumence</translation>
     </message>
     <message>
         <source>Indonesian</source>
-        <translation>Indonesisch</translation>
+        <translation>Endonezce</translation>
     </message>
     <message>
         <source>Panjabi</source>
-        <translation>Punjabi</translation>
+        <translation>Pencapça</translation>
     </message>
     <message>
         <source>Southern Sotho</source>
-        <translation>Süd-Sotho</translation>
+        <translation>Güney Sotoca</translation>
     </message>
     <message>
         <source>Corsican</source>
-        <translation>Korsisch</translation>
+        <translation>Korsikaca</translation>
     </message>
     <message>
         <source>Esperanto</source>
-        <translation>Esperanto</translation>
+        <translation>Esperantoca</translation>
     </message>
     <message>
         <source>Persian</source>
-        <translation>Persisch</translation>
+        <translation>Farsça</translation>
     </message>
     <message>
         <source>Slovenian</source>
-        <translation>Slovenisch</translation>
+        <translation>Slovence</translation>
     </message>
     <message>
         <source>Western Frisian</source>
-        <translation>Westfriesisch</translation>
+        <translation>Batı Frizce</translation>
     </message>
     <message>
         <source>Aragonese</source>
-        <translation>Aragonesisch</translation>
+        <translation>Aragonca</translation>
     </message>
     <message>
         <source>Tahitian</source>
-        <translation>Tahitianisch</translation>
+        <translation>Tahitice</translation>
     </message>
     <message>
         <source>Malagasy</source>
-        <translation>Madagassisch</translation>
+        <translation>Malgaşça</translation>
     </message>
     <message>
         <source>Galician</source>
-        <translation>Galizisch</translation>
+        <translation>Galiççe</translation>
     </message>
     <message>
         <source>Azerbaijani</source>
-        <translation>Azerbaycan</translation>
+        <translation>Azerice</translation>
     </message>
     <message>
         <source>Amharic</source>
-        <translation>Amharisch</translation>
+        <translation>Amharca</translation>
     </message>
     <message>
         <source>Sanskrit</source>
-        <translation>Sanskrit</translation>
+        <translation>Sanskritçe</translation>
     </message>
     <message>
         <source>Japanese</source>
-        <translation>Japanisch</translation>
+        <translation>Japonca</translation>
     </message>
     <message>
         <source>Ukrainian</source>
-        <translation>Ukrainisch</translation>
+        <translation>Ukraynaca</translation>
     </message>
     <message>
         <source>Bambara</source>
-        <translation>Bambara</translation>
+        <translation>Bambaraca</translation>
     </message>
     <message>
         <source>Kalaallisut</source>
@@ -1702,19 +1702,19 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Bashkir</source>
-        <translation>Baschkir</translation>
+        <translation>Başkurtça</translation>
     </message>
     <message>
         <source>Belarusian</source>
-        <translation>Weißrussisch</translation>
+        <translation>Belarusça</translation>
     </message>
     <message>
         <source>Kashmiri</source>
-        <translation>Kashmiri</translation>
+        <translation>Keşmirce</translation>
     </message>
     <message>
         <source>Sardinian</source>
-        <translation>Sardinisch</translation>
+        <translation>Sardince</translation>
     </message>
     <message>
         <source>Hiri Motu</source>
@@ -1722,139 +1722,139 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Quechua</source>
-        <translation>Quechua</translation>
+        <translation>Keçuvaca</translation>
     </message>
     <message>
         <source>Bengali</source>
-        <translation>Bengali</translation>
+        <translation>Bengalce</translation>
     </message>
     <message>
         <source>Javanese</source>
-        <translation>Javanisch</translation>
+        <translation>Cavaca</translation>
     </message>
     <message>
         <source>Avestan</source>
-        <translation>Avestan</translation>
+        <translation>Avestaca</translation>
     </message>
     <message>
         <source>Kinyarwanda</source>
-        <translation>Kinyarwanda</translation>
+        <translation>Kinyarvandaca</translation>
     </message>
     <message>
         <source>Afrikaans</source>
-        <translation>Afrikaans</translation>
+        <translation>Afrikanca</translation>
     </message>
     <message>
         <source>Bislama</source>
-        <translation>Bislama</translation>
+        <translation>Bislamaca</translation>
     </message>
     <message>
         <source>Armenian</source>
-        <translation>Armenisch</translation>
+        <translation>Ermenice</translation>
     </message>
     <message>
         <source>Norwegian Bokmal</source>
-        <translation>Bokmål</translation>
+        <translation>Bokmol Norveççesi</translation>
     </message>
     <message>
         <source>Croatian</source>
-        <translation>Kroatisch</translation>
+        <translation>Hırvatça</translation>
     </message>
     <message>
         <source>Bosnian</source>
-        <translation>Bosnisch</translation>
+        <translation>Boşnakça</translation>
     </message>
     <message>
         <source>Interlingua</source>
-        <translation>Interlingua</translation>
+        <translation>İnterlinguaca</translation>
     </message>
     <message>
         <source>Interlingue</source>
-        <translation>Interlingue</translation>
+        <translation>İnterlinguece</translation>
     </message>
     <message>
         <source>Catalan</source>
-        <translation>Katalanisch</translation>
+        <translation>Katalanca</translation>
     </message>
     <message>
         <source>Serbian</source>
-        <translation>Serbisch</translation>
+        <translation>Sırpça</translation>
     </message>
     <message>
         <source>Burmese</source>
-        <translation>Burmesisch</translation>
+        <translation>Burmaca</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation>Russisch</translation>
+        <translation>Rusça</translation>
     </message>
     <message>
         <source>Limburgish</source>
-        <translation>Limburgisch</translation>
+        <translation>Limburgca</translation>
     </message>
     <message>
         <source>Norwegian</source>
-        <translation>Norwegisch</translation>
+        <translation>Norveççe</translation>
     </message>
     <message>
         <source>Chechen</source>
-        <translation>Tschetschenisch</translation>
+        <translation>Çeçence</translation>
     </message>
     <message>
         <source>Chinese</source>
-        <translation>Chinesisch</translation>
+        <translation>Çince</translation>
     </message>
     <message>
         <source>Chuvash</source>
-        <translation>Tschuwasch</translation>
+        <translation>Çuvaşça</translation>
     </message>
     <message>
         <source>Sinhala</source>
-        <translation>Singhalesisch</translation>
+        <translation>Sinhalaca</translation>
     </message>
     <message>
         <source>Spanish</source>
-        <translation>Spanisch</translation>
+        <translation>İspanyolca</translation>
     </message>
     <message>
         <source>Cornish</source>
-        <translation>Cornisch</translation>
+        <translation>Kernevekçe</translation>
     </message>
     <message>
         <source>Tagalog</source>
-        <translation>Tagalog</translation>
+        <translation>Tagalogca</translation>
     </message>
     <message>
         <source>Assamese</source>
-        <translation>Assamesisch</translation>
+        <translation>Assamca</translation>
     </message>
     <message>
         <source>Ossetian</source>
-        <translation>Ossetisch</translation>
+        <translation>Osetçe</translation>
     </message>
     <message>
         <source>Estonian</source>
-        <translation>Estnisch</translation>
+        <translation>Estonca</translation>
     </message>
     <message>
         <source>Swahili</source>
-        <translation>Swahili</translation>
+        <translation>Svahilice</translation>
     </message>
     <message>
         <source>Swedish</source>
-        <translation>Schwedisch</translation>
+        <translation>İsveççe</translation>
     </message>
     <message>
         <source>Tibetan</source>
-        <translation>Tibetanisch</translation>
+        <translation>Tibetçe</translation>
     </message>
     <message>
         <source>Vietnamese</source>
-        <translation>Vietnamesisch</translation>
+        <translation>Vietnamca</translation>
     </message>
     <message>
         <source>Macedonian</source>
-        <translation>Mazedonisch</translation>
+        <translation>Makedonca</translation>
     </message>
     <message>
         <source>Portuguese</source>
@@ -1870,43 +1870,43 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Gujarati</source>
-        <translation>Gujarati</translation>
+        <translation>Guceratça</translation>
     </message>
     <message>
         <source>Icelandic</source>
-        <translation>Isländisch</translation>
+        <translation>İzlandaca</translation>
     </message>
     <message>
         <source>Inuktitut</source>
-        <translation>Inuktitut</translation>
+        <translation>Doğu Kanada İnuitçesi</translation>
     </message>
     <message>
         <source>English</source>
-        <translation>Englisch</translation>
+        <translation>İngilizce</translation>
     </message>
     <message>
         <source>Georgian</source>
-        <translation>Georgisch</translation>
+        <translation>Gürcüce</translation>
     </message>
     <message>
         <source>Church Slavic</source>
-        <translation>Kirchenslawisch</translation>
+        <translation>Kilise Slavcası</translation>
     </message>
     <message>
         <source>Faroese</source>
-        <translation>Färöisch</translation>
+        <translation>Faroece</translation>
     </message>
     <message>
         <source>Finnish</source>
-        <translation>Finnisch</translation>
+        <translation>Fince</translation>
     </message>
     <message>
         <source>Volapuk</source>
-        <translation>Volapük</translation>
+        <translation>Volapükçe</translation>
     </message>
     <message>
         <source>Walloon</source>
-        <translation>Wallonisch</translation>
+        <translation>Valonca</translation>
     </message>
     <message>
         <source>Kwanyama</source>
@@ -1914,27 +1914,27 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Marshallese</source>
-        <translation>Marshallesisch</translation>
+        <translation>Marşalca</translation>
     </message>
     <message>
         <source>Northern Sami</source>
-        <translation>Nordsamisch</translation>
+        <translation>Kuzey Laponca</translation>
     </message>
     <message>
         <source>Haitian</source>
-        <translation>Haitianisch</translation>
+        <translation>Haitice</translation>
     </message>
     <message>
         <source>Chamorro</source>
-        <translation>Chamorro</translation>
+        <translation>Çamoruca</translation>
     </message>
     <message>
         <source>Norwegian Nynorsk</source>
-        <translation>Nynorsk</translation>
+        <translation>Nyorsk Norveççesi</translation>
     </message>
     <message>
         <source>Guarani</source>
-        <translation>Guaraní</translation>
+        <translation>Guaraníce</translation>
     </message>
     <message>
         <source>South Ndebele</source>
@@ -1946,7 +1946,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Lithuanian</source>
-        <translation>Litauisch</translation>
+        <translation>Litvanca</translation>
     </message>
     <message>
         <source>Sichuan Yi</source>
@@ -1954,11 +1954,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Tigrinya</source>
-        <translation>Tigrinya</translation>
+        <translation>Tigrinyaca</translation>
     </message>
     <message>
         <source>Yiddish</source>
-        <translation>Jiddisch</translation>
+        <translation>Yidce</translation>
     </message>
     <message>
         <source>Traditional Chinese</source>
@@ -1974,11 +1974,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Other Simplified Chinese dialects</source>
-        <translation>Diğer Basitleştirilmiş Çince lehçeler</translation>
+        <translation>Diğer Basitleştirilmiş Çince lehçeleri</translation>
     </message>
     <message>
         <source>Other Traditional Chinese dialects</source>
-        <translation>Diğer Geleneksel Çince lehçeler</translation>
+        <translation>Diğer Geleneksel Çince lehçeleri</translation>
     </message>
     <message>
         <source>Other Eastern-European languages</source>
@@ -1990,7 +1990,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Other Russian languages</source>
-        <translation>Diğer Rusça dilleri</translation>
+        <translation>Diğer Rus dilleri</translation>
     </message>
     <message>
         <source>Other Japanese languages</source>
@@ -2018,7 +2018,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Tamazight</source>
-        <translation>Tamasih</translation>
+        <translation>Berber Dilleri</translation>
     </message>
     <message>
         <source>Lojban</source>
@@ -2036,7 +2036,7 @@ arasındaki farkı giderir)</translation>
     <name>Main</name>
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
-        <translation>Yapılandırma dosyasında hata. Varsayılan ayarlara devam edilsin mi?</translation>
+        <translation>Yapılandırma dosyasında hata. Varsayılan ayarlarla devam edilsin mi?</translation>
     </message>
 </context>
 <context>
@@ -2055,7 +2055,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Tümü</translation>
+        <translation>Hepsi</translation>
     </message>
     <message>
         <source>Back</source>
@@ -2063,11 +2063,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Print Preview</source>
-        <translation type="obsolete">Baskı Önizleme</translation>
+        <translation type="obsolete">Yazdırma Önizlemesi</translation>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
-        <translation>%1 Sözlük, %2 Madde, %3 Sözcük</translation>
+        <translation>%1 sözlük, %2 madde, %3 sözcük</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -2119,7 +2119,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Close all tabs</source>
-        <translation>Tüm sekmeleri kapat</translation>
+        <translation>Bütün sekmeleri kapat</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -2143,11 +2143,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>&amp;Save Article</source>
-        <translation>Yazıyı Ka&amp;ydet</translation>
+        <translation>Maddeyi Ka&amp;ydet</translation>
     </message>
     <message>
         <source>Save Article As</source>
-        <translation>Yazıyı Farklı Kaydet</translation>
+        <translation>Maddeyi Farklı Kaydet</translation>
     </message>
     <message>
         <source>Ctrl+P</source>
@@ -2159,7 +2159,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Minimizes the window to tray</source>
-        <translation>Küçültüldüğünde sistem tepsisine yerleş</translation>
+        <translation>Pencereyi sistem tepsisine küçültür</translation>
     </message>
     <message>
         <source>Words Zoom Out</source>
@@ -2215,11 +2215,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Close all tabs except current</source>
-        <translation>Bu sekmenin dışındaki tüm sekmeleri kapat</translation>
+        <translation>Bu sekmenin dışındaki bütün sekmeleri kapat</translation>
     </message>
     <message>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Kısayol tuşları izleme mekanizması başlatılamadı. &lt;br&gt; XServer RECORD uzantısının açık olduğundan emin olun.</translation>
+        <translation>Kısayol tuşlarını izleme mekanizması başlatılamadı. &lt;br&gt; XServer RECORD uzantısının açık olduğundan emin olun.</translation>
     </message>
     <message>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
@@ -2227,7 +2227,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Search Pane</source>
-        <translation type="obsolete">Pencerede Ara</translation>
+        <translation>Arama Penceresi</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
@@ -2239,7 +2239,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
+        <translation>GoldenDict</translation>
     </message>
     <message>
         <source>Loading...</source>
@@ -2251,7 +2251,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Sözlük Çubuğu&apos;nda İsimleri Göster</translation>
+        <translation>Sözlük Çubuğu&apos;nda Adları Göster</translation>
     </message>
     <message>
         <source>Opened tabs</source>
@@ -2263,7 +2263,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Html Dosyaları (*.html *.htm)</translation>
+        <translation>Html Dosyaları (*.html *.htm)</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -2275,7 +2275,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Save Article</source>
-        <translation>Yazıyı Kaydet</translation>
+        <translation>Maddeyi Kaydet</translation>
     </message>
     <message>
         <source>H&amp;istory</source>
@@ -2295,31 +2295,31 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation type="obsolete">UYARI: %1</translation>
+        <translation>UYARI: %1</translation>
     </message>
     <message>
         <source>Print Article</source>
-        <translation>Yazıyı Yazdır</translation>
+        <translation>Maddeyi Yazdır</translation>
     </message>
     <message>
         <source>No printer is available. Please install one first.</source>
-        <translation>Hiçbir yazıcı kullanılabilir değil. Lütfen önce bir yazıcı yükleyin.</translation>
+        <translation>Kullanılabilir yazıcı yok. Lütfen önce bir yazıcı yükleyin.</translation>
     </message>
     <message>
         <source>Words Zoom In</source>
-        <translation>Sözcükleri Büyült</translation>
+        <translation>Sözcükleri Büyüt</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="obsolete">Gezinti</translation>
+        <translation>Gezinti</translation>
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation type="obsolete">Gezinti Panelinde Sonuçlar</translation>
+        <translation>Gezinti Panelinde Sonuçlar</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...    F3</source>
-        <translation type="obsolete">&amp;Sözlükler...     F3</translation>
+        <translation>&amp;Sözlükler...     F3</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -2339,11 +2339,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;Aktar</translation>
+        <translation>&amp;Dışa Aktar</translation>
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
-        <translation type="obsolete">Araç Çubuklarında Küçük İkonları Göster</translation>
+        <translation>Araç Çubuklarında Küçük İkonlar Göster</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
@@ -2351,7 +2351,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Found in Dictionaries:</source>
-        <translation>Sözlükler Bulundu:</translation>
+        <translation>Bu Sözlüklerde Bulundu:</translation>
     </message>
     <message>
         <source>Open Tabs List</source>
@@ -2375,23 +2375,23 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>History view mode</source>
-        <translation type="obsolete">Geçmişi görüntüleme modu</translation>
+        <translation>Geçmişi görüntüleme modu</translation>
     </message>
     <message>
         <source>Export history to file</source>
-        <translation>Geçmiş dosyasını gönder</translation>
+        <translation>Geçmişi dosyaya aktar</translation>
     </message>
     <message>
         <source>Text files (*.txt);;All files (*.*)</source>
-        <translation>Metin Dosyaları (*.txt);;Tüm Dosyalar (*.*)</translation>
+        <translation>Metin Dosyaları (*.txt);;Bütün Dosyalar (*.*)</translation>
     </message>
     <message>
         <source>History export complete</source>
-        <translation>Geçmiş gönderimi tamam</translation>
+        <translation>Geçmiş aktarması tamamlandı</translation>
     </message>
     <message>
         <source>Export error: </source>
-        <translation>Göndermede hata: </translation>
+        <translation>Aktarma hatası: </translation>
     </message>
     <message>
         <source>Ctrl+H</source>
@@ -2399,23 +2399,23 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>&amp;Import</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe aktar</translation>
     </message>
     <message>
         <source>Import history from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmişi dosyadan aktar</translation>
     </message>
     <message>
         <source>Import error: invalid data in file</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktarma hatası: dosyada geçersiz veri</translation>
     </message>
     <message>
         <source>History import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Geçmiş aktarması tamamlandı</translation>
     </message>
     <message>
         <source>Import error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Aktarma hatası: </translation>
     </message>
     <message>
         <source>Dictionary info</source>
@@ -2431,15 +2431,15 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>&amp;Results Navigation Pane</source>
-        <translation type="unfinished"></translation>
+        <translation>Sonuçlar Gezme Bölmesi</translation>
     </message>
     <message>
         <source>Print Pre&amp;view</source>
-        <translation type="unfinished"></translation>
+        <translation>Yazdırma Önizlemesi</translation>
     </message>
     <message>
         <source>&amp;Rescan Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dosyaları Yeniden Tara</translation>
     </message>
     <message>
         <source>&amp;New Tab</source>
@@ -2463,11 +2463,11 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Show Names in Dictionary &amp;Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözlük Çubuğunda Adları Göster</translation>
     </message>
     <message>
         <source>Show Small Icons in &amp;Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Araç Çubuklarında Küçük İkonlar Göster</translation>
     </message>
     <message>
         <source>&amp;Navigation</source>
@@ -2487,31 +2487,31 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>F3</source>
-        <translation type="unfinished">F3</translation>
+        <translation>F3</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Erişilebilirlik API'si açılmadı</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Madde, Tam (*.html)</translation>
     </message>
     <message>
         <source>Article, HTML Only (*.html)</source>
-        <translation type="unfinished"></translation>
+        <translation>Madde, Yalnızca HTML (*.html)</translation>
     </message>
     <message>
         <source>Saving article...</source>
-        <translation type="unfinished"></translation>
+        <translation>Madde kaydediliyor...</translation>
     </message>
     <message>
         <source>Open dictionary folder</source>
-        <translation type="unfinished">Sözlük klasörünü aç</translation>
+        <translation>Sözlük klasörünü açın</translation>
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation type="unfinished">Sözlük başlıkları</translation>
+        <translation>Sözlükteki madde başları</translation>
     </message>
     <message>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
@@ -2544,7 +2544,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Now indexing for full-text search: </source>
-        <translation>Tam metin araması için dizin oluştur: </translation>
+        <translation>Tam metin araması için dizinlenmekte: </translation>
     </message>
     <message>
         <source>Favor&amp;ites Pane</source>
@@ -2556,11 +2556,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished">Dışarı aktar</translation>
+        <translation>Dışa aktar</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>İçe aktar</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2572,31 +2572,31 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Export to list</source>
-        <translation type="unfinished"></translation>
+        <translation>Listeye aktar</translation>
     </message>
     <message>
         <source>Export Favorites to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorileri dosyaya aktar</translation>
     </message>
     <message>
         <source>XML files (*.xml);;All files (*.*)</source>
-        <translation>XML dosyaları (*.xml);;Tüm dosyalar (*.*)</translation>
+        <translation>XML dosyaları (*.xml);;Bütün dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Favorites export complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorilerin aktarılması tamamlandı</translation>
     </message>
     <message>
         <source>Export Favorites to file as plain list</source>
-        <translation type="unfinished"></translation>
+        <translation">Favorileri düz metin olarak aktar</translation>
     </message>
     <message>
         <source>Import Favorites from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorileri dosyadan aktar</translation>
     </message>
     <message>
         <source>Favorites import complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Favorileri aktarma tamamlandı</translation>
     </message>
     <message>
         <source>Data parsing error</source>
@@ -2612,22 +2612,22 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Add all tabs to Favorites</source>
-        <translation>Tüm sekmeleri favorilere ekle</translation>
+        <translation>Bütün sekmeleri favorilere ekle</translation>
     </message>
     <message>
         <source>Remove current tab from Favorites</source>
-        <translation>Mevcut sekmeyi favorilerden kaldır</translation>
+        <translation>Geçerli sekmeyi favorilerden kaldır</translation>
     </message>
     <message>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
-        <translation>&quot;%1&quot; anahtar kelimesini favorilerden çıkar?</translation>
+        <translation>&quot;%1&quot; madde başı favorilerden çıkarılsın mı?</translation>
     </message>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
         <source>Dictionary file was tampered or corrupted</source>
-        <translation>Sözlük dosyası değiştirildi veya bozuldu</translation>
+        <translation>Sözlük dosyası değiştirilmiş ya da bozulmuş</translation>
     </message>
     <message>
         <source>Failed loading article from %1, reason: %2</source>
@@ -2652,7 +2652,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     <name>MediaWikisModel</name>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Address</source>
@@ -2686,15 +2686,15 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Pasifleştirilmiş (etkin olmayan) sözlükler:</translation>
+        <translation>Etkin olmayan (kapatılmış) sözlükler:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>İsim:</translation>
+        <translation>Ad:</translation>
     </message>
     <message>
         <source>Total articles:</source>
-        <translation>Toplam makale:</translation>
+        <translation>Toplam madde:</translation>
     </message>
     <message>
         <source>Translates from:</source>
@@ -2730,7 +2730,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Sort by name</source>
-        <translation>İsme göre sırala</translation>
+        <translation>Ada göre sırala</translation>
     </message>
     <message>
         <source>Sort by languages</source>
@@ -2738,11 +2738,11 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Dictionary headwords</source>
-        <translation>Sözlük başlıkları</translation>
+        <translation>Sözlükteki madde başları</translation>
     </message>
     <message>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation>Aktif sözlükler: %1, pasif sözlükler: %2</translation>
+        <translation>Açık sözlükler: %1, kapalı sözlükler: %2</translation>
     </message>
 </context>
 <context>
@@ -2768,7 +2768,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Left Shift only</source>
-        <translation>Sadece Sol Shift</translation>
+        <translation>Yalnızca Sol Shift</translation>
     </message>
     <message>
         <source>Ctrl</source>
@@ -2814,12 +2814,12 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Normalde, yeni bir sekme açmadan hemen gelir.
-Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
+        <translation>Normalde, yeni bir sekme açıldığında hemen o sekmeye geçilir.
+Bu seçenekleyse, yeni sekmeler açıldığında hemen o sekmeye geçilmeyecek.</translation>
     </message>
     <message>
         <source>Use proxy server</source>
-        <translation>Proxy sunucusu</translation>
+        <translation>Proxy sunucusu kullan</translation>
     </message>
     <message>
         <source>Use the following hotkey to translate a word from clipboard:</source>
@@ -2831,11 +2831,11 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
-        <translation>Çift tıklandığında sözcüğü seslendirir</translation>
+        <translation>Çift tıklandığında sözcüğü çevirir</translation>
     </message>
     <message>
         <source>Only show popup when all selected keys are kept pressed:</source>
-        <translation>Sadece seçilen tüm tuşlara basıldığında açılan pencereyi göster:</translation>
+        <translation>Sadece seçilen bütün düğmelere basıldığında açılan pencereyi göster:</translation>
     </message>
     <message>
         <source>Auto-pronounce words in main window</source>
@@ -2847,15 +2847,15 @@ Ancak, yeni sekmeler onlar gelmeden açılmış olacak.</translation>
     </message>
     <message>
         <source>Left Alt only</source>
-        <translation>Sadece Sol Alt</translation>
+        <translation>Yalnızca Sol Alt</translation>
     </message>
     <message>
         <source>Tabbed browsing</source>
-        <translation>Sekmeli gözat</translation>
+        <translation>Sekmeli dolaşma</translation>
     </message>
     <message>
         <source>Right Shift only</source>
-        <translation>Sadece Sağ Shift</translation>
+        <translation>Yalnızca Sağ Shift</translation>
     </message>
     <message>
         <source>With this on, an attempt to close main window would hide it instead of closing
@@ -2865,7 +2865,7 @@ yerine onu gizler.</translation>
     </message>
     <message>
         <source>Playback</source>
-        <translation>Oynat</translation>
+        <translation>Oynatma</translation>
     </message>
     <message>
         <source>&amp;Audio</source>
@@ -2883,7 +2883,7 @@ proxy sunucusu kullanmak istiyorsanız etkinleştirin.</translation>
     </message>
     <message>
         <source>Left Ctrl only</source>
-        <translation>Sadece Sol Ctrl</translation>
+        <translation>Yalnızca Sol Ctrl</translation>
     </message>
     <message>
         <source>Play via Windows native API</source>
@@ -2912,7 +2912,7 @@ yorum yapabilirsiniz.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translat
     </message>
     <message>
         <source>Open new tabs in background</source>
-        <translation>Arka planda yeni sekme aç</translation>
+        <translation>Yeni sekmeleri arkaplanda aç</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -2920,7 +2920,7 @@ yorum yapabilirsiniz.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translat
     </message>
     <message>
         <source>Right Ctrl only</source>
-        <translation>Sadece Sağ Ctrl</translation>
+        <translation>Yalnızca Sağ Ctrl</translation>
     </message>
     <message>
         <source>Lingvo</source>
@@ -2943,7 +2943,7 @@ Etkinse, program her zaman aktif kip ile başlar.</translation>
     <message>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Sadece seçilen tüm tuşlar basılı durumdayken Açılır Pencere&apos;de gösterecektir. 
+        <translation>Bu seçenek açıkken, yalnızca seçilen bütün düğmeler basılı durumdayken Açılır Pencere&apos;de gösterecektir. 
 Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translation>
     </message>
     <message>
@@ -2968,7 +2968,7 @@ Aksi halde fare, sözcüğün üzerine geldiğinde çeviri yapılır.</translati
     </message>
     <message>
         <source>Alt key</source>
-        <translation>Alt tuşu</translation>
+        <translation>Alt düğmesi</translation>
     </message>
     <message>
         <source>Enabling this would make GoldenDict block most advertisements
@@ -3030,13 +3030,13 @@ ve muhtemelen indirme sayfasını açar.</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Parola:</translation>
+        <translation>Şifre:</translation>
     </message>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation type="obsolete">Windows yerel çalma programını kullanın.
-Sınırlıdır, (sadece Wav dosyaları) ama çok iyi çalışmakta.</translation>
+        <translation>Windows yerel çalma programını kullanın.
+Yalnızca .wav dosyalarıyla sınırlıdır, ama çok iyi çalışır.</translation>
     </message>
     <message>
         <source>Default</source>
@@ -3050,8 +3050,8 @@ Sınırlıdır, (sadece Wav dosyaları) ama çok iyi çalışmakta.</translation
         <source>To avoid false positives, the keys are only monitored
 after the selection&apos;s done for a limited amount of
 seconds, which is specified here.</source>
-        <translation>Hataları önlemek için tuşlar sadece belirtilen
-saniye boyunca izlenmektedir.</translation>
+        <translation>Hataları önlemek için tuşlar yalnızca burada belirtilen
+saniye süresince izlenmektedir.</translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -3059,7 +3059,7 @@ saniye boyunca izlenmektedir.</translation>
     </message>
     <message>
         <source>Ctrl key</source>
-        <translation>Ctrl tuşu</translation>
+        <translation>Ctrl düğmesi</translation>
     </message>
     <message>
         <source>Use the following hotkey to show or hide the main window:</source>
@@ -3080,12 +3080,11 @@ daha sonra da basılabilir.</translation>
     <message>
         <source>Play audio via Phonon framework. May be somewhat unstable,
 but should support most audio file formats.</source>
-        <translation type="obsolete">Ses dosyalarını Phonon Framework ile oynat. Bu pek çok ses 
-formatlarını destekler, ancak kararsız olabilir.</translation>
+        <translation type="obsolete">Ses dosyalarını Phonon Framework ile oynat. Bu pek çoğu ses formatını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Right Alt only</source>
-        <translation>Sadece Sağ Alt</translation>
+        <translation>Yalnızca Sağ Alt</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -3101,7 +3100,7 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation type="obsolete">Phonon ile oynat</translation>
+        <translation>Phonon ile oynat</translation>
     </message>
     <message>
         <source>Right Alt</source>
@@ -3113,7 +3112,7 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Pronunciation</source>
-        <translation>Telaffuz</translation>
+        <translation>Söyleniş</translation>
     </message>
     <message>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
@@ -3133,20 +3132,20 @@ formatlarını destekler, ancak kararsız olabilir.</translation>
     </message>
     <message>
         <source>Start with scan popup turned on</source>
-        <translation>Ekranda Kelime Yakala&apos;mayı etkinleştir</translation>
+        <translation>Ekranda Kelime Yakala&apos;mayı açık olarak başlat</translation>
     </message>
     <message>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Uygulama, ana penceresini göstermeden, doğrudan Görev Çubuğu&apos;nda başlar.</translation>
+        <translation>Bu seçenekle, uygulama ana penceresini göstermeden, doğrudan sistem çubuğu&apos;nda başlar.</translation>
     </message>
     <message>
         <source>Shift key</source>
-        <translation>Shift tuşu</translation>
+        <translation>Shift düğmesi</translation>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup.</source>
-        <translation>GoldenDict her açılışta otomatik olarak başlar.</translation>
+        <translation>GoldenDict bilgisayarın her açılışında kendiliğinden başlar.</translation>
     </message>
     <message>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
@@ -3164,7 +3163,7 @@ Bununla birlikte ilgili ana pencere gizlenmiş olacaktır.</translation>
     </message>
     <message>
         <source>ESC key hides main window</source>
-        <translation>ESC tuşu ana pencereyi gizler</translation>
+        <translation>ESC düğmesi ana pencereyi gizler</translation>
     </message>
     <message>
         <source>Send translated word to main window instead of to show it in popup window</source>
@@ -3184,7 +3183,7 @@ Eklenti, bu seçeneğin çalışması için yüklü olmalıdır.</translation>
     </message>
     <message>
         <source>Enable web plugins</source>
-        <translation>Web eklentilerini etkinleştir</translation>
+        <translation>Ağ eklentilerini etkinleştir</translation>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
@@ -3256,11 +3255,11 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Store &amp;history</source>
-        <translation>&amp;Geçmiş boyutu</translation>
+        <translation>Geçmişi depola</translation>
     </message>
     <message>
         <source>Articles</source>
-        <translation>Makaleler</translation>
+        <translation>Maddeler</translation>
     </message>
     <message>
         <source>Turn this option on to always expand optional parts of articles</source>
@@ -3276,15 +3275,15 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Select word by single click</source>
-        <translation type="unfinished"></translation>
+        <translation>Sözcüğü tek tıkla seç</translation>
     </message>
     <message>
         <source>Add-on style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eklenti biçimi</translation>
     </message>
     <message>
         <source>Specify the maximum number of entries to keep in history.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Geçmişte tutulacak en fazla girdi sayısını girin</translation>
     </message>
     <message>
         <source>Maximum history size:</source>
@@ -3296,23 +3295,23 @@ Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
     </message>
     <message>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hepsini kaydet</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>dakika</translation>
     </message>
     <message>
         <source>Modern</source>
-        <translation type="unfinished"></translation>
+        <translation>Modern</translation>
     </message>
     <message>
         <source>Lingoes</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes</translation>
     </message>
     <message>
         <source>Lingoes-Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingoes-Mavi</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
@@ -3345,15 +3344,15 @@ Enable this option to workaround the problem.</source>
     </message>
     <message>
         <source>Articles longer than this size will be collapsed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bu ölçüden daha uzun maddeler daraltılacak</translation>
     </message>
     <message>
         <source>System proxy</source>
-        <translation>Sistem vekil sunucu</translation>
+        <translation>Sistem vekil sunucusu</translation>
     </message>
     <message>
         <source>Custom proxy</source>
-        <translation>Özel vekil sunucu</translation>
+        <translation>Özel vekil sunucusu</translation>
     </message>
     <message>
         <source>Custom settings</source>
@@ -3418,7 +3417,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>Use internal player:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dahili oynatıcı kullan:</translation>
     </message>
     <message>
         <source>Choose audio back end</source>
@@ -3510,7 +3509,7 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source> MB</source>
-        <translation type="unfinished"></translation>
+        <translation> MB</translation>
     </message>
 </context>
 <context>
@@ -3529,7 +3528,7 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>Prefix Match</source>
-        <translation>ÖnEk Eşleme</translation>
+        <translation>Önek Eşleşmesi</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -3540,7 +3539,7 @@ clears its network cache from disk during exit.</source>
     <name>Programs::RunInstance</name>
     <message>
         <source>No program name was given.</source>
-        <translation>Hiçbir program ismi, verilmedi.</translation>
+        <translation>Hiçbir program ismi verilmedi.</translation>
     </message>
     <message>
         <source>The program has crashed.</source>
@@ -3548,7 +3547,7 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>The program has returned exit code %1.</source>
-        <translation>Program %1 çıkış koduna geri döndü.</translation>
+        <translation>Program %1 çıkış kodu verdi.</translation>
     </message>
 </context>
 <context>
@@ -3559,11 +3558,11 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>Type</source>
-        <translation>Tip</translation>
+        <translation>Tür</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Command Line</source>
@@ -3578,7 +3577,7 @@ clears its network cache from disk during exit.</source>
     <name>QObject</name>
     <message>
         <source>Article loading error</source>
-        <translation type="unfinished"></translation>
+        <translation>Madde yüklenme hatası</translation>
     </message>
     <message>
         <source>Article decoding error</source>
@@ -3630,7 +3629,7 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>No driver.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürücü yok</translation>
     </message>
     <message>
         <source>This driver is not a live output device.</source>
@@ -3654,11 +3653,11 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>Copyright: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Telif: %1%2</translation>
     </message>
     <message>
         <source>Version: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüm: %1%2</translation>
     </message>
     <message>
         <source>Author: %1%2</source>
@@ -3666,15 +3665,15 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>E-mail: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>E-posta: %1%2</translation>
     </message>
     <message>
         <source>Title: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Başlık</translation>
     </message>
     <message>
         <source>Website: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ağ sitesi</translation>
     </message>
     <message>
         <source>Date: %1%2</source>
@@ -3752,11 +3751,11 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>word</source>
-        <translation type="obsolete">Sözcük</translation>
+        <translation>sözcük</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
+        <translation>Alt+M</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -3778,7 +3777,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Eşlenenler Listesi (Alt+M)</translation>
+        <translation>Eşleşmeleri Sırala (Alt+M)</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3786,7 +3785,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Send word to main window (Alt+W)</source>
-        <translation>Ana pencereye kelimeyi gönder (Alt+W)</translation>
+        <translation>Sözcüğü ana pencereye gönder (Alt+W)</translation>
     </message>
     <message>
         <source>Alt+W</source>
@@ -3802,7 +3801,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
+        <translation>GoldenDict</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -3814,14 +3813,14 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Always stay on top of all other windows</source>
-        <translation>Her zaman diğer tüm pencerelerin üstünde dur</translation>
+        <translation>Her zaman bütün diğer pencerelerin üstünde dur</translation>
     </message>
 </context>
 <context>
     <name>SoundDirsModel</name>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Path</source>
@@ -3856,7 +3855,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Alternatif olarak %GD1251% için CP1251, %GDISO1% için ISO 8859-1 kullanılabilir.</translation>
+        <translation>Alternatif olarak CP1251 için %GD1251%, ISO 8859-1 için %GDISO1% kullanılabilir.</translation>
     </message>
     <message>
         <source>Greek transliteration</source>
@@ -3892,7 +3891,7 @@ bırakın.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&g
     </message>
     <message>
         <source>Katakana Japanese syllabary</source>
-        <translation>Japon Katakana Yazım Denetimi Tablosu</translation>
+        <translation>Japon Katakana hece yazısı</translation>
     </message>
     <message>
         <source>Make dictionaries from bunches of audiofiles by adding paths here:</source>
@@ -3904,7 +3903,7 @@ bırakın.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&g
     </message>
     <message>
         <source>Japanese Romaji</source>
-        <translation>Japon Romaji</translation>
+        <translation>Japonca Romaji</translation>
     </message>
     <message>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
@@ -3926,7 +3925,7 @@ Henüz GoldenDict uygulanmadı.</translation>
     </message>
     <message>
         <source>Sound Dirs</source>
-        <translation>Ses Dizini</translation>
+        <translation>Ses Dizinleri</translation>
     </message>
     <message>
         <source>API Key:</source>
@@ -3935,12 +3934,11 @@ Henüz GoldenDict uygulanmadı.</translation>
     <message>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
-        <translation>İngilizce telaffuza göre, Japon harf çevirisinde
-en yaygın olarak kullanılan yöntem</translation>
+        <translation>Japon harf çevirisinde en çok kullanılan, İngilizce fonolojisi üzerine kurulmuş yöntem</translation>
     </message>
     <message>
         <source>Hiragana Japanese syllabary</source>
-        <translation>Japon Hiragana Yazım Denetimi Tablosu</translation>
+        <translation>Japon Hiragana hece yazısı</translation>
     </message>
     <message>
         <source>Transliteration</source>
@@ -3978,7 +3976,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Path to a directory with Hunspell/Myspell dictionaries:</source>
-        <translation>Hunspell / Myspell sözlükler ile dizin yolu:</translation>
+        <translation>Hunspell / Myspell sözlükleri bulunan dizinin yolu:</translation>
     </message>
     <message>
         <source>Re&amp;scan now</source>
@@ -3998,7 +3996,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>(not available in portable version)</source>
-        <translation>(taşınabilir bir versiyon değil)</translation>
+        <translation>(taşınabilir sürümü yok)</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -4006,7 +4004,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Choose a directory</source>
-        <translation>Dizin seç</translation>
+        <translation>Bir dizin seç</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
@@ -4014,7 +4012,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Websites</source>
-        <translation>Web Siteleri</translation>
+        <translation>Ağ Siteleri</translation>
     </message>
     <message>
         <source>Paths to search for the dictionary files:</source>
@@ -4034,7 +4032,7 @@ GoldenDict için henüz uygulanmadı.</translation>
     </message>
     <message>
         <source>Syllabaries:</source>
-        <translation>Yazım Denetimi Tablosu:</translation>
+        <translation>Hece yazıları:</translation>
     </message>
     <message>
         <source>Available morphology dictionaries:</source>
@@ -4100,7 +4098,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Text to Speech</source>
-        <translation type="unfinished"></translation>
+        <translation>Metinden Sese</translation>
     </message>
     <message>
         <source>Any external programs. A string %GDWORD% will be replaced with the query word. If such string is not presented, the word will be fed into standard input.</source>
@@ -4108,11 +4106,11 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>DICT servers</source>
-        <translation>Sözlük sunucuları</translation>
+        <translation>DICT sunucuları</translation>
     </message>
     <message>
         <source>DICT servers:</source>
-        <translation>Sözlük sunucuları:</translation>
+        <translation>DICT sunucuları:</translation>
     </message>
 </context>
 <context>
@@ -4126,7 +4124,7 @@ uygun grupların altlarına ekleyin.</translation>
     <name>TextToSpeechSource</name>
     <message>
         <source>Selected voice engines:</source>
-        <translation>Seçilmiş ses motorları:</translation>
+        <translation>Seçili ses motorları:</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -4158,7 +4156,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>No TTS voice available</source>
-        <translation>TTS sesi yok</translation>
+        <translation>Kullanılabilir TTS sesi yok</translation>
     </message>
     <message>
         <source>Confirm removal</source>
@@ -4166,7 +4164,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Remove voice engine &lt;b&gt;%1&lt;/b&gt; from the list?</source>
-        <translation>Ses motorunu &lt;b&gt;%1&lt;/b&gt; listeden kaldır?</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; ses motoru listeden kaldırılsın mı?</translation>
     </message>
     <message>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
@@ -4204,7 +4202,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Id</source>
@@ -4219,7 +4217,7 @@ uygun grupların altlarına ekleyin.</translation>
     <name>WebSitesModel</name>
     <message>
         <source>Name</source>
-        <translation>İsim</translation>
+        <translation>Ad</translation>
     </message>
     <message>
         <source>Address</source>
@@ -4235,7 +4233,7 @@ uygun grupların altlarına ekleyin.</translation>
     </message>
     <message>
         <source>Insert article as link inside &lt;iframe&gt; tag</source>
-        <translation>Makaleyi &lt;iframe&gt; etiketinin içine bağlantı olarak ekle</translation>
+        <translation>Maddeyi &lt;iframe&gt; etiketinin içine bağlantı olarak ekle</translation>
     </message>
     <message>
         <source>As link</source>
@@ -4246,7 +4244,7 @@ uygun grupların altlarına ekleyin.</translation>
     <name>WordFinder</name>
     <message>
         <source>Failed to query some dictionaries.</source>
-        <translation>Bazı sözlükler sorgulamak için başarısız oldu.</translation>
+        <translation>Bazı sözlükler sorgulanamadı.</translation>
     </message>
 </context>
 <context>
