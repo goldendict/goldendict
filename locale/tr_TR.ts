@@ -2588,7 +2588,7 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
     </message>
     <message>
         <source>Export Favorites to file as plain list</source>
-        <translation">Favorileri düz metin olarak aktar</translation>
+        <translation>Favorileri düz metin olarak aktar</translation>
     </message>
     <message>
         <source>Import Favorites from file</source>
