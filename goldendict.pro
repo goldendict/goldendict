@@ -563,7 +563,7 @@ CONFIG( no_epwing_support ) {
   SOURCES += epwing.cc \
              epwing_book.cc \
              epwing_charmap.cc
-  LIBS += -leb
+  LIBS += -lebu
 }
 
 CONFIG( chinese_conversion_support ) {

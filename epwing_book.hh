@@ -22,7 +22,7 @@
 #include <stub_msvc.h>
 #endif
 
-#include <eb/eb.h>
+#include <ebu/eb.h>
 
 namespace Epwing {
 
