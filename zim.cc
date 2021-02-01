@@ -42,6 +42,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <algorithm>
 
 namespace Zim {
 
@@ -290,7 +291,7 @@ bool ZimFile::open()
   for( quint32 i = 0; i < zimHeader.clusterCount; i++ )
     clusterOffsets[ i ] = QPair< quint64, quint32 >( offs.at( i ), i );
 
-  qSort( clusterOffsets );
+  std::sort( clusterOffsets.begin(), clusterOffsets.end() );
 
   return true;
 }
@@ -1027,7 +1028,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
-    qSort( offsetsWithClusters );
+    std::sort( offsetsWithClusters.begin(), offsetsWithClusters.end() );
 
     QVector< uint32_t > offsets;
     offsets.resize( offsetsWithClusters.size() );
@@ -1134,7 +1135,7 @@ void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
     offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
   }
 
-  qSort( offsetsWithClusters );
+  std::sort( offsetsWithClusters.begin(), offsetsWithClusters.end() );
 
   for( int i = 0; i < offsetsWithClusters.size(); i++ )
     offsets[ i ] = offsetsWithClusters.at( i ).second;

@@ -665,7 +665,7 @@ Q_UNUSED( parent );
   }
 
   headwords.append( temp );
-  qSort( headwords );
+  std::sort( headwords.begin(),  headwords.end() );
 
   endResetModel();
   emit contentChanged();
