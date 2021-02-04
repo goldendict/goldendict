@@ -38,7 +38,7 @@ extern "C" {
 #ifdef EB_BUILD_LIBRARY
 #include "defs.h"
 #else
-#include <eb/defs.h>
+#include <ebu/defs.h>
 #endif
 
 /*
@@ -110,6 +110,10 @@ extern "C" {
 #define EB_HOOK_BEGIN_EBXAC_GAIJI	51
 #define EB_HOOK_END_EBXAC_GAIJI		52
 #define EB_HOOK_EBXAC_GAIJI		53
+#define EB_HOOK_UNICODE			54
+
+#define EB_HOOK_BEGIN_COLOR_CHART	55
+#define EB_HOOK_END_COLOR_CHART		56
 
 /*
  * Function declarations.

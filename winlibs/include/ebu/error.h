@@ -36,7 +36,7 @@ extern "C" {
 #ifdef EB_BUILD_LIBRARY
 #include "defs.h"
 #else
-#include <eb/defs.h>
+#include <ebu/defs.h>
 #endif
 
 /*
@@ -125,11 +125,13 @@ extern "C" {
 #define EB_ERR_UNBOUND_BOOKLIST		67
 #define EB_ERR_NO_SUCH_BOOK		68
 
+#define EB_ERR_NO_SUCH_COLOR		69
+
 
 /*
  * The number of error codes.
  */
-#define EB_NUMBER_OF_ERRORS		69
+#define EB_NUMBER_OF_ERRORS		70
 
 /*
  * The maximum length of an error message.

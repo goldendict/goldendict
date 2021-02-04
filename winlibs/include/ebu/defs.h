@@ -40,8 +40,8 @@ extern "C" {
 #include "sysdefs.h"
 #include "zio.h"
 #else
-#include <eb/sysdefs.h>
-#include <eb/zio.h>
+#include <ebu/sysdefs.h>
+#include <ebu/zio.h>
 #endif
 
 #ifdef EB_ENABLE_PTHREAD
@@ -61,6 +61,7 @@ extern "C" {
 #define EB_CHARCODE_ISO8859_1		1
 #define EB_CHARCODE_JISX0208		2
 #define EB_CHARCODE_JISX0208_GB2312	3
+#define EB_CHARCODE_UTF8		4
 #define EB_CHARCODE_INVALID		-1
 
 /*
@@ -175,12 +176,18 @@ extern "C" {
 /*
  * The number of text hooks.
  */
-#define EB_NUMBER_OF_HOOKS		54
+#define EB_NUMBER_OF_HOOKS		57
 
 /*
  * The number of search contexts required by a book.
  */
 #define EB_NUMBER_OF_SEARCH_CONTEXTS	EB_MAX_MULTI_ENTRIES
+
+/*
+ * Maximum length of an EB* book title.
+ */
+#define EB_MAX_COLOR_VALUE_LENGTH	20
+#define EB_MAX_COLOR_NAME_LENGTH	(EB_SIZE_PAGE - EB_MAX_COLOR_VALUE_LENGTH)
 
 /*
  * Types for various codes.
@@ -277,6 +284,15 @@ struct EB_Alternation_Cache_Struct {
      */
     char text[EB_MAX_ALTERNATION_TEXT_LENGTH + 1];
 };
+
+/*
+ * UTF-8 normalization table.
+ */
+struct EB_UTF8_Table_Struct{
+    int code;
+    char *string;
+};
+typedef struct EB_UTF8_Table_Struct EB_UTF8_Table;
 
 /*
  * An appendix for a subbook.
@@ -607,6 +623,7 @@ struct EB_Subbook_Struct {
     EB_Search copyright;
     EB_Search text;
     EB_Search sound;
+    EB_Search color_chart;
 
     /*
      * The number of multi-search methods the subbook has.
@@ -629,6 +646,17 @@ struct EB_Subbook_Struct {
      */
     EB_Font *narrow_current;
     EB_Font *wide_current;
+
+    /*
+     * Normalization table for UTF-8 subbook.
+     */
+    int table_page;
+    int table_size;
+
+    EB_UTF8_Table *table;
+    int table_count;
+    char *table_buffer;
+
 };
 
 /*

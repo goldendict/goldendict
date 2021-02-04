@@ -36,7 +36,7 @@ extern "C" {
 #ifdef EB_BUILD_LIBRARY
 #include "eb.h"
 #else
-#include <eb/eb.h>
+#include <ebu/eb.h>
 #endif
 
 /*
