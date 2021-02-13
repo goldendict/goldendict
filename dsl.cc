@@ -178,6 +178,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   int maxPictureWidth;
 
   wstring currentHeadword;
+  string resourceDir1, resourceDir2;
 
 public:
 
@@ -206,6 +207,12 @@ public:
 
   inline virtual quint32 getLangTo() const
   { return idxHeader.langTo; }
+
+  inline virtual string getResourceDir1() const
+  { return resourceDir1; }
+
+  inline virtual string getResourceDir2() const
+  { return resourceDir2; }
 
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
@@ -323,6 +330,12 @@ DslDictionary::DslDictionary( string const & id,
     idx.read( &sName.front(), sName.size() );
     preferredSoundDictionary = string( &sName.front(), sName.size() );
   }
+
+  resourceDir1 = getDictionaryFilenames()[ 0 ] + ".files" + FsEncoding::separator();
+  QString s = FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
+  if( s.endsWith( QString::fromLatin1( ".dz", Qt::CaseInsensitive ) ) )
+    s.chop( 3 );
+  resourceDir2 = FsEncoding::encode( s ) + ".files" + FsEncoding::separator();
 
   // Everything else would be done in deferred init
 }
@@ -867,10 +880,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
     string filename = Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false );
-    string n =
-      getDictionaryFilenames()[ 0 ] + ".files" +
-      FsEncoding::separator() +
-      FsEncoding::encode( filename );
+    string n = resourceDir1 + FsEncoding::encode( filename );
 
     if ( Filetype::isNameOfSound( filename ) )
     {
@@ -878,9 +888,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       // Otherwise, make a global 'search' one.
 
       bool search =
-          !File::exists( n ) && !File::exists( FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
-                                               FsEncoding::separator() +
-                                               FsEncoding::encode( filename ) ) &&
+          !File::exists( n ) && !File::exists( resourceDir2 + FsEncoding::encode( filename ) ) &&
+          !File::exists( FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+                                              FsEncoding::separator() +
+                                              FsEncoding::encode( filename ) ) &&
           ( !resourceZip.isOpen() ||
             !resourceZip.hasFile( Utf8::decode( filename ) ) );
 
@@ -917,18 +928,26 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
         try
         {
-          n = FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
-              FsEncoding::separator() +
-              FsEncoding::encode( filename );
+          n = resourceDir2 + FsEncoding::encode( filename );
           File::loadFromFile( n, imgdata );
         }
         catch( File::exCantOpen & )
         {
-          // Try reading from zip file
-          if ( resourceZip.isOpen() )
+          try
           {
-            Mutex::Lock _( resourceZipMutex );
-            resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+            n = FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+                FsEncoding::separator() +
+                FsEncoding::encode( filename );
+            File::loadFromFile( n, imgdata );
+          }
+          catch( File::exCantOpen & )
+          {
+            // Try reading from zip file
+            if ( resourceZip.isOpen() )
+            {
+              Mutex::Lock _( resourceZipMutex );
+              resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+            }
           }
         }
       }
@@ -1896,31 +1915,38 @@ void DslResourceRequest::run()
     }
     catch( File::exCantOpen & )
     {
-      n = dict.getDictionaryFilenames()[ 0 ] + ".files" +
-          FsEncoding::separator() +
-          FsEncoding::encode( resourceName );
-
-      try
-      {
+      n = dict.getResourceDir1() + FsEncoding::encode( resourceName );
+      try {
         Mutex::Lock _( dataMutex );
 
         File::loadFromFile( n, data );
       }
       catch( File::exCantOpen & )
       {
-        // Try reading from zip file
+        n = dict.getResourceDir2() + FsEncoding::encode( resourceName );
 
-        if ( dict.resourceZip.isOpen() )
+        try
         {
-          Mutex::Lock _( dict.resourceZipMutex );
+          Mutex::Lock _( dataMutex );
 
-          Mutex::Lock __( dataMutex );
-
-          if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
-            throw; // Make it fail since we couldn't read the archive
+          File::loadFromFile( n, data );
         }
-        else
-          throw;
+        catch( File::exCantOpen & )
+        {
+          // Try reading from zip file
+
+          if ( dict.resourceZip.isOpen() )
+          {
+            Mutex::Lock _( dict.resourceZipMutex );
+
+            Mutex::Lock __( dataMutex );
+
+            if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
+              throw; // Make it fail since we couldn't read the archive
+          }
+          else
+            throw;
+        }
       }
     }
 
