@@ -239,7 +239,7 @@ std::string Class::gets( bool stripNl ) THROW_SPEC( exReadError, exWriteError )
   return std::string( buf );
 }
 
-void Class::seek( long offset ) THROW_SPEC( exSeekError, exWriteError )
+void Class::seek( qint64 offset ) THROW_SPEC( exSeekError, exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -248,7 +248,7 @@ void Class::seek( long offset ) THROW_SPEC( exSeekError, exWriteError )
     throw exSeekError();
 }
 
-void Class::seekCur( long offset ) THROW_SPEC( exSeekError, exWriteError )
+void Class::seekCur( qint64 offset ) THROW_SPEC( exSeekError, exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -257,7 +257,7 @@ void Class::seekCur( long offset ) THROW_SPEC( exSeekError, exWriteError )
     throw exSeekError();
 }
 
-void Class::seekEnd( long offset ) THROW_SPEC( exSeekError, exWriteError )
+void Class::seekEnd( qint64 offset ) THROW_SPEC( exSeekError, exWriteError )
 {
   if ( writeBuffer )
     flushWriteBuffer();
@@ -271,7 +271,7 @@ void Class::rewind() THROW_SPEC( exSeekError, exWriteError )
   seek( 0 );
 }
 
-size_t Class::tell() THROW_SPEC( exSeekError )
+qint64 Class::tell() THROW_SPEC( exSeekError )
 {
   qint64 result = f.pos();
 
@@ -281,7 +281,7 @@ size_t Class::tell() THROW_SPEC( exSeekError )
   if ( writeBuffer )
     result += ( WriteBufferSize - writeBufferLeft );
 
-  return ( size_t ) result;
+  return result;
 }
 
 bool Class::eof() THROW_SPEC( exWriteError )

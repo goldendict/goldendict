@@ -95,17 +95,17 @@ public:
   std::string gets( bool stripNl = true ) THROW_SPEC( exReadError, exWriteError );
 
   /// Seeks in the file, relative to its beginning.
-  void seek( long offset ) THROW_SPEC( exSeekError, exWriteError );
+  void seek( qint64 offset ) THROW_SPEC( exSeekError, exWriteError );
   /// Seeks in the file, relative to the current position.
-  void seekCur( long offset ) THROW_SPEC( exSeekError, exWriteError );
+  void seekCur( qint64 offset ) THROW_SPEC( exSeekError, exWriteError );
   /// Seeks in the file, relative to the end of file.
-  void seekEnd( long offset = 0 ) THROW_SPEC( exSeekError, exWriteError );
+  void seekEnd( qint64 offset = 0 ) THROW_SPEC( exSeekError, exWriteError );
 
   /// Seeks to the beginning of file
   void rewind() THROW_SPEC( exSeekError, exWriteError );
 
   /// Tells the current position within the file, relative to its beginning.
-  size_t tell() THROW_SPEC( exSeekError );
+  qint64 tell() THROW_SPEC( exSeekError );
 
   /// Returns true if end-of-file condition is set.
   bool eof() THROW_SPEC( exWriteError );
