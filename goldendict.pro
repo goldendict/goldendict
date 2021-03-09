@@ -628,6 +628,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/eo_EO.ts \
     locale/fi_FI.ts \
     locale/jb_JB.ts \
+    locale/hi_IN.ts \
     locale/ie_001.ts
 
 # Build version file
