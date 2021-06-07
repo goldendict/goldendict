@@ -2792,10 +2792,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
   updatePronounceAvailability();
   updateFoundInDictsList();
 
-  // Add to history
-
-  addWordToHistory( phrase.phrase );
-
   updateBackForwardButtons();
 
   #if 0
@@ -2907,10 +2903,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
 
   updatePronounceAvailability();
   updateFoundInDictsList();
-
-  // Add to history
-
-  addWordToHistory( inWord );
 
   updateBackForwardButtons();
 }

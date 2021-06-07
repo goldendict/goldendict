@@ -815,9 +815,6 @@ void ScanPopup::showTranslationFor( Config::InputPhrase const & inputPhrase )
   unsigned groupId = ui.groupList->getCurrentGroup();
   definition->showDefinition( inputPhrase, groupId );
   definition->focus();
-
-  // Add to history
-  emit sendWordToHistory( inputPhrase.phrase.trimmed() );
 }
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
