@@ -96,6 +96,10 @@ public:
   /// contexts is an optional map of context values to be passed for dictionaries.
   /// The only values to pass here are ones obtained from showDefinitionInNewTab()
   /// signal or none at all.
+  void showDefinition( Config::InputPhrase const & phrase, unsigned group,
+                       QString const & scrollTo = QString(),
+                       Contexts const & contexts = Contexts() );
+
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
@@ -160,6 +164,9 @@ public:
 
   /// Returns current article's title
   QString getTitle();
+
+  /// Returns the phrase translated by the current article.
+  Config::InputPhrase getPhrase() const;
 
   /// Prints current article
   void print( QPrinter * ) const;

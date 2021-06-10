@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
+#include <QMetaType>
 #include "cpp_features.hh"
 #include "ex.hh"
 
@@ -243,6 +244,30 @@ enum ScanPopupWindowFlags
 };
 ScanPopupWindowFlags spwfFromInt( int id );
 
+struct InputPhrase
+{
+  static InputPhrase fromPhrase( QString const & phrase )
+  {
+    return { phrase, QString() };
+  }
+
+  bool isValid() const { return !phrase.isEmpty(); }
+
+  QString phraseWithSuffix() const { return phrase + punctuationSuffix; }
+
+  QString phrase;
+  QString punctuationSuffix;
+};
+
+inline bool operator == ( InputPhrase const & a, InputPhrase const & b )
+{
+  return a.phrase == b.phrase && a.punctuationSuffix == b.punctuationSuffix;
+}
+inline bool operator != ( InputPhrase const & a, InputPhrase const & b )
+{
+  return !( a == b );
+}
+
 /// Various user preferences
 struct Preferences
 {
@@ -323,7 +348,7 @@ struct Preferences
 
   bool limitInputPhraseLength;
   int inputPhraseLengthLimit;
-  QString sanitizeInputPhrase( QString const & inputPhrase ) const;
+  InputPhrase sanitizeInputPhrase( QString const & inputPhrase ) const;
 
   unsigned short maxDictionaryRefsInContextMenu;
 #ifndef Q_WS_X11
@@ -802,5 +827,6 @@ QString getNetworkCacheDir() throw();
 
 }
 
-#endif
+Q_DECLARE_METATYPE( Config::InputPhrase )
 
+#endif

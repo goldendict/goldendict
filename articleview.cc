@@ -352,7 +352,7 @@ ArticleView::~ArticleView()
 #endif
 }
 
-void ArticleView::showDefinition( QString const & word, unsigned group,
+void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
@@ -364,7 +364,9 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", word );
+  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
+  if ( !phrase.punctuationSuffix.isEmpty() )
+    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
   Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
   if( cfg.preferences.ignoreDiacritics )
     Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
@@ -401,7 +403,7 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
-  emit sendWordToHistory( word );
+  emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
   closeSearch();
@@ -415,6 +417,13 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
+}
+
+void ArticleView::showDefinition( QString const & word, unsigned group,
+                                  QString const & scrollTo,
+                                  Contexts const & contexts_ )
+{
+  showDefinition( Config::InputPhrase::fromPhrase( word ), group, scrollTo, contexts_ );
 }
 
 void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
@@ -1668,6 +1677,13 @@ QString ArticleView::getTitle()
   return ui.definition->page()->mainFrame()->title();
 }
 
+Config::InputPhrase ArticleView::getPhrase() const
+{
+  const QUrl url = ui.definition->url();
+  return { Qt4x5::Url::queryItemValue( url, "word" ),
+           Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) };
+}
+
 void ArticleView::print( QPrinter * printer ) const
 {
   ui.definition->print( printer );
@@ -2085,9 +2101,9 @@ void ArticleView::audioPlayerError( QString const & message )
 
 void ArticleView::pasteTriggered()
 {
-  QString text = cfg.preferences.sanitizeInputPhrase( QApplication::clipboard()->text() );
+  Config::InputPhrase phrase = cfg.preferences.sanitizeInputPhrase( QApplication::clipboard()->text() );
 
-  if ( text.size() )
+  if ( phrase.isValid() )
   {
     unsigned groupId = getGroup( ui.definition->url() );
     if ( groupId == 0 )
@@ -2096,7 +2112,7 @@ void ArticleView::pasteTriggered()
       // so let's try the currently selected group.
       groupId = groupComboBox->getCurrentGroup();
     }
-    showDefinition( text, groupId, getCurrentArticle() );
+    showDefinition( phrase, groupId, getCurrentArticle() );
   }
 }
 
