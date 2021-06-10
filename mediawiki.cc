@@ -7,6 +7,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QtXml>
+#include <algorithm>
 #include <list>
 #include "gddebug.hh"
 #include "audiolink.hh"
@@ -242,6 +243,26 @@ private:
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
+
+  /// This simple set implementation should be much more efficient than tree-
+  /// and hash-based standard/Qt containers when there are very few elements.
+  template< typename T >
+  class SmallSet {
+  public:
+    bool insert( T x )
+    {
+      if( std::find( elements.begin(), elements.end(), x ) != elements.end() )
+        return false;
+      elements.push_back( x );
+      return true;
+    }
+  private:
+    std::vector< T > elements;
+  };
+
+  /// The page id set allows to filter out duplicate articles in case MediaWiki
+  /// redirects the main word and words in the alts collection to the same page.
+  SmallSet< long long > addedPageIds;
   Class * dictPtr;
 };
 
@@ -341,7 +362,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
       {
         QDomNode parseNode = dd.namedItem( "api" ).namedItem( "parse" );
   
-        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0" )
+        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0"
+             // Don't show the same article more than once:
+             && addedPageIds.insert( parseNode.toElement().attribute( "pageid" ).toLongLong() ) )
         {
           QDomNode textNode = parseNode.namedItem( "text" );
   
