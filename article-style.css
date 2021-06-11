@@ -1624,6 +1624,7 @@ in the bottom-right corner of the content area */
 	padding-right: 18px;
 }
 .mwiki #bodyContent a.external[href $=".ogg"], .mwiki #bodyContent a.external[href $=".OGG"],
+.mwiki #bodyContent a.external[href $=".oga"], .mwiki #bodyContent a.external[href $=".OGA"],
 .mwiki #bodyContent a.external[href $=".mid"], .mwiki #bodyContent a.external[href $=".MID"],
 .mwiki #bodyContent a.external[href $=".midi"], .mwiki #bodyContent a.external[href $=".MIDI"],
 .mwiki #bodyContent a.external[href $=".mp3"], .mwiki #bodyContent a.external[href $=".MP3"],
