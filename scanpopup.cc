@@ -804,7 +804,7 @@ void ScanPopup::updateSuggestionList( QString const & text )
 
 void ScanPopup::translateInputFinished()
 {
-  inputPhrase = { ui.translateBox->translateLine()->text().trimmed(), translateBoxSuffix };
+  inputPhrase = Config::InputPhrase ( ui.translateBox->translateLine()->text().trimmed(), translateBoxSuffix );
   showTranslationFor( inputPhrase );
 }
 

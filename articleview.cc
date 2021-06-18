@@ -1680,8 +1680,8 @@ QString ArticleView::getTitle()
 Config::InputPhrase ArticleView::getPhrase() const
 {
   const QUrl url = ui.definition->url();
-  return { Qt4x5::Url::queryItemValue( url, "word" ),
-           Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) };
+  return Config::InputPhrase( Qt4x5::Url::queryItemValue( url, "word" ),
+                              Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
 }
 
 void ArticleView::print( QPrinter * printer ) const

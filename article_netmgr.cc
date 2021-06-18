@@ -388,8 +388,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
-    Config::InputPhrase phrase { Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
-                                 Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) };
+    Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
+                                 Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
 
     bool groupIsValid = false;
     unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );

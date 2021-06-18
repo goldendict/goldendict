@@ -246,9 +246,17 @@ ScanPopupWindowFlags spwfFromInt( int id );
 
 struct InputPhrase
 {
+  InputPhrase()
+  {}
+
+  InputPhrase( QString const & _phrase, QString const & _suffix ) :
+    phrase( _phrase ),
+    punctuationSuffix( _suffix )
+  {}
+
   static InputPhrase fromPhrase( QString const & phrase )
   {
-    return { phrase, QString() };
+    return InputPhrase( phrase, QString() );
   }
 
   bool isValid() const { return !phrase.isEmpty(); }

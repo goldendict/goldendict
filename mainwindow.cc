@@ -2324,7 +2324,7 @@ void MainWindow::updateSuggestionList( QString const & newValue )
 void MainWindow::translateInputFinished( bool checkModifiers )
 {
   QString word = Folding::unescapeWildcardSymbols( translateLine->text() );
-  respondToTranslationRequest( { word, translateBoxSuffix }, checkModifiers );
+  respondToTranslationRequest( Config::InputPhrase( word, translateBoxSuffix ), checkModifiers );
 }
 
 void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase,
@@ -2350,10 +2350,10 @@ void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase
 
 void MainWindow::setTranslateBoxTextAndKeepSuffix( QString const & text, TranslateBoxPopup popupAction )
 {
-  if( popupAction == TranslateBoxPopup::NoPopupChange || cfg.preferences.searchInDock )
+  if( popupAction == NoPopupChange || cfg.preferences.searchInDock )
     translateLine->setText( text );
   else
-    translateBox->setText( text, popupAction == TranslateBoxPopup::EnablePopup );
+    translateBox->setText( text, popupAction == EnablePopup );
 }
 
 void MainWindow::setTranslateBoxTextAndClearSuffix( QString const & text, TranslateBoxPopup popupAction )
