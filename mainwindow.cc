@@ -2035,7 +2035,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
 
+  dicts.restoreGeometry( cfg.dictionariesDialogGeometry );
   dicts.exec();
+  cfg.dictionariesDialogGeometry = newCfg.dictionariesDialogGeometry = dicts.saveGeometry();
 
   if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
