@@ -183,6 +183,30 @@ static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString
         .arg( variable ) );
 }
 
+namespace {
+
+char const * const scrollToPrefix = "gdfrom-";
+
+bool isScrollTo( QString const & id )
+{
+  return id.startsWith( scrollToPrefix );
+}
+
+QString dictionaryIdFromScrollTo( QString const & scrollTo )
+{
+  Q_ASSERT( isScrollTo( scrollTo ) );
+  const int scrollToPrefixLength = 7;
+  return scrollTo.mid( scrollToPrefixLength );
+}
+
+} // unnamed namespace
+
+QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
+{
+  Q_ASSERT( !isScrollTo( dictionaryId ) );
+  return scrollToPrefix + dictionaryId;
+}
+
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
@@ -550,11 +574,14 @@ void ArticleView::loadFinished( bool )
     }
   }
   else
-  if ( Qt4x5::Url::queryItemValue( url, "scrollto" ).startsWith( "gdfrom-" ) )
   {
-    // There is no active article saved in history, but we have it as a parameter.
-    // setCurrentArticle will save it and scroll there.
-    setCurrentArticle( Qt4x5::Url::queryItemValue( url, "scrollto" ), true );
+    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    if( isScrollTo( scrollTo ) )
+    {
+      // There is no active article saved in history, but we have it as a parameter.
+      // setCurrentArticle will save it and scroll there.
+      setCurrentArticle( scrollTo, true );
+    }
   }
 
 
@@ -675,10 +702,10 @@ QStringList ArticleView::getArticlesList()
 QString ArticleView::getActiveArticleId()
 {
   QString currentArticle = getCurrentArticle();
-  if ( !currentArticle.startsWith( "gdfrom-" ) )
+  if ( !isScrollTo( currentArticle ) )
     return QString(); // Incorrect id
 
-  return currentArticle.mid( 7 );
+  return dictionaryIdFromScrollTo( currentArticle );
 }
 
 QString ArticleView::getCurrentArticle()
@@ -693,7 +720,7 @@ QString ArticleView::getCurrentArticle()
 
 void ArticleView::jumpToDictionary( QString const & id, bool force )
 {
-  QString targetArticle = "gdfrom-" + id;
+  QString targetArticle = scrollToFromDictionaryId( id );
 
   // jump only if neceessary, or when forced
   if ( force || targetArticle != getCurrentArticle() )
@@ -704,13 +731,14 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
 
 void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
-  if ( !id.startsWith( "gdfrom-" ) )
+  if ( !isScrollTo( id ) )
     return; // Incorrect id
 
   if ( !ui.definition->isVisible() )
     return; // No action on background page, scrollIntoView there don't work
 
-  if ( getArticlesList().contains( id.mid( 7 ) ) )
+  QString const dictionaryId = dictionaryIdFromScrollTo( id );
+  if ( getArticlesList().contains( dictionaryId ) )
   {
     if ( moveToIt )
       ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
@@ -721,7 +749,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     ui.definition->history()->currentItem().setUserData( userData );
 
     ui.definition->page()->mainFrame()->evaluateJavaScript(
-      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
+      QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
   }
 }
 
@@ -737,7 +765,8 @@ bool ArticleView::isFramedArticle( QString const & ca )
     return false;
 
   return ui.definition->page()->mainFrame()->
-               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
+               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" )
+                                          .arg( dictionaryIdFromScrollTo( ca ) ) ).toBool();
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -765,8 +794,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
       if ( result.type() == QVariant::String )
       {
         // Looks this way
-
-        contexts[ ca.mid( 7 ) ] = QString::fromLatin1( url.toEncoded() );
+        contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
 
         QUrl target;
 
@@ -798,7 +826,7 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
 
     if ( frameName.startsWith( "gdexpandframe-" ) )
     {
-      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
+      QString newCurrent = scrollToFromDictionaryId( frameName.mid( 14 ) );
 
       if ( getCurrentArticle() != newCurrent )
         setCurrentArticle( newCurrent, false );
@@ -1190,7 +1218,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         {
           if( dictName.compare( QString::fromUtf8( allDictionaries[ i ]->getName().c_str() ) ) == 0 )
           {
-            newScrollTo = QString( "gdfrom-" ) + QString::fromUtf8( allDictionaries[ i ]->getId().c_str() );
+            newScrollTo = scrollToFromDictionaryId( QString::fromUtf8( allDictionaries[ i ]->getId().c_str() ) );
             break;
           }
         }
@@ -2004,7 +2032,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       QString id = tableOfContents[ result ];
 
       if ( id.size() )
-        setCurrentArticle( "gdfrom-" + id, true );
+        setCurrentArticle( scrollToFromDictionaryId( id ), true );
     }
   }
 #if 0
@@ -2124,7 +2152,7 @@ void ArticleView::moveOneArticleUp()
   {
     QStringList lst = getArticlesList();
 
-    int idx = lst.indexOf( current.mid( 7 ) );
+    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
 
     if ( idx != -1 )
     {
@@ -2133,7 +2161,7 @@ void ArticleView::moveOneArticleUp()
       if ( idx < 0 )
         idx = lst.size() - 1;
 
-      setCurrentArticle( "gdfrom-" + lst[ idx ], true );
+      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
     }
   }
 }
@@ -2146,13 +2174,13 @@ void ArticleView::moveOneArticleDown()
   {
     QStringList lst = getArticlesList();
 
-    int idx = lst.indexOf( current.mid( 7 ) );
+    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
 
     if ( idx != -1 )
     {
       idx = ( idx + 1 ) % lst.size();
 
-      setCurrentArticle( "gdfrom-" + lst[ idx ], true );
+      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
     }
   }
 }
@@ -2230,10 +2258,10 @@ void ArticleView::on_highlightAllButton_clicked()
 
 void ArticleView::onJsActiveArticleChanged(QString const & id)
 {
-  if ( !id.startsWith( "gdfrom-" ) )
+  if ( !isScrollTo( id ) )
     return; // Incorrect id
 
-  emit activeArticleChanged( this, id.mid( 7 ) );
+  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
 }
 
 void ArticleView::doubleClicked( QPoint pos )

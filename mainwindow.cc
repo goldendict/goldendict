@@ -2330,7 +2330,7 @@ void MainWindow::translateInputFinished( bool checkModifiers )
 }
 
 void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase,
-                                              bool checkModifiers, QString const & dictID )
+                                              bool checkModifiers, QString const & scrollTo )
 {
   if ( phrase.isValid() )
   {
@@ -2338,7 +2338,7 @@ void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase
     if ( checkModifiers && ( mods & (Qt::ControlModifier | Qt::ShiftModifier) ) )
       addNewTab();
 
-    showTranslationFor( phrase, 0, dictID );
+    showTranslationFor( phrase, 0, scrollTo );
 
     if ( cfg.preferences.searchInDock )
     {
@@ -2779,7 +2779,7 @@ void MainWindow::showHistoryItem( QString const & word )
 
 void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
                                      unsigned inGroup,
-                                     QString const & dictID )
+                                     QString const & scrollTo )
 {
   ArticleView *view = getCurrentArticleView();
 
@@ -2789,7 +2789,7 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
                    ( groupInstances.empty() ? 0 :
                         groupInstances[ groupList->currentIndex() ].id );
 
-  view->showDefinition( phrase, group, dictID );
+  view->showDefinition( phrase, group, scrollTo );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -3906,7 +3906,7 @@ void MainWindow::headwordReceived( const QString & word, const QString & ID )
   toggleMainWindow( true );
   setTranslateBoxTextAndClearSuffix( Folding::escapeWildcardSymbols( word ), NoPopupChange );
   respondToTranslationRequest( Config::InputPhrase::fromPhrase( word ),
-                               false, "gdfrom-" + ID );
+                               false, ArticleView::scrollToFromDictionaryId( ID ) );
 }
 
 void MainWindow::updateFavoritesMenu()

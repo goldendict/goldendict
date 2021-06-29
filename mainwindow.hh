@@ -260,7 +260,7 @@ private:
   QString unescapeTabHeader( QString const & header );
 
   void respondToTranslationRequest( Config::InputPhrase const & phrase,
-                                    bool checkModifiers, QString const & dictID = QString() );
+                                    bool checkModifiers, QString const & scrollTo = QString() );
 
   void updateSuggestionList();
   void updateSuggestionList( QString const & text );
@@ -406,7 +406,7 @@ private slots:
   void mutedDictionariesChanged();
 
   void showTranslationFor( Config::InputPhrase const &, unsigned inGroup = 0,
-                           QString const & dictID = QString() );
+                           QString const & scrollTo = QString() );
   void showTranslationFor( QString const & );
 
   void showTranslationFor( QString const &, QStringList const & dictIDs,
