@@ -217,6 +217,14 @@ QString dictionaryIdFromScrollTo( QString const & scrollTo )
   return scrollTo.mid( scrollToPrefixLength );
 }
 
+QString scrollToFromUrl( QUrl const & url )
+{
+  QString value = Qt4x5::Url::queryItemValue( url, "scrollto" );
+  if( isScrollTo( value ) )
+    return value;
+  return QString();
+}
+
 QString searchStatusMessageNoMatches()
 {
   return ArticleView::tr( "Phrase not found" );
@@ -261,6 +269,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   goForwardAction( this ),
   selectCurrentArticleAction( this ),
   copyAsTextAction( this ),
+  jumpToTargetArticleAction( this ),
   inspectAction( this ),
   openSearchAction( openSearchAction_ ),
   searchIsOpened( false ),
@@ -348,6 +357,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &copyAsTextAction );
   connect( &copyAsTextAction, SIGNAL( triggered() ),
            this, SLOT( copyAsText() ) );
+
+  jumpToTargetArticleAction.setShortcut( QKeySequence( "Alt+T" ) );
+  jumpToTargetArticleAction.setText( tr( "Jump to Target Article" ) );
+  ui.definition->addAction( &jumpToTargetArticleAction );
+  connect( &jumpToTargetArticleAction, SIGNAL( triggered() ),
+           this, SLOT( jumpToTargetArticle() ) );
 
   inspectAction.setShortcut( QKeySequence( Qt::Key_F12 ) );
   inspectAction.setText( tr( "Inspect" ) );
@@ -617,8 +632,8 @@ void ArticleView::loadFinished( bool )
   else
   if( cfg.preferences.autoScrollToTargetArticle )
   {
-    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
-    if( isScrollTo( scrollTo ) )
+    QString const scrollTo = scrollToFromUrl( url );
+    if( !scrollTo.isEmpty() )
     {
       // There is no active article saved in history, but we have it as a parameter.
       // setCurrentArticle will save it and scroll there.
@@ -1929,10 +1944,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     menu.addAction( ui.definition->pageAction( QWebPage::SelectAll ) );
   }
 
+  QStringList const ids = getArticlesList();
+
+  QString const scrollTo = scrollToFromUrl( ui.definition->url() );
+  if( !scrollTo.isEmpty() && ids.contains( dictionaryIdFromScrollTo( scrollTo ) ) )
+    menu.addAction( &jumpToTargetArticleAction );
+
   map< QAction *, QString > tableOfContents;
 
   // Add table of contents
-  QStringList ids = getArticlesList();
 
   if ( !menu.isEmpty() && ids.size() )
     menu.addSeparator();
@@ -2092,6 +2112,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   DPRINTF( "url = %s\n", r.linkUrl().toString().toLocal8Bit().data() );
   DPRINTF( "title = %s\n", r.title().toLocal8Bit().data() );
 #endif
+}
+
+void ArticleView::jumpToTargetArticle()
+{
+  QString const scrollTo = scrollToFromUrl( ui.definition->url() );
+  // When there is no "scrollto" query item in the current definition's URL
+  // and this slot's action is triggered via the shortcut - do nothing.
+  if( !scrollTo.isEmpty() )
+    setCurrentArticle( scrollTo, true );
 }
 
 void ArticleView::resourceDownloadFinished()

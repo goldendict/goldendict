@@ -375,7 +375,8 @@ be the last ones.</string>
           <string>Normally, clicking on a link, double-clicking on a word or looking up
 selection in an article loads the translation and almost immediately
 scrolls to the article from the same dictionary. With this option off,
-however, the article from the topmost dictionary is shown.</string>
+however, the article from the topmost dictionary is shown.
+Once the translation is loaded, pressing Alt+T scrolls to the target article.</string>
          </property>
          <property name="text">
           <string>Automatically scroll to target article</string>
