@@ -265,9 +265,12 @@ private:
   void updateSuggestionList();
   void updateSuggestionList( QString const & text );
 
+  enum WildcardPolicy { EscapeWildcards, WildcardsAreAlreadyEscaped };
   enum TranslateBoxPopup { NoPopupChange, EnablePopup, DisablePopup };
-  void setTranslateBoxTextAndKeepSuffix( QString const & text, TranslateBoxPopup popupAction );
-  void setTranslateBoxTextAndClearSuffix( QString const & text, TranslateBoxPopup popupAction );
+  void setTranslateBoxTextAndKeepSuffix( QString text, WildcardPolicy wildcardPolicy,
+                                         TranslateBoxPopup popupAction );
+  void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
+                                          TranslateBoxPopup popupAction );
 
 private slots:
 
