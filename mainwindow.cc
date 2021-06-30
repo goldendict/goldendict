@@ -979,7 +979,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
     QString str = QApplication::clipboard()->text(subtype,
       QClipboard::Selection);
-  setTranslateBoxTextAndClearSuffix( str, NoPopupChange );
+  setTranslateBoxTextAndClearSuffix( Folding::escapeWildcardSymbols( str ), NoPopupChange );
 
         QKeyEvent ev(QEvent::KeyPress, Qt::Key_Enter,
            Qt::NoModifier);
@@ -4544,7 +4544,7 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
 void MainWindow::sendWordToInputLine( const QString & word )
 {
-  setTranslateBoxTextAndClearSuffix( word, NoPopupChange );
+  setTranslateBoxTextAndClearSuffix( Folding::escapeWildcardSymbols( word ), NoPopupChange );
 }
 
 void MainWindow::storeResourceSavePath( const QString & newPath )
