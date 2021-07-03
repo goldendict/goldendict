@@ -36,7 +36,7 @@ extern "C" {
 #ifdef EB_BUILD_LIBRARY
 #include "defs.h"
 #else
-#include <eb/defs.h>
+#include <ebu/defs.h>
 #endif
 
 #include <stdarg.h>
@@ -52,7 +52,14 @@ int eb_is_bound(EB_Book *book);
 EB_Error_Code eb_path(EB_Book *book, char *path);
 EB_Error_Code eb_disc_type(EB_Book *book, EB_Disc_Code *disc_code);
 EB_Error_Code eb_character_code(EB_Book *book,
-    EB_Character_Code *character_code);
+EB_Character_Code *character_code);
+
+/* color.c */
+int eb_have_color_chart(EB_Book *book);
+EB_Error_Code eb_color_chart(EB_Book *book, EB_Position *position);
+EB_Error_Code eb_color_value(EB_Book *book, int number, char *value);
+EB_Error_Code eb_color_name(EB_Book *book, int number, char *name);
+EB_Error_Code eb_color_page(EB_Book *book, int number, char *buffer);
 
 /* copyright.h */
 int eb_have_copyright(EB_Book *book);
@@ -139,6 +146,13 @@ EB_Error_Code eb_subbook_directory2(EB_Book *book,
     EB_Subbook_Code subbook_code, char *directory);
 EB_Error_Code eb_set_subbook(EB_Book *book, EB_Subbook_Code subbook_code);
 void eb_unset_subbook(EB_Book *book);
+
+/* utf8.c */
+char *eb_normalize_utf8 (EB_Book *book, int code);
+EB_Error_Code eb_load_utf8_table (EB_Book *book);
+void eb_initialize_utf8_table (EB_Book *book);
+void eb_finalize_utf8_table (EB_Book *book);
+int eb_read_utf8 (const char *buffer, int *code);
 
 /* word.c */
 int eb_have_word_search(EB_Book *book);

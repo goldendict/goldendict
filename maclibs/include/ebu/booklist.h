@@ -1,5 +1,5 @@
 /*                                                            -*- C -*-
- * Copyright (c) 2001-2006  Motoyuki Kasahara
+ * Copyright (c) 1997-2006  Motoyuki Kasahara
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -26,48 +26,35 @@
  * SUCH DAMAGE.
  */
 
-#ifndef EB_BINARY_H
-#define EB_BINARY_H
+#ifndef EB_BOOKLIST_H
+#define EB_BOOKLIST_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <sys/types.h>
-
 #ifdef EB_BUILD_LIBRARY
-#include "defs.h"
+#include "eb.h"
 #else
-#include <eb/defs.h>
+#include <ebu/eb.h>
 #endif
 
 /*
  * Function declarations.
  */
-/* binary.c */
-EB_Error_Code eb_set_binary_mono_graphic(EB_Book *book,
-    const EB_Position *position, int width, int height);
-EB_Error_Code eb_set_binary_gray_graphic(EB_Book *book,
-    const EB_Position *position, int width, int height);
-EB_Error_Code eb_set_binary_wave(EB_Book *book,
-    const EB_Position *start_position, const EB_Position *end_position);
-EB_Error_Code eb_set_binary_color_graphic(EB_Book *book,
-    const EB_Position *position);
-EB_Error_Code eb_set_binary_mpeg(EB_Book *book, const unsigned int *argv);
-EB_Error_Code eb_read_binary(EB_Book *book, size_t binary_max_length,
-    char *binary, ssize_t *binary_length);
-void eb_unset_binary(EB_Book *book);
+/* booklist.c */
+void eb_initialize_booklist(EB_BookList *booklist);
+void eb_finalize_booklist(EB_BookList *booklist);
+EB_Error_Code eb_bind_booklist(EB_BookList *booklist, const char *path);
+EB_Error_Code eb_booklist_book_count(EB_BookList *booklist, int *book_count);
+EB_Error_Code eb_booklist_book_name(EB_BookList *booklist, int book_index,
+    char **book_name);
+EB_Error_Code eb_booklist_book_title(EB_BookList *booklist, int book_index,
+    char **book_title);
 
-/* filename.c */
-EB_Error_Code eb_compose_movie_file_name(const unsigned int *argv,
-    char *composed_file_name);
-EB_Error_Code eb_compose_movie_path_name(EB_Book *book,
-    const unsigned int *argv, char *composed_path_name);
-EB_Error_Code eb_decompose_movie_file_name(unsigned int *argv,
-    const char *composed_file_name);
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* not EB_BINARY_H */
+#endif /* not EB_BOOKLIST_H */
