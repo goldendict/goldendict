@@ -3013,7 +3013,7 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     if( ftsDlg )
       ftsDlg->show();
 
-    focusTranslateLine();
+    focusArticleView();
 #ifdef HAVE_X11
     Window wh = 0;
     int rev = 0;
