@@ -25,7 +25,7 @@ QT += core \
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \
-          webkitwidgets \
+webenginewidgets\
           printsupport \
           help
 
@@ -125,7 +125,7 @@ win32 {
 
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
-    CONFIG += zim_support
+    #CONFIG += zim_support
 
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support

@@ -4,10 +4,13 @@
 #include "articleview.hh"
 #include <map>
 #include <QMessageBox>
-#include <QWebHitTestResult>
+//#include <QWebHitTestResult>
 #include <QMenu>
 #include <QDesktopServices>
-#include <QWebHistory>
+#include <QWebEngineHistory>
+#include <QWebEngineScript>
+#include <QWebEngineSettings>
+#include <QWebEngineScriptCollection>
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QFileDialog>
@@ -21,7 +24,7 @@
 #include "gestures.hh"
 #include "fulltextsearch.hh"
 
-#if QT_VERSION >= 0x040600
+#if QT_VERSION >= 0x040600 && QT_VERSION <= 0x050500
 #include <QWebElement>
 #include <QWebElementCollection>
 #endif
@@ -176,11 +179,38 @@ public:
 
 /// End of DiacriticsHandler class
 
-static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
+static QVariant runJavaScriptVariableSafe( QWebEnginePage * frame, const QString & variable )
 {
-  return frame->evaluateJavaScript(
+    qDebug(QString("runJavaScriptVariableSafe with:%1").arg(variable).toLatin1().data());
+    QVariant variant;
+    QSemaphore semaph(1);
+    semaph.acquire(1);
+   frame->runJavaScript(
         QString( "( typeof( %1 ) !== 'undefined' && %1 !== undefined ) ? %1 : null;" )
-        .arg( variable ) );
+              .arg( variable ),[&semaph,&variant](const QVariant & result){
+      //variant=result;
+      //semaph.release(1);
+  } );
+
+   //todo
+   //semaph.acquire(1);
+   return variant;
+}
+
+static QVariant runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
+{
+    qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
+    QVariant variant;
+    // QSemaphore semaph(1);
+    // semaph.acquire(1);
+    frame->runJavaScript(variable, [](const QVariant& result) {
+           // variant = result;
+            //semaph.release(1);
+        });
+
+    //todo ,
+    //semaph.acquire(1);
+    return variant;
 }
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
@@ -228,41 +258,42 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( &goForwardAction, SIGNAL( triggered() ),
            this, SLOT( forward() ) );
 
-  ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
-  ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
+  ui.definition->pageAction( QWebEnginePage::Copy )->setShortcut( QKeySequence::Copy );
+  ui.definition->addAction( ui.definition->pageAction( QWebEnginePage::Copy ) );
 
-  QAction * selectAll = ui.definition->pageAction( QWebPage::SelectAll );
+  QAction * selectAll = ui.definition->pageAction( QWebEnginePage::SelectAll );
   selectAll->setShortcut( QKeySequence::SelectAll );
   selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
   ui.definition->addAction( selectAll );
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-  ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
+  //todo
+  //ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
 
-  ui.definition->page()->setNetworkAccessManager( &articleNetMgr );
+  //ui.definition->page()->setNetworkAccessManager( &articleNetMgr );
 
   connect( ui.definition, SIGNAL( loadFinished( bool ) ),
            this, SLOT( loadFinished( bool ) ) );
 
   attachToJavaScript();
-  connect( ui.definition->page()->mainFrame(), SIGNAL( javaScriptWindowObjectCleared() ),
-           this, SLOT( attachToJavaScript() ) );
+//  connect( ui.definition->page(), SIGNAL( javaScriptWindowObjectCleared() ),
+//           this, SLOT( attachToJavaScript() ) );
 
-  connect( ui.definition, SIGNAL( titleChanged( QString const & ) ),
+  connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
-  connect( ui.definition, SIGNAL( urlChanged( QUrl const & ) ),
+  connect( ui.definition->page(), SIGNAL( urlChanged( QUrl const & ) ),
            this, SLOT( handleUrlChanged( QUrl const & ) ) );
 
   connect( ui.definition, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( contextMenuRequested( QPoint const & ) ) );
 
-  connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
-           this, SLOT( linkClicked( QUrl const & ) ) );
+//  connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
+//           this, SLOT( linkClicked( QUrl const & ) ) );
 
-  connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &, const QString &, const QString & ) ),
-           this, SLOT( linkHovered ( const QString &, const QString &, const QString & ) ) );
+  connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &) ),
+           this, SLOT( linkHovered ( const QString & ) ) );
 
   connect( ui.definition, SIGNAL( doubleClicked( QPoint ) ),this,SLOT( doubleClicked( QPoint ) ) );
 
@@ -302,9 +333,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
-  QWebSettings * settings = ui.definition->page()->settings();
-  settings->setAttribute( QWebSettings::LocalContentCanAccessRemoteUrls, true );
-  settings->setAttribute( QWebSettings::LocalContentCanAccessFileUrls, true );
+  QWebEngineSettings * settings = ui.definition->page()->settings();
+  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
 
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -481,36 +512,47 @@ void ArticleView::loadFinished( bool )
   QUrl url = ui.definition->url();
 
   // See if we have any iframes in need of expansion
+   ui.definition->page()->runJavaScript(QString("var frames=windows.frames;"
+"for(int i=0;i<frames.length;i++){"
+"   var f=frames[i];"
+"   f.height=%1;"
+"   f.style.display='block';"
+    "var gdLastUrlText;"
+"   f.document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );"
+"   f.document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );"
 
-  QList< QWebFrame * > frames = ui.definition->page()->mainFrame()->childFrames();
+"}"));
+
+  //QList< QWebEnginePage * > frames = ui.definition->page()->mainFrame()->childFrames();
 
   bool wereFrames = false;
 
-  for( QList< QWebFrame * >::iterator i = frames.begin(); i != frames.end(); ++i )
-  {
-    if ( (*i)->frameName().startsWith( "gdexpandframe-" ) )
-    {
-      //DPRINTF( "Name: %s\n", (*i)->frameName().toUtf8().data() );
-      //DPRINTF( "Size: %d\n", (*i)->contentsSize().height() );
-      //DPRINTF( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
+//  for( QList< QWebEnginePage * >::iterator i = frames.begin(); i != frames.end(); ++i )
+//  {
+//    if ( (*i)->frameName().startsWith( "gdexpandframe-" ) )
+//    {
+//      //DPRINTF( "Name: %s\n", (*i)->frameName().toUtf8().data() );
+//      //DPRINTF( "Size: %d\n", (*i)->contentsSize().height() );
+//      //DPRINTF( ">>>>>>>>Height = %s\n", (*i)->runJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
 
-      // Set the height
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
-        arg( (*i)->frameName() ).
-        arg( (*i)->contentsSize().height() ) );
+//      // Set the height
+//      ui.definition->page()->runJavaScript( QString( "document.getElementById('%1').height = %2;" ).
+//        arg( (*i)->frameName() ).
+//        arg( (*i)->contentsSize().height() ) );
 
-      // Show it
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
-        arg( (*i)->frameName() ) );
+//      // Show it
+//      ui.definition->page()->runJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
+//        arg( (*i)->frameName() ) );
 
-      (*i)->evaluateJavaScript( "var gdLastUrlText;" );
-      (*i)->evaluateJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
-      (*i)->evaluateJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
+//      (*i)->runJavaScript( "var gdLastUrlText;" );
+//      (*i)->runJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
+//      (*i)->runJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
 
-      wereFrames = true;
-    }
-  }
+//      wereFrames = true;
+//    }
+//  }
 
+  //todo
   if ( wereFrames )
   {
     // There's some sort of glitch -- sometimes you need to move a mouse
@@ -520,15 +562,14 @@ void ArticleView::loadFinished( bool )
     qApp->sendEvent( ui.definition, &ev );
   }
 
-  QVariant userDataVariant = ui.definition->history()->currentItem().userData();
+  QVariant userDataVariant = ui.definition->property("currentArticle");
 
-  if ( userDataVariant.type() == QVariant::Map )
+  if ( userDataVariant.isValid() )
   {
-    QMap< QString, QVariant > userData = userDataVariant.toMap();
 
-    QString currentArticle = userData.value( "currentArticle" ).toString();
+    QString currentArticle = userDataVariant.toString();
 
-    if ( currentArticle.size() )
+    if ( !currentArticle.isEmpty() )
     {
       // There's an active article saved, so set it to be active.
       setCurrentArticle( currentArticle );
@@ -536,16 +577,18 @@ void ArticleView::loadFinished( bool )
 
     double sx = 0, sy = 0;
 
-    if ( userData.value( "sx" ).type() == QVariant::Double )
-      sx = userData.value( "sx" ).toDouble();
+    QVariant qsx=ui.definition->property("sx");
+    if ( qsx.type() == QVariant::Double )
+      sx = qsx.toDouble();
 
-    if ( userData.value( "sy" ).type() == QVariant::Double )
-      sy = userData.value( "sy" ).toDouble();
+    QVariant qsy = ui.definition->property("sx");
+    if ( qsy.type() == QVariant::Double )
+      sy = qsy.toDouble();
 
     if ( sx != 0 || sy != 0 )
     {
       // Restore scroll position
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
+      ui.definition->page()->runJavaScript(
           QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
     }
   }
@@ -562,7 +605,7 @@ void ArticleView::loadFinished( bool )
   //QApplication::restoreOverrideCursor();
 
   // Expand collapsed article if only one loaded
-  ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "gdCheckArticlesNumber();" ) );
+  ui.definition->page()->runJavaScript( QString( "gdCheckArticlesNumber();" ) );
 
   // Jump to current article after page reloading
   if( !articleToJump.isEmpty() )
@@ -589,36 +632,19 @@ void ArticleView::loadFinished( bool )
     {
       QString originalAnchor = anchor.mid( n + 1 );
 
-      QRegExp rx;
-      rx.setMinimal( true );
-      rx.setPattern( anchor.left( 34 ) + "[0-9a-f]*_" + originalAnchor );
-
-      QWebElementCollection coll = ui.definition->page()->mainFrame()->findAllElements( "a[name]" );
-      coll += ui.definition->page()->mainFrame()->findAllElements( "a[id]" );
-
-      for( QWebElementCollection::iterator it = coll.begin(); it != coll.end(); ++it )
-      {
-        QString name = (*it).attribute( "name" );
-        QString id = (*it).attribute( "id" );
-        if( ( !name.isEmpty() && rx.indexIn( name ) >= 0 )
-            || ( !id.isEmpty() && rx.indexIn( id ) >= 0 ))
-        {
-          // Anchor found, jump to it
-
-          url.clear();
-          url.setFragment( rx.cap( 0 ) );
-          ui.definition->page()->mainFrame()->evaluateJavaScript(
-             QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
-
-          break;
-        }
-      }
+      int end = originalAnchor.indexOf('_');
+      QString hash=originalAnchor.left(end);
+      url.clear();
+      url.setFragment(hash);
+      ui.definition->page()->runJavaScript(
+          QString("window.location.hash = \"%1\"").arg(QString::fromUtf8(url.toEncoded())));
+      
     }
     else
     {
       url.clear();
       url.setFragment( anchor );
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
+      ui.definition->page()->runJavaScript(
          QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
@@ -638,6 +664,7 @@ void ArticleView::handleTitleChanged( QString const & title )
 
 void ArticleView::handleUrlChanged( QUrl const & url )
 {
+    lastUrl = url.url();
   QIcon icon;
 
   unsigned group = getGroup( url );
@@ -668,8 +695,10 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-  return evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdArticleContents" )
-      .toString().trimmed().split( ' ', QString::SkipEmptyParts );
+	//todo dictid
+    return QStringList() << getCurrentArticle();
+  // return runJavaScriptVariableSafe( ui.definition->page(), "gdArticleContents" )
+  //     .toString().trimmed().split( ' ', QString::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -683,7 +712,8 @@ QString ArticleView::getActiveArticleId()
 
 QString ArticleView::getCurrentArticle()
 {
-  QVariant v = evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdCurrentArticle" );
+    QVariant v=ui.definition->property("currentArticle");
+ // QVariant v = runJavaScriptVariableSafe( ui.definition->page(), "gdCurrentArticle" );
 
   if ( v.type() == QVariant::String )
     return v.toString();
@@ -710,24 +740,39 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !ui.definition->isVisible() )
     return; // No action on background page, scrollIntoView there don't work
 
-  if ( getArticlesList().contains( id.mid( 7 ) ) )
-  {
-    if ( moveToIt )
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
+  QString articleId=id.mid( 7 );
+  QString script=QString(""
+"var s=gdArticleContents;"
+"var index=s.split(' ').indexOf(%1);"
+"if(index>-1){"
+"   if(%2){"
+"       document.getElementById('%3').scrollIntoView(true);"
+"   }"
+""
+"   gdMakeArticleActive( '%1' );"
+"   currentArticle='%3';"
+"}").arg(articleId).arg(moveToIt).arg(id);
 
-    QMap< QString, QVariant > userData = ui.definition->history()->
-                                         currentItem().userData().toMap();
-    userData[ "currentArticle" ] = id;
-    ui.definition->history()->currentItem().setUserData( userData );
+  ui.definition->page()->runJavaScript(script);
+//  if ( getArticlesList().contains( id.mid( 7 ) ) )
+//  {
 
-    ui.definition->page()->mainFrame()->evaluateJavaScript(
-      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
-  }
+//      //gdArticleContents
+
+//    if ( moveToIt )
+//      ui.definition->page()->runJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
+
+//    //todo
+//    ui.definition->setProperty("currentArticle",id);
+//    ui.definition->page()->runJavaScript(
+//      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
+//  }
+  ui.definition->setProperty("currentArticle",id);
 }
 
 void ArticleView::selectCurrentArticle()
 {
-  ui.definition->page()->mainFrame()->evaluateJavaScript(
+  ui.definition->page()->runJavaScript(
         QString( "gdSelectArticle( '%1' );" ).arg( getActiveArticleId() ) );
 }
 
@@ -736,8 +781,7 @@ bool ArticleView::isFramedArticle( QString const & ca )
   if ( ca.isEmpty() )
     return false;
 
-  return ui.definition->page()->mainFrame()->
-               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
+  return  runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -760,7 +804,9 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
     if ( isFramedArticle( ca ) )
     {
-      QVariant result = evaluateJavaScriptVariableSafe( ui.definition->page()->currentFrame(), "gdLastUrlText" );
+    	//todo ,用变量代替最后的url
+      //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
+      QVariant result ;
 
       if ( result.type() == QVariant::String )
       {
@@ -787,43 +833,34 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
   }
 }
 
-void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
+void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
 {
-  if ( !frame )
-    frame = ui.definition->page()->currentFrame();
+    //todo
+    qDebug("updateCurrentArticleFromCurrentFrame");
+//  if ( !frame )
+//    frame = ui.definition->page()->currentFrame();
 
-  for( ; frame; frame = frame->parentFrame() )
-  {
-    QString frameName = frame->frameName();
+//  for( ; frame; frame = frame->parentFrame() )
+//  {
+//    QString frameName = frame->frameName();
 
-    if ( frameName.startsWith( "gdexpandframe-" ) )
-    {
-      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
+//    if ( frameName.startsWith( "gdexpandframe-" ) )
+//    {
+//      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
 
-      if ( getCurrentArticle() != newCurrent )
-        setCurrentArticle( newCurrent, false );
+//      if ( getCurrentArticle() != newCurrent )
+//        setCurrentArticle( newCurrent, false );
 
-      break;
-    }
-  }
+//      break;
+//    }
+//  }
 }
 
 void ArticleView::saveHistoryUserData()
 {
-  QMap< QString, QVariant > userData = ui.definition->history()->
-                                       currentItem().userData().toMap();
-
-  // Save current article, which can be empty
-
-  userData[ "currentArticle" ] = getCurrentArticle();
-
-  // We also save window position. We restore it when the page is fully loaded,
-  // when any hidden frames are expanded.
-
-  userData[ "sx" ] = ui.definition->page()->mainFrame()->evaluateJavaScript( "window.scrollX;" ).toDouble();
-  userData[ "sy" ] = ui.definition->page()->mainFrame()->evaluateJavaScript( "window.scrollY;" ).toDouble();
-
-  ui.definition->history()->currentItem().setUserData( userData );
+  ui.definition->setProperty("currentArticle", getCurrentArticle());
+  ui.definition->setProperty("sx", ui.definition->page()->scrollPosition().x());
+  ui.definition->setProperty("sy", ui.definition->page()->scrollPosition().y());
 }
 
 void ArticleView::cleanupTemp()
@@ -1032,7 +1069,7 @@ QString ArticleView::getMutedForGroup( unsigned group )
   return QString();
 }
 
-void ArticleView::linkHovered ( const QString & link, const QString & , const QString & )
+void ArticleView::linkHovered ( const QString & link )
 {
   QString msg;
   QUrl url(link);
@@ -1108,7 +1145,14 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
 
 void ArticleView::attachToJavaScript()
 {
-  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( QString( "articleview" ), this );
+   QWebEngineScript script;
+          script.setInjectionPoint(QWebEngineScript::DocumentReady);
+          script.setRunsOnSubFrames(false);
+          script.setWorldId(QWebEngineScript::MainWorld);
+          script.setSourceCode(QString("articleview"));
+
+          ui.definition->page()->scripts().insert(script);
+
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -1166,7 +1210,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   {
     if ( url.hasFragment() )
     {
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
+      ui.definition->page()->runJavaScript(
         QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
     else
@@ -1639,26 +1683,30 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-  if ( v.type() == QVariant::String )
-    return !v.toString().isEmpty();
-  return false;
+	//todo ,just return true;need futher effort
+    return true;
+  // QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
+  // if ( v.type() == QVariant::String )
+  //   return !v.toString().isEmpty();
+  // return false;
 }
 
+//todo ,need further effort
 void ArticleView::playSound()
 {
   QVariant v;
   QString soundScript;
 
-  v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
+  v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks[gdAudioLinks.current]" );
 
+	
   if ( v.type() == QVariant::String )
     soundScript = v.toString();
 
   // fallback to the first one
   if ( soundScript.isEmpty() )
   {
-    v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
+    v = runJavaScriptSync( ui.definition->page(), "gdAudioLinks.first" );
     if ( v.type() == QVariant::String )
       soundScript = v.toString();
   }
@@ -1669,12 +1717,22 @@ void ArticleView::playSound()
 
 QString ArticleView::toHtml()
 {
-  return ui.definition->page()->mainFrame()->toHtml();
+    QSemaphore sem(1);
+    sem.acquire(1);
+    QString html;
+    ui.definition->page()->toHtml([&](const QString& content) {
+       
+
+        html = content;
+        sem.release();
+        });
+    sem.acquire(1);
+    return html;
 }
 
 QString ArticleView::getTitle()
 {
-  return ui.definition->page()->mainFrame()->title();
+  return ui.definition->page()->title();
 }
 
 Config::InputPhrase ArticleView::getPhrase() const
@@ -1686,17 +1744,15 @@ Config::InputPhrase ArticleView::getPhrase() const
 
 void ArticleView::print( QPrinter * printer ) const
 {
-  ui.definition->print( printer );
+    ui.definition->page()->print(printer, [](bool result) {});
 }
 
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
 
-  QWebHitTestResult r = ui.definition->page()->mainFrame()->
-                          hitTestContent( pos );
-
-  updateCurrentArticleFromCurrentFrame( r.frame() );
+    QWebEnginePage* r=ui.definition->page();
+  updateCurrentArticleFromCurrentFrame(ui.definition->page(), const_cast<QPoint *>(& pos));
 
   QMenu menu( this );
 
@@ -1714,12 +1770,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  QUrl targetUrl( r.linkUrl() );
+  //todo url();?
+  QUrl targetUrl( r->url() );
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
 
-  if ( !r.linkUrl().isEmpty() )
+  if ( !r->url().isEmpty() )
   {
     if ( !isExternalLink( targetUrl ) )
     {
@@ -1734,15 +1791,15 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
 
-    if ( isExternalLink( r.linkUrl() ) )
+    if ( isExternalLink( r->url() ) )
     {
       followLinkExternal = new QAction( tr( "Open Link in &External Browser" ), &menu );
       menu.addAction( followLinkExternal );
-      menu.addAction( ui.definition->pageAction( QWebPage::CopyLinkToClipboard ) );
+      menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyLinkToClipboard ) );
     }
   }
 
-#if QT_VERSION >= 0x040600
+#if QT_VERSION >= 0x040600 && QT_VERSION <= 0x050500
   QWebElement el = r.element();
   QUrl imageUrl;
   if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
@@ -1750,7 +1807,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
     if( !imageUrl.isEmpty() )
     {
-      menu.addAction( ui.definition->pageAction( QWebPage::CopyImageToClipboard ) );
+      menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
       saveImageAction = new QAction( tr( "Save &image..." ), &menu );
       menu.addAction( saveImageAction );
     }
@@ -1841,13 +1898,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   if ( selectedText.size() )
   {
-    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
+    menu.addAction( ui.definition->pageAction( QWebEnginePage::Copy ) );
     menu.addAction( &copyAsTextAction );
   }
   else
   {
     menu.addAction( &selectCurrentArticleAction );
-    menu.addAction( ui.definition->pageAction( QWebPage::SelectAll ) );
+    menu.addAction( ui.definition->pageAction( QWebEnginePage::SelectAll ) );
   }
 
   map< QAction *, QString > tableOfContents;
@@ -1915,7 +1972,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
     else
     if ( result == followLinkExternal )
-      QDesktopServices::openUrl( r.linkUrl() );
+      QDesktopServices::openUrl( r->url() );
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
@@ -1945,7 +2002,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     if( result == saveImageAction || result == saveSoundAction )
     {
 #if QT_VERSION >= 0x040600
-      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
+//      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
+      QUrl url =  targetUrl;
       QString savePath;
       QString fileName;
 
@@ -2178,8 +2236,8 @@ void ArticleView::openSearch()
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
   {
-    ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+    ui.definition->page()->
+           runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
   }
 
   if ( ui.searchText->property( "noResults" ).toBool() )
@@ -2238,76 +2296,76 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
 
 void ArticleView::doubleClicked( QPoint pos )
 {
-#if QT_VERSION >= 0x040600
-  QWebHitTestResult r = ui.definition->page()->mainFrame()->hitTestContent( pos );
-  QWebElement el = r.element();
-  QUrl imageUrl;
-  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
-  {
-    // Double click on image; download it and transfer to external program
+//#if QT_VERSION >= 0x040600
+//  QWebEnginePage* r = ui.definition->page();
+//  QWebElement el = r.element();
+//  QUrl imageUrl;
+//  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
+//  {
+//    // Double click on image; download it and transfer to external program
 
-    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
-    if( !imageUrl.isEmpty() )
-    {
-      // Download it
+//    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
+//    if( !imageUrl.isEmpty() )
+//    {
+//      // Download it
 
-      // Clear any pending ones
-      resourceDownloadRequests.clear();
+//      // Clear any pending ones
+//      resourceDownloadRequests.clear();
 
-      resourceDownloadUrl = imageUrl;
-      sptr< Dictionary::DataRequest > req;
+//      resourceDownloadUrl = imageUrl;
+//      sptr< Dictionary::DataRequest > req;
 
-      if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
-      {
-        // Web resource
-        req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
-      }
-      else
-      if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
-      {
-        // Local resource
-        QString contentType;
-        req = articleNetMgr.getResource( imageUrl, contentType );
-      }
-      else
-      {
-        // Unsupported scheme
-        gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
-        return;
-      }
+//      if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
+//      {
+//        // Web resource
+//        req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
+//      }
+//      else
+//      if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
+//      {
+//        // Local resource
+//        QString contentType;
+//        req = articleNetMgr.getResource( imageUrl, contentType );
+//      }
+//      else
+//      {
+//        // Unsupported scheme
+//        gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
+//        return;
+//      }
 
-      if ( !req.get() )
-      {
-        // Request failed, fail
-        gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
-        return;
-      }
+//      if ( !req.get() )
+//      {
+//        // Request failed, fail
+//        gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
+//        return;
+//      }
 
-      if ( req->isFinished() && req->dataSize() >= 0 )
-      {
-        // Have data ready, handle it
-        resourceDownloadRequests.push_back( req );
-        resourceDownloadFinished();
-        return;
-      }
-      else
-      if ( !req->isFinished() )
-      {
-        // Queue to be handled when done
-        resourceDownloadRequests.push_back( req );
-        connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
-      }
-      if ( resourceDownloadRequests.empty() ) // No requests were queued
-      {
-        gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
-        return;
-      }
-      else
-        resourceDownloadFinished(); // Check any requests finished already
-    }
-    return;
-  }
-#endif
+//      if ( req->isFinished() && req->dataSize() >= 0 )
+//      {
+//        // Have data ready, handle it
+//        resourceDownloadRequests.push_back( req );
+//        resourceDownloadFinished();
+//        return;
+//      }
+//      else
+//      if ( !req->isFinished() )
+//      {
+//        // Queue to be handled when done
+//        resourceDownloadRequests.push_back( req );
+//        connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
+//      }
+//      if ( resourceDownloadRequests.empty() ) // No requests were queued
+//      {
+//        gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
+//        return;
+//      }
+//      else
+//        resourceDownloadFinished(); // Check any requests finished already
+//    }
+//    return;
+//  }
+//#endif
 
   // We might want to initiate translation of the selected word
 
@@ -2355,17 +2413,17 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       // For now we resort to this hack:
       if ( ui.definition->selectedText().size() )
       {
-        ui.definition->page()->currentFrame()->
-               evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+        ui.definition->page()->
+               runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
       }
     }
 
-    QWebPage::FindFlags f( 0 );
+    QWebEnginePage::FindFlags f( 0 );
 
     if ( ui.searchCaseSensitive->isChecked() )
-      f |= QWebPage::FindCaseSensitively;
-#if QT_VERSION >= 0x040600
-    f |= QWebPage::HighlightAllOccurrences;
+      f |= QWebEnginePage::FindCaseSensitively;
+#if QT_VERSION >= 0x040600  && QT_VERSION <= 0x050600
+    f |= QWebEnginePage::HighlightAllOccurrences;
 #endif
 
     ui.definition->findText( "", f );
@@ -2377,15 +2435,15 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       return;
   }
 
-  QWebPage::FindFlags f( 0 );
+  QWebEnginePage::FindFlags f( 0 );
 
   if ( ui.searchCaseSensitive->isChecked() )
-    f |= QWebPage::FindCaseSensitively;
+    f |= QWebEnginePage::FindCaseSensitively;
 
   if ( backwards )
-    f |= QWebPage::FindBackward;
+    f |= QWebEnginePage::FindBackward;
 
-  bool setMark = text.size() && !ui.definition->findText( text, f );
+  bool setMark = text.size() && !findText(text, f);
 
   if ( ui.searchText->property( "noResults" ).toBool() != setMark )
   {
@@ -2394,6 +2452,19 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
     // Reload stylesheet
     reloadStyleSheet();
   }
+}
+
+bool ArticleView::findText(QString& text, const QWebEnginePage::FindFlags& f)
+{
+    bool r;
+    QSemaphore sem(1);
+    sem.acquire(1);
+    ui.definition->findText(text, f, [&sem,&r](bool result) {
+        r = result;
+        sem.release(1);
+        });
+    sem.acquire(1);
+    return r;
 }
 
 void ArticleView::reloadStyleSheet()
@@ -2430,10 +2501,10 @@ bool ArticleView::closeSearch()
     ui.ftsSearchFrame->hide();
     ui.definition->setFocus();
 
-    QWebPage::FindFlags flags ( 0 );
+    QWebEnginePage::FindFlags flags ( 0 );
 
-  #if QT_VERSION >= 0x040600
-    flags |= QWebPage::HighlightAllOccurrences;
+  #if QT_VERSION >= 0x040600 && QT_VERSION<=0x050500
+    flags |= QWebEnginePage::HighlightAllOccurrences;
   #endif
 
     ui.definition->findText( "", flags );
@@ -2495,7 +2566,7 @@ void ArticleView::copyAsText()
 
 void ArticleView::inspect()
 {
-  ui.definition->triggerPageAction( QWebPage::InspectElement );
+  ui.definition->triggerPageAction( QWebEnginePage::InspectElement );
 }
 
 void ArticleView::highlightFTSResults()
@@ -2547,11 +2618,11 @@ void ArticleView::highlightFTSResults()
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
   {
-    ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+    ui.definition->page()->
+           runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
   }
 
-  QString pageText = ui.definition->page()->currentFrame()->toPlainText();
+  QString pageText = getWebPageTextSync(ui.definition->page());
   marksHandler->setText( pageText );
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
@@ -2610,26 +2681,27 @@ void ArticleView::highlightFTSResults()
 
   ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
 
-  QWebPage::FindFlags flags ( 0 );
+  QWebEnginePage::FindFlags flags ( 0 );
 
   if( ftsSearchMatchCase )
-    flags |= QWebPage::FindCaseSensitively;
+    flags |= QWebEnginePage::FindCaseSensitively;
 
 #if QT_VERSION >= 0x040600
-  flags |= QWebPage::HighlightAllOccurrences;
+ // flags |= QWebEnginePage::HighlightAllOccurrences;
 
   for( int x = 0; x < allMatches.size(); x++ )
     ui.definition->findText( allMatches.at( x ), flags );
 
-  flags &= ~QWebPage::HighlightAllOccurrences;
+ // flags &= ~QWebEnginePage::HighlightAllOccurrences;
 #endif
 
   if( !allMatches.isEmpty() )
   {
-    if( ui.definition->findText( allMatches.at( 0 ), flags ) )
+      ui.definition->findText( allMatches.at( 0 ), flags );
+    //if( ui.definition->findText( allMatches.at( 0 ), flags ) )
     {
-        ui.definition->page()->currentFrame()->
-               evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+        ui.definition->page()->
+               runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
                                    .arg( rangeVarName ) );
     }
   }
@@ -2641,6 +2713,19 @@ void ArticleView::highlightFTSResults()
   ftsSearchIsOpened = true;
 }
 
+QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
+    QSemaphore sem(1);
+    sem.acquire(1);
+    QString planText;
+    page->toPlainText([&](const QString & result){
+        planText = result;
+        sem.release(1);
+    });
+    sem.acquire(1);
+    return planText;
+}
+
+//todo ,futher refinement?
 void ArticleView::performFtsFindOperation( bool backwards )
 {
   if( !ftsSearchIsOpened )
@@ -2653,15 +2738,15 @@ void ArticleView::performFtsFindOperation( bool backwards )
     return;
   }
 
-  QWebPage::FindFlags flags( 0 );
+  QWebEnginePage::FindFlags flags( 0 );
 
   if( ftsSearchMatchCase )
-    flags |= QWebPage::FindCaseSensitively;
+    flags |= QWebEnginePage::FindCaseSensitively;
 
 
   // Restore saved highlighted selection
-  ui.definition->page()->currentFrame()->
-         evaluateJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
+  ui.definition->page()->
+         runJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
                              .arg( rangeVarName ) );
 
   bool res;
@@ -2669,36 +2754,36 @@ void ArticleView::performFtsFindOperation( bool backwards )
   {
     if( ftsPosition > 0 )
     {
-      res = ui.definition->findText( allMatches.at( ftsPosition - 1 ),
-                                     flags | QWebPage::FindBackward );
+      ui.definition->findText( allMatches.at( ftsPosition - 1 ),
+                                     flags | QWebEnginePage::FindBackward );
       ftsPosition -= 1;
     }
     else
-      res = ui.definition->findText( allMatches.at( ftsPosition ),
-                                     flags | QWebPage::FindBackward );
+       ui.definition->findText( allMatches.at( ftsPosition ),
+                                     flags | QWebEnginePage::FindBackward );
 
-    ui.ftsSearchPrevious->setEnabled( res );
-    if( !ui.ftsSearchNext->isEnabled() )
-      ui.ftsSearchNext->setEnabled( res );
+//    ui.ftsSearchPrevious->setEnabled( res );
+//    if( !ui.ftsSearchNext->isEnabled() )
+//      ui.ftsSearchNext->setEnabled( res );
   }
   else
   {
     if( ftsPosition < allMatches.size() - 1 )
     {
-      res = ui.definition->findText( allMatches.at( ftsPosition + 1 ), flags );
+       ui.definition->findText( allMatches.at( ftsPosition + 1 ), flags );
       ftsPosition += 1;
     }
     else
-      res = ui.definition->findText( allMatches.at( ftsPosition ), flags );
+       ui.definition->findText( allMatches.at( ftsPosition ), flags );
 
-    ui.ftsSearchNext->setEnabled( res );
-    if( !ui.ftsSearchPrevious->isEnabled() )
-      ui.ftsSearchPrevious->setEnabled( res );
+//    ui.ftsSearchNext->setEnabled( res );
+//    if( !ui.ftsSearchPrevious->isEnabled() )
+//      ui.ftsSearchPrevious->setEnabled( res );
   }
 
   // Store new highlighted selection
-  ui.definition->page()->currentFrame()->
-         evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+  ui.definition->page()->
+         runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
                              .arg( rangeVarName ) );
 }
 
@@ -2807,24 +2892,29 @@ QString ArticleView::insertSpans( QString const & html )
     return newContent;
 }
 
-QString ArticleView::checkElement( QWebElement & elem, QPoint const & pt )
+QString ArticleView::checkElement( QWebEnginePage & elem, QPoint const & pt )
 {
-    /// Search for lower-level matching element
 
-    QWebElement parentElem = elem;
-    QWebElement childElem = elem.firstChild();
-    while( !childElem.isNull() )
-    {
-      if( childElem.geometry().contains( pt ) )
-      {
-        parentElem = childElem;
-        childElem = parentElem.firstChild();
-        continue;
-      }
-      childElem = childElem.nextSibling();
-    }
 
-    return parentElem.toPlainText();
+    QSemaphore semaphore(1);
+    semaphore.acquire(1);
+      QString nodeValue;
+    elem.runJavaScript(QString(
+                             " var a= document.elementFromPoint(%1,%2);"
+                              "var nodename=a.nodeName.toLowerCase();"
+                              "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
+                              "{"
+                               "   return '';"
+                              "}"
+                              "return a.textContent;")
+                         .arg(pt.x()).arg(pt.y()),[&semaphore,&nodeValue](const QVariant & result){
+              semaphore.release();
+
+              nodeValue=result.toString();
+    });
+
+      semaphore.acquire(1);
+  return nodeValue;
 }
 
 QString ArticleView::wordAtPoint( int x, int y )
@@ -2835,125 +2925,147 @@ QString ArticleView::wordAtPoint( int x, int y )
     return word;
 
   QPoint pos = mapFromGlobal( QPoint( x, y ) );
-  QWebFrame *frame = ui.definition->page()->frameAt( pos );
+  //todo
+  QWebEnginePage *frame = ui.definition->page();
   if( !frame )
     return word;
 
-  QPoint posWithScroll = pos + frame->scrollPosition();
+  QPointF scrollPoint=frame->scrollPosition();
+
+  QPoint posWithScroll = pos + QPoint((int)scrollPoint.x(),(int)scrollPoint.y());
 
   /// Find target HTML element
 
-  QWebHitTestResult result = frame->hitTestContent( pos );
-  QWebElement baseElem = result.enclosingBlockElement();
+  QSemaphore semaphore(1);
+  semaphore.acquire(1);
+    QString nodeValue;
+  frame->runJavaScript(QString(
+                           " var a= document.elementFromPoint(%1,%2);"
+                            "var nodename=a.nodeName.toLowerCase();"
+                            "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
+                            "{"
+                             "   return '';"
+                            "}"
+                            "return a.textContent;")
+                       .arg(posWithScroll.x()).arg(posWithScroll.y()),[&](const QVariant & result){
+            semaphore.release();
 
-  if( baseElem.tagName().compare( "BODY" ) == 0 ||      /// Assume empty field position
-      baseElem.tagName().compare( "HTML" ) == 0 ||
-      baseElem.tagName().compare( "HEAD" ) == 0 )
-    return word;
+            nodeValue=result.toString();
+  });
 
-  /// Save selection position
+    semaphore.acquire(1);
+return nodeValue;
+//  QWebHitTestResult result = frame->hitTestContent( pos );
+//  QWebElement baseElem = result.enclosingBlockElement();
 
-  baseElem.evaluateJavaScript( "var __gd_sel=window.getSelection();"
-                               "if(__gd_sel && __gd_sel.rangeCount>0) {"
-                                 "__gd_SelRange=__gd_sel.getRangeAt(0);"
-                                 "if(__gd_SelRange.collapsed) __gd_sel.removeAllRanges();"
-                                 "else {"
-                                   "__gd_StartTree=[]; __gd_EndTree=[];"
-                                   "var __gd_baseRange=document.createRange();"
-                                   "__gd_baseRange.selectNode(this);"
-                                   "if(__gd_baseRange.comparePoint(__gd_SelRange.startContainer,0)==0) {"
-                                     "__gd_StartOffset=__gd_SelRange.startOffset;"
-                                     "var __gd_child=__gd_SelRange.startContainer;"
-                                     "var __gd_parent='';"
-                                     "if(__gd_child==this) __gd_StartTree.push(-1);"
-                                     "else while(__gd_parent!=this) {"
-                                       "var n=0; __gd_parent=__gd_child.parentNode;"
-                                       "var __gd_el=__gd_parent.firstChild;"
-                                       "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
-                                       "__gd_StartTree.push(n);"
-                                       "__gd_child=__gd_parent;"
-                                     "}"
-                                   "}"
-                                   "if(__gd_baseRange.comparePoint(__gd_SelRange.endContainer,0)==0) {"
-                                     "__gd_EndOffset=__gd_SelRange.endOffset;"
-                                     "var __gd_child=__gd_SelRange.endContainer;"
-                                     "var __gd_parent='';"
-                                     "if(__gd_child==this) __gd_EndTree.push(-1);"
-                                     "else while(__gd_parent!=this) {"
-                                       "var n=0; __gd_parent=__gd_child.parentNode;"
-                                       "var __gd_el=__gd_parent.firstChild;"
-                                       "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
-                                       "__gd_EndTree.push(n);"
-                                       "__gd_child=__gd_parent;"
-                                     "}"
-                                   "}"
-                                 "}"
-                               "}"
-                               );
+//  if( baseElem.tagName().compare( "BODY" ) == 0 ||      /// Assume empty field position
+//      baseElem.tagName().compare( "HTML" ) == 0 ||
+//      baseElem.tagName().compare( "HEAD" ) == 0 )
+//    return word;
 
-  /// Enclose every word be <span> </span>
+//  /// Save selection position
 
-  QString content = baseElem.toInnerXml();
-  QString newContent = insertSpans( content );
+//  baseElem.runJavaScript( "var __gd_sel=window.getSelection();"
+//                               "if(__gd_sel && __gd_sel.rangeCount>0) {"
+//                                 "__gd_SelRange=__gd_sel.getRangeAt(0);"
+//                                 "if(__gd_SelRange.collapsed) __gd_sel.removeAllRanges();"
+//                                 "else {"
+//                                   "__gd_StartTree=[]; __gd_EndTree=[];"
+//                                   "var __gd_baseRange=document.createRange();"
+//                                   "__gd_baseRange.selectNode(this);"
+//                                   "if(__gd_baseRange.comparePoint(__gd_SelRange.startContainer,0)==0) {"
+//                                     "__gd_StartOffset=__gd_SelRange.startOffset;"
+//                                     "var __gd_child=__gd_SelRange.startContainer;"
+//                                     "var __gd_parent='';"
+//                                     "if(__gd_child==this) __gd_StartTree.push(-1);"
+//                                     "else while(__gd_parent!=this) {"
+//                                       "var n=0; __gd_parent=__gd_child.parentNode;"
+//                                       "var __gd_el=__gd_parent.firstChild;"
+//                                       "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
+//                                       "__gd_StartTree.push(n);"
+//                                       "__gd_child=__gd_parent;"
+//                                     "}"
+//                                   "}"
+//                                   "if(__gd_baseRange.comparePoint(__gd_SelRange.endContainer,0)==0) {"
+//                                     "__gd_EndOffset=__gd_SelRange.endOffset;"
+//                                     "var __gd_child=__gd_SelRange.endContainer;"
+//                                     "var __gd_parent='';"
+//                                     "if(__gd_child==this) __gd_EndTree.push(-1);"
+//                                     "else while(__gd_parent!=this) {"
+//                                       "var n=0; __gd_parent=__gd_child.parentNode;"
+//                                       "var __gd_el=__gd_parent.firstChild;"
+//                                       "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
+//                                       "__gd_EndTree.push(n);"
+//                                       "__gd_child=__gd_parent;"
+//                                     "}"
+//                                   "}"
+//                                 "}"
+//                               "}"
+//                               );
 
-  /// Set new code and re-render it to fill geometry
+//  /// Enclose every word be <span> </span>
 
-  QImage img( baseElem.geometry().width(), baseElem.geometry().height(), QImage::Format_Mono );
-  img.fill( 0 );
-  QPainter painter( & img );
+//  QString content = baseElem.toInnerXml();
+//  QString newContent = insertSpans( content );
 
-  baseElem.setInnerXml( newContent );
-  baseElem.render( &painter );
+//  /// Set new code and re-render it to fill geometry
 
-  /// Search in all child elements and check it
+//  QImage img( baseElem.geometry().width(), baseElem.geometry().height(), QImage::Format_Mono );
+//  img.fill( 0 );
+//  QPainter painter( & img );
 
-  QWebElementCollection elemCollection = baseElem.findAll( "*" );
-  foreach ( QWebElement elem, elemCollection )
-  {
-      if( elem.geometry().contains( posWithScroll ) )
-          word = checkElement( elem, posWithScroll );
-      if( !word.isEmpty() )
-          break;
-  }
+//  baseElem.setInnerXml( newContent );
+//  baseElem.render( &painter );
 
-  /// Restore old content
-  baseElem.setInnerXml( content );
+//  /// Search in all child elements and check it
 
-  /// Restore selection
+//  QWebElementCollection elemCollection = baseElem.findAll( "*" );
+//  foreach ( QWebElement elem, elemCollection )
+//  {
+//      if( elem.geometry().contains( posWithScroll ) )
+//          word = checkElement( elem, posWithScroll );
+//      if( !word.isEmpty() )
+//          break;
+//  }
 
-  baseElem.evaluateJavaScript( "var flag=0;"
-                               "if(__gd_StartTree && __gd_StartTree.length) {"
-                                 "var __gd_el=this;"
-                                 "while(__gd_StartTree.length) {"
-                                   "__gd_el=__gd_el.firstChild;"
-                                   "var n=__gd_StartTree.pop();"
-                                   "if(n<0) __gd_el=this;"
-                                   "else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
-                                 "}"
-                                 "__gd_SelRange.setStart(__gd_el, __gd_StartOffset);"
-                                 "__gd_StartTree.splice(0,__gd_StartTree.length);"
-                                 "flag+=1;"
-                               "}"
-                               "if(__gd_EndTree && __gd_EndTree.length) {"
-                                 "var __gd_el=this;"
-                                 "while(__gd_EndTree.length) {"
-                                   "__gd_el=__gd_el.firstChild;"
-                                   "var n=__gd_EndTree.pop();"
-                                   "if(n<0) __gd_el=this;"
-                                   "else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
-                                 "}"
-                                 "__gd_SelRange.setEnd(__gd_el, __gd_EndOffset);"
-                                 "__gd_EndTree.splice(0,__gd_EndTree.length);"
-                                 "flag+=1;"
-                               "}"
-                               "if(flag>0) {"
-                                 "var __gd_sel=window.getSelection();"
-                                 "__gd_sel.removeAllRanges();"
-                                 "__gd_sel.addRange(__gd_SelRange);"
-                               "}"
-                               );
+//  /// Restore old content
+//  baseElem.setInnerXml( content );
 
-  return word;
+//  /// Restore selection
+
+//  baseElem.runJavaScript( "var flag=0;"
+//                               "if(__gd_StartTree && __gd_StartTree.length) {"
+//                                 "var __gd_el=this;"
+//                                 "while(__gd_StartTree.length) {"
+//                                   "__gd_el=__gd_el.firstChild;"
+//                                   "var n=__gd_StartTree.pop();"
+//                                   "if(n<0) __gd_el=this;"
+//                                   "else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
+//                                 "}"
+//                                 "__gd_SelRange.setStart(__gd_el, __gd_StartOffset);"
+//                                 "__gd_StartTree.splice(0,__gd_StartTree.length);"
+//                                 "flag+=1;"
+//                               "}"
+//                               "if(__gd_EndTree && __gd_EndTree.length) {"
+//                                 "var __gd_el=this;"
+//                                 "while(__gd_EndTree.length) {"
+//                                   "__gd_el=__gd_el.firstChild;"
+//                                   "var n=__gd_EndTree.pop();"
+//                                   "if(n<0) __gd_el=this;"
+//                                   "else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
+//                                 "}"
+//                                 "__gd_SelRange.setEnd(__gd_el, __gd_EndOffset);"
+//                                 "__gd_EndTree.splice(0,__gd_EndTree.length);"
+//                                 "flag+=1;"
+//                               "}"
+//                               "if(flag>0) {"
+//                                 "var __gd_sel=window.getSelection();"
+//                                 "__gd_sel.removeAllRanges();"
+//                                 "__gd_sel.addRange(__gd_SelRange);"
+//                               "}"
+//                               );
+
+//  return word;
 }
 
 #endif

@@ -28,7 +28,9 @@
 #include "termination.hh"
 #include "atomic_rename.hh"
 
-#include <QWebSecurityOrigin>
+
+#include <QtWebEngineCore/QWebEngineUrlScheme>
+
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
@@ -432,11 +434,11 @@ int main( int argc, char ** argv )
   // and with the main window closed.
   app.setQuitOnLastWindowClosed( false );
 
-#if QT_VERSION >= 0x040600
-  // Add the dictionary scheme we use as local, so that the file:// links would
-  // work in the articles. The function was introduced in Qt 4.6.
-  QWebSecurityOrigin::addLocalScheme( "gdlookup" );
-#endif
+  QWebEngineUrlScheme webUiScheme("gdlookup");
+  webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
+                       QWebEngineUrlScheme::LocalScheme |
+                       QWebEngineUrlScheme::LocalAccessAllowed);
+  QWebEngineUrlScheme::registerScheme(webUiScheme);
 
   MainWindow m( cfg );
 

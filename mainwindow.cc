@@ -6,6 +6,7 @@
 #endif
 
 #include "mainwindow.hh"
+#include <QWebEngineSettings>
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "preferences.hh"
@@ -736,9 +737,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
   {
-    setGeometry( cfg.maximizedMainWindowGeometry );
-    if ( cfg.mainWindowGeometry.size() )
-      restoreGeometry( cfg.mainWindowGeometry );
+//    setGeometry( cfg.maximizedMainWindowGeometry );
+//    if ( cfg.mainWindowGeometry.size() )
+//      restoreGeometry( cfg.mainWindowGeometry );
     if ( cfg.mainWindowState.size() )
       restoreState( cfg.mainWindowState, 1 );
     setWindowState( windowState() | Qt::WindowMaximized );
@@ -1286,9 +1287,9 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
-  QWebSettings *defaultSettings = QWebSettings::globalSettings();
-  defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
+  QWebEngineSettings *defaultSettings = QWebEngineSettings::globalSettings();
+  defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  //defaultSettings->setAttribute( QWebEngineSettings::DeveloperExtrasEnabled, true );
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -2437,7 +2438,10 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
   {
     if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      setGeometry( cfg.normalMainWindowGeometry );
+      {
+        //todo ,need further effort
+     //   setGeometry( cfg.normalMainWindowGeometry );
+    }
     ev->accept();
     return true;
   }

@@ -5,6 +5,7 @@
 #include <vector>
 #include <errno.h>
 #include <string.h>
+#include <QDebug>
 
 #ifdef __WIN32
 char const * const Iconv::GdWchar = "UCS-4LE";
@@ -54,6 +55,7 @@ Iconv::Result Iconv::convert( void const * & inBuf, size_t  & inBytesLeft,
 
   if ( result == (size_t) -1 )
   {
+      qDebug("iconv convert errno:"+errno);
     switch( errno )
     {
       case EILSEQ:

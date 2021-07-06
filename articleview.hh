@@ -4,7 +4,7 @@
 #ifndef __ARTICLEVIEW_HH_INCLUDED__
 #define __ARTICLEVIEW_HH_INCLUDED__
 
-#include <QWebView>
+#include <QWebEngineView>
 #include <QMap>
 #include <QUrl>
 #include <QSet>
@@ -59,6 +59,8 @@ class ArticleView: public QFrame
   QStringList uniqueMatches;
   bool ftsSearchIsOpened, ftsSearchMatchCase;
   int ftsPosition;
+
+  QString lastUrl;
 
   void highlightFTSResults();
   void performFtsFindOperation( bool backwards );
@@ -131,6 +133,8 @@ public:
 
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
+
+  QString getWebPageTextSync(QWebEnginePage * page);
 
 public slots:
 
@@ -266,7 +270,7 @@ private slots:
   void handleUrlChanged( QUrl const & url );
   void attachToJavaScript();
   void linkClicked( QUrl const & );
-  void linkHovered( const QString & link, const QString & title, const QString & textContent );
+  void linkHovered( const QString & link);
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();
@@ -333,7 +337,7 @@ private:
 
   /// Use the known information about the current frame to update the current
   /// article's value.
-  void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
+  void updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame = 0 ,QPoint * point=0);
 
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
@@ -345,6 +349,8 @@ private:
   bool eventFilter( QObject * obj, QEvent * ev );
 
   void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
+
+  bool findText(QString& text, const QWebEnginePage::FindFlags& f);
 
   void reloadStyleSheet();
 
@@ -364,7 +370,7 @@ protected:
 private:
   QString insertSpans( QString const & html );
   void readTag( QString const & from, QString & to, int & count );
-  QString checkElement( QWebElement & elem, const QPoint & pt );
+  QString checkElement( QWebEnginePage & elem, const QPoint & pt );
 public:
   QString wordAtPoint( int x, int y );
 #endif
