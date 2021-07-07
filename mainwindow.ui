@@ -133,7 +133,7 @@
    </widget>
    <widget class="QMenu" name="menuSearch">
     <property name="title">
-     <string>Search</string>
+     <string>Se&amp;arch</string>
     </property>
     <addaction name="searchInPageAction"/>
     <addaction name="fullTextSearchAction"/>
