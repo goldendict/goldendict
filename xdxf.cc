@@ -145,6 +145,9 @@ public:
 
   ~XdxfDictionary();
 
+  virtual Dictionary::ResourceSearch::Type getResourceSearchType() const
+  { return Dictionary::ResourceSearch::XdxfType; }
+
   virtual string getName() throw()
   { return dictionaryName; }
 
