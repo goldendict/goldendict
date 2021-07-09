@@ -89,9 +89,7 @@ struct DecoderContext
     kBufferSize = 32768
   };
 
-  static QMutex deviceMutex_;
   QAtomicInt & isCancelled_;
-  QByteArray audioData_;
   QDataStream audioDataStream_;
   AVFormatContext * formatContext_;
   AVCodec * codec_;
@@ -117,8 +115,7 @@ struct DecoderContext
 
 DecoderContext::DecoderContext( QByteArray const & audioData, QAtomicInt & isCancelled ):
   isCancelled_( isCancelled ),
-  audioData_( audioData ),
-  audioDataStream_( audioData_ ),
+  audioDataStream_( audioData ),
   formatContext_( NULL ),
   codec_( NULL ),
   codecContext_( NULL ),
