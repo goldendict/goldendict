@@ -43,6 +43,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <algorithm>
 
 namespace Slob {
 
@@ -414,7 +415,7 @@ const SlobFile::RefOffsetsVector & SlobFile::getSortedRefOffsets()
       refsOffsetVector.append( RefEntryOffsetItem( base + qFromBigEndian( tmp ), i ) );
     }
 
-    qSort( refsOffsetVector );
+    std::sort( refsOffsetVector.begin(), refsOffsetVector.end() );
     return refsOffsetVector;
   }
   QString error = fileName + ": " + file.errorString();

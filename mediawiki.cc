@@ -271,6 +271,25 @@ private:
   void processArticle( QString & articleString ) const;
   void appendArticleToData( QString const & articleString );
 
+  /// This simple set implementation should be much more efficient than tree-
+  /// and hash-based standard/Qt containers when there are very few elements.
+  template< typename T >
+  class SmallSet {
+  public:
+    bool insert( T x )
+    {
+      if( std::find( elements.begin(), elements.end(), x ) != elements.end() )
+        return false;
+      elements.push_back( x );
+      return true;
+    }
+  private:
+    std::vector< T > elements;
+  };
+
+  /// The page id set allows to filter out duplicate articles in case MediaWiki
+  /// redirects the main word and words in the alts collection to the same page.
+  SmallSet< long long > addedPageIds;
   const QString url;
   QNetworkAccessManager & netMgr;
 };
@@ -373,7 +392,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
       {
         QDomNode parseNode = dd.namedItem( "api" ).namedItem( "parse" );
   
-        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0" )
+        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0"
+             // Don't show the same article more than once:
+             && addedPageIds.insert( parseNode.toElement().attribute( "pageid" ).toLongLong() ) )
         {
           QDomNode textNode = parseNode.namedItem( "text" );
   
@@ -544,9 +565,9 @@ void MediaWikiArticleRequest::processArticle( QString & articleString ) const
 #endif
     // audio url
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+    articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #else
-    articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+    articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #endif
                            QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
                                                    this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );

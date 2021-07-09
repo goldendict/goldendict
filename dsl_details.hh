@@ -93,6 +93,7 @@ private:
   wchar ch;
   bool escaped;
   unsigned transcriptionCount; // >0 = inside a [t] tag
+  unsigned mediaCount; // >0 = inside a [s] tag
 
   void nextChar() THROW_SPEC( eot );
 

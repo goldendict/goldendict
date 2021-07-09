@@ -49,7 +49,7 @@ using std::pair;
 enum
 {
   BtreeMinElements = 64,
-  BtreeMaxElements = 5120
+  BtreeMaxElements = 8192
 };
 
 BtreeIndex::BtreeIndex():
@@ -1418,7 +1418,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   uint32_t nextLeaf = 0;
   uint32_t leafEntries;
 
-  qSort( offsets );
+  std::sort( offsets.begin(), offsets.end() );
 
   Mutex::Lock _( *idxFileMutex );
 

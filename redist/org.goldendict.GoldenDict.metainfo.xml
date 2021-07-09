@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2019 Vitaly Zaitsev <vitaly@easycoding.org> -->
 <component type="desktop">
-  <id>org.goldendict.desktop</id>
+  <id>org.goldendict.GoldenDict</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>GoldenDict</name>
@@ -34,6 +34,9 @@
   </screenshots>
   <url type="homepage">http://goldendict.org</url>
   <update_contact>https://github.com/goldendict/goldendict</update_contact>
-  <launchable type="desktop-id">goldendict.desktop</launchable>
+  <launchable type="desktop-id">org.goldendict.GoldenDict.desktop</launchable>
   <content_rating type="oars-1.0" />
+  <provides>
+    <id>org.goldendict.desktop</id>
+  </provides>
 </component>

@@ -153,15 +153,31 @@ ScanPopupWindowFlags spwfFromInt( int id )
   return SPWF_default;
 }
 
-QString Preferences::sanitizeInputPhrase( QString const & inputPhrase ) const
+InputPhrase Preferences::sanitizeInputPhrase( QString const & inputPhrase ) const
 {
+  InputPhrase result;
+
   if( limitInputPhraseLength && inputPhrase.size() > inputPhraseLengthLimit )
   {
     gdWarning( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
                inputPhrase.size(), inputPhraseLengthLimit );
-    return QString();
+    return result;
   }
-  return gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( inputPhrase ) ) ).simplified();
+
+  const QString withPunct = inputPhrase.simplified();
+  result.phrase = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( withPunct ) ) );
+  if ( !result.isValid() )
+    return result; // The suffix of an invalid input phrase must be empty.
+
+  const int prefixSize = withPunct.indexOf( result.phrase.at(0) );
+  const int suffixSize = withPunct.size() - prefixSize - result.phrase.size();
+  Q_ASSERT( suffixSize >= 0 );
+  Q_ASSERT( withPunct.size() - suffixSize - 1
+            == withPunct.lastIndexOf( result.phrase.at( result.phrase.size() - 1 ) ) );
+  if ( suffixSize != 0 )
+    result.punctuationSuffix = withPunct.right( suffixSize );
+
+  return result;
 }
 
 Preferences::Preferences():
@@ -1089,6 +1105,11 @@ Class load() THROW_SPEC( exError )
 
   if ( !inspectorGeometry.isNull() )
     c.inspectorGeometry = QByteArray::fromBase64( inspectorGeometry.toElement().text().toLatin1() );
+
+  QDomNode dictionariesDialogGeometry = root.namedItem( "dictionariesDialogGeometry" );
+
+  if ( !dictionariesDialogGeometry.isNull() )
+    c.dictionariesDialogGeometry = QByteArray::fromBase64( dictionariesDialogGeometry.toElement().text().toLatin1() );
 
   QDomNode timeForNewReleaseCheck = root.namedItem( "timeForNewReleaseCheck" );
 
@@ -2082,6 +2103,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "inspectorGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.inspectorGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "dictionariesDialogGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictionariesDialogGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "timeForNewReleaseCheck" );
