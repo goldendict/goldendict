@@ -121,8 +121,6 @@ win32 {
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
 
-    Release:DEFINES += NO_CONSOLE
-
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
     CONFIG += zim_support
@@ -246,6 +244,13 @@ mac {
         }
     }
 }
+
+CONFIG(debug, debug|release): {
+    message("Debug messages are enabled!")
+} else {
+    DEFINES += NO_CONSOLE QT_NO_DEBUG QT_NO_DEBUG_OUTPUT
+}
+
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
@@ -676,4 +681,3 @@ TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
 include( qtsingleapplication/src/qtsingleapplication.pri )
-
