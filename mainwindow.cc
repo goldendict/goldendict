@@ -3864,6 +3864,11 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
     toggleMainWindow( true );
     return;
   }
+  if( message == "toggleScanPopup" )
+  {
+    toggleScanPopup();
+    return;
+  }
   if( message.left( 15 ) == "translateWord: " )
   {
     if( scanPopup.get() )
@@ -4805,6 +4810,11 @@ bool MainWindow::isWordPresentedInFavorites( QString const & word, unsigned grou
     folder = igrp->favoritesFolder;
 
   return ui.favoritesPaneWidget->isHeadwordPresent( folder, word );
+}
+
+void MainWindow::toggleScanPopup()
+{
+  enableScanPopup->toggle();
 }
 
 void MainWindow::setGroupByName( QString const & name, bool main_window )

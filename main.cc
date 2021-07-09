@@ -112,7 +112,7 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 class GDCommandLine
 {
-  bool crashReport, logFile;
+  bool crashReport, toggleScanPopup, logFile;
   QString word, groupName, popupGroupName, errFileName;
   QVector< QString > arguments;
 public:
@@ -123,6 +123,9 @@ public:
 
   inline QString errorFileName()
   { return errFileName; }
+
+  inline bool needToggleScanPopup()
+  { return toggleScanPopup; }
 
   inline bool needSetGroup()
   { return !groupName.isEmpty(); }
@@ -148,6 +151,7 @@ public:
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
 crashReport( false ),
+toggleScanPopup( false ),
 logFile( false )
 {
   if( argc > 1 )
@@ -175,6 +179,12 @@ logFile( false )
           errFileName = arguments[ ++i ];
           crashReport = true;
         }
+        continue;
+      }
+      else
+      if( arguments[ i ].compare( "--toggle-scan-popup" ) == 0 )
+      {
+        toggleScanPopup = true;
         continue;
       }
       else
@@ -304,6 +314,12 @@ int main( int argc, char ** argv )
   if ( app.isRunning() )
   {
     bool wasMessage = false;
+
+    if( gdcl.needToggleScanPopup() )
+    {
+      app.sendMessage( "toggleScanPopup" );
+      wasMessage = true;
+    }
 
     if( gdcl.needSetGroup() )
     {
@@ -444,6 +460,9 @@ int main( int argc, char ** argv )
 
   QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
     &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
+
+  if( gdcl.needToggleScanPopup() )
+    m.toggleScanPopup();
 
   if( gdcl.needSetGroup() )
     m.setGroupByName( gdcl.getGroupName(), true );
