@@ -65,7 +65,7 @@ signals:
   /// Forwarded from the dictionary bar, so that main window could act on this.
   void editGroupRequested( unsigned id );
   /// Send word to main window
-  void sendWordToMainWindow( QString const & word );
+  void sendPhraseToMainWindow( Config::InputPhrase const & phrase );
   /// Close opened menus when window hide
   void closeMenu();
   /// Signals to set expand optional parts mode (retranslation from/to MainWindow and dictionary bar)
@@ -139,7 +139,8 @@ private:
   ArticleView * definition;
   QAction escapeAction, switchExpandModeAction, focusTranslateLineAction;
   QAction openSearchAction;
-  QString pendingInputWord, inputWord;
+  Config::InputPhrase pendingInputPhrase, inputPhrase;
+  QString translateBoxSuffix; ///< A punctuation suffix that corresponds to translateBox's text.
   WordFinder wordFinder;
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
@@ -147,7 +148,7 @@ private:
   QScopedPointer< AudioPlayerUi< QToolButton > > audioPlayerUi;
   PronounceActionTexts pronounceActionTexts;
   /// Fonts saved before words zooming is in effect, so it could be reset back.
-  QFont wordListDefaultFont, translateLineDefaultFont;
+  QFont wordListDefaultFont, translateLineDefaultFont, groupListDefaultFont;
 
 #ifdef HAVE_X11
   ScanFlag * scanFlag;
@@ -191,7 +192,10 @@ private:
 
   void updateBackForwardButtons();
 
-  void showTranslationFor( QString const & inputWord );
+  void showTranslationFor( Config::InputPhrase const & inputPhrase );
+
+  void updateSuggestionList();
+  void updateSuggestionList( QString const & text );
 
 private slots:
 

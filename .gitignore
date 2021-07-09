@@ -18,6 +18,8 @@ Makefile.Release
 
 goldendict.pro.user
 goldendict.pro.user.*
+hotkeys.pro.user
+hotkeys.pro.user.*
 object_script.goldendict.Debug
 object_script.goldendict.Release
 

@@ -14,7 +14,7 @@
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
-#include <QtWidgets/QStyleFactory>
+#include "initializing.hh"
 #include <qt_windows.h>
 #include <uxtheme.h>
 
@@ -143,13 +143,13 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 {
   ui.setupUi( this );
 
-  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
-    restoreGeometry( cfg.preferences.fts.dialogGeometry );
-
   setAttribute( Qt::WA_DeleteOnClose, false );
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
 
   setWindowTitle( tr( "Full-text search" ) );
+
+  if( cfg.preferences.fts.dialogGeometry.size() > 0 )
+    restoreGeometry( cfg.preferences.fts.dialogGeometry );
 
   setNewIndexingName( ftsIdx.nowIndexingName() );
 
@@ -246,14 +246,13 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
   // We use simply "windows" style instead for this case
 
-  barStyle = 0;
   oldBarStyle = 0;
 
   if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA
       && ( QSysInfo::windowsVersion() & QSysInfo::WV_NT_based )
       && !IsThemeActive() )
   {
-    barStyle = QStyleFactory::create( "windows" );
+    QStyle * barStyle = WindowsStyle::instance().getStyle();
 
     if( barStyle )
     {
@@ -271,15 +270,12 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 FullTextSearchDialog::~FullTextSearchDialog()
 {
   if( delegate )
-    delete delegate;
+    delegate->deleteLater();
 
 #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
 
-  if( barStyle )
-  {
+  if( oldBarStyle )
     ui.searchProgressBar->setStyle( oldBarStyle );
-    delete barStyle;
-  }
 
 #endif
 }
@@ -669,7 +665,7 @@ Q_UNUSED( parent );
   }
 
   headwords.append( temp );
-  qSort( headwords );
+  std::sort( headwords.begin(),  headwords.end() );
 
   endResetModel();
   emit contentChanged();

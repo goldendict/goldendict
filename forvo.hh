@@ -21,7 +21,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::Forvo const &,
                                       QNetworkAccessManager & )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
 /// Exposed here for moc
 class ForvoArticleRequest: public Dictionary::DataRequest

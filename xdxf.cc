@@ -165,11 +165,12 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -461,6 +462,7 @@ class XdxfArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   XdxfDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -469,8 +471,8 @@ public:
 
   XdxfArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     XdxfDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     XdxfDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new XdxfArticleRequestRunnable( *this, hasExited ) );
@@ -503,13 +505,13 @@ void XdxfArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -521,6 +523,8 @@ void XdxfArticleRequest::run()
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -550,6 +554,8 @@ void XdxfArticleRequest::run()
 
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+      if( ignoreDiacritics )
+        headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
       multimap< wstring, pair< string, string > > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
@@ -614,10 +620,11 @@ void XdxfArticleRequest::run()
 
 sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word,
                                                             vector< wstring > const & alts,
-                                                            wstring const & )
-  throw( std::exception )
+                                                            wstring const &,
+                                                            bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new XdxfArticleRequest( word, alts, *this );
+  return new XdxfArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 void XdxfDictionary::loadArticle( uint32_t address,
@@ -679,11 +686,11 @@ class GzippedFile: public QIODevice
 
 public:
 
-  GzippedFile( char const * fileName ) throw( exCantReadFile );
+  GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile );
 
   ~GzippedFile();
 
-  size_t gzTell();
+//  size_t gzTell();
 
   char * readDataArray( unsigned long startPos, unsigned long size );
 
@@ -710,7 +717,7 @@ protected:
   { return -1; }
 };
 
-GzippedFile::GzippedFile( char const * fileName ) throw( exCantReadFile )
+GzippedFile::GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile )
 {
   gz = gd_gzopen( fileName );
   if ( !gz )
@@ -732,10 +739,12 @@ bool GzippedFile::atEnd() const
   return gzeof( gz );
 }
 
+/*
 size_t GzippedFile::gzTell()
 {
   return gztell( gz );
 }
+*/
 
 qint64 GzippedFile::readData( char * data, qint64 maxSize )
 {
@@ -1131,7 +1140,7 @@ void XdxfResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new XdxfResourceRequest( *this, name );
 }
@@ -1143,7 +1152,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -1314,13 +1323,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     list < wstring > keys;
                     while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
                     {
-                      stream.readNext();
-                      // abbreviations tag set switch at format revision = 30 
+                      if( !stream.readNextStartElement() )
+                        break;
+                      // abbreviations tag set switch at format revision = 30
                       if( idxHeader.revisionNumber >= 30 )
                       {
                         while ( !( stream.isEndElement() && stream.name() == "abbr_def" ) || !stream.atEnd() )
                         {
-                          stream.readNext();
                           if ( stream.isStartElement() && stream.name() == "abbr_k" )
                           {
                             s = readElementText( stream );
@@ -1338,13 +1347,13 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                           }
                           else if ( stream.isEndElement() && stream.name() == "abbreviations" )
                             break;
+                          stream.readNext();
                         }
                       }
                       else
                       {
                         while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
                         {
-                          stream.readNext();
                           if ( stream.isStartElement() && stream.name() == "k" )
                           {
                             s = readElementText( stream );
@@ -1362,6 +1371,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                           }
                           else if ( stream.isEndElement() && stream.name() == "abbreviations" )
                             break;
+                          stream.readNext();
                         }
                       }
                     }

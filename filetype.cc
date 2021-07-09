@@ -9,11 +9,19 @@ namespace Filetype {
 
 namespace {
 
+/// Checks if the given string ends with the given substring
+bool endsWith( string const & str, string const & tail )
+{
+  return str.size() >= tail.size() &&
+    str.compare( str.size() - tail.size(), tail.size(), tail ) == 0;
+}
+
+}
 
 /// Removes any trailing or leading spaces and lowercases the string.
 /// The lowercasing is done simplistically, but it is enough for file
 /// extensions.
-string simplifyString( string const & str )
+string simplifyString( string const & str, bool lowercase )
 {
   string result;
 
@@ -33,18 +41,9 @@ string simplifyString( string const & str )
   result.reserve( endPos - beginPos );
 
   while( beginPos < endPos )
-    result.push_back( tolower( str[ beginPos++ ] ) );
+    result.push_back( lowercase ? tolower( str[ beginPos++ ] ) : str[ beginPos++ ] );
 
   return result;
-}
-
-/// Checks if the given string ends with the given substring
-bool endsWith( string const & str, string const & tail )
-{
-  return str.size() >= tail.size() &&
-    str.compare( str.size() - tail.size(), tail.size(), tail ) == 0;
-}
-
 }
 
 bool isNameOfSound( string const & name )
@@ -56,6 +55,7 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".au" ) ||
     endsWith( s, ".voc" ) ||
     endsWith( s, ".ogg" ) ||
+    endsWith( s, ".oga" ) ||
     endsWith( s, ".mp3" ) ||
     endsWith( s, ".m4a") ||
     endsWith( s, ".aac" ) ||
@@ -66,7 +66,10 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".wma" ) ||
     endsWith( s, ".wv" ) ||
     endsWith( s, ".ape" ) ||
-    endsWith( s, ".spx" );
+    endsWith( s, ".spx" ) ||
+    endsWith( s, ".opus" ) ||
+    endsWith( s, ".mpa" ) ||
+    endsWith( s, ".mp2" );
 }
 
 bool isNameOfVideo( string const & name )
@@ -108,6 +111,7 @@ bool isNameOfPicture( string const & name )
     endsWith( s, ".tga" ) ||
     endsWith( s, ".pcx" ) ||
     endsWith( s, ".ico" ) ||
+    endsWith( s, ".webp" ) ||
     endsWith( s, ".svg" );
 }
 

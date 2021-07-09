@@ -42,6 +42,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <algorithm>
 
 namespace Zim {
 
@@ -72,7 +73,7 @@ class ZimFile;
 
 enum CompressionType
 {
-  Default = 0, None, Zlib, Bzip2, Lzma2
+  Default = 0, None, Zlib, Bzip2, Lzma2, Zstd
 };
 
 /// Zim file header
@@ -191,6 +192,7 @@ private:
   ZIM_header zimHeader;
   Cache cache[ CACHE_SIZE ];
   int stamp;
+  QVector< QPair< quint64, quint32 > > clusterOffsets;
 
   void clearCache();
 };
@@ -270,6 +272,27 @@ bool ZimFile::open()
   if( read( reinterpret_cast< char * >( &zimHeader ), sizeof( zimHeader ) ) != sizeof( zimHeader ) )
     return false;
 
+// Clusters in zim file may be placed in random order.
+// We create sorted offsets list to calculate clusters size.
+
+  clusterOffsets.resize( zimHeader.clusterCount );
+  QVector< quint64 > offs;
+  offs.resize( zimHeader.clusterCount );
+
+  seek( zimHeader.clusterPtrPos );
+  qint64 size = zimHeader.clusterCount * sizeof( quint64 );
+  if( read( reinterpret_cast< char * >( offs.data() ), size) != size )
+  {
+    vector< string > names;
+    getFilenames( names );
+    throw exCantReadFile( names[ 0 ] );
+  }
+
+  for( quint32 i = 0; i < zimHeader.clusterCount; i++ )
+    clusterOffsets[ i ] = QPair< quint64, quint32 >( offs.at( i ), i );
+
+  std::sort( clusterOffsets.begin(), clusterOffsets.end() );
+
   return true;
 }
 
@@ -312,24 +335,25 @@ string ZimFile::getClusterData( quint32 cluster_nom )
 
   // Cache miss, read data from file
 
-  // Read cluster pointers
-
-  quint64 clusters[ 2 ];
-  seek( zimHeader.clusterPtrPos + cluster_nom * 8 );
-  if( read( reinterpret_cast< char * >( clusters ), sizeof(clusters) ) != sizeof(clusters) )
-    return string();
-
   // Calculate cluster size
 
   quint64 clusterSize;
-  if( cluster_nom < zimHeader.clusterCount - 1 )
-    clusterSize = clusters[ 1 ] - clusters[ 0 ];
+  quint32 nom;
+  for( nom = 0; nom < zimHeader.clusterCount; nom++ )
+    if( clusterOffsets.at( nom ).second == cluster_nom )
+      break;
+
+  if( nom >= zimHeader.clusterCount ) // Invalid cluster nom
+    return string();
+
+  if( nom < zimHeader.clusterCount - 1 )
+    clusterSize = clusterOffsets.at( nom + 1 ).first - clusterOffsets.at( nom ).first;
   else
-    clusterSize = size() - clusters[ 0 ];
+    clusterSize = size() - clusterOffsets.at( nom ).first;
 
   // Read cluster data
 
-  seek( clusters[ 0 ] );
+  seek( clusterOffsets.at( nom ).first );
 
   char compressionType;
   if( !getChar( &compressionType ) )
@@ -351,6 +375,12 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   if( compressionType == Lzma2 )
     decompressedData = decompressLzma2( data.constData(), data.size() );
   else
+  if( compressionType == Zstd )
+    decompressedData = decompressZstd( data.constData(), data.size() );
+  else
+    return string();
+
+  if( decompressedData.empty() )
     return string();
 
   // Check BLOBs number in the cluster
@@ -554,11 +584,12 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
-                                                        wstring const & )
-      throw( std::exception );
+                                                        wstring const &,
+                                                        bool ignoreDiacritics )
+      THROW_SPEC( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      throw( std::exception );
+      THROW_SPEC( std::exception );
 
     virtual QString const& getDescription();
 
@@ -830,7 +861,7 @@ string ZimDictionary::convert( const string & in )
   }
 #endif
 
-  // Occassionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
+  // Occasionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
   // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
@@ -997,7 +1028,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
-    qSort( offsetsWithClusters );
+    std::sort( offsetsWithClusters.begin(), offsetsWithClusters.end() );
 
     QVector< uint32_t > offsets;
     offsets.resize( offsetsWithClusters.size() );
@@ -1104,7 +1135,7 @@ void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
     offsetsWithClusters.append( QPair< uint32_t, quint32 >( getArticleCluster( df, *it ), *it ) );
   }
 
-  qSort( offsetsWithClusters );
+  std::sort( offsetsWithClusters.begin(), offsetsWithClusters.end() );
 
   for( int i = 0; i < offsetsWithClusters.size(); i++ )
     offsets[ i ] = offsetsWithClusters.at( i ).second;
@@ -1186,6 +1217,7 @@ class ZimArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   ZimDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1194,8 +1226,8 @@ public:
 
   ZimArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     ZimDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     ZimDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new ZimArticleRequestRunnable( *this, hasExited ) );
@@ -1228,13 +1260,13 @@ void ZimArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -1246,6 +1278,8 @@ void ZimArticleRequest::run()
                                     // by only allowing them to appear once.
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -1283,6 +1317,8 @@ void ZimArticleRequest::run()
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( headword ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
     multimap< wstring, pair< string, string > > & mapToUse =
       ( wordCaseFolded == headwordStripped ) ?
@@ -1347,10 +1383,11 @@ void ZimArticleRequest::run()
 
 sptr< Dictionary::DataRequest > ZimDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new ZimArticleRequest( word, alts, *this );
+  return new ZimArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// ZimDictionary::getResource()
@@ -1439,6 +1476,8 @@ void ZimResourceRequest::run()
       QString css = QString::fromUtf8( resource.data(), resource.size() );
       dict.isolateCSS( css, ".zimdict" );
       QByteArray bytes = css.toUtf8();
+
+      Mutex::Lock _( dataMutex );
       data.resize( bytes.size() );
       memcpy( &data.front(), bytes.constData(), bytes.size() );
     }
@@ -1481,6 +1520,7 @@ void ZimResourceRequest::run()
       memcpy( &data.front(), resource.data(), data.size() );
     }
 
+    Mutex::Lock _( dataMutex );
     hasAnyData = true;
   }
   catch( std::exception &ex )
@@ -1494,7 +1534,7 @@ void ZimResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new ZimResourceRequest( *this, name );
 }
@@ -1506,7 +1546,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -1667,7 +1707,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   idxHeader.langFrom = LangCoder::code2toInt( lang.c_str() );
                 else
                 if( lang.size() == 3 )
-                  idxHeader.langFrom = LangCoder::code3toInt( lang.c_str() );
+                  idxHeader.langFrom = LangCoder::findIdForLanguageCode3( lang.c_str() );
                 idxHeader.langTo = idxHeader.langFrom;
               }
             }

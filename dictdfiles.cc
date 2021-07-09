@@ -124,8 +124,9 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual QString const& getDescription();
 
@@ -160,8 +161,11 @@ DictdDictionary::DictdDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   // Open the .dict file
 
@@ -254,18 +258,19 @@ uint32_t decodeBase64( string const & str )
 
 sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & word,
                                                              vector< wstring > const & alts,
-                                                             wstring const & )
-  throw( std::exception )
+                                                             wstring const &,
+                                                             bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
   try
   {
-    vector< WordArticleLink > chain = findArticles( word );
+    vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
     for( unsigned x = 0; x < alts.size(); ++x )
     {
       /// Make an additional query for each alt
 
-      vector< WordArticleLink > altChain = findArticles( alts[ x ] );
+      vector< WordArticleLink > altChain = findArticles( alts[ x ], ignoreDiacritics );
 
       chain.insert( chain.end(), altChain.begin(), altChain.end() );
     }
@@ -277,6 +282,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
                                       // by only allowing them to appear once.
 
     wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+    if( ignoreDiacritics )
+      wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
     char buf[ 16384 ];
 
@@ -418,6 +425,8 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
 
       wstring headwordStripped =
         Folding::applySimpleCaseOnly( Utf8::decode( chain[ x ].word ) );
+      if( ignoreDiacritics )
+        headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
       multimap< wstring, string > & mapToUse =
         ( wordCaseFolded == headwordStripped ) ?
@@ -464,7 +473,7 @@ QString const& DictdDictionary::getDescription()
         return dictionaryDescription;
 
     sptr< Dictionary::DataRequest > req = getArticle( GD_NATIVE_TO_WS( L"00databaseinfo" ),
-                                                      vector< wstring >(), wstring() );
+                                                      vector< wstring >(), wstring(), false );
 
     if( req->dataSize() > 0 )
       dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ), true );
@@ -601,7 +610,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -712,7 +721,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   char * articleBody = dict_data_read_( dz, articleOffset, articleSize, 0, 0 );
                   if ( articleBody )
                   {
-                    char * eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
+                    char * eol;
+                    if ( !strncmp( articleBody, "00databaseshort", 15 ) || !strncmp( articleBody, "00-database-short", 17 ) )
+                      eol = strchr( articleBody, '\n'  ); // skip the first line (headword itself)
+                    else
+                      eol = articleBody; // No headword itself
                     if ( eol )
                     {
                       while( *eol && Utf8::isspace( *eol ) ) ++eol; // skip spaces

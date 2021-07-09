@@ -27,9 +27,11 @@
 #define AVUTIL_ATTRIBUTES_H
 
 #ifdef __GNUC__
-#    define AV_GCC_VERSION_AT_LEAST(x,y) (__GNUC__ > x || __GNUC__ == x && __GNUC_MINOR__ >= y)
+#    define AV_GCC_VERSION_AT_LEAST(x,y) (__GNUC__ > (x) || __GNUC__ == (x) && __GNUC_MINOR__ >= (y))
+#    define AV_GCC_VERSION_AT_MOST(x,y)  (__GNUC__ < (x) || __GNUC__ == (x) && __GNUC_MINOR__ <= (y))
 #else
 #    define AV_GCC_VERSION_AT_LEAST(x,y) 0
+#    define AV_GCC_VERSION_AT_MOST(x,y)  0
 #endif
 
 #ifndef av_always_inline
@@ -50,35 +52,39 @@
 #endif
 #endif
 
+#if AV_GCC_VERSION_AT_LEAST(3,4)
+#    define av_warn_unused_result __attribute__((warn_unused_result))
+#else
+#    define av_warn_unused_result
+#endif
+
 #if AV_GCC_VERSION_AT_LEAST(3,1)
 #    define av_noinline __attribute__((noinline))
+#elif defined(_MSC_VER)
+#    define av_noinline __declspec(noinline)
 #else
 #    define av_noinline
 #endif
 
-#if AV_GCC_VERSION_AT_LEAST(3,1)
+#if AV_GCC_VERSION_AT_LEAST(3,1) || defined(__clang__)
 #    define av_pure __attribute__((pure))
 #else
 #    define av_pure
 #endif
 
-#ifndef av_restrict
-#define av_restrict restrict
-#endif
-
-#if AV_GCC_VERSION_AT_LEAST(2,6)
+#if AV_GCC_VERSION_AT_LEAST(2,6) || defined(__clang__)
 #    define av_const __attribute__((const))
 #else
 #    define av_const
 #endif
 
-#if AV_GCC_VERSION_AT_LEAST(4,3)
+#if AV_GCC_VERSION_AT_LEAST(4,3) || defined(__clang__)
 #    define av_cold __attribute__((cold))
 #else
 #    define av_cold
 #endif
 
-#if AV_GCC_VERSION_AT_LEAST(4,1)
+#if AV_GCC_VERSION_AT_LEAST(4,1) && !defined(__llvm__)
 #    define av_flatten __attribute__((flatten))
 #else
 #    define av_flatten
@@ -86,6 +92,8 @@
 
 #if AV_GCC_VERSION_AT_LEAST(3,1)
 #    define attribute_deprecated __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#    define attribute_deprecated __declspec(deprecated)
 #else
 #    define attribute_deprecated
 #endif
@@ -102,13 +110,18 @@
         _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"") \
         code \
         _Pragma("GCC diagnostic pop")
+#elif defined(_MSC_VER)
+#    define AV_NOWARN_DEPRECATED(code) \
+        __pragma(warning(push)) \
+        __pragma(warning(disable : 4996)) \
+        code; \
+        __pragma(warning(pop))
 #else
 #    define AV_NOWARN_DEPRECATED(code) code
 #endif
 #endif
 
-
-#if defined(__GNUC__)
+#if defined(__GNUC__) || defined(__clang__)
 #    define av_unused __attribute__((unused))
 #else
 #    define av_unused
@@ -119,25 +132,25 @@
  * away.  This is useful for variables accessed only from inline
  * assembler without the compiler being aware.
  */
-#if AV_GCC_VERSION_AT_LEAST(3,1)
+#if AV_GCC_VERSION_AT_LEAST(3,1) || defined(__clang__)
 #    define av_used __attribute__((used))
 #else
 #    define av_used
 #endif
 
-#if AV_GCC_VERSION_AT_LEAST(3,3)
+#if AV_GCC_VERSION_AT_LEAST(3,3) || defined(__clang__)
 #   define av_alias __attribute__((may_alias))
 #else
 #   define av_alias
 #endif
 
-#if defined(__GNUC__) && !defined(__INTEL_COMPILER) && !defined(__clang__)
+#if (defined(__GNUC__) || defined(__clang__)) && !defined(__INTEL_COMPILER)
 #    define av_uninit(x) x=x
 #else
 #    define av_uninit(x) x
 #endif
 
-#ifdef __GNUC__
+#if defined(__GNUC__) || defined(__clang__)
 #    define av_builtin_constant_p __builtin_constant_p
 #    define av_printf_format(fmtpos, attrpos) __attribute__((__format__(__printf__, fmtpos, attrpos)))
 #else
@@ -145,7 +158,7 @@
 #    define av_printf_format(fmtpos, attrpos)
 #endif
 
-#if AV_GCC_VERSION_AT_LEAST(2,5)
+#if AV_GCC_VERSION_AT_LEAST(2,5) || defined(__clang__)
 #    define av_noreturn __attribute__((noreturn))
 #else
 #    define av_noreturn

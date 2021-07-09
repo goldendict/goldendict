@@ -8,6 +8,7 @@
 #include <QMap>
 #include <set>
 #include <list>
+#include "config.hh"
 #include "dictionary.hh"
 #include "instances.hh"
 #include "wordfinder.hh"
@@ -41,7 +42,7 @@ public:
   /// choice of the stylesheet file.
   void setDisplayStyle( QString const &, QString const & addonStyle );
 
-  /// Looks up the given word within the given group, and creates a full html
+  /// Looks up the given phrase within the given group, and creates a full html
   /// page text containing its definition.
   /// The result is returned as Dictionary::DataRequest just like dictionaries
   /// themselves do. The difference is that the result is a complete html page
@@ -50,11 +51,12 @@ public:
   /// the keys are dictionary ids.
   /// If mutedDicts is not empty, the search would be limited only to those
   /// dictionaries in group which aren't listed there.
-  sptr< Dictionary::DataRequest > makeDefinitionFor( QString const & word, unsigned groupId,
+  sptr< Dictionary::DataRequest > makeDefinitionFor( Config::InputPhrase const & phrase, unsigned groupId,
                                                      QMap< QString, QString > const & contexts,
                                                      QSet< QString > const & mutedDicts =
                                                        QSet< QString >(),
-                                                     QStringList const & dictIDs = QStringList() ) const;
+                                                     QStringList const & dictIDs = QStringList(),
+                                                     bool ignoreDiacritics = false ) const;
 
   /// Makes up a text which states that no translation for the given word
   /// was found. Sometimes it's better to call this directly when it's already
@@ -124,14 +126,16 @@ class ArticleRequest: public Dictionary::DataRequest
   bool firstCompoundWasFound;
   int articleSizeLimit;
   bool needExpandOptionalParts;
+  bool ignoreDiacritics;
 
 public:
 
-  ArticleRequest( QString const & word, QString const & group,
+  ArticleRequest( Config::InputPhrase const & phrase, QString const & group,
                   QMap< QString, QString > const & contexts,
                   std::vector< sptr< Dictionary::Class > > const & activeDicts,
                   std::string const & header,
-                  int sizeLimit, bool needExpandOptionalParts_ );
+                  int sizeLimit, bool needExpandOptionalParts_,
+                  bool ignoreDiacritics = false );
 
   virtual void cancel();
 //  { finish(); } // Add our own requests cancellation here

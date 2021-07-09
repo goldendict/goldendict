@@ -89,9 +89,9 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x584c5344, // DSLX on little-endian, XLSD on big-endian
-  CurrentFormatVersion = 22 + BtreeIndexing::FormatVersion + Folding::Version,
+  CurrentFormatVersion = 23 + BtreeIndexing::FormatVersion + Folding::Version,
   CurrentZipSupportVersion = 2,
-  CurrentFtsIndexVersion = 5
+  CurrentFtsIndexVersion = 7
 };
 
 struct IdxHeader
@@ -178,6 +178,7 @@ class DslDictionary: public BtreeIndexing::BtreeDictionary
   int maxPictureWidth;
 
   wstring currentHeadword;
+  string resourceDir1, resourceDir2;
 
 public:
 
@@ -207,9 +208,15 @@ public:
   inline virtual quint32 getLangTo() const
   { return idxHeader.langTo; }
 
+  inline virtual string getResourceDir1() const
+  { return resourceDir1; }
+
+  inline virtual string getResourceDir2() const
+  { return resourceDir2; }
+
   #if 0
   virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    throw( std::exception )
+    THROW_SPEC( std::exception )
   {
     return vector< wstring >();
   }
@@ -217,11 +224,12 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
-                                                      wstring const & )
-    throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics )
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
@@ -262,6 +270,7 @@ private:
   /// Loads the article. Does not process the DSL language.
   void loadArticle( uint32_t address,
                     wstring const & requestedHeadwordFolded,
+                    bool ignoreDiacritics,
                     wstring & tildeValue,
                     wstring & displayedHeadword,
                     unsigned & headwordIndex,
@@ -309,12 +318,24 @@ DslDictionary::DslDictionary( string const & id,
   idx.seek( sizeof( idxHeader ) );
 
   vector< char > dName( idx.read< uint32_t >() );
-  idx.read( &dName.front(), dName.size() );
-  dictionaryName = string( &dName.front(), dName.size() );
+  if( dName.size() > 0 )
+  {
+    idx.read( &dName.front(), dName.size() );
+    dictionaryName = string( &dName.front(), dName.size() );
+  }
 
   vector< char > sName( idx.read< uint32_t >() );
-  idx.read( &sName.front(), sName.size() );
-  preferredSoundDictionary = string( &sName.front(), sName.size() );
+  if( sName.size() > 0 )
+  {
+    idx.read( &sName.front(), sName.size() );
+    preferredSoundDictionary = string( &sName.front(), sName.size() );
+  }
+
+  resourceDir1 = getDictionaryFilenames()[ 0 ] + ".files" + FsEncoding::separator();
+  QString s = FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
+  if( s.endsWith( QString::fromLatin1( ".dz", Qt::CaseInsensitive ) ) )
+    s.chop( 3 );
+  resourceDir2 = FsEncoding::encode( s ) + ".files" + FsEncoding::separator();
 
   // Everything else would be done in deferred init
 }
@@ -529,6 +550,7 @@ bool isDslWs( wchar ch )
 
 void DslDictionary::loadArticle( uint32_t address,
                                  wstring const & requestedHeadwordFolded,
+                                 bool ignoreDiacritics,
                                  wstring & tildeValue,
                                  wstring & displayedHeadword,
                                  unsigned & headwordIndex,
@@ -673,7 +695,13 @@ void DslDictionary::loadArticle( uint32_t address,
           unescapeDsl( *i );
           normalizeHeadword( *i );
 
-          if ( Folding::trimWhitespace( *i ) == requestedHeadwordFolded )
+          bool found;
+          if( ignoreDiacritics )
+            found = Folding::applyDiacriticsOnly( Folding::trimWhitespace( *i ) ) == Folding::applyDiacriticsOnly( requestedHeadwordFolded );
+          else
+            found = Folding::trimWhitespace( *i ) == requestedHeadwordFolded;
+
+          if ( found )
           {
             // Found it. Now we should make a displayed headword for it.
             if ( hadFirstHeadword )
@@ -851,11 +879,8 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
   {
-    string filename = Utf8::encode( node.renderAsText() );
-    string n =
-      getDictionaryFilenames()[ 0 ] + ".files" +
-      FsEncoding::separator() +
-      FsEncoding::encode( filename );
+    string filename = Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false );
+    string n = resourceDir1 + FsEncoding::encode( filename );
 
     if ( Filetype::isNameOfSound( filename ) )
     {
@@ -863,9 +888,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       // Otherwise, make a global 'search' one.
 
       bool search =
-          !File::exists( n ) && !File::exists( FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
-                                               FsEncoding::separator() +
-                                               FsEncoding::encode( filename ) ) &&
+          !File::exists( n ) && !File::exists( resourceDir2 + FsEncoding::encode( filename ) ) &&
+          !File::exists( FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+                                              FsEncoding::separator() +
+                                              FsEncoding::encode( filename ) ) &&
           ( !resourceZip.isOpen() ||
             !resourceZip.hasFile( Utf8::decode( filename ) ) );
 
@@ -902,18 +928,26 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
         try
         {
-          n = FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
-              FsEncoding::separator() +
-              FsEncoding::encode( filename );
+          n = resourceDir2 + FsEncoding::encode( filename );
           File::loadFromFile( n, imgdata );
         }
         catch( File::exCantOpen & )
         {
-          // Try reading from zip file
-          if ( resourceZip.isOpen() )
+          try
           {
-            Mutex::Lock _( resourceZipMutex );
-            resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+            n = FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+                FsEncoding::separator() +
+                FsEncoding::encode( filename );
+            File::loadFromFile( n, imgdata );
+          }
+          catch( File::exCantOpen & )
+          {
+            // Try reading from zip file
+            if ( resourceZip.isOpen() )
+            {
+              Mutex::Lock _( resourceZipMutex );
+              resourceZip.loadFile( Utf8::decode( filename ), imgdata );
+            }
           }
         }
       }
@@ -992,7 +1026,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
   {
-    string link = Html::escape( Utf8::encode( node.renderAsText() ) );
+    string link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
       link = "http://" + link;
 
@@ -1176,7 +1210,10 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
                gd::toQString( node.tagName ).toUtf8().data(), gd::toQString( node.tagAttrs ).toUtf8().data(),
                getName().c_str(), gd::toQString( currentHeadword ).toUtf8().data() );
 
-    result += "<span class=\"dsl_unknown\">" + processNodeChildren( node ) + "</span>";
+    result += "<span class=\"dsl_unknown\">[" + string( gd::toQString( node.tagName ).toUtf8().data() );
+    if( !node.tagAttrs.empty() )
+      result += " " + string( gd::toQString( node.tagAttrs ).toUtf8().data() );
+    result += "]" + processNodeChildren( node ) + "</span>";
   }
 
   return result;
@@ -1511,7 +1548,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
           if( tag.compare( stripTags[ n ], Qt::CaseInsensitive ) == 0 )
           {
             pos2 = text.indexOf( stripEndTags[ n ] , pos + stripTags[ n ].size() + 2, Qt::CaseInsensitive );
-            text.remove( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos );
+            text.replace( pos, pos2 > 0 ? pos2 - pos + stripEndTags[ n ].length() : text.length() - pos, " " );
             break;
           }
         }
@@ -1524,10 +1561,16 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     // Strip tags
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    text.replace( QRegularExpression( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegularExpression( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
     text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
 #else
-    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]", Qt::CaseInsensitive ) );
+    text.replace( QRegExp( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
+    text.replace( QRegExp( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
+    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]" ) );
 #endif
+    text.remove( QString::fromLatin1( "<<" ) );
+    text.remove( QString::fromLatin1( ">>" ) );
 
     // Chech for insided cards
 
@@ -1602,6 +1645,7 @@ class DslArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   DslDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -1610,8 +1654,8 @@ public:
 
   DslArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     DslDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     DslDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new DslArticleRequestRunnable( *this, hasExited ) );
@@ -1651,13 +1695,13 @@ void DslArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -1690,7 +1734,7 @@ void DslArticleRequest::run()
 
     try
     {
-      dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, tildeValue,
+      dict.loadArticle( chain[ x ].articleOffset, wordCaseFolded, ignoreDiacritics, tildeValue,
                         displayedHeadword, headwordIndex, articleBody );
 
       if ( !articlesIncluded.insert( std::make_pair( chain[ x ].articleOffset,
@@ -1766,10 +1810,11 @@ void DslArticleRequest::run()
 
 sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new DslArticleRequest( word, alts, *this );
+  return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 //// DslDictionary::getResource()
@@ -1870,31 +1915,38 @@ void DslResourceRequest::run()
     }
     catch( File::exCantOpen & )
     {
-      n = dict.getDictionaryFilenames()[ 0 ] + ".files" +
-          FsEncoding::separator() +
-          FsEncoding::encode( resourceName );
-
-      try
-      {
+      n = dict.getResourceDir1() + FsEncoding::encode( resourceName );
+      try {
         Mutex::Lock _( dataMutex );
 
         File::loadFromFile( n, data );
       }
       catch( File::exCantOpen & )
       {
-        // Try reading from zip file
+        n = dict.getResourceDir2() + FsEncoding::encode( resourceName );
 
-        if ( dict.resourceZip.isOpen() )
+        try
         {
-          Mutex::Lock _( dict.resourceZipMutex );
+          Mutex::Lock _( dataMutex );
 
-          Mutex::Lock __( dataMutex );
-
-          if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
-            throw; // Make it fail since we couldn't read the archive
+          File::loadFromFile( n, data );
         }
-        else
-          throw;
+        catch( File::exCantOpen & )
+        {
+          // Try reading from zip file
+
+          if ( dict.resourceZip.isOpen() )
+          {
+            Mutex::Lock _( dict.resourceZipMutex );
+
+            Mutex::Lock __( dataMutex );
+
+            if ( !dict.resourceZip.loadFile( Utf8::decode( resourceName ), data ) )
+              throw; // Make it fail since we couldn't read the archive
+          }
+          else
+            throw;
+        }
       }
     }
 
@@ -1946,7 +1998,7 @@ void DslResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new DslResourceRequest( *this, name );
 }
@@ -2007,7 +2059,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       int maxPictureWidth, unsigned int maxHeadwordSize )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -2310,12 +2362,15 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           bool wasEmptyLine = false;
           int headwordLine = scanner.getLinesRead() - 2;
           bool noSignificantLines = Folding::applyWhitespaceOnly( curString ).empty();
+          bool haveLine = !noSignificantLines;
 
           // Skip the article's body
           for( ; ; )
           {
-            if ( ! ( hasString = scanner.readNextLineWithoutComments( curString, curOffset ) )
-                 || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
+            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset );
+            haveLine = false;
+
+            if ( !hasString || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
             {
               if( insideInsided )
               {

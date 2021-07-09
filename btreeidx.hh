@@ -10,9 +10,11 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include <QVector>
 #include <QSet>
 #include <QList>
+#include "cpp_features.hh"
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
@@ -69,7 +71,7 @@ struct IndexInfo
 };
 
 /// Base btree indexing class which allows using what buildIndex() function
-/// created. It's quite low-lovel and is basically a set of 'bulding blocks'
+/// created. It's quite low-lovel and is basically a set of 'building blocks'
 /// functions.
 class BtreeIndex
 {
@@ -89,7 +91,7 @@ public:
   /// Find all unique article links in the index
   void findAllArticleLinks( QVector< WordArticleLink > & articleLinks );
 
-  /// Retrieve all unique headwors from index
+  /// Retrieve all unique headwords from index
   void getAllHeadwords( QSet< QString > & headwords );
 
   /// Find all article links and/or headwords in the index
@@ -98,7 +100,7 @@ public:
                          QSet< QString > * headwords,
                          QAtomicInt * isCancelled = 0 );
 
-  /// Retrieve headwords for presented article adresses
+  /// Retrieve headwords for presented article addresses
   void getHeadwordsFromOffsets( QList< uint32_t > & offsets,
                                 QVector< QString > & headwords,
                                 QAtomicInt * isCancelled = 0 );
@@ -131,7 +133,7 @@ protected:
   /// is updated to point to the next chain, if there's any.
   vector< WordArticleLink > readChain( char const * & );
 
-  /// Drops any alises which arose due to folding. Only case-folded aliases
+  /// Drops any aliases which arose due to folding. Only case-folded aliases
   /// are left.
   void antialias( wstring const &, vector< WordArticleLink > &, bool ignoreDiactitics );
 
@@ -165,13 +167,13 @@ public:
   /// need not to implement this function.
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
                                                               unsigned minLength,
                                                               unsigned maxSuffixVariation,
                                                               unsigned long maxResults )
-    throw( std::exception );
+    THROW_SPEC( std::exception );
 
   virtual bool isLocalDictionary()
   { return true; }
@@ -194,7 +196,7 @@ public:
   // Default - simple sorting in increase order
   virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
                                           QAtomicInt & isCancelled )
-  { Q_UNUSED( isCancelled ); qSort( offsets ); }
+  { Q_UNUSED( isCancelled ); std::sort( offsets.begin(), offsets.end() ); }
 
   /// Called before each matching operation to ensure that any child init
   /// has completed. Mainly used for deferred init. The default implementation

@@ -3,7 +3,6 @@
 
 #include "scanpopup.hh"
 #include "folding.hh"
-#include "wstring_qt.hh"
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>
@@ -30,6 +29,17 @@ static const Qt::WindowFlags defaultUnpinnedWindowFlags =
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
+#endif
+;
+
+static const Qt::WindowFlags pinnedWindowFlags =
+#ifdef HAVE_X11
+/// With the Qt::Dialog flag, scan popup is always on top of the main window
+/// on Linux/X11 with Qt 4, Qt 5 since version 5.12.1 (QTBUG-74309).
+/// Qt::Window allows to use the scan popup and the main window independently.
+Qt::Window
+#else
+Qt::Dialog
 #endif
 ;
 
@@ -115,9 +125,7 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   wordListDefaultFont = ui.translateBox->wordList()->font();
   translateLineDefaultFont = ui.translateBox->font();
-
-  applyZoomFactor();
-  applyWordsZoomLevel();
+  groupListDefaultFont = ui.groupList->font();
 
   ui.mainLayout->addWidget( definition );
 
@@ -190,7 +198,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   if ( cfg.pinPopupWindow )
   {
     dictionaryBar.setMovable( true );
-    Qt::WindowFlags flags = Qt::Dialog;
+    Qt::WindowFlags flags = pinnedWindowFlags;
     if( cfg.popupWindowAlwaysOnTop )
       flags |= Qt::WindowStaysOnTopHint;
     setWindowFlags( flags );
@@ -231,6 +239,11 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &focusTranslateLineAction, SIGNAL( triggered() ),
            this, SLOT( focusTranslateLine() ) );
 
+  QAction * const focusArticleViewAction = new QAction( this );
+  focusArticleViewAction->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  focusArticleViewAction->setShortcut( QKeySequence( "Ctrl+N" ) );
+  addAction( focusArticleViewAction );
+  connect( focusArticleViewAction, SIGNAL( triggered() ), definition, SLOT( focus() ) );
 
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
                                        QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
@@ -327,6 +340,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &delayTimer, SIGNAL( timeout() ),
     this, SLOT( delayShow() ) );
 #endif
+
+  applyZoomFactor();
+  applyWordsZoomLevel();
 }
 
 ScanPopup::~ScanPopup()
@@ -403,9 +419,31 @@ void ScanPopup::applyWordsZoomLevel()
   if ( ui.translateBox->translateLine()->font().pointSize() != ps )
     ui.translateBox->translateLine()->setFont( font );
 
-  ui.groupList->setFont(font);
+  font = groupListDefaultFont;
+  ps = font.pointSize();
 
-  ui.groupList->parentWidget()->layout()->activate();
+  if ( cfg.preferences.wordsZoomLevel != 0 )
+  {
+    ps += cfg.preferences.wordsZoomLevel;
+    if ( ps < 1 )
+      ps = 1;
+    font.setPointSize( ps );
+  }
+
+  if ( ui.groupList->font().pointSize() != ps )
+  {
+    disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+                this, SLOT( currentGroupChanged( QString const & ) ) );
+    int n = ui.groupList->currentIndex();
+    ui.groupList->clear();
+    ui.groupList->setFont( font );
+    ui.groupList->fill( groups );
+    ui.groupList->setCurrentIndex( n );
+    connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
+             this, SLOT( currentGroupChanged( QString const & ) ) );
+  }
+
+  ui.outerFrame->layout()->activate();
 }
 
 Qt::WindowFlags ScanPopup::unpinnedWindowFlags() const
@@ -457,9 +495,9 @@ void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 
 void ScanPopup::translateWord( QString const & word )
 {
-  QString str = pendingInputWord = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( word ) ) ).simplified();
+  pendingInputPhrase = cfg.preferences.sanitizeInputPhrase( word );
 
-  if ( !str.size() )
+  if ( !pendingInputPhrase.isValid() )
     return; // Nothing there
 
   // In case we had any timers engaged before, cancel them now.
@@ -470,7 +508,7 @@ void ScanPopup::translateWord( QString const & word )
   emit hideScanFlag();
 #endif
 
-  inputWord = str;
+  inputPhrase = pendingInputPhrase;
   engagePopup( false,
 #ifdef Q_OS_WIN
       true // We only focus popup under Windows when activated via Ctrl+C+C
@@ -533,18 +571,18 @@ void ScanPopup::mouseHovered( QString const & str, bool forcePopup )
 
 void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
 {
-  QString sanitizedStr = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( str ) ) );
+  Config::InputPhrase sanitizedPhrase = cfg.preferences.sanitizeInputPhrase( str );
 
-  if ( isVisible() && sanitizedStr == inputWord )
+  if ( isVisible() && sanitizedPhrase == inputPhrase )
   {
     // Attempt to translate the same word we already have shown in scan popup.
     // Ignore it, as it is probably a spurious mouseover event.
     return;
   }
 
-  pendingInputWord = sanitizedStr;
+  pendingInputPhrase = sanitizedPhrase;
 
-  if ( !pendingInputWord.size() )
+  if ( !pendingInputPhrase.isValid() )
   {
     if ( cfg.preferences.scanPopupAltMode )
     {
@@ -558,7 +596,7 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
 
 #ifdef HAVE_X11
   if ( cfg.preferences.showScanFlag ) {
-    inputWord = pendingInputWord;
+    inputPhrase = pendingInputPhrase;
     emit showScanFlag( forcePopup );
     return;
   }
@@ -577,7 +615,7 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
     return;
   }
 
-  inputWord = pendingInputWord;
+  inputPhrase = pendingInputPhrase;
   engagePopup( forcePopup );
 }
 
@@ -593,7 +631,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
   if( cfg.preferences.scanToMainWindow && !forcePopup )
   {
     // Send translated word to main window istead of show popup
-    emit sendWordToMainWindow( inputWord );
+    emit sendPhraseToMainWindow( inputPhrase );
     return;
   }
 
@@ -689,13 +727,15 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
   /// Too large strings make window expand which is probably not what user
   /// wants
-  ui.translateBox->setText( inputWord, false );
+  ui.translateBox->setText( Folding::escapeWildcardSymbols( inputPhrase.phrase ), false );
+  translateBoxSuffix = inputPhrase.punctuationSuffix;
 
-  showTranslationFor( inputWord );
+  showTranslationFor( inputPhrase );
 }
 
 QString ScanPopup::elideInputWord()
 {
+  QString const & inputWord = inputPhrase.phrase;
   return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
 }
 
@@ -726,7 +766,7 @@ void ScanPopup::currentGroupChanged( QString const & )
 
   if ( isVisible() )
   {
-    translateInputChanged( ui.translateBox->translateLine()->text() );
+    updateSuggestionList();
     translateInputFinished();
   }
 
@@ -735,10 +775,21 @@ void ScanPopup::currentGroupChanged( QString const & )
 
 void ScanPopup::wordListItemActivated( QListWidgetItem * item )
 {
-  showTranslationFor( item->text() );
+  showTranslationFor( Config::InputPhrase::fromPhrase( item->text() ) );
 }
 
 void ScanPopup::translateInputChanged( QString const & text )
+{
+  updateSuggestionList( text );
+  translateBoxSuffix = QString();
+}
+
+void ScanPopup::updateSuggestionList()
+{
+  updateSuggestionList( ui.translateBox->translateLine()->text() );
+}
+
+void ScanPopup::updateSuggestionList( QString const & text )
 {
   mainStatusBar->clearMessage();
   ui.translateBox->wordList()->setCurrentItem( 0, QItemSelectionModel::Clear );
@@ -768,20 +819,18 @@ void ScanPopup::translateInputChanged( QString const & text )
 
 void ScanPopup::translateInputFinished()
 {
-  inputWord = ui.translateBox->translateLine()->text().trimmed();
-  showTranslationFor( inputWord );
+  inputPhrase.phrase = Folding::unescapeWildcardSymbols( ui.translateBox->translateLine()->text().trimmed() );
+  inputPhrase.punctuationSuffix = translateBoxSuffix;
+  showTranslationFor( inputPhrase );
 }
 
-void ScanPopup::showTranslationFor( QString const & inputWord )
+void ScanPopup::showTranslationFor( Config::InputPhrase const & inputPhrase )
 {
   audioPlayerUi->setPlayable( false );
 
   unsigned groupId = ui.groupList->getCurrentGroup();
-  definition->showDefinition( inputWord, groupId );
+  definition->showDefinition( inputPhrase, groupId );
   definition->focus();
-
-  // Add to history
-  emit sendWordToHistory( inputWord.trimmed() );
 }
 
 vector< sptr< Dictionary::Class > > const & ScanPopup::getActiveDicts()
@@ -833,15 +882,29 @@ void ScanPopup::typingEvent( QString const & t )
 
 bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 {
-  if ( event->type() == QEvent::FocusIn && watched == ui.translateBox->translateLine() )
+  if ( watched == ui.translateBox->translateLine() )
   {
-    QFocusEvent * focusEvent = static_cast< QFocusEvent * >( event );
+    if ( event->type() == QEvent::FocusIn )
+    {
+      QFocusEvent * focusEvent = static_cast< QFocusEvent * >( event );
 
-    // select all on mouse click
-    if ( focusEvent->reason() == Qt::MouseFocusReason ) {
-      QTimer::singleShot(0, this, SLOT(focusTranslateLine()));
+      // select all on mouse click
+      if ( focusEvent->reason() == Qt::MouseFocusReason ) {
+        QTimer::singleShot(0, this, SLOT(focusTranslateLine()));
+      }
+      return false;
     }
-    return false;
+
+    if ( event->type() == QEvent::Resize )
+    {
+      // The UI looks ugly when group combobox is higher than translate line.
+      // Make the height of the combobox the same as the line edit's height.
+      // The fonts of these UI items should be kept in sync by applyWordsZoomLevel()
+      // so that text in the combobox is not clipped.
+      const QResizeEvent * const resizeEvent = static_cast< const QResizeEvent * >( event );
+      ui.groupList->setFixedHeight( resizeEvent->size().height() );
+      return false;
+    }
   }
 
   if ( mouseIntercepted )
@@ -1041,7 +1104,7 @@ void ScanPopup::pinButtonClicked( bool checked )
     uninterceptMouse();
 
     ui.onTopButton->setVisible( true );
-    Qt::WindowFlags flags = Qt::Dialog;
+    Qt::WindowFlags flags = pinnedWindowFlags;
     if( ui.onTopButton->isChecked() )
       flags |= Qt::WindowStaysOnTopHint;
     setWindowFlags( flags );
@@ -1093,7 +1156,7 @@ void ScanPopup::altModeExpired()
 
 void ScanPopup::altModePoll()
 {
-  if ( !pendingInputWord.size() )
+  if ( !pendingInputPhrase.isValid() )
   {
     altModePollingTimer.stop();
     altModeExpirationTimer.stop();
@@ -1104,7 +1167,7 @@ void ScanPopup::altModePoll()
     altModePollingTimer.stop();
     altModeExpirationTimer.stop();
 
-    inputWord = pendingInputWord;
+    inputPhrase = pendingInputPhrase;
     engagePopup( false );
   }
 }
@@ -1201,9 +1264,7 @@ void ScanPopup::updateDictionaryBar()
 
 void ScanPopup::mutedDictionariesChanged()
 {
-  // Update suggestion list
-  translateInputChanged( ui.translateBox->translateLine()->text() );
-
+  updateSuggestionList();
   if ( dictionaryBar.toggleViewAction()->isChecked() )
     definition->updateMutedContents();
 }
@@ -1217,7 +1278,7 @@ void ScanPopup::on_sendWordButton_clicked()
     definition->closeSearch();
     hideWindow();
   }
-  emit sendWordToMainWindow( definition->getTitle() );
+  emit sendPhraseToMainWindow( definition->getPhrase() );
 }
 
 void ScanPopup::on_sendWordToFavoritesButton_clicked()

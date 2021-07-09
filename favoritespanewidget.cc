@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QtAlgorithms>
 #include <QMap>
+#include <algorithm>
 
 #include "favoritespanewidget.hh"
 #include "gddebug.hh"
@@ -20,7 +21,7 @@
 void FavoritesPaneWidget::setUp( Config::Class * cfg, QMenu * menu )
 {
   m_cfg = cfg;
-  m_favoritesTree = findChild< QTreeView * >( "favoritesTree" );
+  m_favoritesTree = findChild< TreeView * >( "favoritesTree" );
   QDockWidget * favoritesPane = qobject_cast< QDockWidget * >( parentWidget() );
   m_favoritesTree->setHeaderHidden( true );
 
@@ -906,7 +907,7 @@ void FavoritesModel::removeItemsForIndexes( const QModelIndexList & idxList )
   for( int i = lowestLevel; i >= 0; i-- )
   {
     QModelIndexList idxSublist = itemsToDelete[ i ];
-    qSort( idxSublist.begin(), idxSublist.end(), qGreater< QModelIndex >() );
+    std::sort( idxSublist.begin(), idxSublist.end(), qGreater< QModelIndex >() );
 
     it = idxSublist.begin();
     for( ; it != idxSublist.end(); ++it )

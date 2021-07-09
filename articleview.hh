@@ -90,12 +90,19 @@ public:
 
   typedef QMap< QString, QString > Contexts;
 
+  /// Returns "gdfrom-" + dictionaryId.
+  static QString scrollToFromDictionaryId( QString const & dictionaryId );
+
   /// Shows the definition of the given word with the given group.
   /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
   /// the page to that article on load.
   /// contexts is an optional map of context values to be passed for dictionaries.
   /// The only values to pass here are ones obtained from showDefinitionInNewTab()
   /// signal or none at all.
+  void showDefinition( Config::InputPhrase const & phrase, unsigned group,
+                       QString const & scrollTo = QString(),
+                       Contexts const & contexts = Contexts() );
+
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
@@ -139,11 +146,11 @@ public slots:
   /// Goes forward in history
   void forward();
 
-public:
-
   /// Takes the focus to the view
   void focus()
   { ui.definition->setFocus( Qt::ShortcutFocusReason ); }
+
+public:
 
   /// Reloads the view
   void reload()
@@ -168,6 +175,9 @@ public:
 
   /// Returns current article's title
   QString getTitle();
+
+  /// Returns the phrase translated by the current article.
+  Config::InputPhrase getPhrase() const;
 
   /// Prints current article
   void print( QPrinter * ) const;

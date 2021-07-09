@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>636</width>
-    <height>427</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -682,10 +682,10 @@ seconds, which is specified here.</string>
           <item>
            <widget class="QCheckBox" name="ignoreOwnClipboardChanges">
             <property name="toolTip">
-             <string>Do not show popup when selection or clipboard in one of Goldendict's own windows changes</string>
+             <string>Do not show popup when selection or clipboard in one of GoldenDict's own windows changes</string>
             </property>
             <property name="text">
-             <string>Ignore Goldendict's own selection and clipboard changes</string>
+             <string>Ignore GoldenDict's own selection and clipboard changes</string>
             </property>
            </widget>
           </item>
@@ -1151,6 +1151,59 @@ Enable this option to workaround the problem.</string>
           <string>Do not identify GoldenDict in HTTP headers</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
+         <item>
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>Maximum network cache size:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="maxNetworkCacheSize">
+           <property name="toolTip">
+            <string>Maximum disk space occupied by GoldenDict's network cache in
+%1
+If set to 0 the network disk cache will be disabled.</string>
+           </property>
+           <property name="suffix">
+            <string> MiB</string>
+           </property>
+           <property name="maximum">
+            <number>2000</number>
+           </property>
+           <property name="value">
+            <number>50</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="clearNetworkCacheOnExit">
+           <property name="toolTip">
+            <string>When this option is enabled, GoldenDict
+clears its network cache from disk during exit.</string>
+           </property>
+           <property name="text">
+            <string>Clear network cache on exit</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_15">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
        <item>
         <spacer name="verticalSpacer_10">
@@ -1680,8 +1733,101 @@ It is not needed to select this option if you don't use such programs.</string>
          <property name="title">
           <string>Articles</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_17">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="collapseBigArticles">
+            <property name="toolTip">
+             <string>Select this option to automatic collapse big articles</string>
+            </property>
+            <property name="text">
+             <string>Collapse articles more than</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="articleSizeLimit">
+            <property name="toolTip">
+             <string>Articles longer than this size will be collapsed</string>
+            </property>
+            <property name="maximum">
+             <number>100000</number>
+            </property>
+            <property name="singleStep">
+             <number>50</number>
+            </property>
+            <property name="value">
+             <number>2000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>symbols</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="limitInputPhraseLength">
+            <property name="toolTip">
+             <string>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</string>
+            </property>
+            <property name="text">
+             <string>Ignore input phrases longer than</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="inputPhraseLengthLimit">
+            <property name="toolTip">
+             <string>Input phrases longer than this size will be ignored</string>
+            </property>
+            <property name="maximum">
+             <number>9999999</number>
+            </property>
+            <property name="singleStep">
+             <number>10</number>
+            </property>
+            <property name="value">
+             <number>1000</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>symbols</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="ignoreDiacritics">
+            <property name="toolTip">
+             <string>Turn this option on to ignore diacritics while searching articles</string>
+            </property>
+            <property name="text">
+             <string>Ignore diacritics while searching</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
            <widget class="QCheckBox" name="alwaysExpandOptionalParts">
             <property name="toolTip">
              <string>Turn this option on to always expand optional parts of articles</string>
@@ -1691,55 +1837,18 @@ It is not needed to select this option if you don't use such programs.</string>
             </property>
            </widget>
           </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
-            <item>
-             <widget class="QCheckBox" name="collapseBigArticles">
-              <property name="toolTip">
-               <string>Select this option to automatic collapse big articles</string>
-              </property>
-              <property name="text">
-               <string>Collapse articles more than</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSpinBox" name="articleSizeLimit">
-              <property name="toolTip">
-               <string>Articles longer than this size will be collapsed</string>
-              </property>
-              <property name="maximum">
-               <number>100000</number>
-              </property>
-              <property name="singleStep">
-               <number>50</number>
-              </property>
-              <property name="value">
-               <number>2000</number>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_13">
-              <property name="text">
-               <string>symbols</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_11">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
+          <item row="1" column="3">
+           <spacer name="horizontalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

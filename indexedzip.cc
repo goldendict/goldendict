@@ -199,7 +199,7 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 *
             alreadyCounted = true;
           }
         }
-        catch( Utf8::exCantDecode )
+        catch( Utf8::exCantDecode & )
         {
           // Failed to decode
         }
@@ -246,7 +246,7 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 *
               }
             }
           }
-          catch( Iconv::Ex )
+          catch( Iconv::Ex & )
           {
               // Failed to decode
           }
@@ -269,7 +269,7 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 *
               }
             }
           }
-          catch( Iconv::Ex )
+          catch( Iconv::Ex & )
           {
             // Failed to decode
           }

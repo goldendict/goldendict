@@ -7,6 +7,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QtXml>
+#include <algorithm>
 #include <list>
 #include "gddebug.hh"
 #include "audiolink.hh"
@@ -61,11 +62,11 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults ) throw( std::exception );
+                                                 unsigned long maxResults ) THROW_SPEC( std::exception );
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const & )
-    throw( std::exception );
+                                          wstring const &, bool )
+    THROW_SPEC( std::exception );
 
   virtual quint32 getLangFrom() const
   { return langId; }
@@ -242,6 +243,26 @@ private:
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
+
+  /// This simple set implementation should be much more efficient than tree-
+  /// and hash-based standard/Qt containers when there are very few elements.
+  template< typename T >
+  class SmallSet {
+  public:
+    bool insert( T x )
+    {
+      if( std::find( elements.begin(), elements.end(), x ) != elements.end() )
+        return false;
+      elements.push_back( x );
+      return true;
+    }
+  private:
+    std::vector< T > elements;
+  };
+
+  /// The page id set allows to filter out duplicate articles in case MediaWiki
+  /// redirects the main word and words in the alts collection to the same page.
+  SmallSet< long long > addedPageIds;
   Class * dictPtr;
 };
 
@@ -341,7 +362,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
       {
         QDomNode parseNode = dd.namedItem( "api" ).namedItem( "parse" );
   
-        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0" )
+        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0"
+             // Don't show the same article more than once:
+             && addedPageIds.insert( parseNode.toElement().attribute( "pageid" ).toLongLong() ) )
         {
           QDomNode textNode = parseNode.namedItem( "text" );
   
@@ -480,9 +503,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 #endif
             // audio url
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+            articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #else
-            articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+            articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #endif
                                    QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
                                                                          this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
@@ -493,23 +516,10 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
 
             // Remove the /wiki/ prefix from links
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<a\\s+href=\"/wiki/" ), "<a href=\"" );
-#else
-            articleString.replace( QRegExp( "<a\\s+href=\"/wiki/" ), "<a href=\"" );
-#endif
+            articleString.replace( "<a href=\"/wiki/", "<a href=\"" );
 
-            //fix audio
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>" ),
-#else
-            articleString.replace( QRegExp( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
-#endif
-                                            QString::fromStdString(addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + "://\\1\"", this->dictPtr->getId() ) +
-                                            "<a href=\"" + wikiUrl.scheme().toStdString() + "://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>" ) );
             // In those strings, change any underscores to spaces
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            pos = 0;
             QRegularExpression rxLink( "<a\\s+href=\"[^/:\">#]+" );
             it = rxLink.globalMatch( articleString );
             while( it.hasNext() )
@@ -540,6 +550,43 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // Add url scheme to other urls like  "//xxx"
             articleString.replace( " href=\"//", " href=\"" + wikiUrl.scheme() + "://" );
+
+            // Fix urls in "srcset" attribute
+            pos = 0;
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+            QRegularExpression regSrcset( " srcset\\s*=\\s*\"/[^\"]+\"" );
+            it = regSrcset.globalMatch( articleString );
+            while( it.hasNext() )
+            {
+              QRegularExpressionMatch match = it.next();
+              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              pos = match.capturedEnd();
+
+              QString srcset = match.captured();
+#else
+            QRegExp regSrcset( " srcset\\s*=\\s*\"/([^\"]+)\"" );
+            for( ; ; )
+            {
+              pos = regSrcset.indexIn( articleString, pos );
+              if( pos < 0 )
+                break;
+              QString srcset = regSrcset.cap();
+#endif
+              QString newSrcset = srcset.replace( "//", wikiUrl.scheme() + "://" );
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+              articleNewString += newSrcset;
+            }
+            if( pos )
+            {
+              articleNewString += articleString.midRef( pos );
+              articleString = articleNewString;
+              articleNewString.clear();
+            }
+#else
+              articleString.replace( pos, regSrcset.cap().size(), newSrcset );
+              pos += newSrcset.size();
+            }
+#endif
 
             QByteArray articleBody = articleString.toUtf8();
 
@@ -579,7 +626,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
 sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word,
                                                             unsigned long maxResults )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   (void) maxResults;
   if ( word.size() > 80 )
@@ -594,8 +641,8 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
 
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
                                                      vector< wstring > const & alts,
-                                                     wstring const & )
-  throw( std::exception )
+                                                     wstring const &, bool )
+  THROW_SPEC( std::exception )
 {
   if ( word.size() > 80 )
   {
@@ -613,7 +660,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
                                       QNetworkAccessManager & mgr )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > result;
 

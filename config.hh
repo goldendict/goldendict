@@ -11,6 +11,8 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
+#include <QMetaType>
+#include "cpp_features.hh"
 #include "ex.hh"
 
 #ifdef Q_OS_WIN
@@ -242,6 +244,38 @@ enum ScanPopupWindowFlags
 };
 ScanPopupWindowFlags spwfFromInt( int id );
 
+struct InputPhrase
+{
+  InputPhrase()
+  {}
+
+  InputPhrase( QString const & _phrase, QString const & _suffix ) :
+    phrase( _phrase ),
+    punctuationSuffix( _suffix )
+  {}
+
+  static InputPhrase fromPhrase( QString const & phrase )
+  {
+    return InputPhrase( phrase, QString() );
+  }
+
+  bool isValid() const { return !phrase.isEmpty(); }
+
+  QString phraseWithSuffix() const { return phrase + punctuationSuffix; }
+
+  QString phrase;
+  QString punctuationSuffix;
+};
+
+inline bool operator == ( InputPhrase const & a, InputPhrase const & b )
+{
+  return a.phrase == b.phrase && a.punctuationSuffix == b.punctuationSuffix;
+}
+inline bool operator != ( InputPhrase const & a, InputPhrase const & b )
+{
+  return !( a == b );
+}
+
 /// Various user preferences
 struct Preferences
 {
@@ -284,6 +318,7 @@ struct Preferences
   ScanPopupWindowFlags scanPopupUnpinnedWindowFlags;
   bool scanPopupUnpinnedBypassWMHint;
   bool scanToMainWindow;
+  bool ignoreDiacritics;
 #ifdef HAVE_X11
   bool showScanFlag;
 #endif
@@ -300,6 +335,8 @@ struct Preferences
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
   bool hideGoldenDictHeader;
+  int maxNetworkCacheSize;
+  bool clearNetworkCacheOnExit;
 
   qreal zoomFactor;
   qreal helpZoomFactor;
@@ -316,6 +353,10 @@ struct Preferences
 
   bool collapseBigArticles;
   int articleSizeLimit;
+
+  bool limitInputPhraseLength;
+  int inputPhraseLengthLimit;
+  InputPhrase sanitizeInputPhrase( QString const & inputPhrase ) const;
 
   unsigned short maxDictionaryRefsInContextMenu;
 #ifndef Q_WS_X11
@@ -636,6 +677,7 @@ struct Class
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
   QByteArray inspectorGeometry; // Geometry of WebKit inspector window
+  QByteArray dictionariesDialogGeometry; // Geometry of Dictionaries dialog
   QByteArray helpWindowGeometry; // Geometry of help window
   QByteArray helpSplitterState; // Geometry of help splitter
 
@@ -723,38 +765,38 @@ DEF_EX( exCantWriteConfigFile, "Can't write the configuration file", exError )
 DEF_EX( exMalformedConfigFile, "The configuration file is malformed", exError )
 
 /// Loads the configuration, or creates the default one if none is present
-Class load() throw( exError );
+Class load() THROW_SPEC( exError );
 
 /// Saves the configuration
-void save( Class const & ) throw( exError );
+void save( Class const & ) THROW_SPEC( exError );
 
 /// Returns the configuration file name.
 QString getConfigFileName();
 
 /// Returns the main configuration directory.
-QString getConfigDir() throw( exError );
+QString getConfigDir() THROW_SPEC( exError );
 
 /// Returns the index directory, where the indices are to be stored.
-QString getIndexDir() throw( exError );
+QString getIndexDir() THROW_SPEC( exError );
 
 /// Returns the filename of a .pid file which should store current pid of
 /// the process.
-QString getPidFileName() throw( exError );
+QString getPidFileName() THROW_SPEC( exError );
 
 /// Returns the filename of a history file which stores search history.
-QString getHistoryFileName() throw( exError );
+QString getHistoryFileName() THROW_SPEC( exError );
 
 /// Returns the filename of a favorities file.
-QString getFavoritiesFileName() throw( exError );
+QString getFavoritiesFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name.
-QString getUserCssFileName() throw( exError );
+QString getUserCssFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name used for printing only.
-QString getUserCssPrintFileName() throw( exError );
+QString getUserCssPrintFileName() THROW_SPEC( exError );
 
 /// Returns the user .css file name for the Qt interface customization.
-QString getUserQtCssFileName() throw( exError );
+QString getUserQtCssFileName() THROW_SPEC( exError );
 
 /// Returns the program's data dir. Under Linux that would be something like
 /// /usr/share/apps/goldendict, under Windows C:/Program Files/GoldenDict.
@@ -786,7 +828,14 @@ QString getPortableVersionMorphoDir() throw();
 /// Returns the add-on styles directory.
 QString getStylesDir() throw();
 
+/// Returns the directory where user-specific non-essential (cached) data should be written.
+QString getCacheDir() throw();
+
+/// Returns the article network disk cache directory.
+QString getNetworkCacheDir() throw();
+
 }
 
-#endif
+Q_DECLARE_METATYPE( Config::InputPhrase )
 
+#endif

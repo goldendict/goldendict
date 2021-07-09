@@ -406,7 +406,7 @@ public:
   }
 };
 
-std::vector< sptr< Dictionary::Class > > makeDictionaries() throw( std::exception )
+std::vector< sptr< Dictionary::Class > > makeDictionaries() THROW_SPEC( std::exception )
 {
   static BelarusianLatinToClassicTable t0;
   static BelarusianLatinToSchoolTable t1;

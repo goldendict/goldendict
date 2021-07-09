@@ -23,7 +23,7 @@
       <NewGoldenDictVersion>$([System.IO.File]::ReadAllText($(NewVersionFile)).Trim())</NewGoldenDictVersion>
     </PropertyGroup>
 
-    <Message Text="Version change: $(GoldenDictVersion) ~> $(NewGoldendictVersion)"
+    <Message Text="Version change: $(GoldenDictVersion) ~> $(NewGoldenDictVersion)"
              Importance="high"
              Condition="('$(NewGoldenDictVersion)' != '') And
                         ('$(NewGoldenDictVersion)' != '$(GoldenDictVersion)')" />

@@ -228,15 +228,16 @@ namespace
     { return idxHeader.langTo; }
 
     virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-      throw( std::exception );
+      THROW_SPEC( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
-                                                        wstring const & )
-      throw( std::exception );
+                                                        wstring const &,
+                                                        bool ignoreDiacritics )
+      THROW_SPEC( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      throw( std::exception );
+      THROW_SPEC( std::exception );
 
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
@@ -288,11 +289,14 @@ namespace
 
     size_t len = idx.read< uint32_t >();
 
-    vector< char > nameBuf( len );
+    if( len )
+    {
+      vector< char > nameBuf( len );
 
-    idx.read( &nameBuf.front(), len );
+      idx.read( &nameBuf.front(), len );
 
-    dictionaryName = string( &nameBuf.front(), len );
+      dictionaryName = string( &nameBuf.front(), len );
+    }
 
     // Initialize the index
 
@@ -587,7 +591,7 @@ void BglHeadwordsRequest::run()
     {
       headwordDecoded = Utf8::decode( removePostfix(  headword ) );
     }
-    catch( Utf8::exCantDecode )
+    catch( Utf8::exCantDecode & )
     {
     }
 
@@ -606,7 +610,7 @@ void BglHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   BglDictionary::findHeadwordsForSynonym( wstring const & word )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return synonymSearchEnabled ? new BglHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -675,13 +679,14 @@ class BglArticleRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  bool ignoreDiacritics;
 
 public:
 
   BglArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     BglDictionary & dict_ ):
-    word( word_ ), alts( alts_ ), dict( dict_ )
+                     BglDictionary & dict_, bool ignoreDiacritics_ ):
+    word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start(
       new BglArticleRequestRunnable( *this, hasExited ) );
@@ -716,7 +721,7 @@ void BglArticleRequest::fixHebString(string & hebStr) // Hebrew support - conver
   {
     hebWStr = Utf8::decode(hebStr);
   }
-  catch( Utf8::exCantDecode )
+  catch( Utf8::exCantDecode & )
   {
     hebStr = "Utf-8 decoding error";
     return;
@@ -751,7 +756,7 @@ void BglArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   static Language::Id hebrew = LangCoder::code2toInt( "he" ); // Hebrew support
 
@@ -759,7 +764,7 @@ void BglArticleRequest::run()
   {
     /// Make an additional query for each alt
 
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
@@ -774,6 +779,8 @@ void BglArticleRequest::run()
   set< QByteArray > articleBodiesIncluded;
 
   wstring wordCaseFolded = Folding::applySimpleCaseOnly( word );
+  if( ignoreDiacritics )
+    wordCaseFolded = Folding::applyDiacriticsOnly( wordCaseFolded );
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
@@ -803,8 +810,10 @@ void BglArticleRequest::run()
 
     wstring headwordStripped =
       Folding::applySimpleCaseOnly( Utf8::decode( removePostfix( headword ) ) );
+    if( ignoreDiacritics )
+      headwordStripped = Folding::applyDiacriticsOnly( headwordStripped );
 
-	// Hebrew support - fix Hebrew text
+    // Hebrew support - fix Hebrew text
     if (dict.idxHeader.langFrom == hebrew)
     {
         displayedHeadword= displayedHeadword.size() ? displayedHeadword : headword;
@@ -940,10 +949,11 @@ void BglArticleRequest::run()
 
 sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
-                                                           wstring const & )
-  throw( std::exception )
+                                                           wstring const &,
+                                                           bool ignoreDiacritics )
+  THROW_SPEC( std::exception )
 {
-  return new BglArticleRequest( word, alts, *this );
+  return new BglArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 
@@ -1085,13 +1095,13 @@ void BglResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   return new BglResourceRequest( idxMutex, idx, idxHeader.resourceListOffset,
                                  idxHeader.resourcesCount, name );
 }
 
-  /// Replaces <CHARSET c="t">1234;</CHARSET> occurences with &#x1234;
+  /// Replaces <CHARSET c="t">1234;</CHARSET> occurrences with &#x1234;
   void BglDictionary::replaceCharsetEntities( string & text )
   {
     QString str = QString::fromUtf8( text.c_str() );
@@ -1211,7 +1221,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  throw( std::exception )
+  THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

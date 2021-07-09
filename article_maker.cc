@@ -179,7 +179,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
-            "gdAudioLinks = { first: null, current: null };"
+            "var gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
@@ -206,15 +206,15 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "elem.style.display='none'; ico.className='gdexpandicon';"
             "art.className = art.className+' gdcollapsedarticle';"
             "nm=document.getElementById('gddictname-'+id); nm.style.cursor='pointer';"
-            "if(ev) ev.stopPropagation(); ico.title=''; nm.title='";
+            "if(ev) ev.stopPropagation(); ico.title=''; nm.title=\"";
   result += tr( "Expand article" ).toUtf8().data();
-  result += "' } else if(elem.style.display=='none') {"
+  result += "\" } else if(elem.style.display=='none') {"
             "elem.style.display='inline'; ico.className='gdcollapseicon';"
             "art.className=art.className.replace(' gdcollapsedarticle','');"
             "nm=document.getElementById('gddictname-'+id); nm.style.cursor='default';"
-            "nm.title=''; ico.title='";
+            "nm.title=''; ico.title=\"";
   result += tr( "Collapse article").toUtf8().data();
-  result += "' } }"
+  result += "\" } }"
             "function gdCheckArticlesNumber() {"
             "elems=document.getElementsByClassName('gddictname');"
             "if(elems.length == 1) {"
@@ -257,10 +257,10 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
-  QString const & inWord, unsigned groupId,
+  Config::InputPhrase const & phrase, unsigned groupId,
   QMap< QString, QString > const & contexts,
   QSet< QString > const & mutedDicts,
-  QStringList const & dictIDs ) const
+  QStringList const & dictIDs , bool ignoreDiacritics ) const
 {
   if( !dictIDs.isEmpty() )
   {
@@ -283,9 +283,9 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
         break;
     }
 
-    string header = makeHtmlHeader( inWord.trimmed(), QString(), true );
+    string header = makeHtmlHeader( phrase.phrase, QString(), true );
 
-    return new ArticleRequest( inWord.trimmed(), "",
+    return new ArticleRequest( phrase, "",
                                contexts, ftsDicts, header,
                                -1, true );
   }
@@ -293,9 +293,9 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   if ( groupId == Instances::Group::HelpGroupId )
   {
     // This is a special group containing internal welcome/help pages
-    string result = makeHtmlHeader( inWord, QString(), needExpandOptionalParts );
+    string result = makeHtmlHeader( phrase.phrase, QString(), needExpandOptionalParts );
 
-    if ( inWord == tr( "Welcome!" ) )
+    if ( phrase.phrase == tr( "Welcome!" ) )
     {
       result += tr(
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
@@ -313,7 +313,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
         ).toUtf8().data();
     }
     else
-    if ( inWord == tr( "Working with popup" ) )
+    if ( phrase.phrase == tr( "Working with popup" ) )
     {
       result += ( tr( "<h3 align=\"center\">Working with the popup</h3>"
 
@@ -334,7 +334,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
     else
     {
       // Not found
-      return makeNotFoundTextFor( inWord, "help" );
+      return makeNotFoundTextFor( phrase.phrase, "help" );
     }
 
     result += "</body></html>";
@@ -363,7 +363,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
   std::vector< sptr< Dictionary::Class > > const & activeDicts =
     activeGroup ? activeGroup->dictionaries : dictionaries;
 
-  string header = makeHtmlHeader( inWord.trimmed(),
+  string header = makeHtmlHeader( phrase.phrase,
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString(),
                                   needExpandOptionalParts );
@@ -379,16 +379,16 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
               QString::fromStdString( activeDicts[ x ]->getId() ) ) )
         unmutedDicts.push_back( activeDicts[ x ] );
 
-    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+    return new ArticleRequest( phrase, activeGroup ? activeGroup->name : "",
                                contexts, unmutedDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
-                               needExpandOptionalParts );
+                               needExpandOptionalParts, ignoreDiacritics );
   }
   else
-    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+    return new ArticleRequest( phrase, activeGroup ? activeGroup->name : "",
                                contexts, activeDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
-                               needExpandOptionalParts );
+                               needExpandOptionalParts, ignoreDiacritics );
 }
 
 sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
@@ -467,18 +467,22 @@ bool ArticleMaker::adjustFilePath( QString & fileName )
 //////// ArticleRequest
 
 ArticleRequest::ArticleRequest(
-  QString const & word_, QString const & group_,
+  Config::InputPhrase const & phrase, QString const & group_,
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
   string const & header,
-  int sizeLimit, bool needExpandOptionalParts_ ):
-    word( word_ ), group( group_ ), contexts( contexts_ ),
+  int sizeLimit, bool needExpandOptionalParts_, bool ignoreDiacritics_ ):
+    word( phrase.phrase ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
 ,   articleSizeLimit( sizeLimit )
 ,   needExpandOptionalParts( needExpandOptionalParts_ )
+,   ignoreDiacritics( ignoreDiacritics_ )
 {
+  if ( !phrase.punctuationSuffix.isEmpty() )
+    alts.insert( gd::toWString( phrase.phraseWithSuffix() ) );
+
   // No need to lock dataMutex on construction
 
   hasAnyData = true;
@@ -552,7 +556,8 @@ void ArticleRequest::altSearchFinished()
       {
         sptr< Dictionary::DataRequest > r =
           activeDicts[ x ]->getArticle( wordStd, altsVector,
-                                        gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ) );
+                                        gd::toWString( contexts.value( QString::fromStdString( activeDicts[ x ]->getId() ) ) ),
+                                        ignoreDiacritics );
 
         connect( r.get(), SIGNAL( finished() ),
                  this, SLOT( bodyFinished() ), Qt::QueuedConnection );
@@ -770,7 +775,7 @@ void ArticleRequest::bodyFinished()
       {
         // No definitions were ever found, say so to the user.
 
-        // Larger words are usually whole sentences - don't clutter the ouput
+        // Larger words are usually whole sentences - don't clutter the output
         // with their full bodies.
         footer += ArticleMaker::makeNotFoundBody( word.size() < 40 ? word : "", group );
 

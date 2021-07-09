@@ -246,8 +246,9 @@ public:
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const & word,
                                                       vector< wstring > const & alts,
-                                                      wstring const & ) throw( std::exception );
-  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) throw( std::exception );
+                                                      wstring const &,
+                                                      bool ignoreDiacritics ) THROW_SPEC( std::exception );
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
   virtual QString const & getDescription();
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
@@ -302,14 +303,20 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   idx.seek( sizeof( idxHeader ) );
   size_t len = idx.read< uint32_t >();
   vector< char > buf( len );
-  idx.read( &buf.front(), len );
-  dictionaryName = string( &buf.front(), len );
+  if( len > 0 )
+  {
+    idx.read( &buf.front(), len );
+    dictionaryName = string( &buf.front(), len );
+  }
 
   // then read the dictionary's encoding
   len = idx.read< uint32_t >();
-  buf.resize( len );
-  idx.read( &buf.front(), len );
-  encoding = string( &buf.front(), len );
+  if( len > 0 )
+  {
+    buf.resize( len );
+    idx.read( &buf.front(), len );
+    encoding = string( &buf.front(), len );
+  }
 
   dictFile.setFileName( QString::fromUtf8( dictionaryFiles[ 0 ].c_str() ) );
   dictFile.open( QIODevice::ReadOnly );
@@ -554,6 +561,7 @@ class MdxArticleRequest: public Dictionary::DataRequest
   wstring word;
   vector< wstring > alts;
   MdxDictionary & dict;
+  bool ignoreDiacritics;
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
@@ -562,10 +570,12 @@ public:
 
   MdxArticleRequest( wstring const & word_,
                      vector< wstring > const & alts_,
-                     MdxDictionary & dict_ ):
+                     MdxDictionary & dict_,
+                     bool ignoreDiacritics_ ):
     word( word_ ),
     alts( alts_ ),
-    dict( dict_ )
+    dict( dict_ ),
+    ignoreDiacritics( ignoreDiacritics_ )
   {
     QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
   }
@@ -604,12 +614,12 @@ void MdxArticleRequest::run()
     return;
   }
 
-  vector< WordArticleLink > chain = dict.findArticles( word );
+  vector< WordArticleLink > chain = dict.findArticles( word, ignoreDiacritics );
 
   for ( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
-    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ] );
+    vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
   }
 
@@ -687,22 +697,22 @@ void MdxArticleRequest::run()
                      "</i></i></i></i></i></i></i></i>"
                      "</a></a></a></a></a></a></a></a>";
     articleText += "<div class=\"mdict\">" + articleBody + cleaner + "</div>\n";
-    hasAnyData = true;
   }
 
-  if ( hasAnyData )
+  if ( !articleText.empty() )
   {
     Mutex::Lock _( dataMutex );
     data.insert( data.end(), articleText.begin(), articleText.end() );
+    hasAnyData = true;
   }
 
   finish();
 }
 
 sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, const vector<wstring> & alts,
-                                                         const wstring & ) throw( std::exception )
+                                                         const wstring &, bool ignoreDiacritics ) THROW_SPEC( std::exception )
 {
-  return new MdxArticleRequest( word, alts, *this );
+  return new MdxArticleRequest( word, alts, *this, ignoreDiacritics );
 }
 
 /// MdxDictionary::getResource
@@ -926,7 +936,7 @@ void MddResourceRequest::run()
   finish();
 }
 
-sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) throw( std::exception )
+sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) THROW_SPEC( std::exception )
 {
   return new MddResourceRequest( *this, name );
 }
@@ -1033,7 +1043,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 
   QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)",
                                  QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*)((?:#[^>]*)?)\\2",
+  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
                                     QRegularExpression::CaseInsensitiveOption );
   QRegularExpression anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)",
                                  QRegularExpression::CaseInsensitiveOption );
@@ -1105,7 +1115,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                          + "gdlookup://localhost/"
                          + match.captured( 3 );
 
-        if( match.lastCapturedIndex() >= 4 )
+        if( match.lastCapturedIndex() >= 4 && !match.captured( 4 ).isEmpty() )
           newTxt += QString( "?gdanchor=" ) + uniquePrefix + match.captured( 4 ).mid( 1 );
 
         newTxt += match.captured( 2 );
@@ -1411,7 +1421,7 @@ static void findResourceFiles( string const & mdx, vector< string > & dictFiles 
 
 vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
                                                       string const & indicesDir,
-                                                      Dictionary::Initializing & initializing ) throw( std::exception )
+                                                      Dictionary::Initializing & initializing ) THROW_SPEC( std::exception )
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

@@ -18,6 +18,7 @@
 
 #include "ripemd.hh"
 
+#include <limits>
 #include <string.h>
 #include <QtEndian>
 
