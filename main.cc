@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <stdio.h>
+#include <limits>
 #include <QIcon>
 #include "gdappstyle.hh"
 #include "mainwindow.hh"
@@ -112,7 +113,12 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 class GDCommandLine
 {
+  static int invalidWordsZoomLevel() { return std::numeric_limits< int >::max(); }
+  static double invalidZoomFactor() { return std::numeric_limits< double >::max(); }
+
   bool crashReport, logFile;
+  int wordsZoomLevel;
+  double zoomFactor;
   QString word, groupName, popupGroupName, errFileName;
   QVector< QString > arguments;
 public:
@@ -123,6 +129,11 @@ public:
 
   inline QString errorFileName()
   { return errFileName; }
+
+  bool needSetWordsZoomLevel() const { return wordsZoomLevel != invalidWordsZoomLevel(); }
+  int getWordsZoomLevel() const { return wordsZoomLevel; }
+  bool needSetZoomFactor() const { return zoomFactor != invalidZoomFactor(); }
+  double getZoomFactor() const { return zoomFactor; }
 
   inline bool needSetGroup()
   { return !groupName.isEmpty(); }
@@ -148,7 +159,9 @@ public:
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
 crashReport( false ),
-logFile( false )
+logFile( false ),
+wordsZoomLevel( invalidWordsZoomLevel() ),
+zoomFactor( invalidZoomFactor() )
 {
   if( argc > 1 )
   {
@@ -181,6 +194,18 @@ logFile( false )
       if( arguments[ i ].compare( "--log-to-file" ) == 0 )
       {
         logFile = true;
+        continue;
+      }
+      else
+      if( arguments[ i ].startsWith( "--words-zoom-level=" ) )
+      {
+        wordsZoomLevel = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 ).toInt();
+        continue;
+      }
+      else
+      if( arguments[ i ].startsWith( "--zoom-factor=" ) )
+      {
+        zoomFactor = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 ).toDouble();
         continue;
       }
       else
@@ -304,6 +329,17 @@ int main( int argc, char ** argv )
   if ( app.isRunning() )
   {
     bool wasMessage = false;
+
+    if( gdcl.needSetWordsZoomLevel() )
+    {
+      app.sendMessage( "setWordsZoomLevel: " + QString::number( gdcl.getWordsZoomLevel() ) );
+      wasMessage = true;
+    }
+    if( gdcl.needSetZoomFactor() )
+    {
+      app.sendMessage( "setZoomFactor: " + QString::number( gdcl.getZoomFactor() ) );
+      wasMessage = true;
+    }
 
     if( gdcl.needSetGroup() )
     {
@@ -444,6 +480,11 @@ int main( int argc, char ** argv )
 
   QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
     &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
+
+  if( gdcl.needSetWordsZoomLevel() )
+    m.setWordsZoomLevel( gdcl.getWordsZoomLevel() );
+  if( gdcl.needSetZoomFactor() )
+    m.setZoomFactorImmediately( gdcl.getZoomFactor() );
 
   if( gdcl.needSetGroup() )
     m.setGroupByName( gdcl.getGroupName(), true );
