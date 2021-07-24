@@ -55,7 +55,6 @@ Iconv::Result Iconv::convert( void const * & inBuf, size_t  & inBytesLeft,
 
   if ( result == (size_t) -1 )
   {
-      qDebug("iconv convert errno:"+errno);
     switch( errno )
     {
       case EILSEQ:
