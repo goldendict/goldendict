@@ -21,34 +21,6 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
-#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500 // Qt 5.3+
-
-// White lists for QWebSecurityOrigin
-struct SecurityWhiteList
-{
-  //QWebSecurityOrigin * origin;
-  QString originUri;
-  QSet< QPair< QString, QString > > hostsToAccess;
-
-  SecurityWhiteList()
-  {}
-
-  ~SecurityWhiteList()
-  { swlDelete(); }
-
-  SecurityWhiteList( SecurityWhiteList const & swl )
-  { swlCopy( swl ); }
-
-  SecurityWhiteList & operator=( SecurityWhiteList const & swl );
-  //QWebSecurityOrigin * setOrigin( QUrl const & url );
-
-private:
-  void swlCopy( SecurityWhiteList const & swl );
-  void swlDelete();
-};
-
-typedef QMap< QString, SecurityWhiteList > Origins;
-
 // Proxy class for QNetworkReply to remove X-Frame-Options header
 // It allow to show websites in <iframe> tag like Qt 4.x
 
@@ -118,7 +90,7 @@ protected:
   qint64 writeData( const char * data, qint64 maxSize )
   { return baseReply->write( data, maxSize ); }
 };
-#endif
+
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {

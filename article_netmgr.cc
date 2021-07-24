@@ -16,54 +16,6 @@
 
 using std::string;
 
-#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500 // Qt 5.3+
-
-  // SecurityWhiteList
-
-  SecurityWhiteList & SecurityWhiteList::operator=( SecurityWhiteList const & swl )
-  {
-    swlDelete();
-    swlCopy( swl );
-    return *this;
-  }
-
-  QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
-  {
-    swlDelete();
-    originUri = url.toString( QUrl::PrettyDecoded );
-    origin = new QWebSecurityOrigin( url );
-    return origin;
-  }
-
-  void SecurityWhiteList::swlCopy( SecurityWhiteList const & swl )
-  {
-    if( swl.origin )
-    {
-      hostsToAccess = swl.hostsToAccess;
-      originUri = swl.originUri;
-      origin = new QWebSecurityOrigin( QUrl( originUri ) );
-
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-    }
-  }
-
-  void SecurityWhiteList::swlDelete()
-  {
-    if( origin )
-    {
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-
-      delete origin;
-      origin = 0;
-    }
-    hostsToAccess.clear();
-    originUri.clear();
-  }
-
   // AllowFrameReply
 
   AllowFrameReply::AllowFrameReply( QNetworkReply * _reply ) :
@@ -200,7 +152,6 @@ using std::string;
     return size;
   }
 
-#endif
 
 namespace
 {
@@ -255,39 +206,6 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= 0x050300 && QT_VERSION<=0x050500 // Qt 5.3+
-    // Workaround of same-origin policy
-    if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
-        && req.hasRawHeader( "Referer" ) )
-    {
-      QByteArray referer = req.rawHeader( "Referer" );
-      QUrl refererUrl = QUrl::fromEncoded( referer );
-
-      if( refererUrl.scheme().startsWith( "http") || refererUrl.scheme() == "ftp" )
-      {
-        // Only for pages from network resources
-        if ( !req.url().host().endsWith( refererUrl.host() ) )
-        {
-          QUrl frameUrl;
-          frameUrl.setScheme( refererUrl.scheme() );
-          frameUrl.setHost( refererUrl.host() );
-          QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
-
-          SecurityWhiteList & value = allOrigins[ frameStr ];
-          if( !value.origin )
-            value.setOrigin( frameUrl );
-
-          QPair< QString, QString > target( req.url().scheme(), req.url().host() );
-          if( value.hostsToAccess.find( target ) == value.hostsToAccess.end() )
-          {
-            value.hostsToAccess.insert( target );
-            value.origin->addAccessWhitelistEntry( target.first, target.second,
-                                                   QWebSecurityOrigin::AllowSubdomains );
-          }
-        }
-      }
-    }
-#endif
 
     QString contentType;
 
@@ -360,7 +278,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500 // Qt 5.3+
+#if QT_VERSION >= 0x050300 // Qt 5.3+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else
