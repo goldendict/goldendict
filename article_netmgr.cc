@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
@@ -13,6 +13,7 @@
 #include "wstring_qt.hh"
 #include "gddebug.hh"
 #include "qt4x5.hh"
+#include <QNetworkAccessManager>
 
 using std::string;
 
@@ -286,6 +287,17 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
 }
 
+void ArticleNetworkAccessManager:: requestStart(QUrl url){
+    qDebug(U"slots executes，执行了");
+    qDebug()<<url;
+//    QNetworkRequest request;
+//    request.setUrl( url );
+//    QNetworkReply* reply = mManager. createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+
+
+
+}
+
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
@@ -556,3 +568,25 @@ void BlockedNetworkReply::finishedSlot()
   emit readyRead();
   emit finished();
 }
+
+MySchemeHandler::MySchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
+    }
+    void MySchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
+    {
+        // ....
+        QUrl url = requestJob->requestUrl();
+
+//        QNetworkRequest* request = new QNetworkRequest(url);
+
+        QNetworkRequest request;
+        request.setUrl( url );
+        QNetworkReply* reply = mManager. createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+
+
+
+        // Reply segment
+        requestJob->reply("text/html", reply);
+        connect(this, SIGNAL(requestStart(QUrl)),&mManager,SLOT(requestStart(QUrl)),Qt::QueuedConnection );
+        emit requestStart(url);
+    }
+

@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <stdio.h>
@@ -6,7 +6,8 @@
 #include "gdappstyle.hh"
 #include "mainwindow.hh"
 #include "config.hh"
-
+#include "article_netmgr.hh"
+#include <QWebEngineProfile>
 #include "processwrapper.hh"
 #include "hotkeywrapper.hh"
 #ifdef HAVE_X11
@@ -300,6 +301,14 @@ int main( int argc, char ** argv )
 
 #endif
 
+  QWebEngineUrlScheme webUiScheme("gdlookup");
+  webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
+                       QWebEngineUrlScheme::LocalScheme |
+                       QWebEngineUrlScheme::LocalAccessAllowed);
+  QWebEngineUrlScheme::registerScheme(webUiScheme);
+
+
+
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
 
@@ -434,11 +443,7 @@ int main( int argc, char ** argv )
   // and with the main window closed.
   app.setQuitOnLastWindowClosed( false );
 
-  QWebEngineUrlScheme webUiScheme("gdlookup");
-  webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
-                       QWebEngineUrlScheme::LocalScheme |
-                       QWebEngineUrlScheme::LocalAccessAllowed);
-  QWebEngineUrlScheme::registerScheme(webUiScheme);
+
 
   MainWindow m( cfg );
 

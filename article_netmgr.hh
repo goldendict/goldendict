@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __ARTICLE_NETMGR_HH_INCLUDED__
@@ -11,6 +11,9 @@
 #include <QSet>
 #include <QMap>
 #include <QPair>
+#include <QWebEngineUrlSchemeHandler>
+#include <QWebEngineUrlRequestJob>
+#include <QNetworkAccessManager>
 #endif
 
 #include "dictionary.hh"
@@ -94,6 +97,7 @@ protected:
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
+    Q_OBJECT
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
@@ -122,11 +126,14 @@ public:
   sptr< Dictionary::DataRequest > getResource( QUrl const & url,
                                                QString & contentType );
 
-protected:
+//protected:
 
   virtual QNetworkReply * createRequest( Operation op,
                                          QNetworkRequest const & req,
                                          QIODevice * outgoingData );
+private slots:
+
+  void requestStart(QUrl url);
 };
 
 class ArticleResourceReply: public QNetworkReply
@@ -199,4 +206,19 @@ private slots:
   void finishedSlot();
 };
 
+
+class MySchemeHandler : public QWebEngineUrlSchemeHandler
+{
+    Q_OBJECT
+public:
+    MySchemeHandler(ArticleNetworkAccessManager& articleNetMgr);
+    void requestStarted(QWebEngineUrlRequestJob *requestJob);
+protected:
+signals:
+
+    void requestStart(QUrl url);
+
+private:
+    ArticleNetworkAccessManager& mManager;
+};
 #endif
