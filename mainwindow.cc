@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef NO_EPWING_SUPPORT
@@ -6,6 +6,7 @@
 #endif
 
 #include "mainwindow.hh"
+#include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
@@ -142,6 +143,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifndef QT_NO_OPENSSL
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
+
+
+  MySchemeHandler *handler = new MySchemeHandler(articleNetMgr);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
 
   qRegisterMetaType< Config::InputPhrase >();
 
