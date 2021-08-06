@@ -1,4 +1,4 @@
-﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <stdio.h>
@@ -229,27 +229,20 @@ int main( int argc, char ** argv )
   #ifdef Q_OS_MAC
     setenv("LANG", "en_US.UTF-8", 1);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-   // Check for retina display
-   if( LionSupport::isRetinaDisplay() )
-     QApplication::setGraphicsSystem( "native" );
-   else
-     QApplication::setGraphicsSystem( "raster" );
-#endif
   #endif
 
-  // The following clause fixes a race in the MinGW runtime where throwing
-  // exceptions for the first time in several threads simultaneously can cause
-  // an abort(). This code throws first exception in a safe, single-threaded
-  // manner, thus avoiding that race.
-  {
-    class Dummy {};
+//  // The following clause fixes a race in the MinGW runtime where throwing
+//  // exceptions for the first time in several threads simultaneously can cause
+//  // an abort(). This code throws first exception in a safe, single-threaded
+//  // manner, thus avoiding that race.
+//  {
+//    class Dummy {};
 
-    try
-    { throw Dummy(); }
-    catch( Dummy )
-    {}
-  }
+//    try
+//    { throw Dummy(); }
+//    catch( Dummy )
+//    {}
+//  }
 
 #if defined( Q_OS_UNIX )
   setlocale( LC_ALL, "" ); // use correct char set mapping
