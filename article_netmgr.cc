@@ -288,14 +288,8 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 }
 
 void ArticleNetworkAccessManager:: requestStart(QUrl url){
-    qDebug(U"slots executes，执行了");
+    qDebug(u8"slots executes，执行了");
     qDebug()<<url;
-//    QNetworkRequest request;
-//    request.setUrl( url );
-//    QNetworkReply* reply = mManager. createRequest(QNetworkAccessManager::GetOperation,request,NULL);
-
-
-
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
