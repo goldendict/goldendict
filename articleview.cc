@@ -333,7 +333,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   QWebEngineSettings * settings = ui.definition->page()->settings();
   settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
@@ -506,7 +505,11 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
-  QUrl url = ui.definition->url();
+    QUrl url = ui.definition->url();
+    QObject* obj=sender();
+    qDebug()<<"article view loaded url is :"<<url<<" sender class is :"<<obj->metaObject()->className();
+
+
 
   // See if we have any iframes in need of expansion
    ui.definition->page()->runJavaScript(QString("var frames=windows.frames;"
@@ -1129,13 +1132,13 @@ void ArticleView::linkHovered ( const QString & link )
 
 void ArticleView::attachToJavaScript()
 {
-   QWebEngineScript script;
-          script.setInjectionPoint(QWebEngineScript::DocumentReady);
-          script.setRunsOnSubFrames(false);
-          script.setWorldId(QWebEngineScript::MainWorld);
-          script.setSourceCode(QString("articleview"));
+    QWebEngineScript script;
+    script.setInjectionPoint(QWebEngineScript::DocumentReady);
+    script.setRunsOnSubFrames(false);
+    script.setWorldId(QWebEngineScript::MainWorld);
+    script.setSourceCode(QString("articleview"));
 
-          ui.definition->page()->scripts().insert(script);
+    ui.definition->page()->scripts().insert(script);
 
 }
 
@@ -1701,17 +1704,19 @@ void ArticleView::playSound()
 
 QString ArticleView::toHtml()
 {
-    QSemaphore sem(1);
-    sem.acquire(1);
     QString html;
     ui.definition->page()->toHtml([&](const QString& content) {
        
 
         html = content;
-        sem.release();
+
         });
-    sem.acquire(1);
+
     return html;
+}
+
+void ArticleView::setHtml(QString& content,QUrl& baseUrl){
+    ui.definition->page()->setHtml(content,baseUrl);
 }
 
 QString ArticleView::getTitle()
