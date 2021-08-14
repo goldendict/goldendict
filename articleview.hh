@@ -166,6 +166,8 @@ public:
   /// Returns current article's text in .html format
   QString toHtml();
 
+  void setHtml(QString& content,QUrl& baseUrl);
+
   /// Returns current article's title
   QString getTitle();
 

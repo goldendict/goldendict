@@ -1,4 +1,4 @@
-﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef __ARTICLE_NETMGR_HH_INCLUDED__
@@ -133,7 +133,7 @@ public:
                                          QIODevice * outgoingData );
 private slots:
 
-  void requestStart(QUrl url);
+  void requestStart(QUrl& url);
 };
 
 class ArticleResourceReply: public QNetworkReply
@@ -216,7 +216,7 @@ public:
 protected:
 signals:
 
-    void requestStart(QUrl url);
+    void requestStart(QUrl& url);
 
 private:
     ArticleNetworkAccessManager& mManager;

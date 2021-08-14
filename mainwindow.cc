@@ -1,4 +1,4 @@
-﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #ifndef NO_EPWING_SUPPORT
@@ -147,6 +147,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   MySchemeHandler *handler = new MySchemeHandler(articleNetMgr);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
+  connect(handler,SIGNAL(requestStart(QUrl&)),this,SLOT(requestStart(QUrl&)));
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -1614,6 +1615,25 @@ void MainWindow::addNewTab()
 {
   createNewTab( true, tr( "(untitled)" ) );
 }
+void MainWindow::finished(){
+    QNetworkReply *reply=qobject_cast<QNetworkReply*>(sender());
+
+    ArticleView * view = getCurrentArticleView();
+    if ( view )
+    {
+      view->setHtml(QString(reply->readAll()),reply->url());
+    }
+}
+void MainWindow::requestStart(QUrl &url){
+    qDebug("current loaded url is: ");
+    qDebug()<<url;
+    QNetworkRequest request;
+    request.setUrl( url );
+    QNetworkReply* reply = articleNetMgr.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+    connect(reply,SIGNAL(finished()),this,SLOT(finished()));
+}
+
+
 
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
