@@ -261,12 +261,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->pageAction( QWebEnginePage::Copy )->setShortcut( QKeySequence::Copy );
   ui.definition->addAction( ui.definition->pageAction( QWebEnginePage::Copy ) );
 
-  QAction * selectAll = ui.definition->pageAction( QWebEnginePage::SelectAll );
-  selectAll->setShortcut( QKeySequence::SelectAll );
-  selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
-  ui.definition->addAction( selectAll );
+//  QAction * selectAll = ui.definition->pageAction( QWebEnginePage::SelectAll );
+//  selectAll->setShortcut( QKeySequence::SelectAll );
+//  selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+//  ui.definition->addAction( selectAll );
 
-  ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
+//  ui.definition->setContextMenuPolicy( Qt::DefaultContextMenu );
 
   //todo
   //ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
@@ -1731,7 +1731,7 @@ QString ArticleView::toHtml()
     return html;
 }
 
-void ArticleView::setHtml(QString& content,QUrl& baseUrl){
+void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){
     ui.definition->page()->setHtml(content,baseUrl);
 }
 
