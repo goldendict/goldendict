@@ -169,7 +169,7 @@ public:
   /// Returns current article's text in .html format
   QString toHtml();
 
-  void setHtml(QString& content,QUrl& baseUrl);
+  void setHtml(const QString& content, const QUrl& baseUrl);
 
   /// Returns current article's title
   QString getTitle();
