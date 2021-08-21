@@ -211,14 +211,12 @@ class MySchemeHandler : public QWebEngineUrlSchemeHandler
 {
     Q_OBJECT
 public:
-    MySchemeHandler(ArticleNetworkAccessManager& articleNetMgr);
+    MySchemeHandler();
     void requestStarted(QWebEngineUrlRequestJob *requestJob);
+
 protected:
+
 signals:
-
     void requestStart(QUrl& url);
-
-private:
-    ArticleNetworkAccessManager& mManager;
 };
 #endif

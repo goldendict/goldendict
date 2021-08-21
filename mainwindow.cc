@@ -145,8 +145,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #endif
 
 
-  MySchemeHandler *handler = new MySchemeHandler(articleNetMgr);
+  MySchemeHandler *handler = new MySchemeHandler();
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
+  //QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gico", handler);
   connect(handler,SIGNAL(requestStart(QUrl&)),this,SLOT(requestStart(QUrl&)));
 
   qRegisterMetaType< Config::InputPhrase >();
@@ -1630,7 +1631,13 @@ void MainWindow::finished(){
     ArticleView * view = getCurrentArticleView();
     if ( view )
     {
-      view->setHtml(QString(reply->readAll()),reply->url());
+        //view->setHtml(QString(reply->readAll()),reply->url());
+        QVariant header=reply->header(QNetworkRequest::KnownHeaders::ContentTypeHeader);
+        QString contentType=header.toString();
+        //if(contentType=="text/html")
+        {
+            view->setContent(reply->readAll(),header.toString());
+        }
     }
 }
 void MainWindow::requestStart(QUrl &url){

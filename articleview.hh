@@ -170,6 +170,7 @@ public:
   QString toHtml();
 
   void setHtml(const QString& content, const QUrl& baseUrl);
+  void setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
 
   /// Returns current article's title
   QString getTitle();

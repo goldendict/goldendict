@@ -376,6 +376,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
         {
             if( url.scheme() == "gico" )
             {
+                contentType="image/png";
                 QByteArray bytes;
                 QBuffer buffer(&bytes);
                 buffer.open(QIODevice::WriteOnly);
@@ -564,12 +565,11 @@ void BlockedNetworkReply::finishedSlot()
   emit finished();
 }
 
-MySchemeHandler::MySchemeHandler(ArticleNetworkAccessManager &articleNetMgr):mManager(articleNetMgr){
-          //connect(this, SIGNAL(requestStart(QUrl)),&mManager,SLOT(requestStart(QUrl)),Qt::QueuedConnection );
+MySchemeHandler::MySchemeHandler(){
+
 }
 void MySchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
-    // ....
     QUrl url = requestJob->requestUrl();
 
 //        QNetworkRequest* request = new QNetworkRequest(url);

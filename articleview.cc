@@ -258,12 +258,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->pageAction( QWebEnginePage::Copy )->setShortcut( QKeySequence::Copy );
   ui.definition->addAction( ui.definition->pageAction( QWebEnginePage::Copy ) );
 
-//  QAction * selectAll = ui.definition->pageAction( QWebEnginePage::SelectAll );
-//  selectAll->setShortcut( QKeySequence::SelectAll );
-//  selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
-//  ui.definition->addAction( selectAll );
+  QAction * selectAll = ui.definition->pageAction( QWebEnginePage::SelectAll );
+  selectAll->setShortcut( QKeySequence::SelectAll );
+  selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
+  ui.definition->addAction( selectAll );
 
-//  ui.definition->setContextMenuPolicy( Qt::DefaultContextMenu );
+  ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
   //todo
   //ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
@@ -1717,6 +1717,10 @@ QString ArticleView::toHtml()
 
 void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){
     ui.definition->page()->setHtml(content,baseUrl);
+}
+
+void ArticleView::setContent(const QByteArray &data, const QString &mimeType, const QUrl &baseUrl ){
+    ui.definition->page()->setContent(data,mimeType,baseUrl);
 }
 
 QString ArticleView::getTitle()
