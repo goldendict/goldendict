@@ -295,19 +295,17 @@ int main( int argc, char ** argv )
 #endif
 
 
+  QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres"};
 
-  QWebEngineUrlScheme webUiScheme("gdlookup");
-  webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
-                       QWebEngineUrlScheme::LocalScheme |
-                       QWebEngineUrlScheme::LocalAccessAllowed);
-  QWebEngineUrlScheme::registerScheme(webUiScheme);
-
-
-  QWebEngineUrlScheme gico("gico");
-  webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
-                       QWebEngineUrlScheme::LocalScheme |
-                       QWebEngineUrlScheme::LocalAccessAllowed);
-  QWebEngineUrlScheme::registerScheme(gico);
+  for (int i = 0; i < localSchemes.size(); ++i)
+  {
+      QString localScheme=localSchemes.at(i);
+      QWebEngineUrlScheme webUiScheme(localScheme.toLatin1());
+      webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
+                           QWebEngineUrlScheme::LocalScheme |
+                           QWebEngineUrlScheme::LocalAccessAllowed);
+      QWebEngineUrlScheme::registerScheme(webUiScheme);
+  }
 
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
