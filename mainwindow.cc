@@ -48,6 +48,7 @@
 #include "qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
+#include "gico_schemahandler.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -147,7 +148,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   MySchemeHandler *handler = new MySchemeHandler();
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
-  //QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gico", handler);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gico", new GicoSchemeHandler(articleNetMgr));
   connect(handler,SIGNAL(requestStart(QUrl&)),this,SLOT(requestStart(QUrl&)));
 
   qRegisterMetaType< Config::InputPhrase >();
