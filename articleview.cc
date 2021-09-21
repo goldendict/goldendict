@@ -201,15 +201,11 @@ static QVariant runJavaScriptSync(QWebEnginePage* frame, const QString& variable
 {
     qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
     QVariant variant;
-    // QSemaphore semaph(1);
-    // semaph.acquire(1);
+
     frame->runJavaScript(variable, [](const QVariant& result) {
-           // variant = result;
-            //semaph.release(1);
+
         });
 
-    //todo ,
-    //semaph.acquire(1);
     return variant;
 }
 
@@ -1697,25 +1693,18 @@ bool ArticleView::hasSound()
 //todo ,need further effort
 void ArticleView::playSound()
 {
-  QVariant v;
-  QString soundScript;
+  runJavaScriptSync( ui.definition->page(),
+"   var link=gdAudioLinks[gdAudioLinks.current];           "
+"   if(link==undefined){           "
+"       link=gdAudioLinks.first;           "
+"   }          "
+"              "
+"   var music = new Audio(link);    "
+"   music.muted=true;    "
 
-  v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks[gdAudioLinks.current]" );
+"   music.play();   "
 
-	
-  if ( v.type() == QVariant::String )
-    soundScript = v.toString();
-
-  // fallback to the first one
-  if ( soundScript.isEmpty() )
-  {
-    v = runJavaScriptSync( ui.definition->page(), "gdAudioLinks.first" );
-    if ( v.type() == QVariant::String )
-      soundScript = v.toString();
-  }
-
-  if ( !soundScript.isEmpty() )
-    openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
+ );
 }
 
 QString ArticleView::toHtml()

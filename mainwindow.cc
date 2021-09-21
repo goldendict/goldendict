@@ -148,7 +148,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   MySchemeHandler *handler = new MySchemeHandler();
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gico", new GicoSchemeHandler(articleNetMgr));
+
+  QStringList localSchemes={"gdau","gico","qrcx","bres"};
+  for(int i=0;i<localSchemes.size();i++){
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), new GicoSchemeHandler(articleNetMgr));
+  }
   connect(handler,SIGNAL(requestStart(QUrl&)),this,SLOT(requestStart(QUrl&)));
 
   qRegisterMetaType< Config::InputPhrase >();
