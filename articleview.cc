@@ -272,7 +272,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( ui.definition, SIGNAL( loadFinished( bool ) ),
            this, SLOT( loadFinished( bool ) ) );
 
-  attachToJavaScript();
 //  connect( ui.definition->page(), SIGNAL( javaScriptWindowObjectCleared() ),
 //           this, SLOT( attachToJavaScript() ) );
 
@@ -753,6 +752,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 "}").arg(articleId).arg(moveToIt).arg(id);
 
   ui.definition->page()->runJavaScript(script);
+  onJsActiveArticleChanged(id);
 //  if ( getArticlesList().contains( id.mid( 7 ) ) )
 //  {
 

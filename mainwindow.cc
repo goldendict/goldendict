@@ -1301,6 +1301,7 @@ void MainWindow::applyWebSettings()
 {
   QWebEngineSettings *defaultSettings = QWebEngineSettings::globalSettings();
   defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
   //defaultSettings->setAttribute( QWebEngineSettings::DeveloperExtrasEnabled, true );
 }
 
