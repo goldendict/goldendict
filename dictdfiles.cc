@@ -343,7 +343,6 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
       }
       else
       {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                             QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
         static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
@@ -352,12 +351,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
                                          QRegularExpression::CaseInsensitiveOption );
         static QRegularExpression tags( "<[^>]*>",
                                         QRegularExpression::CaseInsensitiveOption );
-#else
-        static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
-        static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
-        static QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
-        static QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
-#endif
+
 
         articleText = string( "<div class=\"dictd_article\"" );
         if( isToLanguageRTL() )
@@ -373,7 +367,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         convertedText.erase();
 
         int pos = 0;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+
         QString articleNewString;
         QRegularExpressionMatchIterator it = links.globalMatch( articleString );
         while( it.hasNext() )
@@ -397,21 +391,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
           articleString = articleNewString;
           articleNewString.clear();
         }
-#else
-        for( ; ; )
-        {
-          pos = articleString.indexOf( links, pos );
-          if( pos < 0 )
-            break;
 
-          QString link = links.cap( 1 );
-          link.replace( tags, " " );
-          link.replace( "&nbsp;", " " );
-          articleString.replace( pos + 30, links.cap( 1 ).length(),
-                                 QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
-          pos += 30;
-        }
-#endif
 
         articleString += "</div>";
 

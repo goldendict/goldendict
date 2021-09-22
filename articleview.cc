@@ -1749,7 +1749,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
 
-    QWebEnginePage* r=ui.definition->page();
+  QWebEnginePage* r=ui.definition->page();
   updateCurrentArticleFromCurrentFrame(ui.definition->page(), const_cast<QPoint *>(& pos));
 
   QMenu menu( this );
@@ -2063,12 +2063,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         setCurrentArticle( "gdfrom-" + id, true );
     }
   }
-#if 0
-  DPRINTF( "%s\n", r.linkUrl().isEmpty() ? "null" : "not null" );
 
-  DPRINTF( "url = %s\n", r.linkUrl().toString().toLocal8Bit().data() );
-  DPRINTF( "title = %s\n", r.title().toLocal8Bit().data() );
-#endif
+  qDebug( "url = %s\n", r->url().toString().toLocal8Bit().data() );
+  qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
+
 }
 
 void ArticleView::resourceDownloadFinished()
