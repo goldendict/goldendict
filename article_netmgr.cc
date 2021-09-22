@@ -399,30 +399,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
         }
     }
-    else
-    {
-      // We don't do search requests for now
-#if 0
-      for( unsigned x = 0; x < dictionaries.size(); ++x )
-      {
-        if ( search || dictionaries[ x ]->getId() == id )
-        {
-          try
-          {
-            dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data(),
-                                            data );
 
-            return true;
-          }
-          catch( Dictionary::exNoSuchResource & )
-          {
-            if ( !search )
-              break;
-          }
-        }
-      }
-#endif      
-    }
   }
 
   if ( url.scheme() == "gdpicture" )
