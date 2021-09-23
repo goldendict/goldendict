@@ -668,11 +668,16 @@ void ArticleRequest::bodyFinished()
           }
         }
 
-      	//todo ,gdArticleContents应该可以用类变量保存。
+        //todo ,gdArticleContents need refractor in the future?
         string jsVal = Html::escapeForJavaScript( dictId );
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
-          "else gdArticleContents += \"" + jsVal + " \";</script>";
+          "else gdArticleContents += \"" + jsVal + " \";"
+"function playSound(sound){"
+" var a=new Audio(sound);"
+" a.play();"
+"}"
+"</script>";
 
         head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +

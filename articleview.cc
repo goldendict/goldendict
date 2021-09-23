@@ -1700,8 +1700,6 @@ void ArticleView::playSound()
 "   }          "
 "              "
 "   var music = new Audio(link);    "
-"   music.muted=true;    "
-
 "   music.play();   "
 
  );
