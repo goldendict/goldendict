@@ -906,8 +906,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       result += addAudioLink( ref, getId() );
 
-      result += "<span class=\"dsl_s_wav\"><a href=" + ref
-         + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";
+      string surl=url.toEncoded().data();
+
+      result += "<span class=\"dsl_s_wav\"><a onclick=\"playSound('"+surl+"')\"  href= \"javascript:void(0)\" ><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";
     }
     else
     if ( Filetype::isNameOfPicture( filename ) )
