@@ -9,17 +9,11 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 ### External Deps
 
 * Make, GCC, Git
-* Qt framework. Minimum required version is 4.6. But Qt 4.7 or 4.8 is recommended.
+* Qt framework. Minimum required version is 5.15
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
 * On Mac and Windows all the libraries are already included in the repository
 
-### Installing External Deps on Ubuntu Linux
-
-    sudo apt-get install git pkg-config build-essential qt4-qmake \
-         libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
-         libqt4-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
-         libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev
 
 #### Installing External Deps on Ubuntu Linux for Qt5
 
