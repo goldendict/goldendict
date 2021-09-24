@@ -92,6 +92,9 @@ public:
 
   typedef QMap< QString, QString > Contexts;
 
+  /// Returns "gdfrom-" + dictionaryId.
+  static QString scrollToFromDictionaryId( QString const & dictionaryId );
+
   /// Shows the definition of the given word with the given group.
   /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
   /// the page to that article on load.

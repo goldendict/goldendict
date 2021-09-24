@@ -109,7 +109,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   for( QStringList::iterator i = availHelps.begin(); i != availHelps.end(); ++i )
   {
-    QString loc = i->mid( 7, i->length() - 11 );
+    QString loc = i->mid( 7, i->length() - 11 ); // e.g. *i == "gdhelp_en.qch" => loc == "en"
     QString lang = loc.mid( 0, 2 );
     QString reg;
     if(loc.length() >= 5 )

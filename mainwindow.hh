@@ -260,14 +260,17 @@ private:
   QString unescapeTabHeader( QString const & header );
 
   void respondToTranslationRequest( Config::InputPhrase const & phrase,
-                                    bool checkModifiers, QString const & dictID = QString() );
+                                    bool checkModifiers, QString const & scrollTo = QString() );
 
   void updateSuggestionList();
   void updateSuggestionList( QString const & text );
 
+  enum WildcardPolicy { EscapeWildcards, WildcardsAreAlreadyEscaped };
   enum TranslateBoxPopup { NoPopupChange, EnablePopup, DisablePopup };
-  void setTranslateBoxTextAndKeepSuffix( QString const & text, TranslateBoxPopup popupAction );
-  void setTranslateBoxTextAndClearSuffix( QString const & text, TranslateBoxPopup popupAction );
+  void setTranslateBoxTextAndKeepSuffix( QString text, WildcardPolicy wildcardPolicy,
+                                         TranslateBoxPopup popupAction );
+  void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
+                                          TranslateBoxPopup popupAction );
 
 private slots:
 
@@ -406,7 +409,7 @@ private slots:
   void mutedDictionariesChanged();
 
   void showTranslationFor( Config::InputPhrase const &, unsigned inGroup = 0,
-                           QString const & dictID = QString() );
+                           QString const & scrollTo = QString() );
   void showTranslationFor( QString const & );
 
   void showTranslationFor( QString const &, QStringList const & dictIDs,

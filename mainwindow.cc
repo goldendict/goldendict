@@ -971,7 +971,7 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
   updateGroupList();
   applyWordsZoomLevel();
 
-  setTranslateBoxTextAndKeepSuffix( text, DisablePopup );
+  setTranslateBoxTextAndKeepSuffix( text, WildcardsAreAlreadyEscaped, DisablePopup );
   focusTranslateLine();
 }
 
@@ -991,7 +991,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
     QString str = QApplication::clipboard()->text(subtype,
       QClipboard::Selection);
-  setTranslateBoxTextAndClearSuffix( str, NoPopupChange );
+  setTranslateBoxTextAndClearSuffix( str, EscapeWildcards, NoPopupChange );
 
         QKeyEvent ev(QEvent::KeyPress, Qt::Key_Enter,
            Qt::NoModifier);
@@ -2048,7 +2048,9 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   if ( editDictionaryGroup != Instances::Group::NoGroupId )
     dicts.editGroup( editDictionaryGroup );
 
+  dicts.restoreGeometry( cfg.dictionariesDialogGeometry );
   dicts.exec();
+  cfg.dictionariesDialogGeometry = newCfg.dictionariesDialogGeometry = dicts.saveGeometry();
 
   if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
@@ -2341,7 +2343,7 @@ void MainWindow::translateInputFinished( bool checkModifiers )
 }
 
 void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase,
-                                              bool checkModifiers, QString const & dictID )
+                                              bool checkModifiers, QString const & scrollTo )
 {
   if ( phrase.isValid() )
   {
@@ -2349,7 +2351,7 @@ void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase
     if ( checkModifiers && ( mods & (Qt::ControlModifier | Qt::ShiftModifier) ) )
       addNewTab();
 
-    showTranslationFor( phrase, 0, dictID );
+    showTranslationFor( phrase, 0, scrollTo );
 
     if ( cfg.preferences.searchInDock )
     {
@@ -2361,17 +2363,22 @@ void MainWindow::respondToTranslationRequest( Config::InputPhrase const & phrase
   }
 }
 
-void MainWindow::setTranslateBoxTextAndKeepSuffix( QString const & text, TranslateBoxPopup popupAction )
+void MainWindow::setTranslateBoxTextAndKeepSuffix( QString text, WildcardPolicy wildcardPolicy,
+                                                   TranslateBoxPopup popupAction )
 {
+  if( wildcardPolicy == EscapeWildcards )
+    text = Folding::escapeWildcardSymbols( text );
+
   if( popupAction == NoPopupChange || cfg.preferences.searchInDock )
     translateLine->setText( text );
   else
     translateBox->setText( text, popupAction == EnablePopup );
 }
 
-void MainWindow::setTranslateBoxTextAndClearSuffix( QString const & text, TranslateBoxPopup popupAction )
+void MainWindow::setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
+                                                    TranslateBoxPopup popupAction )
 {
-  setTranslateBoxTextAndKeepSuffix( text, popupAction );
+  setTranslateBoxTextAndKeepSuffix( text, wildcardPolicy, popupAction );
   translateBoxSuffix = QString();
 }
 
@@ -2767,7 +2774,8 @@ void MainWindow::typingEvent( QString const & t )
     if( translateLine->isEnabled() )
     {
       translateLine->setFocus();
-      setTranslateBoxTextAndClearSuffix( t, EnablePopup );
+      // Escaping the typed-in characters is the user's responsibility.
+      setTranslateBoxTextAndClearSuffix( t, WildcardsAreAlreadyEscaped, EnablePopup );
       translateLine->setCursorPosition( t.size() );
     }
   }
@@ -2785,7 +2793,7 @@ void MainWindow::showHistoryItem( QString const & word )
 
   history.enableAdd( false );
 
-  setTranslateBoxTextAndClearSuffix( Folding::escapeWildcardSymbols( word ), DisablePopup );
+  setTranslateBoxTextAndClearSuffix( word, EscapeWildcards, DisablePopup );
   showTranslationFor( word );
 
   history.enableAdd( cfg.preferences.storeHistory );
@@ -2793,7 +2801,7 @@ void MainWindow::showHistoryItem( QString const & word )
 
 void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
                                      unsigned inGroup,
-                                     QString const & dictID )
+                                     QString const & scrollTo )
 {
   ArticleView *view = getCurrentArticleView();
 
@@ -2803,7 +2811,7 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
                    ( groupInstances.empty() ? 0 :
                         groupInstances[ groupList->currentIndex() ].id );
 
-  view->showDefinition( phrase, group, dictID );
+  view->showDefinition( phrase, group, scrollTo );
 
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -3819,7 +3827,7 @@ ArticleView * MainWindow::getCurrentArticleView()
 void MainWindow::phraseReceived( Config::InputPhrase const & phrase )
 {
   toggleMainWindow( true );
-  setTranslateBoxTextAndKeepSuffix( Folding::escapeWildcardSymbols( phrase.phrase ), NoPopupChange );
+  setTranslateBoxTextAndKeepSuffix( phrase.phrase, EscapeWildcards, NoPopupChange );
   translateBoxSuffix = phrase.punctuationSuffix;
   respondToTranslationRequest( phrase, false );
 }
@@ -3832,9 +3840,9 @@ void MainWindow::wordReceived( const QString & word)
 void MainWindow::headwordReceived( const QString & word, const QString & ID )
 {
   toggleMainWindow( true );
-  setTranslateBoxTextAndClearSuffix( Folding::escapeWildcardSymbols( word ), NoPopupChange );
+  setTranslateBoxTextAndClearSuffix( word, EscapeWildcards, NoPopupChange );
   respondToTranslationRequest( Config::InputPhrase::fromPhrase( word ),
-                               false, "gdfrom-" + ID );
+                               false, ArticleView::scrollToFromDictionaryId( ID ) );
 }
 
 void MainWindow::updateFavoritesMenu()
@@ -4472,7 +4480,7 @@ void MainWindow::foundDictsContextMenuRequested( const QPoint &pos )
 
 void MainWindow::sendWordToInputLine( const QString & word )
 {
-  setTranslateBoxTextAndClearSuffix( word, NoPopupChange );
+  setTranslateBoxTextAndClearSuffix( word, EscapeWildcards, NoPopupChange );
 }
 
 void MainWindow::storeResourceSavePath( const QString & newPath )
@@ -4775,7 +4783,7 @@ void MainWindow::headwordFromFavorites( QString const & headword,
   }
 
   // Show headword without lost of focus on Favorites tree
-  setTranslateBoxTextAndClearSuffix( Folding::escapeWildcardSymbols( headword ), DisablePopup );
+  setTranslateBoxTextAndClearSuffix( headword, EscapeWildcards, DisablePopup );
   showTranslationFor(headword );
 }
 

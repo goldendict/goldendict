@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "scanpopup.hh"
+#include "folding.hh"
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>
@@ -712,7 +713,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
   /// Too large strings make window expand which is probably not what user
   /// wants
-  ui.translateBox->setText( inputPhrase.phrase, false );
+  ui.translateBox->setText( Folding::escapeWildcardSymbols( inputPhrase.phrase ), false );
   translateBoxSuffix = inputPhrase.punctuationSuffix;
 
   showTranslationFor( inputPhrase );
@@ -804,7 +805,8 @@ void ScanPopup::updateSuggestionList( QString const & text )
 
 void ScanPopup::translateInputFinished()
 {
-  inputPhrase = Config::InputPhrase ( ui.translateBox->translateLine()->text().trimmed(), translateBoxSuffix );
+  inputPhrase.phrase = Folding::unescapeWildcardSymbols( ui.translateBox->translateLine()->text().trimmed() );
+  inputPhrase.punctuationSuffix = translateBoxSuffix;
   showTranslationFor( inputPhrase );
 }
 
