@@ -507,8 +507,6 @@ void ArticleView::loadFinished( bool )
     QObject* obj=sender();
     qDebug()<<"article view loaded url is :"<<url<<" sender class is :"<<obj->metaObject()->className();
 
-
-
   // See if we have any iframes in need of expansion
    ui.definition->page()->runJavaScript(QString("var frames=windows.frames;"
 "for(int i=0;i<frames.length;i++){"

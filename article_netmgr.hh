@@ -216,9 +216,6 @@ public:
 
 protected:
 
-signals:
-    void requestStart(QUrl& url);
-
 private:
     ArticleNetworkAccessManager& mManager;
 };

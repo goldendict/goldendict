@@ -277,11 +277,6 @@ private slots:
   /// the timer. Does nothing otherwise.
   void prepareNewReleaseChecks();
 
-
-
-  void finished();
-  void requestStart(QUrl& url);
-
 private slots:
 
   /// Does the new release check.
