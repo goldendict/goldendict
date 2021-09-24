@@ -30,12 +30,11 @@ First, clone this repository, e.g.:
 
     git clone git://github.com/goldendict/goldendict.git
 
-And then invoke `qmake-qt4` and `make`:
+And then invoke `qmake-qt5` and `make`:
 
-    cd goldendict && qmake-qt4 && make
+    cd goldendict && qmake-qt5 && make
 
-In case when `qmake-qt4` does not exist, try using `qmake` but make sure it is indeed from the Qt 4 installation.
-On the other hand, if you want to use `qt5`, make sure that `qmake` is from Qt 5 installation. If not, you can try
+make sure that `qmake` is from Qt 5 installation. If not, you can try
 finding it at a path like `/usr/lib/x86_64-linux-gnu/qt5/bin/qmake`.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
