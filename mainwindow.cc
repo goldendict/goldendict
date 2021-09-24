@@ -146,7 +146,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #endif
 
 
-  MySchemeHandler *handler = new MySchemeHandler();
+  MySchemeHandler *handler = new MySchemeHandler(articleNetMgr);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
 
   QStringList localSchemes={"gdau","gico","qrcx","bres"};
@@ -1311,7 +1311,8 @@ void MainWindow::applyWebSettings()
   QWebEngineSettings *defaultSettings = QWebEngineSettings::globalSettings();
   defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
-  //defaultSettings->setAttribute( QWebEngineSettings::DeveloperExtrasEnabled, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
