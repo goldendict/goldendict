@@ -288,9 +288,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 }
 
 void ArticleNetworkAccessManager:: requestStart(QUrl& url){
-    QNetworkRequest request;
-    request.setUrl( url );
-    QNetworkReply* reply = createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+//    QNetworkRequest request;
+//    request.setUrl( url );
+//    QNetworkReply* reply = createRequest(QNetworkAccessManager::GetOperation,request,NULL);
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
@@ -542,19 +542,26 @@ void BlockedNetworkReply::finishedSlot()
   emit finished();
 }
 
-MySchemeHandler::MySchemeHandler(){
+MySchemeHandler::MySchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
 
 }
 void MySchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
     QUrl url = requestJob->requestUrl();
 
-//        QNetworkRequest* request = new QNetworkRequest(url);
 
+        QNetworkRequest request;
+        request.setUrl( url );
 
-    // Reply segment
-   // requestJob->reply("text/html", reply);
+     QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+     connect(reply,&QNetworkReply::finished,[=](){
+         //QNetworkReply *reply1=qobject_cast<QNetworkReply*>(sender());
+         requestJob->reply("text/html",reply);
+     });
 
-   emit requestStart(url);
+//    // Reply segment
+//   requestJob->reply("text/html", reply);
+
+//   emit requestStart(url);
 }
 
