@@ -210,7 +210,17 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
     QString contentType;
 
-    sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
+    QUrl url=req.url();
+    if(req.url().scheme()=="gdlookup"){
+        QString path=url.path();
+        if(!path.isEmpty()){
+            Qt4x5::Url::addQueryItem(url,"word",path.mid(1));
+            url.setPath("");
+            Qt4x5::Url::addQueryItem(url,"group","1");
+        }
+    }
+
+    sptr< Dictionary::DataRequest > dr = getResource( url, contentType );
 
     if ( dr.get() )
       return new ArticleResourceReply( this, req, dr, contentType );
@@ -312,6 +322,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
+
+
 
     Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
                                  Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
