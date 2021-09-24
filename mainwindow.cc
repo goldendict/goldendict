@@ -153,7 +153,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   for(int i=0;i<localSchemes.size();i++){
     QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), new GicoSchemeHandler(articleNetMgr));
   }
-  connect(handler,SIGNAL(requestStart(QUrl&)),this,SLOT(requestStart(QUrl&)));
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -1627,36 +1626,10 @@ void MainWindow::switchToWindow(QAction *act)
   ui.tabWidget->setCurrentIndex(idx);
 }
 
-
 void MainWindow::addNewTab()
 {
   createNewTab( true, tr( "(untitled)" ) );
 }
-void MainWindow::finished(){
-    QNetworkReply *reply=qobject_cast<QNetworkReply*>(sender());
-
-    ArticleView * view = getCurrentArticleView();
-    if ( view )
-    {
-        //view->setHtml(QString(reply->readAll()),reply->url());
-        QVariant header=reply->header(QNetworkRequest::KnownHeaders::ContentTypeHeader);
-        QString contentType=header.toString();
-        //if(contentType=="text/html")
-        {
-            view->setContent(reply->readAll(),header.toString());
-        }
-    }
-}
-void MainWindow::requestStart(QUrl &url){
-    qDebug("current loaded url is: ");
-    qDebug()<<url;
-    QNetworkRequest request;
-    request.setUrl( url );
-    QNetworkReply* reply = articleNetMgr.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
-    connect(reply,SIGNAL(finished()),this,SLOT(finished()));
-}
-
-
 
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )

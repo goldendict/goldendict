@@ -217,6 +217,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
             Qt4x5::Url::addQueryItem(url,"word",path.mid(1));
             url.setPath("");
             Qt4x5::Url::addQueryItem(url,"group","1");
+
         }
     }
 
@@ -322,8 +323,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
-
-
 
     Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
                                  Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
@@ -562,18 +561,13 @@ void MySchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QUrl url = requestJob->requestUrl();
 
 
-        QNetworkRequest request;
-        request.setUrl( url );
+    QNetworkRequest request;
+    request.setUrl( url );
 
-     QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
-     connect(reply,&QNetworkReply::finished,[=](){
-         //QNetworkReply *reply1=qobject_cast<QNetworkReply*>(sender());
-         requestJob->reply("text/html",reply);
-     });
-
-//    // Reply segment
-//   requestJob->reply("text/html", reply);
-
-//   emit requestStart(url);
+    QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+    connect(reply,&QNetworkReply::finished,[=](){
+        //QNetworkReply *reply1=qobject_cast<QNetworkReply*>(sender());
+        requestJob->reply("text/html",reply);
+    });
 }
 
