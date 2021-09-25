@@ -298,12 +298,6 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
 }
 
-void ArticleNetworkAccessManager:: requestStart(QUrl& url){
-//    QNetworkRequest request;
-//    request.setUrl( url );
-//    QNetworkReply* reply = createRequest(QNetworkAccessManager::GetOperation,request,NULL);
-}
-
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
