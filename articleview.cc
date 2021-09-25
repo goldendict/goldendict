@@ -509,46 +509,28 @@ void ArticleView::loadFinished( bool )
     QObject* obj=sender();
     qDebug()<<"article view loaded url is :"<<url<<" sender class is :"<<obj->metaObject()->className();
 
-  // See if we have any iframes in need of expansion
-   ui.definition->page()->runJavaScript(QString("var frames=windows.frames;"
-"for(int i=0;i<frames.length;i++){"
-"   var f=frames[i];"
-"   f.height=%1;"
-"   f.style.display='block';"
-    "var gdLastUrlText;"
-"   f.document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );"
-"   f.document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );"
-
-"}"));
-
-  //QList< QWebEnginePage * > frames = ui.definition->page()->mainFrame()->childFrames();
+//  // See if we have any iframes in need of expansion
+//   ui.definition->page()->runJavaScript(QString(""
+//"var frames = window.frames;"
+//"for (var i=0; i < frames.length; i++) {"
+//"    var f = frames[i];"
+//"    "
+//"    f.onload = function()"
+//"    {"
+//"      f.style.height = "
+//"      f.contentWindow.document.body.scrollHeight + 'px';"
+//"     f.style.width  = "
+//"      f.contentWindow.document.body.scrollWidth+'px';    "
+//"    }"
+//"    f.style.display = 'block';"
+//"    var gdLastUrlText;"
+//"    f.document.addEventListener('click', function () { gdLastUrlText = window.event.srcElement.textContent; });"
+//"    f.document.addEventListener('contextmenu', function () { gdLastUrlText = window.event.srcElement.textContent; });"
+//"}"
+//));
 
   bool wereFrames = false;
 
-//  for( QList< QWebEnginePage * >::iterator i = frames.begin(); i != frames.end(); ++i )
-//  {
-//    if ( (*i)->frameName().startsWith( "gdexpandframe-" ) )
-//    {
-//      //DPRINTF( "Name: %s\n", (*i)->frameName().toUtf8().data() );
-//      //DPRINTF( "Size: %d\n", (*i)->contentsSize().height() );
-//      //DPRINTF( ">>>>>>>>Height = %s\n", (*i)->runJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
-
-//      // Set the height
-//      ui.definition->page()->runJavaScript( QString( "document.getElementById('%1').height = %2;" ).
-//        arg( (*i)->frameName() ).
-//        arg( (*i)->contentsSize().height() ) );
-
-//      // Show it
-//      ui.definition->page()->runJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
-//        arg( (*i)->frameName() ) );
-
-//      (*i)->runJavaScript( "var gdLastUrlText;" );
-//      (*i)->runJavaScript( "document.addEventListener( 'click', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
-//      (*i)->runJavaScript( "document.addEventListener( 'contextmenu', function() { gdLastUrlText = window.event.srcElement.textContent; }, true );" );
-
-//      wereFrames = true;
-//    }
-//  }
 
   //todo
   if ( wereFrames )
