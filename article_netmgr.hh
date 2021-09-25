@@ -7,7 +7,6 @@
 #include <QtNetwork>
 
 #if QT_VERSION >= 0x050300  // Qt 5.3+
-//#include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
 #include <QPair>
@@ -102,9 +101,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500  // Qt 5.3+
-  Origins allOrigins;
-#endif
+
 public:
 
   ArticleNetworkAccessManager( QObject * parent,
@@ -131,9 +128,7 @@ public:
   virtual QNetworkReply * createRequest( Operation op,
                                          QNetworkRequest const & req,
                                          QIODevice * outgoingData );
-private slots:
 
-  void requestStart(QUrl& url);
 };
 
 class ArticleResourceReply: public QNetworkReply
