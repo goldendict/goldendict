@@ -527,7 +527,7 @@ void ArticleResourceReply::finishedSlot()
   if ( req->dataSize() < 0 )
     error( ContentNotFoundError );
 
-  finished();
+  emit finished();
 }
 
 BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
@@ -559,7 +559,7 @@ void MySchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     request.setUrl( url );
 
     QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
-    connect(reply,&QNetworkReply::finished,[=](){
+    connect(reply,&QNetworkReply::finished,this,[=](){
         //QNetworkReply *reply1=qobject_cast<QNetworkReply*>(sender());
         requestJob->reply("text/html",reply);
     });
