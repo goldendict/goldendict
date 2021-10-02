@@ -1801,28 +1801,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-#if QT_VERSION >= 0x040600 && QT_VERSION <= 0x050500
-  QWebElement el = r.element();
-  QUrl imageUrl;
-  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
-  {
-    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
-    if( !imageUrl.isEmpty() )
-    {
-      menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
-      saveImageAction = new QAction( tr( "Save &image..." ), &menu );
-      menu.addAction( saveImageAction );
-    }
-  }
-
-  if( !popupView && ( targetUrl.scheme() == "gdau"
-                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
-  {
-    saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
-    menu.addAction( saveSoundAction );
-  }
-#endif
-
   QString selectedText = ui.definition->selectedText();
   QString text = selectedText.trimmed();
 

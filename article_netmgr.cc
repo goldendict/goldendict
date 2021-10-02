@@ -547,10 +547,10 @@ void BlockedNetworkReply::finishedSlot()
   emit finished();
 }
 
-MySchemeHandler::MySchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
+LocalSchemeHandler::LocalSchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
 
 }
-void MySchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
+void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
     QUrl url = requestJob->requestUrl();
 
