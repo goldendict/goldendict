@@ -179,11 +179,34 @@ public:
 
 /// End of DiacriticsHandler class
 
-static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
+static QVariant runJavaScriptVariableSafe( QWebEnginePage * frame, const QString & variable )
 {
-  return frame->evaluateJavaScript(
+    qDebug(QString("runJavaScriptVariableSafe with:%1").arg(variable).toLatin1().data());
+    QVariant variant;
+    QSemaphore semaph(1);
+    semaph.acquire(1);
+   frame->runJavaScript(
         QString( "( typeof( %1 ) !== 'undefined' && %1 !== undefined ) ? %1 : null;" )
-        .arg( variable ) );
+              .arg( variable ),[&semaph,&variant](const QVariant & result){
+      //variant=result;
+      //semaph.release(1);
+  } );
+
+   //todo
+   //semaph.acquire(1);
+   return variant;
+}
+
+static QVariant runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
+{
+    qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
+    QVariant variant;
+
+    frame->runJavaScript(variable, [](const QVariant& result) {
+
+        });
+
+    return variant;
 }
 
 namespace {
@@ -197,18 +220,17 @@ bool isScrollTo( QString const & id )
 
 QString dictionaryIdFromScrollTo( QString const & scrollTo )
 {
-    qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
-    QVariant variant;
-    // QSemaphore semaph(1);
-    // semaph.acquire(1);
-    frame->runJavaScript(variable, [](const QVariant& result) {
-           // variant = result;
-            //semaph.release(1);
-        });
+  Q_ASSERT( isScrollTo( scrollTo ) );
+  const int scrollToPrefixLength = 7;
+  return scrollTo.mid( scrollToPrefixLength );
+}
 
-    //todo ,
-    //semaph.acquire(1);
-    return variant;
+} // unnamed namespace
+
+QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
+{
+  Q_ASSERT( !isScrollTo( dictionaryId ) );
+  return scrollToPrefix + dictionaryId;
 }
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
@@ -679,7 +701,21 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
 	//todo dictid
-    return QStringList() << getCurrentArticle();
+    QStringList dictList;
+	for (unsigned i = 0; i < allDictionaries.size(); i++)
+	{
+        dictList.append( allDictionaries[i]->getId().c_str());
+		
+	}
+
+    QStringList mutedDictionaries = getMutedDictionaries(Instances::Group::AllGroupId);
+    for (int i=0;i<mutedDictionaries.size();i++)
+    {
+        dictList.removeOne(mutedDictionaries[i]);
+    }
+
+    return dictList;
+    
   // return runJavaScriptVariableSafe( ui.definition->page(), "gdArticleContents" )
   //     .toString().trimmed().split( ' ', QString::SkipEmptyParts );
 }
@@ -723,18 +759,14 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !ui.definition->isVisible() )
     return; // No action on background page, scrollIntoView there don't work
 
-  if ( getArticlesList().contains( id.mid( 7 ) ) )
-  {
-    if ( moveToIt )
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
+  if(moveToIt){
+      QString script=QString(" document.getElementById('%1').scrollIntoView(true);").arg(id);
 
-  ui.definition->page()->runJavaScript(script);
-  onJsActiveArticleChanged(id);
-//  if ( getArticlesList().contains( id.mid( 7 ) ) )
-//  {
+      ui.definition->page()->runJavaScript(script);
 
-    ui.definition->page()->mainFrame()->evaluateJavaScript(
-      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
+      onJsActiveArticleChanged(id);
+
+      ui.definition->setProperty("currentArticle",id);
   }
 }
 
@@ -749,8 +781,7 @@ bool ArticleView::isFramedArticle( QString const & ca )
   if ( ca.isEmpty() )
     return false;
 
-  return ui.definition->page()->mainFrame()->
-               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
+  return  runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -773,7 +804,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
     if ( isFramedArticle( ca ) )
     {
-    	//todo ,\D3ñ\E4\C1\BF\B4\FA\CC\E6\D7\EE\BA\F3\B5\C4url
+    	//todo ,ÓÃ±äÁ¿´úÌæ×îºóµÄurl
       //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
       QVariant result ;
 
@@ -812,9 +843,9 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,
 //  {
 //    QString frameName = frame->frameName();
 
-    if ( frameName.startsWith( "gdexpandframe-" ) )
-    {
-      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
+//    if ( frameName.startsWith( "gdexpandframe-" ) )
+//    {
+//      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
 
 //      if ( getCurrentArticle() != newCurrent )
 //        setCurrentArticle( newCurrent, false );
@@ -1035,6 +1066,43 @@ QString ArticleView::getMutedForGroup( unsigned group )
   }
 
   return QString();
+}
+
+QStringList ArticleView::getMutedDictionaries(unsigned group)
+{
+	if (dictionaryBarToggled && dictionaryBarToggled->isChecked())
+	{
+		// Dictionary bar is active -- mute the muted dictionaries
+		Instances::Group const* groupInstance = groups.findGroup(group);
+
+		// Find muted dictionaries for current group
+		Config::Group const* grp = cfg.getGroup(group);
+		Config::MutedDictionaries const* mutedDictionaries;
+		if (group == Instances::Group::AllGroupId||!grp)
+			mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
+		else
+			mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
+		if (!mutedDictionaries)
+			return QStringList();
+
+		QStringList mutedDicts;
+
+		if (groupInstance)
+		{
+			for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x)
+			{
+				QString id = QString::fromStdString(
+					groupInstance->dictionaries[x]->getId());
+
+				if (mutedDictionaries->contains(id))
+					mutedDicts.append(id);
+			}
+		}
+
+        return mutedDicts;
+	}
+
+	return QStringList();
 }
 
 void ArticleView::linkHovered ( const QString & link )
@@ -1763,28 +1831,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyLinkToClipboard ) );
     }
   }
-
-#if QT_VERSION >= 0x040600 && QT_VERSION <= 0x050500
-  QWebElement el = r.element();
-  QUrl imageUrl;
-  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
-  {
-    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
-    if( !imageUrl.isEmpty() )
-    {
-      menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
-      saveImageAction = new QAction( tr( "Save &image..." ), &menu );
-      menu.addAction( saveImageAction );
-    }
-  }
-
-  if( !popupView && ( targetUrl.scheme() == "gdau"
-                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
-  {
-    saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
-    menu.addAction( saveSoundAction );
-  }
-#endif
 
   QString selectedText = ui.definition->selectedText();
   QString text = selectedText.trimmed();

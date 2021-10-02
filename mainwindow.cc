@@ -146,7 +146,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #endif
 
 
-  MySchemeHandler *handler = new MySchemeHandler(articleNetMgr);
+  LocalSchemeHandler *handler = new LocalSchemeHandler(articleNetMgr);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
 
   QStringList localSchemes={"gdau","gico","qrcx","bres"};

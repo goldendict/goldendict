@@ -202,11 +202,11 @@ private slots:
 };
 
 
-class MySchemeHandler : public QWebEngineUrlSchemeHandler
+class LocalSchemeHandler : public QWebEngineUrlSchemeHandler
 {
     Q_OBJECT
 public:
-    MySchemeHandler(ArticleNetworkAccessManager &articleNetMgr);
+    LocalSchemeHandler(ArticleNetworkAccessManager &articleNetMgr);
     void requestStarted(QWebEngineUrlRequestJob *requestJob);
 
 protected:

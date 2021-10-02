@@ -364,6 +364,8 @@ private:
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );
 
+  QStringList getMutedDictionaries(unsigned group);
+
 protected:
 
   // We need this to hide the search bar when we're showed
