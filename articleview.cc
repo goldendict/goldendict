@@ -701,7 +701,14 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
 	//todo dictid
-    return QStringList() << getCurrentArticle();
+    QStringList dictList;
+	for (unsigned i = 0; i < allDictionaries.size(); i++)
+	{
+        dictList.append( allDictionaries[i]->getId().c_str());
+		
+	}
+    return dictList;
+    
   // return runJavaScriptVariableSafe( ui.definition->page(), "gdArticleContents" )
   //     .toString().trimmed().split( ' ', QString::SkipEmptyParts );
 }
