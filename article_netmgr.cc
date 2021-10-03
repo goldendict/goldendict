@@ -290,12 +290,10 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
-#else
-  return reply;
-#endif
+
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
@@ -550,10 +548,10 @@ void BlockedNetworkReply::finishedSlot()
 LocalSchemeHandler::LocalSchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
 
 }
+
 void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
     QUrl url = requestJob->requestUrl();
-
 
     QNetworkRequest request;
     request.setUrl( url );

@@ -701,7 +701,21 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
 	//todo dictid
-    return QStringList() << getCurrentArticle();
+    QStringList dictList;
+	for (unsigned i = 0; i < allDictionaries.size(); i++)
+	{
+        dictList.append( allDictionaries[i]->getId().c_str());
+		
+	}
+
+    QStringList mutedDictionaries = getMutedDictionaries(Instances::Group::AllGroupId);
+    for (int i=0;i<mutedDictionaries.size();i++)
+    {
+        dictList.removeOne(mutedDictionaries[i]);
+    }
+
+    return dictList;
+    
   // return runJavaScriptVariableSafe( ui.definition->page(), "gdArticleContents" )
   //     .toString().trimmed().split( ' ', QString::SkipEmptyParts );
 }
@@ -760,19 +774,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 
   ui.definition->page()->runJavaScript(script);
   onJsActiveArticleChanged(id);
-//  if ( getArticlesList().contains( id.mid( 7 ) ) )
-//  {
 
-//      //gdArticleContents
-
-//    if ( moveToIt )
-//      ui.definition->page()->runJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
-
-//    //todo
-//    ui.definition->setProperty("currentArticle",id);
-//    ui.definition->page()->runJavaScript(
-//      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
-//  }
   ui.definition->setProperty("currentArticle",id);
 }
 
@@ -1072,6 +1074,43 @@ QString ArticleView::getMutedForGroup( unsigned group )
   }
 
   return QString();
+}
+
+QStringList ArticleView::getMutedDictionaries(unsigned group)
+{
+	if (dictionaryBarToggled && dictionaryBarToggled->isChecked())
+	{
+		// Dictionary bar is active -- mute the muted dictionaries
+		Instances::Group const* groupInstance = groups.findGroup(group);
+
+		// Find muted dictionaries for current group
+		Config::Group const* grp = cfg.getGroup(group);
+		Config::MutedDictionaries const* mutedDictionaries;
+		if (group == Instances::Group::AllGroupId||!grp)
+			mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
+		else
+			mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
+		if (!mutedDictionaries)
+			return QStringList();
+
+		QStringList mutedDicts;
+
+		if (groupInstance)
+		{
+			for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x)
+			{
+				QString id = QString::fromStdString(
+					groupInstance->dictionaries[x]->getId());
+
+				if (mutedDictionaries->contains(id))
+					mutedDicts.append(id);
+			}
+		}
+
+        return mutedDicts;
+	}
+
+	return QStringList();
 }
 
 void ArticleView::linkHovered ( const QString & link )
