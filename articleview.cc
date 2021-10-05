@@ -759,23 +759,15 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !ui.definition->isVisible() )
     return; // No action on background page, scrollIntoView there don't work
 
-  QString articleId=id.mid( 7 );
-  QString script=QString(""
-"var s=gdArticleContents;"
-"var index=s.split(' ').indexOf(%1);"
-"if(index>-1){"
-"   if(%2){"
-"       document.getElementById('%3').scrollIntoView(true);"
-"   }"
-""
-"   gdMakeArticleActive( '%1' );"
-"   currentArticle='%3';"
-"}").arg(articleId).arg(moveToIt).arg(id);
+  if(moveToIt){
+      QString script=QString(" document.getElementById('%1').scrollIntoView(true);").arg(id);
 
-  ui.definition->page()->runJavaScript(script);
-  onJsActiveArticleChanged(id);
+      ui.definition->page()->runJavaScript(script);
 
-  ui.definition->setProperty("currentArticle",id);
+      onJsActiveArticleChanged(id);
+
+      ui.definition->setProperty("currentArticle",id);
+  }
 }
 
 void ArticleView::selectCurrentArticle()
@@ -1086,7 +1078,7 @@ QStringList ArticleView::getMutedDictionaries(unsigned group)
 		// Find muted dictionaries for current group
 		Config::Group const* grp = cfg.getGroup(group);
 		Config::MutedDictionaries const* mutedDictionaries;
-		if (group == Instances::Group::AllGroupId||!grp)
+        if (group == Instances::Group::AllGroupId)
 			mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
 		else
 			mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
