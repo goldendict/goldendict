@@ -7,8 +7,6 @@
 #include <QWebEngineView>
 #include "config.hh"
 
-class ArticleInspector;
-
 /// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
@@ -55,7 +53,6 @@ protected:
 private:
 
   Config::Class * cfg;
-  ArticleInspector * inspector;
 
   bool midButtonPressed;
   bool selectionBySingleClick;
