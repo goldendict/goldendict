@@ -288,28 +288,20 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-  //todo
+  //todo acceptNavigationRequest
   //ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
 
-  //ui.definition->page()->setNetworkAccessManager( &articleNetMgr );
-
-  connect( ui.definition, SIGNAL( loadFinished( bool ) ),
-           this, SLOT( loadFinished( bool ) ) );
-
-//  connect( ui.definition->page(), SIGNAL( javaScriptWindowObjectCleared() ),
-//           this, SLOT( attachToJavaScript() ) );
+  connect( ui.definition, SIGNAL( loadFinished(bool) ),
+           this, SLOT( loadFinished(bool) ) );
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
-  connect( ui.definition->page(), SIGNAL( urlChanged( QUrl const & ) ),
-           this, SLOT( handleUrlChanged( QUrl const & ) ) );
+  connect( ui.definition->page(), SIGNAL( urlChanged(QUrl) ),
+           this, SLOT( handleUrlChanged(QUrl) ) );
 
   connect( ui.definition, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( contextMenuRequested( QPoint const & ) ) );
-
-//  connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
-//           this, SLOT( linkClicked( QUrl const & ) ) );
 
   connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &) ),
            this, SLOT( linkHovered ( const QString & ) ) );

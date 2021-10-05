@@ -5,7 +5,6 @@
 #include <QMouseEvent>
 #include <QWebEngineView>
 #include <QApplication>
-#include "articleinspector.hh"
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
@@ -13,9 +12,6 @@
 
 ArticleWebView::ArticleWebView( QWidget *parent ):
   QWebEngineView( parent ),
-#if QT_VERSION >= 0x040600
-  inspector( NULL ),
-#endif
   midButtonPressed( false ),
   selectionBySingleClick( false ),
   showInspectorDirectly( true )

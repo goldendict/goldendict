@@ -353,7 +353,6 @@ HEADERS += folding.hh \
     mdx.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
-    articleinspector.hh \
     delegate.hh \
     zim.hh \
     gddebug.hh \
@@ -486,7 +485,6 @@ SOURCES += folding.cc \
     mdx.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
-    articleinspector.cc \
     delegate.cc \
     zim.cc \
     gddebug.cc \
