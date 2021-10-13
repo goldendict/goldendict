@@ -980,7 +980,8 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
             linksPtr += sizeof(uint32_t);
           }
           wordNom += 1;
-          break;
+          if( searchMode == FTS::PlainText || searchMode == FTS::WholeWords )
+            break;
         }
       }
     }
@@ -1069,7 +1070,8 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
           allWordsLinks[ i ].insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
           linksPtr += sizeof(uint32_t);
         }
-        break;
+        if( searchMode == FTS::PlainText )
+          break;
       }
     }
   }
