@@ -824,7 +824,7 @@ bool ArticleDom::atSignFirstInLine()
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
+  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 ),pos(0)
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -891,7 +891,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   }
 
   iconv.reinit( encoding );
-
+  codec=QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -984,6 +984,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   gzseek( f, offset, SEEK_SET );
   readBufferPtr = readBuffer;
   readBufferLeft = 0;
+  pos = 0;
 
   if ( needExactEncoding )
     iconv.reinit( encoding );
@@ -994,23 +995,18 @@ DslScanner::~DslScanner() throw()
   gzclose( f );
 }
 
-bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
+bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-  offset = (size_t)( gztell( f ) - readBufferLeft );
+  offset = (size_t)( gztell( f ) - readBufferLeft+pos );
 
-  // For now we just read one char at a time
-  size_t readMultiple = distanceToBytes( 1 );
-
-  size_t leftInOut = wcharBuffer.size();
-
-  wchar * outPtr = &wcharBuffer.front();
-
-  for( ; ; )
+  for(;;)
   {
     // Check that we have bytes to read
-    if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
+    if ( readBufferLeft-pos < 2000 )
     {
+      readBufferPtr+=pos;
+      readBufferLeft-=pos;
       if ( !gzeof( f ) )
       {
         // To avoid having to deal with ring logic, we move the remaining bytes
@@ -1026,80 +1022,31 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
 
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
+        QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
+        fragStream = new QTextStream(frag) ;
+        fragStream->setCodec(codec);
       }
     }
 
-    if ( readBufferLeft < readMultiple )
-    {
-      // No more data. Return what we've got so far, forget the last byte if
-      // it was a 16-bit Unicode and a file had an odd number of bytes.
-      readBufferLeft = 0;
-
-      if ( outPtr != &wcharBuffer.front() )
-      {
-        // If there was a stray \r, remove it
-        if ( outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-        out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-        ++linesRead;
-
-        return true;
-      }
-      else
+    if(fragStream->atEnd())
         return false;
-    }
 
-    // Check that we have chars to write
-    if ( leftInOut < 2 ) // With 16-bit wchars, 2 is needed for a surrogate pair
-    {
-      wcharBuffer.resize( wcharBuffer.size() + 64 );
-      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64 - leftInOut;
-      leftInOut += 64;
-    }
+    QString line=fragStream->readLine();
+    pos = fragStream->pos();
+    linesRead++;
+    if(only_head_word &&( line.isEmpty()||line.at(0).isSpace()))
+        continue;
+#ifdef __WIN32
+    out=line.toStdU32String();
+#else
+    out=line.toStdWString();
+#endif
+    return true;
 
-    // Ok, now convert one char
-    size_t outBytesLeft = sizeof( wchar );
-
-    Iconv::Result r =
-      iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-
-    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar ) )
-    {
-      // Seems to be a surrogate pair with a 16-bit target wchar
-
-      outBytesLeft *= 2;
-      r = iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-      --leftInOut; // Complements the next decremention
-    }
-
-    if ( outBytesLeft )
-      throw exEncodingError();
-
-    --leftInOut;
-
-    // Have we got \n?
-    if ( outPtr[ -1 ] == L'\n' )
-    {
-      --outPtr;
-
-      // Now kill a \r if there is one, and return the result.
-      if ( outPtr != &wcharBuffer.front() && outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-      out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-      ++linesRead;
-
-      return true;
-    }
   }
 }
 
-bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
+bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , bool only_headword)
                  THROW_SPEC( Ex, Iconv::Ex )
 {
   wstring str;
@@ -1111,7 +1058,7 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
 
   do
   {
-    bool b = readNextLine( str, currentOffset );
+    bool b = readNextLine( str, currentOffset, only_headword );
 
     if( offset == 0 )
       offset = currentOffset;
@@ -1306,7 +1253,11 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           else
           {
             if( !inside_recurse )
-              result->merge( expanded );
+            {
+//                expanded.sort();
+//                result->merge(expanded );
+                result->splice(result->end(),expanded);
+            }
             return;
           }
         }
@@ -1330,8 +1281,10 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
   // Limit the amount of results to avoid excessive resource consumption
   if ( headwords->size() < 32 )
     headwords->push_back( str );
-  if( !inside_recurse )
-    result->merge( expanded );
+  if (!inside_recurse)
+  {
+         result->splice(result->end(),expanded);
+  }
 }
 
 static const wstring openBraces( GD_NATIVE_TO_WS( L"{{" ) );

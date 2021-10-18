@@ -2181,7 +2181,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( ; ; )
             {
               // Skip any whitespace
-              if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) )
+              if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset, true ) )
                 break;
               if ( curString.empty() || isDslWs( curString[ 0 ] ) )
                 continue;
@@ -2269,7 +2269,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           // Find the main headword
 
-          if ( !hasString && !scanner.readNextLineWithoutComments( curString, curOffset ) )
+          if ( !hasString && !scanner.readNextLineWithoutComments( curString, curOffset, true) )
             break; // Clean end of file
 
           hasString = false;
@@ -2367,7 +2367,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           // Skip the article's body
           for( ; ; )
           {
-            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset );
+              //todo ,return headword only?
+            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset);
             haveLine = false;
 
             if ( !hasString || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )
