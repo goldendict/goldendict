@@ -10,6 +10,8 @@
 #include <zlib.h>
 #include "dictionary.hh"
 #include "iconv.hh"
+#include <QTextCodec>
+#include <QByteArray>
 
 // Implementation details for Dsl, not part of its interface
 namespace Dsl {
@@ -119,11 +121,13 @@ class DslScanner
 {
   gzFile f;
   DslEncoding encoding;
+  QTextCodec* codec;
   DslIconv iconv;
   wstring dictionaryName;
   wstring langFrom, langTo;
   wstring soundDictionary;
-  char readBuffer[ 65536 ];
+  char readBuffer[ 3000 ];
+  QByteArray frag;
   char * readBufferPtr;
   size_t readBufferLeft;
   vector< wchar > wcharBuffer;

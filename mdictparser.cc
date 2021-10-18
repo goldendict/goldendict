@@ -29,14 +29,11 @@
 #include <QStringList>
 #include <QByteArray>
 #include <QFileInfo>
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 #include <QDomDocument>
 #include <QTextDocumentFragment>
 #include <QDataStream>
+#include <QTextCodec>
 
 #include "decompress.hh"
 #include "gddebug.hh"
@@ -184,38 +181,10 @@ QString MdictParser::toUtf16( const char * fromCode, const char * from, size_t f
   if ( !fromCode || !from )
     return QString();
 
-  iconv_t conv = iconv_open( "UTF-16//IGNORE", fromCode );
-  if ( conv == ( iconv_t ) - 1 )
-    return QString();
 
-  vector<char> result;
-  const static int CHUNK_SIZE = 512;
-  char buf[CHUNK_SIZE];
-  char ** inBuf = ( char ** )&from;
 
-  while ( fromSize )
-  {
-    char * outBuf = buf;
-    size_t outBytesLeft = CHUNK_SIZE;
-    size_t ret = iconv( conv, inBuf, &fromSize, &outBuf, &outBytesLeft );
-
-    if ( ret == ( size_t ) - 1 )
-    {
-      if ( errno != E2BIG )
-      {
-        // Real problem
-        result.clear();
-        break;
-      }
-    }
-
-    result.insert( result.end(), buf, buf + CHUNK_SIZE - outBytesLeft );
-  }
-
-  iconv_close( conv );
-  if ( result.size() <= 2 )
-    return QString();
-  return QString::fromUtf16( ( const ushort * )&result.front() );
+  QTextCodec *codec =QTextCodec::codecForName(fromCode);
+  return codec->toUnicode(from,fromSize);
 }
 
 bool MdictParser::decryptHeadWordIndex(char * buffer, qint64 len)

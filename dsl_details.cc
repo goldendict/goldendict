@@ -891,6 +891,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   }
 
   iconv.reinit( encoding );
+  codec=QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
 
   // We now can use our own readNextLine() function
 
@@ -1009,7 +1010,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
   for( ; ; )
   {
     // Check that we have bytes to read
-    if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
+    if ( readBufferLeft < 1000 ) // To convert one char, we need at most 4 bytes
     {
       if ( !gzeof( f ) )
       {
@@ -1026,76 +1027,25 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
 
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
+        frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
       }
     }
 
-    if ( readBufferLeft < readMultiple )
-    {
-      // No more data. Return what we've got so far, forget the last byte if
-      // it was a 16-bit Unicode and a file had an odd number of bytes.
-      readBufferLeft = 0;
 
-      if ( outPtr != &wcharBuffer.front() )
-      {
-        // If there was a stray \r, remove it
-        if ( outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-        out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-        ++linesRead;
-
-        return true;
-      }
-      else
+    //QByteArray frag=QByteArray::fromRawData(readBuffer,readBufferLeft);
+    QTextStream in(frag);
+    if(in.atEnd())
         return false;
-    }
+    in.setCodec(codec);
+    QString line=in.readLine();
+    qint64 pos=in.pos();
+    readBufferPtr+=pos;
+    readBufferLeft-=pos;
+    linesRead++;
+    out=line.toStdU32String();
+    frag.remove(0, pos);
+    return true;
 
-    // Check that we have chars to write
-    if ( leftInOut < 2 ) // With 16-bit wchars, 2 is needed for a surrogate pair
-    {
-      wcharBuffer.resize( wcharBuffer.size() + 64 );
-      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64 - leftInOut;
-      leftInOut += 64;
-    }
-
-    // Ok, now convert one char
-    size_t outBytesLeft = sizeof( wchar );
-
-    Iconv::Result r =
-      iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-
-    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar ) )
-    {
-      // Seems to be a surrogate pair with a 16-bit target wchar
-
-      outBytesLeft *= 2;
-      r = iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-      --leftInOut; // Complements the next decremention
-    }
-
-    if ( outBytesLeft )
-      throw exEncodingError();
-
-    --leftInOut;
-
-    // Have we got \n?
-    if ( outPtr[ -1 ] == L'\n' )
-    {
-      --outPtr;
-
-      // Now kill a \r if there is one, and return the result.
-      if ( outPtr != &wcharBuffer.front() && outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-      out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-      ++linesRead;
-
-      return true;
-    }
   }
 }
 
@@ -1330,8 +1280,12 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
   // Limit the amount of results to avoid excessive resource consumption
   if ( headwords->size() < 32 )
     headwords->push_back( str );
-  if( !inside_recurse )
-    result->merge( expanded );
+  if (!inside_recurse)
+  {
+      result->sort();
+      expanded.sort();
+      result->merge(expanded);
+  }
 }
 
 static const wstring openBraces( GD_NATIVE_TO_WS( L"{{" ) );
