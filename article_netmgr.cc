@@ -557,8 +557,7 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     request.setUrl( url );
 
     QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
-    connect(reply,&QNetworkReply::finished,this,[=](){
-        //QNetworkReply *reply1=qobject_cast<QNetworkReply*>(sender());
+    connect(reply,&QNetworkReply::finished,requestJob,[=](){
         requestJob->reply("text/html",reply);
     });
 }
