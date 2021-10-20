@@ -738,7 +738,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     return; // No action on background page, scrollIntoView there don't work
 
   if(moveToIt){
-      QString script=QString(" document.getElementById('%1').scrollIntoView(true);").arg(id);
+      QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
 
       ui.definition->page()->runJavaScript(script);
 
