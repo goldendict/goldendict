@@ -44,22 +44,11 @@
 #include "lionsupport.h"
 #endif
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
-
 void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &mess )
 {
   Q_UNUSED( context );
   QString message( mess );
   QByteArray msg = message.toUtf8().constData();
-
-#else
-
-void gdMessageHandler( QtMsgType type, const char *msg_ )
-{
-  QString message = QString::fromUtf8( msg_ );
-  QByteArray msg = QByteArray::fromRawData( msg_, strlen( msg_ ) );
-
-#endif
 
   switch (type) {
 
@@ -94,15 +83,12 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
       else
         fprintf(stderr, "Fatal: %s\n", msg.constData());
       abort();
-
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
     case QtInfoMsg:
       if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Info: " );
       else
         fprintf(stderr, "Info: %s\n", msg.constData());
       break;
-#endif
   }
 
   if( logFilePtr && logFilePtr->isOpen() )

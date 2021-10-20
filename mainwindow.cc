@@ -629,9 +629,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->setCornerWidget( &addTab, Qt::TopLeftCorner );
   //ui.tabWidget->setCornerWidget( &closeTab, Qt::TopRightCorner );
 
-#if QT_VERSION >= 0x040500
   ui.tabWidget->setMovable( true );
-#endif
 
 #ifndef Q_OS_WIN32
   ui.tabWidget->setDocumentMode( true );
