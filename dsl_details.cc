@@ -824,7 +824,7 @@ bool ArticleDom::atSignFirstInLine()
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
+  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 ),pos(0)
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -985,6 +985,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   gzseek( f, offset, SEEK_SET );
   readBufferPtr = readBuffer;
   readBufferLeft = 0;
+  pos = 0;
 
   if ( needExactEncoding )
     iconv.reinit( encoding );
@@ -998,20 +999,15 @@ DslScanner::~DslScanner() throw()
 bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-  offset = (size_t)( gztell( f ) - readBufferLeft );
-
-  // For now we just read one char at a time
-  size_t readMultiple = distanceToBytes( 1 );
-
-  size_t leftInOut = wcharBuffer.size();
-
-  wchar * outPtr = &wcharBuffer.front();
+  offset = (size_t)( gztell( f ) - readBufferLeft+pos );
 
   for( ; ; )
   {
     // Check that we have bytes to read
-    if ( readBufferLeft < 1000 ) // To convert one char, we need at most 4 bytes
+    if ( readBufferLeft-pos < 1000 )
     {
+      readBufferPtr+=pos;
+      readBufferLeft-=pos;
       if ( !gzeof( f ) )
       {
         // To avoid having to deal with ring logic, we move the remaining bytes
@@ -1027,23 +1023,26 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
 
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
-        frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
+        QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
+        //QTextStream in(frag);
+        fragStream = new QTextStream(frag) ;
+        fragStream->setCodec(codec);
       }
     }
 
 
     //QByteArray frag=QByteArray::fromRawData(readBuffer,readBufferLeft);
-    QTextStream in(frag);
-    if(in.atEnd())
+    if(fragStream->atEnd())
         return false;
-    in.setCodec(codec);
-    QString line=in.readLine();
-    qint64 pos=in.pos();
-    readBufferPtr+=pos;
-    readBufferLeft-=pos;
+
+    QString line=fragStream->readLine();
+    pos = fragStream->pos();
+//    qint64 pos= fragStream.pos();
+//    readBufferPtr+=pos;
+//    readBufferLeft-=pos;
     linesRead++;
     out=line.toStdU32String();
-    frag.remove(0, pos);
+    //frag.remove(0, pos);
     return true;
 
   }
@@ -1256,7 +1255,10 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           else
           {
             if( !inside_recurse )
-              result->merge( expanded );
+            {
+                expanded.sort();
+                result->merge(expanded );
+            }
             return;
           }
         }

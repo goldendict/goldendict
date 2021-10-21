@@ -127,9 +127,10 @@ class DslScanner
   wstring langFrom, langTo;
   wstring soundDictionary;
   char readBuffer[ 3000 ];
-  QByteArray frag;
+  QTextStream* fragStream;
   char * readBufferPtr;
   size_t readBufferLeft;
+  qint64 pos;
   vector< wchar > wcharBuffer;
   unsigned linesRead;
 
