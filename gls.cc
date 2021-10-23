@@ -72,14 +72,16 @@ class GlsScanner
 {
   gzFile f;
   Encoding encoding;
+  QTextCodec* codec;
   Iconv iconv;
   wstring dictionaryName;
   wstring dictionaryDecription, dictionaryAuthor;
   wstring langFrom, langTo;
-  char readBuffer[ 65536 ];
+  char readBuffer[ 10000 ];
   char * readBufferPtr;
   size_t readBufferLeft;
-  vector< wchar > wcharBuffer;
+  QTextStream* fragStream;
+  qint64 pos;
   unsigned linesRead;
 
 public:
@@ -147,7 +149,7 @@ public:
 
 GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Utf8 ), iconv( Iconv::GdWchar, Iconv::Utf8 ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
+  readBufferLeft( 0 ), linesRead( 0 ), pos(0)
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -198,7 +200,7 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   if( encoding != Utf8 )
     iconv.reinit( Iconv::GdWchar, getEncodingNameFor( encoding ) );
-
+  codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -269,106 +271,50 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-  offset = (size_t)( gztell( f ) - readBufferLeft );
+	offset = (size_t)(gztell(f) - readBufferLeft + pos);
 
-  // For now we just read one char at a time
-  size_t readMultiple = ( encoding == Utf16LE || encoding == Utf16BE ) ? 2 : 1;
+	{
+		// Check that we have bytes to read
+		if (readBufferLeft - pos < 2000)
+		{
+			readBufferPtr += pos;
+			readBufferLeft -= pos;
+			if (!gzeof(f))
+			{
+				// To avoid having to deal with ring logic, we move the remaining bytes
+				// to the beginning
+				memmove(readBuffer, readBufferPtr, readBufferLeft);
 
-  size_t leftInOut = wcharBuffer.size();
+				// Read some more bytes to readBuffer
+				int result = gzread(f, readBuffer + readBufferLeft,
+					sizeof(readBuffer) - readBufferLeft);
 
-  wchar * outPtr = &wcharBuffer.front();
+				if (result == -1)
+                    throw exCantReadGlsFile();
 
-  for( ; ; )
-  {
-    // Check that we have bytes to read
-    if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
-    {
-      if ( !gzeof( f ) )
-      {
-        // To avoid having to deal with ring logic, we move the remaining bytes
-        // to the beginning
-        memmove( readBuffer, readBufferPtr, readBufferLeft );
+				readBufferPtr = readBuffer;
+				readBufferLeft += (size_t)result;
+				QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
+				fragStream = new QTextStream(frag);
+				fragStream->setCodec(codec);
+			}
+		}
 
-        // Read some more bytes to readBuffer
-        int result = gzread( f, readBuffer + readBufferLeft,
-                             sizeof( readBuffer ) - readBufferLeft );
+		if (fragStream->atEnd())
+			return false;
 
-        if ( result == -1 )
-          throw exCantReadGlsFile();
+		QString line = fragStream->readLine();
+		pos = fragStream->pos();
+		linesRead++;
 
-        readBufferPtr = readBuffer;
-        readBufferLeft += (size_t) result;
-      }
-    }
+#ifdef __WIN32
+		out = line.toStdU32String();
+#else
+		out = line.toStdWString();
+#endif
+		return true;
 
-    if ( readBufferLeft < readMultiple )
-    {
-      // No more data. Return what we've got so far, forget the last byte if
-      // it was a 16-bit Unicode and a file had an odd number of bytes.
-      readBufferLeft = 0;
-
-      if ( outPtr != &wcharBuffer.front() )
-      {
-        // If there was a stray \r, remove it
-        if ( outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-        out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-        ++linesRead;
-
-        return true;
-      }
-      else
-        return false;
-    }
-
-    // Check that we have chars to write
-    if ( leftInOut < 2 ) // With 16-bit wchars, 2 is needed for a surrogate pair
-    {
-      wcharBuffer.resize( wcharBuffer.size() + 64 );
-      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64 - leftInOut;
-      leftInOut += 64;
-    }
-
-    // Ok, now convert one char
-    size_t outBytesLeft = sizeof( wchar );
-
-    Iconv::Result r =
-      iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-
-    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar ) )
-    {
-      // Seems to be a surrogate pair with a 16-bit target wchar
-
-      outBytesLeft *= 2;
-      r = iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-      --leftInOut; // Complements the next decremention
-    }
-
-    if ( outBytesLeft )
-      throw exEncodingError();
-
-    --leftInOut;
-
-    // Have we got \n?
-    if ( outPtr[ -1 ] == L'\n' )
-    {
-      --outPtr;
-
-      // Now kill a \r if there is one, and return the result.
-      if ( outPtr != &wcharBuffer.front() && outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-      out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-      ++linesRead;
-
-      return true;
-    }
-  }
+	}
 }
 
 GlsScanner::~GlsScanner() throw()
