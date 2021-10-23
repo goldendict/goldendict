@@ -126,7 +126,7 @@ class DslScanner
   wstring dictionaryName;
   wstring langFrom, langTo;
   wstring soundDictionary;
-  char readBuffer[ 3000 ];
+  char readBuffer[ 10000 ];
   QTextStream* fragStream;
   char * readBufferPtr;
   size_t readBufferLeft;
@@ -172,10 +172,10 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which start
   /// with #).
-  bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset, bool only_head_word = false ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Similar readNextLine but strip all DSL comments {{...}}
-  bool readNextLineWithoutComments( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLineWithoutComments( wstring &, size_t & offset, bool only_headword = false ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const

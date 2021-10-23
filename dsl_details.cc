@@ -892,7 +892,6 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   iconv.reinit( encoding );
   codec=QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
-
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -996,15 +995,15 @@ DslScanner::~DslScanner() throw()
   gzclose( f );
 }
 
-bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
+bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
   offset = (size_t)( gztell( f ) - readBufferLeft+pos );
 
-  for( ; ; )
+  for(;;)
   {
     // Check that we have bytes to read
-    if ( readBufferLeft-pos < 1000 )
+    if ( readBufferLeft-pos < 2000 )
     {
       readBufferPtr+=pos;
       readBufferLeft-=pos;
@@ -1024,31 +1023,30 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
         QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
-        //QTextStream in(frag);
         fragStream = new QTextStream(frag) ;
         fragStream->setCodec(codec);
       }
     }
 
-
-    //QByteArray frag=QByteArray::fromRawData(readBuffer,readBufferLeft);
     if(fragStream->atEnd())
         return false;
 
     QString line=fragStream->readLine();
     pos = fragStream->pos();
-//    qint64 pos= fragStream.pos();
-//    readBufferPtr+=pos;
-//    readBufferLeft-=pos;
     linesRead++;
+    if(only_head_word &&( line.isEmpty()||line.at(0).isSpace()))
+        continue;
+#ifdef __WIN32
     out=line.toStdU32String();
-    //frag.remove(0, pos);
+#else
+    out=line.toStdWString();
+#endif
     return true;
 
   }
 }
 
-bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
+bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , bool only_headword)
                  THROW_SPEC( Ex, Iconv::Ex )
 {
   wstring str;
@@ -1060,7 +1058,7 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
 
   do
   {
-    bool b = readNextLine( str, currentOffset );
+    bool b = readNextLine( str, currentOffset, only_headword );
 
     if( offset == 0 )
       offset = currentOffset;
@@ -1256,8 +1254,9 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           {
             if( !inside_recurse )
             {
-                expanded.sort();
-                result->merge(expanded );
+//                expanded.sort();
+//                result->merge(expanded );
+                result->splice(result->end(),expanded);
             }
             return;
           }
@@ -1284,9 +1283,7 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
     headwords->push_back( str );
   if (!inside_recurse)
   {
-      result->sort();
-      expanded.sort();
-      result->merge(expanded);
+         result->splice(result->end(),expanded);
   }
 }
 

@@ -7,7 +7,11 @@ namespace gd
 
   QString toQString( wstring const & in )
   {
+#ifdef __WIN32
     return QString::fromUcs4( in.c_str() );
+#else
+      return QString::fromStdWString(in);
+#endif
   }
 
   wstring toWString( QString const & in )
