@@ -824,7 +824,7 @@ bool ArticleDom::atSignFirstInLine()
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 ),pos(0)
+  readBufferLeft( 0 ), linesRead( 0 ), pos(0)
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -891,7 +891,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   }
 
   iconv.reinit( encoding );
-  codec=QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
+  codec = QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
   // We now can use our own readNextLine() function
 
   wstring str;

@@ -90,7 +90,7 @@ private:
 
   wchar const * stringPos, * lineStartPos;
 
-  class eot {};
+  class eot: std::exception {};
 
   wchar ch;
   bool escaped;
@@ -131,7 +131,6 @@ class DslScanner
   char * readBufferPtr;
   size_t readBufferLeft;
   qint64 pos;
-  vector< wchar > wcharBuffer;
   unsigned linesRead;
 
 public:
