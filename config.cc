@@ -2339,7 +2339,11 @@ QString getCacheDir() throw()
 {
   return isPortableVersion() ? portableHomeDirPath() + "/cache"
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  #ifdef HAVE_X11
+                             : QStandardPaths::writableLocation( QStandardPaths::GenericCacheLocation ) + "/goldendict";
+  #else
                              : QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
+  #endif
 #else
                              : QDesktopServices::storageLocation( QDesktopServices::CacheLocation );
 #endif
