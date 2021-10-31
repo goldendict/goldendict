@@ -28,10 +28,31 @@
 #include <QDesktopServices>
 #endif
 
+#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+// Whether XDG Base Directory specification might be followed.
+// Only Qt5 builds are supported, as Qt4 doesn't provide all functions needed
+// to get XDG Base Directory compliant locations.
+#define XDG_BASE_DIRECTORY_COMPLIANCE
+#endif
+
 namespace Config {
 
 namespace
 {
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+  const char xdgSubdirName[] = "goldendict";
+
+  QDir getDataDir()
+  {
+    QDir dir = QStandardPaths::writableLocation( QStandardPaths::GenericDataLocation );
+    dir.mkpath( xdgSubdirName );
+    if ( !dir.cd( xdgSubdirName ) )
+      throw exCantUseDataDir();
+
+    return dir;
+  }
+#endif
+
   QString portableHomeDirPath()
   {
     return QCoreApplication::applicationDirPath() + "/portable";
@@ -52,12 +73,12 @@ namespace
       result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
     #else
       char const * pathInHome = ".goldendict";
-      #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) && defined( HAVE_X11 )
+      #ifdef XDG_BASE_DIRECTORY_COMPLIANCE
         // check if an old config dir is present, otherwise use standards-compliant location
         if ( !result.exists( pathInHome ) )
         {
           result.setPath( QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) );
-          pathInHome = "goldendict";
+          pathInHome = xdgSubdirName;
         }
       #endif
     #endif
@@ -2214,7 +2235,7 @@ QString getIndexDir() THROW_SPEC( exError )
 {
   QDir result = getHomeDir();
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) && defined( HAVE_X11 )
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
   // store index in XDG_CACHE_HOME in non-portable version
   // *and* when an old index directory in GoldenDict home doesn't exist
   if ( !isPortableVersion() && !result.exists( "index" ) )
@@ -2238,7 +2259,18 @@ QString getPidFileName() THROW_SPEC( exError )
 
 QString getHistoryFileName() THROW_SPEC( exError )
 {
-  return getHomeDir().filePath( "history" );
+  QString homeHistoryPath = getHomeDir().filePath( "history" );
+
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+  // use separate data dir for history, if it is not already stored alongside
+  // configuration in non-portable mode
+  if ( !isPortableVersion() && !QFile::exists( homeHistoryPath ) )
+  {
+    return getDataDir().filePath( "history" );
+  }
+#endif
+
+  return homeHistoryPath;
 }
 
 QString getFavoritiesFileName() THROW_SPEC( exError )
