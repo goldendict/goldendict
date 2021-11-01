@@ -2214,6 +2214,15 @@ QString getIndexDir() THROW_SPEC( exError )
 {
   QDir result = getHomeDir();
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) && defined( HAVE_X11 )
+  // store index in XDG_CACHE_HOME in non-portable version
+  // *and* when an old index directory in GoldenDict home doesn't exist
+  if ( !isPortableVersion() && !result.exists( "index" ) )
+  {
+    result.setPath( getCacheDir() );
+  }
+#endif
+
   result.mkpath( "index" );
 
   if ( !result.cd( "index" ) )
