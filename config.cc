@@ -52,6 +52,14 @@ namespace
       result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
     #else
       char const * pathInHome = ".goldendict";
+      #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) && defined( HAVE_X11 )
+        // check if an old config dir is present, otherwise use standards-compliant location
+        if ( !result.exists( pathInHome ) )
+        {
+          result.setPath( QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) );
+          pathInHome = "goldendict";
+        }
+      #endif
     #endif
 
     result.mkpath( pathInHome );
