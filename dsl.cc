@@ -75,6 +75,7 @@ using gd::wstring;
 using gd::wchar;
 using std::vector;
 using std::list;
+using Utf8::Encoding;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
@@ -597,7 +598,7 @@ void DslDictionary::loadArticle( uint32_t address,
       {
         articleData =
           Iconv::toWstring(
-            getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+            Utf8::getEncodingNameFor( Encoding( idxHeader.dslEncoding ) ),
             articleBody, articleSize );
         free( articleBody );
 
@@ -1361,7 +1362,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     {
       articleData =
         Iconv::toWstring(
-          getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+          getEncodingNameFor( Encoding( idxHeader.dslEncoding ) ),
           articleBody, articleSize );
       free( articleBody );
 

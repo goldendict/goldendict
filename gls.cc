@@ -58,13 +58,7 @@ using gd::wchar;
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
 using BtreeIndexing::IndexInfo;
-
-enum Encoding
-{
-  Utf8,
-  Utf16LE,
-  Utf16BE
-};
+using Utf8::Encoding;
 
 /////////////// GlsScanner
 
@@ -73,15 +67,14 @@ class GlsScanner
   gzFile f;
   Encoding encoding;
   QTextCodec* codec;
-  Iconv iconv;
   wstring dictionaryName;
   wstring dictionaryDecription, dictionaryAuthor;
   wstring langFrom, langTo;
   char readBuffer[ 10000 ];
   char * readBufferPtr;
   size_t readBufferLeft;
-  QTextStream* fragStream;
-  qint64 pos;
+  const char* lineFeed;
+  int lineFeedLength;
   unsigned linesRead;
 
 public:
@@ -126,30 +119,15 @@ public:
   /// Reading begins from the first line after the headers (ones which end
   /// by the "### Glossary section:" line).
   bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
-
+  void initLineFeed(Utf8::Encoding e);
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
   { return linesRead; }
-
-  /// Returns a name to be passed to iconv for the given encoding.
-  static char const * getEncodingNameFor( Encoding e )
-  {
-    switch( e )
-    {
-      case Utf16LE:
-        return Iconv::Utf16Le;
-      case Utf16BE:
-        return "UTF-16BE";
-      case Utf8:
-      default:
-        return Iconv::Utf8;
-    }
-  }
 };
 
 GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
-  encoding( Utf8 ), iconv( Iconv::GdWchar, Iconv::Utf8 ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), linesRead( 0 ), pos(0)
+  encoding( Utf8::Utf8 ), readBufferPtr( readBuffer ),
+  readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -172,10 +150,10 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   // If the file begins with the dedicated Unicode marker, we just consume
   // it. If, on the other hand, it's not, we return the bytes back
   if ( firstBytes[ 0 ] == 0xFF && firstBytes[ 1 ] == 0xFE )
-    encoding = Utf16LE;
+    encoding = Utf8::Utf16LE;
   else
   if ( firstBytes[ 0 ] == 0xFE && firstBytes[ 1 ] == 0xFF )
-    encoding = Utf16BE;
+    encoding = Utf8::Utf16BE;
   else
   if ( firstBytes[ 0 ] == 0xEF && firstBytes[ 1 ] == 0xBB )
   {
@@ -186,7 +164,7 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       gzclose( f );
       throw exMalformedGlsFile( fileName );
     }
-    encoding = Utf8;
+    encoding = Utf8::Utf8;
   }
   else
   {
@@ -195,12 +173,10 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       gzclose( f );
       throw exCantOpen( fileName );
     }
-    encoding = Utf8;
+    encoding = Utf8::Utf8;
   }
 
-  if( encoding != Utf8 )
-    iconv.reinit( Iconv::GdWchar, getEncodingNameFor( encoding ) );
-  codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
+  codec = QTextCodec::codecForName(Utf8::getEncodingNameFor(encoding));
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -267,45 +243,74 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
     }
   }
 }
+void GlsScanner::initLineFeed(Utf8::Encoding e)
+{
+    switch (e)
+    {
+    case Utf8::Utf16LE:
+        lineFeed= new char[2] {0x0A,0};
+        lineFeedLength = 2;
+        break;
+    case Utf8::Utf16BE:
+        lineFeed = new char[2] { 0,0x0A};
+        lineFeedLength = 2;
+        break;
+    case Utf8::Windows1252:
 
+    case Utf8::Windows1251:
+
+    case Utf8::Utf8:
+
+    case Utf8::Windows1250:
+    default:
+        lineFeedLength = 1;
+        lineFeed = new char[1] {0x0A};
+    }
+}
 bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-	offset = (size_t)(gztell(f) - readBufferLeft + pos);
+    offset = (size_t)(gztell(f) - readBufferLeft);
 
-	{
-		// Check that we have bytes to read
-		if (readBufferLeft - pos < 2000)
-		{
-			readBufferPtr += pos;
-			readBufferLeft -= pos;
-			if (!gzeof(f))
-			{
-				// To avoid having to deal with ring logic, we move the remaining bytes
-				// to the beginning
-				memmove(readBuffer, readBufferPtr, readBufferLeft);
+    {
+      // Check that we have bytes to read
+      if ( readBufferLeft < 5000 )
+      {
+        if ( !gzeof( f ) )
+        {
+          // To avoid having to deal with ring logic, we move the remaining bytes
+          // to the beginning
+          memmove( readBuffer, readBufferPtr, readBufferLeft );
 
-				// Read some more bytes to readBuffer
-				int result = gzread(f, readBuffer + readBufferLeft,
-					sizeof(readBuffer) - readBufferLeft);
+          // Read some more bytes to readBuffer
+          int result = gzread( f, readBuffer + readBufferLeft,
+                               sizeof( readBuffer ) - readBufferLeft );
 
-				if (result == -1)
-                    throw exCantReadGlsFile();
+		  if (result == -1)
+            throw exCantReadGlsFile();
 
-				readBufferPtr = readBuffer;
-				readBufferLeft += (size_t)result;
-				QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
-				fragStream = new QTextStream(frag);
-				fragStream->setCodec(codec);
-			}
-		}
+          readBufferPtr = readBuffer;
+          readBufferLeft += (size_t) result;
+        }
+      }
+      if(readBufferLeft<=0)
+          return false;
 
-		if (fragStream->atEnd())
-			return false;
+      int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed,lineFeedLength);
+      if(pos==-1)
+          return false;
+      QString line = codec->toUnicode(readBufferPtr, pos);
+      if(line.endsWith("\n"))
+          line.chop(1);
+      if(line.endsWith("\r"))
+          line.chop(1);
 
-		QString line = fragStream->readLine();
-		pos = fragStream->pos();
-		linesRead++;
+      if(pos>readBufferLeft){
+          pos=readBufferLeft;
+      }
+      readBufferLeft -= pos;
+      readBufferPtr += pos;
+      linesRead++;
 
 #ifdef __WIN32
 		out = line.toStdU32String();
@@ -314,7 +319,7 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
 #endif
 		return true;
 
-	}
+    }
 }
 
 GlsScanner::~GlsScanner() throw()
@@ -669,7 +674,7 @@ void GlsDictionary::loadArticleText( uint32_t address,
   }
   else
   {
-    string articleData = Iconv::toUtf8( GlsScanner::getEncodingNameFor( Encoding( idxHeader.glsEncoding ) ), articleBody, articleSize );
+    string articleData = Iconv::toUtf8( Utf8::getEncodingNameFor( Encoding( idxHeader.glsEncoding ) ), articleBody, articleSize );
     string::size_type start_pos = 0, end_pos = 0;
 
     for( ; ; )

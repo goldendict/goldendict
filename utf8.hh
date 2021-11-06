@@ -1,6 +1,7 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
-
+#ifndef __UTF8_HH_INCLUDED__
+#define __UTF8_HH_INCLUDED__
 #include <cstdio>
 #include <string>
 #include "cpp_features.hh"
@@ -12,6 +13,17 @@
 /// Besides, utf8 is quite ubiquitous now, and its use is spreaded over many
 /// places.
 namespace Utf8 {
+
+// Those are possible encodings for .dsl files
+enum Encoding
+{
+  Utf16LE,
+  Utf16BE,
+  Windows1252,
+  Windows1251,
+  Windows1250,
+  Utf8 // This is an extension. Detected solely by the UTF8 BOM.
+};
 
 using std::string;
 using gd::wstring;
@@ -40,4 +52,8 @@ wstring decode( string const & ) THROW_SPEC( exCantDecode );
 /// Linux but was messing up strings under Windows.
 bool isspace( int c );
 
+//get the first line in string s1. -1 if not found
+int findFirstLinePosition( char* s1,int s1length, const char* s2,int s2length);
+char const* getEncodingNameFor(Encoding e);
 }
+#endif
