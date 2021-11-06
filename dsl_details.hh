@@ -44,6 +44,8 @@ string findCodeForDslId( int id );
 
 bool isAtSignFirst( wstring const & str );
 
+char const* getEncodingNameFor(DslEncoding e);
+
 /// Parses the DSL language, representing it in its structural DOM form.
 struct ArticleDom
 {
@@ -104,17 +106,6 @@ private:
   wstring headword;
 };
 
-/// A adapted version of Iconv which takes Dsl encoding and decodes to wchar.
-class DslIconv: public Iconv
-{
-public:
-  DslIconv( DslEncoding ) THROW_SPEC( Iconv::Ex );
-  void reinit( DslEncoding ) THROW_SPEC( Iconv::Ex );
-
-  /// Returns a name to be passed to iconv for the given dsl encoding.
-  static char const * getEncodingNameFor( DslEncoding );
-};
-
 /// Opens the .dsl or .dsl.dz file and allows line-by-line reading. Auto-detects
 /// the encoding, and reads all headers by itself.
 class DslScanner
@@ -122,7 +113,6 @@ class DslScanner
   gzFile f;
   DslEncoding encoding;
   QTextCodec* codec;
-  DslIconv iconv;
   wstring dictionaryName;
   wstring langFrom, langTo;
   wstring soundDictionary;

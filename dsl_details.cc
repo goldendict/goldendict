@@ -159,6 +159,26 @@ bool isAtSignFirst( wstring const & str )
   return reg.indexIn( gd::toQString( str ) ) == 0;
 }
 
+char const* getEncodingNameFor(DslEncoding e)
+{
+    switch (e)
+    {
+    case Utf16LE:
+        return "UTF-16LE";
+    case Utf16BE:
+        return "UTF-16BE";
+    case Windows1252:
+        return "WINDOWS-1252";
+    case Windows1251:
+        return "WINDOWS-1251";
+    case Details::Utf8:
+        return "UTF-8";
+    case Windows1250:
+    default:
+        return "WINDOWS-1250";
+    }
+}
+
 /////////////// ArticleDom
 
 wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
@@ -837,7 +857,7 @@ bool ArticleDom::atSignFirstInLine()
 /////////////// DslScanner
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
-  encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
+  encoding( Windows1252 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
@@ -905,7 +925,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   }
 
   //iconv.reinit( encoding );
-  codec = QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
+  codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
   initLineFeed(encoding);
   // We now can use our own readNextLine() function
 
@@ -999,9 +1019,6 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   gzseek( f, offset, SEEK_SET );
   readBufferPtr = readBuffer;
   readBufferLeft = 0;
-
-  if ( needExactEncoding )
-    iconv.reinit( encoding );
 }
 
 DslScanner::~DslScanner() throw()
@@ -1105,37 +1122,6 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , b
 }
 
 /////////////// DslScanner
-
-DslIconv::DslIconv( DslEncoding e ) THROW_SPEC( Iconv::Ex ):
-  Iconv( Iconv::GdWchar, getEncodingNameFor( e ) )
-{
-}
-
-void DslIconv::reinit( DslEncoding e ) THROW_SPEC( Iconv::Ex )
-{
-  Iconv::reinit( Iconv::GdWchar, getEncodingNameFor( e ) );
-}
-
-char const * DslIconv::getEncodingNameFor( DslEncoding e )
-{
-  switch( e )
-  {
-    case Utf16LE:
-      return "UTF-16LE";
-    case Utf16BE:
-      return "UTF-16BE";
-    case Windows1252:
-      return "WINDOWS-1252";
-    case Windows1251:
-      return "WINDOWS-1251";
-    case Details::Utf8:
-      return "UTF-8";
-    case Windows1250:
-    default:
-      return "WINDOWS-1250";
-  }
-}
-
 
 void DslScanner::initLineFeed(DslEncoding e)
 {

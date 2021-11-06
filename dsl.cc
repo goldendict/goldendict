@@ -596,8 +596,8 @@ void DslDictionary::loadArticle( uint32_t address,
       try
       {
         articleData =
-          DslIconv::toWstring(
-            DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+          Iconv::toWstring(
+            getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
             articleBody, articleSize );
         free( articleBody );
 
@@ -1360,8 +1360,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     try
     {
       articleData =
-        DslIconv::toWstring(
-          DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+        Iconv::toWstring(
+          getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
           articleBody, articleSize );
       free( articleBody );
 
