@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <wctype.h>
+#include <algorithm>
 
 namespace Dsl {
 namespace Details {
@@ -39,6 +40,18 @@ int wcscasecmp( const wchar *s1, const wchar *s2 )
 }
 
 #endif
+
+//get the first line in string s1. -1 if not found
+int findFirstLinePosition( char* s1,int s1length, const char* s2,int s2length)
+{
+    char* pos = std::search(s1,s1+s1length, s2, s2+s2length);
+
+    if (pos == s1 + s1length)
+        return pos-s1;
+
+    //the line size.
+    return pos- s1+ s2length;
+}
 
 static DSLLangCode LangCodes[] =
 {
@@ -144,6 +157,26 @@ bool isAtSignFirst( wstring const & str )
   // Test if '@' is first in string except spaces and dsl tags
   QRegExp reg( "[ \\t]*(?:\\[[^\\]]+\\][ \\t]*)*@", Qt::CaseInsensitive, QRegExp::RegExp2 );
   return reg.indexIn( gd::toQString( str ) ) == 0;
+}
+
+char const* getEncodingNameFor(DslEncoding e)
+{
+    switch (e)
+    {
+    case Utf16LE:
+        return "UTF-16LE";
+    case Utf16BE:
+        return "UTF-16BE";
+    case Windows1252:
+        return "WINDOWS-1252";
+    case Windows1251:
+        return "WINDOWS-1251";
+    case Details::Utf8:
+        return "UTF-8";
+    case Windows1250:
+    default:
+        return "WINDOWS-1250";
+    }
 }
 
 /////////////// ArticleDom
@@ -780,35 +813,36 @@ void ArticleDom::nextChar() THROW_SPEC( eot )
 {
   if ( !*stringPos )
     throw eot();
+  else{
+      ch = *stringPos++;
 
-  ch = *stringPos++;
+      if ( ch == L'\\' )
+      {
+        if ( !*stringPos )
+          throw eot();
 
-  if ( ch == L'\\' )
-  {
-    if ( !*stringPos )
-      throw eot();
+        ch = *stringPos++;
 
-    ch = *stringPos++;
+        escaped = true;
+      }
+      else
+      if ( ch == L'[' && *stringPos == L'[' )
+      {
+        ++stringPos;
+        escaped = true;
+      }
+      else
+      if ( ch == L']' && *stringPos == L']' )
+      {
+        ++stringPos;
+        escaped = true;
+      }
+      else
+        escaped = false;
 
-    escaped = true;
+      if( ch == '\n' || ch == '\r' )
+        lineStartPos = stringPos;
   }
-  else
-  if ( ch == L'[' && *stringPos == L'[' )
-  {
-    ++stringPos;
-    escaped = true;
-  }
-  else
-  if ( ch == L']' && *stringPos == L']' )
-  {
-    ++stringPos;
-    escaped = true;
-  }
-  else
-    escaped = false;
-
-  if( ch == '\n' || ch == '\r' )
-    lineStartPos = stringPos;
 }
 
 bool ArticleDom::atSignFirstInLine()
@@ -823,8 +857,8 @@ bool ArticleDom::atSignFirstInLine()
 /////////////// DslScanner
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
-  encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), linesRead( 0 ), pos(0)
+  encoding( Windows1252 ), readBufferPtr( readBuffer ),
+  readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -890,8 +924,9 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
     }
   }
 
-  iconv.reinit( encoding );
-  codec = QTextCodec::codecForName(iconv.getEncodingNameFor(encoding));
+  //iconv.reinit( encoding );
+  codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
+  initLineFeed(encoding);
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -984,10 +1019,6 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   gzseek( f, offset, SEEK_SET );
   readBufferPtr = readBuffer;
   readBufferLeft = 0;
-  pos = 0;
-
-  if ( needExactEncoding )
-    iconv.reinit( encoding );
 }
 
 DslScanner::~DslScanner() throw()
@@ -998,15 +1029,15 @@ DslScanner::~DslScanner() throw()
 bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-  offset = (size_t)( gztell( f ) - readBufferLeft+pos );
+  offset = (size_t)( gztell( f ) - readBufferLeft/*+pos*/ );
 
   for(;;)
   {
     // Check that we have bytes to read
-    if ( readBufferLeft-pos < 2000 )
+    if ( readBufferLeft < 5000 )
     {
-      readBufferPtr+=pos;
-      readBufferLeft-=pos;
+      //readBufferPtr+=pos;
+      //readBufferLeft-=pos;
       if ( !gzeof( f ) )
       {
         // To avoid having to deal with ring logic, we move the remaining bytes
@@ -1022,17 +1053,32 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
 
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
-        QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
+        /*QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
         fragStream = new QTextStream(frag) ;
-        fragStream->setCodec(codec);
+        fragStream->setCodec(codec);*/
       }
     }
 
-    if(fragStream->atEnd())
-        return false;
+    //if(fragStream->atEnd())
+    //    return false;
 
-    QString line=fragStream->readLine();
-    pos = fragStream->pos();
+    if(readBufferLeft<=0)
+        return false;
+    //QString line=fragStream->readLine();
+    int pos = findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed,lineFeedLength);
+    if(pos==-1)
+        return false;
+    QString line = codec->toUnicode(readBufferPtr, pos);
+    if(line.endsWith("\n"))
+        line.chop(1);
+    if(line.endsWith("\r"))
+        line.chop(1);
+
+    if(pos>readBufferLeft){
+        pos=readBufferLeft;
+    }
+    readBufferLeft -= pos;
+    readBufferPtr += pos;
     linesRead++;
     if(only_head_word &&( line.isEmpty()||line.at(0).isSpace()))
         continue;
@@ -1077,36 +1123,30 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , b
 
 /////////////// DslScanner
 
-DslIconv::DslIconv( DslEncoding e ) THROW_SPEC( Iconv::Ex ):
-  Iconv( Iconv::GdWchar, getEncodingNameFor( e ) )
+void DslScanner::initLineFeed(DslEncoding e)
 {
+	switch (e)
+	{
+	case Utf16LE:
+        lineFeed= new char[2] {0x0A,0};
+        lineFeedLength = 2;
+        break;
+	case Utf16BE:
+        lineFeed = new char[2] { 0,0x0A};
+        lineFeedLength = 2;
+        break;
+	case Windows1252:
+		
+	case Windows1251:
+		
+	case Details::Utf8:
+		
+	case Windows1250:
+	default:
+        lineFeedLength = 1;
+        lineFeed = new char[1] {0x0A};
+	}
 }
-
-void DslIconv::reinit( DslEncoding e ) THROW_SPEC( Iconv::Ex )
-{
-  Iconv::reinit( Iconv::GdWchar, getEncodingNameFor( e ) );
-}
-
-char const * DslIconv::getEncodingNameFor( DslEncoding e )
-{
-  switch( e )
-  {
-    case Utf16LE:
-      return "UTF-16LE";
-    case Utf16BE:
-      return "UTF-16BE";
-    case Windows1252:
-      return "WINDOWS-1252";
-    case Windows1251:
-      return "WINDOWS-1251";
-    case Details::Utf8:
-      return "UTF-8";
-    case Windows1250:
-    default:
-      return "WINDOWS-1250";
-  }
-}
-
 
 void processUnsortedParts( wstring & str, bool strip )
 {
