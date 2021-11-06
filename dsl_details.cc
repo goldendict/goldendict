@@ -19,6 +19,7 @@ namespace Details {
 
 using gd::wstring;
 using std::list;
+using Utf8::Encoding;
 
 #ifndef __linux__
 
@@ -40,18 +41,6 @@ int wcscasecmp( const wchar *s1, const wchar *s2 )
 }
 
 #endif
-
-//get the first line in string s1. -1 if not found
-int findFirstLinePosition( char* s1,int s1length, const char* s2,int s2length)
-{
-    char* pos = std::search(s1,s1+s1length, s2, s2+s2length);
-
-    if (pos == s1 + s1length)
-        return pos-s1;
-
-    //the line size.
-    return pos- s1+ s2length;
-}
 
 static DSLLangCode LangCodes[] =
 {
@@ -159,25 +148,7 @@ bool isAtSignFirst( wstring const & str )
   return reg.indexIn( gd::toQString( str ) ) == 0;
 }
 
-char const* getEncodingNameFor(DslEncoding e)
-{
-    switch (e)
-    {
-    case Utf16LE:
-        return "UTF-16LE";
-    case Utf16BE:
-        return "UTF-16BE";
-    case Windows1252:
-        return "WINDOWS-1252";
-    case Windows1251:
-        return "WINDOWS-1251";
-    case Details::Utf8:
-        return "UTF-8";
-    case Windows1250:
-    default:
-        return "WINDOWS-1250";
-    }
-}
+
 
 /////////////// ArticleDom
 
@@ -811,38 +782,36 @@ void ArticleDom::closeTag( wstring const & name,
 
 void ArticleDom::nextChar() THROW_SPEC( eot )
 {
-  if ( !*stringPos )
-    throw eot();
-  else{
-      ch = *stringPos++;
+    if ( !*stringPos )
+        throw eot();
 
-      if ( ch == L'\\' )
-      {
+    ch = *stringPos++;
+
+    if ( ch == L'\\' )
+    {
         if ( !*stringPos )
-          throw eot();
+            throw eot();
 
         ch = *stringPos++;
 
         escaped = true;
-      }
-      else
-      if ( ch == L'[' && *stringPos == L'[' )
-      {
+    }
+    else if ( ch == L'[' && *stringPos == L'[' )
+    {
         ++stringPos;
         escaped = true;
-      }
-      else
-      if ( ch == L']' && *stringPos == L']' )
-      {
+    }
+    else if ( ch == L']' && *stringPos == L']' )
+    {
         ++stringPos;
         escaped = true;
-      }
-      else
+    }
+    else
         escaped = false;
 
-      if( ch == '\n' || ch == '\r' )
+    if( ch == '\n' || ch == '\r' )
         lineStartPos = stringPos;
-  }
+
 }
 
 bool ArticleDom::atSignFirstInLine()
@@ -857,7 +826,7 @@ bool ArticleDom::atSignFirstInLine()
 /////////////// DslScanner
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
-  encoding( Windows1252 ), readBufferPtr( readBuffer ),
+  encoding( Utf8::Windows1252 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
@@ -884,10 +853,10 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   // If the file begins with the dedicated Unicode marker, we just consume
   // it. If, on the other hand, it's not, we return the bytes back
   if ( firstBytes[ 0 ] == 0xFF && firstBytes[ 1 ] == 0xFE )
-    encoding = Utf16LE;
+    encoding = Utf8::Utf16LE;
   else
   if ( firstBytes[ 0 ] == 0xFE && firstBytes[ 1 ] == 0xFF )
-    encoding = Utf16BE;
+    encoding = Utf8::Utf16BE;
   else
   if ( firstBytes[ 0 ] == 0xEF && firstBytes[ 1 ] == 0xBB )
   {
@@ -899,22 +868,22 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       throw exMalformedDslFile( fileName );
     }
     
-    encoding = Utf8;
+    encoding = Utf8::Utf8;
   }
   else
   {
     if ( firstBytes[ 0 ] && !firstBytes[ 1 ] )
-      encoding = Utf16LE;
+      encoding = Utf8::Utf16LE;
     else
     if ( !firstBytes[ 0 ] && firstBytes[ 1 ] )
-      encoding = Utf16BE;
+      encoding = Utf8::Utf16BE;
     else
     {
       // Ok, this doesn't look like 16-bit Unicode. We will start with a
       // 8-bit encoding with an intent to find out the exact one from
       // the header.
       needExactEncoding = true;
-      encoding = Windows1251;
+      encoding = Utf8::Windows1251;
     }
 
     if ( gzrewind( f ) )
@@ -926,7 +895,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   //iconv.reinit( encoding );
   codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
-  initLineFeed(encoding);
+  lineFeed=Utf8::initLineFeed(encoding);
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -995,13 +964,13 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       }
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Latin" ) ) )
-        encoding = Windows1252;
+        encoding = Utf8::Windows1252;
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Cyrillic" ) ) )
-        encoding = Windows1251;
+        encoding = Utf8::Windows1251;
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"EasternEuropean" ) ) )
-        encoding = Windows1250;
+        encoding = Utf8::Windows1250;
       else
       {
         gzclose( f );
@@ -1036,8 +1005,6 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
     // Check that we have bytes to read
     if ( readBufferLeft < 5000 )
     {
-      //readBufferPtr+=pos;
-      //readBufferLeft-=pos;
       if ( !gzeof( f ) )
       {
         // To avoid having to deal with ring logic, we move the remaining bytes
@@ -1053,19 +1020,12 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
 
         readBufferPtr = readBuffer;
         readBufferLeft += (size_t) result;
-        /*QByteArray frag = QByteArray::fromRawData(readBuffer, readBufferLeft);
-        fragStream = new QTextStream(frag) ;
-        fragStream->setCodec(codec);*/
       }
     }
-
-    //if(fragStream->atEnd())
-    //    return false;
-
     if(readBufferLeft<=0)
         return false;
-    //QString line=fragStream->readLine();
-    int pos = findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed,lineFeedLength);
+
+    int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed.lineFeed,lineFeed.length);
     if(pos==-1)
         return false;
     QString line = codec->toUnicode(readBufferPtr, pos);
@@ -1122,31 +1082,6 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , b
 }
 
 /////////////// DslScanner
-
-void DslScanner::initLineFeed(DslEncoding e)
-{
-	switch (e)
-	{
-	case Utf16LE:
-        lineFeed= new char[2] {0x0A,0};
-        lineFeedLength = 2;
-        break;
-	case Utf16BE:
-        lineFeed = new char[2] { 0,0x0A};
-        lineFeedLength = 2;
-        break;
-	case Windows1252:
-		
-	case Windows1251:
-		
-	case Details::Utf8:
-		
-	case Windows1250:
-	default:
-        lineFeedLength = 1;
-        lineFeed = new char[1] {0x0A};
-	}
-}
 
 void processUnsortedParts( wstring & str, bool strip )
 {

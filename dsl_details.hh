@@ -12,6 +12,7 @@
 #include "iconv.hh"
 #include <QTextCodec>
 #include <QByteArray>
+#include "utf8.hh"
 
 // Implementation details for Dsl, not part of its interface
 namespace Dsl {
@@ -22,17 +23,10 @@ using gd::wstring;
 using gd::wchar;
 using std::list;
 using std::vector;
+using Utf8::Encoding;
+using Utf8::LineFeed;
 
-// Those are possible encodings for .dsl files
-enum DslEncoding
-{
-  Utf16LE,
-  Utf16BE,
-  Windows1252,
-  Windows1251,
-  Windows1250,
-  Utf8 // This is an extension. Detected solely by the UTF8 BOM.
-};
+
 
 struct DSLLangCode
 {
@@ -43,8 +37,6 @@ struct DSLLangCode
 string findCodeForDslId( int id );
 
 bool isAtSignFirst( wstring const & str );
-
-char const* getEncodingNameFor(DslEncoding e);
 
 /// Parses the DSL language, representing it in its structural DOM form.
 struct ArticleDom
@@ -111,7 +103,7 @@ private:
 class DslScanner
 {
   gzFile f;
-  DslEncoding encoding;
+  Encoding encoding;
   QTextCodec* codec;
   wstring dictionaryName;
   wstring langFrom, langTo;
@@ -119,8 +111,7 @@ class DslScanner
   char readBuffer[ 65536 ];
   QTextStream* fragStream;
   char * readBufferPtr;
-  const char* lineFeed;
-  int lineFeedLength;
+  LineFeed lineFeed;
   size_t readBufferLeft;
   //qint64 pos;
   unsigned linesRead;
@@ -138,9 +129,8 @@ public:
   ~DslScanner() throw();
 
   /// Returns the detected encoding of this file.
-  DslEncoding getEncoding() const
+  Encoding getEncoding() const
   { return encoding; }
-  void initLineFeed(DslEncoding e);
 
   /// Returns the dictionary's name, as was read from file's headers.
   wstring const & getDictionaryName() const
@@ -207,8 +197,8 @@ inline size_t DslScanner::distanceToBytes( size_t x ) const
 {
   switch( encoding )
   {
-    case Utf16LE:
-    case Utf16BE:
+    case Utf8::Utf16LE:
+    case Utf8::Utf16BE:
       return x*2;
     default:
       return x;
