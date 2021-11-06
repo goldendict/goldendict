@@ -126,12 +126,13 @@ class DslScanner
   wstring dictionaryName;
   wstring langFrom, langTo;
   wstring soundDictionary;
-  char readBuffer[ 10000 ];
+  char readBuffer[ 65536 ];
   QTextStream* fragStream;
   char * readBufferPtr;
+  const char* lineFeed;
+  int lineFeedLength;
   size_t readBufferLeft;
-  qint64 pos;
-  vector< wchar > wcharBuffer;
+  //qint64 pos;
   unsigned linesRead;
 
 public:
@@ -149,6 +150,7 @@ public:
   /// Returns the detected encoding of this file.
   DslEncoding getEncoding() const
   { return encoding; }
+  void initLineFeed(DslEncoding e);
 
   /// Returns the dictionary's name, as was read from file's headers.
   wstring const & getDictionaryName() const
