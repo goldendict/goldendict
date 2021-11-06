@@ -208,4 +208,31 @@ char const* getEncodingNameFor(Encoding e)
     }
 }
 
+LineFeed initLineFeed(Encoding e)
+{
+    LineFeed lf;
+	switch (e)
+	{
+	case Utf8::Utf16LE:
+        lf.lineFeed= new char[2]{ 0x0A,0 };
+        lf.length = 2;
+		break;
+	case Utf8::Utf16BE:
+        lf.lineFeed = new char[2]{ 0,0x0A };
+        lf.length = 2;
+		break;
+	case Utf8::Windows1252:
+
+	case Utf8::Windows1251:
+
+	case Utf8::Utf8:
+
+	case Utf8::Windows1250:
+	default:
+        lf.length = 1;
+        lf.lineFeed = new char[1]{ 0x0A };
+	}
+    return lf;
+}
+
 }

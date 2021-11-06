@@ -24,6 +24,7 @@ using gd::wchar;
 using std::list;
 using std::vector;
 using Utf8::Encoding;
+using Utf8::LineFeed;
 
 
 
@@ -110,8 +111,7 @@ class DslScanner
   char readBuffer[ 65536 ];
   QTextStream* fragStream;
   char * readBufferPtr;
-  const char* lineFeed;
-  int lineFeedLength;
+  LineFeed lineFeed;
   size_t readBufferLeft;
   //qint64 pos;
   unsigned linesRead;
@@ -131,7 +131,6 @@ public:
   /// Returns the detected encoding of this file.
   Encoding getEncoding() const
   { return encoding; }
-  void initLineFeed(Encoding e);
 
   /// Returns the dictionary's name, as was read from file's headers.
   wstring const & getDictionaryName() const

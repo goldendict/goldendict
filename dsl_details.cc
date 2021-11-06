@@ -895,7 +895,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   //iconv.reinit( encoding );
   codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
-  initLineFeed(encoding);
+  lineFeed=Utf8::initLineFeed(encoding);
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -1025,7 +1025,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
     if(readBufferLeft<=0)
         return false;
 
-    int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed,lineFeedLength);
+    int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed.lineFeed,lineFeed.length);
     if(pos==-1)
         return false;
     QString line = codec->toUnicode(readBufferPtr, pos);
@@ -1082,31 +1082,6 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , b
 }
 
 /////////////// DslScanner
-
-void DslScanner::initLineFeed(Utf8::Encoding e)
-{
-	switch (e)
-	{
-    case Utf8::Utf16LE:
-        lineFeed= new char[2] {0x0A,0};
-        lineFeedLength = 2;
-        break;
-    case Utf8::Utf16BE:
-        lineFeed = new char[2] { 0,0x0A};
-        lineFeedLength = 2;
-        break;
-    case Utf8::Windows1252:
-		
-    case Utf8::Windows1251:
-		
-    case Utf8::Utf8:
-		
-    case Utf8::Windows1250:
-	default:
-        lineFeedLength = 1;
-        lineFeed = new char[1] {0x0A};
-	}
-}
 
 void processUnsortedParts( wstring & str, bool strip )
 {

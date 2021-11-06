@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 #ifndef __UTF8_HH_INCLUDED__
 #define __UTF8_HH_INCLUDED__
+
 #include <cstdio>
 #include <string>
 #include "cpp_features.hh"
@@ -55,5 +56,15 @@ bool isspace( int c );
 //get the first line in string s1. -1 if not found
 int findFirstLinePosition( char* s1,int s1length, const char* s2,int s2length);
 char const* getEncodingNameFor(Encoding e);
+
+struct LineFeed
+{
+	int length;
+	char* lineFeed;
+
+};
+
+LineFeed initLineFeed(Encoding e);
 }
+
 #endif

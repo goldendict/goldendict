@@ -59,6 +59,7 @@ using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
 using BtreeIndexing::IndexInfo;
 using Utf8::Encoding;
+using Utf8::LineFeed;
 
 /////////////// GlsScanner
 
@@ -73,8 +74,7 @@ class GlsScanner
   char readBuffer[ 10000 ];
   char * readBufferPtr;
   size_t readBufferLeft;
-  const char* lineFeed;
-  int lineFeedLength;
+  LineFeed lineFeed;
   unsigned linesRead;
 
 public:
@@ -119,7 +119,6 @@ public:
   /// Reading begins from the first line after the headers (ones which end
   /// by the "### Glossary section:" line).
   bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
-  void initLineFeed(Utf8::Encoding e);
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
   { return linesRead; }
@@ -178,6 +177,7 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   codec = QTextCodec::codecForName(Utf8::getEncodingNameFor(encoding));
   // We now can use our own readNextLine() function
+  lineFeed = Utf8::initLineFeed(encoding);
 
   wstring str;
   wstring *currentField = 0;
@@ -243,30 +243,7 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
     }
   }
 }
-void GlsScanner::initLineFeed(Utf8::Encoding e)
-{
-    switch (e)
-    {
-    case Utf8::Utf16LE:
-        lineFeed= new char[2] {0x0A,0};
-        lineFeedLength = 2;
-        break;
-    case Utf8::Utf16BE:
-        lineFeed = new char[2] { 0,0x0A};
-        lineFeedLength = 2;
-        break;
-    case Utf8::Windows1252:
 
-    case Utf8::Windows1251:
-
-    case Utf8::Utf8:
-
-    case Utf8::Windows1250:
-    default:
-        lineFeedLength = 1;
-        lineFeed = new char[1] {0x0A};
-    }
-}
 bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
@@ -286,7 +263,7 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
           int result = gzread( f, readBuffer + readBufferLeft,
                                sizeof( readBuffer ) - readBufferLeft );
 
-		  if (result == -1)
+          if (result == -1)
             throw exCantReadGlsFile();
 
           readBufferPtr = readBuffer;
@@ -296,7 +273,7 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
       if(readBufferLeft<=0)
           return false;
 
-      int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed,lineFeedLength);
+      int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed.lineFeed,lineFeed.length);
       if(pos==-1)
           return false;
       QString line = codec->toUnicode(readBufferPtr, pos);
