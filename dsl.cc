@@ -215,13 +215,7 @@ public:
   inline virtual string getResourceDir2() const
   { return resourceDir2; }
 
-  #if 0
-  virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception )
-  {
-    return vector< wstring >();
-  }
-  #endif
+
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
@@ -2005,42 +1999,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
   return new DslResourceRequest( *this, name );
 }
 
-#if 0
-static void findCorrespondingFiles( string const & ifo,
-                                    string & idx, string & dict, string & syn,
-                                    bool needSyn )
-{
-  string base( ifo, 0, ifo.size() - 3 );
-
-  if ( !(
-          tryPossibleName( base + "idx", idx ) ||
-          tryPossibleName( base + "idx.gz", idx ) ||
-          tryPossibleName( base + "idx.dz", idx ) ||
-          tryPossibleName( base + "IDX", idx ) ||
-          tryPossibleName( base + "IDX.GZ", idx ) ||
-          tryPossibleName( base + "IDX.DZ", idx )
-      ) )
-    throw exNoIdxFile( ifo );
-
-  if ( !(
-          tryPossibleName( base + "dict", dict ) ||
-          tryPossibleName( base + "dict.dz", dict ) ||
-          tryPossibleName( base + "DICT", dict ) ||
-          tryPossibleName( base + "dict.DZ", dict )
-      ) )
-    throw exNoDictFile( ifo );
-
-  if ( needSyn && !(
-                     tryPossibleName( base + "syn", syn ) ||
-                     tryPossibleName( base + "syn.gz", syn ) ||
-                     tryPossibleName( base + "syn.dz", syn ) ||
-                     tryPossibleName( base + "SYN", syn ) ||
-                     tryPossibleName( base + "SYN.GZ", syn ) ||
-                     tryPossibleName( base + "SYN.DZ", syn )
-     ) )
-    throw exNoSynFile( ifo );
-}
-#endif
 
 sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const & searchString,
                                                                  int searchMode, bool matchCase,
