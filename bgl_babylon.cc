@@ -94,9 +94,6 @@ bool Babylon::open()
     return false;
   }
 
-  if( fseek( f, i, SEEK_SET ) ) /* can't seek - emulate */
-      for(int j=0;j < i - 6;j++) fgetc( f );
-
   if( ferror( f ) || feof( f ) )
   {
     fclose( f );
@@ -108,14 +105,10 @@ bool Babylon::open()
 
   fflush( f );
 
-#ifdef Q_OS_MAC
   /* Under Mac OS X the above technique don't set reopen position properly */
   int fn = DUP( fileno( f ) );
   lseek( fn, i, SEEK_SET );
   file = gzdopen( fn, "r" );
-#else
-  file = gzdopen( DUP( fileno( f ) ), "r" );
-#endif
 
   fclose( f );
 
