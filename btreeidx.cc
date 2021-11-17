@@ -676,30 +676,6 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         }
       }
 
-      #if 0
-      DPRINTF( "The winner is %s, compareResult = %d\n", closestString, compareResult );
-
-      if ( closestString != ptr )
-      {
-        char const * left = closestString -1;
-
-        while( left != ptr && left[ -1 ] )
-          --left;
-
-        DPRINTF( "To the left: %s\n", left );
-      }
-      else
-        DPRINTF( "To the lest -- nothing\n" );
-
-      char const * right = closestString + strlen( closestString ) + 1;
-
-      if ( right != leafEnd )
-      {
-        DPRINTF( "To the right: %s\n", right );
-      }
-      else
-        DPRINTF( "To the right -- nothing\n" );
-      #endif
 
       // Now, whatever the outcome (compareResult) is, we need to find
       // entry number for the closestMatch string.

@@ -358,11 +358,6 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
           resourceHandler->handleBabylonResource( filename,
                                                   block.data + pos,
                                                   block.length - pos );
-    #if 0
-            FILE *ifile = gd_fopen(filename.c_str(), "w");
-            fwrite(block.data + pos, 1, block.length -pos, ifile);
-            fclose(ifile);
-    #endif
         break;
       }
       case 1:

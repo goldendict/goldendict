@@ -95,31 +95,6 @@ void ForvoDictionary::loadIcon() throw()
   if ( dictionaryIconLoaded )
     return;
 
-// Experimental code to generate icon -- but the flags clutter the interface too
-// much and we're better with a single icon.
-#if 0
-  if ( languageCode.size() == 2 )
-  {
-    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toLatin1().data() ) );
-
-    if ( countryCode.size() )
-    {
-      QImage flag( QString( ":/flags/%1.png" ).arg( countryCode.toLower() ) );
-
-      if ( !flag.isNull() )
-      {
-        QImage img( ":/icons/forvo_icon_base.png" );
-
-        {
-          QPainter painter( &img );
-          painter.drawImage( QPoint( 5, 7 ), flag );
-        }
-
-        return QIcon( QPixmap::fromImage( img ) );
-      }
-    }
-  }
-#endif
   dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/forvo.png" );
   dictionaryIconLoaded = true;
 }
