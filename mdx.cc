@@ -205,6 +205,7 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
   QSemaphore deferredInitRunnableExited;
 
   string initError;
+  QString cacheDirName;
 
 public:
 
@@ -270,6 +271,9 @@ public:
               && !fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive )
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
+
+  QString getCachedFileName( QString name );
+
 protected:
 
   virtual void loadIcon() throw();
@@ -284,6 +288,8 @@ private:
 
   /// Process resource links (images, audios, etc)
   QString & filterResource( QString const & articleId, QString & article );
+
+  void removeDirectory( QString const & directory );
 
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
@@ -330,6 +336,10 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   if( !Dictionary::needToRebuildIndex( dictionaryFiles, ftsIdxName )
       && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
+
+  cacheDirName = QDir::tempPath() + QDir::separator()
+                 + QString::fromUtf8( getId().c_str() )
+                 + ".cache";
 }
 
 MdxDictionary::~MdxDictionary()
@@ -341,6 +351,8 @@ MdxDictionary::~MdxDictionary()
     deferredInitRunnableExited.acquire();
 
   dictFile.close();
+
+  removeDirectory( cacheDirName );
 }
 
 //////// MdxDictionary::deferredInit()
@@ -1041,7 +1053,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
-  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)",
+  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
                                  QRegularExpression::CaseInsensitiveOption );
   QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
                                     QRegularExpression::CaseInsensitiveOption );
@@ -1139,11 +1151,12 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                                    "\\1\"bres://" + id + "/\\2\"" );
     }
     else
-    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0 )
+    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0
+        || linkType.compare( "source" ) == 0 )
     {
       // javascripts and images
       QRegularExpressionMatch match = inlineScriptRe.match( linkTxt );
-      if( linkType.at( 0 ) == 's'
+      if( linkType.at( 1 ) == 'c' // "script" tag
           && match.hasMatch() && match.capturedLength() == linkTxt.length() )
       {
         // skip inline scripts
@@ -1161,9 +1174,21 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         match = srcRe.match( linkTxt );
         if( match.hasMatch() )
         {
-          QString newText = match.captured( 1 ) + match.captured( 2 )
-                            + "bres://" + id + "/"
-                            + match.captured( 3 ) + match.captured( 2 );
+          QString newText;
+          if( linkType.at( 1 ) == 'o' ) // "source" tag
+          {
+            QString filename = match.captured( 3 );
+            QString newName = getCachedFileName( filename );
+            newName.replace( '\\', '/' );
+            newText = match.captured( 1 ) + match.captured( 2 )
+                      + "file:///" + newName + match.captured( 2 );
+          }
+          else
+          {
+            newText = match.captured( 1 ) + match.captured( 2 )
+                      + "bres://" + id + "/"
+                      + match.captured( 3 ) + match.captured( 2 );
+          }
           newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
         }
         else
@@ -1192,7 +1217,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
-  QRegExp allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script)(?:\\s+[^>]+|\\s*)>)", Qt::CaseInsensitive );
+  QRegExp allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)", Qt::CaseInsensitive );
   QRegExp wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*)((?:#[^>]*)?)\\2", Qt::CaseInsensitive );
   wordCrossLink.setMinimal( true );
 
@@ -1281,7 +1306,8 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                                    "\\1\"bres://" + id + "/\\2\"" );
     }
     else
-    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0 )
+    if( linkType.compare( "script" ) == 0 || linkType.compare( "img" ) == 0
+        || linkType.compare( "source" ) == 0 )
     {
       // javascripts and images
       if( linkType.at( 0 ) == 's' && inlineScriptRe.exactMatch( linkTxt ) )
@@ -1298,9 +1324,21 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         int pos = srcRe.indexIn( linkTxt );
         if( pos >= 0 )
         {
-          QString newText = srcRe.cap( 1 ) + srcRe.cap( 2 )
-                            + "bres://" + id + "/"
-                            + srcRe.cap( 3 ) + srcRe.cap( 2 );
+          QString newText;
+          if( linkType.at( 1 ) == 'o' ) // "source" tag
+          {
+            QString filename = srcRe.cap( 3 );
+            QString newName = getCachedFileName( filename );
+            newName.replace( '\\', '/' );
+            newText = srcRe.cap( 1 ) + srcRe.cap( 2 )
+                      + "file:///" + newName + srcRe.cap( 2 );
+          }
+          else
+          {
+            newText = srcRe.cap( 1 ) + srcRe.cap( 2 )
+                      + "bres://" + id + "/"
+                      + srcRe.cap( 3 ) + srcRe.cap( 2 );
+          }
           newLink = linkTxt.replace( pos, srcRe.cap().length(), newText );
         }
         else
@@ -1320,6 +1358,154 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   return article;
 }
 #endif
+
+QString MdxDictionary::getCachedFileName( QString filename )
+{
+  QDir dir;
+  QFileInfo info( cacheDirName );
+  if( !info.exists() || !info.isDir() )
+  {
+    if( !dir.mkdir( cacheDirName ) )
+    {
+      gdWarning( "Mdx: can't create cache directory \"%s\"", cacheDirName.toUtf8().data() );
+      return QString();
+    }
+  }
+
+  // Create subfolders if needed
+
+  QString name = filename;
+  name.replace( '/', '\\' );
+  QStringList list = name.split( '\\' );
+  int subFolders = list.size() - 1;
+  if( subFolders > 0 )
+  {
+    QString dirName = cacheDirName;
+    for( int i = 0; i < subFolders; i++ )
+    {
+      dirName += QDir::separator() + list.at( i );
+      QFileInfo dirInfo( dirName );
+      if( !dirInfo.exists() )
+      {
+        if( !dir.mkdir( dirName ) )
+        {
+          gdWarning( "Mdx: can't create cache directory \"%s\"", dirName.toUtf8().data() );
+          return QString();
+        }
+      }
+    }
+  }
+
+  QString fullName = cacheDirName + QDir::separator() + filename;
+
+  info.setFile( fullName );
+  if( !info.exists() )
+  {
+    QFile f( fullName );
+    if( f.open( QFile::WriteOnly ) )
+    {
+      gd::wstring resourceName = FsEncoding::decode( filename.toStdString() );
+      vector< char > data;
+
+      // In order to prevent recursive internal redirection...
+      set< QByteArray > resourceIncluded;
+
+      for ( ;; )
+      {
+
+        string u8ResourceName = Utf8::encode( resourceName );
+        QCryptographicHash hash( QCryptographicHash::Md5 );
+        hash.addData( u8ResourceName.data(), u8ResourceName.size() );
+        if ( !resourceIncluded.insert( hash.result() ).second )
+          continue;
+
+        // Convert to the Windows separator
+        std::replace( resourceName.begin(), resourceName.end(), '/', '\\' );
+        if ( resourceName[ 0 ] != '\\' )
+        {
+          resourceName.insert( 0, 1, '\\' );
+        }
+
+        try
+        {
+          // local file takes precedence
+          string fn = FsEncoding::dirname( getDictionaryFilenames()[ 0 ] ) +
+                      FsEncoding::separator() + u8ResourceName;
+          File::loadFromFile( fn, data );
+        }
+        catch ( File::exCantOpen & )
+        {
+          for ( vector< sptr< IndexedMdd > >::const_iterator i = mddResources.begin();
+                i != mddResources.end(); i++  )
+          {
+            sptr< IndexedMdd > mddResource = *i;
+            if ( mddResource->loadFile( resourceName, data ) )
+              break;
+          }
+        }
+
+        // Check if this file has a redirection
+        // Always encoded in UTF16-LE
+        // L"@@@LINK="
+        static const char pattern[16] =
+        {
+          '@', '\0', '@', '\0', '@', '\0', 'L', '\0', 'I', '\0', 'N', '\0', 'K', '\0', '=', '\0'
+        };
+
+        if ( data.size() > sizeof( pattern ) )
+        {
+          if ( memcmp( &data.front(),  pattern, sizeof( pattern ) ) == 0 )
+          {
+            data.push_back( '\0' );
+            data.push_back( '\0' );
+            QString target = MdictParser::toUtf16( "UTF-16LE", &data.front() + sizeof( pattern ),
+                                                   data.size() - sizeof( pattern ) );
+            resourceName = gd::toWString( target.trimmed() );
+            continue;
+          }
+        }
+        break;
+      }
+
+      qint64 n = 0;
+      if( !data.empty() )
+        n = f.write( data.data(), data.size() );
+
+      f.close();
+
+      if( n < (qint64)data.size() )
+      {
+        gdWarning( "Mdx: file \"%s\" writing error: \"%s\"", fullName.toUtf8().data(),
+                                                             f.errorString().toUtf8().data() );
+        return QString();
+      }
+    }
+    else
+    {
+      gdWarning( "Mdx: file \"%s\" creating error: \"%s\"", fullName.toUtf8().data(),
+                                                            f.errorString().toUtf8().data() );
+      return QString();
+    }
+  }
+  return fullName;
+}
+
+void MdxDictionary::removeDirectory( QString const & directory )
+{
+  QDir dir( directory );
+  Q_FOREACH( QFileInfo info, dir.entryInfoList( QDir::NoDotAndDotDot
+                                                | QDir::AllDirs
+                                                | QDir::Files,
+                                                QDir::DirsFirst))
+  {
+    if( info.isDir() )
+      removeDirectory( info.absoluteFilePath() );
+    else
+      QFile::remove( info.absoluteFilePath() );
+  }
+
+  dir.rmdir( directory );
+}
 
 static void addEntryToIndex( QString const & word, uint32_t offset, IndexedWords & indexedWords )
 {
