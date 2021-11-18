@@ -25,7 +25,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static const Qt::WindowFlags defaultUnpinnedWindowFlags =
 
-#if defined (Q_OS_WIN) || ( defined (Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK( 5, 3, 0 ) )
+#if defined (Q_OS_WIN)
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup

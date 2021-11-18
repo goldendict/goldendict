@@ -599,7 +599,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.menuHistory, SIGNAL( aboutToShow() ),
            this, SLOT( updateHistoryMenu() ) );
 
-#if !defined( HAVE_X11 ) || QT_VERSION < QT_VERSION_CHECK( 5, 0, 0 )
+#if !defined( HAVE_X11 )
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
   // Do not create dummy tray icon in X. Cause QT5 failed to upgrade systemtray context menu.
