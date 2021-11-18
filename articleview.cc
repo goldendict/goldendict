@@ -2418,9 +2418,6 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
     if ( ui.searchCaseSensitive->isChecked() )
       f |= QWebEnginePage::FindCaseSensitively;
-#if QT_VERSION >= 0x040600  && QT_VERSION <= 0x050600
-    f |= QWebEnginePage::HighlightAllOccurrences;
-#endif
 
     ui.definition->findText( "", f );
 
@@ -2678,14 +2675,8 @@ void ArticleView::highlightFTSResults()
   if( ftsSearchMatchCase )
     flags |= QWebEnginePage::FindCaseSensitively;
 
-#if QT_VERSION >= 0x040600
- // flags |= QWebEnginePage::HighlightAllOccurrences;
-
   for( int x = 0; x < allMatches.size(); x++ )
     ui.definition->findText( allMatches.at( x ), flags );
-
- // flags &= ~QWebEnginePage::HighlightAllOccurrences;
-#endif
 
   if( !allMatches.isEmpty() )
   {
