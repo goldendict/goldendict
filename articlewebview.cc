@@ -20,10 +20,6 @@ ArticleWebView::ArticleWebView( QWidget *parent ):
 
 ArticleWebView::~ArticleWebView()
 {
-#if QT_VERSION >= 0x040600 && QT_VERSION <0x050500
-  if ( inspector )
-    inspector->deleteLater();
-#endif
 }
 
 void ArticleWebView::setUp( Config::Class * cfg )
@@ -33,29 +29,6 @@ void ArticleWebView::setUp( Config::Class * cfg )
 
 void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
 {
-#if QT_VERSION >= 0x040600 && QT_VERSION <0x050500
-  if ( action == QWebEnginePage::InspectElement )
-  {
-    // Get or create inspector instance for current view.
-    if ( !inspector )
-    {
-      inspector = new ArticleInspector( cfg );
-      inspector->setPage( page() );
-      connect( this, SIGNAL( destroyed() ), inspector, SLOT( beforeClosed() ) );
-    }
-
-    if ( showInspectorDirectly )
-    {
-      showInspectorDirectly = false;
-      // Bring up the inspector window and set focus
-      inspector->show();
-      inspector->activateWindow();
-      inspector->raise();
-      return;
-    }
-  }
-#endif
-
   QWebEngineView::triggerPageAction( action, checked );
 }
 
