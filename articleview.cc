@@ -24,11 +24,6 @@
 #include "gestures.hh"
 #include "fulltextsearch.hh"
 
-#if QT_VERSION >= 0x040600 && QT_VERSION <= 0x050500
-#include <QWebElement>
-#include <QWebElementCollection>
-#endif
-
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
@@ -2503,10 +2498,6 @@ bool ArticleView::closeSearch()
     ui.definition->setFocus();
 
     QWebEnginePage::FindFlags flags ( 0 );
-
-  #if QT_VERSION >= 0x040600 && QT_VERSION<=0x050500
-    flags |= QWebEnginePage::HighlightAllOccurrences;
-  #endif
 
     ui.definition->findText( "", flags );
 
