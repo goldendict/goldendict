@@ -703,12 +703,12 @@
   <ItemGroup>
     <ClCompile Include="delegate.cc" />
     <ClCompile Include="ffmpegaudio.cc" />
+    <ClCompile Include="gico_schemahandler.cpp" />
     <ClCompile Include="mouseover_win32\ThTypes.c" />
     <ClCompile Include="aard.cc" />
     <ClCompile Include="about.cc" />
     <ClCompile Include="article_maker.cc" />
     <ClCompile Include="article_netmgr.cc" />
-    <ClCompile Include="articleinspector.cc" />
     <ClCompile Include="articleview.cc" />
     <ClCompile Include="articlewebview.cc" />
     <ClCompile Include="atomic_rename.cc" />
@@ -817,7 +817,6 @@
     <QtMOCCompile Include="about.hh" />
     <QtMOCCompile Include="article_maker.hh" />
     <QtMOCCompile Include="article_netmgr.hh" />
-    <QtMOCCompile Include="articleinspector.hh" />
     <QtMOCCompile Include="articleview.hh" />
     <QtMOCCompile Include="articlewebview.hh" />
     <ClInclude Include="atomic_rename.hh" />
@@ -837,7 +836,6 @@
     <QtMOCCompile Include="dictionarybar.hh" />
     <QtMOCCompile Include="dictspanewidget.hh" />
     <ClInclude Include="dictzip.h" />
-    <ClInclude Include="dprintf.hh" />
     <ClInclude Include="dsl.hh" />
     <ClInclude Include="dsl_details.hh" />
     <QtMOCCompile Include="editdictionaries.hh" />
@@ -852,6 +850,7 @@
     <QtMOCCompile Include="gdappstyle.hh" />
     <ClInclude Include="german.hh" />
     <ClInclude Include="greektranslit.hh" />
+    <QtMOCCompile Include="gico_schemahandler.h" />
     <QtMOCCompile Include="groupcombobox.hh" />
     <QtMOCCompile Include="groups.hh" />
     <QtMOCCompile Include="groups_widgets.hh" />

@@ -62,9 +62,6 @@
     <ClCompile Include="article_netmgr.cc">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="articleinspector.cc">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="articleview.cc">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -359,6 +356,9 @@
     <ClCompile Include="zipsounds.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="gico_schemahandler.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mouseover_win32\ThTypes.h">
@@ -401,9 +401,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="dictzip.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="dprintf.hh">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="dsl.hh">
@@ -1585,9 +1582,6 @@
     <QtMOCCompile Include="article_netmgr.hh">
       <Filter>Headers</Filter>
     </QtMOCCompile>
-    <QtMOCCompile Include="articleinspector.hh">
-      <Filter>Headers</Filter>
-    </QtMOCCompile>
     <QtMOCCompile Include="articleview.hh">
       <Filter>Headers</Filter>
     </QtMOCCompile>
@@ -1707,6 +1701,9 @@
     </QtMOCCompile>
     <QtMOCCompile Include="wordlist.hh">
       <Filter>Headers</Filter>
+    </QtMOCCompile>
+    <QtMOCCompile Include="gico_schemahandler.h">
+      <Filter>Generated Files</Filter>
     </QtMOCCompile>
   </ItemGroup>
   <ItemGroup>
