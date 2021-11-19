@@ -173,35 +173,13 @@ public:
 };
 
 /// End of DiacriticsHandler class
-
-static QVariant runJavaScriptVariableSafe( QWebEnginePage * frame, const QString & variable )
-{
-    qDebug(QString("runJavaScriptVariableSafe with:%1").arg(variable).toLatin1().data());
-    QVariant variant;
-    QSemaphore semaph(1);
-    semaph.acquire(1);
-   frame->runJavaScript(
-        QString( "( typeof( %1 ) !== 'undefined' && %1 !== undefined ) ? %1 : null;" )
-              .arg( variable ),[&semaph,&variant](const QVariant & result){
-      //variant=result;
-      //semaph.release(1);
-  } );
-
-   //todo
-   //semaph.acquire(1);
-   return variant;
-}
-
-static QVariant runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
+static void runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
     qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
-    QVariant variant;
 
     frame->runJavaScript(variable, [](const QVariant& result) {
 
         });
-
-    return variant;
 }
 
 namespace {
@@ -538,19 +516,6 @@ void ArticleView::loadFinished( bool )
 //"}"
 //));
 
-  bool wereFrames = false;
-
-
-  //todo
-  if ( wereFrames )
-  {
-    // There's some sort of glitch -- sometimes you need to move a mouse
-
-    QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), 0, 0 );
-
-    qApp->sendEvent( ui.definition, &ev );
-  }
-
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
   if ( userDataVariant.isValid() )
@@ -656,7 +621,6 @@ void ArticleView::handleTitleChanged( QString const & title )
 
 void ArticleView::handleUrlChanged( QUrl const & url )
 {
-    lastUrl = url.url();
   QIcon icon;
 
   unsigned group = getGroup( url );
@@ -768,7 +732,8 @@ bool ArticleView::isFramedArticle( QString const & ca )
   if ( ca.isEmpty() )
     return false;
 
-  return  runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
+  runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) );
+  return false;
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -791,7 +756,6 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
     if ( isFramedArticle( ca ) )
     {
-    	//todo ,ÓÃ±äÁ¿´úÌæ×îºóµÄurl
       //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
       QVariant result ;
 
@@ -2572,7 +2536,6 @@ void ArticleView::highlightFTSResults()
   else
     regString = regString.remove( AccentMarkHandler::accentMark() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regexp;
   if( Qt4x5::Url::hasQueryItem( url, "wildcards" ) )
     regexp.setPattern( wildcardsToRegexp( regString ) );
@@ -2589,17 +2552,7 @@ void ArticleView::highlightFTSResults()
 
   if( regexp.pattern().isEmpty() || !regexp.isValid() )
     return;
-#else
-  QRegExp regexp( regString,
-                  Qt4x5::Url::hasQueryItem( url, "matchcase" ) ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                  Qt4x5::Url::hasQueryItem( url, "wildcards" ) ? QRegExp::WildcardUnix : QRegExp::RegExp2 );
 
-
-  if( regexp.pattern().isEmpty() )
-    return;
-
-  regexp.setMinimal( true );
-#endif
 
   sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
                                            new DiacriticsHandler : new AccentMarkHandler;

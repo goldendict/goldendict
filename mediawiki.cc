@@ -374,7 +374,6 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // Replace all ":" in links, remove '#' part in links to other articles
             int pos = 0;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpression regLinks( "<a\\s+href=\"/([^\"]+)\"" );
             QString articleNewString;
             QRegularExpressionMatchIterator it = regLinks.globalMatch( articleString );
@@ -385,23 +384,12 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               pos = match.capturedEnd();
 
               QString link = match.captured( 1 );
-#else
-            QRegExp regLinks( "<a\\s+href=\"/([^\"]+)\"" );
-            for( ; ; )
-            {
-              pos = regLinks.indexIn( articleString, pos );
-              if( pos < 0 )
-                break;
-              QString link = regLinks.cap( 1 );
-#endif
+
               if( link.indexOf( "://" ) >= 0 )
               {
                 // External link
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
                 articleNewString += match.captured();
-#else
-                pos += regLinks.cap().size();
-#endif
+
                 continue;
               }
 
@@ -417,7 +405,6 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               }
 
               QString newLink = QString( "<a href=\"/%1\"" ).arg( link );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
               articleNewString += newLink;
             }
             if( pos )
@@ -426,26 +413,17 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               articleString = articleNewString;
               articleNewString.clear();
             }
-#else
-              articleString.replace( pos, regLinks.cap().size(), newLink );
-              pos += newLink.size();
-            }
-#endif
+
 
             QUrl wikiUrl( url );
             wikiUrl.setPath( "/" );
   
             // Update any special index.php pages to be absolute
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             articleString.replace( QRegularExpression( "<a\\shref=\"(/([\\w]*/)*index.php\\?)" ),
                                    QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
-#else
-            articleString.replace( QRegExp( "<a\\shref=\"(/(\\w*/)*index.php\\?)" ),
-                                   QString( "<a href=\"%1\\1" ).arg( wikiUrl.toString() ) );
-#endif
+
 
             // audio tag
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpression reg1( "<audio\\s.+?</audio>",
                                      QRegularExpression::CaseInsensitiveOption
                                      | QRegularExpression::DotMatchesEverythingOption );
@@ -477,36 +455,10 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               articleString = articleNewString;
               articleNewString.clear();
             }
-#else
-            QRegExp reg1( "<audio\\s.+</audio>", Qt::CaseInsensitive, QRegExp::RegExp2 );
-            reg1.setMinimal( true );
-            QRegExp reg2( "<source\\s+src=\"([^\"]+)", Qt::CaseInsensitive );
-            pos = 0;
-            for( ; ; )
-            {
-              pos = reg1.indexIn( articleString, pos );
-              if( pos >= 0 )
-              {
-                QString tag = reg1.cap();
-                if( reg2.indexIn( tag ) >= 0 )
-                {
-                  QString ref = reg2.cap( 1 );
-                  QString audio_url = "<a href=\"" + ref
-                                      + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
-                  articleString.replace( pos, tag.length(), audio_url );
-                }
-                pos += 1;
-              }
-              else
-                break;
-            }
-#endif
+
             // audio url
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
-#else
-            articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
-#endif
+
                                    QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
                                                                          this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
 
@@ -519,7 +471,6 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( "<a href=\"/wiki/", "<a href=\"" );
 
             // In those strings, change any underscores to spaces
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpression rxLink( "<a\\s+href=\"[^/:\">#]+" );
             it = rxLink.globalMatch( articleString );
             while( it.hasNext() )
@@ -529,23 +480,11 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
                 if( articleString.at( i ) == QChar( '_') )
                   articleString[ i ] = ' ';
             }
-#else
-            for( ; ; )
-            {
-              QString before = articleString;
-              articleString.replace( QRegExp( "<a href=\"([^/:\">#]*)_" ), "<a href=\"\\1 " );
-  
-              if ( articleString == before )
-                break;
-            }
-#endif
+
             //fix file: url
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             articleString.replace( QRegularExpression( "<a\\s+href=\"([^:/\"]*file%3A[^/\"]+\")",
                                                        QRegularExpression::CaseInsensitiveOption ),
-#else
-            articleString.replace( QRegExp("<a\\s+href=\"([^:/\"]*file%3A[^/\"]+\")", Qt::CaseInsensitive ),
-#endif
+
                                    QString( "<a href=\"%1/index.php?title=\\1" ).arg( url ));
 
             // Add url scheme to other urls like  "//xxx"
@@ -553,7 +492,6 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
             // Fix urls in "srcset" attribute
             pos = 0;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpression regSrcset( " srcset\\s*=\\s*\"/[^\"]+\"" );
             it = regSrcset.globalMatch( articleString );
             while( it.hasNext() )
@@ -563,17 +501,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               pos = match.capturedEnd();
 
               QString srcset = match.captured();
-#else
-            QRegExp regSrcset( " srcset\\s*=\\s*\"/([^\"]+)\"" );
-            for( ; ; )
-            {
-              pos = regSrcset.indexIn( articleString, pos );
-              if( pos < 0 )
-                break;
-              QString srcset = regSrcset.cap();
-#endif
+
               QString newSrcset = srcset.replace( "//", wikiUrl.scheme() + "://" );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
               articleNewString += newSrcset;
             }
             if( pos )
@@ -582,11 +511,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               articleString = articleNewString;
               articleNewString.clear();
             }
-#else
-              articleString.replace( pos, regSrcset.cap().size(), newSrcset );
-              pos += newSrcset.size();
-            }
-#endif
+
 
             QByteArray articleBody = articleString.toUtf8();
 

@@ -749,19 +749,13 @@ void GlsDictionary::loadArticle( uint32_t address,
 
 QString & GlsDictionary::filterResource( QString & article )
 {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)",
                             QRegularExpression::CaseInsensitiveOption
                             | QRegularExpression::InvertedGreedinessOption );
   QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                              QRegularExpression::CaseInsensitiveOption
                              | QRegularExpression::InvertedGreedinessOption );
-#else
-  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)", Qt::CaseInsensitive );
-  imgRe.setMinimal( true );
-  QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-  linkRe.setMinimal( true );
-#endif
+
   article.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
          .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
 
@@ -850,15 +844,11 @@ QString & GlsDictionary::filterResource( QString & article )
 
   // Handle "audio" tags
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
                               QRegularExpression::CaseInsensitiveOption
                               | QRegularExpression::DotMatchesEverythingOption
                               | QRegularExpression::InvertedGreedinessOption );
-#else
-  QRegExp audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
-  audioRe.setMinimal( true );
-#endif
+
 
   pos = 0;
 
@@ -1403,7 +1393,6 @@ void GlsResourceRequest::run()
       QString id = QString::fromUtf8( dict.getId().c_str() );
       int pos = 0;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
                                 QRegularExpression::CaseInsensitiveOption );
 
@@ -1434,28 +1423,6 @@ void GlsResourceRequest::run()
         css = newCSS;
         newCSS.clear();
       }
-#else
-      QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", Qt::CaseInsensitive, QRegExp::RegExp );
-      for( ; ; )
-      {
-        pos = links.indexIn( css, pos );
-        if( pos < 0 )
-          break;
-        QString url = links.cap( 2 );
-
-        if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0)
-        {
-          // External link
-          pos += links.cap().size();
-          continue;
-        }
-
-        QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
-                                           + id + "/" + url + links.cap( 3 ) + ")";
-        css.replace( pos, links.cap().size(), newUrl );
-        pos += newUrl.size();
-      }
-#endif
 
       dict.isolateCSS( css );
       QByteArray bytes = css.toUtf8();

@@ -767,12 +767,9 @@ void DictServerArticleRequest::run()
 
             // Retreive MIME headers if any
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             static QRegularExpression contentTypeExpr( "Content-Type\\s*:\\s*text/html",
                                                        QRegularExpression::CaseInsensitiveOption );
-#else
-            QRegExp contentTypeExpr( "Content-Type\\s*:\\s*text/html", Qt::CaseInsensitive );
-#endif
+
             bool contentInHtml = false;
             for( ; ; )
             {
@@ -809,7 +806,6 @@ void DictServerArticleRequest::run()
             if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
               break;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                                 QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
             static QRegularExpression divs_inside_phonetic( "</div([^>]*)><div([^>]*)>",
@@ -820,13 +816,7 @@ void DictServerArticleRequest::run()
                                              QRegularExpression::CaseInsensitiveOption );
             static QRegularExpression tags( "<[^>]*>",
                                             QRegularExpression::CaseInsensitiveOption );
-#else
-            QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
-            QRegExp divs_inside_phonetic( "</div([^>]*)><div([^>]*)>", Qt::CaseInsensitive );
-            QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
-            QRegExp links( "<a href=\"gdlookup://localhost/([^\"]*)\">", Qt::CaseInsensitive );
-            QRegExp tags( "<[^>]*>", Qt::CaseInsensitive );
-#endif
+
             string articleStr;
             if( contentInHtml )
               articleStr = articleText.toUtf8().data();

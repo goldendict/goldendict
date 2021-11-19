@@ -218,7 +218,6 @@ void DictHeadwords::filterChanged()
           QRegExp::PatternSyntax( ui.searchModeCombo->itemData(
                   ui.searchModeCombo->currentIndex()).toInt() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
   QRegularExpression::PatternOptions options = QRegularExpression::UseUnicodePropertiesOption;
   if( !ui.matchCase->isChecked() )
     options |= QRegularExpression::CaseInsensitiveOption;
@@ -245,15 +244,7 @@ void DictHeadwords::filterChanged()
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
   proxy->setFilterRegularExpression( regExp );
-#else
-  Qt::CaseSensitivity caseSensitivity = ui.matchCase->isChecked() ? Qt::CaseSensitive
-                                                                  : Qt::CaseInsensitive;
-  QRegExp regExp( ui.filterLine->text(), caseSensitivity, syntax );
 
-  QApplication::setOverrideCursor( Qt::WaitCursor );
-
-  proxy->setFilterRegExp( regExp );
-#endif
 
   proxy->sort( 0 );
 

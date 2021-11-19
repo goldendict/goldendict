@@ -840,7 +840,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
   QString anchor;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
   QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
   int pos = 0;
@@ -856,16 +855,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     // Add empty strings for compatibility with QRegExp behaviour
     for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
       list.append( QString() );
-#else
-  QRegExp rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
-                       Qt::CaseSensitive,
-                       QRegExp::RegExp2 );
 
-  int pos = 0;
-  while( (pos = rxLink.indexIn( text, pos )) >= 0 )
-  {
-    QStringList list = rxLink.capturedTexts();
-#endif
     QString tag = list[3];
     if ( !list[4].isEmpty() )
       tag = list[4].split("\"")[1];
@@ -883,7 +873,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
         prepend( "<a href=\"gdlookup://localhost/" ).
         append( anchor + "\" " + list[4] + ">" );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     newText += tag;
   }
   if( pos )
@@ -892,27 +881,16 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     text = newText;
   }
   newText.clear();
-#else
-    text.replace( pos, list[0].length(), tag );
-    pos += tag.length() + 1;
-  }
-#endif
+
 
   // Handle TeX formulas via mimetex.cgi
 
   if( !texCgiPath.isEmpty() )
   {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>" );
       QRegularExpression regFrac( "\\\\[dt]frac" );
       QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])" );
-#else
-    QRegExp texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
-                      Qt::CaseSensitive,
-                      QRegExp::RegExp2 );
-    QRegExp regFrac = QRegExp( "\\\\[dt]frac" );
-    QRegExp regSpaces = QRegExp( "\\s+([\\{\\(\\[\\}\\)\\]])", Qt::CaseSensitive, QRegExp::RegExp2 );
-#endif
+
     QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     QString arrayDesc( "\\begin{array}{" );
@@ -920,7 +898,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     unsigned texCount = 0;
     QString imgName;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpressionMatchIterator it = texImage.globalMatch( text );
     QString newText;
     while( it.hasNext() )
@@ -931,11 +908,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
       pos = match.capturedEnd();
 
       QStringList list = match.capturedTexts();
-#else
-    while( (pos = texImage.indexIn( text, pos )) >= 0 )
-    {
-      QStringList list = texImage.capturedTexts();
-#endif
+
 
       if( list[ 1 ].compare( "tex" ) == 0
           || list[ 1 ].compare( "mwe-math-fallback-image-inline" ) == 0
@@ -1034,21 +1007,14 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 #endif
                       + imgName + "\" alt=\"" + list[ 3 ] + "\">";
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         newText += tag;
-#else
-        text.replace( pos, list[0].length(), tag );
-        pos += tag.length() + 1;
-#endif
+
 
         texCount += 1;
       }
       else
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         newText += list[ 0 ];
-#else
-        pos += list[ 0 ].length();
-#endif
+
     }
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     if( pos )
