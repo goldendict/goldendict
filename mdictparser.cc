@@ -616,12 +616,9 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
 
 QString & MdictParser::substituteStylesheet( QString & article, MdictParser::StyleSheets const & styleSheets )
 {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression rx( "`(\\d+)`", QRegularExpression::UseUnicodePropertiesOption );
   QString articleNewText;
-#else
-  QRegExp rx( "`(\\d+)`" );
-#endif
+
   QString endStyle;
   int pos = 0;
 

@@ -184,7 +184,6 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   if( articleText.isEmpty() )
     return;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
                                   QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
@@ -193,13 +192,7 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
                                         .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
                                                                     QRegularExpression::UseUnicodePropertiesOption ),
                                                 QString::SkipEmptyParts );
-#else
-  QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
-  QRegExp regSplit = QRegExp( "\\W+" );
 
-  QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                        .split( QRegExp( handleRoundBrackets ? "[^\\w\\(\\)]+" : "\\W+" ), QString::SkipEmptyParts );
-#endif
 
   QSet< QString > setOfWords;
   setOfWords.reserve( articleWords.size() );
@@ -436,14 +429,10 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
   }
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
                                   QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-#else
-  QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
-  QRegExp regSplit = QRegExp( "\\W+" );
-#endif
+
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
@@ -497,13 +486,8 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   {
     // Words mode
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression splitWithBrackets( "[^\\w\\(\\)\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
     QRegularExpression splitWithoutBrackets( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-#else
-    QRegExp splitWithBrackets( "[^\\w\\(\\)]+" );
-    QRegExp splitWithoutBrackets( "\\W+" );
-#endif
 
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;

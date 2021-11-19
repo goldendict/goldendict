@@ -60,8 +60,6 @@ class ArticleView: public QFrame
   bool ftsSearchIsOpened, ftsSearchMatchCase;
   int ftsPosition;
 
-  QString lastUrl;
-
   void highlightFTSResults();
   void performFtsFindOperation( bool backwards );
   void showFindButtons();

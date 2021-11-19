@@ -898,7 +898,6 @@ void BglArticleRequest::run()
 
   BglDictionary::replaceCharsetEntities( result );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   result = QString::fromUtf8( result.c_str() )
           // onclick location to link
           .replace( QRegularExpression( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>",
@@ -918,23 +917,7 @@ void BglArticleRequest::run()
                                         QRegularExpression::CaseInsensitiveOption ),
                     " \\1 " )
            .toUtf8().data();
-#else
-  result = QString::fromUtf8( result.c_str() )
-          // onclick location to link
-          .replace( QRegExp( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
-                    "<a href=\"\\2\">\\3</a>")
-           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                     "\\1bword:" )
-          //remove invalid width, height attrs
-          .replace(QRegExp( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
-                   "" )
-          //remove invalid <br> tag
-          .replace( QRegExp( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)", Qt::CaseInsensitive ),
-                    "\\1" )
-          .replace( QRegExp( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>", Qt::CaseInsensitive ),
-                    " \\1 " )
-           .toUtf8().data();
-#endif
+
 
   Mutex::Lock _( dataMutex );
 
@@ -1106,7 +1089,6 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   {
     QString str = QString::fromUtf8( text.c_str() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
                                    QRegularExpression::CaseInsensitiveOption
                                    | QRegularExpression::InvertedGreedinessOption );
@@ -1135,31 +1117,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
       result += str.midRef( pos );
       str = result;
     }
-#else
-    QRegExp charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
-                        Qt::CaseInsensitive );
 
-    charsetExp.setMinimal( true );
-    
-    QRegExp oneValueExp( "\\s*([0-9a-fA-F]+)\\s*;" );
-
-    for( int pos = 0; ( pos = charsetExp.indexIn( str, pos ) ) != -1; )
-    {
-      //DPRINTF( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
-      
-      QString out;
-
-      for( int p = 0; ( p = oneValueExp.indexIn( charsetExp.cap( 1 ), p ) ) != -1; )
-      {
-        //DPRINTF( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
-        out += "&#x" + oneValueExp.cap( 1 ) + ";";
-
-        p += oneValueExp.matchedLength();
-      }
-
-      str.replace( pos, charsetExp.matchedLength(), out );
-    }
-#endif
 
     text = str.toUtf8().data();
   }

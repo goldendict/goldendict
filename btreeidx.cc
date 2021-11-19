@@ -185,11 +185,8 @@ void BtreeWordSearchRequest::findMatches()
     return;
   }
   
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regexp;
-#else
-  QRegExp regexp;
-#endif
+
   bool useWildcards = false;
   if( allowMiddleMatches )
     useWildcards = ( str.find( '*' ) != wstring::npos ||

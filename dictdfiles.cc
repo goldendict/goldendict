@@ -548,15 +548,10 @@ void DictdDictionary::getArticleText( uint32_t articleAddress, QString & headwor
     }
     else
     {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
                                           QRegularExpression::CaseInsensitiveOption ); // phonetics: \stuff\ ...
       static QRegularExpression refs( "\\{([^\\{\\}]+)\\}",
                                       QRegularExpression::CaseInsensitiveOption );     // links: {stuff}
-#else
-      static QRegExp phonetic( "\\\\([^\\\\]+)\\\\", Qt::CaseInsensitive ); // phonetics: \stuff\ ...
-      static QRegExp refs( "\\{([^\\{\\}]+)\\}", Qt::CaseInsensitive );     // links: {stuff}
-#endif
 
       string convertedText = Html::preformat( articleBody, isToLanguageRTL() );
       free( articleBody );
