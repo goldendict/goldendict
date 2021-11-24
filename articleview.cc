@@ -24,10 +24,8 @@
 #include "gestures.hh"
 #include "fulltextsearch.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
-#endif
 
 #include "qt4x5.hh"
 
@@ -171,15 +169,28 @@ public:
     normalizedString = gd::toQString( normText );
   }
 };
-
 /// End of DiacriticsHandler class
-static void runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
+
+void ArticleView::emitJavascriptFinished(){
+    emit notifyJavascriptFinished();
+}
+//in webengine,javascript has been executed in async mode ,for simpility,use EventLoop to simulate sync execution.
+//a better solution would be to replace it with callback etc.
+QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
     qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
 
-    frame->runJavaScript(variable, [](const QVariant& result) {
+    QString result;
+    QEventLoop loop;
+    QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
+    frame->runJavaScript(variable, [&](const QVariant &v)
+    {
+        result = v.toString();
+        emitJavascriptFinished();
+    });
 
-        });
+    loop.exec();
+    return result;
 }
 
 namespace {
@@ -651,24 +662,24 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-	//todo dictid
-    QStringList dictList;
-	for (unsigned i = 0; i < allDictionaries.size(); i++)
-	{
-        dictList.append( allDictionaries[i]->getId().c_str());
+//	//todo dictid
+//    QStringList dictList;
+//	for (unsigned i = 0; i < allDictionaries.size(); i++)
+//	{
+//        dictList.append( allDictionaries[i]->getId().c_str());
 		
-	}
+//	}
 
-    QStringList mutedDictionaries = getMutedDictionaries(Instances::Group::AllGroupId);
-    for (int i=0;i<mutedDictionaries.size();i++)
-    {
-        dictList.removeOne(mutedDictionaries[i]);
-    }
+//    QStringList mutedDictionaries = getMutedDictionaries(Instances::Group::AllGroupId);
+//    for (int i=0;i<mutedDictionaries.size();i++)
+//    {
+//        dictList.removeOne(mutedDictionaries[i]);
+//    }
 
-    return dictList;
+//    return dictList;
     
-  // return runJavaScriptVariableSafe( ui.definition->page(), "gdArticleContents" )
-  //     .toString().trimmed().split( ' ', QString::SkipEmptyParts );
+   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
+       .trimmed().split( ' ', QString::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -1681,16 +1692,14 @@ bool ArticleView::hasSound()
 //todo ,need further effort
 void ArticleView::playSound()
 {
-  runJavaScriptSync( ui.definition->page(),
-"   var link=gdAudioLinks[gdAudioLinks.current];           "
-"   if(link==undefined){           "
-"       link=gdAudioLinks.first;           "
-"   }          "
-"              "
-"   var music = new Audio(link);    "
-"   music.play();   "
-
- );
+  QString variable = "   var link=gdAudioLinks[gdAudioLinks.current];           "
+    "   if(link==undefined){           "
+    "       link=gdAudioLinks.first;           "
+    "   }          "
+    "              "
+    "   var music = new Audio(link);    "
+    "   music.play();   ";
+  ui.definition->page()->runJavaScript(variable);
 }
 
 QString ArticleView::toHtml()
