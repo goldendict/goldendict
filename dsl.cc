@@ -2322,7 +2322,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           // Skip the article's body
           for( ; ; )
           {
-              //todo ,return headword only?
             hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset);
             haveLine = false;
 

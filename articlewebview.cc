@@ -81,13 +81,9 @@ void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 {
   QWebEngineView::mouseDoubleClickEvent( event );
   //todo
-#if QT_VERSION >= 0x040600 && QT_VERSION <0x050500
-  int scrollBarWidth = page()->contentsSize().width();
-  int scrollBarHeight = page()->contentsSize().height();
-#else
+
   int scrollBarWidth = 0;
   int scrollBarHeight = 0;
-#endif
 
   // emit the signal only if we are not double-clicking on scrollbars
   if ( ( event->x() < width() - scrollBarWidth ) &&

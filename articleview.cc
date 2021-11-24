@@ -24,10 +24,8 @@
 #include "gestures.hh"
 #include "fulltextsearch.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
-#endif
 
 #include "qt4x5.hh"
 
@@ -171,15 +169,28 @@ public:
     normalizedString = gd::toQString( normText );
   }
 };
-
 /// End of DiacriticsHandler class
-static void runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
+
+void ArticleView::emitJavascriptFinished(){
+    emit notifyJavascriptFinished();
+}
+//in webengine,javascript has been executed in async mode ,for simpility,use EventLoop to simulate sync execution.
+//a better solution would be to replace it with callback etc.
+QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
     qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
 
-    frame->runJavaScript(variable, [](const QVariant& result) {
+    QString result;
+    QEventLoop loop;
+    QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
+    frame->runJavaScript(variable, [&](const QVariant &v)
+    {
+        result = v.toString();
+        emitJavascriptFinished();
+    });
 
-        });
+    loop.exec();
+    return result;
 }
 
 namespace {
@@ -651,24 +662,8 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-	//todo dictid
-    QStringList dictList;
-	for (unsigned i = 0; i < allDictionaries.size(); i++)
-	{
-        dictList.append( allDictionaries[i]->getId().c_str());
-		
-	}
-
-    QStringList mutedDictionaries = getMutedDictionaries(Instances::Group::AllGroupId);
-    for (int i=0;i<mutedDictionaries.size();i++)
-    {
-        dictList.removeOne(mutedDictionaries[i]);
-    }
-
-    return dictList;
-    
-  // return runJavaScriptVariableSafe( ui.definition->page(), "gdArticleContents" )
-  //     .toString().trimmed().split( ' ', QString::SkipEmptyParts );
+   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
+       .trimmed().split( ' ', QString::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -682,8 +677,7 @@ QString ArticleView::getActiveArticleId()
 
 QString ArticleView::getCurrentArticle()
 {
-    QVariant v=ui.definition->property("currentArticle");
- // QVariant v = runJavaScriptVariableSafe( ui.definition->page(), "gdCurrentArticle" );
+  QVariant v=ui.definition->property("currentArticle");
 
   if ( v.type() == QVariant::String )
     return v.toString();
@@ -785,25 +779,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
 void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
 {
-    //todo
     qDebug("updateCurrentArticleFromCurrentFrame");
-//  if ( !frame )
-//    frame = ui.definition->page()->currentFrame();
-
-//  for( ; frame; frame = frame->parentFrame() )
-//  {
-//    QString frameName = frame->frameName();
-
-//    if ( frameName.startsWith( "gdexpandframe-" ) )
-//    {
-//      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
-
-//      if ( getCurrentArticle() != newCurrent )
-//        setCurrentArticle( newCurrent, false );
-
-//      break;
-//    }
-//  }
 }
 
 void ArticleView::saveHistoryUserData()
@@ -1670,27 +1646,23 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-	//todo ,just return true;need futher effort
-    return true;
-  // QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
-  // if ( v.type() == QVariant::String )
-  //   return !v.toString().isEmpty();
-  // return false;
+  QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
+  if ( v.type() == QVariant::String )
+    return !v.toString().isEmpty();
+  return false;
 }
 
-//todo ,need further effort
+//use webengine javascript to playsound
 void ArticleView::playSound()
 {
-  runJavaScriptSync( ui.definition->page(),
-"   var link=gdAudioLinks[gdAudioLinks.current];           "
-"   if(link==undefined){           "
-"       link=gdAudioLinks.first;           "
-"   }          "
-"              "
-"   var music = new Audio(link);    "
-"   music.play();   "
-
- );
+  QString variable = "   var link=gdAudioLinks[gdAudioLinks.current];           "
+    "   if(link==undefined){           "
+    "       link=gdAudioLinks.first;           "
+    "   }          "
+    "              "
+    "   var music = new Audio(link);    "
+    "   music.play();   ";
+  ui.definition->page()->runJavaScript(variable);
 }
 
 QString ArticleView::toHtml()
@@ -1754,7 +1726,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  //todo url();?
+  //todo url() or lastclickurl ?
   QUrl targetUrl( r->url() );
   Contexts contexts;
 
@@ -2871,137 +2843,17 @@ QString ArticleView::wordAtPoint( int x, int y )
   QPoint posWithScroll = pos + QPoint((int)scrollPoint.x(),(int)scrollPoint.y());
 
   /// Find target HTML element
-
-  QSemaphore semaphore(1);
-  semaphore.acquire(1);
-    QString nodeValue;
-  frame->runJavaScript(QString(
-                           " var a= document.elementFromPoint(%1,%2);"
-                            "var nodename=a.nodeName.toLowerCase();"
-                            "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
-                            "{"
-                             "   return '';"
-                            "}"
-                            "return a.textContent;")
-                       .arg(posWithScroll.x()).arg(posWithScroll.y()),[&](const QVariant & result){
-            semaphore.release();
-
-            nodeValue=result.toString();
-  });
-
-    semaphore.acquire(1);
-return nodeValue;
-//  QWebHitTestResult result = frame->hitTestContent( pos );
-//  QWebElement baseElem = result.enclosingBlockElement();
-
-//  if( baseElem.tagName().compare( "BODY" ) == 0 ||      /// Assume empty field position
-//      baseElem.tagName().compare( "HTML" ) == 0 ||
-//      baseElem.tagName().compare( "HEAD" ) == 0 )
-//    return word;
-
-//  /// Save selection position
-
-//  baseElem.runJavaScript( "var __gd_sel=window.getSelection();"
-//                               "if(__gd_sel && __gd_sel.rangeCount>0) {"
-//                                 "__gd_SelRange=__gd_sel.getRangeAt(0);"
-//                                 "if(__gd_SelRange.collapsed) __gd_sel.removeAllRanges();"
-//                                 "else {"
-//                                   "__gd_StartTree=[]; __gd_EndTree=[];"
-//                                   "var __gd_baseRange=document.createRange();"
-//                                   "__gd_baseRange.selectNode(this);"
-//                                   "if(__gd_baseRange.comparePoint(__gd_SelRange.startContainer,0)==0) {"
-//                                     "__gd_StartOffset=__gd_SelRange.startOffset;"
-//                                     "var __gd_child=__gd_SelRange.startContainer;"
-//                                     "var __gd_parent='';"
-//                                     "if(__gd_child==this) __gd_StartTree.push(-1);"
-//                                     "else while(__gd_parent!=this) {"
-//                                       "var n=0; __gd_parent=__gd_child.parentNode;"
-//                                       "var __gd_el=__gd_parent.firstChild;"
-//                                       "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
-//                                       "__gd_StartTree.push(n);"
-//                                       "__gd_child=__gd_parent;"
-//                                     "}"
-//                                   "}"
-//                                   "if(__gd_baseRange.comparePoint(__gd_SelRange.endContainer,0)==0) {"
-//                                     "__gd_EndOffset=__gd_SelRange.endOffset;"
-//                                     "var __gd_child=__gd_SelRange.endContainer;"
-//                                     "var __gd_parent='';"
-//                                     "if(__gd_child==this) __gd_EndTree.push(-1);"
-//                                     "else while(__gd_parent!=this) {"
-//                                       "var n=0; __gd_parent=__gd_child.parentNode;"
-//                                       "var __gd_el=__gd_parent.firstChild;"
-//                                       "while(__gd_el!=__gd_child) { n++; __gd_el=__gd_el.nextSibling; }"
-//                                       "__gd_EndTree.push(n);"
-//                                       "__gd_child=__gd_parent;"
-//                                     "}"
-//                                   "}"
-//                                 "}"
-//                               "}"
-//                               );
-
-//  /// Enclose every word be <span> </span>
-
-//  QString content = baseElem.toInnerXml();
-//  QString newContent = insertSpans( content );
-
-//  /// Set new code and re-render it to fill geometry
-
-//  QImage img( baseElem.geometry().width(), baseElem.geometry().height(), QImage::Format_Mono );
-//  img.fill( 0 );
-//  QPainter painter( & img );
-
-//  baseElem.setInnerXml( newContent );
-//  baseElem.render( &painter );
-
-//  /// Search in all child elements and check it
-
-//  QWebElementCollection elemCollection = baseElem.findAll( "*" );
-//  foreach ( QWebElement elem, elemCollection )
-//  {
-//      if( elem.geometry().contains( posWithScroll ) )
-//          word = checkElement( elem, posWithScroll );
-//      if( !word.isEmpty() )
-//          break;
-//  }
-
-//  /// Restore old content
-//  baseElem.setInnerXml( content );
-
-//  /// Restore selection
-
-//  baseElem.runJavaScript( "var flag=0;"
-//                               "if(__gd_StartTree && __gd_StartTree.length) {"
-//                                 "var __gd_el=this;"
-//                                 "while(__gd_StartTree.length) {"
-//                                   "__gd_el=__gd_el.firstChild;"
-//                                   "var n=__gd_StartTree.pop();"
-//                                   "if(n<0) __gd_el=this;"
-//                                   "else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
-//                                 "}"
-//                                 "__gd_SelRange.setStart(__gd_el, __gd_StartOffset);"
-//                                 "__gd_StartTree.splice(0,__gd_StartTree.length);"
-//                                 "flag+=1;"
-//                               "}"
-//                               "if(__gd_EndTree && __gd_EndTree.length) {"
-//                                 "var __gd_el=this;"
-//                                 "while(__gd_EndTree.length) {"
-//                                   "__gd_el=__gd_el.firstChild;"
-//                                   "var n=__gd_EndTree.pop();"
-//                                   "if(n<0) __gd_el=this;"
-//                                   "else for(var i=0;i<n;i++) __gd_el=__gd_el.nextSibling;"
-//                                 "}"
-//                                 "__gd_SelRange.setEnd(__gd_el, __gd_EndOffset);"
-//                                 "__gd_EndTree.splice(0,__gd_EndTree.length);"
-//                                 "flag+=1;"
-//                               "}"
-//                               "if(flag>0) {"
-//                                 "var __gd_sel=window.getSelection();"
-//                                 "__gd_sel.removeAllRanges();"
-//                                 "__gd_sel.addRange(__gd_SelRange);"
-//                               "}"
-//                               );
-
-//  return word;
+  QString nodeValue = runJavaScriptSync(frame, QString(
+                                                   "var a= document.elementFromPoint(%1,%2);"
+                                                   "var nodename=a.nodeName.toLowerCase();"
+                                                   "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
+                                                   "{"
+                                                   "   return '';"
+                                                   "}"
+                                                   "return a.textContent;")
+                                                   .arg(posWithScroll.x())
+                                                   .arg(posWithScroll.y()));
+  return nodeValue;
 }
 
 #endif
