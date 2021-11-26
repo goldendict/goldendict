@@ -215,7 +215,7 @@ public:
 // by Qt meta-object compiler
 
 class QIntermediateApplication : public QtSingleApplication
-#if defined( Q_OS_WIN ) && IS_QT_5
+#if defined( Q_OS_WIN ) 
         , public QAbstractNativeEventFilter
 #endif
 {
@@ -255,11 +255,7 @@ protected:
   void unregisterWrapper(HotkeyWrapper *wrapper);
 
 #ifdef Q_OS_WIN32
-#if IS_QT_5
   virtual bool nativeEventFilter( const QByteArray & eventType, void * message, long * result );
-#else // IS_QT_5
-  virtual bool winEventFilter ( MSG * message, long * result );
-#endif // IS_QT_5
 
   QWidget * mainWindow;
 public:
