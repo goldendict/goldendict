@@ -130,11 +130,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
-#if IS_QT_5
   Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ).replace( '+', "%2B" ) );
-#else
-  reqUrl.addEncodedQueryItem( "apfrom", QUrl::toPercentEncoding( gd::toQString( str ) ) );
-#endif
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
 
@@ -295,11 +291,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
-#if IS_QT_5
   Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ).replace( '+', "%2B" ) );
-#else
-  reqUrl.addEncodedQueryItem( "page", QUrl::toPercentEncoding( gd::toQString( str ) ) );
-#endif
 
   QNetworkReply * netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
