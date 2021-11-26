@@ -35,9 +35,7 @@
 #include <QVector>
 #include <QtAlgorithms>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 #include <string>
 #include <vector>
@@ -819,7 +817,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 {
   QString text = QString::fromUtf8( in.c_str() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // pattern of img and script
   text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
                 QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
@@ -827,15 +824,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   // pattern <link... href="..." ...>
   text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
-#else
-  // pattern of img and script
-  text.replace( QRegExp( "<\\s*(img|script)\\s+([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
-                QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
-
-  // pattern <link... href="..." ...>
-  text.replace( QRegExp( "<\\s*link\\s+([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
-                QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
-#endif
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
@@ -1016,14 +1004,12 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
         newText += list[ 0 ];
 
     }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     if( pos )
     {
       newText += text.midRef( pos );
       text = newText;
     }
     newText.clear();
-#endif
   }
 #ifdef Q_OS_WIN32
   else

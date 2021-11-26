@@ -22,12 +22,7 @@
 
 #include <QImage>
 #include <QPainter>
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
-
 #include "qt4x5.hh"
 #include "zipfile.hh"
 

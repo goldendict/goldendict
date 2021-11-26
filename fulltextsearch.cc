@@ -12,7 +12,7 @@
 #include <QMessageBox>
 #include <qalgorithms.h>
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#if defined( Q_OS_WIN32 )
 
 #include "initializing.hh"
 #include <qt_windows.h>
@@ -241,7 +241,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   if( delegate )
     ui.headwordsView->setItemDelegate( delegate );
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#if defined( Q_OS_WIN32 )
 
   // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
   // We use simply "windows" style instead for this case
@@ -272,7 +272,7 @@ FullTextSearchDialog::~FullTextSearchDialog()
   if( delegate )
     delegate->deleteLater();
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#if defined( Q_OS_WIN32 )
 
   if( oldBarStyle )
     ui.searchProgressBar->setStyle( oldBarStyle );

@@ -227,7 +227,7 @@ private:
   QString name;
 };
 
-#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#if defined( HAVE_X11 )
   // The ScanPopup window flags customization code has been tested
   // only in X11 desktop environments and window managers.
   // None of the window flags configurations I have tried works perfectly well

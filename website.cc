@@ -10,11 +10,7 @@
 #include <QFileInfo>
 #include "gddebug.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 namespace WebSite {
 
@@ -139,46 +135,7 @@ WebSiteArticleRequest::WebSiteArticleRequest( QString const & url_,
 
 QTextCodec * WebSiteArticleRequest::codecForHtml( QByteArray const & ba )
 {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   return QTextCodec::codecForHtml( ba, 0 );
-#else
-// Implementation taken from Qt 5 sources
-// Function from Qt 4 can't recognize charset name inside single quotes
-
-  QByteArray header = ba.left( 1024 ).toLower();
-  int pos = header.indexOf( "meta " );
-  if (pos != -1) {
-    pos = header.indexOf( "charset=", pos );
-    if (pos != -1) {
-      pos += qstrlen( "charset=" );
-
-      int pos2 = pos;
-      while ( ++pos2 < header.size() )
-      {
-        char ch = header.at( pos2 );
-        if( ch != '\"' && ch != '\'' && ch != ' ' )
-          break;
-      }
-
-      // The attribute can be closed with either """, "'", ">" or "/",
-      // none of which are valid charset characters.
-
-      while ( pos2++ < header.size() )
-      {
-        char ch = header.at( pos2 );
-        if( ch == '\"' || ch == '\'' || ch == '>' || ch == '/' )
-        {
-          QByteArray name = header.mid( pos, pos2 - pos );
-          if ( name == "unicode" )
-            name = QByteArray( "UTF-8" );
-
-          return QTextCodec::codecForName(name);
-        }
-      }
-    }
-  }
-  return 0;
-#endif
 }
 
 void WebSiteArticleRequest::requestFinished( QNetworkReply * r )

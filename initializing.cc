@@ -5,7 +5,7 @@
 #include "initializing.hh"
 #include <QCloseEvent>
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#if defined( Q_OS_WIN32 )
 #include <qt_windows.h>
 #include <uxtheme.h>
 
@@ -34,7 +34,7 @@ Initializing::Initializing( QWidget * parent, bool showOnStartup ): QDialog( par
     setWindowIcon( QIcon( ":/icons/macicon.png" ) );
   #endif
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#if defined( Q_OS_WIN32 )
 
   // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
   // We use simply "windows" style instead for this case
@@ -84,7 +84,7 @@ void Initializing::reject()
 {
 }
 
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) ) && defined( Q_OS_WIN32 )
+#if defined( Q_OS_WIN32 )
 
 Initializing::~Initializing()
 {

@@ -14,10 +14,8 @@
 #include "wstring_qt.hh"
 #include "qt4x5.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
-#endif
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -200,16 +198,10 @@ void BtreeWordSearchRequest::findMatches()
 
   if( useWildcards )
   {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     regexp.setPattern( wildcardsToRegexp( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) ) );
     if( !regexp.isValid() )
       regexp.setPattern( QRegularExpression::escape( regexp.pattern() ) );
     regexp.setPatternOptions( QRegularExpression::CaseInsensitiveOption );
-#else
-    regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) );
-    regexp.setPatternSyntax( QRegExp::WildcardUnix );
-    regexp.setCaseSensitivity( Qt::CaseInsensitive );
-#endif
 
     bool bNoLetters = folded.empty();
     wstring foldedWithWildcards;
@@ -357,7 +349,6 @@ void BtreeWordSearchRequest::findMatches()
             {
               wstring word = Utf8::decode( chain[ x ].prefix + chain[ x ].word );
               wstring result = Folding::applyDiacriticsOnly( word );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
               if( result.size() >= (wstring::size_type)minMatchLength )
               {
                 QRegularExpressionMatch match = regexp.match( gd::toQString( result ) );
@@ -366,14 +357,6 @@ void BtreeWordSearchRequest::findMatches()
                   addMatch( word );
                 }
               }
-#else
-              if( result.size() >= (wstring::size_type)minMatchLength
-                  && regexp.indexIn( gd::toQString( result ) ) == 0
-                  && regexp.matchedLength() >= minMatchLength )
-              {
-                addMatch( word );
-              }
-#endif
             }
             else
             {

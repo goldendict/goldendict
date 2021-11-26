@@ -38,9 +38,7 @@
 #include <QTextDocument>
 #include <QCryptographicHash>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 #include "qt4x5.hh"
 
@@ -903,25 +901,16 @@ void MddResourceRequest::run()
             continue;
           }
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
           QString newUrl = QString( "url(" ) + match.captured( 1 ) + "bres://"
                                              + id + "/" + url + match.captured( 3 ) + ")";
           newCSS += newUrl;
-#else
-          QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
-                                             + id + "/" + url + links.cap( 3 ) + ")";
-          css.replace( pos, links.cap().size(), newUrl );
-          pos += newUrl.size();
-#endif
         }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         if( pos )
         {
           newCSS += css.midRef( pos );
           css = newCSS;
           newCSS.clear();
         }
-#endif
         dict.isolateCSS( css, ".mdict" );
         QByteArray bytes = css.toUtf8();
         data.resize( bytes.size() );

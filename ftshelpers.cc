@@ -14,10 +14,8 @@
 
 #include <QVector>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
-#endif
 
 using std::vector;
 using std::string;
@@ -240,7 +238,6 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
           if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
             list.append( *it );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         QRegularExpressionMatch match = regBrackets.match( word );
         if( match.hasMatch() )
         {
@@ -248,12 +245,6 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
           // Add empty strings for compatibility with QRegExp behaviour
           for( int i = match.lastCapturedIndex() + 1; i < 6; i++ )
             parts.append( QString() );
-#else
-        int pos = regBrackets.indexIn( word );
-        if( pos >= 0 )
-        {
-          QStringList parts = regBrackets.capturedTexts();
-#endif
           QString parsedWord = parts[ 2 ] + parts[ 4 ]; // Brackets removed
 
           if( parsedWord.size() >= FTS::MinimumWordSize && !list.contains( parsedWord ) )
@@ -438,7 +429,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   {
     // RegExp mode
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression searchRegularExpression;
     if( searchMode == FTS::Wildcards )
       searchRegularExpression.setPattern( wildcardsToRegexp( searchRegexp.pattern() ) );
@@ -453,7 +443,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     searchRegularExpression.setPatternOptions( patternOptions );
     if( !searchRegularExpression.isValid() )
       searchRegularExpression.setPattern( "" );
-#endif
     for( int i = 0; i < offsets.size(); i++ )
     {
       if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
@@ -465,11 +454,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       if( ignoreDiacritics )
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       if( articleText.contains( searchRegularExpression ) )
-#else
-      if( articleText.contains( searchRegexp ) )
-#endif
       {
         if( headword.isEmpty() )
           offsetsForHeadwords.append( offsets.at( i ) );
@@ -536,7 +521,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           if( needHandleBrackets && ( s.indexOf( '(' ) >= 0 || s.indexOf( ')' ) >= 0 ) )
           {
             // Handle brackets
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpressionMatch match_brackets = regBrackets.match( s );
             if( match_brackets.hasMatch() )
             {
@@ -544,12 +528,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               // Add empty strings for compatibility with QRegExp behaviour
               for( int i = match_brackets.lastCapturedIndex() + 1; i < 6; i++ )
                 parts.append( QString() );
-#else
-            int pos = regBrackets.indexIn( s );
-            if( pos >= 0 )
-            {
-              QStringList parts = regBrackets.capturedTexts();
-#endif
+                
               QString word = parts[ 2 ] + parts[ 4 ]; // Brackets removed
               parsedWords.append( word );
 
