@@ -661,25 +661,8 @@ unsigned ArticleView::getGroup( QUrl const & url )
 }
 
 QStringList ArticleView::getArticlesList()
-{
-//	//todo dictid
-//    QStringList dictList;
-//	for (unsigned i = 0; i < allDictionaries.size(); i++)
-//	{
-//        dictList.append( allDictionaries[i]->getId().c_str());
-		
-//	}
-
-//    QStringList mutedDictionaries = getMutedDictionaries(Instances::Group::AllGroupId);
-//    for (int i=0;i<mutedDictionaries.size();i++)
-//    {
-//        dictList.removeOne(mutedDictionaries[i]);
-//    }
-
-//    return dictList;
-    
-   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-       .trimmed().split( ' ', QString::SkipEmptyParts );
+{    
+   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" ).split( ' ', QString::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -796,25 +779,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
 void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
 {
-    //todo
     qDebug("updateCurrentArticleFromCurrentFrame");
-//  if ( !frame )
-//    frame = ui.definition->page()->currentFrame();
-
-//  for( ; frame; frame = frame->parentFrame() )
-//  {
-//    QString frameName = frame->frameName();
-
-//    if ( frameName.startsWith( "gdexpandframe-" ) )
-//    {
-//      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
-
-//      if ( getCurrentArticle() != newCurrent )
-//        setCurrentArticle( newCurrent, false );
-
-//      break;
-//    }
-//  }
 }
 
 void ArticleView::saveHistoryUserData()
@@ -1681,12 +1646,10 @@ void ArticleView::forward()
 
 bool ArticleView::hasSound()
 {
-	//todo ,just return true;need futher effort
-    return true;
-  // QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
-  // if ( v.type() == QVariant::String )
-  //   return !v.toString().isEmpty();
-  // return false;
+   QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
+   if ( v.type() == QVariant::String )
+     return !v.toString().isEmpty();
+   return false;
 }
 
 //todo ,need further effort
@@ -1763,7 +1726,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  //todo url();?
   QUrl targetUrl( r->url() );
   Contexts contexts;
 
@@ -2670,7 +2632,6 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
     return planText;
 }
 
-//todo ,futher refinement?
 void ArticleView::performFtsFindOperation( bool backwards )
 {
   if( !ftsSearchIsOpened )

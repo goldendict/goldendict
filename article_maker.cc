@@ -670,7 +670,6 @@ void ArticleRequest::bodyFinished()
           }
         }
 
-        //todo ,gdArticleContents need refractor in the future?
         string jsVal = Html::escapeForJavaScript( dictId );
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
