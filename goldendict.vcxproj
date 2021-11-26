@@ -1,293 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug-Qt4|Win32">
-      <Configuration>Debug-Qt4</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug-Qt4|x64">
-      <Configuration>Debug-Qt4</Configuration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-Qt4|Win32">
-      <Configuration>Release-Qt4</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release-Qt4|x64">
-      <Configuration>Release-Qt4</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
-      <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C3D65E5B-B7EE-3F85-B73F-6D65D9C501A8}</ProjectGuid>
+    <ProjectGuid>{099B3DB8-81EE-3E0D-9C12-CB2AE08A1574}</ProjectGuid>
     <RootNamespace>GoldenDict</RootNamespace>
-    <Keyword>Qt4VSv1.0</Keyword>
-  </PropertyGroup>
+    <Keyword>QtVS_v304</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
+  <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild></PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
-    <OutputDirectory>release\</OutputDirectory>
-    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
-    <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
+    <PlatformToolset>v140</PlatformToolset>
     <OutputDirectory>release\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
-    <OutputDirectory>debug\</OutputDirectory>
-    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
-    <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
+    <PrimaryOutput>GoldenDict</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
+    <PlatformToolset>v140</PlatformToolset>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
     <ConfigurationType>Application</ConfigurationType>
     <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
+    <PrimaryOutput>GoldenDict</PrimaryOutput>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
-    <OutputDirectory>debug\</OutputDirectory>
-    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
-    <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
-    <OutputDirectory>debug\</OutputDirectory>
-    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
-    <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
-    <OutputDirectory>debug\</OutputDirectory>
-    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
-    <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'" Label="Configuration">
-    <PlatformToolSet>v142</PlatformToolSet>
-    <OutputDirectory>debug\</OutputDirectory>
-    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
-    <CharacterSet>Unicode</CharacterSet>
-    <ConfigurationType>Application</ConfigurationType>
-    <IntermediateDirectory>build\</IntermediateDirectory>
-    <PrimaryOutput>GoldenDict1</PrimaryOutput>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-    <Import Project="MSBuild\QtExtensions\moc.props" />
-    <Import Project="MSBuild\QtExtensions\rcc.props" />
-    <Import Project="MSBuild\QtExtensions\uic.props" />
-    <Import Project="MSBuild\QtExtensions\lrelease.props" />
-    <Import Project="MSBuild\custom.props" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-  </ImportGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" /><Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')"><Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." /></Target>
+  <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
-  </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
-  <PropertyGroup>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\$(Platform)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Configuration)\$(Platform)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">GoldenDict</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">GoldenDict</TargetName>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IgnoreImportLibrary>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\$(Platform)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Configuration)\$(Platform)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">$(Configuration)\$(Platform)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">$(Configuration)\$(Platform)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">$(Configuration)\$(Platform)\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">$(Configuration)\$(Platform)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">tmp\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">GoldenDict</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">GoldenDict</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">GoldenDict</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">GoldenDict</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">GoldenDict</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">GoldenDict</TargetName>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IgnoreImportLibrary>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">true</IgnoreImportLibrary>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">true</IgnoreImportLibrary>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">true</IgnoreImportLibrary>
-    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">true</IgnoreImportLibrary>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">
-    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
-    <IntDir>$(ProjectDir)\tmp\$(Configuration)\$(Platform)\</IntDir>
-    <EmbedManifest>true</EmbedManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">
-    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
-    <IntDir>$(ProjectDir)\tmp\$(Configuration)\$(Platform)\</IntDir>
-    <EmbedManifest>true</EmbedManifest>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"D:\Qt\5.15.2\msvc2019_64\include";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKitWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtQuick";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL";"D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport";"D:\Qt\5.15.2\msvc2019_64\include\QtSvg";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKit";"D:\Qt\5.15.2\msvc2019_64\include\QtQml";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia";"D:\Qt\5.15.2\msvc2019_64\include\QtWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtSensors";"D:\Qt\5.15.2\msvc2019_64\include\QtNetwork";"D:\Qt\5.15.2\msvc2019_64\include\QtXml";"D:\Qt\5.15.2\msvc2019_64\include\QtGui";"D:\Qt\5.15.2\msvc2019_64\include\QtANGLE";"D:\Qt\5.15.2\msvc2019_64\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
-      <BrowseInformation>false</BrowseInformation>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__LZO_EXPORT1XXXX#__declspec(dllimport);_WINDOWS;UNICODE;WIN32;NO_CONSOLE;PROGRAM_VERSION="1.5.0+git";QT_NO_DEBUG;QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;NDEBUG;__WIN32;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessToFile>false</PreprocessToFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;hunspell.lib;lzo2.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\Qt5WebKitWidgets.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5MultimediaWidgets.lib;$(QTDIR)\lib\Qt5OpenGL.lib;$(QTDIR)\lib\Qt5PrintSupport.lib;$(QTDIR)\lib\Qt5Svg.lib;$(QTDIR)\lib\Qt5WebKit.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Sensors.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Xml.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;libEGL.lib;libGLESv2.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <LinkIncremental>false</LinkIncremental>
-      <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Windows</SubSystem>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <Version>1.5</Version>
-      <LargeAddressAware>true</LargeAddressAware>
-    </Link>
-    <Midl>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-      <WarningLevel>0</WarningLevel>
-    </Midl>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;NO_CONSOLE;PROGRAM_VERSION=\"1.5.0+git\";QT_NO_DEBUG;QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
+  <PropertyGroup Label="UserMacros" /><ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')"><Import Project="$(QtMsBuild)\qt_defaults.props" /></ImportGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"><OutDir>debug\</OutDir><IntDir>build\</IntDir><TargetName>GoldenDict</TargetName><IgnoreImportLibrary>true</IgnoreImportLibrary></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><OutDir>release\</OutDir><IntDir>build\</IntDir><TargetName>GoldenDict</TargetName><IgnoreImportLibrary>true</IgnoreImportLibrary><LinkIncremental>false</LinkIncremental></PropertyGroup><PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"><QtInstall>5.15.2_msvc2019_64</QtInstall><QtModules>core;xml;sql;network;gui;svg;help;multimedia;widgets;qml;positioning;printsupport;webchannel;quick;webengine;webenginewidgets</QtModules></PropertyGroup><PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><QtInstall>5.15.2_msvc2019_64</QtInstall><QtModules>core;xml;sql;network;gui;svg;help;multimedia;widgets;qml;positioning;printsupport;webchannel;quick;webengine;webenginewidgets</QtModules></PropertyGroup><ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')"><Import Project="$(QtMsBuild)\qt.props" /></ImportGroup>
+  
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"D:\Qt\5.15.2\msvc2019_64\include";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKitWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtQuick";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL";"D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport";"D:\Qt\5.15.2\msvc2019_64\include\QtSvg";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKit";"D:\Qt\5.15.2\msvc2019_64\include\QtQml";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia";"D:\Qt\5.15.2\msvc2019_64\include\QtWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtSensors";"D:\Qt\5.15.2\msvc2019_64\include\QtNetwork";"D:\Qt\5.15.2\msvc2019_64\include\QtXml";"D:\Qt\5.15.2\msvc2019_64\include\QtGui";"D:\Qt\5.15.2\msvc2019_64\include\QtANGLE";"D:\Qt\5.15.2\msvc2019_64\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;build;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>build\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>build\</ObjectFileName>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__WIN32;__WIN64;NOMINMAX;_CRT_SECURE_NO_WARNINGS;QT_NO_OPENSSL;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;NO_CONSOLE;PROGRAM_VERSION="1.5.0";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;NDEBUG;QT_NO_DEBUG;QT_QMLMODELS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName></ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-    </ClCompile>
+    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;hunspell.lib;lzo2.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\Qt5WebKitWidgets.lib;$(QTDIR)\lib\Qt5Quick.lib;$(QTDIR)\lib\Qt5MultimediaWidgets.lib;$(QTDIR)\lib\Qt5OpenGL.lib;$(QTDIR)\lib\Qt5PrintSupport.lib;$(QTDIR)\lib\Qt5Svg.lib;$(QTDIR)\lib\Qt5WebKit.lib;$(QTDIR)\lib\Qt5Qml.lib;$(QTDIR)\lib\Qt5Multimedia.lib;$(QTDIR)\lib\Qt5Widgets.lib;$(QTDIR)\lib\Qt5Sensors.lib;$(QTDIR)\lib\Qt5Network.lib;$(QTDIR)\lib\Qt5Xml.lib;$(QTDIR)\lib\Qt5Gui.lib;$(QTDIR)\lib\Qt5Core.lib;libEGL.lib;libGLESv2.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>z.lib;bz2.lib;lzo2.lib;shell32.lib;user32.lib;sapi.lib;.\winlibs\lib\msvc\hunspell.lib;.\winlibs\lib\msvc\iconv.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;.\winlibs\lib\msvc\vorbisfile.lib;.\winlibs\lib\msvc\vorbis.lib;.\winlibs\lib\msvc\ogg.lib;.\winlibs\lib\msvc\ao.lib;.\winlibs\lib\msvc\swresample-gd.lib;.\winlibs\lib\msvc\avutil-gd.lib;.\winlibs\lib\msvc\avformat-gd.lib;.\winlibs\lib\msvc\avcodec-gd.lib;uxtheme.lib;.\winlibs\lib\msvc\lzma.lib;zstd.lib;.\winlibs\lib\msvc\tiff.lib;.\winlibs\lib\msvc\eb.lib;.\winlibs\lib\msvc\opencc.lib;.\qtsingleapplication\lib\QtSolutions_SingleApplication-head.lib;$(QTDIR)\lib\Qt5QmlModels.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\winlibs\lib\msvc;.\qtsingleapplication\lib;C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreImportLibrary>true</IgnoreImportLibrary>
       <LinkIncremental>false</LinkIncremental>
+      <OptimizeReferences>true</OptimizeReferences>
       <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Windows</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <Version>1.5</Version>
-      <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <Midl>
       <DefaultCharType>Unsigned</DefaultCharType>
@@ -295,106 +88,31 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;NO_CONSOLE;PROGRAM_VERSION=\"1.5.0+git\";QT_NO_DEBUG;QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;NO_CONSOLE;PROGRAM_VERSION=\"1.5.0\";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;NDEBUG;QT_NO_DEBUG;QT_SVG_LIB;QT_WEBENGINEWIDGETS_LIB;QT_PRINTSUPPORT_LIB;QT_HELP_LIB;QT_WIDGETS_LIB;QT_WEBENGINECORE_LIB;QT_QUICK_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_XML_LIB;QT_QMLMODELS_LIB;QT_WEBCHANNEL_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_POSITIONING_LIB;QT_SQL_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;D:\Qt\5.15.2\msvc2019_64\include\QtWebEngineCore;D:\Qt\5.15.2\msvc2019_64\include;D:\Qt\5.15.2\msvc2019_64\include\QtWebEngineWidgets;D:\Qt\5.15.2\msvc2019_64\include\QtQuick;D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets;D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL;D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;D:\Qt\5.15.2\msvc2019_64\include\QtSvg;D:\Qt\5.15.2\msvc2019_64\include\QtWebEngine;D:\Qt\5.15.2\msvc2019_64\include\QtQml;D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia;D:\Qt\5.15.2\msvc2019_64\include\QtWidgets;D:\Qt\5.15.2\msvc2019_64\include\QtSensors;D:\Qt\5.15.2\msvc2019_64\include\QtNetwork;D:\Qt\5.15.2\msvc2019_64\include\QtXml;D:\Qt\5.15.2\msvc2019_64\include\QtGui;D:\Qt\5.15.2\msvc2019_64\include\QtANGLE;D:\Qt\5.15.2\msvc2019_64\include\QtCore;build;..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
-      <BrowseInformation>false</BrowseInformation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__LZO_EXPORT1XXXX#__declspec(dllimport);_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;DISABLE_INTERNAL_PLAYER;__WIN32;NOMINMAX;HUNSPELL_STATIC;USING_STATIC_LIBICONV;_CRT_SECURE_NO_WARNINGS;Q_OS_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessToFile>false</PreprocessToFile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;hunspell.lib;lzo2.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\Qt5WebKitWidgetsd.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5MultimediaWidgetsd.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;$(QTDIR)\lib\Qt5PrintSupportd.lib;$(QTDIR)\lib\Qt5Svgd.lib;$(QTDIR)\lib\Qt5WebKitd.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Multimediad.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Sensorsd.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Xmld.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Console</SubSystem>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ShowProgress>NotSet</ShowProgress>
-      <Version>1.5</Version>
-      <LinkStatus>true</LinkStatus>
-      <LargeAddressAware>true</LargeAddressAware>
-      <DelayLoadDLLs>iconv.dll</DelayLoadDLLs>
-    </Link>
-    <Midl>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-      <WarningLevel>0</WarningLevel>
-    </Midl>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
+  <QtRcc><Compression>default</Compression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription><QtRccDir>build</QtRccDir><QtRccFileName>qrc_%(Filename).cpp</QtRccFileName></QtRcc><QtMoc><CompilerFlavor>msvc</CompilerFlavor><Include>./build/moc_predefs.h</Include><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource><QtMocDir>build</QtMocDir><QtMocFileName>moc_%(Filename).cpp</QtMocFileName></QtMoc><QtUic><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription><QtUicDir>build</QtUicDir><QtUicFileName>ui_%(Filename).h</QtUicFileName></QtUic></ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"D:\Qt\5.15.2\msvc2019_64\include";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKitWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtQuick";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL";"D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport";"D:\Qt\5.15.2\msvc2019_64\include\QtSvg";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKit";"D:\Qt\5.15.2\msvc2019_64\include\QtQml";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia";"D:\Qt\5.15.2\msvc2019_64\include\QtWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtSensors";"D:\Qt\5.15.2\msvc2019_64\include\QtNetwork";"D:\Qt\5.15.2\msvc2019_64\include\QtXml";"D:\Qt\5.15.2\msvc2019_64\include\QtGui";"D:\Qt\5.15.2\msvc2019_64\include\QtANGLE";"D:\Qt\5.15.2\msvc2019_64\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;build;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>build\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;4577;4467;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>build\</ObjectFileName>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__WIN32;__WIN64;NOMINMAX;_CRT_SECURE_NO_WARNINGS;QT_NO_OPENSSL;UNICODE;WIN32;DEBUG;_DEBUG;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;PROGRAM_VERSION="1.5.0";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;QT_QMLMODELS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
+    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
     <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;hunspell.lib;lzo2.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\Qt5WebKitWidgetsd.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5MultimediaWidgetsd.lib;$(QTDIR)\lib\Qt5OpenGLd.lib;$(QTDIR)\lib\Qt5PrintSupportd.lib;$(QTDIR)\lib\Qt5Svgd.lib;$(QTDIR)\lib\Qt5WebKitd.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Multimediad.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Sensorsd.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Xmld.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>z.lib;bz2.lib;lzo2.lib;shell32.lib;user32.lib;sapi.lib;.\winlibs\lib\msvc\hunspelld.lib;.\winlibs\lib\msvc\iconv.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;.\winlibs\lib\msvc\vorbisfile.lib;.\winlibs\lib\msvc\vorbis.lib;.\winlibs\lib\msvc\ogg.lib;.\winlibs\lib\msvc\ao.lib;.\winlibs\lib\msvc\swresample-gd.lib;.\winlibs\lib\msvc\avutil-gd.lib;.\winlibs\lib\msvc\avformat-gd.lib;.\winlibs\lib\msvc\avcodec-gd.lib;uxtheme.lib;.\winlibs\lib\msvc\lzma.lib;zstd.lib;.\winlibs\lib\msvc\tiff.lib;.\winlibs\lib\msvc\eb.lib;.\winlibs\lib\msvc\openccd.lib;.\qtsingleapplication\lib\QtSolutions_SingleApplication-headd.lib;$(QTDIR)\lib\Qt5QmlModelsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\winlibs\lib\msvc;.\qtsingleapplication\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -403,11 +121,7 @@
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <SubSystem>Console</SubSystem>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ShowProgress>NotSet</ShowProgress>
       <Version>1.5</Version>
-      <LinkStatus>true</LinkStatus>
-      <LargeAddressAware>true</LargeAddressAware>
-      <DelayLoadDLLs>iconv.dll</DelayLoadDLLs>
     </Link>
     <Midl>
       <DefaultCharType>Unsigned</DefaultCharType>
@@ -415,295 +129,10 @@
       <WarningLevel>0</WarningLevel>
     </Midl>
     <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;PROGRAM_VERSION=\"1.5.0\";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;QT_SVG_LIB;QT_WEBENGINEWIDGETS_LIB;QT_PRINTSUPPORT_LIB;QT_HELP_LIB;QT_WIDGETS_LIB;QT_WEBENGINECORE_LIB;QT_QUICK_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_XML_LIB;QT_QMLMODELS_LIB;QT_WEBCHANNEL_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_POSITIONING_LIB;QT_SQL_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">
-    <ClCompile>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
-      <BrowseInformation>false</BrowseInformation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__LZO_EXPORT1XXXX#__declspec(dllimport);QT_NO_OPENSSL;_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;DISABLE_INTERNAL_PLAYER;__WIN32;NOMINMAX;HUNSPELL_STATIC;USING_STATIC_LIBICONV;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessToFile>false</PreprocessToFile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;lzo2.lib;hunspell.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\QtSvg4.lib;$(QTDIR)\lib\QtWebKit4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtXml4.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtCore4.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Console</SubSystem>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ShowProgress>NotSet</ShowProgress>
-      <Version>1.5</Version>
-      <LinkStatus>true</LinkStatus>
-      <LargeAddressAware>true</LargeAddressAware>
-      <DelayLoadDLLs>
-      </DelayLoadDLLs>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <Midl>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-      <WarningLevel>0</WarningLevel>
-    </Midl>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
-      <BrowseInformation>false</BrowseInformation>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__WIN32;__WIN64;NOMINMAX;_CRT_SECURE_NO_WARNINGS;QT_NO_OPENSSL;UNICODE;WIN32;DEBUG;_DEBUG;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessToFile>false</PreprocessToFile>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;lzo2.lib;hunspell.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\QtSvg4.lib;$(QTDIR)\lib\QtWebKit4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtXml4.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtCore4.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Console</SubSystem>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ShowProgress>NotSet</ShowProgress>
-      <Version>1.5</Version>
-      <LinkStatus>true</LinkStatus>
-      <LargeAddressAware>true</LargeAddressAware>
-      <DelayLoadDLLs>
-      </DelayLoadDLLs>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <Midl>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-      <WarningLevel>0</WarningLevel>
-    </Midl>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
-      <BrowseInformation>false</BrowseInformation>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>QT_NO_OPENSSL;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;__WIN32;NOMINMAX;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessToFile>false</PreprocessToFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
-      <ProgramDataBaseFileName />
-      <DebugInformationFormat>None</DebugInformationFormat>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;lzo2.lib;hunspell.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\QtSvg4.lib;$(QTDIR)\lib\QtWebKit4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtXml4.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtCore4.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
-      <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Windows</SubSystem>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ShowProgress>NotSet</ShowProgress>
-      <Version>1.5</Version>
-      <LinkStatus>
-      </LinkStatus>
-      <LargeAddressAware>true</LargeAddressAware>
-      <DelayLoadDLLs>
-      </DelayLoadDLLs>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-    </Link>
-    <Midl>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-      <WarningLevel>0</WarningLevel>
-    </Midl>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <Manifest>
-      <AdditionalManifestFiles>$(ProjectDir)\GoldenDict.exe.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
-    </Manifest>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;$(QTDIR)\include;$(QTDIR)\include\QtSvg;$(QTDIR)\include\QtWebKit;$(QTDIR)\include\QtWidgets;$(QTDIR)\include\QtNetwork;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtCore;build;$(QTDIR)\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
-      <BrowseInformation>false</BrowseInformation>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>__WIN32;__WIN64;NOMINMAX;_CRT_SECURE_NO_WARNINGS;QT_NO_OPENSSL;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessToFile>false</PreprocessToFile>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
-      <WarningLevel>Level3</WarningLevel>
-      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
-      <ProgramDataBaseFileName>
-      </ProgramDataBaseFileName>
-      <DebugInformationFormat>None</DebugInformationFormat>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>qtmain.lib;avutil-gd.lib;avcodec-gd.lib;avformat-gd.lib;ao.lib;z.lib;bz2.lib;lzo2.lib;hunspell.lib;iconv.lib;vorbisfile.lib;vorbis.lib;ogg.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;$(QTDIR)\lib\QtSvg4.lib;$(QTDIR)\lib\QtWebKit4.lib;$(QTDIR)\lib\QtNetwork4.lib;$(QTDIR)\lib\QtXml4.lib;$(QTDIR)\lib\QtGui4.lib;$(QTDIR)\lib\QtCore4.lib;gdi32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;$(ProjectDir)\winlibs\lib\msvc\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
-      <IgnoreImportLibrary>true</IgnoreImportLibrary>
-      <OutputFile>$(OutDir)\GoldenDict.exe</OutputFile>
-      <RandomizedBaseAddress>true</RandomizedBaseAddress>
-      <SubSystem>Windows</SubSystem>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-      <ShowProgress>NotSet</ShowProgress>
-      <Version>1.5</Version>
-      <LinkStatus>
-      </LinkStatus>
-      <LargeAddressAware>true</LargeAddressAware>
-      <DelayLoadDLLs>
-      </DelayLoadDLLs>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-    </Link>
-    <Midl>
-      <DefaultCharType>Unsigned</DefaultCharType>
-      <EnableErrorChecks>None</EnableErrorChecks>
-      <WarningLevel>0</WarningLevel>
-    </Midl>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION=\"1.5.0+git\";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-    <PostBuildEvent>
-      <Command>copy $(ProjectDir)\winlibs\lib\msvc\x64\*.dll $(ProjectDir)\$(Configuration)\$(Platform) &gt;NUL</Command>
-    </PostBuildEvent>
-    <Manifest>
-      <AdditionalManifestFiles>$(ProjectDir)\GoldenDict.exe.manifest %(AdditionalManifestFiles)</AdditionalManifestFiles>
-    </Manifest>
-    <QtUICCompile>
-      <OutputFile>$(ProjectDir)build\ui_%(Filename).h</OutputFile>
-      <UIC>$(QTDIR)\bin\uic.exe</UIC>
-    </QtUICCompile>
-    <QtTranslate>
-      <Compress>false</Compress>
-      <OutputFile>$(OutDir)locale\%(Filename).qm</OutputFile>
-    </QtTranslate>
-    <QtMOCCompile>
-      <OutputFile>$(ProjectDir)build\moc_%(Filename).cpp</OutputFile>
-    </QtMOCCompile>
-    <QtRCCCompile>
-      <OutputFile>$(ProjectDir)build\qrc_%(Filename).cpp</OutputFile>
-    </QtRCCCompile>
-  </ItemDefinitionGroup>
+  <QtMoc><CompilerFlavor>msvc</CompilerFlavor><Include>./build/moc_predefs.h</Include><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource><QtMocDir>build</QtMocDir><QtMocFileName>moc_%(Filename).cpp</QtMocFileName></QtMoc><QtRcc><Compression>default</Compression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription><QtRccDir>build</QtRccDir><QtRccFileName>qrc_%(Filename).cpp</QtRccFileName></QtRcc><QtUic><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription><QtUicDir>build</QtUicDir><QtUicFileName>ui_%(Filename).h</QtUicFileName></QtUic></ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="delegate.cc" />
-    <ClCompile Include="ffmpegaudio.cc" />
-    <ClCompile Include="gico_schemahandler.cpp" />
     <ClCompile Include="mouseover_win32\ThTypes.c" />
     <ClCompile Include="aard.cc" />
     <ClCompile Include="about.cc" />
@@ -713,42 +142,56 @@
     <ClCompile Include="articlewebview.cc" />
     <ClCompile Include="atomic_rename.cc" />
     <ClCompile Include="audiolink.cc" />
+    <ClCompile Include="audioplayerfactory.cc" />
     <ClCompile Include="belarusiantranslit.cc" />
     <ClCompile Include="bgl.cc" />
     <ClCompile Include="bgl_babylon.cc" />
     <ClCompile Include="broken_xrecord.cc" />
     <ClCompile Include="btreeidx.cc" />
+    <ClCompile Include="chinese.cc" />
+    <ClCompile Include="chineseconversion.cc" />
     <ClCompile Include="chunkedstorage.cc" />
     <ClCompile Include="config.cc" />
     <ClCompile Include="country.cc" />
     <ClCompile Include="decompress.cc" />
+    <ClCompile Include="delegate.cc" />
     <ClCompile Include="dictdfiles.cc" />
+    <ClCompile Include="dictheadwords.cc" />
     <ClCompile Include="dictinfo.cc" />
     <ClCompile Include="dictionary.cc" />
     <ClCompile Include="dictionarybar.cc" />
-    <ClCompile Include="dictzip.c">
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">CompileAsC</CompileAs>
-      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">CompileAsC</CompileAs>
-    </ClCompile>
+    <ClCompile Include="dictserver.cc" />
+    <ClCompile Include="dictzip.c" />
     <ClCompile Include="dsl.cc" />
     <ClCompile Include="dsl_details.cc" />
     <ClCompile Include="editdictionaries.cc" />
+    <ClCompile Include="epwing.cc" />
+    <ClCompile Include="epwing_book.cc" />
+    <ClCompile Include="epwing_charmap.cc" />
+    <ClCompile Include="externalaudioplayer.cc" />
     <ClCompile Include="externalviewer.cc" />
     <ClCompile Include="extlineedit.cc" />
+    <ClCompile Include="favoritespanewidget.cc" />
+    <ClCompile Include="ffmpegaudio.cc" />
     <ClCompile Include="file.cc" />
     <ClCompile Include="filetype.cc" />
     <ClCompile Include="folding.cc" />
     <ClCompile Include="forvo.cc" />
     <ClCompile Include="fsencoding.cc" />
+    <ClCompile Include="ftshelpers.cc" />
+    <ClCompile Include="fulltextsearch.cc" />
     <ClCompile Include="gdappstyle.cc" />
+    <ClCompile Include="gddebug.cc" />
     <ClCompile Include="german.cc" />
+    <ClCompile Include="gestures.cc" />
+    <ClCompile Include="gico_schemahandler.cpp" />
+    <ClCompile Include="gls.cc" />
     <ClCompile Include="greektranslit.cc" />
     <ClCompile Include="groupcombobox.cc" />
     <ClCompile Include="groups.cc" />
     <ClCompile Include="groups_widgets.cc" />
     <ClCompile Include="guids.c" />
+    <ClCompile Include="helpwindow.cc" />
     <ClCompile Include="history.cc" />
     <ClCompile Include="historypanewidget.cc" />
     <ClCompile Include="hotkeyedit.cc" />
@@ -773,33 +216,38 @@
     <ClCompile Include="mediawiki.cc" />
     <ClCompile Include="mouseover.cc" />
     <ClCompile Include="mruqmenu.cc" />
+    <ClCompile Include="multimediaaudioplayer.cc" />
     <ClCompile Include="mutex.cc" />
     <ClCompile Include="orderandprops.cc" />
     <ClCompile Include="parsecmdline.cc" />
     <ClCompile Include="preferences.cc" />
     <ClCompile Include="processwrapper.cc" />
     <ClCompile Include="programs.cc" />
-    <ClCompile Include="qtsingleapplication\src\qtlocalpeer.cpp" />
-    <ClCompile Include="qtsingleapplication\src\qtsingleapplication.cpp" />
+    <ClCompile Include="ripemd.cc" />
     <ClCompile Include="romaji.cc" />
     <ClCompile Include="russiantranslit.cc" />
     <ClCompile Include="scanpopup.cc" />
     <ClCompile Include="sdict.cc" />
+    <ClCompile Include="slob.cc" />
     <ClCompile Include="sounddir.cc" />
     <ClCompile Include="sources.cc" />
     <ClCompile Include="speechclient_win.cc" />
     <ClCompile Include="speechhlp.cc" />
+    <ClCompile Include="splitfile.cc" />
     <ClCompile Include="stardict.cc" />
     <ClCompile Include="stylescombobox.cc" />
     <ClCompile Include="termination.cc" />
     <ClCompile Include="texttospeechsource.cc" />
+    <ClCompile Include="tiff.cc" />
     <ClCompile Include="translatebox.cc" />
     <ClCompile Include="transliteration.cc" />
+    <ClCompile Include="treeview.cc" />
     <ClCompile Include="ufile.cc" />
     <ClCompile Include="utf8.cc" />
     <ClCompile Include="voiceengines.cc" />
     <ClCompile Include="webmultimediadownload.cc" />
     <ClCompile Include="website.cc" />
+    <ClCompile Include="wildcard.cc" />
     <ClCompile Include="wordbyauto.cc" />
     <ClCompile Include="wordfinder.cc" />
     <ClCompile Include="wordlist.cc" />
@@ -808,196 +256,1308 @@
     <ClCompile Include="x64.cc" />
     <ClCompile Include="xdxf.cc" />
     <ClCompile Include="xdxf2html.cc" />
+    <ClCompile Include="zim.cc" />
     <ClCompile Include="zipfile.cc" />
     <ClCompile Include="zipsounds.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mouseover_win32\ThTypes.h" />
     <ClInclude Include="aard.hh" />
-    <QtMOCCompile Include="about.hh" />
-    <QtMOCCompile Include="article_maker.hh" />
-    <QtMOCCompile Include="article_netmgr.hh" />
-    <QtMOCCompile Include="articleview.hh" />
-    <QtMOCCompile Include="articlewebview.hh" />
+    <QtMoc Include="about.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="article_maker.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="article_netmgr.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="articleview.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="articlewebview.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="atomic_rename.hh" />
     <ClInclude Include="audiolink.hh" />
+    <ClInclude Include="audioplayerfactory.hh" />
+    <QtMoc Include="audioplayerinterface.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="belarusiantranslit.hh" />
     <ClInclude Include="bgl.hh" />
     <ClInclude Include="bgl_babylon.hh" />
     <ClInclude Include="broken_xrecord.hh" />
     <ClInclude Include="btreeidx.hh" />
+    <ClInclude Include="chinese.hh" />
+    <QtMoc Include="chineseconversion.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="chunkedstorage.hh" />
-    <QtMOCCompile Include="config.hh" />
+    <QtMoc Include="config.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="country.hh" />
+    <ClInclude Include="cpp_features.hh" />
     <ClInclude Include="decompress.hh" />
+    <ClInclude Include="delegate.hh" />
     <ClInclude Include="dictdfiles.hh" />
-    <QtMOCCompile Include="dictinfo.hh" />
-    <QtMOCCompile Include="dictionary.hh" />
-    <QtMOCCompile Include="dictionarybar.hh" />
-    <QtMOCCompile Include="dictspanewidget.hh" />
+    <QtMoc Include="dictheadwords.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="dictinfo.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="dictionary.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="dictionarybar.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="dictserver.hh" />
+    <QtMoc Include="dictspanewidget.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="dictzip.h" />
     <ClInclude Include="dsl.hh" />
     <ClInclude Include="dsl_details.hh" />
-    <QtMOCCompile Include="editdictionaries.hh" />
+    <QtMoc Include="editdictionaries.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="epwing.hh" />
+    <ClInclude Include="epwing_book.hh" />
+    <ClInclude Include="epwing_charmap.hh" />
     <ClInclude Include="ex.hh" />
-    <QtMOCCompile Include="externalviewer.hh" />
-    <QtMOCCompile Include="extlineedit.hh" />
+    <QtMoc Include="externalaudioplayer.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="externalviewer.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="extlineedit.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="favoritespanewidget.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="ffmpegaudio.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="ffmpegaudioplayer.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="file.hh" />
     <ClInclude Include="filetype.hh" />
     <ClInclude Include="folding.hh" />
-    <QtMOCCompile Include="forvo.hh" />
+    <QtMoc Include="forvo.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="fsencoding.hh" />
-    <QtMOCCompile Include="gdappstyle.hh" />
+    <ClInclude Include="ftshelpers.hh" />
+    <QtMoc Include="fulltextsearch.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="gdappstyle.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="gddebug.hh" />
     <ClInclude Include="german.hh" />
+    <ClInclude Include="gestures.hh" />
+    <QtMoc Include="gico_schemahandler.h">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="gls.hh" />
     <ClInclude Include="greektranslit.hh" />
-    <QtMOCCompile Include="gico_schemahandler.h" />
-    <QtMOCCompile Include="groupcombobox.hh" />
-    <QtMOCCompile Include="groups.hh" />
-    <QtMOCCompile Include="groups_widgets.hh" />
-    <QtMOCCompile Include="history.hh" />
-    <QtMOCCompile Include="historypanewidget.hh" />
-    <QtMOCCompile Include="hotkeyedit.hh" />
-    <QtMOCCompile Include="hotkeywrapper.hh" />
+    <QtMoc Include="groupcombobox.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="groups.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="groups_widgets.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="helpwindow.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="history.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="historypanewidget.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="hotkeyedit.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="hotkeys.h" />
+    <QtMoc Include="hotkeywrapper.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="htmlescape.hh" />
     <ClInclude Include="hunspell.hh" />
     <ClInclude Include="iconv.hh" />
     <ClInclude Include="inc_case_folding.hh" />
     <ClInclude Include="inc_diacritic_folding.hh" />
     <ClInclude Include="indexedzip.hh" />
-    <QtMOCCompile Include="initializing.hh" />
+    <QtMoc Include="initializing.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="instances.hh" />
     <ClInclude Include="keyboardstate.hh" />
     <ClInclude Include="langcoder.hh" />
     <ClInclude Include="language.hh" />
-    <QtMOCCompile Include="loaddictionaries.hh" />
+    <QtMoc Include="loaddictionaries.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="lsa.hh" />
-    <QtMOCCompile Include="mainstatusbar.hh" />
-    <QtMOCCompile Include="maintabwidget.hh" />
-    <QtMOCCompile Include="mainwindow.hh" />
+    <QtMoc Include="mainstatusbar.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="maintabwidget.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="mainwindow.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="mdictparser.hh" />
     <ClInclude Include="mdx.hh" />
-    <QtMOCCompile Include="mediawiki.hh" />
-    <QtMOCCompile Include="mouseover.hh" />
-    <QtMOCCompile Include="mruqmenu.hh" />
+    <QtMoc Include="mediawiki.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="mouseover.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="mruqmenu.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="multimediaaudioplayer.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="mutex.hh" />
-    <QtMOCCompile Include="orderandprops.hh" />
+    <QtMoc Include="orderandprops.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="parsecmdline.hh" />
-    <QtMOCCompile Include="preferences.hh" />
+    <QtMoc Include="preferences.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="processwrapper.hh" />
-    <QtMOCCompile Include="programs.hh" />
+    <QtMoc Include="programs.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="qt4x5.hh" />
-    <QtMOCCompile Include="qtsingleapplication\src\qtlocalpeer.h" />
-    <QtMOCCompile Include="qtsingleapplication\src\qtsingleapplication.h" />
+    <ClInclude Include="ripemd.hh" />
     <ClInclude Include="romaji.hh" />
     <ClInclude Include="russiantranslit.hh" />
     <ClInclude Include="sapi.hh" />
-    <QtMOCCompile Include="scanpopup.hh" />
+    <QtMoc Include="scanpopup.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="sdict.hh" />
     <ClInclude Include="searchpanewidget.hh" />
+    <ClInclude Include="slob.hh" />
     <ClInclude Include="sounddir.hh" />
-    <QtMOCCompile Include="sources.hh" />
-    <QtMOCCompile Include="speechclient.hh" />
+    <QtMoc Include="sources.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="speechclient.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="speechhlp.hh" />
     <ClInclude Include="sphelper.hh" />
+    <ClInclude Include="splitfile.hh" />
     <ClInclude Include="sptr.hh" />
     <ClInclude Include="stardict.hh" />
-    <QtMOCCompile Include="stylescombobox.hh" />
+    <QtMoc Include="stylescombobox.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="termination.hh" />
-    <QtMOCCompile Include="texttospeechsource.hh" />
-    <QtMOCCompile Include="translatebox.hh" />
+    <QtMoc Include="texttospeechsource.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="tiff.hh" />
+    <QtMoc Include="translatebox.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="transliteration.hh" />
+    <ClInclude Include="treeview.hh" />
     <ClInclude Include="ufile.hh" />
     <ClInclude Include="uiauto.hh" />
     <ClInclude Include="utf8.hh" />
     <ClInclude Include="voiceengines.hh" />
-    <QtMOCCompile Include="webmultimediadownload.hh" />
-    <ClInclude Include="website.hh" />
+    <QtMoc Include="webmultimediadownload.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="website.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <ClInclude Include="wildcard.hh" />
     <ClInclude Include="wordbyauto.hh" />
-    <QtMOCCompile Include="wordfinder.hh" />
-    <QtMOCCompile Include="wordlist.hh" />
+    <QtMoc Include="wordfinder.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
+    <QtMoc Include="wordlist.hh">
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtMoc>
     <ClInclude Include="wstring.hh" />
     <ClInclude Include="wstring_qt.hh" />
     <ClInclude Include="x64.hh" />
     <ClInclude Include="xdxf.hh" />
     <ClInclude Include="xdxf2html.hh" />
+    <ClInclude Include="zim.hh" />
     <ClInclude Include="zipfile.hh" />
     <ClInclude Include="zipsounds.hh" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="build\ui_about.h" />
-    <ClInclude Include="build\ui_articleview.h" />
-    <ClInclude Include="build\ui_dictgroupwidget.h" />
-    <ClInclude Include="build\ui_dictinfo.h" />
-    <ClInclude Include="build\ui_editdictionaries.h" />
-    <ClInclude Include="build\ui_groups.h" />
-    <ClInclude Include="build\ui_groupselectorwidget.h" />
-    <ClInclude Include="build\ui_initializing.h" />
-    <ClInclude Include="build\ui_mainwindow.h" />
-    <ClInclude Include="build\ui_orderandprops.h" />
-    <ClInclude Include="build\ui_preferences.h" />
-    <ClInclude Include="build\ui_scanpopup.h" />
-    <ClInclude Include="build\ui_sources.h" />
-    <ClInclude Include="build\ui_texttospeechsource.h" />
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <CustomBuild Include="build\moc_predefs.h.cbt">
+      <FileType>Document</FileType>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /wd4290 -O2 -MD -EHsc -GR -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;build\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">build\moc_predefs.h;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cl -Bx"$(QTDIR)\bin\qmake.exe" -nologo -Zc:wchar_t -FS -Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew /wd4290 -Zi -MDd -EHsc -GR -W3 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458 -wd4577 -wd4467 -E $(QTDIR)\mkspecs\features\data\dummy.cpp 2&gt;NUL &gt;build\moc_predefs.h</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">build\moc_predefs.h;%(Outputs)</Outputs>
+    </CustomBuild>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
   </ItemGroup>
   <ItemGroup>
-    <QtTranslate Include="locale\ar_SA.ts" />
-    <QtTranslate Include="locale\ay_WI.ts" />
-    <QtTranslate Include="locale\be_BY.ts" />
-    <QtTranslate Include="locale\be_BY@latin.ts" />
-    <QtTranslate Include="locale\bg_BG.ts" />
-    <QtTranslate Include="locale\cs_CZ.ts" />
-    <QtTranslate Include="locale\de_DE.ts" />
-    <QtTranslate Include="locale\el_GR.ts" />
-    <QtTranslate Include="locale\es_AR.ts" />
-    <QtTranslate Include="locale\es_BO.ts" />
-    <QtTranslate Include="locale\es_ES.ts" />
-    <QtTranslate Include="locale\fr_FR.ts" />
-    <QtTranslate Include="locale\it_IT.ts" />
-    <QtTranslate Include="locale\ja_JP.ts" />
-    <QtTranslate Include="locale\ko_KR.ts" />
-    <QtTranslate Include="locale\lt_LT.ts" />
-    <QtTranslate Include="locale\nl_NL.ts" />
-    <QtTranslate Include="locale\pl_PL.ts" />
-    <QtTranslate Include="locale\pt_BR.ts" />
-    <QtTranslate Include="locale\qu_WI.ts" />
-    <QtTranslate Include="locale\ru_RU.ts" />
-    <QtTranslate Include="locale\sk_SK.ts" />
-    <QtTranslate Include="locale\sq_AL.ts" />
-    <QtTranslate Include="locale\sr_SR.ts" />
-    <QtTranslate Include="locale\sv_SE.ts" />
-    <QtTranslate Include="locale\tg_TJ.ts" />
-    <QtTranslate Include="locale\tk_TM.ts" />
-    <QtTranslate Include="locale\tr_TR.ts" />
-    <QtTranslate Include="locale\uk_UA.ts" />
-    <QtTranslate Include="locale\vi_VN.ts" />
-    <QtTranslate Include="locale\zh_CN.ts" />
-    <QtTranslate Include="locale\zh_TW.ts" />
-    <QtTranslate Include="locale\eo_EO.ts" />
-    <QtTranslate Include="locale\fi_FI.ts" />
+    <CustomBuild Include="locale\ar_SA.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ar_SA.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\ar_SA.ts -qm locale\ar_SA.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ar_SA.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ar_SA.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\ar_SA.ts -qm locale\ar_SA.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ar_SA.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\ay_WI.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ay_WI.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\ay_WI.ts -qm locale\ay_WI.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ay_WI.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ay_WI.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\ay_WI.ts -qm locale\ay_WI.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ay_WI.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\be_BY.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\be_BY.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\be_BY.ts -qm locale\be_BY.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\be_BY.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\be_BY.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\be_BY.ts -qm locale\be_BY.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\be_BY.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\be_BY@latin.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\be_BY@latin.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\be_BY@latin.ts -qm locale\be_BY@latin.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\be_BY@latin.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\be_BY@latin.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\be_BY@latin.ts -qm locale\be_BY@latin.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\be_BY@latin.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\bg_BG.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\bg_BG.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\bg_BG.ts -qm locale\bg_BG.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\bg_BG.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\bg_BG.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\bg_BG.ts -qm locale\bg_BG.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\bg_BG.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\cs_CZ.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\cs_CZ.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\cs_CZ.ts -qm locale\cs_CZ.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\cs_CZ.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\cs_CZ.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\cs_CZ.ts -qm locale\cs_CZ.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\cs_CZ.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\de_DE.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\de_DE.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\de_DE.ts -qm locale\de_DE.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\de_DE.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\de_DE.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\de_DE.ts -qm locale\de_DE.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\de_DE.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\el_GR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\el_GR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\el_GR.ts -qm locale\el_GR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\el_GR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\el_GR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\el_GR.ts -qm locale\el_GR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\el_GR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\eo_EO.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\eo_EO.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\eo_EO.ts -qm locale\eo_EO.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\eo_EO.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\eo_EO.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\eo_EO.ts -qm locale\eo_EO.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\eo_EO.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\es_AR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\es_AR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\es_AR.ts -qm locale\es_AR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\es_AR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\es_AR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\es_AR.ts -qm locale\es_AR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\es_AR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\es_BO.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\es_BO.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\es_BO.ts -qm locale\es_BO.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\es_BO.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\es_BO.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\es_BO.ts -qm locale\es_BO.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\es_BO.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\es_ES.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\es_ES.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\es_ES.ts -qm locale\es_ES.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\es_ES.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\es_ES.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\es_ES.ts -qm locale\es_ES.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\es_ES.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\fa_IR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\fa_IR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\fa_IR.ts -qm locale\fa_IR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\fa_IR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\fa_IR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\fa_IR.ts -qm locale\fa_IR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\fa_IR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\fi_FI.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\fi_FI.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\fi_FI.ts -qm locale\fi_FI.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\fi_FI.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\fi_FI.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\fi_FI.ts -qm locale\fi_FI.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\fi_FI.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\fr_FR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\fr_FR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\fr_FR.ts -qm locale\fr_FR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\fr_FR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\fr_FR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\fr_FR.ts -qm locale\fr_FR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\fr_FR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\hi_IN.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\hi_IN.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\hi_IN.ts -qm locale\hi_IN.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\hi_IN.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\hi_IN.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\hi_IN.ts -qm locale\hi_IN.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\hi_IN.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\ie_001.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ie_001.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\ie_001.ts -qm locale\ie_001.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ie_001.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ie_001.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\ie_001.ts -qm locale\ie_001.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ie_001.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\it_IT.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\it_IT.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\it_IT.ts -qm locale\it_IT.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\it_IT.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\it_IT.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\it_IT.ts -qm locale\it_IT.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\it_IT.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\ja_JP.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ja_JP.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\ja_JP.ts -qm locale\ja_JP.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ja_JP.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ja_JP.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\ja_JP.ts -qm locale\ja_JP.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ja_JP.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\jb_JB.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\jb_JB.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\jb_JB.ts -qm locale\jb_JB.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\jb_JB.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\jb_JB.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\jb_JB.ts -qm locale\jb_JB.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\jb_JB.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\ko_KR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ko_KR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\ko_KR.ts -qm locale\ko_KR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ko_KR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ko_KR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\ko_KR.ts -qm locale\ko_KR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ko_KR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\lt_LT.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\lt_LT.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\lt_LT.ts -qm locale\lt_LT.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\lt_LT.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\lt_LT.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\lt_LT.ts -qm locale\lt_LT.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\lt_LT.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\mk_MK.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\mk_MK.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\mk_MK.ts -qm locale\mk_MK.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\mk_MK.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\mk_MK.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\mk_MK.ts -qm locale\mk_MK.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\mk_MK.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\nl_NL.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\nl_NL.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\nl_NL.ts -qm locale\nl_NL.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\nl_NL.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\nl_NL.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\nl_NL.ts -qm locale\nl_NL.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\nl_NL.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\pl_PL.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\pl_PL.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\pl_PL.ts -qm locale\pl_PL.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\pl_PL.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\pl_PL.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\pl_PL.ts -qm locale\pl_PL.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\pl_PL.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\pt_BR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\pt_BR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\pt_BR.ts -qm locale\pt_BR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\pt_BR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\pt_BR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\pt_BR.ts -qm locale\pt_BR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\pt_BR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\qu_WI.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\qu_WI.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\qu_WI.ts -qm locale\qu_WI.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\qu_WI.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\qu_WI.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\qu_WI.ts -qm locale\qu_WI.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\qu_WI.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\ru_RU.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ru_RU.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\ru_RU.ts -qm locale\ru_RU.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\ru_RU.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ru_RU.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\ru_RU.ts -qm locale\ru_RU.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\ru_RU.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\sk_SK.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sk_SK.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\sk_SK.ts -qm locale\sk_SK.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sk_SK.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sk_SK.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\sk_SK.ts -qm locale\sk_SK.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sk_SK.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\sq_AL.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sq_AL.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\sq_AL.ts -qm locale\sq_AL.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sq_AL.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sq_AL.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\sq_AL.ts -qm locale\sq_AL.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sq_AL.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\sr_SR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sr_SR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\sr_SR.ts -qm locale\sr_SR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sr_SR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sr_SR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\sr_SR.ts -qm locale\sr_SR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sr_SR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\sv_SE.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sv_SE.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\sv_SE.ts -qm locale\sv_SE.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\sv_SE.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sv_SE.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\sv_SE.ts -qm locale\sv_SE.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\sv_SE.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\tg_TJ.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\tg_TJ.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\tg_TJ.ts -qm locale\tg_TJ.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\tg_TJ.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\tg_TJ.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\tg_TJ.ts -qm locale\tg_TJ.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\tg_TJ.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\tk_TM.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\tk_TM.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\tk_TM.ts -qm locale\tk_TM.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\tk_TM.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\tk_TM.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\tk_TM.ts -qm locale\tk_TM.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\tk_TM.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\tr_TR.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\tr_TR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\tr_TR.ts -qm locale\tr_TR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\tr_TR.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\tr_TR.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\tr_TR.ts -qm locale\tr_TR.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\tr_TR.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\uk_UA.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\uk_UA.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\uk_UA.ts -qm locale\uk_UA.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\uk_UA.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\uk_UA.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\uk_UA.ts -qm locale\uk_UA.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\uk_UA.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\vi_VN.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\vi_VN.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\vi_VN.ts -qm locale\vi_VN.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\vi_VN.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\vi_VN.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\vi_VN.ts -qm locale\vi_VN.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\vi_VN.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\zh_CN.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\zh_CN.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\zh_CN.ts -qm locale\zh_CN.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\zh_CN.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\zh_CN.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\zh_CN.ts -qm locale\zh_CN.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\zh_CN.qm;%(Outputs)</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="locale\zh_TW.ts">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\zh_TW.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease locale\zh_TW.ts -qm locale\zh_TW.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">locale\zh_TW.qm;%(Outputs)</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\zh_TW.ts;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease locale\zh_TW.ts -qm locale\zh_TW.qm</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)/bin/lrelease</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">locale\zh_TW.qm;%(Outputs)</Outputs>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <QtUICCompile Include="about.ui" />
-    <QtUICCompile Include="articleview.ui" />
-    <QtUICCompile Include="dictgroupwidget.ui" />
-    <QtUICCompile Include="dictinfo.ui" />
-    <QtUICCompile Include="editdictionaries.ui" />
-    <QtUICCompile Include="groups.ui" />
-    <QtUICCompile Include="initializing.ui" />
-    <QtUICCompile Include="mainwindow.ui" />
-    <QtUICCompile Include="dictheadwords.ui" />
-    <QtUICCompile Include="preferences.ui" />
-    <QtUICCompile Include="scanpopup.ui" />
-    <QtUICCompile Include="sources.ui" />
-    <QtUICCompile Include="orderandprops.ui" />
-    <QtUICCompile Include="authentication.ui" />
-    <QtUICCompile Include="fulltextsearch.ui" />
-    <QtUICCompile Include="texttospeechsource.ui" />
+    <QtUic Include="about.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="articleview.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="authentication.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="chineseconversion.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="dictgroupwidget.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="dictheadwords.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="dictinfo.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="editdictionaries.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="fulltextsearch.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="groups.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="initializing.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="mainwindow.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="orderandprops.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="preferences.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="scanpopup.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="sources.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
+    <QtUic Include="texttospeechsource.ui">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="delegate.hh" />
-    <QtMOCCompile Include="ffmpegaudio.hh" />
+    <None Include="icons\1downarrow.png" />
     <None Include="CREDITS.txt" />
     <None Include="flags\ad.png" />
+    <None Include="icons\addtab.png" />
     <None Include="flags\ae.png" />
     <None Include="flags\af.png" />
     <None Include="flags\ag.png" />
@@ -1007,6 +1567,7 @@
     <None Include="flags\an.png" />
     <None Include="flags\ao.png" />
     <None Include="flags\ar.png" />
+    <None Include="icons\arrow.png" />
     <None Include="article-style-print.css" />
     <None Include="article-style-st-babylon.css" />
     <None Include="article-style-st-lingoes-blue.css" />
@@ -1029,9 +1590,12 @@
     <None Include="flags\bh.png" />
     <None Include="flags\bi.png" />
     <None Include="flags\bj.png" />
+    <None Include="icons\blank.png" />
     <None Include="flags\bm.png" />
     <None Include="flags\bn.png" />
     <None Include="flags\bo.png" />
+    <None Include="icons\book.png" />
+    <None Include="icons\bookcase.png" />
     <None Include="flags\br.png" />
     <None Include="flags\bs.png" />
     <None Include="flags\bt.png" />
@@ -1049,9 +1613,15 @@
     <None Include="flags\ci.png" />
     <None Include="flags\ck.png" />
     <None Include="flags\cl.png" />
+    <None Include="icons\clear.png" />
+    <None Include="icons\closetab.png" />
     <None Include="flags\cm.png" />
     <None Include="flags\cn.png" />
     <None Include="flags\co.png" />
+    <None Include="icons\collapse_article.png" />
+    <None Include="icons\collapse_article_hovered.png" />
+    <None Include="icons\collapse_opt.png" />
+    <None Include="icons\configure.png" />
     <None Include="flags\cr.png" />
     <None Include="flags\cs.png" />
     <None Include="flags\cu.png" />
@@ -1064,6 +1634,7 @@
     <None Include="flags\dk.png" />
     <None Include="flags\dm.png" />
     <None Include="flags\do.png" />
+    <None Include="icons\downarrow.png" />
     <None Include="flags\dz.png" />
     <None Include="flags\ec.png" />
     <None Include="flags\ee.png" />
@@ -1077,12 +1648,31 @@
     <None Include="flags\es.png" />
     <None Include="flags\et.png" />
     <None Include="flags\europeanunion.png" />
+    <None Include="icons\expand_article.png" />
+    <None Include="icons\expand_article_hovered.png" />
+    <None Include="icons\expand_opt.png" />
+    <None Include="flags\fam.png" />
     <None Include="flags\fi.png" />
+    <None Include="icons\fileopen.png" />
+    <None Include="icons\filesave.png" />
     <None Include="flags\fj.png" />
     <None Include="flags\fk.png" />
-    <QtRCCCompile Include="flags.qrc" />
+    <QtRcc Include="flags.qrc">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flags</InitFuncName><InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flags</InitFuncName></QtRcc>
     <None Include="flags\fm.png" />
     <None Include="flags\fo.png" />
+    <None Include="flags\folder.png" />
+    <None Include="icons\folder.png" />
+    <None Include="icons\forvo.png" />
     <None Include="flags\fr.png" />
     <None Include="flags\ga.png" />
     <None Include="flags\gb.png" />
@@ -1102,17 +1692,37 @@
     <None Include="flags\gu.png" />
     <None Include="flags\gw.png" />
     <None Include="flags\gy.png" />
+    <None Include="icons\highlighter.png" />
     <None Include="flags\hk.png" />
     <None Include="flags\hm.png" />
     <None Include="flags\hn.png" />
+    <None Include="icons\home.png" />
+    <None Include="icons\hotkeys.png" />
     <None Include="flags\hr.png" />
     <None Include="flags\ht.png" />
     <None Include="flags\hu.png" />
+    <None Include="icons\icon32_aard.png" />
+    <None Include="icons\icon32_bgl.png" />
+    <None Include="icons\icon32_dictd.png" />
+    <None Include="icons\icon32_dsl.png" />
+    <None Include="icons\icon32_epwing.png" />
+    <None Include="icons\icon32_gls.png" />
+    <None Include="icons\icon32_hunspell.png" />
+    <None Include="icons\icon32_lingoes.png" />
+    <None Include="icons\icon32_sdict.png" />
+    <None Include="icons\icon32_slob.png" />
+    <None Include="icons\icon32_stardict.png" />
+    <None Include="icons\icon32_wiki.png" />
+    <None Include="icons\icon32_xdxf.png" />
+    <None Include="icons\icon32_zim.png" />
+    <None Include="icons\icon32_zoombase.png" />
+    <None Include="icons\icon32_zoomin.png" />
+    <None Include="icons\icon32_zoomout.png" />
+    <None Include="icons\icon_dsl_native.png" />
     <None Include="flags\id.png" />
     <None Include="flags\ie.png" />
     <None Include="flags\il.png" />
     <None Include="flags\in.png" />
-    <None Include="icons\icon.svg" />
     <None Include="icons\interface.png" />
     <None Include="icons\internet.png" />
     <None Include="flags\io.png" />
@@ -1121,6 +1731,7 @@
     <None Include="flags\is.png" />
     <None Include="flags\it.png" />
     <None Include="flags\ja.png" />
+    <None Include="flags\jb.png" />
     <None Include="flags\jm.png" />
     <None Include="flags\jo.png" />
     <None Include="flags\jp.png" />
@@ -1186,6 +1797,7 @@
     <None Include="flags\nu.png" />
     <None Include="flags\nz.png" />
     <None Include="flags\om.png" />
+    <None Include="icons\ontop.png" />
     <None Include="flags\other.png" />
     <None Include="flags\pa.png" />
     <None Include="flags\pe.png" />
@@ -1195,6 +1807,8 @@
     <None Include="flags\pk.png" />
     <None Include="flags\pl.png" />
     <None Include="icons\playsound.png" />
+    <None Include="icons\playsound_color.png" />
+    <None Include="icons\playsound_full.png" />
     <None Include="flags\pm.png" />
     <None Include="flags\pn.png" />
     <None Include="flags\pr.png" />
@@ -1202,6 +1816,7 @@
     <None Include="icons\previous.png" />
     <None Include="icons\print.png" />
     <None Include="icons\programicon.png" />
+    <None Include="icons\programicon_old.png" />
     <None Include="icons\programicon_scan.png" />
     <None Include="icons\programs.png" />
     <None Include="flags\ps.png" />
@@ -1210,16 +1825,6 @@
     <None Include="flags\pw.png" />
     <None Include="flags\py.png" />
     <None Include="flags\qa.png" />
-    <None Include="MSBuild\custom.props" />
-    <None Include="MSBuild\custom.targets" />
-    <None Include="MSBuild\QtExtensions\lrelease.props" />
-    <None Include="MSBuild\QtExtensions\lrelease.targets" />
-    <None Include="MSBuild\QtExtensions\moc.props" />
-    <None Include="MSBuild\QtExtensions\moc.targets" />
-    <None Include="MSBuild\QtExtensions\rcc.props" />
-    <None Include="MSBuild\QtExtensions\rcc.targets" />
-    <None Include="MSBuild\QtExtensions\uic.props" />
-    <None Include="MSBuild\QtExtensions\uic.targets" />
     <None Include="qt-style-macos.css" />
     <None Include="qt-style-st-babylon.css" />
     <None Include="qt-style-st-lingoes-blue.css" />
@@ -1228,7 +1833,17 @@
     <None Include="qt-style.css" />
     <None Include="flags\re.png" />
     <None Include="icons\reload.png" />
-    <QtRCCCompile Include="resources.qrc" />
+    <QtRcc Include="resources.qrc">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">resources</InitFuncName><InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">resources</InitFuncName></QtRcc>
     <None Include="flags\ro.png" />
     <None Include="flags\rs.png" />
     <None Include="flags\ru.png" />
@@ -1250,6 +1865,8 @@
     <None Include="flags\so.png" />
     <None Include="flags\sr.png" />
     <None Include="flags\st.png" />
+    <None Include="icons\star.png" />
+    <None Include="icons\star_blue.png" />
     <None Include="flags\sv.png" />
     <None Include="flags\sy.png" />
     <None Include="icons\system-search.png" />
@@ -1301,76 +1918,8 @@
     <None Include="flags\zw.png" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="goldendict.rc">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'">_MSC_VER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'">_MSC_VER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
+    <ResourceCompile Include="goldendict.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="MSBuild\QtExtensions\lrelease.xml" />
-    <Xml Include="MSBuild\QtExtensions\moc.xml" />
-    <Xml Include="MSBuild\QtExtensions\rcc.xml" />
-    <Xml Include="MSBuild\QtExtensions\uic.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="flags\00readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="icons\1downarrow.png" />
-    <Image Include="icons\addtab.png" />
-    <Image Include="icons\arrow.png" />
-    <Image Include="icons\blank.png" />
-    <Image Include="icons\book.png" />
-    <Image Include="icons\bookcase.png" />
-    <Image Include="icons\clear.png" />
-    <Image Include="icons\closetab.png" />
-    <Image Include="icons\collapse_article.png" />
-    <Image Include="icons\collapse_article_hovered.png" />
-    <Image Include="icons\collapse_opt.png" />
-    <Image Include="icons\configure.png" />
-    <Image Include="icons\downarrow.png" />
-    <Image Include="icons\expand_article.png" />
-    <Image Include="icons\expand_article_hovered.png" />
-    <Image Include="icons\expand_opt.png" />
-    <Image Include="icons\fileopen.png" />
-    <Image Include="icons\filesave.png" />
-    <Image Include="icons\forvo.png" />
-    <Image Include="icons\highlighter.png" />
-    <Image Include="icons\hotkeys.png" />
-    <Image Include="icons\icon32_aard.png" />
-    <Image Include="icons\icon32_bgl.png" />
-    <Image Include="icons\icon32_dictd.png" />
-    <Image Include="icons\icon32_dsl.png" />
-    <Image Include="icons\icon32_hunspell.png" />
-    <Image Include="icons\icon32_lingoes.png" />
-    <Image Include="icons\icon32_sdict.png" />
-    <Image Include="icons\icon32_stardict.png" />
-    <Image Include="icons\icon32_wiki.png" />
-    <Image Include="icons\icon32_xdxf.png" />
-    <Image Include="icons\icon32_zoombase.png" />
-    <Image Include="icons\icon32_zoomin.png" />
-    <Image Include="icons\icon32_zoomout.png" />
-    <Image Include="icons\icon_dsl_native.png" />
-    <Image Include="icons\playsound_color.png" />
-    <Image Include="icons\playsound_full.png" />
-    <Image Include="icons\programicon.ico" />
-    <Image Include="icons\programicon_old.ico" />
-    <Image Include="icons\programicon_old.png" />
-  </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-    <Import Project="MSBuild\QtExtensions\moc.targets" />
-    <Import Project="MSBuild\QtExtensions\rcc.targets" />
-    <Import Project="MSBuild\QtExtensions\uic.targets" />
-    <Import Project="MSBuild\QtExtensions\lrelease.targets" />
-    <Import Project="MSBuild\custom.targets" />
-  </ImportGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" /><ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')"><Import Project="$(QtMsBuild)\qt.targets" /></ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>
