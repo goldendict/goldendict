@@ -22,9 +22,7 @@
 
 #include <QDebug>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>

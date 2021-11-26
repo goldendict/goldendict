@@ -2539,7 +2539,6 @@ void ArticleView::highlightFTSResults()
   QString pageText = getWebPageTextSync(ui.definition->page());
   marksHandler->setText( pageText );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
   while( it.hasNext() )
   {
@@ -2563,35 +2562,6 @@ void ArticleView::highlightFTSResults()
     else
       allMatches.append( pageText.mid( spos, matched ) );
   }
-#else
-  int pos = 0;
-
-  while( pos >= 0 )
-  {
-    pos = regexp.indexIn( marksHandler->normalizedText(), pos );
-    if( pos >= 0 )
-    {
-      // Mirror pos and matched length to original string
-      int spos = marksHandler->mirrorPosition( pos );
-      int matched = marksHandler->mirrorPosition( pos + regexp.matchedLength() ) - spos;
-
-      // Add mark pos (if presented)
-      while( spos + matched < pageText.length()
-             && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
-        matched++;
-
-      if( matched > FTS::MaxMatchLengthForHighlightResults )
-      {
-        gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
-                   regexp.matchedLength(), FTS::MaxMatchLengthForHighlightResults );
-      }
-      else
-        allMatches.append( pageText.mid( spos, matched ) );
-
-      pos += regexp.matchedLength();
-    }
-  }
-#endif
 
   ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
 

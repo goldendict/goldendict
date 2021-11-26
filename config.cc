@@ -22,13 +22,9 @@
 #include "atomic_rename.hh"
 #include "qt4x5.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
-#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#if defined( HAVE_X11 )
 // Whether XDG Base Directory specification might be followed.
 // Only Qt5 builds are supported, as Qt4 doesn't provide all functions needed
 // to get XDG Base Directory compliant locations.
@@ -2387,15 +2383,11 @@ QString getStylesDir() throw()
 QString getCacheDir() throw()
 {
   return isPortableVersion() ? portableHomeDirPath() + "/cache"
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   #ifdef HAVE_X11
                              : QStandardPaths::writableLocation( QStandardPaths::GenericCacheLocation ) + "/goldendict";
   #else
                              : QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
   #endif
-#else
-                             : QDesktopServices::storageLocation( QDesktopServices::CacheLocation );
-#endif
 }
 
 QString getNetworkCacheDir() throw()

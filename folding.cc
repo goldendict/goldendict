@@ -2,11 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "folding.hh"
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 namespace Folding {
 

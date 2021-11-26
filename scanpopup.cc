@@ -1030,15 +1030,7 @@ void ScanPopup::requestWindowFocus()
   // One of the rare, actually working workarounds for requesting a user keyboard focus on X11,
   // works for Qt::Popup windows, exactly like our Scan Popup (in unpinned state).
   // Modern window managers actively resist to automatically focus pop-up windows.
-#if defined HAVE_X11 && QT_VERSION < QT_VERSION_CHECK( 5, 0, 0 )
-  if ( !ui.pinButton->isChecked() )
-  {
-    QMenu m( this );
-    m.addAction( "" );
-    m.show();
-    m.hide();
-  }
-#endif
+
 }
 
 void ScanPopup::showEvent( QShowEvent * ev )

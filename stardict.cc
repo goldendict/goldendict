@@ -46,9 +46,7 @@
 #include "ufile.hh"
 #include "qt4x5.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 namespace Stardict {
 
@@ -427,14 +425,10 @@ private:
             }
             old = s;
         }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         s.replace(QRegularExpression( "&.\\s*\\{",
                                       QRegularExpression::UseUnicodePropertiesOption
                                       | QRegularExpression::DotMatchesEverythingOption),
                   "");
-#else
-        s.replace(QRegExp("&.\\s*\\{"), "");
-#endif
         s.replace("}", "");
     }
 private:

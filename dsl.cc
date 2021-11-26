@@ -46,11 +46,7 @@
 #include <QMap>
 #include <QStringList>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 // For TIFF conversion
 #include <QImage>

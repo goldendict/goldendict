@@ -381,11 +381,7 @@ int main( int argc, char ** argv )
     logFilePtr->write( line );
 
     // Install message handler
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
     qInstallMessageHandler( gdMessageHandler );
-#else
-    qInstallMsgHandler( gdMessageHandler );
-#endif
   }
 
   if ( Config::isPortableVersion() )
