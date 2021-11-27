@@ -275,10 +275,8 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
       if(pos==-1)
           return false;
       QString line = codec->toUnicode(readBufferPtr, pos);
-      if(line.endsWith("\n"))
-          line.chop(1);
-      if(line.endsWith("\r"))
-          line.chop(1);
+
+      line = Utils::rstrip(line);
 
       if(pos>readBufferLeft){
           pos=readBufferLeft;
@@ -933,7 +931,7 @@ void GlsHeadwordsRequestRunnable::run()
 
 void GlsHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -947,7 +945,7 @@ void GlsHeadwordsRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1056,7 +1054,7 @@ void GlsArticleRequestRunnable::run()
 
 void GlsArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1086,7 +1084,7 @@ void GlsArticleRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1236,7 +1234,7 @@ void GlsResourceRequestRunnable::run()
 void GlsResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

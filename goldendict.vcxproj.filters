@@ -725,7 +725,7 @@
     <QtMoc Include="programs.hh">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClInclude Include="qt4x5.hh">
+    <ClInclude Include="utils.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ripemd.hh">
@@ -853,82 +853,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <CustomBuild Include="build\moc_predefs.h.cbt">
       <Filter>Generated Files</Filter>
     </CustomBuild>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="locale\ar_SA.ts">

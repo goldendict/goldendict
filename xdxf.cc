@@ -44,7 +44,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Xdxf {
 
@@ -499,7 +499,7 @@ void XdxfArticleRequestRunnable::run()
 
 void XdxfArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -528,7 +528,7 @@ void XdxfArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -799,21 +799,21 @@ QString readXhtmlData( QXmlStreamReader & stream )
     {
       QString name = stream.name().toString();
 
-      result += "<" + Qt4x5::escape( name ) + " ";
+      result += "<" + Utils::escape( name ) + " ";
 
       QXmlStreamAttributes attrs = stream.attributes();
 
       for( int x = 0; x < attrs.size(); ++x )
       {
-        result += Qt4x5::escape( attrs[ x ].name().toString() );
-        result += "=\"" + Qt4x5::escape( attrs[ x ].value().toString() ) + "\"";
+        result += Utils::escape( attrs[ x ].name().toString() );
+        result += "=\"" + Utils::escape( attrs[ x ].value().toString() ) + "\"";
       }
 
       result += ">";
 
       result += readXhtmlData( stream );
 
-      result += "</" + Qt4x5::escape( name ) + ">";
+      result += "</" + Utils::escape( name ) + ">";
     }
     else
     if ( stream.isCharacters() || stream.isWhitespace() || stream.isCDATA() )
@@ -1034,7 +1034,7 @@ void XdxfResourceRequestRunnable::run()
 void XdxfResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

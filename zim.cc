@@ -14,7 +14,7 @@
 #include "wstring_qt.hh"
 #include "filetype.hh"
 #include "file.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 #include "tiff.hh"
 #include "ftshelpers.hh"
 #include "htmlescape.hh"
@@ -948,7 +948,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 
     findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     // We should sort articles order by cluster number
@@ -960,7 +960,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
          it != setOfOffsets.constEnd(); ++it )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       Mutex::Lock _( zimMutex );
@@ -970,7 +970,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     setOfOffsets.clear();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     std::sort( offsetsWithClusters.begin(), offsetsWithClusters.end() );
@@ -983,7 +983,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     offsetsWithClusters.clear();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     QMap< QString, QVector< uint32_t > > ftsWords;
@@ -994,7 +994,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // index articles for full-text search
     for( int i = 0; i < offsets.size(); i++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       QString headword, articleStr;
@@ -1015,7 +1015,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
     while( it != ftsWords.end() )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       uint32_t offset = chunks.startNewBlock();
@@ -1032,13 +1032,13 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     // Free memory
     ftsWords.clear();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     ftsIdxHeader.chunksOffset = chunks.finish();
     ftsIdxHeader.wordCount = indexedWords.size();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
@@ -1073,7 +1073,7 @@ void ZimDictionary::sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
   for( QVector< uint32_t >::ConstIterator it = offsets.constBegin();
        it != offsets.constEnd(); ++it )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return;
 
     Mutex::Lock _( zimMutex );
@@ -1199,7 +1199,7 @@ void ZimArticleRequestRunnable::run()
 
 void ZimArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1228,7 +1228,7 @@ void ZimArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1403,7 +1403,7 @@ void ZimResourceRequestRunnable::run()
 void ZimResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

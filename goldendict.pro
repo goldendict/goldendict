@@ -356,7 +356,7 @@ HEADERS += folding.hh \
     delegate.hh \
     zim.hh \
     gddebug.hh \
-    qt4x5.hh \
+    utils.hh \
     gestures.hh \
     tiff.hh \
     dictheadwords.hh \

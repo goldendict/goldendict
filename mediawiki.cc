@@ -12,7 +12,7 @@
 #include "gddebug.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #include <QRegularExpression>
 
@@ -128,7 +128,7 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
   GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
 
-  Qt4x5::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ).replace( '+', "%2B" ) );
+  Utils::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ).replace( '+', "%2B" ) );
 
   netReply = mgr.get( QNetworkRequest( reqUrl ) );
 
@@ -206,7 +206,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
         Mutex::Lock _( dataMutex );
 
-        for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+        for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }
@@ -289,7 +289,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
-  Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ).replace( '+', "%2B" ) );
+  Utils::Url::addQueryItem( reqUrl, "page", gd::toQString( str ).replace( '+', "%2B" ) );
 
   QNetworkReply * netReply = mgr.get( QNetworkRequest( reqUrl ) );
   

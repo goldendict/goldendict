@@ -13,7 +13,7 @@
 #include "folding.hh"
 #include "langcoder.hh"
 #include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 using std::vector;
 using std::string;
@@ -1112,7 +1112,7 @@ string ArticleRequest::linkWord( QString const & str )
 
   url.setScheme( "gdlookup" );
   url.setHost( "localhost" );
-  url.setPath( Qt4x5::Url::ensureLeadingSlash( str ) );
+  url.setPath( Utils::Url::ensureLeadingSlash( str ) );
 
   string escapedResult = Html::escape( str.toUtf8().data() );
   return string( "<a href=\"" ) + url.toEncoded().data() + "\">" + escapedResult +"</a>";

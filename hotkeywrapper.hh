@@ -25,7 +25,7 @@
 
 #include "ex.hh"
 #include "qtsingleapplication.h"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #ifdef Q_OS_WIN32
 #include "hotkeys.h"

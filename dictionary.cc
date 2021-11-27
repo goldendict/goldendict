@@ -23,25 +23,25 @@
 #include <QImage>
 #include <QPainter>
 #include <QRegularExpression>
-#include "qt4x5.hh"
+#include "utils.hh"
 #include "zipfile.hh"
 
 namespace Dictionary {
 
 bool Request::isFinished()
 {
-  return Qt4x5::AtomicInt::loadAcquire( isFinishedFlag );
+  return Utils::AtomicInt::loadAcquire( isFinishedFlag );
 }
 
 void Request::update()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
+  if ( !Utils::AtomicInt::loadAcquire( isFinishedFlag ) )
     emit updated();
 }
 
 void Request::finish()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
+  if ( !Utils::AtomicInt::loadAcquire( isFinishedFlag ) )
   {
     isFinishedFlag.ref();
 

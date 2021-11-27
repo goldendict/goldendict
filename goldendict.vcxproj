@@ -16,7 +16,8 @@
     <Keyword>QtVS_v304</Keyword>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformMinVersion>10.0.19041.0</WindowsTargetPlatformMinVersion>
-  <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild></PropertyGroup>
+    <QtMsBuild Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <PlatformToolset>v140</PlatformToolset>
@@ -36,7 +37,10 @@
     <IntermediateDirectory>build\</IntermediateDirectory>
     <PrimaryOutput>GoldenDict</PrimaryOutput>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" /><Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')"><Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." /></Target>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
@@ -44,8 +48,34 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" /><ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')"><Import Project="$(QtMsBuild)\qt_defaults.props" /></ImportGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"><OutDir>debug\</OutDir><IntDir>build\</IntDir><TargetName>GoldenDict</TargetName><IgnoreImportLibrary>true</IgnoreImportLibrary></PropertyGroup><PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><OutDir>release\</OutDir><IntDir>build\</IntDir><TargetName>GoldenDict</TargetName><IgnoreImportLibrary>true</IgnoreImportLibrary><LinkIncremental>false</LinkIncremental></PropertyGroup><PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"><QtInstall>5.15.2_msvc2019_64</QtInstall><QtModules>core;xml;sql;network;gui;svg;help;multimedia;widgets;qml;positioning;printsupport;webchannel;quick;webengine;webenginewidgets</QtModules></PropertyGroup><PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><QtInstall>5.15.2_msvc2019_64</QtInstall><QtModules>core;xml;sql;network;gui;svg;help;multimedia;widgets;qml;positioning;printsupport;webchannel;quick;webengine;webenginewidgets</QtModules></PropertyGroup><ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')"><Import Project="$(QtMsBuild)\qt.props" /></ImportGroup>
-  
+  <PropertyGroup Label="UserMacros" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt_defaults.props')">
+    <Import Project="$(QtMsBuild)\qt_defaults.props" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>debug\</OutDir>
+    <IntDir>build\</IntDir>
+    <TargetName>GoldenDict</TargetName>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>release\</OutDir>
+    <IntDir>build\</IntDir>
+    <TargetName>GoldenDict</TargetName>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;xml;sql;network;gui;svg;help;multimedia;widgets;qml;positioning;printsupport;webchannel;quick;webengine;webenginewidgets</QtModules>
+  </PropertyGroup>
+  <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <QtInstall>5.15.2_msvc2019_64</QtInstall>
+    <QtModules>core;xml;sql;network;gui;svg;help;multimedia;widgets;qml;positioning;printsupport;webchannel;quick;webengine;webenginewidgets</QtModules>
+  </PropertyGroup>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;build;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -59,13 +89,15 @@
       <Optimization>MaxSpeed</Optimization>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;NO_CONSOLE;PROGRAM_VERSION="1.5.0";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;NDEBUG;QT_NO_DEBUG;QT_QMLMODELS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
-      <ProgramDataBaseFileName></ProgramDataBaseFileName>
+      <ProgramDataBaseFileName>
+      </ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
-    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
     <Link>
       <AdditionalDependencies>z.lib;bz2.lib;lzo2.lib;shell32.lib;user32.lib;sapi.lib;.\winlibs\lib\msvc\hunspell.lib;.\winlibs\lib\msvc\iconv.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;.\winlibs\lib\msvc\vorbisfile.lib;.\winlibs\lib\msvc\vorbis.lib;.\winlibs\lib\msvc\ogg.lib;.\winlibs\lib\msvc\ao.lib;.\winlibs\lib\msvc\swresample-gd.lib;.\winlibs\lib\msvc\avutil-gd.lib;.\winlibs\lib\msvc\avformat-gd.lib;.\winlibs\lib\msvc\avcodec-gd.lib;uxtheme.lib;.\winlibs\lib\msvc\lzma.lib;zstd.lib;.\winlibs\lib\msvc\tiff.lib;.\winlibs\lib\msvc\eb.lib;.\winlibs\lib\msvc\opencc.lib;.\qtsingleapplication\lib\QtSolutions_SingleApplication-head.lib;$(QTDIR)\lib\Qt5QmlModels.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>.\winlibs\lib\msvc;.\qtsingleapplication\lib;C:\openssl\lib;C:\Utils\my_sql\mysql-5.7.25-winx64\lib;C:\Utils\postgresql\pgsql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -90,7 +122,26 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_WINDOWS;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;NO_CONSOLE;PROGRAM_VERSION=\"1.5.0\";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;NDEBUG;QT_NO_DEBUG;QT_SVG_LIB;QT_WEBENGINEWIDGETS_LIB;QT_PRINTSUPPORT_LIB;QT_HELP_LIB;QT_WIDGETS_LIB;QT_WEBENGINECORE_LIB;QT_QUICK_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_XML_LIB;QT_QMLMODELS_LIB;QT_WEBCHANNEL_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_POSITIONING_LIB;QT_SQL_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-  <QtRcc><Compression>default</Compression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription><QtRccDir>build</QtRccDir><QtRccFileName>qrc_%(Filename).cpp</QtRccFileName></QtRcc><QtMoc><CompilerFlavor>msvc</CompilerFlavor><Include>./build/moc_predefs.h</Include><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource><QtMocDir>build</QtMocDir><QtMocFileName>moc_%(Filename).cpp</QtMocFileName></QtMoc><QtUic><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription><QtUicDir>build</QtUicDir><QtUicFileName>ui_%(Filename).h</QtUicFileName></QtUic></ItemDefinitionGroup>
+    <QtRcc>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>build</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./build/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>build</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>build</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;build;/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -109,7 +160,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <WarningLevel>Level3</WarningLevel>
-    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
     <Link>
       <AdditionalDependencies>z.lib;bz2.lib;lzo2.lib;shell32.lib;user32.lib;sapi.lib;.\winlibs\lib\msvc\hunspelld.lib;.\winlibs\lib\msvc\iconv.lib;wsock32.lib;psapi.lib;ole32.lib;oleaut32.lib;advapi32.lib;comdlg32.lib;.\winlibs\lib\msvc\vorbisfile.lib;.\winlibs\lib\msvc\vorbis.lib;.\winlibs\lib\msvc\ogg.lib;.\winlibs\lib\msvc\ao.lib;.\winlibs\lib\msvc\swresample-gd.lib;.\winlibs\lib\msvc\avutil-gd.lib;.\winlibs\lib\msvc\avformat-gd.lib;.\winlibs\lib\msvc\avcodec-gd.lib;uxtheme.lib;.\winlibs\lib\msvc\lzma.lib;zstd.lib;.\winlibs\lib\msvc\tiff.lib;.\winlibs\lib\msvc\eb.lib;.\winlibs\lib\msvc\openccd.lib;.\qtsingleapplication\lib\QtSolutions_SingleApplication-headd.lib;$(QTDIR)\lib\Qt5QmlModelsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>.\winlibs\lib\msvc;.\qtsingleapplication\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -131,7 +183,26 @@
     <ResourceCompile>
       <PreprocessorDefinitions>_CONSOLE;UNICODE;_UNICODE;WIN32;_ENABLE_EXTENDED_ALIGNED_STORAGE;WIN64;MAKE_QTMULTIMEDIA_PLAYER;MAKE_FFMPEG_PLAYER;__WIN32;_CRT_SECURE_NO_WARNINGS;NOMINMAX;__WIN64;GD_NO_MANIFEST;PROGRAM_VERSION=\"1.5.0\";MAKE_ZIM_SUPPORT;MAKE_EXTRA_TIFF_HANDLER;MAKE_CHINESE_CONVERSION_SUPPORT;QT_QTSINGLEAPPLICATION_IMPORT;QT_SVG_LIB;QT_WEBENGINEWIDGETS_LIB;QT_PRINTSUPPORT_LIB;QT_HELP_LIB;QT_WIDGETS_LIB;QT_WEBENGINECORE_LIB;QT_QUICK_LIB;QT_MULTIMEDIA_LIB;QT_GUI_LIB;QT_XML_LIB;QT_QMLMODELS_LIB;QT_WEBCHANNEL_LIB;QT_QML_LIB;QT_NETWORK_LIB;QT_POSITIONING_LIB;QT_SQL_LIB;QT_CORE_LIB;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
-  <QtMoc><CompilerFlavor>msvc</CompilerFlavor><Include>./build/moc_predefs.h</Include><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource><QtMocDir>build</QtMocDir><QtMocFileName>moc_%(Filename).cpp</QtMocFileName></QtMoc><QtRcc><Compression>default</Compression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription><QtRccDir>build</QtRccDir><QtRccFileName>qrc_%(Filename).cpp</QtRccFileName></QtRcc><QtUic><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription><QtUicDir>build</QtUicDir><QtUicFileName>ui_%(Filename).h</QtUicFileName></QtUic></ItemDefinitionGroup>
+    <QtMoc>
+      <CompilerFlavor>msvc</CompilerFlavor>
+      <Include>./build/moc_predefs.h</Include>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+      <QtMocDir>build</QtMocDir>
+      <QtMocFileName>moc_%(Filename).cpp</QtMocFileName>
+    </QtMoc>
+    <QtRcc>
+      <Compression>default</Compression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+      <QtRccDir>build</QtRccDir>
+      <QtRccFileName>qrc_%(Filename).cpp</QtRccFileName>
+    </QtRcc>
+    <QtUic>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+      <QtUicDir>build</QtUicDir>
+      <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="mouseover_win32\ThTypes.c" />
     <ClCompile Include="aard.cc" />
@@ -264,67 +335,19 @@
     <ClInclude Include="mouseover_win32\ThTypes.h" />
     <ClInclude Include="aard.hh" />
     <QtMoc Include="about.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="article_maker.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="article_netmgr.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="articleview.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="articlewebview.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="atomic_rename.hh" />
     <ClInclude Include="audiolink.hh" />
     <ClInclude Include="audioplayerfactory.hh" />
     <QtMoc Include="audioplayerinterface.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="belarusiantranslit.hh" />
     <ClInclude Include="bgl.hh" />
@@ -333,25 +356,9 @@
     <ClInclude Include="btreeidx.hh" />
     <ClInclude Include="chinese.hh" />
     <QtMoc Include="chineseconversion.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="chunkedstorage.hh" />
     <QtMoc Include="config.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="country.hh" />
     <ClInclude Include="cpp_features.hh" />
@@ -359,263 +366,71 @@
     <ClInclude Include="delegate.hh" />
     <ClInclude Include="dictdfiles.hh" />
     <QtMoc Include="dictheadwords.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="dictinfo.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="dictionary.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="dictionarybar.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="dictserver.hh" />
     <QtMoc Include="dictspanewidget.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="dictzip.h" />
     <ClInclude Include="dsl.hh" />
     <ClInclude Include="dsl_details.hh" />
     <QtMoc Include="editdictionaries.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="epwing.hh" />
     <ClInclude Include="epwing_book.hh" />
     <ClInclude Include="epwing_charmap.hh" />
     <ClInclude Include="ex.hh" />
     <QtMoc Include="externalaudioplayer.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="externalviewer.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="extlineedit.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="favoritespanewidget.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="ffmpegaudio.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="ffmpegaudioplayer.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="file.hh" />
     <ClInclude Include="filetype.hh" />
     <ClInclude Include="folding.hh" />
     <QtMoc Include="forvo.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="fsencoding.hh" />
     <ClInclude Include="ftshelpers.hh" />
     <QtMoc Include="fulltextsearch.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="gdappstyle.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="gddebug.hh" />
     <ClInclude Include="german.hh" />
     <ClInclude Include="gestures.hh" />
     <QtMoc Include="gico_schemahandler.h">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="gls.hh" />
     <ClInclude Include="greektranslit.hh" />
     <QtMoc Include="groupcombobox.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="groups.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="groups_widgets.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="helpwindow.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="history.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="historypanewidget.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="hotkeyedit.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="hotkeys.h" />
     <QtMoc Include="hotkeywrapper.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="htmlescape.hh" />
     <ClInclude Include="hunspell.hh" />
@@ -624,173 +439,53 @@
     <ClInclude Include="inc_diacritic_folding.hh" />
     <ClInclude Include="indexedzip.hh" />
     <QtMoc Include="initializing.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="instances.hh" />
     <ClInclude Include="keyboardstate.hh" />
     <ClInclude Include="langcoder.hh" />
     <ClInclude Include="language.hh" />
     <QtMoc Include="loaddictionaries.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="lsa.hh" />
     <QtMoc Include="mainstatusbar.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="maintabwidget.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="mainwindow.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="mdictparser.hh" />
     <ClInclude Include="mdx.hh" />
     <QtMoc Include="mediawiki.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="mouseover.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="mruqmenu.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="multimediaaudioplayer.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="mutex.hh" />
     <QtMoc Include="orderandprops.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="parsecmdline.hh" />
     <QtMoc Include="preferences.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="processwrapper.hh" />
     <QtMoc Include="programs.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
-    <ClInclude Include="qt4x5.hh" />
+    <ClInclude Include="utils.hh" />
     <ClInclude Include="ripemd.hh" />
     <ClInclude Include="romaji.hh" />
     <ClInclude Include="russiantranslit.hh" />
     <ClInclude Include="sapi.hh" />
     <QtMoc Include="scanpopup.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="sdict.hh" />
     <ClInclude Include="searchpanewidget.hh" />
     <ClInclude Include="slob.hh" />
     <ClInclude Include="sounddir.hh" />
     <QtMoc Include="sources.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="speechclient.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="speechhlp.hh" />
     <ClInclude Include="sphelper.hh" />
@@ -798,36 +493,12 @@
     <ClInclude Include="sptr.hh" />
     <ClInclude Include="stardict.hh" />
     <QtMoc Include="stylescombobox.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="termination.hh" />
     <QtMoc Include="texttospeechsource.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="tiff.hh" />
     <QtMoc Include="translatebox.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="transliteration.hh" />
     <ClInclude Include="treeview.hh" />
@@ -836,46 +507,14 @@
     <ClInclude Include="utf8.hh" />
     <ClInclude Include="voiceengines.hh" />
     <QtMoc Include="webmultimediadownload.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="website.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="wildcard.hh" />
     <ClInclude Include="wordbyauto.hh" />
     <QtMoc Include="wordfinder.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <QtMoc Include="wordlist.hh">
-      
-      
-      
-      
-      
-      
-      
-      
     </QtMoc>
     <ClInclude Include="wstring.hh" />
     <ClInclude Include="wstring_qt.hh" />
@@ -887,48 +526,6 @@
     <ClInclude Include="zipsounds.hh" />
   </ItemGroup>
   <ItemGroup>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     <CustomBuild Include="build\moc_predefs.h.cbt">
       <FileType>Document</FileType>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\mkspecs\features\data\dummy.cpp;%(AdditionalInputs)</AdditionalInputs>
@@ -940,37 +537,6 @@
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generate moc_predefs.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">build\moc_predefs.h;%(Outputs)</Outputs>
     </CustomBuild>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="locale\ar_SA.ts">
@@ -1366,191 +932,38 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="about.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="articleview.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="authentication.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="chineseconversion.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="dictgroupwidget.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="dictheadwords.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="dictinfo.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="editdictionaries.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="fulltextsearch.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="groups.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="initializing.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="mainwindow.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="orderandprops.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="preferences.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="scanpopup.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="sources.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
     <QtUic Include="texttospeechsource.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtUic>
   </ItemGroup>
   <ItemGroup>
@@ -1658,16 +1071,9 @@
     <None Include="flags\fj.png" />
     <None Include="flags\fk.png" />
     <QtRcc Include="flags.qrc">
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flags</InitFuncName><InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flags</InitFuncName></QtRcc>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">flags</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">flags</InitFuncName>
+    </QtRcc>
     <None Include="flags\fm.png" />
     <None Include="flags\fo.png" />
     <None Include="flags\folder.png" />
@@ -1834,16 +1240,9 @@
     <None Include="flags\re.png" />
     <None Include="icons\reload.png" />
     <QtRcc Include="resources.qrc">
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">resources</InitFuncName><InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">resources</InitFuncName></QtRcc>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">resources</InitFuncName>
+      <InitFuncName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">resources</InitFuncName>
+    </QtRcc>
     <None Include="flags\ro.png" />
     <None Include="flags\rs.png" />
     <None Include="flags\ru.png" />
@@ -1920,6 +1319,9 @@
   <ItemGroup>
     <ResourceCompile Include="goldendict.rc" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" /><ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')"><Import Project="$(QtMsBuild)\qt.targets" /></ImportGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
   <ImportGroup Label="ExtensionTargets" />
 </Project>

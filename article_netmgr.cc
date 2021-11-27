@@ -12,7 +12,7 @@
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 #include <QNetworkAccessManager>
 
 using std::string;
@@ -214,9 +214,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     if(req.url().scheme()=="gdlookup"){
         QString path=url.path();
         if(!path.isEmpty()){
-            Qt4x5::Url::addQueryItem(url,"word",path.mid(1));
+            Utils::Url::addQueryItem(url,"word",path.mid(1));
             url.setPath("");
-            Qt4x5::Url::addQueryItem(url,"group","1");
+            Utils::Url::addQueryItem(url,"group","1");
 
         }
     }
@@ -260,7 +260,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       QUrl localUrl = QUrl::fromLocalFile( fileName );
 
       newUrl.setHost( localUrl.host() );
-      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( localUrl.path() ) );
+      newUrl.setPath( Utils::Url::ensureLeadingSlash( localUrl.path() ) );
 
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
@@ -313,16 +313,16 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     contentType = "text/html";
 
-    if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
+    if ( Utils::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
-    Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
-                                 Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
+    Config::InputPhrase phrase ( Utils::Url::queryItemValue( url, "word" ).trimmed(),
+                                 Utils::Url::queryItemValue( url, "punctuation_suffix" ) );
 
     bool groupIsValid = false;
-    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+    unsigned group = Utils::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
    
-    QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
+    QString dictIDs = Utils::Url::queryItemValue( url, "dictionaries" );
     if( !dictIDs.isEmpty() )
     {
       // Individual dictionaries set from full-text search
@@ -333,13 +333,13 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
-        QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
+        QSet< QString >::fromList( Utils::Url::queryItemValue( url, "muted" ).split( ',' ) );
 
     // Unpack contexts
 
     QMap< QString, QString > contexts;
 
-    QString contextsEncoded = Qt4x5::Url::queryItemValue( url, "contexts" );
+    QString contextsEncoded = Utils::Url::queryItemValue( url, "contexts" );
 
     if ( contextsEncoded.size() )
     {
@@ -356,7 +356,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     // See for ignore diacritics
 
-    bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
+    bool ignoreDiacritics = Utils::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
 
     if ( groupIsValid && phrase.isValid() ) // Require group and phrase to be passed
       return articleMaker.makeDefinitionFor( phrase, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
@@ -392,7 +392,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
             try
             {
-              return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
+              return  dictionaries[ x ]->getResource( Utils::Url::path( url ).mid( 1 ).toUtf8().data() );
             }
             catch( std::exception & e )
             {

@@ -32,7 +32,7 @@
 #include <QRegularExpression>
 
 #include "ufile.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Sdict {
 
@@ -543,7 +543,7 @@ void SdictArticleRequestRunnable::run()
 
 void SdictArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -572,7 +572,7 @@ void SdictArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

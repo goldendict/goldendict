@@ -1025,17 +1025,14 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
     if(readBufferLeft<=0)
         return false;
 
-    int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed.lineFeed,lineFeed.length);
-    if(pos==-1)
-        return false;
+    int pos = Utf8::findFirstLinePosition(readBufferPtr, readBufferLeft, lineFeed.lineFeed, lineFeed.length);
+    if (pos == -1)
+      return false;
     QString line = codec->toUnicode(readBufferPtr, pos);
-    if(line.endsWith("\n"))
-        line.chop(1);
-    if(line.endsWith("\r"))
-        line.chop(1);
+    line = Utils::rstrip(line);
 
-    if(pos>readBufferLeft){
-        pos=readBufferLeft;
+    if (pos > readBufferLeft) {
+      pos = readBufferLeft;
     }
     readBufferLeft -= pos;
     readBufferPtr += pos;

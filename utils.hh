@@ -1,7 +1,7 @@
 /* Thin wrappers for retaining compatibility for both Qt4.x and Qt5.x */
 
-#ifndef QT4X5_HH
-#define QT4X5_HH
+#ifndef UTILS_HH
+#define UTILS_HH
 
 #include <QString>
 #include <QAtomicInt>
@@ -10,8 +10,21 @@
 #include <QUrl>
 #include <QUrlQuery>
 
-namespace Qt4x5
+namespace Utils
 {
+
+  /**
+   * remove right end space
+   */
+  QString rstrip(const QString& str) {
+    int n = str.size() - 1;
+    for (; n >= 0; --n) {
+      if (!str.at(n).isSpace()) {
+        return str.left(n + 1);
+      }
+    }
+    return "";
+  }
 
 inline QString escape( QString const & plain )
 {
@@ -102,4 +115,4 @@ namespace Dom
 
 }
 
-#endif // QT4X5_HH
+#endif // UTILS_HH

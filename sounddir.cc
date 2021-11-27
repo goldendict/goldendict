@@ -12,7 +12,7 @@
 #include "audiolink.hh"
 #include "wstring_qt.hh"
 #include "fsencoding.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #include <set>
 #include <QDir>
@@ -222,7 +222,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::number( chain[ i->second ].articleOffset ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( QString::number( chain[ i->second ].articleOffset ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -266,7 +266,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::number( chain[ i->second ].articleOffset ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( QString::number( chain[ i->second ].articleOffset ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 

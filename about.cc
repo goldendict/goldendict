@@ -5,7 +5,7 @@
 #include <QtGui>
 #include <QSysInfo>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 About::About( QWidget * parent ): QDialog( parent )
 {
@@ -54,7 +54,7 @@ About::About( QWidget * parent ): QDialog( parent )
 
       str.replace( "\\", "@" );
 
-      str = Qt4x5::escape( str );
+      str = Utils::escape( str );
 
       int colon = str.indexOf( ":" );
 

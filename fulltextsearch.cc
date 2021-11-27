@@ -5,7 +5,7 @@
 #include "ftshelpers.hh"
 #include "gddebug.hh"
 #include "mainwindow.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #include <QThreadPool>
 #include <QIntValidator>
@@ -38,7 +38,7 @@ void Indexing::run()
     // First iteration - dictionaries with no more MaxDictionarySizeForFastSearch articles
     for( size_t x = 0; x < dictionaries.size(); x++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( dictionaries.at( x )->canFTS()
@@ -52,7 +52,7 @@ void Indexing::run()
     // Second iteration - all remaining dictionaries
     for( size_t x = 0; x < dictionaries.size(); x++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( dictionaries.at( x )->canFTS()
@@ -84,7 +84,7 @@ void FtsIndexing::doIndexing()
 
   if( !started )
   {
-    while( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    while( Utils::AtomicInt::loadAcquire( isCancelled ) )
       isCancelled.deref();
 
     Indexing *idx = new Indexing( isCancelled, dictionaries, indexingExited );
@@ -101,7 +101,7 @@ void FtsIndexing::stopIndexing()
 {
   if( started )
   {
-    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( !Utils::AtomicInt::loadAcquire( isCancelled ) )
       isCancelled.ref();
 
     indexingExited.acquire();

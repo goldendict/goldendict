@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include "gddebug.hh"
 #include "wstring_qt.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #include <QRegularExpression>
 #include "wildcard.hh"
@@ -170,7 +170,7 @@ BtreeWordSearchRequest::BtreeWordSearchRequest( BtreeDictionary & dict_,
 
 void BtreeWordSearchRequest::findMatches()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -322,7 +322,7 @@ void BtreeWordSearchRequest::findMatches()
       if ( chainOffset )
       for( ; ; )
       {
-        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
         //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
@@ -368,7 +368,7 @@ void BtreeWordSearchRequest::findMatches()
             }
           }
 
-          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+          if( Utils::AtomicInt::loadAcquire( isCancelled ) )
             break;
 
           if ( matches.size() >= maxResults )
@@ -414,7 +414,7 @@ void BtreeWordSearchRequest::findMatches()
         }
       }
 
-      if ( charsLeftToChop && !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( charsLeftToChop && !Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         --charsLeftToChop;
         folded.resize( folded.size() - 1 );
@@ -436,7 +436,7 @@ void BtreeWordSearchRequest::findMatches()
 
 void BtreeWordSearchRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1271,7 +1271,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+    if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1326,7 +1326,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+      if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
         return;
 
       if( headwords )
@@ -1397,7 +1397,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+    if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1442,7 +1442,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
       if( it != offsets.end() )
       {
-        if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+        if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );

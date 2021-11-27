@@ -30,7 +30,7 @@
 #include <QRegularExpression>
 #include "ufile.hh"
 #include "wstring_qt.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Aard {
 
@@ -713,7 +713,7 @@ void AardArticleRequestRunnable::run()
 
 void AardArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -742,7 +742,7 @@ void AardArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

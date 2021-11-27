@@ -45,7 +45,7 @@
 #include "dictinfo.hh"
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
 #include "gico_schemahandler.h"
@@ -3417,7 +3417,7 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
   {
     QUrl url( rx.cap( 1 ) );
     QString host = url.host();
-    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Qt4x5::Url::path( url ), "/" ) );
+    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Utils::Url::path( url ), "/" ) );
 
     if ( !host.startsWith( '/' ) )
       host.insert( 0, '/' );

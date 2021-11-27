@@ -34,7 +34,7 @@ bool readLine( QTcpSocket & socket, QString & line,
 
   for( ; ; )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( socket.canReadLine() )
@@ -63,7 +63,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
 
   for( ; ; )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     socket.connectToHost( serverUrl.host(), port );
@@ -74,7 +74,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
         break;
     }
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( !readLine( socket, reply, errorString, isCancelled ) )
@@ -92,7 +92,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
     if( !socket.waitForBytesWritten( 1000 ) )
       break;
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( !readLine( socket, reply, errorString, isCancelled ) )
@@ -121,7 +121,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
       if( !socket.waitForBytesWritten( 1000 ) )
         break;
 
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         return false;
 
       if( !readLine( socket, reply, errorString, isCancelled ) )
@@ -139,7 +139,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
     if( !socket.waitForBytesWritten( 1000 ) )
       break;
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return false;
 
     if( !readLine( socket, reply, errorString, isCancelled ) )
@@ -157,7 +157,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
     return true;
   }
 
-  if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( !Utils::AtomicInt::loadAcquire( isCancelled ) )
     errorString = QString( "Server connection fault, socket error %1: \"%2\"" )
                   .arg( QString::number( socket.error() ) )
                   .arg( socket.errorString() );
@@ -408,7 +408,7 @@ void DictServerWordSearchRequestRunnable::run()
 
 void DictServerWordSearchRequest::run()
 {
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -438,7 +438,7 @@ void DictServerWordSearchRequest::run()
         socket->write( matchReq.toUtf8() );
         socket->waitForBytesWritten( 1000 );
 
-        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        if( Utils::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
         QString reply;
@@ -446,7 +446,7 @@ void DictServerWordSearchRequest::run()
         if( !readLine( *socket, reply, errorString, isCancelled ) )
           break;
 
-        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        if( Utils::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
         if( reply.left( 3 ) == "250" )
@@ -455,7 +455,7 @@ void DictServerWordSearchRequest::run()
           if( !readLine( *socket, reply, errorString, isCancelled ) )
             break;
 
-          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+          if( Utils::AtomicInt::loadAcquire( isCancelled ) )
             break;
         }
 
@@ -485,7 +485,7 @@ void DictServerWordSearchRequest::run()
           // Read matches
           for( int x = 0; x <= count; x++ )
           {
-            if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+            if( Utils::AtomicInt::loadAcquire( isCancelled ) )
               break;
 
             if( !readLine( *socket, reply, errorString, isCancelled ) )
@@ -509,12 +509,12 @@ void DictServerWordSearchRequest::run()
               matchesList.append( word );
             }
           }
-          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
+          if( Utils::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
             break;
         }
       }
 
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
         break;
 
       matchesList.removeDuplicates();
@@ -522,7 +522,7 @@ void DictServerWordSearchRequest::run()
         break;
     }
 
-    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) && errorString.isEmpty() )
+    if( !Utils::AtomicInt::loadAcquire( isCancelled ) && errorString.isEmpty() )
     {
       matchesList.removeDuplicates();
 
@@ -543,13 +543,13 @@ void DictServerWordSearchRequest::run()
     gdWarning( "Prefix find in \"%s\" fault: %s\n", dict.getName().c_str(),
                 errorString.toUtf8().data() );
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     socket->abort();
   else
     disconnectFromServer( *socket );
 
   delete socket;
-  if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( !Utils::AtomicInt::loadAcquire( isCancelled ) )
     finish();
 }
 
@@ -622,7 +622,7 @@ void DictServerArticleRequestRunnable::run()
 
 void DictServerArticleRequest::run()
 {
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -650,13 +650,13 @@ void DictServerArticleRequest::run()
 
       QString reply;
 
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( !readLine( *socket, reply, errorString, isCancelled ) )
         break;
 
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( reply.left( 3 ) == "250" )
@@ -665,7 +665,7 @@ void DictServerArticleRequest::run()
         if( !readLine( *socket, reply, errorString, isCancelled ) )
           break;
 
-        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        if( Utils::AtomicInt::loadAcquire( isCancelled ) )
           break;
       }
 
@@ -697,7 +697,7 @@ void DictServerArticleRequest::run()
         // Read articles
         for( int x = 0; x < count; x++ )
         {
-          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+          if( Utils::AtomicInt::loadAcquire( isCancelled ) )
             break;
 
           if( !readLine( *socket, reply, errorString, isCancelled ) )
@@ -796,7 +796,7 @@ void DictServerArticleRequest::run()
               articleText += reply;
             }
 
-            if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
+            if( Utils::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
               break;
 
             static QRegularExpression phonetic( "\\\\([^\\\\]+)\\\\",
@@ -878,12 +878,12 @@ void DictServerArticleRequest::run()
                            + "<br></div>";
           }
 
-          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
+          if( Utils::AtomicInt::loadAcquire( isCancelled ) || !errorString.isEmpty() )
             break;
         }
       }
     }
-    if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) && errorString.isEmpty() && !articleData.empty() )
+    if( !Utils::AtomicInt::loadAcquire( isCancelled ) && errorString.isEmpty() && !articleData.empty() )
     {
       Mutex::Lock _( dataMutex );
 
@@ -898,13 +898,13 @@ void DictServerArticleRequest::run()
     gdWarning( "Articles request from \"%s\" fault: %s\n", dict.getName().c_str(),
                 errorString.toUtf8().data() );
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     socket->abort();
   else
     disconnectFromServer( *socket );
 
   delete socket;
-  if( !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( !Utils::AtomicInt::loadAcquire( isCancelled ) )
     finish();
 }
 

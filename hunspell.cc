@@ -22,7 +22,7 @@
 #include <hunspell/hunspell.hxx>
 #include "gddebug.hh"
 #include "fsencoding.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace HunspellMorpho {
 
@@ -239,7 +239,7 @@ void HunspellArticleRequestRunnable::run()
 
 void HunspellArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -440,7 +440,7 @@ void HunspellHeadwordsRequestRunnable::run()
 
 void HunspellHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -641,7 +641,7 @@ void HunspellPrefixMatchRequestRunnable::run()
 
 void HunspellPrefixMatchRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
