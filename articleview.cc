@@ -185,7 +185,8 @@ QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& var
     QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
     frame->runJavaScript(variable, [&](const QVariant &v)
     {
-        result = v.toString();
+        if(v.isValid())
+            result = v.toString();
         emitJavascriptFinished();
     });
 
@@ -345,10 +346,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.definition->grabGesture( Gestures::GDPinchGestureType );
   ui.definition->grabGesture( Gestures::GDSwipeGestureType );
-#endif
 
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
