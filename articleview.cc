@@ -2384,15 +2384,16 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
 bool ArticleView::findText(QString& text, const QWebEnginePage::FindFlags& f)
 {
-    bool r;
-    QSemaphore sem(1);
-    sem.acquire(1);
-    ui.definition->findText(text, f, [&sem,&r](bool result) {
-        r = result;
-        sem.release(1);
-        });
-    sem.acquire(1);
-    return r;
+  bool r;
+  //turn async to sync invoke.
+  QEventLoop loop;
+  ui.definition->findText(text, f, [&](bool result)
+                          {
+                            r = result;
+                            loop.quit();
+                          });
+  loop.exec();
+  return r;
 }
 
 void ArticleView::reloadStyleSheet()
@@ -2591,14 +2592,15 @@ void ArticleView::highlightFTSResults()
 }
 
 QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
-    QSemaphore sem(1);
-    sem.acquire(1);
     QString planText;
+    QEventLoop loop;
     page->toPlainText([&](const QString & result){
+      if(result.valid())
         planText = result;
-        sem.release(1);
+      loop.quit();
     });
-    sem.acquire(1);
+
+    loop.exec();
     return planText;
 }
 
@@ -2769,29 +2771,18 @@ QString ArticleView::insertSpans( QString const & html )
     return newContent;
 }
 
-QString ArticleView::checkElement( QWebEnginePage & elem, QPoint const & pt )
+QString ArticleView::checkElement( QWebEnginePage & page, QPoint const & pt )
 {
-
-
-    QSemaphore semaphore(1);
-    semaphore.acquire(1);
-      QString nodeValue;
-    elem.runJavaScript(QString(
-                             " var a= document.elementFromPoint(%1,%2);"
-                              "var nodename=a.nodeName.toLowerCase();"
-                              "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
-                              "{"
-                               "   return '';"
-                              "}"
-                              "return a.textContent;")
-                         .arg(pt.x()).arg(pt.y()),[&semaphore,&nodeValue](const QVariant & result){
-              semaphore.release();
-
-              nodeValue=result.toString();
-    });
-
-      semaphore.acquire(1);
-  return nodeValue;
+  return runJavaScriptSync(page, QString(
+                                     " var a= document.elementFromPoint(%1,%2);"
+                                     "var nodename=a.nodeName.toLowerCase();"
+                                     "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
+                                     "{"
+                                     "   return '';"
+                                     "}"
+                                     "return a.textContent;")
+                                     .arg(pt.x())
+                                     .arg(pt.y()));
 }
 
 QString ArticleView::wordAtPoint( int x, int y )
