@@ -181,16 +181,22 @@ QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& var
     qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
 
     QString result;
-    QEventLoop loop;
-    QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
-    frame->runJavaScript(variable, [&](const QVariant &v)
+    //QEventLoop loop;
+    //QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
+    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
+    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
+    frame->runJavaScript(variable, [loop,&result](const QVariant &v)
     {
-        if(v.isValid())
-            result = v.toString();
-        emitJavascriptFinished();
+        if(loop->isRunning()){
+            if(v.isValid())
+                result = v.toString();
+            loop->quit();
+        }
+
+        //this->emitJavascriptFinished();
     });
 
-    loop.exec();
+    loop->exec();
     return result;
 }
 
@@ -326,7 +332,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
   QWebEngineView *m_pNewView;
-  QWebEnginePage *page = ui.definition;
+  QWebEnginePage *page = ui.definition->page();
   connect(&inspectAction, &QAction::triggered, this, [page, m_pNewView]() mutable
           {
             m_pNewView = new QWebEngineView();
@@ -2605,8 +2611,7 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
     QString planText;
     QEventLoop loop;
     page->toPlainText([&](const QString & result){
-      if(result.valid())
-        planText = result;
+      planText = result;
       loop.quit();
     });
 
@@ -2783,7 +2788,7 @@ QString ArticleView::insertSpans( QString const & html )
 
 QString ArticleView::checkElement( QWebEnginePage & page, QPoint const & pt )
 {
-  return runJavaScriptSync(page, QString(
+  return runJavaScriptSync(&page, QString(
                                      " var a= document.elementFromPoint(%1,%2);"
                                      "var nodename=a.nodeName.toLowerCase();"
                                      "if(nodename==\"body\"||nodename==\"html\"||nodename==\"head\")"
