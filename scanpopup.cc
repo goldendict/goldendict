@@ -315,10 +315,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   grabGesture( Gestures::GDPinchGestureType );
   grabGesture( Gestures::GDSwipeGestureType );
-#endif
 
 #ifdef HAVE_X11
   scanFlag = new ScanFlag( this );
@@ -349,10 +347,8 @@ ScanPopup::~ScanPopup()
 
   disableScanning();
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ungrabGesture( Gestures::GDPinchGestureType );
   ungrabGesture( Gestures::GDSwipeGestureType );
-#endif
 }
 
 void ScanPopup::saveConfigData()

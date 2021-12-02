@@ -386,10 +386,8 @@ ArticleView::~ArticleView()
   cleanupTemp();
   audioPlayer->stop();
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
-#endif
 }
 
 void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
@@ -597,7 +595,6 @@ void ArticleView::loadFinished( bool )
     articleToJump.clear();
   }
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   if( !Utils::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
     QString anchor = QUrl::fromPercentEncoding( Utils::Url::encodedQueryItemValue( url, "gdanchor" ) );
@@ -631,7 +628,6 @@ void ArticleView::loadFinished( bool )
          QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
-#endif
 
   emit pageLoaded( this );
 
@@ -868,7 +864,6 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   if( ev->type() == QEvent::Gesture )
   {
     Gestures::GestureResult result;
@@ -920,7 +915,6 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
       return true;
     }
   }
-#endif
 
   if ( handleF3( obj, ev ) )
   {

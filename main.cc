@@ -40,10 +40,6 @@
 
 #include "gddebug.hh"
 
-#if defined( Q_OS_MAC ) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-#include "lionsupport.h"
-#endif
-
 void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &mess )
 {
   Q_UNUSED( context );
