@@ -11,11 +11,9 @@
 #include <QTimer>
 #include <QProgressDialog>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
 #include "gddebug.hh"
-#endif
 
 #define AUTO_APPLY_LIMIT 150000
 

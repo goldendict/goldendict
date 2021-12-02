@@ -1229,8 +1229,6 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           {
             if( !inside_recurse )
             {
-//                expanded.sort();
-//                result->merge(expanded );
                 result->splice(result->end(),expanded);
             }
             return;

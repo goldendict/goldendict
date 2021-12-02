@@ -164,10 +164,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   // Set own gesture recognizers
   Gestures::registerRecognizers();
-#endif
 
   // use our own, custom statusbar
   setStatusBar(0);
@@ -888,10 +886,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
 #endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
-#endif
 
   if( layoutDirection() == Qt::RightToLeft )
   {
@@ -1015,11 +1011,9 @@ MainWindow::~MainWindow()
 
   ftsIndexing.stopIndexing();
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->ungrabGesture( Gestures::GDSwipeGestureType );
 //  Gestures::unregisterRecognizers();
-#endif
 
   // Close all tabs -- they should be destroyed before network managers
   // do.
