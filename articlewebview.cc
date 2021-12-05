@@ -34,22 +34,45 @@ void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool c
 
 bool ArticleWebView::event( QEvent * event )
 {
-  switch ( event->type() )
-  {
-  case QEvent::MouseButtonRelease:
-  case QEvent::MouseButtonDblClick:
-    showInspectorDirectly = true;
-    break;
+    if (event->type() == QEvent::ChildAdded) {
+        QChildEvent *child_ev = static_cast<QChildEvent *>(event);
 
-  case QEvent::ContextMenu:
-    showInspectorDirectly = false;
-    break;
+        //should restrict the child event type?
+        child_ev->child()->installEventFilter(this);
+    }
 
-  default:
-    break;
-  }
+    return QWebEngineView::event(event);
+}
 
-  return QWebEngineView::event( event );
+bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
+{
+    if (ev->type() == QEvent::MouseButtonDblClick) {
+        QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+        mouseDoubleClickEvent(pe);
+        return true;
+    }
+    //    if (ev->type() == QEvent::MouseButtonPress) {
+    //        QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+    //        mousePressEvent(pe);
+    //        return true;
+    //    }
+    //    if (ev->type() == QEvent::MouseButtonRelease) {
+    //        QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+    //        mouseReleaseEvent(pe);
+    //        return true;
+    //    }
+    if (ev->type() == QEvent::Wheel) {
+        QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
+        wheelEvent(pe);
+        return true;
+    }
+    if (ev->type() == QEvent::FocusIn) {
+        QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
+        focusInEvent(pe);
+        return true;
+    }
+
+    return QWebEngineView::eventFilter(obj, ev);
 }
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
@@ -57,13 +80,13 @@ void ArticleWebView::mousePressEvent( QMouseEvent * event )
   if ( event->buttons() & Qt::MidButton )
     midButtonPressed = true;
 
-  QWebEngineView::mousePressEvent( event );
+  QWebEngineView::mousePressEvent(event);
 
-  if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
-  {
-    findText(""); // clear the selection first, if any
-    QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
-    QApplication::sendEvent( page(), &ev );
+  qDebug() << event->buttons();
+  if (selectionBySingleClick && (event->buttons() & Qt::LeftButton)) {
+      //   findText(""); // clear the selection first, if any
+      //    QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
+      //    QApplication::sendEvent( page(), &ev );
   }
 }
 
@@ -79,17 +102,15 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 
 void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 {
-  QWebEngineView::mouseDoubleClickEvent( event );
-  //todo
+    //QWebEngineView::mouseDoubleClickEvent( event );
+    //todo
 
-  int scrollBarWidth = 0;
-  int scrollBarHeight = 0;
+    int scrollBarWidth = 0;
+    int scrollBarHeight = 0;
 
-  // emit the signal only if we are not double-clicking on scrollbars
-  if ( ( event->x() < width() - scrollBarWidth ) &&
-       ( event->y() < height() - scrollBarHeight ) )
-  {
-    emit doubleClicked( event->pos() );
+    // emit the signal only if we are not double-clicking on scrollbars
+    if ((event->x() < width() - scrollBarWidth) && (event->y() < height() - scrollBarHeight)) {
+        emit doubleClicked(event->pos());
   }
 
 }
