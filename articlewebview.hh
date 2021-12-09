@@ -48,9 +48,9 @@ public:
 protected:
 
   bool event( QEvent * event );
-  void mousePressEvent( QMouseEvent * event );
+  void singleClickAction( QMouseEvent * event );
   void mouseReleaseEvent( QMouseEvent * event );
-  void mouseDoubleClickEvent( QMouseEvent * event );
+  void doubleClickAction( QMouseEvent * event );
   void focusInEvent( QFocusEvent * event );
   void wheelEvent( QWheelEvent * event );
 
@@ -61,6 +61,8 @@ private:
   bool midButtonPressed;
   bool selectionBySingleClick;
   bool showInspectorDirectly;
+
+  bool firstClicked;
 };
 
 #endif

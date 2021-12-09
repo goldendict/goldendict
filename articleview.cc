@@ -178,7 +178,7 @@ void ArticleView::emitJavascriptFinished(){
 //a better solution would be to replace it with callback etc.
 QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
-    qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
+    qDebug(QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
 
     QString result;
     //QEventLoop loop;
