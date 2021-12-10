@@ -61,7 +61,6 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
             QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
                 singleClickAction(pe);
             });
-            return true;
         }
         else{
             doubleClickAction(pe);
