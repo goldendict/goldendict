@@ -49,6 +49,7 @@ protected:
 
   bool event( QEvent * event );
   void singleClickAction( QMouseEvent * event );
+  void mousePressEvent(QMouseEvent *event);
   void mouseReleaseEvent( QMouseEvent * event );
   void doubleClickAction( QMouseEvent * event );
   void focusInEvent( QFocusEvent * event );
