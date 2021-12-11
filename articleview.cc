@@ -4,7 +4,7 @@
 #include "articleview.hh"
 #include <map>
 #include <QMessageBox>
-//#include <QWebHitTestResult>
+#include "weburlrequestinterceptor.h"
 #include <QMenu>
 #include <QDesktopServices>
 #include <QWebEngineHistory>
@@ -279,8 +279,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-  //todo acceptNavigationRequest
-  //ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
+  //use acceptNavigationRequest method to simulate the linkclick signal
+  //connect( ui.definition, SIGNAL( linkClicked(QUrl) ),this,SLOT( linkClicked(QUrl ) ) );
+//  WebUrlRequestInterceptor *wuri = new WebUrlRequestInterceptor();
+//  ui.definition->page ()->profile ()->setUrlRequestInterceptor(wuri);
+//  connect( wuri, SIGNAL( linkClicked(QUrl) ),this,SLOT( linkClicked(QUrl ) ) );
 
   connect( ui.definition, SIGNAL( loadFinished(bool) ),
            this, SLOT( loadFinished(bool) ) );

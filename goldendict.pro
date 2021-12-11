@@ -269,6 +269,7 @@ HEADERS += folding.hh \
     btreeidx.hh \
     stardict.hh \
     chunkedstorage.hh \
+    weburlrequestinterceptor.h \
     xdxf2html.hh \
     iconv.hh \
     lsa.hh \
@@ -405,6 +406,7 @@ SOURCES += folding.cc \
     btreeidx.cc \
     stardict.cc \
     chunkedstorage.cc \
+    weburlrequestinterceptor.cpp \
     xdxf2html.cc \
     iconv.cc \
     lsa.cc \

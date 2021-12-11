@@ -45,6 +45,9 @@ public:
   /// word, which gets selected by the view in response to double-click.
   void doubleClicked( QPoint pos );
 
+  //the linkClicked signal was removed from webengineview. add the signal to simulate.
+  void linkClicked(QUrl const& url);
+
 protected:
 
   bool event( QEvent * event );
@@ -55,6 +58,7 @@ protected:
   void focusInEvent( QFocusEvent * event );
   void wheelEvent( QWheelEvent * event );
 
+
 private:
 
   Config::Class * cfg;
@@ -63,6 +67,8 @@ private:
   bool selectionBySingleClick;
   bool showInspectorDirectly;
 
+  //MouseDbClickEvent will also emit MousePressEvent which conflict the single click event.
+  //this variable used to distinguish the single click and real double click.
   bool firstClicked;
 };
 

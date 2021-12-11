@@ -32,6 +32,7 @@
 #include "helpwindow.hh"
 
 #include "hotkeywrapper.hh"
+#include "weburlrequestinterceptor.h"
 #ifdef HAVE_X11
 #include <fixx11h.h>
 #endif
@@ -98,6 +99,8 @@ private:
   void commitData();
 
   QSystemTrayIcon * trayIcon;
+
+  WebUrlRequestInterceptor *wuri;
 
   Ui::MainWindow ui;
 
