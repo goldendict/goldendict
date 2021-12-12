@@ -26,14 +26,11 @@
 
 #include <QRegularExpression>
 #include "wildcard.hh"
-
 #include "utils.hh"
-
 #include <assert.h>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
-
 #include <QPainter>
 #endif
 
@@ -178,11 +175,9 @@ void ArticleView::emitJavascriptFinished(){
 //a better solution would be to replace it with callback etc.
 QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
-    qDebug(QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
+    qDebug("%s", QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
 
     QString result;
-    //QEventLoop loop;
-    //QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
     QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
     QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
     frame->runJavaScript(variable, [loop,&result](const QVariant &v)
@@ -192,8 +187,6 @@ QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& var
                 result = v.toString();
             loop->quit();
         }
-
-        //this->emitJavascriptFinished();
     });
 
     loop->exec();
@@ -334,15 +327,15 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &inspectAction );
   //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
-  QWebEngineView *m_pNewView;
   QWebEnginePage *page = ui.definition->page();
-  connect(&inspectAction, &QAction::triggered, this, [page, m_pNewView]() mutable
-          {
-            m_pNewView = new QWebEngineView();
-            page->setDevToolsPage(m_pNewView->page());
-            page->triggerAction(QWebEnginePage::InspectElement);
-            m_pNewView->show();
-          });
+  connect(&inspectAction, &QAction::triggered, this, [page, this]() {
+      if (inspectView == nullptr || !inspectView->isVisible()) {
+          inspectView = new QWebEngineView();
+          page->setDevToolsPage(inspectView->page());
+          page->triggerAction(QWebEnginePage::InspectElement);
+          inspectView->show();
+      }
+  });
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
@@ -1677,17 +1670,21 @@ void ArticleView::playSound()
   ui.definition->page()->runJavaScript(variable);
 }
 
+// use eventloop to turn the async callback to sync execution.
 QString ArticleView::toHtml()
 {
-    QString html;
-    ui.definition->page()->toHtml([&](const QString& content) {
-       
+    QString result;
+    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
+    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
 
-        html = content;
-
-        });
-
-    return html;
+    ui.definition->page()->toHtml([loop, &result](const QString &content) {
+        if (loop->isRunning()) {
+            result = content;
+            loop->quit();
+        }
+    });
+    loop->exec();
+    return result;
 }
 
 void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){
@@ -2645,36 +2642,28 @@ void ArticleView::performFtsFindOperation( bool backwards )
          runJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
                              .arg( rangeVarName ) );
 
-  bool res;
-  if( backwards )
-  {
-    if( ftsPosition > 0 )
-    {
-      ui.definition->findText( allMatches.at( ftsPosition - 1 ),
-                                     flags | QWebEnginePage::FindBackward );
-      ftsPosition -= 1;
-    }
-    else
-       ui.definition->findText( allMatches.at( ftsPosition ),
-                                     flags | QWebEnginePage::FindBackward );
+  if (backwards) {
+      if (ftsPosition > 0) {
+          ftsPosition -= 1;
+      }
 
-//    ui.ftsSearchPrevious->setEnabled( res );
-//    if( !ui.ftsSearchNext->isEnabled() )
-//      ui.ftsSearchNext->setEnabled( res );
-  }
-  else
-  {
-    if( ftsPosition < allMatches.size() - 1 )
-    {
-       ui.definition->findText( allMatches.at( ftsPosition + 1 ), flags );
-      ftsPosition += 1;
-    }
-    else
-       ui.definition->findText( allMatches.at( ftsPosition ), flags );
+      ui.definition->findText(allMatches.at(ftsPosition),
+                              flags | QWebEnginePage::FindBackward,
+                              [this](bool res) {
+                                  ui.ftsSearchPrevious->setEnabled(res);
+                                  if (!ui.ftsSearchNext->isEnabled())
+                                      ui.ftsSearchNext->setEnabled(res);
+                              });
+  } else {
+      if (ftsPosition < allMatches.size() - 1) {
+          ftsPosition += 1;
+      }
 
-//    ui.ftsSearchNext->setEnabled( res );
-//    if( !ui.ftsSearchPrevious->isEnabled() )
-//      ui.ftsSearchPrevious->setEnabled( res );
+      ui.definition->findText(allMatches.at(ftsPosition), flags, [this](bool res) {
+          ui.ftsSearchNext->setEnabled(res);
+          if (!ui.ftsSearchPrevious->isEnabled())
+              ui.ftsSearchPrevious->setEnabled(res);
+      });
   }
 
   // Store new highlighted selection
