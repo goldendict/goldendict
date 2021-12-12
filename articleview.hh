@@ -374,8 +374,6 @@ private:
 
   QStringList getMutedDictionaries(unsigned group);
 
-  void findTextCallback();
-
   protected:
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
