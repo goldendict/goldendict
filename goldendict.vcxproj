@@ -800,6 +800,11 @@
     <ClCompile Include="voiceengines.cc" />
     <ClCompile Include="webmultimediadownload.cc" />
     <ClCompile Include="website.cc" />
+<<<<<<< HEAD
+=======
+    <ClCompile Include="weburlrequestinterceptor.cpp" />
+    <ClCompile Include="wildcard.cc" />
+>>>>>>> 1d61f3cc (update visual studio project files.)
     <ClCompile Include="wordbyauto.cc" />
     <ClCompile Include="wordfinder.cc" />
     <ClCompile Include="wordlist.cc" />
@@ -910,8 +915,17 @@
     <ClInclude Include="uiauto.hh" />
     <ClInclude Include="utf8.hh" />
     <ClInclude Include="voiceengines.hh" />
+<<<<<<< HEAD
     <QtMOCCompile Include="webmultimediadownload.hh" />
     <ClInclude Include="website.hh" />
+=======
+    <QtMoc Include="webmultimediadownload.hh">
+    </QtMoc>
+    <QtMoc Include="website.hh">
+    </QtMoc>
+    <QtMoc Include="weburlrequestinterceptor.h" />
+    <ClInclude Include="wildcard.hh" />
+>>>>>>> 1d61f3cc (update visual studio project files.)
     <ClInclude Include="wordbyauto.hh" />
     <QtMOCCompile Include="wordfinder.hh" />
     <QtMOCCompile Include="wordlist.hh" />

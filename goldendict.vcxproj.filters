@@ -359,6 +359,9 @@
     <ClCompile Include="gico_schemahandler.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="weburlrequestinterceptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mouseover_win32\ThTypes.h">
@@ -1958,5 +1961,10 @@
     <QtRCCCompile Include="resources.qrc">
       <Filter>Resources</Filter>
     </QtRCCCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="weburlrequestinterceptor.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

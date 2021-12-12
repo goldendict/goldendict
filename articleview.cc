@@ -279,12 +279,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-  //use acceptNavigationRequest method to simulate the linkclick signal
-  //connect( ui.definition, SIGNAL( linkClicked(QUrl) ),this,SLOT( linkClicked(QUrl ) ) );
-//  WebUrlRequestInterceptor *wuri = new WebUrlRequestInterceptor();
-//  ui.definition->page ()->profile ()->setUrlRequestInterceptor(wuri);
-//  connect( wuri, SIGNAL( linkClicked(QUrl) ),this,SLOT( linkClicked(QUrl ) ) );
-
   connect( ui.definition, SIGNAL( loadFinished(bool) ),
            this, SLOT( loadFinished(bool) ) );
 
