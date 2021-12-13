@@ -217,19 +217,6 @@ int main( int argc, char ** argv )
 
   #endif
 
-//  // The following clause fixes a race in the MinGW runtime where throwing
-//  // exceptions for the first time in several threads simultaneously can cause
-//  // an abort(). This code throws first exception in a safe, single-threaded
-//  // manner, thus avoiding that race.
-//  {
-//    class Dummy {};
-
-//    try
-//    { throw Dummy(); }
-//    catch( Dummy )
-//    {}
-//  }
-
 #if defined( Q_OS_UNIX )
   setlocale( LC_ALL, "" ); // use correct char set mapping
 #endif
