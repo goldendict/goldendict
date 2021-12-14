@@ -435,6 +435,9 @@
     <ClCompile Include="zipsounds.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="weburlrequestinterceptor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mouseover_win32\ThTypes.h">
@@ -2059,5 +2062,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="goldendict.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="weburlrequestinterceptor.h">
+      <Filter>Source Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

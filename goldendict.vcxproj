@@ -318,6 +318,7 @@
     <ClCompile Include="voiceengines.cc" />
     <ClCompile Include="webmultimediadownload.cc" />
     <ClCompile Include="website.cc" />
+    <ClCompile Include="weburlrequestinterceptor.cpp" />
     <ClCompile Include="wildcard.cc" />
     <ClCompile Include="wordbyauto.cc" />
     <ClCompile Include="wordfinder.cc" />
@@ -510,6 +511,7 @@
     </QtMoc>
     <QtMoc Include="website.hh">
     </QtMoc>
+    <QtMoc Include="weburlrequestinterceptor.h" />
     <ClInclude Include="wildcard.hh" />
     <ClInclude Include="wordbyauto.hh" />
     <QtMoc Include="wordfinder.hh">
