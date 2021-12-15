@@ -508,27 +508,7 @@ void ArticleView::loadFinished( bool )
 {
     QUrl url = ui.definition->url();
     QObject* obj=sender();
-    qDebug()<<"article view loaded url is :"<<url<<" sender class is :"<<obj->metaObject()->className();
-
-//  // See if we have any iframes in need of expansion
-//   ui.definition->page()->runJavaScript(QString(""
-//"var frames = window.frames;"
-//"for (var i=0; i < frames.length; i++) {"
-//"    var f = frames[i];"
-//"    "
-//"    f.onload = function()"
-//"    {"
-//"      f.style.height = "
-//"      f.contentWindow.document.body.scrollHeight + 'px';"
-//"     f.style.width  = "
-//"      f.contentWindow.document.body.scrollWidth+'px';    "
-//"    }"
-//"    f.style.display = 'block';"
-//"    var gdLastUrlText;"
-//"    f.document.addEventListener('click', function () { gdLastUrlText = window.event.srcElement.textContent; });"
-//"    f.document.addEventListener('contextmenu', function () { gdLastUrlText = window.event.srcElement.textContent; });"
-//"}"
-//));
+    qDebug()<<"article view loaded url:"<<url;
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
@@ -727,8 +707,8 @@ bool ArticleView::isFramedArticle( QString const & ca )
   if ( ca.isEmpty() )
     return false;
 
-  runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) );
-  return false;
+  QString result=runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) );
+  return result=="true";
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -925,7 +905,7 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
       }
     }
     else
-    if ( ev->type() == QEvent::KeyPress )
+    if ( ev->type() == QEvent::KeyPress || ev->type ()==QEvent::ShortcutOverride)
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -1187,6 +1167,16 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         return;
       }
 
+      QString word;
+
+      if( Utils::Url::hasQueryItem( url, "word" ) )
+      {
+          word=Utils::Url::queryItemValue (url,"word");
+      }
+      else{
+          word=url.path ().mid (1);
+      }
+
       QString newScrollTo( scrollTo );
       if( Utils::Url::hasQueryItem( url, "dict" ) )
       {
@@ -1205,7 +1195,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       if( Utils::Url::hasQueryItem( url, "gdanchor" ) )
         contexts[ "gdanchor" ] = Utils::Url::queryItemValue( url, "gdanchor" );
 
-      showDefinition( url.path().mid( 1 ),
+      showDefinition( word,
                       getGroup( ref ), newScrollTo, contexts );
     }
   }
@@ -2231,77 +2221,6 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
 
 void ArticleView::doubleClicked( QPoint pos )
 {
-//#if QT_VERSION >= 0x040600
-//  QWebEnginePage* r = ui.definition->page();
-//  QWebElement el = r.element();
-//  QUrl imageUrl;
-//  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
-//  {
-//    // Double click on image; download it and transfer to external program
-
-//    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
-//    if( !imageUrl.isEmpty() )
-//    {
-//      // Download it
-
-//      // Clear any pending ones
-//      resourceDownloadRequests.clear();
-
-//      resourceDownloadUrl = imageUrl;
-//      sptr< Dictionary::DataRequest > req;
-
-//      if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
-//      {
-//        // Web resource
-//        req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
-//      }
-//      else
-//      if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
-//      {
-//        // Local resource
-//        QString contentType;
-//        req = articleNetMgr.getResource( imageUrl, contentType );
-//      }
-//      else
-//      {
-//        // Unsupported scheme
-//        gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
-//        return;
-//      }
-
-//      if ( !req.get() )
-//      {
-//        // Request failed, fail
-//        gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
-//        return;
-//      }
-
-//      if ( req->isFinished() && req->dataSize() >= 0 )
-//      {
-//        // Have data ready, handle it
-//        resourceDownloadRequests.push_back( req );
-//        resourceDownloadFinished();
-//        return;
-//      }
-//      else
-//      if ( !req->isFinished() )
-//      {
-//        // Queue to be handled when done
-//        resourceDownloadRequests.push_back( req );
-//        connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
-//      }
-//      if ( resourceDownloadRequests.empty() ) // No requests were queued
-//      {
-//        gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
-//        return;
-//      }
-//      else
-//        resourceDownloadFinished(); // Check any requests finished already
-//    }
-//    return;
-//  }
-//#endif
-
   // We might want to initiate translation of the selected word
 
   if ( cfg.preferences.doubleClickTranslates )
