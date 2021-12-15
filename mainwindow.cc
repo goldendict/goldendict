@@ -2779,7 +2779,7 @@ void MainWindow::typingEvent( QString const & t )
 
     if( translateLine->isEnabled() )
     {
-      translateLine->setFocus();
+      //translateLine->setFocus();
       // Escaping the typed-in characters is the user's responsibility.
       setTranslateBoxTextAndClearSuffix( t, WildcardsAreAlreadyEscaped, EnablePopup );
       translateLine->setCursorPosition( t.size() );

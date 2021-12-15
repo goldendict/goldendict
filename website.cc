@@ -392,7 +392,7 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                       "onmouseout=\"processIframeMouseOut();\" "
                       "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "
                       "frameborder=\"0\" vspace=\"0\" hspace=\"0\" "
-                      "style=\"overflow:visible; width:100%; display:none;\">"
+                      "style=\"overflow:visible; width:100%; display:block;\">"
                       "</iframe>";
 
     dr->getData().resize( result.size() );

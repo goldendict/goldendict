@@ -14,6 +14,7 @@ protected:
 
 private:
     ArticleNetworkAccessManager& mManager;
+    QMimeDatabase db;
 };
 
 #endif // GICO_SCHEMAHANDLER_H
