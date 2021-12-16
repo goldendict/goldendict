@@ -98,10 +98,7 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
 
   setFocusProxy(translate_line);
   translate_line->setObjectName("translateLine");
-#if QT_VERSION >= 0x040700
   translate_line->setPlaceholderText( tr( "Type a word or phrase to search dictionaries" ) );
-#endif
-
   word_list->setTranslateLine(translate_line);
 
   // completer = new QCompleter(m_completionList->model(), this);

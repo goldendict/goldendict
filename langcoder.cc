@@ -353,11 +353,7 @@ bool LangCoder::isLanguageRTL( quint32 code )
     GDLangCode &lc = LangCodes[ langCoder.codeMap[ code ] ];
     if( lc.isRTL < 0 )
     {
-#if QT_VERSION >= 0x040700
       lc.isRTL = ( int )( QLocale( lc.code ).textDirection() == Qt::RightToLeft );
-#else
-      lc.isRTL = 0;
-#endif
     }
     return lc.isRTL != 0;
   }

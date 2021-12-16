@@ -3,8 +3,6 @@
 
 #include "gdappstyle.hh"
 
-#if QT_VERSION >= 0x040600
-
 #include "dictionarybar.hh"
 
 #include <QWidget>
@@ -53,5 +51,3 @@ bool GdAppStyle::dictionaryBarButton(const QWidget * widget) const {
 
   return false;
 }
-
-#endif // QT_VERSION

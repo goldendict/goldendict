@@ -546,9 +546,7 @@ void DictListWidget::rowsAboutToBeRemoved( QModelIndex const & parent, int start
 DictGroupsWidget::DictGroupsWidget( QWidget * parent ):
   QTabWidget( parent ), nextId( 1 ), allDicts( 0 ), activeDicts( 0 )
 {
-#if QT_VERSION >= 0x040500
   setMovable( true );
-#endif
   setContextMenuPolicy( Qt::CustomContextMenu );
   connect( this, SIGNAL( customContextMenuRequested( QPoint ) ),
            this, SLOT( contextMenu( QPoint ) ) );
@@ -1023,9 +1021,7 @@ QuickFilterLine::QuickFilterLine( QWidget * parent ): ExtLineEdit( parent ), m_f
 {
   m_proxyModel.setFilterCaseSensitivity( Qt::CaseInsensitive );
 
-#if QT_VERSION >= 0x040700
   setPlaceholderText( tr( "Dictionary search/filter (Ctrl+F)" ) );
-#endif
 
   m_focusAction.setShortcut( QKeySequence( "Ctrl+F" ) );
   connect( &m_focusAction, SIGNAL( triggered() ),

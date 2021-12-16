@@ -831,11 +831,7 @@ namespace {
 /// Deal with Qt 4.5 incompatibility
 QString readElementText( QXmlStreamReader & stream )
 {
-#if QT_VERSION >= 0x040600
     return stream.readElementText( QXmlStreamReader::SkipChildElements );
-#else
-    return stream.readElementText();
-#endif
 }
 
 }

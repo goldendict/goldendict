@@ -1937,7 +1937,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if( result == saveImageAction || result == saveSoundAction )
     {
-#if QT_VERSION >= 0x040600
 //      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
       QUrl url =  targetUrl;
       QString savePath;
@@ -1987,7 +1986,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
         saveResource( url, ui.definition->url(), fileName );
       }
-#endif
     }
     else
     {
