@@ -655,9 +655,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.tabWidget, SIGNAL( customContextMenuRequested(QPoint)) ,
            this, SLOT( tabMenuRequested(QPoint)) );
 
-#if QT_VERSION >= 0x040500
   ui.tabWidget->setTabsClosable( true );
-#endif
 
   connect( ui.quit, SIGNAL( triggered() ),
            this, SLOT( quitApp() ) );

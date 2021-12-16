@@ -1495,9 +1495,7 @@ bool BtreeDictionary::getHeadwords( QStringList &headwords )
 
     if( setOfHeadwords.size() )
     {
-#if QT_VERSION >= 0x040700
       headwords.reserve( setOfHeadwords.size() );
-#endif
 
       QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
       QSet< QString >::const_iterator end = setOfHeadwords.constEnd();
