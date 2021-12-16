@@ -26,9 +26,7 @@
 
 #include <QRegularExpression>
 #include "wildcard.hh"
-
-#include "qt4x5.hh"
-
+#include "utils.hh"
 #include <assert.h>
 
 #ifdef Q_OS_WIN32
