@@ -213,6 +213,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
             "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
             "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
+            "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
             " } }"
             "var overIframeId = null;"
             "function gdSelectArticle( id ) {"
@@ -657,6 +658,11 @@ void ArticleRequest::bodyFinished()
         if ( closePrevSpan )
         {
           head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
+        } else {
+          // This is the first article
+          head += "<script type=\"text/javascript\">"
+              "var gdCurrentArticle=\"" + gdFrom  + "\"; "
+              "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
         bool collapse = false;
