@@ -689,11 +689,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 
   if(moveToIt){
       QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
-
       ui.definition->page()->runJavaScript(script);
-
-      onJsActiveArticleChanged(id);
-
       ui.definition->setProperty("currentArticle",id);
   }
 }
