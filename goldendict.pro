@@ -23,21 +23,18 @@ QT += core \
       network \
       svg
 
-greaterThan(QT_MAJOR_VERSION, 4) {
-    QT += widgets \
-          webenginewidgets\
-          printsupport \
-          help
+QT += widgets \
+      webenginewidgets\
+      webchannel\
+      printsupport \
+      help
 
-    # QMediaPlayer is not available in Qt4.
-    !CONFIG( no_qtmultimedia_player ) {
-      QT += multimedia
-      DEFINES += MAKE_QTMULTIMEDIA_PLAYER
-    }
-} else {
-    QT += webkit
-    CONFIG += help
+# QMediaPlayer is not available in Qt4.
+!CONFIG( no_qtmultimedia_player ) {
+  QT += multimedia
+  DEFINES += MAKE_QTMULTIMEDIA_PLAYER
 }
+
 
 !CONFIG( no_ffmpeg_player ) {
   DEFINES += MAKE_FFMPEG_PLAYER

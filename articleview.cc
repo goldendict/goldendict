@@ -2,32 +2,32 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articleview.hh"
-#include <map>
-#include <QMessageBox>
+#include "folding.hh"
+#include "fulltextsearch.hh"
+#include "gddebug.hh"
+#include "gestures.hh"
+#include "programs.hh"
+#include "utils.hh"
+#include "webmultimediadownload.hh"
 #include "weburlrequestinterceptor.h"
-#include <QMenu>
+#include "wildcard.hh"
+#include "wstring_qt.hh"
+#include <QClipboard>
+#include <QCryptographicHash>
+#include <QDebug>
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QMenu>
+#include <QMessageBox>
+#include <QRegularExpression>
+#include <QWebChannel>
 #include <QWebEngineHistory>
 #include <QWebEngineScript>
-#include <QWebEngineSettings>
 #include <QWebEngineScriptCollection>
-#include <QClipboard>
-#include <QKeyEvent>
-#include <QFileDialog>
-#include "folding.hh"
-#include "wstring_qt.hh"
-#include "webmultimediadownload.hh"
-#include "programs.hh"
-#include "gddebug.hh"
-#include <QDebug>
-#include <QCryptographicHash>
-#include "gestures.hh"
-#include "fulltextsearch.hh"
-
-#include <QRegularExpression>
-#include "wildcard.hh"
-#include "utils.hh"
+#include <QWebEngineSettings>
 #include <assert.h>
+#include <map>
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -272,8 +272,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-  connect( ui.definition, SIGNAL( loadFinished(bool) ),
-           this, SLOT( loadFinished(bool) ) );
+  connect(ui.definition, SIGNAL(loadFinished(bool)), this,
+          SLOT(loadFinished(bool)));
+
+  attachToJavaScript();
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
@@ -1085,16 +1087,15 @@ void ArticleView::linkHovered ( const QString & link )
   emit statusBarMessage( msg );
 }
 
-void ArticleView::attachToJavaScript()
-{
-    QWebEngineScript script;
-    script.setInjectionPoint(QWebEngineScript::DocumentReady);
-    script.setRunsOnSubFrames(false);
-    script.setWorldId(QWebEngineScript::MainWorld);
-    script.setSourceCode(QString("articleview"));
+void ArticleView::attachToJavaScript() {
+  QWebChannel *channel = new QWebChannel(ui.definition->page());
 
-    ui.definition->page()->scripts().insert(script);
+  // set the web channel to be used by the page
+  // see http://doc.qt.io/qt-5/qwebenginepage.html#setWebChannel
+  ui.definition->page()->setWebChannel(channel, QWebEngineScript::MainWorld);
 
+  // register QObjects to be exposed to JavaScript
+  channel->registerObject(QStringLiteral("articleview"), this);
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
