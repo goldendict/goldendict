@@ -29,6 +29,8 @@ QT += widgets \
       printsupport \
       help
 
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
+
 # QMediaPlayer is not available in Qt4.
 !CONFIG( no_qtmultimedia_player ) {
   QT += multimedia

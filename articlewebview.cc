@@ -86,7 +86,7 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
 
 void ArticleWebView::mousePressEvent(QMouseEvent *event)
 {
-    if (event->buttons() & Qt::MidButton)
+    if (event->buttons() & Qt::MiddleButton)
         midButtonPressed = true;
 
     //QWebEngineView::mousePressEvent(event);
@@ -122,7 +122,7 @@ void ArticleWebView::singleClickAction( QMouseEvent * event )
 
 void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 {
-  bool noMidButton = !( event->buttons() & Qt::MidButton );
+  bool noMidButton = !( event->buttons() & Qt::MiddleButton );
 
   //QWebEngineView::mouseReleaseEvent( event );
 
