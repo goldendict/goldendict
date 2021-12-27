@@ -207,10 +207,10 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-
-    QString contentType;
-
     QUrl url=req.url();
+    QMimeType mineType=db.mimeTypeForUrl (url);
+    QString contentType=mineType.name();
+
     if(req.url().scheme()=="gdlookup"){
         QString path=url.path();
         if(!path.isEmpty()){
@@ -381,7 +381,6 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
         {
             if( url.scheme() == "gico" )
             {
-                contentType="image/png";
                 QByteArray bytes;
                 QBuffer buffer(&bytes);
                 buffer.open(QIODevice::WriteOnly);
@@ -510,8 +509,6 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   if ( maxSize == 0 )
     return 0;
 
-  GD_DPRINTF( "====reading %d bytes\n", (int)maxSize );
-
   bool finished = req->isFinished();
   
   qint64 avail = req->dataSize();
@@ -522,6 +519,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   qint64 left = avail - alreadyRead;
   
   qint64 toRead = maxSize < left ? maxSize : left;
+  GD_DPRINTF( "====reading %d bytes\n", (int)toRead );
 
   try
   {
@@ -542,13 +540,13 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 
 void ArticleResourceReply::readyReadSlot()
 {
-  readyRead();
+  emit readyRead();
 }
 
 void ArticleResourceReply::finishedSlot()
 {
   if ( req->dataSize() < 0 )
-    error( ContentNotFoundError );
+    errorOccurred( ContentNotFoundError );
 
   emit finished();
 }

@@ -101,6 +101,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
+  QMimeDatabase db;
 
 public:
 
