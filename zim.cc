@@ -1377,8 +1377,9 @@ public:
     dict( dict_ ),
     resourceName( resourceName_ )
   {
-    QThreadPool::globalInstance()->start(
-      new ZimResourceRequestRunnable( *this, hasExited ) );
+    (new ZimResourceRequestRunnable(*this, hasExited))->run();
+//    QThreadPool::globalInstance()->start(
+//      new ZimResourceRequestRunnable( *this, hasExited ) );
   }
 
   void run(); // Run from another thread by ZimResourceRequestRunnable
