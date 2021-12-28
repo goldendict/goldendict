@@ -28,7 +28,7 @@
 #include <QWebEngineSettings>
 #include <assert.h>
 #include <map>
-
+#include <QWebEngineContextMenuData>
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <QPainter>
@@ -1716,8 +1716,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  //todo url() or lastclickurl ?
-  QUrl targetUrl( r->url() );
+  QWebEngineContextMenuData menuData=r->contextMenuData();
+  QUrl targetUrl(menuData.linkUrl());
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
