@@ -1188,7 +1188,7 @@ public:
   ~ZimArticleRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
 
@@ -1353,7 +1353,7 @@ public:
 
   ~ZimResourceRequestRunnable()
   {
-    hasExited.release();
+    //hasExited.release();
   }
 
   virtual void run();
@@ -1371,15 +1371,9 @@ class ZimResourceRequest: public Dictionary::DataRequest
   QSemaphore hasExited;
 
 public:
-
-  ZimResourceRequest( ZimDictionary & dict_,
-                      string const & resourceName_ ):
-    dict( dict_ ),
-    resourceName( resourceName_ )
-  {
-    (new ZimResourceRequestRunnable(*this, hasExited))->run();
-//    QThreadPool::globalInstance()->start(
-//      new ZimResourceRequestRunnable( *this, hasExited ) );
+  ZimResourceRequest(ZimDictionary &dict_, string const &resourceName_)
+      : dict(dict_), resourceName(resourceName_) {
+      (new ZimResourceRequestRunnable(*this, hasExited))->run();
   }
 
   void run(); // Run from another thread by ZimResourceRequestRunnable
@@ -1392,7 +1386,7 @@ public:
   ~ZimResourceRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
 
