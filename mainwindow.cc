@@ -1681,7 +1681,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
-  connect (wuri,SIGNAL(linkClicked(QUrl)),view,SLOT(linkClicked(QUrl)));
+  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
+    ArticleView *active = getCurrentArticleView();
+    if (active == view) {
+      view->linkClicked(url);
+    }
+  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
