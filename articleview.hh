@@ -278,14 +278,14 @@ public slots:
 
   /// Selects an entire text of the current article
   void selectCurrentArticle();
-
+  void linkClicked( QUrl const & );
 private slots:
 
   void loadFinished( bool ok );
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
   void attachToJavaScript();
-  void linkClicked( QUrl const & );
+
   void linkHovered( const QString & link);
   void contextMenuRequested( QPoint const & );
 
