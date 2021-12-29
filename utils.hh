@@ -26,6 +26,13 @@ inline  QString rstrip(const QString& str) {
     return "";
   }
 
+  inline bool isExternalLink( QUrl const & url )
+  {
+    return url.scheme() == "http" || url.scheme() == "https" ||
+           url.scheme() == "ftp" || url.scheme() == "mailto" ||
+           url.scheme() == "file";
+  }
+
 inline QString escape( QString const & plain )
 {
   return plain.toHtmlEscaped();
