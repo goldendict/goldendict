@@ -1307,6 +1307,7 @@ void MainWindow::applyWebSettings()
   defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
 }
 
 void MainWindow::setupNetworkCache( int maxSize )

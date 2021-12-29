@@ -28,7 +28,7 @@
 #include "wildcard.hh"
 #include "utils.hh"
 #include <assert.h>
-
+#include <QWebEngineContextMenuData>
 #ifdef Q_OS_WIN32
 #include <windows.h>
 
@@ -343,6 +343,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   QWebEngineSettings * settings = ui.definition->page()->settings();
   settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
@@ -513,15 +514,20 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
+<<<<<<< HEAD
     QUrl url = ui.definition->url();
     QObject* obj=sender();
     qDebug()<<"article view loaded url:"<<url;
+=======
+  setZoomFactor(cfg.preferences.zoomFactor);
+  QUrl url = ui.definition->url();
+  qDebug() << "article view loaded url:" << url;
+>>>>>>> 1b6f6403 (fix:zoom in does not take affect.)
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
   if ( userDataVariant.isValid() )
   {
-
     QString currentArticle = userDataVariant.toString();
 
     if ( !currentArticle.isEmpty() )
@@ -1134,7 +1140,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
-  qDebug() << "clicked" << url;
+  qDebug() << "clicked url:" << url;
 
   Contexts contexts( contexts_ );
 
@@ -1722,13 +1728,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  //todo url() or lastclickurl ?
-  QUrl targetUrl( r->url() );
+  QWebEngineContextMenuData menuData=r->contextMenuData();
+  QUrl targetUrl(menuData.linkUrl());
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
 
-  if ( !r->url().isEmpty() )
+  if ( !targetUrl.isEmpty() )
   {
     if ( !isExternalLink( targetUrl ) )
     {
@@ -1743,7 +1749,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
 
-    if ( isExternalLink( r->url() ) )
+    if ( isExternalLink( targetUrl ) )
     {
       followLinkExternal = new QAction( tr( "Open Link in &External Browser" ), &menu );
       menu.addAction( followLinkExternal );
@@ -1902,7 +1908,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
     else
     if ( result == followLinkExternal )
-      QDesktopServices::openUrl( r->url() );
+      QDesktopServices::openUrl( targetUrl );
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
@@ -1994,7 +2000,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  qDebug( "url = %s\n", r->url().toString().toLocal8Bit().data() );
+  qDebug( "url = %s\n", targetUrl.toString().toLocal8Bit().data() );
   qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
 
 }
