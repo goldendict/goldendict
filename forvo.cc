@@ -353,7 +353,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
   if ( forvo.enable )
   {
-    QStringList codes = forvo.languageCodes.split( ',', QString::SkipEmptyParts );
+    QStringList codes = forvo.languageCodes.split( ',', Qt::SkipEmptyParts );
 
     QSet< QString > usedCodes;
 

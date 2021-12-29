@@ -338,8 +338,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.ftsSearchFrame->installEventFilter( this );
 
   QWebEngineSettings * settings = ui.definition->page()->settings();
-  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
@@ -509,7 +509,6 @@ void ArticleView::showAnticipation()
 void ArticleView::loadFinished( bool )
 {
     QUrl url = ui.definition->url();
-    QObject* obj=sender();
     qDebug()<<"article view loaded url:"<<url;
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
@@ -646,7 +645,7 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
    return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-       .trimmed().split( ' ', QString::SkipEmptyParts );
+       .trimmed().split( ' ', Qt::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -1124,7 +1123,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
-  qDebug() << "clicked" << url;
+  qDebug() << "clicked url:" << url;
 
   Contexts contexts( contexts_ );
 
@@ -1136,7 +1135,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     if( Utils::Url::hasQueryItem( ref, "dictionaries" ) )
     {
       QStringList dictsList = Utils::Url::queryItemValue( ref, "dictionaries" )
-                                          .split( ",", QString::SkipEmptyParts );
+                                          .split( ",", Qt::SkipEmptyParts );
 
       showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
@@ -1158,7 +1157,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       {
         // Specific dictionary group from full-text search
         QStringList dictsList = Utils::Url::queryItemValue( ref, "dictionaries" )
-                                            .split( ",", QString::SkipEmptyParts );
+                                            .split( ",", Qt::SkipEmptyParts );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return;
@@ -1718,6 +1717,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   QWebEngineContextMenuData menuData=r->contextMenuData();
   QUrl targetUrl(menuData.linkUrl());
+  qDebug() << "menu:" <<  menuData.linkText()<<":"<<menuData.mediaUrl();
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -2240,7 +2240,7 @@ void ArticleView::doubleClicked( QPoint pos )
         if( Utils::Url::hasQueryItem( ref, "dictionaries" ) )
         {
           QStringList dictsList = Utils::Url::queryItemValue(ref, "dictionaries" )
-                                              .split( ",", QString::SkipEmptyParts );
+                                              .split( ",", Qt::SkipEmptyParts );
           showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else

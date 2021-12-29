@@ -91,17 +91,17 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     // Make words list for search in article text
     searchWords = str.normalized( QString::NormalizationForm_C )
-                     .split( spacesRegExp, QString::SkipEmptyParts );
+                     .split( spacesRegExp, Qt::SkipEmptyParts );
 
     // Make words list for index search
     QStringList list = str.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, QString::SkipEmptyParts );
+                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
     indexWords = list.filter( wordRegExp );
     indexWords.removeDuplicates();
 
     // Make regexp for results hilite
 
-    QStringList allWords = str.split( spacesRegExp, QString::SkipEmptyParts );
+    QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
     QString searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords );
 
     searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
@@ -124,7 +124,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
     tmp.replace( setsRegExp, " " );
 
     QStringList list = tmp.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, QString::SkipEmptyParts );
+                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
 
     if( hasCJK )
     {
@@ -189,7 +189,7 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
                                         .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
                                                                     QRegularExpression::UseUnicodePropertiesOption ),
-                                                QString::SkipEmptyParts );
+                                                Qt::SkipEmptyParts );
 
 
   QSet< QString > setOfWords;
@@ -233,7 +233,7 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
         // Special handle for words with round brackets - DSL feature
         QStringList list;
 
-        QStringList oldVariant = word.split( regSplit, QString::SkipEmptyParts );
+        QStringList oldVariant = word.split( regSplit, Qt::SkipEmptyParts );
         for( QStringList::iterator it = oldVariant.begin(); it != oldVariant.end(); ++it )
           if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
             list.append( *it );
@@ -509,7 +509,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
 
       QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
-                                                    QString::SkipEmptyParts );
+                                                    Qt::SkipEmptyParts );
 
       int wordsNum = articleWords.length();
       while ( pos < wordsNum )
@@ -540,7 +540,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               parsedWords.append( word );
             }
             else
-              parsedWords = s.split( regSplit, QString::SkipEmptyParts );
+              parsedWords = s.split( regSplit, Qt::SkipEmptyParts );
           }
           else
             parsedWords.append( s );

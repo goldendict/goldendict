@@ -1293,7 +1293,7 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
-  QWebEngineSettings *defaultSettings = QWebEngineSettings::globalSettings();
+  QWebEngineSettings *defaultSettings = QWebEngineSettings::defaultSettings();
   defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );

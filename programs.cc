@@ -353,7 +353,7 @@ void ProgramWordSearchRequest::instanceFinished( QByteArray output, QString erro
     // Handle any Windows artifacts
     output.replace( "\r\n", "\n" );
     QStringList result =
-      QString::fromUtf8( output ).split( "\n", QString::SkipEmptyParts );
+      QString::fromUtf8( output ).split( "\n", Qt::SkipEmptyParts );
 
     for( int x = 0; x < result.size(); ++x )
       matches.push_back( Dictionary::WordMatch( gd::toWString( result[ x ] ) ) );

@@ -555,7 +555,7 @@ bool EpwingBook::setSubBook( int book_nom )
     QString line = ts.readLine();
     while( !line.isEmpty() )
     {
-      QStringList list = line.remove( '\n' ).split( ' ', QString::SkipEmptyParts );
+      QStringList list = line.remove( '\n' ).split( ' ', Qt::SkipEmptyParts );
       if( list.count() == 2 )
         customFontsMap[ list[ 0 ] ] = list[ 1 ];
       line = ts.readLine();
