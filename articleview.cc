@@ -1722,7 +1722,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
 
-  if ( !r->url().isEmpty() )
+  if ( !targetUrl.isEmpty() )
   {
     if ( !isExternalLink( targetUrl ) )
     {
@@ -1737,7 +1737,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
 
-    if ( isExternalLink( r->url() ) )
+    if ( isExternalLink( targetUrl ) )
     {
       followLinkExternal = new QAction( tr( "Open Link in &External Browser" ), &menu );
       menu.addAction( followLinkExternal );
@@ -1896,7 +1896,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
     else
     if ( result == followLinkExternal )
-      QDesktopServices::openUrl( r->url() );
+      QDesktopServices::openUrl( targetUrl );
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
@@ -1988,7 +1988,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  qDebug( "url = %s\n", r->url().toString().toLocal8Bit().data() );
+  qDebug( "url = %s\n", targetUrl.toString().toLocal8Bit().data() );
   qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
 
 }
