@@ -926,7 +926,8 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
            keyEvent->key() == Qt::Key_Tab ||
            keyEvent->key() == Qt::Key_Backtab ||
            keyEvent->key() == Qt::Key_Return ||
-           keyEvent->key() == Qt::Key_Enter )
+           keyEvent->key() == Qt::Key_Enter ||
+           keyEvent->key() == Qt::Key_Escape)
         return false; // Those key have other uses than to start typing
 
       QString text = keyEvent->text();
