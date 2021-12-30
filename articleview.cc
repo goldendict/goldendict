@@ -509,14 +509,14 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
-    QUrl url = ui.definition->url();
-    qDebug()<<"article view loaded url:"<<url;
+  setZoomFactor(cfg.preferences.zoomFactor);
+  QUrl url = ui.definition->url();
+  qDebug() << "article view loaded url:" << url;
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
   if ( userDataVariant.isValid() )
   {
-
     QString currentArticle = userDataVariant.toString();
 
     if ( !currentArticle.isEmpty() )
