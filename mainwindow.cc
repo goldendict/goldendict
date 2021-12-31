@@ -150,7 +150,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", handler);
 
-  QStringList localSchemes={"gdau","gico","qrcx","bres"};
+  QStringList localSchemes={"gdau","gico","qrcx","bres","gdprg","gdvideo","gdpicture","gdtts"};
   GicoSchemeHandler *h=new GicoSchemeHandler(articleNetMgr);
   for(int i=0;i<localSchemes.size();i++){
     QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), h);

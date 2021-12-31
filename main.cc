@@ -301,7 +301,7 @@ int main( int argc, char ** argv )
 
 #endif
 
-  QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword"};
+  QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword","gdprg","gdvideo","gdpicture","gdtts"};
 
   for (int i = 0; i < localSchemes.size(); ++i)
   {
