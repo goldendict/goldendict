@@ -1219,12 +1219,21 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 {
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
   {
-    ev->ignore();
-
     if( !cfg.preferences.searchInDock )
       translateBox->setPopupEnabled( false );
 
+#ifdef HAVE_X11
+    // Don't ignore the close event, because doing so cancels session logout if
+    // the main window is visible when the user attempts to log out.
+    // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
+    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    Q_ASSERT(!QApplication::quitOnLastWindowClosed());
+    Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
+#else
+    // Ignore the close event because closing the main window breaks global hotkeys on Windows.
+    ev->ignore();
     hide();
+#endif
   }
   else
   {
