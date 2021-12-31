@@ -55,6 +55,10 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   {
     result += "<script type=\"text/javascript\"  "
               "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
+
+    //custom javascript
+    result += "<script type=\"text/javascript\"  "
+              "src=\"qrc:///resources/gd_custom.js\"></script>";
   }
 
   // add qwebchannel
