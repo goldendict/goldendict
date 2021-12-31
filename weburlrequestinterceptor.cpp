@@ -7,13 +7,10 @@ WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
 {
 
 }
-void WebUrlRequestInterceptor::interceptRequest(
-    QWebEngineUrlRequestInfo &info) {
-  if (QWebEngineUrlRequestInfo::NavigationTypeLink == info.navigationType() &&
-      info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMainFrame) {
+void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info) {
+  if (QWebEngineUrlRequestInfo::NavigationTypeLink == info.navigationType() && info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMainFrame) {
     emit linkClicked(info.requestUrl());
-    if (Utils::isExternalLink(info.requestUrl())) {
-      info.block(true);
-    }
+
+    info.block(true);
   }
 }
