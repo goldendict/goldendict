@@ -64,7 +64,7 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
         mouseReleaseEvent(pe);
         if (firstClicked) {
             QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
-                singleClickAction(pe);
+                singleClickAction(obj,pe);
             });
         } else {
             doubleClickAction(pe);
@@ -92,31 +92,21 @@ void ArticleWebView::mousePressEvent(QMouseEvent *event)
     //QWebEngineView::mousePressEvent(event);
 }
 
-void ArticleWebView::singleClickAction( QMouseEvent * event )
+void ArticleWebView::singleClickAction(QObject* obj, QMouseEvent * event )
 {
   if(!firstClicked)
     return;
 
   if (selectionBySingleClick) {
-      // findText(""); // clear the selection first, if any
-      page()->runJavaScript(QString(
-          "  var s = window.getSelection();  "
-          " if(s.rangeCount>0){ "
-          "  var range = s.getRangeAt(0);  "
-          "  var node = s.anchorNode;  "
-          "  while (range.toString().indexOf(' ') != 0) {  "
-          "    range.setStart(node, (range.startOffset - 1));  "
-          "  }  "
-          "  range.setStart(node, range.startOffset + 1);  "
-          "  do {  "
-          "    range.setEnd(node, range.endOffset+1);  "
-          "  }  "
-          "  while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');  "
-          "  range.setEnd(node,range.endOffset-1);"
-          "  var str = range.toString().trim();  "
-          "  console.log(str);"
-          " }"));
+      findText(""); // clear the selection first, if any
+      sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick, event);
+      sendCustomMouseEvent(obj, QEvent::MouseButtonRelease, event);
   }
+}
+
+void ArticleWebView::sendCustomMouseEvent(QObject* obj,QEvent::Type type,QMouseEvent * event){
+  QMouseEvent ev( QEvent::MouseButtonDblClick,event->localPos (),event->windowPos (),event->screenPos (), Qt::LeftButton, Qt::LeftButton, event->modifiers(), Qt::MouseEventSynthesizedByApplication );
+  QApplication::sendEvent(obj, &ev );
 }
 
 
@@ -130,18 +120,13 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
     midButtonPressed = false;
 }
 
-void ArticleWebView::doubleClickAction( QMouseEvent * event )
-{
-    //QWebEngineView::mouseDoubleClickEvent( event );
+void ArticleWebView::doubleClickAction(QMouseEvent *event) {
+  // QWebEngineView::mouseDoubleClickEvent( event );
 
-    int scrollBarWidth = 0;
-    int scrollBarHeight = 0;
-
-    // emit the signal only if we are not double-clicking on scrollbars
-    if ((event->x() < width() - scrollBarWidth) && (event->y() < height() - scrollBarHeight)) {
-        emit doubleClicked(event->pos());
+  // emit the signal only if we are not double-clicking on scrollbars
+  if (Qt::MouseEventSynthesizedByApplication != event->source()) {
+    emit doubleClicked(event->pos());
   }
-
 }
 
 void ArticleWebView::focusInEvent( QFocusEvent * event )
