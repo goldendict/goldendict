@@ -709,10 +709,6 @@ void ArticleRequest::bodyFinished()
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";"
-"function playSound(sound){"
-" var a=new Audio(sound);"
-" a.play();"
-"}"
 "</script>";
 
         head += string( "<div class=\"gdarticle" ) +
