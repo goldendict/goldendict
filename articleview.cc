@@ -277,8 +277,13 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
+<<<<<<< HEAD
   connect( ui.definition, SIGNAL( loadFinished(bool) ),
            this, SLOT( loadFinished(bool) ) );
+=======
+  connect(ui.definition, SIGNAL(loadFinished(bool)), this,
+          SLOT(loadFinished(bool)));
+>>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
@@ -363,6 +368,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
+
+  channel = new QWebChannel(ui.definition->page());
+  attachToJavaScript();
 }
 
 // explicitly report the minimum size, to avoid
@@ -381,8 +389,12 @@ ArticleView::~ArticleView()
 {
   cleanupTemp();
   audioPlayer->stop();
+<<<<<<< HEAD
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+=======
+  channel->deregisterObject(this);
+>>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
 #endif
@@ -1094,6 +1106,7 @@ void ArticleView::linkHovered ( const QString & link )
   emit statusBarMessage( msg );
 }
 
+<<<<<<< HEAD
 void ArticleView::attachToJavaScript()
 {
     QWebEngineScript script;
@@ -1101,6 +1114,10 @@ void ArticleView::attachToJavaScript()
     script.setRunsOnSubFrames(false);
     script.setWorldId(QWebEngineScript::MainWorld);
     script.setSourceCode(QString("articleview"));
+=======
+void ArticleView::attachToJavaScript() {
+
+>>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
 
     ui.definition->page()->scripts().insert(script);
 
