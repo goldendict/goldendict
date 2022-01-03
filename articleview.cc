@@ -1742,6 +1742,25 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
+  QUrl imageUrl;
+  if( !popupView && menuData.mediaType ()==QWebEngineContextMenuData::MediaTypeImage)
+  {
+      imageUrl = menuData.mediaUrl ();
+      if( !imageUrl.isEmpty() )
+      {
+          menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
+          saveImageAction = new QAction( tr( "Save &image..." ), &menu );
+          menu.addAction( saveImageAction );
+      }
+  }
+
+  if( !popupView && ( targetUrl.scheme() == "gdau"
+                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
+  {
+      saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
+      menu.addAction( saveSoundAction );
+  }
+
   QString selectedText = ui.definition->selectedText();
   QString text = selectedText.trimmed();
 
