@@ -275,8 +275,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect(ui.definition, SIGNAL(loadFinished(bool)), this,
           SLOT(loadFinished(bool)));
 
-  attachToJavaScript();
-
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
@@ -360,6 +358,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
+
+  channel = new QWebChannel(ui.definition->page());
+  attachToJavaScript();
 }
 
 // explicitly report the minimum size, to avoid
@@ -378,7 +379,7 @@ ArticleView::~ArticleView()
 {
   cleanupTemp();
   audioPlayer->stop();
-
+  channel->deregisterObject(this);
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
 }
@@ -1080,7 +1081,7 @@ void ArticleView::linkHovered ( const QString & link )
 }
 
 void ArticleView::attachToJavaScript() {
-  QWebChannel *channel = new QWebChannel(ui.definition->page());
+
 
   // set the web channel to be used by the page
   // see http://doc.qt.io/qt-5/qwebenginepage.html#setWebChannel
