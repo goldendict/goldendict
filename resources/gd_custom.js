@@ -2,7 +2,7 @@
 $(function() {
         $("a").click(function(event) {
             var link = $(this).attr("href");
-            if(link.indexOf("://")>=0){
+            if(link.indexOf(":")>=0){
                 return;
             }
 
@@ -21,3 +21,7 @@ $(function() {
     }
 
 );
+function playSound(sound) {
+            var a = new Audio(sound);
+            a.play();
+        }
