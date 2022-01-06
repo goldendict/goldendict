@@ -81,13 +81,11 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
   {
     QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
     wheelEvent(pe);
-    // return true;
   }
   if (ev->type() == QEvent::FocusIn)
   {
     QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
     focusInEvent(pe);
-    // return true;
   }
 
   return QWebEngineView::eventFilter(obj, ev);
@@ -107,13 +105,14 @@ void ArticleWebView::singleClickAction(QObject *obj, QMouseEvent *event)
   if (selectionBySingleClick)
   {
     findText(""); // clear the selection first, if any
+    // send dbl click event twice? send one time seems not work .weird really.  need further investigate.
     sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick, event);
-    sendCustomMouseEvent(obj, QEvent::MouseButtonRelease, event);
+    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick, event);
   }
 }
 
 void ArticleWebView::sendCustomMouseEvent(QObject* obj,QEvent::Type type,QMouseEvent * event){
-  QMouseEvent ev( QEvent::MouseButtonDblClick,event->localPos (),event->windowPos (),event->screenPos (), Qt::LeftButton, Qt::LeftButton, event->modifiers(), Qt::MouseEventSynthesizedByApplication );
+  QMouseEvent ev( type,mapFromGlobal(QCursor::pos()),mapFromGlobal(QCursor::pos()),QCursor::pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers(), Qt::MouseEventSynthesizedByApplication );
   QApplication::sendEvent(obj, &ev );
 }
 
