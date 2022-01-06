@@ -105,7 +105,7 @@ void ArticleWebView::singleClickAction(QObject* obj, QMouseEvent * event )
 }
 
 void ArticleWebView::sendCustomMouseEvent(QObject* obj,QEvent::Type type,QMouseEvent * event){
-  QMouseEvent ev( QEvent::MouseButtonDblClick,event->localPos (),event->windowPos (),event->screenPos (), Qt::LeftButton, Qt::LeftButton, event->modifiers(), Qt::MouseEventSynthesizedByApplication );
+  QMouseEvent ev( QEvent::MouseButtonDblClick,mapFromGlobal(QCursor::pos()),mapFromGlobal(QCursor::pos()),QCursor::pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers(), Qt::MouseEventSynthesizedByApplication );
   QApplication::sendEvent(obj, &ev );
 }
 
