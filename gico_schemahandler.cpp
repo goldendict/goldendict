@@ -10,10 +10,17 @@ void GicoSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QNetworkRequest request;
     request.setUrl( url );
 
-    QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+    QNetworkReply *reply = this->mManager.createRequest(QNetworkAccessManager::GetOperation, request, NULL);
 
-    QMimeType mineType=db.mimeTypeForUrl (url);
-    QString contentType=mineType.name ();
-    // Reply segment
-    requestJob->reply(contentType.toLatin1(), reply);
+    connect(reply, &QNetworkReply::finished, requestJob, [=]() {
+      if (reply->error() == QNetworkReply::ContentNotFoundError) {
+        requestJob->fail(QWebEngineUrlRequestJob::UrlNotFound);
+        return;
+      }
+
+      QMimeType mineType = db.mimeTypeForUrl(url);
+      QString contentType = mineType.name();
+      // Reply segment
+      requestJob->reply(contentType.toLatin1(), reply);
+    });
 }
