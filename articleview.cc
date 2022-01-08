@@ -652,8 +652,6 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
   return currentActiveDictIds;
-//   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-//       .trimmed().split( ' ', Qt::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
