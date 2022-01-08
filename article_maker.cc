@@ -836,12 +836,13 @@ void ArticleRequest::bodyFinished()
     else {
       finish();
       qDebug() << "send dicts:" << dictIds;
-      GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+      emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
     }
-  }
-  else
-  if ( wasUpdated )
+  } else if (wasUpdated) {
     update();
+    qDebug() << "send dicts(updated):" << dictIds;
+    emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+  }
 }
 
 void ArticleRequest::stemmedSearchFinished()
