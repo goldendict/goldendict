@@ -649,7 +649,7 @@ Q_UNUSED( parent );
 
   for( int x = 0; x < hws.length(); x++ )
   {
-    QList< FtsHeadword >::iterator it = qBinaryFind( headwords.begin(), headwords.end(), hws.at( x ) );
+    QList< FtsHeadword >::iterator it = std::lower_bound( headwords.begin(), headwords.end(), hws.at( x ) );
     if( it != headwords.end() )
     {
       it->dictIDs.push_back( hws.at( x ).dictIDs.front() );

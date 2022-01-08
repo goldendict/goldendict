@@ -211,7 +211,7 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
   {
     QString command( editDictionaryCommand );
     command.replace( "%GDDICT%", "\"" + dictFilename + "\"" );
-    if( !QProcess::startDetached( command ) )
+    if( !QProcess::startDetached( command ,QStringList()) )
       QApplication::beep();
   }
 

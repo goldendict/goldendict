@@ -864,15 +864,17 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         int delta = result == Gestures::SWIPE_UP ? -120 : 120;
         QWidget *widget = static_cast< QWidget * >( obj );
 
+        QPoint angleDelta(0, delta);
+        QPoint pixelDetal;
         QWidget *child = widget->childAt( widget->mapFromGlobal( pt ) );
         if( child )
         {
-          QWheelEvent whev( child->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+          QWheelEvent whev( child->mapFromGlobal( pt ), pt,  pixelDetal,angleDelta, Qt::NoButton, Qt::NoModifier,Qt::NoScrollPhase,false);
           qApp->sendEvent( child, &whev );
         }
         else
         {
-          QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+          QWheelEvent whev( widget->mapFromGlobal( pt ), pt,pixelDetal, angleDelta,Qt::NoButton, Qt::NoModifier,Qt::NoScrollPhase,false );
           qApp->sendEvent( widget, &whev );
         }
       }

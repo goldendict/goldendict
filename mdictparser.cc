@@ -357,7 +357,7 @@ bool MdictParser::readHeader( QDataStream & in )
   if ( headerAttributes.contains( "StyleSheet" ) )
   {
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
-    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), QString::KeepEmptyParts );
+    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt::KeepEmptyParts );
 
     for ( int i = 0; i < lines.size() - 3; i += 3 )
     {

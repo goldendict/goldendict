@@ -43,7 +43,7 @@ MainStatusBar::MainStatusBar( QWidget *parent ) : QWidget( parent )
 
 bool MainStatusBar::hasImage() const
 {
-  return !picWidget->pixmap()->isNull();
+  return !picWidget->pixmap().isNull();
 }
 
 void MainStatusBar::clearMessage()
@@ -92,7 +92,7 @@ void MainStatusBar::refresh()
   {
     adjustSize();
 
-    if ( !picWidget->pixmap()->isNull() )
+    if ( !picWidget->pixmap().isNull() )
     {
       picWidget->setFixedSize( textWidget->height(), textWidget->height() );
     }

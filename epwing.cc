@@ -957,9 +957,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
   vector< sptr< Dictionary::Class > > dictionaries;
 
   vector< string > dictFiles;
-  QByteArray catName;
-  catName += QDir::separator();
-  catName += "catalogs";
+  QByteArray catName = QString("%1catalogs").arg(QDir::separator()).toUtf8();
 
   for( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end();
        ++i )

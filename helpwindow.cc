@@ -11,6 +11,7 @@
 
 #include "helpwindow.hh"
 #include "gddebug.hh"
+#include <QHelpLink>
 
 namespace Help {
 
@@ -25,9 +26,11 @@ void HelpBrowser::showHelpForKeyword( QString const & id )
 {
   if ( helpEngine )
   {
-    QMap< QString, QUrl > links = helpEngine->linksForIdentifier( id );
-    if( !links.isEmpty() )
-      setSource( links.constBegin().value() );
+    QList<QHelpLink> links = helpEngine->documentsForIdentifier(id);
+    if (!links.isEmpty()) {
+      QHelpLink link=links.constFirst();
+      setSource(link.url);
+    }
   }
 }
 

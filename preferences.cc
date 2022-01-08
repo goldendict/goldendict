@@ -77,7 +77,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     if ( lang == "qt" )
       continue; // We skip qt's own localizations
 
-    sortedLocs.insertMulti(
+    sortedLocs.insert(
       Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
       QPair< QIcon, QString >(
         QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
@@ -122,7 +122,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
         reg = lang.toUpper();
     }
 
-    sortedHelps.insertMulti(
+    sortedHelps.insert(
       Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
       QPair< QIcon, QString >(
         QIcon( QString( ":/flags/%1.png" ).arg( reg.toLower() ) ), lang + "_" + reg ) );
