@@ -28,7 +28,7 @@
 #include <QWebEngineSettings>
 #include <assert.h>
 #include <map>
-
+#include <QWebEngineContextMenuData>
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <QPainter>
@@ -40,6 +40,7 @@
 #include "speechclient.hh"
 #endif
 
+#include "globalbroadcaster.h"
 using std::map;
 using std::list;
 
@@ -180,7 +181,7 @@ QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& var
     QString result;
     QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
     QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-    frame->runJavaScript(variable, [loop,&result](const QVariant &v)
+    frame->runJavaScript(variable, [=,&result](const QVariant &v)
     {
         if(loop->isRunning()){
             if(v.isValid())
@@ -275,8 +276,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect(ui.definition, SIGNAL(loadFinished(bool)), this,
           SLOT(loadFinished(bool)));
 
-  attachToJavaScript();
-
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
 
@@ -340,6 +339,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   QWebEngineSettings * settings = ui.definition->page()->settings();
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
@@ -359,6 +359,12 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
+
+  connect(GlobalBroadcaster::instance(), SIGNAL( emitDictIds(ActiveDictIds)), this,
+          SLOT(setActiveDictIds(ActiveDictIds)));
+
+  channel = new QWebChannel(ui.definition->page());
+  attachToJavaScript();
 }
 
 // explicitly report the minimum size, to avoid
@@ -377,7 +383,7 @@ ArticleView::~ArticleView()
 {
   cleanupTemp();
   audioPlayer->stop();
-
+  channel->deregisterObject(this);
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
 }
@@ -386,6 +392,8 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
+  currentWord = phrase.phrase;
+  currentActiveDictIds.clear();
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -508,15 +516,14 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
-    QUrl url = ui.definition->url();
-    QObject* obj=sender();
-    qDebug()<<"article view loaded url:"<<url;
+  setZoomFactor(cfg.preferences.zoomFactor);
+  QUrl url = ui.definition->url();
+  qDebug() << "article view loaded url:" << url;
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
   if ( userDataVariant.isValid() )
   {
-
     QString currentArticle = userDataVariant.toString();
 
     if ( !currentArticle.isEmpty() )
@@ -645,8 +652,7 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-       .trimmed().split( ' ', Qt::SkipEmptyParts );
+  return currentActiveDictIds;
 }
 
 QString ArticleView::getActiveArticleId()
@@ -758,7 +764,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
 void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
 {
-    qDebug("updateCurrentArticleFromCurrentFrame");
+
 }
 
 void ArticleView::saveHistoryUserData()
@@ -916,7 +922,8 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
            keyEvent->key() == Qt::Key_Tab ||
            keyEvent->key() == Qt::Key_Backtab ||
            keyEvent->key() == Qt::Key_Return ||
-           keyEvent->key() == Qt::Key_Enter )
+           keyEvent->key() == Qt::Key_Enter ||
+           keyEvent->key() == Qt::Key_Escape)
         return false; // Those key have other uses than to start typing
 
       QString text = keyEvent->text();
@@ -972,41 +979,36 @@ QString ArticleView::getMutedForGroup( unsigned group )
   return QString();
 }
 
-QStringList ArticleView::getMutedDictionaries(unsigned group)
-{
-	if (dictionaryBarToggled && dictionaryBarToggled->isChecked())
-	{
-		// Dictionary bar is active -- mute the muted dictionaries
-		Instances::Group const* groupInstance = groups.findGroup(group);
+QStringList ArticleView::getMutedDictionaries(unsigned group) {
+  if (dictionaryBarToggled && dictionaryBarToggled->isChecked()) {
+    // Dictionary bar is active -- mute the muted dictionaries
+    Instances::Group const *groupInstance = groups.findGroup(group);
 
-		// Find muted dictionaries for current group
-		Config::Group const* grp = cfg.getGroup(group);
-		Config::MutedDictionaries const* mutedDictionaries;
-        if (group == Instances::Group::AllGroupId)
-			mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
-		else
-			mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
-		if (!mutedDictionaries)
-			return QStringList();
+    // Find muted dictionaries for current group
+    Config::Group const *grp = cfg.getGroup(group);
+    Config::MutedDictionaries const *mutedDictionaries;
+    if (group == Instances::Group::AllGroupId)
+      mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
+    else
+      mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
+    if (!mutedDictionaries)
+      return QStringList();
 
-		QStringList mutedDicts;
+    QStringList mutedDicts;
 
-		if (groupInstance)
-		{
-			for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x)
-			{
-				QString id = QString::fromStdString(
-					groupInstance->dictionaries[x]->getId());
+    if (groupInstance) {
+      for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x) {
+        QString id = QString::fromStdString(groupInstance->dictionaries[x]->getId());
 
-				if (mutedDictionaries->contains(id))
-					mutedDicts.append(id);
-			}
-		}
+        if (mutedDictionaries->contains(id))
+          mutedDicts.append(id);
+      }
+    }
 
-        return mutedDicts;
-	}
+    return mutedDicts;
+  }
 
-	return QStringList();
+  return QStringList();
 }
 
 void ArticleView::linkHovered ( const QString & link )
@@ -1084,7 +1086,7 @@ void ArticleView::linkHovered ( const QString & link )
 }
 
 void ArticleView::attachToJavaScript() {
-  QWebChannel *channel = new QWebChannel(ui.definition->page());
+
 
   // set the web channel to be used by the page
   // see http://doc.qt.io/qt-5/qwebenginepage.html#setWebChannel
@@ -1124,7 +1126,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
-  qDebug() << "clicked" << url;
+  qDebug() << "open link url:" << url;
 
   Contexts contexts( contexts_ );
 
@@ -1716,13 +1718,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  //todo url() or lastclickurl ?
-  QUrl targetUrl( r->url() );
+  QWebEngineContextMenuData menuData=r->contextMenuData();
+  QUrl targetUrl(menuData.linkUrl());
+  qDebug() << "menu:" <<  menuData.linkText()<<":"<<menuData.mediaUrl();
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
 
-  if ( !r->url().isEmpty() )
+  if ( !targetUrl.isEmpty() )
   {
     if ( !isExternalLink( targetUrl ) )
     {
@@ -1737,12 +1740,31 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
     }
 
-    if ( isExternalLink( r->url() ) )
+    if ( isExternalLink( targetUrl ) )
     {
       followLinkExternal = new QAction( tr( "Open Link in &External Browser" ), &menu );
       menu.addAction( followLinkExternal );
       menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyLinkToClipboard ) );
     }
+  }
+
+  QUrl imageUrl;
+  if( !popupView && menuData.mediaType ()==QWebEngineContextMenuData::MediaTypeImage)
+  {
+      imageUrl = menuData.mediaUrl ();
+      if( !imageUrl.isEmpty() )
+      {
+          menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
+          saveImageAction = new QAction( tr( "Save &image..." ), &menu );
+          menu.addAction( saveImageAction );
+      }
+  }
+
+  if( !popupView && ( targetUrl.scheme() == "gdau"
+                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
+  {
+      saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
+      menu.addAction( saveSoundAction );
   }
 
   QString selectedText = ui.definition->selectedText();
@@ -1896,7 +1918,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
     else
     if ( result == followLinkExternal )
-      QDesktopServices::openUrl( r->url() );
+      QDesktopServices::openUrl( targetUrl );
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
@@ -1988,7 +2010,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  qDebug( "url = %s\n", r->url().toString().toLocal8Bit().data() );
+  qDebug( "url = %s\n", targetUrl.toString().toLocal8Bit().data() );
   qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
 
 }
@@ -2524,6 +2546,16 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
                         } });
     loop->exec();
     return planText;
+}
+
+void ArticleView::setActiveDictIds(ActiveDictIds ad) {
+  // ignore all other signals.
+
+  if (ad.word == currentWord) {
+    currentActiveDictIds << ad.dictIds;
+    currentActiveDictIds.removeDuplicates();
+    qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
+  }
 }
 
 //todo ,futher refinement?

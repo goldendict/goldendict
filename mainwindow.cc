@@ -150,7 +150,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", handler);
 
-  QStringList localSchemes={"gdau","gico","qrcx","bres"};
+  QStringList localSchemes={"gdau","gico","qrcx","bres","gdprg","gdvideo","gdpicture","gdtts"};
   GicoSchemeHandler *h=new GicoSchemeHandler(articleNetMgr);
   for(int i=0;i<localSchemes.size();i++){
     QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), h);
@@ -1219,12 +1219,21 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 {
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
   {
-    ev->ignore();
-
     if( !cfg.preferences.searchInDock )
       translateBox->setPopupEnabled( false );
 
+#ifdef HAVE_X11
+    // Don't ignore the close event, because doing so cancels session logout if
+    // the main window is visible when the user attempts to log out.
+    // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
+    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    Q_ASSERT(!QApplication::quitOnLastWindowClosed());
+    Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
+#else
+    // Ignore the close event because closing the main window breaks global hotkeys on Windows.
+    ev->ignore();
     hide();
+#endif
   }
   else
   {
@@ -1293,11 +1302,12 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
-  QWebEngineSettings *defaultSettings = QWebEngineSettings::globalSettings();
+  QWebEngineSettings *defaultSettings = QWebEngineSettings::defaultSettings();
   defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -1672,7 +1682,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
-  connect (wuri,SIGNAL(linkClicked(QUrl)),view,SLOT(linkClicked(QUrl)));
+  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
+    ArticleView *active = getCurrentArticleView();
+    if (active == view) {
+      view->linkClicked(url);
+    }
+  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -2619,7 +2634,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
            keyEvent->key() == Qt::Key_Tab ||
-           keyEvent->key() == Qt::Key_Backtab )
+           keyEvent->key() == Qt::Key_Backtab ||
+           keyEvent->key() == Qt::Key_Escape)
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
@@ -2648,7 +2664,8 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
            keyEvent->key() == Qt::Key_Tab ||
-           keyEvent->key() == Qt::Key_Backtab )
+           keyEvent->key() == Qt::Key_Backtab ||
+           keyEvent->key() == Qt::Key_Escape)
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 

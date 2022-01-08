@@ -51,7 +51,8 @@ public:
 protected:
 
   bool event( QEvent * event );
-  void singleClickAction( QMouseEvent * event );
+  void singleClickAction(QObject *obj, QMouseEvent *event);
+  void sendCustomMouseEvent(QObject *obj, QEvent::Type type);
   void mousePressEvent(QMouseEvent *event);
   void mouseReleaseEvent( QMouseEvent * event );
   void doubleClickAction( QMouseEvent * event );

@@ -64,7 +64,7 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
         mouseReleaseEvent(pe);
         if (firstClicked) {
             QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
-                singleClickAction(pe);
+                singleClickAction(obj,pe);
             });
         } else {
             doubleClickAction(pe);
@@ -73,12 +73,10 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
     if (ev->type() == QEvent::Wheel) {
         QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
         wheelEvent(pe);
-        //return true;
     }
     if (ev->type() == QEvent::FocusIn) {
         QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
         focusInEvent(pe);
-        //return true;
     }
 
     return QWebEngineView::eventFilter(obj, ev);
@@ -92,36 +90,31 @@ void ArticleWebView::mousePressEvent(QMouseEvent *event)
     //QWebEngineView::mousePressEvent(event);
 }
 
-void ArticleWebView::singleClickAction( QMouseEvent * event )
+void ArticleWebView::singleClickAction(QObject* obj, QMouseEvent * event )
 {
   if(!firstClicked)
     return;
 
   if (selectionBySingleClick) {
-      // findText(""); // clear the selection first, if any
-      page()->runJavaScript(QString(
-          "  var s = window.getSelection();  "
-          " if(s.rangeCount>0){ "
-          "  var range = s.getRangeAt(0);  "
-          "  var node = s.anchorNode;  "
-          "  while (range.toString().indexOf(' ') != 0) {  "
-          "    range.setStart(node, (range.startOffset - 1));  "
-          "  }  "
-          "  range.setStart(node, range.startOffset + 1);  "
-          "  do {  "
-          "    range.setEnd(node, range.endOffset+1);  "
-          "  }  "
-          "  while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');  "
-          "  range.setEnd(node,range.endOffset-1);"
-          "  var str = range.toString().trim();  "
-          "  console.log(str);"
-          " }"));
+      findText(""); // clear the selection first, if any
+      //send dbl click event twice? send one time seems not work .weird really.  need further investigate.
+      sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick);
+      sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick);
   }
 }
 
+void ArticleWebView::sendCustomMouseEvent(QObject *obj, QEvent::Type type) {
+  QPoint pt = mapFromGlobal(QCursor::pos());
+  QMouseEvent ev(type, pt, pt, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier,
+                 Qt::MouseEventSynthesizedByApplication);
 
-void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
-{
+  QObjectList list = this->children();
+  for (int i = 0; i < list.size(); i++) {
+    QApplication::sendEvent(list[i], &ev);
+  }
+}
+
+void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
   bool noMidButton = !( event->buttons() & Qt::MiddleButton );
 
   //QWebEngineView::mouseReleaseEvent( event );
@@ -130,18 +123,13 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
     midButtonPressed = false;
 }
 
-void ArticleWebView::doubleClickAction( QMouseEvent * event )
-{
-    //QWebEngineView::mouseDoubleClickEvent( event );
+void ArticleWebView::doubleClickAction(QMouseEvent *event) {
+  // QWebEngineView::mouseDoubleClickEvent( event );
 
-    int scrollBarWidth = 0;
-    int scrollBarHeight = 0;
-
-    // emit the signal only if we are not double-clicking on scrollbars
-    if ((event->x() < width() - scrollBarWidth) && (event->y() < height() - scrollBarHeight)) {
-        emit doubleClicked(event->pos());
+  // emit the signal only if we are not double-clicking on scrollbars
+  if (Qt::MouseEventSynthesizedByApplication != event->source()) {
+    emit doubleClicked(event->pos());
   }
-
 }
 
 void ArticleWebView::focusInEvent( QFocusEvent * event )

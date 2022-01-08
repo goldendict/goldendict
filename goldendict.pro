@@ -250,6 +250,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 # Input
 HEADERS += folding.hh \
     gico_schemahandler.h \
+    globalbroadcaster.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
@@ -390,6 +391,7 @@ FORMS += groups.ui \
 
 SOURCES += folding.cc \
     gico_schemahandler.cpp \
+    globalbroadcaster.cpp \
     main.cc \
     dictionary.cc \
     config.cc \

@@ -635,7 +635,7 @@ void StardictDictionary::pangoToHtml( QString & text )
           {
             // Parse font description
 
-            QStringList list = styleRegex.cap( 2 ).split( " ", QString::SkipEmptyParts );
+            QStringList list = styleRegex.cap( 2 ).split( " ", Qt::SkipEmptyParts );
             int n;
             QString sizeStr, stylesStr, familiesStr;
             for( n = list.size() - 1; n >= 0; n-- )

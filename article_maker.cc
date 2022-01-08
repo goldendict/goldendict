@@ -14,6 +14,7 @@
 #include "langcoder.hh"
 #include "gddebug.hh"
 #include "utils.hh"
+#include "globalbroadcaster.h"
 
 using std::vector;
 using std::string;
@@ -55,6 +56,10 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   {
     result += "<script type=\"text/javascript\"  "
               "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
+
+    //custom javascript
+    result += "<script type=\"text/javascript\"  "
+              "src=\"qrc:///resources/gd_custom.js\"></script>";
   }
 
   // add qwebchannel
@@ -630,6 +635,7 @@ void ArticleRequest::bodyFinished()
 
   bool wasUpdated = false;
 
+  QStringList dictIds;
   while ( bodyRequests.size() )
   {
     // Since requests should go in order, check the first one first
@@ -649,7 +655,7 @@ void ArticleRequest::bodyFinished()
             activeDicts[ activeDicts.size() - bodyRequests.size() ];
 
         string dictId = activeDict->getId();
-
+        dictIds << QString::fromStdString(dictId);
         string head;
 
         string gdFrom = "gdfrom-" + Html::escape( dictId );
@@ -702,14 +708,6 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script type=\"text/javascript\">var gdArticleContents; "
-          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
-          "else gdArticleContents += \"" + jsVal + " \";"
-"function playSound(sound){"
-" var a=new Audio(sound);"
-" a.play();"
-"}"
-"</script>";
 
         head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
@@ -787,6 +785,7 @@ void ArticleRequest::bodyFinished()
     }
   }
 
+
   if ( bodyRequests.empty() )
   {
     // No requests left, end the article
@@ -834,12 +833,16 @@ void ArticleRequest::bodyFinished()
 
     if ( stemmedWordFinder.get() )
       update();
-    else
+    else {
       finish();
-  }
-  else
-  if ( wasUpdated )
+      qDebug() << "send dicts:" << dictIds;
+      emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+    }
+  } else if (wasUpdated) {
     update();
+    qDebug() << "send dicts(updated):" << dictIds;
+    emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+  }
 }
 
 void ArticleRequest::stemmedSearchFinished()
