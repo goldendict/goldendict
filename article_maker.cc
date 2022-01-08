@@ -708,10 +708,6 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script type=\"text/javascript\">var gdArticleContents; "
-          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
-          "else gdArticleContents += \"" + jsVal + " \";"
-"</script>";
 
         head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
