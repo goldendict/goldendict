@@ -40,6 +40,7 @@
 #include "speechclient.hh"
 #endif
 
+#include "globalbroadcaster.h"
 using std::map;
 using std::list;
 
@@ -359,6 +360,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
 
+  connect(GlobalBroadcaster::instance(), SIGNAL( emitDictIds(ActiveDictIds)), this,
+          SLOT(setActiveDictIds(ActiveDictIds)));
+
   channel = new QWebChannel(ui.definition->page());
   attachToJavaScript();
 }
@@ -388,6 +392,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
+  currentWord = phrase.phrase;
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -646,8 +651,9 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-       .trimmed().split( ' ', Qt::SkipEmptyParts );
+  return currentActiveDictIds;
+//   return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
+//       .trimmed().split( ' ', Qt::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -2541,6 +2547,15 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
                         } });
     loop->exec();
     return planText;
+}
+
+void ArticleView::setActiveDictIds(ActiveDictIds ad) {
+  // ignore all other signals.
+
+  if (ad.word == currentWord) {
+    currentActiveDictIds = ad.dictIds;
+  qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
+  }
 }
 
 //todo ,futher refinement?
