@@ -17,6 +17,7 @@
 #include "initializing.hh"
 #include <qt_windows.h>
 #include <uxtheme.h>
+#include <QOperatingSystemVersion>
 
 #endif
 
@@ -248,8 +249,7 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
 
   oldBarStyle = 0;
 
-  if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA
-      && ( QSysInfo::windowsVersion() & QSysInfo::WV_NT_based )
+  if(  QOperatingSystemVersion::current () >= QOperatingSystemVersion::Windows7
       && !IsThemeActive() )
   {
     QStyle * barStyle = WindowsStyle::instance().getStyle();

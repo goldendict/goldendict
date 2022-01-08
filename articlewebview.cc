@@ -162,7 +162,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
     SystemParametersInfo( SPI_GETWHEELSCROLLLINES, 0, &nLines, 0 );
     if( nLines == WHEEL_PAGESCROLL )
     {
-      QKeyEvent kev( QEvent::KeyPress, ev->delta() > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
+      QKeyEvent kev( QEvent::KeyPress, ev->angleDelta ().y () > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
                      Qt::NoModifier );
       QApplication::sendEvent( this, &kev );
 

@@ -742,7 +742,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_WIN
   if( cfg.normalMainWindowGeometry.width() <= 0 )
   {
-    QRect r = QApplication::desktop()->availableGeometry();
+    QRect r = QGuiApplication::primaryScreen ()->geometry ();
     cfg.normalMainWindowGeometry.setRect( r.width() / 4, r.height() / 4, r.width() / 2, r.height() / 2 );
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
