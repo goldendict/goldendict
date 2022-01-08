@@ -14,6 +14,7 @@
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
+#include "globalbroadcaster.h"
 
 class ResourceToSaveHandler;
 
@@ -55,7 +56,13 @@ class ArticleView: public QFrame
   QSet< QString > desktopOpenedTempFiles;
 
   QAction * dictionaryBarToggled;
-  GroupComboBox const * groupComboBox;
+  GroupComboBox const *groupComboBox;
+
+  /// current searching word.
+  QString currentWord;
+
+  /// current active dict id list;
+  QStringList currentActiveDictIds;
 
   /// Search in results of full-text search
   QStringList allMatches;
@@ -322,12 +329,13 @@ private slots:
   /// Inspect element
   void inspect();
 
+  void setActiveDictIds(ActiveDictIds);
+
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
   unsigned getGroup( QUrl const & );
-
 
   /// Returns current article in the view, in the form of "gdfrom-xxx" id.
   QString getCurrentArticle();
@@ -373,6 +381,7 @@ private:
   QString getMutedForGroup( unsigned group );
 
   QStringList getMutedDictionaries(unsigned group);
+
 
   protected:
   // We need this to hide the search bar when we're showed

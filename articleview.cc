@@ -2,36 +2,35 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articleview.hh"
-#include <map>
-#include <QMessageBox>
+#include "folding.hh"
+#include "fulltextsearch.hh"
+#include "gddebug.hh"
+#include "gestures.hh"
+#include "programs.hh"
+#include "utils.hh"
+#include "webmultimediadownload.hh"
 #include "weburlrequestinterceptor.h"
-#include <QMenu>
+#include "wildcard.hh"
+#include "wstring_qt.hh"
+#include <QClipboard>
+#include <QCryptographicHash>
+#include <QDebug>
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QKeyEvent>
+#include <QMenu>
+#include <QMessageBox>
+#include <QRegularExpression>
+#include <QWebChannel>
 #include <QWebEngineHistory>
 #include <QWebEngineScript>
-#include <QWebEngineSettings>
 #include <QWebEngineScriptCollection>
-#include <QClipboard>
-#include <QKeyEvent>
-#include <QFileDialog>
-#include "folding.hh"
-#include "wstring_qt.hh"
-#include "webmultimediadownload.hh"
-#include "programs.hh"
-#include "gddebug.hh"
-#include <QDebug>
-#include <QCryptographicHash>
-#include "gestures.hh"
-#include "fulltextsearch.hh"
-
-#include <QRegularExpression>
-#include "wildcard.hh"
-#include "utils.hh"
+#include <QWebEngineSettings>
 #include <assert.h>
+#include <map>
 #include <QWebEngineContextMenuData>
 #ifdef Q_OS_WIN32
 #include <windows.h>
-
 #include <QPainter>
 #endif
 
@@ -41,6 +40,7 @@
 #include "speechclient.hh"
 #endif
 
+#include "globalbroadcaster.h"
 using std::map;
 using std::list;
 
@@ -176,11 +176,9 @@ void ArticleView::emitJavascriptFinished(){
 //a better solution would be to replace it with callback etc.
 QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
-    qDebug(QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
+    qDebug("%s", QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
 
     QString result;
-    //QEventLoop loop;
-    //QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
     QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
     QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
     frame->runJavaScript(variable, [=,&result](const QVariant &v)
@@ -190,8 +188,6 @@ QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& var
                 result = v.toString();
             loop->quit();
         }
-
-        //this->emitJavascriptFinished();
     });
 
     loop->exec();
@@ -277,13 +273,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-<<<<<<< HEAD
-  connect( ui.definition, SIGNAL( loadFinished(bool) ),
-           this, SLOT( loadFinished(bool) ) );
-=======
   connect(ui.definition, SIGNAL(loadFinished(bool)), this,
           SLOT(loadFinished(bool)));
->>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
@@ -331,23 +322,23 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &inspectAction );
   //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
-  QWebEngineView *m_pNewView;
   QWebEnginePage *page = ui.definition->page();
-  connect(&inspectAction, &QAction::triggered, this, [page, m_pNewView]() mutable
-          {
-            m_pNewView = new QWebEngineView();
-            page->setDevToolsPage(m_pNewView->page());
-            page->triggerAction(QWebEnginePage::InspectElement);
-            m_pNewView->show();
-          });
+  connect(&inspectAction, &QAction::triggered, this, [page, this]() {
+      if (inspectView == nullptr || !inspectView->isVisible()) {
+          inspectView = new QWebEngineView();
+          page->setDevToolsPage(inspectView->page());
+          page->triggerAction(QWebEnginePage::InspectElement);
+          inspectView->show();
+      }
+  });
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
   QWebEngineSettings * settings = ui.definition->page()->settings();
-  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -369,6 +360,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
 
+  connect(GlobalBroadcaster::instance(), SIGNAL( emitDictIds(ActiveDictIds)), this,
+          SLOT(setActiveDictIds(ActiveDictIds)));
+
   channel = new QWebChannel(ui.definition->page());
   attachToJavaScript();
 }
@@ -389,21 +383,16 @@ ArticleView::~ArticleView()
 {
   cleanupTemp();
   audioPlayer->stop();
-<<<<<<< HEAD
-
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-=======
   channel->deregisterObject(this);
->>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
-#endif
 }
 
 void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
+  currentWord = phrase.phrase;
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -412,20 +401,20 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
+  Utils::Url::addQueryItem( req, "word", phrase.phrase );
   if ( !phrase.punctuationSuffix.isEmpty() )
-    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
-  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+    Utils::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
+  Utils::Url::addQueryItem( req, "group", QString::number( group ) );
   if( cfg.preferences.ignoreDiacritics )
-    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
+    Utils::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   if ( scrollTo.size() )
-    Qt4x5::Url::addQueryItem( req, "scrollto", scrollTo );
+    Utils::Url::addQueryItem( req, "scrollto", scrollTo );
 
   Contexts::Iterator pos = contexts.find( "gdanchor" );
   if( pos != contexts.end() )
   {
-    Qt4x5::Url::addQueryItem( req, "gdanchor", contexts[ "gdanchor" ] );
+    Utils::Url::addQueryItem( req, "gdanchor", contexts[ "gdanchor" ] );
     contexts.erase( pos );
   }
 
@@ -441,13 +430,13 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
 
     buf.close();
 
-    Qt4x5::Url::addQueryItem( req,  "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
+    Utils::Url::addQueryItem( req,  "contexts", QString::fromLatin1( buf.buffer().toBase64() ) );
   }
 
   QString mutedDicts = getMutedForGroup( group );
 
   if ( mutedDicts.size() )
-    Qt4x5::Url::addQueryItem( req,  "muted", mutedDicts );
+    Utils::Url::addQueryItem( req,  "muted", mutedDicts );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -488,16 +477,16 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", word );
-  Qt4x5::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
-  Qt4x5::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
+  Utils::Url::addQueryItem( req, "word", word );
+  Utils::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
+  Utils::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
   if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
-    Qt4x5::Url::addQueryItem( req, "matchcase", "1" );
+    Utils::Url::addQueryItem( req, "matchcase", "1" );
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
-    Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
-  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+    Utils::Url::addQueryItem( req, "wildcards", "1" );
+  Utils::Url::addQueryItem( req, "group", QString::number( group ) );
   if( ignoreDiacritics )
-    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
+    Utils::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   // Update both histories (pages history and headwords history)
   saveHistoryUserData();
@@ -526,15 +515,9 @@ void ArticleView::showAnticipation()
 
 void ArticleView::loadFinished( bool )
 {
-<<<<<<< HEAD
-    QUrl url = ui.definition->url();
-    QObject* obj=sender();
-    qDebug()<<"article view loaded url:"<<url;
-=======
   setZoomFactor(cfg.preferences.zoomFactor);
   QUrl url = ui.definition->url();
   qDebug() << "article view loaded url:" << url;
->>>>>>> 1b6f6403 (fix:zoom in does not take affect.)
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
@@ -567,7 +550,7 @@ void ArticleView::loadFinished( bool )
   }
   else
   {
-    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    QString const scrollTo = Utils::Url::queryItemValue( url, "scrollto" );
     if( isScrollTo( scrollTo ) )
     {
       // There is no active article saved in history, but we have it as a parameter.
@@ -590,10 +573,9 @@ void ArticleView::loadFinished( bool )
     articleToJump.clear();
   }
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-  if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
+  if( !Utils::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
-    QString anchor = QUrl::fromPercentEncoding( Qt4x5::Url::encodedQueryItemValue( url, "gdanchor" ) );
+    QString anchor = QUrl::fromPercentEncoding( Utils::Url::encodedQueryItemValue( url, "gdanchor" ) );
 
     // Find GD anchor on page
 
@@ -624,11 +606,10 @@ void ArticleView::loadFinished( bool )
          QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
-#endif
 
   emit pageLoaded( this );
 
-  if( Qt4x5::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
+  if( Utils::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
 }
 
@@ -662,8 +643,8 @@ void ArticleView::handleUrlChanged( QUrl const & url )
 
 unsigned ArticleView::getGroup( QUrl const & url )
 {
-  if ( url.scheme() == "gdlookup" && Qt4x5::Url::hasQueryItem( url, "group" ) )
-    return Qt4x5::Url::queryItemValue( url, "group" ).toUInt();
+  if ( url.scheme() == "gdlookup" && Utils::Url::hasQueryItem( url, "group" ) )
+    return Utils::Url::queryItemValue( url, "group" ).toUInt();
 
   return 0;
 }
@@ -671,7 +652,7 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
    return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-       .trimmed().split( ' ', QString::SkipEmptyParts );
+       .trimmed().split( ' ', Qt::SkipEmptyParts );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -857,7 +838,6 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   if( ev->type() == QEvent::Gesture )
   {
     Gestures::GestureResult result;
@@ -909,7 +889,6 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
       return true;
     }
   }
-#endif
 
   if ( handleF3( obj, ev ) )
   {
@@ -1082,10 +1061,10 @@ void ArticleView::linkHovered ( const QString & link )
       def = def.mid( 1 );
     }
 
-    if( Qt4x5::Url::hasQueryItem( url, "dict" ) )
+    if( Utils::Url::hasQueryItem( url, "dict" ) )
     {
       // Link to other dictionary
-      QString dictName( Qt4x5::Url::queryItemValue( url, "dict" ) );
+      QString dictName( Utils::Url::queryItemValue( url, "dict" ) );
       if( !dictName.isEmpty() )
         msg = tr( "Definition from dictionary \"%1\": %2" ).arg( dictName ).arg( def );
     }
@@ -1106,21 +1085,15 @@ void ArticleView::linkHovered ( const QString & link )
   emit statusBarMessage( msg );
 }
 
-<<<<<<< HEAD
-void ArticleView::attachToJavaScript()
-{
-    QWebEngineScript script;
-    script.setInjectionPoint(QWebEngineScript::DocumentReady);
-    script.setRunsOnSubFrames(false);
-    script.setWorldId(QWebEngineScript::MainWorld);
-    script.setSourceCode(QString("articleview"));
-=======
 void ArticleView::attachToJavaScript() {
 
->>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
 
-    ui.definition->page()->scripts().insert(script);
+  // set the web channel to be used by the page
+  // see http://doc.qt.io/qt-5/qwebenginepage.html#setWebChannel
+  ui.definition->page()->setWebChannel(channel, QWebEngineScript::MainWorld);
 
+  // register QObjects to be exposed to JavaScript
+  channel->registerObject(QStringLiteral("articleview"), this);
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -1153,7 +1126,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
-  qDebug() << "clicked url:" << url;
+  qDebug() << "open link url:" << url;
 
   Contexts contexts( contexts_ );
 
@@ -1162,10 +1135,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   else
   if ( url.scheme().compare( "bword" ) == 0 )
   {
-    if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
+    if( Utils::Url::hasQueryItem( ref, "dictionaries" ) )
     {
-      QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                          .split( ",", QString::SkipEmptyParts );
+      QStringList dictsList = Utils::Url::queryItemValue( ref, "dictionaries" )
+                                          .split( ",", Qt::SkipEmptyParts );
 
       showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
@@ -1183,11 +1156,11 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     }
     else
     {
-      if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
+      if( Utils::Url::hasQueryItem( ref, "dictionaries" ) )
       {
         // Specific dictionary group from full-text search
-        QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                            .split( ",", QString::SkipEmptyParts );
+        QStringList dictsList = Utils::Url::queryItemValue( ref, "dictionaries" )
+                                            .split( ",", Qt::SkipEmptyParts );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return;
@@ -1204,10 +1177,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       }
 
       QString newScrollTo( scrollTo );
-      if( Qt4x5::Url::hasQueryItem( url, "dict" ) )
+      if( Utils::Url::hasQueryItem( url, "dict" ) )
       {
         // Link to other dictionary
-        QString dictName( Qt4x5::Url::queryItemValue( url, "dict" ) );
+        QString dictName( Utils::Url::queryItemValue( url, "dict" ) );
         for( unsigned i = 0; i < allDictionaries.size(); i++ )
         {
           if( dictName.compare( QString::fromUtf8( allDictionaries[ i ]->getName().c_str() ) ) == 0 )
@@ -1218,8 +1191,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         }
       }
 
-      if( Qt4x5::Url::hasQueryItem( url, "gdanchor" ) )
-        contexts[ "gdanchor" ] = Qt4x5::Url::queryItemValue( url, "gdanchor" );
+      if( Utils::Url::hasQueryItem( url, "gdanchor" ) )
+        contexts[ "gdanchor" ] = Utils::Url::queryItemValue( url, "gdanchor" );
 
       showDefinition( word,
                       getGroup( ref ), newScrollTo, contexts );
@@ -1276,7 +1249,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
         if( url.hasFragment() )
         {
           // Find sound in the preferred dictionary
-          QString preferredName = Qt4x5::Url::fragment( url );
+          QString preferredName = Utils::Url::fragment( url );
           try
           {
             for( unsigned x = 0; x < activeDicts->size(); ++x )
@@ -1438,7 +1411,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 // TODO: Port TTS
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
     // Text to speech
-    QString md5Id = Qt4x5::Url::queryItemValue( url, "engine" );
+    QString md5Id = Utils::Url::queryItemValue( url, "engine" );
     QString text( url.path().mid( 1 ) );
 
     for ( Config::VoiceEngines::const_iterator i = cfg.voiceEngines.begin();
@@ -1506,7 +1479,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
         if( url.hasFragment() && url.scheme() == "gdau" )
         {
           // Find sound in the preferred dictionary
-          QString preferredName = Qt4x5::Url::fragment( url );
+          QString preferredName = Utils::Url::fragment( url );
           for( unsigned x = 0; x < activeDicts->size(); ++x )
           {
             try
@@ -1543,7 +1516,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
               continue;
 
             req = (*activeDicts)[ x ]->getResource(
-                    Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
+                    Utils::Url::path( url ).mid( 1 ).toUtf8().data() );
 
             handler->addRequest( req );
 
@@ -1607,14 +1580,14 @@ void ArticleView::updateMutedContents()
 
   QString mutedDicts = getMutedForGroup( group );
 
-  if ( Qt4x5::Url::queryItemValue( currentUrl, "muted" ) != mutedDicts )
+  if ( Utils::Url::queryItemValue( currentUrl, "muted" ) != mutedDicts )
   {
     // The list has changed -- update the url
 
-    Qt4x5::Url::removeQueryItem( currentUrl, "muted" );
+    Utils::Url::removeQueryItem( currentUrl, "muted" );
 
     if ( mutedDicts.size() )
-    Qt4x5::Url::addQueryItem( currentUrl, "muted", mutedDicts );
+    Utils::Url::addQueryItem( currentUrl, "muted", mutedDicts );
 
     saveHistoryUserData();
 
@@ -1680,17 +1653,21 @@ void ArticleView::playSound()
   ui.definition->page()->runJavaScript(variable);
 }
 
+// use eventloop to turn the async callback to sync execution.
 QString ArticleView::toHtml()
 {
-    QString html;
-    ui.definition->page()->toHtml([&](const QString& content) {
-       
+    QString result;
+    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
+    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
 
-        html = content;
-
-        });
-
-    return html;
+    ui.definition->page()->toHtml([loop, &result](const QString &content) {
+        if (loop->isRunning()) {
+            result = content;
+            loop->quit();
+        }
+    });
+    loop->exec();
+    return result;
 }
 
 void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){
@@ -1709,8 +1686,8 @@ QString ArticleView::getTitle()
 Config::InputPhrase ArticleView::getPhrase() const
 {
   const QUrl url = ui.definition->url();
-  return Config::InputPhrase( Qt4x5::Url::queryItemValue( url, "word" ),
-                              Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
+  return Config::InputPhrase( Utils::Url::queryItemValue( url, "word" ),
+                              Utils::Url::queryItemValue( url, "punctuation_suffix" ) );
 }
 
 void ArticleView::print( QPrinter * printer ) const
@@ -1743,6 +1720,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   QWebEngineContextMenuData menuData=r->contextMenuData();
   QUrl targetUrl(menuData.linkUrl());
+  qDebug() << "menu:" <<  menuData.linkText()<<":"<<menuData.mediaUrl();
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -1983,7 +1961,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
           savePath = QDir::homePath();
       }
 
-      QString name = Qt4x5::Url::path( url ).section( '/', -1 );
+      QString name = Utils::Url::path( url ).section( '/', -1 );
 
       if ( result == saveSoundAction )
       {
@@ -2281,10 +2259,10 @@ void ArticleView::doubleClicked( QPoint pos )
       {
         QUrl const & ref = ui.definition->url();
 
-        if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
+        if( Utils::Url::hasQueryItem( ref, "dictionaries" ) )
         {
-          QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
-                                              .split( ",", QString::SkipEmptyParts );
+          QStringList dictsList = Utils::Url::queryItemValue(ref, "dictionaries" )
+                                              .split( ",", Qt::SkipEmptyParts );
           showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else
@@ -2465,16 +2443,16 @@ void ArticleView::highlightFTSResults()
 
   const QUrl & url = ui.definition->url();
 
-  bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
+  bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
 
-  QString regString = Qt4x5::Url::queryItemValue( url, "regexp" );
+  QString regString = Utils::Url::queryItemValue( url, "regexp" );
   if( ignoreDiacritics )
     regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
   else
     regString = regString.remove( AccentMarkHandler::accentMark() );
 
   QRegularExpression regexp;
-  if( Qt4x5::Url::hasQueryItem( url, "wildcards" ) )
+  if( Utils::Url::hasQueryItem( url, "wildcards" ) )
     regexp.setPattern( wildcardsToRegexp( regString ) );
   else
     regexp.setPattern( regString );
@@ -2483,7 +2461,7 @@ void ArticleView::highlightFTSResults()
                                                       | QRegularExpression::UseUnicodePropertiesOption
                                                       | QRegularExpression::MultilineOption
                                                       | QRegularExpression::InvertedGreedinessOption;
-  if( !Qt4x5::Url::hasQueryItem( url, "matchcase" ) )
+  if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
     patternOptions |= QRegularExpression::CaseInsensitiveOption;
   regexp.setPatternOptions( patternOptions );
 
@@ -2528,7 +2506,7 @@ void ArticleView::highlightFTSResults()
       allMatches.append( pageText.mid( spos, matched ) );
   }
 
-  ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
+  ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
 
   QWebEnginePage::FindFlags flags ( 0 );
 
@@ -2570,6 +2548,15 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
     return planText;
 }
 
+void ArticleView::setActiveDictIds(ActiveDictIds ad) {
+  // ignore all other signals.
+
+  if (ad.word == currentWord) {
+    currentActiveDictIds = ad.dictIds;
+  qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
+  }
+}
+
 //todo ,futher refinement?
 void ArticleView::performFtsFindOperation( bool backwards )
 {
@@ -2594,36 +2581,28 @@ void ArticleView::performFtsFindOperation( bool backwards )
          runJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
                              .arg( rangeVarName ) );
 
-  bool res;
-  if( backwards )
-  {
-    if( ftsPosition > 0 )
-    {
-      ui.definition->findText( allMatches.at( ftsPosition - 1 ),
-                                     flags | QWebEnginePage::FindBackward );
-      ftsPosition -= 1;
-    }
-    else
-       ui.definition->findText( allMatches.at( ftsPosition ),
-                                     flags | QWebEnginePage::FindBackward );
+  if (backwards) {
+      if (ftsPosition > 0) {
+          ftsPosition -= 1;
+      }
 
-//    ui.ftsSearchPrevious->setEnabled( res );
-//    if( !ui.ftsSearchNext->isEnabled() )
-//      ui.ftsSearchNext->setEnabled( res );
-  }
-  else
-  {
-    if( ftsPosition < allMatches.size() - 1 )
-    {
-       ui.definition->findText( allMatches.at( ftsPosition + 1 ), flags );
-      ftsPosition += 1;
-    }
-    else
-       ui.definition->findText( allMatches.at( ftsPosition ), flags );
+      ui.definition->findText(allMatches.at(ftsPosition),
+                              flags | QWebEnginePage::FindBackward,
+                              [this](bool res) {
+                                  ui.ftsSearchPrevious->setEnabled(res);
+                                  if (!ui.ftsSearchNext->isEnabled())
+                                      ui.ftsSearchNext->setEnabled(res);
+                              });
+  } else {
+      if (ftsPosition < allMatches.size() - 1) {
+          ftsPosition += 1;
+      }
 
-//    ui.ftsSearchNext->setEnabled( res );
-//    if( !ui.ftsSearchPrevious->isEnabled() )
-//      ui.ftsSearchPrevious->setEnabled( res );
+      ui.definition->findText(allMatches.at(ftsPosition), flags, [this](bool res) {
+          ui.ftsSearchNext->setEnabled(res);
+          if (!ui.ftsSearchPrevious->isEnabled())
+              ui.ftsSearchPrevious->setEnabled(res);
+      });
   }
 
   // Store new highlighted selection
