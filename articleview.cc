@@ -401,6 +401,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
                                   Contexts const & contexts_ )
 {
   currentWord = phrase.phrase;
+  currentActiveDictIds.clear();
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -2621,8 +2622,9 @@ void ArticleView::setActiveDictIds(ActiveDictIds ad) {
   // ignore all other signals.
 
   if (ad.word == currentWord) {
-    currentActiveDictIds = ad.dictIds;
-  qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
+    currentActiveDictIds << ad.dictIds;
+    currentActiveDictIds.removeDuplicates();
+    qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
   }
 }
 
