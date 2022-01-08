@@ -1373,7 +1373,9 @@ class ZimResourceRequest: public Dictionary::DataRequest
 public:
   ZimResourceRequest(ZimDictionary &dict_, string const &resourceName_)
       : dict(dict_), resourceName(resourceName_) {
-      (new ZimResourceRequestRunnable(*this, hasExited))->run();
+      //(new ZimResourceRequestRunnable(*this, hasExited))->run();
+      QThreadPool::globalInstance()->start(
+          new ZimResourceRequestRunnable( *this, hasExited ) );
   }
 
   void run(); // Run from another thread by ZimResourceRequestRunnable
