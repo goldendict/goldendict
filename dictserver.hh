@@ -12,7 +12,7 @@ using std::string;
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Config::DictServers const & servers )
-    THROW_SPEC( std::exception );
+    ;
 
 }
 

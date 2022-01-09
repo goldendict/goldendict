@@ -129,10 +129,10 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
 protected:
 
@@ -178,7 +178,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
                                                                  vector< wstring > const & alts,
                                                                  wstring const &,
                                                                  bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
@@ -343,7 +343,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
 }
 
 sptr< Dictionary::DataRequest > ZipSoundsDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   // Remove extension for sound files (like in sound dirs)
 
@@ -410,7 +410,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   (void) initializing;
   vector< sptr< Dictionary::Class > > dictionaries;

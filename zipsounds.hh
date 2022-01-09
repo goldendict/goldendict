@@ -15,7 +15,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & )
-  THROW_SPEC( std::exception );
+  ;
 
 }
 

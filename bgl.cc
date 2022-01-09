@@ -226,16 +226,16 @@ namespace
     { return idxHeader.langTo; }
 
     virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
                                                         wstring const &,
                                                         bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
@@ -608,7 +608,7 @@ void BglHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   BglDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+  
 {
   return synonymSearchEnabled ? new BglHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -932,7 +932,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new BglArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1076,7 +1076,7 @@ void BglResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new BglResourceRequest( idxMutex, idx, idxHeader.resourceListOffset,
                                  idxHeader.resourcesCount, name );
@@ -1177,7 +1177,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

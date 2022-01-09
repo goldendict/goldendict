@@ -217,10 +217,10 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
@@ -1799,7 +1799,7 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1985,7 +1985,7 @@ void DslResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new DslResourceRequest( *this, name );
 }
@@ -2010,7 +2010,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       int maxPictureWidth, unsigned int maxHeadwordSize )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

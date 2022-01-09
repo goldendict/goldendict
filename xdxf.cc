@@ -167,10 +167,10 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual QString const& getDescription();
 
@@ -622,7 +622,7 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word
                                                             vector< wstring > const & alts,
                                                             wstring const &,
                                                             bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new XdxfArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -686,7 +686,7 @@ class GzippedFile: public QIODevice
 
 public:
 
-  GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile );
+  GzippedFile( char const * fileName ) ;
 
   ~GzippedFile();
 
@@ -717,7 +717,7 @@ protected:
   { return -1; }
 };
 
-GzippedFile::GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile )
+GzippedFile::GzippedFile( char const * fileName ) 
 {
   gz = gd_gzopen( fileName );
   if ( !gz )
@@ -1134,7 +1134,7 @@ void XdxfResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new XdxfResourceRequest( *this, name );
 }
@@ -1146,7 +1146,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

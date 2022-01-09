@@ -58,12 +58,12 @@ public:
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
                                                  unsigned long maxResults )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
                                           wstring const &, bool )
-    THROW_SPEC( std::exception );
+    ;
 
 protected:
 
@@ -72,7 +72,7 @@ protected:
 
 sptr< WordSearchRequest > VoiceEnginesDictionary::prefixMatch( wstring const & /*word*/,
                                                                unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+  
 {
   WordSearchRequestInstant * sr = new WordSearchRequestInstant();
   sr->setUncertain( true );
@@ -81,7 +81,7 @@ sptr< WordSearchRequest > VoiceEnginesDictionary::prefixMatch( wstring const & /
 
 sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
   wstring const & word, vector< wstring > const &, wstring const &, bool )
-  THROW_SPEC( std::exception )
+  
 {
   string result;
   string wordUtf8( Utf8::encode( word ) );
@@ -128,7 +128,7 @@ void VoiceEnginesDictionary::loadIcon() throw()
 
 vector< sptr< Dictionary::Class > > makeDictionaries(
   Config::VoiceEngines const & voiceEngines )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > result;
 

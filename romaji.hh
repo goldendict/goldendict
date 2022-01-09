@@ -13,7 +13,7 @@ namespace Romaji {
 using std::vector;
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Romaji const & )
-  THROW_SPEC( std::exception );
+  ;
 
 }
 

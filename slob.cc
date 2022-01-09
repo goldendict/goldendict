@@ -606,10 +606,10 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                         vector< wstring > const & alts,
                                                         wstring const &,
                                                         bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual QString const& getDescription();
 
@@ -1486,7 +1486,7 @@ sptr< Dictionary::DataRequest > SlobDictionary::getArticle( wstring const & word
                                                             vector< wstring > const & alts,
                                                             wstring const &,
                                                             bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new SlobArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1635,7 +1635,7 @@ void SlobResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > SlobDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new SlobResourceRequest( *this, name );
 }
@@ -1646,7 +1646,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

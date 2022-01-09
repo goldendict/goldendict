@@ -34,7 +34,7 @@ struct DataFiles
 vector< DataFiles > findDataFiles( QString const & path );
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & )
-  THROW_SPEC( std::exception );
+  ;
 
 }
 

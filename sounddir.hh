@@ -16,7 +16,7 @@ using std::string;
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const &,
                                                       string const & indicesDir,
                                                       Dictionary::Initializing & )
-  THROW_SPEC( std::exception );
+  ;
 
 }
 

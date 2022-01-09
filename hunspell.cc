@@ -73,16 +73,16 @@ public:
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
                                           wstring const &,
                                           bool )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual bool isLocalDictionary()
   { return true; }
@@ -366,7 +366,7 @@ void HunspellArticleRequest::run()
 sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
                                                     vector< wstring > const &,
                                                     wstring const &, bool )
-  THROW_SPEC( std::exception )
+  
 {
   return new HunspellArticleRequest( word, getHunspellMutex(), hunspell );
 }
@@ -566,7 +566,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 
 
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+  
 {
   return new HunspellHeadwordsRequest( word, getHunspellMutex(), hunspell );
 }
@@ -685,7 +685,7 @@ void HunspellPrefixMatchRequest::run()
 
 sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+  
 {
   return new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell );
 }
@@ -828,7 +828,7 @@ wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & cfg )
-    THROW_SPEC( std::exception )
+    
 {
   vector< sptr< Dictionary::Class > > result;
 
