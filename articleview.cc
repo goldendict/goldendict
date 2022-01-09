@@ -33,6 +33,7 @@
 #include "qt4x5.hh"
 
 #include <assert.h>
+#include <map>
 #include <QWebEngineContextMenuData>
 #ifdef Q_OS_WIN32
 #include <windows.h>
@@ -1962,8 +1963,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     if( result == saveImageAction || result == saveSoundAction )
     {
 #if QT_VERSION >= 0x040600
-//      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
-      QUrl url =  targetUrl;
+      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
       QString savePath;
       QString fileName;
 
