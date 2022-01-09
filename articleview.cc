@@ -1947,8 +1947,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if( result == saveImageAction || result == saveSoundAction )
     {
-//      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
-      QUrl url =  targetUrl;
+      QUrl url = ( result == saveImageAction ) ? imageUrl : targetUrl;
       QString savePath;
       QString fileName;
 
