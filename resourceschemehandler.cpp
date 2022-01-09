@@ -1,9 +1,9 @@
-#include "gico_schemahandler.h"
+#include "resourceschemehandler.h"
 
-GicoSchemeHandler::GicoSchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
+ResourceSchemeHandler::ResourceSchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
 
 }
-void GicoSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
+void ResourceSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
     QUrl url = requestJob->requestUrl();
 
@@ -17,7 +17,7 @@ void GicoSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
         requestJob->fail(QWebEngineUrlRequestJob::UrlNotFound);
         return;
       }
-
+      qDebug() << "resource scheme handler receive finished signal:" << reply->request().url();
       QMimeType mineType = db.mimeTypeForUrl(url);
       QString contentType = mineType.name();
       // Reply segment

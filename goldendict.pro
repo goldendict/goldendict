@@ -247,11 +247,11 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
-    gico_schemahandler.h \
     globalbroadcaster.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
+    resourceschemehandler.h \
     sptr.hh \
     dictionary.hh \
     ex.hh \
@@ -388,11 +388,11 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
-    gico_schemahandler.cpp \
     globalbroadcaster.cpp \
     main.cc \
     dictionary.cc \
     config.cc \
+    resourceschemehandler.cpp \
     sources.cc \
     mainwindow.cc \
     utf8.cc \

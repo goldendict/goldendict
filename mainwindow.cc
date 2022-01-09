@@ -48,7 +48,7 @@
 #include "utils.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
-#include "gico_schemahandler.h"
+#include "resourceschemehandler.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -146,14 +146,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #endif
 
 
-  LocalSchemeHandler *handler = new LocalSchemeHandler(articleNetMgr);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", handler);
+  localSchemeHandler = new LocalSchemeHandler(articleNetMgr);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", localSchemeHandler);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", localSchemeHandler);
 
   QStringList localSchemes={"gdau","gico","qrcx","bres","gdprg","gdvideo","gdpicture","gdtts"};
-  GicoSchemeHandler *h=new GicoSchemeHandler(articleNetMgr);
+  resourceSchemeHandler = new ResourceSchemeHandler(articleNetMgr);
   for(int i=0;i<localSchemes.size();i++){
-    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), h);
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), resourceSchemeHandler);
   }
 
   wuri = new WebUrlRequestInterceptor();

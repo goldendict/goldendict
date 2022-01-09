@@ -33,6 +33,7 @@
 
 #include "hotkeywrapper.hh"
 #include "weburlrequestinterceptor.h"
+#include "resourceschemehandler.h"
 #ifdef HAVE_X11
 #include <fixx11h.h>
 #endif
@@ -193,6 +194,9 @@ private:
   Help::HelpWindow * helpWindow;
 
   QIcon starIcon, blueStarIcon;
+
+  LocalSchemeHandler *localSchemeHandler;
+  ResourceSchemeHandler *resourceSchemeHandler;
 
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
