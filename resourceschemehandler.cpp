@@ -8,16 +8,18 @@ void ResourceSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QUrl url = requestJob->requestUrl();
 
     QNetworkRequest request;
-    request.setUrl( url );
-
+    request.setUrl(url);
     QNetworkReply *reply = this->mManager.createRequest(QNetworkAccessManager::GetOperation, request, NULL);
-
     connect(reply, &QNetworkReply::finished, requestJob, [=]() {
       if (reply->error() == QNetworkReply::ContentNotFoundError) {
         requestJob->fail(QWebEngineUrlRequestJob::UrlNotFound);
         return;
       }
-      qDebug() << "resource scheme handler receive finished signal:" << reply->request().url();
+      if (reply->error() != QNetworkReply::NoError) {
+        qDebug() << "resource handler failed:" << reply->error() << ":" << reply->request().url();
+        requestJob->fail(QWebEngineUrlRequestJob::RequestFailed);
+        return;
+      }
       QMimeType mineType = db.mimeTypeForUrl(url);
       QString contentType = mineType.name();
       // Reply segment
