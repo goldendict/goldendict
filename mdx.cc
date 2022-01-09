@@ -165,6 +165,12 @@ public:
     const char * indexEntryPtr = chunks.getBlock( links[ 0 ].articleOffset, chunk );
     memcpy( &indexEntry, indexEntryPtr, sizeof( indexEntry ) );
 
+    //corrupted file or broken entry.
+    if (indexEntry.decompressedBlockSize < indexEntry.recordOffset + indexEntry.recordSize)
+    {
+      return false;
+    }
+
     ScopedMemMap compressed( mddFile, indexEntry.compressedBlockPos, indexEntry.compressedBlockSize );
     if ( !compressed.startAddress() )
     {
