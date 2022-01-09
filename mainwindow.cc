@@ -1655,6 +1655,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
+  connect( view, SIGNAL( updateFoundInDictsList(  ) ),
+          this, SLOT( updateFoundInDictsList() ) );
+
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ) );
 
@@ -1895,7 +1898,7 @@ void MainWindow::pageLoaded( ArticleView * view )
   if ( cfg.preferences.pronounceOnLoadMain )
     pronounce( view );
 
-  updateFoundInDictsList();
+  //updateFoundInDictsList();
 }
 
 void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )

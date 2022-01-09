@@ -2624,7 +2624,8 @@ void ArticleView::setActiveDictIds(ActiveDictIds ad) {
   if (ad.word == currentWord) {
     currentActiveDictIds << ad.dictIds;
     currentActiveDictIds.removeDuplicates();
-    qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
+    emit updateFoundInDictsList();
+    qDebug() << "receive dicts:"<<ad.word<<":" << ad.dictIds;
   }
 }
 
