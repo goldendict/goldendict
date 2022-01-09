@@ -7,12 +7,27 @@ $(function() {
             }
 
             var newLink;
+            var href = window.location.href;
+                
             if (link.startsWith("#")) {
-                newLink = window.location.href + link;
+                //the href may contain # fragment already.remove them before append the new #fragment
+                var index = href.indexOf("#");
+                if(index>-1)
+                {
+                    newLink = href.substring(0, index) + link;
+                } 
+                else{
+                    newLink= href+link;
+                }
             } else {
-                var href = window.location.href;
                 var index = href.indexOf("?");
-                newLink = href.substring(0, index) + "?word=" + link;
+                if(index>-1)
+                {
+                    newLink = href.substring(0, index) + "?word=" + link;
+                }
+                else{
+                    newLink=href+"?word=" + link;
+                }
             }
             $(this).attr("href", newLink);
 
