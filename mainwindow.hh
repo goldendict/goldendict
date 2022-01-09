@@ -219,8 +219,6 @@ private:
 
   void updatePronounceAvailability();
 
-  void updateFoundInDictsList();
-
   void updateBackForwardButtons();
 
   void updateWindowTitle();
@@ -287,7 +285,7 @@ private slots:
   /// the timer. Does nothing otherwise.
   void prepareNewReleaseChecks();
 
-private slots:
+  void updateFoundInDictsList();
 
   /// Does the new release check.
   void checkForNewRelease();

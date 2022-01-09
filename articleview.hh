@@ -241,6 +241,8 @@ signals:
 
   /// Signals that the dictionaries pane was requested to be showed
   void showDictsPane( );
+  /// Signals that the founded dictionaries ready to be showed
+  void updateFoundInDictsList( );
 
   /// Emitted when an article becomes active,
   /// typically in response to user actions
