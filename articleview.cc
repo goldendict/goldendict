@@ -518,7 +518,7 @@ void ArticleView::loadFinished( bool )
 {
   setZoomFactor(cfg.preferences.zoomFactor);
   QUrl url = ui.definition->url();
-  qDebug() << "article view loaded url:" << url;
+  qDebug() << "article view loaded url:" << url.url ().left (200);
 
   QVariant userDataVariant = ui.definition->property("currentArticle");
 
