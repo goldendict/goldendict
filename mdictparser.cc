@@ -584,7 +584,7 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
 
   for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); ++i )
   {
-    if ( recordBlockInfos_[idx].endPos <= i->first )
+    if (recordBlockInfos_[idx].shadowEndPos <= i->first)
       idx = RecordIndex::bsearch( recordBlockInfos_, i->first );
 
     if ( idx == ( size_t )( -1 ) )
