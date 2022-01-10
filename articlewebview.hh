@@ -70,7 +70,8 @@ private:
 
   //MouseDbClickEvent will also emit MousePressEvent which conflict the single click event.
   //this variable used to distinguish the single click and real double click.
-  bool firstClicked;
+  bool singleClicked;
+  bool dbClicked;
 };
 
 #endif
