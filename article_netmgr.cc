@@ -422,8 +422,8 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
   QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
 {
   setRequest( netReq );
-
   setOpenMode( ReadOnly );
+  setUrl(netReq.url());
 
   if ( contentType.size() )
     setHeader( QNetworkRequest::ContentTypeHeader, contentType );
@@ -561,7 +561,7 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QNetworkRequest request;
     request.setUrl( url );
 
-    QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+    QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request);
     connect(reply,&QNetworkReply::finished,requestJob,[=](){
         requestJob->reply("text/html",reply);
     });

@@ -122,11 +122,11 @@ public:
   sptr< Dictionary::DataRequest > getResource( QUrl const & url,
                                                QString & contentType );
 
-//protected:
+// protected:
 
   virtual QNetworkReply * createRequest( Operation op,
                                          QNetworkRequest const & req,
-                                         QIODevice * outgoingData );
+                                         QIODevice * outgoingData = nullptr);
 
 };
 
