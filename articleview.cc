@@ -320,16 +320,15 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   inspectAction.setShortcut( QKeySequence( Qt::Key_F12 ) );
   inspectAction.setText( tr( "Inspect" ) );
   ui.definition->addAction( &inspectAction );
-  //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
   QWebEnginePage *page = ui.definition->page();
   connect(&inspectAction, &QAction::triggered, this, [page, this]() {
-      if (inspectView == nullptr || !inspectView->isVisible()) {
-          inspectView = new QWebEngineView();
-          page->setDevToolsPage(inspectView->page());
-          page->triggerAction(QWebEnginePage::InspectElement);
-          inspectView->show();
-      }
+    if (inspectView == nullptr || !inspectView->isVisible()) {
+      inspectView = new QWebEngineView();
+      page->setDevToolsPage(inspectView->page());
+      page->triggerAction(QWebEnginePage::InspectElement);
+      inspectView->show();
+    }
   });
 
   ui.definition->installEventFilter( this );
