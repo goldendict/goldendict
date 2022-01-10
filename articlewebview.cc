@@ -45,28 +45,32 @@ bool ArticleWebView::event( QEvent * event )
     return QWebEngineView::event(event);
 }
 
-bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
-{
+bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
+
     if (ev->type() == QEvent::MouseButtonDblClick) {
-        //QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
-        firstClicked=false;
+      singleClicked = false;
+      dbClicked = true;
+    }
+    if (ev->type()==QEvent::MouseMove) {
+      singleClicked=false;
     }
     if (ev->type() == QEvent::MouseButtonPress) {
         QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
-        if(pe->buttons() & Qt::LeftButton)
+        if(pe->button() == Qt::LeftButton)
         {
-            firstClicked=true;
+          singleClicked = true;
+          dbClicked = false;
+          QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
+            singleClickAction(pe);
+          });
         }
         mousePressEvent(pe);
     }
     if (ev->type() == QEvent::MouseButtonRelease) {
         QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
         mouseReleaseEvent(pe);
-        if (firstClicked) {
-            QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
-                singleClickAction(pe);
-            });
-        } else {
+        if (dbClicked) {
+          //emit the signal after button release.emit earlier(in MouseButtonDblClick event) can not get selected text;
             doubleClickAction(pe);
         }
     }
@@ -90,7 +94,7 @@ void ArticleWebView::mousePressEvent(QMouseEvent *event)
 
 void ArticleWebView::singleClickAction(QMouseEvent * event )
 {
-  if(!firstClicked)
+  if(!singleClicked)
     return;
 
   if (selectionBySingleClick) {
@@ -120,7 +124,6 @@ void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
 }
 
 void ArticleWebView::doubleClickAction(QMouseEvent *event) {
-  // emit the signal only if we are not double-clicking on scrollbars
   if (Qt::MouseEventSynthesizedByApplication != event->source()) {
     emit doubleClicked(event->pos());
   }
