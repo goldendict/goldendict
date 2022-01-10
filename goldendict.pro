@@ -43,7 +43,8 @@ QT += widgets \
 QT += sql
 CONFIG += exceptions \
     rtti \
-    stl
+    stl \
+    c++11
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
@@ -72,17 +73,8 @@ win32 {
         Release: LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
     } else {
-        CONFIG(gcc48) {
-            x64 {
-                LIBS += -L$${PWD}/winlibs/lib64-48
-                QMAKE_CXXFLAGS += -m64
-                QMAKE_CFLAGS += -m64
-            } else {
-                LIBS += -L$${PWD}/winlibs/lib32-48
-            }
-        } else {
-            LIBS += -L$${PWD}/winlibs/lib
-        }
+        LIBS += -L$${PWD}/winlibs/lib
+
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
         isEmpty(HUNSPELL_LIB) {
