@@ -1,4 +1,5 @@
-//document ready ,
+//document ready
+(function($){
 $(function() {
         $("a").click(function(event) {
             var link = $(this).attr("href");
@@ -8,10 +9,10 @@ $(function() {
 
             var newLink;
             var href = window.location.href;
-                
+            var index=-1;
             if (link.startsWith("#")) {
                 //the href may contain # fragment already.remove them before append the new #fragment
-                var index = href.indexOf("#");
+                index = href.indexOf("#");
                 if(index>-1)
                 {
                     newLink = href.substring(0, index) + link;
@@ -20,7 +21,7 @@ $(function() {
                     newLink= href+link;
                 }
             } else {
-                var index = href.indexOf("?");
+                index = href.indexOf("?");
                 if(index>-1)
                 {
                     newLink = href.substring(0, index) + "?word=" + link;
@@ -33,10 +34,10 @@ $(function() {
 
         });
 
-    }
+    });
+})($_$);
 
-);
 function playSound(sound) {
-            var a = new Audio(sound);
-            a.play();
-        }
+    var a = new Audio(sound);
+    a.play();
+}

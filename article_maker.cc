@@ -57,6 +57,9 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script type=\"text/javascript\"  "
               "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
 
+    result += "<script>"
+              "var $_$=$.noConflict(true);"
+              "</script>";
     //custom javascript
     result += "<script type=\"text/javascript\"  "
               "src=\"qrc:///resources/gd_custom.js\"></script>";
@@ -70,13 +73,13 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
 
   // document ready ,init webchannel
   {
-    // var _JS = { 'jQuery': jQuery.noConflict(true) };
     result += "<script>"
-              " $(document).ready( function (){ "
-              "     console.log(\"document ready,init webchannel\"); "
+              " $_$(document).ready( function ($){ "
+              "     console.log(\"webchannel ready...\"); "
               "     new QWebChannel(qt.webChannelTransport, function "
               "(channel) { "
               "         window.articleview = channel.objects.articleview; "
+              "         articleview.onJsActiveArticleChanged(gdCurrentArticle);"
               "   }); "
               " }); "
               "</script>";
@@ -664,8 +667,8 @@ void ArticleRequest::bodyFinished()
         } else {
           // This is the first article
           head += "<script type=\"text/javascript\">"
-              "var gdCurrentArticle=\"" + gdFrom  + "\"; "
-              "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
+                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
+                           "</script>";
         }
 
         bool collapse = false;
