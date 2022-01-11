@@ -210,10 +210,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
-"           var gdCurrentArticle;"
             "var gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
-"           if(gdCurrentArticle==null) return;"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
             "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
