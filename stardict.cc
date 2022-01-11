@@ -1464,11 +1464,10 @@ void StardictArticleRequest::run()
 
     multimap< wstring, pair< string, string > >::const_iterator i;
 
-    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>";
-
+    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+    string cleaner = "";
     for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
     {
         result += dict.isFromLanguageRTL() ? "<h3 class=\"sdct_headwords\" dir=\"rtl\">" : "<h3 class=\"sdct_headwords\">";

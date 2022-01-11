@@ -1286,11 +1286,10 @@ void ZimArticleRequest::run()
   string result;
 
   // See Issue #271: A mechanism to clean-up invalid HTML cards.
-  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</b></b></b></b></b></b></b></b>"
-                   "</i></i></i></i></i></i></i></i>"
-                   "</a></a></a></a></a></a></a></a>";
+  // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+  // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+  // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+  string cleaner = "";
 
   multimap< wstring, pair< string, string > >::const_iterator i;
 
