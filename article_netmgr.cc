@@ -225,6 +225,16 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
     if ( dr.get() )
       return new ArticleResourceReply( this, req, dr, contentType );
+
+    //dr.get() can be null. code continue to execute.
+  }
+
+  //can not match dictionary in the above code,means the url must be external links.
+  //if not external url,can be blocked from here. no need to continue execute the following code.
+  //such as bres://upload.wikimedia....  etc .
+  if (!Utils::isExternalLink(req.url())) {
+    gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
+    return new BlockedNetworkReply( this );
   }
 
   // Check the Referer. If the user has opted-in to block elements from external
@@ -269,18 +279,14 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     }
   }
 
-  QNetworkReply *reply = 0;
-
   // spoof User-Agent
+  QNetworkRequest newReq(req);
   if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
   {
-    QNetworkRequest newReq( req );
     newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
-    reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
   }
 
-  if( !reply )
-    reply = QNetworkAccessManager::createRequest( op, req, outgoingData );
+  QNetworkReply *  reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
 
   if( req.url().scheme() == "https")
   {
@@ -290,10 +296,8 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
-
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(

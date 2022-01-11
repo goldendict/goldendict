@@ -716,9 +716,7 @@ bool ArticleView::isFramedArticle( QString const & ca )
 
 bool ArticleView::isExternalLink( QUrl const & url )
 {
-  return url.scheme() == "http" || url.scheme() == "https" ||
-         url.scheme() == "ftp" || url.scheme() == "mailto" ||
-         url.scheme() == "file";
+  return Utils::isExternalLink(url);
 }
 
 void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
