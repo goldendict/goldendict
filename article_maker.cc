@@ -57,18 +57,15 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script type=\"text/javascript\"  "
               "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
 
-    result += "<script>"
-              "var $_$=$.noConflict(true);"
-              "</script>";
+    result += "<script> var $_$=$.noConflict(true); </script>";
+
     //custom javascript
-    result += "<script type=\"text/javascript\"  "
-              "src=\"qrc:///resources/gd_custom.js\"></script>";
+    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd_custom.js\"></script>";
   }
 
   // add qwebchannel
   {
-    result += "<script type=\"text/javascript\" "
-              "src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>";
+    result += "<script type=\"text/javascript\" src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>";
   }
 
   // document ready ,init webchannel
@@ -76,8 +73,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script>"
               " $_$(document).ready( function ($){ "
               "     console.log(\"webchannel ready...\"); "
-              "     new QWebChannel(qt.webChannelTransport, function "
-              "(channel) { "
+              "     new QWebChannel(qt.webChannelTransport, function(channel) { "
               "         window.articleview = channel.objects.articleview; "
               "         articleview.onJsActiveArticleChanged(gdCurrentArticle);"
               "   }); "
@@ -87,63 +83,25 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
 
   // Add a css stylesheet
   {
-    QFile builtInCssFile( ":/article-style.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-
-    if( !css.isEmpty() )
-    {
-      result += "\n<!-- Built-in css -->\n";
-      result += "<style type=\"text/css\" media=\"all\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
+    QByteArray css;
+    result += "<link href=\"qrc:///article-style.css\"  media=\"all\" rel=\"stylesheet\" type=\"text/css\">";
 
     if ( displayStyle.size() )
     {
       // Load an additional stylesheet
-      QFile builtInCssFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
-      builtInCssFile.open( QFile::ReadOnly );
-      css = builtInCssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- Built-in style css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
+      QString displayStyleCssFile = QString("qrc:///article-style-st-%1.css").arg(displayStyle);
+      result += "<link href=\"" + displayStyleCssFile.toStdString() +
+                "\"  media=\"all\" rel=\"stylesheet\" type=\"text/css\">";
     }
 
-    QFile cssFile( Config::getUserCssFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
-    }
+    result += readCssFile(Config::getUserCssFileName() ,"all");
 
     if( !addonStyle.isEmpty() )
     {
       QString name = Config::getStylesDir() + addonStyle
                      + QDir::separator() + "article-style.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style css -->\n";
-          result += "<style type=\"text/css\" media=\"all\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
+
+      result += readCssFile(name ,"all");
     }
 
     // Turn on/off expanding of article optional parts
@@ -158,50 +116,16 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   }
 
   // Add print-only css
-
   {
-    QFile builtInCssFile( ":/article-style-print.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-    if( !css.isEmpty() )
-    {
-      result += "<!-- Built-in print css -->\n";
-      result += "<style type=\"text/css\" media=\"print\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
+    result += "<link href=\"qrc:///article-style-print.css\"  media=\"print\" rel=\"stylesheet\" type=\"text/css\">";
 
-    QFile cssFile( Config::getUserCssPrintFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User print css -->\n";
-        result += "<style type=\"text/css\" media=\"print\">\n";
-        result += css.data();
-        result += "</style>\n";
-        css.clear();
-      }
-    }
+    result += readCssFile(Config::getUserCssPrintFileName() ,"print");
 
     if( !addonStyle.isEmpty() )
     {
       QString name = Config::getStylesDir() + addonStyle
                      + QDir::separator() + "article-style-print.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style print css -->\n";
-          result += "<style type=\"text/css\" media=\"print\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
+      result += readCssFile(name ,"print");
     }
   }
 
@@ -260,6 +184,21 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
 
   result += "</head><body>";
 
+  return result;
+}
+
+ std::string ArticleMaker::readCssFile(QString  const & fileName, std::string media)  const{
+  QFile addonCss(fileName);
+  std::string result;
+  if (addonCss.open(QFile::ReadOnly)) {
+    QByteArray css = addonCss.readAll();
+    if (!css.isEmpty()) {
+      result += "<!-- Addon style css -->\n";
+      result += "<style type=\"text/css\" media=\"" + media + "\">\n";
+      result += css.data();
+      result += "</style>\n";
+    }
+  }
   return result;
 }
 
