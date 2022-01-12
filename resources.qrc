@@ -86,5 +86,6 @@
         <file>icons/ontop.png</file>
         <file>resources/jquery-3.6.0.slim.min.js</file>
         <file>resources/gd_custom.js</file>
+        <file>resources/gd_builtin.js</file>
     </qresource>
 </RCC>
