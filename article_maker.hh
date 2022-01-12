@@ -80,7 +80,7 @@ public:
   void setCollapseParameters( bool autoCollapse, int articleSize );
 
 private:
-
+  std::string readCssFile(QString const& fileName, std::string type) const;
   /// Makes everything up to and including the opening body tag.
   std::string makeHtmlHeader( QString const & word, QString const & icon,
                               bool expandOptionalParts ) const;
