@@ -276,7 +276,7 @@ private:
                                          TranslateBoxPopup popupAction );
   void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
                                           TranslateBoxPopup popupAction );
-
+  bool ignoreKeyEvent(QKeyEvent *keyEvent);
 private slots:
 
   void hotKeyActivated( int );
