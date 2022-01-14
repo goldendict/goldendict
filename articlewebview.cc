@@ -38,27 +38,37 @@ bool ArticleWebView::event( QEvent * event )
     if (event->type() == QEvent::ChildAdded) {
         QChildEvent *child_ev = static_cast<QChildEvent *>(event);
 
-        //should restrict the child event type?
+//      // there is also QObject child that should be ignored here;
+//      // use only QOpenGLWidget child
+//      QOpenGLWidget *w = static_cast<QOpenGLWidget*>(child_ev->child());
+
         child_ev->child()->installEventFilter(this);
     }
 
     return QWebEngineView::event(event);
 }
 
-bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
+void ArticleWebView::linkClickedInHtml(QUrl const& ){
+  //disable single click to simulate dbclick action on the new loaded pages.
+  singleClickToDbClick=false;
+}
 
+bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
     if (ev->type() == QEvent::MouseButtonDblClick) {
-      singleClicked = false;
-      dbClicked = true;
+      QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+      if (Qt::MouseEventSynthesizedByApplication != pe->source()) {
+        singleClickToDbClick = false;
+        dbClicked = true;
+      }
     }
     if (ev->type()==QEvent::MouseMove) {
-      singleClicked=false;
+      singleClickToDbClick=false;
     }
     if (ev->type() == QEvent::MouseButtonPress) {
         QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
         if(pe->button() == Qt::LeftButton)
         {
-          singleClicked = true;
+          singleClickToDbClick = true;
           dbClicked = false;
           QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
             singleClickAction(pe);
@@ -92,9 +102,9 @@ void ArticleWebView::mousePressEvent(QMouseEvent *event)
         midButtonPressed = true;
 }
 
-void ArticleWebView::singleClickAction(QMouseEvent * event )
+void ArticleWebView::singleClickAction(QMouseEvent *event )
 {
-  if(!singleClicked)
+  if(!singleClickToDbClick)
     return;
 
   if (selectionBySingleClick) {

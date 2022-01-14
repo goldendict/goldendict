@@ -8,6 +8,8 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <QWebEngineView>
+#include <QOpenGLWidget>
+#include <QPointer>
 
 /// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
@@ -45,9 +47,6 @@ public:
   /// word, which gets selected by the view in response to double-click.
   void doubleClicked( QPoint pos );
 
-  //the linkClicked signal was removed from webengineview. add the signal to simulate.
-  void linkClicked(QUrl const& url);
-
 protected:
 
   bool event( QEvent * event );
@@ -63,6 +62,7 @@ protected:
 private:
 
   Config::Class * cfg;
+  //QPointer<QOpenGLWidget> child_;
 
   bool midButtonPressed;
   bool selectionBySingleClick;
@@ -70,8 +70,13 @@ private:
 
   //MouseDbClickEvent will also emit MousePressEvent which conflict the single click event.
   //this variable used to distinguish the single click and real double click.
-  bool singleClicked;
+  bool singleClickToDbClick;
   bool dbClicked;
+
+public slots:
+
+    //receive signal ,a link has been clicked.
+    void linkClickedInHtml(QUrl const& url);
 };
 
 #endif
