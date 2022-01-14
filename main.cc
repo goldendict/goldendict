@@ -14,6 +14,10 @@
 #include <fixx11h.h>
 #endif
 
+#if defined( Q_OS_UNIX )
+#include <clocale>
+#endif
+
 //#define __DO_DEBUG
 
 #define LOG_TO_FILE_KEY "--log-to-file"
@@ -28,10 +32,7 @@
 
 #include "termination.hh"
 #include "atomic_rename.hh"
-
-
 #include <QtWebEngineCore/QWebEngineUrlScheme>
-
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
