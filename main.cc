@@ -405,14 +405,12 @@ int main( int argc, char ** argv )
   // and with the main window closed.
   app.setQuitOnLastWindowClosed( false );
 
-
-
   MainWindow m( cfg );
 
   app.addDataCommiter( m );
 
-  QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
-    &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
+  QObject::connect( &app, SIGNAL(messageReceived(QString)),
+    &m, SLOT(messageFromAnotherInstanceReceived(QString)));
 
   if( gdcl.needSetGroup() )
     m.setGroupByName( gdcl.getGroupName(), true );
