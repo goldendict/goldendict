@@ -6,25 +6,25 @@
 #include <QString>
 #include <QAtomicInt>
 #include <QTextDocument>
-
+#include <QKeyEvent>
 #include <QUrl>
 #include <QUrlQuery>
 
 namespace Utils
 {
 
-  /**
-   * remove right end space
-   */
-inline  QString rstrip(const QString& str) {
-    int n = str.size() - 1;
-    for (; n >= 0; --n) {
-      if (!str.at(n).isSpace()) {
-        return str.left(n + 1);
-      }
+/**
+ * remove right end space
+ */
+inline QString rstrip(const QString &str) {
+  int n = str.size() - 1;
+  for (; n >= 0; --n) {
+    if (!str.at(n).isSpace()) {
+      return str.left(n + 1);
     }
-    return "";
   }
+  return "";
+}
 
   inline bool isExternalLink( QUrl const & url )
   {
@@ -36,6 +36,17 @@ inline  QString rstrip(const QString& str) {
 inline QString escape( QString const & plain )
 {
   return plain.toHtmlEscaped();
+}
+
+// should ignore key event.
+inline bool ignoreKeyEvent(QKeyEvent *keyEvent) {
+  if ( keyEvent->key() == Qt::Key_Space ||
+      keyEvent->key() == Qt::Key_Backspace ||
+      keyEvent->key() == Qt::Key_Tab ||
+      keyEvent->key() == Qt::Key_Backtab ||
+      keyEvent->key() == Qt::Key_Escape)
+    return true;
+  return false;
 }
 
 namespace AtomicInt
