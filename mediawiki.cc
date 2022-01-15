@@ -290,9 +290,13 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
   QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
 
   Utils::Url::addQueryItem( reqUrl, "page", gd::toQString( str ).replace( '+', "%2B" ) );
-
-  QNetworkReply * netReply = mgr.get( QNetworkRequest( reqUrl ) );
-  
+  QNetworkRequest req( reqUrl ) ;
+  //millseconds.
+  req.setTransferTimeout(3000);
+  QNetworkReply * netReply = mgr.get(req);
+  connect( netReply, &QNetworkReply::errorOccurred, this, [=](QNetworkReply::NetworkError e){
+            qDebug()<<  "error:"<<e;
+   } );
 #ifndef QT_NO_OPENSSL
 
   connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
