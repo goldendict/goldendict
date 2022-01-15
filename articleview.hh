@@ -178,7 +178,10 @@ public:
   void playSound();
 
   void setZoomFactor( qreal factor )
-  { ui.definition->setZoomFactor( factor ); }
+  {
+      ui.definition->setZoomFactor( factor );
+      ui.definition->page()->setZoomFactor(factor);
+  }
 
   /// Returns current article's text in .html format
   QString toHtml();
