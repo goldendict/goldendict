@@ -1141,7 +1141,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   void ResourceHandler::handleBabylonResource( string const & filename,
                                                char const * data, size_t size )
   {
-    //DPRINTF( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
+    //GD_DPRINTF( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
 
     vector< unsigned char > compressedData( compressBound( size ) );
 

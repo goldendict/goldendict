@@ -937,7 +937,7 @@ void indexArticle( GzippedFile & gzFile,
         // Add also first header - it's needed for full-text search
         chunks.addToBlock( words.begin()->toUtf8().data(), words.begin()->toUtf8().length() + 1 );
 
-//        DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
+//        GD_DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
 
         // Add words to index
 

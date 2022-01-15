@@ -827,7 +827,7 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
     if ( lastGoodCompoundResult.size() ) // We have something to append
     {
-//      DPRINTF( "Appending\n" );
+//      GD_DPRINTF( "Appending\n" );
 
       if ( !firstCompoundWasFound )
       {
@@ -925,7 +925,7 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
   // Look it up
 
-//  DPRINTF( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
+//  GD_DPRINTF( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
 
   stemmedWordFinder->expressionMatch( currentSplittedWordCompound, activeDicts, 40, // Would one be enough? Leave 40 to be safe.
                                       Dictionary::SuitableForCompoundSearching );

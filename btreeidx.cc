@@ -325,7 +325,7 @@ void BtreeWordSearchRequest::findMatches()
         if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
-        //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
+        //GD_DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
 
         vector< WordArticleLink > chain = dict.readChain( chainOffset );
 
@@ -389,7 +389,7 @@ void BtreeWordSearchRequest::findMatches()
         {
           // We're past the current leaf, fetch the next one
 
-          //DPRINTF( "advancing\n" );
+          //GD_DPRINTF( "advancing\n" );
 
           if ( nextLeaf )
           {
@@ -405,7 +405,7 @@ void BtreeWordSearchRequest::findMatches()
 
             if ( leafEntries == 0xffffFFFF )
             {
-              //DPRINTF( "bah!\n" );
+              //GD_DPRINTF( "bah!\n" );
               exit( 1 );
             }
           }
@@ -483,7 +483,7 @@ void BtreeIndex::readNode( uint32_t offset, vector< char > & out )
   uint32_t uncompressedSize = idxFile->read< uint32_t >();
   uint32_t compressedSize = idxFile->read< uint32_t >();
 
-  //DPRINTF( "%x,%x\n", uncompressedSize, compressedSize );
+  //GD_DPRINTF( "%x,%x\n", uncompressedSize, compressedSize );
 
   out.resize( uncompressedSize );
 
@@ -586,7 +586,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
     {
       // A node
 
-      //DPRINTF( "=>a node\n" );
+      //GD_DPRINTF( "=>a node\n" );
 
       uint32_t const * offsets = (uint32_t *)leaf + 1;
 
@@ -626,7 +626,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
   
         wcharBuffer[ result ] = 0;
 
-        //DPRINTF( "Checking against %s\n", closestString );
+        //GD_DPRINTF( "Checking against %s\n", closestString );
 
         compareResult = target.compare( &wcharBuffer.front() );
   
@@ -686,14 +686,14 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         currentNodeOffset = offsets[ entry + 1 ];
       }
 
-      //DPRINTF( "reading node at %x\n", currentNodeOffset );
+      //GD_DPRINTF( "reading node at %x\n", currentNodeOffset );
       readNode( currentNodeOffset, extLeaf );
       leaf = &extLeaf.front();
       leafEnd = leaf + extLeaf.size();
     }
     else
     {
-      //DPRINTF( "=>a leaf\n" );
+      //GD_DPRINTF( "=>a leaf\n" );
       // A leaf
 
       // If this leaf is the root, there's no next leaf, it just can't be.
@@ -726,7 +726,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
           memcpy( &chainSize, ptr, sizeof( uint32_t ) );
 
-          //DPRINTF( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
+          //GD_DPRINTF( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
 
           ptr += sizeof( uint32_t ) + chainSize;
         }
@@ -740,7 +740,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
       for( ; ; )
       {
-        //DPRINTF( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
+        //GD_DPRINTF( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
 
         char const ** chainToCheck = window + windowSize/2;
         ptr = *chainToCheck;
@@ -753,7 +753,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         if ( wcharBuffer.size() <= wordSize )
           wcharBuffer.resize( wordSize + 1 );
   
-        //DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
+        //GD_DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
   
         long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
   

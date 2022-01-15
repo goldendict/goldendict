@@ -260,7 +260,7 @@ void SdictDictionary::loadIcon() throw()
 
 string SdictDictionary::convert( string const & in )
 {
-//    DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
+//    GD_DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
     string inConverted;
 

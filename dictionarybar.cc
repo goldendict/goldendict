@@ -231,7 +231,7 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
 
 void DictionaryBar::mutedDictionariesChanged()
 {
-  //DPRINTF( "Muted dictionaries changed\n" );
+  //GD_DPRINTF( "Muted dictionaries changed\n" );
 
   if( !mutedDictionaries )
     return;

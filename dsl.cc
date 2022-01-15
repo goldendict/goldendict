@@ -2193,7 +2193,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( map< string, string >::const_iterator i = abrv.begin();
                  i != abrv.end(); ++i )
             {
-//              DPRINTF( "%s:%s\n", i->first.c_str(), i->second.c_str() );
+//              GD_DPRINTF( "%s:%s\n", i->first.c_str(), i->second.c_str() );
 
               sz = i->first.size();
               chunks.addToBlock( &sz, sizeof( uint32_t ) );
@@ -2255,7 +2255,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           uint32_t articleOffset = curOffset;
 
-          //DPRINTF( "Headword: %ls\n", curString.c_str() );
+          //GD_DPRINTF( "Headword: %ls\n", curString.c_str() );
 
           // More headwords may follow
 

@@ -152,7 +152,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                "/order/rate-desc"
        ).toUtf8() );
 
-//  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
+//  GD_DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
 
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
@@ -206,7 +206,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
       }
       else
       {
-//        DPRINTF( "%s\n", dd.toByteArray().data() );
+//        GD_DPRINTF( "%s\n", dd.toByteArray().data() );
 
         QDomNode items = dd.namedItem( "items" );
   

@@ -69,7 +69,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
                 Dictionary::Class *dictPtr,  IndexedZip * resourceZip,
                 bool isLogicalFormat, unsigned revisionNumber, QString * headword )
 {
-//  DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
+//  GD_DPRINTF( "Source>>>>>>>>>>: %s\n\n\n", in.c_str() );
 
   // Convert spaces after each end of line to &nbsp;s, and then each end of
   // line to a <br>

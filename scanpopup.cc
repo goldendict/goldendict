@@ -896,7 +896,7 @@ bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 
     if ( event->type() == QEvent::MouseMove )
     {
-//    DPRINTF( "Object: %s\n", watched->objectName().toUtf8().data() );
+//    GD_DPRINTF( "Object: %s\n", watched->objectName().toUtf8().data() );
       QMouseEvent * mouseEvent = ( QMouseEvent * ) event;
       reactOnMouseMove( mouseEvent->globalPos() );
     }
@@ -909,7 +909,7 @@ void ScanPopup::reactOnMouseMove( QPoint const & p )
 {
   if ( geometry().contains( p ) )
   {
-//        DPRINTF( "got inside\n" );
+//        GD_DPRINTF( "got inside\n" );
 
     hideTimer.stop();
     mouseEnteredOnce = true;
@@ -917,7 +917,7 @@ void ScanPopup::reactOnMouseMove( QPoint const & p )
   }
   else
   {
-//        DPRINTF( "outside\n" );
+//        GD_DPRINTF( "outside\n" );
     // We're in grab mode and outside the window - calculate the
     // distance from it. We might want to hide it.
 

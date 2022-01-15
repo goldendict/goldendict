@@ -244,11 +244,11 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     QByteArray referer = req.rawHeader( "Referer" );
 
-    //DPRINTF( "Referer: %s\n", referer.data() );
+    //GD_DPRINTF( "Referer: %s\n", referer.data() );
 
     QUrl refererUrl = QUrl::fromEncoded( referer );
 
-    //DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
+    //GD_DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
     //        getHostBase( refererUrl ).toUtf8().data() );
 
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
@@ -369,8 +369,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&
        url.path().size() )
   {
-    //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
-    //DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
+    //GD_DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
+    //GD_DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
 
     string id = url.host().toStdString();
 
