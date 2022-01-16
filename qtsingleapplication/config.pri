@@ -1,0 +1,1 @@
+SOLUTIONS_LIBRARY = yes
