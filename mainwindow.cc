@@ -716,8 +716,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
-  connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
-           this, SLOT( dictsListSelectionChanged() ) );
+//  connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
+//           this, SLOT( dictsListSelectionChanged() ) );
 
   connect( ui.dictsList, SIGNAL( itemDoubleClicked( QListWidgetItem * ) ),
            this, SLOT( dictsListItemActivated( QListWidgetItem * ) ) );
@@ -1655,7 +1655,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
-  connect( view, SIGNAL( updateFoundInDictsList(  ) ),
+  connect( view, SIGNAL( updateFoundInDictsList( ) ),
           this, SLOT( updateFoundInDictsList() ) );
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
@@ -2020,6 +2020,11 @@ void MainWindow::updateFoundInDictsList()
           break;
         }
       }
+    }
+
+    //if no item in dict List panel has been choose ,select first one.
+    if(ui.dictsList->count()>0&&ui.dictsList->selectedItems().empty()){
+        ui.dictsList->setCurrentRow(0);
     }
   }
 }
@@ -4323,6 +4328,8 @@ void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
     QString id = item->data( Qt::UserRole ).toString();
     emit clickOnDictPane( id );
   }
+
+  dictsListSelectionChanged();
 }
 
 void MainWindow::showDictionaryInfo( const QString & id )

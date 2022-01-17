@@ -533,14 +533,6 @@ void ArticleView::loadFinished( bool )
 
   if ( userDataVariant.isValid() )
   {
-    QString currentArticle = userDataVariant.toString();
-
-    if ( !currentArticle.isEmpty() )
-    {
-      // There's an active article saved, so set it to be active.
-      setCurrentArticle( currentArticle );
-    }
-
     double sx = 0, sy = 0;
 
     QVariant qsx=ui.definition->property("sx");
@@ -708,8 +700,9 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 
   if(moveToIt){
       QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
+      onJsActiveArticleChanged(id);
       ui.definition->page()->runJavaScript(script);
-      ui.definition->setProperty("currentArticle",id);
+      ui.definition->setProperty("currentArticle",id.mid(7));
   }
 }
 
@@ -783,7 +776,6 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,
 
 void ArticleView::saveHistoryUserData()
 {
-  ui.definition->setProperty("currentArticle", getCurrentArticle());
   ui.definition->setProperty("sx", ui.definition->page()->scrollPosition().x());
   ui.definition->setProperty("sy", ui.definition->page()->scrollPosition().y());
 }
