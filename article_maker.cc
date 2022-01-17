@@ -74,7 +74,6 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
               "     console.log(\"webchannel ready...\"); "
               "     new QWebChannel(qt.webChannelTransport, function(channel) { "
               "         window.articleview = channel.objects.articleview; "
-              "         articleview.onJsActiveArticleChanged(gdCurrentArticle);"
               "   }); "
               " }); "
               "</script>";
@@ -567,11 +566,6 @@ void ArticleRequest::bodyFinished()
         if ( closePrevSpan )
         {
           head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
-        } else {
-          // This is the first article
-          head += "<script type=\"text/javascript\">"
-                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
-                           "</script>";
         }
 
         bool collapse = false;

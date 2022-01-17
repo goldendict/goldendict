@@ -2,11 +2,11 @@
 var gdAudioLinks = { first: null, current: null };
 
 function gdMakeArticleActive(newId) {
-    if (gdCurrentArticle != 'gdfrom-' + newId) {
-        el = document.getElementById(gdCurrentArticle);
-        el.className = el.className.replace(' gdactivearticle', '');
-        el = document.getElementById('gdfrom-' + newId);
-        el.className = el.className + ' gdactivearticle';
+    var gdCurrentArticle=$_$(".gdactivearticle").attr("id");
+    if (gdCurrentArticle !== 'gdfrom-' + newId) {
+        $_$(".gdactivearticle").removeClass("gdactivearticle");
+        var newFormId='gdfrom-' + newId;
+        $_$("#"+newFormId).addClass("gdactivearticle");
         gdCurrentArticle = 'gdfrom-' + newId;
         gdAudioLinks.current = newId;
         articleview.onJsActiveArticleChanged(gdCurrentArticle);
