@@ -1,4 +1,4 @@
-﻿/* This file is (c) 2013 Maksim Tamkovicz <quendimax@gmail.com>
+/* This file is (c) 2013 Maksim Tamkovicz <quendimax@gmail.com>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "belarusiantranslit.hh"
