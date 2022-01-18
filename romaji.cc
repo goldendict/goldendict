@@ -1,4 +1,4 @@
-﻿#include "romaji.hh"
+#include "romaji.hh"
 #include <QCoreApplication>
 
 namespace Romaji {
