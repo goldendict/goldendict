@@ -702,7 +702,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
       QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
       onJsActiveArticleChanged(id);
       ui.definition->page()->runJavaScript(script);
-      ui.definition->setProperty("currentArticle",id.mid(7));
+      ui.definition->setProperty("currentArticle",id);
   }
 }
 
@@ -1732,7 +1732,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   QWebEngineContextMenuData menuData=r->contextMenuData();
   QUrl targetUrl(menuData.linkUrl());
-  qDebug() << "menu:" <<  menuData.linkText()<<":"<<menuData.mediaUrl();
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -2240,6 +2239,7 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
+//the id start with "gdform-"
 void ArticleView::onJsActiveArticleChanged(QString const & id)
 {
   if ( !isScrollTo( id ) )
