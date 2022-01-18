@@ -1825,7 +1825,15 @@ void MainWindow::forwardClicked()
 
 void MainWindow::titleChanged( ArticleView * view, QString const & title )
 {
-  QString escaped = title;
+  //the title can be url if html title is empty.according to qwebenginepage title() document.
+  QString escaped ;
+  if (title!=nullptr && title.contains(":")) {
+    //check if the title is url.
+    QUrl url(title);
+    escaped = Utils::Url::queryItemValue(url,"word");
+  } else {
+    escaped = title;
+  }
   escaped.replace( "&", "&&" );
 
   if( escaped.isRightToLeft() )
