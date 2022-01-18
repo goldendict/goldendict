@@ -733,12 +733,12 @@ void ArticleRequest::bodyFinished()
       update();
     else {
       finish();
-      qDebug() << "send dicts:" << dictIds;
+      qDebug() << "send dicts:" << word << ":" << dictIds;
       emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
     }
   } else if (wasUpdated) {
     update();
-    qDebug() << "send dicts(updated):" << dictIds;
+    qDebug() << "send dicts(updated):" << word << ":" << dictIds;
     emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
   }
 }
