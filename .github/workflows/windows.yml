@@ -75,7 +75,9 @@ jobs:
 
       - name: Set outputs
         id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d-%H%M')"    
       # 打包 
       - name: package
         id: package      
@@ -101,7 +103,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ steps.package.outputs.packageName }}.zip
-          tag: ${{ github.ref }}
+          tag: prerelease-${{steps.vars.outputs.release_date}}
           overwrite: true 
           release_name: ${{ steps.package.outputs.packageName }}
           prerelease: true
