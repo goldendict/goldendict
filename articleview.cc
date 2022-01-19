@@ -41,6 +41,7 @@
 #endif
 
 #include "globalbroadcaster.h"
+#include "articleviewagent.hh"
 using std::map;
 using std::list;
 
@@ -469,7 +470,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 {
   if( dictIDs.isEmpty() )
     return;
-
+  currentWord = word;
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -502,7 +503,6 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   ui.definition->load( req );
 
-  //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
@@ -510,7 +510,6 @@ void ArticleView::showAnticipation()
 {
   ui.definition->setHtml( "" );
   ui.definition->setCursor( Qt::WaitCursor );
-  //QApplication::setOverrideCursor( Qt::WaitCursor );
 }
 
 void ArticleView::loadFinished( bool )
@@ -648,11 +647,11 @@ QStringList ArticleView::getArticlesList()
 
 QString ArticleView::getActiveArticleId()
 {
-  QString currentArticle = getCurrentArticle();
-  if ( !isScrollTo( currentArticle ) )
-    return QString(); // Incorrect id
+    return activeDictId;
+}
 
-  return dictionaryIdFromScrollTo( currentArticle );
+void ArticleView::setActiveArticleId(QString const & dictId){
+    this->activeDictId=dictId;
 }
 
 QString ArticleView::getCurrentArticle()
@@ -688,7 +687,8 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
       QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
       onJsActiveArticleChanged(id);
       ui.definition->page()->runJavaScript(script);
-      ui.definition->setProperty("currentArticle",id.mid(7));
+      ui.definition->setProperty("currentArticle",id);
+      setActiveArticleId(id.mid(7));
   }
 }
 
@@ -1078,7 +1078,7 @@ void ArticleView::attachToJavaScript() {
   ui.definition->page()->setWebChannel(channel, QWebEngineScript::MainWorld);
 
   // register QObjects to be exposed to JavaScript
-  channel->registerObject(QStringLiteral("articleview"), this);
+  channel->registerObject(QStringLiteral("articleview"), new ArticleViewAgent(this));
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -1709,7 +1709,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   QWebEngineContextMenuData menuData=r->contextMenuData();
   QUrl targetUrl(menuData.linkUrl());
-  qDebug() << "menu:" <<  menuData.linkText()<<":"<<menuData.mediaUrl();
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -1998,7 +1997,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  qDebug( "url = %s\n", targetUrl.toString().toLocal8Bit().data() );
   qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
 
 }
@@ -2216,6 +2214,7 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
+//the id start with "gdform-"
 void ArticleView::onJsActiveArticleChanged(QString const & id)
 {
   if ( !isScrollTo( id ) )
