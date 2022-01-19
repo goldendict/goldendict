@@ -7,7 +7,7 @@ on:
       - dev
     paths:
       - '*.pro'
-      - '.github/**'
+  #    - '.github/**'
   pull_request:
     branches:
       - dev
@@ -67,6 +67,7 @@ jobs:
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake "CONFIG+=zim_support"
           nmake
+          tree /f
 
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
           echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
@@ -78,11 +79,12 @@ jobs:
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
+          echo "::set-output name=release_time::$(date +'%H%M%S')"    
       # 打包 
       - name: package
         id: package      
         env:
-          archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
+          archiveName: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
           msvcArch: ${{ matrix.msvc_arch }}
         shell: pwsh
         run: |
@@ -91,10 +93,10 @@ jobs:
            echo "::set-output name=packageName::$name" 
       # tag 查询github-Release
       # 上传artifacts          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ${{ steps.package.outputs.packageName }}
-          path: ${{ steps.package.outputs.packageName }}.zip
+#       - uses: actions/upload-artifact@v2
+#         with:
+#           name: ${{ steps.package.outputs.packageName }}
+#           path: ${{ steps.package.outputs.packageName }}.zip
       # tag 上传Release
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
@@ -107,4 +109,4 @@ jobs:
           overwrite: true 
           release_name: ${{ steps.package.outputs.packageName }}
           prerelease: true
-          body: "${{steps.vars.outputs.release_date}} \n This is a prerelease version ,auto build by github action. use on your on risk:-)"
+          body: "release on ${{steps.vars.outputs.release_date}} ${{steps.vars.outputs.release_time}} \n arch: ${{ matrix.qt_ver }}-${{ matrix.qt_arch }} branch:${{ github.ref_name }}, commit:${{ steps.vars.outputs.sha_short }} \n This is a prerelease version ,auto build by github action. use on your on risk:-)"

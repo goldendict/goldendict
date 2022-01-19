@@ -26,6 +26,7 @@ Write-Host "scriptDir" $scriptDir
 function Main() {
 
     New-Item -ItemType Directory $archiveName
+    New-Item -ItemType Directory $archiveName\locale
     # 拷贝exe
     Copy-Item release\$targetName $archiveName\
     Write-Host "copy item finished..."
@@ -45,6 +46,7 @@ function Main() {
     Write-Host "copy sdk dll$($sdkDll)"
     Copy-Item $sdkDll $archiveName\
     Copy-Item winlibs\lib\msvc\*.dll $archiveName\
+    Copy-Item locale\*.qm $archiveName\locale\
     Copy-Item qtsingleapplication\lib\*.dll $archiveName\
     Write-Host "compress zip..."
     # 打包zip

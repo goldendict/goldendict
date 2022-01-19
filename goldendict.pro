@@ -44,7 +44,9 @@ QT += sql
 CONFIG += exceptions \
     rtti \
     stl \
-    c++11
+    lrelease    #lrelease generate qm under target folder.
+    
+QM_FILES_INSTALL_PATH = /locale/
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
@@ -645,15 +647,20 @@ TRANSLATIONS += locale/ru_RU.ts \
 
 # This makes qmake generate translations
 
-win32:# Windows doesn't seem to have *-qt4 symlinks
+
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
+
 
 # The *.qm files might not exist when qmake is run for the first time,
 # causing the standard install rule to be ignored, and no translations
 # will be installed. With this, we create the qm files during qmake run.
 !win32 {
   system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null)
+  message("$${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null")
+}
+else{
+  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_})
+  message("$${QMAKE_LRELEASE} -silent $${_PRO_FILE_}")
 }
 
 updateqm.input = TRANSLATIONS
