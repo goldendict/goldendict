@@ -827,6 +827,9 @@ void MddResourceRequest::run()
 
     // Convert to the Windows separator
     std::replace( resourceName.begin(), resourceName.end(), '/', '\\' );
+    if(resourceName[0]=='.'){
+        resourceName.erase(0,1);
+    }
     if ( resourceName[ 0 ] != '\\' )
     {
       resourceName.insert( 0, 1, '\\' );
