@@ -68,7 +68,7 @@ function gdExpandArticle(id) {
     ev = window.event;
     t = null;
     if (ev) t = ev.target || ev.srcElement;
-    if (elem.style.display == 'inline' && t == ico) {
+    if (elem.style.display == 'inline' ) {
         elem.style.display = 'none';
         ico.className = 'gdexpandicon';
         art.className = art.className + ' gdcollapsedarticle';

@@ -710,8 +710,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
-//  connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
-//           this, SLOT( dictsListSelectionChanged() ) );
+  connect( ui.dictsList, SIGNAL( itemSelectionChanged() ),
+           this, SLOT( dictsListSelectionChanged() ) );
 
   connect( ui.dictsList, SIGNAL( itemDoubleClicked( QListWidgetItem * ) ),
            this, SLOT( dictsListItemActivated( QListWidgetItem * ) ) );
@@ -2021,9 +2021,10 @@ void MainWindow::updateFoundInDictsList()
     }
 
     //if no item in dict List panel has been choose ,select first one.
-    if(ui.dictsList->count()>0&&ui.dictsList->selectedItems().empty()){
+    if (ui.dictsList->count() > 0 && ui.dictsList->selectedItems().empty()) {
         ui.dictsList->setCurrentRow(0);
     }
+
   }
 }
 
@@ -2727,7 +2728,14 @@ void MainWindow::dictsListSelectionChanged()
 {
   QList< QListWidgetItem * > selected = ui.dictsList->selectedItems();
   if ( selected.size() )
-    jumpToDictionary( selected.front() );
+  {
+      ArticleView * view = getCurrentArticleView();
+      if(view){
+          QString dictId = ui.dictsList->selectedItems().at(0)->data(Qt::UserRole).toString();
+          view->setActiveArticleId(dictId);
+       }
+//      jumpToDictionary( selected.front() );
+  }
 }
 
 void MainWindow::jumpToDictionary( QListWidgetItem * item, bool force )
@@ -4228,7 +4236,7 @@ void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
     emit clickOnDictPane( id );
   }
 
-  dictsListSelectionChanged();
+   jumpToDictionary( item);
 }
 
 void MainWindow::showDictionaryInfo( const QString & id )

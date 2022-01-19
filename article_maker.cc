@@ -59,7 +59,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script> var $_$=$.noConflict(true); </script>";
 
     //custom javascript
-    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd_custom.js\"></script>";
+    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd-custom.js\"></script>";
   }
 
   // add qwebchannel
@@ -144,7 +144,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "return tr_map[key] || '';"
             "}"
             "</script>";
-  result+= "<script type=\"text/javascript\" src=\"qrc:///resources/gd_builtin.js\"></script>";
+  result+= "<script type=\"text/javascript\" src=\"qrc:///resources/gd-builtin.js\"></script>";
   result += "</head><body>";
 
   return result;
@@ -730,16 +730,23 @@ void ArticleRequest::bodyFinished()
     }
 
     if ( stemmedWordFinder.get() )
-      update();
+    {
+        update();
+        qDebug() << "send dicts(stemmed):" << word << ":" << dictIds;
+        emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+        dictIds.clear();
+    }
     else {
       finish();
-      qDebug() << "send dicts:" << word << ":" << dictIds;
+      qDebug() << "send dicts(finished):" << word << ":" << dictIds;
       emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+      dictIds.clear();
     }
   } else if (wasUpdated) {
     update();
     qDebug() << "send dicts(updated):" << word << ":" << dictIds;
     emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+    dictIds.clear();
   }
 }
 

@@ -277,6 +277,9 @@ int main( int argc, char ** argv )
       QWebEngineUrlScheme::registerScheme(webUiScheme);
   }
 
+  //high dpi screen support
+  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
 
