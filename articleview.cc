@@ -646,11 +646,11 @@ QStringList ArticleView::getArticlesList()
 
 QString ArticleView::getActiveArticleId()
 {
-  QString currentArticle = getCurrentArticle();
-  if ( !isScrollTo( currentArticle ) )
-    return QString(); // Incorrect id
+    return activeDictId;
+}
 
-  return dictionaryIdFromScrollTo( currentArticle );
+void ArticleView::setActiveArticleId(QString const & dictId){
+    this->activeDictId=dictId;
 }
 
 QString ArticleView::getCurrentArticle()
@@ -687,6 +687,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
       onJsActiveArticleChanged(id);
       ui.definition->page()->runJavaScript(script);
       ui.definition->setProperty("currentArticle",id);
+      setActiveArticleId(id.mid(7));
   }
 }
 
@@ -2001,7 +2002,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  qDebug( "url = %s\n", targetUrl.toString().toLocal8Bit().data() );
   qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
 
 }
