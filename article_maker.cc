@@ -60,7 +60,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script> var $_$=$.noConflict(); </script>";
 
     //custom javascript
-    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd_custom.js\"></script>";
+    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd-custom.js\"></script>";
   }
 
   // add qwebchannel
@@ -145,7 +145,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "return tr_map[key] || '';"
             "}"
             "</script>";
-  result+= "<script type=\"text/javascript\" src=\"qrc:///resources/gd_builtin.js\"></script>";
+  result+= "<script type=\"text/javascript\" src=\"qrc:///resources/gd-builtin.js\"></script>";
   result += "</head><body>";
 
   return result;
