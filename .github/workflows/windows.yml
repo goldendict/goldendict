@@ -77,7 +77,7 @@ jobs:
         id: vars
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
-          echo "::set-output name=release_date::$(date +'%Y%m%d-%H%M')"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
       # 打包 
       - name: package
         id: package      
@@ -107,4 +107,4 @@ jobs:
           overwrite: true 
           release_name: ${{ steps.package.outputs.packageName }}
           prerelease: true
-          body: "This is a prerelease version ,auto build by github action. use on your on risk:-)"
+          body: "${{steps.vars.outputs.release_date}} \n This is a prerelease version ,auto build by github action. use on your on risk:-)"
