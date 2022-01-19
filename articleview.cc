@@ -41,6 +41,7 @@
 #endif
 
 #include "globalbroadcaster.h"
+#include "articleviewagent.hh"
 using std::map;
 using std::list;
 
@@ -1077,7 +1078,7 @@ void ArticleView::attachToJavaScript() {
   ui.definition->page()->setWebChannel(channel, QWebEngineScript::MainWorld);
 
   // register QObjects to be exposed to JavaScript
-  channel->registerObject(QStringLiteral("articleview"), this);
+  channel->registerObject(QStringLiteral("articleview"), new ArticleViewAgent(this));
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
