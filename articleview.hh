@@ -64,6 +64,9 @@ class ArticleView: public QFrame
   /// current active dict id list;
   QStringList currentActiveDictIds;
 
+  //current active dictionary id;
+  QString activeDictId;
+
   /// Search in results of full-text search
   QStringList allMatches;
   QStringList uniqueMatches;
@@ -214,6 +217,7 @@ public:
 
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
+   void setActiveArticleId(QString const&);
 
   ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
   ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
