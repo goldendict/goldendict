@@ -182,8 +182,11 @@ public:
 
   void setZoomFactor( qreal factor )
   {
+    if(ui.definition->zoomFactor()!=factor){
+      qDebug()<<"set zoom factor:"<<factor;
       ui.definition->setZoomFactor( factor );
       ui.definition->page()->setZoomFactor(factor);
+    }
   }
 
   /// Returns current article's text in .html format
@@ -301,6 +304,7 @@ public slots:
 private slots:
 
   void loadFinished( bool ok );
+  void loadProgress(int);
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
   void attachWebChannelToHtml();
