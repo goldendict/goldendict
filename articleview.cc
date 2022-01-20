@@ -663,12 +663,8 @@ void ArticleView::setActiveArticleId(QString const & dictId){
 
 QString ArticleView::getCurrentArticle()
 {
-  QVariant v=ui.definition->property("currentArticle");
-
-  if ( v.type() == QVariant::String )
-    return v.toString();
-  else
-    return QString();
+  QString dictId=getActiveArticleId();
+  return scrollToFromDictionaryId( dictId );
 }
 
 void ArticleView::jumpToDictionary( QString const & id, bool force )
@@ -702,7 +698,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 void ArticleView::selectCurrentArticle()
 {
   ui.definition->page()->runJavaScript(
-        QString( "gdSelectArticle( '%1' );" ).arg( getActiveArticleId() ) );
+        QString( "gdSelectArticle( '%1' );var elem=document.getElementById('%2'); if(elem!=undefined){elem.scrollIntoView(true);}" ).arg( getActiveArticleId() ,getCurrentArticle()) );
 }
 
 bool ArticleView::isFramedArticle( QString const & ca )
