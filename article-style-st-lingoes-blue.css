@@ -126,6 +126,7 @@ a:hover {
 
 .gdarticleseparator {
 	display: none;
+    clear:both;
 }
 
 /* The 'From ' string which preceeds dictionary name in the heading */

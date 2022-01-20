@@ -47,6 +47,7 @@ a:hover
 .gdarticleseparator
 {
   display: none;
+  clear: both;
 }
 
 /* Hide the 'From ' string which precedes dictionary name in the heading */

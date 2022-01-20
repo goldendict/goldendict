@@ -48,7 +48,7 @@ function emitClickedEvent(link){
         articleview.linkClickedInHtml(link);
     }catch(error)
     {
-        console.log(error);
+        console.error(error);
     }
 
 }
