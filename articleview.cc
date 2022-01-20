@@ -2541,12 +2541,12 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
 
 void ArticleView::setActiveDictIds(ActiveDictIds ad) {
   // ignore all other signals.
-
+  qDebug() << "receive dicts, current word:" << currentWord << ad.word << ":" << ad.dictIds;
   if (ad.word == currentWord) {
+    qDebug() << "receive dicts, current word accept:" << currentWord;
     currentActiveDictIds << ad.dictIds;
     currentActiveDictIds.removeDuplicates();
     emit updateFoundInDictsList();
-    qDebug() << "receive dicts:"<<ad.word<<":" << ad.dictIds;
   }
 }
 
