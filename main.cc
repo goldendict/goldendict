@@ -279,6 +279,8 @@ int main( int argc, char ** argv )
 
   //high dpi screen support
   QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+  QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
