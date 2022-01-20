@@ -276,8 +276,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect(ui.definition, SIGNAL(loadFinished(bool)), this,
           SLOT(loadFinished(bool)));
 
-  connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
-           this, SLOT( handleTitleChanged( QString const & ) ) );
+  connect(ui.definition, SIGNAL(loadProgress(int)), this,
+          SLOT(loadProgress(int)));
+
+  connect( ui.definition->page(), SIGNAL( titleChanged( QString  ) ),
+           this, SLOT( handleTitleChanged( QString  ) ) );
 
   connect( ui.definition->page(), SIGNAL( urlChanged(QUrl) ),
            this, SLOT( handleUrlChanged(QUrl) ) );
@@ -602,6 +605,10 @@ void ArticleView::loadFinished( bool )
 
   if( Utils::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
+}
+
+void ArticleView::loadProgress(int ){
+    setZoomFactor(cfg.preferences.zoomFactor);
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
