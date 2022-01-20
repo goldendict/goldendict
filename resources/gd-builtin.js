@@ -61,7 +61,18 @@ function gdExpandOptPart(expanderId, optionalId) {
     }
 };
 
+function emitClickedEvent(){
+    try{
+        articleview.linkClickedInHtml("");
+    }catch(error)
+    {
+        console.error(error);
+    }
+
+}
+
 function gdExpandArticle(id) {
+    emitClickedEvent();
     elem = document.getElementById('gdarticlefrom-' + id);
     ico = document.getElementById('expandicon-' + id);
     art = document.getElementById('gdfrom-' + id);

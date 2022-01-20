@@ -17,6 +17,7 @@
 #include "globalbroadcaster.h"
 
 class ResourceToSaveHandler;
+class ArticleViewAgent ;
 
 /// A widget with the web view tailored to view and handle articles -- it
 /// uses the appropriate netmgr, handles link clicks, rmb clicks etc
@@ -31,6 +32,7 @@ class ArticleView: public QFrame
   bool popupView;
   Config::Class const & cfg;
   QWebChannel *channel;
+  ArticleViewAgent * agent;
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
@@ -180,8 +182,11 @@ public:
 
   void setZoomFactor( qreal factor )
   {
+    if(ui.definition->zoomFactor()!=factor){
+      qDebug()<<"set zoom factor:"<<factor;
       ui.definition->setZoomFactor( factor );
       ui.definition->page()->setZoomFactor(factor);
+    }
   }
 
   /// Returns current article's text in .html format
@@ -299,9 +304,10 @@ public slots:
 private slots:
 
   void loadFinished( bool ok );
+  void loadProgress(int);
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
-  void attachToJavaScript();
+  void attachWebChannelToHtml();
 
   void linkHovered( const QString & link);
   void contextMenuRequested( QPoint const & );
@@ -434,6 +440,22 @@ private:
   std::list< sptr< Dictionary::DataRequest > > downloadRequests;
   QString fileName;
   bool alreadyDone;
+};
+
+class ArticleViewAgent : public QObject
+{
+    Q_OBJECT
+    ArticleView* articleView;
+  public:
+    explicit ArticleViewAgent(QObject *parent = nullptr);
+    ArticleViewAgent(ArticleView* articleView);
+
+  signals:
+
+  public slots:
+    Q_INVOKABLE void onJsActiveArticleChanged(QString const & id);
+    Q_INVOKABLE void linkClickedInHtml( QUrl const & );
+
 };
 
 #endif

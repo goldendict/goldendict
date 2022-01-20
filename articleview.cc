@@ -276,8 +276,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect(ui.definition, SIGNAL(loadFinished(bool)), this,
           SLOT(loadFinished(bool)));
 
-  connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
-           this, SLOT( handleTitleChanged( QString const & ) ) );
+  connect(ui.definition, SIGNAL(loadProgress(int)), this,
+          SLOT(loadProgress(int)));
+
+  connect( ui.definition->page(), SIGNAL( titleChanged( QString  ) ),
+           this, SLOT( handleTitleChanged( QString  ) ) );
 
   connect( ui.definition->page(), SIGNAL( urlChanged(QUrl) ),
            this, SLOT( handleUrlChanged(QUrl) ) );
@@ -363,7 +366,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
           SLOT(setActiveDictIds(ActiveDictIds)));
 
   channel = new QWebChannel(ui.definition->page());
-  attachToJavaScript();
+  agent = new ArticleViewAgent(this);
+  attachWebChannelToHtml();
 }
 
 // explicitly report the minimum size, to avoid
@@ -601,6 +605,10 @@ void ArticleView::loadFinished( bool )
 
   if( Utils::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
+}
+
+void ArticleView::loadProgress(int ){
+    setZoomFactor(cfg.preferences.zoomFactor);
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -1050,7 +1058,7 @@ void ArticleView::linkHovered ( const QString & link )
       // Link to other dictionary
       QString dictName( Utils::Url::queryItemValue( url, "dict" ) );
       if( !dictName.isEmpty() )
-        msg = tr( "Definition from dictionary \"%1\": %2" ).arg( dictName ).arg( def );
+        msg = tr( "Definition from dictionary \"%1\": %2" ).arg( dictName , def );
     }
 
     if( msg.isEmpty() )
@@ -1069,15 +1077,13 @@ void ArticleView::linkHovered ( const QString & link )
   emit statusBarMessage( msg );
 }
 
-void ArticleView::attachToJavaScript() {
-
-
+void ArticleView::attachWebChannelToHtml() {
   // set the web channel to be used by the page
   // see http://doc.qt.io/qt-5/qwebenginepage.html#setWebChannel
   ui.definition->page()->setWebChannel(channel, QWebEngineScript::MainWorld);
 
   // register QObjects to be exposed to JavaScript
-  channel->registerObject(QStringLiteral("articleview"), this);
+  channel->registerObject(QStringLiteral("articleview"), agent);
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -2536,12 +2542,12 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
 
 void ArticleView::setActiveDictIds(ActiveDictIds ad) {
   // ignore all other signals.
-
+  qDebug() << "receive dicts, current word:" << currentWord << ad.word << ":" << ad.dictIds;
   if (ad.word == currentWord) {
+    qDebug() << "receive dicts, current word accept:" << currentWord;
     currentActiveDictIds << ad.dictIds;
     currentActiveDictIds.removeDuplicates();
     emit updateFoundInDictsList();
-    qDebug() << "receive dicts:"<<ad.word<<":" << ad.dictIds;
   }
 }
 
@@ -2837,4 +2843,23 @@ void ResourceToSaveHandler::downloadFinished()
     emit done();
     deleteLater();
   }
+}
+
+ArticleViewAgent::ArticleViewAgent(QObject *parent)
+  : QObject{parent}
+{
+
+}
+ArticleViewAgent::ArticleViewAgent(ArticleView *articleView)
+  : articleView(articleView)
+{
+
+}
+
+void ArticleViewAgent::onJsActiveArticleChanged(QString const & id){
+    articleView->onJsActiveArticleChanged(id);
+}
+
+void ArticleViewAgent::linkClickedInHtml(QUrl const & url){
+    articleView->linkClickedInHtml(url);
 }
