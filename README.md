@@ -104,9 +104,8 @@ To build GoldenDict with Visual Studio take one of next library packs and unpack
 [GoldenDict_libs_VS2015_x86_v4.7z](http://www.mediafire.com/file/0a7ygy9rn99oevm/GoldenDict_libs_VS2015_x86_v4.7z) - for MS Visual Studio 2015, 32 bit  
 [GoldenDict_libs_VS2015_x64_v4.7z](http://www.mediafire.com/file/yoy2q8af0s1467m/GoldenDict_libs_VS2015_x64_v4.7z) - for MS Visual Studio 2015, 64 bit  
 
-To create project files for Visual Studio you can pass `"-tp vc"` option to `qmake`.
-
-Note: In Qt 5.6.0 and later the `Webkit` module was removed from official release builds. You should to build it from sources to compile GoldenDict.
+To build with Visual Studio.
+check this [how to build with visual studio](howto/how to build and debug with VS2019.md)
 
 
 ## Installation
