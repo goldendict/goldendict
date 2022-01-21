@@ -106,7 +106,6 @@ To build GoldenDict with Visual Studio take one of next library packs and unpack
 
 To create project files for Visual Studio you can pass `"-tp vc"` option to `qmake`.
 
-Note: In Qt 5.6.0 and later the `Webkit` module was removed from official release builds. You should to build it from sources to compile GoldenDict.
 
 
 ## Installation
