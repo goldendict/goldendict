@@ -70,7 +70,6 @@ pre
 /* Appears between the articles */
 .gdarticleseparator
 {
-  width: 100%;
   display: inline-block;
   clear: both;
 }
