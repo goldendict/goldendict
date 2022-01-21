@@ -75,6 +75,12 @@ pre
   clear: both;
 }
 
+.gddictnamebodyseparator
+{
+  display: inline-block;
+  clear: both;
+}
+
 /* Dictionary query error description string */
 .gderrordesc
 {
