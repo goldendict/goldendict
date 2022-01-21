@@ -105,7 +105,7 @@ To build GoldenDict with Visual Studio take one of next library packs and unpack
 [GoldenDict_libs_VS2015_x64_v4.7z](http://www.mediafire.com/file/yoy2q8af0s1467m/GoldenDict_libs_VS2015_x64_v4.7z) - for MS Visual Studio 2015, 64 bit  
 
 To build with Visual Studio.
-check this [how to build with visual studio](howto/how to build and debug with VS2019.md)
+check this [how to build with visual studio](howto/how%20to%20build%20and%20debug%20with%20VS2019.md)
 
 
 ## Installation
