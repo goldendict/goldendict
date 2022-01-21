@@ -43,11 +43,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: build singleapplication
-        run: |
-          cd qtsingleapplication
-          qmake
-          make
+      # - name: build singleapplication
+      #   run: |
+      #     cd qtsingleapplication
+      #     qmake
+      #     make
       - name: build goldendict
         run: |
           qmake

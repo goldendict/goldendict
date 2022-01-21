@@ -47,7 +47,7 @@ function Main() {
     Copy-Item $sdkDll $archiveName\
     Copy-Item winlibs\lib\msvc\*.dll $archiveName\
     Copy-Item locale\*.qm $archiveName\locale\
-    Copy-Item qtsingleapplication\lib\*.dll $archiveName\
+    # Copy-Item qtsingleapplication\lib\*.dll $archiveName\
     Write-Host "compress zip..."
     # 打包zip
     Compress-Archive -Path $archiveName -DestinationPath $archiveName'.zip'

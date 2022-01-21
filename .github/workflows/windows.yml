@@ -52,14 +52,14 @@ jobs:
           fetch-depth: 1
       # msvc编译
 
-      - name: build singleapplication
-        shell: cmd
-        run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
-          cd qtsingleapplication
-          qmake
-          nmake
-          tree /f
+      # - name: build singleapplication
+      #   shell: cmd
+      #   run: |
+      #     call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+      #     cd qtsingleapplication
+      #     qmake
+      #     nmake
+      #     tree /f
       - name: msvc-build goldendict
         id: build
         shell: cmd
