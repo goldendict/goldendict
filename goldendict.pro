@@ -580,10 +580,6 @@ CONFIG( chinese_conversion_support ) {
   }
 }
 
-CONFIG( old_hunspell ) {
-  DEFINES += OLD_HUNSPELL_INTERFACE
-}
-
 RESOURCES += resources.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \
