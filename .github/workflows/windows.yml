@@ -80,6 +80,7 @@ jobs:
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"    
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
       # 打包 
       - name: package
         id: package      
@@ -104,9 +105,14 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
-          asset_name: ${{ steps.package.outputs.packageName }}.zip
+          #asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: prerelease-${{steps.vars.outputs.release_date}}
           overwrite: true 
-          release_name: ${{ steps.package.outputs.packageName }}
+          #release_name: ${{ steps.package.outputs.packageName }}
           prerelease: true
-          body: "release on ${{steps.vars.outputs.release_date}} ${{steps.vars.outputs.release_time}} \n arch: ${{ matrix.qt_ver }}-${{ matrix.qt_arch }} branch:${{ github.ref_name }}, commit:${{ steps.vars.outputs.sha_short }} \n This is a prerelease version ,auto build by github action. use on your on risk:-)"
+          body: |
+            "release on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}} \n 
+            branch:${{ github.ref_name }}, commit:${{ steps.vars.outputs.sha_short }} 
+            windows built with: arch: qt5.15.2-msvc64  visual studio 2019
+            appimage built with : ubuntu-20.04
+            \n This is a prerelease version ,auto build by github action. use on your on risk:-)"
