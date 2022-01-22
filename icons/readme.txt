@@ -14,3 +14,5 @@ error.png
 
 https://github.com/yeyushengfan258/Win11-icon-theme GPLv3
 lists:
+
+clear.png
