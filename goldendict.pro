@@ -43,8 +43,8 @@ QT += widgets \
 QT += sql
 CONFIG += exceptions \
     rtti \
-    stl \
-    lrelease    #lrelease generate qm under target folder.
+    stl
+    # lrelease    #lrelease generate qm under target folder.
     
 QM_FILES_INSTALL_PATH = /locale/
 OBJECTS_DIR = build
@@ -652,11 +652,9 @@ isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 # will be installed. With this, we create the qm files during qmake run.
 !win32 {
   system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null)
-  message("$${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null")
 }
 else{
   system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_})
-  message("$${QMAKE_LRELEASE} -silent $${_PRO_FILE_}")
 }
 
 updateqm.input = TRANSLATIONS
