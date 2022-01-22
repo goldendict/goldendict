@@ -41,6 +41,8 @@ function Main() {
     Write-Host "redist dll $($redistDll)"
     Copy-Item $redistDll $archiveName\
     Write-Host "copy redist dll..."
+    Copy-Item "LICENSE.txt" $archiveName\
+    Write-Host "copy license.."
     # 拷贝WinSDK dll
     $sdkDll="{0}Redist\{1}ucrt\DLLs\{2}\*.dll" -f $env:winSdkDir.Trim(),$env:winSdkVer.Trim(),$env:msvcArch
     Write-Host "copy sdk dll$($sdkDll)"

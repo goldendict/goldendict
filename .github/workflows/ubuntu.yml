@@ -1,20 +1,19 @@
 name: Ubuntu
 # Qt官方没有linux平台的x86包
 on: 
+  workflow_dispatch:
   push:
     branches:
       - dev
     paths:
       - '*.pro'
-      - 'src/**'
-      - '.github/workflows/ubuntu.yml'
+      - '.github/**' 
   pull_request:
     branches:
       - dev
     paths:
       - '*.pro'
-      - 'src/**'
-      - '.github/workflows/ubuntu.yml' 
+      - '.github/**' 
 jobs:
   build:
     name: Build
@@ -38,7 +37,7 @@ jobs:
           sudo apt-get install qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev 
           sudo apt-get install libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev 
           sudo apt-get install libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev 
-          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins
+          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins opencc libzstd-dev
           sudo ln -sf /usr/bin/x86_64-linux-gnu-ld.gold /usr/bin/ld
       - uses: actions/checkout@v2
         with:
@@ -50,5 +49,35 @@ jobs:
       #     make
       - name: build goldendict
         run: |
-          qmake
-          make
+          qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support 
+          make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
+          ls -al
+      - name: Build AppImage
+        run: |
+          wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
+          chmod a+x linuxdeploy-plugin-qt-x86_64.AppImage
+          wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
+          chmod a+x linuxdeploy-x86_64.AppImage
+          ./linuxdeploy-x86_64.AppImage --appdir appdir --output appimage --plugin qt # -i redist/icons/goldendict.png -d redist/org.goldendict.GoldenDict.desktop 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: AppImage
+          path: './*.AppImage*'
+      - name: Set outputs
+        id: vars
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
+          echo "::set-output name=release_time::$(date +'%H%M%S')"  
+          echo "::set-output name=appname::$(ls *.AppImage*)"
+      - name: uploadRelease
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.vars.outputs.appname }}
+          asset_name: ${{ steps.vars.outputs.appname }}
+          tag: prerelease-${{steps.vars.outputs.release_date}}
+          overwrite: true 
+          release_name: ${{ steps.vars.outputs.appname }}
+          prerelease: true
