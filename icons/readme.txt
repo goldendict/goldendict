@@ -16,3 +16,17 @@ https://github.com/yeyushengfan258/Win11-icon-theme GPLv3
 lists:
 
 clear.png
+
+
+qt resources example
+list:
+icons/fileopen.png
+icons/folder.png
+icons/home.png
+icons/next.png
+icons/previous.png
+icons/print.png
+icons/programs.png
+icons/readme.txt
+icons/reload.png
+filesave.png
