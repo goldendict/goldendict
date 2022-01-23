@@ -329,18 +329,16 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   inspectAction.setShortcut( QKeySequence( Qt::Key_F12 ) );
   inspectAction.setText( tr( "Inspect" ) );
   ui.definition->addAction( &inspectAction );
-  //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
   QWebEnginePage *page = ui.definition->page();
-  connect(&inspectAction, &QAction::triggered, this, [page, this]()
-          {
-            if (inspectView == nullptr || !inspectView->isVisible()) {
-                inspectView = new QWebEngineView();
-                page->setDevToolsPage(inspectView->page());
-                page->triggerAction(QWebEnginePage::InspectElement);
-                inspectView->show();
-            } 
-          });
+  connect(&inspectAction, &QAction::triggered, this, [page, this]() {
+    if (inspectView == nullptr || !inspectView->isVisible()) {
+      inspectView = new QWebEngineView();
+      page->setDevToolsPage(inspectView->page());
+      page->triggerAction(QWebEnginePage::InspectElement);
+      inspectView->show();
+    }
+  });
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
@@ -556,7 +554,7 @@ void ArticleView::loadFinished( bool )
   }
   else
   {
-    QString const scrollTo = Utils::Url::queryItemValue( url, "scrollto" );
+    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
     if( isScrollTo( scrollTo ) )
     {
       // There is no active article saved in history, but we have it as a parameter.
@@ -664,8 +662,7 @@ unsigned ArticleView::getGroup( QUrl const & url )
 
 QStringList ArticleView::getArticlesList()
 {
-  return runJavaScriptSync( ui.definition->page(), "gdArticleContents" )
-    .trimmed().split( ' ', QString::SkipEmptyParts );
+  return currentActiveDictIds;
 }
 
 QString ArticleView::getActiveArticleId()
@@ -1153,7 +1150,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
     {
       QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                          .split( ",", QString::SkipEmptyParts );
+                                          .split( ",", Qt::SkipEmptyParts );
 
       showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
@@ -1175,7 +1172,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       {
         // Specific dictionary group from full-text search
         QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                            .split( ",", QString::SkipEmptyParts );
+                                            .split( ",", Qt::SkipEmptyParts );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return;
@@ -1183,9 +1180,9 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
       QString word;
 
-      if( Utils::Url::hasQueryItem( url, "word" ) )
+      if( Qt4x5::Url::hasQueryItem( url, "word" ) )
       {
-          word=Utils::Url::queryItemValue (url,"word");
+          word=Qt4x5::Url::queryItemValue (url,"word");
       }
       else{
           word=url.path ().mid (1);
@@ -1658,14 +1655,17 @@ bool ArticleView::hasSound()
 //use webengine javascript to playsound
 void ArticleView::playSound()
 {
-  QString variable = "   var link=gdAudioLinks[gdAudioLinks.current];           "
+  QString variable = " (function(){  var link=gdAudioLinks[gdAudioLinks.current];           "
     "   if(link==undefined){           "
     "       link=gdAudioLinks.first;           "
     "   }          "
-    "              "
-    "   var music = new Audio(link);    "
-    "   music.play();   ";
-  ui.definition->page()->runJavaScript(variable);
+    "    return link;})();         ";
+    // "   var music = new Audio(link);    "
+    // "   music.play();   ";
+  QString soundScript = runJavaScriptSync(ui.definition->page(), variable);
+  // ui.definition->page()->runJavaScript(variable);
+  if (!soundScript.isEmpty())
+    openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
 }
 
 // use eventloop to turn the async callback to sync execution.
