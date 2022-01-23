@@ -5,15 +5,15 @@ on:
   push:
     branches:
       - dev
-    paths:
-      - '*.pro'
-      - '.github/**' 
+    # paths:
+    #   - '*.pro'
+    #   - '.github/**' 
   pull_request:
     branches:
       - dev
-    paths:
-      - '*.pro'
-      - '.github/**' 
+    # paths:
+    #   - '*.pro'
+    #   - '.github/**' 
 jobs:
   build:
     name: Build
