@@ -396,7 +396,7 @@ ArticleView::~ArticleView()
 {
   cleanupTemp();
   audioPlayer->stop();
-  channel->deregisterObject(this);
+  //channel->deregisterObject(this);
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
 }
