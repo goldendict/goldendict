@@ -30,3 +30,8 @@ icons/programs.png
 icons/readme.txt
 icons/reload.png
 filesave.png
+
+
+http://tango.freedesktop.org/Tango_Desktop_Project
+list:
+internet.png
