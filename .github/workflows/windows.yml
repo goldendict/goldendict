@@ -67,7 +67,6 @@ jobs:
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake "CONFIG+=zim_support"
           nmake
-          tree /f
 
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
           echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
@@ -111,8 +110,8 @@ jobs:
           #release_name: ${{ steps.package.outputs.packageName }}
           prerelease: true
           body: |
-            "release on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}} \n 
+            release on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
             branch:${{ github.ref_name }}, commit:${{ steps.vars.outputs.sha_short }} 
             windows built with: arch: qt5.15.2-msvc64  visual studio 2019
             appimage built with : ubuntu-20.04
-            \n This is a prerelease version ,auto build by github action. use on your on risk:-)"
+            This is a prerelease version ,auto build by github action. use on your on risk:-)
