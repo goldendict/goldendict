@@ -32,6 +32,7 @@ configure.png
 system-search.png
 fileopen.png
 addtab.png
+wizard.png
 
 https://commons.wikimedia.org/wiki/GNOME_Desktop_icons GPLv3
 lists:
