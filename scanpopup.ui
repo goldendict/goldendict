@@ -145,7 +145,7 @@
              </property>
              <property name="icon">
               <iconset resource="resources.qrc">
-               <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
+               <normaloff>:/icons/playsound_full.png</normaloff>:/icons/playsound_full.png</iconset>
              </property>
              <property name="shortcut">
               <string>Alt+S</string>

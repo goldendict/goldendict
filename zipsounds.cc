@@ -398,7 +398,7 @@ void ZipSoundsDictionary::loadIcon() throw()
   if( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
-    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound.png");
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound_full.png");
   }
 
   dictionaryIconLoaded = true;
