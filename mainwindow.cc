@@ -4244,7 +4244,7 @@ void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
     emit clickOnDictPane( id );
   }
 
-   jumpToDictionary( item);
+   jumpToDictionary( item,true);
 }
 
 void MainWindow::showDictionaryInfo( const QString & id )
