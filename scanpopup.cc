@@ -1285,7 +1285,7 @@ void ScanPopup::setDictionaryIconSize()
 {
   int extent = cfg.usingSmallIconsInToolbars ?
                QApplication::style()->pixelMetric( QStyle::PM_SmallIconSize ) :
-               21;
+               QApplication::style()->pixelMetric(QStyle::PM_ToolBarIconSize);
   dictionaryBar.setDictionaryIconSize( extent );
 }
 
