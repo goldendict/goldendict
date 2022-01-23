@@ -20,18 +20,32 @@ clear.png
 
 qt resources example
 list:
-icons/fileopen.png
-icons/folder.png
-icons/home.png
-icons/next.png
-icons/previous.png
 icons/print.png
 icons/programs.png
-icons/readme.txt
-icons/reload.png
-filesave.png
 
 
 http://tango.freedesktop.org/Tango_Desktop_Project
 list:
 internet.png
+home.png
+configure.png
+system-search.png
+fileopen.png
+addtab.png
+
+https://commons.wikimedia.org/wiki/GNOME_Desktop_icons GPLv3
+lists:
+windows-list.png
+interface.png
+closetab.png
+icon32_sdict.png https://commons.wikimedia.org/wiki/File:Accessories-dictionary.svg
+folder.png
+previous.png
+next.png
+reload.png
+icon32_zoomin.png
+icon32_zoomout.png
+icon32_zoombase.png
+hotkeys.png
+filesave.png
+playsound_color.png
