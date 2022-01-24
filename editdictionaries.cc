@@ -39,7 +39,7 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
   ui.setupUi( this );
 
-  setWindowIcon( QIcon(":/icons/bookcase.svg") );
+  setWindowIcon( QIcon(":/icons/dictionary.svg") );
 
   ui.tabs->clear();
 

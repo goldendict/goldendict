@@ -118,5 +118,6 @@
         <file>icons/system-search.svg</file>
         <file>icons/windows-list.svg</file>
         <file>icons/wizard.svg</file>
+        <file>icons/dictionary.svg</file>
     </qresource>
 </RCC>
