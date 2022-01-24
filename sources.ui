@@ -94,7 +94,7 @@
      <widget class="QWidget" name="tab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/fileopen.svg</normaloff>:/icons/fileopen.svg</iconset>
+        <normaloff>:/icons/folder-sound.svg</normaloff>:/icons/folder-sound.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Sound Dirs</string>
