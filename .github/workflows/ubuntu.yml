@@ -49,7 +49,7 @@ jobs:
       #     make
       - name: build goldendict
         run: |
-          qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support  CONFIG+=chinese_conversion_support
+          qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support  # CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
           ls -al
       - name: Build AppImage
