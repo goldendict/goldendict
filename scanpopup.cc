@@ -84,8 +84,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
   hideTimer( this ),
-  starIcon( ":/icons/star.png" ),
-  blueStarIcon( ":/icons/star_blue.png" )
+  starIcon( ":/icons/star.svg" ),
+  blueStarIcon( ":/icons/star_blue.svg" )
 {
   ui.setupUi( this );
 
@@ -94,8 +94,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   if( layoutDirection() == Qt::RightToLeft )
   {
     // Adjust button icons for Right-To-Left layout
-    ui.goBackButton->setIcon( QIcon( ":/icons/next.png" ) );
-    ui.goForwardButton->setIcon( QIcon( ":/icons/previous.png" ) );
+    ui.goBackButton->setIcon( QIcon( ":/icons/next.svg" ) );
+    ui.goForwardButton->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 
   mainStatusBar = new MainStatusBar( this );

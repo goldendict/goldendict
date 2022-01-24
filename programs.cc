@@ -130,7 +130,7 @@ void ProgramsDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.png");
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.svg");
   dictionaryIconLoaded = true;
 }
 

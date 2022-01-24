@@ -39,13 +39,13 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
   ui.setupUi( this );
 
-  setWindowIcon( QIcon(":/icons/book.png") );
+  setWindowIcon( QIcon(":/icons/bookcase.svg") );
 
   ui.tabs->clear();
 
-  ui.tabs->addTab( &sources, QIcon(":/icons/reload.png"), tr( "&Sources" ) );
-  ui.tabs->addTab( orderAndProps.get(), QIcon(":/icons/book.png"), tr( "&Dictionaries" ) );
-  ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+  ui.tabs->addTab( &sources, QIcon(":/icons/folders.svg"), tr( "&Sources" ) );
+  ui.tabs->addTab( orderAndProps.get(), QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
+  ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.svg"), tr( "&Groups" ) );
 
   connect( ui.buttons, SIGNAL( clicked( QAbstractButton * ) ),
            this, SLOT( buttonBoxClicked( QAbstractButton * ) ) );
@@ -241,10 +241,10 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   if ( rebuildGroups )
   {
     orderAndProps = new OrderAndProps( this, savedOrder, savedInactive, dictionaries );
-    ui.tabs->insertTab( 1, orderAndProps.get(), QIcon(":/icons/book.png"), tr( "&Dictionaries" ) );
+    ui.tabs->insertTab( 1, orderAndProps.get(), QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
 
     groups = new Groups( this, dictionaries, savedGroups, orderAndProps->getCurrentDictionaryOrder() );
-    ui.tabs->insertTab( 2, groups.get(), QIcon(":/icons/bookcase.png"), tr( "&Groups" ) );
+    ui.tabs->insertTab( 2, groups.get(), QIcon(":/icons/bookcase.svg"), tr( "&Groups" ) );
 
     ui.tabs->setUpdatesEnabled( true );
 

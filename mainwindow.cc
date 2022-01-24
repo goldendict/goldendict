@@ -132,8 +132,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
 , helpWindow( 0 )
-, starIcon( ":/icons/star.png" )
-, blueStarIcon( ":/icons/star_blue.png" )
+, starIcon( ":/icons/star.svg" )
+, blueStarIcon( ":/icons/star_blue.svg" )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -180,9 +180,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar = addToolBar( tr( "&Navigation" ) );
   navToolbar->setObjectName( "navToolbar" );
 
-  navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
+  navBack = navToolbar->addAction( QIcon( ":/icons/previous.svg" ), tr( "Back" ) );
   navToolbar->widgetForAction( navBack )->setObjectName( "backButton" );
-  navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
+  navForward = navToolbar->addAction( QIcon( ":/icons/next.svg" ), tr( "Forward" ) );
   navToolbar->widgetForAction( navForward )->setObjectName( "forwardButton" );
 
   QWidget * translateBoxWidget = new QWidget( this );
@@ -207,7 +207,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( beforeScanPopupSeparator )->setObjectName( "beforeScanPopupSeparator" );
 
-  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
+  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.svg" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( enableScanPopup )->setObjectName( "scanPopupButton" );
@@ -418,7 +418,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
   closeCurrentTabAction.setText( tr("Close current tab") );
-  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab.png") );
+  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab.svg") );
 
   connect( &closeCurrentTabAction, SIGNAL( triggered() ),
            this, SLOT( closeCurrentTab() ) );
@@ -624,7 +624,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab.setAutoRaise( true );
   addTab.setToolTip( tr( "New Tab"  ) );
   addTab.setFocusPolicy( Qt::NoFocus );
-  addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
+  addTab.setIcon( QIcon( ":/icons/addtab.svg" ) );
 
   ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
   ui.tabWidget->clear();
@@ -895,8 +895,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   if( layoutDirection() == Qt::RightToLeft )
   {
     // Adjust button icons for Right-To-Left layout
-    navBack->setIcon( QIcon( ":/icons/next.png" ) );
-    navForward->setIcon( QIcon( ":/icons/previous.png" ) );
+    navBack->setIcon( QIcon( ":/icons/next.svg" ) );
+    navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 }
 
@@ -1405,7 +1405,7 @@ void MainWindow::updateGroupList()
 
     g.name = tr( "All" );
     g.id = Instances::Group::AllGroupId;
-    g.icon = "folder.png";
+    g.icon = "folder.svg";
 
     groupInstances.push_back( g );
   }
@@ -1559,7 +1559,7 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
 
 void MainWindow::createTabList()
 {
-  tabListMenu->setIcon(QIcon(":/icons/windows-list.png"));
+  tabListMenu->setIcon(QIcon(":/icons/windows-list.svg"));
   connect(tabListMenu, SIGNAL(aboutToShow()), this, SLOT(fillWindowsMenu()));
   connect(tabListMenu, SIGNAL(triggered(QAction*)), this, SLOT(switchToWindow(QAction*)));
 

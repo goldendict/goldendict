@@ -121,7 +121,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   // Text to speech
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
   textToSpeechSource = new TextToSpeechSource( this, cfg.voiceEngines );
-  ui.tabWidget->addTab( textToSpeechSource, QIcon(":/icons/playsound_color.png"), tr( "Text to Speech" ) );
+  ui.tabWidget->addTab( textToSpeechSource, QIcon(":/icons/playsound_color.svg"), tr( "Text to Speech" ) );
 #endif
 
   if ( Config::isPortableVersion() )

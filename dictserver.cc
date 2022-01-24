@@ -257,7 +257,7 @@ void DictServerDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/network.png");
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/network.svg");
   dictionaryIconLoaded = true;
 }
 

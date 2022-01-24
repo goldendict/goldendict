@@ -87,5 +87,36 @@
         <file>resources/jquery-3.6.0.slim.min.js</file>
         <file>resources/gd-custom.js</file>
         <file>resources/gd-builtin.js</file>
+        <file>icons/addtab.svg</file>
+        <file>icons/book.svg</file>
+        <file>icons/bookcase.svg</file>
+        <file>icons/clear.svg</file>
+        <file>icons/closetab.svg</file>
+        <file>icons/configure.svg</file>
+        <file>icons/error.svg</file>
+        <file>icons/fileopen.svg</file>
+        <file>icons/filesave.svg</file>
+        <file>icons/folder.svg</file>
+        <file>icons/folders.svg</file>
+        <file>icons/home.svg</file>
+        <file>icons/hotkeys.svg</file>
+        <file>icons/icon.svg</file>
+        <file>icons/icon32_zoombase.svg</file>
+        <file>icons/icon32_zoomin.svg</file>
+        <file>icons/icon32_zoomout.svg</file>
+        <file>icons/interface.svg</file>
+        <file>icons/internet.svg</file>
+        <file>icons/network.svg</file>
+        <file>icons/next.svg</file>
+        <file>icons/playsound_color.svg</file>
+        <file>icons/previous.svg</file>
+        <file>icons/print.svg</file>
+        <file>icons/programs.svg</file>
+        <file>icons/reload.svg</file>
+        <file>icons/star.svg</file>
+        <file>icons/star_blue.svg</file>
+        <file>icons/system-search.svg</file>
+        <file>icons/windows-list.svg</file>
+        <file>icons/wizard.svg</file>
     </qresource>
 </RCC>

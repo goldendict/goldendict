@@ -256,5 +256,6 @@
         <file>flags/eo.png</file>
         <file>flags/jb.png</file>
         <file>flags/other.png</file>
+        <file>flags/folder.svg</file>
     </qresource>
 </RCC>
