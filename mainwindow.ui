@@ -371,7 +371,7 @@
   <action name="dictionaries">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
+     <normaloff>:/icons/book.svg</normaloff>:/icons/book.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Dictionaries...</string>
@@ -386,7 +386,7 @@
   <action name="preferences">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+     <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Preferences...</string>
@@ -456,7 +456,7 @@
   <action name="saveArticle">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
+     <normalon>:/icons/filesave.svg</normalon>:/icons/filesave.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Save Article</string>
@@ -474,7 +474,7 @@
   <action name="print">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
+     <normaloff>:/icons/print.svg</normaloff>:/icons/print.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;Print</string>
@@ -524,7 +524,7 @@
   <action name="newTab">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/addtab.png</normaloff>:/icons/addtab.png</iconset>
+     <normaloff>:/icons/addtab.svg</normaloff>:/icons/addtab.svg</iconset>
    </property>
    <property name="text">
     <string>&amp;New Tab</string>

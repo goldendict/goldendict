@@ -117,7 +117,7 @@
              </property>
              <property name="icon">
               <iconset resource="resources.qrc">
-               <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
+               <normaloff>:/icons/previous.svg</normaloff>:/icons/previous.svg</iconset>
              </property>
             </widget>
            </item>
@@ -131,7 +131,7 @@
              </property>
              <property name="icon">
               <iconset resource="resources.qrc">
-               <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
+               <normaloff>:/icons/next.svg</normaloff>:/icons/next.svg</iconset>
              </property>
             </widget>
            </item>
@@ -182,7 +182,7 @@
              </property>
              <property name="icon">
               <iconset resource="resources.qrc">
-               <normaloff>:/icons/star.png</normaloff>:/icons/star.png</iconset>
+               <normaloff>:/icons/star.svg</normaloff>:/icons/star.svg</iconset>
              </property>
              <property name="shortcut">
               <string notr="true">Ctrl+E</string>
@@ -212,7 +212,7 @@
              </property>
              <property name="icon">
               <iconset resource="resources.qrc">
-               <normaloff>:/icons/bookcase.png</normaloff>:/icons/bookcase.png</iconset>
+               <normaloff>:/icons/bookcase.svg</normaloff>:/icons/bookcase.svg</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>

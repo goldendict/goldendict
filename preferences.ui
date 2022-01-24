@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+    <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -41,7 +41,7 @@
      <widget class="QWidget" name="tab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/interface.png</normaloff>:/icons/interface.png</iconset>
+        <normaloff>:/icons/interface.svg</normaloff>:/icons/interface.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Interface</string>
@@ -374,7 +374,7 @@ be the last ones.</string>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/wizard.png</normaloff>:/icons/wizard.png</iconset>
+        <normaloff>:/icons/wizard.svg</normaloff>:/icons/wizard.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Scan Popup</string>
@@ -720,7 +720,7 @@ seconds, which is specified here.</string>
      <widget class="QWidget" name="tab_5">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/hotkeys.png</normaloff>:/icons/hotkeys.png</iconset>
+        <normaloff>:/icons/hotkeys.svg</normaloff>:/icons/hotkeys.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Hotkeys</string>
@@ -865,7 +865,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/playsound_color.png</normaloff>:/icons/playsound_color.png</iconset>
+        <normaloff>:/icons/playsound_color.svg</normaloff>:/icons/playsound_color.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Audio</string>
@@ -971,7 +971,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_3">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
+        <normaloff>:/icons/network.svg</normaloff>:/icons/network.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Network</string>
@@ -1253,7 +1253,7 @@ download page.</string>
      <widget class="QWidget" name="tab_FTS">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/system-search.png</normaloff>:/icons/system-search.png</iconset>
+        <normaloff>:/icons/system-search.svg</normaloff>:/icons/system-search.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Full-text search</string>
