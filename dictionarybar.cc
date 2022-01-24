@@ -81,10 +81,10 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 
     QList< QSize > sizes = icon.availableSizes();
 
-    for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
-         ++i )
-      if ( i->width() == 14 && i->height() == 21 )
-        use14x21 = true;
+    // for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
+    //      ++i )
+    //   if ( i->width() == 14 && i->height() == 21 )
+    //     use14x21 = true;
 
     dictActions.append( action );
   }

@@ -122,9 +122,7 @@ win32 {
         CONFIG += chinese_conversion_support
     }
 
-    greaterThan(QT_MAJOR_VERSION, 4) {
-      LIBS += -luxtheme
-    }
+    LIBS += -luxtheme
 }
 
 unix:!mac {
@@ -133,11 +131,7 @@ unix:!mac {
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
 
-    greaterThan(QT_MAJOR_VERSION, 4) {
-      greaterThan(QT_MINOR_VERSION, 0) {
-        QT += x11extras
-      }
-    }
+    QT += x11extras
 
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
@@ -532,10 +526,10 @@ unix:!mac {
     SOURCES += scanflag.cc
 }
 
-greaterThan(QT_MAJOR_VERSION, 4) {
+
     HEADERS += wildcard.hh
     SOURCES += wildcard.cc
-}
+
 
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
