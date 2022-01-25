@@ -37,7 +37,7 @@ jobs:
           sudo apt-get install qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev 
           sudo apt-get install libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev 
           sudo apt-get install libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev 
-          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins opencc libzstd-dev
+          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins libopencc-dev libzstd-dev
           sudo ln -sf /usr/bin/x86_64-linux-gnu-ld.gold /usr/bin/ld
       - uses: actions/checkout@v2
         with:
@@ -76,8 +76,14 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
-          asset_name: ${{ steps.vars.outputs.appname }}
+          asset_name: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
           tag: prerelease-${{steps.vars.outputs.release_date}}
           overwrite: true 
-          release_name: ${{ steps.vars.outputs.appname }}
+          #release_name: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
           prerelease: true
+          body: |
+            release on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
+            branch:${{ github.ref_name }}, commit:${{ steps.vars.outputs.sha_short }} 
+            windows built with: arch: qt5.15.2-msvc64  visual studio 2019
+            appimage built with : ubuntu-20.04
+            This is a prerelease version ,auto build by github action. use on your on risk:-)
