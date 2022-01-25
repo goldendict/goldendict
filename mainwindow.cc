@@ -234,17 +234,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // named separator (to be able to hide it via CSS)
   navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeZoom" );
 
-  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
+  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.svg" ), tr( "Zoom In" ) );
   zoomIn->setShortcuts( QList< QKeySequence >() <<
                        QKeySequence::ZoomIn <<
                        QKeySequence( "Ctrl+=" ) );
   navToolbar->widgetForAction( zoomIn )->setObjectName( "zoomInButton" );
 
-  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
+  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.svg" ), tr( "Zoom Out" ) );
   zoomOut->setShortcut( QKeySequence::ZoomOut );
   navToolbar->widgetForAction( zoomOut )->setObjectName( "zoomOutButton" );
 
-  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
+  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.svg" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
   navToolbar->widgetForAction( zoomBase )->setObjectName( "zoomBaseButton" );
 
@@ -365,13 +365,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.menuZoom->addSeparator();
 
-  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Words Zoom In" ) );
+  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.svg" ), tr( "Words Zoom In" ) );
   wordsZoomIn->setShortcuts( QList< QKeySequence >() <<
                             QKeySequence( "Alt++" ) <<
                             QKeySequence( "Alt+=" ) );
-  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Words Zoom Out" ) );
+  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.svg" ), tr( "Words Zoom Out" ) );
   wordsZoomOut->setShortcut( QKeySequence( "Alt+-" ) );
-  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Words Normal Size" ) );
+  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.svg" ), tr( "Words Normal Size" ) );
   wordsZoomBase->setShortcut( QKeySequence( "Alt+0" ) );
 
   connect( wordsZoomIn, SIGNAL(triggered()), this, SLOT(doWordsZoomIn()) );
@@ -3228,9 +3228,13 @@ void MainWindow::scanEnableToggled( bool on )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
                                           QPixmap( ":/icons/error.png" ) );
 #endif
+      enableScanPopup->setIcon(QIcon(":/icons/wizard-selected.svg"));
     }
     else
+    {
       scanPopup->disableScanning();
+      enableScanPopup->setIcon(QIcon(":/icons/wizard.svg"));
+    }
   }
 
   updateTrayIcon();

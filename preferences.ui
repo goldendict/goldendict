@@ -865,7 +865,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/playsound_color.svg</normaloff>:/icons/playsound_color.svg</iconset>
+        <normaloff>:/icons/text2speech.svg</normaloff>:/icons/text2speech.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Audio</string>
@@ -1253,7 +1253,7 @@ download page.</string>
      <widget class="QWidget" name="tab_FTS">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/system-search.svg</normaloff>:/icons/system-search.svg</iconset>
+        <normaloff>:/icons/fulltext.svg</normaloff>:/icons/fulltext.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Full-text search</string>
@@ -1428,6 +1428,10 @@ download page.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_Advanced">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/advanced.svg</normaloff>:/icons/advanced.svg</iconset>
+      </attribute>
       <attribute name="title">
        <string>Ad&amp;vanced</string>
       </attribute>

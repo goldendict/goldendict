@@ -256,7 +256,7 @@ could be resized or managed in other ways.</string>
              </property>
              <property name="icon">
               <iconset resource="resources.qrc">
-               <normaloff>:/icons/pushpin.png</normaloff>:/icons/pushpin.png</iconset>
+               <normaloff>:/icons/pushpin.svg</normaloff>:/icons/pushpin.svg</iconset>
              </property>
              <property name="checkable">
               <bool>true</bool>

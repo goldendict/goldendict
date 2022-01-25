@@ -120,5 +120,14 @@
         <file>icons/windows-list.svg</file>
         <file>icons/wizard.svg</file>
         <file>icons/dictionary.svg</file>
+        <file>icons/advanced.svg</file>
+        <file>icons/webdict.svg</file>
+        <file>icons/transliteration.svg</file>
+        <file>icons/pushpin.svg</file>
+        <file>icons/fulltext.svg</file>
+        <file>icons/text2speech.svg</file>
+        <file>icons/closetab-hover.svg</file>
+        <file>icons/1downarrow.svg</file>
+        <file>icons/wizard-selected.svg</file>
     </qresource>
 </RCC>

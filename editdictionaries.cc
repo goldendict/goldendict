@@ -43,7 +43,7 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
   ui.tabs->clear();
 
-  ui.tabs->addTab( &sources, QIcon(":/icons/folders.svg"), tr( "&Sources" ) );
+  ui.tabs->addTab( &sources, QIcon(":/icons/reload.svg"), tr( "&Sources" ) );
   ui.tabs->addTab( orderAndProps.get(), QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
   ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.svg"), tr( "&Groups" ) );
 
