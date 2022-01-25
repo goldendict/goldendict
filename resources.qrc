@@ -95,6 +95,7 @@
         <file>icons/configure.svg</file>
         <file>icons/error.svg</file>
         <file>icons/fileopen.svg</file>
+        <file>icons/folder-sound.svg</file>
         <file>icons/filesave.svg</file>
         <file>icons/folder.svg</file>
         <file>icons/folders.svg</file>
@@ -118,5 +119,15 @@
         <file>icons/system-search.svg</file>
         <file>icons/windows-list.svg</file>
         <file>icons/wizard.svg</file>
+        <file>icons/dictionary.svg</file>
+        <file>icons/advanced.svg</file>
+        <file>icons/webdict.svg</file>
+        <file>icons/transliteration.svg</file>
+        <file>icons/pushpin.svg</file>
+        <file>icons/fulltext.svg</file>
+        <file>icons/text2speech.svg</file>
+        <file>icons/closetab-hover.svg</file>
+        <file>icons/1downarrow.svg</file>
+        <file>icons/wizard-selected.svg</file>
     </qresource>
 </RCC>

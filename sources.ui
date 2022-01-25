@@ -94,7 +94,7 @@
      <widget class="QWidget" name="tab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/fileopen.svg</normaloff>:/icons/fileopen.svg</iconset>
+        <normaloff>:/icons/folder-sound.svg</normaloff>:/icons/folder-sound.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Sound Dirs</string>
@@ -630,6 +630,10 @@ in the future, or register on the site to get your own key.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_3">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/transliteration.svg</normaloff>:/icons/transliteration.svg</iconset>
+      </attribute>
       <attribute name="title">
        <string>Transliteration</string>
       </attribute>

@@ -528,7 +528,7 @@ void WebSiteDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/internet.svg");
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/webdict.svg");
   dictionaryIconLoaded = true;
 }
 
