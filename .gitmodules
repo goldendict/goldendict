@@ -1,3 +1,0 @@
-[submodule "winlibs/lib/msvc"]
-	path = winlibs/lib/msvc
-	url = git://github.com/Tvangeste/goldendict-winlibs-prebuilt.git
