@@ -76,10 +76,10 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
-          asset_name: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
+          asset_name: ${{ steps.vars.outputs.appname }}
           tag: prerelease-${{steps.vars.outputs.release_date}}
           overwrite: true 
-          #release_name: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
+          release_name: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
           prerelease: true
           body: |
             release on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
