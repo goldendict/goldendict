@@ -92,8 +92,9 @@ void ExtLineEdit::updateMargins()
     Side realLeft = (leftToRight ? Left : Right);
     Side realRight = (leftToRight ? Right : Left);
 
-    int leftMargin = iconButtons[realLeft]->pixmap().width() + 8;
-    int rightMargin = iconButtons[realRight]->pixmap().width() + 8;
+    int widgetHeight=height();
+    int leftMargin = widgetHeight + 8;
+    int rightMargin = widgetHeight + 8;
 
     setTextMargins(
             (iconEnabled[realLeft] ? leftMargin : 0), 1,
@@ -162,7 +163,10 @@ void IconButton::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setRenderHint(QPainter::RenderHint::Antialiasing);
-    QRect pixmapRect = QRect(0, 0, m_pixmap.width(), m_pixmap.height());
+    painter.setRenderHint(QPainter::RenderHint::TextAntialiasing);
+    painter.setRenderHint(QPainter::RenderHint::SmoothPixmapTransform);
+    painter.setRenderHint(QPainter::RenderHint::LosslessImageRendering);
+    QRect pixmapRect = QRect(0, 0, height(), height());
     pixmapRect.moveCenter(rect().center());
 
     if (m_autohide)
