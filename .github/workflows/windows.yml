@@ -107,11 +107,14 @@ jobs:
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: prerelease-${{steps.vars.outputs.release_date}}
           overwrite: true 
-          release_name: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}
+          release_name: Ubuntu-Windows-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }} built on:${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
           prerelease: true
           body: |
             release on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
-            branch:${{ github.ref_name }}, commit:${{ steps.vars.outputs.sha_short }} 
-            windows built with: arch: qt5.15.2-msvc64  visual studio 2019
-            appimage built with : ubuntu-20.04
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   arch: qt5.15.2-msvc64  visual studio 2019
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            
             This is a prerelease version ,auto build by github action. use on your on risk:-)
