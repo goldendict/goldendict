@@ -865,7 +865,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/text2speech.svg</normaloff>:/icons/text2speech.svg</iconset>
+        <normaloff>:/icons/playsound_color.svg</normaloff>:/icons/playsound_color.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Audio</string>
