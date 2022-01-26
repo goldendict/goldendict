@@ -107,7 +107,7 @@ jobs:
           asset_name: ${{ steps.package.outputs.packageName }}.zip
           tag: prerelease-${{steps.vars.outputs.release_date}}
           overwrite: true 
-          release_name: Ubuntu-Windows-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }} built on:${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
+          release_name: Ubuntu-Windows-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }} built on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
           prerelease: true
           body: |
             release on date: ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
