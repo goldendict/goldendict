@@ -54,7 +54,8 @@ ScanPopup #translateLine[noResults="true"]
 }
 
 #navToolbar GroupComboBox::down-arrow {
-   image: url(:/icons/1downarrow.svg);
+    image: url(:/icons/1downarrow.svg);
+    max-height: 100%;
 }
 
 #navToolbar GroupComboBox::down-arrow:on { /* shift the arrow when popup is open */
