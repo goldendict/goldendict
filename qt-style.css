@@ -135,6 +135,7 @@ ScanPopup GroupComboBox::drop-down {
 
 ScanPopup GroupComboBox::down-arrow {
    image: url(:/icons/1downarrow.svg);
+  max-height: 100%;
 }
 
 ScanPopup GroupComboBox::down-arrow:on { /* shift the arrow when popup is open */
