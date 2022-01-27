@@ -1,52 +1,54 @@
-some icons taken from 
-https://github.com/elementary/icons GPLv3 
+issue: https://github.com/goldendict/goldendict/issues/1441
 
-lists:
-network.png
-star.png
-star_blue.png
-
-some icons taken from 
-https://github.com/zayronxio/Zafiro-icons GPLv3
-
-lists:
-error.png
-
-https://github.com/yeyushengfan258/Win11-icon-theme GPLv3
-lists:
-
-clear.png
-
-
-qt resources example
+http://tango.freedesktop.org/Tango_Desktop_Project GPLv3
 list:
-icons/print.png
-icons/programs.png
-
-
-http://tango.freedesktop.org/Tango_Desktop_Project
-list:
-internet.png
-home.png
-configure.png
-system-search.png
-fileopen.png
-addtab.png
-wizard.png
+internet.svg
+home.svg
+configure.svg
+system-search.svg
+fileopen.svg
+addtab.svg
+wizard.svg
+fulltext
+text2speech
+reload 
+icons/print.svg
+icons/programs.svg
+error
+star.svg
+star_blue.svg
+network.svg
 
 https://commons.wikimedia.org/wiki/GNOME_Desktop_icons GPLv3
 lists:
-windows-list.png
-interface.png
-closetab.png
-icon32_sdict.png https://commons.wikimedia.org/wiki/File:Accessories-dictionary.svg
-folder.png
-previous.png
-next.png
-reload.png
-icon32_zoomin.png
-icon32_zoomout.png
-icon32_zoombase.png
-hotkeys.png
-filesave.png
-playsound_color.png
+windows-list.svg
+interface.svg
+closetab.svg
+advanced
+folder.svg
+previous.svg
+next.svg
+reload.svg
+icon32_zoomin.svg
+icon32_zoomout.svg
+icon32_zoombase.svg
+hotkeys.svg
+filesave.svg
+playsound_color.svg
+webdict
+transliteration
+clear.svg
+
+https://commons.wikimedia.org/wiki/File:Accessories-dictionary.svg
+lists:
+icon32_sdict.svg 
+
+
+https://freesvg.org/pushpin-vector-image  public domain 
+lists:
+pushbin
+
+
+https://commons.wikimedia.org/wiki/File:Arrow_bottom_svg.svg  license:public domain
+lists:
+1downarrow
