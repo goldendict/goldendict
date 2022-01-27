@@ -257,7 +257,7 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
       result.fill( 0 ); // Black transparent
 
       QPainter painter( &result );
-
+      painter.setRenderHint(QPainter::RenderHint::Antialiasing);
       painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
                                  img.height() == max ? 0 : ( max - img.height() ) / 2 ),
                          img );

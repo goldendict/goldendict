@@ -593,7 +593,7 @@ QVariant FavoritesModel::data( QModelIndex const & index, int role ) const
   if( role == Qt::DecorationRole )
   {
     if( item->type() == TreeItem::Folder || item->type() == TreeItem::Root )
-      return QIcon( ":/icons/folder.png" );
+      return QIcon( ":/icons/folder.svg" );
 
     return QVariant();
   }

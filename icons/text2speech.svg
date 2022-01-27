@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="48px" width="48px">
+<defs>
+<path id="bp" d="m34 6l8.6 5-8.6 5z"/>
+<linearGradient id="dp" y2="14.21" gradientUnits="userSpaceOnUse" x2="34.6" y1="8.78" x1="34.56">
+<stop stop-color="#fff" offset="0"/>
+<stop stop-color="#fff" stop-opacity="0" offset="1"/>
+</linearGradient>
+<linearGradient id="ep" y2="12.78" gradientUnits="userSpaceOnUse" x2="35.84" y1="11.16" x1="35.57">
+<stop offset="0"/>
+<stop stop-color="#666" stop-opacity="0" offset="1"/>
+</linearGradient>
+<linearGradient id="cp" gradientUnits="userSpaceOnUse" x2="0" y2="10.87" y1="4.77">
+<stop stop-color="#676b61" offset="0"/>
+<stop offset="1"/>
+</linearGradient>
+<radialGradient id="ap" gradientUnits="userSpaceOnUse" cy="84.5" cx="110.4" gradientTransform="matrix(.019-.3.724.046-24.77 41.2)" r="12.55">
+<stop stop-color="#999" offset="0"/>
+<stop stop-color="#343" offset="1"/>
+</radialGradient>
+<radialGradient id="c" gradientUnits="userSpaceOnUse" cy="18.82" cx="10.1" r="1.21">
+<stop stop-color="#f0f0f0" offset="0"/>
+<stop stop-color="#9a9a9a" offset="1"/>
+</radialGradient>
+<radialGradient id="e" gradientUnits="userSpaceOnUse" cy="7.27" cx="8.14" gradientTransform="matrix(.968 0 0 1.033 3.35.65)" r="38.2">
+<stop stop-color="#fff" offset="0"/>
+<stop stop-color="#f8f8f8" offset="1"/>
+</radialGradient>
+<radialGradient id="b" gradientUnits="userSpaceOnUse" cy="42.1" cx="24.31" gradientTransform="matrix(1.076 0 0 .285-1.85 30.8)" r="15.82">
+<stop offset="0"/>
+<stop stop-opacity="0" offset="1"/>
+</radialGradient>
+<radialGradient id="g" gradientUnits="userSpaceOnUse" cy="3.76" cx="8.82" gradientTransform="matrix(.968 0 0 1.033 3.35.65)" r="37.75">
+<stop stop-color="#a3a3a3" offset="0"/>
+<stop stop-color="#4c4c4c" offset="1"/>
+</radialGradient>
+<radialGradient id="f" gradientUnits="userSpaceOnUse" cy="35.74" cx="33.97" gradientTransform="scale(.961 1.041)" r="86.7">
+<stop stop-color="#fafafa" offset="0"/>
+<stop stop-color="#bbb" offset="1"/>
+</radialGradient>
+<linearGradient id="h" y2="88.57" gradientUnits="userSpaceOnUse" x2="38.6" gradientTransform="matrix(.4958 0 0 .4958 19.55 -36.06)" y1="101.4" x1="38.56">
+<stop stop-color="#fff" offset="0"/>
+<stop offset="1"/>
+</linearGradient>
+<radialGradient id="i" gradientUnits="userSpaceOnUse" cy="36.42" cx="24.84" gradientTransform="matrix(.7031 0 0 .2557 19.44 8.589)" r="15.64">
+<stop offset="0"/>
+<stop stop-opacity="0" offset="1"/>
+</radialGradient>
+<linearGradient id="k" y2="31.3" gradientUnits="userSpaceOnUse" x2="-54.19" gradientTransform="matrix(1.016 0 0 1.034 91.97 -13.48)" y1="16.03" x1="-54.19">
+<stop stop-color="#fff" offset="0"/>
+<stop stop-color="#fff" stop-opacity=".2" offset="1"/>
+</linearGradient>
+<linearGradient id="j" y2="21.04" gradientUnits="userSpaceOnUse" x2="36.92" y1="9.596" x1="36.92">
+<stop stop-color="#fff" stop-opacity=".5020" offset="0"/>
+<stop stop-color="#999" stop-opacity=".5020" offset="1"/>
+</linearGradient>
+</defs>
+<ellipse opacity=".8" rx="17" ry="4.5" cy="42.8" cx="24.3" fill="url(#b)"/>
+<rect rx="1.2" height="41" width="34.88" stroke="url(#g)" y="3.65" x="6.6" fill="url(#f)"/>
+<g fill="none">
+<rect rx=".2" height="39" width="32.78" stroke="url(#e)" y="4.58" x="7.66"/>
+<path stroke="#000" d="m11.5 5.4v37.9" stroke-opacity=".02"/>
+<path stroke="#fff" d="m12.5 5v38" stroke-opacity=".2"/>
+</g>
+<g fill="#9b9b9b" fill-opacity=".55">
+<g id="a">
+<rect rx=".2" height="1" width="20" y="9" x="16"/>
+<rect rx=".2" height="1" width="20" y="11" x="16"/>
+<rect rx=".2" height="1" width="20" y="13" x="16"/>
+<rect rx=".2" height="1" width="20" y="15" x="16"/>
+</g>
+<rect rx=".2" height="1" width="9" y="25" x="16"/>
+<rect rx=".2" height="1" width="14" y="37" x="16"/>
+<use y="8" xlink:href="#a"/>
+<use y="20" xlink:href="#a"/>
+</g>
+<g id="d">
+<circle cy="18.69" cx="10.17" r=".82" fill="#fff"/>
+<circle cy="18.43" cx="9.82" r=".82" fill="url(#c)"/>
+</g>
+<use y="11.5" xlink:href="#d" fill="none"/>
+<ellipse opacity=".2" rx="11" ry="4" cy="18" cx="36.9" fill="url(#i)"/>
+<g stroke-linejoin="round" fill="none">
+<circle r="9" stroke="#204a87" cy="11" cx="36.9" stroke-width="2.2" fill="url(#j)"/>
+<use opacity=".2" stroke="url(#h)" xlink:href="#bp" stroke-width="2.5"/>
+<use xlink:href="#bp" stroke="url(#cp)" stroke-width="1.5"/>
+<circle opacity=".6" cx="36.9" stroke="url(#k)" cy="11" r="7.9"/>
+</g>
+<use xlink:href="#bp" stroke="url(#ap)" stroke-width=".5" fill="url(#ap)"/>
+<path opacity=".2" d="m33.76 13l6.43-0.53 2.49-1.41-1.2-0.71c-1.06 0.22-2.66 0.99-7.48 1.06" fill="url(#ep)"/>
+<use stroke-opacity=".62" xlink:href="#bp" stroke="url(#dp)" stroke-width=".5" fill="none"/>
+</svg>

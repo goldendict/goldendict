@@ -132,8 +132,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
 , helpWindow( 0 )
-, starIcon( ":/icons/star.png" )
-, blueStarIcon( ":/icons/star_blue.png" )
+, starIcon( ":/icons/star.svg" )
+, blueStarIcon( ":/icons/star_blue.svg" )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -180,9 +180,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar = addToolBar( tr( "&Navigation" ) );
   navToolbar->setObjectName( "navToolbar" );
 
-  navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
+  navBack = navToolbar->addAction( QIcon( ":/icons/previous.svg" ), tr( "Back" ) );
   navToolbar->widgetForAction( navBack )->setObjectName( "backButton" );
-  navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
+  navForward = navToolbar->addAction( QIcon( ":/icons/next.svg" ), tr( "Forward" ) );
   navToolbar->widgetForAction( navForward )->setObjectName( "forwardButton" );
 
   QWidget * translateBoxWidget = new QWidget( this );
@@ -207,7 +207,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( beforeScanPopupSeparator )->setObjectName( "beforeScanPopupSeparator" );
 
-  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
+  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.svg" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( enableScanPopup )->setObjectName( "scanPopupButton" );
@@ -234,17 +234,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // named separator (to be able to hide it via CSS)
   navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeZoom" );
 
-  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
+  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.svg" ), tr( "Zoom In" ) );
   zoomIn->setShortcuts( QList< QKeySequence >() <<
                        QKeySequence::ZoomIn <<
                        QKeySequence( "Ctrl+=" ) );
   navToolbar->widgetForAction( zoomIn )->setObjectName( "zoomInButton" );
 
-  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
+  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.svg" ), tr( "Zoom Out" ) );
   zoomOut->setShortcut( QKeySequence::ZoomOut );
   navToolbar->widgetForAction( zoomOut )->setObjectName( "zoomOutButton" );
 
-  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
+  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.svg" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
   navToolbar->widgetForAction( zoomBase )->setObjectName( "zoomBaseButton" );
 
@@ -365,13 +365,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.menuZoom->addSeparator();
 
-  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Words Zoom In" ) );
+  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.svg" ), tr( "Words Zoom In" ) );
   wordsZoomIn->setShortcuts( QList< QKeySequence >() <<
                             QKeySequence( "Alt++" ) <<
                             QKeySequence( "Alt+=" ) );
-  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Words Zoom Out" ) );
+  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.svg" ), tr( "Words Zoom Out" ) );
   wordsZoomOut->setShortcut( QKeySequence( "Alt+-" ) );
-  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Words Normal Size" ) );
+  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.svg" ), tr( "Words Normal Size" ) );
   wordsZoomBase->setShortcut( QKeySequence( "Alt+0" ) );
 
   connect( wordsZoomIn, SIGNAL(triggered()), this, SLOT(doWordsZoomIn()) );
@@ -418,7 +418,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
   closeCurrentTabAction.setText( tr("Close current tab") );
-  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab.png") );
+  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab-hover.svg") );
 
   connect( &closeCurrentTabAction, SIGNAL( triggered() ),
            this, SLOT( closeCurrentTab() ) );
@@ -624,7 +624,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab.setAutoRaise( true );
   addTab.setToolTip( tr( "New Tab"  ) );
   addTab.setFocusPolicy( Qt::NoFocus );
-  addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
+  addTab.setIcon( QIcon( ":/icons/addtab.svg" ) );
 
   ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
   ui.tabWidget->clear();
@@ -874,7 +874,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_MAC
   if( cfg.preferences.startWithScanPopupOn && !MacMouseOver::isAXAPIEnabled() )
       mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
-                                      QPixmap( ":/icons/error.png" ) );
+                                      QPixmap( ":/icons/error.svg" ) );
 #endif
 
   wasMaximized = isMaximized();
@@ -895,8 +895,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   if( layoutDirection() == Qt::RightToLeft )
   {
     // Adjust button icons for Right-To-Left layout
-    navBack->setIcon( QIcon( ":/icons/next.png" ) );
-    navForward->setIcon( QIcon( ":/icons/previous.png" ) );
+    navBack->setIcon( QIcon( ":/icons/next.svg" ) );
+    navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 }
 
@@ -1405,7 +1405,7 @@ void MainWindow::updateGroupList()
 
     g.name = tr( "All" );
     g.id = Instances::Group::AllGroupId;
-    g.icon = "folder.png";
+    g.icon = "folder.svg";
 
     groupInstances.push_back( g );
   }
@@ -1560,7 +1560,7 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
 
 void MainWindow::createTabList()
 {
-  tabListMenu->setIcon(QIcon(":/icons/windows-list.png"));
+  tabListMenu->setIcon(QIcon(":/icons/windows-list.svg"));
   connect(tabListMenu, SIGNAL(aboutToShow()), this, SLOT(fillWindowsMenu()));
   connect(tabListMenu, SIGNAL(triggered(QAction*)), this, SLOT(switchToWindow(QAction*)));
 
@@ -3227,11 +3227,15 @@ void MainWindow::scanEnableToggled( bool on )
 #ifdef Q_OS_MAC
       if( !MacMouseOver::isAXAPIEnabled() )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
-                                          QPixmap( ":/icons/error.png" ) );
+                                          QPixmap( ":/icons/error.svg" ) );
 #endif
+      enableScanPopup->setIcon(QIcon(":/icons/wizard-selected.svg"));
     }
     else
+    {
       scanPopup->disableScanning();
+      enableScanPopup->setIcon(QIcon(":/icons/wizard.svg"));
+    }
   }
 
   updateTrayIcon();
@@ -3962,7 +3966,7 @@ void MainWindow::on_exportHistory_triggered()
     }
     QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
     file.close();
-    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 // TODO: consider moving parts of this method into History class.
@@ -4028,7 +4032,7 @@ void MainWindow::on_importHistory_triggered()
         if( fileStream.status() >= QTextStream::ReadCorruptData )
         {
             errStr = QString ( tr( "Import error: invalid data in file" ) );
-            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
         }
         else
             mainStatusBar->showMessage( tr( "History import complete" ), 5000 );
@@ -4036,7 +4040,7 @@ void MainWindow::on_importHistory_triggered()
     }
     errStr = QString( tr( "Import error: " ) ) + file.errorString();
     file.close();
-    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_exportFavorites_triggered()
@@ -4077,7 +4081,7 @@ void MainWindow::on_exportFavorites_triggered()
   }
   QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_ExportFavoritesToList_triggered()
@@ -4126,7 +4130,7 @@ void MainWindow::on_ExportFavoritesToList_triggered()
   }
   QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_importFavorites_triggered()
@@ -4175,7 +4179,7 @@ void MainWindow::on_importFavorites_triggered()
     errStr = QString( tr( "Data parsing error" ) );
 
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::fillWordListFromHistory()

@@ -110,13 +110,14 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
   layout->setMargin(0);
   layout->addWidget(translate_line);
 
-  QPixmap image(":/icons/system-search.png");
-  translate_line->setButtonPixmap(ExtLineEdit::Left, image.scaled(18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  QPixmap image(":/icons/system-search.svg");
+  
+  translate_line->setButtonPixmap(ExtLineEdit::Left, image);
   // translate_line->setButtonToolTip(ExtLineEdit::Left, tr("Options"));
   translate_line->setButtonVisible(ExtLineEdit::Left, true);
   translate_line->setButtonFocusPolicy(ExtLineEdit::Left, Qt::ClickFocus);
 
-  QPixmap right(":/icons/1downarrow.png");
+  QPixmap right(":/icons/1downarrow.svg");
   translate_line->setButtonPixmap(ExtLineEdit::Right, right);
   translate_line->setButtonToolTip(ExtLineEdit::Right, tr("Drop-down"));
   translate_line->setButtonVisible(ExtLineEdit::Right, true);
