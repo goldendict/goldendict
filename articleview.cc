@@ -1276,8 +1276,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
           catch( std::exception & e )
           {
             emit statusBarMessage(
-                  tr( "ERROR: %1" ).arg( e.what() ),
-                  10000, QPixmap( ":/icons/error.png" ) );
+                tr("ERROR: %1").arg(e.what()),
+                10000, QPixmap(":/icons/error.svg"));
           }
         }
         for( unsigned x = 0; x < activeDicts->size(); ++x )
@@ -1312,8 +1312,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
           catch( std::exception & e )
           {
             emit statusBarMessage(
-                  tr( "ERROR: %1" ).arg( e.what() ),
-                  10000, QPixmap( ":/icons/error.png" ) );
+                tr("ERROR: %1").arg(e.what()),
+                10000, QPixmap(":/icons/error.svg"));
           }
         }
       }
@@ -1546,8 +1546,8 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
   if ( handler->isEmpty() ) // No requests were queued
   {
     emit statusBarMessage(
-          tr( "ERROR: %1" ).arg( tr( "The referenced resource doesn't exist." ) ),
-          10000, QPixmap( ":/icons/error.png" ) );
+        tr("ERROR: %1").arg(tr("The referenced resource doesn't exist.")),
+        10000, QPixmap(":/icons/error.svg"));
   }
 
   // Check already finished downloads
@@ -2083,15 +2083,15 @@ void ArticleView::resourceDownloadFinished()
   if ( resourceDownloadRequests.empty() )
   {
     emit statusBarMessage(
-          tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
-          10000, QPixmap( ":/icons/error.png" ) );
+        tr("WARNING: %1").arg(tr("The referenced resource failed to download.")),
+        10000, QPixmap(":/icons/error.svg"));
   }
 }
 
 void ArticleView::audioPlayerError( QString const & message )
 {
-  emit statusBarMessage( tr( "WARNING: Audio Player: %1" ).arg( message ),
-                         10000, QPixmap( ":/icons/error.png" ) );
+  emit statusBarMessage(tr("WARNING: Audio Player: %1").arg(message),
+                        10000, QPixmap(":/icons/error.svg"));
 }
 
 void ArticleView::pasteTriggered()
@@ -2815,8 +2815,8 @@ void ResourceToSaveHandler::downloadFinished()
           if ( file.error() )
           {
             emit statusBarMessage(
-                  tr( "ERROR: %1" ).arg( tr( "Resource saving error: " ) + file.errorString() ),
-                  10000, QPixmap( ":/icons/error.png" ) );
+                tr("ERROR: %1").arg(tr("Resource saving error: ") + file.errorString()),
+                10000, QPixmap(":/icons/error.svg"));
           }
         }
         alreadyDone = true;
@@ -2841,8 +2841,8 @@ void ResourceToSaveHandler::downloadFinished()
     if( !alreadyDone )
     {
       emit statusBarMessage(
-            tr( "WARNING: %1" ).arg( tr( "The referenced resource failed to download." ) ),
-            10000, QPixmap( ":/icons/error.png" ) );
+          tr("WARNING: %1").arg(tr("The referenced resource failed to download.")),
+          10000, QPixmap(":/icons/error.svg"));
     }
     emit done();
     deleteLater();

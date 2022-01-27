@@ -874,7 +874,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_MAC
   if( cfg.preferences.startWithScanPopupOn && !MacMouseOver::isAXAPIEnabled() )
       mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
-                                      QPixmap( ":/icons/error.png" ) );
+                                      QPixmap( ":/icons/error.svg" ) );
 #endif
 
   wasMaximized = isMaximized();
@@ -3227,7 +3227,7 @@ void MainWindow::scanEnableToggled( bool on )
 #ifdef Q_OS_MAC
       if( !MacMouseOver::isAXAPIEnabled() )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
-                                          QPixmap( ":/icons/error.png" ) );
+                                          QPixmap( ":/icons/error.svg" ) );
 #endif
       enableScanPopup->setIcon(QIcon(":/icons/wizard-selected.svg"));
     }
@@ -3965,7 +3965,7 @@ void MainWindow::on_exportHistory_triggered()
     }
     QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
     file.close();
-    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 // TODO: consider moving parts of this method into History class.
@@ -4031,7 +4031,7 @@ void MainWindow::on_importHistory_triggered()
         if( fileStream.status() >= QTextStream::ReadCorruptData )
         {
             errStr = QString ( tr( "Import error: invalid data in file" ) );
-            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
         }
         else
             mainStatusBar->showMessage( tr( "History import complete" ), 5000 );
@@ -4039,7 +4039,7 @@ void MainWindow::on_importHistory_triggered()
     }
     errStr = QString( tr( "Import error: " ) ) + file.errorString();
     file.close();
-    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_exportFavorites_triggered()
@@ -4080,7 +4080,7 @@ void MainWindow::on_exportFavorites_triggered()
   }
   QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_ExportFavoritesToList_triggered()
@@ -4129,7 +4129,7 @@ void MainWindow::on_ExportFavoritesToList_triggered()
   }
   QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_importFavorites_triggered()
@@ -4178,7 +4178,7 @@ void MainWindow::on_importFavorites_triggered()
     errStr = QString( tr( "Data parsing error" ) );
 
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::fillWordListFromHistory()
