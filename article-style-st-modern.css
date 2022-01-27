@@ -125,6 +125,7 @@ a:hover
   padding-right: -1em;
   padding-left: 0.3em;
   -webkit-box-ordinal-group: 2;
+  height: 1em;
 }
 
 .gdexpandicon, .gdexpandicon:hover, .gdcollapseicon, .gdcollapseicon:hover
