@@ -18,25 +18,25 @@ error
 star.svg
 star_blue.svg
 network.svg
-
-https://packages.debian.org/bullseye/gnome-icon-theme GPLv3
-lists:
-windows-list
-interface
-closetab
-advanced
-folder
-previous
-next
-reload
 icon32_zoomin
 icon32_zoomout
 icon32_zoombase
 hotkeys
+previous
+next
+advanced
+windows-list
 filesave
 playsound_color
+interface
 webdict
 transliteration
+closetab
+folder
+reload
+
+https://packages.debian.org/bullseye/gnome-icon-theme GPLv3
+lists:
 clear
 
 https://commons.wikimedia.org/wiki/File:Accessories-dictionary.svg
