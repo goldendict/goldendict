@@ -67,7 +67,7 @@ QTabBar::close-button {
   image: url(:/icons/closetab.svg)
 }
 QTabBar::close-button:hover {
-  image: url(:/icons/closetab-hover.svg)
+  image: url(:/icons/closetab-hover.png)
 }
 
 

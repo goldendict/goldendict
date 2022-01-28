@@ -18,26 +18,26 @@ error
 star.svg
 star_blue.svg
 network.svg
-
-https://commons.wikimedia.org/wiki/GNOME_Desktop_icons GPLv3
-lists:
-windows-list.svg
-interface.svg
-closetab.svg
+icon32_zoomin
+icon32_zoomout
+icon32_zoombase
+hotkeys
+previous
+next
 advanced
-folder.svg
-previous.svg
-next.svg
-reload.svg
-icon32_zoomin.svg
-icon32_zoomout.svg
-icon32_zoombase.svg
-hotkeys.svg
-filesave.svg
-playsound_color.svg
+windows-list
+filesave
+playsound_color
+interface
 webdict
 transliteration
-clear.svg
+closetab
+folder
+reload
+
+https://packages.debian.org/bullseye/gnome-icon-theme GPLv3
+lists:
+clear
 
 https://commons.wikimedia.org/wiki/File:Accessories-dictionary.svg
 lists:
