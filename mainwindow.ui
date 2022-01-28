@@ -456,7 +456,7 @@
   <action name="saveArticle">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normalon>:/icons/filesave.svg</normalon>:/icons/filesave.svg</iconset>
+     <normalon>:/icons/filesave.png</normalon>:/icons/filesave.png</iconset>
    </property>
    <property name="text">
     <string>&amp;Save Article</string>

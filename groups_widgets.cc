@@ -1032,7 +1032,7 @@ QuickFilterLine::QuickFilterLine( QWidget * parent ): ExtLineEdit( parent ), m_f
   setButtonToolTip(ExtLineEdit::Left, tr("Quick Search"));
   setButtonVisible(ExtLineEdit::Left, true);
 
-  QPixmap right(":/icons/clear.svg");
+  QPixmap right(":/icons/clear.png");
   setButtonPixmap(ExtLineEdit::Right, right);
   setButtonToolTip(ExtLineEdit::Right, tr("Clear Search"));
   setButtonVisible(ExtLineEdit::Right, true);

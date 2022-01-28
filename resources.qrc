@@ -63,13 +63,12 @@
         <file>icons/addtab.svg</file>
         <file>icons/book.svg</file>
         <file>icons/bookcase.svg</file>
-        <file>icons/clear.svg</file>
         <file>icons/closetab.svg</file>
         <file>icons/configure.svg</file>
         <file>icons/error.svg</file>
         <file>icons/fileopen.svg</file>
         <file>icons/folder-sound.svg</file>
-        <file>icons/filesave.svg</file>
+        <file>icons/filesave.png</file>
         <file>icons/folder.svg</file>
         <file>icons/folders.svg</file>
         <file>icons/home.svg</file>
@@ -99,7 +98,7 @@
         <file>icons/pushpin.svg</file>
         <file>icons/fulltext.svg</file>
         <file>icons/text2speech.svg</file>
-        <file>icons/closetab-hover.svg</file>
+        <file>icons/closetab-hover.png</file>
         <file>icons/1downarrow.svg</file>
         <file>icons/wizard-selected.svg</file>
     </qresource>
