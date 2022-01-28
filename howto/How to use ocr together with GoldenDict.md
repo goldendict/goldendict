@@ -29,12 +29,15 @@ without this configuration ,it will capture the last word of
 ## Use it
 place the cursor on the word (can be on the  image ),press 
 - Win+W to capture the first word.
+
 ![image](https://user-images.githubusercontent.com/105986/151481735-6c1c7fc1-715f-4f5c-a98c-7452099b9709.png)
 
 - Win+Q select rectangle.
 
 ![image](https://user-images.githubusercontent.com/105986/151489148-6fb09787-8d27-4c55-92bb-b385e23ed859.png)
+
 result:
+
 ![image](https://user-images.githubusercontent.com/105986/151489564-a70ce1f5-0101-4bb2-bc6c-020553d62cf1.png)
 
 
