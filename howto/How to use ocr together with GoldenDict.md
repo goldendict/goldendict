@@ -13,9 +13,9 @@ Capture2Text has offered Windows precompiled executable files.I think it would b
 after installation of both software.
 configure the Capture2Text ,see screenshot following
 ## configure external `Call Executable` path   (Windows for example)
-`path\GoldenDict.exe ${capture}`
+`path\GoldenDict.exe "${capture}"`
 
-![image](https://user-images.githubusercontent.com/105986/151481166-806c4866-601d-4223-b18c-5bc5d078607e.png)
+![image](https://user-images.githubusercontent.com/105986/151507994-97ab732d-686a-47b1-b950-3b2db076ef4c.png)
 
 ## configure hotkey
 I only left three of them .
