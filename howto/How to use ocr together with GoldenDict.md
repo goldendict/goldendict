@@ -6,8 +6,8 @@ with the help of another great tool [Capture2Text](https://sourceforge.net/proje
 
 # Note
 Capture2Text has offered Windows precompiled executable files.I think it would be easier and possible to make it work on Linux as some afforts have tried.
-[Capture2Text Linux Port](https://github.com/GSam/Capture2Text ),
-[another on nixos](https://github.com/sikmir/nur-packages/blob/7c876e3fb20160781207a8f652fb052647e6da0d/pkgs/misc/capture2text/default.nix)
+- [Capture2Text Linux Port](https://github.com/GSam/Capture2Text )
+- [another on nixos](https://github.com/sikmir/nur-packages/blob/7c876e3fb20160781207a8f652fb052647e6da0d/pkgs/misc/capture2text/default.nix) from [sikmir](https://github.com/goldendict/goldendict/issues/1445#issuecomment-1022972220)
 
 # Configuration 
 after installation of both software.
