@@ -38,7 +38,8 @@ place the cursor on the word (can be on the  image ),press
 
 result:
 
-![image](https://user-images.githubusercontent.com/105986/151489564-a70ce1f5-0101-4bb2-bc6c-020553d62cf1.png)
+![image](https://user-images.githubusercontent.com/105986/151489807-71231884-75bf-45e7-9bfa-b5242be1b189.png)
+
 
 
 
