@@ -282,10 +282,6 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
            this, SLOT( mouseHovered( QString const &, bool ) ) );
 
-#ifdef Q_OS_WIN32
-  connect( &MouseOver::instance(), SIGNAL( isGoldenDictWindow( HWND ) ),
-           this, SIGNAL( isGoldenDictWindow( HWND ) ) );
-#endif
 
   hideTimer.setSingleShot( true );
   hideTimer.setInterval( 400 );

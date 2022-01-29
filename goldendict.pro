@@ -482,15 +482,13 @@ SOURCES += folding.cc \
 
 win32 {
     FORMS   += texttospeechsource.ui
-    SOURCES += mouseover_win32/ThTypes.c \
-               wordbyauto.cc \
+    SOURCES += wordbyauto.cc \
                guids.c \
                x64.cc \
                speechclient_win.cc \
                texttospeechsource.cc \
                speechhlp.cc
-    HEADERS += mouseover_win32/ThTypes.h \
-               wordbyauto.hh \
+    HEADERS += wordbyauto.hh \
                uiauto.hh \
                x64.hh \
                texttospeechsource.hh \

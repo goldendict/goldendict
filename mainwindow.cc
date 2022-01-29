@@ -57,7 +57,6 @@
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
-#include "mouseover_win32/GDDataTranfer.h"
 #include "wstring.hh"
 #include "wstring_qt.hh"
 
@@ -884,10 +883,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #ifdef Q_OS_MAC
     LionSupport::addFullscreen(this);
   #endif
-#ifdef Q_OS_WIN32
-  gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
-  ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
-#endif
 
   ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
@@ -4830,14 +4825,6 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
   ArticleView * view = getCurrentArticleView();
   if( !view )
     return true;
-
-  LPGDDataStruct lpdata = ( LPGDDataStruct ) message->lParam;
-
-  QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
-
-  memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
-  str.truncate( lpdata->dwMaxLength - 1 );
-  str.toWCharArray( lpdata->cwData );
 
   *result = 1;
   return true;
