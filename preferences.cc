@@ -195,9 +195,6 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
   ui.ignoreOwnClipboardChanges->setChecked( p.ignoreOwnClipboardChanges );
   ui.scanToMainWindow->setChecked( p.scanToMainWindow );
-  ui.scanPopupUseUIAutomation->setChecked( p.scanPopupUseUIAutomation );
-  ui.scanPopupUseIAccessibleEx->setChecked( p.scanPopupUseIAccessibleEx );
-  ui.scanPopupUseGDMessage->setChecked( p.scanPopupUseGDMessage );
   ui.scanPopupUnpinnedWindowFlags->setCurrentIndex( p.scanPopupUnpinnedWindowFlags );
   ui.scanPopupUnpinnedBypassWMHint->setChecked( p.scanPopupUnpinnedBypassWMHint );
 
@@ -416,9 +413,6 @@ Config::Preferences Preferences::getPreferences()
 #ifdef HAVE_X11
   p.showScanFlag= ui.showScanFlag->isChecked();
 #endif
-  p.scanPopupUseUIAutomation = ui.scanPopupUseUIAutomation->isChecked();
-  p.scanPopupUseIAccessibleEx = ui.scanPopupUseIAccessibleEx->isChecked();
-  p.scanPopupUseGDMessage = ui.scanPopupUseGDMessage->isChecked();
   p.scanPopupUnpinnedWindowFlags = Config::spwfFromInt( ui.scanPopupUnpinnedWindowFlags->currentIndex() );
   p.scanPopupUnpinnedBypassWMHint = ui.scanPopupUnpinnedBypassWMHint->isChecked();
 
