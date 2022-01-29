@@ -274,7 +274,6 @@ Preferences::Preferences():
 {
 }
 
-#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 Chinese::Chinese():
   enable( false ),
   enableSCToTWConversion( true ),
@@ -282,7 +281,6 @@ Chinese::Chinese():
   enableTCToSCConversion( true )
 {
 }
-#endif
 
 Romaji::Romaji():
   enable( false ),

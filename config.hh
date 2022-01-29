@@ -464,7 +464,7 @@ struct Hunspell
 /// All the MediaWikis
 typedef QVector< MediaWiki > MediaWikis;
 
-#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+
 /// Chinese transliteration configuration
 struct Chinese
 {
@@ -486,7 +486,7 @@ struct Chinese
   { return ! operator == ( other ); }
 
 };
-#endif
+
 
 /// Romaji transliteration configuration
 struct Romaji
