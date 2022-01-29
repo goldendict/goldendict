@@ -1633,14 +1633,17 @@ bool ArticleView::hasSound()
 //use webengine javascript to playsound
 void ArticleView::playSound()
 {
-  QString variable = "   var link=gdAudioLinks[gdAudioLinks.current];           "
+  QString variable = " (function(){  var link=gdAudioLinks[gdAudioLinks.current];           "
     "   if(link==undefined){           "
     "       link=gdAudioLinks.first;           "
     "   }          "
-    "              "
-    "   var music = new Audio(link);    "
-    "   music.play();   ";
-  ui.definition->page()->runJavaScript(variable);
+    "    return link;})();         ";
+    // "   var music = new Audio(link);    "
+    // "   music.play();   ";
+  QString soundScript = runJavaScriptSync(ui.definition->page(), variable);
+  // ui.definition->page()->runJavaScript(variable);
+  if (!soundScript.isEmpty())
+    openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
 }
 
 // use eventloop to turn the async callback to sync execution.
