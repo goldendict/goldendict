@@ -1830,7 +1830,7 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   if (title!=nullptr && title.contains(":")) {
     //check if the title is url.
     QUrl url(title);
-    escaped = Utils::Url::queryItemValue(url,"word");
+    escaped = Qt4x5::Url::queryItemValue(url,"word");
   } else {
     escaped = title;
   }

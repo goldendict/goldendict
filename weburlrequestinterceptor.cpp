@@ -1,6 +1,6 @@
 #include "weburlrequestinterceptor.h"
 #include <QDebug>
-#include "utils.hh"
+#include "qt4x5.hh"
 
 WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
   :QWebEngineUrlRequestInterceptor(p)
