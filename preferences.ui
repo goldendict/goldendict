@@ -1439,52 +1439,6 @@ download page.</string>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_17">
          <item>
-          <widget class="QGroupBox" name="groupBox_ScanPopupTechnologies">
-           <property name="title">
-            <string>ScanPopup extra technologies</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_13">
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseIAccessibleEx">
-              <property name="toolTip">
-               <string>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use &amp;IAccessibleEx</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseUIAutomation">
-              <property name="toolTip">
-               <string>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use &amp;UIAutomation</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseGDMessage">
-              <property name="toolTip">
-               <string>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use &amp;GoldenDict message</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
           <widget class="QGroupBox" name="groupBox_ScanPopupWindowFlags">
            <property name="title">
             <string>ScanPopup unpinned window flags</string>

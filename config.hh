@@ -312,9 +312,6 @@ struct Preferences
   bool scanPopupAltMode; // When you press modifier shortly after the selection
   unsigned scanPopupAltModeSecs;
   bool ignoreOwnClipboardChanges;
-  bool scanPopupUseUIAutomation;
-  bool scanPopupUseIAccessibleEx;
-  bool scanPopupUseGDMessage;
   ScanPopupWindowFlags scanPopupUnpinnedWindowFlags;
   bool scanPopupUnpinnedBypassWMHint;
   bool scanToMainWindow;

@@ -233,9 +233,6 @@ Preferences::Preferences():
   scanPopupAltMode( false ),
   scanPopupAltModeSecs( 3 ),
   ignoreOwnClipboardChanges( false ),
-  scanPopupUseUIAutomation( true ),
-  scanPopupUseIAccessibleEx( true ),
-  scanPopupUseGDMessage( true ),
   scanPopupUnpinnedWindowFlags( SPWF_default ),
   scanPopupUnpinnedBypassWMHint( false ),
   scanToMainWindow( false ),
@@ -897,9 +894,6 @@ Class load() THROW_SPEC( exError )
 #ifdef HAVE_X11
     c.preferences.showScanFlag= ( preferences.namedItem( "showScanFlag" ).toElement().text() == "1" );
 #endif
-    c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
-    c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
-    c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
     c.preferences.scanPopupUnpinnedWindowFlags = spwfFromInt( preferences.namedItem( "scanPopupUnpinnedWindowFlags" ).toElement().text().toInt() );
     c.preferences.scanPopupUnpinnedBypassWMHint = ( preferences.namedItem( "scanPopupUnpinnedBypassWMHint" ).toElement().text() == "1" );
 
@@ -1804,18 +1798,6 @@ void save( Class const & c ) THROW_SPEC( exError )
     opt.appendChild( dd.createTextNode( c.preferences.showScanFlag? "1":"0" ) );
     preferences.appendChild( opt );
 #endif
-
-    opt = dd.createElement( "scanPopupUseUIAutomation" );
-    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseUIAutomation ? "1":"0" ) );
-    preferences.appendChild( opt );
-
-    opt = dd.createElement( "scanPopupUseIAccessibleEx" );
-    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseIAccessibleEx ? "1":"0" ) );
-    preferences.appendChild( opt );
-
-    opt = dd.createElement( "scanPopupUseGDMessage" );
-    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseGDMessage ? "1":"0" ) );
-    preferences.appendChild( opt );
 
     opt = dd.createElement( "scanPopupUnpinnedWindowFlags" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupUnpinnedWindowFlags ) ) );
