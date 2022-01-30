@@ -44,6 +44,9 @@ result:
 
 ## use Capture2Text on Linxu
 
+### download and build the capture2text
+https://github.com/xiaoyifang/Capture2Text
+
 ![2022-01-30 15-54-35屏幕截图](https://user-images.githubusercontent.com/105986/151691526-f28cc053-f6e0-4099-b677-f7a4657aa9fc.png)
 
 ### settings
