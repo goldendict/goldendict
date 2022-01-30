@@ -6,14 +6,12 @@
 
 #include <QtNetwork>
 
-#if QT_VERSION >= 0x050300  // Qt 5.3+
 #include <QSet>
 #include <QMap>
 #include <QPair>
 #include <QWebEngineUrlSchemeHandler>
 #include <QWebEngineUrlRequestJob>
 #include <QNetworkAccessManager>
-#endif
 
 #include "dictionary.hh"
 #include "article_maker.hh"
