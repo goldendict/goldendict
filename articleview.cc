@@ -183,7 +183,7 @@ QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& var
     //QObject::connect(this, SIGNAL(notifyJavascriptFinished()), &loop, SLOT(quit()));
     QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
     QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-    frame->runJavaScript(variable, [loop,&result](const QVariant &v)
+    frame->runJavaScript(variable, [=,&result](const QVariant &v)
     {
         if(loop->isRunning()){
             if(v.isValid())
@@ -771,7 +771,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
 void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
 {
-    qDebug("updateCurrentArticleFromCurrentFrame");
+
 }
 
 void ArticleView::saveHistoryUserData()
@@ -988,41 +988,36 @@ QString ArticleView::getMutedForGroup( unsigned group )
   return QString();
 }
 
-QStringList ArticleView::getMutedDictionaries(unsigned group)
-{
-	if (dictionaryBarToggled && dictionaryBarToggled->isChecked())
-	{
-		// Dictionary bar is active -- mute the muted dictionaries
-		Instances::Group const* groupInstance = groups.findGroup(group);
+QStringList ArticleView::getMutedDictionaries(unsigned group) {
+  if (dictionaryBarToggled && dictionaryBarToggled->isChecked()) {
+    // Dictionary bar is active -- mute the muted dictionaries
+    Instances::Group const *groupInstance = groups.findGroup(group);
 
 		// Find muted dictionaries for current group
 		Config::Group const* grp = cfg.getGroup(group);
 		Config::MutedDictionaries const* mutedDictionaries;
-		if (group == Instances::Group::AllGroupId||!grp)
+        if (group == Instances::Group::AllGroupId)
 			mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
 		else
 			mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
 		if (!mutedDictionaries)
 			return QStringList();
 
-		QStringList mutedDicts;
+    QStringList mutedDicts;
 
-		if (groupInstance)
-		{
-			for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x)
-			{
-				QString id = QString::fromStdString(
-					groupInstance->dictionaries[x]->getId());
+    if (groupInstance) {
+      for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x) {
+        QString id = QString::fromStdString(groupInstance->dictionaries[x]->getId());
 
-				if (mutedDictionaries->contains(id))
-					mutedDicts.append(id);
-			}
-		}
+        if (mutedDictionaries->contains(id))
+          mutedDicts.append(id);
+      }
+    }
 
-        return mutedDicts;
-	}
+    return mutedDicts;
+  }
 
-	return QStringList();
+  return QStringList();
 }
 
 void ArticleView::linkHovered ( const QString & link )
