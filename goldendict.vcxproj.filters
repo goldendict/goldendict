@@ -1434,9 +1434,6 @@
     <QtUICCompile Include="groups.ui">
       <Filter>Forms</Filter>
     </QtUICCompile>
-    <QtUICCompile Include="groupselectorwidget.ui">
-      <Filter>Forms</Filter>
-    </QtUICCompile>
     <QtUICCompile Include="initializing.ui">
       <Filter>Forms</Filter>
     </QtUICCompile>
@@ -1455,7 +1452,16 @@
     <QtUICCompile Include="sources.ui">
       <Filter>Forms</Filter>
     </QtUICCompile>
+    <QtUICCompile Include="dictheadwords.ui">
+      <Filter>Forms</Filter>
+    </QtUICCompile>
+    <QtUICCompile Include="authentication.ui">
+      <Filter>Forms</Filter>
+    </QtUICCompile>
     <QtUICCompile Include="texttospeechsource.ui">
+      <Filter>Forms</Filter>
+    </QtUICCompile>
+    <QtUICCompile Include="fulltextsearch.ui">
       <Filter>Forms</Filter>
     </QtUICCompile>
   </ItemGroup>

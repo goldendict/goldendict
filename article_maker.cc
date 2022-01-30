@@ -675,6 +675,7 @@ void ArticleRequest::bodyFinished()
           }
         }
 
+      	//todo ,gdArticleContents应该可以用类变量保存。
         string jsVal = Html::escapeForJavaScript( dictId );
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "

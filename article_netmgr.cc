@@ -16,7 +16,7 @@
 
 using std::string;
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
+#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500 // Qt 5.3+
 
   // SecurityWhiteList
 
@@ -255,7 +255,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
+#if QT_VERSION >= 0x050300 && QT_VERSION<=0x050500 // Qt 5.3+
     // Workaround of same-origin policy
     if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
         && req.hasRawHeader( "Referer" ) )
@@ -360,7 +360,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
+#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500 // Qt 5.3+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else

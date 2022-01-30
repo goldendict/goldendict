@@ -7,7 +7,7 @@
 #include <QtNetwork>
 
 #if QT_VERSION >= 0x050300  // Qt 5.3+
-#include <QWebSecurityOrigin>
+//#include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
 #include <QPair>
@@ -21,28 +21,26 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
-#if QT_VERSION >= 0x050300  // Qt 5.3+
+#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500 // Qt 5.3+
 
 // White lists for QWebSecurityOrigin
 struct SecurityWhiteList
 {
-  QWebSecurityOrigin * origin;
+  //QWebSecurityOrigin * origin;
   QString originUri;
   QSet< QPair< QString, QString > > hostsToAccess;
 
-  SecurityWhiteList() :
-    origin( 0 )
+  SecurityWhiteList()
   {}
 
   ~SecurityWhiteList()
   { swlDelete(); }
 
-  SecurityWhiteList( SecurityWhiteList const & swl ) :
-    origin( 0 )
+  SecurityWhiteList( SecurityWhiteList const & swl )
   { swlCopy( swl ); }
 
   SecurityWhiteList & operator=( SecurityWhiteList const & swl );
-  QWebSecurityOrigin * setOrigin( QUrl const & url );
+  //QWebSecurityOrigin * setOrigin( QUrl const & url );
 
 private:
   void swlCopy( SecurityWhiteList const & swl );
@@ -128,7 +126,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= 0x050300  // Qt 5.3+
+#if QT_VERSION >= 0x050300 && QT_VERSION <= 0x050500  // Qt 5.3+
   Origins allOrigins;
 #endif
 public:

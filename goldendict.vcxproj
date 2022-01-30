@@ -41,7 +41,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>release\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -51,7 +51,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>release\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -61,7 +61,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -70,7 +70,7 @@
     <PrimaryOutput>GoldenDict1</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -79,7 +79,7 @@
     <PrimaryOutput>GoldenDict1</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|Win32'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -88,7 +88,7 @@
     <PrimaryOutput>GoldenDict1</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Qt4|x64'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -97,7 +97,7 @@
     <PrimaryOutput>GoldenDict1</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|Win32'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -107,7 +107,7 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Qt4|x64'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v142</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>Unicode</CharacterSet>
@@ -198,7 +198,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKitWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQuick";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimediaWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtOpenGL";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtPrintSupport";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSvg";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKit";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimedia";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSensors";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtNetwork";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtXml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtGui";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtANGLE";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"D:\Qt\5.15.2\msvc2019_64\include";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKitWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtQuick";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL";"D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport";"D:\Qt\5.15.2\msvc2019_64\include\QtSvg";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKit";"D:\Qt\5.15.2\msvc2019_64\include\QtQml";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia";"D:\Qt\5.15.2\msvc2019_64\include\QtWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtSensors";"D:\Qt\5.15.2\msvc2019_64\include\QtNetwork";"D:\Qt\5.15.2\msvc2019_64\include\QtXml";"D:\Qt\5.15.2\msvc2019_64\include\QtGui";"D:\Qt\5.15.2\msvc2019_64\include\QtANGLE";"D:\Qt\5.15.2\msvc2019_64\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -257,7 +257,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKitWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQuick";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimediaWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtOpenGL";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtPrintSupport";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSvg";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKit";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimedia";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSensors";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtNetwork";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtXml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtGui";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtANGLE";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"D:\Qt\5.15.2\msvc2019_64\include";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKitWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtQuick";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL";"D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport";"D:\Qt\5.15.2\msvc2019_64\include\QtSvg";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKit";"D:\Qt\5.15.2\msvc2019_64\include\QtQml";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia";"D:\Qt\5.15.2\msvc2019_64\include\QtWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtSensors";"D:\Qt\5.15.2\msvc2019_64\include\QtNetwork";"D:\Qt\5.15.2\msvc2019_64\include\QtXml";"D:\Qt\5.15.2\msvc2019_64\include\QtGui";"D:\Qt\5.15.2\msvc2019_64\include\QtANGLE";"D:\Qt\5.15.2\msvc2019_64\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -316,13 +316,13 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKitWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQuick";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimediaWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtOpenGL";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtPrintSupport";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSvg";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKit";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimedia";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSensors";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtNetwork";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtXml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtGui";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtANGLE";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;winlibs\include;qtsingleapplication\src;D:\Qt\5.15.2\msvc2019_64\include;D:\Qt\5.15.2\msvc2019_64\include\QtWebEngineWidgets;D:\Qt\5.15.2\msvc2019_64\include\QtQuick;D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets;D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL;D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport;D:\Qt\5.15.2\msvc2019_64\include\QtSvg;D:\Qt\5.15.2\msvc2019_64\include\QtWebEngine;D:\Qt\5.15.2\msvc2019_64\include\QtQml;D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia;D:\Qt\5.15.2\msvc2019_64\include\QtWidgets;D:\Qt\5.15.2\msvc2019_64\include\QtSensors;D:\Qt\5.15.2\msvc2019_64\include\QtNetwork;D:\Qt\5.15.2\msvc2019_64\include\QtXml;D:\Qt\5.15.2\msvc2019_64\include\QtGui;D:\Qt\5.15.2\msvc2019_64\include\QtANGLE;D:\Qt\5.15.2\msvc2019_64\include\QtCore;build;..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>__LZO_EXPORT1XXXX#__declspec(dllimport);_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;DISABLE_INTERNAL_PLAYER;__WIN32;NOMINMAX;HUNSPELL_STATIC;USING_STATIC_LIBICONV;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__LZO_EXPORT1XXXX#__declspec(dllimport);_CONSOLE;UNICODE;WIN32;PROGRAM_VERSION="1.5.0+git";QT_WEBKITWIDGETS_LIB;QT_QUICK_LIB;QT_MULTIMEDIAWIDGETS_LIB;QT_OPENGL_LIB;QT_PRINTSUPPORT_LIB;QT_SVG_LIB;QT_WEBKIT_LIB;QT_QML_LIB;QT_MULTIMEDIA_LIB;QT_WIDGETS_LIB;QT_SENSORS_LIB;QT_NETWORK_LIB;QT_XML_LIB;QT_GUI_LIB;QT_CORE_LIB;QT_OPENGL_ES_2;QT_OPENGL_ES_2_ANGLE;DISABLE_INTERNAL_PLAYER;__WIN32;NOMINMAX;HUNSPELL_STATIC;USING_STATIC_LIBICONV;_CRT_SECURE_NO_WARNINGS;Q_OS_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessToFile>false</PreprocessToFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -376,7 +376,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKitWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQuick";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimediaWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtOpenGL";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtPrintSupport";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSvg";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWebKit";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtQml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtMultimedia";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtWidgets";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtSensors";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtNetwork";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtXml";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtGui";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtANGLE";"..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>".";"winlibs\include";"qtsingleapplication\src";"D:\Qt\5.15.2\msvc2019_64\include";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKitWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtQuick";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimediaWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtOpenGL";"D:\Qt\5.15.2\msvc2019_64\include\QtPrintSupport";"D:\Qt\5.15.2\msvc2019_64\include\QtSvg";"D:\Qt\5.15.2\msvc2019_64\include\QtWebKit";"D:\Qt\5.15.2\msvc2019_64\include\QtQml";"D:\Qt\5.15.2\msvc2019_64\include\QtMultimedia";"D:\Qt\5.15.2\msvc2019_64\include\QtWidgets";"D:\Qt\5.15.2\msvc2019_64\include\QtSensors";"D:\Qt\5.15.2\msvc2019_64\include\QtNetwork";"D:\Qt\5.15.2\msvc2019_64\include\QtXml";"D:\Qt\5.15.2\msvc2019_64\include\QtGui";"D:\Qt\5.15.2\msvc2019_64\include\QtANGLE";"D:\Qt\5.15.2\msvc2019_64\include\QtCore";"build";"build";..\..\Qt\Qt5.1.0-msvc2012\5.1.0\msvc2012\mkspecs\win32-msvc2012;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <BrowseInformation>false</BrowseInformation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -965,7 +965,7 @@
     <QtTranslate Include="locale\sk_SK.ts" />
     <QtTranslate Include="locale\sq_AL.ts" />
     <QtTranslate Include="locale\sr_SR.ts" />
-	<QtTranslate Include="locale\sv_SE.ts" />
+    <QtTranslate Include="locale\sv_SE.ts" />
     <QtTranslate Include="locale\tg_TJ.ts" />
     <QtTranslate Include="locale\tk_TM.ts" />
     <QtTranslate Include="locale\tr_TR.ts" />
@@ -983,13 +983,15 @@
     <QtUICCompile Include="dictinfo.ui" />
     <QtUICCompile Include="editdictionaries.ui" />
     <QtUICCompile Include="groups.ui" />
-    <QtUICCompile Include="groupselectorwidget.ui" />
     <QtUICCompile Include="initializing.ui" />
     <QtUICCompile Include="mainwindow.ui" />
-    <QtUICCompile Include="orderandprops.ui" />
+    <QtUICCompile Include="dictheadwords.ui" />
     <QtUICCompile Include="preferences.ui" />
     <QtUICCompile Include="scanpopup.ui" />
     <QtUICCompile Include="sources.ui" />
+    <QtUICCompile Include="orderandprops.ui" />
+    <QtUICCompile Include="authentication.ui" />
+    <QtUICCompile Include="fulltextsearch.ui" />
     <QtUICCompile Include="texttospeechsource.ui" />
   </ItemGroup>
   <ItemGroup>

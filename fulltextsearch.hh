@@ -26,7 +26,7 @@ enum {
   MaxDictionarySizeForFastSearch = 150000,
 
   // Maxumum match length for highlight search results
-  // (QWebPage::findText() crashes on too long strings)
+  // (QWebEnginePage::findText() crashes on too long strings)
   MaxMatchLengthForHighlightResults = 500
 };
 

@@ -4,20 +4,20 @@
 #ifndef __ARTICLEWEBVIEW_HH_INCLUDED__
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
-#include <QWebView>
+#include <QWebEngineView>
 #include "config.hh"
 
 class ArticleInspector;
 
-/// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
+/// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
 ///    to the view's current state. This is used to open links in new tabs when
 ///    they are clicked with middle button. There's also an added possibility to
 ///    get double-click events after the fact with the doubleClicked() signal.
 /// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
-///    use triggerPageAction( QWebPage::InspectElement ) instead.
-class ArticleWebView: public QWebView
+///    use triggerPageAction( QWebEnginePage::InspectElement ) instead.
+class ArticleWebView: public QWebEngineView
 {
   Q_OBJECT
 
@@ -33,7 +33,7 @@ public:
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
-  void triggerPageAction( QWebPage::WebAction action, bool checked = false );
+  void triggerPageAction( QWebEnginePage::WebAction action, bool checked = false );
 
 signals:
 
