@@ -53,6 +53,7 @@ https://github.com/xiaoyifang/Capture2Text
 
 ![2022-01-30 15-54-35屏幕截图1](https://user-images.githubusercontent.com/105986/151691583-eda3e059-a77f-4476-a5a5-18d34463005e.png)
 
+![image](https://user-images.githubusercontent.com/105986/151694194-7f0048fc-5649-46b3-940f-d4d5d10968b7.png)
 
 ### start capture
 
