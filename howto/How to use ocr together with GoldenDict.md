@@ -42,6 +42,24 @@ result:
 
 
 
+## use Capture2Text on Linxu
+
+![2022-01-30 15-54-35屏幕截图](https://user-images.githubusercontent.com/105986/151691526-f28cc053-f6e0-4099-b677-f7a4657aa9fc.png)
+
+### settings
+
+![2022-01-30 15-54-35屏幕截图1](https://user-images.githubusercontent.com/105986/151691583-eda3e059-a77f-4476-a5a5-18d34463005e.png)
+
+
+### start capture
+
+`Ctrl+Shift+Q`
+
+![image](https://user-images.githubusercontent.com/105986/151691692-955caf26-e828-4ffe-a630-b17b66b8a955.png)
+
+
+### end capture
+press `Ctrl+Shift+Q` again.
 
 
 
