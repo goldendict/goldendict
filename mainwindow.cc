@@ -286,7 +286,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   menuButton = new QToolButton( navToolbar );
   menuButton->setPopupMode( QToolButton::InstantPopup );
   menuButton->setMenu( buttonMenu );
-  menuButton->setIcon( QIcon (":/icons/menu_button.png") );
+  menuButton->setIcon( QIcon (":/icons/menu_button.svg") );
   menuButton->addAction( ui.menuOptions );
   menuButton->setToolTip( tr( "Menu Button" ) );
   menuButton->setObjectName( "menuButton" );

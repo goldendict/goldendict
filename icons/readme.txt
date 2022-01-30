@@ -34,6 +34,7 @@ transliteration
 closetab
 folder
 reload
+menu.svg
 
 https://packages.debian.org/bullseye/gnome-icon-theme GPLv3
 lists:
