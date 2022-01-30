@@ -41,6 +41,9 @@ class ArticleView: public QFrame
   QString articleToJump;
   QString rangeVarName;
 
+  //used to hold the F12 inspect source view.
+  QWebEngineView *inspectView = nullptr;
+
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
   /// a multitude of requests.
@@ -373,8 +376,7 @@ private:
 
   QStringList getMutedDictionaries(unsigned group);
 
-protected:
-
+  protected:
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
 
