@@ -1638,8 +1638,7 @@ void ArticleView::playSound()
     "       link=gdAudioLinks.first;           "
     "   }          "
     "    return link;})();         ";
-    // "   var music = new Audio(link);    "
-    // "   music.play();   ";
+
   QString soundScript = runJavaScriptSync(ui.definition->page(), variable);
   // ui.definition->page()->runJavaScript(variable);
   if (!soundScript.isEmpty())
