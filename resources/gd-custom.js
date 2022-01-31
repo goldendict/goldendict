@@ -43,12 +43,14 @@ function playSound(sound) {
     a.play();
 }
 
-function emitClickedEvent(link){
-    try{
+function emitClickedEvent(link) {
+    try {
         articleview.linkClickedInHtml(link);
-    }catch(error)
-    {
+    } catch (error) {
         console.error(error);
     }
+}
 
+function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
 }

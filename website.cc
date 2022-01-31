@@ -389,7 +389,7 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                       "\" onmouseover=\"processIframeMouseOver('gdexpandframe-" + getId() + "');\" "
                       "onmouseout=\"processIframeMouseOut();\" "
                       "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "
-                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\" "
+                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\" onload=\"resizeIframe(this)\""
                       "style=\"overflow:visible; width:100%; display:block;\">"
                       "</iframe>";
 
