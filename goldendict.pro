@@ -74,17 +74,6 @@ win32 {
         Debug: LIBS+= -lhunspelld
         Release: LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
-    } else {
-        LIBS += -L$${PWD}/winlibs/lib
-
-        !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-
-        isEmpty(HUNSPELL_LIB) {
-          LIBS += -lhunspell-1.6.1
-        } else {
-          LIBS += -l$$HUNSPELL_LIB
-        }
-        QMAKE_CXXFLAGS += -Wextra -Wempty-body
     }
 
     LIBS += -liconv \
