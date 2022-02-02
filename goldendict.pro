@@ -97,10 +97,10 @@ win32 {
         -logg
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
-            -lswresample-gd \
-            -lavutil-gd \
-            -lavformat-gd \
-            -lavcodec-gd
+            -lswresample \
+            -lavutil \
+            -lavformat \
+            -lavcodec
     }
 
 
