@@ -51,15 +51,6 @@ jobs:
         with:
           fetch-depth: 1
       # msvc编译
-
-      # - name: build singleapplication
-      #   shell: cmd
-      #   run: |
-      #     call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
-      #     cd qtsingleapplication
-      #     qmake
-      #     nmake
-      #     tree /f
       - name: msvc-build goldendict
         id: build
         shell: cmd
@@ -84,7 +75,7 @@ jobs:
       - name: package
         id: package      
         env:
-          archiveName: ${{ matrix.qt_arch }}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
+          archiveName: ${env:targetName}-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
           msvcArch: ${{ matrix.msvc_arch }}
         shell: pwsh
         run: |
