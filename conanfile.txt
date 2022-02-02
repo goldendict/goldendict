@@ -1,0 +1,11 @@
+[requires]
+ffmpeg/4.4
+
+[options]
+ffmpeg:shared=True
+
+[generators]
+qmake
+[imports]
+bin,*.dll->./lib/
+lib,*.lib -> ./lib/
