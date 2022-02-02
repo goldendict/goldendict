@@ -2417,14 +2417,17 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 bool ArticleView::findText(QString& text, const QWebEnginePage::FindFlags& f)
 {
   bool r;
-  //turn async to sync invoke.
-  QEventLoop loop;
+  // turn async to sync invoke.
+  QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
+  QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
   ui.definition->findText(text, f, [&](bool result)
                           {
-                            r = result;
-                            loop.quit();
-                          });
-  loop.exec();
+                            if(loop->isRunning()){
+                              r = result;
+                              loop->quit();
+                            } });
+
+  loop->exec();
   return r;
 }
 
@@ -2676,13 +2679,15 @@ void ArticleView::highlightFTSResults()
 
 QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
     QString planText;
-    QEventLoop loop;
-    page->toPlainText([&](const QString & result){
-      planText = result;
-      loop.quit();
-    });
-
-    loop.exec();
+    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
+    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
+    page->toPlainText([&](const QString &result)
+                      {
+                        if(loop->isRunning()){
+                          planText = result;
+                          loop->quit();
+                        } });
+    loop->exec();
     return planText;
 }
 

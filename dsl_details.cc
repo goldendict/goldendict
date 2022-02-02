@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include <wctype.h>
+#include <algorithm>
 
 namespace Dsl {
 namespace Details {
@@ -1306,7 +1307,9 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           else
           {
             if( !inside_recurse )
-              result->merge( expanded );
+            {
+                result->splice(result->end(),expanded);
+            }
             return;
           }
         }
