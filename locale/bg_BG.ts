@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<TS version="2.1" language="bg_BG">
 <context>
     <name>About</name>
     <message>
@@ -10,10 +10,6 @@
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
         <translation>Речник GoldenDict, версия </translation>
-    </message>
-    <message>
-        <source>#.#</source>
-        <translation type="obsolete">#.#</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
@@ -121,10 +117,6 @@
 <context>
     <name>ArticleView</name>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Даденият ресурс не съществува.</translation>
     </message>
@@ -151,10 +143,6 @@
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Търсене на &quot;%1&quot; в %2 в нов &amp;подпрозорец</translation>
-    </message>
-    <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">Неуспех при пускането програма за възпроизвеждане на файл: %1</translation>
     </message>
     <message>
         <source>Failed to create temporary file.</source>
@@ -203,14 +191,6 @@
     <message>
         <source>Open Link in &amp;External Browser</source>
         <translation>Отваряне на връзката във &amp;външен уеб четец</translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Възпроизвеждане на не-WAV файл</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">За да включите възпрозвеждането на файлове, различни от WAV, отидете в Редактиране|Настройки, изберете подпрозореца Звук и изберете &quot;Възпроизвеждане чрез DirectShow&quot;.</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
@@ -265,10 +245,6 @@
         <translation>Запиши звук</translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Звукови файлове (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Все файлы (*.*)</translation>
-    </message>
-    <message>
         <source>Save image</source>
         <translation>Запиши изображение</translation>
     </message>
@@ -311,6 +287,10 @@
     <message>
         <source>WARNING: Audio Player: %1</source>
         <translation>ПРЕДУПРЕЖДЕНИЕ: Аудио-плеер: %1</translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -690,10 +670,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Лента Речник</translation>
-    </message>
-    <message>
         <source>Edit this group</source>
         <translation>Редактиране на тази група</translation>
     </message>
@@ -765,13 +741,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Без</translation>
-    </message>
-</context>
-<context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
@@ -828,13 +797,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>None</source>
         <translation>Няма</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Без</translation>
     </message>
 </context>
 <context>
@@ -972,13 +934,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Choose a Group (Alt+G)</source>
         <translation>Избор на група (Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">Търсене в</translation>
     </message>
 </context>
 <context>
@@ -1167,14 +1122,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Spelling suggestions: </source>
         <translation>Варианти за проверка на правописа: </translation>
-    </message>
-    <message>
-        <source>Dzongkha</source>
-        <translation type="obsolete"> (Бутан)</translation>
-    </message>
-    <message>
-        <source>Sichuan Yi</source>
-        <translation type="obsolete"> И</translation>
     </message>
     <message>
         <source>%1 Morphology</source>
@@ -2035,10 +1982,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Navigation</source>
-        <translation type="obsolete">Навигация</translation>
-    </message>
-    <message>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
@@ -2081,10 +2024,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Save Article As</source>
         <translation>Запазване на статията като</translation>
-    </message>
-    <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Файлове Html (*.html *.htm)</translation>
     </message>
     <message>
         <source>Error</source>
@@ -2147,14 +2086,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>(без име)</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">Внимание: %1</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
         <source>Welcome!</source>
         <translation>Добре дошли!</translation>
     </message>
@@ -2177,10 +2108,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>F2</source>
         <translation>F2</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">&amp;Групи...</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...</source>
@@ -2255,24 +2182,8 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Настройки на страницата</translation>
     </message>
     <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">Мостра на страница</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Повторно сканиране на файловете</translation>
-    </message>
-    <message>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
-    </message>
-    <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">Панел Търсене</translation>
-    </message>
-    <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Показване на имена в лентата Речник</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -2667,10 +2578,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Подредба на речниците:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Неактивни (изключени) речници:</translation>
     </message>
@@ -2811,10 +2718,6 @@ the application.</source>
         <translation>Пускане</translation>
     </message>
     <message>
-        <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation type="obsolete">Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
-    </message>
-    <message>
         <source>Start with system</source>
         <translation>Автоматично стартиране</translation>
     </message>
@@ -2859,12 +2762,6 @@ off from main window or tray icon.</source>
     <message>
         <source>Enable scan popup functionality</source>
         <translation>Включване на изскачащ прозорец</translation>
-    </message>
-    <message>
-        <source>Chooses whether the scan popup mode is on by default nor not. If checked,
-the program would always start with the scan popup active.</source>
-        <translation type="obsolete">Избира дали изскачащият прозорец да е включен поначало или не. Ако е
-включен, програмата винаги ще се стартира с активен изскачащ прозорец.</translation>
     </message>
     <message>
         <source>Start with scan popup turned on</source>
@@ -2961,16 +2858,6 @@ in the pressed state when the word selection changes.</source>
         <translation>Win/Meta</translation>
     </message>
     <message>
-        <source>Normally, in order to activate a popup you have to
-maintain the chosen keys pressed while you select
-a word. With this enabled, the chosen keys may also
-be pressed shorty after the selection is done.</source>
-        <translation type="obsolete">Обикновено, за да активирате изскачащ прозорец трябва да
-задържите избраните клавиши докато избирате дума.
-Когато това е включено, избраните клавиши могат да бъдат
-натиснати и малко след като думата е избрана.</translation>
-    </message>
-    <message>
         <source>Keys may also be pressed afterwards, within</source>
         <translation>Клавишите могат натиснати и по-късно, в рамките на</translation>
     </message>
@@ -2997,10 +2884,6 @@ seconds, which is specified here.</source>
     <message>
         <source>Auto-pronounce words in scan popup</source>
         <translation>Автоматично произнасяне на думите в изскачащия прозорец</translation>
-    </message>
-    <message>
-        <source>Program to play audio files:</source>
-        <translation type="obsolete">Програма да възпроизвеждане на звуковите файлове:</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -3054,14 +2937,6 @@ download page.</source>
     <message>
         <source>System default</source>
         <translation>Системен</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="obsolete">Английски</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Руски</translation>
     </message>
     <message>
         <source>Default</source>
@@ -3132,16 +3007,8 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <translation>Възпроизвеждане</translation>
     </message>
     <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Възпроизвеждане чрез Phonon</translation>
-    </message>
-    <message>
         <source>Use external program:</source>
         <translation>Използване на външна програма:</translation>
-    </message>
-    <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">Възпроизвеждане чрез DirectShow</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
@@ -3192,48 +3059,6 @@ Plugin must be installed for this option to work.</source>
     <message>
         <source>Ad&amp;vanced</source>
         <translation>Доп&amp;ълнително</translation>
-    </message>
-    <message>
-        <source>ScanPopup extra technologies</source>
-        <translation>Допълнителни методи за определяне думата под курсора</translation>
-    </message>
-    <message>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Опитайте с IAccessibleEx technology да възстанови думата под курсора.
-Тази технология работи с някой програми които я поддържат
- (например Internet Explorer 9).
-Ако не се нуждаете от такива програми ,не я използвайте.</translation>
-    </message>
-    <message>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation>Използвай &amp;IAccessibleEx</translation>
-    </message>
-    <message>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Използвайте UI Automation технология да възстановите думата под курсора.
-Тази технология работи само с някои програми които я поддържат
-Ако не използвате такива програми не включвайте опцията.</translation>
-    </message>
-    <message>
-        <source>Use &amp;UIAutomation</source>
-        <translation>Използвай &amp;UIAutomation</translation>
-    </message>
-    <message>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Използвайте GoldenDict съобщение да възстанови думата под курсора.
-Тази технология работи само с някои програми които я поддържат
-Ако не използвате такива програми не включвайте опцията.</translation>
-    </message>
-    <message>
-        <source>Use &amp;GoldenDict message</source>
-        <translation>Използвай заявка &amp;GoldenDict</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
@@ -3750,18 +3575,6 @@ clears its network cache from disk during exit.</source>
         <translation>Диалог</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">дума</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Списък съвпадение (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
-    </message>
-    <message>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Произнасяне на думата (Alt+S)</translation>
     </message>
@@ -3798,10 +3611,6 @@ could be resized or managed in other ways.</source>
     <message>
         <source>Forward</source>
         <translation>Напред</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -3920,10 +3729,6 @@ of the appropriate groups to use them.</source>
         <translation>Произволни уеб страници. Низът %GDWORD% ще бъде заменен с думата за търсене:</translation>
     </message>
     <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Може да използвате и %GD1251% за кодиране CP1251, %GDISO1% за кодиране ISO 8859-1.</translation>
-    </message>
-    <message>
         <source>Transliteration</source>
         <translation>Транслитерация</translation>
     </message>
@@ -4036,24 +3841,6 @@ in the future, or register on the site to get your own key.</source>
         <translation>Исползването на Forvo изисква ключ за програмния интерфейс.
 Оставете празно , за да използва ключа по подразб., който може
 да стане недостъпен или се регистрирайте за получаване на ключ.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Получете собствен ключ &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, или оставете празно за използване на стандартния.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>

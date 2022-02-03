@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>About</name>
     <message>
@@ -17,10 +17,6 @@
         <location filename="../about.ui" line="91"/>
         <source>(c) 2008-2013 Konstantin Isakov (ikm@goldendict.org)</source>
         <translation>© 2008-2013 Konstantin Isakov (ikm@goldendict.org)</translation>
-    </message>
-    <message>
-        <source>(c) 2008-2012 Konstantin Isakov (ikm@goldendict.org)</source>
-        <translation type="obsolete">© 2008-2012 Konstantin Isakov (ikm@goldendict.org)</translation>
     </message>
     <message>
         <location filename="../about.ui" line="101"/>
@@ -46,36 +42,32 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="245"/>
+        <location filename="../article_maker.cc" line="181"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Aucune traduction pour &lt;b&gt;%1&lt;/b&gt; n&apos;a été trouvée dans le groupe &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="250"/>
+        <location filename="../article_maker.cc" line="186"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Aucune traduction trouvée dans le groupe &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="297"/>
+        <location filename="../article_maker.cc" line="234"/>
         <source>Welcome!</source>
         <translation>Bienvenue !</translation>
     </message>
     <message>
-        <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation type="obsolete">&lt;h3 align=&quot;center&quot;&gt;Bienvenue dans &lt;b&gt;GoldenDict&lt;/b&gt; !&lt;/h3&gt;&lt;p&gt;Pour commencer à utiliser le logiciel, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer divers sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots d&apos;autres applications actives&lt;/a&gt;. &lt;p&gt;Pour personnaliser le logiciel, vérifiez les options disponibles dans &lt;b&gt;Édition|Préférences&lt;/b&gt;. Tous les paramètres y disposent d&apos;une aide, lisez-les bien en cas de doute !&lt;p&gt;Si vous avez besoin d&apos;aide, avez des questions, des suggestions ou désirez vous enquérir de l&apos;avis d&apos;autrui, vous serez les bienvenus sur le&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Visitez le &apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;site&lt;/a&gt; du logiciel pour les mises à jour. &lt;p&gt;(c) 2008-2012 Konstantin Isakov. Sous licence GPLv3 ou plus récente.</translation>
-    </message>
-    <message>
-        <location filename="../article_maker.cc" line="210"/>
+        <location filename="../article_maker.cc" line="140"/>
         <source>Expand article</source>
         <translation>Agrandir l&apos;article</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="216"/>
+        <location filename="../article_maker.cc" line="142"/>
         <source>Collapse article</source>
         <translation>Diminuer l&apos;article</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="299"/>
+        <location filename="../article_maker.cc" line="236"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Bienvenue dans &lt;b&gt;GoldenDict&lt;/b&gt; !&lt;/h3&gt;
 &lt;p&gt;Pour commencer à utiliser GoldenDict, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer des sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots à partir d&apos;autres applications actives&lt;/a&gt;.
@@ -85,32 +77,32 @@
 &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Sous licence GPLv3 ou ultérieure.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="315"/>
+        <location filename="../article_maker.cc" line="252"/>
         <source>Working with popup</source>
         <translation>Utilisation avec pop-up</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="317"/>
+        <location filename="../article_maker.cc" line="254"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Utilisation avec fenêtre de scan&lt;/h3&gt;Pour rechercher des mots à partir d&apos;autres applications actives, vous devez d&apos;abord activer la fonctionnalité &lt;i&gt;&quot;Fonction de scan avec fenêtre pop-up&quot;&lt;/i&gt; dans les &lt;b&gt;Préférences&lt;/b&gt;, et ensuite l&apos;activer à tout moment en cliquant sur l&apos;icône &apos;Fenêtre de scan&apos;, ou par clic droit sur l&apos;icône de la barre des tâches, puis sélection de la fonctionnalité dans le menu déroulant.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="324"/>
+        <location filename="../article_maker.cc" line="261"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Ensuite, positionnez le curseur au-dessus du mot que vous souhaitez rechercher dans l&apos;application, et une fenêtre le décrivant apparaîtra.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="327"/>
+        <location filename="../article_maker.cc" line="264"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Ensuite, sélectionnez avec la souris (ou double-cliquez) le mot que vous souhaitez rechercher dans l&apos;application, et une fenêtre le décrivant apparaîtra.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="409"/>
+        <location filename="../article_maker.cc" line="346"/>
         <source>(untitled)</source>
         <translation>(sans titre)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="423"/>
+        <location filename="../article_maker.cc" line="360"/>
         <source>(picture)</source>
         <translation>(image)</translation>
     </message>
@@ -118,37 +110,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="692"/>
+        <location filename="../article_maker.cc" line="623"/>
         <source>Expand article</source>
         <translation>Agrandir l&apos;article</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="695"/>
+        <location filename="../article_maker.cc" line="626"/>
         <source>From </source>
         <translation>De </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="700"/>
+        <location filename="../article_maker.cc" line="631"/>
         <source>Collapse article</source>
         <translation>Diminuer l&apos;article</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="717"/>
+        <location filename="../article_maker.cc" line="648"/>
         <source>Query error: %1</source>
         <translation>Erreur dans la requête : %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="823"/>
+        <location filename="../article_maker.cc" line="766"/>
         <source>Close words: </source>
         <translation>Mots se rapprochant : </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="894"/>
+        <location filename="../article_maker.cc" line="837"/>
         <source>Compound expressions: </source>
         <translation>Expressions composées :</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="922"/>
+        <location filename="../article_maker.cc" line="865"/>
         <source>Individual words: </source>
         <translation>Mots seuls :</translation>
     </message>
@@ -203,213 +195,181 @@
         <translation>&amp;Tout surligner</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="285"/>
+        <location filename="../articleview.cc" line="312"/>
         <source>Select Current Article</source>
         <translation>Sélectionner l&apos;article courant</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="291"/>
+        <location filename="../articleview.cc" line="318"/>
         <source>Copy as text</source>
         <translation>Copier le texte</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="297"/>
+        <location filename="../articleview.cc" line="324"/>
         <source>Inspect</source>
         <translation>Inspecter</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1033"/>
+        <location filename="../articleview.cc" line="1009"/>
         <source>Resource</source>
         <translation>Ressource</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1038"/>
+        <location filename="../articleview.cc" line="1014"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1043"/>
+        <location filename="../articleview.cc" line="1019"/>
         <source>TTS Voice</source>
         <translation>Synthèse vocale TTS</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1048"/>
+        <location filename="../articleview.cc" line="1024"/>
         <source>Picture</source>
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1031"/>
         <source>Video</source>
         <translation>Vidéo</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1064"/>
+        <location filename="../articleview.cc" line="1040"/>
         <source>Video: %1</source>
         <translation>Vidéo : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1081"/>
+        <location filename="../articleview.cc" line="1057"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Définition à partir du dictionnaire &quot;%1&quot; : %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1089"/>
+        <location filename="../articleview.cc" line="1065"/>
         <source>Definition: %1</source>
         <translation>Définition : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2026"/>
+        <location filename="../articleview.cc" line="1971"/>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2037"/>
         <source>Failed to play sound file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2082"/>
+        <location filename="../articleview.cc" line="2093"/>
         <source>WARNING: Audio Player: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1362"/>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1356"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>La ressource référencée n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1402"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Le programme référencé n&apos;existe pas.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1285"/>
-        <location filename="../articleview.cc" line="1321"/>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1279"/>
+        <location filename="../articleview.cc" line="1315"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>ERROR: %1</source>
         <translation>ERREUR : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1954"/>
+        <location filename="../articleview.cc" line="1969"/>
         <source>Save sound</source>
         <translation>Enregistrer le fichier audio</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1956"/>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Fichiers audio (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1969"/>
+        <location filename="../articleview.cc" line="1984"/>
         <source>Save image</source>
         <translation>Enregistrer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1971"/>
+        <location filename="../articleview.cc" line="1986"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Fichiers image (*.bmp *.jpg *.png *.tif);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <source>Resource saving error: </source>
-        <translation type="obsolete">Erreur lors de l&apos;enregistrement de la ressource :</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1710"/>
+        <location filename="../articleview.cc" line="1729"/>
         <source>&amp;Open Link</source>
         <translation>&amp;Ouvrir un lien</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1716"/>
+        <location filename="../articleview.cc" line="1735"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Ouvrir un lien dans un nouvel on&amp;glet</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1723"/>
+        <location filename="../articleview.cc" line="1742"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Ouvrir un lien dans un navigateur &amp;externe</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1738"/>
+        <location filename="../articleview.cc" line="1755"/>
         <source>Save &amp;image...</source>
         <translation>Enregistrer l&apos;&amp;image...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1746"/>
+        <location filename="../articleview.cc" line="1763"/>
         <source>Save s&amp;ound...</source>
         <translation>Enregistrer le fichier audi&amp;o...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1765"/>
+        <location filename="../articleview.cc" line="1781"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>Re&amp;chercher &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1773"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Rechercher &quot;%1&quot; dans un &amp;nouvel onglet</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1778"/>
+        <location filename="../articleview.cc" line="1794"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Envoyer &quot;%1&quot; dans la zone de saisie</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1784"/>
-        <location filename="../articleview.cc" line="1820"/>
+        <location filename="../articleview.cc" line="1800"/>
+        <location filename="../articleview.cc" line="1836"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Ajouter &quot;%1&quot; à l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1798"/>
+        <location filename="../articleview.cc" line="1814"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Rechercher &quot;%1&quot; dans %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1806"/>
+        <location filename="../articleview.cc" line="1822"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Rechercher &quot;%1&quot; dans &quot;%2&quot; dans un &amp;nouvel onglet</translation>
     </message>
     <message>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="obsolete">ATTENTION : lecteur audio FFmpeg : %1</translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Lecture d&apos;un fichier non-WAV</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Pour activer la lecture de fichiers de type autre que WAV, allez dans Édition|Préférences, choisissez l&apos;onglet Audio et sélectionnez &quot;Lire avec DirectShow&quot;.</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="2075"/>
+        <location filename="../articleview.cc" line="2086"/>
         <source>WARNING: %1</source>
         <translation>ATTENTION : %1</translation>
     </message>
     <message>
-        <source>Bass library not found.</source>
-        <translation type="obsolete">Bibliothèque Bass non trouvée.</translation>
-    </message>
-    <message>
-        <source>Bass library can&apos;t play this sound.</source>
-        <translation type="obsolete">La bibliothèque Bass ne peut lire ce son.</translation>
-    </message>
-    <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">Échec de lancement d&apos;un lecteur pour lire le fichier audio %1</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="2041"/>
+        <location filename="../articleview.cc" line="2052"/>
         <source>Failed to create temporary file.</source>
         <translation>Échec de création d&apos;un fichier temporaire.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2052"/>
+        <location filename="../articleview.cc" line="2063"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Échec lors de l&apos;ouverture automatique du fichier de ressources, essayez d&apos;ouvrir manuellement : %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2075"/>
+        <location filename="../articleview.cc" line="2086"/>
         <source>The referenced resource failed to download.</source>
         <translation>La ressource référencée n&apos;a pas pu être téléchargée.</translation>
     </message>
@@ -580,46 +540,46 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="594"/>
-        <location filename="../groups_widgets.cc" line="669"/>
-        <location filename="../groups_widgets.cc" line="842"/>
-        <location filename="../groups_widgets.cc" line="1017"/>
+        <location filename="../groups_widgets.cc" line="592"/>
+        <location filename="../groups_widgets.cc" line="667"/>
+        <location filename="../groups_widgets.cc" line="840"/>
+        <location filename="../groups_widgets.cc" line="1015"/>
         <source>Dictionaries: </source>
         <translation>Dictionnaires :</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="694"/>
+        <location filename="../groups_widgets.cc" line="692"/>
         <source>Confirmation</source>
         <translation>Confirmation</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="695"/>
+        <location filename="../groups_widgets.cc" line="693"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Êtes-vous sûr de vouloir générer un ensemble de groupes basés sur des paires de langues ?</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="720"/>
+        <location filename="../groups_widgets.cc" line="718"/>
         <source>Unassigned</source>
         <translation>Non assigné</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="858"/>
+        <location filename="../groups_widgets.cc" line="856"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>Combiner les groupes selon la langue source pour &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="875"/>
+        <location filename="../groups_widgets.cc" line="873"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation>Combiner les groupes selon la langue cible pour &quot;%1-&gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="893"/>
+        <location filename="../groups_widgets.cc" line="891"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation>Faire des groupes de traduction dans les deux sens &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="911"/>
-        <location filename="../groups_widgets.cc" line="930"/>
+        <location filename="../groups_widgets.cc" line="909"/>
+        <location filename="../groups_widgets.cc" line="928"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation>Combiner les groupes avec &quot;%1&quot;</translation>
     </message>
@@ -697,42 +657,42 @@ between classic and school orthography in cyrillic)</source>
         <translation>Filtre (chaîne de caractères, opérateurs de cardinalité ou expression régulière)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="41"/>
+        <location filename="../dictheadwords.cc" line="39"/>
         <source>Text</source>
         <translation>Texte</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="42"/>
+        <location filename="../dictheadwords.cc" line="40"/>
         <source>Wildcards</source>
         <translation>Opérateurs de cardinalité</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="43"/>
+        <location filename="../dictheadwords.cc" line="41"/>
         <source>RegExp</source>
         <translation>Expression régulière</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="282"/>
+        <location filename="../dictheadwords.cc" line="271"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation>Total de vedettes uniques : %1, %2 filtrées</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="299"/>
+        <location filename="../dictheadwords.cc" line="288"/>
         <source>Save headwords to file</source>
         <translation>Enregistrer les vedettes dans un fichier</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="301"/>
+        <location filename="../dictheadwords.cc" line="290"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Fichiers texte (*.txt);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="325"/>
+        <location filename="../dictheadwords.cc" line="314"/>
         <source>Export headwords...</source>
         <translation>Exporter les vedettes ...</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="325"/>
+        <location filename="../dictheadwords.cc" line="314"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -808,22 +768,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictServer</name>
     <message>
-        <location filename="../dictserver.cc" line="276"/>
+        <location filename="../dictserver.cc" line="274"/>
         <source>Url: </source>
         <translation>Adresse : </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="277"/>
+        <location filename="../dictserver.cc" line="275"/>
         <source>Databases: </source>
         <translation>Bases de données : </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="278"/>
+        <location filename="../dictserver.cc" line="276"/>
         <source>Search strategies: </source>
         <translation>Stratégies de recherche : </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="282"/>
+        <location filename="../dictserver.cc" line="280"/>
         <source>Server databases</source>
         <translation>Bases de données serveur</translation>
     </message>
@@ -878,10 +838,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Barre de dictionnaire</translation>
-    </message>
-    <message>
         <location filename="../dictionarybar.cc" line="15"/>
         <source>&amp;Dictionary Bar</source>
         <translation>Barre de &amp;dictionnaire</translation>
@@ -925,39 +881,39 @@ between classic and school orthography in cyrillic)</source>
         <translation>Dictionnaires</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="46"/>
         <source>&amp;Sources</source>
         <translation>&amp;Sources</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="45"/>
-        <location filename="../editdictionaries.cc" line="242"/>
+        <location filename="../editdictionaries.cc" line="47"/>
+        <location filename="../editdictionaries.cc" line="244"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Dictionnaires</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="46"/>
-        <location filename="../editdictionaries.cc" line="245"/>
+        <location filename="../editdictionaries.cc" line="48"/>
+        <location filename="../editdictionaries.cc" line="247"/>
         <source>&amp;Groups</source>
         <translation>&amp;Groupes</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="122"/>
+        <location filename="../editdictionaries.cc" line="124"/>
         <source>Sources changed</source>
         <translation>Sources modifiées</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="123"/>
+        <location filename="../editdictionaries.cc" line="125"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>Certaines sources ont été modifiées. Acceptez-vous ces changements ?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="126"/>
+        <location filename="../editdictionaries.cc" line="128"/>
         <source>Accept</source>
         <translation>Accepter</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="128"/>
+        <location filename="../editdictionaries.cc" line="130"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -968,13 +924,6 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../externalviewer.cc" line="53"/>
         <source>the viewer program name is empty</source>
         <translation>le nom du programme n&apos;est pas renseigné</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Aucun</translation>
     </message>
 </context>
 <context>
@@ -1054,16 +1003,9 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Aucun</translation>
-    </message>
-</context>
-<context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="643"/>
+        <location filename="../favoritespanewidget.cc" line="644"/>
         <source>Error in favorities file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1071,27 +1013,27 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesPaneWidget</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="29"/>
+        <location filename="../favoritespanewidget.cc" line="30"/>
         <source>&amp;Delete Selected</source>
         <translation type="unfinished">&amp;Supprimer les éléments sélectionnés</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="38"/>
+        <location filename="../favoritespanewidget.cc" line="39"/>
         <source>Copy Selected</source>
         <translation type="unfinished">Copier les éléments sélectionnés</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="47"/>
+        <location filename="../favoritespanewidget.cc" line="48"/>
         <source>Add folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="61"/>
+        <location filename="../favoritespanewidget.cc" line="62"/>
         <source>Favorites:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="167"/>
+        <location filename="../favoritespanewidget.cc" line="168"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1099,37 +1041,37 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="229"/>
+        <location filename="../forvo.cc" line="204"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Erreur de lecture XML : %1 à la position %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="305"/>
+        <location filename="../forvo.cc" line="280"/>
         <source>Added %1</source>
         <translation>Ajouté %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="308"/>
+        <location filename="../forvo.cc" line="283"/>
         <source>by</source>
         <translation>par</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="287"/>
         <source>Male</source>
         <translation>Homme</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="287"/>
         <source>Female</source>
         <translation>Femme</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="314"/>
+        <location filename="../forvo.cc" line="289"/>
         <source>from</source>
         <translation>de</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="352"/>
+        <location filename="../forvo.cc" line="327"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Allez dans Édition|Dictionnaires|Sources|Forvo puis faites une requête pour obtenir votre clé API afin de faire disparâitre ce message d&apos;erreur.</translation>
     </message>
@@ -1225,17 +1167,6 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
         <translation>Choisissez un groupe (Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulaire</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">Chercher dans</translation>
     </message>
 </context>
 <context>
@@ -1439,27 +1370,27 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HistoryPaneWidget</name>
     <message>
-        <location filename="../historypanewidget.cc" line="21"/>
+        <location filename="../historypanewidget.cc" line="23"/>
         <source>&amp;Delete Selected</source>
         <translation>&amp;Supprimer les éléments sélectionnés</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="30"/>
+        <location filename="../historypanewidget.cc" line="32"/>
         <source>Copy Selected</source>
         <translation>Copier les éléments sélectionnés</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="47"/>
+        <location filename="../historypanewidget.cc" line="49"/>
         <source>History:</source>
         <translation>Historique :</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="219"/>
+        <location filename="../historypanewidget.cc" line="221"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="223"/>
+        <location filename="../historypanewidget.cc" line="225"/>
         <source>History size: %1 entries out of maximum %2</source>
         <translation>Taille de l&apos;historique : %1 entrées sur un maximum de %2</translation>
     </message>
@@ -1467,12 +1398,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="293"/>
+        <location filename="../hunspell.cc" line="278"/>
         <source>Spelling suggestions: </source>
         <translation>Orthographes suggérées :</translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="923"/>
+        <location filename="../hunspell.cc" line="856"/>
         <source>%1 Morphology</source>
         <translation>%1 Morphologie</translation>
     </message>
@@ -2533,7 +2464,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="375"/>
+        <location filename="../main.cc" line="358"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Erreur dans le fichier de configuration. Continuer avec les paramètres par défaut ?</translation>
     </message>
@@ -2541,12 +2472,8 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="799"/>
+        <location filename="../mainwindow.cc" line="811"/>
         <source>Welcome!</source>
         <translation>Bienvenue !</translation>
     </message>
@@ -2581,14 +2508,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Historique</translation>
     </message>
     <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">Recherche</translation>
-    </message>
-    <message>
-        <source>Results Navigation Pane</source>
-        <translation type="obsolete">Résultats</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="162"/>
         <source>&amp;Search Pane</source>
         <translation>Re&amp;chercher</translation>
@@ -2597,10 +2516,6 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../mainwindow.ui" line="289"/>
         <source>&amp;Results Navigation Pane</source>
         <translation>&amp;Résultats de la recherche</translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...	F3</source>
-        <translation type="obsolete">&amp;Dictionnaires...	F3</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="136"/>
@@ -2664,7 +2579,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
-        <location filename="../mainwindow.cc" line="369"/>
+        <location filename="../mainwindow.cc" line="385"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
@@ -2766,7 +2681,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="597"/>
         <location filename="../mainwindow.ui" line="600"/>
-        <location filename="../mainwindow.cc" line="274"/>
+        <location filename="../mainwindow.cc" line="290"/>
         <source>Menu Button</source>
         <translation>Bouton du menu</translation>
     </message>
@@ -2812,10 +2727,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
-        <location filename="../mainwindow.cc" line="245"/>
-        <location filename="../mainwindow.cc" line="1823"/>
-        <location filename="../mainwindow.cc" line="1901"/>
-        <location filename="../mainwindow.cc" line="4733"/>
+        <location filename="../mainwindow.cc" line="261"/>
+        <location filename="../mainwindow.cc" line="1852"/>
+        <location filename="../mainwindow.cc" line="1930"/>
+        <location filename="../mainwindow.cc" line="4716"/>
         <source>Add current tab to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2830,14 +2745,6 @@ between classic and school orthography in cyrillic)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">Aperçu avant impression</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Rescanner les fichiers</translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="510"/>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
@@ -2848,7 +2755,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>E&amp;ffacer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="608"/>
+        <location filename="../mainwindow.cc" line="624"/>
         <source>New Tab</source>
         <translation>Nouvel onglet</translation>
     </message>
@@ -2864,8 +2771,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3896"/>
-        <location filename="../mainwindow.cc" line="3908"/>
+        <location filename="../mainwindow.cc" line="3878"/>
+        <location filename="../mainwindow.cc" line="3890"/>
         <source>&amp;Show</source>
         <translation>Affi&amp;cher</translation>
     </message>
@@ -2885,401 +2792,373 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Importer</translation>
     </message>
     <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Afficher les noms dans la barre du dictionnaire</translation>
-    </message>
-    <message>
-        <source>Show Small Icons in Toolbars</source>
-        <translation type="obsolete">Afficher des petites icônes dans les barres d&apos;outils</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="106"/>
+        <location filename="../mainwindow.cc" line="108"/>
         <source>&amp;Menubar</source>
         <translation>Barre du &amp;menu</translation>
     </message>
     <message>
-        <source>Navigation</source>
-        <translation type="obsolete">Navigation</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="104"/>
+        <location filename="../mainwindow.cc" line="106"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>Afficher les noms dans la &amp;barre de dictionnaire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="105"/>
+        <location filename="../mainwindow.cc" line="107"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>Afficher de petites icônes dans les barres d&apos;ou&amp;tils</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="163"/>
+        <location filename="../mainwindow.cc" line="179"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Navigation</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="166"/>
+        <location filename="../mainwindow.cc" line="182"/>
         <source>Back</source>
         <translation>Précédent</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="168"/>
+        <location filename="../mainwindow.cc" line="184"/>
         <source>Forward</source>
         <translation>Suivant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="193"/>
+        <location filename="../mainwindow.cc" line="209"/>
         <source>Scan Popup</source>
         <translation>Fenêtre de scan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="208"/>
+        <location filename="../mainwindow.cc" line="224"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Prononcer le mot (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="220"/>
+        <location filename="../mainwindow.cc" line="236"/>
         <source>Zoom In</source>
         <translation>Zoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="226"/>
+        <location filename="../mainwindow.cc" line="242"/>
         <source>Zoom Out</source>
         <translation>Dézoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="230"/>
+        <location filename="../mainwindow.cc" line="246"/>
         <source>Normal Size</source>
         <translation>Taille normale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="282"/>
-        <location filename="../mainwindow.cc" line="1371"/>
+        <location filename="../mainwindow.cc" line="298"/>
+        <location filename="../mainwindow.cc" line="1383"/>
         <source>Look up in:</source>
         <translation>Chercher dans :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="321"/>
+        <location filename="../mainwindow.cc" line="337"/>
         <source>Found in Dictionaries:</source>
         <translation>Trouvé dans les dictionnaires :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="351"/>
+        <location filename="../mainwindow.cc" line="367"/>
         <source>Words Zoom In</source>
         <translation>Zoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="355"/>
+        <location filename="../mainwindow.cc" line="371"/>
         <source>Words Zoom Out</source>
         <translation>Dézoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="357"/>
+        <location filename="../mainwindow.cc" line="373"/>
         <source>Words Normal Size</source>
         <translation>Taille normale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="365"/>
+        <location filename="../mainwindow.cc" line="381"/>
         <source>Show &amp;Main Window</source>
         <translation>Afficher la fenêtre &amp;principale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="392"/>
+        <location filename="../mainwindow.cc" line="408"/>
         <source>Opened tabs</source>
         <translation>Onglets ouverts</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="403"/>
+        <location filename="../mainwindow.cc" line="419"/>
         <source>Close current tab</source>
         <translation>Fermer l&apos;onglet courant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="413"/>
+        <location filename="../mainwindow.cc" line="429"/>
         <source>Close all tabs</source>
         <translation>Fermer tous les onglets</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="421"/>
+        <location filename="../mainwindow.cc" line="437"/>
         <source>Close all tabs except current</source>
         <translation>Fermer tous les onglets sauf l&apos;onglet courant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="455"/>
+        <location filename="../mainwindow.cc" line="471"/>
         <source>Add all tabs to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="597"/>
+        <location filename="../mainwindow.cc" line="613"/>
         <source>Loading...</source>
         <translation>Chargement...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1360"/>
+        <location filename="../mainwindow.cc" line="1372"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 dictionnaires, %2 articles, %3 mots</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1371"/>
+        <location filename="../mainwindow.cc" line="1383"/>
         <source>Look up:</source>
         <translation>Chercher :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1389"/>
+        <location filename="../mainwindow.cc" line="1401"/>
         <source>All</source>
         <translation>Tout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1553"/>
+        <location filename="../mainwindow.cc" line="1566"/>
         <source>Open Tabs List</source>
         <translation>Liste des onglets ouverts</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1611"/>
+        <location filename="../mainwindow.cc" line="1623"/>
         <source>(untitled)</source>
         <translation>(sans titre)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1818"/>
-        <location filename="../mainwindow.cc" line="1896"/>
-        <location filename="../mainwindow.cc" line="4713"/>
-        <location filename="../mainwindow.cc" line="4741"/>
-        <location filename="../mainwindow.cc" line="4768"/>
+        <location filename="../mainwindow.cc" line="1847"/>
+        <location filename="../mainwindow.cc" line="1925"/>
+        <location filename="../mainwindow.cc" line="4696"/>
+        <location filename="../mainwindow.cc" line="4724"/>
+        <location filename="../mainwindow.cc" line="4751"/>
         <source>Remove current tab from Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1848"/>
+        <location filename="../mainwindow.cc" line="1877"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4071"/>
+        <location filename="../mainwindow.cc" line="4053"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4073"/>
-        <location filename="../mainwindow.cc" line="4163"/>
+        <location filename="../mainwindow.cc" line="4055"/>
+        <location filename="../mainwindow.cc" line="4145"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4092"/>
-        <location filename="../mainwindow.cc" line="4141"/>
+        <location filename="../mainwindow.cc" line="4074"/>
+        <location filename="../mainwindow.cc" line="4123"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4112"/>
+        <location filename="../mainwindow.cc" line="4094"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4161"/>
+        <location filename="../mainwindow.cc" line="4143"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4186"/>
+        <location filename="../mainwindow.cc" line="4168"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4192"/>
+        <location filename="../mainwindow.cc" line="4174"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4684"/>
+        <location filename="../mainwindow.cc" line="4667"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4726"/>
+        <location filename="../mainwindow.cc" line="4709"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">ATTENTION : %1</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="3038"/>
+        <location filename="../mainwindow.cc" line="3018"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Échec lors de l&apos;initialisation du mécanisme d&apos;écoute des raccourcis.&lt;br&gt;Vérifiez que l&apos;extension ENREGISTREMENT du serveur X est activée.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3184"/>
+        <location filename="../mainwindow.cc" line="3164"/>
         <source>New Release Available</source>
         <translation>Nouvelle version disponible</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3185"/>
+        <location filename="../mainwindow.cc" line="3165"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>La version &lt;b&gt;%1&lt;/b&gt; de GoldenDict est disponible au téléchargement.&lt;br&gt;Cliquez sur &lt;b&gt;Télécharger&lt;/b&gt; pour accéder à la page de téléchargement.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3190"/>
+        <location filename="../mainwindow.cc" line="3170"/>
         <source>Download</source>
         <translation>Téléchargement</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3191"/>
+        <location filename="../mainwindow.cc" line="3171"/>
         <source>Skip This Release</source>
         <translation>Ignorer la version</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="863"/>
-        <location filename="../mainwindow.cc" line="3244"/>
+        <location filename="../mainwindow.cc" line="875"/>
+        <location filename="../mainwindow.cc" line="3224"/>
         <source>Accessibility API is not enabled</source>
         <translation>L&apos;API d&apos;accessibilité n&apos;est pas activée</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="950"/>
+        <location filename="../mainwindow.cc" line="956"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation>Chaîne à rechercher dans les dictionnaires. Les opérateurs de cardinalité &apos;*&apos;, &apos;?&apos; et les groupes de symboles &apos;[...]&apos; sont autorisés.
 Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;, utiliser respectivement &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3321"/>
+        <location filename="../mainwindow.cc" line="3305"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vous avez choisi de masquer une barre de menus. Utilisez %1 pour l&apos;afficher à nouveau.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3322"/>
+        <location filename="../mainwindow.cc" line="3306"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3421"/>
+        <location filename="../mainwindow.cc" line="3405"/>
         <source>Page Setup</source>
         <translation>Paramètres d&apos;impression</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3422"/>
+        <location filename="../mainwindow.cc" line="3406"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Aucune imprimante n&apos;est disponible. Veuillez en installer une afin de continuer.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3440"/>
+        <location filename="../mainwindow.cc" line="3425"/>
         <source>Print Article</source>
         <translation>Imprimer l&apos;article</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3515"/>
+        <location filename="../mainwindow.cc" line="3500"/>
         <source>Article, Complete (*.html)</source>
         <translation>Article, Complet (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3516"/>
+        <location filename="../mainwindow.cc" line="3501"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Article, HTML uniquement (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3519"/>
+        <location filename="../mainwindow.cc" line="3504"/>
         <source>Save Article As</source>
         <translation>Enregister l&apos;article sous</translation>
     </message>
     <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Fichiers HTML (*.html *.htm)</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="3533"/>
+        <location filename="../mainwindow.cc" line="3518"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3534"/>
+        <location filename="../mainwindow.cc" line="3519"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Impossible d&apos;enregistrer l&apos;article : %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3595"/>
+        <location filename="../mainwindow.cc" line="3580"/>
         <source>Saving article...</source>
         <translation>Sauvegarde de l&apos;article...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3658"/>
+        <location filename="../mainwindow.cc" line="3641"/>
         <source>The main window is set to be always on top.</source>
         <translation>La fenêtre pricipale est configurée pour être toujours au premier plan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3892"/>
-        <location filename="../mainwindow.cc" line="3904"/>
+        <location filename="../mainwindow.cc" line="3874"/>
+        <location filename="../mainwindow.cc" line="3886"/>
         <source>&amp;Hide</source>
         <translation>&amp;Masquer</translation>
     </message>
     <message>
-        <source>History view mode</source>
-        <translation type="obsolete">Mode d&apos;affichage de l&apos;historique</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="3936"/>
+        <location filename="../mainwindow.cc" line="3918"/>
         <source>Export history to file</source>
         <translation>Exporter l&apos;historique dans un fichier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3938"/>
-        <location filename="../mainwindow.cc" line="4000"/>
-        <location filename="../mainwindow.cc" line="4114"/>
+        <location filename="../mainwindow.cc" line="3920"/>
+        <location filename="../mainwindow.cc" line="3982"/>
+        <location filename="../mainwindow.cc" line="4096"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Fichiers texte (*.txt);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3977"/>
+        <location filename="../mainwindow.cc" line="3959"/>
         <source>History export complete</source>
         <translation>Export de l&apos;historique terminé</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3980"/>
-        <location filename="../mainwindow.cc" line="4095"/>
-        <location filename="../mainwindow.cc" line="4144"/>
+        <location filename="../mainwindow.cc" line="3962"/>
+        <location filename="../mainwindow.cc" line="4077"/>
+        <location filename="../mainwindow.cc" line="4126"/>
         <source>Export error: </source>
         <translation>Erreur d&apos;export :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3998"/>
+        <location filename="../mainwindow.cc" line="3980"/>
         <source>Import history from file</source>
         <translation>Importer l&apos;historique à partir d&apos;un fichier</translation>
     </message>
     <message>
-        <source>Imported from file: </source>
-        <translation type="obsolete">Importé à partir du fichier :</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.cc" line="4047"/>
+        <location filename="../mainwindow.cc" line="4029"/>
         <source>Import error: invalid data in file</source>
         <translation>Erreur d&apos;import : données invalides dans le fichier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4051"/>
+        <location filename="../mainwindow.cc" line="4033"/>
         <source>History import complete</source>
         <translation>Import d&apos;historique terminé</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4054"/>
-        <location filename="../mainwindow.cc" line="4190"/>
+        <location filename="../mainwindow.cc" line="4036"/>
+        <location filename="../mainwindow.cc" line="4172"/>
         <source>Import error: </source>
         <translation>Erreur d&apos;import :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4474"/>
+        <location filename="../mainwindow.cc" line="4458"/>
         <source>Dictionary info</source>
         <translation>Informations sur le dictionnaire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4478"/>
+        <location filename="../mainwindow.cc" line="4462"/>
         <source>Dictionary headwords</source>
         <translation>Vedettes du dictionnaire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4480"/>
+        <location filename="../mainwindow.cc" line="4464"/>
         <source>Open dictionary folder</source>
         <translation>Ouvrir le dossier des dictionnaires</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4486"/>
+        <location filename="../mainwindow.cc" line="4470"/>
         <source>Edit dictionary</source>
         <translation>Éditer le dictionnaire</translation>
     </message>
@@ -3287,12 +3166,12 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="656"/>
+        <location filename="../mdx.cc" line="672"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Le fichier de dictionnaire a été modifié ou corrompu</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="667"/>
+        <location filename="../mdx.cc" line="683"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>Échec du chargement de l&apos;article à partir de %1, cause : %2</translation>
     </message>
@@ -3300,7 +3179,7 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="337"/>
+        <location filename="../mediawiki.cc" line="352"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Erreur de lecture XML  : %1 à la position %2,%3</translation>
     </message>
@@ -3308,7 +3187,7 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="201"/>
+        <location filename="../mediawiki.cc" line="196"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Erreur de lecture XML : %1 à la position %2,%3</translation>
     </message>
@@ -3355,10 +3234,6 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <location filename="../orderandprops.ui" line="37"/>
         <source>Dictionary order:</source>
         <translation>Ordre des dictionnaires :</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="53"/>
@@ -3888,14 +3763,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="obsolete">Lire les fichiers audio via FFmpeg (libav) et libao</translation>
-    </message>
-    <message>
-        <source>Use internal player</source>
-        <translation type="obsolete">Utiliser le lecteur interne</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="1012"/>
         <source>System proxy</source>
         <translation>Proxy du système</translation>
@@ -3932,86 +3799,56 @@ p, li { white-space: pre-wrap; }
         <translation>article(s) (0 - pas de limite)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1672"/>
+        <location filename="../preferences.ui" line="1630"/>
         <source>Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1680"/>
+        <location filename="../preferences.ui" line="1638"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1706"/>
+        <location filename="../preferences.ui" line="1664"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1709"/>
+        <location filename="../preferences.ui" line="1667"/>
         <source>Confirmation for items deletion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1740"/>
+        <location filename="../preferences.ui" line="1698"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Sélectionnez cette option pour réduire automatiquement les longs articles</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1743"/>
+        <location filename="../preferences.ui" line="1701"/>
         <source>Collapse articles more than</source>
         <translation>Réduire les articles de plus de</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1750"/>
+        <location filename="../preferences.ui" line="1708"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Les articles dépassant cette longueur seront réduits</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1766"/>
-        <location filename="../preferences.ui" line="1816"/>
+        <location filename="../preferences.ui" line="1724"/>
+        <location filename="../preferences.ui" line="1774"/>
         <source>symbols</source>
         <translation>symboles</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1859"/>
+        <location filename="../preferences.ui" line="1817"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1863"/>
+        <location filename="../preferences.ui" line="1821"/>
         <source>Extra search via synonyms</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">Utiliser l&apos;API de playback WIndows native. Limitée exclusivement aux fichiers WAV,
-mais parfaitement fonctionnelle.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">Lire avec l&apos;API Windows native</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Jouer via le framework Phonon. Peut être quelque peu instable,
-mais devrait supporter la plupart des formats de fichier audio.</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Lire avec Phonon</translation>
-    </message>
-    <message>
-        <source>Play audio via Bass library. Optimal choice. To use this mode
-you must place bass.dll (http://www.un4seen.com) into GoldenDict folder.</source>
-        <translation type="obsolete">Lire l&apos;audio avec la bibliothèque Bass. Choix optimal. Pour utiliser ce mode,
-placez bass.dll (http://www.un4seen.com) dans le dossier d&apos;installation de GoldenDict.</translation>
-    </message>
-    <message>
-        <source>Play via Bass library</source>
-        <translation type="obsolete">Lire avec la bibliothèque Bass</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="936"/>
@@ -4156,173 +3993,125 @@ téléchargement.</translation>
         <translation>Vérifier régulièrement les mises à jour</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1432"/>
+        <location filename="../preferences.ui" line="1436"/>
         <source>Ad&amp;vanced</source>
         <translation>A&amp;vancé</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1440"/>
-        <source>ScanPopup extra technologies</source>
-        <translation>Fenêtre de scan</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1446"/>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Utiliser la fonction IAccessibleEx pour retrouver le mot sous le curseur.
-Cette fonction marche uniquement avec certains programmes la supportant
-(par exemple, Internet Explorer 9).
-Il n&apos;est pas nécessaire d&apos;activer cette option si vous n&apos;utilisez pas de tels programmes.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1452"/>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation>Utiliser &amp;IAccessibleEx</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1459"/>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Utiliser l&apos;automatisation IHM pour retrouver le mot sous le curseur.
-Cette fonction marche uniquement avec les programmes qui la supportent.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1464"/>
-        <source>Use &amp;UIAutomation</source>
-        <translation>Utiliser l&apos;a&amp;utomatisation de l&apos;interface</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1471"/>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translatorcomment>wtf is a &quot;special GoldenDict message&quot;? some kind of software illumination? anyway, i lol&apos;d</translatorcomment>
-        <translation>Utiliser le message spécial GoldenDict pour retrouver le mot sous le curseur.
-Ne fonctionne qu&apos;avec les programmes qui le supportent.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1476"/>
-        <source>Use &amp;GoldenDict message</source>
-        <translation>Utiliser les messages de &amp;GoldenDict</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1486"/>
+        <location filename="../preferences.ui" line="1444"/>
         <source>ScanPopup unpinned window flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1492"/>
+        <location filename="../preferences.ui" line="1450"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1496"/>
+        <location filename="../preferences.ui" line="1454"/>
         <source>&lt;default&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1501"/>
+        <location filename="../preferences.ui" line="1459"/>
         <source>Popup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1506"/>
+        <location filename="../preferences.ui" line="1464"/>
         <source>Tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1517"/>
+        <location filename="../preferences.ui" line="1475"/>
         <source>This hint can be combined with non-default window flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1520"/>
+        <location filename="../preferences.ui" line="1478"/>
         <source>Bypass window manager hint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1560"/>
+        <location filename="../preferences.ui" line="1518"/>
         <source>History</source>
         <translation>Historique</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1566"/>
+        <location filename="../preferences.ui" line="1524"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Conserver l&apos;historique des mots traduits</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1569"/>
+        <location filename="../preferences.ui" line="1527"/>
         <source>Store &amp;history</source>
         <translation>Conserver l&apos;&amp;historique</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1584"/>
+        <location filename="../preferences.ui" line="1542"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Nombre maximal d&apos;entrées à conserver dans l&apos;historique.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1587"/>
+        <location filename="../preferences.ui" line="1545"/>
         <source>Maximum history size:</source>
         <translation>Taille maximale de l&apos;historique :</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1624"/>
+        <location filename="../preferences.ui" line="1582"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Intervalle de sauvegarde de l&apos;historique. Si cette valeur vaut 0, l&apos;historique sera sauvegardé uniquement lors de la sortie du programme.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1630"/>
-        <location filename="../preferences.ui" line="1683"/>
+        <location filename="../preferences.ui" line="1588"/>
+        <location filename="../preferences.ui" line="1641"/>
         <source>Save every</source>
         <translation>Sauver toutes les</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1647"/>
-        <location filename="../preferences.ui" line="1697"/>
+        <location filename="../preferences.ui" line="1605"/>
+        <location filename="../preferences.ui" line="1655"/>
         <source>minutes</source>
         <translation>minutes</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1734"/>
+        <location filename="../preferences.ui" line="1692"/>
         <source>Articles</source>
         <translation>Articles</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1786"/>
+        <location filename="../preferences.ui" line="1744"/>
         <source>Turn this option on to ignore unreasonably long input text
 from mouse-over, selection, clipboard or command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1790"/>
+        <location filename="../preferences.ui" line="1748"/>
         <source>Ignore input phrases longer than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1800"/>
+        <location filename="../preferences.ui" line="1758"/>
         <source>Input phrases longer than this size will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1823"/>
+        <location filename="../preferences.ui" line="1781"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1826"/>
+        <location filename="../preferences.ui" line="1784"/>
         <source>Ignore diacritics while searching</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1833"/>
+        <location filename="../preferences.ui" line="1791"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Toujours afficher les parties optionnelles des articles</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1836"/>
+        <location filename="../preferences.ui" line="1794"/>
         <source>Expand optional &amp;parts</source>
         <translation>Afficher les &amp;parties optionnelles</translation>
     </message>
@@ -4368,16 +4157,12 @@ from mouse-over, selection, clipboard or command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">Jouer via DirectShow</translation>
-    </message>
-    <message>
-        <location filename="../preferences.cc" line="636"/>
+        <location filename="../preferences.cc" line="634"/>
         <source>Changing Language</source>
         <translation>Changement de langue</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="637"/>
+        <location filename="../preferences.cc" line="635"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Redémarrez le programme pour appliquer le changement de langue.</translation>
     </message>
@@ -4459,28 +4244,28 @@ from mouse-over, selection, clipboard or command line</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="449"/>
-        <location filename="../dsl.cc" line="1775"/>
+        <location filename="../aard.cc" line="432"/>
+        <location filename="../dsl.cc" line="1781"/>
         <source>Article loading error</source>
         <translation>Erreur de chargement de l&apos;article</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="541"/>
-        <location filename="../slob.cc" line="800"/>
+        <location filename="../aard.cc" line="524"/>
+        <location filename="../slob.cc" line="799"/>
         <source>Article decoding error</source>
         <translation>Erreur de décodage de l&apos;article</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="586"/>
-        <location filename="../bgl.cc" line="406"/>
-        <location filename="../sdict.cc" line="721"/>
-        <location filename="../stardict.cc" line="1162"/>
+        <location filename="../aard.cc" line="568"/>
+        <location filename="../bgl.cc" line="405"/>
+        <location filename="../sdict.cc" line="708"/>
+        <location filename="../stardict.cc" line="1085"/>
         <source>Copyright: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="590"/>
-        <location filename="../sdict.cc" line="737"/>
+        <location filename="../aard.cc" line="572"/>
+        <location filename="../sdict.cc" line="724"/>
         <source>Version: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4576,30 +4361,30 @@ from mouse-over, selection, clipboard or command line</source>
         <translation>avcodec_alloc_frame() a échoué.</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="413"/>
-        <location filename="../gls.cc" line="630"/>
-        <location filename="../stardict.cc" line="1170"/>
+        <location filename="../bgl.cc" line="412"/>
+        <location filename="../gls.cc" line="554"/>
+        <location filename="../stardict.cc" line="1093"/>
         <source>Author: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="420"/>
-        <location filename="../stardict.cc" line="1178"/>
+        <location filename="../bgl.cc" line="419"/>
+        <location filename="../stardict.cc" line="1101"/>
         <source>E-mail: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../sdict.cc" line="689"/>
+        <location filename="../sdict.cc" line="676"/>
         <source>Title: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1186"/>
+        <location filename="../stardict.cc" line="1109"/>
         <source>Website: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1194"/>
+        <location filename="../stardict.cc" line="1117"/>
         <source>Date: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4607,17 +4392,17 @@ from mouse-over, selection, clipboard or command line</source>
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1027"/>
+        <location filename="../groups_widgets.cc" line="1024"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>Rechercher dans les dictionnaires/filtrer (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1036"/>
+        <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
         <translation>Recherche rapide</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1041"/>
+        <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
         <translation>Effacer la recherche</translation>
     </message>
@@ -4625,23 +4410,23 @@ from mouse-over, selection, clipboard or command line</source>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2999"/>
+        <location filename="../articleview.cc" line="2818"/>
         <source>ERROR: %1</source>
         <translation>ERREUR : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2999"/>
+        <location filename="../articleview.cc" line="2818"/>
         <source>Resource saving error: </source>
         <translation>
 Erreur lors de l&apos;enregistrement de la ressource :</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3025"/>
+        <location filename="../articleview.cc" line="2844"/>
         <source>The referenced resource failed to download.</source>
         <translation>La ressource référencée n&apos;a pas pu être téléchargée.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3025"/>
+        <location filename="../articleview.cc" line="2844"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">ATTENTION : %1</translation>
     </message>
@@ -4683,10 +4468,6 @@ Erreur lors de l&apos;enregistrement de la ressource :</translation>
         <translation>Message</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">mot</translation>
-    </message>
-    <message>
         <location filename="../scanpopup.ui" line="113"/>
         <source>Back</source>
         <translation>Précédent</translation>
@@ -4704,14 +4485,6 @@ Erreur lors de l&apos;enregistrement de la ressource :</translation>
         <location filename="../scanpopup.ui" line="127"/>
         <source>Forward</source>
         <translation>Suivant</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Lister les correspondances (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="141"/>
@@ -4755,12 +4528,8 @@ could be resized or managed in other ways.</source>
         <translation>Utiliser pour épingler la fenêtre de manière à ce qu&apos;elle reste à l&apos;écran, puisse être redimensionnée ou gérée par d&apos;autres moyens.</translation>
     </message>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
-        <location filename="../scanpopup.cc" line="711"/>
-        <location filename="../scanpopup.cc" line="1080"/>
+        <location filename="../scanpopup.cc" line="704"/>
+        <location filename="../scanpopup.cc" line="1077"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -4884,17 +4653,9 @@ Ajoutez les dictionnaires appropriés à la fin des groupes concernés pour les 
         <translation>N&apos;importe quel site. Une chaîne %GDWORD% sera remplacée par le mot recherché :</translation>
     </message>
     <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Alternativement, utilisez %GD1251% pour le CP1251, %GDISO1% pour l&apos;ISO 8859-1.</translation>
-    </message>
-    <message>
         <location filename="../sources.ui" line="403"/>
         <source>Programs</source>
         <translation>Programmes</translation>
-    </message>
-    <message>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="obsolete">N&apos;importe quel programme externe. Une chaîne %GDWORD% sera remplacée par le mot recherché. Le mot sera aussi utilisé dans l&apos;entrée standard.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="462"/>
@@ -4927,24 +4688,6 @@ in the future, or register on the site to get your own key.</source>
         <location filename="../sources.ui" line="549"/>
         <source>Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;here&lt;/a&gt;, or leave blank to use the default one.</source>
         <translation>Obtenez une nouvelle clé &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;ici&lt;/a&gt;, ou laissez le champ vide pour utiliser la clé par défaut.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Obtenez votre propre clé &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ici&lt;/span&gt;&lt;/a&gt;, ou laissez vide pour utiliser la clé par défaut.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="334"/>
@@ -4984,59 +4727,59 @@ p, li { white-space: pre-wrap; }
         <translation>La liste complète des codes de langues est disponible &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="634"/>
+        <location filename="../sources.ui" line="638"/>
         <source>Transliteration</source>
         <translation>Tanslitération</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="655"/>
+        <location filename="../sources.ui" line="659"/>
         <source>Russian transliteration</source>
         <translation>Translitération russe</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="666"/>
+        <location filename="../sources.ui" line="670"/>
         <source>Greek transliteration</source>
         <translation>Translitération grecque</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="690"/>
+        <location filename="../sources.ui" line="694"/>
         <source>German transliteration</source>
         <translation>Translitération allemande</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="701"/>
+        <location filename="../sources.ui" line="705"/>
         <source>Belarusian transliteration</source>
         <translation>Translitération biélorusse</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="727"/>
+        <location filename="../sources.ui" line="731"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Activer l&apos;utilisation de l&apos;alphabet latin pour écrire le japonais</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="730"/>
+        <location filename="../sources.ui" line="734"/>
         <source>Japanese Romaji</source>
         <translation>Japonais (Rōmaji)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="746"/>
         <source>Systems:</source>
         <translation>Systèmes :</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="753"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>La méthode la plus largement utilisée pour transcrire le japonais,
 basée sur la phonologie anglaise</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="757"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="763"/>
+        <location filename="../sources.ui" line="767"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -5047,12 +4790,12 @@ Standardisé comme ISO 3602
 Pas encore implémenté dans GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="769"/>
+        <location filename="../sources.ui" line="773"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="779"/>
+        <location filename="../sources.ui" line="783"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -5063,32 +4806,32 @@ Standardisé comme ISO 3602
 Pas encore implémenté dans GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="785"/>
+        <location filename="../sources.ui" line="789"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="792"/>
+        <location filename="../sources.ui" line="796"/>
         <source>Syllabaries:</source>
         <translation>Syllabaires :</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="799"/>
+        <location filename="../sources.ui" line="803"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Syllabaire japonais (Hiragana)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="802"/>
+        <location filename="../sources.ui" line="806"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="809"/>
+        <location filename="../sources.ui" line="813"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Syllabaire japonais (Katakana)</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="812"/>
+        <location filename="../sources.ui" line="816"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
@@ -5227,12 +4970,12 @@ Pas encore implémenté dans GoldenDict.</translation>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="102"/>
+        <location filename="../translatebox.cc" line="101"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Saisissez un mot ou une phrase pour chercher dans les dictionnaires</translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="124"/>
+        <location filename="../translatebox.cc" line="122"/>
         <source>Drop-down</source>
         <translation>Descendre</translation>
     </message>

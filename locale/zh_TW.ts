@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="zh_TW">
+<TS version="2.1" language="zh_TW">
 <context>
     <name>About</name>
     <message>
@@ -125,10 +125,6 @@
         <translation>表單</translation>
     </message>
     <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">沒有可用的播放器，無法開啟音訊檔案：%1</translation>
-    </message>
-    <message>
         <source>&amp;Next</source>
         <translation>下一個(&amp;N)</translation>
     </message>
@@ -165,10 +161,6 @@
         <translation>在新分頁中查詢 &quot;%1&quot;(&amp;N)</translation>
     </message>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>所引用的資源不存在。</translation>
     </message>
@@ -199,14 +191,6 @@
     <message>
         <source>Open Link in &amp;External Browser</source>
         <translation>在外部瀏覽器中開啟連結(&amp;E)</translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">播放非 wav 檔案</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">要播放非 WAV 檔案，請進入 編輯|偏好設定，選取音訊標籤，選擇「透過 DirectShow 播放」。</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
@@ -261,10 +245,6 @@
         <translation>儲存音訊</translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>音訊檔(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有檔案 (*.*)</translation>
-    </message>
-    <message>
         <source>Save image</source>
         <translation>儲存圖片</translation>
     </message>
@@ -283,10 +263,6 @@
     <message>
         <source>TTS Voice</source>
         <translation>文字轉語音聲音</translation>
-    </message>
-    <message>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="obsolete">警告： FFmpeg 音訊撥放程式： %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
@@ -312,6 +288,10 @@
         <source>WARNING: Audio Player: %1</source>
         <translation>警告： 音訊播放程式： %1</translation>
     </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
@@ -331,10 +311,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>ChineseConversion</name>
-    <message>
-        <source>GroupBox</source>
-        <translation type="obsolete">群組框</translation>
-    </message>
     <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
         <translation>啟用簡繁轉換</translation>
@@ -693,10 +669,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">字典欄</translation>
-    </message>
-    <message>
         <source>Edit this group</source>
         <translation>編輯此群組</translation>
     </message>
@@ -768,13 +740,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">無</translation>
-    </message>
-</context>
-<context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
@@ -831,13 +796,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>None</source>
         <translation>無</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">無</translation>
     </message>
 </context>
 <context>
@@ -975,17 +933,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Choose a Group (Alt+G)</source>
         <translation>選擇一個群組(Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">表單</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">尋找於</translation>
     </message>
 </context>
 <context>
@@ -2058,10 +2005,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>上一頁</translation>
     </message>
     <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">列印預覽</translation>
-    </message>
-    <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>字典數：%1，條目數：%2，單字數：%3</translation>
     </message>
@@ -2142,10 +2085,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>最小化視窗至系統匣</translation>
     </message>
     <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">重新掃描檔案</translation>
-    </message>
-    <message>
         <source>Page Set&amp;up</source>
         <translation>頁面設定(&amp;U)</translation>
     </message>
@@ -2164,10 +2103,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Zoom Out</source>
         <translation>縮小</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">群組...(&amp;G)</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -2203,20 +2138,12 @@ between classic and school orthography in cyrillic)</source>
 按 &lt;b&gt;下載&lt;/b&gt; 以開啟下載頁面。</translation>
     </message>
     <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">查詢面板</translation>
-    </message>
-    <message>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <source>Loading...</source>
@@ -2231,10 +2158,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>&amp;Preferences...</source>
         <translation>偏好設定(&amp;P)...</translation>
-    </message>
-    <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Html 檔案(*.html *.htm)</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -2257,10 +2180,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>下一頁</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">警告： %1</translation>
-    </message>
-    <message>
         <source>Print Article</source>
         <translation>列印條目</translation>
     </message>
@@ -2269,16 +2188,8 @@ between classic and school orthography in cyrillic)</source>
         <translation>找不到可用的印表機，請先安裝一個印表機。</translation>
     </message>
     <message>
-        <source>Navigation</source>
-        <translation type="obsolete">導航列</translation>
-    </message>
-    <message>
         <source>&amp;View</source>
         <translation>檢視(&amp;V)</translation>
-    </message>
-    <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">在字典欄中顯示字典名稱</translation>
     </message>
     <message>
         <source>H&amp;istory</source>
@@ -2660,10 +2571,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 </context>
 <context>
     <name>OrderAndProps</name>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
     <message>
         <source>Form</source>
         <translation>表單</translation>
@@ -3094,34 +3001,12 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
         <translation>播放</translation>
     </message>
     <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">透過 Phonon 播放</translation>
-    </message>
-    <message>
         <source>Use external program:</source>
         <translation>使用外部程式播放：</translation>
     </message>
     <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">透過 DirectShow 播放</translation>
-    </message>
-    <message>
         <source>Double-click translates the word clicked</source>
         <translation>按兩下翻譯字詞(在主介面中)</translation>
-    </message>
-    <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">使用 Windows 原生 API 播放。僅支援 .wav 檔案，但穩定可靠。</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">透過 Windows 原生 API 播放</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">透過 Phonon 框架播放音訊。有時不太穩定，但支援大多數音訊檔案格式。</translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
@@ -3167,47 +3052,6 @@ Plugin must be installed for this option to work.</source>
     <message>
         <source>Ad&amp;vanced</source>
         <translation>進階設定(&amp;V)</translation>
-    </message>
-    <message>
-        <source>ScanPopup extra technologies</source>
-        <translation>額外的螢幕取詞技術</translation>
-    </message>
-    <message>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>嘗試使用 IAccessibleEx 技術來取得滑鼠游標下的單字。
-本技術僅適用支援該技術的程式 (如 Internet Explorer 9 )。
-若您不使用這類程式的話，就不須勾選此選項。</translation>
-    </message>
-    <message>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation>啟用 &amp;IAccessibleEx</translation>
-    </message>
-    <message>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>嘗試使用 UI Automation 技術來取得滑鼠游標下的單字。
-本技術僅適用支援該技術的程式。
-若您不使用這類程式的話，就不須勾選此選項。</translation>
-    </message>
-    <message>
-        <source>Use &amp;UIAutomation</source>
-        <translation>啟用 &amp;UIAutomation</translation>
-    </message>
-    <message>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>嘗試使用特別的 GoldenDict 訊息來取得滑鼠游標下的單字。
-本技術僅適用支援該技術的程式。
-若您不使用這類程式的話，就不須勾選此選項。</translation>
-    </message>
-    <message>
-        <source>Use &amp;GoldenDict message</source>
-        <translation>啟用 &amp;GoldenDict 訊息</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
@@ -3284,14 +3128,6 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <source>Lingoes-Blue</source>
         <translation>靈格斯-藍</translation>
-    </message>
-    <message>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="obsolete">使用 FFmpeg(libav) 和 libao 播放音訊檔案。</translation>
-    </message>
-    <message>
-        <source>Use internal player</source>
-        <translation type="obsolete">使用內部播放器</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
@@ -3667,13 +3503,6 @@ clears its network cache from disk during exit.</source>
     </message>
 </context>
 <context>
-    <name>QWebEnginePage</name>
-    <message>
-        <source>Select All</source>
-        <translation type="obsolete">全選</translation>
-    </message>
-</context>
-<context>
     <name>QuickFilterLine</name>
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
@@ -3739,24 +3568,12 @@ clears its network cache from disk during exit.</source>
         <translation>...</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">詞條</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
-    </message>
-    <message>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
     <message>
         <source>Dialog</source>
         <translation>對話方塊</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">列出符合條件的詞條(Alt+M)</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3787,10 +3604,6 @@ could be resized or managed in other ways.</source>
     <message>
         <source>Forward</source>
         <translation>下一頁</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -3837,10 +3650,6 @@ could be resized or managed in other ways.</source>
     <message>
         <source>Nihon-shiki</source>
         <translation>日本式</translation>
-    </message>
-    <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">作為取代選項，使用 %GD1251% 代替 CP1251，%GDISO1% 代替 ISO 8859-1.</translation>
     </message>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
@@ -4017,24 +3826,6 @@ blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>目前使用 Forvo 需要一個 API key。若此處空白將使用未來可能
 會失效的預設 key，或者請在該網站註冊以獲取您自己的 key。</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:2em;&quot;&gt;從&lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;這裡&lt;/span&gt;&lt;/a&gt;獲取屬於您的 key, 或是保持空白以使用預設 key.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>
