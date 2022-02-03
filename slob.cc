@@ -902,7 +902,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           || list[ 1 ].endsWith( " tex" ) )
       {
         QString name;
-        name.sprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
+        name.asprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
         imgName = texCachePath + "/" + name;
 
         if( !QFileInfo( imgName ).exists() )
@@ -985,7 +985,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
-          QProcess::execute( command );
+          QProcess::execute( command,QStringList() );
         }
 
         QString tag = QString( "<img class=\"imgtex\" src=\"file://" )

@@ -98,7 +98,7 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
 
 void ArticleWebView::mousePressEvent(QMouseEvent *event)
 {
-    if (event->buttons() & Qt::MidButton)
+    if (event->buttons() & Qt::MiddleButton)
         midButtonPressed = true;
 }
 
@@ -127,7 +127,7 @@ void ArticleWebView::sendCustomMouseEvent( QEvent::Type type) {
 }
 
 void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
-  bool noMidButton = !( event->buttons() & Qt::MidButton );
+  bool noMidButton = !( event->buttons() & Qt::MiddleButton );
 
   if ( midButtonPressed & noMidButton )
     midButtonPressed = false;
@@ -169,7 +169,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
     SystemParametersInfo( SPI_GETWHEELSCROLLLINES, 0, &nLines, 0 );
     if( nLines == WHEEL_PAGESCROLL )
     {
-      QKeyEvent kev( QEvent::KeyPress, ev->delta() > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
+      QKeyEvent kev( QEvent::KeyPress, ev->angleDelta ().y () > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
                      Qt::NoModifier );
       auto childrens = this->children();
       for (auto child : childrens) {

@@ -107,7 +107,7 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
 
   QHBoxLayout *layout = new QHBoxLayout(this);
   setLayout(layout);
-  layout->setMargin(0);
+  layout->setContentsMargins(0,0,0,0);
   layout->addWidget(translate_line);
 
   QPixmap image(":/icons/system-search.svg");

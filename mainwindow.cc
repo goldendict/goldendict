@@ -741,7 +741,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_WIN
   if( cfg.normalMainWindowGeometry.width() <= 0 )
   {
-    QRect r = QApplication::desktop()->availableGeometry();
+    QRect r = QGuiApplication::primaryScreen ()->geometry ();
     cfg.normalMainWindowGeometry.setRect( r.width() / 4, r.height() / 4, r.width() / 2, r.height() / 2 );
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
@@ -975,7 +975,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
     return;
   }
 
-  if (event->button() != Qt::MidButton)
+  if (event->button() != Qt::MiddleButton)
     return QMainWindow::mousePressEvent(event);
 
   // middle clicked
@@ -1194,11 +1194,11 @@ void MainWindow::wheelEvent( QWheelEvent *ev )
 {
   if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
   {
-    if ( ev->delta() > 0 )
+    if ( ev->angleDelta().y() > 0 )
     {
         zoomin();
     }
-    else if ( ev->delta() < 0 )
+    else if ( ev->angleDelta().y()  < 0 )
     {
         zoomout();
     }
@@ -4363,11 +4363,10 @@ void MainWindow::editDictionary( Dictionary::Class * dict )
       QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
       command.replace( "%GDWORD%", headword );
     }
-    if( !QProcess::startDetached( command ) )
+    if( !QProcess::startDetached( command,QStringList() ) )
       QApplication::beep();
   }
 }
-
 
 void MainWindow::openDictionaryFolder( const QString & id )
 {
