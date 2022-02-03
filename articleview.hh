@@ -29,7 +29,7 @@ class ArticleView: public QFrame
   Instances::Groups const & groups;
   bool popupView;
   Config::Class const & cfg;
-
+  QWebChannel *channel;
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,

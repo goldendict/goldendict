@@ -2,7 +2,7 @@
 $(function() {
         $("a").click(function(event) {
             var link = $(this).attr("href");
-            if(link.indexOf("://")>=0){
+            if(link.indexOf(":")>=0){
                 return;
             }
 
