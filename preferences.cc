@@ -240,11 +240,6 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
 //Platform-specific options
 
-#ifndef Q_OS_WIN32
-  ui.groupBox_ScanPopupTechnologies->hide();
-//  ui.tabWidget->removeTab( 5 );
-#endif
-
 #ifndef ENABLE_SPWF_CUSTOMIZATION
   ui.groupBox_ScanPopupWindowFlags->hide();
 #endif
