@@ -5,15 +5,11 @@ on:
   push:
     branches:
       - dev
-    # paths:
-    #   - '*.pro'
-    #   - '.github/**'
+      - staged
   pull_request:
     branches:
       - dev
-    # paths:
-    #   - '*.pro'
-    #   - '.github/**' 
+      - staged
 jobs:
   build:
     name: Build
