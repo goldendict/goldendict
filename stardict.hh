@@ -17,7 +17,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing &,
                                       unsigned maxHeadwordsToExpand )
-  THROW_SPEC( std::exception );
+  ;
 
 }
 

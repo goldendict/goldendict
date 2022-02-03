@@ -831,7 +831,7 @@ GreekTable::GreekTable()
 
 }
 
-sptr< Dictionary::Class > makeDictionary() THROW_SPEC( std::exception )
+sptr< Dictionary::Class > makeDictionary() 
 {
   static GreekTable t;
 

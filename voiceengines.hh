@@ -18,7 +18,7 @@ using std::string;
 using gd::wstring;
 
 vector< sptr< Dictionary::Class > > makeDictionaries(Config::VoiceEngines const & voiceEngines)
-  THROW_SPEC( std::exception );
+  ;
 
 }
 

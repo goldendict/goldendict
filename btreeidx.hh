@@ -167,13 +167,13 @@ public:
   /// need not to implement this function.
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
                                                               unsigned minLength,
                                                               unsigned maxSuffixVariation,
                                                               unsigned long maxResults )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual bool isLocalDictionary()
   { return true; }

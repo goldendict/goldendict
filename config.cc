@@ -446,7 +446,7 @@ void saveMutedDictionaries( QDomDocument & dd, QDomElement & muted,
 
 }
 
-Class load() THROW_SPEC( exError )
+Class load() 
 {
   QString configName  = getConfigFileName();
 
@@ -1278,7 +1278,7 @@ void saveGroup( Group const & data, QDomElement & group )
 
 }
 
-void save( Class const & c ) THROW_SPEC( exError )
+void save( Class const & c ) 
 {
   QFile configFile( getConfigFileName() + ".tmp" );
 
@@ -2202,12 +2202,12 @@ QString getConfigFileName()
   return getHomeDir().absoluteFilePath( "config" );
 }
 
-QString getConfigDir() THROW_SPEC( exError )
+QString getConfigDir() 
 {
   return getHomeDir().path() + QDir::separator();
 }
 
-QString getIndexDir() THROW_SPEC( exError )
+QString getIndexDir() 
 {
   QDir result = getHomeDir();
 
@@ -2228,12 +2228,12 @@ QString getIndexDir() THROW_SPEC( exError )
   return result.path() + QDir::separator();
 }
 
-QString getPidFileName() THROW_SPEC( exError )
+QString getPidFileName() 
 {
   return getHomeDir().filePath( "pid" );
 }
 
-QString getHistoryFileName() THROW_SPEC( exError )
+QString getHistoryFileName() 
 {
   QString homeHistoryPath = getHomeDir().filePath( "history" );
 
@@ -2249,22 +2249,22 @@ QString getHistoryFileName() THROW_SPEC( exError )
   return homeHistoryPath;
 }
 
-QString getFavoritiesFileName() THROW_SPEC( exError )
+QString getFavoritiesFileName() 
 {
   return getHomeDir().filePath( "favorites" );
 }
 
-QString getUserCssFileName() THROW_SPEC( exError )
+QString getUserCssFileName() 
 {
   return getHomeDir().filePath( "article-style.css" );
 }
 
-QString getUserCssPrintFileName() THROW_SPEC( exError )
+QString getUserCssPrintFileName() 
 {
   return getHomeDir().filePath( "article-style-print.css" );
 }
 
-QString getUserQtCssFileName() THROW_SPEC( exError )
+QString getUserQtCssFileName() 
 {
   return getHomeDir().filePath( "qt-style.css" );
 }
