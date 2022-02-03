@@ -35,3 +35,4 @@ by using external file syntax.the browser can cache the file.improve web perform
 - imp. zoomfactor cause web page flicker during loading the content. ease this situation in some way.
 - remove mouseover32 folder
   the mouseover32 folder is old and not crossplatform. see also https://github.com/goldendict/goldendict/issues/1444
+  remove all the obsolete entries from ts files.
