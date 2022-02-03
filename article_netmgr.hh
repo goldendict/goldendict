@@ -139,6 +139,8 @@ class ArticleResourceReply: public QNetworkReply
   sptr< Dictionary::DataRequest > req;
   qint64 alreadyRead;
 
+  QAtomicInt finishSignalSent;
+
 public:
 
   ArticleResourceReply( QObject * parent,

@@ -463,6 +463,8 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
   {
     connect( this, SIGNAL( readyReadSignal() ),
              this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
+    connect( this, SIGNAL( finishedSignal() ),
+            this, SLOT( finishedSlot() ), Qt::QueuedConnection );
 
     emit readyReadSignal();
 
@@ -470,10 +472,6 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
     {
       emit finishedSignal();
       GD_DPRINTF( "In-place finish.\n" );
-    }
-    else{
-      connect( this, SIGNAL( finishedSignal() ),
-              this, SLOT( finishedSlot() ), Qt::QueuedConnection );
     }
   }
 }
@@ -552,7 +550,12 @@ void ArticleResourceReply::finishedSlot()
     setError(ContentNotFoundError, "content not found");
   }
 
-  emit finished();
+  //prevent sent multi times.
+  if (!finishSignalSent.loadAcquire())
+  {
+    finishSignalSent.ref();
+    emit finished();
+  }
 }
 
 BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
