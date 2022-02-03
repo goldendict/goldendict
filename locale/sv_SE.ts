@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sv_SE">
+<TS version="2.1" language="sv_SE">
 <context>
     <name>About</name>
     <message>
@@ -42,62 +42,62 @@
 <context>
     <name>ArticleMaker</name>
     <message>
-        <location filename="../article_maker.cc" line="245"/>
+        <location filename="../article_maker.cc" line="181"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>Ingen översättning för &lt;b&gt;%1&lt;/b&gt; hittades i gruppen &lt;b&gt;%2&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="250"/>
+        <location filename="../article_maker.cc" line="186"/>
         <source>No translation was found in group &lt;b&gt;%1&lt;/b&gt;.</source>
         <translation>Ingen översättning hittades i gruppen &lt;b&gt;%1&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="297"/>
+        <location filename="../article_maker.cc" line="234"/>
         <source>Welcome!</source>
         <translation>Välkommen!</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="210"/>
+        <location filename="../article_maker.cc" line="140"/>
         <source>Expand article</source>
         <translation>Visa artikel</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="216"/>
+        <location filename="../article_maker.cc" line="142"/>
         <source>Collapse article</source>
         <translation>Dölj artikel</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="299"/>
+        <location filename="../article_maker.cc" line="236"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Välkommen till &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;För att komma igång med programmet måste du först gå till &lt;b&gt;Redigera|Ordlistor&lt;/b&gt; för att lägga till mappsökvägar där programmet skall söka efter dina ordlistefiler. Där kan du även konfigurera olika Wikipedia-webbplatser eller andra källor, ändra ordning på ordlistor och skapa ordlistegrupper.&lt;p&gt;När det är avklarat kan du börja slå upp ord! Du kan göra detta i det här fönstret genom att använda sökpanelen till vänster, eller genom att &lt;a href=&quot;Arbeta med popuprutor&quot;&gt;slå upp ord inifrån andra öppna program&lt;/a&gt;. &lt;p&gt;Vill du anpassa programmet hittar du alla tillgängliga inställningsalternativ i &lt;b&gt;Redigera|Inställningar&lt;/b&gt;. Alla inställningar där har verktygstips, läs dem om det är något du undrar över.&lt;p&gt;Om du behöver ytterligare hjälp, behöver ställa en fråga, har förslag eller bara undrar vad andra tycker, så är du välkommen till programmets &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Gå till programmets &lt;a href=&quot;http://goldendict.org/&quot;&gt;webbplats&lt;/a&gt; för att hitta uppdateringar. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensierat under GNU GPLv3 eller senare.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="315"/>
+        <location filename="../article_maker.cc" line="252"/>
         <source>Working with popup</source>
         <translation>Arbeta med popuprutor</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="317"/>
+        <location filename="../article_maker.cc" line="254"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Arbeta med popuprutor&lt;/h3&gt;För att slå upp ord inifrån andra öppna program, så måste du först aktivera alternativet &lt;i&gt;&quot;Använd sökning med popupruta&quot;&lt;/i&gt; i &lt;b&gt;Inställningar&lt;/b&gt;. Därefter kan du slå på/stänga av funktionen vid behov genom att antingen klicka på popuprutefunktionens ikon här ovan eller genom att högerklicka på ikonen i meddelandefältet och välja alternativet i menyn som visas. </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="324"/>
+        <location filename="../article_maker.cc" line="261"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Håll sedan muspekaren över det ord som du vill slå upp i det andra programmet, så visas en popupruta med sökresultat från de ordlistor du använder.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="327"/>
+        <location filename="../article_maker.cc" line="264"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Använd sedan musen för att markera det ord som du vill slå upp i det andra programmet (dubbelklicka eller klicka och dra med musknappen nedtryckt), så visas en popupruta med sökresultat från de ordlistor du använder.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="409"/>
+        <location filename="../article_maker.cc" line="346"/>
         <source>(untitled)</source>
         <translation>(namnlös)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="423"/>
+        <location filename="../article_maker.cc" line="360"/>
         <source>(picture)</source>
         <translation>(bild)</translation>
     </message>
@@ -105,37 +105,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="692"/>
+        <location filename="../article_maker.cc" line="623"/>
         <source>Expand article</source>
         <translation>Visa artikel</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="695"/>
+        <location filename="../article_maker.cc" line="626"/>
         <source>From </source>
         <translation>Från </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="700"/>
+        <location filename="../article_maker.cc" line="631"/>
         <source>Collapse article</source>
         <translation>Dölj artikel</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="717"/>
+        <location filename="../article_maker.cc" line="648"/>
         <source>Query error: %1</source>
         <translation>Frågefel: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="823"/>
+        <location filename="../article_maker.cc" line="766"/>
         <source>Close words: </source>
         <translation>Närliggande ord: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="894"/>
+        <location filename="../article_maker.cc" line="837"/>
         <source>Compound expressions: </source>
         <translation>Sammansättningar: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="922"/>
+        <location filename="../article_maker.cc" line="865"/>
         <source>Individual words: </source>
         <translation>Enskilda ord: </translation>
     </message>
@@ -190,189 +190,181 @@
         <translation>Färgmarkera &amp;alla</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="285"/>
+        <location filename="../articleview.cc" line="312"/>
         <source>Select Current Article</source>
         <translation>Markera aktuell artikel</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="291"/>
+        <location filename="../articleview.cc" line="318"/>
         <source>Copy as text</source>
         <translation>Kopiera som oformaterad text</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="297"/>
+        <location filename="../articleview.cc" line="324"/>
         <source>Inspect</source>
         <translation>Granska källkod</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1033"/>
+        <location filename="../articleview.cc" line="1009"/>
         <source>Resource</source>
         <translation>Resurs</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1038"/>
+        <location filename="../articleview.cc" line="1014"/>
         <source>Audio</source>
         <translation>Ljud</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1043"/>
+        <location filename="../articleview.cc" line="1019"/>
         <source>TTS Voice</source>
         <translation>Text till tal-modul</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1048"/>
+        <location filename="../articleview.cc" line="1024"/>
         <source>Picture</source>
         <translation>Bild</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1055"/>
+        <location filename="../articleview.cc" line="1031"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1064"/>
+        <location filename="../articleview.cc" line="1040"/>
         <source>Video: %1</source>
         <translation>Video: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1081"/>
+        <location filename="../articleview.cc" line="1057"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>Definition ur ordlistan &quot;%1&quot;: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1089"/>
+        <location filename="../articleview.cc" line="1065"/>
         <source>Definition: %1</source>
         <translation>Definition: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1362"/>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1356"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Den refererade resursen finns inte.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1402"/>
+        <location filename="../articleview.cc" line="1396"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>Det refererade ljudprogrammet finns inte.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2026"/>
+        <location filename="../articleview.cc" line="1971"/>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2037"/>
         <source>Failed to play sound file: %1</source>
         <translation>Det gick inte att spela upp ljudfil: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2082"/>
+        <location filename="../articleview.cc" line="2093"/>
         <source>WARNING: Audio Player: %1</source>
         <translation>VARNING: Ljudspelare: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1285"/>
-        <location filename="../articleview.cc" line="1321"/>
-        <location filename="../articleview.cc" line="1555"/>
+        <location filename="../articleview.cc" line="1279"/>
+        <location filename="../articleview.cc" line="1315"/>
+        <location filename="../articleview.cc" line="1549"/>
         <source>ERROR: %1</source>
         <translation>FEL: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1954"/>
+        <location filename="../articleview.cc" line="1969"/>
         <source>Save sound</source>
         <translation>Spara ljud</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1956"/>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Ljudfiler (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Alla filer (*.*)</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="1969"/>
+        <location filename="../articleview.cc" line="1984"/>
         <source>Save image</source>
         <translation>Spara bild</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1971"/>
+        <location filename="../articleview.cc" line="1986"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>Bildfiler (*.bmp *.jpg *.png *.tif);;Alla filer (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1710"/>
+        <location filename="../articleview.cc" line="1729"/>
         <source>&amp;Open Link</source>
         <translation>Öppna &amp;länk</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1716"/>
+        <location filename="../articleview.cc" line="1735"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Öppna länk i ny &amp;flik</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1723"/>
+        <location filename="../articleview.cc" line="1742"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>Öppna länk i extern &amp;webbläsare</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1738"/>
+        <location filename="../articleview.cc" line="1755"/>
         <source>Save &amp;image...</source>
         <translation>Spara &amp;bild …</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1746"/>
+        <location filename="../articleview.cc" line="1763"/>
         <source>Save s&amp;ound...</source>
         <translation>Spara l&amp;jud …</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1765"/>
+        <location filename="../articleview.cc" line="1781"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&amp;Slå upp &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1773"/>
+        <location filename="../articleview.cc" line="1789"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>Slå upp &quot;%1&quot; i &amp;ny flik</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1778"/>
+        <location filename="../articleview.cc" line="1794"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>Skicka &quot;%1&quot; till sökfältet</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1784"/>
-        <location filename="../articleview.cc" line="1820"/>
+        <location filename="../articleview.cc" line="1800"/>
+        <location filename="../articleview.cc" line="1836"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>&amp;Lägg till &quot;%1&quot; i historiken</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1798"/>
+        <location filename="../articleview.cc" line="1814"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>Slå upp &quot;%1&quot; i %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1806"/>
+        <location filename="../articleview.cc" line="1822"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Slå upp &quot;%1&quot; i %2 i &amp;ny flik</translation>
     </message>
     <message>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="obsolete">VARNING: Ljudspelare för FFmpeg: %1</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="2075"/>
+        <location filename="../articleview.cc" line="2086"/>
         <source>WARNING: %1</source>
         <translation>VARNING: %1</translation>
     </message>
     <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">Det gick inte att köra en spelare när en ljudfil skulle spelas upp: %1</translation>
-    </message>
-    <message>
-        <location filename="../articleview.cc" line="2041"/>
+        <location filename="../articleview.cc" line="2052"/>
         <source>Failed to create temporary file.</source>
         <translation>Det gick inte att skapa en tillfällig fil.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2052"/>
+        <location filename="../articleview.cc" line="2063"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>Det gick inte att automatiskt öppna en resursfil. Försök att öppna den manuellt: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2075"/>
+        <location filename="../articleview.cc" line="2086"/>
         <source>The referenced resource failed to download.</source>
         <translation>Det gick inte att hämta den refererade resursen.</translation>
     </message>
@@ -544,46 +536,46 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>DictGroupsWidget</name>
     <message>
-        <location filename="../groups_widgets.cc" line="594"/>
-        <location filename="../groups_widgets.cc" line="669"/>
-        <location filename="../groups_widgets.cc" line="842"/>
-        <location filename="../groups_widgets.cc" line="1017"/>
+        <location filename="../groups_widgets.cc" line="592"/>
+        <location filename="../groups_widgets.cc" line="667"/>
+        <location filename="../groups_widgets.cc" line="840"/>
+        <location filename="../groups_widgets.cc" line="1015"/>
         <source>Dictionaries: </source>
         <translation>Ordlistor: </translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="694"/>
+        <location filename="../groups_widgets.cc" line="692"/>
         <source>Confirmation</source>
         <translation>Bekräftelse</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="695"/>
+        <location filename="../groups_widgets.cc" line="693"/>
         <source>Are you sure you want to generate a set of groups based on language pairs?</source>
         <translation>Är du säker på att du vill skapa en uppsättning grupper baserade på språkpar?</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="720"/>
+        <location filename="../groups_widgets.cc" line="718"/>
         <source>Unassigned</source>
         <translation>Ej tilldelad</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="858"/>
+        <location filename="../groups_widgets.cc" line="856"/>
         <source>Combine groups by source language to &quot;%1-&gt;&quot;</source>
         <translation>Kombinera grupper efter källspråk till &quot;%1 &gt;&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="875"/>
+        <location filename="../groups_widgets.cc" line="873"/>
         <source>Combine groups by target language to &quot;-&gt;%1&quot;</source>
         <translation>Kombinera grupper efter målspråk till &quot;&gt; %1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="893"/>
+        <location filename="../groups_widgets.cc" line="891"/>
         <source>Make two-side translate group &quot;%1-%2-%1&quot;</source>
         <translation>Skapa den dubbelsidiga språkgruppen &quot;%1-%2-%1&quot;</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="911"/>
-        <location filename="../groups_widgets.cc" line="930"/>
+        <location filename="../groups_widgets.cc" line="909"/>
+        <location filename="../groups_widgets.cc" line="928"/>
         <source>Combine groups with &quot;%1&quot;</source>
         <translation>Kombinera grupper med &quot;%1&quot;</translation>
     </message>
@@ -661,42 +653,42 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation>Filtersträng (fast sträng, jokertecken eller reguljärt uttryck)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="41"/>
+        <location filename="../dictheadwords.cc" line="39"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="42"/>
+        <location filename="../dictheadwords.cc" line="40"/>
         <source>Wildcards</source>
         <translation>Jokertecken</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="43"/>
+        <location filename="../dictheadwords.cc" line="41"/>
         <source>RegExp</source>
         <translation>RegExp</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="282"/>
+        <location filename="../dictheadwords.cc" line="271"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation>Unikt huvudord totalt: %1, filtrerat: %2</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="299"/>
+        <location filename="../dictheadwords.cc" line="288"/>
         <source>Save headwords to file</source>
         <translation>Spara huvudord till fil</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="301"/>
+        <location filename="../dictheadwords.cc" line="290"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Textfiler (*.txt);;Alla filer (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="325"/>
+        <location filename="../dictheadwords.cc" line="314"/>
         <source>Export headwords...</source>
         <translation>Exportera huvudord...</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="325"/>
+        <location filename="../dictheadwords.cc" line="314"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -772,22 +764,22 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>DictServer</name>
     <message>
-        <location filename="../dictserver.cc" line="276"/>
+        <location filename="../dictserver.cc" line="274"/>
         <source>Url: </source>
         <translation>Webbadress: </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="277"/>
+        <location filename="../dictserver.cc" line="275"/>
         <source>Databases: </source>
         <translation>Databaser: </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="278"/>
+        <location filename="../dictserver.cc" line="276"/>
         <source>Search strategies: </source>
         <translation>Sökstrategier: </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="282"/>
+        <location filename="../dictserver.cc" line="280"/>
         <source>Server databases</source>
         <translation>Serverdatabaser</translation>
     </message>
@@ -885,39 +877,39 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation>Ordlistor</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="46"/>
         <source>&amp;Sources</source>
         <translation>&amp;Källor</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="45"/>
-        <location filename="../editdictionaries.cc" line="242"/>
+        <location filename="../editdictionaries.cc" line="47"/>
+        <location filename="../editdictionaries.cc" line="244"/>
         <source>&amp;Dictionaries</source>
         <translation>&amp;Ordlistor</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="46"/>
-        <location filename="../editdictionaries.cc" line="245"/>
+        <location filename="../editdictionaries.cc" line="48"/>
+        <location filename="../editdictionaries.cc" line="247"/>
         <source>&amp;Groups</source>
         <translation>&amp;Grupper</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="122"/>
+        <location filename="../editdictionaries.cc" line="124"/>
         <source>Sources changed</source>
         <translation>Källor har ändrats</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="123"/>
+        <location filename="../editdictionaries.cc" line="125"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>Några källor har ändrats. Godkänner du ändringarna?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="126"/>
+        <location filename="../editdictionaries.cc" line="128"/>
         <source>Accept</source>
         <translation>Godkänn</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="128"/>
+        <location filename="../editdictionaries.cc" line="130"/>
         <source>Cancel</source>
         <translation>Avbryt</translation>
     </message>
@@ -928,13 +920,6 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <location filename="../externalviewer.cc" line="53"/>
         <source>the viewer program name is empty</source>
         <translation>fältet för visningsprogrammets namn är tomt</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Ingen</translation>
     </message>
 </context>
 <context>
@@ -1013,16 +998,9 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
 </context>
 <context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Ingen</translation>
-    </message>
-</context>
-<context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="643"/>
+        <location filename="../favoritespanewidget.cc" line="644"/>
         <source>Error in favorities file</source>
         <translation>Fel i favoriter-fil</translation>
     </message>
@@ -1030,27 +1008,27 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>FavoritesPaneWidget</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="29"/>
+        <location filename="../favoritespanewidget.cc" line="30"/>
         <source>&amp;Delete Selected</source>
         <translation>Ta &amp;bort markerade</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="38"/>
+        <location filename="../favoritespanewidget.cc" line="39"/>
         <source>Copy Selected</source>
         <translation>Kopiera markerade</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="47"/>
+        <location filename="../favoritespanewidget.cc" line="48"/>
         <source>Add folder</source>
         <translation>Lägg till mapp</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="61"/>
+        <location filename="../favoritespanewidget.cc" line="62"/>
         <source>Favorites:</source>
         <translation>Favoriter:</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="167"/>
+        <location filename="../favoritespanewidget.cc" line="168"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation>Alla markerade objekt tas bort. Fortsätt?</translation>
     </message>
@@ -1058,37 +1036,37 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
     <message>
-        <location filename="../forvo.cc" line="229"/>
+        <location filename="../forvo.cc" line="204"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML-tolkningsfel: %1 vid %2,%3</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="305"/>
+        <location filename="../forvo.cc" line="280"/>
         <source>Added %1</source>
         <translation>Lade till %1</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="308"/>
+        <location filename="../forvo.cc" line="283"/>
         <source>by</source>
         <translation>av</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="287"/>
         <source>Male</source>
         <translation>Man</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="312"/>
+        <location filename="../forvo.cc" line="287"/>
         <source>Female</source>
         <translation>Kvinna</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="314"/>
+        <location filename="../forvo.cc" line="289"/>
         <source>from</source>
         <translation>från</translation>
     </message>
     <message>
-        <location filename="../forvo.cc" line="352"/>
+        <location filename="../forvo.cc" line="327"/>
         <source>Go to Edit|Dictionaries|Sources|Forvo and apply for our own API key to make this error disappear.</source>
         <translation>Gå till Redigera|Ordlistor|Källor|Forvo och ansök om att få vår egen API-nyckel för att få problemet att försvinna.</translation>
     </message>
@@ -1184,17 +1162,6 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
         <translation>Välj en grupp (Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulär</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">Sök i</translation>
     </message>
 </context>
 <context>
@@ -1398,27 +1365,27 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>HistoryPaneWidget</name>
     <message>
-        <location filename="../historypanewidget.cc" line="21"/>
+        <location filename="../historypanewidget.cc" line="23"/>
         <source>&amp;Delete Selected</source>
         <translation>Ta &amp;bort markerade</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="30"/>
+        <location filename="../historypanewidget.cc" line="32"/>
         <source>Copy Selected</source>
         <translation>Kopiera markerade</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="47"/>
+        <location filename="../historypanewidget.cc" line="49"/>
         <source>History:</source>
         <translation>Historik:</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="219"/>
+        <location filename="../historypanewidget.cc" line="221"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="223"/>
+        <location filename="../historypanewidget.cc" line="225"/>
         <source>History size: %1 entries out of maximum %2</source>
         <translation>Historikstorlek: %1 poster av maximalt %2</translation>
     </message>
@@ -1426,12 +1393,12 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>Hunspell</name>
     <message>
-        <location filename="../hunspell.cc" line="293"/>
+        <location filename="../hunspell.cc" line="278"/>
         <source>Spelling suggestions: </source>
         <translation>Stavningsförslag: </translation>
     </message>
     <message>
-        <location filename="../hunspell.cc" line="923"/>
+        <location filename="../hunspell.cc" line="856"/>
         <source>%1 Morphology</source>
         <translation>Morfologi för %1</translation>
     </message>
@@ -2492,7 +2459,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="375"/>
+        <location filename="../main.cc" line="358"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Fel i konfigurationsfilen. Vill du använda standardinställningarna istället?</translation>
     </message>
@@ -2501,7 +2468,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="799"/>
+        <location filename="../mainwindow.cc" line="811"/>
         <source>Welcome!</source>
         <translation>Välkommen!</translation>
     </message>
@@ -2607,7 +2574,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
-        <location filename="../mainwindow.cc" line="369"/>
+        <location filename="../mainwindow.cc" line="385"/>
         <source>&amp;Quit</source>
         <translation>&amp;Avsluta</translation>
     </message>
@@ -2709,7 +2676,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     <message>
         <location filename="../mainwindow.ui" line="597"/>
         <location filename="../mainwindow.ui" line="600"/>
-        <location filename="../mainwindow.cc" line="274"/>
+        <location filename="../mainwindow.cc" line="290"/>
         <source>Menu Button</source>
         <translation>Menyknapp</translation>
     </message>
@@ -2755,10 +2722,10 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
-        <location filename="../mainwindow.cc" line="245"/>
-        <location filename="../mainwindow.cc" line="1823"/>
-        <location filename="../mainwindow.cc" line="1901"/>
-        <location filename="../mainwindow.cc" line="4733"/>
+        <location filename="../mainwindow.cc" line="261"/>
+        <location filename="../mainwindow.cc" line="1852"/>
+        <location filename="../mainwindow.cc" line="1930"/>
+        <location filename="../mainwindow.cc" line="4716"/>
         <source>Add current tab to Favorites</source>
         <translation>Lägg till aktuell flik i Favoriter</translation>
     </message>
@@ -2783,7 +2750,7 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation>&amp;Rensa</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="608"/>
+        <location filename="../mainwindow.cc" line="624"/>
         <source>New Tab</source>
         <translation>Ny flik</translation>
     </message>
@@ -2799,8 +2766,8 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3896"/>
-        <location filename="../mainwindow.cc" line="3908"/>
+        <location filename="../mainwindow.cc" line="3878"/>
+        <location filename="../mainwindow.cc" line="3890"/>
         <source>&amp;Show</source>
         <translation>&amp;Visa</translation>
     </message>
@@ -2820,373 +2787,373 @@ klassisk rättstavning och skolrättstavning i kyrillisk skrift)</translation>
         <translation>&amp;Importera</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="106"/>
+        <location filename="../mainwindow.cc" line="108"/>
         <source>&amp;Menubar</source>
         <translation>&amp;Menyrad</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="104"/>
+        <location filename="../mainwindow.cc" line="106"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>Visa namn i ordliste&amp;fältet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="105"/>
+        <location filename="../mainwindow.cc" line="107"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>Visa små ikoner i &amp;verktygsfält</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="163"/>
+        <location filename="../mainwindow.cc" line="179"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Navigeringsfältet</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="166"/>
+        <location filename="../mainwindow.cc" line="182"/>
         <source>Back</source>
         <translation>Bakåt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="168"/>
+        <location filename="../mainwindow.cc" line="184"/>
         <source>Forward</source>
         <translation>Framåt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="193"/>
+        <location filename="../mainwindow.cc" line="209"/>
         <source>Scan Popup</source>
         <translation>Sökpopupruta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="208"/>
+        <location filename="../mainwindow.cc" line="224"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Läs upp ord (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="220"/>
+        <location filename="../mainwindow.cc" line="236"/>
         <source>Zoom In</source>
         <translation>Zooma in</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="226"/>
+        <location filename="../mainwindow.cc" line="242"/>
         <source>Zoom Out</source>
         <translation>Zooma ut</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="230"/>
+        <location filename="../mainwindow.cc" line="246"/>
         <source>Normal Size</source>
         <translation>Normal storlek</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="282"/>
-        <location filename="../mainwindow.cc" line="1371"/>
+        <location filename="../mainwindow.cc" line="298"/>
+        <location filename="../mainwindow.cc" line="1383"/>
         <source>Look up in:</source>
         <translation>Slå upp i:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="321"/>
+        <location filename="../mainwindow.cc" line="337"/>
         <source>Found in Dictionaries:</source>
         <translation>Träffar hittades i följande ordlistor:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="351"/>
+        <location filename="../mainwindow.cc" line="367"/>
         <source>Words Zoom In</source>
         <translation>Zooma in ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="355"/>
+        <location filename="../mainwindow.cc" line="371"/>
         <source>Words Zoom Out</source>
         <translation>Zooma ut ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="357"/>
+        <location filename="../mainwindow.cc" line="373"/>
         <source>Words Normal Size</source>
         <translation>Normal storlek på ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="365"/>
+        <location filename="../mainwindow.cc" line="381"/>
         <source>Show &amp;Main Window</source>
         <translation>Visa &amp;huvudfönstret</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="392"/>
+        <location filename="../mainwindow.cc" line="408"/>
         <source>Opened tabs</source>
         <translation>Öppnade flikar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="403"/>
+        <location filename="../mainwindow.cc" line="419"/>
         <source>Close current tab</source>
         <translation>Stäng aktuell flik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="413"/>
+        <location filename="../mainwindow.cc" line="429"/>
         <source>Close all tabs</source>
         <translation>Stäng alla flikar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="421"/>
+        <location filename="../mainwindow.cc" line="437"/>
         <source>Close all tabs except current</source>
         <translation>Stäng alla flikar utom aktuell flik</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="455"/>
+        <location filename="../mainwindow.cc" line="471"/>
         <source>Add all tabs to Favorites</source>
         <translation>Lägg till alla flikar i Favoriter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="597"/>
+        <location filename="../mainwindow.cc" line="613"/>
         <source>Loading...</source>
         <translation>Läser in …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1360"/>
+        <location filename="../mainwindow.cc" line="1372"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 ordlistor, %2 artiklar, %3 ord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1371"/>
+        <location filename="../mainwindow.cc" line="1383"/>
         <source>Look up:</source>
         <translation>Slå upp:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1389"/>
+        <location filename="../mainwindow.cc" line="1401"/>
         <source>All</source>
         <translation>Alla</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1553"/>
+        <location filename="../mainwindow.cc" line="1566"/>
         <source>Open Tabs List</source>
         <translation>Öppna lista över flikar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1611"/>
+        <location filename="../mainwindow.cc" line="1623"/>
         <source>(untitled)</source>
         <translation>(namnlös)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1818"/>
-        <location filename="../mainwindow.cc" line="1896"/>
-        <location filename="../mainwindow.cc" line="4713"/>
-        <location filename="../mainwindow.cc" line="4741"/>
-        <location filename="../mainwindow.cc" line="4768"/>
+        <location filename="../mainwindow.cc" line="1847"/>
+        <location filename="../mainwindow.cc" line="1925"/>
+        <location filename="../mainwindow.cc" line="4696"/>
+        <location filename="../mainwindow.cc" line="4724"/>
+        <location filename="../mainwindow.cc" line="4751"/>
         <source>Remove current tab from Favorites</source>
         <translation>Ta bort aktuell flik från Favoriter</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1848"/>
+        <location filename="../mainwindow.cc" line="1877"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3038"/>
+        <location filename="../mainwindow.cc" line="3018"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Det gick inte att initiera övervakningsmekanismen för kortkommandon.&lt;br&gt;Säkerställ att tillägget RECORD för din XServer är aktiverat.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3184"/>
+        <location filename="../mainwindow.cc" line="3164"/>
         <source>New Release Available</source>
         <translation>Ny version tillgänglig</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3185"/>
+        <location filename="../mainwindow.cc" line="3165"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>Version &lt;b&gt;%1&lt;/b&gt; av GoldenDict finns nu tillgänglig för hämtning.&lt;br&gt;Klicka på &lt;b&gt;Hämta&lt;/b&gt; för att gå till hämtningssidan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3190"/>
+        <location filename="../mainwindow.cc" line="3170"/>
         <source>Download</source>
         <translation>Hämta</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3191"/>
+        <location filename="../mainwindow.cc" line="3171"/>
         <source>Skip This Release</source>
         <translation>Hoppa över denna version</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4071"/>
+        <location filename="../mainwindow.cc" line="4053"/>
         <source>Export Favorites to file</source>
         <translation>Exportera Favoriter till fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4073"/>
-        <location filename="../mainwindow.cc" line="4163"/>
+        <location filename="../mainwindow.cc" line="4055"/>
+        <location filename="../mainwindow.cc" line="4145"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation>XML-filer (*.xml);;Alla filer (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4092"/>
-        <location filename="../mainwindow.cc" line="4141"/>
+        <location filename="../mainwindow.cc" line="4074"/>
+        <location filename="../mainwindow.cc" line="4123"/>
         <source>Favorites export complete</source>
         <translation>Favoriter exportera komplett</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4112"/>
+        <location filename="../mainwindow.cc" line="4094"/>
         <source>Export Favorites to file as plain list</source>
         <translation>Exportera Favoriter till fil som vanlig lista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4161"/>
+        <location filename="../mainwindow.cc" line="4143"/>
         <source>Import Favorites from file</source>
         <translation>Importera Favoriter från fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4186"/>
+        <location filename="../mainwindow.cc" line="4168"/>
         <source>Favorites import complete</source>
         <translation>Favoriter import komplett</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4192"/>
+        <location filename="../mainwindow.cc" line="4174"/>
         <source>Data parsing error</source>
         <translation>Dataparseringsfel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4684"/>
+        <location filename="../mainwindow.cc" line="4667"/>
         <source>Now indexing for full-text search: </source>
         <translation>Nu indexering för fulltextsökning: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4726"/>
+        <location filename="../mainwindow.cc" line="4709"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation>Ta bort huvudord &quot;%1&quot; från Favoriter?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="863"/>
-        <location filename="../mainwindow.cc" line="3244"/>
+        <location filename="../mainwindow.cc" line="875"/>
+        <location filename="../mainwindow.cc" line="3224"/>
         <source>Accessibility API is not enabled</source>
         <translation>API för hjälpmedel har inte aktiverats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="950"/>
+        <location filename="../mainwindow.cc" line="956"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation>Sträng för att söka i ordlistor. Jokertecken &apos;*&apos;, &apos;?&apos; och uppsättningar av symboler &apos;[...]&apos; är tillåtna.
 För att hitta &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symboler använder &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respektive</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3321"/>
+        <location filename="../mainwindow.cc" line="3305"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Du har valt att dölja en menyrad. Använd %1 för att visa den igen.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3322"/>
+        <location filename="../mainwindow.cc" line="3306"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3421"/>
+        <location filename="../mainwindow.cc" line="3405"/>
         <source>Page Setup</source>
         <translation>Utskriftsformat</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3422"/>
+        <location filename="../mainwindow.cc" line="3406"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Inga tillgängliga skrivare. Du måste installera eller ansluta dig till en.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3440"/>
+        <location filename="../mainwindow.cc" line="3425"/>
         <source>Print Article</source>
         <translation>Skriv ut artikel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3515"/>
+        <location filename="../mainwindow.cc" line="3500"/>
         <source>Article, Complete (*.html)</source>
         <translation>Artikel, fullständig (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3516"/>
+        <location filename="../mainwindow.cc" line="3501"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Artikel, endast HTML (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3519"/>
+        <location filename="../mainwindow.cc" line="3504"/>
         <source>Save Article As</source>
         <translation>Spara artikel som</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3533"/>
+        <location filename="../mainwindow.cc" line="3518"/>
         <source>Error</source>
         <translation>Fel</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3534"/>
+        <location filename="../mainwindow.cc" line="3519"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Det gick inte att spara artikeln: %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3595"/>
+        <location filename="../mainwindow.cc" line="3580"/>
         <source>Saving article...</source>
         <translation>Sparar artikel …</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3658"/>
+        <location filename="../mainwindow.cc" line="3641"/>
         <source>The main window is set to be always on top.</source>
         <translation>Huvudfönstret har ställts in att alltid ligga överst.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3892"/>
-        <location filename="../mainwindow.cc" line="3904"/>
+        <location filename="../mainwindow.cc" line="3874"/>
+        <location filename="../mainwindow.cc" line="3886"/>
         <source>&amp;Hide</source>
         <translation>&amp;Dölj</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3936"/>
+        <location filename="../mainwindow.cc" line="3918"/>
         <source>Export history to file</source>
         <translation>Exportera historik till fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3938"/>
-        <location filename="../mainwindow.cc" line="4000"/>
-        <location filename="../mainwindow.cc" line="4114"/>
+        <location filename="../mainwindow.cc" line="3920"/>
+        <location filename="../mainwindow.cc" line="3982"/>
+        <location filename="../mainwindow.cc" line="4096"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Textfiler (*.txt);;Alla filer (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3977"/>
+        <location filename="../mainwindow.cc" line="3959"/>
         <source>History export complete</source>
         <translation>Historiken har exporterats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3980"/>
-        <location filename="../mainwindow.cc" line="4095"/>
-        <location filename="../mainwindow.cc" line="4144"/>
+        <location filename="../mainwindow.cc" line="3962"/>
+        <location filename="../mainwindow.cc" line="4077"/>
+        <location filename="../mainwindow.cc" line="4126"/>
         <source>Export error: </source>
         <translation>Fel vid export: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3998"/>
+        <location filename="../mainwindow.cc" line="3980"/>
         <source>Import history from file</source>
         <translation>Importera historik från fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4047"/>
+        <location filename="../mainwindow.cc" line="4029"/>
         <source>Import error: invalid data in file</source>
         <translation>Fel vid import: felaktiga data i fil</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4051"/>
+        <location filename="../mainwindow.cc" line="4033"/>
         <source>History import complete</source>
         <translation>Historiken har importerats</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4054"/>
-        <location filename="../mainwindow.cc" line="4190"/>
+        <location filename="../mainwindow.cc" line="4036"/>
+        <location filename="../mainwindow.cc" line="4172"/>
         <source>Import error: </source>
         <translation>Fel vid import: </translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4474"/>
+        <location filename="../mainwindow.cc" line="4458"/>
         <source>Dictionary info</source>
         <translation>Information om ordlista</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4478"/>
+        <location filename="../mainwindow.cc" line="4462"/>
         <source>Dictionary headwords</source>
         <translation>Ordlistans huvudord</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4480"/>
+        <location filename="../mainwindow.cc" line="4464"/>
         <source>Open dictionary folder</source>
         <translation>Öppna ordlistans mapp</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4486"/>
+        <location filename="../mainwindow.cc" line="4470"/>
         <source>Edit dictionary</source>
         <translation>Redigera ordlista</translation>
     </message>
@@ -3194,12 +3161,12 @@ För att hitta &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbol
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="656"/>
+        <location filename="../mdx.cc" line="672"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Ordlistefilen har manipulerats eller är skadad</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="667"/>
+        <location filename="../mdx.cc" line="683"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>Det gick inte att läsa in en artikel från %1, orsak: %2</translation>
     </message>
@@ -3207,7 +3174,7 @@ För att hitta &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbol
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="337"/>
+        <location filename="../mediawiki.cc" line="352"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML-tolkningsfel: %1 på %2, %3</translation>
     </message>
@@ -3215,7 +3182,7 @@ För att hitta &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbol
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="201"/>
+        <location filename="../mediawiki.cc" line="196"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML-tolkningsfel: %1 på %2, %3</translation>
     </message>
@@ -3262,10 +3229,6 @@ För att hitta &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbol
         <location filename="../orderandprops.ui" line="37"/>
         <source>Dictionary order:</source>
         <translation>Ordlisteordning:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">…</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="53"/>
@@ -3774,14 +3737,6 @@ p, li { white-space: pre-wrap; }
         <translation>Uppspelning</translation>
     </message>
     <message>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="obsolete">Spela upp ljudfiler via FFmpeg(libav) och libao.</translation>
-    </message>
-    <message>
-        <source>Use internal player</source>
-        <translation type="obsolete">Använd intern spelare</translation>
-    </message>
-    <message>
         <location filename="../preferences.ui" line="1012"/>
         <source>System proxy</source>
         <translation>Systemproxy</translation>
@@ -3817,55 +3772,55 @@ p, li { white-space: pre-wrap; }
         <translation>artiklar (0 - obegränsat)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1672"/>
+        <location filename="../preferences.ui" line="1630"/>
         <source>Favorites</source>
         <translation>Favoriter</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1680"/>
+        <location filename="../preferences.ui" line="1638"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
         <translation>Favoriters sparningsintervall. Om inställd på 0 sparas Favoriter endast vid avslutning.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1706"/>
+        <location filename="../preferences.ui" line="1664"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
         <translation>Slå på detta alternativ för att bekräfta varje operation av postborttagning</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1709"/>
+        <location filename="../preferences.ui" line="1667"/>
         <source>Confirmation for items deletion</source>
         <translation>Bekräftelse för borttagning av poster</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1740"/>
+        <location filename="../preferences.ui" line="1698"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>Välj detta alternativ för att automatiskt dölja stora artiklar.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1743"/>
+        <location filename="../preferences.ui" line="1701"/>
         <source>Collapse articles more than</source>
         <translation>Dölj artiklar längre än</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1750"/>
+        <location filename="../preferences.ui" line="1708"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>Artiklar som är längre än följande antal tecken kommer att komprimeras.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1766"/>
-        <location filename="../preferences.ui" line="1816"/>
+        <location filename="../preferences.ui" line="1724"/>
+        <location filename="../preferences.ui" line="1774"/>
         <source>symbols</source>
         <translation>tecken</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1859"/>
+        <location filename="../preferences.ui" line="1817"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation>Aktivera det här alternativet om du vill aktivera extra artiklar sök via synonymlistor
 från Stardict, Babylon och GLS ordböcker</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1863"/>
+        <location filename="../preferences.ui" line="1821"/>
         <source>Extra search via synonyms</source>
         <translation>Extra sökning via synonymer</translation>
     </message>
@@ -4042,176 +3997,125 @@ saken och ber denna att öppna en hämtningssida.</translation>
         <translation>Sök med jämna mellanrum efter nya programversioner</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1432"/>
+        <location filename="../preferences.ui" line="1436"/>
         <source>Ad&amp;vanced</source>
         <translation>A&amp;vancerat</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1440"/>
-        <source>ScanPopup extra technologies</source>
-        <translation>Ytterligare teknologier för sökpopuprutan</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1446"/>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Försök att använda IAccessibleEx-teknologi för att hämta ett ord
-under muspekaren. Denna teknologi fungerar endast med program
-som stöder den (t.ex. Internet Explorer 9). Om du inte använder
-sådana program, så behöver du inte aktivera det här alternativet.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1452"/>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation>Använd &amp;IAccessibleEx</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1459"/>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Försök att använda UI Automation-teknologi för att hämta ett ord
-under muspekaren. Denna teknologi fungerar endast med program
-som stöder den. Om du inte använder sådana program, så behöver
-du inte aktivera det här alternativet.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1464"/>
-        <source>Use &amp;UIAutomation</source>
-        <translation>Använd &amp;UIAutomation</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1471"/>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Försök att använda ett särskilt GoldenDict-meddelandei för att hämta
-ett ord under muspekaren. Denna teknologi fungerar endast med program
-som stöder den. Om du inte använder sådana program, så behöver
-du inte aktivera det här alternativet.</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1476"/>
-        <source>Use &amp;GoldenDict message</source>
-        <translation>Använd &amp;GoldenDict-meddelande</translation>
-    </message>
-    <message>
-        <location filename="../preferences.ui" line="1486"/>
+        <location filename="../preferences.ui" line="1444"/>
         <source>ScanPopup unpinned window flags</source>
         <translation>ScanPopup ofästa fönsterflaggor</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1492"/>
+        <location filename="../preferences.ui" line="1450"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
         <translation>Experimentera med icke-standardflaggor om ofäst skannings popup-fönstret missköterer sig</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1496"/>
+        <location filename="../preferences.ui" line="1454"/>
         <source>&lt;default&gt;</source>
         <translation>&lt;standard&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1501"/>
+        <location filename="../preferences.ui" line="1459"/>
         <source>Popup</source>
         <translation>Popup</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1506"/>
+        <location filename="../preferences.ui" line="1464"/>
         <source>Tool</source>
         <translation>Verktyg</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1517"/>
+        <location filename="../preferences.ui" line="1475"/>
         <source>This hint can be combined with non-default window flags</source>
         <translation>Denna ledtråd kan kombineras med icke-standardfönsterflaggor</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1520"/>
+        <location filename="../preferences.ui" line="1478"/>
         <source>Bypass window manager hint</source>
         <translation>Hoppa över fönsterhanterarens ledtråd</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1560"/>
+        <location filename="../preferences.ui" line="1518"/>
         <source>History</source>
         <translation>Historik</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1566"/>
+        <location filename="../preferences.ui" line="1524"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>Aktivera detta alternativ för att lagra en historik över översatta ord.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1569"/>
+        <location filename="../preferences.ui" line="1527"/>
         <source>Store &amp;history</source>
         <translation>Lagra &amp;historik</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1584"/>
+        <location filename="../preferences.ui" line="1542"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>Ange det maximala antalet poster som får behållas i historiken.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1587"/>
+        <location filename="../preferences.ui" line="1545"/>
         <source>Maximum history size:</source>
         <translation>Största historikstorlek:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1624"/>
+        <location filename="../preferences.ui" line="1582"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>Sparintervall för historiken. Ange till 0 för att endast  spara historiken vid programavslut.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1630"/>
-        <location filename="../preferences.ui" line="1683"/>
+        <location filename="../preferences.ui" line="1588"/>
+        <location filename="../preferences.ui" line="1641"/>
         <source>Save every</source>
         <translation>Spara var</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1647"/>
-        <location filename="../preferences.ui" line="1697"/>
+        <location filename="../preferences.ui" line="1605"/>
+        <location filename="../preferences.ui" line="1655"/>
         <source>minutes</source>
         <translation>minut</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1734"/>
+        <location filename="../preferences.ui" line="1692"/>
         <source>Articles</source>
         <translation>Artiklar</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1786"/>
+        <location filename="../preferences.ui" line="1744"/>
         <source>Turn this option on to ignore unreasonably long input text
 from mouse-over, selection, clipboard or command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1790"/>
+        <location filename="../preferences.ui" line="1748"/>
         <source>Ignore input phrases longer than</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1800"/>
+        <location filename="../preferences.ui" line="1758"/>
         <source>Input phrases longer than this size will be ignored</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1823"/>
+        <location filename="../preferences.ui" line="1781"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
         <translation>Aktivera det här alternativet om du vill ignorera diacritics när du söker artiklar</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1826"/>
+        <location filename="../preferences.ui" line="1784"/>
         <source>Ignore diacritics while searching</source>
         <translation>Ignorera diacritics medan du söker</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1833"/>
+        <location filename="../preferences.ui" line="1791"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>Aktivera detta alternativ för att alltid visa valfria delar av artiklar.</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1836"/>
+        <location filename="../preferences.ui" line="1794"/>
         <source>Expand optional &amp;parts</source>
         <translation>Visa valfria &amp;delar</translation>
     </message>
@@ -4257,12 +4161,12 @@ from mouse-over, selection, clipboard or command line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="636"/>
+        <location filename="../preferences.cc" line="634"/>
         <source>Changing Language</source>
         <translation>Språkbyte</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="637"/>
+        <location filename="../preferences.cc" line="635"/>
         <source>Restart the program to apply the language change.</source>
         <translation>Starta om programmet för att verkställa bytet av språk.</translation>
     </message>
@@ -4344,28 +4248,28 @@ from mouse-over, selection, clipboard or command line</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../aard.cc" line="449"/>
-        <location filename="../dsl.cc" line="1775"/>
+        <location filename="../aard.cc" line="432"/>
+        <location filename="../dsl.cc" line="1781"/>
         <source>Article loading error</source>
         <translation>Artikelinläsningsfel</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="541"/>
-        <location filename="../slob.cc" line="800"/>
+        <location filename="../aard.cc" line="524"/>
+        <location filename="../slob.cc" line="799"/>
         <source>Article decoding error</source>
         <translation>Artikelavkodningsfel</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="586"/>
-        <location filename="../bgl.cc" line="406"/>
-        <location filename="../sdict.cc" line="721"/>
-        <location filename="../stardict.cc" line="1162"/>
+        <location filename="../aard.cc" line="568"/>
+        <location filename="../bgl.cc" line="405"/>
+        <location filename="../sdict.cc" line="708"/>
+        <location filename="../stardict.cc" line="1085"/>
         <source>Copyright: %1%2</source>
         <translation>Copyright: %1%2</translation>
     </message>
     <message>
-        <location filename="../aard.cc" line="590"/>
-        <location filename="../sdict.cc" line="737"/>
+        <location filename="../aard.cc" line="572"/>
+        <location filename="../sdict.cc" line="724"/>
         <source>Version: %1%2</source>
         <translation>Version: %1%2</translation>
     </message>
@@ -4461,30 +4365,30 @@ from mouse-over, selection, clipboard or command line</source>
         <translation>avcodec_alloc_frame() misslyckades.</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="413"/>
-        <location filename="../gls.cc" line="630"/>
-        <location filename="../stardict.cc" line="1170"/>
+        <location filename="../bgl.cc" line="412"/>
+        <location filename="../gls.cc" line="554"/>
+        <location filename="../stardict.cc" line="1093"/>
         <source>Author: %1%2</source>
         <translation>Författare: %1%2</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="420"/>
-        <location filename="../stardict.cc" line="1178"/>
+        <location filename="../bgl.cc" line="419"/>
+        <location filename="../stardict.cc" line="1101"/>
         <source>E-mail: %1%2</source>
         <translation>E-post: %1%2</translation>
     </message>
     <message>
-        <location filename="../sdict.cc" line="689"/>
+        <location filename="../sdict.cc" line="676"/>
         <source>Title: %1%2</source>
         <translation>Titel: %1%2</translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1186"/>
+        <location filename="../stardict.cc" line="1109"/>
         <source>Website: %1%2</source>
         <translation>Webbplats: %1%2</translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1194"/>
+        <location filename="../stardict.cc" line="1117"/>
         <source>Date: %1%2</source>
         <translation>Datum: %1%2</translation>
     </message>
@@ -4492,17 +4396,17 @@ from mouse-over, selection, clipboard or command line</source>
 <context>
     <name>QuickFilterLine</name>
     <message>
-        <location filename="../groups_widgets.cc" line="1027"/>
+        <location filename="../groups_widgets.cc" line="1024"/>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>Sök i/filtrera ordlista (Ctrl+F)</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1036"/>
+        <location filename="../groups_widgets.cc" line="1032"/>
         <source>Quick Search</source>
         <translation>Snabbsökning</translation>
     </message>
     <message>
-        <location filename="../groups_widgets.cc" line="1041"/>
+        <location filename="../groups_widgets.cc" line="1037"/>
         <source>Clear Search</source>
         <translation>Rensa sökning</translation>
     </message>
@@ -4510,22 +4414,22 @@ from mouse-over, selection, clipboard or command line</source>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2999"/>
+        <location filename="../articleview.cc" line="2818"/>
         <source>ERROR: %1</source>
         <translation>FEL: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2999"/>
+        <location filename="../articleview.cc" line="2818"/>
         <source>Resource saving error: </source>
         <translation>Fel när resurs skulle sparas: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3025"/>
+        <location filename="../articleview.cc" line="2844"/>
         <source>The referenced resource failed to download.</source>
         <translation>Det gick inte att hämta den refererade resursen.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="3025"/>
+        <location filename="../articleview.cc" line="2844"/>
         <source>WARNING: %1</source>
         <translation>VARNING: %1</translation>
     </message>
@@ -4628,8 +4532,8 @@ could be resized or managed in other ways.</source>
 Rutan kan storleksändras och hanteras på andra sätt.</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="711"/>
-        <location filename="../scanpopup.cc" line="1080"/>
+        <location filename="../scanpopup.cc" line="704"/>
+        <location filename="../scanpopup.cc" line="1077"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -4832,59 +4736,59 @@ dig på webbplatsen för att få din egen nyckel.</translation>
         <translation>Avgränsa språkkoderna med kommatecken. En fullständig lista över språkkoder finns tillgänglig &lt;a href=&quot;http://www.forvo.com/languages-codes/&quot;&gt;här&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="634"/>
+        <location filename="../sources.ui" line="638"/>
         <source>Transliteration</source>
         <translation>Translitterering</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="655"/>
+        <location filename="../sources.ui" line="659"/>
         <source>Russian transliteration</source>
         <translation>Translitterering av ryska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="666"/>
+        <location filename="../sources.ui" line="670"/>
         <source>Greek transliteration</source>
         <translation>Translitterering av grekiska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="690"/>
+        <location filename="../sources.ui" line="694"/>
         <source>German transliteration</source>
         <translation>Translitterering av tyska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="701"/>
+        <location filename="../sources.ui" line="705"/>
         <source>Belarusian transliteration</source>
         <translation>Translitterering av vitryska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="727"/>
+        <location filename="../sources.ui" line="731"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
         <translation>Låter dig använda det latinska alfabetet för att skriva på japanska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="730"/>
+        <location filename="../sources.ui" line="734"/>
         <source>Japanese Romaji</source>
         <translation>Romanisering av japanska</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="742"/>
+        <location filename="../sources.ui" line="746"/>
         <source>Systems:</source>
         <translation>System:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="749"/>
+        <location filename="../sources.ui" line="753"/>
         <source>The most widely used method of transcription of Japanese,
 based on English phonology</source>
         <translation>Den mest utbredda metoden för transkribering av japanska,
 baserad på engelsk fonologi.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="753"/>
+        <location filename="../sources.ui" line="757"/>
         <source>Hepburn</source>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="763"/>
+        <location filename="../sources.ui" line="767"/>
         <source>The most regular system, having a one-to-one relation to the
 kana writing systems. Standardized as ISO 3602
 
@@ -4895,12 +4799,12 @@ stavelseskriftsystemet kana. Standardiserat som ISO 3602.
 Har ännu inte implementerats i  GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="769"/>
+        <location filename="../sources.ui" line="773"/>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="779"/>
+        <location filename="../sources.ui" line="783"/>
         <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
 Standardized as ISO 3602
 
@@ -4911,32 +4815,32 @@ Standardiserat som ISO 3602.
 Har ännu inte implementerats i  GoldenDict.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="785"/>
+        <location filename="../sources.ui" line="789"/>
         <source>Kunrei-shiki</source>
         <translation>Kunrei-shiki</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="792"/>
+        <location filename="../sources.ui" line="796"/>
         <source>Syllabaries:</source>
         <translation>Stavelseskrifter:</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="799"/>
+        <location filename="../sources.ui" line="803"/>
         <source>Hiragana Japanese syllabary</source>
         <translation>Den japanska stavelseskriften hiragana.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="802"/>
+        <location filename="../sources.ui" line="806"/>
         <source>Hiragana</source>
         <translation>Hiragana</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="809"/>
+        <location filename="../sources.ui" line="813"/>
         <source>Katakana Japanese syllabary</source>
         <translation>Den japanska stavelseskriften katakana.</translation>
     </message>
     <message>
-        <location filename="../sources.ui" line="812"/>
+        <location filename="../sources.ui" line="816"/>
         <source>Katakana</source>
         <translation>Katakana</translation>
     </message>
@@ -5075,12 +4979,12 @@ Har ännu inte implementerats i  GoldenDict.</translation>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="102"/>
+        <location filename="../translatebox.cc" line="101"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Ange ett ord eller en fras för att söka i ordlistor</translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="124"/>
+        <location filename="../translatebox.cc" line="122"/>
         <source>Drop-down</source>
         <translation>Rullgardinsmeny</translation>
     </message>
