@@ -12,10 +12,8 @@ void GicoSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
     QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
 
-    QString contentType="image/png";
-    if(url.scheme()=="gadu"){
-        contentType="audio/wav";
-    }
+    QMimeType mineType=db.mimeTypeForUrl (url);
+    QString contentType=mineType.name ();
     // Reply segment
     requestJob->reply(contentType.toLatin1(), reply);
 }
