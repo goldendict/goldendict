@@ -6,10 +6,14 @@ on:
     branches:
       - dev
       - staged
+    paths-ignore:
+      - 'docs/**'
   pull_request:
     branches:
       - dev
       - staged
+    paths-ignore:
+      - 'docs/**'
 jobs:
   build:
     name: Build
@@ -92,7 +96,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ steps.package.outputs.packageName }}.zip
-          tag: prerelease-${{steps.vars.outputs.release_date}}
+          tag: pre-${{steps.vars.outputs.release_date}}-${{ github.ref_name }}
           overwrite: true 
           release_name: Ubuntu-Windows-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }} built on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
           prerelease: true
