@@ -1,6 +1,10 @@
 #!/bin/sh
 
 ./configure \
+   	--toolchain=msvc \
+    --arch=x86_64 \
+    --enable-yasm \
+    --enable-asm\
 	--prefix=$PREFIX \
 	--enable-runtime-cpudetect \
 	--enable-shared \
@@ -183,4 +187,4 @@
 	--enable-decoder=wmav2 \
 	--enable-decoder=wmavoice \
 	--enable-decoder=xan_dpcm \
-	--enable-libspeex 
+	--enable-libspeex
