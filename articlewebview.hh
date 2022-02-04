@@ -4,8 +4,10 @@
 #ifndef __ARTICLEWEBVIEW_HH_INCLUDED__
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
-#include <QWebEngineView>
 #include "config.hh"
+#include <QEvent>
+#include <QMouseEvent>
+#include <QWebEngineView>
 
 /// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
@@ -31,9 +33,11 @@ public:
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
-  void triggerPageAction( QWebEnginePage::WebAction action, bool checked = false );
+  void triggerPageAction(QWebEnginePage::WebAction action, bool checked = false);
 
-signals:
+  bool eventFilter(QObject *obj, QEvent *ev);
+
+  signals:
 
   /// Signals that the user has just double-clicked. The signal is delivered
   /// after the event was processed by the view -- that's the difference from
