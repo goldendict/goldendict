@@ -3,7 +3,6 @@
 ./configure \
 	--prefix=$PREFIX \
 	--build-suffix=-gd \
-	--enable-memalign-hack \
 	--enable-runtime-cpudetect \
 	--enable-shared \
 	--disable-static \
