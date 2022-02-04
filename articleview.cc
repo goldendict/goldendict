@@ -515,7 +515,7 @@ void ArticleView::showAnticipation()
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
-void ArticleView::loadFinished( bool )
+void ArticleView::loadFinished( bool result )
 {
   setZoomFactor(cfg.preferences.zoomFactor);
   QUrl url = ui.definition->url();
@@ -601,8 +601,11 @@ void ArticleView::loadFinished( bool )
     }
   }
 
-  emit pageLoaded( this );
-
+  //the click audio url such as gdau://xxxx ,webview also emit a pageLoaded signal but with the result is false.need future investigation.
+  //the audio link click ,no need to emit pageLoaded signal
+  if(result){
+    emit pageLoaded( this );
+  }
   if( Utils::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
 }
@@ -1118,6 +1121,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
+  audioPlayer->stop();
   qDebug() << "open link url:" << url;
 
   Contexts contexts( contexts_ );
