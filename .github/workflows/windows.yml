@@ -8,12 +8,16 @@ on:
       - staged
     paths-ignore:
       - 'docs/**'
+      - ".github/**"
+      - "howto/**"
   pull_request:
     branches:
       - dev
       - staged
     paths-ignore:
       - 'docs/**'
+      - ".github/**"
+      - "howto/**"
 jobs:
   build:
     name: Build
