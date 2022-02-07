@@ -509,10 +509,7 @@ void DecoderContext::playFrame( AVFrame * frame )
 
   vector<char> samples;
   if ( normalizeAudio( frame, samples ) )
-  {
-    qDebug()<<"play:"<<samples.size();
     ao_play( aoDevice_, &samples.front(), samples.size() );
-  }
 }
 
 DecoderThread::DecoderThread( QByteArray const & audioData, QObject * parent ) :
