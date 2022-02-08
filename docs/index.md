@@ -1,6 +1,6 @@
 ## Welcome to GitHub Pages
 
-This page serve as a release note page
+This page serves as a release note page
 
 ### Releases
 
@@ -14,12 +14,8 @@ the first version has been named as 22.2.alpha.commit_hash.
 
 22 means 2022 year.
 
-2 means 2 month of the year.
+2 means 2th month of the year.
 
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/xiaoyifang/goldendict/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ### Support or Contact
 
