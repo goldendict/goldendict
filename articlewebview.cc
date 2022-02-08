@@ -56,8 +56,11 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
   }
   if (ev->type() == QEvent::MouseButtonPress)
   {
-    firstClicked = true;
     QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+    if (pe->buttons() & Qt::LeftButton)
+    {
+      firstClicked = true;
+    }
     mousePressEvent(pe);
   }
   if (ev->type() == QEvent::MouseButtonRelease)
@@ -101,7 +104,7 @@ void ArticleWebView::singleClickAction( QMouseEvent * event )
   if(!firstClicked)
     return;
 
-  if (selectionBySingleClick && (event->buttons() & Qt::LeftButton))
+  if (selectionBySingleClick)
   {
     // findText(""); // clear the selection first, if any
     page()->runJavaScript(QString(
@@ -117,6 +120,7 @@ void ArticleWebView::singleClickAction( QMouseEvent * event )
         "    range.setEnd(node, range.endOffset+1);  "
         "  }  "
         "  while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');  "
+        "  range.setEnd(node,range.endOffset-1);"
         "  var str = range.toString().trim();  "
         "  console.log(str);"
         " }"));

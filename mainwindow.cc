@@ -148,11 +148,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   LocalSchemeHandler *handler = new LocalSchemeHandler(articleNetMgr);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", handler);
 
   QStringList localSchemes={"gdau","gico","qrcx","bres"};
+  GicoSchemeHandler *h=new GicoSchemeHandler(articleNetMgr);
   for(int i=0;i<localSchemes.size();i++){
-    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), new GicoSchemeHandler(articleNetMgr));
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), h);
   }
+
+  wuri = new WebUrlRequestInterceptor();
+  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -1686,6 +1691,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
+  connect (wuri,SIGNAL(linkClicked(QUrl)),view,SLOT(linkClicked(QUrl)));
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
