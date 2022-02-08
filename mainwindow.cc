@@ -158,6 +158,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   wuri = new WebUrlRequestInterceptor();
   QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
 
+  if(!cfg.preferences.hideGoldenDictHeader){
+    QWebEngineProfile::defaultProfile()->setHttpUserAgent(QWebEngineProfile::defaultProfile()->httpUserAgent()+" GoldenDict/webengine");
+  }
+
   qRegisterMetaType< Config::InputPhrase >();
 
 #ifndef NO_EPWING_SUPPORT
