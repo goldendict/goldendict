@@ -49,6 +49,7 @@ bool ArticleWebView::event(QEvent *event)
 
 bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
 {
+
   if (ev->type() == QEvent::MouseButtonDblClick)
   {
     // QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
@@ -134,7 +135,6 @@ void ArticleWebView::mouseReleaseEvent(QMouseEvent *event)
 
 void ArticleWebView::doubleClickAction(QMouseEvent *event)
 {
-  // emit the signal only if we are not double-clicking on scrollbars
   if (Qt::MouseEventSynthesizedByApplication != event->source())
   {
     emit doubleClicked(event->pos());
