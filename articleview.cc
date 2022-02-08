@@ -36,7 +36,6 @@
 #include <QWebEngineContextMenuData>
 #ifdef Q_OS_WIN32
 #include <windows.h>
-
 #include <QPainter>
 #endif
 
@@ -279,8 +278,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
-  connect( ui.definition, SIGNAL( loadFinished(bool) ),
-           this, SLOT( loadFinished(bool) ) );
+  connect(ui.definition, SIGNAL(loadFinished(bool)), this,
+          SLOT(loadFinished(bool)));
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
@@ -559,7 +558,7 @@ void ArticleView::loadFinished( bool )
   }
   else
   {
-    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    QString const scrollTo = Utils::Url::queryItemValue( url, "scrollto" );
     if( isScrollTo( scrollTo ) )
     {
       // There is no active article saved in history, but we have it as a parameter.
@@ -747,7 +746,9 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
     if ( isFramedArticle( ca ) )
     {
-      QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
+    	//todo ,ÓÃ±äÁ¿´úÌæ×îºóµÄurl
+      //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
+      QVariant result ;
 
       if ( result.type() == QVariant::String )
       {
@@ -1666,17 +1667,21 @@ void ArticleView::playSound()
   ui.definition->page()->runJavaScript(variable);
 }
 
+// use eventloop to turn the async callback to sync execution.
 QString ArticleView::toHtml()
 {
-    QString html;
-    ui.definition->page()->toHtml([&](const QString& content) {
-       
+    QString result;
+    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
+    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
 
-        html = content;
-
-        });
-
-    return html;
+    ui.definition->page()->toHtml([loop, &result](const QString &content) {
+        if (loop->isRunning()) {
+            result = content;
+            loop->quit();
+        }
+    });
+    loop->exec();
+    return result;
 }
 
 void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){
@@ -1708,7 +1713,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
 
-    QWebEnginePage* r=ui.definition->page();
+  QWebEnginePage* r=ui.definition->page();
   updateCurrentArticleFromCurrentFrame(ui.definition->page(), const_cast<QPoint *>(& pos));
 
   QMenu menu( this );
@@ -1729,6 +1734,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   QWebEngineContextMenuData menuData=r->contextMenuData();
   QUrl targetUrl(menuData.linkUrl());
+  qDebug() << "menu:" <<  menuData.linkText()<<":"<<menuData.mediaUrl();
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -1759,20 +1765,19 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QUrl imageUrl;
   if( !popupView && menuData.mediaType ()==QWebEngineContextMenuData::MediaTypeImage)
   {
-      imageUrl = menuData.mediaUrl ();
-      if( !imageUrl.isEmpty() )
-      {
-          menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
-          saveImageAction = new QAction( tr( "Save &image..." ), &menu );
-          menu.addAction( saveImageAction );
-      }
+    imageUrl = menuData.mediaUrl();
+    if (!imageUrl.isEmpty())
+    {
+      menu.addAction(ui.definition->pageAction(QWebEnginePage::CopyImageToClipboard));
+      saveImageAction = new QAction(tr("Save &image..."), &menu);
+      menu.addAction(saveImageAction);
+    }
   }
 
-  if( !popupView && ( targetUrl.scheme() == "gdau"
-                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
+  if (!popupView && (targetUrl.scheme() == "gdau" || Dictionary::WebMultimediaDownload::isAudioUrl(targetUrl)))
   {
-      saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
-      menu.addAction( saveSoundAction );
+    saveSoundAction = new QAction(tr("Save s&ound..."), &menu);
+    menu.addAction(saveSoundAction);
   }
 
   QString selectedText = ui.definition->selectedText();
@@ -2612,6 +2617,15 @@ QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
     return planText;
 }
 
+void ArticleView::setActiveDictIds(ActiveDictIds ad) {
+  // ignore all other signals.
+
+  if (ad.word == currentWord) {
+    currentActiveDictIds = ad.dictIds;
+  qDebug() << "current word:"<<currentWord<<"receivedd:"<<ad.word<<":" << ad.dictIds<<this;
+  }
+}
+
 //todo ,futher refinement?
 void ArticleView::performFtsFindOperation( bool backwards )
 {
@@ -2636,36 +2650,28 @@ void ArticleView::performFtsFindOperation( bool backwards )
          runJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
                              .arg( rangeVarName ) );
 
-  bool res;
-  if( backwards )
-  {
-    if( ftsPosition > 0 )
-    {
-      ui.definition->findText( allMatches.at( ftsPosition - 1 ),
-                                     flags | QWebEnginePage::FindBackward );
-      ftsPosition -= 1;
-    }
-    else
-       ui.definition->findText( allMatches.at( ftsPosition ),
-                                     flags | QWebEnginePage::FindBackward );
+  if (backwards) {
+      if (ftsPosition > 0) {
+          ftsPosition -= 1;
+      }
 
-//    ui.ftsSearchPrevious->setEnabled( res );
-//    if( !ui.ftsSearchNext->isEnabled() )
-//      ui.ftsSearchNext->setEnabled( res );
-  }
-  else
-  {
-    if( ftsPosition < allMatches.size() - 1 )
-    {
-       ui.definition->findText( allMatches.at( ftsPosition + 1 ), flags );
-      ftsPosition += 1;
-    }
-    else
-       ui.definition->findText( allMatches.at( ftsPosition ), flags );
+      ui.definition->findText(allMatches.at(ftsPosition),
+                              flags | QWebEnginePage::FindBackward,
+                              [this](bool res) {
+                                  ui.ftsSearchPrevious->setEnabled(res);
+                                  if (!ui.ftsSearchNext->isEnabled())
+                                      ui.ftsSearchNext->setEnabled(res);
+                              });
+  } else {
+      if (ftsPosition < allMatches.size() - 1) {
+          ftsPosition += 1;
+      }
 
-//    ui.ftsSearchNext->setEnabled( res );
-//    if( !ui.ftsSearchPrevious->isEnabled() )
-//      ui.ftsSearchPrevious->setEnabled( res );
+      ui.definition->findText(allMatches.at(ftsPosition), flags, [this](bool res) {
+          ui.ftsSearchNext->setEnabled(res);
+          if (!ui.ftsSearchPrevious->isEnabled())
+              ui.ftsSearchPrevious->setEnabled(res);
+      });
   }
 
   // Store new highlighted selection
