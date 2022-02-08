@@ -479,7 +479,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 {
   if( dictIDs.isEmpty() )
     return;
-
+  currentWord = word;
   // first, let's stop the player
   audioPlayer->stop();
 
