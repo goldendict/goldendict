@@ -14,6 +14,7 @@
 #include "langcoder.hh"
 #include "gddebug.hh"
 #include "qt4x5.hh"
+#include "globalbroadcaster.h"
 
 using std::vector;
 using std::string;
@@ -634,6 +635,7 @@ void ArticleRequest::bodyFinished()
 
   bool wasUpdated = false;
 
+  QStringList dictIds;
   while ( bodyRequests.size() )
   {
     // Since requests should go in order, check the first one first
@@ -653,7 +655,7 @@ void ArticleRequest::bodyFinished()
             activeDicts[ activeDicts.size() - bodyRequests.size() ];
 
         string dictId = activeDict->getId();
-
+        dictIds << QString::fromStdString(dictId);
         string head;
 
         string gdFrom = "gdfrom-" + Html::escape( dictId );
@@ -786,6 +788,7 @@ void ArticleRequest::bodyFinished()
     }
   }
 
+
   if ( bodyRequests.empty() )
   {
     // No requests left, end the article
@@ -833,8 +836,11 @@ void ArticleRequest::bodyFinished()
 
     if ( stemmedWordFinder.get() )
       update();
-    else
+    else {
       finish();
+      qDebug() << "send dicts:" << dictIds;
+      GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+    }
   }
   else
   if ( wasUpdated )

@@ -46,6 +46,7 @@
 #include "speechclient.hh"
 #endif
 
+#include "globalbroadcaster.h"
 using std::map;
 using std::list;
 
@@ -179,20 +180,21 @@ void ArticleView::emitJavascriptFinished(){
 }
 //in webengine,javascript has been executed in async mode ,for simpility,use EventLoop to simulate sync execution.
 //a better solution would be to replace it with callback etc.
-QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
+QString ArticleView::runJavaScriptSync(QWebEnginePage *frame, const QString &variable)
 {
-  qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
+  qDebug("%s", QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
 
   QString result;
   QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
   QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-  frame->runJavaScript(variable, [loop, &result](const QVariant &v)
-                       {
-      if(loop->isRunning()){
-          if(v.isValid())
-              result = v.toString();
-          loop->quit();
-      } });
+  frame->runJavaScript(variable, [=, &result](const QVariant &v)
+      {
+        if(loop->isRunning()){
+            if(v.isValid())
+                result = v.toString();
+            loop->quit();
+        } 
+      });
 
   loop->exec();
   return result;
@@ -326,14 +328,15 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &inspectAction );
   //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
-  QWebEngineView *m_pNewView;
   QWebEnginePage *page = ui.definition->page();
-  connect(&inspectAction, &QAction::triggered, this, [page, m_pNewView]() mutable
+  connect(&inspectAction, &QAction::triggered, this, [page, this]()
           {
-            m_pNewView = new QWebEngineView();
-            page->setDevToolsPage(m_pNewView->page());
-            page->triggerAction(QWebEnginePage::InspectElement);
-            m_pNewView->show();
+            if (inspectView == nullptr || !inspectView->isVisible()) {
+                inspectView = new QWebEngineView();
+                page->setDevToolsPage(inspectView->page());
+                page->triggerAction(QWebEnginePage::InspectElement);
+                inspectView->show();
+            } 
           });
 
   ui.definition->installEventFilter( this );
@@ -341,8 +344,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.ftsSearchFrame->installEventFilter( this );
 
   QWebEngineSettings * settings = ui.definition->page()->settings();
-  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  settings->globalSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
   // Load the default blank page instantly, so there would be no flicker.
 
@@ -366,6 +369,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
 
+  connect(GlobalBroadcaster::instance(), SIGNAL( emitDictIds(ActiveDictIds)), this,
+          SLOT(setActiveDictIds(ActiveDictIds)));
+
   channel = new QWebChannel(ui.definition->page());
   attachToJavaScript();
 }
@@ -386,21 +392,16 @@ ArticleView::~ArticleView()
 {
   cleanupTemp();
   audioPlayer->stop();
-<<<<<<< HEAD
-
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-=======
   channel->deregisterObject(this);
->>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
   ui.definition->ungrabGesture( Gestures::GDPinchGestureType );
   ui.definition->ungrabGesture( Gestures::GDSwipeGestureType );
-#endif
 }
 
 void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
+  currentWord = phrase.phrase;
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -774,7 +775,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
 void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
 {
-  qDebug("updateCurrentArticleFromCurrentFrame");
+
 }
 
 void ArticleView::saveHistoryUserData()
@@ -991,41 +992,36 @@ QString ArticleView::getMutedForGroup( unsigned group )
   return QString();
 }
 
-QStringList ArticleView::getMutedDictionaries(unsigned group)
-{
-	if (dictionaryBarToggled && dictionaryBarToggled->isChecked())
-	{
-		// Dictionary bar is active -- mute the muted dictionaries
-		Instances::Group const* groupInstance = groups.findGroup(group);
+QStringList ArticleView::getMutedDictionaries(unsigned group) {
+  if (dictionaryBarToggled && dictionaryBarToggled->isChecked()) {
+    // Dictionary bar is active -- mute the muted dictionaries
+    Instances::Group const *groupInstance = groups.findGroup(group);
 
 		// Find muted dictionaries for current group
 		Config::Group const* grp = cfg.getGroup(group);
 		Config::MutedDictionaries const* mutedDictionaries;
-		if (group == Instances::Group::AllGroupId||!grp)
+        if (group == Instances::Group::AllGroupId)
 			mutedDictionaries = popupView ? &cfg.popupMutedDictionaries : &cfg.mutedDictionaries;
 		else
 			mutedDictionaries = grp ? (popupView ? &grp->popupMutedDictionaries : &grp->mutedDictionaries) : 0;
 		if (!mutedDictionaries)
 			return QStringList();
 
-		QStringList mutedDicts;
+    QStringList mutedDicts;
 
-		if (groupInstance)
-		{
-			for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x)
-			{
-				QString id = QString::fromStdString(
-					groupInstance->dictionaries[x]->getId());
+    if (groupInstance) {
+      for (unsigned x = 0; x < groupInstance->dictionaries.size(); ++x) {
+        QString id = QString::fromStdString(groupInstance->dictionaries[x]->getId());
 
-				if (mutedDictionaries->contains(id))
-					mutedDicts.append(id);
-			}
-		}
+        if (mutedDictionaries->contains(id))
+          mutedDicts.append(id);
+      }
+    }
 
-        return mutedDicts;
-	}
+    return mutedDicts;
+  }
 
-	return QStringList();
+  return QStringList();
 }
 
 void ArticleView::linkHovered ( const QString & link )
@@ -1102,21 +1098,15 @@ void ArticleView::linkHovered ( const QString & link )
   emit statusBarMessage( msg );
 }
 
-<<<<<<< HEAD
-void ArticleView::attachToJavaScript()
-{
-    QWebEngineScript script;
-    script.setInjectionPoint(QWebEngineScript::DocumentReady);
-    script.setRunsOnSubFrames(false);
-    script.setWorldId(QWebEngineScript::MainWorld);
-    script.setSourceCode(QString("articleview"));
-=======
 void ArticleView::attachToJavaScript() {
 
->>>>>>> be1e7b7f (fix:single click to select work (inside html iframe))
 
-    ui.definition->page()->scripts().insert(script);
+  // set the web channel to be used by the page
+  // see http://doc.qt.io/qt-5/qwebenginepage.html#setWebChannel
+  ui.definition->page()->setWebChannel(channel, QWebEngineScript::MainWorld);
 
+  // register QObjects to be exposed to JavaScript
+  channel->registerObject(QStringLiteral("articleview"), this);
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -1149,7 +1139,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
 {
-  qDebug() << "clicked url:" << url;
+  qDebug() << "open link url:" << url;
 
   Contexts contexts( contexts_ );
 

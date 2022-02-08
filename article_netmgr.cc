@@ -545,8 +545,10 @@ void ArticleResourceReply::readyReadSlot()
 
 void ArticleResourceReply::finishedSlot()
 {
-  if ( req->dataSize() < 0 )
-    errorOccurred( ContentNotFoundError );
+  if (req->dataSize() < 0) {
+    emit error(ContentNotFoundError);
+    setError(ContentNotFoundError, "content not found");
+  }
 
   emit finished();
 }
