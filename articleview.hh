@@ -95,6 +95,10 @@ public:
   /// Returns "gdfrom-" + dictionaryId.
   static QString scrollToFromDictionaryId( QString const & dictionaryId );
 
+  QString runJavaScriptSync(QWebEnginePage* frame, const QString& variable);
+
+  void emitJavascriptFinished();
+
   /// Shows the definition of the given word with the given group.
   /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
   /// the page to that article on load.
@@ -251,6 +255,9 @@ signals:
 
   void zoomIn();
   void zoomOut();
+
+  ///  signal finished javascript;
+  void notifyJavascriptFinished();
 
 public slots:
 
