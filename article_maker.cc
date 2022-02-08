@@ -46,12 +46,38 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
                                           bool expandOptionalParts ) const
 {
   string result =
-    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
+    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" "
+    "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
     "<html><head>"
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
-  // Add a css stylesheet
+  // add jquery
+  {
+    result += "<script type=\"text/javascript\"  "
+              "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
+  }
 
+  // add qwebchannel
+  {
+    result += "<script type=\"text/javascript\" "
+              "src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>";
+  }
+
+  // document ready ,init webchannel
+  {
+    // var _JS = { 'jQuery': jQuery.noConflict(true) };
+    result += "<script>"
+              " $(document).ready( function (){ "
+              "     console.log(\"document ready,init webchannel\"); "
+              "     new QWebChannel(qt.webChannelTransport, function "
+              "(channel) { "
+              "         window.articleview = channel.objects.articleview; "
+              "   }); "
+              " }); "
+              "</script>";
+  }
+
+  // Add a css stylesheet
   {
     QFile builtInCssFile( ":/article-style.css" );
     builtInCssFile.open( QFile::ReadOnly );

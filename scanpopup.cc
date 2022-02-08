@@ -860,9 +860,8 @@ void ScanPopup::typingEvent( QString const & t )
   }
   else
   {
+    ui.translateBox->translateLine()->clear();
     ui.translateBox->translateLine()->setFocus();
-    ui.translateBox->setText( t, true );
-    ui.translateBox->translateLine()->setCursorPosition( t.size() );
   }
 }
 

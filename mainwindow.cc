@@ -2602,7 +2602,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   else
   if ( obj == wordList )
   {
-    if ( ev->type() == QEvent::KeyPress )
+    if (ev->type() == QEvent::KeyPress || ev->type() == QEvent::ShortcutOverride) 
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -2653,7 +2653,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   }
   else
   if (obj == ui.dictsList) {
-    if ( ev->type() == QEvent::KeyPress )
+    if ( ev->type() == QEvent::KeyPress || ev->type() == QEvent::ShortcutOverride)
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -2787,10 +2787,8 @@ void MainWindow::typingEvent( QString const & t )
 
     if( translateLine->isEnabled() )
     {
-      //translateLine->setFocus();
-      // Escaping the typed-in characters is the user's responsibility.
-      setTranslateBoxTextAndClearSuffix( t, WildcardsAreAlreadyEscaped, EnablePopup );
-      translateLine->setCursorPosition( t.size() );
+      translateLine->clear();
+      translateLine->setFocus();
     }
   }
 }
