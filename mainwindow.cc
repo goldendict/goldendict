@@ -748,9 +748,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
   {
-//    setGeometry( cfg.maximizedMainWindowGeometry );
-//    if ( cfg.mainWindowGeometry.size() )
-//      restoreGeometry( cfg.mainWindowGeometry );
+    setGeometry( cfg.maximizedMainWindowGeometry );
+    if ( cfg.mainWindowGeometry.size() )
+      restoreGeometry( cfg.mainWindowGeometry );
     if ( cfg.mainWindowState.size() )
       restoreState( cfg.mainWindowState, 1 );
     setWindowState( windowState() | Qt::WindowMaximized );
@@ -2467,8 +2467,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   {
     if( !isMaximized() && !isMinimized() && !isFullScreen() )
     {
-        //todo ,need further effort
-     //   setGeometry( cfg.normalMainWindowGeometry );
+      setGeometry( cfg.normalMainWindowGeometry );
     }
     ev->accept();
     return true;

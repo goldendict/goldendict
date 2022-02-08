@@ -171,7 +171,6 @@ public:
     normalizedString = gd::toQString( normText );
   }
 };
-
 /// End of DiacriticsHandler class
 
 void ArticleView::emitJavascriptFinished(){
@@ -182,7 +181,6 @@ void ArticleView::emitJavascriptFinished(){
 QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
 {
   qDebug(QString("runJavascriptScriptSync with :%1").arg(variable).toLatin1().data());
-  QVariant variant;
 
   QString result;
   QEventLoop loop;
@@ -1742,7 +1740,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * saveImageAction = 0;
   QAction * saveSoundAction = 0;
 
-  //todo url();?
+  //todo url() or lastclickurl ?
   QUrl targetUrl( r->url() );
   Contexts contexts;
 
