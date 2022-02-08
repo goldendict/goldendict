@@ -329,7 +329,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   //connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
   QWebEngineView *m_pNewView;
-  QWebEnginePage *page = ui.definition;
+  QWebEnginePage *page = ui.definition->page();
   connect(&inspectAction, &QAction::triggered, this, [page, m_pNewView]() mutable
           {
             m_pNewView = new QWebEngineView();
