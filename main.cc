@@ -301,7 +301,6 @@ int main( int argc, char ** argv )
 
 #endif
 
-
   QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword"};
 
   for (int i = 0; i < localSchemes.size(); ++i)
@@ -310,10 +309,10 @@ int main( int argc, char ** argv )
       QWebEngineUrlScheme webUiScheme(localScheme.toLatin1());
       webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
                            QWebEngineUrlScheme::LocalScheme |
-                           QWebEngineUrlScheme::LocalAccessAllowed);
+                           QWebEngineUrlScheme::LocalAccessAllowed|
+                           QWebEngineUrlScheme::CorsEnabled);
       QWebEngineUrlScheme::registerScheme(webUiScheme);
   }
-
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
