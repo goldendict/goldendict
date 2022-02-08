@@ -1138,6 +1138,10 @@ void ArticleView::linkClicked( QUrl const & url_ )
     openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
 }
 
+void ArticleView::linkClickedInHtml( QUrl const & url_ )
+{
+  ui.definition->linkClickedInHtml(url_);
+}
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )

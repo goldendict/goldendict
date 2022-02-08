@@ -49,35 +49,28 @@ bool ArticleWebView::event(QEvent *event)
 
 bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
 {
-
   if (ev->type() == QEvent::MouseButtonDblClick)
   {
-    // QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
-    firstClicked = false;
+    singleClickToDbClick = false;
+    dbClicked = true;
+  }
+  if (ev->type() == QEvent::MouseMove)
+  {
+    singleClickToDbClick = false;
   }
   if (ev->type() == QEvent::MouseButtonPress)
   {
     QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
-    if (pe->buttons() & Qt::LeftButton)
+    if (pe->button() == Qt::LeftButton)
     {
-      firstClicked = true;
-    }
-    mousePressEvent(pe);
-  }
-  if (ev->type() == QEvent::MouseButtonRelease)
-  {
-    QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
-    mouseReleaseEvent(pe);
-    if (firstClicked)
-    {
+      singleClickToDbClick = true;
+      dbClicked = false;
       QTimer::singleShot(QApplication::doubleClickInterval(), this, [=]()
                          { singleClickAction(pe); });
     }
-    else
-    {
-      doubleClickAction(pe);
-    }
+    mousePressEvent(pe);
   }
+
   if (ev->type() == QEvent::Wheel)
   {
     QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
@@ -100,7 +93,7 @@ void ArticleWebView::mousePressEvent(QMouseEvent *event)
 
 void ArticleWebView::singleClickAction(QMouseEvent *event)
 {
-  if (!firstClicked)
+  if (!singleClickToDbClick)
     return;
 
   if (selectionBySingleClick)
@@ -110,6 +103,11 @@ void ArticleWebView::singleClickAction(QMouseEvent *event)
     sendCustomMouseEvent(QEvent::MouseButtonDblClick);
     sendCustomMouseEvent(QEvent::MouseButtonDblClick);
   }
+}
+
+void ArticleWebView::linkClickedInHtml(QUrl const& ){
+  //disable single click to simulate dbclick action on the new loaded pages.
+  singleClickToDbClick=false;
 }
 
 void ArticleWebView::sendCustomMouseEvent(QEvent::Type type)

@@ -287,7 +287,10 @@ public slots:
 
   /// Selects an entire text of the current article
   void selectCurrentArticle();
+  //receive signal from weburlinterceptor.
   void linkClicked( QUrl const & );
+  //aim to receive signal from html. the fragment url click to  navigation through page wil not be intecepted by weburlinteceptor
+  Q_INVOKABLE void linkClickedInHtml( QUrl const & );
 private slots:
 
   void loadFinished( bool ok );
