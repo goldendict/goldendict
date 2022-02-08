@@ -106,19 +106,24 @@ void ArticleWebView::singleClickAction(QObject *obj, QMouseEvent *event)
   {
     findText(""); // clear the selection first, if any
     // send dbl click event twice? send one time seems not work .weird really.  need further investigate.
-    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick, event);
-    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick, event);
+    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick);
+    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick);
   }
 }
 
-void ArticleWebView::sendCustomMouseEvent(QObject* obj,QEvent::Type type,QMouseEvent * event){
-  QMouseEvent ev( type,mapFromGlobal(QCursor::pos()),mapFromGlobal(QCursor::pos()),QCursor::pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers(), Qt::MouseEventSynthesizedByApplication );
-  QApplication::sendEvent(obj, &ev );
+void ArticleWebView::sendCustomMouseEvent(QObject *obj, QEvent::Type type)
+{
+  QPoint pt = mapFromGlobal(QCursor::pos());
+  QMouseEvent ev(type, pt, pt, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier,
+                 Qt::MouseEventSynthesizedByApplication);
+
+  QObjectList list = this->children();
+  for (int i = 0; i < list.size(); i++) {
+    QApplication::sendEvent(list[i], &ev);
+  }
 }
 
-
-void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
-{
+void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
   bool noMidButton = !( event->buttons() & Qt::MidButton );
 
   //QWebEngineView::mouseReleaseEvent( event );
