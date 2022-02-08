@@ -14,7 +14,7 @@ the first version has been named as 22.2.alpha.commit_hash.
 
 22 means 2022 year.
 
-2 means 2 month.
+2 means 2 month of the year.
 
 
 ### Jekyll Themes
