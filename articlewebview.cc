@@ -70,7 +70,7 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
     if (firstClicked)
     {
       QTimer::singleShot(QApplication::doubleClickInterval(), this, [=]()
-                         { singleClickAction(obj, pe); });
+                         { singleClickAction(pe); });
     }
     else
     {
@@ -97,7 +97,7 @@ void ArticleWebView::mousePressEvent(QMouseEvent *event)
     midButtonPressed = true;
 }
 
-void ArticleWebView::singleClickAction(QObject *obj, QMouseEvent *event)
+void ArticleWebView::singleClickAction(QMouseEvent *event)
 {
   if (!firstClicked)
     return;
@@ -106,37 +106,37 @@ void ArticleWebView::singleClickAction(QObject *obj, QMouseEvent *event)
   {
     findText(""); // clear the selection first, if any
     // send dbl click event twice? send one time seems not work .weird really.  need further investigate.
-    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick);
-    sendCustomMouseEvent(obj, QEvent::MouseButtonDblClick);
+    sendCustomMouseEvent(QEvent::MouseButtonDblClick);
+    sendCustomMouseEvent(QEvent::MouseButtonDblClick);
   }
 }
 
-void ArticleWebView::sendCustomMouseEvent(QObject *obj, QEvent::Type type)
+void ArticleWebView::sendCustomMouseEvent(QEvent::Type type)
 {
   QPoint pt = mapFromGlobal(QCursor::pos());
   QMouseEvent ev(type, pt, pt, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier,
                  Qt::MouseEventSynthesizedByApplication);
 
-  QObjectList list = this->children();
-  for (int i = 0; i < list.size(); i++) {
-    QApplication::sendEvent(list[i], &ev);
+  auto childrens = this->children();
+  for (auto child : childrens)
+  {
+    QApplication::sendEvent(child, &ev);
   }
 }
 
-void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
-  bool noMidButton = !( event->buttons() & Qt::MidButton );
+void ArticleWebView::mouseReleaseEvent(QMouseEvent *event)
+{
+  bool noMidButton = !(event->buttons() & Qt::MidButton);
 
-  //QWebEngineView::mouseReleaseEvent( event );
-
-  if ( midButtonPressed & noMidButton )
+  if (midButtonPressed & noMidButton)
     midButtonPressed = false;
 }
 
-void ArticleWebView::doubleClickAction(QMouseEvent *event) {
-  // QWebEngineView::mouseDoubleClickEvent( event );
-
+void ArticleWebView::doubleClickAction(QMouseEvent *event)
+{
   // emit the signal only if we are not double-clicking on scrollbars
-  if (Qt::MouseEventSynthesizedByApplication != event->source()) {
+  if (Qt::MouseEventSynthesizedByApplication != event->source())
+  {
     emit doubleClicked(event->pos());
   }
 }
@@ -173,7 +173,10 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
     {
       QKeyEvent kev( QEvent::KeyPress, ev->delta() > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
                      Qt::NoModifier );
-      QApplication::sendEvent( this, &kev );
+      auto childrens = this->children();
+      for (auto child : childrens) {
+        QApplication::sendEvent(child, &kev);
+      }
 
       ev->accept();
       return;
