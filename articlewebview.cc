@@ -57,6 +57,8 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
   if (ev->type() == QEvent::MouseButtonPress)
   {
     firstClicked = true;
+    QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+    mousePressEvent(pe);
   }
   if (ev->type() == QEvent::MouseButtonRelease)
   {
@@ -88,33 +90,36 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
   return QWebEngineView::eventFilter(obj, ev);
 }
 
+void ArticleWebView::mousePressEvent(QMouseEvent *event)
+{
+  if (event->buttons() & Qt::MidButton)
+    midButtonPressed = true;
+}
+
 void ArticleWebView::singleClickAction( QMouseEvent * event )
 {
   if(!firstClicked)
     return;
-  if ( event->buttons() & Qt::MidButton )
-    midButtonPressed = true;
 
-  //QWebEngineView::mousePressEvent(event);
-
-  if (selectionBySingleClick && (event->button() & Qt::LeftButton)) {
-         findText(""); // clear the selection first, if any
-         page()->runJavaScript(QString(""
-"  var s = window.getSelection();  "
-"  var range = s.getRangeAt(0);  "
-"  var node = s.anchorNode;  "
-"  while (range.toString().indexOf(' ') != 0) {  "
-"    range.setStart(node, (range.startOffset - 1));  "
-"  }  "
-"  range.setStart(node, range.startOffset + 1);  "
-"  do {  "
-"    range.setEnd(node, range.endOffset + 1);  "
-"  }  "
-"  while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');  "
-"  var str = range.toString().trim();  "
-"  console.log(str);"));
-//         QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
-//         QApplication::sendEvent(page(), &ev );
+  if (selectionBySingleClick && (event->buttons() & Qt::LeftButton))
+  {
+    // findText(""); // clear the selection first, if any
+    page()->runJavaScript(QString(
+        "  var s = window.getSelection();  "
+        " if(s.rangeCount>0){ "
+        "  var range = s.getRangeAt(0);  "
+        "  var node = s.anchorNode;  "
+        "  while (range.toString().indexOf(' ') != 0) {  "
+        "    range.setStart(node, (range.startOffset - 1));  "
+        "  }  "
+        "  range.setStart(node, range.startOffset + 1);  "
+        "  do {  "
+        "    range.setEnd(node, range.endOffset+1);  "
+        "  }  "
+        "  while (range.toString().indexOf(' ') == -1 && range.toString().trim() != '');  "
+        "  var str = range.toString().trim();  "
+        "  console.log(str);"
+        " }"));
   }
 }
 
