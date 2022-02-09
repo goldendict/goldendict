@@ -13,56 +13,9 @@
 #include "wstring_qt.hh"
 #include "gddebug.hh"
 #include "qt4x5.hh"
+#include <QNetworkAccessManager>
 
 using std::string;
-
-#if QT_VERSION >= 0x050300 // Qt 5.3+
-
-  // SecurityWhiteList
-
-  SecurityWhiteList & SecurityWhiteList::operator=( SecurityWhiteList const & swl )
-  {
-    swlDelete();
-    swlCopy( swl );
-    return *this;
-  }
-
-  QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
-  {
-    swlDelete();
-    originUri = url.toString( QUrl::PrettyDecoded );
-    origin = new QWebSecurityOrigin( url );
-    return origin;
-  }
-
-  void SecurityWhiteList::swlCopy( SecurityWhiteList const & swl )
-  {
-    if( swl.origin )
-    {
-      hostsToAccess = swl.hostsToAccess;
-      originUri = swl.originUri;
-      origin = new QWebSecurityOrigin( QUrl( originUri ) );
-
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-    }
-  }
-
-  void SecurityWhiteList::swlDelete()
-  {
-    if( origin )
-    {
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-
-      delete origin;
-      origin = 0;
-    }
-    hostsToAccess.clear();
-    originUri.clear();
-  }
 
   // AllowFrameReply
 
@@ -200,7 +153,6 @@ using std::string;
     return size;
   }
 
-#endif
 
 namespace
 {
@@ -255,43 +207,21 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
-    // Workaround of same-origin policy
-    if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
-        && req.hasRawHeader( "Referer" ) )
-    {
-      QByteArray referer = req.rawHeader( "Referer" );
-      QUrl refererUrl = QUrl::fromEncoded( referer );
-
-      if( refererUrl.scheme().startsWith( "http") || refererUrl.scheme() == "ftp" )
-      {
-        // Only for pages from network resources
-        if ( !req.url().host().endsWith( refererUrl.host() ) )
-        {
-          QUrl frameUrl;
-          frameUrl.setScheme( refererUrl.scheme() );
-          frameUrl.setHost( refererUrl.host() );
-          QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
-
-          SecurityWhiteList & value = allOrigins[ frameStr ];
-          if( !value.origin )
-            value.setOrigin( frameUrl );
-
-          QPair< QString, QString > target( req.url().scheme(), req.url().host() );
-          if( value.hostsToAccess.find( target ) == value.hostsToAccess.end() )
-          {
-            value.hostsToAccess.insert( target );
-            value.origin->addAccessWhitelistEntry( target.first, target.second,
-                                                   QWebSecurityOrigin::AllowSubdomains );
-          }
-        }
-      }
-    }
-#endif
 
     QString contentType;
 
-    sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
+    QUrl url=req.url();
+    if(req.url().scheme()=="gdlookup"){
+        QString path=url.path();
+        if(!path.isEmpty()){
+            Qt4x5::Url::addQueryItem(url,"word",path.mid(1));
+            url.setPath("");
+            Qt4x5::Url::addQueryItem(url,"group","1");
+
+        }
+    }
+
+    sptr< Dictionary::DataRequest > dr = getResource( url, contentType );
 
     if ( dr.get() )
       return new ArticleResourceReply( this, req, dr, contentType );
@@ -451,6 +381,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
         {
             if( url.scheme() == "gico" )
             {
+                contentType="image/png";
                 QByteArray bytes;
                 QBuffer buffer(&bytes);
                 buffer.open(QIODevice::WriteOnly);
@@ -619,7 +550,7 @@ void ArticleResourceReply::finishedSlot()
   if ( req->dataSize() < 0 )
     error( ContentNotFoundError );
 
-  finished();
+  emit finished();
 }
 
 BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
@@ -638,3 +569,24 @@ void BlockedNetworkReply::finishedSlot()
   emit readyRead();
   emit finished();
 }
+
+LocalSchemeHandler::LocalSchemeHandler(ArticleNetworkAccessManager& articleNetMgr)
+:mManager(articleNetMgr)
+{
+
+}
+
+void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
+{
+  QUrl url = requestJob->requestUrl();
+
+  QNetworkRequest request;
+  request.setUrl( url );
+
+  QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request,NULL);
+  connect(reply,&QNetworkReply::finished,this,[=](){
+      //QNetworkReply *reply1=qobject_cast<QNetworkReply*>(sender());
+      requestJob->reply("text/html",reply);
+  });
+}
+

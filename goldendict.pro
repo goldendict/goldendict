@@ -25,7 +25,7 @@ QT += core \
 
 greaterThan(QT_MAJOR_VERSION, 4) {
     QT += widgets \
-          webkitwidgets \
+          webenginewidgets\
           printsupport \
           help
 
@@ -250,6 +250,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
+    gico_schemahandler.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
@@ -352,7 +353,6 @@ HEADERS += folding.hh \
     mdx.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
-    articleinspector.hh \
     delegate.hh \
     zim.hh \
     gddebug.hh \
@@ -389,6 +389,7 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
+    gico_schemahandler.cpp \
     main.cc \
     dictionary.cc \
     config.cc \
@@ -484,7 +485,6 @@ SOURCES += folding.cc \
     mdx.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
-    articleinspector.cc \
     delegate.cc \
     zim.cc \
     gddebug.cc \

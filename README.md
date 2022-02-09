@@ -9,17 +9,11 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 ### External Deps
 
 * Make, GCC, Git
-* Qt framework. Minimum required version is 4.6. But Qt 4.7 or 4.8 is recommended.
+* Qt framework. Minimum required version is 5.15
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
 * On Mac and Windows all the libraries are already included in the repository
 
-### Installing External Deps on Ubuntu Linux
-
-    sudo apt-get install git pkg-config build-essential qt4-qmake \
-         libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
-         libqt4-dev libqtwebkit-dev libxtst-dev liblzo2-dev libbz2-dev \
-         libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev
 
 #### Installing External Deps on Ubuntu Linux for Qt5
 
@@ -36,12 +30,11 @@ First, clone this repository, e.g.:
 
     git clone git://github.com/goldendict/goldendict.git
 
-And then invoke `qmake-qt4` and `make`:
+And then invoke `qmake-qt5` and `make`:
 
-    cd goldendict && qmake-qt4 && make
+    cd goldendict && qmake-qt5 && make
 
-In case when `qmake-qt4` does not exist, try using `qmake` but make sure it is indeed from the Qt 4 installation.
-On the other hand, if you want to use `qt5`, make sure that `qmake` is from Qt 5 installation. If not, you can try
+make sure that `qmake` is from Qt 5 installation. If not, you can try
 finding it at a path like `/usr/lib/x86_64-linux-gnu/qt5/bin/qmake`.
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 

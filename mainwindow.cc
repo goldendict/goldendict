@@ -6,6 +6,8 @@
 #endif
 
 #include "mainwindow.hh"
+#include <QWebEngineProfile>
+#include <QWebEngineSettings>
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "preferences.hh"
@@ -46,6 +48,7 @@
 #include "qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
+#include "gico_schemahandler.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -141,6 +144,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifndef QT_NO_OPENSSL
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
+
+
+  LocalSchemeHandler *handler = new LocalSchemeHandler(articleNetMgr);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", handler);
+
+  QStringList localSchemes={"gdau","gico","qrcx","bres"};
+  for(int i=0;i<localSchemes.size();i++){
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), new GicoSchemeHandler(articleNetMgr));
+  }
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -736,9 +748,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
   {
-    setGeometry( cfg.maximizedMainWindowGeometry );
-    if ( cfg.mainWindowGeometry.size() )
-      restoreGeometry( cfg.mainWindowGeometry );
+//    setGeometry( cfg.maximizedMainWindowGeometry );
+//    if ( cfg.mainWindowGeometry.size() )
+//      restoreGeometry( cfg.mainWindowGeometry );
     if ( cfg.mainWindowState.size() )
       restoreState( cfg.mainWindowState, 1 );
     setWindowState( windowState() | Qt::WindowMaximized );
@@ -1295,9 +1307,11 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
-  QWebSettings *defaultSettings = QWebSettings::globalSettings();
-  defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
+  QWebEngineSettings *defaultSettings = QWebEngineSettings::globalSettings();
+  defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -1611,7 +1625,6 @@ void MainWindow::switchToWindow(QAction *act)
   int idx = act->data().toInt();
   ui.tabWidget->setCurrentIndex(idx);
 }
-
 
 void MainWindow::addNewTab()
 {
@@ -2453,7 +2466,10 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
   {
     if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      setGeometry( cfg.normalMainWindowGeometry );
+    {
+        //todo ,need further effort
+     //   setGeometry( cfg.normalMainWindowGeometry );
+    }
     ev->accept();
     return true;
   }

@@ -3,19 +3,15 @@
 
 #include "articlewebview.hh"
 #include <QMouseEvent>
-#include <QWebFrame>
+#include <QWebEngineView>
 #include <QApplication>
-#include "articleinspector.hh"
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
 #endif
 
 ArticleWebView::ArticleWebView( QWidget *parent ):
-  QWebView( parent ),
-#if QT_VERSION >= 0x040600
-  inspector( NULL ),
-#endif
+  QWebEngineView( parent ),
   midButtonPressed( false ),
   selectionBySingleClick( false ),
   showInspectorDirectly( true )
@@ -24,10 +20,7 @@ ArticleWebView::ArticleWebView( QWidget *parent ):
 
 ArticleWebView::~ArticleWebView()
 {
-#if QT_VERSION >= 0x040600
-  if ( inspector )
-    inspector->deleteLater();
-#endif
+
 }
 
 void ArticleWebView::setUp( Config::Class * cfg )
@@ -35,32 +28,9 @@ void ArticleWebView::setUp( Config::Class * cfg )
   this->cfg = cfg;
 }
 
-void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked )
+void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
 {
-#if QT_VERSION >= 0x040600
-  if ( action == QWebPage::InspectElement )
-  {
-    // Get or create inspector instance for current view.
-    if ( !inspector )
-    {
-      inspector = new ArticleInspector( cfg );
-      inspector->setPage( page() );
-      connect( this, SIGNAL( destroyed() ), inspector, SLOT( beforeClosed() ) );
-    }
-
-    if ( showInspectorDirectly )
-    {
-      showInspectorDirectly = false;
-      // Bring up the inspector window and set focus
-      inspector->show();
-      inspector->activateWindow();
-      inspector->raise();
-      return;
-    }
-  }
-#endif
-
-  QWebView::triggerPageAction( action, checked );
+  QWebEngineView::triggerPageAction( action, checked );
 }
 
 bool ArticleWebView::event( QEvent * event )
@@ -80,7 +50,7 @@ bool ArticleWebView::event( QEvent * event )
     break;
   }
 
-  return QWebView::event( event );
+  return QWebEngineView::event( event );
 }
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
@@ -88,7 +58,7 @@ void ArticleWebView::mousePressEvent( QMouseEvent * event )
   if ( event->buttons() & Qt::MidButton )
     midButtonPressed = true;
 
-  QWebView::mousePressEvent( event );
+  QWebEngineView::mousePressEvent( event );
 
   if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
   {
@@ -102,7 +72,7 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 {
   bool noMidButton = !( event->buttons() & Qt::MidButton );
 
-  QWebView::mouseReleaseEvent( event );
+  QWebEngineView::mouseReleaseEvent( event );
 
   if ( midButtonPressed & noMidButton )
     midButtonPressed = false;
@@ -110,14 +80,11 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 
 void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 {
-  QWebView::mouseDoubleClickEvent( event );
-#if QT_VERSION >= 0x040600
-  int scrollBarWidth = page()->mainFrame()->scrollBarGeometry( Qt::Vertical ).width();
-  int scrollBarHeight = page()->mainFrame()->scrollBarGeometry( Qt::Horizontal ).height();
-#else
+  QWebEngineView::mouseDoubleClickEvent( event );
+
   int scrollBarWidth = 0;
   int scrollBarHeight = 0;
-#endif
+
 
   // emit the signal only if we are not double-clicking on scrollbars
   if ( ( event->x() < width() - scrollBarWidth ) &&
@@ -130,14 +97,14 @@ void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 
 void ArticleWebView::focusInEvent( QFocusEvent * event )
 {
-  QWebView::focusInEvent( event );
+  QWebEngineView::focusInEvent( event );
 
   switch( event->reason() )
   {
     case Qt::MouseFocusReason:
     case Qt::TabFocusReason:
     case Qt::BacktabFocusReason:
-      page()->mainFrame()->evaluateJavaScript("top.focus();");
+      page()->runJavaScript("top.focus();");
       break;
 
     default:
@@ -149,7 +116,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
 {
 #ifdef Q_OS_WIN32
 
-  // Avoid wrong mouse wheel handling in QWebView
+  // Avoid wrong mouse wheel handling in QWebEngineView
   // if system preferences is set to "scroll by page"
 
   if( ev->modifiers() == Qt::NoModifier )
@@ -174,7 +141,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
   }
   else
   {
-     QWebView::wheelEvent( ev );
+     QWebEngineView::wheelEvent( ev );
   }
 
 }

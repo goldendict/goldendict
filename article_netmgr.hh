@@ -7,10 +7,12 @@
 #include <QtNetwork>
 
 #if QT_VERSION >= 0x050300  // Qt 5.3+
-#include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
 #include <QPair>
+#include <QWebEngineUrlSchemeHandler>
+#include <QWebEngineUrlRequestJob>
+#include <QNetworkAccessManager>
 #endif
 
 #include "dictionary.hh"
@@ -20,36 +22,6 @@ using std::vector;
 
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
-
-#if QT_VERSION >= 0x050300  // Qt 5.3+
-
-// White lists for QWebSecurityOrigin
-struct SecurityWhiteList
-{
-  QWebSecurityOrigin * origin;
-  QString originUri;
-  QSet< QPair< QString, QString > > hostsToAccess;
-
-  SecurityWhiteList() :
-    origin( 0 )
-  {}
-
-  ~SecurityWhiteList()
-  { swlDelete(); }
-
-  SecurityWhiteList( SecurityWhiteList const & swl ) :
-    origin( 0 )
-  { swlCopy( swl ); }
-
-  SecurityWhiteList & operator=( SecurityWhiteList const & swl );
-  QWebSecurityOrigin * setOrigin( QUrl const & url );
-
-private:
-  void swlCopy( SecurityWhiteList const & swl );
-  void swlDelete();
-};
-
-typedef QMap< QString, SecurityWhiteList > Origins;
 
 // Proxy class for QNetworkReply to remove X-Frame-Options header
 // It allow to show websites in <iframe> tag like Qt 4.x
@@ -120,17 +92,16 @@ protected:
   qint64 writeData( const char * data, qint64 maxSize )
   { return baseReply->write( data, maxSize ); }
 };
-#endif
+
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
+    Q_OBJECT
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= 0x050300  // Qt 5.3+
-  Origins allOrigins;
-#endif
+
 public:
 
   ArticleNetworkAccessManager( QObject * parent,
@@ -152,11 +123,12 @@ public:
   sptr< Dictionary::DataRequest > getResource( QUrl const & url,
                                                QString & contentType );
 
-protected:
+//protected:
 
   virtual QNetworkReply * createRequest( Operation op,
                                          QNetworkRequest const & req,
                                          QIODevice * outgoingData );
+
 };
 
 class ArticleResourceReply: public QNetworkReply
@@ -229,4 +201,16 @@ private slots:
   void finishedSlot();
 };
 
+
+class LocalSchemeHandler : public QWebEngineUrlSchemeHandler
+{
+  Q_OBJECT
+public:
+  LocalSchemeHandler(ArticleNetworkAccessManager &articleNetMgr);
+  void requestStarted(QWebEngineUrlRequestJob *requestJob);
+
+protected:
+private:
+    ArticleNetworkAccessManager& mManager;
+};
 #endif

@@ -179,13 +179,15 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
+"           var gdCurrentArticle;"
             "var gdAudioLinks = { first: null, current: null };"
             "function gdMakeArticleActive( newId ) {"
+"           if(gdCurrentArticle==null) return;"
             "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
             "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
             "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
             "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
-            "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
+            " } }"
             "var overIframeId = null;"
             "function gdSelectArticle( id ) {"
             "var selection = window.getSelection(); var range = document.createRange();"
@@ -630,13 +632,6 @@ void ArticleRequest::bodyFinished()
         {
           head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
-        else
-        {
-          // This is the first article
-          head += "<script type=\"text/javascript\">"
-                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
-                  "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
-        }
 
         bool collapse = false;
         if( articleSizeLimit >= 0 )
@@ -675,6 +670,7 @@ void ArticleRequest::bodyFinished()
           }
         }
 
+      	//todo ,gdArticleContents应该可以用类变量保存。
         string jsVal = Html::escapeForJavaScript( dictId );
         head += "<script type=\"text/javascript\">var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "

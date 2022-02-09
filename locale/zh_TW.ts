@@ -3667,7 +3667,7 @@ clears its network cache from disk during exit.</source>
     </message>
 </context>
 <context>
-    <name>QWebPage</name>
+    <name>QWebEnginePage</name>
     <message>
         <source>Select All</source>
         <translation type="obsolete">全選</translation>
