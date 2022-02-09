@@ -1,16 +1,17 @@
 #include "resourceschemehandler.h"
 
-ResourceSchemeHandler::ResourceSchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
-
+ResourceSchemeHandler::ResourceSchemeHandler(ArticleNetworkAccessManager &articleNetMgr) : mManager(articleNetMgr)
+{
 }
 void ResourceSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
-    QUrl url = requestJob->requestUrl();
+  QUrl url = requestJob->requestUrl();
 
-    QNetworkRequest request;
-    request.setUrl(url);
-    QNetworkReply *reply = this->mManager.createRequest(QNetworkAccessManager::GetOperation, request, NULL);
-    connect(reply, &QNetworkReply::finished, requestJob, [=]() {
+  QNetworkRequest request;
+  request.setUrl(url);
+  QNetworkReply *reply = this->mManager.createRequest(QNetworkAccessManager::GetOperation, request);
+  connect(reply, &QNetworkReply::finished, requestJob, [=]()
+    {
       if (reply->error() == QNetworkReply::ContentNotFoundError) {
         requestJob->fail(QWebEngineUrlRequestJob::UrlNotFound);
         return;
@@ -23,6 +24,6 @@ void ResourceSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
       QMimeType mineType = db.mimeTypeForUrl(url);
       QString contentType = mineType.name();
       // Reply segment
-      requestJob->reply(contentType.toLatin1(), reply);
+      requestJob->reply(contentType.toLatin1(), reply); 
     });
 }

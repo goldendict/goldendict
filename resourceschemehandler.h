@@ -1,20 +1,19 @@
 #ifndef RESOURCESCHEMEHANDLER_H
 #define RESOURCESCHEMEHANDLER_H
 
-#include"article_netmgr.hh"
+#include "article_netmgr.hh"
 
 class ResourceSchemeHandler : public QWebEngineUrlSchemeHandler
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    ResourceSchemeHandler(ArticleNetworkAccessManager& articleNetMgr);
-    void requestStarted(QWebEngineUrlRequestJob *requestJob);
+  ResourceSchemeHandler(ArticleNetworkAccessManager &articleNetMgr);
+  void requestStarted(QWebEngineUrlRequestJob *requestJob);
 
 protected:
-
 private:
-    ArticleNetworkAccessManager& mManager;
-    QMimeDatabase db;
+  ArticleNetworkAccessManager &mManager;
+  QMimeDatabase db;
 };
 
 #endif // RESOURCESCHEMEHANDLER_H
