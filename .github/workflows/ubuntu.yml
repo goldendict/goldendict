@@ -1,5 +1,8 @@
 name: Ubuntu
 # Qt官方没有linux平台的x86包
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 on: 
   workflow_dispatch:
   push:
