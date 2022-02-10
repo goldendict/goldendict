@@ -2814,7 +2814,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.cc" line="209"/>
         <source>Scan Popup</source>
-        <translation>Vyskakovanie okno</translation>
+        <translation>Vyskakovacie okno</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="224"/>
@@ -3937,30 +3937,33 @@ Povoľte toto nastavenie na obídenie problému.</translation>
     <message>
         <location filename="../preferences.ui" line="1160"/>
         <source>Maximum network cache size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálna veľkosť vyr. pamäte siete:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1167"/>
         <source>Maximum disk space occupied by GoldenDict&apos;s network cache in
 %1
 If set to 0 the network disk cache will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálny priestor na disku obsadený vyrovnávacou pamäťou siete GoldenDict v
+%1
+Ak nastavíte na 0, vyrovnávacia pamäť siete bude vypnutá.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1172"/>
         <source> MiB</source>
-        <translation type="unfinished"></translation>
+        <translation> MiB</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1185"/>
         <source>When this option is enabled, GoldenDict
 clears its network cache from disk during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ak zapnete túto možnosť, GoldenDict
+vyčistí vyrovnávaciu pamäť siete pri ukončení aplikácie.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1189"/>
         <source>Clear network cache on exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistiť vyr. pamäť siete pri ukončení</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1227"/>
@@ -4142,7 +4145,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../preferences.cc" line="158"/>
         <source> MB</source>
-        <translation type="unfinished"></translation>
+        <translation> MB</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="634"/>
