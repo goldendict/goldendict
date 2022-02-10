@@ -18,6 +18,49 @@ on:
       - ".github/**"
       - "howto/**"
 jobs:
+  formatting-check:
+    name: Formatting Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        path:
+          - check: '.'
+            exclude: '(winlibs|maclibs)' # Exclude file paths containing "hello" or "world"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run clang-format style check for C/C++/Protobuf programs.
+      uses: jidicula/clang-format-action@v4.5.0
+      with:
+        clang-format-version: '13'
+        check-path: ${{ matrix.path['check'] }}
+        exclude-regex: ${{ matrix.path['exclude'] }}
+        fallback-style: 'llvm' # optional
+  clang-tidy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install clang-tidy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang-tidy
+    - name: Prepare compile_commands.json
+      run: |
+        cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+    - name: Create results directory
+      run: |
+        mkdir clang-tidy-result
+    - name: Analyze
+      run: |
+        git diff -U0 HEAD^ | clang-tidy-diff -p1 -path build -export-fixes clang-tidy-result/fixes.yml
+    - name: Save PR metadata
+      run: |
+        echo ${{ github.event.number }} > clang-tidy-result/pr-id.txt
+        echo ${{ github.event.pull_request.head.repo.full_name }} > clang-tidy-result/pr-head-repo.txt
+        echo ${{ github.event.pull_request.head.ref }} > clang-tidy-result/pr-head-ref.txt
+    - uses: actions/upload-artifact@v2
+      with:
+        name: clang-tidy-result
+        path: clang-tidy-result/
   clang-format-checking:
     runs-on: ubuntu-latest
     steps:
