@@ -10,6 +10,7 @@ on:
       - 'docs/**'
       - ".github/**"
       - "howto/**"
+      - "*.md"
   pull_request:
     branches:
       - dev
@@ -18,6 +19,7 @@ on:
       - 'docs/**'
       - ".github/**"
       - "howto/**"
+      - "*.md"
 jobs:
   build:
     name: Build
