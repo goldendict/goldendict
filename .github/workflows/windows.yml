@@ -1,4 +1,7 @@
 name: Windows
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 on: 
   workflow_dispatch:
   # push代码时触发workflow
