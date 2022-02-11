@@ -552,8 +552,7 @@ CONFIG( chinese_conversion_support ) {
   SOURCES += chinese.cc \
              chineseconversion.cc
   win32-msvc* {
-    Debug:   LIBS += -lopenccd
-    Release: LIBS += -lopencc
+    LIBS += -lopencc
   } else {
     mac {
       LIBS += -lopencc.2
