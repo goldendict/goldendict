@@ -1,16 +1,11 @@
 *.o
 *~
 
-mouseover_win32/*.dll
-mouseover_win32/*.a
-
 locale/*.qm
 debug/
 build/
 release/
 tmp/
-goldendict
-winlibs/lib32-48/
 
 Makefile
 Makefile.Debug
@@ -27,8 +22,6 @@ version.txt
 
 .gitattributes
 
-/goldendict.app/
-/GoldenDict.app/
 *.dmg
 
 .DS_Store
