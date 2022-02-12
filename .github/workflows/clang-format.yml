@@ -1,7 +1,12 @@
 name: Clang Format Checker
 on:
   workflow_dispatch:
-
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "winlibs/**"
   pull_request:
     branches:
       - dev
@@ -10,6 +15,7 @@ on:
       - 'docs/**'
       - ".github/**"
       - "howto/**"
+      - "winlibs/**"
 jobs:
   formatting-check:
     name: Formatting Check
