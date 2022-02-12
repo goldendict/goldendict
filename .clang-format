@@ -1,13 +1,12 @@
 # Format Style Options - Created with Clang Power Tools
 ---
 AllowShortFunctionsOnASingleLine: None
-AllowShortIfStatementsOnASingleLine: true
 BasedOnStyle: LLVM
 BinPackArguments: false
 BinPackParameters: false
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: AfterColon
-ColumnLimit: 160
+ColumnLimit: 120
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth : 2
 ContinuationIndentWidth: 2
