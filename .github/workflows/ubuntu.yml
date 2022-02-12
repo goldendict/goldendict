@@ -46,7 +46,7 @@ jobs:
           sudo apt-get install qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev 
           sudo apt-get install libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev 
           sudo apt-get install libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev 
-          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins  libzstd-dev #libopencc-dev
+          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins doxygen libzstd-dev #libopencc-dev
           sudo ln -sf /usr/bin/x86_64-linux-gnu-ld.gold /usr/bin/ld
           git clone https://github.com/BYVoid/OpenCC
           pwd
