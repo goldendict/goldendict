@@ -47,129 +47,8 @@
        <string>&amp;Interface</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="1">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>Startup</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QCheckBox" name="cbAutostart">
-            <property name="toolTip">
-             <string>Automatically starts GoldenDict after operation system bootup.</string>
-            </property>
-            <property name="text">
-             <string>Start with system</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="8" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="addonStylesLabel">
-           <property name="text">
-            <string>Add-on style:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="StylesComboBox" name="addonStyles"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0">
-        <widget class="QGroupBox" name="enableTrayIcon">
-         <property name="toolTip">
-          <string>When enabled, an icon appears in the system tray area which can be used
-to open main window and perform other tasks.</string>
-         </property>
-         <property name="title">
-          <string>Enable system tray icon</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-         <property name="flat">
-          <bool>false</bool>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QCheckBox" name="startToTray">
-            <property name="toolTip">
-             <string>With this on, the application starts directly to system tray without showing
-its main window.</string>
-            </property>
-            <property name="text">
-             <string>Start to system tray</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="closeToTray">
-            <property name="toolTip">
-             <string>With this on, an attempt to close main window would hide it instead of closing
-the application.</string>
-            </property>
-            <property name="text">
-             <string>Close to system tray</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="doubleClickTranslates">
-         <property name="text">
-          <string>Double-click translates the word clicked</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QCheckBox" name="escKeyHidesMainWindow">
-         <property name="toolTip">
-          <string>Normally, pressing ESC key moves focus to the translation line.
-With this on however, it will hide the main window.</string>
-         </property>
-         <property name="text">
-          <string>ESC key hides main window</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="selectBySingleClick">
-         <property name="toolTip">
-          <string>Turn this option on if you want to select words by single mouse click</string>
-         </property>
-         <property name="text">
-          <string>Select word by single click</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <spacer name="verticalSpacer_8">
+       <item row="9" column="0" colspan="2">
+        <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -181,7 +60,14 @@ With this on however, it will hide the main window.</string>
          </property>
         </spacer>
        </item>
-       <item row="1" column="0" colspan="2">
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="doubleClickTranslates">
+         <property name="text">
+          <string>Double-click translates the word clicked</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="2">
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
           <string>Tabbed browsing</string>
@@ -231,7 +117,17 @@ be the last ones.</string>
          </layout>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2">
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="selectBySingleClick">
+         <property name="toolTip">
+          <string>Turn this option on if you want to select words by single mouse click</string>
+         </property>
+         <property name="text">
+          <string>Select word by single click</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QLabel" name="label_6">
@@ -307,20 +203,127 @@ be the last ones.</string>
          </item>
         </layout>
        </item>
-       <item row="10" column="0" colspan="2">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="1" column="0">
+        <widget class="QGroupBox" name="enableTrayIcon">
+         <property name="toolTip">
+          <string>When enabled, an icon appears in the system tray area which can be used
+to open main window and perform other tasks.</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
+         <property name="title">
+          <string>Enable system tray icon</string>
          </property>
-        </spacer>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="startToTray">
+            <property name="toolTip">
+             <string>With this on, the application starts directly to system tray without showing
+its main window.</string>
+            </property>
+            <property name="text">
+             <string>Start to system tray</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="closeToTray">
+            <property name="toolTip">
+             <string>With this on, an attempt to close main window would hide it instead of closing
+the application.</string>
+            </property>
+            <property name="text">
+             <string>Close to system tray</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="addonStylesLabel">
+           <property name="text">
+            <string>Add-on style:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="StylesComboBox" name="addonStyles"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
        <item row="3" column="1">
+        <widget class="QCheckBox" name="autoScrollToTargetArticle">
+         <property name="toolTip">
+          <string>Normally, clicking on a link, double-clicking on a word or looking up
+selection in an article loads the translation and almost immediately
+scrolls to the article from the same dictionary. With this option off,
+however, the article from the topmost dictionary is shown.</string>
+         </property>
+         <property name="text">
+          <string>Automatically scroll to target article</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Startup</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QCheckBox" name="cbAutostart">
+            <property name="toolTip">
+             <string>Automatically starts GoldenDict after operation system bootup.</string>
+            </property>
+            <property name="text">
+             <string>Start with system</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="escKeyHidesMainWindow">
+         <property name="toolTip">
+          <string>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</string>
+         </property>
+         <property name="text">
+          <string>ESC key hides main window</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_13">
          <item>
           <widget class="QLabel" name="maxDictsInContextMenuLabel">
@@ -369,22 +372,6 @@ be the last ones.</string>
          </item>
         </layout>
        </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="autoScrollToTargetArticle">
-         <property name="toolTip">
-          <string>Normally, clicking on a link, double-clicking on a word or looking up
-selection in an article loads the translation and almost immediately
-scrolls to the article from the same dictionary. With this option off,
-however, the article from the topmost dictionary is shown.</string>
-         </property>
-         <property name="text">
-          <string>Automatically scroll to target article</string>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_4">
@@ -396,19 +383,6 @@ however, the article from the topmost dictionary is shown.</string>
        <string>&amp;Scan Popup</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_10">
-       <item>
-        <spacer name="verticalSpacer_16">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item>
         <widget class="QGroupBox" name="enableScanPopup">
          <property name="toolTip">
@@ -743,19 +717,6 @@ seconds, which is specified here.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_12">
        <item>
-        <spacer name="verticalSpacer_11">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>19</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <widget class="QCheckBox" name="enableMainWindowHotkey">
          <property name="text">
           <string>Use the following hotkey to show or hide the main window:</string>
@@ -887,19 +848,6 @@ p, li { white-space: pre-wrap; }
        <string>&amp;Audio</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
-       <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item>
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
@@ -1275,19 +1223,6 @@ download page.</string>
        <string>Full-text search</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_19">
-       <item>
-        <spacer name="verticalSpacer_9">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item>
         <widget class="QGroupBox" name="ftsGroupBox">
          <property name="title">
