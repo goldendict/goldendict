@@ -3,6 +3,7 @@
 ## Until to now
 - upgrade opencc to 2020-04-26 version
 - upgrade ffmpeg to 4.4
+- fix: double click word to translate ,right context menu does not display.
 
 
 
