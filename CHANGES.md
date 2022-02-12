@@ -1,12 +1,12 @@
 # Changes:
 
-## before now
+## Until to now
 - upgrade opencc to 2020-04-26 version
 - upgrade ffmpeg to 4.4
 
 
 
-## before 2022-2-2
+## Until to 2022-2-2
 -  replace webkit with webenginewidgets
 -    clean old code.
       -  remove old `if 0` code section 
