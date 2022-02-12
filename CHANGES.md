@@ -1,4 +1,10 @@
-# all the changes:
+# Changes:
+
+## before now
+- upgrade opencc to 2020-04-26
+
+
+## before 2022-2-2
 -  replace webkit with webenginewidgets
 -    clean old code.
       -  remove old `if 0` code section 
