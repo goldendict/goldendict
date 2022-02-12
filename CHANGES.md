@@ -1,7 +1,9 @@
 # Changes:
 
 ## before now
-- upgrade opencc to 2020-04-26
+- upgrade opencc to 2020-04-26 version
+- upgrade ffmpeg to 4.4
+
 
 
 ## before 2022-2-2
