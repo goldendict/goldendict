@@ -1,0 +1,30 @@
+# Format Style Options - Created with Clang Power Tools
+---
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: AcrossComments
+AlignEscapedNewlines: Left
+AlignOperands: Align
+AllowAllArgumentsOnNextLine: false
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+BasedOnStyle: LLVM
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeBraces: Allman
+BreakConstructorInitializers: AfterColon
+ColumnLimit: 120
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth : 2
+ContinuationIndentWidth: 2
+MaxEmptyLinesToKeep: 1
+PointerAlignment: Middle
+SortIncludes: false
+SortUsingDeclarations: false
+SpaceBeforeParens: Never
+SpacesInAngles: true
+SpacesInParentheses: true
+SpacesInSquareBrackets: true
+UseTab: Never
+...
