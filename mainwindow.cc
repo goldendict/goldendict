@@ -1137,8 +1137,8 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const 
   {
     // Load an additional stylesheet
     QFile builtInCssFile( QString( ":/qt-style-st-%1.css" ).arg( displayStyle ) );
-    builtInCssFile.open( QFile::ReadOnly );
-    css += builtInCssFile.readAll();
+    if ( builtInCssFile.open( QFile::ReadOnly ) )
+      css += builtInCssFile.readAll();
   }
 
   // Try loading a style sheet if there's one
