@@ -14,7 +14,7 @@ ColumnLimit: '120'
 ConstructorInitializerAllOnOneLineOrOnePerLine: 'true'
 ConstructorInitializerIndentWidth: '2'
 ContinuationIndentWidth: '2'
-MaxEmptyLinesToKeep: '2'
+MaxEmptyLinesToKeep: '1'
 PointerAlignment: Middle
 SortIncludes: 'false'
 SortUsingDeclarations: 'false'
