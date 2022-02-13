@@ -2356,7 +2356,7 @@ QString getPortableVersionMorphoDir() throw()
     return QString();
 }
 
-QString getStylesDir() throw()
+QString getStylesDir()
 {
   QDir result = getHomeDir();
 

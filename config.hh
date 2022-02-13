@@ -825,7 +825,7 @@ QString getPortableVersionDictionaryDir() throw();
 QString getPortableVersionMorphoDir() throw();
 
 /// Returns the add-on styles directory.
-QString getStylesDir() throw();
+QString getStylesDir();
 
 /// Returns the directory where user-specific non-essential (cached) data should be written.
 QString getCacheDir() throw();
