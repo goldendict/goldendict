@@ -10,6 +10,7 @@ on:
       - ".github/**"
       - "howto/**"
       - "*.md"
+      - ".clang-format"
   pull_request:
     branches:
       - dev
