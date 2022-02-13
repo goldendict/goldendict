@@ -92,9 +92,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ steps.vars.outputs.appname }}
-          tag: pre-${{steps.vars.outputs.release_date}}-${{ github.ref_name }}-${{ steps.vars.outputs.sha_short }}
+          tag: ${{ github.ref }}
           overwrite: true 
-          release_name: Ubuntu-Windows-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  

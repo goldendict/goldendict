@@ -71,16 +71,16 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.targetName }}.dmg
           asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
-          tag: pre-${{steps.vars.outputs.release_date}}-${{ github.ref_name }}-${{ steps.vars.outputs.sha_short }}
+          tag: ${{ github.ref }}
           overwrite: true 
-          release_name: MacOS-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
             branch:               ${{ github.ref_name }}
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
-            Macos built with:     ${{ matrix.os }},clang_64
+            macos built with:     ${{ matrix.os }},clang_64
             
             This is a prerelease version ,auto build by github action. use on your on risk:-)
 
