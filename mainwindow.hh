@@ -361,6 +361,8 @@ private slots:
   void zoomout();
   void unzoom();
 
+  void viewLinkClicked( const QUrl & url );
+
   void scaleArticlesByCurrentZoomFactor();
 
   void doWordsZoomIn();

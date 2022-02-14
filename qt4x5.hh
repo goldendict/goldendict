@@ -54,7 +54,6 @@ inline int loadAcquire( QAtomicInt const & ref )
 
 namespace Url
 {
-
 // This wrapper is created due to behavior change of the setPath() method
 // See: https://bugreports.qt-project.org/browse/QTBUG-27728
 //       https://codereview.qt-project.org/#change,38257
@@ -157,6 +156,28 @@ inline QString fragment( const QUrl & url )
 #endif
 }
 
+// extract query word from url
+inline QString getWordFromUrl( const QUrl & url )
+{
+  QString word;
+  if( url.scheme().compare( "bword" ) == 0 )
+  {
+    word = url.path();
+  }
+  else if( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
+  {
+    if( hasQueryItem( url, "word" ) )
+    {
+      word = queryItemValue( url, "word" );
+    }
+    else
+    {
+      word = url.path().mid( 1 );
+    }
+  }
+
+  return word;
+}
 }
 
 namespace Dom

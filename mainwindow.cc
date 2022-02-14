@@ -157,7 +157,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   wuri = new WebUrlRequestInterceptor();
-  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
+  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor( wuri );
+  connect( wuri, &WebUrlRequestInterceptor::linkClicked, this, &MainWindow::viewLinkClicked );
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -1695,12 +1696,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
-  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
-    ArticleView *active = getCurrentArticleView();
-    if (active == view) {
-      view->linkClicked(url);
-    }
-  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -3765,6 +3760,21 @@ void MainWindow::unzoom()
 {
   cfg.preferences.zoomFactor = 1;
   applyZoomFactor();
+}
+
+void MainWindow::viewLinkClicked( const QUrl & url )
+{
+  if( scanPopup.get() && scanPopup->isActiveWindow() )
+  {
+    QString word = Qt4x5::Url::getWordFromUrl(url);
+    if( !word.isEmpty() )
+    {
+      scanPopup->translateWord( word );
+      return;
+    }
+  }
+  ArticleView * view = getCurrentArticleView();
+  view->linkClicked( url );
 }
 
 void MainWindow::applyZoomFactor()
