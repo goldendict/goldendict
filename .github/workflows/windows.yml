@@ -129,3 +129,24 @@ jobs:
             AppImage built with:  Ubuntu-20.04 ,latest gcc
 
             This is a prerelease version ,auto build by github action. use on your on risk:-)
+      - name: upload goldendict.exe only
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release/${env:targetName}
+          asset_name: ${env:targetName}
+          tag: ${{ steps.autotag.outputs.tagname }}
+          overwrite: true 
+          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          prerelease: true
+          body: |
+            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+
+            This is a prerelease version ,auto build by github action. use on your on risk:-)   
