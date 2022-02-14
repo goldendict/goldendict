@@ -156,7 +156,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   wuri = new WebUrlRequestInterceptor();
-  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
+  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor( wuri );
+  connect( wuri, &WebUrlRequestInterceptor::linkClicked, this, &MainWindow::viewLinkClicked );
 
   if(!cfg.preferences.hideGoldenDictHeader){
     QWebEngineProfile::defaultProfile()->setHttpUserAgent(QWebEngineProfile::defaultProfile()->httpUserAgent()+" GoldenDict/webengine");
@@ -1519,6 +1520,8 @@ void MainWindow::makeScanPopup()
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
            this, SLOT( isGoldenDictWindow( HWND ) ) );
 #endif
+  
+  connect( wuri, &WebUrlRequestInterceptor::linkClicked, scanPopup.get(), &ScanPopup::linkClicked );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -1685,12 +1688,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
-  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
-    ArticleView *active = getCurrentArticleView();
-    if (active == view) {
-      view->linkClicked(url);
-    }
-  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -3676,6 +3673,14 @@ void MainWindow::unzoom()
 {
   cfg.preferences.zoomFactor = 1;
   applyZoomFactor();
+}
+
+void MainWindow::viewLinkClicked( const QUrl & url )
+{
+  if( scanPopup.get() && scanPopup->isVisible() )
+    return;
+  ArticleView * view = getCurrentArticleView();
+  view->linkClicked( url );
 }
 
 void MainWindow::applyZoomFactor()

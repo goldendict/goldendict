@@ -188,9 +188,9 @@ private:
 
   void updateSuggestionList();
   void updateSuggestionList( QString const & text );
-
+public slots:
+  void linkClicked( const QUrl & url );
 private slots:
-
   void clipboardChanged( QClipboard::Mode );
   void mouseHovered( QString const & , bool forcePopup);
   void currentGroupChanged( QString const & );

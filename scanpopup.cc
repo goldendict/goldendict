@@ -517,6 +517,30 @@ void ScanPopup::delayShow()
 }
 #endif
 
+void ScanPopup::linkClicked( const QUrl & url )
+{
+  if( !isVisible() )
+    return;
+  QString word;
+  if( url.scheme().compare( "bword" ) == 0 )
+  {
+    word = url.path();
+  }
+  else if( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
+  {
+    if( Utils::Url::hasQueryItem( url, "word" ) )
+    {
+      word = Utils::Url::queryItemValue( url, "word" );
+    }
+    else
+    {
+      word = url.path().mid( 1 );
+    }
+  }
+  if( !word.isEmpty() )
+    translateWord( word );
+}
+
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
   if ( !isScanningEnabled )
