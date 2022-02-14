@@ -134,8 +134,8 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: release/${env:targetName}
-          asset_name: ${env:targetName}
+          file: release/${{ env.targetName }}
+          asset_name: ${{ env.targetName }}
           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
