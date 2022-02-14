@@ -553,11 +553,11 @@ CONFIG( chinese_conversion_support ) {
   win32-msvc* {
     LIBS += -lopencc
   } else {
-    mac {
-      LIBS += -lopencc.2
-    } else {
+  #  mac {
+  #    LIBS += -lopencc.2
+  #  } else {
       LIBS += -lopencc
-    }
+  #  }
   }
 }
 
