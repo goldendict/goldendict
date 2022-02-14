@@ -52,11 +52,9 @@ jobs:
           git clone https://github.com/BYVoid/OpenCC
           pwd
           cd OpenCC/
-          pwd
           make PREFIX=/usr -j$(nproc)
           sudo make install
           cd ..
-          pwd  #print current directory
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -101,7 +99,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ steps.vars.outputs.appname }}
-          tag: ${{ steps.autotag.outputs.tagname }}
+          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true
