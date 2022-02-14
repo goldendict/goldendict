@@ -10,7 +10,7 @@ BinPackArguments: 'false'
 BinPackParameters: 'false'
 BreakBeforeBraces: Allman
 BreakConstructorInitializers: AfterColon
-ColumnLimit: '140'
+ColumnLimit: '120'
 ConstructorInitializerAllOnOneLineOrOnePerLine: 'true'
 ConstructorInitializerIndentWidth: '2'
 ContinuationIndentWidth: '2'
