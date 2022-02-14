@@ -60,7 +60,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-
+      - name: Set outputs
+        id: githash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+      - uses: Klemensas/action-autotag@stable
+        id: autotag
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "v"
+          tag_suffix: "-${{ steps.githash.outputs.sha_short }}"
       - name: build goldendict
         run: |
           qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
@@ -92,7 +101,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ steps.vars.outputs.appname }}
-          tag: ${{ github.ref }}
+          tag: ${{ steps.autotag.outputs.tagname }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true

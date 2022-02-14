@@ -1,0 +1,5 @@
+{
+    "name": "goldendict",
+    "description": "used to manage github workflow auto tag version",
+    "version":"22.2.alpha"
+}
