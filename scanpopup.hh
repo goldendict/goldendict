@@ -53,7 +53,6 @@ public:
   void setDictionaryIconSize();
 
   void saveConfigData();
-
 signals:
 
   /// Forwarded from the dictionary bar, so that main window could act on this.
@@ -188,8 +187,6 @@ private:
 
   void updateSuggestionList();
   void updateSuggestionList( QString const & text );
-public slots:
-  void linkClicked( const QUrl & url );
 private slots:
   void clipboardChanged( QClipboard::Mode );
   void mouseHovered( QString const & , bool forcePopup);

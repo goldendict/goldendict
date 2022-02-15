@@ -1520,8 +1520,6 @@ void MainWindow::makeScanPopup()
   connect( scanPopup.get(), SIGNAL( isGoldenDictWindow( HWND ) ),
            this, SLOT( isGoldenDictWindow( HWND ) ) );
 #endif
-  
-  connect( wuri, &WebUrlRequestInterceptor::linkClicked, scanPopup.get(), &ScanPopup::linkClicked );
 }
 
 vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
@@ -3677,8 +3675,15 @@ void MainWindow::unzoom()
 
 void MainWindow::viewLinkClicked( const QUrl & url )
 {
-  if( scanPopup.get() && scanPopup->isVisible() )
-    return;
+  if( scanPopup.get() && scanPopup->isActiveWindow() )
+  {
+    QString word = Utils::Url::getWordFromUrl( url );
+    if( !word.isEmpty() )
+    {
+      scanPopup->translateWord( word );
+      return;
+    }
+  }
   ArticleView * view = getCurrentArticleView();
   view->linkClicked( url );
 }
