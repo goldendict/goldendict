@@ -4391,11 +4391,11 @@ void MainWindow::openDictionaryFolder( const QString & id )
       if( dictionaries[ x ]->getDictionaryFilenames().size() > 0 )
       {
         QString fileName = FsEncoding::decode( dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str() );
-        bool explorerLaunched = false;
 
         // Platform-dependent way to launch a file explorer and to select a file,
         // currently only on Windows.
 #if defined(Q_OS_WIN)
+        bool explorerLaunched = false;
         if ( !QFileInfo( fileName ).isDir() )
         {
           QString param = QLatin1String("explorer.exe ")
@@ -4425,12 +4425,9 @@ void MainWindow::openDictionaryFolder( const QString & id )
         }
 #endif
 
-        if ( !explorerLaunched )
-        {
-          QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
-          if( !folder.isEmpty() )
-            QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
-        }
+        QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
+        if( !folder.isEmpty() )
+          QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
       }
       break;
     }
