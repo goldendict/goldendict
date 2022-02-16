@@ -791,6 +791,8 @@ div.xdxf
 	font-style: italic;
 }
 
+.mwiki td.mw-label { vertical-align: top; }
+.mwiki td.mw-submit { white-space: nowrap; }
 /**
  * Forms
  */
@@ -800,9 +802,6 @@ div.xdxf
 .mwiki body.rtl td.mw-label { text-align: left; }
 .mwiki body.rtl td.mw-input { text-align: right; }
 .mwiki body.rtl td.mw-submit { text-align: right; }
-
-.mwiki td.mw-label { vertical-align: top; }
-.mwiki td.mw-submit { white-space: nowrap; }
 
 /**
  * Image captions

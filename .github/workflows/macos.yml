@@ -1,4 +1,7 @@
-name: MacOS
+name: macos
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 on: 
   workflow_dispatch:
   push:
@@ -90,8 +93,8 @@ jobs:
             branch:               ${{ github.ref_name }}
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     ${{ matrix.os }},clang_64
-            
-            This is a prerelease version ,auto build by github action. use on your on risk:-)
-
-      
+            This is a prerelease version ,auto build by github action. use on your on risk:-)   

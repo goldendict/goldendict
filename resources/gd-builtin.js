@@ -59,7 +59,7 @@ function gdExpandOptPart(expanderId, optionalId) {
             d2.style.display = 'none';
         }
     }
-};
+}
 
 function emitClickedEvent(){
     try{
