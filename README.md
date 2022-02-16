@@ -100,9 +100,7 @@ Then, invoke `make clean` before `make` because the setting change:
 
 ### Building under Windows with MS Visual Studio
 
-To build GoldenDict with Visual Studio take one of next library packs and unpack it to `"winlibs/lib/msvc"` folder in GoldenDict sources folder.  
-[GoldenDict_libs_VS2015_x86_v4.7z](http://www.mediafire.com/file/0a7ygy9rn99oevm/GoldenDict_libs_VS2015_x86_v4.7z) - for MS Visual Studio 2015, 32 bit  
-[GoldenDict_libs_VS2015_x64_v4.7z](http://www.mediafire.com/file/yoy2q8af0s1467m/GoldenDict_libs_VS2015_x64_v4.7z) - for MS Visual Studio 2015, 64 bit  
+the source code has offered precompile x64 windows libs on winlibs/lib/msvc. you can build your own version either.
 
 To build with Visual Studio.
 check this [how to build with visual studio](howto/how%20to%20build%20and%20debug%20with%20VS2019.md)
