@@ -3616,7 +3616,7 @@ void MainWindow::on_saveArticle_triggered()
 
         // Pull and save resources to files
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-              i != downloadResources.end(); i++ )
+              i != downloadResources.end(); ++i )
         {
           ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
           if( !handler->isEmpty() )
