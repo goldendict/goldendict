@@ -46,6 +46,7 @@ class ArticleView: public QFrame
 
   //used to hold the F12 inspect source view.
   QWebEngineView *inspectView = nullptr;
+  QDialog * devDialog         = nullptr;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -303,7 +304,7 @@ public slots:
   //aim to receive signal from html. the fragment url click to  navigation through page wil not be intecepted by weburlinteceptor
   Q_INVOKABLE void linkClickedInHtml( QUrl const & );
 private slots:
-
+  void inspectElement();
   void loadFinished( bool ok );
   void loadProgress(int);
   void handleTitleChanged( QString const & title );
