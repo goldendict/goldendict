@@ -26,6 +26,7 @@ ArticleWebView::~ArticleWebView()
 void ArticleWebView::setUp( Config::Class * cfg )
 {
   this->cfg = cfg;
+  setZoomFactor(cfg->preferences.zoomFactor);
 }
 
 void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
@@ -87,6 +88,11 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
     if (ev->type() == QEvent::Wheel) {
         QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
         wheelEvent(pe);
+
+        if ( pe->modifiers().testFlag( Qt::ControlModifier ) )
+        {
+          return true;
+        }
     }
     if (ev->type() == QEvent::FocusIn) {
         QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
