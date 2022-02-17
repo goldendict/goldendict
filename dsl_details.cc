@@ -12,12 +12,14 @@
 
 #include <stdio.h>
 #include <wctype.h>
+#include <algorithm>
 
 namespace Dsl {
 namespace Details {
 
 using gd::wstring;
 using std::list;
+using Utf8::Encoding;
 
 #ifndef __linux__
 
@@ -145,6 +147,8 @@ bool isAtSignFirst( wstring const & str )
   QRegExp reg( "[ \\t]*(?:\\[[^\\]]+\\][ \\t]*)*@", Qt::CaseInsensitive, QRegExp::RegExp2 );
   return reg.indexIn( gd::toQString( str ) ) == 0;
 }
+
+
 
 /////////////// ArticleDom
 
@@ -778,37 +782,36 @@ void ArticleDom::closeTag( wstring const & name,
 
 void ArticleDom::nextChar() THROW_SPEC( eot )
 {
-  if ( !*stringPos )
-    throw eot();
-
-  ch = *stringPos++;
-
-  if ( ch == L'\\' )
-  {
     if ( !*stringPos )
-      throw eot();
+        throw eot();
 
     ch = *stringPos++;
 
-    escaped = true;
-  }
-  else
-  if ( ch == L'[' && *stringPos == L'[' )
-  {
-    ++stringPos;
-    escaped = true;
-  }
-  else
-  if ( ch == L']' && *stringPos == L']' )
-  {
-    ++stringPos;
-    escaped = true;
-  }
-  else
-    escaped = false;
+    if ( ch == L'\\' )
+    {
+        if ( !*stringPos )
+            throw eot();
 
-  if( ch == '\n' || ch == '\r' )
-    lineStartPos = stringPos;
+        ch = *stringPos++;
+
+        escaped = true;
+    }
+    else if ( ch == L'[' && *stringPos == L'[' )
+    {
+        ++stringPos;
+        escaped = true;
+    }
+    else if ( ch == L']' && *stringPos == L']' )
+    {
+        ++stringPos;
+        escaped = true;
+    }
+    else
+        escaped = false;
+
+    if( ch == '\n' || ch == '\r' )
+        lineStartPos = stringPos;
+
 }
 
 bool ArticleDom::atSignFirstInLine()
@@ -823,8 +826,8 @@ bool ArticleDom::atSignFirstInLine()
 /////////////// DslScanner
 
 DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
-  encoding( Windows1252 ), iconv( encoding ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
+  encoding( Utf8::Windows1252 ), readBufferPtr( readBuffer ),
+  readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -850,10 +853,10 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   // If the file begins with the dedicated Unicode marker, we just consume
   // it. If, on the other hand, it's not, we return the bytes back
   if ( firstBytes[ 0 ] == 0xFF && firstBytes[ 1 ] == 0xFE )
-    encoding = Utf16LE;
+    encoding = Utf8::Utf16LE;
   else
   if ( firstBytes[ 0 ] == 0xFE && firstBytes[ 1 ] == 0xFF )
-    encoding = Utf16BE;
+    encoding = Utf8::Utf16BE;
   else
   if ( firstBytes[ 0 ] == 0xEF && firstBytes[ 1 ] == 0xBB )
   {
@@ -865,22 +868,22 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       throw exMalformedDslFile( fileName );
     }
     
-    encoding = Utf8;
+    encoding = Utf8::Utf8;
   }
   else
   {
     if ( firstBytes[ 0 ] && !firstBytes[ 1 ] )
-      encoding = Utf16LE;
+      encoding = Utf8::Utf16LE;
     else
     if ( !firstBytes[ 0 ] && firstBytes[ 1 ] )
-      encoding = Utf16BE;
+      encoding = Utf8::Utf16BE;
     else
     {
       // Ok, this doesn't look like 16-bit Unicode. We will start with a
       // 8-bit encoding with an intent to find out the exact one from
       // the header.
       needExactEncoding = true;
-      encoding = Windows1251;
+      encoding = Utf8::Windows1251;
     }
 
     if ( gzrewind( f ) )
@@ -890,8 +893,9 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
     }
   }
 
-  iconv.reinit( encoding );
-
+  //iconv.reinit( encoding );
+  codec = QTextCodec::codecForName(getEncodingNameFor(encoding));
+  lineFeed=Utf8::initLineFeed(encoding);
   // We now can use our own readNextLine() function
 
   wstring str;
@@ -960,13 +964,13 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       }
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Latin" ) ) )
-        encoding = Windows1252;
+        encoding = Utf8::Windows1252;
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Cyrillic" ) ) )
-        encoding = Windows1251;
+        encoding = Utf8::Windows1251;
       else
       if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"EasternEuropean" ) ) )
-        encoding = Windows1250;
+        encoding = Utf8::Windows1250;
       else
       {
         gzclose( f );
@@ -984,9 +988,6 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   gzseek( f, offset, SEEK_SET );
   readBufferPtr = readBuffer;
   readBufferLeft = 0;
-
-  if ( needExactEncoding )
-    iconv.reinit( encoding );
 }
 
 DslScanner::~DslScanner() throw()
@@ -994,22 +995,15 @@ DslScanner::~DslScanner() throw()
   gzclose( f );
 }
 
-bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
+bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-  offset = (size_t)( gztell( f ) - readBufferLeft );
+  offset = (size_t)( gztell( f ) - readBufferLeft/*+pos*/ );
 
-  // For now we just read one char at a time
-  size_t readMultiple = distanceToBytes( 1 );
-
-  size_t leftInOut = wcharBuffer.size();
-
-  wchar * outPtr = &wcharBuffer.front();
-
-  for( ; ; )
+  for(;;)
   {
     // Check that we have bytes to read
-    if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
+    if ( readBufferLeft < 5000 )
     {
       if ( !gzeof( f ) )
       {
@@ -1028,78 +1022,34 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
         readBufferLeft += (size_t) result;
       }
     }
-
-    if ( readBufferLeft < readMultiple )
-    {
-      // No more data. Return what we've got so far, forget the last byte if
-      // it was a 16-bit Unicode and a file had an odd number of bytes.
-      readBufferLeft = 0;
-
-      if ( outPtr != &wcharBuffer.front() )
-      {
-        // If there was a stray \r, remove it
-        if ( outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-        out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-        ++linesRead;
-
-        return true;
-      }
-      else
+    if(readBufferLeft<=0)
         return false;
+
+    int pos = Utf8::findFirstLinePosition(readBufferPtr, readBufferLeft, lineFeed.lineFeed, lineFeed.length);
+    if (pos == -1)
+      return false;
+    QString line = codec->toUnicode(readBufferPtr, pos);
+    line = Utils::rstrip(line);
+
+    if (pos > readBufferLeft) {
+      pos = readBufferLeft;
     }
+    readBufferLeft -= pos;
+    readBufferPtr += pos;
+    linesRead++;
+    if(only_head_word &&( line.isEmpty()||line.at(0).isSpace()))
+        continue;
+#ifdef __WIN32
+    out=line.toStdU32String();
+#else
+    out=line.toStdWString();
+#endif
+    return true;
 
-    // Check that we have chars to write
-    if ( leftInOut < 2 ) // With 16-bit wchars, 2 is needed for a surrogate pair
-    {
-      wcharBuffer.resize( wcharBuffer.size() + 64 );
-      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64 - leftInOut;
-      leftInOut += 64;
-    }
-
-    // Ok, now convert one char
-    size_t outBytesLeft = sizeof( wchar );
-
-    Iconv::Result r =
-      iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-
-    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar ) )
-    {
-      // Seems to be a surrogate pair with a 16-bit target wchar
-
-      outBytesLeft *= 2;
-      r = iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-      --leftInOut; // Complements the next decremention
-    }
-
-    if ( outBytesLeft )
-      throw exEncodingError();
-
-    --leftInOut;
-
-    // Have we got \n?
-    if ( outPtr[ -1 ] == L'\n' )
-    {
-      --outPtr;
-
-      // Now kill a \r if there is one, and return the result.
-      if ( outPtr != &wcharBuffer.front() && outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-      out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-      ++linesRead;
-
-      return true;
-    }
   }
 }
 
-bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
+bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , bool only_headword)
                  THROW_SPEC( Ex, Iconv::Ex )
 {
   wstring str;
@@ -1111,7 +1061,7 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
 
   do
   {
-    bool b = readNextLine( str, currentOffset );
+    bool b = readNextLine( str, currentOffset, only_headword );
 
     if( offset == 0 )
       offset = currentOffset;
@@ -1129,37 +1079,6 @@ bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset )
 }
 
 /////////////// DslScanner
-
-DslIconv::DslIconv( DslEncoding e ) THROW_SPEC( Iconv::Ex ):
-  Iconv( Iconv::GdWchar, getEncodingNameFor( e ) )
-{
-}
-
-void DslIconv::reinit( DslEncoding e ) THROW_SPEC( Iconv::Ex )
-{
-  Iconv::reinit( Iconv::GdWchar, getEncodingNameFor( e ) );
-}
-
-char const * DslIconv::getEncodingNameFor( DslEncoding e )
-{
-  switch( e )
-  {
-    case Utf16LE:
-      return "UTF-16LE";
-    case Utf16BE:
-      return "UTF-16BE";
-    case Windows1252:
-      return "WINDOWS-1252";
-    case Windows1251:
-      return "WINDOWS-1251";
-    case Details::Utf8:
-      return "UTF-8";
-    case Windows1250:
-    default:
-      return "WINDOWS-1250";
-  }
-}
-
 
 void processUnsortedParts( wstring & str, bool strip )
 {
@@ -1306,7 +1225,9 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           else
           {
             if( !inside_recurse )
-              result->merge( expanded );
+            {
+                result->splice(result->end(),expanded);
+            }
             return;
           }
         }
@@ -1330,8 +1251,10 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
   // Limit the amount of results to avoid excessive resource consumption
   if ( headwords->size() < 32 )
     headwords->push_back( str );
-  if( !inside_recurse )
-    result->merge( expanded );
+  if (!inside_recurse)
+  {
+         result->splice(result->end(),expanded);
+  }
 }
 
 static const wstring openBraces( GD_NATIVE_TO_WS( L"{{" ) );

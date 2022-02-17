@@ -32,6 +32,8 @@
 #include "helpwindow.hh"
 
 #include "hotkeywrapper.hh"
+#include "weburlrequestinterceptor.h"
+#include "resourceschemehandler.h"
 #ifdef HAVE_X11
 #include <fixx11h.h>
 #endif
@@ -98,6 +100,8 @@ private:
   void commitData();
 
   QSystemTrayIcon * trayIcon;
+
+  WebUrlRequestInterceptor *wuri;
 
   Ui::MainWindow ui;
 
@@ -191,6 +195,9 @@ private:
 
   QIcon starIcon, blueStarIcon;
 
+  LocalSchemeHandler *localSchemeHandler;
+  ResourceSchemeHandler *resourceSchemeHandler;
+
   /// Applies the qt's stylesheet, given the style's name.
   void applyQtStyleSheet( QString const & displayStyle, QString const & addonStyle );
 
@@ -211,8 +218,6 @@ private:
   void makeScanPopup();
 
   void updatePronounceAvailability();
-
-  void updateFoundInDictsList();
 
   void updateBackForwardButtons();
 
@@ -271,7 +276,6 @@ private:
                                          TranslateBoxPopup popupAction );
   void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
                                           TranslateBoxPopup popupAction );
-
 private slots:
 
   void hotKeyActivated( int );
@@ -280,7 +284,7 @@ private slots:
   /// the timer. Does nothing otherwise.
   void prepareNewReleaseChecks();
 
-private slots:
+  void updateFoundInDictsList();
 
   /// Does the new release check.
   void checkForNewRelease();

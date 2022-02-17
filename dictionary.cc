@@ -22,31 +22,26 @@
 
 #include <QImage>
 #include <QPainter>
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
-
-#include "qt4x5.hh"
+#include "utils.hh"
 #include "zipfile.hh"
 
 namespace Dictionary {
 
 bool Request::isFinished()
 {
-  return Qt4x5::AtomicInt::loadAcquire( isFinishedFlag );
+  return Utils::AtomicInt::loadAcquire( isFinishedFlag );
 }
 
 void Request::update()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
+  if ( !Utils::AtomicInt::loadAcquire( isFinishedFlag ) )
     emit updated();
 }
 
 void Request::finish()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( isFinishedFlag ) )
+  if ( !Utils::AtomicInt::loadAcquire( isFinishedFlag ) )
   {
     isFinishedFlag.ref();
 
@@ -262,7 +257,7 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
       result.fill( 0 ); // Black transparent
 
       QPainter painter( &result );
-
+      painter.setRenderHint(QPainter::RenderHint::Antialiasing);
       painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
                                  img.height() == max ? 0 : ( max - img.height() ) / 2 ),
                          img );
@@ -282,16 +277,11 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
   if( css.isEmpty() )
     return;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/",
                            QRegularExpression::DotMatchesEverythingOption );
   QRegularExpression reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
   QRegularExpression reg3( "[,;\\{]" );
-#else
-  QRegExp reg1( "\\/\\*(?:.(?!\\*\\/))*.?\\*\\/" );
-  QRegExp reg2( "[ \\*\\>\\+,;:\\[\\{\\]]" );
-  QRegExp reg3( "[,;\\{]" );
-#endif
+
 
   int currentPos = 0;
   QString newCSS;

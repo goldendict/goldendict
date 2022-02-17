@@ -27,7 +27,7 @@ QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
   connect( this, SIGNAL( saveStateRequest( QSessionManager& ) ),
            this, SLOT( hotkeyAppSaveState( QSessionManager& ) ), Qt::DirectConnection );
 
-#if defined( Q_OS_WIN ) && IS_QT_5
+#if defined( Q_OS_WIN ) 
   installNativeEventFilter( this );
 #endif
 }
@@ -45,7 +45,7 @@ QHotkeyApplication::QHotkeyApplication( QString const & id,
   connect( this, SIGNAL( saveStateRequest( QSessionManager& ) ),
            this, SLOT( hotkeyAppSaveState( QSessionManager& ) ), Qt::DirectConnection );
 
-#if defined( Q_OS_WIN ) && IS_QT_5
+#if defined( Q_OS_WIN ) 
   installNativeEventFilter( this );
 #endif
 }
@@ -478,9 +478,6 @@ void HotkeyWrapper::unregister()
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
 }
 
-
-#if IS_QT_5
-
 bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, void * message, long * result )
 {
   MSG * msg = reinterpret_cast< MSG * >( message );
@@ -502,30 +499,6 @@ bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, vo
 
   return false;
 }
-
-#else // IS_QT_5
-
-bool QHotkeyApplication::winEventFilter ( MSG * message, long * result )
-{
-  if (message->message == WM_HOTKEY || message->message == GD_HOTKEY_MESSAGE)
-  {
-    for (int i = 0; i < hotkeyWrappers.size(); i++)
-    {
-      if ( hotkeyWrappers.at(i)->winEvent( message, result ) )
-        return true;
-    }
-  }
-
-  if( mainWindow )
-  {
-    if( ( static_cast< MainWindow * >( mainWindow ) )->handleGDMessage( message, result ) )
-      return true;
-  }
-
-  return QApplication::winEventFilter( message, result );
-}
-
-#endif
 
 //////////////////////////////////////////////////////////////////////////
 

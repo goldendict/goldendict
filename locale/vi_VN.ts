@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="vi_VN" sourcelanguage="en">
+<TS version="2.1" language="vi_VN" sourcelanguage="en">
 <context>
     <name>About</name>
     <message>
@@ -10,10 +10,6 @@
     <message>
         <source>GoldenDict dictionary lookup program, version </source>
         <translation>Chương trình tra từ điển Từ điển Vàng, phiên bản </translation>
-    </message>
-    <message>
-        <source>#.#</source>
-        <translation type="obsolete">#.#</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
@@ -153,10 +149,6 @@
         <translation>Phân biệt &amp;hoa thường</translation>
     </message>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">Từ điển Vàng</translation>
-    </message>
-    <message>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>Nguồn tham chiếu không tồn tại.</translation>
     </message>
@@ -189,10 +181,6 @@
         <translation>Tra từ &quot;%1&quot; trong %2 trong &amp;Thẻ mới</translation>
     </message>
     <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">Lỗi chạy trình chơi nhạc khi chơi tệp âm thanh: %1</translation>
-    </message>
-    <message>
         <source>Failed to create temporary file.</source>
         <translation>Lỗi tạo tệp tạm.</translation>
     </message>
@@ -203,14 +191,6 @@
     <message>
         <source>The referenced resource failed to download.</source>
         <translation>Nguồn tham chiếu lỗi tải xuống.</translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Chơi một tệp không phải WAV</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Để bật khả năng chơi các tệp không phải WAV, hãy vào Biên tập|Tùy thích, mở thẻ Âm thanh và chọn &quot;Chơi qua DirectShow&quot; ở đó.</translation>
     </message>
     <message>
         <source>Highlight &amp;all</source>
@@ -265,10 +245,6 @@
         <translation>Lưu âm thanh</translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Các tệp âm thanh  (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tất cả tệp (*.*)</translation>
-    </message>
-    <message>
         <source>Save image</source>
         <translation>Lưu hình ảnh</translation>
     </message>
@@ -287,10 +263,6 @@
     <message>
         <source>TTS Voice</source>
         <translation>Giọng nói TTS</translation>
-    </message>
-    <message>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-        <translation type="obsolete">CẢNH BÁO: Trình chơi âm thanh FFmpeg: %1</translation>
     </message>
     <message>
         <source>Copy as text</source>
@@ -314,6 +286,10 @@
     </message>
     <message>
         <source>WARNING: Audio Player: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -695,10 +671,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Thanh từ điển</translation>
-    </message>
-    <message>
         <source>Edit this group</source>
         <translation>Chỉnh sửa nhóm này</translation>
     </message>
@@ -770,13 +742,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Không</translation>
-    </message>
-</context>
-<context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
@@ -833,13 +798,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>None</source>
         <translation type="unfinished">Không</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Không</translation>
     </message>
 </context>
 <context>
@@ -977,17 +935,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Choose a Group (Alt+G)</source>
         <translation>Chọn một Nhóm (Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Mẫu</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">Tìm trong</translation>
     </message>
 </context>
 <context>
@@ -2036,10 +1983,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">Từ điển Vàng</translation>
-    </message>
-    <message>
         <source>Welcome!</source>
         <translation>Chào mừng!</translation>
     </message>
@@ -2068,20 +2011,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Lược sử</translation>
     </message>
     <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">Ô tìm kiếm</translation>
-    </message>
-    <message>
         <source>&amp;Dictionaries...</source>
         <translation>&amp;Từ điển...</translation>
     </message>
     <message>
         <source>F3</source>
         <translation>F3</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">Nhó&amp;m...</translation>
     </message>
     <message>
         <source>&amp;Preferences...</source>
@@ -2160,14 +2095,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Thiết lập Trang</translation>
     </message>
     <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">Xem trước khi in</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Quét lại các tệp</translation>
-    </message>
-    <message>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
@@ -2176,16 +2103,8 @@ between classic and school orthography in cyrillic)</source>
         <translation>Xóa sạ&amp;ch</translation>
     </message>
     <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Hiện tên trên Thanh Từ điển</translation>
-    </message>
-    <message>
         <source>Look up in:</source>
         <translation>Tra từ trong:</translation>
-    </message>
-    <message>
-        <source>Navigation</source>
-        <translation type="obsolete">Điều hướng</translation>
     </message>
     <message>
         <source>Back</source>
@@ -2252,10 +2171,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>(chưa đặt tên)</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">CẢNH BÁO: %1</translation>
-    </message>
-    <message>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Lỗi khởi chạy cơ chế quản lý phím tắt. &lt;br&gt;Hãy kiểm tra XServer đã bật phần mở rộng RECORD.</translation>
     </message>
@@ -2276,10 +2191,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>Bỏ qua phiên bản này</translation>
     </message>
     <message>
-        <source>[Unknown]</source>
-        <translation type="obsolete">[Không biết]</translation>
-    </message>
-    <message>
         <source>Page Setup</source>
         <translation>Thiết lập Trang</translation>
     </message>
@@ -2294,10 +2205,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Save Article As</source>
         <translation>Lưu Bài viết như</translation>
-    </message>
-    <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Tệp Html (*.html *.htm)</translation>
     </message>
     <message>
         <source>Error</source>
@@ -3020,10 +2927,6 @@ p, li { white-space: pre-wrap; }
         <translation>Phát lại</translation>
     </message>
     <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Phát qua Phonon</translation>
-    </message>
-    <message>
         <source>Use external program:</source>
         <translation>Sử dụng chương trình ngoài:</translation>
     </message>
@@ -3099,32 +3002,12 @@ download page.</source>
         <translation>Lingvo</translation>
     </message>
     <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">Phát qua DirectShow</translation>
-    </message>
-    <message>
         <source>Changing Language</source>
         <translation>Thay đổi ngôn ngữ</translation>
     </message>
     <message>
         <source>Restart the program to apply the language change.</source>
         <translation>Khởi động lại chương trình để áp dụng thay đổi ngôn ngữ.</translation>
-    </message>
-    <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">Sử dụng API phát lại của Windows. Giới hạn chỉ cho các tệp .wav,
-nhưng hoạt động rất tốt.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">Chơi bằng API của Windows</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Phát âm thanh qua nền tảng Phonon. Có thể sẽ không ổn định một chút,
-nhưng hỗ trợ nhiều định dạng âm thanh nhất.</translation>
     </message>
     <message>
         <source>Use any external program to play audio files</source>
@@ -3170,48 +3053,6 @@ hay các bổ trợ web khác. Phần bổ trợ phải được cài đặt.</t
     <message>
         <source>Ad&amp;vanced</source>
         <translation>&amp;Nâng cao</translation>
-    </message>
-    <message>
-        <source>ScanPopup extra technologies</source>
-        <translation>Kỹ thuật Quét Popup bổ sung</translation>
-    </message>
-    <message>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Dùng kỹ thuật IAccessibleEx để đọc từ dưới con trỏ.
-Kỹ thuật này chỉ làm việc với một vài chương trình hỗ trợ
-(VD: Internet Explorer 9).
-Không cần bật chức năng này nếu bạn không cần dùng.</translation>
-    </message>
-    <message>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation>Dùng &amp;IAccessibleEx</translation>
-    </message>
-    <message>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Dùng kỹ thuật UI Automation để đọc từ dưới con trỏ.
-Kỹ thuật này chỉ làm việc với một vài chương trình hỗ trợ.
-Không cần bật chức năng này nếu bạn không cần dùng.</translation>
-    </message>
-    <message>
-        <source>Use &amp;UIAutomation</source>
-        <translation>Dùng  &amp;UIAutomation</translation>
-    </message>
-    <message>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Dùng thông điệp Từ điển Vàng đặc biệt để đọc từ dưới con trỏ.
-Kỹ thuật này chỉ làm việc với một vài chương trình hỗ trợ.
-Không cần bật chức năng này nếu bạn không cần dùng.</translation>
-    </message>
-    <message>
-        <source>Use &amp;GoldenDict message</source>
-        <translation>Dùng thông điệp Từ điển &amp;Vàng</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
@@ -3288,14 +3129,6 @@ Không cần bật chức năng này nếu bạn không cần dùng.</translatio
     <message>
         <source>Lingoes-Blue</source>
         <translation>Lingoes-Blue</translation>
-    </message>
-    <message>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-        <translation type="obsolete">Phát các tệp âm thanh thông qua FFmpeg(libav) và libao</translation>
-    </message>
-    <message>
-        <source>Use internal player</source>
-        <translation type="obsolete">Dùng trình phát âm thanh tích hợp</translation>
     </message>
     <message>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
@@ -3735,20 +3568,8 @@ clears its network cache from disk during exit.</source>
         <translation>Hộp thoại</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation type="obsolete">từ</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Danh sách từ phù hợp (Alt+M)</translation>
-    </message>
-    <message>
         <source>...</source>
         <translation>...</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3783,10 +3604,6 @@ quản lý theo nhiều cách khác.</translation>
     <message>
         <source>Forward</source>
         <translation>Tiếp tục</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">Từ điển Vàng</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -3892,10 +3709,6 @@ phù hợp để sử dụng chúng.</translation>
         <translation>Có thể dùng bất kỳ trang nào. Chuỗi %GDWORD% sẽ được thay thế bởi từ truy vấn:</translation>
     </message>
     <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Như một sự lựa chọn, sử dụng %GD1251% cho mã CP1251, %GDISO1% cho mã ISO 8859-1.</translation>
-    </message>
-    <message>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
@@ -3918,24 +3731,6 @@ in the future, or register on the site to get your own key.</source>
         <translation>Sử dụng Forvo yêu cầu một khóa API. Để trống ô này để sử
 dụng khóa mặc định mà có thể không còn hiệu lực trong tương
 lai, đăng ký trên trang chủ để lấy khóa của chính bạn.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lấy khóa của riêng bạn &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;ở đây&lt;/span&gt;&lt;/a&gt;,hay để trống để dùng khóa mặc định.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>

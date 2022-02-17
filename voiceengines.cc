@@ -14,7 +14,7 @@
 #include <QFileInfo>
 #include <QCryptographicHash>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace VoiceEngines
 {
@@ -91,10 +91,10 @@ sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
   QUrl url;
   url.setScheme( "gdtts" );
   url.setHost( "localhost" );
-  url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
+  url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
   QList< QPair<QString, QString> > query;
   query.push_back( QPair<QString, QString>( "engine", QString::fromStdString( getId() ) ) );
-  Qt4x5::Url::setQueryItems( url, query );
+  Utils::Url::setQueryItems( url, query );
 
   string encodedUrl = url.toEncoded().data();
   string ref = string( "\"" ) + encodedUrl + "\"";
@@ -122,7 +122,7 @@ void VoiceEnginesDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if ( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/playsound.png" );
+    dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/playsound_full.png" );
   dictionaryIconLoaded = true;
 }
 

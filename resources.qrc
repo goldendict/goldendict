@@ -1,21 +1,12 @@
 <RCC>
     <qresource prefix="/">
         <file>version.txt</file>
-        <file>icons/print.png</file>
         <file>icons/arrow.png</file>
         <file>icons/prefix.png</file>
-        <file>icons/pushpin.png</file>
         <file>icons/playsound.png</file>
-        <file>icons/closetab.png</file>
-        <file>icons/addtab.png</file>
-        <file>icons/next.png</file>
-        <file>icons/previous.png</file>
-        <file>icons/home.png</file>
         <file>icons/reload.png</file>
         <file>icons/programicon.png</file>
         <file>icons/programicon_scan.png</file>
-        <file>icons/programs.png</file>
-        <file>icons/wizard.png</file>
         <file>icons/warning.png</file>
         <file>article-style.css</file>
         <file>article-style-print.css</file>
@@ -26,27 +17,13 @@
         <file>icons/icon32_bgl.png</file>
         <file>icons/icon32_dictd.png</file>
         <file>icons/icon32_hunspell.png</file>
-        <file>icons/fileopen.png</file>
-        <file>icons/filesave.png</file>
         <file>icons/icon32_wiki.png</file>
-        <file>icons/icon32_zoombase.png</file>
-        <file>icons/icon32_zoomin.png</file>
-        <file>icons/icon32_zoomout.png</file>
-        <file>icons/network.png</file>
-        <file>icons/hotkeys.png</file>
-        <file>icons/interface.png</file>
-        <file>icons/configure.png</file>
-        <file>icons/book.png</file>
-        <file>icons/bookcase.png</file>
         <file>qt-style-st-lingvo.css</file>
         <file>article-style-st-lingvo.css</file>
-        <file>icons/internet.png</file>
         <file>icons/icon_dsl_native.png</file>
         <file>icons/forvo.png</file>
-        <file>icons/windows-list.png</file>
         <file>CREDITS.txt</file>
         <file>icons/highlighter.png</file>
-        <file>icons/error.png</file>
         <file>icons/macicon.png</file>
         <file>icons/icon32_sdict.png</file>
         <file>icons/icon32_aard.png</file>
@@ -54,9 +31,7 @@
         <file>icons/collapse_opt.png</file>
         <file>article-style-st-babylon.css</file>
         <file>qt-style-st-babylon.css</file>
-        <file>icons/1downarrow.png</file>
-        <file>icons/system-search.png</file>
-        <file>icons/menu_button.png</file>
+        <file>icons/menu_button.svg</file>
         <file>icons/clear.png</file>
         <file>article-style-st-modern.css</file>
         <file>qt-style-st-modern.css</file>
@@ -74,15 +49,56 @@
         <file>icons/collapse_article.png</file>
         <file>icons/video.png</file>
         <file>icons/programicon_old.png</file>
-        <file>icons/playsound_color.png</file>
         <file>icons/playsound_full.png</file>
         <file>icons/icon32_zim.png</file>
         <file>icons/icon32_epwing.png</file>
         <file>icons/icon32_slob.png</file>
         <file>icons/icon32_gls.png</file>
-        <file>icons/star.png</file>
-        <file>icons/star_blue.png</file>
         <file>icons/folder.png</file>
         <file>icons/ontop.png</file>
+        <file>resources/jquery-3.6.0.slim.min.js</file>
+        <file>resources/gd-custom.js</file>
+        <file>resources/gd-builtin.js</file>
+        <file>icons/addtab.svg</file>
+        <file>icons/book.svg</file>
+        <file>icons/bookcase.svg</file>
+        <file>icons/closetab.svg</file>
+        <file>icons/configure.svg</file>
+        <file>icons/error.svg</file>
+        <file>icons/fileopen.svg</file>
+        <file>icons/folder-sound.svg</file>
+        <file>icons/filesave.png</file>
+        <file>icons/folder.svg</file>
+        <file>icons/folders.svg</file>
+        <file>icons/home.svg</file>
+        <file>icons/hotkeys.svg</file>
+        <file>icons/icon.svg</file>
+        <file>icons/icon32_zoombase.svg</file>
+        <file>icons/icon32_zoomin.svg</file>
+        <file>icons/icon32_zoomout.svg</file>
+        <file>icons/interface.svg</file>
+        <file>icons/internet.svg</file>
+        <file>icons/network.svg</file>
+        <file>icons/next.svg</file>
+        <file>icons/playsound_color.svg</file>
+        <file>icons/previous.svg</file>
+        <file>icons/print.svg</file>
+        <file>icons/programs.svg</file>
+        <file>icons/reload.svg</file>
+        <file>icons/star.svg</file>
+        <file>icons/star_blue.svg</file>
+        <file>icons/system-search.svg</file>
+        <file>icons/windows-list.svg</file>
+        <file>icons/wizard.svg</file>
+        <file>icons/dictionary.svg</file>
+        <file>icons/advanced.svg</file>
+        <file>icons/webdict.svg</file>
+        <file>icons/transliteration.png</file>
+        <file>icons/pushpin.svg</file>
+        <file>icons/fulltext.svg</file>
+        <file>icons/text2speech.svg</file>
+        <file>icons/closetab-hover.png</file>
+        <file>icons/1downarrow.svg</file>
+        <file>icons/wizard-selected.svg</file>
     </qresource>
 </RCC>

@@ -1,8 +1,6 @@
 #ifndef __GESTURES_HH_INCLUDED__
 #define __GESTURES_HH_INCLUDED__
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-
 #include <QGestureRecognizer>
 #include <QGesture>
 #include <QTimer>
@@ -111,7 +109,5 @@ private:
 bool handleGestureEvent( QObject * obj, QEvent * event, GestureResult & result, QPoint & point );
 
 } // namespace
-
-#endif
 
 #endif // __GESTURES_HH_INCLUDED__

@@ -227,7 +227,7 @@ private:
   QString name;
 };
 
-#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#if defined( HAVE_X11 )
   // The ScanPopup window flags customization code has been tested
   // only in X11 desktop environments and window managers.
   // None of the window flags configurations I have tried works perfectly well
@@ -312,9 +312,6 @@ struct Preferences
   bool scanPopupAltMode; // When you press modifier shortly after the selection
   unsigned scanPopupAltModeSecs;
   bool ignoreOwnClipboardChanges;
-  bool scanPopupUseUIAutomation;
-  bool scanPopupUseIAccessibleEx;
-  bool scanPopupUseGDMessage;
   ScanPopupWindowFlags scanPopupUnpinnedWindowFlags;
   bool scanPopupUnpinnedBypassWMHint;
   bool scanToMainWindow;
@@ -464,7 +461,7 @@ struct Hunspell
 /// All the MediaWikis
 typedef QVector< MediaWiki > MediaWikis;
 
-#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
+
 /// Chinese transliteration configuration
 struct Chinese
 {
@@ -486,7 +483,7 @@ struct Chinese
   { return ! operator == ( other ); }
 
 };
-#endif
+
 
 /// Romaji transliteration configuration
 struct Romaji

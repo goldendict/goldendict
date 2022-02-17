@@ -31,9 +31,7 @@
 #include <QByteArray>
 #include <QBuffer>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 #include <string>
 #include <list>
@@ -58,13 +56,8 @@ using gd::wchar;
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
 using BtreeIndexing::IndexInfo;
-
-enum Encoding
-{
-  Utf8,
-  Utf16LE,
-  Utf16BE
-};
+using Utf8::Encoding;
+using Utf8::LineFeed;
 
 /////////////// GlsScanner
 
@@ -72,14 +65,14 @@ class GlsScanner
 {
   gzFile f;
   Encoding encoding;
-  Iconv iconv;
+  QTextCodec* codec;
   wstring dictionaryName;
   wstring dictionaryDecription, dictionaryAuthor;
   wstring langFrom, langTo;
-  char readBuffer[ 65536 ];
+  char readBuffer[ 10000 ];
   char * readBufferPtr;
   size_t readBufferLeft;
-  vector< wchar > wcharBuffer;
+  LineFeed lineFeed;
   unsigned linesRead;
 
 public:
@@ -124,30 +117,14 @@ public:
   /// Reading begins from the first line after the headers (ones which end
   /// by the "### Glossary section:" line).
   bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
-
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
   { return linesRead; }
-
-  /// Returns a name to be passed to iconv for the given encoding.
-  static char const * getEncodingNameFor( Encoding e )
-  {
-    switch( e )
-    {
-      case Utf16LE:
-        return Iconv::Utf16Le;
-      case Utf16BE:
-        return "UTF-16BE";
-      case Utf8:
-      default:
-        return Iconv::Utf8;
-    }
-  }
 };
 
 GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
-  encoding( Utf8 ), iconv( Iconv::GdWchar, Iconv::Utf8 ), readBufferPtr( readBuffer ),
-  readBufferLeft( 0 ), wcharBuffer( 64 ), linesRead( 0 )
+  encoding( Utf8::Utf8 ), readBufferPtr( readBuffer ),
+  readBufferLeft( 0 ), linesRead( 0 )
 {
   // Since .dz is backwards-compatible with .gz, we use gz- functions to
   // read it -- they are much nicer than the dict_data- ones.
@@ -170,10 +147,10 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   // If the file begins with the dedicated Unicode marker, we just consume
   // it. If, on the other hand, it's not, we return the bytes back
   if ( firstBytes[ 0 ] == 0xFF && firstBytes[ 1 ] == 0xFE )
-    encoding = Utf16LE;
+    encoding = Utf8::Utf16LE;
   else
   if ( firstBytes[ 0 ] == 0xFE && firstBytes[ 1 ] == 0xFF )
-    encoding = Utf16BE;
+    encoding = Utf8::Utf16BE;
   else
   if ( firstBytes[ 0 ] == 0xEF && firstBytes[ 1 ] == 0xBB )
   {
@@ -184,7 +161,7 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       gzclose( f );
       throw exMalformedGlsFile( fileName );
     }
-    encoding = Utf8;
+    encoding = Utf8::Utf8;
   }
   else
   {
@@ -193,13 +170,12 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
       gzclose( f );
       throw exCantOpen( fileName );
     }
-    encoding = Utf8;
+    encoding = Utf8::Utf8;
   }
 
-  if( encoding != Utf8 )
-    iconv.reinit( Iconv::GdWchar, getEncodingNameFor( encoding ) );
-
+  codec = QTextCodec::codecForName(Utf8::getEncodingNameFor(encoding));
   // We now can use our own readNextLine() function
+  lineFeed = Utf8::initLineFeed(encoding);
 
   wstring str;
   wstring *currentField = 0;
@@ -269,106 +245,54 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
                                                                        Iconv::Ex )
 {
-  offset = (size_t)( gztell( f ) - readBufferLeft );
+    offset = (size_t)(gztell(f) - readBufferLeft);
 
-  // For now we just read one char at a time
-  size_t readMultiple = ( encoding == Utf16LE || encoding == Utf16BE ) ? 2 : 1;
-
-  size_t leftInOut = wcharBuffer.size();
-
-  wchar * outPtr = &wcharBuffer.front();
-
-  for( ; ; )
-  {
-    // Check that we have bytes to read
-    if ( readBufferLeft < 4 ) // To convert one char, we need at most 4 bytes
     {
-      if ( !gzeof( f ) )
+      // Check that we have bytes to read
+      if ( readBufferLeft < 5000 )
       {
-        // To avoid having to deal with ring logic, we move the remaining bytes
-        // to the beginning
-        memmove( readBuffer, readBufferPtr, readBufferLeft );
+        if ( !gzeof( f ) )
+        {
+          // To avoid having to deal with ring logic, we move the remaining bytes
+          // to the beginning
+          memmove( readBuffer, readBufferPtr, readBufferLeft );
 
-        // Read some more bytes to readBuffer
-        int result = gzread( f, readBuffer + readBufferLeft,
-                             sizeof( readBuffer ) - readBufferLeft );
+          // Read some more bytes to readBuffer
+          int result = gzread( f, readBuffer + readBufferLeft,
+                               sizeof( readBuffer ) - readBufferLeft );
 
-        if ( result == -1 )
-          throw exCantReadGlsFile();
+          if (result == -1)
+            throw exCantReadGlsFile();
 
-        readBufferPtr = readBuffer;
-        readBufferLeft += (size_t) result;
+          readBufferPtr = readBuffer;
+          readBufferLeft += (size_t) result;
+        }
       }
-    }
+      if(readBufferLeft<=0)
+          return false;
 
-    if ( readBufferLeft < readMultiple )
-    {
-      // No more data. Return what we've got so far, forget the last byte if
-      // it was a 16-bit Unicode and a file had an odd number of bytes.
-      readBufferLeft = 0;
+      int pos = Utf8::findFirstLinePosition(readBufferPtr,readBufferLeft, lineFeed.lineFeed,lineFeed.length);
+      if(pos==-1)
+          return false;
+      QString line = codec->toUnicode(readBufferPtr, pos);
 
-      if ( outPtr != &wcharBuffer.front() )
-      {
-        // If there was a stray \r, remove it
-        if ( outPtr[ -1 ] == L'\r' )
-          --outPtr;
+      line = Utils::rstrip(line);
 
-        out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-        ++linesRead;
-
-        return true;
+      if(pos>readBufferLeft){
+          pos=readBufferLeft;
       }
-      else
-        return false;
+      readBufferLeft -= pos;
+      readBufferPtr += pos;
+      linesRead++;
+
+#ifdef __WIN32
+		out = line.toStdU32String();
+#else
+		out = line.toStdWString();
+#endif
+		return true;
+
     }
-
-    // Check that we have chars to write
-    if ( leftInOut < 2 ) // With 16-bit wchars, 2 is needed for a surrogate pair
-    {
-      wcharBuffer.resize( wcharBuffer.size() + 64 );
-      outPtr = &wcharBuffer.front() + wcharBuffer.size() - 64 - leftInOut;
-      leftInOut += 64;
-    }
-
-    // Ok, now convert one char
-    size_t outBytesLeft = sizeof( wchar );
-
-    Iconv::Result r =
-      iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-
-    if ( r == Iconv::NeedMoreOut && outBytesLeft == sizeof( wchar ) )
-    {
-      // Seems to be a surrogate pair with a 16-bit target wchar
-
-      outBytesLeft *= 2;
-      r = iconv.convert( (void const *&)readBufferPtr, readBufferLeft,
-                     (void *&)outPtr, outBytesLeft );
-      --leftInOut; // Complements the next decremention
-    }
-
-    if ( outBytesLeft )
-      throw exEncodingError();
-
-    --leftInOut;
-
-    // Have we got \n?
-    if ( outPtr[ -1 ] == L'\n' )
-    {
-      --outPtr;
-
-      // Now kill a \r if there is one, and return the result.
-      if ( outPtr != &wcharBuffer.front() && outPtr[ -1 ] == L'\r' )
-          --outPtr;
-
-      out = wstring( &wcharBuffer.front(), outPtr - &wcharBuffer.front() );
-
-      ++linesRead;
-
-      return true;
-    }
-  }
 }
 
 GlsScanner::~GlsScanner() throw()
@@ -723,7 +647,7 @@ void GlsDictionary::loadArticleText( uint32_t address,
   }
   else
   {
-    string articleData = Iconv::toUtf8( GlsScanner::getEncodingNameFor( Encoding( idxHeader.glsEncoding ) ), articleBody, articleSize );
+    string articleData = Iconv::toUtf8( Utf8::getEncodingNameFor( Encoding( idxHeader.glsEncoding ) ), articleBody, articleSize );
     string::size_type start_pos = 0, end_pos = 0;
 
     for( ; ; )
@@ -821,34 +745,22 @@ void GlsDictionary::loadArticle( uint32_t address,
 
 QString & GlsDictionary::filterResource( QString & article )
 {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)",
                             QRegularExpression::CaseInsensitiveOption
                             | QRegularExpression::InvertedGreedinessOption );
   QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                              QRegularExpression::CaseInsensitiveOption
                              | QRegularExpression::InvertedGreedinessOption );
-#else
-  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)", Qt::CaseInsensitive );
-  imgRe.setMinimal( true );
-  QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-  linkRe.setMinimal( true );
-#endif
+
   article.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
          .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
 
   // Handle links to articles
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression linksReg( "<a(\\s+[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]",
                                QRegularExpression::CaseInsensitiveOption );
-#else
-  QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]" );
-  linksReg.setMinimal( true );
-#endif
 
   int pos = 0;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QString articleNewText;
   QRegularExpressionMatchIterator it = linksReg.globalMatch( article );
   while( it.hasNext() )
@@ -858,55 +770,30 @@ QString & GlsDictionary::filterResource( QString & article )
     pos = match.capturedEnd();
 
     QString link = match.captured( 3 );
-#else
-  while( pos >= 0 )
-  {
-    pos = linksReg.indexIn( article, pos );
-    if( pos < 0 )
-      break;
 
-    QString link = linksReg.cap( 3 );
-#endif
     if( link.indexOf( ':' ) < 0 )
     {
       QString newLink;
       if( link.indexOf( '#' ) < 0 )
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         newLink = QString( "<a" ) + match.captured( 1 ) + "href=\"bword:" + link + "\"";
-#else
-        newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"bword:" + link + "\"";
-#endif
 
       // Anchors
 
       if( link.indexOf( '#' ) > 0 )
       {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         newLink = QString( "<a" ) + match.captured( 1 ) + "href=\"gdlookup://localhost/" + link + "\"";
-#else
-        newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"gdlookup://localhost/" + link + "\"";
-#endif
+
         newLink.replace( "#", "?gdanchor=" );
       }
 
       if( !newLink.isEmpty() )
       {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         articleNewText += newLink;
-#else
-        article.replace( pos, linksReg.cap( 0 ).size(), newLink );
-        pos += newLink.size();
-#endif
       }
       else
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         articleNewText += match.captured();
-#else
-        pos += linksReg.cap( 0 ).size();
-#endif
     }
     else
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       articleNewText += match.captured();
   }
   if( pos )
@@ -915,26 +802,17 @@ QString & GlsDictionary::filterResource( QString & article )
     article = articleNewText;
     articleNewText.clear();
   }
-#else
-      pos += linksReg.cap( 0 ).size();
-  }
-#endif
 
   // Handle "audio" tags
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
                               QRegularExpression::CaseInsensitiveOption
                               | QRegularExpression::DotMatchesEverythingOption
                               | QRegularExpression::InvertedGreedinessOption );
-#else
-  QRegExp audioRe( "<\\s*audio\\s+src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
-  audioRe.setMinimal( true );
-#endif
+
 
   pos = 0;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   it = audioRe.globalMatch( article );
   while( it.hasNext() )
   {
@@ -943,51 +821,27 @@ QString & GlsDictionary::filterResource( QString & article )
     pos = match.capturedEnd();
 
     QString src = match.captured( 2 );
-#else
-  while( pos >= 0 )
-  {
-    pos = audioRe.indexIn( article, pos );
-    if( pos < 0 )
-      break;
 
-    QString src = audioRe.cap( 2 );
-#endif
     if( src.indexOf( "://" ) >= 0 )
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       articleNewText += match.captured();
-#else
-      pos += audioRe.cap( 0 ).length();
-#endif
     else
     {
       std::string href = "\"gdau://" + getId() + "/" + src.toUtf8().data() + "\"";
       QString newTag = QString::fromUtf8( ( addAudioLink( href, getId() ) + "<span class=\"gls_wav\"><a href=" + href + ">" ).c_str() );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       newTag += match.captured( 4 );
       if( match.captured( 4 ).indexOf( "<img " ) < 0 )
         newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
       newTag += "</a></span>";
 
       articleNewText += newTag;
-#else
-      newTag += audioRe.cap( 4 );
-      if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
-        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
-      newTag += "</a></span>";
-
-      article.replace( pos, audioRe.cap( 0 ).length(), newTag );
-      pos += newTag.length();
-#endif
     }
   }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   if( pos )
   {
     articleNewText += article.midRef( pos );
     article = articleNewText;
     articleNewText.clear();
   }
-#endif
 
   return article;
 }
@@ -1077,7 +931,7 @@ void GlsHeadwordsRequestRunnable::run()
 
 void GlsHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1091,7 +945,7 @@ void GlsHeadwordsRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1200,7 +1054,7 @@ void GlsArticleRequestRunnable::run()
 
 void GlsArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1230,7 +1084,7 @@ void GlsArticleRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1380,7 +1234,7 @@ void GlsResourceRequestRunnable::run()
 void GlsResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1475,7 +1329,6 @@ void GlsResourceRequest::run()
       QString id = QString::fromUtf8( dict.getId().c_str() );
       int pos = 0;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
                                 QRegularExpression::CaseInsensitiveOption );
 
@@ -1506,28 +1359,6 @@ void GlsResourceRequest::run()
         css = newCSS;
         newCSS.clear();
       }
-#else
-      QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", Qt::CaseInsensitive, QRegExp::RegExp );
-      for( ; ; )
-      {
-        pos = links.indexIn( css, pos );
-        if( pos < 0 )
-          break;
-        QString url = links.cap( 2 );
-
-        if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0)
-        {
-          // External link
-          pos += links.cap().size();
-          continue;
-        }
-
-        QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
-                                           + id + "/" + url + links.cap( 3 ) + ")";
-        css.replace( pos, links.cap().size(), newUrl );
-        pos += newUrl.size();
-      }
-#endif
 
       dict.isolateCSS( css );
       QByteArray bytes = css.toUtf8();

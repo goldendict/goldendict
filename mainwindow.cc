@@ -6,6 +6,8 @@
 #endif
 
 #include "mainwindow.hh"
+#include <QWebEngineProfile>
+#include <QWebEngineSettings>
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "preferences.hh"
@@ -43,9 +45,10 @@
 #include "dictinfo.hh"
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
+#include "resourceschemehandler.h"
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -54,7 +57,6 @@
 
 #ifdef Q_OS_WIN32
 #include <windows.h>
-#include "mouseover_win32/GDDataTranfer.h"
 #include "wstring.hh"
 #include "wstring_qt.hh"
 
@@ -129,8 +131,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 , ftsIndexing( dictionaries )
 , ftsDlg( 0 )
 , helpWindow( 0 )
-, starIcon( ":/icons/star.png" )
-, blueStarIcon( ":/icons/star_blue.png" )
+, starIcon( ":/icons/star.svg" )
+, blueStarIcon( ":/icons/star_blue.svg" )
 #ifdef Q_OS_WIN32
 , gdAskMessage( 0xFFFFFFFF )
 #endif
@@ -142,6 +144,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
 
+
+  localSchemeHandler = new LocalSchemeHandler(articleNetMgr);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", localSchemeHandler);
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", localSchemeHandler);
+
+  QStringList localSchemes={"gdau","gico","qrcx","bres","gdprg","gdvideo","gdpicture","gdtts"};
+  resourceSchemeHandler = new ResourceSchemeHandler(articleNetMgr);
+  for(int i=0;i<localSchemes.size();i++){
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), resourceSchemeHandler);
+  }
+
+  wuri = new WebUrlRequestInterceptor();
+  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
+
   qRegisterMetaType< Config::InputPhrase >();
 
 #ifndef NO_EPWING_SUPPORT
@@ -152,10 +168,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   // Set own gesture recognizers
   Gestures::registerRecognizers();
-#endif
 
   // use our own, custom statusbar
   setStatusBar(0);
@@ -165,9 +179,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   navToolbar = addToolBar( tr( "&Navigation" ) );
   navToolbar->setObjectName( "navToolbar" );
 
-  navBack = navToolbar->addAction( QIcon( ":/icons/previous.png" ), tr( "Back" ) );
+  navBack = navToolbar->addAction( QIcon( ":/icons/previous.svg" ), tr( "Back" ) );
   navToolbar->widgetForAction( navBack )->setObjectName( "backButton" );
-  navForward = navToolbar->addAction( QIcon( ":/icons/next.png" ), tr( "Forward" ) );
+  navForward = navToolbar->addAction( QIcon( ":/icons/next.svg" ), tr( "Forward" ) );
   navToolbar->widgetForAction( navForward )->setObjectName( "forwardButton" );
 
   QWidget * translateBoxWidget = new QWidget( this );
@@ -192,7 +206,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   beforeScanPopupSeparator->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( beforeScanPopupSeparator )->setObjectName( "beforeScanPopupSeparator" );
 
-  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.png" ), tr( "Scan Popup" ) );
+  enableScanPopup = navToolbar->addAction( QIcon( ":/icons/wizard.svg" ), tr( "Scan Popup" ) );
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( enableScanPopup )->setObjectName( "scanPopupButton" );
@@ -219,17 +233,17 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // named separator (to be able to hide it via CSS)
   navToolbar->widgetForAction( navToolbar->addSeparator() )->setObjectName( "separatorBeforeZoom" );
 
-  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Zoom In" ) );
+  zoomIn = navToolbar->addAction( QIcon( ":/icons/icon32_zoomin.svg" ), tr( "Zoom In" ) );
   zoomIn->setShortcuts( QList< QKeySequence >() <<
                        QKeySequence::ZoomIn <<
                        QKeySequence( "Ctrl+=" ) );
   navToolbar->widgetForAction( zoomIn )->setObjectName( "zoomInButton" );
 
-  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Zoom Out" ) );
+  zoomOut = navToolbar->addAction( QIcon( ":/icons/icon32_zoomout.svg" ), tr( "Zoom Out" ) );
   zoomOut->setShortcut( QKeySequence::ZoomOut );
   navToolbar->widgetForAction( zoomOut )->setObjectName( "zoomOutButton" );
 
-  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Normal Size" ) );
+  zoomBase = navToolbar->addAction( QIcon( ":/icons/icon32_zoombase.svg" ), tr( "Normal Size" ) );
   zoomBase->setShortcut( QKeySequence( "Ctrl+0" ) );
   navToolbar->widgetForAction( zoomBase )->setObjectName( "zoomBaseButton" );
 
@@ -271,7 +285,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   menuButton = new QToolButton( navToolbar );
   menuButton->setPopupMode( QToolButton::InstantPopup );
   menuButton->setMenu( buttonMenu );
-  menuButton->setIcon( QIcon (":/icons/menu_button.png") );
+  menuButton->setIcon( QIcon (":/icons/menu_button.svg") );
   menuButton->addAction( ui.menuOptions );
   menuButton->setToolTip( tr( "Menu Button" ) );
   menuButton->setObjectName( "menuButton" );
@@ -350,13 +364,13 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.menuZoom->addSeparator();
 
-  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.png" ), tr( "Words Zoom In" ) );
+  wordsZoomIn = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomin.svg" ), tr( "Words Zoom In" ) );
   wordsZoomIn->setShortcuts( QList< QKeySequence >() <<
                             QKeySequence( "Alt++" ) <<
                             QKeySequence( "Alt+=" ) );
-  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.png" ), tr( "Words Zoom Out" ) );
+  wordsZoomOut = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoomout.svg" ), tr( "Words Zoom Out" ) );
   wordsZoomOut->setShortcut( QKeySequence( "Alt+-" ) );
-  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.png" ), tr( "Words Normal Size" ) );
+  wordsZoomBase = ui.menuZoom->addAction( QIcon( ":/icons/icon32_zoombase.svg" ), tr( "Words Normal Size" ) );
   wordsZoomBase->setShortcut( QKeySequence( "Alt+0" ) );
 
   connect( wordsZoomIn, SIGNAL(triggered()), this, SLOT(doWordsZoomIn()) );
@@ -403,7 +417,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   closeCurrentTabAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   closeCurrentTabAction.setShortcut( QKeySequence( "Ctrl+W" ) );
   closeCurrentTabAction.setText( tr("Close current tab") );
-  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab.png") );
+  closeCurrentTabAction.setIcon( QIcon(":/icons/closetab-hover.png") );
 
   connect( &closeCurrentTabAction, SIGNAL( triggered() ),
            this, SLOT( closeCurrentTab() ) );
@@ -587,7 +601,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.menuHistory, SIGNAL( aboutToShow() ),
            this, SLOT( updateHistoryMenu() ) );
 
-#if !defined( HAVE_X11 ) || QT_VERSION < QT_VERSION_CHECK( 5, 0, 0 )
+#if !defined( HAVE_X11 )
   // Show tray icon early so the user would be happy. It won't be functional
   // though until the program inits fully.
   // Do not create dummy tray icon in X. Cause QT5 failed to upgrade systemtray context menu.
@@ -609,7 +623,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   addTab.setAutoRaise( true );
   addTab.setToolTip( tr( "New Tab"  ) );
   addTab.setFocusPolicy( Qt::NoFocus );
-  addTab.setIcon( QIcon( ":/icons/addtab.png" ) );
+  addTab.setIcon( QIcon( ":/icons/addtab.svg" ) );
 
   ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
   ui.tabWidget->clear();
@@ -617,9 +631,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.tabWidget->setCornerWidget( &addTab, Qt::TopLeftCorner );
   //ui.tabWidget->setCornerWidget( &closeTab, Qt::TopRightCorner );
 
-#if QT_VERSION >= 0x040500
   ui.tabWidget->setMovable( true );
-#endif
 
 #ifndef Q_OS_WIN32
   ui.tabWidget->setDocumentMode( true );
@@ -642,9 +654,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.tabWidget, SIGNAL( customContextMenuRequested(QPoint)) ,
            this, SLOT( tabMenuRequested(QPoint)) );
 
-#if QT_VERSION >= 0x040500
   ui.tabWidget->setTabsClosable( true );
-#endif
 
   connect( ui.quit, SIGNAL( triggered() ),
            this, SLOT( quitApp() ) );
@@ -863,7 +873,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_MAC
   if( cfg.preferences.startWithScanPopupOn && !MacMouseOver::isAXAPIEnabled() )
       mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
-                                      QPixmap( ":/icons/error.png" ) );
+                                      QPixmap( ":/icons/error.svg" ) );
 #endif
 
   wasMaximized = isMaximized();
@@ -873,21 +883,15 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #ifdef Q_OS_MAC
     LionSupport::addFullscreen(this);
   #endif
-#ifdef Q_OS_WIN32
-  gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
-  ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
-#endif
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->grabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->grabGesture( Gestures::GDSwipeGestureType );
-#endif
 
   if( layoutDirection() == Qt::RightToLeft )
   {
     // Adjust button icons for Right-To-Left layout
-    navBack->setIcon( QIcon( ":/icons/next.png" ) );
-    navForward->setIcon( QIcon( ":/icons/previous.png" ) );
+    navBack->setIcon( QIcon( ":/icons/next.svg" ) );
+    navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 }
 
@@ -1005,11 +1009,9 @@ MainWindow::~MainWindow()
 
   ftsIndexing.stopIndexing();
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ui.centralWidget->ungrabGesture( Gestures::GDPinchGestureType );
   ui.centralWidget->ungrabGesture( Gestures::GDSwipeGestureType );
 //  Gestures::unregisterRecognizers();
-#endif
 
   // Close all tabs -- they should be destroyed before network managers
   // do.
@@ -1295,9 +1297,12 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
-  QWebSettings *defaultSettings = QWebSettings::globalSettings();
-  defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
+  QWebEngineSettings *defaultSettings = QWebEngineSettings::defaultSettings();
+  defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -1395,7 +1400,7 @@ void MainWindow::updateGroupList()
 
     g.name = tr( "All" );
     g.id = Instances::Group::AllGroupId;
-    g.icon = "folder.png";
+    g.icon = "folder.svg";
 
     groupInstances.push_back( g );
   }
@@ -1449,10 +1454,11 @@ void MainWindow::updateDictionaryBar()
 
     dictionaryBar.setDictionaries( grp->dictionaries );
 
-    if ( useSmallIconsInToolbarsAction.isChecked() ) {
-      int extent = QApplication::style()->pixelMetric(QStyle::PM_SmallIconSize);
-      dictionaryBar.setDictionaryIconSize( extent );
-    }
+    int extent = useSmallIconsInToolbarsAction.isChecked() ?
+               QApplication::style()->pixelMetric( QStyle::PM_SmallIconSize ) :
+               QApplication::style()->pixelMetric(QStyle::PM_ToolBarIconSize);
+
+    dictionaryBar.setDictionaryIconSize( extent );
   }
 }
 
@@ -1549,7 +1555,7 @@ vector< sptr< Dictionary::Class > > const & MainWindow::getActiveDicts()
 
 void MainWindow::createTabList()
 {
-  tabListMenu->setIcon(QIcon(":/icons/windows-list.png"));
+  tabListMenu->setIcon(QIcon(":/icons/windows-list.svg"));
   connect(tabListMenu, SIGNAL(aboutToShow()), this, SLOT(fillWindowsMenu()));
   connect(tabListMenu, SIGNAL(triggered(QAction*)), this, SLOT(switchToWindow(QAction*)));
 
@@ -1612,7 +1618,6 @@ void MainWindow::switchToWindow(QAction *act)
   ui.tabWidget->setCurrentIndex(idx);
 }
 
-
 void MainWindow::addNewTab()
 {
   createNewTab( true, tr( "(untitled)" ) );
@@ -1635,6 +1640,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
+
+  connect( view, SIGNAL( updateFoundInDictsList( ) ),
+          this, SLOT( updateFoundInDictsList() ) );
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ) );
@@ -1673,6 +1681,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
+  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
+    ArticleView *active = getCurrentArticleView();
+    if (active == view) {
+      view->linkClicked(url);
+    }
+  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -1807,7 +1821,15 @@ void MainWindow::forwardClicked()
 
 void MainWindow::titleChanged( ArticleView * view, QString const & title )
 {
-  QString escaped = title;
+  //the title can be url if html title is empty.according to qwebenginepage title() document.
+  QString escaped ;
+  if (title!=nullptr && title.contains(":")) {
+    //check if the title is url.
+    QUrl url(title);
+    escaped = Utils::Url::queryItemValue(url,"word");
+  } else {
+    escaped = title;
+  }
   escaped.replace( "&", "&&" );
 
   if( escaped.isRightToLeft() )
@@ -1870,7 +1892,7 @@ void MainWindow::pageLoaded( ArticleView * view )
   if ( cfg.preferences.pronounceOnLoadMain )
     pronounce( view );
 
-  updateFoundInDictsList();
+  //updateFoundInDictsList();
 }
 
 void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
@@ -1993,6 +2015,12 @@ void MainWindow::updateFoundInDictsList()
         }
       }
     }
+
+    //if no item in dict List panel has been choose ,select first one.
+    if (ui.dictsList->count() > 0 && ui.dictsList->selectedItems().empty()) {
+        ui.dictsList->setCurrentRow(0);
+    }
+
   }
 }
 
@@ -2453,7 +2481,9 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
   {
     if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      setGeometry( cfg.normalMainWindowGeometry );
+      {
+        setGeometry( cfg.normalMainWindowGeometry );
+    }
     ev->accept();
     return true;
   }
@@ -2581,7 +2611,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   else
   if ( obj == wordList )
   {
-    if ( ev->type() == QEvent::KeyPress )
+    if (ev->type() == QEvent::KeyPress || ev->type() == QEvent::ShortcutOverride) 
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -2614,10 +2644,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
            ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
         return false; // A non-typing modifier is pressed
 
-      if ( keyEvent->key() == Qt::Key_Space ||
-           keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab ||
-           keyEvent->key() == Qt::Key_Backtab )
+      if (  Utils::ignoreKeyEvent(keyEvent))
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
@@ -2632,7 +2659,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   }
   else
   if (obj == ui.dictsList) {
-    if ( ev->type() == QEvent::KeyPress )
+    if ( ev->type() == QEvent::KeyPress || ev->type() == QEvent::ShortcutOverride)
     {
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
@@ -2643,10 +2670,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
            ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
         return false; // A non-typing modifier is pressed
 
-      if ( keyEvent->key() == Qt::Key_Space ||
-           keyEvent->key() == Qt::Key_Backspace ||
-           keyEvent->key() == Qt::Key_Tab ||
-           keyEvent->key() == Qt::Key_Backtab )
+      if ( Utils::ignoreKeyEvent(keyEvent))
         return false; // Those key have other uses than to start typing
                       // or don't make sense
 
@@ -2700,7 +2724,14 @@ void MainWindow::dictsListSelectionChanged()
 {
   QList< QListWidgetItem * > selected = ui.dictsList->selectedItems();
   if ( selected.size() )
-    jumpToDictionary( selected.front() );
+  {
+      ArticleView * view = getCurrentArticleView();
+      if(view){
+          QString dictId = ui.dictsList->selectedItems().at(0)->data(Qt::UserRole).toString();
+          view->setActiveArticleId(dictId);
+       }
+//      jumpToDictionary( selected.front() );
+  }
 }
 
 void MainWindow::jumpToDictionary( QListWidgetItem * item, bool force )
@@ -2766,10 +2797,11 @@ void MainWindow::typingEvent( QString const & t )
 
     if( translateLine->isEnabled() )
     {
-      translateLine->setFocus();
-      // Escaping the typed-in characters is the user's responsibility.
-      setTranslateBoxTextAndClearSuffix( t, WildcardsAreAlreadyEscaped, EnablePopup );
-      translateLine->setCursorPosition( t.size() );
+        translateLine->clear();
+        translateLine->setFocus();
+        // Escaping the typed-in characters is the user's responsibility.
+        //      setTranslateBoxTextAndClearSuffix( t, WildcardsAreAlreadyEscaped, EnablePopup );
+        //      translateLine->setCursorPosition( t.size() );
     }
   }
 }
@@ -2810,92 +2842,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
   updateFoundInDictsList();
 
   updateBackForwardButtons();
-
-  #if 0
-  QUrl req;
-
-  req.setScheme( "gdlookup" );
-  req.setHost( "localhost" );
-  req.addQueryItem( "word", inWord );
-  req.addQueryItem( "group",
-                    cfg.groups.empty() ? "" :
-                      groupInstances[ groupList->currentIndex() ].name );
-
-  ui.definition->load( req );
-
-  return;
-#endif
-
-  #if 0
-  wstring word = inWord.trimmed().toStdWString();
-
-  // Where to look?
-
-  vector< sptr< Dictionary::Class > > const & activeDicts = getActiveDicts();
-
-  // Accumulate main forms
-
-  vector< wstring > alts;
-
-  {
-    set< wstring > altsSet;
-
-    for( unsigned x = 0; x < activeDicts.size(); ++x )
-    {
-      vector< wstring > found = activeDicts[ x ]->findHeadwordsForSynonym( word );
-
-      altsSet.insert( found.begin(), found.end() );
-    }
-
-    alts.insert( alts.begin(), altsSet.begin(), altsSet.end() );
-  }
-
-  for( unsigned x = 0; x < alts.size(); ++x )
-  {
-    DPRINTF( "Alt: %ls\n", alts[ x ].c_str() );
-  }
-
-
-  string result =
-    "<html><head>"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
-
-  QFile cssFile( Config::getUserCssFileName() );
-
-  if ( cssFile.open( QFile::ReadOnly ) )
-  {
-    result += "<style type=\"text/css\">\n";
-    result += cssFile.readAll().data();
-    result += "</style>\n";
-  }
-
-  result += "</head><body>";
-
-  for( unsigned x = 0; x < activeDicts.size(); ++x )
-  {
-    try
-    {
-      string body = activeDicts[ x ]->getArticle( word, alts );
-
-      DPRINTF( "From %s: %s\n", activeDicts[ x ]->getName().c_str(), body.c_str() );
-
-      result += "<div class=\"gddictname\">From " + activeDicts[ x ]->getName() + "</div>" + body;
-    }
-    catch( Dictionary::exNoSuchWord & )
-    {
-      continue;
-    }
-  }
-
-  result += "</body></html>";
-
-  ArticleMaker am( dictionaries, groupInstances );
-
-  string result = am.makeDefinitionFor( inWord, "En" );
-
-  ui.definition->setContent( result.c_str(), QString() );
-
-  #endif
 
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
@@ -3276,11 +3222,15 @@ void MainWindow::scanEnableToggled( bool on )
 #ifdef Q_OS_MAC
       if( !MacMouseOver::isAXAPIEnabled() )
           mainStatusBar->showMessage( tr( "Accessibility API is not enabled" ), 10000,
-                                          QPixmap( ":/icons/error.png" ) );
+                                          QPixmap( ":/icons/error.svg" ) );
 #endif
+      enableScanPopup->setIcon(QIcon(":/icons/wizard-selected.svg"));
     }
     else
+    {
       scanPopup->disableScanning();
+      enableScanPopup->setIcon(QIcon(":/icons/wizard.svg"));
+    }
   }
 
   updateTrayIcon();
@@ -3458,7 +3408,8 @@ void MainWindow::on_pageSetup_triggered()
 
 void MainWindow::on_printPreview_triggered()
 {
-  QPrintPreviewDialog dialog( &getPrinter(), this );
+  QPrinter printer;
+  QPrintPreviewDialog dialog( &printer, this );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
@@ -3498,7 +3449,7 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
   {
     QUrl url( rx.cap( 1 ) );
     QString host = url.host();
-    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Qt4x5::Url::path( url ), "/" ) );
+    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Utils::Url::path( url ), "/" ) );
 
     if ( !host.startsWith( '/' ) )
       host.insert( 0, '/' );
@@ -3730,7 +3681,6 @@ void MainWindow::applyZoomFactor()
   // triggered() signal is no longer emitted, which in turn improves performance.
   adjustCurrentZoomFactor();
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // Scaling article views asynchronously dramatically improves performance when
   // a zoom action is triggered repeatedly while many or large articles are open
   // in the main window or in scan popup.
@@ -3740,13 +3690,6 @@ void MainWindow::applyZoomFactor()
   // In effect, some intermediate zoom factors are skipped when scaling is slow.
   // The slower the scaling, the more steps are skipped.
   QTimer::singleShot( 0, this, SLOT( scaleArticlesByCurrentZoomFactor() ) );
-#else
-  // The timer trick above usually doesn't improve performance with Qt4
-  // due to a different ordering of keyboard and timer events.
-  // Sometimes, unpredictably, it does work like with Qt5.
-  // Scale article views synchronously to avoid inconsistent or unexpected behavior.
-  scaleArticlesByCurrentZoomFactor();
-#endif
 }
 
 void MainWindow::adjustCurrentZoomFactor()
@@ -4018,7 +3961,7 @@ void MainWindow::on_exportHistory_triggered()
     }
     QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
     file.close();
-    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 // TODO: consider moving parts of this method into History class.
@@ -4084,7 +4027,7 @@ void MainWindow::on_importHistory_triggered()
         if( fileStream.status() >= QTextStream::ReadCorruptData )
         {
             errStr = QString ( tr( "Import error: invalid data in file" ) );
-            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+            mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
         }
         else
             mainStatusBar->showMessage( tr( "History import complete" ), 5000 );
@@ -4092,7 +4035,7 @@ void MainWindow::on_importHistory_triggered()
     }
     errStr = QString( tr( "Import error: " ) ) + file.errorString();
     file.close();
-    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+    mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_exportFavorites_triggered()
@@ -4133,7 +4076,7 @@ void MainWindow::on_exportFavorites_triggered()
   }
   QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_ExportFavoritesToList_triggered()
@@ -4182,7 +4125,7 @@ void MainWindow::on_ExportFavoritesToList_triggered()
   }
   QString errStr = QString( tr( "Export error: " ) ) + file.errorString();
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::on_importFavorites_triggered()
@@ -4231,7 +4174,7 @@ void MainWindow::on_importFavorites_triggered()
     errStr = QString( tr( "Data parsing error" ) );
 
   file.close();
-  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.png" ) );
+  mainStatusBar->showMessage( errStr, 10000, QPixmap( ":/icons/error.svg" ) );
 }
 
 void MainWindow::fillWordListFromHistory()
@@ -4293,6 +4236,8 @@ void MainWindow::foundDictsPaneClicked( QListWidgetItem * item )
     QString id = item->data( Qt::UserRole ).toString();
     emit clickOnDictPane( id );
   }
+
+   jumpToDictionary( item,true);
 }
 
 void MainWindow::showDictionaryInfo( const QString & id )
@@ -4880,14 +4825,6 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
   ArticleView * view = getCurrentArticleView();
   if( !view )
     return true;
-
-  LPGDDataStruct lpdata = ( LPGDDataStruct ) message->lParam;
-
-  QString str = view->wordAtPoint( lpdata->Pt.x, lpdata->Pt.y );
-
-  memset( lpdata->cwData, 0, lpdata->dwMaxLength * sizeof( WCHAR ) );
-  str.truncate( lpdata->dwMaxLength - 1 );
-  str.toWCharArray( lpdata->cwData );
 
   *result = 1;
   return true;

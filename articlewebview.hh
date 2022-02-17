@@ -4,20 +4,22 @@
 #ifndef __ARTICLEWEBVIEW_HH_INCLUDED__
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
-#include <QWebView>
 #include "config.hh"
+#include <QEvent>
+#include <QMouseEvent>
+#include <QWebEngineView>
+#include <QOpenGLWidget>
+#include <QPointer>
 
-class ArticleInspector;
-
-/// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
+/// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
 ///    to the view's current state. This is used to open links in new tabs when
 ///    they are clicked with middle button. There's also an added possibility to
 ///    get double-click events after the fact with the doubleClicked() signal.
 /// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
-///    use triggerPageAction( QWebPage::InspectElement ) instead.
-class ArticleWebView: public QWebView
+///    use triggerPageAction( QWebEnginePage::InspectElement ) instead.
+class ArticleWebView: public QWebEngineView
 {
   Q_OBJECT
 
@@ -33,9 +35,11 @@ public:
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
-  void triggerPageAction( QWebPage::WebAction action, bool checked = false );
+  void triggerPageAction(QWebEnginePage::WebAction action, bool checked = false);
 
-signals:
+  bool eventFilter(QObject *obj, QEvent *ev);
+
+  signals:
 
   /// Signals that the user has just double-clicked. The signal is delivered
   /// after the event was processed by the view -- that's the difference from
@@ -46,20 +50,33 @@ signals:
 protected:
 
   bool event( QEvent * event );
-  void mousePressEvent( QMouseEvent * event );
+  void singleClickAction(QMouseEvent *event);
+  void sendCustomMouseEvent(QEvent::Type type);
+  void mousePressEvent(QMouseEvent *event);
   void mouseReleaseEvent( QMouseEvent * event );
-  void mouseDoubleClickEvent( QMouseEvent * event );
+  void doubleClickAction( QMouseEvent * event );
   void focusInEvent( QFocusEvent * event );
   void wheelEvent( QWheelEvent * event );
+
 
 private:
 
   Config::Class * cfg;
-  ArticleInspector * inspector;
+  //QPointer<QOpenGLWidget> child_;
 
   bool midButtonPressed;
   bool selectionBySingleClick;
   bool showInspectorDirectly;
+
+  //MouseDbClickEvent will also emit MousePressEvent which conflict the single click event.
+  //this variable used to distinguish the single click and real double click.
+  bool singleClickToDbClick;
+  bool dbClicked;
+
+public slots:
+
+    //receive signal ,a link has been clicked.
+    void linkClickedInHtml(QUrl const& url);
 };
 
 #endif

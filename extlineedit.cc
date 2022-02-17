@@ -2,12 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "extlineedit.hh"
-
 #include <QPainter>
-
-#if QT_VERSION >= 0x040600
 #include <QPropertyAnimation>
-#endif
 
 ExtLineEdit::ExtLineEdit(QWidget *parent) :
     QLineEdit(parent)
@@ -96,8 +92,9 @@ void ExtLineEdit::updateMargins()
     Side realLeft = (leftToRight ? Left : Right);
     Side realRight = (leftToRight ? Right : Left);
 
-    int leftMargin = iconButtons[realLeft]->pixmap().width() + 8;
-    int rightMargin = iconButtons[realRight]->pixmap().width() + 8;
+    int widgetHeight=height();
+    int leftMargin = widgetHeight + 8;
+    int rightMargin = widgetHeight + 8;
 
     setTextMargins(
             (iconEnabled[realLeft] ? leftMargin : 0), 1,
@@ -165,8 +162,11 @@ IconButton::IconButton(QWidget *parent)
 void IconButton::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-
-    QRect pixmapRect = QRect(0, 0, m_pixmap.width(), m_pixmap.height());
+    painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+    painter.setRenderHint(QPainter::RenderHint::TextAntialiasing);
+    painter.setRenderHint(QPainter::RenderHint::SmoothPixmapTransform);
+    painter.setRenderHint(QPainter::RenderHint::LosslessImageRendering);
+    QRect pixmapRect = QRect(0, 0, height(), height());
     pixmapRect.moveCenter(rect().center());
 
     if (m_autohide)
@@ -179,7 +179,6 @@ void IconButton::paintEvent(QPaintEvent *)
 
 void IconButton::animate(bool visible)
 {
-#if QT_VERSION >= 0x040600
   QPropertyAnimation *animation = new QPropertyAnimation(this, "opacity");
   animation->setDuration(250);
   if (visible)
@@ -191,7 +190,4 @@ void IconButton::animate(bool visible)
     animation->setEndValue(0.0);
   }
   animation->start(QAbstractAnimation::DeleteWhenStopped);
-#else
-  setOpacity(visible ? 1.0 : 0.0);
-#endif
 }

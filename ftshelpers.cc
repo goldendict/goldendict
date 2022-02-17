@@ -7,17 +7,15 @@
 #include "file.hh"
 #include "gddebug.hh"
 #include "folding.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #include <vector>
 #include <string>
 
 #include <QVector>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
-#endif
 
 using std::vector;
 using std::string;
@@ -93,17 +91,17 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     // Make words list for search in article text
     searchWords = str.normalized( QString::NormalizationForm_C )
-                     .split( spacesRegExp, QString::SkipEmptyParts );
+                     .split( spacesRegExp, Qt::SkipEmptyParts );
 
     // Make words list for index search
     QStringList list = str.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, QString::SkipEmptyParts );
+                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
     indexWords = list.filter( wordRegExp );
     indexWords.removeDuplicates();
 
     // Make regexp for results hilite
 
-    QStringList allWords = str.split( spacesRegExp, QString::SkipEmptyParts );
+    QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
     QString searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords );
 
     searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
@@ -126,7 +124,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
     tmp.replace( setsRegExp, " " );
 
     QStringList list = tmp.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, QString::SkipEmptyParts );
+                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
 
     if( hasCJK )
     {
@@ -184,7 +182,6 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   if( articleText.isEmpty() )
     return;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
                                   QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
@@ -192,14 +189,8 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
                                         .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
                                                                     QRegularExpression::UseUnicodePropertiesOption ),
-                                                QString::SkipEmptyParts );
-#else
-  QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
-  QRegExp regSplit = QRegExp( "\\W+" );
+                                                Qt::SkipEmptyParts );
 
-  QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                        .split( QRegExp( handleRoundBrackets ? "[^\\w\\(\\)]+" : "\\W+" ), QString::SkipEmptyParts );
-#endif
 
   QSet< QString > setOfWords;
   setOfWords.reserve( articleWords.size() );
@@ -242,12 +233,11 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
         // Special handle for words with round brackets - DSL feature
         QStringList list;
 
-        QStringList oldVariant = word.split( regSplit, QString::SkipEmptyParts );
+        QStringList oldVariant = word.split( regSplit, Qt::SkipEmptyParts );
         for( QStringList::iterator it = oldVariant.begin(); it != oldVariant.end(); ++it )
           if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
             list.append( *it );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         QRegularExpressionMatch match = regBrackets.match( word );
         if( match.hasMatch() )
         {
@@ -255,12 +245,6 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
           // Add empty strings for compatibility with QRegExp behaviour
           for( int i = match.lastCapturedIndex() + 1; i < 6; i++ )
             parts.append( QString() );
-#else
-        int pos = regBrackets.indexIn( word );
-        if( pos >= 0 )
-        {
-          QStringList parts = regBrackets.capturedTexts();
-#endif
           QString parsedWord = parts[ 2 ] + parts[ 4 ]; // Brackets removed
 
           if( parsedWord.size() >= FTS::MinimumWordSize && !list.contains( parsedWord ) )
@@ -299,7 +283,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 {
   Mutex::Lock _( dict->getFtsMutex() );
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     throw exUserAbort();
 
   File::Class ftsIdx( dict->ftsIndexName(), "wb" );
@@ -321,7 +305,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
   dict->findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     throw exUserAbort();
 
   QVector< uint32_t > offsets;
@@ -338,7 +322,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   // Free memory
   setOfOffsets.clear();
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     throw exUserAbort();
 
   dict->sortArticlesOffsetsForFTS( offsets, isCancelled );
@@ -354,7 +338,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   // index articles for full-text search
   for( int i = 0; i < offsets.size(); i++ )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     QString headword, articleStr;
@@ -370,7 +354,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
   while( it != ftsWords.end() )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     uint32_t offset = chunks.startNewBlock();
@@ -387,7 +371,7 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
   ftsIdxHeader.chunksOffset = chunks.finish();
   ftsIdxHeader.wordCount = indexedWords.size();
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     throw exUserAbort();
 
   BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
@@ -436,20 +420,15 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
   }
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
                                   QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-#else
-  QRegExp regBrackets = QRegExp( "(\\(\\w+\\)){0,1}(\\w+)(\\(\\w+\\)){0,1}(\\w+){0,1}(\\(\\w+\\)){0,1}" );
-  QRegExp regSplit = QRegExp( "\\W+" );
-#endif
+
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
     // RegExp mode
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression searchRegularExpression;
     if( searchMode == FTS::Wildcards )
       searchRegularExpression.setPattern( wildcardsToRegexp( searchRegexp.pattern() ) );
@@ -464,10 +443,9 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     searchRegularExpression.setPatternOptions( patternOptions );
     if( !searchRegularExpression.isValid() )
       searchRegularExpression.setPattern( "" );
-#endif
     for( int i = 0; i < offsets.size(); i++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       dict.getArticleText( offsets.at( i ), headword, articleText );
@@ -476,11 +454,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       if( ignoreDiacritics )
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       if( articleText.contains( searchRegularExpression ) )
-#else
-      if( articleText.contains( searchRegexp ) )
-#endif
       {
         if( headword.isEmpty() )
           offsetsForHeadwords.append( offsets.at( i ) );
@@ -497,13 +471,8 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   {
     // Words mode
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression splitWithBrackets( "[^\\w\\(\\)\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
     QRegularExpression splitWithoutBrackets( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-#else
-    QRegExp splitWithBrackets( "[^\\w\\(\\)]+" );
-    QRegExp splitWithoutBrackets( "\\W+" );
-#endif
 
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;
@@ -515,7 +484,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 
     for( int i = 0; i < offsets.size(); i++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       int pos = 0;
@@ -540,7 +509,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
 
       QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
-                                                    QString::SkipEmptyParts );
+                                                    Qt::SkipEmptyParts );
 
       int wordsNum = articleWords.length();
       while ( pos < wordsNum )
@@ -552,7 +521,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           if( needHandleBrackets && ( s.indexOf( '(' ) >= 0 || s.indexOf( ')' ) >= 0 ) )
           {
             // Handle brackets
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpressionMatch match_brackets = regBrackets.match( s );
             if( match_brackets.hasMatch() )
             {
@@ -560,12 +528,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               // Add empty strings for compatibility with QRegExp behaviour
               for( int i = match_brackets.lastCapturedIndex() + 1; i < 6; i++ )
                 parts.append( QString() );
-#else
-            int pos = regBrackets.indexIn( s );
-            if( pos >= 0 )
-            {
-              QStringList parts = regBrackets.capturedTexts();
-#endif
+                
               QString word = parts[ 2 ] + parts[ 4 ]; // Brackets removed
               parsedWords.append( word );
 
@@ -577,7 +540,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               parsedWords.append( word );
             }
             else
-              parsedWords = s.split( regSplit, QString::SkipEmptyParts );
+              parsedWords = s.split( regSplit, Qt::SkipEmptyParts );
           }
           else
             parsedWords.append( s );
@@ -805,7 +768,7 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
   int n = indexWords.length();
   for( int i = 0; i < n; i++ )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return;
 
     tmp.clear();
@@ -814,7 +777,7 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
     for( unsigned x = 0; x < links.size(); x++ )
     {
 
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         return;
 
       vector< char > chunk;
@@ -876,7 +839,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
   QSet< uint32_t > setOfOffsets;
   uint32_t size;
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   if( indexWords.isEmpty() )
@@ -913,7 +876,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
       for( unsigned x = 0; x < links.size(); x++ )
       {
 
-        if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        if( Utils::AtomicInt::loadAcquire( isCancelled ) )
           return;
 
         vector< char > chunk;
@@ -953,7 +916,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
     for( int x = 0; x < links.size(); x++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         return;
 
       QString word = QString::fromUtf8( links[ x ].word.data(), links[ x ].word.size() );
@@ -1030,7 +993,7 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
   uint32_t size;
   QVector< BtreeIndexing::WordArticleLink > links;
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   if( indexWords.isEmpty() )
@@ -1044,7 +1007,7 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
   for( int x = 0; x < links.size(); x++ )
   {
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return;
 
     QString word = QString::fromUtf8( links[ x ].word.data(), links[ x ].word.size() );
@@ -1113,14 +1076,14 @@ void FTSResultsRequest::fullSearch( QStringList & searchWords, QRegExp & regexp 
 {
   // Whole file survey
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   QSet< uint32_t > setOfOffsets;
   setOfOffsets.reserve( dict.getArticleCount() );
   dict.findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   QVector< uint32_t > offsets;
@@ -1134,14 +1097,14 @@ void FTSResultsRequest::fullSearch( QStringList & searchWords, QRegExp & regexp 
     ptr++;
   }
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   setOfOffsets.clear();
 
   dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
-  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     return;
 
   checkArticles( offsets, searchWords, regexp );

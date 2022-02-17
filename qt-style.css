@@ -54,13 +54,22 @@ ScanPopup #translateLine[noResults="true"]
 }
 
 #navToolbar GroupComboBox::down-arrow {
-   image: url(:/icons/1downarrow.png);
+    image: url(:/icons/1downarrow.svg);
+    max-height: 100%;
 }
 
 #navToolbar GroupComboBox::down-arrow:on { /* shift the arrow when popup is open */
    top: 1px;
    left: 1px;
 }
+
+QTabBar::close-button {
+  image: url(:/icons/closetab.svg)
+}
+QTabBar::close-button:hover {
+  image: url(:/icons/closetab-hover.png)
+}
+
 
 ArticleView #searchText[noResults="true"]
 {
@@ -125,7 +134,8 @@ ScanPopup GroupComboBox::drop-down {
 }
 
 ScanPopup GroupComboBox::down-arrow {
-   image: url(:/icons/1downarrow.png);
+   image: url(:/icons/1downarrow.svg);
+  max-height: 100%;
 }
 
 ScanPopup GroupComboBox::down-arrow:on { /* shift the arrow when popup is open */

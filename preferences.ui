@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>636</width>
-    <height>431</height>
+    <height>447</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
+    <normaloff>:/icons/configure.svg</normaloff>:/icons/configure.svg</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -24,7 +24,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>6</number>
      </property>
      <property name="iconSize">
       <size>
@@ -41,7 +41,7 @@
      <widget class="QWidget" name="tab">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/interface.png</normaloff>:/icons/interface.png</iconset>
+        <normaloff>:/icons/interface.svg</normaloff>:/icons/interface.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Interface</string>
@@ -374,7 +374,7 @@ be the last ones.</string>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/wizard.png</normaloff>:/icons/wizard.png</iconset>
+        <normaloff>:/icons/wizard.svg</normaloff>:/icons/wizard.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Scan Popup</string>
@@ -720,7 +720,7 @@ seconds, which is specified here.</string>
      <widget class="QWidget" name="tab_5">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/hotkeys.png</normaloff>:/icons/hotkeys.png</iconset>
+        <normaloff>:/icons/hotkeys.svg</normaloff>:/icons/hotkeys.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Hotkeys</string>
@@ -865,7 +865,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/playsound_color.png</normaloff>:/icons/playsound_color.png</iconset>
+        <normaloff>:/icons/playsound_color.svg</normaloff>:/icons/playsound_color.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Audio</string>
@@ -971,7 +971,7 @@ p, li { white-space: pre-wrap; }
      <widget class="QWidget" name="tab_3">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
+        <normaloff>:/icons/network.svg</normaloff>:/icons/network.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>&amp;Network</string>
@@ -1253,7 +1253,7 @@ download page.</string>
      <widget class="QWidget" name="tab_FTS">
       <attribute name="icon">
        <iconset resource="resources.qrc">
-        <normaloff>:/icons/system-search.png</normaloff>:/icons/system-search.png</iconset>
+        <normaloff>:/icons/fulltext.svg</normaloff>:/icons/fulltext.svg</iconset>
       </attribute>
       <attribute name="title">
        <string>Full-text search</string>
@@ -1428,58 +1428,16 @@ download page.</string>
       </layout>
      </widget>
      <widget class="QWidget" name="tab_Advanced">
+      <attribute name="icon">
+       <iconset resource="resources.qrc">
+        <normaloff>:/icons/advanced.svg</normaloff>:/icons/advanced.svg</iconset>
+      </attribute>
       <attribute name="title">
        <string>Ad&amp;vanced</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_17">
-         <item>
-          <widget class="QGroupBox" name="groupBox_ScanPopupTechnologies">
-           <property name="title">
-            <string>ScanPopup extra technologies</string>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_13">
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseIAccessibleEx">
-              <property name="toolTip">
-               <string>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use &amp;IAccessibleEx</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseUIAutomation">
-              <property name="toolTip">
-               <string>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use &amp;UIAutomation</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="scanPopupUseGDMessage">
-              <property name="toolTip">
-               <string>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don't use such programs.</string>
-              </property>
-              <property name="text">
-               <string>Use &amp;GoldenDict message</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
          <item>
           <widget class="QGroupBox" name="groupBox_ScanPopupWindowFlags">
            <property name="title">

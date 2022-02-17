@@ -1,0 +1,84 @@
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ dev ]
+  schedule:
+    - cron: '40 15 * * 6'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ${{ matrix.os }}
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'cpp', 'javascript' ]
+        os: [ubuntu-20.04]
+        qt_ver: [5.15.2]
+        qt_arch: [gcc_64]
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
+        # Learn more about CodeQL language support at https://git.io/codeql-language-support
+
+    steps:
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v2.13.0
+      with:
+        version: ${{ matrix.qt_ver }}
+        cached: 'false'
+        modules: qtwebengine
+    - name: ubuntu install thirdparty dependencies
+      run: |
+        sudo apt-get install git pkg-config build-essential qt5-qmake 
+        sudo apt-get install libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev 
+        sudo apt-get install qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev 
+        sudo apt-get install libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev 
+        sudo apt-get install libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev 
+        sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins libopencc-dev libzstd-dev
+        sudo ln -sf /usr/bin/x86_64-linux-gnu-ld.gold /usr/bin/ld
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: ${{ matrix.language }}
+        # If you wish to specify custom queries, you can do so here or in a config file.
+        # By default, queries listed here will override any specified in a config file.
+        # Prefix the list here with "+" to use these queries and those in the config file.
+        # queries: ./path/to/local/query, your-org/your-repo/queries@main
+
+
+    # ℹ️ Command-line programs to run using the OS shell.
+    # 📚 https://git.io/JvXDl
+
+    # ✏️ If the Autobuild fails above, remove it and uncomment the following three lines
+    #    and modify them (or add more) to build your code if your project
+    #    uses a compiled language
+
+    - run: |
+        qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
+        make INSTALL_ROOT=appdir -j`nproc` ; # find appdir/
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1

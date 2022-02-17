@@ -25,7 +25,7 @@ using std::wstring;
 /// in their behavior on those platforms.
 static const Qt::WindowFlags defaultUnpinnedWindowFlags =
 
-#if defined (Q_OS_WIN) || ( defined (Q_OS_MAC) && QT_VERSION < QT_VERSION_CHECK( 5, 3, 0 ) )
+#if defined (Q_OS_WIN)
 Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
 #else
 Qt::Popup
@@ -84,8 +84,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseEnteredOnce( false ),
   mouseIntercepted( false ),
   hideTimer( this ),
-  starIcon( ":/icons/star.png" ),
-  blueStarIcon( ":/icons/star_blue.png" )
+  starIcon( ":/icons/star.svg" ),
+  blueStarIcon( ":/icons/star_blue.svg" )
 {
   ui.setupUi( this );
 
@@ -94,8 +94,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   if( layoutDirection() == Qt::RightToLeft )
   {
     // Adjust button icons for Right-To-Left layout
-    ui.goBackButton->setIcon( QIcon( ":/icons/next.png" ) );
-    ui.goForwardButton->setIcon( QIcon( ":/icons/previous.png" ) );
+    ui.goBackButton->setIcon( QIcon( ":/icons/next.svg" ) );
+    ui.goForwardButton->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 
   mainStatusBar = new MainStatusBar( this );
@@ -282,10 +282,6 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
            this, SLOT( mouseHovered( QString const &, bool ) ) );
 
-#ifdef Q_OS_WIN32
-  connect( &MouseOver::instance(), SIGNAL( isGoldenDictWindow( HWND ) ),
-           this, SIGNAL( isGoldenDictWindow( HWND ) ) );
-#endif
 
   hideTimer.setSingleShot( true );
   hideTimer.setInterval( 400 );
@@ -315,10 +311,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   grabGesture( Gestures::GDPinchGestureType );
   grabGesture( Gestures::GDSwipeGestureType );
-#endif
 
 #ifdef HAVE_X11
   scanFlag = new ScanFlag( this );
@@ -349,10 +343,8 @@ ScanPopup::~ScanPopup()
 
   disableScanning();
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   ungrabGesture( Gestures::GDPinchGestureType );
   ungrabGesture( Gestures::GDSwipeGestureType );
-#endif
 }
 
 void ScanPopup::saveConfigData()
@@ -860,9 +852,10 @@ void ScanPopup::typingEvent( QString const & t )
   }
   else
   {
-    ui.translateBox->translateLine()->setFocus();
-    ui.translateBox->setText( t, true );
-    ui.translateBox->translateLine()->setCursorPosition( t.size() );
+      ui.translateBox->translateLine()->clear();
+      ui.translateBox->translateLine()->setFocus();
+      //    ui.translateBox->setText( t, true );
+      //    ui.translateBox->translateLine()->setCursorPosition( t.size() );
   }
 }
 
@@ -899,7 +892,7 @@ bool ScanPopup::eventFilter( QObject * watched, QEvent * event )
 
     if ( event->type() == QEvent::MouseMove )
     {
-//    DPRINTF( "Object: %s\n", watched->objectName().toUtf8().data() );
+//    GD_DPRINTF( "Object: %s\n", watched->objectName().toUtf8().data() );
       QMouseEvent * mouseEvent = ( QMouseEvent * ) event;
       reactOnMouseMove( mouseEvent->globalPos() );
     }
@@ -912,7 +905,7 @@ void ScanPopup::reactOnMouseMove( QPoint const & p )
 {
   if ( geometry().contains( p ) )
   {
-//        DPRINTF( "got inside\n" );
+//        GD_DPRINTF( "got inside\n" );
 
     hideTimer.stop();
     mouseEnteredOnce = true;
@@ -920,7 +913,7 @@ void ScanPopup::reactOnMouseMove( QPoint const & p )
   }
   else
   {
-//        DPRINTF( "outside\n" );
+//        GD_DPRINTF( "outside\n" );
     // We're in grab mode and outside the window - calculate the
     // distance from it. We might want to hide it.
 
@@ -1030,15 +1023,7 @@ void ScanPopup::requestWindowFocus()
   // One of the rare, actually working workarounds for requesting a user keyboard focus on X11,
   // works for Qt::Popup windows, exactly like our Scan Popup (in unpinned state).
   // Modern window managers actively resist to automatically focus pop-up windows.
-#if defined HAVE_X11 && QT_VERSION < QT_VERSION_CHECK( 5, 0, 0 )
-  if ( !ui.pinButton->isChecked() )
-  {
-    QMenu m( this );
-    m.addAction( "" );
-    m.show();
-    m.hide();
-  }
-#endif
+
 }
 
 void ScanPopup::showEvent( QShowEvent * ev )
@@ -1296,7 +1281,7 @@ void ScanPopup::setDictionaryIconSize()
 {
   int extent = cfg.usingSmallIconsInToolbars ?
                QApplication::style()->pixelMetric( QStyle::PM_SmallIconSize ) :
-               21;
+               QApplication::style()->pixelMetric(QStyle::PM_ToolBarIconSize);
   dictionaryBar.setDictionaryIconSize( extent );
 }
 

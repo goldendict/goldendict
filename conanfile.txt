@@ -1,0 +1,17 @@
+[requires]
+ffmpeg/4.4
+
+[options]
+ffmpeg:shared=True
+ffmpeg:with_libiconv=False
+ffmpeg:with_lzma=False
+ffmpeg:with_freetype=False
+ffmpeg:with_openjpeg=False
+ffmpeg:with_libwebp=False
+ffmpeg:with_ssl=False
+[generators]
+qmake
+
+[imports]
+bin,*.dll->./lib/
+lib,*.lib -> ./lib/

@@ -44,11 +44,9 @@
 #include <QDomDocument>
 #include <QDomNode>
 #include "ufile.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 namespace Stardict {
 
@@ -344,30 +342,21 @@ class PowerWordDataProcessor{
     class PWSyntaxTranslate{
     public:
         PWSyntaxTranslate(const char* re, const char* replacement)
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             : _re(re, QRegularExpression::UseUnicodePropertiesOption )
-#else
-            : _re(re)
-#endif
+
             , _replacement(replacement)
         {
         }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         const QRegularExpression & re() const {
-#else
-        const QRegExp& re() const {
-#endif
+
             return _re;
         }
         const QString & replacement() const {
             return _replacement;
         }
     private:
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         QRegularExpression _re;
-#else
-        QRegExp _re;
-#endif
+
         QString _replacement;
     };
 public:
@@ -436,14 +425,10 @@ private:
             }
             old = s;
         }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         s.replace(QRegularExpression( "&.\\s*\\{",
                                       QRegularExpression::UseUnicodePropertiesOption
                                       | QRegularExpression::DotMatchesEverythingOption),
                   "");
-#else
-        s.replace(QRegExp("&.\\s*\\{"), "");
-#endif
         s.replace("}", "");
     }
 private:
@@ -464,35 +449,24 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
     {
       QString articleText = QString( "<div class=\"sdct_h\">" ) + QString::fromUtf8( resource, size ) + "</div>";
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                                 QRegularExpression::CaseInsensitiveOption
                                 | QRegularExpression::InvertedGreedinessOption );
       QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                                  QRegularExpression::CaseInsensitiveOption
                                  | QRegularExpression::InvertedGreedinessOption );
-#else
-      QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-      imgRe.setMinimal( true );
-      QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-      linkRe.setMinimal( true );
-#endif
+
 
       articleText.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
                  .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
 
       // Handle links to articles
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]",
                                    QRegularExpression::CaseInsensitiveOption );
-#else
-      QRegExp linksReg( "<a(\\s*[^>]*)href\\s*=\\s*['\"](bword://)?([^'\"]+)['\"]", Qt::CaseInsensitive );
-      linksReg.setMinimal( true );
-#endif
+
 
       int pos = 0;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QString articleNewText;
       QRegularExpressionMatchIterator it = linksReg.globalMatch( articleText );
       while( it.hasNext() )
@@ -502,55 +476,33 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
         pos = match.capturedEnd();
 
         QString link = match.captured( 3 );
-#else
-      while( pos >= 0 )
-      {
-        pos = linksReg.indexIn( articleText, pos );
-        if( pos < 0 )
-          break;
 
-        QString link = linksReg.cap( 3 );
-#endif
         if( link.indexOf( ':' ) < 0 )
         {
           QString newLink;
           if( link.indexOf( '#' ) < 0 )
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             newLink = QString( "<a" ) + match.captured( 1 ) + "href=\"bword:" + link + "\"";
-#else
-            newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"bword:" + link + "\"";
-#endif
+
 
           // Anchors
 
           if( link.indexOf( '#' ) > 0 )
           {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             newLink = QString( "<a" ) + match.captured( 1 ) + "href=\"gdlookup://localhost/" + link + "\"";
-#else
-            newLink = QString( "<a" ) + linksReg.cap( 1 ) + "href=\"gdlookup://localhost/" + link + "\"";
-#endif
+
             newLink.replace( "#", "?gdanchor=" );
           }
 
           if( !newLink.isEmpty() )
           {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             articleNewText += newLink;
-#else
-            articleText.replace( pos, linksReg.cap( 0 ).size(), newLink );
-            pos += newLink.size();
-#endif
+
           }
           else
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             articleNewText += match.captured();
-#else
-            pos += linksReg.cap( 0 ).size();
-#endif
+
         }
         else
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
           articleNewText += match.captured();
       }
       if( pos )
@@ -559,26 +511,18 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
         articleText = articleNewText;
         articleNewText.clear();
       }
-#else
-          pos += linksReg.cap( 0 ).size();
-      }
-#endif
+
 
       // Handle "audio" tags
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>",
                                   QRegularExpression::CaseInsensitiveOption
                                   | QRegularExpression::DotMatchesEverythingOption
                                   | QRegularExpression::InvertedGreedinessOption );
-#else
-      QRegExp audioRe( "<\\s*audio\\s*src\\s*=\\s*([\"']+)([^\"']+)([\"'])\\s*>(.*)</audio>", Qt::CaseInsensitive );
-      audioRe.setMinimal( true );
-#endif
+
 
       pos = 0;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       it = audioRe.globalMatch( articleText );
       while( it.hasNext() )
       {
@@ -587,51 +531,30 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
         pos = match.capturedEnd();
 
         QString src = match.captured( 2 );
-#else
-      while( pos >= 0 )
-      {
-        pos = audioRe.indexIn( articleText, pos );
-        if( pos < 0 )
-          break;
 
-        QString src = audioRe.cap( 2 );
-#endif
         if( src.indexOf( "://" ) >= 0 )
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
           articleNewText += match.captured();
-#else
-          pos += audioRe.cap( 0 ).length();
-#endif
+
         else
         {
           std::string href = "\"gdau://" + getId() + "/" + src.toUtf8().data() + "\"";
           QString newTag = QString::fromUtf8( ( addAudioLink( href, getId() ) + "<span class=\"sdict_h_wav\"><a href=" + href + ">" ).c_str() );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
           newTag += match.captured( 4 );
           if( match.captured( 4 ).indexOf( "<img " ) < 0 )
-#else
-          newTag += audioRe.cap( 4 );
-          if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
-#endif
+
             newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
           newTag += "</a></span>";
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
           articleNewText += newTag;
-#else
-          articleText.replace( pos, audioRe.cap( 0 ).length(), newTag );
-          pos += newTag.length();
-#endif
+
         }
       }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       if( pos )
       {
         articleNewText += articleText.midRef( pos );
         articleText = articleNewText;
         articleNewText.clear();
       }
-#endif
 
       return ( articleText.toUtf8().data() );
     }
@@ -712,7 +635,7 @@ void StardictDictionary::pangoToHtml( QString & text )
           {
             // Parse font description
 
-            QStringList list = styleRegex.cap( 2 ).split( " ", QString::SkipEmptyParts );
+            QStringList list = styleRegex.cap( 2 ).split( " ", Qt::SkipEmptyParts );
             int n;
             QString sizeStr, stylesStr, familiesStr;
             for( n = list.size() - 1; n >= 0; n-- )
@@ -1340,7 +1263,7 @@ void StardictHeadwordsRequestRunnable::run()
 
 void StardictHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1354,7 +1277,7 @@ void StardictHeadwordsRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1463,7 +1386,7 @@ void StardictArticleRequestRunnable::run()
 
 void StardictArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1494,7 +1417,7 @@ void StardictArticleRequest::run()
 
     for( unsigned x = 0; x < chain.size(); ++x )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         finish();
         return;
@@ -1541,11 +1464,10 @@ void StardictArticleRequest::run()
 
     multimap< wstring, pair< string, string > >::const_iterator i;
 
-    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>";
-
+    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+    string cleaner = "";
     for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
     {
         result += dict.isFromLanguageRTL() ? "<h3 class=\"sdct_headwords\" dir=\"rtl\">" : "<h3 class=\"sdct_headwords\">";
@@ -1612,8 +1534,8 @@ Ifo::Ifo( File::Class & f ):
 
   static string const booknameEq( "bookname=" );
 
-  //DPRINTF( "%s<\n", f.gets().c_str() );
-  //DPRINTF( "%s<\n", f.gets().c_str() );
+  //GD_DPRINTF( "%s<\n", f.gets().c_str() );
+  //GD_DPRINTF( "%s<\n", f.gets().c_str() );
 
   if ( QString::fromUtf8(f.gets().c_str()) != "StarDict's dict ifo file" ||
        f.gets().compare( 0, versionEq.size(), versionEq ) )
@@ -1756,7 +1678,7 @@ void StardictResourceRequestRunnable::run()
 void StardictResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1845,7 +1767,6 @@ void StardictResourceRequest::run()
       QString id = QString::fromUtf8( dict.getId().c_str() );
       int pos = 0;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
                                 QRegularExpression::CaseInsensitiveOption );
 
@@ -1876,28 +1797,6 @@ void StardictResourceRequest::run()
         css = newCSS;
         newCSS.clear();
       }
-#else
-      QRegExp links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)", Qt::CaseInsensitive, QRegExp::RegExp );
-      for( ; ; )
-      {
-        pos = links.indexIn( css, pos );
-        if( pos < 0 )
-          break;
-        QString url = links.cap( 2 );
-
-        if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0)
-        {
-          // External link
-          pos += links.cap().size();
-          continue;
-        }
-
-        QString newUrl = QString( "url(" ) + links.cap( 1 ) + "bres://"
-                                           + id + "/" + url + links.cap( 3 ) + ")";
-        css.replace( pos, links.cap().size(), newUrl );
-        pos += newUrl.size();
-      }
-#endif
 
       dict.isolateCSS( css );
       QByteArray bytes = css.toUtf8();

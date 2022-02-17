@@ -4,7 +4,7 @@
 #ifndef __ARTICLEVIEW_HH_INCLUDED__
 #define __ARTICLEVIEW_HH_INCLUDED__
 
-#include <QWebView>
+#include <QWebEngineView>
 #include <QMap>
 #include <QUrl>
 #include <QSet>
@@ -14,8 +14,10 @@
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
+#include "globalbroadcaster.h"
 
 class ResourceToSaveHandler;
+class ArticleViewAgent ;
 
 /// A widget with the web view tailored to view and handle articles -- it
 /// uses the appropriate netmgr, handles link clicks, rmb clicks etc
@@ -29,7 +31,8 @@ class ArticleView: public QFrame
   Instances::Groups const & groups;
   bool popupView;
   Config::Class const & cfg;
-
+  QWebChannel *channel;
+  ArticleViewAgent * agent;
   Ui::ArticleView ui;
 
   QAction pasteAction, articleUpAction, articleDownAction,
@@ -40,6 +43,9 @@ class ArticleView: public QFrame
   bool expandOptionalParts;
   QString articleToJump;
   QString rangeVarName;
+
+  //used to hold the F12 inspect source view.
+  QWebEngineView *inspectView = nullptr;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -52,7 +58,16 @@ class ArticleView: public QFrame
   QSet< QString > desktopOpenedTempFiles;
 
   QAction * dictionaryBarToggled;
-  GroupComboBox const * groupComboBox;
+  GroupComboBox const *groupComboBox;
+
+  /// current searching word.
+  QString currentWord;
+
+  /// current active dict id list;
+  QStringList currentActiveDictIds;
+
+  //current active dictionary id;
+  QString activeDictId;
 
   /// Search in results of full-text search
   QStringList allMatches;
@@ -92,6 +107,10 @@ public:
 
   /// Returns "gdfrom-" + dictionaryId.
   static QString scrollToFromDictionaryId( QString const & dictionaryId );
+
+  QString runJavaScriptSync(QWebEnginePage* frame, const QString& variable);
+
+  void emitJavascriptFinished();
 
   /// Shows the definition of the given word with the given group.
   /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
@@ -135,6 +154,8 @@ public:
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
 
+  QString getWebPageTextSync(QWebEnginePage * page);
+
 public slots:
 
   /// Goes back in history
@@ -160,10 +181,19 @@ public:
   void playSound();
 
   void setZoomFactor( qreal factor )
-  { ui.definition->setZoomFactor( factor ); }
+  {
+    if(ui.definition->zoomFactor()!=factor){
+      qDebug()<<"set zoom factor:"<<factor;
+      ui.definition->setZoomFactor( factor );
+      ui.definition->page()->setZoomFactor(factor);
+    }
+  }
 
   /// Returns current article's text in .html format
   QString toHtml();
+
+  void setHtml(const QString& content, const QUrl& baseUrl);
+  void setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
 
   /// Returns current article's title
   QString getTitle();
@@ -190,6 +220,7 @@ public:
 
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
+   void setActiveArticleId(QString const&);
 
   ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
   ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
@@ -222,6 +253,8 @@ signals:
 
   /// Signals that the dictionaries pane was requested to be showed
   void showDictsPane( );
+  /// Signals that the founded dictionaries ready to be showed
+  void updateFoundInDictsList( );
 
   /// Emitted when an article becomes active,
   /// typically in response to user actions
@@ -245,6 +278,9 @@ signals:
   void zoomIn();
   void zoomOut();
 
+  ///  signal finished javascript;
+  void notifyJavascriptFinished();
+
 public slots:
 
   void on_searchPrevious_clicked();
@@ -261,15 +297,19 @@ public slots:
 
   /// Selects an entire text of the current article
   void selectCurrentArticle();
-
+  //receive signal from weburlinterceptor.
+  void linkClicked( QUrl const & );
+  //aim to receive signal from html. the fragment url click to  navigation through page wil not be intecepted by weburlinteceptor
+  Q_INVOKABLE void linkClickedInHtml( QUrl const & );
 private slots:
 
   void loadFinished( bool ok );
+  void loadProgress(int);
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
-  void attachToJavaScript();
-  void linkClicked( QUrl const & );
-  void linkHovered( const QString & link, const QString & title, const QString & textContent );
+  void attachWebChannelToHtml();
+
+  void linkHovered( const QString & link);
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();
@@ -307,12 +347,13 @@ private slots:
   /// Inspect element
   void inspect();
 
+  void setActiveDictIds(ActiveDictIds);
+
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
   unsigned getGroup( QUrl const & );
-
 
   /// Returns current article in the view, in the form of "gdfrom-xxx" id.
   QString getCurrentArticle();
@@ -336,7 +377,7 @@ private:
 
   /// Use the known information about the current frame to update the current
   /// article's value.
-  void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
+  void updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame = 0 ,QPoint * point=0);
 
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
@@ -349,14 +390,18 @@ private:
 
   void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
 
+  bool findText(QString& text, const QWebEnginePage::FindFlags& f);
+
   void reloadStyleSheet();
 
   /// Returns the comma-separated list of dictionary ids which should be muted
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );
 
-protected:
+  QStringList getMutedDictionaries(unsigned group);
 
+
+  protected:
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
 
@@ -367,7 +412,7 @@ protected:
 private:
   QString insertSpans( QString const & html );
   void readTag( QString const & from, QString & to, int & count );
-  QString checkElement( QWebElement & elem, const QPoint & pt );
+  QString checkElement( QWebEnginePage & elem, const QPoint & pt );
 public:
   QString wordAtPoint( int x, int y );
 #endif
@@ -395,6 +440,22 @@ private:
   std::list< sptr< Dictionary::DataRequest > > downloadRequests;
   QString fileName;
   bool alreadyDone;
+};
+
+class ArticleViewAgent : public QObject
+{
+    Q_OBJECT
+    ArticleView* articleView;
+  public:
+    explicit ArticleViewAgent(QObject *parent = nullptr);
+    ArticleViewAgent(ArticleView* articleView);
+
+  signals:
+
+  public slots:
+    Q_INVOKABLE void onJsActiveArticleChanged(QString const & id);
+    Q_INVOKABLE void linkClickedInHtml( QUrl const & );
+
 };
 
 #endif

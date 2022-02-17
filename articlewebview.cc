@@ -3,19 +3,16 @@
 
 #include "articlewebview.hh"
 #include <QMouseEvent>
-#include <QWebFrame>
+#include <QWebEngineView>
 #include <QApplication>
-#include "articleinspector.hh"
+#include <QTimer>
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
 #endif
 
 ArticleWebView::ArticleWebView( QWidget *parent ):
-  QWebView( parent ),
-#if QT_VERSION >= 0x040600
-  inspector( NULL ),
-#endif
+  QWebEngineView( parent ),
   midButtonPressed( false ),
   selectionBySingleClick( false ),
   showInspectorDirectly( true )
@@ -24,10 +21,6 @@ ArticleWebView::ArticleWebView( QWidget *parent ):
 
 ArticleWebView::~ArticleWebView()
 {
-#if QT_VERSION >= 0x040600
-  if ( inspector )
-    inspector->deleteLater();
-#endif
 }
 
 void ArticleWebView::setUp( Config::Class * cfg )
@@ -35,109 +28,127 @@ void ArticleWebView::setUp( Config::Class * cfg )
   this->cfg = cfg;
 }
 
-void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked )
+void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
 {
-#if QT_VERSION >= 0x040600
-  if ( action == QWebPage::InspectElement )
-  {
-    // Get or create inspector instance for current view.
-    if ( !inspector )
-    {
-      inspector = new ArticleInspector( cfg );
-      inspector->setPage( page() );
-      connect( this, SIGNAL( destroyed() ), inspector, SLOT( beforeClosed() ) );
-    }
-
-    if ( showInspectorDirectly )
-    {
-      showInspectorDirectly = false;
-      // Bring up the inspector window and set focus
-      inspector->show();
-      inspector->activateWindow();
-      inspector->raise();
-      return;
-    }
-  }
-#endif
-
-  QWebView::triggerPageAction( action, checked );
+  QWebEngineView::triggerPageAction( action, checked );
 }
 
 bool ArticleWebView::event( QEvent * event )
 {
-  switch ( event->type() )
-  {
-  case QEvent::MouseButtonRelease:
-  case QEvent::MouseButtonDblClick:
-    showInspectorDirectly = true;
-    break;
+    if (event->type() == QEvent::ChildAdded) {
+        QChildEvent *child_ev = static_cast<QChildEvent *>(event);
 
-  case QEvent::ContextMenu:
-    showInspectorDirectly = false;
-    break;
+//      // there is also QObject child that should be ignored here;
+//      // use only QOpenGLWidget child
+//      QOpenGLWidget *w = static_cast<QOpenGLWidget*>(child_ev->child());
 
-  default:
-    break;
-  }
+        child_ev->child()->installEventFilter(this);
+    }
 
-  return QWebView::event( event );
+    return QWebEngineView::event(event);
 }
 
-void ArticleWebView::mousePressEvent( QMouseEvent * event )
+void ArticleWebView::linkClickedInHtml(QUrl const& ){
+  //disable single click to simulate dbclick action on the new loaded pages.
+  singleClickToDbClick=false;
+}
+
+bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
+    if (ev->type() == QEvent::MouseButtonDblClick) {
+      QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+      if (Qt::MouseEventSynthesizedByApplication != pe->source()) {
+        singleClickToDbClick = false;
+        dbClicked = true;
+      }
+    }
+    if (ev->type()==QEvent::MouseMove) {
+      singleClickToDbClick=false;
+    }
+    if (ev->type() == QEvent::MouseButtonPress) {
+        QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+        if(pe->button() == Qt::LeftButton)
+        {
+          singleClickToDbClick = true;
+          dbClicked = false;
+          QTimer::singleShot(QApplication::doubleClickInterval(),this,[=](){
+            singleClickAction(pe);
+          });
+        }
+        mousePressEvent(pe);
+    }
+    if (ev->type() == QEvent::MouseButtonRelease) {
+        QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
+        mouseReleaseEvent(pe);
+        if (dbClicked) {
+          //emit the signal after button release.emit earlier(in MouseButtonDblClick event) can not get selected text;
+            doubleClickAction(pe);
+        }
+    }
+    if (ev->type() == QEvent::Wheel) {
+        QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
+        wheelEvent(pe);
+    }
+    if (ev->type() == QEvent::FocusIn) {
+        QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
+        focusInEvent(pe);
+    }
+
+    return QWebEngineView::eventFilter(obj, ev);
+}
+
+void ArticleWebView::mousePressEvent(QMouseEvent *event)
 {
-  if ( event->buttons() & Qt::MidButton )
-    midButtonPressed = true;
+    if (event->buttons() & Qt::MidButton)
+        midButtonPressed = true;
+}
 
-  QWebView::mousePressEvent( event );
+void ArticleWebView::singleClickAction(QMouseEvent *event )
+{
+  if(!singleClickToDbClick)
+    return;
 
-  if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
-  {
-    findText(""); // clear the selection first, if any
-    QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
-    QApplication::sendEvent( page(), &ev );
+  if (selectionBySingleClick) {
+      findText(""); // clear the selection first, if any
+      //send dbl click event twice? send one time seems not work .weird really.  need further investigate.
+      sendCustomMouseEvent( QEvent::MouseButtonDblClick);
+      sendCustomMouseEvent( QEvent::MouseButtonDblClick);
   }
 }
 
-void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
-{
+void ArticleWebView::sendCustomMouseEvent( QEvent::Type type) {
+  QPoint pt = mapFromGlobal(QCursor::pos());
+  QMouseEvent ev(type, pt, pt, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier,
+                 Qt::MouseEventSynthesizedByApplication);
+
+  auto childrens = this->children();
+  for (auto child:childrens) {
+    QApplication::sendEvent(child, &ev);
+  }
+}
+
+void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
   bool noMidButton = !( event->buttons() & Qt::MidButton );
-
-  QWebView::mouseReleaseEvent( event );
 
   if ( midButtonPressed & noMidButton )
     midButtonPressed = false;
 }
 
-void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
-{
-  QWebView::mouseDoubleClickEvent( event );
-#if QT_VERSION >= 0x040600
-  int scrollBarWidth = page()->mainFrame()->scrollBarGeometry( Qt::Vertical ).width();
-  int scrollBarHeight = page()->mainFrame()->scrollBarGeometry( Qt::Horizontal ).height();
-#else
-  int scrollBarWidth = 0;
-  int scrollBarHeight = 0;
-#endif
-
-  // emit the signal only if we are not double-clicking on scrollbars
-  if ( ( event->x() < width() - scrollBarWidth ) &&
-       ( event->y() < height() - scrollBarHeight ) )
-  {
-    emit doubleClicked( event->pos() );
+void ArticleWebView::doubleClickAction(QMouseEvent *event) {
+  if (Qt::MouseEventSynthesizedByApplication != event->source()) {
+    emit doubleClicked(event->pos());
   }
-
 }
 
 void ArticleWebView::focusInEvent( QFocusEvent * event )
 {
-  QWebView::focusInEvent( event );
+  QWebEngineView::focusInEvent( event );
 
   switch( event->reason() )
   {
     case Qt::MouseFocusReason:
     case Qt::TabFocusReason:
     case Qt::BacktabFocusReason:
-      page()->mainFrame()->evaluateJavaScript("top.focus();");
+      page()->runJavaScript("top.focus();");
       break;
 
     default:
@@ -149,7 +160,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
 {
 #ifdef Q_OS_WIN32
 
-  // Avoid wrong mouse wheel handling in QWebView
+  // Avoid wrong mouse wheel handling in QWebEngineView
   // if system preferences is set to "scroll by page"
 
   if( ev->modifiers() == Qt::NoModifier )
@@ -160,7 +171,10 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
     {
       QKeyEvent kev( QEvent::KeyPress, ev->delta() > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
                      Qt::NoModifier );
-      QApplication::sendEvent( this, &kev );
+      auto childrens = this->children();
+      for (auto child : childrens) {
+        QApplication::sendEvent(child, &kev);
+      }
 
       ev->accept();
       return;
@@ -174,7 +188,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
   }
   else
   {
-     QWebView::wheelEvent( ev );
+     QWebEngineView::wheelEvent( ev );
   }
 
 }

@@ -70,6 +70,8 @@ pre
 /* Appears between the articles */
 .gdarticleseparator
 {
+  display: inline-block;
+  clear: both;
 }
 
 /* Dictionary query error description string */

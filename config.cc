@@ -20,15 +20,11 @@
 #endif
 
 #include "atomic_rename.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
-#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#if defined( HAVE_X11 )
 // Whether XDG Base Directory specification might be followed.
 // Only Qt5 builds are supported, as Qt4 doesn't provide all functions needed
 // to get XDG Base Directory compliant locations.
@@ -237,9 +233,6 @@ Preferences::Preferences():
   scanPopupAltMode( false ),
   scanPopupAltModeSecs( 3 ),
   ignoreOwnClipboardChanges( false ),
-  scanPopupUseUIAutomation( true ),
-  scanPopupUseIAccessibleEx( true ),
-  scanPopupUseGDMessage( true ),
   scanPopupUnpinnedWindowFlags( SPWF_default ),
   scanPopupUnpinnedBypassWMHint( false ),
   scanToMainWindow( false ),
@@ -278,7 +271,6 @@ Preferences::Preferences():
 {
 }
 
-#ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 Chinese::Chinese():
   enable( false ),
   enableSCToTWConversion( true ),
@@ -286,7 +278,6 @@ Chinese::Chinese():
   enableTCToSCConversion( true )
 {
 }
-#endif
 
 Romaji::Romaji():
   enable( false ),
@@ -407,17 +398,17 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
 
-  for( Qt4x5::Dom::size_type y = 0; y < dicts.length(); ++y )
+  for( Utils::Dom::size_type y = 0; y < dicts.length(); ++y )
     g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
                                              dicts.item( y ).toElement().attribute( "name" ) ) );
 
   QDomNode muted = grp.namedItem( "mutedDictionaries" );
   dicts = muted.toElement().elementsByTagName( "mutedDictionary" );
-  for( Qt4x5::Dom::size_type x = 0; x < dicts.length(); ++x )
+  for( Utils::Dom::size_type x = 0; x < dicts.length(); ++x )
     g.mutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   dicts = muted.toElement().elementsByTagName( "popupMutedDictionary" );
-  for( Qt4x5::Dom::size_type x = 0; x < dicts.length(); ++x )
+  for( Utils::Dom::size_type x = 0; x < dicts.length(); ++x )
     g.popupMutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   return g;
@@ -432,7 +423,7 @@ MutedDictionaries loadMutedDictionaries( QDomNode mutedDictionaries )
     QDomNodeList nl = mutedDictionaries.toElement().
                         elementsByTagName( "mutedDictionary" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
       result.insert( nl.item( x ).toElement().text() );
   }
 
@@ -595,7 +586,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = paths.toElement().elementsByTagName( "path" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
       c.paths.push_back(
         Path( nl.item( x ).toElement().text(),
               nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
@@ -607,7 +598,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = soundDirs.toElement().elementsByTagName( "sounddir" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
       c.soundDirs.push_back(
         SoundDir( nl.item( x ).toElement().text(),
                   nl.item( x ).toElement().attribute( "name" ),
@@ -632,7 +623,7 @@ Class load() THROW_SPEC( exError )
 
     QDomNodeList nl = groups.toElement().elementsByTagName( "group" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement grp = nl.item( x ).toElement();
 
@@ -648,7 +639,7 @@ Class load() THROW_SPEC( exError )
 
     QDomNodeList nl = hunspell.toElement().elementsByTagName( "enabled" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
       c.hunspell.enabledDictionaries.push_back( nl.item( x ).toElement().text() );
   }
 
@@ -712,7 +703,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = programs.toElement().elementsByTagName( "program" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement pr = nl.item( x ).toElement();
 
@@ -739,7 +730,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = mws.toElement().elementsByTagName( "mediawiki" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement mw = nl.item( x ).toElement();
 
@@ -767,7 +758,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = wss.toElement().elementsByTagName( "website" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ws = nl.item( x ).toElement();
 
@@ -795,7 +786,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = dss.toElement().elementsByTagName( "server" );
 
-    for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ds = nl.item( x ).toElement();
 
@@ -824,7 +815,7 @@ Class load() THROW_SPEC( exError )
   {
     QDomNodeList nl = ves.toElement().elementsByTagName( "voiceEngine" );
 
-    for ( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+    for ( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
     {
       QDomElement ve = nl.item( x ).toElement();
       VoiceEngine v;
@@ -903,9 +894,6 @@ Class load() THROW_SPEC( exError )
 #ifdef HAVE_X11
     c.preferences.showScanFlag= ( preferences.namedItem( "showScanFlag" ).toElement().text() == "1" );
 #endif
-    c.preferences.scanPopupUseUIAutomation = ( preferences.namedItem( "scanPopupUseUIAutomation" ).toElement().text() == "1" );
-    c.preferences.scanPopupUseIAccessibleEx = ( preferences.namedItem( "scanPopupUseIAccessibleEx" ).toElement().text() == "1" );
-    c.preferences.scanPopupUseGDMessage = ( preferences.namedItem( "scanPopupUseGDMessage" ).toElement().text() == "1" );
     c.preferences.scanPopupUnpinnedWindowFlags = spwfFromInt( preferences.namedItem( "scanPopupUnpinnedWindowFlags" ).toElement().text().toInt() );
     c.preferences.scanPopupUnpinnedBypassWMHint = ( preferences.namedItem( "scanPopupUnpinnedBypassWMHint" ).toElement().text() == "1" );
 
@@ -1811,18 +1799,6 @@ void save( Class const & c ) THROW_SPEC( exError )
     preferences.appendChild( opt );
 #endif
 
-    opt = dd.createElement( "scanPopupUseUIAutomation" );
-    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseUIAutomation ? "1":"0" ) );
-    preferences.appendChild( opt );
-
-    opt = dd.createElement( "scanPopupUseIAccessibleEx" );
-    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseIAccessibleEx ? "1":"0" ) );
-    preferences.appendChild( opt );
-
-    opt = dd.createElement( "scanPopupUseGDMessage" );
-    opt.appendChild( dd.createTextNode( c.preferences.scanPopupUseGDMessage ? "1":"0" ) );
-    preferences.appendChild( opt );
-
     opt = dd.createElement( "scanPopupUnpinnedWindowFlags" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.scanPopupUnpinnedWindowFlags ) ) );
     preferences.appendChild( opt );
@@ -2387,15 +2363,11 @@ QString getStylesDir() throw()
 QString getCacheDir() throw()
 {
   return isPortableVersion() ? portableHomeDirPath() + "/cache"
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   #ifdef HAVE_X11
                              : QStandardPaths::writableLocation( QStandardPaths::GenericCacheLocation ) + "/goldendict";
   #else
                              : QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
   #endif
-#else
-                             : QDesktopServices::storageLocation( QDesktopServices::CacheLocation );
-#endif
 }
 
 QString getNetworkCacheDir() throw()

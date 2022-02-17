@@ -12,57 +12,10 @@
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
+#include <QNetworkAccessManager>
 
 using std::string;
-
-#if QT_VERSION >= 0x050300 // Qt 5.3+
-
-  // SecurityWhiteList
-
-  SecurityWhiteList & SecurityWhiteList::operator=( SecurityWhiteList const & swl )
-  {
-    swlDelete();
-    swlCopy( swl );
-    return *this;
-  }
-
-  QWebSecurityOrigin * SecurityWhiteList::setOrigin( QUrl const & url )
-  {
-    swlDelete();
-    originUri = url.toString( QUrl::PrettyDecoded );
-    origin = new QWebSecurityOrigin( url );
-    return origin;
-  }
-
-  void SecurityWhiteList::swlCopy( SecurityWhiteList const & swl )
-  {
-    if( swl.origin )
-    {
-      hostsToAccess = swl.hostsToAccess;
-      originUri = swl.originUri;
-      origin = new QWebSecurityOrigin( QUrl( originUri ) );
-
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->addAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-    }
-  }
-
-  void SecurityWhiteList::swlDelete()
-  {
-    if( origin )
-    {
-      for( QSet< QPair< QString, QString > >::iterator it = hostsToAccess.begin();
-           it != hostsToAccess.end(); ++it )
-        origin->removeAccessWhitelistEntry( it->first, it->second, QWebSecurityOrigin::AllowSubdomains );
-
-      delete origin;
-      origin = 0;
-    }
-    hostsToAccess.clear();
-    originUri.clear();
-  }
 
   // AllowFrameReply
 
@@ -200,7 +153,6 @@ using std::string;
     return size;
   }
 
-#endif
 
 namespace
 {
@@ -255,46 +207,34 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
-    // Workaround of same-origin policy
-    if( ( req.url().scheme().startsWith( "http" ) || req.url().scheme() == "ftp" )
-        && req.hasRawHeader( "Referer" ) )
-    {
-      QByteArray referer = req.rawHeader( "Referer" );
-      QUrl refererUrl = QUrl::fromEncoded( referer );
+    QUrl url=req.url();
+    QMimeType mineType=db.mimeTypeForUrl (url);
+    QString contentType=mineType.name();
 
-      if( refererUrl.scheme().startsWith( "http") || refererUrl.scheme() == "ftp" )
-      {
-        // Only for pages from network resources
-        if ( !req.url().host().endsWith( refererUrl.host() ) )
-        {
-          QUrl frameUrl;
-          frameUrl.setScheme( refererUrl.scheme() );
-          frameUrl.setHost( refererUrl.host() );
-          QString frameStr = frameUrl.toString( QUrl::PrettyDecoded );
+    if(req.url().scheme()=="gdlookup"){
+        QString path=url.path();
+        if(!path.isEmpty()){
+            Utils::Url::addQueryItem(url,"word",path.mid(1));
+            url.setPath("");
+            Utils::Url::addQueryItem(url,"group","1");
 
-          SecurityWhiteList & value = allOrigins[ frameStr ];
-          if( !value.origin )
-            value.setOrigin( frameUrl );
-
-          QPair< QString, QString > target( req.url().scheme(), req.url().host() );
-          if( value.hostsToAccess.find( target ) == value.hostsToAccess.end() )
-          {
-            value.hostsToAccess.insert( target );
-            value.origin->addAccessWhitelistEntry( target.first, target.second,
-                                                   QWebSecurityOrigin::AllowSubdomains );
-          }
         }
-      }
     }
-#endif
 
-    QString contentType;
-
-    sptr< Dictionary::DataRequest > dr = getResource( req.url(), contentType );
+    sptr< Dictionary::DataRequest > dr = getResource( url, contentType );
 
     if ( dr.get() )
       return new ArticleResourceReply( this, req, dr, contentType );
+
+    //dr.get() can be null. code continue to execute.
+  }
+
+  //can not match dictionary in the above code,means the url must be external links.
+  //if not external url,can be blocked from here. no need to continue execute the following code.
+  //such as bres://upload.wikimedia....  etc .
+  if (!Utils::isExternalLink(req.url())) {
+    gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
+    return new BlockedNetworkReply( this );
   }
 
   // Check the Referer. If the user has opted-in to block elements from external
@@ -304,11 +244,11 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     QByteArray referer = req.rawHeader( "Referer" );
 
-    //DPRINTF( "Referer: %s\n", referer.data() );
+    //GD_DPRINTF( "Referer: %s\n", referer.data() );
 
     QUrl refererUrl = QUrl::fromEncoded( referer );
 
-    //DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
+    //GD_DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
     //        getHostBase( refererUrl ).toUtf8().data() );
 
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
@@ -330,7 +270,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       QUrl localUrl = QUrl::fromLocalFile( fileName );
 
       newUrl.setHost( localUrl.host() );
-      newUrl.setPath( Qt4x5::Url::ensureLeadingSlash( localUrl.path() ) );
+      newUrl.setPath( Utils::Url::ensureLeadingSlash( localUrl.path() ) );
 
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
@@ -339,18 +279,14 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     }
   }
 
-  QNetworkReply *reply = 0;
-
   // spoof User-Agent
+  QNetworkRequest newReq(req);
   if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
   {
-    QNetworkRequest newReq( req );
     newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
-    reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
   }
 
-  if( !reply )
-    reply = QNetworkAccessManager::createRequest( op, req, outgoingData );
+  QNetworkReply *  reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
 
   if( req.url().scheme() == "https")
   {
@@ -360,12 +296,8 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
-#else
-  return reply;
-#endif
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
@@ -385,16 +317,16 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     contentType = "text/html";
 
-    if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
+    if ( Utils::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
-    Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
-                                 Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
+    Config::InputPhrase phrase ( Utils::Url::queryItemValue( url, "word" ).trimmed(),
+                                 Utils::Url::queryItemValue( url, "punctuation_suffix" ) );
 
     bool groupIsValid = false;
-    unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+    unsigned group = Utils::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
    
-    QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
+    QString dictIDs = Utils::Url::queryItemValue( url, "dictionaries" );
     if( !dictIDs.isEmpty() )
     {
       // Individual dictionaries set from full-text search
@@ -405,13 +337,13 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     // See if we have some dictionaries muted
 
     QSet< QString > mutedDicts =
-        QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
+        QSet< QString >::fromList( Utils::Url::queryItemValue( url, "muted" ).split( ',' ) );
 
     // Unpack contexts
 
     QMap< QString, QString > contexts;
 
-    QString contextsEncoded = Qt4x5::Url::queryItemValue( url, "contexts" );
+    QString contextsEncoded = Utils::Url::queryItemValue( url, "contexts" );
 
     if ( contextsEncoded.size() )
     {
@@ -428,7 +360,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     // See for ignore diacritics
 
-    bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
+    bool ignoreDiacritics = Utils::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
 
     if ( groupIsValid && phrase.isValid() ) // Require group and phrase to be passed
       return articleMaker.makeDefinitionFor( phrase, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
@@ -437,8 +369,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&
        url.path().size() )
   {
-    //DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
-    //DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
+    //GD_DPRINTF( "Get %s\n", req.url().host().toLocal8Bit().data() );
+    //GD_DPRINTF( "Get %s\n", req.url().path().toLocal8Bit().data() );
 
     string id = url.host().toStdString();
 
@@ -463,7 +395,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
             try
             {
-              return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
+              return  dictionaries[ x ]->getResource( Utils::Url::path( url ).mid( 1 ).toUtf8().data() );
             }
             catch( std::exception & e )
             {
@@ -473,30 +405,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
         }
     }
-    else
-    {
-      // We don't do search requests for now
-#if 0
-      for( unsigned x = 0; x < dictionaries.size(); ++x )
-      {
-        if ( search || dictionaries[ x ]->getId() == id )
-        {
-          try
-          {
-            dictionaries[ x ]->getResource( url.path().mid( 1 ).toUtf8().data(),
-                                            data );
 
-            return true;
-          }
-          catch( Dictionary::exNoSuchResource & )
-          {
-            if ( !search )
-              break;
-          }
-        }
-      }
-#endif      
-    }
   }
 
   if ( url.scheme() == "gdpicture" )
@@ -517,8 +426,8 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
   QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
 {
   setRequest( netReq );
-
   setOpenMode( ReadOnly );
+  setUrl(netReq.url());
 
   if ( contentType.size() )
     setHeader( QNetworkRequest::ContentTypeHeader, contentType );
@@ -534,7 +443,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
     connect( this, SIGNAL( readyReadSignal() ),
              this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
     connect( this, SIGNAL( finishedSignal() ),
-             this, SLOT( finishedSlot() ), Qt::QueuedConnection );
+            this, SLOT( finishedSlot() ), Qt::QueuedConnection );
 
     emit readyReadSignal();
 
@@ -579,8 +488,6 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   if ( maxSize == 0 )
     return 0;
 
-  GD_DPRINTF( "====reading %d bytes\n", (int)maxSize );
-
   bool finished = req->isFinished();
   
   qint64 avail = req->dataSize();
@@ -591,6 +498,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   qint64 left = avail - alreadyRead;
   
   qint64 toRead = maxSize < left ? maxSize : left;
+  GD_DPRINTF( "====reading %d bytes\n", (int)toRead );
 
   try
   {
@@ -611,15 +519,22 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 
 void ArticleResourceReply::readyReadSlot()
 {
-  readyRead();
+  emit readyRead();
 }
 
 void ArticleResourceReply::finishedSlot()
 {
-  if ( req->dataSize() < 0 )
-    error( ContentNotFoundError );
+  if (req->dataSize() < 0) {
+    emit error(ContentNotFoundError);
+    setError(ContentNotFoundError, "content not found");
+  }
 
-  finished();
+  //prevent sent multi times.
+  if (!finishSignalSent.loadAcquire())
+  {
+    finishSignalSent.ref();
+    emit finished();
+  }
 }
 
 BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
@@ -638,3 +553,21 @@ void BlockedNetworkReply::finishedSlot()
   emit readyRead();
   emit finished();
 }
+
+LocalSchemeHandler::LocalSchemeHandler(ArticleNetworkAccessManager& articleNetMgr):mManager(articleNetMgr){
+
+}
+
+void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
+{
+    QUrl url = requestJob->requestUrl();
+
+    QNetworkRequest request;
+    request.setUrl( url );
+
+    QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request);
+    connect(reply,&QNetworkReply::finished,requestJob,[=](){
+        requestJob->reply("text/html",reply);
+    });
+}
+

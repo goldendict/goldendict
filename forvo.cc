@@ -14,7 +14,7 @@
 #include "langcoder.hh"
 #include "utf8.hh"
 #include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Forvo {
 
@@ -95,31 +95,6 @@ void ForvoDictionary::loadIcon() throw()
   if ( dictionaryIconLoaded )
     return;
 
-// Experimental code to generate icon -- but the flags clutter the interface too
-// much and we're better with a single icon.
-#if 0
-  if ( languageCode.size() == 2 )
-  {
-    QString countryCode = Language::countryCodeForId( LangCoder::code2toInt( languageCode.toLatin1().data() ) );
-
-    if ( countryCode.size() )
-    {
-      QImage flag( QString( ":/flags/%1.png" ).arg( countryCode.toLower() ) );
-
-      if ( !flag.isNull() )
-      {
-        QImage img( ":/icons/forvo_icon_base.png" );
-
-        {
-          QPainter painter( &img );
-          painter.drawImage( QPoint( 5, 7 ), flag );
-        }
-
-        return QIcon( QPixmap::fromImage( img ) );
-      }
-    }
-  }
-#endif
   dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/forvo.png" );
   dictionaryIconLoaded = true;
 }
@@ -177,7 +152,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                "/order/rate-desc"
        ).toUtf8() );
 
-//  DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
+//  GD_DPRINTF( "req: %s\n", reqUrl.toEncoded().data() );
 
   sptr< QNetworkReply > netReply = mgr.get( QNetworkRequest( reqUrl ) );
   
@@ -231,7 +206,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
       }
       else
       {
-//        DPRINTF( "%s\n", dd.toByteArray().data() );
+//        GD_DPRINTF( "%s\n", dd.toByteArray().data() );
 
         QDomNode items = dd.namedItem( "items" );
   
@@ -249,7 +224,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 
             articleBody += "<table class=\"forvo_play\">";
 
-            for( Qt4x5::Dom::size_type x = 0; x < nl.length(); ++x )
+            for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
             {
               QDomElement item = nl.item( x ).toElement();
 
@@ -378,7 +353,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
   if ( forvo.enable )
   {
-    QStringList codes = forvo.languageCodes.split( ',', QString::SkipEmptyParts );
+    QStringList codes = forvo.languageCodes.split( ',', Qt::SkipEmptyParts );
 
     QSet< QString > usedCodes;
 

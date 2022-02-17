@@ -27,14 +27,10 @@
 #include <QAtomicInt>
 #include <QDomDocument>
 #include <QtEndian>
-
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
-
 #include "ufile.hh"
 #include "wstring_qt.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Aard {
 
@@ -396,7 +392,6 @@ string AardDictionary::convert( const string & in )
 
     QString text = QString::fromUtf8( inConverted.c_str() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     text.replace( QRegularExpression( "<\\s*a\\s+href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)",
                                       QRegularExpression::DotMatchesEverythingOption ),
                   "<a href=\"bword:\\2\"");
@@ -411,19 +406,7 @@ string AardDictionary::convert( const string & in )
     static QRegularExpression self_closing_divs( "(<div\\s+[^>]*)/>",
                                                  QRegularExpression::CaseInsensitiveOption );  // <div ... />
     text.replace( self_closing_divs, "\\1></div>" );
-#else
-    text.replace( QRegExp( "<\\s*a\\s+href\\s*=\\s*\\\"(w:|s:){0,1}([^#](?!ttp://)[^\\\"]*)(.)" ),
-                  "<a href=\"bword:\\2\"");
-    text.replace( QRegExp( "<\\s*a\\s+href\\s*=\\s*'(w:|s:){0,1}([^#](?!ttp://)[^']*)(.)" ),
-                  "<a href=\"bword:\\2\"");
 
-    // Anchors
-    text.replace( QRegExp( "<a\\s+href=\"bword:([^#\"]+)#([^\"]+)" ),
-                  "<a href=\"gdlookup://localhost/\\1?gdanchor=\\2" );
-
-    static QRegExp self_closing_divs( "(<div\\s[^>]*)/>", Qt::CaseInsensitive );  // <div ... />
-    text.replace( self_closing_divs, "\\1></div>" );
-#endif
 
     // Fix outstanding elements
     text += "<br style=\"clear:both;\" />";
@@ -541,11 +524,10 @@ void AardDictionary::loadArticle( quint32 address,
       articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
-    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>"
-                     "</a></a></a></a></a></a></a></a>";
+    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+    string cleaner = "";
 
     string prefix( "<div class=\"aard\"" );
     if( isToLanguageRTL() )
@@ -730,7 +712,7 @@ void AardArticleRequestRunnable::run()
 
 void AardArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -759,7 +741,7 @@ void AardArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;

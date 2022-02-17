@@ -3,21 +3,16 @@
 
 namespace gd
 {
-  #ifdef __WIN32
+
 
   QString toQString( wstring const & in )
   {
+#ifdef __WIN32
     return QString::fromUcs4( in.c_str() );
+#else
+      return QString::fromStdWString(in);
+#endif
   }
-
-  #else
-
-  QString toQString( wstring const & in )
-  {
-    return QString::fromStdWString( in );
-  }
-
-  #endif
 
   wstring toWString( QString const & in )
   {

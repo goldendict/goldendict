@@ -10,11 +10,7 @@
 #include <QFileInfo>
 #include "gddebug.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 namespace WebSite {
 
@@ -139,46 +135,7 @@ WebSiteArticleRequest::WebSiteArticleRequest( QString const & url_,
 
 QTextCodec * WebSiteArticleRequest::codecForHtml( QByteArray const & ba )
 {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   return QTextCodec::codecForHtml( ba, 0 );
-#else
-// Implementation taken from Qt 5 sources
-// Function from Qt 4 can't recognize charset name inside single quotes
-
-  QByteArray header = ba.left( 1024 ).toLower();
-  int pos = header.indexOf( "meta " );
-  if (pos != -1) {
-    pos = header.indexOf( "charset=", pos );
-    if (pos != -1) {
-      pos += qstrlen( "charset=" );
-
-      int pos2 = pos;
-      while ( ++pos2 < header.size() )
-      {
-        char ch = header.at( pos2 );
-        if( ch != '\"' && ch != '\'' && ch != ' ' )
-          break;
-      }
-
-      // The attribute can be closed with either """, "'", ">" or "/",
-      // none of which are valid charset characters.
-
-      while ( pos2++ < header.size() )
-      {
-        char ch = header.at( pos2 );
-        if( ch == '\"' || ch == '\'' || ch == '>' || ch == '/' )
-        {
-          QByteArray name = header.mid( pos, pos2 - pos );
-          if ( name == "unicode" )
-            name = QByteArray( "UTF-8" );
-
-          return QTextCodec::codecForName(name);
-        }
-      }
-    }
-  }
-  return 0;
-#endif
 }
 
 void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
@@ -228,7 +185,6 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     while( !base.isEmpty() && !base.endsWith( "/" ) )
       base.chop( 1 );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
                              QRegularExpression::CaseInsensitiveOption );
     QRegularExpression links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
@@ -305,72 +261,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
       articleString = articleNewString;
       articleNewString.clear();
     }
-#else
-    QRegExp tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
-                  Qt::CaseInsensitive, QRegExp::RegExp2 );
-    QRegExp links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
-                   Qt::CaseInsensitive, QRegExp::RegExp2 );
-    int pos = 0;
-    while( pos >= 0 )
-    {
-      pos = articleString.indexOf( tags, pos );
-      if( pos < 0 )
-        break;
 
-      QString tag = tags.cap();
-
-      int linkPos = tag.indexOf( links );
-      if( linkPos < 0 )
-      {
-        pos += tag.size();
-        continue;
-      }
-
-      QString url = links.cap( 3 );
-
-      if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0
-          || url.indexOf( "mailto:" ) >= 0 || url.startsWith( "#" )
-          || url.startsWith( "javascript:" ) )
-      {
-        // External link, anchor or base64-encoded data
-        pos += tag.size();
-        continue;
-      }
-
-      QString newUrl = links.cap( 1 ) + "=" + links.cap( 2 );
-      if( url.startsWith( "//" ) )
-        newUrl += netReply->url().scheme() + ":";
-      else
-      if( url.startsWith( "/" ) )
-        newUrl += root;
-      else
-        newUrl += base;
-      newUrl += links.cap( 3 );
-
-      tag.replace( linkPos, links.cap().size(), newUrl );
-      articleString.replace( pos, tags.cap().size(), tag );
-
-      pos += tag.size();
-    }
-
-    // Redirect CSS links to own handler
-
-    QString prefix = QString( "bres://" ) + dictPtr->getId().c_str() + "/";
-    QRegExp linkTags( "(<\\s*link\\s[^>]*rel\\s*=\\s*['\"]stylesheet['\"]\\s+[^>]*href\\s*=\\s*['\"])([^'\"]+)://([^'\"]+['\"][^>]+>)",
-                  Qt::CaseInsensitive, QRegExp::RegExp2 );
-    pos = 0;
-    while( pos >= 0 )
-    {
-      pos = articleString.indexOf( linkTags, pos );
-      if( pos < 0 )
-        break;
-
-      QString newTag = linkTags.cap( 1 ) + prefix + linkTags.cap( 2 )
-                       + "/" + linkTags.cap( 3 );
-      articleString.replace( pos, linkTags.cap().size(), newTag );
-      pos += newTag.size();
-    }
-#endif
     // Check for unclosed <span> and <div>
 
     int openTags = articleString.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );
@@ -390,11 +281,9 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     }
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
-    articleString += "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</font>""</font>""</font>""</font>""</font>""</font>"
-                     "</b></b></b></b></b></b></b></b>"
-                     "</i></i></i></i></i></i></i></i>"
-                     "</a></a></a></a></a></a></a></a>";
+    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
 
     QByteArray articleBody = articleString.toUtf8();
 
@@ -500,8 +389,8 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                       "\" onmouseover=\"processIframeMouseOver('gdexpandframe-" + getId() + "');\" "
                       "onmouseout=\"processIframeMouseOut();\" "
                       "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "
-                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\" "
-                      "style=\"overflow:visible; width:100%; display:none;\">"
+                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\" onload=\"resizeIframe(this)\""
+                      "style=\"overflow:visible; width:100%; display:block;\">"
                       "</iframe>";
 
     dr->getData().resize( result.size() );
@@ -639,7 +528,7 @@ void WebSiteDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/internet.png");
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/webdict.svg");
   dictionaryIconLoaded = true;
 }
 

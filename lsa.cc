@@ -25,7 +25,7 @@
 #include <QDebug>
 #include <QFile>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Lsa {
 
@@ -280,7 +280,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( i->second.c_str() ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( i->second.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -298,7 +298,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( i->second.c_str() ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( i->second.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -512,7 +512,7 @@ void LsaDictionary::loadIcon() throw()
   if( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
-    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound.png");
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound_full.png");
   }
 
   dictionaryIconLoaded = true;

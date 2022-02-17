@@ -494,7 +494,7 @@ void EpwingArticleRequestRunnable::run()
 
 void EpwingArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -525,7 +525,7 @@ void EpwingArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -730,7 +730,7 @@ void EpwingResourceRequestRunnable::run()
 void EpwingResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -901,7 +901,7 @@ void EpwingWordSearchRunnable::run()
 void EpwingWordSearchRequest::findMatches()
 {
   BtreeWordSearchRequest::findMatches();
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -912,7 +912,7 @@ void EpwingWordSearchRequest::findMatches()
     QVector< QString > headwords;
     {
       Mutex::Lock _( edict.eBook.getLibMutex() );
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
       if( !edict.eBook.getMatches( gd::toQString( str ), headwords ) )

@@ -46,11 +46,7 @@
 #include <QMap>
 #include <QStringList>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 // For TIFF conversion
 #include <QImage>
@@ -60,7 +56,7 @@
 // For SVG handling
 #include <QtSvg/QSvgRenderer>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Dsl {
 
@@ -75,6 +71,7 @@ using gd::wstring;
 using gd::wchar;
 using std::vector;
 using std::list;
+using Utf8::Encoding;
 
 using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
@@ -214,13 +211,7 @@ public:
   inline virtual string getResourceDir2() const
   { return resourceDir2; }
 
-  #if 0
-  virtual vector< wstring > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception )
-  {
-    return vector< wstring >();
-  }
-  #endif
+
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
@@ -379,11 +370,11 @@ public:
 
 void DslDictionary::deferredInit()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
+  if ( !Utils::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
+    if ( Utils::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     if ( !deferredInitRunnableStarted )
@@ -407,11 +398,11 @@ string const & DslDictionary::ensureInitDone()
 
 void DslDictionary::doDeferredInit()
 {
-  if ( !Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
+  if ( !Utils::AtomicInt::loadAcquire( deferredInitDone ) )
   {
     Mutex::Lock _( deferredInitMutex );
 
-    if ( Qt4x5::AtomicInt::loadAcquire( deferredInitDone ) )
+    if ( Utils::AtomicInt::loadAcquire( deferredInitDone ) )
       return;
 
     // Do deferred init
@@ -596,8 +587,8 @@ void DslDictionary::loadArticle( uint32_t address,
       try
       {
         articleData =
-          DslIconv::toWstring(
-            DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+          Iconv::toWstring(
+            Utf8::getEncodingNameFor( Encoding( idxHeader.dslEncoding ) ),
             articleBody, articleSize );
         free( articleBody );
 
@@ -898,16 +889,15 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "gdau" );
       url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
-      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
+      url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
       if( search && idxHeader.hasSoundDictionaryName )
-        Qt4x5::Url::setFragment( url, QString::fromUtf8( preferredSoundDictionary.c_str() ) );
+        Utils::Url::setFragment( url, QString::fromUtf8( preferredSoundDictionary.c_str() ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
       result += addAudioLink( ref, getId() );
 
-      result += "<span class=\"dsl_s_wav\"><a href=" + ref
-         + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";
+      result += "<span class=\"dsl_s_wav\"><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>";
     }
     else
     if ( Filetype::isNameOfPicture( filename ) )
@@ -915,7 +905,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
+      url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       vector< char > imgdata;
       bool resize = false;
@@ -1004,7 +994,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "gdvideo" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
+      url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       result += string( "<a class=\"dsl_s dsl_video\" href=\"" ) + url.toEncoded().data() + "\">"
              + "<span class=\"img\"></span>"
@@ -1017,7 +1007,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       QUrl url;
       url.setScheme( "bres" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
+      url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
       result += string( "<a class=\"dsl_s\" href=\"" ) + url.toEncoded().data()
              + "\">" + processNodeChildren( node ) + "</a>";
@@ -1040,7 +1030,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       if( info.isFile() )
       {
         name = info.canonicalFilePath();
-        url.setPath( Qt4x5::Url::ensureLeadingSlash( QUrl::fromLocalFile( name ).path() ) );
+        url.setPath( Utils::Url::ensureLeadingSlash( QUrl::fromLocalFile( name ).path() ) );
         link = string( url.toEncoded().data() );
       }
     }
@@ -1152,7 +1142,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( node.renderAsText() ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( gd::toQString( node.renderAsText() ) ) );
     if( !node.tagAttrs.empty() )
     {
       QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
@@ -1161,7 +1151,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
       {
         QList< QPair< QString, QString > > query;
         query.append( QPair< QString, QString >( attr.left( n ), attr.mid( n + 1 ) ) );
-        Qt4x5::Url::setQueryItems( url, query );
+        Utils::Url::setQueryItems( url, query );
       }
     }
 
@@ -1179,7 +1169,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     url.setHost( "localhost" );
     wstring nodeStr = node.renderAsText();
     normalizeHeadword( nodeStr );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
 
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
               + processNodeChildren( node ) + "</a>";
@@ -1359,8 +1349,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
     try
     {
       articleData =
-        DslIconv::toWstring(
-          DslIconv::getEncodingNameFor( DslEncoding( idxHeader.dslEncoding ) ),
+        Iconv::toWstring(
+          getEncodingNameFor( Encoding( idxHeader.dslEncoding ) ),
           articleBody, articleSize );
       free( articleBody );
 
@@ -1560,15 +1550,10 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
     // Strip tags
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     text.replace( QRegularExpression( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
     text.replace( QRegularExpression( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
     text.remove( QRegularExpression( "\\[[^\\\\\\[\\]]+\\]" ) );
-#else
-    text.replace( QRegExp( "\\[(|/)(p|trn|ex|com|\\*|t|br|m[0-9]?)\\]" ), " " );
-    text.replace( QRegExp( "\\[(|/)lang(\\s[^\\]]*)?\\]" ), " " );
-    text.remove( QRegExp( "\\[[^\\\\\\[\\]]+\\]" ) );
-#endif
+
     text.remove( QString::fromLatin1( "<<" ) );
     text.remove( QString::fromLatin1( ">>" ) );
 
@@ -1682,7 +1667,7 @@ void DslArticleRequestRunnable::run()
 
 void DslArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1717,7 +1702,7 @@ void DslArticleRequest::run()
   for( unsigned x = 0; x < chain.size(); ++x )
   {
     // Check if we're cancelled occasionally
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1885,7 +1870,7 @@ void DslResourceRequestRunnable::run()
 void DslResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -2003,42 +1988,6 @@ sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name 
   return new DslResourceRequest( *this, name );
 }
 
-#if 0
-static void findCorrespondingFiles( string const & ifo,
-                                    string & idx, string & dict, string & syn,
-                                    bool needSyn )
-{
-  string base( ifo, 0, ifo.size() - 3 );
-
-  if ( !(
-          tryPossibleName( base + "idx", idx ) ||
-          tryPossibleName( base + "idx.gz", idx ) ||
-          tryPossibleName( base + "idx.dz", idx ) ||
-          tryPossibleName( base + "IDX", idx ) ||
-          tryPossibleName( base + "IDX.GZ", idx ) ||
-          tryPossibleName( base + "IDX.DZ", idx )
-      ) )
-    throw exNoIdxFile( ifo );
-
-  if ( !(
-          tryPossibleName( base + "dict", dict ) ||
-          tryPossibleName( base + "dict.dz", dict ) ||
-          tryPossibleName( base + "DICT", dict ) ||
-          tryPossibleName( base + "dict.DZ", dict )
-      ) )
-    throw exNoDictFile( ifo );
-
-  if ( needSyn && !(
-                     tryPossibleName( base + "syn", syn ) ||
-                     tryPossibleName( base + "syn.gz", syn ) ||
-                     tryPossibleName( base + "syn.dz", syn ) ||
-                     tryPossibleName( base + "SYN", syn ) ||
-                     tryPossibleName( base + "SYN.GZ", syn ) ||
-                     tryPossibleName( base + "SYN.DZ", syn )
-     ) )
-    throw exNoSynFile( ifo );
-}
-#endif
 
 sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const & searchString,
                                                                  int searchMode, bool matchCase,
@@ -2181,7 +2130,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( ; ; )
             {
               // Skip any whitespace
-              if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset ) )
+              if ( !abrvScanner.readNextLineWithoutComments( curString, curOffset, true ) )
                 break;
               if ( curString.empty() || isDslWs( curString[ 0 ] ) )
                 continue;
@@ -2242,7 +2191,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             for( map< string, string >::const_iterator i = abrv.begin();
                  i != abrv.end(); ++i )
             {
-//              DPRINTF( "%s:%s\n", i->first.c_str(), i->second.c_str() );
+//              GD_DPRINTF( "%s:%s\n", i->first.c_str(), i->second.c_str() );
 
               sz = i->first.size();
               chunks.addToBlock( &sz, sizeof( uint32_t ) );
@@ -2269,7 +2218,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         {
           // Find the main headword
 
-          if ( !hasString && !scanner.readNextLineWithoutComments( curString, curOffset ) )
+          if ( !hasString && !scanner.readNextLineWithoutComments( curString, curOffset, true) )
             break; // Clean end of file
 
           hasString = false;
@@ -2304,7 +2253,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           uint32_t articleOffset = curOffset;
 
-          //DPRINTF( "Headword: %ls\n", curString.c_str() );
+          //GD_DPRINTF( "Headword: %ls\n", curString.c_str() );
 
           // More headwords may follow
 
@@ -2367,7 +2316,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           // Skip the article's body
           for( ; ; )
           {
-            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset );
+            hasString = haveLine ? true : scanner.readNextLineWithoutComments( curString, curOffset);
             haveLine = false;
 
             if ( !hasString || ( curString.size() && !isDslWs( curString[ 0 ] ) ) )

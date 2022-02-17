@@ -8,8 +8,6 @@
 #include "articleview.hh"
 #include "gestures.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-
 namespace Gestures
 {
 
@@ -80,9 +78,7 @@ QGestureRecognizer::Result GDPinchGestureRecognizer::recognize( QGesture * state
         gest->isNewSequence = true;
         break;
       }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     case QEvent::TouchCancel:
-#endif
     case QEvent::TouchEnd:
       {
         result = QGestureRecognizer::CancelGesture;
@@ -225,9 +221,7 @@ QGestureRecognizer::Result GDSwipeGestureRecognizer::recognize( QGesture * state
         result = QGestureRecognizer::MayBeGesture;
         break;
       }
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     case QEvent::TouchCancel:
-#endif
     case QEvent::TouchEnd:
       {
         fewTouchPointsPresented = false;
@@ -394,4 +388,3 @@ void unregisterRecognizers()
 
 } // namespace
 
-#endif //QT_VERSION

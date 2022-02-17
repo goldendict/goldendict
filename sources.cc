@@ -121,7 +121,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   // Text to speech
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
   textToSpeechSource = new TextToSpeechSource( this, cfg.voiceEngines );
-  ui.tabWidget->addTab( textToSpeechSource, QIcon(":/icons/playsound_color.png"), tr( "Text to Speech" ) );
+  ui.tabWidget->addTab( textToSpeechSource, QIcon(":/icons/text2speech.svg"), tr( "Text to Speech" ) );
 #endif
 
   if ( Config::isPortableVersion() )
@@ -511,8 +511,8 @@ bool MediaWikisModel::setData( QModelIndex const & index, const QVariant & value
 
   if ( role == Qt::CheckStateRole && !index.column() )
   {
-    //DPRINTF( "type = %d\n", (int)value.type() );
-    //DPRINTF( "value = %d\n", (int)value.toInt() );
+    //GD_DPRINTF( "type = %d\n", (int)value.type() );
+    //GD_DPRINTF( "value = %d\n", (int)value.toInt() );
 
     // XXX it seems to be always passing Int( 2 ) as a value, so we just toggle
     mediawikis[ index.row() ].enabled = !mediawikis[ index.row() ].enabled;
@@ -691,8 +691,8 @@ bool WebSitesModel::setData( QModelIndex const & index, const QVariant & value,
 
   if ( role == Qt::CheckStateRole && !index.column() )
   {
-    //DPRINTF( "type = %d\n", (int)value.type() );
-    //DPRINTF( "value = %d\n", (int)value.toInt() );
+    //GD_DPRINTF( "type = %d\n", (int)value.type() );
+    //GD_DPRINTF( "value = %d\n", (int)value.toInt() );
 
     // XXX it seems to be always passing Int( 2 ) as a value, so we just toggle
     webSites[ index.row() ].enabled = !webSites[ index.row() ].enabled;

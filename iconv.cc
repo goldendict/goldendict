@@ -5,6 +5,7 @@
 #include <vector>
 #include <errno.h>
 #include <string.h>
+#include <QDebug>
 
 #ifdef __WIN32
 char const * const Iconv::GdWchar = "UCS-4LE";

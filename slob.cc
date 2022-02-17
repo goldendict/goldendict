@@ -17,7 +17,7 @@
 #include "htmlescape.hh"
 #include "filetype.hh"
 #include "tiff.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #ifdef _MSC_VER
 #include <stub_msvc.h>
@@ -35,9 +35,7 @@
 #include <QVector>
 #include <QtAlgorithms>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
 #include <string>
 #include <vector>
@@ -801,11 +799,10 @@ void SlobDictionary::loadArticle( quint32 address,
     articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
 
   // See Issue #271: A mechanism to clean-up invalid HTML cards.
-  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</b></b></b></b></b></b></b></b>"
-                   "</i></i></i></i></i></i></i></i>"
-                   "</a></a></a></a></a></a></a></a>";
+  // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+  // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+  // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+  string cleaner = "";
 
   string prefix( "<div class=\"slobdict\"" );
   if( isToLanguageRTL() )
@@ -819,7 +816,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 {
   QString text = QString::fromUtf8( in.c_str() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // pattern of img and script
   text.replace( QRegularExpression( "<\\s*(img|script)\\s+([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
                 QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
@@ -827,20 +823,10 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   // pattern <link... href="..." ...>
   text.replace( QRegularExpression( "<\\s*link\\s+([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
                 QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
-#else
-  // pattern of img and script
-  text.replace( QRegExp( "<\\s*(img|script)\\s+([^>]*)src=\"(?!(?:data|https?|ftp):)(|/)([^\"]*)\"" ),
-                QString( "<\\1 \\2src=\"bres://%1/\\4\"").arg( getId().c_str() ) );
-
-  // pattern <link... href="..." ...>
-  text.replace( QRegExp( "<\\s*link\\s+([^>]*)href=\"(?!(?:data|https?|ftp):)" ),
-                QString( "<link \\1href=\"bres://%1/").arg( getId().c_str() ) );
-#endif
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
   QString anchor;
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
   QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
   int pos = 0;
@@ -856,16 +842,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     // Add empty strings for compatibility with QRegExp behaviour
     for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
       list.append( QString() );
-#else
-  QRegExp rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>",
-                       Qt::CaseSensitive,
-                       QRegExp::RegExp2 );
 
-  int pos = 0;
-  while( (pos = rxLink.indexIn( text, pos )) >= 0 )
-  {
-    QStringList list = rxLink.capturedTexts();
-#endif
     QString tag = list[3];
     if ( !list[4].isEmpty() )
       tag = list[4].split("\"")[1];
@@ -883,7 +860,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
         prepend( "<a href=\"gdlookup://localhost/" ).
         append( anchor + "\" " + list[4] + ">" );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     newText += tag;
   }
   if( pos )
@@ -892,27 +868,16 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     text = newText;
   }
   newText.clear();
-#else
-    text.replace( pos, list[0].length(), tag );
-    pos += tag.length() + 1;
-  }
-#endif
+
 
   // Handle TeX formulas via mimetex.cgi
 
   if( !texCgiPath.isEmpty() )
   {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       QRegularExpression texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>" );
       QRegularExpression regFrac( "\\\\[dt]frac" );
       QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])" );
-#else
-    QRegExp texImage( "<\\s*img\\s+class=\"([^\"]+)\"\\s*([^>]*)alt=\"([^\"]+)\"[^>]*>",
-                      Qt::CaseSensitive,
-                      QRegExp::RegExp2 );
-    QRegExp regFrac = QRegExp( "\\\\[dt]frac" );
-    QRegExp regSpaces = QRegExp( "\\s+([\\{\\(\\[\\}\\)\\]])", Qt::CaseSensitive, QRegExp::RegExp2 );
-#endif
+
     QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     QString arrayDesc( "\\begin{array}{" );
@@ -920,7 +885,6 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     unsigned texCount = 0;
     QString imgName;
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpressionMatchIterator it = texImage.globalMatch( text );
     QString newText;
     while( it.hasNext() )
@@ -931,11 +895,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
       pos = match.capturedEnd();
 
       QStringList list = match.capturedTexts();
-#else
-    while( (pos = texImage.indexIn( text, pos )) >= 0 )
-    {
-      QStringList list = texImage.capturedTexts();
-#endif
+
 
       if( list[ 1 ].compare( "tex" ) == 0
           || list[ 1 ].compare( "mwe-math-fallback-image-inline" ) == 0
@@ -1034,30 +994,21 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 #endif
                       + imgName + "\" alt=\"" + list[ 3 ] + "\">";
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         newText += tag;
-#else
-        text.replace( pos, list[0].length(), tag );
-        pos += tag.length() + 1;
-#endif
+
 
         texCount += 1;
       }
       else
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
         newText += list[ 0 ];
-#else
-        pos += list[ 0 ].length();
-#endif
+
     }
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     if( pos )
     {
       newText += text.midRef( pos );
       text = newText;
     }
     newText.clear();
-#endif
   }
 #ifdef Q_OS_WIN32
   else
@@ -1176,7 +1127,7 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
 
     findArticleLinks( 0, &setOfOffsets, 0, &isCancelled );
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     QVector< uint32_t > offsets;
@@ -1197,10 +1148,10 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
     sf.clearRefOffsets();
     setOfOffsets.clear();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     QMap< QString, QVector< uint32_t > > ftsWords;
@@ -1222,7 +1173,7 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
     // index articles for full-text search
     for( int i = 0; i < offsets.size(); i++ )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       QString articleStr;
@@ -1257,7 +1208,7 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
     QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
     while( it != ftsWords.end() )
     {
-      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         throw exUserAbort();
 
       uint32_t offset = chunks.startNewBlock();
@@ -1274,13 +1225,13 @@ void SlobDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration
     // Free memory
     ftsWords.clear();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     ftsIdxHeader.chunksOffset = chunks.finish();
     ftsIdxHeader.wordCount = indexedWords.size();
 
-    if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
 
     BtreeIndexing::IndexInfo ftsIdxInfo = BtreeIndexing::buildIndex( indexedWords, ftsIdx );
@@ -1418,7 +1369,7 @@ void SlobArticleRequestRunnable::run()
 
 void SlobArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1447,7 +1398,7 @@ void SlobArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -1607,7 +1558,7 @@ void SlobResourceRequestRunnable::run()
 void SlobResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

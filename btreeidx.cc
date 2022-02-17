@@ -12,12 +12,10 @@
 #include <stdlib.h>
 #include "gddebug.hh"
 #include "wstring_qt.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
 #include "wildcard.hh"
-#endif
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -172,7 +170,7 @@ BtreeWordSearchRequest::BtreeWordSearchRequest( BtreeDictionary & dict_,
 
 void BtreeWordSearchRequest::findMatches()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -185,11 +183,8 @@ void BtreeWordSearchRequest::findMatches()
     return;
   }
   
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   QRegularExpression regexp;
-#else
-  QRegExp regexp;
-#endif
+
   bool useWildcards = false;
   if( allowMiddleMatches )
     useWildcards = ( str.find( '*' ) != wstring::npos ||
@@ -203,16 +198,10 @@ void BtreeWordSearchRequest::findMatches()
 
   if( useWildcards )
   {
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     regexp.setPattern( wildcardsToRegexp( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) ) );
     if( !regexp.isValid() )
       regexp.setPattern( QRegularExpression::escape( regexp.pattern() ) );
     regexp.setPatternOptions( QRegularExpression::CaseInsensitiveOption );
-#else
-    regexp.setPattern( gd::toQString( Folding::applyDiacriticsOnly( Folding::applySimpleCaseOnly( str ) ) ) );
-    regexp.setPatternSyntax( QRegExp::WildcardUnix );
-    regexp.setCaseSensitivity( Qt::CaseInsensitive );
-#endif
 
     bool bNoLetters = folded.empty();
     wstring foldedWithWildcards;
@@ -333,10 +322,10 @@ void BtreeWordSearchRequest::findMatches()
       if ( chainOffset )
       for( ; ; )
       {
-        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
           break;
 
-        //DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
+        //GD_DPRINTF( "offset = %u, size = %u\n", chainOffset - &leaf.front(), leaf.size() );
 
         vector< WordArticleLink > chain = dict.readChain( chainOffset );
 
@@ -360,7 +349,6 @@ void BtreeWordSearchRequest::findMatches()
             {
               wstring word = Utf8::decode( chain[ x ].prefix + chain[ x ].word );
               wstring result = Folding::applyDiacriticsOnly( word );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
               if( result.size() >= (wstring::size_type)minMatchLength )
               {
                 QRegularExpressionMatch match = regexp.match( gd::toQString( result ) );
@@ -369,14 +357,6 @@ void BtreeWordSearchRequest::findMatches()
                   addMatch( word );
                 }
               }
-#else
-              if( result.size() >= (wstring::size_type)minMatchLength
-                  && regexp.indexIn( gd::toQString( result ) ) == 0
-                  && regexp.matchedLength() >= minMatchLength )
-              {
-                addMatch( word );
-              }
-#endif
             }
             else
             {
@@ -388,7 +368,7 @@ void BtreeWordSearchRequest::findMatches()
             }
           }
 
-          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+          if( Utils::AtomicInt::loadAcquire( isCancelled ) )
             break;
 
           if ( matches.size() >= maxResults )
@@ -409,7 +389,7 @@ void BtreeWordSearchRequest::findMatches()
         {
           // We're past the current leaf, fetch the next one
 
-          //DPRINTF( "advancing\n" );
+          //GD_DPRINTF( "advancing\n" );
 
           if ( nextLeaf )
           {
@@ -425,7 +405,7 @@ void BtreeWordSearchRequest::findMatches()
 
             if ( leafEntries == 0xffffFFFF )
             {
-              //DPRINTF( "bah!\n" );
+              //GD_DPRINTF( "bah!\n" );
               exit( 1 );
             }
           }
@@ -434,7 +414,7 @@ void BtreeWordSearchRequest::findMatches()
         }
       }
 
-      if ( charsLeftToChop && !Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+      if ( charsLeftToChop && !Utils::AtomicInt::loadAcquire( isCancelled ) )
       {
         --charsLeftToChop;
         folded.resize( folded.size() - 1 );
@@ -456,7 +436,7 @@ void BtreeWordSearchRequest::findMatches()
 
 void BtreeWordSearchRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -503,7 +483,7 @@ void BtreeIndex::readNode( uint32_t offset, vector< char > & out )
   uint32_t uncompressedSize = idxFile->read< uint32_t >();
   uint32_t compressedSize = idxFile->read< uint32_t >();
 
-  //DPRINTF( "%x,%x\n", uncompressedSize, compressedSize );
+  //GD_DPRINTF( "%x,%x\n", uncompressedSize, compressedSize );
 
   out.resize( uncompressedSize );
 
@@ -606,7 +586,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
     {
       // A node
 
-      //DPRINTF( "=>a node\n" );
+      //GD_DPRINTF( "=>a node\n" );
 
       uint32_t const * offsets = (uint32_t *)leaf + 1;
 
@@ -646,7 +626,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
   
         wcharBuffer[ result ] = 0;
 
-        //DPRINTF( "Checking against %s\n", closestString );
+        //GD_DPRINTF( "Checking against %s\n", closestString );
 
         compareResult = target.compare( &wcharBuffer.front() );
   
@@ -676,30 +656,6 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         }
       }
 
-      #if 0
-      DPRINTF( "The winner is %s, compareResult = %d\n", closestString, compareResult );
-
-      if ( closestString != ptr )
-      {
-        char const * left = closestString -1;
-
-        while( left != ptr && left[ -1 ] )
-          --left;
-
-        DPRINTF( "To the left: %s\n", left );
-      }
-      else
-        DPRINTF( "To the lest -- nothing\n" );
-
-      char const * right = closestString + strlen( closestString ) + 1;
-
-      if ( right != leafEnd )
-      {
-        DPRINTF( "To the right: %s\n", right );
-      }
-      else
-        DPRINTF( "To the right -- nothing\n" );
-      #endif
 
       // Now, whatever the outcome (compareResult) is, we need to find
       // entry number for the closestMatch string.
@@ -730,14 +686,14 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         currentNodeOffset = offsets[ entry + 1 ];
       }
 
-      //DPRINTF( "reading node at %x\n", currentNodeOffset );
+      //GD_DPRINTF( "reading node at %x\n", currentNodeOffset );
       readNode( currentNodeOffset, extLeaf );
       leaf = &extLeaf.front();
       leafEnd = leaf + extLeaf.size();
     }
     else
     {
-      //DPRINTF( "=>a leaf\n" );
+      //GD_DPRINTF( "=>a leaf\n" );
       // A leaf
 
       // If this leaf is the root, there's no next leaf, it just can't be.
@@ -770,7 +726,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
           memcpy( &chainSize, ptr, sizeof( uint32_t ) );
 
-          //DPRINTF( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
+          //GD_DPRINTF( "%s + %s\n", ptr + sizeof( uint32_t ), ptr + sizeof( uint32_t ) + strlen( ptr + sizeof( uint32_t ) ) + 1 );
 
           ptr += sizeof( uint32_t ) + chainSize;
         }
@@ -784,7 +740,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
 
       for( ; ; )
       {
-        //DPRINTF( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
+        //GD_DPRINTF( "window = %u, ws = %u\n", window - &chainOffsets.front(), windowSize );
 
         char const ** chainToCheck = window + windowSize/2;
         ptr = *chainToCheck;
@@ -797,7 +753,7 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         if ( wcharBuffer.size() <= wordSize )
           wcharBuffer.resize( wordSize + 1 );
   
-        //DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
+        //GD_DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
   
         long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
   
@@ -1315,7 +1271,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+    if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1370,7 +1326,7 @@ void BtreeIndex::findArticleLinks( QVector< WordArticleLink > * articleLinks,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+      if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
         return;
 
       if( headwords )
@@ -1441,7 +1397,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
   {
     leafEntries = *(uint32_t *)leaf;
 
-    if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+    if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
       return;
 
     if ( leafEntries == 0xffffFFFF )
@@ -1486,7 +1442,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
       if( it != offsets.end() )
       {
-        if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
+        if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
@@ -1539,9 +1495,7 @@ bool BtreeDictionary::getHeadwords( QStringList &headwords )
 
     if( setOfHeadwords.size() )
     {
-#if QT_VERSION >= 0x040700
       headwords.reserve( setOfHeadwords.size() );
-#endif
 
       QSet< QString >::const_iterator it = setOfHeadwords.constBegin();
       QSet< QString >::const_iterator end = setOfHeadwords.constEnd();

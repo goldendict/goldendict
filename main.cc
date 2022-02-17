@@ -6,11 +6,16 @@
 #include "gdappstyle.hh"
 #include "mainwindow.hh"
 #include "config.hh"
-
+#include "article_netmgr.hh"
+#include <QWebEngineProfile>
 #include "processwrapper.hh"
 #include "hotkeywrapper.hh"
 #ifdef HAVE_X11
 #include <fixx11h.h>
+#endif
+
+#if defined( Q_OS_UNIX )
+#include <clocale>
 #endif
 
 //#define __DO_DEBUG
@@ -27,8 +32,7 @@
 
 #include "termination.hh"
 #include "atomic_rename.hh"
-
-#include <QWebSecurityOrigin>
+#include <QtWebEngineCore/QWebEngineUrlScheme>
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
@@ -37,26 +41,11 @@
 
 #include "gddebug.hh"
 
-#if defined( Q_OS_MAC ) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-#include "lionsupport.h"
-#endif
-
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
-
 void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const QString &mess )
 {
   Q_UNUSED( context );
   QString message( mess );
   QByteArray msg = message.toUtf8().constData();
-
-#else
-
-void gdMessageHandler( QtMsgType type, const char *msg_ )
-{
-  QString message = QString::fromUtf8( msg_ );
-  QByteArray msg = QByteArray::fromRawData( msg_, strlen( msg_ ) );
-
-#endif
 
   switch (type) {
 
@@ -91,15 +80,12 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
       else
         fprintf(stderr, "Fatal: %s\n", msg.constData());
       abort();
-
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
     case QtInfoMsg:
       if( logFilePtr && logFilePtr->isOpen() )
         message.insert( 0, "Info: " );
       else
         fprintf(stderr, "Info: %s\n", msg.constData());
       break;
-#endif
   }
 
   if( logFilePtr && logFilePtr->isOpen() )
@@ -226,27 +212,7 @@ int main( int argc, char ** argv )
   #ifdef Q_OS_MAC
     setenv("LANG", "en_US.UTF-8", 1);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
-   // Check for retina display
-   if( LionSupport::isRetinaDisplay() )
-     QApplication::setGraphicsSystem( "native" );
-   else
-     QApplication::setGraphicsSystem( "raster" );
-#endif
   #endif
-
-  // The following clause fixes a race in the MinGW runtime where throwing
-  // exceptions for the first time in several threads simultaneously can cause
-  // an abort(). This code throws first exception in a safe, single-threaded
-  // manner, thus avoiding that race.
-  {
-    class Dummy {};
-
-    try
-    { throw Dummy(); }
-    catch( Dummy )
-    {}
-  }
 
 #if defined( Q_OS_UNIX )
   setlocale( LC_ALL, "" ); // use correct char set mapping
@@ -298,6 +264,25 @@ int main( int argc, char ** argv )
 
 #endif
 
+  QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword","gdprg","gdvideo","gdpicture","gdtts"};
+
+  for (int i = 0; i < localSchemes.size(); ++i)
+  {
+      QString localScheme=localSchemes.at(i);
+      QWebEngineUrlScheme webUiScheme(localScheme.toLatin1());
+      webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
+                           QWebEngineUrlScheme::LocalScheme |
+                           QWebEngineUrlScheme::LocalAccessAllowed|
+                           QWebEngineUrlScheme::CorsEnabled);
+      QWebEngineUrlScheme::registerScheme(webUiScheme);
+  }
+
+  //high dpi screen support
+  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+  QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
 
@@ -331,9 +316,7 @@ int main( int argc, char ** argv )
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
-#if QT_VERSION >= 0x040600
   app.setStyle(new GdAppStyle);
-#endif
 
   #ifndef Q_OS_MAC
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
@@ -398,11 +381,7 @@ int main( int argc, char ** argv )
     logFilePtr->write( line );
 
     // Install message handler
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 ) )
     qInstallMessageHandler( gdMessageHandler );
-#else
-    qInstallMsgHandler( gdMessageHandler );
-#endif
   }
 
   if ( Config::isPortableVersion() )
@@ -432,18 +411,12 @@ int main( int argc, char ** argv )
   // and with the main window closed.
   app.setQuitOnLastWindowClosed( false );
 
-#if QT_VERSION >= 0x040600
-  // Add the dictionary scheme we use as local, so that the file:// links would
-  // work in the articles. The function was introduced in Qt 4.6.
-  QWebSecurityOrigin::addLocalScheme( "gdlookup" );
-#endif
-
   MainWindow m( cfg );
 
   app.addDataCommiter( m );
 
-  QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
-    &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
+  QObject::connect( &app, SIGNAL(messageReceived(QString)),
+    &m, SLOT(messageFromAnotherInstanceReceived(QString)));
 
   if( gdcl.needSetGroup() )
     m.setGroupByName( gdcl.getGroupName(), true );

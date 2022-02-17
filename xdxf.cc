@@ -44,7 +44,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Xdxf {
 
@@ -499,7 +499,7 @@ void XdxfArticleRequestRunnable::run()
 
 void XdxfArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -528,7 +528,7 @@ void XdxfArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -584,10 +584,10 @@ void XdxfArticleRequest::run()
 
   multimap< wstring, pair< string, string > >::const_iterator i;
 
-  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</b></b></b></b></b></b></b></b>"
-                   "</i></i></i></i></i></i></i></i>";
+  // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+  // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+  // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+  string cleaner = "";
 
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
@@ -754,7 +754,6 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
   // The returning value translates directly to QIODevice semantics
   int n = gzread( gz, data, maxSize );
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
   // With QT 5.x QXmlStreamReader ask one byte instead of one UTF-8 char.
   // We read and return all bytes for char.
 
@@ -775,7 +774,6 @@ qint64 GzippedFile::readData( char * data, qint64 maxSize )
     if( addBytes )
       n += gzread( gz, data + 1, addBytes );
   }
-#endif
 
   return n;
 }
@@ -799,21 +797,21 @@ QString readXhtmlData( QXmlStreamReader & stream )
     {
       QString name = stream.name().toString();
 
-      result += "<" + Qt4x5::escape( name ) + " ";
+      result += "<" + Utils::escape( name ) + " ";
 
       QXmlStreamAttributes attrs = stream.attributes();
 
       for( int x = 0; x < attrs.size(); ++x )
       {
-        result += Qt4x5::escape( attrs[ x ].name().toString() );
-        result += "=\"" + Qt4x5::escape( attrs[ x ].value().toString() ) + "\"";
+        result += Utils::escape( attrs[ x ].name().toString() );
+        result += "=\"" + Utils::escape( attrs[ x ].value().toString() ) + "\"";
       }
 
       result += ">";
 
       result += readXhtmlData( stream );
 
-      result += "</" + Qt4x5::escape( name ) + ">";
+      result += "</" + Utils::escape( name ) + ">";
     }
     else
     if ( stream.isCharacters() || stream.isWhitespace() || stream.isCDATA() )
@@ -833,11 +831,7 @@ namespace {
 /// Deal with Qt 4.5 incompatibility
 QString readElementText( QXmlStreamReader & stream )
 {
-#if QT_VERSION >= 0x040600
     return stream.readElementText( QXmlStreamReader::SkipChildElements );
-#else
-    return stream.readElementText();
-#endif
 }
 
 }
@@ -943,7 +937,7 @@ void indexArticle( GzippedFile & gzFile,
         // Add also first header - it's needed for full-text search
         chunks.addToBlock( words.begin()->toUtf8().data(), words.begin()->toUtf8().length() + 1 );
 
-//        DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
+//        GD_DPRINTF( "%x: %s\n", articleOffset, words.begin()->toUtf8().data() );
 
         // Add words to index
 
@@ -1034,7 +1028,7 @@ void XdxfResourceRequestRunnable::run()
 void XdxfResourceRequest::run()
 {
   // Some runnables linger enough that they are cancelled before they start
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;

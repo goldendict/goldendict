@@ -33,11 +33,9 @@
 
 #include <QRegExp>
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#endif
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace Bgl {
 
@@ -352,6 +350,7 @@ namespace
           result.fill( 0 ); // Black transparent
 
           QPainter painter( &result );
+          painter.setRenderHint(QPainter::RenderHint::Antialiasing);
 
           painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
                                      img.height() == max ? 0 : ( max - img.height() ) / 2 ),
@@ -563,7 +562,7 @@ void BglHeadwordsRequestRunnable::run()
 
 void BglHeadwordsRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -575,7 +574,7 @@ void BglHeadwordsRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -750,7 +749,7 @@ void BglArticleRequest::fixHebArticle(string & hebArticle) // Hebrew support - r
 
 void BglArticleRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -784,7 +783,7 @@ void BglArticleRequest::run()
 
   for( unsigned x = 0; x < chain.size(); ++x )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
       finish();
       return;
@@ -860,10 +859,10 @@ void BglArticleRequest::run()
 
   multimap< wstring, pair< string, string > >::const_iterator i;
 
-  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</font>""</font>""</font>""</font>""</font>""</font>"
-                   "</b></b></b></b></b></b></b></b>"
-                   "</i></i></i></i></i></i></i></i>";
+  // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
+  // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
+  // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+  string cleaner = "";
   for( i = mainArticles.begin(); i != mainArticles.end(); ++i )
   {
       if (dict.isFromLanguageRTL() ) // RTL support
@@ -898,7 +897,6 @@ void BglArticleRequest::run()
 
   BglDictionary::replaceCharsetEntities( result );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   result = QString::fromUtf8( result.c_str() )
           // onclick location to link
           .replace( QRegularExpression( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>",
@@ -918,23 +916,7 @@ void BglArticleRequest::run()
                                         QRegularExpression::CaseInsensitiveOption ),
                     " \\1 " )
            .toUtf8().data();
-#else
-  result = QString::fromUtf8( result.c_str() )
-          // onclick location to link
-          .replace( QRegExp( "<([a-z0-9]+)\\s+[^>]*onclick=\"[a-z.]*location(?:\\.href)\\s*=\\s*'([^']+)[^>]*>([^<]+)</\\1>", Qt::CaseInsensitive ),
-                    "<a href=\"\\2\">\\3</a>")
-           .replace( QRegExp( "(<\\s*a\\s+[^>]*href\\s*=\\s*[\"']\\s*)bword://", Qt::CaseInsensitive ),
-                     "\\1bword:" )
-          //remove invalid width, height attrs
-          .replace(QRegExp( "(width|height)\\s*=\\s*[\"']\\d{7,}[\"'']" ),
-                   "" )
-          //remove invalid <br> tag
-          .replace( QRegExp( "<br>(<div|<table|<tbody|<tr|<td|</div>|</table>|</tbody>|</tr>|</td>|function addScript|var scNode|scNode|var atag|while\\(atag|atag=atag|document\\.getElementsByTagName|addScript|src=\"bres|<a onmouseover=\"return overlib|onclick=\"return overlib)", Qt::CaseInsensitive ),
-                    "\\1" )
-          .replace( QRegExp( "(AUTOSTATUS, WRAP\\);\" |</DIV>|addScript\\('JS_FILE_PHONG_VT_45634'\\);|appendChild\\(scNode\\);|atag\\.firstChild;)<br>", Qt::CaseInsensitive ),
-                    " \\1 " )
-           .toUtf8().data();
-#endif
+
 
   Mutex::Lock _( dataMutex );
 
@@ -1031,7 +1013,7 @@ void BglResourceRequestRunnable::run()
 
 void BglResourceRequest::run()
 {
-  if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
   {
     finish();
     return;
@@ -1049,7 +1031,7 @@ void BglResourceRequest::run()
 
   for( size_t count = resourcesCount; count--; )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled ) )
       break;
 
     vector< char > nameData( idx.read< uint32_t >() );
@@ -1106,7 +1088,6 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   {
     QString str = QString::fromUtf8( text.c_str() );
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
     QRegularExpression charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
                                    QRegularExpression::CaseInsensitiveOption
                                    | QRegularExpression::InvertedGreedinessOption );
@@ -1135,31 +1116,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
       result += str.midRef( pos );
       str = result;
     }
-#else
-    QRegExp charsetExp( "<\\s*charset\\s+c\\s*=\\s*[\"']?t[\"']?\\s*>((?:\\s*[0-9a-fA-F]+\\s*;\\s*)*)<\\s*/\\s*charset\\s*>",
-                        Qt::CaseInsensitive );
 
-    charsetExp.setMinimal( true );
-    
-    QRegExp oneValueExp( "\\s*([0-9a-fA-F]+)\\s*;" );
-
-    for( int pos = 0; ( pos = charsetExp.indexIn( str, pos ) ) != -1; )
-    {
-      //DPRINTF( "Match: %s\n", str.mid( pos, charsetExp.matchedLength() ).toUtf8().data() );
-      
-      QString out;
-
-      for( int p = 0; ( p = oneValueExp.indexIn( charsetExp.cap( 1 ), p ) ) != -1; )
-      {
-        //DPRINTF( "Cap: %s\n", oneValueExp.cap( 1 ).toUtf8().data() );
-        out += "&#x" + oneValueExp.cap( 1 ) + ";";
-
-        p += oneValueExp.matchedLength();
-      }
-
-      str.replace( pos, charsetExp.matchedLength(), out );
-    }
-#endif
 
     text = str.toUtf8().data();
   }
@@ -1185,7 +1142,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
   void ResourceHandler::handleBabylonResource( string const & filename,
                                                char const * data, size_t size )
   {
-    //DPRINTF( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
+    //GD_DPRINTF( "Handling resource file %s (%u bytes)\n", filename.c_str(), size );
 
     vector< unsigned char > compressedData( compressBound( size ) );
 

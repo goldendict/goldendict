@@ -2,11 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "folding.hh"
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#else
-#include <QRegExp>
-#endif
 
 namespace Folding {
 
@@ -669,22 +665,16 @@ void normalizeWhitespace( wstring & str )
 QString escapeWildcardSymbols( const QString & str )
 {
   QString escaped( str );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   escaped.replace( QRegularExpression( "([\\[\\]\\?\\*])" ), "\\\\1" );
-#else
-  escaped.replace( QRegExp( "([\\[\\]\\?\\*])", Qt::CaseInsensitive ), "\\\\1" );
-#endif
+
   return escaped;
 }
 
 QString unescapeWildcardSymbols( const QString & str )
 {
   QString unescaped( str );
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   unescaped.replace( QRegularExpression( "\\\\([\\[\\]\\?\\*])" ), "\\1" );
-#else
-  unescaped.replace( QRegExp( "\\\\([\\[\\]\\?\\*])", Qt::CaseInsensitive ), "\\1" );
-#endif
+
   return unescaped;
 }
 

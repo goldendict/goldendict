@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="tr_TR">
+<TS version="2.1" language="tr_TR">
 <context>
     <name>About</name>
     <message>
@@ -139,20 +139,12 @@ GPLv3 veya daha üst lisanslıdır.</translation>
         <translation>Form</translation>
     </message>
     <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">Ses dosyasını oynatmak için oynatıcı çalıştırılamadı: %1</translation>
-    </message>
-    <message>
         <source>&amp;Next</source>
         <translation>&amp;Sonraki</translation>
     </message>
     <message>
         <source>Find:</source>
         <translation>Bul:</translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation>WAV uzantılı olmayan bir dosya oynatılıyor</translation>
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
@@ -187,10 +179,6 @@ GPLv3 veya daha üst lisanslıdır.</translation>
         <translation>&quot;%1&quot; &amp;yeni sekmede ara</translation>
     </message>
     <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>İlgili kaynak yok.</translation>
     </message>
@@ -209,11 +197,6 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     <message>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>&quot;%2&quot; içinde %1 ara</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">WAV dosyalarını oynatmayı etkinleştirmek için,Düzen|Tercihler&apos;e gidin
-Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translation>
     </message>
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
@@ -276,10 +259,6 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
         <translation>Sesi kaydet</translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Ses dosyaları (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tüm dosyalar (*.*)</translation>
-    </message>
-    <message>
         <source>Save image</source>
         <translation>Görüntüyü kaydet</translation>
     </message>
@@ -322,6 +301,10 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     <message>
         <source>WARNING: Audio Player: %1</source>
         <translation>UYARI: Müzik Çalar: %1</translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -705,10 +688,6 @@ arasındaki farkı giderir)</translation>
         <translation>Bu grubu düzenle</translation>
     </message>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Sözlük Çubuğu</translation>
-    </message>
-    <message>
         <source>Dictionary info</source>
         <translation>Sözlük bilgisi</translation>
     </message>
@@ -776,13 +755,6 @@ arasındaki farkı giderir)</translation>
     </message>
 </context>
 <context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Yok</translation>
-    </message>
-</context>
-<context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
@@ -839,13 +811,6 @@ arasındaki farkı giderir)</translation>
     <message>
         <source>None</source>
         <translation>Yok</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Yok</translation>
     </message>
 </context>
 <context>
@@ -983,17 +948,6 @@ arasındaki farkı giderir)</translation>
     <message>
         <source>Choose a Group (Alt+G)</source>
         <translation>Grup Seç (Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Form</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">Ara</translation>
     </message>
 </context>
 <context>
@@ -2062,10 +2016,6 @@ arasındaki farkı giderir)</translation>
         <translation>Önceki</translation>
     </message>
     <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">Yazdırma Önizlemesi</translation>
-    </message>
-    <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 sözlük, %2 madde, %3 sözcük</translation>
     </message>
@@ -2166,10 +2116,6 @@ arasındaki farkı giderir)</translation>
         <translation>Sözcükleri Küçült</translation>
     </message>
     <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Dosyaları Tekrar Tara</translation>
-    </message>
-    <message>
         <source>Page Set&amp;up</source>
         <translation>Sayfa Ya&amp;pısı</translation>
     </message>
@@ -2226,20 +2172,12 @@ arasındaki farkı giderir)</translation>
         <translation>GoldenDict, Sürüm &lt;b&gt;%1&lt;/b&gt; indirilmeye hazır.&lt;br&gt; &lt;b&gt;İndirme&lt;/b&gt; sayfasına ulaşmak için tıklayın.</translation>
     </message>
     <message>
-        <source>Search Pane</source>
-        <translation>Arama Penceresi</translation>
-    </message>
-    <message>
         <source>Ctrl+F4</source>
         <translation>Ctrl+F4</translation>
     </message>
     <message>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
     </message>
     <message>
         <source>Loading...</source>
@@ -2250,20 +2188,12 @@ arasındaki farkı giderir)</translation>
         <translation>(başlıksız)</translation>
     </message>
     <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation>Sözlük Çubuğu&apos;nda Adları Göster</translation>
-    </message>
-    <message>
         <source>Opened tabs</source>
         <translation>Açık Sekmeler</translation>
     </message>
     <message>
         <source>&amp;Preferences...</source>
         <translation>&amp;Tercihler...</translation>
-    </message>
-    <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation>Html Dosyaları (*.html *.htm)</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -2294,10 +2224,6 @@ arasındaki farkı giderir)</translation>
         <translation>Bu Sekmeyi Kapat</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation>UYARI: %1</translation>
-    </message>
-    <message>
         <source>Print Article</source>
         <translation>Maddeyi Yazdır</translation>
     </message>
@@ -2308,18 +2234,6 @@ arasındaki farkı giderir)</translation>
     <message>
         <source>Words Zoom In</source>
         <translation>Sözcükleri Büyüt</translation>
-    </message>
-    <message>
-        <source>Navigation</source>
-        <translation>Gezinti</translation>
-    </message>
-    <message>
-        <source>Results Navigation Pane</source>
-        <translation>Gezinti Panelinde Sonuçlar</translation>
-    </message>
-    <message>
-        <source>&amp;Dictionaries...    F3</source>
-        <translation>&amp;Sözlükler...     F3</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -2340,10 +2254,6 @@ arasındaki farkı giderir)</translation>
     <message>
         <source>&amp;Export</source>
         <translation>&amp;Dışa Aktar</translation>
-    </message>
-    <message>
-        <source>Show Small Icons in Toolbars</source>
-        <translation>Araç Çubuklarında Küçük İkonlar Göster</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
@@ -2372,10 +2282,6 @@ arasındaki farkı giderir)</translation>
     <message>
         <source>&amp;Hide</source>
         <translation>G&amp;izle</translation>
-    </message>
-    <message>
-        <source>History view mode</source>
-        <translation>Geçmişi görüntüleme modu</translation>
     </message>
     <message>
         <source>Export history to file</source>
@@ -2491,7 +2397,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation>Erişilebilirlik API'si açılmadı</translation>
+        <translation>Erişilebilirlik API&apos;si açılmadı</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
@@ -2676,10 +2582,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
 </context>
 <context>
     <name>OrderAndProps</name>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
     <message>
         <source>Form</source>
         <translation>Form</translation>
@@ -2886,14 +2788,6 @@ proxy sunucusu kullanmak istiyorsanız etkinleştirin.</translation>
         <translation>Yalnızca Sol Ctrl</translation>
     </message>
     <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">Windows yerel uygulamasıyla çal</translation>
-    </message>
-    <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">DirectShow ile oynat</translation>
-    </message>
-    <message>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3033,12 +2927,6 @@ ve muhtemelen indirme sayfasını açar.</translation>
         <translation>Şifre:</translation>
     </message>
     <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation>Windows yerel çalma programını kullanın.
-Yalnızca .wav dosyalarıyla sınırlıdır, ama çok iyi çalışır.</translation>
-    </message>
-    <message>
         <source>Default</source>
         <translation>Varsayılan</translation>
     </message>
@@ -3078,11 +2966,6 @@ be pressed shortly after the selection is done.</source>
 daha sonra da basılabilir.</translation>
     </message>
     <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Ses dosyalarını Phonon Framework ile oynat. Bu pek çoğu ses formatını destekler, ancak kararsız olabilir.</translation>
-    </message>
-    <message>
         <source>Right Alt only</source>
         <translation>Yalnızca Sağ Alt</translation>
     </message>
@@ -3097,10 +2980,6 @@ but should support most audio file formats.</source>
     <message>
         <source>Left Ctrl</source>
         <translation>Sol Ctrl</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation>Phonon ile oynat</translation>
     </message>
     <message>
         <source>Right Alt</source>
@@ -3188,54 +3067,6 @@ Eklenti, bu seçeneğin çalışması için yüklü olmalıdır.</translation>
     <message>
         <source>Ad&amp;vanced</source>
         <translation>Geli&amp;şmiş</translation>
-    </message>
-    <message>
-        <source>ScanPopup extra technologies</source>
-        <translation>Açılır Pencerede Ekstra Tarama teknolojileri</translation>
-    </message>
-    <message>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Imlecin altındaki kelimeyi almak için IAccessibleEx teknolojisini
- kullanmayı deneyin.
-Bu teknoloji onu destekleyen (örneğin Internet Explorer 9 için)
- bazı programlar ile çalışır.
-Siz bu tür programları kullanmak istemiyorsanız bu seçeneği 
- seçmeyebilirsiniz.</translation>
-    </message>
-    <message>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation>&amp;IAccessibleEx Teknolojisini Kullan</translation>
-    </message>
-    <message>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Imlecin altındaki kelimeyi almak için UI Automation teknolojisini
- kullanmayı deneyin.
-Bu teknoloji onu destekleyen bazı programlar ile çalışır.
-Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
- seçmeyebilirsiniz.</translation>
-    </message>
-    <message>
-        <source>Use &amp;UIAutomation</source>
-        <translation>&amp;UIAutomation Teknolojisini Kullan</translation>
-    </message>
-    <message>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation>Imlecin altındaki kelimeyi almak için özel GoldenDict mesaj teknolojisini
- kullanmayı deneyin.
-Bu teknoloji onu destekleyen bazı programlar ile çalışır.
-Siz bu tür programları kullanmak istemiyorsanız bu seçeneği
- seçmeyebilirsiniz.</translation>
-    </message>
-    <message>
-        <source>Use &amp;GoldenDict message</source>
-        <translation>&amp;GoldenDict Mesaj Teknolojisini Kullan</translation>
     </message>
     <message>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
@@ -3750,14 +3581,6 @@ clears its network cache from disk during exit.</source>
         <translation>...</translation>
     </message>
     <message>
-        <source>word</source>
-        <translation>sözcük</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation>Alt+M</translation>
-    </message>
-    <message>
         <source>Alt+S</source>
         <translation>Alt+S</translation>
     </message>
@@ -3774,10 +3597,6 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     <message>
         <source>Dialog</source>
         <translation>İletişim</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation>Eşleşmeleri Sırala (Alt+M)</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3798,10 +3617,6 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     <message>
         <source>Forward</source>
         <translation>Sonraki</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -3854,36 +3669,12 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
         <translation>Nihon-shiki</translation>
     </message>
     <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Alternatif olarak CP1251 için %GD1251%, ISO 8859-1 için %GDISO1% kullanılabilir.</translation>
-    </message>
-    <message>
         <source>Greek transliteration</source>
         <translation>Yunanca harf çevirisi</translation>
     </message>
     <message>
         <source>Remove site &lt;b&gt;%1&lt;/b&gt; from the list?</source>
         <translation>Listeden &lt;b&gt;%1 &lt;/b&gt; sitesi kaldırılsın mı?</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-
-indent:0px;&quot;&gt; Kendi Anahtarınızı &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;buradan&lt;/span&gt;&lt;/a&gt; alın, ya da varsayılan olarak kullanmak için boş 
-bırakın.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Wikipedia</source>
@@ -4074,10 +3865,6 @@ uygun grupların altlarına ekleyin.</translation>
     <message>
         <source>Programs</source>
         <translation>Programlar</translation>
-    </message>
-    <message>
-        <source>Any external programs. A string %GDWORD% will be replaced with the query word. The word will also be fed into standard input.</source>
-        <translation type="obsolete">Her türlü harici programlar. Metin %GDWORD% arama kelimesi ile değiştirilecektir. Bu kelime de standart girişten girecektir.</translation>
     </message>
     <message>
         <source>Remove program &lt;b&gt;%1&lt;/b&gt; from the list?</source>

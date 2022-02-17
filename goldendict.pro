@@ -23,21 +23,18 @@ QT += core \
       network \
       svg
 
-greaterThan(QT_MAJOR_VERSION, 4) {
-    QT += widgets \
-          webkitwidgets \
-          printsupport \
-          help
+QT += widgets \
+      webenginewidgets\
+      webchannel\
+      printsupport \
+      help
 
-    # QMediaPlayer is not available in Qt4.
-    !CONFIG( no_qtmultimedia_player ) {
-      QT += multimedia
-      DEFINES += MAKE_QTMULTIMEDIA_PLAYER
-    }
-} else {
-    QT += webkit
-    CONFIG += help
+# QMediaPlayer is not available in Qt4.
+!CONFIG( no_qtmultimedia_player ) {
+  QT += multimedia
+  DEFINES += MAKE_QTMULTIMEDIA_PLAYER
 }
+
 
 !CONFIG( no_ffmpeg_player ) {
   DEFINES += MAKE_FFMPEG_PLAYER
@@ -47,6 +44,9 @@ QT += sql
 CONFIG += exceptions \
     rtti \
     stl
+    # lrelease    #lrelease generate qm under target folder.
+    
+QM_FILES_INSTALL_PATH = /locale/
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
@@ -74,26 +74,6 @@ win32 {
         Debug: LIBS+= -lhunspelld
         Release: LIBS+= -lhunspell
         HUNSPELL_LIB = hunspell
-    } else {
-        CONFIG(gcc48) {
-            x64 {
-                LIBS += -L$${PWD}/winlibs/lib64-48
-                QMAKE_CXXFLAGS += -m64
-                QMAKE_CFLAGS += -m64
-            } else {
-                LIBS += -L$${PWD}/winlibs/lib32-48
-            }
-        } else {
-            LIBS += -L$${PWD}/winlibs/lib
-        }
-        !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
-
-        isEmpty(HUNSPELL_LIB) {
-          LIBS += -lhunspell-1.6.1
-        } else {
-          LIBS += -l$$HUNSPELL_LIB
-        }
-        QMAKE_CXXFLAGS += -Wextra -Wempty-body
     }
 
     LIBS += -liconv \
@@ -108,10 +88,10 @@ win32 {
         -logg
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
-            -lswresample-gd \
-            -lavutil-gd \
-            -lavformat-gd \
-            -lavcodec-gd
+            -lswresample \
+            -lavutil \
+            -lavformat \
+            -lavcodec
     }
 
 
@@ -131,9 +111,7 @@ win32 {
         CONFIG += chinese_conversion_support
     }
 
-    greaterThan(QT_MAJOR_VERSION, 4) {
-      LIBS += -luxtheme
-    }
+    LIBS += -luxtheme
 }
 
 unix:!mac {
@@ -142,11 +120,7 @@ unix:!mac {
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
 
-    greaterThan(QT_MAJOR_VERSION, 4) {
-      greaterThan(QT_MINOR_VERSION, 0) {
-        QT += x11extras
-      }
-    }
+    QT += x11extras
 
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
@@ -250,9 +224,11 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
+    globalbroadcaster.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
+    resourceschemehandler.h \
     sptr.hh \
     dictionary.hh \
     ex.hh \
@@ -268,6 +244,7 @@ HEADERS += folding.hh \
     btreeidx.hh \
     stardict.hh \
     chunkedstorage.hh \
+    weburlrequestinterceptor.h \
     xdxf2html.hh \
     iconv.hh \
     lsa.hh \
@@ -352,11 +329,10 @@ HEADERS += folding.hh \
     mdx.hh \
     voiceengines.hh \
     ffmpegaudio.hh \
-    articleinspector.hh \
     delegate.hh \
     zim.hh \
     gddebug.hh \
-    qt4x5.hh \
+    utils.hh \
     gestures.hh \
     tiff.hh \
     dictheadwords.hh \
@@ -389,9 +365,11 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
+    globalbroadcaster.cpp \
     main.cc \
     dictionary.cc \
     config.cc \
+    resourceschemehandler.cpp \
     sources.cc \
     mainwindow.cc \
     utf8.cc \
@@ -404,6 +382,7 @@ SOURCES += folding.cc \
     btreeidx.cc \
     stardict.cc \
     chunkedstorage.cc \
+    weburlrequestinterceptor.cpp \
     xdxf2html.cc \
     iconv.cc \
     lsa.cc \
@@ -484,7 +463,6 @@ SOURCES += folding.cc \
     mdx.cc \
     voiceengines.cc \
     ffmpegaudio.cc \
-    articleinspector.cc \
     delegate.cc \
     zim.cc \
     gddebug.cc \
@@ -504,15 +482,13 @@ SOURCES += folding.cc \
 
 win32 {
     FORMS   += texttospeechsource.ui
-    SOURCES += mouseover_win32/ThTypes.c \
-               wordbyauto.cc \
+    SOURCES += wordbyauto.cc \
                guids.c \
                x64.cc \
                speechclient_win.cc \
                texttospeechsource.cc \
                speechhlp.cc
-    HEADERS += mouseover_win32/ThTypes.h \
-               wordbyauto.hh \
+    HEADERS += wordbyauto.hh \
                uiauto.hh \
                x64.hh \
                texttospeechsource.hh \
@@ -537,10 +513,10 @@ unix:!mac {
     SOURCES += scanflag.cc
 }
 
-greaterThan(QT_MAJOR_VERSION, 4) {
+
     HEADERS += wildcard.hh
     SOURCES += wildcard.cc
-}
+
 
 CONFIG( zim_support ) {
   DEFINES += MAKE_ZIM_SUPPORT
@@ -583,10 +559,6 @@ CONFIG( chinese_conversion_support ) {
       LIBS += -lopencc
     }
   }
-}
-
-CONFIG( old_hunspell ) {
-  DEFINES += OLD_HUNSPELL_INTERFACE
 }
 
 RESOURCES += resources.qrc \
@@ -652,15 +624,18 @@ TRANSLATIONS += locale/ru_RU.ts \
 
 # This makes qmake generate translations
 
-win32:# Windows doesn't seem to have *-qt4 symlinks
+
 isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
+
 
 # The *.qm files might not exist when qmake is run for the first time,
 # causing the standard install rule to be ignored, and no translations
 # will be installed. With this, we create the qm files during qmake run.
 !win32 {
   system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null)
+}
+else{
+  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_})
 }
 
 updateqm.input = TRANSLATIONS

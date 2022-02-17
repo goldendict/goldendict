@@ -47,6 +47,7 @@ a:hover
 .gdarticleseparator
 {
   display: none;
+  clear: both;
 }
 
 /* Hide the 'From ' string which precedes dictionary name in the heading */
@@ -124,6 +125,10 @@ a:hover
   padding-right: -1em;
   padding-left: 0.3em;
   -webkit-box-ordinal-group: 2;
+}
+
+.gddicticon img {
+    height: 1.3em;
 }
 
 .gdexpandicon, .gdexpandicon:hover, .gdcollapseicon, .gdcollapseicon:hover

@@ -24,7 +24,7 @@
 #include <stub_msvc.h>
 #endif
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 namespace ZipSounds {
 
@@ -273,7 +273,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( name.c_str() ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( name.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -319,7 +319,7 @@ sptr< Dictionary::DataRequest > ZipSoundsDictionary::getArticle( wstring const &
     QUrl url;
     url.setScheme( "gdau" );
     url.setHost( QString::fromUtf8( getId().c_str() ) );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( name.c_str() ) ) );
+    url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( name.c_str() ) ) );
 
     string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -398,7 +398,7 @@ void ZipSoundsDictionary::loadIcon() throw()
   if( !loadIconFromFile( fileName ) )
   {
     // Load failed -- use default icons
-    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound.png");
+    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/playsound_full.png");
   }
 
   dictionaryIconLoaded = true;

@@ -10,6 +10,9 @@
 #include <zlib.h>
 #include "dictionary.hh"
 #include "iconv.hh"
+#include <QTextCodec>
+#include <QByteArray>
+#include "utf8.hh"
 
 // Implementation details for Dsl, not part of its interface
 namespace Dsl {
@@ -20,17 +23,10 @@ using gd::wstring;
 using gd::wchar;
 using std::list;
 using std::vector;
+using Utf8::Encoding;
+using Utf8::LineFeed;
 
-// Those are possible encodings for .dsl files
-enum DslEncoding
-{
-  Utf16LE,
-  Utf16BE,
-  Windows1252,
-  Windows1251,
-  Windows1250,
-  Utf8 // This is an extension. Detected solely by the UTF8 BOM.
-};
+
 
 struct DSLLangCode
 {
@@ -88,7 +84,7 @@ private:
 
   wchar const * stringPos, * lineStartPos;
 
-  class eot {};
+  class eot: std::exception {};
 
   wchar ch;
   bool escaped;
@@ -102,31 +98,22 @@ private:
   wstring headword;
 };
 
-/// A adapted version of Iconv which takes Dsl encoding and decodes to wchar.
-class DslIconv: public Iconv
-{
-public:
-  DslIconv( DslEncoding ) THROW_SPEC( Iconv::Ex );
-  void reinit( DslEncoding ) THROW_SPEC( Iconv::Ex );
-
-  /// Returns a name to be passed to iconv for the given dsl encoding.
-  static char const * getEncodingNameFor( DslEncoding );
-};
-
 /// Opens the .dsl or .dsl.dz file and allows line-by-line reading. Auto-detects
 /// the encoding, and reads all headers by itself.
 class DslScanner
 {
   gzFile f;
-  DslEncoding encoding;
-  DslIconv iconv;
+  Encoding encoding;
+  QTextCodec* codec;
   wstring dictionaryName;
   wstring langFrom, langTo;
   wstring soundDictionary;
   char readBuffer[ 65536 ];
+  QTextStream* fragStream;
   char * readBufferPtr;
+  LineFeed lineFeed;
   size_t readBufferLeft;
-  vector< wchar > wcharBuffer;
+  //qint64 pos;
   unsigned linesRead;
 
 public:
@@ -142,7 +129,7 @@ public:
   ~DslScanner() throw();
 
   /// Returns the detected encoding of this file.
-  DslEncoding getEncoding() const
+  Encoding getEncoding() const
   { return encoding; }
 
   /// Returns the dictionary's name, as was read from file's headers.
@@ -167,10 +154,10 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which start
   /// with #).
-  bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset, bool only_head_word = false ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Similar readNextLine but strip all DSL comments {{...}}
-  bool readNextLineWithoutComments( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLineWithoutComments( wstring &, size_t & offset, bool only_headword = false ) THROW_SPEC( Ex, Iconv::Ex );
 
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
@@ -210,8 +197,8 @@ inline size_t DslScanner::distanceToBytes( size_t x ) const
 {
   switch( encoding )
   {
-    case Utf16LE:
-    case Utf16BE:
+    case Utf8::Utf16LE:
+    case Utf8::Utf16BE:
       return x*2;
     default:
       return x;

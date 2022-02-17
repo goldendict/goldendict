@@ -7,9 +7,7 @@
 static Qt::WindowFlags popupWindowFlags =
 
 Qt::ToolTip | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint
-#if QT_VERSION >= 0x050000
  | Qt::WindowDoesNotAcceptFocus
-#endif
 ;
 
 ScanFlag::ScanFlag(QWidget *parent) :

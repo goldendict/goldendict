@@ -81,10 +81,10 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 
     QList< QSize > sizes = icon.availableSizes();
 
-    for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
-         ++i )
-      if ( i->width() == 14 && i->height() == 21 )
-        use14x21 = true;
+    // for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
+    //      ++i )
+    //   if ( i->width() == 14 && i->height() == 21 )
+    //     use14x21 = true;
 
     dictActions.append( action );
   }
@@ -109,7 +109,7 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
   QMenu menu( this );
 
   QAction * editAction =
-      menu.addAction( QIcon( ":/icons/bookcase.png" ), tr( "Edit this group" ) );
+      menu.addAction( QIcon( ":/icons/bookcase.svg" ), tr( "Edit this group" ) );
 
   QAction * infoAction = NULL;
   QAction * headwordsAction = NULL;
@@ -231,7 +231,7 @@ void DictionaryBar::showContextMenu( QContextMenuEvent * event, bool extended )
 
 void DictionaryBar::mutedDictionariesChanged()
 {
-  //DPRINTF( "Muted dictionaries changed\n" );
+  //GD_DPRINTF( "Muted dictionaries changed\n" );
 
   if( !mutedDictionaries )
     return;

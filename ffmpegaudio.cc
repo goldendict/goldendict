@@ -28,7 +28,7 @@ extern "C" {
 
 #include <vector>
 
-#include "qt4x5.hh"
+#include "utils.hh"
 
 using std::vector;
 
@@ -411,7 +411,7 @@ bool DecoderContext::play( QString & errorString )
   AVPacket packet;
   av_init_packet( &packet );
 
-  while ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) &&
+  while ( !Utils::AtomicInt::loadAcquire( isCancelled_ ) &&
           av_read_frame( formatContext_, &packet ) >= 0 )
   {
     if ( packet.stream_index == audioStream_->index )
@@ -422,11 +422,11 @@ bool DecoderContext::play( QString & errorString )
       do
       {
         int len = avcodec_decode_audio4( codecContext_, frame, &gotFrame, &pack );
-        if ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) && gotFrame )
+        if ( !Utils::AtomicInt::loadAcquire( isCancelled_ ) && gotFrame )
         {
           playFrame( frame );
         }
-        if( len <= 0 || Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) )
+        if( len <= 0 || Utils::AtomicInt::loadAcquire( isCancelled_ ) )
           break;
         pack.size -= len;
         pack.data += len;
@@ -439,7 +439,7 @@ bool DecoderContext::play( QString & errorString )
       {
         ret = avcodec_receive_frame( codecContext_, frame);
 
-        if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) || ret < 0 )
+        if ( Utils::AtomicInt::loadAcquire( isCancelled_ ) || ret < 0 )
           break;
 
         playFrame( frame );
@@ -455,14 +455,14 @@ bool DecoderContext::play( QString & errorString )
   }
 
 #if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 37 )
-  if ( !Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) &&
+  if ( !Utils::AtomicInt::loadAcquire( isCancelled_ ) &&
        codecContext_->codec->capabilities & CODEC_CAP_DELAY )
   {
     av_init_packet( &packet );
     int gotFrame = 0;
     while ( avcodec_decode_audio4( codecContext_, frame, &gotFrame, &packet ) >= 0 && gotFrame )
     {
-      if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) )
+      if ( Utils::AtomicInt::loadAcquire( isCancelled_ ) )
         break;
       playFrame( frame );
     }
@@ -476,7 +476,7 @@ bool DecoderContext::play( QString & errorString )
   while( ret >= 0 )
   {
     ret = avcodec_receive_frame(codecContext_, frame);
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) || ret < 0 )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled_ ) || ret < 0 )
       break;
     playFrame( frame );
   }
@@ -614,7 +614,7 @@ void DecoderThread::run()
 
   while ( !deviceMutex_.tryLock( 100 ) )
   {
-    if ( Qt4x5::AtomicInt::loadAcquire( isCancelled_ ) )
+    if ( Utils::AtomicInt::loadAcquire( isCancelled_ ) )
       return;
   }
 

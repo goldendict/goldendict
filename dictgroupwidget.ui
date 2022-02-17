@@ -60,7 +60,7 @@
         <string notr="true"/>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/icons/hotkeys.png</pixmap>
+        <pixmap resource="resources.qrc">:/icons/hotkeys.svg</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>

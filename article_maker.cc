@@ -13,7 +13,8 @@
 #include "folding.hh"
 #include "langcoder.hh"
 #include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
+#include "globalbroadcaster.h"
 
 using std::vector;
 using std::string;
@@ -46,70 +47,58 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
                                           bool expandOptionalParts ) const
 {
   string result =
-    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
-    "<html><head>"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+      "<!DOCTYPE html>"
+      "<html><head>"
+      "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+
+  // add jquery
+  {
+    result += "<script type=\"text/javascript\"  "
+              "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
+
+    result += "<script> var $_$=$.noConflict(true); </script>";
+
+    //custom javascript
+    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd-custom.js\"></script>";
+  }
+
+  // add qwebchannel
+  {
+    result += "<script type=\"text/javascript\" src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>";
+  }
+
+  // document ready ,init webchannel
+  {
+    result += "<script>"
+              " $_$(document).ready( function ($){ "
+              "     console.log(\"webchannel ready...\"); "
+              "     new QWebChannel(qt.webChannelTransport, function(channel) { "
+              "         window.articleview = channel.objects.articleview; "
+              "   }); "
+              " }); "
+              "</script>";
+  }
 
   // Add a css stylesheet
-
   {
-    QFile builtInCssFile( ":/article-style.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-
-    if( !css.isEmpty() )
-    {
-      result += "\n<!-- Built-in css -->\n";
-      result += "<style type=\"text/css\" media=\"all\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
+    result += "<link href=\"qrc:///article-style.css\"  media=\"all\" rel=\"stylesheet\" type=\"text/css\">";
 
     if ( displayStyle.size() )
     {
       // Load an additional stylesheet
-      QFile builtInCssFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
-      builtInCssFile.open( QFile::ReadOnly );
-      css = builtInCssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- Built-in style css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
+      QString displayStyleCssFile = QString("qrc:///article-style-st-%1.css").arg(displayStyle);
+      result += "<link href=\"" + displayStyleCssFile.toStdString() +
+                "\"  media=\"all\" rel=\"stylesheet\" type=\"text/css\">";
     }
 
-    QFile cssFile( Config::getUserCssFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
-    }
+    result += readCssFile(Config::getUserCssFileName() ,"all");
 
     if( !addonStyle.isEmpty() )
     {
       QString name = Config::getStylesDir() + addonStyle
                      + QDir::separator() + "article-style.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style css -->\n";
-          result += "<style type=\"text/css\" media=\"all\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
+
+      result += readCssFile(name ,"all");
     }
 
     // Turn on/off expanding of article optional parts
@@ -124,50 +113,16 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   }
 
   // Add print-only css
-
   {
-    QFile builtInCssFile( ":/article-style-print.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-    if( !css.isEmpty() )
-    {
-      result += "<!-- Built-in print css -->\n";
-      result += "<style type=\"text/css\" media=\"print\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
+    result += "<link href=\"qrc:///article-style-print.css\"  media=\"print\" rel=\"stylesheet\" type=\"text/css\">";
 
-    QFile cssFile( Config::getUserCssPrintFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User print css -->\n";
-        result += "<style type=\"text/css\" media=\"print\">\n";
-        result += css.data();
-        result += "</style>\n";
-        css.clear();
-      }
-    }
+    result += readCssFile(Config::getUserCssPrintFileName() ,"print");
 
     if( !addonStyle.isEmpty() )
     {
       QString name = Config::getStylesDir() + addonStyle
                      + QDir::separator() + "article-style-print.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style print css -->\n";
-          result += "<style type=\"text/css\" media=\"print\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
+      result += readCssFile(name ,"print");
     }
   }
 
@@ -179,53 +134,34 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "<script type=\"text/javascript\">"
-            "var gdAudioLinks = { first: null, current: null };"
-            "function gdMakeArticleActive( newId ) {"
-            "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
-            "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
-            "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
-            "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
-            "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
-            "var overIframeId = null;"
-            "function gdSelectArticle( id ) {"
-            "var selection = window.getSelection(); var range = document.createRange();"
-            "range.selectNodeContents(document.getElementById('gdfrom-' + id));"
-            "selection.removeAllRanges(); selection.addRange(range); }"
-            "function processIframeMouseOut() { overIframeId = null; top.focus(); }"
-            "function processIframeMouseOver( newId ) { overIframeId = newId; }"
-            "function processIframeClick() { if( overIframeId != null ) { overIframeId = overIframeId.replace( 'gdexpandframe-', '' ); gdMakeArticleActive( overIframeId ) } }"
-            "function init() { window.addEventListener('blur', processIframeClick, false); }"
-            "window.addEventListener('load', init, false);"
-            "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.alt == '[+]' ) {"
-            "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
-            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } };"
-            "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
-            "ev=window.event; t=null;"
-            "if(ev) t=ev.target || ev.srcElement;"
-            "if(elem.style.display=='inline' && t==ico) {"
-            "elem.style.display='none'; ico.className='gdexpandicon';"
-            "art.className = art.className+' gdcollapsedarticle';"
-            "nm=document.getElementById('gddictname-'+id); nm.style.cursor='pointer';"
-            "if(ev) ev.stopPropagation(); ico.title=''; nm.title=\"";
-  result += tr( "Expand article" ).toUtf8().data();
-  result += "\" } else if(elem.style.display=='none') {"
-            "elem.style.display='inline'; ico.className='gdcollapseicon';"
-            "art.className=art.className.replace(' gdcollapsedarticle','');"
-            "nm=document.getElementById('gddictname-'+id); nm.style.cursor='default';"
-            "nm.title=''; ico.title=\"";
-  result += tr( "Collapse article").toUtf8().data();
-  result += "\" } }"
-            "function gdCheckArticlesNumber() {"
-            "elems=document.getElementsByClassName('gddictname');"
-            "if(elems.length == 1) {"
-              "el=elems.item(0); s=el.id.replace('gddictname-','');"
-              "el=document.getElementById('gdfrom-'+s);"
-              "if(el && el.className.search('gdcollapsedarticle')>0) gdExpandArticle(s);"
-            "} }"
+            "function tr(key) {"
+            " var tr_map = {"
+            "\"Expand article\":\"";
+  result += tr("Expand article").toUtf8().data();
+  result += "\",\"Collapse article\":\"";
+  result += tr("Collapse article").toUtf8().data();
+  result += "\"  };"
+            "return tr_map[key] || '';"
+            "}"
             "</script>";
-
+  result+= "<script type=\"text/javascript\" src=\"qrc:///resources/gd-builtin.js\"></script>";
   result += "</head><body>";
 
+  return result;
+}
+
+ std::string ArticleMaker::readCssFile(QString  const & fileName, std::string media)  const{
+  QFile addonCss(fileName);
+  std::string result;
+  if (addonCss.open(QFile::ReadOnly)) {
+    QByteArray css = addonCss.readAll();
+    if (!css.isEmpty()) {
+      result += "<!-- Addon style css -->\n";
+      result += "<style type=\"text/css\" media=\"" + media + "\">\n";
+      result += css.data();
+      result += "</style>\n";
+    }
+  }
   return result;
 }
 
@@ -602,6 +538,7 @@ void ArticleRequest::bodyFinished()
 
   bool wasUpdated = false;
 
+  QStringList dictIds;
   while ( bodyRequests.size() )
   {
     // Since requests should go in order, check the first one first
@@ -621,7 +558,7 @@ void ArticleRequest::bodyFinished()
             activeDicts[ activeDicts.size() - bodyRequests.size() ];
 
         string dictId = activeDict->getId();
-
+        dictIds << QString::fromStdString(dictId);
         string head;
 
         string gdFrom = "gdfrom-" + Html::escape( dictId );
@@ -629,13 +566,6 @@ void ArticleRequest::bodyFinished()
         if ( closePrevSpan )
         {
           head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
-        }
-        else
-        {
-          // This is the first article
-          head += "<script type=\"text/javascript\">"
-                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
-                  "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
         bool collapse = false;
@@ -676,9 +606,6 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script type=\"text/javascript\">var gdArticleContents; "
-          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
-          "else gdArticleContents += \"" + jsVal + " \";</script>";
 
         head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
@@ -756,6 +683,7 @@ void ArticleRequest::bodyFinished()
     }
   }
 
+
   if ( bodyRequests.empty() )
   {
     // No requests left, end the article
@@ -802,13 +730,24 @@ void ArticleRequest::bodyFinished()
     }
 
     if ( stemmedWordFinder.get() )
-      update();
-    else
+    {
+        update();
+        qDebug() << "send dicts(stemmed):" << word << ":" << dictIds;
+        emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+        dictIds.clear();
+    }
+    else {
       finish();
-  }
-  else
-  if ( wasUpdated )
+      qDebug() << "send dicts(finished):" << word << ":" << dictIds;
+      emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+      dictIds.clear();
+    }
+  } else if (wasUpdated) {
     update();
+    qDebug() << "send dicts(updated):" << word << ":" << dictIds;
+    emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+    dictIds.clear();
+  }
 }
 
 void ArticleRequest::stemmedSearchFinished()
@@ -889,7 +828,7 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
     if ( lastGoodCompoundResult.size() ) // We have something to append
     {
-//      DPRINTF( "Appending\n" );
+//      GD_DPRINTF( "Appending\n" );
 
       if ( !firstCompoundWasFound )
       {
@@ -987,7 +926,7 @@ void ArticleRequest::compoundSearchNextStep( bool lastSearchSucceeded )
 
   // Look it up
 
-//  DPRINTF( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
+//  GD_DPRINTF( "Looking up %s\n", qPrintable( currentSplittedWordCompound ) );
 
   stemmedWordFinder->expressionMatch( currentSplittedWordCompound, activeDicts, 40, // Would one be enough? Leave 40 to be safe.
                                       Dictionary::SuitableForCompoundSearching );
@@ -1112,7 +1051,7 @@ string ArticleRequest::linkWord( QString const & str )
 
   url.setScheme( "gdlookup" );
   url.setHost( "localhost" );
-  url.setPath( Qt4x5::Url::ensureLeadingSlash( str ) );
+  url.setPath( Utils::Url::ensureLeadingSlash( str ) );
 
   string escapedResult = Html::escape( str.toUtf8().data() );
   return string( "<a href=\"" ) + url.toEncoded().data() + "\">" + escapedResult +"</a>";

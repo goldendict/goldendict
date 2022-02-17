@@ -593,7 +593,7 @@ QVariant FavoritesModel::data( QModelIndex const & index, int role ) const
   if( role == Qt::DecorationRole )
   {
     if( item->type() == TreeItem::Folder || item->type() == TreeItem::Root )
-      return QIcon( ":/icons/folder.png" );
+      return QIcon( ":/icons/folder.svg" );
 
     return QVariant();
   }
@@ -976,7 +976,7 @@ bool FavoritesModel::addNewHeadword( const QString & path, const QString & headw
 
   // Find or create target folder
 
-  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList folders = path.split( "/", Qt::SkipEmptyParts );
   QStringList::const_iterator it = folders.begin();
   for( ; it != folders.end(); ++it )
     parentIdx = forceFolder( *it, parentIdx );
@@ -992,7 +992,7 @@ bool FavoritesModel::removeHeadword( const QString & path, const QString & headw
 
   // Find target folder
 
-  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList folders = path.split( "/", Qt::SkipEmptyParts );
   QStringList::const_iterator it = folders.begin();
   for( ; it != folders.end(); ++it )
   {
@@ -1022,7 +1022,7 @@ bool FavoritesModel::isHeadwordPresent( const QString & path, const QString & he
 
   // Find target folder
 
-  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList folders = path.split( "/", Qt::SkipEmptyParts );
   QStringList::const_iterator it = folders.begin();
   for( ; it != folders.end(); ++it )
   {

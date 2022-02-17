@@ -72,7 +72,7 @@
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
+          <normaloff>:/icons/previous.svg</normaloff>:/icons/previous.svg</iconset>
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -86,7 +86,7 @@
         </property>
         <property name="icon">
          <iconset resource="resources.qrc">
-          <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
+          <normaloff>:/icons/next.svg</normaloff>:/icons/next.svg</iconset>
         </property>
         <property name="toolButtonStyle">
          <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -143,7 +143,7 @@
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/closetab.png</normaloff>:/icons/closetab.png</iconset>
+            <normaloff>:/icons/closetab.svg</normaloff>:/icons/closetab.svg</iconset>
           </property>
           <property name="autoRaise">
            <bool>true</bool>
@@ -161,7 +161,7 @@
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
+            <normaloff>:/icons/previous.svg</normaloff>:/icons/previous.svg</iconset>
           </property>
           <property name="toolButtonStyle">
            <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -178,7 +178,7 @@
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
+            <normaloff>:/icons/next.svg</normaloff>:/icons/next.svg</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+G</string>

@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ay">
-<context>
-    <name>
-        </name>
-    <message>
-        <source>XML parse error: %1 at %2,%3</source>
-        <translation type="obsolete">Jan wali XML ullarasa : %1 en %2,%3</translation>
-    </message>
-</context>
+<TS version="2.1" language="ay">
 <context>
     <name>About</name>
     <message>
@@ -20,16 +12,8 @@
         <translation>credito</translation>
     </message>
     <message>
-        <source>GoldenDict dictionary lookup program, version 0.7</source>
-        <translation type="obsolete">GoldenDict arupirwa electrónico, versión 0.7</translation>
-    </message>
-    <message>
         <source>GoldenDict dictionary lookup program, version </source>
         <translation>GoldenDict, aru pirwa electrónico, versión </translation>
-    </message>
-    <message>
-        <source>#.#</source>
-        <translation type="obsolete">#.#</translation>
     </message>
     <message>
         <source>Licensed under GNU GPLv3 or later</source>
@@ -106,10 +90,6 @@
         <translation>Ukata</translation>
     </message>
     <message>
-        <source>From %1</source>
-        <translation type="obsolete">Ukata %1</translation>
-    </message>
-    <message>
         <source>Query error: %1</source>
         <translation>Thaqtawit pantjata: %1</translation>
     </message>
@@ -136,10 +116,6 @@
 </context>
 <context>
     <name>ArticleView</name>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">Quri aru pirwa</translation>
-    </message>
     <message>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation> Janiw Chiqanchata  wakiskirix utjkiti.</translation>
@@ -171,18 +147,6 @@
     <message>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>Thaqhaña&quot;%1&quot; en %2 mä &amp; machaq phichhuna</translation>
-    </message>
-    <message>
-        <source>Playing a non-WAV file</source>
-        <translation type="obsolete">Jan WAV uka kipumpi  jaylliyaña</translation>
-    </message>
-    <message>
-        <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">Jaylliyañ sartayañatakix jan WAV ukampikix, por favor vaya a Editar|Preferencias, escoja la pestaña Audio y seleccione &quot;Reproducir con DirectShow&quot;.</translation>
-    </message>
-    <message>
-        <source>Failed to run a player to play sound file: %1</source>
-        <translation type="obsolete">Audio ist&apos;añataki panthatawa: %1</translation>
     </message>
     <message>
         <source>Failed to create temporary file.</source>
@@ -281,10 +245,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,6 +286,10 @@
     </message>
     <message>
         <source>WARNING: Audio Player: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -702,10 +666,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictionaryBar</name>
     <message>
-        <source>Dictionary Bar</source>
-        <translation type="obsolete">Aru pirwa wanqaña </translation>
-    </message>
-    <message>
         <source>Edit this group</source>
         <translation>Aka tama askichaña</translation>
     </message>
@@ -777,13 +737,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Ni maya</translation>
-    </message>
-</context>
-<context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <source>Full-text search</source>
@@ -840,13 +793,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>None</source>
         <translation type="unfinished">Ni maya</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Ni maya</translation>
     </message>
 </context>
 <context>
@@ -987,17 +933,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-        <translation type="obsolete">Formulario &quot;phuqhaña&quot;</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-        <translation type="obsolete">thaqhaña:</translation>
-    </message>
-</context>
-<context>
     <name>Groups</name>
     <message>
         <source>Add group</source>
@@ -1030,10 +965,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Are you sure you want to remove all the groups?</source>
         <translation>Chiqpach taqpach tamanaka chhaqayañ muntati?</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">tamanaka </translation>
     </message>
     <message>
         <source>Dictionaries available:</source>
@@ -1187,746 +1118,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Spelling suggestions: </source>
         <translation>Arunak amuyt&apos;awinaka: </translation>
-    </message>
-    <message>
-        <source>Afar</source>
-        <translation type="obsolete">Afar</translation>
-    </message>
-    <message>
-        <source>Abkhazian</source>
-        <translation type="obsolete">Abkhazian</translation>
-    </message>
-    <message>
-        <source>Avestan</source>
-        <translation type="obsolete">Avestan</translation>
-    </message>
-    <message>
-        <source>Afrikaans</source>
-        <translation type="obsolete">Africanos</translation>
-    </message>
-    <message>
-        <source>Akan</source>
-        <translation type="obsolete">Akan</translation>
-    </message>
-    <message>
-        <source>Amharic</source>
-        <translation type="obsolete">Amharic</translation>
-    </message>
-    <message>
-        <source>Aragonese</source>
-        <translation type="obsolete">Aragonese</translation>
-    </message>
-    <message>
-        <source>Arabic</source>
-        <translation type="obsolete">Árabe</translation>
-    </message>
-    <message>
-        <source>Assamese</source>
-        <translation type="obsolete">Assamese</translation>
-    </message>
-    <message>
-        <source>Avaric</source>
-        <translation type="obsolete">Avaric</translation>
-    </message>
-    <message>
-        <source>Aymara</source>
-        <translation type="obsolete">Aymara</translation>
-    </message>
-    <message>
-        <source>Azerbaijani</source>
-        <translation type="obsolete">Azerbaijani</translation>
-    </message>
-    <message>
-        <source>Bashkir</source>
-        <translation type="obsolete">Bashkir</translation>
-    </message>
-    <message>
-        <source>Belarusian</source>
-        <translation type="obsolete">Belarusian</translation>
-    </message>
-    <message>
-        <source>Bulgarian</source>
-        <translation type="obsolete">Bulgaria</translation>
-    </message>
-    <message>
-        <source>Bihari</source>
-        <translation type="obsolete">Bihari</translation>
-    </message>
-    <message>
-        <source>Bislama</source>
-        <translation type="obsolete">Bislama</translation>
-    </message>
-    <message>
-        <source>Bambara</source>
-        <translation type="obsolete">Bambara</translation>
-    </message>
-    <message>
-        <source>Bengali</source>
-        <translation type="obsolete">Bengali</translation>
-    </message>
-    <message>
-        <source>Tibetan</source>
-        <translation type="obsolete">Tibetan</translation>
-    </message>
-    <message>
-        <source>Breton</source>
-        <translation type="obsolete">Breton</translation>
-    </message>
-    <message>
-        <source>Bosnian</source>
-        <translation type="obsolete">Bosnian</translation>
-    </message>
-    <message>
-        <source>Catalan</source>
-        <translation type="obsolete">Catalan</translation>
-    </message>
-    <message>
-        <source>Chechen</source>
-        <translation type="obsolete">Chechen</translation>
-    </message>
-    <message>
-        <source>Chamorro</source>
-        <translation type="obsolete">Chamorro</translation>
-    </message>
-    <message>
-        <source>Corsican</source>
-        <translation type="obsolete">Corsican</translation>
-    </message>
-    <message>
-        <source>Cree</source>
-        <translation type="obsolete">Cree</translation>
-    </message>
-    <message>
-        <source>Czech</source>
-        <translation type="obsolete">Czech</translation>
-    </message>
-    <message>
-        <source>Church Slavic</source>
-        <translation type="obsolete">Church Slavic</translation>
-    </message>
-    <message>
-        <source>Chuvash</source>
-        <translation type="obsolete">Chuvash</translation>
-    </message>
-    <message>
-        <source>Welsh</source>
-        <translation type="obsolete">Welsh</translation>
-    </message>
-    <message>
-        <source>Danish</source>
-        <translation type="obsolete">Danes</translation>
-    </message>
-    <message>
-        <source>German</source>
-        <translation type="obsolete">alemania</translation>
-    </message>
-    <message>
-        <source>Divehi</source>
-        <translation type="obsolete">Divehi</translation>
-    </message>
-    <message>
-        <source>Dzongkha</source>
-        <translation type="obsolete">Dzongkha</translation>
-    </message>
-    <message>
-        <source>Ewe</source>
-        <translation type="obsolete">Ewe</translation>
-    </message>
-    <message>
-        <source>Greek</source>
-        <translation type="obsolete">Griego</translation>
-    </message>
-    <message>
-        <source>English</source>
-        <translation type="obsolete">Inglisa aru</translation>
-    </message>
-    <message>
-        <source>Esperanto</source>
-        <translation type="obsolete">Esperanto</translation>
-    </message>
-    <message>
-        <source>Spanish</source>
-        <translation type="obsolete">Español</translation>
-    </message>
-    <message>
-        <source>Estonian</source>
-        <translation type="obsolete">Estonian</translation>
-    </message>
-    <message>
-        <source>Basque</source>
-        <translation type="obsolete">Basque</translation>
-    </message>
-    <message>
-        <source>Persian</source>
-        <translation type="obsolete">Persian</translation>
-    </message>
-    <message>
-        <source>Fulah</source>
-        <translation type="obsolete">Fulah</translation>
-    </message>
-    <message>
-        <source>Finnish</source>
-        <translation type="obsolete">Finnish</translation>
-    </message>
-    <message>
-        <source>Fijian</source>
-        <translation type="obsolete">Fijian</translation>
-    </message>
-    <message>
-        <source>Faroese</source>
-        <translation type="obsolete">Faroese</translation>
-    </message>
-    <message>
-        <source>French</source>
-        <translation type="obsolete">Frances </translation>
-    </message>
-    <message>
-        <source>Western Frisian</source>
-        <translation type="obsolete">Western Frisian</translation>
-    </message>
-    <message>
-        <source>Irish</source>
-        <translation type="obsolete">Irish</translation>
-    </message>
-    <message>
-        <source>Scottish Gaelic</source>
-        <translation type="obsolete">Scottish Gaelic</translation>
-    </message>
-    <message>
-        <source>Galician</source>
-        <translation type="obsolete">Galician</translation>
-    </message>
-    <message>
-        <source>Guarani</source>
-        <translation type="obsolete">Guarani</translation>
-    </message>
-    <message>
-        <source>Gujarati</source>
-        <translation type="obsolete">Gujarati</translation>
-    </message>
-    <message>
-        <source>Manx</source>
-        <translation type="obsolete">Manx</translation>
-    </message>
-    <message>
-        <source>Hausa</source>
-        <translation type="obsolete">Hausa</translation>
-    </message>
-    <message>
-        <source>Hebrew</source>
-        <translation type="obsolete">Hebrew</translation>
-    </message>
-    <message>
-        <source>Hindi</source>
-        <translation type="obsolete">Hindi</translation>
-    </message>
-    <message>
-        <source>Hiri Motu</source>
-        <translation type="obsolete">Hiri Motu</translation>
-    </message>
-    <message>
-        <source>Croatian</source>
-        <translation type="obsolete">Croatian</translation>
-    </message>
-    <message>
-        <source>Haitian</source>
-        <translation type="obsolete">Haiti</translation>
-    </message>
-    <message>
-        <source>Hungarian</source>
-        <translation type="obsolete">Hungaria</translation>
-    </message>
-    <message>
-        <source>Armenian</source>
-        <translation type="obsolete">Armenia</translation>
-    </message>
-    <message>
-        <source>Herero</source>
-        <translation type="obsolete">Herero</translation>
-    </message>
-    <message>
-        <source>Interlingua</source>
-        <translation type="obsolete">Interlingua</translation>
-    </message>
-    <message>
-        <source>Indonesian</source>
-        <translation type="obsolete">Indonesia</translation>
-    </message>
-    <message>
-        <source>Interlingue</source>
-        <translation type="obsolete">Interlingue</translation>
-    </message>
-    <message>
-        <source>Igbo</source>
-        <translation type="obsolete">Igbo</translation>
-    </message>
-    <message>
-        <source>Sichuan Yi</source>
-        <translation type="obsolete">Sichuan Yi</translation>
-    </message>
-    <message>
-        <source>Inupiaq</source>
-        <translation type="obsolete">Inupiaq</translation>
-    </message>
-    <message>
-        <source>Ido</source>
-        <translation type="obsolete">Ido</translation>
-    </message>
-    <message>
-        <source>Icelandic</source>
-        <translation type="obsolete">Icelandic</translation>
-    </message>
-    <message>
-        <source>Italian</source>
-        <translation type="obsolete">Italiano</translation>
-    </message>
-    <message>
-        <source>Inuktitut</source>
-        <translation type="obsolete">Inuktitut</translation>
-    </message>
-    <message>
-        <source>Japanese</source>
-        <translation type="obsolete">Japanes</translation>
-    </message>
-    <message>
-        <source>Javanese</source>
-        <translation type="obsolete">Javanese</translation>
-    </message>
-    <message>
-        <source>Georgian</source>
-        <translation type="obsolete">Georgia</translation>
-    </message>
-    <message>
-        <source>Kongo</source>
-        <translation type="obsolete">Kongo</translation>
-    </message>
-    <message>
-        <source>Kikuyu</source>
-        <translation type="obsolete">Kikuyu</translation>
-    </message>
-    <message>
-        <source>Kwanyama</source>
-        <translation type="obsolete">Kwanyama</translation>
-    </message>
-    <message>
-        <source>Kazakh</source>
-        <translation type="obsolete">Kazakh</translation>
-    </message>
-    <message>
-        <source>Kalaallisut</source>
-        <translation type="obsolete">Kalaallisut</translation>
-    </message>
-    <message>
-        <source>Khmer</source>
-        <translation type="obsolete">Khmer</translation>
-    </message>
-    <message>
-        <source>Kannada</source>
-        <translation type="obsolete">Kannada</translation>
-    </message>
-    <message>
-        <source>Korean</source>
-        <translation type="obsolete">Koreano</translation>
-    </message>
-    <message>
-        <source>Kanuri</source>
-        <translation type="obsolete">Kanuri</translation>
-    </message>
-    <message>
-        <source>Kashmiri</source>
-        <translation type="obsolete">Kashmiri</translation>
-    </message>
-    <message>
-        <source>Kurdish</source>
-        <translation type="obsolete">Kurdish</translation>
-    </message>
-    <message>
-        <source>Komi</source>
-        <translation type="obsolete">Komi</translation>
-    </message>
-    <message>
-        <source>Cornish</source>
-        <translation type="obsolete">Cornish</translation>
-    </message>
-    <message>
-        <source>Kirghiz</source>
-        <translation type="obsolete">Kirghiz</translation>
-    </message>
-    <message>
-        <source>Latin</source>
-        <translation type="obsolete">Latino</translation>
-    </message>
-    <message>
-        <source>Luxembourgish</source>
-        <translation type="obsolete">Luxembourgish</translation>
-    </message>
-    <message>
-        <source>Ganda</source>
-        <translation type="obsolete">Ganda</translation>
-    </message>
-    <message>
-        <source>Limburgish</source>
-        <translation type="obsolete">Limburgish</translation>
-    </message>
-    <message>
-        <source>Lingala</source>
-        <translation type="obsolete">Lingala</translation>
-    </message>
-    <message>
-        <source>Lao</source>
-        <translation type="obsolete">Lao</translation>
-    </message>
-    <message>
-        <source>Lithuanian</source>
-        <translation type="obsolete">Lithuanian</translation>
-    </message>
-    <message>
-        <source>Luba-Katanga</source>
-        <translation type="obsolete">Luba-Katanga</translation>
-    </message>
-    <message>
-        <source>Latvian</source>
-        <translation type="obsolete">Latvian</translation>
-    </message>
-    <message>
-        <source>Malagasy</source>
-        <translation type="obsolete">Malagasy</translation>
-    </message>
-    <message>
-        <source>Marshallese</source>
-        <translation type="obsolete">Marshallese</translation>
-    </message>
-    <message>
-        <source>Maori</source>
-        <translation type="obsolete">Maori</translation>
-    </message>
-    <message>
-        <source>Macedonian</source>
-        <translation type="obsolete">Macedonian</translation>
-    </message>
-    <message>
-        <source>Malayalam</source>
-        <translation type="obsolete">Malayalam</translation>
-    </message>
-    <message>
-        <source>Mongolian</source>
-        <translation type="obsolete">Mongolian</translation>
-    </message>
-    <message>
-        <source>Marathi</source>
-        <translation type="obsolete">Marathi</translation>
-    </message>
-    <message>
-        <source>Malay</source>
-        <translation type="obsolete">Malay</translation>
-    </message>
-    <message>
-        <source>Maltese</source>
-        <translation type="obsolete">Maltes</translation>
-    </message>
-    <message>
-        <source>Burmese</source>
-        <translation type="obsolete">Burmese</translation>
-    </message>
-    <message>
-        <source>Nauru</source>
-        <translation type="obsolete">Nauru</translation>
-    </message>
-    <message>
-        <source>Norwegian Bokmal</source>
-        <translation type="obsolete">Norwegian Bokmal</translation>
-    </message>
-    <message>
-        <source>North Ndebele</source>
-        <translation type="obsolete">North Ndebele</translation>
-    </message>
-    <message>
-        <source>Nepali</source>
-        <translation type="obsolete">Nepali</translation>
-    </message>
-    <message>
-        <source>Ndonga</source>
-        <translation type="obsolete">Ndonga</translation>
-    </message>
-    <message>
-        <source>Dutch</source>
-        <translation type="obsolete">Dutch</translation>
-    </message>
-    <message>
-        <source>Norwegian Nynorsk</source>
-        <translation type="obsolete">Norwegian Nynorsk</translation>
-    </message>
-    <message>
-        <source>Norwegian</source>
-        <translation type="obsolete">Norwegian</translation>
-    </message>
-    <message>
-        <source>South Ndebele</source>
-        <translation type="obsolete">Sur Ndebele</translation>
-    </message>
-    <message>
-        <source>Navajo</source>
-        <translation type="obsolete">Navajo</translation>
-    </message>
-    <message>
-        <source>Chichewa</source>
-        <translation type="obsolete">Chichewa</translation>
-    </message>
-    <message>
-        <source>Occitan</source>
-        <translation type="obsolete">Occitan</translation>
-    </message>
-    <message>
-        <source>Ojibwa</source>
-        <translation type="obsolete">Ojibwa</translation>
-    </message>
-    <message>
-        <source>Oromo</source>
-        <translation type="obsolete">Oromo</translation>
-    </message>
-    <message>
-        <source>Oriya</source>
-        <translation type="obsolete">Oriya</translation>
-    </message>
-    <message>
-        <source>Ossetian</source>
-        <translation type="obsolete">Ossetian</translation>
-    </message>
-    <message>
-        <source>Panjabi</source>
-        <translation type="obsolete">Panjabi</translation>
-    </message>
-    <message>
-        <source>Pali</source>
-        <translation type="obsolete">Pali</translation>
-    </message>
-    <message>
-        <source>Polish</source>
-        <translation type="obsolete">Polish</translation>
-    </message>
-    <message>
-        <source>Pashto</source>
-        <translation type="obsolete">Pashto</translation>
-    </message>
-    <message>
-        <source>Portuguese</source>
-        <translation type="obsolete">Portugues</translation>
-    </message>
-    <message>
-        <source>Quechua</source>
-        <translation type="obsolete">Quechua</translation>
-    </message>
-    <message>
-        <source>Raeto-Romance</source>
-        <translation type="obsolete">Raeto-Romance</translation>
-    </message>
-    <message>
-        <source>Kirundi</source>
-        <translation type="obsolete">Kirundi</translation>
-    </message>
-    <message>
-        <source>Romanian</source>
-        <translation type="obsolete">Romania</translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Russia</translation>
-    </message>
-    <message>
-        <source>Kinyarwanda</source>
-        <translation type="obsolete">Kinyarwanda</translation>
-    </message>
-    <message>
-        <source>Sanskrit</source>
-        <translation type="obsolete">Sanskrit</translation>
-    </message>
-    <message>
-        <source>Sardinian</source>
-        <translation type="obsolete">Sardinian</translation>
-    </message>
-    <message>
-        <source>Sindhi</source>
-        <translation type="obsolete">Sindhi</translation>
-    </message>
-    <message>
-        <source>Northern Sami</source>
-        <translation type="obsolete">Northern Sami</translation>
-    </message>
-    <message>
-        <source>Sango</source>
-        <translation type="obsolete">Sango</translation>
-    </message>
-    <message>
-        <source>Serbo-Croatian</source>
-        <translation type="obsolete">Serbo-Croatian</translation>
-    </message>
-    <message>
-        <source>Sinhala</source>
-        <translation type="obsolete">Sinhala</translation>
-    </message>
-    <message>
-        <source>Slovak</source>
-        <translation type="obsolete">Slovak</translation>
-    </message>
-    <message>
-        <source>Slovenian</source>
-        <translation type="obsolete">Slovenian</translation>
-    </message>
-    <message>
-        <source>Samoan</source>
-        <translation type="obsolete">Samoan</translation>
-    </message>
-    <message>
-        <source>Shona</source>
-        <translation type="obsolete">Shona</translation>
-    </message>
-    <message>
-        <source>Somali</source>
-        <translation type="obsolete">Somali</translation>
-    </message>
-    <message>
-        <source>Albanian</source>
-        <translation type="obsolete">Albanian</translation>
-    </message>
-    <message>
-        <source>Serbian</source>
-        <translation type="obsolete">Serbian</translation>
-    </message>
-    <message>
-        <source>Swati</source>
-        <translation type="obsolete">Swati</translation>
-    </message>
-    <message>
-        <source>Southern Sotho</source>
-        <translation type="obsolete">Southern Sotho</translation>
-    </message>
-    <message>
-        <source>Sundanese</source>
-        <translation type="obsolete">Sundanes</translation>
-    </message>
-    <message>
-        <source>Swedish</source>
-        <translation type="obsolete">Swedish</translation>
-    </message>
-    <message>
-        <source>Swahili</source>
-        <translation type="obsolete">Swahili</translation>
-    </message>
-    <message>
-        <source>Tamil</source>
-        <translation type="obsolete">Tamil</translation>
-    </message>
-    <message>
-        <source>Telugu</source>
-        <translation type="obsolete">Telugu</translation>
-    </message>
-    <message>
-        <source>Tajik</source>
-        <translation type="obsolete">Tajik</translation>
-    </message>
-    <message>
-        <source>Thai</source>
-        <translation type="obsolete">Thai</translation>
-    </message>
-    <message>
-        <source>Tigrinya</source>
-        <translation type="obsolete">Tigrinya</translation>
-    </message>
-    <message>
-        <source>Turkmen</source>
-        <translation type="obsolete">Turkmen</translation>
-    </message>
-    <message>
-        <source>Tagalog</source>
-        <translation type="obsolete">Tagalog</translation>
-    </message>
-    <message>
-        <source>Tswana</source>
-        <translation type="obsolete">Tswana</translation>
-    </message>
-    <message>
-        <source>Tonga</source>
-        <translation type="obsolete">Tonga</translation>
-    </message>
-    <message>
-        <source>Turkish</source>
-        <translation type="obsolete">Turkish</translation>
-    </message>
-    <message>
-        <source>Tsonga</source>
-        <translation type="obsolete">Tsonga</translation>
-    </message>
-    <message>
-        <source>Tatar</source>
-        <translation type="obsolete">Tatar</translation>
-    </message>
-    <message>
-        <source>Twi</source>
-        <translation type="obsolete">Twi</translation>
-    </message>
-    <message>
-        <source>Tahitian</source>
-        <translation type="obsolete">Tahitian</translation>
-    </message>
-    <message>
-        <source>Uighur</source>
-        <translation type="obsolete">Uighur</translation>
-    </message>
-    <message>
-        <source>Ukrainian</source>
-        <translation type="obsolete">Ukrainian</translation>
-    </message>
-    <message>
-        <source>Urdu</source>
-        <translation type="obsolete">Urdu</translation>
-    </message>
-    <message>
-        <source>Uzbek</source>
-        <translation type="obsolete">Uzbek</translation>
-    </message>
-    <message>
-        <source>Venda</source>
-        <translation type="obsolete">Venda</translation>
-    </message>
-    <message>
-        <source>Vietnamese</source>
-        <translation type="obsolete">Vietnamese</translation>
-    </message>
-    <message>
-        <source>Volapuk</source>
-        <translation type="obsolete">Volapuk</translation>
-    </message>
-    <message>
-        <source>Walloon</source>
-        <translation type="obsolete">Walloon</translation>
-    </message>
-    <message>
-        <source>Wolof</source>
-        <translation type="obsolete">Wolof</translation>
-    </message>
-    <message>
-        <source>Xhosa</source>
-        <translation type="obsolete">Xhosa</translation>
-    </message>
-    <message>
-        <source>Yiddish</source>
-        <translation type="obsolete">Yiddish</translation>
-    </message>
-    <message>
-        <source>Yoruba</source>
-        <translation type="obsolete">Yoruba</translation>
-    </message>
-    <message>
-        <source>Zhuang</source>
-        <translation type="obsolete">Zhuang</translation>
-    </message>
-    <message>
-        <source>Chinese</source>
-        <translation type="obsolete">China</translation>
-    </message>
-    <message>
-        <source>Zulu</source>
-        <translation type="obsolete">Zulu</translation>
     </message>
     <message>
         <source>%1 Morphology</source>
@@ -2787,10 +1978,6 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Navigation</source>
-        <translation type="obsolete">Thaqhawi</translation>
-    </message>
-    <message>
         <source>Back</source>
         <translation>Qhipa</translation>
     </message>
@@ -2801,10 +1988,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Scan Popup</source>
         <translation>Escanear en ventana &amp;emergente</translation>
-    </message>
-    <message>
-        <source>Pronounce word</source>
-        <translation type="obsolete">Pronounce word</translation>
     </message>
     <message>
         <source>Show &amp;Main Window</source>
@@ -2823,10 +2006,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>Thukum aka tuqi </translation>
     </message>
     <message>
-        <source>[Unknown]</source>
-        <translation type="obsolete">[Sconosciuto]</translation>
-    </message>
-    <message>
         <source>Page Setup</source>
         <translation>Laphi askichaña</translation>
     </message>
@@ -2843,20 +2022,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>Kunjam qillqa imaña</translation>
     </message>
     <message>
-        <source>Html files (*.html *.htm)</source>
-        <translation type="obsolete">Archivos HTML (*.html *.htm)</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Pantja</translation>
     </message>
     <message>
         <source>Can&apos;t save article: %1</source>
         <translation>Janiw qillqa imañ atiykiti: %1</translation>
-    </message>
-    <message>
-        <source>Error loading dictionaries</source>
-        <translation type="obsolete">Pantjiw aru pirwa apaqaña</translation>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
@@ -2881,10 +2052,6 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <source>Look up in:</source>
         <translation>Kawkin thaqaña:</translation>
-    </message>
-    <message>
-        <source>Show Names in Dictionary Bar</source>
-        <translation type="obsolete">Sutinaka uñjañawi aru pirwan barrana </translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -2943,22 +2110,6 @@ between classic and school orthography in cyrillic)</source>
         <translation>(jan sutini)</translation>
     </message>
     <message>
-        <source>WARNING: %1</source>
-        <translation type="obsolete">akataraki : %1</translation>
-    </message>
-    <message>
-        <source>GoldenDict</source>
-        <translation type="obsolete">GoldenDict</translation>
-    </message>
-    <message>
-        <source>Tab 1</source>
-        <translation type="obsolete">Tab 1</translation>
-    </message>
-    <message>
-        <source>Tab 2</source>
-        <translation type="obsolete">Tab 2</translation>
-    </message>
-    <message>
         <source>Welcome!</source>
         <translation>¡Aski jutawi!</translation>
     </message>
@@ -2979,16 +2130,8 @@ between classic and school orthography in cyrillic)</source>
         <translation>&amp;Preferencias...</translation>
     </message>
     <message>
-        <source>&amp;Sources...</source>
-        <translation type="obsolete">&amp;Sources...</translation>
-    </message>
-    <message>
         <source>F2</source>
         <translation>F2</translation>
-    </message>
-    <message>
-        <source>&amp;Groups...</source>
-        <translation type="obsolete">&amp;tamanaka...</translation>
     </message>
     <message>
         <source>&amp;View</source>
@@ -3075,28 +2218,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>Mayjachaña&amp;laphi</translation>
     </message>
     <message>
-        <source>Print Preview</source>
-        <translation type="obsolete">liqsuñ uñjawi</translation>
-    </message>
-    <message>
-        <source>Rescan Files</source>
-        <translation type="obsolete">Reescanear Archivos</translation>
-    </message>
-    <message>
         <source>Ctrl+F5</source>
         <translation>Ctrl+F5</translation>
     </message>
     <message>
         <source>&amp;Clear</source>
         <translation>&amp;Despejar</translation>
-    </message>
-    <message>
-        <source>Search Pane</source>
-        <translation type="obsolete">Panel de búsquedas</translation>
-    </message>
-    <message>
-        <source>Ctrl+F11</source>
-        <translation type="obsolete">Ctrl+F11</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -3446,10 +2573,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Aru pirwa pirqantata:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Aru pirwa jan apnaqañataki:</translation>
     </message>
@@ -3652,10 +2775,6 @@ se puede prenderla o
 apagarla desde la ventana principal o el icono en la bandeja del sistema.</translation>
     </message>
     <message>
-        <source>Scan popup functionality</source>
-        <translation type="obsolete">Scan popup functionality</translation>
-    </message>
-    <message>
         <source>Enable scan popup functionality</source>
         <translation>Habilitar escaneo en una ventana emergente</translation>
     </message>
@@ -3800,36 +2919,12 @@ p, li { white-space: pre-wrap; }
         <translation>Aru jaquqipa</translation>
     </message>
     <message>
-        <source>Use Windows native playback API. Limited to .wav files only,
-but works very well.</source>
-        <translation type="obsolete">Apnaqaña API nativa de Windows apnakañataki
-a archivos .wav,askiwa.</translation>
-    </message>
-    <message>
-        <source>Play via Windows native API</source>
-        <translation type="obsolete">API apnaqaña nativa de Windows</translation>
-    </message>
-    <message>
-        <source>Play audio via Phonon framework. May be somewhat unstable,
-but should support most audio file formats.</source>
-        <translation type="obsolete">Arst&apos;awi Phonon arst&apos;awayi. inach janiw sumaniti, 
-taxpach arunaka apnakispawa</translation>
-    </message>
-    <message>
-        <source>Play via Phonon</source>
-        <translation type="obsolete">Phononmpi arst&apos;asi </translation>
-    </message>
-    <message>
         <source>Use any external program to play audio files</source>
         <translation>Taxpach wakist&apos;awi arunakax apnakaskaniwa </translation>
     </message>
     <message>
         <source>Use external program:</source>
         <translation>Ankat wakist&apos;awi apnaqam:</translation>
-    </message>
-    <message>
-        <source>Program to play audio files:</source>
-        <translation type="obsolete">Program to play audio files:</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -3893,24 +2988,12 @@ download page.</source>
         <translation>Sistemaw phanti</translation>
     </message>
     <message>
-        <source>English</source>
-        <translation type="obsolete">Inglés </translation>
-    </message>
-    <message>
-        <source>Russian</source>
-        <translation type="obsolete">Russia</translation>
-    </message>
-    <message>
         <source>Default</source>
         <translation>Phanta layku </translation>
     </message>
     <message>
         <source>Lingvo</source>
         <translation>Lingvo</translation>
-    </message>
-    <message>
-        <source>Play via DirectShow</source>
-        <translation type="obsolete">DirectShow </translation>
     </message>
     <message>
         <source>Changing Language</source>
@@ -3973,41 +3056,6 @@ Plugin must be installed for this option to work.</source>
     </message>
     <message>
         <source>Ad&amp;vanced</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ScanPopup extra technologies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Try to use IAccessibleEx technology to retrieve word under cursor.
-This technology works only with some programs that support it
- (for example Internet Explorer 9).
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use &amp;IAccessibleEx</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Try to use UI Automation technology to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use &amp;UIAutomation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Try to use special GoldenDict message to retrieve word under cursor.
-This technology works only with some programs that support it.
-It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use &amp;GoldenDict message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4503,28 +3551,8 @@ clears its network cache from disk during exit.</source>
 <context>
     <name>ScanPopup</name>
     <message>
-        <source>%1 results differing in diacritic marks</source>
-        <translation type="obsolete">%1 results differing in diacritic marks</translation>
-    </message>
-    <message>
-        <source>%1 result(s) beginning with the search word</source>
-        <translation type="obsolete">%1 result(s) beginning with the search word</translation>
-    </message>
-    <message>
         <source>Dialog</source>
         <translation>Tantachaw aru </translation>
-    </message>
-    <message>
-        <source>word</source>
-        <translation type="obsolete">Aru</translation>
-    </message>
-    <message>
-        <source>List Matches (Alt+M)</source>
-        <translation type="obsolete">Kikpa amuyt&apos;awan sinru qillqa (Alt+M)</translation>
-    </message>
-    <message>
-        <source>Alt+M</source>
-        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -4544,16 +3572,8 @@ could be resized or managed in other ways.</source>
         <translation>Utilice esto para fijar la ventana en la pantalla, redimensionarla o gerenciarla en otra manera.</translation>
     </message>
     <message>
-        <source>List matches</source>
-        <translation type="obsolete">List matches</translation>
-    </message>
-    <message>
         <source>...</source>
         <translation>...</translation>
-    </message>
-    <message>
-        <source>Pronounce word</source>
-        <translation type="obsolete">Pronounce word</translation>
     </message>
     <message>
         <source>Back</source>
@@ -4622,10 +3642,6 @@ could be resized or managed in other ways.</source>
         <translation> &lt;b&gt;%1&lt;/b&gt; de la lista?</translation>
     </message>
     <message>
-        <source>Sources</source>
-        <translation type="obsolete">Sources</translation>
-    </message>
-    <message>
         <source>Files</source>
         <translation>File</translation>
     </message>
@@ -4692,10 +3708,6 @@ fondos de grupos apropriados para utilizarlos.</translation>
         <translation>Taqi tuqi web. Una cadena %GDWORD% será reemplazada por la palabra buscada:</translation>
     </message>
     <message>
-        <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation type="obsolete">Alternativamente, use %GD1251% en lugar de CP1251, %GDISO1% en lugar de ISO 8859-1.</translation>
-    </message>
-    <message>
         <source>Forvo</source>
         <translation>Forvo</translation>
     </message>
@@ -4716,24 +3728,6 @@ fondos de grupos apropriados para utilizarlos.</translation>
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
         <translation>Forvo apnaqawi mä clavempi API mantani. jankukiw jaytam, inach jutir pacha istarani, jan ukax akar qillqasim.</translation>
-    </message>
-    <message>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table style=&quot;-qt-table-type: root; margin-top:4px; margin-bottom:4px; margin-left:4px; margin-right:4px;&quot;&gt;
-&lt;tr&gt;
-&lt;td style=&quot;border: none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Obtenga tu propria clave &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;aquí&lt;/span&gt;&lt;/a&gt;, o deje en blanco para utilizar la clave por defecto.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Language codes (comma-separated):</source>
@@ -4786,24 +3780,8 @@ basado en la fonología inglesa</translation>
         <translation>Hepburn</translation>
     </message>
     <message>
-        <source>The most regular system, having a one-to-one relation to the
-kana writing systems. Standardized as ISO 3602
-Not implemented yet in GoldenDict.</source>
-        <translation type="obsolete">El sistema más utilizado, con una relación uno-a-uno con sistemas de escritura kana.
-Su estándar es ISO-3602.
-Todavia no implementado en GoldenDict.</translation>
-    </message>
-    <message>
         <source>Nihon-shiki</source>
         <translation>Nihon-shiki</translation>
-    </message>
-    <message>
-        <source>Based on Nihon-shiki system, but modified for modern standard Japanese.
-Standardized as ISO 3602
-Not implemented yet in GoldenDict.</source>
-        <translation type="obsolete">Basado en el sistema Nihon-shiki, pero modificado para el japonés moderno estándar.
-Estandarizado como ISO 3602
-Todavía no implementado en GoldenDict.</translation>
     </message>
     <message>
         <source>Kunrei-shiki</source>
@@ -4828,10 +3806,6 @@ Todavía no implementado en GoldenDict.</translation>
     <message>
         <source>Katakana</source>
         <translation>Katakana</translation>
-    </message>
-    <message>
-        <source>Each morphology dictionary appears as a separate auxiliary dictionary which provides stem words for searches and spelling suggestions for mistyped words. Add appropriate dictionaries to the bottoms of the appropriate groups to use them.</source>
-        <translation type="obsolete">sapa t&apos;aqa t&apos;aqa arupirwa yanapa aru pirwa saphimpi uñsti qillqa askichañataki. t&apos;aqa t&apos;aqa arupirwa apnaqañataki uskuwayi.</translation>
     </message>
     <message>
         <source>Wikipedia</source>

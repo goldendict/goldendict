@@ -3,6 +3,7 @@
 
 #include "utf8.hh"
 #include <vector>
+#include <algorithm>
 
 namespace Utf8 {
 
@@ -173,6 +174,65 @@ bool isspace( int c )
     default:
       return false;
   }
+}
+
+//get the first line in string s1. -1 if not found
+int findFirstLinePosition( char* s1,int s1length, const char* s2,int s2length)
+{
+    char* pos = std::search(s1,s1+s1length, s2, s2+s2length);
+
+    if (pos == s1 + s1length)
+        return pos-s1;
+
+    //the line size.
+    return pos- s1+ s2length;
+}
+
+char const* getEncodingNameFor(Encoding e)
+{
+    switch (e)
+    {
+    case Utf16LE:
+        return "UTF-16LE";
+    case Utf16BE:
+        return "UTF-16BE";
+    case Windows1252:
+        return "WINDOWS-1252";
+    case Windows1251:
+        return "WINDOWS-1251";
+    case Utf8:
+        return "UTF-8";
+    case Windows1250:
+    default:
+        return "WINDOWS-1250";
+    }
+}
+
+LineFeed initLineFeed(Encoding e)
+{
+    LineFeed lf;
+	switch (e)
+	{
+	case Utf8::Utf16LE:
+        lf.lineFeed= new char[2]{ 0x0A,0 };
+        lf.length = 2;
+		break;
+	case Utf8::Utf16BE:
+        lf.lineFeed = new char[2]{ 0,0x0A };
+        lf.length = 2;
+		break;
+	case Utf8::Windows1252:
+
+	case Utf8::Windows1251:
+
+	case Utf8::Utf8:
+
+	case Utf8::Windows1250:
+	default:
+        lf.length = 1;
+        lf.lineFeed = new char[1]{ 0x0A };
+	}
+    return lf;
 }
 
 }

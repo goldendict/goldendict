@@ -8,7 +8,7 @@
 #include "wstring_qt.hh"
 #include "parsecmdline.hh"
 #include "iconv.hh"
-#include "qt4x5.hh"
+#include "utils.hh"
 
 #include <QDir>
 #include <QFileInfo>
@@ -90,7 +90,7 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
       QUrl url;
       url.setScheme( "gdprg" );
       url.setHost( QString::fromUtf8( getId().c_str() ) );
-      url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
+      url.setPath( Utils::Url::ensureLeadingSlash( QString::fromUtf8( wordUtf8.c_str() ) ) );
 
       string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
@@ -130,7 +130,7 @@ void ProgramsDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.png");
+    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/programs.svg");
   dictionaryIconLoaded = true;
 }
 
@@ -353,7 +353,7 @@ void ProgramWordSearchRequest::instanceFinished( QByteArray output, QString erro
     // Handle any Windows artifacts
     output.replace( "\r\n", "\n" );
     QStringList result =
-      QString::fromUtf8( output ).split( "\n", QString::SkipEmptyParts );
+      QString::fromUtf8( output ).split( "\n", Qt::SkipEmptyParts );
 
     for( int x = 0; x < result.size(); ++x )
       matches.push_back( Dictionary::WordMatch( gd::toWString( result[ x ] ) ) );
