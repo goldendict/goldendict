@@ -143,7 +143,7 @@ string encode( wstring const & in ) throw()
                  encode( in.data(), in.size(), &buffer.front() ) );
 }
 
-wstring decode( string const & in ) THROW_SPEC( exCantDecode )
+wstring decode( string const & in ) 
 {
   
   if ( in.size() == 0 )

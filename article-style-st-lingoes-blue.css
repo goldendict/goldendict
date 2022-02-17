@@ -134,6 +134,12 @@ a:hover {
 	display: none;
 }
 
+/* Headers */
+h3 {
+    color: inherit;
+    font-family: Arial;
+}
+
 /* The first headword in a (possibly) multi-headword DSL article */
 .gdarticlebody > div:first-child .dsl_headwords,
 .gdarticlebody > h3:first-child {
@@ -160,12 +166,6 @@ a:hover {
 
 code::selection {
 	background: #839EC7;
-}
-
-/* Headers */
-h3 {
-	color: inherit; 
-	font-family: Arial;
 }
 
 /******** DSL Dictionaries ****************/
@@ -226,9 +226,6 @@ h3 {
 	-webkit-border-radius: 100px;
 	text-align: center;
 	vertical-align: text-bottom;
-}
-
-.dsl_s_wav a {
 	color: #FFF;
 	border: 1px solid #798415;
 	-webkit-box-shadow: 1px 1px #CCC, inset -1px -1px #4E7500;

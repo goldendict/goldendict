@@ -73,7 +73,7 @@ size_t WordSearchRequest::matchesCount()
   return matches.size();
 }
 
-WordMatch WordSearchRequest::operator [] ( size_t index ) THROW_SPEC( exIndexOutOfRange )
+WordMatch WordSearchRequest::operator [] ( size_t index ) 
 {
   Mutex::Lock _( dataMutex );
   
@@ -83,7 +83,7 @@ WordMatch WordSearchRequest::operator [] ( size_t index ) THROW_SPEC( exIndexOut
   return matches[ index ];
 }
 
-vector< WordMatch > & WordSearchRequest::getAllMatches() THROW_SPEC( exRequestUnfinished )
+vector< WordMatch > & WordSearchRequest::getAllMatches() 
 {
   if ( !isFinished() )
     throw exRequestUnfinished();
@@ -112,7 +112,7 @@ long DataRequest::dataSize()
 }
 
 void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
-  THROW_SPEC( exSliceOutOfRange )
+  
 {
   if ( size == 0 )
     return;
@@ -125,7 +125,7 @@ void DataRequest::getDataSlice( size_t offset, size_t size, void * buffer )
   memcpy( buffer, &data[ offset ], size );
 }
 
-vector< char > & DataRequest::getFullData() THROW_SPEC( exRequestUnfinished )
+vector< char > & DataRequest::getFullData() 
 {
   if ( !isFinished() )
     throw exRequestUnfinished();
@@ -147,13 +147,13 @@ sptr< WordSearchRequest > Class::stemmedMatch( wstring const & /*str*/,
                                                unsigned /*minLength*/,
                                                unsigned /*maxSuffixVariation*/,
                                                unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+  
 {
   return new WordSearchRequestInstant();
 }
 
 sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
-  THROW_SPEC( std::exception )
+  
 {
   return new WordSearchRequestInstant();
 }
@@ -165,7 +165,7 @@ vector< wstring > Class::getAlternateWritings( wstring const & )
 }
 
 sptr< DataRequest > Class::getResource( string const & /*name*/ )
-  THROW_SPEC( std::exception )
+  
 {
   return new DataRequestInstant( false );
 }
@@ -487,13 +487,13 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
       ZipFile::SplitZipFile zf( name );
       if( !zf.exists() )
         return true;
-      ts = zf.lastModified().toTime_t();
+      ts = zf.lastModified().toSecsSinceEpoch();
     }
     else
     {
       if ( !fileInfo.exists() )
         return true;
-      ts = fileInfo.lastModified().toTime_t();
+      ts = fileInfo.lastModified().toSecsSinceEpoch();
     }
 
     if ( ts > lastModified )
@@ -505,7 +505,7 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
   if ( !fileInfo.exists() )
     return true;
 
-  return fileInfo.lastModified().toTime_t() < lastModified;
+  return fileInfo.lastModified().toSecsSinceEpoch() < lastModified;
 }
 
 QString generateRandomDictionaryId()

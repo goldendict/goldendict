@@ -625,7 +625,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
       QPoint currentPos = QCursor::pos();
 
-      QRect desktop = QApplication::desktop()->screenGeometry();
+      QRect desktop = QGuiApplication::primaryScreen()->geometry();
 
       QSize windowSize = geometry().size();
 

@@ -60,11 +60,11 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults ) THROW_SPEC( std::exception );
+                                                 unsigned long maxResults ) ;
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
                                           wstring const &, bool )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual quint32 getLangFrom() const
   { return langId; }
@@ -545,7 +545,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
 sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word,
                                                             unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   (void) maxResults;
   if ( word.size() > 80 )
@@ -561,7 +561,7 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
                                                      vector< wstring > const & alts,
                                                      wstring const &, bool )
-  THROW_SPEC( std::exception )
+  
 {
   if ( word.size() > 80 )
   {
@@ -579,7 +579,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
                                       QNetworkAccessManager & mgr )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > result;
 

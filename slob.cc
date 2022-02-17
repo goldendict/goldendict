@@ -606,10 +606,10 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                         vector< wstring > const & alts,
                                                         wstring const &,
                                                         bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual QString const& getDescription();
 
@@ -902,7 +902,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           || list[ 1 ].endsWith( " tex" ) )
       {
         QString name;
-        name.sprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
+        name.asprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
         imgName = texCachePath + "/" + name;
 
         if( !QFileInfo( imgName ).exists() )
@@ -985,7 +985,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
-          QProcess::execute( command );
+          QProcess::execute( command,QStringList() );
         }
 
         QString tag = QString( "<img class=\"imgtex\" src=\"file://" )
@@ -1485,7 +1485,7 @@ sptr< Dictionary::DataRequest > SlobDictionary::getArticle( wstring const & word
                                                             vector< wstring > const & alts,
                                                             wstring const &,
                                                             bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new SlobArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1634,7 +1634,7 @@ void SlobResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > SlobDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new SlobResourceRequest( *this, name );
 }
@@ -1645,7 +1645,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

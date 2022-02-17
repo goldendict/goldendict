@@ -218,14 +218,11 @@ QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
   return scrollToPrefix + dictionaryId;
 }
 
-ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
-                          AudioPlayerPtr const & audioPlayer_,
+ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
-                          Instances::Groups const & groups_, bool popupView_,
-                          Config::Class const & cfg_,
-                          QAction & openSearchAction_,
-                          QAction * dictionaryBarToggled_,
-                          GroupComboBox const * groupComboBox_ ):
+                          Instances::Groups const & groups_, bool popupView_, Config::Class const & cfg_,
+                          QAction & openSearchAction_, QAction * dictionaryBarToggled_,
+                          GroupComboBox const * groupComboBox_ ) :
   QFrame( parent ),
   articleNetMgr( nm ),
   audioPlayer( audioPlayer_ ),
@@ -395,7 +392,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
-  currentWord = phrase.phrase;
+  currentWord = phrase.phrase.trimmed();
   currentActiveDictIds.clear();
   // first, let's stop the player
   audioPlayer->stop();
@@ -473,7 +470,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 {
   if( dictIDs.isEmpty() )
     return;
-  currentWord = word;
+  currentWord = word.trimmed();
   // first, let's stop the player
   audioPlayer->stop();
 
@@ -543,6 +540,7 @@ void ArticleView::loadFinished( bool result )
     }
   }
   else
+  if( cfg.preferences.autoScrollToTargetArticle )
   {
     QString const scrollTo = Utils::Url::queryItemValue( url, "scrollto" );
     if( isScrollTo( scrollTo ) )
@@ -859,15 +857,17 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         int delta = result == Gestures::SWIPE_UP ? -120 : 120;
         QWidget *widget = static_cast< QWidget * >( obj );
 
+        QPoint angleDelta(0, delta);
+        QPoint pixelDetal;
         QWidget *child = widget->childAt( widget->mapFromGlobal( pt ) );
         if( child )
         {
-          QWheelEvent whev( child->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+          QWheelEvent whev( child->mapFromGlobal( pt ), pt,  pixelDetal,angleDelta, Qt::NoButton, Qt::NoModifier,Qt::NoScrollPhase,false);
           qApp->sendEvent( child, &whev );
         }
         else
         {
-          QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+          QWheelEvent whev( widget->mapFromGlobal( pt ), pt,pixelDetal, angleDelta,Qt::NoButton, Qt::NoModifier,Qt::NoScrollPhase,false );
           qApp->sendEvent( widget, &whev );
         }
       }
@@ -923,6 +923,21 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
       {
         emit typingEvent( text );
         return true;
+      }
+    }
+    else if( ev->type() == QEvent::Wheel )
+    {
+      QWheelEvent * pe = static_cast< QWheelEvent * >( ev );
+      if( pe->modifiers().testFlag( Qt::ControlModifier ) )
+      {
+        if( pe->angleDelta().y() > 0 )
+        {
+          zoomIn();
+        }
+        else
+        {
+          zoomOut();
+        }
       }
     }
   }

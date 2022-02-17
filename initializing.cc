@@ -8,6 +8,7 @@
 #if defined( Q_OS_WIN32 )
 #include <qt_windows.h>
 #include <uxtheme.h>
+#include <QOperatingSystemVersion>
 
 WindowsStyle::WindowsStyle()
 {
@@ -41,8 +42,7 @@ Initializing::Initializing( QWidget * parent, bool showOnStartup ): QDialog( par
 
   oldBarStyle = 0;
 
-  if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA
-      && ( QSysInfo::windowsVersion() & QSysInfo::WV_NT_based )
+  if( QOperatingSystemVersion::current () >= QOperatingSystemVersion::Windows7
       && !IsThemeActive() )
   {
     QStyle * barStyle = WindowsStyle::instance().getStyle();

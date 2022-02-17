@@ -77,7 +77,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     if ( lang == "qt" )
       continue; // We skip qt's own localizations
 
-    sortedLocs.insertMulti(
+    sortedLocs.insert(
       Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
       QPair< QIcon, QString >(
         QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
@@ -122,7 +122,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
         reg = lang.toUpper();
     }
 
-    sortedHelps.insertMulti(
+    sortedHelps.insert(
       Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
       QPair< QIcon, QString >(
         QIcon( QString( ":/flags/%1.png" ).arg( reg.toLower() ) ), lang + "_" + reg ) );
@@ -169,6 +169,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.cbAutostart->setChecked( p.autoStart );
   ui.doubleClickTranslates->setChecked( p.doubleClickTranslates );
   ui.selectBySingleClick->setChecked( p.selectWordBySingleClick);
+  ui.autoScrollToTargetArticle->setChecked( p.autoScrollToTargetArticle );
   ui.escKeyHidesMainWindow->setChecked( p.escKeyHidesMainWindow );
 
   ui.enableMainWindowHotkey->setChecked( p.enableMainWindowHotkey );
@@ -379,6 +380,7 @@ Config::Preferences Preferences::getPreferences()
   p.autoStart = ui.cbAutostart->isChecked();
   p.doubleClickTranslates = ui.doubleClickTranslates->isChecked();
   p.selectWordBySingleClick = ui.selectBySingleClick->isChecked();
+  p.autoScrollToTargetArticle = ui.autoScrollToTargetArticle->isChecked();
   p.escKeyHidesMainWindow = ui.escKeyHidesMainWindow->isChecked();
 
   p.enableMainWindowHotkey = ui.enableMainWindowHotkey->isChecked();

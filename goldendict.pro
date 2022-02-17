@@ -1,18 +1,18 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0-RC2+git
+VERSION = 22.2.alpha
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
 # rebuilt; and doing it here is required too since any other way the RCC
 # compiler would complain if version.txt wouldn't exist (fresh checkouts).
 
-system(git describe --tags --always --dirty > version.txt): hasGit=1
+system(git describe --tags --always --dirty): hasGit=1
 
-isEmpty( hasGit ) {
-  message(Failed to precisely describe the version via Git -- using the default version string)
-  system(echo $$VERSION > version.txt)
+!isEmpty(hasGit){
+    GIT_HASH=$$system(git rev-parse --short HEAD )
 }
+system(echo $${VERSION}.$${GIT_HASH} > version.txt)
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
@@ -28,6 +28,8 @@ QT += widgets \
       webchannel\
       printsupport \
       help
+
+DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
 
 # QMediaPlayer is not available in Qt4.
 !CONFIG( no_qtmultimedia_player ) {
@@ -60,7 +62,7 @@ win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
+        #VERSION = 22.2 # More complicated things cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
@@ -95,7 +97,7 @@ win32 {
     }
 
 
-    RC_FILE = goldendict.rc
+    #RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
 
     # Enable console in Debug mode on Windows, with useful logging messages
@@ -209,15 +211,14 @@ mac {
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
-        CONFIG( x86 ) {
+        #CONFIG( x86 ) {
             QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
-        } else {
-            QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
-        }
+                                 cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/ 
+        #} else {
+        #    QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
+        #                         cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+        #                         cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+        #}
     }
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
@@ -550,11 +551,10 @@ CONFIG( chinese_conversion_support ) {
   SOURCES += chinese.cc \
              chineseconversion.cc
   win32-msvc* {
-    Debug:   LIBS += -lopenccd
-    Release: LIBS += -lopencc
+    LIBS += -lopencc
   } else {
     mac {
-      LIBS += -lopencc.2
+      LIBS += -lopencc.1.1
     } else {
       LIBS += -lopencc
     }
@@ -609,11 +609,11 @@ TRANSLATIONS += locale/ru_RU.ts \
   PRE_TARGETDEPS      += $$PWD/version.txt
   revtarget.target     = $$PWD/version.txt
 
-  !win32 {
-    revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
-  } else {
-    revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
-  }
+#  !win32 {
+#    revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
+#  } else {
+#    revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
+#  }
 
   ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
   for(src, ALL_SOURCES) {

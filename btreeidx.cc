@@ -462,7 +462,7 @@ BtreeWordSearchRequest::~BtreeWordSearchRequest()
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -470,7 +470,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                      false, maxResults );
@@ -1437,16 +1437,17 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
-                                                    result.at( i ).articleOffset );
+      uint32_t articleOffset =   result.at(i).articleOffset;
+      QList<uint32_t>::Iterator  it = std::lower_bound( begOffsets, endOffsets,
+                                                    articleOffset );
 
-      if( it != offsets.end() )
+      if( it!=offsets.end())
       {
         if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
-        offsets.erase( it );
+        offsets.erase( it);
         begOffsets = offsets.begin();
         endOffsets = offsets.end();
       }

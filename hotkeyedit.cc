@@ -87,7 +87,7 @@ void HotKeyEdit::keyPressEvent( QKeyEvent * event )
         // Delete current combo
         currentKey1 = 0;
         currentKey2 = 0;
-        currentModifiers = 0;
+        currentModifiers = Qt::NoModifier;
         continuingCombo = false;
       }
       else

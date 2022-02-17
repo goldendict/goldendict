@@ -1,21 +1,32 @@
-# all the changes:
--  replace webkit with webenginewidgets
--    clean old code.
-      -  remove old `if 0` code section 
-      -  qt_version check 
-      -  remove IS_QT_5 check
-           rename qt4x5.hh to utils.hh,for the name is not proper now.
-      - QString::SkipEmptyParts=>Qt::SkipEmptyParts
-      - remove "CONFIG+=old_hunspell" 
--  remove iconv partly,use qtextcodec instead.
-      - when parse mdx dictionary ,use qtextcodec
-      - when parse dsl dictionary ,use qtextcodec instead of iconv
+# Changes
+
+## Until to now
+- upgrade opencc to 2020-04-26 version
+- upgrade ffmpeg to 4.4
+- fix: double click word to translate ,right context menu does not display.
+- add macos release workflow ,though not verified.
+
+
+
+## Until to 2022-2-2
+- replace webkit with webenginewidgets
+- clean old code.
+  -  remove old `if 0` code section 
+  -  qt_version check 
+  -  remove IS_QT_5 check
+  
+     rename qt4x5.hh to utils.hh,for the name is not proper now.
+  - QString::SkipEmptyParts=>Qt::SkipEmptyParts
+  - remove "CONFIG+=old_hunspell" 
+- remove iconv partly,use qtextcodec instead.
+   - when parse mdx dictionary ,use qtextcodec
+   - when parse dsl dictionary ,use qtextcodec instead of iconv
       
-      fix the old bug https://github.com/goldendict/goldendict/issues/1322 by the way
--   remove dependency of iconv lib completely,use qtextcodec instead. has not merge into this PR yet. in this branch https://github.com/xiaoyifang/goldendict/tree/remove-iconv-lib
--   bug, found dictionaries panel show all the dictionaries  which is not correct.
--  bug,F12 inspect function.
--  bug ,double click event.in webengineview widget. the mouse event was eated by child widget.
+   fix the old bug https://github.com/goldendict/goldendict/issues/1322 by the way
+- remove dependency of iconv lib completely,use qtextcodec instead. has not merge into this PR yet. in this branch https://github.com/xiaoyifang/goldendict/tree/remove-iconv-lib
+- bug, found dictionaries panel show all the dictionaries  which is not correct.
+- bug,F12 inspect function.
+- bug ,double click event.in webengineview widget. the mouse event was eated by child widget.
 - bug,bword link (hunspell dictionary) navigation error.
 - single click to select the word ~(**work inside  iframe**)~
 - Fix:open image url in external viewer.  (only worked with external images)

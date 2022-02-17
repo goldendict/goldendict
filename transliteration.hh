@@ -40,15 +40,15 @@ public:
     throw() = 0;
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
-                                                             unsigned long ) THROW_SPEC( std::exception );
+                                                             unsigned long ) ;
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const &,
                                                       wstring const &, bool )
-    THROW_SPEC( std::exception );
+    ;
 };
 
 

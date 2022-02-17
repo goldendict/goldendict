@@ -1,19 +1,31 @@
 name: Windows
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 on: 
   workflow_dispatch:
   # push代码时触发workflow
   push:
     branches:
       - dev
-    # paths:
-    #   - '*.pro'
-    #   - '.github/**'
+      - master
+      # - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
+      - ".clang-format"      
   pull_request:
     branches:
       - dev
-    # paths:
-    #   - '*.pro'
-    #   - '.github/**' 
+      - master
+      # - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
 jobs:
   build:
     name: Build
@@ -50,6 +62,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+      - name: Set outputs
+        id: githash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+      - uses: Klemensas/action-autotag@stable
+        id: autotag
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "v"
+          tag_suffix: "-${{ steps.githash.outputs.sha_short }}"
       # msvc编译
       - name: msvc-build goldendict
         id: build
@@ -96,9 +118,9 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ steps.package.outputs.packageName }}.zip
-          tag: prerelease-${{steps.vars.outputs.release_date}}
+          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: Ubuntu-Windows-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }} built on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
+          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
@@ -109,3 +131,24 @@ jobs:
             AppImage built with:  Ubuntu-20.04 ,latest gcc
 
             This is a prerelease version ,auto build by github action. use on your on risk:-)
+      - name: upload goldendict.exe only
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release/${{ env.targetName }}
+          asset_name: ${{ env.targetName }}
+          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          prerelease: true
+          body: |
+            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            macos built with:     macos-10.15,macos-11.0,clang_64
+            This is a prerelease version ,auto build by github action. use on your on risk:-)   

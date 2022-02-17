@@ -360,6 +360,8 @@ private slots:
   void zoomout();
   void unzoom();
 
+  void viewLinkClicked( const QUrl & url );
+
   void scaleArticlesByCurrentZoomFactor();
 
   void doWordsZoomIn();
@@ -524,7 +526,7 @@ class ArticleSaveProgressDialog : public QProgressDialog
 Q_OBJECT
 
 public:
-  explicit ArticleSaveProgressDialog( QWidget * parent = 0,  Qt::WindowFlags f = 0 ):
+  explicit ArticleSaveProgressDialog( QWidget * parent = 0,  Qt::WindowFlags f = Qt::Widget ):
     QProgressDialog( parent, f )
   {
     setAutoReset( false );

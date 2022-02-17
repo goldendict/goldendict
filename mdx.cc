@@ -252,8 +252,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const & word,
                                                       vector< wstring > const & alts,
                                                       wstring const &,
-                                                      bool ignoreDiacritics ) THROW_SPEC( std::exception );
-  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
+                                                      bool ignoreDiacritics ) ;
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) ;
   virtual QString const & getDescription();
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
@@ -725,7 +725,7 @@ void MdxArticleRequest::run()
 }
 
 sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, const vector<wstring> & alts,
-                                                         const wstring &, bool ignoreDiacritics ) THROW_SPEC( std::exception )
+                                                         const wstring &, bool ignoreDiacritics ) 
 {
   return new MdxArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -848,7 +848,7 @@ void MddResourceRequest::run()
     catch ( File::exCantOpen & )
     {
       for ( vector< sptr< IndexedMdd > >::const_iterator i = dict.mddResources.begin();
-            i != dict.mddResources.end(); i++  )
+            i != dict.mddResources.end(); ++i  )
       {
         sptr< IndexedMdd > mddResource = *i;
         if ( mddResource->loadFile( resourceName, data ) )
@@ -931,7 +931,7 @@ void MddResourceRequest::run()
   finish();
 }
 
-sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) THROW_SPEC( std::exception )
+sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) 
 {
   return new MddResourceRequest( *this, name );
 }
@@ -1272,7 +1272,7 @@ QString MdxDictionary::getCachedFileName( QString filename )
         catch ( File::exCantOpen & )
         {
           for ( vector< sptr< IndexedMdd > >::const_iterator i = mddResources.begin();
-                i != mddResources.end(); i++  )
+                i != mddResources.end(); ++i )
           {
             sptr< IndexedMdd > mddResource = *i;
             if ( mddResource->loadFile( resourceName, data ) )
@@ -1443,11 +1443,11 @@ static void findResourceFiles( string const & mdx, vector< string > & dictFiles 
 
 vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
                                                       string const & indicesDir,
-                                                      Dictionary::Initializing & initializing ) THROW_SPEC( std::exception )
+                                                      Dictionary::Initializing & initializing ) 
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
-  for ( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end(); i++ )
+  for ( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end(); ++i )
   {
     // Skip files with the extensions different to .mdx to speed up the
     // scanning
@@ -1477,7 +1477,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       initializing.indexingDictionary( title );
 
       for ( vector< string >::const_iterator mddIter = dictFiles.begin() + 1;
-            mddIter != dictFiles.end(); mddIter++ )
+            mddIter != dictFiles.end(); ++mddIter )
       {
         if ( File::exists( *mddIter ) )
         {
@@ -1576,7 +1576,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
         idxHeader.styleSheetCount = styleSheets.size();
 
         for ( MdictParser::StyleSheets::const_iterator iter = styleSheets.begin();
-              iter != styleSheets.end(); iter++ )
+              iter != styleSheets.end(); ++iter )
         {
           string styleBegin( iter->second.first.toUtf8().constData() );
           string styleEnd( iter->second.second.toUtf8().constData() );
@@ -1607,7 +1607,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       // Build index info for each mdd file
       vector< IndexInfo > mddIndexInfos;
       for ( vector< sptr< IndexedWords > >::const_iterator mddIndexIter = mddIndices.begin();
-            mddIndexIter != mddIndices.end(); mddIndexIter++ )
+            mddIndexIter != mddIndices.end(); ++mddIndexIter )
       {
         IndexInfo resourceIdxInfo = BtreeIndexing::buildIndex( *( *mddIndexIter ), idx );
         mddIndexInfos.push_back( resourceIdxInfo );

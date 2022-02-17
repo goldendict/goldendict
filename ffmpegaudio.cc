@@ -52,9 +52,6 @@ AudioService & AudioService::instance()
 
 AudioService::AudioService()
 {
-#if LIBAVFORMAT_VERSION_MAJOR < 58 || ( LIBAVFORMAT_VERSION_MAJOR == 58 && LIBAVFORMAT_VERSION_MINOR < 9 )
-  av_register_all();
-#endif
   ao_initialize();
 }
 
@@ -151,11 +148,8 @@ bool DecoderContext::openCodec( QString & errorString )
     return false;
   }
 
-#if LIBAVCODEC_VERSION_MAJOR < 56 || ( LIBAVCODEC_VERSION_MAJOR == 56 && LIBAVCODEC_VERSION_MINOR < 56 )
-  unsigned char * avioBuffer = ( unsigned char * )av_malloc( kBufferSize + FF_INPUT_BUFFER_PADDING_SIZE );
-#else
   unsigned char * avioBuffer = ( unsigned char * )av_malloc( kBufferSize + AV_INPUT_BUFFER_PADDING_SIZE );
-#endif
+
   if ( !avioBuffer )
   {
     errorString = QObject::tr( "av_malloc() failed." );
@@ -198,11 +192,7 @@ bool DecoderContext::openCodec( QString & errorString )
   // Find audio stream, use the first audio stream if available
   for ( unsigned i = 0; i < formatContext_->nb_streams; i++ )
   {
-#if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 33 )
-    if ( formatContext_->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO )
-#else
-      if ( formatContext_->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO )
-#endif
+    if ( formatContext_->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO )
     {
       audioStream_ = formatContext_->streams[i];
       break;
@@ -214,15 +204,6 @@ bool DecoderContext::openCodec( QString & errorString )
     return false;
   }
 
-#if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 33 )
-  codecContext_ = audioStream_->codec;
-  codec_ = avcodec_find_decoder( codecContext_->codec_id );
-  if ( !codec_ )
-  {
-    errorString = QObject::tr( "Codec [id: %1] not found." ).arg( codecContext_->codec_id );
-    return false;
-  }
-#else
   codec_ = avcodec_find_decoder( audioStream_->codecpar->codec_id );
   if ( !codec_ )
   {
@@ -236,7 +217,6 @@ bool DecoderContext::openCodec( QString & errorString )
     return false;
   }
   avcodec_parameters_to_context( codecContext_, audioStream_->codecpar );
-#endif
 
   ret = avcodec_open2( codecContext_, codec_, NULL );
   if ( ret < 0 )
@@ -313,9 +293,7 @@ void DecoderContext::closeCodec()
   {
     audioStream_->discard = AVDISCARD_ALL;
     avcodec_close( codecContext_ );
-#if LIBAVCODEC_VERSION_MAJOR > 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR >= 33 )
     avcodec_free_context( &codecContext_ );
-#endif
   }
 
   avformat_close_input( &formatContext_ );
@@ -397,11 +375,7 @@ void DecoderContext::closeOutputDevice()
 
 bool DecoderContext::play( QString & errorString )
 {
-#if LIBAVCODEC_VERSION_MAJOR < 55 || ( LIBAVCODEC_VERSION_MAJOR == 55 && LIBAVCODEC_VERSION_MINOR < 28 )
-  AVFrame * frame = avcodec_alloc_frame();
-#else
   AVFrame * frame = av_frame_alloc();
-#endif
   if ( !frame )
   {
     errorString = QObject::tr( "avcodec_alloc_frame() failed." );
@@ -417,22 +391,6 @@ bool DecoderContext::play( QString & errorString )
     if ( packet.stream_index == audioStream_->index )
     {
       AVPacket pack = packet;
-#if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 37 )
-      int gotFrame = 0;
-      do
-      {
-        int len = avcodec_decode_audio4( codecContext_, frame, &gotFrame, &pack );
-        if ( !Utils::AtomicInt::loadAcquire( isCancelled_ ) && gotFrame )
-        {
-          playFrame( frame );
-        }
-        if( len <= 0 || Utils::AtomicInt::loadAcquire( isCancelled_ ) )
-          break;
-        pack.size -= len;
-        pack.data += len;
-      }
-      while( pack.size > 0 );
-#else
       int ret = avcodec_send_packet( codecContext_, &pack );
       /* read all the output frames (in general there may be any number of them) */
       while( ret >= 0 )
@@ -444,30 +402,13 @@ bool DecoderContext::play( QString & errorString )
 
         playFrame( frame );
       }
-#endif
+
     }
-    // av_free_packet() must be called after each call to av_read_frame()
-#if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 7 )
-    av_free_packet( &packet );
-#else
+
     av_packet_unref( &packet );
-#endif
+
   }
 
-#if LIBAVCODEC_VERSION_MAJOR < 57 || ( LIBAVCODEC_VERSION_MAJOR == 57 && LIBAVCODEC_VERSION_MINOR < 37 )
-  if ( !Utils::AtomicInt::loadAcquire( isCancelled_ ) &&
-       codecContext_->codec->capabilities & CODEC_CAP_DELAY )
-  {
-    av_init_packet( &packet );
-    int gotFrame = 0;
-    while ( avcodec_decode_audio4( codecContext_, frame, &gotFrame, &packet ) >= 0 && gotFrame )
-    {
-      if ( Utils::AtomicInt::loadAcquire( isCancelled_ ) )
-        break;
-      playFrame( frame );
-    }
-  }
-#else
   /* flush the decoder */
   av_init_packet( &packet );
   packet.data = NULL;
@@ -480,26 +421,8 @@ bool DecoderContext::play( QString & errorString )
       break;
     playFrame( frame );
   }
-#endif
-
-#if LIBAVCODEC_VERSION_MAJOR < 54
-  av_free( frame );
-#elif LIBAVCODEC_VERSION_MAJOR < 55 || ( LIBAVCODEC_VERSION_MAJOR == 55 && LIBAVCODEC_VERSION_MINOR < 28 )
-  avcodec_free_frame( &frame );
-#else
   av_frame_free( &frame );
-#endif
-
   return true;
-}
-
-static inline int32_t toInt32( double v )
-{
-  if ( v >= 1.0 )
-    return 0x7fffffffL;
-  else if ( v <= -1.0 )
-    return 0x80000000L;
-  return floor( v * 2147483648.0 );
 }
 
 bool DecoderContext::normalizeAudio( AVFrame * frame, vector<char> & samples )

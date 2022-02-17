@@ -95,10 +95,10 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
 protected:
 
@@ -128,7 +128,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
                                                                 vector< wstring > const & alts,
                                                                 wstring const &,
                                                                 bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   vector< WordArticleLink > chain = findArticles( word, ignoreDiacritics );
 
@@ -306,7 +306,7 @@ void SoundDirDictionary::loadIcon() throw()
 }
 
 sptr< Dictionary::DataRequest > SoundDirDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   bool isNumber = false;
 
@@ -408,7 +408,7 @@ void addDir( QDir const & baseDir, QDir const & dir, IndexedWords & indexedWords
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::SoundDirs const & soundDirs,
                                                       string const & indicesDir,
                                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

@@ -182,8 +182,9 @@ public:
 
   void setZoomFactor( qreal factor )
   {
-    if(ui.definition->zoomFactor()!=factor){
-      qDebug()<<"set zoom factor:"<<factor;
+    qreal existedFactor = ui.definition->zoomFactor();
+    if(!qFuzzyCompare(existedFactor,factor)){
+      qDebug()<<"zoom factor ,existed:"<<existedFactor<<"set:"<<factor;
       ui.definition->setZoomFactor( factor );
       ui.definition->page()->setZoomFactor(factor);
     }

@@ -156,7 +156,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   wuri = new WebUrlRequestInterceptor();
-  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
+  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor( wuri );
+  connect( wuri, &WebUrlRequestInterceptor::linkClicked, this, &MainWindow::viewLinkClicked );
+
+  if(!cfg.preferences.hideGoldenDictHeader){
+    QWebEngineProfile::defaultProfile()->setHttpUserAgent(QWebEngineProfile::defaultProfile()->httpUserAgent()+" GoldenDict/webengine");
+  }
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -741,7 +746,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_WIN
   if( cfg.normalMainWindowGeometry.width() <= 0 )
   {
-    QRect r = QApplication::desktop()->availableGeometry();
+    QRect r = QGuiApplication::primaryScreen ()->geometry ();
     cfg.normalMainWindowGeometry.setRect( r.width() / 4, r.height() / 4, r.width() / 2, r.height() / 2 );
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
@@ -975,7 +980,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
     return;
   }
 
-  if (event->button() != Qt::MidButton)
+  if (event->button() != Qt::MiddleButton)
     return QMainWindow::mousePressEvent(event);
 
   // middle clicked
@@ -1133,8 +1138,8 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const 
   {
     // Load an additional stylesheet
     QFile builtInCssFile( QString( ":/qt-style-st-%1.css" ).arg( displayStyle ) );
-    builtInCssFile.open( QFile::ReadOnly );
-    css += builtInCssFile.readAll();
+    if ( builtInCssFile.open( QFile::ReadOnly ) )
+      css += builtInCssFile.readAll();
   }
 
   // Try loading a style sheet if there's one
@@ -1194,11 +1199,11 @@ void MainWindow::wheelEvent( QWheelEvent *ev )
 {
   if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
   {
-    if ( ev->delta() > 0 )
+    if ( ev->angleDelta().y() > 0 )
     {
         zoomin();
     }
-    else if ( ev->delta() < 0 )
+    else if ( ev->angleDelta().y()  < 0 )
     {
         zoomout();
     }
@@ -1681,12 +1686,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
-  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
-    ArticleView *active = getCurrentArticleView();
-    if (active == view) {
-      view->linkClicked(url);
-    }
-  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -3567,7 +3566,7 @@ void MainWindow::on_saveArticle_triggered()
 
         // Pull and save resources to files
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-              i != downloadResources.end(); i++ )
+              i != downloadResources.end(); ++i )
         {
           ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
           if( !handler->isEmpty() )
@@ -3672,6 +3671,21 @@ void MainWindow::unzoom()
 {
   cfg.preferences.zoomFactor = 1;
   applyZoomFactor();
+}
+
+void MainWindow::viewLinkClicked( const QUrl & url )
+{
+  if( scanPopup.get() && scanPopup->isActiveWindow() )
+  {
+    QString word = Utils::Url::getWordFromUrl( url );
+    if( !word.isEmpty() )
+    {
+      scanPopup->translateWord( word );
+      return;
+    }
+  }
+  ArticleView * view = getCurrentArticleView();
+  view->linkClicked( url );
 }
 
 void MainWindow::applyZoomFactor()
@@ -4363,11 +4377,10 @@ void MainWindow::editDictionary( Dictionary::Class * dict )
       QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
       command.replace( "%GDWORD%", headword );
     }
-    if( !QProcess::startDetached( command ) )
+    if( !QProcess::startDetached( command,QStringList() ) )
       QApplication::beep();
   }
 }
-
 
 void MainWindow::openDictionaryFolder( const QString & id )
 {
@@ -4378,46 +4391,10 @@ void MainWindow::openDictionaryFolder( const QString & id )
       if( dictionaries[ x ]->getDictionaryFilenames().size() > 0 )
       {
         QString fileName = FsEncoding::decode( dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str() );
-        bool explorerLaunched = false;
 
-        // Platform-dependent way to launch a file explorer and to select a file,
-        // currently only on Windows.
-#if defined(Q_OS_WIN)
-        if ( !QFileInfo( fileName ).isDir() )
-        {
-          QString param = QLatin1String("explorer.exe ")
-              + QLatin1String("/select, \"") + QDir::toNativeSeparators( fileName ) + QLatin1String("\"");
-
-          qDebug() << "Launching" << param;
-
-          // We use CreateProcess() directly instead of QProcess::startDetached() since
-          // startDetached() does some evil things with quotes breaking explorer arguments.
-          // E.g., the following file cannot be properly selected via startDetached(), due to equals sign,
-          // which explorer considers as separator:
-          // Z:\GoldenDict\content\-=MDict=-\Test.mdx
-          PROCESS_INFORMATION pinfo;
-          STARTUPINFOW startupInfo = { sizeof( STARTUPINFO ), 0, 0, 0,
-                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
-                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
-                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                                     };
-          explorerLaunched = CreateProcess(0, (wchar_t*) param.utf16(),
-                                           0, 0, FALSE, CREATE_UNICODE_ENVIRONMENT | CREATE_NEW_CONSOLE, 0,
-                                           0, &startupInfo, &pinfo);
-
-          if ( explorerLaunched ) {
-            CloseHandle( pinfo.hThread );
-            CloseHandle( pinfo.hProcess );
-          }
-        }
-#endif
-
-        if ( !explorerLaunched )
-        {
-          QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
-          if( !folder.isEmpty() )
-            QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
-        }
+        QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
+        if( !folder.isEmpty() )
+          QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
       }
       break;
     }

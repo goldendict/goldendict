@@ -1732,8 +1732,7 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
     if( refOpenCount > refCloseCount )
       return QByteArray();
 
-    QString str;
-    str.sprintf( "<R%i>", refOpenCount );
+    QString str=QString( "<R%1>").arg( refOpenCount );
     refOpenCount += 1;
     return str.toUtf8();
   }
@@ -1747,7 +1746,7 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
   refOffsets.append( argv[ 2 ] );
 
   QString str;
-  str.sprintf( "</R%i>", refCloseCount );
+  str.asprintf( "</R%i>", refCloseCount );
   refCloseCount += 1;
 
   return str.toUtf8();

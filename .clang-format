@@ -1,0 +1,28 @@
+---
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: Align
+AlignEscapedNewlines: Left
+AllowAllArgumentsOnNextLine: 'false'
+AllowShortBlocksOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+BinPackArguments: 'false'
+BinPackParameters: 'false'
+BreakBeforeBraces: Allman
+BreakConstructorInitializers: AfterColon
+ColumnLimit: '120'
+ConstructorInitializerAllOnOneLineOrOnePerLine: 'true'
+ConstructorInitializerIndentWidth: '2'
+ContinuationIndentWidth: '2'
+MaxEmptyLinesToKeep: '1'
+PointerAlignment: Middle
+SortIncludes: 'false'
+SortUsingDeclarations: 'false'
+SpaceBeforeParens: Never
+SpacesInAngles: 'true'
+SpacesInParentheses: 'true'
+SpacesInSquareBrackets: 'true'
+UseTab: Never
+AlignConsecutiveAssignments: AcrossComments
+
+...

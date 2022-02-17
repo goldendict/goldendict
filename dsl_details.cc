@@ -780,7 +780,7 @@ void ArticleDom::closeTag( wstring const & name,
   }
 }
 
-void ArticleDom::nextChar() THROW_SPEC( eot )
+void ArticleDom::nextChar() 
 {
     if ( !*stringPos )
         throw eot();
@@ -825,7 +825,7 @@ bool ArticleDom::atSignFirstInLine()
 
 /////////////// DslScanner
 
-DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
+DslScanner::DslScanner( string const & fileName ) :
   encoding( Utf8::Windows1252 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), linesRead( 0 )
 {
@@ -995,8 +995,7 @@ DslScanner::~DslScanner() throw()
   gzclose( f );
 }
 
-bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word ) THROW_SPEC( Ex,
-                                                                       Iconv::Ex )
+bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word )
 {
   offset = (size_t)( gztell( f ) - readBufferLeft/*+pos*/ );
 
@@ -1050,7 +1049,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
 }
 
 bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , bool only_headword)
-                 THROW_SPEC( Ex, Iconv::Ex )
+                 
 {
   wstring str;
   bool commentToNextLine = false;

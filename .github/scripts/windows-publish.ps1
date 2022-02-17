@@ -27,6 +27,7 @@ function Main() {
 
     New-Item -ItemType Directory $archiveName
     New-Item -ItemType Directory $archiveName\locale
+    New-Item -ItemType Directory $archiveName\opencc
     # 拷贝exe
     Copy-Item release\$targetName $archiveName\
     Write-Host "copy item finished..."
@@ -43,6 +44,8 @@ function Main() {
     Write-Host "copy redist dll..."
     Copy-Item "LICENSE.txt" $archiveName\
     Write-Host "copy license.."
+    Copy-Item "opencc\*" $archiveName\opencc\
+    Write-Host "opencc config files.."
     # 拷贝WinSDK dll
     $sdkDll="{0}Redist\{1}ucrt\DLLs\{2}\*.dll" -f $env:winSdkDir.Trim(),$env:winSdkVer.Trim(),$env:msvcArch
     Write-Host "copy sdk dll$($sdkDll)"
