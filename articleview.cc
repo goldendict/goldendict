@@ -218,14 +218,11 @@ QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
   return scrollToPrefix + dictionaryId;
 }
 
-ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
-                          AudioPlayerPtr const & audioPlayer_,
+ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
-                          Instances::Groups const & groups_, bool popupView_,
-                          Config::Class const & cfg_,
-                          QAction & openSearchAction_,
-                          QAction * dictionaryBarToggled_,
-                          GroupComboBox const * groupComboBox_ ):
+                          Instances::Groups const & groups_, bool popupView_, Config::Class const & cfg_,
+                          QAction & openSearchAction_, QAction * dictionaryBarToggled_,
+                          GroupComboBox const * groupComboBox_ ) :
   QFrame( parent ),
   articleNetMgr( nm ),
   audioPlayer( audioPlayer_ ),
