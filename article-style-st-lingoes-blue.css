@@ -134,6 +134,12 @@ a:hover {
 	display: none;
 }
 
+/* Headers */
+h3 {
+    color: inherit;
+    font-family: Arial;
+}
+
 /* The first headword in a (possibly) multi-headword DSL article */
 .gdarticlebody > div:first-child .dsl_headwords,
 .gdarticlebody > h3:first-child {
@@ -160,12 +166,6 @@ a:hover {
 
 code::selection {
 	background: #839EC7;
-}
-
-/* Headers */
-h3 {
-	color: inherit; 
-	font-family: Arial;
 }
 
 /******** DSL Dictionaries ****************/
