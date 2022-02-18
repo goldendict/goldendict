@@ -284,13 +284,8 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset )
       readBufferPtr += pos;
       linesRead++;
 
-#ifdef __WIN32
-		out = line.toStdU32String();
-#else
-                out = line.toStdU32String();
-#endif
-		return true;
-
+      out = line.toStdU32String();
+      return true;
     }
 }
 
