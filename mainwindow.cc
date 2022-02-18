@@ -1223,7 +1223,7 @@ void MainWindow::closeEvent( QCloseEvent * ev )
       translateBox->setPopupEnabled( false );
 
 #ifdef Q_OS_MACOS
-    if (!event->spontaneous() || !isVisible()) {
+    if (!ev->spontaneous() || !isVisible()) {
       return;
     }
 #endif
