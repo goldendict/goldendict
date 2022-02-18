@@ -179,13 +179,13 @@ GlsScanner::GlsScanner( string const & fileName ) :
 
   wstring str;
   wstring *currentField = 0;
-  wstring mark = GD_NATIVE_TO_WS( L"###" );
-  wstring titleMark = GD_NATIVE_TO_WS( L"### Glossary title:" );
-  wstring authorMark = GD_NATIVE_TO_WS( L"### Author:" );
-  wstring descriptionMark = GD_NATIVE_TO_WS( L"### Description:" );
-  wstring langFromMark = GD_NATIVE_TO_WS( L"### Source language:" );
-  wstring langToMark = GD_NATIVE_TO_WS( L"### Target language:" );
-  wstring endOfHeaderMark = GD_NATIVE_TO_WS( L"### Glossary section:" );
+  wstring mark            =  U"###" ;
+  wstring titleMark       =  U"### Glossary title:" ;
+  wstring authorMark      =  U"### Author:" ;
+  wstring descriptionMark =  U"### Description:" ;
+  wstring langFromMark    =  U"### Source language:" ;
+  wstring langToMark      =  U"### Target language:" ;
+  wstring endOfHeaderMark =  U"### Glossary section:" ;
   size_t offset;
 
   for( ; ; )
@@ -287,7 +287,7 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset )
 #ifdef __WIN32
 		out = line.toStdU32String();
 #else
-		out = line.toStdWString();
+                out = line.toStdU32String();
 #endif
 		return true;
 

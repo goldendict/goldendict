@@ -13,12 +13,12 @@
 /// all Unicode chars were 2 bytes long. After the Unicode got expanded past
 /// two-byte representation, the guys at Microsoft had probably decided that
 /// the least painful way to go is to just switch to UTF-16. Or so's the theory.
-/// 
+///
 /// Now, the UTF family is an encoding, made for transit purposes -- is not a
 /// representation. While it's good for passthrough, it's not directly
 /// applicable for manipulation on Unicode symbols. It must be decoded first to
 /// a normal UCS. Think like this: UTF to UCS is something like Base64 to ASCII.
-/// 
+///
 /// The distinction between Microsoft platform and all other ones is that while
 /// the latters are stuck in an 8-bit era and use UTF-8 to pass unicode around
 /// through its venerable interfaces, the former one is stuck in a 16-bit era,
@@ -27,7 +27,7 @@
 /// solution is even more ugly than the 8-bit one, because it doesn't have a
 /// benefit of ASCII compatibility, having a much more useless UCS-2
 /// compatibility instead. It's stuck in the middle of nowhere, really.
-/// 
+///
 /// The question is, what are we going to do with all this? When we do Unicode
 /// processing in GoldenDict, we want to use real Unicode characters, not some
 /// UTF-16 encoded ones. To that end, we have two options under Windows: first,
@@ -40,23 +40,14 @@
 /// introduce our own gd::wstring and gd::wchar types here. On all systems but
 /// Windows, they are equivalent to std::wstring and wchar_t. On Windows, they
 /// are basic_string< unsigned int > and unsigned int.
+///
+///
+/// Now we have a better built-in type as char32_t and std::u32string
 
 namespace gd
 {
-
-  #ifdef __WIN32
    typedef char32_t wchar;
    typedef std::u32string wstring;
-  // GD_NATIVE_TO_WS is used to convert L"" strings to a const pointer to
-  // wchar.
-  wstring __nativeToWs( wchar_t const * );
-  #define GD_NATIVE_TO_WS( str ) ( gd::__nativeToWs( ( str ) ).c_str() )
-
-  #else
-  typedef wchar_t wchar;
-  typedef std::basic_string<wchar> wstring;
-  #define GD_NATIVE_TO_WS( str ) ( str )
-  #endif
 }
 
 #endif

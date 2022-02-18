@@ -62,7 +62,7 @@ win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        #VERSION = 22.2 # More complicated things cause errors during compilation under MSVC++
+        VERSION = 22.2 # VS does not recognize 22.2.alpha,cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
@@ -413,7 +413,6 @@ SOURCES += folding.cc \
     hunspell.cc \
     dictdfiles.cc \
     audiolink.cc \
-    wstring.cc \
     wstring_qt.cc \
     processwrapper.cc \
     hotkeywrapper.cc \

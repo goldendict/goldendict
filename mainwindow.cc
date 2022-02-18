@@ -1222,6 +1222,11 @@ void MainWindow::closeEvent( QCloseEvent * ev )
     if( !cfg.preferences.searchInDock )
       translateBox->setPopupEnabled( false );
 
+#ifdef Q_OS_MACOS
+    if (!event->spontaneous() || !isVisible()) {
+      return;
+    }
+#endif
 #ifdef HAVE_X11
     // Don't ignore the close event, because doing so cancels session logout if
     // the main window is visible when the user attempts to log out.
