@@ -450,8 +450,8 @@ QString const& DictdDictionary::getDescription()
     if( !dictionaryDescription.isEmpty() )
         return dictionaryDescription;
 
-    sptr< Dictionary::DataRequest > req = getArticle( GD_NATIVE_TO_WS( L"00databaseinfo" ),
-                                                      vector< wstring >(), wstring(), false );
+    sptr< Dictionary::DataRequest > req =
+      getArticle(  U"00databaseinfo" , vector< wstring >(), wstring(), false );
 
     if( req->dataSize() > 0 )
       dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ), true );

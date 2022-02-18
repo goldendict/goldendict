@@ -413,7 +413,6 @@ SOURCES += folding.cc \
     hunspell.cc \
     dictdfiles.cc \
     audiolink.cc \
-    wstring.cc \
     wstring_qt.cc \
     processwrapper.cc \
     hotkeywrapper.cc \
