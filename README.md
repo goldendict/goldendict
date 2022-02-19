@@ -6,7 +6,7 @@
 
 ## Requirements
 
-This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
+This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
 
 ### External Deps
 
