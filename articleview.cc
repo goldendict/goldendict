@@ -321,15 +321,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   inspectAction.setText( tr( "Inspect" ) );
   ui.definition->addAction( &inspectAction );
 
-  QWebEnginePage *page = ui.definition->page();
-  connect(&inspectAction, &QAction::triggered, this, [page, this]() {
-    if (inspectView == nullptr || !inspectView->isVisible()) {
-      inspectView = new QWebEngineView();
-      page->setDevToolsPage(inspectView->page());
-      page->triggerAction(QWebEnginePage::InspectElement);
-      inspectView->show();
-    }
-  });
+
+  connect(&inspectAction, &QAction::triggered, this, &ArticleView::inspectElement);
 
   ui.definition->installEventFilter( this );
   ui.searchFrame->installEventFilter( this );
@@ -510,6 +503,27 @@ void ArticleView::showAnticipation()
 {
   ui.definition->setHtml( "" );
   ui.definition->setCursor( Qt::WaitCursor );
+}
+
+void ArticleView::inspectElement(){
+  QWebEnginePage *page = ui.definition->page();
+  if (inspectView == nullptr) {
+    inspectView = new QWebEngineView();
+    page->setDevToolsPage( inspectView->page() );
+    devDialog = new QDialog( this );
+    devDialog->setWindowTitle( tr( "Inspect" ) );
+    devDialog->setWindowFlags( Qt::Window );
+    devDialog->setContentsMargins( 0, 0, 0, 0 );
+    devDialog->setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
+    QVBoxLayout * v=new QVBoxLayout( devDialog );
+//    devDialog->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
+//    inspectView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding);
+//    inspectView->setContentsMargins(0,0,0,0);
+    v->addWidget( inspectView );
+  }
+  page->triggerAction( QWebEnginePage::InspectElement );
+  devDialog->raise();
+  devDialog->show();
 }
 
 void ArticleView::loadFinished( bool result )
