@@ -97,7 +97,7 @@ win32 {
     }
 
 
-    #RC_FILE = goldendict.rc
+    RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
 
     # Enable console in Debug mode on Windows, with useful logging messages
