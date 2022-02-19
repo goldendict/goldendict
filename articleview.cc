@@ -514,7 +514,7 @@ void ArticleView::inspectElement(){
     devDialog->setWindowTitle( tr( "Inspect" ) );
     devDialog->setWindowFlags( Qt::Window );
     devDialog->setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
-    QVBoxLayout * v=new QVBoxLayout( devDialog );
+    QVBoxLayout * v = new QVBoxLayout( devDialog );
     v->setSpacing( 0 );
     v->setContentsMargins( 0, 0, 0, 0 );
     v->addWidget( inspectView );
