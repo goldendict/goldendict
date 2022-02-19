@@ -96,8 +96,7 @@ win32 {
             -lavcodec
     }
 
-
-    RC_FILE = goldendict.rc
+    RC_ICONS += icons/programicon.ico icons/programicon_old.ico
     INCLUDEPATH += winlibs/include
 
     # Enable console in Debug mode on Windows, with useful logging messages
