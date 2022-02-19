@@ -513,12 +513,10 @@ void ArticleView::inspectElement(){
     devDialog = new QDialog( this );
     devDialog->setWindowTitle( tr( "Inspect" ) );
     devDialog->setWindowFlags( Qt::Window );
-    devDialog->setContentsMargins( 0, 0, 0, 0 );
     devDialog->setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
     QVBoxLayout * v=new QVBoxLayout( devDialog );
-//    devDialog->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding );
-//    inspectView->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding);
-//    inspectView->setContentsMargins(0,0,0,0);
+    v->setSpacing( 0 );
+    v->setContentsMargins( 0, 0, 0, 0 );
     v->addWidget( inspectView );
   }
   page->triggerAction( QWebEnginePage::InspectElement );
