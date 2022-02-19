@@ -3720,7 +3720,7 @@ void MainWindow::adjustCurrentZoomFactor()
 
   zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
   zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.1 );
-  zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
+  zoomBase->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, 1.0 ) );
 }
 
 void MainWindow::scaleArticlesByCurrentZoomFactor()

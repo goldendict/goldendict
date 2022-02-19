@@ -97,7 +97,7 @@ win32 {
     }
 
 
-    #RC_FILE = goldendict.rc
+    RC_FILE = goldendict.rc
     INCLUDEPATH += winlibs/include
 
     # Enable console in Debug mode on Windows, with useful logging messages
@@ -649,5 +649,5 @@ TS_OUT = $$TRANSLATIONS
 TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
-include( qtsingleapplication/src/qtsingleapplication.pri )
+include( thirdparty/qtsingleapplication/src/qtsingleapplication.pri )
 

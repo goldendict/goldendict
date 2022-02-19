@@ -254,7 +254,7 @@ void HelpWindow::applyZoomFactor()
 
   zoomInAction->setEnabled( cfg.preferences.helpZoomFactor < 5 );
   zoomOutAction->setEnabled( cfg.preferences.helpZoomFactor > 0.2 );
-  zoomBaseAction->setEnabled( cfg.preferences.helpZoomFactor != 1.0 );
+  zoomBaseAction->setEnabled( !qFuzzyCompare(cfg.preferences.helpZoomFactor, 1.0) );
 
   if( fontSize > 0 )
   {
