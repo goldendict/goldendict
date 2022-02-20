@@ -50,41 +50,54 @@ bool ArticleWebView::event(QEvent *event)
 
 bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev)
 {
-  if (ev->type() == QEvent::MouseButtonDblClick)
+  if( ev->type() == QEvent::MouseButtonDblClick )
+  {
+    QMouseEvent * pe = static_cast< QMouseEvent * >( ev );
+    if( Qt::MouseEventSynthesizedByApplication != pe->source() )
+    {
+      singleClickToDbClick = false;
+      dbClicked            = true;
+    }
+  }
+  if( ev->type() == QEvent::MouseMove )
   {
     singleClickToDbClick = false;
-    dbClicked = true;
   }
-  if (ev->type() == QEvent::MouseMove)
+  if( ev->type() == QEvent::MouseButtonPress )
   {
-    singleClickToDbClick = false;
-  }
-  if (ev->type() == QEvent::MouseButtonPress)
-  {
-    QMouseEvent *pe = static_cast<QMouseEvent *>(ev);
-    if (pe->button() == Qt::LeftButton)
+    QMouseEvent * pe = static_cast< QMouseEvent * >( ev );
+    if( pe->button() == Qt::LeftButton )
     {
       singleClickToDbClick = true;
-      dbClicked = false;
-      QTimer::singleShot(QApplication::doubleClickInterval(), this, [=]()
-                         { singleClickAction(pe); });
+      dbClicked            = false;
+      QTimer::singleShot( QApplication::doubleClickInterval(), this, [ = ]() { singleClickAction( pe ); } );
     }
-    mousePressEvent(pe);
+    mousePressEvent( pe );
   }
-
-  if (ev->type() == QEvent::Wheel)
+  if( ev->type() == QEvent::MouseButtonRelease )
   {
-    QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
-    wheelEvent(pe);
+    QMouseEvent * pe = static_cast< QMouseEvent * >( ev );
+    mouseReleaseEvent( pe );
+    if( dbClicked )
+    {
+      // emit the signal after button release.emit earlier(in MouseButtonDblClick event) can not get selected text;
+      doubleClickAction( pe );
+    }
+  }
+  if( ev->type() == QEvent::Wheel )
+  {
+    QWheelEvent * pe = static_cast< QWheelEvent * >( ev );
+    wheelEvent( pe );
+
     if( pe->modifiers().testFlag( Qt::ControlModifier ) )
     {
       return true;
     }
   }
-  if (ev->type() == QEvent::FocusIn)
+  if( ev->type() == QEvent::FocusIn )
   {
-    QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
-    focusInEvent(pe);
+    QFocusEvent * pe = static_cast< QFocusEvent * >( ev );
+    focusInEvent( pe );
   }
 
   return QWebEngineView::eventFilter(obj, ev);
