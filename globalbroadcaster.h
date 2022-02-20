@@ -3,22 +3,20 @@
 
 #include <QObject>
 
-struct ActiveDictIds {
+struct ActiveDictIds
+{
   QString word;
   QStringList dictIds;
-}
-;
+};
 
 class GlobalBroadcaster : public QObject
 {
   Q_OBJECT
 public:
-  GlobalBroadcaster(QObject *parent = nullptr);
-  static GlobalBroadcaster *instance();
+  GlobalBroadcaster( QObject * parent = nullptr );
+  static GlobalBroadcaster * instance();
 signals:
-  void emitDictIds(ActiveDictIds ad);
-
+  void emitDictIds( ActiveDictIds ad );
 };
-
 
 #endif // GLOBAL_GLOBALBROADCASTER_H

@@ -446,18 +446,18 @@ private:
 
 class ArticleViewAgent : public QObject
 {
-    Q_OBJECT
-    ArticleView* articleView;
-  public:
-    explicit ArticleViewAgent(QObject *parent = nullptr);
-    ArticleViewAgent(ArticleView* articleView);
+  Q_OBJECT
+  ArticleView * articleView;
 
-  signals:
+public:
+  explicit ArticleViewAgent( QObject * parent = nullptr );
+  ArticleViewAgent( ArticleView * articleView );
 
-  public slots:
-    Q_INVOKABLE void onJsActiveArticleChanged(QString const & id);
-    Q_INVOKABLE void linkClickedInHtml( QUrl const & );
+signals:
 
+public slots:
+  Q_INVOKABLE void onJsActiveArticleChanged( QString const & id );
+  Q_INVOKABLE void linkClickedInHtml( QUrl const & );
 };
 
 #endif

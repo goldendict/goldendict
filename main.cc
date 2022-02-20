@@ -303,15 +303,13 @@ int main( int argc, char ** argv )
 
   QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword","gdprg","gdvideo","gdpicture","gdtts"};
 
-  for (int i = 0; i < localSchemes.size(); ++i)
+  for( int i = 0; i < localSchemes.size(); ++i )
   {
-      QString localScheme=localSchemes.at(i);
-      QWebEngineUrlScheme webUiScheme(localScheme.toLatin1());
-      webUiScheme.setFlags(QWebEngineUrlScheme::SecureScheme |
-                           QWebEngineUrlScheme::LocalScheme |
-                           QWebEngineUrlScheme::LocalAccessAllowed|
-                           QWebEngineUrlScheme::CorsEnabled);
-      QWebEngineUrlScheme::registerScheme(webUiScheme);
+    QString localScheme = localSchemes.at( i );
+    QWebEngineUrlScheme webUiScheme( localScheme.toLatin1() );
+    webUiScheme.setFlags( QWebEngineUrlScheme::SecureScheme | QWebEngineUrlScheme::LocalScheme |
+                          QWebEngineUrlScheme::LocalAccessAllowed | QWebEngineUrlScheme::CorsEnabled );
+    QWebEngineUrlScheme::registerScheme( webUiScheme );
   }
 
   QHotkeyApplication app( "GoldenDict", argc, argv );

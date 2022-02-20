@@ -1657,7 +1657,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
   connect( view, SIGNAL( updateFoundInDictsList( ) ),
-          this, SLOT( updateFoundInDictsList() ) );
+           this, SLOT( updateFoundInDictsList() ) );
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ) );
@@ -2017,11 +2017,11 @@ void MainWindow::updateFoundInDictsList()
       }
     }
 
-    //if no item in dict List panel has been choose ,select first one.
-    if (ui.dictsList->count() > 0 && ui.dictsList->selectedItems().empty()) {
-        ui.dictsList->setCurrentRow(0);
+    // if no item in dict List panel has been choose ,select first one.
+    if( ui.dictsList->count() > 0 && ui.dictsList->selectedItems().empty() )
+    {
+      ui.dictsList->setCurrentRow( 0 );
     }
-
   }
 }
 
@@ -2732,14 +2732,15 @@ void MainWindow::dictsListItemActivated( QListWidgetItem * item )
 void MainWindow::dictsListSelectionChanged()
 {
   QList< QListWidgetItem * > selected = ui.dictsList->selectedItems();
-  if ( selected.size() )
+  if( selected.size() )
   {
-      ArticleView * view = getCurrentArticleView();
-      if(view){
-          QString dictId = ui.dictsList->selectedItems().at(0)->data(Qt::UserRole).toString();
-          view->setActiveArticleId(dictId);
-       }
-//      jumpToDictionary( selected.front() );
+    ArticleView * view = getCurrentArticleView();
+    if( view )
+    {
+      QString dictId = ui.dictsList->selectedItems().at( 0 )->data( Qt::UserRole ).toString();
+      view->setActiveArticleId( dictId );
+    }
+    //      jumpToDictionary( selected.front() );
   }
 }
 

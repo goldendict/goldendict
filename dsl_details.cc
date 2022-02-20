@@ -1308,7 +1308,7 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
           {
             if( !inside_recurse )
             {
-                result->splice(result->end(),expanded);
+              result->splice( result->end(), expanded );
             }
             return;
           }

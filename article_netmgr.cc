@@ -464,7 +464,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
     connect( this, SIGNAL( readyReadSignal() ),
              this, SLOT( readyReadSlot() ), Qt::QueuedConnection );
     connect( this, SIGNAL( finishedSignal() ),
-            this, SLOT( finishedSlot() ), Qt::QueuedConnection );
+             this, SLOT( finishedSlot() ), Qt::QueuedConnection );
 
     emit readyReadSignal();
 
@@ -575,22 +575,17 @@ void BlockedNetworkReply::finishedSlot()
   emit finished();
 }
 
-LocalSchemeHandler::LocalSchemeHandler(ArticleNetworkAccessManager& articleNetMgr)
-:mManager(articleNetMgr)
+LocalSchemeHandler::LocalSchemeHandler( ArticleNetworkAccessManager & articleNetMgr ) : mManager( articleNetMgr )
 {
-
 }
 
-void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
+void LocalSchemeHandler::requestStarted( QWebEngineUrlRequestJob * requestJob )
 {
   QUrl url = requestJob->requestUrl();
 
   QNetworkRequest request;
   request.setUrl( url );
 
-  QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request);
-  connect(reply,&QNetworkReply::finished,requestJob,[=](){
-      requestJob->reply("text/html",reply);
-  });
+  QNetworkReply * reply = this->mManager.createRequest( QNetworkAccessManager::GetOperation, request );
+  connect( reply, &QNetworkReply::finished, requestJob, [ = ]() { requestJob->reply( "text/html", reply ); } );
 }
-

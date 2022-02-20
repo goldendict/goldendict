@@ -96,7 +96,7 @@ protected:
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
-    Q_OBJECT
+  Q_OBJECT
   vector< sptr< Dictionary::Class > > const & dictionaries;
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
@@ -127,7 +127,6 @@ public:
   virtual QNetworkReply * createRequest( Operation op,
                                          QNetworkRequest const & req,
                                          QIODevice * outgoingData = nullptr);
-
 };
 
 class ArticleResourceReply: public QNetworkReply
@@ -202,15 +201,14 @@ private slots:
   void finishedSlot();
 };
 
-
 class LocalSchemeHandler : public QWebEngineUrlSchemeHandler
 {
   Q_OBJECT
 public:
-  LocalSchemeHandler(ArticleNetworkAccessManager &articleNetMgr);
-  void requestStarted(QWebEngineUrlRequestJob *requestJob);
+  LocalSchemeHandler( ArticleNetworkAccessManager & articleNetMgr );
+  void requestStarted( QWebEngineUrlRequestJob * requestJob );
 
 private:
-    ArticleNetworkAccessManager& mManager;
+  ArticleNetworkAccessManager & mManager;
 };
 #endif

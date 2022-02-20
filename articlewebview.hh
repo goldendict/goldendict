@@ -39,7 +39,7 @@ public:
 
   bool eventFilter(QObject *obj, QEvent *ev);
 
-  signals:
+signals:
 
   /// Signals that the user has just double-clicked. The signal is delivered
   /// after the event was processed by the view -- that's the difference from
@@ -75,8 +75,8 @@ private:
 
 public slots:
 
-    //receive signal ,a link has been clicked.
-    void linkClickedInHtml(QUrl const& url);
+  // receive signal ,a link has been clicked.
+  void linkClickedInHtml( QUrl const & url );
 };
 
 #endif
