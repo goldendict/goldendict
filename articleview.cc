@@ -944,6 +944,21 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         return true;
       }
     }
+    else if( ev->type() == QEvent::Wheel )
+    {
+      QWheelEvent * pe = static_cast< QWheelEvent * >( ev );
+      if( pe->modifiers().testFlag( Qt::ControlModifier ) )
+      {
+        if( pe->angleDelta().y() > 0 )
+        {
+          zoomIn();
+        }
+        else
+        {
+          zoomOut();
+        }
+      }
+    }
   }
   else
     return QFrame::eventFilter( obj, ev );
