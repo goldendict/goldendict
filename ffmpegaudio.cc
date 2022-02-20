@@ -91,7 +91,11 @@ struct DecoderContext
   QByteArray audioData_;
   QDataStream audioDataStream_;
   AVFormatContext * formatContext_;
+#if LIBAVCODEC_VERSION_MAJOR < 59
   AVCodec * codec_;
+#else
+  const AVCodec * codec_;
+#endif
   AVCodecContext * codecContext_;
   AVIOContext * avioContext_;
   AVStream * audioStream_;
