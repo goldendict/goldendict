@@ -2143,19 +2143,21 @@ void ArticleView::moveOneArticleUp()
 void ArticleView::moveOneArticleDown()
 {
   QString current = getCurrentArticle();
-
-  if ( current.size() )
+  QString currentDictId = dictionaryIdFromScrollTo( current );
+  QStringList lst       = getArticlesList();
+  // if current article is empty .use the first as default.
+  if( currentDictId.isEmpty() && !lst.isEmpty() )
   {
-    QStringList lst = getArticlesList();
+    currentDictId = lst[ 0 ];
+  }
 
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
+  int idx = lst.indexOf( currentDictId );
 
-    if ( idx != -1 )
-    {
-      idx = ( idx + 1 ) % lst.size();
+  if( idx != -1 )
+  {
+    idx = ( idx + 1 ) % lst.size();
 
-      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
-    }
+    setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
   }
 }
 
