@@ -530,42 +530,16 @@ void ArticleView::loadFinished( bool result )
   QUrl url = ui.definition->url();
   qDebug() << "article view loaded url:" << url.url ().left (200);
 
-  QVariant userDataVariant = ui.definition->property("currentArticle");
-
-  if ( userDataVariant.isValid() )
-  {
-    double sx = 0, sy = 0;
-
-    QVariant qsx=ui.definition->property("sx");
-    if ( qsx.type() == QVariant::Double )
-      sx = qsx.toDouble();
-
-    QVariant qsy = ui.definition->property("sx");
-    if ( qsy.type() == QVariant::Double )
-      sy = qsy.toDouble();
-
-    if ( sx != 0 || sy != 0 )
-    {
-      // Restore scroll position
-      ui.definition->page()->runJavaScript(
-          QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
-    }
-  }
-  else
   if( cfg.preferences.autoScrollToTargetArticle )
   {
     QString const scrollTo = Utils::Url::queryItemValue( url, "scrollto" );
     if( isScrollTo( scrollTo ) )
     {
-      // There is no active article saved in history, but we have it as a parameter.
-      // setCurrentArticle will save it and scroll there.
       setCurrentArticle( scrollTo, true );
     }
   }
 
-
   ui.definition->unsetCursor();
-  //QApplication::restoreOverrideCursor();
 
   // Expand collapsed article if only one loaded
   ui.definition->page()->runJavaScript( QString( "gdCheckArticlesNumber();" ) );
