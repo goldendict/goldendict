@@ -677,8 +677,10 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
       QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
       onJsActiveArticleChanged(id);
       ui.definition->page()->runJavaScript(script);
-      ui.definition->setProperty("currentArticle",id);
-      setActiveArticleId(id.mid(7));
+      QString dictId = id.mid( 7 );
+      setActiveArticleId( dictId );
+
+      ui.definition->page()->runJavaScript( QString( "gdMakeArticleActive(%1);" ).arg( dictId ) );
   }
 }
 
