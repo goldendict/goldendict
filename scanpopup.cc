@@ -15,8 +15,6 @@
 #ifdef Q_OS_MAC
 #include "macmouseover.hh"
 #define MouseOver MacMouseOver
-#else
-#include "mouseover.hh"
 #endif
 
 using std::wstring;
@@ -279,9 +277,10 @@ ScanPopup::ScanPopup( QWidget * parent,
              this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
 #endif
 
+#ifdef Q_OS_MAC
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
            this, SLOT( mouseHovered( QString const &, bool ) ) );
-
+#endif
 
   hideTimer.setSingleShot( true );
   hideTimer.setInterval( 400 );
@@ -305,9 +304,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseGrabPollTimer.setInterval( 10 );
   connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
            this, SLOT(mouseGrabPoll())  );
-
+#ifdef Q_OS_MAC
   MouseOver::instance().setPreferencesPtr( &( cfg.preferences ) );
-
+#endif
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
 
@@ -361,7 +360,6 @@ void ScanPopup::enableScanning()
   if ( !isScanningEnabled )
   {
     isScanningEnabled = true;
-    MouseOver::instance().enableMouseOver();
   }
 }
 
@@ -369,7 +367,6 @@ void ScanPopup::disableScanning()
 {
   if ( isScanningEnabled )
   {
-    MouseOver::instance().disableMouseOver();
     isScanningEnabled = false;
   }
 }

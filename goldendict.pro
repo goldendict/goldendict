@@ -268,7 +268,6 @@ HEADERS += folding.hh \
     wordfinder.hh \
     groupcombobox.hh \
     keyboardstate.hh \
-    mouseover.hh \
     preferences.hh \
     mutex.hh \
     mediawiki.hh \
@@ -404,7 +403,6 @@ SOURCES += folding.cc \
     wordfinder.cc \
     groupcombobox.cc \
     keyboardstate.cc \
-    mouseover.cc \
     preferences.cc \
     mutex.cc \
     mediawiki.cc \
@@ -483,13 +481,11 @@ win32 {
     FORMS   += texttospeechsource.ui
     SOURCES += wordbyauto.cc \
                guids.c \
-               x64.cc \
                speechclient_win.cc \
                texttospeechsource.cc \
                speechhlp.cc
     HEADERS += wordbyauto.hh \
                uiauto.hh \
-               x64.hh \
                texttospeechsource.hh \
                sapi.hh \
                sphelper.hh \
