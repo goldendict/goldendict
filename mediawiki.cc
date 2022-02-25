@@ -97,9 +97,6 @@ void MediaWikiDictionary::loadIcon() throw()
 class MediaWikiWordSearchRequest: public MediaWikiWordSearchRequestSlots
 {
   sptr< QNetworkReply > netReply;
-  bool livedLongEnough; // Indicates that the request has lived long enough
-                        // to be destroyed prematurely. Used to prevent excessive
-                        // network loads when typing search terms rapidly.
   bool isCancelling;
 
 public:
@@ -111,10 +108,6 @@ public:
 
   virtual void cancel();
 
-protected:
-
-  virtual void timerEvent( QTimerEvent * );
-
 private:
 
   virtual void downloadFinished();
@@ -122,8 +115,8 @@ private:
 
 MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
                                                         QString const & url,
-                                                        QNetworkAccessManager & mgr ):
-  livedLongEnough( false ), isCancelling( false )
+                                                        QNetworkAccessManager & mgr ) :
+  isCancelling( false )
 {
   GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
@@ -141,19 +134,6 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
            netReply.get(), SLOT( ignoreSslErrors() ) );
 
 #endif
-
-  // We start a timer to postpone early destruction, so a rapid type won't make
-  // unnecessary network load
-  startTimer( 200 );
-}
-
-void MediaWikiWordSearchRequest::timerEvent( QTimerEvent * ev )
-{
-  killTimer( ev->timerId() );
-  livedLongEnough = true;
-
-  if ( isCancelling )
-    finish();
 }
 
 MediaWikiWordSearchRequest::~MediaWikiWordSearchRequest()
@@ -166,17 +146,12 @@ void MediaWikiWordSearchRequest::cancel()
   // We either finish it in place, or in the timer handler
   isCancelling = true;
 
-  if ( netReply.get() )
+  if( netReply.get() )
     netReply.reset();
 
-  if ( livedLongEnough )
-  {
-    finish();
-  }
-  else
-  {
-    GD_DPRINTF("not long enough\n" );
-  }
+  finish();
+
+  GD_DPRINTF( "cancel the request" );
 }
 
 void MediaWikiWordSearchRequest::downloadFinished()
