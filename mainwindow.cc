@@ -2474,23 +2474,23 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
 #ifdef Q_OS_WIN
-  if( obj == this && ev->type() == gdStoreNormalGeometryEvent )
-  {
-    if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      cfg.normalMainWindowGeometry = normalGeometry();
-    ev->accept();
-    return true;
-  }
+//  if( obj == this && ev->type() == gdStoreNormalGeometryEvent )
+//  {
+//    if( !isMaximized() && !isMinimized() && !isFullScreen() )
+//      cfg.normalMainWindowGeometry = normalGeometry();
+//    ev->accept();
+//    return true;
+//  }
 
-  if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
-  {
-    if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      {
-        setGeometry( cfg.normalMainWindowGeometry );
-    }
-    ev->accept();
-    return true;
-  }
+//  if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
+//  {
+//    if( !isMaximized() && !isMinimized() && !isFullScreen() )
+//      {
+//        setGeometry( cfg.normalMainWindowGeometry );
+//    }
+//    ev->accept();
+//    return true;
+//  }
 #endif
   if ( ev->type() == QEvent::ShortcutOverride
        || ev->type() == QEvent::KeyPress )
@@ -2527,11 +2527,11 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
   {
 #ifdef Q_OS_WIN
-    if( !isMaximized() && !isMinimized() && !isFullScreen() && gdAskMessage != 0xFFFFFFFF )
-    {
-      QEvent *ev = new QEvent( gdStoreNormalGeometryEvent );
-      qApp->postEvent( this, ev );
-    }
+//    if( !isMaximized() && !isMinimized() && !isFullScreen() && gdAskMessage != 0xFFFFFFFF )
+//    {
+//      QEvent *ev = new QEvent( gdStoreNormalGeometryEvent );
+//      qApp->postEvent( this, ev );
+//    }
 #endif
     if ( !cfg.preferences.searchInDock )
     {
