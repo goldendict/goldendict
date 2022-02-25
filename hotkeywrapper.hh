@@ -27,10 +27,6 @@
 #include "qtsingleapplication.h"
 #include "utils.hh"
 
-#ifdef Q_OS_WIN32
-#include "hotkeys.h"
-#endif
-
 //////////////////////////////////////////////////////////////////////////
 
 struct HotkeyStruct

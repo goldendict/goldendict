@@ -491,7 +491,6 @@ win32 {
                sphelper.hh \
                speechclient.hh \
                speechhlp.hh \
-               hotkeys.h
 }
 
 mac {

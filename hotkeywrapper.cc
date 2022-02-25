@@ -323,14 +323,6 @@ bool HotkeyWrapper::winEvent ( MSG * message, long * result )
   if (message->message == WM_HOTKEY)
     return checkState( (message->lParam >> 16), (message->lParam & 0xffff) );
 
-  if( message->message == GD_HOTKEY_MESSAGE )
-  {
-    int n = (int)message->wParam;
-    if( n < hotkeys.size() && n >= 0 )
-      emit hotkeyActivated( hotkeys.at( n ).handle );
-    return true;
-  }
-
   return false;
 }
 
@@ -444,7 +436,7 @@ bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, vo
 {
   MSG * msg = reinterpret_cast< MSG * >( message );
 
-  if ( msg->message == WM_HOTKEY || msg->message == GD_HOTKEY_MESSAGE )
+  if( msg->message == WM_HOTKEY )
   {
     for (int i = 0; i < hotkeyWrappers.size(); i++)
     {
