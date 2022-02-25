@@ -2250,7 +2250,7 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
 void ArticleView::doubleClicked( QPoint pos )
 {
   // We might want to initiate translation of the selected word
-
+  audioPlayer->stop();
   if ( cfg.preferences.doubleClickTranslates )
   {
     QString selectedText = ui.definition->selectedText();
