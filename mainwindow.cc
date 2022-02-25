@@ -2858,23 +2858,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   {
     show();
 
-#ifdef Q_OS_WIN32
-    if( !!( hotkeyWrapper ) && hotkeyWrapper->handleViaDLL() )
-    {
-      // Some dances with tambourine
-      HWND wId = (HWND) winId();
-      DWORD pId = GetWindowThreadProcessId( wId, NULL );
-      DWORD fpId = GetWindowThreadProcessId( GetForegroundWindow(), NULL );
-
-      //Attach Thread to get the Input - i am now allowed to set the Foreground window!
-      AttachThreadInput( fpId, pId, true );
-      SetActiveWindow( wId );
-      SetForegroundWindow( wId );
-      SetFocus( wId );
-      AttachThreadInput( fpId, pId, false );
-    }
-#endif
-
     qApp->setActiveWindow( this );
     activateWindow();
     raise();
@@ -2895,22 +2878,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   if ( !isActiveWindow() )
   {
     qApp->setActiveWindow( this );
-#ifdef Q_OS_WIN32
-    if( !!( hotkeyWrapper ) && hotkeyWrapper->handleViaDLL() )
-    {
-      // Some dances with tambourine
-      HWND wId = (HWND) winId();
-      DWORD pId = GetWindowThreadProcessId( wId, NULL );
-      DWORD fpId = GetWindowThreadProcessId( GetForegroundWindow(), NULL );
-
-      //Attach Thread to get the Input - i am now allowed to set the Foreground window!
-      AttachThreadInput( fpId, pId, true );
-      SetActiveWindow( wId );
-      SetForegroundWindow( wId );
-      SetFocus( wId );
-      AttachThreadInput( fpId, pId, false );
-    }
-#endif
     raise();
     activateWindow();
     shown = true;
@@ -3010,11 +2977,7 @@ void MainWindow::installHotKeys()
 
     connect( hotkeyWrapper.get(), SIGNAL( hotkeyActivated( int ) ),
              this, SLOT( hotKeyActivated( int ) ),
-#ifdef Q_OS_WIN32
-             hotkeyWrapper->handleViaDLL() ? Qt::QueuedConnection : Qt::AutoConnection );
-#else
              Qt::AutoConnection );
-#endif
   }
 }
 

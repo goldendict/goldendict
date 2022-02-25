@@ -108,25 +108,7 @@ HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
 #ifdef Q_OS_WIN
   hwnd=(HWND)((static_cast<QMainWindow*>(parent))->winId());
 
-  dllHandler.hDLLHandle = LoadLibraryA( "GdHotkeys.dll" );
-  if( dllHandler.hDLLHandle )
-  {
-    dllHandler.setHook = ( setHookProc )GetProcAddress( dllHandler.hDLLHandle, "setHook" );
-    dllHandler.removeHook = ( removeHookProc )GetProcAddress( dllHandler.hDLLHandle, "removeHook" );
-    dllHandler.setHotkeys = ( setHotkeysProc )GetProcAddress( dllHandler.hDLLHandle, "setHotkeys" );
-    dllHandler.clearHotkeys = ( clearHotkeysProc )GetProcAddress( dllHandler.hDLLHandle, "clearHotkeys" );
-
-    if( !dllHandler.setHook || !dllHandler.removeHook || !dllHandler.setHotkeys || !dllHandler.clearHotkeys )
-    {
-      FreeLibrary( dllHandler.hDLLHandle );
-      dllHandler.hDLLHandle = 0;
-    }
-  }
-
-  if( dllHandler.hDLLHandle )
-    gdWarning( "Handle global hotkeys via GdHotkeys.dll" );
-  else
-    gdWarning( "Handle global hotkeys via RegisterHotkey()" );
+  gdWarning( "Handle global hotkeys via RegisterHotkey()" );
 
 #else
   init();
@@ -137,10 +119,6 @@ HotkeyWrapper::HotkeyWrapper(QObject *parent) : QThread( parent ),
 HotkeyWrapper::~HotkeyWrapper()
 {
   unregister();
-#ifdef Q_OS_WIN32
-  if( dllHandler.hDLLHandle )
-    FreeLibrary( dllHandler.hDLLHandle );
-#endif
 }
 
 void HotkeyWrapper::waitKey2()
@@ -330,14 +308,6 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
 
   hotkeys.append( HotkeyStruct( vk, vk2, mod, handle, id ) );
 
-  if( dllHandler.hDLLHandle )
-  {
-    dllHandler.removeHook();
-    dllHandler.setHotkeys( vk, vk2, mod, hotkeys.size() - 1 );
-    dllHandler.setHook( hwnd );
-    return true;
-  }
-
   if (!RegisterHotKey(hwnd, id++, mod, vk))
     return false;
 
@@ -457,22 +427,14 @@ quint32 HotkeyWrapper::nativeKey(int key)
 
 void HotkeyWrapper::unregister()
 {
-  if( dllHandler.hDLLHandle )
+  for( int i = 0; i < hotkeys.count(); i++ )
   {
-    dllHandler.removeHook();
-    dllHandler.clearHotkeys();
-  }
-  else
-  {
-    for (int i = 0; i < hotkeys.count(); i++)
-    {
-      HotkeyStruct const & hk = hotkeys.at( i );
+    HotkeyStruct const & hk = hotkeys.at( i );
 
-      UnregisterHotKey( hwnd, hk.id );
+    UnregisterHotKey( hwnd, hk.id );
 
-      if ( hk.key2 && hk.key2 != hk.key )
-        UnregisterHotKey( hwnd, hk.id+1 );
-    }
+    if( hk.key2 && hk.key2 != hk.key )
+      UnregisterHotKey( hwnd, hk.id + 1 );
   }
 
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
