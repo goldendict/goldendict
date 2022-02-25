@@ -674,13 +674,15 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     return; // No action on background page, scrollIntoView there don't work
 
   if(moveToIt){
-      QString script=QString(" var elem=document.getElementById('%1'); if(elem!=undefined){elem.scrollIntoView(true);}").arg(id);
-      onJsActiveArticleChanged(id);
-      ui.definition->page()->runJavaScript(script);
-      QString dictId = id.mid( 7 );
-      setActiveArticleId( dictId );
-
-      ui.definition->page()->runJavaScript( QString( "gdMakeArticleActive(%1);" ).arg( dictId ) );
+    QString dictId = id.mid( 7 );
+    if( dictId.isEmpty() )
+      return;
+    QString script = QString( "var elem=document.getElementById('%1'); "
+                              "if(elem!=undefined){elem.scrollIntoView(true);} gdMakeArticleActive('%2',true);" )
+                       .arg( id, dictId );
+    onJsActiveArticleChanged( id );
+    ui.definition->page()->runJavaScript( script );
+    setActiveArticleId( dictId );
   }
 }
 
@@ -2240,7 +2242,9 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
   if ( !isScrollTo( id ) )
     return; // Incorrect id
 
-  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
+  QString dictId = dictionaryIdFromScrollTo( id );
+  setActiveArticleId( dictId );
+  emit activeArticleChanged( this, dictId );
 }
 
 void ArticleView::doubleClicked( QPoint pos )
