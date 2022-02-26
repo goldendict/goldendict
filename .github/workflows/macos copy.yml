@@ -1,0 +1,102 @@
+name: macos-m1
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - dev
+      - master
+      # - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
+      - ".clang-format"
+  pull_request:
+    branches:
+      - dev
+      - master
+      # - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-11.0]
+        qt_ver: [5.15.2]
+        qt_arch: [clang_64]
+    env:
+      targetName: GoldenDict
+    steps:
+      # macos 11.0 默认环境变了,要指定
+      - name: prepare env
+        if: ${{ matrix.os == 'macos-11.0' }}
+        run: |
+          softwareupdate --all --install --force
+          sudo xcode-select --print-path
+          sudo xcode-select --switch /Library/Developer/CommandLineTools       
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: ${{ matrix.qt_ver }}
+          cached: 'false'
+          modules: qtwebengine
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Set outputs
+        id: githash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+      - uses: Klemensas/action-autotag@stable
+        id: autotag
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "v"
+          tag_suffix: "-${{ steps.githash.outputs.sha_short }}"          
+      - name: build macos
+        run: |
+          qmake CONFIG+=release CONFIG+=zim_support CONFIG+=chinese_conversion_support -device-option QMAKE_APPLE_DEVICE_ARCHS=arm64
+          make 
+      # 打包
+      - name: package
+        run: |
+          # 拷贝依赖
+          macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
+      - name: Set outputs
+        id: vars
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
+          echo "::set-output name=release_time::$(date +'%H%M%S')"  
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+      # tag 上传Release
+      - name: uploadRelease
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.targetName }}.dmg
+          asset_name: ${{ env.targetName }}-M1_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
+          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          prerelease: true
+          body: |
+            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            macos built with:     macos-10.15,macos-11.0,clang_64
+            This is a prerelease version ,auto build by github action. use on your on risk:-)   
