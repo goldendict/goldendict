@@ -8,11 +8,7 @@
 #include "file.hh"
 
 #include <vector>
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
 
 /// A chunked compression storage. We use this for articles' bodies. The idea
 /// is to store data in a separately-compressed chunks, much like in dictzip,

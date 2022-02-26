@@ -15,11 +15,7 @@
 #include <QSet>
 #include <QList>
 
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
 
 /// A base for the dictionary which creates a btree index to look up
 /// the words.

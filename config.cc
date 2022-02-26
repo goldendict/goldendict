@@ -9,11 +9,7 @@
 #include <QtXml>
 #include "gddebug.hh"
 
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
 
 #ifdef Q_OS_WIN32
 #include "shlobj.h"
