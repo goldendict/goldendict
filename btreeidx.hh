@@ -14,7 +14,6 @@
 #include <QVector>
 #include <QSet>
 #include <QList>
-#include "cpp_features.hh"
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>

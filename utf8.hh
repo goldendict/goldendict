@@ -5,7 +5,6 @@
 
 #include <cstdio>
 #include <string>
-#include "cpp_features.hh"
 #include "ex.hh"
 #include "wstring.hh"
 

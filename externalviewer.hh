@@ -8,7 +8,6 @@
 #include <QTemporaryFile>
 #include <QProcess>
 #include "ex.hh"
-#include "cpp_features.hh"
 
 /// An external viewer, opens resources in other programs
 class ExternalViewer: public QObject

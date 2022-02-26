@@ -7,7 +7,6 @@
 #include <iconv.h>
 #include "wstring.hh"
 #include "ex.hh"
-#include "cpp_features.hh"
 
 /// A wrapper for the iconv() character set conversion functions
 class Iconv

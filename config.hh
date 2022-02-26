@@ -12,7 +12,6 @@
 #include <QKeySequence>
 #include <QSet>
 #include <QMetaType>
-#include "cpp_features.hh"
 #include "ex.hh"
 
 #ifdef Q_OS_WIN

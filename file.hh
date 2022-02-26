@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include <QFile>
-#include "cpp_features.hh"
 #include "ex.hh"
 
 /// A simple wrapper over FILE * operations with added write-buffering,

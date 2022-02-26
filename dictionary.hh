@@ -9,7 +9,6 @@
 #include <map>
 #include <QObject>
 #include <QIcon>
-#include "cpp_features.hh"
 #include "sptr.hh"
 #include "ex.hh"
 #include "mutex.hh"
