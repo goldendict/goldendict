@@ -57,15 +57,15 @@ jobs:
         id: githash
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
-      - uses: Klemensas/action-autotag@stable
-        id: autotag
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          tag_prefix: "v"
-          tag_suffix: "-${{ steps.githash.outputs.sha_short }}"          
+      # - uses: Klemensas/action-autotag@stable
+      #   id: autotag
+      #   with:
+      #     GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      #     tag_prefix: "v"
+      #     tag_suffix: "-${{ steps.githash.outputs.sha_short }}"          
       - name: build macos
         run: |
-          qmake CONFIG+=release CONFIG+=zim_support CONFIG+=chinese_conversion_support -device-option QMAKE_APPLE_DEVICE_ARCHS=arm64
+          qmake CONFIG+=release CONFIG+=zim_support CONFIG+=chinese_conversion_support QMAKE_APPLE_DEVICE_ARCHS=arm64
           make 
       # 打包
       - name: package
