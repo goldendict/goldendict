@@ -8,12 +8,7 @@
 #include <QDebug>
 #include "wstring_qt.hh"
 
-#ifdef __WIN32
 char const * const Iconv::GdWchar = "UTF-32LE";
-#else
-char const * const Iconv::GdWchar = "UTF-32LE";
-#endif
-
 char const * const Iconv::Utf16Le = "UTF-16LE";
 char const * const Iconv::Utf8 = "UTF-8";
 
