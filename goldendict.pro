@@ -96,6 +96,8 @@ win32 {
             -lavcodec
     }
 
+    CONFIG+=utf8_source
+
     RC_ICONS += icons/programicon.ico icons/programicon_old.ico
     INCLUDEPATH += winlibs/include
 
@@ -210,14 +212,8 @@ mac {
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
-        #CONFIG( x86 ) {
-            QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/ 
-        #} else {
-        #    QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-        #                         cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-        #                         cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
-        #}
+        QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
+                             cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/
     }
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
