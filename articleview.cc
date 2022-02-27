@@ -335,7 +335,20 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
-
+  QWebEngineSettings * settings = ui.definition->settings();
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
+  settings->defaultSettings()->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  settings->defaultSettings()->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+#else
+  settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
+  settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+  settings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
+#endif
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;

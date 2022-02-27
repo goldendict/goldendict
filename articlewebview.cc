@@ -107,10 +107,10 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
           return true;
         }
     }
-    if (ev->type() == QEvent::FocusIn) {
-        QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
-        focusInEvent(pe);
-    }
+    // if (ev->type() == QEvent::FocusIn) {
+    //     QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
+    //     focusInEvent(pe);
+    // }
 
     return QWebEngineView::eventFilter(obj, ev);
 }
