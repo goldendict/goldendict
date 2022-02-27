@@ -1,5 +1,4 @@
 #include <QCursor>
-#include <QDesktopWidget>
 
 #include "scanflag.hh"
 #include "ui_scanflag.h"

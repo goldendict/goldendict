@@ -39,9 +39,10 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QDebug>
-#include <QRegExp>
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtCore5Compat>
+#include <QtCore5Compat/QRegExp>
+#else
+#include <QRegExp>
 #endif
 #include <QStringList>
 #include <QDomDocument>

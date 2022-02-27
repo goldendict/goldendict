@@ -56,9 +56,6 @@ static PProcessIdToSessionId pProcessIdToSessionId = 0;
 #include <unistd.h>
 #endif
 
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtCore5Compat>
-#endif
 #include <QRegularExpression>
 
 namespace QtLP_Private {
@@ -113,8 +110,6 @@ QtLocalPeer::QtLocalPeer(QObject* parent, const QString &appId)
     lockFile.open(QIODevice::ReadWrite);
 }
 
-
-
 bool QtLocalPeer::isClient()
 {
     if (lockFile.isLocked())
@@ -136,7 +131,6 @@ bool QtLocalPeer::isClient()
     QObject::connect(server, SIGNAL(newConnection()), SLOT(receiveConnection()));
     return false;
 }
-
 
 bool QtLocalPeer::sendMessage(const QString &message, int timeout)
 {
@@ -173,7 +167,6 @@ bool QtLocalPeer::sendMessage(const QString &message, int timeout)
     }
     return res;
 }
-
 
 void QtLocalPeer::receiveConnection()
 {

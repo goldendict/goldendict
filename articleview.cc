@@ -32,7 +32,7 @@
 #include <QWebEngineContextMenuData>
 #endif
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtCore5Compat>
+#include <QtCore5Compat/QRegExp>
 #include <QWebEngineContextMenuRequest>
 #include <QWebEngineFindTextResult>
 #endif

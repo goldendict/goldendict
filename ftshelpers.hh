@@ -2,9 +2,10 @@
 #define __FTSHELPERS_HH_INCLUDED__
 
 #include <QString>
-#include <QRegExp>
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtCore5Compat>
+#include <QtCore5Compat/QRegExp>
+#else
+#include <QRegExp>
 #endif
 #include <QRunnable>
 #include <QSemaphore>
