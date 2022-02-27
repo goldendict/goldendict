@@ -13,6 +13,9 @@
 #include "wstring_qt.hh"
 #include "folding.hh"
 #include "epwing_charmap.hh"
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #define _FILE_OFFSET_BITS 64
@@ -550,7 +553,8 @@ bool EpwingBook::setSubBook( int book_nom )
   if( f.open( QFile::ReadOnly | QFile::Text ) )
   {
     QTextStream ts( &f );
-    ts.setCodec( "UTF-8" );
+    //todo?
+//    ts.setCodec( "UTF-8" );
 
     QString line = ts.readLine();
     while( !line.isEmpty() )
@@ -853,7 +857,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 {
   EB_Position pos;
 
-  QRegExp badLinks( "#(v|n)\\d" );
+  QRegularExpression badLinks( "#(v|n)\\d" );
 
   // At first we check references queue
   while( !LinksQueue.isEmpty() )
@@ -1031,7 +1035,8 @@ void EpwingBook::fixHeadword( QString & headword )
     return;
 
   QString fixed = headword;
-  fixed.remove( QRegExp( "/[^/]+/", Qt::CaseSensitive ) );
+  QRegularExpression leadingSlashRx( "/[^/]+/" );
+  fixed.remove(leadingSlashRx );
 
   if( isHeadwordCorrect( fixed ) )
   {
@@ -1202,8 +1207,8 @@ void EpwingBook::finalizeText( QString & text )
   // Replace references
 
   int pos = 0;
-  QRegExp reg1( "<R[^<]*>" );
-  QRegExp reg2( "</R[^<]*>" );
+  QRegularExpression reg1( "<R[^<]*>" );
+  QRegularExpression reg2( "</R[^<]*>" );
 
   EContainer cont( this, true );
 
@@ -1239,13 +1244,14 @@ void EpwingBook::finalizeText( QString & text )
 
     QString link = "<a href=\"" + url.toEncoded() + "\">";
 
-    text.replace( reg1.cap(), link );
+    //todo ? iterate cap ,or replace as a whole?
+    text.replace( reg1, link );
 
     pos = text.indexOf( reg2, pos );
     if( pos < 0 )
       break;
 
-    text.replace( reg2.cap(), "</a>" );
+    text.replace( reg2, "</a>" );
   }
 }
 

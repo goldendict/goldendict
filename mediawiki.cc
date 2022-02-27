@@ -349,7 +349,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
-              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              articleNewString += articleString.mid( pos, match.capturedStart() - pos );
               pos = match.capturedEnd();
 
               QString link = match.captured( 1 );
@@ -378,7 +378,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
             if( pos )
             {
-              articleNewString += articleString.midRef( pos );
+              articleNewString += articleString.mid( pos );
               articleString = articleNewString;
               articleNewString.clear();
             }
@@ -403,7 +403,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
-              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              articleNewString += articleString.mid( pos, match.capturedStart() - pos );
               pos = match.capturedEnd();
 
               QString tag = match.captured();
@@ -420,7 +420,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
             if( pos )
             {
-              articleNewString += articleString.midRef( pos );
+              articleNewString += articleString.mid( pos );
               articleString = articleNewString;
               articleNewString.clear();
             }
@@ -466,7 +466,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
-              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              articleNewString += articleString.mid( pos, match.capturedStart() - pos );
               pos = match.capturedEnd();
 
               QString srcset = match.captured();
@@ -476,7 +476,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
             if( pos )
             {
-              articleNewString += articleString.midRef( pos );
+              articleNewString += articleString.mid( pos );
               articleString = articleNewString;
               articleNewString.clear();
             }

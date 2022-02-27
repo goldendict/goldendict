@@ -8,7 +8,11 @@
 #include <QBitmap>
 #include <QMenu>
 #include <QMouseEvent>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#else
 #include <QDesktopWidget>
+#endif
 #include "gddebug.hh"
 #include "gestures.hh"
 
@@ -242,9 +246,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( focusArticleViewAction, SIGNAL( triggered() ), definition, SLOT( focus() ) );
 
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
-                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+                                       QKeySequence( Qt::CTRL | Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL | Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_8 ) );
 
   addAction( &switchExpandModeAction );
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
@@ -1001,7 +1005,11 @@ void ScanPopup::leaveEvent( QEvent * event )
   }
 }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+void ScanPopup::enterEvent( QEnterEvent * event )
+#else
 void ScanPopup::enterEvent( QEvent * event )
+#endif
 {
   QMainWindow::enterEvent( event );
 

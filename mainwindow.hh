@@ -513,7 +513,6 @@ signals:
 protected:
   unsigned gdAskMessage;
 public:
-  bool handleGDMessage( MSG * message, long * result );
 
 private slots:
   /// Return true while scanning GoldenDict window

@@ -46,7 +46,7 @@
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
 #include "utils.hh"
-#include <QDesktopWidget>
+#include <qscreen.h>
 #include "ui_authentication.h"
 #include "resourceschemehandler.h"
 
@@ -460,9 +460,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   switchExpandModeAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
-                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+                                       QKeySequence( Qt::CTRL | Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL | Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_8 ) );
 
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
            this, SLOT(switchExpandOptionalPartsMode() ) );
@@ -3413,7 +3413,7 @@ void MainWindow::on_saveArticle_triggered()
   QString fileName = view->getTitle().simplified();
 
   // Replace reserved filename characters
-  QRegExp rxName( "[/\\\\\\?\\*:\\|<>]" );
+  QRegularExpression rxName( "[/\\\\\\?\\*:\\|<>]" );
   fileName.replace( rxName, "_" );
 
   fileName += ".html";
@@ -3462,6 +3462,7 @@ void MainWindow::on_saveArticle_triggered()
 
       QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
       int pos = 0;
+      QRegularExpression anchorRx( "(g[0-9a-f]{32}_)[0-9a-f]+_" );
       while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
       {
         QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
@@ -3472,7 +3473,7 @@ void MainWindow::on_saveArticle_triggered()
         {
           anchor = name.mid( n );
           name.truncate( n );
-          anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
+          anchor.replace( anchorRx, "\\1" ); // MDict anchors
         }
         name.replace( rxName, "_" );
         name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
@@ -3481,7 +3482,7 @@ void MainWindow::on_saveArticle_triggered()
       }
 
       // MDict anchors
-      QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
+      QRegularExpression anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", QRegularExpression::PatternOption::CaseInsensitiveOption );
       html.replace( anchorLinkRe, "\\1" );
 
       if ( complete )
@@ -4724,23 +4725,6 @@ void MainWindow::headwordFromFavorites( QString const & headword,
 }
 
 #ifdef Q_OS_WIN32
-
-bool MainWindow::handleGDMessage( MSG * message, long * result )
-{
-  if( message->message != gdAskMessage )
-    return false;
-  *result = 0;
-
-  if( !isGoldenDictWindow( message->hwnd ) )
-    return true;
-
-  ArticleView * view = getCurrentArticleView();
-  if( !view )
-    return true;
-
-  *result = 1;
-  return true;
-}
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {

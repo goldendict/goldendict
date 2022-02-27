@@ -40,6 +40,9 @@
 #include <QAtomicInt>
 #include <QDebug>
 #include <QRegExp>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 #include <QStringList>
 #include <QDomDocument>
 #include <QDomNode>
@@ -472,7 +475,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+        articleNewText += articleText.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString link = match.captured( 3 );
@@ -507,7 +510,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       }
       if( pos )
       {
-        articleNewText += articleText.midRef( pos );
+        articleNewText += articleText.mid( pos );
         articleText = articleNewText;
         articleNewText.clear();
       }
@@ -527,7 +530,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+        articleNewText += articleText.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString src = match.captured( 2 );
@@ -551,7 +554,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       }
       if( pos )
       {
-        articleNewText += articleText.midRef( pos );
+        articleNewText += articleText.mid( pos );
         articleText = articleNewText;
         articleNewText.clear();
       }
@@ -1775,7 +1778,7 @@ void StardictResourceRequest::run()
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        newCSS += css.midRef( pos, match.capturedStart() - pos );
+        newCSS += css.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString url = match.captured( 2 );
@@ -1793,7 +1796,7 @@ void StardictResourceRequest::run()
       }
       if( pos )
       {
-        newCSS += css.midRef( pos );
+        newCSS += css.mid( pos );
         css = newCSS;
         newCSS.clear();
       }

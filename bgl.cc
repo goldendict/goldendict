@@ -32,6 +32,9 @@
 #include <QDebug>
 
 #include <QRegExp>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 
 #include <QRegularExpression>
 
@@ -1100,7 +1103,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     while( it.hasNext() )
     {
       QRegularExpressionMatch match = it.next();
-      result += str.midRef( pos, match.capturedStart() - pos );
+      result += str.mid( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QRegularExpressionMatchIterator itValue = oneValueExp.globalMatch( match.captured( 1 ) );
@@ -1113,7 +1116,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
 
     if( pos )
     {
-      result += str.midRef( pos );
+      result += str.mid( pos );
       str = result;
     }
 

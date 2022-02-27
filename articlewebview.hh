@@ -8,7 +8,6 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <QWebEngineView>
-#include <QOpenGLWidget>
 #include <QPointer>
 
 /// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.

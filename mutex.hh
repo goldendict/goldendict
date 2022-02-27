@@ -13,7 +13,7 @@
 class Mutex: public QMutex
 {
 public:
-  Mutex() : QMutex( Recursive )
+  Mutex() : QMutex(  )
   {}
   ~Mutex()
   {}

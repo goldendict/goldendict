@@ -21,13 +21,14 @@ QT += core \
       gui \
       xml \
       network \
-      svg
-
-QT += widgets \
+      svg \
+      widgets \
       webenginewidgets\
       webchannel\
       printsupport \
       help
+
+greaterThan(QT_MAJOR_VERSION, 6): QT += webenginecore core5compat
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
 

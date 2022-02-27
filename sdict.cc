@@ -28,7 +28,9 @@
 #include <QAtomicInt>
 #include <QDebug>
 #include <QRegExp>
-
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 #include <QRegularExpression>
 
 #include "ufile.hh"
@@ -322,8 +324,8 @@ string SdictDictionary::convert( string const & in )
     int n = 0;
     for( ; ; )
     {
-      QRegExp start_link_tag( "<\\s*r\\s*>", Qt::CaseInsensitive );
-      QRegExp end_link_tag( "<\\s*/r\\s*>", Qt::CaseInsensitive );
+      QRegularExpression start_link_tag( "<\\s*r\\s*>", QRegularExpression::CaseInsensitiveOption );
+      QRegularExpression end_link_tag( "<\\s*/r\\s*>", QRegularExpression::CaseInsensitiveOption );
 
       n = result.indexOf( start_link_tag, n );
       if( n < 0 )
@@ -333,10 +335,12 @@ string SdictDictionary::convert( string const & in )
       if( end < 0 )
         break;
 
-      int tag_len = start_link_tag.cap().length();
+      QRegularExpressionMatch m= start_link_tag.match( result, 0, QRegularExpression::PartialPreferFirstMatch );
+      int tag_len = m.captured ().length();
       QString link_text = result.mid( n + tag_len, end - n - tag_len );
 
-      result.replace( end, end_link_tag.cap().length(), "</a>" );
+      m= end_link_tag.match( result, 0, QRegularExpression::PartialPreferFirstMatch );
+      result.replace( end, m.captured ().length(), "</a>" );
       result.replace( n, tag_len, QString( "<a class=\"sdict_wordref\" href=\"bword:" ) + link_text + "\">");
     }
 

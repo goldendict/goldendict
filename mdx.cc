@@ -896,7 +896,7 @@ void MddResourceRequest::run()
         while ( it.hasNext() )
         {
           QRegularExpressionMatch match = it.next();
-          newCSS += css.midRef( pos, match.capturedStart() - pos );
+          newCSS += css.mid( pos, match.capturedStart() - pos );
           pos = match.capturedEnd();
           QString url = match.captured( 2 );
 
@@ -915,7 +915,7 @@ void MddResourceRequest::run()
         }
         if( pos )
         {
-          newCSS += css.midRef( pos );
+          newCSS += css.mid( pos );
           css = newCSS;
           newCSS.clear();
         }
@@ -1010,17 +1010,20 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
     article = filterResource( articleId, article );
 
   // Check for unclosed <span> and <div>
-
-  int openTags = article.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );
-  int closedTags = article.count( QRegExp( "<\\s*/span\\s*>", Qt::CaseInsensitive ) );
+  QRegularExpression openTagsRx( "<\\s*span\\b", QRegularExpression::PatternOption::CaseInsensitiveOption );
+  int openTags = article.count( openTagsRx );
+  QRegularExpression closeTagRx( "<\\s*/span\\s*>", QRegularExpression::PatternOption::CaseInsensitiveOption );
+  int closedTags = article.count( closeTagRx );
   while( openTags > closedTags )
   {
     article += "</span>";
     closedTags += 1;
   }
 
-  openTags = article.count( QRegExp( "<\\s*div\\b", Qt::CaseInsensitive ) );
-  closedTags = article.count( QRegExp( "<\\s*/div\\s*>", Qt::CaseInsensitive ) );
+  QRegularExpression openDivRx( "<\\s*div\\b", QRegularExpression::PatternOption::CaseInsensitiveOption );
+  openTags = article.count( openDivRx );
+  QRegularExpression closeDivRx( "<\\s*/div\\s*>", QRegularExpression::PatternOption::CaseInsensitiveOption );
+  closedTags = article.count( closeDivRx );
   while( openTags > closedTags )
   {
     article += "</div>";
@@ -1071,7 +1074,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( allLinksMatch.capturedEnd() < linkPos )
       continue;
 
-    articleNewText += article.midRef( linkPos, allLinksMatch.capturedStart() - linkPos );
+    articleNewText += article.mid( linkPos, allLinksMatch.capturedStart() - linkPos );
     linkPos = allLinksMatch.capturedEnd();
 
     QString linkTxt = allLinksMatch.captured();
@@ -1146,7 +1149,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         match = closeScriptTagRe.match( article, linkPos );
         if( match.hasMatch() )
         {
-          articleNewText += article.midRef( linkPos, match.capturedEnd() - linkPos );
+          articleNewText += article.mid( linkPos, match.capturedEnd() - linkPos );
           linkPos = match.capturedEnd();
         }
         continue;
@@ -1187,7 +1190,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   }
   if( linkPos )
   {
-    articleNewText += article.midRef( linkPos );
+    articleNewText += article.mid( linkPos );
     article = articleNewText;
   }
 

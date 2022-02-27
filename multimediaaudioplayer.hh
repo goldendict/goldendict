@@ -9,6 +9,9 @@
 #include <QBuffer>
 #include <QMediaPlayer>
 #include "audioplayerinterface.hh"
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QAudioOutput>
+#endif
 
 class MultimediaAudioPlayer : public AudioPlayerInterface
 {
@@ -25,6 +28,9 @@ private slots:
 private:
   QBuffer audioBuffer;
   QMediaPlayer player; ///< Depends on audioBuffer.
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+  QAudioOutput audioOutput;
+#endif
 };
 
 #endif // MAKE_QTMULTIMEDIA_PLAYER
