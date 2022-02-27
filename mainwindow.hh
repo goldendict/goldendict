@@ -377,7 +377,7 @@ private slots:
   void editCurrentGroup();
   void editPreferences();
 
-  void currentGroupChanged( QString const & );
+  void currentGroupChanged( int );
   void translateInputChanged( QString const & );
   void translateInputFinished( bool checkModifiers = true );
 

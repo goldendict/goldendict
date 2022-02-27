@@ -254,8 +254,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
            this, SLOT(switchExpandOptionalPartsMode() ) );
 
-  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( ui.groupList, &QComboBox::currentIndexChanged,
+           this, &ScanPopup::currentGroupChanged);
 
   connect( &wordFinder, SIGNAL( finished() ),
            this, SLOT( prefixMatchFinished() ) );
@@ -717,8 +717,7 @@ QString ScanPopup::elideInputWord()
   QString const & inputWord = inputPhrase.phrase;
   return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
 }
-
-void ScanPopup::currentGroupChanged( QString const & )
+void ScanPopup::currentGroupChanged( int )
 {
     cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
     Instances::Group const * igrp = groups.findGroup( cfg.lastPopupGroupId );

@@ -677,11 +677,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.showReference, SIGNAL( triggered() ),
            this, SLOT( showGDHelp() ) );
 
-  connect( groupListInDock, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupListInDock, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 
-  connect( groupListInToolbar, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupListInToolbar, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
@@ -1391,8 +1391,8 @@ void MainWindow::updateGroupList()
 
   // currentIndexChanged() signal is very trigger-happy. To avoid triggering
   // it, we disconnect it while we're clearing and filling back groups.
-  disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-              this, SLOT( currentGroupChanged( QString const & ) ) );
+  disconnect( groupList, &GroupComboBox::currentIndexChanged,
+              this, &MainWindow::currentGroupChanged );
 
   groupInstances.clear();
 
@@ -1437,8 +1437,8 @@ void MainWindow::updateGroupList()
     view.reload();
   }
 
-  connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupList, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 }
 
 void MainWindow::updateDictionaryBar()
@@ -2255,7 +2255,7 @@ void MainWindow::editPreferences()
   ftsIndexing.doIndexing();
 }
 
-void MainWindow::currentGroupChanged( QString const & )
+void MainWindow::currentGroupChanged( int )
 {
   cfg.lastMainGroupId = groupList->getCurrentGroup();
   Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
@@ -3740,8 +3740,8 @@ void MainWindow::applyWordsZoomLevel()
 
   if ( groupList->font().pointSize() != ps )
   {
-    disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-                this, SLOT( currentGroupChanged( QString const & ) ) );
+    disconnect( groupList, &GroupComboBox::currentIndexChanged,
+                this, &MainWindow::currentGroupChanged );
     int n = groupList->currentIndex();
     groupList->clear();
     groupList->setFont( font );

@@ -194,7 +194,7 @@ private:
 private slots:
   void clipboardChanged( QClipboard::Mode );
   void mouseHovered( QString const & , bool forcePopup);
-  void currentGroupChanged( QString const & );
+  void currentGroupChanged( int );
   void prefixMatchFinished();
   void on_pronounceButton_clicked();
   void pinButtonClicked( bool checked );
