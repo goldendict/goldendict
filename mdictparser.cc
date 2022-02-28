@@ -32,8 +32,11 @@
 #include <QDomDocument>
 #include <QTextDocumentFragment>
 #include <QDataStream>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QTextCodec>
+#else
 #include <QTextCodec>
-
+#endif
 #include "decompress.hh"
 #include "gddebug.hh"
 #include "ripemd.hh"
