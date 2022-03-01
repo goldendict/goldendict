@@ -209,7 +209,6 @@ private:
   void closeEvent( QCloseEvent * );
 
   void applyProxySettings();
-  void applyWebSettings();
   void setupNetworkCache( int maxSize );
   void makeDictionaries();
   void updateStatusLine();

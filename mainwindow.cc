@@ -772,7 +772,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
   applyProxySettings();
-  applyWebSettings();
 
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
@@ -1231,7 +1230,7 @@ void MainWindow::closeEvent( QCloseEvent * ev )
     // Don't ignore the close event, because doing so cancels session logout if
     // the main window is visible when the user attempts to log out.
     // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
-    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    // property is false and Qt::WA_DeleteOnClose widget  is not set.
     Q_ASSERT(!QApplication::quitOnLastWindowClosed());
     Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
 #else
@@ -1303,17 +1302,6 @@ void MainWindow::applyProxySettings()
   }
 
   QNetworkProxy::setApplicationProxy( proxy );
-}
-
-void MainWindow::applyWebSettings()
-{
-  QWebEngineSettings * defaultSettings = QWebEngineSettings::defaultSettings();
-  defaultSettings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
-  defaultSettings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::JavascriptCanOpenWindows, true );
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -2229,7 +2217,6 @@ void MainWindow::editPreferences()
 
     updateTrayIcon();
     applyProxySettings();
-    applyWebSettings();
 
     ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
 
