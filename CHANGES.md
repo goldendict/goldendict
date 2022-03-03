@@ -1,6 +1,9 @@
 # Changes
 
+
+
 ## Until to now
+- **CLEANING OLD/USELESS CODE**
 - upgrade opencc to 2020-04-26 version(through vcpkg)
 - upgrade ffmpeg dependency to 4.4(on windows),code support to 5.0
 - fix: double click word to translate ,right context menu does not display.
