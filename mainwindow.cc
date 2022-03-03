@@ -2503,13 +2503,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   // when the main window is moved or resized, hide the word list suggestions
   if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
   {
-#ifdef Q_OS_WIN
-//    if( !isMaximized() && !isMinimized() && !isFullScreen() && gdAskMessage != 0xFFFFFFFF )
-//    {
-//      QEvent *ev = new QEvent( gdStoreNormalGeometryEvent );
-//      qApp->postEvent( this, ev );
-//    }
-#endif
     if ( !cfg.preferences.searchInDock )
     {
         translateBox->setPopupEnabled( false );

@@ -73,8 +73,12 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
 
 void EditDictionaries::editGroup( unsigned id )
 {
+  ui.tabs->setTabVisible( 0, false );
+
   if ( id == Instances::Group::AllGroupId )
+  {
     ui.tabs->setCurrentIndex( 1 );
+  }
   else
   {
     ui.tabs->setCurrentIndex( 2 );
