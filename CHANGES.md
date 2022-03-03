@@ -1,10 +1,14 @@
 # Changes
 
 ## Until to now
-- upgrade opencc to 2020-04-26 version
-- upgrade ffmpeg to 4.4
+- upgrade opencc to 2020-04-26 version(through vcpkg)
+- upgrade ffmpeg dependency to 4.4(on windows),code support to 5.0
 - fix: double click word to translate ,right context menu does not display.
 - add macos release workflow ,though not verified.
+- fix:middle button open in new tab does not work.
+- optimize: large memory consumption ,when have large collection of dictionaries.even when query a small group of dictionaries.
+- peformance: dsl parse performance .  
+  when have very long lines,the line will be split into two parts .the remaining part was considered a normal headword ,and hanged when expand parts.
 
 
 
