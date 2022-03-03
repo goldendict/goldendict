@@ -460,6 +460,6 @@ QString localizedStringForId( Id langId )
     if( iconId.isEmpty() )
       return name;
     else
-      return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
+      return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId , name );
   }
 }

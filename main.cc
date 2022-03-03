@@ -328,22 +328,7 @@ int main( int argc, char ** argv )
 #endif
 
   // Load translations for system locale
-
-  QTranslator qtTranslator;
-
   QString localeName = QLocale::system().name();
-
-  if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
-    qtTranslator.load( "qt_" + localeName,
-                       QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
-
-  app.installTranslator( &qtTranslator );
-
-  QTranslator translator;
-
-  translator.load( Config::getLocDir() + "/" + localeName );
-
-  app.installTranslator( &translator );
 
   Config::Class cfg;
   for( ; ; )
@@ -395,16 +380,36 @@ int main( int argc, char ** argv )
   }
 
   // Reload translations for user selected locale is nesessary
-
+  QTranslator qtTranslator;
+  QTranslator translator;
   if( !cfg.preferences.interfaceLanguage.isEmpty() && localeName != cfg.preferences.interfaceLanguage )
   {
     localeName = cfg.preferences.interfaceLanguage;
-
-    if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
-      qtTranslator.load( "qt_" + localeName,
-                                 QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+    QLocale locale( localeName );
+    QLocale::setDefault( locale );
+    if( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
+    {
+      qtTranslator.load( "qt_" + localeName, QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+      app.installTranslator( &qtTranslator );
+    }
 
     translator.load( Config::getLocDir() + "/" + localeName );
+    app.installTranslator( &translator );
+  }
+  else
+  {
+    QString localeName = QLocale::system().name();
+
+
+    if( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
+    {
+      qtTranslator.load( "qt_" + localeName, QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+
+      app.installTranslator( &qtTranslator );
+    }
+
+    translator.load( Config::getLocDir() + "/" + localeName );
+    app.installTranslator( &translator );
   }
 
   // Prevent app from quitting spontaneously when it works with scan popup
