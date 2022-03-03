@@ -2050,10 +2050,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
 
-  // the full index does not have to wait until this function invoked.
-
-//  ftsIndexing.stopIndexing();
-//  ftsIndexing.clearDictionaries();
+  ftsIndexing.stopIndexing();
+  ftsIndexing.clearDictionaries();
 
   wordFinder.clear();
   dictionariesUnmuted.clear();
@@ -2110,14 +2108,14 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   makeScanPopup();
   installHotKeys();
 
-//  for( unsigned x = 0; x < dictionaries.size(); x++ )
-//  {
-//    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
-//    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
-//  }
+  for( unsigned x = 0; x < dictionaries.size(); x++ )
+  {
+    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+  }
 
-//  ftsIndexing.setDictionaries( dictionaries );
-//  ftsIndexing.doIndexing();
+  ftsIndexing.setDictionaries( dictionaries );
+  ftsIndexing.doIndexing();
 }
 
 void MainWindow::editCurrentGroup()
