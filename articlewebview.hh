@@ -32,6 +32,10 @@ public:
 
   bool isMidButtonPressed() const
   { return midButtonPressed; }
+  void resetMidButtonPressed()
+  {
+    midButtonPressed = false;
+  }
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 

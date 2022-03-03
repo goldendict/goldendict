@@ -1110,6 +1110,7 @@ void ArticleView::linkClicked( QUrl const & url_ )
          ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
   {
     // Mid button or Control/Shift is currently pressed - open the link in new tab
+    ui.definition->resetMidButtonPressed();
     emit openLinkInNewTab( url, ui.definition->url(), getCurrentArticle(), contexts );
   }
   else

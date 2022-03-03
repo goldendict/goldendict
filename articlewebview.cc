@@ -135,8 +135,8 @@ void ArticleWebView::sendCustomMouseEvent( QEvent::Type type) {
 void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
   bool noMidButton = !( event->buttons() & Qt::MiddleButton );
 
-  if ( midButtonPressed & noMidButton )
-    midButtonPressed = false;
+//  if ( midButtonPressed & noMidButton )
+//    midButtonPressed = false;
 }
 
 void ArticleWebView::doubleClickAction(QMouseEvent *event) {
