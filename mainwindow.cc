@@ -867,7 +867,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   prepareNewReleaseChecks();
 
   // makeDictionaries() didn't do deferred init - we do it here, at the end.
-  doDeferredInit( dictionaries );
+  //doDeferredInit( dictionaries );
 
   updateStatusLine();
 
@@ -2050,9 +2050,6 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
 
-  ftsIndexing.stopIndexing();
-  ftsIndexing.clearDictionaries();
-
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
@@ -2078,7 +2075,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
-
+    ftsIndexing.stopIndexing();
+    ftsIndexing.clearDictionaries();
     // Set muted dictionaries from old groups
     for( int x = 0; x < newCfg.groups.size(); x++ )
     {
@@ -2101,6 +2099,15 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
     Config::save( cfg );
 
     updateSuggestionList();
+
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
+      dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+      dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+    }
+
+    ftsIndexing.setDictionaries( dictionaries );
+    ftsIndexing.doIndexing();
   }
 
   }
@@ -2108,14 +2115,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   makeScanPopup();
   installHotKeys();
 
-  for( unsigned x = 0; x < dictionaries.size(); x++ )
-  {
-    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
-    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
-  }
 
-  ftsIndexing.setDictionaries( dictionaries );
-  ftsIndexing.doIndexing();
 }
 
 void MainWindow::editCurrentGroup()
