@@ -15,6 +15,7 @@
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
 #include "globalbroadcaster.h"
+#include "article_inspect.h"
 
 class ResourceToSaveHandler;
 class ArticleViewAgent ;
@@ -45,8 +46,7 @@ class ArticleView: public QFrame
   QString rangeVarName;
 
   //used to hold the F12 inspect source view.
-  QWebEngineView *inspectView = nullptr;
-  QDialog * devDialog         = nullptr;
+  article_inspect * inspector = nullptr;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make

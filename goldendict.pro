@@ -217,6 +217,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
+    article_inspect.h \
     globalbroadcaster.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
@@ -356,6 +357,7 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
+    article_inspect.cpp \
     globalbroadcaster.cpp \
     main.cc \
     dictionary.cc \

@@ -507,21 +507,12 @@ void ArticleView::showAnticipation()
 
 void ArticleView::inspectElement(){
   QWebEnginePage *page = ui.definition->page();
-  if (inspectView == nullptr) {
-    inspectView = new QWebEngineView();
-    page->setDevToolsPage( inspectView->page() );
-    devDialog = new QDialog( this );
-    devDialog->setWindowTitle( tr( "Inspect" ) );
-    devDialog->setWindowFlags( Qt::Window );
-    devDialog->setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
-    QVBoxLayout * v = new QVBoxLayout( devDialog );
-    v->setSpacing( 0 );
-    v->setContentsMargins( 0, 0, 0, 0 );
-    v->addWidget( inspectView );
+  if( inspector == nullptr )
+  {
+    inspector = new article_inspect( this );
+    inspector->setWindowTitle( tr( "Inspect" ) );
   }
-  page->triggerAction( QWebEnginePage::InspectElement );
-  devDialog->raise();
-  devDialog->show();
+  inspector->setInspectPage( page );
 }
 
 void ArticleView::loadFinished( bool result )
