@@ -37,7 +37,6 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
   DEFINES += MAKE_QTMULTIMEDIA_PLAYER
 }
 
-
 !CONFIG( no_ffmpeg_player ) {
   DEFINES += MAKE_FFMPEG_PLAYER
 }
@@ -78,8 +77,7 @@ win32 {
         HUNSPELL_LIB = hunspell
     }
 
-    LIBS += -liconv \
-        -lwsock32 \
+    LIBS += -lwsock32 \
         -lpsapi \
         -lole32 \
         -loleaut32 \
@@ -138,7 +136,7 @@ unix:!mac {
             libswresample \
     }
     arm {
-        LIBS += -liconv
+        #LIBS += -liconv
     } else {
         LIBS += -lX11 -lXtst
     }
@@ -171,7 +169,7 @@ unix:!mac {
     INSTALLS += helps
 }
 freebsd {
-    LIBS += -liconv -lexecinfo
+    LIBS +=   -lexecinfo
 }
 mac {
     TARGET = GoldenDict
@@ -181,7 +179,6 @@ mac {
     # CONFIG += x86 x86_64 ppc
     LIBS = -lz \
         -lbz2 \
-        -liconv \
         -lvorbisfile \
         -lvorbis \
         -logg \

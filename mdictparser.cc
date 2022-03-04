@@ -22,7 +22,6 @@
 
 #include <errno.h>
 #include <zlib.h>
-#include <iconv.h>
 #include <lzo/lzo1x.h>
 
 #include <QtEndian>

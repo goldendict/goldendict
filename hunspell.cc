@@ -734,10 +734,8 @@ string encodeToHunspell( Hunspell & hunspell, wstring const & str )
   void * out = &result.front();
   size_t outLeft = result.size();
 
-  if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
-    throw Iconv::Ex();
-
-  return string( &result.front(), result.size() - outLeft );
+  QString convStr= conv.convert( in, inLeft);
+  return FsEncoding::encode(convStr);
 }
 
 wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
@@ -752,12 +750,9 @@ wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
   void * out = &result.front();
   size_t outLeft = result.size() * sizeof( wchar );
 
-  if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
-    throw Iconv::Ex();
-
-  return wstring( &result.front(), result.size() - outLeft/sizeof( wchar ) );
+  QString convStr= conv.convert( in, inLeft);
+  return gd::toWString(convStr);
 }
-
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & cfg )

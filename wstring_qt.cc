@@ -28,4 +28,9 @@ namespace gd
     return gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
   }
 
+  std::string toStdString(const QString& str)
+  {
+      return str.toStdString();
+  }
+
 }
