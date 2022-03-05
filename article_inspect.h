@@ -6,13 +6,13 @@
 #include <QWebEnginePage>
 #include <QVBoxLayout>
 
-class article_inspect : public QDialog
+class ArticleInspector : public QDialog
 {
   Q_OBJECT
   QWebEngineView * inspectView   = nullptr;
   QWebEnginePage * inspectedPage = nullptr;
 public:
-  article_inspect( QWidget * parent = nullptr );
+  ArticleInspector( QWidget * parent = nullptr );
 
   void setInspectPage( QWebEnginePage * page );
 

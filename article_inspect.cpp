@@ -1,6 +1,6 @@
 #include "article_inspect.h"
 #include <QCloseEvent>
-article_inspect::article_inspect( QWidget * parent ) : QDialog( parent, Qt::WindowType::Window )
+ArticleInspector::ArticleInspector( QWidget * parent ) : QDialog( parent, Qt::WindowType::Window )
 {
   setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
   QVBoxLayout * v = new QVBoxLayout( this );
@@ -10,7 +10,7 @@ article_inspect::article_inspect( QWidget * parent ) : QDialog( parent, Qt::Wind
   v->addWidget( inspectView );
 }
 
-void article_inspect::setInspectPage( QWebEnginePage * page )
+void ArticleInspector::setInspectPage( QWebEnginePage * page )
 {
   this->inspectedPage = page;
   page->setDevToolsPage( inspectView->page() );
@@ -19,7 +19,7 @@ void article_inspect::setInspectPage( QWebEnginePage * page )
   show();
 }
 
-void article_inspect::closeEvent( QCloseEvent * ev )
+void ArticleInspector::closeEvent( QCloseEvent * ev )
 {
   inspectedPage->setDevToolsPage( nullptr );
 }

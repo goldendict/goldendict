@@ -509,7 +509,7 @@ void ArticleView::inspectElement(){
   QWebEnginePage *page = ui.definition->page();
   if( inspector == nullptr )
   {
-    inspector = new article_inspect( this );
+    inspector = new ArticleInspector( this );
     inspector->setWindowTitle( tr( "Inspect" ) );
   }
   inspector->setInspectPage( page );

@@ -46,7 +46,7 @@ class ArticleView: public QFrame
   QString rangeVarName;
 
   //used to hold the F12 inspect source view.
-  article_inspect * inspector = nullptr;
+  ArticleInspector * inspector = nullptr;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
