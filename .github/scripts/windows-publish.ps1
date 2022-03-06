@@ -52,7 +52,11 @@ function Main() {
     Copy-Item $sdkDll $archiveName\
     Copy-Item winlibs\lib\msvc\*.dll $archiveName\
     Copy-Item locale\*.qm $archiveName\locale\
-    # Copy-Item qtsingleapplication\lib\*.dll $archiveName\
+    Write-Host "copy qwebengine zh_CN translation"
+    Copy-Item thirdparty\qwebengine_ts\*.qm $archiveName\locale\
+    $webengineqm="{0}\translations\qtwebengine_*.qm" -f $env:Qt5_Dir
+    Write-Host "copy qtwebengine qm from $($webengineqm)"
+    Copy-Item $webengineqm $archiveName\locale\
     Write-Host "compress zip..."
     # 打包zip
     Compress-Archive -Path $archiveName -DestinationPath $archiveName'.zip'
