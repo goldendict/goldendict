@@ -90,6 +90,7 @@ void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const 
 
   if( logFilePtr && logFilePtr->isOpen() )
   {
+    message.insert( 0, QDateTime::currentDateTime().toString( "yyyy-MM-dd HH:mm:ss.zzz " ) );
     message.append( "\n" );
     logFilePtr->write( message.toUtf8() );
     logFilePtr->flush();
