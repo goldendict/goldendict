@@ -27,7 +27,6 @@ public:
 
   ArticleWebView( QWidget * parent );
   ~ArticleWebView();
-
   void setUp( Config::Class * cfg );
 
   bool isMidButtonPressed() const
@@ -52,7 +51,7 @@ public:
   void doubleClicked( QPoint pos );
 
 protected:
-
+  QWebEngineView *createWindow(QWebEnginePage::WebWindowType type);
   bool event( QEvent * event );
   void singleClickAction(QMouseEvent *event);
   void sendCustomMouseEvent(QEvent::Type type);

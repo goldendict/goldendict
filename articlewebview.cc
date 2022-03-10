@@ -6,6 +6,8 @@
 #include <QWebEngineView>
 #include <QApplication>
 #include <QTimer>
+#include <QDialog>
+#include <QMainWindow>
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
@@ -32,6 +34,17 @@ void ArticleWebView::setUp( Config::Class * cfg )
 void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
 {
   QWebEngineView::triggerPageAction( action, checked );
+}
+
+QWebEngineView * ArticleWebView::createWindow( QWebEnginePage::WebWindowType type )
+{
+  QMainWindow * dlg = new QMainWindow( this );
+  QWebEngineView * webbrowser = new QWebEngineView( this );
+  dlg->setCentralWidget(webbrowser);
+  dlg->setMinimumSize(400,400);
+  dlg->show();
+
+  return webbrowser;
 }
 
 bool ArticleWebView::event( QEvent * event )

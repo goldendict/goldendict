@@ -1303,12 +1303,13 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
-  QWebEngineSettings *defaultSettings = QWebEngineSettings::defaultSettings();
-  defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+  QWebEngineSettings * defaultSettings = QWebEngineSettings::defaultSettings();
+  defaultSettings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+  defaultSettings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
+  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::JavascriptCanOpenWindows, true );
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
