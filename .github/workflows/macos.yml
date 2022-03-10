@@ -78,7 +78,13 @@ jobs:
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
-          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          commitSummary="$(git shortlog $previousTag..${{ github.ref }})"
+          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""           
       # tag 上传Release
       - name: uploadRelease
         uses: svenstaro/upload-release-action@v2
@@ -100,3 +106,6 @@ jobs:
             AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     macos-10.15,macos-11.0,clang_64
             This is a prerelease version ,auto build by github action. use on your on risk:-)   
+
+            CHANGES:
+            ${{ steps.vars.outputs.COMMIT_SUMMARY }}            

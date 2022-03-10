@@ -94,13 +94,19 @@ jobs:
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
           echo "::set-output name=appname::$(ls *.AppImage*)"
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          commitSummary="$(git shortlog $previousTag..${{ github.ref }})"
+          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""          
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
-          asset_name: ${{ steps.vars.outputs.appname }}
+          asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
@@ -114,4 +120,7 @@ jobs:
                                   goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
             AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     macos-10.15,macos-11.0,clang_64
-            This is a prerelease version ,auto build by github action. use on your on risk:-)   
+            This is a prerelease version ,auto build by github action. use on your on risk:-)  
+
+            CHANGES:
+            ${{ steps.vars.outputs.COMMIT_SUMMARY }}             

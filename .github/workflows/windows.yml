@@ -93,6 +93,12 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"    
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          commitSummary="$(git shortlog $previousTag..${{ github.ref }})"
+          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""
       # 打包 
       - name: package
         id: package      
@@ -117,7 +123,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
-          asset_name: ${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{ matrix.qt_ver }}-${{ steps.package.outputs.packageName }}.zip
           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
@@ -131,6 +137,9 @@ jobs:
             AppImage built with:  Ubuntu-20.04 ,latest gcc
 
             This is a prerelease version ,auto build by github action. use on your on risk:-)
+
+            CHANGES:
+            ${{ steps.vars.outputs.COMMIT_SUMMARY }}
       - name: upload goldendict.exe only
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
