@@ -83,7 +83,7 @@ jobs:
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
-          commitSummary="$(git shortlog $previousTag..${{ github.ref }})"
+          commitSummary="$(git shortlog $previousTag..HEAD)"
           echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""           
       # tag 上传Release
       - name: uploadRelease

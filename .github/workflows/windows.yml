@@ -72,6 +72,20 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           tag_prefix: "v"
           tag_suffix: "-${{ steps.githash.outputs.sha_short }}"
+      - name: Set outputs
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
+          echo "::set-output name=release_time::$(date +'%H%M%S')"    
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          commitSummary="$(git shortlog $previousTag..HEAD)"
+          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""        
       # msvc编译
       - name: msvc-build goldendict
         id: build
@@ -86,19 +100,6 @@ jobs:
           echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
           echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
 
-      - name: Set outputs
-        id: vars
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
-          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
-          echo "::set-output name=release_time::$(date +'%H%M%S')"    
-          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
-
-          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
-          echo "previousTag : $previousTag"
-          
-          commitSummary="$(git shortlog $previousTag..${{ github.ref }})"
-          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""
       # 打包 
       - name: package
         id: package      
@@ -146,7 +147,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release/${{ env.targetName }}
-          asset_name: ${{ env.targetName }}
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}
           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
