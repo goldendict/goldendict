@@ -39,7 +39,7 @@ void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool c
 QWebEngineView * ArticleWebView::createWindow( QWebEnginePage::WebWindowType type )
 {
   QMainWindow * dlg = new QMainWindow( this );
-  QWebEngineView * view = new QWebEngineView( this );
+  QWebEngineView * view = new QWebEngineView( dlg );
   dlg->setCentralWidget(view);
   dlg->resize(400,400);
   dlg->show();
