@@ -135,6 +135,8 @@ jobs:
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
+            # goldendict.exe can not used alone 
+            if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
             AppImage built with:  Ubuntu-20.04 ,latest gcc
 
             This is a prerelease version ,auto build by github action. use on your on risk:-)
@@ -158,7 +160,9 @@ jobs:
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
-                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            # goldendict.exe can not used alone 
+            if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            
             AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     macos-10.15,macos-11.0,clang_64
             This is a prerelease version ,auto build by github action. use on your on risk:-)   
