@@ -54,7 +54,7 @@ function Main() {
     Copy-Item locale\*.qm $archiveName\locale\
     Write-Host "copy qwebengine zh_CN translation"
     Copy-Item thirdparty\qwebengine_ts\*.qm $archiveName\locale\
-    $webengineqm="{0}\translations\qtwebengine_*.qm" -f $env:Qt5_Dir
+    $webengineqm="{0}\translations\qtwebengine_*.qm" -f $env:QTDIR.Trim()
     Write-Host "copy qtwebengine qm from $($webengineqm)"
     Copy-Item $webengineqm $archiveName\locale\
     Write-Host "compress zip..."

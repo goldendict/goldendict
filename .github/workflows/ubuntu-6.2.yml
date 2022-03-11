@@ -1,39 +1,42 @@
-name: Ubuntu
+name: Ubuntu-6.2
 # Qt官方没有linux平台的x86包
 concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 on: 
+  workflow_run:
+    workflows: [AutoTag]
+    types: [completed]
   workflow_dispatch:
-  push:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
-      - ".clang-format"
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
+  # push:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+  #     - ".clang-format"
+  # pull_request:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
 jobs:
   build:
     name: Build
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        qt_ver: [5.15.2]
+        os: [ubuntu-latest]
+        qt_ver: [6.2.3]
         qt_arch: [gcc_64]
     env:
       version: 22.2.alpha
@@ -42,43 +45,44 @@ jobs:
         uses: jurplel/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
           cached: 'false'
-          modules: qtwebengine
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
       - name: ubuntu install thirdparty dependencies
         run: |
-          sudo apt-get install git pkg-config build-essential qt5-qmake 
+          sudo apt-get install git pkg-config build-essential 
           sudo apt-get install libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev 
-          sudo apt-get install qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev 
+          sudo apt-get install libxtst-dev liblzo2-dev libbz2-dev 
           sudo apt-get install libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev 
-          sudo apt-get install libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev 
-          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins doxygen libzstd-dev #libopencc-dev
+          sudo apt-get install doxygen libzstd-dev libxkbcommon-dev libgstreamer-plugins-base1.0-0 libgstreamer-gl1.0-0
           sudo ln -sf /usr/bin/x86_64-linux-gnu-ld.gold /usr/bin/ld
+          
+          #build opencc
           git clone https://github.com/BYVoid/OpenCC
-          pwd
           cd OpenCC/
           make PREFIX=/usr -j$(nproc)
           sudo make install
           cd ..
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      - run: |
-          short_sha=$(git rev-parse --short HEAD)
-          tagname=v$version-$short_sha
-          echo $tagname
-          git tag $tagname -f
-          git push origin $tagname
-
-      - name: Set git short sha
+          fetch-depth: 1
+          
+      - name: Set outputs
         id: githash
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+      # - uses: Klemensas/action-autotag@stable
+      #   id: autotag
+      #   with:
+      #     GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      #     tag_prefix: "v"
+      #     tag_suffix: "-${{ steps.githash.outputs.sha_short }}"
 
       - name: build goldendict
         run: |
           qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
-
+          ls -al
       - name: Build AppImage
         run: |
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
@@ -86,7 +90,10 @@ jobs:
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
           chmod a+x linuxdeploy-x86_64.AppImage
           ./linuxdeploy-x86_64.AppImage --appdir appdir --output appimage --plugin qt  -i redist/icons/goldendict.png -d redist/org.goldendict.GoldenDict.desktop 
-
+      - uses: actions/upload-artifact@v2
+        with:
+          name: AppImage
+          path: './*.AppImage*'
       - name: Set outputs
         id: vars
         run: |
@@ -99,11 +106,8 @@ jobs:
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
-          CHANGELOG="$(git shortlog $previousTag..HEAD)"
-          CHANGELOG="${CHANGELOG//'%'/'%25'}"
-          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
-          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
+          commitSummary="$(git shortlog $previousTag..HEAD)"
+          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""          
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
@@ -111,7 +115,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
-          tag: v$version-${{ steps.vars.outputs.sha_short }}
+          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true
@@ -121,7 +125,7 @@ jobs:
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
-            ## goldendict.exe can not used alone 
+            # goldendict.exe can not used alone 
             if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
             
             AppImage built with:  Ubuntu-20.04 ,latest gcc
