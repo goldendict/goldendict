@@ -39,12 +39,12 @@ void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool c
 QWebEngineView * ArticleWebView::createWindow( QWebEnginePage::WebWindowType type )
 {
   QMainWindow * dlg = new QMainWindow( this );
-  QWebEngineView * webbrowser = new QWebEngineView( this );
-  dlg->setCentralWidget(webbrowser);
-  dlg->setMinimumSize(400,400);
+  QWebEngineView * view = new QWebEngineView( this );
+  dlg->setCentralWidget(view);
+  dlg->resize(400,400);
   dlg->show();
 
-  return webbrowser;
+  return view;
 }
 
 bool ArticleWebView::event( QEvent * event )
