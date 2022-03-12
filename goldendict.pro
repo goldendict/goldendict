@@ -193,6 +193,8 @@ mac {
             -lavformat-gd \
             -lavcodec-gd
     }
+    QT_CONFIG -= no-pkg-config 
+    CONFIG += link_pkgconfig
     INCLUDEPATH = $${PWD}/maclibs/include
     LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
@@ -211,6 +213,7 @@ mac {
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
+        PKGCONFIG += opencc
         QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
                              cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/
     }
@@ -543,7 +546,7 @@ CONFIG( chinese_conversion_support ) {
     LIBS += -lopencc
   } else {
     mac {
-      LIBS += -lopencc.1.1
+      LIBS += -lopencc
     } else {
       LIBS += -lopencc
     }
