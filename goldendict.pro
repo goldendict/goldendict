@@ -489,7 +489,7 @@ win32 {
                sapi.hh \
                sphelper.hh \
                speechclient.hh \
-               speechhlp.hh \
+               speechhlp.hh
 }
 
 mac {
