@@ -65,6 +65,7 @@ jobs:
           tag_suffix: "-${{ steps.githash.outputs.sha_short }}"          
       - name: build macos
         run: |
+          brew install opencc
           qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make 
       # 打包
@@ -91,7 +92,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.targetName }}.dmg
-          asset_name: ${{ env.targetName }}_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}.dmg
           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
