@@ -45,7 +45,8 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
 QT += sql
 CONFIG += exceptions \
     rtti \
-    stl
+    stl  \
+    c++11
     # lrelease    #lrelease generate qm under target folder.
     
 QM_FILES_INSTALL_PATH = /locale/
