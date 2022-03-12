@@ -1702,18 +1702,24 @@ Config::InputPhrase ArticleView::getPhrase() const
 
 void ArticleView::print( QPrinter * printer ) const
 {
-    QEventLoop loop;
-    bool result;
-    auto printPreview = [&](bool success) { result = success; loop.quit(); };
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
-    ui.definition->page()->print(printer, std::move(printPreview));
+  QEventLoop loop;
+  bool result;
+  auto printPreview = [ & ]( bool success )
+  {
+    result = success;
+    loop.quit();
+  };
+
+  ui.definition->page()->print( printer, std::move( printPreview ) );
+  loop.exec();
+  if( !result )
+  {
+    qDebug() << "print failed";
+  }
 #else
-    ui.definition->print(printer);
+  ui.definition->print( printer );
 #endif
-    loop.exec();
-    if (!result) {
-      qDebug()<<"print failed";
-    }
 }
 
 void ArticleView::contextMenuRequested( QPoint const & pos )
