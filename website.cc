@@ -245,10 +245,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
                                  QRegularExpression::CaseInsensitiveOption );
     pos = 0;
     it = linkTags.globalMatch( articleString );
-    QRegularExpression openSpanRx( "<\\s*span\\b", QRegularExpression::CaseInsensitiveOption );
-    QRegularExpression closeSpanRx( "<\\s*/span\\s*>", QRegularExpression::CaseInsensitiveOption );
-    QRegularExpression openDivRx( "<\\s*div\\b", QRegularExpression::CaseInsensitiveOption );
-    QRegularExpression closeDivRx( "<\\s*/div\\s*>", QRegularExpression::CaseInsensitiveOption );
+
     while( it.hasNext() )
     {
       QRegularExpressionMatch match = it.next();
@@ -264,24 +261,6 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
       articleNewString += articleString.mid( pos );
       articleString = articleNewString;
       articleNewString.clear();
-    }
-
-    // Check for unclosed <span> and <div>
-
-    int openTags = articleString.count(openSpanRx );
-    int closedTags = articleString.count( closeSpanRx );
-    while( openTags > closedTags )
-    {
-      articleString += "</span>";
-      closedTags += 1;
-    }
-
-    openTags = articleString.count( openDivRx );
-    closedTags = articleString.count( closeDivRx );
-    while( openTags > closedTags )
-    {
-      articleString += "</div>";
-      closedTags += 1;
     }
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.

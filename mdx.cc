@@ -1009,27 +1009,6 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
   if( !noFilter )
     article = filterResource( articleId, article );
 
-  //// Check for unclosed <span> and <div>
-  //QRegularExpression openTagsRx( "<\\s*span\\b", QRegularExpression::PatternOption::CaseInsensitiveOption );
-  //int openTags = article.count( openTagsRx );
-  //QRegularExpression closeTagRx( "<\\s*/span\\s*>", QRegularExpression::PatternOption::CaseInsensitiveOption );
-  //int closedTags = article.count( closeTagRx );
-  //while( openTags > closedTags )
-  //{
-  //  article += "</span>";
-  //  closedTags += 1;
-  //}
-
-  //QRegularExpression openDivRx( "<\\s*div\\b", QRegularExpression::PatternOption::CaseInsensitiveOption );
-  //openTags = article.count( openDivRx );
-  //QRegularExpression closeDivRx( "<\\s*/div\\s*>", QRegularExpression::PatternOption::CaseInsensitiveOption );
-  //closedTags = article.count( closeDivRx );
-  //while( openTags > closedTags )
-  //{
-  //  article += "</div>";
-  //  closedTags += 1;
-  //}
-
   articleText = string( article.toUtf8().constData() );
 }
 
