@@ -317,7 +317,11 @@ bool HotkeyWrapper::setGlobalKey( int key, int key2,
   return true;
 }
 
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
 bool HotkeyWrapper::winEvent ( MSG * message, long * result )
+#else
+bool HotkeyWrapper::winEvent ( MSG * message, qintptr * result )
+#endif
 {
   (void) result;
   if (message->message == WM_HOTKEY)
@@ -432,7 +436,11 @@ void HotkeyWrapper::unregister()
   (static_cast<QHotkeyApplication*>(qApp))->unregisterWrapper(this);
 }
 
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
 bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, void * message, long * result )
+#else
+bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, void * message, qintptr * result )
+#endif
 {
   MSG * msg = reinterpret_cast< MSG * >( message );
 
@@ -443,12 +451,6 @@ bool QHotkeyApplication::nativeEventFilter( const QByteArray & /*eventType*/, vo
       if ( hotkeyWrappers.at(i)->winEvent( msg, result ) )
         return true;
     }
-  }
-
-  if( mainWindow )
-  {
-    if( ( static_cast< MainWindow * >( mainWindow ) )->handleGDMessage( msg, result ) )
-      return true;
   }
 
   return false;

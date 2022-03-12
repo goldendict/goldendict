@@ -51,7 +51,13 @@ bool CompletionList::eventFilter( QObject * obj, QEvent * ev )
 
 int CompletionList::preferredHeight() const
 {
-  const QSize itemSizeHint = itemDelegate()->sizeHint(viewOptions(), model()->index( 0, 0 ) );
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
+  const QSize itemSizeHint = itemDelegate()->sizeHint( viewOptions(), model()->index( 0, 0 ) );
+#else
+  QStyleOptionViewItem option;
+  initViewItemOption( &option );
+  const QSize itemSizeHint = itemDelegate()->sizeHint(option, model()->index( 0, 0 ) );
+#endif
   int rows = qMin( count(), MAX_POPUP_ROWS );
 
   int scrollBarHeight = 0;

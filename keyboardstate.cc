@@ -7,7 +7,11 @@
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #elif defined(HAVE_X11)
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtGui/private/qtx11extras_p.h>
+#else
 #include <QX11Info>
+#endif
 #include <X11/X.h>
 #include <X11/XKBlib.h>
 #elif defined Q_OS_MAC

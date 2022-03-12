@@ -209,7 +209,6 @@ private:
   void closeEvent( QCloseEvent * );
 
   void applyProxySettings();
-  void applyWebSettings();
   void setupNetworkCache( int maxSize );
   void makeDictionaries();
   void updateStatusLine();
@@ -377,7 +376,7 @@ private slots:
   void editCurrentGroup();
   void editPreferences();
 
-  void currentGroupChanged( QString const & );
+  void currentGroupChanged( int );
   void translateInputChanged( QString const & );
   void translateInputFinished( bool checkModifiers = true );
 
@@ -513,7 +512,6 @@ signals:
 protected:
   unsigned gdAskMessage;
 public:
-  bool handleGDMessage( MSG * message, long * result );
 
 private slots:
   /// Return true while scanning GoldenDict window

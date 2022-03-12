@@ -371,7 +371,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         while( it.hasNext() )
         {
           QRegularExpressionMatch match = it.next();
-          articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+          articleNewString += articleString.mid( pos, match.capturedStart() - pos );
           pos = match.capturedEnd();
 
           QString link = match.captured( 1 );
@@ -385,7 +385,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         }
         if( pos )
         {
-          articleNewString += articleString.midRef( pos );
+          articleNewString += articleString.mid( pos );
           articleString = articleNewString;
           articleNewString.clear();
         }

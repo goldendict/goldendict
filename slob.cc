@@ -31,6 +31,9 @@
 #include <QMap>
 #include <QPair>
 #include <QRegExp>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 #include <QProcess>
 #include <QVector>
 #include <QtAlgorithms>
@@ -835,7 +838,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   {
     QRegularExpressionMatch match = it.next();
 
-    newText += text.midRef( pos, match.capturedStart() - pos );
+    newText += text.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QStringList list = match.capturedTexts();
@@ -854,8 +857,8 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     else
       anchor.clear();
 
-    tag.remove( QRegExp(".*/") ).
-        remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+    tag.remove( QRegularExpression(".*/") ).
+        remove( QRegularExpression( "\\.(s|)htm(l|)$", QRegularExpression::PatternOption::CaseInsensitiveOption ) ).
         replace( "_", "%20" ).
         prepend( "<a href=\"gdlookup://localhost/" ).
         append( anchor + "\" " + list[4] + ">" );
@@ -864,7 +867,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   }
   if( pos )
   {
-    newText += text.midRef( pos );
+    newText += text.mid( pos );
     text = newText;
   }
   newText.clear();
@@ -878,7 +881,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
       QRegularExpression regFrac( "\\\\[dt]frac" );
       QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])" );
 
-    QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
+    QRegExp multReg( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     QString arrayDesc( "\\begin{array}{" );
     pos = 0;
@@ -891,7 +894,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     {
       QRegularExpressionMatch match = it.next();
 
-      newText += text.midRef( pos, match.capturedStart() - pos );
+      newText += text.mid( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QStringList list = match.capturedTexts();
@@ -1005,7 +1008,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     }
     if( pos )
     {
-      newText += text.midRef( pos );
+      newText += text.mid( pos );
       text = newText;
     }
     newText.clear();

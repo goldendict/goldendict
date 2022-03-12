@@ -13,7 +13,11 @@
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSemaphore>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#else
 #include <QRegExp>
+#endif
 #include <QDir>
 #include <QCoreApplication>
 #include <QFileInfo>

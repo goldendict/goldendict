@@ -16,6 +16,9 @@
 #include "ui_articleview.h"
 #include "globalbroadcaster.h"
 #include "article_inspect.h"
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#endif
 
 class ResourceToSaveHandler;
 class ArticleViewAgent ;

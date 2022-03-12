@@ -28,7 +28,14 @@
 #include <QWebEngineSettings>
 #include <assert.h>
 #include <map>
+#if (QT_VERSION >= QT_VERSION_CHECK(5,0,0) && QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <QWebEngineContextMenuData>
+#endif
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#include <QWebEngineContextMenuRequest>
+#include <QWebEngineFindTextResult>
+#endif
 #ifdef Q_OS_WIN32
 #include <windows.h>
 #include <QPainter>
@@ -328,10 +335,20 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
-//  QWebEngineSettings * settings = ui.definition->page()->settings();
-//  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-//  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-//  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
+  QWebEngineSettings * settings = ui.definition->settings();
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
+  settings->defaultSettings()->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
+  settings->defaultSettings()->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+#else
+  settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
+  settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
+  settings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
+  settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+  settings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
+#endif
   // Load the default blank page instantly, so there would be no flicker.
 
   QString contentType;
@@ -474,9 +491,10 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   Utils::Url::addQueryItem( req, "word", word );
   Utils::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
   Utils::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
-  if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
+  //todo
+//  if( searchRegExp.patternOptions () == QRegularExpression:: )
     Utils::Url::addQueryItem( req, "matchcase", "1" );
-  if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
+//  if( searchRegExp.patternOptions () == PatternOptions::WildcardUnix )
     Utils::Url::addQueryItem( req, "wildcards", "1" );
   Utils::Url::addQueryItem( req, "group", QString::number( group ) );
   if( ignoreDiacritics )
@@ -1641,7 +1659,6 @@ void ArticleView::playSound()
     "    return link;})();         ";
 
   QString soundScript = runJavaScriptSync(ui.definition->page(), variable);
-  // ui.definition->page()->runJavaScript(variable);
   if (!soundScript.isEmpty())
     openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
 }
@@ -1685,11 +1702,14 @@ Config::InputPhrase ArticleView::getPhrase() const
 
 void ArticleView::print( QPrinter * printer ) const
 {
-    //ui.definition->page()->print(printer, [](bool result) {});
     QEventLoop loop;
     bool result;
     auto printPreview = [&](bool success) { result = success; loop.quit(); };
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
     ui.definition->page()->print(printer, std::move(printPreview));
+#else
+    ui.definition->print(printer);
+#endif
     loop.exec();
     if (!result) {
       qDebug()<<"print failed";
@@ -1717,10 +1737,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * addHeaderToHistoryAction = 0;
   QAction * sendWordToInputLineAction = 0;
   QAction * saveImageAction = 0;
-  QAction * saveSoundAction = 0;
+  QAction * saveSoundAction           = 0;
 
-  QWebEngineContextMenuData menuData=r->contextMenuData();
-  QUrl targetUrl(menuData.linkUrl());
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
+  const QWebEngineContextMenuData * menuData = &(r->contextMenuData());
+#else
+  QWebEngineContextMenuRequest * menuData = ui.definition->lastContextMenuRequest();
+#endif
+  QUrl targetUrl(menuData->linkUrl());
   Contexts contexts;
 
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
@@ -1749,9 +1773,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   }
 
   QUrl imageUrl;
-  if( !popupView && menuData.mediaType ()==QWebEngineContextMenuData::MediaTypeImage)
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
+  if( !popupView && menuData->mediaType ()==QWebEngineContextMenuData::MediaTypeImage)
+#else
+  if( !popupView && menuData->mediaType ()==QWebEngineContextMenuRequest::MediaType::MediaTypeImage)
+#endif
   {
-      imageUrl = menuData.mediaUrl ();
+    imageUrl = menuData->mediaUrl ();
       if( !imageUrl.isEmpty() )
       {
           menu.addAction( ui.definition->pageAction( QWebEnginePage::CopyImageToClipboard ) );
@@ -2331,12 +2359,22 @@ bool ArticleView::findText(QString& text, const QWebEnginePage::FindFlags& f)
   // turn async to sync invoke.
   QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
   QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+  ui.definition->findText(text, f, [&](const QWebEngineFindTextResult& result)
+                           {
+                             if(loop->isRunning()){
+                               r = result.numberOfMatches()>0;
+                               loop->quit();
+                             } });
+#else
   ui.definition->findText(text, f, [&](bool result)
-                          {
-                            if(loop->isRunning()){
-                              r = result;
-                              loop->quit();
-                            } });
+                           {
+                             if(loop->isRunning()){
+                               r = result;
+                               loop->quit();
+                             } });
+#endif
+
 
   loop->exec();
   return r;
@@ -2590,7 +2628,18 @@ void ArticleView::performFtsFindOperation( bool backwards )
       if (ftsPosition > 0) {
           ftsPosition -= 1;
       }
-
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+      ui.definition->findText( allMatches.at( ftsPosition ),
+                               flags | QWebEnginePage::FindBackward,
+                               [ this ]( const QWebEngineFindTextResult & result )
+                               {
+                                 if( result.numberOfMatches ()== 0 )
+                                   return;
+                                 ui.ftsSearchPrevious->setEnabled(true);
+                                 if (!ui.ftsSearchNext->isEnabled())
+                                   ui.ftsSearchNext->setEnabled(true);
+                               });
+#else
       ui.definition->findText(allMatches.at(ftsPosition),
                               flags | QWebEnginePage::FindBackward,
                               [this](bool res) {
@@ -2598,10 +2647,21 @@ void ArticleView::performFtsFindOperation( bool backwards )
                                   if (!ui.ftsSearchNext->isEnabled())
                                       ui.ftsSearchNext->setEnabled(res);
                               });
+#endif
   } else {
       if (ftsPosition < allMatches.size() - 1) {
           ftsPosition += 1;
       }
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+      ui.definition->findText(allMatches.at(ftsPosition), flags, [this](const QWebEngineFindTextResult & result ) {
+        if( result.numberOfMatches() == 0 )
+          return;
+        ui.ftsSearchNext->setEnabled(true);
+        if (!ui.ftsSearchPrevious->isEnabled())
+          ui.ftsSearchPrevious->setEnabled(true);
+      });
+  }
+#else
 
       ui.definition->findText(allMatches.at(ftsPosition), flags, [this](bool res) {
           ui.ftsSearchNext->setEnabled(res);
@@ -2609,7 +2669,7 @@ void ArticleView::performFtsFindOperation( bool backwards )
               ui.ftsSearchPrevious->setEnabled(res);
       });
   }
-
+#endif
   // Store new highlighted selection
   ui.definition->page()->
          runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )

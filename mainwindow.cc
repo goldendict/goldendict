@@ -46,7 +46,7 @@
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
 #include "utils.hh"
-#include <QDesktopWidget>
+#include <qscreen.h>
 #include "ui_authentication.h"
 #include "resourceschemehandler.h"
 
@@ -62,7 +62,11 @@
 #endif
 
 #ifdef HAVE_X11
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtGui/private/qtx11extras_p.h>
+#else
 #include <QX11Info>
+#endif
 #include <X11/Xlib.h>
 #include <fixx11h.h>
 #endif
@@ -460,9 +464,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   switchExpandModeAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
-                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+                                       QKeySequence( Qt::CTRL | Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL | Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_8 ) );
 
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
            this, SLOT(switchExpandOptionalPartsMode() ) );
@@ -677,11 +681,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.showReference, SIGNAL( triggered() ),
            this, SLOT( showGDHelp() ) );
 
-  connect( groupListInDock, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupListInDock, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 
-  connect( groupListInToolbar, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupListInToolbar, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
@@ -768,7 +772,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
   applyProxySettings();
-  applyWebSettings();
 
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
@@ -1227,7 +1230,7 @@ void MainWindow::closeEvent( QCloseEvent * ev )
     // Don't ignore the close event, because doing so cancels session logout if
     // the main window is visible when the user attempts to log out.
     // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
-    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    // property is false and Qt::WA_DeleteOnClose widget  is not set.
     Q_ASSERT(!QApplication::quitOnLastWindowClosed());
     Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
 #else
@@ -1299,17 +1302,6 @@ void MainWindow::applyProxySettings()
   }
 
   QNetworkProxy::setApplicationProxy( proxy );
-}
-
-void MainWindow::applyWebSettings()
-{
-  QWebEngineSettings * defaultSettings = QWebEngineSettings::defaultSettings();
-  defaultSettings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
-  defaultSettings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::JavascriptCanOpenWindows, true );
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -1391,8 +1383,8 @@ void MainWindow::updateGroupList()
 
   // currentIndexChanged() signal is very trigger-happy. To avoid triggering
   // it, we disconnect it while we're clearing and filling back groups.
-  disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-              this, SLOT( currentGroupChanged( QString const & ) ) );
+  disconnect( groupList, &GroupComboBox::currentIndexChanged,
+              this, &MainWindow::currentGroupChanged );
 
   groupInstances.clear();
 
@@ -1437,8 +1429,8 @@ void MainWindow::updateGroupList()
     view.reload();
   }
 
-  connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupList, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 }
 
 void MainWindow::updateDictionaryBar()
@@ -2225,7 +2217,6 @@ void MainWindow::editPreferences()
 
     updateTrayIcon();
     applyProxySettings();
-    applyWebSettings();
 
     ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
 
@@ -2255,7 +2246,7 @@ void MainWindow::editPreferences()
   ftsIndexing.doIndexing();
 }
 
-void MainWindow::currentGroupChanged( QString const & )
+void MainWindow::currentGroupChanged( int )
 {
   cfg.lastMainGroupId = groupList->getCurrentGroup();
   Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
@@ -3413,7 +3404,7 @@ void MainWindow::on_saveArticle_triggered()
   QString fileName = view->getTitle().simplified();
 
   // Replace reserved filename characters
-  QRegExp rxName( "[/\\\\\\?\\*:\\|<>]" );
+  QRegularExpression rxName( "[/\\\\\\?\\*:\\|<>]" );
   fileName.replace( rxName, "_" );
 
   fileName += ".html";
@@ -3462,6 +3453,7 @@ void MainWindow::on_saveArticle_triggered()
 
       QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
       int pos = 0;
+      QRegularExpression anchorRx( "(g[0-9a-f]{32}_)[0-9a-f]+_" );
       while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
       {
         QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
@@ -3472,7 +3464,7 @@ void MainWindow::on_saveArticle_triggered()
         {
           anchor = name.mid( n );
           name.truncate( n );
-          anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
+          anchor.replace( anchorRx, "\\1" ); // MDict anchors
         }
         name.replace( rxName, "_" );
         name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
@@ -3481,7 +3473,7 @@ void MainWindow::on_saveArticle_triggered()
       }
 
       // MDict anchors
-      QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
+      QRegularExpression anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", QRegularExpression::PatternOption::CaseInsensitiveOption );
       html.replace( anchorLinkRe, "\\1" );
 
       if ( complete )
@@ -3739,8 +3731,8 @@ void MainWindow::applyWordsZoomLevel()
 
   if ( groupList->font().pointSize() != ps )
   {
-    disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-                this, SLOT( currentGroupChanged( QString const & ) ) );
+    disconnect( groupList, &GroupComboBox::currentIndexChanged,
+                this, &MainWindow::currentGroupChanged );
     int n = groupList->currentIndex();
     groupList->clear();
     groupList->setFont( font );
@@ -4724,23 +4716,6 @@ void MainWindow::headwordFromFavorites( QString const & headword,
 }
 
 #ifdef Q_OS_WIN32
-
-bool MainWindow::handleGDMessage( MSG * message, long * result )
-{
-  if( message->message != gdAskMessage )
-    return false;
-  *result = 0;
-
-  if( !isGoldenDictWindow( message->hwnd ) )
-    return true;
-
-  ArticleView * view = getCurrentArticleView();
-  if( !view )
-    return true;
-
-  *result = 1;
-  return true;
-}
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {

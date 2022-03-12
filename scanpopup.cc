@@ -8,7 +8,9 @@
 #include <QBitmap>
 #include <QMenu>
 #include <QMouseEvent>
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <QDesktopWidget>
+#endif
 #include "gddebug.hh"
 #include "gestures.hh"
 
@@ -242,16 +244,16 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( focusArticleViewAction, SIGNAL( triggered() ), definition, SLOT( focus() ) );
 
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
-                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+                                       QKeySequence( Qt::CTRL | Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL | Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_8 ) );
 
   addAction( &switchExpandModeAction );
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
            this, SLOT(switchExpandOptionalPartsMode() ) );
 
-  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( ui.groupList, &QComboBox::currentIndexChanged,
+           this, &ScanPopup::currentGroupChanged);
 
   connect( &wordFinder, SIGNAL( finished() ),
            this, SLOT( prefixMatchFinished() ) );
@@ -713,8 +715,7 @@ QString ScanPopup::elideInputWord()
   QString const & inputWord = inputPhrase.phrase;
   return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
 }
-
-void ScanPopup::currentGroupChanged( QString const & )
+void ScanPopup::currentGroupChanged( int )
 {
     cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
     Instances::Group const * igrp = groups.findGroup( cfg.lastPopupGroupId );
@@ -1001,7 +1002,11 @@ void ScanPopup::leaveEvent( QEvent * event )
   }
 }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+void ScanPopup::enterEvent( QEnterEvent * event )
+#else
 void ScanPopup::enterEvent( QEvent * event )
+#endif
 {
   QMainWindow::enterEvent( event );
 

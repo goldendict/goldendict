@@ -9,7 +9,11 @@
 
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtGui/private/qtx11extras_p.h>
+#else
 #include <QX11Info>
+#endif
 #include <X11/Xlibint.h>
 
 #undef Bool
@@ -92,7 +96,12 @@ private:
   HotkeyStruct state2waiter;
 
 #ifdef Q_OS_WIN32
+
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   virtual bool winEvent ( MSG * message, long * result );
+#else
+  virtual bool winEvent ( MSG * message, qintptr * result );
+#endif
   HWND hwnd;
 
 #elif defined(Q_OS_MAC)
@@ -236,7 +245,13 @@ protected:
   void unregisterWrapper(HotkeyWrapper *wrapper);
 
 #ifdef Q_OS_WIN32
+
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   virtual bool nativeEventFilter( const QByteArray & eventType, void * message, long * result );
+#else
+  virtual bool nativeEventFilter( const QByteArray & eventType, void * message, qintptr * result );
+#endif
+
 
   QWidget * mainWindow;
 public:

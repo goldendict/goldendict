@@ -42,7 +42,7 @@ void SplitFile::close()
 
 void SplitFile::getFilenames( vector< string > &names ) const
 {
-  for( QVector< QFile const * >::const_iterator i = files.begin(); i != files.end(); ++i )
+  for( QVector< QFile * >::const_iterator i = files.begin(); i != files.end(); ++i )
     names.push_back( FsEncoding::encode( (*i)->fileName() ) );
 }
 

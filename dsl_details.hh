@@ -10,7 +10,11 @@
 #include <zlib.h>
 #include "dictionary.hh"
 #include "iconv.hh"
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QTextCodec>
+#else
 #include <QTextCodec>
+#endif
 #include <QByteArray>
 #include "utf8.hh"
 
