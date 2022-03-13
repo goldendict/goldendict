@@ -74,7 +74,6 @@ jobs:
         run: |
           qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
-          ls -al
       - name: Build AppImage
         run: |
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
@@ -82,10 +81,7 @@ jobs:
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
           chmod a+x linuxdeploy-x86_64.AppImage
           ./linuxdeploy-x86_64.AppImage --appdir appdir --output appimage --plugin qt  -i redist/icons/goldendict.png -d redist/org.goldendict.GoldenDict.desktop 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: AppImage
-          path: './*.AppImage*'
+
       - name: Set outputs
         id: vars
         run: |
@@ -98,7 +94,7 @@ jobs:
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
-          commitSummary="$(git shortlog $previousTag..HEAD)"
+          commitSummary="$(git shortlog $(git tag --sort=-creatordate | sed -n 2p)..HEAD)"
           echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""          
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
