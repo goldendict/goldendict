@@ -516,5 +516,14 @@ QString generateRandomDictionaryId()
       QCryptographicHash::Md5 ).toHex() );
 }
 
-
+QMap< std::string, sptr< Dictionary::Class > >
+dictToMap( std::vector< sptr< Dictionary::Class > > const & dicts )
+{
+  QMap< std::string, sptr< Dictionary::Class > > dictMap;
+  for( auto dict : dicts )
+  {
+    dictMap.insert( dict.get()->getId(), dict );
+  }
+  return dictMap;
+}
 }

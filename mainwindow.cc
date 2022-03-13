@@ -1345,6 +1345,11 @@ void MainWindow::makeDictionaries()
 
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
+  //create map
+  for(const auto &dict:dictionaries){
+    dictMap.insert(dict->getId(),dict);
+  }
+
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
@@ -1390,11 +1395,11 @@ void MainWindow::updateGroupList()
 
   // Add dictionaryOrder first, as the 'All' group.
   {
-    Instances::Group g( cfg.dictionaryOrder, dictionaries, Config::Group() );
+    Instances::Group g( cfg.dictionaryOrder, dictMap, Config::Group() );
 
     // Add any missing entries to dictionary order
     Instances::complementDictionaryOrder( g,
-                                          Instances::Group( cfg.inactiveDictionaries, dictionaries, Config::Group() ),
+                                          Instances::Group( cfg.inactiveDictionaries, dictMap, Config::Group() ),
                                           dictionaries );
 
     g.name = tr( "All" );
@@ -1405,7 +1410,7 @@ void MainWindow::updateGroupList()
   }
 
   for( int x  = 0; x < cfg.groups.size(); ++x )
-    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries, cfg.inactiveDictionaries ) );
+    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictMap, cfg.inactiveDictionaries ) );
 
   // Update names for dictionaries that are present, so that they could be
   // found in case they got moved.
@@ -2051,7 +2056,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   { // Limit existence of newCfg
 
   Config::Class newCfg = cfg;
-  EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
+  EditDictionaries dicts( this, newCfg, dictionaries, dictMap, groupInstances, dictNetMgr );
 
   connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );

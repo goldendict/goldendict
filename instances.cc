@@ -11,7 +11,7 @@ using std::set;
 using std::string;
 
 Group::Group( Config::Group const & cfgGroup,
-              vector< sptr< Dictionary::Class > > const & allDictionaries,
+              QMap<std::string, sptr< Dictionary::Class > > const & allDictionaries,
               Config::Group const & inactiveGroup ):
   id( cfgGroup.id ),
   name( cfgGroup.name ),
@@ -22,70 +22,29 @@ Group::Group( Config::Group const & cfgGroup,
   if ( !cfgGroup.iconData.isEmpty() )
     iconData = iconFromData( cfgGroup.iconData );
 
-  vector< sptr< Dictionary::Class > > groupDicts;
+  QMap<string, sptr< Dictionary::Class > > groupDicts;
 
   for( unsigned x = 0; x < (unsigned)cfgGroup.dictionaries.size(); ++x )
   {
     std::string id = cfgGroup.dictionaries[ x ].id.toStdString();
 
-    bool added = false;
-
-    for( unsigned y = allDictionaries.size(); y--; )
-      if ( allDictionaries[ y ]->getId() == id )
-      {
-        groupDicts.push_back( allDictionaries[ y ] );
-        added = true;
-        break;
-      }
-
-    if ( !added )
-    {
-      // Try matching by name instead
-      QString qname = cfgGroup.dictionaries[ x ].name;
-      std::string name = qname.toUtf8().data();
-
-      if ( !qname.isEmpty() )
-      {
-
-        // To avoid duplicates in dictionaries list we don't add dictionary
-        // if it with such name was already added or presented in rest of list
-
-        unsigned n;
-        for( n = 0; n < groupDicts.size(); n++ )
-          if( groupDicts[ n ]->getName() == name )
-            break;
-        if( n < groupDicts.size() )
-          continue;
-
-        for( n = x + 1; n < (unsigned)cfgGroup.dictionaries.size(); n++ )
-          if( cfgGroup.dictionaries[ n ].name == qname )
-            break;
-        if( n < (unsigned)cfgGroup.dictionaries.size() )
-          continue;
-
-        for( unsigned y = 0; y < allDictionaries.size(); ++y )
-          if ( allDictionaries[ y ]->getName() == name )
-          {
-            groupDicts.push_back( allDictionaries[ y ] );
-            break;
-          }
-      }
+    if(allDictionaries.contains(id)){
+      groupDicts.insert(id, allDictionaries[ id ] );
     }
   }
 
   // Remove inactive dictionaries
-
-  if( inactiveGroup.dictionaries.isEmpty() )
-    dictionaries = groupDicts;
-  else
+  if( !inactiveGroup.dictionaries.isEmpty() )
   {
     set< string > inactiveSet;
     for( int i = 0; i < inactiveGroup.dictionaries.size(); i++ )
-      inactiveSet.insert( inactiveGroup.dictionaries[ i ].id.toStdString() );
-
-    for( unsigned i = 0; i < groupDicts.size(); i++ )
-      if( inactiveSet.find( groupDicts[ i ]->getId() ) == inactiveSet.end() )
-        dictionaries.push_back( groupDicts[ i ] );
+    {
+      groupDicts.remove(inactiveGroup.dictionaries[ i ].id.toStdString());
+    }
+  }
+  for(const auto & dict : groupDicts)
+  {
+    dictionaries.push_back(dict);
   }
 }
 
