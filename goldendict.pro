@@ -119,9 +119,6 @@ win32 {
 
 unix:!mac {
     DEFINES += HAVE_X11
-    # This is to keep symbols for backtraces
-    QMAKE_CXXFLAGS += -rdynamic
-    QMAKE_LFLAGS += -rdynamic
 
     lessThan(QT_MAJOR_VERSION, 6):     QT += x11extras
     greaterThan(QT_MAJOR_VERSION, 5):     QT += gui-private
