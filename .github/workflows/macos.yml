@@ -50,9 +50,9 @@ jobs:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
           modules: qtwebengine
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - name: Set outputs
         id: githash
         run: |
@@ -84,8 +84,11 @@ jobs:
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
-          commitSummary="$(git shortlog $previousTag..HEAD)"
-          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""           
+          CHANGELOG="$(git shortlog $previousTag..HEAD)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"           
       # tag 上传Release
       - name: uploadRelease
         uses: svenstaro/upload-release-action@v2
@@ -103,7 +106,7 @@ jobs:
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
-            # goldendict.exe can not used alone 
+            ## goldendict.exe can not used alone 
             if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
 
             AppImage built with:  Ubuntu-20.04 ,latest gcc
