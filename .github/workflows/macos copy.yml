@@ -36,6 +36,7 @@ jobs:
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
+      version: 22.2.alpha
     steps:
       # macos 11.0 默认环境变了,要指定
       - name: prepare env
@@ -86,7 +87,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.targetName }}.dmg
           asset_name: ${{ env.targetName }}-M1_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
-          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true

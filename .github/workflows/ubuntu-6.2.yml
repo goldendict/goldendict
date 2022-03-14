@@ -65,7 +65,7 @@ jobs:
           cd ..
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 1
+          fetch-depth: 0
           
       - name: Set outputs
         id: githash
@@ -106,8 +106,11 @@ jobs:
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
-          commitSummary="$(git shortlog $previousTag..HEAD)"
-          echo "::set-output name=COMMIT_SUMMARY::\"$commitSummary\""          
+          CHANGELOG="$(git shortlog $previousTag..HEAD)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
@@ -115,7 +118,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
-          tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
           prerelease: true
