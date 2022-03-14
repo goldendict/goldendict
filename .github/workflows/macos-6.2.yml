@@ -64,6 +64,7 @@ jobs:
 
       - name: build macos
         run: |
+          brew install opencc
           qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make 
       # 打包
