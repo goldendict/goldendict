@@ -261,7 +261,7 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
 
     case Qt::DecorationRole:
       // make all icons of the same size to avoid visual size/alignment problems
-      return item->getIcon().pixmap( 32 ).scaledToHeight( 21, Qt::SmoothTransformation );
+      return item->getIcon();
 
     default:;
   }

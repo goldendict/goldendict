@@ -23,6 +23,7 @@ Group::Group( Config::Group const & cfgGroup,
     iconData = iconFromData( cfgGroup.iconData );
 
   QMap<string, sptr< Dictionary::Class > > groupDicts;
+  QVector<string> dictOrderList;
 
   for( unsigned x = 0; x < (unsigned)cfgGroup.dictionaries.size(); ++x )
   {
@@ -30,6 +31,7 @@ Group::Group( Config::Group const & cfgGroup,
 
     if(allDictionaries.contains(id)){
       groupDicts.insert(id, allDictionaries[ id ] );
+      dictOrderList.push_back(id);
     }
   }
 
@@ -39,12 +41,14 @@ Group::Group( Config::Group const & cfgGroup,
     set< string > inactiveSet;
     for( int i = 0; i < inactiveGroup.dictionaries.size(); i++ )
     {
-      groupDicts.remove(inactiveGroup.dictionaries[ i ].id.toStdString());
+      string id=inactiveGroup.dictionaries[ i ].id.toStdString();
+      groupDicts.remove(id);
+      dictOrderList.removeOne(id);
     }
   }
-  for(const auto & dict : groupDicts)
+  for(const auto & dictId : dictOrderList)
   {
-    dictionaries.push_back(dict);
+    dictionaries.push_back(groupDicts[dictId]);
   }
 }
 

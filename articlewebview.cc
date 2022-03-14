@@ -38,28 +38,28 @@ void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool c
 
 QWebEngineView * ArticleWebView::createWindow( QWebEnginePage::WebWindowType type )
 {
-  QMainWindow * dlg = new QMainWindow( this );
-  QWebEngineView * view = new QWebEngineView( dlg );
-  dlg->setCentralWidget(view);
-  dlg->resize(400,400);
-  dlg->show();
+  if(type==QWebEnginePage::WebWindowType::WebDialog)
+  {
+    QMainWindow * dlg = new QMainWindow( this );
+    QWebEngineView * view = new QWebEngineView( dlg );
+    dlg->setCentralWidget(view);
+    dlg->resize(400,400);
+    dlg->show();
 
-  return view;
+    return view;
+  }
+  return QWebEngineView::createWindow(type);
 }
 
 bool ArticleWebView::event( QEvent * event )
 {
-    if (event->type() == QEvent::ChildAdded) {
-        QChildEvent *child_ev = static_cast<QChildEvent *>(event);
+  if( event->type() == QEvent::ChildAdded )
+  {
+    QChildEvent * child_ev = static_cast< QChildEvent * >( event );
+    child_ev->child()->installEventFilter( this );
+  }
 
-//      // there is also QObject child that should be ignored here;
-//      // use only QOpenGLWidget child
-//      QOpenGLWidget *w = static_cast<QOpenGLWidget*>(child_ev->child());
-
-        child_ev->child()->installEventFilter(this);
-    }
-
-    return QWebEngineView::event(event);
+  return QWebEngineView::event( event );
 }
 
 void ArticleWebView::linkClickedInHtml(QUrl const& ){
