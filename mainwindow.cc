@@ -1346,9 +1346,7 @@ void MainWindow::makeDictionaries()
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
   //create map
-  for(const auto &dict:dictionaries){
-    dictMap.insert(dict->getId(),dict);
-  }
+  dictMap = Dictionary::dictToMap(dictionaries);
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {

@@ -585,8 +585,7 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
   {
     DictGroupWidget *gr = new DictGroupWidget( this, *allDicts, groups[ x ] );
     addTab( gr, escapeAmps( groups[ x ].name ) );
-    connect( gr, SIGNAL( showDictionaryInfo( QString const & ) ),
-             this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+//    connect( gr, &DictGroupWidget::showDictionaryInfo,this, &DictGroupsWidget::showDictionaryInfo );
     connect( gr->getModel(), SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
 
     setCurrentIndex( x );
