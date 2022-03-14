@@ -336,6 +336,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   ui.ftsSearchFrame->installEventFilter( this );
 
   QWebEngineSettings * settings = ui.definition->settings();
+  settings->setUnknownUrlSchemePolicy(QWebEngineSettings::UnknownUrlSchemePolicy::DisallowUnknownUrlSchemes);
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
