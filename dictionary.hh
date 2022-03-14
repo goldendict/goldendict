@@ -479,6 +479,9 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
 /// dictionaries.
 QString generateRandomDictionaryId();
 
+QMap< std::string, sptr< Dictionary::Class > >
+dictToMap( std::vector< sptr< Dictionary::Class > > const & dicts );
+
 }
 
 #endif

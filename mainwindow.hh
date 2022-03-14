@@ -151,6 +151,7 @@ private:
   History history;
   DictionaryBar dictionaryBar;
   vector< sptr< Dictionary::Class > > dictionaries;
+  QMap<std::string, sptr< Dictionary::Class > > dictMap;
   /// Here we store unmuted dictionaries when the dictionary bar is active
   vector< sptr< Dictionary::Class > > dictionariesUnmuted;
   Instances::Groups groupInstances;

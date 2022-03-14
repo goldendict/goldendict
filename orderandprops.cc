@@ -86,13 +86,14 @@ OrderAndProps::OrderAndProps( QWidget * parent,
                               Config::Group const & dictionaryOrder,
                               Config::Group const & inactiveDictionaries,
                               std::vector< sptr< Dictionary::Class > > const &
-                              allDictionaries ):
+                              allDictionaries ,
+                              QMap<std::string, sptr< Dictionary::Class > > const & dictMap):
   QWidget( parent )
 {
   ui.setupUi( this );
 
-  Instances::Group order( dictionaryOrder, allDictionaries, Config::Group() );
-  Instances::Group inactive( inactiveDictionaries, allDictionaries, Config::Group() );
+  Instances::Group order( dictionaryOrder, dictMap, Config::Group() );
+  Instances::Group inactive( inactiveDictionaries, dictMap, Config::Group() );
 
   Instances::complementDictionaryOrder( order, inactive, allDictionaries );
 

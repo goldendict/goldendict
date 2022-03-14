@@ -31,7 +31,8 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
   groupId( group.id )
 {
   ui.setupUi( this );
-  ui.dictionaries->populate( Instances::Group( group, dicts, Config::Group() ).dictionaries, dicts );
+  auto dictMap = Dictionary::dictToMap(dicts);
+  ui.dictionaries->populate( Instances::Group( group, dictMap, Config::Group() ).dictionaries, dicts );
 
   // Populate icons' list
 
@@ -328,7 +329,7 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
 
     g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
 
-    Instances::Group i( g, *allDicts, Config::Group() );
+    Instances::Group i( g, Dictionary::dictToMap(*allDicts), Config::Group() );
 
     if ( i.dictionaries.size() == 1 )
     {
@@ -584,8 +585,7 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
   {
     DictGroupWidget *gr = new DictGroupWidget( this, *allDicts, groups[ x ] );
     addTab( gr, escapeAmps( groups[ x ].name ) );
-    connect( gr, SIGNAL( showDictionaryInfo( QString const & ) ),
-             this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+//    connect( gr, &DictGroupWidget::showDictionaryInfo,this, &DictGroupsWidget::showDictionaryInfo );
     connect( gr->getModel(), SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
 
     setCurrentIndex( x );
