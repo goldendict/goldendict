@@ -32,7 +32,7 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
 
 First, clone this repository, e.g.:
 
-    git clone git://github.com/goldendict/goldendict.git
+    git clone https://github.com/goldendict/goldendict.git
 
 
 ### Linux 
