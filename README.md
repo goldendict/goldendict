@@ -34,15 +34,24 @@ First, clone this repository, e.g.:
 
     git clone git://github.com/goldendict/goldendict.git
 
+
+### Linux 
 And then invoke `qmake-qt5` and `make`:
 
     cd goldendict && qmake-qt5 && make
 
-make sure that `qmake` is from Qt 5 installation. If not, you can try
-finding it at a path like `/usr/lib/x86_64-linux-gnu/qt5/bin/qmake`.
+### macOS
+```
+brew install qt
+brew install opencc
+qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
+make 
+make install
+```
+### Windows
+
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
-Note:   `libhunspell` version > 1.5.
 
 ### Building with Chinese conversion support
 
