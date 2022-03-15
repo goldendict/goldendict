@@ -91,15 +91,15 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
 
-      # msvc编译
-      - uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: ${{ matrix.msvc_arch }}    
+      # # msvc编译
+      # - uses: ilammy/msvc-dev-cmd@v1
+      #   with:
+      #     arch: ${{ matrix.msvc_arch }}    
       - name: msvc-build goldendict
         id: build
         shell: cmd
         run: |
-          # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake "CONFIG+=zim_support" CONFIG+=release
           nmake
 
