@@ -12,6 +12,8 @@
 - optimize: large memory consumption ,when have large collection of dictionaries.even when query a small group of dictionaries.
 - peformance: dsl parse performance .  
   when have very long lines,the line will be split into two parts .the remaining part was considered a normal headword ,and hanged when expand parts.
+- support qt6.2
+- performance improve when edit dictionary groups.
 
 
 
