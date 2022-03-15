@@ -50,17 +50,16 @@ jobs:
           sudo xcode-select --print-path
           sudo xcode-select --switch /Library/Developer/CommandLineTools    
       - name: Install Qt
-        run: |
-          brew update
-          brew install qt@6    #qt6.2.3  
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
 
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      - name: Set outputs
-        id: githash
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"      
+          fetch-depth: 0 
 
       - name: build macos
         run: |
@@ -75,7 +74,7 @@ jobs:
       - name: Set outputs
         id: vars
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   

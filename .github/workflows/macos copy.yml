@@ -57,7 +57,7 @@ jobs:
       - name: Set outputs
         id: githash
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"   
       - uses: Klemensas/action-autotag@stable
         id: autotag
         with:
@@ -76,7 +76,7 @@ jobs:
       - name: Set outputs
         id: vars
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    

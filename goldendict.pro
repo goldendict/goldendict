@@ -10,7 +10,7 @@ VERSION = 22.2.alpha
 system(git describe --tags --always --dirty): hasGit=1
 
 !isEmpty(hasGit){
-    GIT_HASH=$$system(git rev-parse --short HEAD )
+    GIT_HASH=$$system(git rev-parse --short=8 HEAD )
 }
 system(echo $${VERSION}.$${GIT_HASH} > version.txt)
 

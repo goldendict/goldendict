@@ -28,25 +28,8 @@ on:
 jobs:
   build:
     name: Build
-    # 运行平台， windows-latest目前是windows server 2019 
-    # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
     runs-on: windows-2019
-    strategy:
-      # 矩阵配置
-      matrix:
-        # qt_ver: [5.15.2,6.2.2]
-        include:
-          # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
-          - qt_ver: 5.15.2
-            qt_arch: win64_msvc2019_64
-            msvc_arch: x64
-            qt_target: x64
-            qt_arch_install: msvc2019_64  
-          # - qt_ver: 6.2.3
-          #   qt_arch: win64_msvc2019_64
-          #   msvc_arch: x64
-          #   qt_target: x64
-          #   qt_arch_install: msvc2019_64           
+      
     env:
       targetName: GoldenDict.exe
       version: 22.2.alpha
@@ -59,7 +42,7 @@ jobs:
       - name: Set outputs
         id: githash
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"   
       - uses: Klemensas/action-autotag@stable
         id: autotag
         with:

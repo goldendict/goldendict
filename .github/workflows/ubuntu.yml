@@ -64,18 +64,7 @@ jobs:
           cd ..
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-      # - run: |
-      #     short_sha=$(git rev-parse --short HEAD)
-      #     tagname=v$version-$short_sha
-      #     echo $tagname
-      #     git tag $tagname -f
-      #     git push origin $tagname
-
-      - name: Set git short sha
-        id: githash
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+          fetch-depth: 0 
 
       - name: build goldendict
         run: |
@@ -93,7 +82,7 @@ jobs:
       - name: Set outputs
         id: vars
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
