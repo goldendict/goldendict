@@ -72,9 +72,9 @@ function gdExpandOptPart(expanderId, optionalId) {
     }
 }
 
-function emitClickedEvent() {
+function emitClickedEvent(link) {
     try {
-        articleview.linkClickedInHtml("")
+        articleview.linkClickedInHtml(link)
     } catch (error) {
         console.error(error)
     }

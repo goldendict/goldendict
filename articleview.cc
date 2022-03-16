@@ -1130,6 +1130,10 @@ void ArticleView::linkClicked( QUrl const & url_ )
 void ArticleView::linkClickedInHtml( QUrl const & url_ )
 {
   emit ui.definition->linkClickedInHtml(url_);
+  if(!url_.isEmpty())
+  {
+    linkClicked( url_ );
+  }
 }
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
