@@ -16,8 +16,6 @@
 ///    to the view's current state. This is used to open links in new tabs when
 ///    they are clicked with middle button. There's also an added possibility to
 ///    get double-click events after the fact with the doubleClicked() signal.
-/// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
-///    use triggerPageAction( QWebEnginePage::InspectElement ) instead.
 class ArticleWebView: public QWebEngineView
 {
   Q_OBJECT
