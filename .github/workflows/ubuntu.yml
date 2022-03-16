@@ -91,7 +91,7 @@ jobs:
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
-          CHANGELOG="$(git shortlog $previousTag..HEAD)"
+          CHANGELOG="$(git log --oneline --no-decorate $previousTag..HEAD)"
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
