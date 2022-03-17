@@ -211,6 +211,19 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
   string initError;
   QString cacheDirName;
 
+  QRegularExpression allLinksRe;
+  QRegularExpression wordCrossLink;
+  QRegularExpression anchorIdRe;
+  QRegularExpression anchorIdRe2;
+  QRegularExpression anchorLinkRe;
+  QRegularExpression audioRe;
+  QRegularExpression stylesRe;
+  QRegularExpression stylesRe2;
+  QRegularExpression inlineScriptRe;
+  QRegularExpression closeScriptTagRe;
+  QRegularExpression srcRe;
+  QRegularExpression srcRe2;
+
 public:
 
   MdxDictionary( string const & id, string const & indexFile, vector<string> const & dictionaryFiles );
@@ -307,7 +320,31 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
   idx( indexFile, "rb" ),
   idxHeader( idx.read< IdxHeader >() ),
   chunks( idx, idxHeader.chunksOffset ),
-  deferredInitRunnableStarted( false )
+  deferredInitRunnableStarted( false ),
+  allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
+              QRegularExpression::CaseInsensitiveOption ),
+  wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
+                 QRegularExpression::CaseInsensitiveOption ),
+  anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)", QRegularExpression::CaseInsensitiveOption ),
+  anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)", QRegularExpression::CaseInsensitiveOption ),
+  anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#", QRegularExpression::CaseInsensitiveOption ),
+  audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
+           QRegularExpression::CaseInsensitiveOption | QRegularExpression::InvertedGreedinessOption ),
+  stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://"
+            "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
+            QRegularExpression::CaseInsensitiveOption ),
+  stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
+             "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
+             QRegularExpression::CaseInsensitiveOption ),
+  inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
+                  QRegularExpression::CaseInsensitiveOption ),
+  closeScriptTagRe( "<\\s*/script\\s*>", QRegularExpression::CaseInsensitiveOption ),
+  srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://"
+         "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
+         QRegularExpression::CaseInsensitiveOption ),
+  srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
+          "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
+          QRegularExpression::CaseInsensitiveOption )
 {
   // Read the dictionary's name
   idx.seek( sizeof( idxHeader ) );
@@ -1017,31 +1054,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
-  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
-                                 QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
-                                    QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)",
-                                 QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)",
-                                  QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#",
-                                   QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
-                              QRegularExpression::CaseInsensitiveOption
-                              | QRegularExpression::InvertedGreedinessOption );
-  QRegularExpression stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-                               QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-                                QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
-                                     QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression closeScriptTagRe( "<\\s*/script\\s*>",
-                                       QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-                            QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-                             QRegularExpression::CaseInsensitiveOption );
+
 
   QString articleNewText;
   int linkPos = 0;
