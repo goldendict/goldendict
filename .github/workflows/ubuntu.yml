@@ -71,6 +71,11 @@ jobs:
           qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
 
+          #copy missing shared dll to appdir.
+          mkdir -p appdir/usr/lib
+          cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep gobject ) appdir/usr/lib
+          cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep libpango ) appdir/usr/lib
+
       - name: Build AppImage
         run: |
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
@@ -105,7 +110,7 @@ jobs:
           asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
           tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          release_name: win-ubuntu-macos-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
@@ -118,7 +123,7 @@ jobs:
             
             AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     macos-10.15,macos-11.0,clang_64
-            This is a prerelease version ,auto build by github action. use on your on risk:-)  
+            auto built by github action. use on your on risk:-)  
 
             CHANGES:
             ${{ steps.vars.outputs.COMMIT_SUMMARY }}             

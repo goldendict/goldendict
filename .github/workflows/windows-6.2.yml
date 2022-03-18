@@ -136,7 +136,7 @@ jobs:
           asset_name: ${{ matrix.qt_ver }}-${{ steps.package.outputs.packageName }}.zip
           tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          release_name: win-ubuntu-macos-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
@@ -146,7 +146,7 @@ jobs:
             Windows built with:   msvc64  Visual studio 2019
             AppImage built with:  Ubuntu-20.04 ,latest gcc
 
-            This is a prerelease version ,auto build by github action. use on your on risk:-)
+            auto built by github action. use on your on risk:-)
       - name: upload goldendict.exe only
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
@@ -156,7 +156,7 @@ jobs:
           asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}
           tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
+          release_name: win-ubuntu-macos-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
@@ -167,4 +167,4 @@ jobs:
                                   goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
             AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     macos-10.15,macos-11.0,clang_64
-            This is a prerelease version ,auto build by github action. use on your on risk:-)   
+            auto built by github action. use on your on risk:-)   
