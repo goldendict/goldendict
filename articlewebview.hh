@@ -66,7 +66,6 @@ private:
 
   bool midButtonPressed;
   bool selectionBySingleClick;
-  bool showInspectorDirectly;
 
   //MouseDbClickEvent will also emit MousePressEvent which conflict the single click event.
   //this variable used to distinguish the single click and real double click.

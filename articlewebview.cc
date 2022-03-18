@@ -16,8 +16,7 @@
 ArticleWebView::ArticleWebView( QWidget *parent ):
   QWebEngineView( parent ),
   midButtonPressed( false ),
-  selectionBySingleClick( false ),
-  showInspectorDirectly( true )
+  selectionBySingleClick( false )
 {
 }
 
