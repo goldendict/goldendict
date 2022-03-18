@@ -213,10 +213,9 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
 
   groupInstances.clear(); // Those hold pointers to dictionaries, we need to
                           // free them.
-
   ui.tabs->setUpdatesEnabled( false );
-  ui.tabs->removeTab( 1 );
-  ui.tabs->removeTab( 1 );
+
+
   groups.reset();
   orderAndProps.reset();
 
@@ -247,12 +246,14 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   if ( rebuildGroups )
   {
     orderAndProps = new OrderAndProps( this, savedOrder, savedInactive, dictionaries, dictMap );
+    groups = new Groups( this, dictionaries, savedGroups, orderAndProps->getCurrentDictionaryOrder() );
+
+    ui.tabs->removeTab( 1 );
+    ui.tabs->removeTab( 1 );
     ui.tabs->insertTab( 1, orderAndProps.get(), QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
 
-    groups = new Groups( this, dictionaries, savedGroups, orderAndProps->getCurrentDictionaryOrder() );
     ui.tabs->insertTab( 2, groups.get(), QIcon(":/icons/bookcase.svg"), tr( "&Groups" ) );
 
-    ui.tabs->setUpdatesEnabled( true );
 
     if ( noGroupEdits )
       origCfg.groups = groups->getGroups();
@@ -263,6 +264,8 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
     if ( noInactiveEdits )
       origCfg.inactiveDictionaries = orderAndProps->getCurrentInactiveDictionaries();
   }
+  ui.tabs->setUpdatesEnabled( true );
+
 }
 
 void EditDictionaries::helpRequested()
