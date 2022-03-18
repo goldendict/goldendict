@@ -71,7 +71,11 @@ jobs:
         run: |
           qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
-          ls -al
+          
+          #copy missing shared dll to appdir.
+          mkdir -p appdir/usr/lib
+          cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep gobject ) appdir/usr/lib
+          cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep libpango ) appdir/usr/lib
       - name: Build AppImage
         run: |
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
