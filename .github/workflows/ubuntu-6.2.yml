@@ -113,7 +113,7 @@ jobs:
           asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
           tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-ubuntu-macos-${{steps.vars.outputs.release_date}} 
+          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
