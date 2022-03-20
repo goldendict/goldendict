@@ -95,7 +95,7 @@ jobs:
         shell: cmd
         run: |
           call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
-          qmake "CONFIG+=zim_support"
+          qmake "CONFIG+=zim_support" CONFIG+=release
           nmake
 
           echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
