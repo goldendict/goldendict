@@ -907,9 +907,8 @@ void FavoritesModel::removeItemsForIndexes( const QModelIndexList & idxList )
   for( int i = lowestLevel; i >= 0; i-- )
   {
     QModelIndexList idxSublist = itemsToDelete[ i ];
-    //std::greater does not work ,operator < not implemented ,use std:less first ,then std::reverse.
-    std::sort(idxSublist.begin(), idxSublist.end(), std::less<QModelIndex>());
-    std::reverse(idxSublist.begin(), idxSublist.end());
+    // std::greater does not work as operator < not implemented
+    std::sort( idxSublist.begin(), idxSublist.end(), std::not2( std::less< QModelIndex >() ) );
 
     it = idxSublist.begin();
     for( ; it != idxSublist.end(); ++it )
