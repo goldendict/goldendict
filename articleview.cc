@@ -492,10 +492,9 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   Utils::Url::addQueryItem( req, "word", word );
   Utils::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
   Utils::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
-  //todo
-//  if( searchRegExp.patternOptions () == QRegularExpression:: )
+  if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
     Utils::Url::addQueryItem( req, "matchcase", "1" );
-//  if( searchRegExp.patternOptions () == PatternOptions::WildcardUnix )
+  if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     Utils::Url::addQueryItem( req, "wildcards", "1" );
   Utils::Url::addQueryItem( req, "group", QString::number( group ) );
   if( ignoreDiacritics )
