@@ -35,6 +35,8 @@ jobs:
     # 步骤
     steps:
       - uses: actions/checkout@v3
+            
+      - name: set git short sha
         id: git
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
