@@ -28,10 +28,9 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
       
     env:
-      targetName: GoldenDict.exe
       version: 22.2.alpha
     # 步骤
     steps:
