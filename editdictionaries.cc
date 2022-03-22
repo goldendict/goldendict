@@ -220,7 +220,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   orderAndProps.reset();
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
-
+  dictMap = Dictionary::dictToMap(dictionaries);
   // If no changes to groups were made, update the original data
   bool noGroupEdits = ( origCfg.groups == savedGroups );
 
