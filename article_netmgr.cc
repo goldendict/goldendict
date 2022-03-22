@@ -563,5 +563,6 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     connect(reply,&QNetworkReply::finished,requestJob,[=](){
         requestJob->reply("text/html",reply);
     });
+    connect(requestJob, &QObject::destroyed, reply, &QObject::deleteLater);
 }
 
