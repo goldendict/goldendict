@@ -3538,6 +3538,7 @@ void MainWindow::on_rescanFiles_triggered()
   dictionaryBar.setDictionaries( dictionaries );
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+  dictMap = Dictionary::dictToMap(dictionaries);
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
