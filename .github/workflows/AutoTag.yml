@@ -45,7 +45,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: v${{env.version}}-${{ steps.git.outputs.sha_short }}
+          custom_tag: ${{env.version}}-${{ steps.git.outputs.sha_short }}
 
          
       
