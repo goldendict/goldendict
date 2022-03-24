@@ -2886,7 +2886,7 @@ in bg url to hide it from iemac */
 /****** Wiktionary-specific excerpts *********/
 
 .mwiki .audiolink a {
-    background: url("http://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/16px-Loudspeaker.svg.png") center left no-repeat !important;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Loudspeaker.svg/16px-Loudspeaker.svg.png") center left no-repeat !important;
     padding-left: 20px !important;
     padding-right: 0 !important;
 }
