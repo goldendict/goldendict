@@ -63,8 +63,7 @@ public:
                                                  unsigned long maxResults ) ;
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const &, bool )
-    ;
+                                          wstring const &, bool );
 
   virtual quint32 getLangFrom() const
   { return langId; }
@@ -90,7 +89,12 @@ void MediaWikiDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_wiki.png");
+  {
+    if( url.contains( "tionary" ) )
+      dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/wiktionary.png" );
+    else
+      dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/icon32_wiki.png" );
+  }
   dictionaryIconLoaded = true;
 }
 
