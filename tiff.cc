@@ -5,7 +5,7 @@
 
 #include "tiff.hh"
 
-#if defined (Q_OS_MAC) || defined (Q_OS_WIN)
+#if defined (Q_OS_WIN)
 #include "tiff/tiff.h"
 #include "tiff/tiffio.h"
 #else
