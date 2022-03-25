@@ -1,9 +1,12 @@
 # Changes
 
-
-
 ## Until to now
+
 - **CLEANING OLD/USELESS CODE**
+- mac m1 Sillion chip support from [@ngn999](https://github.com/ngn999)
+
+## Until to 2022-3-24
+
 - upgrade opencc to 2020-04-26 version(through vcpkg)
 - upgrade ffmpeg dependency to 4.4(on windows),code support to 5.0
 - fix: double click word to translate ,right context menu does not display.
@@ -12,19 +15,18 @@
 - optimize: large memory consumption ,when have large collection of dictionaries.even when query a small group of dictionaries.
 - peformance: dsl parse performance .  
   when have very long lines,the line will be split into two parts .the remaining part was considered a normal headword ,and hanged when expand parts.
-- support qt6.2
+- support qt6.2.3
 - performance improve when edit dictionary groups.
 
-
-
 ## Until to 2022-2-2
+
 - replace webkit with webenginewidgets
 - clean old code.
-  -  remove old `if 0` code section 
-  -  qt_version check 
-  -  remove IS_QT_5 check
+  - remove old `if 0` code section 
+  - qt_version check 
+  - remove IS_QT_5 check
   
-     rename qt4x5.hh to utils.hh,for the name is not proper now.
+    rename qt4x5.hh to utils.hh,for the name is not proper now.
   - QString::SkipEmptyParts=>Qt::SkipEmptyParts
   - remove "CONFIG+=old_hunspell" 
 - remove iconv partly,use qtextcodec instead.
@@ -32,7 +34,7 @@
    - when parse dsl dictionary ,use qtextcodec instead of iconv
       
    fix the old bug https://github.com/goldendict/goldendict/issues/1322 by the way
-- remove dependency of iconv lib completely,use qtextcodec instead. has not merge into this PR yet. in this branch https://github.com/xiaoyifang/goldendict/tree/remove-iconv-lib
+- remove dependency of iconv lib completely,use qtextcodec instead. has not merge into this PR yet. in this branch                https://github.com/xiaoyifang/goldendict/tree/remove-iconv-lib
 - bug, found dictionaries panel show all the dictionaries  which is not correct.
 - bug,F12 inspect function.
 - bug ,double click event.in webengineview widget. the mouse event was eated by child widget.
