@@ -524,13 +524,12 @@ void ArticleView::showAnticipation()
 }
 
 void ArticleView::inspectElement(){
-  QWebEnginePage *page = ui.definition->page();
   if( inspector == nullptr )
   {
     inspector = new ArticleInspector( this );
     inspector->setWindowTitle( tr( "Inspect" ) );
   }
-  inspector->setInspectPage( page );
+  inspector->setInspectPage( ui.definition );
 }
 
 void ArticleView::loadFinished( bool result )

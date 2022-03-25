@@ -14,7 +14,7 @@ class ArticleInspector : public QDialog
 public:
   ArticleInspector( QWidget * parent = nullptr );
 
-  void setInspectPage( QWebEnginePage * page );
+  void setInspectPage( QWebEngineView * view);
 
 private:
 

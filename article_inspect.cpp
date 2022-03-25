@@ -1,5 +1,6 @@
 #include "article_inspect.h"
 #include <QCloseEvent>
+#include <QWebEngineContextMenuRequest>
 ArticleInspector::ArticleInspector( QWidget * parent ) : QDialog( parent, Qt::WindowType::Window )
 {
   setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
@@ -10,19 +11,21 @@ ArticleInspector::ArticleInspector( QWidget * parent ) : QDialog( parent, Qt::Wi
   v->addWidget( inspectView );
 }
 
-void ArticleInspector::setInspectPage( QWebEnginePage * page )
+void ArticleInspector::setInspectPage( QWebEngineView * view )
 {
+  auto page=view->page();
   this->inspectedPage = page;
   page->setDevToolsPage( inspectView->page() );
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-  //this line will crash application on qt6.2 ,see https://bugreports.qt.io/browse/QTBUG-101724
-  page->triggerAction( QWebEnginePage::InspectElement );
-#endif
+  // without this line, application will crash on qt6.2 ,see https://bugreports.qt.io/browse/QTBUG-101724
+  if( view->lastContextMenuRequest() )
+  {
+    page->triggerAction( QWebEnginePage::InspectElement );
+  }
   raise();
   show();
 }
 
-void ArticleInspector::closeEvent( QCloseEvent * ev )
+void ArticleInspector::closeEvent( QCloseEvent * )
 {
   inspectedPage->setDevToolsPage( nullptr );
 }
