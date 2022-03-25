@@ -1,7 +1,7 @@
 //document ready
 (function($){
 $(function() {
-        $("a").click(function(event) {
+        $(document).on("click","a",function(event) {
             var link = $(this).attr("href");
             if(link.indexOf(":")>=0){
                 emitClickedEvent(link);
