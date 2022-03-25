@@ -49,7 +49,8 @@ jobs:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
-          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia               
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia 
+          setup-python: 'false'              
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
