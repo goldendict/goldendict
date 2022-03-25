@@ -216,7 +216,7 @@ mac {
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
-        PKGCONFIG += opencc
+#        PKGCONFIG += opencc
         QMAKE_POST_LINK += && mkdir -p GoldenDict.app/Contents/MacOS/opencc && \
                              cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/
     }
@@ -545,15 +545,7 @@ CONFIG( chinese_conversion_support ) {
              chineseconversion.hh
   SOURCES += chinese.cc \
              chineseconversion.cc
-  win32-msvc* {
-    LIBS += -lopencc
-  } else {
-    mac {
-      LIBS += -lopencc
-    } else {
-      LIBS += -lopencc
-    }
-  }
+  LIBS += -lopencc
 }
 
 RESOURCES += resources.qrc \
