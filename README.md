@@ -42,8 +42,11 @@ And then invoke `qmake-qt5` and `make`:
 
 ### macOS
 ```
-brew install qt
-brew install opencc
+wget ftp://ftp.sra.co.jp/pub/misc/eb/eb-4.4.3.tar.bz2
+tar xvjf eb-4.4.3.tar.bz2
+cd eb-4.4.3 && ./configure && make -j 8 && sudo make install
+brew install qt # or use official offline installer
+brew install opencc libao hunspell ffmpeg libtiff xz lzo libogg libvorbis
 qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
 make 
 make install

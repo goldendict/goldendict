@@ -48,6 +48,10 @@ CONFIG += exceptions \
     stl  \
     c++11
     # lrelease    #lrelease generate qm under target folder.
+
+mac {
+    CONFIG += app_bundle
+}
     
 QM_FILES_INSTALL_PATH = /locale/
 OBJECTS_DIR = build
@@ -184,37 +188,36 @@ mac {
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.6.1 \
+        -lhunspell-1.7.0 \
         -llzo2
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
-            -lswresample-gd \
-            -lavutil-gd \
-            -lavformat-gd \
-            -lavcodec-gd
+            -lswresample \
+            -lavutil \
+            -lavformat \
+            -lavcodec
     }
     QT_CONFIG -= no-pkg-config 
     CONFIG += link_pkgconfig
-    INCLUDEPATH = $${PWD}/maclibs/include
-    LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
+    INCLUDEPATH = /opt/homebrew/include /usr/local/include
+    LIBS += -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
                          speechclient_mac.mm
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
-    QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
-                      cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
-                      mkdir -p GoldenDict.app/Contents/MacOS/locale & \
-                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
-                      mkdir -p GoldenDict.app/Contents/MacOS/help & \
+    QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
+                      mkdir -p GoldenDict.app/Contents/MacOS/locale && \
+                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ && \
+                      mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
-        PKGCONFIG += opencc
-        QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
+#        PKGCONFIG += opencc
+        QMAKE_POST_LINK += && mkdir -p GoldenDict.app/Contents/MacOS/opencc && \
                              cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/
     }
 }
@@ -542,15 +545,7 @@ CONFIG( chinese_conversion_support ) {
              chineseconversion.hh
   SOURCES += chinese.cc \
              chineseconversion.cc
-  win32-msvc* {
-    LIBS += -lopencc
-  } else {
-    mac {
-      LIBS += -lopencc
-    } else {
-      LIBS += -lopencc
-    }
-  }
+  LIBS += -lopencc
 }
 
 RESOURCES += resources.qrc \
