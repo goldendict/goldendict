@@ -61,22 +61,21 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-          
       - name: build macos
         run: |
           wget ftp://ftp.sra.co.jp/pub/misc/eb/eb-4.4.3.tar.bz2
           tar xvjf eb-4.4.3.tar.bz2
           cd eb-4.4.3 && ./configure && make -j 8 && sudo make install && cd ..
           #brew install qt # or use official offline installer
-          brew install opencc libao hunspell ffmpeg libtiff xz lzo libogg libvorbis zstd
+          brew install opencc libao hunspell ffmpeg@5 libtiff xz lzo libogg libvorbis zstd
           qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make 
       # 打包
       - name: package
         run: |
-          # 拷贝依赖
           macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
+          otool -L  GoldenDict.app/Contents/MacOS/GoldenDict
+
       - name: Set outputs
         id: vars
         run: |
