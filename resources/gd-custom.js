@@ -3,6 +3,9 @@
 $(function() {
         $(document).on("click","a",function(event) {
             var link = $(this).attr("href");
+            if ('string' != typeof(link)) {
+                return;
+            }
             if(link.indexOf(":")>=0){
                 emitClickedEvent(link);
                 return false;
