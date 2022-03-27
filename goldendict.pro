@@ -46,18 +46,19 @@ QT += sql
 CONFIG += exceptions \
     rtti \
     stl  \
-    c++11
-    # lrelease    #lrelease generate qm under target folder.
+    c++11 \
+    lrelease \
+    embed_translations
 
 mac {
-    CONFIG += app_bundle
+    DEBUG:CONFIG += app_bundle
 }
-    
-QM_FILES_INSTALL_PATH = /locale/
+
+QM_FILES_RESOURCE_PREFIX = /locale/
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
-RCC_DIR = build
+#RCC_DIR = build
 LIBS += \
         -lz \
         -lbz2 \
@@ -550,6 +551,7 @@ CONFIG( chinese_conversion_support ) {
 
 RESOURCES += resources.qrc \
     flags.qrc
+#EXTRA_TRANSLATIONS += thirdparty/qwebengine_ts/qtwebengine_zh_CN.ts
 TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_CN.ts \
     locale/cs_CZ.ts \
@@ -592,50 +594,10 @@ TRANSLATIONS += locale/ru_RU.ts \
 
 # Build version file
 !isEmpty( hasGit ) {
-  QMAKE_EXTRA_TARGETS += revtarget
   PRE_TARGETDEPS      += $$PWD/version.txt
-  revtarget.target     = $$PWD/version.txt
-
-#  !win32 {
-#    revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
-#  } else {
-#    revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
-#  }
-
-  ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
-  for(src, ALL_SOURCES) {
-    QUALIFIED_SOURCES += $${PWD}/$${src}
-  }
-  revtarget.depends = $$QUALIFIED_SOURCES
 }
 
-# This makes qmake generate translations
 
-
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-
-
-# The *.qm files might not exist when qmake is run for the first time,
-# causing the standard install rule to be ignored, and no translations
-# will be installed. With this, we create the qm files during qmake run.
-!win32 {
-  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null)
-}
-else{
-  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_})
-}
-
-updateqm.input = TRANSLATIONS
-updateqm.output = locale/${QMAKE_FILE_BASE}.qm
-updateqm.commands = $$QMAKE_LRELEASE \
-    ${QMAKE_FILE_IN} \
-    -qm \
-    ${QMAKE_FILE_OUT}
-updateqm.CONFIG += no_link
-QMAKE_EXTRA_COMPILERS += updateqm
-TS_OUT = $$TRANSLATIONS
-TS_OUT ~= s/.ts/.qm/g
-PRE_TARGETDEPS += $$TS_OUT
 
 include( thirdparty/qtsingleapplication/src/qtsingleapplication.pri )
 

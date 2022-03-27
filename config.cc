@@ -2287,10 +2287,11 @@ QString getProgramDataDir() throw()
 
 QString getLocDir() throw()
 {
-  if ( QDir( getProgramDataDir() ).cd( "locale" ) )
-    return getProgramDataDir() + "/locale";
-  else
-    return QCoreApplication::applicationDirPath() + "/locale";
+  return ":/locale";
+//  if ( QDir( getProgramDataDir() ).cd( "locale" ) )
+//    return getProgramDataDir() + "/locale";
+//  else
+//    return QCoreApplication::applicationDirPath() + "/locale";
 }
 
 QString getHelpDir() throw()
