@@ -174,8 +174,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
 
   // Set own gesture recognizers
+#ifndef Q_OS_MAC
   Gestures::registerRecognizers();
-
+#endif
   // use our own, custom statusbar
   setStatusBar(0);
   mainStatusBar = new MainStatusBar( this );

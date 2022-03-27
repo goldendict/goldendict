@@ -112,8 +112,6 @@ public:
   /// Returns "gdfrom-" + dictionaryId.
   static QString scrollToFromDictionaryId( QString const & dictionaryId );
 
-  QString runJavaScriptSync(QWebEnginePage* frame, const QString& variable);
-
   void emitJavascriptFinished();
 
   /// Shows the definition of the given word with the given group.
@@ -369,7 +367,7 @@ private:
 
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.
-  bool isFramedArticle( QString const & );
+  void isFramedArticle( QString const &article, const std::function< void(bool framed) > &callback);
 
   /// Checks if the given link is to be opened externally, as opposed to opening
   /// it in-place.

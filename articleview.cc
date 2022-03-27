@@ -180,27 +180,6 @@ public:
 void ArticleView::emitJavascriptFinished(){
     emit notifyJavascriptFinished();
 }
-//in webengine,javascript has been executed in async mode ,for simpility,use EventLoop to simulate sync execution.
-//a better solution would be to replace it with callback etc.
-QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
-{
-    qDebug("%s", QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
-
-    QString result;
-    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-    frame->runJavaScript(variable, [=,&result](const QVariant &v)
-    {
-        if(loop->isRunning()){
-            if(v.isValid())
-                result = v.toString();
-            loop->quit();
-        }
-    });
-
-    loop->exec();
-    return result;
-}
 
 namespace {
 
@@ -701,13 +680,15 @@ void ArticleView::selectCurrentArticle()
         QString( "gdSelectArticle( '%1' );var elem=document.getElementById('%2'); if(elem!=undefined){elem.scrollIntoView(true);}" ).arg( getActiveArticleId() ,getCurrentArticle()) );
 }
 
-bool ArticleView::isFramedArticle( QString const & ca )
+void ArticleView::isFramedArticle( QString const & ca, const std::function< void(bool) > &callback)
 {
   if ( ca.isEmpty() )
-    return false;
+    callback(false);
 
-  QString result=runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) );
-  return result=="true";
+  ui.definition->page()->runJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ),
+                                        [callback](const QVariant &res) {
+      callback(res.toBool());
+  });
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -725,33 +706,33 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
     // Maybe a link inside a website was clicked?
 
     QString ca = getCurrentArticle();
+    isFramedArticle( ca, [contexts, &url, ca](bool framed) {
+        if (framed) {
+            //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
+            QVariant result ;
 
-    if ( isFramedArticle( ca ) )
-    {
-      //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
-      QVariant result ;
+            if ( result.type() == QVariant::String )
+            {
+                // Looks this way
+                contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
 
-      if ( result.type() == QVariant::String )
-      {
-        // Looks this way
-        contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
+                QUrl target;
 
-        QUrl target;
+                QString queryWord = result.toString();
 
-        QString queryWord = result.toString();
+                // Empty requests are treated as no request, so we work this around by
+                // adding a space.
+                if ( queryWord.isEmpty() )
+                    queryWord = " ";
 
-        // Empty requests are treated as no request, so we work this around by
-        // adding a space.
-        if ( queryWord.isEmpty() )
-          queryWord = " ";
+                target.setScheme( "gdlookup" );
+                target.setHost( "localhost" );
+                target.setPath( "/" + queryWord );
 
-        target.setScheme( "gdlookup" );
-        target.setHost( "localhost" );
-        target.setPath( "/" + queryWord );
-
-        url = target;
-      }
-    }
+                url = target;
+            }
+        }
+    } );
   }
 }
 
@@ -830,7 +811,16 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
+#ifdef Q_OS_MAC
 
+    if (ev->type() == QEvent::NativeGesture) {
+        qDebug() << "it's a Native Gesture!";
+        // handle Qt::ZoomNativeGesture Qt::SmartZoomNativeGesture here
+        // ignore swipe left/right.
+        // QWebEngine can handle Qt::SmartZoomNativeGesture.
+    }
+
+#else
   if( ev->type() == QEvent::Gesture )
   {
     Gestures::GestureResult result;
@@ -875,6 +865,7 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
     return handled;
   }
+#endif
 
   if( ev->type() == QEvent::MouseMove )
   {
