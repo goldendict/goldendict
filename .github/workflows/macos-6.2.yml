@@ -113,7 +113,7 @@ jobs:
             if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
 
             AppImage built with:  Ubuntu-20.04 ,latest gcc
-            macos built with:     macos-10.15,macos-11.0,clang_64
+            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64(Intel Kind)
             auto built by github action. use on your on risk:-)   
 
             CHANGES:
