@@ -47,6 +47,9 @@
        <string>&amp;Interface</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="topMargin">
+        <number>9</number>
+       </property>
        <item row="9" column="0" colspan="2">
         <spacer name="verticalSpacer">
          <property name="orientation">
@@ -1375,65 +1378,64 @@ download page.</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_17">
-         <item>
-          <widget class="QGroupBox" name="groupBox_ScanPopupWindowFlags">
-           <property name="title">
-            <string>ScanPopup unpinned window flags</string>
+        <widget class="QGroupBox" name="groupBox_ScanPopupWindowFlags">
+         <property name="title">
+          <string>ScanPopup unpinned window flags</string>
+         </property>
+         <widget class="QComboBox" name="scanPopupUnpinnedWindowFlags">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>25</y>
+            <width>191</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string>Experiment with non-default flags if the unpinned scan popup window misbehaves</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>&lt;default&gt;</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_22">
-            <item>
-             <widget class="QComboBox" name="scanPopupUnpinnedWindowFlags">
-              <property name="toolTip">
-               <string>Experiment with non-default flags if the unpinned scan popup window misbehaves</string>
-              </property>
-              <item>
-               <property name="text">
-                <string>&lt;default&gt;</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Popup</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Tool</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="scanPopupUnpinnedBypassWMHint">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="toolTip">
-               <string>This hint can be combined with non-default window flags</string>
-              </property>
-              <property name="text">
-               <string>Bypass window manager hint</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_13">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          </item>
+          <item>
+           <property name="text">
+            <string>Popup</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tool</string>
            </property>
-          </spacer>
-         </item>
-        </layout>
+          </item>
+         </widget>
+         <widget class="QCheckBox" name="scanPopupUnpinnedBypassWMHint">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>53</y>
+            <width>193</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>This hint can be combined with non-default window flags</string>
+          </property>
+          <property name="text">
+           <string>Bypass window manager hint</string>
+          </property>
+         </widget>
+        </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_15">
