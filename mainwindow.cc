@@ -1402,7 +1402,7 @@ void MainWindow::updateGroupList()
 
     g.name = tr( "All" );
     g.id = Instances::Group::AllGroupId;
-    g.icon = "folder.svg";
+    g.icon = "folder.png";
 
     groupInstances.push_back( g );
   }
