@@ -706,7 +706,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
     // Maybe a link inside a website was clicked?
 
     QString ca = getCurrentArticle();
-    isFramedArticle( ca, [contexts, &url, ca](bool framed) {
+    isFramedArticle( ca, [=,&url](bool framed) {
         if (framed) {
             //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
             QVariant result ;
