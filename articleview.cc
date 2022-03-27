@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articleview.hh"
+#include "QtCore/qvariant.h"
 #include "folding.hh"
 #include "fulltextsearch.hh"
 #include "gddebug.hh"
@@ -829,6 +830,7 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
+
   if( ev->type() == QEvent::Gesture )
   {
     Gestures::GestureResult result;
@@ -1644,12 +1646,14 @@ void ArticleView::forward()
   ui.definition->forward();
 }
 
-bool ArticleView::hasSound()
+void ArticleView::hasSound(const std::function< void (bool) > &callback)
 {
-  QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
-  if ( v.type() == QVariant::String )
-    return !v.toString().isEmpty();
-  return false;
+    ui.definition->page()->runJavaScript("gdAudioLinks.first", [callback](const QVariant &v) {
+        bool has = false;
+        if ( v.type() == QVariant::String )
+            has = !v.toString().isEmpty();
+        callback(has);
+    });
 }
 
 //use webengine javascript to playsound
@@ -1661,9 +1665,13 @@ void ArticleView::playSound()
     "   }          "
     "    return link;})();         ";
 
-  QString soundScript = runJavaScriptSync(ui.definition->page(), variable);
-  if (!soundScript.isEmpty())
-    openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
+  ui.definition->page()->runJavaScript(variable,[this](const QVariant & result){
+      if (result.type() == QVariant::String) {
+          QString soundScript = result.toString();
+          if (!soundScript.isEmpty())
+            openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
+      }
+  });
 }
 
 // use eventloop to turn the async callback to sync execution.

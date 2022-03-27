@@ -2033,10 +2033,14 @@ void MainWindow::updateBackForwardButtons()
 
 void MainWindow::updatePronounceAvailability()
 {
-  bool pronounceEnabled = ui.tabWidget->count() > 0 &&
-    getCurrentArticleView()->hasSound();
-
-  navPronounce->setEnabled( pronounceEnabled );
+    if (ui.tabWidget->count() > 0) {
+        getCurrentArticleView()->hasSound([this](bool has) {
+            navPronounce->setEnabled( has );
+        });
+    }
+    else {
+        navPronounce->setEnabled( false );
+    }
 }
 
 void MainWindow::editDictionaries( unsigned editDictionaryGroup )

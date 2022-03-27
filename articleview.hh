@@ -179,7 +179,7 @@ public:
   { ui.definition->reload(); }
 
   /// Returns true if there's an audio reference on the page, false otherwise.
-  bool hasSound();
+  void hasSound(const std::function< void (bool has) > &callback);
 
   /// Plays the first audio reference on the page, if any.
   void playSound();
