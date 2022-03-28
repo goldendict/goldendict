@@ -3444,7 +3444,6 @@ void MainWindow::on_saveArticle_triggered()
     if ( fileName.isEmpty() )
         return;
 
-    vector< pair< QUrl, QString > > downloadResources;
     view->toHtml([=]  (QString &html) mutable {
         QFile file( fileName );
         if ( !file.open( QIODevice::WriteOnly ) )
@@ -3490,6 +3489,7 @@ void MainWindow::on_saveArticle_triggered()
                 QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
                 QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
                 set< QByteArray > resourceIncluded;
+                vector< pair< QUrl, QString > > downloadResources;
 
                 filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
                 filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
