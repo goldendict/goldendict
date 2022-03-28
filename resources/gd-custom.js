@@ -48,5 +48,8 @@ function playSound(sound) {
 }
 
 function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+    setInterval(function(){
+        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        console.log(obj.style.height);
+    },500);
 }
