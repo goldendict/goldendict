@@ -193,7 +193,7 @@ public:
   }
 
   /// Returns current article's text in .html format
-  QString toHtml();
+  void toHtml(const std::function< void (QString &) > &callback);
 
   void setHtml(const QString& content, const QUrl& baseUrl);
   void setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());

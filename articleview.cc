@@ -1666,20 +1666,12 @@ void ArticleView::playSound()
 }
 
 // use eventloop to turn the async callback to sync execution.
-QString ArticleView::toHtml()
+void ArticleView::toHtml(const std::function< void (QString &) > &callback)
 {
-    QString result;
-    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-
-    ui.definition->page()->toHtml([loop, &result](const QString &content) {
-        if (loop->isRunning()) {
-            result = content;
-            loop->quit();
-        }
+    ui.definition->page()->toHtml([=](const QString &content) {
+        QString html = content;
+        callback(html);
     });
-    loop->exec();
-    return result;
 }
 
 void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){

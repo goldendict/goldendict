@@ -3441,11 +3441,12 @@ void MainWindow::on_saveArticle_triggered()
 
     bool complete = ( selectedFilter == filters[ 0 ] );
 
-    if ( !fileName.isEmpty() )
-    {
+    if ( fileName.isEmpty() )
+        return;
 
+    vector< pair< QUrl, QString > > downloadResources  = vector< pair< QUrl, QString > >();
+    view->toHtml([=]  (QString &html) mutable {
         QFile file( fileName );
-
         if ( !file.open( QIODevice::WriteOnly ) )
         {
             QMessageBox::critical( this, tr( "Error" ),
@@ -3453,7 +3454,6 @@ void MainWindow::on_saveArticle_triggered()
         }
         else
         {
-            QString html = view->toHtml();
             QFileInfo fi( fileName );
             cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
 
@@ -3490,7 +3490,6 @@ void MainWindow::on_saveArticle_triggered()
                 QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
                 QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
                 set< QByteArray > resourceIncluded;
-                vector< pair< QUrl, QString > > downloadResources;
 
                 filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
                 filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
@@ -3523,8 +3522,8 @@ void MainWindow::on_saveArticle_triggered()
             {
                 file.write( html.toUtf8() );
             }
-        } // toHtml
-    }
+        }
+    });
 }
 
 void MainWindow::on_rescanFiles_triggered()
