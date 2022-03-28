@@ -3444,7 +3444,7 @@ void MainWindow::on_saveArticle_triggered()
     if ( fileName.isEmpty() )
         return;
 
-    vector< pair< QUrl, QString > > downloadResources  = vector< pair< QUrl, QString > >();
+    vector< pair< QUrl, QString > > downloadResources;
     view->toHtml([=]  (QString &html) mutable {
         QFile file( fileName );
         if ( !file.open( QIODevice::WriteOnly ) )
@@ -3516,7 +3516,7 @@ void MainWindow::on_saveArticle_triggered()
                 progressDialog->show();
 
                 file.write( html.toUtf8() );
-                progressDialog->setValue( 1 );
+                progressDialog->perform();
             }
             else
             {
