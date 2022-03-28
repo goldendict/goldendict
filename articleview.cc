@@ -2480,113 +2480,101 @@ void ArticleView::inspect()
 
 void ArticleView::highlightFTSResults()
 {
-  closeSearch();
+    closeSearch();
 
-  const QUrl & url = ui.definition->url();
+    const QUrl & url = ui.definition->url();
 
-  bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
+    bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
 
-  QString regString = Utils::Url::queryItemValue( url, "regexp" );
-  if( ignoreDiacritics )
-    regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
-  else
-    regString = regString.remove( AccentMarkHandler::accentMark() );
-
-  QRegularExpression regexp;
-  if( Utils::Url::hasQueryItem( url, "wildcards" ) )
-    regexp.setPattern( wildcardsToRegexp( regString ) );
-  else
-    regexp.setPattern( regString );
-
-  QRegularExpression::PatternOptions patternOptions = QRegularExpression::DotMatchesEverythingOption
-                                                      | QRegularExpression::UseUnicodePropertiesOption
-                                                      | QRegularExpression::MultilineOption
-                                                      | QRegularExpression::InvertedGreedinessOption;
-  if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
-    patternOptions |= QRegularExpression::CaseInsensitiveOption;
-  regexp.setPatternOptions( patternOptions );
-
-  if( regexp.pattern().isEmpty() || !regexp.isValid() )
-    return;
-
-
-  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
-                                           new DiacriticsHandler : new AccentMarkHandler;
-
-  // Clear any current selection
-  if ( ui.definition->selectedText().size() )
-  {
-    ui.definition->page()->
-           runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-  }
-
-  QString pageText = getWebPageTextSync(ui.definition->page());
-  marksHandler->setText( pageText );
-
-  QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
-  while( it.hasNext() )
-  {
-    QRegularExpressionMatch match = it.next();
-
-    // Mirror pos and matched length to original string
-    int pos = match.capturedStart();
-    int spos = marksHandler->mirrorPosition( pos );
-    int matched = marksHandler->mirrorPosition( pos + match.capturedLength() ) - spos;
-
-    // Add mark pos (if presented)
-    while( spos + matched < pageText.length()
-           && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
-      matched++;
-
-    if( matched > FTS::MaxMatchLengthForHighlightResults )
-    {
-      gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
-                 match.capturedLength(), FTS::MaxMatchLengthForHighlightResults );
-    }
+    QString regString = Utils::Url::queryItemValue( url, "regexp" );
+    if( ignoreDiacritics )
+        regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
     else
-      allMatches.append( pageText.mid( spos, matched ) );
-  }
+        regString = regString.remove( AccentMarkHandler::accentMark() );
 
-  ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
+    QRegularExpression regexp;
+    if( Utils::Url::hasQueryItem( url, "wildcards" ) )
+        regexp.setPattern( wildcardsToRegexp( regString ) );
+    else
+        regexp.setPattern( regString );
 
-  QWebEnginePage::FindFlags flags ( 0 );
+    QRegularExpression::PatternOptions patternOptions = QRegularExpression::DotMatchesEverythingOption
+            | QRegularExpression::UseUnicodePropertiesOption
+            | QRegularExpression::MultilineOption
+            | QRegularExpression::InvertedGreedinessOption;
+    if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
+        patternOptions |= QRegularExpression::CaseInsensitiveOption;
+    regexp.setPatternOptions( patternOptions );
 
-  if( ftsSearchMatchCase )
-    flags |= QWebEnginePage::FindCaseSensitively;
+    if( regexp.pattern().isEmpty() || !regexp.isValid() )
+        return;
 
-  for( int x = 0; x < allMatches.size(); x++ )
-    ui.definition->findText( allMatches.at( x ), flags );
 
-  if( !allMatches.isEmpty() )
-  {
-      ui.definition->findText( allMatches.at( 0 ), flags );
-    //if( ui.definition->findText( allMatches.at( 0 ), flags ) )
+    sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
+                new DiacriticsHandler : new AccentMarkHandler;
+
+    // Clear any current selection
+    if ( ui.definition->selectedText().size() )
     {
         ui.definition->page()->
-               runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
-                                   .arg( rangeVarName ) );
+                runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
     }
-  }
 
-  ui.ftsSearchFrame->show();
-  ui.ftsSearchPrevious->setEnabled( false );
-  ui.ftsSearchNext->setEnabled( allMatches.size()>1 );
+    ui.definition->page()->toPlainText([&](const QString pageText){
+        marksHandler->setText( pageText );
 
-  ftsSearchIsOpened = true;
-}
+        QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
+        while( it.hasNext() )
+        {
+            QRegularExpressionMatch match = it.next();
 
-QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
-    QString planText;
-    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-    page->toPlainText([&](const QString &result)
-                      {
-                        if(loop->isRunning()){
-                          planText = result;
-                          loop->quit();
-                        } });
-    loop->exec();
-    return planText;
+            // Mirror pos and matched length to original string
+            int pos = match.capturedStart();
+            int spos = marksHandler->mirrorPosition( pos );
+            int matched = marksHandler->mirrorPosition( pos + match.capturedLength() ) - spos;
+
+            // Add mark pos (if presented)
+            while( spos + matched < pageText.length()
+                   && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
+                matched++;
+
+            if( matched > FTS::MaxMatchLengthForHighlightResults )
+            {
+                gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
+                           match.capturedLength(), FTS::MaxMatchLengthForHighlightResults );
+            }
+            else
+                allMatches.append( pageText.mid( spos, matched ) );
+        }
+
+        ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
+
+        QWebEnginePage::FindFlags flags ( 0 );
+
+        if( ftsSearchMatchCase )
+            flags |= QWebEnginePage::FindCaseSensitively;
+
+        for( int x = 0; x < allMatches.size(); x++ )
+            ui.definition->findText( allMatches.at( x ), flags );
+
+        if( !allMatches.isEmpty() )
+        {
+            ui.definition->findText( allMatches.at( 0 ), flags );
+            //if( ui.definition->findText( allMatches.at( 0 ), flags ) )
+            {
+                ui.definition->page()->
+                        runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+                                       .arg( rangeVarName ) );
+            }
+        }
+
+        ui.ftsSearchFrame->show();
+        ui.ftsSearchPrevious->setEnabled( false );
+        ui.ftsSearchNext->setEnabled( allMatches.size()>1 );
+
+        ftsSearchIsOpened = true;
+    });
+
 }
 
 void ArticleView::setActiveDictIds(ActiveDictIds ad) {

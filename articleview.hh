@@ -156,8 +156,6 @@ public:
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
 
-  QString getWebPageTextSync(QWebEnginePage * page);
-
 public slots:
 
   /// Goes back in history
