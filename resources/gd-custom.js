@@ -49,7 +49,14 @@ function playSound(sound) {
 
 function resizeIframe(obj) {
     setInterval(function(){
-        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
-        console.log(obj.style.height);
+        //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
+        if(obj.contentWindow.document.documentElement.scrollHeight <1000)
+        {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+        else{
+            obj.style.height ='1000px'
+            obj.scrolling="yes";
+        }
     },500);
 }
