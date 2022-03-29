@@ -209,15 +209,12 @@ mac {
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
-                      mkdir -p GoldenDict.app/Contents/MacOS/locale && \
-                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ && \
                       mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
-#        PKGCONFIG += opencc
         QMAKE_POST_LINK += && mkdir -p GoldenDict.app/Contents/MacOS/opencc && \
                              cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/
     }
