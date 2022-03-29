@@ -49,6 +49,9 @@ jobs:
           softwareupdate --all --install --force
           sudo xcode-select --print-path
           sudo xcode-select --switch /Library/Developer/CommandLineTools    
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'              
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -57,7 +60,7 @@ jobs:
           cached: 'false'
           modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
           setup-python: 'false'
-
+          py7zrversion: '==0.18.1'
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 

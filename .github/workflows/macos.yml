@@ -50,6 +50,9 @@ jobs:
           sudo xcode-select --print-path
           sudo xcode-select --switch /Library/Developer/CommandLineTools    
           # brew install qt@6   
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'          
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         # if: ${{ matrix.qt_ver == '5.15.2' }}
@@ -58,6 +61,7 @@ jobs:
           cached: 'false'
           modules: qtwebengine
           setup-python: 'false'
+          py7zrversion: '==0.18.1'
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
