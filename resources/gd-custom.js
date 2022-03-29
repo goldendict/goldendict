@@ -27,12 +27,17 @@ $(function() {
                 }
             } else {
                 index = href.indexOf("?");
-                if(index>-1)
-                {
-                    newLink = href.substring(0, index) + "?word=" + link;
+
+                if (link.indexOf("?gdanchor") > -1) {
+                    newLink = "gdlookup://localhost/" + link;
                 }
-                else{
-                    newLink=href+"?word=" + link;
+                else {
+                    if (index > -1) {
+                        newLink = href.substring(0, index) + "?word=" + link;
+                    }
+                    else {
+                        newLink = href + "?word=" + link;
+                    }
                 }
             }
             $(this).attr("href", newLink);
