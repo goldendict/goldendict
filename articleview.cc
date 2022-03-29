@@ -1705,7 +1705,6 @@ Config::InputPhrase ArticleView::getPhrase() const
 
 void ArticleView::print( QPrinter * printer ) const
 {
-#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   QEventLoop loop;
   bool result;
   auto printPreview = [ & ]( bool success )
@@ -1713,16 +1712,17 @@ void ArticleView::print( QPrinter * printer ) const
     result = success;
     loop.quit();
   };
-
+#if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   ui.definition->page()->print( printer, std::move( printPreview ) );
+#else
+  connect( ui.definition, &QWebEngineView::printFinished, &loop, std::move( printPreview ) );
+  ui.definition->print( printer );
+#endif
   loop.exec();
   if( !result )
   {
     qDebug() << "print failed";
   }
-#else
-  ui.definition->print( printer );
-#endif
 }
 
 void ArticleView::contextMenuRequested( QPoint const & pos )
