@@ -3336,8 +3336,8 @@ void MainWindow::on_pageSetup_triggered()
 
 void MainWindow::on_printPreview_triggered()
 {
-//  QPrinter printer;
-  QPrintPreviewDialog dialog(  &getPrinter(), this );
+  QPrinter printer;
+  QPrintPreviewDialog dialog(  &printer, this );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
