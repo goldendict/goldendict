@@ -2046,7 +2046,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
-  qDebug( "title = %s\n", r->title().toLocal8Bit().data() );
+  qDebug()<< "title = "<< r->title();
 
 }
 
@@ -2283,7 +2283,7 @@ void ArticleView::doubleClicked( QPoint pos )
   if ( cfg.preferences.doubleClickTranslates )
   {
     QString selectedText = ui.definition->selectedText();
-
+    emit sendWordToInputLine( selectedText );
     // Do some checks to make sure there's a sensible selection indeed
     if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
          selectedText.size() < 60 )
