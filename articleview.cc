@@ -813,12 +813,13 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
 #ifdef Q_OS_MAC
 
-    if (ev->type() == QEvent::NativeGesture) {
-        qDebug() << "it's a Native Gesture!";
-        // handle Qt::ZoomNativeGesture Qt::SmartZoomNativeGesture here
-        // ignore swipe left/right.
-        // QWebEngine can handle Qt::SmartZoomNativeGesture.
-    }
+  if( ev->type() == QEvent::NativeGesture )
+  {
+    qDebug() << "it's a Native Gesture!";
+    // handle Qt::ZoomNativeGesture Qt::SmartZoomNativeGesture here
+    // ignore swipe left/right.
+    // QWebEngine can handle Qt::SmartZoomNativeGesture.
+  }
 
 #else
   if( ev->type() == QEvent::Gesture )
