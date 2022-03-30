@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articleview.hh"
+#include "QtCore/qvariant.h"
 #include "folding.hh"
 #include "fulltextsearch.hh"
 #include "gddebug.hh"
@@ -178,27 +179,6 @@ public:
 
 void ArticleView::emitJavascriptFinished(){
     emit notifyJavascriptFinished();
-}
-//in webengine,javascript has been executed in async mode ,for simpility,use EventLoop to simulate sync execution.
-//a better solution would be to replace it with callback etc.
-QString ArticleView::runJavaScriptSync(QWebEnginePage* frame, const QString& variable)
-{
-    qDebug("%s", QString("runJavascriptScriptSync:%1").arg(variable).toLatin1().data());
-
-    QString result;
-    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-    frame->runJavaScript(variable, [=,&result](const QVariant &v)
-    {
-        if(loop->isRunning()){
-            if(v.isValid())
-                result = v.toString();
-            loop->quit();
-        }
-    });
-
-    loop->exec();
-    return result;
 }
 
 namespace {
@@ -700,13 +680,13 @@ void ArticleView::selectCurrentArticle()
         QString( "gdSelectArticle( '%1' );var elem=document.getElementById('%2'); if(elem!=undefined){elem.scrollIntoView(true);}" ).arg( getActiveArticleId() ,getCurrentArticle()) );
 }
 
-bool ArticleView::isFramedArticle( QString const & ca )
+void ArticleView::isFramedArticle( QString const & ca, const std::function< void( bool ) > & callback )
 {
-  if ( ca.isEmpty() )
-    return false;
+  if( ca.isEmpty() )
+    callback( false );
 
-  QString result=runJavaScriptSync( ui.definition->page(), QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) );
-  return result=="true";
+  ui.definition->page()->runJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ),
+                                        [ callback ]( const QVariant & res ) { callback( res.toBool() ); } );
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -718,39 +698,41 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 {
   // Don't try mangling audio urls, even if they are from the framed websites
 
-  if( ( url.scheme() == "http" || url.scheme() == "https" )
-      && ! Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
+  if( ( url.scheme() == "http" || url.scheme() == "https" ) && !Dictionary::WebMultimediaDownload::isAudioUrl( url ) )
   {
     // Maybe a link inside a website was clicked?
 
     QString ca = getCurrentArticle();
+    isFramedArticle( ca,
+                     [ =, &url ]( bool framed )
+                     {
+                       if( framed )
+                       {
+                         // QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
+                         QVariant result;
 
-    if ( isFramedArticle( ca ) )
-    {
-      //QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
-      QVariant result ;
+                         if( result.type() == QVariant::String )
+                         {
+                           // Looks this way
+                           contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
 
-      if ( result.type() == QVariant::String )
-      {
-        // Looks this way
-        contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
+                           QUrl target;
 
-        QUrl target;
+                           QString queryWord = result.toString();
 
-        QString queryWord = result.toString();
+                           // Empty requests are treated as no request, so we work this around by
+                           // adding a space.
+                           if( queryWord.isEmpty() )
+                             queryWord = " ";
 
-        // Empty requests are treated as no request, so we work this around by
-        // adding a space.
-        if ( queryWord.isEmpty() )
-          queryWord = " ";
+                           target.setScheme( "gdlookup" );
+                           target.setHost( "localhost" );
+                           target.setPath( "/" + queryWord );
 
-        target.setScheme( "gdlookup" );
-        target.setHost( "localhost" );
-        target.setPath( "/" + queryWord );
-
-        url = target;
-      }
-    }
+                           url = target;
+                         }
+                       }
+                     } );
   }
 }
 
@@ -829,6 +811,17 @@ bool ArticleView::handleF3( QObject * /*obj*/, QEvent * ev )
 
 bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 {
+#ifdef Q_OS_MAC
+
+  if( ev->type() == QEvent::NativeGesture )
+  {
+    qDebug() << "it's a Native Gesture!";
+    // handle Qt::ZoomNativeGesture Qt::SmartZoomNativeGesture here
+    // ignore swipe left/right.
+    // QWebEngine can handle Qt::SmartZoomNativeGesture.
+  }
+
+#else
   if( ev->type() == QEvent::Gesture )
   {
     Gestures::GestureResult result;
@@ -873,6 +866,7 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
     return handled;
   }
+#endif
 
   if( ev->type() == QEvent::MouseMove )
   {
@@ -1644,12 +1638,16 @@ void ArticleView::forward()
   ui.definition->forward();
 }
 
-bool ArticleView::hasSound()
+void ArticleView::hasSound( const std::function< void( bool ) > & callback )
 {
-  QVariant v = runJavaScriptSync( ui.definition->page(),"gdAudioLinks.first" );
-  if ( v.type() == QVariant::String )
-    return !v.toString().isEmpty();
-  return false;
+  ui.definition->page()->runJavaScript( "gdAudioLinks.first",
+                                        [ callback ]( const QVariant & v )
+                                        {
+                                          bool has = false;
+                                          if( v.type() == QVariant::String )
+                                            has = !v.toString().isEmpty();
+                                          callback( has );
+                                        } );
 }
 
 //use webengine javascript to playsound
@@ -1661,26 +1659,24 @@ void ArticleView::playSound()
     "   }          "
     "    return link;})();         ";
 
-  QString soundScript = runJavaScriptSync(ui.definition->page(), variable);
-  if (!soundScript.isEmpty())
-    openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
+  ui.definition->page()->runJavaScript(variable,[this](const QVariant & result){
+      if (result.type() == QVariant::String) {
+          QString soundScript = result.toString();
+          if (!soundScript.isEmpty())
+            openLink(QUrl::fromEncoded(soundScript.toUtf8()), ui.definition->url());
+      }
+  });
 }
 
 // use eventloop to turn the async callback to sync execution.
-QString ArticleView::toHtml()
+void ArticleView::toHtml( const std::function< void( QString & ) > & callback )
 {
-    QString result;
-    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-
-    ui.definition->page()->toHtml([loop, &result](const QString &content) {
-        if (loop->isRunning()) {
-            result = content;
-            loop->quit();
-        }
-    });
-    loop->exec();
-    return result;
+  ui.definition->page()->toHtml(
+    [ = ]( const QString & content )
+    {
+      QString html = content;
+      callback( html );
+    } );
 }
 
 void ArticleView::setHtml(const QString& content,const QUrl& baseUrl){
@@ -2507,10 +2503,9 @@ void ArticleView::highlightFTSResults()
   else
     regexp.setPattern( regString );
 
-  QRegularExpression::PatternOptions patternOptions = QRegularExpression::DotMatchesEverythingOption
-                                                      | QRegularExpression::UseUnicodePropertiesOption
-                                                      | QRegularExpression::MultilineOption
-                                                      | QRegularExpression::InvertedGreedinessOption;
+  QRegularExpression::PatternOptions patternOptions =
+    QRegularExpression::DotMatchesEverythingOption | QRegularExpression::UseUnicodePropertiesOption |
+    QRegularExpression::MultilineOption | QRegularExpression::InvertedGreedinessOption;
   if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
     patternOptions |= QRegularExpression::CaseInsensitiveOption;
   regexp.setPatternOptions( patternOptions );
@@ -2518,84 +2513,69 @@ void ArticleView::highlightFTSResults()
   if( regexp.pattern().isEmpty() || !regexp.isValid() )
     return;
 
-
-  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
-                                           new DiacriticsHandler : new AccentMarkHandler;
+  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ? new DiacriticsHandler : new AccentMarkHandler;
 
   // Clear any current selection
-  if ( ui.definition->selectedText().size() )
+  if( ui.definition->selectedText().size() )
   {
-    ui.definition->page()->
-           runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+    ui.definition->page()->runJavaScript( "window.getSelection().removeAllRanges();_=0;" );
   }
 
-  QString pageText = getWebPageTextSync(ui.definition->page());
-  marksHandler->setText( pageText );
-
-  QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
-  while( it.hasNext() )
-  {
-    QRegularExpressionMatch match = it.next();
-
-    // Mirror pos and matched length to original string
-    int pos = match.capturedStart();
-    int spos = marksHandler->mirrorPosition( pos );
-    int matched = marksHandler->mirrorPosition( pos + match.capturedLength() ) - spos;
-
-    // Add mark pos (if presented)
-    while( spos + matched < pageText.length()
-           && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
-      matched++;
-
-    if( matched > FTS::MaxMatchLengthForHighlightResults )
+  ui.definition->page()->toPlainText(
+    [ & ]( const QString pageText )
     {
-      gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
-                 match.capturedLength(), FTS::MaxMatchLengthForHighlightResults );
-    }
-    else
-      allMatches.append( pageText.mid( spos, matched ) );
-  }
+      marksHandler->setText( pageText );
 
-  ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
+      QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
+      while( it.hasNext() )
+      {
+        QRegularExpressionMatch match = it.next();
 
-  QWebEnginePage::FindFlags flags ( 0 );
+        // Mirror pos and matched length to original string
+        int pos     = match.capturedStart();
+        int spos    = marksHandler->mirrorPosition( pos );
+        int matched = marksHandler->mirrorPosition( pos + match.capturedLength() ) - spos;
 
-  if( ftsSearchMatchCase )
-    flags |= QWebEnginePage::FindCaseSensitively;
+        // Add mark pos (if presented)
+        while( spos + matched < pageText.length() && pageText[ spos + matched ].category() == QChar::Mark_NonSpacing )
+          matched++;
 
-  for( int x = 0; x < allMatches.size(); x++ )
-    ui.definition->findText( allMatches.at( x ), flags );
+        if( matched > FTS::MaxMatchLengthForHighlightResults )
+        {
+          gdWarning( "ArticleView::highlightFTSResults(): Too long match - skipped (matched length %i, allowed %i)",
+                     match.capturedLength(),
+                     FTS::MaxMatchLengthForHighlightResults );
+        }
+        else
+          allMatches.append( pageText.mid( spos, matched ) );
+      }
 
-  if( !allMatches.isEmpty() )
-  {
-      ui.definition->findText( allMatches.at( 0 ), flags );
-    //if( ui.definition->findText( allMatches.at( 0 ), flags ) )
-    {
-        ui.definition->page()->
-               runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
-                                   .arg( rangeVarName ) );
-    }
-  }
+      ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
 
-  ui.ftsSearchFrame->show();
-  ui.ftsSearchPrevious->setEnabled( false );
-  ui.ftsSearchNext->setEnabled( allMatches.size()>1 );
+      QWebEnginePage::FindFlags flags( 0 );
 
-  ftsSearchIsOpened = true;
-}
+      if( ftsSearchMatchCase )
+        flags |= QWebEnginePage::FindCaseSensitively;
 
-QString ArticleView::getWebPageTextSync(QWebEnginePage * page){
-    QString planText;
-    QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-    QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-    page->toPlainText([&](const QString &result)
-                      {
-                        if(loop->isRunning()){
-                          planText = result;
-                          loop->quit();
-                        } });
-    loop->exec();
-    return planText;
+      for( int x = 0; x < allMatches.size(); x++ )
+        ui.definition->findText( allMatches.at( x ), flags );
+
+      if( !allMatches.isEmpty() )
+      {
+        ui.definition->findText( allMatches.at( 0 ), flags );
+        // if( ui.definition->findText( allMatches.at( 0 ), flags ) )
+        {
+          ui.definition->page()->runJavaScript(
+            QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
+        }
+      }
+
+      ui.ftsSearchFrame->show();
+      ui.ftsSearchPrevious->setEnabled( false );
+      ui.ftsSearchNext->setEnabled( allMatches.size() > 1 );
+
+      ftsSearchIsOpened = true;
+    } );
 }
 
 void ArticleView::setActiveDictIds(ActiveDictIds ad) {

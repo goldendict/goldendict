@@ -112,8 +112,6 @@ public:
   /// Returns "gdfrom-" + dictionaryId.
   static QString scrollToFromDictionaryId( QString const & dictionaryId );
 
-  QString runJavaScriptSync(QWebEnginePage* frame, const QString& variable);
-
   void emitJavascriptFinished();
 
   /// Shows the definition of the given word with the given group.
@@ -158,8 +156,6 @@ public:
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
 
-  QString getWebPageTextSync(QWebEnginePage * page);
-
 public slots:
 
   /// Goes back in history
@@ -179,7 +175,7 @@ public:
   { ui.definition->reload(); }
 
   /// Returns true if there's an audio reference on the page, false otherwise.
-  bool hasSound();
+  void hasSound( const std::function< void( bool has ) > & callback );
 
   /// Plays the first audio reference on the page, if any.
   void playSound();
@@ -195,7 +191,7 @@ public:
   }
 
   /// Returns current article's text in .html format
-  QString toHtml();
+  void toHtml( const std::function< void( QString & ) > & callback );
 
   void setHtml(const QString& content, const QUrl& baseUrl);
   void setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
@@ -369,7 +365,7 @@ private:
 
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.
-  bool isFramedArticle( QString const & );
+  void isFramedArticle( QString const & article, const std::function< void( bool framed ) > & callback );
 
   /// Checks if the given link is to be opened externally, as opposed to opening
   /// it in-place.
