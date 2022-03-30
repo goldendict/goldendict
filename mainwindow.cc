@@ -3338,6 +3338,9 @@ void MainWindow::on_printPreview_triggered()
 {
   QPrinter printer;
   QPrintPreviewDialog dialog(  &printer, this );
+  auto combox = dialog.findChild< QComboBox *>();
+  int index=combox->findText( "100%" );
+  combox->setCurrentIndex( index );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
