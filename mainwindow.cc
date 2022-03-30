@@ -870,7 +870,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   prepareNewReleaseChecks();
 
   // makeDictionaries() didn't do deferred init - we do it here, at the end.
-  //doDeferredInit( dictionaries );
+  doDeferredInit( dictionaries );
 
   updateStatusLine();
 
