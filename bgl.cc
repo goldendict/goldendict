@@ -178,20 +178,7 @@ namespace
     }
 
     // Convert the word from utf8 to wide chars
-
-    if ( wcharBuffer.size() <= word.size() )
-      wcharBuffer.resize( word.size() + 1 );
-
-    long result = Utf8::decode( word.c_str(), word.size(),
-                                &wcharBuffer.front() );
-
-    if ( result < 0 )
-    {
-      gdWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
-      return;
-    }
-
-    indexedWords.addWord( wstring( &wcharBuffer.front(), result ), articleOffset );
+    indexedWords.addWord( Utf8::decode( word ), articleOffset );
   }
 
 

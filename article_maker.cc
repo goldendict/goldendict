@@ -126,7 +126,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     }
   }
 
-  result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
+  result += "<title>" + Html::escape( word.toStdString()) + "</title>";
 
   // This doesn't seem to be much of influence right now, but we'll keep
   // it anyway.
