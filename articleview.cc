@@ -704,7 +704,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 
     QString ca = getCurrentArticle();
     isFramedArticle( ca,
-                     [ =, &url ]( bool framed )
+                     [ &url, &contexts, &ca ]( bool framed )
                      {
                        if( framed )
                        {
