@@ -396,7 +396,7 @@ int main( int argc, char ** argv )
     app.installTranslator( &qtTranslator );
   }
 
-  translator.load( Config::getLocDir() + "/" + localeName );
+  translator.load( Config::getEmbedLocDir() + "/" + localeName );
   app.installTranslator( &translator );
 
   QTranslator webengineTs;

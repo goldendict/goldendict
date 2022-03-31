@@ -63,7 +63,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   // See which other translations do we have
 
-  QStringList availLocs = QDir( Config::getLocDir() ).entryList( QStringList( "*.qm" ),
+  QStringList availLocs = QDir( Config::getEmbedLocDir() ).entryList( QStringList( "*.qm" ),
                                                                  QDir::Files );
 
   // We need to sort by language name -- otherwise list looks really weird

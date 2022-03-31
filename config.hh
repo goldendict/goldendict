@@ -801,6 +801,7 @@ QString getUserQtCssFileName() ;
 QString getProgramDataDir() throw();
 
 /// Returns the directory storing program localizized files (.qm).
+QString getEmbedLocDir() throw();
 QString getLocDir() throw();
 
 /// Returns the directory storing program help files (.qch).
