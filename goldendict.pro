@@ -46,7 +46,7 @@ QT += sql
 CONFIG += exceptions \
     rtti \
     stl  \
-    c++11 \
+    c++14 \
     lrelease \
     embed_translations
 
@@ -63,6 +63,8 @@ LIBS += \
         -lz \
         -lbz2 \
         -llzo2
+
+CONFIG+=utf8_source
 
 win32 {
     TARGET = GoldenDict
@@ -101,8 +103,6 @@ win32 {
             -lavcodec
     }
 
-    CONFIG+=utf8_source
-
     RC_ICONS += icons/programicon.ico icons/programicon_old.ico
     INCLUDEPATH += winlibs/include
 
@@ -112,8 +112,6 @@ win32 {
     Release:DEFINES += NO_CONSOLE
 
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
-
-    CONFIG += zim_support
 
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
@@ -130,7 +128,6 @@ unix:!mac {
 
     CONFIG += link_pkgconfig
 
-    CONFIG += c++14
     PKGCONFIG += vorbisfile \
         vorbis \
         ogg \
