@@ -3755,8 +3755,8 @@ void MainWindow::applyWordsZoomLevel()
     groupList->setFont( font );
     groupList->fill( groupInstances );
     groupList->setCurrentIndex( n );
-    connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-             this, SLOT( currentGroupChanged( QString const & ) ) );
+    connect( groupList, &GroupComboBox::currentIndexChanged,
+                this, &MainWindow::currentGroupChanged );
   }
 
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
