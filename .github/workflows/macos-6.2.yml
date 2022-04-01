@@ -39,7 +39,7 @@ jobs:
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
-      version: 22.2.alpha
+      version: 22.4.alpha
 
     steps:
       # macos 11.0 默认环境变了,要指定

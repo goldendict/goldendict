@@ -39,7 +39,7 @@ jobs:
         qt_ver: [6.2.3]
         qt_arch: [gcc_64]
     env:
-      version: 22.2.alpha
+      version: 22.4.alpha
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3

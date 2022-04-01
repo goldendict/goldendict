@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
       
     env:
-      version: 22.2.alpha
+      version: 22.4.alpha
     # 步骤
     steps:
       - uses: actions/checkout@v3
