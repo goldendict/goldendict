@@ -63,11 +63,11 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   // See which other translations do we have
 
-  QStringList availLocs = QDir( Config::getLocDir() ).entryList( QStringList( "*.qm" ),
+  QStringList availLocs = QDir( Config::getEmbedLocDir() ).entryList( QStringList( "*.qm" ),
                                                                  QDir::Files );
 
   // We need to sort by language name -- otherwise list looks really weird
-  QMap< QString, QPair< QIcon, QString > > sortedLocs;
+  QMultiMap< QString, QPair< QIcon, QString > > sortedLocs;
 
   for( QStringList::iterator i = availLocs.begin(); i != availLocs.end(); ++i )
   {
@@ -77,15 +77,14 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     if ( lang == "qt" )
       continue; // We skip qt's own localizations
 
-    sortedLocs.insertMulti(
+    sortedLocs.insert(
       Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
       QPair< QIcon, QString >(
         QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
         i->mid( 0, i->size() - 3 ) ) );
   }
 
-  for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedLocs.begin();
-       i != sortedLocs.end(); ++i )
+  for( QMultiMap< QString, QPair< QIcon, QString > >::iterator i = sortedLocs.begin(); i != sortedLocs.end(); ++i )
     ui.interfaceLanguage->addItem( i.value().first, i.key(), i.value().second );
 
   for( int x = 0; x < ui.interfaceLanguage->count(); ++x )
@@ -105,7 +104,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QStringList availHelps = QDir( Config::getHelpDir() ).entryList( QStringList( "*.qch" ),
                                                                  QDir::Files );
 
-  QMap< QString, QPair< QIcon, QString > > sortedHelps;
+  QMultiMap< QString, QPair< QIcon, QString > > sortedHelps;
 
   for( QStringList::iterator i = availHelps.begin(); i != availHelps.end(); ++i )
   {
@@ -122,14 +121,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
         reg = lang.toUpper();
     }
 
-    sortedHelps.insertMulti(
+    sortedHelps.insert(
       Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
       QPair< QIcon, QString >(
         QIcon( QString( ":/flags/%1.png" ).arg( reg.toLower() ) ), lang + "_" + reg ) );
   }
 
-  for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedHelps.begin();
-       i != sortedHelps.end(); ++i )
+  for( QMultiMap< QString, QPair< QIcon, QString > >::iterator i = sortedHelps.begin(); i != sortedHelps.end(); ++i )
     ui.helpLanguage->addItem( i.value().first, i.key(), i.value().second );
 
   for( int x = 0; x < ui.helpLanguage->count(); ++x )
@@ -169,6 +167,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.cbAutostart->setChecked( p.autoStart );
   ui.doubleClickTranslates->setChecked( p.doubleClickTranslates );
   ui.selectBySingleClick->setChecked( p.selectWordBySingleClick);
+  ui.autoScrollToTargetArticle->setChecked( p.autoScrollToTargetArticle );
   ui.escKeyHidesMainWindow->setChecked( p.escKeyHidesMainWindow );
 
   ui.enableMainWindowHotkey->setChecked( p.enableMainWindowHotkey );
@@ -379,6 +378,7 @@ Config::Preferences Preferences::getPreferences()
   p.autoStart = ui.cbAutostart->isChecked();
   p.doubleClickTranslates = ui.doubleClickTranslates->isChecked();
   p.selectWordBySingleClick = ui.selectBySingleClick->isChecked();
+  p.autoScrollToTargetArticle = ui.autoScrollToTargetArticle->isChecked();
   p.escKeyHidesMainWindow = ui.escKeyHidesMainWindow->isChecked();
 
   p.enableMainWindowHotkey = ui.enableMainWindowHotkey->isChecked();

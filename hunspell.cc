@@ -13,7 +13,11 @@
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSemaphore>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#else
 #include <QRegExp>
+#endif
 #include <QDir>
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -73,16 +77,16 @@ public:
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
                                                  unsigned long maxResults )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
                                           wstring const &,
                                           bool )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual bool isLocalDictionary()
   { return true; }
@@ -329,7 +333,7 @@ void HunspellArticleRequest::run()
 sptr< DataRequest > HunspellDictionary::getArticle( wstring const & word,
                                                     vector< wstring > const &,
                                                     wstring const &, bool )
-  THROW_SPEC( std::exception )
+  
 {
   return new HunspellArticleRequest( word, getHunspellMutex(), hunspell );
 }
@@ -503,7 +507,7 @@ QVector< wstring > suggest( wstring & word, Mutex & hunspellMutex, Hunspell & hu
 
 
 sptr< WordSearchRequest > HunspellDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+  
 {
   return new HunspellHeadwordsRequest( word, getHunspellMutex(), hunspell );
 }
@@ -618,7 +622,7 @@ void HunspellPrefixMatchRequest::run()
 
 sptr< WordSearchRequest > HunspellDictionary::prefixMatch( wstring const & word,
                                                            unsigned long /*maxResults*/ )
-  THROW_SPEC( std::exception )
+  
 {
   return new HunspellPrefixMatchRequest( word, getHunspellMutex(), hunspell );
 }
@@ -734,10 +738,8 @@ string encodeToHunspell( Hunspell & hunspell, wstring const & str )
   void * out = &result.front();
   size_t outLeft = result.size();
 
-  if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
-    throw Iconv::Ex();
-
-  return string( &result.front(), result.size() - outLeft );
+  QString convStr= conv.convert( in, inLeft);
+  return FsEncoding::encode(convStr);
 }
 
 wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
@@ -752,16 +754,13 @@ wstring decodeFromHunspell( Hunspell & hunspell, char const * str )
   void * out = &result.front();
   size_t outLeft = result.size() * sizeof( wchar );
 
-  if ( conv.convert( in, inLeft, out, outLeft ) != Iconv::Success )
-    throw Iconv::Ex();
-
-  return wstring( &result.front(), result.size() - outLeft/sizeof( wchar ) );
+  QString convStr= conv.convert( in, inLeft);
+  return gd::toWString(convStr);
 }
-
 }
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Hunspell const & cfg )
-    THROW_SPEC( std::exception )
+    
 {
   vector< sptr< Dictionary::Class > > result;
 

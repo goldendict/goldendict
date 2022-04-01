@@ -60,11 +60,10 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults ) THROW_SPEC( std::exception );
+                                                 unsigned long maxResults ) ;
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
-                                          wstring const &, bool )
-    THROW_SPEC( std::exception );
+                                          wstring const &, bool );
 
   virtual quint32 getLangFrom() const
   { return langId; }
@@ -90,16 +89,18 @@ void MediaWikiDictionary::loadIcon() throw()
       loadIconFromFile( fInfo.absoluteFilePath(), true );
   }
   if( dictionaryIcon.isNull() )
-    dictionaryIcon = dictionaryNativeIcon = QIcon(":/icons/icon32_wiki.png");
+  {
+    if( url.contains( "tionary" ) )
+      dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/wiktionary.png" );
+    else
+      dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/icon32_wiki.png" );
+  }
   dictionaryIconLoaded = true;
 }
 
 class MediaWikiWordSearchRequest: public MediaWikiWordSearchRequestSlots
 {
   sptr< QNetworkReply > netReply;
-  bool livedLongEnough; // Indicates that the request has lived long enough
-                        // to be destroyed prematurely. Used to prevent excessive
-                        // network loads when typing search terms rapidly.
   bool isCancelling;
 
 public:
@@ -111,10 +112,6 @@ public:
 
   virtual void cancel();
 
-protected:
-
-  virtual void timerEvent( QTimerEvent * );
-
 private:
 
   virtual void downloadFinished();
@@ -122,8 +119,8 @@ private:
 
 MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
                                                         QString const & url,
-                                                        QNetworkAccessManager & mgr ):
-  livedLongEnough( false ), isCancelling( false )
+                                                        QNetworkAccessManager & mgr ) :
+  isCancelling( false )
 {
   GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
@@ -141,19 +138,6 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
            netReply.get(), SLOT( ignoreSslErrors() ) );
 
 #endif
-
-  // We start a timer to postpone early destruction, so a rapid type won't make
-  // unnecessary network load
-  startTimer( 200 );
-}
-
-void MediaWikiWordSearchRequest::timerEvent( QTimerEvent * ev )
-{
-  killTimer( ev->timerId() );
-  livedLongEnough = true;
-
-  if ( isCancelling )
-    finish();
 }
 
 MediaWikiWordSearchRequest::~MediaWikiWordSearchRequest()
@@ -166,17 +150,12 @@ void MediaWikiWordSearchRequest::cancel()
   // We either finish it in place, or in the timer handler
   isCancelling = true;
 
-  if ( netReply.get() )
+  if( netReply.get() )
     netReply.reset();
 
-  if ( livedLongEnough )
-  {
-    finish();
-  }
-  else
-  {
-    GD_DPRINTF("not long enough\n" );
-  }
+  finish();
+
+  GD_DPRINTF( "cancel the request" );
 }
 
 void MediaWikiWordSearchRequest::downloadFinished()
@@ -374,7 +353,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
-              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              articleNewString += articleString.mid( pos, match.capturedStart() - pos );
               pos = match.capturedEnd();
 
               QString link = match.captured( 1 );
@@ -403,7 +382,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
             if( pos )
             {
-              articleNewString += articleString.midRef( pos );
+              articleNewString += articleString.mid( pos );
               articleString = articleNewString;
               articleNewString.clear();
             }
@@ -428,7 +407,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
-              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              articleNewString += articleString.mid( pos, match.capturedStart() - pos );
               pos = match.capturedEnd();
 
               QString tag = match.captured();
@@ -445,7 +424,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
             if( pos )
             {
-              articleNewString += articleString.midRef( pos );
+              articleNewString += articleString.mid( pos );
               articleString = articleNewString;
               articleNewString.clear();
             }
@@ -491,7 +470,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             while( it.hasNext() )
             {
               QRegularExpressionMatch match = it.next();
-              articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+              articleNewString += articleString.mid( pos, match.capturedStart() - pos );
               pos = match.capturedEnd();
 
               QString srcset = match.captured();
@@ -501,7 +480,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             }
             if( pos )
             {
-              articleNewString += articleString.midRef( pos );
+              articleNewString += articleString.mid( pos );
               articleString = articleNewString;
               articleNewString.clear();
             }
@@ -545,7 +524,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 
 sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word,
                                                             unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   (void) maxResults;
   if ( word.size() > 80 )
@@ -561,7 +540,7 @@ sptr< WordSearchRequest > MediaWikiDictionary::prefixMatch( wstring const & word
 sptr< DataRequest > MediaWikiDictionary::getArticle( wstring const & word,
                                                      vector< wstring > const & alts,
                                                      wstring const &, bool )
-  THROW_SPEC( std::exception )
+  
 {
   if ( word.size() > 80 )
   {
@@ -579,7 +558,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       Dictionary::Initializing &,
                                       Config::MediaWikis const & wikis,
                                       QNetworkAccessManager & mgr )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > result;
 

@@ -1,0 +1,123 @@
+name: macos-6.2
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on: 
+  workflow_run:
+    workflows: [AutoTag]
+    types: [completed]
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+  #     - ".clang-format"
+  # pull_request:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-11]
+        qt_ver: [6.2.3]
+        qt_arch: [clang_64]
+    env:
+      targetName: GoldenDict
+      version: 22.4.Summer
+
+    steps:
+      # macos 11.0 默认环境变了,要指定
+      - name: prepare env
+        if: ${{ matrix.os == 'macos-11' }}
+        run: |
+          softwareupdate --all --install --force
+          sudo xcode-select --print-path
+          sudo xcode-select --switch /Library/Developer/CommandLineTools    
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'              
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
+          setup-python: 'false'
+          py7zrversion: '==0.18.1'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
+
+      - name: build macos
+        run: |
+          wget ftp://ftp.sra.co.jp/pub/misc/eb/eb-4.4.3.tar.bz2
+          tar xvjf eb-4.4.3.tar.bz2
+          cd eb-4.4.3 && ./configure && make -j 8 && sudo make install && cd ..
+          #brew install qt # or use official offline installer
+          brew install opencc libao hunspell ffmpeg@5 libtiff xz lzo libogg libvorbis zstd
+          qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
+          make 
+      # 打包
+      - name: package
+        run: |
+          macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
+          otool -L  GoldenDict.app/Contents/MacOS/GoldenDict
+      - name: Set outputs
+        id: vars
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
+          echo "::set-output name=release_time::$(date +'%H%M%S')"  
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          CHANGELOG="$(git log --oneline --no-decorate $previousTag..HEAD)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"           
+      # tag 上传Release
+      - name: uploadRelease
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ env.targetName }}.dmg
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}.dmg
+          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
+          prerelease: false
+          body: |
+            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+            # goldendict.exe can not used alone 
+            if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64(Intel Kind)
+            auto built by github action. use on your on risk:-)   
+
+            CHANGES:
+            ${{ steps.vars.outputs.COMMIT_SUMMARY }}            

@@ -22,7 +22,6 @@
 
 #include <errno.h>
 #include <zlib.h>
-#include <iconv.h>
 #include <lzo/lzo1x.h>
 
 #include <QtEndian>
@@ -33,8 +32,11 @@
 #include <QDomDocument>
 #include <QTextDocumentFragment>
 #include <QDataStream>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QTextCodec>
+#else
 #include <QTextCodec>
-
+#endif
 #include "decompress.hh"
 #include "gddebug.hh"
 #include "ripemd.hh"
@@ -165,7 +167,7 @@ bool MdictParser::readNextHeadWordIndex( MdictParser::HeadWordIndex & headWordIn
     return false;
 
   headWordIndex = splitHeadWordBlock( decompressed );
-  headWordBlockInfosIter_++;
+  ++headWordBlockInfosIter_;
   return true;
 }
 
@@ -357,7 +359,7 @@ bool MdictParser::readHeader( QDataStream & in )
   if ( headerAttributes.contains( "StyleSheet" ) )
   {
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
-    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), QString::KeepEmptyParts );
+    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt::KeepEmptyParts );
 
     for ( int i = 0; i < lines.size() - 3; i += 3 )
     {
@@ -624,7 +626,7 @@ QString & MdictParser::substituteStylesheet( QString & article, MdictParser::Sty
   {
     QRegularExpressionMatch match = it.next();
     int styleId = match.captured( 1 ).toInt();
-    articleNewText += article.midRef( pos, match.capturedStart() - pos );
+    articleNewText += article.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     StyleSheets::const_iterator iter = styleSheets.find( styleId );
@@ -645,7 +647,7 @@ QString & MdictParser::substituteStylesheet( QString & article, MdictParser::Sty
   }
   if( pos )
   {
-    articleNewText += article.midRef( pos );
+    articleNewText += article.mid( pos );
     article = articleNewText;
     articleNewText.clear();
   }

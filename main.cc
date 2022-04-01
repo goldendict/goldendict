@@ -1,4 +1,4 @@
-/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
+﻿/* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <stdio.h>
@@ -90,6 +90,7 @@ void gdMessageHandler( QtMsgType type, const QMessageLogContext &context, const 
 
   if( logFilePtr && logFilePtr->isOpen() )
   {
+    message.insert( 0, QDateTime::currentDateTime().toString( "yyyy-MM-dd HH:mm:ss.zzz " ) );
     message.append( "\n" );
     logFilePtr->write( message.toUtf8() );
     logFilePtr->flush();
@@ -328,22 +329,7 @@ int main( int argc, char ** argv )
 #endif
 
   // Load translations for system locale
-
-  QTranslator qtTranslator;
-
   QString localeName = QLocale::system().name();
-
-  if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
-    qtTranslator.load( "qt_" + localeName,
-                       QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
-
-  app.installTranslator( &qtTranslator );
-
-  QTranslator translator;
-
-  translator.load( Config::getLocDir() + "/" + localeName );
-
-  app.installTranslator( &translator );
 
   Config::Class cfg;
   for( ; ; )
@@ -395,16 +381,28 @@ int main( int argc, char ** argv )
   }
 
   // Reload translations for user selected locale is nesessary
-
+  QTranslator qtTranslator;
+  QTranslator translator;
   if( !cfg.preferences.interfaceLanguage.isEmpty() && localeName != cfg.preferences.interfaceLanguage )
   {
     localeName = cfg.preferences.interfaceLanguage;
+  }
 
-    if ( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
-      qtTranslator.load( "qt_" + localeName,
-                                 QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+  QLocale locale( localeName );
+  QLocale::setDefault( locale );
+  if( !qtTranslator.load( "qt_" + localeName, Config::getLocDir() ) )
+  {
+    qtTranslator.load( "qt_" + localeName, QLibraryInfo::location( QLibraryInfo::TranslationsPath ) );
+    app.installTranslator( &qtTranslator );
+  }
 
-    translator.load( Config::getLocDir() + "/" + localeName );
+  translator.load( Config::getEmbedLocDir() + "/" + localeName );
+  app.installTranslator( &translator );
+
+  QTranslator webengineTs;
+  if( webengineTs.load( "qtwebengine_" + localeName, Config::getLocDir() ) )
+  {
+    app.installTranslator( &webengineTs );
   }
 
   // Prevent app from quitting spontaneously when it works with scan popup

@@ -191,6 +191,49 @@ public:
 
 };
 
+struct MdxRegex
+{
+  MdxRegex() :
+    allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
+                QRegularExpression::CaseInsensitiveOption ),
+    wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
+                   QRegularExpression::CaseInsensitiveOption ),
+    anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)", QRegularExpression::CaseInsensitiveOption ),
+    anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)", QRegularExpression::CaseInsensitiveOption ),
+    anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#", QRegularExpression::CaseInsensitiveOption ),
+    audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
+             QRegularExpression::CaseInsensitiveOption | QRegularExpression::InvertedGreedinessOption ),
+    stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://"
+              "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
+              QRegularExpression::CaseInsensitiveOption ),
+    stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
+               "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
+               QRegularExpression::CaseInsensitiveOption ),
+    inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
+                    QRegularExpression::CaseInsensitiveOption ),
+    closeScriptTagRe( "<\\s*/script\\s*>", QRegularExpression::CaseInsensitiveOption ),
+    srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://"
+           "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
+           QRegularExpression::CaseInsensitiveOption ),
+    srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
+            "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
+            QRegularExpression::CaseInsensitiveOption )
+  {
+  }
+  QRegularExpression allLinksRe;
+  QRegularExpression wordCrossLink;
+  QRegularExpression anchorIdRe;
+  QRegularExpression anchorIdRe2;
+  QRegularExpression anchorLinkRe;
+  QRegularExpression audioRe;
+  QRegularExpression stylesRe;
+  QRegularExpression stylesRe2;
+  QRegularExpression inlineScriptRe;
+  QRegularExpression closeScriptTagRe;
+  QRegularExpression srcRe;
+  QRegularExpression srcRe2;
+};
+
 class MdxDictionary: public BtreeIndexing::BtreeDictionary
 {
   Mutex idxMutex;
@@ -210,6 +253,8 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
 
   string initError;
   QString cacheDirName;
+
+  static MdxRegex mdxRx;
 
 public:
 
@@ -252,8 +297,8 @@ public:
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const & word,
                                                       vector< wstring > const & alts,
                                                       wstring const &,
-                                                      bool ignoreDiacritics ) THROW_SPEC( std::exception );
-  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
+                                                      bool ignoreDiacritics ) ;
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) ;
   virtual QString const & getDescription();
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
@@ -268,8 +313,8 @@ public:
 
   virtual void setFTSParameters( Config::FullTextSearch const & fts )
   {
-    if( ensureInitDone().size() )
-      return;
+//    if( ensureInitDone().size() )
+//      return;
 
     can_FTS = fts.enabled
               && !fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive )
@@ -300,6 +345,8 @@ private:
   friend class MddResourceRequest;
   friend class MdxDeferredInitRunnable;
 };
+
+MdxRegex MdxDictionary::mdxRx;
 
 MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
                               vector<string> const & dictionaryFiles ):
@@ -725,7 +772,7 @@ void MdxArticleRequest::run()
 }
 
 sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, const vector<wstring> & alts,
-                                                         const wstring &, bool ignoreDiacritics ) THROW_SPEC( std::exception )
+                                                         const wstring &, bool ignoreDiacritics ) 
 {
   return new MdxArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -848,7 +895,7 @@ void MddResourceRequest::run()
     catch ( File::exCantOpen & )
     {
       for ( vector< sptr< IndexedMdd > >::const_iterator i = dict.mddResources.begin();
-            i != dict.mddResources.end(); i++  )
+            i != dict.mddResources.end(); ++i  )
       {
         sptr< IndexedMdd > mddResource = *i;
         if ( mddResource->loadFile( resourceName, data ) )
@@ -896,7 +943,7 @@ void MddResourceRequest::run()
         while ( it.hasNext() )
         {
           QRegularExpressionMatch match = it.next();
-          newCSS += css.midRef( pos, match.capturedStart() - pos );
+          newCSS += css.mid( pos, match.capturedStart() - pos );
           pos = match.capturedEnd();
           QString url = match.captured( 2 );
 
@@ -915,7 +962,7 @@ void MddResourceRequest::run()
         }
         if( pos )
         {
-          newCSS += css.midRef( pos );
+          newCSS += css.mid( pos );
           css = newCSS;
           newCSS.clear();
         }
@@ -931,7 +978,7 @@ void MddResourceRequest::run()
   finish();
 }
 
-sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) THROW_SPEC( std::exception )
+sptr<Dictionary::DataRequest> MdxDictionary::getResource( const string & name ) 
 {
   return new MddResourceRequest( *this, name );
 }
@@ -1009,24 +1056,6 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
   if( !noFilter )
     article = filterResource( articleId, article );
 
-  // Check for unclosed <span> and <div>
-
-  int openTags = article.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );
-  int closedTags = article.count( QRegExp( "<\\s*/span\\s*>", Qt::CaseInsensitive ) );
-  while( openTags > closedTags )
-  {
-    article += "</span>";
-    closedTags += 1;
-  }
-
-  openTags = article.count( QRegExp( "<\\s*div\\b", Qt::CaseInsensitive ) );
-  closedTags = article.count( QRegExp( "<\\s*/div\\s*>", Qt::CaseInsensitive ) );
-  while( openTags > closedTags )
-  {
-    article += "</div>";
-    closedTags += 1;
-  }
-
   articleText = string( article.toUtf8().constData() );
 }
 
@@ -1035,35 +1064,11 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
-  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
-                                 QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
-                                    QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)",
-                                 QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)",
-                                  QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#",
-                                   QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
-                              QRegularExpression::CaseInsensitiveOption
-                              | QRegularExpression::InvertedGreedinessOption );
-  QRegularExpression stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-                               QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-                                QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
-                                     QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression closeScriptTagRe( "<\\s*/script\\s*>",
-                                       QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-                            QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-                             QRegularExpression::CaseInsensitiveOption );
+
 
   QString articleNewText;
   int linkPos = 0;
-  QRegularExpressionMatchIterator it = allLinksRe.globalMatch( article );
+  QRegularExpressionMatchIterator it = mdxRx.allLinksRe.globalMatch( article );
   while( it.hasNext() )
   {
     QRegularExpressionMatch allLinksMatch = it.next();
@@ -1071,7 +1076,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( allLinksMatch.capturedEnd() < linkPos )
       continue;
 
-    articleNewText += article.midRef( linkPos, allLinksMatch.capturedStart() - linkPos );
+    articleNewText += article.mid( linkPos, allLinksMatch.capturedStart() - linkPos );
     linkPos = allLinksMatch.capturedEnd();
 
     QString linkTxt = allLinksMatch.captured();
@@ -1080,18 +1085,18 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 
     if( !linkType.isEmpty() && linkType.at( 0 ) == 'a' )
     {
-      QRegularExpressionMatch match = anchorIdRe.match( linkTxt );
+      QRegularExpressionMatch match = mdxRx.anchorIdRe.match( linkTxt );
       if( match.hasMatch() )
       {
         QString newText = match.captured( 1 ) + match.captured( 2 ) + uniquePrefix;
         newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
       }
       else
-        newLink = linkTxt.replace( anchorIdRe2, "\\1\"" + uniquePrefix + "\\2\"" );
+        newLink = linkTxt.replace( mdxRx.anchorIdRe2, "\\1\"" + uniquePrefix + "\\2\"" );
 
-      newLink = newLink.replace( anchorLinkRe, "\\1#" + uniquePrefix );
+      newLink = newLink.replace( mdxRx.anchorLinkRe, "\\1#" + uniquePrefix );
 
-      match = audioRe.match( newLink );
+      match = mdxRx.audioRe.match( newLink );
       if( match.hasMatch() )
       {
         // sounds and audio link script
@@ -1102,7 +1107,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                   + newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
       }
 
-      match = wordCrossLink.match( newLink );
+      match = mdxRx.wordCrossLink.match( newLink );
       if( match.hasMatch() )
       {
         QString newTxt = match.captured( 1 ) + match.captured( 2 )
@@ -1120,7 +1125,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( linkType.compare( "link" ) == 0 )
     {
       // stylesheets
-      QRegularExpressionMatch match = stylesRe.match( linkTxt );
+      QRegularExpressionMatch match = mdxRx.stylesRe.match( linkTxt );
       if( match.hasMatch() )
       {
         QString newText = match.captured( 1 ) + match.captured( 2 )
@@ -1129,7 +1134,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
       }
       else
-        newLink = linkTxt.replace( stylesRe2,
+        newLink = linkTxt.replace( mdxRx.stylesRe2,
                                    "\\1\"bres://" + id + "/\\2\"" );
     }
     else
@@ -1137,23 +1142,23 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         || linkType.compare( "source" ) == 0 )
     {
       // javascripts and images
-      QRegularExpressionMatch match = inlineScriptRe.match( linkTxt );
+      QRegularExpressionMatch match = mdxRx.inlineScriptRe.match( linkTxt );
       if( linkType.at( 1 ) == 'c' // "script" tag
           && match.hasMatch() && match.capturedLength() == linkTxt.length() )
       {
         // skip inline scripts
         articleNewText += linkTxt;
-        match = closeScriptTagRe.match( article, linkPos );
+        match = mdxRx.closeScriptTagRe.match( article, linkPos );
         if( match.hasMatch() )
         {
-          articleNewText += article.midRef( linkPos, match.capturedEnd() - linkPos );
+          articleNewText += article.mid( linkPos, match.capturedEnd() - linkPos );
           linkPos = match.capturedEnd();
         }
         continue;
       }
       else
       {
-        match = srcRe.match( linkTxt );
+        match = mdxRx.srcRe.match( linkTxt );
         if( match.hasMatch() )
         {
           QString newText;
@@ -1174,7 +1179,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
           newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
         }
         else
-          newLink = linkTxt.replace( srcRe2,
+          newLink = linkTxt.replace( mdxRx.srcRe2,
                                      "\\1\"bres://" + id + "/\\2\"" );
       }
     }
@@ -1187,7 +1192,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   }
   if( linkPos )
   {
-    articleNewText += article.midRef( linkPos );
+    articleNewText += article.mid( linkPos );
     article = articleNewText;
   }
 
@@ -1272,7 +1277,7 @@ QString MdxDictionary::getCachedFileName( QString filename )
         catch ( File::exCantOpen & )
         {
           for ( vector< sptr< IndexedMdd > >::const_iterator i = mddResources.begin();
-                i != mddResources.end(); i++  )
+                i != mddResources.end(); ++i )
           {
             sptr< IndexedMdd > mddResource = *i;
             if ( mddResource->loadFile( resourceName, data ) )
@@ -1441,18 +1446,21 @@ static void findResourceFiles( string const & mdx, vector< string > & dictFiles 
   }
 }
 
-vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
+vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > & fileNames,
                                                       string const & indicesDir,
-                                                      Dictionary::Initializing & initializing ) THROW_SPEC( std::exception )
+                                                      Dictionary::Initializing & initializing ) 
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
-  for ( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end(); i++ )
+  for ( vector< string >::iterator i = fileNames.begin(); i != fileNames.end();  )
   {
     // Skip files with the extensions different to .mdx to speed up the
     // scanning
     if ( i->size() < 4 || strcasecmp( i->c_str() + ( i->size() - 4 ), ".mdx" ) != 0 )
+    {
+      i++;
       continue;
+    }
 
     vector< string > dictFiles( 1, *i );
     findResourceFiles( *i, dictFiles );
@@ -1477,7 +1485,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       initializing.indexingDictionary( title );
 
       for ( vector< string >::const_iterator mddIter = dictFiles.begin() + 1;
-            mddIter != dictFiles.end(); mddIter++ )
+            mddIter != dictFiles.end(); ++mddIter )
       {
         if ( File::exists( *mddIter ) )
         {
@@ -1576,7 +1584,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
         idxHeader.styleSheetCount = styleSheets.size();
 
         for ( MdictParser::StyleSheets::const_iterator iter = styleSheets.begin();
-              iter != styleSheets.end(); iter++ )
+              iter != styleSheets.end(); ++iter )
         {
           string styleBegin( iter->second.first.toUtf8().constData() );
           string styleEnd( iter->second.second.toUtf8().constData() );
@@ -1607,7 +1615,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       // Build index info for each mdd file
       vector< IndexInfo > mddIndexInfos;
       for ( vector< sptr< IndexedWords > >::const_iterator mddIndexIter = mddIndices.begin();
-            mddIndexIter != mddIndices.end(); mddIndexIter++ )
+            mddIndexIter != mddIndices.end(); ++mddIndexIter )
       {
         IndexInfo resourceIdxInfo = BtreeIndexing::buildIndex( *( *mddIndexIter ), idx );
         mddIndexInfos.push_back( resourceIdxInfo );
@@ -1639,6 +1647,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
     }
 
     dictionaries.push_back( new MdxDictionary( dictId, indexFile, dictFiles ) );
+
+    i=fileNames.erase(i);
   }
 
   return dictionaries;

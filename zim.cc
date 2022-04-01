@@ -584,10 +584,10 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
                                                         vector< wstring > const & alts,
                                                         wstring const &,
                                                         bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual QString const& getDescription();
 
@@ -758,7 +758,7 @@ string ZimDictionary::convert( const string & in )
   {
     QRegularExpressionMatch match = it.next();
 
-    newText += text.midRef( pos, match.capturedStart() - pos );
+    newText += text.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QStringList list = match.capturedTexts();
@@ -775,7 +775,8 @@ string ZimDictionary::convert( const string & in )
     if( linksType == UNKNOWN && tag.indexOf( '/' ) >= 0 )
     {
       QString word = QUrl::fromPercentEncoding( tag.toLatin1() );
-      word.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+      QRegularExpression htmlRx( "\\.(s|)htm(l|)$", QRegularExpression::CaseInsensitiveOption );
+      word.remove( htmlRx ).
            replace( "_", " " );
 
       vector< WordArticleLink > links;
@@ -787,7 +788,7 @@ string ZimDictionary::convert( const string & in )
       }
       else
       {
-        word.remove( QRegExp(".*/") );
+        word.remove( QRegularExpression(".*/") );
         links = findArticles( gd::toWString( word ) );
         if( !links.empty() )
         {
@@ -799,15 +800,15 @@ string ZimDictionary::convert( const string & in )
 
     if( linksType == SLASH || linksType == UNKNOWN )
     {
-      tag.remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+      tag.remove( QRegularExpression( "\\.(s|)htm(l|)$", QRegularExpression::PatternOption::CaseInsensitiveOption ) ).
           replace( "_", "%20" ).
           prepend( "<a href=\"gdlookup://localhost/" ).
           append( "\" " + list[4] + ">" );
     }
     else
     {
-      tag.remove( QRegExp(".*/") ).
-          remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+      tag.remove( QRegularExpression(".*/") ).
+          remove( QRegularExpression( "\\.(s|)htm(l|)$", QRegularExpression::PatternOption::CaseInsensitiveOption ) ).
           replace( "_", "%20" ).
           prepend( "<a href=\"gdlookup://localhost/" ).
           append( "\" " + list[4] + ">" );
@@ -817,7 +818,7 @@ string ZimDictionary::convert( const string & in )
   }
   if( pos )
   {
-    newText += text.midRef( pos );
+    newText += text.mid( pos );
     text = newText;
   }
   newText.clear();
@@ -833,7 +834,7 @@ string ZimDictionary::convert( const string & in )
   {
     QRegularExpressionMatch match = it.next();
 
-    newText += text.midRef( pos, match.capturedStart() - pos );
+    newText += text.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QStringList list = match.capturedTexts();
@@ -842,7 +843,7 @@ string ZimDictionary::convert( const string & in )
       list.append( QString() );
 
     QString tag = list[2];
-    tag.replace( QRegExp( "&lt;br( |)(\\\\|/|)&gt;", Qt::CaseInsensitive ) , "<br/>" ).
+    tag.replace( QRegularExpression( "&lt;br( |)(\\\\|/|)&gt;", QRegularExpression::PatternOption::CaseInsensitiveOption ) , "<br/>" ).
         prepend( list[1] ).
         append( "</a>" );
 
@@ -850,7 +851,7 @@ string ZimDictionary::convert( const string & in )
   }
   if( pos )
   {
-    newText += text.midRef( pos );
+    newText += text.mid( pos );
     text = newText;
   }
   newText.clear();
@@ -1329,7 +1330,7 @@ sptr< Dictionary::DataRequest > ZimDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new ZimArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1475,7 +1476,7 @@ void ZimResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > ZimDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new ZimResourceRequest( *this, name );
 }
@@ -1487,7 +1488,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

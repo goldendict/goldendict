@@ -622,6 +622,8 @@ wstring trimWhitespaceOrPunct( wstring const & in )
 
 wstring trimWhitespace( wstring const & in )
 {
+  if( in.empty() )
+    return in;
   wchar const * wordBegin = in.c_str();
   wstring::size_type wordSize = in.size();
 

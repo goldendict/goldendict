@@ -3,11 +3,7 @@
 #include <map>
 #include <QCoreApplication>
 
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
 
 namespace Language {
 
@@ -464,6 +460,6 @@ QString localizedStringForId( Id langId )
     if( iconId.isEmpty() )
       return name;
     else
-      return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId ).arg( name );
+      return QString( "<img src=\":/flags/%1.png\"> %2" ).arg( iconId , name );
   }
 }

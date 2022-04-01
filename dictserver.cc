@@ -103,7 +103,7 @@ bool connectToServer( QTcpSocket & socket, QString const & url,
       QString authCommand = QString( "AUTH " );
       QString authString = msgId;
 
-      int pos = serverUrl.userInfo().indexOf( QRegExp( "[:;]" ) );
+      int pos = serverUrl.userInfo().indexOf( QRegularExpression( "[:;]" ) );
       if( pos > 0 )
       {
         authCommand += serverUrl.userInfo().left( pos );
@@ -200,11 +200,11 @@ public:
     if( pos < 0 )
       url = "dict://" + url;
 
-    databases = database_.split( QRegExp( "[ ,;]" ), Qt::SkipEmptyParts );
+    databases = database_.split( QRegularExpression( "[ ,;]" ), Qt::SkipEmptyParts );
     if( databases.isEmpty() )
       databases.append( "*" );
 
-    strategies = strategies_.split( QRegExp( "[ ,;]" ), Qt::SkipEmptyParts );
+    strategies = strategies_.split( QRegularExpression( "[ ,;]" ), Qt::SkipEmptyParts );
     if( strategies.isEmpty() )
       strategies.append( "prefix" );
   }
@@ -222,11 +222,11 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults ) THROW_SPEC( std::exception );
+                                                 unsigned long maxResults ) ;
 
   virtual sptr< DataRequest > getArticle( wstring const &, vector< wstring > const & alts,
                                           wstring const &, bool )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual quint32 getLangFrom() const
   { return langId; }
@@ -830,7 +830,7 @@ void DictServerArticleRequest::run()
               while( it.hasNext() )
               {
                 QRegularExpressionMatch match = it.next();
-                articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+                articleNewText += articleText.mid( pos, match.capturedStart() - pos );
                 pos = match.capturedEnd();
 
                 QString phonetic_text = match.captured( 1 );
@@ -840,7 +840,7 @@ void DictServerArticleRequest::run()
               }
               if( pos )
               {
-                articleNewText += articleText.midRef( pos );
+                articleNewText += articleText.mid( pos );
                 articleText = articleNewText;
                 articleNewText.clear();
               }
@@ -852,7 +852,7 @@ void DictServerArticleRequest::run()
               while( it.hasNext() )
               {
                 QRegularExpressionMatch match = it.next();
-                articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+                articleNewText += articleText.mid( pos, match.capturedStart() - pos );
                 pos = match.capturedEnd();
 
                 QString link = match.captured( 1 );
@@ -866,7 +866,7 @@ void DictServerArticleRequest::run()
               }
               if( pos )
               {
-                articleNewText += articleText.midRef( pos );
+                articleNewText += articleText.mid( pos );
                 articleText = articleNewText;
                 articleNewText.clear();
               }
@@ -918,7 +918,7 @@ void DictServerArticleRequest::cancel()
 
 sptr< WordSearchRequest > DictServerDictionary::prefixMatch( wstring const & word,
                                                              unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   (void) maxResults;
   if ( word.size() > 80 )
@@ -934,7 +934,7 @@ sptr< WordSearchRequest > DictServerDictionary::prefixMatch( wstring const & wor
 sptr< DataRequest > DictServerDictionary::getArticle( wstring const & word,
                                                       vector< wstring > const &,
                                                       wstring const &, bool )
-  THROW_SPEC( std::exception )
+  
 {
   if ( word.size() > 80 )
   {
@@ -949,7 +949,7 @@ sptr< DataRequest > DictServerDictionary::getArticle( wstring const & word,
 } // Anonimuos namespace
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::DictServers const & servers )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > result;
 

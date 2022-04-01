@@ -3,15 +3,9 @@
 
 namespace gd
 {
-
-
   QString toQString( wstring const & in )
   {
-#ifdef __WIN32
-    return QString::fromUcs4( in.c_str() );
-#else
-      return QString::fromStdWString(in);
-#endif
+    return QString::fromStdU32String( in );
   }
 
   wstring toWString( QString const & in )
@@ -32,6 +26,11 @@ namespace gd
   wstring normalize( const wstring & str )
   {
     return gd::toWString( gd::toQString( str ).normalized( QString::NormalizationForm_C ) );
+  }
+
+  std::string toStdString(const QString& str)
+  {
+      return str.toStdString();
   }
 
 }

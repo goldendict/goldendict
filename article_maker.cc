@@ -56,7 +56,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script type=\"text/javascript\"  "
               "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
 
-    result += "<script> var $_$=$.noConflict(true); </script>";
+    result += "<script> var $_$=$.noConflict(); </script>";
 
     //custom javascript
     result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd-custom.js\"></script>";
@@ -126,7 +126,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     }
   }
 
-  result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
+  result += "<title>" + Html::escape( word.toStdString()) + "</title>";
 
   // This doesn't seem to be much of influence right now, but we'll keep
   // it anyway.

@@ -12,7 +12,6 @@
 #include <QKeySequence>
 #include <QSet>
 #include <QMetaType>
-#include "cpp_features.hh"
 #include "ex.hh"
 
 #ifdef Q_OS_WIN
@@ -293,6 +292,7 @@ struct Preferences
   bool autoStart;
   bool doubleClickTranslates;
   bool selectWordBySingleClick;
+  bool autoScrollToTargetArticle;
   bool escKeyHidesMainWindow;
   bool alwaysOnTop;
 
@@ -763,44 +763,45 @@ DEF_EX( exCantWriteConfigFile, "Can't write the configuration file", exError )
 DEF_EX( exMalformedConfigFile, "The configuration file is malformed", exError )
 
 /// Loads the configuration, or creates the default one if none is present
-Class load() THROW_SPEC( exError );
+Class load() ;
 
 /// Saves the configuration
-void save( Class const & ) THROW_SPEC( exError );
+void save( Class const & ) ;
 
 /// Returns the configuration file name.
 QString getConfigFileName();
 
 /// Returns the main configuration directory.
-QString getConfigDir() THROW_SPEC( exError );
+QString getConfigDir() ;
 
 /// Returns the index directory, where the indices are to be stored.
-QString getIndexDir() THROW_SPEC( exError );
+QString getIndexDir() ;
 
 /// Returns the filename of a .pid file which should store current pid of
 /// the process.
-QString getPidFileName() THROW_SPEC( exError );
+QString getPidFileName() ;
 
 /// Returns the filename of a history file which stores search history.
-QString getHistoryFileName() THROW_SPEC( exError );
+QString getHistoryFileName() ;
 
 /// Returns the filename of a favorities file.
-QString getFavoritiesFileName() THROW_SPEC( exError );
+QString getFavoritiesFileName() ;
 
 /// Returns the user .css file name.
-QString getUserCssFileName() THROW_SPEC( exError );
+QString getUserCssFileName() ;
 
 /// Returns the user .css file name used for printing only.
-QString getUserCssPrintFileName() THROW_SPEC( exError );
+QString getUserCssPrintFileName() ;
 
 /// Returns the user .css file name for the Qt interface customization.
-QString getUserQtCssFileName() THROW_SPEC( exError );
+QString getUserQtCssFileName() ;
 
 /// Returns the program's data dir. Under Linux that would be something like
 /// /usr/share/apps/goldendict, under Windows C:/Program Files/GoldenDict.
 QString getProgramDataDir() throw();
 
 /// Returns the directory storing program localizized files (.qm).
+QString getEmbedLocDir() throw();
 QString getLocDir() throw();
 
 /// Returns the directory storing program help files (.qch).
@@ -824,7 +825,7 @@ QString getPortableVersionDictionaryDir() throw();
 QString getPortableVersionMorphoDir() throw();
 
 /// Returns the add-on styles directory.
-QString getStylesDir() throw();
+QString getStylesDir();
 
 /// Returns the directory where user-specific non-essential (cached) data should be written.
 QString getCacheDir() throw();

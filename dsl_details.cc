@@ -144,11 +144,9 @@ string findCodeForDslId( int id )
 bool isAtSignFirst( wstring const & str )
 {
   // Test if '@' is first in string except spaces and dsl tags
-  QRegExp reg( "[ \\t]*(?:\\[[^\\]]+\\][ \\t]*)*@", Qt::CaseInsensitive, QRegExp::RegExp2 );
-  return reg.indexIn( gd::toQString( str ) ) == 0;
+  QRegularExpression reg( "[ \\t]*(?:\\[[^\\]]+\\][ \\t]*)*@", QRegularExpression::PatternOption::CaseInsensitiveOption);
+  return gd::toQString( str ).indexOf (reg) == 0;
 }
-
-
 
 /////////////// ArticleDom
 
@@ -160,7 +158,7 @@ wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
   wstring result;
 
   for( list< Node >::const_iterator i = begin(); i != end(); ++i )
-    if( !stripTrsTag || i->tagName != GD_NATIVE_TO_WS( L"!trs" ) )
+    if( !stripTrsTag || i->tagName !=  U"!trs"  )
       result += i->renderAsText( stripTrsTag );
 
   return result;
@@ -169,8 +167,7 @@ wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
 // Returns true if src == 'm' and dest is 'mX', where X is a digit
 static inline bool checkM( wstring const & dest, wstring const & src )
 {
-  return ( src == GD_NATIVE_TO_WS( L"m" ) && dest.size() == 2 &&
-    dest[ 0 ] == L'm' && iswdigit( dest[ 1 ] ) );
+  return ( src ==  U"m"  && dest.size() == 2 && dest[ 0 ] == L'm' && iswdigit( dest[ 1 ] ) );
 }
 
 ArticleDom::ArticleDom( wstring const & str, string const & dictName,
@@ -252,7 +249,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               wstring linkText = Folding::trimWhitespace( *entry );
               ArticleDom nodeDom( linkText, dictName, headword_ );
 
-              Node link( Node::Tag(), GD_NATIVE_TO_WS( L"@" ), wstring() );
+              Node link( Node::Tag(),  U"@" , wstring() );
               for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
                 link.push_back( *n );
 
@@ -262,13 +259,13 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
               {
                 root.push_back( link );
                 if( entry != allLinkEntries.end() ) // Add line break before next entry
-                  root.push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
+                  root.push_back( Node( Node::Tag(),  U"br" , wstring() ) );
               }
               else
               {
                 stack.back()->push_back( link );
                 if( entry != allLinkEntries.end() )
-                  stack.back()->push_back( Node( Node::Tag(), GD_NATIVE_TO_WS( L"br" ), wstring() ) );
+                  stack.back()->push_back( Node( Node::Tag(),  U"br" , wstring() ) );
               }
             }
 
@@ -349,7 +346,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
         }
 
         // If the tag is [t], we update the transcriptionCount
-        if ( name == GD_NATIVE_TO_WS( L"t" ) )
+        if( name ==  U"t"  )
         {
           if ( isClosing )
           {
@@ -361,7 +358,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
         }
         
         // If the tag is [s], we update the mediaCount
-        if ( name == GD_NATIVE_TO_WS( L"s" ) )
+        if( name ==  U"s"  )
         {
           if ( isClosing )
           {
@@ -374,14 +371,13 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
         if ( !isClosing )
         {
-          if ( name == GD_NATIVE_TO_WS( L"m" ) ||
-               ( name.size() == 2 && name[ 0 ] == L'm' && iswdigit( name[ 1 ] ) ) )
+          if( name ==  U"m"  || ( name.size() == 2 && name[ 0 ] == L'm' && iswdigit( name[ 1 ] ) ) )
           {
             // Opening an 'mX' or 'm' tag closes any previous 'm' tag
-            closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
+            closeTag(  U"m" , stack, false );
           }
           openTag( name, attrs, stack );
-          if ( name == GD_NATIVE_TO_WS( L"br" ) )
+          if( name ==  U"br"  )
           {
             // [br] tag don't have closing tag
             closeTag( name, stack );
@@ -465,7 +461,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
           processUnsortedParts( linkText, true );
           ArticleDom nodeDom( linkText, dictName, headword_ );
 
-          Node link( Node::Tag(), GD_NATIVE_TO_WS( L"ref" ), wstring() );
+          Node link( Node::Tag(),  U"ref" , wstring() );
           for( Node::iterator n = nodeDom.root.begin(); n != nodeDom.root.end(); ++n )
             link.push_back( *n );
 
@@ -640,7 +636,7 @@ void ArticleDom::openTag( wstring const & name,
 {
   list< Node > nodesToReopen;
 
-  if( name == GD_NATIVE_TO_WS( L"m" ) || checkM( name, GD_NATIVE_TO_WS( L"m" ) ) )
+  if( name ==  U"m"  || checkM( name,  U"m"  ) )
   {
     // All tags above [m] tag will be closed and reopened after
     // to avoid break this tag by closing some other tag.
@@ -734,7 +730,7 @@ void ArticleDom::closeTag( wstring const & name,
         nodesToReopen.push_back( Node( Node::Tag(), stack.back()->tagName,
                                        stack.back()->tagAttrs ) );
 
-      if ( stack.back()->empty() && stack.back()->tagName != GD_NATIVE_TO_WS( L"br" ) )
+      if( stack.back()->empty() && stack.back()->tagName !=  U"br"  )
       {
         // Empty nodes except [br] tag are deleted since they're no use
 
@@ -780,7 +776,7 @@ void ArticleDom::closeTag( wstring const & name,
   }
 }
 
-void ArticleDom::nextChar() THROW_SPEC( eot )
+void ArticleDom::nextChar() 
 {
     if ( !*stringPos )
         throw eot();
@@ -825,7 +821,7 @@ bool ArticleDom::atSignFirstInLine()
 
 /////////////// DslScanner
 
-DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
+DslScanner::DslScanner( string const & fileName ) :
   encoding( Utf8::Windows1252 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), linesRead( 0 )
 {
@@ -917,19 +913,15 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
     bool isLangTo = false;
     bool isSoundDict = false;
 
-    if ( !str.compare( 0, 5, GD_NATIVE_TO_WS( L"#NAME" ), 5 ) )
+    if( !str.compare( 0, 5,  U"#NAME" , 5 ) )
       isName = true;
-    else
-    if ( !str.compare( 0, 15, GD_NATIVE_TO_WS( L"#INDEX_LANGUAGE" ), 15 ) )
+    else if( !str.compare( 0, 15,  U"#INDEX_LANGUAGE" , 15 ) )
       isLangFrom = true;
-    else
-    if ( !str.compare( 0, 18, GD_NATIVE_TO_WS( L"#CONTENTS_LANGUAGE" ), 18 ) )
+    else if( !str.compare( 0, 18,  U"#CONTENTS_LANGUAGE" , 18 ) )
       isLangTo = true;
-    else
-    if ( !str.compare( 0, 17, GD_NATIVE_TO_WS( L"#SOUND_DICTIONARY" ), 17 ) )
+    else if( !str.compare( 0, 17,  U"#SOUND_DICTIONARY" , 17 ) )
       isSoundDict = true;
-    else
-    if ( str.compare( 0, 17, GD_NATIVE_TO_WS( L"#SOURCE_CODE_PAGE" ), 17 ) )
+    else if( str.compare( 0, 17,  U"#SOURCE_CODE_PAGE" , 17 ) )
       continue;
 
     // Locate the argument
@@ -962,14 +954,11 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
         // We don't need that!
         GD_FDPRINTF( stderr, "Warning: encoding was specified in a Unicode file, ignoring.\n" );
       }
-      else
-      if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Latin" ) ) )
+      else if( !arg.compare( U"Latin"  ) )
         encoding = Utf8::Windows1252;
-      else
-      if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"Cyrillic" ) ) )
+      else if( !arg.compare( U"Cyrillic"  ) )
         encoding = Utf8::Windows1251;
-      else
-      if ( !wcscasecmp( arg.c_str(), GD_NATIVE_TO_WS( L"EasternEuropean" ) ) )
+      else if( !arg.compare( U"EasternEuropean"  ) )
         encoding = Utf8::Windows1250;
       else
       {
@@ -995,8 +984,7 @@ DslScanner::~DslScanner() throw()
   gzclose( f );
 }
 
-bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word ) THROW_SPEC( Ex,
-                                                                       Iconv::Ex )
+bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_word )
 {
   offset = (size_t)( gztell( f ) - readBufferLeft/*+pos*/ );
 
@@ -1042,7 +1030,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
 #ifdef __WIN32
     out=line.toStdU32String();
 #else
-    out=line.toStdWString();
+    out=line.toStdU32String();
 #endif
     return true;
 
@@ -1050,7 +1038,7 @@ bool DslScanner::readNextLine( wstring & out, size_t & offset, bool only_head_wo
 }
 
 bool DslScanner::readNextLineWithoutComments( wstring & out, size_t & offset , bool only_headword)
-                 THROW_SPEC( Ex, Iconv::Ex )
+                 
 {
   wstring str;
   bool commentToNextLine = false;
@@ -1163,6 +1151,12 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
   list< wstring > * headwords;
   headwords = inside_recurse ? result : &expanded;
 
+  //if str is too long ,it can never be headwords.
+  //todo?
+  if( str.size() > 100 )
+  {
+    return;
+  }
   for( ; x < str.size(); )
   {
     wchar ch = str[ x ];
@@ -1257,8 +1251,8 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
   }
 }
 
-static const wstring openBraces( GD_NATIVE_TO_WS( L"{{" ) );
-static const wstring closeBraces( GD_NATIVE_TO_WS( L"}}" ) );
+static const wstring openBraces(  U"{{"  );
+static const wstring closeBraces(  U"}}"  );
 
 void stripComments( wstring & str, bool & nextLine )
 {
@@ -1357,11 +1351,11 @@ namespace
 
 quint32 dslLanguageToId( wstring const & name )
 {
-  static wstring newSp( GD_NATIVE_TO_WS( L"newspelling" ) );
-  static wstring st( GD_NATIVE_TO_WS( L"standard" ) );
-  static wstring ms( GD_NATIVE_TO_WS( L"modernsort" ) );
-  static wstring ts( GD_NATIVE_TO_WS( L"traditionalsort" ) );
-  static wstring prc( GD_NATIVE_TO_WS( L"prc" ) );
+  static wstring newSp(  U"newspelling"  );
+  static wstring st(  U"standard"  );
+  static wstring ms(  U"modernsort"  );
+  static wstring ts(  U"traditionalsort"  );
+  static wstring prc(  U"prc"  );
 
   // Any of those endings are to be removed
 

@@ -349,11 +349,13 @@ static enum  DZ_ERRORS dict_read_header( const char *filename,
 	 }
 	 header->chunks = xmalloc( sizeof( header->chunks[0] )
 				   * header->chunkCount );
-	 if( header->chunks == 0 ) {
-	   return DZ_ERR_NOMEMORY;
-	 }
+         if( header->chunks == 0 )
+         {
+           fclose( str );
+           return DZ_ERR_NOMEMORY;
+         }
 
-	 for (i = 0; i < header->chunkCount; i++) {
+         for (i = 0; i < header->chunkCount; i++) {
 	    header->chunks[i]  = getc( str ) << 0;
 	    header->chunks[i] |= getc( str ) << 8;
 	 }

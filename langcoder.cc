@@ -9,7 +9,9 @@
 #ifdef _MSC_VER
 #include <stub_msvc.h>
 #endif
-
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#endif
 #include <cctype>
 #include <QLocale>
 

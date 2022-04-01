@@ -2,8 +2,6 @@
 
 ./configure \
 	--prefix=$PREFIX \
-	--build-suffix=-gd \
-	--enable-memalign-hack \
 	--enable-runtime-cpudetect \
 	--enable-shared \
 	--disable-static \
@@ -185,4 +183,4 @@
 	--enable-decoder=wmav2 \
 	--enable-decoder=wmavoice \
 	--enable-decoder=xan_dpcm \
-	--enable-libspeex
+	--enable-libspeex 

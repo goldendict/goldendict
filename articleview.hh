@@ -15,6 +15,10 @@
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
 #include "globalbroadcaster.h"
+#include "article_inspect.h"
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#endif
 
 class ResourceToSaveHandler;
 class ArticleViewAgent ;
@@ -45,7 +49,7 @@ class ArticleView: public QFrame
   QString rangeVarName;
 
   //used to hold the F12 inspect source view.
-  QWebEngineView *inspectView = nullptr;
+  ArticleInspector * inspector = nullptr;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -108,8 +112,6 @@ public:
   /// Returns "gdfrom-" + dictionaryId.
   static QString scrollToFromDictionaryId( QString const & dictionaryId );
 
-  QString runJavaScriptSync(QWebEnginePage* frame, const QString& variable);
-
   void emitJavascriptFinished();
 
   /// Shows the definition of the given word with the given group.
@@ -154,8 +156,6 @@ public:
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
 
-  QString getWebPageTextSync(QWebEnginePage * page);
-
 public slots:
 
   /// Goes back in history
@@ -175,22 +175,23 @@ public:
   { ui.definition->reload(); }
 
   /// Returns true if there's an audio reference on the page, false otherwise.
-  bool hasSound();
+  void hasSound( const std::function< void( bool has ) > & callback );
 
   /// Plays the first audio reference on the page, if any.
   void playSound();
 
   void setZoomFactor( qreal factor )
   {
-    if(ui.definition->zoomFactor()!=factor){
-      qDebug()<<"set zoom factor:"<<factor;
+    qreal existedFactor = ui.definition->zoomFactor();
+    if(!qFuzzyCompare(existedFactor,factor)){
+      qDebug()<<"zoom factor ,existed:"<<existedFactor<<"set:"<<factor;
       ui.definition->setZoomFactor( factor );
-      ui.definition->page()->setZoomFactor(factor);
+      //ui.definition->page()->setZoomFactor(factor);
     }
   }
 
   /// Returns current article's text in .html format
-  QString toHtml();
+  void toHtml( const std::function< void( QString & ) > & callback );
 
   void setHtml(const QString& content, const QUrl& baseUrl);
   void setContent(const QByteArray &data, const QString &mimeType = QString(), const QUrl &baseUrl = QUrl());
@@ -302,7 +303,7 @@ public slots:
   //aim to receive signal from html. the fragment url click to  navigation through page wil not be intecepted by weburlinteceptor
   Q_INVOKABLE void linkClickedInHtml( QUrl const & );
 private slots:
-
+  void inspectElement();
   void loadFinished( bool ok );
   void loadProgress(int);
   void handleTitleChanged( QString const & title );
@@ -364,7 +365,7 @@ private:
 
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.
-  bool isFramedArticle( QString const & );
+  void isFramedArticle( QString const & article, const std::function< void( bool framed ) > & callback );
 
   /// Checks if the given link is to be opened externally, as opposed to opening
   /// it in-place.
@@ -404,18 +405,6 @@ private:
   protected:
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
-
-#ifdef Q_OS_WIN32
-
-  /// Search inside web page for word under cursor
-
-private:
-  QString insertSpans( QString const & html );
-  void readTag( QString const & from, QString & to, int & count );
-  QString checkElement( QWebEnginePage & elem, const QPoint & pt );
-public:
-  QString wordAtPoint( int x, int y );
-#endif
 
 };
 

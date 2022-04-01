@@ -32,7 +32,11 @@
 #include <QBuffer>
 
 #include <QRegularExpression>
-
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QTextCodec>
+#else
+#include <QTextCodec>
+#endif
 #include <string>
 #include <list>
 #include <map>
@@ -83,7 +87,7 @@ public:
   DEF_EX_STR( exMalformedGlsFile, "The .gls file is malformed:", Ex )
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
-  GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex );
+  GlsScanner( string const & fileName ) ;
   ~GlsScanner() throw();
 
   /// Returns the detected encoding of this file.
@@ -116,13 +120,13 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which end
   /// by the "### Glossary section:" line).
-  bool readNextLine( wstring &, size_t & offset ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset ) ;
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
   { return linesRead; }
 };
 
-GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
+GlsScanner::GlsScanner( string const & fileName ) :
   encoding( Utf8::Utf8 ), readBufferPtr( readBuffer ),
   readBufferLeft( 0 ), linesRead( 0 )
 {
@@ -179,13 +183,13 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   wstring str;
   wstring *currentField = 0;
-  wstring mark = GD_NATIVE_TO_WS( L"###" );
-  wstring titleMark = GD_NATIVE_TO_WS( L"### Glossary title:" );
-  wstring authorMark = GD_NATIVE_TO_WS( L"### Author:" );
-  wstring descriptionMark = GD_NATIVE_TO_WS( L"### Description:" );
-  wstring langFromMark = GD_NATIVE_TO_WS( L"### Source language:" );
-  wstring langToMark = GD_NATIVE_TO_WS( L"### Target language:" );
-  wstring endOfHeaderMark = GD_NATIVE_TO_WS( L"### Glossary section:" );
+  wstring mark            =  U"###" ;
+  wstring titleMark       =  U"### Glossary title:" ;
+  wstring authorMark      =  U"### Author:" ;
+  wstring descriptionMark =  U"### Description:" ;
+  wstring langFromMark    =  U"### Source language:" ;
+  wstring langToMark      =  U"### Target language:" ;
+  wstring endOfHeaderMark =  U"### Glossary section:" ;
   size_t offset;
 
   for( ; ; )
@@ -242,8 +246,7 @@ GlsScanner::GlsScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
   }
 }
 
-bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
-                                                                       Iconv::Ex )
+bool GlsScanner::readNextLine( wstring & out, size_t & offset )
 {
     offset = (size_t)(gztell(f) - readBufferLeft);
 
@@ -285,13 +288,8 @@ bool GlsScanner::readNextLine( wstring & out, size_t & offset ) THROW_SPEC( Ex,
       readBufferPtr += pos;
       linesRead++;
 
-#ifdef __WIN32
-		out = line.toStdU32String();
-#else
-		out = line.toStdWString();
-#endif
-		return true;
-
+      out = line.toStdU32String();
+      return true;
     }
 }
 
@@ -393,16 +391,16 @@ public:
   { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual QString const& getDescription();
 
@@ -766,7 +764,7 @@ QString & GlsDictionary::filterResource( QString & article )
   while( it.hasNext() )
   {
     QRegularExpressionMatch match = it.next();
-    articleNewText += article.midRef( pos, match.capturedStart() - pos );
+    articleNewText += article.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QString link = match.captured( 3 );
@@ -798,7 +796,7 @@ QString & GlsDictionary::filterResource( QString & article )
   }
   if( pos )
   {
-    articleNewText += article.midRef( pos );
+    articleNewText += article.mid( pos );
     article = articleNewText;
     articleNewText.clear();
   }
@@ -817,7 +815,7 @@ QString & GlsDictionary::filterResource( QString & article )
   while( it.hasNext() )
   {
     QRegularExpressionMatch match = it.next();
-    articleNewText += article.midRef( pos, match.capturedStart() - pos );
+    articleNewText += article.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QString src = match.captured( 2 );
@@ -838,7 +836,7 @@ QString & GlsDictionary::filterResource( QString & article )
   }
   if( pos )
   {
-    articleNewText += article.midRef( pos );
+    articleNewText += article.mid( pos );
     article = articleNewText;
     articleNewText.clear();
   }
@@ -979,7 +977,7 @@ void GlsHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   GlsDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+  
 {
   return synonymSearchEnabled ? new GlsHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -1161,7 +1159,7 @@ sptr< Dictionary::DataRequest > GlsDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new GlsArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1337,7 +1335,7 @@ void GlsResourceRequest::run()
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        newCSS += css.midRef( pos, match.capturedStart() - pos );
+        newCSS += css.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString url = match.captured( 2 );
@@ -1355,7 +1353,7 @@ void GlsResourceRequest::run()
       }
       if( pos )
       {
-        newCSS += css.midRef( pos );
+        newCSS += css.mid( pos );
         css = newCSS;
         newCSS.clear();
       }
@@ -1380,7 +1378,7 @@ void GlsResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > GlsDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new GlsResourceRequest( *this, name );
 }
@@ -1403,7 +1401,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

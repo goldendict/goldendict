@@ -31,7 +31,11 @@
 #include <QAtomicInt>
 #include <QDebug>
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#else
 #include <QRegExp>
+#endif
 
 #include <QRegularExpression>
 
@@ -174,20 +178,7 @@ namespace
     }
 
     // Convert the word from utf8 to wide chars
-
-    if ( wcharBuffer.size() <= word.size() )
-      wcharBuffer.resize( word.size() + 1 );
-
-    long result = Utf8::decode( word.c_str(), word.size(),
-                                &wcharBuffer.front() );
-
-    if ( result < 0 )
-    {
-      gdWarning( "Failed to decode utf8 of headword \"%s\", skipping it.", word.c_str() );
-      return;
-    }
-
-    indexedWords.addWord( wstring( &wcharBuffer.front(), result ), articleOffset );
+    indexedWords.addWord( Utf8::decode( word ), articleOffset );
   }
 
 
@@ -226,16 +217,16 @@ namespace
     { return idxHeader.langTo; }
 
     virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                         vector< wstring > const & alts,
                                                         wstring const &,
                                                         bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                               int searchMode, bool matchCase,
@@ -609,7 +600,7 @@ void BglHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   BglDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+  
 {
   return synonymSearchEnabled ? new BglHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -933,7 +924,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new BglArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1077,7 +1068,7 @@ void BglResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new BglResourceRequest( idxMutex, idx, idxHeader.resourceListOffset,
                                  idxHeader.resourcesCount, name );
@@ -1100,7 +1091,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
     while( it.hasNext() )
     {
       QRegularExpressionMatch match = it.next();
-      result += str.midRef( pos, match.capturedStart() - pos );
+      result += str.mid( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QRegularExpressionMatchIterator itValue = oneValueExp.globalMatch( match.captured( 1 ) );
@@ -1113,7 +1104,7 @@ sptr< Dictionary::DataRequest > BglDictionary::getResource( string const & name 
 
     if( pos )
     {
-      result += str.midRef( pos );
+      result += str.mid( pos );
       str = result;
     }
 
@@ -1178,7 +1169,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

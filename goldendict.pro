@@ -1,18 +1,18 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0-RC2+git
+VERSION = 22.4.Summer
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
 # rebuilt; and doing it here is required too since any other way the RCC
 # compiler would complain if version.txt wouldn't exist (fresh checkouts).
 
-system(git describe --tags --always --dirty > version.txt): hasGit=1
+system(git describe --tags --always --dirty): hasGit=1
 
-isEmpty( hasGit ) {
-  message(Failed to precisely describe the version via Git -- using the default version string)
-  system(echo $$VERSION > version.txt)
+!isEmpty(hasGit){
+    GIT_HASH=$$system(git rev-parse --short=8 HEAD )
 }
+system(echo $${VERSION}.$${GIT_HASH} > version.txt)
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
@@ -21,20 +21,22 @@ QT += core \
       gui \
       xml \
       network \
-      svg
-
-QT += widgets \
+      svg \
+      widgets \
       webenginewidgets\
       webchannel\
       printsupport \
       help
+
+greaterThan(QT_MAJOR_VERSION, 5): QT += webenginecore core5compat
+
+DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
 
 # QMediaPlayer is not available in Qt4.
 !CONFIG( no_qtmultimedia_player ) {
   QT += multimedia
   DEFINES += MAKE_QTMULTIMEDIA_PLAYER
 }
-
 
 !CONFIG( no_ffmpeg_player ) {
   DEFINES += MAKE_FFMPEG_PLAYER
@@ -43,24 +45,32 @@ QT += widgets \
 QT += sql
 CONFIG += exceptions \
     rtti \
-    stl
-    # lrelease    #lrelease generate qm under target folder.
-    
-QM_FILES_INSTALL_PATH = /locale/
+    stl  \
+    c++14 \
+    lrelease \
+    embed_translations
+
+mac {
+    DEBUG:CONFIG += app_bundle
+}
+
+QM_FILES_RESOURCE_PREFIX = /locale/
 OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
-RCC_DIR = build
+#RCC_DIR = build
 LIBS += \
         -lz \
         -lbz2 \
         -llzo2
 
+CONFIG+=utf8_source
+
 win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        VERSION = 1.5.0 # More complicated things cause errors during compilation under MSVC++
+        VERSION = 22.4.1 # VS does not recognize 22.2.xxx,cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
@@ -76,8 +86,7 @@ win32 {
         HUNSPELL_LIB = hunspell
     }
 
-    LIBS += -liconv \
-        -lwsock32 \
+    LIBS += -lwsock32 \
         -lpsapi \
         -lole32 \
         -loleaut32 \
@@ -94,8 +103,7 @@ win32 {
             -lavcodec
     }
 
-
-    RC_FILE = goldendict.rc
+    RC_ICONS += icons/programicon.ico icons/programicon_old.ico
     INCLUDEPATH += winlibs/include
 
     # Enable console in Debug mode on Windows, with useful logging messages
@@ -105,8 +113,6 @@ win32 {
 
     gcc48:QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
 
-    CONFIG += zim_support
-
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
     }
@@ -115,14 +121,13 @@ win32 {
 }
 
 unix:!mac {
-  DEFINES += HAVE_X11
-  # This is to keep symbols for backtraces
-  QMAKE_CXXFLAGS += -rdynamic
-  QMAKE_LFLAGS += -rdynamic
+    DEFINES += HAVE_X11
 
-    QT += x11extras
+    lessThan(QT_MAJOR_VERSION, 6):     QT += x11extras
+    greaterThan(QT_MAJOR_VERSION, 5):     QT += gui-private
 
     CONFIG += link_pkgconfig
+
     PKGCONFIG += vorbisfile \
         vorbis \
         ogg \
@@ -135,7 +140,7 @@ unix:!mac {
             libswresample \
     }
     arm {
-        LIBS += -liconv
+        #LIBS += -liconv
     } else {
         LIBS += -lX11 -lXtst
     }
@@ -168,7 +173,7 @@ unix:!mac {
     INSTALLS += helps
 }
 freebsd {
-    LIBS += -liconv -lexecinfo
+    LIBS +=   -lexecinfo
 }
 mac {
     TARGET = GoldenDict
@@ -178,52 +183,44 @@ mac {
     # CONFIG += x86 x86_64 ppc
     LIBS = -lz \
         -lbz2 \
-        -liconv \
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.6.1 \
+        -lhunspell-1.7.0 \
         -llzo2
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
-            -lswresample-gd \
-            -lavutil-gd \
-            -lavformat-gd \
-            -lavcodec-gd
+            -lswresample \
+            -lavutil \
+            -lavformat \
+            -lavcodec
     }
-    INCLUDEPATH = $${PWD}/maclibs/include
-    LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
+    QT_CONFIG -= no-pkg-config 
+    CONFIG += link_pkgconfig
+    INCLUDEPATH = /opt/homebrew/include /usr/local/include
+    LIBS += -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
                          speechclient_mac.mm
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
-    QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
-                      cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
-                      mkdir -p GoldenDict.app/Contents/MacOS/locale & \
-                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
-                      mkdir -p GoldenDict.app/Contents/MacOS/help & \
+    QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
+                      mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
-        CONFIG( x86 ) {
-            QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
-        } else {
-            QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
-        }
+        QMAKE_POST_LINK += && mkdir -p GoldenDict.app/Contents/MacOS/opencc && \
+                             cp -R $${PWD}/opencc/*.* GoldenDict.app/Contents/MacOS/opencc/
     }
 }
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
+    article_inspect.h \
     globalbroadcaster.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
@@ -268,7 +265,6 @@ HEADERS += folding.hh \
     wordfinder.hh \
     groupcombobox.hh \
     keyboardstate.hh \
-    mouseover.hh \
     preferences.hh \
     mutex.hh \
     mediawiki.hh \
@@ -345,7 +341,6 @@ HEADERS += folding.hh \
     gls.hh \
     splitfile.hh \
     favoritespanewidget.hh \
-    cpp_features.hh \
     treeview.hh
 
 FORMS += groups.ui \
@@ -365,6 +360,7 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
+    article_inspect.cpp \
     globalbroadcaster.cpp \
     main.cc \
     dictionary.cc \
@@ -404,7 +400,6 @@ SOURCES += folding.cc \
     wordfinder.cc \
     groupcombobox.cc \
     keyboardstate.cc \
-    mouseover.cc \
     preferences.cc \
     mutex.cc \
     mediawiki.cc \
@@ -412,7 +407,6 @@ SOURCES += folding.cc \
     hunspell.cc \
     dictdfiles.cc \
     audiolink.cc \
-    wstring.cc \
     wstring_qt.cc \
     processwrapper.cc \
     hotkeywrapper.cc \
@@ -484,19 +478,16 @@ win32 {
     FORMS   += texttospeechsource.ui
     SOURCES += wordbyauto.cc \
                guids.c \
-               x64.cc \
                speechclient_win.cc \
                texttospeechsource.cc \
                speechhlp.cc
     HEADERS += wordbyauto.hh \
                uiauto.hh \
-               x64.hh \
                texttospeechsource.hh \
                sapi.hh \
                sphelper.hh \
                speechclient.hh \
-               speechhlp.hh \
-               hotkeys.h
+               speechhlp.hh
 }
 
 mac {
@@ -549,20 +540,12 @@ CONFIG( chinese_conversion_support ) {
              chineseconversion.hh
   SOURCES += chinese.cc \
              chineseconversion.cc
-  win32-msvc* {
-    Debug:   LIBS += -lopenccd
-    Release: LIBS += -lopencc
-  } else {
-    mac {
-      LIBS += -lopencc.2
-    } else {
-      LIBS += -lopencc
-    }
-  }
+  LIBS += -lopencc
 }
 
 RESOURCES += resources.qrc \
     flags.qrc
+#EXTRA_TRANSLATIONS += thirdparty/qwebengine_ts/qtwebengine_zh_CN.ts
 TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_CN.ts \
     locale/cs_CZ.ts \
@@ -605,50 +588,10 @@ TRANSLATIONS += locale/ru_RU.ts \
 
 # Build version file
 !isEmpty( hasGit ) {
-  QMAKE_EXTRA_TARGETS += revtarget
   PRE_TARGETDEPS      += $$PWD/version.txt
-  revtarget.target     = $$PWD/version.txt
-
-  !win32 {
-    revtarget.commands   = cd $$PWD; git describe --tags --always --dirty > $$revtarget.target
-  } else {
-    revtarget.commands   = git --git-dir=\"$$PWD/.git\" describe --tags --always --dirty > $$revtarget.target
-  }
-
-  ALL_SOURCES = $$SOURCES $$HEADERS $$FORMS
-  for(src, ALL_SOURCES) {
-    QUALIFIED_SOURCES += $${PWD}/$${src}
-  }
-  revtarget.depends = $$QUALIFIED_SOURCES
 }
 
-# This makes qmake generate translations
 
 
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-
-
-# The *.qm files might not exist when qmake is run for the first time,
-# causing the standard install rule to be ignored, and no translations
-# will be installed. With this, we create the qm files during qmake run.
-!win32 {
-  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_} 2> /dev/null)
-}
-else{
-  system($${QMAKE_LRELEASE} -silent $${_PRO_FILE_})
-}
-
-updateqm.input = TRANSLATIONS
-updateqm.output = locale/${QMAKE_FILE_BASE}.qm
-updateqm.commands = $$QMAKE_LRELEASE \
-    ${QMAKE_FILE_IN} \
-    -qm \
-    ${QMAKE_FILE_OUT}
-updateqm.CONFIG += no_link
-QMAKE_EXTRA_COMPILERS += updateqm
-TS_OUT = $$TRANSLATIONS
-TS_OUT ~= s/.ts/.qm/g
-PRE_TARGETDEPS += $$TS_OUT
-
-include( qtsingleapplication/src/qtsingleapplication.pri )
+include( thirdparty/qtsingleapplication/src/qtsingleapplication.pri )
 

@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 #include <QFile>
-#include "cpp_features.hh"
 #include "ex.hh"
 
 /// A simple wrapper over FILE * operations with added write-buffering,
@@ -42,29 +41,29 @@ class Class
   char * writeBuffer;
   qint64 writeBufferLeft;
 
-  void open( char const * filename, char const * mode ) THROW_SPEC( exCantOpen );
+  void open( char const * filename, char const * mode ) ;
 
 public:
 
-  Class( char const * filename, char const * mode ) THROW_SPEC( exCantOpen );
+  Class( char const * filename, char const * mode ) ;
 
-  Class( std::string const & filename, char const * mode ) THROW_SPEC( exCantOpen );
+  Class( std::string const & filename, char const * mode ) ;
 
   /// Reads the number of bytes to the buffer, throws an error if it
   /// failed to fill the whole buffer (short read, i/o error etc).
-  void read( void * buf, qint64 size ) THROW_SPEC( exReadError, exWriteError );
+  void read( void * buf, qint64 size ) ;
 
   template< typename T >
-  void read( T & value ) THROW_SPEC( exReadError, exWriteError )
+  void read( T & value ) 
   { read( &value, sizeof( value ) ); }
 
   template< typename T >
-  T read() THROW_SPEC( exReadError, exWriteError )
+  T read() 
   { T value; read( value ); return value; }
 
   /// Attempts reading at most 'count' records sized 'size'. Returns
   /// the number of records it managed to read, up to 'count'.
-  size_t readRecords( void * buf, qint64 size, size_t count ) THROW_SPEC( exWriteError );
+  size_t readRecords( void * buf, qint64 size, size_t count ) ;
 
   /// Writes the number of bytes from the buffer, throws an error if it
   /// failed to write the whole buffer (short write, i/o error etc).
@@ -72,10 +71,10 @@ public:
   /// end up on disk immediately, or a short write may occur later
   /// than it really did. If you don't want write buffering, use
   /// writeRecords() function instead.
-  void write( void const * buf, qint64 size ) THROW_SPEC( exWriteError, exAllocation );
+  void write( void const * buf, qint64 size ) ;
 
   template< typename T >
-  void write( T const & value ) THROW_SPEC( exWriteError )
+  void write( T const & value ) 
   { write( &value, sizeof( value ) ); }
 
   /// Attempts writing at most 'count' records sized 'size'. Returns
@@ -83,46 +82,46 @@ public:
   /// This function does not employ buffering, but flushes the buffer if it
   /// was used before.
   size_t writeRecords( void const * buf, qint64 size, size_t count )
-    THROW_SPEC( exWriteError );
+    ;
 
   /// Reads a string from the file. Unlike the normal fgets(), this one
   /// can strip the trailing newline character, if this was requested.
   /// Returns either s or 0 if no characters were read.
-  char * gets( char * s, int size, bool stripNl = false ) THROW_SPEC( exWriteError );
+  char * gets( char * s, int size, bool stripNl = false ) ;
 
   /// Like the above, but uses its own local internal buffer (1024 bytes
   /// currently), and strips newlines by default.
-  std::string gets( bool stripNl = true ) THROW_SPEC( exReadError, exWriteError );
+  std::string gets( bool stripNl = true ) ;
 
   /// Seeks in the file, relative to its beginning.
-  void seek( qint64 offset ) THROW_SPEC( exSeekError, exWriteError );
+  void seek( qint64 offset ) ;
   /// Seeks in the file, relative to the current position.
-  void seekCur( qint64 offset ) THROW_SPEC( exSeekError, exWriteError );
+  void seekCur( qint64 offset ) ;
   /// Seeks in the file, relative to the end of file.
-  void seekEnd( qint64 offset = 0 ) THROW_SPEC( exSeekError, exWriteError );
+  void seekEnd( qint64 offset = 0 ) ;
 
   /// Seeks to the beginning of file
-  void rewind() THROW_SPEC( exSeekError, exWriteError );
+  void rewind() ;
 
   /// Tells the current position within the file, relative to its beginning.
-  qint64 tell() THROW_SPEC( exSeekError );
+  qint64 tell() ;
 
   /// Returns true if end-of-file condition is set.
-  bool eof() THROW_SPEC( exWriteError );
+  bool eof() ;
 
   /// Returns the underlying FILE * record, so other operations can be
   /// performed on it.
-  QFile & file() THROW_SPEC( exWriteError );
+  QFile & file() ;
 
   /// Closes the file. No further operations are valid.
-  void close() THROW_SPEC( exWriteError );
+  void close() ;
 
   ~Class() throw();
 
 private:
 
-  void flushWriteBuffer() THROW_SPEC( exWriteError );
-  void releaseWriteBuffer() THROW_SPEC( exWriteError );
+  void flushWriteBuffer() ;
+  void releaseWriteBuffer() ;
 };
 
 }

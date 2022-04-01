@@ -151,6 +151,7 @@ private:
   History history;
   DictionaryBar dictionaryBar;
   vector< sptr< Dictionary::Class > > dictionaries;
+  QMap<std::string, sptr< Dictionary::Class > > dictMap;
   /// Here we store unmuted dictionaries when the dictionary bar is active
   vector< sptr< Dictionary::Class > > dictionariesUnmuted;
   Instances::Groups groupInstances;
@@ -209,7 +210,6 @@ private:
   void closeEvent( QCloseEvent * );
 
   void applyProxySettings();
-  void applyWebSettings();
   void setupNetworkCache( int maxSize );
   void makeDictionaries();
   void updateStatusLine();
@@ -360,6 +360,8 @@ private slots:
   void zoomout();
   void unzoom();
 
+  void viewLinkClicked( const QUrl & url );
+
   void scaleArticlesByCurrentZoomFactor();
 
   void doWordsZoomIn();
@@ -375,7 +377,7 @@ private slots:
   void editCurrentGroup();
   void editPreferences();
 
-  void currentGroupChanged( QString const & );
+  void currentGroupChanged( int );
   void translateInputChanged( QString const & );
   void translateInputFinished( bool checkModifiers = true );
 
@@ -511,7 +513,6 @@ signals:
 protected:
   unsigned gdAskMessage;
 public:
-  bool handleGDMessage( MSG * message, long * result );
 
 private slots:
   /// Return true while scanning GoldenDict window
@@ -524,7 +525,7 @@ class ArticleSaveProgressDialog : public QProgressDialog
 Q_OBJECT
 
 public:
-  explicit ArticleSaveProgressDialog( QWidget * parent = 0,  Qt::WindowFlags f = 0 ):
+  explicit ArticleSaveProgressDialog( QWidget * parent = 0,  Qt::WindowFlags f = Qt::Widget ):
     QProgressDialog( parent, f )
   {
     setAutoReset( false );

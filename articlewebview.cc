@@ -6,6 +6,8 @@
 #include <QWebEngineView>
 #include <QApplication>
 #include <QTimer>
+#include <QDialog>
+#include <QMainWindow>
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
@@ -14,8 +16,7 @@
 ArticleWebView::ArticleWebView( QWidget *parent ):
   QWebEngineView( parent ),
   midButtonPressed( false ),
-  selectionBySingleClick( false ),
-  showInspectorDirectly( true )
+  selectionBySingleClick( false )
 {
 }
 
@@ -26,6 +27,7 @@ ArticleWebView::~ArticleWebView()
 void ArticleWebView::setUp( Config::Class * cfg )
 {
   this->cfg = cfg;
+  setZoomFactor(cfg->preferences.zoomFactor);
 }
 
 void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
@@ -33,19 +35,30 @@ void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool c
   QWebEngineView::triggerPageAction( action, checked );
 }
 
+QWebEngineView * ArticleWebView::createWindow( QWebEnginePage::WebWindowType type )
+{
+  if(type==QWebEnginePage::WebWindowType::WebDialog)
+  {
+    QMainWindow * dlg = new QMainWindow( this );
+    QWebEngineView * view = new QWebEngineView( dlg );
+    dlg->setCentralWidget(view);
+    dlg->resize(400,400);
+    dlg->show();
+
+    return view;
+  }
+  return QWebEngineView::createWindow(type);
+}
+
 bool ArticleWebView::event( QEvent * event )
 {
-    if (event->type() == QEvent::ChildAdded) {
-        QChildEvent *child_ev = static_cast<QChildEvent *>(event);
+  if( event->type() == QEvent::ChildAdded )
+  {
+    QChildEvent * child_ev = static_cast< QChildEvent * >( event );
+    child_ev->child()->installEventFilter( this );
+  }
 
-//      // there is also QObject child that should be ignored here;
-//      // use only QOpenGLWidget child
-//      QOpenGLWidget *w = static_cast<QOpenGLWidget*>(child_ev->child());
-
-        child_ev->child()->installEventFilter(this);
-    }
-
-    return QWebEngineView::event(event);
+  return QWebEngineView::event( event );
 }
 
 void ArticleWebView::linkClickedInHtml(QUrl const& ){
@@ -87,10 +100,17 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
     if (ev->type() == QEvent::Wheel) {
         QWheelEvent *pe = static_cast<QWheelEvent *>(ev);
         wheelEvent(pe);
+
+        if ( pe->modifiers().testFlag( Qt::ControlModifier ) )
+        {
+          return true;
+        }
     }
-    if (ev->type() == QEvent::FocusIn) {
-        QFocusEvent *pe = static_cast<QFocusEvent *>(ev);
-        focusInEvent(pe);
+    if( ev->type() == QEvent::FocusIn )
+    {
+      QFocusEvent * pe = static_cast< QFocusEvent * >( ev );
+      focusInEvent( pe );
+      return true;
     }
 
     return QWebEngineView::eventFilter(obj, ev);
@@ -98,7 +118,7 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
 
 void ArticleWebView::mousePressEvent(QMouseEvent *event)
 {
-    if (event->buttons() & Qt::MidButton)
+    if (event->buttons() & Qt::MiddleButton)
         midButtonPressed = true;
 }
 
@@ -127,10 +147,10 @@ void ArticleWebView::sendCustomMouseEvent( QEvent::Type type) {
 }
 
 void ArticleWebView::mouseReleaseEvent(QMouseEvent *event) {
-  bool noMidButton = !( event->buttons() & Qt::MidButton );
+  bool noMidButton = !( event->buttons() & Qt::MiddleButton );
 
-  if ( midButtonPressed & noMidButton )
-    midButtonPressed = false;
+//  if ( midButtonPressed & noMidButton )
+//    midButtonPressed = false;
 }
 
 void ArticleWebView::doubleClickAction(QMouseEvent *event) {
@@ -169,7 +189,7 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
     SystemParametersInfo( SPI_GETWHEELSCROLLLINES, 0, &nLines, 0 );
     if( nLines == WHEEL_PAGESCROLL )
     {
-      QKeyEvent kev( QEvent::KeyPress, ev->delta() > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
+      QKeyEvent kev( QEvent::KeyPress, ev->angleDelta ().y () > 0 ? Qt::Key_PageUp : Qt::Key_PageDown,
                      Qt::NoModifier );
       auto childrens = this->children();
       for (auto child : childrens) {

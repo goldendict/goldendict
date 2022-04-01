@@ -1,4 +1,6 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e507f9bf83bd48f7a5b76f71dfe9f0dd)](https://app.codacy.com/gh/xiaoyifang/goldendict?utm_source=github.com&utm_medium=referral&utm_content=xiaoyifang/goldendict&utm_campaign=Badge_Grade_Settings)
 [![Windows](https://github.com/xiaoyifang/goldendict/actions/workflows/windows.yml/badge.svg)](https://github.com/xiaoyifang/goldendict/actions/workflows/windows.yml) [![Ubuntu](https://github.com/xiaoyifang/goldendict/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/xiaoyifang/goldendict/actions/workflows/ubuntu.yml)
+[![macos](https://github.com/xiaoyifang/goldendict/actions/workflows/macos.yml/badge.svg)](https://github.com/xiaoyifang/goldendict/actions/workflows/macos.yml)
 
 ## Introduction
 
@@ -6,7 +8,7 @@
 
 ## Requirements
 
-This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
+This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
 
 ### External Deps
 
@@ -23,24 +25,36 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
          libvorbis-dev zlib1g-dev libhunspell-dev x11proto-record-dev \
          qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev \
-         libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev \
+         libqt5svg5-dev libqt5x11extras5-dev qttools5-dev \
          qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins
 
 ## How to build
 
 First, clone this repository, e.g.:
 
-    git clone git://github.com/goldendict/goldendict.git
+    git clone https://github.com/goldendict/goldendict.git
 
+
+### Linux 
 And then invoke `qmake-qt5` and `make`:
 
     cd goldendict && qmake-qt5 && make
 
-make sure that `qmake` is from Qt 5 installation. If not, you can try
-finding it at a path like `/usr/lib/x86_64-linux-gnu/qt5/bin/qmake`.
+### macOS
+```
+wget ftp://ftp.sra.co.jp/pub/misc/eb/eb-4.4.3.tar.bz2
+tar xvjf eb-4.4.3.tar.bz2
+cd eb-4.4.3 && ./configure && make -j 8 && sudo make install
+brew install qt # or use official offline installer
+brew install opencc libao hunspell ffmpeg libtiff xz lzo libogg libvorbis
+qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
+make 
+make install
+```
+### Windows
+
 Alternatively, you might want to load `goldendict.pro` file from within Qt Creator, especially on Windows.
 
-Note:   `libhunspell` version > 1.5.
 
 ### Building with Chinese conversion support
 
@@ -100,9 +114,7 @@ Then, invoke `make clean` before `make` because the setting change:
 
 ### Building under Windows with MS Visual Studio
 
-To build GoldenDict with Visual Studio take one of next library packs and unpack it to `"winlibs/lib/msvc"` folder in GoldenDict sources folder.  
-[GoldenDict_libs_VS2015_x86_v4.7z](http://www.mediafire.com/file/0a7ygy9rn99oevm/GoldenDict_libs_VS2015_x86_v4.7z) - for MS Visual Studio 2015, 32 bit  
-[GoldenDict_libs_VS2015_x64_v4.7z](http://www.mediafire.com/file/yoy2q8af0s1467m/GoldenDict_libs_VS2015_x64_v4.7z) - for MS Visual Studio 2015, 64 bit  
+the source code has offered precompile x64 windows libs on winlibs/lib/msvc. you can build your own version either.
 
 To build with Visual Studio.
 check this [how to build with visual studio](howto/how%20to%20build%20and%20debug%20with%20VS2019.md)

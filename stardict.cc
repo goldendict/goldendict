@@ -39,7 +39,11 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 #include <QDebug>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QRegExp>
+#else
 #include <QRegExp>
+#endif
 #include <QStringList>
 #include <QDomDocument>
 #include <QDomNode>
@@ -170,16 +174,16 @@ public:
   { return idxHeader.langTo; }
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual QString const& getDescription();
 
@@ -472,7 +476,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+        articleNewText += articleText.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString link = match.captured( 3 );
@@ -507,7 +511,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       }
       if( pos )
       {
-        articleNewText += articleText.midRef( pos );
+        articleNewText += articleText.mid( pos );
         articleText = articleNewText;
         articleNewText.clear();
       }
@@ -527,7 +531,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+        articleNewText += articleText.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString src = match.captured( 2 );
@@ -551,7 +555,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
       }
       if( pos )
       {
-        articleNewText += articleText.midRef( pos );
+        articleNewText += articleText.mid( pos );
         articleText = articleNewText;
         articleNewText.clear();
       }
@@ -1310,7 +1314,7 @@ void StardictHeadwordsRequest::run()
 
 sptr< Dictionary::WordSearchRequest >
   StardictDictionary::findHeadwordsForSynonym( wstring const & word )
-  THROW_SPEC( std::exception )
+  
 {
   return synonymSearchEnabled ? new StardictHeadwordsRequest( word, *this ) :
                                 Class::findHeadwordsForSynonym( word );
@@ -1514,7 +1518,7 @@ sptr< Dictionary::DataRequest > StardictDictionary::getArticle( wstring const & 
                                                                 vector< wstring > const & alts,
                                                                 wstring const &,
                                                                 bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new StardictArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1775,7 +1779,7 @@ void StardictResourceRequest::run()
       while( it.hasNext() )
       {
         QRegularExpressionMatch match = it.next();
-        newCSS += css.midRef( pos, match.capturedStart() - pos );
+        newCSS += css.mid( pos, match.capturedStart() - pos );
         pos = match.capturedEnd();
 
         QString url = match.captured( 2 );
@@ -1793,7 +1797,7 @@ void StardictResourceRequest::run()
       }
       if( pos )
       {
-        newCSS += css.midRef( pos );
+        newCSS += css.mid( pos );
         css = newCSS;
         newCSS.clear();
       }
@@ -1821,7 +1825,7 @@ void StardictResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > StardictDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new StardictResourceRequest( *this, name );
 }
@@ -2004,7 +2008,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

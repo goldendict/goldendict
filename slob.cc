@@ -31,6 +31,9 @@
 #include <QMap>
 #include <QPair>
 #include <QRegExp>
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 #include <QProcess>
 #include <QVector>
 #include <QtAlgorithms>
@@ -606,10 +609,10 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                         vector< wstring > const & alts,
                                                         wstring const &,
                                                         bool ignoreDiacritics )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-      THROW_SPEC( std::exception );
+      ;
 
     virtual QString const& getDescription();
 
@@ -835,7 +838,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   {
     QRegularExpressionMatch match = it.next();
 
-    newText += text.midRef( pos, match.capturedStart() - pos );
+    newText += text.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
 
     QStringList list = match.capturedTexts();
@@ -854,8 +857,8 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     else
       anchor.clear();
 
-    tag.remove( QRegExp(".*/") ).
-        remove( QRegExp( "\\.(s|)htm(l|)$", Qt::CaseInsensitive ) ).
+    tag.remove( QRegularExpression(".*/") ).
+        remove( QRegularExpression( "\\.(s|)htm(l|)$", QRegularExpression::PatternOption::CaseInsensitiveOption ) ).
         replace( "_", "%20" ).
         prepend( "<a href=\"gdlookup://localhost/" ).
         append( anchor + "\" " + list[4] + ">" );
@@ -864,7 +867,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
   }
   if( pos )
   {
-    newText += text.midRef( pos );
+    newText += text.mid( pos );
     text = newText;
   }
   newText.clear();
@@ -878,7 +881,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
       QRegularExpression regFrac( "\\\\[dt]frac" );
       QRegularExpression regSpaces( "\\s+([\\{\\(\\[\\}\\)\\]])" );
 
-    QRegExp multReg = QRegExp( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
+    QRegExp multReg( "\\*\\{(\\d+)\\}([^\\{]|\\{([^\\}]+)\\})", Qt::CaseSensitive, QRegExp::RegExp2 );
 
     QString arrayDesc( "\\begin{array}{" );
     pos = 0;
@@ -891,7 +894,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     {
       QRegularExpressionMatch match = it.next();
 
-      newText += text.midRef( pos, match.capturedStart() - pos );
+      newText += text.mid( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QStringList list = match.capturedTexts();
@@ -902,7 +905,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           || list[ 1 ].endsWith( " tex" ) )
       {
         QString name;
-        name.sprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
+        name.asprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
         imgName = texCachePath + "/" + name;
 
         if( !QFileInfo( imgName ).exists() )
@@ -985,7 +988,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
 
           QString command = texCgiPath + " -e " +  imgName
                             + " \"" + tex + "\"";
-          QProcess::execute( command );
+          QProcess::execute( command,QStringList() );
         }
 
         QString tag = QString( "<img class=\"imgtex\" src=\"file://" )
@@ -1005,7 +1008,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     }
     if( pos )
     {
-      newText += text.midRef( pos );
+      newText += text.mid( pos );
       text = newText;
     }
     newText.clear();
@@ -1485,7 +1488,7 @@ sptr< Dictionary::DataRequest > SlobDictionary::getArticle( wstring const & word
                                                             vector< wstring > const & alts,
                                                             wstring const &,
                                                             bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new SlobArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1634,7 +1637,7 @@ void SlobResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > SlobDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new SlobResourceRequest( *this, name );
 }
@@ -1645,7 +1648,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       unsigned maxHeadwordsToExpand )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

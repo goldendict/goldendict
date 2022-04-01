@@ -20,7 +20,7 @@ public:
 private:
   EpwingCharmap();
 
-  void addEntry( QString const & code, QChar ch );
+  void addEntry( QString const & code, int ch );
 
   QMap< QString, QChar > charMap;
 };

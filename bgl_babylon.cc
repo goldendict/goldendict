@@ -27,7 +27,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <iconv.h>
 #include <QTextDocument>
 #include "gddebug.hh"
 #include "ufile.hh"
@@ -36,6 +35,7 @@
 #include <QString>
 #include <QDebug>
 #include "dictionary.hh"
+#include "wstring_qt.hh"
 
 #ifdef _WIN32
 #include <io.h>
@@ -198,6 +198,7 @@ bool Babylon::read(std::string &source_charset, std::string &target_charset)
   {
     headword.clear();
     definition.clear();
+
     switch( block.type )
     {
       case 0:
@@ -534,7 +535,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
             {
               try
               {
-                transcription = Iconv::toUtf8( "CP1252", block.data + pos + 3, length );
+                transcription = Iconv::toUtf8( "Windows-1252", block.data + pos + 3, length );
               }
               catch( Iconv::Ex & e )
               {
@@ -565,7 +566,7 @@ bgl_entry Babylon::readEntry( ResourceHandler * resourceHandler )
             {
               try
               {
-                transcription = Iconv::toUtf8( "CP1252", block.data + pos + 4, length );
+                transcription = Iconv::toUtf8( "Windows-1252", block.data + pos + 4, length );
               }
               catch( Iconv::Ex & e )
               {
@@ -759,42 +760,14 @@ void Babylon::convertToUtf8( std::string &s, unsigned int type )
   if( charset == "UTF-8" )
     return;
 
-  iconv_t cd = iconv_open( "UTF-8", charset.c_str() );
-  if( cd == (iconv_t)(-1) )
-    throw exIconv();
+  Iconv conv_("UTF-8", charset.c_str());
 
-  char *outbuf, *defbuf;
-  size_t inbufbytes, outbufbytes;
-
-  inbufbytes = s.size();
-  outbufbytes = s.size() * 6;
+  size_t inbufbytes = s.size();
 
   char *inbuf;
   inbuf = (char *)s.data();
-  outbuf = (char*)malloc( outbufbytes + 1 );
-  if( !outbuf )
-  {
-    iconv_close( cd );
-    throw exAllocation();
-  }
+  const void* test = inbuf;
 
-  memset( outbuf, '\0', outbufbytes + 1 );
-  defbuf = outbuf;
-  while (inbufbytes) {
-    if (iconv(cd, &inbuf, &inbufbytes, &outbuf, &outbufbytes) == (size_t)-1) {
-      gdWarning( "\"%s\" - error in iconv conversion (%s)\n", inbuf, strerror( errno ) );
-      break;
-//      inbuf++;
-//      inbufbytes--;
-    }
-  }
-  
-  // Flush the state. This fixes CP1255 problems.
-  iconv( cd, 0, 0, &outbuf, &outbufbytes );
-  
-  if( inbufbytes == 0 )
-    s = std::string( defbuf );
-
-  free( defbuf );
-  iconv_close( cd );
+  QString convStr = conv_.convert(test,inbufbytes);
+  s = gd::toStdString(convStr);
 }

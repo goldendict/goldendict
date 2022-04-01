@@ -14,13 +14,8 @@
 #include <QVector>
 #include <QSet>
 #include <QList>
-#include "cpp_features.hh"
 
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
 
 /// A base for the dictionary which creates a btree index to look up
 /// the words.
@@ -167,13 +162,13 @@ public:
   /// need not to implement this function.
   virtual sptr< Dictionary::WordSearchRequest > prefixMatch( wstring const &,
                                                              unsigned long )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::WordSearchRequest > stemmedMatch( wstring const &,
                                                               unsigned minLength,
                                                               unsigned maxSuffixVariation,
                                                               unsigned long maxResults )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual bool isLocalDictionary()
   { return true; }

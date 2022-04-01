@@ -5,7 +5,6 @@
 
 #include <cstdio>
 #include <string>
-#include "cpp_features.hh"
 #include "ex.hh"
 #include "wstring.hh"
 
@@ -46,7 +45,7 @@ long decode( char const * in, size_t inSize, wchar * out );
 
 /// Versions for non time-critical code.
 string encode( wstring const & ) throw();
-wstring decode( string const & ) THROW_SPEC( exCantDecode );
+wstring decode( string const & ) ;
 
 /// Since the standard isspace() is locale-specific, we need something
 /// that would never mess up our utf8 input. The stock one worked fine under

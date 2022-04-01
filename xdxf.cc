@@ -39,7 +39,9 @@
 #include <QPainter>
 #include <QDebug>
 #include <QRegExp>
-
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat>
+#endif
 #include <QSemaphore>
 #include <QThreadPool>
 #include <QAtomicInt>
@@ -167,10 +169,10 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual QString const& getDescription();
 
@@ -622,7 +624,7 @@ sptr< Dictionary::DataRequest > XdxfDictionary::getArticle( wstring const & word
                                                             vector< wstring > const & alts,
                                                             wstring const &,
                                                             bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new XdxfArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -686,7 +688,7 @@ class GzippedFile: public QIODevice
 
 public:
 
-  GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile );
+  GzippedFile( char const * fileName ) ;
 
   ~GzippedFile();
 
@@ -717,7 +719,7 @@ protected:
   { return -1; }
 };
 
-GzippedFile::GzippedFile( char const * fileName ) THROW_SPEC( exCantReadFile )
+GzippedFile::GzippedFile( char const * fileName ) 
 {
   gz = gd_gzopen( fileName );
   if ( !gz )
@@ -839,8 +841,8 @@ QString readElementText( QXmlStreamReader & stream )
 
 void addAllKeyTags( QXmlStreamReader & stream, list< QString > & words )
 {
-  // todo implement support for tag <srt>, that overrides the article sorting order 
-  if ( stream.name() == "k" )
+  // todo implement support for tag <srt>, that overrides the article sorting order
+  if ( stream.name() == u"k" )
   {
     words.push_back( readElementText( stream ) );
     return;
@@ -887,12 +889,12 @@ void indexArticle( GzippedFile & gzFile,
 {
   ArticleFormat format( Default );
 
-  QStringRef formatValue = stream.attributes().value( "f" );
+  QStringView formatValue = stream.attributes().value( "f" );
 
-  if ( formatValue == "v" )
+  if ( formatValue == u"v" )
     format = Visual;
   else
-  if ( formatValue == "l" )
+  if ( formatValue == u"l" )
     format = Logical;
   if( format == Default )
     format = defaultFormat; 
@@ -1134,7 +1136,7 @@ void XdxfResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > XdxfDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new XdxfResourceRequest( *this, name );
 }
@@ -1146,7 +1148,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -1225,7 +1227,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           if ( stream.isStartElement() )
           {
-            if ( stream.name() != "xdxf" )
+            if ( stream.name() != u"xdxf" )
               throw exNotXdxfFile( dictFiles[ 0 ] );
             else
             {
@@ -1245,7 +1247,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
 
-              bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
+              bool isLogical = ( stream.attributes().value( "format" ) == u"logical" );
 
               QRegExp regNum( "\\d+" );
               regNum.indexIn( stream.attributes().value( "revision" ).toString() );
@@ -1262,7 +1264,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 if ( stream.isStartElement() )
                 {
                   // todo implement using short <title> for denoting the dictionary in settings or dict list toolbar
-                  if ( stream.name() == "full_name" || stream.name() == "full_title" )
+                  if ( stream.name() == u"full_name" || stream.name() == u"full_title" )
                   {
                     // That's our name
 
@@ -1288,7 +1290,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     }
                   }
                   else
-                  if ( stream.name() == "description" )
+                  if ( stream.name() == u"description" )
                   {
                     // todo implement adding other information to the description like <publisher>, <authors>, <file_ver>, <creation_date>, <last_edited_date>, <dict_edition>, <publishing_date>, <dict_src_url> 
                     QString desc = readXhtmlData( stream );
@@ -1310,26 +1312,26 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     }
                   }
                   else
-                  if ( stream.name() == "abbreviations" )
+                  if ( stream.name() == u"abbreviations" )
                   {
                     QString s;
                     string value;
                     list < wstring > keys;
-                    while( !( stream.isEndElement() && stream.name() == "abbreviations" ) && !stream.atEnd() )
+                    while( !( stream.isEndElement() && stream.name() == u"abbreviations" ) && !stream.atEnd() )
                     {
                       if( !stream.readNextStartElement() )
                         break;
                       // abbreviations tag set switch at format revision = 30
                       if( idxHeader.revisionNumber >= 30 )
                       {
-                        while ( !( stream.isEndElement() && stream.name() == "abbr_def" ) || !stream.atEnd() )
+                        while ( !( stream.isEndElement() && stream.name() == u"abbr_def" ) || !stream.atEnd() )
                         {
-                          if ( stream.isStartElement() && stream.name() == "abbr_k" )
+                          if ( stream.isStartElement() && stream.name() == u"abbr_k" )
                           {
                             s = readElementText( stream );
                             keys.push_back( gd::toWString( s ) );
                           }
-                          else if ( stream.isStartElement() && stream.name() == "abbr_v" )
+                          else if ( stream.isStartElement() && stream.name() == u"abbr_v" )
                           {
                             s =  readElementText( stream );
                               value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
@@ -1339,21 +1341,21 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                               }
                               keys.clear();
                           }
-                          else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                          else if ( stream.isEndElement() && stream.name() == u"abbreviations" )
                             break;
                           stream.readNext();
                         }
                       }
                       else
                       {
-                        while ( !( stream.isEndElement() && stream.name() == "abr_def" ) || !stream.atEnd() )
+                        while ( !( stream.isEndElement() && stream.name() == u"abr_def" ) || !stream.atEnd() )
                         {
-                          if ( stream.isStartElement() && stream.name() == "k" )
+                          if ( stream.isStartElement() && stream.name() == u"k" )
                           {
                             s = readElementText( stream );
                             keys.push_back( gd::toWString( s ) );
                           }
-                          else if ( stream.isStartElement() && stream.name() == "v" )
+                          else if ( stream.isStartElement() && stream.name() == u"v" )
                           {
                             s =  readElementText( stream );
                               value = Utf8::encode( Folding::trimWhitespace( gd::toWString( s ) ) );
@@ -1363,7 +1365,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                               }
                               keys.clear();
                           }
-                          else if ( stream.isEndElement() && stream.name() == "abbreviations" )
+                          else if ( stream.isEndElement() && stream.name() == u"abbreviations" )
                             break;
                           stream.readNext();
                         }
@@ -1371,7 +1373,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     }
                   }
                   else
-                  if ( stream.name() == "ar" )
+                  if ( stream.name() == u"ar" )
                   {
                     indexArticle( gzFile, stream, indexedWords, chunks,
                                   articleCount, wordCount, isLogical ? Logical : Visual );

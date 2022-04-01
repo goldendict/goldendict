@@ -132,6 +132,14 @@ void LoadDictionaries::handlePath( Config::Path const & path )
   }
 
   {
+    vector< sptr< Dictionary::Class > > mdxDictionaries =
+      Mdx::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
+
+    dictionaries.insert( dictionaries.end(), mdxDictionaries.begin(),
+                         mdxDictionaries.end() );
+  }
+
+  {
     vector< sptr< Dictionary::Class > > bglDictionaries =
       Bgl::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
 
@@ -198,13 +206,6 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 
     dictionaries.insert( dictionaries.end(), zipSoundsDictionaries.begin(),
                          zipSoundsDictionaries.end() );
-  }
-  {
-    vector< sptr< Dictionary::Class > > mdxDictionaries =
-      Mdx::makeDictionaries( allFiles, FsEncoding::encode( Config::getIndexDir() ), *this );
-
-    dictionaries.insert( dictionaries.end(), mdxDictionaries.begin(),
-                         mdxDictionaries.end() );
   }
   {
     vector< sptr< Dictionary::Class > > glsDictionaries =

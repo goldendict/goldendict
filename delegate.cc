@@ -1,4 +1,4 @@
-#include <QStyleOptionViewItemV4>
+#include <QStyleOptionViewItem>
 
 #include "delegate.hh"
 

@@ -3852,7 +3852,20 @@ Plugin must be installed for this option to work.</source>
         <translation>显示弹出窗口之前先显示一个旗标窗口，点击旗标以显示弹出窗口。</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="678"/>
+        <location filename="../preferences.ui" line="283"/>
+        <source>Normally, clicking on a link, double-clicking on a word or looking up
+selection in an article loads the translation and almost immediately
+scrolls to the article from the same dictionary. With this option off,
+however, the article from the topmost dictionary is shown.</source>
+        <translation>单击link或双击翻译的时候是否自动定位到当前正在浏览的词典。</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="289"/>
+        <source>Automatically scroll to target article</source>
+        <translation>自动定位到当前词典</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="668"/>
         <source>Show scan flag when word is selected</source>
         <translation>单词被选中时显示扫描旗标</translation>
     </message>

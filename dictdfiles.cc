@@ -124,7 +124,7 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual QString const& getDescription();
 
@@ -258,7 +258,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
                                                              vector< wstring > const & alts,
                                                              wstring const &,
                                                              bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   try
   {
@@ -371,7 +371,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         while( it.hasNext() )
         {
           QRegularExpressionMatch match = it.next();
-          articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+          articleNewString += articleString.mid( pos, match.capturedStart() - pos );
           pos = match.capturedEnd();
 
           QString link = match.captured( 1 );
@@ -385,7 +385,7 @@ sptr< Dictionary::DataRequest > DictdDictionary::getArticle( wstring const & wor
         }
         if( pos )
         {
-          articleNewString += articleString.midRef( pos );
+          articleNewString += articleString.mid( pos );
           articleString = articleNewString;
           articleNewString.clear();
         }
@@ -450,8 +450,8 @@ QString const& DictdDictionary::getDescription()
     if( !dictionaryDescription.isEmpty() )
         return dictionaryDescription;
 
-    sptr< Dictionary::DataRequest > req = getArticle( GD_NATIVE_TO_WS( L"00databaseinfo" ),
-                                                      vector< wstring >(), wstring(), false );
+    sptr< Dictionary::DataRequest > req =
+      getArticle(  U"00databaseinfo" , vector< wstring >(), wstring(), false );
 
     if( req->dataSize() > 0 )
       dictionaryDescription = Html::unescape( QString::fromUtf8( req->getFullData().data(), req->getFullData().size() ), true );
@@ -583,7 +583,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 

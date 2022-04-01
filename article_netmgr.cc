@@ -1,14 +1,8 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
-
 #include <QUrl>
-
 #include "article_netmgr.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
@@ -32,7 +26,7 @@ using std::string;
 
     connect( baseReply, SIGNAL( metaDataChanged() ), this, SLOT( applyMetaData() ) );
 
-    connect( baseReply, SIGNAL( error( QNetworkReply::NetworkError) ),
+    connect( baseReply, SIGNAL( errorOccurred( QNetworkReply::NetworkError) ),
              this, SLOT( applyError( QNetworkReply::NetworkError ) ) );
 
     connect( baseReply, SIGNAL( readyRead() ), this, SLOT( readDataFromBase() ) );
@@ -113,8 +107,8 @@ using std::string;
                   baseReply->attribute( QNetworkRequest::HttpPipeliningWasUsedAttribute ) );
     setAttribute( QNetworkRequest::BackgroundRequestAttribute,
                   baseReply->attribute( QNetworkRequest::BackgroundRequestAttribute ) );
-    setAttribute( QNetworkRequest::SpdyWasUsedAttribute,
-                  baseReply->attribute( QNetworkRequest::SpdyWasUsedAttribute ) );
+    setAttribute( QNetworkRequest::Http2WasUsedAttribute,
+                  baseReply->attribute( QNetworkRequest::Http2WasUsedAttribute ) );
 
     emit metaDataChanged();
   }
@@ -133,7 +127,7 @@ using std::string;
   void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
   {
     setError( code, baseReply->errorString() );
-    emit error( code );
+    emit errorOccurred( code );
   }
 
   void AllowFrameReply::readDataFromBase()
@@ -283,7 +277,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   QNetworkRequest newReq(req);
   if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
   {
-    newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
+    newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName().toUtf8(), ""));
   }
 
   QNetworkReply *  reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
@@ -336,8 +330,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     // See if we have some dictionaries muted
 
-    QSet< QString > mutedDicts =
-        QSet< QString >::fromList( Utils::Url::queryItemValue( url, "muted" ).split( ',' ) );
+    QStringList mutedDictLists=Utils::Url::queryItemValue( url, "muted" ).split( ',' );
+    QSet< QString > mutedDicts ( mutedDictLists.begin(),mutedDictLists.end());
 
     // Unpack contexts
 
@@ -525,7 +519,7 @@ void ArticleResourceReply::readyReadSlot()
 void ArticleResourceReply::finishedSlot()
 {
   if (req->dataSize() < 0) {
-    emit error(ContentNotFoundError);
+    emit errorOccurred(ContentNotFoundError);
     setError(ContentNotFoundError, "content not found");
   }
 
@@ -569,5 +563,6 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     connect(reply,&QNetworkReply::finished,requestJob,[=](){
         requestJob->reply("text/html",reply);
     });
+    connect(requestJob, &QObject::destroyed, reply, &QObject::deleteLater);
 }
 

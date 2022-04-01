@@ -16,7 +16,8 @@ public:
 
   OrderAndProps( QWidget * parent, Config::Group const & dictionaryOrder,
                  Config::Group const & inactiveDictionaries,
-                 std::vector< sptr< Dictionary::Class > > const & allDictionaries );
+                 std::vector< sptr< Dictionary::Class > > const & allDictionaries ,
+                 QMap<std::string, sptr< Dictionary::Class > > const & dictMap);
 
   Config::Group getCurrentDictionaryOrder() const;
   Config::Group getCurrentInactiveDictionaries() const;

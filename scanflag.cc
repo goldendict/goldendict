@@ -1,8 +1,8 @@
 #include <QCursor>
-#include <QDesktopWidget>
 
 #include "scanflag.hh"
 #include "ui_scanflag.h"
+#include <QScreen>
 
 static Qt::WindowFlags popupWindowFlags =
 
@@ -53,7 +53,7 @@ void ScanFlag::showScanFlag()
 
   QPoint currentPos = QCursor::pos();
 
-  QRect desktop = QApplication::desktop()->screenGeometry();
+  QRect desktop = QGuiApplication::primaryScreen()->geometry();
 
   QSize windowSize = geometry().size();
 

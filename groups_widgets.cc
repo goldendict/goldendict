@@ -31,7 +31,8 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
   groupId( group.id )
 {
   ui.setupUi( this );
-  ui.dictionaries->populate( Instances::Group( group, dicts, Config::Group() ).dictionaries, dicts );
+  auto dictMap = Dictionary::dictToMap(dicts);
+  ui.dictionaries->populate( Instances::Group( group, dictMap, Config::Group() ).dictionaries, dicts );
 
   // Populate icons' list
 
@@ -260,7 +261,7 @@ QVariant DictListModel::data( QModelIndex const & index, int role ) const
 
     case Qt::DecorationRole:
       // make all icons of the same size to avoid visual size/alignment problems
-      return item->getIcon().pixmap( 32 ).scaledToHeight( 21, Qt::SmoothTransformation );
+      return item->getIcon();
 
     default:;
   }
@@ -328,7 +329,7 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
 
     g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
 
-    Instances::Group i( g, *allDicts, Config::Group() );
+    Instances::Group i( g, Dictionary::dictToMap(*allDicts), Config::Group() );
 
     if ( i.dictionaries.size() == 1 )
     {
@@ -584,8 +585,7 @@ void DictGroupsWidget::populate( Config::Groups const & groups,
   {
     DictGroupWidget *gr = new DictGroupWidget( this, *allDicts, groups[ x ] );
     addTab( gr, escapeAmps( groups[ x ].name ) );
-    connect( gr, SIGNAL( showDictionaryInfo( QString const & ) ),
-             this, SIGNAL( showDictionaryInfo( QString const & ) ) );
+    connect( gr, &DictGroupWidget::showDictionaryInfo,this, &DictGroupsWidget::showDictionaryInfo );
     connect( gr->getModel(), SIGNAL( contentChanged() ), this, SLOT( tabDataChanged() ) );
 
     setCurrentIndex( x );
@@ -744,8 +744,8 @@ void DictGroupsWidget::addAutoGroups()
     dictMap[ name ] = vd;
   }
 
-  QStringList groupList = dictMap.uniqueKeys();
-  QStringList morphoList = morphoMap.uniqueKeys();
+  QStringList groupList = dictMap.keys();
+  QStringList morphoList = morphoMap.keys();
 
   // Insert morphology dictionaries into corresponding lists
 

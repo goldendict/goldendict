@@ -17,7 +17,7 @@ using std::string;
 using gd::wstring;
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::Programs const & )
-  THROW_SPEC( std::exception );
+  ;
 
 class RunInstance: public QObject
 {

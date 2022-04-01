@@ -8,7 +8,6 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <QWebEngineView>
-#include <QOpenGLWidget>
 #include <QPointer>
 
 /// A thin wrapper around QWebEngineView to accommodate to some ArticleView's needs.
@@ -17,8 +16,6 @@
 ///    to the view's current state. This is used to open links in new tabs when
 ///    they are clicked with middle button. There's also an added possibility to
 ///    get double-click events after the fact with the doubleClicked() signal.
-/// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
-///    use triggerPageAction( QWebEnginePage::InspectElement ) instead.
 class ArticleWebView: public QWebEngineView
 {
   Q_OBJECT
@@ -27,11 +24,14 @@ public:
 
   ArticleWebView( QWidget * parent );
   ~ArticleWebView();
-
   void setUp( Config::Class * cfg );
 
   bool isMidButtonPressed() const
   { return midButtonPressed; }
+  void resetMidButtonPressed()
+  {
+    midButtonPressed = false;
+  }
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
@@ -48,7 +48,7 @@ public:
   void doubleClicked( QPoint pos );
 
 protected:
-
+  QWebEngineView *createWindow(QWebEnginePage::WebWindowType type);
   bool event( QEvent * event );
   void singleClickAction(QMouseEvent *event);
   void sendCustomMouseEvent(QEvent::Type type);
@@ -66,7 +66,6 @@ private:
 
   bool midButtonPressed;
   bool selectionBySingleClick;
-  bool showInspectorDirectly;
 
   //MouseDbClickEvent will also emit MousePressEvent which conflict the single click event.
   //this variable used to distinguish the single click and real double click.

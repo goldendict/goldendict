@@ -56,14 +56,14 @@ public:
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
-                                                 unsigned long ) THROW_SPEC( std::exception );
+                                                 unsigned long ) ;
 
   virtual sptr< DataRequest > getArticle( wstring const &,
                                           vector< wstring > const & alts,
                                           wstring const & context, bool )
-    THROW_SPEC( std::exception );
+    ;
 
-  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) THROW_SPEC( std::exception );
+  virtual sptr< Dictionary::DataRequest > getResource( string const & name ) ;
 
   void isolateWebCSS( QString & css );
 
@@ -73,7 +73,7 @@ protected:
 };
 
 sptr< WordSearchRequest > WebSiteDictionary::prefixMatch( wstring const & /*word*/,
-                                                          unsigned long ) THROW_SPEC( std::exception )
+                                                          unsigned long ) 
 {
   sptr< WordSearchRequestInstant > sr = new WordSearchRequestInstant;
 
@@ -195,7 +195,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     while( it.hasNext() )
     {
       QRegularExpressionMatch match = it.next();
-      articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+      articleNewString += articleString.mid( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QString tag = match.captured();
@@ -233,7 +233,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     }
     if( pos )
     {
-      articleNewString += articleString.midRef( pos );
+      articleNewString += articleString.mid( pos );
       articleString = articleNewString;
       articleNewString.clear();
     }
@@ -245,10 +245,11 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
                                  QRegularExpression::CaseInsensitiveOption );
     pos = 0;
     it = linkTags.globalMatch( articleString );
+
     while( it.hasNext() )
     {
       QRegularExpressionMatch match = it.next();
-      articleNewString += articleString.midRef( pos, match.capturedStart() - pos );
+      articleNewString += articleString.mid( pos, match.capturedStart() - pos );
       pos = match.capturedEnd();
 
       QString newTag = match.captured( 1 ) + prefix + match.captured( 2 )
@@ -257,27 +258,9 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     }
     if( pos )
     {
-      articleNewString += articleString.midRef( pos );
+      articleNewString += articleString.mid( pos );
       articleString = articleNewString;
       articleNewString.clear();
-    }
-
-    // Check for unclosed <span> and <div>
-
-    int openTags = articleString.count( QRegExp( "<\\s*span\\b", Qt::CaseInsensitive ) );
-    int closedTags = articleString.count( QRegExp( "<\\s*/span\\s*>", Qt::CaseInsensitive ) );
-    while( openTags > closedTags )
-    {
-      articleString += "</span>";
-      closedTags += 1;
-    }
-
-    openTags = articleString.count( QRegExp( "<\\s*div\\b", Qt::CaseInsensitive ) );
-    closedTags = articleString.count( QRegExp( "<\\s*/div\\s*>", Qt::CaseInsensitive ) );
-    while( openTags > closedTags )
-    {
-      articleString += "</div>";
-      closedTags += 1;
     }
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
@@ -328,7 +311,7 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
 sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                                                    vector< wstring > const &,
                                                    wstring const & context, bool )
-  THROW_SPEC( std::exception )
+  
 {
   QByteArray urlString;
 
@@ -369,7 +352,7 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
     {
       codec = QTextCodec::codecForName( QString( "ISO 8859-%1" ).arg( x ).toLatin1() );
       if( codec )
-        urlString.replace( QString( "%25GDISO%1%25" ).arg( x ), codec->fromUnicode( inputWord ).toPercentEncoding() );
+        urlString.replace( QString( "%25GDISO%1%25" ).arg( x ).toUtf8(), codec->fromUnicode( inputWord ).toPercentEncoding() );
 
       if ( x == 10 )
         x = 12; // Skip encodings 11..12, they don't exist
@@ -507,7 +490,7 @@ void WebSiteResourceRequest::requestFinished( QNetworkReply * r )
   finish();
 }
 
-sptr< Dictionary::DataRequest > WebSiteDictionary::getResource( string const & name ) THROW_SPEC( std::exception )
+sptr< Dictionary::DataRequest > WebSiteDictionary::getResource( string const & name ) 
 {
   QString link = QString::fromUtf8( name.c_str() );
   int pos = link.indexOf( '/' );
@@ -536,7 +519,7 @@ void WebSiteDictionary::loadIcon() throw()
 
 vector< sptr< Dictionary::Class > > makeDictionaries( Config::WebSites const & ws,
                                                       QNetworkAccessManager & mgr )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > result;
 

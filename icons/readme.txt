@@ -53,3 +53,8 @@ pushbin
 https://commons.wikimedia.org/wiki/File:Arrow_bottom_svg.svg  license:public domain
 lists:
 1downarrow
+
+
+these two icons from sertoli @  https://forum.freemdict.com/u/sertoli/summary
+playsound.png
+playsound_full.png

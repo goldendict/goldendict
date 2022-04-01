@@ -12,9 +12,9 @@ namespace Mdx
 using std::vector;
 using std::string;
 
-vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
+vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > & fileNames,
                                                       string const & indicesDir,
-                                                      Dictionary::Initializing & ) THROW_SPEC( std::exception );
+                                                      Dictionary::Initializing & ) ;
 
 }
 

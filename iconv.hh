@@ -4,23 +4,20 @@
 #ifndef __ICONV_HH_INCLUDED__
 #define __ICONV_HH_INCLUDED__
 
-#include <iconv.h>
+#include <QTextCodec>
+
 #include "wstring.hh"
 #include "ex.hh"
-#include "cpp_features.hh"
 
 /// A wrapper for the iconv() character set conversion functions
 class Iconv
 {
-  iconv_t state;
+  //iconv_t state;
+    QTextCodec* codec;
 
 public:
 
   DEF_EX( Ex, "Iconv exception", std::exception )
-  DEF_EX_STR( exCantInit, "Can't initialize iconv conversion:", Ex )
-  DEF_EX( exIncorrectSeq, "Invalid character sequence encountered during character conversion", Ex )
-  DEF_EX( exPrematureEnd, "Character sequence ended prematurely during character conversion", Ex )
-  DEF_EX_STR( exOther, "An error has occurred during character conversion:", Ex )
 
   // Some predefined character sets' names
 
@@ -28,35 +25,20 @@ public:
   static char const * const Utf16Le;
   static char const * const Utf8;
 
-  Iconv( char const * to, char const * from ) THROW_SPEC( exCantInit );
+  Iconv( char const * to, char const * from );
 
-  // Changes to another pair of encodings. All the internal state is reset.
-  void reinit( char const * to, char const * from ) THROW_SPEC( exCantInit );
+  ~Iconv();
 
-  ~Iconv() throw();
-
-  enum Result
-  {
-    Success, // All the data was successfully converted
-    NeedMoreIn, // Input has an incomplete multibyte character at its end
-    NeedMoreOut // The output buffer can't hold the result
-  };
-
-  Result convert( void const * & inBuf, size_t & inBytesLeft,
-                  void * & outBuf, size_t & outBytesLeft ) THROW_SPEC( exIncorrectSeq,
-                                                                  exOther );
+  QString convert(void const* & inBuf, size_t& inBytesLeft);
 
   // Converts a given block of data from the given encoding to a wide string.
   static gd::wstring toWstring( char const * fromEncoding, void const * fromData,
-                                 size_t dataSize )
-    THROW_SPEC( exCantInit, exIncorrectSeq, exPrematureEnd, exOther );
+                                 size_t dataSize );
 
   // Converts a given block of data from the given encoding to an utf8-encoded
   // string.
   static std::string toUtf8( char const * fromEncoding, void const * fromData,
-                             size_t dataSize )
-    THROW_SPEC( exCantInit, exIncorrectSeq, exPrematureEnd, exOther );
-
+                             size_t dataSize );
 private:
 
   // Copying/assigning not supported

@@ -74,7 +74,7 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.programs->resizeColumnToContents( 0 );
   // Make sure this thing will be large enough
   ui.programs->setColumnWidth( 1,
-    QFontMetrics( QFont() ).width(
+    QFontMetrics( QFont() ).horizontalAdvance(
       ProgramTypeEditor::getNameForType( Config::Program::PrefixMatch ) ) + 16 );
   ui.programs->resizeColumnToContents( 2 );
   ui.programs->resizeColumnToContents( 3 );

@@ -462,7 +462,7 @@ BtreeWordSearchRequest::~BtreeWordSearchRequest()
 
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
   wstring const & str, unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   return new BtreeWordSearchRequest( *this, str, 0, -1, true, maxResults );
 }
@@ -470,7 +470,7 @@ sptr< Dictionary::WordSearchRequest > BtreeDictionary::prefixMatch(
 sptr< Dictionary::WordSearchRequest > BtreeDictionary::stemmedMatch(
   wstring const & str, unsigned minLength, unsigned maxSuffixVariation,
   unsigned long maxResults )
-  THROW_SPEC( std::exception )
+  
 {
   return new BtreeWordSearchRequest( *this, str, minLength, (int)maxSuffixVariation,
                                      false, maxResults );
@@ -526,8 +526,8 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
   
   // Lookup the index by traversing the index btree
 
-  vector< wchar > wcharBuffer;
-
+  // vector< wchar > wcharBuffer;
+  wstring w_word;
   exactMatch = false;
 
   // Read a node
@@ -615,20 +615,10 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
           --closestString;
   
         size_t wordSize = strlen( closestString );
-  
-        if ( wcharBuffer.size() <= wordSize )
-          wcharBuffer.resize( wordSize + 1 );
-  
-        long result = Utf8::decode( closestString, wordSize, &wcharBuffer.front() );
 
-        if ( result < 0 )
-          throw Utf8::exCantDecode( closestString );
-  
-        wcharBuffer[ result ] = 0;
+        w_word = Utf8::decode( string( closestString, wordSize ) );
 
-        //GD_DPRINTF( "Checking against %s\n", closestString );
-
-        compareResult = target.compare( &wcharBuffer.front() );
+        compareResult = target.compare( w_word);
   
         if ( !compareResult )
         {
@@ -749,22 +739,12 @@ char const * BtreeIndex::findChainOffsetExactOrPrefix( wstring const & target,
         ptr += sizeof( uint32_t );
   
         size_t wordSize = strlen( ptr );
+
+        w_word = Utf8::decode( string( ptr, wordSize ) );
   
-        if ( wcharBuffer.size() <= wordSize )
-          wcharBuffer.resize( wordSize + 1 );
-  
-        //GD_DPRINTF( "checking against word %s, left = %u\n", ptr, leafEntries );
-  
-        long result = Utf8::decode( ptr, wordSize, &wcharBuffer.front() );
-  
-        if ( result < 0 )
-          throw Utf8::exCantDecode( ptr );
-  
-        wcharBuffer[ result ] = 0;
-  
-        wstring foldedWord = Folding::apply( &wcharBuffer.front() );
+        wstring foldedWord = Folding::apply( w_word );
         if( foldedWord.empty() )
-          foldedWord = Folding::applyWhitespaceOnly( &wcharBuffer.front() );
+          foldedWord = Folding::applyWhitespaceOnly( w_word );
   
         int compareResult = target.compare( foldedWord );
   
@@ -1071,22 +1051,10 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
 
   // Safeguard us against various bugs here. Don't attempt adding words
   // which are freakishly huge.
-  if ( wordSize > maxHeadwordSize )
+  if( wordSize > maxHeadwordSize )
   {
-#define MAX_LOG_WORD_SIZE 500
-    string headword;
-    if( wordSize <= MAX_LOG_WORD_SIZE )
-      headword = Utf8::encode( word );
-    else
-    {
-      std::vector< char > buffer( MAX_LOG_WORD_SIZE * 4 );
-      headword = string( &buffer.front(),
-                         Utf8::encode( wordBegin, MAX_LOG_WORD_SIZE, &buffer.front() ) );
-      headword += "...";
-    }
-    gdWarning( "Skipped too long headword: \"%s\"", headword.c_str() );
+    qWarning() << "Skipped too long headword: " << word.substr( 0, 100 ).c_str() << "size:" << wordSize;
     return;
-#undef MAX_LOG_WORD_SIZE
   }
 
   // Skip any leading whitespace
@@ -1118,17 +1086,11 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
               wstring folded = Folding::applyWhitespaceOnly( wstring( wordBegin, wordSize ) );
               if( !folded.empty() )
               {
-                  iterator i = insert(
-                    IndexedWords::value_type(
-                      string( &utfBuffer.front(),
-                              Utf8::encode( folded.data(), folded.size(), &utfBuffer.front() ) ),
-                      vector< WordArticleLink >() ) ).first;
+                iterator i = insert( { Utf8::encode( folded ),
+                                       vector< WordArticleLink >() } )
+                               .first;
 
-                  // Try to conserve memory somewhat -- slow insertions are ok
-                  i->second.reserve( i->second.size() + 1 );
-
-                  string utfWord( &utfBuffer.front(),
-                                  Utf8::encode( wordBegin, wordSize, &utfBuffer.front() ) );
+                string utfWord=Utf8::encode( wstring(wordBegin, wordSize )) ;
                   string utfPrefix;
                   i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
               }
@@ -1142,24 +1104,15 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
 
     // Insert this word
     wstring folded = Folding::apply( nextChar );
-    
-    iterator i = insert(
-      IndexedWords::value_type(
-        string( &utfBuffer.front(),
-                Utf8::encode( folded.data(), folded.size(), &utfBuffer.front() ) ),
-        vector< WordArticleLink >() ) ).first;
 
-    if ( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
+    iterator i = insert( { Utf8::encode( folded ), vector< WordArticleLink >() } ).first;
+
+    if( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
     {
-      // Try to conserve memory somewhat -- slow insertions are ok
-      i->second.reserve( i->second.size() + 1 );
-  
-      string utfWord( &utfBuffer.front(),
-                      Utf8::encode( nextChar, wordSize - ( nextChar - wordBegin ), &utfBuffer.front() ) );
-  
-      string utfPrefix( &utfBuffer.front(),
-                        Utf8::encode( wordBegin, nextChar - wordBegin, &utfBuffer.front() ) );
-  
+      string utfWord = Utf8::encode( wstring( nextChar, wordSize - ( nextChar - wordBegin ) ) );
+
+      string utfPrefix = Utf8::encode( wstring( wordBegin, nextChar - wordBegin ) );
+
       i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
     }
 
@@ -1437,16 +1390,17 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
-                                                    result.at( i ).articleOffset );
+      uint32_t articleOffset =   result.at(i).articleOffset;
+      QList<uint32_t>::Iterator  it = std::lower_bound( begOffsets, endOffsets,
+                                                    articleOffset );
 
-      if( it != offsets.end() )
+      if( it!=offsets.end())
       {
         if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
-        offsets.erase( it );
+        offsets.erase( it);
         begOffsets = offsets.begin();
         endOffsets = offsets.end();
       }

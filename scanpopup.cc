@@ -8,15 +8,15 @@
 #include <QBitmap>
 #include <QMenu>
 #include <QMouseEvent>
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <QDesktopWidget>
+#endif
 #include "gddebug.hh"
 #include "gestures.hh"
 
 #ifdef Q_OS_MAC
 #include "macmouseover.hh"
 #define MouseOver MacMouseOver
-#else
-#include "mouseover.hh"
 #endif
 
 using std::wstring;
@@ -244,16 +244,16 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( focusArticleViewAction, SIGNAL( triggered() ), definition, SLOT( focus() ) );
 
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
-                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+                                       QKeySequence( Qt::CTRL | Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL | Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_8 ) );
 
   addAction( &switchExpandModeAction );
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
            this, SLOT(switchExpandOptionalPartsMode() ) );
 
-  connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( ui.groupList, &QComboBox::currentIndexChanged,
+           this, &ScanPopup::currentGroupChanged);
 
   connect( &wordFinder, SIGNAL( finished() ),
            this, SLOT( prefixMatchFinished() ) );
@@ -279,9 +279,10 @@ ScanPopup::ScanPopup( QWidget * parent,
              this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
 #endif
 
+#ifdef Q_OS_MAC
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
            this, SLOT( mouseHovered( QString const &, bool ) ) );
-
+#endif
 
   hideTimer.setSingleShot( true );
   hideTimer.setInterval( 400 );
@@ -305,9 +306,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseGrabPollTimer.setInterval( 10 );
   connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
            this, SLOT(mouseGrabPoll())  );
-
+#ifdef Q_OS_MAC
   MouseOver::instance().setPreferencesPtr( &( cfg.preferences ) );
-
+#endif
   ui.goBackButton->setEnabled( false );
   ui.goForwardButton->setEnabled( false );
 
@@ -361,7 +362,6 @@ void ScanPopup::enableScanning()
   if ( !isScanningEnabled )
   {
     isScanningEnabled = true;
-    MouseOver::instance().enableMouseOver();
   }
 }
 
@@ -369,7 +369,6 @@ void ScanPopup::disableScanning()
 {
   if ( isScanningEnabled )
   {
-    MouseOver::instance().disableMouseOver();
     isScanningEnabled = false;
   }
 }
@@ -625,7 +624,7 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
       QPoint currentPos = QCursor::pos();
 
-      QRect desktop = QApplication::desktop()->screenGeometry();
+      QRect desktop = QGuiApplication::primaryScreen()->geometry();
 
       QSize windowSize = geometry().size();
 
@@ -716,8 +715,7 @@ QString ScanPopup::elideInputWord()
   QString const & inputWord = inputPhrase.phrase;
   return inputWord.size() > 32 ? inputWord.mid( 0, 32 ) + "..." : inputWord;
 }
-
-void ScanPopup::currentGroupChanged( QString const & )
+void ScanPopup::currentGroupChanged( int )
 {
     cfg.lastPopupGroupId = ui.groupList->getCurrentGroup();
     Instances::Group const * igrp = groups.findGroup( cfg.lastPopupGroupId );
@@ -1004,7 +1002,11 @@ void ScanPopup::leaveEvent( QEvent * event )
   }
 }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+void ScanPopup::enterEvent( QEnterEvent * event )
+#else
 void ScanPopup::enterEvent( QEvent * event )
+#endif
 {
   QMainWindow::enterEvent( event );
 
@@ -1139,7 +1141,11 @@ void ScanPopup::altModePoll()
 
 void ScanPopup::pageLoaded( ArticleView * )
 {
-  ui.pronounceButton->setVisible( definition->hasSound() );
+
+
+  definition->hasSound([this](bool has){
+      ui.pronounceButton->setVisible( has );
+  });
 
   updateBackForwardButtons();
 

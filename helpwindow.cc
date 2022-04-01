@@ -11,6 +11,7 @@
 
 #include "helpwindow.hh"
 #include "gddebug.hh"
+#include <QHelpLink>
 
 namespace Help {
 
@@ -25,9 +26,11 @@ void HelpBrowser::showHelpForKeyword( QString const & id )
 {
   if ( helpEngine )
   {
-    QMap< QString, QUrl > links = helpEngine->linksForIdentifier( id );
-    if( !links.isEmpty() )
-      setSource( links.constBegin().value() );
+    QList<QHelpLink> links = helpEngine->documentsForIdentifier(id);
+    if (!links.isEmpty()) {
+      QHelpLink link=links.constFirst();
+      setSource(link.url);
+    }
   }
 }
 
@@ -251,7 +254,7 @@ void HelpWindow::applyZoomFactor()
 
   zoomInAction->setEnabled( cfg.preferences.helpZoomFactor < 5 );
   zoomOutAction->setEnabled( cfg.preferences.helpZoomFactor > 0.2 );
-  zoomBaseAction->setEnabled( cfg.preferences.helpZoomFactor != 1.0 );
+  zoomBaseAction->setEnabled( !qFuzzyCompare(cfg.preferences.helpZoomFactor, 1.0) );
 
   if( fontSize > 0 )
   {

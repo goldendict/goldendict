@@ -1,0 +1,170 @@
+name: Windows-6.2
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on: 
+  workflow_run:
+    workflows: [AutoTag]
+    types: [completed]
+  workflow_dispatch:
+  # push代码时触发workflow
+  # push:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+  #     - ".clang-format"      
+  # pull_request:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+jobs:
+  build:
+    name: Build
+    # 运行平台， windows-latest目前是windows server 2019 
+    # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
+    runs-on: windows-2019
+    strategy:
+      # 矩阵配置
+      matrix:
+        # qt_ver: [5.15.2,6.2.2]
+        include:
+          # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
+          # - qt_ver: 5.15.2
+          #   qt_arch: win64_msvc2019_64
+          #   msvc_arch: x64
+          #   qt_target: x64
+          #   qt_arch_install: msvc2019_64  
+          - qt_ver: 6.2.3
+            qt_arch: win64_msvc2019_64
+            msvc_arch: x64
+            qt_target: x64
+            qt_arch_install: msvc2019_64           
+    env:
+      targetName: GoldenDict.exe
+      version: 22.4.Summer
+    # 步骤
+    steps:
+      # 安装Qt
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          # Version of Qt to install
+          version: ${{ matrix.qt_ver }}
+          # Target platform for build
+          # target: ${{ matrix.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
+
+      # 拉取代码
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set outputs
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
+          echo "::set-output name=release_date::$(date +'%Y%m%d')"    
+          echo "::set-output name=release_time::$(date +'%H%M%S')"    
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          CHANGELOG="$(git log --oneline --no-decorate $previousTag..HEAD)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
+
+      # # msvc编译
+      # - uses: ilammy/msvc-dev-cmd@v1
+      #   with:
+      #     arch: ${{ matrix.msvc_arch }}    
+      - name: msvc-build goldendict
+        id: build
+        shell: cmd
+        run: |
+          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          qmake "CONFIG+=zim_support" CONFIG+=release
+          nmake
+
+          echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
+          echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
+          echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
+          echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
+          echo QTDIR=%Qt6_DIR% >> %GITHUB_ENV%
+
+      # 打包 
+      - name: package
+        id: package      
+        env:
+          archiveName: GoldenDict-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
+          msvcArch: ${{ matrix.msvc_arch }}
+        shell: pwsh
+        run: |
+          & .github\scripts\windows-publish.ps1 ${env:archiveName} ${env:targetName}
+           $name = ${env:archiveName}
+           echo "::set-output name=packageName::$name" 
+      # tag 查询github-Release
+      # 上传artifacts          
+#       - uses: actions/upload-artifact@v2
+#         with:
+#           name: ${{ steps.package.outputs.packageName }}
+#           path: ${{ steps.package.outputs.packageName }}.zip
+      # tag 上传Release
+      - name: uploadRelease
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{ matrix.qt_ver }}-${{ steps.package.outputs.packageName }}.zip
+          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
+          prerelease: false
+          body: |
+            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+
+            auto built by github action. use on your on risk:-)
+      - name: upload goldendict.exe only
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release/${{ env.targetName }}
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}
+          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
+          prerelease: false
+          body: |
+            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
+            branch:               ${{ github.ref_name }}
+            commit:               ${{ steps.vars.outputs.sha_short }} 
+            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Windows built with:   msvc64  Visual studio 2019
+                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64(Intel Kind)
+            auto built by github action. use on your on risk:-)   

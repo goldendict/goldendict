@@ -1,12 +1,16 @@
 //document ready
 (function($){
 $(function() {
-        $("a").click(function(event) {
+        $(document).on("click","a",function(event) {
             var link = $(this).attr("href");
-            emitClickedEvent(link);
-            if(link.indexOf(":")>=0){
+            if ('string' != typeof(link)) {
                 return;
             }
+            if(link.indexOf(":")>=0){
+                emitClickedEvent(link);
+                return false;
+            }
+            emitClickedEvent("");
 
             var newLink;
             var href = window.location.href;
@@ -23,12 +27,17 @@ $(function() {
                 }
             } else {
                 index = href.indexOf("?");
-                if(index>-1)
-                {
-                    newLink = href.substring(0, index) + "?word=" + link;
+
+                if (link.indexOf("?gdanchor") > -1) {
+                    newLink = "gdlookup://localhost/" + link;
                 }
-                else{
-                    newLink=href+"?word=" + link;
+                else {
+                    if (index > -1) {
+                        newLink = href.substring(0, index) + "?word=" + link;
+                    }
+                    else {
+                        newLink = href + "?word=" + link;
+                    }
                 }
             }
             $(this).attr("href", newLink);
@@ -43,14 +52,16 @@ function playSound(sound) {
     a.play();
 }
 
-function emitClickedEvent(link) {
-    try {
-        articleview.linkClickedInHtml(link);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+    setInterval(function(){
+        //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
+        if(obj.contentWindow.document.documentElement.scrollHeight <1000)
+        {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+        else{
+            obj.style.height ='1000px'
+            obj.scrolling="yes";
+        }
+    },500);
 }

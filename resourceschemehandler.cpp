@@ -25,4 +25,5 @@ void ResourceSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
       // Reply segment
       requestJob->reply(contentType.toLatin1(), reply);
     });
+    connect(requestJob, &QObject::destroyed, reply, &QObject::deleteLater);
 }

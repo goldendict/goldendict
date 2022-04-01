@@ -1,19 +1,34 @@
 name: Ubuntu
 # Qt官方没有linux平台的x86包
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 on: 
+  workflow_run:
+    workflows: [AutoTag]
+    types: [completed]
   workflow_dispatch:
-  push:
-    branches:
-      - dev
-    # paths:
-    #   - '*.pro'
-    #   - '.github/**' 
-  pull_request:
-    branches:
-      - dev
-    # paths:
-    #   - '*.pro'
-    #   - '.github/**' 
+  # push:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+  #     - ".clang-format"
+  # pull_request:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
 jobs:
   build:
     name: Build
@@ -23,9 +38,11 @@ jobs:
         os: [ubuntu-20.04]
         qt_ver: [5.15.2]
         qt_arch: [gcc_64]
+    env:
+      version: 22.4.Summer
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2.13.0
+        uses: jurplel/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
@@ -37,21 +54,28 @@ jobs:
           sudo apt-get install qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev 
           sudo apt-get install libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev 
           sudo apt-get install libqt5webkit5-dev libqt5svg5-dev libqt5x11extras5-dev qttools5-dev 
-          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins libopencc-dev libzstd-dev
+          sudo apt-get install qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins doxygen libzstd-dev #libopencc-dev
           sudo ln -sf /usr/bin/x86_64-linux-gnu-ld.gold /usr/bin/ld
-      - uses: actions/checkout@v2
+          git clone https://github.com/BYVoid/OpenCC
+          pwd
+          cd OpenCC/
+          make PREFIX=/usr -j$(nproc)
+          sudo make install
+          cd ..
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 1
-      # - name: build singleapplication
-      #   run: |
-      #     cd qtsingleapplication
-      #     qmake
-      #     make
+          fetch-depth: 0 
+
       - name: build goldendict
         run: |
           qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
-          ls -al
+
+          #copy missing shared dll to appdir.
+          mkdir -p appdir/usr/lib
+          cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep gobject ) appdir/usr/lib
+          cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep libpango ) appdir/usr/lib
+
       - name: Build AppImage
         run: |
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
@@ -59,35 +83,47 @@ jobs:
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage"
           chmod a+x linuxdeploy-x86_64.AppImage
           ./linuxdeploy-x86_64.AppImage --appdir appdir --output appimage --plugin qt  -i redist/icons/goldendict.png -d redist/org.goldendict.GoldenDict.desktop 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: AppImage
-          path: './*.AppImage*'
+
       - name: Set outputs
         id: vars
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"    
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
           echo "::set-output name=appname::$(ls *.AppImage*)"
+
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          CHANGELOG="$(git log --oneline --no-decorate $previousTag..HEAD)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
-          asset_name: ${{ steps.vars.outputs.appname }}
-          tag: prerelease-${{steps.vars.outputs.release_date}}
+          asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
+          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: Ubuntu-Windows-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }} built on ${{steps.vars.outputs.release_date}}  ${{steps.vars.outputs.release_time_clock}}  
-          prerelease: true
+          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
+          prerelease: false
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
             branch:               ${{ github.ref_name }}
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
-            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            ## goldendict.exe can not used alone 
+            if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
             
-            This is a prerelease version ,auto build by github action. use on your on risk:-)
+            AppImage built with:  Ubuntu-20.04 ,latest gcc
+            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64(Intel Kind)
+            auto built by github action. use on your on risk:-)  
+
+            CHANGES:
+            ${{ steps.vars.outputs.COMMIT_SUMMARY }}             

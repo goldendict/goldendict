@@ -9,11 +9,7 @@
 #include <QtXml>
 #include "gddebug.hh"
 
-#if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
-#include <stdint_msvc.h>
-#else
 #include <stdint.h>
-#endif
 
 #ifdef Q_OS_WIN32
 #include "shlobj.h"
@@ -217,6 +213,7 @@ Preferences::Preferences():
   autoStart( false ),
   doubleClickTranslates( true ),
   selectWordBySingleClick( false ),
+  autoScrollToTargetArticle( true ),
   escKeyHidesMainWindow( false ),
   alwaysOnTop ( false ),
   searchInDock ( false ),
@@ -446,7 +443,7 @@ void saveMutedDictionaries( QDomDocument & dd, QDomElement & muted,
 
 }
 
-Class load() THROW_SPEC( exError )
+Class load() 
 {
   QString configName  = getConfigFileName();
 
@@ -861,6 +858,9 @@ Class load() THROW_SPEC( exError )
 
     if ( !preferences.namedItem( "selectWordBySingleClick" ).isNull() )
       c.preferences.selectWordBySingleClick = ( preferences.namedItem( "selectWordBySingleClick" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "autoScrollToTargetArticle" ).isNull() )
+      c.preferences.autoScrollToTargetArticle = ( preferences.namedItem( "autoScrollToTargetArticle" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "escKeyHidesMainWindow" ).isNull() )
       c.preferences.escKeyHidesMainWindow = ( preferences.namedItem( "escKeyHidesMainWindow" ).toElement().text() == "1" );
@@ -1278,7 +1278,7 @@ void saveGroup( Group const & data, QDomElement & group )
 
 }
 
-void save( Class const & c ) THROW_SPEC( exError )
+void save( Class const & c ) 
 {
   QFile configFile( getConfigFileName() + ".tmp" );
 
@@ -1723,6 +1723,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "selectWordBySingleClick" );
     opt.appendChild( dd.createTextNode( c.preferences.selectWordBySingleClick ? "1":"0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "autoScrollToTargetArticle" );
+    opt.appendChild( dd.createTextNode( c.preferences.autoScrollToTargetArticle ? "1":"0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "escKeyHidesMainWindow" );
@@ -2202,12 +2206,12 @@ QString getConfigFileName()
   return getHomeDir().absoluteFilePath( "config" );
 }
 
-QString getConfigDir() THROW_SPEC( exError )
+QString getConfigDir() 
 {
   return getHomeDir().path() + QDir::separator();
 }
 
-QString getIndexDir() THROW_SPEC( exError )
+QString getIndexDir() 
 {
   QDir result = getHomeDir();
 
@@ -2228,12 +2232,12 @@ QString getIndexDir() THROW_SPEC( exError )
   return result.path() + QDir::separator();
 }
 
-QString getPidFileName() THROW_SPEC( exError )
+QString getPidFileName() 
 {
   return getHomeDir().filePath( "pid" );
 }
 
-QString getHistoryFileName() THROW_SPEC( exError )
+QString getHistoryFileName() 
 {
   QString homeHistoryPath = getHomeDir().filePath( "history" );
 
@@ -2249,22 +2253,22 @@ QString getHistoryFileName() THROW_SPEC( exError )
   return homeHistoryPath;
 }
 
-QString getFavoritiesFileName() THROW_SPEC( exError )
+QString getFavoritiesFileName() 
 {
   return getHomeDir().filePath( "favorites" );
 }
 
-QString getUserCssFileName() THROW_SPEC( exError )
+QString getUserCssFileName() 
 {
   return getHomeDir().filePath( "article-style.css" );
 }
 
-QString getUserCssPrintFileName() THROW_SPEC( exError )
+QString getUserCssPrintFileName() 
 {
   return getHomeDir().filePath( "article-style-print.css" );
 }
 
-QString getUserQtCssFileName() THROW_SPEC( exError )
+QString getUserQtCssFileName() 
 {
   return getHomeDir().filePath( "qt-style.css" );
 }
@@ -2281,12 +2285,17 @@ QString getProgramDataDir() throw()
   #endif
 }
 
+QString getEmbedLocDir() throw()
+{
+  return ":/locale";
+}
+
 QString getLocDir() throw()
 {
-  if ( QDir( getProgramDataDir() ).cd( "locale" ) )
-    return getProgramDataDir() + "/locale";
-  else
-    return QCoreApplication::applicationDirPath() + "/locale";
+    if ( QDir( getProgramDataDir() ).cd( "locale" ) )
+      return getProgramDataDir() + "/locale";
+    else
+      return QCoreApplication::applicationDirPath() + "/locale";
 }
 
 QString getHelpDir() throw()
@@ -2348,7 +2357,7 @@ QString getPortableVersionMorphoDir() throw()
     return QString();
 }
 
-QString getStylesDir() throw()
+QString getStylesDir()
 {
   QDir result = getHomeDir();
 

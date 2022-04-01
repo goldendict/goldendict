@@ -46,7 +46,7 @@
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
 #include "utils.hh"
-#include <QDesktopWidget>
+#include <qscreen.h>
 #include "ui_authentication.h"
 #include "resourceschemehandler.h"
 
@@ -59,14 +59,14 @@
 #include <windows.h>
 #include "wstring.hh"
 #include "wstring_qt.hh"
-
-#define gdStoreNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 1 ) )
-#define gdApplyNormalGeometryEvent ( ( QEvent::Type )( QEvent::User + 2 ) )
-
 #endif
 
 #ifdef HAVE_X11
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtGui/private/qtx11extras_p.h>
+#else
 #include <QX11Info>
+#endif
 #include <X11/Xlib.h>
 #include <fixx11h.h>
 #endif
@@ -156,7 +156,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   wuri = new WebUrlRequestInterceptor();
-  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor(wuri);
+  QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor( wuri );
+  connect( wuri, &WebUrlRequestInterceptor::linkClicked, this, &MainWindow::viewLinkClicked );
+
+  if(!cfg.preferences.hideGoldenDictHeader){
+    QWebEngineProfile::defaultProfile()->setHttpUserAgent(QWebEngineProfile::defaultProfile()->httpUserAgent()+" GoldenDict/webengine");
+  }
 
   qRegisterMetaType< Config::InputPhrase >();
 
@@ -169,8 +174,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   articleMaker.setCollapseParameters( cfg.preferences.collapseBigArticles, cfg.preferences.articleSizeLimit );
 
   // Set own gesture recognizers
+#ifndef Q_OS_MAC
   Gestures::registerRecognizers();
-
+#endif
   // use our own, custom statusbar
   setStatusBar(0);
   mainStatusBar = new MainStatusBar( this );
@@ -459,9 +465,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   switchExpandModeAction.setShortcutContext( Qt::WidgetWithChildrenShortcut );
   switchExpandModeAction.setShortcuts( QList< QKeySequence >() <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_8 ) <<
-                                       QKeySequence( Qt::CTRL + Qt::Key_Asterisk ) <<
-                                       QKeySequence( Qt::CTRL + Qt::SHIFT + Qt::Key_8 ) );
+                                       QKeySequence( Qt::CTRL | Qt::Key_8 ) <<
+                                       QKeySequence( Qt::CTRL | Qt::Key_Asterisk ) <<
+                                       QKeySequence( Qt::CTRL | Qt::SHIFT | Qt::Key_8 ) );
 
   connect( &switchExpandModeAction, SIGNAL( triggered() ),
            this, SLOT(switchExpandOptionalPartsMode() ) );
@@ -676,11 +682,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.showReference, SIGNAL( triggered() ),
            this, SLOT( showGDHelp() ) );
 
-  connect( groupListInDock, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupListInDock, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 
-  connect( groupListInToolbar, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupListInToolbar, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 
   connect( ui.translateLine, SIGNAL( textChanged( QString const & ) ),
            this, SLOT( translateInputChanged( QString const & ) ) );
@@ -741,7 +747,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 #ifdef Q_OS_WIN
   if( cfg.normalMainWindowGeometry.width() <= 0 )
   {
-    QRect r = QApplication::desktop()->availableGeometry();
+    QRect r = QGuiApplication::primaryScreen ()->geometry ();
     cfg.normalMainWindowGeometry.setRect( r.width() / 4, r.height() / 4, r.width() / 2, r.height() / 2 );
   }
   if( cfg.maximizedMainWindowGeometry.width() > 0 )
@@ -767,7 +773,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
   applyProxySettings();
-  applyWebSettings();
 
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
@@ -975,7 +980,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
     return;
   }
 
-  if (event->button() != Qt::MidButton)
+  if (event->button() != Qt::MiddleButton)
     return QMainWindow::mousePressEvent(event);
 
   // middle clicked
@@ -1133,8 +1138,8 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const 
   {
     // Load an additional stylesheet
     QFile builtInCssFile( QString( ":/qt-style-st-%1.css" ).arg( displayStyle ) );
-    builtInCssFile.open( QFile::ReadOnly );
-    css += builtInCssFile.readAll();
+    if ( builtInCssFile.open( QFile::ReadOnly ) )
+      css += builtInCssFile.readAll();
   }
 
   // Try loading a style sheet if there's one
@@ -1194,11 +1199,11 @@ void MainWindow::wheelEvent( QWheelEvent *ev )
 {
   if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
   {
-    if ( ev->delta() > 0 )
+    if ( ev->angleDelta().y() > 0 )
     {
         zoomin();
     }
-    else if ( ev->delta() < 0 )
+    else if ( ev->angleDelta().y()  < 0 )
     {
         zoomout();
     }
@@ -1217,11 +1222,16 @@ void MainWindow::closeEvent( QCloseEvent * ev )
     if( !cfg.preferences.searchInDock )
       translateBox->setPopupEnabled( false );
 
+#ifdef Q_OS_MACOS
+    if (!ev->spontaneous() || !isVisible()) {
+      return;
+    }
+#endif
 #ifdef HAVE_X11
     // Don't ignore the close event, because doing so cancels session logout if
     // the main window is visible when the user attempts to log out.
     // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
-    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    // property is false and Qt::WA_DeleteOnClose widget  is not set.
     Q_ASSERT(!QApplication::quitOnLastWindowClosed());
     Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
 #else
@@ -1295,16 +1305,6 @@ void MainWindow::applyProxySettings()
   QNetworkProxy::setApplicationProxy( proxy );
 }
 
-void MainWindow::applyWebSettings()
-{
-  QWebEngineSettings *defaultSettings = QWebEngineSettings::defaultSettings();
-  defaultSettings->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  defaultSettings->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  defaultSettings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
-}
-
 void MainWindow::setupNetworkCache( int maxSize )
 {
   // x << 20 == x * 2^20 converts mebibytes to bytes.
@@ -1346,6 +1346,9 @@ void MainWindow::makeDictionaries()
 
   loadDictionaries( this, isVisible(), cfg, dictionaries, dictNetMgr, false );
 
+  //create map
+  dictMap = Dictionary::dictToMap(dictionaries);
+
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
     dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
@@ -1384,29 +1387,29 @@ void MainWindow::updateGroupList()
 
   // currentIndexChanged() signal is very trigger-happy. To avoid triggering
   // it, we disconnect it while we're clearing and filling back groups.
-  disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-              this, SLOT( currentGroupChanged( QString const & ) ) );
+  disconnect( groupList, &GroupComboBox::currentIndexChanged,
+              this, &MainWindow::currentGroupChanged );
 
   groupInstances.clear();
 
   // Add dictionaryOrder first, as the 'All' group.
   {
-    Instances::Group g( cfg.dictionaryOrder, dictionaries, Config::Group() );
+    Instances::Group g( cfg.dictionaryOrder, dictMap, Config::Group() );
 
     // Add any missing entries to dictionary order
     Instances::complementDictionaryOrder( g,
-                                          Instances::Group( cfg.inactiveDictionaries, dictionaries, Config::Group() ),
+                                          Instances::Group( cfg.inactiveDictionaries, dictMap, Config::Group() ),
                                           dictionaries );
 
     g.name = tr( "All" );
     g.id = Instances::Group::AllGroupId;
-    g.icon = "folder.svg";
+    g.icon = "folder.png";
 
     groupInstances.push_back( g );
   }
 
   for( int x  = 0; x < cfg.groups.size(); ++x )
-    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries, cfg.inactiveDictionaries ) );
+    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictMap, cfg.inactiveDictionaries ) );
 
   // Update names for dictionaries that are present, so that they could be
   // found in case they got moved.
@@ -1430,8 +1433,8 @@ void MainWindow::updateGroupList()
     view.reload();
   }
 
-  connect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-           this, SLOT( currentGroupChanged( QString const & ) ) );
+  connect( groupList, &GroupComboBox::currentIndexChanged,
+           this, &MainWindow::currentGroupChanged );
 }
 
 void MainWindow::updateDictionaryBar()
@@ -1681,12 +1684,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
-  connect(wuri, &WebUrlRequestInterceptor::linkClicked, view, [=](QUrl url) {
-    ArticleView *active = getCurrentArticleView();
-    if (active == view) {
-      view->linkClicked(url);
-    }
-  });
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -2000,7 +1997,7 @@ void MainWindow::updateFoundInDictsList()
           QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
           QListWidgetItem * item =
               new QListWidgetItem(
-                dictionaries[ x ]->getIcon().pixmap(32).scaledToHeight( 21, Qt::SmoothTransformation ),
+                dictionaries[ x ]->getIcon(),
                 dictName,
                 ui.dictsList, QListWidgetItem::Type );
           item->setData(Qt::UserRole, QVariant( dictId ) );
@@ -2037,10 +2034,14 @@ void MainWindow::updateBackForwardButtons()
 
 void MainWindow::updatePronounceAvailability()
 {
-  bool pronounceEnabled = ui.tabWidget->count() > 0 &&
-    getCurrentArticleView()->hasSound();
-
-  navPronounce->setEnabled( pronounceEnabled );
+    if (ui.tabWidget->count() > 0) {
+        getCurrentArticleView()->hasSound([this](bool has) {
+            navPronounce->setEnabled( has );
+        });
+    }
+    else {
+        navPronounce->setEnabled( false );
+    }
 }
 
 void MainWindow::editDictionaries( unsigned editDictionaryGroup )
@@ -2050,9 +2051,6 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
 
-  ftsIndexing.stopIndexing();
-  ftsIndexing.clearDictionaries();
-
   wordFinder.clear();
   dictionariesUnmuted.clear();
 
@@ -2061,7 +2059,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   { // Limit existence of newCfg
 
   Config::Class newCfg = cfg;
-  EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
+  EditDictionaries dicts( this, newCfg, dictionaries, dictMap, groupInstances, dictNetMgr );
 
   connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
@@ -2078,7 +2076,8 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 
   if ( dicts.areDictionariesChanged() || dicts.areGroupsChanged() )
   {
-
+    ftsIndexing.stopIndexing();
+    ftsIndexing.clearDictionaries();
     // Set muted dictionaries from old groups
     for( int x = 0; x < newCfg.groups.size(); x++ )
     {
@@ -2101,6 +2100,15 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
     Config::save( cfg );
 
     updateSuggestionList();
+
+    for( unsigned x = 0; x < dictionaries.size(); x++ )
+    {
+      dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
+      dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
+    }
+
+    ftsIndexing.setDictionaries( dictionaries );
+    ftsIndexing.doIndexing();
   }
 
   }
@@ -2108,14 +2116,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   makeScanPopup();
   installHotKeys();
 
-  for( unsigned x = 0; x < dictionaries.size(); x++ )
-  {
-    dictionaries[ x ]->setFTSParameters( cfg.preferences.fts );
-    dictionaries[ x ]->setSynonymSearchEnabled( cfg.preferences.synonymSearchEnabled );
-  }
 
-  ftsIndexing.setDictionaries( dictionaries );
-  ftsIndexing.doIndexing();
 }
 
 void MainWindow::editCurrentGroup()
@@ -2224,7 +2225,6 @@ void MainWindow::editPreferences()
 
     updateTrayIcon();
     applyProxySettings();
-    applyWebSettings();
 
     ui.tabWidget->setHideSingleTab(cfg.preferences.hideSingleTab);
 
@@ -2254,7 +2254,7 @@ void MainWindow::editPreferences()
   ftsIndexing.doIndexing();
 }
 
-void MainWindow::currentGroupChanged( QString const & )
+void MainWindow::currentGroupChanged( int )
 {
   cfg.lastMainGroupId = groupList->getCurrentGroup();
   Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
@@ -2469,25 +2469,6 @@ bool MainWindow::handleBackForwardMouseButtons ( QMouseEvent * event) {
 
 bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
 {
-#ifdef Q_OS_WIN
-  if( obj == this && ev->type() == gdStoreNormalGeometryEvent )
-  {
-    if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      cfg.normalMainWindowGeometry = normalGeometry();
-    ev->accept();
-    return true;
-  }
-
-  if( obj == this && ev->type() == gdApplyNormalGeometryEvent )
-  {
-    if( !isMaximized() && !isMinimized() && !isFullScreen() )
-      {
-        setGeometry( cfg.normalMainWindowGeometry );
-    }
-    ev->accept();
-    return true;
-  }
-#endif
   if ( ev->type() == QEvent::ShortcutOverride
        || ev->type() == QEvent::KeyPress )
   {
@@ -2522,13 +2503,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   // when the main window is moved or resized, hide the word list suggestions
   if ( obj == this && ( ev->type() == QEvent::Move || ev->type() == QEvent::Resize ) )
   {
-#ifdef Q_OS_WIN
-    if( !isMaximized() && !isMinimized() && !isFullScreen() && gdAskMessage != 0xFFFFFFFF )
-    {
-      QEvent *ev = new QEvent( gdStoreNormalGeometryEvent );
-      qApp->postEvent( this, ev );
-    }
-#endif
     if ( !cfg.preferences.searchInDock )
     {
         translateBox->setPopupEnabled( false );
@@ -2540,14 +2514,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   {
     QWindowStateChangeEvent *stev = static_cast< QWindowStateChangeEvent *>( ev );
     wasMaximized = ( stev->oldState() == Qt::WindowMaximized && isMinimized() );
-
-#ifdef Q_OS_WIN
-    if( stev->oldState() == Qt::WindowMaximized && !isMinimized() && cfg.normalMainWindowGeometry.width() > 0 )
-    {
-      QEvent *ev = new QEvent( gdApplyNormalGeometryEvent );
-      qApp->postEvent( this, ev );
-    }
-#endif
   }
 
   if ( ev->type() == QEvent::MouseButtonPress ) {
@@ -2723,14 +2689,18 @@ void MainWindow::dictsListItemActivated( QListWidgetItem * item )
 void MainWindow::dictsListSelectionChanged()
 {
   QList< QListWidgetItem * > selected = ui.dictsList->selectedItems();
-  if ( selected.size() )
+  if( selected.size() )
   {
-      ArticleView * view = getCurrentArticleView();
-      if(view){
-          QString dictId = ui.dictsList->selectedItems().at(0)->data(Qt::UserRole).toString();
-          view->setActiveArticleId(dictId);
-       }
-//      jumpToDictionary( selected.front() );
+    ArticleView * view = getCurrentArticleView();
+    if( view )
+    {
+      QString dictId = ui.dictsList->selectedItems().at( 0 )->data( Qt::UserRole ).toString();
+      view->setActiveArticleId( dictId );
+    }
+    // selection change ,no need to jump to article ,if jump to article ,the position in webview would be changed
+    // when click the dictionary in the html.
+
+    // jumpToDictionary( selected.front() );
   }
 }
 
@@ -2885,23 +2855,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   {
     show();
 
-#ifdef Q_OS_WIN32
-    if( !!( hotkeyWrapper ) && hotkeyWrapper->handleViaDLL() )
-    {
-      // Some dances with tambourine
-      HWND wId = (HWND) winId();
-      DWORD pId = GetWindowThreadProcessId( wId, NULL );
-      DWORD fpId = GetWindowThreadProcessId( GetForegroundWindow(), NULL );
-
-      //Attach Thread to get the Input - i am now allowed to set the Foreground window!
-      AttachThreadInput( fpId, pId, true );
-      SetActiveWindow( wId );
-      SetForegroundWindow( wId );
-      SetFocus( wId );
-      AttachThreadInput( fpId, pId, false );
-    }
-#endif
-
     qApp->setActiveWindow( this );
     activateWindow();
     raise();
@@ -2922,22 +2875,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   if ( !isActiveWindow() )
   {
     qApp->setActiveWindow( this );
-#ifdef Q_OS_WIN32
-    if( !!( hotkeyWrapper ) && hotkeyWrapper->handleViaDLL() )
-    {
-      // Some dances with tambourine
-      HWND wId = (HWND) winId();
-      DWORD pId = GetWindowThreadProcessId( wId, NULL );
-      DWORD fpId = GetWindowThreadProcessId( GetForegroundWindow(), NULL );
-
-      //Attach Thread to get the Input - i am now allowed to set the Foreground window!
-      AttachThreadInput( fpId, pId, true );
-      SetActiveWindow( wId );
-      SetForegroundWindow( wId );
-      SetFocus( wId );
-      AttachThreadInput( fpId, pId, false );
-    }
-#endif
     raise();
     activateWindow();
     shown = true;
@@ -3037,11 +2974,7 @@ void MainWindow::installHotKeys()
 
     connect( hotkeyWrapper.get(), SIGNAL( hotkeyActivated( int ) ),
              this, SLOT( hotKeyActivated( int ) ),
-#ifdef Q_OS_WIN32
-             hotkeyWrapper->handleViaDLL() ? Qt::QueuedConnection : Qt::AutoConnection );
-#else
              Qt::AutoConnection );
-#endif
   }
 }
 
@@ -3409,7 +3342,10 @@ void MainWindow::on_pageSetup_triggered()
 void MainWindow::on_printPreview_triggered()
 {
   QPrinter printer;
-  QPrintPreviewDialog dialog( &printer, this );
+  QPrintPreviewDialog dialog(  &printer, this );
+  auto combox = dialog.findChild< QComboBox *>();
+  int index=combox->findText( "100%" );
+  combox->setCurrentIndex( index );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
@@ -3474,23 +3410,23 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
 
 void MainWindow::on_saveArticle_triggered()
 {
-  ArticleView *view = getCurrentArticleView();
+  ArticleView * view = getCurrentArticleView();
 
   QString fileName = view->getTitle().simplified();
 
   // Replace reserved filename characters
-  QRegExp rxName( "[/\\\\\\?\\*:\\|<>]" );
+  QRegularExpression rxName( "[/\\\\\\?\\*:\\|<>]" );
   fileName.replace( rxName, "_" );
 
   fileName += ".html";
   QString savePath;
 
-  if ( cfg.articleSavePath.isEmpty() )
+  if( cfg.articleSavePath.isEmpty() )
     savePath = QDir::homePath();
   else
   {
     savePath = QDir::fromNativeSeparators( cfg.articleSavePath );
-    if ( !QDir( savePath ).exists() )
+    if( !QDir( savePath ).exists() )
       savePath = QDir::homePath();
   }
 
@@ -3501,96 +3437,102 @@ void MainWindow::on_saveArticle_triggered()
   filters.push_back( tr( "Article, HTML Only (*.html)" ) );
 
   fileName = savePath + "/" + fileName;
-  fileName = QFileDialog::getSaveFileName( this, tr(  "Save Article As" ),
+  fileName = QFileDialog::getSaveFileName( this,
+                                           tr( "Save Article As" ),
                                            fileName,
                                            filters.join( ";;" ),
-                                           &selectedFilter, options );
+                                           &selectedFilter,
+                                           options );
 
   bool complete = ( selectedFilter == filters[ 0 ] );
 
-  if ( !fileName.isEmpty() )
-  {
+  if( fileName.isEmpty() )
+    return;
 
-    QFile file( fileName );
-
-    if ( !file.open( QIODevice::WriteOnly ) )
+  view->toHtml(
+    [ = ]( QString & html ) mutable
     {
-      QMessageBox::critical( this, tr( "Error" ),
-                             tr( "Can't save article: %1" ).arg( file.errorString() ) );
-    }
-    else
-    {
-      QString html = view->toHtml();
-      QFileInfo fi( fileName );
-      cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
-
-      // Convert internal links
-
-      QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
-      int pos = 0;
-      while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
+      QFile file( fileName );
+      if( !file.open( QIODevice::WriteOnly ) )
       {
-        QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
-        QString anchor;
-        name.replace( "?gdanchor=", "#" );
-        int n = name.indexOf( '#' );
-        if( n > 0 )
-        {
-          anchor = name.mid( n );
-          name.truncate( n );
-          anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
-        }
-        name.replace( rxName, "_" );
-        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
-        html.replace( pos, rx3.cap().length(), name );
-        pos += name.length();
-      }
-
-      // MDict anchors
-      QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
-      html.replace( anchorLinkRe, "\\1" );
-
-      if ( complete )
-      {
-        QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
-        QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
-        set< QByteArray > resourceIncluded;
-        vector< pair< QUrl, QString > > downloadResources;
-
-        filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
-        filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
-
-        ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
-        // reserve '1' for saving main html file
-        int maxVal = 1;
-
-        // Pull and save resources to files
-        for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-              i != downloadResources.end(); i++ )
-        {
-          ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
-          if( !handler->isEmpty() )
-          {
-            maxVal += 1;
-            connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
-          }
-        }
-
-        progressDialog->setLabelText( tr("Saving article...") );
-        progressDialog->setRange( 0, maxVal );
-        progressDialog->setValue( 0 );
-        progressDialog->show();
-
-        file.write( html.toUtf8() );
-        progressDialog->setValue( 1 );
+        QMessageBox::critical( this, tr( "Error" ), tr( "Can't save article: %1" ).arg( file.errorString() ) );
       }
       else
       {
-        file.write( html.toUtf8() );
+        QFileInfo fi( fileName );
+        cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
+
+        // Convert internal links
+
+        QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
+        int pos = 0;
+        QRegularExpression anchorRx( "(g[0-9a-f]{32}_)[0-9a-f]+_" );
+        while( ( pos = rx3.indexIn( html, pos ) ) != -1 )
+        {
+          QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
+          QString anchor;
+          name.replace( "?gdanchor=", "#" );
+          int n = name.indexOf( '#' );
+          if( n > 0 )
+          {
+            anchor = name.mid( n );
+            name.truncate( n );
+            anchor.replace( anchorRx, "\\1" ); // MDict anchors
+          }
+          name.replace( rxName, "_" );
+          name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
+          html.replace( pos, rx3.cap().length(), name );
+          pos += name.length();
+        }
+
+        // MDict anchors
+        QRegularExpression anchorLinkRe(
+          "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])",
+          QRegularExpression::PatternOption::CaseInsensitiveOption );
+        html.replace( anchorLinkRe, "\\1" );
+
+        if( complete )
+        {
+          QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
+          QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
+          QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
+          set< QByteArray > resourceIncluded;
+          vector< pair< QUrl, QString > > downloadResources;
+
+          filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
+          filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
+
+          ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
+          // reserve '1' for saving main html file
+          int maxVal                                 = 1;
+
+          // Pull and save resources to files
+          for( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
+               i != downloadResources.end();
+               ++i )
+          {
+            ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
+            if( !handler->isEmpty() )
+            {
+              maxVal += 1;
+              connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
+            }
+          }
+
+          progressDialog->setLabelText( tr( "Saving article..." ) );
+          progressDialog->setRange( 0, maxVal );
+          progressDialog->setValue( 0 );
+          progressDialog->show();
+
+          file.write( html.toUtf8() );
+          progressDialog->perform();
+        }
+        else
+        {
+          file.write( html.toUtf8() );
+        }
       }
-    }
-  }
+    } );
 }
 
 void MainWindow::on_rescanFiles_triggered()
@@ -3609,6 +3551,7 @@ void MainWindow::on_rescanFiles_triggered()
   dictionaryBar.setDictionaries( dictionaries );
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
+  dictMap = Dictionary::dictToMap(dictionaries);
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
@@ -3674,6 +3617,21 @@ void MainWindow::unzoom()
   applyZoomFactor();
 }
 
+void MainWindow::viewLinkClicked( const QUrl & url )
+{
+  if( scanPopup.get() && scanPopup->isActiveWindow() )
+  {
+    QString word = Utils::Url::getWordFromUrl( url );
+    if( !word.isEmpty() )
+    {
+      scanPopup->translateWord( word );
+      return;
+    }
+  }
+  ArticleView * view = getCurrentArticleView();
+  view->linkClicked( url );
+}
+
 void MainWindow::applyZoomFactor()
 {
   // Always call this function synchronously to potentially disable a zoom action,
@@ -3701,7 +3659,7 @@ void MainWindow::adjustCurrentZoomFactor()
 
   zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
   zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.1 );
-  zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
+  zoomBase->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, 1.0 ) );
 }
 
 void MainWindow::scaleArticlesByCurrentZoomFactor()
@@ -3790,8 +3748,8 @@ void MainWindow::applyWordsZoomLevel()
 
   if ( groupList->font().pointSize() != ps )
   {
-    disconnect( groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-                this, SLOT( currentGroupChanged( QString const & ) ) );
+    disconnect( groupList, &GroupComboBox::currentIndexChanged,
+                this, &MainWindow::currentGroupChanged );
     int n = groupList->currentIndex();
     groupList->clear();
     groupList->setFont( font );
@@ -4363,11 +4321,10 @@ void MainWindow::editDictionary( Dictionary::Class * dict )
       QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
       command.replace( "%GDWORD%", headword );
     }
-    if( !QProcess::startDetached( command ) )
+    if( !QProcess::startDetached( command,QStringList() ) )
       QApplication::beep();
   }
 }
-
 
 void MainWindow::openDictionaryFolder( const QString & id )
 {
@@ -4378,46 +4335,10 @@ void MainWindow::openDictionaryFolder( const QString & id )
       if( dictionaries[ x ]->getDictionaryFilenames().size() > 0 )
       {
         QString fileName = FsEncoding::decode( dictionaries[ x ]->getDictionaryFilenames()[ 0 ].c_str() );
-        bool explorerLaunched = false;
 
-        // Platform-dependent way to launch a file explorer and to select a file,
-        // currently only on Windows.
-#if defined(Q_OS_WIN)
-        if ( !QFileInfo( fileName ).isDir() )
-        {
-          QString param = QLatin1String("explorer.exe ")
-              + QLatin1String("/select, \"") + QDir::toNativeSeparators( fileName ) + QLatin1String("\"");
-
-          qDebug() << "Launching" << param;
-
-          // We use CreateProcess() directly instead of QProcess::startDetached() since
-          // startDetached() does some evil things with quotes breaking explorer arguments.
-          // E.g., the following file cannot be properly selected via startDetached(), due to equals sign,
-          // which explorer considers as separator:
-          // Z:\GoldenDict\content\-=MDict=-\Test.mdx
-          PROCESS_INFORMATION pinfo;
-          STARTUPINFOW startupInfo = { sizeof( STARTUPINFO ), 0, 0, 0,
-                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
-                                       (ulong)CW_USEDEFAULT, (ulong)CW_USEDEFAULT,
-                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                                     };
-          explorerLaunched = CreateProcess(0, (wchar_t*) param.utf16(),
-                                           0, 0, FALSE, CREATE_UNICODE_ENVIRONMENT | CREATE_NEW_CONSOLE, 0,
-                                           0, &startupInfo, &pinfo);
-
-          if ( explorerLaunched ) {
-            CloseHandle( pinfo.hThread );
-            CloseHandle( pinfo.hProcess );
-          }
-        }
-#endif
-
-        if ( !explorerLaunched )
-        {
-          QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
-          if( !folder.isEmpty() )
-            QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
-        }
+        QString folder = QFileInfo( fileName ).absoluteDir().absolutePath();
+        if( !folder.isEmpty() )
+          QDesktopServices::openUrl( QUrl::fromLocalFile( folder ) );
       }
       break;
     }
@@ -4812,23 +4733,6 @@ void MainWindow::headwordFromFavorites( QString const & headword,
 }
 
 #ifdef Q_OS_WIN32
-
-bool MainWindow::handleGDMessage( MSG * message, long * result )
-{
-  if( message->message != gdAskMessage )
-    return false;
-  *result = 0;
-
-  if( !isGoldenDictWindow( message->hwnd ) )
-    return true;
-
-  ArticleView * view = getCurrentArticleView();
-  if( !view )
-    return true;
-
-  *result = 1;
-  return true;
-}
 
 bool MainWindow::isGoldenDictWindow( HWND hwnd )
 {

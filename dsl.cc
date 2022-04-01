@@ -217,10 +217,10 @@ public:
                                                       vector< wstring > const & alts,
                                                       wstring const &,
                                                       bool ignoreDiacritics )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getResource( string const & name )
-    THROW_SPEC( std::exception );
+    ;
 
   virtual sptr< Dictionary::DataRequest > getSearchResults( QString const & searchString,
                                                             int searchMode, bool matchCase,
@@ -580,7 +580,7 @@ void DslDictionary::loadArticle( uint32_t address,
     if ( !articleBody )
     {
 //      throw exCantReadFile( getDictionaryFilenames()[ 0 ] );
-      articleData = GD_NATIVE_TO_WS( L"\n\r\t" ) + gd::toWString( QString( "DICTZIP error: " ) + dict_error_str( dz ) );
+articleData =  U"\n\r\t"  + gd::toWString( QString( "DICTZIP error: " ) + dict_error_str( dz ) );
     }
     else
     {
@@ -616,7 +616,7 @@ void DslDictionary::loadArticle( uint32_t address,
   {
     size_t begin = pos;
 
-    pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), begin );
+    pos = articleData.find_first_of(  U"\n\r" , begin );
 
     if ( pos == wstring::npos )
       pos = articleData.size();
@@ -741,7 +741,7 @@ void DslDictionary::loadArticle( uint32_t address,
       if( insidedCard )
       {
         // Check for next insided headword
-        wstring::size_type hpos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
+        wstring::size_type hpos = articleData.find_first_of(  U"\n\r" , pos );
         if ( hpos == wstring::npos )
           hpos = articleData.size();
 
@@ -820,13 +820,11 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     return result;
   }
 
-  if ( node.tagName == GD_NATIVE_TO_WS( L"b" ) )
+  if( node.tagName ==  U"b"  )
     result += "<b class=\"dsl_b\">" + processNodeChildren( node ) + "</b>";
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"i" ) )
+  else if( node.tagName ==  U"i"  )
     result += "<i class=\"dsl_i\">" + processNodeChildren( node ) + "</i>";
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"u" ) )
+  else if( node.tagName ==  U"u"  )
   {
     string nodeText = processNodeChildren( node );
 
@@ -836,39 +834,32 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     result += "<span class=\"dsl_u\">" + nodeText + "</span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"c" ) )
+  else if( node.tagName ==  U"c"  )
   {
     result += "<font color=\"" + ( node.tagAttrs.size() ?
       Html::escape( Utf8::encode( node.tagAttrs ) ) : string( "c_default_color" ) )
       + "\">" + processNodeChildren( node ) + "</font>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"*" ) )
+  else if( node.tagName ==  U"*"  )
   {
       string id = "O" + getId().substr( 0, 7 ) + "_" +
                 QString::number( articleNom ).toStdString() +
                 "_opt_" + QString::number( optionalPartNom++ ).toStdString();
     result += "<span class=\"dsl_opt\" id=\"" + id + "\">" + processNodeChildren( node ) + "</span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"m" ) )
-      result += "<div class=\"dsl_m\">" + processNodeChildren( node ) + "</div>";
+  else if( node.tagName ==  U"m"  )
+    result += "<div class=\"dsl_m\">" + processNodeChildren( node ) + "</div>";
   else
   if ( node.tagName.size() == 2 && node.tagName[ 0 ] == L'm' &&
        iswdigit( node.tagName[ 1 ] ) )
     result += "<div class=\"dsl_" + Utf8::encode( node.tagName ) + "\">" + processNodeChildren( node ) + "</div>";
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"trn" ) )
+  else if( node.tagName ==  U"trn"  )
     result += "<span class=\"dsl_trn\">" + processNodeChildren( node ) + "</span>";
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"ex" ) )
+  else if( node.tagName ==  U"ex"  )
     result += "<span class=\"dsl_ex\">" + processNodeChildren( node ) + "</span>";
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"com" ) )
+  else if( node.tagName ==  U"com"  )
     result += "<span class=\"dsl_com\">" + processNodeChildren( node ) + "</span>";
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"s" ) || node.tagName == GD_NATIVE_TO_WS( L"video" ) )
+  else if( node.tagName ==  U"s"  || node.tagName ==  U"video"  )
   {
     string filename = Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false );
     string n = resourceDir1 + FsEncoding::encode( filename );
@@ -1013,8 +1004,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
              + "\">" + processNodeChildren( node ) + "</a>";
     }
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
+  else if( node.tagName ==  U"url"  )
   {
     string link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
@@ -1037,13 +1027,11 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     result += "<a class=\"dsl_url\" href=\"" + link +"\">" + processNodeChildren( node ) + "</a>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"!trs" ) )
+  else if( node.tagName ==  U"!trs"  )
   {
     result += "<span class=\"dsl_trs\">" + processNodeChildren( node ) + "</span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"p") )
+  else if( node.tagName ==  U"p"  )
   {
     result += "<span class=\"dsl_p\"";
 
@@ -1090,8 +1078,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     result += ">" + processNodeChildren( node ) + "</span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"'" ) )
+  else if( node.tagName ==  U"'"  )
   {
     // There are two ways to display the stress: by adding an accent sign or via font styles.
     // We generate two spans, one with accented data and another one without it, so the
@@ -1101,8 +1088,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
         + "<span class=\"dsl_stress_with_accent\">" + data + Utf8::encode( wstring( 1, 0x301 ) )
         + "</span></span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"lang" ) )
+  else if( node.tagName ==  U"lang"  )
   {
     result += "<span class=\"dsl_lang\"";
     if( !node.tagAttrs.empty() )
@@ -1135,8 +1121,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     }
     result += ">" + processNodeChildren( node ) + "</span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )
+  else if( node.tagName ==  U"ref"  )
   {
     QUrl url;
 
@@ -1158,8 +1143,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
               + processNodeChildren( node ) + "</a>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"@" ) )
+  else if( node.tagName ==  U"@"  )
   {
     // Special case - insided card header was not parsed
 
@@ -1174,23 +1158,19 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
     result += string( "<a class=\"dsl_ref\" href=\"" ) + url.toEncoded().data() +"\">"
               + processNodeChildren( node ) + "</a>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"sub" ) )
+  else if( node.tagName ==  U"sub"  )
   {
     result += "<sub>" + processNodeChildren( node ) + "</sub>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"sup" ) )
+  else if( node.tagName ==  U"sup"  )
   {
     result += "<sup>" + processNodeChildren( node ) + "</sup>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"t" ) )
+  else if( node.tagName ==  U"t"  )
   {
     result += "<span class=\"dsl_t\">" + processNodeChildren( node ) + "</span>";
   }
-  else
-  if ( node.tagName == GD_NATIVE_TO_WS( L"br" ) )
+  else if( node.tagName ==  U"br"  )
   {
     result += "<br />";
   }
@@ -1377,7 +1357,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   {
     size_t begin = pos;
 
-    pos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), begin );
+    pos = articleData.find_first_of(  U"\n\r" , begin );
 
     if ( articleHeadword.empty() )
     {
@@ -1445,7 +1425,7 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
       if( insidedCard )
       {
         // Check for next insided headword
-        wstring::size_type hpos = articleData.find_first_of( GD_NATIVE_TO_WS( L"\n\r" ), pos );
+        wstring::size_type hpos = articleData.find_first_of(  U"\n\r" , pos );
         if ( hpos == wstring::npos )
           hpos = articleData.size();
 
@@ -1797,7 +1777,7 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
                                                            vector< wstring > const & alts,
                                                            wstring const &,
                                                            bool ignoreDiacritics )
-  THROW_SPEC( std::exception )
+  
 {
   return new DslArticleRequest( word, alts, *this, ignoreDiacritics );
 }
@@ -1983,7 +1963,7 @@ void DslResourceRequest::run()
 }
 
 sptr< Dictionary::DataRequest > DslDictionary::getResource( string const & name )
-  THROW_SPEC( std::exception )
+  
 {
   return new DslResourceRequest( *this, name );
 }
@@ -2008,7 +1988,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & initializing,
                                       int maxPictureWidth, unsigned int maxHeadwordSize )
-  THROW_SPEC( std::exception )
+  
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
@@ -2075,37 +2055,37 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         try { // Here we intercept any errors during the read to save line at
               // which the incident happened. We need alive scanner for that.
 
-        if ( scanner.getDictionaryName() == GD_NATIVE_TO_WS( L"Abbrev" ) )
-          continue; // For now just skip abbreviations
+          if( scanner.getDictionaryName() ==  U"Abbrev"  )
+            continue; // For now just skip abbreviations
 
-        // Building the index
-        initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
+          // Building the index
+          initializing.indexingDictionary( Utf8::encode( scanner.getDictionaryName() ) );
 
-        gdDebug( "Dsl: Building the index for dictionary: %s\n",
-                 gd::toQString( scanner.getDictionaryName() ).toUtf8().data() );
+          gdDebug( "Dsl: Building the index for dictionary: %s\n",
+                   gd::toQString( scanner.getDictionaryName() ).toUtf8().data() );
 
-        File::Class idx( indexFile, "wb" );
+          File::Class idx( indexFile, "wb" );
 
-        IdxHeader idxHeader;
+          IdxHeader idxHeader;
 
-        memset( &idxHeader, 0, sizeof( idxHeader ) );
+          memset( &idxHeader, 0, sizeof( idxHeader ) );
 
-        // We write a dummy header first. At the end of the process the header
-        // will be rewritten with the right values.
+          // We write a dummy header first. At the end of the process the header
+          // will be rewritten with the right values.
 
-        idx.write( idxHeader );
+          idx.write( idxHeader );
 
-        string dictionaryName = Utf8::encode( scanner.getDictionaryName() );
+          string dictionaryName = Utf8::encode( scanner.getDictionaryName() );
 
-        idx.write( (uint32_t) dictionaryName.size() );
-        idx.write( dictionaryName.data(), dictionaryName.size() );
+          idx.write( (uint32_t)dictionaryName.size() );
+          idx.write( dictionaryName.data(), dictionaryName.size() );
 
-        string soundDictName = Utf8::encode( scanner.getSoundDictionaryName() );
-        if( !soundDictName.empty() )
-        {
-          idxHeader.hasSoundDictionaryName = 1;
-          idx.write( (uint32_t) soundDictName.size() );
-          idx.write( soundDictName.data(), soundDictName.size() );
+          string soundDictName = Utf8::encode( scanner.getSoundDictionaryName() );
+          if( !soundDictName.empty() )
+          {
+            idxHeader.hasSoundDictionaryName = 1;
+            idx.write( (uint32_t)soundDictName.size() );
+            idx.write( soundDictName.data(), soundDictName.size() );
         }
 
         idxHeader.dslEncoding = scanner.getEncoding();
@@ -2163,7 +2143,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               if ( eof )
                 break;
 
-              curString.erase( 0, curString.find_first_not_of( GD_NATIVE_TO_WS( L" \t" ) ) );
+              curString.erase( 0, curString.find_first_not_of(  U" \t"  ) );
 
               if ( keys.size() )
                 expandTildes( curString, keys.front() );

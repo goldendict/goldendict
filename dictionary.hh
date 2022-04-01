@@ -9,7 +9,6 @@
 #include <map>
 #include <QObject>
 #include <QIcon>
-#include "cpp_features.hh"
 #include "sptr.hh"
 #include "ex.hh"
 #include "mutex.hh"
@@ -144,11 +143,11 @@ public:
 
   /// Returns the match with the given zero-based index, which should be less
   /// than matchesCount().
-  WordMatch operator [] ( size_t index ) THROW_SPEC( exIndexOutOfRange );
+  WordMatch operator [] ( size_t index ) ;
 
   /// Returns all the matches found. Since no further locking can or would be
   /// done, this can only be called after the request has finished.
-  vector< WordMatch > & getAllMatches() THROW_SPEC( exRequestUnfinished );
+  vector< WordMatch > & getAllMatches() ;
 
   /// Returns true if the match was uncertain -- that is, there may be more
   /// results in the dictionary itself, the dictionary index isn't good enough
@@ -188,11 +187,11 @@ public:
   /// Writes "size" bytes starting from "offset" of the data read to the given
   /// buffer. "size + offset" must be <= than dataSize().
   void getDataSlice( size_t offset, size_t size, void * buffer )
-    THROW_SPEC( exSliceOutOfRange );
+    ;
 
   /// Returns all the data read. Since no further locking can or would be
   /// done, this can only be called after the request has finished.
-  vector< char > & getFullData() THROW_SPEC( exRequestUnfinished );
+  vector< char > & getFullData() ;
 
   DataRequest(): hasAnyData( false ) {}
 
@@ -344,7 +343,7 @@ public:
   /// be stored. The whole operation is supposed to be fast, though some
   /// dictionaries, the network ones particularly, may of course be slow.
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
-                                                 unsigned long maxResults ) THROW_SPEC( std::exception )=0;
+                                                 unsigned long maxResults ) =0;
 
   /// Looks up a given word in the dictionary, aiming to find different forms
   /// of the given word by allowing suffix variations. This means allowing words
@@ -357,14 +356,14 @@ public:
   virtual sptr< WordSearchRequest > stemmedMatch( wstring const &,
                                                   unsigned minLength,
                                                   unsigned maxSuffixVariation,
-                                                  unsigned long maxResults ) THROW_SPEC( std::exception );
+                                                  unsigned long maxResults ) ;
 
   /// Finds known headwords for the given word, that is, the words for which
   /// the given word is a synonym. If a dictionary can't perform this operation,
   /// it should leave the default implementation which always returns an empty
   /// result.
   virtual sptr< WordSearchRequest > findHeadwordsForSynonym( wstring const & )
-    THROW_SPEC( std::exception );
+    ;
 
   /// For a given word, provides alternate writings of it which are to be looked
   /// up alongside with it. Transliteration dictionaries implement this. The
@@ -385,14 +384,14 @@ public:
                                           vector< wstring > const & alts,
                                           wstring const & context = wstring(),
                                           bool ignoreDiacritics = false )
-    THROW_SPEC( std::exception )=0;
+    =0;
 
   /// Loads contents of a resource named 'name' into the 'data' vector. This is
   /// usually a picture file referenced in the article or something like that.
   /// The default implementation always returns the non-existing resource
   /// response.
   virtual sptr< DataRequest > getResource( string const & /*name*/ )
-    THROW_SPEC( std::exception );
+    ;
 
   /// Returns a results of full-text search of given string similar getArticle().
   virtual sptr< DataRequest > getSearchResults( QString const & searchString,
@@ -479,6 +478,9 @@ bool needToRebuildIndex( vector< string > const & dictionaryFiles,
 /// Returns a random dictionary id useful for interactively created
 /// dictionaries.
 QString generateRandomDictionaryId();
+
+QMap< std::string, sptr< Dictionary::Class > >
+dictToMap( std::vector< sptr< Dictionary::Class > > const & dicts );
 
 }
 

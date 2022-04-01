@@ -10,7 +10,11 @@
 #include <zlib.h>
 #include "dictionary.hh"
 #include "iconv.hh"
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#include <QtCore5Compat/QTextCodec>
+#else
 #include <QTextCodec>
+#endif
 #include <QByteArray>
 #include "utf8.hh"
 
@@ -91,7 +95,7 @@ private:
   unsigned transcriptionCount; // >0 = inside a [t] tag
   unsigned mediaCount; // >0 = inside a [s] tag
 
-  void nextChar() THROW_SPEC( eot );
+  void nextChar() ;
 
   /// Information for diagnostic purposes
   string dictionaryName;
@@ -125,7 +129,7 @@ public:
   DEF_EX( exUnknownCodePage, "The .dsl file specified an unknown code page", Ex )
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
-  DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex );
+  DslScanner( string const & fileName ) ;
   ~DslScanner() throw();
 
   /// Returns the detected encoding of this file.
@@ -154,10 +158,10 @@ public:
   /// If end of file is reached, false is returned.
   /// Reading begins from the first line after the headers (ones which start
   /// with #).
-  bool readNextLine( wstring &, size_t & offset, bool only_head_word = false ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLine( wstring &, size_t & offset, bool only_head_word = false ) ;
 
   /// Similar readNextLine but strip all DSL comments {{...}}
-  bool readNextLineWithoutComments( wstring &, size_t & offset, bool only_headword = false ) THROW_SPEC( Ex, Iconv::Ex );
+  bool readNextLineWithoutComments( wstring &, size_t & offset, bool only_headword = false ) ;
 
   /// Returns the number of lines read so far from the file.
   unsigned getLinesRead() const
