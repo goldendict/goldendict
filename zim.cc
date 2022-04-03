@@ -827,7 +827,7 @@ string ZimDictionary::convert( const string & in )
   QRegularExpression rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
                            QRegularExpression::UseUnicodePropertiesOption );
   pos = 0;
-  QRegularExpressionMatchIterator it2 = rxLink.globalMatch( text );
+  QRegularExpressionMatchIterator it2 = rxBR.globalMatch( text );
   while( it2.hasNext() )
   {
     QRegularExpressionMatch match = it2.next();
