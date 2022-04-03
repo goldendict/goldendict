@@ -3,7 +3,12 @@
 ## Until to now
 
 - **CLEANING OLD/USELESS CODE**
+- fix a zim about:blank#block [issue](https://github.com/goldendict/goldendict/issues/1472#issuecomment-1086776611)
+## Until to 2022-4-1
+
+- fix save file progress dialog never close bug @ngn999
 - mac m1 Sillion chip support from [@ngn999](https://github.com/ngn999)
+- on Macbook pro , scrolling from trackpad will trigger zoom in/out  @ngn999
 
 ## Until to 2022-3-24
 
