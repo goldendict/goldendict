@@ -750,7 +750,8 @@ string ZimDictionary::convert( const string & in )
 
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
-  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
+  // <meta http-equiv="Refresh" content="0;url=../dsalsrv02.uchicago.edu/cgi-bin/0994.html">
+  QRegularExpression rxLink( "<\\s*(?:a|meta)\\s+([^>]*)(?:href|url)=\"?(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
   QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
   int pos = 0;
   QString newText;
@@ -763,7 +764,7 @@ string ZimDictionary::convert( const string & in )
 
     QStringList list = match.capturedTexts();
     // Add empty strings for compatibility with QRegExp behaviour
-    for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
+    for( int i = list.size(); i < 5; i++ )
       list.append( QString() );
 
     QString tag = list[3];     // a url, ex: Precambrian_Chaotian.html
@@ -832,7 +833,7 @@ string ZimDictionary::convert( const string & in )
   QRegularExpressionMatchIterator it2 = rxLink.globalMatch( text );
   while( it2.hasNext() )
   {
-    QRegularExpressionMatch match = it.next();
+    QRegularExpressionMatch match = it2.next();
 
     newText += text.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
