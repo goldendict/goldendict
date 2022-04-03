@@ -747,7 +747,6 @@ string ZimDictionary::convert( const string & in )
   text.replace( QRegularExpression( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
                 QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
 
-
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
   // <meta http-equiv="Refresh" content="0;url=../dsalsrv02.uchicago.edu/cgi-bin/0994.html">
@@ -770,7 +769,6 @@ string ZimDictionary::convert( const string & in )
     QString tag = list[3];     // a url, ex: Precambrian_Chaotian.html
     if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
       tag = list[4].split("\"")[1];
-
 
     // Check type of links inside articles
     if( linksType == UNKNOWN && tag.indexOf( '/' ) >= 0 )
@@ -823,7 +821,6 @@ string ZimDictionary::convert( const string & in )
     text = newText;
   }
   newText.clear();
-
 
   // Occasionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
   // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
@@ -1287,7 +1284,6 @@ void ZimArticleRequest::run()
 
   string result;
 
-  // See Issue #271: A mechanism to clean-up invalid HTML cards.
   // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
   // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
   // https://en.wikipedia.org/wiki/Tag_soup#HTML5
@@ -1504,7 +1500,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         continue;
 
       // Got the file -- check if we need to rebuid the index
-
       ZimFile df( firstName );
 
       vector< string > dictFiles;
@@ -1520,7 +1515,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
              indexIsOldOrBad( indexFile ) )
         {
           gdDebug( "Zim: Building the index for dictionary: %s\n", i->c_str() );
-
 
           unsigned articleCount = 0;
           unsigned wordCount = 0;
