@@ -72,13 +72,19 @@ jobs:
           cd eb-4.4.3 && ./configure && make -j 8 && sudo make install && cd ..
           #brew install qt # or use official offline installer
           brew install opencc libao hunspell ffmpeg@5 libtiff xz lzo libogg libvorbis zstd
+          brew install create-dmg
           qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
-          make 
+          make -j 8
       # 打包
       - name: package
         run: |
-          macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
+          macdeployqt ${targetName}.app -qmldir=. -verbose=1
           otool -L  GoldenDict.app/Contents/MacOS/GoldenDict
+          mkdir tmp
+          mv ${targetName}.app ./tmp
+          # --background "installer_background.png"
+          create-dmg --volname "${targetName} Installer" --volicon "icons/macicon.icns" --window-pos 200 120 --window-size 800 400 --icon-size 100 --icon "${targetName}.app" 200 190 --hide-extension "${targetName}.app" --app-drop-link 600 185 --skip-jenkins "${targetName}.dmg" tmp/
+
 
       - name: Set outputs
         id: vars
