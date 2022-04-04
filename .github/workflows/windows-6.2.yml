@@ -45,7 +45,7 @@ jobs:
           #   msvc_arch: x64
           #   qt_target: x64
           #   qt_arch_install: msvc2019_64  
-          - qt_ver: 6.2.3
+          - qt_ver: 6.2.4
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
             qt_target: x64
@@ -66,6 +66,7 @@ jobs:
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
           modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
+          # archives: qtimageformats
 
       # 拉取代码
       - uses: actions/checkout@v3
