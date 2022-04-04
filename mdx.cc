@@ -40,6 +40,7 @@
 
 #include <QRegularExpression>
 
+#include "tiff.hh"
 #include "utils.hh"
 
 namespace Mdx
@@ -970,6 +971,37 @@ void MddResourceRequest::run()
         QByteArray bytes = css.toUtf8();
         data.resize( bytes.size() );
         memcpy( &data.front(), bytes.constData(), bytes.size() );
+      }
+      if( Filetype::isNameOfTiff( u8ResourceName ) )
+      {
+        // Convert it
+
+        dataMutex.lock();
+
+        QImage img = QImage::fromData( (unsigned char *)&data.front(), data.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+        if( img.isNull() )
+          GdTiff::tiffToQImage( &data.front(), data.size(), img );
+#endif
+
+        dataMutex.unlock();
+
+        if( !img.isNull() )
+        {
+          // Managed to load -- now store it back as BMP
+
+          QByteArray ba;
+          QBuffer buffer( &ba );
+          buffer.open( QIODevice::WriteOnly );
+          img.save( &buffer, "png" );
+
+          Mutex::Lock _( dataMutex );
+
+          data.resize( buffer.size() );
+
+          memcpy( &data.front(), buffer.data(), data.size() );
+        }
       }
     }
     break;
