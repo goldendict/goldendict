@@ -994,7 +994,7 @@ void MddResourceRequest::run()
           QByteArray ba;
           QBuffer buffer( &ba );
           buffer.open( QIODevice::WriteOnly );
-          img.save( &buffer, "png" );
+          img.save( &buffer, "webp" );
 
           Mutex::Lock _( dataMutex );
 
