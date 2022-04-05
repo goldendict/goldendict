@@ -185,7 +185,7 @@ void MediaWikiWordSearchRequest::downloadFinished()
 
         Mutex::Lock _( dataMutex );
 
-        for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+        for( int x = 0; x < nl.length(); ++x )
           matches.push_back( gd::toWString( nl.item( x ).toElement().attribute( "title" ) ) );
       }
     }

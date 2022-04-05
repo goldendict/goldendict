@@ -224,7 +224,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 
             articleBody += "<table class=\"forvo_play\">";
 
-            for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+            for( int x = 0; x < nl.length(); ++x )
             {
               QDomElement item = nl.item( x ).toElement();
 

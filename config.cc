@@ -395,17 +395,17 @@ Group loadGroup( QDomElement grp, unsigned * nextId = 0 )
 
   QDomNodeList dicts = grp.elementsByTagName( "dictionary" );
 
-  for( Utils::Dom::size_type y = 0; y < dicts.length(); ++y )
+  for( int y = 0; y < dicts.length(); ++y )
     g.dictionaries.push_back( DictionaryRef( dicts.item( y ).toElement().text(),
                                              dicts.item( y ).toElement().attribute( "name" ) ) );
 
   QDomNode muted = grp.namedItem( "mutedDictionaries" );
   dicts = muted.toElement().elementsByTagName( "mutedDictionary" );
-  for( Utils::Dom::size_type x = 0; x < dicts.length(); ++x )
+  for( int x = 0; x < dicts.length(); ++x )
     g.mutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   dicts = muted.toElement().elementsByTagName( "popupMutedDictionary" );
-  for( Utils::Dom::size_type x = 0; x < dicts.length(); ++x )
+  for( int x = 0; x < dicts.length(); ++x )
     g.popupMutedDictionaries.insert( dicts.item( x ).toElement().text() );
 
   return g;
@@ -420,7 +420,7 @@ MutedDictionaries loadMutedDictionaries( QDomNode mutedDictionaries )
     QDomNodeList nl = mutedDictionaries.toElement().
                         elementsByTagName( "mutedDictionary" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
       result.insert( nl.item( x ).toElement().text() );
   }
 
@@ -583,7 +583,7 @@ Class load()
   {
     QDomNodeList nl = paths.toElement().elementsByTagName( "path" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
       c.paths.push_back(
         Path( nl.item( x ).toElement().text(),
               nl.item( x ).toElement().attribute( "recursive" ) == "1" ) );
@@ -595,7 +595,7 @@ Class load()
   {
     QDomNodeList nl = soundDirs.toElement().elementsByTagName( "sounddir" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
       c.soundDirs.push_back(
         SoundDir( nl.item( x ).toElement().text(),
                   nl.item( x ).toElement().attribute( "name" ),
@@ -620,7 +620,7 @@ Class load()
 
     QDomNodeList nl = groups.toElement().elementsByTagName( "group" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
     {
       QDomElement grp = nl.item( x ).toElement();
 
@@ -636,7 +636,7 @@ Class load()
 
     QDomNodeList nl = hunspell.toElement().elementsByTagName( "enabled" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
       c.hunspell.enabledDictionaries.push_back( nl.item( x ).toElement().text() );
   }
 
@@ -700,7 +700,7 @@ Class load()
   {
     QDomNodeList nl = programs.toElement().elementsByTagName( "program" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
     {
       QDomElement pr = nl.item( x ).toElement();
 
@@ -727,7 +727,7 @@ Class load()
   {
     QDomNodeList nl = mws.toElement().elementsByTagName( "mediawiki" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
     {
       QDomElement mw = nl.item( x ).toElement();
 
@@ -755,7 +755,7 @@ Class load()
   {
     QDomNodeList nl = wss.toElement().elementsByTagName( "website" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
     {
       QDomElement ws = nl.item( x ).toElement();
 
@@ -783,7 +783,7 @@ Class load()
   {
     QDomNodeList nl = dss.toElement().elementsByTagName( "server" );
 
-    for( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for( int x = 0; x < nl.length(); ++x )
     {
       QDomElement ds = nl.item( x ).toElement();
 
@@ -812,7 +812,7 @@ Class load()
   {
     QDomNodeList nl = ves.toElement().elementsByTagName( "voiceEngine" );
 
-    for ( Utils::Dom::size_type x = 0; x < nl.length(); ++x )
+    for ( int x = 0; x < nl.length(); ++x )
     {
       QDomElement ve = nl.item( x ).toElement();
       VoiceEngine v;

@@ -146,11 +146,6 @@ inline QString getWordFromUrl( const QUrl & url )
 }
 }
 
-namespace Dom
-{
-  typedef int size_type;
-}
-
 }
 
 #endif // UTILS_HH
