@@ -47,7 +47,7 @@ jobs:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
-          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia  qtimageformats
       - name: ubuntu install thirdparty dependencies
         run: |
           sudo apt-get install git pkg-config build-essential 
