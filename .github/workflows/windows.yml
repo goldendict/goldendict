@@ -43,12 +43,7 @@ jobs:
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
             qt_target: x64
-            qt_arch_install: msvc2019_64  
-          # - qt_ver: 6.2.3
-          #   qt_arch: win64_msvc2019_64
-          #   msvc_arch: x64
-          #   qt_target: x64
-          #   qt_arch_install: msvc2019_64           
+            qt_arch_install: msvc2019_64
     env:
       targetName: GoldenDict.exe
       version: 22.4.alpha
