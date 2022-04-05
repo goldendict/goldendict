@@ -87,6 +87,7 @@ jobs:
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          CHANGELOG="${CHANGELOG//'\''/''}"
           echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"   
       # msvc编译
       - name: msvc-build goldendict
