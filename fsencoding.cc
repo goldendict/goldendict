@@ -21,7 +21,7 @@ string encode( wstring const & str )
 string encode( string const & str )
 {
 #ifdef __WIN32
-  return string( str );
+  return str;
 #else
   return string( QString::fromUtf8( str.c_str() ).toLocal8Bit().data() );
 #endif
