@@ -975,33 +975,8 @@ void MddResourceRequest::run()
       if( Filetype::isNameOfTiff( u8ResourceName ) )
       {
         // Convert it
-
-        dataMutex.lock();
-
-        QImage img = QImage::fromData( (unsigned char *)&data.front(), data.size() );
-
-#ifdef MAKE_EXTRA_TIFF_HANDLER
-        if( img.isNull() )
-          GdTiff::tiffToQImage( &data.front(), data.size(), img );
-#endif
-
-        dataMutex.unlock();
-
-        if( !img.isNull() )
-        {
-          // Managed to load -- now store it back as BMP
-
-          QByteArray ba;
-          QBuffer buffer( &ba );
-          buffer.open( QIODevice::WriteOnly );
-          img.save( &buffer, "webp" );
-
-          Mutex::Lock _( dataMutex );
-
-          data.resize( buffer.size() );
-
-          memcpy( &data.front(), buffer.data(), data.size() );
-        }
+        Mutex::Lock _( dataMutex );
+        GdTiff::tiff2img( data );
       }
     }
     break;
@@ -1095,8 +1070,6 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 {
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
-
-
 
   QString articleNewText;
   int linkPos = 0;

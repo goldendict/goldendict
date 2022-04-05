@@ -139,6 +139,28 @@ bool tiffToQImage( const char * data, int size, QImage & image )
   return false;
 }
 
+void tiff2img( vector< char > & data, const char * format )
+{
+  QImage img = QImage::fromData( (unsigned char *)&data.front(), data.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+  if( img.isNull() )
+    tiffToQImage( &data.front(), data.size(), img );
+#endif
+
+  if( !img.isNull() )
+  {
+    QByteArray ba;
+    QBuffer buffer( &ba );
+    buffer.open( QIODevice::WriteOnly );
+    img.save( &buffer, format );
+
+    data.resize( buffer.size() );
+    memcpy( &data.front(), buffer.data(), data.size() );
+    buffer.close();
+  }
+}
+
 } // namespace
 
 #endif
