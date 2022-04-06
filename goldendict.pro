@@ -223,6 +223,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 HEADERS += folding.hh \
     article_inspect.h \
     globalbroadcaster.h \
+    headwordslistmodel.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
@@ -363,6 +364,7 @@ FORMS += groups.ui \
 SOURCES += folding.cc \
     article_inspect.cpp \
     globalbroadcaster.cpp \
+    headwordslistmodel.cpp \
     main.cc \
     dictionary.cc \
     config.cc \
