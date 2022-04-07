@@ -37,7 +37,6 @@ jobs:
     strategy:
       # 矩阵配置
       matrix:
-        # qt_ver: [5.15.2,6.2.2]
         include:
           # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
           # - qt_ver: 5.15.2
@@ -52,7 +51,7 @@ jobs:
             qt_arch_install: msvc2019_64           
     env:
       targetName: GoldenDict.exe
-      version: 22.4.alpha
+      version: 22.4.7-alpha
     # 步骤
     steps:
       # 安装Qt
