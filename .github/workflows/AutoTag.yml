@@ -39,13 +39,14 @@ jobs:
       - name: set git short sha
         id: git
         run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
+          echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"   
+          echo "::set-output name=release_hm::$(date +'%y%m%d%H%M')"             
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{env.version}}-${{ steps.git.outputs.sha_short }}
+          custom_tag: ${{env.version}}.${{ steps.git.outputs.release_hm }}.${{ steps.git.outputs.sha_short }}
 
          
       

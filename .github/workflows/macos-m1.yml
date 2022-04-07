@@ -104,6 +104,7 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+          echo "::set-output name=release_hm::$(date +'%y%m%d%H%M')"            
       # tag 上传Release
 #       - name: uploadRelease
 #         uses: svenstaro/upload-release-action@v2
@@ -111,7 +112,7 @@ jobs:
 #           repo_token: ${{ secrets.GITHUB_TOKEN }}
 #           file: ${{ env.targetName }}.dmg
 #           asset_name: ${{ env.targetName }}-M1_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
-#           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
+#           tag: v${{ steps.autotag.outputs.version }}.${{ steps.git.outputs.release_hm }}.${{ steps.git.outputs.sha_short }}
 #           overwrite: true 
 #           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
 #           prerelease: true

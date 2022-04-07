@@ -91,7 +91,7 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
-
+          echo "::set-output name=release_hm::$(date +'%y%m%d%H%M')"  
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
@@ -107,7 +107,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.targetName }}.dmg
           asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}.dmg
-          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}.${{ steps.git.outputs.release_hm }}.${{ steps.git.outputs.sha_short }}
           overwrite: true 
           release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
           prerelease: true
