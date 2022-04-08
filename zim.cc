@@ -1587,31 +1587,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             {
               wstring word;
               if( !title.empty() )
-              {
-
                 word = Utf8::decode( title );
-                if( maxHeadwordsToExpand && zh.articleCount >= maxHeadwordsToExpand )
-                  indexedWords.addSingleWord( word, n );
-                else
-                  indexedWords.addWord( word, n );
-              }
-              if( !url.empty() )
-              {
-                word          = Utf8::decode( url );
+              else
+                word = Utf8::decode( url );
 
-                // begin, the same process order as ZimDictionary::convert before findArticle's invocation
-                QString qword = QString::fromStdU32String( word );
-                QRegularExpression htmlRx( "\\.(s|)htm(l|)$", QRegularExpression::CaseInsensitiveOption );
-                qword.remove( htmlRx ).replace( "_", " " ).remove( QRegularExpression( ".*/" ) );
-                //end
-
-                word = qword.toStdU32String();
-                if( maxHeadwordsToExpand && zh.articleCount >= maxHeadwordsToExpand )
-                  indexedWords.addSingleWord( word, n );
-                else
-                  indexedWords.addWord( word, n );
-              }
-
+              if( maxHeadwordsToExpand && zh.articleCount >= maxHeadwordsToExpand )
+                indexedWords.addSingleWord( word, n );
+              else
+                indexedWords.addWord( word, n );
               wordCount++;
             }
             else
