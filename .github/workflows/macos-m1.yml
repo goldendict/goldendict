@@ -112,7 +112,7 @@ jobs:
 #           repo_token: ${{ secrets.GITHUB_TOKEN }}
 #           file: ${{ env.targetName }}.dmg
 #           asset_name: ${{ env.targetName }}-M1_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
-#           tag: v${{ steps.autotag.outputs.version }}.${{ steps.git.outputs.release_hm }}.${{ steps.git.outputs.sha_short }}
+#           tag: v${{ steps.autotag.outputs.version }}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
 #           overwrite: true 
 #           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
 #           prerelease: true
