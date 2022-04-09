@@ -443,9 +443,10 @@ void MdxDictionary::deferredInit()
 
     if ( !deferredInitRunnableStarted )
     {
-      QThreadPool::globalInstance()->start(
-        new MdxDeferredInitRunnable( *this, deferredInitRunnableExited ),
-        -1000 );
+      // QThreadPool::globalInstance()->start(
+      //   new MdxDeferredInitRunnable( *this, deferredInitRunnableExited ),
+      //   -1000 );
+      QThreadPool::globalInstance()->start( [ this ]() { this->doDeferredInit(); },-1000 );
       deferredInitRunnableStarted = true;
     }
   }
@@ -641,7 +642,8 @@ public:
     dict( dict_ ),
     ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
+    // QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -654,7 +656,7 @@ public:
   ~MdxArticleRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
 
@@ -818,7 +820,8 @@ public:
     dict( dict_ ),
     resourceName( Utf8::decode( resourceName_ ) )
   {
-    QThreadPool::globalInstance()->start( new MddResourceRequestRunnable( *this, hasExited ) );
+    //QThreadPool::globalInstance()->start( new MddResourceRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run(); // Run from another thread by MddResourceRequestRunnable
@@ -831,7 +834,7 @@ public:
   ~MddResourceRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
 
