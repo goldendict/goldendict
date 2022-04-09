@@ -104,7 +104,7 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
-          echo "::set-output name=release_hm::$(date +'%y%m%d%H%M')"            
+          echo "::set-output name=release_hm::$(date +'%y%m%d')"            
       # tag 上传Release
 #       - name: uploadRelease
 #         uses: svenstaro/upload-release-action@v2

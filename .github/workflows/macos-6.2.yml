@@ -99,7 +99,7 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
-          echo "::set-output name=release_hm::$(date +'%y%m%d%H%M')"  
+          echo "::set-output name=release_hm::$(date +'%y%m%d')"  
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
