@@ -399,8 +399,8 @@ MdxDictionary::~MdxDictionary()
   Mutex::Lock _( deferredInitMutex );
 
   // Wait for init runnable to complete if it was ever started
-  if ( deferredInitRunnableStarted )
-    deferredInitRunnableExited.acquire();
+//  if ( deferredInitRunnableStarted )
+//    deferredInitRunnableExited.acquire();
 
   dictFile.close();
 

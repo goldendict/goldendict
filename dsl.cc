@@ -336,8 +336,8 @@ DslDictionary::~DslDictionary()
   Mutex::Lock _( deferredInitMutex );
 
   // Wait for init runnable to complete if it was ever started
-  if ( deferredInitRunnableStarted )
-    deferredInitRunnableExited.acquire();
+  // if ( deferredInitRunnableStarted )
+  //   deferredInitRunnableExited.acquire();
 
   if ( dz )
     dict_data_close( dz );
