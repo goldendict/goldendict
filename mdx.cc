@@ -767,6 +767,8 @@ void MdxArticleRequest::run()
 
   if ( !articleText.empty() )
   {
+    articleText+="</div></div></div></div></div></div></div></div></div>";
+
     Mutex::Lock _( dataMutex );
     data.insert( data.end(), articleText.begin(), articleText.end() );
     hasAnyData = true;
