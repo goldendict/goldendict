@@ -757,10 +757,11 @@ void MdxArticleRequest::run()
     }
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
-    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
-    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
-    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
-    string cleaner = "";
+    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>"
+                     "</a></a></a></a></a></a></a></a>";
     articleText += "<div class=\"mdict\">" + articleBody + cleaner + "</div>\n";
   }
 
