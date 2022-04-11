@@ -731,8 +731,7 @@ void MdxArticleRequest::run()
     if ( hasError )
     {
       setErrorString( tr( "Failed loading article from %1, reason: %2" )
-                      .arg( QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ) )
-                      .arg( errorMessage ) );
+                      .arg( QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ), errorMessage ) );
       finish();
       return;
     }
@@ -1264,7 +1263,6 @@ QString MdxDictionary::getCachedFileName( QString filename )
 
       for ( ;; )
       {
-
         string u8ResourceName = Utf8::encode( resourceName );
         QCryptographicHash hash( QCryptographicHash::Md5 );
         hash.addData( u8ResourceName.data(), u8ResourceName.size() );
