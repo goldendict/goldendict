@@ -1455,21 +1455,18 @@ static void findResourceFiles( string const & mdx, vector< string > & dictFiles 
   }
 }
 
-vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > & fileNames,
+vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
                                                       string const & indicesDir,
                                                       Dictionary::Initializing & initializing ) 
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
-  for ( vector< string >::iterator i = fileNames.begin(); i != fileNames.end();  )
+  for ( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end(); ++i )
   {
     // Skip files with the extensions different to .mdx to speed up the
     // scanning
     if ( i->size() < 4 || strcasecmp( i->c_str() + ( i->size() - 4 ), ".mdx" ) != 0 )
-    {
-      i++;
       continue;
-    }
 
     vector< string > dictFiles( 1, *i );
     findResourceFiles( *i, dictFiles );
@@ -1656,8 +1653,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > & fileNam
     }
 
     dictionaries.push_back( new MdxDictionary( dictId, indexFile, dictFiles ) );
-
-    i=fileNames.erase(i);
   }
 
   return dictionaries;
