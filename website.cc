@@ -125,7 +125,9 @@ WebSiteArticleRequest::WebSiteArticleRequest( QString const & url_,
 
   QUrl reqUrl( url );
 
-  netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  auto request = QNetworkRequest( reqUrl );
+  request.setAttribute( QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy );
+  netReply = mgr.get( request );
 
 #ifndef QT_NO_OPENSSL
   connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
