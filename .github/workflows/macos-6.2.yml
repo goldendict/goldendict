@@ -79,12 +79,12 @@ jobs:
       - name: package
         run: |
           macdeployqt ${targetName}.app -qmldir=. -verbose=1
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0/lib/libavcodec.59.dylib" "@executable_path/../Frameworks/libavcodec.59.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libswresample.4.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavcodec.59.dylib" "@executable_path/../Frameworks/libavcodec.59.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libswresample.4.dylib"
           install_name_tool -change  "/usr/local/Cellar/nettle/3.7.3/lib/libnettle.8.dylib" "@executable_path/../Frameworks/libnettle.8.dylib" "GoldenDict.app/Contents/Frameworks//libhogweed.6.dylib"
           otool -L GoldenDict.app/Contents/MacOS/GoldenDict
           otool -L GoldenDict.app/Contents/Frameworks/lib*
