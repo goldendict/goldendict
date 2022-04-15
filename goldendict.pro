@@ -197,8 +197,8 @@ mac {
     }
     QT_CONFIG -= no-pkg-config 
     CONFIG += link_pkgconfig
-    INCLUDEPATH = /opt/homebrew/include /usr/local/include
-    LIBS += -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
+    INCLUDEPATH = $${PWD}/maclibs/include /opt/homebrew/include /usr/local/include
+    LIBS += -L$${PWD}/maclibs/lib -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
@@ -206,6 +206,7 @@ mac {
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
+                      cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ && \
                       mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
