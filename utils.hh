@@ -1,4 +1,4 @@
-/* Thin wrappers for retaining compatibility for both Qt4.x and Qt5.x */
+/* Thin wrappers for retaining compatibility for both Qt6.x and Qt5.x */
 
 #ifndef UTILS_HH
 #define UTILS_HH
