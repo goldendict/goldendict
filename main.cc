@@ -279,8 +279,10 @@ int main( int argc, char ** argv )
   }
 
   //high dpi screen support
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
   qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
   QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
