@@ -41,6 +41,7 @@
 #include "gddebug.hh"
 #include "ripemd.hh"
 #include "utils.hh"
+#include "htmlescape.hh"
 
 namespace Mdict
 {
@@ -373,7 +374,7 @@ bool MdictParser::readHeader( QDataStream & in )
     {
 #if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
       styleSheets_[ lines[ i ].toInt() ] =
-        pair< QString, QString >( Utils::unescapeHtml( lines[ i + 1 ] ), Utils::unescapeHtml( lines[ i + 2 ] ) );
+        pair< QString, QString >( Html::unescape( lines[ i + 1 ] ),  Html::unescape( lines[ i + 2 ] ) );
 #else
       styleSheets_[ lines[ i ].toInt() ] = pair< QString, QString >( lines[ i + 1 ], lines[ i + 2 ] );
 #endif
