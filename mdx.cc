@@ -200,6 +200,7 @@ struct MdxRegex
     wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
                    QRegularExpression::CaseInsensitiveOption ),
     anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)", QRegularExpression::CaseInsensitiveOption ),
+    anchorIdReWord( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)([^\"]*)", QRegularExpression::CaseInsensitiveOption ),
     anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)", QRegularExpression::CaseInsensitiveOption ),
     anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#", QRegularExpression::CaseInsensitiveOption ),
     audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
@@ -224,6 +225,7 @@ struct MdxRegex
   QRegularExpression allLinksRe;
   QRegularExpression wordCrossLink;
   QRegularExpression anchorIdRe;
+  QRegularExpression anchorIdReWord;
   QRegularExpression anchorIdRe2;
   QRegularExpression anchorLinkRe;
   QRegularExpression audioRe;
@@ -1079,6 +1081,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString articleNewText;
   int linkPos = 0;
   QRegularExpressionMatchIterator it = mdxRx.allLinksRe.globalMatch( article );
+  QMap<QString,QString> idMap;
   while( it.hasNext() )
   {
     QRegularExpressionMatch allLinksMatch = it.next();
@@ -1098,6 +1101,11 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
       QRegularExpressionMatch match = mdxRx.anchorIdRe.match( linkTxt );
       if( match.hasMatch() )
       {
+        auto wordMatch = mdxRx.anchorIdReWord.match( linkTxt );
+        if( wordMatch.hasMatch() )
+        {
+          idMap.insert( wordMatch.captured( 3 ), uniquePrefix + wordMatch.captured( 3 ) );
+        }
         QString newText = match.captured( 1 ) + match.captured( 2 ) + uniquePrefix;
         newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
       }
@@ -1204,6 +1212,13 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   {
     articleNewText += article.mid( linkPos );
     article = articleNewText;
+  }
+
+  //some built-in javascript may reference this id. replace "idxxx" with "unique_idxxx"
+  foreach ( const auto& key, idMap.keys() )
+  {
+    const auto& value = idMap[ key ];
+    article.replace("\""+key+"\"","\""+value+"\"");
   }
 
   return article;
