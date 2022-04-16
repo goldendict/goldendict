@@ -71,10 +71,6 @@ static QDomNamedNodeMap parseHeaderAttributes( const QString & headerText )
   QDomElement docElem = doc.documentElement();
   attributes = docElem.attributes();
 
-  for ( int i = 0; i < attributes.count(); i++ )
-  {
-    QDomAttr attr = attributes.item( i ).toAttr();
-  }
 
   return attributes;
 }
@@ -357,12 +353,30 @@ bool MdictParser::readHeader( QDataStream & in )
   //   style.suffix
   if ( headerAttributes.contains( "StyleSheet" ) )
   {
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+    //a workaround to bypass https://bugreports.qt.io/browse/QTBUG-102612
+    QRegularExpression rx( "StyleSheet=\"([^\"]*?)\"", QRegularExpression::CaseInsensitiveOption );
+
+    auto match = rx.match( headerText );
+    QString styleSheets;
+
+    if( match.hasMatch() || match.hasPartialMatch() )
+    {
+      styleSheets = match.captured( 1 );
+    }
+#else
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
+#endif
     QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt::KeepEmptyParts );
 
-    for ( int i = 0; i < lines.size() - 3; i += 3 )
+    for( int i = 0; i < lines.size() - 3; i += 3 )
     {
-      styleSheets_[lines[i].toInt()] = pair<QString, QString>( lines[i + 1], lines[i + 2] );
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+      styleSheets_[ lines[ i ].toInt() ] =
+        pair< QString, QString >( Utils::unescapeHtml( lines[ i + 1 ] ), Utils::unescapeHtml( lines[ i + 2 ] ) );
+#else
+      styleSheets_[ lines[ i ].toInt() ] = pair< QString, QString >( lines[ i + 1 ], lines[ i + 2 ] );
+#endif
     }
   }
 
