@@ -40,6 +40,7 @@
 #include "decompress.hh"
 #include "gddebug.hh"
 #include "ripemd.hh"
+#include "utils.hh"
 
 namespace Mdict
 {
@@ -182,8 +183,6 @@ QString MdictParser::toUtf16( const char * fromCode, const char * from, size_t f
 {
   if ( !fromCode || !from )
     return QString();
-
-
 
   QTextCodec *codec =QTextCodec::codecForName(fromCode);
   return codec->toUnicode(from,fromSize);
@@ -647,7 +646,7 @@ QString & MdictParser::substituteStylesheet( QString & article, MdictParser::Sty
   }
   if( pos )
   {
-    articleNewText += article.mid( pos );
+    articleNewText += Utils::rstripnull( article.mid( pos ));
     article = articleNewText;
     articleNewText.clear();
   }

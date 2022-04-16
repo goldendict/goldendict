@@ -26,6 +26,22 @@ inline QString rstrip(const QString &str) {
   return "";
 }
 
+/**
+ * str="abc\r\n\u0000" should be returned as "abc"
+ * @brief rstripnull
+ * @param str
+ * @return
+ */
+inline QString rstripnull(const QString &str) {
+  int n = str.size() - 1;
+  for (; n >= 0; --n) {
+    if (!str.at(n).isSpace()&&!str.at(n).isNull()) {
+      return str.left(n + 1);
+    }
+  }
+  return "";
+}
+
 inline bool isExternalLink(QUrl const &url) {
   return url.scheme() == "http" || url.scheme() == "https" ||
          url.scheme() == "ftp" || url.scheme() == "mailto" ||
