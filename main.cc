@@ -18,16 +18,10 @@
 #include <clocale>
 #endif
 
-//#define __DO_DEBUG
-
 #define LOG_TO_FILE_KEY "--log-to-file"
 
 #ifdef Q_OS_WIN32
 #include <QtCore/qt_windows.h>
-#endif
-
-#ifdef __DO_DEBUG
-#include <sys/resource.h>
 #endif
 
 #include "termination.hh"
@@ -245,17 +239,6 @@ int main( int argc, char ** argv )
   }
 
   installTerminationHandler();
-
-  #ifdef __DO_DEBUG
-  {
-    rlimit limit;
-
-    memset( &limit, 0, sizeof( limit ) );
-    limit.rlim_cur = RLIM_INFINITY;
-    limit.rlim_max = RLIM_INFINITY;
-    setrlimit( RLIMIT_CORE, &limit );
-  }
-  #endif
 
 #ifdef __WIN32
 
