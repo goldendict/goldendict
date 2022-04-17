@@ -55,6 +55,7 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   connect(model,&HeadwordListModel::finished,this,[this](){
     ui.exportButton->setEnabled(true);
+    ui.progressBar->hide();
   });
   proxy = new QSortFilterProxyModel( this );
 
