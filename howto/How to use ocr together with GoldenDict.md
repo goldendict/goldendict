@@ -15,7 +15,7 @@ Thanks to:
 https://github.com/xiaoyifang/Capture2Text/releases
 # Configuration on Windows
 after installation of both software.
-configure the Capture2Text ,see screenshot following
+configure the Capture2Text ,see screenshots below.
 ## configure external `Call Executable` path   (Windows for example)
 `path\GoldenDict.exe "${capture}"`
 
