@@ -14,6 +14,8 @@
 #endif
 
 #include <QBuffer>
+#include <QApplication>
+#include <QScreen>
 
 namespace GdTiff
 {
@@ -153,7 +155,11 @@ void tiff2img( vector< char > & data, const char * format )
     QByteArray ba;
     QBuffer buffer( &ba );
     buffer.open( QIODevice::WriteOnly );
-    img.save( &buffer, format );
+    QSize screenSize = QApplication::primaryScreen()->availableSize();
+    QSize imgSize    = img.size();
+    int scaleSize    = qMin( imgSize.width(), screenSize.width() );
+
+    img.scaledToWidth( scaleSize ).save( &buffer, format );
 
     data.resize( buffer.size() );
     memcpy( &data.front(), buffer.data(), data.size() );
