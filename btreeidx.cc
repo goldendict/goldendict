@@ -1053,7 +1053,8 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
   // which are freakishly huge.
   if( wordSize > maxHeadwordSize )
   {
-    qWarning() << "Skipped too long headword: " << word.substr( 0, 100 ).c_str() << "size:" << wordSize;
+    qWarning() << "Skipped too long headword: " << QString::fromStdU32String( word.substr( 0, 30 ) )
+               << "size:" << wordSize;
     return;
   }
 
