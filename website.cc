@@ -125,7 +125,9 @@ WebSiteArticleRequest::WebSiteArticleRequest( QString const & url_,
 
   QUrl reqUrl( url );
 
-  netReply = mgr.get( QNetworkRequest( reqUrl ) );
+  auto request = QNetworkRequest( reqUrl );
+  request.setAttribute( QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy );
+  netReply = mgr.get( request );
 
 #ifndef QT_NO_OPENSSL
   connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
@@ -264,9 +266,11 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     }
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
-    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
-    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
-    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
+    articleString += "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>"
+                     "</a></a></a></a></a></a></a></a>";
 
     QByteArray articleBody = articleString.toUtf8();
 
@@ -372,7 +376,7 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                       "\" onmouseover=\"processIframeMouseOver('gdexpandframe-" + getId() + "');\" "
                       "onmouseout=\"processIframeMouseOut();\" "
                       "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "
-                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\" onload=\"resizeIframe(this)\""
+                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\""
                       "style=\"overflow:visible; width:100%; display:block;\">"
                       "</iframe>";
 

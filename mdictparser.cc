@@ -40,6 +40,8 @@
 #include "decompress.hh"
 #include "gddebug.hh"
 #include "ripemd.hh"
+#include "utils.hh"
+#include "htmlescape.hh"
 
 namespace Mdict
 {
@@ -70,10 +72,6 @@ static QDomNamedNodeMap parseHeaderAttributes( const QString & headerText )
   QDomElement docElem = doc.documentElement();
   attributes = docElem.attributes();
 
-  for ( int i = 0; i < attributes.count(); i++ )
-  {
-    QDomAttr attr = attributes.item( i ).toAttr();
-  }
 
   return attributes;
 }
@@ -182,8 +180,6 @@ QString MdictParser::toUtf16( const char * fromCode, const char * from, size_t f
 {
   if ( !fromCode || !from )
     return QString();
-
-
 
   QTextCodec *codec =QTextCodec::codecForName(fromCode);
   return codec->toUnicode(from,fromSize);
@@ -358,12 +354,30 @@ bool MdictParser::readHeader( QDataStream & in )
   //   style.suffix
   if ( headerAttributes.contains( "StyleSheet" ) )
   {
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+    //a workaround to bypass https://bugreports.qt.io/browse/QTBUG-102612
+    QRegularExpression rx( "StyleSheet=\"([^\"]*?)\"", QRegularExpression::CaseInsensitiveOption );
+
+    auto match = rx.match( headerText );
+    QString styleSheets;
+
+    if( match.hasMatch() || match.hasPartialMatch() )
+    {
+      styleSheets = match.captured( 1 );
+    }
+#else
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
+#endif
     QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt::KeepEmptyParts );
 
-    for ( int i = 0; i < lines.size() - 3; i += 3 )
+    for( int i = 0; i < lines.size() - 3; i += 3 )
     {
-      styleSheets_[lines[i].toInt()] = pair<QString, QString>( lines[i + 1], lines[i + 2] );
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+      styleSheets_[ lines[ i ].toInt() ] =
+        pair< QString, QString >( Html::unescape( lines[ i + 1 ] ),  Html::unescape( lines[ i + 2 ] ) );
+#else
+      styleSheets_[ lines[ i ].toInt() ] = pair< QString, QString >( lines[ i + 1 ], lines[ i + 2 ] );
+#endif
     }
   }
 
@@ -647,7 +661,7 @@ QString & MdictParser::substituteStylesheet( QString & article, MdictParser::Sty
   }
   if( pos )
   {
-    articleNewText += article.mid( pos );
+    articleNewText += Utils::rstripnull( article.mid( pos ));
     article = articleNewText;
     articleNewText.clear();
   }

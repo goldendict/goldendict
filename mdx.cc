@@ -40,6 +40,7 @@
 
 #include <QRegularExpression>
 
+#include "tiff.hh"
 #include "utils.hh"
 
 namespace Mdx
@@ -199,6 +200,7 @@ struct MdxRegex
     wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
                    QRegularExpression::CaseInsensitiveOption ),
     anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)", QRegularExpression::CaseInsensitiveOption ),
+    anchorIdReWord( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)([^\"]*)", QRegularExpression::CaseInsensitiveOption ),
     anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)", QRegularExpression::CaseInsensitiveOption ),
     anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#", QRegularExpression::CaseInsensitiveOption ),
     audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
@@ -223,6 +225,7 @@ struct MdxRegex
   QRegularExpression allLinksRe;
   QRegularExpression wordCrossLink;
   QRegularExpression anchorIdRe;
+  QRegularExpression anchorIdReWord;
   QRegularExpression anchorIdRe2;
   QRegularExpression anchorLinkRe;
   QRegularExpression audioRe;
@@ -398,8 +401,8 @@ MdxDictionary::~MdxDictionary()
   Mutex::Lock _( deferredInitMutex );
 
   // Wait for init runnable to complete if it was ever started
-  if ( deferredInitRunnableStarted )
-    deferredInitRunnableExited.acquire();
+//  if ( deferredInitRunnableStarted )
+//    deferredInitRunnableExited.acquire();
 
   dictFile.close();
 
@@ -442,9 +445,10 @@ void MdxDictionary::deferredInit()
 
     if ( !deferredInitRunnableStarted )
     {
-      QThreadPool::globalInstance()->start(
-        new MdxDeferredInitRunnable( *this, deferredInitRunnableExited ),
-        -1000 );
+      // QThreadPool::globalInstance()->start(
+      //   new MdxDeferredInitRunnable( *this, deferredInitRunnableExited ),
+      //   -1000 );
+      QThreadPool::globalInstance()->start( [ this ]() { this->doDeferredInit(); },-1000 );
       deferredInitRunnableStarted = true;
     }
   }
@@ -640,7 +644,8 @@ public:
     dict( dict_ ),
     ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
+    // QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -653,7 +658,7 @@ public:
   ~MdxArticleRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
 
@@ -728,8 +733,7 @@ void MdxArticleRequest::run()
     if ( hasError )
     {
       setErrorString( tr( "Failed loading article from %1, reason: %2" )
-                      .arg( QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ) )
-                      .arg( errorMessage ) );
+                      .arg( QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ), errorMessage ) );
       finish();
       return;
     }
@@ -754,15 +758,18 @@ void MdxArticleRequest::run()
     }
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
-    // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
-    // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
-    // https://en.wikipedia.org/wiki/Tag_soup#HTML5
-    string cleaner = "";
+    string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</font>""</font>""</font>""</font>""</font>""</font>"
+                     "</b></b></b></b></b></b></b></b>"
+                     "</i></i></i></i></i></i></i></i>"
+                     "</a></a></a></a></a></a></a></a>";
     articleText += "<div class=\"mdict\">" + articleBody + cleaner + "</div>\n";
   }
 
   if ( !articleText.empty() )
   {
+    articleText+="</div></div></div></div></div></div></div></div></div>";
+
     Mutex::Lock _( dataMutex );
     data.insert( data.end(), articleText.begin(), articleText.end() );
     hasAnyData = true;
@@ -817,7 +824,8 @@ public:
     dict( dict_ ),
     resourceName( Utf8::decode( resourceName_ ) )
   {
-    QThreadPool::globalInstance()->start( new MddResourceRequestRunnable( *this, hasExited ) );
+    //QThreadPool::globalInstance()->start( new MddResourceRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run(); // Run from another thread by MddResourceRequestRunnable
@@ -830,7 +838,7 @@ public:
   ~MddResourceRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
 
@@ -971,6 +979,12 @@ void MddResourceRequest::run()
         data.resize( bytes.size() );
         memcpy( &data.front(), bytes.constData(), bytes.size() );
       }
+      if( Filetype::isNameOfTiff( u8ResourceName ) )
+      {
+        // Convert it
+        Mutex::Lock _( dataMutex );
+        GdTiff::tiff2img( data );
+      }
     }
     break;
   }
@@ -1064,11 +1078,10 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
-
-
   QString articleNewText;
   int linkPos = 0;
   QRegularExpressionMatchIterator it = mdxRx.allLinksRe.globalMatch( article );
+  QMap<QString,QString> idMap;
   while( it.hasNext() )
   {
     QRegularExpressionMatch allLinksMatch = it.next();
@@ -1088,6 +1101,11 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
       QRegularExpressionMatch match = mdxRx.anchorIdRe.match( linkTxt );
       if( match.hasMatch() )
       {
+        auto wordMatch = mdxRx.anchorIdReWord.match( linkTxt );
+        if( wordMatch.hasMatch() )
+        {
+          idMap.insert( wordMatch.captured( 3 ), uniquePrefix + wordMatch.captured( 3 ) );
+        }
         QString newText = match.captured( 1 ) + match.captured( 2 ) + uniquePrefix;
         newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
       }
@@ -1196,6 +1214,13 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     article = articleNewText;
   }
 
+  //some built-in javascript may reference this id. replace "idxxx" with "unique_idxxx"
+  foreach ( const auto& key, idMap.keys() )
+  {
+    const auto& value = idMap[ key ];
+    article.replace("\""+key+"\"","\""+value+"\"");
+  }
+
   return article;
 }
 
@@ -1253,7 +1278,6 @@ QString MdxDictionary::getCachedFileName( QString filename )
 
       for ( ;; )
       {
-
         string u8ResourceName = Utf8::encode( resourceName );
         QCryptographicHash hash( QCryptographicHash::Md5 );
         hash.addData( u8ResourceName.data(), u8ResourceName.size() );
@@ -1446,21 +1470,18 @@ static void findResourceFiles( string const & mdx, vector< string > & dictFiles 
   }
 }
 
-vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > & fileNames,
+vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & fileNames,
                                                       string const & indicesDir,
                                                       Dictionary::Initializing & initializing ) 
 {
   vector< sptr< Dictionary::Class > > dictionaries;
 
-  for ( vector< string >::iterator i = fileNames.begin(); i != fileNames.end();  )
+  for ( vector< string >::const_iterator i = fileNames.begin(); i != fileNames.end(); ++i )
   {
     // Skip files with the extensions different to .mdx to speed up the
     // scanning
     if ( i->size() < 4 || strcasecmp( i->c_str() + ( i->size() - 4 ), ".mdx" ) != 0 )
-    {
-      i++;
       continue;
-    }
 
     vector< string > dictFiles( 1, *i );
     findResourceFiles( *i, dictFiles );
@@ -1647,8 +1668,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > & fileNam
     }
 
     dictionaries.push_back( new MdxDictionary( dictId, indexFile, dictFiles ) );
-
-    i=fileNames.erase(i);
   }
 
   return dictionaries;

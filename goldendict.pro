@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 22.4.Summer
+VERSION = 22.4.18-Summer
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
@@ -70,7 +70,7 @@ win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        VERSION = 22.4.1 # VS does not recognize 22.2.xxx,cause errors during compilation under MSVC++
+        VERSION = 22.4.18 # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
@@ -197,8 +197,8 @@ mac {
     }
     QT_CONFIG -= no-pkg-config 
     CONFIG += link_pkgconfig
-    INCLUDEPATH = /opt/homebrew/include /usr/local/include
-    LIBS += -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
+    INCLUDEPATH = $${PWD}/maclibs/include /opt/homebrew/include /usr/local/include
+    LIBS += -L$${PWD}/maclibs/lib -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
@@ -206,6 +206,7 @@ mac {
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
+                      cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ && \
                       mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
@@ -222,6 +223,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 HEADERS += folding.hh \
     article_inspect.h \
     globalbroadcaster.h \
+    headwordslistmodel.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
@@ -362,6 +364,7 @@ FORMS += groups.ui \
 SOURCES += folding.cc \
     article_inspect.cpp \
     globalbroadcaster.cpp \
+    headwordslistmodel.cpp \
     main.cc \
     dictionary.cc \
     config.cc \

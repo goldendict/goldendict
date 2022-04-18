@@ -51,9 +51,12 @@ DictHeadwords::DictHeadwords( QWidget *parent, Config::Class & cfg_,
 
   ui.matchCase->setChecked( cfg.headwordsDialog.matchCase );
 
-  model = new QStringListModel( this );
-  model->setStringList( headers );
+  model = new HeadwordListModel( this );
 
+  connect(model,&HeadwordListModel::finished,this,[this](){
+    ui.exportButton->setEnabled(true);
+    ui.progressBar->hide();
+  });
   proxy = new QSortFilterProxyModel( this );
 
   proxy->setSourceModel( model );
@@ -134,16 +137,12 @@ void DictHeadwords::setup( Dictionary::Class *dict_ )
 
   setWindowTitle( QString::fromUtf8( dict->getName().c_str() ) );
 
-  headers.clear();
-  model->setStringList( headers );
-
-  dict->getHeadwords( headers );
-  model->setStringList( headers );
-
+  auto size = dict->getWordCount();
+  model->setDict(dict);
   proxy->sort( 0 );
   filterChanged();
 
-  if( headers.size() > AUTO_APPLY_LIMIT )
+  if( size > AUTO_APPLY_LIMIT )
   {
     cfg.headwordsDialog.autoApply = ui.autoApply->isChecked();
     ui.autoApply->setChecked( false );
@@ -155,6 +154,7 @@ void DictHeadwords::setup( Dictionary::Class *dict_ )
     ui.autoApply->setChecked( cfg.headwordsDialog.autoApply );
   }
 
+  ui.exportButton->setEnabled(false);
   ui.applyButton->setEnabled( !ui.autoApply->isChecked() );
 
   setWindowIcon( dict->getIcon() );
@@ -169,7 +169,7 @@ void DictHeadwords::savePos()
   cfg.headwordsDialog.searchMode = ui.searchModeCombo->currentIndex();
   cfg.headwordsDialog.matchCase = ui.matchCase->isChecked();
 
-  if( headers.size() <= AUTO_APPLY_LIMIT )
+  if( model->totalCount() <= AUTO_APPLY_LIMIT )
     cfg.headwordsDialog.autoApply = ui.autoApply->isChecked();
 
   cfg.headwordsDialog.headwordsDialogGeometry = saveGeometry();
@@ -226,12 +226,15 @@ void DictHeadwords::filterChanged()
   QString pattern;
   switch( syntax )
   {
-    case QRegExp::FixedString:  pattern = QRegularExpression::escape( ui.filterLine->text() );
-                                break;
-    case QRegExp::WildcardUnix: pattern = wildcardsToRegexp( ui.filterLine->text() );
-                                break;
-    default:                    pattern = ui.filterLine->text();
-                                break;
+  case QRegExp::FixedString:
+    pattern = QRegularExpression::escape( ui.filterLine->text() );
+    break;
+  case QRegExp::WildcardUnix:
+    pattern = wildcardsToRegexp( ui.filterLine->text() );
+    break;
+  default:
+    pattern = ui.filterLine->text();
+    break;
   }
 
   QRegularExpression regExp( pattern, options );
@@ -245,8 +248,6 @@ void DictHeadwords::filterChanged()
   QApplication::setOverrideCursor( Qt::WaitCursor );
 
   proxy->setFilterRegularExpression( regExp );
-
-
   proxy->sort( 0 );
 
   QApplication::restoreOverrideCursor();
@@ -272,8 +273,7 @@ void DictHeadwords::autoApplyStateChanged( int state )
 void DictHeadwords::showHeadwordsNumber()
 {
   ui.headersNumber->setText( tr( "Unique headwords total: %1, filtered: %2" )
-                             .arg( QString::number( headers.size() ) )
-                             .arg( QString::number( proxy->rowCount() ) ) );
+                             .arg( QString::number( model->totalCount() ), QString::number( proxy->rowCount() ) ) );
 }
 
 void DictHeadwords::saveHeadersToFile()
@@ -303,7 +303,7 @@ void DictHeadwords::saveHeadersToFile()
     if ( !file.open( QFile::WriteOnly | QIODevice::Text ) )
       break;
 
-    int headwordsNumber = proxy->rowCount();
+    int headwordsNumber = model->totalCount();
 
     // Setup progress dialog
     int n = headwordsNumber;
@@ -335,7 +335,7 @@ void DictHeadwords::saveHeadersToFile()
       if( progress.wasCanceled() )
         break;
 
-      QVariant value = proxy->data( proxy->index( i, 0 ) );
+      QVariant value = model->getRow(i);
       if( !value.canConvert< QString >() )
         continue;
 

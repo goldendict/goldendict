@@ -421,15 +421,15 @@ void ScanPopup::applyWordsZoomLevel()
 
   if ( ui.groupList->font().pointSize() != ps )
   {
-    disconnect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-                this, SLOT( currentGroupChanged( QString const & ) ) );
+    disconnect( ui.groupList, &GroupComboBox::currentIndexChanged,
+                this, &ScanPopup::currentGroupChanged );
     int n = ui.groupList->currentIndex();
     ui.groupList->clear();
     ui.groupList->setFont( font );
     ui.groupList->fill( groups );
     ui.groupList->setCurrentIndex( n );
-    connect( ui.groupList, SIGNAL( currentIndexChanged( QString const & ) ),
-             this, SLOT( currentGroupChanged( QString const & ) ) );
+    connect( ui.groupList, &GroupComboBox::currentIndexChanged,
+                this, &ScanPopup::currentGroupChanged );
   }
 
   ui.outerFrame->layout()->activate();

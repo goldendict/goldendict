@@ -44,6 +44,27 @@ $(function() {
 
         });
 
+    //monitor iframe height.
+
+        $( "iframe" ).on( "load", function() {
+          var iframe = $( this );
+          resizeIframe( iframe[ 0 ] );
+        } );
+
+    function resizeIframe(obj) {
+        setInterval(function(){
+            //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
+            if($(obj).contents().height() <2000)
+            {
+                $(obj).height($(obj).contents().height());
+            }
+            else{
+                $(obj).height(2000);
+                obj.scrolling="yes";
+            }
+        },500);
+    }
+
     });
 })($_$);
 
@@ -52,16 +73,4 @@ function playSound(sound) {
     a.play();
 }
 
-function resizeIframe(obj) {
-    setInterval(function(){
-        //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
-        if(obj.contentWindow.document.documentElement.scrollHeight <1000)
-        {
-            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
-        }
-        else{
-            obj.style.height ='1000px'
-            obj.scrolling="yes";
-        }
-    },500);
-}
+

@@ -37,22 +37,16 @@ jobs:
     strategy:
       # 矩阵配置
       matrix:
-        # qt_ver: [5.15.2,6.2.2]
         include:
           # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
-          # - qt_ver: 5.15.2
-          #   qt_arch: win64_msvc2019_64
-          #   msvc_arch: x64
-          #   qt_target: x64
-          #   qt_arch_install: msvc2019_64  
-          - qt_ver: 6.2.3
+          - qt_ver: 6.3.0
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
             qt_target: x64
             qt_arch_install: msvc2019_64           
     env:
       targetName: GoldenDict.exe
-      version: 22.4.Summer
+      version: 22.4.18-Summer
     # 步骤
     steps:
       # 安装Qt
@@ -65,8 +59,7 @@ jobs:
           # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
-          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
-
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia qtimageformats
       # 拉取代码
       - uses: actions/checkout@v3
         with:
@@ -80,7 +73,7 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"    
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
-
+          echo "::set-output name=release_hm::$(date +'%y%m%d')"  
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
@@ -133,7 +126,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ matrix.qt_ver }}-${{ steps.package.outputs.packageName }}.zip
-          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
           prerelease: false
@@ -153,7 +146,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release/${{ env.targetName }}
           asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}
-          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
           prerelease: false

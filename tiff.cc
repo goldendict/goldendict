@@ -14,6 +14,8 @@
 #endif
 
 #include <QBuffer>
+#include <QApplication>
+#include <QScreen>
 
 namespace GdTiff
 {
@@ -137,6 +139,32 @@ bool tiffToQImage( const char * data, int size, QImage & image )
 
   TIFFClose( tiff );
   return false;
+}
+
+void tiff2img( vector< char > & data, const char * format )
+{
+  QImage img = QImage::fromData( (unsigned char *)&data.front(), data.size() );
+
+#ifdef MAKE_EXTRA_TIFF_HANDLER
+  if( img.isNull() )
+    tiffToQImage( &data.front(), data.size(), img );
+#endif
+
+  if( !img.isNull() )
+  {
+    QByteArray ba;
+    QBuffer buffer( &ba );
+    buffer.open( QIODevice::WriteOnly );
+    QSize screenSize = QApplication::primaryScreen()->availableSize();
+    QSize imgSize    = img.size();
+    int scaleSize    = qMin( imgSize.width(), screenSize.width() );
+
+    img.scaledToWidth( scaleSize ).save( &buffer, format );
+
+    data.resize( buffer.size() );
+    memcpy( &data.front(), buffer.data(), data.size() );
+    buffer.close();
+  }
 }
 
 } // namespace

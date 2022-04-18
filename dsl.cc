@@ -336,8 +336,8 @@ DslDictionary::~DslDictionary()
   Mutex::Lock _( deferredInitMutex );
 
   // Wait for init runnable to complete if it was ever started
-  if ( deferredInitRunnableStarted )
-    deferredInitRunnableExited.acquire();
+  // if ( deferredInitRunnableStarted )
+  //   deferredInitRunnableExited.acquire();
 
   if ( dz )
     dict_data_close( dz );
@@ -1919,33 +1919,8 @@ void DslResourceRequest::run()
     {
       // Convert it
 
-      dataMutex.lock();
-
-      QImage img = QImage::fromData( (unsigned char *) &data.front(),
-                                     data.size() );
-
-#ifdef MAKE_EXTRA_TIFF_HANDLER
-      if( img.isNull() )
-        GdTiff::tiffToQImage( &data.front(), data.size(), img );
-#endif
-
-      dataMutex.unlock();
-
-      if ( !img.isNull() )
-      {
-        // Managed to load -- now store it back as BMP
-
-        QByteArray ba;
-        QBuffer buffer( &ba );
-        buffer.open( QIODevice::WriteOnly );
-        img.save( &buffer, "BMP" );
-
-        Mutex::Lock _( dataMutex );
-
-        data.resize( buffer.size() );
-
-        memcpy( &data.front(), buffer.data(), data.size() );
-      }
+      Mutex::Lock _( dataMutex );
+      GdTiff::tiff2img( data );
     }
 
     Mutex::Lock _( dataMutex );

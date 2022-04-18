@@ -19,6 +19,46 @@
      <item row="3" column="0">
       <widget class="QListView" name="headersListView"/>
      </item>
+     <item row="1" column="1">
+      <widget class="QCheckBox" name="autoApply">
+       <property name="toolTip">
+        <string>If checked any filter changes will we immediately applied to headwords list</string>
+       </property>
+       <property name="text">
+        <string>Auto apply</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLineEdit" name="filterLine">
+       <property name="toolTip">
+        <string>Filter string (fixed string, wildcards or regular expression)</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Filter:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="applyButton">
+       <property name="toolTip">
+        <string>Press this button to apply filter to headwords list</string>
+       </property>
+       <property name="text">
+        <string>Apply</string>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
      <item row="3" column="1">
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
@@ -95,43 +135,16 @@
        </item>
       </layout>
      </item>
-     <item row="2" column="1">
-      <widget class="QPushButton" name="applyButton">
-       <property name="toolTip">
-        <string>Press this button to apply filter to headwords list</string>
+     <item row="4" column="0">
+      <widget class="QProgressBar" name="progressBar">
+       <property name="maximum">
+        <number>0</number>
        </property>
-       <property name="text">
-        <string>Apply</string>
+       <property name="value">
+        <number>-1</number>
        </property>
-       <property name="autoDefault">
+       <property name="invertedAppearance">
         <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QCheckBox" name="autoApply">
-       <property name="toolTip">
-        <string>If checked any filter changes will we immediately applied to headwords list</string>
-       </property>
-       <property name="text">
-        <string>Auto apply</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Filter:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLineEdit" name="filterLine">
-       <property name="toolTip">
-        <string>Filter string (fixed string, wildcards or regular expression)</string>
        </property>
       </widget>
      </item>

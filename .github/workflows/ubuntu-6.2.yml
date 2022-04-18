@@ -8,27 +8,27 @@ on:
   #   workflows: [AutoTag]
   #   types: [completed]
   workflow_dispatch:
-  push:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
-      - ".clang-format"
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
+  # push:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+  #     - ".clang-format"
+  # pull_request:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
 jobs:
   build:
     name: Build
@@ -36,10 +36,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        qt_ver: [6.2.3]
+        qt_ver: [6.3.0]
         qt_arch: [gcc_64]
     env:
-      version: 22.4.Summer
+      version: 22.4.18-Summer
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -47,7 +47,7 @@ jobs:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
-          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia  qtimageformats
       - name: ubuntu install thirdparty dependencies
         run: |
           sudo apt-get install git pkg-config build-essential 
@@ -74,10 +74,8 @@ jobs:
           
           #copy missing shared dll to appdir.
           mkdir -p appdir/usr/lib
-          # mkdir -p appdir/usr/libexec
           cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep gobject ) appdir/usr/lib
           cp  $(ldd appdir/usr/bin/goldendict | grep -o '\W/[^ ]*' |grep libpango ) appdir/usr/lib
-          # cp $${env.Qt6_DIR}/libexec/QtWebEngineProcess  appdir/usr/libexec
       - name: Build AppImage
         run: |
           wget -c -nv "https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage"
@@ -97,7 +95,7 @@ jobs:
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
           echo "::set-output name=appname::$(ls *.AppImage*)"
-
+          echo "::set-output name=release_hm::$(date +'%y%m%d')"  
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
@@ -113,7 +111,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
-          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
           prerelease: false

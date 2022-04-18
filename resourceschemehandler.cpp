@@ -9,6 +9,7 @@ void ResourceSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
     QNetworkRequest request;
     request.setUrl(url);
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
     QNetworkReply *reply = this->mManager.createRequest(QNetworkAccessManager::GetOperation, request);
     connect(reply, &QNetworkReply::finished, requestJob, [=]() {
       if (reply->error() == QNetworkReply::ContentNotFoundError) {

@@ -3,6 +3,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 on: 
+  # workflow_run:
+  #   workflows: [AutoTag]
+  #   types: [completed]
   workflow_dispatch:
   # push:
   #   branches:
@@ -32,96 +35,41 @@ jobs:
     strategy:
       matrix:
         os: [macos-11]
-        qt_ver: [6.2.2]
+        qt_ver: [6.3.0]
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
+      version: 22.4.7-alpha
+
     steps:
-      - name: prepare env
-        run: |
-          softwareupdate --all --install --force
-          sudo xcode-select --switch /Applications/Xcode.app
-          sudo xcode-select --print-path
-          #sudo xcode-select --switch /Library/Developer/CommandLineTools  
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          version: ${{ matrix.qt_ver }}
-          arch: ${{ matrix.qt_arch }}
-          cached: 'false'
-          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia 
-          setup-python: 'false'              
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 1
-      - name: Set outputs
-        id: githash
-        run: |
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
-       
-      - name: build macos
-        run: |
-          brew install pcre2 harfbuzz freetype
-          brew install cmake ninja python
-          brew install automake
-          brew install autoconf
-          brew install libtool
-          git clone https://github.com/xiph/vorbis.git
-          cd vorbis
-          ./autogen.sh
-          ./configure
-          make
-          sudo make install
-          cd ..
-          brew install opencc
-          brew install ffmpeg@5
-          #brew reinstall $(brew deps ffmpeg) ffmpeg
-          brew install libao
-          brew install libiconv
-          brew install lzo
-          brew install libogg
-          brew install zstd
-          brew install libtiff
-          #brew install libvorbis --force
-          #brew link libvorbis --force
-          brew install hunspell
-
-          # brew install qt@6
-          brew install pkg-config
-          # CONFIG+=chinese_conversion_support
-          #file /usr/local/lib/libzstd.dylib
-          file /usr/local/lib/QtGui.framework/QtGui
-          qmake CONFIG+=no_extra_tiff_handler CONFIG+=release CONFIG+=zim_support QMAKE_APPLE_DEVICE_ARCHS="arm64" CONFIG+=no_epwing_support CONFIG+=no_ffmpeg_player #CONFIG+=no_qtmultimedia_player
-          make 
-      # 打包
-      - name: package
-        run: |
-          macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
+          fetch-depth: 0
+      # - name: get current time
+      #   run: echo "REL_DATE=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+      # - name: get OS version
+      #   run: echo "OS_VER=$(sw_vers -productVersion)" >> $GITHUB_ENV
       - name: Set outputs
         id: vars
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
-          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
+          echo "::set-output name=release_hm::$(date +'%y%m%d%H%M')"  
+          previousTag=$(git tag --sort=-creatordate | sed -n 2p)
+          echo "previousTag : $previousTag"
+          
+          CHANGELOG="$(git log --oneline --no-decorate $previousTag..HEAD)"
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"           
       # tag 上传Release
-#       - name: uploadRelease
-#         uses: svenstaro/upload-release-action@v2
-#         with:
-#           repo_token: ${{ secrets.GITHUB_TOKEN }}
-#           file: ${{ env.targetName }}.dmg
-#           asset_name: ${{ env.targetName }}-M1_${{ matrix.os }}_${{ matrix.qt_ver }}_${{ steps.vars.outputs.sha_short }}.dmg
-#           tag: v${{ steps.autotag.outputs.version }}-${{ steps.vars.outputs.sha_short }}
-#           overwrite: true 
-#           release_name: win-ubuntu-macos-${{ github.ref_name }}-${{steps.vars.outputs.release_date}} 
-#           prerelease: false
-#           body: |
-#             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
-#             branch:               ${{ github.ref_name }}
-#             commit:               ${{ steps.vars.outputs.sha_short }} 
-#             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
-#             Windows built with:   msvc64  Visual studio 2019
-#                                   goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
-#             AppImage built with:  Ubuntu-20.04 ,latest gcc
-#             macos built with:     macos-10.15,macos-11.0,clang_64 x86_64(Intel Kind)
-#             This is a prerelease version ,auto build by github action. use on your on risk:-)   
+      - name: publish
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ env.targetName }}-AppleSilicon-${{ matrix.qt_ver }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}
+          draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

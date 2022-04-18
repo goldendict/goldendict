@@ -39,7 +39,7 @@ jobs:
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
-      version: 22.4.Summer
+      version: 22.4.18-Summer
 
     steps:
       # macos 11.0 默认环境变了,要指定
@@ -54,7 +54,7 @@ jobs:
         with:
           python-version: '3.9'          
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         # if: ${{ matrix.qt_ver == '5.15.2' }}
         with:
           version: ${{ matrix.qt_ver }}
@@ -71,14 +71,28 @@ jobs:
           tar xvjf eb-4.4.3.tar.bz2
           cd eb-4.4.3 && ./configure && make -j 8 && sudo make install && cd ..
           #brew install qt # or use official offline installer
-          brew install opencc libao hunspell ffmpeg@5 libtiff xz lzo libogg libvorbis zstd
+          brew install opencc hunspell ffmpeg@5 libtiff xz lzo libogg libvorbis zstd
+          brew install create-dmg
           qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
-          make 
+          make -j 8
       # 打包
       - name: package
         run: |
-          macdeployqt ${targetName}.app -qmldir=. -verbose=1 -dmg
-          otool -L  GoldenDict.app/Contents/MacOS/GoldenDict
+          macdeployqt ${targetName}.app -qmldir=. -verbose=1
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavcodec.59.dylib" "@executable_path/../Frameworks/libavcodec.59.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
+          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libswresample.4.dylib"
+          install_name_tool -change  "/usr/local/Cellar/nettle/3.7.3/lib/libnettle.8.dylib" "@executable_path/../Frameworks/libnettle.8.dylib" "GoldenDict.app/Contents/Frameworks//libhogweed.6.dylib"
+          otool -L GoldenDict.app/Contents/MacOS/GoldenDict
+          otool -L GoldenDict.app/Contents/Frameworks/lib*
+          mkdir tmp
+          mv ${targetName}.app ./tmp
+          # --background "installer_background.png"
+          create-dmg --volname "${targetName} Installer" --volicon "icons/macicon.icns" --window-pos 200 120 --window-size 800 400 --icon-size 100 --icon "${targetName}.app" 200 190 --hide-extension "${targetName}.app" --app-drop-link 600 185 --skip-jenkins "${targetName}.dmg" tmp/
+
 
       - name: Set outputs
         id: vars
@@ -87,7 +101,7 @@ jobs:
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
-
+          echo "::set-output name=release_hm::$(date +'%y%m%d')"  
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
@@ -103,7 +117,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.targetName }}.dmg
           asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}.dmg
-          tag: v${{env.version}}-${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
           prerelease: false

@@ -18,16 +18,10 @@
 #include <clocale>
 #endif
 
-//#define __DO_DEBUG
-
 #define LOG_TO_FILE_KEY "--log-to-file"
 
 #ifdef Q_OS_WIN32
 #include <QtCore/qt_windows.h>
-#endif
-
-#ifdef __DO_DEBUG
-#include <sys/resource.h>
 #endif
 
 #include "termination.hh"
@@ -246,17 +240,6 @@ int main( int argc, char ** argv )
 
   installTerminationHandler();
 
-  #ifdef __DO_DEBUG
-  {
-    rlimit limit;
-
-    memset( &limit, 0, sizeof( limit ) );
-    limit.rlim_cur = RLIM_INFINITY;
-    limit.rlim_max = RLIM_INFINITY;
-    setrlimit( RLIMIT_CORE, &limit );
-  }
-  #endif
-
 #ifdef __WIN32
 
   // Under Windows, increase the amount of fopen()-able file descriptors from
@@ -279,8 +262,10 @@ int main( int argc, char ** argv )
   }
 
   //high dpi screen support
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
   qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
   QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 

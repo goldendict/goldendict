@@ -747,10 +747,10 @@ string ZimDictionary::convert( const string & in )
   text.replace( QRegularExpression( "<\\s*a\\s+(class=\"external\"\\s+|)href=" + urlWiki ),
                 QString( "<a href=\"gdlookup://localhost/\\6\"" ) );
 
-
   // pattern <a href="..." ...>, excluding any known protocols such as http://, mailto:, #(comment)
   // these links will be translated into local definitions
-  QRegularExpression rxLink( "<\\s*a\\s+([^>]*)href=\"(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
+  // <meta http-equiv="Refresh" content="0;url=../dsalsrv02.uchicago.edu/cgi-bin/0994.html">
+  QRegularExpression rxLink( "<\\s*(?:a|meta)\\s+([^>]*)(?:href|url)=\"?(?!(?:\\w+://|#|mailto:|tel:))(/|)([^\"]*)\"\\s*(title=\"[^\"]*\")?[^>]*>" );
   QRegularExpressionMatchIterator it = rxLink.globalMatch( text );
   int pos = 0;
   QString newText;
@@ -763,13 +763,12 @@ string ZimDictionary::convert( const string & in )
 
     QStringList list = match.capturedTexts();
     // Add empty strings for compatibility with QRegExp behaviour
-    for( int i = match.lastCapturedIndex() + 1; i < 5; i++ )
+    for( int i = list.size(); i < 5; i++ )
       list.append( QString() );
 
     QString tag = list[3];     // a url, ex: Precambrian_Chaotian.html
     if ( !list[4].isEmpty() )  // a title, ex: title="Precambrian/Chaotian"
       tag = list[4].split("\"")[1];
-
 
     // Check type of links inside articles
     if( linksType == UNKNOWN && tag.indexOf( '/' ) >= 0 )
@@ -823,16 +822,15 @@ string ZimDictionary::convert( const string & in )
   }
   newText.clear();
 
-
   // Occasionally words needs to be displayed in vertical, but <br/> were changed to <br\> somewhere
   // proper style: <a href="gdlookup://localhost/Neoptera" ... >N<br/>e<br/>o<br/>p<br/>t<br/>e<br/>r<br/>a</a>
   QRegularExpression rxBR( "(<a href=\"gdlookup://localhost/[^\"]*\"\\s*[^>]*>)\\s*((\\w\\s*&lt;br(\\\\|/|)&gt;\\s*)+\\w)\\s*</a>",
                            QRegularExpression::UseUnicodePropertiesOption );
   pos = 0;
-  QRegularExpressionMatchIterator it2 = rxLink.globalMatch( text );
+  QRegularExpressionMatchIterator it2 = rxBR.globalMatch( text );
   while( it2.hasNext() )
   {
-    QRegularExpressionMatch match = it.next();
+    QRegularExpressionMatch match = it2.next();
 
     newText += text.mid( pos, match.capturedStart() - pos );
     pos = match.capturedEnd();
@@ -1287,10 +1285,11 @@ void ZimArticleRequest::run()
   string result;
 
   // See Issue #271: A mechanism to clean-up invalid HTML cards.
-  // leave the invalid tags at the mercy of modern browsers.(webengine chrome)
-  // https://html.spec.whatwg.org/#an-introduction-to-error-handling-and-strange-cases-in-the-parser
-  // https://en.wikipedia.org/wiki/Tag_soup#HTML5
-  string cleaner = "";
+  string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
+                   "</font>""</font>""</font>""</font>""</font>""</font>"
+                   "</b></b></b></b></b></b></b></b>"
+                   "</i></i></i></i></i></i></i></i>"
+                   "</a></a></a></a></a></a></a></a>";
 
   multimap< wstring, pair< string, string > >::const_iterator i;
 
@@ -1427,33 +1426,8 @@ void ZimResourceRequest::run()
     if ( Filetype::isNameOfTiff( resourceName ) )
     {
       // Convert it
-
-      dataMutex.lock();
-
-      QImage img = QImage::fromData( reinterpret_cast< const uchar * >( resource.data() ), resource.size() );
-
-#ifdef MAKE_EXTRA_TIFF_HANDLER
-      if( img.isNull() )
-        GdTiff::tiffToQImage( &data.front(), data.size(), img );
-#endif
-
-      dataMutex.unlock();
-
-      if ( !img.isNull() )
-      {
-        // Managed to load -- now store it back as BMP
-
-        QByteArray ba;
-        QBuffer buffer( &ba );
-        buffer.open( QIODevice::WriteOnly );
-        img.save( &buffer, "BMP" );
-
-        Mutex::Lock _( dataMutex );
-
-        data.resize( buffer.size() );
-
-        memcpy( &data.front(), buffer.data(), data.size() );
-      }
+      Mutex::Lock _( dataMutex );
+      GdTiff::tiff2img( data );
     }
     else
     {
@@ -1503,7 +1477,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         continue;
 
       // Got the file -- check if we need to rebuid the index
-
       ZimFile df( firstName );
 
       vector< string > dictFiles;
@@ -1519,7 +1492,6 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
              indexIsOldOrBad( indexFile ) )
         {
           gdDebug( "Zim: Building the index for dictionary: %s\n", i->c_str() );
-
 
           unsigned articleCount = 0;
           unsigned wordCount = 0;

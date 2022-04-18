@@ -1,4 +1,4 @@
-/* Thin wrappers for retaining compatibility for both Qt4.x and Qt5.x */
+/* Thin wrappers for retaining compatibility for both Qt6.x and Qt5.x */
 
 #ifndef UTILS_HH
 #define UTILS_HH
@@ -25,6 +25,29 @@ inline QString rstrip(const QString &str) {
   }
   return "";
 }
+
+/**
+ * str="abc\r\n\u0000" should be returned as "abc"
+ * @brief rstripnull
+ * @param str
+ * @return
+ */
+inline QString rstripnull(const QString &str) {
+  int n = str.size() - 1;
+  for (; n >= 0; --n) {
+    if (!str.at(n).isSpace()&&!str.at(n).isNull()) {
+      return str.left(n + 1);
+    }
+  }
+  return "";
+}
+
+inline QString unescapeHtml(const QString &str) {
+  QTextDocument text;
+  text.setHtml(str);
+  return text.toPlainText();
+}
+
 
 inline bool isExternalLink(QUrl const &url) {
   return url.scheme() == "http" || url.scheme() == "https" ||
@@ -146,11 +169,38 @@ inline QString getWordFromUrl( const QUrl & url )
 }
 }
 
-namespace Dom
-{
-  typedef int size_type;
 }
 
+namespace
+{
+/// Uses some heuristics to chop off the first domain name from the host name,
+/// but only if it's not too base. Returns the resulting host name.
+inline QString getHostBase( QUrl const & url )
+{
+  QString host = url.host();
+
+  QStringList domains = host.split( '.' );
+
+  int left = domains.size();
+
+     // Skip last <=3-letter domain name
+  if ( left && domains[ left - 1 ].size() <= 3 )
+    --left;
+
+     // Skip another <=3-letter domain name
+  if ( left && domains[ left - 1 ].size() <= 3 )
+    --left;
+
+  if ( left > 1 )
+  {
+    // We've got something like www.foobar.co.uk -- we can chop off the first
+    // domain
+
+    return host.mid( domains[ 0 ].size() + 1 );
+  }
+  else
+    return host;
+}
 }
 
 #endif // UTILS_HH

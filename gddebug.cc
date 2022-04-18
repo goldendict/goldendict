@@ -3,6 +3,7 @@
 
 #include <QString>
 #include "gddebug.hh"
+#include <QDebug>
 #if(QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 #include <QtCore5Compat/QTextCodec>
 #else
@@ -27,7 +28,7 @@ QTextCodec *localeCodec = 0;
     QTextCodec::setCodecForLocale( utf8Codec );
   }
 
-  qWarning( "%s", QString().vasprintf( msg, ap ).toUtf8().data() );
+  qWarning() << QString().vasprintf( msg, ap );
 
   if( logFilePtr && logFilePtr->isOpen() )
   {
@@ -52,7 +53,7 @@ QTextCodec *localeCodec = 0;
     QTextCodec::setCodecForLocale( utf8Codec );
   }
 
-  qDebug( "%s", QString().vasprintf( msg, ap ).toUtf8().data() );
+  qDebug()<< QString().vasprintf( msg, ap );
 
   if( logFilePtr && logFilePtr->isOpen() )
   {

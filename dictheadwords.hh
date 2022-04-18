@@ -14,6 +14,7 @@
 #include "dictionary.hh"
 #include "delegate.hh"
 #include "helpwindow.hh"
+#include "headwordslistmodel.h"
 
 class DictHeadwords : public QDialog
 {
@@ -29,8 +30,8 @@ public:
 protected:
   Config::Class & cfg;
   Dictionary::Class * dict;
-  QStringList headers;
-  QStringListModel * model;
+
+  HeadwordListModel * model;
   QSortFilterProxyModel * proxy;
   WordListItemDelegate * delegate;
   QString dictId;
