@@ -252,7 +252,6 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
   QAtomicInt deferredInitDone;
   Mutex deferredInitMutex;
   bool deferredInitRunnableStarted;
-  QSemaphore deferredInitRunnableExited;
 
   string initError;
   QString cacheDirName;
@@ -400,39 +399,12 @@ MdxDictionary::~MdxDictionary()
 {
   Mutex::Lock _( deferredInitMutex );
 
-  // Wait for init runnable to complete if it was ever started
-//  if ( deferredInitRunnableStarted )
-//    deferredInitRunnableExited.acquire();
-
   dictFile.close();
 
   removeDirectory( cacheDirName );
 }
 
 //////// MdxDictionary::deferredInit()
-
-class MdxDeferredInitRunnable: public QRunnable
-{
-  MdxDictionary & dictionary;
-  QSemaphore & hasExited;
-
-public:
-
-  MdxDeferredInitRunnable( MdxDictionary & dictionary_,
-                           QSemaphore & hasExited_ ):
-    dictionary( dictionary_ ), hasExited( hasExited_ )
-  {}
-
-  ~MdxDeferredInitRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run()
-  {
-    dictionary.doDeferredInit();
-  }
-};
 
 void MdxDictionary::deferredInit()
 {
@@ -445,9 +417,6 @@ void MdxDictionary::deferredInit()
 
     if ( !deferredInitRunnableStarted )
     {
-      // QThreadPool::globalInstance()->start(
-      //   new MdxDeferredInitRunnable( *this, deferredInitRunnableExited ),
-      //   -1000 );
       QThreadPool::globalInstance()->start( [ this ]() { this->doDeferredInit(); },-1000 );
       deferredInitRunnableStarted = true;
     }
