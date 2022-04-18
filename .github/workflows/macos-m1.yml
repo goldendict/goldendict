@@ -39,7 +39,7 @@ jobs:
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
-      version: 22.4.7-alpha
+      version: 22.4.19-alpha
 
     steps:
       - uses: actions/checkout@v3
