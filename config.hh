@@ -709,11 +709,6 @@ struct Class
 
   HeadwordsDialog headwordsDialog;
 
-#ifdef Q_OS_WIN
-  QRect maximizedMainWindowGeometry;
-  QRect normalMainWindowGeometry;
-#endif
-
   QString editDictionaryCommandLine; // Command line to call external editor for dictionary
 
   Class(): lastMainGroupId( 0 ), lastPopupGroupId( 0 ),

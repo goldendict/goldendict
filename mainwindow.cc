@@ -744,23 +744,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &ftsIndexing, SIGNAL( newIndexingName( QString ) ), this, SLOT( showFTSIndexingName( QString ) ) );
 
-#ifdef Q_OS_WIN
-  if( cfg.normalMainWindowGeometry.width() <= 0 )
-  {
-    QRect r = QGuiApplication::primaryScreen ()->geometry ();
-    cfg.normalMainWindowGeometry.setRect( r.width() / 4, r.height() / 4, r.width() / 2, r.height() / 2 );
-  }
-  if( cfg.maximizedMainWindowGeometry.width() > 0 )
-  {
-    setGeometry( cfg.maximizedMainWindowGeometry );
-    if ( cfg.mainWindowGeometry.size() )
-      restoreGeometry( cfg.mainWindowGeometry );
-    if ( cfg.mainWindowState.size() )
-      restoreState( cfg.mainWindowState, 1 );
-    setWindowState( windowState() | Qt::WindowMaximized );
-  }
-  else
-#endif
 #ifndef Q_OS_MAC
   {
     if ( cfg.mainWindowGeometry.size() )
@@ -997,19 +980,6 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
 
 MainWindow::~MainWindow()
 {
-#ifdef Q_OS_WIN
-  if( isMaximized() )
-  {
-    cfg.maximizedMainWindowGeometry = geometry();
-  }
-  else
-  {
-    cfg.maximizedMainWindowGeometry = QRect();
-    if( !isMinimized() )
-      cfg.normalMainWindowGeometry = geometry();
-  }
-#endif
-
   closeHeadwordsDialog();
 
   ftsIndexing.stopIndexing();
