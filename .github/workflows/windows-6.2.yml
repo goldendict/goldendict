@@ -31,19 +31,22 @@ on:
 jobs:
   build:
     name: Build
-    # 运行平台， windows-latest目前是windows server 2019 
-    # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
+    # see https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
     runs-on: windows-2019
     strategy:
-      # 矩阵配置
       matrix:
         include:
-          # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
+          # see https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
+          - qt_ver: 6.2.4
+            qt_arch: win64_msvc2019_64
+            msvc_arch: x64
+            qt_target: x64
+            qt_arch_install: msvc2019_64
           - qt_ver: 6.3.0
             qt_arch: win64_msvc2019_64
             msvc_arch: x64
             qt_target: x64
-            qt_arch_install: msvc2019_64           
+            qt_arch_install: msvc2019_64
     env:
       targetName: GoldenDict.exe
       version: 22.4.19-alpha
