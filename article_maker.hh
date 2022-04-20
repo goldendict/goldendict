@@ -148,7 +148,7 @@ private slots:
   void individualWordFinished();
 
 private:
-
+  int htmlTextSize( QString html );
   /// Appends the given string to 'data', with locking its mutex.
   void appendToData( std::string const & );
 

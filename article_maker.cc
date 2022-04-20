@@ -596,7 +596,7 @@ void ArticleRequest::bodyFinished()
               }
             }
 
-            int size = QTextDocumentFragment::fromHtml( text ).toPlainText().length();
+            int size = htmlTextSize( text );
             if( size > articleSizeLimit )
               collapse = true;
           }
@@ -748,6 +748,24 @@ void ArticleRequest::bodyFinished()
     emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
     dictIds.clear();
   }
+}
+
+int ArticleRequest::htmlTextSize( QString html )
+{
+  // website dictionary.
+  if( html.contains( QRegularExpression( "<iframe\\s*[^>]*>", QRegularExpression::CaseInsensitiveOption ) ) )
+  {
+    //arbitary number;
+    return 1000;
+  }
+
+  //https://bugreports.qt.io/browse/QTBUG-102757
+  QString stripStyleSheet =
+    html.remove( QRegularExpression( "<link\\s*[^>]*>", QRegularExpression::CaseInsensitiveOption ) )
+      .remove( QRegularExpression( "<script[\\s\\S]*?>[\\s\\S]*?<\\/script>", QRegularExpression::CaseInsensitiveOption|QRegularExpression::MultilineOption ) );
+  int size = QTextDocumentFragment::fromHtml( stripStyleSheet ).toPlainText().length();
+
+  return size;
 }
 
 void ArticleRequest::stemmedSearchFinished()
