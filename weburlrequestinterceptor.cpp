@@ -9,7 +9,12 @@ WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
 }
 void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info) {
   if (QWebEngineUrlRequestInfo::NavigationTypeLink == info.navigationType() && info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMainFrame) {
-    emit linkClicked(info.requestUrl());
+    //workaround to fix devtool "Switch devtool to chinese" interface was blocked.
+    if( info.requestUrl().scheme() == "devtools" )
+    {
+      return;
+    }
+    emit linkClicked( info.requestUrl() );
     info.block(true);
   }
 }
