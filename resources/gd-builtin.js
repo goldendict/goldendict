@@ -74,6 +74,9 @@ function gdExpandOptPart(expanderId, optionalId) {
 
 function emitClickedEvent(link) {
     try {
+        if ('string' != typeof(link)) {
+            return;
+        }
         articleview.linkClickedInHtml(link)
     } catch (error) {
         console.error(error)
