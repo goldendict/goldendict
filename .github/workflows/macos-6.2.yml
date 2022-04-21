@@ -35,7 +35,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-11]
-        qt_ver: [6.2.4,6.3.0]
+        qt_ver: [6.2.4]
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
@@ -67,25 +67,15 @@ jobs:
 
       - name: build macos
         run: |
-          wget ftp://ftp.sra.co.jp/pub/misc/eb/eb-4.4.3.tar.bz2
-          tar xvjf eb-4.4.3.tar.bz2
-          cd eb-4.4.3 && ./configure && make -j 8 && sudo make install && cd ..
-          #brew install qt # or use official offline installer
-          brew install opencc hunspell ffmpeg@5 libtiff xz lzo libogg libvorbis zstd
+          brew uninstall opencc hunspell ffmpeg@5 ffmpeg@4 libtiff xz lzo libogg libvorbis zstd || true
           brew install create-dmg
-          qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
-          make -j 8
+          qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
+          make -j$(nproc)
       # 打包
       - name: package
         run: |
           macdeployqt ${targetName}.app -qmldir=. -verbose=1
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavcodec.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavcodec.59.dylib" "@executable_path/../Frameworks/libavcodec.59.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libswresample.4.dylib" "@executable_path/../Frameworks/libswresample.4.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libavformat.59.dylib"
-          install_name_tool -change  "/usr/local/Cellar/ffmpeg/5.0.1/lib/libavutil.57.dylib" "@executable_path/../Frameworks/libavutil.57.dylib" "GoldenDict.app/Contents/Frameworks//libswresample.4.dylib"
-          install_name_tool -change  "/usr/local/Cellar/nettle/3.7.3/lib/libnettle.8.dylib" "@executable_path/../Frameworks/libnettle.8.dylib" "GoldenDict.app/Contents/Frameworks//libhogweed.6.dylib"
+          codesign --force --deep -s - GoldenDict.app
           otool -L GoldenDict.app/Contents/MacOS/GoldenDict
           otool -L GoldenDict.app/Contents/Frameworks/lib*
           mkdir tmp
