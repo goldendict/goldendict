@@ -107,7 +107,7 @@ jobs:
           asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}.dmg
           tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
+          release_name: GoldenDict-v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           prerelease: true
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
