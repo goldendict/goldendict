@@ -50,20 +50,20 @@ jobs:
     env:
       targetName: GoldenDict.exe
       version: 22.4.19-alpha
-    # 步骤
     steps:
-      # 安装Qt
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          # Version of Qt to install
           version: ${{ matrix.qt_ver }}
-          # Target platform for build
           # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
           cached: 'false'
           modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia qtimageformats
-      # 拉取代码
+          setup-python: 'false'
+          py7zrversion: '==0.18.1'
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
