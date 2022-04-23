@@ -144,6 +144,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
 
+  GlobalBroadcaster::instance()->setPreference(&cfg.preferences);
 
   localSchemeHandler = new LocalSchemeHandler(articleNetMgr);
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", localSchemeHandler);
