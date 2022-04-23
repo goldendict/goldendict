@@ -34,7 +34,8 @@ function Main() {
     # 拷贝依赖
     windeployqt --qmldir . --plugindir $archiveName\plugins --compiler-runtime $archiveName\$targetName
     # 删除不必要的文件
-    $excludeList = @("*.qmlc", "*.ilk", "*.exp", "*.lib", "*.pdb")
+#    $excludeList = @("*.qmlc", "*.ilk", "*.exp", "*.lib", "*.pdb")
+    $excludeList = @("*.qmlc", "*.ilk", "*.exp", "*.lib")
     Remove-Item -Path $archiveName -Include $excludeList -Recurse -Force
     Write-Host "remove item finished..."
     # 拷贝vcRedist dll
