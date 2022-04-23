@@ -1073,40 +1073,6 @@ Class load()
   if ( !helpSplitterState.isNull() )
     c.helpSplitterState = QByteArray::fromBase64( helpSplitterState.toElement().text().toLatin1() );
 
-#ifdef Q_OS_WIN
-  QDomNode maximizedMainWindowGeometry = root.namedItem( "maximizedMainWindowGeometry" );
-
-  if ( !maximizedMainWindowGeometry.isNull() )
-  {
-    int x = 0, y = 0, width = 0, height = 0;
-    if( !maximizedMainWindowGeometry.namedItem( "x" ).isNull() )
-      x = maximizedMainWindowGeometry.namedItem( "x" ).toElement().text().toInt();
-    if( !maximizedMainWindowGeometry.namedItem( "y" ).isNull() )
-      y = maximizedMainWindowGeometry.namedItem( "y" ).toElement().text().toInt();
-    if( !maximizedMainWindowGeometry.namedItem( "width" ).isNull() )
-      width = maximizedMainWindowGeometry.namedItem( "width" ).toElement().text().toInt();
-    if( !maximizedMainWindowGeometry.namedItem( "height" ).isNull() )
-      height = maximizedMainWindowGeometry.namedItem( "height" ).toElement().text().toInt();
-    c.maximizedMainWindowGeometry = QRect( x, y, width, height );
-  }
-
-  QDomNode normalMainWindowGeometry = root.namedItem( "normalMainWindowGeometry" );
-
-  if ( !normalMainWindowGeometry.isNull() )
-  {
-    int x = 0, y = 0, width = 0, height = 0;
-    if( !normalMainWindowGeometry.namedItem( "x" ).isNull() )
-      x = normalMainWindowGeometry.namedItem( "x" ).toElement().text().toInt();
-    if( !normalMainWindowGeometry.namedItem( "y" ).isNull() )
-      y = normalMainWindowGeometry.namedItem( "y" ).toElement().text().toInt();
-    if( !normalMainWindowGeometry.namedItem( "width" ).isNull() )
-      width = normalMainWindowGeometry.namedItem( "width" ).toElement().text().toInt();
-    if( !normalMainWindowGeometry.namedItem( "height" ).isNull() )
-      height = normalMainWindowGeometry.namedItem( "height" ).toElement().text().toInt();
-    c.normalMainWindowGeometry = QRect( x, y, width, height );
-  }
-#endif
-
   QDomNode dictInfoGeometry = root.namedItem( "dictInfoGeometry" );
 
   if ( !dictInfoGeometry.isNull() )
@@ -2057,48 +2023,6 @@ void save( Class const & c )
     opt = dd.createElement( "helpSplitterState" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.helpSplitterState.toBase64() ) ) );
     root.appendChild( opt );
-
-#ifdef Q_OS_WIN
-    {
-      QDomElement maximizedMainWindowGeometry = dd.createElement( "maximizedMainWindowGeometry" );
-      root.appendChild( maximizedMainWindowGeometry );
-
-      opt = dd.createElement( "x" );
-      opt.appendChild( dd.createTextNode( QString::number( c.maximizedMainWindowGeometry.x() ) ) );
-      maximizedMainWindowGeometry.appendChild( opt );
-
-      opt = dd.createElement( "y" );
-      opt.appendChild( dd.createTextNode( QString::number( c.maximizedMainWindowGeometry.y() ) ) );
-      maximizedMainWindowGeometry.appendChild( opt );
-
-      opt = dd.createElement( "width" );
-      opt.appendChild( dd.createTextNode( QString::number( c.maximizedMainWindowGeometry.width() ) ) );
-      maximizedMainWindowGeometry.appendChild( opt );
-
-      opt = dd.createElement( "height" );
-      opt.appendChild( dd.createTextNode( QString::number( c.maximizedMainWindowGeometry.height() ) ) );
-      maximizedMainWindowGeometry.appendChild( opt );
-
-      QDomElement normalMainWindowGeometry = dd.createElement( "normalMainWindowGeometry" );
-      root.appendChild( normalMainWindowGeometry );
-
-      opt = dd.createElement( "x" );
-      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.x() ) ) );
-      normalMainWindowGeometry.appendChild( opt );
-
-      opt = dd.createElement( "y" );
-      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.y() ) ) );
-      normalMainWindowGeometry.appendChild( opt );
-
-      opt = dd.createElement( "width" );
-      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.width() ) ) );
-      normalMainWindowGeometry.appendChild( opt );
-
-      opt = dd.createElement( "height" );
-      opt.appendChild( dd.createTextNode( QString::number( c.normalMainWindowGeometry.height() ) ) );
-      normalMainWindowGeometry.appendChild( opt );
-    }
-#endif
 
     opt = dd.createElement( "dictInfoGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictInfoGeometry.toBase64() ) ) );

@@ -309,7 +309,7 @@
     <message>
         <location filename="../articleview.cc" line="1971"/>
         <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>声音文件(*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有文件（*.*）</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2093"/>
@@ -3898,30 +3898,31 @@ Enable this option to workaround the problem.</source>
     <message>
         <location filename="../preferences.ui" line="1160"/>
         <source>Maximum network cache size:</source>
-        <translation type="unfinished"></translation>
+        <translation>允许的最大网络缓存：</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1167"/>
         <source>Maximum disk space occupied by GoldenDict&apos;s network cache in
 %1
 If set to 0 the network disk cache will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict使用的最大磁盘容量位于%1
+如果设置为0，磁盘缓存会被禁用。</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1172"/>
         <source> MiB</source>
-        <translation type="unfinished"></translation>
+        <translation> MB</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1185"/>
         <source>When this option is enabled, GoldenDict
 clears its network cache from disk during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>GoldenDict退出时清空网络缓存。</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1189"/>
         <source>Clear network cache on exit</source>
-        <translation type="unfinished"></translation>
+        <translation>退出时清空网络缓存</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1259"/>
@@ -4007,17 +4008,17 @@ clears its network cache from disk during exit.</source>
         <location filename="../preferences.ui" line="1744"/>
         <source>Turn this option on to ignore unreasonably long input text
 from mouse-over, selection, clipboard or command line</source>
-        <translation type="unfinished"></translation>
+        <translation>启用后，避免过长的输入（来自鼠标选择，剪贴板或命令行）</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1748"/>
         <source>Ignore input phrases longer than</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略大于</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1758"/>
         <source>Input phrases longer than this size will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>忽略超过设置长度的字符</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1781"/>
@@ -4162,7 +4163,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <location filename="../preferences.cc" line="158"/>
         <source> MB</source>
-        <translation type="unfinished"></translation>
+        <translation> MB</translation>
     </message>
 </context>
 <context>

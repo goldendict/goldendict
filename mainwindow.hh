@@ -41,26 +41,6 @@
 using std::string;
 using std::vector;
 
-class ExpandableToolBar : public QToolBar
-{
-  Q_OBJECT
-
-public:
-  explicit ExpandableToolBar(QString const & title, QWidget * parent = 0)
-    : QToolBar(title, parent) {}
-  virtual QSize sizeHint() const
-  {
-    if ( !isFloating() && parentWidget() )
-    {
-      return QSize( parentWidget()->width(), QToolBar::sizeHint().height() );
-    }
-    else
-    {
-      return QToolBar::sizeHint();
-    }
-  }
-};
-
 class MainWindow: public QMainWindow, public DataCommitter
 {
   Q_OBJECT

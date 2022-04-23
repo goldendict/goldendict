@@ -194,7 +194,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   //if not external url,can be blocked from here. no need to continue execute the following code.
   //such as bres://upload.wikimedia....  etc .
   if (!Utils::isExternalLink(req.url())) {
-    gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
+    gdWarning( "Blocking element \"%s\" as built-in link ", req.url().toEncoded().data() );
     return new BlockedNetworkReply( this );
   }
 
@@ -215,7 +215,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     if ( !req.url().host().endsWith( refererUrl.host() ) &&
          getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
     {
-      gdWarning( "Blocking element \"%s\"\n", req.url().toEncoded().data() );
+      gdWarning( "Blocking element \"%s\" due to not same domain", req.url().toEncoded().data() );
 
       return new BlockedNetworkReply( this );
     }

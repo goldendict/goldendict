@@ -36,10 +36,10 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        qt_ver: [6.3.0]
+        qt_ver: [6.2.4,6.3.0]
         qt_arch: [gcc_64]
     env:
-      version: 22.4.18-Summer
+      version: 22.4.23-GrainRain
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3

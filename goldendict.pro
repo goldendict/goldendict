@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 22.4.18-Summer
+VERSION = 22.4.23-GrainRain
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
@@ -70,7 +70,7 @@ win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        VERSION = 22.4.18 # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
+        VERSION = 22.4.23 # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
@@ -186,7 +186,7 @@ mac {
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell-1.7.0 \
+        -lhunspell \
         -llzo2
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
@@ -197,8 +197,8 @@ mac {
     }
     QT_CONFIG -= no-pkg-config 
     CONFIG += link_pkgconfig
-    INCLUDEPATH = $${PWD}/maclibs/include /opt/homebrew/include /usr/local/include
-    LIBS += -L$${PWD}/maclibs/lib -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
+    INCLUDEPATH = $${PWD}/maclibs/include
+    LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
