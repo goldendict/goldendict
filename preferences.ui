@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>721</width>
+    <width>744</width>
     <height>506</height>
    </rect>
   </property>
@@ -1379,6 +1379,12 @@ download page.</string>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <item>
         <widget class="QGroupBox" name="groupBox_ScanPopupWindowFlags">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>83</height>
+          </size>
+         </property>
          <property name="title">
           <string>ScanPopup unpinned window flags</string>
          </property>
@@ -1424,7 +1430,7 @@ download page.</string>
            <rect>
             <x>10</x>
             <y>53</y>
-            <width>193</width>
+            <width>271</width>
             <height>20</height>
            </rect>
           </property>
