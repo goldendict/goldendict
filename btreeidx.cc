@@ -853,6 +853,8 @@ void BtreeIndex::antialias( wstring const & str,
   if( ignoreDiacritics )
     caseFolded = Folding::applyDiacriticsOnly( caseFolded );
 
+  caseFolded = Folding::trimWhitespaceOrPunct( caseFolded );
+
   for( unsigned x = chain.size(); x--; )
   {
     // If after applying case folding to each word they wouldn't match, we
@@ -861,6 +863,7 @@ void BtreeIndex::antialias( wstring const & str,
     if( ignoreDiacritics )
       entry = Folding::applyDiacriticsOnly( entry );
 
+    entry = Folding::trimWhitespaceOrPunct( entry );
     if ( entry != caseFolded )
       chain.erase( chain.begin() + x );
     else
