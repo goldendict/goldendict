@@ -16,6 +16,7 @@
 
 #include <QRegularExpression>
 #include "wildcard.hh"
+#include "globalbroadcaster.h"
 
 //#define __BTREE_USE_LZO
 // LZO mode is experimental and unsupported. Tests didn't show any substantial
@@ -853,7 +854,8 @@ void BtreeIndex::antialias( wstring const & str,
   if( ignoreDiacritics )
     caseFolded = Folding::applyDiacriticsOnly( caseFolded );
 
-  caseFolded = Folding::trimWhitespaceOrPunct( caseFolded );
+  if(GlobalBroadcaster::instance()->getPreference()->ignorePunctuation)
+    caseFolded = Folding::trimWhitespaceOrPunct( caseFolded );
 
   for( unsigned x = chain.size(); x--; )
   {
@@ -863,7 +865,9 @@ void BtreeIndex::antialias( wstring const & str,
     if( ignoreDiacritics )
       entry = Folding::applyDiacriticsOnly( entry );
 
-    entry = Folding::trimWhitespaceOrPunct( entry );
+    if( GlobalBroadcaster::instance()->getPreference()->ignorePunctuation )
+      entry = Folding::trimWhitespaceOrPunct( entry );
+
     if ( entry != caseFolded )
       chain.erase( chain.begin() + x );
     else

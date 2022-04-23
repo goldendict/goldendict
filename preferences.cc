@@ -215,6 +215,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
+  ui.ignorePunctuation->setChecked( p.ignorePunctuation );
+
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
 
   ui.maxDictsInContextMenu->setValue( p.maxDictionaryRefsInContextMenu );
@@ -424,6 +426,7 @@ Config::Preferences Preferences::getPreferences()
   p.limitInputPhraseLength = ui.limitInputPhraseLength->isChecked();
   p.inputPhraseLengthLimit = ui.inputPhraseLengthLimit->value();
   p.ignoreDiacritics = ui.ignoreDiacritics->isChecked();
+  p.ignorePunctuation = ui.ignorePunctuation->isChecked();
 
   p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 

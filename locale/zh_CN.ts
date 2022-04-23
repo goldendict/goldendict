@@ -4056,7 +4056,12 @@ from mouse-over, selection, clipboard or command line</source>
         <translation>大于此大小的文章将被收起</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1817"/>
+        <location filename="../preferences.ui" line="1741"/>
+        <source>Ignore punctuation while searching</source>
+        <translation>搜索时忽略标点符号</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1751"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation>启用该选项可以激活基于同义词列表的额外搜索功能

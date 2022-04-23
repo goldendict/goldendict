@@ -1625,15 +1625,45 @@ download page.</string>
           <string>Articles</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="collapseBigArticles">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="limitInputPhraseLength">
             <property name="toolTip">
-             <string>Select this option to automatic collapse big articles</string>
+             <string>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</string>
             </property>
             <property name="text">
-             <string>Collapse articles more than</string>
+             <string>Ignore input phrases longer than</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
+          </item>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="3">
+           <spacer name="horizontalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="0" column="1">
            <widget class="QSpinBox" name="articleSizeLimit">
@@ -1651,37 +1681,20 @@ download page.</string>
             </property>
            </widget>
           </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="ignoreDiacritics">
+            <property name="toolTip">
+             <string>Turn this option on to ignore diacritics while searching articles</string>
+            </property>
+            <property name="text">
+             <string>Ignore diacritics while searching</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="2">
            <widget class="QLabel" name="label_13">
             <property name="text">
              <string>symbols</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <spacer name="horizontalSpacer_11">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="limitInputPhraseLength">
-            <property name="toolTip">
-             <string>Turn this option on to ignore unreasonably long input text
-from mouse-over, selection, clipboard or command line</string>
-            </property>
-            <property name="text">
-             <string>Ignore input phrases longer than</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1701,20 +1714,13 @@ from mouse-over, selection, clipboard or command line</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>symbols</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QCheckBox" name="ignoreDiacritics">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="collapseBigArticles">
             <property name="toolTip">
-             <string>Turn this option on to ignore diacritics while searching articles</string>
+             <string>Select this option to automatic collapse big articles</string>
             </property>
             <property name="text">
-             <string>Ignore diacritics while searching</string>
+             <string>Collapse articles more than</string>
             </property>
            </widget>
           </item>
@@ -1728,18 +1734,19 @@ from mouse-over, selection, clipboard or command line</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <spacer name="horizontalSpacer_14">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>symbols</string>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QCheckBox" name="ignorePunctuation">
+            <property name="text">
+             <string>Ignore punctuation while searching</string>
             </property>
-           </spacer>
+           </widget>
           </item>
          </layout>
         </widget>
