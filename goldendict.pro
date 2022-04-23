@@ -42,7 +42,7 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
   DEFINES += MAKE_FFMPEG_PLAYER
 }
 
-QT += sql
+#QT += sql
 CONFIG += exceptions \
     rtti \
     stl  \
