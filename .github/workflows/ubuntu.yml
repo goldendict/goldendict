@@ -118,7 +118,7 @@ jobs:
             commit:               ${{ steps.vars.outputs.sha_short }} 
             Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
-            ## goldendict.exe can not used alone 
+            ## goldendict.exe can not be used alone 
             if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
             
             AppImage built with:  Ubuntu-20.04 ,latest gcc
