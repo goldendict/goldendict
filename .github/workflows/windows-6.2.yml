@@ -49,7 +49,7 @@ jobs:
             qt_arch_install: msvc2019_64
     env:
       targetName: GoldenDict.exe
-      version: 22.4.19-alpha
+      version: 22.4.24-alpha
     steps:
       - uses: actions/setup-python@v3
         with:
