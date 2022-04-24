@@ -8,23 +8,14 @@ on:
     branches:
       - dev
       - master
-      # - staged
+
     paths-ignore:
       - 'docs/**'
       - ".github/**"
       - "howto/**"
       - "*.md"
       - ".clang-format"      
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
+
 jobs:
   build:
     name: Build
@@ -32,7 +23,7 @@ jobs:
       
     env:
       version: 22.4.24-alpha
-    # 步骤
+
     steps:
       - uses: actions/checkout@v3
             

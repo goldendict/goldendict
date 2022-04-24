@@ -18,32 +18,18 @@ on:
       - "howto/**"
       - "*.md"
       - ".clang-format"      
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
+
 jobs:
   build:
     name: Build
     # 运行平台， windows-latest目前是windows server 2019 
     # 参考文档 https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
-    runs-on: windows-2019
+    runs-on: ${{ matrix.os }}
     strategy:
-      # 矩阵配置
       matrix:
-        include:
-          # 5.15.2 参考 https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
-          - qt_ver: 5.15.2
-            qt_arch: win64_msvc2019_64
-            msvc_arch: x64
-            qt_target: x64
-            qt_arch_install: msvc2019_64
+        os: [windows-2019]
+        qt_ver: [5.15.2]
+        qt_arch: [win64_msvc2019_64]
     env:
       targetName: GoldenDict.exe
       version: 22.4.24-alpha
@@ -82,13 +68,14 @@ jobs:
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
-          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"   
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"
+      - uses: ilammy/msvc-dev-cmd@v1
       # msvc编译
       - name: msvc-build goldendict
         id: build
         shell: cmd
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake "CONFIG+=zim_support" CONFIG+=release
           nmake
 

@@ -18,16 +18,6 @@ on:
       - "howto/**"
       - "*.md"
       - ".clang-format"
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
 jobs:
   build:
     name: Build
