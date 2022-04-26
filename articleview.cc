@@ -320,15 +320,17 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
-  settings->defaultSettings()->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  settings->defaultSettings()->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
 #else
   settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
   settings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
   settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
   settings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
+  settings->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
 #endif
   // Load the default blank page instantly, so there would be no flicker.
 
