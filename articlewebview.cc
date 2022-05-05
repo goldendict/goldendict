@@ -118,8 +118,17 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
 
 void ArticleWebView::mousePressEvent(QMouseEvent *event)
 {
-    if (event->buttons() & Qt::MiddleButton)
-        midButtonPressed = true;
+  if( event->buttons() & Qt::MiddleButton )
+    midButtonPressed = true;
+
+  if( event->buttons() & Qt::XButton1 )
+  {
+    back();
+  }
+  if( event->buttons() & Qt::XButton2 )
+  {
+    forward();
+  }
 }
 
 void ArticleWebView::singleClickAction(QMouseEvent *event )

@@ -1726,7 +1726,6 @@ void ArticleView::print( QPrinter * printer ) const
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
-
   QWebEnginePage* r=ui.definition->page();
   updateCurrentArticleFromCurrentFrame(ui.definition->page(), const_cast<QPoint *>(& pos));
 
