@@ -7,6 +7,7 @@
 - add fallback font family configuration for dictionary through preference dialog.
 - fix mdx (compact html) display error on the last item.
 - fix article count calculation error due to qt bug. QTBUG-102757
+- fix devtool localization blocked by GD with qt6.3
 
 ## Until to 2022-4-1
 
