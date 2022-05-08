@@ -4,6 +4,10 @@
 
 - **CLEANING OLD/USELESS CODE**
 - fix a zim about:blank#block [issue](https://github.com/goldendict/goldendict/issues/1472#issuecomment-1086776611)
+- add fallback font family configuration for dictionary through preference dialog.
+- fix mdx (compact html) display error on the last item.
+- fix article count calculation error due to qt bug. QTBUG-102757
+
 ## Until to 2022-4-1
 
 - fix save file progress dialog never close bug @ngn999
