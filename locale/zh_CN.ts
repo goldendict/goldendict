@@ -3867,7 +3867,7 @@ however, the article from the topmost dictionary is shown.</source>
     <message>
         <location filename="../preferences.ui" line="356"/>
         <source>Dictionary Font: </source>
-        <translation>词典字体： </translation>
+        <translation>词典字体：</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="369"/>
