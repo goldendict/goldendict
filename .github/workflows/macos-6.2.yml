@@ -103,15 +103,15 @@ jobs:
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
             branch:               ${{ github.ref_name }}
             commit:               ${{ steps.vars.outputs.sha_short }} 
-            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
+            Qt version:           Qt5.15.2,Qt6.X  ${{ matrix.qt_arch }}
             Windows built with:   msvc64  Visual studio 2019
             ## goldendict.exe can not be used alone 
             if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
 
             AppImage built with:  Ubuntu-20.04 ,latest gcc
             macos built with:     macos-10.15,macos-11.0,clang_64 x86_64
-                                  qt6.X(Univeral Build)
-                                  qt5.15.2(Intel Kind)
+                                  Qt6.X(Universal Build)
+                                  Qt5.15.2(Intel Kind)
             auto built by github action. use on your on risk:-)   
 
             CHANGES:
