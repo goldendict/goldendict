@@ -345,7 +345,6 @@ private:
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
   friend class MddResourceRequest;
-  friend class MdxDeferredInitRunnable;
 };
 
 MdxRegex MdxDictionary::mdxRx;
@@ -567,33 +566,8 @@ sptr< Dictionary::DataRequest > MdxDictionary::getSearchResults( QString const &
 
 /// MdxDictionary::getArticle
 
-class MdxArticleRequest;
-
-class MdxArticleRequestRunnable: public QRunnable
-{
-  MdxArticleRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  MdxArticleRequestRunnable( MdxArticleRequest & r_,
-                             QSemaphore & hasExited_ ):
-    r( r_ ),
-    hasExited( hasExited_ )
-  {}
-
-  ~MdxArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class MdxArticleRequest: public Dictionary::DataRequest
 {
-  friend class MdxArticleRequestRunnable;
-
   wstring word;
   vector< wstring > alts;
   MdxDictionary & dict;
@@ -613,7 +587,6 @@ public:
     dict( dict_ ),
     ignoreDiacritics( ignoreDiacritics_ )
   {
-    // QThreadPool::globalInstance()->start( new MdxArticleRequestRunnable( *this, hasExited ) );
     QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
@@ -631,10 +604,6 @@ public:
   }
 };
 
-void MdxArticleRequestRunnable::run()
-{
-  r.run();
-}
 
 void MdxArticleRequest::run()
 {
@@ -754,33 +723,8 @@ sptr<Dictionary::DataRequest> MdxDictionary::getArticle( const wstring & word, c
 }
 
 /// MdxDictionary::getResource
-
-class MddResourceRequest;
-
-class MddResourceRequestRunnable: public QRunnable
-{
-  MddResourceRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  MddResourceRequestRunnable( MddResourceRequest & r_,
-                              QSemaphore & hasExited_ ): r( r_ ),
-    hasExited( hasExited_ )
-  {}
-
-  ~MddResourceRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class MddResourceRequest: public Dictionary::DataRequest
 {
-  friend class MddResourceRequestRunnable;
-
   MdxDictionary & dict;
   wstring resourceName;
   QAtomicInt isCancelled;
@@ -793,11 +737,10 @@ public:
     dict( dict_ ),
     resourceName( Utf8::decode( resourceName_ ) )
   {
-    //QThreadPool::globalInstance()->start( new MddResourceRequestRunnable( *this, hasExited ) );
     QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by MddResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -810,11 +753,6 @@ public:
     //hasExited.acquire();
   }
 };
-
-void MddResourceRequestRunnable::run()
-{
-  r.run();
-}
 
 void MddResourceRequest::run()
 {
