@@ -854,6 +854,9 @@ Class load()
     c.preferences.alwaysOnTop = ( preferences.namedItem( "alwaysOnTop" ).toElement().text() == "1" );
     c.preferences.searchInDock = ( preferences.namedItem( "searchInDock" ).toElement().text() == "1" );
 
+    if ( !preferences.namedItem( "webFontFamily" ).isNull() )
+      c.preferences.webFontFamily = preferences.namedItem( "webFontFamily" ).toElement().text();
+
     if ( !preferences.namedItem( "doubleClickTranslates" ).isNull() )
       c.preferences.doubleClickTranslates = ( preferences.namedItem( "doubleClickTranslates" ).toElement().text() == "1" );
 
@@ -1640,6 +1643,10 @@ void save( Class const & c )
 
     QDomElement opt = dd.createElement( "interfaceLanguage" );
     opt.appendChild( dd.createTextNode( c.preferences.interfaceLanguage ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "webFontFamily" );
+    opt.appendChild( dd.createTextNode( c.preferences.webFontFamily ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "helpLanguage" );

@@ -7,7 +7,6 @@
 
 #include "mainwindow.hh"
 #include <QWebEngineProfile>
-#include <QWebEngineSettings>
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "preferences.hh"

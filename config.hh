@@ -281,6 +281,7 @@ struct Preferences
   QString interfaceLanguage; // Empty value corresponds to system default
   QString helpLanguage; // Empty value corresponds to interface language
   QString displayStyle; // Empty value corresponds to the default one
+  QString webFontFamily; // Empty value corresponds to the default one
   bool newTabsOpenAfterCurrentOne;
   bool newTabsOpenInBackground;
   bool hideSingleTab;

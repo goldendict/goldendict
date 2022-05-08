@@ -6,7 +6,6 @@
 #include "broken_xrecord.hh"
 #include "mainwindow.hh"
 
-
 Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
 , helpWindow( 0 )
@@ -60,6 +59,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.interfaceLanguage->addItem( tr( "System default" ), QString() );
   ui.interfaceLanguage->addItem( QIcon( ":/flags/us.png" ), Language::localizedNameForId( LangCoder::code2toInt( "en" ) ), QString( "en_US" ) );
+  ui.fontFamilies->addItem( tr( "System default" ), QString() );
 
   // See which other translations do we have
 
@@ -95,6 +95,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
       break;
     }
 
+  const QStringList fontFamilies = QFontDatabase::families();
+  for( const QString & family : fontFamilies )
+  {
+    ui.fontFamilies->addItem( family );
+  }
+  prevWebFontFamily = p.webFontFamily;
+  ui.fontFamilies->setCurrentText( p.webFontFamily );
   // Fill help languages combobox
 
   ui.helpLanguage->addItem( tr( "Default" ), QString() );
@@ -361,6 +368,8 @@ Config::Preferences Preferences::getPreferences()
   p.interfaceLanguage =
     ui.interfaceLanguage->itemData(
       ui.interfaceLanguage->currentIndex() ).toString();
+
+  p.webFontFamily = ui.fontFamilies->currentText();
 
   p.helpLanguage =
     ui.helpLanguage->itemData(
@@ -631,6 +640,10 @@ void Preferences::on_buttonBox_accepted()
   if ( prevInterfaceLanguage != ui.interfaceLanguage->currentIndex() )
     QMessageBox::information( this, tr( "Changing Language" ),
                               tr( "Restart the program to apply the language change." ) );
+
+  if ( prevWebFontFamily != ui.fontFamilies->currentText() )
+    QMessageBox::information( this, tr( "Changing Dictionary Font Family" ),
+                              tr( "Restart the program to apply the dictionary font family change." ) );
 }
 
 void Preferences::on_useExternalPlayer_toggled( bool enabled )

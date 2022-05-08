@@ -50,86 +50,6 @@
        <property name="topMargin">
         <number>9</number>
        </property>
-       <item row="9" column="0" colspan="2">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="doubleClickTranslates">
-         <property name="text">
-          <string>Double-click translates the word clicked</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QGroupBox" name="groupBox">
-         <property name="title">
-          <string>Tabbed browsing</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="newTabsOpenInBackground">
-            <property name="toolTip">
-             <string>Normally, opening a new tab switches to it immediately.
-With this on however, new tabs will be opened without
-switching to them.</string>
-            </property>
-            <property name="text">
-             <string>Open new tabs in background</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="newTabsOpenAfterCurrentOne">
-            <property name="toolTip">
-             <string>With this on, new tabs are opened just after the
-current, active one. Otherwise they are added to
-be the last ones.</string>
-            </property>
-            <property name="text">
-             <string>Open new tabs after the current one</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="hideSingleTab">
-            <property name="toolTip">
-             <string>Select this option if you don't want to see the main tab bar when only a single tab is opened.</string>
-            </property>
-            <property name="text">
-             <string>Hide single tab</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="mruTabOrder">
-            <property name="text">
-             <string>Ctrl-Tab navigates tabs in MRU order</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="selectBySingleClick">
-         <property name="toolTip">
-          <string>Turn this option on if you want to select words by single mouse click</string>
-         </property>
-         <property name="text">
-          <string>Select word by single click</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
@@ -206,6 +126,30 @@ be the last ones.</string>
          </item>
         </layout>
        </item>
+       <item row="14" column="0" colspan="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="escKeyHidesMainWindow">
+         <property name="toolTip">
+          <string>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</string>
+         </property>
+         <property name="text">
+          <string>ESC key hides main window</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QGroupBox" name="enableTrayIcon">
          <property name="toolTip">
@@ -253,33 +197,6 @@ the application.</string>
          </layout>
         </widget>
        </item>
-       <item row="7" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="addonStylesLabel">
-           <property name="text">
-            <string>Add-on style:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="StylesComboBox" name="addonStyles"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
        <item row="3" column="1">
         <widget class="QCheckBox" name="autoScrollToTargetArticle">
          <property name="toolTip">
@@ -313,17 +230,6 @@ however, the article from the topmost dictionary is shown.</string>
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="escKeyHidesMainWindow">
-         <property name="toolTip">
-          <string>Normally, pressing ESC key moves focus to the translation line.
-With this on however, it will hide the main window.</string>
-         </property>
-         <property name="text">
-          <string>ESC key hides main window</string>
-         </property>
         </widget>
        </item>
        <item row="2" column="1">
@@ -372,6 +278,137 @@ With this on however, it will hide the main window.</string>
             <string/>
            </property>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="selectBySingleClick">
+         <property name="toolTip">
+          <string>Turn this option on if you want to select words by single mouse click</string>
+         </property>
+         <property name="text">
+          <string>Select word by single click</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="doubleClickTranslates">
+         <property name="text">
+          <string>Double-click translates the word clicked</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Tabbed browsing</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="newTabsOpenInBackground">
+            <property name="toolTip">
+             <string>Normally, opening a new tab switches to it immediately.
+With this on however, new tabs will be opened without
+switching to them.</string>
+            </property>
+            <property name="text">
+             <string>Open new tabs in background</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="newTabsOpenAfterCurrentOne">
+            <property name="toolTip">
+             <string>With this on, new tabs are opened just after the
+current, active one. Otherwise they are added to
+be the last ones.</string>
+            </property>
+            <property name="text">
+             <string>Open new tabs after the current one</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="hideSingleTab">
+            <property name="toolTip">
+             <string>Select this option if you don't want to see the main tab bar when only a single tab is opened.</string>
+            </property>
+            <property name="text">
+             <string>Hide single tab</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="mruTabOrder">
+            <property name="text">
+             <string>Ctrl-Tab navigates tabs in MRU order</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="11" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_21">
+           <property name="text">
+            <string>Dictionary Font: </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="fontFamilies">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>set the fallback font family for dictionary</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="addonStylesLabel">
+           <property name="text">
+            <string>Add-on style:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="StylesComboBox" name="addonStyles"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>

@@ -324,6 +324,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   settings->defaultSettings()->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
+
+  if( !cfg.preferences.webFontFamily.isEmpty() )
+    settings->defaultSettings()->setFontFamily( QWebEngineSettings::StandardFont, cfg.preferences.webFontFamily );
 #else
   settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
   settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
@@ -331,18 +334,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
   settings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
   settings->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
+
+  if( !cfg.preferences.webFontFamily.isEmpty() )
+    settings->setFontFamily( QWebEngineSettings::StandardFont, cfg.preferences.webFontFamily );
 #endif
-  // Load the default blank page instantly, so there would be no flicker.
-
-  QString contentType;
-//  QUrl blankPage( "gdlookup://localhost?blank=1" );
-
-//  sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
-//                                                                 contentType );
-
-//  ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
-//                                             r->getFullData().size() ),
-//                          blankPage );
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
 

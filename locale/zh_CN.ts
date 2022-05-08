@@ -3865,7 +3865,17 @@ however, the article from the topmost dictionary is shown.</source>
         <translation>自动定位到当前词典</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="668"/>
+        <location filename="../preferences.ui" line="356"/>
+        <source>Dictionary Font: </source>
+        <translation>词典字体： </translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="369"/>
+        <source>set the fallback font family for dictionary</source>
+        <translation>设置词典的备用字体</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="708"/>
         <source>Show scan flag when word is selected</source>
         <translation>单词被选中时显示扫描旗标</translation>
     </message>
@@ -4169,6 +4179,16 @@ from Stardict, Babylon and GLS dictionaries</source>
         <location filename="../preferences.cc" line="158"/>
         <source> MB</source>
         <translation> MB</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="645"/>
+        <source>Changing Dictionary Font Family</source>
+        <translation>更改词典的备用字体</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="646"/>
+        <source>Restart the program to apply the dictionary font family change.</source>
+        <translation>重新启动程序以应用字典的备用字体。</translation>
     </message>
 </context>
 <context>
