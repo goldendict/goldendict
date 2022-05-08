@@ -94,8 +94,12 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
       prevInterfaceLanguage = x;
       break;
     }
-
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
   const QStringList fontFamilies = QFontDatabase::families();
+#else
+  QFontDatabase fontDb;
+  const QStringList fontFamilies = fontDb.families();
+#endif
   for( const QString & family : fontFamilies )
   {
     ui.fontFamilies->addItem( family );
