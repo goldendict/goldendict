@@ -176,6 +176,11 @@ logFile( false )
         popupGroupName = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 );
         continue;
       }
+      if( arguments[ i ].startsWith( "-style" ) )
+      {
+        // skip next argument,  -style fusion
+        i++;
+      }
       else
         word = arguments[ i ];
     }
