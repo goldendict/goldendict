@@ -3952,7 +3952,7 @@ clears its network cache from disk during exit.</source>
     <message>
         <location filename="../preferences.ui" line="1444"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation>扫描——弹出非固定窗口的选项</translation>
+        <translation>非固定弹窗选项</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1450"/>
@@ -3967,7 +3967,7 @@ clears its network cache from disk during exit.</source>
     <message>
         <location filename="../preferences.ui" line="1459"/>
         <source>Popup</source>
-        <translation>弹出</translation>
+        <translation>弹窗</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
