@@ -302,7 +302,9 @@ int main( int argc, char ** argv )
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
-  app.setStyle(new GdAppStyle);
+
+  //this line will forbid stylesheet applying on GroupComboBox
+//  app.setStyle(new GdAppStyle);
 
   #ifndef Q_OS_MAC
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
