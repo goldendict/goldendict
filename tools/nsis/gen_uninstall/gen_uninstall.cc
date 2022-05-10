@@ -3,6 +3,7 @@
 // Why is this not part of NSIS? Ask NSIS developers.
 
 #include <QtCore>
+#include <QtCore5Compat/QRegExp>
 
 int main( int argc, char *argv[] )
 {

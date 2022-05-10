@@ -3,11 +3,13 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = gen_uninstall
 DEPENDPATH += .
 INCLUDEPATH += .
 
+QT += core5compat core
+CONFIG+=utf8_source
 # Input
 SOURCES += gen_uninstall.cc
 
-RC_FILE = gen_uninstall.rc
+#RC_FILE = gen_uninstall.rc
