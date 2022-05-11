@@ -67,6 +67,7 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           CHANGELOG="${CHANGELOG//'\"'/'%22'}"
+          CHANGELOG="${CHANGELOG//"'"/'%20'}"
           echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
 
       # # msvc编译
