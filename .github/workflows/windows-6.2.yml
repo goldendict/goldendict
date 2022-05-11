@@ -66,6 +66,7 @@ jobs:
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          CHANGELOG="${CHANGELOG//'\"'/'%22'}"
           echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
 
       # # msvc编译
@@ -90,7 +91,7 @@ jobs:
       - name: package
         id: package      
         env:
-          archiveName: GoldenDict-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
+          archiveName: GoldenDict-Windows.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
           msvcArch: ${{ matrix.msvc_arch }}
         shell: pwsh
         run: |
