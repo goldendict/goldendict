@@ -2275,6 +2275,11 @@ void ArticleView::doubleClicked( QPoint pos )
   if ( cfg.preferences.doubleClickTranslates )
   {
     QString selectedText = ui.definition->selectedText();
+
+    // ignore empty word;
+    if( selectedText.isEmpty() )
+      return;
+
     emit sendWordToInputLine( selectedText );
     // Do some checks to make sure there's a sensible selection indeed
     if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
