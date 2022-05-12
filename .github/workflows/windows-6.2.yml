@@ -135,15 +135,28 @@ jobs:
           overwrite: true 
           release_name: GoldenDict-v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           prerelease: true
-          body: |
-            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
-            branch:               ${{ github.ref_name }}
-            commit:               ${{ steps.vars.outputs.sha_short }} 
-            Qt version:           Qt5.15.2,Qt6.X  ${{ matrix.qt_arch }}
-            Windows built with:   msvc64  Visual studio 2019
-                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
-            AppImage built with:  Ubuntu-20.04 ,latest gcc
-            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64
-                                  qt6.X(Universal Build)
-                                  qt5.15.2(Intel Kind)
-            auto built by github action. use on your on risk:-)   
+
+      - name: copy nsis 
+        shell: bash
+        run: |
+          cp tools/nsis/GoldenDict.nsi ${{ steps.package.outputs.packageName }}/
+      - name: Create installer
+        uses: joncloud/makensis-action@v3.6
+        with:
+          arguments: "/V3"
+          script-file: ${{ steps.package.outputs.packageName }}/GoldenDict.nsi
+      - name: make installer 
+        run: |
+          cd ${{ steps.package.outputs.packageName }} 
+          ls *.exe
+      - name: upload goldendict installer
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.package.outputs.packageName }}/GoldenDict-v22-Install.exe
+          asset_name: ${{ matrix.qt_ver }}-GoldenDict-v22-Install.exe
+          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: GoldenDict-v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          prerelease: true
