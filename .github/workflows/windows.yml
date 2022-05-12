@@ -69,7 +69,7 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           CHANGELOG="${CHANGELOG//'\"'/'%22'}"
-          CHANGELOG="${CHANGELOG//"'"/'%20'}"
+          CHANGELOG="${CHANGELOG//"'"/ }"
           echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"
       - uses: ilammy/msvc-dev-cmd@v1
       # msvc编译
