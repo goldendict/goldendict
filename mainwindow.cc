@@ -145,14 +145,19 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   GlobalBroadcaster::instance()->setPreference(&cfg.preferences);
 
-  localSchemeHandler = new LocalSchemeHandler(articleNetMgr);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", localSchemeHandler);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", localSchemeHandler);
+  localSchemeHandler = new LocalSchemeHandler( articleNetMgr );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "gdlookup", localSchemeHandler );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "bword", localSchemeHandler );
 
-  QStringList localSchemes={"gdau","gico","qrcx","bres","gdprg","gdvideo","gdpicture","gdtts"};
-  resourceSchemeHandler = new ResourceSchemeHandler(articleNetMgr);
-  for(int i=0;i<localSchemes.size();i++){
-    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), resourceSchemeHandler);
+  iframeSchemeHandler = new IframeSchemeHandler( this );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "ifr", iframeSchemeHandler );
+
+  QStringList localSchemes = { "gdau", "gico", "qrcx", "bres", "gdprg", "gdvideo", "gdpicture", "gdtts" };
+  resourceSchemeHandler    = new ResourceSchemeHandler( articleNetMgr );
+  for( int i = 0; i < localSchemes.size(); i++ )
+  {
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( localSchemes.at( i ).toLatin1(),
+                                                                  resourceSchemeHandler );
   }
 
   wuri = new WebUrlRequestInterceptor();
