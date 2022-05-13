@@ -30,7 +30,9 @@ jobs:
         qt_ver: [5.15.2]
         qt_arch: [gcc_64]
     env:
-      version: 22.4.24-alpha
+      version: 22.4.24
+      version-suffix: alpha
+      prerelease: true
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -101,10 +103,10 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
           asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
-          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: GoldenDict-v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
-          prerelease: true
+          release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          prerelease: ${{env.prerelease}}
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
             branch:               ${{ github.ref_name }}
