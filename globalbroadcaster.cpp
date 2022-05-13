@@ -19,4 +19,11 @@ Config::Preferences * GlobalBroadcaster::getPreference()
   return preference;
 }
 
+void GlobalBroadcaster::addWhitelist(QString url){
+  whitelist.push_back(url);
+}
+
+bool GlobalBroadcaster::existedInWhitelist(QString url){
+  return std::find(whitelist.begin(), whitelist.end(), url) != whitelist.end();
+}
 // namespace global

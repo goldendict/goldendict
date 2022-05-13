@@ -29,7 +29,7 @@ using std::string;
     connect( baseReply, SIGNAL( errorOccurred( QNetworkReply::NetworkError) ),
              this, SLOT( applyError( QNetworkReply::NetworkError ) ) );
 
-    connect( baseReply, SIGNAL( readyRead() ), this, SLOT( readDataFromBase() ) );
+    connect( baseReply, SIGNAL( readyRead() ), this, SIGNAL( readyRead() ) );
 
     // Redirect QNetworkReply signals
 
@@ -68,7 +68,8 @@ using std::string;
     QList< QByteArray > rawHeaders = baseReply->rawHeaderList();
     for( QList< QByteArray >::iterator it = rawHeaders.begin(); it != rawHeaders.end(); ++it )
     {
-      if( it->toLower() != "x-frame-options" )
+      auto headerName = it->toLower();
+      if( headerName != "x-frame-options" && headerName != "content-security-policy")
         setRawHeader( *it, baseReply->rawHeader( *it ) );
     }
 
@@ -121,7 +122,7 @@ using std::string;
 
   qint64 AllowFrameReply::bytesAvailable() const
   {
-    return buffer.size() + QNetworkReply::bytesAvailable();
+    return baseReply->bytesAvailable();
   }
 
   void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
@@ -130,20 +131,22 @@ using std::string;
     emit errorOccurred( code );
   }
 
-  void AllowFrameReply::readDataFromBase()
-  {
-    QByteArray data;
-    data.resize( baseReply->bytesAvailable() );
-    baseReply->read( data.data(), data.size() );
-    buffer += data;
-    emit readyRead();
-  }
+//  void AllowFrameReply::readDataFromBase()
+//  {
+////    QByteArray data;
+////    data.resize( baseReply->bytesAvailable() );
+////    baseReply->read( data.data(), data.size() );
+////    buffer += data;
+//    emit readyRead();
+//  }
 
   qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
   {
-    qint64 size = qMin( maxSize, qint64( buffer.size() ) );
-    memcpy( data, buffer.data(), size );
-    buffer.remove( 0, size );
+    auto bytesAvailable= baseReply->bytesAvailable();
+    qint64 size = qMin( maxSize, bytesAvailable );
+    baseReply->read( data, size );
+//    memcpy( data, buffer.data(), size );
+//    buffer.remove( 0, size );
     return size;
   }
 
@@ -151,6 +154,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
                                                             QNetworkRequest const & req,
                                                             QIODevice * outgoingData )
 {
+  QUrl url;
   if ( op == GetOperation )
   {
     if ( req.url().scheme() == "qrcx" )
@@ -168,7 +172,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
     }
 
-    QUrl url=req.url();
+    url=req.url();
     QMimeType mineType=db.mimeTypeForUrl (url);
     QString contentType=mineType.name();
 
@@ -178,7 +182,6 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
             Utils::Url::addQueryItem(url,"word",path.mid(1));
             url.setPath("");
             Utils::Url::addQueryItem(url,"group","1");
-
         }
     }
 
@@ -193,7 +196,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   //can not match dictionary in the above code,means the url must be external links.
   //if not external url,can be blocked from here. no need to continue execute the following code.
   //such as bres://upload.wikimedia....  etc .
-  if (!Utils::isExternalLink(req.url())) {
+  if (!Utils::isExternalLink(url)) {
     gdWarning( "Blocking element \"%s\" as built-in link ", req.url().toEncoded().data() );
     return new BlockedNetworkReply( this );
   }
@@ -205,17 +208,15 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     QByteArray referer = req.rawHeader( "Referer" );
 
-    //GD_DPRINTF( "Referer: %s\n", referer.data() );
-
     QUrl refererUrl = QUrl::fromEncoded( referer );
 
     //GD_DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
     //        getHostBase( refererUrl ).toUtf8().data() );
 
-    if ( !req.url().host().endsWith( refererUrl.host() ) &&
-         getHostBase( req.url() ) != getHostBase( refererUrl ) && !req.url().scheme().startsWith("data") )
+    if ( !url.host().endsWith( refererUrl.host() ) &&
+         getHostBase( url ) != getHostBase( refererUrl ) && !url.scheme().startsWith("data") )
     {
-      gdWarning( "Blocking element \"%s\" due to not same domain", req.url().toEncoded().data() );
+      gdWarning( "Blocking element \"%s\" due to not same domain", url.toEncoded() );
 
       return new BlockedNetworkReply( this );
     }
@@ -241,15 +242,17 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   }
 
   // spoof User-Agent
-  QNetworkRequest newReq(req);
-  if ( hideGoldenDictHeader && req.url().scheme().startsWith("http", Qt::CaseInsensitive))
+  QNetworkRequest newReq;
+  newReq.setUrl(url);
+  newReq.setAttribute( QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy );
+  if ( hideGoldenDictHeader && url.scheme().startsWith("http", Qt::CaseInsensitive))
   {
     newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName().toUtf8(), ""));
   }
 
   QNetworkReply *  reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
 
-  if( req.url().scheme() == "https")
+  if( url.scheme() == "https")
   {
 #ifndef QT_NO_OPENSSL
     connect( reply, SIGNAL( sslErrors( QList< QSslError > ) ),
@@ -521,15 +524,11 @@ LocalSchemeHandler::LocalSchemeHandler(ArticleNetworkAccessManager& articleNetMg
 
 void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 {
-    QUrl url = requestJob->requestUrl();
+  QUrl url = requestJob->requestUrl();
+  QNetworkRequest request;
+  request.setUrl( url );
 
-    QNetworkRequest request;
-    request.setUrl( url );
-
-    QNetworkReply* reply=this->mManager.createRequest(QNetworkAccessManager::GetOperation,request);
-    connect(reply,&QNetworkReply::finished,requestJob,[=](){
-        requestJob->reply("text/html",reply);
-    });
-    connect(requestJob, &QObject::destroyed, reply, &QObject::deleteLater);
+  QNetworkReply * reply = this->mManager.createRequest( QNetworkAccessManager::GetOperation, request );
+  connect( reply, &QNetworkReply::finished, requestJob, [ = ]() { requestJob->reply( "text/html", reply ); } );
+  connect( requestJob, &QObject::destroyed, reply, &QObject::deleteLater );
 }
-
