@@ -22,7 +22,7 @@ public:
   GlobalBroadcaster( QObject * parent = nullptr );
   static GlobalBroadcaster * instance();
 signals:
-  void emitDictIds( ActiveDictIds ad );
+  void dictionaryChanges( ActiveDictIds ad );
 };
 
 #endif // GLOBAL_GLOBALBROADCASTER_H
