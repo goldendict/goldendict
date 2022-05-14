@@ -733,19 +733,19 @@ void ArticleRequest::bodyFinished()
     {
         update();
         qDebug() << "send dicts(stemmed):" << word << ":" << dictIds;
-        emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+        emit GlobalBroadcaster::instance()->dictionaryChanges(ActiveDictIds{word, dictIds});
         dictIds.clear();
     }
     else {
       finish();
       qDebug() << "send dicts(finished):" << word << ":" << dictIds;
-      emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+      emit GlobalBroadcaster::instance()->dictionaryChanges(ActiveDictIds{word, dictIds});
       dictIds.clear();
     }
   } else if (wasUpdated) {
     update();
     qDebug() << "send dicts(updated):" << word << ":" << dictIds;
-    emit GlobalBroadcaster::instance()->emitDictIds(ActiveDictIds{word, dictIds});
+    emit GlobalBroadcaster::instance()->dictionaryChanges(ActiveDictIds{word, dictIds});
     dictIds.clear();
   }
 }

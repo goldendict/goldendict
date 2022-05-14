@@ -347,7 +347,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
 
-  connect(GlobalBroadcaster::instance(), SIGNAL( emitDictIds(ActiveDictIds)), this,
+  connect(GlobalBroadcaster::instance(), SIGNAL( dictionaryChanges(ActiveDictIds)), this,
           SLOT(setActiveDictIds(ActiveDictIds)));
 
   channel = new QWebChannel(ui.definition->page());
