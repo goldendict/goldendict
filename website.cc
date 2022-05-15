@@ -9,6 +9,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include "gddebug.hh"
+#include "globalbroadcaster.h"
 
 #include <QRegularExpression>
 
@@ -371,8 +372,12 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
 
     string result = "<div class=\"website_padding\"></div>";
 
+    //permissive add url to global whitelist.
+    QUrl url(urlString);
+    GlobalBroadcaster::instance()->addWhitelist(url.host());
+
     result += string( "<iframe id=\"gdexpandframe-" ) + getId() +
-                      "\" src=\"" + urlString.data() +
+              "\" src=\"ifr://localhost?url=" +QUrl::toPercentEncoding(  urlString).data() +
                       "\" onmouseover=\"processIframeMouseOver('gdexpandframe-" + getId() + "');\" "
                       "onmouseout=\"processIframeMouseOut();\" "
                       "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "

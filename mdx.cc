@@ -523,7 +523,7 @@ void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   if( firstIteration && getArticleCount() > FTS::MaxDictionarySizeForFastSearch )
     return;
 
-  gdDebug( "MDict: Building the full-text index for dictionary: %s\n",
+  gdDebug( "MDict: Building the full-text index for dictionary: %s",
            getName().c_str() );
 
   try
@@ -533,7 +533,7 @@ void MdxDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
   }
   catch( std::exception &ex )
   {
-    gdWarning( "MDict: Failed building full-text search index for \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    gdWarning( "MDict: Failed building full-text search index for \"%s\", reason: %s", getName().c_str(), ex.what() );
     QFile::remove( FsEncoding::decode( ftsIdxName.c_str() ) );
   }
 }
@@ -550,7 +550,7 @@ void MdxDictionary::getArticleText( uint32_t articleAddress, QString & headword,
   }
   catch( std::exception &ex )
   {
-    gdWarning( "MDict: Failed retrieving article from \"%s\", reason: %s\n", getName().c_str(), ex.what() );
+    gdWarning( "MDict: Failed retrieving article from \"%s\", reason: %s", getName().c_str(), ex.what() );
   }
 }
 

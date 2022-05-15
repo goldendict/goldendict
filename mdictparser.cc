@@ -120,7 +120,7 @@ bool MdictParser::open( const char * filename )
   filename_ = QString::fromUtf8( filename );
   file_ = new QFile( filename_ );
 
-  GD_DPRINTF( "MdictParser: open %s\n", filename );
+  gdDebug( "MdictParser: open %s", filename );
 
   if ( file_.isNull() || !file_->exists() )
     return false;
