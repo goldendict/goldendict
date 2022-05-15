@@ -42,23 +42,23 @@ void gdDebug(const char *msg, ...)
 {
 va_list ap;
 va_start(ap, msg);
-QTextCodec *localeCodec = 0;
+// QTextCodec *localeCodec = 0;
 
-  if( logFilePtr && logFilePtr->isOpen() )
-  {
-    if( utf8Codec == 0 )
-      utf8Codec = QTextCodec::codecForName( "UTF8" );
+  // if( logFilePtr && logFilePtr->isOpen() )
+  // {
+  //   if( utf8Codec == 0 )
+  //     utf8Codec = QTextCodec::codecForName( "UTF8" );
 
-    localeCodec = QTextCodec::codecForLocale();
-    QTextCodec::setCodecForLocale( utf8Codec );
-  }
+  //   localeCodec = QTextCodec::codecForLocale();
+  //   QTextCodec::setCodecForLocale( utf8Codec );
+  // }
 
   qDebug()<< QString().vasprintf( msg, ap );
 
-  if( logFilePtr && logFilePtr->isOpen() )
-  {
-    QTextCodec::setCodecForLocale( localeCodec );
-  }
+  // if( logFilePtr && logFilePtr->isOpen() )
+  // {
+  //   QTextCodec::setCodecForLocale( localeCodec );
+  // }
 
   va_end(ap);
 }
