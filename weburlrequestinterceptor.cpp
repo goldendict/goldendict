@@ -11,7 +11,8 @@ WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
 void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info) {
   if( Utils::isExternalLink( info.requestUrl() ) )
   {
-    if(GlobalBroadcaster::instance()-> existedInWhitelist(info.requestUrl().host()))
+    auto hostBase = getHostBase( info.requestUrl().host() );
+    if( GlobalBroadcaster::instance()->existedInWhitelist( hostBase ) )
     {
       //whitelist url does not block
       return;
@@ -20,7 +21,12 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
       //let throuth the resources file.
       return;
     }
-    info.block(true);
+
+    // configure should the gd block external links
+//    if( GlobalBroadcaster::instance()->getPreference()->disallowContentFromOtherSites )
+    {
+      info.block( true );
+    }
   }
 
   if (QWebEngineUrlRequestInfo::NavigationTypeLink == info.navigationType() && info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMainFrame) {
