@@ -13,8 +13,10 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   url = QUrl( Utils::Url::queryItemValue( url, "url" ) );
   QNetworkRequest request;
   request.setUrl( url );
+  request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,QNetworkRequest::RedirectPolicy::NoLessSafeRedirectPolicy);
 
   QNetworkReply * reply = mgr.get( request );
+
   auto finishAction     = [ = ]() -> void
   {
     // Handle reply data
@@ -22,11 +24,8 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QByteArray replyData = reply->readAll();
     QString articleString;
 
-    QTextCodec * codec = QTextCodec::codecForHtml( replyData );
-    if( codec )
-      articleString = codec->toUnicode( replyData );
-    else
-      articleString = QString::fromUtf8( replyData );
+    QTextCodec * codec = QTextCodec::codecForHtml( replyData, QTextCodec::codecForName( "UTF-8" ) );
+    articleString      = codec->toUnicode( replyData );
 
     // Change links from relative to absolute
 
@@ -86,17 +85,10 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
       articleNewString.clear();
     }
 
-    sptr< Dictionary::DataRequestInstant > response = new Dictionary::DataRequestInstant( true );
+    QBuffer * buffer = new QBuffer(requestJob);
+    buffer->setData(codec->fromUnicode(articleString));
 
-    auto content = articleString.toStdString();
-    response->getData().resize( content.size() );
-    memcpy( &( response->getData().front() ), content.data(), content.size() );
-
-    auto contentType="text/html";
-    auto newReply = new ArticleResourceReply( this, request, response, contentType );
-
-    requestJob->reply( contentType, newReply );
-    connect( requestJob, &QObject::destroyed, newReply, &QObject::deleteLater );
+    requestJob->reply( "text/html;charset=UTF-8", buffer );
   };
   connect( reply, &QNetworkReply::finished, requestJob, finishAction );
 

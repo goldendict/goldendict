@@ -1,5 +1,6 @@
 #include "globalbroadcaster.h"
 #include <QGlobalStatic>
+#include "utils.hh"
 
 Q_GLOBAL_STATIC( GlobalBroadcaster, bdcaster )
 GlobalBroadcaster::GlobalBroadcaster( QObject * parent ) : QObject( parent )
@@ -21,6 +22,8 @@ Config::Preferences * GlobalBroadcaster::getPreference()
 
 void GlobalBroadcaster::addWhitelist(QString url){
   whitelist.push_back(url);
+  auto baseUrl=::getHostBase(url);
+  whitelist.push_back(baseUrl);
 }
 
 bool GlobalBroadcaster::existedInWhitelist(QString url){
