@@ -53,7 +53,7 @@ va_start(ap, msg);
   //   QTextCodec::setCodecForLocale( utf8Codec );
   // }
 
-  qDebug()<< QString().vasprintf( msg, ap );
+  qDebug().noquote() << QString().vasprintf( msg, ap );
 
   // if( logFilePtr && logFilePtr->isOpen() )
   // {

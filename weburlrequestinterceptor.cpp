@@ -11,10 +11,16 @@ WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
 void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info) {
   if( Utils::isExternalLink( info.requestUrl() ) )
   {
-    if(!GlobalBroadcaster::instance()-> existedInWhitelist(info.requestUrl().host()))
+    if(GlobalBroadcaster::instance()-> existedInWhitelist(info.requestUrl().host()))
     {
-      info.block( true );
+      //whitelist url does not block
+      return;
     }
+    if(Utils::isCssFontImage(info.requestUrl())){
+      //let throuth the resources file.
+      return;
+    }
+    info.block(true);
   }
 
   if (QWebEngineUrlRequestInfo::NavigationTypeLink == info.navigationType() && info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMainFrame) {

@@ -55,6 +55,13 @@ inline bool isExternalLink(QUrl const &url) {
          url.scheme() == "file";
 }
 
+inline bool isCssFontImage(QUrl const &url) {
+  auto fileName = url.fileName();
+  auto ext=fileName.mid(fileName.lastIndexOf("."));
+  QStringList extensions{".css",".woff",".woff2",".bmp" ,".jpg", ".png", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv ",".ape"} ;
+  return extensions.indexOf(ext)>-1;
+}
+
 inline QString escape( QString const & plain )
 {
   return plain.toHtmlEscaped();
@@ -179,15 +186,20 @@ inline QString getHostBase( QUrl const & url )
 {
   QString host = url.host();
 
+  return getHostBase(host);
+}
+
+inline QString getHostBase( QString const & host )
+{
   QStringList domains = host.split( '.' );
 
   int left = domains.size();
 
-     // Skip last <=3-letter domain name
+       // Skip last <=3-letter domain name
   if ( left && domains[ left - 1 ].size() <= 3 )
     --left;
 
-     // Skip another <=3-letter domain name
+       // Skip another <=3-letter domain name
   if ( left && domains[ left - 1 ].size() <= 3 )
     --left;
 
