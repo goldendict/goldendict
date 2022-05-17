@@ -5,6 +5,8 @@
 #include <QMessageBox>
 #include "broken_xrecord.hh"
 #include "mainwindow.hh"
+#include <QWebEngineSettings>
+#include <QWebEngineProfile>
 
 Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
@@ -105,7 +107,9 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     ui.fontFamilies->addItem( family );
   }
   prevWebFontFamily = p.webFontFamily;
-  ui.fontFamilies->setCurrentText( p.webFontFamily );
+
+  if(!p.webFontFamily.isEmpty())
+    ui.fontFamilies->setCurrentText( p.webFontFamily );
   // Fill help languages combobox
 
   ui.helpLanguage->addItem( tr( "Default" ), QString() );
@@ -373,7 +377,9 @@ Config::Preferences Preferences::getPreferences()
     ui.interfaceLanguage->itemData(
       ui.interfaceLanguage->currentIndex() ).toString();
 
-  p.webFontFamily = ui.fontFamilies->currentText();
+  //bypass the first default
+  if(ui.fontFamilies->currentIndex()>0)
+    p.webFontFamily = ui.fontFamilies->currentText();
 
   p.helpLanguage =
     ui.helpLanguage->itemData(
@@ -645,9 +651,20 @@ void Preferences::on_buttonBox_accepted()
     QMessageBox::information( this, tr( "Changing Language" ),
                               tr( "Restart the program to apply the language change." ) );
 
-  if ( prevWebFontFamily != ui.fontFamilies->currentText() )
-    QMessageBox::information( this, tr( "Changing Dictionary Font Family" ),
-                              tr( "Restart the program to apply the dictionary font family change." ) );
+  auto currentFontFamily = ui.fontFamilies->currentText();
+  if( prevWebFontFamily != currentFontFamily )
+  {
+    //reset to default font .
+    if( currentFontFamily.isEmpty() )
+    {
+      QWebEngineProfile::defaultProfile()->settings()->resetFontFamily( QWebEngineSettings::StandardFont );
+    }
+    else
+    {
+      QWebEngineProfile::defaultProfile()->settings()->setFontFamily( QWebEngineSettings::StandardFont,
+                                                                      currentFontFamily );
+    }
+  }
 }
 
 void Preferences::on_useExternalPlayer_toggled( bool enabled )
