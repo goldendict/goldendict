@@ -9,9 +9,14 @@ WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
 
 }
 void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info) {
-  if( Utils::isExternalLink( info.requestUrl() ) )
+  if(  GlobalBroadcaster::instance()->getPreference()->disallowContentFromOtherSites && Utils::isExternalLink( info.requestUrl() ) )
   {
-    if(GlobalBroadcaster::instance()-> existedInWhitelist(info.requestUrl().host()))
+    //file:// link ,pass
+    if(info.requestUrl().scheme()=="file"){
+      return;
+    }
+    auto hostBase = getHostBase( info.requestUrl().host() );
+    if( GlobalBroadcaster::instance()->existedInWhitelist( hostBase ) )
     {
       //whitelist url does not block
       return;
@@ -20,7 +25,12 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
       //let throuth the resources file.
       return;
     }
-    info.block(true);
+
+    // block external links
+    {
+      info.block( true );
+      return;
+    }
   }
 
   if (QWebEngineUrlRequestInfo::NavigationTypeLink == info.navigationType() && info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMainFrame) {

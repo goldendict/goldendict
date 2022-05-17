@@ -13,9 +13,6 @@
 #include "wstring_qt.hh"
 #include "folding.hh"
 #include "epwing_charmap.hh"
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtCore5Compat>
-#endif
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #define _FILE_OFFSET_BITS 64
@@ -1207,8 +1204,8 @@ void EpwingBook::finalizeText( QString & text )
   // Replace references
 
   int pos = 0;
-  QRegularExpression reg1( "<R[^<]*>" );
-  QRegularExpression reg2( "</R[^<]*>" );
+  QRegularExpression reg1( "<R[^<]*>", QRegularExpression::CaseInsensitiveOption );
+  QRegularExpression reg2( "</R[^<]*>", QRegularExpression::CaseInsensitiveOption );
 
   EContainer cont( this, true );
 
@@ -1751,8 +1748,7 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
   refPages.append( argv[ 1 ] );
   refOffsets.append( argv[ 2 ] );
 
-  QString str;
-  str.asprintf( "</R%i>", refCloseCount );
+  QString str = QString( "</R%1>" ).arg( refCloseCount );
   refCloseCount += 1;
 
   return str.toUtf8();
