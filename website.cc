@@ -23,6 +23,7 @@ class WebSiteDictionary: public Dictionary::Class
 {
   string name;
   QByteArray urlTemplate;
+  bool experimentalIframe;
   QString iconFilename;
   bool inside_iframe;
   QNetworkAccessManager & netMgr;
@@ -36,12 +37,20 @@ public:
                      QNetworkAccessManager & netMgr_ ):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
-    urlTemplate( QUrl( urlTemplate_ ).toEncoded() ),
     iconFilename( iconFilename_ ),
     inside_iframe( inside_iframe_ ),
-    netMgr( netMgr_ )
+    netMgr( netMgr_ ),
+    experimentalIframe(false)
   {
-    dictionaryDescription = urlTemplate_;
+    QString temp=urlTemplate_;
+    if(temp.endsWith("##")){
+      experimentalIframe=true;
+      temp.chop(2);
+    }
+
+    urlTemplate = QUrl( temp ).toEncoded() ;
+
+    dictionaryDescription = temp;
   }
 
   virtual string getName() throw()
@@ -372,12 +381,21 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
 
     string result = "<div class=\"website_padding\"></div>";
 
-    //permissive add url to global whitelist.
+    //heuristic add url to global whitelist.
     QUrl url(urlString);
     GlobalBroadcaster::instance()->addWhitelist(url.host());
 
+    QString encodeUrl;
+    if(experimentalIframe){
+      encodeUrl="ifr://localhost?url="+QUrl::toPercentEncoding(  urlString);
+    }
+    else{
+      encodeUrl = urlString;
+    }
+
+
     result += string( "<iframe id=\"gdexpandframe-" ) + getId() +
-              "\" src=\"ifr://localhost?url=" +QUrl::toPercentEncoding(  urlString).data() +
+                      "\" src=\""+encodeUrl.toStdString() +
                       "\" onmouseover=\"processIframeMouseOver('gdexpandframe-" + getId() + "');\" "
                       "onmouseout=\"processIframeMouseOut();\" "
                       "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "

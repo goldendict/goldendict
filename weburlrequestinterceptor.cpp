@@ -9,8 +9,12 @@ WebUrlRequestInterceptor::WebUrlRequestInterceptor(QObject *p)
 
 }
 void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info) {
-  if( Utils::isExternalLink( info.requestUrl() ) )
+  if(  GlobalBroadcaster::instance()->getPreference()->disallowContentFromOtherSites && Utils::isExternalLink( info.requestUrl() ) )
   {
+    //file:// link ,pass
+    if(info.requestUrl().scheme()=="file"){
+      return;
+    }
     auto hostBase = getHostBase( info.requestUrl().host() );
     if( GlobalBroadcaster::instance()->existedInWhitelist( hostBase ) )
     {
@@ -22,10 +26,10 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
       return;
     }
 
-    // configure should the gd block external links
-//    if( GlobalBroadcaster::instance()->getPreference()->disallowContentFromOtherSites )
+    // block external links
     {
       info.block( true );
+      return;
     }
   }
 
