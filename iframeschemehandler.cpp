@@ -88,7 +88,12 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QBuffer * buffer = new QBuffer(requestJob);
     buffer->setData(codec->fromUnicode(articleString));
 
-    requestJob->reply( "text/html;charset=UTF-8", buffer );
+    QByteArray contentType="text/html;charset=UTF-8";
+    auto contentTypeHeader=reply->header(QNetworkRequest::ContentTypeHeader);
+    if(contentTypeHeader.isValid())
+      contentType= contentTypeHeader.toByteArray();
+
+    requestJob->reply(contentType , buffer );
   };
   connect( reply, &QNetworkReply::finished, requestJob, finishAction );
 

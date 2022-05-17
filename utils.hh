@@ -57,7 +57,7 @@ inline bool isExternalLink(QUrl const &url) {
 inline bool isCssFontImage(QUrl const &url) {
   auto fileName = url.fileName();
   auto ext=fileName.mid(fileName.lastIndexOf("."));
-  QStringList extensions{".css",".woff",".woff2",".bmp" ,".jpg", ".png", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv ",".ape"} ;
+  QStringList extensions{".css",".woff",".woff2","ttf",".bmp" ,".jpg", ".png", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv ",".ape"} ;
   return extensions.indexOf(ext)>-1;
 }
 
