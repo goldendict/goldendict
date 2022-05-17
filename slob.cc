@@ -906,7 +906,7 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
           || list[ 1 ].endsWith( " tex" ) )
       {
         QString name;
-        name.asprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
+        name = name.asprintf( "%04X%04X%04X.gif", entry.itemIndex, entry.binIndex, texCount );
         imgName = texCachePath + "/" + name;
 
         if( !QFileInfo( imgName ).exists() )
