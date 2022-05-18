@@ -150,12 +150,11 @@ using std::string;
     return size;
   }
 
-QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
-                                                            QNetworkRequest const & req,
-                                                            QIODevice * outgoingData )
+QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest const & req )
 {
   QUrl url;
-  if ( op == GetOperation )
+  auto op = GetOperation;
+//  if ( op == GetOperation )
   {
     if ( req.url().scheme() == "qrcx" )
     {
@@ -169,7 +168,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
 
-      return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+      return QNetworkAccessManager::createRequest( op, newReq, nullptr );
     }
 
     url=req.url();
@@ -237,7 +236,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       QNetworkRequest newReq( req );
       newReq.setUrl( newUrl );
 
-      return QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+      return QNetworkAccessManager::createRequest( op, newReq, nullptr );
     }
   }
 
@@ -250,7 +249,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     newReq.setRawHeader("User-Agent", req.rawHeader("User-Agent").replace(qApp->applicationName().toUtf8(), ""));
   }
 
-  QNetworkReply *  reply = QNetworkAccessManager::createRequest( op, newReq, outgoingData );
+  QNetworkReply *  reply = QNetworkAccessManager::createRequest( op, newReq, nullptr );
 
   if( url.scheme() == "https")
   {
@@ -260,8 +259,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-  return op == QNetworkAccessManager::GetOperation
-         || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
+  return  new AllowFrameReply( reply );
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
@@ -528,7 +526,7 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   QNetworkRequest request;
   request.setUrl( url );
 
-  QNetworkReply * reply = this->mManager.createRequest( QNetworkAccessManager::GetOperation, request );
+  QNetworkReply * reply = this->mManager.getArticleReply( request );
   connect( reply, &QNetworkReply::finished, requestJob, [ = ]() { requestJob->reply( "text/html", reply ); } );
   connect( requestJob, &QObject::destroyed, reply, &QObject::deleteLater );
 }

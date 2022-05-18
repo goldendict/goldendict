@@ -42,6 +42,7 @@ pre
 /* The 'From ' string which precedes dictionary name in the heading */
 .gdfromprefix
 {
+    display:none;
 }
 
 /* The article span. Here we have a padding/margin hack to make fragment links
