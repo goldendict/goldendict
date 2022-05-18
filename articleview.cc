@@ -262,6 +262,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
 
   connect(ui.definition, SIGNAL(loadProgress(int)), this,
           SLOT(loadProgress(int)));
+  connect( ui.definition, SIGNAL( linkClicked( QUrl ) ), this, SLOT( linkClicked( QUrl ) ) );
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString  ) ),
            this, SLOT( handleTitleChanged( QString  ) ) );

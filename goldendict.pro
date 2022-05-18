@@ -225,6 +225,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 # Input
 HEADERS += folding.hh \
     article_inspect.h \
+    articlewebpage.h \
     globalbroadcaster.h \
     iframeschemehandler.h \
     inc_case_folding.hh \
@@ -365,6 +366,7 @@ FORMS += groups.ui \
 
 SOURCES += folding.cc \
     article_inspect.cpp \
+    articlewebpage.cpp \
     globalbroadcaster.cpp \
     iframeschemehandler.cpp \
     main.cc \
