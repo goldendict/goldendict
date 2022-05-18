@@ -122,11 +122,7 @@ public:
   sptr< Dictionary::DataRequest > getResource( QUrl const & url,
                                                QString & contentType );
 
-// protected:
-
-  virtual QNetworkReply * createRequest( Operation op,
-                                         QNetworkRequest const & req,
-                                         QIODevice * outgoingData = nullptr);
+  virtual QNetworkReply * getArticleReply( QNetworkRequest const & req );
 
 };
 
@@ -202,18 +198,16 @@ private slots:
   void finishedSlot();
 };
 
-
 class LocalSchemeHandler : public QWebEngineUrlSchemeHandler
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    LocalSchemeHandler(ArticleNetworkAccessManager &articleNetMgr);
-    void requestStarted(QWebEngineUrlRequestJob *requestJob);
+  LocalSchemeHandler( ArticleNetworkAccessManager & articleNetMgr );
+  void requestStarted( QWebEngineUrlRequestJob * requestJob );
 
 protected:
-
 private:
-    ArticleNetworkAccessManager& mManager;
+  ArticleNetworkAccessManager & mManager;
   QNetworkAccessManager mgr;
 };
 #endif
