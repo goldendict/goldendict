@@ -2482,34 +2482,6 @@ void ArticleView::highlightFTSResults()
 {
   closeSearch();
 
-  const QUrl & url = ui.definition->url();
-
-  bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
-
-  QString regString = Utils::Url::queryItemValue( url, "regexp" );
-  if( ignoreDiacritics )
-    regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
-  else
-    regString = regString.remove( AccentMarkHandler::accentMark() );
-
-  QRegularExpression regexp;
-  if( Utils::Url::hasQueryItem( url, "wildcards" ) )
-    regexp.setPattern( wildcardsToRegexp( regString ) );
-  else
-    regexp.setPattern( regString );
-
-  QRegularExpression::PatternOptions patternOptions =
-    QRegularExpression::DotMatchesEverythingOption | QRegularExpression::UseUnicodePropertiesOption |
-    QRegularExpression::MultilineOption | QRegularExpression::InvertedGreedinessOption;
-  if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
-    patternOptions |= QRegularExpression::CaseInsensitiveOption;
-  regexp.setPatternOptions( patternOptions );
-
-  if( regexp.pattern().isEmpty() || !regexp.isValid() )
-    return;
-
-  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ? new DiacriticsHandler : new AccentMarkHandler;
-
   // Clear any current selection
   if( ui.definition->selectedText().size() )
   {
@@ -2519,6 +2491,33 @@ void ArticleView::highlightFTSResults()
   ui.definition->page()->toPlainText(
     [ & ]( const QString pageText )
     {
+      const QUrl & url = ui.definition->url();
+
+      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
+
+      QString regString = Utils::Url::queryItemValue( url, "regexp" );
+      if( ignoreDiacritics )
+        regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
+      else
+        regString = regString.remove( AccentMarkHandler::accentMark() );
+
+      QRegularExpression regexp;
+      if( Utils::Url::hasQueryItem( url, "wildcards" ) )
+        regexp.setPattern( wildcardsToRegexp( regString ) );
+      else
+        regexp.setPattern( regString );
+
+      QRegularExpression::PatternOptions patternOptions =
+        QRegularExpression::DotMatchesEverythingOption | QRegularExpression::UseUnicodePropertiesOption |
+        QRegularExpression::MultilineOption | QRegularExpression::InvertedGreedinessOption;
+      if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
+        patternOptions |= QRegularExpression::CaseInsensitiveOption;
+      regexp.setPatternOptions( patternOptions );
+
+      if( regexp.pattern().isEmpty() || !regexp.isValid() )
+        return;
+      sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ? new DiacriticsHandler : new AccentMarkHandler;
+
       marksHandler->setText( pageText );
 
       QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
@@ -2547,7 +2546,7 @@ void ArticleView::highlightFTSResults()
 
       ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
 
-      QWebEnginePage::FindFlags flags( 0 );
+      QWebEnginePage::FindFlags flags( QWebEnginePage::FindBackward );
 
       if( ftsSearchMatchCase )
         flags |= QWebEnginePage::FindCaseSensitively;
@@ -2758,21 +2757,16 @@ void ResourceToSaveHandler::downloadFinished()
   }
 }
 
-ArticleViewAgent::ArticleViewAgent(QObject *parent)
-  : QObject{parent}
+ArticleViewAgent::ArticleViewAgent( ArticleView * articleView ) : QObject( articleView ), articleView( articleView )
 {
-
 }
-ArticleViewAgent::ArticleViewAgent(ArticleView *articleView)
-  : articleView(articleView)
+
+void ArticleViewAgent::onJsActiveArticleChanged( QString const & id )
 {
-
+  articleView->onJsActiveArticleChanged( id );
 }
 
-void ArticleViewAgent::onJsActiveArticleChanged(QString const & id){
-    articleView->onJsActiveArticleChanged(id);
-}
-
-void ArticleViewAgent::linkClickedInHtml(QUrl const & url){
-    articleView->linkClickedInHtml(url);
+void ArticleViewAgent::linkClickedInHtml( QUrl const & url )
+{
+  articleView->linkClickedInHtml( url );
 }

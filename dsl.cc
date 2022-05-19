@@ -345,29 +345,6 @@ DslDictionary::~DslDictionary()
 
 //////// DslDictionary::deferredInit()
 
-class DslDeferredInitRunnable: public QRunnable
-{
-  DslDictionary & dictionary;
-  QSemaphore & hasExited;
-
-public:
-
-  DslDeferredInitRunnable( DslDictionary & dictionary_,
-                           QSemaphore & hasExited_ ):
-    dictionary( dictionary_ ), hasExited( hasExited_ )
-  {}
-
-  ~DslDeferredInitRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run()
-  {
-    dictionary.doDeferredInit();
-  }
-};
-
 void DslDictionary::deferredInit()
 {
   if ( !Utils::AtomicInt::loadAcquire( deferredInitDone ) )
@@ -379,9 +356,7 @@ void DslDictionary::deferredInit()
 
     if ( !deferredInitRunnableStarted )
     {
-      QThreadPool::globalInstance()->start(
-        new DslDeferredInitRunnable( *this, deferredInitRunnableExited ),
-        -1000 );
+      QThreadPool::globalInstance()->start( [ this ]() { this->doDeferredInit(); }, -1000 );
       deferredInitRunnableStarted = true;
     }
   }

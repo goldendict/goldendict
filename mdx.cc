@@ -315,8 +315,8 @@ public:
 
   virtual void setFTSParameters( Config::FullTextSearch const & fts )
   {
-//    if( ensureInitDone().size() )
-//      return;
+    if( ensureInitDone().size() )
+      return;
 
     can_FTS = fts.enabled
               && !fts.disabledTypes.contains( "MDICT", Qt::CaseInsensitive )

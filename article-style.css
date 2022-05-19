@@ -5,7 +5,6 @@ body
 {
   background: #fefdeb;
   font-family: Tahoma, Verdana, "Lucida Sans Unicode", sans-serif;
-  font-size: 13px;
 }
 
 /* This stylesheet is used to highligh current selection when doing a search.
@@ -611,15 +610,15 @@ div.xdxf
 
 .epwing_narrow_font
 {
-  width: 7px;
-  height: 13px;
+  width: 0.5em;
+  height: 1em;
   vertical-align: -15%;
 }
 
 .epwing_wide_font
 {
-  width: 13px;
-  height: 13px;
+  width: 1em;
+  height: 1em;
   vertical-align: -15%;
 }
 
@@ -1600,7 +1599,7 @@ in the bottom-right corner of the content area */
 .mwiki #bodyContent a.external,
 .mwiki #bodyContent a[href ^="gopher://"] {
 	background: url(external.png) center right no-repeat;
-	padding-right: 13px;
+        padding-right: 1em;
 }
 .mwiki #bodyContent a[href ^="https://"],
 .mwiki .link-https {
@@ -1636,7 +1635,7 @@ in the bottom-right corner of the content area */
 .mwiki #bodyContent a.external[href $=".wma"], .mwiki #bodyContent a.external[href $=".WMA"],
 .mwiki .link-audio {
 	background: url("audio.png") center right no-repeat;
-	padding-right: 13px;
+        padding-right: 1em;
 }
 .mwiki #bodyContent a.external[href $=".ogm"], .mwiki #bodyContent a.external[href $=".OGM"],
 .mwiki #bodyContent a.external[href $=".avi"], .mwiki #bodyContent a.external[href $=".AVI"],
@@ -1644,7 +1643,7 @@ in the bottom-right corner of the content area */
 .mwiki #bodyContent a.external[href $=".mpg"], .mwiki #bodyContent a.external[href $=".MPG"],
 .mwiki .link-video {
 	background: url("video.png") center right no-repeat;
-	padding-right: 13px;
+        padding-right: 1em;
 }
 .mwiki #bodyContent a.external[href $=".pdf"], .mwiki #bodyContent a.external[href $=".PDF"],
 .mwiki #bodyContent a.external[href *=".pdf#"], .mwiki #bodyContent a.external[href *=".PDF#"],
