@@ -88,14 +88,14 @@ void EditDictionaries::editGroup( unsigned id )
   }
 }
 
-void EditDictionaries::save()
+void EditDictionaries::save( bool rebuildGroups )
 {
   Config::Groups newGroups = groups->getGroups();
   Config::Group newOrder = orderAndProps->getCurrentDictionaryOrder();
   Config::Group newInactive = orderAndProps->getCurrentInactiveDictionaries();
 
-  if ( isSourcesChanged() )
-    acceptChangedSources( false );
+  if( isSourcesChanged() )
+    acceptChangedSources( rebuildGroups );
 
   if ( origCfg.groups != newGroups || origCfg.dictionaryOrder != newOrder ||
        origCfg.inactiveDictionaries != newInactive )
@@ -171,10 +171,7 @@ void EditDictionaries::rescanSources()
 void EditDictionaries::buttonBoxClicked( QAbstractButton * button )
 {
   if (ui.buttons->buttonRole(button) == QDialogButtonBox::ApplyRole) {
-    if ( isSourcesChanged() ) {
-      acceptChangedSources( true );
-    }
-    save();
+    save( true );
   }
 }
 

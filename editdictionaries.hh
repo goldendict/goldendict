@@ -71,8 +71,9 @@ private:
 
   void acceptChangedSources( bool rebuildGroups );
 
-  void save();
-  
+  //the rebuildGroups was an initative,means to build the group if possible.
+  void save( bool rebuildGroups = false );
+
 private:
    
   Config::Class & cfg;
