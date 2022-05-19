@@ -3,7 +3,6 @@
 #include "language.hh"
 #include "langcoder.hh"
 #include <QMessageBox>
-#include "broken_xrecord.hh"
 #include "mainwindow.hh"
 #include <QWebEngineSettings>
 #include <QWebEngineProfile>
@@ -296,9 +295,6 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   }
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
-
-  if ( !isRECORDBroken() )
-    ui.brokenXRECORD->hide();
 
   // Proxy server
 

@@ -295,7 +295,6 @@ HEADERS += folding.hh \
     orderandprops.hh \
     language.hh \
     dictionarybar.hh \
-    broken_xrecord.hh \
     history.hh \
     atomic_rename.hh \
     articlewebview.hh \
@@ -429,7 +428,6 @@ SOURCES += folding.cc \
     orderandprops.cc \
     language.cc \
     dictionarybar.cc \
-    broken_xrecord.cc \
     history.cc \
     atomic_rename.cc \
     articlewebview.cc \
