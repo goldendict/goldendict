@@ -380,6 +380,8 @@ Config::Preferences Preferences::getPreferences()
   //bypass the first default
   if(ui.fontFamilies->currentIndex()>0)
     p.webFontFamily = ui.fontFamilies->currentText();
+  else
+    p.webFontFamily = "";
 
   p.helpLanguage =
     ui.helpLanguage->itemData(
