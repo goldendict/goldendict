@@ -2757,21 +2757,16 @@ void ResourceToSaveHandler::downloadFinished()
   }
 }
 
-ArticleViewAgent::ArticleViewAgent(QObject *parent)
-  : QObject{parent}
+ArticleViewAgent::ArticleViewAgent( ArticleView * articleView ) : QObject( articleView ), articleView( articleView )
 {
-
 }
-ArticleViewAgent::ArticleViewAgent(ArticleView *articleView)
-  : articleView(articleView)
+
+void ArticleViewAgent::onJsActiveArticleChanged( QString const & id )
 {
-
+  articleView->onJsActiveArticleChanged( id );
 }
 
-void ArticleViewAgent::onJsActiveArticleChanged(QString const & id){
-    articleView->onJsActiveArticleChanged(id);
-}
-
-void ArticleViewAgent::linkClickedInHtml(QUrl const & url){
-    articleView->linkClickedInHtml(url);
+void ArticleViewAgent::linkClickedInHtml( QUrl const & url )
+{
+  articleView->linkClickedInHtml( url );
 }
