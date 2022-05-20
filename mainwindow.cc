@@ -162,7 +162,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   wuri = new WebUrlRequestInterceptor();
   QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor( wuri );
-  connect( wuri, &WebUrlRequestInterceptor::linkClicked, this, &MainWindow::viewLinkClicked );
 
   if(!cfg.preferences.hideGoldenDictHeader){
     QWebEngineProfile::defaultProfile()->setHttpUserAgent(QWebEngineProfile::defaultProfile()->httpUserAgent()+" GoldenDict/webengine");
@@ -886,6 +885,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     navBack->setIcon( QIcon( ":/icons/next.svg" ) );
     navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
+
+  inspector = new ArticleInspector( this );
 }
 
 void MainWindow::ctrlTabPressed()
@@ -1609,6 +1610,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
+
+  connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
+    if(inspector){
+      inspector->setInspectPage(view);
+    }
+  });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -3590,21 +3597,6 @@ void MainWindow::unzoom()
 {
   cfg.preferences.zoomFactor = 1;
   applyZoomFactor();
-}
-
-void MainWindow::viewLinkClicked( const QUrl & url )
-{
-  if( scanPopup.get() && scanPopup->isActiveWindow() )
-  {
-    QString word = Utils::Url::getWordFromUrl( url );
-    if( !word.isEmpty() )
-    {
-      scanPopup->translateWord( word );
-      return;
-    }
-  }
-  ArticleView * view = getCurrentArticleView();
-  view->linkClicked( url );
 }
 
 void MainWindow::applyZoomFactor()

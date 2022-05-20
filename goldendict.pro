@@ -119,8 +119,6 @@ win32 {
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
     }
-
-    LIBS += -luxtheme
 }
 
 unix:!mac {
@@ -225,6 +223,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 # Input
 HEADERS += folding.hh \
     article_inspect.h \
+    articlewebpage.h \
     globalbroadcaster.h \
     iframeschemehandler.h \
     inc_case_folding.hh \
@@ -295,7 +294,6 @@ HEADERS += folding.hh \
     orderandprops.hh \
     language.hh \
     dictionarybar.hh \
-    broken_xrecord.hh \
     history.hh \
     atomic_rename.hh \
     articlewebview.hh \
@@ -366,6 +364,7 @@ FORMS += groups.ui \
 
 SOURCES += folding.cc \
     article_inspect.cpp \
+    articlewebpage.cpp \
     globalbroadcaster.cpp \
     iframeschemehandler.cpp \
     main.cc \
@@ -429,7 +428,6 @@ SOURCES += folding.cc \
     orderandprops.cc \
     language.cc \
     dictionarybar.cc \
-    broken_xrecord.cc \
     history.cc \
     atomic_rename.cc \
     articlewebview.cc \

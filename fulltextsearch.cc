@@ -16,7 +16,6 @@
 
 #include "initializing.hh"
 #include <qt_windows.h>
-#include <uxtheme.h>
 #include <QOperatingSystemVersion>
 
 #endif
@@ -242,27 +241,6 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   if( delegate )
     ui.headwordsView->setItemDelegate( delegate );
 
-#if defined( Q_OS_WIN32 )
-
-  // Style "windowsvista" in Qt5 turn off progress bar animation for classic appearance
-  // We use simply "windows" style instead for this case
-
-  oldBarStyle = 0;
-
-  if(  QOperatingSystemVersion::current () >= QOperatingSystemVersion::Windows7
-      && !IsThemeActive() )
-  {
-    QStyle * barStyle = WindowsStyle::instance().getStyle();
-
-    if( barStyle )
-    {
-      oldBarStyle = ui.searchProgressBar->style();
-      ui.searchProgressBar->setStyle( barStyle );
-    }
-  }
-
-#endif
-
   ui.searchLine->setText( static_cast< MainWindow * >( parent )->getTranslateLineText() );
   ui.searchLine->selectAll();
 }
@@ -271,13 +249,6 @@ FullTextSearchDialog::~FullTextSearchDialog()
 {
   if( delegate )
     delegate->deleteLater();
-
-#if defined( Q_OS_WIN32 )
-
-  if( oldBarStyle )
-    ui.searchProgressBar->setStyle( oldBarStyle );
-
-#endif
 }
 
 void FullTextSearchDialog::stopSearch()

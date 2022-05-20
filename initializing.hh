@@ -46,9 +46,6 @@ private:
 
   virtual void closeEvent( QCloseEvent * );
   virtual void reject();
-#if defined( Q_OS_WIN32 )
-  QStyle * oldBarStyle;
-#endif
 
   Ui::Initializing ui;
 };

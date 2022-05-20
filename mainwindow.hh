@@ -82,6 +82,8 @@ private:
 
   QSystemTrayIcon * trayIcon;
 
+  QPointer< ArticleInspector > inspector;
+
   WebUrlRequestInterceptor *wuri;
 
   Ui::MainWindow ui;
@@ -341,8 +343,6 @@ private slots:
   void zoomin();
   void zoomout();
   void unzoom();
-
-  void viewLinkClicked( const QUrl & url );
 
   void scaleArticlesByCurrentZoomFactor();
 

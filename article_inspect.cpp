@@ -3,14 +3,17 @@
 #if (QT_VERSION > QT_VERSION_CHECK(6,0,0))
 #include <QWebEngineContextMenuRequest>
 #endif
-ArticleInspector::ArticleInspector( QWidget * parent ) : QDialog( parent, Qt::WindowType::Window )
+ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::WindowType::Window )
 {
+  setWindowTitle(tr("Inspect"));
   setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
   QVBoxLayout * v = new QVBoxLayout( this );
   v->setSpacing( 0 );
   v->setContentsMargins( 0, 0, 0, 0 );
-  inspectView = new QWebEngineView();
+  inspectView = new QWebEngineView( this );
   v->addWidget( inspectView );
+
+  resize(800,600);
 }
 
 void ArticleInspector::setInspectPage( QWebEngineView * view )

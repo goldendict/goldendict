@@ -40,6 +40,14 @@
     </message>
 </context>
 <context>
+    <name>ArticleInspector</name>
+    <message>
+        <location filename="../article_inspect.cpp" line="8"/>
+        <source>Inspect</source>
+        <translation>审查元素</translation>
+    </message>
+</context>
+<context>
     <name>ArticleMaker</name>
     <message>
         <location filename="../article_maker.cc" line="261"/>

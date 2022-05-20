@@ -6,7 +6,7 @@
 #include <QWebEnginePage>
 #include <QVBoxLayout>
 
-class ArticleInspector : public QDialog
+class ArticleInspector : public QWidget
 {
   Q_OBJECT
   QWebEngineView * inspectView   = nullptr;
@@ -15,7 +15,6 @@ public:
   ArticleInspector( QWidget * parent = nullptr );
 
   void setInspectPage( QWebEngineView * view);
-
 private:
 
   virtual void closeEvent( QCloseEvent * );
