@@ -30,9 +30,9 @@ jobs:
         qt_ver: [6.2.4,6.3.0]
         qt_arch: [gcc_64]
     env:
-      version: 22.4.24
-      version-suffix: alpha
-      prerelease: true
+      version: 22.5.21
+      version-suffix: GrainBuds
+      prerelease: false
     steps:
       - name: Install Qt
         uses: jurplel/install-qt-action@v3

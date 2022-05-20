@@ -29,9 +29,9 @@ jobs:
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
-      version: 22.4.24
-      version-suffix: alpha
-      prerelease: true
+      version: 22.5.21
+      version-suffix: GrainBuds
+      prerelease: false
 
     steps:
       # macos 11.0 默认环境变了,要指定

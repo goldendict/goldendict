@@ -27,9 +27,9 @@ jobs:
 
     env:
       targetName: GoldenDict.exe
-      version: 22.4.24
-      version-suffix: alpha
-      prerelease: true
+      version: 22.5.21
+      version-suffix: GrainBuds
+      prerelease: false
     steps:
       - uses: actions/setup-python@v3
         with:
