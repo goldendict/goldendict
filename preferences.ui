@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>721</width>
+    <width>744</width>
     <height>506</height>
    </rect>
   </property>
@@ -50,86 +50,6 @@
        <property name="topMargin">
         <number>9</number>
        </property>
-       <item row="9" column="0" colspan="2">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="doubleClickTranslates">
-         <property name="text">
-          <string>Double-click translates the word clicked</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QGroupBox" name="groupBox">
-         <property name="title">
-          <string>Tabbed browsing</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="newTabsOpenInBackground">
-            <property name="toolTip">
-             <string>Normally, opening a new tab switches to it immediately.
-With this on however, new tabs will be opened without
-switching to them.</string>
-            </property>
-            <property name="text">
-             <string>Open new tabs in background</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="newTabsOpenAfterCurrentOne">
-            <property name="toolTip">
-             <string>With this on, new tabs are opened just after the
-current, active one. Otherwise they are added to
-be the last ones.</string>
-            </property>
-            <property name="text">
-             <string>Open new tabs after the current one</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="hideSingleTab">
-            <property name="toolTip">
-             <string>Select this option if you don't want to see the main tab bar when only a single tab is opened.</string>
-            </property>
-            <property name="text">
-             <string>Hide single tab</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="mruTabOrder">
-            <property name="text">
-             <string>Ctrl-Tab navigates tabs in MRU order</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="selectBySingleClick">
-         <property name="toolTip">
-          <string>Turn this option on if you want to select words by single mouse click</string>
-         </property>
-         <property name="text">
-          <string>Select word by single click</string>
-         </property>
-        </widget>
-       </item>
        <item row="5" column="0" colspan="2">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
@@ -206,6 +126,30 @@ be the last ones.</string>
          </item>
         </layout>
        </item>
+       <item row="14" column="0" colspan="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="4" column="0">
+        <widget class="QCheckBox" name="escKeyHidesMainWindow">
+         <property name="toolTip">
+          <string>Normally, pressing ESC key moves focus to the translation line.
+With this on however, it will hide the main window.</string>
+         </property>
+         <property name="text">
+          <string>ESC key hides main window</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QGroupBox" name="enableTrayIcon">
          <property name="toolTip">
@@ -253,33 +197,6 @@ the application.</string>
          </layout>
         </widget>
        </item>
-       <item row="7" column="0" colspan="2">
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="addonStylesLabel">
-           <property name="text">
-            <string>Add-on style:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="StylesComboBox" name="addonStyles"/>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
        <item row="3" column="1">
         <widget class="QCheckBox" name="autoScrollToTargetArticle">
          <property name="toolTip">
@@ -313,17 +230,6 @@ however, the article from the topmost dictionary is shown.</string>
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="escKeyHidesMainWindow">
-         <property name="toolTip">
-          <string>Normally, pressing ESC key moves focus to the translation line.
-With this on however, it will hide the main window.</string>
-         </property>
-         <property name="text">
-          <string>ESC key hides main window</string>
-         </property>
         </widget>
        </item>
        <item row="2" column="1">
@@ -372,6 +278,137 @@ With this on however, it will hide the main window.</string>
             <string/>
            </property>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <widget class="QCheckBox" name="selectBySingleClick">
+         <property name="toolTip">
+          <string>Turn this option on if you want to select words by single mouse click</string>
+         </property>
+         <property name="text">
+          <string>Select word by single click</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QCheckBox" name="doubleClickTranslates">
+         <property name="text">
+          <string>Double-click translates the word clicked</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Tabbed browsing</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="newTabsOpenInBackground">
+            <property name="toolTip">
+             <string>Normally, opening a new tab switches to it immediately.
+With this on however, new tabs will be opened without
+switching to them.</string>
+            </property>
+            <property name="text">
+             <string>Open new tabs in background</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="newTabsOpenAfterCurrentOne">
+            <property name="toolTip">
+             <string>With this on, new tabs are opened just after the
+current, active one. Otherwise they are added to
+be the last ones.</string>
+            </property>
+            <property name="text">
+             <string>Open new tabs after the current one</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="hideSingleTab">
+            <property name="toolTip">
+             <string>Select this option if you don't want to see the main tab bar when only a single tab is opened.</string>
+            </property>
+            <property name="text">
+             <string>Hide single tab</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QCheckBox" name="mruTabOrder">
+            <property name="text">
+             <string>Ctrl-Tab navigates tabs in MRU order</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="11" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <widget class="QLabel" name="label_21">
+           <property name="text">
+            <string>Dictionary Font: </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="fontFamilies">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="toolTip">
+            <string>set the fallback font family for dictionary</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="7" column="0" colspan="2">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="addonStylesLabel">
+           <property name="text">
+            <string>Add-on style:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="StylesComboBox" name="addonStyles"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -803,26 +840,6 @@ seconds, which is specified here.</string>
           <string>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</string>
          </property>
          <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="brokenXRECORD">
-         <property name="text">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Note: You appear to be running an X.Org XServer release which has the RECORD extension broken. Hotkeys in GoldenDict will probably not work. This must be fixed in the server itself. Please refer to the following &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;bug entry&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; and leave a comment there if you like.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::RichText</enum>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-         <property name="openExternalLinks">
           <bool>true</bool>
          </property>
         </widget>
@@ -1379,6 +1396,12 @@ download page.</string>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <item>
         <widget class="QGroupBox" name="groupBox_ScanPopupWindowFlags">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>83</height>
+          </size>
+         </property>
          <property name="title">
           <string>ScanPopup unpinned window flags</string>
          </property>
@@ -1424,7 +1447,7 @@ download page.</string>
            <rect>
             <x>10</x>
             <y>53</y>
-            <width>193</width>
+            <width>271</width>
             <height>20</height>
            </rect>
           </property>
@@ -1619,15 +1642,45 @@ download page.</string>
           <string>Articles</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="collapseBigArticles">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="limitInputPhraseLength">
             <property name="toolTip">
-             <string>Select this option to automatic collapse big articles</string>
+             <string>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</string>
             </property>
             <property name="text">
-             <string>Collapse articles more than</string>
+             <string>Ignore input phrases longer than</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
+          </item>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="3">
+           <spacer name="horizontalSpacer_14">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
           <item row="0" column="1">
            <widget class="QSpinBox" name="articleSizeLimit">
@@ -1645,37 +1698,20 @@ download page.</string>
             </property>
            </widget>
           </item>
+          <item row="1" column="4">
+           <widget class="QCheckBox" name="ignoreDiacritics">
+            <property name="toolTip">
+             <string>Turn this option on to ignore diacritics while searching articles</string>
+            </property>
+            <property name="text">
+             <string>Ignore diacritics while searching</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="2">
            <widget class="QLabel" name="label_13">
             <property name="text">
              <string>symbols</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <spacer name="horizontalSpacer_11">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="limitInputPhraseLength">
-            <property name="toolTip">
-             <string>Turn this option on to ignore unreasonably long input text
-from mouse-over, selection, clipboard or command line</string>
-            </property>
-            <property name="text">
-             <string>Ignore input phrases longer than</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -1695,20 +1731,13 @@ from mouse-over, selection, clipboard or command line</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2">
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>symbols</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4">
-           <widget class="QCheckBox" name="ignoreDiacritics">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="collapseBigArticles">
             <property name="toolTip">
-             <string>Turn this option on to ignore diacritics while searching articles</string>
+             <string>Select this option to automatic collapse big articles</string>
             </property>
             <property name="text">
-             <string>Ignore diacritics while searching</string>
+             <string>Collapse articles more than</string>
             </property>
            </widget>
           </item>
@@ -1722,18 +1751,19 @@ from mouse-over, selection, clipboard or command line</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <spacer name="horizontalSpacer_14">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+          <item row="1" column="2">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>symbols</string>
             </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QCheckBox" name="ignorePunctuation">
+            <property name="text">
+             <string>Ignore punctuation while searching</string>
             </property>
-           </spacer>
+           </widget>
           </item>
          </layout>
         </widget>

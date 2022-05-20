@@ -7,7 +7,7 @@
 #define GD_DPRINTF(...) do {} while( 0 )
 #define GD_FDPRINTF(...) do {} while( 0 )
 #else
-#define GD_DPRINTF(...) printf(__VA_ARGS__)
+#define GD_DPRINTF(...) gdDebug(__VA_ARGS__)
 #define GD_FDPRINTF(...) fprintf(__VA_ARGS__)
 #endif
 

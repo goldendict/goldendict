@@ -13,6 +13,8 @@ class Preferences: public QDialog
 
   int prevInterfaceLanguage;
 
+  QString prevWebFontFamily;
+
   Help::HelpWindow * helpWindow;
   Config::Class & cfg;
   QAction helpAction;

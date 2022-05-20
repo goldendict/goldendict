@@ -7,7 +7,6 @@
 
 #include "mainwindow.hh"
 #include <QWebEngineProfile>
-#include <QWebEngineSettings>
 #include "editdictionaries.hh"
 #include "loaddictionaries.hh"
 #include "preferences.hh"
@@ -144,20 +143,25 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   QThreadPool::globalInstance()->start( new InitSSLRunnable );
 #endif
 
+  GlobalBroadcaster::instance()->setPreference(&cfg.preferences);
 
-  localSchemeHandler = new LocalSchemeHandler(articleNetMgr);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("gdlookup", localSchemeHandler);
-  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler("bword", localSchemeHandler);
+  localSchemeHandler = new LocalSchemeHandler( articleNetMgr );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "gdlookup", localSchemeHandler );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "bword", localSchemeHandler );
 
-  QStringList localSchemes={"gdau","gico","qrcx","bres","gdprg","gdvideo","gdpicture","gdtts"};
-  resourceSchemeHandler = new ResourceSchemeHandler(articleNetMgr);
-  for(int i=0;i<localSchemes.size();i++){
-    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler(localSchemes.at(i).toLatin1(), resourceSchemeHandler);
+  iframeSchemeHandler = new IframeSchemeHandler( this );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "ifr", iframeSchemeHandler );
+
+  QStringList localSchemes = { "gdau", "gico", "qrcx", "bres", "gdprg", "gdvideo", "gdpicture", "gdtts" };
+  resourceSchemeHandler    = new ResourceSchemeHandler( articleNetMgr );
+  for( int i = 0; i < localSchemes.size(); i++ )
+  {
+    QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( localSchemes.at( i ).toLatin1(),
+                                                                  resourceSchemeHandler );
   }
 
   wuri = new WebUrlRequestInterceptor();
   QWebEngineProfile::defaultProfile()->setUrlRequestInterceptor( wuri );
-  connect( wuri, &WebUrlRequestInterceptor::linkClicked, this, &MainWindow::viewLinkClicked );
 
   if(!cfg.preferences.hideGoldenDictHeader){
     QWebEngineProfile::defaultProfile()->setHttpUserAgent(QWebEngineProfile::defaultProfile()->httpUserAgent()+" GoldenDict/webengine");
@@ -881,6 +885,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     navBack->setIcon( QIcon( ":/icons/next.svg" ) );
     navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
+
+  inspector = new ArticleInspector( this );
 }
 
 void MainWindow::ctrlTabPressed()
@@ -1604,6 +1610,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
+
+  connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
+    if(inspector){
+      inspector->setInspectPage(view);
+    }
+  });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -3585,21 +3597,6 @@ void MainWindow::unzoom()
 {
   cfg.preferences.zoomFactor = 1;
   applyZoomFactor();
-}
-
-void MainWindow::viewLinkClicked( const QUrl & url )
-{
-  if( scanPopup.get() && scanPopup->isActiveWindow() )
-  {
-    QString word = Utils::Url::getWordFromUrl( url );
-    if( !word.isEmpty() )
-    {
-      scanPopup->translateWord( word );
-      return;
-    }
-  }
-  ArticleView * view = getCurrentArticleView();
-  view->linkClicked( url );
 }
 
 void MainWindow::applyZoomFactor()

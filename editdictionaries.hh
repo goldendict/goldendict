@@ -28,7 +28,10 @@ public:
                     QNetworkAccessManager & dictNetMgr );
 
   ~EditDictionaries()
-  { if( helpWindow ) delete helpWindow; }
+  {
+    if( helpWindow )
+      delete helpWindow;
+  }
 
   /// Instructs the dialog to position itself on editing the given group.
   void editGroup( unsigned id );
@@ -68,8 +71,9 @@ private:
 
   void acceptChangedSources( bool rebuildGroups );
 
-  void save();
-  
+  //the rebuildGroups was an initative,means to build the group if possible.
+  void save( bool rebuildGroups = false );
+
 private:
    
   Config::Class & cfg;
@@ -83,7 +87,7 @@ private:
 
   Ui::EditDictionaries ui;
   Sources sources;
-  sptr< OrderAndProps > orderAndProps;
+  QPointer<OrderAndProps> orderAndProps;
   sptr< Groups > groups;
 
   bool dictionariesChanged;

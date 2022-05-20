@@ -13,9 +13,6 @@
 #include "wstring_qt.hh"
 #include "folding.hh"
 #include "epwing_charmap.hh"
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtCore5Compat>
-#endif
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
 #define _FILE_OFFSET_BITS 64
@@ -553,8 +550,11 @@ bool EpwingBook::setSubBook( int book_nom )
   if( f.open( QFile::ReadOnly | QFile::Text ) )
   {
     QTextStream ts( &f );
-    //todo?
-//    ts.setCodec( "UTF-8" );
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+    ts.setCodec( "UTF-8" );
+#else
+    ts.setEncoding(QStringConverter::Utf8);
+#endif
 
     QString line = ts.readLine();
     while( !line.isEmpty() )
@@ -1207,8 +1207,8 @@ void EpwingBook::finalizeText( QString & text )
   // Replace references
 
   int pos = 0;
-  QRegularExpression reg1( "<R[^<]*>" );
-  QRegularExpression reg2( "</R[^<]*>" );
+  QString reg1( "<R%1>");
+  QString reg2( "</R%1>");
 
   EContainer cont( this, true );
 
@@ -1216,9 +1216,11 @@ void EpwingBook::finalizeText( QString & text )
 
   for( int x = 0; x < refCloseCount; x++ )
   {
-    pos = text.indexOf( reg1, pos );
+    auto tag1=reg1.arg(x);
+    auto tag2=reg2.arg(x);
+    pos = text.indexOf( tag1, pos );
     if( pos < 0 )
-      break;
+      continue;
 
     EB_Position ebpos;
     ebpos.page = refPages[ x ];
@@ -1244,14 +1246,13 @@ void EpwingBook::finalizeText( QString & text )
 
     QString link = "<a href=\"" + url.toEncoded() + "\">";
 
-    //todo ? iterate cap ,or replace as a whole?
-    text.replace( reg1, link );
+    text.replace( tag1, link );
 
-    pos = text.indexOf( reg2, pos );
+    pos = text.indexOf( tag2, pos );
     if( pos < 0 )
-      break;
+      continue;
 
-    text.replace( reg2, "</a>" );
+    text.replace( tag2, "</a>" );
   }
 }
 
@@ -1751,8 +1752,7 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
   refPages.append( argv[ 1 ] );
   refOffsets.append( argv[ 2 ] );
 
-  QString str;
-  str.asprintf( "</R%i>", refCloseCount );
+  QString str = QString( "</R%1>" ).arg( refCloseCount );
   refCloseCount += 1;
 
   return str.toUtf8();

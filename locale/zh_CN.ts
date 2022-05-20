@@ -40,6 +40,14 @@
     </message>
 </context>
 <context>
+    <name>ArticleInspector</name>
+    <message>
+        <location filename="../article_inspect.cpp" line="8"/>
+        <source>Inspect</source>
+        <translation>审查元素</translation>
+    </message>
+</context>
+<context>
     <name>ArticleMaker</name>
     <message>
         <location filename="../article_maker.cc" line="261"/>
@@ -3865,7 +3873,17 @@ however, the article from the topmost dictionary is shown.</source>
         <translation>自动定位到当前词典</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="668"/>
+        <location filename="../preferences.ui" line="356"/>
+        <source>Dictionary Font: </source>
+        <translation>词典字体：</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="369"/>
+        <source>set the fallback font family for dictionary</source>
+        <translation>设置词典的备用字体</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="708"/>
         <source>Show scan flag when word is selected</source>
         <translation>单词被选中时显示扫描旗标</translation>
     </message>
@@ -3952,7 +3970,7 @@ clears its network cache from disk during exit.</source>
     <message>
         <location filename="../preferences.ui" line="1444"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation>扫描——弹出非固定窗口的选项</translation>
+        <translation>非固定弹窗选项</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1450"/>
@@ -3967,7 +3985,7 @@ clears its network cache from disk during exit.</source>
     <message>
         <location filename="../preferences.ui" line="1459"/>
         <source>Popup</source>
-        <translation>弹出</translation>
+        <translation>弹窗</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
@@ -4056,7 +4074,12 @@ from mouse-over, selection, clipboard or command line</source>
         <translation>大于此大小的文章将被收起</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1817"/>
+        <location filename="../preferences.ui" line="1741"/>
+        <source>Ignore punctuation while searching</source>
+        <translation>搜索时忽略标点符号</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1751"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation>启用该选项可以激活基于同义词列表的额外搜索功能
@@ -4164,6 +4187,16 @@ from Stardict, Babylon and GLS dictionaries</source>
         <location filename="../preferences.cc" line="158"/>
         <source> MB</source>
         <translation> MB</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="645"/>
+        <source>Changing Dictionary Font Family</source>
+        <translation>更改词典的备用字体</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="646"/>
+        <source>Restart the program to apply the dictionary font family change.</source>
+        <translation>重新启动程序以应用字典的备用字体。</translation>
     </message>
 </context>
 <context>

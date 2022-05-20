@@ -3,9 +3,9 @@
 #include "language.hh"
 #include "langcoder.hh"
 #include <QMessageBox>
-#include "broken_xrecord.hh"
 #include "mainwindow.hh"
-
+#include <QWebEngineSettings>
+#include <QWebEngineProfile>
 
 Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
@@ -60,6 +60,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.interfaceLanguage->addItem( tr( "System default" ), QString() );
   ui.interfaceLanguage->addItem( QIcon( ":/flags/us.png" ), Language::localizedNameForId( LangCoder::code2toInt( "en" ) ), QString( "en_US" ) );
+  ui.fontFamilies->addItem( tr( "System default" ), QString() );
 
   // See which other translations do we have
 
@@ -94,7 +95,20 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
       prevInterfaceLanguage = x;
       break;
     }
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+  const QStringList fontFamilies = QFontDatabase::families();
+#else
+  QFontDatabase fontDb;
+  const QStringList fontFamilies = fontDb.families();
+#endif
+  for( const QString & family : fontFamilies )
+  {
+    ui.fontFamilies->addItem( family );
+  }
+  prevWebFontFamily = p.webFontFamily;
 
+  if(!p.webFontFamily.isEmpty())
+    ui.fontFamilies->setCurrentText( p.webFontFamily );
   // Fill help languages combobox
 
   ui.helpLanguage->addItem( tr( "Default" ), QString() );
@@ -215,6 +229,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
+  ui.ignorePunctuation->setChecked( p.ignorePunctuation );
+
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
 
   ui.maxDictsInContextMenu->setValue( p.maxDictionaryRefsInContextMenu );
@@ -279,9 +295,6 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   }
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
-
-  if ( !isRECORDBroken() )
-    ui.brokenXRECORD->hide();
 
   // Proxy server
 
@@ -360,6 +373,12 @@ Config::Preferences Preferences::getPreferences()
     ui.interfaceLanguage->itemData(
       ui.interfaceLanguage->currentIndex() ).toString();
 
+  //bypass the first default
+  if(ui.fontFamilies->currentIndex()>0)
+    p.webFontFamily = ui.fontFamilies->currentText();
+  else
+    p.webFontFamily = "";
+
   p.helpLanguage =
     ui.helpLanguage->itemData(
       ui.helpLanguage->currentIndex() ).toString();
@@ -424,6 +443,7 @@ Config::Preferences Preferences::getPreferences()
   p.limitInputPhraseLength = ui.limitInputPhraseLength->isChecked();
   p.inputPhraseLengthLimit = ui.inputPhraseLengthLimit->value();
   p.ignoreDiacritics = ui.ignoreDiacritics->isChecked();
+  p.ignorePunctuation = ui.ignorePunctuation->isChecked();
 
   p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
 
@@ -628,6 +648,21 @@ void Preferences::on_buttonBox_accepted()
   if ( prevInterfaceLanguage != ui.interfaceLanguage->currentIndex() )
     QMessageBox::information( this, tr( "Changing Language" ),
                               tr( "Restart the program to apply the language change." ) );
+
+  auto currentFontFamily = ui.fontFamilies->currentText();
+  if( prevWebFontFamily != currentFontFamily )
+  {
+    //reset to default font .
+    if( currentFontFamily.isEmpty() )
+    {
+      QWebEngineProfile::defaultProfile()->settings()->resetFontFamily( QWebEngineSettings::StandardFont );
+    }
+    else
+    {
+      QWebEngineProfile::defaultProfile()->settings()->setFontFamily( QWebEngineSettings::StandardFont,
+                                                                      currentFontFamily );
+    }
+  }
 }
 
 void Preferences::on_useExternalPlayer_toggled( bool enabled )

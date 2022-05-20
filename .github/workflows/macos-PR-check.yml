@@ -1,0 +1,69 @@
+name: macos-PR-check
+
+on: 
+
+  workflow_dispatch:
+  
+  pull_request:
+    branches:
+      - dev
+      - master
+      - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-11.0]
+        qt_ver: [5.15.2,6.2.4]
+        qt_arch: [clang_64]
+    env:
+      targetName: GoldenDict
+      version: 22.4.7-alpha
+
+    steps:
+      # macos 11.0 默认环境变了,要指定
+      - name: prepare env
+        if: ${{ matrix.os == 'macos-11.0' }}
+        run: |
+          softwareupdate --all --install --force
+          sudo xcode-select --print-path
+          sudo xcode-select --switch /Library/Developer/CommandLineTools    
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      - name: Install Qt
+        if: ${{ matrix.qt_ver == '5.15.2' }}
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          cached: 'false'
+          modules: qtwebengine
+          setup-python: 'false'
+          py7zrversion: '==0.18.1'         
+      - name: Install Qt
+        if: ${{ matrix.qt_ver != '5.15.2' }}        
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia qtimageformats
+          setup-python: 'false'
+          py7zrversion: '==0.18.1'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: build macos
+        run: |
+          brew uninstall opencc hunspell ffmpeg@5 ffmpeg@4 libtiff xz lzo libogg libvorbis zstd || true
+          brew install create-dmg
+          qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support #QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
+          make -j$(nproc)

@@ -8,31 +8,24 @@ on:
     branches:
       - dev
       - master
-      # - staged
+
     paths-ignore:
       - 'docs/**'
       - ".github/**"
       - "howto/**"
       - "*.md"
       - ".clang-format"      
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
       
     env:
-      version: 22.4.23-GrainRain
-    # 步骤
+      version: 22.4.24
+      version-suffix: alpha
+      prerelease: true
+
     steps:
       - uses: actions/checkout@v3
             
@@ -46,7 +39,7 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          custom_tag: ${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
 
          
       

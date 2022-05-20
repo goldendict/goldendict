@@ -1,0 +1,75 @@
+name: Windows-PR-check
+
+on: 
+
+  workflow_dispatch:
+      
+  pull_request:
+    branches:
+      - dev
+      - master
+      - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
+jobs:
+  build:
+    name: Build
+    # see https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-2019]
+        qt_ver: [5.15.2,6.2.4]
+        qt_arch: [win64_msvc2019_64]
+
+    env:
+      targetName: GoldenDict.exe
+      version: 22.4.24
+      version-suffix: alpha
+      prerelease: true
+    steps:
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+      - name: Install Qt
+        if: ${{ matrix.qt_ver == '5.15.2' }}        
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine          
+      - name: Install Qt
+        if: ${{ matrix.qt_ver != '5.15.2' }}      
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          # target: ${{ matrix.qt_target }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia qtimageformats
+          setup-python: 'false'
+          py7zrversion: '==0.18.1'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      
+      - uses: ilammy/msvc-dev-cmd@v1
+        # with:
+        #   arch: ${{ matrix.msvc_arch }}    
+      - name: msvc-build goldendict
+        id: build
+        shell: cmd
+        run: |
+          # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          qmake "CONFIG+=zim_support" CONFIG+=release
+          nmake
+
+          echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
+          echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
+          echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
+          echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
+          echo QTDIR=%Qt6_DIR% >> %GITHUB_ENV%

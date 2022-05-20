@@ -1,6 +1,7 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
+#include "articlewebpage.h"
 #include "articlewebview.hh"
 #include <QMouseEvent>
 #include <QWebEngineView>
@@ -18,6 +19,9 @@ ArticleWebView::ArticleWebView( QWidget *parent ):
   midButtonPressed( false ),
   selectionBySingleClick( false )
 {
+  auto page = new ArticleWebPage( this );
+  connect( page, &ArticleWebPage::linkClicked, this, &ArticleWebView::linkClicked );
+  this->setPage( page );
 }
 
 ArticleWebView::~ArticleWebView()
@@ -118,8 +122,17 @@ bool ArticleWebView::eventFilter(QObject *obj, QEvent *ev) {
 
 void ArticleWebView::mousePressEvent(QMouseEvent *event)
 {
-    if (event->buttons() & Qt::MiddleButton)
-        midButtonPressed = true;
+  if( event->buttons() & Qt::MiddleButton )
+    midButtonPressed = true;
+
+  if( event->buttons() & Qt::XButton1 )
+  {
+    back();
+  }
+  if( event->buttons() & Qt::XButton2 )
+  {
+    forward();
+  }
 }
 
 void ArticleWebView::singleClickAction(QMouseEvent *event )

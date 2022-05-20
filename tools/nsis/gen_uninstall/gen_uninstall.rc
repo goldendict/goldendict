@@ -1,3 +1,0 @@
-#include <windows.h>
-
-1 RT_MANIFEST gen_uninstall.exe.manifest

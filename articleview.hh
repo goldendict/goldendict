@@ -48,9 +48,6 @@ class ArticleView: public QFrame
   QString articleToJump;
   QString rangeVarName;
 
-  //used to hold the F12 inspect source view.
-  ArticleInspector * inspector = nullptr;
-
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
   /// a multitude of requests.
@@ -282,6 +279,8 @@ signals:
   ///  signal finished javascript;
   void notifyJavascriptFinished();
 
+  void inspectSignal(QWebEngineView * view);
+
 public slots:
 
   void on_searchPrevious_clicked();
@@ -433,18 +432,17 @@ private:
 
 class ArticleViewAgent : public QObject
 {
-    Q_OBJECT
-    ArticleView* articleView;
-  public:
-    explicit ArticleViewAgent(QObject *parent = nullptr);
-    ArticleViewAgent(ArticleView* articleView);
+  Q_OBJECT
+  ArticleView * articleView;
 
-  signals:
+public:
+  ArticleViewAgent( ArticleView * articleView );
 
-  public slots:
-    Q_INVOKABLE void onJsActiveArticleChanged(QString const & id);
-    Q_INVOKABLE void linkClickedInHtml( QUrl const & );
+signals:
 
+public slots:
+  Q_INVOKABLE void onJsActiveArticleChanged( QString const & id );
+  Q_INVOKABLE void linkClickedInHtml( QUrl const & );
 };
 
 #endif

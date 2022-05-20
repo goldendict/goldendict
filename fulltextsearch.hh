@@ -188,10 +188,6 @@ class FullTextSearchDialog : public QDialog
 
   QRegExp searchRegExp;
 
-#if defined( Q_OS_WIN32 )
-  QStyle * oldBarStyle;
-#endif
-
 public:
   FullTextSearchDialog( QWidget * parent,
                         Config::Class & cfg_,

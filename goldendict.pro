@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 22.4.23-GrainRain
+VERSION = 22.4.24-alpha
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
@@ -42,7 +42,7 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
   DEFINES += MAKE_FFMPEG_PLAYER
 }
 
-QT += sql
+#QT += sql
 CONFIG += exceptions \
     rtti \
     stl  \
@@ -70,14 +70,18 @@ win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        VERSION = 22.4.23 # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
+        VERSION = 22.4.24 # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
         }
         LIBS += -L$${PWD}/winlibs/lib/msvc
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
-        QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
+        # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
+        # QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /DEBUG
+        CONFIG+=force_debug_info
+        QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
+        QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
         DEFINES += GD_NO_MANIFEST
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
         LIBS += -lshell32 -luser32 -lsapi -lole32
@@ -116,8 +120,6 @@ win32 {
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
     }
-
-    LIBS += -luxtheme
 }
 
 unix:!mac {
@@ -222,8 +224,9 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 # Input
 HEADERS += folding.hh \
     article_inspect.h \
+    articlewebpage.h \
     globalbroadcaster.h \
-    headwordslistmodel.h \
+    iframeschemehandler.h \
     inc_case_folding.hh \
     inc_diacritic_folding.hh \
     mainwindow.hh \
@@ -292,7 +295,6 @@ HEADERS += folding.hh \
     orderandprops.hh \
     language.hh \
     dictionarybar.hh \
-    broken_xrecord.hh \
     history.hh \
     atomic_rename.hh \
     articlewebview.hh \
@@ -363,8 +365,9 @@ FORMS += groups.ui \
 
 SOURCES += folding.cc \
     article_inspect.cpp \
+    articlewebpage.cpp \
     globalbroadcaster.cpp \
-    headwordslistmodel.cpp \
+    iframeschemehandler.cpp \
     main.cc \
     dictionary.cc \
     config.cc \
@@ -426,7 +429,6 @@ SOURCES += folding.cc \
     orderandprops.cc \
     language.cc \
     dictionarybar.cc \
-    broken_xrecord.cc \
     history.cc \
     atomic_rename.cc \
     articlewebview.cc \

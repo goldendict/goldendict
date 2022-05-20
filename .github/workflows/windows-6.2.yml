@@ -18,38 +18,22 @@ on:
       - "howto/**"
       - "*.md"
       - ".clang-format"      
-  pull_request:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
+
 jobs:
   build:
     name: Build
     # see https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md
-    runs-on: windows-2019
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include:
-          # see https://mirrors.cloud.tencent.com/qt/online/qtsdkrepository/windows_x86/desktop/qt5_5152/
-          - qt_ver: 6.2.4
-            qt_arch: win64_msvc2019_64
-            msvc_arch: x64
-            qt_target: x64
-            qt_arch_install: msvc2019_64
-          - qt_ver: 6.3.0
-            qt_arch: win64_msvc2019_64
-            msvc_arch: x64
-            qt_target: x64
-            qt_arch_install: msvc2019_64
+        os: [windows-2019]
+        qt_ver: [6.2.4,6.3.0]
+        qt_arch: [win64_msvc2019_64]
     env:
       targetName: GoldenDict.exe
-      version: 22.4.23-GrainRain
+      version: 22.4.24
+      version-suffix: alpha
+      prerelease: true
     steps:
       - uses: actions/setup-python@v3
         with:
@@ -84,17 +68,19 @@ jobs:
           CHANGELOG="${CHANGELOG//'%'/'%25'}"
           CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          CHANGELOG="${CHANGELOG//'\"'/'%22'}"
+          CHANGELOG="${CHANGELOG//"'"/ }"
           echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
 
       # # msvc编译
-      # - uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/msvc-dev-cmd@v1
       #   with:
       #     arch: ${{ matrix.msvc_arch }}    
       - name: msvc-build goldendict
         id: build
         shell: cmd
         run: |
-          call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
+          # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake "CONFIG+=zim_support" CONFIG+=release
           nmake
 
@@ -108,20 +94,18 @@ jobs:
       - name: package
         id: package      
         env:
-          archiveName: GoldenDict-${{ github.ref_name }}.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
+          archiveName: GoldenDict-Windows.${{ steps.vars.outputs.sha_short }}-${{ steps.vars.outputs.release_time }}
           msvcArch: ${{ matrix.msvc_arch }}
         shell: pwsh
         run: |
           & .github\scripts\windows-publish.ps1 ${env:archiveName} ${env:targetName}
            $name = ${env:archiveName}
            echo "::set-output name=packageName::$name" 
-      # tag 查询github-Release
-      # 上传artifacts          
+    
 #       - uses: actions/upload-artifact@v2
 #         with:
 #           name: ${{ steps.package.outputs.packageName }}
 #           path: ${{ steps.package.outputs.packageName }}.zip
-      # tag 上传Release
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
@@ -129,18 +113,20 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
           asset_name: ${{ matrix.qt_ver }}-${{ steps.package.outputs.packageName }}.zip
-          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
-          prerelease: false
+          release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          prerelease: ${{env.prerelease}}
           body: |
             release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
             branch:               ${{ github.ref_name }}
             commit:               ${{ steps.vars.outputs.sha_short }} 
-            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
-            Windows built with:   msvc64  Visual studio 2019
+            Qt version:           Qt5.15.2, Qt6.X  
+            Windows built with:   msvc64,  Visual studio 2019
             AppImage built with:  Ubuntu-20.04 ,latest gcc
-
+            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64
+                                  Qt6.X(Universal Build)
+                                  Qt5.15.2(Intel Kind)
             auto built by github action. use on your on risk:-)
       - name: upload goldendict.exe only
         # if: startsWith(github.event.ref, 'refs/tags/')
@@ -149,17 +135,32 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release/${{ env.targetName }}
           asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}
-          tag: v${{env.version}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
-          release_name: win-linux-macos-${{steps.vars.outputs.release_date}} 
-          prerelease: false
-          body: |
-            release on date:      ${{steps.vars.outputs.release_date}} time: ${{steps.vars.outputs.release_time_clock}}  
-            branch:               ${{ github.ref_name }}
-            commit:               ${{ steps.vars.outputs.sha_short }} 
-            Qt version:           ${{ matrix.qt_ver }} ${{ matrix.qt_arch }}
-            Windows built with:   msvc64  Visual studio 2019
-                                  goldendict.exe was provided alone ,if you have a previous version. replace this maybe ok. if not ,download the whole bundle.
-            AppImage built with:  Ubuntu-20.04 ,latest gcc
-            macos built with:     macos-10.15,macos-11.0,clang_64 x86_64(Intel Kind)
-            auto built by github action. use on your on risk:-)   
+          release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          prerelease: ${{env.prerelease}}
+
+      - name: copy nsis 
+        shell: bash
+        run: |
+          cp tools/nsis/GoldenDict.nsi ${{ steps.package.outputs.packageName }}/
+      - name: Create installer
+        uses: joncloud/makensis-action@v3.6
+        with:
+          arguments: "/V3"
+          script-file: ${{ steps.package.outputs.packageName }}/GoldenDict.nsi
+      - name: make installer 
+        run: |
+          cd ${{ steps.package.outputs.packageName }} 
+          ls *.exe
+      - name: upload goldendict installer
+        # if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ steps.package.outputs.packageName }}/GoldenDict-v22-Install.exe
+          asset_name: ${{ matrix.qt_ver }}-GoldenDict-v22-Install.exe
+          tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          overwrite: true 
+          release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
+          prerelease: ${{env.prerelease}}

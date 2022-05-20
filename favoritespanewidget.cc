@@ -11,6 +11,7 @@
 #include <QtAlgorithms>
 #include <QMap>
 #include <algorithm>
+#include <functional>
 
 #include "favoritespanewidget.hh"
 #include "gddebug.hh"
@@ -908,7 +909,11 @@ void FavoritesModel::removeItemsForIndexes( const QModelIndexList & idxList )
   {
     QModelIndexList idxSublist = itemsToDelete[ i ];
     // std::greater does not work as operator < not implemented
+    #if __cplusplus >= 201703L
+    std::sort( idxSublist.begin(), idxSublist.end(), std::not_fn( std::less< QModelIndex >() ) );
+    #else
     std::sort( idxSublist.begin(), idxSublist.end(), std::not2( std::less< QModelIndex >() ) );
+    #endif
 
     it = idxSublist.begin();
     for( ; it != idxSublist.end(); ++it )

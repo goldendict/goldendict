@@ -47,6 +47,8 @@ public:
   /// word, which gets selected by the view in response to double-click.
   void doubleClicked( QPoint pos );
 
+  void linkClicked( const QUrl & url );
+
 protected:
   QWebEngineView *createWindow(QWebEnginePage::WebWindowType type);
   bool event( QEvent * event );

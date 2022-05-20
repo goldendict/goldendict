@@ -262,6 +262,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
 
   connect(ui.definition, SIGNAL(loadProgress(int)), this,
           SLOT(loadProgress(int)));
+  connect( ui.definition, SIGNAL( linkClicked( QUrl ) ), this, SLOT( linkClicked( QUrl ) ) );
 
   connect( ui.definition->page(), SIGNAL( titleChanged( QString  ) ),
            this, SLOT( handleTitleChanged( QString  ) ) );
@@ -318,29 +319,20 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   QWebEngineSettings * settings = ui.definition->settings();
   settings->setUnknownUrlSchemePolicy(QWebEngineSettings::UnknownUrlSchemePolicy::DisallowUnknownUrlSchemes);
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
-  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  settings->defaultSettings()->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false);
-  settings->defaultSettings()->setAttribute(QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
-  settings->defaultSettings()->setAttribute(QWebEngineSettings::PlaybackRequiresUserGesture, false);
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::LocalContentCanAccessRemoteUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::LocalContentCanAccessFileUrls, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::ErrorPageEnabled, false );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
 #else
-  settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessRemoteUrls, true );
-  settings->setAttribute( QWebEngineSettings::WebAttribute::LocalContentCanAccessFileUrls, true );
-  settings->setAttribute( QWebEngineSettings::WebAttribute::ErrorPageEnabled, false );
+  settings->setAttribute( QWebEngineSettings::LocalContentCanAccessRemoteUrls, true );
+  settings->setAttribute( QWebEngineSettings::LocalContentCanAccessFileUrls, true );
+  settings->setAttribute( QWebEngineSettings::ErrorPageEnabled, false );
   settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
   settings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
+  settings->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
 #endif
-  // Load the default blank page instantly, so there would be no flicker.
-
-  QString contentType;
-  QUrl blankPage( "gdlookup://localhost?blank=1" );
-
-  sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
-                                                                 contentType );
-
-  ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
-                                             r->getFullData().size() ),
-                          blankPage );
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
 
@@ -350,7 +342,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
 
-  connect(GlobalBroadcaster::instance(), SIGNAL( emitDictIds(ActiveDictIds)), this,
+  connect(GlobalBroadcaster::instance(), SIGNAL( dictionaryChanges(ActiveDictIds)), this,
           SLOT(setActiveDictIds(ActiveDictIds)));
 
   channel = new QWebChannel(ui.definition->page());
@@ -503,20 +495,16 @@ void ArticleView::showAnticipation()
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
-void ArticleView::inspectElement(){
-  if( inspector == nullptr )
-  {
-    inspector = new ArticleInspector( this );
-    inspector->setWindowTitle( tr( "Inspect" ) );
-  }
-  inspector->setInspectPage( ui.definition );
+void ArticleView::inspectElement()
+{
+  emit inspectSignal( ui.definition );
 }
 
 void ArticleView::loadFinished( bool result )
 {
-  setZoomFactor(cfg.preferences.zoomFactor);
+  setZoomFactor( cfg.preferences.zoomFactor );
   QUrl url = ui.definition->url();
-  qDebug() << "article view loaded url:" << url.url ().left (200);
+  qDebug() << "article view loaded url:" << url.url().left( 200 );
 
   if( cfg.preferences.autoScrollToTargetArticle )
   {
@@ -1724,7 +1712,6 @@ void ArticleView::print( QPrinter * printer ) const
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
-
   QWebEnginePage* r=ui.definition->page();
   updateCurrentArticleFromCurrentFrame(ui.definition->page(), const_cast<QPoint *>(& pos));
 
@@ -2279,6 +2266,11 @@ void ArticleView::doubleClicked( QPoint pos )
   if ( cfg.preferences.doubleClickTranslates )
   {
     QString selectedText = ui.definition->selectedText();
+
+    // ignore empty word;
+    if( selectedText.isEmpty() )
+      return;
+
     emit sendWordToInputLine( selectedText );
     // Do some checks to make sure there's a sensible selection indeed
     if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
@@ -2487,34 +2479,6 @@ void ArticleView::highlightFTSResults()
 {
   closeSearch();
 
-  const QUrl & url = ui.definition->url();
-
-  bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
-
-  QString regString = Utils::Url::queryItemValue( url, "regexp" );
-  if( ignoreDiacritics )
-    regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
-  else
-    regString = regString.remove( AccentMarkHandler::accentMark() );
-
-  QRegularExpression regexp;
-  if( Utils::Url::hasQueryItem( url, "wildcards" ) )
-    regexp.setPattern( wildcardsToRegexp( regString ) );
-  else
-    regexp.setPattern( regString );
-
-  QRegularExpression::PatternOptions patternOptions =
-    QRegularExpression::DotMatchesEverythingOption | QRegularExpression::UseUnicodePropertiesOption |
-    QRegularExpression::MultilineOption | QRegularExpression::InvertedGreedinessOption;
-  if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
-    patternOptions |= QRegularExpression::CaseInsensitiveOption;
-  regexp.setPatternOptions( patternOptions );
-
-  if( regexp.pattern().isEmpty() || !regexp.isValid() )
-    return;
-
-  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ? new DiacriticsHandler : new AccentMarkHandler;
-
   // Clear any current selection
   if( ui.definition->selectedText().size() )
   {
@@ -2524,6 +2488,33 @@ void ArticleView::highlightFTSResults()
   ui.definition->page()->toPlainText(
     [ & ]( const QString pageText )
     {
+      const QUrl & url = ui.definition->url();
+
+      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
+
+      QString regString = Utils::Url::queryItemValue( url, "regexp" );
+      if( ignoreDiacritics )
+        regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
+      else
+        regString = regString.remove( AccentMarkHandler::accentMark() );
+
+      QRegularExpression regexp;
+      if( Utils::Url::hasQueryItem( url, "wildcards" ) )
+        regexp.setPattern( wildcardsToRegexp( regString ) );
+      else
+        regexp.setPattern( regString );
+
+      QRegularExpression::PatternOptions patternOptions =
+        QRegularExpression::DotMatchesEverythingOption | QRegularExpression::UseUnicodePropertiesOption |
+        QRegularExpression::MultilineOption | QRegularExpression::InvertedGreedinessOption;
+      if( !Utils::Url::hasQueryItem( url, "matchcase" ) )
+        patternOptions |= QRegularExpression::CaseInsensitiveOption;
+      regexp.setPatternOptions( patternOptions );
+
+      if( regexp.pattern().isEmpty() || !regexp.isValid() )
+        return;
+      sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ? new DiacriticsHandler : new AccentMarkHandler;
+
       marksHandler->setText( pageText );
 
       QRegularExpressionMatchIterator it = regexp.globalMatch( marksHandler->normalizedText() );
@@ -2552,7 +2543,7 @@ void ArticleView::highlightFTSResults()
 
       ftsSearchMatchCase = Utils::Url::hasQueryItem( url, "matchcase" );
 
-      QWebEnginePage::FindFlags flags( 0 );
+      QWebEnginePage::FindFlags flags( QWebEnginePage::FindBackward );
 
       if( ftsSearchMatchCase )
         flags |= QWebEnginePage::FindCaseSensitively;
@@ -2763,21 +2754,16 @@ void ResourceToSaveHandler::downloadFinished()
   }
 }
 
-ArticleViewAgent::ArticleViewAgent(QObject *parent)
-  : QObject{parent}
+ArticleViewAgent::ArticleViewAgent( ArticleView * articleView ) : QObject( articleView ), articleView( articleView )
 {
-
 }
-ArticleViewAgent::ArticleViewAgent(ArticleView *articleView)
-  : articleView(articleView)
+
+void ArticleViewAgent::onJsActiveArticleChanged( QString const & id )
 {
-
+  articleView->onJsActiveArticleChanged( id );
 }
 
-void ArticleViewAgent::onJsActiveArticleChanged(QString const & id){
-    articleView->onJsActiveArticleChanged(id);
-}
-
-void ArticleViewAgent::linkClickedInHtml(QUrl const & url){
-    articleView->linkClickedInHtml(url);
+void ArticleViewAgent::linkClickedInHtml( QUrl const & url )
+{
+  articleView->linkClickedInHtml( url );
 }

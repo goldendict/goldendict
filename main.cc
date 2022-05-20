@@ -176,6 +176,11 @@ logFile( false )
         popupGroupName = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 );
         continue;
       }
+      if( arguments[ i ].startsWith( "-style" ) )
+      {
+        // skip next argument,  -style fusion
+        i++;
+      }
       else
         word = arguments[ i ];
     }
@@ -248,7 +253,7 @@ int main( int argc, char ** argv )
 
 #endif
 
-  QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword","gdprg","gdvideo","gdpicture","gdtts"};
+  QStringList localSchemes={"gdlookup","gdau","gico","qrcx","bres","bword","gdprg","gdvideo","gdpicture","gdtts","ifr"};
 
   for (int i = 0; i < localSchemes.size(); ++i)
   {
@@ -302,7 +307,9 @@ int main( int argc, char ** argv )
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );
-  app.setStyle(new GdAppStyle);
+
+  //this line will forbid stylesheet applying on GroupComboBox
+//  app.setStyle(new GdAppStyle);
 
   #ifndef Q_OS_MAC
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );

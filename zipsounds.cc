@@ -44,7 +44,7 @@ DEF_EX( exInvalidData, "Invalid data encountered", Dictionary::Ex )
 enum
 {
   Signature = 0x5350495a, // ZIPS on little-endian, SPIZ on big-endian
-  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion
+  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion
 };
 
 struct IdxHeader
@@ -471,7 +471,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               wstring word = stripExtension( links[ x ].word );
               if( !word.empty() )
-                names.addSingleWord( word, offset );
+                names.addWord( word, offset );
             }
           }
 

@@ -46,7 +46,7 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   ui.tabs->clear();
 
   ui.tabs->addTab( &sources, QIcon(":/icons/reload.svg"), tr( "&Sources" ) );
-  ui.tabs->addTab( orderAndProps.get(), QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
+  ui.tabs->addTab( orderAndProps, QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
   ui.tabs->addTab( groups.get(), QIcon(":/icons/bookcase.svg"), tr( "&Groups" ) );
 
   connect( ui.buttons, SIGNAL( clicked( QAbstractButton * ) ),
@@ -57,7 +57,7 @@ EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
   connect( groups.get(), SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SIGNAL( showDictionaryInfo( QString const & ) ) );
 
-  connect( orderAndProps.get(), SIGNAL( showDictionaryHeadwords( QString const & ) ),
+  connect( orderAndProps, SIGNAL( showDictionaryHeadwords( QString const & ) ),
            this, SIGNAL( showDictionaryHeadwords( QString const & ) ) );
 
   connect( ui.buttons, SIGNAL( helpRequested() ),
@@ -88,14 +88,14 @@ void EditDictionaries::editGroup( unsigned id )
   }
 }
 
-void EditDictionaries::save()
+void EditDictionaries::save( bool rebuildGroups )
 {
   Config::Groups newGroups = groups->getGroups();
   Config::Group newOrder = orderAndProps->getCurrentDictionaryOrder();
   Config::Group newInactive = orderAndProps->getCurrentInactiveDictionaries();
 
-  if ( isSourcesChanged() )
-    acceptChangedSources( false );
+  if( isSourcesChanged() )
+    acceptChangedSources( rebuildGroups );
 
   if ( origCfg.groups != newGroups || origCfg.dictionaryOrder != newOrder ||
        origCfg.inactiveDictionaries != newInactive )
@@ -171,10 +171,7 @@ void EditDictionaries::rescanSources()
 void EditDictionaries::buttonBoxClicked( QAbstractButton * button )
 {
   if (ui.buttons->buttonRole(button) == QDialogButtonBox::ApplyRole) {
-    if ( isSourcesChanged() ) {
-      acceptChangedSources( true );
-    }
-    save();
+    save( true );
   }
 }
 
@@ -215,9 +212,8 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
                           // free them.
   ui.tabs->setUpdatesEnabled( false );
 
-
   groups.reset();
-  orderAndProps.reset();
+  orderAndProps.clear();
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
   dictMap = Dictionary::dictToMap(dictionaries);
@@ -250,7 +246,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
 
     ui.tabs->removeTab( 1 );
     ui.tabs->removeTab( 1 );
-    ui.tabs->insertTab( 1, orderAndProps.get(), QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
+    ui.tabs->insertTab( 1, orderAndProps, QIcon(":/icons/book.svg"), tr( "&Dictionaries" ) );
 
     ui.tabs->insertTab( 2, groups.get(), QIcon(":/icons/bookcase.svg"), tr( "&Groups" ) );
 
