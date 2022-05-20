@@ -886,6 +886,8 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     navBack->setIcon( QIcon( ":/icons/next.svg" ) );
     navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
+
+  inspector = new ArticleInspector( this );
 }
 
 void MainWindow::ctrlTabPressed()
@@ -1609,6 +1611,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
+
+  connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
+    if(inspector){
+      inspector->setInspectPage(view);
+    }
+  });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );

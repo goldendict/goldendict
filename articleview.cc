@@ -494,20 +494,16 @@ void ArticleView::showAnticipation()
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
-void ArticleView::inspectElement(){
-  if( inspector == nullptr )
-  {
-    inspector = new ArticleInspector( this );
-    inspector->setWindowTitle( tr( "Inspect" ) );
-  }
-  inspector->setInspectPage( ui.definition );
+void ArticleView::inspectElement()
+{
+  emit inspectSignal( ui.definition );
 }
 
 void ArticleView::loadFinished( bool result )
 {
-  setZoomFactor(cfg.preferences.zoomFactor);
+  setZoomFactor( cfg.preferences.zoomFactor );
   QUrl url = ui.definition->url();
-  qDebug() << "article view loaded url:" << url.url ().left (200);
+  qDebug() << "article view loaded url:" << url.url().left( 200 );
 
   if( cfg.preferences.autoScrollToTargetArticle )
   {

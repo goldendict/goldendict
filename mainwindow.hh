@@ -82,6 +82,8 @@ private:
 
   QSystemTrayIcon * trayIcon;
 
+  QPointer< ArticleInspector > inspector;
+
   WebUrlRequestInterceptor *wuri;
 
   Ui::MainWindow ui;
