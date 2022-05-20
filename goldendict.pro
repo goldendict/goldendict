@@ -79,6 +79,7 @@ win32 {
         QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
         # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         # QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /DEBUG
+        CONFIG+=force_debug_info
         QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
         QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
         DEFINES += GD_NO_MANIFEST
