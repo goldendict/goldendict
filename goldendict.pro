@@ -119,8 +119,6 @@ win32 {
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
     }
-
-    LIBS += -luxtheme
 }
 
 unix:!mac {
