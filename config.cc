@@ -89,6 +89,10 @@ ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Soc
 {
 }
 
+AnkiConnectServer::AnkiConnectServer(): enabled( false ), host("127.0.0.1"), port( 8765 )
+{
+}
+
 HotKey::HotKey(): modifiers( 0 ), key1( 0 ), key2( 0 )
 {
 }
@@ -935,6 +939,15 @@ Class load()
       c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
       c.preferences.proxyServer.systemProxyUser = proxy.namedItem( "systemProxyUser" ).toElement().text();
       c.preferences.proxyServer.systemProxyPassword = proxy.namedItem( "systemProxyPassword" ).toElement().text();
+    }
+
+    QDomNode ankiConnectServer = preferences.namedItem( "ankiConnectServer" );
+
+    if ( !ankiConnectServer.isNull() )
+    {
+      c.preferences.ankiConnectServer.enabled = ( ankiConnectServer.toElement().attribute( "enabled" ) == "1" );
+      c.preferences.ankiConnectServer.host = ankiConnectServer.namedItem( "host" ).toElement().text();
+      c.preferences.ankiConnectServer.port = ankiConnectServer.namedItem( "port" ).toElement().text().toULong();
     }
 
     if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
@@ -1869,6 +1882,24 @@ void save( Class const & c )
 
       opt = dd.createElement( "systemProxyPassword" );
       opt.appendChild( dd.createTextNode( c.preferences.proxyServer.systemProxyPassword ) );
+      proxy.appendChild( opt );
+    }
+
+    //anki connect
+    {
+      QDomElement proxy = dd.createElement( "ankiConnectServer" );
+      preferences.appendChild( proxy );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( c.preferences.ankiConnectServer.enabled ? "1" : "0" );
+      proxy.setAttributeNode( enabled );
+
+      opt = dd.createElement( "host" );
+      opt.appendChild( dd.createTextNode( c.preferences.ankiConnectServer.host ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "port" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.ankiConnectServer.port ) ) );
       proxy.appendChild( opt );
     }
 
