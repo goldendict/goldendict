@@ -348,6 +348,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   channel = new QWebChannel(ui.definition->page());
   agent = new ArticleViewAgent(this);
   attachWebChannelToHtml();
+  ankiConnector = new AnkiConnector( this, cfg );
+  connect( ankiConnector,
+           &AnkiConnector::errorText,
+           this,
+           [ this ]( QString const & errorText ) { emit statusBarMessage( errorText ); } );
 }
 
 // explicitly report the minimum size, to avoid
@@ -487,6 +492,10 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   ui.definition->load( req );
 
   ui.definition->setCursor( Qt::WaitCursor );
+}
+
+void ArticleView::sendToAnki(QString const & word, QString const & text ){
+  ankiConnector->sendToAnki(word,text);
 }
 
 void ArticleView::showAnticipation()
@@ -1721,6 +1730,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * followLinkExternal = 0;
   QAction * followLinkNewTab = 0;
   QAction * lookupSelection = 0;
+  QAction * sendToAnkiAction = 0 ;
   QAction * lookupSelectionGr = 0;
   QAction * lookupSelectionNewTab = 0;
   QAction * lookupSelectionNewTabGr = 0;
@@ -1850,6 +1860,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
+  // add anki menu
+  if( !text.isEmpty() && cfg.preferences.ankiConnectServer.enabled )
+  {
+    QString txt      = ui.definition->title();
+    sendToAnkiAction = new QAction( tr( "&Send \"%1\" to anki with selected text." ).arg( txt ), &menu );
+    menu.addAction( sendToAnkiAction );
+  }
+
   if( text.isEmpty() && !cfg.preferences.storeHistory)
   {
     QString txt = ui.definition->title();
@@ -1942,6 +1960,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+    else if( result = sendToAnkiAction )
+    {
+      sendToAnki( ui.definition->title(), ui.definition->selectedText() );
+    }
     else
     if ( result == lookupSelectionGr && groupComboBox )
       showDefinition( selectedText, groupComboBox->getCurrentGroup(), QString() );

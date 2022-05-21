@@ -9,6 +9,8 @@
 #include <QKeyEvent>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 namespace Utils
 {
@@ -75,6 +77,11 @@ inline bool ignoreKeyEvent(QKeyEvent *keyEvent) {
       keyEvent->key() == Qt::Key_Escape)
     return true;
   return false;
+}
+
+inline QString json2String( const QJsonObject & json )
+{
+  return QString( QJsonDocument( json ).toJson( QJsonDocument::Compact ) );
 }
 
 namespace AtomicInt
