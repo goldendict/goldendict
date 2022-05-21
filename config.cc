@@ -948,6 +948,8 @@ Class load()
       c.preferences.ankiConnectServer.enabled = ( ankiConnectServer.toElement().attribute( "enabled" ) == "1" );
       c.preferences.ankiConnectServer.host = ankiConnectServer.namedItem( "host" ).toElement().text();
       c.preferences.ankiConnectServer.port = ankiConnectServer.namedItem( "port" ).toElement().text().toULong();
+      c.preferences.ankiConnectServer.deck = ankiConnectServer.namedItem( "deck" ).toElement().text();
+      c.preferences.ankiConnectServer.model = ankiConnectServer.namedItem( "model" ).toElement().text();
     }
 
     if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
@@ -1900,6 +1902,14 @@ void save( Class const & c )
 
       opt = dd.createElement( "port" );
       opt.appendChild( dd.createTextNode( QString::number( c.preferences.ankiConnectServer.port ) ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "deck" );
+      opt.appendChild( dd.createTextNode( c.preferences.ankiConnectServer.deck ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "model" );
+      opt.appendChild( dd.createTextNode( c.preferences.ankiConnectServer.model ) );
       proxy.appendChild( opt );
     }
 

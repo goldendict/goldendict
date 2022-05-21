@@ -327,6 +327,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.useAnkiConnect->setChecked( p.ankiConnectServer.enabled );
   ui.ankiHost->setText( p.ankiConnectServer.host );
   ui.ankiPort->setValue( p.ankiConnectServer.port );
+  ui.ankiModel->setText( p.ankiConnectServer.model );
+  ui.ankiDeck->setText(p.ankiConnectServer.deck);
 
   connect( ui.customProxy, SIGNAL( toggled( bool ) ),
            this, SLOT( customProxyToggled( bool ) ) );
@@ -475,6 +477,8 @@ Config::Preferences Preferences::getPreferences()
   p.ankiConnectServer.enabled = ui.useAnkiConnect->isChecked();
   p.ankiConnectServer.host    = ui.ankiHost->text();
   p.ankiConnectServer.port    = (unsigned)ui.ankiPort->value();
+  p.ankiConnectServer.deck = ui.ankiDeck->text();
+  p.ankiConnectServer.model = ui.ankiModel->text();
 
   p.checkForNewReleases = ui.checkForNewReleases->isChecked();
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();

@@ -143,6 +143,8 @@ struct AnkiConnectServer
 
   QString host;
   unsigned port;
+  QString deck;
+  QString model;
 
   AnkiConnectServer();
 };

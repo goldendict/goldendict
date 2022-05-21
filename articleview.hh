@@ -19,6 +19,7 @@
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 #include <QtCore5Compat/QRegExp>
 #endif
+#include "ankiconnector.h"
 
 class ResourceToSaveHandler;
 class ArticleViewAgent ;
@@ -38,6 +39,8 @@ class ArticleView: public QFrame
   QWebChannel *channel;
   ArticleViewAgent * agent;
   Ui::ArticleView ui;
+
+  AnkiConnector  * ankiConnector;
 
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
@@ -129,6 +132,7 @@ public:
                        QRegExp const & searchRegExp, unsigned group,
                        bool ignoreDiacritics );
 
+  void sendToAnki(QString const & word, QString const & text );
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
   void showAnticipation();

@@ -223,6 +223,7 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
+    ankiconnector.h \
     article_inspect.h \
     articlewebpage.h \
     globalbroadcaster.h \
@@ -364,6 +365,7 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
+    ankiconnector.cpp \
     article_inspect.cpp \
     articlewebpage.cpp \
     globalbroadcaster.cpp \

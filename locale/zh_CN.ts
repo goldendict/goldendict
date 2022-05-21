@@ -40,6 +40,20 @@
     </message>
 </context>
 <context>
+    <name>AnkiConnector</name>
+    <message>
+        <location filename="../ankiconnector.cpp" line="56"/>
+        <source>anki: post to anki failed</source>
+        <translatorcomment>anki:发布成功</translatorcomment>
+        <translation>anki:发布失败</translation>
+    </message>
+    <message>
+        <location filename="../ankiconnector.cpp" line="76"/>
+        <source>anki: post to anki success</source>
+        <translation>anki: 发布成功</translation>
+    </message>
+</context>
+<context>
     <name>ArticleInspector</name>
     <message>
         <location filename="../article_inspect.cpp" line="8"/>
@@ -315,7 +329,12 @@
         <translation>引用的音频播放程序不存在。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1971"/>
+        <location filename="../articleview.cc" line="1867"/>
+        <source>&amp;Send &quot;%1&quot; to anki with selected text.</source>
+        <translation>将“%1”发送到anki并附带选择的文本。</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2016"/>
         <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation>声音文件(*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有文件（*.*）</translation>
     </message>
@@ -3903,7 +3922,27 @@ however, the article from the topmost dictionary is shown.</source>
         <translation>自定义设置</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1147"/>
+        <location filename="../preferences.ui" line="1087"/>
+        <source>Anki Connect</source>
+        <translation>Anki连接</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1108"/>
+        <source>http://</source>
+        <translation>http://</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1152"/>
+        <source>Deck:</source>
+        <translation>牌组：</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1162"/>
+        <source>Model:</source>
+        <translation>模板：</translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1214"/>
         <source>Some sites detect GoldenDict via HTTP headers and block the requests.
 Enable this option to workaround the problem.</source>
         <translation>部分网站屏蔽了使用 GoldenDict 浏览器标识（UA）的请求，启用此选项以绕过该问题。</translation>
@@ -4419,6 +4458,12 @@ from Stardict, Babylon and GLS dictionaries</source>
         <location filename="../stardict.cc" line="1117"/>
         <source>Date: %1%2</source>
         <translation>日期：%1%2</translation>
+    </message>
+    <message>
+        <location filename="../ankiconnector.cpp" line="55"/>
+        <location filename="../ankiconnector.cpp" line="69"/>
+        <source>anki: post to anki failed</source>
+        <translation>anki:发布失败</translation>
     </message>
 </context>
 <context>
