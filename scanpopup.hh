@@ -110,8 +110,7 @@ private:
 
   Qt::WindowFlags unpinnedWindowFlags() const;
 
-  // Translates the word from the clipboard or the clipboard selection
-  void translateWordFromClipboard(QClipboard::Mode m);
+  void setTranslateWordFromClipboard();
 
   // Hides the popup window, effectively closing it.
   void hideWindow();
@@ -125,6 +124,10 @@ private:
 
   Config::Class & cfg;
   bool isScanningEnabled;
+  bool isTranslateWordFromClipboard = false;
+  QTimer translateWordFromClipboardDelayTimer;
+  QTimer translateWordFromClipboardClearTimer;
+  QClipboard::Mode TranslateWordFromClipboardMode = QClipboard::Clipboard;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   std::vector< sptr< Dictionary::Class > > dictionariesUnmuted;
   Instances::Groups const & groups;
@@ -191,6 +194,9 @@ private:
 
 private slots:
 
+  // Translates the word from the clipboard or the clipboard selection
+  void handleTranslateWordFromClipboard();
+  void clearTranslateWordFromClipboard();
   void clipboardChanged( QClipboard::Mode );
   void mouseHovered( QString const & , bool forcePopup);
   void currentGroupChanged( QString const & );
@@ -236,7 +242,6 @@ private slots:
 
 #ifdef HAVE_X11
   void delayShow();
-#endif
+#endif 
 };
-
 #endif

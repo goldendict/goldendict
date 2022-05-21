@@ -270,6 +270,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
 
+  connect( QApplication::clipboard(), SIGNAL( dataChanged() ),
+           this, SLOT( handleTranslateWordFromClipboard() ) );
+
 #ifdef HAVE_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
@@ -309,6 +312,18 @@ ScanPopup::ScanPopup( QWidget * parent,
   mouseGrabPollTimer.setInterval( 10 );
   connect( &mouseGrabPollTimer, SIGNAL( timeout() ),
            this, SLOT(mouseGrabPoll())  );
+
+  translateWordFromClipboardDelayTimer.setSingleShot( true );
+  translateWordFromClipboardDelayTimer.setInterval( 10 );
+
+  connect( &translateWordFromClipboardDelayTimer, SIGNAL( timeout() ),
+           this, SLOT( handleTranslateWordFromClipboard() ) );
+
+  translateWordFromClipboardClearTimer.setSingleShot( true );
+  translateWordFromClipboardClearTimer.setInterval( 100 );
+
+  connect( &translateWordFromClipboardClearTimer, SIGNAL( timeout() ),
+           this, SLOT( clearTranslateWordFromClipboard() ) );
 
   MouseOver::instance().setPreferencesPtr( &( cfg.preferences ) );
 
@@ -467,12 +482,21 @@ Qt::WindowFlags ScanPopup::unpinnedWindowFlags() const
 
 void ScanPopup::translateWordFromClipboard()
 {
-	return translateWordFromClipboard(QClipboard::Clipboard);
+  TranslateWordFromClipboardMode = QClipboard::Clipboard;
+  setTranslateWordFromClipboard();
 }
 
 void ScanPopup::translateWordFromSelection()
 {
-	return translateWordFromClipboard(QClipboard::Selection);
+  TranslateWordFromClipboardMode = QClipboard::Selection;
+  setTranslateWordFromClipboard();
+}
+
+void ScanPopup::setTranslateWordFromClipboard()
+{
+  isTranslateWordFromClipboard = true;
+  translateWordFromClipboardDelayTimer.start();
+  translateWordFromClipboardClearTimer.start();
 }
 
 void ScanPopup::editGroupRequested()
@@ -480,15 +504,27 @@ void ScanPopup::editGroupRequested()
   emit editGroupRequested( ui.groupList->getCurrentGroup() );
 }
 
-void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
+void ScanPopup::handleTranslateWordFromClipboard()
 {
+  if(!isTranslateWordFromClipboard) return;
+
   GD_DPRINTF( "translating from clipboard or selection\n" );
 
   QString subtype = "plain";
 
-  QString str = QApplication::clipboard()->text( subtype, m);
+  QString str = QApplication::clipboard()->text( subtype, TranslateWordFromClipboardMode );
 
-  translateWord( str );
+  if(!str.isEmpty()) {
+    clearTranslateWordFromClipboard();
+    translateWord( str );
+  }
+}
+
+void ScanPopup::clearTranslateWordFromClipboard()
+{
+  isTranslateWordFromClipboard = false;
+  translateWordFromClipboardDelayTimer.stop();
+  translateWordFromClipboardClearTimer.stop();
 }
 
 void ScanPopup::translateWord( QString const & word )
