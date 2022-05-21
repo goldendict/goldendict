@@ -1155,12 +1155,6 @@ void expandOptionalParts( wstring & str, list< wstring > * result,
   list< wstring > * headwords;
   headwords = inside_recurse ? result : &expanded;
 
-  //if str is too long ,it can never be headwords.
-  //todo?
-  if( str.size() > 100 )
-  {
-    return;
-  }
   for( ; x < str.size(); )
   {
     wchar ch = str[ x ];

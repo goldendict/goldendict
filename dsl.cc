@@ -2153,10 +2153,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           hasString = false;
 
-          // The line read should either consist of pure whitespace, or be a
-          // headword
-
-          if ( curString.empty() )
+          // The line read should either consist of pure whitespace, or be a headword
+          // skip too long headword,it can never be headword.
+          if( curString.empty() || curString.size() > 100 )
             continue;
 
           if ( isDslWs( curString[ 0 ] ) )
