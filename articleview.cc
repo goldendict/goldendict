@@ -1960,7 +1960,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     else
     if ( result == lookupSelection )
       showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
-    else if( result = sendToAnkiAction )
+    else if( result == sendToAnkiAction )
     {
       sendToAnki( ui.definition->title(), ui.definition->selectedText() );
     }
