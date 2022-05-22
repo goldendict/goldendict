@@ -270,9 +270,6 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
 
-  connect( QApplication::clipboard(), SIGNAL( dataChanged() ),
-           this, SLOT( handleTranslateWordFromClipboard() ) );
-
 #ifdef HAVE_X11
   connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
            this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
@@ -563,6 +560,9 @@ void ScanPopup::delayShow()
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
+  if ( isTranslateWordFromClipboard && m == TranslateWordFromClipboardMode )
+      return handleTranslateWordFromClipboard();
+
   if ( !isScanningEnabled )
     return;
 #ifdef HAVE_X11
