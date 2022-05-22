@@ -72,6 +72,8 @@ ScanPopup::ScanPopup( QWidget * parent,
   QMainWindow( parent ),
   cfg( cfg_ ),
   isScanningEnabled( false ),
+  isTranslateWordFromClipboard( false ),
+  translateWordFromClipboardMode( QClipboard::Clipboard ),
   allDictionaries( allDictionaries_ ),
   groups( groups_ ),
   history( history_ ),
@@ -479,13 +481,13 @@ Qt::WindowFlags ScanPopup::unpinnedWindowFlags() const
 
 void ScanPopup::translateWordFromClipboard()
 {
-  TranslateWordFromClipboardMode = QClipboard::Clipboard;
+  translateWordFromClipboardMode = QClipboard::Clipboard;
   setTranslateWordFromClipboard();
 }
 
 void ScanPopup::translateWordFromSelection()
 {
-  TranslateWordFromClipboardMode = QClipboard::Selection;
+  translateWordFromClipboardMode = QClipboard::Selection;
   setTranslateWordFromClipboard();
 }
 
@@ -503,15 +505,16 @@ void ScanPopup::editGroupRequested()
 
 void ScanPopup::handleTranslateWordFromClipboard()
 {
-  if(!isTranslateWordFromClipboard) return;
+  if( !isTranslateWordFromClipboard )
+    return;
 
   GD_DPRINTF( "translating from clipboard or selection\n" );
 
   QString subtype = "plain";
 
-  QString str = QApplication::clipboard()->text( subtype, TranslateWordFromClipboardMode );
+  QString str = QApplication::clipboard()->text( subtype, translateWordFromClipboardMode );
 
-  if(!str.isEmpty()) {
+  if( !str.isEmpty() ) {
     clearTranslateWordFromClipboard();
     translateWord( str );
   }
@@ -560,7 +563,7 @@ void ScanPopup::delayShow()
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
-  if ( isTranslateWordFromClipboard && m == TranslateWordFromClipboardMode )
+  if ( isTranslateWordFromClipboard && m == translateWordFromClipboardMode )
       return handleTranslateWordFromClipboard();
 
   if ( !isScanningEnabled )

@@ -124,10 +124,10 @@ private:
 
   Config::Class & cfg;
   bool isScanningEnabled;
-  bool isTranslateWordFromClipboard = false;
+  bool isTranslateWordFromClipboard;
   QTimer translateWordFromClipboardDelayTimer;
   QTimer translateWordFromClipboardClearTimer;
-  QClipboard::Mode TranslateWordFromClipboardMode = QClipboard::Clipboard;
+  QClipboard::Mode translateWordFromClipboardMode;
   std::vector< sptr< Dictionary::Class > > const & allDictionaries;
   std::vector< sptr< Dictionary::Class > > dictionariesUnmuted;
   Instances::Groups const & groups;
@@ -242,6 +242,7 @@ private slots:
 
 #ifdef HAVE_X11
   void delayShow();
-#endif 
+#endif
 };
+
 #endif
