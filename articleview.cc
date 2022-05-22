@@ -2664,8 +2664,22 @@ void ArticleView::highlightFTSResults()
 void ArticleView::highlightAllFtsOccurences( QWebPage::FindFlags flags )
 {
   flags |= QWebPage::HighlightAllOccurrences;
-  for( int x = 0; x < allMatches.size(); x++ )
-    ui.definition->findText( allMatches.at( x ), flags );
+
+  // Usually allMatches contains mostly duplicates. Thus searching for each element of
+  // allMatches to highlight them takes a long time => collect unique elements into a
+  // set and search for them instead.
+  // Don't use QList::toSet() or QSet's range constructor because they reserve space
+  // for QList::size() elements, whereas the final QSet size is likely 1 or 2.
+  QSet< QString > uniqueMatches;
+  for( int x = 0; x < allMatches.size(); ++x )
+  {
+    QString const & match = allMatches.at( x );
+    // Consider words that differ only in case equal if the search is case-insensitive.
+    uniqueMatches.insert( ftsSearchMatchCase ? match : match.toLower() );
+  }
+
+  for( QSet< QString >::const_iterator it = uniqueMatches.constBegin(); it != uniqueMatches.constEnd(); ++it )
+    ui.definition->findText( *it, flags );
 }
 
 void ArticleView::performFtsFindOperation( bool backwards )
