@@ -15,7 +15,7 @@ the back template
 
 # configure goldendict
 ## 1. through toolbar=>preference=>network
-![image](https://user-images.githubusercontent.com/105986/169638498-fcb36ca7-02ac-4384-9a77-52aab657f5c1.png)
+![image](https://user-images.githubusercontent.com/105986/169657672-d1affbde-e80e-4110-8fd9-55f2645c5ee1.png)
 
 ## 2. action
 ![image](https://user-images.githubusercontent.com/105986/169638740-abecde84-d33b-45ce-932c-d465c6650334.png)
