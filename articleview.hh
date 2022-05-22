@@ -61,6 +61,7 @@ class ArticleView: public QFrame
   int ftsPosition;
 
   void highlightFTSResults();
+  void highlightAllFtsOccurences( QWebPage::FindFlags flags );
   void performFtsFindOperation( bool backwards );
 
 public:

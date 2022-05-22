@@ -2643,17 +2643,9 @@ void ArticleView::highlightFTSResults()
   if( ftsSearchMatchCase )
     flags |= QWebPage::FindCaseSensitively;
 
-#if QT_VERSION >= 0x040600
-  flags |= QWebPage::HighlightAllOccurrences;
-
-  for( int x = 0; x < allMatches.size(); x++ )
-    ui.definition->findText( allMatches.at( x ), flags );
-
-  flags &= ~QWebPage::HighlightAllOccurrences;
-#endif
-
   if( !allMatches.isEmpty() )
   {
+    highlightAllFtsOccurences( flags );
     if( ui.definition->findText( allMatches.at( 0 ), flags ) )
     {
         ui.definition->page()->currentFrame()->
@@ -2667,6 +2659,13 @@ void ArticleView::highlightFTSResults()
   ui.ftsSearchNext->setEnabled( allMatches.size()>1 );
 
   ftsSearchIsOpened = true;
+}
+
+void ArticleView::highlightAllFtsOccurences( QWebPage::FindFlags flags )
+{
+  flags |= QWebPage::HighlightAllOccurrences;
+  for( int x = 0; x < allMatches.size(); x++ )
+    ui.definition->findText( allMatches.at( x ), flags );
 }
 
 void ArticleView::performFtsFindOperation( bool backwards )
