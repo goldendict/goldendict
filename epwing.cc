@@ -1054,7 +1054,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
             for( ; ; )
             {
-              if( !head.headword.isEmpty() )
+              //skip too long headword
+              if( !head.headword.isEmpty() && head.headword.size() < 30 )
               {
                 uint32_t offset = chunks.startNewBlock();
                 chunks.addToBlock( &head.page, sizeof( head.page ) );
