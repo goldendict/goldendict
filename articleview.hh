@@ -62,7 +62,6 @@ class ArticleView: public QFrame
 
   void highlightFTSResults();
   void performFtsFindOperation( bool backwards );
-  void showFindButtons();
 
 public:
   /// The popupView flag influences contents of the context menus to be
