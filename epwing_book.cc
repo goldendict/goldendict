@@ -899,7 +899,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
       }
       else
       {
-        allHeadwordPositions[ head.headword ]<<EWPos( pos.page, pos.offset );
+        allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
         return true;
       }
     }
@@ -973,7 +973,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
     }
     else
     {
-      allHeadwordPositions[ head.headword ]<<EWPos( pos.page, pos.offset );
+      allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
       return true;
     }
   }
