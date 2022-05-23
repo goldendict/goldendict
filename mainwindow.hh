@@ -260,6 +260,8 @@ private:
                                          TranslateBoxPopup popupAction );
   void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
                                           TranslateBoxPopup popupAction );
+  void changeWebEngineViewFont();
+  
 private slots:
 
   void hotKeyActivated( int );

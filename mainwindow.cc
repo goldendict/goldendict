@@ -60,6 +60,9 @@
 #include "wstring_qt.hh"
 #endif
 
+#include <QWebEngineSettings>
+#include <QWebEngineProfile>
+
 #ifdef HAVE_X11
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 #include <QtGui/private/qtx11extras_p.h>
@@ -89,6 +92,19 @@ class InitSSLRunnable : public QRunnable
 };
 
 #endif
+
+void MainWindow::changeWebEngineViewFont()
+{
+  if( cfg.preferences.webFontFamily.isEmpty() )
+  {
+    QWebEngineProfile::defaultProfile()->settings()->resetFontFamily( QWebEngineSettings::StandardFont );
+  }
+  else
+  {
+    QWebEngineProfile::defaultProfile()->settings()->setFontFamily( QWebEngineSettings::StandardFont,
+                                                                    cfg.preferences.webFontFamily );
+  }
+}
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
@@ -760,6 +776,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
   applyProxySettings();
+
+  //set  webengineview font
+  changeWebEngineViewFont();
 
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
