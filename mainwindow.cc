@@ -1244,6 +1244,10 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::quitApp()
 {
+  if( inspector && inspector->isVisible() )
+  {
+    inspector->hide();
+  }
   commitData();
   qApp->quit();
 }
