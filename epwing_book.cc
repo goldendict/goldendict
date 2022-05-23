@@ -850,7 +850,7 @@ void EpwingBook::getFirstHeadword( EpwingHeadword & head )
   fixHeadword( head.headword );
 
   EWPos epos( pos.page, pos.offset );
-  allHeadwordPositions[ head.headword ] = epos;
+  allHeadwordPositions[ head.headword ] << epos;
 }
 
 bool EpwingBook::getNextHeadword( EpwingHeadword & head )
@@ -881,13 +881,25 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 
       if( allHeadwordPositions.contains( head.headword ) )
       {
-        EWPos epos = allHeadwordPositions[ head.headword ];
-        if( pos.page != epos.first || abs( pos.offset - epos.second ) > 4 )
+        // existed position
+        bool existed = false;
+        foreach( EWPos epos, allHeadwordPositions[ head.headword ] )
+        {
+          if( pos.page == epos.first && abs( pos.offset - epos.second ) <= 4 )
+          {
+            existed = true;
+            break;
+          }
+        }
+        if( !existed )
+        {
+          allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
           return true;
+        }
       }
       else
       {
-        allHeadwordPositions[ head.headword ] = EWPos( pos.page, pos.offset );
+        allHeadwordPositions[ head.headword ]<<EWPos( pos.page, pos.offset );
         return true;
       }
     }
@@ -943,14 +955,26 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 
     if( allHeadwordPositions.contains( head.headword ) )
     {
-      EWPos epos = allHeadwordPositions[ head.headword ];
-      if( pos.page != epos.first || abs( pos.offset - epos.second ) > 4 )
-        break;
+      // existed position
+      bool existed = false;
+      foreach( EWPos epos, allHeadwordPositions[ head.headword ] )
+      {
+        if( pos.page == epos.first && abs( pos.offset - epos.second ) <= 4 )
+        {
+          existed = true;
+          break;
+        }
+      }
+      if( !existed )
+      {
+        allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
+        return true;
+      }
     }
     else
     {
-      allHeadwordPositions[ head.headword ] = EWPos( pos.page, pos.offset );
-      break;
+      allHeadwordPositions[ head.headword ]<<EWPos( pos.page, pos.offset );
+      return true;
     }
   }
 
