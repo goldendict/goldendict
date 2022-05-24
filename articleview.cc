@@ -544,59 +544,62 @@ void ArticleView::loadFinished( bool )
     qApp->sendEvent( ui.definition, &ev );
   }
 
-  QVariant userDataVariant = ui.definition->history()->currentItem().userData();
-
-  if ( userDataVariant.type() == QVariant::Map )
-  {
-    QMap< QString, QVariant > userData = userDataVariant.toMap();
-
-    QString currentArticle = userData.value( "currentArticle" ).toString();
-
-    if ( currentArticle.size() )
-    {
-      // There's an active article saved, so set it to be active.
-      setCurrentArticle( currentArticle );
-    }
-
-    double sx = 0, sy = 0;
-
-    if ( userData.value( "sx" ).type() == QVariant::Double )
-      sx = userData.value( "sx" ).toDouble();
-
-    if ( userData.value( "sy" ).type() == QVariant::Double )
-      sy = userData.value( "sy" ).toDouble();
-
-    if ( sx != 0 || sy != 0 )
-    {
-      // Restore scroll position
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
-          QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
-    }
-  }
-  else
-  {
-    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
-    if( isScrollTo( scrollTo ) )
-    {
-      // There is no active article saved in history, but we have it as a parameter.
-      // setCurrentArticle will save it and scroll there.
-      setCurrentArticle( scrollTo, true );
-    }
-  }
-
-
-  ui.definition->unsetCursor();
-  //QApplication::restoreOverrideCursor();
-
   // Expand collapsed article if only one loaded
-  ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "gdCheckArticlesNumber();" ) );
+  ui.definition->page()->mainFrame()->evaluateJavaScript( "gdCheckArticlesNumber();" );
 
+  bool jumpedToCurrentArticle = false;
   // Jump to current article after page reloading
   if( !articleToJump.isEmpty() )
   {
-    setCurrentArticle( articleToJump, true );
+    jumpedToCurrentArticle = setCurrentArticle( articleToJump, true );
     articleToJump.clear();
   }
+
+  if( !jumpedToCurrentArticle )
+  {
+    QVariant userDataVariant = ui.definition->history()->currentItem().userData();
+
+    if ( userDataVariant.type() == QVariant::Map )
+    {
+      QMap< QString, QVariant > userData = userDataVariant.toMap();
+
+      QString currentArticle = userData.value( "currentArticle" ).toString();
+
+      if ( currentArticle.size() )
+      {
+        // There's an active article saved, so set it to be active.
+        setCurrentArticle( currentArticle );
+      }
+
+      double sx = 0, sy = 0;
+
+      if ( userData.value( "sx" ).type() == QVariant::Double )
+        sx = userData.value( "sx" ).toDouble();
+
+      if ( userData.value( "sy" ).type() == QVariant::Double )
+        sy = userData.value( "sy" ).toDouble();
+
+      if ( sx != 0 || sy != 0 )
+      {
+        // Restore scroll position
+        ui.definition->page()->mainFrame()->evaluateJavaScript(
+            QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
+      }
+    }
+    else
+    {
+      QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+      if( isScrollTo( scrollTo ) )
+      {
+        // There is no active article saved in history, but we have it as a parameter.
+        // setCurrentArticle will save it and scroll there.
+        setCurrentArticle( scrollTo, true );
+      }
+    }
+  }
+
+  ui.definition->unsetCursor();
+  //QApplication::restoreOverrideCursor();
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
@@ -729,13 +732,13 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
   }
 }
 
-void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
+bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
   if ( !isScrollTo( id ) )
-    return; // Incorrect id
+    return false; // Incorrect id
 
   if ( !ui.definition->isVisible() )
-    return; // No action on background page, scrollIntoView there don't work
+    return false; // No action on background page, scrollIntoView there don't work
 
   QString const dictionaryId = dictionaryIdFromScrollTo( id );
   if ( getArticlesList().contains( dictionaryId ) )
@@ -751,6 +754,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     ui.definition->page()->mainFrame()->evaluateJavaScript(
       QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
   }
+  return true;
 }
 
 void ArticleView::selectCurrentArticle()
