@@ -44,7 +44,7 @@ namespace {
 enum
 {
   Signature = 0x58575045, // EPWX on little-endian, XWPE on big-endian
-  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
