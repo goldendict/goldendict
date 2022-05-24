@@ -80,8 +80,8 @@ class ArticleView: public QFrame
   int ftsPosition;
 
   void highlightFTSResults();
+  void highlightAllFtsOccurences( QWebEnginePage::FindFlags flags );
   void performFtsFindOperation( bool backwards );
-  void showFindButtons();
 
 public:
   /// The popupView flag influences contents of the context menus to be
