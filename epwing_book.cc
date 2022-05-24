@@ -899,7 +899,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
       }
       else
       {
-        allHeadwordPositions[ head.headword ]<<EWPos( pos.page, pos.offset );
+        allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
         return true;
       }
     }
@@ -973,7 +973,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
     }
     else
     {
-      allHeadwordPositions[ head.headword ]<<EWPos( pos.page, pos.offset );
+      allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
       return true;
     }
   }
@@ -1127,6 +1127,9 @@ void EpwingBook::getArticle( QString & headword, QString & articleText,
 
   headword = QString::fromUtf8( buffer, length );
   finalizeText( headword );
+
+  if( text_only )
+    fixHeadword( headword );
 
   articleText = getText( pos.page, pos.offset, text_only );
 }

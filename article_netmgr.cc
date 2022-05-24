@@ -131,22 +131,11 @@ using std::string;
     emit errorOccurred( code );
   }
 
-//  void AllowFrameReply::readDataFromBase()
-//  {
-////    QByteArray data;
-////    data.resize( baseReply->bytesAvailable() );
-////    baseReply->read( data.data(), data.size() );
-////    buffer += data;
-//    emit readyRead();
-//  }
-
   qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
   {
     auto bytesAvailable= baseReply->bytesAvailable();
     qint64 size = qMin( maxSize, bytesAvailable );
     baseReply->read( data, size );
-//    memcpy( data, buffer.data(), size );
-//    buffer.remove( 0, size );
     return size;
   }
 
