@@ -1128,6 +1128,9 @@ void EpwingBook::getArticle( QString & headword, QString & articleText,
   headword = QString::fromUtf8( buffer, length );
   finalizeText( headword );
 
+  if( text_only )
+    fixHeadword( headword );
+
   articleText = getText( pos.page, pos.offset, text_only );
 }
 
