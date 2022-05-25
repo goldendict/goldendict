@@ -2806,11 +2806,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
 
   view->showDefinition( phrase, group, scrollTo );
 
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
-
   #if 0
   QUrl req;
 
@@ -2917,11 +2912,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,
                         ignoreDiacritics );
-
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 }
 
 #ifdef HAVE_X11
