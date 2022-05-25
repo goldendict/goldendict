@@ -2813,10 +2813,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
 
   view->showDefinition( phrase, group, scrollTo );
 
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
@@ -2838,11 +2834,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,
                         ignoreDiacritics );
-
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 }
 
 #ifdef HAVE_X11
