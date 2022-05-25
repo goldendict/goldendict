@@ -941,12 +941,6 @@ div.xdxf
 	background-color: #4C59A6;
 	color: white;
 }
-.mwiki td.os-suggest-result-hl {
-	/* System colors are misimplemented in Safari 3.0 and earlier,
-	   making highlighted text illegible... */
-	/* background-color: Highlight;
-	color: HighlightText; */
-}
 
 .mwiki .os-suggest-toggle {
 	position: relative;
