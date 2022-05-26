@@ -325,6 +325,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   settings->defaultSettings()->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
   settings->defaultSettings()->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
+  settings->defaultSettings()->setAttribute( QWebEngineSettings::PrintElementBackgrounds, false );
 #else
   settings->setAttribute( QWebEngineSettings::LocalContentCanAccessRemoteUrls, true );
   settings->setAttribute( QWebEngineSettings::LocalContentCanAccessFileUrls, true );
@@ -332,6 +333,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
   settings->setAttribute( QWebEngineSettings::PlaybackRequiresUserGesture, false );
   settings->setAttribute( QWebEngineSettings::JavascriptCanAccessClipboard, true );
+  settings->setAttribute( QWebEngineSettings::PrintElementBackgrounds, false );
 #endif
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
@@ -650,18 +652,18 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
   }
 }
 
-void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
+bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
   if ( !isScrollTo( id ) )
-    return; // Incorrect id
+    return false; // Incorrect id
 
   if ( !ui.definition->isVisible() )
-    return; // No action on background page, scrollIntoView there don't work
+    return false; // No action on background page, scrollIntoView there don't work
 
   if(moveToIt){
     QString dictId = id.mid( 7 );
     if( dictId.isEmpty() )
-      return;
+      return false;
     QString script = QString( "var elem=document.getElementById('%1'); "
                               "if(elem!=undefined){elem.scrollIntoView(true);} gdMakeArticleActive('%2',true);" )
                        .arg( id, dictId );
@@ -669,6 +671,7 @@ void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     ui.definition->page()->runJavaScript( script );
     setActiveArticleId( dictId );
   }
+  return true;
 }
 
 void ArticleView::selectCurrentArticle()

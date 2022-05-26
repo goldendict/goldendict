@@ -481,14 +481,11 @@ SOURCES += folding.cc \
 
 win32 {
     FORMS   += texttospeechsource.ui
-    SOURCES += wordbyauto.cc \
-               guids.c \
+    SOURCES += guids.c \
                speechclient_win.cc \
                texttospeechsource.cc \
                speechhlp.cc
-    HEADERS += wordbyauto.hh \
-               uiauto.hh \
-               texttospeechsource.hh \
+    HEADERS += texttospeechsource.hh \
                sapi.hh \
                sphelper.hh \
                speechclient.hh \

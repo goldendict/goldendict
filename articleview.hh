@@ -364,7 +364,8 @@ private:
 
   /// Sets the current article by executing a javascript code.
   /// If moveToIt is true, it moves the focus to it as well.
-  void setCurrentArticle( QString const &, bool moveToIt = false );
+  /// Returns true in case of success, false otherwise.
+  bool setCurrentArticle( QString const &, bool moveToIt = false );
 
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.

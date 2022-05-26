@@ -2813,10 +2813,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
 
   view->showDefinition( phrase, group, scrollTo );
 
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
@@ -2838,11 +2834,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,
                         ignoreDiacritics );
-
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 }
 
 #ifdef HAVE_X11
@@ -2989,7 +2980,19 @@ void MainWindow::hotKeyActivated( int hk )
     toggleMainWindow();
   else
   if ( scanPopup.get() )
+  {
+#ifdef HAVE_X11
+    // When the user requests translation with the Ctrl+C+C hotkey in certain apps
+    // on some GNU/Linux systems, GoldenDict appears to handle Ctrl+C+C before the
+    // active application finishes handling Ctrl+C. As a result, GoldenDict finds
+    // the clipboard empty, silently cancels the translation request, and users report
+    // that Ctrl+C+C is broken in these apps. Slightly delay handling the clipboard
+    // hotkey to give the active application more time and thus work around the issue.
+    QTimer::singleShot( 10, scanPopup.get(), SLOT( translateWordFromClipboard() ) );
+#else
     scanPopup->translateWordFromClipboard();
+#endif
+  }
 }
 
 void MainWindow::prepareNewReleaseChecks()
