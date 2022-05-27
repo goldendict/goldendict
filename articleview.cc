@@ -708,37 +708,12 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
                      {
                        if( framed )
                        {
-                         // QVariant result = runJavaScriptSync( ui.definition->page(), "gdLastUrlText" );
-                         QVariant result;
-
-                         if( result.type() == QVariant::String )
-                         {
-                           // Looks this way
-                           contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
-
-                           QUrl target;
-
-                           QString queryWord = result.toString();
-
-                           // Empty requests are treated as no request, so we work this around by
-                           // adding a space.
-                           if( queryWord.isEmpty() )
-                             queryWord = " ";
-
-                           target.setScheme( "gdlookup" );
-                           target.setHost( "localhost" );
-                           target.setPath( "/" + queryWord );
-
-                           url = target;
-                         }
+                         // no need to translate website internal url to gd builtin url
+                         // and lack the formulation to convert them.
+                         qDebug() << "in the website with url:" << url;
                        }
                      } );
   }
-}
-
-void ArticleView::updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame ,QPoint * point)
-{
-
 }
 
 void ArticleView::saveHistoryUserData()
@@ -1099,8 +1074,6 @@ void ArticleView::linkClicked( QUrl const & url_ )
   // Lock jump on links while Alt key is pressed
   if( kmod & Qt::AltModifier )
     return;
-
-  updateCurrentArticleFromCurrentFrame();
 
   QUrl url( url_ );
   Contexts contexts;
@@ -1725,8 +1698,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
   QWebEnginePage* r=ui.definition->page();
-  updateCurrentArticleFromCurrentFrame(ui.definition->page(), const_cast<QPoint *>(& pos));
-
   QMenu menu( this );
 
   QAction * followLink = 0;
