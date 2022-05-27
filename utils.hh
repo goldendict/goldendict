@@ -96,6 +96,7 @@ inline int loadAcquire( QAtomicInt const & ref )
 
 namespace Url
 {
+
 // This wrapper is created due to behavior change of the setPath() method
 // See: https://bugreports.qt-project.org/browse/QTBUG-27728
 //       https://codereview.qt-project.org/#change,38257
@@ -158,16 +159,15 @@ inline QString fragment( const QUrl & url )
   return url.fragment( QUrl::FullyDecoded );
 }
 
-// extract query word from url
-inline QString getWordFromUrl( const QUrl & url )
+// get the query word of bword and gdlookup scheme.
+// if the scheme is gdlookup or scheme ,the first value of pair is true,otherwise is false;
+inline std::pair< bool, QString > getQueryWord( QUrl const & url )
 {
   QString word;
-  if( url.scheme().compare( "bword" ) == 0 )
+  bool validScheme = false;
+  if( url.scheme().compare( "gdlookup" ) == 0 )
   {
-    word = url.path();
-  }
-  else if( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
-  {
+    validScheme = true;
     if( hasQueryItem( url, "word" ) )
     {
       word = queryItemValue( url, "word" );
@@ -177,8 +177,12 @@ inline QString getWordFromUrl( const QUrl & url )
       word = url.path().mid( 1 );
     }
   }
-
-  return word;
+  if( url.scheme().compare( "bword" ) == 0 )
+  {
+    validScheme = true;
+    word        = url.path().mid( 1 );
+  }
+  return std::make_pair( validScheme, word );
 }
 }
 

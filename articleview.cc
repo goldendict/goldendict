@@ -1107,6 +1107,14 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   audioPlayer->stop();
   qDebug() << "open link url:" << url;
 
+  auto queryWord = Utils::Url::getQueryWord( url );
+  auto word      = queryWord.second;
+  if( queryWord.first && word.isEmpty() )
+  {
+    // invalid gdlookup url.
+    return;
+  }
+
   Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
@@ -1119,10 +1127,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       QStringList dictsList = Utils::Url::queryItemValue( ref, "dictionaries" )
                                           .split( ",", Qt::SkipEmptyParts );
 
-      showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
+      showDefinition( word, dictsList, QRegExp(), getGroup( ref ), false );
     }
     else
-      showDefinition( url.path(),
+      showDefinition( word,
                       getGroup( ref ), scrollTo, contexts );
   }
   else
@@ -1143,16 +1151,6 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return;
-      }
-
-      QString word;
-
-      if( Utils::Url::hasQueryItem( url, "word" ) )
-      {
-          word=Utils::Url::queryItemValue (url,"word");
-      }
-      else{
-          word=url.path ().mid (1);
       }
 
       QString newScrollTo( scrollTo );

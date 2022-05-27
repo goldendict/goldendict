@@ -515,6 +515,17 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   QNetworkRequest request;
   request.setUrl( url );
 
+  //all the url reached here must be either gdlookup or bword scheme.
+  auto queryWord = Utils::Url::getQueryWord( url );
+  auto word      = queryWord.second;
+  // or the condition can be (!queryWord.first || word.isEmpty())
+  // ( queryWord.first && word.isEmpty() ) is only part of the above condition.
+  if( queryWord.first && word.isEmpty() )
+  {
+    // invalid gdlookup url.
+    return;
+  }
+
   QNetworkReply * reply = this->mManager.getArticleReply( request );
   connect( reply, &QNetworkReply::finished, requestJob, [ = ]() { requestJob->reply( "text/html", reply ); } );
   connect( requestJob, &QObject::destroyed, reply, &QObject::deleteLater );
