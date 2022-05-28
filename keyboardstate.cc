@@ -8,7 +8,7 @@
 #include <windows.h>
 #elif defined(HAVE_X11)
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtGui/private/qtx11extras_p.h>
+#include <QGuiApplication>
 #else
 #include <QX11Info>
 #endif
@@ -44,9 +44,17 @@ bool KeyboardState::checkModifiersPressed( int mask )
     ( mask & Shift && !( keys & ( 1 << shiftKeyBit ) ) ) ||
     ( mask & Win && !( keys & ( 1 << controlKeyBit ) ) ) );
   #else
+
+#if QT_VERSION < 0x060000
+  Display *displayID = QX11Info::display();
+#else
+  QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+  Display *displayID = x11AppInfo->display();
+#endif
+
   XkbStateRec state;
 
-  XkbGetState( QX11Info::display(), XkbUseCoreKbd, &state );
+  XkbGetState( displayID, XkbUseCoreKbd, &state );
 
   return !(
     ( mask & Alt && !( state.base_mods & Mod1Mask ) ) ||

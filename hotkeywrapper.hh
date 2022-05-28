@@ -10,7 +10,7 @@
 #include <X11/Xlib.h>
 #include <X11/extensions/record.h>
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtGui/private/qtx11extras_p.h>
+#include <QGuiApplication>
 #else
 #include <QX11Info>
 #endif
