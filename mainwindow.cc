@@ -1246,7 +1246,7 @@ void MainWindow::quitApp()
 {
   if( inspector && inspector->isVisible() )
   {
-    inspector->hide();
+    inspector->close();
   }
   commitData();
   qApp->quit();
@@ -1635,9 +1635,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         groupList );
 
   connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
-    if(inspector){
-      inspector->setInspectPage(view);
+    if( !inspector ){
+      inspector = new ArticleInspector( this );
     }
+    inspector->setInspectPage( view );
   });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
