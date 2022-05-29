@@ -226,13 +226,6 @@ namespace
 {
 /// Uses some heuristics to chop off the first domain name from the host name,
 /// but only if it's not too base. Returns the resulting host name.
-inline QString getHostBase( QUrl const & url )
-{
-  QString host = url.host();
-
-  return getHostBase(host);
-}
-
 inline QString getHostBase( QString const & host )
 {
   QStringList domains = host.split( '.' );
@@ -256,6 +249,13 @@ inline QString getHostBase( QString const & host )
   }
   else
     return host;
+}
+
+inline QString getHostBaseFromUrl( QUrl const & url )
+{
+  QString host = url.host();
+
+  return getHostBase( host );
 }
 }
 
