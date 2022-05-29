@@ -3,6 +3,14 @@
 ## Until to now
 
 - **CLEANING OLD/USELESS CODE**
+  - remove Runnable Class in dsl, zim , epwing etc files.
+  
+- add "send to anki"
+- right context menu actions, remove nonsense character like `OBJ`,punctuation etc.
+- epwing remove duplicate entries when index.
+
+
+## Until 2022-5-21
 - fix a zim about:blank#block [issue](https://github.com/goldendict/goldendict/issues/1472#issuecomment-1086776611)
 - add fallback font family configuration for dictionary through preference dialog.
 - fix mdx (compact html) display error on the last item.
