@@ -75,7 +75,8 @@ win32 {
             DEFINES += NOMINMAX __WIN64
         }
         LIBS += -L$${PWD}/winlibs/lib/msvc
-        QMAKE_CXXFLAGS += /wd4290 /Zc:__cplusplus /std:c++17 # silence the warning C4290: C++ exception specification ignored
+        # silence the warning C4290: C++ exception specification ignored
+        QMAKE_CXXFLAGS += /wd4290 /Zc:__cplusplus /std:c++17 /permissive- 
         # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         # QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /DEBUG
         CONFIG+=force_debug_info
