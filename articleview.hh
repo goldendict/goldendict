@@ -380,10 +380,6 @@ private:
   /// url to the appropriate "contexts" entry.
   void tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts );
 
-  /// Use the known information about the current frame to update the current
-  /// article's value.
-  void updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame = 0 ,QPoint * point=0);
-
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
   void saveHistoryUserData();

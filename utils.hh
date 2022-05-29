@@ -29,6 +29,39 @@ inline QString rstrip(const QString &str) {
 }
 
 /**
+ * remove punctuation , space, symbol
+ *
+ *
+ * " abc, '" should be "abc"
+ */
+inline QString trimNonChar( const QString & str )
+{
+  QString remain;
+  int n = str.size() - 1;
+  for( ; n >= 0; --n )
+  {
+    auto c = str.at( n );
+    if( !c.isSpace() && !c.isSymbol() && !c.isNonCharacter() && !c.isPunct()&& !c.isNull() )
+    {
+      remain = str.left( n + 1 );
+      break;
+    }
+  }
+
+  n = 0;
+  for( ; n < remain.size(); n++ )
+  {
+    auto c = remain.at( n );
+    if( !c.isSpace() && !c.isSymbol() && !c.isNonCharacter() && !c.isPunct() )
+    {
+      return remain.mid( n );
+    }
+  }
+
+  return "";
+}
+
+/**
  * str="abc\r\n\u0000" should be returned as "abc"
  * @brief rstripnull
  * @param str
@@ -37,7 +70,8 @@ inline QString rstrip(const QString &str) {
 inline QString rstripnull(const QString &str) {
   int n = str.size() - 1;
   for (; n >= 0; --n) {
-    if (!str.at(n).isSpace()&&!str.at(n).isNull()) {
+    auto c = str.at(n);
+    if (!c.isSpace()&&!c.isNull()) {
       return str.left(n + 1);
     }
   }
@@ -96,6 +130,7 @@ inline int loadAcquire( QAtomicInt const & ref )
 
 namespace Url
 {
+
 // This wrapper is created due to behavior change of the setPath() method
 // See: https://bugreports.qt-project.org/browse/QTBUG-27728
 //       https://codereview.qt-project.org/#change,38257
@@ -158,16 +193,15 @@ inline QString fragment( const QUrl & url )
   return url.fragment( QUrl::FullyDecoded );
 }
 
-// extract query word from url
-inline QString getWordFromUrl( const QUrl & url )
+// get the query word of bword and gdlookup scheme.
+// if the scheme is gdlookup or scheme ,the first value of pair is true,otherwise is false;
+inline std::pair< bool, QString > getQueryWord( QUrl const & url )
 {
   QString word;
-  if( url.scheme().compare( "bword" ) == 0 )
+  bool validScheme = false;
+  if( url.scheme().compare( "gdlookup" ) == 0 )
   {
-    word = url.path();
-  }
-  else if( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
-  {
+    validScheme = true;
     if( hasQueryItem( url, "word" ) )
     {
       word = queryItemValue( url, "word" );
@@ -177,8 +211,12 @@ inline QString getWordFromUrl( const QUrl & url )
       word = url.path().mid( 1 );
     }
   }
-
-  return word;
+  if( url.scheme().compare( "bword" ) == 0 )
+  {
+    validScheme = true;
+    word        = url.path().mid( 1 );
+  }
+  return std::make_pair( validScheme, word );
 }
 }
 
@@ -188,13 +226,6 @@ namespace
 {
 /// Uses some heuristics to chop off the first domain name from the host name,
 /// but only if it's not too base. Returns the resulting host name.
-inline QString getHostBase( QUrl const & url )
-{
-  QString host = url.host();
-
-  return getHostBase(host);
-}
-
 inline QString getHostBase( QString const & host )
 {
   QStringList domains = host.split( '.' );
@@ -218,6 +249,13 @@ inline QString getHostBase( QString const & host )
   }
   else
     return host;
+}
+
+inline QString getHostBaseFromUrl( QUrl const & url )
+{
+  QString host = url.host();
+
+  return getHostBase( host );
 }
 }
 

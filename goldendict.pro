@@ -75,7 +75,8 @@ win32 {
             DEFINES += NOMINMAX __WIN64
         }
         LIBS += -L$${PWD}/winlibs/lib/msvc
-        QMAKE_CXXFLAGS += /wd4290 /Zc:__cplusplus /std:c++17 # silence the warning C4290: C++ exception specification ignored
+        # silence the warning C4290: C++ exception specification ignored
+        QMAKE_CXXFLAGS += /wd4290 /Zc:__cplusplus /std:c++17 /permissive- 
         # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
         # QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /DEBUG
         CONFIG+=force_debug_info
@@ -124,7 +125,6 @@ unix:!mac {
     DEFINES += HAVE_X11
 
     lessThan(QT_MAJOR_VERSION, 6):     QT += x11extras
-    greaterThan(QT_MAJOR_VERSION, 5):     QT += gui-private
 
     CONFIG += link_pkgconfig
 
@@ -139,9 +139,7 @@ unix:!mac {
             libavcodec \
             libswresample \
     }
-    arm {
-        #LIBS += -liconv
-    } else {
+    !arm {
         LIBS += -lX11 -lXtst
     }
 

@@ -9,8 +9,7 @@
 class ArticleInspector : public QWidget
 {
   Q_OBJECT
-  QWebEngineView * inspectView   = nullptr;
-  QWebEnginePage * inspectedPage = nullptr;
+  QWebEngineView * viewContainer   = nullptr;
 public:
   ArticleInspector( QWidget * parent = nullptr );
 

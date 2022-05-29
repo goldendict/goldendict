@@ -468,10 +468,17 @@ void HotkeyWrapper::init()
 {
   keyToUngrab = grabbedKeys.end();
 
+#if QT_VERSION < 0x060000
+  Display *displayID = QX11Info::display();
+#else
+  QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+  Display *displayID = x11AppInfo->display();
+#endif
+
   // We use RECORD extension instead of XGrabKey. That's because XGrabKey
   // prevents other clients from getting their input if it's grabbed.
 
-  Display * display = QX11Info::display();
+  Display * display = displayID;
 
   lShiftCode = XKeysymToKeycode( display, XK_Shift_L );
   rShiftCode = XKeysymToKeycode( display, XK_Shift_R );
@@ -678,13 +685,25 @@ public:
 
   ~X11GrabUngrabErrorHandler()
   {
-    XFlush( QX11Info::display() );
+#if QT_VERSION < 0x060000
+    Display *displayID = QX11Info::display();
+#else
+    QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+    Display *displayID = x11AppInfo->display();
+#endif
+    XFlush( displayID );
     (void) XSetErrorHandler( previousErrorHandler_ );
   }
 
   bool isError() const
   {
-    XFlush( QX11Info::display() );
+#if QT_VERSION < 0x060000
+    Display *displayID = QX11Info::display();
+#else
+    QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+    Display *displayID = x11AppInfo->display();
+#endif
+    XFlush( displayID );
     return error;
   }
 
@@ -706,8 +725,14 @@ HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
 
   if ( result.second )
   {
+#if QT_VERSION < 0x060000
+    Display *displayID = QX11Info::display();
+#else
+    QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+    Display *displayID = x11AppInfo->display();
+#endif
     X11GrabUngrabErrorHandler errorHandler;
-    XGrabKey( QX11Info::display(), keyCode, modifiers, QX11Info::appRootWindow(),
+    XGrabKey( displayID, keyCode, modifiers, DefaultRootWindow(displayID),
               True, GrabModeAsync, GrabModeAsync );
 
     if ( errorHandler.isError() )
@@ -722,8 +747,14 @@ HotkeyWrapper::GrabbedKeys::iterator HotkeyWrapper::grabKey( quint32 keyCode,
 
 void HotkeyWrapper::ungrabKey( GrabbedKeys::iterator i )
 {
+#if QT_VERSION < 0x060000
+  Display *displayID = QX11Info::display();
+#else
+  QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+  Display *displayID = x11AppInfo->display();
+#endif
   X11GrabUngrabErrorHandler errorHandler;
-  XUngrabKey( QX11Info::display(), i->first, i->second, QX11Info::appRootWindow() );
+  XUngrabKey( displayID, i->first, i->second, XDefaultRootWindow(displayID) );
 
   grabbedKeys.erase( i );
 
@@ -746,14 +777,25 @@ quint32 HotkeyWrapper::nativeKey(int key)
       keySymName = QKeySequence( key ).toString();
     break;
   }
-
-  Display * display = QX11Info::display();
+#if QT_VERSION < 0x060000
+    Display *displayID = QX11Info::display();
+#else
+    QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+    Display *displayID = x11AppInfo->display();
+#endif
+  Display * display = displayID;
   return XKeysymToKeycode( display, XStringToKeysym( keySymName.toLatin1().data() ) );
 }
 
 void HotkeyWrapper::unregister()
 {
-  Display * display = QX11Info::display();
+#if QT_VERSION < 0x060000
+  Display *displayID = QX11Info::display();
+#else
+  QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+  Display *displayID = x11AppInfo->display();
+#endif
+  Display * display = displayID;
 
   XRecordDisableContext( display, recordContext );
   XSync( display, False );

@@ -1132,32 +1132,8 @@ sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const &
 
 /// ZimDictionary::getArticle()
 
-class ZimArticleRequest;
-
-class ZimArticleRequestRunnable: public QRunnable
-{
-  ZimArticleRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  ZimArticleRequestRunnable( ZimArticleRequest & r_,
-                             QSemaphore & hasExited_ ): r( r_ ),
-                                                        hasExited( hasExited_ )
-  {}
-
-  ~ZimArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class ZimArticleRequest: public Dictionary::DataRequest
 {
-  friend class ZimArticleRequestRunnable;
-
   wstring word;
   vector< wstring > alts;
   ZimDictionary & dict;
@@ -1173,11 +1149,10 @@ public:
                      ZimDictionary & dict_, bool ignoreDiacritics_ ):
     word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start(
-      new ZimArticleRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by ZimArticleRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -1190,11 +1165,6 @@ public:
     //hasExited.acquire();
   }
 };
-
-void ZimArticleRequestRunnable::run()
-{
-  r.run();
-}
 
 void ZimArticleRequest::run()
 {
@@ -1336,32 +1306,8 @@ sptr< Dictionary::DataRequest > ZimDictionary::getArticle( wstring const & word,
 
 //// ZimDictionary::getResource()
 
-class ZimResourceRequest;
-
-class ZimResourceRequestRunnable: public QRunnable
-{
-  ZimResourceRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  ZimResourceRequestRunnable( ZimResourceRequest & r_,
-                              QSemaphore & hasExited_ ): r( r_ ),
-                                                         hasExited( hasExited_ )
-  {}
-
-  ~ZimResourceRequestRunnable()
-  {
-    //hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class ZimResourceRequest: public Dictionary::DataRequest
 {
-  friend class ZimResourceRequestRunnable;
-
   ZimDictionary & dict;
 
   string resourceName;
@@ -1372,12 +1318,10 @@ class ZimResourceRequest: public Dictionary::DataRequest
 public:
   ZimResourceRequest(ZimDictionary &dict_, string const &resourceName_)
       : dict(dict_), resourceName(resourceName_) {
-      //(new ZimResourceRequestRunnable(*this, hasExited))->run();
-      QThreadPool::globalInstance()->start(
-          new ZimResourceRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by ZimResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -1390,11 +1334,6 @@ public:
     //hasExited.acquire();
   }
 };
-
-void ZimResourceRequestRunnable::run()
-{
-  r.run();
-}
 
 void ZimResourceRequest::run()
 {

@@ -202,7 +202,7 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
     //        getHostBase( refererUrl ).toUtf8().data() );
 
     if ( !url.host().endsWith( refererUrl.host() ) &&
-         getHostBase( url ) != getHostBase( refererUrl ) && !url.scheme().startsWith("data") )
+         getHostBaseFromUrl( url ) != getHostBaseFromUrl( refererUrl ) && !url.scheme().startsWith("data") )
     {
       gdWarning( "Blocking element \"%s\" due to not same domain", url.toEncoded().data() );
 
@@ -254,9 +254,9 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
-  GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
+  GD_DPRINTF( "getResource: %ls", url.toString().toStdWString().c_str() );
+  GD_DPRINTF( "scheme: %ls", url.scheme().toStdWString().c_str() );
+  GD_DPRINTF( "host: %ls", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {
@@ -514,6 +514,17 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   QUrl url = requestJob->requestUrl();
   QNetworkRequest request;
   request.setUrl( url );
+
+  //all the url reached here must be either gdlookup or bword scheme.
+  auto queryWord = Utils::Url::getQueryWord( url );
+  auto word      = queryWord.second;
+  // or the condition can be (!queryWord.first || word.isEmpty())
+  // ( queryWord.first && word.isEmpty() ) is only part of the above condition.
+  if( queryWord.first && word.isEmpty() )
+  {
+    // invalid gdlookup url.
+    return;
+  }
 
   QNetworkReply * reply = this->mManager.getArticleReply( request );
   connect( reply, &QNetworkReply::finished, requestJob, [ = ]() { requestJob->reply( "text/html", reply ); } );

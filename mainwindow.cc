@@ -65,7 +65,7 @@
 
 #ifdef HAVE_X11
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtGui/private/qtx11extras_p.h>
+#include <QGuiApplication>
 #else
 #include <QX11Info>
 #endif
@@ -1246,7 +1246,7 @@ void MainWindow::quitApp()
 {
   if( inspector && inspector->isVisible() )
   {
-    inspector->hide();
+    inspector->close();
   }
   commitData();
   qApp->quit();
@@ -1635,9 +1635,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         groupList );
 
   connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
-    if(inspector){
-      inspector->setInspectPage(view);
+    if( !inspector ){
+      inspector = new ArticleInspector( this );
     }
+    inspector->setInspectPage( view );
   });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
@@ -2903,9 +2904,15 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 
     focusTranslateLine();
 #ifdef HAVE_X11
+#if QT_VERSION < 0x060000
+    Display *displayID = QX11Info::display();
+#else
+    QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+    Display *displayID = x11AppInfo->display();
+#endif
     Window wh = 0;
     int rev = 0;
-    XGetInputFocus( QX11Info::display(), &wh, &rev );
+    XGetInputFocus( displayID, &wh, &rev );
     if( wh != translateLine->internalWinId() && !byIconClick )
     {
         QPoint p( 1, 1 );
@@ -2918,17 +2925,17 @@ void MainWindow::toggleMainWindow( bool onlyShow )
         event.xbutton.x_root = p.x();
         event.xbutton.y_root = p.y();
         event.xbutton.window = internalWinId();
-        event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
+        event.xbutton.root = XDefaultRootWindow(displayID);
         event.xbutton.state = Button1Mask;
         event.xbutton.button = Button1;
         event.xbutton.same_screen = true;
         event.xbutton.time = CurrentTime;
 
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
+        XSendEvent( displayID, internalWinId(), true, 0xfff, &event );
+        XFlush( displayID );
         event.type = ButtonRelease;
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
+        XSendEvent( displayID, internalWinId(), true, 0xfff, &event );
+        XFlush( displayID );
     }
 #endif
   }
