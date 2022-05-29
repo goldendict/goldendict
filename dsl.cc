@@ -1556,32 +1556,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
 /// DslDictionary::getArticle()
 
-class DslArticleRequest;
-
-class DslArticleRequestRunnable: public QRunnable
-{
-  DslArticleRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  DslArticleRequestRunnable( DslArticleRequest & r_,
-                             QSemaphore & hasExited_ ): r( r_ ),
-                                                        hasExited( hasExited_ )
-  {}
-
-  ~DslArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class DslArticleRequest: public Dictionary::DataRequest
 {
-  friend class DslArticleRequestRunnable;
-
   wstring word;
   vector< wstring > alts;
   DslDictionary & dict;
@@ -1597,11 +1573,10 @@ public:
                      DslDictionary & dict_, bool ignoreDiacritics_ ):
     word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start(
-      new DslArticleRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by DslArticleRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -1611,14 +1586,9 @@ public:
   ~DslArticleRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
-
-void DslArticleRequestRunnable::run()
-{
-  r.run();
-}
 
 void DslArticleRequest::run()
 {
@@ -1759,32 +1729,8 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
 
 //// DslDictionary::getResource()
 
-class DslResourceRequest;
-
-class DslResourceRequestRunnable: public QRunnable
-{
-  DslResourceRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  DslResourceRequestRunnable( DslResourceRequest & r_,
-                              QSemaphore & hasExited_ ): r( r_ ),
-                                                         hasExited( hasExited_ )
-  {}
-
-  ~DslResourceRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class DslResourceRequest: public Dictionary::DataRequest
 {
-  friend class DslResourceRequestRunnable;
-
   DslDictionary & dict;
 
   string resourceName;
@@ -1799,11 +1745,10 @@ public:
     dict( dict_ ),
     resourceName( resourceName_ )
   {
-    QThreadPool::globalInstance()->start(
-      new DslResourceRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by DslResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -1813,14 +1758,9 @@ public:
   ~DslResourceRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
-
-void DslResourceRequestRunnable::run()
-{
-  r.run();
-}
 
 void DslResourceRequest::run()
 {

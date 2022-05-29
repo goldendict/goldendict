@@ -465,7 +465,7 @@ void ArticleRequest::altSearchFinished()
   if ( altSearches.empty() )
   {
 #ifdef QT_DEBUG
-    qDebug( "alts finished\n" );
+    qDebug( "alts finished" );
 #endif
 
     // They all've finished! Now we can look up bodies
@@ -534,7 +534,7 @@ void ArticleRequest::bodyFinished()
   if ( bodyDone )
     return;
 
-  GD_DPRINTF( "some body finished\n" );
+  GD_DPRINTF( "some body finished" );
 
   bool wasUpdated = false;
 
@@ -546,7 +546,7 @@ void ArticleRequest::bodyFinished()
     {
       // Good
 
-      GD_DPRINTF( "one finished.\n" );
+      GD_DPRINTF( "one finished." );
 
       Dictionary::DataRequest & req = *bodyRequests.front();
 
@@ -672,13 +672,13 @@ void ArticleRequest::bodyFinished()
 
         foundAnyDefinitions = true;
       }
-      GD_DPRINTF( "erasing..\n" );
+      GD_DPRINTF( "erasing.." );
       bodyRequests.pop_front();
-      GD_DPRINTF( "erase done..\n" );
+      GD_DPRINTF( "erase done.." );
     }
     else
     {
-      GD_DPRINTF( "one not finished.\n" );
+      GD_DPRINTF( "one not finished." );
       break;
     }
   }

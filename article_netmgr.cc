@@ -254,9 +254,9 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
-  GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
+  GD_DPRINTF( "getResource: %ls", url.toString().toStdWString().c_str() );
+  GD_DPRINTF( "scheme: %ls", url.scheme().toStdWString().c_str() );
+  GD_DPRINTF( "host: %ls", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {

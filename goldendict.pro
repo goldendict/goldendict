@@ -124,7 +124,6 @@ unix:!mac {
     DEFINES += HAVE_X11
 
     lessThan(QT_MAJOR_VERSION, 6):     QT += x11extras
-#    greaterThan(QT_MAJOR_VERSION, 5):     QT += gui-private
 
     CONFIG += link_pkgconfig
 
@@ -139,9 +138,7 @@ unix:!mac {
             libavcodec \
             libswresample \
     }
-    arm {
-        #LIBS += -liconv
-    } else {
+    !arm {
         LIBS += -lX11 -lXtst
     }
 
