@@ -1770,7 +1770,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   }
 
   QString selectedText = ui.definition->selectedText();
-  QString text = selectedText.trimmed();
+  QString text         = Utils::trimNonChar( selectedText );
 
   if ( text.size() && text.size() < 60 )
   {

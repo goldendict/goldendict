@@ -29,6 +29,39 @@ inline QString rstrip(const QString &str) {
 }
 
 /**
+ * remove punctuation , space, symbol
+ *
+ *
+ * " abc, '" should be "abc"
+ */
+inline QString trimNonChar( const QString & str )
+{
+  QString remain;
+  int n = str.size() - 1;
+  for( ; n >= 0; --n )
+  {
+    auto c = str.at( n );
+    if( !c.isSpace() && !c.isSymbol() && !c.isNonCharacter() && !c.isPunct()&& !c.isNull() )
+    {
+      remain = str.left( n + 1 );
+      break;
+    }
+  }
+
+  n = 0;
+  for( ; n < remain.size(); n++ )
+  {
+    auto c = remain.at( n );
+    if( !c.isSpace() && !c.isSymbol() && !c.isNonCharacter() && !c.isPunct() )
+    {
+      return remain.mid( n );
+    }
+  }
+
+  return "";
+}
+
+/**
  * str="abc\r\n\u0000" should be returned as "abc"
  * @brief rstripnull
  * @param str
@@ -37,7 +70,8 @@ inline QString rstrip(const QString &str) {
 inline QString rstripnull(const QString &str) {
   int n = str.size() - 1;
   for (; n >= 0; --n) {
-    if (!str.at(n).isSpace()&&!str.at(n).isNull()) {
+    auto c = str.at(n);
+    if (!c.isSpace()&&!c.isNull()) {
       return str.left(n + 1);
     }
   }
