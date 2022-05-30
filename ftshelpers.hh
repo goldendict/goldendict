@@ -65,28 +65,6 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
 
 bool isCJKChar( ushort ch );
 
-class FTSResultsRequest;
-
-class FTSResultsRequestRunnable : public QRunnable
-{
-  FTSResultsRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  FTSResultsRequestRunnable( FTSResultsRequest & r_,
-                             QSemaphore & hasExited_ ) : r( r_ ),
-                                                         hasExited( hasExited_ )
-  {}
-
-  ~FTSResultsRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class FTSResultsRequest : public Dictionary::DataRequest
 {
   BtreeIndexing::BtreeDictionary & dict;
@@ -102,7 +80,6 @@ class FTSResultsRequest : public Dictionary::DataRequest
   int wordsInIndex;
 
   QAtomicInt isCancelled;
-  QSemaphore hasExited;
 
   QList< FTS::FtsHeadword > * foundHeadwords;
 
@@ -149,11 +126,10 @@ public:
       searchString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( searchString_ ) ) );
 
     foundHeadwords = new QList< FTS::FtsHeadword >;
-    QThreadPool::globalInstance()->start(
-      new FTSResultsRequestRunnable( *this, hasExited ), -100 );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); }, -100 );
   }
 
-  void run(); // Run from another thread by DslResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -165,7 +141,6 @@ public:
     isCancelled.ref();
     if( foundHeadwords )
       delete foundHeadwords;
-    hasExited.acquire();
   }
 };
 

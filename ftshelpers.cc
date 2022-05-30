@@ -399,11 +399,6 @@ bool isCJKChar( ushort ch )
   return false;
 }
 
-void FTSResultsRequestRunnable::run()
-{
-  r.run();
-}
-
 void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                                        QStringList const & words,
                                        QRegExp const & searchRegexp )
