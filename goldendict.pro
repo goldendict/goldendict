@@ -32,6 +32,9 @@ system(echo $${VERSION}.$${GIT_HASH} on $${DATE} > version.txt)
   }
 }
 
+CONFIG( release, debug|release ) {
+  DEFINES += NDEBUG
+}
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
