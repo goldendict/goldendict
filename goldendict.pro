@@ -22,6 +22,10 @@ isEmpty( hasGit ) {
   }
 }
 
+CONFIG( release, debug|release ) {
+  DEFINES += NDEBUG
+}
+
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 
