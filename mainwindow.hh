@@ -462,6 +462,8 @@ private slots:
 
   void addWordToFavorites( QString const & word, unsigned groupId );
 
+  void addBookmarkToFavorite( QString const & text );
+
   bool isWordPresentedInFavorites( QString const & word, unsigned groupId );
 
   void sendWordToInputLine( QString const & word );
