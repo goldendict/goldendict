@@ -64,7 +64,7 @@ bool IndexedZip::loadFile( uint32_t offset, vector< char > & data )
 
   if ( !ZipFile::readLocalHeader( zip, header ) )
   {
-    GD_DPRINTF( "Failed to load header\n" );
+    GD_DPRINTF( "Failed to load header" );
     return false;
   }
 
@@ -73,13 +73,13 @@ bool IndexedZip::loadFile( uint32_t offset, vector< char > & data )
   switch( header.compressionMethod )
   {
     case ZipFile::Uncompressed:
-      GD_DPRINTF( "Uncompressed\n" );
+      GD_DPRINTF( "Uncompressed" );
       data.resize( header.uncompressedSize );
       return (size_t) zip.read( &data.front(), data.size() ) == data.size();
 
     case ZipFile::Deflated:
     {
-      GD_DPRINTF( "Deflated\n" );
+      GD_DPRINTF( "Deflated" );
 
       // Now do the deflation
 

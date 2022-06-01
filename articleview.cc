@@ -1849,7 +1849,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   if(text.size())
   {
-    saveBookmark = new QAction( tr( "Save &Bookmark \"%1\"" ).arg( text.left( 60 ) ), &menu );
+    // avoid too long in the menu ,use left 30 characters.
+    saveBookmark = new QAction( tr( "Save &Bookmark \"%1...\"" ).arg( text.left( 30 ) ), &menu );
     menu.addAction( saveBookmark );
   }
 
@@ -1952,10 +1953,10 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       QDesktopServices::openUrl( targetUrl );
     else
     if ( result == lookupSelection )
-      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      showDefinition( text, getGroup( ui.definition->url() ), getCurrentArticle() );
     else if( result == saveBookmark )
     {
-      emit saveBookmarkSignal( selectedText );
+      emit saveBookmarkSignal( text.left( 60 ) );
     }
     else if( result == sendToAnkiAction )
     {
