@@ -71,8 +71,8 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 {
   searchWords.clear();
   indexWords.clear();
-  QRegularExpression spacesRegExp( "\\W+" );
-  QRegularExpression wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}" );
+  QRegularExpression spacesRegExp( "\\W+", QRegularExpression::UseUnicodePropertiesOption );
+  QRegularExpression wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}", QRegularExpression::UseUnicodePropertiesOption );
   QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
   QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
 

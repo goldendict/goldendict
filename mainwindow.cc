@@ -3503,7 +3503,7 @@ void MainWindow::on_saveArticle_triggered()
         // MDict anchors
         QRegularExpression anchorLinkRe(
           "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])",
-          QRegularExpression::PatternOption::CaseInsensitiveOption );
+          QRegularExpression::PatternOption::CaseInsensitiveOption|QRegularExpression::UseUnicodePropertiesOption );
         html.replace( anchorLinkRe, "\\1" );
 
         if( complete )
