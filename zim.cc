@@ -128,7 +128,7 @@ __attribute__((packed))
 enum
 {
   Signature = 0x584D495A, // ZIMX on little-endian, XMIZ on big-endian
-  CurrentFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -161,13 +161,15 @@ struct Cache
   quint32 clusterNumber;
   int stamp;
   int count, size;
+  unsigned blobs_offset_size;
 
   Cache() :
     data( 0 ),
     clusterNumber( 0 ),
     stamp( -1 ),
     count( 0 ),
-    size( 0 )
+    size( 0 ),
+    blobs_offset_size( 0 )
   {}
 };
 
@@ -188,14 +190,14 @@ public:
   const ZIM_header & header() const
   { return zimHeader; }
 
-  string getClusterData( quint32 cluster_nom );
+  string getClusterData( quint32 cluster_nom, unsigned & blob_offset_size );
 
   const QString getMimeType( quint16 nom )
   { return mimeTypes.value( nom ); }
 
   bool isArticleMime( quint16 mime_type )
-  { return getMimeType( mime_type ).compare( "text/html", Qt::CaseInsensitive ) == 0
-           || getMimeType( mime_type ).compare( "text/plain", Qt::CaseInsensitive ) == 0; }
+  { return getMimeType( mime_type ).startsWith( "text/html", Qt::CaseInsensitive )
+           || getMimeType( mime_type ).startsWith( "text/plain", Qt::CaseInsensitive ); }
 
 
   quint16 redirectedMimeType( RedirectEntry const & redEntry );
@@ -332,7 +334,7 @@ bool ZimFile::open()
   return true;
 }
 
-string ZimFile::getClusterData( quint32 cluster_nom )
+string ZimFile::getClusterData( quint32 cluster_nom, unsigned & blobs_offset_size )
 {
   // Check cache
   int target = 0;
@@ -366,6 +368,7 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   if( found )
   {
     // Cache hit
+    blobs_offset_size = cache[ target ].blobs_offset_size;
     return string( cache[ target ].data, cache[ target ].count );
   }
 
@@ -391,9 +394,11 @@ string ZimFile::getClusterData( quint32 cluster_nom )
 
   seek( clusterOffsets.at( nom ).first );
 
-  char compressionType;
-  if( !getChar( &compressionType ) )
+  char compressionType, cluster_info;
+  if( !getChar( &cluster_info ) )
     return string();
+  compressionType = cluster_info & 0x0F;
+  blobs_offset_size = cluster_info & 0x10 && zimHeader.majorVersion >= 6 ? 8 : 4;
 
   string decompressedData;
 
@@ -422,9 +427,16 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   // Check BLOBs number in the cluster
   // We cache multi-element clusters only
 
-  quint32 firstOffset;
-  memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
-  quint32 blobCount = ( firstOffset - 4 ) / 4;
+  quint32 firstOffset32;
+  quint64 firstOffset;
+  if( blobs_offset_size == 8 )
+    memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
+  else
+  {
+    memcpy( &firstOffset32, decompressedData.data(), sizeof(firstOffset32) );
+    firstOffset = firstOffset32;
+  }
+  quint32 blobCount = ( firstOffset - blobs_offset_size ) / blobs_offset_size;
 
   if( blobCount > 1 )
   {
@@ -448,6 +460,7 @@ string ZimFile::getClusterData( quint32 cluster_nom )
       memcpy( cache[ target ].data, decompressedData.c_str(), size );
       cache[ target ].count = size;
       cache[ target ].clusterNumber = cluster_nom;
+      cache[ target ].blobs_offset_size = blobs_offset_size;
     }
   }
 
@@ -593,23 +606,42 @@ quint32 readArticle( ZimFile & file, quint32 articleNumber, string & result,
 
     // Read cluster data
 
-    string decompressedData = file.getClusterData( artEntry.clusterNumber );
+    unsigned offset_size = 0;
+    string decompressedData = file.getClusterData( artEntry.clusterNumber, offset_size );
     if( decompressedData.empty() )
       break;
 
     // Take article data from cluster
 
-    quint32 firstOffset;
-    memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
-    quint32 blobCount = ( firstOffset - 4 ) / 4;
+    quint32 firstOffset32;
+    quint64 firstOffset;
+
+    if( offset_size == 8 )
+      memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
+    else
+    {
+      memcpy( &firstOffset32, decompressedData.data(), sizeof(firstOffset32) );
+      firstOffset = firstOffset32;
+    }
+    quint32 blobCount = ( firstOffset - offset_size ) / offset_size;
     if( artEntry.blobNumber > blobCount )
       break;
 
-    quint32 offsets[ 2 ];
-    memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 4, sizeof(offsets) );
-    quint32 size = offsets[ 1 ] - offsets[ 0 ];
-
-    result.append( decompressedData, offsets[ 0 ], size );
+    quint32 size;
+    if( offset_size == 8 )
+    {
+      quint64 offsets[ 2 ];
+      memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 8, sizeof(offsets) );
+      size = offsets[ 1 ] - offsets[ 0 ];
+      result.append( decompressedData, offsets[ 0 ], size );
+    }
+    else
+    {
+      quint32 offsets[ 2 ];
+      memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 4, sizeof(offsets) );
+      size = offsets[ 1 ] - offsets[ 0 ];
+      result.append( decompressedData, offsets[ 0 ], size );
+    }
 
     return articleNumber;
   }
@@ -1696,7 +1728,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
 
           const quint64 * ptr;
-          quint16 mimetype, redirected_mime;
+          quint16 mimetype, redirected_mime = 0xFFFF;
           ArticleEntry artEntry;
           RedirectEntry redEntry;
           string url, title;
