@@ -402,6 +402,9 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( scrollTo.size() )
     Utils::Url::addQueryItem( req, "scrollto", scrollTo );
 
+  if(delayedHighlightText.size())
+    Utils::Url::addQueryItem( req, "regexp", delayedHighlightText );
+
   Contexts::Iterator pos = contexts.find( "gdanchor" );
   if( pos != contexts.end() )
   {
@@ -579,6 +582,12 @@ void ArticleView::loadFinished( bool result )
   }
   if( Utils::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
+
+  if( !delayedHighlightText.isEmpty() )
+  {
+    // findText( delayedHighlightText, QWebEnginePage::FindCaseSensitively ,[](bool){});
+    delayedHighlightText.clear();
+  }
 }
 
 void ArticleView::loadProgress(int ){
@@ -1592,6 +1601,11 @@ void ArticleView::setSelectionBySingleClick( bool set )
   ui.definition->setSelectionBySingleClick( set );
 }
 
+void ArticleView::setDelayedHighlightText(QString const & text)
+{
+  delayedHighlightText = text;
+}
+
 void ArticleView::back()
 {
   // Don't allow navigating back to page 0, which is usually the initial
@@ -1712,6 +1726,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QAction * sendWordToInputLineAction = 0;
   QAction * saveImageAction = 0;
   QAction * saveSoundAction           = 0;
+  QAction * saveBookmark = 0;
 
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   const QWebEngineContextMenuData * menuData = &(r->contextMenuData());
@@ -1832,6 +1847,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     }
   }
 
+  if(text.size())
+  {
+    // avoid too long in the menu ,use left 30 characters.
+    saveBookmark = new QAction( tr( "Save &Bookmark \"%1...\"" ).arg( text.left( 30 ) ), &menu );
+    menu.addAction( saveBookmark );
+  }
+
   // add anki menu
   if( !text.isEmpty() && cfg.preferences.ankiConnectServer.enabled )
   {
@@ -1931,7 +1953,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       QDesktopServices::openUrl( targetUrl );
     else
     if ( result == lookupSelection )
-      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      showDefinition( text, getGroup( ui.definition->url() ), getCurrentArticle() );
+    else if( result == saveBookmark )
+    {
+      emit saveBookmarkSignal( text.left( 60 ) );
+    }
     else if( result == sendToAnkiAction )
     {
       sendToAnki( ui.definition->title(), ui.definition->selectedText() );
@@ -2333,42 +2359,44 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
   if ( backwards )
     f |= QWebEnginePage::FindBackward;
 
-  bool setMark = text.size() && !findText(text, f);
+  findText( text,
+            f,
+            [ &text, this ]( bool match )
+            {
+              bool setMark = !text.isEmpty() && !match;
 
-  if ( ui.searchText->property( "noResults" ).toBool() != setMark )
-  {
-    ui.searchText->setProperty( "noResults", setMark );
+              if( ui.searchText->property( "noResults" ).toBool() != setMark )
+              {
+                ui.searchText->setProperty( "noResults", setMark );
 
-    // Reload stylesheet
-    reloadStyleSheet();
-  }
+                // Reload stylesheet
+                reloadStyleSheet();
+              }
+            } );
 }
 
-bool ArticleView::findText(QString& text, const QWebEnginePage::FindFlags& f)
+void ArticleView::findText( QString & text,
+                            const QWebEnginePage::FindFlags & f,
+                            const std::function< void( bool match ) > & callback )
 {
-  bool r;
-  // turn async to sync invoke.
-  QSharedPointer<QEventLoop> loop = QSharedPointer<QEventLoop>(new QEventLoop());
-  QTimer::singleShot(1000, loop.data(), &QEventLoop::quit);
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-  ui.definition->findText(text, f, [&](const QWebEngineFindTextResult& result)
+#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
+  ui.definition->findText( text,
+                           f,
+                           [ callback ]( const QWebEngineFindTextResult & result )
                            {
-                             if(loop->isRunning()){
-                               r = result.numberOfMatches()>0;
-                               loop->quit();
-                             } });
+                             auto r = result.numberOfMatches() > 0;
+                             if( callback )
+                               callback( r );
+                           } );
 #else
-  ui.definition->findText(text, f, [&](bool result)
+  ui.definition->findText( text,
+                           f,
+                           [ callback ]( bool result )
                            {
-                             if(loop->isRunning()){
-                               r = result;
-                               loop->quit();
-                             } });
+                             if( callback )
+                               callback( result );
+                           } );
 #endif
-
-
-  loop->exec();
-  return r;
 }
 
 void ArticleView::reloadStyleSheet()

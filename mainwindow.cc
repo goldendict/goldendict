@@ -1690,6 +1690,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
+  connect( view, &ArticleView::saveBookmarkSignal, this, &MainWindow::addBookmarkToFavorite );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -4656,6 +4657,15 @@ void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
   ui.favoritesPaneWidget->addHeadword( folder, word );
 }
 
+void MainWindow::addBookmarkToFavorite( QString const & text )
+{
+  // get current tab word.
+  QString word        = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
+  const auto bookmark = QString( "%1~~~%2" ).arg( word, text );
+
+  ui.favoritesPaneWidget->addHeadword( nullptr, bookmark );
+}
+
 void MainWindow::addAllTabsToFavorites()
 {
   QString folder;
@@ -4728,8 +4738,22 @@ void MainWindow::headwordFromFavorites( QString const & headword,
   }
 
   // Show headword without lost of focus on Favorites tree
-  setTranslateBoxTextAndClearSuffix( headword, EscapeWildcards, DisablePopup );
-  showTranslationFor(headword );
+  // bookmark cases:   the favorite item may like this   "word~~~selectedtext"
+  auto words = headword.split( "~~~" );
+
+  setTranslateBoxTextAndClearSuffix( words[0], EscapeWildcards, DisablePopup );
+
+  //must be a bookmark.
+  if(words.size()>1)
+  {
+    auto view = getCurrentArticleView();
+    if(view)
+    {
+      view->setDelayedHighlightText(words[1]);// findText( words[ 1 ], QWebEnginePage::FindCaseSensitively );
+    }
+  }
+
+  showTranslationFor( words[ 0 ] );
 }
 
 #ifdef Q_OS_WIN32
