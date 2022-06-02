@@ -45,7 +45,7 @@ function processIframeMouseOver(newId) {
 function processIframeClick() {
     if (overIframeId != null) {
         overIframeId = overIframeId.replace('gdexpandframe-', '');
-        gdMakeArticleActive(overIframeId)
+        gdMakeArticleActive(overIframeId);
     }
 }
 
@@ -76,7 +76,7 @@ function gdExpandOptPart(expanderId, optionalId) {
             d2.style.display = 'none';
         }
     }
-};
+}
 
 function gdExpandArticle(id) {
     elem = document.getElementById('gdarticlefrom-' + id);
