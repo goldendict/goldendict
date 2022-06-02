@@ -119,6 +119,9 @@ protected:
   { return baseReply->readLine( data, maxSize ); }
   qint64 writeData( const char * data, qint64 maxSize )
   { return baseReply->write( data, maxSize ); }
+
+private slots:
+  void finishedSlot();
 };
 #endif
 

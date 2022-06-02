@@ -91,7 +91,7 @@ using std::string;
 
     connect( baseReply, SIGNAL( encrypted() ), this, SIGNAL( encrypted() ) );
 
-    connect( baseReply, SIGNAL( finished() ), this, SIGNAL( finished() ) );
+    connect( baseReply, SIGNAL( finished() ), this, SLOT( finishedSlot() ) );
 
     connect( baseReply, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ),
              this, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ) );
@@ -198,6 +198,14 @@ using std::string;
     memcpy( data, buffer.data(), size );
     buffer.remove( 0, size );
     return size;
+  }
+
+  void AllowFrameReply::finishedSlot()
+  {
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+    setFinished( true );
+#endif
+    emit finished();
   }
 
 #endif
@@ -627,7 +635,10 @@ void ArticleResourceReply::finishedSlot()
   if ( req->dataSize() < 0 )
     error( ContentNotFoundError );
 
-  finished();
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+  setFinished( true );
+#endif
+  emit finished();
 }
 
 BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
@@ -644,5 +655,9 @@ BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( par
 void BlockedNetworkReply::finishedSlot()
 {
   emit readyRead();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+  setFinished( true );
+#endif
   emit finished();
 }
