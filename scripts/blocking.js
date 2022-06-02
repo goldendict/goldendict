@@ -13,7 +13,7 @@ var gdAudioLinks = {
 };
 
 function gdMakeArticleActive(newId) {
-    if (gdCurrentArticle != 'gdfrom-' + newId) {
+    if (gdCurrentArticle !== 'gdfrom-' + newId) {
         el = document.getElementById(gdCurrentArticle);
         el.className = el.className.replace(' gdactivearticle', '');
         el = document.getElementById('gdfrom-' + newId);
@@ -58,11 +58,11 @@ window.addEventListener('load', init, false);
 function gdExpandOptPart(expanderId, optionalId) {
     var d1 = document.getElementById(expanderId);
     var i = 0;
-    if (d1.alt == '[+]') {
+    if (d1.alt === '[+]') {
         d1.alt = '[-]';
         d1.src = 'qrcx://localhost/icons/collapse_opt.png';
         for (i = 0; i < 1000; i++) {
-            var d2 = document.getElementById(optionalId + i);
+            const d2 = document.getElementById(optionalId + i);
             if (!d2)
                 break;
             d2.style.display = 'inline';
@@ -71,7 +71,7 @@ function gdExpandOptPart(expanderId, optionalId) {
         d1.alt = '[+]';
         d1.src = 'qrcx://localhost/icons/expand_opt.png';
         for (i = 0; i < 1000; i++) {
-            var d2 = document.getElementById(optionalId + i);
+            const d2 = document.getElementById(optionalId + i);
             if (!d2)
                 break;
             d2.style.display = 'none';
@@ -87,7 +87,7 @@ function gdExpandArticle(id) {
     t = null;
     if (ev)
         t = ev.target || ev.srcElement;
-    if (elem.style.display == 'inline' && t == ico) {
+    if (elem.style.display === 'inline' && t === ico) {
         elem.style.display = 'none';
         ico.className = 'gdexpandicon';
         art.className = art.className + ' gdcollapsedarticle';
@@ -97,7 +97,7 @@ function gdExpandArticle(id) {
             ev.stopPropagation();
         ico.title = '';
         nm.title = gdExpandArticleTitle;
-    } else if (elem.style.display == 'none') {
+    } else if (elem.style.display === 'none') {
         elem.style.display = 'inline';
         ico.className = 'gdcollapseicon';
         art.className = art.className.replace(' gdcollapsedarticle', '');
@@ -110,7 +110,7 @@ function gdExpandArticle(id) {
 
 function gdCheckArticlesNumber() {
     elems = document.getElementsByClassName('gddictname');
-    if (elems.length == 1) {
+    if (elems.length === 1) {
         el = elems.item(0);
         s = el.id.replace('gddictname-', '');
         el = document.getElementById('gdfrom-' + s);
