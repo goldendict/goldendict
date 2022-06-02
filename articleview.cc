@@ -50,6 +50,24 @@
 using std::map;
 using std::list;
 
+/// This class exposes only slim, minimal API to JavaScript clients in order to
+/// reduce attack surface available to potentionally malicious external scripts.
+class ArticleViewJsProxy: public QObject
+{
+  Q_OBJECT
+public:
+  /// Note: view becomes the parent of this proxy object.
+  explicit ArticleViewJsProxy( ArticleView & view ):
+    QObject( &view ), articleView( view )
+  {}
+
+  Q_INVOKABLE void onJsActiveArticleChanged( QString const & id )
+  { articleView.onJsActiveArticleChanged( id ); }
+
+private:
+  ArticleView & articleView;
+};
+
 /// AccentMarkHandler class
 ///
 /// Remove accent marks from text
@@ -222,6 +240,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   groups( groups_ ),
   popupView( popupView_ ),
   cfg( cfg_ ),
+  jsProxy( new ArticleViewJsProxy( *this ) ),
   pasteAction( this ),
   articleUpAction( this ),
   articleDownAction( this ),
@@ -1140,7 +1159,7 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
 
 void ArticleView::attachToJavaScript()
 {
-  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( QString( "articleview" ), this );
+  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( "articleview", jsProxy );
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -3090,3 +3109,5 @@ void ResourceToSaveHandler::downloadFinished()
     deleteLater();
   }
 }
+
+#include "articleview.moc"

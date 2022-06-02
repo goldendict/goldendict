@@ -15,6 +15,7 @@
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
 
+class ArticleViewJsProxy;
 class ResourceToSaveHandler;
 
 /// A widget with the web view tailored to view and handle articles -- it
@@ -31,6 +32,8 @@ class ArticleView: public QFrame
   Config::Class const & cfg;
 
   Ui::ArticleView ui;
+
+  ArticleViewJsProxy * const jsProxy;
 
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
