@@ -23,7 +23,6 @@ function gdMakeArticleActive(newId) {
         articleview.onJsActiveArticleChanged(gdCurrentArticle);
     }
 }
-var overIframeId = null;
 
 function gdSelectArticle(id) {
     var selection = window.getSelection();
@@ -32,6 +31,8 @@ function gdSelectArticle(id) {
     selection.removeAllRanges();
     selection.addRange(range);
 }
+
+var overIframeId = null;
 
 function processIframeMouseOut() {
     overIframeId = null;
