@@ -15,11 +15,10 @@ system(git describe --tags --always --dirty): hasGit=1
 
 win32{
 # date /T output is locale aware.
-    DD=$$system(date /T)
-    DATE =$$replace(DD, / , )
+    DATE=$$system(date /T)
 }
 else{
-    DATE=$$system(date '+%y%m%d')
+    DATE=$$system(date '+%Y/%m/%d')
 }
 
 system(echo $${VERSION}.$${GIT_HASH} on $${DATE} > version.txt)
