@@ -39,16 +39,26 @@ bool ftsIndexIsOldOrBad( string const & indexFile,
 
 static QString makeHiliteRegExpString( QStringList const & words,
                                        int searchMode,
-                                       int distanceBetweenWords )
+                                       int distanceBetweenWords, bool hasCJK = false )
 {
   QString searchString( "(" );
 
   QString stripWords( "(?:\\W+\\w+){0," );
   if( distanceBetweenWords >= 0 )
     stripWords += QString::number( distanceBetweenWords );
-  stripWords += "}\\W+";
+  stripWords += "}";
+
+  if(!hasCJK)
+  {
+    stripWords += "\\W+";
+  }
 
   QString boundWord( searchMode == FTS::WholeWords ? "\\b" : "(?:\\w*)");
+  if(hasCJK)
+  {
+    //no boundary for CJK
+    boundWord.clear();
+  }
 
   for( int x = 0; x < words.size(); x++ )
   {
@@ -60,6 +70,54 @@ static QString makeHiliteRegExpString( QStringList const & words,
 
   searchString += ")";
   return searchString;
+}
+
+void tokenizeCJK( QStringList & indexWords, QRegularExpression wordRegExp, QStringList list )
+{
+  QStringList wordList, hieroglyphList;
+  for( int i = 0; i < list.size(); i ++ )
+  {
+    QString word = list.at( i );
+
+    // Check for CJK symbols in word
+    bool parsed = false;
+    QString hieroglyph;
+    for( int x = 0; x < word.size(); x++ )
+      if( isCJKChar( word.at( x ).unicode() ) )
+      {
+        parsed = true;
+        hieroglyph.append( word[ x ] );
+
+        if( QChar( word.at( x ) ).isHighSurrogate()
+            &&  QChar( word[ x + 1 ] ).isLowSurrogate() )
+          hieroglyph.append( word[ ++x ] );
+
+        hieroglyphList.append( hieroglyph );
+        hieroglyph.clear();
+      }
+
+    // If word don't contains CJK symbols put it in list as is
+    if( !parsed )
+      wordList.append( word );
+  }
+
+  indexWords = wordList.filter( wordRegExp );
+  indexWords.removeDuplicates();
+
+  hieroglyphList.removeDuplicates();
+  indexWords += hieroglyphList;
+}
+
+bool containCJK( QString const & str)
+{
+  bool hasCJK = false;
+  for( int x = 0; x < str.size(); x++ )
+    if( isCJKChar( str.at( x ).unicode() ) )
+    {
+      hasCJK = true;
+      break;
+    }
+  return hasCJK;
 }
 
 bool parseSearchString( QString const & str, QStringList & indexWords,
@@ -76,38 +134,35 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
   QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
   QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
 
-  hasCJK = false;
-  for( int x = 0; x < str.size(); x++ )
-    if( isCJKChar( str.at( x ).unicode() ) )
-    {
-      hasCJK = true;
-      break;
-    }
+  hasCJK = containCJK( str );
 
   if( searchMode == FTS::WholeWords || searchMode == FTS::PlainText )
   {
-    if( hasCJK )
-      return false;
-
     // Make words list for search in article text
-    searchWords = str.normalized( QString::NormalizationForm_C )
-                     .split( spacesRegExp, Qt::SkipEmptyParts );
-
+    searchWords = str.normalized( QString::NormalizationForm_C ).split( spacesRegExp, Qt::SkipEmptyParts );
     // Make words list for index search
-    QStringList list = str.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
-    indexWords = list.filter( wordRegExp );
-    indexWords.removeDuplicates();
+    QStringList list =
+      str.normalized( QString::NormalizationForm_C ).toLower().split( spacesRegExp, Qt::SkipEmptyParts );
 
-    // Make regexp for results hilite
+    QString searchString;
+    if( hasCJK )
+    {
+      tokenizeCJK( indexWords, wordRegExp, list );
+      // QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
+      searchString         = makeHiliteRegExpString( indexWords, searchMode, distanceBetweenWords, hasCJK );
+    }
+    else
+    {
+      indexWords = list.filter( wordRegExp );
+      indexWords.removeDuplicates();
 
-    QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
-    QString searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords );
+      // Make regexp for results hilite
 
-    searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                            QRegExp::RegExp2 );
+      QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
+      searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords );
+    }
+    searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::RegExp2 );
     searchRegExp.setMinimal( true );
-
     return !indexWords.isEmpty();
   }
   else
@@ -128,38 +183,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     if( hasCJK )
     {
-      QStringList wordList, hieroglyphList;
-      for( int i = 0; i < list.size(); i ++ )
-      {
-        QString word = list.at( i );
-
-        // Check for CJK symbols in word
-        bool parsed = false;
-        QString hieroglyph;
-        for( int x = 0; x < word.size(); x++ )
-          if( isCJKChar( word.at( x ).unicode() ) )
-          {
-            parsed = true;
-            hieroglyph.append( word[ x ] );
-
-            if( QChar( word.at( x ) ).isHighSurrogate()
-                &&  QChar( word[ x + 1 ] ).isLowSurrogate() )
-              hieroglyph.append( word[ ++x ] );
-
-            hieroglyphList.append( hieroglyph );
-            hieroglyph.clear();
-          }
-
-        // If word don't contains CJK symbols put it in list as is
-        if( !parsed )
-          wordList.append( word );
-      }
-
-      indexWords = wordList.filter( wordRegExp );
-      indexWords.removeDuplicates();
-
-      hieroglyphList.removeDuplicates();
-      indexWords += hieroglyphList;
+      tokenizeCJK( indexWords, wordRegExp, list );
     }
     else
     {
@@ -543,6 +567,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           int n;
           for( n = 0; n < parsedWords.size(); n++ )
           {
+            auto parsed_word = parsedWords.at( n );
             if( ignoreWordsOrder )
             {
               int i;
@@ -550,8 +575,8 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               {
                 if( wordsList.at( i ).second )
                 {
-                  if( ( searchMode == FTS::WholeWords && parsedWords.at( n ).compare( wordsList.at( i ).first, cs ) == 0 )
-                      || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( wordsList.at( i ).first, cs ) ) )
+                  if( ( searchMode == FTS::WholeWords && parsed_word.compare( wordsList.at( i ).first, cs ) == 0 )
+                      || ( searchMode == FTS::PlainText && parsed_word.contains( wordsList.at( i ).first, cs ) ) )
                   {
                     wordsList[ i ].second = false;
 
@@ -630,8 +655,13 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
             }
             else
             {
-              if( ( searchMode == FTS::WholeWords && parsedWords.at( n ).compare( words.at( matchWordNom ), cs ) == 0 )
-                  || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( words.at( matchWordNom ), cs ) ) )
+              //for cjk word, FTS::WholeWords and FTS::PlainText actually have same effect.
+              auto match_word = words.at( matchWordNom );
+              bool hasCJK = containCJK( match_word );
+              if( ( searchMode == FTS::WholeWords &&
+                    ( ( !hasCJK&& parsed_word.compare( match_word, cs ) == 0 ) ||
+                      ( hasCJK && parsed_word.contains( match_word, cs ) ) ) )
+                  || ( searchMode == FTS::PlainText && parsed_word.contains( match_word, cs ) ) )
               {
                 matchWordNom += 1;
 
