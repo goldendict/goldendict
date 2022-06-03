@@ -351,7 +351,7 @@ void FullTextSearchDialog::accept()
                                       searchRegExp, mode,
                                       ui.matchCase->isChecked(),
                                       distanceBetweenWords,
-                                      hasCJK ) )
+                                      hasCJK, ignoreWordsOrder ) )
   {
 //    if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
 //    {

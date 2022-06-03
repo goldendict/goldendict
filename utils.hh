@@ -118,6 +118,16 @@ inline QString json2String( const QJsonObject & json )
   return QString( QJsonDocument( json ).toJson( QJsonDocument::Compact ) );
 }
 
+inline QStringList repeat( const QString str, const int times )
+{
+  QStringList list;
+  for( int i = 0; i < times; i++ )
+  {
+    list << str;
+  }
+  return list;
+}
+
 namespace AtomicInt
 {
 
