@@ -2569,7 +2569,7 @@ void ArticleView::highlightFTSResults()
 
       if( !allMatches.isEmpty() )
       {
-        highlightAllFtsOccurences( flags );
+//        highlightAllFtsOccurences( flags );
         ui.definition->findText( allMatches.at( 0 ), flags );
         // if( ui.definition->findText( allMatches.at( 0 ), flags ) )
         {
