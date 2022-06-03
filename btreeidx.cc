@@ -1402,7 +1402,7 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
       QList<uint32_t>::Iterator  it = std::lower_bound( begOffsets, endOffsets,
                                                     articleOffset );
 
-      if( it!=offsets.end())
+      if( it != offsets.end() && *it == articleOffset )
       {
         if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
           return;

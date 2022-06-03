@@ -621,7 +621,7 @@ Q_UNUSED( parent );
   for( int x = 0; x < hws.length(); x++ )
   {
     QList< FtsHeadword >::iterator it = std::lower_bound( headwords.begin(), headwords.end(), hws.at( x ) );
-    if( it != headwords.end() )
+    if( it != headwords.end() && *it == hws.at( x ) )
     {
       it->dictIDs.push_back( hws.at( x ).dictIDs.front() );
       for( QStringList::const_iterator itr = it->foundHiliteRegExps.constBegin();
