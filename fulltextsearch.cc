@@ -353,16 +353,16 @@ void FullTextSearchDialog::accept()
                                       distanceBetweenWords,
                                       hasCJK ) )
   {
-    if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
-    {
-      QMessageBox message( QMessageBox::Warning,
-                           "GoldenDict",
-                           tr( "CJK symbols in search string are not compatible with search modes \"Whole words\" and \"Plain text\"" ),
-                           QMessageBox::Ok,
-                           this );
-      message.exec();
-    }
-    else
+//    if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
+//    {
+//      QMessageBox message( QMessageBox::Warning,
+//                           "GoldenDict",
+//                           tr( "CJK symbols in search string are not compatible with search modes \"Whole words\" and \"Plain text\"" ),
+//                           QMessageBox::Ok,
+//                           this );
+//      message.exec();
+//    }
+//    else
     {
       QMessageBox message( QMessageBox::Warning,
                            "GoldenDict",
