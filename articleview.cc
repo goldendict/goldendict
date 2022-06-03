@@ -402,8 +402,11 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( scrollTo.size() )
     Utils::Url::addQueryItem( req, "scrollto", scrollTo );
 
-  if(delayedHighlightText.size())
+  if( delayedHighlightText.size() )
+  {
     Utils::Url::addQueryItem( req, "regexp", delayedHighlightText );
+    delayedHighlightText.clear();
+  }
 
   Contexts::Iterator pos = contexts.find( "gdanchor" );
   if( pos != contexts.end() )
@@ -582,12 +585,6 @@ void ArticleView::loadFinished( bool result )
   }
   if( Utils::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
-
-  if( !delayedHighlightText.isEmpty() )
-  {
-    // findText( delayedHighlightText, QWebEnginePage::FindCaseSensitively ,[](bool){});
-    delayedHighlightText.clear();
-  }
 }
 
 void ArticleView::loadProgress(int ){
