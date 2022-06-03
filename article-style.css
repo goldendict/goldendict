@@ -41,6 +41,11 @@ pre
   /*background: #ffffdd;*/
 }
 
+.gddictnamebodyseparator
+{
+  clear: both;
+}
+
 /* The 'From ' string which precedes dictionary name in the heading */
 .gdfromprefix
 {
@@ -525,7 +530,7 @@ div.xdxf
 /************* MDict dictionaries **************/
 .mdict
 {
-  margin-top: 1em;
+  /* margin-top: 1em; */
 }
 
 .mdict a[name]
