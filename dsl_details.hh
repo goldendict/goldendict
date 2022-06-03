@@ -130,7 +130,7 @@ public:
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
   DslScanner( string const & fileName ) ;
-  ~DslScanner() throw();
+  ~DslScanner() noexcept;
 
   /// Returns the detected encoding of this file.
   Encoding getEncoding() const

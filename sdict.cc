@@ -143,16 +143,16 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
 
     ~SdictDictionary();
 
-    virtual string getName() throw()
+    virtual string getName() noexcept
     { return dictionaryName; }
 
-    virtual map< Dictionary::Property, string > getProperties() throw()
+    virtual map< Dictionary::Property, string > getProperties() noexcept
     { return map< Dictionary::Property, string >(); }
 
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() noexcept
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() noexcept
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -187,7 +187,7 @@ class SdictDictionary: public BtreeIndexing::BtreeDictionary
     }
 protected:
 
-    void loadIcon() throw();
+    void loadIcon() noexcept;
 
 private:
 
@@ -240,7 +240,7 @@ SdictDictionary::~SdictDictionary()
     df.close();
 }
 
-void SdictDictionary::loadIcon() throw()
+void SdictDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

@@ -31,7 +31,7 @@ public:
   ~CharacterConversionDictionary();
 
   std::vector< gd::wstring > getAlternateWritings( gd::wstring const & )
-    throw();
+    noexcept;
 };
 
 CharacterConversionDictionary::CharacterConversionDictionary( std::string const & id,
@@ -70,7 +70,7 @@ CharacterConversionDictionary::~CharacterConversionDictionary()
 }
 
 std::vector< gd::wstring > CharacterConversionDictionary::getAlternateWritings( gd::wstring const & str )
-  throw()
+  noexcept
 {
   std::vector< gd::wstring > results;
 

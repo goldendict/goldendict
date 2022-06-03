@@ -240,7 +240,7 @@ void LoadDictionaries::handlePath( Config::Path const & path )
 #endif
 }
 
-void LoadDictionaries::indexingDictionary( string const & dictionaryName ) throw()
+void LoadDictionaries::indexingDictionary( string const & dictionaryName ) noexcept
 {
   emit indexingDictionarySignal( QString::fromUtf8( dictionaryName.c_str() ) );
 }

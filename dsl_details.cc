@@ -983,7 +983,7 @@ DslScanner::DslScanner( string const & fileName ) :
   readBufferLeft = 0;
 }
 
-DslScanner::~DslScanner() throw()
+DslScanner::~DslScanner() noexcept
 {
   gzclose( f );
 }

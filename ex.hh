@@ -14,8 +14,8 @@
 #define DEF_EX( exName, exDescription, exParent ) \
 class exName: public exParent { \
 public: \
-virtual const char * what() const throw() { return (exDescription); } \
-virtual ~exName() throw() {} };
+virtual const char * what() const noexcept { return (exDescription); } \
+virtual ~exName() noexcept {} };
 
 /// Same as DEF_EX, but takes a runtime string argument, which gets concatenated
 /// with the description.
@@ -31,7 +31,7 @@ class exName: public exParent { \
 std::string value; \
 public: \
   exName( std::string const & value_ ): value( std::string( exDescription ) + " " + value_ ) {} \
-virtual const char * what() const throw() { return value.c_str(); } \
-virtual ~exName() throw() {} };
+virtual const char * what() const noexcept { return value.c_str(); } \
+virtual ~exName() noexcept {} };
 
 #endif

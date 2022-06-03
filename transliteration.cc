@@ -22,16 +22,16 @@ BaseTransliterationDictionary::BaseTransliterationDictionary( string const & id,
   dictionaryIconLoaded = true;
 }
 
-string BaseTransliterationDictionary::getName() throw()
+string BaseTransliterationDictionary::getName() noexcept
 { return name; }
 
-map< Dictionary::Property, string > BaseTransliterationDictionary::getProperties() throw()
+map< Dictionary::Property, string > BaseTransliterationDictionary::getProperties() noexcept
 { return map< Dictionary::Property, string >(); }
 
-unsigned long BaseTransliterationDictionary::getArticleCount() throw()
+unsigned long BaseTransliterationDictionary::getArticleCount() noexcept
 { return 0; }
 
-unsigned long BaseTransliterationDictionary::getWordCount() throw()
+unsigned long BaseTransliterationDictionary::getWordCount() noexcept
 { return 0; }
 
 sptr< Dictionary::WordSearchRequest > BaseTransliterationDictionary::prefixMatch( wstring const &,
@@ -83,7 +83,7 @@ TransliterationDictionary::TransliterationDictionary( string const & id,
 }
 
 vector< wstring > TransliterationDictionary::getAlternateWritings( wstring const & str )
-  throw()
+  noexcept
 {
   vector< wstring > results;
 

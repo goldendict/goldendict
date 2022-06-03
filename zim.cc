@@ -669,16 +669,16 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
 
     ~ZimDictionary();
 
-    virtual string getName() throw()
+    virtual string getName() noexcept
     { return dictionaryName; }
 
-    virtual map< Dictionary::Property, string > getProperties() throw()
+    virtual map< Dictionary::Property, string > getProperties() noexcept
     { return map< Dictionary::Property, string >(); }
 
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() noexcept
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() noexcept
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -725,7 +725,7 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
 
 protected:
 
-    virtual void loadIcon() throw();
+    virtual void loadIcon() noexcept;
 
 private:
 
@@ -792,7 +792,7 @@ ZimDictionary::~ZimDictionary()
     df.close();
 }
 
-void ZimDictionary::loadIcon() throw()
+void ZimDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

@@ -100,19 +100,19 @@ public:
 
   ~DictdDictionary();
 
-  virtual string getName() throw()
+  virtual string getName() noexcept
   { return dictionaryName; }
 
-  virtual map< Dictionary::Property, string > getProperties() throw()
+  virtual map< Dictionary::Property, string > getProperties() noexcept
   { return map< Dictionary::Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return idxHeader.articleCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return idxHeader.wordCount; }
 
-  virtual void loadIcon() throw();
+  virtual void loadIcon() noexcept;
 
   inline virtual quint32 getLangFrom() const
   { return idxHeader.langFrom; }
@@ -215,7 +215,7 @@ string nameFromFileName( string const & indexFileName )
   return Utf8::encode( FsEncoding::decode( string( sep + 1, dot - sep - 1 ) ) );
 }
 
-void DictdDictionary::loadIcon() throw()
+void DictdDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

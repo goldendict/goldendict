@@ -79,16 +79,16 @@ public:
                       vector< string > const & dictionaryFiles,
                       QString const & iconFilename_ );
 
-  virtual string getName() throw()
+  virtual string getName() noexcept
   { return name; }
 
-  virtual map< Dictionary::Property, string > getProperties() throw()
+  virtual map< Dictionary::Property, string > getProperties() noexcept
   { return map< Dictionary::Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return idxHeader.soundsCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return getArticleCount(); }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
@@ -102,7 +102,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw();
+  virtual void loadIcon() noexcept;
 };
 
 SoundDirDictionary::SoundDirDictionary( string const & id,
@@ -289,7 +289,7 @@ sptr< Dictionary::DataRequest > SoundDirDictionary::getArticle( wstring const & 
   return ret;
 }
 
-void SoundDirDictionary::loadIcon() throw()
+void SoundDirDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

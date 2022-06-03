@@ -65,7 +65,7 @@ void loadFromFile( std::string const & n, std::vector< char > & data )
   f.read( &data.front(), data.size() );
 }
 
-bool exists( char const * filename ) throw()
+bool exists( char const * filename ) noexcept
 {
 #ifdef __WIN32
 #if defined(__WIN64) || defined(_MSC_VER)
@@ -313,7 +313,7 @@ void Class::close()
   f.close();
 }
 
-Class::~Class() throw()
+Class::~Class() noexcept
 {
   if ( f.isOpen() )
   {
