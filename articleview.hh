@@ -79,6 +79,8 @@ class ArticleView: public QFrame
   bool ftsSearchIsOpened, ftsSearchMatchCase;
   int ftsPosition;
 
+  QString delayedHighlightText;
+
   void highlightFTSResults();
   void highlightAllFtsOccurences( QWebEnginePage::FindFlags flags );
   void performFtsFindOperation( bool backwards );
@@ -157,6 +159,8 @@ public:
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
 
+  void setDelayedHighlightText(QString const & text);
+
 public slots:
 
   /// Goes back in history
@@ -227,6 +231,10 @@ public:
   ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
   ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
 
+  void findText( QString & text,
+                 const QWebEnginePage::FindFlags & f,
+                 const std::function< void( bool match ) > & callback = nullptr );
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
@@ -284,6 +292,8 @@ signals:
   void notifyJavascriptFinished();
 
   void inspectSignal(QWebEngineView * view);
+
+  void saveBookmarkSignal( const QString & bookmark );
 
 public slots:
 
@@ -391,7 +401,6 @@ private:
 
   void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
 
-  bool findText(QString& text, const QWebEnginePage::FindFlags& f);
 
   void reloadStyleSheet();
 

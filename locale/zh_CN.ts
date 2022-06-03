@@ -329,7 +329,12 @@
         <translation>引用的音频播放程序不存在。</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1867"/>
+        <location filename="../articleview.cc" line="1853"/>
+        <source>Save &amp;Bookmark &quot;%1...&quot;</source>
+        <translation>保存为书签（&amp;S）“%1...”</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1861"/>
         <source>&amp;Send &quot;%1&quot; to anki with selected text.</source>
         <translation>将“%1”发送到anki并附带选择的文本。</translation>
     </message>

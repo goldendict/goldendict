@@ -198,9 +198,6 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
 
     QUrl refererUrl = QUrl::fromEncoded( referer );
 
-    //GD_DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
-    //        getHostBase( refererUrl ).toUtf8().data() );
-
     if ( !url.host().endsWith( refererUrl.host() ) &&
          getHostBaseFromUrl( url ) != getHostBaseFromUrl( refererUrl ) && !url.scheme().startsWith("data") )
     {
@@ -449,7 +446,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   qint64 left = avail - alreadyRead;
   
   qint64 toRead = maxSize < left ? maxSize : left;
-  GD_DPRINTF( "====reading %d bytes\n", (int)toRead );
+  GD_DPRINTF( "====reading %d bytes", (int)toRead );
 
   try
   {
@@ -457,7 +454,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   }
   catch( std::exception & e )
   {
-    qWarning( "getDataSlice error: %s\n", e.what() );
+    qWarning( "getDataSlice error: %s", e.what() );
   }
 
   alreadyRead += toRead;

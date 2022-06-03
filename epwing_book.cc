@@ -857,7 +857,7 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 {
   EB_Position pos;
 
-  QRegularExpression badLinks( "#(v|n)\\d" );
+  QRegularExpression badLinks( "#(v|n)\\d", QRegularExpression::UseUnicodePropertiesOption);
 
   // At first we check references queue
   while( !LinksQueue.isEmpty() )

@@ -12,7 +12,29 @@ system(git describe --tags --always --dirty): hasGit=1
 !isEmpty(hasGit){
     GIT_HASH=$$system(git rev-parse --short=8 HEAD )
 }
-system(echo $${VERSION}.$${GIT_HASH} > version.txt)
+
+win32{
+# date /T output is locale aware.
+    DD=$$system(date /T)
+    DATE =$$replace(DD, / , )
+}
+else{
+    DATE=$$system(date '+%y%m%d')
+}
+
+system(echo $${VERSION}.$${GIT_HASH} on $${DATE} > version.txt)
+
+!CONFIG( verbose_build_output ) {
+  !win32|*-msvc* {
+    # Reduce build log verbosity except for MinGW builds (mingw-make cannot
+    # execute "@echo ..." commands inserted by qmake).
+    CONFIG += silent
+  }
+}
+
+CONFIG( release, debug|release ) {
+  DEFINES += NDEBUG
+}
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
