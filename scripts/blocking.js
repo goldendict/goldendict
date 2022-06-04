@@ -14,7 +14,7 @@ const gdAudioLinks = {
 
 function gdMakeArticleActive(newId) {
     if (gdCurrentArticle !== 'gdfrom-' + newId) {
-        el = document.getElementById(gdCurrentArticle);
+        var el = document.getElementById(gdCurrentArticle);
         el.className = el.className.replace(' gdactivearticle', '');
         el = document.getElementById('gdfrom-' + newId);
         el.className = el.className + ' gdactivearticle';
@@ -76,18 +76,18 @@ function gdExpandOptPart(expanderId, optionalId) {
 }
 
 function gdExpandArticle(id) {
-    elem = document.getElementById('gdarticlefrom-' + id);
-    ico = document.getElementById('expandicon-' + id);
-    art = document.getElementById('gdfrom-' + id);
-    ev = window.event;
-    t = null;
+    const elem = document.getElementById('gdarticlefrom-' + id);
+    const ico = document.getElementById('expandicon-' + id);
+    const art = document.getElementById('gdfrom-' + id);
+    const ev = window.event;
+    var t = null;
     if (ev)
         t = ev.target || ev.srcElement;
     if (elem.style.display === 'inline' && t === ico) {
         elem.style.display = 'none';
         ico.className = 'gdexpandicon';
         art.className = art.className + ' gdcollapsedarticle';
-        nm = document.getElementById('gddictname-' + id);
+        const nm = document.getElementById('gddictname-' + id);
         nm.style.cursor = 'pointer';
         if (ev)
             ev.stopPropagation();
@@ -97,7 +97,7 @@ function gdExpandArticle(id) {
         elem.style.display = 'inline';
         ico.className = 'gdcollapseicon';
         art.className = art.className.replace(' gdcollapsedarticle', '');
-        nm = document.getElementById('gddictname-' + id);
+        const nm = document.getElementById('gddictname-' + id);
         nm.style.cursor = 'default';
         nm.title = '';
         ico.title = gdCollapseArticleTitle;
@@ -105,10 +105,10 @@ function gdExpandArticle(id) {
 }
 
 function gdCheckArticlesNumber() {
-    elems = document.getElementsByClassName('gddictname');
+    const elems = document.getElementsByClassName('gddictname');
     if (elems.length === 1) {
-        el = elems.item(0);
-        s = el.id.replace('gddictname-', '');
+        var el = elems.item(0);
+        const s = el.id.replace('gddictname-', '');
         el = document.getElementById('gdfrom-' + s);
         if (el && el.className.search('gdcollapsedarticle') > 0)
             gdExpandArticle(s);
