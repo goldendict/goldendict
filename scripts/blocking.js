@@ -7,7 +7,7 @@
 // Functions that can be called from C++ code at any time should be defined here to make the
 // functionality work (more or less) and prevent ReferenceError while the page is being loaded.
 
-var gdAudioLinks = {
+const gdAudioLinks = {
     first: null,
     current: null
 };
@@ -25,8 +25,8 @@ function gdMakeArticleActive(newId) {
 }
 
 function gdSelectArticle(id) {
-    var selection = window.getSelection();
-    var range = document.createRange();
+    const selection = window.getSelection();
+    const range = document.createRange();
     range.selectNodeContents(document.getElementById('gdfrom-' + id));
     selection.removeAllRanges();
     selection.addRange(range);
@@ -56,7 +56,7 @@ function init() {
 window.addEventListener('load', init, false);
 
 function gdExpandOptPart(expanderId, optionalId) {
-    var d1 = document.getElementById(expanderId);
+    const d1 = document.getElementById(expanderId);
     var i = 0;
     if (d1.alt === '[+]') {
         d1.alt = '[-]';
