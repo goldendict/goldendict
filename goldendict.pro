@@ -47,7 +47,8 @@ QT += core \
       webenginewidgets\
       webchannel\
       printsupport \
-      help
+      help \
+      concurrent
 
 greaterThan(QT_MAJOR_VERSION, 5): QT += webenginecore core5compat
 
@@ -242,6 +243,7 @@ HEADERS += folding.hh \
     ankiconnector.h \
     article_inspect.h \
     articlewebpage.h \
+    base/globalregex.hh \
     globalbroadcaster.h \
     iframeschemehandler.h \
     inc_case_folding.hh \
@@ -384,6 +386,7 @@ SOURCES += folding.cc \
     ankiconnector.cpp \
     article_inspect.cpp \
     articlewebpage.cpp \
+    base/globalregex.cc \
     globalbroadcaster.cpp \
     iframeschemehandler.cpp \
     main.cc \
