@@ -644,7 +644,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                                      sptr< ChunkedStorage::Reader > chunks,
                                      QStringList & indexWords,
-                                     QStringList & searchWords )
+                                     QStringList & searchWords, QRegExp & regexp )
 {
   // Find articles which contains all requested words
 
@@ -714,7 +714,7 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
   dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
-  checkArticles( offsets, searchWords );
+  checkArticles( offsets, searchWords, regexp );
 }
 
 void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
@@ -1048,7 +1048,7 @@ void FTSResultsRequest::run()
       else
       {
         if( searchMode == FTS::WholeWords )
-          indexSearch( ftsIndex, chunks, indexWords, searchWords );
+          indexSearch( ftsIndex, chunks, indexWords, searchWords, searchRegExp );
         else
           fullIndexSearch( ftsIndex, chunks, indexWords, searchWords, searchRegExp );
       }

@@ -91,7 +91,7 @@ class FTSResultsRequest : public Dictionary::DataRequest
   void indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                     sptr< ChunkedStorage::Reader > chunks,
                     QStringList & indexWords,
-                    QStringList & searchWords );
+                    QStringList & searchWords, QRegExp & regexp );
 
   void combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                             sptr< ChunkedStorage::Reader > chunks,
