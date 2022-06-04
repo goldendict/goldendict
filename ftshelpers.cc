@@ -522,11 +522,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         break;
 
-      int pos = 0;
-      int matchWordNom = 0;
-      int unmatchWordNom = 0;
-      int nextNotFoundPos = 0;
-
       QVector< QStringList > allOrders;
       QStringList order;
 
@@ -542,9 +537,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 
       if( ignoreDiacritics )
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
-
-      //QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
-      //                                              Qt::SkipEmptyParts );
 
       if(ignoreWordsOrder)
       {
