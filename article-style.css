@@ -41,6 +41,11 @@ pre
   /*background: #ffffdd;*/
 }
 
+.gddictnamebodyseparator
+{
+  clear: both;
+}
+
 /* The 'From ' string which precedes dictionary name in the heading */
 .gdfromprefix
 {
@@ -58,8 +63,8 @@ pre
   background: #fefdeb;
 /*fix for invalid blg*/
   font-style:normal;
-  content-visibility:auto;
-  contain-intrinsic-size:400px;
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
 }
 
 /* CSS trick to prevent the floating elements to overflow
@@ -525,7 +530,7 @@ div.xdxf
 /************* MDict dictionaries **************/
 .mdict
 {
-  margin-top: 1em;
+  /* margin-top: 1em; */
 }
 
 .mdict a[name]

@@ -587,16 +587,16 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
 
     ~SlobDictionary();
 
-    virtual string getName() throw()
+    virtual string getName() noexcept
     { return dictionaryName; }
 
-    virtual map< Dictionary::Property, string > getProperties() throw()
+    virtual map< Dictionary::Property, string > getProperties() noexcept
     { return map< Dictionary::Property, string >(); }
 
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() noexcept
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() noexcept
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -643,7 +643,7 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
 
 protected:
 
-    virtual void loadIcon() throw();
+    virtual void loadIcon() noexcept;
 
 private:
 
@@ -746,7 +746,7 @@ void SlobDictionary::removeDirectory( QString const & directory )
   dir.rmdir( directory );
 }
 
-void SlobDictionary::loadIcon() throw()
+void SlobDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

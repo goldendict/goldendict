@@ -55,7 +55,8 @@ bool parseSearchString( QString const & str, QStringList & IndexWords,
                         QRegExp & searchRegExp, int searchMode,
                         bool matchCase,
                         int distanceBetweenWords,
-                        bool & hasCJK );
+                        bool & hasCJK,
+                        bool ignoreWordsOrder = false );
 
 void parseArticleForFts( uint32_t articleAddress, QString & articleText,
                          QMap< QString, QVector< uint32_t > > & words,

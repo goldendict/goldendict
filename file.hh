@@ -30,9 +30,9 @@ bool tryPossibleZipName( std::string const & name, std::string & copyTo );
 
 void loadFromFile( std::string const & n, std::vector< char > & data );
 
-bool exists( char const * filename ) throw();
+bool exists( char const * filename ) noexcept;
 
-inline bool exists( std::string const & filename ) throw()
+inline bool exists( std::string const & filename ) noexcept
 { return exists( filename.c_str() ); }
 
 class Class
@@ -116,7 +116,7 @@ public:
   /// Closes the file. No further operations are valid.
   void close() ;
 
-  ~Class() throw();
+  ~Class() noexcept;
 
 private:
 

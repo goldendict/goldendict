@@ -164,15 +164,15 @@ public:
   LsaDictionary( string const & id, string const & indexFile,
                  vector< string > const & dictionaryFiles );
 
-  virtual string getName() throw();
+  virtual string getName() noexcept;
 
-  virtual map< Dictionary::Property, string > getProperties() throw()
+  virtual map< Dictionary::Property, string > getProperties() noexcept
   { return map< Dictionary::Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return idxHeader.soundsCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return getArticleCount(); }
 
   virtual sptr< Dictionary::DataRequest > getArticle( wstring const &,
@@ -186,10 +186,10 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw();
+  virtual void loadIcon() noexcept;
 };
 
-string LsaDictionary::getName() throw()
+string LsaDictionary::getName() noexcept
 {
   string result = FsEncoding::basename( getDictionaryFilenames()[ 0 ] );
 
@@ -498,7 +498,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getResource( string const & name 
   return dr;
 }
 
-void LsaDictionary::loadIcon() throw()
+void LsaDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

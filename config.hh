@@ -808,40 +808,40 @@ QString getUserQtCssFileName() ;
 
 /// Returns the program's data dir. Under Linux that would be something like
 /// /usr/share/apps/goldendict, under Windows C:/Program Files/GoldenDict.
-QString getProgramDataDir() throw();
+QString getProgramDataDir() noexcept;
 
 /// Returns the directory storing program localizized files (.qm).
-QString getEmbedLocDir() throw();
-QString getLocDir() throw();
+QString getEmbedLocDir() noexcept;
+QString getLocDir() noexcept;
 
 /// Returns the directory storing program help files (.qch).
-QString getHelpDir() throw();
+QString getHelpDir() noexcept;
 
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 /// Returns the directory storing OpenCC configuration and dictionary files (.json and .ocd).
-QString getOpenCCDir() throw();
+QString getOpenCCDir() noexcept;
 #endif
 
 /// Returns true if the program is configured as a portable version. In that
 /// mode, all the settings and indices are kept in the program's directory.
-bool isPortableVersion() throw();
+bool isPortableVersion() noexcept;
 
 /// Returns directory with dictionaries for portable version. It is content/
 /// in the application's directory.
-QString getPortableVersionDictionaryDir() throw();
+QString getPortableVersionDictionaryDir() noexcept;
 
 /// Returns directory with morpgologies for portable version. It is
 /// content/morphology in the application's directory.
-QString getPortableVersionMorphoDir() throw();
+QString getPortableVersionMorphoDir() noexcept;
 
 /// Returns the add-on styles directory.
 QString getStylesDir();
 
 /// Returns the directory where user-specific non-essential (cached) data should be written.
-QString getCacheDir() throw();
+QString getCacheDir() noexcept;
 
 /// Returns the article network disk cache directory.
-QString getNetworkCacheDir() throw();
+QString getNetworkCacheDir() noexcept;
 
 }
 

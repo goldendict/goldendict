@@ -159,7 +159,7 @@ sptr< WordSearchRequest > Class::findHeadwordsForSynonym( wstring const & )
 }
 
 vector< wstring > Class::getAlternateWritings( wstring const & )
-  throw()
+  noexcept
 {
   return vector< wstring >();
 }
@@ -185,21 +185,21 @@ QString Class::getMainFilename()
   return QString();
 }
 
-QIcon const & Class::getIcon() throw()
+QIcon const & Class::getIcon() noexcept
 {
   if( !dictionaryIconLoaded )
     loadIcon();
   return dictionaryIcon;
 }
 
-QIcon const & Class::getNativeIcon() throw()
+QIcon const & Class::getNativeIcon() noexcept
 {
   if( !dictionaryIconLoaded )
     loadIcon();
   return dictionaryNativeIcon;
 }
 
-void Class::loadIcon() throw()
+void Class::loadIcon() noexcept
 {
   dictionaryIconLoaded = true;
 }
@@ -424,7 +424,7 @@ void Class::isolateCSS( QString & css, QString const & wrapperSelector )
   css = newCSS;
 }
 
-string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
+string makeDictionaryId( vector< string > const & dictionaryFiles ) noexcept
 {
   std::vector< string > sortedList;
 
@@ -470,7 +470,7 @@ string makeDictionaryId( vector< string > const & dictionaryFiles ) throw()
 // of a timestamp of the file, so we use here Qt anyway. It is supposed to
 // be fixed in the future when it's needed.
 bool needToRebuildIndex( vector< string > const & dictionaryFiles,
-                         string const & indexFile ) throw()
+                         string const & indexFile ) noexcept
 {
   unsigned long lastModified = 0;
 

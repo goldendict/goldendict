@@ -1399,15 +1399,18 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
     for( unsigned i = 0; i < result.size(); i++ )
     {
       uint32_t articleOffset =   result.at(i).articleOffset;
+
       QList<uint32_t>::Iterator  it = std::lower_bound( begOffsets, endOffsets,
                                                     articleOffset );
 
-      if( it!=offsets.end())
+      if( it != offsets.end() && *it == articleOffset )
       {
         if( isCancelled && Utils::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
-        headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
+        auto word = QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() );
+
+        headwords.append(  word );
         offsets.erase( it);
         begOffsets = offsets.begin();
         endOffsets = offsets.end();

@@ -28,16 +28,16 @@ public:
   BaseTransliterationDictionary( string const & id, string const & name,
                                  QIcon icon, bool caseSensitive = true );
 
-  virtual string getName() throw();
+  virtual string getName() noexcept;
 
-  virtual map< Dictionary::Property, string > getProperties() throw();
+  virtual map< Dictionary::Property, string > getProperties() noexcept;
 
-  virtual unsigned long getArticleCount() throw();
+  virtual unsigned long getArticleCount() noexcept;
 
-  virtual unsigned long getWordCount() throw();
+  virtual unsigned long getWordCount() noexcept;
 
   virtual vector< wstring > getAlternateWritings( wstring const & )
-    throw() = 0;
+    noexcept = 0;
 
   virtual sptr< Dictionary::WordSearchRequest > findHeadwordsForSynonym( wstring const & )
     ;
@@ -85,7 +85,7 @@ public:
                              bool caseSensitive = true );
 
   virtual vector< wstring > getAlternateWritings( wstring const & )
-    throw();
+    noexcept;
 };
 
 }

@@ -15,6 +15,7 @@
 #include <QVector>
 
 #include <QRegularExpression>
+
 #include "wildcard.hh"
 
 using std::vector;
@@ -38,28 +39,96 @@ bool ftsIndexIsOldOrBad( string const & indexFile,
 }
 
 static QString makeHiliteRegExpString( QStringList const & words,
-                                       int searchMode,
-                                       int distanceBetweenWords )
+                                       int searchMode, int distanceBetweenWords, bool hasCJK = false, bool ignoreWordsOrder = false )
 {
   QString searchString( "(" );
 
   QString stripWords( "(?:\\W+\\w+){0," );
   if( distanceBetweenWords >= 0 )
     stripWords += QString::number( distanceBetweenWords );
-  stripWords += "}\\W+";
+  stripWords += "}";
+
+  if(!hasCJK)
+  {
+    stripWords += "\\W+";
+  }
 
   QString boundWord( searchMode == FTS::WholeWords ? "\\b" : "(?:\\w*)");
+  if(hasCJK)
+  {
+    //no boundary for CJK
+    boundWord.clear();
+  }
 
   for( int x = 0; x < words.size(); x++ )
   {
     if( x )
+    {
       searchString += stripWords;
+      if(ignoreWordsOrder)
+        searchString += "(";
+    }
 
     searchString += boundWord + words[ x ] + boundWord;
+
+    if( x )
+    {
+      if( ignoreWordsOrder )
+        searchString += ")?";
+    }
+
   }
 
   searchString += ")";
   return searchString;
+}
+
+void tokenizeCJK( QStringList & indexWords, QRegularExpression wordRegExp, QStringList list )
+{
+  QStringList wordList, hieroglyphList;
+  for( int i = 0; i < list.size(); i ++ )
+  {
+    QString word = list.at( i );
+
+    // Check for CJK symbols in word
+    bool parsed = false;
+    QString hieroglyph;
+    for( int x = 0; x < word.size(); x++ )
+      if( isCJKChar( word.at( x ).unicode() ) )
+      {
+        parsed = true;
+        hieroglyph.append( word[ x ] );
+
+        if( QChar( word.at( x ) ).isHighSurrogate()
+            &&  QChar( word[ x + 1 ] ).isLowSurrogate() )
+          hieroglyph.append( word[ ++x ] );
+
+        hieroglyphList.append( hieroglyph );
+        hieroglyph.clear();
+      }
+
+    // If word don't contains CJK symbols put it in list as is
+    if( !parsed )
+      wordList.append( word );
+  }
+
+  indexWords = wordList.filter( wordRegExp );
+  indexWords.removeDuplicates();
+
+  hieroglyphList.removeDuplicates();
+  indexWords += hieroglyphList;
+}
+
+bool containCJK( QString const & str)
+{
+  bool hasCJK = false;
+  for( int x = 0; x < str.size(); x++ )
+    if( isCJKChar( str.at( x ).unicode() ) )
+    {
+      hasCJK = true;
+      break;
+    }
+  return hasCJK;
 }
 
 bool parseSearchString( QString const & str, QStringList & indexWords,
@@ -67,7 +136,8 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
                         QRegExp & searchRegExp, int searchMode,
                         bool matchCase,
                         int distanceBetweenWords,
-                        bool & hasCJK )
+                        bool & hasCJK,
+                        bool ignoreWordsOrder )
 {
   searchWords.clear();
   indexWords.clear();
@@ -76,38 +146,35 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
   QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
   QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
 
-  hasCJK = false;
-  for( int x = 0; x < str.size(); x++ )
-    if( isCJKChar( str.at( x ).unicode() ) )
-    {
-      hasCJK = true;
-      break;
-    }
+  hasCJK = containCJK( str );
 
   if( searchMode == FTS::WholeWords || searchMode == FTS::PlainText )
   {
-    if( hasCJK )
-      return false;
-
     // Make words list for search in article text
-    searchWords = str.normalized( QString::NormalizationForm_C )
-                     .split( spacesRegExp, Qt::SkipEmptyParts );
-
+    searchWords = str.normalized( QString::NormalizationForm_C ).split( spacesRegExp, Qt::SkipEmptyParts );
     // Make words list for index search
-    QStringList list = str.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
-    indexWords = list.filter( wordRegExp );
-    indexWords.removeDuplicates();
+    QStringList list =
+      str.normalized( QString::NormalizationForm_C ).toLower().split( spacesRegExp, Qt::SkipEmptyParts );
 
-    // Make regexp for results hilite
+    QString searchString;
+    if( hasCJK )
+    {
+      tokenizeCJK( indexWords, wordRegExp, list );
+      // QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
+      searchString         = makeHiliteRegExpString( list, searchMode, distanceBetweenWords, hasCJK , ignoreWordsOrder);
+    }
+    else
+    {
+      indexWords = list.filter( wordRegExp );
+      indexWords.removeDuplicates();
 
-    QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
-    QString searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords );
+      // Make regexp for results hilite
 
-    searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive,
-                            QRegExp::RegExp2 );
+      QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
+      searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords,false, ignoreWordsOrder );
+    }
+    searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::RegExp2 );
     searchRegExp.setMinimal( true );
-
     return !indexWords.isEmpty();
   }
   else
@@ -128,38 +195,7 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     if( hasCJK )
     {
-      QStringList wordList, hieroglyphList;
-      for( int i = 0; i < list.size(); i ++ )
-      {
-        QString word = list.at( i );
-
-        // Check for CJK symbols in word
-        bool parsed = false;
-        QString hieroglyph;
-        for( int x = 0; x < word.size(); x++ )
-          if( isCJKChar( word.at( x ).unicode() ) )
-          {
-            parsed = true;
-            hieroglyph.append( word[ x ] );
-
-            if( QChar( word.at( x ) ).isHighSurrogate()
-                &&  QChar( word[ x + 1 ] ).isLowSurrogate() )
-              hieroglyph.append( word[ ++x ] );
-
-            hieroglyphList.append( hieroglyph );
-            hieroglyph.clear();
-          }
-
-        // If word don't contains CJK symbols put it in list as is
-        if( !parsed )
-          wordList.append( word );
-      }
-
-      indexWords = wordList.filter( wordRegExp );
-      indexWords.removeDuplicates();
-
-      hieroglyphList.removeDuplicates();
-      indexWords += hieroglyphList;
+      tokenizeCJK( indexWords, wordRegExp, list );
     }
     else
     {
@@ -419,25 +455,23 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                                   QRegularExpression::UseUnicodePropertiesOption);
   QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 
+  // RegExp mode
+  QRegularExpression searchRegularExpression;
+  if( searchMode == FTS::Wildcards )
+    searchRegularExpression.setPattern( wildcardsToRegexp( searchRegexp.pattern() ) );
+  else
+    searchRegularExpression.setPattern( searchRegexp.pattern() );
+  QRegularExpression::PatternOptions patternOptions =
+    QRegularExpression::DotMatchesEverythingOption | QRegularExpression::UseUnicodePropertiesOption
+    | QRegularExpression::MultilineOption | QRegularExpression::InvertedGreedinessOption;
+  if( searchRegexp.caseSensitivity() == Qt::CaseInsensitive )
+    patternOptions |= QRegularExpression::CaseInsensitiveOption;
+  searchRegularExpression.setPatternOptions( patternOptions );
+  if( !searchRegularExpression.isValid() )
+    searchRegularExpression.setPattern( "" );
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
-    // RegExp mode
-
-    QRegularExpression searchRegularExpression;
-    if( searchMode == FTS::Wildcards )
-      searchRegularExpression.setPattern( wildcardsToRegexp( searchRegexp.pattern() ) );
-    else
-      searchRegularExpression.setPattern( searchRegexp.pattern() );
-    QRegularExpression::PatternOptions patternOptions = QRegularExpression::DotMatchesEverythingOption
-                                                        | QRegularExpression::UseUnicodePropertiesOption
-                                                        | QRegularExpression::MultilineOption
-                                                        | QRegularExpression::InvertedGreedinessOption;
-    if( searchRegexp.caseSensitivity() == Qt::CaseInsensitive )
-      patternOptions |= QRegularExpression::CaseInsensitiveOption;
-    searchRegularExpression.setPatternOptions( patternOptions );
-    if( !searchRegularExpression.isValid() )
-      searchRegularExpression.setPattern( "" );
     for( int i = 0; i < offsets.size(); i++ )
     {
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
@@ -503,237 +537,92 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       if( ignoreDiacritics )
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
 
-      QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
-                                                    Qt::SkipEmptyParts );
+      //QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
+      //                                              Qt::SkipEmptyParts );
 
-      int wordsNum = articleWords.length();
-      while ( pos < wordsNum )
+      if(ignoreWordsOrder)
       {
-          QString s = articleWords[ pos ];
-          bool breakSearch = false;
-
-          QStringList parsedWords;
-          if( needHandleBrackets && ( s.indexOf( '(' ) >= 0 || s.indexOf( ')' ) >= 0 ) )
+        bool allMatch = true;
+        foreach( QString word, words )
+        {
+          if( containCJK( word ) || searchMode == FTS::PlainText )
           {
-            // Handle brackets
-            QRegularExpressionMatch match_brackets = regBrackets.match( s );
-            if( match_brackets.hasMatch() )
+            if( !articleText.contains( word ) )
             {
-              QStringList parts = match_brackets.capturedTexts();
-              // Add empty strings for compatibility with QRegExp behaviour
-              for( int i = match_brackets.lastCapturedIndex() + 1; i < 6; i++ )
-                parts.append( QString() );
-                
-              QString word = parts[ 2 ] + parts[ 4 ]; // Brackets removed
-              parsedWords.append( word );
-
-              word = parts[ 1 ].remove( '(' ).remove( ')' )
-                     + parts[ 2 ]
-                     + parts[ 3 ].remove( '(' ).remove( ')' )
-                     + parts[ 4 ]
-                     + parts[ 5 ].remove( '(' ).remove( ')' ); // Brackets expansed
-              parsedWords.append( word );
+              allMatch = false;
+              break;
             }
+          }
+          else if(  searchMode == FTS::WholeWords)
+          {
+            QRegularExpression tmpReg( QString( "\b%1\b" ).arg( word ),QRegularExpression::CaseInsensitiveOption|QRegularExpression::UseUnicodePropertiesOption );
+            if( !articleText.contains( tmpReg) )
+            {
+              allMatch = false;
+              break;
+            }
+          }
+          
+        }
+
+        if(!allMatch)
+        {
+          continue;
+        }
+
+        if( distanceBetweenWords >= 0 )
+        {
+          // the article text contains all the needed words.
+          // determine if distance restriction is meet
+          QRegularExpression replaceReg( QString( "(%1)" ).arg( words.join( '|' ) ),
+                                         QRegularExpression::CaseInsensitiveOption |
+                                           QRegularExpression::UseUnicodePropertiesOption );
+          // use a string that could not be presented in the article.
+          articleText = articleText.replace( replaceReg, "=@XXXXX@=" );
+
+          auto hasCJK = false;
+          foreach(QString word,words)
+          {
+            if(containCJK( word ))
+            {
+              hasCJK = true;
+              break;
+            }
+          }
+
+          //hascjk value ,perhaps should depend on each word
+          auto searchRegStr = makeHiliteRegExpString( Utils::repeat( "=@XXXXX@=", words.size() ), searchMode, distanceBetweenWords,hasCJK );
+          QRegularExpression distanceOrderReg( searchRegStr,
+                                         QRegularExpression::CaseInsensitiveOption |
+                                           QRegularExpression::UseUnicodePropertiesOption );
+          // use a string that could not be presented in the article.
+          if(articleText.contains(distanceOrderReg))
+          {
+            if( headword.isEmpty() )
+              offsetsForHeadwords.append( offsets.at( i ) );
             else
-              parsedWords = s.split( regSplit, Qt::SkipEmptyParts );
+              foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
+
+            results++;
+            if( maxResults > 0 && results >= maxResults )
+              break;
           }
-          else
-            parsedWords.append( s );
-
-          int n;
-          for( n = 0; n < parsedWords.size(); n++ )
-          {
-            if( ignoreWordsOrder )
-            {
-              int i;
-              for( i = 0; i < wordsList.size(); i++ )
-              {
-                if( wordsList.at( i ).second )
-                {
-                  if( ( searchMode == FTS::WholeWords && parsedWords.at( n ).compare( wordsList.at( i ).first, cs ) == 0 )
-                      || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( wordsList.at( i ).first, cs ) ) )
-                  {
-                    wordsList[ i ].second = false;
-
-                    if( parsedWords.size() > 1 )
-                    {
-                      QString wordToHilite = s;
-                      while( !wordToHilite.isEmpty() && ( wordToHilite.at( 0 ) == '(' || wordToHilite.at( 0 ) == ')' ) )
-                        wordToHilite.remove( 0, 1 );
-                      while( !wordToHilite.isEmpty() && ( wordToHilite.endsWith( '(' ) || wordToHilite.endsWith( ')' ) ) )
-                        wordToHilite.chop( 1 );
-                      order.append( wordToHilite.replace( '(', "\\(" ).replace( ')', "\\)" ) );
-                    }
-                    else
-                      order.append( wordsList.at( i ).first );
-
-                    break;
-                  }
-                }
-              }
-              if( i < wordsList.size() )
-              {
-                // Word found
-
-                matchWordNom += 1;
-
-                if( matchWordNom == 1 )
-                {
-                  // Store position to remake search if sequence will not be found
-                  nextNotFoundPos = pos + 1;
-                }
-
-                if( matchWordNom >= words.size() )
-                {
-                  // All words are found
-                  // Store found words sequence and continue search
-                  // It's nesessary for hilite search results
-
-                  // Check if such sequence already presented
-                  int x;
-                  for( x = 0; x < allOrders.size(); x++ )
-                  {
-                    if( allOrders[ x ] == order )
-                      break;
-                  }
-                  if( x >= allOrders.size() )
-                    allOrders.append( order );
-
-                  order.clear();
-
-                  matchWordNom = 0;
-                  unmatchWordNom = 0;
-                  for( int i = 0; i < wordsList.size(); i++ )
-                    wordsList[ i ].second = true;
-                  nextNotFoundPos = 0;
-
-                  break;
-                }
-
-                unmatchWordNom = 0;
-                break;
-              }
-              else
-              if( matchWordNom > 0 && n >= parsedWords.size() - 1 )
-              {
-                unmatchWordNom += 1;
-                if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
-                {
-                  // Sequence broken, clear all counters
-                  matchWordNom = 0;
-                  unmatchWordNom = 0;
-                  for( int i = 0; i < wordsList.size(); i++ )
-                    wordsList[ i ].second = true;
-                  order.clear();
-                }
-              }
-            }
-            else
-            {
-              if( ( searchMode == FTS::WholeWords && parsedWords.at( n ).compare( words.at( matchWordNom ), cs ) == 0 )
-                  || ( searchMode == FTS::PlainText && parsedWords.at( n ).contains( words.at( matchWordNom ), cs ) ) )
-              {
-                matchWordNom += 1;
-
-                if( matchWordNom == 1 )
-                {
-                  // Store position to remake search if sequence will not be found
-                  nextNotFoundPos = pos + 1;
-                }
-
-                if( needHandleBrackets )
-                {
-                  if( parsedWords.size() > 1 )
-                  {
-                    QString wordToHilite = s;
-                    while( !wordToHilite.isEmpty() && ( wordToHilite.at( 0 ) == '(' || wordToHilite.at( 0 ) == ')' ) )
-                      wordToHilite.remove( 0, 1 );
-                    while( !wordToHilite.isEmpty() && ( wordToHilite.endsWith( '(' ) || wordToHilite.endsWith( ')' ) ) )
-                      wordToHilite.chop( 1 );
-                    order.append( wordToHilite.replace( '(', "\\(" ).replace( ')', "\\)" ) );
-                  }
-                  else
-                    order.append( words.at( matchWordNom - 1 ) );
-                }
-
-                if( matchWordNom >= words.size() )
-                {
-                  // All words are found
-                  if( needHandleBrackets )
-                  {
-                    if( allOrders.isEmpty() )
-                      allOrders.append( words );
-
-                    // Check if such sequence already presented
-                    int x;
-                    for( x = 0; x < allOrders.size(); x++ )
-                    {
-                      if( allOrders[ x ] == order )
-                        break;
-                    }
-                    if( x >= allOrders.size() )
-                      allOrders.append( order );
-
-                    matchWordNom = 0;
-                    unmatchWordNom = 0;
-                    order.clear();
-                    nextNotFoundPos = 0;
-                  }
-                  else
-                    breakSearch = true;
-                  break;
-                }
-                unmatchWordNom = 0;
-                break;
-              }
-              else
-              if( matchWordNom > 0 && n >= parsedWords.size() - 1 )
-              {
-                unmatchWordNom += 1;
-                if( distanceBetweenWords >= 0 && unmatchWordNom > distanceBetweenWords )
-                {
-                  matchWordNom = 0;
-                  unmatchWordNom = 0;
-                  if( needHandleBrackets )
-                    order.clear();
-                }
-              }
-            }
-          }
-          if( breakSearch )
-            break;
-          if( nextNotFoundPos > 0 && matchWordNom == 0 )
-          {
-            pos = nextNotFoundPos;
-            nextNotFoundPos = 0;
-          }
-          else
-            pos += 1;
+        }
+       
       }
-
-      if( !allOrders.isEmpty() || matchWordNom >= words.size() )
+      else
       {
-        QStringList hiliteReg;
-        if( !allOrders.isEmpty() )
+        if( articleText.contains( searchRegularExpression ) )
         {
-          for( int i = 0; i < allOrders.size(); i++ )
-          {
-            QString hiliteStr = makeHiliteRegExpString( allOrders.at( i ), searchMode, distanceBetweenWords );
-            hiliteReg.append( hiliteStr );
-          }
-          allOrders.clear();
+          if( headword.isEmpty() )
+            offsetsForHeadwords.append( offsets.at( i ) );
+          else
+            foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
+      
+          results++;
+          if( maxResults > 0 && results >= maxResults )
+            break;
         }
-        if( headword.isEmpty() )
-        {
-          offsetsForHeadwords.append( offsets.at( i ) );
-          hiliteRegExps.append( hiliteReg );
-        }
-        else
-          foundHeadwords->append( FTS::FtsHeadword( headword, id, hiliteReg, matchCase ) );
-
-        results++;
-        if( maxResults > 0 && results >= maxResults )
-          break;
       }
     }
   }
@@ -1120,7 +1009,7 @@ void FTSResultsRequest::run()
     QRegExp searchRegExp;
 
     if( !FtsHelpers::parseSearchString( searchString, indexWords, searchWords, searchRegExp,
-                                        searchMode, matchCase, distanceBetweenWords, hasCJK ) )
+                                        searchMode, matchCase, distanceBetweenWords, hasCJK, ignoreWordsOrder ) )
     {
       finish();
       return;
