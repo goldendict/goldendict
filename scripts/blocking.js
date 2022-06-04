@@ -57,26 +57,22 @@ window.addEventListener('load', init, false);
 
 function gdExpandOptPart(expanderId, optionalId) {
     const d1 = document.getElementById(expanderId);
-    var i = 0;
-    if (d1.alt === '[+]') {
-        d1.alt = '[-]';
-        d1.src = 'qrcx://localhost/icons/collapse_opt.png';
-        for (i = 0; i < 1000; i++) {
+
+    function gdToggleExpanded(alt, iconFilePath, display) {
+        d1.alt = alt;
+        d1.src = iconFilePath;
+        for (var i = 0; i < 1000; i++) {
             const d2 = document.getElementById(optionalId + i);
             if (!d2)
                 break;
-            d2.style.display = 'inline';
-        }
-    } else {
-        d1.alt = '[+]';
-        d1.src = 'qrcx://localhost/icons/expand_opt.png';
-        for (i = 0; i < 1000; i++) {
-            const d2 = document.getElementById(optionalId + i);
-            if (!d2)
-                break;
-            d2.style.display = 'none';
+            d2.style.display = display;
         }
     }
+
+    if (d1.alt === '[+]')
+        gdToggleExpanded('[-]', 'qrcx://localhost/icons/collapse_opt.png', 'inline');
+    else
+        gdToggleExpanded('[+]', 'qrcx://localhost/icons/expand_opt.png', 'none');
 }
 
 function gdExpandArticle(id) {
