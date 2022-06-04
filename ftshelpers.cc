@@ -44,6 +44,12 @@ static QString makeHiliteRegExpString( QStringList const & words,
   QString searchString( "(" );
 
   QString stripWords( "(?:\\W+\\w+){0," );
+
+  if( hasCJK )
+  {
+    stripWords = "(?:[\\W\\w]){0,";
+  }
+
   if( distanceBetweenWords >= 0 )
     stripWords += QString::number( distanceBetweenWords );
   stripWords += "}";
