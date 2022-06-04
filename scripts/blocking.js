@@ -61,7 +61,7 @@ function gdExpandOptPart(expanderId, optionalId) {
     function gdToggleExpanded(alt, iconFilePath, display) {
         d1.alt = alt;
         d1.src = iconFilePath;
-        for (var i = 0; i < 1000; i++) {
+        for (var i = 0;; i++) {
             const d2 = document.getElementById(optionalId + i);
             if (!d2)
                 break;
