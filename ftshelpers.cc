@@ -880,8 +880,11 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
   dict.sortArticlesOffsetsForFTS( offsets, isCancelled );
 
-  // checkArticles( offsets, searchWords, regexp );
-  QtConcurrent::blockingMapped(offsets,[&](uint32_t offset){checkSingleArticle(offset,searchWords,regexp); return 0;});
+//#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+  QtConcurrent::blockingMap(offsets,[&](uint32_t offset){checkSingleArticle(offset,searchWords,regexp);});
+//#else
+//  checkArticles( offsets, searchWords, regexp );
+//#endif
 }
 
 void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
