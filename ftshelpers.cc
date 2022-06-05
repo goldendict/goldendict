@@ -814,27 +814,26 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 {
   // Find articles which contains all requested words
 
-  vector< BtreeIndexing::WordArticleLink > links;
-  QSet< uint32_t > setOfOffsets, tmp;
-  uint32_t size;
+  QSet< uint32_t > setOfOffsets;
 
   if( indexWords.isEmpty() )
     return;
 
-  int n = indexWords.length();
-  for( int i = 0; i < n; i++ )
+  auto findLinks = [ & ]( const QString & word ) -> QSet< uint32_t >
   {
+    QSet< uint32_t > tmp;
+    uint32_t size;
+
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-      return;
+      return tmp;
 
-    tmp.clear();
-
-    links = ftsIndex.findArticles( gd::toWString( indexWords.at( i ) ), ignoreDiacritics );
+    vector< BtreeIndexing::WordArticleLink > links =
+      ftsIndex.findArticles( gd::toWString( word ), ignoreDiacritics );
     for( unsigned x = 0; x < links.size(); x++ )
     {
 
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-        return;
+        return tmp;
 
       vector< char > chunk;
       char * linksPtr;
@@ -843,24 +842,32 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
         linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
       }
 
-      memcpy( &size, linksPtr, sizeof(uint32_t) );
-      linksPtr += sizeof(uint32_t);
+      memcpy( &size, linksPtr, sizeof( uint32_t ) );
+      linksPtr += sizeof( uint32_t );
       for( uint32_t y = 0; y < size; y++ )
       {
         tmp.insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
-        linksPtr += sizeof(uint32_t);
+        linksPtr += sizeof( uint32_t );
       }
     }
 
     links.clear();
 
-    if( i == 0 )
-      setOfOffsets = tmp;
+    return tmp;
+  };
+  // int n = indexWords.length();
+  auto sets = QtConcurrent::blockingMapped( indexWords,
+                                            findLinks );
+
+  int i = 0;
+  for( auto & elem : sets )
+  {
+    if( i++ == 0 )
+      setOfOffsets = elem;
     else
-      setOfOffsets = setOfOffsets.intersect( tmp );
+      setOfOffsets = setOfOffsets.intersect( elem );
   }
 
-  tmp.clear();
 
   if( setOfOffsets.isEmpty() )
     return;
