@@ -679,7 +679,6 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             url.setHost( QString::fromUtf8( search ? "search" : dictPtr->getId().c_str() ) );
             url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
-            el_script.setAttribute( "type", "text/javascript" );
             parent.replaceChild( el_script, el );
 
             QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"",

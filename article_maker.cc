@@ -29,7 +29,7 @@ void appendScripts( string & result )
   // "QIODevice::read (QNetworkReplyFileImpl): device not open" at GoldenDict start, because
   // AllowFrameReply::baseReply is not open when AllowFrameReply::readDataFromBase() is invoked.
 
-  result += "<script type=\"text/javascript\">"
+  result += "<script>"
             "const gdExpandArticleTitle = \"";
   result += ArticleMaker::tr( "Expand article" ).toUtf8().constData();
   result += "\";\n"
@@ -610,7 +610,7 @@ void ArticleRequest::bodyFinished()
         else
         {
           // This is the first article
-          head += "<script type=\"text/javascript\">"
+          head += "<script>"
                   "var gdCurrentArticle=\"" + gdFrom  + "\"; "
                   "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
@@ -653,7 +653,7 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script type=\"text/javascript\">var gdArticleContents; "
+        head += "<script>var gdArticleContents; "
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
 
