@@ -18,6 +18,7 @@
 
 #include "wildcard.hh"
 #include <QtConcurrent>
+#include "base/globalregex.hh"
 
 using std::vector;
 using std::string;
@@ -148,36 +149,36 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 {
   searchWords.clear();
   indexWords.clear();
-  QRegularExpression spacesRegExp( "\\W+", QRegularExpression::UseUnicodePropertiesOption );
-  QRegularExpression wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}", QRegularExpression::UseUnicodePropertiesOption );
-  QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
+  // QRegularExpression spacesRegExp( "\\W+", QRegularExpression::UseUnicodePropertiesOption );
+  // QRegularExpression wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}", QRegularExpression::UseUnicodePropertiesOption );
+  // QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
+  // QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
 
   hasCJK = containCJK( str );
 
   if( searchMode == FTS::WholeWords || searchMode == FTS::PlainText )
   {
     // Make words list for search in article text
-    searchWords = str.normalized( QString::NormalizationForm_C ).split( spacesRegExp, Qt::SkipEmptyParts );
+    searchWords = str.normalized( QString::NormalizationForm_C ).split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
     // Make words list for index search
     QStringList list =
-      str.normalized( QString::NormalizationForm_C ).toLower().split( spacesRegExp, Qt::SkipEmptyParts );
+      str.normalized( QString::NormalizationForm_C ).toLower().split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
 
     QString searchString;
     if( hasCJK )
     {
-      tokenizeCJK( indexWords, wordRegExp, list );
+      tokenizeCJK( indexWords, RX::Ftx::wordRegExp, list );
       // QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
       searchString         = makeHiliteRegExpString( list, searchMode, distanceBetweenWords, hasCJK , ignoreWordsOrder);
     }
     else
     {
-      indexWords = list.filter( wordRegExp );
+      indexWords = list.filter( RX::Ftx::wordRegExp );
       indexWords.removeDuplicates();
 
       // Make regexp for results hilite
 
-      QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
+      QStringList allWords = str.split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
       searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords,false, ignoreWordsOrder );
     }
     searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::RegExp2 );
@@ -192,21 +193,21 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     // Remove RegExp commands
     if( searchMode == FTS::RegExp )
-      tmp.replace( regexRegExp, " " );
+      tmp.replace( RX::Ftx::regexRegExp, " " );
 
     // Remove all symbol sets
-    tmp.replace( setsRegExp, " " );
+    tmp.replace( RX::Ftx::setsRegExp, " " );
 
     QStringList list = tmp.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
+                          .toLower().split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
 
     if( hasCJK )
     {
-      tokenizeCJK( indexWords, wordRegExp, list );
+      tokenizeCJK( indexWords, RX::Ftx::wordRegExp, list );
     }
     else
     {
-      indexWords = list.filter( wordRegExp );
+      indexWords = list.filter( RX::Ftx::wordRegExp );
       indexWords.removeDuplicates();
     }
 
@@ -225,9 +226,9 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   if( articleText.isEmpty() )
     return;
 
-  QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
-                                  QRegularExpression::UseUnicodePropertiesOption);
-  QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
+  // QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
+  //                                 QRegularExpression::UseUnicodePropertiesOption);
+  // QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
                                         .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
@@ -276,12 +277,12 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
         // Special handle for words with round brackets - DSL feature
         QStringList list;
 
-        QStringList oldVariant = word.split( regSplit, Qt::SkipEmptyParts );
+        QStringList oldVariant = word.split( RX::Ftx::regSplit, Qt::SkipEmptyParts );
         for( QStringList::iterator it = oldVariant.begin(); it != oldVariant.end(); ++it )
           if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
             list.append( *it );
 
-        QRegularExpressionMatch match = regBrackets.match( word );
+        QRegularExpressionMatch match = RX::Ftx::regBrackets.match( word );
         if( match.hasMatch() )
         {
           QStringList parts = match.capturedTexts();
@@ -452,15 +453,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   QVector< QStringList > hiliteRegExps;
 
   QString id = QString::fromUtf8( dict.getId().c_str() );
-  bool needHandleBrackets;
-  {
-    QString name = QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ).toLower();
-    needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
-  }
-
-  QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
-                                  QRegularExpression::UseUnicodePropertiesOption);
-  QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 
   // RegExp mode
   QRegularExpression searchRegularExpression;
@@ -506,9 +498,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   else
   {
     // Words mode
-
-    QRegularExpression splitWithBrackets( "[^\\w\\(\\)\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-    QRegularExpression splitWithoutBrackets( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 
     Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;
@@ -602,7 +591,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
             else
               foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
 
-            results++;
+            ++results;
             if( maxResults > 0 && results >= maxResults )
               break;
           }
@@ -645,11 +634,6 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
   QVector< QStringList > hiliteRegExps;
 
   QString id = QString::fromUtf8( dict.getId().c_str() );
-  bool needHandleBrackets;
-  {
-    QString name       = QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ).toLower();
-    needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
-  }
 
   // RegExp mode
   QRegularExpression searchRegularExpression;
@@ -757,9 +741,9 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
         {
           // the article text contains all the needed words.
           // determine if distance restriction is meet
-          QRegularExpression replaceReg( QString( "(%1)" ).arg( words.join( '|' ) ),
-                                         QRegularExpression::CaseInsensitiveOption
-                                           | QRegularExpression::UseUnicodePropertiesOption );
+          const QRegularExpression replaceReg( QString( "(%1)" ).arg( words.join( '|' ) ),
+                                               QRegularExpression::CaseInsensitiveOption
+                                               | QRegularExpression::UseUnicodePropertiesOption );
           // use a string that could not be presented in the article.
           articleText = articleText.replace( replaceReg, "=@XXXXX@=" );
 
@@ -774,13 +758,13 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
           }
 
           // hascjk value ,perhaps should depend on each word
-          auto searchRegStr = makeHiliteRegExpString( Utils::repeat( "=@XXXXX@=", words.size() ),
-                                                      searchMode,
-                                                      distanceBetweenWords,
-                                                      hasCJK );
-          QRegularExpression distanceOrderReg( searchRegStr,
-                                               QRegularExpression::CaseInsensitiveOption
-                                                 | QRegularExpression::UseUnicodePropertiesOption );
+          const auto searchRegStr = makeHiliteRegExpString( Utils::repeat( "=@XXXXX@=", words.size() ),
+                                                            searchMode,
+                                                            distanceBetweenWords,
+                                                            hasCJK );
+          const QRegularExpression distanceOrderReg( searchRegStr,
+                                                     QRegularExpression::CaseInsensitiveOption
+                                                     | QRegularExpression::UseUnicodePropertiesOption );
           // use a string that could not be presented in the article.
           if( articleText.contains( distanceOrderReg ) )
           {
