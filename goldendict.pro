@@ -35,6 +35,8 @@ CONFIG( release, debug|release ) {
   DEFINES += NDEBUG
 }
 
+DEFINES *= QT_USE_QSTRINGBUILDER
+
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 
