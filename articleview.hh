@@ -35,6 +35,8 @@ class ArticleView: public QFrame
 
   ArticleViewJsProxy * const jsProxy;
 
+  bool loadedPageHasSound;
+
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
           copyAsTextAction, inspectAction;
@@ -155,7 +157,7 @@ public:
   void reload();
 
   /// Returns true if there's an audio reference on the page, false otherwise.
-  bool hasSound();
+  bool hasSound() const;
 
   /// Plays the first audio reference on the page, if any.
   void playSound();
@@ -254,8 +256,6 @@ public slots:
   void on_searchPrevious_clicked();
   void on_searchNext_clicked();
 
-  void onJsActiveArticleChanged(QString const & id);
-
   /// Handles F3 and Shift+F3 for search navigation
   bool handleF3( QObject * obj, QEvent * ev );
 
@@ -312,6 +312,13 @@ private slots:
   void inspect();
 
 private:
+  /// <JavaScript interface>
+
+  friend class ArticleViewJsProxy;
+  void onPageJsReady( bool hasSound );
+  void onJsActiveArticleChanged( QString const & id );
+
+  /// </JavaScript interface>
 
   /// Clears selection on the current web page. This function can be called to
   /// reset the start position of the page's findText().

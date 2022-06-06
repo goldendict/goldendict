@@ -11,3 +11,5 @@
             gdExpandArticle(s);
     }
 })();
+
+gdArticleView.onPageJsReady(!!gdAudioLinks.first);

@@ -63,6 +63,9 @@ public:
   {}
 
 public slots:
+  void onPageJsReady( bool hasSound )
+  { articleView.onPageJsReady( hasSound ); }
+
   void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
 
@@ -261,6 +264,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   popupView( popupView_ ),
   cfg( cfg_ ),
   jsProxy( new ArticleViewJsProxy( *this ) ),
+  loadedPageHasSound( false ),
   pasteAction( this ),
   articleUpAction( this ),
   articleDownAction( this ),
@@ -1735,12 +1739,9 @@ void ArticleView::reload()
   ui.definition->reload();
 }
 
-bool ArticleView::hasSound()
+bool ArticleView::hasSound() const
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-  if ( v.type() == QVariant::String )
-    return !v.toString().isEmpty();
-  return false;
+  return loadedPageHasSound;
 }
 
 void ArticleView::playSound()
@@ -2323,6 +2324,11 @@ void ArticleView::on_searchCaseSensitive_clicked()
 void ArticleView::on_highlightAllButton_clicked()
 {
   performFindOperation( false, false, true );
+}
+
+void ArticleView::onPageJsReady( bool hasSound )
+{
+  loadedPageHasSound = hasSound;
 }
 
 void ArticleView::onJsActiveArticleChanged(QString const & id)
