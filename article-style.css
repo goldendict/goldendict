@@ -1,13 +1,14 @@
 /******** Global, non-dictionary-specific classes ***********/
 
-html{
-	height:100%;
+html {
+        height: 100%;
 }
 
 body
 {
   background: #fefdeb;
   font-family: Tahoma, Verdana, "Lucida Sans Unicode", sans-serif;
+  height: 100%;
 }
 
 /* This stylesheet is used to highligh current selection when doing a search.
