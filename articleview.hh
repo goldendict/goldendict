@@ -36,6 +36,8 @@ class ArticleView: public QFrame
   ArticleViewJsProxy * const jsProxy;
 
   QVariantMap audioLinks;
+  QString currentArticle; ///< Current article in the view, in the form of "gdfrom-xxx"
+                          ///< (scrollTo) id. If empty, there is no current article.
 
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
@@ -315,7 +317,7 @@ private:
   /// <JavaScript interface>
 
   friend class ArticleViewJsProxy;
-  void onPageJsReady( QVariantMap const & audioLinks_ );
+  void onPageJsReady( QVariantMap const & audioLinks_, QString const & activeArticleId );
   void onJsActiveArticleChanged( QString const & id );
 
   /// </JavaScript interface>
@@ -327,10 +329,6 @@ private:
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
   unsigned getGroup( QUrl const & );
-
-
-  /// Returns current article in the view, in the form of "gdfrom-xxx" id.
-  QString getCurrentArticle();
 
   /// Sets the current article by executing a javascript code.
   /// If moveToIt is true, it moves the focus to it as well.

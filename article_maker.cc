@@ -613,9 +613,7 @@ void ArticleRequest::bodyFinished()
         else
         {
           // This is the first article
-          head += "<script>"
-                  "gdCurrentArticle=\"" + gdFrom  + "\"; "
-                  "gdArticleView.onJsActiveArticleChanged(gdCurrentArticle)</script>";
+          head += "<script>gdCurrentArticle=\"" + gdFrom + "\";</script>";
         }
 
         bool collapse = false;

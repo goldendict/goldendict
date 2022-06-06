@@ -63,8 +63,8 @@ public:
   {}
 
 public slots:
-  void onPageJsReady( QVariantMap const & audioLinks )
-  { articleView.onPageJsReady( audioLinks ); }
+  void onPageJsReady( QVariantMap const & audioLinks, QString const & activeArticleId )
+  { articleView.onPageJsReady( audioLinks, activeArticleId ); }
 
   void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
@@ -607,13 +607,13 @@ void ArticleView::loadFinished( bool )
       moveToCurrentArticle = false;
     }
 
-    const QString currentArticle = userData.value( "currentArticle" ).toString();
-    if( !currentArticle.isEmpty() )
+    QString const savedCurrentArticle = userData.value( "currentArticle" ).toString();
+    if( !savedCurrentArticle.isEmpty() )
     {
       // There's a current article saved, so set it to be current.
       // If a scroll position was stored - even (0, 0) - don't move to the
       // current article.
-      setCurrentArticle( currentArticle, moveToCurrentArticle );
+      setCurrentArticle( savedCurrentArticle, moveToCurrentArticle );
     }
 
     if ( sx != 0 || sy != 0 )
@@ -746,21 +746,10 @@ QStringList ArticleView::getArticlesList()
 
 QString ArticleView::getActiveArticleId()
 {
-  QString currentArticle = getCurrentArticle();
   if ( !isScrollTo( currentArticle ) )
     return QString(); // Incorrect id
 
   return dictionaryIdFromScrollTo( currentArticle );
-}
-
-QString ArticleView::getCurrentArticle()
-{
-  QVariant v = evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdCurrentArticle" );
-
-  if ( v.type() == QVariant::String )
-    return v.toString();
-  else
-    return QString();
 }
 
 void ArticleView::jumpToDictionary( QString const & id, bool force )
@@ -768,7 +757,7 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
   QString targetArticle = scrollToFromDictionaryId( id );
 
   // jump only if neceessary, or when forced
-  if ( force || targetArticle != getCurrentArticle() )
+  if ( force || targetArticle != currentArticle )
   {
     setCurrentArticle( targetArticle, true );
   }
@@ -838,16 +827,14 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
   {
     // Maybe a link inside a website was clicked?
 
-    QString ca = getCurrentArticle();
-
-    if ( isFramedArticle( ca ) )
+    if( isFramedArticle( currentArticle ) )
     {
       QVariant result = evaluateJavaScriptVariableSafe( ui.definition->page()->currentFrame(), "gdLastUrlText" );
 
       if ( result.type() == QVariant::String )
       {
         // Looks this way
-        contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
+        contexts[ dictionaryIdFromScrollTo( currentArticle ) ] = QString::fromLatin1( url.toEncoded() );
 
         QUrl target;
 
@@ -881,7 +868,7 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
     {
       QString newCurrent = scrollToFromDictionaryId( frameName.mid( 14 ) );
 
-      if ( getCurrentArticle() != newCurrent )
+      if( currentArticle != newCurrent )
         setCurrentArticle( newCurrent, false );
 
       break;
@@ -896,7 +883,7 @@ void ArticleView::saveHistoryUserData()
 
   // Save current article, which can be empty
 
-  userData[ "currentArticle" ] = getCurrentArticle();
+  userData[ "currentArticle" ] = currentArticle;
 
   // We also save window position. We restore it when the page is fully loaded,
   // when any hidden frames are expanded.
@@ -1218,10 +1205,10 @@ void ArticleView::linkClicked( QUrl const & url_ )
          ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
   {
     // Mid button or Control/Shift is currently pressed - open the link in new tab
-    emit openLinkInNewTab( url, ui.definition->url(), getCurrentArticle(), contexts );
+    emit openLinkInNewTab( url, ui.definition->url(), currentArticle, contexts );
   }
   else
-    openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
+    openLink( url, ui.definition->url(), currentArticle, contexts );
 }
 
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
@@ -1724,7 +1711,7 @@ void ArticleView::reload()
   QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
 
   // Save current article, which can be empty
-  userData[ "currentArticle" ] = getCurrentArticle();
+  userData[ "currentArticle" ] = currentArticle;
 
   // Remove saved window position. Reloading occurs in response to changes that
   // may affect content height, so restoring the current window position can cause
@@ -1999,13 +1986,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       return;
 
     if ( result == followLink )
-      openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
+      openLink( targetUrl, ui.definition->url(), currentArticle, contexts );
     else
     if ( result == followLinkExternal )
       QDesktopServices::openUrl( r.linkUrl() );
     else
     if ( result == lookupSelection )
-      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      showDefinition( selectedText, getGroup( ui.definition->url() ), currentArticle );
     else
     if ( result == lookupSelectionGr && groupComboBox )
       showDefinition( selectedText, groupComboBox->getCurrentGroup(), QString() );
@@ -2019,11 +2006,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       emit sendWordToInputLine( selectedText );
     else
     if ( !popupView && result == followLinkNewTab )
-      emit openLinkInNewTab( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
+      emit openLinkInNewTab( targetUrl, ui.definition->url(), currentArticle, contexts );
     else
     if ( !popupView && result == lookupSelectionNewTab )
       emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                   getCurrentArticle(), Contexts() );
+                                   currentArticle, Contexts() );
     else
     if ( !popupView && result == lookupSelectionNewTabGr && groupComboBox )
       emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
@@ -2201,19 +2188,17 @@ void ArticleView::pasteTriggered()
       // so let's try the currently selected group.
       groupId = groupComboBox->getCurrentGroup();
     }
-    showDefinition( phrase, groupId, getCurrentArticle() );
+    showDefinition( phrase, groupId, currentArticle );
   }
 }
 
 void ArticleView::moveOneArticleUp()
 {
-  QString current = getCurrentArticle();
-
-  if ( current.size() )
+  if( !currentArticle.isEmpty() )
   {
     QStringList lst = getArticlesList();
 
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
+    int idx = lst.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
 
     if ( idx != -1 )
     {
@@ -2229,13 +2214,11 @@ void ArticleView::moveOneArticleUp()
 
 void ArticleView::moveOneArticleDown()
 {
-  QString current = getCurrentArticle();
-
-  if ( current.size() )
+  if( !currentArticle.isEmpty() )
   {
     QStringList lst = getArticlesList();
 
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
+    int idx = lst.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
 
     if ( idx != -1 )
     {
@@ -2314,9 +2297,10 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
-void ArticleView::onPageJsReady( QVariantMap const & audioLinks_ )
+void ArticleView::onPageJsReady( QVariantMap const & audioLinks_, QString const & activeArticleId )
 {
   audioLinks = audioLinks_;
+  currentArticle = activeArticleId;
 }
 
 void ArticleView::onJsActiveArticleChanged(QString const & id)
@@ -2324,6 +2308,7 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
   if ( !isScrollTo( id ) )
     return; // Incorrect id
 
+  currentArticle = id;
   emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
 }
 
@@ -2415,7 +2400,7 @@ void ArticleView::doubleClicked( QPoint pos )
       if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
       { // open in new tab
         emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                     getCurrentArticle(), Contexts() );
+                                     currentArticle, Contexts() );
       }
       else
       {
@@ -2428,7 +2413,7 @@ void ArticleView::doubleClicked( QPoint pos )
           showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else
-          showDefinition( selectedText, getGroup( ref ), getCurrentArticle() );
+          showDefinition( selectedText, getGroup( ref ), currentArticle );
       }
     }
   }
