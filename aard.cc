@@ -429,7 +429,7 @@ void AardDictionary::loadArticle( quint32 address,
 
     while( 1 )
     {
-      articleText = string( QObject::tr( "Article loading error" ).toUtf8().constData() );
+      articleText = QObject::tr( "Article loading error" ).toStdString();
       try
       {
         Mutex::Lock _( aardMutex );
@@ -521,7 +521,7 @@ void AardDictionary::loadArticle( quint32 address,
       articleText = convert( articleText );
     }
     else
-      articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
+      articleText = QObject::tr( "Article decoding error" ).toStdString();
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
     string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"
