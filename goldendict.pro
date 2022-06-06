@@ -332,6 +332,7 @@ HEADERS += folding.hh \
     broken_xrecord.hh \
     history.hh \
     atomic_rename.hh \
+    articlewebpage.hh \
     articlewebview.hh \
     zipfile.hh \
     indexedzip.hh \
@@ -466,6 +467,7 @@ SOURCES += folding.cc \
     broken_xrecord.cc \
     history.cc \
     atomic_rename.cc \
+    articlewebpage.cc \
     articlewebview.cc \
     zipfile.cc \
     indexedzip.cc \

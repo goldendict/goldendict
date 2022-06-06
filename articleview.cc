@@ -11,6 +11,7 @@
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QFileDialog>
+#include "articlewebpage.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
@@ -272,6 +273,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 {
   ui.setupUi( this );
 
+  ui.definition->setPage( new ArticleWebPage( ui.definition ) );
   ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
 
   goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
@@ -1669,9 +1671,7 @@ void ArticleView::updateMutedContents()
 
 bool ArticleView::canGoBack()
 {
-  // First entry in a history is always an empty page,
-  // so we skip it.
-  return ui.definition->history()->currentItemIndex() > 1;
+  return ui.definition->history()->canGoBack();
 }
 
 bool ArticleView::canGoForward()
@@ -1686,8 +1686,6 @@ void ArticleView::setSelectionBySingleClick( bool set )
 
 void ArticleView::back()
 {
-  // Don't allow navigating back to page 0, which is usually the initial
-  // empty page
   if ( canGoBack() )
   {
     saveHistoryUserData();
