@@ -1697,7 +1697,7 @@ void DslArticleRequest::run()
     {
       gdWarning( "DSL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
       articleText = string( "<span class=\"dsl_article\">" )
-                    + string( QObject::tr( "Article loading error" ).toUtf8().constData() )
+                    + QObject::tr( "Article loading error" ).toStdString()
                     + "</span>";
     }
 

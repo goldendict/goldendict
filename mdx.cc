@@ -977,7 +977,7 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
   if( !noFilter )
     article = filterResource( articleId, article );
 
-  articleText = string( article.toUtf8().constData() );
+  articleText = article.toStdString();
 }
 
 QString & MdxDictionary::filterResource( QString const & articleId, QString & article )
@@ -1409,7 +1409,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       if ( !parser.open( i->c_str() ) )
         continue;
 
-      string title = string( parser.title().toUtf8().constData() );
+      string title = parser.title().toStdString();
       initializing.indexingDictionary( title );
 
       for ( vector< string >::const_iterator mddIter = dictFiles.begin() + 1;
@@ -1440,7 +1440,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
 
       // then the encoding
       {
-        string encoding = string( parser.encoding().toUtf8().constData() );
+        string encoding = parser.encoding().toStdString();
         idx.write< uint32_t >( encoding.size() );
         idx.write( encoding.data(), encoding.size() );
       }
@@ -1457,7 +1457,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
 
       // Save dictionary description if there's one
       {
-        string description = string( parser.description().toUtf8().constData() );
+        string description = parser.description().toStdString();
         idxHeader.descriptionAddress = chunks.startNewBlock();
         chunks.addToBlock( description.c_str(), description.size() + 1 );
         idxHeader.descriptionSize = description.size() + 1;
@@ -1491,7 +1491,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
         mddIndices.push_back( mddIndexedWords );
         // Save filename for .mdd files only
         QFileInfo fi( mddParser->filename() );
-        mddFileNames.push_back( string( fi.fileName().toUtf8().constData() ) );
+        mddFileNames.push_back( fi.fileName().toStdString() );
         mddParsers.pop_front();
       }
 
@@ -1514,8 +1514,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
         for ( MdictParser::StyleSheets::const_iterator iter = styleSheets.begin();
               iter != styleSheets.end(); ++iter )
         {
-          string styleBegin( iter->second.first.toUtf8().constData() );
-          string styleEnd( iter->second.second.toUtf8().constData() );
+          string styleBegin(iter->second.first.toStdString());
+          string styleEnd( iter->second.second.toStdString() );
 
           // key
           idx.write<qint32>( iter->first );
