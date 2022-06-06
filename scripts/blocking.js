@@ -7,10 +7,12 @@
 // Functions that can be called from C++ code at any time should be defined here to make the
 // functionality work (more or less) and prevent ReferenceError while the page is being loaded.
 
+var gdArticleContents;
 const gdAudioLinks = {
     first: null,
     current: null
 };
+var gdCurrentArticle;
 
 function gdMakeArticleActive(newId) {
     const articleId = 'gdfrom-' + newId;

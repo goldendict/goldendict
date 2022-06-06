@@ -611,7 +611,7 @@ void ArticleRequest::bodyFinished()
         {
           // This is the first article
           head += "<script>"
-                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
+                  "gdCurrentArticle=\"" + gdFrom  + "\"; "
                   "gdArticleView.onJsActiveArticleChanged(gdCurrentArticle)</script>";
         }
 
@@ -653,7 +653,7 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script>var gdArticleContents; "
+        head += "<script>"
           "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
           "else gdArticleContents += \"" + jsVal + " \";</script>";
 
