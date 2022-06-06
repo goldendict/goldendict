@@ -584,9 +584,6 @@ void ArticleView::loadFinished( bool )
     qApp->sendEvent( ui.definition, &ev );
   }
 
-  // Expand collapsed article if only one loaded
-  ui.definition->page()->mainFrame()->evaluateJavaScript( "gdCheckArticlesNumber();" );
-
   QVariant userDataVariant = ui.definition->history()->currentItem().userData();
   if ( userDataVariant.type() == QVariant::Map )
   {

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/scripts">
         <file>blocking.js</file>
+        <file>deferred.js</file>
     </qresource>
 </RCC>

@@ -29,7 +29,10 @@ void appendScripts( string & result )
   // "QIODevice::read (QNetworkReplyFileImpl): device not open" at GoldenDict start, because
   // AllowFrameReply::baseReply is not open when AllowFrameReply::readDataFromBase() is invoked.
 
-  result += "<script>"
+  result +=
+  // Start reading the deferred script early so that it is ready when needed.
+            "<script defer src='qrcx://localhost/scripts/deferred.js'></script>"
+            "<script>"
             "const gdExpandArticleTitle = \"";
   result += ArticleMaker::tr( "Expand article" ).toUtf8().constData();
   result += "\";\n"
