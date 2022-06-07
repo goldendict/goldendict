@@ -10,7 +10,7 @@
 #include <sddl.h>
 #include <accctrl.h>
 #include <aclapi.h>
-#include "mouseover_win32/ThTypes.h"
+#include "win32/ThTypes.h"
 #include "wordbyauto.hh"
 #include "x64.hh"
 #endif

@@ -516,14 +516,14 @@ SOURCES += src/folding.cc \
 
 win32 {
     FORMS   += src/texttospeechsource.ui
-    SOURCES += mouseover_win32/ThTypes.c \
+    SOURCES += src/win32/ThTypes.c \
                src/wordbyauto.cc \
                src/guids.c \
                src/x64.cc \
                src/speechclient_win.cc \
                src/texttospeechsource.cc \
                src/speechhlp.cc
-    HEADERS += mouseover_win32/ThTypes.h \
+    HEADERS += src/win32/ThTypes.h \
                src/wordbyauto.hh \
                src/uiauto.hh \
                src/x64.hh \
