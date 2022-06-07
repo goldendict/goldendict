@@ -221,7 +221,7 @@ inline std::pair< bool, QString > getQueryWord( QUrl const & url )
       word = url.path().mid( 1 );
     }
   }
-  if( url.scheme().compare( "bword" ) == 0 )
+  if( url.scheme().compare( "bword" ) == 0 || url.scheme().compare( "entry" ) == 0 )
   {
     validScheme = true;
 
