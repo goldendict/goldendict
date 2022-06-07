@@ -193,13 +193,13 @@ unix:!mac {
     INSTALLS += target \
         locale
     icons.path = $$PREFIX/share/pixmaps
-    icons.files = redist/icons/*.*
+    icons.files = data/icons/goldendict.png
     INSTALLS += icons
     desktops.path = $$PREFIX/share/applications
-    desktops.files = redist/*.desktop
+    desktops.files = data/*.desktop
     INSTALLS += desktops
     metainfo.path = $$PREFIX/share/metainfo
-    metainfo.files = redist/*.metainfo.xml
+    metainfo.files = data/*.metainfo.xml
     INSTALLS += metainfo
     helps.path = $$PREFIX/share/goldendict/help/
     helps.files = help/*.qch
