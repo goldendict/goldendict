@@ -224,7 +224,24 @@ inline std::pair< bool, QString > getQueryWord( QUrl const & url )
   if( url.scheme().compare( "bword" ) == 0 )
   {
     validScheme = true;
-    word        = url.path().mid( 1 );
+
+    auto path = url.path();
+    // url like this , bword:word  or bword://localhost/word
+    if( !path.isEmpty() )
+    {
+      //url,bword://localhost/word
+      if( path.startsWith( "/" ) )
+        word = url.path().mid( 1 );
+    }
+    else
+    {
+      // url looks like this, bword://word,or bword://localhost
+      auto host = url.host();
+      if( host != "localhost" )
+      {
+        word = host;
+      }
+    }
   }
   return std::make_pair( validScheme, word );
 }

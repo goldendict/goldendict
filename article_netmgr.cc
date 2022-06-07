@@ -513,11 +513,10 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   request.setUrl( url );
 
   //all the url reached here must be either gdlookup or bword scheme.
-  auto queryWord = Utils::Url::getQueryWord( url );
-  auto word      = queryWord.second;
+  auto [valid, word] = Utils::Url::getQueryWord( url );
   // or the condition can be (!queryWord.first || word.isEmpty())
   // ( queryWord.first && word.isEmpty() ) is only part of the above condition.
-  if( queryWord.first && word.isEmpty() )
+  if( valid && word.isEmpty() )
   {
     // invalid gdlookup url.
     return;
