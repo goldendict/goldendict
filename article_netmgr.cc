@@ -8,6 +8,7 @@
 #include "gddebug.hh"
 #include "utils.hh"
 #include <QNetworkAccessManager>
+#include "globalbroadcaster.h"
 
 using std::string;
 
@@ -249,11 +250,22 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
 }
 
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
-  QUrl const & url, QString & contentType )
+  QUrl const & resUrl, QString & contentType )
 {
-  GD_DPRINTF( "getResource: %ls", url.toString().toStdWString().c_str() );
-  GD_DPRINTF( "scheme: %ls", url.scheme().toStdWString().c_str() );
-  GD_DPRINTF( "host: %ls", url.host().toStdWString().c_str() );
+  GD_DPRINTF( "getResource: %ls", resUrl.toString().toStdWString().c_str() );
+  GD_DPRINTF( "scheme: %ls", resUrl.scheme().toStdWString().c_str() );
+  GD_DPRINTF( "host: %ls", resUrl.host().toStdWString().c_str() );
+
+  QUrl url = resUrl;
+  if( url.scheme() == "bword" || url.scheme() == "entry" )
+  {
+    url.setScheme( "gdlookup" );
+    url.setHost( "localhost" );
+    url.setPath( "" );
+    auto [ valid, word ] = Utils::Url::getQueryWord( resUrl );
+    Utils::Url::addQueryItem( url, "word", word );
+    Utils::Url::addQueryItem( url, "group", QString( "%1" ).arg( GlobalBroadcaster::instance()->getGroupId() ) );
+  }
 
   if ( url.scheme() == "gdlookup" )
   {
@@ -273,6 +285,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     bool groupIsValid = false;
     unsigned group = Utils::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
+
+    GlobalBroadcaster::instance()->setGroupId(group);
    
     QString dictIDs = Utils::Url::queryItemValue( url, "dictionaries" );
     if( !dictIDs.isEmpty() )

@@ -231,7 +231,9 @@ inline std::pair< bool, QString > getQueryWord( QUrl const & url )
     {
       //url,bword://localhost/word
       if( path.startsWith( "/" ) )
-        word = url.path().mid( 1 );
+        word = path.mid( 1 );
+      else
+        word = path;
     }
     else
     {

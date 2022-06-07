@@ -6,6 +6,11 @@ $(function() {
             if ('string' != typeof(link)) {
                 return;
             }
+
+            if(link.indexOf("javascript:")>=0){
+                return;
+            }
+
             if(link.indexOf(":")>=0){
                 emitClickedEvent(link);
                 return false;
