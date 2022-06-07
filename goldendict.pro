@@ -602,7 +602,8 @@ CONFIG( old_hunspell ) {
 }
 
 RESOURCES += resources.qrc \
-    flags.qrc
+    flags.qrc \
+    data/icons/icons.qrc
 
 TRANSLATIONS += data/locale/ru_RU.ts \
     data/locale/zh_CN.ts \
