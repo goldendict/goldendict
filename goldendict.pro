@@ -690,5 +690,5 @@ TS_OUT = $$TRANSLATIONS
 TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
-include( src/third-party/qtsingleapplication/src/qtsingleapplication.pri )
+include( third-party/qtsingleapplication/src/qtsingleapplication.pri )
 
