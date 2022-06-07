@@ -63,8 +63,8 @@ public:
   {}
 
 public slots:
-  void onPageJsReady( bool hasSound )
-  { articleView.onPageJsReady( hasSound ); }
+  void onPageJsReady( QVariantMap const & audioLinks )
+  { articleView.onPageJsReady( audioLinks ); }
 
   void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
@@ -264,7 +264,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   popupView( popupView_ ),
   cfg( cfg_ ),
   jsProxy( new ArticleViewJsProxy( *this ) ),
-  loadedPageHasSound( false ),
   pasteAction( this ),
   articleUpAction( this ),
   articleDownAction( this ),
@@ -1741,26 +1740,15 @@ void ArticleView::reload()
 
 bool ArticleView::hasSound() const
 {
-  return loadedPageHasSound;
+  return !audioLinks.value( "first" ).toString().isEmpty();
 }
 
 void ArticleView::playSound()
 {
-  QVariant v;
-  QString soundScript;
-
-  v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
-
-  if ( v.type() == QVariant::String )
-    soundScript = v.toString();
-
+  QString soundScript = audioLinks.value( getActiveArticleId() ).toString();
   // fallback to the first one
   if ( soundScript.isEmpty() )
-  {
-    v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-    if ( v.type() == QVariant::String )
-      soundScript = v.toString();
-  }
+    soundScript = audioLinks.value( "first" ).toString();
 
   if ( !soundScript.isEmpty() )
     openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
@@ -2326,9 +2314,9 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
-void ArticleView::onPageJsReady( bool hasSound )
+void ArticleView::onPageJsReady( QVariantMap const & audioLinks_ )
 {
-  loadedPageHasSound = hasSound;
+  audioLinks = audioLinks_;
 }
 
 void ArticleView::onJsActiveArticleChanged(QString const & id)

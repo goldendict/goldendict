@@ -35,7 +35,7 @@ class ArticleView: public QFrame
 
   ArticleViewJsProxy * const jsProxy;
 
-  bool loadedPageHasSound;
+  QVariantMap audioLinks;
 
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
@@ -315,7 +315,7 @@ private:
   /// <JavaScript interface>
 
   friend class ArticleViewJsProxy;
-  void onPageJsReady( bool hasSound );
+  void onPageJsReady( QVariantMap const & audioLinks_ );
   void onJsActiveArticleChanged( QString const & id );
 
   /// </JavaScript interface>

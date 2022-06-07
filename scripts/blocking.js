@@ -9,8 +9,7 @@
 
 var gdArticleContents;
 const gdAudioLinks = {
-    first: null,
-    current: null
+    first: null
 };
 var gdCurrentArticle;
 
@@ -22,7 +21,6 @@ function gdMakeArticleActive(newId) {
         el = document.getElementById(articleId);
         el.className = el.className + ' gdactivearticle';
         gdCurrentArticle = articleId;
-        gdAudioLinks.current = newId;
         gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
     }
 }

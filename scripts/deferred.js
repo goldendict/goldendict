@@ -12,4 +12,4 @@
     }
 })();
 
-gdArticleView.onPageJsReady(!!gdAudioLinks.first);
+gdArticleView.onPageJsReady(gdAudioLinks);
