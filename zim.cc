@@ -769,7 +769,7 @@ ZimDictionary::ZimDictionary( string const & id,
     {
       QString name = QDir::fromNativeSeparators( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) );
       int n = name.lastIndexOf( '/' );
-      dictionaryName = string( name.mid( n + 1 ).toUtf8().constData() );
+      dictionaryName = name.mid( n + 1 ).toStdString();
     }
     else
     {

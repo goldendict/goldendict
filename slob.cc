@@ -694,12 +694,12 @@ SlobDictionary::SlobDictionary( string const & id,
 
     // Read dictionary name
 
-    dictionaryName = string( sf.getDictionaryName().toUtf8().constData() );
+    dictionaryName = sf.getDictionaryName().toStdString();
     if( dictionaryName.empty() )
     {
       QString name = QDir::fromNativeSeparators( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) );
       int n = name.lastIndexOf( '/' );
-      dictionaryName = string( name.mid( n + 1 ).toUtf8().constData() );
+      dictionaryName = name.mid( n + 1 ).toStdString();
     }
 
     // Full-text search parameters
@@ -799,7 +799,7 @@ void SlobDictionary::loadArticle( quint32 address,
     articleText = convert( articleText, entry );
   }
   else
-    articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
+    articleText = QObject::tr( "Article decoding error" ).toStdString();
 
   // See Issue #271: A mechanism to clean-up invalid HTML cards.
   string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"

@@ -1113,9 +1113,8 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   audioPlayer->stop();
   qDebug() << "open link url:" << url;
 
-  auto queryWord = Utils::Url::getQueryWord( url );
-  auto word      = queryWord.second;
-  if( queryWord.first && word.isEmpty() )
+  auto [valid, word] = Utils::Url::getQueryWord( url );
+  if( valid && word.isEmpty() )
   {
     // invalid gdlookup url.
     return;
@@ -1126,7 +1125,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   if( url.scheme().compare( "gdpicture" ) == 0 )
     ui.definition->load( url );
   else
-  if ( url.scheme().compare( "bword" ) == 0 )
+  if ( url.scheme().compare( "bword" ) == 0 || url.scheme().compare( "entry" ) == 0 )
   {
     if( Utils::Url::hasQueryItem( ref, "dictionaries" ) )
     {
