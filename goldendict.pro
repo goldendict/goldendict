@@ -202,7 +202,7 @@ unix:!mac {
     metainfo.files = redist/*.metainfo.xml
     INSTALLS += metainfo
     helps.path = $$PREFIX/share/goldendict/help/
-    helps.files = help/*.qch
+    helps.files = data/help/*.qch
     INSTALLS += helps
 }
 freebsd {
@@ -242,7 +242,7 @@ mac {
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
                       cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/help & \
-                      cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
+                      cp -R $${PWD}/data/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
