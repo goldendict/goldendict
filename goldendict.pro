@@ -96,7 +96,7 @@ win32 {
                 LIBS += -L$${PWD}/winlibs/lib32-48
             }
         } else {
-            LIBS += -L$${PWD}/winlibs/lib
+            LIBS += -L$${PWD}/third-party/lib/windows
         }
         !x64:QMAKE_LFLAGS += -Wl,--large-address-aware
 
@@ -128,7 +128,7 @@ win32 {
 
 
     RC_FILE = goldendict.rc
-    INCLUDEPATH += winlibs/include
+    INCLUDEPATH += third-party/include/windows
 
     # Enable console in Debug mode on Windows, with useful logging messages
     Debug:CONFIG += console
@@ -229,8 +229,8 @@ mac {
             -lavformat-gd \
             -lavcodec-gd
     }
-    INCLUDEPATH = $${PWD}/maclibs/include
-    LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
+    INCLUDEPATH = $${PWD}/third-party/include/macos
+    LIBS += -L$${PWD}/third-party/lib/macos -framework AppKit -framework Carbon
     OBJECTIVE_SOURCES += src/lionsupport.mm \
                          src/machotkeywrapper.mm \
                          src/macmouseover.mm \
@@ -238,7 +238,7 @@ mac {
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
-                      cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
+                      cp -nR $${PWD}/third-party/lib/macos GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
                       cp -R data/locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/help & \
