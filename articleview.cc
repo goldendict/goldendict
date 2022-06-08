@@ -760,19 +760,19 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
     return false; // No action on background page, scrollIntoView there don't work
 
   QString const dictionaryId = dictionaryIdFromScrollTo( id );
-  if ( getArticlesList().contains( dictionaryId ) )
-  {
-    if ( moveToIt )
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
+  if( !getArticlesList().contains( dictionaryId ) )
+    return false;
 
-    QMap< QString, QVariant > userData = ui.definition->history()->
-                                         currentItem().userData().toMap();
-    userData[ "currentArticle" ] = id;
-    ui.definition->history()->currentItem().setUserData( userData );
+  if ( moveToIt )
+    ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
 
-    ui.definition->page()->mainFrame()->evaluateJavaScript(
-      QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
-  }
+  QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
+  userData[ "currentArticle" ] = id;
+  ui.definition->history()->currentItem().setUserData( userData );
+
+  ui.definition->page()->mainFrame()->evaluateJavaScript(
+    QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
+
   return true;
 }
 
