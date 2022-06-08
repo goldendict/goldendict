@@ -75,11 +75,8 @@ jobs:
           mv ${targetName}.app ./tmp
           # --background "installer_background.png"
           create-dmg --volname "${targetName} Installer" --volicon "icons/macicon.icns" --window-pos 200 120 --window-size 800 400 --icon-size 100 --icon "${targetName}.app" 200 190 --hide-extension "${targetName}.app" --app-drop-link 600 185 --skip-jenkins "${targetName}.dmg" tmp/
-      - name: Generate changelog
-        id: changelog
-        uses: metcalfc/changelog-generator@v3.0.0
-        with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+
+
       - name: Set outputs
         id: vars
         run: |
@@ -125,6 +122,4 @@ jobs:
             auto built by github action. use on your on risk:-)   
 
             CHANGES:
-            ${{ steps.vars.outputs.COMMIT_SUMMARY }}
-            CHANGE LOGS:    
-            ${{ steps.changelog.outputs.changelog }}        
+            ${{ steps.vars.outputs.COMMIT_SUMMARY }}            
