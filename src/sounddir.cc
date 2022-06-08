@@ -2,17 +2,17 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "sounddir.hh"
-#include "file.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/file.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "dict/btreeidx.hh"
 #include "chunkedstorage.hh"
-#include "filetype.hh"
+#include "utils/filetype.hh"
 #include "htmlescape.hh"
 #include "audiolink.hh"
-#include "wstring_qt.hh"
-#include "fsencoding.hh"
-#include "qt4x5.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/fsencoding.hh"
+#include "utils/qt4x5.hh"
 
 #include <set>
 #include <QDir>

@@ -11,11 +11,11 @@
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QFileDialog>
-#include "folding.hh"
-#include "wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/wstring_qt.hh"
 #include "webmultimediadownload.hh"
 #include "programs.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include <QDebug>
 #include <QCryptographicHash>
 #include "gestures.hh"
@@ -28,10 +28,10 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#include "wildcard.hh"
+#include "utils/wildcard.hh"
 #endif
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 #include <assert.h>
 

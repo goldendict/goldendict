@@ -3,16 +3,16 @@
 
 #include "xdxf2html.hh"
 #include <QtXml>
-#include "gddebug.hh"
-#include "utf8.hh"
-#include "wstring_qt.hh"
-#include "folding.hh"
-#include "fsencoding.hh"
+#include "utils/gddebug.hh"
+#include "utils/utf8.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/fsencoding.hh"
 #include "audiolink.hh"
-#include "file.hh"
-#include "filetype.hh"
+#include "utils/file.hh"
+#include "utils/filetype.hh"
 #include "htmlescape.hh"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 #include <QDebug>
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )

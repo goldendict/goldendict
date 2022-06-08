@@ -3,7 +3,7 @@
 #include "language.hh"
 #include "langcoder.hh"
 #include <QMessageBox>
-#include "broken_xrecord.hh"
+#include "utils/broken_xrecord.hh"
 #include "mainwindow.hh"
 
 

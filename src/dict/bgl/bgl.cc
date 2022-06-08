@@ -4,14 +4,14 @@
 #include "dict/bgl/bgl.hh"
 #include "dict/btreeidx.hh"
 #include "bgl_babylon.hh"
-#include "file.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/file.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "chunkedstorage.hh"
 #include "langcoder.hh"
 #include "language.hh"
-#include "gddebug.hh"
-#include "fsencoding.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
 #include "htmlescape.hh"
 #include "ftshelpers.hh"
 
@@ -37,7 +37,7 @@
 #include <QRegularExpression>
 #endif
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 namespace Bgl {
 

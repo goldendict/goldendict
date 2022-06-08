@@ -7,7 +7,7 @@
 #include "dict/dictionary.hh"
 #include "config.hh"
 #include <QNetworkAccessManager>
-#include "wstring.hh"
+#include "utils/wstring.hh"
 #include <QNetworkReply>
 
 /// Support for Forvo pronunciations, based on its API.

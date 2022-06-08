@@ -3,11 +3,11 @@
 
 #include "dictdfiles.hh"
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
-#include "dictzip.h"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
+#include "utils/dictzip.h"
 #include "htmlescape.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include "langcoder.hh"
 #include <map>
 #include <set>
@@ -16,7 +16,7 @@
 #include <list>
 #include <wctype.h>
 #include <stdlib.h>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "ftshelpers.hh"
 #include <QUrl>
 

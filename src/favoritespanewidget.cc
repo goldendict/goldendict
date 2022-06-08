@@ -13,7 +13,7 @@
 #include <algorithm>
 
 #include "favoritespanewidget.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "atomic_rename.hh"
 
 /************************************************** FavoritesPaneWidget *********************************************/

@@ -2,7 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "dictheadwords.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "mainwindow.hh"
 
 #include <QRegExp>
@@ -13,8 +13,8 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
 #include <QRegularExpression>
-#include "wildcard.hh"
-#include "gddebug.hh"
+#include "utils/wildcard.hh"
+#include "utils/gddebug.hh"
 #endif
 
 #define AUTO_APPLY_LIMIT 150000

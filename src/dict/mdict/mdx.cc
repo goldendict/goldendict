@@ -3,19 +3,19 @@
 
 #include "dict/mdict/mdx.hh"
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
-#include "file.hh"
-#include "wstring.hh"
-#include "wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
+#include "utils/file.hh"
+#include "utils/wstring.hh"
+#include "utils/wstring_qt.hh"
 #include "chunkedstorage.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "langcoder.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include "audiolink.hh"
-#include "ex.hh"
+#include "utils/ex.hh"
 #include "mdictparser.hh"
-#include "filetype.hh"
+#include "utils/filetype.hh"
 #include "ftshelpers.hh"
 #include "htmlescape.hh"
 
@@ -42,7 +42,7 @@
 #include <QRegularExpression>
 #endif
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 namespace Mdx
 {

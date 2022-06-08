@@ -261,33 +261,33 @@ mac {
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
-HEADERS += src/folding.hh \
-    src/inc_case_folding.hh \
-    src/inc_diacritic_folding.hh \
+HEADERS += src/utils/folding.hh \
+    src/utils/inc_case_folding.hh \
+    src/utils/inc_diacritic_folding.hh \
     src/mainwindow.hh \
-    src/sptr.hh \
+    src/utils/sptr.hh \
     src/dict/dictionary.hh \
-    src/ex.hh \
+    src/utils/ex.hh \
     src/config.hh \
     src/sources.hh \
-    src/utf8.hh \
-    src/file.hh \
+    src/utils/utf8.hh \
+    src/utils/file.hh \
     src/dict/bgl/bgl_babylon.hh \
     src/dict/bgl/bgl.hh \
     src/initializing.hh \
     src/article_netmgr.hh \
-    src/dictzip.h \
+    src/utils/dictzip.h \
     src/dict/btreeidx.hh \
     src/dict/stardict.hh \
     src/chunkedstorage.hh \
     src/dict/xdxf/xdxf2html.hh \
-    src/iconv.hh \
+    src/utils/iconv.hh \
     src/lsa.hh \
     src/htmlescape.hh \
     src/dict/dsl/dsl.hh \
     src/dict/dsl/dsl_details.hh \
-    src/filetype.hh \
-    src/fsencoding.hh \
+    src/utils/filetype.hh \
+    src/utils/fsencoding.hh \
     src/groups.hh \
     src/groups_widgets.hh \
     src/instances.hh \
@@ -308,11 +308,11 @@ HEADERS += src/folding.hh \
     src/mutex.hh \
     src/mediawiki.hh \
     src/sounddir.hh \
-    src/hunspell.hh \
+    src/utils/hunspell.hh \
     src/dict/dictdfiles.hh \
     src/audiolink.hh \
-    src/wstring.hh \
-    src/wstring_qt.hh \
+    src/utils/wstring.hh \
+    src/utils/wstring_qt.hh \
     src/processwrapper.hh \
     src/hotkeywrapper.hh \
     src/searchpanewidget.hh \
@@ -329,12 +329,12 @@ HEADERS += src/folding.hh \
     src/orderandprops.hh \
     src/language.hh \
     src/dictionarybar.hh \
-    src/broken_xrecord.hh \
+    src/utils/broken_xrecord.hh \
     src/history.hh \
     src/atomic_rename.hh \
     src/articlewebview.hh \
-    src/zipfile.hh \
-    src/indexedzip.hh \
+    src/utils/zipfile.hh \
+    src/utils/indexedzip.hh \
     src/termination.hh \
     src/greektranslit.hh \
     src/webmultimediadownload.hh \
@@ -347,14 +347,14 @@ HEADERS += src/folding.hh \
     src/maintabwidget.hh \
     src/mainstatusbar.hh \
     src/gdappstyle.hh \
-    src/ufile.hh \
+    src/utils/ufile.hh \
     src/dict/xdxf/xdxf.hh \
     src/dict/sdict.hh \
-    src/decompress.hh \
+    src/utils/decompress.hh \
     src/dict/aard.hh \
     src/mruqmenu.hh \
     src/dictinfo.hh \
-    src/zipsounds.hh \
+    src/utils/zipsounds.hh \
     src/stylescombobox.hh \
     src/extlineedit.hh \
     src/translatebox.hh \
@@ -367,10 +367,10 @@ HEADERS += src/folding.hh \
     src/articleinspector.hh \
     src/delegate.hh \
     src/dict/zim.hh \
-    src/gddebug.hh \
-    src/qt4x5.hh \
+    src/utils/gddebug.hh \
+    src/utils/qt4x5.hh \
     src/gestures.hh \
-    src/tiff.hh \
+    src/utils/tiff.hh \
     src/dictheadwords.hh \
     src/fulltextsearch.hh \
     src/ftshelpers.hh \
@@ -379,9 +379,9 @@ HEADERS += src/folding.hh \
     src/dict/slob.hh \
     src/ripemd.hh \
     src/dict/gls.hh \
-    src/splitfile.hh \
+    src/utils/splitfile.hh \
     src/favoritespanewidget.hh \
-    src/cpp_features.hh \
+    src/utils/cpp_features.hh \
     src/treeview.hh
 
 FORMS += src/groups.ui \
@@ -400,30 +400,30 @@ FORMS += src/groups.ui \
     src/authentication.ui \
     src/fulltextsearch.ui
 
-SOURCES += src/folding.cc \
+SOURCES += src/utils/folding.cc \
     src/main.cc \
     src/dict/dictionary.cc \
     src/config.cc \
     src/sources.cc \
     src/mainwindow.cc \
-    src/utf8.cc \
-    src/file.cc \
+    src/utils/utf8.cc \
+    src/utils/file.cc \
     src/dict/bgl/bgl_babylon.cc \
     src/dict/bgl/bgl.cc \
     src/initializing.cc \
     src/article_netmgr.cc \
-    src/dictzip.c \
+    src/utils/dictzip.c \
     src/dict/btreeidx.cc \
     src/dict/stardict.cc \
     src/chunkedstorage.cc \
     src/dict/xdxf/xdxf2html.cc \
-    src/iconv.cc \
+    src/utils/iconv.cc \
     src/lsa.cc \
     src/htmlescape.cc \
     src/dict/dsl/dsl.cc \
     src/dict/dsl/dsl_details.cc \
-    src/filetype.cc \
-    src/fsencoding.cc \
+    src/utils/filetype.cc \
+    src/utils/fsencoding.cc \
     src/groups.cc \
     src/groups_widgets.cc \
     src/instances.cc \
@@ -442,11 +442,11 @@ SOURCES += src/folding.cc \
     src/mutex.cc \
     src/mediawiki.cc \
     src/sounddir.cc \
-    src/hunspell.cc \
+    src/utils/hunspell.cc \
     src/dict/dictdfiles.cc \
     src/audiolink.cc \
-    src/wstring.cc \
-    src/wstring_qt.cc \
+    src/utils/wstring.cc \
+    src/utils/wstring_qt.cc \
     src/processwrapper.cc \
     src/hotkeywrapper.cc \
     src/hotkeyedit.cc \
@@ -462,12 +462,12 @@ SOURCES += src/folding.cc \
     src/orderandprops.cc \
     src/language.cc \
     src/dictionarybar.cc \
-    src/broken_xrecord.cc \
+    src/utils/broken_xrecord.cc \
     src/history.cc \
     src/atomic_rename.cc \
     src/articlewebview.cc \
-    src/zipfile.cc \
-    src/indexedzip.cc \
+    src/utils/zipfile.cc \
+    src/utils/indexedzip.cc \
     src/termination.cc \
     src/greektranslit.cc \
     src/webmultimediadownload.cc \
@@ -479,14 +479,14 @@ SOURCES += src/folding.cc \
     src/maintabwidget.cc \
     src/mainstatusbar.cc \
     src/gdappstyle.cc \
-    src/ufile.cc \
+    src/utils/ufile.cc \
     src/dict/xdxf/xdxf.cc \
     src/dict/sdict.cc \
-    src/decompress.cc \
+    src/utils/decompress.cc \
     src/dict/aard.cc \
     src/mruqmenu.cc \
     src/dictinfo.cc \
-    src/zipsounds.cc \
+    src/utils/zipsounds.cc \
     src/stylescombobox.cc \
     src/extlineedit.cc \
     src/translatebox.cc \
@@ -499,9 +499,9 @@ SOURCES += src/folding.cc \
     src/articleinspector.cc \
     src/delegate.cc \
     src/dict/zim.cc \
-    src/gddebug.cc \
+    src/utils/gddebug.cc \
     src/gestures.cc \
-    src/tiff.cc \
+    src/utils/tiff.cc \
     src/dictheadwords.cc \
     src/fulltextsearch.cc \
     src/ftshelpers.cc \
@@ -510,7 +510,7 @@ SOURCES += src/folding.cc \
     src/dict/slob.cc \
     src/ripemd.cc \
     src/dict/gls.cc \
-    src/splitfile.cc \
+    src/utils/splitfile.cc \
     src/favoritespanewidget.cc \
     src/treeview.cc
 
@@ -519,14 +519,14 @@ win32 {
     SOURCES += src/win32/ThTypes.c \
                src/wordbyauto.cc \
                src/guids.c \
-               src/x64.cc \
+               src/utils/x64.cc \
                src/speechclient_win.cc \
                src/texttospeechsource.cc \
                src/speechhlp.cc
     HEADERS += src/win32/ThTypes.h \
                src/wordbyauto.hh \
                src/uiauto.hh \
-               src/x64.hh \
+               src/utils/x64.hh \
                src/texttospeechsource.hh \
                src/sapi.hh \
                src/sphelper.hh \
@@ -550,8 +550,8 @@ unix:!mac {
 }
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-    HEADERS += src/wildcard.hh
-    SOURCES += src/wildcard.cc
+    HEADERS += src/utils/wildcard.hh
+    SOURCES += src/utils/wildcard.cc
 }
 
 CONFIG( zim_support ) {

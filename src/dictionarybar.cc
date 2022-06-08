@@ -4,8 +4,8 @@
 #include <QMenu>
 #include <QContextMenuEvent>
 #include <QProcess>
-#include "gddebug.hh"
-#include "fsencoding.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
 #include <QDebug>
 
 using std::vector;

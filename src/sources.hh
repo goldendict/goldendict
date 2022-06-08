@@ -6,7 +6,7 @@
 
 #include "ui_sources.h"
 #include "config.hh"
-#include "hunspell.hh"
+#include "utils/hunspell.hh"
 #include <QAbstractItemModel>
 #include <QComboBox>
 #include <QItemDelegate>

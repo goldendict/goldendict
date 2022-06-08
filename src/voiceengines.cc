@@ -4,8 +4,8 @@
 #include "voiceengines.hh"
 #include "audiolink.hh"
 #include "htmlescape.hh"
-#include "utf8.hh"
-#include "wstring_qt.hh"
+#include "utils/utf8.hh"
+#include "utils/wstring_qt.hh"
 
 #include <string>
 #include <map>
@@ -14,7 +14,7 @@
 #include <QFileInfo>
 #include <QCryptographicHash>
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 namespace VoiceEngines
 {

@@ -3,12 +3,12 @@
 
 #include "dsl_details.hh"
 
-#include "folding.hh"
+#include "utils/folding.hh"
 #include "langcoder.hh"
-#include "gddebug.hh"
-#include "ufile.hh"
-#include "wstring_qt.hh"
-#include "utf8.hh"
+#include "utils/gddebug.hh"
+#include "utils/ufile.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/utf8.hh"
 
 #include <stdio.h>
 #include <wctype.h>

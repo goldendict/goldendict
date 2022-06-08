@@ -10,7 +10,7 @@
 #include <QDesktopServices>
 
 #include "helpwindow.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 namespace Help {
 

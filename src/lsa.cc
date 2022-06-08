@@ -2,14 +2,14 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "lsa.hh"
-#include "file.hh"
-#include "iconv.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/file.hh"
+#include "utils/iconv.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "dict/btreeidx.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include "audiolink.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #include <set>
 #include <string>
@@ -25,7 +25,7 @@
 #include <QDebug>
 #include <QFile>
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 namespace Lsa {
 

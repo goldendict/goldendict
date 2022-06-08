@@ -5,7 +5,7 @@
 #define __BTREEIDX_HH_INCLUDED__
 
 #include "dict/dictionary.hh"
-#include "file.hh"
+#include "utils/file.hh"
 
 #include <string>
 #include <vector>
@@ -14,7 +14,7 @@
 #include <QVector>
 #include <QSet>
 #include <QList>
-#include "cpp_features.hh"
+#include "utils/cpp_features.hh"
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>

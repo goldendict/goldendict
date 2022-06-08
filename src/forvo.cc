@@ -2,7 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "forvo.hh"
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QtXml>
@@ -12,9 +12,9 @@
 #include "country.hh"
 #include "language.hh"
 #include "langcoder.hh"
-#include "utf8.hh"
-#include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils/utf8.hh"
+#include "utils/gddebug.hh"
+#include "utils/qt4x5.hh"
 
 namespace Forvo {
 

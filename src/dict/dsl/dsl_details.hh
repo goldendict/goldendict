@@ -9,7 +9,7 @@
 #include <vector>
 #include <zlib.h>
 #include "dict/dictionary.hh"
-#include "iconv.hh"
+#include "utils/iconv.hh"
 
 // Implementation details for Dsl, not part of its interface
 namespace Dsl {

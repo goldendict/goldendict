@@ -3,11 +3,11 @@
 
 #include "fulltextsearch.hh"
 #include "ftshelpers.hh"
-#include "wstring_qt.hh"
-#include "file.hh"
-#include "gddebug.hh"
-#include "folding.hh"
-#include "qt4x5.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/file.hh"
+#include "utils/gddebug.hh"
+#include "utils/folding.hh"
+#include "utils/qt4x5.hh"
 
 #include <vector>
 #include <string>
@@ -16,7 +16,7 @@
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#include "wildcard.hh"
+#include "utils/wildcard.hh"
 #endif
 
 using std::vector;

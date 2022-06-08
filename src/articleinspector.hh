@@ -8,7 +8,7 @@
 #include <QWebInspector>
 #include <list>
 #include "config.hh"
-#include "ex.hh"
+#include "utils/ex.hh"
 
 class ArticleInspector : public QWebInspector
 {

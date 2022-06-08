@@ -3,12 +3,12 @@
 
 #include "xdxf.hh"
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "chunkedstorage.hh"
-#include "dictzip.h"
+#include "utils/dictzip.h"
 #include "htmlescape.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include <map>
 #include <set>
 #include <string>
@@ -16,15 +16,15 @@
 #include <list>
 #include <wctype.h>
 #include <stdlib.h>
-#include "gddebug.hh"
-#include "wstring_qt.hh"
+#include "utils/gddebug.hh"
+#include "utils/wstring_qt.hh"
 #include "xdxf2html.hh"
-#include "ufile.hh"
-#include "dictzip.h"
+#include "utils/ufile.hh"
+#include "utils/dictzip.h"
 #include "langcoder.hh"
-#include "indexedzip.hh"
-#include "filetype.hh"
-#include "tiff.hh"
+#include "utils/indexedzip.hh"
+#include "utils/filetype.hh"
+#include "utils/tiff.hh"
 #include "ftshelpers.hh"
 
 #ifdef _MSC_VER
@@ -44,7 +44,7 @@
 #include <QThreadPool>
 #include <QAtomicInt>
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 namespace Xdxf {
 

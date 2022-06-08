@@ -2,12 +2,12 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "dictserver.hh"
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 #include <QUrl>
 #include <QTcpSocket>
 #include <QString>
 #include <list>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "htmlescape.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )

@@ -10,9 +10,9 @@
 #include <QUrl>
 
 #include "article_netmgr.hh"
-#include "wstring_qt.hh"
-#include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/gddebug.hh"
+#include "utils/qt4x5.hh"
 
 using std::string;
 

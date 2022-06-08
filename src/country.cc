@@ -2,9 +2,9 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "country.hh"
-#include "folding.hh"
+#include "utils/folding.hh"
 #include <QtCore>
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 
 namespace Country {
 

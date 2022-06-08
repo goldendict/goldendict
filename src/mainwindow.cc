@@ -38,12 +38,12 @@
 #include <limits.h>
 #include <set>
 #include <map>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #include "dictinfo.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include "historypanewidget.hh"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
 

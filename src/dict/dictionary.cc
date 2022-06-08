@@ -17,7 +17,7 @@
 #include <QFileInfo>
 #include <QCryptographicHash>
 #include <QDateTime>
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include "langcoder.hh"
 
 #include <QImage>
@@ -28,8 +28,8 @@
 #include <QRegExp>
 #endif
 
-#include "qt4x5.hh"
-#include "zipfile.hh"
+#include "utils/qt4x5.hh"
+#include "utils/zipfile.hh"
 
 namespace Dictionary {
 

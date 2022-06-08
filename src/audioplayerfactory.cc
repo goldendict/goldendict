@@ -7,7 +7,7 @@
 #include "ffmpegaudioplayer.hh"
 #include "multimediaaudioplayer.hh"
 #include "externalaudioplayer.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 AudioPlayerFactory::AudioPlayerFactory( Config::Preferences const & p ) :
   useInternalPlayer( p.useInternalPlayer ),

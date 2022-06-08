@@ -4,8 +4,8 @@
 #ifndef __CHUNKEDSTORAGE_HH_INCLUDED__
 #define __CHUNKEDSTORAGE_HH_INCLUDED__
 
-#include "ex.hh"
-#include "file.hh"
+#include "utils/ex.hh"
+#include "utils/file.hh"
 
 #include <vector>
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older

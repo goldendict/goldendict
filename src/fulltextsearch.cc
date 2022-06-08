@@ -3,9 +3,9 @@
 
 #include "fulltextsearch.hh"
 #include "ftshelpers.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "mainwindow.hh"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 #include <QThreadPool>
 #include <QIntValidator>

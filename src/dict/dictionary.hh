@@ -9,14 +9,14 @@
 #include <map>
 #include <QObject>
 #include <QIcon>
-#include "cpp_features.hh"
-#include "sptr.hh"
-#include "ex.hh"
+#include "utils/cpp_features.hh"
+#include "utils/sptr.hh"
+#include "utils/ex.hh"
 #include "mutex.hh"
-#include "wstring.hh"
+#include "utils/wstring.hh"
 #include "langcoder.hh"
 #include "config.hh"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {

@@ -2,12 +2,12 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "config.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/wstring_qt.hh"
 #include <QDir>
 #include <QFile>
 #include <QtXml>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #if defined( _MSC_VER ) && _MSC_VER < 1800 // VS2012 and older
 #include <stdint_msvc.h>
@@ -20,7 +20,7 @@
 #endif
 
 #include "atomic_rename.hh"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QStandardPaths>

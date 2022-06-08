@@ -11,8 +11,8 @@
 #include "dict/btreeidx.hh"
 #include "fulltextsearch.hh"
 #include "chunkedstorage.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/wstring_qt.hh"
 
 #include <string>
 

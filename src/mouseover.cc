@@ -1,5 +1,5 @@
 #include "mouseover.hh"
-#include "utf8.hh"
+#include "utils/utf8.hh"
 #include <QCoreApplication>
 #include <QDir>
 #include <algorithm>
@@ -12,7 +12,7 @@
 #include <aclapi.h>
 #include "win32/ThTypes.h"
 #include "wordbyauto.hh"
-#include "x64.hh"
+#include "utils/x64.hh"
 #endif
 
 MouseOver & MouseOver::instance()

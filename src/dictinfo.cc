@@ -1,7 +1,7 @@
 #include "dictinfo.hh"
 #include "langcoder.hh"
 #include "language.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include <QString>
 
 DictInfo::DictInfo( Config::Class &cfg_, QWidget *parent ) :

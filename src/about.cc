@@ -5,7 +5,7 @@
 #include <QtGui>
 #include <QSysInfo>
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 About::About( QWidget * parent ): QDialog( parent )
 {

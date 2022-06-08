@@ -2,21 +2,21 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSemaphore>
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
-#include "gddebug.hh"
-#include "wstring_qt.hh"
-#include "qt4x5.hh"
+#include "utils/gddebug.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/qt4x5.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
-#include "wildcard.hh"
+#include "utils/wildcard.hh"
 #endif
 
 //#define __BTREE_USE_LZO

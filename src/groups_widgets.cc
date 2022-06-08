@@ -7,7 +7,7 @@
 #include "config.hh"
 #include "langcoder.hh"
 #include "language.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 
 //#include "initializing.hh"
 

@@ -5,7 +5,7 @@
 #define __LANGUAGE_HH_INCLUDED__
 
 #include <QString>
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 /// Language-specific stuff - codes, names, ids etc.
 namespace Language {
 

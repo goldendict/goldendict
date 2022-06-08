@@ -3,20 +3,20 @@
 
 #include "dict/stardict.hh"
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "chunkedstorage.hh"
-#include "dictzip.h"
+#include "utils/dictzip.h"
 #include "dict/xdxf/xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
-#include "gddebug.hh"
-#include "fsencoding.hh"
-#include "filetype.hh"
-#include "indexedzip.hh"
-#include "tiff.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
+#include "utils/filetype.hh"
+#include "utils/indexedzip.hh"
+#include "utils/tiff.hh"
 #include "ftshelpers.hh"
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 #include "audiolink.hh"
 
 #include <zlib.h>
@@ -43,8 +43,8 @@
 #include <QStringList>
 #include <QDomDocument>
 #include <QDomNode>
-#include "ufile.hh"
-#include "qt4x5.hh"
+#include "utils/ufile.hh"
+#include "utils/qt4x5.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>

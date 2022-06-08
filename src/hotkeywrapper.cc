@@ -4,7 +4,7 @@
 #endif
 
 #include "hotkeywrapper.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #include <QWidget>
 #include <QMainWindow>

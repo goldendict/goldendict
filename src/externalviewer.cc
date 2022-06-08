@@ -5,7 +5,7 @@
 #include <QTimer>
 #include "externalviewer.hh"
 #include "parsecmdline.hh"
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 ExternalViewer::ExternalViewer( const char * data, int size,
                                 QString const & extension, QString const & viewerCmdLine_,

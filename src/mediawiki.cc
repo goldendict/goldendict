@@ -2,17 +2,17 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "mediawiki.hh"
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QUrl>
 #include <QtXml>
 #include <algorithm>
 #include <list>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>

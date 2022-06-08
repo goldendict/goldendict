@@ -28,7 +28,7 @@ extern "C" {
 
 #include <vector>
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 using std::vector;
 

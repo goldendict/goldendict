@@ -2,13 +2,13 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "website.hh"
-#include "wstring_qt.hh"
-#include "utf8.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/utf8.hh"
 #include <QUrl>
 #include <QTextCodec>
 #include <QDir>
 #include <QFileInfo>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>

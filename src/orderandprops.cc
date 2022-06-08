@@ -5,7 +5,7 @@
 #include "instances.hh"
 #include "langcoder.hh"
 #include "language.hh"
-#include "fsencoding.hh"
+#include "utils/fsencoding.hh"
 #include <algorithm>
 
 #include <QMenu>

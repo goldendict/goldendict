@@ -6,12 +6,12 @@
 #include <QDir>
 #include <QTextStream>
 #include <QTextDocumentFragment>
-#include "gddebug.hh"
-#include "fsencoding.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
 #include "audiolink.hh"
-#include "wstring.hh"
-#include "wstring_qt.hh"
-#include "folding.hh"
+#include "utils/wstring.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/folding.hh"
 #include "epwing_charmap.hh"
 
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )

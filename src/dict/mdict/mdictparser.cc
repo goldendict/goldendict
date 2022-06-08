@@ -38,8 +38,8 @@
 #include <QTextDocumentFragment>
 #include <QDataStream>
 
-#include "decompress.hh"
-#include "gddebug.hh"
+#include "utils/decompress.hh"
+#include "utils/gddebug.hh"
 #include "ripemd.hh"
 
 namespace Mdict

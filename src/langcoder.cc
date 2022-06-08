@@ -2,8 +2,8 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "langcoder.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/wstring_qt.hh"
 #include "language.hh"
 
 #ifdef _MSC_VER

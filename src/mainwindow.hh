@@ -11,7 +11,7 @@
 #include <QNetworkAccessManager>
 #include <QProgressDialog>
 #include "ui_mainwindow.h"
-#include "folding.hh"
+#include "utils/folding.hh"
 #include "config.hh"
 #include "dict/dictionary.hh"
 #include "article_netmgr.hh"

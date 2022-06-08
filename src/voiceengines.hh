@@ -6,7 +6,7 @@
 
 #include "dict/dictionary.hh"
 #include "config.hh"
-#include "wstring.hh"
+#include "utils/wstring.hh"
 
 #include <QCryptographicHash>
 

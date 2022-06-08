@@ -9,7 +9,7 @@
 #endif
 #include <opencc/Export.hpp>
 #include <opencc/SimpleConverter.hpp>
-#include "folding.hh"
+#include "utils/folding.hh"
 #include "gddebug.hh"
 #include "transliteration.hh"
 #include "utf8.hh"

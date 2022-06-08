@@ -2,11 +2,11 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "wordfinder.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
+#include "utils/folding.hh"
+#include "utils/wstring_qt.hh"
 #include <QThreadPool>
 #include <map>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 using std::vector;
 using std::list;

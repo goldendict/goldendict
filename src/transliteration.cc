@@ -2,9 +2,9 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "transliteration.hh"
-#include "utf8.hh"
-#include "folding.hh"
-#include "gddebug.hh"
+#include "utils/utf8.hh"
+#include "utils/folding.hh"
+#include "utils/gddebug.hh"
 
 namespace Transliteration {
 

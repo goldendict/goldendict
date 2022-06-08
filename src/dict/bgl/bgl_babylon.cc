@@ -29,9 +29,9 @@
 #include <stdio.h>
 #include <iconv.h>
 #include <QTextDocument>
-#include "gddebug.hh"
-#include "ufile.hh"
-#include "iconv.hh"
+#include "utils/gddebug.hh"
+#include "utils/ufile.hh"
+#include "utils/iconv.hh"
 #include "htmlescape.hh"
 #include <QString>
 #include <QDebug>

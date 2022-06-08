@@ -3,16 +3,16 @@
 
 #include "sdict.hh"
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "chunkedstorage.hh"
 #include "langcoder.hh"
-#include "gddebug.hh"
-#include "fsencoding.hh"
-#include "decompress.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
+#include "utils/decompress.hh"
 #include "htmlescape.hh"
 #include "ftshelpers.hh"
-#include "wstring_qt.hh"
+#include "utils/wstring_qt.hh"
 
 #include <map>
 #include <set>
@@ -33,8 +33,8 @@
 #include <QRegularExpression>
 #endif
 
-#include "ufile.hh"
-#include "qt4x5.hh"
+#include "utils/ufile.hh"
+#include "utils/qt4x5.hh"
 
 namespace Sdict {
 

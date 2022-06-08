@@ -14,14 +14,14 @@
 #include <string>
 
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "gddebug.hh"
-#include "fsencoding.hh"
+#include "utils/folding.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
 #include "chunkedstorage.hh"
-#include "wstring.hh"
-#include "wstring_qt.hh"
-#include "utf8.hh"
-#include "filetype.hh"
+#include "utils/wstring.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/utf8.hh"
+#include "utils/filetype.hh"
 #include "ftshelpers.hh"
 
 namespace Epwing {

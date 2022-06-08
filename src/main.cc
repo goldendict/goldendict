@@ -35,7 +35,7 @@
 #include <QByteArray>
 #include <QString>
 
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #if defined( Q_OS_MAC ) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include "lionsupport.h"

@@ -4,21 +4,21 @@
 #include "dsl.hh"
 #include "dsl_details.hh"
 #include "dict/btreeidx.hh"
-#include "folding.hh"
-#include "utf8.hh"
+#include "utils/folding.hh"
+#include "utils/utf8.hh"
 #include "chunkedstorage.hh"
-#include "dictzip.h"
+#include "utils/dictzip.h"
 #include "htmlescape.hh"
-#include "iconv.hh"
-#include "filetype.hh"
-#include "fsencoding.hh"
+#include "utils/iconv.hh"
+#include "utils/filetype.hh"
+#include "utils/fsencoding.hh"
 #include "audiolink.hh"
 #include "langcoder.hh"
-#include "wstring_qt.hh"
-#include "zipfile.hh"
-#include "indexedzip.hh"
-#include "gddebug.hh"
-#include "tiff.hh"
+#include "utils/wstring_qt.hh"
+#include "utils/zipfile.hh"
+#include "utils/indexedzip.hh"
+#include "utils/gddebug.hh"
+#include "utils/tiff.hh"
 #include "fulltextsearch.hh"
 #include "ftshelpers.hh"
 #include "language.hh"
@@ -60,7 +60,7 @@
 // For SVG handling
 #include <QtSvg/QSvgRenderer>
 
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 namespace Dsl {
 

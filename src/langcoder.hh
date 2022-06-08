@@ -2,7 +2,7 @@
 #define LANGCODER_H
 
 #include <QtGui>
-#include "wstring.hh"
+#include "utils/wstring.hh"
 
 struct GDLangCode
 {

@@ -23,9 +23,9 @@
 #include <Carbon/Carbon.h>
 #endif
 
-#include "ex.hh"
+#include "utils/ex.hh"
 #include "qtsingleapplication.h"
-#include "qt4x5.hh"
+#include "utils/qt4x5.hh"
 
 #ifdef Q_OS_WIN32
 #include "hotkeys.h"

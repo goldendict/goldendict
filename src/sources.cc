@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardItemModel>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
 #include "chineseconversion.hh"

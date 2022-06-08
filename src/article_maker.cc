@@ -4,16 +4,16 @@
 #include "article_maker.hh"
 #include "config.hh"
 #include "htmlescape.hh"
-#include "utf8.hh"
-#include "wstring_qt.hh"
+#include "utils/utf8.hh"
+#include "utils/wstring_qt.hh"
 #include <limits.h>
 #include <QFile>
 #include <QUrl>
 #include <QTextDocumentFragment>
-#include "folding.hh"
+#include "utils/folding.hh"
 #include "langcoder.hh"
-#include "gddebug.hh"
-#include "qt4x5.hh"
+#include "utils/gddebug.hh"
+#include "utils/qt4x5.hh"
 
 using std::vector;
 using std::string;

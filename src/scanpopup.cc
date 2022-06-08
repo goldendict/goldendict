@@ -2,14 +2,14 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "scanpopup.hh"
-#include "folding.hh"
+#include "utils/folding.hh"
 #include <QCursor>
 #include <QPixmap>
 #include <QBitmap>
 #include <QMenu>
 #include <QMouseEvent>
 #include <QDesktopWidget>
-#include "gddebug.hh"
+#include "utils/gddebug.hh"
 #include "gestures.hh"
 
 #ifdef Q_OS_MAC

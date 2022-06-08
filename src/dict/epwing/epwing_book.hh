@@ -8,7 +8,7 @@
 #endif
 
 #include "dict/dictionary.hh"
-#include "ex.hh"
+#include "utils/ex.hh"
 #include "mutex.hh"
 
 #include <QString>
