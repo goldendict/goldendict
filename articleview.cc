@@ -63,8 +63,9 @@ public:
   {}
 
 public slots:
-  void onPageJsReady( QVariantMap const & audioLinks, QString const & activeArticleId )
-  { articleView.onPageJsReady( audioLinks, activeArticleId ); }
+  void onPageJsReady( QStringList const & articleContents, QVariantMap const & audioLinks,
+                      QString const & activeArticleId )
+  { articleView.onPageJsReady( articleContents, audioLinks, activeArticleId ); }
 
   void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
@@ -738,10 +739,9 @@ unsigned ArticleView::getGroup( QUrl const & url )
   return 0;
 }
 
-QStringList ArticleView::getArticlesList()
+QStringList ArticleView::getArticleList() const
 {
-  return evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdArticleContents" )
-      .toString().trimmed().split( ' ', Qt4x5::skipEmptyParts() );
+  return articleList;
 }
 
 QString ArticleView::getActiveArticleId()
@@ -774,7 +774,7 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !ui.definition->isVisible() )
     return false; // No action on background page, scrollIntoView there don't work
 
-  if( !getArticlesList().contains( dictionaryIdFromScrollTo( id ) ) )
+  if( !articleList.contains( dictionaryIdFromScrollTo( id ) ) )
     return false;
 
   ui.definition->page()->mainFrame()->evaluateJavaScript(
@@ -1927,15 +1927,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   map< QAction *, QString > tableOfContents;
 
   // Add table of contents
-  QStringList ids = getArticlesList();
-
-  if ( !menu.isEmpty() && ids.size() )
+  if ( !menu.isEmpty() && !articleList.empty() )
     menu.addSeparator();
 
   unsigned refsAdded = 0;
   bool maxDictionaryRefsReached = false;
 
-  for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd();
+  for( QStringList::const_iterator i = articleList.constBegin(); i != articleList.constEnd();
        ++i, ++refsAdded )
   {
     // Find this dictionary
@@ -2196,18 +2194,16 @@ void ArticleView::moveOneArticleUp()
 {
   if( !currentArticle.isEmpty() )
   {
-    QStringList lst = getArticlesList();
-
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
+    int idx = articleList.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
 
     if ( idx != -1 )
     {
       --idx;
 
       if ( idx < 0 )
-        idx = lst.size() - 1;
+        idx = articleList.size() - 1;
 
-      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
+      setCurrentArticle( scrollToFromDictionaryId( articleList.at( idx ) ), true );
     }
   }
 }
@@ -2216,15 +2212,13 @@ void ArticleView::moveOneArticleDown()
 {
   if( !currentArticle.isEmpty() )
   {
-    QStringList lst = getArticlesList();
-
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
+    int idx = articleList.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
 
     if ( idx != -1 )
     {
-      idx = ( idx + 1 ) % lst.size();
+      idx = ( idx + 1 ) % articleList.size();
 
-      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
+      setCurrentArticle( scrollToFromDictionaryId( articleList.at( idx ) ), true );
     }
   }
 }
@@ -2297,8 +2291,10 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
-void ArticleView::onPageJsReady( QVariantMap const & audioLinks_, QString const & activeArticleId )
+void ArticleView::onPageJsReady( QStringList const & articleContents, QVariantMap const & audioLinks_,
+                                 QString const & activeArticleId )
 {
+  articleList = articleContents;
   audioLinks = audioLinks_;
   currentArticle = activeArticleId;
 }

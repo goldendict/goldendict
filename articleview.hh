@@ -35,6 +35,7 @@ class ArticleView: public QFrame
 
   ArticleViewJsProxy * const jsProxy;
 
+  QStringList articleList; ///< All articles currently present in the view as a list of dictionary ids.
   QVariantMap audioLinks;
   QString currentArticle; ///< Current article in the view, in the form of "gdfrom-xxx"
                           ///< (scrollTo) id. If empty, there is no current article.
@@ -191,7 +192,7 @@ public:
 
   /// Returns all articles currently present in view, as a list of dictionary
   /// string ids.
-  QStringList getArticlesList();
+  QStringList getArticleList() const;
 
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
@@ -317,7 +318,8 @@ private:
   /// <JavaScript interface>
 
   friend class ArticleViewJsProxy;
-  void onPageJsReady( QVariantMap const & audioLinks_, QString const & activeArticleId );
+  void onPageJsReady( QStringList const & articleContents, QVariantMap const & audioLinks_,
+                      QString const & activeArticleId );
   void onJsActiveArticleChanged( QString const & id );
 
   /// </JavaScript interface>

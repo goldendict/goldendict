@@ -2034,7 +2034,7 @@ void MainWindow::updateFoundInDictsList()
 
   if ( view )
   {
-    QStringList ids = view->getArticlesList();
+    QStringList const ids = view->getArticleList();
     QString activeId = view->getActiveArticleId();
 
     for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
