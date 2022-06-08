@@ -13,16 +13,27 @@ const gdAudioLinks = {
 };
 var gdCurrentArticle;
 
-function gdMakeArticleActive(newId) {
-    const articleId = 'gdfrom-' + newId;
+function gdSetActiveArticle(articleId) {
     if (gdCurrentArticle !== articleId) {
         var el = document.getElementById(gdCurrentArticle);
         el.className = el.className.replace(' gdactivearticle', '');
         el = document.getElementById(articleId);
         el.className = el.className + ' gdactivearticle';
         gdCurrentArticle = articleId;
-        gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
+        return true;
     }
+    return false;
+}
+
+function gdMakeArticleActive(newId) {
+    if (gdSetActiveArticle('gdfrom-' + newId))
+        gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
+}
+
+function gdOnCppActiveArticleChanged(articleId, moveToIt) {
+    if (moveToIt)
+        document.getElementById(articleId).scrollIntoView(true);
+    gdSetActiveArticle(articleId);
 }
 
 function gdSelectArticle(id) {

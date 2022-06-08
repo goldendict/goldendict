@@ -771,15 +771,12 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( !ui.definition->isVisible() )
     return false; // No action on background page, scrollIntoView there don't work
 
-  QString const dictionaryId = dictionaryIdFromScrollTo( id );
-  if( !getArticlesList().contains( dictionaryId ) )
+  if( !getArticlesList().contains( dictionaryIdFromScrollTo( id ) ) )
     return false;
 
-  if ( moveToIt )
-    ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
-
   ui.definition->page()->mainFrame()->evaluateJavaScript(
-    QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
+    QString( "gdOnCppActiveArticleChanged('%1', %2);" ).arg( id, moveToIt ? "true" : "false" ) );
+  onJsActiveArticleChanged( id );
 
   return true;
 }
