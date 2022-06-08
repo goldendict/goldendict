@@ -4,7 +4,7 @@
 #ifndef __TRANSLITERATION_HH_INCLUDED__
 #define __TRANSLITERATION_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include <map>
 
 namespace Transliteration {

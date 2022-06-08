@@ -5,7 +5,7 @@
 #define __INSTANCES_HH_INCLUDED__
 
 #include "config.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include <QIcon>
 #include <limits.h>
 

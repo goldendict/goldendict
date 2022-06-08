@@ -4,7 +4,7 @@
 #ifndef __INDEXEDZIP_HH_INCLUDED__
 #define __INDEXEDZIP_HH_INCLUDED__
 
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include <QFile>
 #include "zipfile.hh"
 

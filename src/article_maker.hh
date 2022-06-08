@@ -9,7 +9,7 @@
 #include <set>
 #include <list>
 #include "config.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "instances.hh"
 #include "wordfinder.hh"
 

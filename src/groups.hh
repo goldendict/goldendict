@@ -6,7 +6,7 @@
 
 #include "ui_groups.h"
 #include "config.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "groups_widgets.hh"
 #include <QToolButton>
 #include <QMenu>

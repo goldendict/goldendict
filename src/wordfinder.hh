@@ -11,7 +11,7 @@
 #include <QMutex>
 #include <QWaitCondition>
 #include <QRunnable>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 /// This component takes care of finding words. The search is asynchronous.
 /// This means the GUI doesn't get blocked during the sometimes lenghtly

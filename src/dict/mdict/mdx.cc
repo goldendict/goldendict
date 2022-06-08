@@ -1,8 +1,8 @@
 /* This file is (c) 2013 Timon Wong <timon86.wang AT gmail DOT com>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include "mdx.hh"
-#include "btreeidx.hh"
+#include "dict/mdict/mdx.hh"
+#include "dict/btreeidx.hh"
 #include "folding.hh"
 #include "utf8.hh"
 #include "file.hh"

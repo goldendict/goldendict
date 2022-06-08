@@ -6,7 +6,7 @@
 #include <QList>
 #include <QString>
 #include <QTimer>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "config.hh"
 
 /// A bar containing dictionary icons of the currently chosen group.

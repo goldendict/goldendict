@@ -4,7 +4,7 @@
 #ifndef __RUSSIANTRANSLIT_HH_INCLUDED__
 #define __RUSSIANTRANSLIT_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 // Support for Russian transliteration
 namespace RussianTranslit {

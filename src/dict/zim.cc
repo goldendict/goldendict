@@ -4,7 +4,7 @@
 #ifdef MAKE_ZIM_SUPPORT
 
 #include "zim.hh"
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include "fsencoding.hh"
 #include "folding.hh"
 #include "gddebug.hh"

@@ -4,7 +4,7 @@
 #ifndef __DSL_HH_INCLUDED__
 #define __DSL_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 /// Support for the ABBYY Lingvo .DSL files.
 namespace Dsl {

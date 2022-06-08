@@ -5,7 +5,7 @@
 #define __PROGRAMS_HH_INCLUDED__
 
 #include <QProcess>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "config.hh"
 #include "wstring.hh"
 

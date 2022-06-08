@@ -4,7 +4,7 @@
 #ifndef __BTREEIDX_HH_INCLUDED__
 #define __BTREEIDX_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "file.hh"
 
 #include <string>

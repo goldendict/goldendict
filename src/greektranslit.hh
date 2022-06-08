@@ -4,7 +4,7 @@
 #ifndef GREEKTRANSLIT_HH
 #define GREEKTRANSLIT_HH
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 // Support for Greek transliteration
 namespace GreekTranslit {

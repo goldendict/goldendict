@@ -7,8 +7,8 @@
 #include <QSemaphore>
 #include <QList>
 
-#include "dictionary.hh"
-#include "btreeidx.hh"
+#include "dict/dictionary.hh"
+#include "dict/btreeidx.hh"
 #include "fulltextsearch.hh"
 #include "chunkedstorage.hh"
 #include "folding.hh"

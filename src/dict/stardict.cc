@@ -1,13 +1,13 @@
 /* This file is (c) 2008-2012 Konstantin Isakov <ikm@goldendict.org>
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include "stardict.hh"
-#include "btreeidx.hh"
+#include "dict/stardict.hh"
+#include "dict/btreeidx.hh"
 #include "folding.hh"
 #include "utf8.hh"
 #include "chunkedstorage.hh"
 #include "dictzip.h"
-#include "xdxf2html.hh"
+#include "dict/xdxf/xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
 #include "gddebug.hh"

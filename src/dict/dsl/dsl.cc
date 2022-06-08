@@ -3,7 +3,7 @@
 
 #include "dsl.hh"
 #include "dsl_details.hh"
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include "folding.hh"
 #include "utf8.hh"
 #include "chunkedstorage.hh"

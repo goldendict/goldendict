@@ -13,7 +13,7 @@
 #include "ui_mainwindow.h"
 #include "folding.hh"
 #include "config.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "article_netmgr.hh"
 #include "audioplayerfactory.hh"
 #include "instances.hh"

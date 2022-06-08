@@ -8,7 +8,7 @@
 #include <list>
 #include <vector>
 #include <zlib.h>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "iconv.hh"
 
 // Implementation details for Dsl, not part of its interface

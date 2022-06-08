@@ -11,7 +11,7 @@
 
 #include "config.hh"
 #include "ui_dictheadwords.h"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "delegate.hh"
 #include "helpwindow.hh"
 

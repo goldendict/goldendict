@@ -5,7 +5,7 @@
 #include "file.hh"
 #include "folding.hh"
 #include "utf8.hh"
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include "chunkedstorage.hh"
 #include "filetype.hh"
 #include "htmlescape.hh"

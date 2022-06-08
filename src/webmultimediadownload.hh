@@ -1,7 +1,7 @@
 #ifndef WEBMULTIMEDIADOWNLOAD_HH
 #define WEBMULTIMEDIADOWNLOAD_HH
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include <QtNetwork>
 
 namespace Dictionary {

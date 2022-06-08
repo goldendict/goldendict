@@ -4,7 +4,7 @@
 #ifndef __MDX_HH_INCLUDED__
 #define __MDX_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 namespace Mdx
 {

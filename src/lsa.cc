@@ -6,7 +6,7 @@
 #include "iconv.hh"
 #include "folding.hh"
 #include "utf8.hh"
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include "fsencoding.hh"
 #include "audiolink.hh"
 #include "gddebug.hh"

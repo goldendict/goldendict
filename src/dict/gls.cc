@@ -4,9 +4,9 @@
 #include <zlib.h>
 #include "gls.hh"
 #include "iconv.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "ufile.hh"
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include "folding.hh"
 #include "gddebug.hh"
 #include "utf8.hh"

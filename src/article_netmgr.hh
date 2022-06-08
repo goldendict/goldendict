@@ -13,7 +13,7 @@
 #include <QPair>
 #endif
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "article_maker.hh"
 
 using std::vector;

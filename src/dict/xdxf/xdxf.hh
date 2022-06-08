@@ -1,10 +1,13 @@
-#ifndef __EPWING_HH__INCLUDED__
-#define __EPWING_HH__INCLUDED__
+/* This file is (c) 2008-2009 Konstantin Isakov <ikm@goldendict.org>
+ * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
-#include "dictionary.hh"
+#ifndef __XDXF_HH_INCLUDED__
+#define __XDXF_HH_INCLUDED__
 
-/// Support for the Epwing dictionaries.
-namespace Epwing {
+#include "dict/dictionary.hh"
+
+/// Support for the XDXF (.xdxf(.dz)) files.
+namespace Xdxf {
 
 using std::vector;
 using std::string;
@@ -14,6 +17,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                                       string const & indicesDir,
                                       Dictionary::Initializing & )
     THROW_SPEC( std::exception );
+
 }
 
-#endif // __EPWING_HH__INCLUDED__
+#endif

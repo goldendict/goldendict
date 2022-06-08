@@ -1,7 +1,7 @@
 #ifndef __DICTSERVER_HH__INCLUDED__
 #define __DICTSERVER_HH__INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "config.hh"
 
 /// Support for servers supporting DICT protocol.

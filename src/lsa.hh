@@ -4,7 +4,7 @@
 #ifndef __L9SA_HH_INCLUDED__
 #define __L9SA_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 /// Support for LSA (.dat, .lsa) audio archives of the Lingo program.
 namespace Lsa {

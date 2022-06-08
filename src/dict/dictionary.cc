@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdio>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 #include <QCryptographicHash>
 

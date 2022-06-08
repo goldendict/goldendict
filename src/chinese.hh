@@ -6,7 +6,7 @@
 
 #include <map>
 #include "config.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 /// Chinese character conversion support.
 namespace Chinese {

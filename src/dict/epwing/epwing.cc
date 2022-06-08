@@ -13,7 +13,7 @@
 #include <set>
 #include <string>
 
-#include "btreeidx.hh"
+#include "dict/btreeidx.hh"
 #include "folding.hh"
 #include "gddebug.hh"
 #include "fsencoding.hh"

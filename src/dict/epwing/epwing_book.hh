@@ -7,7 +7,7 @@
 #define _FILE_OFFSET_BITS 64
 #endif
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "ex.hh"
 #include "mutex.hh"
 

@@ -4,7 +4,7 @@
 #ifndef __SOUNDDIR_HH_INCLUDED__
 #define __SOUNDDIR_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "config.hh"
 
 /// Support for sound dirs, arbitrary directories full of audio files.

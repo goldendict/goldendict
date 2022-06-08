@@ -4,7 +4,7 @@
 #ifndef __FORVO_HH_INCLUDED__
 #define __FORVO_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "config.hh"
 #include <QNetworkAccessManager>
 #include "wstring.hh"

@@ -3,7 +3,7 @@
 #ifndef ZIPSOUNDS_HH
 #define ZIPSOUNDS_HH
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 /// Support for compresses audio packs (.zips).
 namespace ZipSounds {

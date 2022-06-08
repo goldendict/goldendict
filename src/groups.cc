@@ -3,7 +3,7 @@
 
 #include "groups.hh"
 #include "instances.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include <QMessageBox>
 #include <QInputDialog>
 

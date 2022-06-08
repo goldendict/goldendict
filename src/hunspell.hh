@@ -8,7 +8,7 @@
 #define HUNSPELL_STATIC
 #endif
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "config.hh"
 
 /// Support for Hunspell-based morphology.

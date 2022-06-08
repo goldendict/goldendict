@@ -266,26 +266,26 @@ HEADERS += src/folding.hh \
     src/inc_diacritic_folding.hh \
     src/mainwindow.hh \
     src/sptr.hh \
-    src/dictionary.hh \
+    src/dict/dictionary.hh \
     src/ex.hh \
     src/config.hh \
     src/sources.hh \
     src/utf8.hh \
     src/file.hh \
-    src/bgl_babylon.hh \
-    src/bgl.hh \
+    src/dict/bgl/bgl_babylon.hh \
+    src/dict/bgl/bgl.hh \
     src/initializing.hh \
     src/article_netmgr.hh \
     src/dictzip.h \
-    src/btreeidx.hh \
-    src/stardict.hh \
+    src/dict/btreeidx.hh \
+    src/dict/stardict.hh \
     src/chunkedstorage.hh \
-    src/xdxf2html.hh \
+    src/dict/xdxf/xdxf2html.hh \
     src/iconv.hh \
     src/lsa.hh \
     src/htmlescape.hh \
-    src/dsl.hh \
-    src/dsl_details.hh \
+    src/dict/dsl/dsl.hh \
+    src/dict/dsl/dsl_details.hh \
     src/filetype.hh \
     src/fsencoding.hh \
     src/groups.hh \
@@ -309,7 +309,7 @@ HEADERS += src/folding.hh \
     src/mediawiki.hh \
     src/sounddir.hh \
     src/hunspell.hh \
-    src/dictdfiles.hh \
+    src/dict/dictdfiles.hh \
     src/audiolink.hh \
     src/wstring.hh \
     src/wstring_qt.hh \
@@ -348,10 +348,10 @@ HEADERS += src/folding.hh \
     src/mainstatusbar.hh \
     src/gdappstyle.hh \
     src/ufile.hh \
-    src/xdxf.hh \
-    src/sdict.hh \
+    src/dict/xdxf/xdxf.hh \
+    src/dict/sdict.hh \
     src/decompress.hh \
-    src/aard.hh \
+    src/dict/aard.hh \
     src/mruqmenu.hh \
     src/dictinfo.hh \
     src/zipsounds.hh \
@@ -360,13 +360,13 @@ HEADERS += src/folding.hh \
     src/translatebox.hh \
     src/historypanewidget.hh \
     src/wordlist.hh \
-    src/mdictparser.hh \
-    src/mdx.hh \
+    src/dict/mdict/mdictparser.hh \
+    src/dict/mdict/mdx.hh \
     src/voiceengines.hh \
     src/ffmpegaudio.hh \
     src/articleinspector.hh \
     src/delegate.hh \
-    src/zim.hh \
+    src/dict/zim.hh \
     src/gddebug.hh \
     src/qt4x5.hh \
     src/gestures.hh \
@@ -376,9 +376,9 @@ HEADERS += src/folding.hh \
     src/ftshelpers.hh \
     src/dictserver.hh \
     src/helpwindow.hh \
-    src/slob.hh \
+    src/dict/slob.hh \
     src/ripemd.hh \
-    src/gls.hh \
+    src/dict/gls.hh \
     src/splitfile.hh \
     src/favoritespanewidget.hh \
     src/cpp_features.hh \
@@ -402,26 +402,26 @@ FORMS += src/groups.ui \
 
 SOURCES += src/folding.cc \
     src/main.cc \
-    src/dictionary.cc \
+    src/dict/dictionary.cc \
     src/config.cc \
     src/sources.cc \
     src/mainwindow.cc \
     src/utf8.cc \
     src/file.cc \
-    src/bgl_babylon.cc \
-    src/bgl.cc \
+    src/dict/bgl/bgl_babylon.cc \
+    src/dict/bgl/bgl.cc \
     src/initializing.cc \
     src/article_netmgr.cc \
     src/dictzip.c \
-    src/btreeidx.cc \
-    src/stardict.cc \
+    src/dict/btreeidx.cc \
+    src/dict/stardict.cc \
     src/chunkedstorage.cc \
-    src/xdxf2html.cc \
+    src/dict/xdxf/xdxf2html.cc \
     src/iconv.cc \
     src/lsa.cc \
     src/htmlescape.cc \
-    src/dsl.cc \
-    src/dsl_details.cc \
+    src/dict/dsl/dsl.cc \
+    src/dict/dsl/dsl_details.cc \
     src/filetype.cc \
     src/fsencoding.cc \
     src/groups.cc \
@@ -443,7 +443,7 @@ SOURCES += src/folding.cc \
     src/mediawiki.cc \
     src/sounddir.cc \
     src/hunspell.cc \
-    src/dictdfiles.cc \
+    src/dict/dictdfiles.cc \
     src/audiolink.cc \
     src/wstring.cc \
     src/wstring_qt.cc \
@@ -480,10 +480,10 @@ SOURCES += src/folding.cc \
     src/mainstatusbar.cc \
     src/gdappstyle.cc \
     src/ufile.cc \
-    src/xdxf.cc \
-    src/sdict.cc \
+    src/dict/xdxf/xdxf.cc \
+    src/dict/sdict.cc \
     src/decompress.cc \
-    src/aard.cc \
+    src/dict/aard.cc \
     src/mruqmenu.cc \
     src/dictinfo.cc \
     src/zipsounds.cc \
@@ -492,13 +492,13 @@ SOURCES += src/folding.cc \
     src/translatebox.cc \
     src/historypanewidget.cc \
     src/wordlist.cc \
-    src/mdictparser.cc \
-    src/mdx.cc \
+    src/dict/mdict/mdictparser.cc \
+    src/dict/mdict/mdx.cc \
     src/voiceengines.cc \
     src/ffmpegaudio.cc \
     src/articleinspector.cc \
     src/delegate.cc \
-    src/zim.cc \
+    src/dict/zim.cc \
     src/gddebug.cc \
     src/gestures.cc \
     src/tiff.cc \
@@ -507,9 +507,9 @@ SOURCES += src/folding.cc \
     src/ftshelpers.cc \
     src/dictserver.cc \
     src/helpwindow.cc \
-    src/slob.cc \
+    src/dict/slob.cc \
     src/ripemd.cc \
-    src/gls.cc \
+    src/dict/gls.cc \
     src/splitfile.cc \
     src/favoritespanewidget.cc \
     src/treeview.cc
@@ -569,12 +569,12 @@ CONFIG( no_epwing_support ) {
 }
 
 !CONFIG( no_epwing_support ) {
-  HEADERS += src/epwing.hh \
-             src/epwing_book.hh \
-             src/epwing_charmap.hh
-  SOURCES += src/epwing.cc \
-             src/epwing_book.cc \
-             src/epwing_charmap.cc
+  HEADERS += src/dict/epwing/epwing.hh \
+             src/dict/epwing/epwing_book.hh \
+             src/dict/epwing/epwing_charmap.hh
+  SOURCES += src/dict/epwing/epwing.cc \
+             src/dict/epwing/epwing_book.cc \
+             src/dict/epwing/epwing_charmap.cc
   LIBS += -leb
 }
 

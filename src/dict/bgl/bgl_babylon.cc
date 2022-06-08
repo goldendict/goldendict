@@ -35,7 +35,7 @@
 #include "htmlescape.hh"
 #include <QString>
 #include <QDebug>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 #ifdef _WIN32
 #include <io.h>

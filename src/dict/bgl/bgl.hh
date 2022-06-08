@@ -4,7 +4,7 @@
 #ifndef __BGL_HH_INCLUDED__
 #define __BGL_HH_INCLUDED__
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 /// Support for the Babylon's .bgl dictionaries.
 namespace Bgl {

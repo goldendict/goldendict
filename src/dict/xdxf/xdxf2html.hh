@@ -6,7 +6,7 @@
 
 #include <string>
 #include <map>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 #include "indexedzip.hh"
 
 /// Xdxf is an xml file format. Since we display html, we'd like to be able

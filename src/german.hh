@@ -4,7 +4,7 @@
 #ifndef GERMAN_HH
 #define GERMAN_HH
 
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 // Support for German transliteration
 namespace GermanTranslit {

@@ -5,7 +5,7 @@
 #define __BELARUSIANTRANSLIT_HH_INCLUDED__
 
 #include <vector>
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 // Support for Belarusian transliteration
 namespace BelarusianTranslit {

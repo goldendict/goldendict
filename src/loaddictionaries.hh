@@ -6,7 +6,7 @@
 
 #include "initializing.hh"
 #include "config.hh"
-#include "dictionary.hh"
+#include "dict/dictionary.hh"
 
 #include <QThread>
 #include <QNetworkAccessManager>
