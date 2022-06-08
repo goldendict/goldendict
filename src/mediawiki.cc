@@ -11,7 +11,7 @@
 #include <list>
 #include "utils/gddebug.hh"
 #include "audiolink.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/qt4x5.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )

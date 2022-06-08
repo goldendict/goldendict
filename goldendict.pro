@@ -308,7 +308,7 @@ HEADERS += src/utils/folding.hh \
     src/mutex.hh \
     src/mediawiki.hh \
     src/sounddir.hh \
-    src/utils/hunspell.hh \
+    src/lang/hunspell.hh \
     src/dict/dictdfiles.hh \
     src/audiolink.hh \
     src/utils/wstring.hh \
@@ -317,17 +317,17 @@ HEADERS += src/utils/folding.hh \
     src/hotkeywrapper.hh \
     src/searchpanewidget.hh \
     src/hotkeyedit.hh \
-    src/langcoder.hh \
+    src/lang/langcoder.hh \
     src/editdictionaries.hh \
     src/loaddictionaries.hh \
     src/transliteration.hh \
-    src/romaji.hh \
-    src/belarusiantranslit.hh \
-    src/russiantranslit.hh \
-    src/german.hh \
+    src/lang/romaji.hh \
+    src/lang/belarusiantranslit.hh \
+    src/lang/russiantranslit.hh \
+    src/lang/german.hh \
     src/website.hh \
     src/orderandprops.hh \
-    src/language.hh \
+    src/lang/language.hh \
     src/dictionarybar.hh \
     src/utils/broken_xrecord.hh \
     src/history.hh \
@@ -336,10 +336,10 @@ HEADERS += src/utils/folding.hh \
     src/utils/zipfile.hh \
     src/utils/indexedzip.hh \
     src/termination.hh \
-    src/greektranslit.hh \
+    src/lang/greektranslit.hh \
     src/webmultimediadownload.hh \
     src/forvo.hh \
-    src/country.hh \
+    src/lang/country.hh \
     src/about.hh \
     src/programs.hh \
     src/parsecmdline.hh \
@@ -442,7 +442,7 @@ SOURCES += src/utils/folding.cc \
     src/mutex.cc \
     src/mediawiki.cc \
     src/sounddir.cc \
-    src/utils/hunspell.cc \
+    src/lang/hunspell.cc \
     src/dict/dictdfiles.cc \
     src/audiolink.cc \
     src/utils/wstring.cc \
@@ -450,17 +450,17 @@ SOURCES += src/utils/folding.cc \
     src/processwrapper.cc \
     src/hotkeywrapper.cc \
     src/hotkeyedit.cc \
-    src/langcoder.cc \
+    src/lang/langcoder.cc \
     src/editdictionaries.cc \
     src/loaddictionaries.cc \
     src/transliteration.cc \
-    src/romaji.cc \
-    src/belarusiantranslit.cc \
-    src/russiantranslit.cc \
-    src/german.cc \
+    src/lang/romaji.cc \
+    src/lang/belarusiantranslit.cc \
+    src/lang/russiantranslit.cc \
+    src/lang/german.cc \
     src/website.cc \
     src/orderandprops.cc \
-    src/language.cc \
+    src/lang/language.cc \
     src/dictionarybar.cc \
     src/utils/broken_xrecord.cc \
     src/history.cc \
@@ -469,10 +469,10 @@ SOURCES += src/utils/folding.cc \
     src/utils/zipfile.cc \
     src/utils/indexedzip.cc \
     src/termination.cc \
-    src/greektranslit.cc \
+    src/lang/greektranslit.cc \
     src/webmultimediadownload.cc \
     src/forvo.cc \
-    src/country.cc \
+    src/lang/country.cc \
     src/about.cc \
     src/programs.cc \
     src/parsecmdline.cc \

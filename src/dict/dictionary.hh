@@ -14,7 +14,7 @@
 #include "utils/ex.hh"
 #include "mutex.hh"
 #include "utils/wstring.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "config.hh"
 #include "utils/qt4x5.hh"
 

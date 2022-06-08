@@ -10,7 +10,7 @@
 #include "utils/gddebug.hh"
 #include "utils/utf8.hh"
 #include "utils/decompress.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/wstring.hh"
 #include "utils/wstring_qt.hh"
 #include "ftshelpers.hh"

@@ -10,7 +10,7 @@
 #include "utils/wstring_qt.hh"
 #include "chunkedstorage.hh"
 #include "utils/gddebug.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/fsencoding.hh"
 #include "audiolink.hh"
 #include "utils/ex.hh"

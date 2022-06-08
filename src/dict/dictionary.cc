@@ -18,7 +18,7 @@
 #include <QCryptographicHash>
 #include <QDateTime>
 #include "utils/fsencoding.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 
 #include <QImage>
 #include <QPainter>

@@ -9,9 +9,9 @@
 #include <list>
 #include "audiolink.hh"
 #include "htmlescape.hh"
-#include "country.hh"
-#include "language.hh"
-#include "langcoder.hh"
+#include "lang/country.hh"
+#include "lang/language.hh"
+#include "lang/langcoder.hh"
 #include "utils/utf8.hh"
 #include "utils/gddebug.hh"
 #include "utils/qt4x5.hh"

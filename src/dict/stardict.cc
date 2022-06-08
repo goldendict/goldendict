@@ -9,7 +9,7 @@
 #include "utils/dictzip.h"
 #include "dict/xdxf/xdxf2html.hh"
 #include "htmlescape.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/gddebug.hh"
 #include "utils/fsencoding.hh"
 #include "utils/filetype.hh"

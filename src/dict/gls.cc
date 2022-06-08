@@ -12,7 +12,7 @@
 #include "utils/utf8.hh"
 #include "utils/wstring_qt.hh"
 #include "chunkedstorage.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/dictzip.h"
 #include "utils/indexedzip.hh"
 #include "ftshelpers.hh"

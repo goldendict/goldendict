@@ -6,7 +6,7 @@
 #include "utils/folding.hh"
 #include "utils/utf8.hh"
 #include "chunkedstorage.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/gddebug.hh"
 #include "utils/fsencoding.hh"
 #include "utils/decompress.hh"

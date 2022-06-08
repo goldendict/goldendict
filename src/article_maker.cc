@@ -11,7 +11,7 @@
 #include <QUrl>
 #include <QTextDocumentFragment>
 #include "utils/folding.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/gddebug.hh"
 #include "utils/qt4x5.hh"
 

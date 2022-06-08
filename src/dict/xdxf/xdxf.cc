@@ -21,7 +21,7 @@
 #include "xdxf2html.hh"
 #include "utils/ufile.hh"
 #include "utils/dictzip.h"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/indexedzip.hh"
 #include "utils/filetype.hh"
 #include "utils/tiff.hh"

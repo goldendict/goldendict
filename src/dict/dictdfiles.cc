@@ -8,7 +8,7 @@
 #include "utils/dictzip.h"
 #include "htmlescape.hh"
 #include "utils/fsencoding.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include <map>
 #include <set>
 #include <string>

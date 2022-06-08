@@ -9,13 +9,13 @@
 #include "dict/dsl/dsl.hh"
 #include "mediawiki.hh"
 #include "sounddir.hh"
-#include "utils/hunspell.hh"
+#include "lang/hunspell.hh"
 #include "dict/dictdfiles.hh"
-#include "romaji.hh"
-#include "russiantranslit.hh"
-#include "german.hh"
-#include "greektranslit.hh"
-#include "belarusiantranslit.hh"
+#include "lang/romaji.hh"
+#include "lang/russiantranslit.hh"
+#include "lang/german.hh"
+#include "lang/greektranslit.hh"
+#include "lang/belarusiantranslit.hh"
 #include "website.hh"
 #include "forvo.hh"
 #include "programs.hh"
@@ -37,7 +37,7 @@
 #endif
 
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
-#include "chinese.hh"
+#include "lang/chinese.hh"
 #endif
 
 #include <QMessageBox>

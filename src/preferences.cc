@@ -1,7 +1,7 @@
 #include "preferences.hh"
 #include "keyboardstate.hh"
-#include "language.hh"
-#include "langcoder.hh"
+#include "lang/language.hh"
+#include "lang/langcoder.hh"
 #include <QMessageBox>
 #include "utils/broken_xrecord.hh"
 #include "mainwindow.hh"

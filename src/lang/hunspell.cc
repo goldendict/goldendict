@@ -2,11 +2,11 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "hunspell.hh"
-#include "utf8.hh"
+#include "utils/utf8.hh"
 #include "htmlescape.hh"
-#include "iconv.hh"
-#include "folding.hh"
-#include "wstring_qt.hh"
+#include "utils/iconv.hh"
+#include "utils/folding.hh"
+#include "utils/wstring_qt.hh"
 #include "language.hh"
 #include "langcoder.hh"
 
@@ -20,9 +20,9 @@
 
 #include <set>
 #include <hunspell/hunspell.hxx>
-#include "gddebug.hh"
-#include "fsencoding.hh"
-#include "qt4x5.hh"
+#include "utils/gddebug.hh"
+#include "utils/fsencoding.hh"
+#include "utils/qt4x5.hh"
 
 namespace HunspellMorpho {
 

@@ -13,7 +13,7 @@
 #include "utils/filetype.hh"
 #include "utils/fsencoding.hh"
 #include "audiolink.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/wstring_qt.hh"
 #include "utils/zipfile.hh"
 #include "utils/indexedzip.hh"
@@ -21,7 +21,7 @@
 #include "utils/tiff.hh"
 #include "fulltextsearch.hh"
 #include "ftshelpers.hh"
-#include "language.hh"
+#include "lang/language.hh"
 
 #include <zlib.h>
 #include <map>

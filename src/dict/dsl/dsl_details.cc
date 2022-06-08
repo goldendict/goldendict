@@ -4,7 +4,7 @@
 #include "dsl_details.hh"
 
 #include "utils/folding.hh"
-#include "langcoder.hh"
+#include "lang/langcoder.hh"
 #include "utils/gddebug.hh"
 #include "utils/ufile.hh"
 #include "utils/wstring_qt.hh"

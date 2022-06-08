@@ -5,8 +5,8 @@
 
 #include "instances.hh"
 #include "config.hh"
-#include "langcoder.hh"
-#include "language.hh"
+#include "lang/langcoder.hh"
+#include "lang/language.hh"
 #include "utils/fsencoding.hh"
 
 //#include "initializing.hh"

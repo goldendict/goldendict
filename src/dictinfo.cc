@@ -1,6 +1,6 @@
 #include "dictinfo.hh"
-#include "langcoder.hh"
-#include "language.hh"
+#include "lang/langcoder.hh"
+#include "lang/language.hh"
 #include "utils/fsencoding.hh"
 #include <QString>
 
