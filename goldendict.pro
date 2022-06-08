@@ -249,12 +249,12 @@ mac {
         CONFIG += chinese_conversion_support
         CONFIG( x86 ) {
             QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+                                 cp -R $${PWD}/data/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+                                 cp -R $${PWD}/data/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
         } else {
             QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+                                 cp -R $${PWD}/data/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+                                 cp -R $${PWD}/data/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
         }
     }
 }
