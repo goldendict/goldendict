@@ -667,9 +667,10 @@ TRANSLATIONS += data/locale/ru_RU.ts \
 
 # This makes qmake generate translations
 
-win32:# Windows doesn't seem to have *-qt4 symlinks
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
-isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
+win32 { # Windows doesn't seem to have *-qt4 symlinks
+    isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
+    isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
+}
 
 # The *.qm files might not exist when qmake is run for the first time,
 # causing the standard install rule to be ignored, and no translations
