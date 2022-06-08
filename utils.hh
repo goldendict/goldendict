@@ -78,13 +78,6 @@ inline QString rstripnull(const QString &str) {
   return "";
 }
 
-inline QString unescapeHtml(const QString &str) {
-  QTextDocument text;
-  text.setHtml(str);
-  return text.toPlainText();
-}
-
-
 inline bool isExternalLink(QUrl const &url) {
   return url.scheme() == "http" || url.scheme() == "https" || url.scheme() == "ftp" || url.scheme() == "mailto" ||
          url.scheme() == "file" || url.toString().startsWith( "//" );
@@ -231,7 +224,9 @@ inline std::pair< bool, QString > getQueryWord( QUrl const & url )
     {
       //url,bword://localhost/word
       if( path.startsWith( "/" ) )
-        word = url.path().mid( 1 );
+        word = path.mid( 1 );
+      else
+        word = path;
     }
     else
     {

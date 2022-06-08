@@ -1417,6 +1417,7 @@ void MainWindow::updateGroupList()
 
   groupList->fill( groupInstances );
   groupList->setCurrentGroup( cfg.lastMainGroupId );
+
   updateCurrentGroupProperty();
 
   updateDictionaryBar();
