@@ -157,6 +157,35 @@ QString unescape( QString const & str, bool saveFormat )
   return str;
 }
 
+QString fromHtmlEscaped( QString const & str){
+  QString retVal = str;
+  QRegularExpression regExp("(?<lt>\\&lt\\;)|(?<gt>\\&gt\\;)|(?<amp>\\&amp\\;)|(?<quot>\\&quot\\;)", QRegularExpression::PatternOption::CaseInsensitiveOption);
+  auto match = regExp.match(str, 0);
+
+  while (match.hasMatch())
+  {
+    if (!match.captured("lt").isEmpty())
+    {
+      retVal.replace(match.capturedStart("lt"), match.capturedLength("lt"), "<");
+    }
+    else if (!match.captured("gt").isEmpty())
+    {
+      retVal.replace(match.capturedStart("gt"), match.capturedLength("gt"), ">");
+    }
+    else if (!match.captured("amp").isEmpty())
+    {
+      retVal.replace(match.capturedStart("amp"), match.capturedLength("amp"), "&");
+    }
+    else if (!match.captured("quot").isEmpty())
+    {
+      retVal.replace(match.capturedStart("quot"), match.capturedLength("quot"), "\"");
+    }
+    match = regExp.match(retVal, match.capturedStart() + 1);
+  }
+
+  return retVal;
+}
+
 string unescapeUtf8( const string &str, bool saveFormat )
 {
   return string( unescape( QString::fromUtf8( str.c_str(), str.size() ) ).toUtf8().data(), saveFormat );
