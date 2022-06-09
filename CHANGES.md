@@ -8,6 +8,9 @@
 - add "send to anki"
 - right context menu actions, remove nonsense character like `OBJ`,punctuation etc.
 - epwing remove duplicate entries when index.
+- replace throw() with noexcept
+- replace string(***constData) with toStdString
+- add built-in support for entry links in javascript files
 
 
 ## Until 2022-5-21
