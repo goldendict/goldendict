@@ -31,7 +31,7 @@ QHotkeyApplication::QHotkeyApplication( int & argc, char ** argv ):
   installNativeEventFilter( this );
 #endif
 }
-
+#if QT_VERSION < 0x050000
 QHotkeyApplication::QHotkeyApplication( QString const & id,
                                         int & argc, char ** argv ):
   QIntermediateApplication( id, argc, argv )
@@ -49,7 +49,7 @@ QHotkeyApplication::QHotkeyApplication( QString const & id,
   installNativeEventFilter( this );
 #endif
 }
-
+#endif
 void QHotkeyApplication::addDataCommiter( DataCommitter & d )
 {
   dataCommitters.append( &d );

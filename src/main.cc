@@ -297,10 +297,10 @@ int main( int argc, char ** argv )
   _setmaxstdio( 2048 );
 
 #endif
-
-  QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
-
+#if QT_VERSION < 0x050000
+  QHotkeyApplication app( "GoldenDict", argc, argv );
+  
   if ( app.isRunning() )
   {
     bool wasMessage = false;
@@ -328,6 +328,37 @@ int main( int argc, char ** argv )
 
     return 0; // Another instance is running
   }
+#else
+  QHotkeyApplication app( argc, argv );
+  
+  if ( app.isSecondary() )
+  {
+    bool wasMessage = false;
+
+    if( gdcl.needSetGroup() )
+    {
+      app.sendMessage( (QString( "setGroup: " ) + gdcl.getGroupName()).toUtf8() );
+      wasMessage = true;
+    }
+
+    if( gdcl.needSetPopupGroup() )
+    {
+      app.sendMessage( (QString( "setPopupGroup: " ) + gdcl.getPopupGroupName()).toUtf8() );
+      wasMessage = true;
+    }
+
+    if( gdcl.needTranslateWord() )
+    {
+      app.sendMessage( (QString( "translateWord: " ) + gdcl.wordToTranslate()).toUtf8() );
+      wasMessage = true;
+    }
+
+    if( !wasMessage )
+      app.sendMessage("bringToFront");
+
+    return 0; // Another instance is running
+  }
+#endif
 
   app.setApplicationName( "GoldenDict" );
   app.setOrganizationDomain( "http://goldendict.org/" );

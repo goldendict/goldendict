@@ -691,5 +691,11 @@ TS_OUT = $$TRANSLATIONS
 TS_OUT ~= s/.ts/.qm/g
 PRE_TARGETDEPS += $$TS_OUT
 
-include( third-party/qtsingleapplication/src/qtsingleapplication.pri )
+greaterThan(QT_MAJOR_VERSION, 4) {
+  include( third-party/singleapplication/singleapplication.pri )
+  DEFINES += QAPPLICATION_CLASS=QApplication
+}
 
+!greaterThan(QT_MAJOR_VERSION, 4) {
+  include( third-party/qtsingleapplication/src/qtsingleapplication.pri )
+}

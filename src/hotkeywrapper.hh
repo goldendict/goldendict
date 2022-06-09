@@ -24,7 +24,11 @@
 #endif
 
 #include "utils/ex.hh"
+#if QT_VERSION >= 0x050000
+#include <singleapplication.h>
+#else
 #include "qtsingleapplication.h"
+#endif
 #include "utils/qt4x5.hh"
 
 #ifdef Q_OS_WIN32
@@ -214,6 +218,8 @@ public:
 // Intermediate class to avoid misunderstanding of #ifdef's
 // by Qt meta-object compiler
 
+
+#if QT_VERSION < 0x050000
 class QIntermediateApplication : public QtSingleApplication
 #if defined( Q_OS_WIN ) && IS_QT_5
         , public QAbstractNativeEventFilter
@@ -228,6 +234,18 @@ public:
     QtSingleApplication( id, argc, argv )
   {}
 };
+#else
+class QIntermediateApplication : public SingleApplication
+#if defined( Q_OS_WIN )
+        , public QAbstractNativeEventFilter
+#endif
+{
+public:
+  QIntermediateApplication( int & argc, char ** argv ) :
+    SingleApplication( argc, argv )
+  {}
+};
+#endif
 
 class QHotkeyApplication : public QIntermediateApplication
 {
@@ -239,8 +257,9 @@ class QHotkeyApplication : public QIntermediateApplication
 
 public:
   QHotkeyApplication( int & argc, char ** argv );
+#if QT_VERSION < 0x050000
   QHotkeyApplication( QString const & id, int & argc, char ** argv );
-
+#endif
   void addDataCommiter( DataCommitter & );
   void removeDataCommiter( DataCommitter & );
 
