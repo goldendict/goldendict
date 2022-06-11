@@ -336,6 +336,9 @@ bool MdictParser::readHeader( QDataStream & in )
   headerTextUtf16.clear();
   in.setByteOrder( QDataStream::BigEndian );
 
+  //with this control character ,qt6.x can not parse attribute value.
+  headerText.remove(QRegularExpression("\\p{C}"));
+
   QDomNamedNodeMap headerAttributes = parseHeaderAttributes( headerText );
 
   encoding_ = headerAttributes.namedItem( "Encoding" ).toAttr().value();
