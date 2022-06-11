@@ -149,7 +149,7 @@ QString unescape( QString const & str, bool saveFormat )
     {
         tmp.replace( QRegularExpression( "<(?:\\s*/?(?:div|h[1-6r]|q|p(?![alr])|br|li(?![ns])|td|blockquote|[uo]l|pre|d[dl]|nav|address))[^>]{0,}>",
                                          QRegularExpression::CaseInsensitiveOption ), " " );
-        tmp.remove( QRegularExpression( "<[^>]*>" ) );
+        tmp.replace( QRegularExpression( "<[^>]*>"), " ");
 
     }
     return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
