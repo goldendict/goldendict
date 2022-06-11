@@ -153,8 +153,7 @@ public slots:
 public:
 
   /// Reloads the view
-  void reload()
-  { ui.definition->reload(); }
+  void reload();
 
   /// Returns true if there's an audio reference on the page, false otherwise.
   bool hasSound();
