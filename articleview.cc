@@ -2520,11 +2520,7 @@ void ArticleView::receiveExpandOptionalParts( bool expand )
 void ArticleView::switchExpandOptionalParts()
 {
   expandOptionalParts = !expandOptionalParts;
-
-  int n = getArticlesList().indexOf( getActiveArticleId() );
-  if( n > 0 )
-    articleToJump = getCurrentArticle();
-
+  articleToJump = getCurrentArticle();
   emit setExpandMode( expandOptionalParts );
   reload();
 }
