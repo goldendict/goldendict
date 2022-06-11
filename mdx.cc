@@ -924,10 +924,11 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
                                           decompressed.constData() + recordInfo.recordOffset,
                                           recordInfo.recordSize );
 
-  article = MdictParser::substituteStylesheet( article, styleSheets );
-
   if( !noFilter )
+  {
+    article = MdictParser::substituteStylesheet( article, styleSheets );
     article = filterResource( articleId, article );
+  }
 
   articleText = article.toStdString();
 }
