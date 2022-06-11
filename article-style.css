@@ -42,6 +42,11 @@ pre
   /*background: #ffffdd;*/
 }
 
+.gddicttitle
+{
+	user-select: none;
+}
+
 .gddictnamebodyseparator
 {
   clear: both;
