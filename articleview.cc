@@ -1197,7 +1197,10 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
+  {
+    saveHistoryUserData();
     ui.definition->load( url );
+  }
   else
   if ( url.scheme().compare( "bword" ) == 0 )
   {
