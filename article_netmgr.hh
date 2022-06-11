@@ -208,7 +208,7 @@ class BlockedNetworkReply: public QNetworkReply
 
 public:
 
-  BlockedNetworkReply( QObject * parent );
+  explicit BlockedNetworkReply( QNetworkRequest const & request, QObject * parent );
 
   virtual qint64 readData( char *, qint64 )
   {
