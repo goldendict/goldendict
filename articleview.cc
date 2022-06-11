@@ -1690,6 +1690,12 @@ void ArticleView::forward()
   ui.definition->forward();
 }
 
+void ArticleView::reload()
+{
+  articleToJump = getCurrentArticle();
+  ui.definition->reload();
+}
+
 bool ArticleView::hasSound()
 {
   QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
@@ -2522,7 +2528,6 @@ void ArticleView::receiveExpandOptionalParts( bool expand )
 void ArticleView::switchExpandOptionalParts()
 {
   expandOptionalParts = !expandOptionalParts;
-  articleToJump = getCurrentArticle();
   emit setExpandMode( expandOptionalParts );
   reload();
 }
