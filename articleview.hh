@@ -41,7 +41,6 @@ class ArticleView: public QFrame
   QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
-  QString articleToJump;
   QString rangeVarName;
 
   /// Any resource we've decided to download off the dictionary gets stored here.

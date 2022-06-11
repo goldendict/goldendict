@@ -564,54 +564,51 @@ void ArticleView::loadFinished( bool )
   // Expand collapsed article if only one loaded
   ui.definition->page()->mainFrame()->evaluateJavaScript( "gdCheckArticlesNumber();" );
 
-  bool jumpedToCurrentArticle = false;
-  // Jump to current article after page reloading
-  if( !articleToJump.isEmpty() )
+  QVariant userDataVariant = ui.definition->history()->currentItem().userData();
+  if ( userDataVariant.type() == QVariant::Map )
   {
-    jumpedToCurrentArticle = setCurrentArticle( articleToJump, true );
-    articleToJump.clear();
-  }
+    QMap< QString, QVariant > userData = userDataVariant.toMap();
 
-  if( !jumpedToCurrentArticle )
-  {
-    QVariant userDataVariant = ui.definition->history()->currentItem().userData();
+    double sx = 0, sy = 0;
+    bool moveToCurrentArticle = true;
 
-    if ( userDataVariant.type() == QVariant::Map )
+    if ( userData.value( "sx" ).type() == QVariant::Double )
     {
-      QMap< QString, QVariant > userData = userDataVariant.toMap();
-
-      QString currentArticle = userData.value( "currentArticle" ).toString();
-
-      if ( currentArticle.size() )
-      {
-        // There's an active article saved, so set it to be active.
-        setCurrentArticle( currentArticle );
-      }
-
-      double sx = 0, sy = 0;
-
-      if ( userData.value( "sx" ).type() == QVariant::Double )
-        sx = userData.value( "sx" ).toDouble();
-
-      if ( userData.value( "sy" ).type() == QVariant::Double )
-        sy = userData.value( "sy" ).toDouble();
-
-      if ( sx != 0 || sy != 0 )
-      {
-        // Restore scroll position
-        ui.definition->page()->mainFrame()->evaluateJavaScript(
-            QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
-      }
+      sx = userData.value( "sx" ).toDouble();
+      moveToCurrentArticle = false;
     }
-    else
+
+    if ( userData.value( "sy" ).type() == QVariant::Double )
     {
-      QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
-      if( isScrollTo( scrollTo ) )
-      {
-        // There is no active article saved in history, but we have it as a parameter.
-        // setCurrentArticle will save it and scroll there.
-        setCurrentArticle( scrollTo, true );
-      }
+      sy = userData.value( "sy" ).toDouble();
+      moveToCurrentArticle = false;
+    }
+
+    const QString currentArticle = userData.value( "currentArticle" ).toString();
+    if( !currentArticle.isEmpty() )
+    {
+      // There's a current article saved, so set it to be current.
+      // If a scroll position was stored - even (0, 0) - don't move to the
+      // current article.
+      setCurrentArticle( currentArticle, moveToCurrentArticle );
+    }
+
+    if ( sx != 0 || sy != 0 )
+    {
+      // Restore scroll position if at least one non-zero coordinate was stored.
+      // Moving to (0, 0) is a no-op, so don't restore it.
+      ui.definition->page()->mainFrame()->evaluateJavaScript(
+          QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
+    }
+  }
+  else
+  {
+    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    if( isScrollTo( scrollTo ) )
+    {
+      // There is no active article saved in history, but we have it as a parameter.
+      // setCurrentArticle will save it and scroll there.
+      setCurrentArticle( scrollTo, true );
     }
   }
 
@@ -1692,7 +1689,20 @@ void ArticleView::forward()
 
 void ArticleView::reload()
 {
-  articleToJump = getCurrentArticle();
+  QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
+
+  // Save current article, which can be empty
+  userData[ "currentArticle" ] = getCurrentArticle();
+
+  // Remove saved window position. Reloading occurs in response to changes that
+  // may affect content height, so restoring the current window position can cause
+  // uncontrolled jumps. Scrolling to the current article (i.e. jumping to the top
+  // of it) is simple, reliable and predictable, if not ideal.
+  userData[ "sx" ].clear();
+  userData[ "sy" ].clear();
+
+  ui.definition->history()->currentItem().setUserData( userData );
+
   ui.definition->reload();
 }
 
