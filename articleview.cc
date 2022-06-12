@@ -444,8 +444,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( mutedDicts.size() )
     Qt4x5::Url::addQueryItem( req,  "muted", mutedDicts );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
@@ -456,7 +455,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -494,8 +493,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( ignoreDiacritics )
     Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( word );
 
   // Any search opened is probably irrelevant now
@@ -506,7 +504,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -877,6 +875,12 @@ void ArticleView::saveHistoryUserData()
   ui.definition->history()->currentItem().setUserData( userData );
 }
 
+void ArticleView::load( QUrl const & url )
+{
+  saveHistoryUserData();
+  ui.definition->load( url );
+}
+
 void ArticleView::cleanupTemp()
 {
   QSet< QString >::iterator it = desktopOpenedTempFiles.begin();
@@ -1197,10 +1201,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
-  {
-    saveHistoryUserData();
-    ui.definition->load( url );
-  }
+    load( url );
   else
   if ( url.scheme().compare( "bword" ) == 0 )
   {
@@ -1648,9 +1649,7 @@ void ArticleView::updateMutedContents()
     if ( mutedDicts.size() )
     Qt4x5::Url::addQueryItem( currentUrl, "muted", mutedDicts );
 
-    saveHistoryUserData();
-
-    ui.definition->load( currentUrl );
+    load( currentUrl );
 
     //QApplication::setOverrideCursor( Qt::WaitCursor );
     ui.definition->setCursor( Qt::WaitCursor );
