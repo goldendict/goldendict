@@ -346,6 +346,9 @@ private:
   /// Should be used when leaving the page.
   void saveHistoryUserData();
 
+  /// Loads a page at @p url into view.
+  void load( QUrl const & url );
+
   /// Attempts removing last temporary file created.
   void cleanupTemp();
 
