@@ -761,10 +761,6 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if ( moveToIt )
     ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
 
-  QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
-  userData[ "currentArticle" ] = id;
-  ui.definition->history()->currentItem().setUserData( userData );
-
   ui.definition->page()->mainFrame()->evaluateJavaScript(
     QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
 
