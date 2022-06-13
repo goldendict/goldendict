@@ -75,7 +75,12 @@ jobs:
           mv ${targetName}.app ./tmp
           # --background "installer_background.png"
           create-dmg --volname "${targetName} Installer" --volicon "icons/macicon.icns" --window-pos 200 120 --window-size 800 400 --icon-size 100 --icon "${targetName}.app" 200 190 --hide-extension "${targetName}.app" --app-drop-link 600 185 --skip-jenkins "${targetName}.dmg" tmp/
-
+      - name: Generate changelog
+        if: ${{!env.prerelease}}
+        id: changelog1
+        uses: metcalfc/changelog-generator@v3.0.0
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set outputs
         id: vars
@@ -85,6 +90,11 @@ jobs:
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
           echo "::set-output name=release_hm::$(date +'%y%m%d')"  
+
+      - name: changelog
+        if: $${{env.prerelease}}
+        id: changelog2
+        run: |   
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
@@ -122,4 +132,5 @@ jobs:
             auto built by github action. use on your on risk:-)   
 
             CHANGES:
-            ${{ steps.vars.outputs.COMMIT_SUMMARY }}            
+            ${{ steps.changelog1.outputs.changelog }}  
+            ${{ steps.changelog2.outputs.COMMIT_SUMMARY }}          

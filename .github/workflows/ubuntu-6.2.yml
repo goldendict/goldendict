@@ -80,15 +80,26 @@ jobs:
       #   with:
       #     name: AppImage
       #     path: './*.AppImage*'
+      - name: Generate changelog
+        if: ${{!env.prerelease}}
+        id: changelog1
+        uses: metcalfc/changelog-generator@v3.0.0
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Set outputs
         id: vars
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short=8 HEAD)"    
           echo "::set-output name=release_date::$(date +'%Y%m%d')"    
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
-          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"    
-          echo "::set-output name=appname::$(ls *.AppImage*)"
+          echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
           echo "::set-output name=release_hm::$(date +'%y%m%d')"  
+
+      - name: changelog
+        if: $${{env.prerelease}}
+        id: changelog2
+        run: |   
           previousTag=$(git tag --sort=-creatordate | sed -n 2p)
           echo "previousTag : $previousTag"
           
@@ -98,7 +109,7 @@ jobs:
           CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
           CHANGELOG="${CHANGELOG//'\"'/'%22'}"
           CHANGELOG="${CHANGELOG//"'"/ }"
-          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"          
+          echo "::set-output name=COMMIT_SUMMARY::$(echo "$CHANGELOG")"      
       - name: uploadRelease
         # if: startsWith(github.event.ref, 'refs/tags/')
         uses: svenstaro/upload-release-action@v2
@@ -126,4 +137,5 @@ jobs:
             auto built by github action. use on your on risk:-)  
 
             CHANGES:
-            ${{ steps.vars.outputs.COMMIT_SUMMARY }}             
+            ${{ steps.changelog1.outputs.changelog }}  
+            ${{ steps.changelog2.outputs.COMMIT_SUMMARY }}                
