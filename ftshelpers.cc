@@ -17,6 +17,8 @@
 #include <QRegularExpression>
 
 #include "wildcard.hh"
+#include <QtConcurrent>
+#include "base/globalregex.hh"
 
 using std::vector;
 using std::string;
@@ -147,36 +149,36 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 {
   searchWords.clear();
   indexWords.clear();
-  QRegularExpression spacesRegExp( "\\W+", QRegularExpression::UseUnicodePropertiesOption );
-  QRegularExpression wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}", QRegularExpression::UseUnicodePropertiesOption );
-  QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
-  QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
+  // QRegularExpression spacesRegExp( "\\W+", QRegularExpression::UseUnicodePropertiesOption );
+  // QRegularExpression wordRegExp( QString( "\\w{" ) + QString::number( FTS::MinimumWordSize ) + ",}", QRegularExpression::UseUnicodePropertiesOption );
+  // QRegularExpression setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseInsensitiveOption );
+  // QRegularExpression regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})", QRegularExpression::CaseInsensitiveOption);
 
   hasCJK = containCJK( str );
 
   if( searchMode == FTS::WholeWords || searchMode == FTS::PlainText )
   {
     // Make words list for search in article text
-    searchWords = str.normalized( QString::NormalizationForm_C ).split( spacesRegExp, Qt::SkipEmptyParts );
+    searchWords = str.normalized( QString::NormalizationForm_C ).split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
     // Make words list for index search
     QStringList list =
-      str.normalized( QString::NormalizationForm_C ).toLower().split( spacesRegExp, Qt::SkipEmptyParts );
+      str.normalized( QString::NormalizationForm_C ).toLower().split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
 
     QString searchString;
     if( hasCJK )
     {
-      tokenizeCJK( indexWords, wordRegExp, list );
+      tokenizeCJK( indexWords, RX::Ftx::wordRegExp, list );
       // QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
       searchString         = makeHiliteRegExpString( list, searchMode, distanceBetweenWords, hasCJK , ignoreWordsOrder);
     }
     else
     {
-      indexWords = list.filter( wordRegExp );
+      indexWords = list.filter( RX::Ftx::wordRegExp );
       indexWords.removeDuplicates();
 
       // Make regexp for results hilite
 
-      QStringList allWords = str.split( spacesRegExp, Qt::SkipEmptyParts );
+      QStringList allWords = str.split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
       searchString = makeHiliteRegExpString( allWords, searchMode, distanceBetweenWords,false, ignoreWordsOrder );
     }
     searchRegExp = QRegExp( searchString, matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive, QRegExp::RegExp2 );
@@ -191,21 +193,21 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
     // Remove RegExp commands
     if( searchMode == FTS::RegExp )
-      tmp.replace( regexRegExp, " " );
+      tmp.replace( RX::Ftx::regexRegExp, " " );
 
     // Remove all symbol sets
-    tmp.replace( setsRegExp, " " );
+    tmp.replace( RX::Ftx::setsRegExp, " " );
 
     QStringList list = tmp.normalized( QString::NormalizationForm_C )
-                          .toLower().split( spacesRegExp, Qt::SkipEmptyParts );
+                          .toLower().split( RX::Ftx::spacesRegExp, Qt::SkipEmptyParts );
 
     if( hasCJK )
     {
-      tokenizeCJK( indexWords, wordRegExp, list );
+      tokenizeCJK( indexWords, RX::Ftx::wordRegExp, list );
     }
     else
     {
-      indexWords = list.filter( wordRegExp );
+      indexWords = list.filter( RX::Ftx::wordRegExp );
       indexWords.removeDuplicates();
     }
 
@@ -224,9 +226,9 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   if( articleText.isEmpty() )
     return;
 
-  QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
-                                  QRegularExpression::UseUnicodePropertiesOption);
-  QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
+  // QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
+  //                                 QRegularExpression::UseUnicodePropertiesOption);
+  // QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
                                         .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
@@ -275,12 +277,12 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
         // Special handle for words with round brackets - DSL feature
         QStringList list;
 
-        QStringList oldVariant = word.split( regSplit, Qt::SkipEmptyParts );
+        QStringList oldVariant = word.split( RX::Ftx::regSplit, Qt::SkipEmptyParts );
         for( QStringList::iterator it = oldVariant.begin(); it != oldVariant.end(); ++it )
           if( it->size() >= FTS::MinimumWordSize && !list.contains( *it ) )
             list.append( *it );
 
-        QRegularExpressionMatch match = regBrackets.match( word );
+        QRegularExpressionMatch match = RX::Ftx::regBrackets.match( word );
         if( match.hasMatch() )
         {
           QStringList parts = match.capturedTexts();
@@ -445,21 +447,20 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                                        QStringList const & words,
                                        QRegExp const & searchRegexp )
 {
-  int results = 0;
+  QtConcurrent::blockingMap( offsets, [ & ]( uint32_t offset ) { checkSingleArticle( offset, words, searchRegexp ); } );
+}
+
+void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
+                                       QStringList const & words,
+                                       QRegExp const & searchRegexp )
+{
+  qDebug()<<"checking"<<offset<<QThread::currentThreadId();
+  // int results = 0;
   QString headword, articleText;
   QList< uint32_t > offsetsForHeadwords;
   QVector< QStringList > hiliteRegExps;
 
   QString id = QString::fromUtf8( dict.getId().c_str() );
-  bool needHandleBrackets;
-  {
-    QString name = QString::fromUtf8( dict.getDictionaryFilenames()[ 0 ].c_str() ).toLower();
-    needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( ".dsl.dz" );
-  }
-
-  QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
-                                  QRegularExpression::UseUnicodePropertiesOption);
-  QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
 
   // RegExp mode
   QRegularExpression searchRegularExpression;
@@ -478,12 +479,13 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
-    for( int i = 0; i < offsets.size(); i++ )
+    // for( int i = 0; i < offsets.size(); i++ )
     {
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-        break;
+        return;
 
-      dict.getArticleText( offsets.at( i ), headword, articleText );
+      // auto article_address = offsets.at( i );
+      dict.getArticleText( offset, headword, articleText );
       articleText = articleText.normalized( QString::NormalizationForm_C );
 
       if( ignoreDiacritics )
@@ -492,13 +494,13 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
       if( articleText.contains( searchRegularExpression ) )
       {
         if( headword.isEmpty() )
-          offsetsForHeadwords.append( offsets.at( i ) );
+          offsetsForHeadwords.append( offset );
         else
           foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
 
-        results++;
+        ++results;
         if( maxResults > 0 && results >= maxResults )
-          break;
+          return;
       }
     }
   }
@@ -506,10 +508,6 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   {
     // Words mode
 
-    QRegularExpression splitWithBrackets( "[^\\w\\(\\)\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-    QRegularExpression splitWithoutBrackets( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-
-    Qt::CaseSensitivity cs = matchCase ? Qt::CaseSensitive : Qt::CaseInsensitive;
     QVector< QPair< QString, bool > > wordsList;
     if( ignoreWordsOrder )
     {
@@ -517,18 +515,10 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
         wordsList.append( QPair< QString, bool >( *it, true ) );
     }
 
-    for( int i = 0; i < offsets.size(); i++ )
+    // for( int i = 0; i < offsets.size(); i++ )
     {
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-        break;
-
-      int pos = 0;
-      int matchWordNom = 0;
-      int unmatchWordNom = 0;
-      int nextNotFoundPos = 0;
-
-      QVector< QStringList > allOrders;
-      QStringList order;
+        return;
 
       if( ignoreWordsOrder )
       {
@@ -536,17 +526,14 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
           wordsList[ i ].second = true;
       }
 
-      dict.getArticleText( offsets.at( i ), headword, articleText );
+      dict.getArticleText( offset, headword, articleText );
 
       articleText = articleText.normalized( QString::NormalizationForm_C );
 
       if( ignoreDiacritics )
         articleText = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( articleText ) ) );
 
-      //QStringList articleWords = articleText.split( needHandleBrackets ? splitWithBrackets : splitWithoutBrackets,
-      //                                              Qt::SkipEmptyParts );
-
-      if(ignoreWordsOrder)
+      if( ignoreWordsOrder )
       {
         bool allMatch = true;
         foreach( QString word, words )
@@ -559,75 +546,78 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
               break;
             }
           }
-          else if(  searchMode == FTS::WholeWords)
+          else if( searchMode == FTS::WholeWords )
           {
-            QRegularExpression tmpReg( QString( "\b%1\b" ).arg( word ),QRegularExpression::CaseInsensitiveOption|QRegularExpression::UseUnicodePropertiesOption );
-            if( !articleText.contains( tmpReg) )
+            QRegularExpression tmpReg( QString( "\b%1\b" ).arg( word ),
+                                       QRegularExpression::CaseInsensitiveOption
+                                         | QRegularExpression::UseUnicodePropertiesOption );
+            if( !articleText.contains( tmpReg ) )
             {
               allMatch = false;
               break;
             }
           }
-          
         }
 
-        if(!allMatch)
+        if( !allMatch )
         {
-          continue;
+          return;
         }
 
         if( distanceBetweenWords >= 0 )
         {
           // the article text contains all the needed words.
           // determine if distance restriction is meet
-          QRegularExpression replaceReg( QString( "(%1)" ).arg( words.join( '|' ) ),
-                                         QRegularExpression::CaseInsensitiveOption |
-                                           QRegularExpression::UseUnicodePropertiesOption );
+          const QRegularExpression replaceReg( QString( "(%1)" ).arg( words.join( '|' ) ),
+                                               QRegularExpression::CaseInsensitiveOption
+                                               | QRegularExpression::UseUnicodePropertiesOption );
           // use a string that could not be presented in the article.
           articleText = articleText.replace( replaceReg, "=@XXXXX@=" );
 
           auto hasCJK = false;
-          foreach(QString word,words)
+          foreach( QString word, words )
           {
-            if(containCJK( word ))
+            if( containCJK( word ) )
             {
               hasCJK = true;
               break;
             }
           }
 
-          //hascjk value ,perhaps should depend on each word
-          auto searchRegStr = makeHiliteRegExpString( Utils::repeat( "=@XXXXX@=", words.size() ), searchMode, distanceBetweenWords,hasCJK );
-          QRegularExpression distanceOrderReg( searchRegStr,
-                                         QRegularExpression::CaseInsensitiveOption |
-                                           QRegularExpression::UseUnicodePropertiesOption );
+          // hascjk value ,perhaps should depend on each word
+          const auto searchRegStr = makeHiliteRegExpString( Utils::repeat( "=@XXXXX@=", words.size() ),
+                                                            searchMode,
+                                                            distanceBetweenWords,
+                                                            hasCJK );
+          const QRegularExpression distanceOrderReg( searchRegStr,
+                                                     QRegularExpression::CaseInsensitiveOption
+                                                     | QRegularExpression::UseUnicodePropertiesOption );
           // use a string that could not be presented in the article.
-          if(articleText.contains(distanceOrderReg))
+          if( articleText.contains( distanceOrderReg ) )
           {
             if( headword.isEmpty() )
-              offsetsForHeadwords.append( offsets.at( i ) );
+              offsetsForHeadwords.append( offset );
             else
               foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
 
-            results++;
+            ++results;
             if( maxResults > 0 && results >= maxResults )
-              break;
+              return;
           }
         }
-       
       }
       else
       {
         if( articleText.contains( searchRegularExpression ) )
         {
           if( headword.isEmpty() )
-            offsetsForHeadwords.append( offsets.at( i ) );
+            offsetsForHeadwords.append( offset );
           else
             foundHeadwords->append( FTS::FtsHeadword( headword, id, QStringList(), matchCase ) );
-      
-          results++;
+
+          ++results;
           if( maxResults > 0 && results >= maxResults )
-            break;
+            return;
         }
       }
     }
@@ -637,7 +627,10 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     QVector< QString > headwords;
     dict.getHeadwordsFromOffsets( offsetsForHeadwords, headwords, &isCancelled );
     for( int x = 0; x < headwords.size(); x++ )
-      foundHeadwords->append( FTS::FtsHeadword( headwords.at( x ), id, x < hiliteRegExps.size() ? hiliteRegExps.at( x ) : QStringList(), matchCase ) );
+      foundHeadwords->append( FTS::FtsHeadword( headwords.at( x ),
+                                                id,
+                                                x < hiliteRegExps.size() ? hiliteRegExps.at( x ) : QStringList(),
+                                                matchCase ) );
   }
 }
 
@@ -648,27 +641,28 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 {
   // Find articles which contains all requested words
 
-  vector< BtreeIndexing::WordArticleLink > links;
-  QSet< uint32_t > setOfOffsets, tmp;
-  uint32_t size;
+  QSet< uint32_t > setOfOffsets;
 
   if( indexWords.isEmpty() )
     return;
 
-  int n = indexWords.length();
-  for( int i = 0; i < n; i++ )
+  QList< QSet< uint32_t > > addressLists;
+
+  auto findLinks = [ & ]( const QString & word )
   {
+    QSet< uint32_t > tmp;
+    uint32_t size;
+
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-      return;
+      addressLists<< tmp;
 
-    tmp.clear();
-
-    links = ftsIndex.findArticles( gd::toWString( indexWords.at( i ) ), ignoreDiacritics );
+    vector< BtreeIndexing::WordArticleLink > links =
+      ftsIndex.findArticles( gd::toWString( word ), ignoreDiacritics );
     for( unsigned x = 0; x < links.size(); x++ )
     {
 
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-        return;
+        addressLists<< tmp;
 
       vector< char > chunk;
       char * linksPtr;
@@ -677,24 +671,31 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
         linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
       }
 
-      memcpy( &size, linksPtr, sizeof(uint32_t) );
-      linksPtr += sizeof(uint32_t);
+      memcpy( &size, linksPtr, sizeof( uint32_t ) );
+      linksPtr += sizeof( uint32_t );
       for( uint32_t y = 0; y < size; y++ )
       {
         tmp.insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
-        linksPtr += sizeof(uint32_t);
+        linksPtr += sizeof( uint32_t );
       }
     }
 
     links.clear();
 
-    if( i == 0 )
-      setOfOffsets = tmp;
+    addressLists<< tmp;
+  };
+  // int n = indexWords.length();
+  QtConcurrent::blockingMap( indexWords, findLinks );
+
+  int i = 0;
+  for( auto & elem : addressLists )
+  {
+    if( i++ == 0 )
+      setOfOffsets = elem;
     else
-      setOfOffsets = setOfOffsets.intersect( tmp );
+      setOfOffsets = setOfOffsets.intersect( elem );
   }
 
-  tmp.clear();
 
   if( setOfOffsets.isEmpty() )
     return;
@@ -757,17 +758,15 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
   if( !hieroglyphsList.empty() )
   {
-    QSet< uint32_t > tmp;
-    vector< BtreeIndexing::WordArticleLink > links;
-
-    for( int i = 0; i < hieroglyphsList.size(); i++ )
+    QList< QSet< uint32_t > > sets;
+    auto fn_wordLink = [ & ](const QString & word )
     {
-      links = ftsIndex.findArticles( gd::toWString( hieroglyphsList.at( i ) ) );
+      QSet< uint32_t > tmp;
+      vector< BtreeIndexing::WordArticleLink > links = ftsIndex.findArticles( gd::toWString( word ) );
       for( unsigned x = 0; x < links.size(); x++ )
       {
-
         if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-          return;
+          sets<< tmp;
 
         vector< char > chunk;
         char * linksPtr;
@@ -786,11 +785,17 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
       }
 
       links.clear();
+      sets<< tmp;
+    };
+    QtConcurrent::blockingMap( hieroglyphsList, fn_wordLink );
 
-      if( i == 0 )
-        setOfOffsets = tmp;
+    int i = 0;
+    for( auto & elem : sets )
+    {
+      if( i++ == 0 )
+        setOfOffsets = elem;
       else
-        setOfOffsets = setOfOffsets.intersect( tmp );
+        setOfOffsets = setOfOffsets.intersect( elem );
     }
 
     allWordsLinks[ wordNom ] = setOfOffsets;

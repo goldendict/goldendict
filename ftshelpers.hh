@@ -82,11 +82,15 @@ class FTSResultsRequest : public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
 
+  QAtomicInt results;
+
   QList< FTS::FtsHeadword > * foundHeadwords;
 
   void checkArticles( QVector< uint32_t > const & offsets,
                       QStringList const & words,
                       QRegExp const & searchRegexp = QRegExp() );
+
+  void checkSingleArticle( uint32_t offset, QStringList const & words, QRegExp const & searchRegexp = QRegExp() );
 
   void indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                     sptr< ChunkedStorage::Reader > chunks,
@@ -127,6 +131,7 @@ public:
       searchString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( searchString_ ) ) );
 
     foundHeadwords = new QList< FTS::FtsHeadword >;
+    results         = 0;
     QThreadPool::globalInstance()->start( [ this ]() { this->run(); }, -100 );
   }
 

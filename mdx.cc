@@ -42,6 +42,7 @@
 
 #include "tiff.hh"
 #include "utils.hh"
+#include "base/globalregex.hh"
 
 namespace Mdx
 {
@@ -192,51 +193,6 @@ public:
 
 };
 
-struct MdxRegex
-{
-  MdxRegex() :
-    allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
-                QRegularExpression::CaseInsensitiveOption ),
-    wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
-                   QRegularExpression::CaseInsensitiveOption ),
-    anchorIdRe( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)", QRegularExpression::CaseInsensitiveOption ),
-    anchorIdReWord( "([\\s\"'](?:name|id)\\s*=)\\s*([\"'])\\s*(?=\\S)([^\"]*)", QRegularExpression::CaseInsensitiveOption ),
-    anchorIdRe2( "([\\s\"'](?:name|id)\\s*=)\\s*(?=[^\"'])([^\\s\">]+)", QRegularExpression::CaseInsensitiveOption ),
-    anchorLinkRe( "([\\s\"']href\\s*=\\s*[\"'])entry://#", QRegularExpression::CaseInsensitiveOption ),
-    audioRe( "([\\s\"']href\\s*=)\\s*([\"'])sound://([^\">]+)\\2",
-             QRegularExpression::CaseInsensitiveOption | QRegularExpression::InvertedGreedinessOption ),
-    stylesRe( "([\\s\"']href\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://"
-              "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-              QRegularExpression::CaseInsensitiveOption ),
-    stylesRe2( "([\\s\"']href\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
-               "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-               QRegularExpression::CaseInsensitiveOption ),
-    inlineScriptRe( "<\\s*script(?:(?=\\s)(?:(?![\\s\"']src\\s*=)[^>])+|\\s*)>",
-                    QRegularExpression::CaseInsensitiveOption ),
-    closeScriptTagRe( "<\\s*/script\\s*>", QRegularExpression::CaseInsensitiveOption ),
-    srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bres|https?|ftp)://"
-           "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\">]+)\\2",
-           QRegularExpression::CaseInsensitiveOption ),
-    srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
-            "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
-            QRegularExpression::CaseInsensitiveOption )
-  {
-  }
-  QRegularExpression allLinksRe;
-  QRegularExpression wordCrossLink;
-  QRegularExpression anchorIdRe;
-  QRegularExpression anchorIdReWord;
-  QRegularExpression anchorIdRe2;
-  QRegularExpression anchorLinkRe;
-  QRegularExpression audioRe;
-  QRegularExpression stylesRe;
-  QRegularExpression stylesRe2;
-  QRegularExpression inlineScriptRe;
-  QRegularExpression closeScriptTagRe;
-  QRegularExpression srcRe;
-  QRegularExpression srcRe2;
-};
-
 class MdxDictionary: public BtreeIndexing::BtreeDictionary
 {
   Mutex idxMutex;
@@ -255,8 +211,6 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
 
   string initError;
   QString cacheDirName;
-
-  static MdxRegex mdxRx;
 
 public:
 
@@ -346,8 +300,6 @@ private:
   friend class MdxArticleRequest;
   friend class MddResourceRequest;
 };
-
-MdxRegex MdxDictionary::mdxRx;
 
 MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
                               vector<string> const & dictionaryFiles ):
@@ -972,10 +924,11 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
                                           decompressed.constData() + recordInfo.recordOffset,
                                           recordInfo.recordSize );
 
-  article = MdictParser::substituteStylesheet( article, styleSheets );
-
   if( !noFilter )
+  {
+    article = MdictParser::substituteStylesheet( article, styleSheets );
     article = filterResource( articleId, article );
+  }
 
   articleText = article.toStdString();
 }
@@ -987,7 +940,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 
   QString articleNewText;
   int linkPos = 0;
-  QRegularExpressionMatchIterator it = mdxRx.allLinksRe.globalMatch( article );
+  QRegularExpressionMatchIterator it = RX::Mdx::allLinksRe.globalMatch( article );
   QMap<QString,QString> idMap;
   while( it.hasNext() )
   {
@@ -1005,10 +958,10 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 
     if( !linkType.isEmpty() && linkType.at( 0 ) == 'a' )
     {
-      QRegularExpressionMatch match = mdxRx.anchorIdRe.match( linkTxt );
+      QRegularExpressionMatch match = RX::Mdx::anchorIdRe.match( linkTxt );
       if( match.hasMatch() )
       {
-        auto wordMatch = mdxRx.anchorIdReWord.match( linkTxt );
+        auto wordMatch = RX::Mdx::anchorIdReWord.match( linkTxt );
         if( wordMatch.hasMatch() )
         {
           idMap.insert( wordMatch.captured( 3 ), uniquePrefix + wordMatch.captured( 3 ) );
@@ -1017,11 +970,11 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
       }
       else
-        newLink = linkTxt.replace( mdxRx.anchorIdRe2, "\\1\"" + uniquePrefix + "\\2\"" );
+        newLink = linkTxt.replace( RX::Mdx::anchorIdRe2, "\\1\"" + uniquePrefix + "\\2\"" );
 
-      newLink = newLink.replace( mdxRx.anchorLinkRe, "\\1#" + uniquePrefix );
+      newLink = newLink.replace( RX::Mdx::anchorLinkRe, "\\1#" + uniquePrefix );
 
-      match = mdxRx.audioRe.match( newLink );
+      match = RX::Mdx::audioRe.match( newLink );
       if( match.hasMatch() )
       {
         // sounds and audio link script
@@ -1032,7 +985,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                   + newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
       }
 
-      match = mdxRx.wordCrossLink.match( newLink );
+      match = RX::Mdx::wordCrossLink.match( newLink );
       if( match.hasMatch() )
       {
         QString newTxt = match.captured( 1 ) + match.captured( 2 )
@@ -1050,7 +1003,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
     if( linkType.compare( "link" ) == 0 )
     {
       // stylesheets
-      QRegularExpressionMatch match = mdxRx.stylesRe.match( linkTxt );
+      QRegularExpressionMatch match = RX::Mdx::stylesRe.match( linkTxt );
       if( match.hasMatch() )
       {
         QString newText = match.captured( 1 ) + match.captured( 2 )
@@ -1059,7 +1012,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
       }
       else
-        newLink = linkTxt.replace( mdxRx.stylesRe2,
+        newLink = linkTxt.replace( RX::Mdx::stylesRe2,
                                    "\\1\"bres://" + id + "/\\2\"" );
     }
     else
@@ -1067,13 +1020,13 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         || linkType.compare( "source" ) == 0 )
     {
       // javascripts and images
-      QRegularExpressionMatch match = mdxRx.inlineScriptRe.match( linkTxt );
+      QRegularExpressionMatch match = RX::Mdx::inlineScriptRe.match( linkTxt );
       if( linkType.at( 1 ) == 'c' // "script" tag
           && match.hasMatch() && match.capturedLength() == linkTxt.length() )
       {
         // skip inline scripts
         articleNewText += linkTxt;
-        match = mdxRx.closeScriptTagRe.match( article, linkPos );
+        match = RX::Mdx::closeScriptTagRe.match( article, linkPos );
         if( match.hasMatch() )
         {
           articleNewText += article.mid( linkPos, match.capturedEnd() - linkPos );
@@ -1083,7 +1036,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
       }
       else
       {
-        match = mdxRx.srcRe.match( linkTxt );
+        match = RX::Mdx::srcRe.match( linkTxt );
         if( match.hasMatch() )
         {
           QString newText;
@@ -1104,7 +1057,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
           newLink = linkTxt.replace( match.capturedStart(), match.capturedLength(), newText );
         }
         else
-          newLink = linkTxt.replace( mdxRx.srcRe2,
+          newLink = linkTxt.replace( RX::Mdx::srcRe2,
                                      "\\1\"bres://" + id + "/\\2\"" );
       }
     }
