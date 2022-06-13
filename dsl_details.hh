@@ -113,7 +113,6 @@ class DslScanner
   wstring langFrom, langTo;
   wstring soundDictionary;
   char readBuffer[ 65536 ];
-  QTextStream* fragStream;
   char * readBufferPtr;
   LineFeed lineFeed;
   size_t readBufferLeft;
