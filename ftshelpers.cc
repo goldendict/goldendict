@@ -447,7 +447,19 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                                        QStringList const & words,
                                        QRegExp const & searchRegexp )
 {
-  QtConcurrent::blockingMap( offsets, [ & ]( uint32_t offset ) { checkSingleArticle( offset, words, searchRegexp ); } );
+  const int parallel_count = QThread::idealThreadCount()/2;
+  QSemaphore sem( parallel_count  < 1 ? 1 : parallel_count  );
+  for( auto & address : offsets )
+  {
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
+      return;
+    sem.acquire();
+    QtConcurrent::run( [ & ]() { checkSingleArticle( address, words, searchRegexp );
+        sem.release();
+      } );
+    // QtConcurrent::blockingMap( offsets,
+    //                            [ & ]( uint32_t offset ) { checkSingleArticle( offset, words, searchRegexp ); } );
+  }
 }
 
 void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
@@ -681,8 +693,10 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
     }
 
     links.clear();
-
-    addressLists<< tmp;
+    {
+      Mutex::Lock _( dataMutex );
+      addressLists << tmp;
+    }
   };
   // int n = indexWords.length();
   QtConcurrent::blockingMap( indexWords, findLinks );
@@ -785,7 +799,11 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
       }
 
       links.clear();
-      sets<< tmp;
+
+      {
+        Mutex::Lock _( dataMutex );
+        sets << tmp;
+      }
     };
     QtConcurrent::blockingMap( hieroglyphsList, fn_wordLink );
 
