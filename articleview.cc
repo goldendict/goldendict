@@ -435,8 +435,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( mutedDicts.size() )
     Utils::Url::addQueryItem( req,  "muted", mutedDicts );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
@@ -447,7 +446,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -485,8 +484,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( ignoreDiacritics )
     Utils::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( word );
 
   // Any search opened is probably irrelevant now
@@ -497,7 +495,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   ui.definition->setCursor( Qt::WaitCursor );
 }
@@ -726,6 +724,12 @@ void ArticleView::saveHistoryUserData()
 {
   ui.definition->setProperty("sx", ui.definition->page()->scrollPosition().x());
   ui.definition->setProperty("sy", ui.definition->page()->scrollPosition().y());
+}
+
+void ArticleView::load( QUrl const & url )
+{
+  saveHistoryUserData();
+  ui.definition->load( url );
 }
 
 void ArticleView::cleanupTemp()
@@ -1123,7 +1127,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
-    ui.definition->load( url );
+    load( url );
   else
   if ( url.scheme().compare( "bword" ) == 0 || url.scheme().compare( "entry" ) == 0 )
   {
@@ -1571,9 +1575,7 @@ void ArticleView::updateMutedContents()
     if ( mutedDicts.size() )
     Utils::Url::addQueryItem( currentUrl, "muted", mutedDicts );
 
-    saveHistoryUserData();
-
-    ui.definition->load( currentUrl );
+    load( currentUrl );
 
     //QApplication::setOverrideCursor( Qt::WaitCursor );
     ui.definition->setCursor( Qt::WaitCursor );
@@ -1617,6 +1619,25 @@ void ArticleView::forward()
 {
   saveHistoryUserData();
   ui.definition->forward();
+}
+
+void ArticleView::reload()
+{
+  QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
+
+  // Save current article, which can be empty
+  userData[ "currentArticle" ] = getCurrentArticle();
+
+  // Remove saved window position. Reloading occurs in response to changes that
+  // may affect content height, so restoring the current window position can cause
+  // uncontrolled jumps. Scrolling to the current article (i.e. jumping to the top
+  // of it) is simple, reliable and predictable, if not ideal.
+  userData[ "sx" ].clear();
+  userData[ "sy" ].clear();
+
+  ui.definition->history()->currentItem().setUserData( userData );
+
+  ui.definition->reload();
 }
 
 void ArticleView::hasSound( const std::function< void( bool ) > & callback )
@@ -2458,25 +2479,12 @@ void ArticleView::showEvent( QShowEvent * ev )
 void ArticleView::receiveExpandOptionalParts( bool expand )
 {
   if( expandOptionalParts != expand )
-  {
-    int n = getArticlesList().indexOf( getActiveArticleId() );
-    if( n > 0 )
-       articleToJump = getCurrentArticle();
-
-    emit setExpandMode( expand );
-    expandOptionalParts = expand;
-    reload();
-  }
+    switchExpandOptionalParts();
 }
 
 void ArticleView::switchExpandOptionalParts()
 {
   expandOptionalParts = !expandOptionalParts;
-
-  int n = getArticlesList().indexOf( getActiveArticleId() );
-  if( n > 0 )
-    articleToJump = getCurrentArticle();
-
   emit setExpandMode( expandOptionalParts );
   reload();
 }
