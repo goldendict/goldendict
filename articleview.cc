@@ -535,13 +535,6 @@ void ArticleView::loadFinished( bool result )
   // Expand collapsed article if only one loaded
   ui.definition->page()->runJavaScript( QString( "gdCheckArticlesNumber();" ) );
 
-  // Jump to current article after page reloading
-  if( !articleToJump.isEmpty() )
-  {
-    setCurrentArticle( articleToJump, true );
-    articleToJump.clear();
-  }
-
   if( !Utils::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
     QString anchor = QUrl::fromPercentEncoding( Utils::Url::encodedQueryItemValue( url, "gdanchor" ) );
@@ -1623,20 +1616,6 @@ void ArticleView::forward()
 
 void ArticleView::reload()
 {
-  QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
-
-  // Save current article, which can be empty
-  userData[ "currentArticle" ] = getCurrentArticle();
-
-  // Remove saved window position. Reloading occurs in response to changes that
-  // may affect content height, so restoring the current window position can cause
-  // uncontrolled jumps. Scrolling to the current article (i.e. jumping to the top
-  // of it) is simple, reliable and predictable, if not ideal.
-  userData[ "sx" ].clear();
-  userData[ "sy" ].clear();
-
-  ui.definition->history()->currentItem().setUserData( userData );
-
   ui.definition->reload();
 }
 
