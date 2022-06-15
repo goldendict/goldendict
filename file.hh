@@ -95,6 +95,7 @@ public:
 
   /// Seeks in the file, relative to its beginning.
   void seek( qint64 offset ) ;
+  uchar * map( qint64 offset, qint64 size );
   /// Seeks in the file, relative to the current position.
   void seekCur( qint64 offset ) ;
   /// Seeks in the file, relative to the end of file.
@@ -117,6 +118,7 @@ public:
   void close() ;
 
   ~Class() noexcept;
+  bool unmap( uchar * address );
 
 private:
 

@@ -679,7 +679,7 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
       vector< char > chunk;
       char * linksPtr;
       {
-        Mutex::Lock _( dict.getFtsMutex() );
+        // Mutex::Lock _( dict.getFtsMutex() );
         linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
       }
 
@@ -785,7 +785,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
         vector< char > chunk;
         char * linksPtr;
         {
-          Mutex::Lock _( dict.getFtsMutex() );
+          // Mutex::Lock _( dict.getFtsMutex() );
           linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
         }
 
@@ -844,7 +844,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
           vector< char > chunk;
           char * linksPtr;
           {
-            Mutex::Lock _( dict.getFtsMutex() );
+            // Mutex::Lock _( dict.getFtsMutex() );
             linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
           }
 
@@ -935,7 +935,7 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
         vector< char > chunk;
         char * linksPtr;
         {
-          Mutex::Lock _( dict.getFtsMutex() );
+          // Mutex::Lock _( dict.getFtsMutex() );
           linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
         }
 

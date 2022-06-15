@@ -256,6 +256,20 @@ void Class::seek( qint64 offset )
     throw exSeekError();
 }
 
+uchar * Class::map( qint64 offset, qint64 size )
+{
+  if( writeBuffer )
+    flushWriteBuffer();
+
+  return f.map( offset, size );
+}
+
+bool Class::unmap( uchar * address )
+{
+  return f.unmap( address );
+}
+
+
 void Class::seekCur( qint64 offset ) 
 {
   if ( writeBuffer )
