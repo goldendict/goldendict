@@ -1621,7 +1621,7 @@ void ArticleView::reload()
 
 void ArticleView::hasSound( const std::function< void( bool ) > & callback )
 {
-  ui.definition->page()->runJavaScript( "gdAudioLinks.first",
+  ui.definition->page()->runJavaScript( "if(typeof(gdAudioLinks)!=\"undefined\") gdAudioLinks.first",
                                         [ callback ]( const QVariant & v )
                                         {
                                           bool has = false;
