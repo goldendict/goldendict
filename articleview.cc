@@ -2558,10 +2558,10 @@ void ArticleView::highlightFTSResults()
 //        highlightAllFtsOccurences( flags );
         ui.definition->findText( allMatches.at( 0 ), flags );
         // if( ui.definition->findText( allMatches.at( 0 ), flags ) )
-        {
-          ui.definition->page()->runJavaScript(
-            QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
-        }
+        // {
+        //   ui.definition->page()->runJavaScript(
+        //     QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
+        // }
       }
 
       ui.ftsSearchFrame->show();
@@ -2673,9 +2673,9 @@ void ArticleView::performFtsFindOperation( bool backwards )
   }
 #endif
   // Store new highlighted selection
-  ui.definition->page()->
-         runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
-                             .arg( rangeVarName ) );
+  // ui.definition->page()->
+  //        runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+  //                            .arg( rangeVarName ) );
 }
 
 void ArticleView::on_ftsSearchPrevious_clicked()
