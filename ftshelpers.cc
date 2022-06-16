@@ -503,7 +503,6 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
     // for( int i = 0; i < offsets.size(); i++ )
-    {
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         return;
 
@@ -528,7 +527,6 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
         if( maxResults > 0 && results >= maxResults )
           return;
       }
-    }
   }
   else
   {
@@ -542,7 +540,6 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
     }
 
     // for( int i = 0; i < offsets.size(); i++ )
-    {
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         return;
 
@@ -652,15 +649,15 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
             return;
         }
       }
-    }
   }
   if( !offsetsForHeadwords.isEmpty() )
   {
     QVector< QString > headwords;
+    Mutex::Lock _( dataMutex );
+
     dict.getHeadwordsFromOffsets( offsetsForHeadwords, headwords, &isCancelled );
     for( int x = 0; x < headwords.size(); x++ )
     {
-      Mutex::Lock _( dataMutex );
       foundHeadwords->append( FTS::FtsHeadword( headwords.at( x ),
                                                 id,
                                                 x < hiliteRegExps.size() ? hiliteRegExps.at( x ) : QStringList(),
@@ -844,7 +841,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
     // allWordsLinks[ wordNom ] = setOfOffsets;
     // setOfOffsets.clear();
-    wordNom += 1;
+    // wordNom += 1;
   }
 
   if( setOfOffsets.isEmpty() )
