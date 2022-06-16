@@ -2233,7 +2233,8 @@ void ArticleView::openSearch()
   if ( !searchIsOpened )
   {
     ui.searchFrame->show();
-    ui.searchText->setText( getTitle() );
+    if( ui.searchText->text().isEmpty() )
+      ui.searchText->setText( getTitle() );
     searchIsOpened = true;
   }
 
