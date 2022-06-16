@@ -5,6 +5,7 @@
 #include <zlib.h>
 #include <string.h>
 #include <QDataStream>
+#include <QScopeGuard>
 
 namespace ChunkedStorage {
 
@@ -144,7 +145,6 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
 
     uint32_t uncompressedSize;
     uint32_t compressedSize;
-    // = file.read< uint32_t >();
 
     in >> uncompressedSize >> compressedSize;
 
@@ -155,17 +155,20 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
     auto chunkDataBytes = file.map( offsets[ chunkIdx ] + 8, compressedSize );
 
     // file.read( &compressedData.front(), compressedData.size() );
+    auto autoUnmap = qScopeGuard(
+      [ & ] {
+        file.unmap( chunkDataBytes );
+      } );
+    Q_UNUSED( autoUnmap )
 
     unsigned long decompressedLength = chunk.size();
 
     if( uncompress( (unsigned char *)&chunk.front(), &decompressedLength, chunkDataBytes, compressedSize ) != Z_OK
         || decompressedLength != chunk.size() )
     {
-      file.unmap( chunkDataBytes );
       throw exFailedToDecompressChunk();
     }
 
-    file.unmap( chunkDataBytes );
   }
 
   size_t offsetInChunk = address & 0xffFF;
