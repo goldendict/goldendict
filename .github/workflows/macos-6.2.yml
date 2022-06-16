@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-11]
-        qt_ver: [6.2.4,6.3.0]
+        qt_ver: [6.2.4,6.3.1]
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict

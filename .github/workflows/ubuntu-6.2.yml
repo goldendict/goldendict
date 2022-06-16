@@ -27,7 +27,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        qt_ver: [6.2.4,6.3.0]
+        qt_ver: [6.2.4,6.3.1]
         qt_arch: [gcc_64]
     env:
       version: 22.5.22
@@ -95,7 +95,8 @@ jobs:
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
           echo "::set-output name=release_hm::$(date +'%y%m%d')"  
-
+          echo "::set-output name=appname::$(ls *.AppImage*)"
+          
       - name: changelog
         if: $${{env.prerelease}}
         id: changelog2
