@@ -92,7 +92,8 @@ jobs:
           echo "::set-output name=release_time::$(date +'%H%M%S')"  
           echo "::set-output name=release_time_clock::$(date +'%H:%M:%S')"   
           echo "::set-output name=release_hm::$(date +'%y%m%d')"  
-
+          echo "::set-output name=appname::$(ls *.AppImage*)"
+          
       - name: changelog
         if: $${{env.prerelease}}
         id: changelog2
