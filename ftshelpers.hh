@@ -89,8 +89,11 @@ class FTSResultsRequest : public Dictionary::DataRequest
   void checkArticles( QVector< uint32_t > const & offsets,
                       QStringList const & words,
                       QRegExp const & searchRegexp = QRegExp() );
+  QRegularExpression createMatchRegex( QRegExp const & searchRegexp );
 
-  void checkSingleArticle( uint32_t offset, QStringList const & words, QRegExp const & searchRegexp = QRegExp() );
+  void checkSingleArticle( uint32_t offset,
+                           QStringList const & words,
+                           QRegularExpression const & searchRegexp = QRegularExpression() );
 
   void indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                     sptr< ChunkedStorage::Reader > chunks,

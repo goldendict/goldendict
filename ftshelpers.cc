@@ -449,34 +449,29 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
 {
   const int parallel_count = QThread::idealThreadCount()/2;
   QSemaphore sem( parallel_count  < 1 ? 1 : parallel_count  );
+
+  QFutureSynchronizer< void > synchronizer;
+  auto searchRegularExpression = createMatchRegex( searchRegexp );
+
   for( auto & address : offsets )
   {
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
       return;
     sem.acquire();
-    QFuture<void> f =QtConcurrent::run( [ & ]() { checkSingleArticle( address, words, searchRegexp );
-        sem.release();
+    QFuture< void > f = QtConcurrent::run(
+      [ & ]()
+      {
+        QSemaphoreReleaser releaser( sem );
+        checkSingleArticle( address, words,  searchRegularExpression );
       } );
-    f.waitForFinished();
-
-    // QtConcurrent::blockingMap( offsets,
-    //                            [ & ]( uint32_t offset ) { checkSingleArticle( offset, words, searchRegexp ); } );
+    synchronizer.addFuture( f );
   }
 }
 
-void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
-                                       QStringList const & words,
-                                       QRegExp const & searchRegexp )
+QRegularExpression FTSResultsRequest::createMatchRegex( QRegExp const & searchRegexp )
 {
-  // int results = 0;
-  QString headword, articleText;
-  QList< uint32_t > offsetsForHeadwords;
-  QVector< QStringList > hiliteRegExps;
-
-  QString id = QString::fromUtf8( dict.getId().c_str() );
-
-  // RegExp mode
   QRegularExpression searchRegularExpression;
+
   if( searchMode == FTS::Wildcards )
     searchRegularExpression.setPattern( wildcardsToRegexp( searchRegexp.pattern() ) );
   else
@@ -489,6 +484,21 @@ void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
   searchRegularExpression.setPatternOptions( patternOptions );
   if( !searchRegularExpression.isValid() )
     searchRegularExpression.setPattern( "" );
+  return searchRegularExpression;
+}
+
+void FTSResultsRequest::checkSingleArticle( uint32_t  offset,
+                                            QStringList const & words,
+                                            QRegularExpression const & searchRegularExpression )
+{
+  // int results = 0;
+  QString headword, articleText;
+  QList< uint32_t > offsetsForHeadwords;
+  QVector< QStringList > hiliteRegExps;
+
+  QString id = QString::fromUtf8( dict.getId().c_str() );
+
+  // RegExp mode
 
   if( searchMode == FTS::Wildcards || searchMode == FTS::RegExp )
   {
