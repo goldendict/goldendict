@@ -163,7 +163,7 @@ public:
 
     MdictParser::RecordInfo indexEntry;
     vector< char > chunk;
-    Mutex::Lock _( idxMutex );
+    // Mutex::Lock _( idxMutex );
     const char * indexEntryPtr = chunks.getBlock( links[ 0 ].articleOffset, chunk );
     memcpy( &indexEntry, indexEntryPtr, sizeof( indexEntry ) );
 
@@ -867,7 +867,7 @@ const QString & MdxDictionary::getDescription()
   }
   else
   {
-    Mutex::Lock _( idxMutex );
+    // Mutex::Lock _( idxMutex );
     vector< char > chunk;
     char * dictDescription = chunks.getBlock( idxHeader.descriptionAddress, chunk );
     string str( dictDescription );
@@ -900,7 +900,7 @@ void MdxDictionary::loadIcon() noexcept
 void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noFilter )
 {
   vector< char > chunk;
-  Mutex::Lock _( idxMutex );
+  // Mutex::Lock _( idxMutex );
 
   // Load record info from index
   MdictParser::RecordInfo recordInfo;

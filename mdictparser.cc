@@ -336,6 +336,23 @@ bool MdictParser::readHeader( QDataStream & in )
   headerTextUtf16.clear();
   in.setByteOrder( QDataStream::BigEndian );
 
+
+  //parse stylesheet
+  QString styleSheets;
+
+  if( headerText.contains( "StyleSheet" ) )
+  {
+    // a workaround to bypass https://bugreports.qt.io/browse/QTBUG-102612
+    QRegularExpression rx( "StyleSheet=\"([^\"]*?)\"", QRegularExpression::CaseInsensitiveOption );
+
+    auto match = rx.match( headerText );
+
+    if( match.hasMatch() || match.hasPartialMatch() )
+    {
+      styleSheets = match.captured( 1 );
+    }
+  }
+
   //with this control character ,qt6.x can not parse attribute value.
   headerText.remove(QRegularExpression("\\p{C}"));
 
@@ -355,32 +372,14 @@ bool MdictParser::readHeader( QDataStream & in )
   //   styleId # 1-255
   //   style.prefix
   //   style.suffix
-  if ( headerAttributes.contains( "StyleSheet" ) )
+  if ( !styleSheets.isEmpty() )
   {
-#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
-    //a workaround to bypass https://bugreports.qt.io/browse/QTBUG-102612
-    QRegularExpression rx( "StyleSheet=\"([^\"]*?)\"", QRegularExpression::CaseInsensitiveOption );
-
-    auto match = rx.match( headerText );
-    QString styleSheets;
-
-    if( match.hasMatch() || match.hasPartialMatch() )
-    {
-      styleSheets = match.captured( 1 );
-    }
-#else
-    QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
-#endif
     QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt::KeepEmptyParts );
 
     for( int i = 0; i < lines.size() - 3; i += 3 )
     {
-#if( QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 ) )
       styleSheets_[ lines[ i ].toInt() ] =
-        pair< QString, QString >( Html::fromHtmlEscaped( lines[ i + 1 ] ),  Html::fromHtmlEscaped( lines[ i + 2 ] ) );
-#else
-      styleSheets_[ lines[ i ].toInt() ] = pair< QString, QString >( lines[ i + 1 ], lines[ i + 2 ] );
-#endif
+        pair( Html::fromHtmlEscaped( lines[ i + 1 ] ),  Html::fromHtmlEscaped( lines[ i + 2 ] ) );
     }
   }
 

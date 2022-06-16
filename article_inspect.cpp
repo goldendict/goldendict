@@ -26,13 +26,14 @@ void ArticleInspector::setInspectPage( QWebEngineView * view )
   {
     page->triggerAction( QWebEnginePage::InspectElement );
   }
-#else
-  page->triggerAction( QWebEnginePage::InspectElement );
-#endif
   if( !firstTimeOpened )
   {
     firstTimeOpened = true;
   }
+#else
+  page->triggerAction( QWebEnginePage::InspectElement );
+#endif
+
   raise();
   show();
 }

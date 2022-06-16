@@ -435,8 +435,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( mutedDicts.size() )
     Utils::Url::addQueryItem( req,  "muted", mutedDicts );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
@@ -447,7 +446,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -485,8 +484,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( ignoreDiacritics )
     Utils::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( word );
 
   // Any search opened is probably irrelevant now
@@ -497,7 +495,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   ui.definition->setCursor( Qt::WaitCursor );
 }
@@ -536,13 +534,6 @@ void ArticleView::loadFinished( bool result )
 
   // Expand collapsed article if only one loaded
   ui.definition->page()->runJavaScript( QString( "gdCheckArticlesNumber();" ) );
-
-  // Jump to current article after page reloading
-  if( !articleToJump.isEmpty() )
-  {
-    setCurrentArticle( articleToJump, true );
-    articleToJump.clear();
-  }
 
   if( !Utils::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
@@ -726,6 +717,12 @@ void ArticleView::saveHistoryUserData()
 {
   ui.definition->setProperty("sx", ui.definition->page()->scrollPosition().x());
   ui.definition->setProperty("sy", ui.definition->page()->scrollPosition().y());
+}
+
+void ArticleView::load( QUrl const & url )
+{
+  saveHistoryUserData();
+  ui.definition->load( url );
 }
 
 void ArticleView::cleanupTemp()
@@ -1123,7 +1120,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   Contexts contexts( contexts_ );
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
-    ui.definition->load( url );
+    load( url );
   else
   if ( url.scheme().compare( "bword" ) == 0 || url.scheme().compare( "entry" ) == 0 )
   {
@@ -1571,9 +1568,7 @@ void ArticleView::updateMutedContents()
     if ( mutedDicts.size() )
     Utils::Url::addQueryItem( currentUrl, "muted", mutedDicts );
 
-    saveHistoryUserData();
-
-    ui.definition->load( currentUrl );
+    load( currentUrl );
 
     //QApplication::setOverrideCursor( Qt::WaitCursor );
     ui.definition->setCursor( Qt::WaitCursor );
@@ -1619,9 +1614,14 @@ void ArticleView::forward()
   ui.definition->forward();
 }
 
+void ArticleView::reload()
+{
+  ui.definition->reload();
+}
+
 void ArticleView::hasSound( const std::function< void( bool ) > & callback )
 {
-  ui.definition->page()->runJavaScript( "gdAudioLinks.first",
+  ui.definition->page()->runJavaScript( "if(typeof(gdAudioLinks)!=\"undefined\") gdAudioLinks.first",
                                         [ callback ]( const QVariant & v )
                                         {
                                           bool has = false;
@@ -2458,25 +2458,12 @@ void ArticleView::showEvent( QShowEvent * ev )
 void ArticleView::receiveExpandOptionalParts( bool expand )
 {
   if( expandOptionalParts != expand )
-  {
-    int n = getArticlesList().indexOf( getActiveArticleId() );
-    if( n > 0 )
-       articleToJump = getCurrentArticle();
-
-    emit setExpandMode( expand );
-    expandOptionalParts = expand;
-    reload();
-  }
+    switchExpandOptionalParts();
 }
 
 void ArticleView::switchExpandOptionalParts()
 {
   expandOptionalParts = !expandOptionalParts;
-
-  int n = getArticlesList().indexOf( getActiveArticleId() );
-  if( n > 0 )
-    articleToJump = getCurrentArticle();
-
   emit setExpandMode( expandOptionalParts );
   reload();
 }
@@ -2571,10 +2558,10 @@ void ArticleView::highlightFTSResults()
 //        highlightAllFtsOccurences( flags );
         ui.definition->findText( allMatches.at( 0 ), flags );
         // if( ui.definition->findText( allMatches.at( 0 ), flags ) )
-        {
-          ui.definition->page()->runJavaScript(
-            QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
-        }
+        // {
+        //   ui.definition->page()->runJavaScript(
+        //     QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
+        // }
       }
 
       ui.ftsSearchFrame->show();
@@ -2686,9 +2673,9 @@ void ArticleView::performFtsFindOperation( bool backwards )
   }
 #endif
   // Store new highlighted selection
-  ui.definition->page()->
-         runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
-                             .arg( rangeVarName ) );
+  // ui.definition->page()->
+  //        runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
+  //                            .arg( rangeVarName ) );
 }
 
 void ArticleView::on_ftsSearchPrevious_clicked()
