@@ -2503,6 +2503,12 @@ void ArticleView::highlightFTSResults()
       else
         regString = regString.remove( AccentMarkHandler::accentMark() );
 
+      //<div><i>watch</i>out</div>  to plainText will return "watchout".
+      //if application goes here,that means the article text must contains the search text.
+      //whole word match regString will contain \b . can not match the above senario.
+      //workaround ,remove \b from the regstring="(\bwatch\b)"
+      regString.remove( QRegularExpression( "\\\\b" ) );
+
       QRegularExpression regexp;
       if( Utils::Url::hasQueryItem( url, "wildcards" ) )
         regexp.setPattern( wildcardsToRegexp( regString ) );
