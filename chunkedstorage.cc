@@ -160,7 +160,10 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
 
     if( uncompress( (unsigned char *)&chunk.front(), &decompressedLength, chunkDataBytes, compressedSize ) != Z_OK
         || decompressedLength != chunk.size() )
+    {
+      file.unmap( chunkDataBytes );
       throw exFailedToDecompressChunk();
+    }
 
     file.unmap( chunkDataBytes );
   }
