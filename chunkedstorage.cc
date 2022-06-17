@@ -137,7 +137,7 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
   // Read and decompress the chunk
   {
     // file.seek( offsets[ chunkIdx ] );
-
+    Mutex::Lock _( file.lock );
     auto bytes = file.map( offsets[ chunkIdx ], 8 );
     auto qBytes = QByteArray::fromRawData( reinterpret_cast< char * >(bytes), 8 );
     QDataStream in( qBytes );

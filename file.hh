@@ -9,6 +9,7 @@
 #include <vector>
 #include <QFile>
 #include "ex.hh"
+#include "mutex.hh"
 
 /// A simple wrapper over FILE * operations with added write-buffering,
 /// used for non-Qt parts of code.
@@ -44,6 +45,7 @@ class Class
   void open( char const * filename, char const * mode ) ;
 
 public:
+  Mutex lock;
 
   Class( char const * filename, char const * mode ) ;
 
