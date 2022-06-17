@@ -139,6 +139,8 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
     // file.seek( offsets[ chunkIdx ] );
     Mutex::Lock _( file.lock );
     auto bytes = file.map( offsets[ chunkIdx ], 8 );
+    if( bytes == nullptr )
+      throw mapFailed();
     auto qBytes = QByteArray::fromRawData( reinterpret_cast< char * >(bytes), 8 );
     QDataStream in( qBytes );
     in.setByteOrder( QDataStream::LittleEndian );
@@ -153,7 +155,8 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
 
     // vector< unsigned char > compressedData( compressedSize );
     auto chunkDataBytes = file.map( offsets[ chunkIdx ] + 8, compressedSize );
-
+    if( chunkDataBytes == nullptr )
+      throw mapFailed();
     // file.read( &compressedData.front(), compressedData.size() );
     auto autoUnmap = qScopeGuard(
       [ & ] {
