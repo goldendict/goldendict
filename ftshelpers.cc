@@ -458,7 +458,10 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   for( auto & address : offsets )
   {
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
+    {
+      synchronizer.setCancelOnWait(true);
       return;
+    }
     sem.acquire();
     QFuture< void > f = QtConcurrent::run(
       [ & ]()
