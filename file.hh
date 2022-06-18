@@ -45,7 +45,7 @@ class Class
   void open( char const * filename, char const * mode ) ;
 
 public:
-  Mutex lock;
+  QMutex lock;
 
   Class( char const * filename, char const * mode ) ;
 
