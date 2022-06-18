@@ -799,14 +799,14 @@ void MddResourceRequest::run()
       {
         QString css = QString::fromUtf8( data.data(), data.size() );
 
-        QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
-                                  QRegularExpression::CaseInsensitiveOption );
+        // QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
+        //                           QRegularExpression::CaseInsensitiveOption );
 
         QString id = QString::fromUtf8( dict.getId().c_str() );
         int pos = 0;
 
         QString newCSS;
-        QRegularExpressionMatchIterator it = links.globalMatch( css );
+        QRegularExpressionMatchIterator it = RX::Mdx::links.globalMatch( css );
         while ( it.hasNext() )
         {
           QRegularExpressionMatch match = it.next();

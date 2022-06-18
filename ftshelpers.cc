@@ -228,15 +228,9 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
   if( articleText.isEmpty() )
     return;
 
-  // QRegularExpression regBrackets( "(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+)(\\([\\w\\p{M}]+\\)){0,1}([\\w\\p{M}]+){0,1}(\\([\\w\\p{M}]+\\)){0,1}",
-  //                                 QRegularExpression::UseUnicodePropertiesOption);
-  // QRegularExpression regSplit( "[^\\w\\p{M}]+", QRegularExpression::UseUnicodePropertiesOption );
-
   QStringList articleWords = articleText.normalized( QString::NormalizationForm_C )
-                                        .split( QRegularExpression( handleRoundBrackets ? "[^\\w\\(\\)\\p{M}]+" : "[^\\w\\p{M}]+",
-                                                                    QRegularExpression::UseUnicodePropertiesOption ),
+      .split( handleRoundBrackets ? RX::Ftx::handleRoundBracket : RX::Ftx::noRoundBracket,
                                                 Qt::SkipEmptyParts );
-
 
   QSet< QString > setOfWords;
   setOfWords.reserve( articleWords.size() );

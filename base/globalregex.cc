@@ -15,6 +15,11 @@ QRegularExpression Ftx::setsRegExp( "\\[[^\\]]+\\]", QRegularExpression::CaseIns
 QRegularExpression Ftx::regexRegExp( "\\\\[afnrtvdDwWsSbB]|\\\\x([0-9A-Fa-f]{4})|\\\\0([0-7]{3})",
                                      QRegularExpression::CaseInsensitiveOption );
 
+QRegularExpression Ftx::handleRoundBracket( "[^\\w\\(\\)\\p{M}]+" ,
+                                            QRegularExpression::UseUnicodePropertiesOption );
+QRegularExpression Ftx::noRoundBracket( "[^\\w\\p{M}]+",
+                                        QRegularExpression::UseUnicodePropertiesOption );
+
 
 //mdx
 
@@ -48,3 +53,6 @@ QRegularExpression Mdx::srcRe( "([\\s\"']src\\s*=)\\s*([\"'])(?!\\s*\\b(?:(?:bre
 QRegularExpression Mdx::srcRe2( "([\\s\"']src\\s*=)\\s*(?![\\s\"']|\\b(?:(?:bres|https?|ftp)://"
                                 "|(?:data|javascript):))(?:file://)?[\\x00-\\x1f\\x7f]*\\.*/?([^\\s\">]+)",
                                 QRegularExpression::CaseInsensitiveOption );
+
+QRegularExpression Mdx::links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
+                               QRegularExpression::CaseInsensitiveOption );
