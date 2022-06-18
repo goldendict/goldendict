@@ -799,14 +799,14 @@ void MddResourceRequest::run()
       {
         QString css = QString::fromUtf8( data.data(), data.size() );
 
-        QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
-                                  QRegularExpression::CaseInsensitiveOption );
+        // QRegularExpression links( "url\\(\\s*(['\"]?)([^'\"]*)(['\"]?)\\s*\\)",
+        //                           QRegularExpression::CaseInsensitiveOption );
 
         QString id = QString::fromUtf8( dict.getId().c_str() );
         int pos = 0;
 
         QString newCSS;
-        QRegularExpressionMatchIterator it = links.globalMatch( css );
+        QRegularExpressionMatchIterator it = RX::Mdx::links.globalMatch( css );
         while ( it.hasNext() )
         {
           QRegularExpressionMatch match = it.next();
@@ -911,14 +911,20 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
   QString articleId;
   articleId.setNum( ( quint64 )pRecordInfo, 16 );
 
-  ScopedMemMap compressed( dictFile, recordInfo.compressedBlockPos, recordInfo.compressedBlockSize );
-  if ( !compressed.startAddress() )
-    throw exCorruptDictionary();
-
   QByteArray decompressed;
-  if ( !MdictParser::parseCompressedBlock( recordInfo.compressedBlockSize, ( char * )compressed.startAddress(),
-                                           recordInfo.decompressedBlockSize, decompressed ) )
-    throw exCorruptDictionary();
+
+  {
+    Mutex::Lock _( idxMutex );
+    ScopedMemMap compressed( dictFile, recordInfo.compressedBlockPos, recordInfo.compressedBlockSize );
+    if( !compressed.startAddress() )
+      throw exCorruptDictionary();
+
+    if( !MdictParser::parseCompressedBlock( recordInfo.compressedBlockSize,
+                                            (char *)compressed.startAddress(),
+                                            recordInfo.decompressedBlockSize,
+                                            decompressed ) )
+      throw exCorruptDictionary();
+  }
 
   QString article = MdictParser::toUtf16( encoding.c_str(),
                                           decompressed.constData() + recordInfo.recordOffset,

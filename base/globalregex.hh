@@ -14,6 +14,8 @@ public:
   static QRegularExpression wordRegExp;
   static QRegularExpression setsRegExp;
   static QRegularExpression regexRegExp;
+  static QRegularExpression handleRoundBracket;
+  static QRegularExpression noRoundBracket;
 };
 
 
@@ -33,6 +35,8 @@ public:
   static QRegularExpression closeScriptTagRe;
   static QRegularExpression srcRe;
   static QRegularExpression srcRe2;
+
+  static QRegularExpression links;
 };
 
 } // namespace RX
