@@ -4,16 +4,16 @@
 #ifndef __MUTEX_HH_INCLUDED__
 #define __MUTEX_HH_INCLUDED__
 
-#include <QRecursiveMutex>
+#include <QMutex>
 
 /// This provides a mutex class. As you can see, it's just a Qt one, but it
 /// does provide the Lock class which doesn't seem to exist in Qt, and it does
 /// provide some abstraction for dictionaries in case they are to be ported
 /// away from Qt.
-class Mutex : public QRecursiveMutex
+class Mutex : public QMutex
 {
 public:
-  Mutex() : QRecursiveMutex()
+  Mutex() : QMutex()
   {}
   ~Mutex()
   {}
