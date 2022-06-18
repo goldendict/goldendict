@@ -691,15 +691,20 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
     uint32_t size;
 
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-      addressLists<< tmp;
+    {
+      addressLists << tmp;
+      return;
+    }
 
     vector< BtreeIndexing::WordArticleLink > links =
       ftsIndex.findArticles( gd::toWString( word ), ignoreDiacritics );
     for( unsigned x = 0; x < links.size(); x++ )
     {
-
       if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-        addressLists<< tmp;
+      {
+        addressLists << tmp;
+        return;
+      }
 
       vector< char > chunk;
       char * linksPtr;
@@ -796,7 +801,6 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
   }
 
   allWordsLinks.resize( n );
-  int wordNom = 0;
 
   if( !wordsList.empty() )
   {
@@ -808,7 +812,10 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
       for( unsigned x = 0; x < links.size(); x++ )
       {
         if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-          sets<< tmp;
+        {
+          sets << tmp;
+          return;
+        }
 
         vector< char > chunk;
         char * linksPtr;
@@ -819,6 +826,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
         memcpy( &size, linksPtr, sizeof(uint32_t) );
         linksPtr += sizeof(uint32_t);
+        tmp.reserve( size );
         for( uint32_t y = 0; y < size; y++ )
         {
           tmp.insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
@@ -854,16 +862,16 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
   allWordsLinks.clear();
 
-  QVector< uint32_t > offsets;
-  offsets.resize( setOfOffsets.size() );
-  uint32_t * ptr = &offsets.front();
-
-  for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
-       it != setOfOffsets.constEnd(); ++it )
-  {
-    *ptr = *it;
-    ptr++;
-  }
+  QVector< uint32_t > offsets( setOfOffsets.begin(),setOfOffsets.end() );
+  // offsets.resize( setOfOffsets.size() );
+  // uint32_t * ptr = &offsets.front();
+  //
+  // for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
+  //      it != setOfOffsets.constEnd(); ++it )
+  // {
+  //   *ptr = *it;
+  //   ptr++;
+  // }
 
   setOfOffsets.clear();
 
@@ -943,16 +951,16 @@ void FTSResultsRequest::fullIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
 
   allWordsLinks.clear();
 
-  QVector< uint32_t > offsets;
-  offsets.resize( setOfOffsets.size() );
-  uint32_t * ptr = &offsets.front();
-
-  for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
-       it != setOfOffsets.constEnd(); ++it )
-  {
-    *ptr = *it;
-    ptr++;
-  }
+  QVector< uint32_t > offsets( setOfOffsets.begin(), setOfOffsets.end() );
+  // offsets.resize( setOfOffsets.size() );
+  // uint32_t * ptr = &offsets.front();
+  //
+  // for( QSet< uint32_t >::ConstIterator it = setOfOffsets.constBegin();
+  //      it != setOfOffsets.constEnd(); ++it )
+  // {
+  //   *ptr = *it;
+  //   ptr++;
+  // }
 
   setOfOffsets.clear();
 
