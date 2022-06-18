@@ -453,7 +453,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
   QSemaphore sem( parallel_count  < 1 ? 1 : parallel_count  );
 
   QFutureSynchronizer< void > synchronizer;
-  auto searchRegularExpression = createMatchRegex( searchRegexp );
+  const auto searchRegularExpression = createMatchRegex( searchRegexp );
 
   for( auto & address : offsets )
   {
@@ -464,7 +464,7 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
     }
     sem.acquire();
     QFuture< void > f = QtConcurrent::run(
-      [ & ]()
+      [ =,&sem ]()
       {
         QSemaphoreReleaser releaser( sem );
         checkSingleArticle( address, words,  searchRegularExpression );
@@ -826,8 +826,12 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
 
         memcpy( &size, linksPtr, sizeof(uint32_t) );
         linksPtr += sizeof(uint32_t);
+        // across chunks, need further investigation
+        uint32_t max = ( chunk.size() - ( linksPtr - &chunk.front() )) / 4;
+
         tmp.reserve( size );
-        for( uint32_t y = 0; y < size; y++ )
+        uint32_t q_max = qMin(size,max);
+        for( uint32_t y = 0; y < q_max; y++ )
         {
           tmp.insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
           linksPtr += sizeof(uint32_t);
