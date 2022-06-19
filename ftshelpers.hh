@@ -10,6 +10,7 @@
 #include <QRunnable>
 #include <QSemaphore>
 #include <QList>
+#include <QtConcurrent>
 
 #include "dictionary.hh"
 #include "btreeidx.hh"
@@ -83,6 +84,7 @@ class FTSResultsRequest : public Dictionary::DataRequest
   QAtomicInt isCancelled;
 
   QAtomicInt results;
+  QFuture< void > f;
 
   QList< FTS::FtsHeadword > * foundHeadwords;
 
@@ -135,7 +137,8 @@ public:
 
     foundHeadwords = new QList< FTS::FtsHeadword >;
     results         = 0;
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); }, -100 );
+    f              = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start( [ this ]() { this->run(); }, -100 );
   }
 
   void run();
@@ -148,6 +151,7 @@ public:
   ~FTSResultsRequest()
   {
     isCancelled.ref();
+    f.waitForFinished();
     if( foundHeadwords )
       delete foundHeadwords;
   }
