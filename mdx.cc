@@ -43,6 +43,7 @@
 #include "tiff.hh"
 #include "utils.hh"
 #include "base/globalregex.hh"
+#include <QtConcurrent>
 
 namespace Mdx
 {
@@ -173,17 +174,23 @@ public:
       return false;
     }
 
-    ScopedMemMap compressed( mddFile, indexEntry.compressedBlockPos, indexEntry.compressedBlockSize );
-    if ( !compressed.startAddress() )
-    {
-      return false;
-    }
-
     QByteArray decompressed;
-    if ( !MdictParser::parseCompressedBlock( indexEntry.compressedBlockSize, ( char * )compressed.startAddress(),
-                                             indexEntry.decompressedBlockSize, decompressed ) )
+
     {
-      return false;
+      Mutex::Lock _( idxMutex );
+      ScopedMemMap compressed( mddFile, indexEntry.compressedBlockPos, indexEntry.compressedBlockSize );
+      if( !compressed.startAddress() )
+      {
+        return false;
+      }
+
+      if( !MdictParser::parseCompressedBlock( indexEntry.compressedBlockSize,
+                                              (char *)compressed.startAddress(),
+                                              indexEntry.decompressedBlockSize,
+                                              decompressed ) )
+      {
+        return false;
+      }
     }
 
     result.resize( indexEntry.recordSize );
@@ -527,6 +534,7 @@ class MdxArticleRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
 
@@ -539,7 +547,8 @@ public:
     dict( dict_ ),
     ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start(  );
   }
 
   void run();
@@ -552,7 +561,8 @@ public:
   ~MdxArticleRequest()
   {
     isCancelled.ref();
-    //hasExited.acquire();
+    f.waitForFinished();
+    // hasExited.acquire();
   }
 };
 
@@ -681,6 +691,7 @@ class MddResourceRequest: public Dictionary::DataRequest
   wstring resourceName;
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
 
@@ -689,7 +700,8 @@ public:
     dict( dict_ ),
     resourceName( Utf8::decode( resourceName_ ) )
   {
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -702,6 +714,7 @@ public:
   ~MddResourceRequest()
   {
     isCancelled.ref();
+    f.waitForFinished();
     //hasExited.acquire();
   }
 };

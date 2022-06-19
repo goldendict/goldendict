@@ -56,6 +56,8 @@
 // For SVG handling
 #include <QtSvg/QSvgRenderer>
 
+#include <QtConcurrent>
+
 #include "utils.hh"
 
 namespace Dsl {
@@ -1561,6 +1563,7 @@ class DslArticleRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
 
@@ -1569,7 +1572,8 @@ public:
                      DslDictionary & dict_, bool ignoreDiacritics_ ):
     word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -1582,6 +1586,7 @@ public:
   ~DslArticleRequest()
   {
     isCancelled.ref();
+    f.waitForFinished();
     //hasExited.acquire();
   }
 };
@@ -1733,6 +1738,7 @@ class DslResourceRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
 
@@ -1741,7 +1747,8 @@ public:
     dict( dict_ ),
     resourceName( resourceName_ )
   {
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -1754,6 +1761,7 @@ public:
   ~DslResourceRequest()
   {
     isCancelled.ref();
+    f.waitForFinished();
     //hasExited.acquire();
   }
 };
