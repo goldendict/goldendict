@@ -173,17 +173,23 @@ public:
       return false;
     }
 
-    ScopedMemMap compressed( mddFile, indexEntry.compressedBlockPos, indexEntry.compressedBlockSize );
-    if ( !compressed.startAddress() )
-    {
-      return false;
-    }
-
     QByteArray decompressed;
-    if ( !MdictParser::parseCompressedBlock( indexEntry.compressedBlockSize, ( char * )compressed.startAddress(),
-                                             indexEntry.decompressedBlockSize, decompressed ) )
+
     {
-      return false;
+      Mutex::Lock _( idxMutex );
+      ScopedMemMap compressed( mddFile, indexEntry.compressedBlockPos, indexEntry.compressedBlockSize );
+      if( !compressed.startAddress() )
+      {
+        return false;
+      }
+
+      if( !MdictParser::parseCompressedBlock( indexEntry.compressedBlockSize,
+                                              (char *)compressed.startAddress(),
+                                              indexEntry.decompressedBlockSize,
+                                              decompressed ) )
+      {
+        return false;
+      }
     }
 
     result.resize( indexEntry.recordSize );

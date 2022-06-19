@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
       
     env:
-      version: 22.5.22
+      version: 22.6.22
       version-suffix: alpha
       prerelease: true
 
