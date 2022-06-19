@@ -807,6 +807,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
       {
         if( Utils::AtomicInt::loadAcquire( isCancelled ) )
         {
+          Mutex::Lock _( dataMutex );
           sets << tmp;
           return;
         }
