@@ -44,7 +44,7 @@ namespace {
 enum
 {
   Signature = 0x58575045, // EPWX on little-endian, XWPE on big-endian
-  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -96,16 +96,16 @@ public:
 
   ~EpwingDictionary();
 
-  virtual string getName() throw()
+  virtual string getName() noexcept
   { return bookName; }
 
-  virtual map< Dictionary::Property, string > getProperties() throw()
+  virtual map< Dictionary::Property, string > getProperties() noexcept
   { return map< Dictionary::Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return idxHeader.articleCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return idxHeader.wordCount; }
 
   inline virtual quint32 getLangFrom() const
@@ -163,7 +163,7 @@ public:
 
 protected:
 
-  void loadIcon() throw();
+  void loadIcon() noexcept;
 
 private:
 
@@ -244,7 +244,7 @@ EpwingDictionary::~EpwingDictionary()
   removeDirectory( cacheDirectory );
 }
 
-void EpwingDictionary::loadIcon() throw()
+void EpwingDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

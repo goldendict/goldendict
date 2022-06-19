@@ -55,7 +55,8 @@ bool parseSearchString( QString const & str, QStringList & IndexWords,
                         QRegExp & searchRegExp, int searchMode,
                         bool matchCase,
                         int distanceBetweenWords,
-                        bool & hasCJK );
+                        bool & hasCJK,
+                        bool ignoreWordsOrder = false );
 
 void parseArticleForFts( uint32_t articleAddress, QString & articleText,
                          QMap< QString, QVector< uint32_t > > & words,
@@ -64,28 +65,6 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
 void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancelled );
 
 bool isCJKChar( ushort ch );
-
-class FTSResultsRequest;
-
-class FTSResultsRequestRunnable : public QRunnable
-{
-  FTSResultsRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  FTSResultsRequestRunnable( FTSResultsRequest & r_,
-                             QSemaphore & hasExited_ ) : r( r_ ),
-                                                         hasExited( hasExited_ )
-  {}
-
-  ~FTSResultsRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
 
 class FTSResultsRequest : public Dictionary::DataRequest
 {
@@ -102,18 +81,24 @@ class FTSResultsRequest : public Dictionary::DataRequest
   int wordsInIndex;
 
   QAtomicInt isCancelled;
-  QSemaphore hasExited;
+
+  QAtomicInt results;
 
   QList< FTS::FtsHeadword > * foundHeadwords;
 
   void checkArticles( QVector< uint32_t > const & offsets,
                       QStringList const & words,
                       QRegExp const & searchRegexp = QRegExp() );
+  QRegularExpression createMatchRegex( QRegExp const & searchRegexp );
+
+  void checkSingleArticle( uint32_t offset,
+                           QStringList const & words,
+                           QRegularExpression const & searchRegexp = QRegularExpression() );
 
   void indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                     sptr< ChunkedStorage::Reader > chunks,
                     QStringList & indexWords,
-                    QStringList & searchWords );
+                    QStringList & searchWords, QRegExp & regexp );
 
   void combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
                             sptr< ChunkedStorage::Reader > chunks,
@@ -149,11 +134,11 @@ public:
       searchString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( searchString_ ) ) );
 
     foundHeadwords = new QList< FTS::FtsHeadword >;
-    QThreadPool::globalInstance()->start(
-      new FTSResultsRequestRunnable( *this, hasExited ), -100 );
+    results         = 0;
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); }, -100 );
   }
 
-  void run(); // Run from another thread by DslResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -165,7 +150,6 @@ public:
     isCancelled.ref();
     if( foundHeadwords )
       delete foundHeadwords;
-    hasExited.acquire();
   }
 };
 

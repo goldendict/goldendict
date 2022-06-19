@@ -209,16 +209,16 @@ public:
       strategies.append( "prefix" );
   }
 
-  virtual string getName() throw()
+  virtual string getName() noexcept
   { return name; }
 
-  virtual map< Property, string > getProperties() throw()
+  virtual map< Property, string > getProperties() noexcept
   { return map< Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return 0; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const &,
@@ -237,7 +237,7 @@ public:
   virtual QString const & getDescription();
 protected:
 
-  virtual void loadIcon() throw();
+  virtual void loadIcon() noexcept;
 
   void getServerDatabases();
 
@@ -245,7 +245,7 @@ protected:
   friend class DictServerArticleRequest;
 };
 
-void DictServerDictionary::loadIcon() throw()
+void DictServerDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

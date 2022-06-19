@@ -113,7 +113,6 @@ class DslScanner
   wstring langFrom, langTo;
   wstring soundDictionary;
   char readBuffer[ 65536 ];
-  QTextStream* fragStream;
   char * readBufferPtr;
   LineFeed lineFeed;
   size_t readBufferLeft;
@@ -130,7 +129,7 @@ public:
   DEF_EX( exEncodingError, "Encoding error", Ex ) // Should never happen really
 
   DslScanner( string const & fileName ) ;
-  ~DslScanner() throw();
+  ~DslScanner() noexcept;
 
   /// Returns the detected encoding of this file.
   Encoding getEncoding() const

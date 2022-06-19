@@ -128,11 +128,7 @@ struct InsidedCard
   InsidedCard( uint32_t _offset, uint32_t _size, QVector< wstring > const & words ) :
   offset( _offset ), size( _size ), headwords( words )
   {}
-  InsidedCard( InsidedCard const & e ) :
-  offset( e.offset ), size( e.size ), headwords( e.headwords )
-  {}
   InsidedCard() {}
-
 };
 
 bool indexIsOldOrBad( string const & indexFile, bool hasZipFile )
@@ -187,16 +183,16 @@ public:
 
   ~DslDictionary();
 
-  virtual string getName() throw()
+  virtual string getName() noexcept
   { return dictionaryName; }
 
-  virtual map< Dictionary::Property, string > getProperties() throw()
+  virtual map< Dictionary::Property, string > getProperties() noexcept
   { return map< Dictionary::Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return idxHeader.articleCount; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return idxHeader.wordCount; }
 
   inline virtual quint32 getLangFrom() const
@@ -251,7 +247,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw();
+  virtual void loadIcon() noexcept;
 
 private:
 
@@ -470,7 +466,7 @@ void DslDictionary::doDeferredInit()
 }
 
 
-void DslDictionary::loadIcon() throw()
+void DslDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;
@@ -1556,32 +1552,8 @@ void DslDictionary::getArticleText( uint32_t articleAddress, QString & headword,
 
 /// DslDictionary::getArticle()
 
-class DslArticleRequest;
-
-class DslArticleRequestRunnable: public QRunnable
-{
-  DslArticleRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  DslArticleRequestRunnable( DslArticleRequest & r_,
-                             QSemaphore & hasExited_ ): r( r_ ),
-                                                        hasExited( hasExited_ )
-  {}
-
-  ~DslArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class DslArticleRequest: public Dictionary::DataRequest
 {
-  friend class DslArticleRequestRunnable;
-
   wstring word;
   vector< wstring > alts;
   DslDictionary & dict;
@@ -1597,11 +1569,10 @@ public:
                      DslDictionary & dict_, bool ignoreDiacritics_ ):
     word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start(
-      new DslArticleRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by DslArticleRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -1611,14 +1582,9 @@ public:
   ~DslArticleRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
-
-void DslArticleRequestRunnable::run()
-{
-  r.run();
-}
 
 void DslArticleRequest::run()
 {
@@ -1731,7 +1697,7 @@ void DslArticleRequest::run()
     {
       gdWarning( "DSL: Failed loading article from \"%s\", reason: %s\n", dict.getName().c_str(), ex.what() );
       articleText = string( "<span class=\"dsl_article\">" )
-                    + string( QObject::tr( "Article loading error" ).toUtf8().constData() )
+                    + QObject::tr( "Article loading error" ).toStdString()
                     + "</span>";
     }
 
@@ -1759,32 +1725,8 @@ sptr< Dictionary::DataRequest > DslDictionary::getArticle( wstring const & word,
 
 //// DslDictionary::getResource()
 
-class DslResourceRequest;
-
-class DslResourceRequestRunnable: public QRunnable
-{
-  DslResourceRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  DslResourceRequestRunnable( DslResourceRequest & r_,
-                              QSemaphore & hasExited_ ): r( r_ ),
-                                                         hasExited( hasExited_ )
-  {}
-
-  ~DslResourceRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class DslResourceRequest: public Dictionary::DataRequest
 {
-  friend class DslResourceRequestRunnable;
-
   DslDictionary & dict;
 
   string resourceName;
@@ -1799,11 +1741,10 @@ public:
     dict( dict_ ),
     resourceName( resourceName_ )
   {
-    QThreadPool::globalInstance()->start(
-      new DslResourceRequestRunnable( *this, hasExited ) );
+    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
-  void run(); // Run from another thread by DslResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
@@ -1813,14 +1754,9 @@ public:
   ~DslResourceRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    //hasExited.acquire();
   }
 };
-
-void DslResourceRequestRunnable::run()
-{
-  r.run();
-}
 
 void DslResourceRequest::run()
 {
@@ -2153,10 +2089,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           hasString = false;
 
-          // The line read should either consist of pure whitespace, or be a
-          // headword
-
-          if ( curString.empty() )
+          // The line read should either consist of pure whitespace, or be a headword
+          // skip too long headword,it can never be headword.
+          if( curString.empty() || curString.size() > 100 )
             continue;
 
           if ( isDslWs( curString[ 0 ] ) )

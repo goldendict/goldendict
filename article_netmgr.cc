@@ -8,6 +8,7 @@
 #include "gddebug.hh"
 #include "utils.hh"
 #include <QNetworkAccessManager>
+#include "globalbroadcaster.h"
 
 using std::string;
 
@@ -131,22 +132,11 @@ using std::string;
     emit errorOccurred( code );
   }
 
-//  void AllowFrameReply::readDataFromBase()
-//  {
-////    QByteArray data;
-////    data.resize( baseReply->bytesAvailable() );
-////    baseReply->read( data.data(), data.size() );
-////    buffer += data;
-//    emit readyRead();
-//  }
-
   qint64 AllowFrameReply::readData( char * data, qint64 maxSize )
   {
     auto bytesAvailable= baseReply->bytesAvailable();
     qint64 size = qMin( maxSize, bytesAvailable );
     baseReply->read( data, size );
-//    memcpy( data, buffer.data(), size );
-//    buffer.remove( 0, size );
     return size;
   }
 
@@ -209,11 +199,8 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
 
     QUrl refererUrl = QUrl::fromEncoded( referer );
 
-    //GD_DPRINTF( "Considering %s vs %s\n", getHostBase( req.url() ).toUtf8().data(),
-    //        getHostBase( refererUrl ).toUtf8().data() );
-
     if ( !url.host().endsWith( refererUrl.host() ) &&
-         getHostBase( url ) != getHostBase( refererUrl ) && !url.scheme().startsWith("data") )
+         getHostBaseFromUrl( url ) != getHostBaseFromUrl( refererUrl ) && !url.scheme().startsWith("data") )
     {
       gdWarning( "Blocking element \"%s\" due to not same domain", url.toEncoded().data() );
 
@@ -265,9 +252,9 @@ QNetworkReply * ArticleNetworkAccessManager::getArticleReply( QNetworkRequest co
 sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
   QUrl const & url, QString & contentType )
 {
-  GD_DPRINTF( "getResource: %ls\n", url.toString().toStdWString().c_str() );
-  GD_DPRINTF( "scheme: %ls\n", url.scheme().toStdWString().c_str() );
-  GD_DPRINTF( "host: %ls\n", url.host().toStdWString().c_str() );
+  GD_DPRINTF( "getResource: %ls", url.toString().toStdWString().c_str() );
+  GD_DPRINTF( "scheme: %ls", url.scheme().toStdWString().c_str() );
+  GD_DPRINTF( "host: %ls", url.host().toStdWString().c_str() );
 
   if ( url.scheme() == "gdlookup" )
   {
@@ -460,7 +447,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   qint64 left = avail - alreadyRead;
   
   qint64 toRead = maxSize < left ? maxSize : left;
-  GD_DPRINTF( "====reading %d bytes\n", (int)toRead );
+  GD_DPRINTF( "====reading %d bytes", (int)toRead );
 
   try
   {
@@ -468,7 +455,7 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
   }
   catch( std::exception & e )
   {
-    qWarning( "getDataSlice error: %s\n", e.what() );
+    qWarning( "getDataSlice error: %s", e.what() );
   }
 
   alreadyRead += toRead;
@@ -525,6 +512,16 @@ void LocalSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   QUrl url = requestJob->requestUrl();
   QNetworkRequest request;
   request.setUrl( url );
+
+  //all the url reached here must be either gdlookup or bword scheme.
+  auto [valid, word] = Utils::Url::getQueryWord( url );
+  // or the condition can be (!queryWord.first || word.isEmpty())
+  // ( queryWord.first && word.isEmpty() ) is only part of the above condition.
+  if( valid && word.isEmpty() )
+  {
+    // invalid gdlookup url.
+    return;
+  }
 
   QNetworkReply * reply = this->mManager.getArticleReply( request );
   connect( reply, &QNetworkReply::finished, requestJob, [ = ]() { requestJob->reply( "text/html", reply ); } );

@@ -78,7 +78,7 @@ class EpwingBook
   QStringList imageCacheList, soundsCacheList, moviesCacheList, fontsCacheList;
   QMap< QString, QString > baseFontsMap, customFontsMap;
   QVector< int > refPages, refOffsets;
-  QMap< QString, EWPos > allHeadwordPositions;
+  QMap< QString, QList< EWPos > > allHeadwordPositions;
   QVector< EWPos > LinksQueue;
   int refOpenCount, refCloseCount;
   static Mutex libMutex;

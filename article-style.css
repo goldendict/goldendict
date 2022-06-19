@@ -1,10 +1,14 @@
 /******** Global, non-dictionary-specific classes ***********/
 
+html {
+        height: 100%;
+}
 
 body
 {
   background: #fefdeb;
   font-family: Tahoma, Verdana, "Lucida Sans Unicode", sans-serif;
+  height: 100%;
 }
 
 /* This stylesheet is used to highligh current selection when doing a search.
@@ -38,6 +42,16 @@ pre
   /*background: #ffffdd;*/
 }
 
+.gddicttitle
+{
+	user-select: none;
+}
+
+.gddictnamebodyseparator
+{
+  clear: both;
+}
+
 /* The 'From ' string which precedes dictionary name in the heading */
 .gdfromprefix
 {
@@ -55,8 +69,8 @@ pre
   background: #fefdeb;
 /*fix for invalid blg*/
   font-style:normal;
-  content-visibility:auto;
-  contain-intrinsic-size:400px;
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
 }
 
 /* CSS trick to prevent the floating elements to overflow
@@ -522,7 +536,7 @@ div.xdxf
 /************* MDict dictionaries **************/
 .mdict
 {
-  margin-top: 1em;
+
 }
 
 .mdict a[name]
@@ -914,7 +928,6 @@ div.xdxf
 	left: 0px;
 	width: 0px;
 	background-color: white;
-	background-color: Window;
 	border-style: solid;
 	border-color: #AAAAAA;
 	border-width: 1px;
@@ -934,21 +947,13 @@ div.xdxf
 .mwiki td.os-suggest-result, .mwiki td.os-suggest-result-hl {
 	white-space: nowrap;
 	background-color: white;
-	background-color: Window;
 	color: black;
-	color: WindowText;
 	padding: 2px;
 }
 .mwiki td.os-suggest-result-hl,
 .mwiki td.os-suggest-result-hl-webkit {
 	background-color: #4C59A6;
 	color: white;
-}
-.mwiki td.os-suggest-result-hl {
-	/* System colors are misimplemented in Safari 3.0 and earlier,
-	   making highlighted text illegible... */
-	background-color: Highlight;
-	color: HighlightText;
 }
 
 .mwiki .os-suggest-toggle {

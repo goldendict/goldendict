@@ -351,27 +351,15 @@ void FullTextSearchDialog::accept()
                                       searchRegExp, mode,
                                       ui.matchCase->isChecked(),
                                       distanceBetweenWords,
-                                      hasCJK ) )
+                                      hasCJK, ignoreWordsOrder ) )
   {
-    if( hasCJK && ( mode == WholeWords || mode == PlainText ) )
-    {
-      QMessageBox message( QMessageBox::Warning,
-                           "GoldenDict",
-                           tr( "CJK symbols in search string are not compatible with search modes \"Whole words\" and \"Plain text\"" ),
-                           QMessageBox::Ok,
-                           this );
-      message.exec();
-    }
-    else
-    {
-      QMessageBox message( QMessageBox::Warning,
-                           "GoldenDict",
-                           tr( "The search line must contains at least one word containing " )
+    QMessageBox message( QMessageBox::Warning,
+                         "GoldenDict",
+                         tr( "The search line must contains at least one word containing " )
                            + QString::number( MinimumWordSize ) + tr( " or more symbols" ),
-                           QMessageBox::Ok,
-                           this );
-      message.exec();
-    }
+                         QMessageBox::Ok,
+                         this );
+    message.exec();
     return;
   }
 
@@ -393,6 +381,10 @@ void FullTextSearchDialog::accept()
 
   for( unsigned x = 0; x < activeDicts.size(); ++x )
   {
+    if( !activeDicts[ x ] ->haveFTSIndex())
+    {
+      continue;
+    }
     sptr< Dictionary::DataRequest > req = activeDicts[ x ]->getSearchResults(
                                                               ui.searchLine->text(),
                                                               mode,
@@ -621,7 +613,7 @@ Q_UNUSED( parent );
   for( int x = 0; x < hws.length(); x++ )
   {
     QList< FtsHeadword >::iterator it = std::lower_bound( headwords.begin(), headwords.end(), hws.at( x ) );
-    if( it != headwords.end() )
+    if( it != headwords.end() && *it == hws.at( x ) )
     {
       it->dictIDs.push_back( hws.at( x ).dictIDs.front() );
       for( QStringList::const_iterator itr = it->foundHiliteRegExps.constBegin();

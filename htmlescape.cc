@@ -149,12 +149,41 @@ QString unescape( QString const & str, bool saveFormat )
     {
         tmp.replace( QRegularExpression( "<(?:\\s*/?(?:div|h[1-6r]|q|p(?![alr])|br|li(?![ns])|td|blockquote|[uo]l|pre|d[dl]|nav|address))[^>]{0,}>",
                                          QRegularExpression::CaseInsensitiveOption ), " " );
-        tmp.remove( QRegularExpression( "<[^>]*>" ) );
+        tmp.replace( QRegularExpression( "<[^>]*>"), " ");
 
     }
     return QTextDocumentFragment::fromHtml( tmp.trimmed() ).toPlainText();
   }
   return str;
+}
+
+QString fromHtmlEscaped( QString const & str){
+  QString retVal = str;
+  QRegularExpression regExp("(?<lt>\\&lt\\;)|(?<gt>\\&gt\\;)|(?<amp>\\&amp\\;)|(?<quot>\\&quot\\;)", QRegularExpression::PatternOption::CaseInsensitiveOption);
+  auto match = regExp.match(str, 0);
+
+  while (match.hasMatch())
+  {
+    if (!match.captured("lt").isEmpty())
+    {
+      retVal.replace(match.capturedStart("lt"), match.capturedLength("lt"), "<");
+    }
+    else if (!match.captured("gt").isEmpty())
+    {
+      retVal.replace(match.capturedStart("gt"), match.capturedLength("gt"), ">");
+    }
+    else if (!match.captured("amp").isEmpty())
+    {
+      retVal.replace(match.capturedStart("amp"), match.capturedLength("amp"), "&");
+    }
+    else if (!match.captured("quot").isEmpty())
+    {
+      retVal.replace(match.capturedStart("quot"), match.capturedLength("quot"), "\"");
+    }
+    match = regExp.match(retVal, match.capturedStart() + 1);
+  }
+
+  return retVal;
 }
 
 string unescapeUtf8( const string &str, bool saveFormat )

@@ -4,6 +4,7 @@
 #ifndef __HTMLESCAPE_HH_INCLUDED__
 #define __HTMLESCAPE_HH_INCLUDED__
 
+#include <QString>
 #include <string>
 
 namespace Html {
@@ -24,6 +25,8 @@ string escapeForJavaScript( string const & );
 
 // Replace html entities
 QString unescape( QString const & str, bool saveFormat = false );
+
+QString fromHtmlEscaped( QString const & str);
 string unescapeUtf8( string const & str, bool saveFormat = false );
 
 }

@@ -587,16 +587,16 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
 
     ~SlobDictionary();
 
-    virtual string getName() throw()
+    virtual string getName() noexcept
     { return dictionaryName; }
 
-    virtual map< Dictionary::Property, string > getProperties() throw()
+    virtual map< Dictionary::Property, string > getProperties() noexcept
     { return map< Dictionary::Property, string >(); }
 
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() noexcept
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() noexcept
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -643,7 +643,7 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
 
 protected:
 
-    virtual void loadIcon() throw();
+    virtual void loadIcon() noexcept;
 
 private:
 
@@ -694,12 +694,12 @@ SlobDictionary::SlobDictionary( string const & id,
 
     // Read dictionary name
 
-    dictionaryName = string( sf.getDictionaryName().toUtf8().constData() );
+    dictionaryName = sf.getDictionaryName().toStdString();
     if( dictionaryName.empty() )
     {
       QString name = QDir::fromNativeSeparators( FsEncoding::decode( dictionaryFiles[ 0 ].c_str() ) );
       int n = name.lastIndexOf( '/' );
-      dictionaryName = string( name.mid( n + 1 ).toUtf8().constData() );
+      dictionaryName = name.mid( n + 1 ).toStdString();
     }
 
     // Full-text search parameters
@@ -746,7 +746,7 @@ void SlobDictionary::removeDirectory( QString const & directory )
   dir.rmdir( directory );
 }
 
-void SlobDictionary::loadIcon() throw()
+void SlobDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;
@@ -799,7 +799,7 @@ void SlobDictionary::loadArticle( quint32 address,
     articleText = convert( articleText, entry );
   }
   else
-    articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
+    articleText = QObject::tr( "Article decoding error" ).toStdString();
 
   // See Issue #271: A mechanism to clean-up invalid HTML cards.
   string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"

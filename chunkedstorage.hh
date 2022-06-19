@@ -25,6 +25,7 @@ DEF_EX( Ex, "Chunked storage exception", std::exception )
 DEF_EX( exFailedToCompressChunk, "Failed to compress a chunk", Ex )
 DEF_EX( exAddressOutOfRange, "The given chunked address is out of range", Ex )
 DEF_EX( exFailedToDecompressChunk, "Failed to decompress a chunk", Ex )
+DEF_EX( mapFailed, "Failed to map/unmap the file", Ex )
 
 /// This class writes data blocks in chunks.
 class Writer

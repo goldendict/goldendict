@@ -9,6 +9,7 @@
 #include <vector>
 #include <QFile>
 #include "ex.hh"
+#include "mutex.hh"
 
 /// A simple wrapper over FILE * operations with added write-buffering,
 /// used for non-Qt parts of code.
@@ -30,9 +31,9 @@ bool tryPossibleZipName( std::string const & name, std::string & copyTo );
 
 void loadFromFile( std::string const & n, std::vector< char > & data );
 
-bool exists( char const * filename ) throw();
+bool exists( char const * filename ) noexcept;
 
-inline bool exists( std::string const & filename ) throw()
+inline bool exists( std::string const & filename ) noexcept
 { return exists( filename.c_str() ); }
 
 class Class
@@ -44,6 +45,7 @@ class Class
   void open( char const * filename, char const * mode ) ;
 
 public:
+  QMutex lock;
 
   Class( char const * filename, char const * mode ) ;
 
@@ -95,6 +97,7 @@ public:
 
   /// Seeks in the file, relative to its beginning.
   void seek( qint64 offset ) ;
+  uchar * map( qint64 offset, qint64 size );
   /// Seeks in the file, relative to the current position.
   void seekCur( qint64 offset ) ;
   /// Seeks in the file, relative to the end of file.
@@ -116,7 +119,8 @@ public:
   /// Closes the file. No further operations are valid.
   void close() ;
 
-  ~Class() throw();
+  ~Class() noexcept;
+  bool unmap( uchar * address );
 
 private:
 

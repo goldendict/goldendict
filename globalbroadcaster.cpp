@@ -20,13 +20,15 @@ Config::Preferences * GlobalBroadcaster::getPreference()
   return preference;
 }
 
-void GlobalBroadcaster::addWhitelist(QString url){
-  whitelist.push_back(url);
-  auto baseUrl=::getHostBase(url);
-  whitelist.push_back(baseUrl);
+void GlobalBroadcaster::addWhitelist( QString url )
+{
+  whitelist.push_back( url );
+  auto baseUrl = ::getHostBase( url );
+  whitelist.push_back( baseUrl );
 }
 
-bool GlobalBroadcaster::existedInWhitelist(QString url){
-  return std::find(whitelist.begin(), whitelist.end(), url) != whitelist.end();
+bool GlobalBroadcaster::existedInWhitelist( QString url )
+{
+  return std::find( whitelist.begin(), whitelist.end(), url ) != whitelist.end();
 }
 // namespace global

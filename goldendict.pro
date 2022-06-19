@@ -12,7 +12,28 @@ system(git describe --tags --always --dirty): hasGit=1
 !isEmpty(hasGit){
     GIT_HASH=$$system(git rev-parse --short=8 HEAD )
 }
-system(echo $${VERSION}.$${GIT_HASH} > version.txt)
+
+win32{
+# date /T output is locale aware.
+    DATE=$$system(date /T)
+}
+else{
+    DATE=$$system(date '+%Y/%m/%d')
+}
+
+system(echo $${VERSION}.$${GIT_HASH} on $${DATE} > version.txt)
+
+!CONFIG( verbose_build_output ) {
+  !win32|*-msvc* {
+    # Reduce build log verbosity except for MinGW builds (mingw-make cannot
+    # execute "@echo ..." commands inserted by qmake).
+    CONFIG += silent
+  }
+}
+
+CONFIG( release, debug|release ) {
+  DEFINES += NDEBUG
+}
 
 # DEPENDPATH += . generators
 INCLUDEPATH += .
@@ -26,7 +47,8 @@ QT += core \
       webenginewidgets\
       webchannel\
       printsupport \
-      help
+      help \
+      concurrent
 
 greaterThan(QT_MAJOR_VERSION, 5): QT += webenginecore core5compat
 
@@ -42,11 +64,10 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
   DEFINES += MAKE_FFMPEG_PLAYER
 }
 
-#QT += sql
 CONFIG += exceptions \
     rtti \
     stl  \
-    c++14 \
+    c++17 \
     lrelease \
     embed_translations
 
@@ -66,6 +87,8 @@ LIBS += \
 
 CONFIG+=utf8_source
 
+CONFIG+=force_debug_info
+
 win32 {
     TARGET = GoldenDict
 
@@ -76,13 +99,10 @@ win32 {
             DEFINES += NOMINMAX __WIN64
         }
         LIBS += -L$${PWD}/winlibs/lib/msvc
-        QMAKE_CXXFLAGS += /wd4290 # silence the warning C4290: C++ exception specification ignored
+        # silence the warning C4290: C++ exception specification ignored
+        QMAKE_CXXFLAGS += /wd4290 /Zc:__cplusplus /std:c++17 /permissive- 
         # QMAKE_LFLAGS_RELEASE += /OPT:REF /OPT:ICF
-        # QMAKE_LFLAGS_RELEASE = /INCREMENTAL:NO /DEBUG
-        CONFIG+=force_debug_info
-        QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
-        QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
-        DEFINES += GD_NO_MANIFEST
+
         # QMAKE_CXXFLAGS_RELEASE += /GL # slows down the linking significantly
         LIBS += -lshell32 -luser32 -lsapi -lole32
         Debug: LIBS+= -lhunspelld
@@ -126,7 +146,6 @@ unix:!mac {
     DEFINES += HAVE_X11
 
     lessThan(QT_MAJOR_VERSION, 6):     QT += x11extras
-    greaterThan(QT_MAJOR_VERSION, 5):     QT += gui-private
 
     CONFIG += link_pkgconfig
 
@@ -141,9 +160,7 @@ unix:!mac {
             libavcodec \
             libswresample \
     }
-    arm {
-        #LIBS += -liconv
-    } else {
+    !arm {
         LIBS += -lX11 -lXtst
     }
 
@@ -223,8 +240,10 @@ DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
 HEADERS += folding.hh \
+    ankiconnector.h \
     article_inspect.h \
     articlewebpage.h \
+    base/globalregex.hh \
     globalbroadcaster.h \
     iframeschemehandler.h \
     inc_case_folding.hh \
@@ -364,8 +383,10 @@ FORMS += groups.ui \
     fulltextsearch.ui
 
 SOURCES += folding.cc \
+    ankiconnector.cpp \
     article_inspect.cpp \
     articlewebpage.cpp \
+    base/globalregex.cc \
     globalbroadcaster.cpp \
     iframeschemehandler.cpp \
     main.cc \
@@ -481,14 +502,11 @@ SOURCES += folding.cc \
 
 win32 {
     FORMS   += texttospeechsource.ui
-    SOURCES += wordbyauto.cc \
-               guids.c \
+    SOURCES += guids.c \
                speechclient_win.cc \
                texttospeechsource.cc \
                speechhlp.cc
-    HEADERS += wordbyauto.hh \
-               uiauto.hh \
-               texttospeechsource.hh \
+    HEADERS += texttospeechsource.hh \
                sapi.hh \
                sphelper.hh \
                speechclient.hh \

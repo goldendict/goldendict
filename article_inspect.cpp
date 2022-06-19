@@ -3,15 +3,15 @@
 #if (QT_VERSION > QT_VERSION_CHECK(6,0,0))
 #include <QWebEngineContextMenuRequest>
 #endif
-ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::WindowType::Window )
+ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::WindowType::Window ),firstTimeOpened(false)
 {
   setWindowTitle(tr("Inspect"));
   setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
   QVBoxLayout * v = new QVBoxLayout( this );
   v->setSpacing( 0 );
   v->setContentsMargins( 0, 0, 0, 0 );
-  inspectView = new QWebEngineView( this );
-  v->addWidget( inspectView );
+  viewContainer = new QWebEngineView( this );
+  v->addWidget( viewContainer );
 
   resize(800,600);
 }
@@ -19,22 +19,26 @@ ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::Wi
 void ArticleInspector::setInspectPage( QWebEngineView * view )
 {
   auto page=view->page();
-  this->inspectedPage = page;
-  page->setDevToolsPage( inspectView->page() );
+  viewContainer->page()->setInspectedPage(page);
 #if( QT_VERSION > QT_VERSION_CHECK( 6, 0, 0 ) )
   // without this line, application will crash on qt6.2 ,see https://bugreports.qt.io/browse/QTBUG-101724
-  if( view->lastContextMenuRequest() )
+  if( view->lastContextMenuRequest() && firstTimeOpened )
   {
     page->triggerAction( QWebEnginePage::InspectElement );
+  }
+  if( !firstTimeOpened )
+  {
+    firstTimeOpened = true;
   }
 #else
   page->triggerAction( QWebEnginePage::InspectElement );
 #endif
+
   raise();
   show();
 }
 
 void ArticleInspector::closeEvent( QCloseEvent * )
 {
-  inspectedPage->setDevToolsPage( nullptr );
+  viewContainer->page()->setInspectedPage(nullptr);
 }

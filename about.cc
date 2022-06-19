@@ -23,10 +23,8 @@ About::About( QWidget * parent ): QDialog( parent )
   ui.version->setText( version );
 
 #if defined (_MSC_VER)
-  QString compilerVersion = QString( "Visual C++ %1.%2.%3" )
-                               .arg( GD_CXX_MSVC_MAJOR )
-                               .arg( GD_CXX_MSVC_MINOR )
-                               .arg( GD_CXX_MSVC_BUILD );
+  QString compilerVersion = QString( "Visual C++ Compiler: %1" )
+                               .arg( _MSC_FULL_VER );
 #elif defined (__clang__) && defined (__clang_version__)
   QString compilerVersion = QLatin1String( "Clang " ) + QLatin1String( __clang_version__ );
 #else

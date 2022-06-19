@@ -65,7 +65,7 @@ void loadFromFile( std::string const & n, std::vector< char > & data )
   f.read( &data.front(), data.size() );
 }
 
-bool exists( char const * filename ) throw()
+bool exists( char const * filename ) noexcept
 {
 #ifdef __WIN32
 #if defined(__WIN64) || defined(_MSC_VER)
@@ -256,6 +256,20 @@ void Class::seek( qint64 offset )
     throw exSeekError();
 }
 
+uchar * Class::map( qint64 offset, qint64 size )
+{
+  if( writeBuffer )
+    flushWriteBuffer();
+
+  return f.map( offset, size );
+}
+
+bool Class::unmap( uchar * address )
+{
+  return f.unmap( address );
+}
+
+
 void Class::seekCur( qint64 offset ) 
 {
   if ( writeBuffer )
@@ -313,7 +327,7 @@ void Class::close()
   f.close();
 }
 
-Class::~Class() throw()
+Class::~Class() noexcept
 {
   if ( f.isOpen() )
   {

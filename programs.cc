@@ -30,16 +30,16 @@ public:
   {
   }
 
-  virtual string getName() throw()
+  virtual string getName() noexcept
   { return prg.name.toUtf8().data(); }
 
-  virtual map< Property, string > getProperties() throw()
+  virtual map< Property, string > getProperties() noexcept
   { return map< Property, string >(); }
 
-  virtual unsigned long getArticleCount() throw()
+  virtual unsigned long getArticleCount() noexcept
   { return 0; }
 
-  virtual unsigned long getWordCount() throw()
+  virtual unsigned long getWordCount() noexcept
   { return 0; }
 
   virtual sptr< WordSearchRequest > prefixMatch( wstring const & word,
@@ -53,7 +53,7 @@ public:
 
 protected:
 
-  virtual void loadIcon() throw();
+  virtual void loadIcon() noexcept;
 };
 
 sptr< WordSearchRequest > ProgramsDictionary::prefixMatch( wstring const & word,
@@ -118,7 +118,7 @@ sptr< Dictionary::DataRequest > ProgramsDictionary::getArticle(
   }
 }
 
-void ProgramsDictionary::loadIcon() throw()
+void ProgramsDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;

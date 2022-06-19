@@ -132,7 +132,7 @@ long decode( char const * in_, size_t inSize, wchar * out_ )
   return out - out_;
 }
 
-string encode( wstring const & in ) throw()
+string encode( wstring const & in ) noexcept
 {
   if( in.size() == 0 )
     return string();

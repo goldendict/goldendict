@@ -60,9 +60,12 @@
 #include "wstring_qt.hh"
 #endif
 
+#include <QWebEngineSettings>
+#include <QWebEngineProfile>
+
 #ifdef HAVE_X11
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-#include <QtGui/private/qtx11extras_p.h>
+#include <QGuiApplication>
 #else
 #include <QX11Info>
 #endif
@@ -89,6 +92,19 @@ class InitSSLRunnable : public QRunnable
 };
 
 #endif
+
+void MainWindow::changeWebEngineViewFont()
+{
+  if( cfg.preferences.webFontFamily.isEmpty() )
+  {
+    QWebEngineProfile::defaultProfile()->settings()->resetFontFamily( QWebEngineSettings::StandardFont );
+  }
+  else
+  {
+    QWebEngineProfile::defaultProfile()->settings()->setFontFamily( QWebEngineSettings::StandardFont,
+                                                                    cfg.preferences.webFontFamily );
+  }
+}
 
 MainWindow::MainWindow( Config::Class & cfg_ ):
   trayIcon( 0 ),
@@ -148,6 +164,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   localSchemeHandler = new LocalSchemeHandler( articleNetMgr );
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "gdlookup", localSchemeHandler );
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "bword", localSchemeHandler );
+  QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "entry", localSchemeHandler );
 
   iframeSchemeHandler = new IframeSchemeHandler( this );
   QWebEngineProfile::defaultProfile()->installUrlSchemeHandler( "ifr", iframeSchemeHandler );
@@ -761,6 +778,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   applyProxySettings();
 
+  //set  webengineview font
+  changeWebEngineViewFont();
+
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
 
@@ -1225,6 +1245,10 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 
 void MainWindow::quitApp()
 {
+  if( inspector && inspector->isVisible() )
+  {
+    inspector->close();
+  }
   commitData();
   qApp->quit();
 }
@@ -1393,6 +1417,7 @@ void MainWindow::updateGroupList()
 
   groupList->fill( groupInstances );
   groupList->setCurrentGroup( cfg.lastMainGroupId );
+
   updateCurrentGroupProperty();
 
   updateDictionaryBar();
@@ -1612,9 +1637,10 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         groupList );
 
   connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
-    if(inspector){
-      inspector->setInspectPage(view);
+    if( !inspector ){
+      inspector = new ArticleInspector( this );
     }
+    inspector->setInspectPage( view );
   });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
@@ -1666,6 +1692,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( zoomIn()), this, SLOT( zoomin() ) );
 
   connect( view, SIGNAL( zoomOut()), this, SLOT( zoomout() ) );
+  connect( view, &ArticleView::saveBookmarkSignal, this, &MainWindow::addBookmarkToFavorite );
 
   view->setSelectionBySingleClick( cfg.preferences.selectWordBySingleClick );
 
@@ -2790,10 +2817,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
 
   view->showDefinition( phrase, group, scrollTo );
 
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 
   //ui.tabWidget->setTabText( ui.tabWidget->indexOf(ui.tab), inWord.trimmed() );
 }
@@ -2815,11 +2838,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,
                         ignoreDiacritics );
-
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 }
 
 #ifdef HAVE_X11
@@ -2889,9 +2907,15 @@ void MainWindow::toggleMainWindow( bool onlyShow )
 
     focusTranslateLine();
 #ifdef HAVE_X11
+#if QT_VERSION < 0x060000
+    Display *displayID = QX11Info::display();
+#else
+    QNativeInterface::QX11Application *x11AppInfo = qApp->nativeInterface<QNativeInterface::QX11Application>();
+    Display *displayID = x11AppInfo->display();
+#endif
     Window wh = 0;
     int rev = 0;
-    XGetInputFocus( QX11Info::display(), &wh, &rev );
+    XGetInputFocus( displayID, &wh, &rev );
     if( wh != translateLine->internalWinId() && !byIconClick )
     {
         QPoint p( 1, 1 );
@@ -2904,17 +2928,17 @@ void MainWindow::toggleMainWindow( bool onlyShow )
         event.xbutton.x_root = p.x();
         event.xbutton.y_root = p.y();
         event.xbutton.window = internalWinId();
-        event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
+        event.xbutton.root = XDefaultRootWindow(displayID);
         event.xbutton.state = Button1Mask;
         event.xbutton.button = Button1;
         event.xbutton.same_screen = true;
         event.xbutton.time = CurrentTime;
 
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
+        XSendEvent( displayID, internalWinId(), true, 0xfff, &event );
+        XFlush( displayID );
         event.type = ButtonRelease;
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
+        XSendEvent( displayID, internalWinId(), true, 0xfff, &event );
+        XFlush( displayID );
     }
 #endif
   }
@@ -2966,7 +2990,19 @@ void MainWindow::hotKeyActivated( int hk )
     toggleMainWindow();
   else
   if ( scanPopup.get() )
+  {
+#ifdef HAVE_X11
+    // When the user requests translation with the Ctrl+C+C hotkey in certain apps
+    // on some GNU/Linux systems, GoldenDict appears to handle Ctrl+C+C before the
+    // active application finishes handling Ctrl+C. As a result, GoldenDict finds
+    // the clipboard empty, silently cancels the translation request, and users report
+    // that Ctrl+C+C is broken in these apps. Slightly delay handling the clipboard
+    // hotkey to give the active application more time and thus work around the issue.
+    QTimer::singleShot( 10, scanPopup.get(), SLOT( translateWordFromClipboard() ) );
+#else
     scanPopup->translateWordFromClipboard();
+#endif
+  }
 }
 
 void MainWindow::prepareNewReleaseChecks()
@@ -3470,7 +3506,7 @@ void MainWindow::on_saveArticle_triggered()
         // MDict anchors
         QRegularExpression anchorLinkRe(
           "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])",
-          QRegularExpression::PatternOption::CaseInsensitiveOption );
+          QRegularExpression::PatternOption::CaseInsensitiveOption|QRegularExpression::UseUnicodePropertiesOption );
         html.replace( anchorLinkRe, "\\1" );
 
         if( complete )
@@ -4623,6 +4659,15 @@ void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
   ui.favoritesPaneWidget->addHeadword( folder, word );
 }
 
+void MainWindow::addBookmarkToFavorite( QString const & text )
+{
+  // get current tab word.
+  QString word        = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
+  const auto bookmark = QString( "%1~~~%2" ).arg( word, text );
+
+  ui.favoritesPaneWidget->addHeadword( nullptr, bookmark );
+}
+
 void MainWindow::addAllTabsToFavorites()
 {
   QString folder;
@@ -4695,8 +4740,22 @@ void MainWindow::headwordFromFavorites( QString const & headword,
   }
 
   // Show headword without lost of focus on Favorites tree
-  setTranslateBoxTextAndClearSuffix( headword, EscapeWildcards, DisablePopup );
-  showTranslationFor(headword );
+  // bookmark cases:   the favorite item may like this   "word~~~selectedtext"
+  auto words = headword.split( "~~~" );
+
+  setTranslateBoxTextAndClearSuffix( words[0], EscapeWildcards, DisablePopup );
+
+  //must be a bookmark.
+  if(words.size()>1)
+  {
+    auto view = getCurrentArticleView();
+    if(view)
+    {
+      view->setDelayedHighlightText(words[1]);// findText( words[ 1 ], QWebEnginePage::FindCaseSensitively );
+    }
+  }
+
+  showTranslationFor( words[ 0 ] );
 }
 
 #ifdef Q_OS_WIN32

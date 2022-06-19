@@ -993,6 +993,9 @@ for all program's network requests.</string>
           </item>
           <item>
            <widget class="QGroupBox" name="customSettingsGroup">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
             <property name="title">
              <string>Custom settings</string>
             </property>
@@ -1011,6 +1014,9 @@ for all program's network requests.</string>
                </item>
                <item>
                 <widget class="QLabel" name="label_3">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="text">
                   <string>Host:</string>
                  </property>
@@ -1073,20 +1079,110 @@ for all program's network requests.</string>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer_14">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+        <widget class="QGroupBox" name="useAnkiConnect">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
+         <property name="title">
+          <string>Anki Connect</string>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
-        </spacer>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_21">
+            <item>
+             <widget class="QLabel" name="label_22">
+              <property name="text">
+               <string>Host:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_24">
+              <property name="text">
+               <string>http://</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="ankiHost"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_23">
+              <property name="text">
+               <string>Port:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="ankiPort">
+              <property name="maximum">
+               <number>65535</number>
+              </property>
+              <property name="value">
+               <number>8080</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_16">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_22">
+            <item>
+             <widget class="QLabel" name="label_28">
+              <property name="text">
+               <string>Deck:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="ankiDeck"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_25">
+              <property name="text">
+               <string>Model:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="ankiModel"/>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_17">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="disallowContentFromOtherSites">
@@ -1175,22 +1271,6 @@ clears its network cache from disk during exit.</string>
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_10">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
        </item>
        <item>
         <widget class="QCheckBox" name="checkForNewReleases">

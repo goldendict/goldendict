@@ -89,6 +89,10 @@ ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Soc
 {
 }
 
+AnkiConnectServer::AnkiConnectServer(): enabled( false ), host("127.0.0.1"), port( 8765 )
+{
+}
+
 HotKey::HotKey(): modifiers( 0 ), key1( 0 ), key2( 0 )
 {
 }
@@ -935,6 +939,17 @@ Class load()
       c.preferences.proxyServer.password = proxy.namedItem( "password" ).toElement().text();
       c.preferences.proxyServer.systemProxyUser = proxy.namedItem( "systemProxyUser" ).toElement().text();
       c.preferences.proxyServer.systemProxyPassword = proxy.namedItem( "systemProxyPassword" ).toElement().text();
+    }
+
+    QDomNode ankiConnectServer = preferences.namedItem( "ankiConnectServer" );
+
+    if ( !ankiConnectServer.isNull() )
+    {
+      c.preferences.ankiConnectServer.enabled = ( ankiConnectServer.toElement().attribute( "enabled" ) == "1" );
+      c.preferences.ankiConnectServer.host = ankiConnectServer.namedItem( "host" ).toElement().text();
+      c.preferences.ankiConnectServer.port = ankiConnectServer.namedItem( "port" ).toElement().text().toULong();
+      c.preferences.ankiConnectServer.deck = ankiConnectServer.namedItem( "deck" ).toElement().text();
+      c.preferences.ankiConnectServer.model = ankiConnectServer.namedItem( "model" ).toElement().text();
     }
 
     if ( !preferences.namedItem( "checkForNewReleases" ).isNull() )
@@ -1872,6 +1887,32 @@ void save( Class const & c )
       proxy.appendChild( opt );
     }
 
+    //anki connect
+    {
+      QDomElement proxy = dd.createElement( "ankiConnectServer" );
+      preferences.appendChild( proxy );
+
+      QDomAttr enabled = dd.createAttribute( "enabled" );
+      enabled.setValue( c.preferences.ankiConnectServer.enabled ? "1" : "0" );
+      proxy.setAttributeNode( enabled );
+
+      opt = dd.createElement( "host" );
+      opt.appendChild( dd.createTextNode( c.preferences.ankiConnectServer.host ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "port" );
+      opt.appendChild( dd.createTextNode( QString::number( c.preferences.ankiConnectServer.port ) ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "deck" );
+      opt.appendChild( dd.createTextNode( c.preferences.ankiConnectServer.deck ) );
+      proxy.appendChild( opt );
+
+      opt = dd.createElement( "model" );
+      opt.appendChild( dd.createTextNode( c.preferences.ankiConnectServer.model ) );
+      proxy.appendChild( opt );
+    }
+
     opt = dd.createElement( "checkForNewReleases" );
     opt.appendChild( dd.createTextNode( c.preferences.checkForNewReleases ? "1" : "0" ) );
     preferences.appendChild( opt );
@@ -2211,7 +2252,7 @@ QString getUserQtCssFileName()
   return getHomeDir().filePath( "qt-style.css" );
 }
 
-QString getProgramDataDir() throw()
+QString getProgramDataDir() noexcept
 {
   if ( isPortableVersion() )
     return QCoreApplication::applicationDirPath();
@@ -2223,12 +2264,12 @@ QString getProgramDataDir() throw()
   #endif
 }
 
-QString getEmbedLocDir() throw()
+QString getEmbedLocDir() noexcept
 {
   return ":/locale";
 }
 
-QString getLocDir() throw()
+QString getLocDir() noexcept
 {
     if ( QDir( getProgramDataDir() ).cd( "locale" ) )
       return getProgramDataDir() + "/locale";
@@ -2236,7 +2277,7 @@ QString getLocDir() throw()
       return QCoreApplication::applicationDirPath() + "/locale";
 }
 
-QString getHelpDir() throw()
+QString getHelpDir() noexcept
 {
   if ( QDir( getProgramDataDir() ).cd( "help" ) )
     return getProgramDataDir() + "/help";
@@ -2245,7 +2286,7 @@ QString getHelpDir() throw()
 }
 
 #ifdef MAKE_CHINESE_CONVERSION_SUPPORT
-QString getOpenCCDir() throw()
+QString getOpenCCDir() noexcept
 {
 #if defined( Q_OS_WIN )
   if ( QDir( "opencc" ).exists() )
@@ -2264,7 +2305,7 @@ QString getOpenCCDir() throw()
 }
 #endif
 
-bool isPortableVersion() throw()
+bool isPortableVersion() noexcept
 {
   struct IsPortable
   {
@@ -2279,7 +2320,7 @@ bool isPortableVersion() throw()
   return p.isPortable;
 }
 
-QString getPortableVersionDictionaryDir() throw()
+QString getPortableVersionDictionaryDir() noexcept
 {
   if ( isPortableVersion() )
     return getProgramDataDir() + "/content";
@@ -2287,7 +2328,7 @@ QString getPortableVersionDictionaryDir() throw()
     return QString();
 }
 
-QString getPortableVersionMorphoDir() throw()
+QString getPortableVersionMorphoDir() noexcept
 {
   if ( isPortableVersion() )
     return getPortableVersionDictionaryDir() + "/morphology";
@@ -2307,7 +2348,7 @@ QString getStylesDir()
   return result.path() + QDir::separator();
 }
 
-QString getCacheDir() throw()
+QString getCacheDir() noexcept
 {
   return isPortableVersion() ? portableHomeDirPath() + "/cache"
   #ifdef HAVE_X11
@@ -2317,7 +2358,7 @@ QString getCacheDir() throw()
   #endif
 }
 
-QString getNetworkCacheDir() throw()
+QString getNetworkCacheDir() noexcept
 {
   return getCacheDir() + "/network";
 }

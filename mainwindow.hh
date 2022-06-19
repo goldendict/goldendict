@@ -260,6 +260,8 @@ private:
                                          TranslateBoxPopup popupAction );
   void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
                                           TranslateBoxPopup popupAction );
+  void changeWebEngineViewFont();
+  
 private slots:
 
   void hotKeyActivated( int );
@@ -459,6 +461,8 @@ private slots:
   void forceAddWordToHistory( const QString & word);
 
   void addWordToFavorites( QString const & word, unsigned groupId );
+
+  void addBookmarkToFavorite( QString const & text );
 
   bool isWordPresentedInFavorites( QString const & word, unsigned groupId );
 

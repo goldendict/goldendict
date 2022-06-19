@@ -95,7 +95,7 @@ body
 
 .gddictnamebodyseparator
 {
-  display: inline-block;
-  width: 100%;
+  clear: both;
   border-top: 1px solid #92b0dd;
+  margin-bottom: 1em;
 }

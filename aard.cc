@@ -239,16 +239,16 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
 
     ~AardDictionary();
 
-    virtual string getName() throw()
+    virtual string getName() noexcept
     { return dictionaryName; }
 
-    virtual map< Dictionary::Property, string > getProperties() throw()
+    virtual map< Dictionary::Property, string > getProperties() noexcept
     { return map< Dictionary::Property, string >(); }
 
-    virtual unsigned long getArticleCount() throw()
+    virtual unsigned long getArticleCount() noexcept
     { return idxHeader.articleCount; }
 
-    virtual unsigned long getWordCount() throw()
+    virtual unsigned long getWordCount() noexcept
     { return idxHeader.wordCount; }
 
     inline virtual quint32 getLangFrom() const
@@ -284,7 +284,7 @@ class AardDictionary: public BtreeIndexing::BtreeDictionary
 
 protected:
 
-    virtual void loadIcon() throw();
+    virtual void loadIcon() noexcept;
 
 private:
 
@@ -338,7 +338,7 @@ AardDictionary::~AardDictionary()
     df.close();
 }
 
-void AardDictionary::loadIcon() throw()
+void AardDictionary::loadIcon() noexcept
 {
   if ( dictionaryIconLoaded )
     return;
@@ -429,7 +429,7 @@ void AardDictionary::loadArticle( quint32 address,
 
     while( 1 )
     {
-      articleText = string( QObject::tr( "Article loading error" ).toUtf8().constData() );
+      articleText = QObject::tr( "Article loading error" ).toStdString();
       try
       {
         Mutex::Lock _( aardMutex );
@@ -521,7 +521,7 @@ void AardDictionary::loadArticle( quint32 address,
       articleText = convert( articleText );
     }
     else
-      articleText = string( QObject::tr( "Article decoding error" ).toUtf8().constData() );
+      articleText = QObject::tr( "Article decoding error" ).toStdString();
 
     // See Issue #271: A mechanism to clean-up invalid HTML cards.
     string cleaner = "</font>""</font>""</font>""</font>""</font>""</font>"

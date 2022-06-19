@@ -4,6 +4,8 @@
 #include "chunkedstorage.hh"
 #include <zlib.h>
 #include <string.h>
+#include <QDataStream>
+#include <QScopeGuard>
 
 namespace ChunkedStorage {
 
@@ -134,25 +136,42 @@ char * Reader::getBlock( uint32_t address, vector< char > & chunk )
 
   // Read and decompress the chunk
   {
-    file.seek( offsets[ chunkIdx ] );
+    // file.seek( offsets[ chunkIdx ] );
+    QMutexLocker _( &file.lock );
+    auto bytes = file.map( offsets[ chunkIdx ], 8 );
+    if( bytes == nullptr )
+      throw mapFailed();
+    auto qBytes = QByteArray::fromRawData( reinterpret_cast< char * >(bytes), 8 );
+    QDataStream in( qBytes );
+    in.setByteOrder( QDataStream::LittleEndian );
 
-    uint32_t uncompressedSize = file.read< uint32_t >();
-    uint32_t compressedSize = file.read< uint32_t >();
+    uint32_t uncompressedSize;
+    uint32_t compressedSize;
 
+    in >> uncompressedSize >> compressedSize;
+
+    file.unmap( bytes );
     chunk.resize( uncompressedSize );
 
-    vector< unsigned char > compressedData( compressedSize );
-
-    file.read( &compressedData.front(), compressedData.size() );
+    // vector< unsigned char > compressedData( compressedSize );
+    auto chunkDataBytes = file.map( offsets[ chunkIdx ] + 8, compressedSize );
+    if( chunkDataBytes == nullptr )
+      throw mapFailed();
+    // file.read( &compressedData.front(), compressedData.size() );
+    auto autoUnmap = qScopeGuard(
+      [ & ] {
+        file.unmap( chunkDataBytes );
+      } );
+    Q_UNUSED( autoUnmap )
 
     unsigned long decompressedLength = chunk.size();
 
-    if ( uncompress( (unsigned char *)&chunk.front(),
-                     &decompressedLength,
-                     &compressedData.front(),
-                     compressedData.size() ) != Z_OK ||
-         decompressedLength != chunk.size() )
+    if( uncompress( (unsigned char *)&chunk.front(), &decompressedLength, chunkDataBytes, compressedSize ) != Z_OK
+        || decompressedLength != chunk.size() )
+    {
       throw exFailedToDecompressChunk();
+    }
+
   }
 
   size_t offsetInChunk = address & 0xffFF;

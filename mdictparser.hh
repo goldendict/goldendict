@@ -173,7 +173,7 @@ public:
   {
     QString s = QString::fromUtf8( article.c_str() );
     substituteStylesheet( s, styleSheets );
-    return string( s.toUtf8().constData() );
+    return s.toStdString();
   }
 
 protected:

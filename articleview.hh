@@ -19,6 +19,7 @@
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 #include <QtCore5Compat/QRegExp>
 #endif
+#include "ankiconnector.h"
 
 class ResourceToSaveHandler;
 class ArticleViewAgent ;
@@ -39,13 +40,14 @@ class ArticleView: public QFrame
   ArticleViewAgent * agent;
   Ui::ArticleView ui;
 
+  AnkiConnector  * ankiConnector;
+
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
           copyAsTextAction, inspectAction;
   QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
-  QString articleToJump;
   QString rangeVarName;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
@@ -76,9 +78,11 @@ class ArticleView: public QFrame
   bool ftsSearchIsOpened, ftsSearchMatchCase;
   int ftsPosition;
 
+  QString delayedHighlightText;
+
   void highlightFTSResults();
+  void highlightAllFtsOccurences( QWebEnginePage::FindFlags flags );
   void performFtsFindOperation( bool backwards );
-  void showFindButtons();
 
 public:
   /// The popupView flag influences contents of the context menus to be
@@ -129,6 +133,7 @@ public:
                        QRegExp const & searchRegExp, unsigned group,
                        bool ignoreDiacritics );
 
+  void sendToAnki(QString const & word, QString const & text );
   /// Clears the view and sets the application-global waiting cursor,
   /// which will be restored when some article loads eventually.
   void showAnticipation();
@@ -153,6 +158,8 @@ public:
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
 
+  void setDelayedHighlightText(QString const & text);
+
 public slots:
 
   /// Goes back in history
@@ -168,8 +175,7 @@ public slots:
 public:
 
   /// Reloads the view
-  void reload()
-  { ui.definition->reload(); }
+  void reload();
 
   /// Returns true if there's an audio reference on the page, false otherwise.
   void hasSound( const std::function< void( bool has ) > & callback );
@@ -222,6 +228,10 @@ public:
 
   ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
   ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
+
+  void findText( QString & text,
+                 const QWebEnginePage::FindFlags & f,
+                 const std::function< void( bool match ) > & callback = nullptr );
 
 signals:
 
@@ -280,6 +290,8 @@ signals:
   void notifyJavascriptFinished();
 
   void inspectSignal(QWebEngineView * view);
+
+  void saveBookmarkSignal( const QString & bookmark );
 
 public slots:
 
@@ -360,7 +372,8 @@ private:
 
   /// Sets the current article by executing a javascript code.
   /// If moveToIt is true, it moves the focus to it as well.
-  void setCurrentArticle( QString const &, bool moveToIt = false );
+  /// Returns true in case of success, false otherwise.
+  bool setCurrentArticle( QString const &, bool moveToIt = false );
 
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.
@@ -375,13 +388,12 @@ private:
   /// url to the appropriate "contexts" entry.
   void tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts );
 
-  /// Use the known information about the current frame to update the current
-  /// article's value.
-  void updateCurrentArticleFromCurrentFrame( QWebEnginePage * frame = 0 ,QPoint * point=0);
-
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
   void saveHistoryUserData();
+
+  /// Loads a page at @p url into view.
+  void load( QUrl const & url );
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();
@@ -390,7 +402,6 @@ private:
 
   void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
 
-  bool findText(QString& text, const QWebEnginePage::FindFlags& f);
 
   void reloadStyleSheet();
 

@@ -24,24 +24,19 @@ a:hover
   background: white;
 }
 
-/* Dictionary's name heading */
-.gddictname
-{
-  border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
-  margin-top: 1.2em; margin-bottom: 0.1em; font-weight: bold; font-size: 14px;
-  background: #87CEEB;
-}
-
 /* The 'From ' string which preceeds dictionary name in the heading */
 .gdfromprefix
 {
   display: none;
 }
 
+/* Dictionary's name heading */
 .gddictname
 {
+  padding: 0.2em; padding-left: 0.5em;
+  margin-bottom: 0.1em; 
+  font-size: 14px;
   font-weight: normal;
-  
   float: right;
   border: 1px solid white;
   margin-top: 7px;
