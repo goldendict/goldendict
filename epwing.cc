@@ -10,6 +10,7 @@
 #include <QSemaphore>
 
 #include <map>
+#include <QtConcurrent>
 #include <set>
 #include <string>
 
@@ -461,6 +462,7 @@ class EpwingArticleRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
 
@@ -469,8 +471,9 @@ public:
                         EpwingDictionary & dict_, bool ignoreDiacritics_ ):
     word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start(
-      new EpwingArticleRequestRunnable( *this, hasExited ) );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start(
+    //   new EpwingArticleRequestRunnable( *this, hasExited ) );
   }
 
   void run(); // Run from another thread by EpwingArticleRequestRunnable
@@ -483,7 +486,8 @@ public:
   ~EpwingArticleRequest()
   {
     isCancelled.ref();
-    hasExited.acquire();
+    f.waitForFinished();
+    // hasExited.acquire();
   }
 };
 
