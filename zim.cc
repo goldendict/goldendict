@@ -41,6 +41,7 @@
 #include <set>
 #include <map>
 #include <algorithm>
+#include <QtConcurrent>
 
 namespace Zim {
 
@@ -1248,6 +1249,7 @@ class ZimArticleRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
 
@@ -1256,7 +1258,8 @@ public:
                      ZimDictionary & dict_, bool ignoreDiacritics_ ):
     word( word_ ), alts( alts_ ), dict( dict_ ), ignoreDiacritics( ignoreDiacritics_ )
   {
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -1269,6 +1272,7 @@ public:
   ~ZimArticleRequest()
   {
     isCancelled.ref();
+    f.waitForFinished();
     //hasExited.acquire();
   }
 };
@@ -1421,11 +1425,13 @@ class ZimResourceRequest: public Dictionary::DataRequest
 
   QAtomicInt isCancelled;
   QSemaphore hasExited;
+  QFuture< void > f;
 
 public:
   ZimResourceRequest(ZimDictionary &dict_, string const &resourceName_)
       : dict(dict_), resourceName(resourceName_) {
-    QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
+    f = QtConcurrent::run( [ this ]() { this->run(); } );
+    // QThreadPool::globalInstance()->start( [ this ]() { this->run(); } );
   }
 
   void run();
@@ -1438,6 +1444,7 @@ public:
   ~ZimResourceRequest()
   {
     isCancelled.ref();
+    f.waitForFinished();
     //hasExited.acquire();
   }
 };
