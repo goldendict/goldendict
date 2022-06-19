@@ -443,27 +443,19 @@ void FTSResultsRequest::checkArticles( QVector< uint32_t > const & offsets,
                                        QStringList const & words,
                                        QRegExp const & searchRegexp )
 {
-  const int parallel_count = QThread::idealThreadCount()/2;
-  QSemaphore sem( parallel_count  < 1 ? 1 : parallel_count  );
-
-  QFutureSynchronizer< void > synchronizer;
+  // const int parallel_count = QThread::idealThreadCount()/2;
+  // QSemaphore sem( parallel_count  < 1 ? 1 : parallel_count  );
+  //
+  // QFutureSynchronizer< void > synchronizer;
   const auto searchRegularExpression = createMatchRegex( searchRegexp );
 
   for( auto & address : offsets )
   {
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
     {
-      synchronizer.setCancelOnWait(true);
       return;
     }
-    sem.acquire();
-    QFuture< void > f = QtConcurrent::run(
-      [ =,&sem ]()
-      {
-        QSemaphoreReleaser releaser( sem );
-        checkSingleArticle( address, words,  searchRegularExpression );
-      } );
-    synchronizer.addFuture( f );
+    checkSingleArticle( address, words, searchRegularExpression );
   }
 }
 
@@ -723,7 +715,18 @@ void FTSResultsRequest::indexSearch( BtreeIndexing::BtreeIndex & ftsIndex,
     }
   };
   // int n = indexWords.length();
-  QtConcurrent::blockingMap( indexWords, findLinks );
+  // QtConcurrent::blockingMap( indexWords, findLinks );
+
+  for(QString word:indexWords)
+  {
+    if( Utils::AtomicInt::loadAcquire( isCancelled ) )
+    {
+      return;
+    }
+    findLinks( word );
+  }
+
+  // blocked execution.
 
   int i = 0;
   for( auto & elem : addressLists )
@@ -840,7 +843,20 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
         sets << tmp;
       }
     };
-    QtConcurrent::blockingMap( wordsList, fn_wordLink );
+    // QtConcurrent::blockingMap( wordsList, fn_wordLink );
+
+    {
+
+      for(const auto & word : wordsList )
+      {
+        if( Utils::AtomicInt::loadAcquire( isCancelled ) )
+        {
+          return;
+        }
+        fn_wordLink( word );
+      }
+    }
+    //blocked execution.
 
     int i = 0;
     for( auto & elem : sets )
