@@ -2256,7 +2256,7 @@ void ArticleView::on_searchCloseButton_clicked()
 
 void ArticleView::on_searchCaseSensitive_clicked()
 {
-  performFindOperation( false, false, true );
+  performFindOperation( true, false );
 }
 
 void ArticleView::on_highlightAllButton_clicked()
