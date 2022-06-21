@@ -28,6 +28,7 @@ extern "C" {
 
 #include <vector>
 
+#include "gddebug.hh"
 #include "qt4x5.hh"
 
 using std::vector;
@@ -143,7 +144,17 @@ DecoderContext::~DecoderContext()
 static int readAudioData( void * opaque, unsigned char * buffer, int bufferSize )
 {
   QDataStream * pStream = ( QDataStream * )opaque;
-  return pStream->readRawData( ( char * )buffer, bufferSize );
+  // This function is passed as the read_packet callback into avio_alloc_context().
+  // The documentation for this callback parameter states:
+  // For stream protocols, must never return 0 but rather a proper AVERROR code.
+  if( pStream->atEnd() )
+    return AVERROR_EOF;
+  const int bytesRead = pStream->readRawData( ( char * )buffer, bufferSize );
+  // QDataStream::readRawData() returns 0 at EOF => return AVERROR_EOF in this case.
+  // An error is unlikely here, so just print a warning and return AVERROR_EOF too.
+  if( bytesRead < 0 )
+    gdWarning( "readAudioData: error while reading raw data." );
+  return bytesRead > 0 ? bytesRead : AVERROR_EOF;
 }
 
 bool DecoderContext::openCodec( QString & errorString )
