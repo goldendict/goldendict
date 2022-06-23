@@ -35,6 +35,10 @@ void Indexing::run()
 {
   try
   {
+    int parallel_count = QThread::idealThreadCount()/2;
+    QSemaphore sem( parallel_count<1?1:parallel_count );
+
+    QFutureSynchronizer< void > synchronizer;
     // First iteration - dictionaries with no more MaxDictionarySizeForFastSearch articles
     for( size_t x = 0; x < dictionaries.size(); x++ )
     {
@@ -44,8 +48,18 @@ void Indexing::run()
       if( dictionaries.at( x )->canFTS()
           &&!dictionaries.at( x )->haveFTSIndex() )
       {
-        emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
-        dictionaries.at( x )->makeFTSIndex( isCancelled, true );
+        sem.acquire();
+        auto dict                 = dictionaries.at( x );
+        std::function< void() > async_f = [&]()
+        {
+          QSemaphoreReleaser releaser( sem );
+          emit sendNowIndexingName( QString::fromUtf8( dict->getName().c_str() ) );
+          dict->makeFTSIndex( isCancelled, true );
+        };
+
+        auto f= QtConcurrent::run( async_f );
+        synchronizer.addFuture( f );
+
       }
     }
 
@@ -58,8 +72,17 @@ void Indexing::run()
       if( dictionaries.at( x )->canFTS()
           &&!dictionaries.at( x )->haveFTSIndex() )
       {
-        emit sendNowIndexingName( QString::fromUtf8( dictionaries.at( x )->getName().c_str() ) );
-        dictionaries.at( x )->makeFTSIndex( isCancelled, false );
+        sem.acquire();
+        auto dict                       = dictionaries.at( x );
+        std::function< void() > async_f = [ & ]()
+        {
+          QSemaphoreReleaser releaser( sem );
+          emit sendNowIndexingName( QString::fromUtf8( dict->getName().c_str() ) );
+          dict->makeFTSIndex( isCancelled, false );
+        };
+
+        auto f = QtConcurrent::run( async_f );
+        synchronizer.addFuture( f );
       }
     }
   }
