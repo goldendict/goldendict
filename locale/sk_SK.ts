@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sk">
+<TS version="2.1" language="sk">
 <context>
     <name>About</name>
     <message>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="299"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajte v programe &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prácu v programe začnite v &lt;b&gt;Upraviť|Slovníky&lt;/b&gt;, kde môžete pridať cesty k priečinkom v ktorých budú vyhľadané slovníky, nastaviť rôzne stránky Wikipedie a iné zdroje, upraviť poradenie poradenie slovníkov alebo vytvoriť slovníkové skupiny.&lt;/p&gt;&lt;p&gt;Potom budete môcť začať vyhľadať slová! Môžete tak robiť v tomto okne s použitím panela vľavo, alebo môžete &lt;a href=&quot;Working with popup&quot;&gt;vyhľadávať slová z iných aktívnych aplikácií&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Úpravu vlastností programu môžete urobiť &lt;b&gt;Upraviť|Nastavenia…&lt;/b&gt;. Všetky nastavenia majú popisy, ktoré vám pomôžu, pokiaľ si nebudete niečim istý.&lt;/p&gt;&lt;p&gt;Pokiaľ budete potrebovať ďalšiu pomoc, máte nejaké návrhy, alebo len chcete vedieť, čo si myslia iný, tak ste vítaní na &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusnom fóre&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Aktualizácie hľadajte na &lt;a href=&quot;http://goldendict.org/&quot;&gt;stránkach GoldenDict&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencované pod GPLv3 alebo novšou.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Vitajte v programe &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Prácu v programe začnite v &lt;b&gt;Upraviť|Slovníky&lt;/b&gt;, kde môžete pridať cesty ku priečinkom, v ktorých sa budú vyhľadávať slovníky, nastaviť rôzne stránky Wikipedie a iné zdroje, upraviť poradie slovníkov alebo vytvoriť skupiny slovníkov.&lt;/p&gt;&lt;p&gt;Potom môžete začať vyhľadávať slová! Môžete tak urobiť v tomto okne s použitím panela vľavo, alebo môžete &lt;a href=&quot;Working with popup&quot;&gt;vyhľadávať slová z iných aktívnych aplikácií&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Úpravu vlastností programu môžete urobiť v ponuke &lt;b&gt;Upraviť|Nastavenia…&lt;/b&gt;. Všetky nastavenia majú popisy, ktoré vám pomôžu, pokiaľ si nebudete niečím istý.&lt;/p&gt;&lt;p&gt;Ak potrebujete ďalšiu pomoc, máte návrhy na zlepšenie alebo sa chcete dozvedieť, čo si myslia iní, ste vítaní na &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;diskusnom fóre&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Aktualizácie hľadajte na &lt;a href=&quot;http://goldendict.org/&quot;&gt;stránkach GoldenDict&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licencované pod GPLv3 alebo novšou.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="315"/>
@@ -2559,7 +2559,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.ui" line="119"/>
         <source>&amp;Zoom</source>
-        <translation>&amp;Zväčšenie</translation>
+        <translation>P&amp;riblíženie</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="126"/>
@@ -2737,12 +2737,12 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.ui" line="582"/>
         <source>&amp;Always on Top</source>
-        <translation>&amp;Vždy na vrchu</translation>
+        <translation>&amp;Vždy navrchu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="585"/>
         <source>Always on Top</source>
-        <translation>Vždy na vrchu</translation>
+        <translation>Vždy navrchu</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="588"/>
@@ -2881,7 +2881,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.cc" line="106"/>
         <source>&amp;Menubar</source>
-        <translation>&amp;Panel s ponukou</translation>
+        <translation>Panel s p&amp;onukou</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="282"/>
@@ -2911,7 +2911,7 @@ medzi klasickou a školskou ortografiou v azbuke)</translation>
     <message>
         <location filename="../mainwindow.cc" line="193"/>
         <source>Scan Popup</source>
-        <translation>Vyskakovanie okno</translation>
+        <translation>Vyskakovacie okno</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="208"/>
@@ -3589,7 +3589,7 @@ With this on however, it will hide the main window.</source>
     <message>
         <location filename="../preferences.ui" line="380"/>
         <source>&amp;Scan Popup</source>
-        <translation>Vy&amp;skakovacie okno</translation>
+        <translation>Vys&amp;kakovacie okno</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="399"/>
@@ -4082,30 +4082,33 @@ Povoľte toto nastavenie na obídenie problému.</translation>
     <message>
         <location filename="../preferences.ui" line="1160"/>
         <source>Maximum network cache size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálna veľkosť vyr. pamäte siete:</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1167"/>
         <source>Maximum disk space occupied by GoldenDict&apos;s network cache in
 %1
 If set to 0 the network disk cache will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálny priestor na disku obsadený vyrovnávacou pamäťou siete GoldenDict v
+%1
+Ak nastavíte na 0, vyrovnávacia pamäť siete bude vypnutá.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1172"/>
         <source> MiB</source>
-        <translation type="unfinished"></translation>
+        <translation> MiB</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1185"/>
         <source>When this option is enabled, GoldenDict
 clears its network cache from disk during exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ak zapnete túto možnosť, GoldenDict
+vyčistí vyrovnávaciu pamäť siete pri ukončení aplikácie.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1189"/>
         <source>Clear network cache on exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistiť vyr. pamäť siete pri ukončení</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1227"/>
@@ -4182,12 +4185,12 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
     <message>
         <location filename="../preferences.ui" line="1486"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Neštandardné príznaky nepripnutého vysk. okna</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1492"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Experimentujte s neštandardnými príznakmi v prípade, že sa nepripnuté vyskakovacie okno správa nepredvídateľne</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1496"/>
@@ -4265,17 +4268,18 @@ Nie je potrebné použiť túto voľbu, ak nepoužívate takéto programy.</tran
         <location filename="../preferences.ui" line="1786"/>
         <source>Turn this option on to ignore unreasonably long input text
 from mouse-over, selection, clipboard or command line</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnite túto možnosť, ak chcete ignorovať neprimerane
+dlhý text pri navigácií myšou, výbere, v obsahu schránky alebo v príkaze</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1790"/>
         <source>Ignore input phrases longer than</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorovať vstupné frázy dlhšie ako</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1800"/>
         <source>Input phrases longer than this size will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstupné frázy dlhšie ako táto veľkosť sa budú ignorovať</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1823"/>
@@ -4336,7 +4340,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../preferences.cc" line="158"/>
         <source> MB</source>
-        <translation type="unfinished"></translation>
+        <translation> MB</translation>
     </message>
     <message>
         <source>Play via DirectShow</source>
@@ -4875,7 +4879,7 @@ vhodné slovníky dole k vhodným skupinám.</translation>
     <message>
         <location filename="../sources.ui" line="474"/>
         <source>Live pronunciations from &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. The site allows people to record and share word pronunciations. You can listen to them from GoldenDict.</source>
-        <translation>Živá výslovnosť z &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Stánky umožňujú ľuďom nahrávať a zdieľa výslovnosť slov. V GoldenDicte si ich môžete vypočuť.</translation>
+        <translation>Živá výslovnosť z &lt;a href=&quot;http://www.forvo.com/&quot;&gt;forvo.com&lt;/a&gt;. Stránky umožňujú ľuďom nahrávať a zdieľať výslovnosť slov. V GoldenDicte si ich môžete vypočuť.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="487"/>

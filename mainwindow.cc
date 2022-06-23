@@ -1137,8 +1137,8 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const 
   {
     // Load an additional stylesheet
     QFile builtInCssFile( QString( ":/qt-style-st-%1.css" ).arg( displayStyle ) );
-    builtInCssFile.open( QFile::ReadOnly );
-    css += builtInCssFile.readAll();
+    if ( builtInCssFile.open( QFile::ReadOnly ) )
+      css += builtInCssFile.readAll();
   }
 
   // Try loading a style sheet if there's one
@@ -1218,12 +1218,21 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 {
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
   {
-    ev->ignore();
-
     if( !cfg.preferences.searchInDock )
       translateBox->setPopupEnabled( false );
 
+#ifdef HAVE_X11
+    // Don't ignore the close event, because doing so cancels session logout if
+    // the main window is visible when the user attempts to log out.
+    // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
+    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    Q_ASSERT(!QApplication::quitOnLastWindowClosed());
+    Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
+#else
+    // Ignore the close event because closing the main window breaks global hotkeys on Windows.
+    ev->ignore();
     hide();
+#endif
   }
   else
   {
@@ -2825,11 +2834,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
 
   view->showDefinition( phrase, group, scrollTo );
 
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
-
   #if 0
   QUrl req;
 
@@ -2936,11 +2940,6 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,
                         ignoreDiacritics );
-
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 }
 
 #ifdef HAVE_X11
@@ -3124,7 +3123,19 @@ void MainWindow::hotKeyActivated( int hk )
     toggleMainWindow();
   else
   if ( scanPopup.get() )
+  {
+#ifdef HAVE_X11
+    // When the user requests translation with the Ctrl+C+C hotkey in certain apps
+    // on some GNU/Linux systems, GoldenDict appears to handle Ctrl+C+C before the
+    // active application finishes handling Ctrl+C. As a result, GoldenDict finds
+    // the clipboard empty, silently cancels the translation request, and users report
+    // that Ctrl+C+C is broken in these apps. Slightly delay handling the clipboard
+    // hotkey to give the active application more time and thus work around the issue.
+    QTimer::singleShot( 10, scanPopup.get(), SLOT( translateWordFromClipboard() ) );
+#else
     scanPopup->translateWordFromClipboard();
+#endif
+  }
 }
 
 void MainWindow::prepareNewReleaseChecks()
@@ -3635,7 +3646,7 @@ void MainWindow::on_saveArticle_triggered()
 
         // Pull and save resources to files
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-              i != downloadResources.end(); i++ )
+              i != downloadResources.end(); ++i )
         {
           ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
           if( !handler->isEmpty() )

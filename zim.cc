@@ -80,7 +80,8 @@ enum CompressionType
 struct ZIM_header
 {
     quint32 magicNumber;
-    quint32 version;
+    quint16 majorVersion;
+    quint16 minorVersion;
     quint8 uuid[ 16 ];
     quint32 articleCount;
     quint32 clusterCount;
@@ -127,7 +128,7 @@ __attribute__((packed))
 enum
 {
   Signature = 0x584D495A, // ZIMX on little-endian, XMIZ on big-endian
-  CurrentFormatVersion = 1 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -160,13 +161,15 @@ struct Cache
   quint32 clusterNumber;
   int stamp;
   int count, size;
+  unsigned blobs_offset_size;
 
   Cache() :
     data( 0 ),
     clusterNumber( 0 ),
     stamp( -1 ),
     count( 0 ),
-    size( 0 )
+    size( 0 ),
+    blobs_offset_size( 0 )
   {}
 };
 
@@ -186,13 +189,25 @@ public:
   }
   const ZIM_header & header() const
   { return zimHeader; }
-  string getClusterData( quint32 cluster_nom );
+
+  string getClusterData( quint32 cluster_nom, unsigned & blob_offset_size );
+
+  const QString getMimeType( quint16 nom )
+  { return mimeTypes.value( nom ); }
+
+  bool isArticleMime( quint16 mime_type )
+  { return getMimeType( mime_type ).startsWith( "text/html", Qt::CaseInsensitive )
+           || getMimeType( mime_type ).startsWith( "text/plain", Qt::CaseInsensitive ); }
+
+
+  quint16 redirectedMimeType( RedirectEntry const & redEntry );
 
 private:
   ZIM_header zimHeader;
   Cache cache[ CACHE_SIZE ];
   int stamp;
   QVector< QPair< quint64, quint32 > > clusterOffsets;
+  QStringList mimeTypes;
 
   void clearCache();
 };
@@ -293,10 +308,33 @@ bool ZimFile::open()
 
   std::sort( clusterOffsets.begin(), clusterOffsets.end() );
 
+// Read mime types
+
+  string type;
+  char ch;
+
+  seek( zimHeader.mimeListPos );
+
+  for( ; ; )
+  {
+    type.clear();
+    while( getChar( &ch ) )
+    {
+      if( ch == 0 )
+        break;
+      type.push_back( ch );
+    }
+    if( type.empty() )
+      break;
+
+    QString s = QString::fromUtf8( type.c_str(), type.size() );
+    mimeTypes.append( s );
+  }
+
   return true;
 }
 
-string ZimFile::getClusterData( quint32 cluster_nom )
+string ZimFile::getClusterData( quint32 cluster_nom, unsigned & blobs_offset_size )
 {
   // Check cache
   int target = 0;
@@ -330,6 +368,7 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   if( found )
   {
     // Cache hit
+    blobs_offset_size = cache[ target ].blobs_offset_size;
     return string( cache[ target ].data, cache[ target ].count );
   }
 
@@ -355,9 +394,11 @@ string ZimFile::getClusterData( quint32 cluster_nom )
 
   seek( clusterOffsets.at( nom ).first );
 
-  char compressionType;
-  if( !getChar( &compressionType ) )
+  char compressionType, cluster_info;
+  if( !getChar( &cluster_info ) )
     return string();
+  compressionType = cluster_info & 0x0F;
+  blobs_offset_size = cluster_info & 0x10 && zimHeader.majorVersion >= 6 ? 8 : 4;
 
   string decompressedData;
 
@@ -386,9 +427,16 @@ string ZimFile::getClusterData( quint32 cluster_nom )
   // Check BLOBs number in the cluster
   // We cache multi-element clusters only
 
-  quint32 firstOffset;
-  memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
-  quint32 blobCount = ( firstOffset - 4 ) / 4;
+  quint32 firstOffset32;
+  quint64 firstOffset;
+  if( blobs_offset_size == 8 )
+    memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
+  else
+  {
+    memcpy( &firstOffset32, decompressedData.data(), sizeof(firstOffset32) );
+    firstOffset = firstOffset32;
+  }
+  quint32 blobCount = ( firstOffset - blobs_offset_size ) / blobs_offset_size;
 
   if( blobCount > 1 )
   {
@@ -412,11 +460,51 @@ string ZimFile::getClusterData( quint32 cluster_nom )
       memcpy( cache[ target ].data, decompressedData.c_str(), size );
       cache[ target ].count = size;
       cache[ target ].clusterNumber = cluster_nom;
+      cache[ target ].blobs_offset_size = blobs_offset_size;
     }
   }
 
   return decompressedData;
 }
+
+quint16 ZimFile::redirectedMimeType( RedirectEntry const & redEntry )
+{
+  RedirectEntry current_entry = redEntry;
+  quint64 current_pos = pos();
+  quint16 mimetype = 0xFFFF;
+
+  for( ; ; )
+  {
+    quint32 current_nom = current_entry.redirectIndex;
+
+    seek( zimHeader.urlPtrPos + (quint64)current_nom * 8 );
+    quint64 new_pos;
+    if( read( reinterpret_cast< char * >( &new_pos ), sizeof(new_pos) ) != sizeof(new_pos) )
+      break;
+
+    seek( new_pos );
+    quint16 new_mimetype;
+    if( read( reinterpret_cast< char * >( &new_mimetype ), sizeof(new_mimetype) ) != sizeof(new_mimetype) )
+      break;
+
+    if( new_mimetype == 0xFFFF ) // Redirect to other article
+    {
+      if( read( reinterpret_cast< char * >( &current_entry ) + 2, sizeof( current_entry ) - 2 ) != sizeof( current_entry ) - 2 )
+        break;
+      if( current_nom == current_entry.redirectIndex )
+        break;
+    }
+    else
+    {
+      mimetype = new_mimetype;
+      break;
+    }
+  }
+
+  seek( current_pos );
+  return mimetype;
+}
+
 
 // Some supporting functions
 
@@ -518,23 +606,42 @@ quint32 readArticle( ZimFile & file, quint32 articleNumber, string & result,
 
     // Read cluster data
 
-    string decompressedData = file.getClusterData( artEntry.clusterNumber );
+    unsigned offset_size = 0;
+    string decompressedData = file.getClusterData( artEntry.clusterNumber, offset_size );
     if( decompressedData.empty() )
       break;
 
     // Take article data from cluster
 
-    quint32 firstOffset;
-    memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
-    quint32 blobCount = ( firstOffset - 4 ) / 4;
+    quint32 firstOffset32;
+    quint64 firstOffset;
+
+    if( offset_size == 8 )
+      memcpy( &firstOffset, decompressedData.data(), sizeof(firstOffset) );
+    else
+    {
+      memcpy( &firstOffset32, decompressedData.data(), sizeof(firstOffset32) );
+      firstOffset = firstOffset32;
+    }
+    quint32 blobCount = ( firstOffset - offset_size ) / offset_size;
     if( artEntry.blobNumber > blobCount )
       break;
 
-    quint32 offsets[ 2 ];
-    memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 4, sizeof(offsets) );
-    quint32 size = offsets[ 1 ] - offsets[ 0 ];
-
-    result.append( decompressedData, offsets[ 0 ], size );
+    quint32 size;
+    if( offset_size == 8 )
+    {
+      quint64 offsets[ 2 ];
+      memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 8, sizeof(offsets) );
+      size = offsets[ 1 ] - offsets[ 0 ];
+      result.append( decompressedData, offsets[ 0 ], size );
+    }
+    else
+    {
+      quint32 offsets[ 2 ];
+      memcpy( offsets, decompressedData.data() + artEntry.blobNumber * 4, sizeof(offsets) );
+      size = offsets[ 1 ] - offsets[ 0 ];
+      result.append( decompressedData, offsets[ 0 ], size );
+    }
 
     return articleNumber;
   }
@@ -1584,6 +1691,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           df.open();
           ZIM_header const & zh = df.header();
+          bool new_namespaces = ( zh.majorVersion >= 6 && zh.minorVersion >= 1 );
 
           if( zh.magicNumber != 0x44D495A )
             throw exNotZimFile( i->c_str() );
@@ -1620,7 +1728,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           }
 
           const quint64 * ptr;
-          quint16 mimetype;
+          quint16 mimetype, redirected_mime = 0xFFFF;
           ArticleEntry artEntry;
           RedirectEntry redEntry;
           string url, title;
@@ -1637,6 +1745,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               if( ret != sizeof(RedirectEntry) - 2 )
                 throw exCantReadFile( i->c_str() );
 
+              redirected_mime = df.redirectedMimeType( redEntry );
               nameSpace = redEntry.nameSpace;
             }
             else
@@ -1648,7 +1757,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
               nameSpace = artEntry.nameSpace;
 
-              if( nameSpace == 'A' )
+              if( ( nameSpace == 'A' || ( nameSpace == 'C' && new_namespaces ) ) && df.isArticleMime( mimetype ) )
                 articleCount++;
             }
 
@@ -1671,7 +1780,8 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               title.push_back( ch );
             }
 
-            if( nameSpace == 'A' )
+            if( nameSpace == 'A' || ( nameSpace == 'C' && new_namespaces && ( df.isArticleMime( mimetype )
+                                                                              || ( mimetype == 0xFFFF && df.isArticleMime( redirected_mime ) ) ) ) )
             {
               wstring word;
               if( !title.empty() )
@@ -1679,16 +1789,26 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               else
                 word = Utf8::decode( url );
 
-              if( maxHeadwordsToExpand && zh.articleCount >= maxHeadwordsToExpand )
-                indexedWords.addSingleWord( word, n );
+              if( df.isArticleMime( mimetype )
+                  || ( mimetype == 0xFFFF && df.isArticleMime( redirected_mime ) ) )
+              {
+                if( maxHeadwordsToExpand && zh.articleCount >= maxHeadwordsToExpand )
+                  indexedWords.addSingleWord( word, n );
+                else
+                  indexedWords.addWord( word, n );
+                wordCount++;
+              }
               else
-                indexedWords.addWord( word, n );
-              wordCount++;
+              {
+                url.insert( url.begin(), '/' );
+                url.insert( url.begin(), nameSpace );
+                indexedResources.addSingleWord( Utf8::decode( url ), n );
+              }
             }
             else
             if( nameSpace == 'M' )
             {
-              if( url.compare( "Title") == 0 )
+              if( url.compare( "Title" ) == 0 )
               {
                 idxHeader.namePtr = n;
                 string name;
@@ -1696,10 +1816,10 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                 initializing.indexingDictionary( name );
               }
               else
-              if( url.compare( "Description") == 0 )
+              if( url.compare( "Description" ) == 0 )
                 idxHeader.descriptionPtr = n;
               else
-              if( url.compare( "Language") == 0 )
+              if( url.compare( "Language" ) == 0 )
               {
                 string lang;
                 readArticle( df, n, lang );
@@ -1710,6 +1830,11 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   idxHeader.langFrom = LangCoder::findIdForLanguageCode3( lang.c_str() );
                 idxHeader.langTo = idxHeader.langFrom;
               }
+            }
+            else
+            if( nameSpace == 'X' )
+            {
+              continue;
             }
             else
             {

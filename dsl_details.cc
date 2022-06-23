@@ -208,7 +208,11 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             if( ch == L'\n' )
               break;
             if( ch != L'\r' )
+            {
+              if( escaped && ( ch == L'(' || ch == ')' ) )
+                linkTo.push_back( L'\\' );
               linkTo.push_back( ch );
+            }
           }
           linkTo = Folding::trimWhitespace( linkTo );
 

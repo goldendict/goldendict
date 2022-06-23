@@ -112,7 +112,7 @@ unsigned int ProcessWrapper::findProcess(const char *name, unsigned int pid_skip
     QDir pd("/proc");
     QFileInfoList list = pd.entryInfoList(QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
     QFileInfoList::iterator it, it_end = list.end();
-    for (it = list.begin(); it != it_end; it++)
+    for (it = list.begin(); it != it_end; ++it)
     {
         const QFileInfo &fi = *it;
         if (fi.baseName().at(0).isDigit()) {
