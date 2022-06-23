@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 #include <QVector>
 #include <QSet>
 #include <QList>
@@ -195,7 +196,7 @@ public:
   // Default - simple sorting in increase order
   virtual void sortArticlesOffsetsForFTS( QVector< uint32_t > & offsets,
                                           QAtomicInt & isCancelled )
-  { Q_UNUSED( isCancelled ); qSort( offsets ); }
+  { Q_UNUSED( isCancelled ); std::sort( offsets.begin(), offsets.end() ); }
 
   /// Called before each matching operation to ensure that any child init
   /// has completed. Mainly used for deferred init. The default implementation

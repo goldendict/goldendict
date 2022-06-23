@@ -109,7 +109,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   for( QStringList::iterator i = availHelps.begin(); i != availHelps.end(); ++i )
   {
-    QString loc = i->mid( 7, i->length() - 11 );
+    QString loc = i->mid( 7, i->length() - 11 ); // e.g. *i == "gdhelp_en.qch" => loc == "en"
     QString lang = loc.mid( 0, 2 );
     QString reg;
     if(loc.length() >= 5 )
@@ -152,6 +152,12 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
       ui.displayStyle->setCurrentIndex( x );
       break;
     }
+
+#ifdef Q_OS_WIN32
+  // 1 MB stands for 2^20 bytes on Windows. "MiB" is never used by this OS.
+  ui.maxNetworkCacheSize->setSuffix( tr( " MB" ) );
+#endif
+  ui.maxNetworkCacheSize->setToolTip( ui.maxNetworkCacheSize->toolTip().arg( Config::getNetworkCacheDir() ) );
 
   ui.newTabsOpenAfterCurrentOne->setChecked( p.newTabsOpenAfterCurrentOne );
   ui.newTabsOpenInBackground->setChecked( p.newTabsOpenInBackground );
@@ -204,7 +210,13 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.confirmFavoritesDeletion->setChecked( p.confirmFavoritesDeletion );
 
   ui.collapseBigArticles->setChecked( p.collapseBigArticles );
+  on_collapseBigArticles_toggled( ui.collapseBigArticles->isChecked() );
   ui.articleSizeLimit->setValue( p.articleSizeLimit );
+
+  ui.limitInputPhraseLength->setChecked( p.limitInputPhraseLength );
+  on_limitInputPhraseLength_toggled( ui.limitInputPhraseLength->isChecked() );
+  ui.inputPhraseLengthLimit->setValue( p.inputPhraseLengthLimit );
+
   ui.ignoreDiacritics->setChecked( p.ignoreDiacritics );
 
   ui.synonymSearchEnabled->setChecked( p.synonymSearchEnabled );
@@ -317,6 +329,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.disallowContentFromOtherSites->setChecked( p.disallowContentFromOtherSites );
   ui.enableWebPlugins->setChecked( p.enableWebPlugins );
   ui.hideGoldenDictHeader->setChecked( p.hideGoldenDictHeader );
+  ui.maxNetworkCacheSize->setValue( p.maxNetworkCacheSize );
+  ui.clearNetworkCacheOnExit->setChecked( p.clearNetworkCacheOnExit );
 
   // Add-on styles
   ui.addonStylesLabel->setVisible( ui.addonStyles->count() > 1 );
@@ -417,7 +431,9 @@ Config::Preferences Preferences::getPreferences()
   p.confirmFavoritesDeletion = ui.confirmFavoritesDeletion->isChecked();
 
   p.collapseBigArticles = ui.collapseBigArticles->isChecked();
-  p.articleSizeLimit = ui.articleSizeLimit->text().toInt();
+  p.articleSizeLimit = ui.articleSizeLimit->value();
+  p.limitInputPhraseLength = ui.limitInputPhraseLength->isChecked();
+  p.inputPhraseLengthLimit = ui.inputPhraseLengthLimit->value();
   p.ignoreDiacritics = ui.ignoreDiacritics->isChecked();
 
   p.synonymSearchEnabled = ui.synonymSearchEnabled->isChecked();
@@ -445,6 +461,8 @@ Config::Preferences Preferences::getPreferences()
   p.disallowContentFromOtherSites = ui.disallowContentFromOtherSites->isChecked();
   p.enableWebPlugins = ui.enableWebPlugins->isChecked();
   p.hideGoldenDictHeader = ui.hideGoldenDictHeader->isChecked();
+  p.maxNetworkCacheSize = ui.maxNetworkCacheSize->value();
+  p.clearNetworkCacheOnExit = ui.clearNetworkCacheOnExit->isChecked();
 
   p.addonStyle = ui.addonStyles->getCurrentStyle();
 
@@ -633,6 +651,21 @@ void Preferences::customProxyToggled( bool )
 {
   ui.customSettingsGroup->setEnabled( ui.customProxy->isChecked()
                                       && ui.useProxyServer->isChecked() );
+}
+
+void Preferences::on_maxNetworkCacheSize_valueChanged( int value )
+{
+  ui.clearNetworkCacheOnExit->setEnabled( value != 0 );
+}
+
+void Preferences::on_collapseBigArticles_toggled( bool checked )
+{
+  ui.articleSizeLimit->setEnabled( checked );
+}
+
+void Preferences::on_limitInputPhraseLength_toggled( bool checked )
+{
+  ui.inputPhraseLengthLimit->setEnabled( checked );
 }
 
 void Preferences::helpRequested()

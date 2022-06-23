@@ -174,6 +174,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
   root( Node::Tag(), wstring(), wstring() ), stringPos( str.c_str() ),
   lineStartPos( str.c_str() ),
   transcriptionCount( 0 ),
+  mediaCount( 0 ),
   dictionaryName( dictName ),
   headword( headword_ )
 {
@@ -207,7 +208,11 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             if( ch == L'\n' )
               break;
             if( ch != L'\r' )
+            {
+              if( escaped && ( ch == L'(' || ch == ')' ) )
+                linkTo.push_back( L'\\' );
               linkTo.push_back( ch );
+            }
           }
           linkTo = Folding::trimWhitespace( linkTo );
 
@@ -355,6 +360,18 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
             ++transcriptionCount;
         }
         
+        // If the tag is [s], we update the mediaCount
+        if ( name == GD_NATIVE_TO_WS( L"s" ) )
+        {
+          if ( isClosing )
+          {
+            if ( mediaCount )
+              --mediaCount;
+          }
+          else
+            ++mediaCount;
+        }
+
         if ( !isClosing )
         {
           if ( name == GD_NATIVE_TO_WS( L"m" ) ||
@@ -598,7 +615,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
         }
       }
 
-      if ( escaped && ch == L' ' )
+      if ( escaped && ch == L' ' && mediaCount == 0 )
         ch = 0xA0; // Escaped spaces turn into non-breakable ones in Lingvo
             
       textNode->text.push_back( ch );

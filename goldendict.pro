@@ -14,6 +14,18 @@ isEmpty( hasGit ) {
   system(echo $$VERSION > version.txt)
 }
 
+!CONFIG( verbose_build_output ) {
+  !win32|*-msvc* {
+    # Reduce build log verbosity except for MinGW builds (mingw-make cannot
+    # execute "@echo ..." commands inserted by qmake).
+    CONFIG += silent
+  }
+}
+
+CONFIG( release, debug|release ) {
+  DEFINES += NDEBUG
+}
+
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 
@@ -186,9 +198,9 @@ unix:!mac {
     desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
     INSTALLS += desktops
-    appdata.path = $$PREFIX/share/metainfo
-    appdata.files = redist/*.appdata.xml
-    INSTALLS += appdata
+    metainfo.path = $$PREFIX/share/metainfo
+    metainfo.files = redist/*.metainfo.xml
+    INSTALLS += metainfo
     helps.path = $$PREFIX/share/goldendict/help/
     helps.files = help/*.qch
     INSTALLS += helps
@@ -628,6 +640,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/eo_EO.ts \
     locale/fi_FI.ts \
     locale/jb_JB.ts \
+    locale/hi_IN.ts \
     locale/ie_001.ts
 
 # Build version file

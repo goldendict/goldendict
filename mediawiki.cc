@@ -7,6 +7,7 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QtXml>
+#include <algorithm>
 #include <list>
 #include "gddebug.hh"
 #include "audiolink.hh"
@@ -242,6 +243,26 @@ private:
   void addQuery( QNetworkAccessManager & mgr, wstring const & word );
 
   virtual void requestFinished( QNetworkReply * );
+
+  /// This simple set implementation should be much more efficient than tree-
+  /// and hash-based standard/Qt containers when there are very few elements.
+  template< typename T >
+  class SmallSet {
+  public:
+    bool insert( T x )
+    {
+      if( std::find( elements.begin(), elements.end(), x ) != elements.end() )
+        return false;
+      elements.push_back( x );
+      return true;
+    }
+  private:
+    std::vector< T > elements;
+  };
+
+  /// The page id set allows to filter out duplicate articles in case MediaWiki
+  /// redirects the main word and words in the alts collection to the same page.
+  SmallSet< long long > addedPageIds;
   Class * dictPtr;
 };
 
@@ -341,7 +362,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
       {
         QDomNode parseNode = dd.namedItem( "api" ).namedItem( "parse" );
   
-        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0" )
+        if ( !parseNode.isNull() && parseNode.toElement().attribute( "revid" ) != "0"
+             // Don't show the same article more than once:
+             && addedPageIds.insert( parseNode.toElement().attribute( "pageid" ).toLongLong() ) )
         {
           QDomNode textNode = parseNode.namedItem( "text" );
   
@@ -480,9 +503,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 #endif
             // audio url
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+            articleString.replace( QRegularExpression( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #else
-            articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.ogg(?:\\.mp3|))\"" ),
+            articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #endif
                                    QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
                                                                          this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
@@ -493,20 +516,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
             articleString.replace( "src=\"/", "src=\"" + wikiUrl.toString() );
 
             // Remove the /wiki/ prefix from links
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<a\\s+href=\"/wiki/" ), "<a href=\"" );
-#else
-            articleString.replace( QRegExp( "<a\\s+href=\"/wiki/" ), "<a href=\"" );
-#endif
+            articleString.replace( "<a href=\"/wiki/", "<a href=\"" );
 
-            //fix audio
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            articleString.replace( QRegularExpression( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>" ),
-#else
-            articleString.replace( QRegExp( "<button\\s+[^>]*(upload\\.wikimedia\\.org/wikipedia/commons/[^\"'&]*\\.ogg)[^>]*>\\s*<[^<]*</button>"),
-#endif
-                                            QString::fromStdString(addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + "://\\1\"", this->dictPtr->getId() ) +
-                                            "<a href=\"" + wikiUrl.scheme().toStdString() + "://\\1\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"></a>" ) );
             // In those strings, change any underscores to spaces
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
             QRegularExpression rxLink( "<a\\s+href=\"[^/:\">#]+" );

@@ -50,6 +50,24 @@
 using std::map;
 using std::list;
 
+/// This class exposes only slim, minimal API to JavaScript clients in order to
+/// reduce attack surface available to potentionally malicious external scripts.
+class ArticleViewJsProxy: public QObject
+{
+  Q_OBJECT
+public:
+  /// Note: view becomes the parent of this proxy object.
+  explicit ArticleViewJsProxy( ArticleView & view ):
+    QObject( &view ), articleView( view )
+  {}
+
+  Q_INVOKABLE void onJsActiveArticleChanged( QString const & id )
+  { articleView.onJsActiveArticleChanged( id ); }
+
+private:
+  ArticleView & articleView;
+};
+
 /// AccentMarkHandler class
 ///
 /// Remove accent marks from text
@@ -183,6 +201,30 @@ static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString
         .arg( variable ) );
 }
 
+namespace {
+
+char const * const scrollToPrefix = "gdfrom-";
+
+bool isScrollTo( QString const & id )
+{
+  return id.startsWith( scrollToPrefix );
+}
+
+QString dictionaryIdFromScrollTo( QString const & scrollTo )
+{
+  Q_ASSERT( isScrollTo( scrollTo ) );
+  const int scrollToPrefixLength = 7;
+  return scrollTo.mid( scrollToPrefixLength );
+}
+
+} // unnamed namespace
+
+QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
+{
+  Q_ASSERT( !isScrollTo( dictionaryId ) );
+  return scrollToPrefix + dictionaryId;
+}
+
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
@@ -198,6 +240,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   groups( groups_ ),
   popupView( popupView_ ),
   cfg( cfg_ ),
+  jsProxy( new ArticleViewJsProxy( *this ) ),
   pasteAction( this ),
   articleUpAction( this ),
   articleDownAction( this ),
@@ -352,7 +395,7 @@ ArticleView::~ArticleView()
 #endif
 }
 
-void ArticleView::showDefinition( QString const & word, unsigned group,
+void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
 {
@@ -364,7 +407,9 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", word );
+  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
+  if ( !phrase.punctuationSuffix.isEmpty() )
+    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
   Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
   if( cfg.preferences.ignoreDiacritics )
     Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
@@ -399,9 +444,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   if ( mutedDicts.size() )
     Qt4x5::Url::addQueryItem( req,  "muted", mutedDicts );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
-  emit sendWordToHistory( word );
+  // Update headwords history
+  emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
   closeSearch();
@@ -411,10 +455,17 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
+}
+
+void ArticleView::showDefinition( QString const & word, unsigned group,
+                                  QString const & scrollTo,
+                                  Contexts const & contexts_ )
+{
+  showDefinition( Config::InputPhrase::fromPhrase( word ), group, scrollTo, contexts_ );
 }
 
 void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
@@ -442,8 +493,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   if( ignoreDiacritics )
     Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
-  // Update both histories (pages history and headwords history)
-  saveHistoryUserData();
+  // Update headwords history
   emit sendWordToHistory( word );
 
   // Any search opened is probably irrelevant now
@@ -454,7 +504,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   emit setExpandMode( expandOptionalParts );
 
-  ui.definition->load( req );
+  load( req );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -511,56 +561,59 @@ void ArticleView::loadFinished( bool )
     qApp->sendEvent( ui.definition, &ev );
   }
 
-  QVariant userDataVariant = ui.definition->history()->currentItem().userData();
+  // Expand collapsed article if only one loaded
+  ui.definition->page()->mainFrame()->evaluateJavaScript( "gdCheckArticlesNumber();" );
 
+  QVariant userDataVariant = ui.definition->history()->currentItem().userData();
   if ( userDataVariant.type() == QVariant::Map )
   {
     QMap< QString, QVariant > userData = userDataVariant.toMap();
 
-    QString currentArticle = userData.value( "currentArticle" ).toString();
-
-    if ( currentArticle.size() )
-    {
-      // There's an active article saved, so set it to be active.
-      setCurrentArticle( currentArticle );
-    }
-
     double sx = 0, sy = 0;
+    bool moveToCurrentArticle = true;
 
     if ( userData.value( "sx" ).type() == QVariant::Double )
+    {
       sx = userData.value( "sx" ).toDouble();
+      moveToCurrentArticle = false;
+    }
 
     if ( userData.value( "sy" ).type() == QVariant::Double )
+    {
       sy = userData.value( "sy" ).toDouble();
+      moveToCurrentArticle = false;
+    }
+
+    const QString currentArticle = userData.value( "currentArticle" ).toString();
+    if( !currentArticle.isEmpty() )
+    {
+      // There's a current article saved, so set it to be current.
+      // If a scroll position was stored - even (0, 0) - don't move to the
+      // current article.
+      setCurrentArticle( currentArticle, moveToCurrentArticle );
+    }
 
     if ( sx != 0 || sy != 0 )
     {
-      // Restore scroll position
+      // Restore scroll position if at least one non-zero coordinate was stored.
+      // Moving to (0, 0) is a no-op, so don't restore it.
       ui.definition->page()->mainFrame()->evaluateJavaScript(
           QString( "window.scroll( %1, %2 );" ).arg( sx ).arg( sy ) );
     }
   }
   else
-  if ( Qt4x5::Url::queryItemValue( url, "scrollto" ).startsWith( "gdfrom-" ) )
   {
-    // There is no active article saved in history, but we have it as a parameter.
-    // setCurrentArticle will save it and scroll there.
-    setCurrentArticle( Qt4x5::Url::queryItemValue( url, "scrollto" ), true );
+    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    if( isScrollTo( scrollTo ) )
+    {
+      // There is no active article saved in history, but we have it as a parameter.
+      // setCurrentArticle will save it and scroll there.
+      setCurrentArticle( scrollTo, true );
+    }
   }
-
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
-
-  // Expand collapsed article if only one loaded
-  ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "gdCheckArticlesNumber();" ) );
-
-  // Jump to current article after page reloading
-  if( !articleToJump.isEmpty() )
-  {
-    setCurrentArticle( articleToJump, true );
-    articleToJump.clear();
-  }
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
@@ -666,10 +719,10 @@ QStringList ArticleView::getArticlesList()
 QString ArticleView::getActiveArticleId()
 {
   QString currentArticle = getCurrentArticle();
-  if ( !currentArticle.startsWith( "gdfrom-" ) )
+  if ( !isScrollTo( currentArticle ) )
     return QString(); // Incorrect id
 
-  return currentArticle.mid( 7 );
+  return dictionaryIdFromScrollTo( currentArticle );
 }
 
 QString ArticleView::getCurrentArticle()
@@ -684,7 +737,7 @@ QString ArticleView::getCurrentArticle()
 
 void ArticleView::jumpToDictionary( QString const & id, bool force )
 {
-  QString targetArticle = "gdfrom-" + id;
+  QString targetArticle = scrollToFromDictionaryId( id );
 
   // jump only if neceessary, or when forced
   if ( force || targetArticle != getCurrentArticle() )
@@ -693,27 +746,25 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
   }
 }
 
-void ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
+bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
-  if ( !id.startsWith( "gdfrom-" ) )
-    return; // Incorrect id
+  if ( !isScrollTo( id ) )
+    return false; // Incorrect id
 
   if ( !ui.definition->isVisible() )
-    return; // No action on background page, scrollIntoView there don't work
+    return false; // No action on background page, scrollIntoView there don't work
 
-  if ( getArticlesList().contains( id.mid( 7 ) ) )
-  {
-    if ( moveToIt )
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
+  QString const dictionaryId = dictionaryIdFromScrollTo( id );
+  if( !getArticlesList().contains( dictionaryId ) )
+    return false;
 
-    QMap< QString, QVariant > userData = ui.definition->history()->
-                                         currentItem().userData().toMap();
-    userData[ "currentArticle" ] = id;
-    ui.definition->history()->currentItem().setUserData( userData );
+  if ( moveToIt )
+    ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
 
-    ui.definition->page()->mainFrame()->evaluateJavaScript(
-      QString( "gdMakeArticleActive( '%1' );" ).arg( id.mid( 7 ) ) );
-  }
+  ui.definition->page()->mainFrame()->evaluateJavaScript(
+    QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
+
+  return true;
 }
 
 void ArticleView::selectCurrentArticle()
@@ -728,7 +779,8 @@ bool ArticleView::isFramedArticle( QString const & ca )
     return false;
 
   return ui.definition->page()->mainFrame()->
-               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" ).arg( ca.mid( 7 ) ) ).toBool();
+               evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" )
+                                          .arg( dictionaryIdFromScrollTo( ca ) ) ).toBool();
 }
 
 bool ArticleView::isExternalLink( QUrl const & url )
@@ -756,8 +808,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
       if ( result.type() == QVariant::String )
       {
         // Looks this way
-
-        contexts[ ca.mid( 7 ) ] = QString::fromLatin1( url.toEncoded() );
+        contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
 
         QUrl target;
 
@@ -789,7 +840,7 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
 
     if ( frameName.startsWith( "gdexpandframe-" ) )
     {
-      QString newCurrent = "gdfrom-" + frameName.mid( 14 );
+      QString newCurrent = scrollToFromDictionaryId( frameName.mid( 14 ) );
 
       if ( getCurrentArticle() != newCurrent )
         setCurrentArticle( newCurrent, false );
@@ -815,6 +866,12 @@ void ArticleView::saveHistoryUserData()
   userData[ "sy" ] = ui.definition->page()->mainFrame()->evaluateJavaScript( "window.scrollY;" ).toDouble();
 
   ui.definition->history()->currentItem().setUserData( userData );
+}
+
+void ArticleView::load( QUrl const & url )
+{
+  saveHistoryUserData();
+  ui.definition->load( url );
 }
 
 void ArticleView::cleanupTemp()
@@ -1099,7 +1156,7 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
 
 void ArticleView::attachToJavaScript()
 {
-  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( QString( "articleview" ), this );
+  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( "articleview", jsProxy );
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )
@@ -1138,7 +1195,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
 
   if( url.scheme().compare( "gdpicture" ) == 0 )
   {
-    ui.definition->load( url );
+    load( url );
     return true;
   }
   if ( url.scheme().compare( "bword" ) == 0 )
@@ -1183,7 +1240,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
         {
           if( dictName.compare( QString::fromUtf8( allDictionaries[ i ]->getName().c_str() ) ) == 0 )
           {
-            newScrollTo = QString( "gdfrom-" ) + QString::fromUtf8( allDictionaries[ i ]->getId().c_str() );
+            newScrollTo = scrollToFromDictionaryId( QString::fromUtf8( allDictionaries[ i ]->getId().c_str() ) );
             break;
           }
         }
@@ -1597,9 +1654,7 @@ void ArticleView::updateMutedContents()
     if ( mutedDicts.size() )
     Qt4x5::Url::addQueryItem( currentUrl, "muted", mutedDicts );
 
-    saveHistoryUserData();
-
-    ui.definition->load( currentUrl );
+    load( currentUrl );
 
     //QApplication::setOverrideCursor( Qt::WaitCursor );
     ui.definition->setCursor( Qt::WaitCursor );
@@ -1638,6 +1693,25 @@ void ArticleView::forward()
 {
   saveHistoryUserData();
   ui.definition->forward();
+}
+
+void ArticleView::reload()
+{
+  QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
+
+  // Save current article, which can be empty
+  userData[ "currentArticle" ] = getCurrentArticle();
+
+  // Remove saved window position. Reloading occurs in response to changes that
+  // may affect content height, so restoring the current window position can cause
+  // uncontrolled jumps. Scrolling to the current article (i.e. jumping to the top
+  // of it) is simple, reliable and predictable, if not ideal.
+  userData[ "sx" ].clear();
+  userData[ "sy" ].clear();
+
+  ui.definition->history()->currentItem().setUserData( userData );
+
+  ui.definition->reload();
 }
 
 bool ArticleView::hasSound()
@@ -1681,6 +1755,13 @@ QString ArticleView::toHtml()
 QString ArticleView::getTitle()
 {
   return ui.definition->page()->mainFrame()->title();
+}
+
+Config::InputPhrase ArticleView::getPhrase() const
+{
+  const QUrl url = ui.definition->url();
+  return Config::InputPhrase( Qt4x5::Url::queryItemValue( url, "word" ),
+                              Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
 }
 
 void ArticleView::print( QPrinter * printer ) const
@@ -1968,7 +2049,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
         fileName = savePath + "/" + name;
         fileName = QFileDialog::getSaveFileName( parentWidget(), tr( "Save sound" ),
                                                  fileName,
-                                                 tr( "Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)" ) );
+                                                 tr( "Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)" ) );
       }
       else
       {
@@ -2003,7 +2084,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       QString id = tableOfContents[ result ];
 
       if ( id.size() )
-        setCurrentArticle( "gdfrom-" + id, true );
+        setCurrentArticle( scrollToFromDictionaryId( id ), true );
     }
   }
 #if 0
@@ -2102,13 +2183,9 @@ void ArticleView::audioPlayerError( QString const & message )
 
 void ArticleView::pasteTriggered()
 {
-  QString text =
-      gd::toQString(
-          Folding::trimWhitespaceOrPunct(
-              gd::toWString(
-                  QApplication::clipboard()->text() ) ) );
+  Config::InputPhrase phrase = cfg.preferences.sanitizeInputPhrase( QApplication::clipboard()->text() );
 
-  if ( text.size() )
+  if ( phrase.isValid() )
   {
     unsigned groupId = getGroup( ui.definition->url() );
     if ( groupId == 0 )
@@ -2117,7 +2194,7 @@ void ArticleView::pasteTriggered()
       // so let's try the currently selected group.
       groupId = groupComboBox->getCurrentGroup();
     }
-    showDefinition( text, groupId, getCurrentArticle() );
+    showDefinition( phrase, groupId, getCurrentArticle() );
   }
 }
 
@@ -2129,7 +2206,7 @@ void ArticleView::moveOneArticleUp()
   {
     QStringList lst = getArticlesList();
 
-    int idx = lst.indexOf( current.mid( 7 ) );
+    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
 
     if ( idx != -1 )
     {
@@ -2138,7 +2215,7 @@ void ArticleView::moveOneArticleUp()
       if ( idx < 0 )
         idx = lst.size() - 1;
 
-      setCurrentArticle( "gdfrom-" + lst[ idx ], true );
+      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
     }
   }
 }
@@ -2151,13 +2228,13 @@ void ArticleView::moveOneArticleDown()
   {
     QStringList lst = getArticlesList();
 
-    int idx = lst.indexOf( current.mid( 7 ) );
+    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
 
     if ( idx != -1 )
     {
       idx = ( idx + 1 ) % lst.size();
 
-      setCurrentArticle( "gdfrom-" + lst[ idx ], true );
+      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
     }
   }
 }
@@ -2225,7 +2302,7 @@ void ArticleView::on_searchCloseButton_clicked()
 
 void ArticleView::on_searchCaseSensitive_clicked()
 {
-  performFindOperation( false, false, true );
+  performFindOperation( true, false );
 }
 
 void ArticleView::on_highlightAllButton_clicked()
@@ -2235,10 +2312,10 @@ void ArticleView::on_highlightAllButton_clicked()
 
 void ArticleView::onJsActiveArticleChanged(QString const & id)
 {
-  if ( !id.startsWith( "gdfrom-" ) )
+  if ( !isScrollTo( id ) )
     return; // Incorrect id
 
-  emit activeArticleChanged( this, id.mid( 7 ) );
+  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
 }
 
 void ArticleView::doubleClicked( QPoint pos )
@@ -2468,25 +2545,12 @@ void ArticleView::showEvent( QShowEvent * ev )
 void ArticleView::receiveExpandOptionalParts( bool expand )
 {
   if( expandOptionalParts != expand )
-  {
-    int n = getArticlesList().indexOf( getActiveArticleId() );
-    if( n > 0 )
-       articleToJump = getCurrentArticle();
-
-    emit setExpandMode( expand );
-    expandOptionalParts = expand;
-    reload();
-  }
+    switchExpandOptionalParts();
 }
 
 void ArticleView::switchExpandOptionalParts()
 {
   expandOptionalParts = !expandOptionalParts;
-
-  int n = getArticlesList().indexOf( getActiveArticleId() );
-  if( n > 0 )
-    articleToJump = getCurrentArticle();
-
   emit setExpandMode( expandOptionalParts );
   reload();
 }
@@ -2620,17 +2684,9 @@ void ArticleView::highlightFTSResults()
   if( ftsSearchMatchCase )
     flags |= QWebPage::FindCaseSensitively;
 
-#if QT_VERSION >= 0x040600
-  flags |= QWebPage::HighlightAllOccurrences;
-
-  for( int x = 0; x < allMatches.size(); x++ )
-    ui.definition->findText( allMatches.at( x ), flags );
-
-  flags &= ~QWebPage::HighlightAllOccurrences;
-#endif
-
   if( !allMatches.isEmpty() )
   {
+    highlightAllFtsOccurences( flags );
     if( ui.definition->findText( allMatches.at( 0 ), flags ) )
     {
         ui.definition->page()->currentFrame()->
@@ -2644,6 +2700,27 @@ void ArticleView::highlightFTSResults()
   ui.ftsSearchNext->setEnabled( allMatches.size()>1 );
 
   ftsSearchIsOpened = true;
+}
+
+void ArticleView::highlightAllFtsOccurences( QWebPage::FindFlags flags )
+{
+  flags |= QWebPage::HighlightAllOccurrences;
+
+  // Usually allMatches contains mostly duplicates. Thus searching for each element of
+  // allMatches to highlight them takes a long time => collect unique elements into a
+  // set and search for them instead.
+  // Don't use QList::toSet() or QSet's range constructor because they reserve space
+  // for QList::size() elements, whereas the final QSet size is likely 1 or 2.
+  QSet< QString > uniqueMatches;
+  for( int x = 0; x < allMatches.size(); ++x )
+  {
+    QString const & match = allMatches.at( x );
+    // Consider words that differ only in case equal if the search is case-insensitive.
+    uniqueMatches.insert( ftsSearchMatchCase ? match : match.toLower() );
+  }
+
+  for( QSet< QString >::const_iterator it = uniqueMatches.constBegin(); it != uniqueMatches.constEnd(); ++it )
+    ui.definition->findText( *it, flags );
 }
 
 void ArticleView::performFtsFindOperation( bool backwards )
@@ -3050,3 +3127,5 @@ void ResourceToSaveHandler::downloadFinished()
     deleteLater();
   }
 }
+
+#include "articleview.moc"

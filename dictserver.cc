@@ -833,92 +833,95 @@ void DictServerArticleRequest::run()
             else
               articleStr = Html::preformat( articleText.toUtf8().data() );
 
-            articleText = QString::fromUtf8( articleStr.c_str(), articleStr.size() )
-                          .replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>" );
+            articleText = QString::fromUtf8( articleStr.c_str(), articleStr.size() );
+            if( !contentInHtml )
+            {
+              articleText = articleText.replace(refs, "<a href=\"gdlookup://localhost/\\1\">\\1</a>" );
 
-            pos = 0;
+              pos = 0;
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-            QString articleNewText;
+              QString articleNewText;
 
-            // Handle phonetics
+              // Handle phonetics
 
-            QRegularExpressionMatchIterator it = phonetic.globalMatch( articleText );
-            while( it.hasNext() )
-            {
-              QRegularExpressionMatch match = it.next();
-              articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
-              pos = match.capturedEnd();
+              QRegularExpressionMatchIterator it = phonetic.globalMatch( articleText );
+              while( it.hasNext() )
+              {
+                QRegularExpressionMatch match = it.next();
+                articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+                pos = match.capturedEnd();
 
-              QString phonetic_text = match.captured( 1 );
-              phonetic_text.replace( divs_inside_phonetic, "</span></div\\1><div\\2><span class=\"dictd_phonetic\">" );
+                QString phonetic_text = match.captured( 1 );
+                phonetic_text.replace( divs_inside_phonetic, "</span></div\\1><div\\2><span class=\"dictd_phonetic\">" );
 
-              articleNewText += "<span class=\"dictd_phonetic\">" + phonetic_text + "</span>";
-            }
-            if( pos )
-            {
-              articleNewText += articleText.midRef( pos );
-              articleText = articleNewText;
-              articleNewText.clear();
-            }
+                articleNewText += "<span class=\"dictd_phonetic\">" + phonetic_text + "</span>";
+              }
+              if( pos )
+              {
+                articleNewText += articleText.midRef( pos );
+                articleText = articleNewText;
+                articleNewText.clear();
+              }
 
-            // Handle links
+              // Handle links
 
-            pos = 0;
-            it = links.globalMatch( articleText );
-            while( it.hasNext() )
-            {
-              QRegularExpressionMatch match = it.next();
-              articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
-              pos = match.capturedEnd();
+              pos = 0;
+              it = links.globalMatch( articleText );
+              while( it.hasNext() )
+              {
+                QRegularExpressionMatch match = it.next();
+                articleNewText += articleText.midRef( pos, match.capturedStart() - pos );
+                pos = match.capturedEnd();
 
-              QString link = match.captured( 1 );
-              link.replace( tags, " " );
-              link.replace( "&nbsp;", " " );
+                QString link = match.captured( 1 );
+                link.replace( tags, " " );
+                link.replace( "&nbsp;", " " );
 
-              QString newLink = match.captured();
-              newLink.replace( 30, match.capturedLength( 1 ),
-                               QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
-              articleNewText += newLink;
-            }
-            if( pos )
-            {
-              articleNewText += articleText.midRef( pos );
-              articleText = articleNewText;
-              articleNewText.clear();
-            }
+                QString newLink = match.captured();
+                newLink.replace( 30, match.capturedLength( 1 ),
+                                 QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
+                articleNewText += newLink;
+              }
+              if( pos )
+              {
+                articleNewText += articleText.midRef( pos );
+                articleText = articleNewText;
+                articleNewText.clear();
+              }
 #else
-            // Handle phonetics
+              // Handle phonetics
 
-            for( ; ; )
-            {
-              pos = articleText.indexOf( phonetic, pos );
-              if( pos < 0 )
-                break;
+              for( ; ; )
+              {
+                pos = articleText.indexOf( phonetic, pos );
+                if( pos < 0 )
+                  break;
 
-              QString phonetic_text = phonetic.cap( 1 );
-              phonetic_text.replace( divs_inside_phonetic, "</span></div\\1><div\\2><span class=\"dictd_phonetic\">" );
-              phonetic_text = "<span class=\"dictd_phonetic\">" + phonetic_text + "</span>";
-              articleText.replace( pos, phonetic.cap().length(), phonetic_text );
-              pos += phonetic_text.length();
-            }
+                QString phonetic_text = phonetic.cap( 1 );
+                phonetic_text.replace( divs_inside_phonetic, "</span></div\\1><div\\2><span class=\"dictd_phonetic\">" );
+                phonetic_text = "<span class=\"dictd_phonetic\">" + phonetic_text + "</span>";
+                articleText.replace( pos, phonetic.cap().length(), phonetic_text );
+                pos += phonetic_text.length();
+              }
 
-            // Handle links
+              // Handle links
 
-            pos = 0;
-            for( ; ; )
-            {
-              pos = articleText.indexOf( links, pos );
-              if( pos < 0 )
-                break;
+              pos = 0;
+              for( ; ; )
+              {
+                pos = articleText.indexOf( links, pos );
+                if( pos < 0 )
+                  break;
 
-              QString link = links.cap( 1 );
-              link.replace( tags, " " );
-              link.replace( "&nbsp;", " " );
-              articleText.replace( pos + 30, links.cap( 1 ).length(),
-                                   QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
-              pos += 30;
-            }
+                QString link = links.cap( 1 );
+                link.replace( tags, " " );
+                link.replace( "&nbsp;", " " );
+                articleText.replace( pos + 30, links.cap( 1 ).length(),
+                                     QString::fromUtf8( QUrl::toPercentEncoding( link.simplified() ) ) );
+                pos += 30;
+              }
 #endif
+            }
 
             articleData += string( "<div class=\"dictd_article\">" )
                            + articleText.toUtf8().data()

@@ -15,6 +15,7 @@
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
 
+class ArticleViewJsProxy;
 class ResourceToSaveHandler;
 
 /// A widget with the web view tailored to view and handle articles -- it
@@ -32,13 +33,14 @@ class ArticleView: public QFrame
 
   Ui::ArticleView ui;
 
+  ArticleViewJsProxy * const jsProxy;
+
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
           copyAsTextAction, inspectAction;
   QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
-  QString articleToJump;
   QString rangeVarName;
 
   /// Any resource we've decided to download off the dictionary gets stored here.
@@ -61,8 +63,8 @@ class ArticleView: public QFrame
   int ftsPosition;
 
   void highlightFTSResults();
+  void highlightAllFtsOccurences( QWebPage::FindFlags flags );
   void performFtsFindOperation( bool backwards );
-  void showFindButtons();
 
 public:
   /// The popupView flag influences contents of the context menus to be
@@ -90,12 +92,19 @@ public:
 
   typedef QMap< QString, QString > Contexts;
 
+  /// Returns "gdfrom-" + dictionaryId.
+  static QString scrollToFromDictionaryId( QString const & dictionaryId );
+
   /// Shows the definition of the given word with the given group.
   /// scrollTo can be optionally set to a "gdfrom-xxxx" identifier to position
   /// the page to that article on load.
   /// contexts is an optional map of context values to be passed for dictionaries.
   /// The only values to pass here are ones obtained from showDefinitionInNewTab()
   /// signal or none at all.
+  void showDefinition( Config::InputPhrase const & phrase, unsigned group,
+                       QString const & scrollTo = QString(),
+                       Contexts const & contexts = Contexts() );
+
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
@@ -146,8 +155,7 @@ public slots:
 public:
 
   /// Reloads the view
-  void reload()
-  { ui.definition->reload(); }
+  void reload();
 
   /// Returns true if there's an audio reference on the page, false otherwise.
   bool hasSound();
@@ -163,6 +171,9 @@ public:
 
   /// Returns current article's title
   QString getTitle();
+
+  /// Returns the phrase translated by the current article.
+  Config::InputPhrase getPhrase() const;
 
   /// Prints current article
   void print( QPrinter * ) const;
@@ -313,7 +324,8 @@ private:
 
   /// Sets the current article by executing a javascript code.
   /// If moveToIt is true, it moves the focus to it as well.
-  void setCurrentArticle( QString const &, bool moveToIt = false );
+  /// Returns true in case of success, false otherwise.
+  bool setCurrentArticle( QString const &, bool moveToIt = false );
 
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.
@@ -335,6 +347,9 @@ private:
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
   void saveHistoryUserData();
+
+  /// Loads a page at @p url into view.
+  void load( QUrl const & url );
 
   /// Attempts removing last temporary file created.
   void cleanupTemp();

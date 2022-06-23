@@ -28,9 +28,17 @@ void createMapping()
       return;
 
     CFDataRef dataRef = ( CFDataRef )TISGetInputSourceProperty( inputSourceRef,
-                                     kTISPropertyUnicodeKeyLayoutData );
+                                     kTISPropertyUnicodeKeyLayoutData ); 
+                        // this method returns null under macos Japanese input method(and also Chinese), which causes cmd+C+C not to be registered as a hotkey
     if( !dataRef )
-      return;
+    {
+        // solve the null value under Japanese keyboard
+        inputSourceRef = TISCopyCurrentKeyboardLayoutInputSource();
+        dataRef = static_cast<CFDataRef>((TISGetInputSourceProperty(inputSourceRef, kTISPropertyUnicodeKeyLayoutData)));
+        if (!dataRef) {
+          return;
+        }
+    }
 
     const UCKeyboardLayout * keyboardLayoutPtr = ( const UCKeyboardLayout * )CFDataGetBytePtr( dataRef );
     if( !keyboardLayoutPtr )

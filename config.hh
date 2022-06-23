@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QKeySequence>
 #include <QSet>
+#include <QMetaType>
 #include "cpp_features.hh"
 #include "ex.hh"
 
@@ -243,6 +244,38 @@ enum ScanPopupWindowFlags
 };
 ScanPopupWindowFlags spwfFromInt( int id );
 
+struct InputPhrase
+{
+  InputPhrase()
+  {}
+
+  InputPhrase( QString const & _phrase, QString const & _suffix ) :
+    phrase( _phrase ),
+    punctuationSuffix( _suffix )
+  {}
+
+  static InputPhrase fromPhrase( QString const & phrase )
+  {
+    return InputPhrase( phrase, QString() );
+  }
+
+  bool isValid() const { return !phrase.isEmpty(); }
+
+  QString phraseWithSuffix() const { return phrase + punctuationSuffix; }
+
+  QString phrase;
+  QString punctuationSuffix;
+};
+
+inline bool operator == ( InputPhrase const & a, InputPhrase const & b )
+{
+  return a.phrase == b.phrase && a.punctuationSuffix == b.punctuationSuffix;
+}
+inline bool operator != ( InputPhrase const & a, InputPhrase const & b )
+{
+  return !( a == b );
+}
+
 /// Various user preferences
 struct Preferences
 {
@@ -302,6 +335,8 @@ struct Preferences
   bool disallowContentFromOtherSites;
   bool enableWebPlugins;
   bool hideGoldenDictHeader;
+  int maxNetworkCacheSize;
+  bool clearNetworkCacheOnExit;
 
   qreal zoomFactor;
   qreal helpZoomFactor;
@@ -318,6 +353,10 @@ struct Preferences
 
   bool collapseBigArticles;
   int articleSizeLimit;
+
+  bool limitInputPhraseLength;
+  int inputPhraseLengthLimit;
+  InputPhrase sanitizeInputPhrase( QString const & inputPhrase ) const;
 
   unsigned short maxDictionaryRefsInContextMenu;
 #ifndef Q_WS_X11
@@ -638,6 +677,7 @@ struct Class
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
   QByteArray inspectorGeometry; // Geometry of WebKit inspector window
+  QByteArray dictionariesDialogGeometry; // Geometry of Dictionaries dialog
   QByteArray helpWindowGeometry; // Geometry of help window
   QByteArray helpSplitterState; // Geometry of help splitter
 
@@ -718,6 +758,7 @@ private:
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )
+DEF_EX( exCantUseDataDir, "Can't use XDG_DATA_HOME directory to store GoldenDict data", exError )
 DEF_EX( exCantUseHomeDir, "Can't use home directory to store GoldenDict preferences", exError )
 DEF_EX( exCantUseIndexDir, "Can't use index directory to store GoldenDict index files", exError )
 DEF_EX( exCantReadConfigFile, "Can't read the configuration file", exError )
@@ -788,7 +829,14 @@ QString getPortableVersionMorphoDir() throw();
 /// Returns the add-on styles directory.
 QString getStylesDir() throw();
 
+/// Returns the directory where user-specific non-essential (cached) data should be written.
+QString getCacheDir() throw();
+
+/// Returns the article network disk cache directory.
+QString getNetworkCacheDir() throw();
+
 }
 
-#endif
+Q_DECLARE_METATYPE( Config::InputPhrase )
 
+#endif

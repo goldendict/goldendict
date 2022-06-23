@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.0" language="hi_IN">
 <context>
     <name>About</name>
     <message>
@@ -48,7 +48,7 @@
     <message>
         <location filename="../article_maker.cc" line="245"/>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; के लिए &lt;b&gt;%2&lt;/b&gt; समूह में कोई अनुवाद नही ।/translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; के लिए &lt;b&gt;%2&lt;/b&gt; समूह में कोई अनुवाद नही ।</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="250"/>
@@ -644,7 +644,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../dictheadwords.ui" line="43"/>
         <source>Match case</source>
-        <translation>अक्षरप्रकार मिलाएँ/translation>
+        <translation>अक्षरप्रकार मिलाएँ</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
@@ -1305,7 +1305,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../groups.ui" line="156"/>
         <source>Auto groups</source>
-        <translationस्वतः समूह</translation>
+        <translation>स्वतः समूह</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="163"/>
@@ -1801,7 +1801,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../language.cc" line="112"/>
         <source>Hebrew</source>
-        <translationहेब्रु</translation>
+        <translation>हेब्रु</translation>
     </message>
     <message>
         <location filename="../language.cc" line="113"/>
@@ -3543,7 +3543,7 @@ the application.</source>
     <message>
         <location filename="../preferences.ui" line="167"/>
         <source>Select word by single click</source>
-        <translation>एकल क्लिक द्वारा शब्द का चयन करें/translation>
+        <translation>एकल क्लिक द्वारा शब्द का चयन करें</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="53"/>
@@ -3778,12 +3778,12 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
         <translation type="unfinished">जब गोल्डेंडिक्ट में उसकी खिड़कियों में से चयन या क्लिपबोर्ड बदले तब पॉपअप न दिखाएं</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
         <translation>गोल्डेंडिक्ट के अपने चयन और क्लिपबोर्ड परिवर्तनों को अनदेखा करें</translation>
     </message>
     <message>
@@ -3824,7 +3824,7 @@ seconds, which is specified here.</source>
     <message>
         <location filename="../preferences.ui" line="823"/>
         <source>The hotkeys are global and work from any program and within any context as long as GoldenDict is running in background.</source>
-        <translation>त्वरयितृ-कीलें वैश्विक हैं और किसी भी प्रोग्राम से तथा किसी भी संदर्भ में जब तक गोल्डनडिक्ट पृष्ठभूमि में चल रहा है।<translation>
+        <translation>त्वरयितृ-कीलें वैश्विक हैं और किसी भी प्रोग्राम से तथा किसी भी संदर्भ में जब तक गोल्डनडिक्ट पृष्ठभूमि में चल रहा है।</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="833"/>
@@ -4920,7 +4920,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../sources.ui" line="634"/>
         <source>Transliteration</source>
-        <translation>लिप्यंतरण</</translation>
+        <translation>लिप्यंतरण</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="655"/>

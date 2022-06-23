@@ -168,7 +168,7 @@ bool MdictParser::readNextHeadWordIndex( MdictParser::HeadWordIndex & headWordIn
     return false;
 
   headWordIndex = splitHeadWordBlock( decompressed );
-  headWordBlockInfosIter_++;
+  ++headWordBlockInfosIter_;
   return true;
 }
 

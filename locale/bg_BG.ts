@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="bg_BG">
+<TS version="2.0" language="bg_BG">
 <context>
     <name>About</name>
     <message>
@@ -978,7 +978,7 @@ between classic and school orthography in cyrillic)</source>
     <name>GroupSelectorWidget</name>
     <message>
         <source>Look in</source>
-        <translation>Търсене в</translation>
+        <translation type="obsolete">Търсене в</translation>
     </message>
 </context>
 <context>
@@ -2812,7 +2812,7 @@ the application.</source>
     </message>
     <message>
         <source>Automatically starts GoldenDict after operation system bootup</source>
-        <translation>Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
+        <translation type="obsolete">Автоматично зарежда GoldenDict слез зареждане на ОС</translation>
     </message>
     <message>
         <source>Start with system</source>
@@ -2863,7 +2863,7 @@ off from main window or tray icon.</source>
     <message>
         <source>Chooses whether the scan popup mode is on by default nor not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Избира дали изскачащият прозорец да е включен поначало или не. Ако е
+        <translation type="obsolete">Избира дали изскачащият прозорец да е включен поначало или не. Ако е
 включен, програмата винаги ще се стартира с активен изскачащ прозорец.</translation>
     </message>
     <message>
@@ -2965,7 +2965,7 @@ in the pressed state when the word selection changes.</source>
 maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shorty after the selection is done.</source>
-        <translation>Обикновено, за да активирате изскачащ прозорец трябва да
+        <translation type="obsolete">Обикновено, за да активирате изскачащ прозорец трябва да
 задържите избраните клавиши докато избирате дума.
 Когато това е включено, избраните клавиши могат да бъдат
 натиснати и малко след като думата е избрана.</translation>
@@ -3000,7 +3000,7 @@ seconds, which is specified here.</source>
     </message>
     <message>
         <source>Program to play audio files:</source>
-        <translation>Програма да възпроизвеждане на звуковите файлове:</translation>
+        <translation type="obsolete">Програма да възпроизвеждане на звуковите файлове:</translation>
     </message>
     <message>
         <source>&amp;Network</source>
@@ -3057,11 +3057,11 @@ download page.</source>
     </message>
     <message>
         <source>English</source>
-        <translation>Английски</translation>
+        <translation type="obsolete">Английски</translation>
     </message>
     <message>
         <source>Russian</source>
-        <translation>Руски</translation>
+        <translation type="obsolete">Руски</translation>
     </message>
     <message>
         <source>Default</source>
@@ -3133,7 +3133,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>Възпроизвеждане чрез Phonon</translation>
+        <translation type="obsolete">Възпроизвеждане чрез Phonon</translation>
     </message>
     <message>
         <source>Use external program:</source>
@@ -3141,7 +3141,7 @@ you are browsing. If some site breaks because of this, try disabling this.</sour
     </message>
     <message>
         <source>Play via DirectShow</source>
-        <translation>Възпроизвеждане чрез DirectShow</translation>
+        <translation type="obsolete">Възпроизвеждане чрез DirectShow</translation>
     </message>
     <message>
         <source>Double-click translates the word clicked</source>
@@ -3428,12 +3428,12 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>Команден ред за старт на аудио-плеера</translation>
     </message>
     <message>
-        <source>Do not show popup when selection or clipboard in one of Goldendict&apos;s own windows changes</source>
+        <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
         <translation>Не показвай изскачащ прозорецо при избиране/копиране на текст в някой от подпрозорците на GoldenDict</translation>
     </message>
     <message>
-        <source>Ignore Goldendict&apos;s own selection and clipboard changes</source>
-        <translation>Игнорирайте собствения избор и промени в клипборда на Goldendict</translation>
+        <source>Ignore GoldenDict&apos;s own selection and clipboard changes</source>
+        <translation>Игнорирайте собствения избор и промени в клипборда на GoldenDict</translation>
     </message>
     <message>
         <source>ScanPopup unpinned window flags</source>
@@ -3470,6 +3470,46 @@ from Stardict, Babylon and GLS dictionaries</source>
     <message>
         <source>Ignore diacritics while searching</source>
         <translation>Игнорирай диакритика при търсене</translation>
+    </message>
+    <message>
+        <source>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ignore input phrases longer than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Input phrases longer than this size will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum network cache size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maximum disk space occupied by GoldenDict&apos;s network cache in
+%1
+If set to 0 the network disk cache will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> MiB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When this option is enabled, GoldenDict
+clears its network cache from disk during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear network cache on exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> MB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3715,7 +3755,7 @@ from Stardict, Babylon and GLS dictionaries</source>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Списък съвпадение (Alt+M)</translation>
+        <translation type="obsolete">Списък съвпадение (Alt+M)</translation>
     </message>
     <message>
         <source>Alt+M</source>
@@ -3881,7 +3921,7 @@ of the appropriate groups to use them.</source>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Може да използвате и %GD1251% за кодиране CP1251, %GDISO1% за кодиране ISO 8859-1.</translation>
+        <translation type="obsolete">Може да използвате и %GD1251% за кодиране CP1251, %GDISO1% за кодиране ISO 8859-1.</translation>
     </message>
     <message>
         <source>Transliteration</source>
@@ -4006,7 +4046,7 @@ p, li { white-space: pre-wrap; }
 &lt;tr&gt;
 &lt;td style=&quot;border: none;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Get your own key &lt;a href=&quot;http://api.forvo.com/key/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0057ae;&quot;&gt;here&lt;/span&gt;&lt;/a&gt;, or leave blank to use the default one.&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <translation type="obsolete">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;

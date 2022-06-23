@@ -256,7 +256,8 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
   return result;
 }
 
-sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & inWord, unsigned groupId,
+sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
+  Config::InputPhrase const & phrase, unsigned groupId,
   QMap< QString, QString > const & contexts,
   QSet< QString > const & mutedDicts,
   QStringList const & dictIDs , bool ignoreDiacritics ) const
@@ -282,9 +283,9 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
         break;
     }
 
-    string header = makeHtmlHeader( inWord.trimmed(), QString(), true );
+    string header = makeHtmlHeader( phrase.phrase, QString(), true );
 
-    return new ArticleRequest( inWord.trimmed(), "",
+    return new ArticleRequest( phrase, "",
                                contexts, ftsDicts, header,
                                -1, true );
   }
@@ -292,9 +293,9 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
   if ( groupId == Instances::Group::HelpGroupId )
   {
     // This is a special group containing internal welcome/help pages
-    string result = makeHtmlHeader( inWord, QString(), needExpandOptionalParts );
+    string result = makeHtmlHeader( phrase.phrase, QString(), needExpandOptionalParts );
 
-    if ( inWord == tr( "Welcome!" ) )
+    if ( phrase.phrase == tr( "Welcome!" ) )
     {
       result += tr(
 "<h3 align=\"center\">Welcome to <b>GoldenDict</b>!</h3>"
@@ -312,7 +313,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
         ).toUtf8().data();
     }
     else
-    if ( inWord == tr( "Working with popup" ) )
+    if ( phrase.phrase == tr( "Working with popup" ) )
     {
       result += ( tr( "<h3 align=\"center\">Working with the popup</h3>"
 
@@ -333,7 +334,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
     else
     {
       // Not found
-      return makeNotFoundTextFor( inWord, "help" );
+      return makeNotFoundTextFor( phrase.phrase, "help" );
     }
 
     result += "</body></html>";
@@ -362,7 +363,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
   std::vector< sptr< Dictionary::Class > > const & activeDicts =
     activeGroup ? activeGroup->dictionaries : dictionaries;
 
-  string header = makeHtmlHeader( inWord.trimmed(),
+  string header = makeHtmlHeader( phrase.phrase,
                                   activeGroup && activeGroup->icon.size() ?
                                     activeGroup->icon : QString(),
                                   needExpandOptionalParts );
@@ -378,13 +379,13 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(QString const & 
               QString::fromStdString( activeDicts[ x ]->getId() ) ) )
         unmutedDicts.push_back( activeDicts[ x ] );
 
-    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+    return new ArticleRequest( phrase, activeGroup ? activeGroup->name : "",
                                contexts, unmutedDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
                                needExpandOptionalParts, ignoreDiacritics );
   }
   else
-    return new ArticleRequest( inWord.trimmed(), activeGroup ? activeGroup->name : "",
+    return new ArticleRequest( phrase, activeGroup ? activeGroup->name : "",
                                contexts, activeDicts, header,
                                collapseBigArticles ? articleLimitSize : -1,
                                needExpandOptionalParts, ignoreDiacritics );
@@ -466,12 +467,12 @@ bool ArticleMaker::adjustFilePath( QString & fileName )
 //////// ArticleRequest
 
 ArticleRequest::ArticleRequest(
-  QString const & word_, QString const & group_,
+  Config::InputPhrase const & phrase, QString const & group_,
   QMap< QString, QString > const & contexts_,
   vector< sptr< Dictionary::Class > > const & activeDicts_,
   string const & header,
   int sizeLimit, bool needExpandOptionalParts_, bool ignoreDiacritics_ ):
-    word( word_ ), group( group_ ), contexts( contexts_ ),
+    word( phrase.phrase ), group( group_ ), contexts( contexts_ ),
     activeDicts( activeDicts_ ),
     altsDone( false ), bodyDone( false ), foundAnyDefinitions( false ),
     closePrevSpan( false )
@@ -479,6 +480,9 @@ ArticleRequest::ArticleRequest(
 ,   needExpandOptionalParts( needExpandOptionalParts_ )
 ,   ignoreDiacritics( ignoreDiacritics_ )
 {
+  if ( !phrase.punctuationSuffix.isEmpty() )
+    alts.insert( gd::toWString( phrase.phraseWithSuffix() ) );
+
   // No need to lock dataMutex on construction
 
   hasAnyData = true;

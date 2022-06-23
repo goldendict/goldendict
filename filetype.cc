@@ -55,6 +55,7 @@ bool isNameOfSound( string const & name )
     endsWith( s, ".au" ) ||
     endsWith( s, ".voc" ) ||
     endsWith( s, ".ogg" ) ||
+    endsWith( s, ".oga" ) ||
     endsWith( s, ".mp3" ) ||
     endsWith( s, ".m4a") ||
     endsWith( s, ".aac" ) ||

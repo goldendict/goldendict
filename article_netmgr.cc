@@ -388,9 +388,10 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
       return articleMaker.makeEmptyPage();
 
-    bool groupIsValid = false;
+    Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
+                                 Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
 
-    QString word = Qt4x5::Url::queryItemValue( url, "word" );
+    bool groupIsValid = false;
     unsigned group = Qt4x5::Url::queryItemValue( url, "group" ).toUInt( &groupIsValid );
    
     QString dictIDs = Qt4x5::Url::queryItemValue( url, "dictionaries" );
@@ -398,7 +399,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     {
       // Individual dictionaries set from full-text search
       QStringList dictIDList = dictIDs.split( "," );
-      return articleMaker.makeDefinitionFor( word, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
+      return articleMaker.makeDefinitionFor( phrase, 0, QMap< QString, QString >(), QSet< QString >(), dictIDList );
     }
 
     // See if we have some dictionaries muted
@@ -429,8 +430,8 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     bool ignoreDiacritics = Qt4x5::Url::queryItemValue( url, "ignore_diacritics" ) == "1";
 
-    if ( groupIsValid && word.size() ) // Require group and word to be passed
-      return articleMaker.makeDefinitionFor( word, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
+    if ( groupIsValid && phrase.isValid() ) // Require group and phrase to be passed
+      return articleMaker.makeDefinitionFor( phrase, group, contexts, mutedDicts, QStringList(), ignoreDiacritics );
   }
 
   if ( ( url.scheme() == "bres" || url.scheme() == "gdau" || url.scheme() == "gdvideo" || url.scheme() == "gico" ) &&
