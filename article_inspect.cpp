@@ -3,7 +3,7 @@
 #if (QT_VERSION > QT_VERSION_CHECK(6,0,0))
 #include <QWebEngineContextMenuRequest>
 #endif
-ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::WindowType::Window ),firstTimeOpened(false)
+ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::WindowType::Window )
 {
   setWindowTitle(tr("Inspect"));
   setAttribute( Qt::WidgetAttribute::WA_DeleteOnClose, false );
@@ -22,14 +22,12 @@ void ArticleInspector::setInspectPage( QWebEngineView * view )
   viewContainer->page()->setInspectedPage(page);
 #if( QT_VERSION > QT_VERSION_CHECK( 6, 0, 0 ) )
   // without this line, application will crash on qt6.2 ,see https://bugreports.qt.io/browse/QTBUG-101724
-  if( view->lastContextMenuRequest() && firstTimeOpened )
-  {
-    page->triggerAction( QWebEnginePage::InspectElement );
-  }
-  if( !firstTimeOpened )
-  {
-    firstTimeOpened = true;
-  }
+  // and seems to hangup forever on qt6.3 ,so the best solution for now is to comment out the following lines.
+
+  // if( view->lastContextMenuRequest())
+  // {
+  //   page->triggerAction( QWebEnginePage::InspectElement );
+  // }
 #else
   page->triggerAction( QWebEnginePage::InspectElement );
 #endif

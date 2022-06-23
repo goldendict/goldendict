@@ -15,9 +15,7 @@ public:
 
   void setInspectPage( QWebEngineView * view);
 private:
-  //used to record if the devtool was first time opened.
-  //if right click on the webpage and open inspect page on the first time ,the application has great possiblity to hang forever.
-  bool firstTimeOpened;
+
   virtual void closeEvent( QCloseEvent * );
 };
 
