@@ -207,17 +207,14 @@ static GDLangCode LangCodes[] = {
     { "zh", "chi", 0, "Chinese" },
     { "zu", "zul", -1, "Zulu" },
     { "jb", "jbo", 0, "Lojban" },
-
-    { "", "", 0, "" }
 };
 
 LangCoder::LangCoder()
 {
-  for (int i = 0; true; i++) {
-    const GDLangCode &lc = LangCodes[i];
-    if (lc.lang[0] == 0)
-      break;
-    codeMap[code2toInt(lc.code)] = i;
+  int i = 0;
+  for (const auto lc : LangCodes)
+  {
+    codeMap[ code2toInt( lc.code ) ] = i++;
   }
 }
 

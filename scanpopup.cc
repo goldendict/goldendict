@@ -270,14 +270,10 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( definition, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
 
-#ifdef HAVE_X11
-  connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
-           this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
-#else
-  if( cfg.preferences.trackClipboardChanges )
-    connect( QApplication::clipboard(), SIGNAL( changed( QClipboard::Mode ) ),
-             this, SLOT( clipboardChanged( QClipboard::Mode ) ) );
-#endif
+  connect( QApplication::clipboard(),
+           SIGNAL( changed( QClipboard::Mode ) ),
+           this,
+           SLOT( clipboardChanged( QClipboard::Mode ) ) );
 
 #ifdef Q_OS_MAC
   connect( &MouseOver::instance(), SIGNAL( hovered( QString const &, bool ) ),
@@ -518,9 +514,13 @@ void ScanPopup::delayShow()
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
+  if( !cfg.preferences.trackClipboardChanges )
+    return;
+
+#ifdef HAVE_X11
   if ( !isScanningEnabled )
     return;
-#ifdef HAVE_X11
+
   if( cfg.preferences.ignoreOwnClipboardChanges && ownsClipboardMode( m ) )
     return;
 #endif

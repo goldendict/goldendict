@@ -117,6 +117,7 @@ private:
   QToolBar * navToolbar;
   MainStatusBar * mainStatusBar;
   QAction * navBack, * navForward, * navPronounce, * enableScanPopup;
+  QAction * actTrackingClipboard;
   QAction * beforeScanPopupSeparator, * afterScanPopupSeparator, * beforeOptionsSeparator;
   QAction * zoomIn, * zoomOut, * zoomBase;
   QAction * wordsZoomIn, * wordsZoomOut, * wordsZoomBase;
@@ -414,6 +415,8 @@ private slots:
   void setAutostart( bool );
 
   void showMainWindow();
+
+  void trackingClipboard(bool);
 
   void visitHomepage();
   void visitForum();
