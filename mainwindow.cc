@@ -411,6 +411,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   actTrackingClipboard = trayIconMenu.addAction( tr( "Tracking Clipboard" ) );
   actTrackingClipboard->setCheckable(true);
   actTrackingClipboard->setChecked(cfg.preferences.trackClipboardChanges);
+  actTrackingClipboard->setVisible( cfg.preferences.enableScanPopup );
   connect( actTrackingClipboard , SIGNAL( triggered(bool) ),
            this, SLOT( trackingClipboard(bool) ) );
   trayIconMenu.addSeparator();
