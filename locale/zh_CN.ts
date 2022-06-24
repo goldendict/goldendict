@@ -2846,7 +2846,12 @@ between classic and school orthography in cyrillic)</source>
         <translation>在以下词典中找到：</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="471"/>
+        <location filename="../mainwindow.cc" line="411"/>
+        <source>Tracking Clipboard</source>
+        <translation>剪贴板取词</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cc" line="504"/>
         <source>Add all tabs to Favorites</source>
         <translation>将全部标签页添加至收藏</translation>
     </message>
