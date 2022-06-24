@@ -408,6 +408,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( triggered() ),
            this, SLOT( showMainWindow() ) );
   trayIconMenu.addAction( enableScanPopup );
+  actTrackingClipboard = trayIconMenu.addAction( tr( "Tracking Clipboard" ) );
+  actTrackingClipboard->setCheckable(true);
+  actTrackingClipboard->setChecked(cfg.preferences.trackClipboardChanges);
+  connect( actTrackingClipboard , SIGNAL( triggered(bool) ),
+           this, SLOT( trackingClipboard(bool) ) );
   trayIconMenu.addSeparator();
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
            this, SLOT( quitApp() ) );
@@ -995,13 +1000,11 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
   // middle clicked
   QString subtype = "plain";
 
-    QString str = QApplication::clipboard()->text(subtype,
-      QClipboard::Selection);
+  QString str = QApplication::clipboard()->text( subtype, QClipboard::Selection );
   setTranslateBoxTextAndClearSuffix( str, EscapeWildcards, NoPopupChange );
 
-        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Enter,
-           Qt::NoModifier);
-        QApplication::sendEvent(translateLine, &ev);
+  QKeyEvent ev( QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier );
+  QApplication::sendEvent( translateLine, &ev );
 }
 
 MainWindow::~MainWindow()
@@ -3190,6 +3193,11 @@ void MainWindow::scanEnableToggled( bool on )
 void MainWindow::showMainWindow()
 {
   toggleMainWindow( true );
+}
+
+void MainWindow::trackingClipboard( bool on )
+{
+  cfg.preferences.trackClipboardChanges = on;
 }
 
 void MainWindow::visitHomepage()
