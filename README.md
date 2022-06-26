@@ -42,7 +42,7 @@ sudo dnf install git pkg-config \
 
 First, clone this repository, e.g.:
 
-    git clone https://github.com/goldendict/goldendict.git
+    git clone https://github.com/xiaoyifang/goldendict.git
 
 
 ### Linux 
