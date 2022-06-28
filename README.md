@@ -13,7 +13,7 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
 ### External Deps
 
 * Make, GCC, Git
-* Qt framework. Minimum required version is 5.15 and support the latest QT version 6.2.4
+* Qt framework. Minimum required version is 5.15 and support the latest QT version 6.X
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
 * On Mac and Windows all the libraries are already included in the repository
@@ -42,7 +42,7 @@ sudo dnf install git pkg-config \
 
 First, clone this repository, e.g.:
 
-    git clone https://github.com/goldendict/goldendict.git
+    git clone https://github.com/xiaoyifang/goldendict.git
 
 
 ### Linux 
