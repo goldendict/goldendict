@@ -117,6 +117,10 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.forvoEnabled->setChecked( forvo.enable );
   ui.forvoApiKey->setText( forvo.apiKey );
   ui.forvoLanguageCodes->setText( forvo.languageCodes );
+  ui.forvoGender->addItem( tr( "Any" ) );
+  ui.forvoGender->addItem( tr( "Male" ) );
+  ui.forvoGender->addItem( tr( "Female" ) );
+  ui.forvoGender->setCurrentIndex( forvo.gender );
 
   // Text to speech
 #if defined( Q_OS_WIN32 ) || defined( Q_OS_MAC )
@@ -383,6 +387,7 @@ Config::Forvo Sources::getForvo() const
   forvo.enable = ui.forvoEnabled->isChecked();
   forvo.apiKey = ui.forvoApiKey->text();
   forvo.languageCodes = ui.forvoLanguageCodes->text();
+  forvo.gender = Config::Forvo::Gender( ui.forvoGender->currentIndex() );
 
   return forvo;
 }

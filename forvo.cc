@@ -25,7 +25,7 @@ namespace {
 class ForvoDictionary: public Dictionary::Class
 {
   string name;
-  QString apiKey, languageCode;
+  QString apiKey, languageCode, genderCode;
   QNetworkAccessManager & netMgr;
 
 public:
@@ -33,11 +33,13 @@ public:
   ForvoDictionary( string const & id, string const & name_,
                    QString const & apiKey_,
                    QString const & languageCode_,
+                   QString const & genderCode_,
                    QNetworkAccessManager & netMgr_ ):
     Dictionary::Class( id, vector< string >() ),
     name( name_ ),
     apiKey( apiKey_ ),
     languageCode( languageCode_ ),
+    genderCode( genderCode_ ),
     netMgr( netMgr_ )
   {
   }
@@ -86,7 +88,7 @@ sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
+    return new ForvoArticleRequest( word, alts, apiKey, languageCode, genderCode, getId(),
                                     netMgr );
 }
 
@@ -135,9 +137,10 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
                                           vector< wstring > const & alts,
                                           QString const & apiKey_,
                                           QString const & languageCode_,
+                                          QString const & genderCode_,
                                           string const & dictionaryId_,
                                           QNetworkAccessManager & mgr ):
-  apiKey( apiKey_ ), languageCode( languageCode_ ),
+  apiKey( apiKey_ ), languageCode( languageCode_ ), genderCode( genderCode_ ),
   dictionaryId( dictionaryId_ )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
@@ -174,6 +177,7 @@ void ForvoArticleRequest::addQuery( QNetworkAccessManager & mgr,
                "/format/xml"
                "/word/" + QLatin1String( QUrl::toPercentEncoding( gd::toQString( str ) ) ) +
                "/language/" + languageCode +
+               (genderCode.isEmpty() ? "" : "/sex/" + genderCode) +
                "/order/rate-desc"
        ).toUtf8() );
 
@@ -270,7 +274,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
                 QString user = item.namedItem( "username" ).toElement().text();
                 QString country = item.namedItem( "country" ).toElement().text();
 
-                string userProfile = string( "http://www.forvo.com/user/" ) +
+                string userProfile = string( "https://www.forvo.com/user/" ) +
                                      QUrl::toPercentEncoding( user ).data() + "/";
 
                 int totalVotes = item.namedItem( "num_votes" ).toElement().text().toInt();
@@ -400,10 +404,23 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
         if ( displayedCode.size() )
           displayedCode[ 0 ] = displayedCode[ 0 ].toUpper();
 
+        QString genderCode;
+        switch (forvo.gender) {
+        case Config::Forvo::Gender::Male:
+            genderCode = QString::fromLatin1( "m" );
+            break;
+        case Config::Forvo::Gender::Female:
+            genderCode = QString::fromLatin1( "f" );
+            break;
+        default:
+            // keep empty
+            break;
+        };
+
         result.push_back(
             new ForvoDictionary( hash.result().toHex().data(),
                                  QString( "Forvo (%1)" ).arg( displayedCode ).toUtf8().data(),
-                                 forvo.apiKey, code, mgr ) );
+                                 forvo.apiKey, code, genderCode, mgr ) );
 
         usedCodes.insert( code );
       }

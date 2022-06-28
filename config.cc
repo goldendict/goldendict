@@ -702,6 +702,7 @@ Class load() THROW_SPEC( exError )
 
     c.forvo.apiKey = forvo.namedItem( "apiKey" ).toElement().text();
     c.forvo.languageCodes = forvo.namedItem( "languageCodes" ).toElement().text();
+    c.forvo.gender = Forvo::Gender( forvo.namedItem( "gender" ).toElement().text().toUInt() );
   }
   else
     c.forvo.languageCodes = "en, ru"; // Default demo values
@@ -1487,6 +1488,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "languageCodes" );
     opt.appendChild( dd.createTextNode( c.forvo.languageCodes ) );
+    forvo.appendChild( opt );
+
+    opt = dd.createElement( "gender" );
+    opt.appendChild( dd.createTextNode( QString::number( c.forvo.gender ) ) );
     forvo.appendChild( opt );
   }
 
