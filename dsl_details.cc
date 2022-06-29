@@ -1151,6 +1151,11 @@ void processUnsortedParts( wstring & str, bool strip )
 void expandOptionalParts( wstring & str, list< wstring > * result,
                           size_t x, bool inside_recurse )
 {
+  // if str is too long ,it can never be headwords.
+  if( str.size() > 100 )
+  {
+    return;
+  }
   list< wstring > expanded;
   list< wstring > * headwords;
   headwords = inside_recurse ? result : &expanded;
