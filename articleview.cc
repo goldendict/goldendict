@@ -2556,9 +2556,10 @@ void ArticleView::highlightFTSResults()
 
   const QUrl & url = ui.definition->url();
 
-  bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
-
   QString regString = Qt4x5::Url::queryItemValue( url, "regexp" );
+  if( regString.isEmpty() )
+    return;
+  const bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
   if( ignoreDiacritics )
     regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
   else
