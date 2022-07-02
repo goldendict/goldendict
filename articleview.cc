@@ -2597,9 +2597,12 @@ void ArticleView::highlightFTSResults()
   sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
                                            new DiacriticsHandler : new AccentMarkHandler;
 
-  // The code below relies on empty current selection. There must be no selection because this
-  // function is called only in one place - when a page loading finishes.
-  Q_ASSERT( !ui.definition->hasSelection() );
+  // Clear any current selection
+  if ( ui.definition->selectedText().size() )
+  {
+    ui.definition->page()->currentFrame()->
+           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+  }
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
   marksHandler->setText( pageText );
