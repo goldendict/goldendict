@@ -2495,10 +2495,13 @@ void ArticleView::highlightFTSResults()
     {
       const QUrl & url = ui.definition->url();
 
-      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
-
       QString regString = Utils::Url::queryItemValue( url, "regexp" );
-      if( ignoreDiacritics )
+	  if( regString.isEmpty() )
+	    return;
+      
+      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
+	  
+	  if( ignoreDiacritics )
         regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
       else
         regString = regString.remove( AccentMarkHandler::accentMark() );
