@@ -819,8 +819,30 @@ void ArticleView::loadFinished( bool )
 
 void ArticleView::handleTitleChanged( QString const & title )
 {
-  if( !title.isEmpty() ) // Qt 5.x WebKit raise signal titleChanges(QString()) while navigation within page
-    emit titleChanged( this, title );
+  // Qt 5.x WebKit raise signal titleChanges(QString()) while navigation within page.
+  // The Qt WebEngine-specific code below assumes title is not empty.
+  if( title.isEmpty() )
+    return;
+
+#ifndef USE_QTWEBKIT
+  // When a page is loaded, QWebEngineView::title first becomes equal to the URL,
+  // then quickly changes to the HTML <title>. Ignore the temporary title change
+  // to prevent the flashing of the main window title.
+
+  auto const url = ui.definition->url().toString();
+  if( title == url )
+    return;
+
+  constexpr QChar leftToRightEmbedding( u'\u202A' );
+  constexpr QChar popDirectionalFormatting( u'\u202C' );
+  Q_ASSERT( !title.isEmpty() );
+  bool const titleMatchesUrl = title.front() == leftToRightEmbedding && title.back() == popDirectionalFormatting
+                               && QStringView{ title.constData() + 1, title.size() - 2 } == url;
+  if( titleMatchesUrl )
+    return;
+#endif
+
+  emit titleChanged( this, title );
 }
 
 void ArticleView::handleUrlChanged( QUrl const & url )
