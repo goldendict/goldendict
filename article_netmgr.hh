@@ -185,6 +185,7 @@ public:
 protected:
 
   virtual qint64 bytesAvailable() const;
+  virtual bool atEnd() const;
 
   virtual void abort()
   {}

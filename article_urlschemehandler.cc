@@ -84,20 +84,17 @@ void reportError( QNetworkReply::NetworkError networkError, QNetworkReply const 
              QMetaEnum::fromType< decltype( networkError ) >().valueToKey( networkError ) );
 }
 
-void respondToUrlRequest( QWebEngineUrlRequestJob * job, QNetworkReply * reply )
+bool respondToUrlRequest( QWebEngineUrlRequestJob * job, QNetworkReply * reply )
 {
   Q_ASSERT( job );
   Q_ASSERT( reply );
-  Q_ASSERT( reply->isFinished() );
-  // At this point reply is no longer written to and can be safely destroyed once job ends reading from it.
-  QObject::connect( job, &QObject::destroyed, reply, &QObject::deleteLater );
 
   auto const networkError = reply->error();
   if( networkError != QNetworkReply::NoError )
   {
     reportError( networkError, *reply );
     job->fail( jobErrorFromNetworkError( networkError ) );
-    return;
+    return false;
   }
 
   auto contentType = reply->header( QNetworkRequest::ContentTypeHeader ).toByteArray();
@@ -108,6 +105,7 @@ void respondToUrlRequest( QWebEngineUrlRequestJob * job, QNetworkReply * reply )
   }
 
   job->reply( contentType, reply );
+  return true;
 }
 
 } // unnamed namespace
@@ -155,18 +153,35 @@ void ArticleUrlSchemeHandler::requestStarted( QWebEngineUrlRequestJob * job )
 
   auto * const reply = articleNetMgr.get( networkRequestFromJob( *job ) );
 
-  if( reply->isFinished() )
+  // Respond to the request immediately in order to show topmost articles as
+  // soon as they become available, without waiting for all articles to load.
+  // job uses the QIODevice interface of reply in another thread. *reply can be one of the following:
+  // - a qrc:// QNetworkAccessManager's QNetworkReply;
+  // - QNetworkAccessManager's QNetworkReply for a GoldenDict's custom URL scheme (an error page);
+  // - ArticleResourceReply;
+  // - BlockedNetworkReply.
+  // Hopefully the QNetworkAccessManager's replies support such usage. ArticleResourceReply is designed
+  // to be thread-safe in this scenario. BlockedNetworkReply is trivial and obviously thread-safe.
+
+  if( !respondToUrlRequest( job, reply ) )
   {
-    respondToUrlRequest( job, reply );
+    // A network error occurred and respondToUrlRequest() handled it.
+    // Destroy the no longer needed reply as soon as it finishes.
+    connect( reply, &QNetworkReply::finished, reply, &QObject::deleteLater );
     return;
   }
+
+  connect( reply, &QNetworkReply::errorOccurred, [ reply ]( QNetworkReply::NetworkError code ) {
+    reportError( code, *reply );
+  } );
 
   // Deliberately don't use job as context in this connection: if job is destroyed
   // before reply is finished, reply would be leaked. Using reply as context does
   // not impact behavior, but silences Clazy checker connect-3arg-lambda (level1).
   connect( reply, &QNetworkReply::finished, reply, [ reply, job = QPointer< QWebEngineUrlRequestJob >{ job } ] {
+    // At this point reply is no longer written to and can be safely destroyed once job ends reading from it.
     if( job )
-      respondToUrlRequest( job, reply );
+      connect( job, &QObject::destroyed, reply, &QObject::deleteLater );
     else
       reply->deleteLater();
   } );

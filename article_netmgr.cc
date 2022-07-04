@@ -608,8 +608,20 @@ qint64 ArticleResourceReply::bytesAvailable() const
   return avail - alreadyRead + QNetworkReply::bytesAvailable();
 }
 
+bool ArticleResourceReply::atEnd() const
+{
+  return req->isFinished() && QNetworkReply::atEnd();
+}
+
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
+  // TODO (Qt WebEngine): Chromium's IO thread calls this function repeatedly even if there
+  // is no new data: our readyRead() signal is not emitted and in the code below `left == 0`.
+  // Investigate whether these frequent calls can be prevented. If not and this is the
+  // intended Qt WebEngine behavior, try to optimize this function for such a call pattern,
+  // e.g. check an atomic variable instead of locking dataMutex in DataRequest::dataSize()
+  // to prevent lock contention.
+
   // From the doc: "This function might be called with a maxSize of 0,
   // which can be used to perform post-reading operations".
   if ( maxSize == 0 )
