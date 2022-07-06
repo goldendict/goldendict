@@ -717,7 +717,7 @@ void ArticleView::handleUrlChanged( QUrl const & url )
 
 void ArticleView::clearPageSelection()
 {
-  ui.definition->page()->currentFrame()->evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+  ui.definition->page()->currentFrame()->evaluateJavaScript( "window.getSelection().removeAllRanges();" );
 }
 
 unsigned ArticleView::getGroup( QUrl const & url )
