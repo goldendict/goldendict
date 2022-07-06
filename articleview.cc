@@ -715,6 +715,11 @@ void ArticleView::handleUrlChanged( QUrl const & url )
   emit iconChanged( this, icon );
 }
 
+void ArticleView::clearPageSelection()
+{
+  ui.definition->page()->currentFrame()->evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
+}
+
 unsigned ArticleView::getGroup( QUrl const & url )
 {
   if ( url.scheme() == "gdlookup" && Qt4x5::Url::hasQueryItem( url, "group" ) )
@@ -2255,10 +2260,7 @@ void ArticleView::openSearch()
 
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
-  {
-    ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-  }
+    clearPageSelection();
 
   if ( ui.searchText->property( "noResults" ).toBool() )
   {
@@ -2432,10 +2434,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       // Anyone knows how we reset the search position?
       // For now we resort to this hack:
       if ( ui.definition->selectedText().size() )
-      {
-        ui.definition->page()->currentFrame()->
-               evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-      }
+        clearPageSelection();
     }
 
     QWebPage::FindFlags f( 0 );
@@ -2612,10 +2611,7 @@ void ArticleView::highlightFTSResults()
 
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
-  {
-    ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-  }
+    clearPageSelection();
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
   marksHandler->setText( pageText );

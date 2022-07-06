@@ -310,6 +310,10 @@ private slots:
 
 private:
 
+  /// Clears selection on the current web page. This function can be called to
+  /// reset the start position of the page's findText().
+  void clearPageSelection();
+
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
   unsigned getGroup( QUrl const & );
