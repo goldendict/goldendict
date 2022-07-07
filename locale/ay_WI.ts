@@ -281,10 +281,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save image</source>
         <translation type="unfinished"></translation>
     </message>
@@ -326,6 +322,18 @@
     </message>
     <message>
         <source>WARNING: Audio Player: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phrase not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of %2 matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

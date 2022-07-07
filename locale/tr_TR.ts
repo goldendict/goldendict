@@ -152,7 +152,7 @@ GPLv3 veya daha üst lisanslıdır.</translation>
     </message>
     <message>
         <source>Playing a non-WAV file</source>
-        <translation>WAV uzantılı olmayan bir dosya oynatılıyor</translation>
+        <translation type="obsolete">WAV uzantılı olmayan bir dosya oynatılıyor</translation>
     </message>
     <message>
         <source>Open Link in &amp;External Browser</source>
@@ -277,7 +277,7 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Ses dosyaları (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tüm dosyalar (*.*)</translation>
+        <translation type="obsolete">Ses dosyaları (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Tüm dosyalar (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
@@ -322,6 +322,18 @@ Ses sekmesinden &quot;DirectShow ile çal&quot; seçeneğini seçin.</translatio
     <message>
         <source>WARNING: Audio Player: %1</source>
         <translation>UYARI: Müzik Çalar: %1</translation>
+    </message>
+    <message>
+        <source>Phrase not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of %2 matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2239,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Search Pane</source>
-        <translation>Arama Penceresi</translation>
+        <translation type="obsolete">Arama Penceresi</translation>
     </message>
     <message>
         <source>Ctrl+F4</source>
@@ -2239,7 +2251,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <source>Loading...</source>
@@ -2251,7 +2263,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Show Names in Dictionary Bar</source>
-        <translation>Sözlük Çubuğu&apos;nda Adları Göster</translation>
+        <translation type="obsolete">Sözlük Çubuğu&apos;nda Adları Göster</translation>
     </message>
     <message>
         <source>Opened tabs</source>
@@ -2263,7 +2275,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Html files (*.html *.htm)</source>
-        <translation>Html Dosyaları (*.html *.htm)</translation>
+        <translation type="obsolete">Html Dosyaları (*.html *.htm)</translation>
     </message>
     <message>
         <source>Welcome!</source>
@@ -2295,7 +2307,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>WARNING: %1</source>
-        <translation>UYARI: %1</translation>
+        <translation type="obsolete">UYARI: %1</translation>
     </message>
     <message>
         <source>Print Article</source>
@@ -2311,15 +2323,15 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation>Gezinti</translation>
+        <translation type="obsolete">Gezinti</translation>
     </message>
     <message>
         <source>Results Navigation Pane</source>
-        <translation>Gezinti Panelinde Sonuçlar</translation>
+        <translation type="obsolete">Gezinti Panelinde Sonuçlar</translation>
     </message>
     <message>
         <source>&amp;Dictionaries...    F3</source>
-        <translation>&amp;Sözlükler...     F3</translation>
+        <translation type="obsolete">&amp;Sözlükler...     F3</translation>
     </message>
     <message>
         <source>New Tab</source>
@@ -2343,7 +2355,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Show Small Icons in Toolbars</source>
-        <translation>Araç Çubuklarında Küçük İkonlar Göster</translation>
+        <translation type="obsolete">Araç Çubuklarında Küçük İkonlar Göster</translation>
     </message>
     <message>
         <source>&amp;Menubar</source>
@@ -2375,7 +2387,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>History view mode</source>
-        <translation>Geçmişi görüntüleme modu</translation>
+        <translation type="obsolete">Geçmişi görüntüleme modu</translation>
     </message>
     <message>
         <source>Export history to file</source>
@@ -2491,7 +2503,7 @@ arasındaki farkı giderir)</translation>
     </message>
     <message>
         <source>Accessibility API is not enabled</source>
-        <translation>Erişilebilirlik API'si açılmadı</translation>
+        <translation>Erişilebilirlik API&apos;si açılmadı</translation>
     </message>
     <message>
         <source>Article, Complete (*.html)</source>
@@ -3035,7 +3047,7 @@ ve muhtemelen indirme sayfasını açar.</translation>
     <message>
         <source>Use Windows native playback API. Limited to .wav files only,
 but works very well.</source>
-        <translation>Windows yerel çalma programını kullanın.
+        <translation type="obsolete">Windows yerel çalma programını kullanın.
 Yalnızca .wav dosyalarıyla sınırlıdır, ama çok iyi çalışır.</translation>
     </message>
     <message>
@@ -3100,7 +3112,7 @@ but should support most audio file formats.</source>
     </message>
     <message>
         <source>Play via Phonon</source>
-        <translation>Phonon ile oynat</translation>
+        <translation type="obsolete">Phonon ile oynat</translation>
     </message>
     <message>
         <source>Right Alt</source>
@@ -3751,11 +3763,11 @@ clears its network cache from disk during exit.</source>
     </message>
     <message>
         <source>word</source>
-        <translation>sözcük</translation>
+        <translation type="obsolete">sözcük</translation>
     </message>
     <message>
         <source>Alt+M</source>
-        <translation>Alt+M</translation>
+        <translation type="obsolete">Alt+M</translation>
     </message>
     <message>
         <source>Alt+S</source>
@@ -3777,7 +3789,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>List Matches (Alt+M)</source>
-        <translation>Eşleşmeleri Sırala (Alt+M)</translation>
+        <translation type="obsolete">Eşleşmeleri Sırala (Alt+M)</translation>
     </message>
     <message>
         <source>Pronounce Word (Alt+S)</source>
@@ -3801,7 +3813,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>GoldenDict</source>
-        <translation>GoldenDict</translation>
+        <translation type="obsolete">GoldenDict</translation>
     </message>
     <message>
         <source>%1 - %2</source>
@@ -3855,7 +3867,7 @@ Yeniden boyutlandırma, ya da başka bir şekilde yönetilebilir.</translation>
     </message>
     <message>
         <source>Alternatively, use %GD1251% for CP1251, %GDISO1% for ISO 8859-1.</source>
-        <translation>Alternatif olarak CP1251 için %GD1251%, ISO 8859-1 için %GDISO1% kullanılabilir.</translation>
+        <translation type="obsolete">Alternatif olarak CP1251 için %GD1251%, ISO 8859-1 için %GDISO1% kullanılabilir.</translation>
     </message>
     <message>
         <source>Greek transliteration</source>

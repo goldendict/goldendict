@@ -56,7 +56,7 @@
         <translation>&lt;b&gt;%1&lt;/b&gt; समूह में कोई अनुवाद नही पाया गया।</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="297"/>
+        <location filename="../article_maker.cc" line="298"/>
         <source>Welcome!</source>
         <translation>स्वागत है!</translation>
     </message>
@@ -75,7 +75,7 @@
         <translation>लेख को संक्षिप्त करें</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="299"/>
+        <location filename="../article_maker.cc" line="300"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Bienvenue dans &lt;b&gt;GoldenDict&lt;/b&gt; !&lt;/h3&gt;
 &lt;p&gt;Pour commencer à utiliser GoldenDict, visitez d&apos;abord &lt;b&gt;Édition|Dictionnaires&lt;/b&gt; pour ajouter des emplacements où trouver les fichiers de dictionnaires, configurer des sites Wikipédia ou d&apos;autres sources, ajuster l&apos;ordre des dictionnaires ou créer des groupes de dictionnaires.&lt;p&gt;Vous êtes paré pour lancer de nouvelles recherches ! Vous pouvez faire cela en utilisant le panneau à gauche de cette fenêtre, ou vous pouvez &lt;a href=&quot;Working with popup&quot;&gt;chercher les mots à partir d&apos;autres applications actives&lt;/a&gt;.
@@ -85,32 +85,32 @@
 &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Sous licence GPLv3 ou ultérieure.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="315"/>
+        <location filename="../article_maker.cc" line="316"/>
         <source>Working with popup</source>
         <translation>Utilisation avec pop-up</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="317"/>
+        <location filename="../article_maker.cc" line="318"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
         <translation>&lt;h3 align=&quot;center&quot;&gt;Utilisation avec fenêtre de scan&lt;/h3&gt;Pour rechercher des mots à partir d&apos;autres applications actives, vous devez d&apos;abord activer la fonctionnalité &lt;i&gt;&quot;Fonction de scan avec fenêtre pop-up&quot;&lt;/i&gt; dans les &lt;b&gt;Préférences&lt;/b&gt;, et ensuite l&apos;activer à tout moment en cliquant sur l&apos;icône &apos;Fenêtre de scan&apos;, ou par clic droit sur l&apos;icône de la barre des tâches, puis sélection de la fonctionnalité dans le menu déroulant.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="324"/>
+        <location filename="../article_maker.cc" line="325"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
         <translation>Ensuite, positionnez le curseur au-dessus du mot que vous souhaitez rechercher dans l&apos;application, et une fenêtre le décrivant apparaîtra.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="327"/>
+        <location filename="../article_maker.cc" line="328"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
         <translation>Ensuite, sélectionnez avec la souris (ou double-cliquez) le mot que vous souhaitez rechercher dans l&apos;application, et une fenêtre le décrivant apparaîtra.</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="409"/>
+        <location filename="../article_maker.cc" line="410"/>
         <source>(untitled)</source>
         <translation>(शीर्षकहीन)</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="423"/>
+        <location filename="../article_maker.cc" line="424"/>
         <source>(picture)</source>
         <translation>(छवि)</translation>
     </message>
@@ -118,37 +118,37 @@
 <context>
     <name>ArticleRequest</name>
     <message>
-        <location filename="../article_maker.cc" line="692"/>
+        <location filename="../article_maker.cc" line="696"/>
         <source>Expand article</source>
         <translation>लेख का विस्तार करें</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="695"/>
+        <location filename="../article_maker.cc" line="699"/>
         <source>From </source>
         <translation>से </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="700"/>
+        <location filename="../article_maker.cc" line="704"/>
         <source>Collapse article</source>
         <translation>लेख को संक्षिप्त करें</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="717"/>
+        <location filename="../article_maker.cc" line="721"/>
         <source>Query error: %1</source>
         <translation>पृच्छा त्रुटि: %1</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="823"/>
+        <location filename="../article_maker.cc" line="827"/>
         <source>Close words: </source>
         <translation>निकट शब्द: </translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="894"/>
+        <location filename="../article_maker.cc" line="898"/>
         <source>Compound expressions: </source>
         <translation>यौगिक भाव:</translation>
     </message>
     <message>
-        <location filename="../article_maker.cc" line="922"/>
+        <location filename="../article_maker.cc" line="926"/>
         <source>Individual words: </source>
         <translation>व्यक्तिगत शब्द:</translation>
     </message>
@@ -166,104 +166,109 @@
         <translation>बारे में:रिक्त</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="142"/>
+        <location filename="../articleview.ui" line="145"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="132"/>
+        <location filename="../articleview.ui" line="135"/>
         <source>Find:</source>
         <translation>ढूँढ़ें :</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="71"/>
-        <location filename="../articleview.ui" line="160"/>
+        <location filename="../articleview.ui" line="163"/>
         <source>&amp;Previous</source>
         <translation>&amp;पिछला</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="85"/>
-        <location filename="../articleview.ui" line="177"/>
+        <location filename="../articleview.ui" line="180"/>
         <source>&amp;Next</source>
         <translation>&amp;अगला</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="184"/>
+        <location filename="../articleview.ui" line="187"/>
         <source>Ctrl+G</source>
         <translation>कन्ट्रोल+जी</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="220"/>
+        <location filename="../articleview.ui" line="223"/>
         <source>&amp;Case Sensitive</source>
         <translation>&amp;वर्णप्रकार संवेदनशील</translation>
     </message>
     <message>
-        <location filename="../articleview.ui" line="197"/>
+        <location filename="../articleview.ui" line="200"/>
         <source>Highlight &amp;all</source>
         <translation>&amp;सभी को विशिष्ट दर्शाएं</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="280"/>
+        <location filename="../articleview.cc" line="341"/>
         <source>Select Current Article</source>
         <translation>वर्तमान लेख का चयन करें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="286"/>
+        <location filename="../articleview.cc" line="347"/>
         <source>Copy as text</source>
         <translation>पाठ के रूप में प्रतिलिपि बनाएं</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="292"/>
+        <location filename="../articleview.cc" line="353"/>
         <source>Inspect</source>
         <translation>निरीक्षण</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1028"/>
+        <location filename="../articleview.cc" line="1103"/>
         <source>Resource</source>
         <translation>संसाधन</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1033"/>
+        <location filename="../articleview.cc" line="1108"/>
         <source>Audio</source>
         <translation>श्रव्य</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1038"/>
+        <location filename="../articleview.cc" line="1113"/>
         <source>TTS Voice</source>
         <translation>टी.टीए.एस. ध्वनि</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1043"/>
+        <location filename="../articleview.cc" line="1118"/>
         <source>Picture</source>
         <translation>छवि</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1050"/>
+        <location filename="../articleview.cc" line="1125"/>
         <source>Video</source>
         <translation>वीडियो</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1059"/>
+        <location filename="../articleview.cc" line="1134"/>
         <source>Video: %1</source>
         <translation>वीडियो: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1076"/>
+        <location filename="../articleview.cc" line="1151"/>
         <source>Definition from dictionary &quot;%1&quot;: %2</source>
         <translation>शब्दकोश &quot;%1&quot; से परिभाषा: %2</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1080"/>
+        <location filename="../articleview.cc" line="1159"/>
         <source>Definition: %1</source>
         <translation>परिभाषा : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1980"/>
+        <location filename="../articleview.cc" line="2050"/>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2120"/>
         <source>Failed to play sound file: %1</source>
         <translation type="unfinished">श्रव्य फ़ाइल चलाने में विफल: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2036"/>
+        <location filename="../articleview.cc" line="2176"/>
         <source>WARNING: Audio Player: %1</source>
         <translation type="unfinished">चेतावनी: श्रव्य वादक: %1</translation>
     </message>
@@ -272,40 +277,49 @@
         <translation type="obsolete">गोल्डेनडिक्ट</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1352"/>
-        <location filename="../articleview.cc" line="1509"/>
+        <location filename="../articleview.cc" line="1432"/>
+        <location filename="../articleview.cc" line="1625"/>
         <source>The referenced resource doesn&apos;t exist.</source>
         <translation>संदर्भित संसाधन विद्यमान नहीं है।</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1392"/>
+        <location filename="../articleview.cc" line="1472"/>
         <source>The referenced audio program doesn&apos;t exist.</source>
         <translation>संदर्भित श्रव्य प्रोग्राम विद्यमान नहीं है।</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1275"/>
-        <location filename="../articleview.cc" line="1311"/>
-        <location filename="../articleview.cc" line="1509"/>
+        <location filename="../articleview.cc" line="1355"/>
+        <location filename="../articleview.cc" line="1391"/>
+        <location filename="../articleview.cc" line="1625"/>
         <source>ERROR: %1</source>
         <translation>त्रुटि : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1908"/>
+        <location filename="../articleview.cc" line="222"/>
+        <source>Phrase not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="230"/>
+        <source>%1 of %2 matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="2048"/>
         <source>Save sound</source>
         <translation>ध्वनि सुरक्षित करें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1910"/>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>ध्वनि फ़ाइलें (*.wav *.ogg *.mp3 *.mp4 *.acac *.flac *.mid *.wv *.ape);;सभी फ़ाइलें (*.*)</translation>
+        <translation type="obsolete">ध्वनि फ़ाइलें (*.wav *.ogg *.mp3 *.mp4 *.acac *.flac *.mid *.wv *.ape);;सभी फ़ाइलें (*.*)</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1923"/>
+        <location filename="../articleview.cc" line="2063"/>
         <source>Save image</source>
         <translation>छवि सहेजें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1925"/>
+        <location filename="../articleview.cc" line="2065"/>
         <source>Image files (*.bmp *.jpg *.png *.tif);;All files (*.*)</source>
         <translation>छवि फ़ाइलें (*.bmp *.jpg *.png *.tif);;सभी फाइलें (*.*)</translation>
     </message>
@@ -314,58 +328,58 @@
         <translation type="obsolete">संसाधन बचत त्रुटि:</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1664"/>
+        <location filename="../articleview.cc" line="1804"/>
         <source>&amp;Open Link</source>
         <translation>कडी &amp;खोलें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1670"/>
+        <location filename="../articleview.cc" line="1810"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>कडी को नये &amp;टैब में खोलें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1677"/>
+        <location filename="../articleview.cc" line="1817"/>
         <source>Open Link in &amp;External Browser</source>
         <translation>&amp;बाह्य गवेषक में कडी खोलें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1692"/>
+        <location filename="../articleview.cc" line="1832"/>
         <source>Save &amp;image...</source>
         <translation>&amp;छवि सहेजें...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1700"/>
+        <location filename="../articleview.cc" line="1840"/>
         <source>Save s&amp;ound...</source>
         <translation>ध्वनि सुरक्षित करें...</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1719"/>
+        <location filename="../articleview.cc" line="1859"/>
         <source>&amp;Look up &quot;%1&quot;</source>
         <translation>&quot;%1&quot; को देखें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1727"/>
+        <location filename="../articleview.cc" line="1867"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
         <translation>&quot;%1&quot; को देंखें &amp;नया टैब</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1732"/>
+        <location filename="../articleview.cc" line="1872"/>
         <source>Send &quot;%1&quot; to input line</source>
         <translation>&quot;%1&quot; को निवेश पंक्ति में भेजें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1738"/>
-        <location filename="../articleview.cc" line="1774"/>
+        <location filename="../articleview.cc" line="1878"/>
+        <location filename="../articleview.cc" line="1914"/>
         <source>&amp;Add &quot;%1&quot; to history</source>
         <translation>तथा &quot;%1&quot; को इतिहास में जोड़ें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1752"/>
+        <location filename="../articleview.cc" line="1892"/>
         <source>Look up &quot;%1&quot; in %2</source>
         <translation>%2 में &quot;%1&quot; देखें</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1760"/>
+        <location filename="../articleview.cc" line="1900"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
         <translation>नये टैब में &quot;%1&quot; को %2 में देखें</translation>
     </message>
@@ -379,10 +393,10 @@
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="obsolete">डब्ल्यू.ए.वी. से भिन्न फ़ाइलों के प्लेबैक को सक्षम करने के लिए, कृपया संपादित करें|वरीयताएँ पर जाएँ, ऑडियो टैब चुनें और 'डायरेक्ट-शो से चलाएं' पर जाएँ।</translation>
+        <translation type="obsolete">डब्ल्यू.ए.वी. से भिन्न फ़ाइलों के प्लेबैक को सक्षम करने के लिए, कृपया संपादित करें|वरीयताएँ पर जाएँ, ऑडियो टैब चुनें और &apos;डायरेक्ट-शो से चलाएं&apos; पर जाएँ।</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2029"/>
+        <location filename="../articleview.cc" line="2169"/>
         <source>WARNING: %1</source>
         <translation>चेतावनी: %1</translation>
     </message>
@@ -399,17 +413,17 @@
         <translation type="obsolete">ध्वनि फ़ाइल चलाने के लिए वादक चलाने में विफल: %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1995"/>
+        <location filename="../articleview.cc" line="2135"/>
         <source>Failed to create temporary file.</source>
         <translation>अस्थायी फ़ाइल बनाने में विफल।</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2006"/>
+        <location filename="../articleview.cc" line="2146"/>
         <source>Failed to auto-open resource file, try opening manually: %1.</source>
         <translation>स्वतः-संसाधन फ़ाइल खोलने में विफल, मैन्युअल रूप से खोलने का प्रयास करें: %1.</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2029"/>
+        <location filename="../articleview.cc" line="2169"/>
         <source>The referenced resource failed to download.</source>
         <translation>संदर्भित संसाधन डाउनलोड करने में विफल रहा।</translation>
     </message>
@@ -697,42 +711,42 @@ between classic and school orthography in cyrillic)</source>
         <translation>स्ट्रिंग छाँटें(निश्चित स्ट्रिंग, अक्षरचिह्नम् या नियमवचन)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="35"/>
+        <location filename="../dictheadwords.cc" line="41"/>
         <source>Text</source>
         <translation>पाठ</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="36"/>
+        <location filename="../dictheadwords.cc" line="42"/>
         <source>Wildcards</source>
         <translation>अक्षरचिह्नम्</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="37"/>
+        <location filename="../dictheadwords.cc" line="43"/>
         <source>RegExp</source>
         <translation>नियमवचन</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="247"/>
+        <location filename="../dictheadwords.cc" line="282"/>
         <source>Unique headwords total: %1, filtered: %2</source>
         <translation>कुल अद्वितीय मुख्यशब्द: %1, छाँटे हुएः  %2</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="264"/>
+        <location filename="../dictheadwords.cc" line="299"/>
         <source>Save headwords to file</source>
         <translation>मुख्यशब्दों को फ़ाइल में सहेजें</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="266"/>
+        <location filename="../dictheadwords.cc" line="301"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>पाठ फ़ाइलें (*.txt);;सभी फ़ाइलें (*.*)</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="290"/>
+        <location filename="../dictheadwords.cc" line="325"/>
         <source>Export headwords...</source>
         <translation>मुख्यशब्दों को निर्यात करें...</translation>
     </message>
     <message>
-        <location filename="../dictheadwords.cc" line="290"/>
+        <location filename="../dictheadwords.cc" line="325"/>
         <source>Cancel</source>
         <translation>रद्द करें</translation>
     </message>
@@ -808,22 +822,22 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>DictServer</name>
     <message>
-        <location filename="../dictserver.cc" line="252"/>
+        <location filename="../dictserver.cc" line="276"/>
         <source>Url: </source>
         <translation>सार्वत्रिकविभवसङ्केत: </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="253"/>
+        <location filename="../dictserver.cc" line="277"/>
         <source>Databases: </source>
-        <translation>>दत्तनिधि: </translation>
+        <translation>&gt;दत्तनिधि: </translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="254"/>
+        <location filename="../dictserver.cc" line="278"/>
         <source>Search strategies: </source>
         <translation>खोज रणनीतियाँ:</translation>
     </message>
     <message>
-        <location filename="../dictserver.cc" line="258"/>
+        <location filename="../dictserver.cc" line="282"/>
         <source>Server databases</source>
         <translation>दत्तनिधि वितरक</translation>
     </message>
@@ -865,14 +879,14 @@ between classic and school orthography in cyrillic)</source>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
         <translation>डेटाबेस की अल्पविराम-सीमांकित सूची
-(खाली स्ट्रिंग या '*' सभी डेटाबेस से मेल खाता है)</translation>
+(खाली स्ट्रिंग या &apos;*&apos; सभी डेटाबेस से मेल खाता है)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="856"/>
         <source>Comma-delimited list of search strategies
 (empty string mean &quot;prefix&quot; strategy)</source>
         <translation>खोज रणनीतियों की अल्पविराम-सीमांकित सूची
-(रिक्त स्ट्रिंग का अर्थ है 'उपसर्ग' की रणनीति)</translation>
+(रिक्त स्ट्रिंग का अर्थ है &apos;उपसर्ग&apos; की रणनीति)</translation>
     </message>
 </context>
 <context>
@@ -925,39 +939,39 @@ between classic and school orthography in cyrillic)</source>
         <translation>शब्दकोश</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="44"/>
+        <location filename="../editdictionaries.cc" line="46"/>
         <source>&amp;Sources</source>
         <translation>तथा स्त्रोत</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="45"/>
-        <location filename="../editdictionaries.cc" line="242"/>
+        <location filename="../editdictionaries.cc" line="47"/>
+        <location filename="../editdictionaries.cc" line="244"/>
         <source>&amp;Dictionaries</source>
         <translation>तथा शब्दकोश</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="46"/>
-        <location filename="../editdictionaries.cc" line="245"/>
+        <location filename="../editdictionaries.cc" line="48"/>
+        <location filename="../editdictionaries.cc" line="247"/>
         <source>&amp;Groups</source>
         <translation>तथा समूह</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="122"/>
+        <location filename="../editdictionaries.cc" line="124"/>
         <source>Sources changed</source>
         <translation>स्रोत बदल गए</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="123"/>
+        <location filename="../editdictionaries.cc" line="125"/>
         <source>Some sources were changed. Would you like to accept the changes?</source>
         <translation>कुछ स्रोत बदल दिए गए। क्या आप परिवर्तनों को स्वीकार करना चाहेंगे?</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="126"/>
+        <location filename="../editdictionaries.cc" line="128"/>
         <source>Accept</source>
         <translation>स्वीकार करें</translation>
     </message>
     <message>
-        <location filename="../editdictionaries.cc" line="128"/>
+        <location filename="../editdictionaries.cc" line="130"/>
         <source>Cancel</source>
         <translation>रद्द करें</translation>
     </message>
@@ -974,13 +988,13 @@ between classic and school orthography in cyrillic)</source>
     <name>FTS::FtsIndexing</name>
     <message>
         <source>None</source>
-        <translation>कोई नही</translation>
+        <translation type="obsolete">कोई नही</translation>
     </message>
 </context>
 <context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
-        <location filename="../fulltextsearch.cc" line="152"/>
+        <location filename="../fulltextsearch.cc" line="149"/>
         <source>Full-text search</source>
         <translation>पूरा पाठ खोजें</translation>
     </message>
@@ -1016,39 +1030,39 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../fulltextsearch.cc" line="217"/>
-        <location filename="../fulltextsearch.cc" line="380"/>
-        <location filename="../fulltextsearch.cc" line="470"/>
+        <location filename="../fulltextsearch.cc" line="376"/>
+        <location filename="../fulltextsearch.cc" line="466"/>
         <source>Articles found: </source>
         <translation>लेख मिले: </translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="334"/>
+        <location filename="../fulltextsearch.cc" line="330"/>
         <source>Now indexing: </source>
         <translation>अब अनुक्रमण हो रहा है:</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="335"/>
+        <location filename="../fulltextsearch.cc" line="331"/>
         <source>None</source>
         <translation>कोई नही</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="393"/>
+        <location filename="../fulltextsearch.cc" line="389"/>
         <source>CJK symbols in search string are not compatible with search modes &quot;Whole words&quot; and &quot;Plain text&quot;</source>
-        <translation>खोज स्ट्रिंग में चीनी, जापानी तथा कोरियाई प्रतीक खोज पद्धति 'संपूर्ण शब्द' और 'प्लेन टेक्स्ट' के साथ संगत नहीं हैं</translation>
+        <translation>खोज स्ट्रिंग में चीनी, जापानी तथा कोरियाई प्रतीक खोज पद्धति &apos;संपूर्ण शब्द&apos; और &apos;प्लेन टेक्स्ट&apos; के साथ संगत नहीं हैं</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="402"/>
+        <location filename="../fulltextsearch.cc" line="398"/>
         <source>The search line must contains at least one word containing </source>
         <translatorcomment>the source sentence is a bit weird...</translatorcomment>
         <translation>खोज पंक्ति में कम से कम एक शब्द होना चाहिए</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="403"/>
+        <location filename="../fulltextsearch.cc" line="399"/>
         <source> or more symbols</source>
         <translation>या अधिक प्रतीक चिह्न</translation>
     </message>
     <message>
-        <location filename="../fulltextsearch.cc" line="415"/>
+        <location filename="../fulltextsearch.cc" line="411"/>
         <source>No dictionaries for full-text search</source>
         <translation>पूर्ण-पाठ खोज के लिए कोई शब्दकोश नहीं</translation>
     </message>
@@ -1063,7 +1077,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesModel</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="643"/>
+        <location filename="../favoritespanewidget.cc" line="644"/>
         <source>Error in favorities file</source>
         <translation>पसंदीदा फ़ाइल में त्रुटि</translation>
     </message>
@@ -1071,27 +1085,27 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>FavoritesPaneWidget</name>
     <message>
-        <location filename="../favoritespanewidget.cc" line="29"/>
+        <location filename="../favoritespanewidget.cc" line="30"/>
         <source>&amp;Delete Selected</source>
         <translation>तथा चयनित हटाएं</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="38"/>
+        <location filename="../favoritespanewidget.cc" line="39"/>
         <source>Copy Selected</source>
         <translation>चयनित प्रतिलिपि करें</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="47"/>
+        <location filename="../favoritespanewidget.cc" line="48"/>
         <source>Add folder</source>
         <translation>फ़ोल्डर जोड़ें</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="61"/>
+        <location filename="../favoritespanewidget.cc" line="62"/>
         <source>Favorites:</source>
         <translation>पसंदीदा:</translation>
     </message>
     <message>
-        <location filename="../favoritespanewidget.cc" line="167"/>
+        <location filename="../favoritespanewidget.cc" line="168"/>
         <source>All selected items will be deleted. Continue?</source>
         <translation>सभी चयनित मद हटा दिए जाएंगे। जारी रखें?</translation>
     </message>
@@ -1230,14 +1244,12 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>GroupSelectorWidget</name>
     <message>
-        <location filename="../groupselectorwidget.ui" line="13"/>
         <source>Form</source>
-        <translation>प्रपत्र</translation>
+        <translation type="obsolete">प्रपत्र</translation>
     </message>
     <message>
-        <location filename="../groupselectorwidget.ui" line="19"/>
         <source>Look in</source>
-        <translation>में खोजें</translation>
+        <translation type="obsolete">में खोजें</translation>
     </message>
 </context>
 <context>
@@ -1441,27 +1453,27 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>HistoryPaneWidget</name>
     <message>
-        <location filename="../historypanewidget.cc" line="21"/>
+        <location filename="../historypanewidget.cc" line="23"/>
         <source>&amp;Delete Selected</source>
         <translation>&amp;चयनित मिटाएं</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="30"/>
+        <location filename="../historypanewidget.cc" line="32"/>
         <source>Copy Selected</source>
         <translation>चयनित प्रतिलिपित करें</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="47"/>
+        <location filename="../historypanewidget.cc" line="49"/>
         <source>History:</source>
         <translation>इतिहास:</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="219"/>
+        <location filename="../historypanewidget.cc" line="221"/>
         <source>%1/%2</source>
         <translation>%1/%2</translation>
     </message>
     <message>
-        <location filename="../historypanewidget.cc" line="223"/>
+        <location filename="../historypanewidget.cc" line="225"/>
         <source>History size: %1 entries out of maximum %2</source>
         <translation>इतिहासाकार: %1 प्रविष्टियाँ अधिकतम %2 प्रविष्टियों में से</translation>
     </message>
@@ -1501,7 +1513,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../initializing.ui" line="28"/>
-        <location filename="../initializing.cc" line="60"/>
+        <location filename="../initializing.cc" line="70"/>
         <source>Please wait while indexing dictionary</source>
         <translation>कृपया शब्दकोश को अनुक्रमित करते समय तक प्रतीक्षा करें</translation>
     </message>
@@ -1511,7 +1523,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>शब्दकोश नाम</translation>
     </message>
     <message>
-        <location filename="../initializing.cc" line="51"/>
+        <location filename="../initializing.cc" line="61"/>
         <source>Please wait...</source>
         <translation>कृपया प्रतीक्षा करें...</translation>
     </message>
@@ -2449,77 +2461,77 @@ between classic and school orthography in cyrillic)</source>
         <translation>Lojban</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="376"/>
+        <location filename="../language.cc" line="377"/>
         <source>Traditional Chinese</source>
         <translation>Chinois traditionel</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="377"/>
+        <location filename="../language.cc" line="378"/>
         <source>Simplified Chinese</source>
         <translation>Chinois simplifié</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="378"/>
+        <location filename="../language.cc" line="379"/>
         <source>Other</source>
         <translation>Autre</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="379"/>
+        <location filename="../language.cc" line="380"/>
         <source>Other Simplified Chinese dialects</source>
         <translation>Autres dialectes chinois simplifiés</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="380"/>
+        <location filename="../language.cc" line="381"/>
         <source>Other Traditional Chinese dialects</source>
         <translation>Autres dialectes chinois traditionels</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="381"/>
+        <location filename="../language.cc" line="382"/>
         <source>Other Eastern-European languages</source>
         <translation>Autres langues d&apos;Europe de l&apos;Est</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="382"/>
+        <location filename="../language.cc" line="383"/>
         <source>Other Western-European languages</source>
         <translation>Autres langues d&apos;Europe de l&apos;Ouest</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="383"/>
+        <location filename="../language.cc" line="384"/>
         <source>Other Russian languages</source>
         <translation>Autres langues russes</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="384"/>
+        <location filename="../language.cc" line="385"/>
         <source>Other Japanese languages</source>
         <translation>Autres langues japonaises</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="385"/>
+        <location filename="../language.cc" line="386"/>
         <source>Other Baltic languages</source>
         <translation>Autres langues baltiques</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="386"/>
+        <location filename="../language.cc" line="387"/>
         <source>Other Greek languages</source>
         <translation>Autres langues grecques</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="387"/>
+        <location filename="../language.cc" line="388"/>
         <source>Other Korean dialects</source>
         <translation>Autres dialectes coréens</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="388"/>
+        <location filename="../language.cc" line="389"/>
         <source>Other Turkish dialects</source>
         <translation>Autres dialectes turcs</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="389"/>
+        <location filename="../language.cc" line="390"/>
         <source>Other Thai dialects</source>
         <translation>Autres ldialectes thaï</translation>
     </message>
     <message>
-        <location filename="../language.cc" line="390"/>
+        <location filename="../language.cc" line="391"/>
         <source>Tamazight</source>
         <translation>Tamazight (Berbère)</translation>
     </message>
@@ -2535,7 +2547,7 @@ between classic and school orthography in cyrillic)</source>
 <context>
     <name>Main</name>
     <message>
-        <location filename="../main.cc" line="361"/>
+        <location filename="../main.cc" line="375"/>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Erreur dans le fichier de configuration. Continuer avec les paramètres par défaut ?</translation>
     </message>
@@ -2548,7 +2560,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="46"/>
-        <location filename="../mainwindow.cc" line="783"/>
+        <location filename="../mainwindow.cc" line="801"/>
         <source>Welcome!</source>
         <translation>Bienvenue !</translation>
     </message>
@@ -2666,7 +2678,7 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="422"/>
-        <location filename="../mainwindow.cc" line="369"/>
+        <location filename="../mainwindow.cc" line="371"/>
         <source>&amp;Quit</source>
         <translation>&amp;Quitter</translation>
     </message>
@@ -2768,7 +2780,7 @@ between classic and school orthography in cyrillic)</source>
     <message>
         <location filename="../mainwindow.ui" line="597"/>
         <location filename="../mainwindow.ui" line="600"/>
-        <location filename="../mainwindow.cc" line="275"/>
+        <location filename="../mainwindow.cc" line="276"/>
         <source>Menu Button</source>
         <translation>Bouton du menu</translation>
     </message>
@@ -2814,10 +2826,10 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="659"/>
-        <location filename="../mainwindow.cc" line="246"/>
-        <location filename="../mainwindow.cc" line="1746"/>
-        <location filename="../mainwindow.cc" line="1824"/>
-        <location filename="../mainwindow.cc" line="4553"/>
+        <location filename="../mainwindow.cc" line="247"/>
+        <location filename="../mainwindow.cc" line="1830"/>
+        <location filename="../mainwindow.cc" line="1908"/>
+        <location filename="../mainwindow.cc" line="4773"/>
         <source>Add current tab to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2850,7 +2862,7 @@ between classic and school orthography in cyrillic)</source>
         <translation>E&amp;ffacer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="604"/>
+        <location filename="../mainwindow.cc" line="610"/>
         <source>New Tab</source>
         <translation>Nouvel onglet</translation>
     </message>
@@ -2866,8 +2878,8 @@ between classic and school orthography in cyrillic)</source>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="552"/>
-        <location filename="../mainwindow.cc" line="3723"/>
-        <location filename="../mainwindow.cc" line="3735"/>
+        <location filename="../mainwindow.cc" line="3937"/>
+        <location filename="../mainwindow.cc" line="3949"/>
         <source>&amp;Show</source>
         <translation>Affi&amp;cher</translation>
     </message>
@@ -2895,7 +2907,7 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Afficher des petites icônes dans les barres d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="105"/>
+        <location filename="../mainwindow.cc" line="106"/>
         <source>&amp;Menubar</source>
         <translation>Barre du &amp;menu</translation>
     </message>
@@ -2904,199 +2916,199 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">Navigation</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="103"/>
+        <location filename="../mainwindow.cc" line="104"/>
         <source>Show Names in Dictionary &amp;Bar</source>
         <translation>Afficher les noms dans la &amp;barre de dictionnaire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="104"/>
+        <location filename="../mainwindow.cc" line="105"/>
         <source>Show Small Icons in &amp;Toolbars</source>
         <translation>Afficher de petites icônes dans les barres d&apos;ou&amp;tils</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="164"/>
+        <location filename="../mainwindow.cc" line="165"/>
         <source>&amp;Navigation</source>
         <translation>&amp;Navigation</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="167"/>
+        <location filename="../mainwindow.cc" line="168"/>
         <source>Back</source>
         <translation>Précédent</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="169"/>
+        <location filename="../mainwindow.cc" line="170"/>
         <source>Forward</source>
         <translation>Suivant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="194"/>
+        <location filename="../mainwindow.cc" line="195"/>
         <source>Scan Popup</source>
         <translation>Fenêtre de scan</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="209"/>
+        <location filename="../mainwindow.cc" line="210"/>
         <source>Pronounce Word (Alt+S)</source>
         <translation>Prononcer le mot (Alt+S)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="221"/>
+        <location filename="../mainwindow.cc" line="222"/>
         <source>Zoom In</source>
         <translation>Zoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="227"/>
+        <location filename="../mainwindow.cc" line="228"/>
         <source>Zoom Out</source>
         <translation>Dézoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="231"/>
+        <location filename="../mainwindow.cc" line="232"/>
         <source>Normal Size</source>
         <translation>Taille normale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="283"/>
-        <location filename="../mainwindow.cc" line="1297"/>
+        <location filename="../mainwindow.cc" line="284"/>
+        <location filename="../mainwindow.cc" line="1378"/>
         <source>Look up in:</source>
         <translation>Chercher dans :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="321"/>
+        <location filename="../mainwindow.cc" line="323"/>
         <source>Found in Dictionaries:</source>
         <translation>Trouvé dans les dictionnaires :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="351"/>
+        <location filename="../mainwindow.cc" line="353"/>
         <source>Words Zoom In</source>
         <translation>Zoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="355"/>
+        <location filename="../mainwindow.cc" line="357"/>
         <source>Words Zoom Out</source>
         <translation>Dézoomer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="357"/>
+        <location filename="../mainwindow.cc" line="359"/>
         <source>Words Normal Size</source>
         <translation>Taille normale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="365"/>
+        <location filename="../mainwindow.cc" line="367"/>
         <source>Show &amp;Main Window</source>
         <translation>Afficher la fenêtre &amp;principale</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="392"/>
+        <location filename="../mainwindow.cc" line="394"/>
         <source>Opened tabs</source>
         <translation>Onglets ouverts</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="403"/>
+        <location filename="../mainwindow.cc" line="405"/>
         <source>Close current tab</source>
         <translation>Fermer l&apos;onglet courant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="413"/>
+        <location filename="../mainwindow.cc" line="415"/>
         <source>Close all tabs</source>
         <translation>Fermer tous les onglets</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="421"/>
+        <location filename="../mainwindow.cc" line="423"/>
         <source>Close all tabs except current</source>
         <translation>Fermer tous les onglets sauf l&apos;onglet courant</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="455"/>
+        <location filename="../mainwindow.cc" line="457"/>
         <source>Add all tabs to Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="594"/>
+        <location filename="../mainwindow.cc" line="599"/>
         <source>Loading...</source>
         <translation>Chargement...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1286"/>
+        <location filename="../mainwindow.cc" line="1367"/>
         <source>%1 dictionaries, %2 articles, %3 words</source>
         <translation>%1 dictionnaires, %2 articles, %3 mots</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1297"/>
+        <location filename="../mainwindow.cc" line="1378"/>
         <source>Look up:</source>
         <translation>Chercher :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1315"/>
+        <location filename="../mainwindow.cc" line="1396"/>
         <source>All</source>
         <translation>Tout</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1479"/>
+        <location filename="../mainwindow.cc" line="1560"/>
         <source>Open Tabs List</source>
         <translation>Liste des onglets ouverts</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1537"/>
+        <location filename="../mainwindow.cc" line="1618"/>
         <source>(untitled)</source>
         <translation>(sans titre)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1741"/>
-        <location filename="../mainwindow.cc" line="1819"/>
-        <location filename="../mainwindow.cc" line="4533"/>
-        <location filename="../mainwindow.cc" line="4561"/>
-        <location filename="../mainwindow.cc" line="4588"/>
+        <location filename="../mainwindow.cc" line="1825"/>
+        <location filename="../mainwindow.cc" line="1903"/>
+        <location filename="../mainwindow.cc" line="4753"/>
+        <location filename="../mainwindow.cc" line="4781"/>
+        <location filename="../mainwindow.cc" line="4808"/>
         <source>Remove current tab from Favorites</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="1771"/>
+        <location filename="../mainwindow.cc" line="1855"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3898"/>
+        <location filename="../mainwindow.cc" line="4112"/>
         <source>Export Favorites to file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3900"/>
-        <location filename="../mainwindow.cc" line="3990"/>
+        <location filename="../mainwindow.cc" line="4114"/>
+        <location filename="../mainwindow.cc" line="4204"/>
         <source>XML files (*.xml);;All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3919"/>
-        <location filename="../mainwindow.cc" line="3968"/>
+        <location filename="../mainwindow.cc" line="4133"/>
+        <location filename="../mainwindow.cc" line="4182"/>
         <source>Favorites export complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3939"/>
+        <location filename="../mainwindow.cc" line="4153"/>
         <source>Export Favorites to file as plain list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3988"/>
+        <location filename="../mainwindow.cc" line="4202"/>
         <source>Import Favorites from file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4013"/>
+        <location filename="../mainwindow.cc" line="4227"/>
         <source>Favorites import complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4019"/>
+        <location filename="../mainwindow.cc" line="4233"/>
         <source>Data parsing error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4504"/>
+        <location filename="../mainwindow.cc" line="4724"/>
         <source>Now indexing for full-text search: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4546"/>
+        <location filename="../mainwindow.cc" line="4766"/>
         <source>Remove headword &quot;%1&quot; from Favorites?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3105,80 +3117,80 @@ between classic and school orthography in cyrillic)</source>
         <translation type="obsolete">ATTENTION : %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="2924"/>
+        <location filename="../mainwindow.cc" line="3062"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
         <translation>Échec lors de l&apos;initialisation du mécanisme d&apos;écoute des raccourcis.&lt;br&gt;Vérifiez que l&apos;extension ENREGISTREMENT du serveur X est activée.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3065"/>
+        <location filename="../mainwindow.cc" line="3220"/>
         <source>New Release Available</source>
         <translation>Nouvelle version disponible</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3066"/>
+        <location filename="../mainwindow.cc" line="3221"/>
         <source>Version &lt;b&gt;%1&lt;/b&gt; of GoldenDict is now available for download.&lt;br&gt;Click &lt;b&gt;Download&lt;/b&gt; to get to the download page.</source>
         <translation>La version &lt;b&gt;%1&lt;/b&gt; de GoldenDict est disponible au téléchargement.&lt;br&gt;Cliquez sur &lt;b&gt;Télécharger&lt;/b&gt; pour accéder à la page de téléchargement.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3071"/>
+        <location filename="../mainwindow.cc" line="3226"/>
         <source>Download</source>
         <translation>Téléchargement</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3072"/>
+        <location filename="../mainwindow.cc" line="3227"/>
         <source>Skip This Release</source>
         <translation>Ignorer la version</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="842"/>
-        <location filename="../mainwindow.cc" line="3125"/>
+        <location filename="../mainwindow.cc" line="865"/>
+        <location filename="../mainwindow.cc" line="3280"/>
         <source>Accessibility API is not enabled</source>
         <translation>L&apos;API d&apos;accessibilité n&apos;est pas activée</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="919"/>
+        <location filename="../mainwindow.cc" line="952"/>
         <source>String to search in dictionaries. The wildcards &apos;*&apos;, &apos;?&apos; and sets of symbols &apos;[...]&apos; are allowed.
 To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos; respectively</source>
         <translation>Chaîne à rechercher dans les dictionnaires. Les opérateurs de cardinalité &apos;*&apos;, &apos;?&apos; et les groupes de symboles &apos;[...]&apos; sont autorisés.
 Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos;, utiliser respectivement &apos;\*&apos;, &apos;\?&apos;, &apos;\[&apos;, &apos;\]&apos;</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3202"/>
+        <location filename="../mainwindow.cc" line="3357"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
         <translation>Vous avez choisi de masquer une barre de menus. Utilisez %1 pour l&apos;afficher à nouveau.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3203"/>
+        <location filename="../mainwindow.cc" line="3358"/>
         <source>Ctrl+M</source>
         <translation>Ctrl+M</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3302"/>
+        <location filename="../mainwindow.cc" line="3457"/>
         <source>Page Setup</source>
         <translation>Paramètres d&apos;impression</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3303"/>
+        <location filename="../mainwindow.cc" line="3458"/>
         <source>No printer is available. Please install one first.</source>
         <translation>Aucune imprimante n&apos;est disponible. Veuillez en installer une afin de continuer.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3321"/>
+        <location filename="../mainwindow.cc" line="3476"/>
         <source>Print Article</source>
         <translation>Imprimer l&apos;article</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3396"/>
+        <location filename="../mainwindow.cc" line="3551"/>
         <source>Article, Complete (*.html)</source>
         <translation>Article, Complet (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3397"/>
+        <location filename="../mainwindow.cc" line="3552"/>
         <source>Article, HTML Only (*.html)</source>
         <translation>Article, HTML uniquement (*.html)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3400"/>
+        <location filename="../mainwindow.cc" line="3555"/>
         <source>Save Article As</source>
         <translation>Enregister l&apos;article sous</translation>
     </message>
@@ -3187,28 +3199,28 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <translation type="obsolete">Fichiers HTML (*.html *.htm)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3414"/>
+        <location filename="../mainwindow.cc" line="3569"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3415"/>
+        <location filename="../mainwindow.cc" line="3570"/>
         <source>Can&apos;t save article: %1</source>
         <translation>Impossible d&apos;enregistrer l&apos;article : %1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3476"/>
+        <location filename="../mainwindow.cc" line="3631"/>
         <source>Saving article...</source>
         <translation>Sauvegarde de l&apos;article...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3539"/>
+        <location filename="../mainwindow.cc" line="3692"/>
         <source>The main window is set to be always on top.</source>
         <translation>La fenêtre pricipale est configurée pour être toujours au premier plan.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3719"/>
-        <location filename="../mainwindow.cc" line="3731"/>
+        <location filename="../mainwindow.cc" line="3933"/>
+        <location filename="../mainwindow.cc" line="3945"/>
         <source>&amp;Hide</source>
         <translation>&amp;Masquer</translation>
     </message>
@@ -3217,31 +3229,31 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <translation type="obsolete">Mode d&apos;affichage de l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3763"/>
+        <location filename="../mainwindow.cc" line="3977"/>
         <source>Export history to file</source>
         <translation>Exporter l&apos;historique dans un fichier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3765"/>
-        <location filename="../mainwindow.cc" line="3827"/>
-        <location filename="../mainwindow.cc" line="3941"/>
+        <location filename="../mainwindow.cc" line="3979"/>
+        <location filename="../mainwindow.cc" line="4041"/>
+        <location filename="../mainwindow.cc" line="4155"/>
         <source>Text files (*.txt);;All files (*.*)</source>
         <translation>Fichiers texte (*.txt);;Tous les fichiers (*.*)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3804"/>
+        <location filename="../mainwindow.cc" line="4018"/>
         <source>History export complete</source>
         <translation>Export de l&apos;historique terminé</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3807"/>
-        <location filename="../mainwindow.cc" line="3922"/>
-        <location filename="../mainwindow.cc" line="3971"/>
+        <location filename="../mainwindow.cc" line="4021"/>
+        <location filename="../mainwindow.cc" line="4136"/>
+        <location filename="../mainwindow.cc" line="4185"/>
         <source>Export error: </source>
         <translation>Erreur d&apos;export :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3825"/>
+        <location filename="../mainwindow.cc" line="4039"/>
         <source>Import history from file</source>
         <translation>Importer l&apos;historique à partir d&apos;un fichier</translation>
     </message>
@@ -3250,38 +3262,38 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <translation type="obsolete">Importé à partir du fichier :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3874"/>
+        <location filename="../mainwindow.cc" line="4088"/>
         <source>Import error: invalid data in file</source>
         <translation>Erreur d&apos;import : données invalides dans le fichier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3878"/>
+        <location filename="../mainwindow.cc" line="4092"/>
         <source>History import complete</source>
         <translation>Import d&apos;historique terminé</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="3881"/>
-        <location filename="../mainwindow.cc" line="4017"/>
+        <location filename="../mainwindow.cc" line="4095"/>
+        <location filename="../mainwindow.cc" line="4231"/>
         <source>Import error: </source>
         <translation>Erreur d&apos;import :</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4295"/>
+        <location filename="../mainwindow.cc" line="4515"/>
         <source>Dictionary info</source>
         <translation>Informations sur le dictionnaire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4299"/>
+        <location filename="../mainwindow.cc" line="4519"/>
         <source>Dictionary headwords</source>
         <translation>Vedettes du dictionnaire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4301"/>
+        <location filename="../mainwindow.cc" line="4521"/>
         <source>Open dictionary folder</source>
         <translation>Ouvrir le dossier des dictionnaires</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cc" line="4307"/>
+        <location filename="../mainwindow.cc" line="4527"/>
         <source>Edit dictionary</source>
         <translation>Éditer le dictionnaire</translation>
     </message>
@@ -3289,12 +3301,12 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
 <context>
     <name>Mdx::MdxArticleRequest</name>
     <message>
-        <location filename="../mdx.cc" line="650"/>
+        <location filename="../mdx.cc" line="668"/>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Le fichier de dictionnaire a été modifié ou corrompu</translation>
     </message>
     <message>
-        <location filename="../mdx.cc" line="661"/>
+        <location filename="../mdx.cc" line="679"/>
         <source>Failed loading article from %1, reason: %2</source>
         <translation>%1 से लेख लोडिंग विफल रहा, कारण: %2</translation>
     </message>
@@ -3302,7 +3314,7 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="337"/>
+        <location filename="../mediawiki.cc" line="358"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>एक्स.एम.एल पदव्याख्या त्रुटि: %2,%3 पर %1</translation>
     </message>
@@ -3310,7 +3322,7 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
     <message>
-        <location filename="../mediawiki.cc" line="201"/>
+        <location filename="../mediawiki.cc" line="202"/>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>एक्स.एम.एल पदव्याख्या त्रुटि: %2,%3 पर %1</translation>
     </message>
@@ -3413,17 +3425,17 @@ Pour rechercher les symboles &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;
         <translation> इसमें मदों को खींचकर और छोडकर क्रम समायोजित करें।शब्दकोशों के उपयोग को अक्षम करने के लिए उन्हें निष्क्रिय समूह में छोड़ दें।</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="255"/>
+        <location filename="../orderandprops.cc" line="267"/>
         <source>Sort by name</source>
         <translation>नाम के आधार पर छाँटें</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="257"/>
+        <location filename="../orderandprops.cc" line="269"/>
         <source>Sort by languages</source>
         <translation>भाषाओं के आधार पर छाँटें</translation>
     </message>
     <message>
-        <location filename="../orderandprops.cc" line="268"/>
+        <location filename="../orderandprops.cc" line="263"/>
         <source>Dictionary headwords</source>
         <translation>शब्दकोश मुखशब्द</translation>
     </message>
@@ -3903,74 +3915,75 @@ p, li { white-space: pre-wrap; }
         <translation>अनुकूलित सेटिंग्स</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1206"/>
+        <location filename="../preferences.ui" line="1259"/>
         <source>Full-text search</source>
         <translation>पूर्ण-पाठ खोज</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1225"/>
+        <location filename="../preferences.ui" line="1278"/>
         <source>Allow full-text search for:</source>
         <translation>पूर्ण-पाठ खोज की अनुमति दें:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1323"/>
+        <location filename="../preferences.ui" line="1376"/>
         <source>Don&apos;t search in dictionaries containing more than</source>
         <translatorcomment>typo in source sentence? *containing* more than</translatorcomment>
         <translation>इससे अधिक वाले शब्दकोशों में खोज न करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1340"/>
+        <location filename="../preferences.ui" line="1393"/>
         <source>articles (0 - unlimited)</source>
         <translation>लेख (0 - असीमित)</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1619"/>
+        <location filename="../preferences.ui" line="1672"/>
         <source>Favorites</source>
         <translation>पसंदीदा</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1627"/>
+        <location filename="../preferences.ui" line="1680"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
         <translation>पसंदीदा रक्षण अंतराल। यदि 0 पर सेट किया जाता है तो पसंदीदा केवल निकास के समय रक्षण किया जाएगा।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1653"/>
+        <location filename="../preferences.ui" line="1706"/>
         <source>Turn this option on to confirm every operation of items deletion</source>
         <translation>मद हटाने के प्रत्येक प्रक्रिया की पुष्टि करने के लिए इस विकल्प को चालू करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1656"/>
+        <location filename="../preferences.ui" line="1709"/>
         <source>Confirmation for items deletion</source>
         <translation>मद मिटाने की पुष्टि</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1689"/>
+        <location filename="../preferences.ui" line="1740"/>
         <source>Select this option to automatic collapse big articles</source>
         <translation>बड़े लेखों को स्वचालित रूप से संक्षिप्त करने के लिए इस विकल्प का चयन करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1692"/>
+        <location filename="../preferences.ui" line="1743"/>
         <source>Collapse articles more than</source>
         <translation>से अधिक लेखों को संक्षिप्त करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1699"/>
+        <location filename="../preferences.ui" line="1750"/>
         <source>Articles longer than this size will be collapsed</source>
         <translation>इस आकार से अधिक लंबे लेख संक्षिप्त हो जाएंगे</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1715"/>
+        <location filename="../preferences.ui" line="1766"/>
+        <location filename="../preferences.ui" line="1816"/>
         <source>symbols</source>
         <translation>प्रतीक</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1773"/>
+        <location filename="../preferences.ui" line="1859"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
         <translation>स्टारडिक्ट, बेबीलोन और जी.एल.एस शब्दकोशों से पर्याय सूची के माध्यम से अतिरिक्त लेख खोज को सक्षम करने के लिए इस विकल्प को चालू करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1777"/>
+        <location filename="../preferences.ui" line="1863"/>
         <source>Extra search via synonyms</source>
         <translation>पर्याय/समानार्थी के माध्यम से अतिरिक्त खोज</translation>
     </message>
@@ -4097,7 +4110,35 @@ Enable this option to workaround the problem.</source>
         <translation>एच.टी.टी.पी शीर्षक में गोलेडेनडिक्ट की पहचान न करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1174"/>
+        <location filename="../preferences.ui" line="1160"/>
+        <source>Maximum network cache size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1167"/>
+        <source>Maximum disk space occupied by GoldenDict&apos;s network cache in
+%1
+If set to 0 the network disk cache will be disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1172"/>
+        <source> MiB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1185"/>
+        <source>When this option is enabled, GoldenDict
+clears its network cache from disk during exit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1189"/>
+        <source>Clear network cache on exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1227"/>
         <source>When this is enabled, the program periodically
 checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
@@ -4106,22 +4147,22 @@ download page.</source>
         <translation>जब यह सक्षम हो जाता है, तो समय-समय पर प्रोग्राम जाँच करता है कि यदि गोल्डेनडिक्ट का एक नया, अद्यतन संस्करण डाउनलोड के लिए उपलब्ध है।अगर ऐसा है, तो प्रोग्राम उपयोगकर्ता को इसके बारे में सूचित करता है और एक डाउनलोड पृष्ठ खोलने का संकेत देता है ।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1181"/>
+        <location filename="../preferences.ui" line="1234"/>
         <source>Check for new program releases periodically</source>
         <translation>समय-समय पर नए प्रोग्राम रिलीज़ के लिए जाँच करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1379"/>
+        <location filename="../preferences.ui" line="1432"/>
         <source>Ad&amp;vanced</source>
         <translation>उन्नत</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1387"/>
+        <location filename="../preferences.ui" line="1440"/>
         <source>ScanPopup extra technologies</source>
         <translation>स्कैनपॉपअप अतिरिक्त तकनीकें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1393"/>
+        <location filename="../preferences.ui" line="1446"/>
         <source>Try to use IAccessibleEx technology to retrieve word under cursor.
 This technology works only with some programs that support it
  (for example Internet Explorer 9).
@@ -4132,12 +4173,12 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 यदि आप ऐसे कार्यक्रमों का उपयोग नहीं करते हैं, तो इस विकल्प का चयन करने की आवश्यकता नहीं है।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1399"/>
+        <location filename="../preferences.ui" line="1452"/>
         <source>Use &amp;IAccessibleEx</source>
         <translation>&amp;IAccessibleEx का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1406"/>
+        <location filename="../preferences.ui" line="1459"/>
         <source>Try to use UI Automation technology to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
@@ -4146,125 +4187,140 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
 यदि आप ऐसे प्रोग्रामों का उपयोग नहीं करते हैं, तो इस विकल्प का चयन करने की आवश्यकता नहीं है।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1411"/>
+        <location filename="../preferences.ui" line="1464"/>
         <source>Use &amp;UIAutomation</source>
         <translation>&amp;यू.आई.स्वचालन का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1418"/>
+        <location filename="../preferences.ui" line="1471"/>
         <source>Try to use special GoldenDict message to retrieve word under cursor.
 This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
-        <translatorcomment>wtf is a &quot;special GoldenDict message&quot;? some kind of software illumination? anyway, i lol&apos;d</translatorcomment>
         <translatorcomment>wtf एक &quot;विशेष गोल्डेनडिक्ट संदेश&quot;? ; सॉफ्टवेयर प्रदीप्ति का कोई प्रकार? वैसे भी, मैं जोर से हंसा।</translatorcomment>
         <translation>कर्सर के नीचे शब्द को प्राप्त करने के लिए विशेष गोल्डनडिक्ट संदेश का उपयोग करने का प्रयास करें।
 यह तकनीक केवल कुछ प्रोग्रामों के साथ काम करती है जो इसका समर्थन करते हैं।
 यदि आप ऐसे प्रोग्रामों का उपयोग नहीं करते हैं, तो इस विकल्प का चयन करने की आवश्यकता नहीं है।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1423"/>
+        <location filename="../preferences.ui" line="1476"/>
         <source>Use &amp;GoldenDict message</source>
         <translation>&amp;गोल्डनडिक्ट संदेश का उपयोग करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1433"/>
+        <location filename="../preferences.ui" line="1486"/>
         <source>ScanPopup unpinned window flags</source>
         <translation type="unfinished">बिना पिन किए खिड़की झंड़ों का अवलोकन तथा पाॅपअप करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1439"/>
+        <location filename="../preferences.ui" line="1492"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
         <translation type="unfinished">अनौत्सर्गिक झंडे के साथ प्रयोग करें यदि अनपिन किए गए स्कैन पॉपअप विंडो खराब चलते हैं</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1443"/>
+        <location filename="../preferences.ui" line="1496"/>
         <source>&lt;default&gt;</source>
         <translation>&lt;औत्सर्गिक&gt;</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1448"/>
+        <location filename="../preferences.ui" line="1501"/>
         <source>Popup</source>
         <translation>पाॅप अप</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1453"/>
+        <location filename="../preferences.ui" line="1506"/>
         <source>Tool</source>
         <translation>साधन</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1464"/>
+        <location filename="../preferences.ui" line="1517"/>
         <source>This hint can be combined with non-default window flags</source>
         <translation>इस संकेत को अनौत्सर्गिक खिड़की झंडे के साथ जोड़ा जा सकता है</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1467"/>
+        <location filename="../preferences.ui" line="1520"/>
         <source>Bypass window manager hint</source>
         <translation>लघुमार्ग खिड़की प्रबंधक संकेत</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1507"/>
+        <location filename="../preferences.ui" line="1560"/>
         <source>History</source>
         <translation>इतिहास</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1513"/>
+        <location filename="../preferences.ui" line="1566"/>
         <source>Turn this option on to store history of the translated words</source>
         <translation>अनुवादित शब्दों के इतिहास को संग्रहीत करने के लिए इस विकल्प को चालू करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1516"/>
+        <location filename="../preferences.ui" line="1569"/>
         <source>Store &amp;history</source>
         <translation>&amp;इतिहास संग्रहीत करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1531"/>
+        <location filename="../preferences.ui" line="1584"/>
         <source>Specify the maximum number of entries to keep in history.</source>
         <translation>इतिहास में रखने के लिए प्रविष्टियों की अधिकतम संख्या निर्दिष्ट करें।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1534"/>
+        <location filename="../preferences.ui" line="1587"/>
         <source>Maximum history size:</source>
         <translation>अधिकतम इतिहास का आकार:</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1571"/>
+        <location filename="../preferences.ui" line="1624"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
         <translation>इतिहास रक्षण अंतराल। यदि 0 पर सेट किया जाता है तो इतिहास केवल निकास के दौरान ही सहेजा जाएगा।</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1577"/>
         <location filename="../preferences.ui" line="1630"/>
+        <location filename="../preferences.ui" line="1683"/>
         <source>Save every</source>
         <translation>प्रत्येक सहेजें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1594"/>
-        <location filename="../preferences.ui" line="1644"/>
+        <location filename="../preferences.ui" line="1647"/>
+        <location filename="../preferences.ui" line="1697"/>
         <source>minutes</source>
         <translation>मिनट</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1681"/>
+        <location filename="../preferences.ui" line="1734"/>
         <source>Articles</source>
         <translation>लेख</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1737"/>
+        <location filename="../preferences.ui" line="1786"/>
+        <source>Turn this option on to ignore unreasonably long input text
+from mouse-over, selection, clipboard or command line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1790"/>
+        <source>Ignore input phrases longer than</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1800"/>
+        <source>Input phrases longer than this size will be ignored</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../preferences.ui" line="1823"/>
         <source>Turn this option on to ignore diacritics while searching articles</source>
         <translation>लेखों को खोजते समय विशिष्ट स्वर चिह्नों की उपेक्षा करने के लिए इस विकल्प को चालू करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1740"/>
+        <location filename="../preferences.ui" line="1826"/>
         <source>Ignore diacritics while searching</source>
         <translation>खोज करते समय विशिष्ट स्वर चिह्नों की उपेक्षा करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1747"/>
+        <location filename="../preferences.ui" line="1833"/>
         <source>Turn this option on to always expand optional parts of articles</source>
         <translation>लेख के वैकल्पिक भागों का हमेशा विस्तार करने के लिए इस विकल्प को चालू करें</translation>
     </message>
     <message>
-        <location filename="../preferences.ui" line="1750"/>
+        <location filename="../preferences.ui" line="1836"/>
         <source>Expand optional &amp;parts</source>
         <translation>वैकल्पिक &amp;भागों का विस्तार करें</translation>
     </message>
@@ -4305,16 +4361,21 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>लिंगोज-नीला</translation>
     </message>
     <message>
+        <location filename="../preferences.cc" line="158"/>
+        <source> MB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Play via DirectShow</source>
         <translation type="obsolete">डायरेक्ट-शो से चलाएं</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="622"/>
+        <location filename="../preferences.cc" line="640"/>
         <source>Changing Language</source>
         <translation>भाषा परिवर्तन</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="623"/>
+        <location filename="../preferences.cc" line="641"/>
         <source>Restart the program to apply the language change.</source>
         <translation>भाषा परिवर्तन लागू करने के लिए प्रोग्राम को पुनरारंभ करें।</translation>
     </message>
@@ -4397,146 +4458,146 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <name>QObject</name>
     <message>
         <location filename="../aard.cc" line="449"/>
-        <location filename="../dsl.cc" line="1752"/>
+        <location filename="../dsl.cc" line="1794"/>
         <source>Article loading error</source>
         <translation>लेख लोड करने मे त्रुटि</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="541"/>
-        <location filename="../slob.cc" line="734"/>
+        <location filename="../slob.cc" line="801"/>
         <source>Article decoding error</source>
         <translation>लेख विकूटन त्रुटि</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="586"/>
-        <location filename="../bgl.cc" line="403"/>
-        <location filename="../sdict.cc" line="718"/>
-        <location filename="../stardict.cc" line="1159"/>
+        <location filename="../bgl.cc" line="406"/>
+        <location filename="../sdict.cc" line="721"/>
+        <location filename="../stardict.cc" line="1162"/>
         <source>Copyright: %1%2</source>
         <translation>सर्वाधिकार</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="590"/>
-        <location filename="../sdict.cc" line="734"/>
+        <location filename="../sdict.cc" line="737"/>
         <source>Version: %1%2</source>
         <translation>संस्करण: %1%2</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="144"/>
+        <location filename="../ffmpegaudio.cc" line="165"/>
         <source>avformat_alloc_context() failed.</source>
         <translation>avformat_alloc_context() विफल।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="155"/>
+        <location filename="../ffmpegaudio.cc" line="176"/>
         <source>av_malloc() failed.</source>
         <translation>av_malloc() विफल।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="164"/>
+        <location filename="../ffmpegaudio.cc" line="185"/>
         <source>avio_alloc_context() failed.</source>
         <translation>avio_alloc_context() विफल।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="181"/>
+        <location filename="../ffmpegaudio.cc" line="202"/>
         <source>avformat_open_input() failed: %1.</source>
         <translation>avformat_open_input() विफल: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="188"/>
+        <location filename="../ffmpegaudio.cc" line="209"/>
         <source>avformat_find_stream_info() failed: %1.</source>
         <translation>avformat_find_stream_info() विफल : %1 ।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="207"/>
+        <location filename="../ffmpegaudio.cc" line="228"/>
         <source>Could not find audio stream.</source>
         <translation>श्रव्य प्रवाह नहीं मिल सका।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="216"/>
-        <location filename="../ffmpegaudio.cc" line="223"/>
+        <location filename="../ffmpegaudio.cc" line="237"/>
+        <location filename="../ffmpegaudio.cc" line="244"/>
         <source>Codec [id: %1] not found.</source>
         <translation>कूटक [id : %1] नही मिला।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="229"/>
+        <location filename="../ffmpegaudio.cc" line="250"/>
         <source>avcodec_alloc_context3() failed.</source>
         <translation type="unfinished">avcodec_alloc_context3() विफल ।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="238"/>
+        <location filename="../ffmpegaudio.cc" line="259"/>
         <source>avcodec_open2() failed: %1.</source>
         <translation>avcodec_open2() विफल: %1.</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="302"/>
+        <location filename="../ffmpegaudio.cc" line="348"/>
         <source>Cannot find usable audio output device.</source>
         <translation>प्रयोग करने योग्य श्रव्य आउटपुट साधन नहीं मिला।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="315"/>
+        <location filename="../ffmpegaudio.cc" line="362"/>
         <source>Unsupported sample format.</source>
         <translation>असमर्थित नमूना प्रारूप।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="325"/>
+        <location filename="../ffmpegaudio.cc" line="372"/>
         <source>ao_open_live() failed: </source>
         <translation>ano_open_live() विफल:</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="330"/>
+        <location filename="../ffmpegaudio.cc" line="377"/>
         <source>No driver.</source>
         <translation>कोई ड्राइवर नहीं।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="333"/>
+        <location filename="../ffmpegaudio.cc" line="380"/>
         <source>This driver is not a live output device.</source>
         <translation>यह ड्राइवर सजीव आउटपुट साधन नहीं है।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="336"/>
+        <location filename="../ffmpegaudio.cc" line="383"/>
         <source>A valid option key has an invalid value.</source>
         <translation>एक वैध विकल्प कुंजी में एक अमान्य मान है।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="339"/>
+        <location filename="../ffmpegaudio.cc" line="386"/>
         <source>Cannot open the device: %1, channels: %2, rate: %3, bits: %4.</source>
         <translation>डिवाइस को नहीं खोल सका: %1, चैनल: %2, दर: %3, बिट्स: %4 ।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="346"/>
+        <location filename="../ffmpegaudio.cc" line="393"/>
         <source>Unknown error.</source>
         <translation>अज्ञात त्रुटि।</translation>
     </message>
     <message>
-        <location filename="../ffmpegaudio.cc" line="375"/>
+        <location filename="../ffmpegaudio.cc" line="422"/>
         <source>avcodec_alloc_frame() failed.</source>
         <translation>avcodec_alloc_frame() विफल रहा।</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="410"/>
-        <location filename="../gls.cc" line="627"/>
-        <location filename="../stardict.cc" line="1167"/>
+        <location filename="../bgl.cc" line="413"/>
+        <location filename="../gls.cc" line="630"/>
+        <location filename="../stardict.cc" line="1170"/>
         <source>Author: %1%2</source>
         <translation>लेखक: %1%2</translation>
     </message>
     <message>
-        <location filename="../bgl.cc" line="417"/>
-        <location filename="../stardict.cc" line="1175"/>
+        <location filename="../bgl.cc" line="420"/>
+        <location filename="../stardict.cc" line="1178"/>
         <source>E-mail: %1%2</source>
         <translation>ई-पत्र: %1%2</translation>
     </message>
     <message>
-        <location filename="../sdict.cc" line="686"/>
+        <location filename="../sdict.cc" line="689"/>
         <source>Title: %1%2</source>
         <translation>शीर्षक: %1%2</translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1183"/>
+        <location filename="../stardict.cc" line="1186"/>
         <source>Website: %1%2</source>
         <translation>वेबसाइट: %1%2</translation>
     </message>
     <message>
-        <location filename="../stardict.cc" line="1191"/>
+        <location filename="../stardict.cc" line="1194"/>
         <source>Date: %1%2</source>
         <translation>तिथि: %1%2</translation>
     </message>
@@ -4555,29 +4616,33 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     </message>
     <message>
         <location filename="../groups_widgets.cc" line="1041"/>
+        <source>Clear Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>खोज साफ करें</source>
-        <translation>Effacer la recherche</translation>
+        <translation type="obsolete">Effacer la recherche</translation>
     </message>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
     <message>
-        <location filename="../articleview.cc" line="2912"/>
+        <location filename="../articleview.cc" line="3101"/>
         <source>ERROR: %1</source>
         <translation>त्रुटि : %1</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2912"/>
+        <location filename="../articleview.cc" line="3101"/>
         <source>Resource saving error: </source>
         <translation>संसाधन बचत त्रुटि: </translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2938"/>
+        <location filename="../articleview.cc" line="3127"/>
         <source>The referenced resource failed to download.</source>
         <translation>संदर्भित संसाधन डाउनलोड करने में विफल रहा।</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="2938"/>
+        <location filename="../articleview.cc" line="3127"/>
         <source>WARNING: %1</source>
         <translation type="unfinished">चेतावनी : %1</translation>
     </message>
@@ -4696,8 +4761,8 @@ could be resized or managed in other ways.</source>
         <translation type="obsolete">गोल्डेनडिक्ट</translation>
     </message>
     <message>
-        <location filename="../scanpopup.cc" line="679"/>
-        <location filename="../scanpopup.cc" line="1034"/>
+        <location filename="../scanpopup.cc" line="712"/>
+        <location filename="../scanpopup.cc" line="1092"/>
         <source>%1 - %2</source>
         <translation>%1 - %2</translation>
     </message>
@@ -5160,12 +5225,12 @@ Not implemented yet in GoldenDict.</source>
 <context>
     <name>TranslateBox</name>
     <message>
-        <location filename="../translatebox.cc" line="104"/>
+        <location filename="../translatebox.cc" line="102"/>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>शब्दकोशों में खोजने के लिए एक शब्द या वाक्यांश लिखें</translation>
     </message>
     <message>
-        <location filename="../translatebox.cc" line="126"/>
+        <location filename="../translatebox.cc" line="124"/>
         <source>Drop-down</source>
         <translation>निपात</translation>
     </message>
