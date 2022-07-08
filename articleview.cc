@@ -218,6 +218,11 @@ QString dictionaryIdFromScrollTo( QString const & scrollTo )
   return scrollTo.mid( scrollToPrefixLength );
 }
 
+QWebPage::FindFlags caseSensitivityFindFlags( bool matchCase )
+{
+  return matchCase ? QWebPage::FindCaseSensitively : QWebPage::FindFlags();
+}
+
 QString searchStatusMessageNoMatches()
 {
   return ArticleView::tr( "Phrase not found" );
@@ -2446,13 +2451,8 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
         clearPageSelection();
     }
 
-    QWebPage::FindFlags f;
-
-    if ( ui.searchCaseSensitive->isChecked() )
-      f |= QWebPage::FindCaseSensitively;
-#if QT_VERSION >= 0x040600
+    QWebPage::FindFlags f = caseSensitivityFindFlags( ui.searchCaseSensitive->isChecked() );
     f |= QWebPage::HighlightAllOccurrences;
-#endif
 
     ui.definition->findText( "", f );
 
@@ -2463,11 +2463,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       return;
   }
 
-  QWebPage::FindFlags f;
-
-  if ( ui.searchCaseSensitive->isChecked() )
-    f |= QWebPage::FindCaseSensitively;
-
+  QWebPage::FindFlags f = caseSensitivityFindFlags( ui.searchCaseSensitive->isChecked() );
   if ( backwards )
     f |= QWebPage::FindBackward;
 
@@ -2681,10 +2677,7 @@ void ArticleView::highlightFTSResults()
 
   ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
 
-  QWebPage::FindFlags flags;
-
-  if( ftsSearchMatchCase )
-    flags |= QWebPage::FindCaseSensitively;
+  QWebPage::FindFlags const flags = caseSensitivityFindFlags( ftsSearchMatchCase );
 
   if( allMatches.isEmpty() )
     ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
@@ -2742,11 +2735,7 @@ void ArticleView::performFtsFindOperation( bool backwards )
     return;
   }
 
-  QWebPage::FindFlags flags;
-
-  if( ftsSearchMatchCase )
-    flags |= QWebPage::FindCaseSensitively;
-
+  QWebPage::FindFlags flags = caseSensitivityFindFlags( ftsSearchMatchCase );
 
   // Restore saved highlighted selection
   ui.definition->page()->currentFrame()->
