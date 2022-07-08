@@ -11,19 +11,17 @@ using std::vector;
 
 EditDictionaries::EditDictionaries( QWidget * parent, Config::Class & cfg_,
                                     vector< sptr< Dictionary::Class > > & dictionaries_,
-                                    QMap<std::string, sptr< Dictionary::Class > > & dictMap_,
                                     Instances::Groups & groupInstances_,
                                     QNetworkAccessManager & dictNetMgr_ ):
   QDialog( parent, Qt::WindowSystemMenuHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint ),
   cfg( cfg_ ),
   dictionaries( dictionaries_ ),
-  dictMap(dictMap_),
   groupInstances( groupInstances_ ),
   dictNetMgr( dictNetMgr_ ),
   origCfg( cfg ),
   sources( this, cfg ),
   orderAndProps( new OrderAndProps( this, cfg.dictionaryOrder, cfg.inactiveDictionaries,
-                                    dictionaries, dictMap ) ),
+                                    dictionaries ) ),
   groups( new Groups( this, dictionaries, cfg.groups, orderAndProps->getCurrentDictionaryOrder() ) ),
   dictionariesChanged( false ),
   groupsChanged( false ),
@@ -216,7 +214,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
   orderAndProps.clear();
 
   loadDictionaries( this, true, cfg, dictionaries, dictNetMgr );
-  dictMap = Dictionary::dictToMap(dictionaries);
+
   // If no changes to groups were made, update the original data
   bool noGroupEdits = ( origCfg.groups == savedGroups );
 
@@ -241,7 +239,7 @@ void EditDictionaries::acceptChangedSources( bool rebuildGroups )
 
   if ( rebuildGroups )
   {
-    orderAndProps = new OrderAndProps( this, savedOrder, savedInactive, dictionaries, dictMap );
+    orderAndProps = new OrderAndProps( this, savedOrder, savedInactive, dictionaries );
     groups = new Groups( this, dictionaries, savedGroups, orderAndProps->getCurrentDictionaryOrder() );
 
     ui.tabs->removeTab( 1 );
