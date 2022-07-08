@@ -292,8 +292,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( &goForwardAction, SIGNAL( triggered() ),
            this, SLOT( forward() ) );
 
-  ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
-  ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
+  QAction * const copyAction = ui.definition->pageAction( QWebPage::Copy );
+  copyAction->setShortcut( QKeySequence::Copy );
+  ui.definition->addAction( copyAction );
 
   QAction * selectAll = ui.definition->pageAction( QWebPage::SelectAll );
   selectAll->setShortcut( QKeySequence::SelectAll );
