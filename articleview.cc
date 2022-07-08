@@ -278,7 +278,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 {
   ui.setupUi( this );
 
-  ui.definition->setPage( new ArticleWebPage( ui.definition ) );
+  ArticleWebPage * const webPage = new ArticleWebPage( ui.definition );
+  ui.definition->setPage( webPage );
   ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
 
   goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
@@ -321,7 +322,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( ui.definition, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( contextMenuRequested( QPoint const & ) ) );
 
-  connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
+  connect( webPage, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
 
   connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &, const QString &, const QString & ) ),
