@@ -700,16 +700,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
     // Maybe a link inside a website was clicked?
 
     QString ca = getCurrentArticle();
-    isFramedArticle( ca,
-                     [ &url, &contexts, &ca ]( bool framed )
-                     {
-                       if( framed )
-                       {
-                         // no need to translate website internal url to gd builtin url
-                         // and lack the formulation to convert them.
-                         qDebug() << "in the website with url:" << url;
-                       }
-                     } );
+    isFramedArticle( ca, []( bool framed ){} );
   }
 }
 
@@ -2495,10 +2486,13 @@ void ArticleView::highlightFTSResults()
     {
       const QUrl & url = ui.definition->url();
 
-      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
-
       QString regString = Utils::Url::queryItemValue( url, "regexp" );
-      if( ignoreDiacritics )
+	  if( regString.isEmpty() )
+	    return;
+      
+      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
+	  
+	  if( ignoreDiacritics )
         regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
       else
         regString = regString.remove( AccentMarkHandler::accentMark() );
