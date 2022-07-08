@@ -700,16 +700,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
     // Maybe a link inside a website was clicked?
 
     QString ca = getCurrentArticle();
-    isFramedArticle( ca,
-                     [ &url, &contexts, &ca ]( bool framed )
-                     {
-                       if( framed )
-                       {
-                         // no need to translate website internal url to gd builtin url
-                         // and lack the formulation to convert them.
-                         qDebug() << "in the website with url:" << url;
-                       }
-                     } );
+    isFramedArticle( ca, []( bool framed ){} );
   }
 }
 
