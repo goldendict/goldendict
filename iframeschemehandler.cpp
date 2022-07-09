@@ -19,8 +19,20 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
   auto finishAction     = [ = ]() -> void
   {
-    // Handle reply data
+    QByteArray contentType = "text/html;charset=UTF-8";
+    auto contentTypeHeader = reply->header( QNetworkRequest::ContentTypeHeader );
+    if( contentTypeHeader.isValid() )
+      contentType = contentTypeHeader.toByteArray();
 
+    QBuffer * buffer = new QBuffer( requestJob );
+    // Handle reply data
+    if( reply->error() != QNetworkReply::NoError )
+    {
+      QString emptyHtml = QString( "<html><body>%1</body></html>" ).arg( reply->errorString() );
+      buffer->setData( emptyHtml.toUtf8() );
+      requestJob->reply( contentType, buffer );
+      return;
+    }
     QByteArray replyData = reply->readAll();
     QString articleString;
 
@@ -85,13 +97,8 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
       articleNewString.clear();
     }
 
-    QBuffer * buffer = new QBuffer(requestJob);
-    buffer->setData(codec->fromUnicode(articleString));
 
-    QByteArray contentType="text/html;charset=UTF-8";
-    auto contentTypeHeader=reply->header(QNetworkRequest::ContentTypeHeader);
-    if(contentTypeHeader.isValid())
-      contentType= contentTypeHeader.toByteArray();
+    buffer->setData(codec->fromUnicode(articleString));
 
     requestJob->reply(contentType , buffer );
   };
