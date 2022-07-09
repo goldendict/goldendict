@@ -274,7 +274,18 @@ int main( int argc, char ** argv )
   qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
   QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 
-  QHotkeyApplication app( "GoldenDict", argc, argv );
+
+  char ARG_DISABLE_WEB_SECURITY[] = "--disable-web-security";
+  int newArgc                     = argc + 1 + 1;
+  char ** newArgv                 = new char *[ newArgc ];
+  for( int i = 0; i < argc; i++ )
+  {
+    newArgv[ i ] = argv[ i ];
+  }
+  newArgv[ argc ]     = ARG_DISABLE_WEB_SECURITY;
+  newArgv[ argc + 1 ] = nullptr;
+
+  QHotkeyApplication app( "GoldenDict", newArgc, newArgv );
   LogFilePtrGuard logFilePtrGuard;
 
   if ( app.isRunning() )
