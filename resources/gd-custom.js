@@ -59,12 +59,10 @@ $(function() {
     function resizeIframe(obj) {
         setInterval(function(){
             //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
-            if($(obj).contents().height() <2000)
+            var height = $(obj).contents().height();
+            $(obj).height(Math.min(2000,height));
+            if(height >= 2000)
             {
-                $(obj).height($(obj).contents().height());
-            }
-            else{
-                $(obj).height(2000);
                 obj.scrolling="yes";
             }
         },500);
