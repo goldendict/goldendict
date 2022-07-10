@@ -31,7 +31,7 @@ bool ArticleWebPage::acceptNavigationRequest( const QUrl & resUrl, NavigationTyp
   if( type == QWebEnginePage::NavigationTypeLinkClicked )
   {
     emit linkClicked( url );
-    return true;
+    return false;
   }
 
   return QWebEnginePage::acceptNavigationRequest( url, type, isMainFrame );
