@@ -1076,7 +1076,7 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
   if ( !popupView &&
        ( ui.definition->isMidButtonPressed() ||
-         ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
+         ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) && !isAudioLink(url) )
   {
     // Mid button or Control/Shift is currently pressed - open the link in new tab
     ui.definition->resetMidButtonPressed();
@@ -1732,7 +1732,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       followLink = new QAction( tr( "&Open Link" ), &menu );
       menu.addAction( followLink );
 
-      if ( !popupView )
+      if( !popupView && !isAudioLink( targetUrl ) )
       {
         followLinkNewTab = new QAction( QIcon( ":/icons/addtab.svg" ),
                                         tr( "Open Link in New &Tab" ), &menu );
@@ -1764,8 +1764,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
   }
 
-  if( !popupView && ( targetUrl.scheme() == "gdau"
-                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
+  if( !popupView && isAudioLink( targetUrl ) )
   {
       saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
       menu.addAction( saveSoundAction );
