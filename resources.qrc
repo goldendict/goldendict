@@ -13,7 +13,8 @@
         <file>icons/home.png</file>
         <file>icons/reload.png</file>
         <file>icons/programicon.png</file>
-        <file>icons/programicon_scan.png</file>
+        <file alias="icons/programicon_old.png">redist/icons/32x32/apps/goldendict-tray.png</file>
+        <file alias="icons/programicon_scan.png">redist/icons/32x32/apps/goldendict-scan-tray.png</file>
         <file>icons/programs.png</file>
         <file>icons/wizard.png</file>
         <file>icons/warning.png</file>
@@ -73,7 +74,6 @@
         <file>icons/collapse_article_hovered.png</file>
         <file>icons/collapse_article.png</file>
         <file>icons/video.png</file>
-        <file>icons/programicon_old.png</file>
         <file>icons/playsound_color.png</file>
         <file>icons/playsound_full.png</file>
         <file>icons/icon32_zim.png</file>
