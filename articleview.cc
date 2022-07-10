@@ -197,6 +197,19 @@ QString dictionaryIdFromScrollTo( QString const & scrollTo )
   return scrollTo.mid( scrollToPrefixLength );
 }
 
+QString searchStatusMessageNoMatches()
+{
+  return ArticleView::tr( "Phrase not found" );
+}
+
+QString searchStatusMessage( int activeMatch, int matchCount )
+{
+  Q_ASSERT( matchCount > 0 );
+  Q_ASSERT( activeMatch > 0 );
+  Q_ASSERT( activeMatch <= matchCount );
+  return ArticleView::tr( "%1 of %2 matches" ).arg( activeMatch ).arg( matchCount );
+}
+
 } // unnamed namespace
 
 QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
@@ -2552,7 +2565,9 @@ void ArticleView::highlightFTSResults()
       if( ftsSearchMatchCase )
         flags |= QWebEnginePage::FindCaseSensitively;
 
-      if( !allMatches.isEmpty() )
+  if( allMatches.isEmpty() )
+    ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
+  else
       {
 //        highlightAllFtsOccurences( flags );
         ui.definition->findText( allMatches.at( 0 ), flags );
@@ -2561,7 +2576,10 @@ void ArticleView::highlightFTSResults()
         //   ui.definition->page()->runJavaScript(
         //     QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
         // }
+		Q_ASSERT( ftsPosition == 0 );
+    	ui.ftsSearchStatusLabel->setText( searchStatusMessage( 1, allMatches.size() ) );
       }
+
 
       ui.ftsSearchFrame->show();
       ui.ftsSearchPrevious->setEnabled( false );
@@ -2609,6 +2627,7 @@ void ArticleView::performFtsFindOperation( bool backwards )
 
   if( allMatches.isEmpty() )
   {
+    ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
     ui.ftsSearchNext->setEnabled( false );
     ui.ftsSearchPrevious->setEnabled( false );
     return;
@@ -2670,7 +2689,10 @@ void ArticleView::performFtsFindOperation( bool backwards )
               ui.ftsSearchPrevious->setEnabled(res);
       });
   }
+
 #endif
+
+  ui.ftsSearchStatusLabel->setText( searchStatusMessage( ftsPosition + 1, allMatches.size() ) );
   // Store new highlighted selection
   // ui.definition->page()->
   //        runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
