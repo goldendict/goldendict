@@ -20,7 +20,7 @@ Groups::Groups( QWidget * parent,
   // Populate the dictionaries' list
 
   ui.dictionaries->setAsSource();
-  ui.dictionaries->populate( Instances::Group( order, Dictionary::dictToMap(dicts), Config::Group() ).dictionaries,
+  ui.dictionaries->populate( Instances::Group( order, dicts, Config::Group() ).dictionaries,
                              dicts );
 
   ui.searchLine->applyTo( ui.dictionaries );
@@ -87,13 +87,12 @@ void Groups::editGroup( unsigned id )
 void Groups::updateDictionaryOrder( Config::Group const & order )
 {
   // Make sure it differs from what we have
-  auto dictMap = Dictionary::dictToMap( dicts );
-  Instances::Group newOrder( order, dictMap, Config::Group() );
+  Instances::Group newOrder( order, dicts, Config::Group() );
 
   if( ui.dictionaries->getCurrentDictionaries() != newOrder.dictionaries )
   {
     // Repopulate
-    ui.dictionaries->populate( Instances::Group( order, dictMap, Config::Group() ).dictionaries, dicts );
+    ui.dictionaries->populate( Instances::Group( order, dicts, Config::Group() ).dictionaries, dicts );
   }
 }
 
