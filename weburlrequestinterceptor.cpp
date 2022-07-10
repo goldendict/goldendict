@@ -42,4 +42,11 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
 //    emit linkClicked( info.requestUrl() );
 //    info.block(true);
   }
+
+  //window.location=audio link
+  if( Utils::Url::isAudioUrl(info.requestUrl()) && info.navigationType()==QWebEngineUrlRequestInfo::NavigationTypeRedirect )
+  {
+    qDebug() << "blocked audio url from page redirect" << info.requestUrl().url();
+    info.block( true );
+  }
 }

@@ -11,6 +11,7 @@
 #include <QUrlQuery>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include "filetype.hh"
 
 namespace Utils
 {
@@ -240,6 +241,15 @@ inline std::pair< bool, QString > getQueryWord( QUrl const & url )
   }
   return std::make_pair( validScheme, word );
 }
+
+inline bool isAudioUrl( QUrl const & url )
+{
+  // Note: we check for forvo sound links explicitly, as they don't have extensions
+
+  return ( url.scheme() == "http" || url.scheme() == "https" || url.scheme() == "gdau" )
+         && ( Filetype::isNameOfSound( url.path().toUtf8().data() ) || url.host() == "apifree.forvo.com" );
+}
+
 }
 
 }
