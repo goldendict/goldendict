@@ -21,7 +21,7 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
       //whitelist url does not block
       return;
     }
-    if(Utils::isCssFontImage(info.requestUrl())){
+    if(Utils::isHtmlResources(info.requestUrl())){
       //let throuth the resources file.
       return;
     }
