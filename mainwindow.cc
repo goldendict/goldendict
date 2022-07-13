@@ -2541,6 +2541,11 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         ctrlTabPressed();
         return true;
       }
+      else if( obj == translateLine )
+      {
+        QApplication::sendEvent( ui.tabWidget, ev );
+        return true;
+      }
       return false;
     }
   }
@@ -2559,6 +2564,12 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
           wordList->setCurrentRow( 0, QItemSelectionModel::ClearAndSelect );
           return true;
         }
+      }
+
+      if( keyEvent->matches( QKeySequence::PreviousChild ) ) // Handle only Ctrl+Shist+Tab because Ctrl+Tab was already handled before
+      {
+        QApplication::sendEvent( ui.tabWidget, ev );
+        return true;
       }
     }
 
