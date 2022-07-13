@@ -1560,7 +1560,7 @@ void MainWindow::createTabList()
   tabListButton->setToolTip( tr( "Open Tabs List" ) );
   tabListButton->setPopupMode(QToolButton::InstantPopup);
   ui.tabWidget->setCornerWidget(tabListButton);
-  tabListButton->setFocusPolicy(Qt::ClickFocus);
+  tabListButton->setFocusPolicy(Qt::NoFocus);
 }
 
 void MainWindow::fillWindowsMenu()
