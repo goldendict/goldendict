@@ -726,6 +726,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.historyList->installEventFilter( this );
 
+  ui.favoritesTree->installEventFilter( this );
+
+  groupListInDock->installEventFilter( this );
+  groupListInToolbar->installEventFilter( this );
+
   connect( &ftsIndexing, SIGNAL( newIndexingName( QString ) ), this, SLOT( showFTSIndexingName( QString ) ) );
 
 #ifdef Q_OS_WIN
@@ -2534,6 +2539,14 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if (ev->type() == QEvent::KeyPress)
   {
     QKeyEvent *keyevent = static_cast<QKeyEvent*>(ev);
+
+    bool handleCtrlTab = ( obj == translateLine
+                           || obj == wordList
+                           || obj == ui.historyList
+                           || obj == ui.favoritesTree
+                           || obj == ui.dictsList
+                           || obj == groupList );
+
     if (keyevent->modifiers() == Qt::ControlModifier && keyevent->key() == Qt::Key_Tab)
     {
       if (cfg.preferences.mruTabOrder)
@@ -2541,12 +2554,17 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         ctrlTabPressed();
         return true;
       }
-      else if( obj == translateLine )
+      else if( handleCtrlTab )
       {
         QApplication::sendEvent( ui.tabWidget, ev );
         return true;
       }
       return false;
+    }
+    if( handleCtrlTab && keyevent->matches( QKeySequence::PreviousChild ) ) // Handle only Ctrl+Shist+Tab here because Ctrl+Tab was already handled before
+    {
+      QApplication::sendEvent( ui.tabWidget, ev );
+      return true;
     }
   }
 
@@ -2566,11 +2584,6 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         }
       }
 
-      if( keyEvent->matches( QKeySequence::PreviousChild ) ) // Handle only Ctrl+Shist+Tab because Ctrl+Tab was already handled before
-      {
-        QApplication::sendEvent( ui.tabWidget, ev );
-        return true;
-      }
     }
 
     if ( ev->type() == QEvent::FocusIn ) {
