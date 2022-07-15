@@ -62,7 +62,8 @@ function gdExpandOptPart(expanderId, optionalId) {
         d1.src = 'qrcx://localhost/icons/collapse_opt.png';
         for (i = 0; i < 1000; i++) {
             var d2 = document.getElementById(optionalId + i);
-            if (!d2) break;
+            if (!d2)
+                break;
             d2.style.display = 'inline';
         }
     } else {
@@ -70,7 +71,8 @@ function gdExpandOptPart(expanderId, optionalId) {
         d1.src = 'qrcx://localhost/icons/expand_opt.png';
         for (i = 0; i < 1000; i++) {
             var d2 = document.getElementById(optionalId + i);
-            if (!d2) break;
+            if (!d2)
+                break;
             d2.style.display = 'none';
         }
     }
@@ -82,14 +84,16 @@ function gdExpandArticle(id) {
     art = document.getElementById('gdfrom-' + id);
     ev = window.event;
     t = null;
-    if (ev) t = ev.target || ev.srcElement;
+    if (ev)
+        t = ev.target || ev.srcElement;
     if (elem.style.display == 'inline' && t == ico) {
         elem.style.display = 'none';
         ico.className = 'gdexpandicon';
         art.className = art.className + ' gdcollapsedarticle';
         nm = document.getElementById('gddictname-' + id);
         nm.style.cursor = 'pointer';
-        if (ev) ev.stopPropagation();
+        if (ev)
+            ev.stopPropagation();
         ico.title = '';
         nm.title = gdExpandArticleTitle;
     } else if (elem.style.display == 'none') {
@@ -109,6 +113,7 @@ function gdCheckArticlesNumber() {
         el = elems.item(0);
         s = el.id.replace('gddictname-', '');
         el = document.getElementById('gdfrom-' + s);
-        if (el && el.className.search('gdcollapsedarticle') > 0) gdExpandArticle(s);
+        if (el && el.className.search('gdcollapsedarticle') > 0)
+            gdExpandArticle(s);
     }
 }
