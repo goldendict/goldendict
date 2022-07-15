@@ -1194,7 +1194,7 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
 
 void ArticleView::attachToJavaScript()
 {
-  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( "articleview", jsProxy );
+  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( "gdArticleView", jsProxy );
 }
 
 void ArticleView::linkClicked( QUrl const & url_ )

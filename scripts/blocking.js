@@ -21,7 +21,7 @@ function gdMakeArticleActive(newId) {
         el.className = el.className + ' gdactivearticle';
         gdCurrentArticle = articleId;
         gdAudioLinks.current = newId;
-        articleview.onJsActiveArticleChanged(gdCurrentArticle);
+        gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
     }
 }
 
@@ -33,28 +33,28 @@ function gdSelectArticle(id) {
     selection.addRange(range);
 }
 
-var overIframeId = null;
+var gdOverIframeId = null;
 
-function processIframeMouseOut() {
-    overIframeId = null;
+function gdProcessIframeMouseOut() {
+    gdOverIframeId = null;
     top.focus();
 }
 
-function processIframeMouseOver(newId) {
-    overIframeId = newId;
+function gdProcessIframeMouseOver(newId) {
+    gdOverIframeId = newId;
 }
 
-function processIframeClick() {
-    if (overIframeId != null) {
-        overIframeId = overIframeId.replace('gdexpandframe-', '');
-        gdMakeArticleActive(overIframeId);
+function gdProcessIframeClick() {
+    if (gdOverIframeId != null) {
+        gdOverIframeId = gdOverIframeId.replace('gdexpandframe-', '');
+        gdMakeArticleActive(gdOverIframeId);
     }
 }
 
-function init() {
-    window.addEventListener('blur', processIframeClick, false);
+function gdInit() {
+    window.addEventListener('blur', gdProcessIframeClick, false);
 }
-window.addEventListener('load', init, false);
+window.addEventListener('load', gdInit, false);
 
 function gdExpandOptPart(expanderId, optionalId) {
     const d1 = document.getElementById(expanderId);
