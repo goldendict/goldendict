@@ -88,7 +88,7 @@ inline bool isHtmlResources(QUrl const &url) {
   auto fileName = url.fileName();
   auto ext=fileName.mid(fileName.lastIndexOf("."));
   QStringList extensions{".css",".woff",".woff2","ttf",".bmp" ,".jpg", ".png",".gif", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv",".ape"} ;
-  return extensions.indexOf(ext)>-1;
+  return extensions.contains( ext, Qt::CaseInsensitive );
 }
 
 inline QString escape( QString const & plain )
