@@ -46,57 +46,16 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     while( !base.isEmpty() && !base.endsWith( "/" ) )
       base.chop( 1 );
 
-    QRegularExpression tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
-                             QRegularExpression::CaseInsensitiveOption );
-    QRegularExpression links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
-                              QRegularExpression::CaseInsensitiveOption );
-    int pos = 0;
-    QString articleNewString;
-    QRegularExpressionMatchIterator it = tags.globalMatch( articleString );
-    while( it.hasNext() )
-    {
-      QRegularExpressionMatch match = it.next();
-      articleNewString += articleString.mid( pos, match.capturedStart() - pos );
-      pos = match.capturedEnd();
-
-      QString tag = match.captured();
-
-      QRegularExpressionMatch match_links = links.match( tag );
-      if( !match_links.hasMatch() )
-      {
-        articleNewString += tag;
-        continue;
-      }
-
-      QString url = match_links.captured( 3 );
-
-      if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0 || url.indexOf( "mailto:" ) >= 0 ||
-          url.startsWith( "#" ) || url.startsWith( "javascript:" ) )
-      {
-        // External link, anchor or base64-encoded data
-        articleNewString += tag;
-        continue;
-      }
-
-      QString newUrl = match_links.captured( 1 ) + "=" + match_links.captured( 2 );
-      if( url.startsWith( "//" ) )
-        newUrl += reply->url().scheme() + ":";
-      else if( url.startsWith( "/" ) )
-        newUrl += root;
-      else
-        newUrl += base;
-      newUrl += match_links.captured( 3 );
-
-      tag.replace( match_links.capturedStart(), match_links.capturedLength(), newUrl );
-      articleNewString += tag;
-    }
-    if( pos )
-    {
-      articleNewString += articleString.mid( pos );
-      articleString = articleNewString;
-      articleNewString.clear();
-    }
-
+    QRegularExpression tags( "<base\\s+.*?>",
+                             QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption );
+    
+    QString baseTagHtml = "<base href=\"" + base + "\">";
+    
+    // remove existed base tag
+    articleString.remove( tags ) ;
+    qsizetype pos = articleString.indexOf( "<head>" );
+    if( pos > -1 )
+      articleString.insert( pos + 6, baseTagHtml );
 
     buffer->setData(codec->fromUnicode(articleString));
 

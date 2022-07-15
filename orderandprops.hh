@@ -16,8 +16,7 @@ public:
 
   OrderAndProps( QWidget * parent, Config::Group const & dictionaryOrder,
                  Config::Group const & inactiveDictionaries,
-                 std::vector< sptr< Dictionary::Class > > const & allDictionaries ,
-                 QMap<std::string, sptr< Dictionary::Class > > const & dictMap);
+                 std::vector< sptr< Dictionary::Class > > const & allDictionaries);
 
   Config::Group getCurrentDictionaryOrder() const;
   Config::Group getCurrentInactiveDictionaries() const;
@@ -35,7 +34,6 @@ private slots:
 private:
 
   Ui::OrderAndProps ui;
-
   void disableDictionaryDescription();
   void describeDictionary( DictListWidget *, QModelIndex const & );
 

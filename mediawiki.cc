@@ -15,6 +15,7 @@
 #include "utils.hh"
 
 #include <QRegularExpression>
+#include "globalbroadcaster.h"
 
 namespace MediaWiki {
 
@@ -124,6 +125,8 @@ MediaWikiWordSearchRequest::MediaWikiWordSearchRequest( wstring const & str,
 {
   GD_DPRINTF( "request begin\n" );
   QUrl reqUrl( url + "/api.php?action=query&list=allpages&aplimit=40&format=xml" );
+
+  GlobalBroadcaster::instance()->addWhitelist( reqUrl.host() );
 
   Utils::Url::addQueryItem( reqUrl, "apfrom", gd::toQString( str ).replace( '+', "%2B" ) );
 

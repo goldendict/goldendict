@@ -29,7 +29,7 @@ struct Group
   /// Instantiates the given group from its configuration. If some dictionary
   /// wasn't found, it just skips it.
   Group( Config::Group const & cfgGroup,
-         QMap<std::string, sptr< Dictionary::Class > > const & allDictionaries,
+         std::vector< sptr< Dictionary::Class > > const & allDictionaries,
          Config::Group const & inactiveGroup );
 
   /// Creates an empty group.
