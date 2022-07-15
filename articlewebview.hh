@@ -4,12 +4,18 @@
 #ifndef __ARTICLEWEBVIEW_HH_INCLUDED__
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
-#include <QWebView>
 #include "config.hh"
+#include "webkit_or_webengine.hh"
 
+#ifdef USE_QTWEBKIT
 class ArticleInspector;
+#endif
 
-/// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
+// TODO (Qt WebEngine): this class is pretty useless in the Qt WebEngine version right now
+// because of QTBUG-43602 - it receives no mouse events. Will have to set an event filter
+// on QWidget children of QWebEngineView and handle the mouse events.
+
+/// A thin wrapper around WebView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
 ///    to the view's current state. This is used to open links in new tabs when
@@ -17,7 +23,7 @@ class ArticleInspector;
 ///    get double-click events after the fact with the doubleClicked() signal.
 /// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
 ///    use triggerPageAction( QWebPage::InspectElement ) instead.
-class ArticleWebView: public QWebView
+class ArticleWebView: public WebView
 {
   Q_OBJECT
 
@@ -33,7 +39,9 @@ public:
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
+#ifdef USE_QTWEBKIT
   void triggerPageAction( QWebPage::WebAction action, bool checked = false );
+#endif
 
 signals:
 
@@ -45,17 +53,23 @@ signals:
 
 protected:
 
+#ifdef USE_QTWEBKIT
   bool event( QEvent * event );
+#endif
   void mousePressEvent( QMouseEvent * event );
   void mouseReleaseEvent( QMouseEvent * event );
   void mouseDoubleClickEvent( QMouseEvent * event );
+#ifdef USE_QTWEBKIT
   void focusInEvent( QFocusEvent * event );
   void wheelEvent( QWheelEvent * event );
+#endif
 
 private:
 
   Config::Class * cfg;
+#ifdef USE_QTWEBKIT
   ArticleInspector * inspector;
+#endif
 
   bool midButtonPressed;
   bool selectionBySingleClick;

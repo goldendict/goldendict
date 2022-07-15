@@ -2,19 +2,24 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articlewebview.hh"
-#include <QMouseEvent>
-#include <QWebFrame>
-#include <QApplication>
-#include "articleinspector.hh"
+
 #include "qt4x5.hh"
+
+#include <QMouseEvent>
+#include <QApplication>
+
+#ifdef USE_QTWEBKIT
+#include "articleinspector.hh"
+#include <QWebFrame>
+#endif
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
 #endif
 
 ArticleWebView::ArticleWebView( QWidget *parent ):
-  QWebView( parent ),
-#if QT_VERSION >= 0x040600
+  WebView( parent ),
+#ifdef USE_QTWEBKIT
   inspector( NULL ),
 #endif
   midButtonPressed( false ),
@@ -25,7 +30,7 @@ ArticleWebView::ArticleWebView( QWidget *parent ):
 
 ArticleWebView::~ArticleWebView()
 {
-#if QT_VERSION >= 0x040600
+#ifdef USE_QTWEBKIT
   if ( inspector )
     inspector->deleteLater();
 #endif
@@ -36,9 +41,9 @@ void ArticleWebView::setUp( Config::Class * cfg )
   this->cfg = cfg;
 }
 
+#ifdef USE_QTWEBKIT
 void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked )
 {
-#if QT_VERSION >= 0x040600
   if ( action == QWebPage::InspectElement )
   {
     // Get or create inspector instance for current view.
@@ -59,7 +64,6 @@ void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked
       return;
     }
   }
-#endif
 
   QWebView::triggerPageAction( action, checked );
 }
@@ -83,13 +87,14 @@ bool ArticleWebView::event( QEvent * event )
 
   return QWebView::event( event );
 }
+#endif // USE_QTWEBKIT
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
 {
   if ( event->buttons() & Qt4x5::middleButton() )
     midButtonPressed = true;
 
-  QWebView::mousePressEvent( event );
+  WebView::mousePressEvent( event );
 
   if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
   {
@@ -103,7 +108,7 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 {
   bool noMidButton = !( event->buttons() & Qt4x5::middleButton() );
 
-  QWebView::mouseReleaseEvent( event );
+  WebView::mouseReleaseEvent( event );
 
   if ( midButtonPressed & noMidButton )
     midButtonPressed = false;
@@ -111,23 +116,24 @@ void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 
 void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 {
-  QWebView::mouseDoubleClickEvent( event );
-#if QT_VERSION >= 0x040600
+  WebView::mouseDoubleClickEvent( event );
+
+  // TODO (Qt WebEngine): port the scrollbar checks if they are useful in the Qt WebEngine version.
+#ifdef USE_QTWEBKIT
   int scrollBarWidth = page()->mainFrame()->scrollBarGeometry( Qt::Vertical ).width();
   int scrollBarHeight = page()->mainFrame()->scrollBarGeometry( Qt::Horizontal ).height();
-#else
-  int scrollBarWidth = 0;
-  int scrollBarHeight = 0;
-#endif
-
   // emit the signal only if we are not double-clicking on scrollbars
   if ( ( event->x() < width() - scrollBarWidth ) &&
        ( event->y() < height() - scrollBarHeight ) )
+#endif
   {
     emit doubleClicked( event->pos() );
   }
 
 }
+
+// TODO (Qt WebEngine): port if this code is useful in the Qt WebEngine version.
+#ifdef USE_QTWEBKIT
 
 void ArticleWebView::focusInEvent( QFocusEvent * event )
 {
@@ -179,3 +185,5 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
   }
 
 }
+
+#endif // USE_QTWEBKIT

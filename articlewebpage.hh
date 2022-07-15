@@ -4,16 +4,29 @@
 #ifndef ARTICLEWEBPAGE_HH_INCLUDED
 #define ARTICLEWEBPAGE_HH_INCLUDED
 
-#include <QWebPage>
+#include "webkit_or_webengine.hh"
 
-class ArticleWebPage: public QWebPage
+/// Note: this class always delegates all links in the Qt WebEngine version.
+class ArticleWebPage: public WebPage
 {
   Q_OBJECT
 public:
   explicit ArticleWebPage( QObject * parent = 0 );
 
+#ifndef USE_QTWEBKIT
+signals:
+  /// This signal is emitted whenever the user clicks on a link.
+  void linkClicked( QUrl const & url );
+#endif
+
 protected:
+#ifdef USE_QTWEBKIT
   virtual void javaScriptConsoleMessage( QString const & message, int lineNumber, QString const & sourceID );
+#else
+  void javaScriptConsoleMessage( JavaScriptConsoleMessageLevel level, QString const & message,
+                                 int lineNumber, QString const & sourceID ) override;
+  bool acceptNavigationRequest( QUrl const & url, NavigationType type, bool isMainFrame ) override;
+#endif
 };
 
 #endif // ARTICLEWEBPAGE_HH_INCLUDED

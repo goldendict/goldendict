@@ -7,29 +7,17 @@
 // Functions that can be called from C++ code at any time should be defined here to make the
 // functionality work (more or less) and prevent ReferenceError while the page is being loaded.
 
-gdArticleView.onJsPageInitStarted();
-
 var gdWasCurrentArticleSetExplicitly = false;
-
-var gdCurrentArticle;
 
 // This variable is temporary and almost always undefined or null.
 var gdJustLoadedAudioLink;
-
-function gdArticleLoaded(articleId) {
-    const isCurrent = !gdCurrentArticle;
-    if (isCurrent)
-        gdCurrentArticle = articleId; // This is the first article. It becomes current when loaded.
-
-    gdArticleView.onJsArticleLoaded(articleId, gdJustLoadedAudioLink, isCurrent);
-    gdJustLoadedAudioLink = null;
-}
 
 function gdSetActiveArticle(articleId) {
     gdWasCurrentArticleSetExplicitly = true;
     if (gdCurrentArticle !== articleId) {
         var el = document.getElementById(gdCurrentArticle);
-        el.className = el.className.replace(' gdactivearticle', '');
+        if (el)
+            el.className = el.className.replace(' gdactivearticle', '');
         el = document.getElementById(articleId);
         el.className = el.className + ' gdactivearticle';
         gdCurrentArticle = articleId;
@@ -39,8 +27,11 @@ function gdSetActiveArticle(articleId) {
 }
 
 function gdMakeArticleActive(newId) {
-    if (gdSetActiveArticle('gdfrom-' + newId))
-        gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
+    if (gdSetActiveArticle('gdfrom-' + newId)) {
+        if (gdArticleView)
+            gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
+        // else: the updated gdCurrentArticle will be passed in gdArticleView.onJsPageInitStarted().
+    }
 }
 
 function gdOnCppActiveArticleChanged(articleId, moveToIt) {
@@ -53,6 +44,10 @@ function gdSelectCurrentArticle() {
     var el;
     if (gdCurrentArticle) {
         el = document.getElementById(gdCurrentArticle);
+        if (!el) {
+            console.warn("Current article is not yet available, so cannot select it");
+            return;
+        }
     } else {
         // Special pages such as the initial Welcome! page or a not-found page have
         // no dictionary articles, and so gdCurrentArticle is undefined. In this case

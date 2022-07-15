@@ -36,8 +36,25 @@ QT += core \
       svg
 
 greaterThan(QT_MAJOR_VERSION, 4) {
+    # TODO: make Qt WebEngine the default for supported Qt versions once the Qt WebEngine
+    # GoldenDict version works well enough. `CONFIG += use_qtwebkit` will override the default then.
+    CONFIG( use_qtwebengine ) {
+      # Qt 5.15.2 introduces API that facilitates porting to Qt 6, so requiring it can be useful.
+      REQUIRED_QT_VERSION = 5.15.2
+      !versionAtLeast( QT_VERSION, $${REQUIRED_QT_VERSION} ) {
+        error( "Cannot use Qt version $${QT_VERSION}." \
+               "The Qt WebEngine version of GoldenDict requires Qt $${REQUIRED_QT_VERSION} or newer." )
+      }
+
+      QT += webchannel \
+            webenginewidgets
+      CONFIG += c++14
+    } else {
+      QT += webkitwidgets
+      DEFINES += USE_QTWEBKIT
+    }
+
     QT += widgets \
-          webkitwidgets \
           printsupport \
           help
 
@@ -48,6 +65,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     }
 } else {
     QT += webkit
+    DEFINES += USE_QTWEBKIT
     CONFIG += help
 }
 
@@ -276,6 +294,7 @@ HEADERS += folding.hh \
     bgl.hh \
     initializing.hh \
     article_netmgr.hh \
+    article_urlschemehandler.hh \
     dictzip.h \
     btreeidx.hh \
     stardict.hh \
@@ -332,6 +351,7 @@ HEADERS += folding.hh \
     broken_xrecord.hh \
     history.hh \
     atomic_rename.hh \
+    webkit_or_webengine.hh \
     articlewebpage.hh \
     articlewebview.hh \
     zipfile.hh \
@@ -414,6 +434,7 @@ SOURCES += folding.cc \
     bgl.cc \
     initializing.cc \
     article_netmgr.cc \
+    article_urlschemehandler.cc \
     dictzip.c \
     btreeidx.cc \
     stardict.cc \

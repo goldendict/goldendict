@@ -6,12 +6,14 @@
 
 #include <QtNetwork>
 
+#ifdef USE_QTWEBKIT
 #if QT_VERSION >= 0x050300  // Qt 5.3+
 #include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
 #include <QPair>
-#endif
+#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
 #include "dictionary.hh"
 #include "article_maker.hh"
@@ -21,6 +23,7 @@ using std::vector;
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
+#ifdef USE_QTWEBKIT
 #if QT_VERSION >= 0x050300  // Qt 5.3+
 
 // White lists for QWebSecurityOrigin
@@ -123,7 +126,8 @@ protected:
 private slots:
   void finishedSlot();
 };
-#endif
+#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
@@ -131,7 +135,7 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= 0x050300  // Qt 5.3+
+#if defined( USE_QTWEBKIT ) && QT_VERSION >= 0x050300  // Qt 5.3+
   Origins allOrigins;
 #endif
 public:

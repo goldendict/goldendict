@@ -27,13 +27,27 @@ namespace {
 
 void appendScripts( string & result )
 {
-  // Use the qrcx scheme for JavaScript files. The qrc scheme causes the warning
+  // Use the qrcx scheme for JavaScript files enabled in the Qt WebKit version. The qrc scheme causes the warning
   // "QIODevice::read (QNetworkReplyFileImpl): device not open" at GoldenDict start, because
   // AllowFrameReply::baseReply is not open when AllowFrameReply::readDataFromBase() is invoked.
 
   result +=
-  // Start reading the deferred script early so that it is ready when needed.
+  // *blocking.js scripts block HTML parser, which is acceptable here,
+  // because the scripts are local, instantly available and fast.
+#ifdef USE_QTWEBKIT
+  // Evaluate webkit_blocking.js now to call gdArticleView.onJsPageInitStarted() ASAP.
+            "<script src='qrcx://localhost/scripts/webkit_blocking.js'></script>"
+#else
+  // Create QWebChannel now to make gdArticleView available ASAP.
+            "<script src='qrc:///qtwebchannel/qwebchannel.js'></script>"
+            "<script src='qrc:///scripts/webengine_blocking.js'></script>"
+#endif
+  // Start reading the deferred scripts early so that they are ready when needed.
             "<script defer src='qrcx://localhost/scripts/deferred.js'></script>"
+#ifndef USE_QTWEBKIT
+  // Load webengine_deferred.js in the end because it calls gdArticleView.onJsPageInitFinished().
+            "<script defer src='qrc:///scripts/webengine_deferred.js'></script>"
+#endif
             "<script>"
             "const gdExpandArticleTitle = \"";
   result += ArticleMaker::tr( "Expand article" ).toUtf8().constData();
@@ -654,7 +668,10 @@ void ArticleRequest::bodyFinished()
         string jsVal = Html::escapeForJavaScript( dictId );
 
         head += string( "<div class=\"gdarticle" ) +
+#ifdef USE_QTWEBKIT
+                // gdCurrentArticleLoaded() initializes " gdactivearticle" in the Qt WebEngine version.
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
+#endif
                 ( collapse ? " gdcollapsedarticle" : "" ) +
                 "\" id=\"" + gdFrom +
                 "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +

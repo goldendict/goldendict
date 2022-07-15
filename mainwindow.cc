@@ -10,6 +10,7 @@
 #include "loaddictionaries.hh"
 #include "preferences.hh"
 #include "about.hh"
+#include "article_urlschemehandler.hh"
 #include "mruqmenu.hh"
 #include "gestures.hh"
 #include "dictheadwords.hh"
@@ -45,6 +46,11 @@
 #include "qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
+
+#ifndef USE_QTWEBKIT
+#include <QWebEngineProfile>
+#include <QWebEngineSettings>
+#endif
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -788,6 +794,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   setupNetworkCache( cfg.preferences.maxNetworkCacheSize );
 
+#ifndef USE_QTWEBKIT
+  ( new ArticleUrlSchemeHandler( articleNetMgr ) )->install( *QWebEngineProfile::defaultProfile() );
+#endif
+
   makeDictionaries();
 
   // After we have dictionaries and groups, we can populate history
@@ -1333,9 +1343,14 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
+#ifdef USE_QTWEBKIT
   QWebSettings *defaultSettings = QWebSettings::globalSettings();
   defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
+#else
+  auto * const settings = QWebEngineSettings::defaultSettings();
+  settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+#endif
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -5201,6 +5216,8 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
     return false;
   *result = 0;
 
+  // TODO (Qt WebEngine): re-enable this code if ArticleView::wordAtPoint() is ported.
+#ifdef USE_QTWEBKIT
   if( !isGoldenDictWindow( message->hwnd ) )
     return true;
 
@@ -5217,6 +5234,7 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
   str.toWCharArray( lpdata->cwData );
 
   *result = 1;
+#endif // USE_QTWEBKIT
   return true;
 }
 

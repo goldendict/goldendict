@@ -94,6 +94,11 @@ If you have problem building with Qt5 Multimedia or experience GStreamer run-tim
 
     qmake "CONFIG+=no_qtmultimedia_player"
 
+### Building with Qt WebEngine instead of Qt WebKit
+
+The Qt WebEngine-based version of GoldenDict is work in progress. Many features don't work yet. In order to test it, pass
+`"CONFIG+=use_qtwebengine"` to `qmake`.
+
 <b>NB:</b> All additional settings for `qmake` that you need must be combined in one `qmake` launch, for example:
 
     qmake "CONFIG+=zim_support" "CONFIG+=no_extra_tiff_handler" "CONFIG+=no_ffmpeg_player"

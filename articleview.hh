@@ -4,7 +4,6 @@
 #ifndef __ARTICLEVIEW_HH_INCLUDED__
 #define __ARTICLEVIEW_HH_INCLUDED__
 
-#include <QWebView>
 #include <QHash>
 #include <QMap>
 #include <QUrl>
@@ -15,6 +14,12 @@
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
+
+#ifdef USE_QTWEBKIT
+#include <QWebView>
+#else
+class QWebEngineFindTextResult;
+#endif
 
 class ArticleViewJsProxy;
 class ResourceToSaveHandler;
@@ -48,7 +53,13 @@ class ArticleView: public QFrame
   QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
+#ifdef USE_QTWEBKIT
+  // The code that uses this variable is not needed in the Qt WebEngine version.
   QString rangeVarName;
+#else
+  // The API necessary to implement Search-in-page status is not available in Qt WebKit.
+  bool skipNextFindTextUiStatusUpdate = false;
+#endif
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -70,7 +81,18 @@ class ArticleView: public QFrame
   int ftsPosition;
 
   void highlightFTSResults();
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  void highlightFTSResults( QRegularExpression const & regexp,
+#else
+  void highlightFTSResults( QRegExp const & regexp,
+#endif
+                            bool ignoreDiacritics, QString const & pageText );
+
+#ifdef USE_QTWEBKIT
+  // The API necessary to highlight all FTS occurrences is not available in Qt WebEngine.
   void highlightAllFtsOccurences( QWebPage::FindFlags flags );
+#endif
+
   void performFtsFindOperation( bool backwards );
 
 public:
@@ -274,9 +296,12 @@ private slots:
   void loadFinished( bool ok );
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
+#ifdef USE_QTWEBKIT
   void attachToJavaScript();
+#endif
   void linkClicked( QUrl const & );
-  void linkHovered( const QString & link, const QString & title, const QString & textContent );
+  void linkHovered( QString const & link, QString const & title = QString(),
+                    QString const & textContent = QString() );
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();
@@ -319,13 +344,29 @@ private:
 
   friend class ArticleViewJsProxy;
 
+#ifdef USE_QTWEBKIT
   void onJsPageInitStarted();
+#else
+  /// In the Qt WebEngine version, gdArticleView is not available when a page starts loading. The IDs and the
+  /// audio links of articles loaded before gdArticleView becomes available (if any) are passed to this function.
+  /// @param activeArticleIndex the index of the currently active article ID in @p loadedArticles
+  ///        or -1 if no article is active yet.
+  /// @param hasPageInitFinished true if the page initialization has already finished,
+  ///        in which case onJsPageInitFinished() won't be invoked by this page.
+  void onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
+                            int activeArticleIndex, bool hasPageInitFinished );
+
+  void onJsPageInitFinished();
+#endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive );
 
   void onJsActiveArticleChanged( QString const & id );
 
   /// </JavaScript interface>
+
+  enum TargetFrame { MainFrame, CurrentFrame };
+  void runJavaScript( TargetFrame targetFrame, QString const & scriptSource );
 
   /// Clears selection on the current web page. This function can be called to
   /// reset the start position of the page's findText().
@@ -342,13 +383,16 @@ private:
 
   void setValidCurrentArticleNoJs( QString const & id );
 
-  /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
-  /// frame.
-  bool isFramedArticle( QString const & );
-
   /// Checks if the given link is to be opened externally, as opposed to opening
   /// it in-place.
   bool isExternalLink( QUrl const & url );
+
+#ifdef USE_QTWEBKIT
+  // The frame-related functions rely on Qt WebKit API unavailable in Qt WebEngine.
+  // The code is useful only for website dictionaries.
+
+  /// Checks if the given article in form of "gdfrom-xxx" is inside a "website" frame.
+  bool isFramedArticle( QString const & );
 
   /// Sees if the last clicked link is from a website frame. If so, changes url
   /// to point to url text translation instead, and saves the original
@@ -358,8 +402,15 @@ private:
   /// Use the known information about the current frame to update the current
   /// article's value.
   void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
+#endif
 
+#ifdef USE_QTWEBKIT
   void initCurrentArticleAndScroll();
+#else
+  /// Injects into JavaScript the current article ID and whether to scroll to it when reloading page.
+  /// Should be called before an action that can be interpreted as page reloading by JavaScript code.
+  void updateInjectedPageReloadingScript( bool scrollToCurrentArticle );
+#endif
 
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
@@ -374,7 +425,12 @@ private:
   bool eventFilter( QObject * obj, QEvent * ev );
 
   void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
+#ifndef USE_QTWEBKIT
+  // The API necessary to implement Search-in-page status is not available in Qt WebKit.
+  void findTextFinished( QWebEngineFindTextResult const & result );
+#endif
 
+  void updateSearchNoResultsProperty( bool noResults );
   void reloadStyleSheet();
 
   /// Returns the comma-separated list of dictionary ids which should be muted
@@ -388,6 +444,8 @@ protected:
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
 
+// TODO (Qt WebEngine): port if this code is useful in the Qt WebEngine version.
+#ifdef USE_QTWEBKIT
 #ifdef Q_OS_WIN32
 
   /// Search inside web page for word under cursor
@@ -399,7 +457,7 @@ private:
 public:
   QString wordAtPoint( int x, int y );
 #endif
-
+#endif // USE_QTWEBKIT
 };
 
 /// Downloads the specified resource and saves it to a file at the specified path.

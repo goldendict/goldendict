@@ -2,5 +2,8 @@
     <qresource prefix="/scripts">
         <file>blocking.js</file>
         <file>deferred.js</file>
+        <file>webengine_blocking.js</file>
+        <file>webengine_deferred.js</file>
+        <file>webkit_blocking.js</file>
     </qresource>
 </RCC>

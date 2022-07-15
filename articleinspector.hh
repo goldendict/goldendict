@@ -1,9 +1,8 @@
 #ifndef ARTICLEINSPECTOR_HH
 #define ARTICLEINSPECTOR_HH
 
-#include <QtGlobal>
-
-#if QT_VERSION >= 0x040600
+// TODO (Qt WebEngine): implement equivalent article inspector functionality using Qt WebEngine API.
+#ifdef USE_QTWEBKIT
 
 #include <QWebInspector>
 #include <list>
@@ -32,6 +31,6 @@ private:
   static std::list< ArticleInspector * > openedInspectors;
 };
 
-#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
 #endif // ARTICLEINSPECTOR_HH
