@@ -367,6 +367,8 @@ private slots:
 
   void setActiveDictIds(ActiveDictIds);
 
+  void dictionaryClear( ActiveDictIds ad );
+
 private:
 
   /// Deduces group from the url. If there doesn't seem to be any group,

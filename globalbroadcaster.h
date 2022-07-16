@@ -28,6 +28,7 @@ public:
 
 signals:
   void dictionaryChanges( ActiveDictIds ad );
+  void dictionaryClear( ActiveDictIds ad );
 };
 
 #endif // GLOBAL_GLOBALBROADCASTER_H
