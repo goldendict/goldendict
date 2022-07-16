@@ -26,7 +26,7 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
          qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev \
          libqt5svg5-dev libqt5x11extras5-dev qttools5-dev \
-         qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins
+         qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins libqt5webchannel5-dev qtwebengine5-dev
          
 ### Fedora 35
 ```
