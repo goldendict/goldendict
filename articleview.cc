@@ -2306,7 +2306,10 @@ void ArticleView::onPageJsReady( QVariantMap const & audioLinks_, QString const 
 void ArticleView::onJsActiveArticleChanged(QString const & id)
 {
   if ( !isScrollTo( id ) )
-    return; // Incorrect id
+  {
+    gdWarning( "Invalid active article ID received from JavaScript: %s", id.toUtf8().constData() );
+    return;
+  }
 
   currentArticle = id;
   emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
