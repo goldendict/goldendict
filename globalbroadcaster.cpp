@@ -5,6 +5,12 @@
 Q_GLOBAL_STATIC( GlobalBroadcaster, bdcaster )
 GlobalBroadcaster::GlobalBroadcaster( QObject * parent ) : QObject( parent )
 {
+  QStringList whiteUrlHosts = { "ajax.googleapis.com" };
+ 
+  for( auto host : whiteUrlHosts )
+  {
+    addWhitelist( host );
+  }
 }
 
 GlobalBroadcaster * GlobalBroadcaster::instance()

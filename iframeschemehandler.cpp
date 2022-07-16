@@ -46,16 +46,22 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     while( !base.isEmpty() && !base.endsWith( "/" ) )
       base.chop( 1 );
 
-    QRegularExpression tags( "<base\\s+.*?>",
+    QRegularExpression baseTag( "<base\\s+.*?>",
                              QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption );
     
     QString baseTagHtml = "<base href=\"" + base + "\">";
     
     // remove existed base tag
-    articleString.remove( tags ) ;
-    qsizetype pos = articleString.indexOf( "<head>" );
-    if( pos > -1 )
-      articleString.insert( pos + 6, baseTagHtml );
+    articleString.remove( baseTag ) ;
+
+    QRegularExpression headTag( "<head\\s+.*?>",
+                             QRegularExpression::CaseInsensitiveOption
+                               | QRegularExpression::DotMatchesEverythingOption );
+    auto match = headTag.match( articleString, 0 );
+    if( match.hasMatch() )
+    {
+      articleString.insert( match.capturedEnd(), baseTagHtml );
+    }
 
     buffer->setData(codec->fromUnicode(articleString));
 
