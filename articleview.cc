@@ -360,6 +360,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   connect(GlobalBroadcaster::instance(), SIGNAL( dictionaryChanges(ActiveDictIds)), this,
           SLOT(setActiveDictIds(ActiveDictIds)));
 
+  connect( GlobalBroadcaster::instance(), &GlobalBroadcaster::dictionaryClear, this,
+           &ArticleView::dictionaryClear );
+
   channel = new QWebChannel(ui.definition->page());
   agent = new ArticleViewAgent(this);
   attachWebChannelToHtml();
@@ -2609,13 +2612,22 @@ void ArticleView::highlightAllFtsOccurences( QWebEnginePage::FindFlags flags )
 }
 
 void ArticleView::setActiveDictIds(ActiveDictIds ad) {
-  // ignore all other signals.
-  qDebug() << "receive dicts, current word:" << currentWord << ad.word << ":" << ad.dictIds;
   if (ad.word == currentWord) {
-    qDebug() << "receive dicts, current word accept:" << currentWord;
+    // ignore all other signals.
+    qDebug() << "receive dicts, current word:" << currentWord << ad.word << ":" << ad.dictIds;
     currentActiveDictIds << ad.dictIds;
     currentActiveDictIds.removeDuplicates();
     emit updateFoundInDictsList();
+  }
+}
+
+void ArticleView::dictionaryClear( ActiveDictIds ad )
+{
+  // ignore all other signals.
+  if( ad.word == currentWord )
+  {
+    qDebug() << "clear current dictionaries:" << currentWord;
+    currentActiveDictIds.clear();
   }
 }
 
