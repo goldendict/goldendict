@@ -54,7 +54,7 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     // remove existed base tag
     articleString.remove( baseTag ) ;
 
-    QRegularExpression headTag( "<head\\s+.*?>",
+    QRegularExpression headTag( "<head\\b.*?>",
                              QRegularExpression::CaseInsensitiveOption
                                | QRegularExpression::DotMatchesEverythingOption );
     auto match = headTag.match( articleString, 0 );
