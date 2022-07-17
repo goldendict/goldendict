@@ -766,7 +766,10 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
 bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
   if ( !isScrollTo( id ) )
-    return false; // Incorrect id
+  {
+    gdWarning( "Attempt to set invalid current article ID: %s", id.toUtf8().constData() );
+    return false;
+  }
 
   if ( !ui.definition->isVisible() )
     return false; // No action on background page, scrollIntoView there don't work
