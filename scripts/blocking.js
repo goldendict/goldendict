@@ -36,10 +36,21 @@ function gdOnCppActiveArticleChanged(articleId, moveToIt) {
     gdSetActiveArticle(articleId);
 }
 
-function gdSelectArticle(id) {
-    const selection = window.getSelection();
+function gdSelectCurrentArticle() {
+    var el;
+    if (gdCurrentArticle) {
+        el = document.getElementById(gdCurrentArticle);
+    } else {
+        // Special pages such as the initial Welcome! page or a not-found page have
+        // no dictionary articles, and so gdCurrentArticle is undefined. In this case
+        // consider the entire page to be a single article and select it all.
+        el = document.body;
+    }
+
     const range = document.createRange();
-    range.selectNodeContents(document.getElementById('gdfrom-' + id));
+    range.selectNodeContents(el);
+
+    const selection = window.getSelection();
     selection.removeAllRanges();
     selection.addRange(range);
 }

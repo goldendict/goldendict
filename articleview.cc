@@ -779,19 +779,7 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 
 void ArticleView::selectCurrentArticle()
 {
-  QString const articleId = getActiveArticleId();
-  if( articleId.isEmpty() )
-  {
-    // The gdSelectArticle( '' ) JavaScript function call fails with a TypeError and has
-    // no visible effect. This must be a special page such as the initial Welcome! page or
-    // a not-found page. Consider the entire page to be a single article and select it all.
-    gdDebug( "No current article to select => select all" );
-    ui.definition->pageAction( QWebPage::SelectAll )->trigger();
-    return;
-  }
-
-  ui.definition->page()->mainFrame()->evaluateJavaScript(
-        QString( "gdSelectArticle( '%1' );" ).arg( articleId ) );
+  ui.definition->page()->mainFrame()->evaluateJavaScript( "gdSelectCurrentArticle();" );
 }
 
 bool ArticleView::isFramedArticle( QString const & ca )
