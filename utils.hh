@@ -11,6 +11,7 @@
 #include <QUrlQuery>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include "filetype.hh"
 
 namespace Utils
 {
@@ -83,11 +84,11 @@ inline bool isExternalLink(QUrl const &url) {
          url.scheme() == "file" || url.toString().startsWith( "//" );
 }
 
-inline bool isCssFontImage(QUrl const &url) {
+inline bool isHtmlResources(QUrl const &url) {
   auto fileName = url.fileName();
   auto ext=fileName.mid(fileName.lastIndexOf("."));
-  QStringList extensions{".css",".woff",".woff2","ttf",".bmp" ,".jpg", ".png", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv ",".ape"} ;
-  return extensions.indexOf(ext)>-1;
+  QStringList extensions{".css",".woff",".woff2","ttf",".bmp" ,".jpg", ".png",".gif", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv",".ape"} ;
+  return extensions.contains( ext, Qt::CaseInsensitive );
 }
 
 inline QString escape( QString const & plain )
@@ -240,6 +241,15 @@ inline std::pair< bool, QString > getQueryWord( QUrl const & url )
   }
   return std::make_pair( validScheme, word );
 }
+
+inline bool isAudioUrl( QUrl const & url )
+{
+  // Note: we check for forvo sound links explicitly, as they don't have extensions
+
+  return ( url.scheme() == "http" || url.scheme() == "https" || url.scheme() == "gdau" )
+         && ( Filetype::isNameOfSound( url.path().toUtf8().data() ) || url.host() == "apifree.forvo.com" );
+}
+
 }
 
 }

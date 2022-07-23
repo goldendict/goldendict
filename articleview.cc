@@ -197,6 +197,19 @@ QString dictionaryIdFromScrollTo( QString const & scrollTo )
   return scrollTo.mid( scrollToPrefixLength );
 }
 
+QString searchStatusMessageNoMatches()
+{
+  return ArticleView::tr( "Phrase not found" );
+}
+
+QString searchStatusMessage( int activeMatch, int matchCount )
+{
+  Q_ASSERT( matchCount > 0 );
+  Q_ASSERT( activeMatch > 0 );
+  Q_ASSERT( activeMatch <= matchCount );
+  return ArticleView::tr( "%1 of %2 matches" ).arg( activeMatch ).arg( matchCount );
+}
+
 } // unnamed namespace
 
 QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
@@ -346,6 +359,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
 
   connect(GlobalBroadcaster::instance(), SIGNAL( dictionaryChanges(ActiveDictIds)), this,
           SLOT(setActiveDictIds(ActiveDictIds)));
+
+  connect( GlobalBroadcaster::instance(), &GlobalBroadcaster::dictionaryClear, this,
+           &ArticleView::dictionaryClear );
 
   channel = new QWebChannel(ui.definition->page());
   agent = new ArticleViewAgent(this);
@@ -700,16 +716,7 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
     // Maybe a link inside a website was clicked?
 
     QString ca = getCurrentArticle();
-    isFramedArticle( ca,
-                     [ &url, &contexts, &ca ]( bool framed )
-                     {
-                       if( framed )
-                       {
-                         // no need to translate website internal url to gd builtin url
-                         // and lack the formulation to convert them.
-                         qDebug() << "in the website with url:" << url;
-                       }
-                     } );
+    isFramedArticle( ca, []( bool framed ){} );
   }
 }
 
@@ -1085,7 +1092,7 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
   if ( !popupView &&
        ( ui.definition->isMidButtonPressed() ||
-         ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
+         ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) && !isAudioLink(url) )
   {
     // Mid button or Control/Shift is currently pressed - open the link in new tab
     ui.definition->resetMidButtonPressed();
@@ -1741,7 +1748,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       followLink = new QAction( tr( "&Open Link" ), &menu );
       menu.addAction( followLink );
 
-      if ( !popupView )
+      if( !popupView && !isAudioLink( targetUrl ) )
       {
         followLinkNewTab = new QAction( QIcon( ":/icons/addtab.svg" ),
                                         tr( "Open Link in New &Tab" ), &menu );
@@ -1773,8 +1780,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       }
   }
 
-  if( !popupView && ( targetUrl.scheme() == "gdau"
-                      || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) ) )
+  if( !popupView && isAudioLink( targetUrl ) )
   {
       saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
       menu.addAction( saveSoundAction );
@@ -2256,7 +2262,7 @@ void ArticleView::on_searchCloseButton_clicked()
 
 void ArticleView::on_searchCaseSensitive_clicked()
 {
-  performFindOperation( false, false, true );
+  performFindOperation( true, false );
 }
 
 void ArticleView::on_highlightAllButton_clicked()
@@ -2495,10 +2501,13 @@ void ArticleView::highlightFTSResults()
     {
       const QUrl & url = ui.definition->url();
 
-      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
-
       QString regString = Utils::Url::queryItemValue( url, "regexp" );
-      if( ignoreDiacritics )
+	  if( regString.isEmpty() )
+	    return;
+      
+      bool ignoreDiacritics = Utils::Url::hasQueryItem( url, "ignore_diacritics" );
+	  
+	  if( ignoreDiacritics )
         regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
       else
         regString = regString.remove( AccentMarkHandler::accentMark() );
@@ -2559,7 +2568,9 @@ void ArticleView::highlightFTSResults()
       if( ftsSearchMatchCase )
         flags |= QWebEnginePage::FindCaseSensitively;
 
-      if( !allMatches.isEmpty() )
+  if( allMatches.isEmpty() )
+    ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
+  else
       {
 //        highlightAllFtsOccurences( flags );
         ui.definition->findText( allMatches.at( 0 ), flags );
@@ -2568,7 +2579,10 @@ void ArticleView::highlightFTSResults()
         //   ui.definition->page()->runJavaScript(
         //     QString( "%1=window.getSelection().getRangeAt(0);_=0;" ).arg( rangeVarName ) );
         // }
+		Q_ASSERT( ftsPosition == 0 );
+    	ui.ftsSearchStatusLabel->setText( searchStatusMessage( 1, allMatches.size() ) );
       }
+
 
       ui.ftsSearchFrame->show();
       ui.ftsSearchPrevious->setEnabled( false );
@@ -2598,13 +2612,22 @@ void ArticleView::highlightAllFtsOccurences( QWebEnginePage::FindFlags flags )
 }
 
 void ArticleView::setActiveDictIds(ActiveDictIds ad) {
-  // ignore all other signals.
-  qDebug() << "receive dicts, current word:" << currentWord << ad.word << ":" << ad.dictIds;
   if (ad.word == currentWord) {
-    qDebug() << "receive dicts, current word accept:" << currentWord;
+    // ignore all other signals.
+    qDebug() << "receive dicts, current word:" << currentWord << ad.word << ":" << ad.dictIds;
     currentActiveDictIds << ad.dictIds;
     currentActiveDictIds.removeDuplicates();
     emit updateFoundInDictsList();
+  }
+}
+
+void ArticleView::dictionaryClear( ActiveDictIds ad )
+{
+  // ignore all other signals.
+  if( ad.word == currentWord )
+  {
+    qDebug() << "clear current dictionaries:" << currentWord;
+    currentActiveDictIds.clear();
   }
 }
 
@@ -2616,6 +2639,7 @@ void ArticleView::performFtsFindOperation( bool backwards )
 
   if( allMatches.isEmpty() )
   {
+    ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
     ui.ftsSearchNext->setEnabled( false );
     ui.ftsSearchPrevious->setEnabled( false );
     return;
@@ -2677,7 +2701,10 @@ void ArticleView::performFtsFindOperation( bool backwards )
               ui.ftsSearchPrevious->setEnabled(res);
       });
   }
+
 #endif
+
+  ui.ftsSearchStatusLabel->setText( searchStatusMessage( ftsPosition + 1, allMatches.size() ) );
   // Store new highlighted selection
   // ui.definition->page()->
   //        runJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )

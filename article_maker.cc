@@ -446,6 +446,8 @@ void ArticleRequest::altSearchFinished()
   if ( altsDone )
     return;
 
+  emit GlobalBroadcaster::instance()->dictionaryClear( ActiveDictIds{word} );
+
   // Check every request for finishing
   for( list< sptr< Dictionary::WordSearchRequest > >::iterator i =
          altSearches.begin(); i != altSearches.end(); )

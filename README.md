@@ -13,7 +13,7 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
 ### External Deps
 
 * Make, GCC, Git
-* Qt framework. Minimum required version is 5.15 and support the latest QT version 6.2.4
+* Qt framework. Minimum required version is 5.15 and support the latest QT version 6.X
 * Qt Creator IDE is recommended for development
 * Various libraries on Linux (png, zlib, etc)
 * On Mac and Windows all the libraries are already included in the repository
@@ -26,7 +26,7 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
          qtdeclarative5-dev libxtst-dev liblzo2-dev libbz2-dev \
          libao-dev libavutil-dev libavformat-dev libtiff5-dev libeb16-dev \
          libqt5svg5-dev libqt5x11extras5-dev qttools5-dev \
-         qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins
+         qttools5-dev-tools qtmultimedia5-dev libqt5multimedia5-plugins libqt5webchannel5-dev qtwebengine5-dev
          
 ### Fedora 35
 ```
@@ -42,7 +42,7 @@ sudo dnf install git pkg-config \
 
 First, clone this repository, e.g.:
 
-    git clone https://github.com/goldendict/goldendict.git
+    git clone https://github.com/xiaoyifang/goldendict.git
 
 
 ### Linux 

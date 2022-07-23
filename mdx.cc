@@ -949,7 +949,8 @@ void MdxDictionary::loadArticle( uint32_t offset, string & articleText, bool noF
     article = filterResource( articleId, article );
   }
 
-  articleText = article.toStdString();
+  // articleText = article.toStdString();
+  articleText = string( article.toUtf8().constData() );
 }
 
 QString & MdxDictionary::filterResource( QString const & articleId, QString & article )
@@ -1439,9 +1440,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       MdictParser::HeadWordIndex headWordIndex;
 
       // enumerating word and its definition
-      while ( parser.readNextHeadWordIndex( headWordIndex ) )
+      if ( parser.readNextHeadWordIndex( headWordIndex ) )
       {
-        parser.readRecordBlock( headWordIndex, articleHandler );
+        parser.readRecordBlock( headWordIndex, articleHandler, true);
       }
 
       // enumerating resources if there's any

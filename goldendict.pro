@@ -69,7 +69,9 @@ CONFIG += exceptions \
     stl  \
     c++17 \
     lrelease \
-    embed_translations
+    embed_translations \
+    utf8_source \
+    force_debug_info
 
 mac {
     DEBUG:CONFIG += app_bundle
@@ -80,14 +82,9 @@ OBJECTS_DIR = build
 UI_DIR = build
 MOC_DIR = build
 #RCC_DIR = build
-LIBS += \
-        -lz \
+LIBS += -lz \
         -lbz2 \
         -llzo2
-
-CONFIG+=utf8_source
-
-CONFIG+=force_debug_info
 
 win32 {
     TARGET = GoldenDict

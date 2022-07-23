@@ -19,8 +19,20 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
   auto finishAction     = [ = ]() -> void
   {
-    // Handle reply data
+    QByteArray contentType = "text/html;charset=UTF-8";
+    auto contentTypeHeader = reply->header( QNetworkRequest::ContentTypeHeader );
+    if( contentTypeHeader.isValid() )
+      contentType = contentTypeHeader.toByteArray();
 
+    QBuffer * buffer = new QBuffer( requestJob );
+    // Handle reply data
+    if( reply->error() != QNetworkReply::NoError )
+    {
+      QString emptyHtml = QString( "<html><body>%1</body></html>" ).arg( reply->errorString() );
+      buffer->setData( emptyHtml.toUtf8() );
+      requestJob->reply( contentType, buffer );
+      return;
+    }
     QByteArray replyData = reply->readAll();
     QString articleString;
 
@@ -34,64 +46,24 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     while( !base.isEmpty() && !base.endsWith( "/" ) )
       base.chop( 1 );
 
-    QRegularExpression tags( "<\\s*(a|link|img|script)\\s+[^>]*(src|href)\\s*=\\s*['\"][^>]+>",
-                             QRegularExpression::CaseInsensitiveOption );
-    QRegularExpression links( "\\b(src|href)\\s*=\\s*(['\"])([^'\"]+['\"])",
-                              QRegularExpression::CaseInsensitiveOption );
-    int pos = 0;
-    QString articleNewString;
-    QRegularExpressionMatchIterator it = tags.globalMatch( articleString );
-    while( it.hasNext() )
+    QRegularExpression baseTag( "<base\\s+.*?>",
+                             QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption );
+    
+    QString baseTagHtml = "<base href=\"" + base + "\">";
+    
+    // remove existed base tag
+    articleString.remove( baseTag ) ;
+
+    QRegularExpression headTag( "<head\\b.*?>",
+                             QRegularExpression::CaseInsensitiveOption
+                               | QRegularExpression::DotMatchesEverythingOption );
+    auto match = headTag.match( articleString, 0 );
+    if( match.hasMatch() )
     {
-      QRegularExpressionMatch match = it.next();
-      articleNewString += articleString.mid( pos, match.capturedStart() - pos );
-      pos = match.capturedEnd();
-
-      QString tag = match.captured();
-
-      QRegularExpressionMatch match_links = links.match( tag );
-      if( !match_links.hasMatch() )
-      {
-        articleNewString += tag;
-        continue;
-      }
-
-      QString url = match_links.captured( 3 );
-
-      if( url.indexOf( ":/" ) >= 0 || url.indexOf( "data:" ) >= 0 || url.indexOf( "mailto:" ) >= 0 ||
-          url.startsWith( "#" ) || url.startsWith( "javascript:" ) )
-      {
-        // External link, anchor or base64-encoded data
-        articleNewString += tag;
-        continue;
-      }
-
-      QString newUrl = match_links.captured( 1 ) + "=" + match_links.captured( 2 );
-      if( url.startsWith( "//" ) )
-        newUrl += reply->url().scheme() + ":";
-      else if( url.startsWith( "/" ) )
-        newUrl += root;
-      else
-        newUrl += base;
-      newUrl += match_links.captured( 3 );
-
-      tag.replace( match_links.capturedStart(), match_links.capturedLength(), newUrl );
-      articleNewString += tag;
-    }
-    if( pos )
-    {
-      articleNewString += articleString.mid( pos );
-      articleString = articleNewString;
-      articleNewString.clear();
+      articleString.insert( match.capturedEnd(), baseTagHtml );
     }
 
-    QBuffer * buffer = new QBuffer(requestJob);
     buffer->setData(codec->fromUnicode(articleString));
-
-    QByteArray contentType="text/html;charset=UTF-8";
-    auto contentTypeHeader=reply->header(QNetworkRequest::ContentTypeHeader);
-    if(contentTypeHeader.isValid())
-      contentType= contentTypeHeader.toByteArray();
 
     requestJob->reply(contentType , buffer );
   };

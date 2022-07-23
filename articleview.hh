@@ -20,6 +20,7 @@
 #include <QtCore5Compat/QRegExp>
 #endif
 #include "ankiconnector.h"
+#include "webmultimediadownload.hh"
 
 class ResourceToSaveHandler;
 class ArticleViewAgent ;
@@ -324,6 +325,11 @@ private slots:
   void linkHovered( const QString & link);
   void contextMenuRequested( QPoint const & );
 
+  bool isAudioLink( QUrl & targetUrl )
+  {
+    return ( targetUrl.scheme() == "gdau" || Dictionary::WebMultimediaDownload::isAudioUrl( targetUrl ) );
+  }
+
   void resourceDownloadFinished();
 
   /// We handle pasting by attempting to define the word in clipboard.
@@ -360,6 +366,8 @@ private slots:
   void inspect();
 
   void setActiveDictIds(ActiveDictIds);
+
+  void dictionaryClear( ActiveDictIds ad );
 
 private:
 

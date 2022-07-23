@@ -21,7 +21,7 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
       //whitelist url does not block
       return;
     }
-    if(Utils::isCssFontImage(info.requestUrl())){
+    if(Utils::isHtmlResources(info.requestUrl())){
       //let throuth the resources file.
       return;
     }
@@ -39,7 +39,14 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
     {
       return;
     }
-//    emit linkClicked( info.requestUrl() );
-//    info.block(true);
+    emit linkClicked( info.requestUrl() );
+    info.block(true);
+  }
+
+  //window.location=audio link
+  if( Utils::Url::isAudioUrl(info.requestUrl()) && info.navigationType()==QWebEngineUrlRequestInfo::NavigationTypeRedirect )
+  {
+    qDebug() << "blocked audio url from page redirect" << info.requestUrl().url();
+    info.block( true );
   }
 }

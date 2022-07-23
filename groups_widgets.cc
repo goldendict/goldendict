@@ -31,8 +31,7 @@ DictGroupWidget::DictGroupWidget( QWidget * parent,
   groupId( group.id )
 {
   ui.setupUi( this );
-  auto dictMap = Dictionary::dictToMap(dicts);
-  ui.dictionaries->populate( Instances::Group( group, dictMap, Config::Group() ).dictionaries, dicts );
+  ui.dictionaries->populate( Instances::Group( group, dicts, Config::Group() ).dictionaries, dicts );
 
   // Populate icons' list
 
@@ -329,7 +328,7 @@ bool DictListModel::setData( QModelIndex const & index, const QVariant & value,
 
     g.dictionaries.push_back( Config::DictionaryRef( value.toString(), QString() ) );
 
-    Instances::Group i( g, Dictionary::dictToMap(*allDicts), Config::Group() );
+    Instances::Group i( g, *allDicts, Config::Group() );
 
     if ( i.dictionaries.size() == 1 )
     {

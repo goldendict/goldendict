@@ -246,7 +246,17 @@
         <translation>&amp;Открыть ссылку</translation>
     </message>
     <message>
-        <location filename="../articleview.cc" line="1735"/>
+        <location filename="../articleview.cc" line="222"/>
+        <source>Phrase not found</source>
+        <translation>Ничего не найдено</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="230"/>
+        <source>%1 of %2 matches</source>
+        <translation>%1 из %2 совпадений</translation>
+    </message>
+    <message>
+        <location filename="../articleview.cc" line="1810"/>
         <source>Open Link in New &amp;Tab</source>
         <translation>Открыть ссылку в новой &amp;вкладке</translation>
     </message>

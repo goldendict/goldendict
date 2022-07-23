@@ -56,7 +56,7 @@
         <file>icons/icon32_slob.png</file>
         <file>icons/icon32_gls.png</file>
         <file>icons/folder.png</file>
-        <file>icons/ontop.png</file>
+        <file>icons/ontop.svg</file>
         <file>resources/jquery-3.6.0.slim.min.js</file>
         <file>resources/gd-custom.js</file>
         <file>resources/gd-builtin.js</file>

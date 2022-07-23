@@ -11,7 +11,7 @@ using std::set;
 using std::string;
 
 Group::Group( Config::Group const & cfgGroup,
-              QMap<std::string, sptr< Dictionary::Class > > const & allDictionaries,
+              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
               Config::Group const & inactiveGroup ):
   id( cfgGroup.id ),
   name( cfgGroup.name ),
@@ -24,13 +24,15 @@ Group::Group( Config::Group const & cfgGroup,
 
   QMap<string, sptr< Dictionary::Class > > groupDicts;
   QVector<string> dictOrderList;
+  auto dictMap = Dictionary::dictToMap( allDictionaries );
 
   for( unsigned x = 0; x < (unsigned)cfgGroup.dictionaries.size(); ++x )
   {
     std::string id = cfgGroup.dictionaries[ x ].id.toStdString();
 
-    if(allDictionaries.contains(id)){
-      groupDicts.insert(id, allDictionaries[ id ] );
+    if( dictMap.contains( id ) )
+    {
+      groupDicts.insert( id, dictMap[ id ] );
       dictOrderList.push_back(id);
     }
   }

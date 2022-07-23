@@ -408,6 +408,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( trayIconMenu.addAction( tr( "Show &Main Window" ) ), SIGNAL( triggered() ),
            this, SLOT( showMainWindow() ) );
   trayIconMenu.addAction( enableScanPopup );
+  actTrackingClipboard = trayIconMenu.addAction( tr( "Tracking Clipboard" ) );
+  actTrackingClipboard->setCheckable(true);
+  actTrackingClipboard->setChecked(cfg.preferences.trackClipboardChanges);
+  actTrackingClipboard->setVisible( cfg.preferences.enableScanPopup );
+  connect( actTrackingClipboard , SIGNAL( triggered(bool) ),
+           this, SLOT( trackingClipboard(bool) ) );
   trayIconMenu.addSeparator();
   connect( trayIconMenu.addAction( tr( "&Quit" ) ), SIGNAL( triggered() ),
            this, SLOT( quitApp() ) );
@@ -763,6 +769,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.historyList->installEventFilter( this );
 
+  ui.favoritesTree->installEventFilter( this );
+
+  groupListInDock->installEventFilter( this );
+  groupListInToolbar->installEventFilter( this );
+
   connect( &ftsIndexing, SIGNAL( newIndexingName( QString ) ), this, SLOT( showFTSIndexingName( QString ) ) );
 
 #ifndef Q_OS_MAC
@@ -995,13 +1006,11 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
   // middle clicked
   QString subtype = "plain";
 
-    QString str = QApplication::clipboard()->text(subtype,
-      QClipboard::Selection);
+  QString str = QApplication::clipboard()->text( subtype, QClipboard::Selection );
   setTranslateBoxTextAndClearSuffix( str, EscapeWildcards, NoPopupChange );
 
-        QKeyEvent ev(QEvent::KeyPress, Qt::Key_Enter,
-           Qt::NoModifier);
-        QApplication::sendEvent(translateLine, &ev);
+  QKeyEvent ev( QEvent::KeyPress, Qt::Key_Enter, Qt::NoModifier );
+  QApplication::sendEvent( translateLine, &ev );
 }
 
 MainWindow::~MainWindow()
@@ -1394,11 +1403,11 @@ void MainWindow::updateGroupList()
 
   // Add dictionaryOrder first, as the 'All' group.
   {
-    Instances::Group g( cfg.dictionaryOrder, dictMap, Config::Group() );
+    Instances::Group g( cfg.dictionaryOrder, dictionaries, Config::Group() );
 
     // Add any missing entries to dictionary order
     Instances::complementDictionaryOrder( g,
-                                          Instances::Group( cfg.inactiveDictionaries, dictMap, Config::Group() ),
+                                          Instances::Group( cfg.inactiveDictionaries, dictionaries, Config::Group() ),
                                           dictionaries );
 
     g.name = tr( "All" );
@@ -1409,7 +1418,7 @@ void MainWindow::updateGroupList()
   }
 
   for( int x  = 0; x < cfg.groups.size(); ++x )
-    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictMap, cfg.inactiveDictionaries ) );
+    groupInstances.push_back( Instances::Group( cfg.groups[ x ], dictionaries, cfg.inactiveDictionaries ) );
 
   // Update names for dictionaries that are present, so that they could be
   // found in case they got moved.
@@ -1570,7 +1579,7 @@ void MainWindow::createTabList()
   tabListButton->setToolTip( tr( "Open Tabs List" ) );
   tabListButton->setPopupMode(QToolButton::InstantPopup);
   ui.tabWidget->setCornerWidget(tabListButton);
-  tabListButton->setFocusPolicy(Qt::ClickFocus);
+  tabListButton->setFocusPolicy(Qt::NoFocus);
 }
 
 void MainWindow::fillWindowsMenu()
@@ -2068,7 +2077,7 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   { // Limit existence of newCfg
 
   Config::Class newCfg = cfg;
-  EditDictionaries dicts( this, newCfg, dictionaries, dictMap, groupInstances, dictNetMgr );
+  EditDictionaries dicts( this, newCfg, dictionaries, groupInstances, dictNetMgr );
 
   connect( &dicts, SIGNAL( showDictionaryInfo( QString const & ) ),
            this, SLOT( showDictionaryInfo( QString const & ) ) );
@@ -2539,6 +2548,14 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if (ev->type() == QEvent::KeyPress)
   {
     QKeyEvent *keyevent = static_cast<QKeyEvent*>(ev);
+
+    bool handleCtrlTab = ( obj == translateLine
+                           || obj == wordList
+                           || obj == ui.historyList
+                           || obj == ui.favoritesTree
+                           || obj == ui.dictsList
+                           || obj == groupList );
+
     if (keyevent->modifiers() == Qt::ControlModifier && keyevent->key() == Qt::Key_Tab)
     {
       if (cfg.preferences.mruTabOrder)
@@ -2546,7 +2563,17 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         ctrlTabPressed();
         return true;
       }
+      else if( handleCtrlTab )
+      {
+        QApplication::sendEvent( ui.tabWidget, ev );
+        return true;
+      }
       return false;
+    }
+    if( handleCtrlTab && keyevent->matches( QKeySequence::PreviousChild ) ) // Handle only Ctrl+Shist+Tab here because Ctrl+Tab was already handled before
+    {
+      QApplication::sendEvent( ui.tabWidget, ev );
+      return true;
     }
   }
 
@@ -2565,6 +2592,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
           return true;
         }
       }
+
     }
 
     if ( ev->type() == QEvent::FocusIn ) {
@@ -3190,6 +3218,11 @@ void MainWindow::scanEnableToggled( bool on )
 void MainWindow::showMainWindow()
 {
   toggleMainWindow( true );
+}
+
+void MainWindow::trackingClipboard( bool on )
+{
+  cfg.preferences.trackClipboardChanges = on;
 }
 
 void MainWindow::visitHomepage()

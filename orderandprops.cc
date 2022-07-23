@@ -85,15 +85,12 @@ bool dictLessThan( sptr< Dictionary::Class > const & dict1,
 OrderAndProps::OrderAndProps( QWidget * parent,
                               Config::Group const & dictionaryOrder,
                               Config::Group const & inactiveDictionaries,
-                              std::vector< sptr< Dictionary::Class > > const &
-                              allDictionaries ,
-                              QMap<std::string, sptr< Dictionary::Class > > const & dictMap):
+                              std::vector< sptr< Dictionary::Class > >  const & allDictionaries):
   QWidget( parent )
 {
   ui.setupUi( this );
-
-  Instances::Group order( dictionaryOrder, dictMap, Config::Group() );
-  Instances::Group inactive( inactiveDictionaries, dictMap, Config::Group() );
+  Instances::Group order( dictionaryOrder, allDictionaries, Config::Group() );
+  Instances::Group inactive( inactiveDictionaries, allDictionaries, Config::Group() );
 
   Instances::complementDictionaryOrder( order, inactive, allDictionaries );
 

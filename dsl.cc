@@ -322,7 +322,7 @@ DslDictionary::DslDictionary( string const & id,
 
   resourceDir1 = getDictionaryFilenames()[ 0 ] + ".files" + FsEncoding::separator();
   QString s = FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
-  if( s.endsWith( QString::fromLatin1( ".dz", Qt::CaseInsensitive ) ) )
+  if( s.endsWith( QString::fromLatin1( ".dz" ), Qt::CaseInsensitive ) )
     s.chop( 3 );
   resourceDir2 = FsEncoding::encode( s ) + ".files" + FsEncoding::separator();
 
