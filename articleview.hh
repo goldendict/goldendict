@@ -419,6 +419,8 @@ private:
   /// Loads a page at @p url into view.
   void load( QUrl const & url );
 
+  void openLinkWithFragment( QUrl const & url, QString const & scrollTo );
+
   /// Attempts removing last temporary file created.
   void cleanupTemp();
 

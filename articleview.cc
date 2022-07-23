@@ -1401,6 +1401,62 @@ void ArticleView::linkClicked( QUrl const & url_ )
     openLink( url, ui.definition->url(), currentArticle, contexts );
 }
 
+static QUrl replaceScrollToInLinkWithFragment( QUrl const & url, QString const & scrollTo )
+{
+  static QString const scrollToQueryKey = "scrollto";
+
+  QUrl result = url;
+
+#ifdef USE_QTWEBKIT
+  // In the Qt WebKit version, the "scrollto" query item value has no effect in background tabs and
+  // overrides the more precise and useful scrolling to the fragment ID in foreground tabs => remove it.
+  // TODO (Qt WebKit): fix these issues and share code with the Qt WebEngine version in order to set correct current
+  // article instead of keeping the first article active (a new Qt4x5::Url::replaceQueryItem() wrapper could be useful).
+  Q_UNUSED( scrollTo )
+  Qt4x5::Url::removeQueryItem( result, scrollToQueryKey );
+#else
+  QUrlQuery urlQuery( url );
+  urlQuery.removeQueryItem( scrollToQueryKey );
+  if( !scrollTo.isEmpty() )
+    urlQuery.addQueryItem( scrollToQueryKey, scrollTo );
+  result.setQuery( urlQuery );
+#endif
+
+  return result;
+}
+
+void ArticleView::openLinkWithFragment( QUrl const & url, QString const & scrollTo )
+{
+  Q_ASSERT( url.hasFragment() );
+
+  // This must be fragment navigation on the same page, but possibly in a new tab. No need to save
+  // history user data, because its only user - loadFinished() - is not called after navigating back
+  // within the page; navigating back to the initial blank page in the new tab is not allowed.
+
+  // Neither assigning to window.location in the current tab nor navigating from the initial blank page
+  // in the new tab looks like reloading to JavaScript code => no need to update the page-reloading script.
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 )
+  if( url.matches( ui.definition->url(), QUrl::RemoveFragment ) )
+#else
+  QUrl currentUrlWithEqualFragment = ui.definition->url();
+  currentUrlWithEqualFragment.setFragment( url.fragment() );
+  if( url == currentUrlWithEqualFragment )
+#endif
+  {
+    // This is a fragment navigation on the same page and not in a new tab.
+    // The regular loading of the url is slower and causes other issues => assign url to window.location.
+    runJavaScript( MainFrame, QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
+    return;
+  }
+
+  // url's target is a different page (is that possible?) or this link is being opened in a new tab.
+  // Load the url regularly, because assigning it to window.location fails in the Qt WebEngine
+  // version - the new tab's page remains blank and the following error message is printed:
+  // JS error: Not allowed to load local resource: <url> (at :1)
+  ui.definition->load( replaceScrollToInLinkWithFragment( url, scrollTo ) );
+}
+
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
                             QString const & scrollTo,
                             Contexts const & contexts_ )
@@ -1429,10 +1485,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
   {
     if ( url.hasFragment() )
-    {
-      runJavaScript( MainFrame,
-        QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
-    }
+      openLinkWithFragment( url, scrollTo );
     else
     {
       if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
