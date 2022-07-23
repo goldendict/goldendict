@@ -32,8 +32,8 @@ jobs:
         qt_arch: [win64_msvc2019_64]
     env:
       targetName: GoldenDict.exe
-      version: 22.6.21
-      version-suffix: SummerSolstice
+      version: 22.7.23
+      version-suffix: GreatHeat
       prerelease: false
     # 步骤
     steps:
