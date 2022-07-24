@@ -101,7 +101,7 @@ public:
     result += description;
     result += " -->";
 
-    result += "\n<style type=\"text/css\" media=\"";
+    result += "\n<style media=\"";
     result += isPrintMedia ? "print" : "all";
     result += "\">\n";
 
