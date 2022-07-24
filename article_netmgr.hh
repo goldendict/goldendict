@@ -20,6 +20,7 @@
 using std::vector;
 
 class ArticleMaker;
+class QColor;
 
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
@@ -152,6 +153,9 @@ public:
     disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
     hideGoldenDictHeader( hideGoldenDictHeader_ )
   {}
+
+  /// @return articleMaker.makeBlankPageHtmlCode( pageBackgroundColor )
+  std::string makeBlankPage( QColor * pageBackgroundColor = 0 ) const;
 
   /// Tries handling any kind of internal resources referenced by dictionaries.
   /// If it succeeds, the result is a dictionary request object. Otherwise, an

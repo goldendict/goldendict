@@ -17,6 +17,12 @@
 
 #include <algorithm>
 
+#ifndef USE_QTWEBKIT
+#include <QColor>
+
+#include <regex>
+#endif
+
 using std::vector;
 using std::string;
 using gd::wstring;
@@ -63,8 +69,9 @@ void appendScripts( string & result )
 class CssAppender
 {
 public:
-  explicit CssAppender( string & result_ ):
-    result( result_ ), isPrintMedia( false )
+  /// @param needPageBackgroundColor_ whether findPageBackgroundColor() will be called.
+  explicit CssAppender( string & result_, bool needPageBackgroundColor_ ):
+    result( result_ ), needPageBackgroundColor( needPageBackgroundColor_ ), isPrintMedia( false )
   {}
 
   /// Style sheets appended after a call to this function apply only while printing.
@@ -105,13 +112,113 @@ public:
     result += isPrintMedia ? "print" : "all";
     result += "\">\n";
 
-    result += code;
+    appendCodeItself( code );
+
     result += "</style>\n";
   }
 
+#ifndef USE_QTWEBKIT
+  // TODO (Qt WebEngine): on my GNU/Linux system a call to findPageBackgroundColor() takes about 15 ms and slows down
+  // GoldenDict start by about 15*2=30 ms when the Default display style is configured. On the bright side, when some
+  // other built-in display style is configured, a call to findPageBackgroundColor() takes up to 1 ms (with one
+  // exception: Lingoes-Blue about 2.5 ms). The significant slowdown suggests reconsidering this implementation. Perhaps
+  // introduce into built-in CSS files a special comment that specifies the background color or states that the CSS file
+  // does not affect the background color, and parse it much faster. For example, /*gdPageBackgroundColor:#abcdef;*/
+  // The comment's format requirements should be strict for fast and easy parsing w/o regex: the only allowed variation
+  // is replacing the #abcdef substring with another color name parsable by QColor::setNamedColor() or with an empty
+  // string to request parsing the previous CSS file. A downside of this optimization is that such a comment would have
+  // to be added into all user-defined styles. The downside can be mitigated by falling back to the current slow regex
+  // implementation if the comment is not found. But with a silent fallback like this the users would never update their
+  // styles, and suffer suboptimal performance. A way to annoy users into adding the comment into their styles is to
+  // print a warning if the comment is not found. The warning message should include the CSS file name and the comment
+  // format specification.
+  // An alternative optimization is to assume that the <body> background color is specified at most once in each CSS
+  // file and return the first regex match instead of the last. If the <body> background color is specified close to the
+  // top of CSS files, which is indeed the case for built-in styles, this could speed up the search dramatically. But
+  // returning the first match would be even less accurate than the current algorithm; would be much slower than the
+  // strictly formatted comment approach (especially if the style sheets become referenced rather than embedded and the
+  // files could be read line by line in case of the plain text search); would retain a hidden performance trap when the
+  // <body> background color is specified at the bottom of a large file, or not specified at all.
+
+  /// @return The page background color or an empty string if
+  ///         the background color could not be found in the style sheets.
+  /// @warning This function parses the style sheets that have been appended to @a result. Therefore it
+  ///          must be called after appending all style sheets that may override the page background color.
+  string findPageBackgroundColor() const
+  {
+    Q_ASSERT( needPageBackgroundColor );
+
+    string backgroundColor;
+
+    // Iterate in the reverse order because the CSS code lower in the page overrides.
+    std::find_if( cssCodeRanges.crbegin(), cssCodeRanges.crend(), [ this, &backgroundColor ]( Range range ) {
+      backgroundColor = findBodyBackgroundColor( result.cbegin() + range.begin, result.cbegin() + range.end );
+      return !backgroundColor.empty();
+    } );
+
+    return backgroundColor;
+  }
+#endif // USE_QTWEBKIT
+
 private:
+  void appendCodeItself( char const * code )
+  {
+#ifndef USE_QTWEBKIT
+    std::size_t const codeRangeStart = result.size();
+#endif
+
+    result += code;
+
+#ifndef USE_QTWEBKIT
+    // We are not looking for printed background color.
+    if( needPageBackgroundColor && !isPrintMedia )
+      cssCodeRanges.push_back( { codeRangeStart, result.size() } );
+#endif
+  }
+
   string & result;
+  bool const needPageBackgroundColor;
   bool isPrintMedia;
+
+#ifndef USE_QTWEBKIT
+  struct Range { std::size_t begin, end; };
+  vector< Range > cssCodeRanges;
+
+  /// Finds the background color of the <body> element in [@p first, @p last).
+  /// @return the background color or an empty string if it could not be found.
+  static string findBodyBackgroundColor( string::const_iterator first, string::const_iterator last )
+  {
+    // This regular expression is simple and efficient. But the result is not always accurate:
+    // 1. The first word after "background:" is considered to be the color, even though this first word could
+    //    be something else, e.g. "border-box".
+    // 2. The code inside CSS comments (/*comment*/) is matched too, not skipped.
+    // Built-in and user-defined style sheets must take this simplified matching into account.
+    // On the bright side, the user can easily override the background color matched here by adding a comment
+    // like /* body{ background:#abcdef } */ at the end of the user-defined article-style.css file.
+    static std::regex const backgroundRegex( R"(\bbody\s*\{[^}]*\bbackground(?:|-color)\s*:\s*([^\s;}]+))",
+                      // CSS code is case-insensitive => regex::icase.
+                      // The regex object is reused (static) and the CSS code can be large => regex::optimize.
+                                             std::regex::icase | std::regex::optimize );
+
+    // Iterate over all matches and return the last one, because the CSS code lower in the page overrides.
+    string::const_iterator::difference_type position = -1, length;
+    for( std::sregex_iterator it( first, last, backgroundRegex ), end; it != end; ++it )
+    {
+      Q_ASSERT( it->size() == 2 );
+
+      position = it->position( 1 );
+      Q_ASSERT( position >= 0 );
+
+      length = it->length( 1 );
+      Q_ASSERT( length > 0 );
+      Q_ASSERT( first + position + length <= last );
+    }
+
+    if( position == -1 )
+      return {};
+    return string( first + position, first + position + length );
+  }
+#endif
 };
 
 } // unnamed namespace
@@ -136,9 +243,35 @@ void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
   addonStyle = adst;
 }
 
-void ArticleMaker::appendCss( string & result, bool expandOptionalParts ) const
+#ifndef USE_QTWEBKIT
+QColor ArticleMaker::colorFromString( string const & pageBackgroundColor )
 {
-  CssAppender cssAppender( result );
+  if( pageBackgroundColor.empty() )
+  {
+    Q_ASSERT_X( false, Q_FUNC_INFO, "The default built-in style sheet :/article-style.css is unconditionally appended "
+                                    "and specifies a valid page background color, which is parsed correctly." );
+    gdWarning( "Couldn't find the page background color in the article style sheets." );
+    return QColor();
+  }
+
+  QColor color( QString::fromUtf8( pageBackgroundColor.c_str() ) );
+  if( !color.isValid() )
+  {
+    gdWarning( "Found invalid page background color in the article style sheets: \"%s\"", pageBackgroundColor.c_str() );
+    return QColor();
+  }
+
+  GD_DPRINTF( "Found page background color in the article style sheets: \"%s\" = %s\n", pageBackgroundColor.c_str(),
+              // Print the result of QColor's nontrivial parsing of pageBackgroundColor string.
+              // Print the alpha component only if the color is not fully opaque.
+              qPrintable( color.name( color.alpha() == 255 ? QColor::HexRgb : QColor::HexArgb ) ) );
+  return color;
+}
+#endif
+
+void ArticleMaker::appendCss( string & result, bool expandOptionalParts, QColor * pageBackgroundColor ) const
+{
+  CssAppender cssAppender( result, static_cast< bool >( pageBackgroundColor ) );
 
   cssAppender.appendFile( ":/article-style.css", "Built-in css" );
   if( !displayStyle.isEmpty() )
@@ -166,11 +299,19 @@ void ArticleMaker::appendCss( string & result, bool expandOptionalParts ) const
     cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style-print.css",
                             "Addon style print css" );
   }
+
+#ifdef USE_QTWEBKIT
+  Q_ASSERT( !pageBackgroundColor );
+#else
+  if( pageBackgroundColor )
+    *pageBackgroundColor = colorFromString( cssAppender.findPageBackgroundColor() );
+#endif
 }
 
 std::string ArticleMaker::makeHtmlHeader( QString const & word,
                                           QString const & icon,
-                                          bool expandOptionalParts ) const
+                                          bool expandOptionalParts,
+                                          QColor * pageBackgroundColor ) const
 {
   string result =
     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
@@ -178,7 +319,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
   appendScripts( result );
-  appendCss( result, expandOptionalParts );
+  appendCss( result, expandOptionalParts, pageBackgroundColor );
 
   result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
 
@@ -368,10 +509,15 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
   return r;
 }
 
-sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
+string ArticleMaker::makeBlankPageHtmlCode( QColor * pageBackgroundColor ) const
 {
-  string result = makeHtmlHeader( tr( "(untitled)" ), QString(), true ) +
+  return makeHtmlHeader( tr( "(untitled)" ), QString(), true, pageBackgroundColor ) +
     "</body></html>";
+}
+
+sptr< Dictionary::DataRequest > ArticleMaker::makeBlankPage() const
+{
+  string const result = makeBlankPageHtmlCode();
 
   sptr< Dictionary::DataRequestInstant > r =
       new Dictionary::DataRequestInstant( true );

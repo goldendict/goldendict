@@ -118,7 +118,6 @@ void registerArticleUrlSchemes()
   for( auto const & name : handledUrlSchemeNames() )
   {
     QWebEngineUrlScheme scheme( name );
-    // Setting the syntax to Host prevents a white background flash while a page is loaded.
     scheme.setSyntax( QWebEngineUrlScheme::Syntax::Host );
     // Register dictionary schemes as local to make file:// links work in articles.
     scheme.setFlags( QWebEngineUrlScheme::SecureScheme

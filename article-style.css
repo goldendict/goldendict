@@ -1106,16 +1106,6 @@ div.xdxf
 ** http://style.cleverchimp.com/font_size_intervals/altintervals.html
 */
 
-/*
-body {
-	font: x-small sans-serif;
-	background: #f9f9f9 url(headbg.jpg) 0 0 no-repeat;
-	color: black;
-	margin: 0;
-	padding: 0;
-}
-*/
-
 /* scale back up to a sane default */
 .mwiki #globalWrapper {
 	font-size: 127%;

@@ -249,6 +249,11 @@ namespace
   }
 }
 
+string ArticleNetworkAccessManager::makeBlankPage( QColor * pageBackgroundColor ) const
+{
+  return articleMaker.makeBlankPageHtmlCode( pageBackgroundColor );
+}
+
 QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
                                                             QNetworkRequest const & req,
                                                             QIODevice * outgoingData )
@@ -417,7 +422,11 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     contentType = "text/html";
 
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
-      return articleMaker.makeEmptyPage();
+    {
+      // This branch is never taken in the Qt WebEngine and Qt 4 WebKit versions.
+      // It is taken in the Qt 5 WebKit version only when the initial blank page is reloaded.
+      return articleMaker.makeBlankPage();
+    }
 
     Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
                                  Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );

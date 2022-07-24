@@ -27,6 +27,7 @@
 #include <QWebHistory>
 #include <QWebHitTestResult>
 #else
+#include <QColor>
 #include <QWebChannel>
 #include <QWebEngineContextMenuData>
 #include <QWebEngineFindTextResult>
@@ -262,6 +263,26 @@ QString searchStatusMessage( int activeMatch, int matchCount )
   return ArticleView::tr( "%1 of %2 matches" ).arg( activeMatch ).arg( matchCount );
 }
 
+std::string makeBlankPage( ArticleNetworkAccessManager const & articleNetMgr, WebPage & webPage )
+{
+#ifdef USE_QTWEBKIT
+  Q_UNUSED( webPage )
+  return articleNetMgr.makeBlankPage();
+#else
+  // Loading the default blank page instantly via QWebEnginePage::setHtml() alone is not sufficient to prevent
+  // white background flashes when the background color in the current article style is not white. The white
+  // background is visible for a particularly long time when a large page is loaded in a new foreground tab.
+  // Setting QWebEnginePage::backgroundColor to Qt::transparent replaces the white background flashes with gray
+  // background flashes. Eliminate the flashes by finding the page background color in the article style sheets and
+  // assigning it to QWebEnginePage::backgroundColor. See also the documentation for QWebEnginePage::backgroundColor.
+  QColor pageBackgroundColor;
+  auto blankPage = articleNetMgr.makeBlankPage( &pageBackgroundColor );
+  if( pageBackgroundColor.isValid() )
+    webPage.setBackgroundColor( pageBackgroundColor );
+  return blankPage;
+#endif
+}
+
 QLatin1String javaScriptBool( bool value )
 {
   return QLatin1String( value ? "true" : "false" );
@@ -461,17 +482,13 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   settings->setAttribute( QWebSettings::LocalContentCanAccessFileUrls, true );
 #endif
 
+  std::string const blankPage = makeBlankPage( articleNetMgr, *webPage );
   // Load the default blank page instantly, so there would be no flicker.
-
-  QString contentType;
-  QUrl blankPage( "gdlookup://localhost?blank=1" );
-
-  sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
-                                                                 contentType );
-
-  ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
-                                             r->getFullData().size() ),
-                          blankPage );
+  // When the correct WebEnginePage::backgroundColor is set, loading this blank page is less important,
+  // but still prevents brief white background flashes when a new empty tab is created and switched to,
+  // or when the scan popup is opened for the first time.
+  ui.definition->setHtml( QString::fromUtf8( blankPage.data(), blankPage.size() ),
+                          QUrl( "gdlookup://localhost?blank=1" ) );
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
 
