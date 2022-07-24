@@ -78,6 +78,8 @@ public:
     // TODO: consider referencing the style sheets via <link href='URL' rel='stylesheet' /> instead of embedding
     // them into HTML via <style>. This may reduce RAM usage by sharing the fairly large CSS code between pages.
     // The CSS comments and the description parameter can be removed then thanks to self-documenting file names.
+    // In order to share the "Expand optional parts css" code as well, it can be moved
+    // into a new optionally referenced file :/article-style-expand-optional-parts.css.
 
     QFile cssFile( fileName );
     if( !cssFile.open( QFile::ReadOnly ) )
@@ -87,6 +89,14 @@ public:
     if( css.isEmpty() )
       return;
 
+    appendCode( css.constData(), description );
+  }
+
+  void appendCode( char const * code, char const * description )
+  {
+    Q_ASSERT( code );
+    Q_ASSERT( description );
+
     result += "<!-- ";
     result += description;
     result += " -->";
@@ -95,7 +105,7 @@ public:
     result += isPrintMedia ? "print" : "all";
     result += "\">\n";
 
-    result += css.constData();
+    result += code;
     result += "</style>\n";
   }
 
@@ -143,10 +153,8 @@ void ArticleMaker::appendCss( string & result, bool expandOptionalParts ) const
   // Turn on/off expanding of article optional parts
   if( expandOptionalParts )
   {
-    result += "<!-- Expand optional parts css -->\n";
-    result += "<style type=\"text/css\" media=\"all\">\n";
-    result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n";
-    result += "</style>\n";
+    cssAppender.appendCode( ".dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n",
+                            "Expand optional parts css" );
   }
 
   cssAppender.startPrintMedia();
