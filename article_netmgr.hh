@@ -16,9 +16,10 @@
 #endif // USE_QTWEBKIT
 
 #include "dictionary.hh"
-#include "article_maker.hh"
 
 using std::vector;
+
+class ArticleMaker;
 
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.

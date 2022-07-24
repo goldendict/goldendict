@@ -10,6 +10,7 @@
 #include <QUrl>
 
 #include "article_netmgr.hh"
+#include "article_maker.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
 #include "qt4x5.hh"
