@@ -81,6 +81,9 @@ public:
 
 private:
 
+  /// Appends CSS style sheets to @p result.
+  void appendCss( std::string & result, bool expandOptionalParts ) const;
+
   /// Makes everything up to and including the opening body tag.
   std::string makeHtmlHeader( QString const & word, QString const & icon,
                               bool expandOptionalParts ) const;

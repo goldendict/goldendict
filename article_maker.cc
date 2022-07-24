@@ -56,8 +56,53 @@ void appendScripts( string & result )
   result += ArticleMaker::tr( "Collapse article" ).toUtf8().constData();
   result += "\";\n"
             "</script>"
-            "<script src='qrcx://localhost/scripts/blocking.js'></script>";
+            "<script src='qrcx://localhost/scripts/blocking.js'></script>"
+            "\n";
 }
+
+class CssAppender
+{
+public:
+  explicit CssAppender( string & result_ ):
+    result( result_ ), isPrintMedia( false )
+  {}
+
+  /// Style sheets appended after a call to this function apply only while printing.
+  /// @note: style sheets with media="print" are appended after uncoditional style sheets,
+  ///        because print-only CSS needs higher priority to override the style used for printing.
+  void startPrintMedia()
+  { isPrintMedia = true; }
+
+  void appendFile( QString const & fileName, char const * description )
+  {
+    // TODO: consider referencing the style sheets via <link href='URL' rel='stylesheet' /> instead of embedding
+    // them into HTML via <style>. This may reduce RAM usage by sharing the fairly large CSS code between pages.
+    // The CSS comments and the description parameter can be removed then thanks to self-documenting file names.
+
+    QFile cssFile( fileName );
+    if( !cssFile.open( QFile::ReadOnly ) )
+      return;
+
+    QByteArray const css = cssFile.readAll();
+    if( css.isEmpty() )
+      return;
+
+    result += "<!-- ";
+    result += description;
+    result += " -->";
+
+    result += "\n<style type=\"text/css\" media=\"";
+    result += isPrintMedia ? "print" : "all";
+    result += "\">\n";
+
+    result += css.constData();
+    result += "</style>\n";
+  }
+
+private:
+  string & result;
+  bool isPrintMedia;
+};
 
 } // unnamed namespace
 
@@ -81,6 +126,40 @@ void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
   addonStyle = adst;
 }
 
+void ArticleMaker::appendCss( string & result, bool expandOptionalParts ) const
+{
+  CssAppender cssAppender( result );
+
+  cssAppender.appendFile( ":/article-style.css", "Built-in css" );
+  if( !displayStyle.isEmpty() )
+    cssAppender.appendFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ), "Built-in style css" );
+  cssAppender.appendFile( Config::getUserCssFileName(), "User css" );
+  if( !addonStyle.isEmpty() )
+  {
+    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style.css",
+                            "Addon style css" );
+  }
+
+  // Turn on/off expanding of article optional parts
+  if( expandOptionalParts )
+  {
+    result += "<!-- Expand optional parts css -->\n";
+    result += "<style type=\"text/css\" media=\"all\">\n";
+    result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n";
+    result += "</style>\n";
+  }
+
+  cssAppender.startPrintMedia();
+
+  cssAppender.appendFile( ":/article-style-print.css", "Built-in print css" );
+  cssAppender.appendFile( Config::getUserCssPrintFileName(), "User print css" );
+  if( !addonStyle.isEmpty() )
+  {
+    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style-print.css",
+                            "Addon style print css" );
+  }
+}
+
 std::string ArticleMaker::makeHtmlHeader( QString const & word,
                                           QString const & icon,
                                           bool expandOptionalParts ) const
@@ -91,127 +170,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
   appendScripts( result );
-
-  // Add a css stylesheet
-
-  {
-    QFile builtInCssFile( ":/article-style.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-
-    if( !css.isEmpty() )
-    {
-      result += "\n<!-- Built-in css -->\n";
-      result += "<style type=\"text/css\" media=\"all\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
-
-    if ( displayStyle.size() )
-    {
-      // Load an additional stylesheet
-      QFile builtInCssFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
-      builtInCssFile.open( QFile::ReadOnly );
-      css = builtInCssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- Built-in style css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
-    }
-
-    QFile cssFile( Config::getUserCssFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
-    }
-
-    if( !addonStyle.isEmpty() )
-    {
-      QString name = Config::getStylesDir() + addonStyle
-                     + QDir::separator() + "article-style.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style css -->\n";
-          result += "<style type=\"text/css\" media=\"all\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
-    }
-
-    // Turn on/off expanding of article optional parts
-    if( expandOptionalParts )
-    {
-      result += "<!-- Expand optional parts css -->\n";
-      result += "<style type=\"text/css\" media=\"all\">\n";
-      result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n";
-      result += "</style>\n";
-    }
-
-  }
-
-  // Add print-only css
-
-  {
-    QFile builtInCssFile( ":/article-style-print.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-    if( !css.isEmpty() )
-    {
-      result += "<!-- Built-in print css -->\n";
-      result += "<style type=\"text/css\" media=\"print\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
-
-    QFile cssFile( Config::getUserCssPrintFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User print css -->\n";
-        result += "<style type=\"text/css\" media=\"print\">\n";
-        result += css.data();
-        result += "</style>\n";
-        css.clear();
-      }
-    }
-
-    if( !addonStyle.isEmpty() )
-    {
-      QString name = Config::getStylesDir() + addonStyle
-                     + QDir::separator() + "article-style-print.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style print css -->\n";
-          result += "<style type=\"text/css\" media=\"print\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
-    }
-  }
+  appendCss( result, expandOptionalParts );
 
   result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
 
