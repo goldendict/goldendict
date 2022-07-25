@@ -156,8 +156,8 @@ public:
   /// The function reloads content if the change affects it.
   void updateMutedContents();
 
-  bool canGoBack();
-  bool canGoForward();
+  bool canGoBack() const;
+  bool canGoForward() const;
 
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );

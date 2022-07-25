@@ -1936,12 +1936,12 @@ void ArticleView::updateMutedContents()
   }
 }
 
-bool ArticleView::canGoBack()
+bool ArticleView::canGoBack() const
 {
   return ui.definition->history()->canGoBack();
 }
 
-bool ArticleView::canGoForward()
+bool ArticleView::canGoForward() const
 {
   return ui.definition->history()->canGoForward();
 }
