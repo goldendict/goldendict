@@ -266,6 +266,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
 
+  connect( definition, SIGNAL( canGoBackForwardChanged( ArticleView * ) ),
+           this, SLOT( updateBackForwardButtons() ) );
+
   connect( definition, SIGNAL( pageUnloaded( ArticleView * ) ),
            this, SLOT( pageUnloaded() ) );
 
@@ -1206,8 +1209,6 @@ void ScanPopup::articleLoaded()
 
 void ScanPopup::pageLoaded( ArticleView * )
 {
-  updateBackForwardButtons();
-
   if ( cfg.preferences.pronounceOnLoadPopup )
     definition->playSound();
 }

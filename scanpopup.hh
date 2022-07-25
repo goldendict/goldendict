@@ -185,8 +185,6 @@ private:
   /// Returns inputWord, chopped with appended ... if it's too long/
   QString elideInputWord();
 
-  void updateBackForwardButtons();
-
   void showTranslationFor( Config::InputPhrase const & inputPhrase );
 
   void updateSuggestionList();
@@ -226,6 +224,8 @@ private slots:
   void mutedDictionariesChanged();
 
   void switchExpandOptionalPartsMode();
+
+  void updateBackForwardButtons();
 
   void translateInputChanged(QString const & text);
   void translateInputFinished();

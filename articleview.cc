@@ -90,6 +90,9 @@ public slots:
   void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
 
+  void onJsLocationHashChanged()
+  { articleView.onJsLocationHashChanged(); }
+
 private:
   ArticleView & articleView;
 };
@@ -828,6 +831,7 @@ void ArticleView::loadFinished( bool )
     scrollToGdAnchor( *ui.definition );
 #endif
 
+  emit canGoBackForwardChanged( this );
   emit pageLoaded( this );
 
   if( Qt4x5::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
@@ -2665,6 +2669,11 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
   }
 
   setValidCurrentArticleNoJs( id );
+}
+
+void ArticleView::onJsLocationHashChanged()
+{
+  emit canGoBackForwardChanged( this ); // Fragment navigation on the same page adds a web history entry.
 }
 
 void ArticleView::doubleClicked( QPoint pos )

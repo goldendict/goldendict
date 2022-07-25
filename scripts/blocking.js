@@ -134,3 +134,8 @@ function gdExpandArticle(id) {
         ico.title = gdCollapseArticleTitle;
     }
 }
+
+window.addEventListener('hashchange', function(event) {
+    if (gdArticleView)
+        gdArticleView.onJsLocationHashChanged();
+});
