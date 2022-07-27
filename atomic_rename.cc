@@ -27,16 +27,12 @@ bool renameAtomically( QString const & oldName, QString const & newName )
   QVector< wchar_t > destFileW( destFile.size() + 1 );
   destFileW[ destFile.toWCharArray( destFileW.data() ) ] = 0;
 
-  if ( !MoveFileExW( srcFileW.data(), destFileW.data(),  MOVEFILE_REPLACE_EXISTING ) )
-    return false;
+  return MoveFileExW( srcFileW.data(), destFileW.data(),  MOVEFILE_REPLACE_EXISTING );
 
 #else
 
-  if ( rename( QFile::encodeName( QDir::toNativeSeparators( oldName ) ).data(),
-               QFile::encodeName( QDir::toNativeSeparators( newName ) ).data() ) )
-    return false;
+  return !rename( QFile::encodeName( QDir::toNativeSeparators( oldName ) ).data(),
+               QFile::encodeName( QDir::toNativeSeparators( newName ) ).data() );
 
 #endif
-
-  return true;
 }
