@@ -535,7 +535,19 @@ void ArticleView::loadFinished( bool result )
 {
   setZoomFactor( cfg.preferences.zoomFactor );
   QUrl url = ui.definition->url();
-  qDebug() << "article view loaded url:" << url.url().left( 200 );
+  qDebug() << "article view loaded url:" << url.url().left( 200 ) << result;
+  
+  if( url.url() == "about:blank" )
+  {
+    return;
+  }
+
+  if( !result )
+  {
+    qWarning() << "article loaded unsuccessful"; 
+    return;
+  }
+
 
   if( cfg.preferences.autoScrollToTargetArticle )
   {
