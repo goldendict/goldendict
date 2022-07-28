@@ -63,9 +63,11 @@ public:
   {}
 
 public slots:
-  void onPageJsReady( QStringList const & articleContents, QVariantMap const & audioLinks,
-                      QString const & activeArticleId )
-  { articleView.onPageJsReady( articleContents, audioLinks, activeArticleId ); }
+  void onJsPageInitStarted()
+  { articleView.onJsPageInitStarted(); }
+
+  void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
+  { articleView.onJsArticleLoaded( id, audioLink, isActive ); }
 
   void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
@@ -1733,16 +1735,13 @@ void ArticleView::reload()
 
 bool ArticleView::hasSound() const
 {
-  return !audioLinks.value( "first" ).toString().isEmpty();
+  return !firstAudioLink.isEmpty();
 }
 
 void ArticleView::playSound()
 {
-  QString soundScript = audioLinks.value( getActiveArticleId() ).toString();
   // fallback to the first one
-  if ( soundScript.isEmpty() )
-    soundScript = audioLinks.value( "first" ).toString();
-
+  QString const soundScript = audioLinks.value( currentArticle, firstAudioLink );
   if ( !soundScript.isEmpty() )
     openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }
@@ -2297,12 +2296,38 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
-void ArticleView::onPageJsReady( QStringList const & articleContents, QVariantMap const & audioLinks_,
-                                 QString const & activeArticleId )
+void ArticleView::onJsPageInitStarted()
 {
-  articleList = articleContents;
-  audioLinks = audioLinks_;
-  currentArticle = activeArticleId;
+  // When JavaScript code initialization starts, the previous page is definitely gone.
+  // Clear the data associated with it and prepare to receive the current page's data.
+
+  articleList.clear();
+  audioLinks.clear();
+  firstAudioLink.clear();
+  currentArticle.clear();
+
+  emit pageUnloaded( this );
+}
+
+void ArticleView::onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
+{
+  if( !isScrollTo( id ) )
+  {
+    gdWarning( "Invalid article ID received from JavaScript: %s", id.toUtf8().constData() );
+    return;
+  }
+
+  articleList.push_back( dictionaryIdFromScrollTo( id ) );
+  if( !audioLink.isEmpty() )
+  {
+    audioLinks.insert( id, audioLink );
+    if( firstAudioLink.isEmpty() )
+      firstAudioLink = audioLink;
+  }
+  if( isActive )
+    currentArticle = id;
+
+  emit articleLoaded( this, articleList.back(), isActive );
 }
 
 void ArticleView::onJsActiveArticleChanged(QString const & id)

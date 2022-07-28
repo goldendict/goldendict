@@ -681,8 +681,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
             parent.replaceChild( el_script, el );
 
-            QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"",
-                                                                      dictPtr->getId() ).c_str() );
+            QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"" ).c_str() );
             el_script.appendChild( el_txt );
 
             QDomElement el_span = dd.createElement( "span" );

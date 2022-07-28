@@ -5,6 +5,7 @@
 #define __ARTICLEVIEW_HH_INCLUDED__
 
 #include <QWebView>
+#include <QHash>
 #include <QMap>
 #include <QUrl>
 #include <QSet>
@@ -36,7 +37,8 @@ class ArticleView: public QFrame
   ArticleViewJsProxy * const jsProxy;
 
   QStringList articleList; ///< All articles currently present in the view as a list of dictionary ids.
-  QVariantMap audioLinks;
+  QHash< QString, QString > audioLinks;
+  QString firstAudioLink;
   QString currentArticle; ///< Current article in the view, in the form of "gdfrom-xxx"
                           ///< (scrollTo) id. If empty, there is no current article.
 
@@ -205,6 +207,8 @@ signals:
 
   void titleChanged( ArticleView *, QString const & title );
 
+  void pageUnloaded( ArticleView * );
+  void articleLoaded( ArticleView *, QString const & id, bool isActive );
   void pageLoaded( ArticleView * );
 
   /// Signals that the following link was requested to be opened in new tab
@@ -314,8 +318,11 @@ private:
   /// <JavaScript interface>
 
   friend class ArticleViewJsProxy;
-  void onPageJsReady( QStringList const & articleContents, QVariantMap const & audioLinks_,
-                      QString const & activeArticleId );
+
+  void onJsPageInitStarted();
+
+  void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive );
+
   void onJsActiveArticleChanged( QString const & id );
 
   /// </JavaScript interface>

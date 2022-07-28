@@ -15,6 +15,8 @@
 #include "gddebug.hh"
 #include "qt4x5.hh"
 
+#include <algorithm>
+
 using std::vector;
 using std::string;
 using gd::wstring;
@@ -73,6 +75,8 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
     "<html><head>"
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
+
+  appendScripts( result );
 
   // Add a css stylesheet
 
@@ -201,8 +205,6 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   // it anyway.
   if ( icon.size() )
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
-
-  appendScripts( result );
 
   result += "</head><body>";
 
@@ -610,11 +612,7 @@ void ArticleRequest::bodyFinished()
         {
           head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
-        else
-        {
-          // This is the first article
-          head += "<script>gdCurrentArticle=\"" + gdFrom + "\";</script>";
-        }
+        // else: this is the first article
 
         bool collapse = false;
         if( articleSizeLimit >= 0 )
@@ -654,7 +652,6 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script>gdArticleContents.push(\"" + jsVal + "\");</script>";
 
         head += string( "<div class=\"gdarticle" ) +
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
@@ -702,7 +699,9 @@ void ArticleRequest::bodyFinished()
 
         size_t offset = data.size();
 
-        data.resize( data.size() + head.size() + ( req.dataSize() > 0 ? req.dataSize() : 0 ) );
+        string const articleEnding = "<script>gdArticleLoaded(\"" + gdFrom + "\");</script>";
+
+        data.resize( data.size() + head.size() + ( req.dataSize() > 0 ? req.dataSize() : 0 ) + articleEnding.size() );
 
         memcpy( &data.front() + offset, head.data(), head.size() );
 
@@ -716,6 +715,8 @@ void ArticleRequest::bodyFinished()
         {
           gdWarning( "getDataSlice error: %s\n", e.what() );
         }
+
+        std::copy( articleEnding.begin(), articleEnding.end(), data.end() - articleEnding.size() );
 
         wasUpdated = true;
 

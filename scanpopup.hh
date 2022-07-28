@@ -217,6 +217,8 @@ private slots:
   /// polling stops.
   void mouseGrabPoll();
 
+  void pageUnloaded();
+  void articleLoaded();
   void pageLoaded( ArticleView * );
 
   void escapePressed();

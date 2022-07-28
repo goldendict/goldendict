@@ -1117,7 +1117,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         QString newTxt = match.captured( 1 ) + match.captured( 2 )
                          + "gdau://" + id + "/"
                          + match.captured( 3 ) + match.captured( 2 );
-        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + match.captured( 3 ).toUtf8().data() + "\"", getId() ).c_str() )
+        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + match.captured( 3 ).toUtf8().data() + "\"" ).c_str() )
                   + newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
       }
 
@@ -1272,7 +1272,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         QString newTxt = audioRe.cap( 1 ) + audioRe.cap( 2 )
                          + "gdau://" + id + "/"
                          + audioRe.cap( 3 ) + audioRe.cap( 2 );
-        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + audioRe.cap( 3 ).toUtf8().data() + "\"", getId() ).c_str() )
+        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + audioRe.cap( 3 ).toUtf8().data() + "\"" ).c_str() )
                   + newLink.replace( pos, audioRe.cap().length(), newTxt );
       }
 

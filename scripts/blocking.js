@@ -7,11 +7,21 @@
 // Functions that can be called from C++ code at any time should be defined here to make the
 // functionality work (more or less) and prevent ReferenceError while the page is being loaded.
 
-const gdArticleContents = [];
-const gdAudioLinks = {
-    first: null
-};
+gdArticleView.onJsPageInitStarted();
+
 var gdCurrentArticle;
+
+// This variable is temporary and almost always undefined or null.
+var gdJustLoadedAudioLink;
+
+function gdArticleLoaded(articleId) {
+    const isCurrent = !gdCurrentArticle;
+    if (isCurrent)
+        gdCurrentArticle = articleId; // This is the first article. It becomes current when loaded.
+
+    gdArticleView.onJsArticleLoaded(articleId, gdJustLoadedAudioLink, isCurrent);
+    gdJustLoadedAudioLink = null;
+}
 
 function gdSetActiveArticle(articleId) {
     if (gdCurrentArticle !== articleId) {

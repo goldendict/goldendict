@@ -11,5 +11,3 @@
             gdExpandArticle(s);
     }
 })();
-
-gdArticleView.onPageJsReady(gdArticleContents, gdAudioLinks, gdCurrentArticle);

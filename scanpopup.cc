@@ -266,6 +266,12 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
 
+  connect( definition, SIGNAL( pageUnloaded( ArticleView * ) ),
+           this, SLOT( pageUnloaded() ) );
+
+  connect( definition, SIGNAL( articleLoaded( ArticleView *, QString const &, bool ) ),
+           this, SLOT( articleLoaded() ) );
+
   connect( definition, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
@@ -1188,10 +1194,18 @@ void ScanPopup::altModePoll()
   }
 }
 
-void ScanPopup::pageLoaded( ArticleView * )
+void ScanPopup::pageUnloaded()
+{
+  ui.pronounceButton->hide();
+}
+
+void ScanPopup::articleLoaded()
 {
   ui.pronounceButton->setVisible( definition->hasSound() );
+}
 
+void ScanPopup::pageLoaded( ArticleView * )
+{
   updateBackForwardButtons();
 
   if ( cfg.preferences.pronounceOnLoadPopup )

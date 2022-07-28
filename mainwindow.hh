@@ -355,6 +355,8 @@ private slots:
   /// ArticleView's icon has changed
   void iconChanged( ArticleView *, QIcon const & );
 
+  void pageUnloaded( ArticleView * );
+  void articleLoaded( ArticleView *, QString const & id, bool isActive );
   void pageLoaded( ArticleView * );
   void tabSwitched( int );
   void tabMenuRequested(QPoint pos);

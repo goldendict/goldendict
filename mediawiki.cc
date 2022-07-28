@@ -658,8 +658,8 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
 #else
             articleString.replace( QRegExp( "<a\\s+href=\"(//upload\\.wikimedia\\.org/wikipedia/[^\"'&]*\\.og[ga](?:\\.mp3|))\"" ),
 #endif
-                                   QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"",
-                                                                         this->dictPtr->getId() ) + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
+                                   QString::fromStdString( addAudioLink( string( "\"" ) + wikiUrl.scheme().toStdString() + ":\\1\"" )
+                                                           + "<a href=\"" + wikiUrl.scheme().toStdString() + ":\\1\"" ) );
 
             // Add url scheme to image source urls
             articleString.replace( " src=\"//", " src=\"" + wikiUrl.scheme() + "://" );

@@ -1671,6 +1671,12 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( iconChanged( ArticleView *, QIcon const & ) ),
            this, SLOT( iconChanged( ArticleView *, QIcon const & ) ) );
 
+  connect( view, SIGNAL( pageUnloaded( ArticleView * ) ),
+           this, SLOT( pageUnloaded( ArticleView * ) ) );
+
+  connect( view, SIGNAL( articleLoaded( ArticleView *, QString const &, bool ) ),
+           this, SLOT( articleLoaded( ArticleView *, QString const &, bool ) ) );
+
   connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
@@ -1921,6 +1927,26 @@ void MainWindow::updateWindowTitle()
   }
 }
 
+void MainWindow::pageUnloaded( ArticleView * view )
+{
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
+  navPronounce->setEnabled( false );
+  if( ui.dictsList->isVisible() )
+    ui.dictsList->clear();
+}
+
+void MainWindow::articleLoaded( ArticleView * view, QString const & id, bool isActive )
+{
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
+  navPronounce->setEnabled( view->hasSound() );
+  if( ui.dictsList->isVisible() )
+    appendToFoundInDictsList( id, isActive );
+}
+
 void MainWindow::pageLoaded( ArticleView * view )
 {
   if( view != getCurrentArticleView() )
@@ -1928,12 +1954,8 @@ void MainWindow::pageLoaded( ArticleView * view )
 
   updateBackForwardButtons();
 
-  updatePronounceAvailability();
-
   if ( cfg.preferences.pronounceOnLoadMain )
     pronounce( view );
-
-  updateFoundInDictsList();
 }
 
 void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
