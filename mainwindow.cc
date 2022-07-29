@@ -1821,21 +1821,25 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
     escaped.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
   }
 
-  ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
+  int index = ui.tabWidget->indexOf( view );
+  ui.tabWidget->setTabText( index, escaped );
 
-  // Set icon for "Add to Favorites" action
-  if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+  if( index == ui.tabWidget->currentIndex() )
   {
-    addToFavorites->setIcon( blueStarIcon );
-    addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
-  }
-  else
-  {
-    addToFavorites->setIcon( starIcon );
-    addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
-  }
+    // Set icon for "Add to Favorites" action
+    if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+    {
+      addToFavorites->setIcon( blueStarIcon );
+      addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+    }
+    else
+    {
+      addToFavorites->setIcon( starIcon );
+      addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
+    }
 
-  updateWindowTitle();
+    updateWindowTitle();
+  }
 }
 
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
