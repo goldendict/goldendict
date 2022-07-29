@@ -118,10 +118,6 @@ public:
                        QRegExp const & searchRegExp, unsigned group,
                        bool ignoreDiacritics );
 
-  /// Clears the view and sets the application-global waiting cursor,
-  /// which will be restored when some article loads eventually.
-  void showAnticipation();
-
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
   /// one of the internal ones.

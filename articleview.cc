@@ -537,13 +537,6 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
-void ArticleView::showAnticipation()
-{
-  ui.definition->setHtml( "" );
-  ui.definition->setCursor( Qt::WaitCursor );
-  //QApplication::setOverrideCursor( Qt::WaitCursor );
-}
-
 void ArticleView::loadFinished( bool )
 {
   QUrl url = ui.definition->url();
