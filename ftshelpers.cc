@@ -220,6 +220,8 @@ bool parseSearchString( QString const & str, QStringList & indexWords,
 
   return true;
 }
+//definition;
+Mutex lockMutex;
 
 void parseArticleForFts( uint32_t articleAddress, QString & articleText,
                          QMap< QString, QVector< uint32_t > > & words,
@@ -232,7 +234,7 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
       .split( handleRoundBrackets ? RX::Ftx::handleRoundBracket : RX::Ftx::noRoundBracket,
                                                 Qt::SkipEmptyParts );
 
-  QSet< QString > setOfWords;
+  QVector< QString > setOfWords;
   setOfWords.reserve( articleWords.size() );
 
   for( int x = 0; x < articleWords.size(); x++ )
@@ -253,10 +255,11 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
             &&  QChar( word[ y + 1 ] ).isLowSurrogate() )
           hieroglyph.append( word[ ++y ] );
 
-        if( !setOfWords.contains( hieroglyph ) )
+        //if( !setOfWords.contains( hieroglyph ) )
         {
-          setOfWords.insert( hieroglyph );
-          words[ hieroglyph ].push_back( articleAddress );
+          setOfWords.push_back( hieroglyph );
+          /*Mutex::Lock _( _mapLock );
+          words[ hieroglyph ].push_back( articleAddress );*/
         }
 
         hieroglyph.clear();
@@ -302,19 +305,32 @@ void parseArticleForFts( uint32_t articleAddress, QString & articleText,
 
         for( QStringList::iterator it = list.begin(); it != list.end(); ++it )
         {
-          if( !setOfWords.contains( *it ) )
+          //if( !setOfWords.contains( *it ) )
           {
-            setOfWords.insert( *it );
-            words[ *it ].push_back( articleAddress );
+            setOfWords.push_back( *it );
+            /*Mutex::Lock _( _mapLock );
+            words[ *it ].push_back( articleAddress );*/
           }
         }
       }
       else
-      if( !setOfWords.contains( word ) )
+      //if( !setOfWords.contains( word ) )
       {
-        setOfWords.insert( word );
-        words[ word ].push_back( articleAddress );
+        setOfWords.push_back( word );
+        /*Mutex::Lock _( _mapLock );
+        words[ word ].push_back( articleAddress );*/
       }
+    }
+
+
+  }
+
+  {
+    Mutex::Lock _( lockMutex );
+
+    for( const QString & word : setOfWords )
+    {
+      words[ word ].push_back( articleAddress );
     }
   }
 }
@@ -375,21 +391,42 @@ void makeFTSIndex( BtreeIndexing::BtreeDictionary * dict, QAtomicInt & isCancell
     needHandleBrackets = name.endsWith( ".dsl" ) || name.endsWith( "dsl.dz" );
   }
 
-  // index articles for full-text search
-  for( int i = 0; i < offsets.size(); i++ )
+  QSemaphore sem( QThread::idealThreadCount() );
+  //QFutureSynchronizer< void > synchronizer;
+
+  for( auto & address : offsets )
   {
     if( Utils::AtomicInt::loadAcquire( isCancelled ) )
-      throw exUserAbort();
+    {
+        //wait the future to be finished.
+      sem.acquire( QThread::idealThreadCount() );
+      return;
+    }
 
-    QString headword, articleStr;
+    sem.acquire();
+    QFuture< void > f = QtConcurrent::run(
+      [ & ]()
+      {
+        QSemaphoreReleaser releaser( sem );
+        if( Utils::AtomicInt::loadAcquire( isCancelled ) )
+        {
+          return;
+        }
 
-    dict->getArticleText( offsets.at( i ), headword, articleStr );
+        QString headword, articleStr;
 
-    parseArticleForFts( offsets.at( i ), articleStr, ftsWords, needHandleBrackets );
+        dict->getArticleText( address, headword, articleStr );
+
+        parseArticleForFts( address, articleStr, ftsWords, needHandleBrackets );
+      } );
+    //synchronizer.addFuture( f );
   }
-
+  sem.acquire( QThread::idealThreadCount() );
   // Free memory
   offsets.clear();
+
+  if( Utils::AtomicInt::loadAcquire( isCancelled ) )
+    throw exUserAbort();
 
   QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
   while( it != ftsWords.end() )
@@ -822,8 +859,8 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
           linksPtr = chunks->getBlock( links[ x ].articleOffset, chunk );
         }
 
-        memcpy( &size, linksPtr, sizeof(uint32_t) );
-        linksPtr += sizeof(uint32_t);
+        memcpy( &size, linksPtr, sizeof( uint32_t ) );
+        linksPtr += sizeof( uint32_t );
         // across chunks, need further investigation
         uint32_t max = ( chunk.size() - ( linksPtr - &chunk.front() )) / 4;
 
@@ -832,7 +869,7 @@ void FTSResultsRequest::combinedIndexSearch( BtreeIndexing::BtreeIndex & ftsInde
         for( uint32_t y = 0; y < q_max; y++ )
         {
           tmp.insert( *( reinterpret_cast< uint32_t * >( linksPtr ) ) );
-          linksPtr += sizeof(uint32_t);
+          linksPtr += sizeof( uint32_t );
         }
       }
 
