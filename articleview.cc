@@ -548,7 +548,6 @@ void ArticleView::loadFinished( bool result )
     return;
   }
 
-
   if( cfg.preferences.autoScrollToTargetArticle )
   {
     QString const scrollTo = Utils::Url::queryItemValue( url, "scrollto" );
