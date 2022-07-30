@@ -29,7 +29,7 @@ jobs:
         qt_arch: [clang_64]
     env:
       targetName: GoldenDict
-      version: 22.6.22
+      version: 22.7.24
       version-suffix: alpha
       prerelease: true
 
