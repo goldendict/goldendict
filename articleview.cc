@@ -697,12 +697,22 @@ void ArticleView::loadFinished( bool )
 {
   expandFrames( *ui.definition );
 
-  initCurrentArticleAndScroll();
+  // If true, the user has managed to activate an article already.
+  // The code below does not override this explicit user choice.
+  bool const wasCurrentArticleSetExplicitly = evaluateJavaScriptVariableSafe(
+        ui.definition->page()->mainFrame(), "gdWasCurrentArticleSetExplicitly" ).toBool();
+
+  // Don't set the current article or scroll if the user has activated an article already.
+  // However, if this was a back/forward navigation or page reloading, the user also has to
+  // scroll the mouse wheel to prevent QWebPage from restoring its saved scroll position.
+  if( !wasCurrentArticleSetExplicitly )
+    initCurrentArticleAndScroll();
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
 
-  scrollToGdAnchor( *ui.definition );
+  if( !wasCurrentArticleSetExplicitly )
+    scrollToGdAnchor( *ui.definition );
 
   emit pageLoaded( this );
 

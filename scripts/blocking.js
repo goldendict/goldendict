@@ -9,6 +9,8 @@
 
 gdArticleView.onJsPageInitStarted();
 
+var gdWasCurrentArticleSetExplicitly = false;
+
 var gdCurrentArticle;
 
 // This variable is temporary and almost always undefined or null.
@@ -24,6 +26,7 @@ function gdArticleLoaded(articleId) {
 }
 
 function gdSetActiveArticle(articleId) {
+    gdWasCurrentArticleSetExplicitly = true;
     if (gdCurrentArticle !== articleId) {
         var el = document.getElementById(gdCurrentArticle);
         el.className = el.className.replace(' gdactivearticle', '');
