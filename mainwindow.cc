@@ -2020,6 +2020,30 @@ void MainWindow::dictsPaneVisibilityChanged( bool visible )
   }
 }
 
+void MainWindow::appendToFoundInDictsList( QString const & id, bool isActive )
+{
+  QByteArray const idUtf8 = id.toUtf8();
+  for( unsigned x = dictionaries.size(); x--; )
+  {
+    sptr< Dictionary::Class > & dictionary = dictionaries[ x ];
+    if( dictionary->getId() != idUtf8.constData() )
+      continue;
+
+    QString const dictName = QString::fromUtf8( dictionary->getName().c_str() );
+    QListWidgetItem * const item =
+        new QListWidgetItem(
+          dictionary->getIcon().pixmap( 32 ).scaledToHeight( 21, Qt::SmoothTransformation ),
+          dictName, ui.dictsList, QListWidgetItem::Type );
+    item->setData( Qt::UserRole, id );
+    item->setToolTip( dictName );
+
+    ui.dictsList->addItem( item );
+    if( isActive )
+      ui.dictsList->setCurrentItem( item );
+    break;
+  }
+}
+
 void MainWindow::updateFoundInDictsList()
 {
   if (!ui.dictsList->isVisible())
@@ -2038,32 +2062,7 @@ void MainWindow::updateFoundInDictsList()
     QString activeId = view->getActiveArticleId();
 
     for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
-    {
-      // Find this dictionary
-
-      for( unsigned x = dictionaries.size(); x--; )
-      {
-        if ( dictionaries[ x ]->getId() == i->toUtf8().data() )
-        {
-          QString dictName = QString::fromUtf8( dictionaries[ x ]->getName().c_str() );
-          QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
-          QListWidgetItem * item =
-              new QListWidgetItem(
-                dictionaries[ x ]->getIcon().pixmap(32).scaledToHeight( 21, Qt::SmoothTransformation ),
-                dictName,
-                ui.dictsList, QListWidgetItem::Type );
-          item->setData(Qt::UserRole, QVariant( dictId ) );
-          item->setToolTip(dictName);
-
-          ui.dictsList->addItem( item );
-          if (dictId == activeId)
-          {
-            ui.dictsList->setCurrentItem(item);
-          }
-          break;
-        }
-      }
-    }
+      appendToFoundInDictsList( *i, *i == activeId );
   }
 }
 

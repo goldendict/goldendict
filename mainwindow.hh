@@ -219,6 +219,7 @@ private:
 
   void updatePronounceAvailability();
 
+  void appendToFoundInDictsList( QString const & id, bool isActive );
   void updateFoundInDictsList();
 
   void updateBackForwardButtons();
