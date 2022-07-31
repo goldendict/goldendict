@@ -16,6 +16,7 @@
 #include "langcoder.hh"
 #include "config.hh"
 #include "utils.hh"
+#include <QString>
 
 /// Abstract dictionary-related stuff
 namespace Dictionary {
@@ -275,6 +276,9 @@ protected:
   // Load icon from filename directly if isFullName == true
   // else treat filename as name without extension
   bool loadIconFromFile( QString const & filename, bool isFullName = false );
+  bool loadIconFromText( QString const & text );
+
+  QString getAbbrName( QString const & text );
 
   /// Make css content usable only for articles from this dictionary
   void isolateCSS( QString & css, QString const & wrapperSelector = QString() );
