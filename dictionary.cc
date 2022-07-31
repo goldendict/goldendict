@@ -246,9 +246,10 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
       //some icon is very large ,will crash the application.
       img = img.scaledToWidth( 48 );
       // Apply the color key
-
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
       img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
                                                     Qt::MaskOutColor ) );
+#endif
 
       dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ));
 
