@@ -91,6 +91,18 @@ namespace
     return result;
   }
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QString getDataDirPath()
+  {
+    return isPortableVersion() ? portableHomeDirPath()
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+                               : getDataDir().path();
+#else
+                               : QStandardPaths::writableLocation( QStandardPaths::DataLocation );
+#endif
+  }
+#endif // QT_VERSION
+
 }
 
 ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Socks5 ), port( 3128 )
@@ -2410,5 +2422,35 @@ QString getNetworkCacheDir() throw()
 {
   return getCacheDir() + "/network";
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+
+static bool replaceLocationIn( QString & path, QString const & location, QString const & replacement )
+{
+  if( !path.startsWith( location ) )
+  {
+    gdWarning( "The path %s does not start with the expected location %s",
+               path.toUtf8().constData(), replacement.toUtf8().constData() );
+    return false;
+  }
+
+  if( replacement == location )
+    return false; // nothing to do
+
+  path.replace( 0, location.size(), replacement );
+  return true;
+}
+
+bool replaceWritableCacheLocationIn( QString & path )
+{
+  return replaceLocationIn( path, QStandardPaths::writableLocation( QStandardPaths::CacheLocation ), getCacheDir() );
+}
+
+bool replaceWritableDataLocationIn( QString & path )
+{
+  return replaceLocationIn( path, QStandardPaths::writableLocation( QStandardPaths::DataLocation ), getDataDirPath() );
+}
+
+#endif // QT_VERSION
 
 }

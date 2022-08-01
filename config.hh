@@ -836,6 +836,17 @@ QString getCacheDir() throw();
 /// Returns the article network disk cache directory.
 QString getNetworkCacheDir() throw();
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+/// Replaces QStandardPaths::writableLocation( QStandardPaths::CacheLocation )
+/// at the beginning of @p path with the path to GoldenDict's cache directory.
+/// @return true if @p path was changed, false otherwise.
+bool replaceWritableCacheLocationIn( QString & path );
+/// Replaces QStandardPaths::writableLocation( QStandardPaths::DataLocation )
+/// at the beginning of @p path with the path to GoldenDict's data directory.
+/// @return true if @p path was changed, false otherwise.
+bool replaceWritableDataLocationIn( QString & path );
+#endif
+
 }
 
 Q_DECLARE_METATYPE( Config::InputPhrase )

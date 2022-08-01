@@ -96,6 +96,33 @@ public:
 };
 #endif
 
+#ifndef USE_QTWEBKIT
+void setupWebEngineProfile( ArticleNetworkAccessManager & articleNetMgr )
+{
+  auto & webEngineProfile = *QWebEngineProfile::defaultProfile();
+
+  // TODO (Qt WebEngine): should the maximum size of the HTTP cache and whether
+  // it is cleared on exit be configurable similarly to the network cache?
+
+  // TODO (Qt WebEngine): allow configuring off-the-record profile. Note that in Qt 6 the default profile became
+  // off-the-record. So it would be better not to use the default profile but always create our own "Article" or
+  // off-the-record profile and pass it to ArticleWebPage's constructor (as profile, not parent). Would have to use our
+  // profile's settings in place of QWebEngineSettings::defaultSettings() in applyWebSettings(). GoldenDict would
+  // require restarting for the off-the-record option toggling to take effect.
+
+  QString cachePath = webEngineProfile.cachePath();
+  if( Config::replaceWritableCacheLocationIn( cachePath ) )
+    webEngineProfile.setCachePath( cachePath );
+
+  QString persistentStoragePath = webEngineProfile.persistentStoragePath();
+  if( Config::replaceWritableDataLocationIn( persistentStoragePath ) )
+    webEngineProfile.setPersistentStoragePath( persistentStoragePath );
+
+  auto * const handler = new ArticleUrlSchemeHandler( articleNetMgr );
+  handler->install( webEngineProfile );
+}
+#endif // USE_QTWEBKIT
+
 } // unnamed namespace
 
 #ifndef QT_NO_OPENSSL
@@ -784,7 +811,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
   applyProxySettings();
-  applyWebSettings();
 
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
@@ -795,8 +821,10 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   setupNetworkCache( cfg.preferences.maxNetworkCacheSize );
 
 #ifndef USE_QTWEBKIT
-  ( new ArticleUrlSchemeHandler( articleNetMgr ) )->install( *QWebEngineProfile::defaultProfile() );
+  setupWebEngineProfile( articleNetMgr );
 #endif
+
+  applyWebSettings();
 
   makeDictionaries();
 
