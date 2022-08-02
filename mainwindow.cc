@@ -411,7 +411,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   actTrackingClipboard = trayIconMenu.addAction( tr( "Tracking Clipboard" ) );
   actTrackingClipboard->setCheckable(true);
   actTrackingClipboard->setChecked(cfg.preferences.trackClipboardChanges);
-  actTrackingClipboard->setVisible( cfg.preferences.enableScanPopup );
+//  actTrackingClipboard->setVisible( cfg.preferences.enableScanPopup );
   connect( actTrackingClipboard , SIGNAL( triggered(bool) ),
            this, SLOT( trackingClipboard(bool) ) );
   trayIconMenu.addSeparator();
@@ -918,6 +918,16 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   }
 
   inspector = new ArticleInspector( this );
+
+  connect( QApplication::clipboard(), &QClipboard::changed, this, &MainWindow::clipboardChange );
+}
+
+void MainWindow::clipboardChange( QClipboard::Mode mode )
+{
+  if( scanPopup && cfg.preferences.trackClipboardChanges )
+  {
+    scanPopup->translateWordFromClipboard();
+  }
 }
 
 void MainWindow::ctrlTabPressed()
