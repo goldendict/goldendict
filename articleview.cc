@@ -779,6 +779,8 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 
 void ArticleView::setValidCurrentArticleNoJs( QString const & id )
 {
+  if( currentArticle == id )
+    return; // nothing to do
   currentArticle = id;
   emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
 }
