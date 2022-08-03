@@ -772,9 +772,15 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 
   ui.definition->page()->mainFrame()->evaluateJavaScript(
     QString( "gdOnCppActiveArticleChanged('%1', %2);" ).arg( id, moveToIt ? "true" : "false" ) );
-  onJsActiveArticleChanged( id );
+  setValidCurrentArticleNoJs( id );
 
   return true;
+}
+
+void ArticleView::setValidCurrentArticleNoJs( QString const & id )
+{
+  currentArticle = id;
+  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
 }
 
 void ArticleView::selectCurrentArticle()
@@ -2288,8 +2294,7 @@ void ArticleView::onJsActiveArticleChanged(QString const & id)
     return;
   }
 
-  currentArticle = id;
-  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
+  setValidCurrentArticleNoJs( id );
 }
 
 void ArticleView::doubleClicked( QPoint pos )

@@ -333,6 +333,8 @@ private:
   /// Returns true in case of success, false otherwise.
   bool setCurrentArticle( QString const &, bool moveToIt = false );
 
+  void setValidCurrentArticleNoJs( QString const & id );
+
   /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
   /// frame.
   bool isFramedArticle( QString const & );
