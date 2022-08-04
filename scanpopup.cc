@@ -514,14 +514,6 @@ void ScanPopup::delayShow()
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
-  if( cfg.preferences.trackClipboardChanges )
-  {
-    QString subtype = "plain";
-
-    handleInputWord( QApplication::clipboard()->text( subtype, m ) );
-    return;
-  }
-
   if( !isScanningEnabled )
     return;
 
