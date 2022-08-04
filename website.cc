@@ -44,9 +44,10 @@ public:
   {
     QString temp=urlTemplate_;
     if(temp.endsWith("##")){
-      experimentalIframe=true;
       temp.chop(2);
     }
+    //make this default.
+    experimentalIframe = true;
 
     urlTemplate = QUrl( temp ).toEncoded() ;
 
