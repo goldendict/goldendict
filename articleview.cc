@@ -884,6 +884,11 @@ void ArticleView::handleTitleChanged( QString const & title )
 
 void ArticleView::handleUrlChanged( QUrl const & url )
 {
+#ifndef USE_QTWEBKIT
+  isBlankPagePresentInWebHistory = isBlankPagePresentInWebHistory
+          || QUrlQuery{ url }.queryItemValue( QStringLiteral( "blank" ) ) == QLatin1String( "1" );
+#endif
+
   QIcon icon;
 
   unsigned group = getGroup( url );
@@ -1966,6 +1971,11 @@ void ArticleView::updateMutedContents()
 
 bool ArticleView::canGoBack() const
 {
+#ifndef USE_QTWEBKIT
+  // Don't allow navigating back to page 0 if it is the initial blank page.
+  if( isBlankPagePresentInWebHistory )
+    return ui.definition->history()->currentItemIndex() > 1;
+#endif
   return ui.definition->history()->canGoBack();
 }
 

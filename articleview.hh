@@ -74,6 +74,11 @@ class ArticleView: public QFrame
   // The code that uses this variable is not needed in the Qt WebEngine version.
   QString rangeVarName;
 #else
+  /// Depending on how fast a next page is loaded, the blank page is present in or absent from
+  /// web history in the Qt WebEngine version. It is always absent in the Qt WebKit version.
+  /// This cache variable allows to make canGoBack() correct and faster than the alternative -
+  /// an expensive call to QWebEngineHistoryItem::url() and comparing the URL's scheme to "data".
+  bool isBlankPagePresentInWebHistory = false;
   // The API necessary to implement Search-in-page status is not available in Qt WebKit.
   bool skipNextFindTextUiStatusUpdate = false;
 #endif
