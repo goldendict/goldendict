@@ -35,8 +35,6 @@ public:
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
-  void triggerPageAction(QWebEnginePage::WebAction action, bool checked = false);
-
   bool eventFilter(QObject *obj, QEvent *ev);
 
   signals:

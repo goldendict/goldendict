@@ -34,11 +34,6 @@ void ArticleWebView::setUp( Config::Class * cfg )
   setZoomFactor(cfg->preferences.zoomFactor);
 }
 
-void ArticleWebView::triggerPageAction( QWebEnginePage::WebAction action, bool checked )
-{
-  QWebEngineView::triggerPageAction( action, checked );
-}
-
 QWebEngineView * ArticleWebView::createWindow( QWebEnginePage::WebWindowType type )
 {
   if(type==QWebEnginePage::WebWindowType::WebDialog)

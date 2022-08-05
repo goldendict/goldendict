@@ -2492,11 +2492,6 @@ void ArticleView::copyAsText()
     QApplication::clipboard()->setText( text );
 }
 
-void ArticleView::inspect()
-{
-  ui.definition->triggerPageAction( QWebEnginePage::InspectElement );
-}
-
 void ArticleView::highlightFTSResults()
 {
   closeSearch();

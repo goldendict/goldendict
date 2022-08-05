@@ -44,7 +44,6 @@ jobs:
           version: ${{ matrix.qt_ver }}
           # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
-          cached: 'false'
           modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia qtimageformats
           setup-python: 'false'
           py7zrversion: '==0.18.1'
