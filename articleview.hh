@@ -362,9 +362,6 @@ private slots:
   /// Copy current selection as plain text
   void copyAsText();
 
-  /// Inspect element
-  void inspect();
-
   void setActiveDictIds(ActiveDictIds);
 
   void dictionaryClear( ActiveDictIds ad );
