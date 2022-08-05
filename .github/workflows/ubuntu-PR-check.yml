@@ -74,7 +74,7 @@ jobs:
 
       - name: build goldendict
         run: |
-          qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
+          qmake CONFIG+=release CONFIG+=no_extra_tiff_handler PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
 
           #copy missing shared dll to appdir.
