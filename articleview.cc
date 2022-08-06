@@ -62,7 +62,8 @@ public:
     QObject( &view ), articleView( view )
   {}
 
-  Q_INVOKABLE void onJsActiveArticleChanged( QString const & id )
+public slots:
+  void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
 
 private:
