@@ -25,7 +25,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-10.15,macos-11.0]
+        os: [macos-11.0]
         qt_ver: [5.15.2]
         qt_arch: [clang_64]
     env:
