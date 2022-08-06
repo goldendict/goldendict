@@ -582,12 +582,8 @@ static void expandFrames( QWebView & view )
   }
 }
 
-void ArticleView::loadFinished( bool )
+void ArticleView::initCurrentArticleAndScroll()
 {
-  expandFrames( *ui.definition );
-
-  QUrl url = ui.definition->url();
-
   QVariant userDataVariant = ui.definition->history()->currentItem().userData();
   if ( userDataVariant.type() == QVariant::Map )
   {
@@ -627,7 +623,7 @@ void ArticleView::loadFinished( bool )
   }
   else
   {
-    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    QString const scrollTo = Qt4x5::Url::queryItemValue( ui.definition->url(), "scrollto" );
     if( isScrollTo( scrollTo ) )
     {
       // There is no active article saved in history, but we have it as a parameter.
@@ -635,11 +631,20 @@ void ArticleView::loadFinished( bool )
       setCurrentArticle( scrollTo, true );
     }
   }
+}
+
+void ArticleView::loadFinished( bool )
+{
+  expandFrames( *ui.definition );
+
+  initCurrentArticleAndScroll();
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
+  QUrl url = ui.definition->url();
+
   if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
     QString anchor = QUrl::fromPercentEncoding( Qt4x5::Url::encodedQueryItemValue( url, "gdanchor" ) );

@@ -352,6 +352,8 @@ private:
   /// article's value.
   void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
 
+  void initCurrentArticleAndScroll();
+
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
   void saveHistoryUserData();
