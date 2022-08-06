@@ -537,13 +537,13 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   ui.definition->setCursor( Qt::WaitCursor );
 }
 
-void ArticleView::loadFinished( bool )
+static void expandFrames( QWebView & view )
 {
-  QUrl url = ui.definition->url();
-
   // See if we have any iframes in need of expansion
 
-  QList< QWebFrame * > frames = ui.definition->page()->mainFrame()->childFrames();
+  QWebFrame & mainFrame = *view.page()->mainFrame();
+
+  QList< QWebFrame * > frames = mainFrame.childFrames();
 
   bool wereFrames = false;
 
@@ -556,12 +556,12 @@ void ArticleView::loadFinished( bool )
       //DPRINTF( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
 
       // Set the height
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
+      mainFrame.evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
         arg( (*i)->frameName() ).
         arg( (*i)->contentsSize().height() ) );
 
       // Show it
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
+      mainFrame.evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
         arg( (*i)->frameName() ) );
 
       (*i)->evaluateJavaScript( "var gdLastUrlText;" );
@@ -578,8 +578,15 @@ void ArticleView::loadFinished( bool )
 
     QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), Qt::MouseButtons(), Qt::KeyboardModifiers() );
 
-    qApp->sendEvent( ui.definition, &ev );
+    qApp->sendEvent( &view, &ev );
   }
+}
+
+void ArticleView::loadFinished( bool )
+{
+  expandFrames( *ui.definition );
+
+  QUrl url = ui.definition->url();
 
   QVariant userDataVariant = ui.definition->history()->currentItem().userData();
   if ( userDataVariant.type() == QVariant::Map )
