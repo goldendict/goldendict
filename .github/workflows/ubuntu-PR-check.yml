@@ -35,7 +35,7 @@ jobs:
           python-version: '3.9'    
       - name: Install Qt
         if: ${{ matrix.qt_ver == '5.15.2' }}
-        uses: jurplel/install-qt-action@v3
+        uses: xiaoyifang/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
@@ -44,7 +44,7 @@ jobs:
           py7zrversion: '==0.18.1'
       - name: Install Qt
         if: ${{ matrix.qt_ver != '5.15.2' }}
-        uses: jurplel/install-qt-action@v3
+        uses: xiaoyifang/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
