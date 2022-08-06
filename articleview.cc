@@ -633,20 +633,14 @@ void ArticleView::initCurrentArticleAndScroll()
   }
 }
 
-void ArticleView::loadFinished( bool )
+static void scrollToGdAnchor( QWebView const & view )
 {
-  expandFrames( *ui.definition );
-
-  initCurrentArticleAndScroll();
-
-  ui.definition->unsetCursor();
-  //QApplication::restoreOverrideCursor();
-
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
-  QUrl url = ui.definition->url();
+  QUrl url = view.url();
 
   if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
+    QWebFrame & mainFrame = *view.page()->mainFrame();
+
     QString anchor = QUrl::fromPercentEncoding( Qt4x5::Url::encodedQueryItemValue( url, "gdanchor" ) );
 
     // Find GD anchor on page
@@ -666,8 +660,8 @@ void ArticleView::loadFinished( bool )
       rx.setMinimal( true );
       rx.setPattern( anchor.left( 34 ) + "[0-9a-f]*_" + originalAnchor );
 
-      QWebElementCollection coll = ui.definition->page()->mainFrame()->findAllElements( "a[name]" );
-      coll += ui.definition->page()->mainFrame()->findAllElements( "a[id]" );
+      QWebElementCollection coll = mainFrame.findAllElements( "a[name]" );
+      coll += mainFrame.findAllElements( "a[id]" );
 
       for( QWebElementCollection::iterator it = coll.begin(); it != coll.end(); ++it )
       {
@@ -680,7 +674,7 @@ void ArticleView::loadFinished( bool )
 
           url.clear();
           url.setFragment( rx.cap( 0 ) );
-          ui.definition->page()->mainFrame()->evaluateJavaScript(
+          mainFrame.evaluateJavaScript(
              QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
 
           break;
@@ -691,11 +685,22 @@ void ArticleView::loadFinished( bool )
     {
       url.clear();
       url.setFragment( anchor );
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
+      mainFrame.evaluateJavaScript(
          QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
-#endif
+}
+
+void ArticleView::loadFinished( bool )
+{
+  expandFrames( *ui.definition );
+
+  initCurrentArticleAndScroll();
+
+  ui.definition->unsetCursor();
+  //QApplication::restoreOverrideCursor();
+
+  scrollToGdAnchor( *ui.definition );
 
   emit pageLoaded( this );
 
