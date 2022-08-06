@@ -1,0 +1,77 @@
+name: macos-m1-PR-check
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+on: 
+
+  workflow_dispatch:
+  
+  pull_request:
+    branches:
+      - dev
+      - master
+      - staged
+    paths-ignore:
+      - 'docs/**'
+      - ".github/**"
+      - "howto/**"
+      - "*.md"
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-12]
+        qt_ver: [6.3.1]
+        qt_arch: [clang_64]
+    env:
+      targetName: GoldenDict
+    steps:
+      # - name: prepare env
+      #   run: |
+      #     cd /opt
+      #     mkdir homebrew
+      #     curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+      #     export PATH=$PATH:/opt/homebrew/bin
+      - name: Install Qt
+        uses: xiaoyifang/install-qt-action@v3
+        with:
+          version: ${{ matrix.qt_ver }}
+          arch: ${{ matrix.qt_arch }}
+          cached: 'false'
+          modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia               
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - name: Set outputs
+        id: githash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"   
+       
+      - name: build macos
+        run: |
+          brew install pcre2 harfbuzz freetype
+          brew install cmake ninja python
+          brew install automake
+          brew install autoconf
+          brew install libtool
+          brew install opencc
+          brew install ffmpeg@5
+          #brew reinstall $(brew deps ffmpeg) ffmpeg
+          brew install libao
+          brew install libiconv
+          brew install lzo bzip2
+          brew install libogg
+          brew install zstd lzip
+          brew install libtiff
+          brew install libvorbis --force
+          brew install hunspell
+
+          brew install pkg-config
+
+      - name: compile
+        run: |          
+          qmake   CONFIG+=release CONFIG+=no_macos_universal CONFIG+=zim_support CONFIG+=no_extra_tiff_handler  #CONFIG+=no_epwing_support # CONFIG+=no_ffmpeg_player #CONFIG+=no_qtmultimedia_player
+          make 
+     

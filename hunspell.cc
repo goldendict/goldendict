@@ -23,7 +23,11 @@
 #include <QFileInfo>
 
 #include <set>
+#ifndef INCLUDE_LIBRARY_PATH
+#include <hunspell.hxx>
+#else
 #include <hunspell/hunspell.hxx>
+#endif
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "utils.hh"

@@ -64,6 +64,10 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
   DEFINES += MAKE_FFMPEG_PLAYER
 }
 
+!CONFIG( no_macos_universal ) {
+  DEFINES += INCLUDE_LIBRARY_PATH
+}
+
 CONFIG += exceptions \
     rtti \
     stl  \
@@ -198,6 +202,7 @@ mac {
     # You will need to use Xcode 3 and Qt Carbon SDK
     # if you want the support for PowerPC and/or Mac OS X 10.4
     # CONFIG += x86 x86_64 ppc
+!CONFIG( no_macos_universal ) {
     LIBS = -lz \
         -lbz2 \
         -lvorbisfile \
@@ -205,6 +210,7 @@ mac {
         -logg \
         -lhunspell \
         -llzo2
+
     !CONFIG( no_ffmpeg_player ) {
         LIBS += -lao \
             -lswresample \
@@ -214,19 +220,50 @@ mac {
     }
     QT_CONFIG -= no-pkg-config 
     CONFIG += link_pkgconfig
+
     INCLUDEPATH = $${PWD}/maclibs/include
     LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
+}
+else{
+    QT_CONFIG -= no-pkg-config
+    CONFIG += link_pkgconfig
+    PKGCONFIG += vorbisfile \
+        vorbis \
+        ogg \
+        lzo2 hunspell
+    !CONFIG( no_ffmpeg_player ) {
+        PKGCONFIG += ao \
+            libavutil \
+            libavformat \
+            libavcodec \
+            libswresample \
+    }
+    
+    INCLUDEPATH = /opt/homebrew/include /usr/local/include
+    INCLUDEPATH += $${PWD}/maclibs/include/
+    LIBS += -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
+    LIBS += -L$${PWD}/maclibs/lib/
+}
+
     OBJECTIVE_SOURCES += lionsupport.mm \
                          machotkeywrapper.mm \
                          macmouseover.mm \
                          speechclient_mac.mm
     ICON = icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
+
+!CONFIG( no_macos_universal ) {
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ && \
                       mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
-
+}
+else{
+    QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks && \
+                      cp -nR $${PWD}/maclibs/lib/libeb.dylib GoldenDict.app/Contents/Frameworks/ && \
+                      mkdir -p GoldenDict.app/Contents/MacOS/help && \
+                      cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
+}
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
         QMAKE_POST_LINK += && mkdir -p GoldenDict.app/Contents/MacOS/opencc && \
