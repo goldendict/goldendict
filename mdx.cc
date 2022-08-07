@@ -1440,9 +1440,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       MdictParser::HeadWordIndex headWordIndex;
 
       // enumerating word and its definition
-      if ( parser.readNextHeadWordIndex( headWordIndex ) )
+      while ( parser.readNextHeadWordIndex( headWordIndex ) )
       {
-        parser.readRecordBlock( headWordIndex, articleHandler, true);
+        parser.readRecordBlock( headWordIndex, articleHandler );
       }
 
       // enumerating resources if there's any

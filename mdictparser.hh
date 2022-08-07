@@ -158,7 +158,7 @@ public:
 
   bool open( const char * filename );
   bool readNextHeadWordIndex( HeadWordIndex & headWordIndex );
-  bool readRecordBlock( HeadWordIndex & headWordIndex, RecordHandler & recordHandler, bool cross_block_read=false );
+  bool readRecordBlock( HeadWordIndex & headWordIndex, RecordHandler & recordHandler );
 
   // helpers
   static QString toUtf16( const char * fromCode, const char * from, size_t fromSize );
