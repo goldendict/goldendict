@@ -831,7 +831,6 @@ void ArticleView::loadFinished( bool )
     scrollToGdAnchor( *ui.definition );
 #endif
 
-  emit canGoBackForwardChanged( this );
   emit pageLoaded( this );
 
   if( Qt4x5::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
@@ -2606,6 +2605,7 @@ void ArticleView::onJsPageInitStarted( QStringList const & loadedArticles, QStri
   firstAudioLink.clear();
   currentArticle.clear();
 
+  emit canGoBackForwardChanged( this );
   emit pageUnloaded( this );
 
 #ifndef USE_QTWEBKIT
