@@ -595,12 +595,10 @@ MdictParser::HeadWordIndex MdictParser::splitHeadWordBlock( QByteArray const & b
 }
 
 bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
-                                   MdictParser::RecordHandler & recordHandler,
-                                   bool cross_block_read )
+                                   MdictParser::RecordHandler & recordHandler )
 {
   // cache the index, the headWordIndex is already sorted
   size_t idx = 0;
-  bool readNextBlock = false;
 
   for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); ++i )
   {
@@ -613,40 +611,20 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
     RecordIndex const & recordIndex = recordBlockInfos_[idx];
     HeadWordIndex::const_iterator iNext = i + 1;
     qint64 recordSize;
-    auto current = *i;
-
-    if( iNext == headWordIndex.end() )
-    {
-      qint64 lastWordSize = recordIndex.shadowEndPos - current.first;
-
-      readNextBlock   = cross_block_read && readNextHeadWordIndex( headWordIndex );
-      if(readNextBlock)
-      {
-        recordSize = qMin(lastWordSize, headWordIndex.begin()->first - current.first);
-      }
-      else
-      {
-        recordSize = lastWordSize;
-      }
-    }
+    if ( iNext == headWordIndex.end() )
+      recordSize = recordIndex.shadowEndPos - i->first;
     else
-      recordSize = iNext->first - current.first;
+      recordSize = iNext->first - i->first;
 
     RecordInfo recordInfo;
     recordInfo.compressedBlockPos = recordPos_ + recordIndex.startPos;
-    recordInfo.recordOffset          = current.first - recordIndex.shadowStartPos;
+    recordInfo.recordOffset = i->first - recordIndex.shadowStartPos;
     recordInfo.decompressedBlockSize = recordIndex.decompressedSize;
     recordInfo.compressedBlockSize = recordIndex.compressedSize;
     recordInfo.recordSize = recordSize;
 
-    recordHandler.handleRecord( current.second, recordInfo );
-
-    if( readNextBlock )
-        break;
+    recordHandler.handleRecord( i->second, recordInfo );
   }
-
-  if( readNextBlock )
-    readRecordBlock( headWordIndex, recordHandler, cross_block_read );
 
   return true;
 }
