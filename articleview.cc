@@ -528,7 +528,7 @@ void ArticleView::showAnticipation()
 
 void ArticleView::inspectElement()
 {
-  emit inspectSignal( ui.definition );
+  emit inspectSignal( ui.definition->page() );
 }
 
 void ArticleView::loadFinished( bool result )

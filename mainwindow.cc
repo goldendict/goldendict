@@ -1655,11 +1655,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
 
-  connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
-    if( !inspector ){
-      inspector = new ArticleInspector( this );
-    }
-    inspector->setInspectPage( view );
+  connect( view, &ArticleView::inspectSignal,this,[this](QWebEnginePage * page){
+    inspector->setInspectPage( page );
   });
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
