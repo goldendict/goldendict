@@ -1215,7 +1215,6 @@ body {
 	list-style-type: square;
 	margin: .3em 0 0 1.5em;
 	padding: 0;
-	list-style-image: url(bullet.gif);
 }
 .mwiki ol {
 	line-height: 1.5em;
@@ -1726,7 +1725,6 @@ special external link styling */
 .mwiki .portlet ul {
 	line-height: 1.5em;
 	list-style-type: square;
-	list-style-image: url(bullet.gif);
 	font-size: 95%;
 }
 .mwiki .portlet li {
