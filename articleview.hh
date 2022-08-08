@@ -290,7 +290,7 @@ signals:
   ///  signal finished javascript;
   void notifyJavascriptFinished();
 
-  void inspectSignal(QWebEngineView * view);
+  void inspectSignal(QWebEnginePage * page);
 
   void saveBookmarkSignal( const QString & bookmark );
 

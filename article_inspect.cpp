@@ -16,9 +16,8 @@ ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::Wi
   resize(800,600);
 }
 
-void ArticleInspector::setInspectPage( QWebEngineView * view )
+void ArticleInspector::setInspectPage( QWebEnginePage * page )
 {
-  auto page = view->page();
   viewContainer->page()->setInspectedPage( page );
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   page->triggerAction( QWebEnginePage::InspectElement );
@@ -28,10 +27,12 @@ void ArticleInspector::setInspectPage( QWebEngineView * view )
   static bool first{ true };
   if( first )
   {
+    qDebug()<<"inspector,phase first time";
     first = false;
   }
   else
   {
+    qDebug()<<"inspector,phase not first time";
     page->triggerAction( QWebEnginePage::InspectElement );
   }
 #endif
