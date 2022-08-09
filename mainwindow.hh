@@ -82,7 +82,7 @@ private:
 
   QSystemTrayIcon * trayIcon;
 
-  QPointer< ArticleInspector > inspector;
+  QScopedPointer< ArticleInspector > inspector;
 
   WebUrlRequestInterceptor *wuri;
 

@@ -917,7 +917,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 
-  inspector = new ArticleInspector( this );
+  inspector.reset( new ArticleInspector( this ));
 
   connect( QApplication::clipboard(), &QClipboard::changed, this, &MainWindow::clipboardChange );
 }
