@@ -130,6 +130,7 @@ jobs:
                                   Qt5.15.2(Intel Kind)
             auto built by github action. use on your on risk:-)   
 
+            file name pattern: [qt version]-GoldenDict-[OS]-[git commit].[ext]
             CHANGES:
             ${{ steps.changelog1.outputs.changelog }}  
             ${{ steps.changelog2.outputs.COMMIT_SUMMARY }}               
