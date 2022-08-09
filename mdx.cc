@@ -435,8 +435,8 @@ void MdxDictionary::doDeferredInit()
         idx.read( &buf.front(), sz );
         uint32_t btreeMaxElements = idx.read<uint32_t>();
         uint32_t rootOffset = idx.read<uint32_t>();
-        mddFileNames.push_back( string( &buf.front() ) );
-        mddIndexInfos.push_back( IndexInfo( btreeMaxElements, rootOffset ) );
+        mddFileNames.emplace_back(&buf.front());
+        mddIndexInfos.emplace_back(btreeMaxElements, rootOffset);
       }
 
       vector< string > const dictFiles = getDictionaryFilenames();
