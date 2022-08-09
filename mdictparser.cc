@@ -555,7 +555,7 @@ MdictParser::BlockInfoVector MdictParser::decodeHeadWordBlockInfo( QByteArray co
     qint64 compressedSize = readNumber( s );
     // headword block decompressed size
     qint64 decompressedSize = readNumber( s );
-    headWordBlockInfos.push_back( BlockInfoVector::value_type( compressedSize, decompressedSize ) );
+    headWordBlockInfos.emplace_back(compressedSize, decompressedSize);
   }
 
   return headWordBlockInfos;
@@ -588,7 +588,7 @@ MdictParser::HeadWordIndex MdictParser::splitHeadWordBlock( QByteArray const & b
     }
     p += headWordBuf.size();
     QString headWord = toUtf16( encoding_, headWordBuf.constBegin(), headWordBuf.size() );
-    index.push_back( HeadWordIndex::value_type( headWordId, headWord ) );
+    index.emplace_back(headWordId, headWord);
   }
 
   return index;
