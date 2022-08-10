@@ -101,5 +101,6 @@
         <file>icons/closetab-hover.png</file>
         <file>icons/1downarrow.svg</file>
         <file>icons/wizard-selected.svg</file>
+        <file>icons/mdict-bg.png</file>
     </qresource>
 </RCC>
