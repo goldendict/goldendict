@@ -39,8 +39,8 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
     {
       return;
     }
-//    emit linkClicked( info.requestUrl() );
-//    info.block(true);
+    emit linkClicked( info.requestUrl() );
+    info.block(true);
   }
 
   //window.location=audio link
