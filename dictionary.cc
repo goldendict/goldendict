@@ -293,6 +293,8 @@ bool Class::loadIconFromText( QString const & text )
     painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
                                img.height() == max ? 0 : ( max - img.height() ) / 2 ),
                        img );
+    painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+
     QFont font = painter.font();
     //the text should be a little smaller than the icon
     font.setPixelSize( iconSize * 0.6 );
