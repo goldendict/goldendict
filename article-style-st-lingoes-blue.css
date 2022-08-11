@@ -1,3 +1,8 @@
+:root
+{
+  --gd-page-background-color: #EAF0F8;
+}
+
 body {
 	background: #EAF0F8;
 	margin: 0.3em;
@@ -366,4 +371,4 @@ h3 {
 	border-width:1px;
 	background-color:#eeeeee;
 	padding: 8px 8px 8px 8px;
-} 
+}

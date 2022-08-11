@@ -14,6 +14,7 @@
 #include "wordfinder.hh"
 
 class QColor;
+class QWidget;
 
 /// This class generates the article's body for the given lookup request
 class ArticleMaker: public QObject
@@ -24,6 +25,12 @@ class ArticleMaker: public QObject
   std::vector< Instances::Group > const & groups;
 
   QString displayStyle, addonStyle;
+
+#ifndef USE_QTWEBKIT
+  QWidget * dialogParent;
+  /// Ensures that a page background color specification warning message appears at most once per GoldenDict launch.
+  mutable bool hasShownBackgroundColorWarningMessage = false;
+#endif
 
   bool needExpandOptionalParts;
   bool collapseBigArticles;
@@ -38,7 +45,8 @@ public:
   ArticleMaker( std::vector< sptr< Dictionary::Class > > const & dictionaries,
                 std::vector< Instances::Group > const & groups,
                 QString const & displayStyle,
-                QString const & addonStyle);
+                QString const & addonStyle,
+                QWidget * dialogParent_ );
 
   /// Sets the display style to use for any new requests. This affects the
   /// choice of the stylesheet file.
@@ -90,7 +98,7 @@ public:
 private:
 
 #ifndef USE_QTWEBKIT
-  static QColor colorFromString( std::string const & pageBackgroundColor );
+  QColor colorFromString( std::string const & pageBackgroundColor ) const;
 #endif
 
   /// Appends CSS style sheets to @p result.

@@ -20,7 +20,10 @@
 #ifndef USE_QTWEBKIT
 #include <QColor>
 #include <QFile>
+#include <QMessageBox>
+#include <QVarLengthArray>
 
+#include <cctype>
 #include <regex>
 #endif
 
@@ -96,50 +99,35 @@ public:
   }
 
 #ifndef USE_QTWEBKIT
-  // TODO (Qt WebEngine): on my GNU/Linux system a call to findPageBackgroundColor() takes about 15 ms and slows down
-  // GoldenDict start by about 15*2=30 ms when the Default display style is configured. On the bright side, when some
-  // other built-in display style is configured, a call to findPageBackgroundColor() takes up to 1 ms (with one
-  // exception: Lingoes-Blue about 2.5 ms). The significant slowdown suggests reconsidering this implementation. Perhaps
-  // introduce into built-in CSS files a special comment that specifies the background color or states that the CSS file
-  // does not affect the background color, and parse it much faster. For example, /*gdPageBackgroundColor:#abcdef;*/
-  // The comment's format requirements should be strict for fast and easy parsing w/o regex: the only allowed variation
-  // is replacing the #abcdef substring with another color name parsable by QColor::setNamedColor() or with an empty
-  // string to request parsing the previous CSS file. A downside of this optimization is that such a comment would have
-  // to be added into all user-defined styles. The downside can be mitigated by falling back to the current slow regex
-  // implementation if the comment is not found. But with a silent fallback like this the users would never update their
-  // styles, and suffer suboptimal performance. A way to annoy users into adding the comment into their styles is to
-  // print a warning if the comment is not found. The warning message should include the CSS file name and the comment
-  // format specification.
-  // An alternative optimization is to assume that the <body> background color is specified at most once in each CSS
-  // file and return the first regex match instead of the last. If the <body> background color is specified close to the
-  // top of CSS files, which is indeed the case for built-in styles, this could speed up the search dramatically. But
-  // returning the first match would be even less accurate than the current algorithm; would be much slower than the
-  // strictly formatted comment approach (especially if the style sheets become referenced rather than embedded and the
-  // files could be read line by line in case of the plain text search); would retain a hidden performance trap when the
-  // <body> background color is specified at the bottom of a large file, or not specified at all.
+  static constexpr auto getPageBackgroundColorPropertyName()
+  { return QLatin1String( pageBackgroundColorPropertyName, pageBackgroundColorPropertyNameSize ); }
 
   /// @return The page background color or an empty string if
   ///         the background color could not be found in the style sheets.
   /// @warning This function parses the style sheets that have been appended to @a result. Therefore it
   ///          must be called after appending all style sheets that may override the page background color.
-  string findPageBackgroundColor() const
+  string findPageBackgroundColor( vector< QString > & unspecifiedColorFileNames ) const
   {
     Q_ASSERT( needPageBackgroundColor );
 
     string backgroundColor;
 
     // Iterate in the reverse order because the CSS code lower in the page overrides.
-    std::find_if( cssFiles.crbegin(), cssFiles.crend(), [ &backgroundColor ]( QString const & fileName ) {
+    std::find_if( cssFiles.crbegin(), cssFiles.crend(),
+                  [ &backgroundColor, &unspecifiedColorFileNames ]( QString const & fileName ) {
       QFile cssFile( fileName );
-      if( !cssFile.open( QFile::ReadOnly ) )
+      if( !cssFile.open( QIODevice::ReadOnly | QIODevice::Text ) )
       {
         gdWarning( "Couldn't open CSS file \"%s\" for reading: %s (%d)", qUtf8Printable( fileName ),
                    qUtf8Printable( cssFile.errorString() ), static_cast< int >( cssFile.error() ) );
         return false;
       }
 
-      auto const cssCode = cssFile.readAll();
-      backgroundColor = findBodyBackgroundColor( cssCode.constData(), cssCode.constData() + cssCode.size() );
+      if( !findPageBackgroundColor( cssFile, backgroundColor ) )
+        unspecifiedColorFileNames.push_back( fileName );
+
+      // Empty backgroundColor means that this CSS file does not override page
+      // background color, in which case we look for it in the remaining CSS files.
       return !backgroundColor.empty();
     } );
 
@@ -175,7 +163,115 @@ private:
   bool isPrintMedia;
 
 #ifndef USE_QTWEBKIT
+  static constexpr char pageBackgroundColorPropertyName[] = "--gd-page-background-color";
+  // - 1 accounts for the terminating null character.
+  static constexpr std::size_t pageBackgroundColorPropertyNameSize = sizeof( pageBackgroundColorPropertyName )
+                                                                      / sizeof( char ) - 1;
+
   vector< QString > cssFiles;
+
+  /// Finds the page background color in @p cssFile.
+  /// First looks for the page background color CSS property. If the property specification
+  /// is missing, falls back to a slower search of the background color of the <body> element.
+  /// @param[out] backgroundColor is set to the page background color or to an empty string
+  ///             if the CSS file does not override page background color.
+  /// @return true if a valid page background color CSS property specification was found, false otherwise.
+  static bool findPageBackgroundColor( QFile & cssFile, string & backgroundColor )
+  {
+    Q_ASSERT( cssFile.isOpen() );
+
+    // TODO: remove the regex fallback, including this variable, all its uses and findBodyBackgroundColor(),
+    // once users have had some time to add the page background color property into their article style files.
+    string cssCode;
+
+    // At the time of writing, each line in built-in article style files fits into maxReasonableLineLength.
+    constexpr int maxReasonableLineLength = 212;
+    QVarLengthArray< char, maxReasonableLineLength > line( maxReasonableLineLength );
+    int offset = 0;
+
+    while( !cssFile.atEnd() )
+    {
+      int const maxSize = line.size() - offset;
+      int bytesRead = cssFile.readLine( line.data() + offset, maxSize );
+      if( bytesRead == -1 )
+      {
+        gdWarning( "Error while reading CSS file \"%s\": %s (%d)", qUtf8Printable( cssFile.fileName() ),
+                   qUtf8Printable( cssFile.errorString() ), static_cast< int >( cssFile.error() ) );
+        break;
+      }
+
+      Q_ASSERT( bytesRead >= 0 );
+      Q_ASSERT( bytesRead < maxSize ); // QIODevice::readLine() reads up to a maximum of maxSize - 1 bytes.
+      if( bytesRead == maxSize - 1 && line[ line.size() - 2 ] != '\n' && !cssFile.atEnd() )
+      {
+        // This line is longer than line.size() => increase the buffer size until the entire line fits in.
+        Q_ASSERT( line.back() == 0 ); // A terminating '\0' byte is always appended to data.
+        offset = line.size() - 1; // Overwrite the terminating '\0' character during the next iteration.
+        line.resize( line.size() * 2 );
+        continue;
+      }
+
+      bytesRead += offset;
+      Q_ASSERT( bytesRead < line.size() );
+      Q_ASSERT( line[ bytesRead ] == 0 ); // A terminating '\0' byte is always appended to data.
+      // We require the property and its value to be on the same line to be able to process the CSS file line by line.
+      if( findPageBackgroundColorProperty( line.data(), line.data() + bytesRead, backgroundColor ) )
+        return true;
+      offset = 0;
+
+      cssCode.append( line.data(), bytesRead );
+    }
+    gdWarning( "Page background color specification is missing from CSS file \"%s\"",
+               qUtf8Printable( cssFile.fileName() ) );
+
+    backgroundColor = findBodyBackgroundColor( cssCode.data(), cssCode.data() + cssCode.size() );
+    return false;
+  }
+
+  static bool isSpace( char ch )
+  {
+    // The behavior of std::isspace() is undefined if the value of ch
+    // is not representable as unsigned char and is not equal to EOF.
+    return std::isspace( static_cast< unsigned char >( ch ) );
+  }
+
+  /// Finds the page background color CSS property in [@p first, @p last).
+  /// @param[out] backgroundColor is set to the page background color if the CSS property is found, unchanged otherwise.
+  /// @note @p backgroundColor set to an empty string means that the CSS file does not override page background color.
+  /// @return true if a valid page background color CSS property specification was found, false otherwise.
+  static bool findPageBackgroundColorProperty( char const * first, char const * last, string & backgroundColor )
+  {
+    char const * it = std::search( first, last, pageBackgroundColorPropertyName,
+                                   pageBackgroundColorPropertyName + pageBackgroundColorPropertyNameSize );
+    if( it == last )
+      return false;
+    it += pageBackgroundColorPropertyNameSize;
+    Q_ASSERT( it <= last );
+
+    auto const skipWhitespace = [ &it, last ] {
+      it = std::find_if_not( it, last, isSpace );
+    };
+
+    skipWhitespace();
+    if( it == last || *it != ':' )
+    {
+      gdWarning( "Missing colon after %s CSS property name. Ignoring this malformed specification.",
+                 pageBackgroundColorPropertyName );
+      return false;
+    }
+    ++it;
+    skipWhitespace();
+
+    char const * const colorBegin = it;
+
+    auto const isCssPropertyValueEnd = []( char ch ) {
+      return ch == ';' || ch == '}' || isSpace( ch );
+    };
+    it = std::find_if( it, last, isCssPropertyValueEnd );
+
+    backgroundColor.assign( colorBegin, it );
+    return true;
+  }
 
   /// Finds the background color of the <body> element in [@p first, @p last).
   /// @return the background color or an empty string if it could not be found.
@@ -214,20 +310,112 @@ private:
 #endif
 };
 
+#ifndef USE_QTWEBKIT
+constexpr char CssAppender::pageBackgroundColorPropertyName[];
+
+QString wrapInHtmlCodeElement( QLatin1String text )
+{
+  return QLatin1String( "<code>%1</code>" ).arg( text );
+}
+
+QString bodyElementHtmlCode()
+{
+  return wrapInHtmlCodeElement( QLatin1String{ "&lt;body&gt;" } );
+}
+
+QString htmlElementHtmlCode()
+{
+  return wrapInHtmlCodeElement( QLatin1String{ "&lt;html&gt;" } );
+}
+
+QString propertyNameHtmlCode()
+{
+  return wrapInHtmlCodeElement( CssAppender::getPageBackgroundColorPropertyName() );
+}
+
+QString missingSpecificationWarningMessage( vector< QString > const & unspecifiedColorFileNames )
+{
+  Q_ASSERT( !unspecifiedColorFileNames.empty() );
+
+  QString message = ArticleMaker::tr( "<p>Page background color specification is missing from the following CSS files:"
+                                      "</p>" ) + QLatin1String( "<pre>" );
+  for( auto const & fileName : unspecifiedColorFileNames )
+  {
+    message += QLatin1String( "<p style='margin: 0px;'>" );
+    message += fileName;
+    message += QLatin1String( "</p>" );
+  }
+  message += QLatin1String( "</pre>" );
+
+  message += ArticleMaker::tr( "<p>Please insert a page background color specification at the top (or close to the "
+                               "top) of each of these files. For example:</p>" );
+  // Recommend to define the page background color custom property on the :root pseudo-class to allow using it globally
+  // across the CSS file in the future. Do not recommend actually using the custom property value with
+  // `var(--gd-page-background-color)` for now. Custom CSS properties are not supported by Qt 5 WebKit, and it is
+  // important to maintain style sheet compatibility with the Qt WebKit version of GoldenDict while it is widely used.
+  message += QLatin1String( "<pre>:root\n{\n  %1: COLOR;\n}</pre>" )
+              .arg( CssAppender::getPageBackgroundColorPropertyName() );
+
+  message += ArticleMaker::tr( "<p>Replace %1 with the actual page background color specified in the CSS file, that is "
+                               "%2 or %3 background color. If the CSS file does not specify the page background color, "
+                               "replace %1 with an empty string (without quotes).</p>"
+                               "<p>Incorrect or missing page background color specification may cause article page "
+                               "background flashes.</p>"
+                               "<p>Supported page background color specification format is strict: quotes are not "
+                               "allowed, the property name %4 and its value must be on the same line. On the other "
+                               "hand, the surrounding declaration block does not matter to GoldenDict. The property "
+                               "specification can just as well be inside a CSS comment instead of the %5 pseudo-class "
+                               "block.</p>" )
+              .arg( wrapInHtmlCodeElement( QLatin1String{ "COLOR" } ), bodyElementHtmlCode(), htmlElementHtmlCode(),
+                    propertyNameHtmlCode(), wrapInHtmlCodeElement( QLatin1String{ ":root" } ) );
+
+  return message;
+}
+
+QString invalidColorWarningMessage( QString const & pageBackgroundColor )
+{
+  return ArticleMaker::tr( "<p>Invalid page background color is specified in the article style sheets:</p>" )
+         + QLatin1String( "<pre>%1</pre>" ).arg( pageBackgroundColor )
+         + ArticleMaker::tr( "<p>Set %1 to the actual page background color specified in the CSS file, that is %2 or "
+                             "%3 background color. If the CSS file does not specify the page background color, set %1 "
+                             "to an empty string (without quotes).</p>"
+                             "<p>Supported color value formats:</p><ul>"
+                             "<li>#RGB (each of R, G, and B is a single hex digit)</li>"
+                             "<li>#RRGGBB</li>"
+                             "<li>#AARRGGBB</li>"
+                             "<li>#RRRGGGBBB</li>"
+                             "<li>#RRRRGGGGBBBB</li>"
+                             "<li>A name from the list of colors defined in the list of <a href=\""
+                             "https://www.w3.org/TR/SVG11/types.html#ColorKeywords\">SVG color keyword names</a> "
+                             "provided by the World Wide Web Consortium; for example, %4 or %5.</li>"
+                             "<li>%6 - representing the absence of a color.</li></ul>" )
+            .arg( propertyNameHtmlCode(), bodyElementHtmlCode(), htmlElementHtmlCode(),
+                  wrapInHtmlCodeElement( QLatin1String{ "steelblue" } ),
+                  wrapInHtmlCodeElement( QLatin1String{ "gainsboro" } ),
+                  wrapInHtmlCodeElement( QLatin1String{ "transparent" } ) );
+}
+
+#endif // USE_QTWEBKIT
+
 } // unnamed namespace
 
 ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictionaries_,
                             vector< Instances::Group > const & groups_,
                             QString const & displayStyle_,
-                            QString const & addonStyle_):
+                            QString const & addonStyle_,
+                            QWidget * dialogParent_ ):
   dictionaries( dictionaries_ ),
   groups( groups_ ),
   displayStyle( displayStyle_ ),
   addonStyle( addonStyle_ ),
+#ifndef USE_QTWEBKIT
+  dialogParent( dialogParent_ ),
+#endif
   needExpandOptionalParts( true )
 , collapseBigArticles( true )
 , articleLimitSize( 500 )
 {
+  Q_UNUSED( dialogParent_ )
 }
 
 void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
@@ -237,7 +425,7 @@ void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
 }
 
 #ifndef USE_QTWEBKIT
-QColor ArticleMaker::colorFromString( string const & pageBackgroundColor )
+QColor ArticleMaker::colorFromString( string const & pageBackgroundColor ) const
 {
   if( pageBackgroundColor.empty() )
   {
@@ -247,10 +435,16 @@ QColor ArticleMaker::colorFromString( string const & pageBackgroundColor )
     return QColor();
   }
 
-  QColor color( QString::fromUtf8( pageBackgroundColor.c_str() ) );
+  auto const pageBackgroundColorQString = QString::fromUtf8( pageBackgroundColor.c_str() );
+  QColor color( pageBackgroundColorQString );
   if( !color.isValid() )
   {
     gdWarning( "Found invalid page background color in the article style sheets: \"%s\"", pageBackgroundColor.c_str() );
+    if( !hasShownBackgroundColorWarningMessage )
+    {
+      hasShownBackgroundColorWarningMessage = true;
+      QMessageBox::warning( dialogParent, "GoldenDict", invalidColorWarningMessage( pageBackgroundColorQString ) );
+    }
     return QColor();
   }
 
@@ -288,7 +482,17 @@ void ArticleMaker::appendCss( string & result, bool expandOptionalParts, QColor 
   Q_ASSERT( !pageBackgroundColor );
 #else
   if( pageBackgroundColor )
-    *pageBackgroundColor = colorFromString( cssAppender.findPageBackgroundColor() );
+  {
+    vector< QString > unspecifiedColorFileNames;
+    auto const backgroundColorString = cssAppender.findPageBackgroundColor( unspecifiedColorFileNames );
+    if( !unspecifiedColorFileNames.empty() && !hasShownBackgroundColorWarningMessage )
+    {
+      hasShownBackgroundColorWarningMessage = true;
+      QMessageBox::warning( dialogParent, "GoldenDict",
+                            missingSpecificationWarningMessage( unspecifiedColorFileNames ) );
+    }
+    *pageBackgroundColor = colorFromString( backgroundColorString );
+  }
 #endif
 }
 

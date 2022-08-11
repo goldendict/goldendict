@@ -1,5 +1,9 @@
 /******** Global, non-dictionary-specific classes ***********/
 
+:root
+{
+  --gd-page-background-color: #fefdeb;
+}
 
 body
 {
