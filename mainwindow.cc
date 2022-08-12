@@ -3585,7 +3585,8 @@ void MainWindow::on_saveArticle_triggered()
                                            filters.join( ";;" ),
                                            &selectedFilter, options );
 
-  bool complete = ( selectedFilter == filters[ 0 ] );
+  // The " (*.html)" part of filters[i] is absent from selectedFilter in Qt 5.
+  bool const complete = filters.at( 0 ).startsWith( selectedFilter );
 
   if ( !fileName.isEmpty() )
   {
