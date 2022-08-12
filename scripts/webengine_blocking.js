@@ -77,8 +77,23 @@ window.addEventListener('pagehide', function(event) {
     // Initialize gdCurrentArticle to the scrollto query item value of the page's URL.
     gdCurrentArticle = searchParams.get('scrollto');
 
-    if (location.hash && location.hash !== '#')
-        return; // The page's URL has a non-empty fragment, which overrides scrolling to scrollto or gdanchor.
+    if (location.hash && location.hash !== '#') {
+        // The page's URL has a non-empty fragment, which overrides scrolling to scrollto or gdanchor.
+
+        // Leaving location.hash as is scrolls to it only after the entire page is loaded.
+        // Furthermore, the scrolling cannot be canceled if the user activates an article
+        // before the page is loaded. Remove the fragment for now; restore it (unless canceled)
+        // when the current article, which contains the element with the fragment id, is loaded.
+
+        // Replacing location.hash with an empty string in location has no effect.
+        // So location.hash has to be replaced with '#' to (almost) clear the fragment.
+        gdCurrentArticleHash = location.hash.substring(1); // exclude the '#' character
+        const urlWithoutFragment = location.href.replace(location.hash, '#');
+        location.replace(urlWithoutFragment);
+        // Now location.href ends with '#', gdCurrentArticleHash does not start with '#'
+        // => there is a single '#' character in (location.href + gdCurrentArticleHash).
+        return;
+    }
 
     // TODO (Qt WebEngine): port MDict gdanchor pattern support from Qt WebKit's scrollToGdAnchor() to JavaScript.
     // The answers to the following question can help to implement this:
