@@ -75,20 +75,26 @@ public slots:
 #ifdef USE_QTWEBKIT
   void onJsPageInitStarted()
   { articleView.onJsPageInitStarted(); }
+
+  void onJsActiveArticleChanged( QString const & id )
+  { articleView.onJsActiveArticleChanged( id ); }
 #else
   void onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
-                            int activeArticleIndex, bool hasPageInitFinished )
-  { articleView.onJsPageInitStarted( loadedArticles, loadedAudioLinks, activeArticleIndex, hasPageInitFinished ); }
+                            int activeArticleIndex, bool hasPageInitFinished, QDateTime const & pageTimestamp )
+  {
+    articleView.onJsPageInitStarted( loadedArticles, loadedAudioLinks,
+                                     activeArticleIndex, hasPageInitFinished, pageTimestamp );
+  }
 
   void onJsPageInitFinished()
   { articleView.onJsPageInitFinished(); }
+
+  void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp )
+  { articleView.onJsActiveArticleChanged( id, currentArticleTimestamp ); }
 #endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
   { articleView.onJsArticleLoaded( id, audioLink, isActive ); }
-
-  void onJsActiveArticleChanged( QString const & id )
-  { articleView.onJsActiveArticleChanged( id ); }
 
   void onJsLocationHashChanged()
   { articleView.onJsLocationHashChanged(); }
@@ -292,6 +298,17 @@ QLatin1String javaScriptBool( bool value )
 }
 
 #ifndef USE_QTWEBKIT
+/// @return the string representation of @p date in the ISO 8601 format required by JavaScript Date constructor.
+/// @note Qt::ISODateWithMs format is used to include milliseconds. The alternative Qt::ISODate format's
+///       one-second precision is definitely too coarse for timestamp-based synchronization.
+/// @note A JavaScript function, connected to a C++ signal with a QDateTime parameter, receives a value of the type
+///       String rather than of the expected type Date in Qt 5.15.5. Explicitly sending date&time strings in the
+///       required format will keep working correctly even if the type conversion issue is fixed in a future Qt version.
+QString javaScriptDateString( QDateTime const & date )
+{
+  return date.toString( Qt::ISODateWithMs );
+}
+
 QString pageReloadingScriptName()
 {
   return QStringLiteral( "PageReloading" );
@@ -954,8 +971,16 @@ bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
   if( !articleList.contains( dictionaryIdFromScrollTo( id ) ) )
     return false;
 
+#ifdef USE_QTWEBKIT
   runJavaScript( MainFrame,
     QString( "gdOnCppActiveArticleChanged('%1', %2);" ).arg( id, javaScriptBool( moveToIt ) ) );
+#else
+  currentArticleTimestamp = QDateTime::currentDateTimeUtc();
+  ui.definition->page()->runJavaScript( QLatin1String( "gdOnCppActiveArticleChanged('%1', %2, '%3', '%4');" )
+                                        .arg( id, javaScriptBool( moveToIt ), javaScriptDateString( pageTimestamp ),
+                                              javaScriptDateString( currentArticleTimestamp ) ) );
+#endif
+
   setValidCurrentArticleNoJs( id );
 
   return true;
@@ -2594,7 +2619,8 @@ void ArticleView::on_highlightAllButton_clicked()
 void ArticleView::onJsPageInitStarted()
 #else
 void ArticleView::onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
-                                       int activeArticleIndex, bool hasPageInitFinished )
+                                       int activeArticleIndex, bool hasPageInitFinished,
+                                       QDateTime const & pageTimestamp_ )
 #endif
 {
   // When JavaScript code initialization starts, the previous page is definitely gone.
@@ -2609,10 +2635,14 @@ void ArticleView::onJsPageInitStarted( QStringList const & loadedArticles, QStri
   emit pageUnloaded( this );
 
 #ifndef USE_QTWEBKIT
+  // This is the first message from JavaScript on this page.
+  // Initialize our stored timestamps to the page timestamp received from JavaScript.
+  currentArticleTimestamp = pageTimestamp = pageTimestamp_;
+
   if( loadedArticles.size() == loadedAudioLinks.size() )
   {
     for( int i = 0; i != loadedArticles.size(); ++i )
-      onJsArticleLoaded( loadedArticles.at( i ), loadedAudioLinks.at( i ), i == activeArticleIndex );
+      onJsArticleLoadedNoTimestamps( loadedArticles.at( i ), loadedAudioLinks.at( i ), i == activeArticleIndex );
   }
   else
     gdWarning( "Loaded item list sizes don't match: %d != %d", loadedArticles.size(), loadedAudioLinks.size() );
@@ -2641,6 +2671,18 @@ void ArticleView::onJsPageInitFinished()
 
 void ArticleView::onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
 {
+#ifndef USE_QTWEBKIT
+  // When JavaScript does not send the current article timestamp, it is implicitly equal to pageTimestamp.
+  // If currentArticleTimestamp != pageTimestamp, then our current article value is fresher => keep it.
+  if( isActive && currentArticleTimestamp != pageTimestamp )
+    isActive = false;
+#endif
+
+  onJsArticleLoadedNoTimestamps( id, audioLink, isActive );
+}
+
+void ArticleView::onJsArticleLoadedNoTimestamps( QString const & id, QString const & audioLink, bool isActive )
+{
   if( !isScrollTo( id ) )
   {
     gdWarning( "Invalid article ID received from JavaScript: %s", id.toUtf8().constData() );
@@ -2660,13 +2702,26 @@ void ArticleView::onJsArticleLoaded( QString const & id, QString const & audioLi
   emit articleLoaded( this, articleList.back(), isActive );
 }
 
+#ifdef USE_QTWEBKIT
 void ArticleView::onJsActiveArticleChanged(QString const & id)
+#else
+void ArticleView::onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp_ )
+#endif
 {
   if ( !isScrollTo( id ) )
   {
     gdWarning( "Invalid active article ID received from JavaScript: %s", id.toUtf8().constData() );
     return;
   }
+
+#ifndef USE_QTWEBKIT
+  // Compare the received and stored current article timestamps using operator< here and using
+  // operator<= in the JavaScript code to ensure that the current article values are always consistent,
+  // even if the user manages to activate different articles in JavaScript and C++ at the same time.
+  if( currentArticleTimestamp_ < currentArticleTimestamp )
+    return; // Our current article value is fresher => keep it.
+  currentArticleTimestamp = currentArticleTimestamp_;
+#endif
 
   setValidCurrentArticleNoJs( id );
 }

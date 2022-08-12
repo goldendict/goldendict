@@ -11,6 +11,11 @@ let gdFirstArticle;
 // This fragment string is appended to location.href once gdCurrentArticle is loaded.
 let gdCurrentArticleHash;
 
+// The timestamps prevent timing issues when a current article is passed to/from C++.
+// More details in the comment above the corresponding ArticleView's timestamp data members.
+const gdPageTimestamp = new Date();
+let gdCurrentArticleTimestamp = gdPageTimestamp;
+
 // These 3 variables are temporary and are permanently set to null once gdArticleView becomes available.
 let gdPendingArticles = [];
 let gdPendingAudioLinks = [];
@@ -22,7 +27,7 @@ const gdWebChannel = new QWebChannel(qt.webChannelTransport, function(channel) {
     gdArticleView = channel.objects.gdArticleView;
 
     gdArticleView.onJsPageInitStarted(gdPendingArticles, gdPendingAudioLinks,
-        gdPendingArticles.indexOf(gdCurrentArticle), gdHasPageInitFinished);
+        gdPendingArticles.indexOf(gdCurrentArticle), gdHasPageInitFinished, gdPageTimestamp);
     gdPendingArticles = null;
     gdPendingAudioLinks = null;
     gdHasPageInitFinished = null;
@@ -145,4 +150,32 @@ function gdArticleLoaded(articleId) {
         gdPendingAudioLinks.push(gdJustLoadedAudioLink);
     }
     gdJustLoadedAudioLink = null;
+}
+
+function gdMakeArticleActive(newId) {
+    gdCurrentArticleTimestamp = new Date();
+    gdSetActiveArticle('gdfrom-' + newId);
+    // Call gdArticleView.onJsActiveArticleChanged() even if gdSetActiveArticle returns false and gdCurrentArticle
+    // is unchanged. This is necessary to send the updated gdCurrentArticleTimestamp value and possibly overwrite
+    // an obsolete current article value on the C++ side, which hasn't been received by JavaScript yet.
+    if (gdArticleView)
+        gdArticleView.onJsActiveArticleChanged(gdCurrentArticle, gdCurrentArticleTimestamp);
+    // else: the updated gdCurrentArticle will be passed in gdArticleView.onJsPageInitStarted().
+}
+
+function gdOnCppActiveArticleChanged(articleId, moveToIt, pageTimestampString, currentArticleTimestampString) {
+    const pageTimestamp = new Date(pageTimestampString);
+    const currentArticleTimestamp = new Date(currentArticleTimestampString);
+    // operator=== compares objects and would always compare page timestamps as not equal. To offer protection
+    // against timing attacks and fingerprinting, the precision of new Date().getTime() might get rounded
+    // depending on browser settings, so it cannot be used to compare page timestamps either. operator< works
+    // here, because a next page's JavaScript code couldn't have sent its newer page timestamp to the C++ code.
+    // Compare the received and stored current article timestamps using operator<= here and using
+    // operator< in the C++ code to ensure that the current article values are always consistent, even
+    // if the user manages to activate different articles in JavaScript and C++ at the same time.
+    if (pageTimestamp < gdPageTimestamp || currentArticleTimestamp <= gdCurrentArticleTimestamp)
+        return; // This current article update is meant for a previous page or is stale => ignore it.
+    gdCurrentArticleTimestamp = currentArticleTimestamp;
+
+    gdOnCppActiveArticleChangedNoTimestamps(articleId, moveToIt);
 }

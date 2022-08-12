@@ -12,3 +12,12 @@ function gdArticleLoaded(articleId) {
     gdArticleView.onJsArticleLoaded(articleId, gdJustLoadedAudioLink, isCurrent);
     gdJustLoadedAudioLink = null;
 }
+
+function gdMakeArticleActive(newId) {
+    if (gdSetActiveArticle('gdfrom-' + newId))
+        gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
+}
+
+function gdOnCppActiveArticleChanged(articleId, moveToIt) {
+    gdOnCppActiveArticleChangedNoTimestamps(articleId, moveToIt);
+}

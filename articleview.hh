@@ -18,6 +18,8 @@
 #ifdef USE_QTWEBKIT
 #include <QWebView>
 #else
+#include <QDateTime>
+
 class QWebEngineFindTextResult;
 #endif
 
@@ -46,6 +48,21 @@ class ArticleView: public QFrame
   QString firstAudioLink;
   QString currentArticle; ///< Current article in the view, in the form of "gdfrom-xxx"
                           ///< (scrollTo) id. If empty, there is no current article.
+#ifndef USE_QTWEBKIT
+  // The timestamps are stored here and in JavaScript global variables with "gd" name prefixes.
+  // They prevent timing issues when a current article is passed to/from JavaScript.
+
+  /// The page timestamp is initialized to the current date and time when JavaScript page initialization
+  /// code starts. This timestamp allows JavaScript's gdOnCppActiveArticleChanged() to reject C++'s
+  /// current article updates pertaining to a previously loaded page.
+  QDateTime pageTimestamp;
+  /// currentArticleTimestamp and its JavaScript counterpart are initialized to pageTimestamp. They are
+  /// set to a current date and time when the user activates an article in some way, and are sent to
+  /// the other (JavaScript or C++) side along with the updated current article value. The receiver of
+  /// the current article update message compares the received timestamp value with its own stored
+  /// current article timestamp and rejects the current article change if the stored timestamp is later.
+  QDateTime currentArticleTimestamp;
+#endif
 
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
@@ -349,6 +366,8 @@ private:
 
 #ifdef USE_QTWEBKIT
   void onJsPageInitStarted();
+
+  void onJsActiveArticleChanged( QString const & id );
 #else
   /// In the Qt WebEngine version, gdArticleView is not available when a page starts loading. The IDs and the
   /// audio links of articles loaded before gdArticleView becomes available (if any) are passed to this function.
@@ -357,18 +376,23 @@ private:
   /// @param hasPageInitFinished true if the page initialization has already finished,
   ///        in which case onJsPageInitFinished() won't be invoked by this page.
   void onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
-                            int activeArticleIndex, bool hasPageInitFinished );
+                            int activeArticleIndex, bool hasPageInitFinished, QDateTime const & pageTimestamp_ );
 
   void onJsPageInitFinished();
+
+  void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp_ );
 #endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive );
 
-  void onJsActiveArticleChanged( QString const & id );
-
   void onJsLocationHashChanged();
 
   /// </JavaScript interface>
+
+  /// Handles the article-loaded JavaScript message assuming it is fresh.
+  /// The callers of this function must check timestamps in the Qt WebEngine version.
+  /// This function's single purpose is code reuse. It is not exposed to JavaScript.
+  void onJsArticleLoadedNoTimestamps( QString const & id, QString const & audioLink, bool isActive );
 
   enum TargetFrame { MainFrame, CurrentFrame };
   void runJavaScript( TargetFrame targetFrame, QString const & scriptSource );

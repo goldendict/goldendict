@@ -26,15 +26,7 @@ function gdSetActiveArticle(articleId) {
     return false;
 }
 
-function gdMakeArticleActive(newId) {
-    if (gdSetActiveArticle('gdfrom-' + newId)) {
-        if (gdArticleView)
-            gdArticleView.onJsActiveArticleChanged(gdCurrentArticle);
-        // else: the updated gdCurrentArticle will be passed in gdArticleView.onJsPageInitStarted().
-    }
-}
-
-function gdOnCppActiveArticleChanged(articleId, moveToIt) {
+function gdOnCppActiveArticleChangedNoTimestamps(articleId, moveToIt) {
     if (moveToIt)
         document.getElementById(articleId).scrollIntoView(true);
     gdSetActiveArticle(articleId);
