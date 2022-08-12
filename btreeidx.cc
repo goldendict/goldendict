@@ -1118,7 +1118,7 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
     if( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
     {
       // reduce the vector reallocation.
-      if( i->second.size() * 1.0 / i->second.capacity() > 0.75 )
+      if( i->second.size() * 1.0 / (i->second.capacity()+1) > 0.75 )
       {
         i->second.reserve( i->second.capacity() * 2 );
       }
