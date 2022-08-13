@@ -1112,17 +1112,16 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
 
     // Insert this word
     wstring folded = Folding::apply( nextChar );
+    auto name      = Utf8::encode( folded );
 
-    iterator i = insert( { Utf8::encode( folded ), vector< WordArticleLink >() } ).first;
+    iterator i = insert( { std::move(name), vector< WordArticleLink >() } ).first;
 
     if( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
     {
-
       string utfWord = Utf8::encode( wstring( nextChar, wordSize - ( nextChar - wordBegin ) ) );
-
       string utfPrefix = Utf8::encode( wstring( wordBegin, nextChar - wordBegin ) );
 
-      i->second.emplace_back(utfWord, articleOffset, utfPrefix);
+      i->second.emplace_back(std::move(utfWord), articleOffset, std::move(utfPrefix));
       // reduce the vector reallocation.
       if( i->second.size() * 1.0 / i->second.capacity() > 0.75 )
       {
