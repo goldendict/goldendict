@@ -242,7 +242,7 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
       // Load successful
 
       //some icon is very large ,will crash the application.
-      img = img.scaledToWidth( 48 );
+      img = img.scaledToWidth( 64 );
       // Apply the color key
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
       img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
@@ -281,11 +281,11 @@ bool Class::loadIconFromText( QString const & text )
 
   if ( !img.isNull() )
   {
-    int iconSize = 48;
+    int iconSize = 64;
     //some icon is very large ,will crash the application.
     img = img.scaledToWidth( iconSize );
     QImage result( iconSize, iconSize, QImage::Format_ARGB32 );
-
+    result.fill( 0 ); // Black transparent
     int max = img.width() > img.height() ? img.width() : img.height();
 
     QPainter painter( &result );
