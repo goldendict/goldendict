@@ -487,7 +487,7 @@ private slots:
   void showGDHelp();
   void hideGDHelp();
 
-  void clipboardChange( QClipboard::Mode mode );
+  void clipboardChange( );
 
 signals:
   /// Set optional parts expand mode for all tabs
