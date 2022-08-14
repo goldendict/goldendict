@@ -1490,7 +1490,7 @@ void MainWindow::makeScanPopup()
   scanPopup.reset();
 
   if ( !cfg.preferences.enableScanPopup &&
-       !cfg.preferences.enableClipboardHotkey )
+       !cfg.preferences.enableClipboardHotkey && !cfg.preferences.trackClipboardChanges )
     return;
 
   scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
