@@ -43,8 +43,6 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
     QString root = reply->url().scheme() + "://" + reply->url().host();
     QString base = root + reply->url().path();
-    while( !base.isEmpty() && !base.endsWith( "/" ) )
-      base.chop( 1 );
 
     QRegularExpression baseTag( "<base\\s+.*?>",
                              QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption );
