@@ -919,11 +919,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   inspector.reset( new ArticleInspector( this ));
 
-  connect( QApplication::clipboard(), &QClipboard::changed, this, &MainWindow::clipboardChange );
+  connect( QApplication::clipboard(), &QClipboard::dataChanged, this, &MainWindow::clipboardChange );
 }
 
-void MainWindow::clipboardChange( QClipboard::Mode mode )
+void MainWindow::clipboardChange( )
 {
+  qDebug() << "clipboard change ," << cfg.preferences.trackClipboardChanges << scanPopup.get();
   if( scanPopup && cfg.preferences.trackClipboardChanges )
   {
     scanPopup->translateWordFromClipboard();
@@ -3234,6 +3235,7 @@ void MainWindow::showMainWindow()
 void MainWindow::trackingClipboard( bool on )
 {
   cfg.preferences.trackClipboardChanges = on;
+  makeScanPopup();
 }
 
 void MainWindow::visitHomepage()

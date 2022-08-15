@@ -469,12 +469,12 @@ void ScanPopup::editGroupRequested()
 
 void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 {
-  GD_DPRINTF( "translating from clipboard or selection\n" );
+  qDebug()<< "translating from clipboard or selection" ;
 
   QString subtype = "plain";
 
   QString str = QApplication::clipboard()->text( subtype, m);
-
+  qDebug() << "clipboard data:" << str;
   translateWord( str );
 }
 
