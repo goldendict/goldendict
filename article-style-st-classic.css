@@ -6,6 +6,7 @@ html {
 
 body
 {
+  background: #fefdeb;
   font-family: Tahoma, Verdana, "Lucida Sans Unicode", sans-serif;
   height: 100%;
 }
@@ -65,6 +66,7 @@ pre
   padding-top: 1px;
   margin-top: -8px;
   margin-bottom: 8px;
+  background: #fefdeb;
 /*fix for invalid blg*/
   font-style:normal;
   content-visibility: auto;

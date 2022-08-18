@@ -102,5 +102,7 @@
         <file>icons/1downarrow.svg</file>
         <file>icons/wizard-selected.svg</file>
         <file>icons/mdict-bg.png</file>
+        <file>article-style-st-classic.css</file>
+        <file>qt-style-st-classic.css</file>
     </qresource>
 </RCC>
