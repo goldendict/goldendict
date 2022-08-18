@@ -18,6 +18,7 @@ ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::Wi
 
 void ArticleInspector::setInspectPage( QWebEnginePage * page )
 {
+  qDebug() << page->lifecycleState();
   viewContainer->page()->setInspectedPage( page );
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   page->triggerAction( QWebEnginePage::InspectElement );
@@ -39,6 +40,7 @@ void ArticleInspector::setInspectPage( QWebEnginePage * page )
 
   raise();
   show();
+  qDebug() << "inspector finished";
 }
 
 void ArticleInspector::closeEvent( QCloseEvent * )
