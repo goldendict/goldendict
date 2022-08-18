@@ -1,11 +1,13 @@
 MainWindow #translateLine, ScanPopup #translateLine, MainWindow #wordList, MainWindow #dictsPane #dictsList, MainWindow #historyPane #historyList, MainWindow #favoritesPane #favoritesTree
 {
+  background: #fefdeb;
+  color: black;
 }
 
 MainWindow #translateLine[noResults="true"],
 ScanPopup #translateLine[noResults="true"]
 {
-
+  background: #febb7d;
 }
 
 #navToolbar #menuButton::menu-indicator {

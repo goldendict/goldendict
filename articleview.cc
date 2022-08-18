@@ -2374,7 +2374,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
   findText( text,
             f,
-            [ &text, this ]( bool match )
+            [ text, this ]( bool match )
             {
               bool setMark = !text.isEmpty() && !match;
 

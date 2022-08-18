@@ -4218,7 +4218,12 @@ from Stardict, Babylon and GLS dictionaries</source>
         <translation>分钟</translation>
     </message>
     <message>
-        <location filename="../preferences.cc" line="143"/>
+        <location filename="../preferences.cc" line="155"/>
+        <source>Classic</source>
+        <translation>经典</translation>
+    </message>
+    <message>
+        <location filename="../preferences.cc" line="156"/>
         <source>Modern</source>
         <translation>现代</translation>
     </message>
