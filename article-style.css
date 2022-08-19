@@ -35,8 +35,12 @@ pre
 /* Dictionary's name heading */
 .gddictname
 {
-  /*border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;*/
-  margin-top: 1.2em; margin-bottom: 9px; font-weight: bold; font-size: 14px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 0.3em;
+  padding-left: 0.5em;
   background: #def;
 }
 
