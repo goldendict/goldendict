@@ -71,8 +71,6 @@ a:hover
   padding-right: 0.3em;
   color: #4480f8;
   background: #E0E8F0;
-
-  -webkit-user-select: none;
   user-select: none;
   cursor: default;
 }

@@ -22,7 +22,6 @@ body
 
 /* Don't allow to select [] */
 :before, :after {
-  -webkit-user-select: none;
   user-select: none;
 }
 
