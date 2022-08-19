@@ -22,7 +22,6 @@ body
 
 /* Don't allow to select [] */
 :before, :after {
-  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -36,9 +35,9 @@ pre
 /* Dictionary's name heading */
 .gddictname
 {
-  border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
+  /*border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;*/
   margin-top: 1.2em; margin-bottom: 9px; font-weight: bold; font-size: 14px;
-  /*background: #ffffdd;*/
+  background: #def;
 }
 
 .gddicttitle
@@ -2908,7 +2907,8 @@ in bg url to hide it from iemac */
     width:16px;
     height:16px;
     vertical-align: text-bottom;
-    background-image:url('qrcx://localhost/icons/arrow.png');
+    background-size: contain;
+    background-image:url('qrc://localhost/icons/arrow.png');
 }
 
 .gdcollapseicon {
@@ -2916,7 +2916,8 @@ in bg url to hide it from iemac */
     width:16px;
     height:16px;
     vertical-align: text-bottom;
-    background-image:url('qrcx://localhost/icons/downarrow.png');
+    background-size: contain;
+    background-image:url('qrc://localhost/icons/downarrow.png');
 }
 
 /********** Slob dictionaries ***********/

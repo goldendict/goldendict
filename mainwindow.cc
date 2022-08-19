@@ -1656,9 +1656,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
 
-  connect( view, &ArticleView::inspectSignal,this,[this](QWebEnginePage * page){
-    inspector->setInspectPage( page );
-  });
+  connect( view, &ArticleView::inspectSignal,this,&MainWindow::inspectElement);
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -1731,6 +1729,11 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   view->installEventFilter( this );
 #endif
   return view;
+}
+
+void MainWindow::inspectElement( QWebEnginePage * page )
+{
+  inspector->setInspectPage( page );
 }
 
 void MainWindow::tabCloseRequested( int x )
