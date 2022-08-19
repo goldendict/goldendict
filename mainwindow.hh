@@ -489,6 +489,8 @@ private slots:
 
   void clipboardChange( );
 
+  void inspectElement( QWebEnginePage * );
+
 signals:
   /// Set optional parts expand mode for all tabs
   void setExpandOptionalParts( bool expand );
