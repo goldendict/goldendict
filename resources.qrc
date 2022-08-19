@@ -104,5 +104,7 @@
         <file>icons/mdict-bg.png</file>
         <file>article-style-st-classic.css</file>
         <file>qt-style-st-classic.css</file>
+        <file>icons/old-arrow.png</file>
+        <file>icons/old-downarrow.png</file>
     </qresource>
 </RCC>

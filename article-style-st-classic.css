@@ -2909,7 +2909,7 @@ in bg url to hide it from iemac */
     width:16px;
     height:16px;
     vertical-align: text-bottom;
-    background-image:url('qrcx://localhost/icons/arrow.png');
+    background-image:url('qrcx://localhost/icons/old-arrow.png');
 }
 
 .gdcollapseicon {
@@ -2917,7 +2917,7 @@ in bg url to hide it from iemac */
     width:16px;
     height:16px;
     vertical-align: text-bottom;
-    background-image:url('qrcx://localhost/icons/downarrow.png');
+    background-image:url('qrcx://localhost/icons/old-downarrow.png');
 }
 
 /********** Slob dictionaries ***********/
