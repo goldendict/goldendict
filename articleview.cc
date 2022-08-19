@@ -606,7 +606,6 @@ void ArticleView::loadFinished( bool result )
 }
 
 void ArticleView::loadProgress(int ){
-    setZoomFactor(cfg.preferences.zoomFactor);
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
