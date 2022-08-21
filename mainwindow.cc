@@ -1865,7 +1865,8 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   }
 
   int index = ui.tabWidget->indexOf( view );
-  ui.tabWidget->setTabText( index, escaped );
+  if( !escaped.isEmpty() )
+    ui.tabWidget->setTabText( index, escaped );
 
   if( index == ui.tabWidget->currentIndex() )
   {
