@@ -13,13 +13,21 @@ ArticleInspector::ArticleInspector( QWidget * parent ) : QWidget( parent, Qt::Wi
   viewContainer = new QWebEngineView( this );
   v->addWidget( viewContainer );
 
+  setInspectPage( nullptr );
   resize(800,600);
 }
 
 void ArticleInspector::setInspectPage( QWebEnginePage * page )
 {
-  qDebug() << page->lifecycleState();
   viewContainer->page()->setInspectedPage( page );
+
+  if( !page )
+  {
+    qDebug() << "set inspected page to nullptr";
+    return;
+  }
+
+  qDebug() << page->lifecycleState();
 #if( QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 ) )
   page->triggerAction( QWebEnginePage::InspectElement );
 #else
