@@ -91,6 +91,9 @@ public slots:
 
   void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp )
   { articleView.onJsActiveArticleChanged( id, currentArticleTimestamp ); }
+
+  void onJsFirstLeftButtonMouseDown()
+  { articleView.onJsFirstLeftButtonMouseDown(); }
 #endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
@@ -337,6 +340,45 @@ QWebEngineScript createPageReloadingScript()
 
 } // unnamed namespace
 
+#ifndef USE_QTWEBKIT
+class ArticleView::MouseEventInfo
+{
+public:
+  void assign( QObject * target_, QMouseEvent const & event )
+  {
+    Q_ASSERT( target_ );
+
+    target = target_;
+    localPos = event.localPos();
+    windowPos = event.windowPos();
+    screenPos = event.screenPos();
+    buttons = event.buttons();
+    modifiers = event.modifiers();
+  }
+
+  void invalidate()
+  { target = nullptr; }
+
+  bool isValid() const
+  { return target != nullptr; }
+
+  void synthesize( QEvent::Type type, Qt::MouseButton button ) const
+  {
+    QMouseEvent event( type, localPos, windowPos, screenPos, button, buttons, modifiers,
+                       Qt::MouseEventSynthesizedByApplication );
+    QApplication::sendEvent( target, &event );
+  }
+
+private:
+  QObject * target = nullptr;
+  QPointF localPos;
+  QPointF windowPos;
+  QPointF screenPos;
+  Qt::MouseButtons buttons;
+  Qt::KeyboardModifiers modifiers;
+};
+#endif
+
 QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
 {
   Q_ASSERT( !isScrollTo( dictionaryId ) );
@@ -379,7 +421,9 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ArticleWebPage * const webPage = new ArticleWebPage( ui.definition );
   ui.definition->setPage( webPage );
+#ifdef USE_QTWEBKIT
   ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
+#endif
 
   goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
   ui.definition->addAction( &goBackAction );
@@ -450,14 +494,14 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
            this, SLOT( linkClicked( QUrl const & ) ) );
 
 #ifdef USE_QTWEBKIT
+  connect( ui.definition, SIGNAL( doubleClicked( QPoint ) ), this, SLOT( doubleClicked( QPoint ) ) );
+
   connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &, const QString &, const QString & ) ),
            this, SLOT( linkHovered ( const QString &, const QString &, const QString & ) ) );
 #else
   connect( ui.definition->page(), &QWebEnginePage::linkHovered,
            this, [ this ]( QString const & url ) { linkHovered( url ); } );
 #endif
-
-  connect( ui.definition, SIGNAL( doubleClicked( QPoint ) ),this,SLOT( doubleClicked( QPoint ) ) );
 
   pasteAction.setShortcut( QKeySequence::Paste  );
   ui.definition->addAction( &pasteAction );
@@ -491,7 +535,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &inspectAction );
   connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
+#ifdef USE_QTWEBKIT
   ui.definition->installEventFilter( this );
+#else
+  ui.definition->setEventFilter( this );
+#endif
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
@@ -1254,13 +1302,32 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
     return true;
   }
 
-  if ( obj == ui.definition )
-  {
-    // TODO (Qt WebEngine): the code in this block does not work because of QTBUG-43602.
-    // Move this code into ArticleWebView, emit signals from there, connect ArticleView's slots to them.
+#ifdef USE_QTWEBKIT
+  if ( obj != ui.definition )
+#else
+  if( !ui.definition->isWatched( obj ) )
+#endif
+    return QFrame::eventFilter( obj, ev );
 
-    if ( ev->type() == QEvent::MouseButtonPress ) {
+  switch( ev->type() )
+  {
+    case QEvent::MouseButtonPress:
+    {
       QMouseEvent * event = static_cast< QMouseEvent * >( ev );
+
+#ifndef USE_QTWEBKIT
+      if( lastLeftMouseButtonPressEvent && event->button() == Qt::LeftButton
+          // Don't store events synthesized by this class to prevent recursion.
+          && event->source() != Qt::MouseEventSynthesizedByApplication )
+      {
+        // "Select word by single click" option is on. A double click must be generated to select the word
+        // under cursor. But if this click is on a scrollbar, generating a double click prevents dragging it.
+        // We cannot determine if the click is on a scrollbar here. Store the event away; generate a double
+        // click once the JavaScript side confirms this is a click on the page proper, not on its scrollbar.
+        lastLeftMouseButtonPressEvent->assign( obj, *event );
+      }
+#endif
+
       if ( event->button() == Qt::XButton1 ) {
         back();
         return true;
@@ -1269,10 +1336,47 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         forward();
         return true;
       }
+
+      break;
     }
-    else
-    if ( ev->type() == QEvent::KeyPress )
+#ifndef USE_QTWEBKIT
+    case QEvent::MouseButtonDblClick:
     {
+      auto * const event = static_cast< QMouseEvent * >( ev );
+      if( lastLeftMouseButtonPressEvent && event->button() == Qt::LeftButton )
+      {
+        if( lastLeftMouseButtonPressEvent->isValid() )
+        {
+          // This means a double click on a scrollbar or a timing issue. In any case, now that a non-synthesized
+          // double click has occurred, synthesizing another one makes no sense => invalidate the stored event.
+          lastLeftMouseButtonPressEvent->invalidate();
+        }
+        else
+        {
+          // A synthesized double click has already selected a word after the first click.
+          // The web page treats a second non-synthesized click as a separate first click.
+          // Filter it out to prevent immediate deselection of the word.
+          return true;
+        }
+      }
+      break;
+    }
+    case QEvent::MouseButtonRelease:
+      // In the Qt WebEngine version, ArticleWebPage::linkClicked() is emitted several milliseconds after the mouse
+      // button release event, so the Qt WebKit version's ArticleWebView::isMidButtonPressed() approach does not work.
+      // Resort to the following hack: on events that can activate a link, set isNavigationByMiddleMouseButton to true
+      // in the case of the middle mouse button release, to false otherwise.
+      isNavigationByMiddleMouseButton = static_cast< QMouseEvent * >( ev )->button() == Qt::MiddleButton;
+      break;
+#endif // USE_QTWEBKIT
+    case QEvent::KeyPress:
+    {
+#ifndef USE_QTWEBKIT
+      // Once a link is focused with [Shift+]Tab key presses, pressing a Return/Enter key activates it.
+      // The last released mouse button must not affect whether the link is opened in a new tab then.
+      isNavigationByMiddleMouseButton = false;
+#endif
+
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
       if ( keyEvent->modifiers() &
@@ -1294,10 +1398,12 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         emit typingEvent( text );
         return true;
       }
+
+      break;
     }
+    default:
+      break;
   }
-  else
-    return QFrame::eventFilter( obj, ev );
 
   return false;
 }
@@ -1438,13 +1544,14 @@ void ArticleView::linkClicked( QUrl const & url_ )
 
 #ifdef USE_QTWEBKIT
   tryMangleWebsiteClickedUrl( url, contexts );
+  bool const isNavigationByMiddleMouseButton = ui.definition->isMidButtonPressed();
 #endif
 
   if ( !popupView &&
-       ( ui.definition->isMidButtonPressed() ||
+       ( isNavigationByMiddleMouseButton ||
          ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
   {
-    // Mid button or Control/Shift is currently pressed - open the link in new tab
+    // The link was middle-button-clicked or Control/Shift is currently pressed => open the link in a new tab.
     emit openLinkInNewTab( url, ui.definition->url(), currentArticle, contexts );
   }
   else
@@ -1986,7 +2093,17 @@ bool ArticleView::canGoForward() const
 
 void ArticleView::setSelectionBySingleClick( bool set )
 {
+#ifdef USE_QTWEBKIT
   ui.definition->setSelectionBySingleClick( set );
+#else
+  if( set )
+  {
+    if( !lastLeftMouseButtonPressEvent )
+      lastLeftMouseButtonPressEvent.reset( new MouseEventInfo{} );
+  }
+  else
+    lastLeftMouseButtonPressEvent.reset();
+#endif
 }
 
 void ArticleView::back()
@@ -2677,7 +2794,33 @@ void ArticleView::onJsPageInitFinished()
   // is emitted before gdArticleView becomes available (rarely, but happens). Calling it here works well.
   loadFinished( true );
 }
-#endif
+
+void ArticleView::onJsFirstLeftButtonMouseDown()
+{
+  if( !lastLeftMouseButtonPressEvent || !lastLeftMouseButtonPressEvent->isValid() )
+    return; // "Select word by single click" option is off or this is a synthesized mousedown event => nothing to do.
+
+  // The JavaScript mousedown event that invoked this function must represent the same user action as the stored
+  // lastLeftMouseButtonPressEvent. Generate a double click with the stored event's data.
+
+  // When "Select word by single click" option is on and more than one word is selected, clicking on one of the selected
+  // words reduces the selection to this single word in the Qt WebKit version. In the Qt WebEngine version clicking on
+  // one of the selected words has no effect. So the user has to click outside a selection to modify it. If the entire
+  // page is selected (e.g. after the Select All action is triggered), the user can resort to a middle mouse button
+  // click or press the left mouse button, move the cursor, then release the button.
+  // This selection issue can we worked around by sending an additional mouse release event, but then links are
+  // activated on left mouse button press rather than release, which is a worse bug.
+
+  // Even though a non-synthesized first MouseButtonPress event occurred just a few milliseconds ago, the web page
+  // treats a synthesized MouseButtonPress or MouseButtonDblClick event as a separate first click. Synthesize two
+  // identical events to generate a double click and select the word under cursor.
+  for( int i = 0; i < 2; ++i )
+    lastLeftMouseButtonPressEvent->synthesize( QEvent::MouseButtonPress, Qt::LeftButton );
+
+  // This stored event has served its purpose. Prevent recursion by invalidating it.
+  lastLeftMouseButtonPressEvent->invalidate();
+}
+#endif // USE_QTWEBKIT
 
 void ArticleView::onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
 {

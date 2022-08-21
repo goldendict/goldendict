@@ -179,3 +179,8 @@ function gdOnCppActiveArticleChanged(articleId, moveToIt, pageTimestampString, c
 
     gdOnCppActiveArticleChangedNoTimestamps(articleId, moveToIt);
 }
+
+function gdBodyMouseDown(event) {
+    if (gdArticleView && event.button === 0 && event.detail === 1)
+        gdArticleView.onJsFirstLeftButtonMouseDown();
+}

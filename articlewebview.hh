@@ -4,18 +4,14 @@
 #ifndef __ARTICLEWEBVIEW_HH_INCLUDED__
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
-#include "config.hh"
-#include "webkit_or_webengine.hh"
-
 #ifdef USE_QTWEBKIT
+
+#include "config.hh"
+#include <QWebView>
+
 class ArticleInspector;
-#endif
 
-// TODO (Qt WebEngine): this class is pretty useless in the Qt WebEngine version right now
-// because of QTBUG-43602 - it receives no mouse events. Will have to set an event filter
-// on QWidget children of QWebEngineView and handle the mouse events.
-
-/// A thin wrapper around WebView to accommodate to some ArticleView's needs.
+/// A thin wrapper around QWebView to accommodate to some ArticleView's needs.
 /// Currently the only added features:
 /// 1. Ability to know if the middle mouse button is pressed or not according
 ///    to the view's current state. This is used to open links in new tabs when
@@ -23,7 +19,7 @@ class ArticleInspector;
 ///    get double-click events after the fact with the doubleClicked() signal.
 /// 2. Manage our own QWebInspector instance. In order to show inspector correctly,
 ///    use triggerPageAction( QWebPage::InspectElement ) instead.
-class ArticleWebView: public WebView
+class ArticleWebView: public QWebView
 {
   Q_OBJECT
 
@@ -39,9 +35,7 @@ public:
   void setSelectionBySingleClick( bool set )
   { selectionBySingleClick = set; }
 
-#ifdef USE_QTWEBKIT
   void triggerPageAction( QWebPage::WebAction action, bool checked = false );
-#endif
 
 signals:
 
@@ -53,27 +47,51 @@ signals:
 
 protected:
 
-#ifdef USE_QTWEBKIT
   bool event( QEvent * event );
-#endif
   void mousePressEvent( QMouseEvent * event );
   void mouseReleaseEvent( QMouseEvent * event );
   void mouseDoubleClickEvent( QMouseEvent * event );
-#ifdef USE_QTWEBKIT
   void focusInEvent( QFocusEvent * event );
   void wheelEvent( QWheelEvent * event );
-#endif
 
 private:
 
   Config::Class * cfg;
-#ifdef USE_QTWEBKIT
   ArticleInspector * inspector;
-#endif
 
   bool midButtonPressed;
   bool selectionBySingleClick;
   bool showInspectorDirectly;
 };
 
-#endif
+#else // USE_QTWEBKIT
+
+#include <QWebEngineView>
+
+/// A thin wrapper around QWebEngineView that works around QTBUG-43602 by installing
+/// an event filter on the widget child of QWebEngineView, which swallows mouse events.
+/// In the Qt WebEngine version, ArticleView implements most features ArticleWebView provides in the Qt WebKit version.
+class ArticleWebView: public QWebEngineView
+{
+  Q_OBJECT
+public:
+  using QWebEngineView::QWebEngineView;
+
+  /// This function supersedes installEventFilter(), which doesn't work as expected because of QTBUG-43602.
+  /// Call this function once and immediately after constructing this view. Otherwise, it will have no effect.
+  /// Removing or replacing the event filter is currently unneeded and thus unsupported.
+  void setEventFilter( QObject * filterObject );
+
+  /// @return whether the argument to a timely setEventFilter() call was installed as event filter on @p object.
+  bool isWatched( QObject * object ) const;
+
+protected:
+  void childEvent( QChildEvent * event ) override;
+
+private:
+  QObject * eventFilterObject = nullptr;
+};
+
+#endif // USE_QTWEBKIT
+
+#endif // __ARTICLEWEBVIEW_HH_INCLUDED__

@@ -19,6 +19,7 @@
 #include <QWebView>
 #else
 #include <QDateTime>
+#include <memory>
 
 class QWebEngineFindTextResult;
 #endif
@@ -81,6 +82,12 @@ class ArticleView: public QFrame
   bool isBlankPagePresentInWebHistory = false;
   // The API necessary to implement Search-in-page status is not available in Qt WebKit.
   bool skipNextFindTextUiStatusUpdate = false;
+
+  // In the Qt WebKit version ArticleWebView implements the functionality of the following data members.
+  bool isNavigationByMiddleMouseButton = false;
+  class MouseEventInfo;
+  /// @invariant This event info is non-null if and only if "Select word by single click" option is on.
+  std::unique_ptr< MouseEventInfo > lastLeftMouseButtonPressEvent;
 #endif
 
   /// Any resource we've decided to download off the dictionary gets stored here.
@@ -386,6 +393,10 @@ private:
   void onJsPageInitFinished();
 
   void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp_ );
+
+  /// Is called on mousedown JavaScript event if it is triggered by the left mouse button and
+  /// the event starts a first click (not a second or a third click in a double- or triple-click).
+  void onJsFirstLeftButtonMouseDown();
 #endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive );

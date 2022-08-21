@@ -328,7 +328,14 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   if ( icon.size() )
     result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
-  result += "</head><body>";
+  result += "</head><body"
+#ifndef USE_QTWEBKIT
+  // Qt WebEngine API does not provide a way to check whether a mouse click occurs on a page
+  // proper or on its scrollbar. We are only interested in clicks on the page contents
+  // within <body>. Listen to such mouse events and send messages from JavaScript to C++.
+            " onMouseDown='gdBodyMouseDown(event);'"
+#endif
+            ">";
 
   return result;
 }
