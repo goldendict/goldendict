@@ -106,5 +106,6 @@
         <file>qt-style-st-classic.css</file>
         <file>icons/old-arrow.png</file>
         <file>icons/old-downarrow.png</file>
+        <file>qt-style-st-lingoes.css</file>
     </qresource>
 </RCC>
