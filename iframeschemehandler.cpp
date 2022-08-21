@@ -20,9 +20,6 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   auto finishAction     = [ = ]() -> void
   {
     QByteArray contentType = "text/html;charset=UTF-8";
-    auto contentTypeHeader = reply->header( QNetworkRequest::ContentTypeHeader );
-    if( contentTypeHeader.isValid() )
-      contentType = contentTypeHeader.toByteArray();
 
     QBuffer * buffer = new QBuffer( requestJob );
     // Handle reply data

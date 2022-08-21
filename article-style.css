@@ -42,6 +42,7 @@ pre
   padding: 0.3em;
   padding-left: 0.5em;
   background: #def;
+  user-select: none;
 }
 
 .gddicttitle
