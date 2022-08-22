@@ -32,7 +32,7 @@ jobs:
         qt_arch: [win64_msvc2019_64]
     env:
       targetName: GoldenDict.exe
-      version: 22.7.24
+      version: 22.8.24
       version-suffix: alpha
       prerelease: true
     # 步骤
