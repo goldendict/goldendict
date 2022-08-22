@@ -29,8 +29,8 @@ jobs:
 
     env:
       targetName: GoldenDict.exe
-      version: 22.7.23
-      version-suffix: GreatHeat
+      version: 22.8.23
+      version-suffix: EndOfHeat
       prerelease: false
     steps:
       - uses: actions/setup-python@v3

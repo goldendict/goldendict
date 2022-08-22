@@ -30,8 +30,8 @@ jobs:
         qt_ver: [6.3.1]
         qt_arch: [gcc_64]
     env:
-      version: 22.7.23
-      version-suffix: GreatHeat
+      version: 22.8.23
+      version-suffix: EndOfHeat
       prerelease: false
     steps:
       - name: Install Qt
