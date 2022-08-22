@@ -90,7 +90,8 @@ win32 {
     TARGET = GoldenDict
 
     win32-msvc* {
-        VERSION = 22.8.24 # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
+        # VS does not recognize 22.number.alpha,cause errors during compilation under MSVC++
+        VERSION = 22.8.24 
         DEFINES += __WIN32 _CRT_SECURE_NO_WARNINGS
         contains(QMAKE_TARGET.arch, x86_64) {
             DEFINES += NOMINMAX __WIN64
