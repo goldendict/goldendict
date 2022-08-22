@@ -469,12 +469,12 @@ void ScanPopup::editGroupRequested()
 
 void ScanPopup::translateWordFromClipboard(QClipboard::Mode m)
 {
-  GD_DPRINTF( "translating from clipboard or selection\n" );
+  qDebug()<< "translating from clipboard or selection" ;
 
   QString subtype = "plain";
 
   QString str = QApplication::clipboard()->text( subtype, m);
-
+  qDebug() << "clipboard data:" << str;
   translateWord( str );
 }
 
@@ -514,14 +514,6 @@ void ScanPopup::delayShow()
 
 void ScanPopup::clipboardChanged( QClipboard::Mode m )
 {
-  if( cfg.preferences.trackClipboardChanges )
-  {
-    QString subtype = "plain";
-
-    handleInputWord( QApplication::clipboard()->text( subtype, m ) );
-    return;
-  }
-
   if( !isScanningEnabled )
     return;
 

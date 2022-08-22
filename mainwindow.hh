@@ -82,7 +82,7 @@ private:
 
   QSystemTrayIcon * trayIcon;
 
-  QPointer< ArticleInspector > inspector;
+  QScopedPointer< ArticleInspector > inspector;
 
   WebUrlRequestInterceptor *wuri;
 
@@ -486,6 +486,10 @@ private slots:
 
   void showGDHelp();
   void hideGDHelp();
+
+  void clipboardChange( );
+
+  void inspectElement( QWebEnginePage * );
 
 signals:
   /// Set optional parts expand mode for all tabs

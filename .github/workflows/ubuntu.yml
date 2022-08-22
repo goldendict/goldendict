@@ -35,7 +35,7 @@ jobs:
       prerelease: false
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: xiaoyifang/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           cached: 'false'
@@ -61,7 +61,7 @@ jobs:
 
       - name: build goldendict
         run: |
-          qmake CONFIG+=release PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
+          qmake CONFIG+=release CONFIG+=no_extra_tiff_handler PREFIX=/usr   CONFIG+=zim_support   CONFIG+=chinese_conversion_support
           make INSTALL_ROOT=appdir -j`nproc` install; find appdir/
 
           #copy missing shared dll to appdir.
@@ -114,7 +114,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.vars.outputs.appname }}
-          asset_name: ${{ matrix.qt_ver }}-${{ steps.vars.outputs.appname }}
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{steps.vars.outputs.release_date}}.AppImage
           tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
@@ -134,6 +134,7 @@ jobs:
                                   Qt5.15.2(Intel Kind)
             auto built by github action. use on your on risk:-)  
 
+            Filename pattern: **[Qt version]-GoldenDict-[OS]-[release-date].[ext]**
             CHANGES:
             ${{ steps.changelog1.outputs.changelog }}  
             ${{ steps.changelog2.outputs.COMMIT_SUMMARY }}                

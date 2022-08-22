@@ -61,7 +61,6 @@ private:
   QList< QAction * > dictActions;
   QAction * maxDictionaryRefsAction;
 
-  bool use14x21;
   int timerId;
 
   virtual bool eventFilter( QObject *, QEvent * );

@@ -435,8 +435,8 @@ void MdxDictionary::doDeferredInit()
         idx.read( &buf.front(), sz );
         uint32_t btreeMaxElements = idx.read<uint32_t>();
         uint32_t rootOffset = idx.read<uint32_t>();
-        mddFileNames.push_back( string( &buf.front() ) );
-        mddIndexInfos.push_back( IndexInfo( btreeMaxElements, rootOffset ) );
+        mddFileNames.emplace_back(&buf.front());
+        mddIndexInfos.emplace_back(btreeMaxElements, rootOffset);
       }
 
       vector< string > const dictFiles = getDictionaryFilenames();
@@ -900,8 +900,9 @@ void MdxDictionary::loadIcon() noexcept
 
   // Remove the extension
   fileName.chop( 3 );
+  QString text = QString::fromStdString( dictionaryName );
 
-  if ( !loadIconFromFile( fileName ) )
+  if( !loadIconFromFile( fileName ) && !loadIconFromText( text ) )
   {
     // Use default icons
     dictionaryIcon = dictionaryNativeIcon = QIcon( ":/icons/mdict.png" );
@@ -1440,9 +1441,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries( vector< string > const & f
       MdictParser::HeadWordIndex headWordIndex;
 
       // enumerating word and its definition
-      if ( parser.readNextHeadWordIndex( headWordIndex ) )
+      while ( parser.readNextHeadWordIndex( headWordIndex ) )
       {
-        parser.readRecordBlock( headWordIndex, articleHandler, true);
+        parser.readRecordBlock( headWordIndex, articleHandler );
       }
 
       // enumerating resources if there's any

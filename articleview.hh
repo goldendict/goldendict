@@ -290,7 +290,7 @@ signals:
   ///  signal finished javascript;
   void notifyJavascriptFinished();
 
-  void inspectSignal(QWebEngineView * view);
+  void inspectSignal(QWebEnginePage * page);
 
   void saveBookmarkSignal( const QString & bookmark );
 
@@ -361,9 +361,6 @@ private slots:
 
   /// Copy current selection as plain text
   void copyAsText();
-
-  /// Inspect element
-  void inspect();
 
   void setActiveDictIds(ActiveDictIds);
 

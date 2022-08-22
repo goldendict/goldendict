@@ -20,9 +20,6 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   auto finishAction     = [ = ]() -> void
   {
     QByteArray contentType = "text/html;charset=UTF-8";
-    auto contentTypeHeader = reply->header( QNetworkRequest::ContentTypeHeader );
-    if( contentTypeHeader.isValid() )
-      contentType = contentTypeHeader.toByteArray();
 
     QBuffer * buffer = new QBuffer( requestJob );
     // Handle reply data
@@ -43,8 +40,6 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
     QString root = reply->url().scheme() + "://" + reply->url().host();
     QString base = root + reply->url().path();
-    while( !base.isEmpty() && !base.endsWith( "/" ) )
-      base.chop( 1 );
 
     QRegularExpression baseTag( "<base\\s+.*?>",
                              QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption );
@@ -55,12 +50,18 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     articleString.remove( baseTag ) ;
 
     QRegularExpression headTag( "<head\\b.*?>",
-                             QRegularExpression::CaseInsensitiveOption
-                               | QRegularExpression::DotMatchesEverythingOption );
+                                QRegularExpression::CaseInsensitiveOption
+                                  | QRegularExpression::DotMatchesEverythingOption );
     auto match = headTag.match( articleString, 0 );
     if( match.hasMatch() )
     {
       articleString.insert( match.capturedEnd(), baseTagHtml );
+    }
+    else
+    {
+      // the html contain no head element
+      // just insert at the beginning of the html ,and leave it at the mercy of browser(chrome webengine)
+      articleString.insert( 0, baseTagHtml );
     }
 
     buffer->setData(codec->fromUnicode(articleString));

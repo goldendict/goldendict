@@ -27,8 +27,6 @@ MainWindow #historyPane #historyList, MainWindow #favoritesPane #favoritesTree
 /* remove the main toolbar handle */
 #navToolbar::handle, #dictionaryBar::handle {
   image: none;
-  width:  0px;
-  margin-left: 1px;
 }
 
 #navToolbar #scanPopupButton {

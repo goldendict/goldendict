@@ -39,12 +39,11 @@ jobs:
         with:
           python-version: '3.9'
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: xiaoyifang/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           # target: ${{ matrix.qt_target }}
           arch: ${{ matrix.qt_arch }}
-          cached: 'false'
           modules: qtwebengine qtwebchannel qtpositioning qt5compat qtmultimedia qtimageformats
           setup-python: 'false'
           py7zrversion: '==0.18.1'
@@ -125,7 +124,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.package.outputs.packageName }}.zip
-          asset_name: ${{ matrix.qt_ver }}-${{ steps.package.outputs.packageName }}.zip
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{steps.vars.outputs.release_date}}.zip
           tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
@@ -142,6 +141,7 @@ jobs:
                                   Qt5.15.2(Intel Kind)
             auto built by github action. use on your on risk:-)
 
+            Filename pattern: **[Qt version]-GoldenDict-[OS]-[release-date].[ext]**
             CHANGES:
             ${{ steps.changelog1.outputs.changelog }}  
             ${{ steps.changelog2.outputs.COMMIT_SUMMARY }}            

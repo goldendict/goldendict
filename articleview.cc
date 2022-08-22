@@ -528,14 +528,25 @@ void ArticleView::showAnticipation()
 
 void ArticleView::inspectElement()
 {
-  emit inspectSignal( ui.definition );
+  emit inspectSignal( ui.definition->page() );
 }
 
 void ArticleView::loadFinished( bool result )
 {
   setZoomFactor( cfg.preferences.zoomFactor );
   QUrl url = ui.definition->url();
-  qDebug() << "article view loaded url:" << url.url().left( 200 );
+  qDebug() << "article view loaded url:" << url.url().left( 200 ) << result;
+  
+  if( url.url() == "about:blank" )
+  {
+    return;
+  }
+
+  if( !result )
+  {
+    qWarning() << "article loaded unsuccessful"; 
+    return;
+  }
 
   if( cfg.preferences.autoScrollToTargetArticle )
   {
@@ -595,7 +606,6 @@ void ArticleView::loadFinished( bool result )
 }
 
 void ArticleView::loadProgress(int ){
-    setZoomFactor(cfg.preferences.zoomFactor);
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -2363,7 +2373,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
   findText( text,
             f,
-            [ &text, this ]( bool match )
+            [ text, this ]( bool match )
             {
               bool setMark = !text.isEmpty() && !match;
 
@@ -2479,11 +2489,6 @@ void ArticleView::copyAsText()
   QString text = ui.definition->selectedText();
   if( !text.isEmpty() )
     QApplication::clipboard()->setText( text );
-}
-
-void ArticleView::inspect()
-{
-  ui.definition->triggerPageAction( QWebEnginePage::InspectElement );
 }
 
 void ArticleView::highlightFTSResults()

@@ -835,7 +835,7 @@ vector< WordArticleLink > BtreeIndex::readChain( char const * & ptr )
 
     ptr += sizeof( uint32_t );
 
-    result.push_back( WordArticleLink( str, articleOffset, prefix ) );
+    result.emplace_back(str, articleOffset, prefix);
 
     if ( chainSize < str.size() + 1 + prefix.size() + 1 + sizeof( uint32_t ) )
       throw exCorruptedChainData();
@@ -1100,7 +1100,7 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
 
                 string utfWord=Utf8::encode( wstring(wordBegin, wordSize )) ;
                   string utfPrefix;
-                  i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
+                  i->second.emplace_back(utfWord, articleOffset, utfPrefix);
               }
           }
           return;
@@ -1112,16 +1112,21 @@ void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsign
 
     // Insert this word
     wstring folded = Folding::apply( nextChar );
+    auto name      = Utf8::encode( folded );
 
-    iterator i = insert( { Utf8::encode( folded ), vector< WordArticleLink >() } ).first;
+    iterator i = insert( { std::move(name), vector< WordArticleLink >() } ).first;
 
     if( ( i->second.size() < 1024 ) || ( nextChar == wordBegin ) ) // Don't overpopulate chains with middle matches
     {
       string utfWord = Utf8::encode( wstring( nextChar, wordSize - ( nextChar - wordBegin ) ) );
-
       string utfPrefix = Utf8::encode( wstring( wordBegin, nextChar - wordBegin ) );
 
-      i->second.push_back( WordArticleLink( utfWord, articleOffset, utfPrefix ) );
+      i->second.emplace_back(std::move(utfWord), articleOffset, std::move(utfPrefix));
+      // reduce the vector reallocation.
+      if( i->second.size() * 1.0 / i->second.capacity() > 0.75 )
+      {
+        i->second.reserve( i->second.capacity() * 2 );
+      }
     }
 
     wordsAdded += 1;
@@ -1143,8 +1148,7 @@ void IndexedWords::addSingleWord( wstring const & word, uint32_t articleOffset )
   wstring folded = Folding::apply( word );
   if( folded.empty() )
       folded = Folding::applyWhitespaceOnly( word );
-  operator []( Utf8::encode( folded ) ).push_back(
-    WordArticleLink( Utf8::encode( word ), articleOffset ) );
+  operator []( Utf8::encode( folded ) ).emplace_back(Utf8::encode( word ), articleOffset);
 }
 
 IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )

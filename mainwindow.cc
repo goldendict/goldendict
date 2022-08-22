@@ -411,7 +411,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   actTrackingClipboard = trayIconMenu.addAction( tr( "Tracking Clipboard" ) );
   actTrackingClipboard->setCheckable(true);
   actTrackingClipboard->setChecked(cfg.preferences.trackClipboardChanges);
-  actTrackingClipboard->setVisible( cfg.preferences.enableScanPopup );
+//  actTrackingClipboard->setVisible( cfg.preferences.enableScanPopup );
   connect( actTrackingClipboard , SIGNAL( triggered(bool) ),
            this, SLOT( trackingClipboard(bool) ) );
   trayIconMenu.addSeparator();
@@ -917,7 +917,18 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     navForward->setIcon( QIcon( ":/icons/previous.svg" ) );
   }
 
-  inspector = new ArticleInspector( this );
+  inspector.reset( new ArticleInspector( this ));
+
+  connect( QApplication::clipboard(), &QClipboard::dataChanged, this, &MainWindow::clipboardChange );
+}
+
+void MainWindow::clipboardChange( )
+{
+  qDebug() << "clipboard change ," << cfg.preferences.trackClipboardChanges << scanPopup.get();
+  if( scanPopup && cfg.preferences.trackClipboardChanges )
+  {
+    scanPopup->translateWordFromClipboard();
+  }
 }
 
 void MainWindow::ctrlTabPressed()
@@ -1480,7 +1491,7 @@ void MainWindow::makeScanPopup()
   scanPopup.reset();
 
   if ( !cfg.preferences.enableScanPopup &&
-       !cfg.preferences.enableClipboardHotkey )
+       !cfg.preferences.enableClipboardHotkey && !cfg.preferences.trackClipboardChanges )
     return;
 
   scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
@@ -1645,12 +1656,7 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         dictionaryBar.toggleViewAction(),
                                         groupList );
 
-  connect( view, &ArticleView::inspectSignal,this,[this](QWebEngineView * view){
-    if( !inspector ){
-      inspector = new ArticleInspector( this );
-    }
-    inspector->setInspectPage( view );
-  });
+  connect( view, &ArticleView::inspectSignal,this,&MainWindow::inspectElement);
 
   connect( view, SIGNAL( titleChanged(  ArticleView *, QString const & ) ),
            this, SLOT( titleChanged(  ArticleView *, QString const & ) ) );
@@ -1719,10 +1725,17 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   view->setZoomFactor( cfg.preferences.zoomFactor );
 
+  view->showDefinition( "about:blank", Instances::Group::HelpGroupId );
+
 #ifdef Q_OS_WIN32
   view->installEventFilter( this );
 #endif
   return view;
+}
+
+void MainWindow::inspectElement( QWebEnginePage * page )
+{
+  inspector->setInspectPage( page );
 }
 
 void MainWindow::tabCloseRequested( int x )
@@ -1853,21 +1866,26 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
     escaped.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
   }
 
-  ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
+  int index = ui.tabWidget->indexOf( view );
+  if( !escaped.isEmpty() )
+    ui.tabWidget->setTabText( index, escaped );
 
-  // Set icon for "Add to Favorites" action
-  if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+  if( index == ui.tabWidget->currentIndex() )
   {
-    addToFavorites->setIcon( blueStarIcon );
-    addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
-  }
-  else
-  {
-    addToFavorites->setIcon( starIcon );
-    addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
-  }
+    // Set icon for "Add to Favorites" action
+    if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+    {
+      addToFavorites->setIcon( blueStarIcon );
+      addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+    }
+    else
+    {
+      addToFavorites->setIcon( starIcon );
+      addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
+    }
 
-  updateWindowTitle();
+    updateWindowTitle();
+  }
 }
 
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
@@ -3223,6 +3241,7 @@ void MainWindow::showMainWindow()
 void MainWindow::trackingClipboard( bool on )
 {
   cfg.preferences.trackClipboardChanges = on;
+  makeScanPopup();
 }
 
 void MainWindow::visitHomepage()

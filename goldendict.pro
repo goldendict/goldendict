@@ -226,7 +226,6 @@ mac {
                       mkdir -p GoldenDict.app/Contents/MacOS/help && \
                       cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
-    CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
         QMAKE_POST_LINK += && mkdir -p GoldenDict.app/Contents/MacOS/opencc && \

@@ -267,6 +267,10 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeDefinitionFor(
 #endif
   ).toUtf8().data();
     }
+    else if( phrase.phrase == "about:blank"){
+      //blank content
+      return makeEmptyPage();
+    }
     else
     {
       // Not found

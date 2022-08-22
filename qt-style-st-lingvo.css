@@ -2,4 +2,5 @@ MainWindow #translateLine, ScanPopup #translateLine, MainWindow #wordList, MainW
 MainWindow #historyPane #historyList, MainWindow #favoritesPane #favoritesTree
 {
   background: white;
+  color: black;
 }

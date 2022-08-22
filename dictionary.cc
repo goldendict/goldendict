@@ -18,8 +18,6 @@
 #include <QCryptographicHash>
 #include <QDateTime>
 #include "fsencoding.hh"
-#include "langcoder.hh"
-
 #include <QImage>
 #include <QPainter>
 #include <QRegularExpression>
@@ -244,11 +242,12 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
       // Load successful
 
       //some icon is very large ,will crash the application.
-      img = img.scaledToWidth( 48 );
+      img = img.scaledToWidth( 64 );
       // Apply the color key
-
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
       img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
                                                     Qt::MaskOutColor ) );
+#endif
 
       dictionaryNativeIcon = QIcon( QPixmap::fromImage( img ));
 
@@ -272,6 +271,73 @@ bool Class::loadIconFromFile( QString const & _filename, bool isFullName )
     }
   }
   return false;
+}
+
+bool Class::loadIconFromText( QString const & text )
+{
+  if( text.isEmpty() )
+    return false;
+  QImage img( ":/icons/mdict-bg.png" );
+
+  if ( !img.isNull() )
+  {
+    int iconSize = 64;
+    //some icon is very large ,will crash the application.
+    img = img.scaledToWidth( iconSize );
+    QImage result( iconSize, iconSize, QImage::Format_ARGB32 );
+    result.fill( 0 ); // Black transparent
+    int max = img.width() > img.height() ? img.width() : img.height();
+
+    QPainter painter( &result );
+    painter.setRenderHint(QPainter::RenderHint::Antialiasing);
+    painter.drawImage( QPoint( img.width() == max ? 0 : ( max - img.width() ) / 2,
+                               img.height() == max ? 0 : ( max - img.height() ) / 2 ),
+                       img );
+    painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+
+    QFont font = painter.font();
+    //the text should be a little smaller than the icon
+    font.setPixelSize( iconSize * 0.6 );
+    font.setWeight( QFont::Black );
+    painter.setFont( font );
+
+    const QRect rectangle = QRect( 0, 0, iconSize, iconSize );
+
+         //select a single char.
+    auto abbrName = getAbbrName( text );
+
+    painter.drawText( rectangle, Qt::AlignCenter, abbrName);
+
+    painter.end();
+
+    dictionaryNativeIcon = dictionaryIcon = QIcon( QPixmap::fromImage( result ) );
+
+    return !dictionaryIcon.isNull();
+  }
+  return false;
+}
+
+QString Class::getAbbrName( QString const & text )
+{
+  if(text.isEmpty())
+    return QString();
+  //remove whitespace
+  QString simplified = text;
+  simplified.remove(QRegularExpression("\\s"));
+  int index = qHash( simplified ) % simplified.size();
+
+  QString abbrName;
+  if( !Utils::isCJKChar( simplified.at( index ).unicode() ) )
+  {
+    // take two chars.
+    abbrName = simplified.mid( index, 2 );
+  }
+  else
+  {
+    abbrName = simplified.mid( index, 1 );
+  }
+
+  return abbrName;
 }
 
 void Class::isolateCSS( QString & css, QString const & wrapperSelector )

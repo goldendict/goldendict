@@ -45,7 +45,7 @@ jobs:
         with:
           python-version: '3.9'              
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
+        uses: xiaoyifang/install-qt-action@v3
         with:
           version: ${{ matrix.qt_ver }}
           arch: ${{ matrix.qt_arch }}
@@ -61,7 +61,7 @@ jobs:
         run: |
           brew uninstall opencc hunspell ffmpeg@5 ffmpeg@4 libtiff xz lzo libogg libvorbis zstd || true
           brew install create-dmg
-          qmake CONFIG+=release   CONFIG+=zim_support   CONFIG+=chinese_conversion_support QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
+          qmake CONFIG+=release CONFIG+=no_extra_tiff_handler   CONFIG+=zim_support   CONFIG+=chinese_conversion_support QMAKE_APPLE_DEVICE_ARCHS="x86_64 arm64"
           make -j$(nproc)
       # 打包
       - name: package
@@ -110,7 +110,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ env.targetName }}.dmg
-          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{ steps.vars.outputs.sha_short }}.dmg
+          asset_name: ${{ matrix.qt_ver }}-${{ env.targetName }}_${{ matrix.os }}_${{steps.vars.outputs.release_date}}.dmg
           tag: v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
           overwrite: true 
           release_name: GoldenDict-v${{env.version}}-${{env.version-suffix}}.${{ steps.vars.outputs.release_hm }}.${{ steps.vars.outputs.sha_short }}
@@ -130,6 +130,7 @@ jobs:
                                   Qt5.15.2(Intel Kind)
             auto built by github action. use on your on risk:-)   
 
+            Filename pattern: **[Qt version]-GoldenDict-[OS]-[release-date].[ext]**
             CHANGES:
             ${{ steps.changelog1.outputs.changelog }}  
             ${{ steps.changelog2.outputs.COMMIT_SUMMARY }}               

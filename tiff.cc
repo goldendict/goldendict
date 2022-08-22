@@ -1,16 +1,14 @@
 /* This file is (c) 2014 Abs62
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
-
-#ifdef MAKE_EXTRA_TIFF_HANDLER
-
 #include "tiff.hh"
-
+#ifdef MAKE_EXTRA_TIFF_HANDLER
 #if defined (Q_OS_WIN)
 #include "tiff/tiff.h"
 #include "tiff/tiffio.h"
 #else
 #include "tiff.h"
 #include "tiffio.h"
+#endif
 #endif
 
 #include <QBuffer>
@@ -19,7 +17,7 @@
 
 namespace GdTiff
 {
-
+#ifdef MAKE_EXTRA_TIFF_HANDLER
 tsize_t tiffReadProc( thandle_t fd, tdata_t buf, tsize_t size )
 {
   return static_cast< QIODevice * >( fd )->read( static_cast< char * >( buf ), size );
@@ -140,7 +138,7 @@ bool tiffToQImage( const char * data, int size, QImage & image )
   TIFFClose( tiff );
   return false;
 }
-
+#endif
 void tiff2img( vector< char > & data, const char * format )
 {
   QImage img = QImage::fromData( (unsigned char *)&data.front(), data.size() );
@@ -169,4 +167,4 @@ void tiff2img( vector< char > & data, const char * format )
 
 } // namespace
 
-#endif
+

@@ -13,7 +13,7 @@ class ArticleInspector : public QWidget
 public:
   ArticleInspector( QWidget * parent = nullptr );
 
-  void setInspectPage( QWebEngineView * view);
+  void setInspectPage( QWebEnginePage * page);
 private:
 
   virtual void closeEvent( QCloseEvent * );

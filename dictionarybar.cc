@@ -17,7 +17,6 @@ DictionaryBar::DictionaryBar( QWidget * parent,
   configEvents( events ),
   editDictionaryCommand( _editDictionaryCommand ),
   maxDictionaryRefsInContextMenu(maxDictionaryRefsInContextMenu_),
-  use14x21( false ),
   timerId( 0 )
 {
   setObjectName( "dictionaryBar" );
@@ -58,8 +57,6 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
   clear();
   dictActions.clear();
 
-  use14x21 = false;
-
   for( unsigned x = 0; x < dictionaries.size(); ++x )
   {
     QIcon icon = dictionaries[ x ]->getNativeIcon();
@@ -79,13 +76,6 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 
     action->setChecked( mutedDictionaries ? !mutedDictionaries->contains( id ) : true );
 
-    QList< QSize > sizes = icon.availableSizes();
-
-    // for( QList< QSize >::iterator i = sizes.begin(); i != sizes.end();
-    //      ++i )
-    //   if ( i->width() == 14 && i->height() == 21 )
-    //     use14x21 = true;
-
     dictActions.append( action );
   }
 
@@ -96,7 +86,7 @@ void DictionaryBar::setDictionaries( vector< sptr< Dictionary::Class > >
 
 void DictionaryBar::setDictionaryIconSize( int extent )
 {
-  setIconSize( QSize( use14x21 ? extent*2/3 : extent, extent  ) );
+  setIconSize( QSize(  extent, extent  ) );
 }
 
 void DictionaryBar::contextMenuEvent( QContextMenuEvent * event )

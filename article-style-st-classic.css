@@ -6,6 +6,7 @@ html {
 
 body
 {
+  background: #fefdeb;
   font-family: Tahoma, Verdana, "Lucida Sans Unicode", sans-serif;
   height: 100%;
 }
@@ -35,14 +36,9 @@ pre
 /* Dictionary's name heading */
 .gddictname
 {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  font-weight: bold;
-  font-size: 0.8em;
-  padding: 0.3em;
-  padding-left: 0.5em;
-  background: #def;
-  user-select: none;
+  border: 1px dotted black; padding: 0.2em; padding-left: 0.5em;
+  margin-top: 1.2em; margin-bottom: 9px; font-weight: bold; font-size: 14px;
+  /*background: #ffffdd;*/
 }
 
 .gddicttitle
@@ -69,6 +65,7 @@ pre
   padding-top: 1px;
   margin-top: -8px;
   margin-bottom: 8px;
+  background: #fefdeb;
 /*fix for invalid blg*/
   font-style:normal;
   content-visibility: auto;
@@ -2912,8 +2909,7 @@ in bg url to hide it from iemac */
     width:16px;
     height:16px;
     vertical-align: text-bottom;
-    background-size: contain;
-    background-image:url('qrc://localhost/icons/arrow.png');
+    background-image:url('qrcx://localhost/icons/old-arrow.png');
 }
 
 .gdcollapseicon {
@@ -2921,8 +2917,7 @@ in bg url to hide it from iemac */
     width:16px;
     height:16px;
     vertical-align: text-bottom;
-    background-size: contain;
-    background-image:url('qrc://localhost/icons/downarrow.png');
+    background-image:url('qrcx://localhost/icons/old-downarrow.png');
 }
 
 /********** Slob dictionaries ***********/

@@ -152,6 +152,7 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     }
 
   ui.displayStyle->addItem( QIcon( ":/icons/programicon_old.png" ), tr( "Default" ), QString() );
+  ui.displayStyle->addItem( QIcon( ":/icons/programicon.png" ), tr( "Classic" ), QString( "classic" ) );
   ui.displayStyle->addItem( QIcon( ":/icons/programicon.png" ), tr( "Modern" ), QString( "modern" ) );
   ui.displayStyle->addItem( QIcon( ":/icons/icon32_dsl.png" ), tr( "Lingvo" ), QString( "lingvo" ) );
   ui.displayStyle->addItem( QIcon( ":/icons/icon32_bgl.png" ), tr( "Babylon" ), QString( "babylon" ) );
