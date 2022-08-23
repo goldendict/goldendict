@@ -26,12 +26,6 @@ jobs:
         os: [windows-2019]
         qt_ver: [5.15.2,6.2.4]
         qt_arch: [win64_msvc2019_64]
-
-    env:
-      targetName: GoldenDict.exe
-      version: 22.8.24
-      version-suffix: alpha
-      prerelease: true
     steps:
       - uses: actions/setup-python@v3
         with:
@@ -69,9 +63,3 @@ jobs:
           # call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ matrix.msvc_arch }}
           qmake "CONFIG+=zim_support" CONFIG+=release
           nmake
-
-          echo winSdkDir=%WindowsSdkDir% >> %GITHUB_ENV%
-          echo winSdkVer=%WindowsSdkVersion% >> %GITHUB_ENV%
-          echo vcToolsInstallDir=%VCToolsInstallDir% >> %GITHUB_ENV%
-          echo vcToolsRedistDir=%VCToolsRedistDir% >> %GITHUB_ENV%
-          echo QTDIR=%Qt6_DIR% >> %GITHUB_ENV%

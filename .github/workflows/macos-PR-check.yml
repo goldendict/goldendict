@@ -25,10 +25,6 @@ jobs:
         os: [macos-11.0]
         qt_ver: [5.15.2,6.2.4]
         qt_arch: [clang_64]
-    env:
-      version: 22.8.23
-      version-suffix: EndOfHeat
-      prerelease: false
 
     steps:
       # macos 11.0 默认环境变了,要指定
