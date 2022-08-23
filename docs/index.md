@@ -10,7 +10,7 @@ https://github.com/xiaoyifang/goldendict/releases
 ### version guideline
 https://github.com/xiaoyifang/goldendict/wiki/Version--guideline
 
-the first version has been named as 22.2.alpha.commit_hash.
+the first version has been named as 22.2.xxx.commit_hash.
 
 22 means 2022 year.
 
