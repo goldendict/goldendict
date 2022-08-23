@@ -349,6 +349,8 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm, Au
   settings->setAttribute( QWebEngineSettings::PrintElementBackgrounds, false );
 #endif
 
+  ui.definition->load( QUrl("gdlookup://localhost?blank=1") );
+
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
 
   ui.definition->grabGesture( Gestures::GDPinchGestureType );
