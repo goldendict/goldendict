@@ -1725,8 +1725,6 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
 
   view->setZoomFactor( cfg.preferences.zoomFactor );
 
-  view->showDefinition( "about:blank", Instances::Group::HelpGroupId );
-
 #ifdef Q_OS_WIN32
   view->installEventFilter( this );
 #endif
