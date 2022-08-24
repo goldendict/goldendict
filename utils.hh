@@ -95,7 +95,19 @@ inline bool isExternalLink(QUrl const &url) {
 inline bool isHtmlResources(QUrl const &url) {
   auto fileName = url.fileName();
   auto ext=fileName.mid(fileName.lastIndexOf("."));
-  QStringList extensions{".css",".woff",".woff2","ttf",".bmp" ,".jpg", ".png",".gif", ".tif",".wav", ".ogg", ".oga", ".mp3", ".mp4", ".aac", ".flac",".mid", ".wv",".ape"} ;
+  QStringList extensions{ ".css", ".woff", ".woff2", ".ttf", ".otf", ".bmp", ".jpg",  ".png", ".gif", ".tif",
+                          ".wav", ".ogg",  ".oga",   ".mp3", ".mp4", ".aac", ".flac", ".mid", ".wv",  ".ape" };
+
+  //some url has the form like  https://xxxx/audio?file=***.mp3&a=1 etc links.
+  if( ext.isEmpty() )
+  {
+    for( QString extension : extensions )
+    {
+      if( url.url().contains( extension ) )
+        return true;
+    }
+    return false;
+  }
   return extensions.contains( ext, Qt::CaseInsensitive );
 }
 
