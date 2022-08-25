@@ -32,3 +32,4 @@ Nasrollah Noori <nanopqr@gmail.com>: Persian translation
 Vladimir Gerovski: Macedonian Translation
 Nikolay Korotkiy <sikmir\gmail.com>: Finnish translation
 Robin Townsend: Lojban translation
+Patrik Studer: Swiss High-German translation (de-ch)
