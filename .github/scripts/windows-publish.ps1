@@ -47,6 +47,10 @@ function Main() {
     Write-Host "copy license.."
     Copy-Item "opencc\*" $archiveName\opencc\
     Write-Host "opencc config files.."
+
+    New-Item -ItemType Directory $archiveName\help
+    Copy-Item "help\*" $archiveName\help\
+    Write-Host "help files.."
     # 拷贝WinSDK dll
     $sdkDll="{0}Redist\{1}ucrt\DLLs\{2}\*.dll" -f $env:winSdkDir.Trim(),$env:winSdkVer.Trim(),$env:msvcArch
     Write-Host "copy sdk dll$($sdkDll)"
