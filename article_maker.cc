@@ -709,6 +709,15 @@ int ArticleRequest::findEndOfCloseDiv( const QString &str, int pos )
   }
 }
 
+static void appendGdMakeArticleActiveOn( string & result, char const * jsEvent, string const & dictionaryId )
+{
+  result += " on";
+  result += jsEvent;
+  result += "=\"gdMakeArticleActive('";
+  result += dictionaryId;
+  result += "');\"";
+}
+
 void ArticleRequest::bodyFinished()
 {
   if ( bodyDone )
@@ -793,10 +802,13 @@ void ArticleRequest::bodyFinished()
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
 #endif
                 ( collapse ? " gdcollapsedarticle" : "" ) +
-                "\" id=\"" + gdFrom +
-                "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
-                " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
-                + ">";
+                "\" id=\"" + gdFrom + '"';
+
+        // Make the article active on left, middle or right mouse button click.
+        appendGdMakeArticleActiveOn( head, "click", jsVal );
+        appendGdMakeArticleActiveOn( head, "contextmenu", jsVal );
+
+        head += '>';
 
         closePrevSpan = true;
 
