@@ -806,7 +806,13 @@ void ArticleRequest::bodyFinished()
 
         // Make the article active on left, middle or right mouse button click.
         appendGdMakeArticleActiveOn( head, "click", jsVal );
+        // A right mouse button click triggers only "contextmenu" JavaScript event.
         appendGdMakeArticleActiveOn( head, "contextmenu", jsVal );
+        // In the Qt WebKit version both a left and a middle mouse button click triggers "click" JavaScript event.
+        // In the Qt WebEngine version a left mouse button click triggers "click", a middle - "auxclick" event.
+#ifndef USE_QTWEBKIT
+        appendGdMakeArticleActiveOn( head, "auxclick", jsVal );
+#endif
 
         head += '>';
 
