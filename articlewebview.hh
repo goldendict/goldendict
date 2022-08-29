@@ -56,6 +56,8 @@ protected:
 
 private:
 
+  bool isOnScrollBar( QMouseEvent const & event ) const;
+
   Config::Class * cfg;
   ArticleInspector * inspector;
 

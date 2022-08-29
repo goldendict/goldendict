@@ -89,7 +89,7 @@ void ArticleWebView::mousePressEvent( QMouseEvent * event )
 
   QWebView::mousePressEvent( event );
 
-  if ( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) )
+  if( selectionBySingleClick && ( event->buttons() & Qt::LeftButton ) && !isOnScrollBar( *event ) )
   {
     findText(""); // clear the selection first, if any
     QMouseEvent ev( QEvent::MouseButtonDblClick, event->pos(), Qt::LeftButton, Qt::LeftButton, event->modifiers() );
@@ -111,16 +111,9 @@ void ArticleWebView::mouseDoubleClickEvent( QMouseEvent * event )
 {
   QWebView::mouseDoubleClickEvent( event );
 
-  int scrollBarWidth = page()->mainFrame()->scrollBarGeometry( Qt::Vertical ).width();
-  int scrollBarHeight = page()->mainFrame()->scrollBarGeometry( Qt::Horizontal ).height();
-
   // emit the signal only if we are not double-clicking on scrollbars
-  if ( ( event->x() < width() - scrollBarWidth ) &&
-       ( event->y() < height() - scrollBarHeight ) )
-  {
+  if( !isOnScrollBar( *event ) )
     emit doubleClicked( event->pos() );
-  }
-
 }
 
 // TODO (Qt WebEngine): port if this code is useful in the Qt WebEngine version.
@@ -174,6 +167,14 @@ void ArticleWebView::wheelEvent( QWheelEvent *ev )
      QWebView::wheelEvent( ev );
   }
 
+}
+
+bool ArticleWebView::isOnScrollBar( QMouseEvent const & event ) const
+{
+  int const scrollBarWidth = page()->mainFrame()->scrollBarGeometry( Qt::Vertical ).width();
+  int const scrollBarHeight = page()->mainFrame()->scrollBarGeometry( Qt::Horizontal ).height();
+
+  return event.x() >= width() - scrollBarWidth || event.y() >= height() - scrollBarHeight;
 }
 
 #else // USE_QTWEBKIT
