@@ -94,6 +94,9 @@ public slots:
 
   void onJsFirstLeftButtonMouseDown()
   { articleView.onJsFirstLeftButtonMouseDown(); }
+
+  void onJsDoubleClicked( QString const & imageUrl )
+  { articleView.onJsDoubleClicked( imageUrl ); }
 #endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
@@ -324,17 +327,43 @@ QString pageReloadingScriptSourceCode( QString const & currentArticle, bool scro
       .arg( currentArticle, javaScriptBool( scrollToCurrentArticle ) );
 }
 
-QWebEngineScript createPageReloadingScript()
+QWebEngineScript createScript( QString const & name, QString const & sourceCode )
 {
   QWebEngineScript script;
   script.setInjectionPoint( QWebEngineScript::DocumentCreation );
   script.setRunsOnSubFrames( false );
   script.setWorldId( QWebEngineScript::MainWorld );
 
-  script.setName( pageReloadingScriptName() );
-  script.setSourceCode( pageReloadingScriptSourceCode( QString{}, false ) );
+  script.setName( name );
+  script.setSourceCode( sourceCode );
 
   return script;
+}
+
+QWebEngineScript createPageReloadingScript()
+{
+  return createScript( pageReloadingScriptName(), pageReloadingScriptSourceCode( QString{}, false ) );
+}
+
+QString variableDeclarationFromAssignmentScript( QString const & assignmentScript )
+{
+  return QLatin1String( "let " ) + assignmentScript;
+}
+
+QString selectWordBySingleClickScriptName()
+{
+  return QStringLiteral( "SelectWordBySingleClick" );
+}
+
+QString selectWordBySingleClickAssignmentScript( bool selectWordBySingleClick )
+{
+  return QLatin1String( "gdSelectWordBySingleClick = %1;" ).arg( javaScriptBool( selectWordBySingleClick ) );
+}
+
+QWebEngineScript createSelectWordBySingleClickScript()
+{
+  return createScript( selectWordBySingleClickScriptName(),
+                       variableDeclarationFromAssignmentScript( selectWordBySingleClickAssignmentScript( false ) ) );
 }
 #endif // USE_QTWEBKIT
 
@@ -474,6 +503,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   webChannel->registerObject( QStringLiteral( "gdArticleView" ), jsProxy );
 
   webPage->scripts().insert( createPageReloadingScript() );
+  webPage->scripts().insert( createSelectWordBySingleClickScript() );
 
   connect( webPage, &QWebEnginePage::findTextFinished, this, &ArticleView::findTextFinished );
 
@@ -1132,16 +1162,30 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
 #endif // USE_QTWEBKIT
 
 #ifndef USE_QTWEBKIT
-void ArticleView::updateInjectedPageReloadingScript( bool scrollToCurrentArticle )
+void ArticleView::updateSourceCodeOfInjectedScript( QString const & name, QString const & sourceCode )
 {
   auto & scripts = ui.definition->page()->scripts();
 
-  auto script = scripts.findScript( pageReloadingScriptName() );
+  auto script = scripts.findScript( name );
   Q_ASSERT( !script.isNull() );
 
   scripts.remove( script );
-  script.setSourceCode( pageReloadingScriptSourceCode( currentArticle, scrollToCurrentArticle ) );
+  script.setSourceCode( sourceCode );
   scripts.insert( script );
+}
+
+void ArticleView::updateInjectedPageReloadingScript( bool scrollToCurrentArticle )
+{
+  updateSourceCodeOfInjectedScript( pageReloadingScriptName(),
+                                    pageReloadingScriptSourceCode( currentArticle, scrollToCurrentArticle ) );
+}
+
+void ArticleView::updateInjectedSelectWordBySingleClickScript( bool selectWordBySingleClick )
+{
+  QString const assignmentScript = selectWordBySingleClickAssignmentScript( selectWordBySingleClick );
+  ui.definition->page()->runJavaScript( assignmentScript );
+  updateSourceCodeOfInjectedScript( selectWordBySingleClickScriptName(),
+                                    variableDeclarationFromAssignmentScript( assignmentScript ) );
 }
 #endif
 
@@ -2096,13 +2140,15 @@ void ArticleView::setSelectionBySingleClick( bool set )
 #ifdef USE_QTWEBKIT
   ui.definition->setSelectionBySingleClick( set );
 #else
+  if( set == static_cast< bool >( lastLeftMouseButtonPressEvent ) )
+    return; // nothing changed
+
   if( set )
-  {
-    if( !lastLeftMouseButtonPressEvent )
-      lastLeftMouseButtonPressEvent.reset( new MouseEventInfo{} );
-  }
+    lastLeftMouseButtonPressEvent.reset( new MouseEventInfo{} );
   else
     lastLeftMouseButtonPressEvent.reset();
+
+  updateInjectedSelectWordBySingleClickScript( set );
 #endif
 }
 
@@ -2808,6 +2854,9 @@ void ArticleView::onJsFirstLeftButtonMouseDown()
   // one of the selected words has no effect. So the user has to click outside a selection to modify it. If the entire
   // page is selected (e.g. after the Select All action is triggered), the user can resort to a middle mouse button
   // click or press the left mouse button, move the cursor, then release the button.
+  // A consequence of this unchanging selection: when "Double-click translates the word clicked" option is on, double
+  // clicking on a selected word translates the entire selection, which can be considered a feature as it allows
+  // translating a phrase, not just a single word, using only the left mouse button.
   // This selection issue can we worked around by sending an additional mouse release event, but then links are
   // activated on left mouse button press rather than release, which is a worse bug.
 
@@ -2819,6 +2868,18 @@ void ArticleView::onJsFirstLeftButtonMouseDown()
 
   // This stored event has served its purpose. Prevent recursion by invalidating it.
   lastLeftMouseButtonPressEvent->invalidate();
+}
+
+void ArticleView::onJsDoubleClicked( QString const & imageUrl )
+{
+  if( !imageUrl.isEmpty() )
+  {
+    downloadImage( QUrl{ imageUrl } );
+    return;
+  }
+
+  if( cfg.preferences.doubleClickTranslates )
+    translateSelectedText();
 }
 #endif // USE_QTWEBKIT
 
@@ -2884,110 +2945,111 @@ void ArticleView::onJsLocationHashChanged()
   emit canGoBackForwardChanged( this ); // Fragment navigation on the same page adds a web history entry.
 }
 
+#ifdef USE_QTWEBKIT
 void ArticleView::doubleClicked( QPoint pos )
 {
-  // TODO (Qt WebEngine): port this block of code after ArticleWebView is ported and this slot is invoked.
-#ifdef USE_QTWEBKIT
   QWebHitTestResult r = ui.definition->page()->mainFrame()->hitTestContent( pos );
   QWebElement el = r.element();
   QUrl imageUrl;
   if( el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
   {
     // Double click on image; download it and transfer to external program
-
     imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
     if( !imageUrl.isEmpty() )
-    {
-      // Download it
-
-      // Clear any pending ones
-      resourceDownloadRequests.clear();
-
-      resourceDownloadUrl = imageUrl;
-      sptr< Dictionary::DataRequest > req;
-
-      if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
-      {
-        // Web resource
-        req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
-      }
-      else
-      if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
-      {
-        // Local resource
-        QString contentType;
-        req = articleNetMgr.getResource( imageUrl, contentType );
-      }
-      else
-      {
-        // Unsupported scheme
-        gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
-        return;
-      }
-
-      if ( !req.get() )
-      {
-        // Request failed, fail
-        gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
-        return;
-      }
-
-      if ( req->isFinished() && req->dataSize() >= 0 )
-      {
-        // Have data ready, handle it
-        resourceDownloadRequests.push_back( req );
-        resourceDownloadFinished();
-        return;
-      }
-      else
-      if ( !req->isFinished() )
-      {
-        // Queue to be handled when done
-        resourceDownloadRequests.push_back( req );
-        connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
-      }
-      if ( resourceDownloadRequests.empty() ) // No requests were queued
-      {
-        gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
-        return;
-      }
-      else
-        resourceDownloadFinished(); // Check any requests finished already
-    }
+      downloadImage( imageUrl );
     return;
   }
-#endif // USE_QTWEBKIT
 
   // We might want to initiate translation of the selected word
+  if( cfg.preferences.doubleClickTranslates )
+    translateSelectedText();
+}
+#endif // USE_QTWEBKIT
 
-  if ( cfg.preferences.doubleClickTranslates )
+void ArticleView::downloadImage( QUrl const & imageUrl )
+{
+  // Clear any pending ones
+  resourceDownloadRequests.clear();
+
+  resourceDownloadUrl = imageUrl;
+  sptr< Dictionary::DataRequest > req;
+
+  if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
   {
-    QString selectedText = ui.definition->selectedText();
+    // Web resource
+    req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
+  }
+  else
+  if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
+  {
+    // Local resource
+    QString contentType;
+    req = articleNetMgr.getResource( imageUrl, contentType );
+  }
+  else
+  {
+    // Unsupported scheme
+    gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
+    return;
+  }
 
-    // Do some checks to make sure there's a sensible selection indeed
-    if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
-         selectedText.size() < 60 )
+  if ( !req.get() )
+  {
+    // Request failed, fail
+    gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
+    return;
+  }
+
+  if ( req->isFinished() && req->dataSize() >= 0 )
+  {
+    // Have data ready, handle it
+    resourceDownloadRequests.push_back( req );
+    resourceDownloadFinished();
+    return;
+  }
+  else
+  if ( !req->isFinished() )
+  {
+    // Queue to be handled when done
+    resourceDownloadRequests.push_back( req );
+    connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
+  }
+  if ( resourceDownloadRequests.empty() ) // No requests were queued
+  {
+    gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
+    return;
+  }
+  else
+    resourceDownloadFinished(); // Check any requests finished already
+}
+
+void ArticleView::translateSelectedText()
+{
+  QString selectedText = ui.definition->selectedText();
+
+  // Do some checks to make sure there's a sensible selection indeed
+  if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
+       selectedText.size() < 60 )
+  {
+    // Initiate translation
+    Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+    if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
+    { // open in new tab
+      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
+                                   currentArticle, Contexts() );
+    }
+    else
     {
-      // Initiate translation
-      Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
-      if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
-      { // open in new tab
-        emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                     currentArticle, Contexts() );
+      QUrl const & ref = ui.definition->url();
+
+      if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
+      {
+        QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
+                                            .split( ",", Qt4x5::skipEmptyParts() );
+        showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
       }
       else
-      {
-        QUrl const & ref = ui.definition->url();
-
-        if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
-        {
-          QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
-                                              .split( ",", Qt4x5::skipEmptyParts() );
-          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
-        }
-        else
-          showDefinition( selectedText, getGroup( ref ), currentArticle );
-      }
+        showDefinition( selectedText, getGroup( ref ), currentArticle );
     }
   }
 }

@@ -334,6 +334,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   // proper or on its scrollbar. We are only interested in clicks on the page contents
   // within <body>. Listen to such mouse events and send messages from JavaScript to C++.
             " onMouseDown='gdBodyMouseDown(event);'"
+            " onMouseUp='gdBodyMouseUp(event);'"
 #endif
             ">";
 

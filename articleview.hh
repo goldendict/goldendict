@@ -359,8 +359,10 @@ private slots:
   void on_ftsSearchPrevious_clicked();
   void on_ftsSearchNext_clicked();
 
+#ifdef USE_QTWEBKIT
   /// Handles the double-click from the definition.
   void doubleClicked( QPoint pos );
+#endif
 
   /// Handles audio player error message
   void audioPlayerError( QString const & message );
@@ -395,8 +397,11 @@ private:
   void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp_ );
 
   /// Is called on mousedown JavaScript event if it is triggered by the left mouse button and
-  /// the event starts a first click (not a second or a third click in a double- or triple-click).
+  /// the event starts a first click (not a second or a third click in a double- or triple-click)
+  /// and "Select word by single click" option is on (otherwise there is nothing to do).
   void onJsFirstLeftButtonMouseDown();
+
+  void onJsDoubleClicked( QString const & imageUrl );
 #endif
 
   void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive );
@@ -416,6 +421,9 @@ private:
   /// Clears selection on the current web page. This function can be called to
   /// reset the start position of the page's findText().
   void clearPageSelection();
+
+  void downloadImage( QUrl const & imageUrl );
+  void translateSelectedText();
 
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
@@ -452,9 +460,14 @@ private:
 #ifdef USE_QTWEBKIT
   void initCurrentArticleAndScroll();
 #else
+  void updateSourceCodeOfInjectedScript( QString const & name, QString const & sourceCode );
+
   /// Injects into JavaScript the current article ID and whether to scroll to it when reloading page.
   /// Should be called before an action that can be interpreted as page reloading by JavaScript code.
   void updateInjectedPageReloadingScript( bool scrollToCurrentArticle );
+
+  /// Updates selectWordBySingleClick option value on the current page and injects the new value into future pages.
+  void updateInjectedSelectWordBySingleClickScript( bool selectWordBySingleClick );
 #endif
 
   /// Saves current article and scroll position for the current history item.

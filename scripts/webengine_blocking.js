@@ -181,6 +181,30 @@ function gdOnCppActiveArticleChanged(articleId, moveToIt, pageTimestampString, c
 }
 
 function gdBodyMouseDown(event) {
-    if (gdArticleView && event.button === 0 && event.detail === 1)
+    if (gdSelectWordBySingleClick && gdArticleView && event.button === 0 && event.detail === 1)
         gdArticleView.onJsFirstLeftButtonMouseDown();
+}
+
+function gdBodyMouseUp(event) {
+    // When "Select word by single click" option is off and the user double-clicks a word, it becomes selected some time
+    // after QWebEngineView::mouseDoubleClickEvent(), not during this event handler as in the Qt WebKit version. The
+    // implementation of "Double-click translates the word clicked" option translates a currently selected word and
+    // needs up-to-date selection. The selection is empty at the time of a second JavaScript mousedown event. Send the
+    // double-clicked message to ArticleView on a second mouseup JavaScript event, at which time the selection is
+    // up-to-date. This later translation is useful: the user can double-click a word, extend selection to one or more
+    // neighboring words, then release the left mouse button. Such a prolonged double-click translates the selected
+    // multi-word phrase, while only a single word can be translated by a double-click in the Qt WebKit version.
+
+    // Normally a second mouseup event (with event.detail === 2) signifies a double click. But when
+    // "Select word by single click" option is on, a second mouseup event occurs after a single click due to
+    // an artificial double click synthesized by ArticleView. Fortunately, when this option is on, ArticleView also
+    // filters out a second non-synthesized mousedown event (MouseButtonDblClick) in a user's double click before
+    // it reaches JavaScript, which makes event.detail of a second non-synthesized mouseup event unique - equal to 0.
+    const targetClickCount = gdSelectWordBySingleClick ? 0 : 2;
+    if (gdArticleView && event.button === 0 && event.detail === targetClickCount) {
+        let imageUrl = null;
+        if (event.target.tagName.toLowerCase() === 'img')
+            imageUrl = event.target.currentSrc;
+        gdArticleView.onJsDoubleClicked(imageUrl);
+    }
 }
