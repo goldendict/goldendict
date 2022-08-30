@@ -2950,11 +2950,10 @@ void ArticleView::doubleClicked( QPoint pos )
 {
   QWebHitTestResult r = ui.definition->page()->mainFrame()->hitTestContent( pos );
   QWebElement el = r.element();
-  QUrl imageUrl;
   if( el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
   {
     // Double click on image; download it and transfer to external program
-    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
+    QUrl const imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
     if( !imageUrl.isEmpty() )
       downloadImage( imageUrl );
     return;
