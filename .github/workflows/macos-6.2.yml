@@ -128,7 +128,8 @@ jobs:
             macos built with:     macos-10.15,macos-11.0,clang_64 x86_64
                                   Qt6.X(Universal Build)
                                   Qt5.15.2(Intel Kind)
-            auto built by github action. use on your on risk:-)   
+            auto built by github action. use on your on risk:-)
+            **recommend version**:Qt6.X   (with the latest bug fixes and performance enhancements)   
 
             Filename pattern: **[Qt version]-GoldenDict-[OS]-[release-date].[ext]**
             CHANGES:
