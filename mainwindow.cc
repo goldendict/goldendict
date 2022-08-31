@@ -237,8 +237,12 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   enableScanPopup->setCheckable( true );
   enableScanPopup->setVisible( cfg.preferences.enableScanPopup );
   navToolbar->widgetForAction( enableScanPopup )->setObjectName( "scanPopupButton" );
-  if ( cfg.preferences.enableScanPopup && cfg.preferences.startWithScanPopupOn )
+  if( cfg.preferences.enableScanPopup && cfg.preferences.startWithScanPopupOn )
+  {
+    enableScanPopup->setIcon( QIcon( ":/icons/wizard-selected.svg" ) );
     enableScanPopup->setChecked( true );
+  }
+
 
   connect( enableScanPopup, SIGNAL( toggled( bool ) ),
            this, SLOT( scanEnableToggled( bool ) ) );
