@@ -1,6 +1,14 @@
 # Changes
 
-## Until to now
+## Until Now
+
+- change the original default style to classic style 
+- add clipboard tracking menu in trayicon
+- concurrent fulltext index creation
+- add CJK fulltext search ability
+- many minor fixes .
+
+## Until 2022-8-31
 
 - **CLEANING OLD/USELESS CODE**
   - remove Runnable Class in dsl, zim , epwing etc files.
