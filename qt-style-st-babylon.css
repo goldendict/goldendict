@@ -1,7 +1,7 @@
 MainWindow #translateLine, ScanPopup #translateLine, MainWindow #searchPane #wordList, MainWindow #dictsPane #dictsList,
 MainWindow #historyPane #historyList, MainWindow #favoritesPane #favoritesTree
 {
-  background: white;
+
 }
 
 MainWindow #searchPane #translateLine
