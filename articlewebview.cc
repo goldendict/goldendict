@@ -134,11 +134,11 @@ void ArticleWebView::focusInEvent( QFocusEvent * event )
   }
 }
 
-// TODO (Qt WebEngine): port if this code is useful in the Qt WebEngine version.
 void ArticleWebView::wheelEvent( QWheelEvent *ev )
 {
 #ifdef Q_OS_WIN32
 
+  // TODO (Qt WebEngine): port if this code is useful in the Qt WebEngine version.
   // Avoid wrong mouse wheel handling in QWebView
   // if system preferences is set to "scroll by page"
 

@@ -1409,6 +1409,18 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
       // in the case of the middle mouse button release, to false otherwise.
       isNavigationByMiddleMouseButton = static_cast< QMouseEvent * >( ev )->button() == Qt::MiddleButton;
       break;
+    case QEvent::Wheel:
+      if( static_cast< QWheelEvent * >( ev )->modifiers().testFlag( Qt::ControlModifier ) )
+      {
+        // Follow the behavior of the Qt WebKit version:
+        // 1. If this view is in the main window, bypass the widget child of QWebEngineView, which only scales the view,
+        //    and let the event propagate to MainWindow. MainWindow::wheelEvent() scales views in all tabs and in the
+        //    scan popup, as well as updates zoom factor in Preferences (stored on disk, persists across app restarts).
+        // 2. If this view is in the scan popup, the event is also propagated but never handled, and thus ignored.
+        QApplication::sendEvent( ui.definition, ev );
+        return true;
+      }
+      break;
 #endif // USE_QTWEBKIT
     case QEvent::KeyPress:
     {
