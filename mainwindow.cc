@@ -1729,8 +1729,8 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ) );
 
-  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned, QString const &, ArticleView::Contexts const & ) ),
-           this, SLOT( showDefinitionInNewTab( QString const &, unsigned, QString const &, ArticleView::Contexts const & ) ) );
+  connect( view, SIGNAL( showDefinitionInNewTab( Config::InputPhrase const &, unsigned, QString const &, ArticleView::Contexts const & ) ),
+           this, SLOT( showDefinitionInNewTab( Config::InputPhrase const &, unsigned, QString const &, ArticleView::Contexts const & ) ) );
 
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
@@ -2894,13 +2894,13 @@ void MainWindow::openLinkInNewTab( QUrl const & url,
       openLink( url, referrer, fromArticle, contexts );
 }
 
-void MainWindow::showDefinitionInNewTab( QString const & word,
+void MainWindow::showDefinitionInNewTab( Config::InputPhrase const & phrase,
                                          unsigned group,
                                          QString const & fromArticle,
                                          ArticleView::Contexts const & contexts )
 {
-  createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->
-      showDefinition( word, group, fromArticle, contexts );
+  createNewTab( !cfg.preferences.newTabsOpenInBackground, phrase.phrase )->
+      showDefinition( phrase, group, fromArticle, contexts );
 }
 
 void MainWindow::activeArticleChanged( ArticleView const * view, QString const & id )

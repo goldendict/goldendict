@@ -418,7 +418,7 @@ private slots:
 
   void openLinkInNewTab( QUrl const &, QUrl const &, QString const &,
                          ArticleView::Contexts const & contexts );
-  void showDefinitionInNewTab( QString const & word, unsigned group,
+  void showDefinitionInNewTab( Config::InputPhrase const & phrase, unsigned group,
                                QString const & fromArticle,
                                ArticleView::Contexts const & contexts );
   void typingEvent( QString const & );

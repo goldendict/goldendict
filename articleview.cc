@@ -697,9 +697,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   showDefinition( Config::InputPhrase::fromPhrase( word ), group, scrollTo, contexts_ );
 }
 
-void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
-                                  QRegExp const & searchRegExp, unsigned group,
-                                  bool ignoreDiacritics )
+void ArticleView::showDefinition( Config::InputPhrase const & phrase, QStringList const & dictIDs,
+                                  QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics )
 {
   if( dictIDs.isEmpty() )
     return;
@@ -711,7 +710,9 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   req.setScheme( "gdlookup" );
   req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", word );
+  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
+  if( !phrase.punctuationSuffix.isEmpty() )
+    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
   Qt4x5::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
   Qt4x5::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
   if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
@@ -723,7 +724,7 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
     Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   // Update headwords history
-  emit sendWordToHistory( word );
+  emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
   closeSearch();
@@ -737,6 +738,12 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
+}
+
+void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
+                                  QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics )
+{
+  showDefinition( Config::InputPhrase::fromPhrase( word ), dictIDs, searchRegExp, group, ignoreDiacritics );
 }
 
 #ifdef USE_QTWEBKIT
@@ -2502,11 +2509,11 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       emit openLinkInNewTab( targetUrl, ui.definition->url(), currentArticle, contexts );
     else
     if ( !popupView && result == lookupSelectionNewTab )
-      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
+      emit showDefinitionInNewTab( Config::InputPhrase::fromPhrase( selectedText ), getGroup( ui.definition->url() ),
                                    currentArticle, Contexts() );
     else
     if ( !popupView && result == lookupSelectionNewTabGr && groupComboBox )
-      emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
+      emit showDefinitionInNewTab( Config::InputPhrase::fromPhrase( selectedText ), groupComboBox->getCurrentGroup(),
                                    QString(), Contexts() );
     else
     if( result == saveImageAction || result == saveSoundAction )
@@ -2879,7 +2886,13 @@ void ArticleView::onJsDoubleClicked( QString const & imageUrl )
   }
 
   if( cfg.preferences.doubleClickTranslates )
-    translateSelectedText();
+  {
+    // Sanitize selected text before translating, because multiple words and punctuation
+    // marks can be selected during a prolonged double-click in the Qt WebEngine version.
+    auto const phrase = cfg.preferences.sanitizeInputPhrase( ui.definition->selectedText() );
+    if( phrase.isValid() )
+      translatePossiblyInNewTab( phrase );
+  }
 }
 #endif // USE_QTWEBKIT
 
@@ -2961,7 +2974,12 @@ void ArticleView::doubleClicked( QPoint pos )
 
   // We might want to initiate translation of the selected word
   if( cfg.preferences.doubleClickTranslates )
-    translateSelectedText();
+  {
+    QString const selectedText = ui.definition->selectedText();
+    // Do some checks to make sure there's a sensible selection indeed
+    if( !Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).empty() && selectedText.size() < 60 )
+      translatePossiblyInNewTab( Config::InputPhrase::fromPhrase( selectedText ) );
+  }
 }
 #endif // USE_QTWEBKIT
 
@@ -3022,34 +3040,30 @@ void ArticleView::downloadImage( QUrl const & imageUrl )
     resourceDownloadFinished(); // Check any requests finished already
 }
 
-void ArticleView::translateSelectedText()
+void ArticleView::translatePossiblyInNewTab( Config::InputPhrase const & phrase )
 {
-  QString selectedText = ui.definition->selectedText();
+  Q_ASSERT( phrase.isValid() );
 
-  // Do some checks to make sure there's a sensible selection indeed
-  if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
-       selectedText.size() < 60 )
+  Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+  if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
+  { // open in new tab
+    // TODO: emitting this signal has no effect in the scan popup's view.
+    //       Should showDefinition() be called if popupView is true?
+    emit showDefinitionInNewTab( phrase, getGroup( ui.definition->url() ),
+                                 currentArticle, Contexts() );
+  }
+  else
   {
-    // Initiate translation
-    Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
-    if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
-    { // open in new tab
-      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                   currentArticle, Contexts() );
+    QUrl const & ref = ui.definition->url();
+
+    if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
+    {
+      QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
+                                          .split( ",", Qt4x5::skipEmptyParts() );
+      showDefinition( phrase, dictsList, QRegExp(), getGroup( ref ), false );
     }
     else
-    {
-      QUrl const & ref = ui.definition->url();
-
-      if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
-      {
-        QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
-                                            .split( ",", Qt4x5::skipEmptyParts() );
-        showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
-      }
-      else
-        showDefinition( selectedText, getGroup( ref ), currentArticle );
-    }
+      showDefinition( phrase, getGroup( ref ), currentArticle );
   }
 }
 

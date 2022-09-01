@@ -162,14 +162,14 @@ public:
   void showDefinition( Config::InputPhrase const & phrase, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
-
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
 
+  void showDefinition( Config::InputPhrase const & phrase, QStringList const & dictIDs,
+                       QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics );
   void showDefinition( QString const & word, QStringList const & dictIDs,
-                       QRegExp const & searchRegExp, unsigned group,
-                       bool ignoreDiacritics );
+                       QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics );
 
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
@@ -270,7 +270,7 @@ signals:
                          QString const & fromArticle,
                          ArticleView::Contexts const & contexts );
   /// Signals that the following definition was requested to be showed in new tab
-  void showDefinitionInNewTab( QString const & word, unsigned group,
+  void showDefinitionInNewTab( Config::InputPhrase const & phrase, unsigned group,
                                QString const & fromArticle,
                                ArticleView::Contexts const & contexts );
 
@@ -423,7 +423,7 @@ private:
   void clearPageSelection();
 
   void downloadImage( QUrl const & imageUrl );
-  void translateSelectedText();
+  void translatePossiblyInNewTab( Config::InputPhrase const & phrase );
 
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
