@@ -4099,6 +4099,11 @@ void MainWindow::applyZoomFactor()
   // so all of them except for the first one don't change anything and run very fast.
   // In effect, some intermediate zoom factors are skipped when scaling is slow.
   // The slower the scaling, the more steps are skipped.
+  // Unfortunately this optimization does not work in the Qt WebEngine version, where
+  // the UI does not completely freeze (e.g. scrolling the page still works) and events
+  // keep being delivered even as the page is being scaled in a separate process.
+  // TODO (Qt WebEngine): optimize repeated scrolling somehow. Is it possible to detect that a web page
+  // is being scaled in order to set an accumulated zoom factor only when the previous scaling finishes?
   QTimer::singleShot( 0, this, SLOT( scaleArticlesByCurrentZoomFactor() ) );
 #else
   // The timer trick above usually doesn't improve performance with Qt4
