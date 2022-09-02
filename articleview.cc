@@ -624,6 +624,22 @@ ArticleView::~ArticleView()
 #endif
 }
 
+static QUrl createGdlookupUrl( Config::InputPhrase const & phrase, unsigned group, bool ignoreDiacritics )
+{
+  QUrl req;
+
+  req.setScheme( "gdlookup" );
+  req.setHost( "localhost" );
+  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
+  if( !phrase.punctuationSuffix.isEmpty() )
+    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
+  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+  if( ignoreDiacritics )
+    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
+
+  return req;
+}
+
 void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
@@ -631,17 +647,8 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   // first, let's stop the player
   audioPlayer->stop();
 
-  QUrl req;
+  QUrl req = createGdlookupUrl( phrase, group, cfg.preferences.ignoreDiacritics );
   Contexts contexts( contexts_ );
-
-  req.setScheme( "gdlookup" );
-  req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
-  if ( !phrase.punctuationSuffix.isEmpty() )
-    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
-  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
-  if( cfg.preferences.ignoreDiacritics )
-    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   if ( scrollTo.size() )
     Qt4x5::Url::addQueryItem( req, "scrollto", scrollTo );
@@ -706,22 +713,14 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, QStringLis
   // first, let's stop the player
   audioPlayer->stop();
 
-  QUrl req;
+  QUrl req = createGdlookupUrl( phrase, group, ignoreDiacritics );
 
-  req.setScheme( "gdlookup" );
-  req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
-  if( !phrase.punctuationSuffix.isEmpty() )
-    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
   Qt4x5::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
   Qt4x5::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
   if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
     Qt4x5::Url::addQueryItem( req, "matchcase", "1" );
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
-  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
-  if( ignoreDiacritics )
-    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   // Update headwords history
   emit sendWordToHistory( phrase.phrase );
