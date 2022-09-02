@@ -45,6 +45,9 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
                              QRegularExpression::CaseInsensitiveOption | QRegularExpression::DotMatchesEverythingOption );
     
     QString baseTagHtml = "<base href=\"" + base + "\">";
+
+    QString depressionFocus =
+      "<script type=\"application/javascript\">HTMLElement.prototype.focus=function(){console.log(\".focus has been depressed \");}</script>";
     
     // remove existed base tag
     articleString.remove( baseTag ) ;
@@ -56,12 +59,14 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     if( match.hasMatch() )
     {
       articleString.insert( match.capturedEnd(), baseTagHtml );
+      articleString.insert( match.capturedEnd(), depressionFocus );
     }
     else
     {
       // the html contain no head element
       // just insert at the beginning of the html ,and leave it at the mercy of browser(chrome webengine)
       articleString.insert( 0, baseTagHtml );
+      articleString.insert( 0, depressionFocus );
     }
 
     buffer->setData(codec->fromUnicode(articleString));
