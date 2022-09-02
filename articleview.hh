@@ -479,6 +479,8 @@ private:
 
   void openLinkWithFragment( QUrl const & url, QString const & scrollTo );
 
+  void showDefinition( Config::InputPhrase const & phrase, QUrl const & url );
+
   /// Attempts removing last temporary file created.
   void cleanupTemp();
 

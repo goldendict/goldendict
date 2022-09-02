@@ -680,6 +680,11 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( mutedDicts.size() )
     Qt4x5::Url::addQueryItem( req,  "muted", mutedDicts );
 
+  showDefinition( phrase, req );
+}
+
+void ArticleView::showDefinition( Config::InputPhrase const & phrase, QUrl const & url )
+{
   // Update headwords history
   emit sendWordToHistory( phrase.phrase );
 
@@ -691,7 +696,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
 
   emit setExpandMode( expandOptionalParts );
 
-  load( req );
+  load( url );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -722,21 +727,7 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, QStringLis
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
 
-  // Update headwords history
-  emit sendWordToHistory( phrase.phrase );
-
-  // Any search opened is probably irrelevant now
-  closeSearch();
-
-  // Clear highlight all button selection
-  ui.highlightAllButton->setChecked(false);
-
-  emit setExpandMode( expandOptionalParts );
-
-  load( req );
-
-  //QApplication::setOverrideCursor( Qt::WaitCursor );
-  ui.definition->setCursor( Qt::WaitCursor );
+  showDefinition( phrase, req );
 }
 
 void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
