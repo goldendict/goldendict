@@ -399,9 +399,8 @@ sptr< DataRequest > WebSiteDictionary::getArticle( wstring const & str,
                       "\" src=\""+encodeUrl.toStdString() +
                       "\" onmouseover=\"processIframeMouseOver('gdexpandframe-" + getId() + "');\" "
                       "onmouseout=\"processIframeMouseOut();\" "
-                      "scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\" "
-                      "frameborder=\"0\" vspace=\"0\" hspace=\"0\""
-                      "style=\"overflow:visible; width:100%; display:block;\" sandbox=\"allow-same-origin allow-scripts allow-popups\">"
+                      "scrolling=\"no\" "
+                      "style=\"overflow:visible; width:100%; display:block; border:none;\" sandbox=\"allow-same-origin allow-scripts allow-popups\">"
                       "</iframe>";
 
     dr->getData().resize( result.size() );
