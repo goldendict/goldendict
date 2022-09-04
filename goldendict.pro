@@ -564,6 +564,7 @@ CONFIG( chinese_conversion_support ) {
 }
 
 RESOURCES += resources.qrc \
+    scripts.qrc \
     flags.qrc
 #EXTRA_TRANSLATIONS += thirdparty/qwebengine_ts/qtwebengine_zh_CN.ts
 TRANSLATIONS += locale/ru_RU.ts \

@@ -47,7 +47,8 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QString baseTagHtml = "<base href=\"" + base + "\">";
 
     QString depressionFocus =
-      "<script type=\"application/javascript\">HTMLElement.prototype.focus=function(){console.log(\".focus has been depressed \");}</script>";
+      QStringLiteral( "<script type=\"application/javascript\">HTMLElement.prototype.focus=function(){console.log(\".focus has been depressed \");}</script>"
+                      "<script type=\"text/javascript\" src=\"qrc:///scripts/iframeResizer.contentWindow.min.js\"></script>");
     
     // remove existed base tag
     articleString.remove( baseTag ) ;

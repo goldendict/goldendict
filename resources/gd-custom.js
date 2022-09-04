@@ -49,23 +49,7 @@
         });
 
         //monitor iframe height.
-
-        $("iframe").on("load", function () {
-            var iframe = $(this);
-            resizeIframe(iframe[0]);
-        });
-
-        function resizeIframe(obj) {
-            setInterval(function () {
-                //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
-                var height = $(obj).contents().height();
-                $(obj).height(Math.min(2000, height));
-                if (height >= 2000) {
-                    obj.scrolling = "yes";
-                }
-            }, 500);
-        }
-
+        $('iframe').iFrameResize({ checkOrigin:false,maxHeight :1500,scrolling:true,warningTimeout:0,minHeight :250});
     });
 })($_$);
 

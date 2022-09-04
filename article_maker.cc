@@ -59,7 +59,10 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     result += "<script> var $_$=$.noConflict(); </script>";
 
     //custom javascript
-    result += "<script type=\"text/javascript\"   src=\"qrc:///resources/gd-custom.js\"></script>";
+    result += "<script type=\"text/javascript\" src=\"qrc:///resources/gd-custom.js\"></script>";
+
+    //iframe resizer javascript
+    result += "<script type=\"text/javascript\" src=\"qrc:///scripts/iframeResizer.min.js\"></script>";
   }
 
   // add qwebchannel

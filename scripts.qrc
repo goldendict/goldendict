@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>scripts/iframeResizer.contentWindow.min.js</file>
+        <file>scripts/iframeResizer.min.js</file>
+        <file>scripts/gd-builtin.js</file>
+        <file>scripts/gd-custom.js</file>
+        <file>scripts/jquery-3.6.0.slim.min.js</file>
+    </qresource>
+</RCC>
