@@ -54,12 +54,12 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   // add jquery
   {
     result += "<script type=\"text/javascript\"  "
-              "src=\"qrc:///resources/jquery-3.6.0.slim.min.js\"></script>";
+              "src=\"qrc:///scripts/jquery-3.6.0.slim.min.js\"></script>";
 
     result += "<script> var $_$=$.noConflict(); </script>";
 
     //custom javascript
-    result += "<script type=\"text/javascript\" src=\"qrc:///resources/gd-custom.js\"></script>";
+    result += "<script type=\"text/javascript\" src=\"qrc:///scripts/gd-custom.js\"></script>";
 
     //iframe resizer javascript
     result += "<script type=\"text/javascript\" src=\"qrc:///scripts/iframeResizer.min.js\"></script>";
@@ -147,7 +147,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
             "return tr_map[key] || '';"
             "}"
             "</script>";
-  result+= "<script type=\"text/javascript\" src=\"qrc:///resources/gd-builtin.js\"></script>";
+  result+= "<script type=\"text/javascript\" src=\"qrc:///scripts/gd-builtin.js\"></script>";
   result += "</head><body>";
 
   return result;

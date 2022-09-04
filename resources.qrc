@@ -57,9 +57,6 @@
         <file>icons/icon32_gls.png</file>
         <file>icons/folder.png</file>
         <file>icons/ontop.svg</file>
-        <file>resources/jquery-3.6.0.slim.min.js</file>
-        <file>resources/gd-custom.js</file>
-        <file>resources/gd-builtin.js</file>
         <file>icons/addtab.svg</file>
         <file>icons/book.svg</file>
         <file>icons/bookcase.svg</file>
