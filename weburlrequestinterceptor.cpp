@@ -21,7 +21,12 @@ void WebUrlRequestInterceptor::interceptRequest( QWebEngineUrlRequestInfo &info)
       //whitelist url does not block
       return;
     }
-    if(Utils::isHtmlResources(info.requestUrl())){
+    if( info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeImage
+        || info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeFontResource
+        || info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeStylesheet
+        || info.resourceType() == QWebEngineUrlRequestInfo::ResourceTypeMedia
+        || Utils::isHtmlResources( info.requestUrl() ) )
+    {
       //let throuth the resources file.
       return;
     }
