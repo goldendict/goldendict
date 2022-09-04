@@ -49,7 +49,7 @@
         });
 
         //monitor iframe height.
-        $('iframe').iFrameResize({ checkOrigin:false,maxHeight :1500,scrolling:true,warningTimeout:0,minHeight :250});
+        $('iframe').iFrameResize({ checkOrigin:false,maxHeight :800,scrolling:true,warningTimeout:0,minHeight :250,log:true});
     });
 })($_$);
 
