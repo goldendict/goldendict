@@ -1100,7 +1100,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
-    url.setPath( Utils::Url::ensureLeadingSlash( gd::toQString( node.renderAsText() ) ) );
+    wstring nodeStr = node.renderAsText();
+    normalizeHeadword( nodeStr );
+    url.setPath( Utils::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
     if( !node.tagAttrs.empty() )
     {
       QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
