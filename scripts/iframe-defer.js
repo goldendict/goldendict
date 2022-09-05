@@ -1,5 +1,12 @@
-setInterval(function () {
-    //in some cases ,the website in iframe will load result after document has been loaded. the height will continue to change.
+var start_time=new Date().getTime();
+
+var interval = setInterval(function () {
+    var end_time=new Date().getTime();
+    //for 10 seconds.
+    if(end_time-start_time>=10000){
+        clearInterval(interval);
+    }
+
     const body = document.body;
     const html = document.documentElement;
 
