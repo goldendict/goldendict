@@ -33,12 +33,12 @@ jobs:
       version-suffix: alpha
       prerelease: true
     steps:
-      # - name: prepare env
-      #   run: |
-      #     cd /opt
-      #     mkdir homebrew
-      #     curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
-      #     export PATH=$PATH:/opt/homebrew/bin
+      - name: prepare env
+        run: |
+          cd /opt
+          mkdir homebrew
+          curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+          export PATH=$PATH:/opt/homebrew/bin
       - name: Install Qt
         uses: xiaoyifang/install-qt-action@v3
         with:
