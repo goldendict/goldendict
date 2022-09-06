@@ -623,7 +623,8 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                               int distanceBetweenWords,
                                                               int maxResults,
                                                               bool ignoreWordsOrder,
-                                                              bool ignoreDiacritics );
+                                                              bool ignoreDiacritics,
+                                                              QThreadPool * ftsThreadPoolPtr );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     quint64 getArticlePos(uint32_t articleNumber );
@@ -1344,9 +1345,10 @@ sptr< Dictionary::DataRequest > SlobDictionary::getSearchResults( QString const 
                                                                   int distanceBetweenWords,
                                                                   int maxResults,
                                                                   bool ignoreWordsOrder,
-                                                                  bool ignoreDiacritics )
+                                                                  bool ignoreDiacritics,
+                                                                  QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 

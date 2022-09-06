@@ -708,7 +708,8 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
                                                               int distanceBetweenWords,
                                                               int maxResults,
                                                               bool ignoreWordsOrder,
-                                                              bool ignoreDiacritics );
+                                                              bool ignoreDiacritics,
+                                                              QThreadPool * ftsThreadPoolPtr );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     quint32 getArticleText( uint32_t articleAddress, QString & headword, QString & text,
@@ -1288,9 +1289,10 @@ sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const &
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
                                                                  bool ignoreWordsOrder,
-                                                                 bool ignoreDiacritics )
+                                                                 bool ignoreDiacritics,
+                                                                 QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 /// ZimDictionary::getArticle()

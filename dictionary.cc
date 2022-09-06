@@ -175,7 +175,7 @@ sptr< DataRequest > Class::getResource( string const & /*name*/ )
   return new DataRequestInstant( false );
 }
 
-sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool, bool )
+sptr< DataRequest > Class::getSearchResults(const QString &, int, bool, int, int, bool, bool, QThreadPool * )
 {
   return new DataRequestInstant( false );
 }

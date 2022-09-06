@@ -1149,6 +1149,12 @@ void FTSResultsRequest::fullSearch( QStringList & searchWords, QRegExp & regexp 
 
 void FTSResultsRequest::run()
 {
+  if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+  {
+    finish();
+    return;
+  }
+
   if ( dict.ensureInitDone().size() )
   {
     setErrorString( QString::fromUtf8( dict.ensureInitDone().c_str() ) );

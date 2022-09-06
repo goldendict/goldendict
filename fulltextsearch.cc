@@ -138,10 +138,14 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   group( 0 ),
   ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
   ignoreDiacritics( cfg_.preferences.fts.ignoreDiacritics ),
+  ftsThreadPool( this ),
+  searchInProgress( false ),
   ftsIdx( ftsidx )
 , helpAction( this )
 {
   ui.setupUi( this );
+
+  ftsThreadPool.setExpiryTimeout( -1 );
 
   setAttribute( Qt::WA_DeleteOnClose, false );
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
@@ -429,11 +433,13 @@ void FullTextSearchDialog::accept()
                                                               distanceBetweenWords,
                                                               maxResultsPerDict,
                                                               ignoreWordsOrder,
-                                                              ignoreDiacritics
+                                                              ignoreDiacritics,
+                                                              &ftsThreadPool
                                                             );
     connect( req.get(), SIGNAL( finished() ),
              this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
 
+    searchInProgress = true;
     searchReqs.push_back( req );
   }
 
@@ -486,8 +492,9 @@ void FullTextSearchDialog::searchReqFinished()
     else
       break;
   }
-  if ( searchReqs.empty() )
+  if ( searchReqs.empty() && searchInProgress )
   {
+    searchInProgress = false;
     ui.searchProgressBar->hide();
     ui.OKButton->setEnabled( true );
     QApplication::beep();

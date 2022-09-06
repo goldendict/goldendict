@@ -244,7 +244,8 @@ namespace
                                                               int distanceBetweenWords,
                                                               int maxResults,
                                                               bool ignoreWordsOrder,
-                                                              bool ignoreDiacritics );
+                                                              bool ignoreDiacritics,
+                                                              QThreadPool * ftsThreadPoolPtr );
     virtual QString const& getDescription();
 
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
@@ -1211,9 +1212,10 @@ sptr< Dictionary::DataRequest > BglDictionary::getSearchResults( QString const &
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
                                                                  bool ignoreWordsOrder,
-                                                                 bool ignoreDiacritics )
+                                                                 bool ignoreDiacritics,
+                                                                 QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 
