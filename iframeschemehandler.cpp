@@ -10,7 +10,8 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
   QUrl url = requestJob->requestUrl();
 
   // website dictionary iframe url
-  url = QUrl( Utils::Url::queryItemValue( url, "url" ) );
+  auto websiteUrl=QUrl::fromPercentEncoding( Utils::Url::queryItemValue( url, "url" ).toUtf8());
+  url = QUrl(  websiteUrl );
   QNetworkRequest request;
   request.setUrl( url );
   request.setAttribute(QNetworkRequest::RedirectPolicyAttribute,QNetworkRequest::RedirectPolicy::NoLessSafeRedirectPolicy);
