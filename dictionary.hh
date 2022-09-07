@@ -276,7 +276,7 @@ protected:
   // Load icon from filename directly if isFullName == true
   // else treat filename as name without extension
   bool loadIconFromFile( QString const & filename, bool isFullName = false );
-  bool loadIconFromText( QString const & text );
+  bool loadIconFromText( QString iconUrl, QString const & text );
 
   QString getAbbrName( QString const & text );
 
