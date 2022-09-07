@@ -146,6 +146,9 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   ui.setupUi( this );
 
   ftsThreadPool.setExpiryTimeout( -1 );
+  int threads = ftsThreadPool.maxThreadCount();
+  if( threads > 1 )
+    ftsThreadPool.setMaxThreadCount( threads - 1 );
 
   setAttribute( Qt::WA_DeleteOnClose, false );
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
