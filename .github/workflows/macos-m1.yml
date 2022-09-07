@@ -7,17 +7,17 @@ on:
   #   workflows: [AutoTag]
   #   types: [completed]
   workflow_dispatch:
-  push:
-    branches:
-      - dev
-      - master
-      # - staged
-    paths-ignore:
-      - 'docs/**'
-      - ".github/**"
-      - "howto/**"
-      - "*.md"
-      - ".clang-format"
+  # push:
+  #   branches:
+  #     - dev
+  #     - master
+  #     # - staged
+  #   paths-ignore:
+  #     - 'docs/**'
+  #     - ".github/**"
+  #     - "howto/**"
+  #     - "*.md"
+  #     - ".clang-format"
 jobs:
   build:
     name: Build
