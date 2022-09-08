@@ -23,12 +23,7 @@
 // speed improvements.
 
 #ifdef __BTREE_USE_LZO
-
-#ifndef INCLUDE_LIBRARY_PATH
-#include <lzo1x.h>
-#else
 #include <lzo/lzo1x.h>
-#endif
 
 namespace {
 struct __LzoInit

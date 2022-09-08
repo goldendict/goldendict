@@ -22,11 +22,8 @@
 
 #include <errno.h>
 #include <zlib.h>
-#ifdef INCLUDE_LIBRARY_PATH
 #include <lzo/lzo1x.h>
-#else
-#include <lzo1x.h>
-#endif
+
 #include <QtEndian>
 #include <QStringList>
 #include <QByteArray>

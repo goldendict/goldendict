@@ -72,13 +72,17 @@ jobs:
           brew install libtiff
           brew install libvorbis --force
           brew install hunspell
-
+          wget ftp://ftp.sra.co.jp/pub/misc/eb/eb-4.4.3.tar.bz2
+          tar xvjf eb-4.4.3.tar.bz2
+          cd eb-4.4.3 && ./configure && make -j 8 && sudo make install && cd ..
+          #brew install qt # or use official offline installer
+          brew install  xz lzo 
           brew install pkg-config
           brew install create-dmg
       - name: compile
         run: |          
           qmake   CONFIG+=release CONFIG+=no_macos_universal CONFIG+=zim_support CONFIG+=no_extra_tiff_handler  #CONFIG+=no_epwing_support # CONFIG+=no_ffmpeg_player #CONFIG+=no_qtmultimedia_player
-          make 
+          make -j 8
       # # 打包
       # - name: package
       #   run: |

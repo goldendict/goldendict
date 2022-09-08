@@ -64,10 +64,6 @@ DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x050F00
   DEFINES += MAKE_FFMPEG_PLAYER
 }
 
-!CONFIG( no_macos_universal ) {
-  DEFINES += INCLUDE_LIBRARY_PATH
-}
-
 CONFIG += exceptions \
     rtti \
     stl  \
@@ -202,13 +198,11 @@ mac {
     # You will need to use Xcode 3 and Qt Carbon SDK
     # if you want the support for PowerPC and/or Mac OS X 10.4
     # CONFIG += x86 x86_64 ppc
-!CONFIG( no_macos_universal ) {
     LIBS = -lz \
         -lbz2 \
         -lvorbisfile \
         -lvorbis \
         -logg \
-        -lhunspell \
         -llzo2
 
     !CONFIG( no_ffmpeg_player ) {
@@ -218,31 +212,20 @@ mac {
             -lavformat \
             -lavcodec
     }
-    QT_CONFIG -= no-pkg-config 
+    QT_CONFIG -= no-pkg-config
     CONFIG += link_pkgconfig
 
+
+!CONFIG( no_macos_universal ) {
+    DEFINES += INCLUDE_LIBRARY_PATH
+    LIBS+=        -lhunspell
     INCLUDEPATH = $${PWD}/maclibs/include
     LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
 }
 else{
-    QT_CONFIG -= no-pkg-config
-    CONFIG += link_pkgconfig
-    PKGCONFIG += vorbisfile \
-        vorbis \
-        ogg \
-        lzo2 hunspell
-    !CONFIG( no_ffmpeg_player ) {
-        PKGCONFIG += ao \
-            libavutil \
-            libavformat \
-            libavcodec \
-            libswresample \
-    }
-    
+    PKGCONFIG +=   hunspell
     INCLUDEPATH = /opt/homebrew/include /usr/local/include
-    INCLUDEPATH += $${PWD}/maclibs/include/
     LIBS += -L/opt/homebrew/lib -L/usr/local/lib -framework AppKit -framework Carbon
-    LIBS += -L$${PWD}/maclibs/lib/
 }
 
     OBJECTIVE_SOURCES += lionsupport.mm \
