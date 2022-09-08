@@ -1950,7 +1950,8 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   }
 
   menu.addSeparator();
-  menu.addAction( &inspectAction );
+  if(!popupView||cfg.pinPopupWindow)
+    menu.addAction( &inspectAction );
 
   if ( !menu.isEmpty() )
   {

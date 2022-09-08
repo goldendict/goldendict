@@ -63,6 +63,7 @@ signals:
   void closeMenu();
   /// Signals to set expand optional parts mode (retranslation from/to MainWindow and dictionary bar)
   void setExpandMode( bool expand );
+  void inspectSignal(QWebEnginePage * page);
   void setViewExpandMode( bool expand );
   /// Signal to switch expand optional parts mode
   void switchExpandMode();
@@ -92,6 +93,7 @@ signals:
 public slots:
   void requestWindowFocus();
 
+  void inspectElementWhenPinned( QWebEnginePage * page );
   /// Translates the word from the clipboard, showing the window etc.
   void translateWordFromClipboard();
   /// Translates the word from the clipboard selection

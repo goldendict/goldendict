@@ -1537,6 +1537,8 @@ void MainWindow::makeScanPopup()
   connect( scanPopup.get(), SIGNAL( setExpandMode( bool ) ),
            this, SLOT( setExpandMode( bool ) ) );
 
+  connect( scanPopup.get(), &ScanPopup::inspectSignal,this,&MainWindow::inspectElement );
+
   connect( scanPopup.get(), SIGNAL( forceAddWordToHistory( const QString & ) ),
            this, SLOT( forceAddWordToHistory( const QString & ) ) );
 
