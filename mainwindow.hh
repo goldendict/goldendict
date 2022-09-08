@@ -154,6 +154,9 @@ private:
 
   sptr< ScanPopup > scanPopup;
 
+  //variable used to mark the first Ctrl+C triggered.
+  bool firstCopyKeyTriggered;
+
   sptr< HotkeyWrapper > hotkeyWrapper;
 
   QTimer newReleaseCheckTimer; // Countdown to a check for the new program
