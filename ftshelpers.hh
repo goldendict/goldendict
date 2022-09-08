@@ -149,7 +149,7 @@ public:
       new FTSResultsRequestRunnable( *this, hasExited ), -100 );
   }
 
-  void run(); // Run from another thread by DslResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
