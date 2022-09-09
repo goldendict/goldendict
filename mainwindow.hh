@@ -31,11 +31,6 @@
 #include "fulltextsearch.hh"
 #include "helpwindow.hh"
 
-#include "hotkeywrapper.hh"
-#ifdef HAVE_X11
-#include <fixx11h.h>
-#endif
-
 using std::string;
 using std::vector;
 
@@ -59,7 +54,7 @@ public:
   }
 };
 
-class MainWindow: public QMainWindow, public DataCommitter
+class MainWindow: public QMainWindow
 {
   Q_OBJECT
 
@@ -165,8 +160,6 @@ private:
 
   sptr< ScanPopup > scanPopup;
 
-  sptr< HotkeyWrapper > hotkeyWrapper;
-
   QTimer newReleaseCheckTimer; // Countdown to a check for the new program
                                // release, if enabled
   QNetworkReply *latestReleaseReply;
@@ -236,9 +229,6 @@ private:
   void toggleMainWindow( bool onlyShow = false );
 #endif
 
-  /// Creates hotkeyWrapper and hooks the currently set keys for it
-  void installHotKeys();
-
   void applyZoomFactor();
   void adjustCurrentZoomFactor();
 
@@ -273,8 +263,6 @@ private:
                                           TranslateBoxPopup popupAction );
 
 private slots:
-
-  void hotKeyActivated( int );
 
   /// If new release checks are on, santizies the next check time and starts
   /// the timer. Does nothing otherwise.

@@ -6,12 +6,9 @@
 #include "gdappstyle.hh"
 #include "mainwindow.hh"
 #include "config.hh"
+#include "qtsingleapplication.h"
 
 #include "processwrapper.hh"
-#include "hotkeywrapper.hh"
-#ifdef HAVE_X11
-#include <fixx11h.h>
-#endif
 
 //#define __DO_DEBUG
 
@@ -298,7 +295,7 @@ int main( int argc, char ** argv )
 
 #endif
 
-  QHotkeyApplication app( "GoldenDict", argc, argv );
+  QtSingleApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
 
   if ( app.isRunning() )
@@ -440,8 +437,6 @@ int main( int argc, char ** argv )
 
   MainWindow m( cfg );
 
-  app.addDataCommiter( m );
-
   QObject::connect( &app, SIGNAL(messageReceived(const QString&)),
     &m, SLOT(messageFromAnotherInstanceReceived(const QString&)));
 
@@ -455,8 +450,6 @@ int main( int argc, char ** argv )
     m.wordReceived( gdcl.wordToTranslate() );
 
   int r = app.exec();
-
-  app.removeDataCommiter( m );
 
   if( logFilePtr->isOpen() )
     logFilePtr->close();

@@ -149,16 +149,9 @@ win32 {
 }
 
 unix:!mac {
-  DEFINES += HAVE_X11
   # This is to keep symbols for backtraces
   QMAKE_CXXFLAGS += -rdynamic
   QMAKE_LFLAGS += -rdynamic
-
-    greaterThan(QT_MAJOR_VERSION, 4) {
-      greaterThan(QT_MINOR_VERSION, 0) {
-        QT += x11extras
-      }
-    }
 
     CONFIG += link_pkgconfig
     PKGCONFIG += vorbisfile \
@@ -175,7 +168,6 @@ unix:!mac {
     arm {
         LIBS += -liconv
     } else {
-        LIBS += -lX11 -lXtst
     }
 
     # Install prefix: first try to use qmake's PREFIX variable,
@@ -302,7 +294,6 @@ HEADERS += folding.hh \
     externalviewer.hh \
     wordfinder.hh \
     groupcombobox.hh \
-    keyboardstate.hh \
     mouseover.hh \
     preferences.hh \
     mutex.hh \
@@ -314,9 +305,7 @@ HEADERS += folding.hh \
     wstring.hh \
     wstring_qt.hh \
     processwrapper.hh \
-    hotkeywrapper.hh \
     searchpanewidget.hh \
-    hotkeyedit.hh \
     langcoder.hh \
     editdictionaries.hh \
     loaddictionaries.hh \
@@ -436,7 +425,6 @@ SOURCES += folding.cc \
     externalviewer.cc \
     wordfinder.cc \
     groupcombobox.cc \
-    keyboardstate.cc \
     mouseover.cc \
     preferences.cc \
     mutex.cc \
@@ -448,8 +436,6 @@ SOURCES += folding.cc \
     wstring.cc \
     wstring_qt.cc \
     processwrapper.cc \
-    hotkeywrapper.cc \
-    hotkeyedit.cc \
     langcoder.cc \
     editdictionaries.cc \
     loaddictionaries.cc \

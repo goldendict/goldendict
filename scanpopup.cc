@@ -590,7 +590,7 @@ void ScanPopup::handleInputWord( QString const & str, bool forcePopup )
 
   // Check key modifiers
 
-  if ( cfg.preferences.enableScanPopupModifiers && !checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
+  if ( cfg.preferences.enableScanPopupModifiers )
   {
     if ( cfg.preferences.scanPopupAltMode )
     {
@@ -1140,15 +1140,6 @@ void ScanPopup::altModePoll()
   {
     altModePollingTimer.stop();
     altModeExpirationTimer.stop();
-  }
-  else
-  if ( checkModifiersPressed( cfg.preferences.scanPopupModifiers ) )
-  {
-    altModePollingTimer.stop();
-    altModeExpirationTimer.stop();
-
-    inputPhrase = pendingInputPhrase;
-    engagePopup( false );
   }
 }
 

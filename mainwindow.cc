@@ -43,6 +43,7 @@
 #include "dictinfo.hh"
 #include "fsencoding.hh"
 #include "historypanewidget.hh"
+#include "qtsingleapplication.h"
 #include "qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
@@ -835,9 +836,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   // Update autostart info
   setAutostart(cfg.preferences.autoStart);
 
-  // Initialize global hotkeys
-  installHotKeys();
-
   if ( cfg.preferences.alwaysOnTop )
   {
     on_alwaysOnTop_triggered( true );
@@ -880,7 +878,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   #endif
 #ifdef Q_OS_WIN32
   gdAskMessage = RegisterWindowMessage( GD_MESSAGE_NAME );
-  ( static_cast< QHotkeyApplication * >( qApp ) )->setMainWindow( this );
+  ( static_cast< QtSingleApplication * >( qApp ) )->setMainWindow( this );
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
@@ -2026,7 +2024,6 @@ void MainWindow::updatePronounceAvailability()
 
 void MainWindow::editDictionaries( unsigned editDictionaryGroup )
 {
-  hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
@@ -2087,7 +2084,6 @@ void MainWindow::editDictionaries( unsigned editDictionaryGroup )
   }
 
   makeScanPopup();
-  installHotKeys();
 
   for( unsigned x = 0; x < dictionaries.size(); x++ )
   {
@@ -2106,7 +2102,6 @@ void MainWindow::editCurrentGroup()
 
 void MainWindow::editPreferences()
 {
-  hotkeyWrapper.reset(); // So we could use the keys it hooks
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
@@ -2229,7 +2224,6 @@ void MainWindow::editPreferences()
   }
 
   makeScanPopup();
-  installHotKeys();
 
   ftsIndexing.setDictionaries( dictionaries );
   ftsIndexing.doIndexing();
@@ -3073,71 +3067,6 @@ void MainWindow::toggleMainWindow( bool onlyShow )
   }
 }
 
-void MainWindow::installHotKeys()
-{
-  hotkeyWrapper.reset(); // Remove the old one
-
-  if ( cfg.preferences.enableMainWindowHotkey ||
-       cfg.preferences.enableClipboardHotkey )
-  {
-    try
-    {
-      hotkeyWrapper = new HotkeyWrapper( this );
-    }
-    catch( HotkeyWrapper::exInit & )
-    {
-      QMessageBox::critical( this, "GoldenDict",
-        tr( "Failed to initialize hotkeys monitoring mechanism.<br>"
-            "Make sure your XServer has RECORD extension turned on." ) );
-
-      return;
-    }
-
-    if ( cfg.preferences.enableMainWindowHotkey )
-      hotkeyWrapper->setGlobalKey( cfg.preferences.mainWindowHotkey.key1,
-                                   cfg.preferences.mainWindowHotkey.key2,
-                                   cfg.preferences.mainWindowHotkey.modifiers,
-                                   0 );
-
-    if ( cfg.preferences.enableClipboardHotkey && scanPopup.get() )
-    {
-      hotkeyWrapper->setGlobalKey( cfg.preferences.clipboardHotkey.key1,
-                                   cfg.preferences.clipboardHotkey.key2,
-                                   cfg.preferences.clipboardHotkey.modifiers,
-                                   1 );
-    }
-
-    connect( hotkeyWrapper.get(), SIGNAL( hotkeyActivated( int ) ),
-             this, SLOT( hotKeyActivated( int ) ),
-#ifdef Q_OS_WIN32
-             hotkeyWrapper->handleViaDLL() ? Qt::QueuedConnection : Qt::AutoConnection );
-#else
-             Qt::AutoConnection );
-#endif
-  }
-}
-
-void MainWindow::hotKeyActivated( int hk )
-{
-  if ( !hk )
-    toggleMainWindow();
-  else
-  if ( scanPopup.get() )
-  {
-#ifdef HAVE_X11
-    // When the user requests translation with the Ctrl+C+C hotkey in certain apps
-    // on some GNU/Linux systems, GoldenDict appears to handle Ctrl+C+C before the
-    // active application finishes handling Ctrl+C. As a result, GoldenDict finds
-    // the clipboard empty, silently cancels the translation request, and users report
-    // that Ctrl+C+C is broken in these apps. Slightly delay handling the clipboard
-    // hotkey to give the active application more time and thus work around the issue.
-    QTimer::singleShot( 10, scanPopup.get(), SLOT( translateWordFromClipboard() ) );
-#else
-    scanPopup->translateWordFromClipboard();
-#endif
-  }
-}
-
 void MainWindow::prepareNewReleaseChecks()
 {
   if ( cfg.preferences.checkForNewReleases )
@@ -3675,7 +3604,6 @@ void MainWindow::on_saveArticle_triggered()
 
 void MainWindow::on_rescanFiles_triggered()
 {
-  hotkeyWrapper.reset(); // No hotkeys while we're editing dictionaries
   scanPopup.reset(); // No scan popup either. No one should use dictionaries.
   closeHeadwordsDialog();
   closeFullTextSearchDialog();
@@ -3702,7 +3630,6 @@ void MainWindow::on_rescanFiles_triggered()
   updateGroupList();
 
   makeScanPopup();
-  installHotKeys();
 
   updateSuggestionList();
 }
@@ -3733,7 +3660,6 @@ void MainWindow::on_alwaysOnTop_triggered( bool checked )
       show();
     }
 
-    installHotKeys();
 }
 
 void MainWindow::zoomin()
