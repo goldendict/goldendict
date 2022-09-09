@@ -139,7 +139,9 @@ win32 {
         CONFIG += chinese_conversion_support
     }
 }
-
+!CONFIG( no_macos_universal ) {
+    DEFINES += INCLUDE_LIBRARY_PATH
+}
 unix:!mac {
     DEFINES += HAVE_X11
 
@@ -217,7 +219,6 @@ mac {
 
 
 !CONFIG( no_macos_universal ) {
-    DEFINES += INCLUDE_LIBRARY_PATH
     LIBS+=        -lhunspell
     INCLUDEPATH = $${PWD}/maclibs/include
     LIBS += -L$${PWD}/maclibs/lib -framework AppKit -framework Carbon
