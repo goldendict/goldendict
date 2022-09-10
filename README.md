@@ -30,12 +30,12 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
          
 ### Fedora 35
 ```
-sudo dnf install git pkg-config \
+sudo dnf install git pkg-config libzstd-devel opencc-devel xz-devel xz-lzma-compat\
      libvorbis-devel zlib-devel hunspell-devel lzo-devel bzip2-devel \
      libao-devel ffmpeg-devel libtiff-devel eb-devel qt5-qtx11extras-devel libXtst-devel \
      libxkbcommon-devel qt5-qtbase qt5-qttools qt5-qtsvg-devl qt5-qtwebengine-devel qt5-qtmultimedia-devl
      
-qmake-qt5 CONFIG+=RELEASE CONFIG+=....(options)
+qmake-qt5 CONFIG+=release CONFIG+=no_extra_tiff_handler CONFIG+=no_epwing_support
 make
 
 
