@@ -48,6 +48,7 @@
 #include "ui_authentication.h"
 
 #ifndef USE_QTWEBKIT
+#include <QVersionNumber>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
 #endif
@@ -97,6 +98,52 @@ public:
 #endif
 
 #ifndef USE_QTWEBKIT
+/// Both compile-time and run-time Qt WebEngine versions may and often do differ from the corresponding
+/// Qt versions. That's because building Qt WebEngine with earlier Qt versions is officially supported.
+/// Patch releases of Qt WebEngine are available as free software and are packaged by GNU/Linux
+/// distributions a year before the patch releases of the corresponding LTS (e.g. 5.15.x) Qt versions.
+QVersionNumber runTimeQtWebEngineVersion( QWebEngineProfile const & webEngineProfile )
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 6, 2, 0 )
+  Q_UNUSED( webEngineProfile )
+  return QVersionNumber::fromString( QLatin1String{ qWebEngineVersion() } );
+#else
+  QString const httpUserAgent = webEngineProfile.httpUserAgent();
+  // httpUserAgent should contain a substring like "QtWebEngine/5.15.10 ". The "5.15.10" part
+  // equals the run-time version of Qt WebEngine. The code below extracts this version.
+
+  QLatin1String const prefix( "QtWebEngine/" );
+  auto webEngineVersionIndex = httpUserAgent.indexOf( prefix );
+  if( webEngineVersionIndex == -1 )
+  {
+    gdWarning( "Failed to parse the Qt WebEngine profile's HTTP User-Agent string: %s",
+               qUtf8Printable( httpUserAgent ) );
+    return QVersionNumber();
+  }
+  webEngineVersionIndex += prefix.size();
+
+  return QVersionNumber::fromString( QStringView{ httpUserAgent }.mid( webEngineVersionIndex ) );
+#endif
+}
+
+StreamingDeviceWorkarounds computeStreamingDeviceWorkarounds( QWebEngineProfile const & webEngineProfile )
+{
+  auto const webEngineVersion = runTimeQtWebEngineVersion( webEngineProfile );
+  if( webEngineVersion.isNull() )
+    return StreamingDeviceWorkarounds::None; // This must be a future version => probably no need for the workarounds.
+
+#if QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 )
+  if( webEngineVersion >= QVersionNumber( 6, 4, 1 ) )
+    return StreamingDeviceWorkarounds::None;
+  if( webEngineVersion >= QVersionNumber( 6, 4, 0 ) )
+    return StreamingDeviceWorkarounds::AtEndOnly;
+#else
+  if( webEngineVersion >= QVersionNumber( 5, 15, 11 ) )
+    return StreamingDeviceWorkarounds::AtEndOnly;
+#endif
+  return StreamingDeviceWorkarounds::AtEndAndReadData;
+}
+
 void setupWebEngineProfile( ArticleNetworkAccessManager & articleNetMgr )
 {
   auto & webEngineProfile = *QWebEngineProfile::defaultProfile();
@@ -117,6 +164,8 @@ void setupWebEngineProfile( ArticleNetworkAccessManager & articleNetMgr )
   QString persistentStoragePath = webEngineProfile.persistentStoragePath();
   if( Config::replaceWritableDataLocationIn( persistentStoragePath ) )
     webEngineProfile.setPersistentStoragePath( persistentStoragePath );
+
+  articleNetMgr.setStreamingDeviceWorkarounds( computeStreamingDeviceWorkarounds( webEngineProfile ) );
 
   auto * const handler = new ArticleUrlSchemeHandler( articleNetMgr );
   handler->install( webEngineProfile );

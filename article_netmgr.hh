@@ -131,6 +131,16 @@ private slots:
 #endif // QT_VERSION
 #endif // USE_QTWEBKIT
 
+#ifndef USE_QTWEBKIT
+/// Signifies workarounds for QTBUG-106461 needed in the current run-time Qt WebEngine version.
+enum class StreamingDeviceWorkarounds
+{
+  None, ///< The bug is completely fixed in Qt WebEngine 6.4.1.
+  AtEndOnly, ///< Busy waiting is fixed in Qt WebEngine 5.15.11 and 6.4.0.
+  AtEndAndReadData
+};
+#endif
+
 class ArticleNetworkAccessManager: public QNetworkAccessManager
 {
   vector< sptr< Dictionary::Class > > const & dictionaries;
@@ -140,6 +150,10 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
 #if defined( USE_QTWEBKIT ) && QT_VERSION >= 0x050300  // Qt 5.3+
   Origins allOrigins;
 #endif
+#ifndef USE_QTWEBKIT
+  StreamingDeviceWorkarounds streamingDeviceWorkarounds = StreamingDeviceWorkarounds::None;
+#endif
+
 public:
 
   ArticleNetworkAccessManager( QObject * parent,
@@ -153,6 +167,11 @@ public:
     disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
     hideGoldenDictHeader( hideGoldenDictHeader_ )
   {}
+
+#ifndef USE_QTWEBKIT
+  void setStreamingDeviceWorkarounds( StreamingDeviceWorkarounds workarounds )
+  { streamingDeviceWorkarounds = workarounds; }
+#endif
 
   /// @return articleMaker.makeBlankPageHtmlCode( pageBackgroundColor )
   std::string makeBlankPage( QColor * pageBackgroundColor = 0 ) const;
@@ -177,6 +196,9 @@ class ArticleResourceReply: public QNetworkReply
 
   sptr< Dictionary::DataRequest > req;
   qint64 alreadyRead;
+#ifndef USE_QTWEBKIT
+  StreamingDeviceWorkarounds streamingDeviceWorkarounds = StreamingDeviceWorkarounds::None;
+#endif
 
 public:
 
@@ -187,10 +209,18 @@ public:
 
   ~ArticleResourceReply();
 
+#ifndef USE_QTWEBKIT
+  void setStreamingDeviceWorkarounds( StreamingDeviceWorkarounds workarounds )
+  { streamingDeviceWorkarounds = workarounds; }
+#endif
+
 protected:
 
   virtual qint64 bytesAvailable() const;
-  virtual bool atEnd() const;
+
+#ifndef USE_QTWEBKIT
+  bool atEnd() const override;
+#endif
 
   virtual void abort()
   {}
