@@ -33,7 +33,10 @@ This code has been run and tested on Windows 10/11, Ubuntu Linux, Mac OS X.
 sudo dnf install git pkg-config \
      libvorbis-devel zlib-devel hunspell-devel lzo-devel bzip2-devel \
      libao-devel ffmpeg-devel libtiff-devel eb-devel qt5-qtx11extras-devel libXtst-devel \
-     libxkbcommon-devel 
+     libxkbcommon-devel qt5-qtbase qt5-qttools qt5-qtsvg-devl qt5-qtwebengine-devel qt5-qtmultimedia-devl
+     
+qmake-qt5 CONFIG+=RELEASE CONFIG+=....(options)
+make
 
 
 ```
