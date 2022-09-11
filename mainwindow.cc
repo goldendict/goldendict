@@ -933,19 +933,17 @@ void MainWindow::clipboardChange( )
   if( scanPopup && cfg.preferences.trackClipboardChanges )
   {
     scanPopup->translateWordFromClipboard();
-    return;
   }
 
   //Ctrl+C+C
   if(cfg.preferences.enableClipboardHotkey)
   {
     if(firstCopyKeyTriggered){
-      firstCopyKeyTriggered=false;
-
       if(scanPopup)
       {
         scanPopup->translateWordFromClipboard();
       }
+      firstCopyKeyTriggered=false;
     }else{
       firstCopyKeyTriggered = true;
       QTimer::singleShot(500,this,[this](){
