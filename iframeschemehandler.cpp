@@ -20,7 +20,7 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
   auto finishAction     = [ = ]() -> void
   {
-    QByteArray contentType = "text/html;charset=UTF-8";
+    QByteArray contentType = "text/html";
 
     QBuffer * buffer = new QBuffer( requestJob );
     // Handle reply data
