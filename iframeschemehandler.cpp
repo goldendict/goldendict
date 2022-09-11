@@ -24,13 +24,6 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
 
     QBuffer * buffer = new QBuffer( requestJob );
     // Handle reply data
-    if( reply->error() != QNetworkReply::NoError )
-    {
-      QString emptyHtml = QString( "<html><body>%1</body></html>" ).arg( reply->errorString() );
-      buffer->setData( emptyHtml.toUtf8() );
-      requestJob->reply( contentType, buffer );
-      return;
-    }
     QByteArray replyData = reply->readAll();
     QString articleString;
 
