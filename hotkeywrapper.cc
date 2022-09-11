@@ -158,7 +158,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
 
       #ifdef Q_OS_WIN32
 
-      if( hs.key2 != 0 /*|| ( mod == MOD_CONTROL && ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) )*/ )
+      if( hs.key2 != 0 || ( mod == MOD_CONTROL && ( vk == VK_INSERT || vk == 'c' || vk == 'C' ) ) )
       {
         // Pass-through first part of compound hotkey or clipdoard copy command
 
@@ -258,7 +258,7 @@ bool HotkeyWrapper::checkState(quint32 vk, quint32 mod)
       // Note that we only grab the clipboard key only if
       // the sequence didn't begin with it
 
-      if ( ( isCopyToClipboardKey( hs.key, hs.modifier ) &&
+      if ( ( isCopyToClipboardKey( hs.key, hs.modifier ) ||
              !isCopyToClipboardKey( hs.key2, hs.modifier ) ) &&
            !isKeyGrabbed( hs.key2, hs.modifier ) )
         keyToUngrab = grabKey( hs.key2, hs.modifier );
