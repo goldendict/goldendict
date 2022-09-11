@@ -642,6 +642,12 @@ bool ArticleResourceReply::atEnd() const
 }
 #endif
 
+void ArticleResourceReply::close()
+{
+  req->cancel();
+  QNetworkReply::close();
+}
+
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
   // From the doc: "This function might be called with a maxSize of 0,

@@ -224,6 +224,8 @@ protected:
 
   virtual void abort()
   {}
+  virtual void close();
+
   virtual qint64 readData( char * data, qint64 maxSize );
 
   // We use the hackery below to work around the fact that we need to emit
