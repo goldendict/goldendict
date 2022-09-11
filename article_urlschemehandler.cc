@@ -19,6 +19,7 @@
 #include <QWebEngineUrlScheme>
 
 #include <array>
+#include <utility>
 
 namespace {
 
@@ -77,11 +78,14 @@ QWebEngineUrlRequestJob::Error jobErrorFromNetworkError( QNetworkReply::NetworkE
   }
 }
 
-void reportError( QNetworkReply::NetworkError networkError, QNetworkReply const & reply )
+void reportError( QNetworkReply::NetworkError networkError, QNetworkReply const & reply, QWebEngineUrlRequestJob * job )
 {
   gdWarning( "Error while requesting URL %s: %s (%s)", qUtf8Printable( reply.url().toString() ),
              qUtf8Printable( reply.errorString() ),
              QMetaEnum::fromType< decltype( networkError ) >().valueToKey( networkError ) );
+
+  if( job )
+    job->fail( jobErrorFromNetworkError( networkError ) );
 }
 
 bool respondToUrlRequest( QWebEngineUrlRequestJob * job, QNetworkReply * reply )
@@ -92,8 +96,7 @@ bool respondToUrlRequest( QWebEngineUrlRequestJob * job, QNetworkReply * reply )
   auto const networkError = reply->error();
   if( networkError != QNetworkReply::NoError )
   {
-    reportError( networkError, *reply );
-    job->fail( jobErrorFromNetworkError( networkError ) );
+    reportError( networkError, *reply, job );
     return false;
   }
 
@@ -170,17 +173,19 @@ void ArticleUrlSchemeHandler::requestStarted( QWebEngineUrlRequestJob * job )
     return;
   }
 
-  connect( reply, &QNetworkReply::errorOccurred, [ reply ]( QNetworkReply::NetworkError code ) {
-    reportError( code, *reply );
+  QPointer< QWebEngineUrlRequestJob > jobPointer( job );
+
+  connect( reply, &QNetworkReply::errorOccurred, reply, [ reply, jobPointer ]( QNetworkReply::NetworkError code ) {
+    reportError( code, *reply, jobPointer );
   } );
 
   // Deliberately don't use job as context in this connection: if job is destroyed
   // before reply is finished, reply would be leaked. Using reply as context does
   // not impact behavior, but silences Clazy checker connect-3arg-lambda (level1).
-  connect( reply, &QNetworkReply::finished, reply, [ reply, job = QPointer< QWebEngineUrlRequestJob >{ job } ] {
+  connect( reply, &QNetworkReply::finished, reply, [ reply, jobPointer = std::move( jobPointer ) ] {
     // At this point reply is no longer written to and can be safely destroyed once job ends reading from it.
-    if( job )
-      connect( job, &QObject::destroyed, reply, &QObject::deleteLater );
+    if( jobPointer )
+      connect( jobPointer, &QObject::destroyed, reply, &QObject::deleteLater );
     else
       reply->deleteLater();
   } );
