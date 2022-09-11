@@ -814,12 +814,6 @@ seconds, which is specified here.</string>
            <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="text">
-            <string>Ctrl+C+C</string>
-           </property>
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
           </widget>
          </item>
         </layout>

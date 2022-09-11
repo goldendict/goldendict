@@ -137,7 +137,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   dictNetMgr( this ),
   audioPlayerFactory( cfg.preferences ),
   wordFinder( this ),
-  firstCopyKeyTriggered(false),
   newReleaseCheckTimer( this ),
   latestReleaseReply( 0 ),
   wordListSelChanged( false )
@@ -933,24 +932,6 @@ void MainWindow::clipboardChange( )
   if( scanPopup && cfg.preferences.trackClipboardChanges )
   {
     scanPopup->translateWordFromClipboard();
-  }
-
-  //Ctrl+C+C
-  if(cfg.preferences.enableClipboardHotkey)
-  {
-    if(firstCopyKeyTriggered){
-      if(scanPopup)
-      {
-        scanPopup->translateWordFromClipboard();
-      }
-      firstCopyKeyTriggered=false;
-    }else{
-      firstCopyKeyTriggered = true;
-      QTimer::singleShot(500,this,[this](){
-        //reset the variable to false;
-        firstCopyKeyTriggered = false;
-      });
-    }
   }
 }
 
@@ -3017,7 +2998,8 @@ void MainWindow::installHotKeys()
 {
   hotkeyWrapper.reset(); // Remove the old one
 
-  if ( cfg.preferences.enableMainWindowHotkey )
+  if ( cfg.preferences.enableMainWindowHotkey ||
+       cfg.preferences.enableClipboardHotkey )
   {
     try
     {
@@ -3038,13 +3020,13 @@ void MainWindow::installHotKeys()
                                    cfg.preferences.mainWindowHotkey.modifiers,
                                    0 );
 
-//    if ( cfg.preferences.enableClipboardHotkey && scanPopup.get() )
-//    {
-//      hotkeyWrapper->setGlobalKey( cfg.preferences.clipboardHotkey.key1,
-//                                   cfg.preferences.clipboardHotkey.key2,
-//                                   cfg.preferences.clipboardHotkey.modifiers,
-//                                   1 );
-//    }
+    if ( cfg.preferences.enableClipboardHotkey && scanPopup.get() )
+    {
+      hotkeyWrapper->setGlobalKey( cfg.preferences.clipboardHotkey.key1,
+                                   cfg.preferences.clipboardHotkey.key2,
+                                   cfg.preferences.clipboardHotkey.modifiers,
+                                   1 );
+    }
 
     connect( hotkeyWrapper.get(), SIGNAL( hotkeyActivated( int ) ),
              this, SLOT( hotKeyActivated( int ) ),
