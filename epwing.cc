@@ -478,6 +478,10 @@ public:
 
   void run(); // Run from another thread by EpwingArticleRequestRunnable
 
+  void getBuiltInArticle(wstring const & word_, QVector< int > & pages,
+                          QVector< int > & offsets,
+                          multimap< wstring, pair< string, string > > & mainArticles );
+
   virtual void cancel()
   {
     isCancelled.ref();
@@ -509,7 +513,6 @@ void EpwingArticleRequest::run()
   for( unsigned x = 0; x < alts.size(); ++x )
   {
     /// Make an additional query for each alt
-
     vector< WordArticleLink > altChain = dict.findArticles( alts[ x ], ignoreDiacritics );
 
     chain.insert( chain.end(), altChain.begin(), altChain.end() );
@@ -577,44 +580,10 @@ void EpwingArticleRequest::run()
   }
 
   // Also try to find word in the built-in dictionary index
-  try
+  getBuiltInArticle(word, pages, offsets, mainArticles );
+  for( unsigned x = 0; x < alts.size(); ++x )
   {
-    string headword, articleText;
-
-    QVector< int > pg, off;
-    {
-      Mutex::Lock _( dict.eBook.getLibMutex() );
-      dict.eBook.getArticlePos( gd::toQString( word ), pg, off );
-    }
-
-    for( int i = 0; i < pg.size(); i++ )
-    {
-      bool already = false;
-      for( int n = 0; n < pages.size(); n++ )
-      {
-        if( pages.at( n ) == pg.at( i )
-            && abs( offsets.at( n ) - off.at( i ) ) <= 4 )
-        {
-          already = true;
-          break;
-        }
-      }
-
-      if( !already )
-      {
-        dict.loadArticle( pg.at( i ), off.at( i ), headword, articleText );
-
-        mainArticles.insert( pair< wstring, pair< string, string > >(
-          Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
-          pair< string, string >( headword, articleText ) ) );
-
-        pages.append( pg.at( i ) );
-        offsets.append( off.at( i ) );
-      }
-    }
-  }
-  catch(...)
-  {
+    getBuiltInArticle( alts[ x ], pages, offsets, alternateArticles );
   }
 
   if ( mainArticles.empty() && alternateArticles.empty() )
@@ -655,6 +624,51 @@ void EpwingArticleRequest::run()
   hasAnyData = true;
 
   finish();
+}
+
+void EpwingArticleRequest::getBuiltInArticle( wstring const & word_,
+                                              QVector< int > & pages,
+                                              QVector< int > & offsets,
+                                              multimap< wstring, pair< string, string > > & mainArticles )
+{
+  try
+  {
+    string headword, articleText;
+
+    QVector< int > pg, off;
+    {
+      Mutex::Lock _( dict.eBook.getLibMutex() );
+      dict.eBook.getArticlePos( gd::toQString( word_ ), pg, off );
+    }
+
+    for( int i = 0; i < pg.size(); i++ )
+    {
+      bool already = false;
+      for( int n = 0; n < pages.size(); n++ )
+      {
+        if( pages.at( n ) == pg.at( i ) && abs( offsets.at( n ) - off.at( i ) ) <= 4 )
+        {
+          already = true;
+          break;
+        }
+      }
+
+      if( !already )
+      {
+        dict.loadArticle( pg.at( i ), off.at( i ), headword, articleText );
+
+        mainArticles.insert(
+          pair< wstring, pair< string, string > >( Folding::applySimpleCaseOnly( Utf8::decode( headword ) ),
+                                                   pair< string, string >( headword, articleText ) ) );
+
+        pages.append( pg.at( i ) );
+        offsets.append( off.at( i ) );
+      }
+    }
+  }
+  catch( ... )
+  {
+  }
 }
 
 sptr< Dictionary::DataRequest > EpwingDictionary::getArticle( wstring const & word,
