@@ -429,28 +429,6 @@ void EpwingDictionary::getArticleText( uint32_t articleAddress, QString & headwo
 
 /// EpwingDictionary::getArticle()
 
-class EpwingArticleRequest;
-
-class EpwingArticleRequestRunnable: public QRunnable
-{
-  EpwingArticleRequest & r;
-  QSemaphore & hasExited;
-
-public:
-
-  EpwingArticleRequestRunnable( EpwingArticleRequest & r_,
-                                QSemaphore & hasExited_ ): r( r_ ),
-                                                           hasExited( hasExited_ )
-  {}
-
-  ~EpwingArticleRequestRunnable()
-  {
-    hasExited.release();
-  }
-
-  virtual void run();
-};
-
 class EpwingArticleRequest: public Dictionary::DataRequest
 {
   friend class EpwingArticleRequestRunnable;
@@ -476,7 +454,7 @@ public:
     //   new EpwingArticleRequestRunnable( *this, hasExited ) );
   }
 
-  void run(); // Run from another thread by EpwingArticleRequestRunnable
+  void run();
 
   void getBuiltInArticle(wstring const & word_, QVector< int > & pages,
                           QVector< int > & offsets,
@@ -494,11 +472,6 @@ public:
     // hasExited.acquire();
   }
 };
-
-void EpwingArticleRequestRunnable::run()
-{
-  r.run();
-}
 
 void EpwingArticleRequest::run()
 {
