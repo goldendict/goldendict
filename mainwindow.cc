@@ -162,6 +162,27 @@ void setupWebEngineProfile( QWebEngineProfile & webEngineProfile, ArticleNetwork
   // TODO (Qt WebEngine): should the maximum size of the HTTP cache and whether
   // it is cleared on exit be configurable similarly to the network cache?
 
+  // TODO (Qt WebEngine): in the Qt WebEngine version articleNetMgr's cache is useful only for downloaded files,
+  // because the page itself is stored separately in the Qt WebEngine profile's cache. In the interest of
+  // reusing the Qt WebEngine profile's cache for both loading pages and downloading files,
+  // Dictionary::WebMultimediaDownload could call QWebEnginePage::download() instead of
+  // QNetworkAccessManager::get() to retrieve files from network. articleNetMgr's cache would become
+  // practically useless then and could be restricted to the Qt WebKit version along with its configuration UI.
+  // QWebEnginePage::download() always stores the downloaded data in a file. A QNetworkReply returned by
+  // QNetworkAccessManager::get() stores the downloaded data in a buffer. This cache reuse requires substantial
+  // refactoring to avoid the overhead of unnecessary reading from and writing to a file, because the users of
+  // WebMultimediaDownload access the data via the DataRequest interface and store it into a file, except for
+  // pronouncing of an external audio link, which passes DataRequest::data to AudioPlayerInterface::play().
+  // This refactoring should eliminate existing code duplication between ArticleView::resourceDownloadFinished()
+  // and ResourceToSaveHandler::downloadFinished() as well as fix minor issues in these functions along the way.
+
+  // TODO (Qt WebEngine): should the configuration UI allow disabling persistent cookies?
+  // Cookies are never stored on disk in the Qt WebKit version according to the documentation for QNetworkCookieJar:
+  // > QNetworkCookieJar does not implement permanent storage: it only keeps the cookies in memory. Once the
+  // > QNetworkCookieJar object is deleted, all cookies it held will be discarded as well. If you want to save the
+  // > cookies, you should derive from this class and implement the saving to disk to your own storage format.
+  // Should the persistent cookies be disabled by default in the Qt WebEngine version too?
+
   articleNetMgr.setStreamingDeviceWorkarounds( computeStreamingDeviceWorkarounds( webEngineProfile ) );
 
   auto * const handler = new ArticleUrlSchemeHandler( articleNetMgr );

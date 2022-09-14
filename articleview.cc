@@ -2230,6 +2230,8 @@ QString ArticleView::toHtml()
   return ui.definition->page()->mainFrame()->toHtml();
 #else
   // TODO (Qt WebEngine): port this function and its uses to asynchronous QWebEnginePage::toHtml().
+  // This function is called only from MainWindow::on_saveArticle_triggered(). The Save Article feature can be
+  // implemented differently using QWebEnginePage::save(). Compare the results of the two approaches and select one.
   return QString();
 #endif
 }
