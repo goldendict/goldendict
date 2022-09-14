@@ -23,12 +23,21 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     QByteArray contentType = "text/html";
 
     QBuffer * buffer = new QBuffer( requestJob );
-    // Handle reply data
+
     QByteArray replyData = reply->readAll();
     QString articleString;
 
     QTextCodec * codec = QTextCodec::codecForHtml( replyData, QTextCodec::codecForName( "UTF-8" ) );
     articleString      = codec->toUnicode( replyData );
+    // Handle reply data
+    // 404 response may have response body.
+    if( reply->error() != QNetworkReply::NoError && articleString.isEmpty())
+    {
+      QString emptyHtml = QString( "<html><body>%1</body></html>" ).arg( reply->errorString() );
+      buffer->setData( emptyHtml.toUtf8() );
+      requestJob->reply( contentType, buffer );
+      return;
+    }
 
     // Change links from relative to absolute
 
