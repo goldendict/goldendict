@@ -32,6 +32,11 @@ void IframeSchemeHandler::requestStarted(QWebEngineUrlRequestJob *requestJob)
     // 404 response may have response body.
     if( reply->error() != QNetworkReply::NoError && articleString.isEmpty())
     {
+      if(reply->error()==QNetworkReply::ContentNotFoundError){
+        //work around to fix QTBUG-106573
+        requestJob->redirect(url);
+        return;
+      }
       QString emptyHtml = QString( "<html><body>%1</body></html>" ).arg( reply->errorString() );
       buffer->setData( emptyHtml.toUtf8() );
       requestJob->reply( contentType, buffer );
