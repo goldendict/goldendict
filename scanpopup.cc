@@ -69,6 +69,9 @@ static bool ownsClipboardMode( QClipboard::Mode mode )
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,
+#ifndef USE_QTWEBKIT
+                      QWebEngineProfile & webEngineProfile,
+#endif
                       AudioPlayerPtr const & audioPlayer_,
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_,
@@ -106,7 +109,11 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.queryError->hide();
 
-  definition = new ArticleView( ui.outerFrame, articleNetMgr, audioPlayer_,
+  definition = new ArticleView( ui.outerFrame, articleNetMgr,
+#ifndef USE_QTWEBKIT
+                                webEngineProfile,
+#endif
+                                audioPlayer_,
                                 allDictionaries, groups, true, cfg,
                                 openSearchAction,
                                 dictionaryBar.toggleViewAction()

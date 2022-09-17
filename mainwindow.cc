@@ -144,18 +144,9 @@ StreamingDeviceWorkarounds computeStreamingDeviceWorkarounds( QWebEngineProfile 
   return StreamingDeviceWorkarounds::AtEndAndReadData;
 }
 
-void setupWebEngineProfile( ArticleNetworkAccessManager & articleNetMgr )
+void setWebEngineProfilePaths( QWebEngineProfile & webEngineProfile )
 {
-  auto & webEngineProfile = *QWebEngineProfile::defaultProfile();
-
-  // TODO (Qt WebEngine): should the maximum size of the HTTP cache and whether
-  // it is cleared on exit be configurable similarly to the network cache?
-
-  // TODO (Qt WebEngine): allow configuring off-the-record profile. Note that in Qt 6 the default profile became
-  // off-the-record. So it would be better not to use the default profile but always create our own "Article" or
-  // off-the-record profile and pass it to ArticleWebPage's constructor (as profile, not parent). Would have to use our
-  // profile's settings in place of QWebEngineSettings::defaultSettings() in applyWebSettings(). GoldenDict would
-  // require restarting for the off-the-record option toggling to take effect.
+  Q_ASSERT( !webEngineProfile.isOffTheRecord() );
 
   QString cachePath = webEngineProfile.cachePath();
   if( Config::replaceWritableCacheLocationIn( cachePath ) )
@@ -164,6 +155,12 @@ void setupWebEngineProfile( ArticleNetworkAccessManager & articleNetMgr )
   QString persistentStoragePath = webEngineProfile.persistentStoragePath();
   if( Config::replaceWritableDataLocationIn( persistentStoragePath ) )
     webEngineProfile.setPersistentStoragePath( persistentStoragePath );
+}
+
+void setupWebEngineProfile( QWebEngineProfile & webEngineProfile, ArticleNetworkAccessManager & articleNetMgr )
+{
+  // TODO (Qt WebEngine): should the maximum size of the HTTP cache and whether
+  // it is cleared on exit be configurable similarly to the network cache?
 
   articleNetMgr.setStreamingDeviceWorkarounds( computeStreamingDeviceWorkarounds( webEngineProfile ) );
 
@@ -870,7 +867,14 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   setupNetworkCache( cfg.preferences.maxNetworkCacheSize );
 
 #ifndef USE_QTWEBKIT
-  setupWebEngineProfile( articleNetMgr );
+  if( cfg.preferences.offTheRecordWebProfile )
+    webEngineProfile.reset( new QWebEngineProfile{} );
+  else
+  {
+    webEngineProfile.reset( new QWebEngineProfile{ QStringLiteral( "Article" ) } );
+    setWebEngineProfilePaths( *webEngineProfile );
+  }
+  setupWebEngineProfile( *webEngineProfile, articleNetMgr );
 #endif
 
   applyWebSettings();
@@ -1425,7 +1429,7 @@ void MainWindow::applyWebSettings()
   defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
 #else
-  auto * const settings = QWebEngineSettings::defaultSettings();
+  auto * const settings = webEngineProfile->settings();
   settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
 #endif
 }
@@ -1594,7 +1598,11 @@ void MainWindow::makeScanPopup()
        !cfg.preferences.enableClipboardHotkey )
     return;
 
-  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
+  scanPopup = new ScanPopup( 0, cfg, articleNetMgr,
+#ifndef USE_QTWEBKIT
+                             *webEngineProfile,
+#endif
+                             audioPlayerFactory.player(),
                              dictionaries, groupInstances, history );
 
   scanPopup->setStyleSheet( styleSheet() );
@@ -1751,7 +1759,11 @@ void MainWindow::addNewTab()
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
-  ArticleView * view = new ArticleView( this, articleNetMgr, audioPlayerFactory.player(),
+  ArticleView * view = new ArticleView( this, articleNetMgr,
+#ifndef USE_QTWEBKIT
+                                        *webEngineProfile,
+#endif
+                                        audioPlayerFactory.player(),
                                         dictionaries, groupInstances, false, cfg,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),

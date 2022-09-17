@@ -337,6 +337,7 @@ struct Preferences
   bool hideGoldenDictHeader;
   int maxNetworkCacheSize;
   bool clearNetworkCacheOnExit;
+  bool offTheRecordWebProfile;
 
   qreal zoomFactor;
   qreal helpZoomFactor;

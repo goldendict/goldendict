@@ -269,6 +269,7 @@ Preferences::Preferences():
   hideGoldenDictHeader( false ),
   maxNetworkCacheSize( 50 ),
   clearNetworkCacheOnExit( true ),
+  offTheRecordWebProfile( false ),
   zoomFactor( 1 ),
   helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
@@ -972,6 +973,9 @@ Class load() THROW_SPEC( exError )
 
     if ( !preferences.namedItem( "clearNetworkCacheOnExit" ).isNull() )
       c.preferences.clearNetworkCacheOnExit = ( preferences.namedItem( "clearNetworkCacheOnExit" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "offTheRecordWebProfile" ).isNull() )
+      c.preferences.offTheRecordWebProfile = ( preferences.namedItem( "offTheRecordWebProfile" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
@@ -1950,6 +1954,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "clearNetworkCacheOnExit" );
     opt.appendChild( dd.createTextNode( c.preferences.clearNetworkCacheOnExit ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
+    opt = dd.createElement( "offTheRecordWebProfile" );
+    opt.appendChild( dd.createTextNode( c.preferences.offTheRecordWebProfile ? "1" : "0" ) );
     preferences.appendChild( opt );
 
     opt = dd.createElement( "maxStringsInHistory" );

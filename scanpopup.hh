@@ -19,6 +19,10 @@
 #include "scanflag.hh"
 #endif
 
+#ifndef USE_QTWEBKIT
+class QWebEngineProfile;
+#endif
+
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
 class ScanPopup: public QMainWindow, KeyboardState
@@ -30,6 +34,9 @@ public:
   ScanPopup( QWidget * parent,
              Config::Class & cfg,
              ArticleNetworkAccessManager &,
+#ifndef USE_QTWEBKIT
+             QWebEngineProfile &,
+#endif
              AudioPlayerPtr const &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const &,

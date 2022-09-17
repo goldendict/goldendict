@@ -24,17 +24,22 @@ char const * messageLevelToString( QWebEnginePage::JavaScriptConsoleMessageLevel
 
 } // unnamed namespace
 
+#ifdef USE_QTWEBKIT
 ArticleWebPage::ArticleWebPage( QObject * parent ):
   WebPage( parent )
 {
 }
 
-#ifdef USE_QTWEBKIT
 void ArticleWebPage::javaScriptConsoleMessage( QString const & message, int lineNumber, QString const & sourceID )
 {
   gdWarning( "JS: %s (at %s:%d)", message.toUtf8().constData(), sourceID.toUtf8().constData(), lineNumber );
 }
 #else
+ArticleWebPage::ArticleWebPage( QWebEngineProfile * profile, QObject * parent ):
+  QWebEnginePage( profile, parent )
+{
+}
+
 void ArticleWebPage::javaScriptConsoleMessage( JavaScriptConsoleMessageLevel level, QString const & message,
                                                int lineNumber, QString const & sourceID )
 {

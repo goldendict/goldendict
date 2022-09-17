@@ -35,6 +35,12 @@
 #include <fixx11h.h>
 #endif
 
+#ifndef USE_QTWEBKIT
+#include <memory>
+
+class QWebEngineProfile;
+#endif
+
 #ifdef HAVE_X11
   // TODO: implement startup notification support and remove these workarounds
   // (see investigation comments on #781).
@@ -162,6 +168,11 @@ private:
   QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
                                     // since their requests can be destroyed
                                     // in a separate thread
+
+#ifndef USE_QTWEBKIT
+  std::unique_ptr< QWebEngineProfile > webEngineProfile;
+#endif
+
   AudioPlayerFactory audioPlayerFactory;
 
   WordList * wordList;

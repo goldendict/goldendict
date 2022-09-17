@@ -22,6 +22,7 @@
 #include <memory>
 
 class QWebEngineFindTextResult;
+class QWebEngineProfile;
 #endif
 
 class ArticleViewJsProxy;
@@ -130,6 +131,9 @@ public:
   /// The groups aren't copied -- rather than that, the reference is kept
   ArticleView( QWidget * parent,
                ArticleNetworkAccessManager &,
+#ifndef USE_QTWEBKIT
+               QWebEngineProfile &,
+#endif
                AudioPlayerPtr const &,
                std::vector< sptr< Dictionary::Class > > const & allDictionaries,
                Instances::Groups const &,

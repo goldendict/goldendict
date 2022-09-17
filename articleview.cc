@@ -415,6 +415,9 @@ QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
 }
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
+#ifndef USE_QTWEBKIT
+                          QWebEngineProfile & webEngineProfile,
+#endif
                           AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
@@ -448,7 +451,11 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 {
   ui.setupUi( this );
 
-  ArticleWebPage * const webPage = new ArticleWebPage( ui.definition );
+  ArticleWebPage * const webPage = new ArticleWebPage(
+#ifndef USE_QTWEBKIT
+                                                        &webEngineProfile,
+#endif
+                                                        ui.definition );
   ui.definition->setPage( webPage );
 #ifdef USE_QTWEBKIT
   ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
