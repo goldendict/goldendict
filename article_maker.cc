@@ -85,8 +85,6 @@ public:
     // TODO: consider referencing the style sheets via <link href='URL' rel='stylesheet' /> instead of embedding
     // them into HTML via <style>. This may reduce RAM usage by sharing the fairly large CSS code between pages.
     // The CSS comments and the description parameter can be removed then thanks to self-documenting file names.
-    // In order to share the "Expand optional parts css" code as well, it can be moved
-    // into a new optionally referenced file :/article-style-expand-optional-parts.css.
 
     QFile cssFile( fileName );
     if( !cssFile.open( QFile::ReadOnly ) )
@@ -285,10 +283,7 @@ void ArticleMaker::appendCss( string & result, bool expandOptionalParts, QColor 
 
   // Turn on/off expanding of article optional parts
   if( expandOptionalParts )
-  {
-    cssAppender.appendCode( ".dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n",
-                            "Expand optional parts css" );
-  }
+    cssAppender.appendFile( ":/article-style-expand-optional-parts.css", "Expand optional parts css" );
 
   cssAppender.startPrintMedia();
 
