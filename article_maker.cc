@@ -34,10 +34,6 @@ namespace {
 
 void appendScripts( string & result )
 {
-  // Use the qrcx scheme for JavaScript files enabled in the Qt WebKit version. The qrc scheme causes the warning
-  // "QIODevice::read (QNetworkReplyFileImpl): device not open" at GoldenDict start, because
-  // AllowFrameReply::baseReply is not open when AllowFrameReply::readDataFromBase() is invoked.
-
   result +=
   // *blocking.js scripts block HTML parser, which is acceptable here,
   // because the scripts are local, instantly available and fast.

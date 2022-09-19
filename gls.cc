@@ -824,14 +824,14 @@ void GlsDictionary::loadArticle( uint32_t address,
 QString & GlsDictionary::filterResource( QString & article )
 {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)",
+  QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx?):)",
                             QRegularExpression::CaseInsensitiveOption
                             | QRegularExpression::InvertedGreedinessOption );
   QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                              QRegularExpression::CaseInsensitiveOption
                              | QRegularExpression::InvertedGreedinessOption );
 #else
-  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)", Qt::CaseInsensitive );
+  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx?):)", Qt::CaseInsensitive );
   imgRe.setMinimal( true );
   QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
   linkRe.setMinimal( true );

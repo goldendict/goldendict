@@ -3985,7 +3985,7 @@ private:
   bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
                                   QString const & pathFromLinkSourceToDestinationDir )
   {
-    static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo|file)://[^']+'" );
+    static QRegExp const rx1( "'(?:bres|gico|gdau|gdvideo|qrcx?|file)://[^']+'" );
     static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
 
     bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1,

@@ -549,7 +549,7 @@ int main( int argc, char ** argv )
 
 #ifdef USE_QTWEBKIT
   // registerArticleUrlSchemes() is responsible for similar configuration in the Qt WebEngine version.
-  // Add the dictionary schemes we use as local to make file:// links work in articles.
+  // Add the dictionary schemes we use as local to make file:// and qrc:// links work in articles.
   QWebSecurityOrigin::addLocalScheme( "gdlookup" );
   QWebSecurityOrigin::addLocalScheme( "gdpicture" );
 #endif

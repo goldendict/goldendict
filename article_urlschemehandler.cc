@@ -122,7 +122,7 @@ void registerArticleUrlSchemes()
   {
     QWebEngineUrlScheme scheme( name );
     scheme.setSyntax( QWebEngineUrlScheme::Syntax::Host );
-    // Register dictionary schemes as local to make file:// links work in articles.
+    // Register dictionary schemes as local to make file:// and qrc:// links work in articles.
     scheme.setFlags( QWebEngineUrlScheme::SecureScheme
                      | QWebEngineUrlScheme::LocalScheme
                      | QWebEngineUrlScheme::LocalAccessAllowed );

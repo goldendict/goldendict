@@ -262,6 +262,13 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
                                                             QNetworkRequest const & req,
                                                             QIODevice * outgoingData )
 {
+  // Don't wrap in AllowFrameReply replies for local URL schemes used by the initial blank and Welcome! pages
+  // to prevent the warning "QIODevice::read (QNetworkReplyFileImpl): device not open" at GoldenDict start
+  // as AllowFrameReply::baseReply is not open when AllowFrameReply::readDataFromBase() is invoked then.
+
+  if( req.url().scheme() == QLatin1String( "qrc" ) )
+    return QNetworkAccessManager::createRequest( op, req, outgoingData ); // bypass AllowFrameReply
+
   QNetworkRequest localReq( req );
 
   if( ( localReq.url().scheme() == "gdlookup" || localReq.url().scheme() == "http" ) && localReq.url().host() == "upload.wikimedia.org" )
