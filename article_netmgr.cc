@@ -284,8 +284,14 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     if ( localReq.url().scheme() == "qrcx" )
     {
-      // We have to override the local load policy for the qrc scheme, hence
-      // we use qrcx and redirect it here back to qrc
+      // We had to override the local load policy for the qrc URL scheme until QWebSecurityOrigin::addLocalScheme() was
+      // introduced in Qt 4.6. Hence we used a custom qrcx URL scheme and redirected it here back to qrc. Qt versions
+      // older than 4.6 are no longer supported, so GoldenDict itself no longer uses the qrcx scheme. However, qrcx has
+      // been used for many years in our built-in article styles, and so may appear in user-defined article styles.
+      // TODO: deprecate (print a warning or show a warning message box) and eventually remove support for the obsolete
+      // qrcx URL scheme. A recent commit "Add support for qrc:// URL scheme" is the first one where the qrc scheme
+      // works correctly. So the deprecation has to wait until older GoldenDict versions become rarely used.
+
       QUrl newUrl( localReq.url() );
 
       newUrl.setScheme( "qrc" );
