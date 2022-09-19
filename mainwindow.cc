@@ -48,6 +48,7 @@
 #include "ui_authentication.h"
 
 #ifndef USE_QTWEBKIT
+#include <QPointer>
 #include <QVersionNumber>
 #include <QWebEngineProfile>
 #include <QWebEngineSettings>
@@ -3755,8 +3756,6 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
-namespace {
-
 /// This dialog displays the progress of saving an article. It supports increasing expected
 /// number of operations at any time and ensures that the progress bar never moves back.
 /// The dialog destroys itself when all operations complete or when canceled.
@@ -3770,6 +3769,8 @@ public:
     operationCount( 1 ), // the first operation is processing and saving the main HTML file
     completedOperationCount( 0 )
   {
+    setLabelText( tr( "Saving article..." ) );
+
     setAutoReset( false );
     setAutoClose( false );
 
@@ -3819,6 +3820,8 @@ private:
   int operationCount; ///< The number of operations represented by @a progressStepCount.
   int completedOperationCount; ///< The number of completed operations, less or equal to @a operationCount.
 };
+
+namespace {
 
 /// Finds custom resource links in an article's HTML, downloads the resources and saves them in the specified resource
 /// destination directory. Finds custom resorce links within downloaded code resources recursively, downloads and saves
@@ -4078,6 +4081,32 @@ void MainWindow::on_saveArticle_triggered()
   if( fileName.isEmpty() )
     return;
 
+#ifdef USE_QTWEBKIT
+  QString html = view->toHtml();
+  saveArticleAs( *view, html, fileName, complete, rxName, 0 );
+#else
+  // QWebEnginePage::save() doesn't even save qrc resources, not to mention custom URL scheme resources.
+  // Our custom page-saving implementation saves a complete web page correctly.
+
+  auto * const progressDialog = new ArticleSaveProgressDialog( this );
+  progressDialog->show();
+
+  view->toHtml( [ this, view, fileName, complete, rxName,
+                  progressDialog = QPointer< ArticleSaveProgressDialog >{ progressDialog } ]( QString const & result ) {
+    if( result.isEmpty() || !progressDialog || progressDialog->wasCanceled() )
+    {
+      // This callback is being called during page destruction or the user canceled the saving of the page.
+      return; // return now to prevent a crash
+    }
+    QString html = result;
+    saveArticleAs( *view, html, fileName, complete, rxName, progressDialog );
+  } );
+#endif
+}
+
+void MainWindow::saveArticleAs( ArticleView & view, QString & html, QString const & fileName, bool complete,
+                                QRegExp const & rxName, ArticleSaveProgressDialog * progressDialog )
+{
   QFile file( fileName );
   if ( !file.open( QIODevice::WriteOnly ) )
   {
@@ -4086,7 +4115,6 @@ void MainWindow::on_saveArticle_triggered()
     return;
   }
 
-  QString html = view->toHtml();
   QFileInfo fi( fileName );
   cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
 
@@ -4116,19 +4144,27 @@ void MainWindow::on_saveArticle_triggered()
   QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
   html.replace( anchorLinkRe, "\\1" );
 
+#ifdef USE_QTWEBKIT
+  Q_ASSERT( !progressDialog );
+
   if( !complete )
   {
     file.write( html.toUtf8() );
     return;
   }
 
-  ArticleSaveProgressDialog * const progressDialog = new ArticleSaveProgressDialog( this );
-  progressDialog->setLabelText( tr("Saving article...") );
+  progressDialog = new ArticleSaveProgressDialog( this );
   progressDialog->show();
+#else
+  Q_ASSERT( progressDialog );
 
-  QString pathFromHtmlToDestinationDir = fi.baseName() + "_files/";
-  QString resourceDestinationDir = fi.absoluteDir().absolutePath() + '/' + pathFromHtmlToDestinationDir;
-  new ArticleResourceSaver( html, pathFromHtmlToDestinationDir, resourceDestinationDir, *view, *progressDialog );
+  if( complete )
+#endif
+  {
+    QString pathFromHtmlToDestinationDir = fi.baseName() + "_files/";
+    QString resourceDestinationDir = fi.absoluteDir().absolutePath() + '/' + pathFromHtmlToDestinationDir;
+    new ArticleResourceSaver( html, pathFromHtmlToDestinationDir, resourceDestinationDir, view, *progressDialog );
+  }
 
   file.write( html.toUtf8() );
   progressDialog->operationCompleted();

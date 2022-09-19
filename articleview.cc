@@ -34,6 +34,8 @@
 #include <QWebEngineHistory>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
+
+#include <utility>
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
@@ -2224,17 +2226,17 @@ void ArticleView::playSound()
     openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }
 
+#ifdef USE_QTWEBKIT
 QString ArticleView::toHtml()
 {
-#ifdef USE_QTWEBKIT
   return ui.definition->page()->mainFrame()->toHtml();
-#else
-  // TODO (Qt WebEngine): port this function and its uses to asynchronous QWebEnginePage::toHtml().
-  // This function is called only from MainWindow::on_saveArticle_triggered(). The Save Article feature can be
-  // implemented differently using QWebEnginePage::save(). Compare the results of the two approaches and select one.
-  return QString();
-#endif
 }
+#else
+void ArticleView::toHtml( std::function< void( QString const & ) > resultCallback )
+{
+  ui.definition->page()->toHtml( std::move( resultCallback ) );
+}
+#endif
 
 QString ArticleView::getTitle()
 {

@@ -19,6 +19,8 @@
 #include <QWebView>
 #else
 #include <QDateTime>
+
+#include <functional>
 #include <memory>
 
 class QWebEngineFindTextResult;
@@ -222,7 +224,11 @@ public:
   { ui.definition->setZoomFactor( factor ); }
 
   /// Returns current article's text in .html format
+#ifdef USE_QTWEBKIT
   QString toHtml();
+#else
+  void toHtml( std::function< void( QString const & ) > resultCallback );
+#endif
 
   /// Returns current article's title
   QString getTitle();
