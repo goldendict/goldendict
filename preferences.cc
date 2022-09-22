@@ -1,9 +1,7 @@
 #include "preferences.hh"
-#include "keyboardstate.hh"
 #include "language.hh"
 #include "langcoder.hh"
 #include <QMessageBox>
-#include "broken_xrecord.hh"
 #include "mainwindow.hh"
 
 
@@ -171,25 +169,9 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.selectBySingleClick->setChecked( p.selectWordBySingleClick);
   ui.escKeyHidesMainWindow->setChecked( p.escKeyHidesMainWindow );
 
-  ui.enableMainWindowHotkey->setChecked( p.enableMainWindowHotkey );
-  ui.mainWindowHotkey->setHotKey( p.mainWindowHotkey );
-  ui.enableClipboardHotkey->setChecked( p.enableClipboardHotkey );
-  ui.clipboardHotkey->setHotKey( p.clipboardHotkey );
-
   ui.enableScanPopup->setChecked( p.enableScanPopup );
   ui.startWithScanPopupOn->setChecked( p.startWithScanPopupOn );
   ui.enableScanPopupModifiers->setChecked( p.enableScanPopupModifiers );
-
-  ui.altKey->setChecked( p.scanPopupModifiers & KeyboardState::Alt );
-  ui.ctrlKey->setChecked( p.scanPopupModifiers & KeyboardState::Ctrl );
-  ui.shiftKey->setChecked( p.scanPopupModifiers & KeyboardState::Shift );
-  ui.winKey->setChecked( p.scanPopupModifiers & KeyboardState::Win );
-  ui.leftAlt->setChecked( p.scanPopupModifiers & KeyboardState::LeftAlt );
-  ui.rightAlt->setChecked( p.scanPopupModifiers & KeyboardState::RightAlt );
-  ui.leftCtrl->setChecked( p.scanPopupModifiers & KeyboardState::LeftCtrl );
-  ui.rightCtrl->setChecked( p.scanPopupModifiers & KeyboardState::RightCtrl );
-  ui.leftShift->setChecked( p.scanPopupModifiers & KeyboardState::LeftShift );
-  ui.rightShift->setChecked( p.scanPopupModifiers & KeyboardState::RightShift );
 
   ui.scanPopupAltMode->setChecked( p.scanPopupAltMode );
   ui.scanPopupAltModeSecs->setValue( p.scanPopupAltModeSecs );
@@ -289,9 +271,6 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
 
   ui.audioPlaybackProgram->setText( p.audioPlaybackProgram );
 
-  if ( !isRECORDBroken() )
-    ui.brokenXRECORD->hide();
-
   // Proxy server
 
   ui.useProxyServer->setChecked( p.proxyServer.enabled );
@@ -389,25 +368,9 @@ Config::Preferences Preferences::getPreferences()
   p.selectWordBySingleClick = ui.selectBySingleClick->isChecked();
   p.escKeyHidesMainWindow = ui.escKeyHidesMainWindow->isChecked();
 
-  p.enableMainWindowHotkey = ui.enableMainWindowHotkey->isChecked();
-  p.mainWindowHotkey = ui.mainWindowHotkey->getHotKey();
-  p.enableClipboardHotkey = ui.enableClipboardHotkey->isChecked();
-  p.clipboardHotkey = ui.clipboardHotkey->getHotKey();
-
   p.enableScanPopup = ui.enableScanPopup->isChecked();
   p.startWithScanPopupOn = ui.startWithScanPopupOn->isChecked();
   p.enableScanPopupModifiers = ui.enableScanPopupModifiers->isChecked();
-
-  p.scanPopupModifiers += ui.altKey->isChecked() ? KeyboardState::Alt : 0;
-  p.scanPopupModifiers += ui.ctrlKey->isChecked() ? KeyboardState::Ctrl: 0;
-  p.scanPopupModifiers += ui.shiftKey->isChecked() ? KeyboardState::Shift: 0;
-  p.scanPopupModifiers += ui.winKey->isChecked() ? KeyboardState::Win: 0;
-  p.scanPopupModifiers += ui.leftAlt->isChecked() ? KeyboardState::LeftAlt: 0;
-  p.scanPopupModifiers += ui.rightAlt->isChecked() ? KeyboardState::RightAlt: 0;
-  p.scanPopupModifiers += ui.leftCtrl->isChecked() ? KeyboardState::LeftCtrl: 0;
-  p.scanPopupModifiers += ui.rightCtrl->isChecked() ? KeyboardState::RightCtrl: 0;
-  p.scanPopupModifiers += ui.leftShift->isChecked() ? KeyboardState::LeftShift: 0;
-  p.scanPopupModifiers += ui.rightShift->isChecked() ? KeyboardState::RightShift: 0;
 
   p.scanPopupAltMode = ui.scanPopupAltMode->isChecked();
   p.scanPopupAltModeSecs = ui.scanPopupAltModeSecs->value();
@@ -622,16 +585,6 @@ void Preferences::sideShiftClicked( bool )
 {
   if ( ui.leftShift->isChecked() || ui.rightShift->isChecked() )
     ui.shiftKey->setChecked( false );
-}
-
-void Preferences::on_enableMainWindowHotkey_toggled( bool checked )
-{
-  ui.mainWindowHotkey->setEnabled( checked );
-}
-
-void Preferences::on_enableClipboardHotkey_toggled( bool checked )
-{
-  ui.clipboardHotkey->setEnabled( checked );
 }
 
 void Preferences::on_buttonBox_accepted()
