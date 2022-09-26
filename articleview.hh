@@ -387,6 +387,8 @@ public:
 
 };
 
+/// Downloads the specified resource and saves it to a file at the specified path.
+/// Emits done() and destroys itself using deleteLater() when finished.
 class ResourceToSaveHandler: public QObject
 {
   Q_OBJECT
