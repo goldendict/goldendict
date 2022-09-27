@@ -3599,7 +3599,7 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
-static void filterAndCollectResources( QString & html, QRegExp & rx, const QString & sep,
+static void filterAndCollectResources( QString & html, QRegExp const & rx, QString const & sep,
                                        const QString & folder, set< QByteArray > & resourceIncluded,
                                        vector< pair< QUrl, QString > > & downloadResources )
 {
@@ -3727,14 +3727,15 @@ void MainWindow::on_saveArticle_triggered()
     return;
   }
 
+  static QRegExp const rx1( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
+  static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
+
   QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-  QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
-  QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
   set< QByteArray > resourceIncluded;
   vector< pair< QUrl, QString > > downloadResources;
 
-  filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
-  filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
+  filterAndCollectResources( html, rx1, "'", folder, resourceIncluded, downloadResources );
+  filterAndCollectResources( html, rx2, "\"", folder, resourceIncluded, downloadResources );
 
   ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
   // reserve '1' for saving main html file
