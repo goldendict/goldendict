@@ -3599,7 +3599,7 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
-static void filterAndCollectResources( QString & html, QRegExp const & rx, QString const & sep,
+static void filterAndCollectResources( QString & html, QRegExp const & rx,
                                        const QString & folder, set< QByteArray > & resourceIncluded,
                                        vector< pair< QUrl, QString > > & downloadResources )
 {
@@ -3608,7 +3608,13 @@ static void filterAndCollectResources( QString & html, QRegExp const & rx, QStri
 
   while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
   {
-    QUrl url( rx.cap( 1 ) );
+    QString urlString = rx.cap();
+    Q_ASSERT( urlString.size() > 2 );
+    // Remove the enclosing quotes from the match.
+    urlString.chop( 1 );
+    urlString.remove( 0, 1 );
+
+    QUrl url( urlString );
     QString host = url.host();
     QString resourcePath = Qt4x5::Url::fullPath( url );
 
@@ -3637,9 +3643,10 @@ static void filterAndCollectResources( QString & html, QRegExp const & rx, QStri
 
     // Modify original url, set to the native one
     resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
-    QString newUrl = sep + QDir( folder ).dirName() + host + resourcePath + sep;
-    html.replace( pos, rx.cap().length(), newUrl );
-    pos += newUrl.length();
+    QString const newUrl = QDir( folder ).dirName() + host + resourcePath;
+    html.replace( pos + 1, urlString.size(), newUrl ); // keep the enclosing quotes
+
+    pos += 1 + newUrl.size() + 1; // skip newUrl and the enclosing quotes
   }
 }
 
@@ -3727,15 +3734,15 @@ void MainWindow::on_saveArticle_triggered()
     return;
   }
 
-  static QRegExp const rx1( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
+  static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo)://[^']+'" );
   static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
 
   QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
   set< QByteArray > resourceIncluded;
   vector< pair< QUrl, QString > > downloadResources;
 
-  filterAndCollectResources( html, rx1, "'", folder, resourceIncluded, downloadResources );
-  filterAndCollectResources( html, rx2, "\"", folder, resourceIncluded, downloadResources );
+  filterAndCollectResources( html, rx1, folder, resourceIncluded, downloadResources );
+  filterAndCollectResources( html, rx2, folder, resourceIncluded, downloadResources );
 
   ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
   // reserve '1' for saving main html file
