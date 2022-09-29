@@ -21,11 +21,11 @@
 #include <QMessageBox>
 #include <QIcon>
 #include <QList>
+#include <QSet>
 #include <QToolBar>
 #include <QCloseEvent>
 #include <QDesktopServices>
 #include <QProcess>
-#include <QCryptographicHash>
 #include <QFileDialog>
 #include <QPrinter>
 #include <QPageSetupDialog>
@@ -36,8 +36,6 @@
 #include <QSslConfiguration>
 
 #include <limits.h>
-#include <set>
-#include <map>
 #include "gddebug.hh"
 
 #include "dictinfo.hh"
@@ -71,9 +69,7 @@
 
 #define MIN_THREAD_COUNT 4
 
-using std::set;
 using std::wstring;
-using std::map;
 using std::pair;
 
 namespace {
@@ -3600,7 +3596,7 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
 }
 
 static void filterAndCollectResources( QString & html, QRegExp const & rx,
-                                       const QString & folder, set< QByteArray > & resourceIncluded,
+                                       QString const & folder, QSet< QString > & encounteredResources,
                                        vector< pair< QUrl, QString > > & downloadResources )
 {
   int pos = 0;
@@ -3632,13 +3628,14 @@ static void filterAndCollectResources( QString & html, QRegExp const & rx,
       queryNom += 1;
     }
 
-    QCryptographicHash hash( QCryptographicHash::Md5 );
-    hash.addData( rx.cap().toUtf8() );
-
-    if ( resourceIncluded.insert( hash.result() ).second )
+    QString const pathInDestinationDir = host + resourcePath;
+    // Avoid double lookup in encounteredResources.
+    int const oldResourceCount = encounteredResources.size();
+    encounteredResources.insert( pathInDestinationDir );
+    if( encounteredResources.size() != oldResourceCount )
     {
       // Gather resource information (url, filename) to be download later
-      downloadResources.push_back( pair<QUrl, QString>( url, folder + host + resourcePath ) );
+      downloadResources.push_back( pair< QUrl, QString >( url, folder + pathInDestinationDir ) );
     }
 
     // Modify original url, set to the native one
@@ -3738,11 +3735,11 @@ void MainWindow::on_saveArticle_triggered()
   static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
 
   QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-  set< QByteArray > resourceIncluded;
+  QSet< QString > encounteredResources;
   vector< pair< QUrl, QString > > downloadResources;
 
-  filterAndCollectResources( html, rx1, folder, resourceIncluded, downloadResources );
-  filterAndCollectResources( html, rx2, folder, resourceIncluded, downloadResources );
+  filterAndCollectResources( html, rx1, folder, encounteredResources, downloadResources );
+  filterAndCollectResources( html, rx2, folder, encounteredResources, downloadResources );
 
   ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
   // reserve '1' for saving main html file
