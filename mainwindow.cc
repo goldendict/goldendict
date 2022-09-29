@@ -70,7 +70,6 @@
 #define MIN_THREAD_COUNT 4
 
 using std::wstring;
-using std::pair;
 
 namespace {
 
@@ -3595,9 +3594,20 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
-static void filterAndCollectResources( QString & html, QRegExp const & rx,
-                                       QString const & folder, QSet< QString > & encounteredResources,
-                                       vector< pair< QUrl, QString > > & downloadResources )
+namespace {
+
+struct Resource
+{
+  explicit Resource( QUrl const & url_, QString const & destinationFilePath_ ):
+    url( url_ ), destinationFilePath( destinationFilePath_ )
+  {}
+
+  QUrl url;
+  QString destinationFilePath;
+};
+
+void filterAndCollectResources( QString & html, vector< Resource > & resourcesToDownload, QRegExp const & rx,
+                                QString const & folder, QSet< QString > & encounteredResources )
 {
   int pos = 0;
   int queryNom = 1;
@@ -3634,8 +3644,8 @@ static void filterAndCollectResources( QString & html, QRegExp const & rx,
     encounteredResources.insert( pathInDestinationDir );
     if( encounteredResources.size() != oldResourceCount )
     {
-      // Gather resource information (url, filename) to be download later
-      downloadResources.push_back( pair< QUrl, QString >( url, folder + pathInDestinationDir ) );
+      // This resource was not encountered before => store it in resourcesToDownload.
+      resourcesToDownload.push_back( Resource( url, folder + pathInDestinationDir ) );
     }
 
     // Modify original url, set to the native one
@@ -3646,6 +3656,8 @@ static void filterAndCollectResources( QString & html, QRegExp const & rx,
     pos += 1 + newUrl.size() + 1; // skip newUrl and the enclosing quotes
   }
 }
+
+} // unnamed namespace
 
 void MainWindow::on_saveArticle_triggered()
 {
@@ -3736,20 +3748,19 @@ void MainWindow::on_saveArticle_triggered()
 
   QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
   QSet< QString > encounteredResources;
-  vector< pair< QUrl, QString > > downloadResources;
+  vector< Resource > resourcesToDownload;
 
-  filterAndCollectResources( html, rx1, folder, encounteredResources, downloadResources );
-  filterAndCollectResources( html, rx2, folder, encounteredResources, downloadResources );
+  filterAndCollectResources( html, resourcesToDownload, rx1, folder, encounteredResources );
+  filterAndCollectResources( html, resourcesToDownload, rx2, folder, encounteredResources );
 
   ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
   // reserve '1' for saving main html file
   int maxVal = 1;
 
   // Pull and save resources to files
-  for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-        i != downloadResources.end(); ++i )
+  for( vector< Resource >::const_iterator it = resourcesToDownload.begin(); it != resourcesToDownload.end(); ++it )
   {
-    ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
+    ResourceToSaveHandler * const handler = view->saveResource( it->url, it->destinationFilePath );
     if( !handler->isEmpty() )
     {
       maxVal += 1;
