@@ -3929,6 +3929,9 @@ private:
       urlString.remove( 0, 1 );
 
       QUrl url( urlString );
+      if( url.scheme() == QLatin1String( "gdpicture" ) )
+        url.setScheme( "bres" );
+
       QString host = url.host();
       QString resourcePath = Qt4x5::Url::fullPath( url );
 
@@ -3988,7 +3991,7 @@ private:
   bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
                                   QString const & pathFromLinkSourceToDestinationDir )
   {
-    static QRegExp const rx1( "'(?:bres|gico|gdau|gdvideo|qrcx?|file)://[^']+'" );
+    static QRegExp const rx1( "'(?:bres|gdpicture|gico|gdau|gdvideo|qrcx?|file)://[^']+'" );
     static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
 
     bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1,
