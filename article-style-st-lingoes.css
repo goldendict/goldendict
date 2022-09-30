@@ -78,19 +78,19 @@ body
 
 
 .gdexpandicon {
-  background-image: url('qrcx://localhost/icons/expand_article.png');
+  background-image: url('qrc:///icons/expand_article.png');
 }
 
 .gdexpandicon:hover {
-  background-image: url('qrcx://localhost/icons/expand_article_hovered.png');
+  background-image: url('qrc:///icons/expand_article_hovered.png');
 }
 
 .gdcollapseicon {
-  background-image: url('qrcx://localhost/icons/collapse_article.png');
+  background-image: url('qrc:///icons/collapse_article.png');
 }
 
 .gdcollapseicon:hover {
-  background-image: url('qrcx://localhost/icons/collapse_article_hovered.png');
+  background-image: url('qrc:///icons/collapse_article_hovered.png');
 }
 
 .gddictnamebodyseparator

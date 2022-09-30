@@ -39,14 +39,14 @@ void appendScripts( string & result )
   // because the scripts are local, instantly available and fast.
 #ifdef USE_QTWEBKIT
   // Evaluate webkit_blocking.js now to call gdArticleView.onJsPageInitStarted() ASAP.
-            "<script src='qrcx://localhost/scripts/webkit_blocking.js'></script>"
+            "<script src='qrc:///scripts/webkit_blocking.js'></script>"
 #else
   // Create QWebChannel now to make gdArticleView available ASAP.
             "<script src='qrc:///qtwebchannel/qwebchannel.js'></script>"
             "<script src='qrc:///scripts/webengine_blocking.js'></script>"
 #endif
   // Start reading the deferred scripts early so that they are ready when needed.
-            "<script defer src='qrcx://localhost/scripts/deferred.js'></script>"
+            "<script defer src='qrc:///scripts/deferred.js'></script>"
 #ifndef USE_QTWEBKIT
   // Load webengine_deferred.js in the end because it calls gdArticleView.onJsPageInitFinished().
             "<script defer src='qrc:///scripts/webengine_deferred.js'></script>"
@@ -59,7 +59,7 @@ void appendScripts( string & result )
   result += ArticleMaker::tr( "Collapse article" ).toUtf8().constData();
   result += "\";\n"
             "</script>"
-            "<script src='qrcx://localhost/scripts/blocking.js'></script>"
+            "<script src='qrc:///scripts/blocking.js'></script>"
             "\n";
 }
 
@@ -153,8 +153,8 @@ private:
     string result;
     if( fileName.startsWith( QLatin1String( ":/" ) ) )
     {
-      // Replace the local file resource prefix ":/" with "qrcx://localhost/" for the web page.
-      result = "qrcx://localhost/";
+      // Replace the local file resource prefix ":/" with "qrc:///" for the web page.
+      result = "qrc:///";
       result += fileName.toUtf8().constData() + 2;
     }
     else
@@ -310,7 +310,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
   // This doesn't seem to be much of influence right now, but we'll keep
   // it anyway.
   if ( icon.size() )
-    result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
+    result += "<link rel=\"icon\" type=\"image/png\" href=\"qrc:///flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
   result += "</head><body"
 #ifndef USE_QTWEBKIT
@@ -811,7 +811,7 @@ void ArticleRequest::bodyFinished()
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span><span class=\"gddicttitle\">" +
           Html::escape( activeDict->getName().c_str() ) + "</span>"
-          + "<span class=\"collapse_expand_area\"><img src=\"qrcx://localhost/icons/blank.png\" class=\""
+          + "<span class=\"collapse_expand_area\"><img src=\"qrc:///icons/blank.png\" class=\""
           + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
           + "\" id=\"expandicon-" + Html::escape( dictId ) + "\""
           + ( collapse ? "" : string( " title=\"" ) + tr( "Collapse article" ).toUtf8().data() + "\"" )

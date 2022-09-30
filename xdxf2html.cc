@@ -693,7 +693,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             el_span.appendChild( el_a );
 
             QDomElement el_img = dd.createElement( "img");
-            el_img.setAttribute( "src", "qrcx://localhost/icons/playsound.png" );
+            el_img.setAttribute( "src", "qrc:///icons/playsound.png" );
             el_img.setAttribute( "border", "0" );
             el_img.setAttribute( "align", "absmiddle" );
             el_img.setAttribute( "alt", "Play" );

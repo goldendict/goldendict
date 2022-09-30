@@ -1454,7 +1454,7 @@ QByteArray EpwingBook::handleWave( EB_Hook_Code code, const unsigned int * argv 
 {
 
   if( code == EB_HOOK_END_WAVE )
-    return QByteArray( "<img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>" );
+    return QByteArray( "<img src=\"qrc:///icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>" );
 
   // Handle EB_HOOK_BEGIN_WAVE
 

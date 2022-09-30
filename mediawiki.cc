@@ -616,7 +616,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               {
                 QString ref = match2.captured( 1 );
                 QString audio_url = "<a href=\"" + ref
-                                    + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
+                                    + "\"><img src=\"qrc:///icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
                 articleNewString += audio_url;
               }
               else
@@ -643,7 +643,7 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
                 {
                   QString ref = reg2.cap( 1 );
                   QString audio_url = "<a href=\"" + ref
-                                      + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
+                                      + "\"><img src=\"qrc:///icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a>";
                   articleString.replace( pos, tag.length(), audio_url );
                 }
                 pos += 1;

@@ -967,14 +967,14 @@ QString & GlsDictionary::filterResource( QString & article )
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       newTag += match.captured( 4 );
       if( match.captured( 4 ).indexOf( "<img " ) < 0 )
-        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
+        newTag += " <img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\">";
       newTag += "</a></span>";
 
       articleNewText += newTag;
 #else
       newTag += audioRe.cap( 4 );
       if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
-        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
+        newTag += " <img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\">";
       newTag += "</a></span>";
 
       article.replace( pos, audioRe.cap( 0 ).length(), newTag );

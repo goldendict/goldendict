@@ -286,7 +286,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
 
     result += addAudioLink( ref );
 
-    result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+    result += "<td><a href=" + ref + "><img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
     result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
     result += "</tr>";
   }
@@ -304,7 +304,7 @@ sptr< Dictionary::DataRequest > LsaDictionary::getArticle( wstring const & word,
 
     result += addAudioLink( ref );
 
-    result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+    result += "<td><a href=" + ref + "><img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
     result += "<td><a href=" + ref + ">" + i->second + "</a></td>";
     result += "</tr>";
   }

@@ -93,9 +93,9 @@ function gdExpandOptPart(expanderId, optionalId) {
     }
 
     if (d1.alt === '[+]')
-        gdToggleExpanded('[-]', 'qrcx://localhost/icons/collapse_opt.png', 'inline');
+        gdToggleExpanded('[-]', 'qrc:///icons/collapse_opt.png', 'inline');
     else
-        gdToggleExpanded('[+]', 'qrcx://localhost/icons/expand_opt.png', 'none');
+        gdToggleExpanded('[+]', 'qrc:///icons/expand_opt.png', 'none');
 }
 
 function gdExpandArticle(id) {
