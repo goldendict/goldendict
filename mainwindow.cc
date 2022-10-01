@@ -4042,6 +4042,25 @@ private:
   QSet< QString > encounteredResources; ///< Contains destination subpaths of all encountered custom resource files.
 };
 
+void insertSavedArticleScript( QString & html )
+{
+  QLatin1String const insertBeforeString( "<script" );
+  int const pos = html.indexOf( insertBeforeString );
+  if( pos == -1 )
+  {
+    gdWarning( "Couldn't find \"%s\" in an article's HTML code.", insertBeforeString.latin1() );
+    return;
+  }
+
+#ifdef USE_QTWEBKIT
+#define w "webkit"
+#else
+#define w "webengine"
+#endif
+  html.insert( pos, QLatin1String( "<script src='qrc:///scripts/" w "_saved_article.js'></script>" ) );
+#undef w
+}
+
 } // unnamed namespace
 
 void MainWindow::on_saveArticle_triggered()
@@ -4164,6 +4183,8 @@ void MainWindow::saveArticleAs( ArticleView & view, QString & html, QString cons
   if( complete )
 #endif
   {
+    insertSavedArticleScript( html );
+
     QString pathFromHtmlToDestinationDir = fi.baseName() + "_files/";
     QString resourceDestinationDir = fi.absoluteDir().absolutePath() + '/' + pathFromHtmlToDestinationDir;
     new ArticleResourceSaver( html, pathFromHtmlToDestinationDir, resourceDestinationDir, view, *progressDialog );
