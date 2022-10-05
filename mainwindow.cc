@@ -3843,7 +3843,7 @@ public:
     Q_ASSERT( pathFromHtmlToDestinationDir.isEmpty() || pathFromHtmlToDestinationDir.endsWith( QLatin1Char( '/' ) ) );
     Q_ASSERT( resourceDestinationDir.endsWith( QLatin1Char( '/' ) ) );
 
-    processLinkSource( html );
+    processLinkSource( html, pathFromHtmlToDestinationDir );
   }
 
 private slots:
@@ -3854,16 +3854,47 @@ private slots:
     if( progressDialog.wasCanceled() )
       return; // don't start new downloads after cancelation
 
-    if( !fileName.endsWith( QLatin1String( ".js" ) ) )
-      return; // this resource is not a link source => nothing to do
+    QString pathFromLinkSourceToDestinationDir;
+    if( !isLinkSource( fileName, pathFromLinkSourceToDestinationDir ) )
+      return; // nothing to do
 
     QString linkSource = QString::fromUtf8( *resourceData );
     // If the link source is modified, update the resource data before it is saved to a file.
-    if( processLinkSource( linkSource ) )
+    if( processLinkSource( linkSource, pathFromLinkSourceToDestinationDir ) )
       *resourceData = linkSource.toUtf8();
   }
 
 private:
+  QString relativePathFromResourceToDestinationDir( QString const & resourceFileName ) const
+  {
+    Q_ASSERT( resourceFileName.startsWith( resourceDestinationDir ) );
+    int const depthInDestinationDir = resourceFileName.mid( resourceDestinationDir.size() ).count( '/' );
+
+    QString pathToDestinationDir;
+    for( int i = 0; i < depthInDestinationDir; ++i )
+      pathToDestinationDir += QLatin1String( "../" );
+    return pathToDestinationDir;
+  }
+
+  bool isLinkSource( QString const & fileName, QString & pathFromLinkSourceToDestinationDir ) const
+  {
+    if( fileName.endsWith( QLatin1String( ".js" ) ) )
+    {
+      // Links in JavaScript code replace HTML attribute values, and so are relative to the HTML file location.
+      pathFromLinkSourceToDestinationDir = pathFromHtmlToDestinationDir;
+      return true;
+    }
+
+    if( fileName.endsWith( QLatin1String( ".css" ) ) )
+    {
+      // Links in a style sheet are relative to the CSS file they are in.
+      pathFromLinkSourceToDestinationDir = relativePathFromResourceToDestinationDir( fileName );
+      return true;
+    }
+
+    return false;
+  }
+
   struct Resource
   {
     explicit Resource( QUrl const & url_, QString const & destinationFilePath_ ):
@@ -3879,7 +3910,8 @@ private:
   /// custom resource URL with the corresponding relative destination path within the in/out parameter @p linkSource.
   /// @param rx a regular expression that matches a custom resource URL enclosed in quotes.
   /// @return whether @p linkSource was modified by this function call.
-  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload, QRegExp const & rx )
+  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
+                                  QRegExp const & rx, QString const & pathFromLinkSourceToDestinationDir )
   {
     bool modified = false;
     int pos = 0;
@@ -3925,7 +3957,7 @@ private:
 
       // Modify original url, set to the native one
       resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
-      QString const newUrl = pathFromHtmlToDestinationDir + host + resourcePath;
+      QString const newUrl = pathFromLinkSourceToDestinationDir + host + resourcePath;
       linkSource.replace( pos + 1, urlString.size(), newUrl ); // keep the enclosing quotes
       modified = true;
 
@@ -3936,22 +3968,26 @@ private:
   }
 
   /// See the documentation for the other overload called from this one.
-  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload )
+  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
+                                  QString const & pathFromLinkSourceToDestinationDir )
   {
     static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo)://[^']+'" );
     static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
 
-    bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1 );
-    bool const modified2 = filterAndCollectResources( linkSource, resourcesToDownload, rx2 );
+    bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1,
+                                                      pathFromLinkSourceToDestinationDir );
+    bool const modified2 = filterAndCollectResources( linkSource, resourcesToDownload, rx2,
+                                                      pathFromLinkSourceToDestinationDir );
 
     return modified1 || modified2;
   }
 
   /// @return whether @p linkSource was modified by this function call.
-  bool processLinkSource( QString & linkSource )
+  bool processLinkSource( QString & linkSource, QString const & pathFromLinkSourceToDestinationDir )
   {
     vector< Resource > resourcesToDownload;
-    bool const modified = filterAndCollectResources( linkSource, resourcesToDownload );
+    bool const modified = filterAndCollectResources( linkSource, resourcesToDownload,
+                                                     pathFromLinkSourceToDestinationDir );
     int asyncSavedResources = 0;
 
     // Pull and save resources to files

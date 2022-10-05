@@ -7,7 +7,7 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include <limits.h>
-#include <QFile>
+#include <QFileInfo>
 #include <QUrl>
 #include <QTextDocumentFragment>
 #include "folding.hh"
@@ -19,6 +19,7 @@
 
 #ifndef USE_QTWEBKIT
 #include <QColor>
+#include <QFile>
 
 #include <regex>
 #endif
@@ -80,39 +81,22 @@ public:
   void startPrintMedia()
   { isPrintMedia = true; }
 
-  void appendFile( QString const & fileName, char const * description )
+  void appendFile( QString const & fileName )
   {
-    // TODO: consider referencing the style sheets via <link href='URL' rel='stylesheet' /> instead of embedding
-    // them into HTML via <style>. This may reduce RAM usage by sharing the fairly large CSS code between pages.
-    // The CSS comments and the description parameter can be removed then thanks to self-documenting file names.
-
-    QFile cssFile( fileName );
-    if( !cssFile.open( QFile::ReadOnly ) )
+    if( !QFileInfo( fileName ).isFile() )
       return;
 
-    QByteArray const css = cssFile.readAll();
-    if( css.isEmpty() )
-      return;
+#ifndef USE_QTWEBKIT
+    // We are not looking for printed background color.
+    if( needPageBackgroundColor && !isPrintMedia )
+      cssFiles.push_back( fileName );
+#endif
 
-    appendCode( css.constData(), description );
-  }
-
-  void appendCode( char const * code, char const * description )
-  {
-    Q_ASSERT( code );
-    Q_ASSERT( description );
-
-    result += "<!-- ";
-    result += description;
-    result += " -->";
-
-    result += "\n<style media=\"";
+    result += "<link href=\"";
+    result += Html::escape( localFileNameToHtml( fileName ) );
+    result += "\" rel=\"stylesheet\" media=\"";
     result += isPrintMedia ? "print" : "all";
-    result += "\">\n";
-
-    appendCodeItself( code );
-
-    result += "</style>\n";
+    result += "\" />\n";
   }
 
 #ifndef USE_QTWEBKIT
@@ -149,8 +133,17 @@ public:
     string backgroundColor;
 
     // Iterate in the reverse order because the CSS code lower in the page overrides.
-    std::find_if( cssCodeRanges.crbegin(), cssCodeRanges.crend(), [ this, &backgroundColor ]( Range range ) {
-      backgroundColor = findBodyBackgroundColor( result.cbegin() + range.begin, result.cbegin() + range.end );
+    std::find_if( cssFiles.crbegin(), cssFiles.crend(), [ &backgroundColor ]( QString const & fileName ) {
+      QFile cssFile( fileName );
+      if( !cssFile.open( QFile::ReadOnly ) )
+      {
+        gdWarning( "Couldn't open CSS file \"%s\" for reading: %s (%d)", qUtf8Printable( fileName ),
+                   qUtf8Printable( cssFile.errorString() ), static_cast< int >( cssFile.error() ) );
+        return false;
+      }
+
+      auto const cssCode = cssFile.readAll();
+      backgroundColor = findBodyBackgroundColor( cssCode.constData(), cssCode.constData() + cssCode.size() );
       return !backgroundColor.empty();
     } );
 
@@ -159,19 +152,26 @@ public:
 #endif // USE_QTWEBKIT
 
 private:
-  void appendCodeItself( char const * code )
+  static std::string localFileNameToHtml( QString const & fileName )
   {
-#ifndef USE_QTWEBKIT
-    std::size_t const codeRangeStart = result.size();
+    string result;
+    if( fileName.startsWith( QLatin1String( ":/" ) ) )
+    {
+      // Replace the local file resource prefix ":/" with "qrcx://localhost/" for the web page.
+      result = "qrcx://localhost/";
+      result += fileName.toUtf8().constData() + 2;
+    }
+    else
+    {
+      // fileName must be a local filesystem path => convert it into a file URL.
+#ifdef Q_OS_WIN32
+      result = "file:///";
+#else
+      result = "file://";
 #endif
-
-    result += code;
-
-#ifndef USE_QTWEBKIT
-    // We are not looking for printed background color.
-    if( needPageBackgroundColor && !isPrintMedia )
-      cssCodeRanges.push_back( { codeRangeStart, result.size() } );
-#endif
+      result += fileName.toUtf8().constData();
+    }
+    return result;
   }
 
   string & result;
@@ -179,12 +179,11 @@ private:
   bool isPrintMedia;
 
 #ifndef USE_QTWEBKIT
-  struct Range { std::size_t begin, end; };
-  vector< Range > cssCodeRanges;
+  vector< QString > cssFiles;
 
   /// Finds the background color of the <body> element in [@p first, @p last).
   /// @return the background color or an empty string if it could not be found.
-  static string findBodyBackgroundColor( string::const_iterator first, string::const_iterator last )
+  static string findBodyBackgroundColor( char const * first, char const * last )
   {
     // This regular expression is simple and efficient. But the result is not always accurate:
     // 1. The first word after "background:" is considered to be the color, even though this first word could
@@ -200,7 +199,7 @@ private:
 
     // Iterate over all matches and return the last one, because the CSS code lower in the page overrides.
     string::const_iterator::difference_type position = -1, length;
-    for( std::sregex_iterator it( first, last, backgroundRegex ), end; it != end; ++it )
+    for( std::cregex_iterator it( first, last, backgroundRegex ), end; it != end; ++it )
     {
       Q_ASSERT( it->size() == 2 );
 
@@ -271,29 +270,23 @@ void ArticleMaker::appendCss( string & result, bool expandOptionalParts, QColor 
 {
   CssAppender cssAppender( result, static_cast< bool >( pageBackgroundColor ) );
 
-  cssAppender.appendFile( ":/article-style.css", "Built-in css" );
+  cssAppender.appendFile( ":/article-style.css" );
   if( !displayStyle.isEmpty() )
-    cssAppender.appendFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ), "Built-in style css" );
-  cssAppender.appendFile( Config::getUserCssFileName(), "User css" );
+    cssAppender.appendFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
+  cssAppender.appendFile( Config::getUserCssFileName() );
   if( !addonStyle.isEmpty() )
-  {
-    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style.css",
-                            "Addon style css" );
-  }
+    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style.css" );
 
   // Turn on/off expanding of article optional parts
   if( expandOptionalParts )
-    cssAppender.appendFile( ":/article-style-expand-optional-parts.css", "Expand optional parts css" );
+    cssAppender.appendFile( ":/article-style-expand-optional-parts.css" );
 
   cssAppender.startPrintMedia();
 
-  cssAppender.appendFile( ":/article-style-print.css", "Built-in print css" );
-  cssAppender.appendFile( Config::getUserCssPrintFileName(), "User print css" );
+  cssAppender.appendFile( ":/article-style-print.css" );
+  cssAppender.appendFile( Config::getUserCssPrintFileName() );
   if( !addonStyle.isEmpty() )
-  {
-    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style-print.css",
-                            "Addon style print css" );
-  }
+    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style-print.css" );
 
 #ifdef USE_QTWEBKIT
   Q_ASSERT( !pageBackgroundColor );
