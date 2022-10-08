@@ -1530,14 +1530,15 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   }
 }
 
-ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QString & fileName )
+void ArticleView::saveResource( QUrl const & url, ResourceToSaveHandler & handler )
 {
-  return saveResource( url, ui.definition->url(), fileName );
+  return saveResource( url, ui.definition->url(), &handler );
 }
 
-ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl & ref, const QString & fileName )
+void ArticleView::saveResource( QUrl const & url, QUrl const & ref, ResourceToSaveHandler * handler )
 {
-  ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, fileName );
+  Q_ASSERT( handler );
+
   sptr< Dictionary::DataRequest > req;
 
   if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" || url.scheme() == "gdvideo" )
@@ -1587,7 +1588,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
                 if( req->isFinished() && req->dataSize() > 0 )
                 {
                   handler->downloadFinished();
-                  return handler;
+                  return;
                 }
                 break;
               }
@@ -1654,7 +1655,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
   // Check already finished downloads
   handler->downloadFinished();
 
-  return handler;
+  return;
 }
 
 void ArticleView::updateMutedContents()
@@ -2090,7 +2091,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       {
         QFileInfo fileInfo( fileName );
         emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
-        saveResource( url, ui.definition->url(), fileName );
+
+        ResourceToSaveHandler * const handler = new ResourceToSaveHandler( this, fileName );
+        saveResource( url, ui.definition->url(), handler );
       }
 #endif
     }
@@ -3076,6 +3079,8 @@ void ResourceToSaveHandler::downloadFinished()
         QByteArray resourceData;
         vector< char > const & data = (*i)->getFullData();
         resourceData = QByteArray( data.data(), data.size() );
+
+        emit downloaded( fileName, &resourceData );
 
         // Write data to file
 

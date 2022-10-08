@@ -192,8 +192,7 @@ public:
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
 
-  ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
-  ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
+  void saveResource( QUrl const & url, ResourceToSaveHandler & handler );
 
   /// Return group id of the view
   unsigned getViewGroup()
@@ -368,6 +367,8 @@ private:
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );
 
+  void saveResource( QUrl const & url, QUrl const & ref, ResourceToSaveHandler * handler );
+
 protected:
 
   // We need this to hide the search bar when we're showed
@@ -400,6 +401,9 @@ public:
   { return downloadRequests.empty(); }
 
 signals:
+  /// Is emitted when the resource is downloaded. Allows to modify the resource data before it is saved to a file.
+  /// Connect via Qt::DirectConnection, because with Qt::QueuedConnection @p resourceData would be a dangling pointer.
+  void downloaded( QString const & fileName, QByteArray * resourceData );
   void done();
   void statusBarMessage( QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap() );
 

@@ -31,6 +31,7 @@
 #include <QPageSetupDialog>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
+#include <QProgressDialog>
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSslConfiguration>
@@ -3596,66 +3597,234 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
 
 namespace {
 
-struct Resource
+/// This dialog displays the progress of saving an article. It supports increasing expected
+/// number of operations at any time and ensures that the progress bar never moves back.
+/// The dialog destroys itself when all operations complete or when canceled.
+class ArticleSaveProgressDialog: public QProgressDialog
 {
-  explicit Resource( QUrl const & url_, QString const & destinationFilePath_ ):
-    url( url_ ), destinationFilePath( destinationFilePath_ )
-  {}
+  Q_OBJECT
+public:
+  explicit ArticleSaveProgressDialog( QWidget * parent = 0 ):
+    QProgressDialog( parent ),
+    progressStepCount( 100 ),
+    operationCount( 1 ), // the first operation is processing and saving the main HTML file
+    completedOperationCount( 0 )
+  {
+    setAutoReset( false );
+    setAutoClose( false );
 
-  QUrl url;
-  QString destinationFilePath;
+    // Once this modal progress dialog is dismissed, the current tab can be closed and thus the article view destroyed.
+    // Destroy the dialog and its child resource saver when canceled to avoid referencing the view and prevent a crash.
+    // Also the article view is the parent of ResourceToSaveHandler objects. If a ResourceToSaveHandler object is
+    // destroyed along with the view before finishing, it never emits the done() signal. Then completedOperationCount
+    // never reaches operationCount, so the progress dialog and its child resource saver are leaked.
+    connect( this, SIGNAL( canceled() ), this, SLOT( deleteLater() ) );
+
+    setRange( 0, progressStepCount );
+    setValue( 0 );
+  }
+
+  void addOperations( int count )
+  {
+    Q_ASSERT( count > 0 );
+    // Forget about already completed operations to reset progress velocity and prevent jumping backwards.
+    // This slows progress down, which harms user experience. Can this be improved while keeping the code simple?
+    operationCount = operationCount - completedOperationCount + count;
+    completedOperationCount = 0;
+    progressStepCount = maximum() - value();
+  }
+
+public slots:
+  void operationCompleted()
+  {
+    if( wasCanceled() )
+      return; // Changing the progress value shows the dialog again. Prevent this by returning early here.
+
+    Q_ASSERT( completedOperationCount < operationCount );
+    ++completedOperationCount;
+
+    // Round progress down so that 100% is reached only when all operations complete.
+    int const progress = progressStepCount * completedOperationCount / operationCount;
+    setValue( maximum() - progressStepCount + progress );
+
+    if( completedOperationCount == operationCount )
+    {
+      close();
+      deleteLater();
+    }
+  }
+
+private:
+  int progressStepCount; ///< The number of available progress steps.
+  int operationCount; ///< The number of operations represented by @a progressStepCount.
+  int completedOperationCount; ///< The number of completed operations, less or equal to @a operationCount.
 };
 
-void filterAndCollectResources( QString & html, vector< Resource > & resourcesToDownload, QRegExp const & rx,
-                                QString const & folder, QSet< QString > & encounteredResources )
+/// Finds custom resource links in an article's HTML, downloads the resources and saves them in the specified resource
+/// destination directory. Finds custom resorce links within downloaded code resources recursively, downloads and saves
+/// them as well. Replaces each custom resource URL with the relative path to the corresponding saved resource file
+/// within the in/out parameter html and within recursively downloaded code resources. Reports progress via the progress
+/// dialog argument. The progress dialog becomes the parent of the ArticleResourceSaver object. Thus both the dialog and
+/// the ArticleResourceSaver object are destroyed once the article's HTML and all referenced resources are saved or
+/// when the dialog is canceled.
+class ArticleResourceSaver: public QObject
 {
-  int pos = 0;
-  int queryNom = 1;
-
-  while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
+  Q_OBJECT
+public:
+  explicit ArticleResourceSaver( QString & html, QString const & pathFromHtmlToDestinationDir_,
+                                 QString const & resourceDestinationDir_, ArticleView & view_,
+                                 ArticleSaveProgressDialog & progressDialog_ ):
+    QObject( &progressDialog_ ),
+    pathFromHtmlToDestinationDir( pathFromHtmlToDestinationDir_ ),
+    resourceDestinationDir( resourceDestinationDir_ ),
+    view( view_ ),
+    progressDialog( progressDialog_ )
   {
-    QString urlString = rx.cap();
-    Q_ASSERT( urlString.size() > 2 );
-    // Remove the enclosing quotes from the match.
-    urlString.chop( 1 );
-    urlString.remove( 0, 1 );
+    Q_ASSERT( pathFromHtmlToDestinationDir.isEmpty() || pathFromHtmlToDestinationDir.endsWith( QLatin1Char( '/' ) ) );
+    Q_ASSERT( resourceDestinationDir.endsWith( QLatin1Char( '/' ) ) );
 
-    QUrl url( urlString );
-    QString host = url.host();
-    QString resourcePath = Qt4x5::Url::fullPath( url );
-
-    if ( !host.startsWith( '/' ) )
-      host.insert( 0, '/' );
-    if ( !resourcePath.startsWith( '/' ) )
-      resourcePath.insert( 0, '/' );
-
-    // Replase query part of url (if exist)
-    int n = resourcePath.indexOf( QLatin1Char( '?' ) );
-    if( n >= 0 )
-    {
-      QString q_str = QString( "_q%1" ).arg( queryNom );
-      resourcePath.replace( n, resourcePath.length() - n, q_str );
-      queryNom += 1;
-    }
-
-    QString const pathInDestinationDir = host + resourcePath;
-    // Avoid double lookup in encounteredResources.
-    int const oldResourceCount = encounteredResources.size();
-    encounteredResources.insert( pathInDestinationDir );
-    if( encounteredResources.size() != oldResourceCount )
-    {
-      // This resource was not encountered before => store it in resourcesToDownload.
-      resourcesToDownload.push_back( Resource( url, folder + pathInDestinationDir ) );
-    }
-
-    // Modify original url, set to the native one
-    resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
-    QString const newUrl = QDir( folder ).dirName() + host + resourcePath;
-    html.replace( pos + 1, urlString.size(), newUrl ); // keep the enclosing quotes
-
-    pos += 1 + newUrl.size() + 1; // skip newUrl and the enclosing quotes
+    processLinkSource( html );
   }
-}
+
+private slots:
+  void resourceDownloaded( QString const & fileName, QByteArray * resourceData )
+  {
+    Q_ASSERT( resourceData );
+
+    if( progressDialog.wasCanceled() )
+      return; // don't start new downloads after cancelation
+
+    if( !fileName.endsWith( QLatin1String( ".js" ) ) )
+      return; // this resource is not a link source => nothing to do
+
+    QString linkSource = QString::fromUtf8( *resourceData );
+    // If the link source is modified, update the resource data before it is saved to a file.
+    if( processLinkSource( linkSource ) )
+      *resourceData = linkSource.toUtf8();
+  }
+
+private:
+  struct Resource
+  {
+    explicit Resource( QUrl const & url_, QString const & destinationFilePath_ ):
+      url( url_ ), destinationFilePath( destinationFilePath_ )
+    {}
+
+    QUrl url;
+    QString destinationFilePath;
+  };
+
+  /// Finds custom resource links within @p linkSource, determines where the resources should be saved and stores each
+  /// unique original resource URL and the corresponding destination path in @p resourcesToDownload. Replaces each
+  /// custom resource URL with the corresponding relative destination path within the in/out parameter @p linkSource.
+  /// @param rx a regular expression that matches a custom resource URL enclosed in quotes.
+  /// @return whether @p linkSource was modified by this function call.
+  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload, QRegExp const & rx )
+  {
+    bool modified = false;
+    int pos = 0;
+    int queryNom = 1;
+
+    while( ( pos = rx.indexIn( linkSource, pos ) ) != -1 )
+    {
+      QString urlString = rx.cap();
+      Q_ASSERT( urlString.size() > 2 );
+      // Remove the enclosing quotes from the match.
+      urlString.chop( 1 );
+      urlString.remove( 0, 1 );
+
+      QUrl url( urlString );
+      QString host = url.host();
+      QString resourcePath = Qt4x5::Url::fullPath( url );
+
+      // Ensure single slash between path components.
+      Q_ASSERT( !host.startsWith( QLatin1Char( '/' ) ) );
+      Q_ASSERT( !host.endsWith( QLatin1Char( '/' ) ) );
+      Q_ASSERT( !host.isEmpty() );
+      if( !resourcePath.startsWith( '/' ) )
+        resourcePath.insert( 0, '/' );
+
+      // Replase query part of url (if exist)
+      int n = resourcePath.indexOf( QLatin1Char( '?' ) );
+      if( n >= 0 )
+      {
+        QString q_str = QString( "_q%1" ).arg( queryNom );
+        resourcePath.replace( n, resourcePath.length() - n, q_str );
+        queryNom += 1;
+      }
+
+      QString const pathInDestinationDir = host + resourcePath;
+      // Avoid double lookup in encounteredResources.
+      int const oldResourceCount = encounteredResources.size();
+      encounteredResources.insert( pathInDestinationDir );
+      if( encounteredResources.size() != oldResourceCount )
+      {
+        // This resource was not encountered before => store it in resourcesToDownload.
+        resourcesToDownload.push_back( Resource( url, resourceDestinationDir + pathInDestinationDir ) );
+      }
+
+      // Modify original url, set to the native one
+      resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
+      QString const newUrl = pathFromHtmlToDestinationDir + host + resourcePath;
+      linkSource.replace( pos + 1, urlString.size(), newUrl ); // keep the enclosing quotes
+      modified = true;
+
+      pos += 1 + newUrl.size() + 1; // skip newUrl and the enclosing quotes
+    }
+
+    return modified;
+  }
+
+  /// See the documentation for the other overload called from this one.
+  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload )
+  {
+    static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo)://[^']+'" );
+    static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
+
+    bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1 );
+    bool const modified2 = filterAndCollectResources( linkSource, resourcesToDownload, rx2 );
+
+    return modified1 || modified2;
+  }
+
+  /// @return whether @p linkSource was modified by this function call.
+  bool processLinkSource( QString & linkSource )
+  {
+    vector< Resource > resourcesToDownload;
+    bool const modified = filterAndCollectResources( linkSource, resourcesToDownload );
+    int asyncSavedResources = 0;
+
+    // Pull and save resources to files
+    for( vector< Resource >::const_iterator it = resourcesToDownload.begin(); it != resourcesToDownload.end(); ++it )
+    {
+      ResourceToSaveHandler * const handler = new ResourceToSaveHandler( &view, it->destinationFilePath );
+
+      // handler may emit downloaded() synchronously from ArticleView::saveResource() => connect to it now.
+      connect( handler, SIGNAL( downloaded( QString, QByteArray * ) ),
+               this, SLOT( resourceDownloaded( QString, QByteArray * ) ) );
+
+      view.saveResource( it->url, *handler );
+      if( !handler->isEmpty() )
+      {
+        ++asyncSavedResources;
+        connect( handler, SIGNAL( done() ), &progressDialog, SLOT( operationCompleted() ) );
+      }
+      // else: the resource was downloaded and saved synchronously => it should not affect the progress dialog.
+    }
+
+    if( asyncSavedResources != 0)
+      progressDialog.addOperations( asyncSavedResources );
+
+    return modified;
+  }
+
+  QString const pathFromHtmlToDestinationDir;
+  QString const resourceDestinationDir;
+  ArticleView & view;
+  ArticleSaveProgressDialog & progressDialog;
+
+  QSet< QString > encounteredResources; ///< Contains destination subpaths of all encountered custom resource files.
+};
 
 } // unnamed namespace
 
@@ -3743,38 +3912,16 @@ void MainWindow::on_saveArticle_triggered()
     return;
   }
 
-  static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo)://[^']+'" );
-  static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
-
-  QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-  QSet< QString > encounteredResources;
-  vector< Resource > resourcesToDownload;
-
-  filterAndCollectResources( html, resourcesToDownload, rx1, folder, encounteredResources );
-  filterAndCollectResources( html, resourcesToDownload, rx2, folder, encounteredResources );
-
-  ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
-  // reserve '1' for saving main html file
-  int maxVal = 1;
-
-  // Pull and save resources to files
-  for( vector< Resource >::const_iterator it = resourcesToDownload.begin(); it != resourcesToDownload.end(); ++it )
-  {
-    ResourceToSaveHandler * const handler = view->saveResource( it->url, it->destinationFilePath );
-    if( !handler->isEmpty() )
-    {
-      maxVal += 1;
-      connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
-    }
-  }
-
+  ArticleSaveProgressDialog * const progressDialog = new ArticleSaveProgressDialog( this );
   progressDialog->setLabelText( tr("Saving article...") );
-  progressDialog->setRange( 0, maxVal );
-  progressDialog->setValue( 0 );
   progressDialog->show();
 
+  QString pathFromHtmlToDestinationDir = fi.baseName() + "_files/";
+  QString resourceDestinationDir = fi.absoluteDir().absolutePath() + '/' + pathFromHtmlToDestinationDir;
+  new ArticleResourceSaver( html, pathFromHtmlToDestinationDir, resourceDestinationDir, *view, *progressDialog );
+
   file.write( html.toUtf8() );
-  progressDialog->setValue( 1 );
+  progressDialog->operationCompleted();
 }
 
 void MainWindow::on_rescanFiles_triggered()
@@ -5059,6 +5206,4 @@ bool MainWindow::isGoldenDictWindow( HWND hwnd )
 
 #endif
 
-#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
 #include "mainwindow.moc"
-#endif
