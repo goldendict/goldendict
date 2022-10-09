@@ -3929,10 +3929,24 @@ private:
       QString host = url.host();
       QString resourcePath = Qt4x5::Url::fullPath( url );
 
+#ifdef Q_OS_WIN32
+      // Remove the volume separator ':' to make resourcePath a valid subpath.
+      if( url.scheme() == QLatin1String( "file" ) && resourcePath.size() > 2
+          && resourcePath.at( 0 ) == QLatin1Char( '/' ) && resourcePath.at( 2 ) == QLatin1Char( ':' ) )
+      {
+        resourcePath.remove( 2, 1 );
+      }
+#endif
+
       // Ensure single slash between path components.
       Q_ASSERT( !host.startsWith( QLatin1Char( '/' ) ) );
       Q_ASSERT( !host.endsWith( QLatin1Char( '/' ) ) );
-      Q_ASSERT( !host.isEmpty() );
+      if( host.isEmpty() )
+      {
+        if( resourcePath.startsWith( QLatin1Char( '/' ) ) )
+          resourcePath.remove( 0, 1 );
+      }
+      else
       if( !resourcePath.startsWith( '/' ) )
         resourcePath.insert( 0, '/' );
 
@@ -3971,7 +3985,7 @@ private:
   bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
                                   QString const & pathFromLinkSourceToDestinationDir )
   {
-    static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo)://[^']+'" );
+    static QRegExp const rx1( "'(?:bres|gico|gdau|qrcx|gdvideo|file)://[^']+'" );
     static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
 
     bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1,
