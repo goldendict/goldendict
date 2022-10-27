@@ -269,7 +269,7 @@ Preferences::Preferences():
   hideGoldenDictHeader( false ),
   maxNetworkCacheSize( 50 ),
   clearNetworkCacheOnExit( true ),
-  offTheRecordWebProfile( false ),
+  offTheRecordWebProfile( true ),
   zoomFactor( 1 ),
   helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
