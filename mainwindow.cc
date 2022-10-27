@@ -4281,7 +4281,7 @@ void MainWindow::applyZoomFactor()
   // triggered() signal is no longer emitted, which in turn improves performance.
   adjustCurrentZoomFactor();
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#if defined( USE_QTWEBKIT ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // Scaling article views asynchronously dramatically improves performance when
   // a zoom action is triggered repeatedly while many or large articles are open
   // in the main window or in scan popup.
@@ -4290,17 +4290,22 @@ void MainWindow::applyZoomFactor()
   // so all of them except for the first one don't change anything and run very fast.
   // In effect, some intermediate zoom factors are skipped when scaling is slow.
   // The slower the scaling, the more steps are skipped.
+
   // Unfortunately this optimization does not work in the Qt WebEngine version, where
   // the UI does not completely freeze (e.g. scrolling the page still works) and events
   // keep being delivered even as the page is being scaled in a separate process.
-  // TODO (Qt WebEngine): optimize repeated scrolling somehow. Is it possible to detect that a web page
-  // is being scaled in order to set an accumulated zoom factor only when the previous scaling finishes?
+  // This issue must have been fixed upstream in Qt 6.4.0 or earlier, because repeated zooming is slow in
+  // Qt WebEngine Widgets Simple Browser Example version 5.15.10 and fast in the same example version 6.4.0.
+
   QTimer::singleShot( 0, this, SLOT( scaleArticlesByCurrentZoomFactor() ) );
 #else
+  // The timer trick above does not help in unfixed Qt WebEngine versions and is not needed in fixed ones.
+
   // The timer trick above usually doesn't improve performance with Qt4
   // due to a different ordering of keyboard and timer events.
   // Sometimes, unpredictably, it does work like with Qt5.
   // Scale article views synchronously to avoid inconsistent or unexpected behavior.
+
   scaleArticlesByCurrentZoomFactor();
 #endif
 }
