@@ -367,6 +367,36 @@ QWebEngineScript createSelectWordBySingleClickScript()
   return createScript( selectWordBySingleClickScriptName(),
                        variableDeclarationFromAssignmentScript( selectWordBySingleClickAssignmentScript( false ) ) );
 }
+
+/// QUrl::StripTrailingSlash does not remove a slash if it is the only character in the path.
+/// gdlookup URL's path is either empty or equal to a slash, depending on representation. Consider such paths matching.
+bool pathsMatch( QUrl const & a, QUrl const & b )
+{
+  auto const isEmptyOrSlash = []( QString const & str ) {
+    return str.isEmpty() || str == QLatin1Char( '/' );
+  };
+  return a.path() == b.path() || ( isEmptyOrSlash( a.path() ) && isEmptyOrSlash( b.path() ) );
+}
+
+bool urlsOrWordsMatch( QUrl const & a, QUrl const & b )
+{
+  if( !pathsMatch( a, b ) )
+    return false;
+
+  constexpr auto formattingOptions = QUrl::RemovePath | QUrl::RemoveFragment;
+
+  if( a.matches( b, formattingOptions ) )
+    return true;
+
+  static const QLatin1String lookupScheme( "gdlookup" );
+  auto const wordQueryItem = []( QUrl const & url ) {
+    return QUrlQuery{ url }.queryItemValue( QStringLiteral( "word" ) );
+  };
+
+  return a.scheme() == lookupScheme && b.scheme() == lookupScheme
+          && a.matches( b, formattingOptions | QUrl::RemoveQuery )
+          && wordQueryItem( a ).compare( wordQueryItem( b ), Qt::CaseInsensitive ) == 0;
+}
 #endif // USE_QTWEBKIT
 
 } // unnamed namespace
@@ -699,9 +729,16 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, QUrl const
 
   // Any search opened is probably irrelevant now
 #ifdef USE_QTWEBKIT
+  // TODO (Qt WebKit): put this statement under the condition currently restricted to the Qt WebEngine
+  // version (see below) once Qt version < 5.2 and C++ standard < 11 are no longer supported.
   closeSearch();
 #else
-  hideSearchFrameOnceJsSavesStateToWebHistory = true;
+  // Handle only regular searchFrame here, because handleUrlChanged() hides ftsSearchFrame.
+  // If the looked-up word is the same as the currently displayed one, keep searchFrame visible:
+  // the user may have re-requested translation of the word to search from the beginning of the
+  // page, or switched to a different dictionary group to search the same text there.
+  if( searchIsOpened && !urlsOrWordsMatch( ui.definition->url(), url ) )
+    hideSearchFrameOnceJsSavesStateToWebHistory = true;
 #endif
 
   // Clear highlight all button selection
