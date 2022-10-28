@@ -74,6 +74,14 @@ window.addEventListener('pagehide', function(event) {
     if (gdCurrentArticle) {
         // Restored current article from web history. The web engine will restore the window position automatically.
         // Scrolling the mouse wheel before the page is fully loaded prevents this window position restoration.
+        // Note: the web engine's automatic vertical scroll position restoration is unreliable. Some positions are
+        // stable and get restored correctly, others shift slightly when restored. This is not much of a problem though.
+        // Should probably be left as is, because manual scroll restoration comes with its own set of problems:
+        // 1) scroll restoration for fragment navigation on the same page has to be handled separately (also manually);
+        // 2) automatic scroll restoration occurs as soon as the necessary amount of content is loaded, while manual
+        //    scroll restoration has to be done at some fixed point of time. If that point is before a 'load' event
+        //    handler (in a deferred script), sometimes a wrong position is restored. A 'load' event handler can be
+        //    invoked much later than the automatic scroll restoration, which decreases perceived responsiveness.
         return;
     }
 

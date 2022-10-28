@@ -698,7 +698,11 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, QUrl const
   emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
+#ifdef USE_QTWEBKIT
   closeSearch();
+#else
+  hideSearchFrameOnceJsSavesStateToWebHistory = true;
+#endif
 
   // Clear highlight all button selection
   ui.highlightAllButton->setChecked(false);
@@ -2831,6 +2835,12 @@ void ArticleView::onJsPageInitStarted( QStringList const & loadedArticles, QStri
   emit pageUnloaded( this );
 
 #ifndef USE_QTWEBKIT
+  if( hideSearchFrameOnceJsSavesStateToWebHistory )
+  {
+    hideSearchFrameOnceJsSavesStateToWebHistory = false;
+    closeSearch();
+  }
+
   // This is the first message from JavaScript on this page.
   // Initialize our stored timestamps to the page timestamp received from JavaScript.
   currentArticleTimestamp = pageTimestamp = pageTimestamp_;
@@ -3198,12 +3208,6 @@ void ArticleView::reloadStyleSheet()
   }
 }
 
-// TODO (Qt WebEngine): If the search is open when a new translation is requested, navigating back to the page
-// where the search was open restores wrong vertical scroll position. Consider either not closing the search
-// automatically, or closing it at a different time, or remembering it in web history and restoring,
-// or remembering the vertical scroll position in web history and restoring it as the Qt WebKit version does.
-// Note that the web engine's automatic vertical scroll position restoration is unreliable: some positions are
-// stable and get restored correctly, others shift slightly when restored, even if the search is not involved.
 bool ArticleView::closeSearch()
 {
   if ( searchIsOpened )

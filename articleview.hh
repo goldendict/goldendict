@@ -85,6 +85,10 @@ class ArticleView: public QFrame
   bool isBlankPagePresentInWebHistory = false;
   // The API necessary to implement Search-in-page status is not available in Qt WebKit.
   bool skipNextFindTextUiStatusUpdate = false;
+  /// Hiding a search frame in showDefinition() results in storing a wrong vertical scroll position in web history.
+  /// Instead, showDefinition() sets this variable to true, and the search frame is hidden later in
+  /// onJsPageInitStarted() - after the previous page stores correct vertical scroll position in web history.
+  bool hideSearchFrameOnceJsSavesStateToWebHistory = false;
 
   // In the Qt WebKit version ArticleWebView implements the functionality of the following data members.
   bool isNavigationByMiddleMouseButton = false;
