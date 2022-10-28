@@ -973,6 +973,9 @@ void ArticleView::handleUrlChanged( QUrl const & url )
           || QUrlQuery{ url }.queryItemValue( QStringLiteral( "blank" ) ) == QLatin1String( "1" );
 #endif
 
+  if( ftsSearchIsOpened && Qt4x5::Url::queryItemValue( url, "regexp" ).isEmpty() )
+    closeSearch(); // ftsSearchFrame does not make sense on a non-FTS-search page => hide it.
+
   QIcon icon;
 
   unsigned group = getGroup( url );
