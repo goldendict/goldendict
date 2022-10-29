@@ -805,7 +805,10 @@ void ScanPopup::updateSuggestionList( QString const & text )
 
 void ScanPopup::translateInputFinished()
 {
-  inputPhrase.phrase = Folding::unescapeWildcardSymbols( ui.translateBox->translateLine()->text().trimmed() );
+  QString const word = ui.translateBox->translateLine()->text().trimmed();
+  if( word.isEmpty() )
+    return;
+  inputPhrase.phrase = Folding::unescapeWildcardSymbols( word );
   inputPhrase.punctuationSuffix = translateBoxSuffix;
   showTranslationFor( inputPhrase );
 }
