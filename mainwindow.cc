@@ -2343,7 +2343,10 @@ void MainWindow::updateSuggestionList( QString const & newValue )
 
 void MainWindow::translateInputFinished( bool checkModifiers )
 {
-  QString word = Folding::unescapeWildcardSymbols( translateLine->text() );
+  QString word = translateLine->text().trimmed();
+  if( word.isEmpty() )
+    return;
+  word = Folding::unescapeWildcardSymbols( word );
   respondToTranslationRequest( Config::InputPhrase( word, translateBoxSuffix ), checkModifiers );
 }
 
