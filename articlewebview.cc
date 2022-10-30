@@ -36,6 +36,12 @@ void ArticleWebView::setUp( Config::Class * cfg )
   this->cfg = cfg;
 }
 
+void ArticleWebView::saveConfigData() const
+{
+  if( inspector )
+    cfg->inspectorGeometry = inspector->saveGeometry();
+}
+
 void ArticleWebView::triggerPageAction( QWebPage::WebAction action, bool checked )
 {
   if ( action == QWebPage::InspectElement )

@@ -1228,6 +1228,9 @@ void MainWindow::commitData()
     if( scanPopup.get() )
       scanPopup->saveConfigData();
 
+    for( int i = 0, count = ui.tabWidget->count(); i < count; ++i )
+      qobject_cast< ArticleView const * >( ui.tabWidget->widget( i ) )->saveConfigData();
+
     // Save any changes in last chosen groups etc
     try
     {

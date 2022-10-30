@@ -158,6 +158,8 @@ public:
 
   ~ArticleView();
 
+  void saveConfigData() const;
+
   typedef QMap< QString, QString > Contexts;
 
   /// Returns "gdfrom-" + dictionaryId.

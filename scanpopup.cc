@@ -378,6 +378,8 @@ ScanPopup::~ScanPopup()
 
 void ScanPopup::saveConfigData()
 {
+  definition->saveConfigData();
+
   // Save state, geometry and pin status
   cfg.popupWindowState = saveState( 1 );
   cfg.popupWindowGeometry = saveGeometry();

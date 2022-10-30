@@ -30,6 +30,8 @@ public:
 
   void setUp( Config::Class * cfg );
 
+  void saveConfigData() const;
+
   bool isMidButtonPressed() const
   { return midButtonPressed; }
   void setSelectionBySingleClick( bool set )

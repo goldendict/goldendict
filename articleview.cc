@@ -663,6 +663,13 @@ ArticleView::~ArticleView()
 #endif
 }
 
+void ArticleView::saveConfigData() const
+{
+#ifdef USE_QTWEBKIT
+  ui.definition->saveConfigData();
+#endif
+}
+
 static QUrl createGdlookupUrl( Config::InputPhrase const & phrase, unsigned group, bool ignoreDiacritics )
 {
   QUrl req;
