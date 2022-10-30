@@ -6,6 +6,12 @@
 
 #include "webkit_or_webengine.hh"
 
+#ifndef USE_QTWEBKIT
+namespace Config {
+class Class;
+}
+#endif
+
 /// Note: this class always delegates all links in the Qt WebEngine version.
 class ArticleWebPage: public WebPage
 {
@@ -14,7 +20,12 @@ public:
 #ifdef USE_QTWEBKIT
   explicit ArticleWebPage( QObject * parent = 0 );
 #else
-  explicit ArticleWebPage( QWebEngineProfile * profile, QObject * parent = nullptr );
+  explicit ArticleWebPage( Config::Class &, QWebEngineProfile * profile, QObject * parent = nullptr );
+  ~ArticleWebPage();
+
+  void saveConfigData() const;
+
+  void triggerAction( WebAction action, bool checked = false ) override;
 
 signals:
   /// This signal is emitted whenever the user clicks on a link.
@@ -28,6 +39,11 @@ protected:
   void javaScriptConsoleMessage( JavaScriptConsoleMessageLevel level, QString const & message,
                                  int lineNumber, QString const & sourceID ) override;
   bool acceptNavigationRequest( QUrl const & url, NavigationType type, bool isMainFrame ) override;
+
+private:
+  QWidget * devToolsView() const;
+
+  Config::Class & cfg;
 #endif
 };
 

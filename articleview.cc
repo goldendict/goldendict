@@ -485,6 +485,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ArticleWebPage * const webPage = new ArticleWebPage(
 #ifndef USE_QTWEBKIT
+                                                        cfg_,
                                                         &webEngineProfile,
 #endif
                                                         ui.definition );
@@ -667,6 +668,9 @@ void ArticleView::saveConfigData() const
 {
 #ifdef USE_QTWEBKIT
   ui.definition->saveConfigData();
+#else
+  auto * const page = static_cast< ArticleWebPage const * >( ui.definition->page() );
+  page->saveConfigData();
 #endif
 }
 

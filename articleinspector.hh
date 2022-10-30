@@ -1,7 +1,11 @@
 #ifndef ARTICLEINSPECTOR_HH
 #define ARTICLEINSPECTOR_HH
 
-// TODO (Qt WebEngine): implement equivalent article inspector functionality using Qt WebEngine API.
+// TODO (Qt WebKit): drop ArticleInspector and code that uses it in ArticleWebView, share the cleaner
+// alternative implementation in ArticleWebPage with the Qt WebEngine version once Qt 4 is no longer
+// supported. The problem with Qt 4 is: destroying an article inspector when it is closed, then
+// creating another one for the same page causes a crash in QWebInspector::setPage().
+
 #ifdef USE_QTWEBKIT
 
 #include <QWebInspector>

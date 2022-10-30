@@ -2,6 +2,9 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "articlewebpage.hh"
+#ifndef USE_QTWEBKIT
+#include "config.hh"
+#endif
 #include "gddebug.hh"
 
 namespace {
@@ -35,8 +38,8 @@ void ArticleWebPage::javaScriptConsoleMessage( QString const & message, int line
   gdWarning( "JS: %s (at %s:%d)", message.toUtf8().constData(), sourceID.toUtf8().constData(), lineNumber );
 }
 #else
-ArticleWebPage::ArticleWebPage( QWebEngineProfile * profile, QObject * parent ):
-  QWebEnginePage( profile, parent )
+ArticleWebPage::ArticleWebPage( Config::Class & cfg_, QWebEngineProfile * profile, QObject * parent ):
+  QWebEnginePage( profile, parent ), cfg( cfg_ )
 {
 }
 
@@ -67,5 +70,88 @@ bool ArticleWebPage::acceptNavigationRequest( QUrl const & url, NavigationType t
   // ArticleView::linkHovered() is adjusted accordingly.
   emit linkClicked( url );
   return false;
+}
+
+namespace {
+
+/// Creates a dev tools view and starts inspecting @p inspectedPage in it.
+/// @p geometry a dev tools view geometry to restore.
+/// @return the created dev tools view.
+QWidget * createDevToolsView( QWebEnginePage & inspectedPage, QByteArray const & geometry )
+{
+  // Making inspectedPage->view() the parent of devToolsView embeds devToolsView into
+  // inspectedPage->view() => delete devToolsView in inspectedPage's destructor instead.
+  auto * const devToolsView = new QWebEngineView();
+
+  // Destroy devToolsView when closed, because otherwise the cursor over the inspected page remains
+  // a circle, hovering over links does not show a tooltip, selecting text is impossible. Furthermore,
+  // if closing devToolsView does not destroy it, there is no way for the user to free up the resources
+  // it uses, other than destroy the inspected page (e.g. close the tab that contains it).
+  devToolsView->setAttribute( Qt::WA_DeleteOnClose, true );
+
+  devToolsView->restoreGeometry( geometry );
+
+  // Use the inspected page's QWebEngineProfile. This might improve performance. On the other hand,
+  // if the article profile is customized further in the future, this sharing could cause issues. In that
+  // case, an off-the-record profile should be used instead (probably shared between all dev tools pages).
+  auto * const devToolsPage = new QWebEnginePage( inspectedPage.profile(), devToolsView );
+  devToolsView->setPage( devToolsPage );
+
+  inspectedPage.setDevToolsPage( devToolsPage );
+
+  return devToolsView;
+}
+
+/// Unminimizes, raises and gives focus to @p devToolsView.
+void resumeWebPageInspection( QWidget & devToolsView )
+{
+  Q_ASSERT( devToolsView.isVisible() ); // a dev tools view is destroyed when closed
+  devToolsView.activateWindow();
+  devToolsView.raise();
+}
+
+} // unnamed namespace
+
+ArticleWebPage::~ArticleWebPage()
+{
+  // Calling deleteLater() in place of delete here prints the following error message on GoldenDict exit:
+  // Release of profile requested but WebEnginePage still not deleted. Expect troubles !
+  delete devToolsView();
+}
+
+void ArticleWebPage::saveConfigData() const
+{
+  if( auto const * view = devToolsView() )
+    cfg.inspectorGeometry = view->saveGeometry();
+}
+
+void ArticleWebPage::triggerAction( WebAction action, bool checked )
+{
+  if( action == InspectElement )
+  {
+    if( auto * view = devToolsView() )
+      resumeWebPageInspection( *view );
+    else
+    {
+      QWidget * const devToolsView = createDevToolsView( *this, cfg.inspectorGeometry );
+
+      // Connecting &ArticleWebPage::saveConfigData to &QWidget::destroyed leads to a crash in saveConfigData(), because
+      // the dev tools page and the the dev tools view are no longer bound and page->view() returns nullptr then.
+      connect( devToolsView, &QWidget::destroyed, this, [ devToolsView, this ] {
+        cfg.inspectorGeometry = devToolsView->saveGeometry();
+      } );
+
+      devToolsView->show();
+    }
+  }
+
+  QWebEnginePage::triggerAction( action, checked );
+}
+
+QWidget * ArticleWebPage::devToolsView() const
+{
+  if( auto const * page = devToolsPage() )
+    return page->view();
+  return nullptr;
 }
 #endif
