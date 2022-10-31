@@ -144,7 +144,7 @@ public:
                std::vector< sptr< Dictionary::Class > > const & allDictionaries,
                Instances::Groups const &,
                bool popupView,
-               Config::Class const & cfg,
+               Config::Class & cfg_,
                QAction & openSearchAction_,
                QAction * dictionaryBarToggled = 0,
                GroupComboBox const * groupComboBox = 0 );

@@ -453,7 +453,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                           AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
-                          Config::Class const & cfg_,
+                          Config::Class & cfg_,
                           QAction & openSearchAction_,
                           QAction * dictionaryBarToggled_,
                           GroupComboBox const * groupComboBox_ ):
@@ -490,7 +490,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
                                                         ui.definition );
   ui.definition->setPage( webPage );
 #ifdef USE_QTWEBKIT
-  ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
+  ui.definition->setUp( &cfg_ );
 #endif
 
   goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
