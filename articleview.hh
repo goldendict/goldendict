@@ -237,7 +237,7 @@ public:
 #endif
 
   /// Returns current article's title
-  QString getTitle();
+  QString getTitle() const;
 
   /// Returns the phrase translated by the current article.
   Config::InputPhrase getPhrase() const;

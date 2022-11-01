@@ -2293,7 +2293,7 @@ void ArticleView::toHtml( std::function< void( QString const & ) > resultCallbac
 }
 #endif
 
-QString ArticleView::getTitle()
+QString ArticleView::getTitle() const
 {
 #ifdef USE_QTWEBKIT
   return ui.definition->page()->mainFrame()->title();
