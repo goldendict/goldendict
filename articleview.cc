@@ -2416,11 +2416,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     // We don't prompt for selections larger or equal to 60 chars, since
     // it ruins the menu and it's hardly a single word anyway.
 
-    if( text.isRightToLeft() )
-    {
-      text.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
-      text.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
-    }
+    Folding::prepareToEmbedRTL( text );
 
     lookupSelection = new QAction( tr( "&Look up \"%1\"" ).
                                    arg( text ),
