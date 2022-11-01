@@ -2041,10 +2041,14 @@ void MainWindow::updateWindowTitle()
     QString str = view->getTitle();
     if( !str.isEmpty() )
     {
+      if( blockUpdateWindowTitle )
+      {
+        blockUpdateWindowTitle = false;
+        return;
+      }
+
       Folding::prepareToEmbedRTL( str );
-      if( !blockUpdateWindowTitle )
-        setWindowTitle( tr( "%1 - %2" ).arg( str, "GoldenDict" ) );
-      blockUpdateWindowTitle = false;
+      setWindowTitle( tr( "%1 - %2" ).arg( str, "GoldenDict" ) );
     }
   }
 }
