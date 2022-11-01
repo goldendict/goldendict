@@ -485,6 +485,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 
   ArticleWebPage * const webPage = new ArticleWebPage(
 #ifndef USE_QTWEBKIT
+                                                        *this,
                                                         cfg_,
                                                         &webEngineProfile,
 #endif

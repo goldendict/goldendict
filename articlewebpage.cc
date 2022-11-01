@@ -3,7 +3,9 @@
 
 #include "articlewebpage.hh"
 #ifndef USE_QTWEBKIT
+#include "articleview.hh"
 #include "config.hh"
+#include "folding.hh"
 #endif
 #include "gddebug.hh"
 
@@ -38,8 +40,9 @@ void ArticleWebPage::javaScriptConsoleMessage( QString const & message, int line
   gdWarning( "JS: %s (at %s:%d)", message.toUtf8().constData(), sourceID.toUtf8().constData(), lineNumber );
 }
 #else
-ArticleWebPage::ArticleWebPage( Config::Class & cfg_, QWebEngineProfile * profile, QObject * parent ):
-  QWebEnginePage( profile, parent ), cfg( cfg_ )
+ArticleWebPage::ArticleWebPage( ArticleView const & articleView_, Config::Class & cfg_,
+                                QWebEngineProfile * profile, QObject * parent ):
+  QWebEnginePage( profile, parent ), articleView( articleView_ ), cfg( cfg_ )
 {
 }
 
@@ -110,6 +113,24 @@ void resumeWebPageInspection( QWidget & devToolsView )
   devToolsView.raise();
 }
 
+void setDevToolsViewTitle( QWidget & devToolsView, QString inspectedPageTitle )
+{
+  Folding::prepareToEmbedRTL( inspectedPageTitle );
+  // Don't mention "GoldenDict" in the window title and rely on the GoldenDict icon for recognition.
+  devToolsView.setWindowTitle( ArticleWebPage::tr( "Developer Tools: %1" ).arg( inspectedPageTitle ) );
+}
+
+void bindDevToolsViewTitle( QWidget & devToolsView, ArticleView const & articleView )
+{
+  // Connect to &ArticleView::titleChanged instead of &QWebEnginePage::titleChanged, because the former
+  // filters out transitory title changes and thus prevents flashing of devToolsView's title.
+  QObject::connect( &articleView, &ArticleView::titleChanged,
+                    &devToolsView, [ &devToolsView ]( ArticleView *, QString const & title ) {
+    setDevToolsViewTitle( devToolsView, title );
+  } );
+  setDevToolsViewTitle( devToolsView, articleView.getTitle() );
+}
+
 } // unnamed namespace
 
 ArticleWebPage::~ArticleWebPage()
@@ -140,6 +161,8 @@ void ArticleWebPage::triggerAction( WebAction action, bool checked )
       connect( devToolsView, &QWidget::destroyed, this, [ devToolsView, this ] {
         cfg.inspectorGeometry = devToolsView->saveGeometry();
       } );
+
+      bindDevToolsViewTitle( *devToolsView, articleView );
 
       devToolsView->show();
     }

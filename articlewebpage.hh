@@ -7,6 +7,7 @@
 #include "webkit_or_webengine.hh"
 
 #ifndef USE_QTWEBKIT
+class ArticleView;
 namespace Config {
 class Class;
 }
@@ -20,7 +21,8 @@ public:
 #ifdef USE_QTWEBKIT
   explicit ArticleWebPage( QObject * parent = 0 );
 #else
-  explicit ArticleWebPage( Config::Class &, QWebEngineProfile * profile, QObject * parent = nullptr );
+  explicit ArticleWebPage( ArticleView const &, Config::Class &,
+                           QWebEngineProfile * profile, QObject * parent = nullptr );
   ~ArticleWebPage();
 
   void saveConfigData() const;
@@ -43,6 +45,7 @@ protected:
 private:
   QWidget * devToolsView() const;
 
+  ArticleView const & articleView;
   Config::Class & cfg;
 #endif
 };
