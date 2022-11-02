@@ -2320,7 +2320,7 @@ void ArticleView::doubleClicked( QPoint pos )
   QWebHitTestResult r = ui.definition->page()->mainFrame()->hitTestContent( pos );
   QWebElement el = r.element();
   QUrl imageUrl;
-  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
+  if( el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
   {
     // Double click on image; download it and transfer to external program
 
