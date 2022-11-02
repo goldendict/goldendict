@@ -34,7 +34,7 @@ This code has been run and tested on Windows XP/Vista/7, Ubuntu Linux, Mac OS X.
 
 First, clone this repository, e.g.:
 
-    git clone git://github.com/goldendict/goldendict.git
+    git clone https://github.com/goldendict/goldendict.git
 
 And then invoke `qmake-qt4` and `make`:
 
