@@ -63,7 +63,7 @@
 
 #endif
 
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
 #include <QX11Info>
 #include <X11/Xlib.h>
 #include <fixx11h.h>
@@ -75,6 +75,26 @@ using std::set;
 using std::wstring;
 using std::map;
 using std::pair;
+
+namespace {
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+class MinimumSizeWidget: public QWidget
+{
+  Q_OBJECT
+public:
+  explicit MinimumSizeWidget( QWidget * parent ):
+    QWidget( parent )
+  {
+    setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+  }
+
+  virtual QSize sizeHint() const
+  { return QSize( 1, 1 ); }
+};
+#endif
+
+} // unnamed namespace
 
 #ifndef QT_NO_OPENSSL
 
@@ -852,6 +872,18 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
            this, SLOT( checkForNewRelease() ) );
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+  // The X11 focus workaround in toggleMainWindow() emulates a left mouse button
+  // click on the top-left pixel of the main GoldenDict window. This hack steals
+  // focus from other applications reliably, but it also performs this click at
+  // the position that belongs to the File menu in the default KDE Plasma style,
+  // because the menu bar has no left margin there.
+  // Insert a minimum-size widget, which ignores mouse clicks, to the left of the
+  // menu bar to work around opening of the File menu each time the main window
+  // is shown (e.g. via a hotkey or when another GoldenDict instance is launched).
+  menuBar()->setCornerWidget( new MinimumSizeWidget( this ), Qt::TopLeftCorner );
+#endif
 
   if ( cfg.preferences.hideMenubar )
   {
@@ -2945,7 +2977,7 @@ void MainWindow::showTranslationFor( QString const & inWord,
                         ignoreDiacritics );
 }
 
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
 void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
 #else
 void MainWindow::toggleMainWindow( bool onlyShow )
@@ -3044,18 +3076,18 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       ftsDlg->show();
 
     focusTranslateLine();
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
     Window wh = 0;
     int rev = 0;
     XGetInputFocus( QX11Info::display(), &wh, &rev );
     if( wh != translateLine->internalWinId() && !byIconClick )
     {
-        QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 1, 1 ) );
+        QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 0, 0 ) );
         XEvent event;
         memset( &event, 0, sizeof( event) );
         event.type = ButtonPress;
-        event.xbutton.x = 1;
-        event.xbutton.y = 1;
+        event.xbutton.x = 0;
+        event.xbutton.y = 0;
         event.xbutton.x_root = pointRelativeToRoot.x();
         event.xbutton.y_root = pointRelativeToRoot.y();
         event.xbutton.window = internalWinId();
@@ -3275,7 +3307,7 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
   switch(r) {
     case QSystemTrayIcon::Trigger:
       // Left click toggles the visibility of main window
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
       toggleMainWindow( false, true );
 #else
       toggleMainWindow();
@@ -4932,4 +4964,8 @@ bool MainWindow::isGoldenDictWindow( HWND hwnd )
   return hwnd == (HWND)winId() || hwnd == (HWND)ui.centralWidget->winId();
 }
 
+#endif
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+#include "mainwindow.moc"
 #endif
