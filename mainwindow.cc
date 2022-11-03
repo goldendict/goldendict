@@ -3050,15 +3050,14 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     XGetInputFocus( QX11Info::display(), &wh, &rev );
     if( wh != translateLine->internalWinId() && !byIconClick )
     {
-        QPoint p( 1, 1 );
-        mapToGlobal( p );
+        QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 1, 1 ) );
         XEvent event;
         memset( &event, 0, sizeof( event) );
         event.type = ButtonPress;
         event.xbutton.x = 1;
         event.xbutton.y = 1;
-        event.xbutton.x_root = p.x();
-        event.xbutton.y_root = p.y();
+        event.xbutton.x_root = pointRelativeToRoot.x();
+        event.xbutton.y_root = pointRelativeToRoot.y();
         event.xbutton.window = internalWinId();
         event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
         event.xbutton.state = Button1Mask;
