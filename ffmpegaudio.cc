@@ -260,7 +260,7 @@ bool DecoderContext::openCodec( QString & errorString )
     return false;
   }
 
-  av_log( NULL, AV_LOG_INFO, "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec_->long_name,
+  gdDebug( "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec_->long_name,
           codecContext_->channels, codecContext_->sample_rate, av_get_sample_fmt_name( codecContext_->sample_fmt ) );
 
   if ( codecContext_->sample_fmt == AV_SAMPLE_FMT_S32  ||
@@ -363,7 +363,7 @@ bool DecoderContext::openOutputDevice( QString & errorString )
     return false;
   }
 
-  av_log( NULL, AV_LOG_INFO, "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
+  gdDebug( "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
           aoDrvInfo->name, aoSampleFormat.channels, aoSampleFormat.rate, aoSampleFormat.bits );
 
   aoDevice_ = ao_open_live( aoDriverId, &aoSampleFormat, NULL );
