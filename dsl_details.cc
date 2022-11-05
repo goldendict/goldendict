@@ -630,7 +630,19 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
   if ( stack.size() )
   {
-    GD_FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
+    unsigned const unclosedTagCount = stack.size();
+    QByteArray const firstTagName = gd::toQString( stack.front()->tagName ).toUtf8();
+    if( dictName.empty() )
+    {
+      gdWarning( "Warning: %u tag(s) were unclosed, first tag name \"%s\".\n",
+                 unclosedTagCount, firstTagName.constData() );
+    }
+    else
+    {
+      gdWarning( "Warning: %u tag(s) were unclosed in \"%s\", article \"%s\", first tag name \"%s\".\n",
+                 unclosedTagCount, dictName.c_str(), gd::toQString( headword ).toUtf8().constData(),
+                 firstTagName.constData() );
+    }
   }
 }
 
