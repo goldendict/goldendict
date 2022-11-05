@@ -3078,35 +3078,43 @@ void MainWindow::toggleMainWindow( bool onlyShow )
     focusTranslateLine();
 
 #ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
-    Window wh = 0;
-    int rev = 0;
-    XGetInputFocus( QX11Info::display(), &wh, &rev );
-    if( wh != internalWinId() && !byIconClick )
-    {
-        QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 0, 0 ) );
-        XEvent event;
-        memset( &event, 0, sizeof( event) );
-        event.type = ButtonPress;
-        event.xbutton.x = 0;
-        event.xbutton.y = 0;
-        event.xbutton.x_root = pointRelativeToRoot.x();
-        event.xbutton.y_root = pointRelativeToRoot.y();
-        event.xbutton.window = internalWinId();
-        event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
-        event.xbutton.state = Button1Mask;
-        event.xbutton.button = Button1;
-        event.xbutton.same_screen = true;
-        event.xbutton.time = CurrentTime;
-
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
-        event.type = ButtonRelease;
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
-    }
+    if( !byIconClick )
+      QTimer::singleShot( 0, this, SLOT( forceX11Focus() ) );
 #endif
   }
 }
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+void MainWindow::forceX11Focus()
+{
+  Window wh = 0;
+  int rev = 0;
+  XGetInputFocus( QX11Info::display(), &wh, &rev );
+  if( wh != internalWinId() )
+  {
+    QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 0, 0 ) );
+    XEvent event;
+    memset( &event, 0, sizeof( event) );
+    event.type = ButtonPress;
+    event.xbutton.x = 0;
+    event.xbutton.y = 0;
+    event.xbutton.x_root = pointRelativeToRoot.x();
+    event.xbutton.y_root = pointRelativeToRoot.y();
+    event.xbutton.window = internalWinId();
+    event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
+    event.xbutton.state = Button1Mask;
+    event.xbutton.button = Button1;
+    event.xbutton.same_screen = true;
+    event.xbutton.time = CurrentTime;
+
+    XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
+    XFlush( QX11Info::display() );
+    event.type = ButtonRelease;
+    XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
+    XFlush( QX11Info::display() );
+  }
+}
+#endif
 
 void MainWindow::installHotKeys()
 {
