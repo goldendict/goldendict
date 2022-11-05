@@ -188,8 +188,8 @@ InputPhrase Preferences::sanitizeInputPhrase( QString const & inputPhrase ) cons
 
   if( limitInputPhraseLength && inputPhrase.size() > inputPhraseLengthLimit )
   {
-    gdWarning( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
-               inputPhrase.size(), inputPhraseLengthLimit );
+    gdDebug( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
+             inputPhrase.size(), inputPhraseLengthLimit );
     return result;
   }
 
