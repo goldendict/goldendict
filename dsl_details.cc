@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <wctype.h>
 
+#include <algorithm>
+
 namespace Dsl {
 namespace Details {
 
@@ -179,6 +181,17 @@ bool checkM( wstring const & dest, wstring const & src )
 {
   return src == GD_NATIVE_TO_WS( L"m" ) && is_mN( dest );
 }
+
+/// Closing the [mN] tags is optional. Quote from https://documentation.help/ABBYY-Lingvo8/paragraph_form.htm:
+/// Any paragraph from this tag until the end of card or until system meets an «[/m]» (margin shift toggle off) tag
+struct MustTagBeClosed
+{
+  bool operator()( ArticleDom::Node const * tag ) const
+  {
+    Q_ASSERT( tag->isTag );
+    return !isAnyM( tag->tagName );
+  }
+};
 
 } // unnamed namespace
 
@@ -642,8 +655,13 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
   if ( stack.size() )
   {
-    unsigned const unclosedTagCount = stack.size();
-    QByteArray const firstTagName = gd::toQString( stack.front()->tagName ).toUtf8();
+    list< Node * >::iterator it = std::find_if( stack.begin(), stack.end(), MustTagBeClosed() );
+    if( it == stack.end() )
+      return; // no unclosed tags that must be closed => nothing to warn about
+    QByteArray const firstTagName = gd::toQString( ( *it )->tagName ).toUtf8();
+    ++it;
+    unsigned const unclosedTagCount = 1 + std::count_if( it, stack.end(), MustTagBeClosed() );
+
     if( dictName.empty() )
     {
       gdWarning( "Warning: %u tag(s) were unclosed, first tag name \"%s\".\n",
