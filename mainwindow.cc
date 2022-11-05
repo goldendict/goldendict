@@ -3076,11 +3076,12 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       ftsDlg->show();
 
     focusTranslateLine();
+
 #ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
     Window wh = 0;
     int rev = 0;
     XGetInputFocus( QX11Info::display(), &wh, &rev );
-    if( wh != translateLine->internalWinId() && !byIconClick )
+    if( wh != internalWinId() && !byIconClick )
     {
         QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 0, 0 ) );
         XEvent event;
