@@ -280,6 +280,10 @@ private:
 
 private slots:
 
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+  void forceX11Focus();
+#endif
+
   void hotKeyActivated( int );
 
   /// If new release checks are on, santizies the next check time and starts
