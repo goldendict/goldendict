@@ -2972,7 +2972,8 @@ void ArticleView::onJsArticleLoaded( QString const & id, QString const & audioLi
 #ifndef USE_QTWEBKIT
   // When JavaScript does not send the current article timestamp, it is implicitly equal to pageTimestamp.
   // If currentArticleTimestamp != pageTimestamp, then our current article value is fresher => keep it.
-  if( isActive && currentArticleTimestamp != pageTimestamp )
+  // Keep isActive true if id == currentArticle (happens when the user activates an article while it is being loaded).
+  if( isActive && currentArticleTimestamp != pageTimestamp && id != currentArticle )
     isActive = false;
 #endif
 

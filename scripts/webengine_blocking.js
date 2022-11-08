@@ -131,9 +131,7 @@ function gdCurrentArticleLoaded() {
 
     // Unlike Element.scrollIntoView(), setting the URL fragment works correctly in background tabs.
     // When location.hash is set after the HTML element with the corresponding id has been loaded, the
-    // scrolling is immediate. Another benefit of setting the fragment when the requisite article is
-    // loaded: the scrolling is automatically canceled if the user activates another article earlier,
-    // because that activated article must have been loaded already, and so won't be loaded again.
+    // scrolling is immediate.
     if (gdCurrentArticleHash) {
         location.replace(location.href + gdCurrentArticleHash);
         gdCurrentArticleHash = null;
@@ -148,7 +146,10 @@ function gdArticleLoaded(articleId) {
     }
 
     const isCurrent = articleId === gdCurrentArticle;
-    if (isCurrent)
+    // gdWasCurrentArticleSetExplicitly === true means that the user has activated this article while it was being
+    // loaded. Don't call gdCurrentArticleLoaded() in this case, because the article's className is already correct
+    // and the user's interaction with the page should cancel the automatic scrolling to the target article or fragment.
+    if (isCurrent && !gdWasCurrentArticleSetExplicitly)
         gdCurrentArticleLoaded();
 
     if (gdArticleView)

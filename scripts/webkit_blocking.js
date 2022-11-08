@@ -5,10 +5,10 @@ gdArticleView.onJsPageInitStarted();
 var gdCurrentArticle;
 
 function gdArticleLoaded(articleId) {
-    const isCurrent = !gdCurrentArticle;
-    if (isCurrent)
+    if (!gdCurrentArticle)
         gdCurrentArticle = articleId; // This is the first article. It becomes current when loaded.
 
+    const isCurrent = articleId === gdCurrentArticle;
     gdArticleView.onJsArticleLoaded(articleId, gdJustLoadedAudioLink, isCurrent);
     gdJustLoadedAudioLink = null;
 }
