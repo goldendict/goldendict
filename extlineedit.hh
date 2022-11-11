@@ -39,6 +39,8 @@ class ExtLineEdit : public QLineEdit
     Q_ENUMS(Side)
 
 public:
+    static QPixmap scaledForButtonPixmap( QPixmap const & pixmap );
+
     enum Side { Left = 0, Right = 1 };
 
     explicit ExtLineEdit(QWidget * parent = 0);

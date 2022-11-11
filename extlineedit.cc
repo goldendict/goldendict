@@ -9,6 +9,11 @@
 #include <QPropertyAnimation>
 #endif
 
+QPixmap ExtLineEdit::scaledForButtonPixmap( QPixmap const & pixmap )
+{
+  return pixmap.scaled( 18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+}
+
 ExtLineEdit::ExtLineEdit(QWidget *parent) :
     QLineEdit(parent)
 {
