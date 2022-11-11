@@ -46,7 +46,6 @@ public:
     explicit ExtLineEdit(QWidget * parent = 0);
     ~ExtLineEdit();
 
-    QPixmap buttonPixmap(Side side) const;
     void setButtonPixmap(Side side, const QPixmap &pixmap);
 
     void setButtonVisible(Side side, bool visible);
@@ -71,7 +70,6 @@ protected:
 private:
     void updateMargins();
     void updateButtonPositions();
-    QPixmap pixmaps[2];
     IconButton * iconButtons[2];
     bool iconEnabled[2];
     QString oldText;
