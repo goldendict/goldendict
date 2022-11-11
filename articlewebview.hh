@@ -89,11 +89,17 @@ public:
   /// @return whether the argument to a timely setEventFilter() call was installed as event filter on @p object.
   bool isWatched( QObject * object ) const;
 
+  // Use the following member functions, not QWidget's equivalents they hide.
+  QCursor cursor() const;
+  void setCursor( QCursor const & );
+  void unsetCursor();
+
 protected:
   void childEvent( QChildEvent * event ) override;
 
 private:
   QObject * eventFilterObject = nullptr;
+  QWidget * childWidget = nullptr;
 };
 
 #endif // USE_QTWEBKIT

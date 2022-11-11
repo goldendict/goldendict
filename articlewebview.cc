@@ -185,6 +185,8 @@ bool ArticleWebView::isOnScrollBar( QMouseEvent const & event ) const
 
 #else // USE_QTWEBKIT
 
+#include "gddebug.hh"
+
 #include <QChildEvent>
 
 void ArticleWebView::setEventFilter( QObject * filterObject )
@@ -195,6 +197,23 @@ void ArticleWebView::setEventFilter( QObject * filterObject )
 bool ArticleWebView::isWatched( QObject * object ) const
 {
   return object->parent() == this && object->isWidgetType();
+}
+
+QCursor ArticleWebView::cursor() const
+{
+  return childWidget ? childWidget->cursor() : QCursor{};
+}
+
+void ArticleWebView::setCursor( QCursor const & cursor )
+{
+  if( childWidget )
+    childWidget->setCursor( cursor );
+}
+
+void ArticleWebView::unsetCursor()
+{
+  if( childWidget )
+    childWidget->unsetCursor();
 }
 
 void ArticleWebView::childEvent( QChildEvent * event )
@@ -209,10 +228,19 @@ void ArticleWebView::childEvent( QChildEvent * event )
     {
       case QEvent::ChildAdded:
         child->installEventFilter( eventFilterObject );
+
+        if( childWidget )
+          gdWarning( "A second widget child is added to an article web view. Replacing the first one." );
+        childWidget = qobject_cast< QWidget * >( child );
         break;
+
       case QEvent::ChildRemoved:
         child->removeEventFilter( eventFilterObject );
+
+        if( childWidget == child )
+          childWidget = nullptr;
         break;
+
       default:
         break;
     }
