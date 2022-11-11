@@ -273,6 +273,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
 
+  connect( definition, SIGNAL( pageLoadingStateChanged( ArticleView *, bool ) ),
+           this, SLOT( pageLoadingStateChanged( ArticleView *, bool ) ) );
+
   connect( definition, SIGNAL( canGoBackForwardChanged( ArticleView * ) ),
            this, SLOT( updateBackForwardButtons() ) );
 
@@ -1334,6 +1337,11 @@ void ScanPopup::switchExpandOptionalPartsMode()
 {
   if( isVisible() )
     emit switchExpandMode();
+}
+
+void ScanPopup::pageLoadingStateChanged( ArticleView *, bool isLoading )
+{
+  ui.translateBox->setIsPageLoading( isLoading );
 }
 
 void ScanPopup::updateBackForwardButtons()

@@ -85,5 +85,6 @@
         <file>icons/star_blue.png</file>
         <file>icons/folder.png</file>
         <file>icons/ontop.png</file>
+        <file>icons/loading.gif</file>
     </qresource>
 </RCC>

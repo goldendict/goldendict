@@ -74,6 +74,7 @@ class ArticleView: public QFrame
   QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
+  bool isLoading;
 #ifdef USE_QTWEBKIT
   // The code that uses this variable is not needed in the Qt WebEngine version.
   QString rangeVarName;
@@ -197,6 +198,9 @@ public:
   /// The function reloads content if the change affects it.
   void updateMutedContents();
 
+  bool isPageLoading() const
+  { return isLoading; }
+
   bool canGoBack() const;
   bool canGoForward() const;
 
@@ -273,6 +277,8 @@ signals:
   void iconChanged( ArticleView *, QIcon const & icon );
 
   void titleChanged( ArticleView *, QString const & title );
+
+  void pageLoadingStateChanged( ArticleView *, bool isLoading );
 
   /// Is emitted when the return value of canGoBack() or canGoForward() may have changed.
   void canGoBackForwardChanged( ArticleView * );

@@ -411,6 +411,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   connect( ui.searchPane->toggleViewAction(), SIGNAL( triggered( bool ) ),
            this, SLOT( updateSearchPaneAndBar( bool ) ) );
 
+  // Bind the loading indicator's height to the translate line's height to prevent UI shifts on loading state changes.
+  ui.loadingIndicatorLabel->setSameHeightWidget( ui.translateLine );
+
   if ( cfg.preferences.searchInDock )
   {
     groupList = groupListInDock;
@@ -1103,6 +1106,7 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 
   updateGroupList();
   applyWordsZoomLevel();
+  updateIsPageLoading();
 
   setTranslateBoxTextAndKeepSuffix( text, WildcardsAreAlreadyEscaped, DisablePopup );
   focusTranslateLine();
@@ -1799,6 +1803,9 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( iconChanged( ArticleView *, QIcon const & ) ),
            this, SLOT( iconChanged( ArticleView *, QIcon const & ) ) );
 
+  connect( view, SIGNAL( pageLoadingStateChanged( ArticleView *, bool ) ),
+           this, SLOT( pageLoadingStateChanged( ArticleView *, bool ) ) );
+
   connect( view, SIGNAL( canGoBackForwardChanged( ArticleView * ) ),
            this, SLOT( canGoBackForwardChanged( ArticleView * ) ) );
 
@@ -2053,6 +2060,13 @@ void MainWindow::updateWindowTitle()
   }
 }
 
+void MainWindow::pageLoadingStateChanged( ArticleView * view, bool isLoading )
+{
+  if( view == getCurrentArticleView() )
+    setIsPageLoading( isLoading );
+  // else: ignore this change in a non-active tab
+}
+
 void MainWindow::canGoBackForwardChanged( ArticleView * view )
 {
   if( view == getCurrentArticleView() )
@@ -2100,6 +2114,7 @@ void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPi
 void MainWindow::tabSwitched( int )
 {
   translateBox->setPopupEnabled( false );
+  updateIsPageLoading();
   updateBackForwardButtons();
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -2217,6 +2232,20 @@ void MainWindow::updateFoundInDictsList()
     for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
       appendToFoundInDictsList( *i, *i == activeId );
   }
+}
+
+void MainWindow::updateIsPageLoading()
+{
+  if( ArticleView const * view = getCurrentArticleView() )
+    setIsPageLoading( view->isPageLoading() );
+}
+
+void MainWindow::setIsPageLoading( bool isLoading )
+{
+  if( cfg.preferences.searchInDock )
+    ui.loadingIndicatorLabel->setVisible( isLoading );
+  else
+    translateBox->setIsPageLoading( isLoading );
 }
 
 void MainWindow::updateBackForwardButtons()
@@ -4388,7 +4417,15 @@ void MainWindow::applyWordsZoomLevel()
   }
 
   if ( translateLine->font().pointSize() != ps )
+  {
     translateLine->setFont( font );
+    if( cfg.preferences.searchInDock )
+    {
+      // loadingIndicatorLabel's size hint is bound to ui.translateLine->height(), which depends on the font.
+      // Update the label's geometry to resize it immediately rather than after it is hidden and shown again.
+      ui.loadingIndicatorLabel->updateGeometry();
+    }
+  }
 
   font = groupListDefaultFont;
 

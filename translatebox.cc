@@ -115,6 +115,9 @@ TranslateBox::TranslateBox(QWidget *parent) : QWidget(parent),
 
   translate_line->setButtonPixmap( ExtLineEdit::Left,
                                    ExtLineEdit::scaledForButtonPixmap( QPixmap( ":/icons/system-search.png" ) ) );
+  // Don't animate the "loading" icon in a QMovie, because that measurably wastes CPU time, which could be a problem,
+  // especially in case GoldenDict is stuck in the loading state due to a bug such as QTBUG-106580.
+  translate_line->setAlternativeLeftPixmap( ExtLineEdit::scaledForButtonPixmap( QPixmap( ":/icons/loading.gif" ) ) );
   // translate_line->setButtonToolTip(ExtLineEdit::Left, tr("Options"));
   translate_line->setButtonVisible(ExtLineEdit::Left, true);
   translate_line->setButtonFocusPolicy(ExtLineEdit::Left, Qt::ClickFocus);
@@ -236,6 +239,11 @@ void TranslateBox::setSizePolicy( QSizePolicy policy )
   QWidget::setSizePolicy( policy );
   if ( translate_line )
     translate_line->setSizePolicy( policy );
+}
+
+void TranslateBox::setIsPageLoading( bool isLoading )
+{
+  translate_line->setAlternativeLeftPixmapVisible( isLoading );
 }
 
 void TranslateBox::showPopup()

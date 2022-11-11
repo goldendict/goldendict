@@ -377,6 +377,7 @@ HEADERS += folding.hh \
     dictinfo.hh \
     zipsounds.hh \
     stylescombobox.hh \
+    square_label.hh \
     extlineedit.hh \
     translatebox.hh \
     historypanewidget.hh \

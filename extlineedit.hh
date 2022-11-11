@@ -56,6 +56,15 @@ public:
 
     void setButtonAutoHide(Side side, bool autohide);
 
+    /// @param pixmap a pixmap that may be intermittently displayed in place of the left button pixmap.
+    /// @pre pixmap.size() equals the size of the left button pixmap.
+    /// @warning Do not change the size of the left button pixmap after setting an alternative left pixmap.
+    void setAlternativeLeftPixmap( QPixmap const & pixmap );
+    /// Shows the alternative left pixmap in place of the left button pixmap if @p visible;
+    /// shows the left button pixmap in its own place (the default until this function is called) otherwise.
+    /// @pre The alternative left pixmap has been set and is not null.
+    void setAlternativeLeftPixmapVisible( bool visible );
+
 signals:
     void leftButtonClicked();
     void rightButtonClicked();
@@ -72,6 +81,8 @@ private:
     void updateButtonPositions();
     IconButton * iconButtons[2];
     bool iconEnabled[2];
+    bool altLeftPixmapVisible;
+    QPixmap altLeftPixmap;
     QString oldText;
 };
 

@@ -475,6 +475,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   inspectAction( this ),
   openSearchAction( openSearchAction_ ),
   searchIsOpened( false ),
+  isLoading( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ ),
   ftsSearchIsOpened( false ),
@@ -987,6 +988,9 @@ void ArticleView::loadFinished( bool )
 
   if( Qt4x5::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
+
+  isLoading = false;
+  emit pageLoadingStateChanged( this, isLoading );
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
@@ -2876,6 +2880,18 @@ void ArticleView::onJsPageInitStarted( QStringList const & loadedArticles, QStri
 
   emit canGoBackForwardChanged( this );
   emit pageUnloaded( this );
+
+#ifdef USE_QTWEBKIT
+  // In the Qt WebKit version loadFinished() for the initial Welcome! page is called before JavaScript execution on this
+  // initial page starts. Don't transition into the loading state if the current URL's group is the internal Help group,
+  // which contains the Welcome! page, to prevent being stuck in the loading state at GoldenDict start. Pages in the
+  // Help group are built into GoldenDict and are loaded instantly, so this workaround shouldn't be noticeable.
+  if( Qt4x5::Url::queryItemValue( ui.definition->url(), "group" ).toUInt() != Instances::Group::HelpGroupId )
+#endif
+  {
+    isLoading = true;
+    emit pageLoadingStateChanged( this, isLoading );
+  }
 
 #ifndef USE_QTWEBKIT
   if( hideSearchFrameOnceJsSavesStateToWebHistory )
