@@ -1757,9 +1757,23 @@ void MainWindow::tabCloseRequested( int x )
   ui.tabWidget->removeTab( x );
   delete w;
 
+  if( ui.tabWidget->count() != 0 )
+    return;
   // if everything is closed, add a new tab
-  if ( ui.tabWidget->count() == 0 )
-    addNewTab();
+  addNewTab();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QWidget const * const focused = focusWidget();
+  if( !focused || focused == ui.tabWidget->tabBar() )
+  {
+    // The article view in the last closed tab had focus. Now no widget has focus or the tab bar acquired useless to it
+    // focus. In this situation GoldenDict ignores typing a new phrase to be translated. Furthermore, when no widget has
+    // focus, focus-transferring shortcuts don't work. Give focus to the newly created article view to work this around.
+    // Cannot just call focusArticleView() or focusTranslateLine(), because no window should be activated here.
+    Q_ASSERT( getCurrentArticleView() );
+    getCurrentArticleView()->focus();
+  }
+#endif
 }
 
 void MainWindow::closeCurrentTab()
