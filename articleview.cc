@@ -974,16 +974,14 @@ void ArticleView::loadFinished( bool )
   // However, if this was a back/forward navigation or page reloading, the user also has to
   // scroll the mouse wheel to prevent QWebPage from restoring its saved scroll position.
   if( !wasCurrentArticleSetExplicitly )
+  {
     initCurrentArticleAndScroll();
+    scrollToGdAnchor( *ui.definition );
+  }
 #endif
 
   ui.definition->unsetCursor();
   //QApplication::restoreOverrideCursor();
-
-#ifdef USE_QTWEBKIT
-  if( !wasCurrentArticleSetExplicitly )
-    scrollToGdAnchor( *ui.definition );
-#endif
 
   emit pageLoaded( this );
 
