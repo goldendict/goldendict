@@ -3948,8 +3948,13 @@ void MainWindow::applyWordsZoomLevel()
   }
 
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
-  // groupList->setFixedHeight(translateLine->height());
-  groupList->parentWidget()->layout()->activate();
+
+  if( !cfg.preferences.searchInDock )
+  {
+    // Invalidating navToolbar's layout displays translateBoxWidget w/o the need to press the toolbar
+    // extension button when Words Zoom level decreases enough for translateBoxWidget to fit in the toolbar.
+    navToolbar->layout()->invalidate();
+  }
 
   if ( scanPopup.get() )
     scanPopup->applyWordsZoomLevel();
