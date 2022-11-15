@@ -3545,13 +3545,15 @@ void MainWindow::on_pageSetup_triggered()
 
 void MainWindow::on_printPreview_triggered()
 {
-  QPrintPreviewDialog dialog( &getPrinter(), this );
+  QPrintPreviewDialog dialog( &getPrinter(), this,
+                              Qt::WindowSystemMenuHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint );
+  dialog.restoreGeometry( cfg.printPreviewDialogGeometry );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
 
-  dialog.showMaximized();
   dialog.exec();
+  cfg.printPreviewDialogGeometry = dialog.saveGeometry();
 }
 
 void MainWindow::on_print_triggered()

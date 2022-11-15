@@ -1134,6 +1134,10 @@ Class load() THROW_SPEC( exError )
   if ( !dictionariesDialogGeometry.isNull() )
     c.dictionariesDialogGeometry = QByteArray::fromBase64( dictionariesDialogGeometry.toElement().text().toLatin1() );
 
+  QDomNode const printPreviewDialogGeometry = root.namedItem( "printPreviewDialogGeometry" );
+  if( !printPreviewDialogGeometry.isNull() )
+    c.printPreviewDialogGeometry = QByteArray::fromBase64( printPreviewDialogGeometry.toElement().text().toLatin1() );
+
   QDomNode timeForNewReleaseCheck = root.namedItem( "timeForNewReleaseCheck" );
 
   if ( !timeForNewReleaseCheck.isNull() )
@@ -2130,6 +2134,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "dictionariesDialogGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictionariesDialogGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "printPreviewDialogGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.printPreviewDialogGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "timeForNewReleaseCheck" );

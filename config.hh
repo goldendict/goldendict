@@ -678,6 +678,7 @@ struct Class
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
   QByteArray inspectorGeometry; // Geometry of WebKit inspector window
   QByteArray dictionariesDialogGeometry; // Geometry of Dictionaries dialog
+  QByteArray printPreviewDialogGeometry; // Geometry of Print Preview dialog
   QByteArray helpWindowGeometry; // Geometry of help window
   QByteArray helpSplitterState; // Geometry of help splitter
 
