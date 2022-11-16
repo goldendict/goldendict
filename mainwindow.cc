@@ -2190,6 +2190,8 @@ void MainWindow::editPreferences()
     p.fts.searchMode = cfg.preferences.fts.searchMode;
     p.fts.useMaxArticlesPerDictionary = cfg.preferences.fts.useMaxArticlesPerDictionary;
     p.fts.useMaxDistanceBetweenWords = cfg.preferences.fts.useMaxDistanceBetweenWords;
+    p.fts.ignoreWordsOrder = cfg.preferences.fts.ignoreWordsOrder;
+    p.fts.ignoreDiacritics = cfg.preferences.fts.ignoreDiacritics;
 
     bool needReload = false;
 
