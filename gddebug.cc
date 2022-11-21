@@ -2,63 +2,69 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <QMutex>
-#include <QMutexLocker>
 #include <QTextCodec>
 #include <QString>
 #include "gddebug.hh"
 
 QFile * logFilePtr;
-static QTextCodec * utf8Codec;
-static QMutex loggingMutex;
+
+namespace {
+
+class Utf8CodecForLocaleReplacer
+{
+public:
+  Utf8CodecForLocaleReplacer():
+    replaceCodecForLocale( shouldReplaceCodecForLocale() ), localeCodec( 0 )
+  {
+    if( !replaceCodecForLocale )
+      return;
+    codecForLocaleMutex.lock();
+    localeCodec = QTextCodec::codecForLocale();
+    // This static local variable caches the result of a possibly slow call to codecForName().
+    static QTextCodec * const utf8Codec = QTextCodec::codecForName( "UTF8" );
+    QTextCodec::setCodecForLocale( utf8Codec );
+  }
+
+  ~Utf8CodecForLocaleReplacer()
+  {
+    if( !replaceCodecForLocale )
+      return;
+    QTextCodec::setCodecForLocale( localeCodec );
+    codecForLocaleMutex.unlock();
+  }
+
+private:
+  static bool shouldReplaceCodecForLocale()
+  { return logFilePtr && logFilePtr->isOpen(); }
+
+  static QMutex codecForLocaleMutex;
+
+  bool const replaceCodecForLocale;
+  QTextCodec * localeCodec;
+};
+
+QMutex Utf8CodecForLocaleReplacer::codecForLocaleMutex;
+
+} // unnamed namespace
 
 void gdWarning(const char *msg, ...)
 {
-va_list ap;
-va_start(ap, msg);
-QTextCodec *localeCodec = 0;
-
-  if( logFilePtr && logFilePtr->isOpen() )
+  va_list ap;
+  va_start(ap, msg);
   {
-    QMutexLocker _( &loggingMutex );
-
-    if( utf8Codec == 0 )
-      utf8Codec = QTextCodec::codecForName( "UTF8" );
-
-    localeCodec = QTextCodec::codecForLocale();
-    QTextCodec::setCodecForLocale( utf8Codec );
-
+    Utf8CodecForLocaleReplacer codecReplacer;
     qWarning( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
-
-    QTextCodec::setCodecForLocale( localeCodec );
   }
-  else
-    qWarning( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
-
   va_end(ap);
 }
 
 void gdDebug(const char *msg, ...)
 {
-va_list ap;
-va_start(ap, msg);
-QTextCodec *localeCodec = 0;
-
-  if( logFilePtr && logFilePtr->isOpen() )
+  va_list ap;
+  va_start(ap, msg);
   {
-    QMutexLocker _( &loggingMutex );
-
-    if( utf8Codec == 0 )
-      utf8Codec = QTextCodec::codecForName( "UTF8" );
-
-    localeCodec = QTextCodec::codecForLocale();
-    QTextCodec::setCodecForLocale( utf8Codec );
-
+    Utf8CodecForLocaleReplacer codecReplacer;
     qDebug( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
-
-    QTextCodec::setCodecForLocale( localeCodec );
   }
-  else
-    qDebug( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
-
   va_end(ap);
 }
