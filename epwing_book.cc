@@ -420,10 +420,10 @@ EpwingBook::~EpwingBook()
 
 void EpwingBook::setErrorString( QString const & func, EB_Error_Code code )
 {
+  QTextCodec * const localeCodec = gdCodecForLocale();
   error_string = QString( "EB \"%1\" function error: %2 (%3)" )
-                 .arg( func )
-                 .arg( QTextCodec::codecForLocale()->toUnicode( eb_error_string( code ) ) )
-                 .arg( QTextCodec::codecForLocale()->toUnicode( eb_error_message( code ) ) );
+                 .arg( func, localeCodec->toUnicode( eb_error_string( code ) ),
+                       localeCodec->toUnicode( eb_error_message( code ) ) );
 
   if( currentPosition.page != 0 )
     error_string += QString( " on page %1, offset %2" ).arg( QString::number( currentPosition.page ) )
