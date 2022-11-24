@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <QMutex>
+#include <QMutexLocker>
 #include <QTextCodec>
 #include <QString>
 #include "gddebug.hh"
@@ -13,6 +14,17 @@ namespace {
 class Utf8CodecForLocaleReplacer
 {
 public:
+  static QTextCodec * originalCodecForLocale()
+  {
+    if( !shouldReplaceCodecForLocale() )
+      return QTextCodec::codecForLocale();
+    // codecForLocaleMutex is locked while the UTF8 codec replaces the original codec.
+    // Thus calling QTextCodec::codecForLocale() while holding a lock is guaranteed to
+    // return the original codec, not its temporary UTF8 replacement.
+    QMutexLocker _( &codecForLocaleMutex );
+    return QTextCodec::codecForLocale();
+  }
+
   Utf8CodecForLocaleReplacer():
     replaceCodecForLocale( shouldReplaceCodecForLocale() ), localeCodec( 0 )
   {
@@ -67,4 +79,9 @@ void gdDebug(const char *msg, ...)
     qDebug( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
   }
   va_end(ap);
+}
+
+QTextCodec * gdCodecForLocale()
+{
+  return Utf8CodecForLocaleReplacer::originalCodecForLocale();
 }
