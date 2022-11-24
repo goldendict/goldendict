@@ -874,7 +874,10 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     // Find anchor
     int n = list[ 3 ].indexOf( '#' );
     if( n > 0 )
+    {
       anchor = QString( "?gdanchor=" ) + list[ 3 ].mid( n + 1 );
+      tag.remove( list[ 3 ].mid( n ) );
+    }
     else
       anchor.clear();
 
