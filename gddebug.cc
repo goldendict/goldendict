@@ -1,14 +1,15 @@
 /* This file is (c) 2013 Abs62
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
+#include <QMutex>
+#include <QMutexLocker>
 #include <QTextCodec>
 #include <QString>
-#include "mutex.hh"
 #include "gddebug.hh"
 
 QFile * logFilePtr;
 static QTextCodec * utf8Codec;
-static Mutex loggingMutex;
+static QMutex loggingMutex;
 
 void gdWarning(const char *msg, ...)
 {
@@ -18,7 +19,7 @@ QTextCodec *localeCodec = 0;
 
   if( logFilePtr && logFilePtr->isOpen() )
   {
-    Mutex::Lock _( loggingMutex );
+    QMutexLocker _( &loggingMutex );
 
     if( utf8Codec == 0 )
       utf8Codec = QTextCodec::codecForName( "UTF8" );
@@ -44,7 +45,7 @@ QTextCodec *localeCodec = 0;
 
   if( logFilePtr && logFilePtr->isOpen() )
   {
-    Mutex::Lock _( loggingMutex );
+    QMutexLocker _( &loggingMutex );
 
     if( utf8Codec == 0 )
       utf8Codec = QTextCodec::codecForName( "UTF8" );
