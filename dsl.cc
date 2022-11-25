@@ -17,6 +17,7 @@
 #include "wstring_qt.hh"
 #include "zipfile.hh"
 #include "indexedzip.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "tiff.hh"
 #include "fulltextsearch.hh"
@@ -1992,8 +1993,8 @@ void DslResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
