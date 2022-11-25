@@ -846,6 +846,10 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
   // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
   articleString.remove( QRegExp( "\u00b7<a href=\"/wiki/File:[^>]+>info</a>" ) );
 
+  // TODO: add support for a particularly complex multiple-<div> audio link variant, if it is not too rare.
+  // An example from the "Dash Rendar/Legends" article in English Wookieepedia:
+  // <div class="inline-image-template" style="float:left; margin-left: 5px; height:35px;"><div class="floatnone"><a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20200426203158" class="image" title="Audio"><img alt="Audio" decoding="async" loading="lazy" width="35" height="35" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/35?cb=20200426203158" /></a></div></div><div class="inline-image-template" style="margin-left:50px"><b><a href="https://static.wikia.nocookie.net/starwars/images/c/c5/SOTE4.ogg/revision/latest?cb=20070801203532" class="internal" title="SOTE4.ogg">"Beggar's Canyon Chase"</a></b><br /><a href="/wiki/File:SOTE4.ogg" title="File:SOTE4.ogg">(info)</a> &#183; <a href="http://en.wikipedia.org/wiki/Help:Media" class="extiw" title="wikipedia:Help:Media">(help)</a><small><br />A theme for Dash Rendar briefly appears at the end of "Beggar's Canyon Chase."</small></div>
+
   // Remove absolute height from scrollbox lines to ensure that everything inside
   // the scrollable container is visible and does not overlap the contents below.
   // The following line occurs multiple times in many (all?) Canon and Legends articles in English Wookieepedia:
