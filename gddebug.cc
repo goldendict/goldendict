@@ -7,6 +7,8 @@
 #include <QString>
 #include "gddebug.hh"
 
+#define TO_LOG_MESSAGE( msg, ap ) QString().vsprintf( msg, ap ).toUtf8().constData()
+
 QFile * logFilePtr;
 
 namespace {
@@ -65,7 +67,7 @@ void gdWarning(const char *msg, ...)
   va_start(ap, msg);
   {
     Utf8CodecForLocaleReplacer codecReplacer;
-    qWarning( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
+    qWarning( "%s", TO_LOG_MESSAGE( msg, ap ) );
   }
   va_end(ap);
 }
@@ -76,7 +78,7 @@ void gdDebug(const char *msg, ...)
   va_start(ap, msg);
   {
     Utf8CodecForLocaleReplacer codecReplacer;
-    qDebug( "%s", QString().vsprintf( msg, ap ).toUtf8().constData() );
+    qDebug( "%s", TO_LOG_MESSAGE( msg, ap ) );
   }
   va_end(ap);
 }
