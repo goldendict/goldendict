@@ -7,6 +7,7 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "folding.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "utf8.hh"
 #include "decompress.hh"
@@ -1634,8 +1635,8 @@ void ZimResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 

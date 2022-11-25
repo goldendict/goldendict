@@ -8,6 +8,7 @@
 #include "ufile.hh"
 #include "btreeidx.hh"
 #include "folding.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "utf8.hh"
 #include "wstring_qt.hh"
@@ -1541,8 +1542,8 @@ void GlsResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "GLS: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "GLS: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 

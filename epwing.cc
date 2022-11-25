@@ -15,6 +15,7 @@
 
 #include "btreeidx.hh"
 #include "folding.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "chunkedstorage.hh"
@@ -777,8 +778,8 @@ void EpwingResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "Epwing: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "Epwing: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 

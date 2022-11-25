@@ -16,6 +16,7 @@
 #include <list>
 #include <wctype.h>
 #include <stdlib.h>
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "wstring_qt.hh"
 #include "xdxf2html.hh"
@@ -1133,8 +1134,8 @@ void XdxfResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "XDXF: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "XDXF: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 

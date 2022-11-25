@@ -367,6 +367,7 @@ HEADERS += folding.hh \
     articleinspector.hh \
     delegate.hh \
     zim.hh \
+    categorized_logging.hh \
     gddebug.hh \
     qt4x5.hh \
     gestures.hh \

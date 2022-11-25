@@ -10,6 +10,7 @@
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "filetype.hh"
@@ -1912,8 +1913,8 @@ void StardictResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+               resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
   catch( ... )
