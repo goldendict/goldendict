@@ -726,7 +726,7 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
   return evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdArticleContents" )
-      .toString().trimmed().split( ' ', QString::SkipEmptyParts );
+      .toString().trimmed().split( ' ', Qt4x5::skipEmptyParts() );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -1214,7 +1214,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
     if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
     {
       QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                          .split( ",", QString::SkipEmptyParts );
+                                          .split( ",", Qt4x5::skipEmptyParts() );
 
       showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
@@ -1236,7 +1236,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
       {
         // Specific dictionary group from full-text search
         QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                            .split( ",", QString::SkipEmptyParts );
+                                            .split( ",", Qt4x5::skipEmptyParts() );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return;
@@ -2411,7 +2411,7 @@ void ArticleView::doubleClicked( QPoint pos )
         if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
         {
           QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
-                                              .split( ",", QString::SkipEmptyParts );
+                                              .split( ",", Qt4x5::skipEmptyParts() );
           showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else
