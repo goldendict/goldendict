@@ -21,6 +21,14 @@
 namespace Qt4x5
 {
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 14, 0 )
+inline Qt::SplitBehaviorFlags skipEmptyParts()
+{ return Qt::SkipEmptyParts; }
+#else
+inline QString::SplitBehavior skipEmptyParts()
+{ return QString::SkipEmptyParts; }
+#endif
+
 inline QString escape( QString const & plain )
 {
 #if IS_QT_5
