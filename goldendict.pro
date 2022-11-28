@@ -46,7 +46,8 @@ greaterThan(QT_MAJOR_VERSION, 4) {
                "The Qt WebEngine version of GoldenDict requires Qt $${REQUIRED_QT_VERSION} or newer." )
       }
 
-      QT += webchannel \
+      QT += quickwidgets \
+            webchannel \
             webenginewidgets
       CONFIG += c++14
     } else {

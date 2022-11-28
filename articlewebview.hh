@@ -73,7 +73,7 @@ private:
 #include <QWebEngineView>
 
 /// A thin wrapper around QWebEngineView that works around QTBUG-43602 by installing
-/// an event filter on the widget child of QWebEngineView, which swallows mouse events.
+/// an event filter on the QQuickWidget child of QWebEngineView, which swallows mouse events.
 /// In the Qt WebEngine version, ArticleView implements most features ArticleWebView provides in the Qt WebKit version.
 class ArticleWebView: public QWebEngineView
 {
