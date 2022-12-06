@@ -25,6 +25,7 @@
 
 class QWebEngineFindTextResult;
 class QWebEngineProfile;
+class QWebEngineScriptCollection;
 #endif
 
 class ArticleViewJsProxy;
@@ -203,6 +204,12 @@ public:
 
   bool canGoBack() const;
   bool canGoForward() const;
+
+#ifndef USE_QTWEBKIT
+  static void initProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & preferences );
+  static void updateProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & oldPreferences,
+                                        Config::Preferences const & newPreferences );
+#endif
 
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
@@ -482,14 +489,12 @@ private:
 #ifdef USE_QTWEBKIT
   void initCurrentArticleAndScroll();
 #else
-  void updateSourceCodeOfInjectedScript( QString const & name, QString const & sourceCode );
+  static void updateSourceCodeOfInjectedScript( QWebEngineScriptCollection & scripts,
+                                                QString const & name, QString const & sourceCode );
 
   /// Injects into JavaScript the current article ID and whether to scroll to it when reloading page.
   /// Should be called before an action that can be interpreted as page reloading by JavaScript code.
   void updateInjectedPageReloadingScript( bool scrollToCurrentArticle );
-
-  /// Updates selectWordBySingleClick option value on the current page and injects the new value into future pages.
-  void updateInjectedSelectWordBySingleClickScript( bool selectWordBySingleClick );
 #endif
 
   /// Saves current article and scroll position for the current history item.

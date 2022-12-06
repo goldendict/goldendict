@@ -32,6 +32,7 @@
 #include <QWebEngineContextMenuData>
 #include <QWebEngineFindTextResult>
 #include <QWebEngineHistory>
+#include <QWebEngineProfile>
 #include <QWebEngineScript>
 #include <QWebEngineScriptCollection>
 
@@ -352,9 +353,9 @@ QString variableDeclarationFromAssignmentScript( QString const & assignmentScrip
   return QLatin1String( "let " ) + assignmentScript;
 }
 
-QString selectWordBySingleClickScriptName()
+QString profilePreferencesScriptName()
 {
-  return QStringLiteral( "SelectWordBySingleClick" );
+  return QStringLiteral( "ProfilePreferences" );
 }
 
 QString selectWordBySingleClickAssignmentScript( bool selectWordBySingleClick )
@@ -362,10 +363,15 @@ QString selectWordBySingleClickAssignmentScript( bool selectWordBySingleClick )
   return QLatin1String( "gdSelectWordBySingleClick = %1;" ).arg( javaScriptBool( selectWordBySingleClick ) );
 }
 
-QWebEngineScript createSelectWordBySingleClickScript()
+bool profilePreferencesChanged( Config::Preferences const & oldPreferences, Config::Preferences const & newPreferences )
 {
-  return createScript( selectWordBySingleClickScriptName(),
-                       variableDeclarationFromAssignmentScript( selectWordBySingleClickAssignmentScript( false ) ) );
+  return oldPreferences.selectWordBySingleClick != newPreferences.selectWordBySingleClick;
+}
+
+QString profilePreferencesScriptSourceCode( Config::Preferences const & preferences )
+{
+  return variableDeclarationFromAssignmentScript( selectWordBySingleClickAssignmentScript(
+                                                    preferences.selectWordBySingleClick ) );
 }
 
 /// QUrl::StripTrailingSlash does not remove a slash if it is the only character in the path.
@@ -545,7 +551,6 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   webChannel->registerObject( QStringLiteral( "gdArticleView" ), jsProxy );
 
   webPage->scripts().insert( createPageReloadingScript() );
-  webPage->scripts().insert( createSelectWordBySingleClickScript() );
 
   connect( webPage, &QWebEnginePage::findTextFinished, this, &ArticleView::findTextFinished );
 
@@ -1226,10 +1231,9 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
 #endif // USE_QTWEBKIT
 
 #ifndef USE_QTWEBKIT
-void ArticleView::updateSourceCodeOfInjectedScript( QString const & name, QString const & sourceCode )
+void ArticleView::updateSourceCodeOfInjectedScript( QWebEngineScriptCollection & scripts,
+                                                    QString const & name, QString const & sourceCode )
 {
-  auto & scripts = ui.definition->page()->scripts();
-
   auto script = scripts.findScript( name );
   Q_ASSERT( !script.isNull() );
 
@@ -1240,16 +1244,8 @@ void ArticleView::updateSourceCodeOfInjectedScript( QString const & name, QStrin
 
 void ArticleView::updateInjectedPageReloadingScript( bool scrollToCurrentArticle )
 {
-  updateSourceCodeOfInjectedScript( pageReloadingScriptName(),
+  updateSourceCodeOfInjectedScript( ui.definition->page()->scripts(), pageReloadingScriptName(),
                                     pageReloadingScriptSourceCode( currentArticle, scrollToCurrentArticle ) );
-}
-
-void ArticleView::updateInjectedSelectWordBySingleClickScript( bool selectWordBySingleClick )
-{
-  QString const assignmentScript = selectWordBySingleClickAssignmentScript( selectWordBySingleClick );
-  ui.definition->page()->runJavaScript( assignmentScript );
-  updateSourceCodeOfInjectedScript( selectWordBySingleClickScriptName(),
-                                    variableDeclarationFromAssignmentScript( assignmentScript ) );
 }
 #endif
 
@@ -2211,6 +2207,24 @@ bool ArticleView::canGoForward() const
   return ui.definition->history()->canGoForward();
 }
 
+#ifndef USE_QTWEBKIT
+void ArticleView::initProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & preferences )
+{
+  Q_ASSERT( profile.scripts()->findScript( profilePreferencesScriptName() ).isNull() );
+  auto const script = createScript( profilePreferencesScriptName(), profilePreferencesScriptSourceCode( preferences ) );
+  profile.scripts()->insert( script );
+}
+
+void ArticleView::updateProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & oldPreferences,
+                                            Config::Preferences const & newPreferences )
+{
+  if( !profilePreferencesChanged( oldPreferences, newPreferences ) )
+    return;
+  updateSourceCodeOfInjectedScript( *profile.scripts(), profilePreferencesScriptName(),
+                                    profilePreferencesScriptSourceCode( newPreferences ) );
+}
+#endif
+
 void ArticleView::setSelectionBySingleClick( bool set )
 {
 #ifdef USE_QTWEBKIT
@@ -2224,7 +2238,7 @@ void ArticleView::setSelectionBySingleClick( bool set )
   else
     lastLeftMouseButtonPressEvent.reset();
 
-  updateInjectedSelectWordBySingleClickScript( set );
+  ui.definition->page()->runJavaScript( selectWordBySingleClickAssignmentScript( set ) );
 #endif
 }
 

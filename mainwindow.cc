@@ -899,6 +899,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
     setWebEngineProfilePaths( *webEngineProfile );
   }
   setupWebEngineProfile( *webEngineProfile, articleNetMgr );
+  ArticleView::initProfilePreferences( *webEngineProfile, cfg.preferences );
 #endif
 
   applyWebSettings();
@@ -2423,6 +2424,10 @@ void MainWindow::editPreferences()
     // See if we need to change help language
     if( cfg.preferences.helpLanguage != p.helpLanguage )
       closeGDHelp();
+
+#ifndef USE_QTWEBKIT
+    ArticleView::updateProfilePreferences( *webEngineProfile, cfg.preferences, p );
+#endif
 
     for( int x = 0; x < ui.tabWidget->count(); ++x )
     {
