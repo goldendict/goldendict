@@ -249,7 +249,6 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     localReq.setUrl( newUrl );
   }
 
-
   if ( op == GetOperation )
   {
     if ( localReq.url().scheme() == "qrcx" )
@@ -472,7 +471,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
             }
             try
             {
-              return  dictionaries[ x ]->getResource( Qt4x5::Url::path( url ).mid( 1 ).toUtf8().data() );
+              return  dictionaries[ x ]->getResource( Qt4x5::Url::fullPath( url ).mid( 1 ).toUtf8().data() );
             }
             catch( std::exception & e )
             {

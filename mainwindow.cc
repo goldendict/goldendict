@@ -3584,17 +3584,27 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
                                        vector< pair< QUrl, QString > > & downloadResources )
 {
   int pos = 0;
+  int queryNom = 1;
 
   while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
   {
     QUrl url( rx.cap( 1 ) );
     QString host = url.host();
-    QString resourcePath = Qt4x5::Url::path( url );
+    QString resourcePath = Qt4x5::Url::fullPath( url );
 
     if ( !host.startsWith( '/' ) )
       host.insert( 0, '/' );
     if ( !resourcePath.startsWith( '/' ) )
       resourcePath.insert( 0, '/' );
+
+    // Replase query part of url (if exist)
+    int n = resourcePath.indexOf( QLatin1Char( '?' ) );
+    if( n >= 0 )
+    {
+      QString q_str = QString( "_q%1" ).arg( queryNom );
+      resourcePath.replace( n, resourcePath.length() - n, q_str );
+      queryNom += 1;
+    }
 
     QCryptographicHash hash( QCryptographicHash::Md5 );
     hash.addData( rx.cap().toUtf8() );
