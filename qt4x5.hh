@@ -123,7 +123,13 @@ inline void removeQueryItem( QUrl & url, QString const & key )
 inline QString fullPath( QUrl const & url )
 {
 #if IS_QT_5
-  return url.toString( QUrl::RemoveScheme | QUrl::RemoveAuthority | QUrl::RemoveFragment | QUrl::RemovePort | QUrl::FullyDecoded );
+  QString path = url.path( QUrl::FullyDecoded );
+  if( url.hasQuery() )
+  {
+    QUrlQuery urlQuery( url );
+    path += QString::fromLatin1( "?" ) + urlQuery.toString( QUrl::FullyDecoded );
+  }
+  return path;
 #else
   return url.toString( QUrl::RemoveScheme | QUrl::RemoveAuthority | QUrl::RemoveFragment | QUrl::RemovePort );
 #endif
