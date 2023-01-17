@@ -63,6 +63,7 @@ using BtreeIndexing::IndexInfo;
 
 DEF_EX_STR( exNotZimFile, "Not an Zim file", Dictionary::Ex )
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
+DEF_EX_STR( exInvalidZimHeader, "Invalid Zim header", Dictionary::Ex )
 DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
 
 
@@ -286,6 +287,9 @@ bool ZimFile::open()
   memset( &zimHeader, 0, sizeof( zimHeader ) );
 
   if( read( reinterpret_cast< char * >( &zimHeader ), sizeof( zimHeader ) ) != sizeof( zimHeader ) )
+    return false;
+
+  if( zimHeader.magicNumber != 0x44D495A || zimHeader.mimeListPos != sizeof( zimHeader ) )
     return false;
 
 // Clusters in zim file may be placed in random order.
@@ -1694,10 +1698,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           df.open();
           ZIM_header const & zh = df.header();
-          bool new_namespaces = ( zh.majorVersion >= 6 && zh.minorVersion >= 1 );
 
           if( zh.magicNumber != 0x44D495A )
             throw exNotZimFile( i->c_str() );
+
+          if( zh.mimeListPos != sizeof( ZIM_header ) )
+            throw exInvalidZimHeader( i->c_str() );
+
+          bool new_namespaces = ( zh.majorVersion >= 6 && zh.minorVersion >= 1 );
 
           {
             int n = firstName.lastIndexOf( '/' );
