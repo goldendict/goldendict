@@ -294,7 +294,7 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd_, UINT msg,
       return 0;
     }
     else
-    if ( !wordSeq[ wordSeqPos ].isLetterOrNumber() )
+    if ( !( wordSeq[ wordSeqPos ].isLetterOrNumber() || wordSeq[ wordSeqPos ] == QChar( 0xAD ) ) ) // Assume soft hyphen as letter
     {
       // Special case: the cursor points to something which doesn't look like a
       // middle of the word -- assume that it's something that joins two words
@@ -303,13 +303,13 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd_, UINT msg,
       int begin = wordSeqPos;
 
       for( ; begin; --begin )
-        if ( !wordSeq[ begin - 1 ].isLetterOrNumber() )
+        if ( !( wordSeq[ begin - 1 ].isLetterOrNumber() || wordSeq[ begin - 1 ] == QChar( 0xAD ) ) )
           break;
 
       int end = wordSeqPos;
 
       while( ++end < wordSeq.size() )
-        if ( !wordSeq[ end ].isLetterOrNumber() )
+        if ( !( wordSeq[ end ].isLetterOrNumber() || wordSeq[ end ] == QChar( 0xAD ) ) )
           break;
 
       if ( end - begin == 1 )
@@ -327,14 +327,14 @@ LRESULT CALLBACK MouseOver::eventHandler( HWND hwnd_, UINT msg,
       int begin = wordSeqPos;
 
       for( ; begin; --begin )
-        if ( !wordSeq[ begin - 1 ].isLetterOrNumber() )
+        if ( !( wordSeq[ begin - 1 ].isLetterOrNumber() || wordSeq[ begin - 1 ] == QChar( 0xAD ) ) )
           break;
 
       int end = wordSeqPos;
 
       while( ++end < wordSeq.size() )
       {
-        if ( !wordSeq[ end ].isLetterOrNumber() )
+        if ( !( wordSeq[ end ].isLetterOrNumber() || wordSeq[ end ] == QChar( 0xAD ) ) )
           break;
       }
       word = wordSeq.mid( begin, end - begin );
