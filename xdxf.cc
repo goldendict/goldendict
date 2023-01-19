@@ -62,6 +62,22 @@ using BtreeIndexing::WordArticleLink;
 using BtreeIndexing::IndexedWords;
 using BtreeIndexing::IndexInfo;
 
+quint32 getLanguageId( const QString & lang )
+{
+  QString lstr = lang.left( 3 );
+
+  if( lstr.endsWith( QChar( '-' ) ) )
+    lstr.chop( 1 );
+
+  switch( lstr.size() )
+  {
+    case 2: return LangCoder::code2toInt( lstr.toLatin1().data() );
+    case 3: return LangCoder::findIdForLanguageCode3( lstr.toLatin1().data() );
+  }
+
+  return 0;
+}
+
 namespace {
 
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
@@ -72,7 +88,7 @@ DEF_EX_STR( exDictzipError, "DICTZIP error", Dictionary::Ex )
 enum
 {
   Signature = 0x46584458, // XDXF on little-endian, FXDX on big-endian
-  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 enum ArticleFormat
@@ -1241,24 +1257,18 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
               // Read the xdxf
 
               string str = stream.attributes().value( "lang_from" ).toString().toLatin1().data();
-
-              if ( str.size() > 3 )
-                str.resize( 3 );
-
-              idxHeader.langFrom = LangCoder::findIdForLanguageCode3( str.c_str() );
+              if( !str.empty() )
+                idxHeader.langFrom = getLanguageId( str.c_str() );
 
               str = stream.attributes().value( "lang_to" ).toString().toLatin1().data();
-
-              if ( str.size() > 3 )
-                str.resize( 3 );
-
-              idxHeader.langTo = LangCoder::findIdForLanguageCode3( str.c_str() );
-
-              bool isLogical = ( stream.attributes().value( "format" ) == "logical" );
+              if( !str.empty() )
+                idxHeader.langTo = getLanguageId( str.c_str() );
 
               QRegExp regNum( "\\d+" );
               regNum.indexIn( stream.attributes().value( "revision" ).toString() );
               idxHeader.revisionNumber = regNum.cap().toUInt();
+
+              bool isLogical = ( stream.attributes().value( "format" ) == "logical" || idxHeader.revisionNumber >= 34 );
 
               idxHeader.articleFormat = isLogical ? Logical : Visual;
 
@@ -1302,6 +1312,12 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     // todo implement adding other information to the description like <publisher>, <authors>, <file_ver>, <creation_date>, <last_edited_date>, <dict_edition>, <publishing_date>, <dict_src_url> 
                     QString desc = readXhtmlData( stream );
 
+                    if( isLogical )
+                    {
+                      desc = desc.simplified();
+                      desc.replace( QRegExp( "<br\\s*>\\s*</br>" ), QChar( '\n' ) );
+                    }
+
                     if ( dictionaryDescription.isEmpty() )
                     {
                       dictionaryDescription = desc;
@@ -1316,6 +1332,36 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                     else
                     {
                       GD_DPRINTF( "Warning: duplicate description in %s\n", dictFiles[ 0 ].c_str() );
+                    }
+                  }
+                  else
+                  if( stream.name() == "languages" )
+                  {
+                    while( !( stream.isEndElement() && stream.name() == "languages" ) && !stream.atEnd() )
+                    {
+                      if( !stream.readNext() )
+                        break;
+                      if ( stream.isStartElement() )
+                      {
+                        if( stream.name() == "from" )
+                        {
+                          if( idxHeader.langFrom == 0 )
+                          {
+                            QString lang = stream.attributes().value( "xml:lang" ).toString();
+                            idxHeader.langFrom = getLanguageId( lang );
+                          }
+                        }
+                        else if( stream.name() == "to" )
+                        {
+                          if( idxHeader.langTo == 0 )
+                          {
+                            QString lang = stream.attributes().value( "xml:lang" ).toString();
+                            idxHeader.langTo = getLanguageId( lang );
+                          }
+                        }
+                      }
+                      else if ( stream.isEndElement() && stream.name() == "languages" )
+                        break;
                     }
                   }
                   else
