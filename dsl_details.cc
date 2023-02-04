@@ -1286,6 +1286,13 @@ void processUnsortedParts( wstring & str, bool strip )
 void expandOptionalParts( wstring & str, list< wstring > * result,
                           size_t x, bool inside_recurse )
 {
+  if( str.size() > 500 )
+  {
+    // Don't expand too long headwords - it is highly likely incorrect dictionary
+    result->push_back( str );
+    return;
+  }
+
   list< wstring > expanded;
   list< wstring > * headwords;
   headwords = inside_recurse ? result : &expanded;
