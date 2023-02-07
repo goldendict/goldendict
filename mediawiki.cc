@@ -224,6 +224,157 @@ void MediaWikiWordSearchRequest::downloadFinished()
   finish();
 }
 
+class MediaWikiSectionsParser
+{
+public:
+  /// Since a recent Wikipedia UI redesign, the table of contents (ToC) is no longer part of an article's HTML.
+  /// ToC is absent from the text node of Wikipedia's MediaWiki API reply. Quote from
+  /// https://www.mediawiki.org/wiki/Reading/Web/Desktop_Improvements/Features/Table_of_contents#How_can_I_get_the_old_table_of_contents?
+  /// We intentionally do not add the old table of contents to the article in addition to the new sidebar location...
+  /// Users can restore the old table of contents position with the following JavaScript code:
+  /// document.querySelector('mw\\3Atocplace,meta[property="mw:PageProp/toc"]').replaceWith( document.getElementById('mw-panel-toc') )
+  ///
+  /// This function searches for an indicator of the empty ToC in an article HTML. If the indicator is present,
+  /// generates ToC HTML from the sections element and replaces the indicator with the generated ToC.
+  static void generateTableOfContentsIfEmpty( QDomNode const & parseNode, QString & articleString )
+  {
+    QString const emptyTocIndicator = "<meta property=\"mw:PageProp/toc\" />";
+    int const emptyTocPos = articleString.indexOf( emptyTocIndicator );
+    if( emptyTocPos == -1 )
+      return; // The ToC must be absent or nonempty => nothing to do.
+
+    QDomElement const sectionsElement = parseNode.firstChildElement( "sections" );
+    if( sectionsElement.isNull() )
+    {
+      gdWarning( "MediaWiki: empty table of contents and missing sections element." );
+      return;
+    }
+
+    gdDebug( "MediaWiki: generating table of contents from the sections element." );
+    MediaWikiSectionsParser parser;
+    parser.generateTableOfContents( sectionsElement );
+    articleString.replace( emptyTocPos, emptyTocIndicator.size(), parser.tableOfContents );
+  }
+
+private:
+  MediaWikiSectionsParser() : previousLevel( 0 ) {}
+  void generateTableOfContents( QDomElement const & sectionsElement );
+
+  bool addListLevel( QString const & levelString );
+  void closeListTags( int currentLevel );
+
+  QString tableOfContents;
+  int previousLevel;
+};
+
+void MediaWikiSectionsParser::generateTableOfContents( QDomElement const & sectionsElement )
+{
+  // A real example of a typical child of the <sections> element:
+  // <s linkAnchor="Marginal_densities" toclevel="2" fromtitle="Probability_density_function" level="3"
+  //  line="Marginal densities" byteoffset="15868" anchor="Marginal_densities" number="7.1" index="9"/>
+
+  // Use Wiktionary's ToC style, which had also been Wikipedia's ToC style until the UI redesign.
+  // Replace double quotes with single quotes to avoid escaping " within string literals.
+
+  QString const elTagName = "s";
+  QDomElement el = sectionsElement.firstChildElement( elTagName );
+  if( el.isNull() )
+    return;
+
+  // Omit invisible and useless toctogglecheckbox, toctogglespan and toctogglelabel elements.
+  // The values of lang (e.g. 'en') and dir (e.g. 'ltr') attributes of the toctitle element depend on
+  // the article's language. These attributes have no visible effect and so are simply omitted here.
+  // TODO: the "Contents" string should be translated to the article's language, but I don't know how
+  // to implement this. Should "Contents" be enclosed in tr() to at least translate it to GoldenDict's
+  // interface language? Is there a language-agnostic Unicode symbol that stands for "Contents"?
+  tableOfContents = "<div id='toc' class='toc' role='navigation' aria-labelledby='mw-toc-heading'>"
+                    "<div class='toctitle'><h2 id='mw-toc-heading'>Contents</h2></div>";
+
+  do
+  {
+    if( !addListLevel( el.attribute( "toclevel" ) ) )
+    {
+      tableOfContents.clear();
+      return;
+    }
+
+    // From https://gerrit.wikimedia.org/r/c/mediawiki/core/+/831147/
+    // The anchor property ... should be used if you want to (eg) look up an element by ID using
+    // document.getElementById(). The linkAnchor property ... contains additional escaping appropriate for
+    // use in a URL fragment, and should be used (eg) if you are creating the href attribute of an <a> tag.
+    tableOfContents += "<a href='#";
+    tableOfContents += el.attribute( "linkAnchor" );
+    tableOfContents += "'>";
+
+    // Omit <span class="tocnumber"> because it has no visible effect.
+    tableOfContents += el.attribute( "number" );
+    tableOfContents += ' ';
+    // Omit <span class="toctext"> because it has no visible effect.
+    tableOfContents += el.attribute( "line" );
+
+    tableOfContents += "</a>";
+
+    el = el.nextSiblingElement( elTagName );
+  } while( !el.isNull() );
+
+  closeListTags( 1 );
+  // Close the first-level list tag and the toc div tag.
+  tableOfContents += "</ul>\n</div>";
+}
+
+bool MediaWikiSectionsParser::addListLevel( QString const & levelString )
+{
+  bool convertedToInt;
+  int const level = levelString.toInt( &convertedToInt );
+
+  if( !convertedToInt )
+  {
+    gdWarning( "MediaWiki: sections level is not an integer: %s", levelString.toUtf8().constData() );
+    return false;
+  }
+  if( level <= 0 )
+  {
+    gdWarning( "MediaWiki: unsupported nonpositive sections level: %s", levelString.toUtf8().constData() );
+    return false;
+  }
+  if( level > previousLevel + 1 )
+  {
+    gdWarning( "MediaWiki: unsupported sections level increase by more than one: from %d to %s",
+               previousLevel, levelString.toUtf8().constData() );
+    return false;
+  }
+
+  if( level == previousLevel + 1 )
+  {
+    // Don't close the previous list item tag to nest the current deeper level's list in it.
+    tableOfContents += "\n<ul>\n";
+    previousLevel = level;
+  }
+  else
+    closeListTags( level );
+  Q_ASSERT( level == previousLevel );
+
+  // Open this list item tag.
+  // Omit the (e.g.) class="toclevel-4 tocsection-9" attribute of <li> because it has no visible effect.
+  tableOfContents += "<li>";
+
+  return true;
+}
+
+void MediaWikiSectionsParser::closeListTags( int currentLevel )
+{
+  Q_ASSERT( currentLevel <= previousLevel );
+
+  // Close the previous list item tag.
+  tableOfContents += "</li>\n";
+  // Close list and list item tags of deeper levels, if any.
+  while( currentLevel < previousLevel )
+  {
+    tableOfContents += "</ul>\n</li>\n";
+    --previousLevel;
+  }
+}
+
 class MediaWikiArticleRequest: public MediaWikiDataRequestSlots
 {
   typedef std::list< std::pair< QNetworkReply *, bool > > NetReplies;
@@ -293,7 +444,7 @@ void MediaWikiArticleRequest::addQuery( QNetworkAccessManager & mgr,
 {
   gdDebug( "MediaWiki: requesting article %s\n", gd::toQString( str ).toUtf8().data() );
 
-  QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid&format=xml&redirects" );
+  QUrl reqUrl( url + "/api.php?action=parse&prop=text|revid|sections&format=xml&redirects" );
 
 #if IS_QT_5
   Qt4x5::Url::addQueryItem( reqUrl, "page", gd::toQString( str ).replace( '+', "%2B" ) );
@@ -587,6 +738,9 @@ void MediaWikiArticleRequest::requestFinished( QNetworkReply * r )
               pos += newSrcset.size();
             }
 #endif
+
+            // Insert the ToC in the end to improve performance because no replacements are needed in the generated ToC.
+            MediaWikiSectionsParser::generateTableOfContentsIfEmpty( parseNode, articleString );
 
             QByteArray articleBody = articleString.toUtf8();
 
