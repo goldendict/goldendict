@@ -28,6 +28,7 @@ extern "C" {
 
 #include <vector>
 
+#include "gddebug.hh"
 #include "qt4x5.hh"
 
 using std::vector;
@@ -94,7 +95,11 @@ struct DecoderContext
   QByteArray audioData_;
   QDataStream audioDataStream_;
   AVFormatContext * formatContext_;
+#if LIBAVCODEC_VERSION_MAJOR < 59
   AVCodec * codec_;
+#else
+  const AVCodec * codec_;
+#endif
   AVCodecContext * codecContext_;
   AVIOContext * avioContext_;
   AVStream * audioStream_;
@@ -139,7 +144,17 @@ DecoderContext::~DecoderContext()
 static int readAudioData( void * opaque, unsigned char * buffer, int bufferSize )
 {
   QDataStream * pStream = ( QDataStream * )opaque;
-  return pStream->readRawData( ( char * )buffer, bufferSize );
+  // This function is passed as the read_packet callback into avio_alloc_context().
+  // The documentation for this callback parameter states:
+  // For stream protocols, must never return 0 but rather a proper AVERROR code.
+  if( pStream->atEnd() )
+    return AVERROR_EOF;
+  const int bytesRead = pStream->readRawData( ( char * )buffer, bufferSize );
+  // QDataStream::readRawData() returns 0 at EOF => return AVERROR_EOF in this case.
+  // An error is unlikely here, so just print a warning and return AVERROR_EOF too.
+  if( bytesRead < 0 )
+    gdWarning( "readAudioData: error while reading raw data." );
+  return bytesRead > 0 ? bytesRead : AVERROR_EOF;
 }
 
 bool DecoderContext::openCodec( QString & errorString )
@@ -245,7 +260,7 @@ bool DecoderContext::openCodec( QString & errorString )
     return false;
   }
 
-  av_log( NULL, AV_LOG_INFO, "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec_->long_name,
+  gdDebug( "Codec open: %s: channels: %d, rate: %d, format: %s\n", codec_->long_name,
           codecContext_->channels, codecContext_->sample_rate, av_get_sample_fmt_name( codecContext_->sample_fmt ) );
 
   if ( codecContext_->sample_fmt == AV_SAMPLE_FMT_S32  ||
@@ -348,7 +363,7 @@ bool DecoderContext::openOutputDevice( QString & errorString )
     return false;
   }
 
-  av_log( NULL, AV_LOG_INFO, "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
+  gdDebug( "ao_open_live(): %s: channels: %d, rate: %d, bits: %d\n",
           aoDrvInfo->name, aoSampleFormat.channels, aoSampleFormat.rate, aoSampleFormat.bits );
 
   aoDevice_ = ao_open_live( aoDriverId, &aoSampleFormat, NULL );

@@ -9,6 +9,7 @@
 #include <map>
 #include <QObject>
 #include <QIcon>
+#include <QThreadPool>
 #include "cpp_features.hh"
 #include "sptr.hh"
 #include "ex.hh"
@@ -400,7 +401,8 @@ public:
                                                 int distanceBetweenWords,
                                                 int maxArticlesPerDictionary,
                                                 bool ignoreWordsOrder,
-                                                bool ignoreDiacritics );
+                                                bool ignoreDiacritics,
+                                                QThreadPool * ftsThreadPoolPtr );
 
   // Return dictionary description if presented
   virtual QString const& getDescription();

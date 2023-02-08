@@ -21,6 +21,14 @@
 namespace Qt4x5
 {
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 14, 0 )
+inline Qt::SplitBehaviorFlags skipEmptyParts()
+{ return Qt::SkipEmptyParts; }
+#else
+inline QString::SplitBehavior skipEmptyParts()
+{ return QString::SkipEmptyParts; }
+#endif
+
 inline QString escape( QString const & plain )
 {
 #if IS_QT_5
@@ -109,6 +117,21 @@ inline void removeQueryItem( QUrl & url, QString const & key )
   url.setQuery( urlQuery );
 #else
   url.removeQueryItem( key );
+#endif
+}
+
+inline QString fullPath( QUrl const & url )
+{
+#if IS_QT_5
+  QString path = url.path( QUrl::FullyDecoded );
+  if( url.hasQuery() )
+  {
+    QUrlQuery urlQuery( url );
+    path += QString::fromLatin1( "?" ) + urlQuery.toString( QUrl::FullyDecoded );
+  }
+  return path;
+#else
+  return url.toString( QUrl::RemoveScheme | QUrl::RemoveAuthority | QUrl::RemoveFragment | QUrl::RemovePort );
 #endif
 }
 

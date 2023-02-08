@@ -15,6 +15,7 @@
 
 #include "btreeidx.hh"
 #include "folding.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "chunkedstorage.hh"
@@ -44,7 +45,7 @@ namespace {
 enum
 {
   Signature = 0x58575045, // EPWX on little-endian, XWPE on big-endian
-  CurrentFormatVersion = 5 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 6 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -130,7 +131,8 @@ public:
                                                             int distanceBetweenWords,
                                                             int maxResults,
                                                             bool ignoreWordsOrder,
-                                                            bool ignoreDiacritics );
+                                                            bool ignoreDiacritics,
+                                                            QThreadPool * ftsThreadPoolPtr );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -776,8 +778,8 @@ void EpwingResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "Epwing: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "Epwing: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
@@ -796,9 +798,10 @@ sptr< Dictionary::DataRequest > EpwingDictionary::getSearchResults( QString cons
                                                                     int distanceBetweenWords,
                                                                     int maxResults,
                                                                     bool ignoreWordsOrder,
-                                                                    bool ignoreDiacritics )
+                                                                    bool ignoreDiacritics,
+                                                                    QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 int EpwingDictionary::japaneseWriting( gd::wchar ch )

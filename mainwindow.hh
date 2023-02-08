@@ -36,6 +36,12 @@
 #include <fixx11h.h>
 #endif
 
+#ifdef HAVE_X11
+  // TODO: implement startup notification support and remove these workarounds
+  // (see investigation comments on #781).
+  #define X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+#endif
+
 using std::string;
 using std::vector;
 
@@ -230,7 +236,7 @@ private:
 
   /// Brings the main window to front if it's not currently, or hides it
   /// otherwise. The hiding part is omitted if onlyShow is true.
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
   void toggleMainWindow( bool onlyShow = false, bool byIconClick = false );
 #else
   void toggleMainWindow( bool onlyShow = false );
@@ -273,6 +279,10 @@ private:
                                           TranslateBoxPopup popupAction );
 
 private slots:
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+  void forceX11Focus();
+#endif
 
   void hotKeyActivated( int );
 

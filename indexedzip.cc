@@ -133,7 +133,7 @@ bool IndexedZip::indexFile( BtreeIndexing::IndexedWords &zipFileNames, quint32 *
     // File seems to be a valid zip file
 
 
-    QTextCodec * localeCodec = QTextCodec::codecForLocale();
+    QTextCodec * const localeCodec = gdCodecForLocale();
 
     ZipFile::CentralDirEntry entry;
 

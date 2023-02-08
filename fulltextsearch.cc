@@ -126,6 +126,72 @@ QString FtsIndexing::nowIndexingName()
   return nowIndexing;
 }
 
+void addSortedHeadwords( QList< FtsHeadword > & base_list, QList< FtsHeadword > const & add_list)
+{
+  QList< FtsHeadword > list;
+
+  if( add_list.isEmpty() )
+    return;
+
+  if( base_list.isEmpty() )
+  {
+    base_list = add_list;
+    return;
+  }
+
+  list.reserve( base_list.size() + add_list.size() );
+
+  QList< FtsHeadword >::iterator base_it = base_list.begin();
+  QList< FtsHeadword >::const_iterator add_it = add_list.constBegin();
+
+  while( base_it != base_list.end() || add_it != add_list.end() )
+  {
+    if( base_it == base_list.end() )
+    {
+      while( add_it != add_list.end() )
+      {
+        list.append( *add_it );
+        ++add_it;
+      }
+      break;
+    }
+
+    if( add_it == add_list.end() )
+    {
+      while( base_it != base_list.end() )
+      {
+        list.append( *base_it );
+        ++base_it;
+      }
+      break;
+    }
+
+    if( *add_it < *base_it )
+    {
+      list.append( *add_it );
+      ++add_it;
+    }
+    else if( *add_it == *base_it )
+    {
+      base_it->dictIDs.append( add_it->dictIDs );
+      for( QStringList::const_iterator itr = add_it->foundHiliteRegExps.constBegin();
+             itr != add_it->foundHiliteRegExps.constEnd(); ++itr )
+      {
+        if( !base_it->foundHiliteRegExps.contains( *itr ) )
+          base_it->foundHiliteRegExps.append( *itr );
+      }
+      ++add_it;
+    }
+    else
+    {
+      list.append( *base_it );
+      ++base_it;
+    }
+  }
+
+  base_list.swap( list );
+}
+
 FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
                                             Config::Class & cfg_,
                                             std::vector< sptr< Dictionary::Class > > const & dictionaries_,
@@ -138,10 +204,17 @@ FullTextSearchDialog::FullTextSearchDialog( QWidget * parent,
   group( 0 ),
   ignoreWordsOrder( cfg_.preferences.fts.ignoreWordsOrder ),
   ignoreDiacritics( cfg_.preferences.fts.ignoreDiacritics ),
+  ftsThreadPool( this ),
+  searchInProgress( false ),
   ftsIdx( ftsidx )
 , helpAction( this )
 {
   ui.setupUi( this );
+
+  ftsThreadPool.setExpiryTimeout( -1 );
+  int threads = ftsThreadPool.maxThreadCount();
+  if( threads > 1 )
+    ftsThreadPool.setMaxThreadCount( threads - 1 );
 
   setAttribute( Qt::WA_DeleteOnClose, false );
   setWindowFlags( windowFlags() & ~Qt::WindowContextHelpButtonHint );
@@ -429,11 +502,13 @@ void FullTextSearchDialog::accept()
                                                               distanceBetweenWords,
                                                               maxResultsPerDict,
                                                               ignoreWordsOrder,
-                                                              ignoreDiacritics
+                                                              ignoreDiacritics,
+                                                              &ftsThreadPool
                                                             );
     connect( req.get(), SIGNAL( finished() ),
              this, SLOT( searchReqFinished() ), Qt::QueuedConnection );
 
+    searchInProgress = true;
     searchReqs.push_back( req );
   }
 
@@ -442,6 +517,7 @@ void FullTextSearchDialog::accept()
 
 void FullTextSearchDialog::searchReqFinished()
 {
+  QList< FtsHeadword > allHeadwords;
   while ( searchReqs.size() )
   {
     std::list< sptr< Dictionary::DataRequest > >::iterator it;
@@ -458,13 +534,14 @@ void FullTextSearchDialog::searchReqFinished()
           QList< FtsHeadword > * headwords;
           if( (unsigned)(*it)->dataSize() >= sizeof( headwords ) )
           {
+            QList< FtsHeadword > hws;
             try
             {
               (*it)->getDataSlice( 0, sizeof( headwords ), &headwords );
-              model->addResults( QModelIndex(), *headwords );
+              hws.swap( *headwords );
+              std::sort( hws.begin(),  hws.end() );
               delete headwords;
-              ui.articlesFoundLabel->setText( tr( "Articles found: " )
-                                              + QString::number( results.size() ) );
+              addSortedHeadwords( allHeadwords, hws );
             }
             catch( std::exception & e )
             {
@@ -486,8 +563,17 @@ void FullTextSearchDialog::searchReqFinished()
     else
       break;
   }
-  if ( searchReqs.empty() )
+
+  if( !allHeadwords.isEmpty() )
   {
+     model->addResults( QModelIndex(), allHeadwords );
+     ui.articlesFoundLabel->setText( tr( "Articles found: " )
+                                     + QString::number( results.size() ) );
+  }
+
+  if ( searchReqs.empty() && searchInProgress )
+  {
+    searchInProgress = false;
     ui.searchProgressBar->hide();
     ui.OKButton->setEnabled( true );
     QApplication::beep();
@@ -645,27 +731,7 @@ void HeadwordsListModel::addResults(const QModelIndex & parent, QList< FtsHeadwo
 Q_UNUSED( parent );
   beginResetModel();
 
-  QList< FtsHeadword > temp;
-
-  for( int x = 0; x < hws.length(); x++ )
-  {
-    QList< FtsHeadword >::iterator it = qBinaryFind( headwords.begin(), headwords.end(), hws.at( x ) );
-    if( it != headwords.end() )
-    {
-      it->dictIDs.push_back( hws.at( x ).dictIDs.front() );
-      for( QStringList::const_iterator itr = it->foundHiliteRegExps.constBegin();
-           itr != it->foundHiliteRegExps.constEnd(); ++itr )
-      {
-        if( !it->foundHiliteRegExps.contains( *itr ) )
-          it->foundHiliteRegExps.append( *itr );
-      }
-    }
-    else
-      temp.append( hws.at( x ) );
-  }
-
-  headwords.append( temp );
-  std::sort( headwords.begin(),  headwords.end() );
+  addSortedHeadwords( headwords, hws );
 
   endResetModel();
   emit contentChanged();

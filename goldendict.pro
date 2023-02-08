@@ -14,6 +14,18 @@ isEmpty( hasGit ) {
   system(echo $$VERSION > version.txt)
 }
 
+!CONFIG( verbose_build_output ) {
+  !win32|*-msvc* {
+    # Reduce build log verbosity except for MinGW builds (mingw-make cannot
+    # execute "@echo ..." commands inserted by qmake).
+    CONFIG += silent
+  }
+}
+
+CONFIG( release, debug|release ) {
+  DEFINES += NDEBUG NO_GD_DPRINTF
+}
+
 # DEPENDPATH += . generators
 INCLUDEPATH += .
 
@@ -355,6 +367,7 @@ HEADERS += folding.hh \
     articleinspector.hh \
     delegate.hh \
     zim.hh \
+    categorized_logging.hh \
     gddebug.hh \
     qt4x5.hh \
     gestures.hh \

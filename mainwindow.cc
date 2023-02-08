@@ -63,7 +63,7 @@
 
 #endif
 
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
 #include <QX11Info>
 #include <X11/Xlib.h>
 #include <fixx11h.h>
@@ -75,6 +75,26 @@ using std::set;
 using std::wstring;
 using std::map;
 using std::pair;
+
+namespace {
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+class MinimumSizeWidget: public QWidget
+{
+  Q_OBJECT
+public:
+  explicit MinimumSizeWidget( QWidget * parent ):
+    QWidget( parent )
+  {
+    setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+  }
+
+  virtual QSize sizeHint() const
+  { return QSize( 1, 1 ); }
+};
+#endif
+
+} // unnamed namespace
 
 #ifndef QT_NO_OPENSSL
 
@@ -726,6 +746,11 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   ui.historyList->installEventFilter( this );
 
+  ui.favoritesTree->installEventFilter( this );
+
+  groupListInDock->installEventFilter( this );
+  groupListInToolbar->installEventFilter( this );
+
   connect( &ftsIndexing, SIGNAL( newIndexingName( QString ) ), this, SLOT( showFTSIndexingName( QString ) ) );
 
 #ifdef Q_OS_WIN
@@ -847,6 +872,18 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
 
   connect( &newReleaseCheckTimer, SIGNAL( timeout() ),
            this, SLOT( checkForNewRelease() ) );
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+  // The X11 focus workaround in toggleMainWindow() emulates a left mouse button
+  // click on the top-left pixel of the main GoldenDict window. This hack steals
+  // focus from other applications reliably, but it also performs this click at
+  // the position that belongs to the File menu in the default KDE Plasma style,
+  // because the menu bar has no left margin there.
+  // Insert a minimum-size widget, which ignores mouse clicks, to the left of the
+  // menu bar to work around opening of the File menu each time the main window
+  // is shown (e.g. via a hotkey or when another GoldenDict instance is launched).
+  menuBar()->setCornerWidget( new MinimumSizeWidget( this ), Qt::TopLeftCorner );
+#endif
 
   if ( cfg.preferences.hideMenubar )
   {
@@ -1131,8 +1168,8 @@ void MainWindow::applyQtStyleSheet( QString const & displayStyle, QString const 
   {
     // Load an additional stylesheet
     QFile builtInCssFile( QString( ":/qt-style-st-%1.css" ).arg( displayStyle ) );
-    builtInCssFile.open( QFile::ReadOnly );
-    css += builtInCssFile.readAll();
+    if ( builtInCssFile.open( QFile::ReadOnly ) )
+      css += builtInCssFile.readAll();
   }
 
   // Try loading a style sheet if there's one
@@ -1212,12 +1249,21 @@ void MainWindow::closeEvent( QCloseEvent * ev )
 {
   if ( cfg.preferences.enableTrayIcon && cfg.preferences.closeToTray )
   {
-    ev->ignore();
-
     if( !cfg.preferences.searchInDock )
       translateBox->setPopupEnabled( false );
 
+#ifdef HAVE_X11
+    // Don't ignore the close event, because doing so cancels session logout if
+    // the main window is visible when the user attempts to log out.
+    // The main window will be only hidden, because QApplication::quitOnLastWindowClosed
+    // property is false and Qt::WA_DeleteOnClose widget attribute is not set.
+    Q_ASSERT(!QApplication::quitOnLastWindowClosed());
+    Q_ASSERT(!testAttribute(Qt::WA_DeleteOnClose));
+#else
+    // Ignore the close event because closing the main window breaks global hotkeys on Windows.
+    ev->ignore();
     hide();
+#endif
   }
   else
   {
@@ -1551,7 +1597,7 @@ void MainWindow::createTabList()
   tabListButton->setToolTip( tr( "Open Tabs List" ) );
   tabListButton->setPopupMode(QToolButton::InstantPopup);
   ui.tabWidget->setCornerWidget(tabListButton);
-  tabListButton->setFocusPolicy(Qt::ClickFocus);
+  tabListButton->setFocusPolicy(Qt::NoFocus);
 }
 
 void MainWindow::fillWindowsMenu()
@@ -1711,9 +1757,23 @@ void MainWindow::tabCloseRequested( int x )
   ui.tabWidget->removeTab( x );
   delete w;
 
+  if( ui.tabWidget->count() != 0 )
+    return;
   // if everything is closed, add a new tab
-  if ( ui.tabWidget->count() == 0 )
-    addNewTab();
+  addNewTab();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QWidget const * const focused = focusWidget();
+  if( !focused || focused == ui.tabWidget->tabBar() )
+  {
+    // The article view in the last closed tab had focus. Now no widget has focus or the tab bar acquired useless to it
+    // focus. In this situation GoldenDict ignores typing a new phrase to be translated. Furthermore, when no widget has
+    // focus, focus-transferring shortcuts don't work. Give focus to the newly created article view to work this around.
+    // Cannot just call focusArticleView() or focusTranslateLine(), because no window should be activated here.
+    Q_ASSERT( getCurrentArticleView() );
+    getCurrentArticleView()->focus();
+  }
+#endif
 }
 
 void MainWindow::closeCurrentTab()
@@ -1807,21 +1867,25 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
     escaped.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
   }
 
-  ui.tabWidget->setTabText( ui.tabWidget->indexOf( view ), escaped );
+  int index = ui.tabWidget->indexOf( view );
+  ui.tabWidget->setTabText( index, escaped );
 
-  // Set icon for "Add to Favorites" action
-  if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+  if( index == ui.tabWidget->currentIndex() )
   {
-    addToFavorites->setIcon( blueStarIcon );
-    addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
-  }
-  else
-  {
-    addToFavorites->setIcon( starIcon );
-    addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
-  }
+    // Set icon for "Add to Favorites" action
+    if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+    {
+      addToFavorites->setIcon( blueStarIcon );
+      addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
+    }
+    else
+    {
+      addToFavorites->setIcon( starIcon );
+      addToFavorites->setToolTip( tr( "Add current tab to Favorites" ) );
+    }
 
-  updateWindowTitle();
+    updateWindowTitle();
+  }
 }
 
 void MainWindow::iconChanged( ArticleView * view, QIcon const & icon )
@@ -2126,6 +2190,8 @@ void MainWindow::editPreferences()
     p.fts.searchMode = cfg.preferences.fts.searchMode;
     p.fts.useMaxArticlesPerDictionary = cfg.preferences.fts.useMaxArticlesPerDictionary;
     p.fts.useMaxDistanceBetweenWords = cfg.preferences.fts.useMaxDistanceBetweenWords;
+    p.fts.ignoreWordsOrder = cfg.preferences.fts.ignoreWordsOrder;
+    p.fts.ignoreDiacritics = cfg.preferences.fts.ignoreDiacritics;
 
     bool needReload = false;
 
@@ -2325,7 +2391,10 @@ void MainWindow::updateSuggestionList( QString const & newValue )
 
 void MainWindow::translateInputFinished( bool checkModifiers )
 {
-  QString word = Folding::unescapeWildcardSymbols( translateLine->text() );
+  QString word = translateLine->text().trimmed();
+  if( word.isEmpty() )
+    return;
+  word = Folding::unescapeWildcardSymbols( word );
   respondToTranslationRequest( Config::InputPhrase( word, translateBoxSuffix ), checkModifiers );
 }
 
@@ -2525,6 +2594,14 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
   if (ev->type() == QEvent::KeyPress)
   {
     QKeyEvent *keyevent = static_cast<QKeyEvent*>(ev);
+
+    bool handleCtrlTab = ( obj == translateLine
+                           || obj == wordList
+                           || obj == ui.historyList
+                           || obj == ui.favoritesTree
+                           || obj == ui.dictsList
+                           || obj == groupList );
+
     if (keyevent->modifiers() == Qt::ControlModifier && keyevent->key() == Qt::Key_Tab)
     {
       if (cfg.preferences.mruTabOrder)
@@ -2532,7 +2609,17 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
         ctrlTabPressed();
         return true;
       }
+      else if( handleCtrlTab )
+      {
+        QApplication::sendEvent( ui.tabWidget, ev );
+        return true;
+      }
       return false;
+    }
+    if( handleCtrlTab && keyevent->matches( QKeySequence::PreviousChild ) ) // Handle only Ctrl+Shist+Tab here because Ctrl+Tab was already handled before
+    {
+      QApplication::sendEvent( ui.tabWidget, ev );
+      return true;
     }
   }
 
@@ -2551,6 +2638,7 @@ bool MainWindow::eventFilter( QObject * obj, QEvent * ev )
           return true;
         }
       }
+
     }
 
     if ( ev->type() == QEvent::FocusIn ) {
@@ -2797,11 +2885,6 @@ void MainWindow::showTranslationFor( Config::InputPhrase const & phrase,
 
   view->showDefinition( phrase, group, scrollTo );
 
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
-
   #if 0
   QUrl req;
 
@@ -2908,14 +2991,9 @@ void MainWindow::showTranslationFor( QString const & inWord,
   view->showDefinition( inWord, dictIDs, searchRegExp,
                         groupInstances[ groupList->currentIndex() ].id,
                         ignoreDiacritics );
-
-  updatePronounceAvailability();
-  updateFoundInDictsList();
-
-  updateBackForwardButtons();
 }
 
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
 void MainWindow::toggleMainWindow( bool onlyShow, bool byIconClick )
 #else
 void MainWindow::toggleMainWindow( bool onlyShow )
@@ -3014,37 +3092,45 @@ void MainWindow::toggleMainWindow( bool onlyShow )
       ftsDlg->show();
 
     focusTranslateLine();
-#ifdef HAVE_X11
-    Window wh = 0;
-    int rev = 0;
-    XGetInputFocus( QX11Info::display(), &wh, &rev );
-    if( wh != translateLine->internalWinId() && !byIconClick )
-    {
-        QPoint p( 1, 1 );
-        mapToGlobal( p );
-        XEvent event;
-        memset( &event, 0, sizeof( event) );
-        event.type = ButtonPress;
-        event.xbutton.x = 1;
-        event.xbutton.y = 1;
-        event.xbutton.x_root = p.x();
-        event.xbutton.y_root = p.y();
-        event.xbutton.window = internalWinId();
-        event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
-        event.xbutton.state = Button1Mask;
-        event.xbutton.button = Button1;
-        event.xbutton.same_screen = true;
-        event.xbutton.time = CurrentTime;
 
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
-        event.type = ButtonRelease;
-        XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
-        XFlush( QX11Info::display() );
-    }
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+    if( !byIconClick )
+      QTimer::singleShot( 0, this, SLOT( forceX11Focus() ) );
 #endif
   }
 }
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+void MainWindow::forceX11Focus()
+{
+  Window wh = 0;
+  int rev = 0;
+  XGetInputFocus( QX11Info::display(), &wh, &rev );
+  if( wh != internalWinId() )
+  {
+    QPoint const pointRelativeToRoot = mapToGlobal( QPoint( 0, 0 ) );
+    XEvent event;
+    memset( &event, 0, sizeof( event) );
+    event.type = ButtonPress;
+    event.xbutton.x = 0;
+    event.xbutton.y = 0;
+    event.xbutton.x_root = pointRelativeToRoot.x();
+    event.xbutton.y_root = pointRelativeToRoot.y();
+    event.xbutton.window = internalWinId();
+    event.xbutton.root = QX11Info::appRootWindow( QX11Info::appScreen() );
+    event.xbutton.state = Button1Mask;
+    event.xbutton.button = Button1;
+    event.xbutton.same_screen = true;
+    event.xbutton.time = CurrentTime;
+
+    XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
+    XFlush( QX11Info::display() );
+    event.type = ButtonRelease;
+    XSendEvent( QX11Info::display(), internalWinId(), true, 0xfff, &event );
+    XFlush( QX11Info::display() );
+  }
+}
+#endif
 
 void MainWindow::installHotKeys()
 {
@@ -3096,7 +3182,19 @@ void MainWindow::hotKeyActivated( int hk )
     toggleMainWindow();
   else
   if ( scanPopup.get() )
+  {
+#ifdef HAVE_X11
+    // When the user requests translation with the Ctrl+C+C hotkey in certain apps
+    // on some GNU/Linux systems, GoldenDict appears to handle Ctrl+C+C before the
+    // active application finishes handling Ctrl+C. As a result, GoldenDict finds
+    // the clipboard empty, silently cancels the translation request, and users report
+    // that Ctrl+C+C is broken in these apps. Slightly delay handling the clipboard
+    // hotkey to give the active application more time and thus work around the issue.
+    QTimer::singleShot( 10, scanPopup.get(), SLOT( translateWordFromClipboard() ) );
+#else
     scanPopup->translateWordFromClipboard();
+#endif
+  }
 }
 
 void MainWindow::prepareNewReleaseChecks()
@@ -3234,7 +3332,7 @@ void MainWindow::trayIconActivated( QSystemTrayIcon::ActivationReason r )
   switch(r) {
     case QSystemTrayIcon::Trigger:
       // Left click toggles the visibility of main window
-#ifdef HAVE_X11
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
       toggleMainWindow( false, true );
 #else
       toggleMainWindow();
@@ -3449,13 +3547,15 @@ void MainWindow::on_pageSetup_triggered()
 
 void MainWindow::on_printPreview_triggered()
 {
-  QPrintPreviewDialog dialog( &getPrinter(), this );
+  QPrintPreviewDialog dialog( &getPrinter(), this,
+                              Qt::WindowSystemMenuHint | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint );
+  dialog.restoreGeometry( cfg.printPreviewDialogGeometry );
 
   connect( &dialog, SIGNAL( paintRequested( QPrinter * ) ),
            this, SLOT( printPreviewPaintRequested( QPrinter * ) ) );
 
-  dialog.showMaximized();
   dialog.exec();
+  cfg.printPreviewDialogGeometry = dialog.saveGeometry();
 }
 
 void MainWindow::on_print_triggered()
@@ -3484,17 +3584,27 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
                                        vector< pair< QUrl, QString > > & downloadResources )
 {
   int pos = 0;
+  int queryNom = 1;
 
   while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
   {
     QUrl url( rx.cap( 1 ) );
     QString host = url.host();
-    QString resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( Qt4x5::Url::path( url ), "/" ) );
+    QString resourcePath = Qt4x5::Url::fullPath( url );
 
     if ( !host.startsWith( '/' ) )
       host.insert( 0, '/' );
     if ( !resourcePath.startsWith( '/' ) )
       resourcePath.insert( 0, '/' );
+
+    // Replase query part of url (if exist)
+    int n = resourcePath.indexOf( QLatin1Char( '?' ) );
+    if( n >= 0 )
+    {
+      QString q_str = QString( "_q%1" ).arg( queryNom );
+      resourcePath.replace( n, resourcePath.length() - n, q_str );
+      queryNom += 1;
+    }
 
     QCryptographicHash hash( QCryptographicHash::Md5 );
     hash.addData( rx.cap().toUtf8() );
@@ -3506,6 +3616,7 @@ static void filterAndCollectResources( QString & html, QRegExp & rx, const QStri
     }
 
     // Modify original url, set to the native one
+    resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
     QString newUrl = sep + QDir( folder ).dirName() + host + resourcePath + sep;
     html.replace( pos, rx.cap().length(), newUrl );
     pos += newUrl.length();
@@ -3546,7 +3657,8 @@ void MainWindow::on_saveArticle_triggered()
                                            filters.join( ";;" ),
                                            &selectedFilter, options );
 
-  bool complete = ( selectedFilter == filters[ 0 ] );
+  // The " (*.html)" part of filters[i] is absent from selectedFilter in Qt 5.
+  bool const complete = filters.at( 0 ).startsWith( selectedFilter );
 
   if ( !fileName.isEmpty() )
   {
@@ -3607,7 +3719,7 @@ void MainWindow::on_saveArticle_triggered()
 
         // Pull and save resources to files
         for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-              i != downloadResources.end(); i++ )
+              i != downloadResources.end(); ++i )
         {
           ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
           if( !handler->isEmpty() )
@@ -3850,8 +3962,13 @@ void MainWindow::applyWordsZoomLevel()
   }
 
   wordsZoomBase->setEnabled( cfg.preferences.wordsZoomLevel != 0 );
-  // groupList->setFixedHeight(translateLine->height());
-  groupList->parentWidget()->layout()->activate();
+
+  if( !cfg.preferences.searchInDock )
+  {
+    // Invalidating navToolbar's layout displays translateBoxWidget w/o the need to press the toolbar
+    // extension button when Words Zoom level decreases enough for translateBoxWidget to fit in the toolbar.
+    navToolbar->layout()->invalidate();
+  }
 
   if ( scanPopup.get() )
     scanPopup->applyWordsZoomLevel();
@@ -4889,4 +5006,8 @@ bool MainWindow::isGoldenDictWindow( HWND hwnd )
   return hwnd == (HWND)winId() || hwnd == (HWND)ui.centralWidget->winId();
 }
 
+#endif
+
+#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
+#include "mainwindow.moc"
 #endif

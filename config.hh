@@ -678,6 +678,7 @@ struct Class
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
   QByteArray inspectorGeometry; // Geometry of WebKit inspector window
   QByteArray dictionariesDialogGeometry; // Geometry of Dictionaries dialog
+  QByteArray printPreviewDialogGeometry; // Geometry of Print Preview dialog
   QByteArray helpWindowGeometry; // Geometry of help window
   QByteArray helpSplitterState; // Geometry of help splitter
 
@@ -758,6 +759,7 @@ private:
 };
 
 DEF_EX( exError, "Error with the program's configuration", std::exception )
+DEF_EX( exCantUseDataDir, "Can't use XDG_DATA_HOME directory to store GoldenDict data", exError )
 DEF_EX( exCantUseHomeDir, "Can't use home directory to store GoldenDict preferences", exError )
 DEF_EX( exCantUseIndexDir, "Can't use index directory to store GoldenDict index files", exError )
 DEF_EX( exCantReadConfigFile, "Can't read the configuration file", exError )

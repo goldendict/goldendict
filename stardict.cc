@@ -10,6 +10,7 @@
 #include "xdxf2html.hh"
 #include "htmlescape.hh"
 #include "langcoder.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "fsencoding.hh"
 #include "filetype.hh"
@@ -192,7 +193,8 @@ public:
                                                             int distanceBetweenWords,
                                                             int maxResults,
                                                             bool ignoreWordsOrder,
-                                                            bool ignoreDiacritics );
+                                                            bool ignoreDiacritics,
+                                                            QThreadPool * ftsThreadPoolPtr );
   virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
   virtual void makeFTSIndex(QAtomicInt & isCancelled, bool firstIteration );
@@ -712,7 +714,7 @@ void StardictDictionary::pangoToHtml( QString & text )
           {
             // Parse font description
 
-            QStringList list = styleRegex.cap( 2 ).split( " ", QString::SkipEmptyParts );
+            QStringList list = styleRegex.cap( 2 ).split( " ", Qt4x5::skipEmptyParts() );
             int n;
             QString sizeStr, stylesStr, familiesStr;
             for( n = list.size() - 1; n >= 0; n-- )
@@ -1270,9 +1272,10 @@ sptr< Dictionary::DataRequest > StardictDictionary::getSearchResults( QString co
                                                                       int distanceBetweenWords,
                                                                       int maxResults,
                                                                       bool ignoreWordsOrder,
-                                                                      bool ignoreDiacritics )
+                                                                      bool ignoreDiacritics,
+                                                                      QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 /// StardictDictionary::findHeadwordsForSynonym()
@@ -1910,8 +1913,8 @@ void StardictResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-              resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "Stardict: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+               resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
   catch( ... )

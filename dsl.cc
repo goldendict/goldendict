@@ -17,6 +17,7 @@
 #include "wstring_qt.hh"
 #include "zipfile.hh"
 #include "indexedzip.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "tiff.hh"
 #include "fulltextsearch.hh"
@@ -236,7 +237,8 @@ public:
                                                             int distanceBetweenWords,
                                                             int maxResults,
                                                             bool ignoreWordsOrder,
-                                                            bool ignoreDiacritics );
+                                                            bool ignoreDiacritics,
+                                                            QThreadPool * ftsThreadPoolPtr );
   virtual QString const& getDescription();
 
   virtual QString getMainFilename();
@@ -333,7 +335,7 @@ DslDictionary::DslDictionary( string const & id,
 
   resourceDir1 = getDictionaryFilenames()[ 0 ] + ".files" + FsEncoding::separator();
   QString s = FsEncoding::decode( getDictionaryFilenames()[ 0 ].c_str() );
-  if( s.endsWith( QString::fromLatin1( ".dz", Qt::CaseInsensitive ) ) )
+  if( s.endsWith( QString::fromLatin1( ".dz" ), Qt::CaseInsensitive ) )
     s.chop( 3 );
   resourceDir2 = FsEncoding::encode( s ) + ".files" + FsEncoding::separator();
 
@@ -1152,7 +1154,9 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( node.renderAsText() ) ) );
+    wstring nodeStr = node.renderAsText();
+    normalizeHeadword( nodeStr );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
     if( !node.tagAttrs.empty() )
     {
       QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
@@ -1989,8 +1993,8 @@ void DslResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "DSL: Failed loading resource \"%s\" for \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
@@ -2045,9 +2049,10 @@ sptr< Dictionary::DataRequest > DslDictionary::getSearchResults( QString const &
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
                                                                  bool ignoreWordsOrder,
-                                                                 bool ignoreDiacritics )
+                                                                 bool ignoreDiacritics,
+                                                                 QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 } // anonymous namespace

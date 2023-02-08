@@ -200,9 +200,10 @@ void WebSiteArticleRequest::requestFinished( QNetworkReply * r )
     QUrl redirectUrl = possibleRedirectUrl.toUrl();
     if( !redirectUrl.isEmpty() )
     {
+      QUrl newUrl = netReply->url().resolved( redirectUrl );
       disconnect( netReply, 0, 0, 0 );
       netReply->deleteLater();
-      netReply = mgr.get( QNetworkRequest( redirectUrl ) );
+      netReply = mgr.get( QNetworkRequest( newUrl ) );
 #ifndef QT_NO_OPENSSL
       connect( netReply, SIGNAL( sslErrors( QList< QSslError > ) ),
                netReply, SLOT( ignoreSslErrors() ) );

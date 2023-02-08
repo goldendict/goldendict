@@ -47,7 +47,8 @@ void ArticleInspector::showEvent( QShowEvent * event )
     setGeometry( p->geometry() );
   }
 
-  openedInspectors.push_back( this );
+  if( std::find( openedInspectors.begin(), openedInspectors.end(), this ) == openedInspectors.end() )
+    openedInspectors.push_back( this );
 
   QWebInspector::showEvent( event );
 }

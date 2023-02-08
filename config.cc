@@ -28,10 +28,31 @@
 #include <QDesktopServices>
 #endif
 
+#if defined( HAVE_X11 ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+// Whether XDG Base Directory specification might be followed.
+// Only Qt5 builds are supported, as Qt4 doesn't provide all functions needed
+// to get XDG Base Directory compliant locations.
+#define XDG_BASE_DIRECTORY_COMPLIANCE
+#endif
+
 namespace Config {
 
 namespace
 {
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+  const char xdgSubdirName[] = "goldendict";
+
+  QDir getDataDir()
+  {
+    QDir dir = QStandardPaths::writableLocation( QStandardPaths::GenericDataLocation );
+    dir.mkpath( xdgSubdirName );
+    if ( !dir.cd( xdgSubdirName ) )
+      throw exCantUseDataDir();
+
+    return dir;
+  }
+#endif
+
   QString portableHomeDirPath()
   {
     return QCoreApplication::applicationDirPath() + "/portable";
@@ -52,6 +73,14 @@ namespace
       result = QDir::fromNativeSeparators( QString::fromWCharArray( _wgetenv( L"APPDATA" ) ) );
     #else
       char const * pathInHome = ".goldendict";
+      #ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+        // check if an old config dir is present, otherwise use standards-compliant location
+        if ( !result.exists( pathInHome ) )
+        {
+          result.setPath( QStandardPaths::writableLocation( QStandardPaths::ConfigLocation ) );
+          pathInHome = xdgSubdirName;
+        }
+      #endif
     #endif
 
     result.mkpath( pathInHome );
@@ -159,12 +188,12 @@ InputPhrase Preferences::sanitizeInputPhrase( QString const & inputPhrase ) cons
 
   if( limitInputPhraseLength && inputPhrase.size() > inputPhraseLengthLimit )
   {
-    gdWarning( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
-               inputPhrase.size(), inputPhraseLengthLimit );
+    gdDebug( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
+             inputPhrase.size(), inputPhraseLengthLimit );
     return result;
   }
 
-  const QString withPunct = inputPhrase.simplified();
+  const QString withPunct = inputPhrase.simplified().remove( QChar( 0xAD ) ); // Simplify whitespaces and remove soft hyphens
   result.phrase = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( withPunct ) ) );
   if ( !result.isValid() )
     return result; // The suffix of an invalid input phrase must be empty.
@@ -1110,6 +1139,10 @@ Class load() THROW_SPEC( exError )
 
   if ( !dictionariesDialogGeometry.isNull() )
     c.dictionariesDialogGeometry = QByteArray::fromBase64( dictionariesDialogGeometry.toElement().text().toLatin1() );
+
+  QDomNode const printPreviewDialogGeometry = root.namedItem( "printPreviewDialogGeometry" );
+  if( !printPreviewDialogGeometry.isNull() )
+    c.printPreviewDialogGeometry = QByteArray::fromBase64( printPreviewDialogGeometry.toElement().text().toLatin1() );
 
   QDomNode timeForNewReleaseCheck = root.namedItem( "timeForNewReleaseCheck" );
 
@@ -2109,6 +2142,10 @@ void save( Class const & c ) THROW_SPEC( exError )
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictionariesDialogGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
+    opt = dd.createElement( "printPreviewDialogGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.printPreviewDialogGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
     opt = dd.createElement( "timeForNewReleaseCheck" );
     opt.appendChild( dd.createTextNode( c.timeForNewReleaseCheck.toString( Qt::ISODate ) ) );
     root.appendChild( opt );
@@ -2212,6 +2249,15 @@ QString getIndexDir() THROW_SPEC( exError )
 {
   QDir result = getHomeDir();
 
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+  // store index in XDG_CACHE_HOME in non-portable version
+  // *and* when an old index directory in GoldenDict home doesn't exist
+  if ( !isPortableVersion() && !result.exists( "index" ) )
+  {
+    result.setPath( getCacheDir() );
+  }
+#endif
+
   result.mkpath( "index" );
 
   if ( !result.cd( "index" ) )
@@ -2227,7 +2273,18 @@ QString getPidFileName() THROW_SPEC( exError )
 
 QString getHistoryFileName() THROW_SPEC( exError )
 {
-  return getHomeDir().filePath( "history" );
+  QString homeHistoryPath = getHomeDir().filePath( "history" );
+
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+  // use separate data dir for history, if it is not already stored alongside
+  // configuration in non-portable mode
+  if ( !isPortableVersion() && !QFile::exists( homeHistoryPath ) )
+  {
+    return getDataDir().filePath( "history" );
+  }
+#endif
+
+  return homeHistoryPath;
 }
 
 QString getFavoritiesFileName() THROW_SPEC( exError )
@@ -2345,7 +2402,11 @@ QString getCacheDir() throw()
 {
   return isPortableVersion() ? portableHomeDirPath() + "/cache"
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  #ifdef HAVE_X11
+                             : QStandardPaths::writableLocation( QStandardPaths::GenericCacheLocation ) + "/goldendict";
+  #else
                              : QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
+  #endif
 #else
                              : QDesktopServices::storageLocation( QDesktopServices::CacheLocation );
 #endif

@@ -420,10 +420,10 @@ EpwingBook::~EpwingBook()
 
 void EpwingBook::setErrorString( QString const & func, EB_Error_Code code )
 {
+  QTextCodec * const localeCodec = gdCodecForLocale();
   error_string = QString( "EB \"%1\" function error: %2 (%3)" )
-                 .arg( func )
-                 .arg( QTextCodec::codecForLocale()->toUnicode( eb_error_string( code ) ) )
-                 .arg( QTextCodec::codecForLocale()->toUnicode( eb_error_message( code ) ) );
+                 .arg( func, localeCodec->toUnicode( eb_error_string( code ) ),
+                       localeCodec->toUnicode( eb_error_message( code ) ) );
 
   if( currentPosition.page != 0 )
     error_string += QString( " on page %1, offset %2" ).arg( QString::number( currentPosition.page ) )
@@ -555,7 +555,7 @@ bool EpwingBook::setSubBook( int book_nom )
     QString line = ts.readLine();
     while( !line.isEmpty() )
     {
-      QStringList list = line.remove( '\n' ).split( ' ', QString::SkipEmptyParts );
+      QStringList list = line.remove( '\n' ).split( ' ', Qt4x5::skipEmptyParts() );
       if( list.count() == 2 )
         customFontsMap[ list[ 0 ] ] = list[ 1 ];
       line = ts.readLine();
@@ -846,7 +846,7 @@ void EpwingBook::getFirstHeadword( EpwingHeadword & head )
   fixHeadword( head.headword );
 
   EWPos epos( pos.page, pos.offset );
-  allHeadwordPositions[ head.headword ] = epos;
+  allHeadwordPositions[ head.headword ] << epos;
 }
 
 bool EpwingBook::getNextHeadword( EpwingHeadword & head )
@@ -877,13 +877,25 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 
       if( allHeadwordPositions.contains( head.headword ) )
       {
-        EWPos epos = allHeadwordPositions[ head.headword ];
-        if( pos.page != epos.first || abs( pos.offset - epos.second ) > 4 )
+        // existed position
+        bool existed = false;
+        foreach( EWPos epos, allHeadwordPositions[ head.headword ] )
+        {
+          if( pos.page == epos.first && abs( pos.offset - epos.second ) <= 4 )
+          {
+            existed = true;
+            break;
+          }
+        }
+        if( !existed )
+        {
+          allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
           return true;
+        }
       }
       else
       {
-        allHeadwordPositions[ head.headword ] = EWPos( pos.page, pos.offset );
+        allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
         return true;
       }
     }
@@ -939,14 +951,26 @@ bool EpwingBook::getNextHeadword( EpwingHeadword & head )
 
     if( allHeadwordPositions.contains( head.headword ) )
     {
-      EWPos epos = allHeadwordPositions[ head.headword ];
-      if( pos.page != epos.first || abs( pos.offset - epos.second ) > 4 )
-        break;
+      // existed position
+      bool existed = false;
+      foreach( EWPos epos, allHeadwordPositions[ head.headword ] )
+      {
+        if( pos.page == epos.first && abs( pos.offset - epos.second ) <= 4 )
+        {
+          existed = true;
+          break;
+        }
+      }
+      if( !existed )
+      {
+        allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
+        return true;
+      }
     }
     else
     {
-      allHeadwordPositions[ head.headword ] = EWPos( pos.page, pos.offset );
-      break;
+      allHeadwordPositions[ head.headword ] << EWPos( pos.page, pos.offset );
+      return true;
     }
   }
 
@@ -1098,6 +1122,9 @@ void EpwingBook::getArticle( QString & headword, QString & articleText,
 
   headword = QString::fromUtf8( buffer, length );
   finalizeText( headword );
+
+  if( text_only )
+    fixHeadword( headword );
 
   articleText = getText( pos.page, pos.offset, text_only );
 }

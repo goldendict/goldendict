@@ -202,11 +202,11 @@ public:
     if( pos < 0 )
       url = "dict://" + url;
 
-    databases = database_.split( QRegExp( "[ ,;]" ), QString::SkipEmptyParts );
+    databases = database_.split( QRegExp( "[ ,;]" ), Qt4x5::skipEmptyParts() );
     if( databases.isEmpty() )
       databases.append( "*" );
 
-    strategies = strategies_.split( QRegExp( "[ ,;]" ), QString::SkipEmptyParts );
+    strategies = strategies_.split( QRegExp( "[ ,;]" ), Qt4x5::skipEmptyParts() );
     if( strategies.isEmpty() )
       strategies.append( "prefix" );
   }

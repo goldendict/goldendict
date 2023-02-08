@@ -129,7 +129,7 @@ public:
 
   FTSResultsRequest( BtreeIndexing::BtreeDictionary & dict_, QString const & searchString_,
                      int searchMode_, bool matchCase_, int distanceBetweenWords_, int maxResults_,
-                     bool ignoreWordsOrder_, bool ignoreDiacritics_ ):
+                     bool ignoreWordsOrder_, bool ignoreDiacritics_, QThreadPool * ftsThreadPoolPtr ):
     dict( dict_ ),
     searchString( searchString_ ),
     searchMode( searchMode_ ),
@@ -145,11 +145,11 @@ public:
       searchString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( searchString_ ) ) );
 
     foundHeadwords = new QList< FTS::FtsHeadword >;
-    QThreadPool::globalInstance()->start(
+    ftsThreadPoolPtr->start(
       new FTSResultsRequestRunnable( *this, hasExited ), -100 );
   }
 
-  void run(); // Run from another thread by DslResourceRequestRunnable
+  void run();
 
   virtual void cancel()
   {
