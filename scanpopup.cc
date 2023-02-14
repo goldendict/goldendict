@@ -181,6 +181,7 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( &dictionaryBar, SIGNAL( openDictionaryFolder( QString const & ) ),
            this, SIGNAL( openDictionaryFolder( QString const & ) ) );
 
+  pinnedGeometry = cfg.popupWindowGeometry;
   if ( cfg.popupWindowGeometry.size() )
     restoreGeometry( cfg.popupWindowGeometry );
 
@@ -663,6 +664,11 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
       move( x, y );
     }
+    else
+    {
+      if( pinnedGeometry.size() > 0 )
+        restoreGeometry( pinnedGeometry );
+    }
 
     show();
 
@@ -1058,6 +1064,14 @@ void ScanPopup::showEvent( QShowEvent * ev )
     ui.showDictionaryBar->setChecked( dictionaryBar.isVisible() );
     updateDictionaryBar();
   }
+}
+
+void ScanPopup::closeEvent( QCloseEvent * ev )
+{
+  if( isVisible() && ui.pinButton->isChecked() )
+    pinnedGeometry = saveGeometry();
+
+  QMainWindow::closeEvent( ev );
 }
 
 void ScanPopup::prefixMatchFinished()
