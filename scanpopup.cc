@@ -1074,6 +1074,14 @@ void ScanPopup::closeEvent( QCloseEvent * ev )
   QMainWindow::closeEvent( ev );
 }
 
+void ScanPopup::moveEvent( QMoveEvent * ev )
+{
+  if( isVisible() && ui.pinButton->isChecked() )
+    pinnedGeometry = saveGeometry();
+
+  QMainWindow::moveEvent( ev );
+}
+
 void ScanPopup::prefixMatchFinished()
 {
   // Check that there's a window there at all
@@ -1120,6 +1128,9 @@ void ScanPopup::pinButtonClicked( bool checked )
   }
 
   show();
+
+  if( checked )
+    pinnedGeometry = saveGeometry();
 }
 
 void ScanPopup::focusTranslateLine()

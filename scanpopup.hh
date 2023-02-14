@@ -180,6 +180,7 @@ private:
   virtual void enterEvent( QEvent * event );
   virtual void showEvent( QShowEvent * );
   virtual void closeEvent( QCloseEvent * );
+  virtual void moveEvent( QMoveEvent * );
 
   /// Returns inputWord, chopped with appended ... if it's too long/
   QString elideInputWord();
