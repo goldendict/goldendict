@@ -240,9 +240,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 {
   QNetworkRequest localReq( req );
 
-  if( localReq.url().scheme() == "gdlookup" && localReq.url().host() == "upload.wikimedia.org" )
+  if( ( localReq.url().scheme() == "gdlookup" || localReq.url().scheme() == "http" ) && localReq.url().host() == "upload.wikimedia.org" )
   {
-    // Handle some requests from offline wikipedia/wiktionary without scheme
+    // Handle some requests from offline wikipedia/wiktionary without scheme or with "http" scheme
 
     QUrl newUrl( req.url() );
     newUrl.setScheme( "https" );
