@@ -278,6 +278,8 @@ private:
   void setTranslateBoxTextAndClearSuffix( QString const & text, WildcardPolicy wildcardPolicy,
                                           TranslateBoxPopup popupAction );
 
+  QString tabFavoritesFolder( int tabNom );
+
 private slots:
 
 #ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
