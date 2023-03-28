@@ -742,8 +742,8 @@ void DictGroupsWidget::addAutoGroups()
     dictMap[ name ].push_back( dict );
   }
 
-  QStringList groupList = dictMap.uniqueKeys();
-  QStringList morphoList = morphoMap.uniqueKeys();
+  QStringList const groupList = dictMap.keys();
+  QStringList const morphoList = morphoMap.keys();
 
   // Insert morphology dictionaries into corresponding lists
 
