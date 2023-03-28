@@ -734,16 +734,12 @@ void DictGroupsWidget::addAutoGroups()
       if( fileName.endsWith( ".aff", Qt::CaseInsensitive ) )
       {
         QString code = fileName.left( 2 ).toLower();
-        QVector<sptr<Dictionary::Class> > vd = morphoMap[ code ];
-        vd.append( dict );
-        morphoMap[ code ] = vd;
+        morphoMap[ code ].push_back( dict );
         continue;
       }
     }
 
-    QVector<sptr<Dictionary::Class> > vd = dictMap[ name ];
-    vd.append( dict );
-    dictMap[ name ] = vd;
+    dictMap[ name ].push_back( dict );
   }
 
   QStringList groupList = dictMap.uniqueKeys();
