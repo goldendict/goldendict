@@ -980,15 +980,15 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
         QWidget *child = widget->childAt( widget->mapFromGlobal( pt ) );
         if( child )
-        {
-          QWheelEvent whev( child->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
-          qApp->sendEvent( child, &whev );
-        }
-        else
-        {
-          QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
-          qApp->sendEvent( widget, &whev );
-        }
+          widget = child;
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
+        QWheelEvent whev( widget->mapFromGlobal( pt ), pt, QPoint(), QPoint( 0, delta ),
+                          Qt::NoButton, Qt::NoModifier, Qt::NoScrollPhase, false );
+#else
+        QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+#endif
+        qApp->sendEvent( widget, &whev );
       }
     }
 
