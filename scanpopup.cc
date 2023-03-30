@@ -12,6 +12,10 @@
 #include "gddebug.hh"
 #include "gestures.hh"
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 11, 0 )
+#include <QScreen>
+#endif
+
 #ifdef Q_OS_MAC
 #include "macmouseover.hh"
 #define MouseOver MacMouseOver
@@ -634,7 +638,11 @@ void ScanPopup::engagePopup( bool forcePopup, bool giveFocus )
 
       QPoint currentPos = QCursor::pos();
 
-      QRect desktop = QApplication::desktop()->screenGeometry();
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 11, 0 )
+      QRect const desktop = QGuiApplication::primaryScreen()->geometry();
+#else
+      QRect const desktop = QApplication::desktop()->screenGeometry();
+#endif
 
       QSize windowSize = geometry().size();
 
