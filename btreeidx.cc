@@ -1472,8 +1472,9 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
   // Read all chains
 
-  QList< uint32_t >::Iterator begOffsets = offsets.begin();
-  QList< uint32_t >::Iterator endOffsets = offsets.end();
+  typedef QList< uint32_t >::Iterator ListIterator;
+  ListIterator begOffsets = offsets.begin();
+  ListIterator endOffsets = offsets.end();
 
   for( ; ; )
   {
@@ -1481,16 +1482,16 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
-                                                    result.at( i ).articleOffset );
+      std::pair< ListIterator, ListIterator > const range = std::equal_range( begOffsets, endOffsets,
+                                                                              result.at( i ).articleOffset );
 
-      if( it != offsets.end() )
+      if( range.first != range.second )
       {
         if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
-        offsets.erase( it );
+        offsets.erase( range.first );
         begOffsets = offsets.begin();
         endOffsets = offsets.end();
       }
