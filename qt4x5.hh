@@ -34,6 +34,15 @@ inline QString::SplitBehavior skipEmptyParts()
 { return QString::SkipEmptyParts; }
 #endif
 
+inline Qt::MouseButton middleButton()
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 7, 0 )
+  return Qt::MiddleButton;
+#else
+  return Qt::MidButton;
+#endif
+}
+
 inline QString escape( QString const & plain )
 {
 #if IS_QT_5
