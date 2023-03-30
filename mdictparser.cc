@@ -41,6 +41,7 @@
 #include "decompress.hh"
 #include "gddebug.hh"
 #include "ripemd.hh"
+#include "qt4x5.hh"
 
 namespace Mdict
 {
@@ -389,7 +390,7 @@ bool MdictParser::readHeader( QDataStream & in )
   {
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), QString::KeepEmptyParts );
+    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt4x5::keepEmptyParts() );
 #else
     QStringList lines = styleSheets.split( QRegExp( "[\r\n]" ), QString::KeepEmptyParts );
 #endif
