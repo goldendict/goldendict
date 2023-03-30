@@ -960,8 +960,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           quint16 volumes = qFromBigEndian( dictHeader.totalVolumes );
           if( volumes > 1 )
           {
-            QString ss;
-            ss.sprintf( " (%i/%i)", qFromBigEndian( dictHeader.volume ), volumes );
+            QString const ss = QString( " (%1/%2)" ).arg( qFromBigEndian( dictHeader.volume ) ).arg( volumes );
             dictName += ss.toLocal8Bit().data();
           }
 
