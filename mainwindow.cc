@@ -1229,11 +1229,16 @@ void MainWindow::wheelEvent( QWheelEvent *ev )
 {
   if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
   {
-    if ( ev->delta() > 0 )
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    int const delta = ev->angleDelta().y();
+#else
+    int const delta = ev->delta();
+#endif
+    if ( delta > 0 )
     {
         zoomin();
     }
-    else if ( ev->delta() < 0 )
+    else if ( delta < 0 )
     {
         zoomout();
     }
