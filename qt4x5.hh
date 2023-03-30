@@ -9,6 +9,7 @@
 # define IS_QT_5    1
 #endif
 
+#include <QProcess>
 #include <QString>
 #include <QAtomicInt>
 #include <QTextDocument>
@@ -187,6 +188,24 @@ typedef int size_type;
 #else
 typedef uint size_type;
 #endif
+
+}
+
+namespace Process
+{
+
+inline bool startDetached( QString const & command )
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+  auto args = QProcess::splitCommand( command );
+  if( args.empty() )
+    return false;
+  auto const program = args.takeFirst();
+  return QProcess::startDetached( program, args );
+#else
+  return QProcess::startDetached( command );
+#endif
+}
 
 }
 
