@@ -12,6 +12,10 @@
 #include "helpwindow.hh"
 #include "gddebug.hh"
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+#include <QHelpLink>
+#endif
+
 namespace Help {
 
 HelpBrowser::HelpBrowser( QHelpEngineCore * engine, QWidget *parent ) :
@@ -25,9 +29,15 @@ void HelpBrowser::showHelpForKeyword( QString const & id )
 {
   if ( helpEngine )
   {
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+    auto const links = helpEngine->documentsForIdentifier( id );
+    if( !links.empty() )
+      setSource( links.constFirst().url );
+#else
     QMap< QString, QUrl > links = helpEngine->linksForIdentifier( id );
     if( !links.isEmpty() )
       setSource( links.constBegin().value() );
+#endif
   }
 }
 
