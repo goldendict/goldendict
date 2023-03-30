@@ -357,7 +357,9 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   // spoof User-Agent
   if ( hideGoldenDictHeader && localReq.url().scheme().startsWith("http", Qt::CaseInsensitive))
   {
-    localReq.setRawHeader("User-Agent", localReq.rawHeader("User-Agent").replace(qApp->applicationName(), ""));
+    QByteArray const userAgentHeader = "User-Agent";
+    localReq.setRawHeader( userAgentHeader,
+                           localReq.rawHeader( userAgentHeader ).replace( qApp->applicationName().toUtf8(), "" ) );
     reply = QNetworkAccessManager::createRequest( op, localReq, outgoingData );
   }
 
