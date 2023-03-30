@@ -180,7 +180,11 @@ using std::string;
   void AllowFrameReply::applyError( QNetworkReply::NetworkError code )
   {
     setError( code, baseReply->errorString() );
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+    emit errorOccurred( code );
+#else
     emit error( code );
+#endif
   }
 
   void AllowFrameReply::readDataFromBase()
@@ -625,7 +629,13 @@ void ArticleResourceReply::readyReadSlot()
 void ArticleResourceReply::finishedSlot()
 {
   if ( req->dataSize() < 0 )
-    error( ContentNotFoundError );
+  {
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+    emit errorOccurred( ContentNotFoundError );
+#else
+    emit error( ContentNotFoundError );
+#endif
+  }
 
   finished();
 }
