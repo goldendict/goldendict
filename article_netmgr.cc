@@ -418,8 +418,12 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     // See if we have some dictionaries muted
 
-    QSet< QString > mutedDicts =
-        QSet< QString >::fromList( Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' ) );
+    QStringList const mutedDictList = Qt4x5::Url::queryItemValue( url, "muted" ).split( ',' );
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 14, 0 )
+    QSet< QString > const mutedDicts( mutedDictList.cbegin(), mutedDictList.cend() );
+#else
+    QSet< QString > const mutedDicts = QSet< QString >::fromList( mutedDictList );
+#endif
 
     // Unpack contexts
 
