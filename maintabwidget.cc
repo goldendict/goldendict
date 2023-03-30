@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include "maintabwidget.hh"
+#include "qt4x5.hh"
 #include <QDebug>
 #include <QEvent>
 #include <QMouseEvent>
@@ -67,7 +68,7 @@ bool MainTabWidget::eventFilter( QObject * obj, QEvent * ev )
   if( obj == tabBar() && ev->type() == QEvent::MouseButtonPress )
   {
      QMouseEvent * mev = static_cast< QMouseEvent *>( ev );
-     if( mev->button() == Qt::MidButton )
+     if( mev->button() == Qt4x5::middleButton() )
      {
          emit tabCloseRequested( tabBar()->tabAt( mev->pos() ) );
          return true;
