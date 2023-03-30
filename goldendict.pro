@@ -23,7 +23,7 @@ isEmpty( hasGit ) {
 }
 
 CONFIG( release, debug|release ) {
-  DEFINES += NDEBUG
+  DEFINES += NDEBUG NO_GD_DPRINTF
 }
 
 # DEPENDPATH += . generators
@@ -368,6 +368,7 @@ HEADERS += folding.hh \
     articleinspector.hh \
     delegate.hh \
     zim.hh \
+    categorized_logging.hh \
     gddebug.hh \
     qt4x5.hh \
     gestures.hh \

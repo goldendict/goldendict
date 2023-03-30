@@ -159,7 +159,7 @@ public:
 
     for( size_t left = baseText.size(); left; )
     {
-      if( *nextChar >= 0x10000U )
+      if( *nextChar >= 0x10000 )
       {
         // Will be translated into surrogate pair
         normText.push_back( *nextChar );
@@ -215,6 +215,19 @@ QString dictionaryIdFromScrollTo( QString const & scrollTo )
   Q_ASSERT( isScrollTo( scrollTo ) );
   const int scrollToPrefixLength = 7;
   return scrollTo.mid( scrollToPrefixLength );
+}
+
+QString searchStatusMessageNoMatches()
+{
+  return ArticleView::tr( "Phrase not found" );
+}
+
+QString searchStatusMessage( int activeMatch, int matchCount )
+{
+  Q_ASSERT( matchCount > 0 );
+  Q_ASSERT( activeMatch > 0 );
+  Q_ASSERT( activeMatch <= matchCount );
+  return ArticleView::tr( "%1 of %2 matches" ).arg( activeMatch ).arg( matchCount );
 }
 
 } // unnamed namespace
@@ -556,7 +569,7 @@ void ArticleView::loadFinished( bool )
   {
     // There's some sort of glitch -- sometimes you need to move a mouse
 
-    QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), 0, 0 );
+    QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), Qt::MouseButtons(), Qt::KeyboardModifiers() );
 
     qApp->sendEvent( ui.definition, &ev );
   }
@@ -713,7 +726,7 @@ unsigned ArticleView::getGroup( QUrl const & url )
 QStringList ArticleView::getArticlesList()
 {
   return evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdArticleContents" )
-      .toString().trimmed().split( ' ', QString::SkipEmptyParts );
+      .toString().trimmed().split( ' ', Qt4x5::skipEmptyParts() );
 }
 
 QString ArticleView::getActiveArticleId()
@@ -967,15 +980,15 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
 
         QWidget *child = widget->childAt( widget->mapFromGlobal( pt ) );
         if( child )
-        {
-          QWheelEvent whev( child->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
-          qApp->sendEvent( child, &whev );
-        }
-        else
-        {
-          QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
-          qApp->sendEvent( widget, &whev );
-        }
+          widget = child;
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 12, 0 )
+        QWheelEvent whev( widget->mapFromGlobal( pt ), pt, QPoint(), QPoint( 0, delta ),
+                          Qt::NoButton, Qt::NoModifier, Qt::NoScrollPhase, false );
+#else
+        QWheelEvent whev( widget->mapFromGlobal( pt ), pt, delta, Qt::NoButton, Qt::NoModifier );
+#endif
+        qApp->sendEvent( widget, &whev );
       }
     }
 
@@ -1203,7 +1216,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
     if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
     {
       QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                          .split( ",", QString::SkipEmptyParts );
+                                          .split( ",", Qt4x5::skipEmptyParts() );
 
       showDefinition( url.path(), dictsList, QRegExp(), getGroup( ref ), false );
     }
@@ -1225,7 +1238,7 @@ bool ArticleView::openLink( QUrl const & url, QUrl const & ref,
       {
         // Specific dictionary group from full-text search
         QStringList dictsList = Qt4x5::Url::queryItemValue( ref, "dictionaries" )
-                                            .split( ",", QString::SkipEmptyParts );
+                                            .split( ",", Qt4x5::skipEmptyParts() );
 
         showDefinition( url.path().mid( 1 ), dictsList, QRegExp(), getGroup( ref ), false );
         return true;
@@ -2315,7 +2328,7 @@ void ArticleView::doubleClicked( QPoint pos )
   QWebHitTestResult r = ui.definition->page()->mainFrame()->hitTestContent( pos );
   QWebElement el = r.element();
   QUrl imageUrl;
-  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
+  if( el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
   {
     // Double click on image; download it and transfer to external program
 
@@ -2406,7 +2419,7 @@ void ArticleView::doubleClicked( QPoint pos )
         if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
         {
           QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
-                                              .split( ",", QString::SkipEmptyParts );
+                                              .split( ",", Qt4x5::skipEmptyParts() );
           showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
         }
         else
@@ -2433,7 +2446,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       }
     }
 
-    QWebPage::FindFlags f( 0 );
+    QWebPage::FindFlags f;
 
     if ( ui.searchCaseSensitive->isChecked() )
       f |= QWebPage::FindCaseSensitively;
@@ -2450,7 +2463,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       return;
   }
 
-  QWebPage::FindFlags f( 0 );
+  QWebPage::FindFlags f;
 
   if ( ui.searchCaseSensitive->isChecked() )
     f |= QWebPage::FindCaseSensitively;
@@ -2503,7 +2516,7 @@ bool ArticleView::closeSearch()
     ui.ftsSearchFrame->hide();
     ui.definition->setFocus();
 
-    QWebPage::FindFlags flags ( 0 );
+    QWebPage::FindFlags flags;
 
   #if QT_VERSION >= 0x040600
     flags |= QWebPage::HighlightAllOccurrences;
@@ -2564,9 +2577,10 @@ void ArticleView::highlightFTSResults()
 
   const QUrl & url = ui.definition->url();
 
-  bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
-
   QString regString = Qt4x5::Url::queryItemValue( url, "regexp" );
+  if( regString.isEmpty() )
+    return;
+  const bool ignoreDiacritics = Qt4x5::Url::hasQueryItem( url, "ignore_diacritics" );
   if( ignoreDiacritics )
     regString = gd::toQString( Folding::applyDiacriticsOnly( gd::toWString( regString ) ) );
   else
@@ -2670,12 +2684,14 @@ void ArticleView::highlightFTSResults()
 
   ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
 
-  QWebPage::FindFlags flags ( 0 );
+  QWebPage::FindFlags flags;
 
   if( ftsSearchMatchCase )
     flags |= QWebPage::FindCaseSensitively;
 
-  if( !allMatches.isEmpty() )
+  if( allMatches.isEmpty() )
+    ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
+  else
   {
     highlightAllFtsOccurences( flags );
     if( ui.definition->findText( allMatches.at( 0 ), flags ) )
@@ -2684,6 +2700,8 @@ void ArticleView::highlightFTSResults()
                evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
                                    .arg( rangeVarName ) );
     }
+    Q_ASSERT( ftsPosition == 0 );
+    ui.ftsSearchStatusLabel->setText( searchStatusMessage( 1, allMatches.size() ) );
   }
 
   ui.ftsSearchFrame->show();
@@ -2721,12 +2739,13 @@ void ArticleView::performFtsFindOperation( bool backwards )
 
   if( allMatches.isEmpty() )
   {
+    ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
     ui.ftsSearchNext->setEnabled( false );
     ui.ftsSearchPrevious->setEnabled( false );
     return;
   }
 
-  QWebPage::FindFlags flags( 0 );
+  QWebPage::FindFlags flags;
 
   if( ftsSearchMatchCase )
     flags |= QWebPage::FindCaseSensitively;
@@ -2768,6 +2787,8 @@ void ArticleView::performFtsFindOperation( bool backwards )
     if( !ui.ftsSearchPrevious->isEnabled() )
       ui.ftsSearchPrevious->setEnabled( res );
   }
+
+  ui.ftsSearchStatusLabel->setText( searchStatusMessage( ftsPosition + 1, allMatches.size() ) );
 
   // Store new highlighted selection
   ui.definition->page()->currentFrame()->

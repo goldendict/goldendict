@@ -15,6 +15,7 @@
 #include "favoritespanewidget.hh"
 #include "gddebug.hh"
 #include "atomic_rename.hh"
+#include "qt4x5.hh"
 
 /************************************************** FavoritesPaneWidget *********************************************/
 
@@ -627,7 +628,7 @@ void FavoritesModel::readData()
   QFile favoritesFile( m_favoritesFilename );
   if( !favoritesFile.open( QFile::ReadOnly ) )
   {
-    gdWarning( "No favorities file found" );
+    gdDebug( "No favorites file found" );
     return;
   }
 
@@ -907,7 +908,16 @@ void FavoritesModel::removeItemsForIndexes( const QModelIndexList & idxList )
   for( int i = lowestLevel; i >= 0; i-- )
   {
     QModelIndexList idxSublist = itemsToDelete[ i ];
+#if __cplusplus >= 201103L
+    // Cannot simply use std::greater< QModelIndex >, because the necessary overload of operator> is missing:
+    // stl_function.h: error: no match for ‘operator>’ (operand types are ‘const QModelIndex’ and ‘const QModelIndex’)
+    // Deprecated qGreater function object template is implemented in terms of operator<, like the lambda below.
+    std::sort( idxSublist.begin(), idxSublist.end(), []( QModelIndex const & a, QModelIndex const & b ) {
+      return b < a;
+    } );
+#else
     std::sort( idxSublist.begin(), idxSublist.end(), qGreater< QModelIndex >() );
+#endif
 
     it = idxSublist.begin();
     for( ; it != idxSublist.end(); ++it )
@@ -976,7 +986,7 @@ bool FavoritesModel::addNewHeadword( const QString & path, const QString & headw
 
   // Find or create target folder
 
-  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList folders = path.split( "/", Qt4x5::skipEmptyParts() );
   QStringList::const_iterator it = folders.begin();
   for( ; it != folders.end(); ++it )
     parentIdx = forceFolder( *it, parentIdx );
@@ -992,7 +1002,7 @@ bool FavoritesModel::removeHeadword( const QString & path, const QString & headw
 
   // Find target folder
 
-  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList folders = path.split( "/", Qt4x5::skipEmptyParts() );
   QStringList::const_iterator it = folders.begin();
   for( ; it != folders.end(); ++it )
   {
@@ -1022,7 +1032,7 @@ bool FavoritesModel::isHeadwordPresent( const QString & path, const QString & he
 
   // Find target folder
 
-  QStringList folders = path.split( "/", QString::SkipEmptyParts );
+  QStringList folders = path.split( "/", Qt4x5::skipEmptyParts() );
   QStringList::const_iterator it = folders.begin();
   for( ; it != folders.end(); ++it )
   {

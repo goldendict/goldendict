@@ -177,6 +177,8 @@ class FullTextSearchDialog : public QDialog
   std::vector< sptr< Dictionary::Class > > activeDicts;
   bool ignoreWordsOrder;
   bool ignoreDiacritics;
+  QThreadPool ftsThreadPool;
+  bool searchInProgress;
 
   std::list< sptr< Dictionary::DataRequest > > searchReqs;
 

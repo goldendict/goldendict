@@ -7,6 +7,7 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "folding.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "utf8.hh"
 #include "decompress.hh"
@@ -623,7 +624,8 @@ class SlobDictionary: public BtreeIndexing::BtreeDictionary
                                                               int distanceBetweenWords,
                                                               int maxResults,
                                                               bool ignoreWordsOrder,
-                                                              bool ignoreDiacritics );
+                                                              bool ignoreDiacritics,
+                                                              QThreadPool * ftsThreadPoolPtr );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     quint64 getArticlePos(uint32_t articleNumber );
@@ -873,7 +875,10 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
     // Find anchor
     int n = list[ 3 ].indexOf( '#' );
     if( n > 0 )
+    {
       anchor = QString( "?gdanchor=" ) + list[ 3 ].mid( n + 1 );
+      tag.remove( list[ 3 ].mid( n ) );
+    }
     else
       anchor.clear();
 
@@ -1344,9 +1349,10 @@ sptr< Dictionary::DataRequest > SlobDictionary::getSearchResults( QString const 
                                                                   int distanceBetweenWords,
                                                                   int maxResults,
                                                                   bool ignoreWordsOrder,
-                                                                  bool ignoreDiacritics )
+                                                                  bool ignoreDiacritics,
+                                                                  QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString, searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 
@@ -1674,8 +1680,8 @@ void SlobResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "SLOB: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "SLOB: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 

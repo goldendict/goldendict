@@ -12,6 +12,8 @@ namespace Xdxf {
 using std::vector;
 using std::string;
 
+quint32 getLanguageId( const QString & lang );
+
 vector< sptr< Dictionary::Class > > makeDictionaries(
                                       vector< string > const & fileNames,
                                       string const & indicesDir,

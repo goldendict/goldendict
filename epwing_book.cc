@@ -420,10 +420,10 @@ EpwingBook::~EpwingBook()
 
 void EpwingBook::setErrorString( QString const & func, EB_Error_Code code )
 {
+  QTextCodec * const localeCodec = gdCodecForLocale();
   error_string = QString( "EB \"%1\" function error: %2 (%3)" )
-                 .arg( func )
-                 .arg( QTextCodec::codecForLocale()->toUnicode( eb_error_string( code ) ) )
-                 .arg( QTextCodec::codecForLocale()->toUnicode( eb_error_message( code ) ) );
+                 .arg( func, localeCodec->toUnicode( eb_error_string( code ) ),
+                       localeCodec->toUnicode( eb_error_message( code ) ) );
 
   if( currentPosition.page != 0 )
     error_string += QString( " on page %1, offset %2" ).arg( QString::number( currentPosition.page ) )
@@ -555,7 +555,7 @@ bool EpwingBook::setSubBook( int book_nom )
     QString line = ts.readLine();
     while( !line.isEmpty() )
     {
-      QStringList list = line.remove( '\n' ).split( ' ', QString::SkipEmptyParts );
+      QStringList list = line.remove( '\n' ).split( ' ', Qt4x5::skipEmptyParts() );
       if( list.count() == 2 )
         customFontsMap[ list[ 0 ] ] = list[ 1 ];
       line = ts.readLine();
@@ -1759,8 +1759,7 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
     if( refOpenCount > refCloseCount )
       return QByteArray();
 
-    QString str;
-    str.sprintf( "<R%i>", refOpenCount );
+    QString str = QString( "<R%1>" ).arg( refOpenCount );
     refOpenCount += 1;
     return str.toUtf8();
   }
@@ -1773,8 +1772,7 @@ QByteArray EpwingBook::handleReference( EB_Hook_Code code, const unsigned int * 
   refPages.append( argv[ 1 ] );
   refOffsets.append( argv[ 2 ] );
 
-  QString str;
-  str.sprintf( "</R%i>", refCloseCount );
+  QString str = QString( "</R%1>").arg( refCloseCount );
   refCloseCount += 1;
 
   return str.toUtf8();

@@ -44,7 +44,7 @@ About::About( QWidget * parent ): QDialog( parent )
   {
     QStringList creditsList =
       QString::fromUtf8(
-        creditsFile.readAll() ).split( '\n', QString::SkipEmptyParts );
+        creditsFile.readAll() ).split( '\n', Qt4x5::skipEmptyParts() );
 
     QString html = "<html><body style='color: black; background: #f4f4f4;'>";
 

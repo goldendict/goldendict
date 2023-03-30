@@ -14,6 +14,7 @@
 #include "htmlescape.hh"
 #include "qt4x5.hh"
 #include <QDebug>
+#include "xdxf.hh"
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
 #include <QRegularExpression>
@@ -233,8 +234,20 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
 
         el.setTagName( "div" );
         el.setAttribute( "class", "xdxf_headwords" );
-        if( dictPtr->isFromLanguageRTL() != dictPtr->isToLanguageRTL() )
-          el.setAttribute( "dir", dictPtr->isFromLanguageRTL() ? "rtl" : "ltr" );
+        bool isLanguageRtl = dictPtr->isFromLanguageRTL();
+        if( el.hasAttribute( "xml:lang" ) )
+        {
+          // Change xml-attribute "xml:lang" to html-attribute "lang"
+          QString lang = el.attribute( "xml:lang" );
+          el.removeAttribute( "xml:lang" );
+          el.setAttribute( "lang", lang );
+
+          quint32 langID = Xdxf::getLanguageId( lang );
+          if( langID )
+            isLanguageRtl = LangCoder::isLanguageRTL( langID );
+        }
+        if( isLanguageRtl != dictPtr->isToLanguageRTL() )
+          el.setAttribute( "dir", isLanguageRtl ? "rtl" : "ltr" );
     }
   }
   
@@ -329,6 +342,20 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
       QDomElement el = nodes.at( 0 ).toElement();
       el.setTagName( "span" );
       el.setAttribute( "class", "xdxf_def" );
+      bool isLanguageRtl = dictPtr->isToLanguageRTL();
+      if( el.hasAttribute( "xml:lang" ) )
+      {
+        // Change xml-attribute "xml:lang" to html-attribute "lang"
+        QString lang = el.attribute( "xml:lang" );
+        el.removeAttribute( "xml:lang" );
+        el.setAttribute( "lang", lang );
+
+        quint32 langID = Xdxf::getLanguageId( lang );
+        if( langID )
+          isLanguageRtl = LangCoder::isLanguageRTL( langID );
+      }
+      if( isLanguageRtl != dictPtr->isToLanguageRTL() )
+        el.setAttribute( "dir", isLanguageRtl ? "rtl" : "ltr" );
     }
   }
   

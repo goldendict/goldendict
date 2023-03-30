@@ -13,6 +13,8 @@
 #include <stdio.h>
 #include <wctype.h>
 
+#include <algorithm>
+
 namespace Dsl {
 namespace Details {
 
@@ -162,12 +164,36 @@ wstring ArticleDom::Node::renderAsText( bool stripTrsTag ) const
   return result;
 }
 
-// Returns true if src == 'm' and dest is 'mX', where X is a digit
-static inline bool checkM( wstring const & dest, wstring const & src )
+namespace {
+
+/// @return true if @p tagName equals "mN" where N is a digit
+bool is_mN( wstring const & tagName )
 {
-  return ( src == GD_NATIVE_TO_WS( L"m" ) && dest.size() == 2 &&
-    dest[ 0 ] == L'm' && iswdigit( dest[ 1 ] ) );
+  return tagName.size() == 2 && tagName[ 0 ] == L'm' && iswdigit( tagName[ 1 ] );
 }
+
+bool isAnyM( wstring const & tagName )
+{
+  return tagName == GD_NATIVE_TO_WS( L"m" ) || is_mN( tagName );
+}
+
+bool checkM( wstring const & dest, wstring const & src )
+{
+  return src == GD_NATIVE_TO_WS( L"m" ) && is_mN( dest );
+}
+
+/// Closing the [mN] tags is optional. Quote from https://documentation.help/ABBYY-Lingvo8/paragraph_form.htm:
+/// Any paragraph from this tag until the end of card or until system meets an «[/m]» (margin shift toggle off) tag
+struct MustTagBeClosed
+{
+  bool operator()( ArticleDom::Node const * tag ) const
+  {
+    Q_ASSERT( tag->isTag );
+    return !isAnyM( tag->tagName );
+  }
+};
+
+} // unnamed namespace
 
 ArticleDom::ArticleDom( wstring const & str, string const & dictName,
                         wstring const & headword_):
@@ -374,8 +400,7 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
         if ( !isClosing )
         {
-          if ( name == GD_NATIVE_TO_WS( L"m" ) ||
-               ( name.size() == 2 && name[ 0 ] == L'm' && iswdigit( name[ 1 ] ) ) )
+          if( isAnyM( name ) )
           {
             // Opening an 'mX' or 'm' tag closes any previous 'm' tag
             closeTag( GD_NATIVE_TO_WS( L"m" ), stack, false );
@@ -630,7 +655,24 @@ ArticleDom::ArticleDom( wstring const & str, string const & dictName,
 
   if ( stack.size() )
   {
-    GD_FDPRINTF( stderr, "Warning: %u tags were unclosed.\n", (unsigned) stack.size() );
+    list< Node * >::iterator it = std::find_if( stack.begin(), stack.end(), MustTagBeClosed() );
+    if( it == stack.end() )
+      return; // no unclosed tags that must be closed => nothing to warn about
+    QByteArray const firstTagName = gd::toQString( ( *it )->tagName ).toUtf8();
+    ++it;
+    unsigned const unclosedTagCount = 1 + std::count_if( it, stack.end(), MustTagBeClosed() );
+
+    if( dictName.empty() )
+    {
+      gdWarning( "Warning: %u tag(s) were unclosed, first tag name \"%s\".\n",
+                 unclosedTagCount, firstTagName.constData() );
+    }
+    else
+    {
+      gdWarning( "Warning: %u tag(s) were unclosed in \"%s\", article \"%s\", first tag name \"%s\".\n",
+                 unclosedTagCount, dictName.c_str(), gd::toQString( headword ).toUtf8().constData(),
+                 firstTagName.constData() );
+    }
   }
 }
 
@@ -640,7 +682,7 @@ void ArticleDom::openTag( wstring const & name,
 {
   list< Node > nodesToReopen;
 
-  if( name == GD_NATIVE_TO_WS( L"m" ) || checkM( name, GD_NATIVE_TO_WS( L"m" ) ) )
+  if( isAnyM( name ) )
   {
     // All tags above [m] tag will be closed and reopened after
     // to avoid break this tag by closing some other tag.
@@ -1244,6 +1286,13 @@ void processUnsortedParts( wstring & str, bool strip )
 void expandOptionalParts( wstring & str, list< wstring > * result,
                           size_t x, bool inside_recurse )
 {
+  if( str.size() > 500 )
+  {
+    // Don't expand too long headwords - it is highly likely incorrect dictionary
+    result->push_back( str );
+    return;
+  }
+
   list< wstring > expanded;
   list< wstring > * headwords;
   headwords = inside_recurse ? result : &expanded;

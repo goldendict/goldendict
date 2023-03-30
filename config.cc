@@ -97,7 +97,7 @@ ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Soc
 {
 }
 
-HotKey::HotKey(): modifiers( 0 ), key1( 0 ), key2( 0 )
+HotKey::HotKey(): modifiers(), key1( 0 ), key2( 0 )
 {
 }
 
@@ -188,12 +188,12 @@ InputPhrase Preferences::sanitizeInputPhrase( QString const & inputPhrase ) cons
 
   if( limitInputPhraseLength && inputPhrase.size() > inputPhraseLengthLimit )
   {
-    gdWarning( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
-               inputPhrase.size(), inputPhraseLengthLimit );
+    gdDebug( "Ignoring an input phrase %d symbols long. The configured maximum input phrase length is %d symbols.",
+             inputPhrase.size(), inputPhraseLengthLimit );
     return result;
   }
 
-  const QString withPunct = inputPhrase.simplified();
+  const QString withPunct = inputPhrase.simplified().remove( QChar( 0xAD ) ); // Simplify whitespaces and remove soft hyphens
   result.phrase = gd::toQString( Folding::trimWhitespaceOrPunct( gd::toWString( withPunct ) ) );
   if ( !result.isValid() )
     return result; // The suffix of an invalid input phrase must be empty.
@@ -1133,6 +1133,10 @@ Class load() THROW_SPEC( exError )
 
   if ( !dictionariesDialogGeometry.isNull() )
     c.dictionariesDialogGeometry = QByteArray::fromBase64( dictionariesDialogGeometry.toElement().text().toLatin1() );
+
+  QDomNode const printPreviewDialogGeometry = root.namedItem( "printPreviewDialogGeometry" );
+  if( !printPreviewDialogGeometry.isNull() )
+    c.printPreviewDialogGeometry = QByteArray::fromBase64( printPreviewDialogGeometry.toElement().text().toLatin1() );
 
   QDomNode timeForNewReleaseCheck = root.namedItem( "timeForNewReleaseCheck" );
 
@@ -2130,6 +2134,10 @@ void save( Class const & c ) THROW_SPEC( exError )
 
     opt = dd.createElement( "dictionariesDialogGeometry" );
     opt.appendChild( dd.createTextNode( QString::fromLatin1( c.dictionariesDialogGeometry.toBase64() ) ) );
+    root.appendChild( opt );
+
+    opt = dd.createElement( "printPreviewDialogGeometry" );
+    opt.appendChild( dd.createTextNode( QString::fromLatin1( c.printPreviewDialogGeometry.toBase64() ) ) );
     root.appendChild( opt );
 
     opt = dd.createElement( "timeForNewReleaseCheck" );

@@ -7,6 +7,7 @@
 #include "btreeidx.hh"
 #include "fsencoding.hh"
 #include "folding.hh"
+#include "categorized_logging.hh"
 #include "gddebug.hh"
 #include "utf8.hh"
 #include "decompress.hh"
@@ -62,6 +63,7 @@ using BtreeIndexing::IndexInfo;
 
 DEF_EX_STR( exNotZimFile, "Not an Zim file", Dictionary::Ex )
 DEF_EX_STR( exCantReadFile, "Can't read file", Dictionary::Ex )
+DEF_EX_STR( exInvalidZimHeader, "Invalid Zim header", Dictionary::Ex )
 DEF_EX( exUserAbort, "User abort", Dictionary::Ex )
 
 
@@ -285,6 +287,9 @@ bool ZimFile::open()
   memset( &zimHeader, 0, sizeof( zimHeader ) );
 
   if( read( reinterpret_cast< char * >( &zimHeader ), sizeof( zimHeader ) ) != sizeof( zimHeader ) )
+    return false;
+
+  if( zimHeader.magicNumber != 0x44D495A || zimHeader.mimeListPos != sizeof( zimHeader ) )
     return false;
 
 // Clusters in zim file may be placed in random order.
@@ -708,7 +713,8 @@ class ZimDictionary: public BtreeIndexing::BtreeDictionary
                                                               int distanceBetweenWords,
                                                               int maxResults,
                                                               bool ignoreWordsOrder,
-                                                              bool ignoreDiacritics );
+                                                              bool ignoreDiacritics,
+                                                              QThreadPool * ftsThreadPoolPtr );
     virtual void getArticleText( uint32_t articleAddress, QString & headword, QString & text );
 
     quint32 getArticleText( uint32_t articleAddress, QString & headword, QString & text,
@@ -1288,9 +1294,10 @@ sptr< Dictionary::DataRequest > ZimDictionary::getSearchResults( QString const &
                                                                  int distanceBetweenWords,
                                                                  int maxResults,
                                                                  bool ignoreWordsOrder,
-                                                                 bool ignoreDiacritics )
+                                                                 bool ignoreDiacritics,
+                                                                 QThreadPool * ftsThreadPoolPtr )
 {
-  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics );
+  return new FtsHelpers::FTSResultsRequest( *this, searchString,searchMode, matchCase, distanceBetweenWords, maxResults, ignoreWordsOrder, ignoreDiacritics, ftsThreadPoolPtr );
 }
 
 /// ZimDictionary::getArticle()
@@ -1632,8 +1639,8 @@ void ZimResourceRequest::run()
   }
   catch( std::exception &ex )
   {
-    gdWarning( "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
-               resourceName.c_str(), dict.getName().c_str(), ex.what() );
+    gdCWarning( dictionaryResourceLc, "ZIM: Failed loading resource \"%s\" from \"%s\", reason: %s\n",
+                resourceName.c_str(), dict.getName().c_str(), ex.what() );
     // Resource not loaded -- we don't set the hasAnyData flag then
   }
 
@@ -1691,10 +1698,14 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
 
           df.open();
           ZIM_header const & zh = df.header();
-          bool new_namespaces = ( zh.majorVersion >= 6 && zh.minorVersion >= 1 );
 
           if( zh.magicNumber != 0x44D495A )
             throw exNotZimFile( i->c_str() );
+
+          if( zh.mimeListPos != sizeof( ZIM_header ) )
+            throw exInvalidZimHeader( i->c_str() );
+
+          bool new_namespaces = ( zh.majorVersion >= 6 && zh.minorVersion >= 1 );
 
           {
             int n = firstName.lastIndexOf( '/' );

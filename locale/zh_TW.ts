@@ -262,7 +262,7 @@
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>音訊檔(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有檔案 (*.*)</translation>
+        <translation type="obsolete">音訊檔(*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;所有檔案 (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
@@ -311,6 +311,18 @@
     <message>
         <source>WARNING: Audio Player: %1</source>
         <translation>警告： 音訊播放程式： %1</translation>
+    </message>
+    <message>
+        <source>Phrase not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of %2 matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
