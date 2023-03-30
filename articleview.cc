@@ -569,7 +569,7 @@ void ArticleView::loadFinished( bool )
   {
     // There's some sort of glitch -- sometimes you need to move a mouse
 
-    QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), 0, 0 );
+    QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), Qt::MouseButtons(), Qt::KeyboardModifiers() );
 
     qApp->sendEvent( ui.definition, &ev );
   }
@@ -2438,7 +2438,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       }
     }
 
-    QWebPage::FindFlags f( 0 );
+    QWebPage::FindFlags f;
 
     if ( ui.searchCaseSensitive->isChecked() )
       f |= QWebPage::FindCaseSensitively;
@@ -2455,7 +2455,7 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
       return;
   }
 
-  QWebPage::FindFlags f( 0 );
+  QWebPage::FindFlags f;
 
   if ( ui.searchCaseSensitive->isChecked() )
     f |= QWebPage::FindCaseSensitively;
@@ -2508,7 +2508,7 @@ bool ArticleView::closeSearch()
     ui.ftsSearchFrame->hide();
     ui.definition->setFocus();
 
-    QWebPage::FindFlags flags ( 0 );
+    QWebPage::FindFlags flags;
 
   #if QT_VERSION >= 0x040600
     flags |= QWebPage::HighlightAllOccurrences;
@@ -2676,7 +2676,7 @@ void ArticleView::highlightFTSResults()
 
   ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
 
-  QWebPage::FindFlags flags ( 0 );
+  QWebPage::FindFlags flags;
 
   if( ftsSearchMatchCase )
     flags |= QWebPage::FindCaseSensitively;
@@ -2737,7 +2737,7 @@ void ArticleView::performFtsFindOperation( bool backwards )
     return;
   }
 
-  QWebPage::FindFlags flags( 0 );
+  QWebPage::FindFlags flags;
 
   if( ftsSearchMatchCase )
     flags |= QWebPage::FindCaseSensitively;

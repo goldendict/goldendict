@@ -97,7 +97,7 @@ ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Soc
 {
 }
 
-HotKey::HotKey(): modifiers( 0 ), key1( 0 ), key2( 0 )
+HotKey::HotKey(): modifiers(), key1( 0 ), key2( 0 )
 {
 }
 
