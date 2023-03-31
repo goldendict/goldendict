@@ -15,6 +15,16 @@
 
 #include <QBuffer>
 
+#if __cplusplus >= 201103L
+#include <cstdint>
+typedef std::uint16_t Uint16;
+typedef std::uint32_t Uint32;
+#else
+// Fall back to deprecated libtiff type aliases in C++98.
+typedef uint16 Uint16;
+typedef uint32 Uint32;
+#endif
+
 namespace GdTiff
 {
 
@@ -96,7 +106,7 @@ bool tiffToQImage( const char * data, int size, QImage & image )
   if( !tiff )
     return false;
 
-  uint32 width, height;
+  Uint32 width, height;
   if( !TIFFGetField( tiff, TIFFTAG_IMAGEWIDTH, &width )
       || !TIFFGetField( tiff, TIFFTAG_IMAGELENGTH, &height ) )
   {
@@ -104,11 +114,11 @@ bool tiffToQImage( const char * data, int size, QImage & image )
     return false;
   }
 
-  uint16 bitPerSample;
+  Uint16 bitPerSample;
   if( !TIFFGetField( tiff, TIFFTAG_BITSPERSAMPLE, &bitPerSample ) )
     bitPerSample = 1;
 
-  uint16 samplesPerPixel; // they may be e.g. grayscale with 2 samples per pixel
+  Uint16 samplesPerPixel; // they may be e.g. grayscale with 2 samples per pixel
   if( !TIFFGetField( tiff, TIFFTAG_SAMPLESPERPIXEL, &samplesPerPixel ) )
     samplesPerPixel = 1;
 
@@ -121,7 +131,7 @@ bool tiffToQImage( const char * data, int size, QImage & image )
     colortable[1] = 0xff000000;
     tiffImage.setColorTable( colortable );
 
-    for ( uint32 y = 0; y < height; ++y )
+    for ( Uint32 y = 0; y < height; ++y )
     {
       if( TIFFReadScanline( tiff, tiffImage.scanLine( y ), y, 0 ) < 0 )
       {
