@@ -1034,9 +1034,8 @@ string SlobDictionary::convert( const string & in, RefEntry const & entry )
               break;
           }
 
-          QString command = texCgiPath + " -e " +  imgName
-                            + " \"" + tex + "\"";
-          QProcess::execute( command );
+          QStringList const arguments = QStringList() << "-e" << imgName << tex;
+          QProcess::execute( texCgiPath, arguments );
         }
 
         QString tag = QString( "<img class=\"imgtex\" src=\"file://" )
