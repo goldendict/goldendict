@@ -143,7 +143,20 @@ public:
   { return !word.isEmpty(); }
 
   inline QString wordToTranslate()
-  { return word; }
+  { 
+#if defined( Q_OS_LINUX )
+    // handle url scheme like "goldendict://" or "dict://" on linux
+    auto schemePos = word.indexOf( "://" );
+    if ( schemePos != -1 ) {
+      word.remove( 0, schemePos + 3 );
+      // In microsoft Words, the / will be automatically appended
+      if ( word.endsWith( "/" ) ) {
+        word.chop( 1 );
+      }
+    }
+#endif
+    return word;
+  }
 };
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
