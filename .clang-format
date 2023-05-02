@@ -6,8 +6,8 @@ AlignAfterOpenBracket: Align
 AlignArrayOfStructures: None
 AlignConsecutiveAssignments: None
 AlignConsecutiveBitFields: Consecutive
-AlignConsecutiveDeclarations: None
 AlignConsecutiveMacros: Consecutive
+AlignConsecutiveDeclarations: None
 AlignEscapedNewlines: Left
 AlignOperands: DontAlign
 AlignTrailingComments: true
@@ -29,7 +29,7 @@ BinPackParameters: false
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: true
-  AfterControlStatement: Never
+  AfterControlStatement: Always
   AfterEnum: false
   AfterFunction: true
   AfterNamespace: false
