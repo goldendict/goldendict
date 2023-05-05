@@ -147,7 +147,7 @@ public:
   { return word; }
 
 private:
-  void setWord( QString const & word_ );
+  void handleUriSchemes();
 };
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
@@ -200,14 +200,17 @@ logFile( false )
         continue;
       }
       else
-        setWord( arguments[ i ] );
+        word = arguments[ i ];
     }
+
+    handleUriSchemes();
   }
 }
 
-void GDCommandLine::setWord( QString const & word_ )
+void GDCommandLine::handleUriSchemes()
 {
-  word = word_;
+  if( word.isEmpty() )
+    return;
 
   static QLatin1String const uriSchemes[] = { QLatin1String( "goldendict://" ),
                                               QLatin1String( "dict://" ) };
@@ -235,6 +238,7 @@ void GDCommandLine::setWord( QString const & word_ )
       word.chop( 1 );
 
     word = QUrl::fromPercentEncoding( word.toUtf8() );
+    break;
   }
 }
 
