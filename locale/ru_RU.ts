@@ -3869,37 +3869,37 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
     <message>
         <location filename="../preferences.ui" line="1486"/>
         <source>ScanPopup unpinned window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Флаги незакреплённого всплывающего окна</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1492"/>
         <source>Experiment with non-default flags if the unpinned scan popup window misbehaves</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспериментируйте с флагами, отличными от флагов по умолчанию, при некорректной работе незакреплённого всплывающего окна</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1496"/>
         <source>&lt;default&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;по умолчанию&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1501"/>
         <source>Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Всплывающее окно</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1506"/>
         <source>Tool</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструмент</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1517"/>
         <source>This hint can be combined with non-default window flags</source>
-        <translation type="unfinished"></translation>
+        <translation>Эту подсказку можно использовать вместе с флагами окна, отличными от флагов по умолчанию</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1520"/>
         <source>Bypass window manager hint</source>
-        <translation type="unfinished"></translation>
+        <translation>Обходить подсказку диспетчера окон</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1560"/>
@@ -4156,7 +4156,7 @@ for all program&apos;s network requests.</source>
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
         <translation>Включение этой опции позволяет GoldenDict блокировать большую часть
-рекламы путём запрещения определённых данных (картинок, фреймов итп),
+рекламы путём запрещения определённых данных (картинок, фреймов и т.п.),
 не находящихся на исходном сайте. Если некоторые сайты перестанут
 из-за этого функционировать, попробуйте запретить эту опцию.</translation>
     </message>
@@ -4925,8 +4925,8 @@ Not implemented yet in GoldenDict.</source>
 Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>Основана на системе Nihon-shiki, но модицирована в соответствии с
-современным Японским. Стандартизована в ISO 3602.
+        <translation>Основана на системе Nihon-shiki, но модифицирована в соответствии с
+современным японским. Стандартизована в ISO 3602.
 
 В GoldenDict пока не реализована.</translation>
     </message>
@@ -5045,7 +5045,7 @@ Not implemented yet in GoldenDict.</source>
     <message>
         <location filename="../texttospeechsource.cc" line="59"/>
         <source>Cannot find available TTS voice.&lt;br&gt;Please make sure that at least one TTS engine installed on your computer already.</source>
-        <translation>Нет доступных голосов.&lt;br&gt;Убедитесь, что на комьпютере установлен хотя бы один голосовой движок.</translation>
+        <translation>Нет доступных голосов.&lt;br&gt;Убедитесь, что на компьютере установлен хотя бы один голосовой движок.</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="79"/>
