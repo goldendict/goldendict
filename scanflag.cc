@@ -60,7 +60,7 @@ void ScanFlag::showScanFlag()
   QPoint currentPos = QCursor::pos();
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 11, 0 )
-  QRect const desktop = QGuiApplication::primaryScreen()->geometry();
+  QRect const desktop = QGuiApplication::screenAt( currentPos )->geometry();
 #else
   QRect const desktop = QApplication::desktop()->screenGeometry();
 #endif
