@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QByteArray>
 #include <QString>
+#include <QUrl>
 
 #include "gddebug.hh"
 
@@ -144,6 +145,9 @@ public:
 
   inline QString wordToTranslate()
   { return word; }
+
+private:
+  void handleUriSchemes();
 };
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
@@ -198,6 +202,43 @@ logFile( false )
       else
         word = arguments[ i ];
     }
+
+    handleUriSchemes();
+  }
+}
+
+void GDCommandLine::handleUriSchemes()
+{
+  if( word.isEmpty() )
+    return;
+
+  static QLatin1String const uriSchemes[] = { QLatin1String( "goldendict://" ),
+                                              QLatin1String( "dict://" ) };
+  static size_t const uriSchemeCount = sizeof( uriSchemes ) / sizeof( uriSchemes[ 0 ] );
+  for( size_t i = 0; i < uriSchemeCount; ++i )
+  {
+    QLatin1String const scheme = uriSchemes[ i ];
+    if( !word.startsWith( scheme ) )
+      continue;
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    int schemeSize = scheme.size();
+#else
+    int schemeSize = strlen( scheme.latin1() );
+#endif
+    if( word.size() > schemeSize && word.at( schemeSize ) == QLatin1Char( '/' ) )
+      ++schemeSize; // support dict:///word as well
+
+    word.remove( 0, schemeSize );
+
+    // An URI can end with a trailing slash, which has to be removed here. This should be more common
+    // than a deliberate lookup of the slash character or a string that ends with a slash.
+    // If word equals '/' (size 1), then word_ ends with 4 slashes, in which case translate the slash.
+    if( word.size() > 1 && word.at( word.size() - 1 ) == QLatin1Char( '/' ) )
+      word.chop( 1 );
+
+    word = QUrl::fromPercentEncoding( word.toUtf8() );
+    break;
   }
 }
 
