@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QByteArray>
 #include <QString>
+#include <QTextStream>
 #include <QUrl>
 
 #include "gddebug.hh"
@@ -113,7 +114,7 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 class GDCommandLine
 {
-  bool crashReport, toggleScanPopup, logFile;
+  bool crashReport, showHelp, toggleScanPopup, logFile;
   QString word, groupName, popupGroupName, errFileName;
   QVector< QString > arguments;
 public:
@@ -124,6 +125,9 @@ public:
 
   inline QString errorFileName()
   { return errFileName; }
+
+  bool needShowHelp() const
+  { return showHelp; }
 
   inline bool needToggleScanPopup()
   { return toggleScanPopup; }
@@ -155,6 +159,7 @@ private:
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
 crashReport( false ),
+showHelp( false ),
 toggleScanPopup( false ),
 logFile( false )
 {
@@ -183,6 +188,12 @@ logFile( false )
           errFileName = arguments[ ++i ];
           crashReport = true;
         }
+        continue;
+      }
+      else
+      if( arguments[ i ].compare( "-h" ) == 0 || arguments[ i ].compare( "--help" ) == 0 )
+      {
+        showHelp = true;
         continue;
       }
       else
@@ -352,7 +363,9 @@ int main( int argc, char ** argv )
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
 
-  if ( app.isRunning() )
+  bool const showHelpAndExit = gdcl.needShowHelp();
+  // Ignore other command-line arguments if help is requested.
+  if( !showHelpAndExit && app.isRunning() )
   {
     bool wasMessage = false;
 
@@ -418,6 +431,46 @@ int main( int argc, char ** argv )
   translator.load( Config::getLocDir() + "/" + localeName );
 
   app.installTranslator( &translator );
+
+  // Show help after loading a system locale translator to translate the help message.
+  // Show help before loading Config to avoid conflicts with a possible another running
+  // GoldenDict instance. An unfortunate consequence of not loading Config is that the
+  // interface language configured in GoldenDict Preferences does not affect the help message.
+  if( showHelpAndExit )
+  {
+    QString const helpMessage = QCoreApplication::translate( "CommandLineHelp",
+        "Usage:\n"
+        "  goldendict [OPTION]... [WORD|URI]\n\n"
+        "GoldenDict dictionary lookup program\n\n"
+        "  WORD\t\t\t\tA word or quoted phrase to translate\n"
+        "  URI\t\t\t\t\"[golden]dict://[/]word or phrase to translate[/]\"\n\n"
+        "Options:\n"
+        "  -h, --help\t\t\tShow command-line help and exit\n"
+        "  --log-to-file\t\t\tTurn on debug mode\n"
+        "  --toggle-scan-popup\t\tToggle scanning mode on/off\n"
+        "  --group-name=GROUP\t\tSet current group of dictionaries in the main window to GROUP\n"
+        "  --popup-group-name=GROUP\tSet current group of dictionaries in the popup window to GROUP\n\n"
+        "If another GoldenDict instance is running, the second instance exits immediately, the options"
+        " --toggle-scan-popup, --group-name, --popup-group-name affect the running instance,"
+        " WORD or URI is translated in the running instance's popup window.\n"
+        "Otherwise, all options affect the initial state of the new instance,"
+        " WORD or URI is translated in the new instance's main window.\n\n"
+        "Assigning a global keyboard shortcut to the \"goldendict --toggle-scan-popup\""
+        " command in system preferences emulates a scanning-mode-toggling global hotkey."
+                                                            );
+
+#ifdef Q_OS_WIN32
+    // GoldenDict has no console under Windows. Show help in a message box
+    // on this platform, as QCommandLineParser documentation recommends.
+    QMessageBox::information( 0, QCoreApplication::translate( "CommandLineHelp", "GoldenDict command-line help" ),
+                              helpMessage );
+#else
+    QTextStream out( stdout, QIODevice::WriteOnly );
+    out << helpMessage << '\n';
+#endif
+
+    return 0;
+  }
 
   Config::Class cfg;
   for( ; ; )
