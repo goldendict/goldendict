@@ -114,17 +114,11 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 class GDCommandLine
 {
-  bool crashReport, showHelp, toggleScanPopup, logFile;
-  QString word, groupName, popupGroupName, errFileName;
+  bool showHelp, toggleScanPopup, logFile;
+  QString word, groupName, popupGroupName;
   QVector< QString > arguments;
 public:
   GDCommandLine( int argc, char **argv );
-
-  inline bool needCrashReport()
-  { return crashReport; }
-
-  inline QString errorFileName()
-  { return errFileName; }
 
   bool needShowHelp() const
   { return showHelp; }
@@ -158,7 +152,6 @@ private:
 };
 
 GDCommandLine::GDCommandLine( int argc, char **argv ):
-crashReport( false ),
 showHelp( false ),
 toggleScanPopup( false ),
 logFile( false )
@@ -181,16 +174,6 @@ logFile( false )
     // Parse command line
     for( int i = 0; i < arguments.size(); i++ )
     {
-      if( arguments[ i ].compare( "--show-error-file" ) == 0 )
-      {
-        if( i < arguments.size() - 1 )
-        {
-          errFileName = arguments[ ++i ];
-          crashReport = true;
-        }
-        continue;
-      }
-      else
       if( arguments[ i ].compare( "-h" ) == 0 || arguments[ i ].compare( "--help" ) == 0 )
       {
         showHelp = true;
@@ -314,15 +297,27 @@ int main( int argc, char ** argv )
   setlocale( LC_ALL, "" ); // use correct char set mapping
 #endif
 
-  GDCommandLine gdcl( argc, argv );
-
-  if ( gdcl.needCrashReport() )
+  // --show-error-file is an undocumented, hidden option passed on exit by a crashing GoldenDict instance in its
+  // terminate handler. Therefore, we can assume that, if present, --show-error-file is the first command-line
+  // argument, that the second argument is the error file name and that there are no more arguments.
+  if( argc == 3 && strcmp( argv[ 1 ], "--show-error-file" ) == 0 )
   {
     // The program has crashed -- show a message about it
 
+#ifdef Q_OS_WIN32
+    int numArgs;
+    LPWSTR *pstr = CommandLineToArgvW( GetCommandLineW(), &numArgs );
+    Q_ASSERT( pstr );
+    Q_ASSERT( numArgs == 3 );
+    QString const errorFileName = QString::fromWCharArray( pstr[ 2 ] );
+#else
+    QString const errorFileName = QString::fromLocal8Bit( argv[ 2 ] );
+#endif
+
+    argc = 1; // the two arguments are parsed just above
     QApplication app( argc, argv );
 
-    QFile errFile( gdcl.errorFileName() );
+    QFile errFile( errorFileName );
 
     QString errorText;
 
@@ -362,6 +357,8 @@ int main( int argc, char ** argv )
 
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
+
+  GDCommandLine gdcl( argc, argv );
 
   bool const showHelpAndExit = gdcl.needShowHelp();
   // Ignore other command-line arguments if help is requested.
