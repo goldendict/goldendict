@@ -283,10 +283,6 @@
         <translation>Захавць гук</translation>
     </message>
     <message>
-        <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-      <translation type="unfinished">Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="2063"/>
         <source>Save image</source>
         <translation>Захаваць выяву</translation>
@@ -363,17 +359,9 @@
         <translation>Шукаць &quot;%1&quot; у %2 у &amp;новай укладцы</translation>
     </message>
     <message>
-        <source>WARNING: FFmpeg Audio Player: %1</source>
-      <translation type="unfinished">WARNING: FFmpeg Audio Player: %1</translation>
-    </message>
-    <message>
         <location filename="../articleview.cc" line="2169"/>
         <source>WARNING: %1</source>
         <translation>УВАГА: %1</translation>
-    </message>
-    <message>
-        <source>Failed to run a player to play sound file: %1</source>
-      <translation type="unfinished">Failed to run a player to play sound file: %1</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2135"/>
@@ -944,13 +932,6 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
-    <name>FTS::FtsIndexing</name>
-    <message>
-        <source>None</source>
-      <translation type="unfinished">None</translation>
-    </message>
-</context>
-<context>
     <name>FTS::FullTextSearchDialog</name>
     <message>
         <location filename="../fulltextsearch.cc" line="149"/>
@@ -1023,13 +1004,6 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../fulltextsearch.cc" line="411"/>
         <source>No dictionaries for full-text search</source>
         <translation>Няма слоўнікаў для паўнатэкставага пошуку</translation>
-    </message>
-</context>
-<context>
-    <name>FTS::Indexing</name>
-    <message>
-        <source>None</source>
-      <translation type="unfinished">None</translation>
     </message>
 </context>
 <context>
@@ -1197,17 +1171,6 @@ between classic and school orthography in cyrillic)</source>
         <location filename="../groupcombobox.cc" line="14"/>
         <source>Choose a Group (Alt+G)</source>
         <translation>Абраць групу (Alt+G)</translation>
-    </message>
-</context>
-<context>
-    <name>GroupSelectorWidget</name>
-    <message>
-        <source>Form</source>
-      <translation type="unfinished">Form</translation>
-    </message>
-    <message>
-        <source>Look in</source>
-      <translation type="unfinished">Look in</translation>
     </message>
 </context>
 <context>
@@ -3276,10 +3239,6 @@ To find &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]&apos; symbols use &
         <translation>Парадак слоўнікаў:</translation>
     </message>
     <message>
-        <source>...</source>
-      <translation type="unfinished">...</translation>
-    </message>
-    <message>
         <location filename="../orderandprops.ui" line="53"/>
         <source>Inactive (disabled) dictionaries:</source>
         <translation>Неактыўныя (адключаныя) слоўнікі:</translation>
@@ -3782,14 +3741,6 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="913"/>
         <source>Playback</source>
         <translation>Прайграванне</translation>
-    </message>
-    <message>
-        <source>Play audio files via FFmpeg(libav) and libao</source>
-      <translation type="unfinished">Play audio files via FFmpeg(libav) and libao</translation>
-    </message>
-    <message>
-        <source>Use internal player</source>
-      <translation type="unfinished">Use internal player</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="919"/>
