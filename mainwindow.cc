@@ -4344,13 +4344,16 @@ void MainWindow::applyZoomFactor()
 
 void MainWindow::adjustCurrentZoomFactor()
 {
-  if ( cfg.preferences.zoomFactor >= 5 )
-    cfg.preferences.zoomFactor = 5;
-  else if ( cfg.preferences.zoomFactor <= 0.1 )
-    cfg.preferences.zoomFactor = 0.1;
+  qreal const minZoomFactor = 0.1;
+  qreal const maxZoomFactor = 5.0;
 
-  zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
-  zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.1 );
+  if( cfg.preferences.zoomFactor < minZoomFactor )
+    cfg.preferences.zoomFactor = minZoomFactor;
+  else if( cfg.preferences.zoomFactor > maxZoomFactor )
+    cfg.preferences.zoomFactor = maxZoomFactor;
+
+  zoomIn->setEnabled( cfg.preferences.zoomFactor < maxZoomFactor );
+  zoomOut->setEnabled( cfg.preferences.zoomFactor > minZoomFactor );
   zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
 }
 
