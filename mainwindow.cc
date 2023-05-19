@@ -4344,7 +4344,11 @@ void MainWindow::applyZoomFactor()
 
 void MainWindow::adjustCurrentZoomFactor()
 {
-  qreal const minZoomFactor = 0.1;
+  // Valid values of QWebEngineView's zoom factor are within the range from 0.25 to 5.0. The default factor is 1.0.
+  // zoomin() and zoomout() adjust zoomFactor by the step 0.1. The difference between the maximum and the default
+  // zoom factors, as well as between the default and the minimum zoom factors, should be divisible by this step to
+  // avoid different intermediate factors depending on the starting point (default, minimum or maximum).
+  qreal const minZoomFactor = 0.3;
   qreal const maxZoomFactor = 5.0;
 
   if( cfg.preferences.zoomFactor < minZoomFactor )
