@@ -4356,9 +4356,9 @@ void MainWindow::adjustCurrentZoomFactor()
   else if( cfg.preferences.zoomFactor > maxZoomFactor )
     cfg.preferences.zoomFactor = maxZoomFactor;
 
-  zoomIn->setEnabled( cfg.preferences.zoomFactor < maxZoomFactor );
-  zoomOut->setEnabled( cfg.preferences.zoomFactor > minZoomFactor );
-  zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
+  zoomIn->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, maxZoomFactor )  );
+  zoomOut->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, minZoomFactor ) );
+  zoomBase->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, 1.0 ) );
 }
 
 void MainWindow::scaleArticlesByCurrentZoomFactor()
