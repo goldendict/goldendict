@@ -846,8 +846,7 @@ void MddResourceRequest::run()
       for ( vector< sptr< IndexedMdd > >::const_iterator i = dict.mddResources.begin();
             i != dict.mddResources.end(); ++i  )
       {
-        sptr< IndexedMdd > mddResource = *i;
-        if ( mddResource->loadFile( resourceName, data ) )
+        if ( ( *i )->loadFile( resourceName, data ) )
           break;
       }
     }
@@ -1440,8 +1439,7 @@ QString MdxDictionary::getCachedFileName( QString filename )
           for ( vector< sptr< IndexedMdd > >::const_iterator i = mddResources.begin();
                 i != mddResources.end(); ++i )
           {
-            sptr< IndexedMdd > mddResource = *i;
-            if ( mddResource->loadFile( resourceName, data ) )
+            if ( ( *i )->loadFile( resourceName, data ) )
               break;
           }
         }
