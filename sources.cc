@@ -154,6 +154,8 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
     ui.hunspellPath->setEnabled( false );
     ui.changeHunspellPath->setEnabled( false );
   }
+  else
+    ui.portableModeNote->hide();
 }
 
 void Sources::fitPathsColumns()
