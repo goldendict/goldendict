@@ -38,6 +38,16 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
+        <widget class="QLabel" name="portableModeNote">
+         <property name="text">
+          <string>&lt;b&gt;Dictionary paths cannot be added or removed, because GoldenDict is in portable mode. See the &lt;i&gt;Portable mode&lt;/i&gt; section in GoldenDict Help.&lt;/b&gt;</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Paths to search for the dictionary files:</string>
