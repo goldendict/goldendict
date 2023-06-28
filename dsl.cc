@@ -1028,7 +1028,22 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   else
   if ( node.tagName == GD_NATIVE_TO_WS( L"url" ) )
   {
-    string link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
+    string link;
+    if( !node.tagAttrs.empty() )
+    {
+      QString attrs = gd::toQString( node.tagAttrs );
+      int n = attrs.indexOf( "target=\"" );
+      if( n >= 0 )
+      {
+        QString target = attrs.mid( n + 8 );
+        if( target.endsWith( '\"' ) )
+          target.chop( 1 );
+        link = Html::escape( Filetype::simplifyString( string( target.toUtf8().data() ), false ) );
+      }
+    }
+    if( link.empty() )
+      link = Html::escape( Filetype::simplifyString( Utf8::encode( node.renderAsText() ), false ) );
+
     if( QUrl::fromEncoded( link.c_str() ).scheme().isEmpty() )
       link = "http://" + link;
 
@@ -1151,15 +1166,39 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
   if ( node.tagName == GD_NATIVE_TO_WS( L"ref" ) )
   {
     QUrl url;
+    QString attrs;
+    if( !node.tagAttrs.empty() )
+      attrs = gd::toQString( node.tagAttrs );
+
+    wstring refStr;
+    if( !attrs.isEmpty() )
+    {
+      int n = attrs.indexOf( "target=\"" );
+      if( n >= 0 )
+      {
+        int n_end = attrs.indexOf( '\"', n + 8 );
+        QString target = attrs.mid( n, n_end > n ? n_end - n + 1 : -1 );
+        attrs.remove( target );
+        if( !attrs.isEmpty() )
+          attrs = attrs.trimmed();
+
+        target = target.mid( 8 );
+        if( target.endsWith( '\"' ) )
+          target.chop( 1 );
+        refStr = gd::toWString( target );
+      }
+    }
 
     url.setScheme( "gdlookup" );
     url.setHost( "localhost" );
-    wstring nodeStr = node.renderAsText();
-    normalizeHeadword( nodeStr );
-    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( nodeStr ) ) );
-    if( !node.tagAttrs.empty() )
+
+    if( refStr.empty() )
+      refStr = node.renderAsText();
+    normalizeHeadword( refStr );
+    url.setPath( Qt4x5::Url::ensureLeadingSlash( gd::toQString( refStr ) ) );
+    if( !attrs.isEmpty() )
     {
-      QString attr = gd::toQString( node.tagAttrs ).remove( '\"' );
+      QString attr = attrs.remove( '\"' );
       int n = attr.indexOf( '=' );
       if( n > 0 )
       {
