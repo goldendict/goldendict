@@ -235,7 +235,7 @@ mac {
                          machotkeywrapper.mm \
                          macmouseover.mm \
                          speechclient_mac.mm
-    ICON = icons/macicon.icns
+    ICON = data/icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
@@ -603,6 +603,7 @@ CONFIG( old_hunspell ) {
 }
 
 RESOURCES += resources.qrc \
+    data/icons/icons.qrc \
     flags.qrc
 TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_CN.ts \

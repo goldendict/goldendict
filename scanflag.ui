@@ -27,12 +27,14 @@
      <string/>
     </property>
     <property name="icon">
-     <iconset>
+     <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/programicon.png</normaloff>:/icons/programicon.png</iconset>
     </property>
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="data/icons/icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

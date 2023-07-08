@@ -370,7 +370,7 @@
   </widget>
   <action name="dictionaries">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/book.png</normaloff>:/icons/book.png</iconset>
    </property>
    <property name="text">
@@ -385,7 +385,7 @@
   </action>
   <action name="preferences">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
    </property>
    <property name="text">
@@ -455,7 +455,7 @@
   </action>
   <action name="saveArticle">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
    </property>
    <property name="text">
@@ -473,7 +473,7 @@
   </action>
   <action name="print">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/print.png</normaloff>:/icons/print.png</iconset>
    </property>
    <property name="text">
@@ -523,7 +523,7 @@
   </action>
   <action name="newTab">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/addtab.png</normaloff>:/icons/addtab.png</iconset>
    </property>
    <property name="text">
@@ -590,7 +590,7 @@
   </action>
   <action name="menuOptions">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="data/icons/icons.qrc">
      <normaloff>:/icons/menu_button.png</normaloff>:/icons/menu_button.png</iconset>
    </property>
    <property name="text">
@@ -716,7 +716,7 @@
   <tabstop>dictsList</tabstop>
  </tabstops>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="data/icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

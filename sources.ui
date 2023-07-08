@@ -30,7 +30,7 @@
      </property>
      <widget class="QWidget" name="filesTab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/filesave.png</normaloff>:/icons/filesave.png</iconset>
       </attribute>
       <attribute name="title">
@@ -103,7 +103,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/fileopen.png</normaloff>:/icons/fileopen.png</iconset>
       </attribute>
       <attribute name="title">
@@ -159,7 +159,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/icon32_hunspell.png</normaloff>:/icons/icon32_hunspell.png</iconset>
       </attribute>
       <attribute name="title">
@@ -227,7 +227,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="mediaWikisTab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/icon32_wiki.png</normaloff>:/icons/icon32_wiki.png</iconset>
       </attribute>
       <attribute name="title">
@@ -286,7 +286,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/internet.png</normaloff>:/icons/internet.png</iconset>
       </attribute>
       <attribute name="title">
@@ -350,7 +350,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="dictdTab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
       </attribute>
       <attribute name="title">
@@ -406,7 +406,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="tab_6">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/programs.png</normaloff>:/icons/programs.png</iconset>
       </attribute>
       <attribute name="title">
@@ -465,7 +465,7 @@ of the appropriate groups to use them.</string>
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/forvo.png</normaloff>:/icons/forvo.png</iconset>
       </attribute>
       <attribute name="title">
@@ -871,7 +871,7 @@ Not implemented yet in GoldenDict.</string>
  </tabstops>
  <resources>
   <include location="flags.qrc"/>
-  <include location="resources.qrc"/>
+  <include location="data/icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

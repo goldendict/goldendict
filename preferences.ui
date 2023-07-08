@@ -14,7 +14,7 @@
    <string>Preferences</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="data/icons/icons.qrc">
     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
   </property>
   <property name="modal">
@@ -40,7 +40,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/interface.png</normaloff>:/icons/interface.png</iconset>
       </attribute>
       <attribute name="title">
@@ -373,7 +373,7 @@ be the last ones.</string>
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/wizard.png</normaloff>:/icons/wizard.png</iconset>
       </attribute>
       <attribute name="title">
@@ -719,7 +719,7 @@ seconds, which is specified here.</string>
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/hotkeys.png</normaloff>:/icons/hotkeys.png</iconset>
       </attribute>
       <attribute name="title">
@@ -864,7 +864,7 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/playsound_color.png</normaloff>:/icons/playsound_color.png</iconset>
       </attribute>
       <attribute name="title">
@@ -970,7 +970,7 @@ p, li { white-space: pre-wrap; }
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/network.png</normaloff>:/icons/network.png</iconset>
       </attribute>
       <attribute name="title">
@@ -1252,7 +1252,7 @@ download page.</string>
      </widget>
      <widget class="QWidget" name="tab_FTS">
       <attribute name="icon">
-       <iconset resource="resources.qrc">
+       <iconset resource="data/icons/icons.qrc">
         <normaloff>:/icons/system-search.png</normaloff>:/icons/system-search.png</iconset>
       </attribute>
       <attribute name="title">
@@ -1937,7 +1937,7 @@ from Stardict, Babylon and GLS dictionaries</string>
   <tabstop>proxyPassword</tabstop>
  </tabstops>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="data/icons/icons.qrc"/>
  </resources>
  <connections>
   <connection>
