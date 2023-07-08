@@ -604,7 +604,8 @@ CONFIG( old_hunspell ) {
 
 RESOURCES += resources.qrc \
     data/icons/icons.qrc \
-    data/flags/flags.qrc
+    data/flags/flags.qrc \
+    data/style/style.qrc
 TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_CN.ts \
     locale/cs_CZ.ts \
