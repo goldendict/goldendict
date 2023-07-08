@@ -71,7 +71,7 @@
          <string>&amp;Previous</string>
         </property>
         <property name="icon">
-         <iconset resource="resources.qrc">
+         <iconset resource="data/icons/icons.qrc">
           <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
         </property>
         <property name="toolButtonStyle">
@@ -85,7 +85,7 @@
          <string>&amp;Next</string>
         </property>
         <property name="icon">
-         <iconset resource="resources.qrc">
+         <iconset resource="data/icons/icons.qrc">
           <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
         </property>
         <property name="toolButtonStyle">
@@ -145,7 +145,7 @@
            <string>x</string>
           </property>
           <property name="icon">
-           <iconset resource="resources.qrc">
+           <iconset resource="data/icons/icons.qrc">
             <normaloff>:/icons/closetab.png</normaloff>:/icons/closetab.png</iconset>
           </property>
           <property name="autoRaise">
@@ -163,7 +163,7 @@
            <string>&amp;Previous</string>
           </property>
           <property name="icon">
-           <iconset resource="resources.qrc">
+           <iconset resource="data/icons/icons.qrc">
             <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
           </property>
           <property name="toolButtonStyle">
@@ -180,7 +180,7 @@
            <string>&amp;Next</string>
           </property>
           <property name="icon">
-           <iconset resource="resources.qrc">
+           <iconset resource="data/icons/icons.qrc">
             <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
           </property>
           <property name="shortcut">
@@ -200,7 +200,7 @@
            <string>Highlight &amp;all</string>
           </property>
           <property name="icon">
-           <iconset resource="resources.qrc">
+           <iconset resource="data/icons/icons.qrc">
             <normaloff>:/icons/highlighter.png</normaloff>:/icons/highlighter.png</iconset>
           </property>
           <property name="checkable">
@@ -252,7 +252,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="data/icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

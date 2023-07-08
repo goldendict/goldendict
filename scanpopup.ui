@@ -103,7 +103,7 @@
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap resource="resources.qrc">:/icons/warning.png</pixmap>
+              <pixmap resource="data/icons/icons.qrc">:/icons/warning.png</pixmap>
              </property>
             </widget>
            </item>
@@ -116,7 +116,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/previous.png</normaloff>:/icons/previous.png</iconset>
              </property>
             </widget>
@@ -130,7 +130,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/next.png</normaloff>:/icons/next.png</iconset>
              </property>
             </widget>
@@ -144,7 +144,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/playsound.png</normaloff>:/icons/playsound.png</iconset>
              </property>
              <property name="shortcut">
@@ -164,7 +164,7 @@
               <string notr="true">...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/programicon.png</normaloff>:/icons/programicon.png</iconset>
              </property>
              <property name="shortcut">
@@ -181,7 +181,7 @@
               <string notr="true">...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/star.png</normaloff>:/icons/star.png</iconset>
              </property>
              <property name="shortcut">
@@ -211,7 +211,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/bookcase.png</normaloff>:/icons/bookcase.png</iconset>
              </property>
              <property name="checkable">
@@ -234,7 +234,7 @@
               <string notr="true"/>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/ontop.png</normaloff>:/icons/ontop.png</iconset>
              </property>
              <property name="checkable">
@@ -255,7 +255,7 @@ could be resized or managed in other ways.</string>
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="resources.qrc">
+              <iconset resource="data/icons/icons.qrc">
                <normaloff>:/icons/pushpin.png</normaloff>:/icons/pushpin.png</iconset>
              </property>
              <property name="checkable">
@@ -289,7 +289,7 @@ could be resized or managed in other ways.</string>
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="data/icons/icons.qrc"/>
  </resources>
  <connections/>
 </ui>

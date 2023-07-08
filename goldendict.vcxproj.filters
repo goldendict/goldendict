@@ -635,763 +635,763 @@
     <None Include="MSBuild\QtExtensions\lrelease.targets">
       <Filter>Customizations</Filter>
     </None>
-    <None Include="flags\ad.png">
+    <None Include="data\flags\ad.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ae.png">
+    <None Include="data\flags\ae.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\af.png">
+    <None Include="data\flags\af.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ag.png">
+    <None Include="data\flags\ag.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ai.png">
+    <None Include="data\flags\ai.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\al.png">
+    <None Include="data\flags\al.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\am.png">
+    <None Include="data\flags\am.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\an.png">
+    <None Include="data\flags\an.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ao.png">
+    <None Include="data\flags\ao.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ar.png">
+    <None Include="data\flags\ar.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\as.png">
+    <None Include="data\flags\as.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\at.png">
+    <None Include="data\flags\at.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\au.png">
+    <None Include="data\flags\au.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\aw.png">
+    <None Include="data\flags\aw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ax.png">
+    <None Include="data\flags\ax.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\az.png">
+    <None Include="data\flags\az.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ba.png">
+    <None Include="data\flags\ba.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bb.png">
+    <None Include="data\flags\bb.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bd.png">
+    <None Include="data\flags\bd.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\be.png">
+    <None Include="data\flags\be.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bf.png">
+    <None Include="data\flags\bf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bg.png">
+    <None Include="data\flags\bg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bh.png">
+    <None Include="data\flags\bh.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bi.png">
+    <None Include="data\flags\bi.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bj.png">
+    <None Include="data\flags\bj.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bm.png">
+    <None Include="data\flags\bm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bn.png">
+    <None Include="data\flags\bn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bo.png">
+    <None Include="data\flags\bo.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\br.png">
+    <None Include="data\flags\br.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bs.png">
+    <None Include="data\flags\bs.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bt.png">
+    <None Include="data\flags\bt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bv.png">
+    <None Include="data\flags\bv.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bw.png">
+    <None Include="data\flags\bw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\by.png">
+    <None Include="data\flags\by.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\bz.png">
+    <None Include="data\flags\bz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ca.png">
+    <None Include="data\flags\ca.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\catalonia.png">
+    <None Include="data\flags\catalonia.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cc.png">
+    <None Include="data\flags\cc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cd.png">
+    <None Include="data\flags\cd.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cf.png">
+    <None Include="data\flags\cf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cg.png">
+    <None Include="data\flags\cg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ch.png">
+    <None Include="data\flags\ch.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ci.png">
+    <None Include="data\flags\ci.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ck.png">
+    <None Include="data\flags\ck.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cl.png">
+    <None Include="data\flags\cl.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cm.png">
+    <None Include="data\flags\cm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cn.png">
+    <None Include="data\flags\cn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\co.png">
+    <None Include="data\flags\co.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cr.png">
+    <None Include="data\flags\cr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\io.png">
+    <None Include="data\flags\io.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\iq.png">
+    <None Include="data\flags\iq.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ir.png">
+    <None Include="data\flags\ir.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\is.png">
+    <None Include="data\flags\is.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\it.png">
+    <None Include="data\flags\it.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ja.png">
+    <None Include="data\flags\ja.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\jm.png">
+    <None Include="data\flags\jm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\jo.png">
+    <None Include="data\flags\jo.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\jp.png">
+    <None Include="data\flags\jp.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ke.png">
+    <None Include="data\flags\ke.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kg.png">
+    <None Include="data\flags\kg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kh.png">
+    <None Include="data\flags\kh.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ki.png">
+    <None Include="data\flags\ki.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\km.png">
+    <None Include="data\flags\km.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kn.png">
+    <None Include="data\flags\kn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kp.png">
+    <None Include="data\flags\kp.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kr.png">
+    <None Include="data\flags\kr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kw.png">
+    <None Include="data\flags\kw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ky.png">
+    <None Include="data\flags\ky.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\kz.png">
+    <None Include="data\flags\kz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\la.png">
+    <None Include="data\flags\la.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lb.png">
+    <None Include="data\flags\lb.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lc.png">
+    <None Include="data\flags\lc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\li.png">
+    <None Include="data\flags\li.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lk.png">
+    <None Include="data\flags\lk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lr.png">
+    <None Include="data\flags\lr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ls.png">
+    <None Include="data\flags\ls.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lt.png">
+    <None Include="data\flags\lt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lu.png">
+    <None Include="data\flags\lu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\lv.png">
+    <None Include="data\flags\lv.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ly.png">
+    <None Include="data\flags\ly.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ma.png">
+    <None Include="data\flags\ma.png">
       <Filter>Resources\Flags</Filter>
     </None>
     <None Include="CREDITS.txt">
       <Filter>Resources</Filter>
     </None>
-    <None Include="flags\fm.png">
+    <None Include="data\flags\fm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\fo.png">
+    <None Include="data\flags\fo.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\fr.png">
+    <None Include="data\flags\fr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ga.png">
+    <None Include="data\flags\ga.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gb.png">
+    <None Include="data\flags\gb.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gd.png">
+    <None Include="data\flags\gd.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ge.png">
+    <None Include="data\flags\ge.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gf.png">
+    <None Include="data\flags\gf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gh.png">
+    <None Include="data\flags\gh.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gi.png">
+    <None Include="data\flags\gi.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gl.png">
+    <None Include="data\flags\gl.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gm.png">
+    <None Include="data\flags\gm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gn.png">
+    <None Include="data\flags\gn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gp.png">
+    <None Include="data\flags\gp.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gq.png">
+    <None Include="data\flags\gq.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gr.png">
+    <None Include="data\flags\gr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gs.png">
+    <None Include="data\flags\gs.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gt.png">
+    <None Include="data\flags\gt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gu.png">
+    <None Include="data\flags\gu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gw.png">
+    <None Include="data\flags\gw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\gy.png">
+    <None Include="data\flags\gy.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cs.png">
+    <None Include="data\flags\cs.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cu.png">
+    <None Include="data\flags\cu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cv.png">
+    <None Include="data\flags\cv.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cx.png">
+    <None Include="data\flags\cx.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cy.png">
+    <None Include="data\flags\cy.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\cz.png">
+    <None Include="data\flags\cz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\de.png">
+    <None Include="data\flags\de.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\dj.png">
+    <None Include="data\flags\dj.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\dk.png">
+    <None Include="data\flags\dk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\dm.png">
+    <None Include="data\flags\dm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\do.png">
+    <None Include="data\flags\do.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\dz.png">
+    <None Include="data\flags\dz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ec.png">
+    <None Include="data\flags\ec.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ee.png">
+    <None Include="data\flags\ee.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\eg.png">
+    <None Include="data\flags\eg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\eh.png">
+    <None Include="data\flags\eh.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\en.png">
+    <None Include="data\flags\en.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\england.png">
+    <None Include="data\flags\england.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\eo.png">
+    <None Include="data\flags\eo.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\er.png">
+    <None Include="data\flags\er.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="icons\error.png">
+    <None Include="data\icons\error.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\es.png">
+    <None Include="data\flags\es.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\et.png">
+    <None Include="data\flags\et.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\europeanunion.png">
+    <None Include="data\flags\europeanunion.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\fi.png">
+    <None Include="data\flags\fi.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\fj.png">
+    <None Include="data\flags\fj.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\fk.png">
+    <None Include="data\flags\fk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\hk.png">
+    <None Include="data\flags\hk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\hm.png">
+    <None Include="data\flags\hm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\hn.png">
+    <None Include="data\flags\hn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\hr.png">
+    <None Include="data\flags\hr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ht.png">
+    <None Include="data\flags\ht.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\hu.png">
+    <None Include="data\flags\hu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mg.png">
+    <None Include="data\flags\mg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mh.png">
+    <None Include="data\flags\mh.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mk.png">
+    <None Include="data\flags\mk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ml.png">
+    <None Include="data\flags\ml.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mm.png">
+    <None Include="data\flags\mm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mn.png">
+    <None Include="data\flags\mn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mo.png">
+    <None Include="data\flags\mo.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mp.png">
+    <None Include="data\flags\mp.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mq.png">
+    <None Include="data\flags\mq.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mr.png">
+    <None Include="data\flags\mr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ms.png">
+    <None Include="data\flags\ms.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mt.png">
+    <None Include="data\flags\mt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mu.png">
+    <None Include="data\flags\mu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mv.png">
+    <None Include="data\flags\mv.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mw.png">
+    <None Include="data\flags\mw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mx.png">
+    <None Include="data\flags\mx.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\my.png">
+    <None Include="data\flags\my.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mz.png">
+    <None Include="data\flags\mz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\na.png">
+    <None Include="data\flags\na.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\nc.png">
+    <None Include="data\flags\nc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ne.png">
+    <None Include="data\flags\ne.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\nf.png">
+    <None Include="data\flags\nf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ng.png">
+    <None Include="data\flags\ng.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ni.png">
+    <None Include="data\flags\ni.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\nl.png">
+    <None Include="data\flags\nl.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\no.png">
+    <None Include="data\flags\no.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\np.png">
+    <None Include="data\flags\np.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\nr.png">
+    <None Include="data\flags\nr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\nu.png">
+    <None Include="data\flags\nu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\nz.png">
+    <None Include="data\flags\nz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\om.png">
+    <None Include="data\flags\om.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pa.png">
+    <None Include="data\flags\pa.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pe.png">
+    <None Include="data\flags\pe.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pf.png">
+    <None Include="data\flags\pf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pg.png">
+    <None Include="data\flags\pg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ph.png">
+    <None Include="data\flags\ph.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pk.png">
+    <None Include="data\flags\pk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pl.png">
+    <None Include="data\flags\pl.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pm.png">
+    <None Include="data\flags\pm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pn.png">
+    <None Include="data\flags\pn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pr.png">
+    <None Include="data\flags\pr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ps.png">
+    <None Include="data\flags\ps.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pt.png">
+    <None Include="data\flags\pt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\pw.png">
+    <None Include="data\flags\pw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\py.png">
+    <None Include="data\flags\py.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\qa.png">
+    <None Include="data\flags\qa.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\re.png">
+    <None Include="data\flags\re.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ro.png">
+    <None Include="data\flags\ro.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\rs.png">
+    <None Include="data\flags\rs.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ru.png">
+    <None Include="data\flags\ru.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\rw.png">
+    <None Include="data\flags\rw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sa.png">
+    <None Include="data\flags\sa.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sb.png">
+    <None Include="data\flags\sb.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sc.png">
+    <None Include="data\flags\sc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\scotland.png">
+    <None Include="data\flags\scotland.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sd.png">
+    <None Include="data\flags\sd.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\se.png">
+    <None Include="data\flags\se.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sg.png">
+    <None Include="data\flags\sg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sh.png">
+    <None Include="data\flags\sh.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\si.png">
+    <None Include="data\flags\si.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sj.png">
+    <None Include="data\flags\sj.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sk.png">
+    <None Include="data\flags\sk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sl.png">
+    <None Include="data\flags\sl.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sm.png">
+    <None Include="data\flags\sm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sn.png">
+    <None Include="data\flags\sn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\so.png">
+    <None Include="data\flags\so.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sr.png">
+    <None Include="data\flags\sr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\st.png">
+    <None Include="data\flags\st.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sv.png">
+    <None Include="data\flags\sv.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sy.png">
+    <None Include="data\flags\sy.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\sz.png">
+    <None Include="data\flags\sz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tc.png">
+    <None Include="data\flags\tc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\td.png">
+    <None Include="data\flags\td.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tf.png">
+    <None Include="data\flags\tf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tg.png">
+    <None Include="data\flags\tg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\th.png">
+    <None Include="data\flags\th.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tj.png">
+    <None Include="data\flags\tj.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tk.png">
+    <None Include="data\flags\tk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tl.png">
+    <None Include="data\flags\tl.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tm.png">
+    <None Include="data\flags\tm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tn.png">
+    <None Include="data\flags\tn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\to.png">
+    <None Include="data\flags\to.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tr.png">
+    <None Include="data\flags\tr.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tt.png">
+    <None Include="data\flags\tt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tv.png">
+    <None Include="data\flags\tv.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tw.png">
+    <None Include="data\flags\tw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\tz.png">
+    <None Include="data\flags\tz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ua.png">
+    <None Include="data\flags\ua.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ug.png">
+    <None Include="data\flags\ug.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\uk.png">
+    <None Include="data\flags\uk.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\um.png">
+    <None Include="data\flags\um.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\us.png">
+    <None Include="data\flags\us.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\uy.png">
+    <None Include="data\flags\uy.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\uz.png">
+    <None Include="data\flags\uz.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\va.png">
+    <None Include="data\flags\va.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\vc.png">
+    <None Include="data\flags\vc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ve.png">
+    <None Include="data\flags\ve.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\vg.png">
+    <None Include="data\flags\vg.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\vi.png">
+    <None Include="data\flags\vi.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\vn.png">
+    <None Include="data\flags\vn.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\vu.png">
+    <None Include="data\flags\vu.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\wales.png">
+    <None Include="data\flags\wales.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\wf.png">
+    <None Include="data\flags\wf.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\wi.png">
+    <None Include="data\flags\wi.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ws.png">
+    <None Include="data\flags\ws.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ye.png">
+    <None Include="data\flags\ye.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\yt.png">
+    <None Include="data\flags\yt.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\za.png">
+    <None Include="data\flags\za.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\zm.png">
+    <None Include="data\flags\zm.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\zw.png">
+    <None Include="data\flags\zw.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="article-style-print.css">
+    <None Include="data\style\article-style-print.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="article-style-st-babylon.css">
+    <None Include="data\style\article-style-st-babylon.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="article-style-st-lingoes-blue.css">
+    <None Include="data\style\article-style-st-lingoes-blue.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="article-style-st-lingoes.css">
+    <None Include="data\style\article-style-st-lingoes.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="article-style-st-lingvo.css">
+    <None Include="data\style\article-style-st-lingvo.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="article-style-st-modern.css">
+    <None Include="data\style\article-style-st-modern.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="article-style.css">
+    <None Include="data\style\article-style.css">
       <Filter>Resources\CSS</Filter>
     </None>
     <None Include="MSBuild\custom.props">
@@ -1460,106 +1460,106 @@
     </QtUICCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtTranslate Include="locale\ar_SA.ts">
+    <QtTranslate Include="data\locale\ar_SA.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\ay_WI.ts">
+    <QtTranslate Include="data\locale\ay_WI.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\be_BY.ts">
+    <QtTranslate Include="data\locale\be_BY.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\be_BY@latin.ts">
+    <QtTranslate Include="data\locale\be_BY@latin.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\bg_BG.ts">
+    <QtTranslate Include="data\locale\bg_BG.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\cs_CZ.ts">
+    <QtTranslate Include="data\locale\cs_CZ.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\de_DE.ts">
+    <QtTranslate Include="data\locale\de_DE.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\el_GR.ts">
+    <QtTranslate Include="data\locale\el_GR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\es_AR.ts">
+    <QtTranslate Include="data\locale\es_AR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\es_BO.ts">
+    <QtTranslate Include="data\locale\es_BO.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\es_ES.ts">
+    <QtTranslate Include="data\locale\es_ES.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\fr_FR.ts">
+    <QtTranslate Include="data\locale\fr_FR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\it_IT.ts">
+    <QtTranslate Include="data\locale\it_IT.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\ja_JP.ts">
+    <QtTranslate Include="data\locale\ja_JP.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\ko_KR.ts">
+    <QtTranslate Include="data\locale\ko_KR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\lt_LT.ts">
+    <QtTranslate Include="data\locale\lt_LT.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\nl_NL.ts">
+    <QtTranslate Include="data\locale\nl_NL.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\pl_PL.ts">
+    <QtTranslate Include="data\locale\pl_PL.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\pt_BR.ts">
+    <QtTranslate Include="data\locale\pt_BR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\qu_WI.ts">
+    <QtTranslate Include="data\locale\qu_WI.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\ru_RU.ts">
+    <QtTranslate Include="data\locale\ru_RU.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\sk_SK.ts">
+    <QtTranslate Include="data\locale\sk_SK.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\sq_AL.ts">
+    <QtTranslate Include="data\locale\sq_AL.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\tg_TJ.ts">
+    <QtTranslate Include="data\locale\tg_TJ.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\tr_TR.ts">
+    <QtTranslate Include="data\locale\tr_TR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\uk_UA.ts">
+    <QtTranslate Include="data\locale\uk_UA.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\vi_VN.ts">
+    <QtTranslate Include="data\locale\vi_VN.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\zh_CN.ts">
+    <QtTranslate Include="data\locale\zh_CN.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\zh_TW.ts">
+    <QtTranslate Include="data\locale\zh_TW.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\sr_SR.ts">
+    <QtTranslate Include="data\locale\sr_SR.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\sv_SE.ts">
+    <QtTranslate Include="data\locale\sv_SE.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\tk_TM.ts">
+    <QtTranslate Include="data\locale\tk_TM.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\eo_EO.ts">
+    <QtTranslate Include="data\locale\eo_EO.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
-    <QtTranslate Include="locale\fi_FI.ts">
+    <QtTranslate Include="data\locale\fi_FI.ts">
       <Filter>Translations</Filter>
     </QtTranslate>
   </ItemGroup>
@@ -1704,242 +1704,242 @@
     </QtMOCCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="flags\00readme.txt">
+    <Text Include="data\flags\00readme.txt">
       <Filter>Resources\Flags</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="qt-style-macos.css">
+    <None Include="data\style\qt-style-macos.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="qt-style-st-babylon.css">
+    <None Include="data\style\qt-style-st-babylon.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="qt-style-st-lingoes-blue.css">
+    <None Include="data\style\qt-style-st-lingoes-blue.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="qt-style-st-lingvo.css">
+    <None Include="data\style\qt-style-st-lingvo.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="qt-style-st-modern.css">
+    <None Include="data\style\qt-style-st-modern.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="qt-style.css">
+    <None Include="data\style\qt-style.css">
       <Filter>Resources\CSS</Filter>
     </None>
-    <None Include="icons\icon.svg">
+    <None Include="data\icons\icon.svg">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="flags\id.png">
+    <None Include="data\flags\id.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\ie.png">
+    <None Include="data\flags\ie.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\il.png">
+    <None Include="data\flags\il.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\in.png">
+    <None Include="data\flags\in.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\me.png">
+    <None Include="data\flags\me.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\md.png">
+    <None Include="data\flags\md.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="flags\mc.png">
+    <None Include="data\flags\mc.png">
       <Filter>Resources\Flags</Filter>
     </None>
-    <None Include="icons\video.png">
+    <None Include="data\icons\video.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\warning.png">
+    <None Include="data\icons\warning.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="flags\wiki.png">
+    <None Include="data\flags\wiki.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\windows-list.png">
+    <None Include="data\icons\windows-list.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\wizard.png">
+    <None Include="data\icons\wizard.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\interface.png">
+    <None Include="data\icons\interface.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\internet.png">
+    <None Include="data\icons\internet.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\macicon.png">
+    <None Include="data\icons\macicon.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\mdict.png">
+    <None Include="data\icons\mdict.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\menu_button.png">
+    <None Include="data\icons\menu_button.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\network.png">
+    <None Include="data\icons\network.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\next.png">
+    <None Include="data\icons\next.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="flags\other.png">
+    <None Include="data\flags\other.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\playsound.png">
+    <None Include="data\icons\playsound.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\prefix.png">
+    <None Include="data\icons\prefix.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\previous.png">
+    <None Include="data\icons\previous.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\print.png">
+    <None Include="data\icons\print.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\programicon.png">
+    <None Include="data\icons\programicon.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\programicon_scan.png">
+    <None Include="data\icons\programicon_scan.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\programs.png">
+    <None Include="data\icons\programs.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\pushpin.png">
+    <None Include="data\icons\pushpin.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\reload.png">
+    <None Include="data\icons\reload.png">
       <Filter>Resources\Icons</Filter>
     </None>
-    <None Include="icons\system-search.png">
+    <None Include="data\icons\system-search.png">
       <Filter>Resources\Icons</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icons\programicon.ico">
+    <Image Include="data\icons\programicon.ico">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\programicon_old.ico">
+    <Image Include="data\icons\programicon_old.ico">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\1downarrow.png">
+    <Image Include="data\icons\1downarrow.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\addtab.png">
+    <Image Include="data\icons\addtab.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\arrow.png">
+    <Image Include="data\icons\arrow.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\blank.png">
+    <Image Include="data\icons\blank.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\book.png">
+    <Image Include="data\icons\book.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\bookcase.png">
+    <Image Include="data\icons\bookcase.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\clear.png">
+    <Image Include="data\icons\clear.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\closetab.png">
+    <Image Include="data\icons\closetab.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\collapse_article.png">
+    <Image Include="data\icons\collapse_article.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\collapse_article_hovered.png">
+    <Image Include="data\icons\collapse_article_hovered.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\collapse_opt.png">
+    <Image Include="data\icons\collapse_opt.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\configure.png">
+    <Image Include="data\icons\configure.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\downarrow.png">
+    <Image Include="data\icons\downarrow.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\expand_article.png">
+    <Image Include="data\icons\expand_article.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\expand_article_hovered.png">
+    <Image Include="data\icons\expand_article_hovered.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\expand_opt.png">
+    <Image Include="data\icons\expand_opt.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\fileopen.png">
+    <Image Include="data\icons\fileopen.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\filesave.png">
+    <Image Include="data\icons\filesave.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\forvo.png">
+    <Image Include="data\icons\forvo.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\highlighter.png">
+    <Image Include="data\icons\highlighter.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\hotkeys.png">
+    <Image Include="data\icons\hotkeys.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon_dsl_native.png">
+    <Image Include="data\icons\icon_dsl_native.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_aard.png">
+    <Image Include="data\icons\icon32_aard.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_bgl.png">
+    <Image Include="data\icons\icon32_bgl.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_dictd.png">
+    <Image Include="data\icons\icon32_dictd.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_dsl.png">
+    <Image Include="data\icons\icon32_dsl.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_hunspell.png">
+    <Image Include="data\icons\icon32_hunspell.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_lingoes.png">
+    <Image Include="data\icons\icon32_lingoes.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_sdict.png">
+    <Image Include="data\icons\icon32_sdict.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_stardict.png">
+    <Image Include="data\icons\icon32_stardict.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_wiki.png">
+    <Image Include="data\icons\icon32_wiki.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_xdxf.png">
+    <Image Include="data\icons\icon32_xdxf.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_zoombase.png">
+    <Image Include="data\icons\icon32_zoombase.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_zoomin.png">
+    <Image Include="data\icons\icon32_zoomin.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\icon32_zoomout.png">
+    <Image Include="data\icons\icon32_zoomout.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\programicon_old.png">
+    <Image Include="data\icons\programicon_old.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\playsound_color.png">
+    <Image Include="data\icons\playsound_color.png">
       <Filter>Resources\Icons</Filter>
     </Image>
-    <Image Include="icons\playsound_full.png">
+    <Image Include="data\icons\playsound_full.png">
       <Filter>Resources\Icons</Filter>
     </Image>
   </ItemGroup>
@@ -1949,7 +1949,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtRCCCompile Include="flags.qrc">
+    <QtRCCCompile Include="data\flags.qrc">
       <Filter>Resources</Filter>
     </QtRCCCompile>
     <QtRCCCompile Include="resources.qrc">

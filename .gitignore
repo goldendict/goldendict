@@ -4,7 +4,7 @@
 mouseover_win32/*.dll
 mouseover_win32/*.a
 
-locale/*.qm
+data/locale/*.qm
 debug/
 build/
 release/

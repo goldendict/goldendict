@@ -189,20 +189,20 @@ unix:!mac {
     DEFINES += PROGRAM_DATA_DIR=\\\"$$PREFIX/share/goldendict/\\\"
     target.path = $$PREFIX/bin/
     locale.path = $$PREFIX/share/goldendict/locale/
-    locale.files = locale/*.qm
+    locale.files = data/locale/*.qm
     INSTALLS += target \
         locale
     icons.path = $$PREFIX/share/pixmaps
-    icons.files = redist/icons/*.*
+    icons.files = data/icons/$$TARGET.png
     INSTALLS += icons
     desktops.path = $$PREFIX/share/applications
-    desktops.files = redist/*.desktop
+    desktops.files = data/*.desktop
     INSTALLS += desktops
     metainfo.path = $$PREFIX/share/metainfo
-    metainfo.files = redist/*.metainfo.xml
+    metainfo.files = data/*.metainfo.xml
     INSTALLS += metainfo
     helps.path = $$PREFIX/share/goldendict/help/
-    helps.files = help/*.qch
+    helps.files = data/help/*.qch
     INSTALLS += helps
 }
 freebsd {
@@ -235,26 +235,26 @@ mac {
                          machotkeywrapper.mm \
                          macmouseover.mm \
                          speechclient_mac.mm
-    ICON = icons/macicon.icns
+    ICON = data/icons/macicon.icns
     QMAKE_INFO_PLIST = myInfo.plist
     QMAKE_POST_LINK = mkdir -p GoldenDict.app/Contents/Frameworks & \
                       cp -nR $${PWD}/maclibs/lib/ GoldenDict.app/Contents/Frameworks/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/locale & \
-                      cp -R locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
+                      cp -R data/locale/*.qm GoldenDict.app/Contents/MacOS/locale/ & \
                       mkdir -p GoldenDict.app/Contents/MacOS/help & \
-                      cp -R $${PWD}/help/*.qch GoldenDict.app/Contents/MacOS/help/
+                      cp -R $${PWD}/data/help/*.qch GoldenDict.app/Contents/MacOS/help/
 
     CONFIG += zim_support
     !CONFIG( no_chinese_conversion_support ) {
         CONFIG += chinese_conversion_support
         CONFIG( x86 ) {
             QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+                                 cp -R $${PWD}/data/opencc/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+                                 cp -R $${PWD}/data/opencc/*.ocd GoldenDict.app/Contents/MacOS/opencc/
         } else {
             QMAKE_POST_LINK += & mkdir -p GoldenDict.app/Contents/MacOS/opencc & \
-                                 cp -R $${PWD}/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
-                                 cp -R $${PWD}/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
+                                 cp -R $${PWD}/data/opencc/x64/*.json GoldenDict.app/Contents/MacOS/opencc/ & \
+                                 cp -R $${PWD}/data/opencc/x64/*.ocd GoldenDict.app/Contents/MacOS/opencc/
         }
     }
 }
@@ -603,46 +603,48 @@ CONFIG( old_hunspell ) {
 }
 
 RESOURCES += resources.qrc \
-    flags.qrc
-TRANSLATIONS += locale/ru_RU.ts \
-    locale/zh_CN.ts \
-    locale/cs_CZ.ts \
-    locale/de_DE.ts \
-    locale/el_GR.ts \
-    locale/bg_BG.ts \
-    locale/ar_SA.ts \
-    locale/lt_LT.ts \
-    locale/uk_UA.ts \
-    locale/vi_VN.ts \
-    locale/it_IT.ts \
-    locale/pl_PL.ts \
-    locale/ja_JP.ts \
-    locale/zh_TW.ts \
-    locale/sq_AL.ts \
-    locale/pt_BR.ts \
-    locale/es_AR.ts \
-    locale/es_BO.ts \
-    locale/es_ES.ts \
-    locale/sk_SK.ts \
-    locale/tr_TR.ts \
-    locale/qu_WI.ts \
-    locale/tg_TJ.ts \
-    locale/ay_WI.ts \
-    locale/be_BY.ts \
-    locale/be_BY@latin.ts \
-    locale/fr_FR.ts \
-    locale/ko_KR.ts \
-    locale/nl_NL.ts \
-    locale/sr_SR.ts \
-    locale/sv_SE.ts \
-    locale/tk_TM.ts \
-    locale/fa_IR.ts \
-    locale/mk_MK.ts \
-    locale/eo_EO.ts \
-    locale/fi_FI.ts \
-    locale/jb_JB.ts \
-    locale/hi_IN.ts \
-    locale/ie_001.ts
+    data/icons/icons.qrc \
+    data/flags/flags.qrc \
+    data/style/style.qrc
+TRANSLATIONS += data/locale/ru_RU.ts \
+    data/locale/zh_CN.ts \
+    data/locale/cs_CZ.ts \
+    data/locale/de_DE.ts \
+    data/locale/el_GR.ts \
+    data/locale/bg_BG.ts \
+    data/locale/ar_SA.ts \
+    data/locale/lt_LT.ts \
+    data/locale/uk_UA.ts \
+    data/locale/vi_VN.ts \
+    data/locale/it_IT.ts \
+    data/locale/pl_PL.ts \
+    data/locale/ja_JP.ts \
+    data/locale/zh_TW.ts \
+    data/locale/sq_AL.ts \
+    data/locale/pt_BR.ts \
+    data/locale/es_AR.ts \
+    data/locale/es_BO.ts \
+    data/locale/es_ES.ts \
+    data/locale/sk_SK.ts \
+    data/locale/tr_TR.ts \
+    data/locale/qu_WI.ts \
+    data/locale/tg_TJ.ts \
+    data/locale/ay_WI.ts \
+    data/locale/be_BY.ts \
+    data/locale/be_BY@latin.ts \
+    data/locale/fr_FR.ts \
+    data/locale/ko_KR.ts \
+    data/locale/nl_NL.ts \
+    data/locale/sr_SR.ts \
+    data/locale/sv_SE.ts \
+    data/locale/tk_TM.ts \
+    data/locale/fa_IR.ts \
+    data/locale/mk_MK.ts \
+    data/locale/eo_EO.ts \
+    data/locale/fi_FI.ts \
+    data/locale/jb_JB.ts \
+    data/locale/hi_IN.ts \
+    data/locale/ie_001.ts
 
 # Build version file
 !isEmpty( hasGit ) {
@@ -677,7 +679,7 @@ isEmpty(QMAKE_LRELEASE):QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease-qt4
 }
 
 updateqm.input = TRANSLATIONS
-updateqm.output = locale/${QMAKE_FILE_BASE}.qm
+updateqm.output = data/locale/${QMAKE_FILE_BASE}.qm
 updateqm.commands = $$QMAKE_LRELEASE \
     ${QMAKE_FILE_IN} \
     -qm \
