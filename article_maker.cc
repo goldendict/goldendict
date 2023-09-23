@@ -117,7 +117,7 @@ std::string ArticleMaker::makeHtmlHeader( QString const & word,
     {
       result += "<!-- Expand optional parts css -->\n";
       result += "<style type=\"text/css\" media=\"all\">\n";
-      result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none;\n}\n";
+      result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n";
       result += "</style>\n";
     }
 
