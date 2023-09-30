@@ -521,12 +521,11 @@ bool MdictParser::readRecordBlockInfos()
     r.compressedSize = readNumber( in );
     r.decompressedSize = readNumber( in );
     r.startPos = acc1;
-    r.endPos = acc1 + r.compressedSize;
     r.shadowStartPos = acc2;
     r.shadowEndPos = acc2 + r.decompressedSize;
     recordBlockInfos_.push_back( r );
 
-    acc1 = r.endPos;
+    acc1 += r.compressedSize;
     acc2 = r.shadowEndPos;
   }
 
