@@ -74,7 +74,6 @@ public:
   struct RecordIndex
   {
     qint64 startPos;
-    qint64 endPos;
     qint64 shadowStartPos;
     qint64 shadowEndPos;
     qint64 compressedSize;
