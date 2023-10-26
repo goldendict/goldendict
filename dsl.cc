@@ -899,7 +899,7 @@ string DslDictionary::nodeToHtml( ArticleDom::Node const & node )
 
       QUrl url;
       url.setScheme( "gdau" );
-      url.setHost( QString::fromUtf8( search ? "search" : getId().c_str() ) );
+      url.setHost( QString::fromUtf8( search ? Dictionary::ResourceSearch::lsaTypeName() : getId().c_str() ) );
       url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
       if( search && idxHeader.hasSoundDictionaryName )
         Qt4x5::Url::setFragment( url, QString::fromUtf8( preferredSoundDictionary.c_str() ) );
