@@ -1032,6 +1032,9 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
            ( Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier ) )
         return false; // A non-typing modifier is pressed
 
+      if( keyEvent->key() == Qt::Key_Backspace )
+        return !canGoBack();  // Prevent QWebView navigation to first (empty) page
+
       if ( keyEvent->key() == Qt::Key_Space ||
            keyEvent->key() == Qt::Key_Backspace ||
            keyEvent->key() == Qt::Key_Tab ||
