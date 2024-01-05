@@ -623,6 +623,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/es_AR.ts \
     locale/es_BO.ts \
     locale/es_ES.ts \
+    locale/ca_CT.ts \
     locale/sk_SK.ts \
     locale/tr_TR.ts \
     locale/qu_WI.ts \
