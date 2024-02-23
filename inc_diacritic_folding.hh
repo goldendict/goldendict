@@ -3134,6 +3134,8 @@ wchar foldDiacritic( wchar const * in, size_t size, size_t & consumed )
         consumed = 1; return 0x415;
       case 0x40d:
         consumed = 1; return 0x418;
+      case 0x40e:
+        consumed = 1; return 0x423;
       case 0x410:
         if ( size > 1 )
         {
@@ -3368,6 +3370,8 @@ wchar foldDiacritic( wchar const * in, size_t size, size_t & consumed )
         consumed = 1; return 0x435;
       case 0x45d:
         consumed = 1; return 0x438;
+      case 0x45e:
+        consumed = 1; return 0x443;
       case 0x474:
         if ( size > 1 )
         {

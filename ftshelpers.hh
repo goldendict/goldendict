@@ -22,7 +22,7 @@ namespace FtsHelpers
 enum
 {
   FtsSignature = 0x58535446, // FTSX on little-endian, XSTF on big-endian
-  CurrentFtsFormatVersion = 2 + BtreeIndexing::FormatVersion,
+  CurrentFtsFormatVersion = 2 + BtreeIndexing::FormatVersion + Folding::Version,
 };
 
 #pragma pack(push,1)
