@@ -701,12 +701,19 @@ void Preferences::helpRequested()
 
     if( helpWindow )
     {
-      helpWindow->setWindowFlags( Qt::Window );
+      #ifdef Q_OS_MAC
+        helpWindow->setWindowFlags( Qt::Dialog );
+      #else
+        helpWindow->setWindowFlags( Qt::Window );
+      #endif
 
       connect( helpWindow, SIGNAL( needClose() ),
                this, SLOT( closeHelp() ) );
       helpWindow->showHelpFor( "Preferences" );
       helpWindow->show();
+      #ifdef Q_OS_MAC
+        helpWindow->activateWindow();
+      #endif
     }
   }
   else
