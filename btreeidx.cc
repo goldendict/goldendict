@@ -1014,9 +1014,25 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
     unsigned prevEntry = 0;
 
+    unsigned step = indexSize / ( maxElements + 1 );
+    bool useNonUniformLeaves = ( maxElements >= BtreeMaxElements && step > maxElements && step < BtreeMinElements * maxElements );
+
     for( unsigned x = 0; x < maxElements; ++x )
     {
-      unsigned curEntry = (uint64_t) indexSize * ( x + 1 ) / ( maxElements + 1 );
+      unsigned curEntry;
+
+      if( useNonUniformLeaves )
+      {
+        curEntry = prevEntry + BtreeMinElements * maxElements;
+        if( curEntry > indexSize - ( maxElements - x ) * maxElements )
+        {
+          curEntry = indexSize - ( maxElements - x ) * maxElements;
+          if( curEntry <= prevEntry )
+            curEntry = prevEntry + BtreeMinElements;
+        }
+      }
+      else
+        curEntry = (uint64_t) indexSize * ( x + 1 ) / ( maxElements + 1 );
 
       uint32_t offset = buildBtreeNode( nextIndex,
                                         curEntry - prevEntry,
@@ -1256,7 +1272,6 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
     btreeMaxElements = BtreeMaxElements;
 
   GD_DPRINTF( "Building a tree of %u elements\n", (unsigned) btreeMaxElements );
-
 
   uint32_t lastLeafOffset = 0;
 

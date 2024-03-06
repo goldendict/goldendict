@@ -1150,6 +1150,7 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
 
     // Free memory
     offsetsWithClusters.clear();
+    offsetsWithClusters.squeeze();
 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
@@ -1178,7 +1179,13 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
     }
 
     // Free memory
+    indexedArticles.clear();
     offsets.clear();
+    offsets.squeeze();
+
+# define BUF_SIZE 20000
+    QVector< QPair< wstring, uint32_t > > wordsWithOffsets;
+    wordsWithOffsets.reserve( BUF_SIZE );
 
     QMap< QString, QVector< uint32_t > >::iterator it = ftsWords.begin();
     while( it != ftsWords.end() )
@@ -1192,13 +1199,36 @@ void ZimDictionary::makeFTSIndex( QAtomicInt & isCancelled, bool firstIteration 
       chunks.addToBlock( &size, sizeof(uint32_t) );
       chunks.addToBlock( it.value().data(), size * sizeof(uint32_t) );
 
-      indexedWords.addSingleWord( gd::toWString( it.key() ), offset );
+      wordsWithOffsets.append( QPair< wstring, uint32_t >( gd::toWString( it.key() ), offset ) );
 
       it = ftsWords.erase( it );
+
+      if( wordsWithOffsets.size() >= BUF_SIZE )
+      {
+        for( int i = 0; i < wordsWithOffsets.size(); i++ )
+        {
+          if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+            throw exUserAbort();
+          indexedWords.addSingleWord( wordsWithOffsets[ i ].first, wordsWithOffsets[ i ].second );
+        }
+        wordsWithOffsets.clear();
+      }
     }
 
     // Free memory
     ftsWords.clear();
+
+    for( int i = 0; i < wordsWithOffsets.size(); i++ )
+    {
+      if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
+        throw exUserAbort();
+      indexedWords.addSingleWord( wordsWithOffsets[ i ].first, wordsWithOffsets[ i ].second );
+    }
+#undef BUF_SIZE
+
+    // Free memory
+    wordsWithOffsets.clear();
+    wordsWithOffsets.squeeze();
 
     if( Qt4x5::AtomicInt::loadAcquire( isCancelled ) )
       throw exUserAbort();
