@@ -83,6 +83,9 @@ public:
 
   void toggleScanPopup();
 
+  void setZoomFactorImmediately( double factor );
+  void setWordsZoomLevel( int level );
+
   /// Set group for main/popup window
   void setGroupByName( QString const & name, bool main_window );
 
@@ -247,6 +250,7 @@ private:
   /// Creates hotkeyWrapper and hooks the currently set keys for it
   void installHotKeys();
 
+  void setZoomFactor( double factor );
   void applyZoomFactor();
   void adjustCurrentZoomFactor();
 
