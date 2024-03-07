@@ -18,11 +18,19 @@
 #define _FILE_OFFSET_BITS 64
 #endif
 
+#ifdef USE_LIBEBU
+#include <ebu/text.h>
+#include <ebu/appendix.h>
+#include <ebu/error.h>
+#include <ebu/binary.h>
+#include <ebu/font.h>
+#else
 #include <eb/text.h>
 #include <eb/appendix.h>
 #include <eb/error.h>
 #include <eb/binary.h>
 #include <eb/font.h>
+#endif
 
 #define HitsBufferSize 512
 
