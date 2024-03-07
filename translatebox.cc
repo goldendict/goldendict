@@ -12,6 +12,10 @@
 #include <QScrollBar>
 #include <QStyle>
 
+#ifdef Q_OS_WIN32
+#include <QDesktopWidget>
+#endif
+
 namespace
 {
 #define MAX_POPUP_ROWS 17
@@ -278,11 +282,28 @@ void TranslateBox::showPopup()
   else
   {
     origin = mapTo( window(), origin );
-    preferredHeight = qMin( translate_line->window()->height() - origin.y(), preferredHeight );
+//    preferredHeight = qMin( translate_line->window()->height() - origin.y(), preferredHeight );
   }
 
   const QSize size(width(), preferredHeight);
-  const QRect rect( origin, size );
+  QRect rect( origin, size );
+#ifdef Q_OS_WIN32
+  QPoint topLeft = word_list->isWindow() ? rect.topLeft() : mapToGlobal( rect.topLeft() );
+  QPoint bottomLeft = word_list->isWindow() ? rect.bottomLeft() : mapToGlobal( rect.bottomLeft() );
+  if( bottomLeft.y() >= QApplication::desktop()->screenGeometry( topLeft ).bottom() )
+    rect.moveTop( rect.top() - preferredHeight - translate_line->height() );
+#else
+  if( !isWindow() )
+  {
+    if( rect.bottom() > window()->height() )
+    {
+      if( rect.top() - preferredHeight - translate_line->height() >= 0 )
+        rect.moveTop( rect.top() - preferredHeight - translate_line->height() );
+      else
+        rect.setBottom( window()->height() );
+    }
+  }
+#endif
 
   word_list->setGeometry(rect);
   word_list->show();
