@@ -19,6 +19,10 @@
 #include "scanflag.hh"
 #endif
 
+#ifndef USE_QTWEBKIT
+class QWebEngineProfile;
+#endif
+
 /// This is a popup dialog to show translations when clipboard scanning mode
 /// is enabled.
 class ScanPopup: public QMainWindow, KeyboardState
@@ -30,6 +34,9 @@ public:
   ScanPopup( QWidget * parent,
              Config::Class & cfg,
              ArticleNetworkAccessManager &,
+#ifndef USE_QTWEBKIT
+             QWebEngineProfile &,
+#endif
              AudioPlayerPtr const &,
              std::vector< sptr< Dictionary::Class > > const & allDictionaries,
              Instances::Groups const &,
@@ -185,8 +192,6 @@ private:
   /// Returns inputWord, chopped with appended ... if it's too long/
   QString elideInputWord();
 
-  void updateBackForwardButtons();
-
   void showTranslationFor( Config::InputPhrase const & inputPhrase );
 
   void updateSuggestionList();
@@ -217,6 +222,8 @@ private slots:
   /// polling stops.
   void mouseGrabPoll();
 
+  void pageUnloaded();
+  void articleLoaded();
   void pageLoaded( ArticleView * );
 
   void escapePressed();
@@ -224,6 +231,9 @@ private slots:
   void mutedDictionariesChanged();
 
   void switchExpandOptionalPartsMode();
+
+  void pageLoadingStateChanged( ArticleView *, bool isLoading );
+  void updateBackForwardButtons();
 
   void translateInputChanged(QString const & text);
   void translateInputFinished();
