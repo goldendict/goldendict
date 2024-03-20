@@ -91,7 +91,7 @@ using std::string;
 
     connect( baseReply, SIGNAL( encrypted() ), this, SIGNAL( encrypted() ) );
 
-    connect( baseReply, SIGNAL( finished() ), this, SIGNAL( finished() ) );
+    connect( baseReply, SIGNAL( finished() ), this, SLOT( finishedSlot() ) );
 
     connect( baseReply, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ),
              this, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ) );
@@ -202,6 +202,14 @@ using std::string;
     memcpy( data, buffer.data(), size );
     buffer.remove( 0, size );
     return size;
+  }
+
+  void AllowFrameReply::finishedSlot()
+  {
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+    setFinished( true );
+#endif
+    emit finished();
   }
 
 #endif
@@ -330,7 +338,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     {
       gdWarning( "Blocking element \"%s\"\n", localReq.url().toEncoded().data() );
 
-      return new BlockedNetworkReply( this );
+      return new BlockedNetworkReply( localReq, this );
     }
   }
 
@@ -534,6 +542,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
   QString const & contentType ):
   QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
 {
+  setUrl( netReq.url() );
   setRequest( netReq );
 
   setOpenMode( ReadOnly );
@@ -643,11 +652,16 @@ void ArticleResourceReply::finishedSlot()
 #endif
   }
 
-  finished();
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+  setFinished( true );
+#endif
+  emit finished();
 }
 
-BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
+BlockedNetworkReply::BlockedNetworkReply( QNetworkRequest const & request, QObject * parent ):
+  QNetworkReply( parent )
 {
+  setUrl( request.url() );
   setError( QNetworkReply::ContentOperationNotPermittedError, "Content Blocked" );
 
   connect( this, SIGNAL( finishedSignal() ), this, SLOT( finishedSlot() ),
@@ -660,5 +674,9 @@ BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( par
 void BlockedNetworkReply::finishedSlot()
 {
   emit readyRead();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+  setFinished( true );
+#endif
   emit finished();
 }
