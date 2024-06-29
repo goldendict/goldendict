@@ -466,22 +466,22 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
     {
       QString articleText = QString( "<div class=\"sdct_h\">" ) + QString::fromUtf8( resource, size ) + "</div>";
 
+      const QString srcRegexpStr(
+          "(<\\s*(?:img|script)\\s(?:[^>]*\\s)?src\\s*=)(?!\\s*[\"']?(?:data|https?|ftp):)(\\s*[\"']?)" );
+      const QString linkRegexpStr(
+          "(<\\s*link\\s(?:[^>]*\\s)?href\\s*=)(?!\\s*[\"']?(?:data|https?|ftp):)(\\s*[\"']?)" );
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-      QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
-                                QRegularExpression::CaseInsensitiveOption
-                                | QRegularExpression::InvertedGreedinessOption );
-      QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
-                                 QRegularExpression::CaseInsensitiveOption
-                                 | QRegularExpression::InvertedGreedinessOption );
+      QRegularExpression srcRe( srcRegexpStr,
+                                QRegularExpression::CaseInsensitiveOption );
+      QRegularExpression linkRe( linkRegexpStr,
+                                 QRegularExpression::CaseInsensitiveOption );
 #else
-      QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-      imgRe.setMinimal( true );
-      QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
-      linkRe.setMinimal( true );
+      QRegExp srcRe( srcRegexpStr, Qt::CaseInsensitive );
+      QRegExp linkRe( linkRegexpStr, Qt::CaseInsensitive );
 #endif
 
-      articleText.replace( imgRe , "\\1bres://" + QString::fromStdString( getId() ) + "/" )
-                 .replace( linkRe, "\\1bres://" + QString::fromStdString( getId() ) + "/" );
+      articleText.replace( srcRe, "\\1\\2bres://" + QString::fromStdString( getId() ) + "/" )
+                 .replace( linkRe, "\\1\\2bres://" + QString::fromStdString( getId() ) + "/" );
 
       // Handle links to articles
 
