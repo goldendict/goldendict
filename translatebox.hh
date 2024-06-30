@@ -49,6 +49,9 @@ public:
   inline void setSizePolicy(QSizePolicy::Policy hor, QSizePolicy::Policy ver)
   { setSizePolicy(QSizePolicy(hor, ver)); }
 
+  /// @param isLoading whether the visible page bound to this translate box is currently loading.
+  void setIsPageLoading( bool isLoading );
+
 signals:
 
 public slots:

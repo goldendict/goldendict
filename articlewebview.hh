@@ -4,8 +4,10 @@
 #ifndef __ARTICLEWEBVIEW_HH_INCLUDED__
 #define __ARTICLEWEBVIEW_HH_INCLUDED__
 
-#include <QWebView>
+#ifdef USE_QTWEBKIT
+
 #include "config.hh"
+#include <QWebView>
 
 class ArticleInspector;
 
@@ -27,6 +29,8 @@ public:
   ~ArticleWebView();
 
   void setUp( Config::Class * cfg );
+
+  void saveConfigData() const;
 
   bool isMidButtonPressed() const
   { return midButtonPressed; }
@@ -54,6 +58,8 @@ protected:
 
 private:
 
+  bool isOnScrollBar( QMouseEvent const & event ) const;
+
   Config::Class * cfg;
   ArticleInspector * inspector;
 
@@ -62,4 +68,40 @@ private:
   bool showInspectorDirectly;
 };
 
-#endif
+#else // USE_QTWEBKIT
+
+#include <QWebEngineView>
+
+/// A thin wrapper around QWebEngineView that works around QTBUG-43602 by installing
+/// an event filter on the QQuickWidget child of QWebEngineView, which swallows mouse events.
+/// In the Qt WebEngine version, ArticleView implements most features ArticleWebView provides in the Qt WebKit version.
+class ArticleWebView: public QWebEngineView
+{
+  Q_OBJECT
+public:
+  using QWebEngineView::QWebEngineView;
+
+  /// This function supersedes installEventFilter(), which doesn't work as expected because of QTBUG-43602.
+  /// Call this function once and immediately after constructing this view. Otherwise, it will have no effect.
+  /// Removing or replacing the event filter is currently unneeded and thus unsupported.
+  void setEventFilter( QObject * filterObject );
+
+  /// @return whether the argument to a timely setEventFilter() call was installed as event filter on @p object.
+  bool isWatched( QObject * object ) const;
+
+  // Use the following member functions, not QWidget's equivalents they hide.
+  QCursor cursor() const;
+  void setCursor( QCursor const & );
+  void unsetCursor();
+
+protected:
+  void childEvent( QChildEvent * event ) override;
+
+private:
+  QObject * eventFilterObject = nullptr;
+  QWidget * childWidget = nullptr;
+};
+
+#endif // USE_QTWEBKIT
+
+#endif // __ARTICLEWEBVIEW_HH_INCLUDED__

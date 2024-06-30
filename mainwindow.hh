@@ -9,7 +9,6 @@
 #include <QToolButton>
 #include <QSystemTrayIcon>
 #include <QNetworkAccessManager>
-#include <QProgressDialog>
 #include "ui_mainwindow.h"
 #include "folding.hh"
 #include "config.hh"
@@ -36,6 +35,12 @@
 #include <fixx11h.h>
 #endif
 
+#ifndef USE_QTWEBKIT
+#include <memory>
+
+class QWebEngineProfile;
+#endif
+
 #ifdef HAVE_X11
   // TODO: implement startup notification support and remove these workarounds
   // (see investigation comments on #781).
@@ -44,6 +49,8 @@
 
 using std::string;
 using std::vector;
+
+class ArticleSaveProgressDialog;
 
 class ExpandableToolBar : public QToolBar
 {
@@ -163,6 +170,11 @@ private:
   QNetworkAccessManager dictNetMgr; // We give dictionaries a separate manager,
                                     // since their requests can be destroyed
                                     // in a separate thread
+
+#ifndef USE_QTWEBKIT
+  std::unique_ptr< QWebEngineProfile > webEngineProfile;
+#endif
+
   AudioPlayerFactory audioPlayerFactory;
 
   WordList * wordList;
@@ -220,9 +232,14 @@ private:
 
   void updatePronounceAvailability();
 
+  void appendToFoundInDictsList( QString const & id, bool isActive );
   void updateFoundInDictsList();
 
+  void updateIsPageLoading();
+  void setIsPageLoading( bool isLoading );
+
   void updateBackForwardButtons();
+  void updateBackForwardButtons( ArticleView * view );
 
   void updateWindowTitle();
 
@@ -260,6 +277,9 @@ private:
 
   ArticleView * getCurrentArticleView();
   void ctrlTabPressed();
+
+  void saveArticleAs( ArticleView & view, QString & html, QString const & fileName, bool complete,
+                      QRegExp const & rxName, ArticleSaveProgressDialog * progressDialog );
 
   void fillWordListFromHistory();
 
@@ -355,6 +375,11 @@ private slots:
   /// ArticleView's icon has changed
   void iconChanged( ArticleView *, QIcon const & );
 
+  void pageLoadingStateChanged( ArticleView *, bool isLoading );
+  void canGoBackForwardChanged( ArticleView * );
+
+  void pageUnloaded( ArticleView * );
+  void articleLoaded( ArticleView *, QString const & id, bool isActive );
   void pageLoaded( ArticleView * );
   void tabSwitched( int );
   void tabMenuRequested(QPoint pos);
@@ -413,7 +438,7 @@ private slots:
 
   void openLinkInNewTab( QUrl const &, QUrl const &, QString const &,
                          ArticleView::Contexts const & contexts );
-  void showDefinitionInNewTab( QString const & word, unsigned group,
+  void showDefinitionInNewTab( Config::InputPhrase const & phrase, unsigned group,
                                QString const & fromArticle,
                                ArticleView::Contexts const & contexts );
   void typingEvent( QString const & );
@@ -527,31 +552,6 @@ private slots:
   /// Return true while scanning GoldenDict window
   bool isGoldenDictWindow( HWND hwnd );
 #endif
-};
-
-class ArticleSaveProgressDialog : public QProgressDialog
-{
-Q_OBJECT
-
-public:
-  explicit ArticleSaveProgressDialog( QWidget * parent = 0,  Qt::WindowFlags f = Qt::WindowFlags() ):
-    QProgressDialog( parent, f )
-  {
-    setAutoReset( false );
-    setAutoClose( false );
-  }
-
-public slots:
-  void perform()
-  {
-    int progress = value() + 1;
-    if ( progress == maximum() )
-    {
-      emit close();
-      deleteLater();
-    }
-    setValue( progress );
-  }
 };
 
 #endif

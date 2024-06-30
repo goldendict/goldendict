@@ -4,13 +4,13 @@
 #include "articleview.hh"
 #include <map>
 #include <QMessageBox>
-#include <QWebHitTestResult>
 #include <QMenu>
 #include <QDesktopServices>
-#include <QWebHistory>
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QFileDialog>
+#include "articlewebpage.hh"
+#include "webkit_or_webengine.hh"
 #include "folding.hh"
 #include "wstring_qt.hh"
 #include "webmultimediadownload.hh"
@@ -21,9 +21,22 @@
 #include "gestures.hh"
 #include "fulltextsearch.hh"
 
-#if QT_VERSION >= 0x040600
+#ifdef USE_QTWEBKIT
 #include <QWebElement>
 #include <QWebElementCollection>
+#include <QWebHistory>
+#include <QWebHitTestResult>
+#else
+#include <QColor>
+#include <QWebChannel>
+#include <QWebEngineContextMenuData>
+#include <QWebEngineFindTextResult>
+#include <QWebEngineHistory>
+#include <QWebEngineProfile>
+#include <QWebEngineScript>
+#include <QWebEngineScriptCollection>
+
+#include <utility>
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
@@ -61,8 +74,39 @@ public:
     QObject( &view ), articleView( view )
   {}
 
-  Q_INVOKABLE void onJsActiveArticleChanged( QString const & id )
+public slots:
+#ifdef USE_QTWEBKIT
+  void onJsPageInitStarted()
+  { articleView.onJsPageInitStarted(); }
+
+  void onJsActiveArticleChanged( QString const & id )
   { articleView.onJsActiveArticleChanged( id ); }
+#else
+  void onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
+                            int activeArticleIndex, bool hasPageInitFinished, QDateTime const & pageTimestamp )
+  {
+    articleView.onJsPageInitStarted( loadedArticles, loadedAudioLinks,
+                                     activeArticleIndex, hasPageInitFinished, pageTimestamp );
+  }
+
+  void onJsPageInitFinished()
+  { articleView.onJsPageInitFinished(); }
+
+  void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp )
+  { articleView.onJsActiveArticleChanged( id, currentArticleTimestamp ); }
+
+  void onJsFirstLeftButtonMouseDown()
+  { articleView.onJsFirstLeftButtonMouseDown(); }
+
+  void onJsDoubleClicked( QString const & imageUrl )
+  { articleView.onJsDoubleClicked( imageUrl ); }
+#endif
+
+  void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
+  { articleView.onJsArticleLoaded( id, audioLink, isActive ); }
+
+  void onJsLocationHashChanged()
+  { articleView.onJsLocationHashChanged(); }
 
 private:
   ArticleView & articleView;
@@ -194,12 +238,14 @@ public:
 
 /// End of DiacriticsHandler class
 
+#ifdef USE_QTWEBKIT
 static QVariant evaluateJavaScriptVariableSafe( QWebFrame * frame, const QString & variable )
 {
   return frame->evaluateJavaScript(
         QString( "( typeof( %1 ) !== 'undefined' && %1 !== undefined ) ? %1 : null;" )
         .arg( variable ) );
 }
+#endif
 
 namespace {
 
@@ -217,6 +263,11 @@ QString dictionaryIdFromScrollTo( QString const & scrollTo )
   return scrollTo.mid( scrollToPrefixLength );
 }
 
+WebPage::FindFlags caseSensitivityFindFlags( bool matchCase )
+{
+  return matchCase ? WebPage::FindCaseSensitively : WebPage::FindFlags();
+}
+
 QString searchStatusMessageNoMatches()
 {
   return ArticleView::tr( "Phrase not found" );
@@ -230,7 +281,170 @@ QString searchStatusMessage( int activeMatch, int matchCount )
   return ArticleView::tr( "%1 of %2 matches" ).arg( activeMatch ).arg( matchCount );
 }
 
+std::string makeBlankPage( ArticleNetworkAccessManager const & articleNetMgr, WebPage & webPage )
+{
+#ifdef USE_QTWEBKIT
+  Q_UNUSED( webPage )
+  return articleNetMgr.makeBlankPage();
+#else
+  // Loading the default blank page instantly via QWebEnginePage::setHtml() alone is not sufficient to prevent
+  // white background flashes when the background color in the current article style is not white. The white
+  // background is visible for a particularly long time when a large page is loaded in a new foreground tab.
+  // Setting QWebEnginePage::backgroundColor to Qt::transparent replaces the white background flashes with gray
+  // background flashes. Eliminate the flashes by finding the page background color in the article style sheets and
+  // assigning it to QWebEnginePage::backgroundColor. See also the documentation for QWebEnginePage::backgroundColor.
+  QColor pageBackgroundColor;
+  auto blankPage = articleNetMgr.makeBlankPage( &pageBackgroundColor );
+  if( pageBackgroundColor.isValid() )
+    webPage.setBackgroundColor( pageBackgroundColor );
+  return blankPage;
+#endif
+}
+
+QLatin1String javaScriptBool( bool value )
+{
+  return QLatin1String( value ? "true" : "false" );
+}
+
+#ifndef USE_QTWEBKIT
+/// @return the string representation of @p date in the ISO 8601 format required by JavaScript Date constructor.
+/// @note Qt::ISODateWithMs format is used to include milliseconds. The alternative Qt::ISODate format's
+///       one-second precision is definitely too coarse for timestamp-based synchronization.
+/// @note A JavaScript function, connected to a C++ signal with a QDateTime parameter, receives a value of the type
+///       String rather than of the expected type Date in Qt 5.15.5. Explicitly sending date&time strings in the
+///       required format will keep working correctly even if the type conversion issue is fixed in a future Qt version.
+QString javaScriptDateString( QDateTime const & date )
+{
+  return date.toString( Qt::ISODateWithMs );
+}
+
+QString pageReloadingScriptName()
+{
+  return QStringLiteral( "PageReloading" );
+}
+
+QString pageReloadingScriptSourceCode( QString const & currentArticle, bool scrollToCurrentArticle )
+{
+  return QLatin1String( "const gdCurrentArticleBeforePageReloading = '%1';\n"
+                        "const gdScrollToCurrentArticleAfterPageReloading = %2;" )
+      .arg( currentArticle, javaScriptBool( scrollToCurrentArticle ) );
+}
+
+QWebEngineScript createScript( QString const & name, QString const & sourceCode )
+{
+  QWebEngineScript script;
+  script.setInjectionPoint( QWebEngineScript::DocumentCreation );
+  script.setRunsOnSubFrames( false );
+  script.setWorldId( QWebEngineScript::MainWorld );
+
+  script.setName( name );
+  script.setSourceCode( sourceCode );
+
+  return script;
+}
+
+QWebEngineScript createPageReloadingScript()
+{
+  return createScript( pageReloadingScriptName(), pageReloadingScriptSourceCode( QString{}, false ) );
+}
+
+QString variableDeclarationFromAssignmentScript( QString const & assignmentScript )
+{
+  return QLatin1String( "let " ) + assignmentScript;
+}
+
+QString profilePreferencesScriptName()
+{
+  return QStringLiteral( "ProfilePreferences" );
+}
+
+QString selectWordBySingleClickAssignmentScript( bool selectWordBySingleClick )
+{
+  return QLatin1String( "gdSelectWordBySingleClick = %1;" ).arg( javaScriptBool( selectWordBySingleClick ) );
+}
+
+bool profilePreferencesChanged( Config::Preferences const & oldPreferences, Config::Preferences const & newPreferences )
+{
+  return oldPreferences.selectWordBySingleClick != newPreferences.selectWordBySingleClick;
+}
+
+QString profilePreferencesScriptSourceCode( Config::Preferences const & preferences )
+{
+  return variableDeclarationFromAssignmentScript( selectWordBySingleClickAssignmentScript(
+                                                    preferences.selectWordBySingleClick ) );
+}
+
+/// QUrl::StripTrailingSlash does not remove a slash if it is the only character in the path.
+/// gdlookup URL's path is either empty or equal to a slash, depending on representation. Consider such paths matching.
+bool pathsMatch( QUrl const & a, QUrl const & b )
+{
+  auto const isEmptyOrSlash = []( QString const & str ) {
+    return str.isEmpty() || str == QLatin1Char( '/' );
+  };
+  return a.path() == b.path() || ( isEmptyOrSlash( a.path() ) && isEmptyOrSlash( b.path() ) );
+}
+
+bool urlsOrWordsMatch( QUrl const & a, QUrl const & b )
+{
+  if( !pathsMatch( a, b ) )
+    return false;
+
+  constexpr auto formattingOptions = QUrl::RemovePath | QUrl::RemoveFragment;
+
+  if( a.matches( b, formattingOptions ) )
+    return true;
+
+  static const QLatin1String lookupScheme( "gdlookup" );
+  auto const wordQueryItem = []( QUrl const & url ) {
+    return QUrlQuery{ url }.queryItemValue( QStringLiteral( "word" ) );
+  };
+
+  return a.scheme() == lookupScheme && b.scheme() == lookupScheme
+          && a.matches( b, formattingOptions | QUrl::RemoveQuery )
+          && wordQueryItem( a ).compare( wordQueryItem( b ), Qt::CaseInsensitive ) == 0;
+}
+#endif // USE_QTWEBKIT
+
 } // unnamed namespace
+
+#ifndef USE_QTWEBKIT
+class ArticleView::MouseEventInfo
+{
+public:
+  void assign( QObject * target_, QMouseEvent const & event )
+  {
+    Q_ASSERT( target_ );
+
+    target = target_;
+    localPos = event.localPos();
+    windowPos = event.windowPos();
+    screenPos = event.screenPos();
+    buttons = event.buttons();
+    modifiers = event.modifiers();
+  }
+
+  void invalidate()
+  { target = nullptr; }
+
+  bool isValid() const
+  { return target != nullptr; }
+
+  void synthesize( QEvent::Type type, Qt::MouseButton button ) const
+  {
+    QMouseEvent event( type, localPos, windowPos, screenPos, button, buttons, modifiers,
+                       Qt::MouseEventSynthesizedByApplication );
+    QApplication::sendEvent( target, &event );
+  }
+
+private:
+  QObject * target = nullptr;
+  QPointF localPos;
+  QPointF windowPos;
+  QPointF screenPos;
+  Qt::MouseButtons buttons;
+  Qt::KeyboardModifiers modifiers;
+};
+#endif
 
 QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
 {
@@ -239,10 +453,13 @@ QString ArticleView::scrollToFromDictionaryId( QString const & dictionaryId )
 }
 
 ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
+#ifndef USE_QTWEBKIT
+                          QWebEngineProfile & webEngineProfile,
+#endif
                           AudioPlayerPtr const & audioPlayer_,
                           std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                           Instances::Groups const & groups_, bool popupView_,
-                          Config::Class const & cfg_,
+                          Config::Class & cfg_,
                           QAction & openSearchAction_,
                           QAction * dictionaryBarToggled_,
                           GroupComboBox const * groupComboBox_ ):
@@ -264,6 +481,7 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   inspectAction( this ),
   openSearchAction( openSearchAction_ ),
   searchIsOpened( false ),
+  isLoading( false ),
   dictionaryBarToggled( dictionaryBarToggled_ ),
   groupComboBox( groupComboBox_ ),
   ftsSearchIsOpened( false ),
@@ -272,7 +490,17 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
 {
   ui.setupUi( this );
 
-  ui.definition->setUp( const_cast< Config::Class * >( &cfg ) );
+  ArticleWebPage * const webPage = new ArticleWebPage(
+#ifndef USE_QTWEBKIT
+                                                        *this,
+                                                        cfg_,
+                                                        &webEngineProfile,
+#endif
+                                                        ui.definition );
+  ui.definition->setPage( webPage );
+#ifdef USE_QTWEBKIT
+  ui.definition->setUp( &cfg_ );
+#endif
 
   goBackAction.setShortcut( QKeySequence( "Alt+Left" ) );
   ui.definition->addAction( &goBackAction );
@@ -284,26 +512,51 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( &goForwardAction, SIGNAL( triggered() ),
            this, SLOT( forward() ) );
 
-  ui.definition->pageAction( QWebPage::Copy )->setShortcut( QKeySequence::Copy );
-  ui.definition->addAction( ui.definition->pageAction( QWebPage::Copy ) );
+  QAction * const copyAction = ui.definition->pageAction( WebPage::Copy );
+  copyAction->setShortcut( QKeySequence::Copy );
+  ui.definition->addAction( copyAction );
 
-  QAction * selectAll = ui.definition->pageAction( QWebPage::SelectAll );
+  QAction * selectAll = ui.definition->pageAction( WebPage::SelectAll );
   selectAll->setShortcut( QKeySequence::SelectAll );
   selectAll->setShortcutContext( Qt::WidgetWithChildrenShortcut );
   ui.definition->addAction( selectAll );
 
   ui.definition->setContextMenuPolicy( Qt::CustomContextMenu );
 
+#ifdef USE_QTWEBKIT
+  // ArticleWebPage always delegates all links in the Qt WebEngine version.
   ui.definition->page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
 
+  // ArticleUrlSchemeHandler implements this using articleNetMgr in the Qt WebEngine version.
   ui.definition->page()->setNetworkAccessManager( &articleNetMgr );
 
+  // QWebView::loadFinished() is emitted immediately after the JavaScript load event, which always
+  // occurs after the page's JavaScript code finishes executing, so at the time of its emission
+  // onJsArticleLoaded() has already obtained the data required by loadFinished(). An exception:
+  // loadFinished() for the initial Welcome! page is emitted before the page's JavaScript code finishes
+  // executing. This exception is not a problem in practice as the Welcome! page contains neither
+  // dictionary articles nor audio links, so onJsArticleLoaded() isn't called at all on this page.
+  // Calling ArticleView::loadFinished() before QWebView::loadFinished() is emitted, for example,
+  // as soon as the page's JavaScript code finishes executing, breaks scrolling to current article
+  // after ArticleView::reload(), i.e. causes a wrong vertical scroll position.
   connect( ui.definition, SIGNAL( loadFinished( bool ) ),
            this, SLOT( loadFinished( bool ) ) );
 
   attachToJavaScript();
   connect( ui.definition->page()->mainFrame(), SIGNAL( javaScriptWindowObjectCleared() ),
            this, SLOT( attachToJavaScript() ) );
+#else
+  auto * const webChannel = new QWebChannel( webPage );
+  webPage->setWebChannel( webChannel, QWebEngineScript::MainWorld );
+  webChannel->registerObject( QStringLiteral( "gdArticleView" ), jsProxy );
+
+  webPage->scripts().insert( createPageReloadingScript() );
+
+  connect( webPage, &QWebEnginePage::findTextFinished, this, &ArticleView::findTextFinished );
+
+  // QWebEnginePage always highlights all occurences, and this cannot be disabled => hide the useless button.
+  ui.highlightAllButton->hide();
+#endif // USE_QTWEBKIT
 
   connect( ui.definition, SIGNAL( titleChanged( QString const & ) ),
            this, SLOT( handleTitleChanged( QString const & ) ) );
@@ -314,13 +567,18 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   connect( ui.definition, SIGNAL( customContextMenuRequested( QPoint const & ) ),
            this, SLOT( contextMenuRequested( QPoint const & ) ) );
 
-  connect( ui.definition, SIGNAL( linkClicked( QUrl const & ) ),
+  connect( webPage, SIGNAL( linkClicked( QUrl const & ) ),
            this, SLOT( linkClicked( QUrl const & ) ) );
+
+#ifdef USE_QTWEBKIT
+  connect( ui.definition, SIGNAL( doubleClicked( QPoint ) ), this, SLOT( doubleClicked( QPoint ) ) );
 
   connect( ui.definition->page(), SIGNAL( linkHovered ( const QString &, const QString &, const QString & ) ),
            this, SLOT( linkHovered ( const QString &, const QString &, const QString & ) ) );
-
-  connect( ui.definition, SIGNAL( doubleClicked( QPoint ) ),this,SLOT( doubleClicked( QPoint ) ) );
+#else
+  connect( ui.definition->page(), &QWebEnginePage::linkHovered,
+           this, [ this ]( QString const & url ) { linkHovered( url ); } );
+#endif
 
   pasteAction.setShortcut( QKeySequence::Paste  );
   ui.definition->addAction( &pasteAction );
@@ -354,25 +612,28 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->addAction( &inspectAction );
   connect( &inspectAction, SIGNAL( triggered() ), this, SLOT( inspect() ) );
 
+#ifdef USE_QTWEBKIT
   ui.definition->installEventFilter( this );
+#else
+  ui.definition->setEventFilter( this );
+#endif
   ui.searchFrame->installEventFilter( this );
   ui.ftsSearchFrame->installEventFilter( this );
 
+#ifdef USE_QTWEBKIT
+  // registerArticleUrlSchemes() is responsible for similar configuration in the Qt WebEngine version.
   QWebSettings * settings = ui.definition->page()->settings();
   settings->setAttribute( QWebSettings::LocalContentCanAccessRemoteUrls, true );
   settings->setAttribute( QWebSettings::LocalContentCanAccessFileUrls, true );
+#endif
 
+  std::string const blankPage = makeBlankPage( articleNetMgr, *webPage );
   // Load the default blank page instantly, so there would be no flicker.
-
-  QString contentType;
-  QUrl blankPage( "gdlookup://localhost?blank=1" );
-
-  sptr< Dictionary::DataRequest > r = articleNetMgr.getResource( blankPage,
-                                                                 contentType );
-
-  ui.definition->setHtml( QString::fromUtf8( &( r->getFullData().front() ),
-                                             r->getFullData().size() ),
-                          blankPage );
+  // When the correct WebEnginePage::backgroundColor is set, loading this blank page is less important,
+  // but still prevents brief white background flashes when a new empty tab is created and switched to,
+  // or when the scan popup is opened for the first time.
+  ui.definition->setHtml( QString::fromUtf8( blankPage.data(), blankPage.size() ),
+                          QUrl( "gdlookup://localhost?blank=1" ) );
 
   expandOptionalParts = cfg.preferences.alwaysExpandOptionalParts;
 
@@ -381,8 +642,10 @@ ArticleView::ArticleView( QWidget * parent, ArticleNetworkAccessManager & nm,
   ui.definition->grabGesture( Gestures::GDSwipeGestureType );
 #endif
 
+#ifdef USE_QTWEBKIT
   // Variable name for store current selection range
   rangeVarName = QString( "sr_%1" ).arg( QString::number( (quint64)this, 16 ) );
+#endif
 }
 
 // explicitly report the minimum size, to avoid
@@ -408,6 +671,32 @@ ArticleView::~ArticleView()
 #endif
 }
 
+void ArticleView::saveConfigData() const
+{
+#ifdef USE_QTWEBKIT
+  ui.definition->saveConfigData();
+#else
+  auto * const page = static_cast< ArticleWebPage const * >( ui.definition->page() );
+  page->saveConfigData();
+#endif
+}
+
+static QUrl createGdlookupUrl( Config::InputPhrase const & phrase, unsigned group, bool ignoreDiacritics )
+{
+  QUrl req;
+
+  req.setScheme( "gdlookup" );
+  req.setHost( "localhost" );
+  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
+  if( !phrase.punctuationSuffix.isEmpty() )
+    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
+  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
+  if( ignoreDiacritics )
+    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
+
+  return req;
+}
+
 void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned group,
                                   QString const & scrollTo,
                                   Contexts const & contexts_ )
@@ -415,17 +704,8 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   // first, let's stop the player
   audioPlayer->stop();
 
-  QUrl req;
+  QUrl req = createGdlookupUrl( phrase, group, cfg.preferences.ignoreDiacritics );
   Contexts contexts( contexts_ );
-
-  req.setScheme( "gdlookup" );
-  req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", phrase.phrase );
-  if ( !phrase.punctuationSuffix.isEmpty() )
-    Qt4x5::Url::addQueryItem( req, "punctuation_suffix", phrase.punctuationSuffix );
-  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
-  if( cfg.preferences.ignoreDiacritics )
-    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
   if ( scrollTo.size() )
     Qt4x5::Url::addQueryItem( req, "scrollto", scrollTo );
@@ -457,18 +737,34 @@ void ArticleView::showDefinition( Config::InputPhrase const & phrase, unsigned g
   if ( mutedDicts.size() )
     Qt4x5::Url::addQueryItem( req,  "muted", mutedDicts );
 
+  showDefinition( phrase, req );
+}
+
+void ArticleView::showDefinition( Config::InputPhrase const & phrase, QUrl const & url )
+{
   // Update headwords history
   emit sendWordToHistory( phrase.phrase );
 
   // Any search opened is probably irrelevant now
+#ifdef USE_QTWEBKIT
+  // TODO (Qt WebKit): put this statement under the condition currently restricted to the Qt WebEngine
+  // version (see below) once Qt version < 5.2 and C++ standard < 11 are no longer supported.
   closeSearch();
+#else
+  // Handle only regular searchFrame here, because handleUrlChanged() hides ftsSearchFrame.
+  // If the looked-up word is the same as the currently displayed one, keep searchFrame visible:
+  // the user may have re-requested translation of the word to search from the beginning of the
+  // page, or switched to a different dictionary group to search the same text there.
+  if( searchIsOpened && !urlsOrWordsMatch( ui.definition->url(), url ) )
+    hideSearchFrameOnceJsSavesStateToWebHistory = true;
+#endif
 
   // Clear highlight all button selection
   ui.highlightAllButton->setChecked(false);
 
   emit setExpandMode( expandOptionalParts );
 
-  load( req );
+  load( url );
 
   //QApplication::setOverrideCursor( Qt::WaitCursor );
   ui.definition->setCursor( Qt::WaitCursor );
@@ -481,9 +777,8 @@ void ArticleView::showDefinition( QString const & word, unsigned group,
   showDefinition( Config::InputPhrase::fromPhrase( word ), group, scrollTo, contexts_ );
 }
 
-void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
-                                  QRegExp const & searchRegExp, unsigned group,
-                                  bool ignoreDiacritics )
+void ArticleView::showDefinition( Config::InputPhrase const & phrase, QStringList const & dictIDs,
+                                  QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics )
 {
   if( dictIDs.isEmpty() )
     return;
@@ -491,52 +786,35 @@ void ArticleView::showDefinition( QString const & word, QStringList const & dict
   // first, let's stop the player
   audioPlayer->stop();
 
-  QUrl req;
+  QUrl req = createGdlookupUrl( phrase, group, ignoreDiacritics );
 
-  req.setScheme( "gdlookup" );
-  req.setHost( "localhost" );
-  Qt4x5::Url::addQueryItem( req, "word", word );
   Qt4x5::Url::addQueryItem( req, "dictionaries", dictIDs.join( ",") );
   Qt4x5::Url::addQueryItem( req, "regexp", searchRegExp.pattern() );
   if( searchRegExp.caseSensitivity() == Qt::CaseSensitive )
     Qt4x5::Url::addQueryItem( req, "matchcase", "1" );
   if( searchRegExp.patternSyntax() == QRegExp::WildcardUnix )
     Qt4x5::Url::addQueryItem( req, "wildcards", "1" );
-  Qt4x5::Url::addQueryItem( req, "group", QString::number( group ) );
-  if( ignoreDiacritics )
-    Qt4x5::Url::addQueryItem( req, "ignore_diacritics", "1" );
 
-  // Update headwords history
-  emit sendWordToHistory( word );
-
-  // Any search opened is probably irrelevant now
-  closeSearch();
-
-  // Clear highlight all button selection
-  ui.highlightAllButton->setChecked(false);
-
-  emit setExpandMode( expandOptionalParts );
-
-  load( req );
-
-  //QApplication::setOverrideCursor( Qt::WaitCursor );
-  ui.definition->setCursor( Qt::WaitCursor );
+  showDefinition( phrase, req );
 }
 
-void ArticleView::showAnticipation()
+void ArticleView::showDefinition( QString const & word, QStringList const & dictIDs,
+                                  QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics )
 {
-  ui.definition->setHtml( "" );
-  ui.definition->setCursor( Qt::WaitCursor );
-  //QApplication::setOverrideCursor( Qt::WaitCursor );
+  showDefinition( Config::InputPhrase::fromPhrase( word ), dictIDs, searchRegExp, group, ignoreDiacritics );
 }
 
-void ArticleView::loadFinished( bool )
-{
-  QUrl url = ui.definition->url();
+#ifdef USE_QTWEBKIT
 
+// This function relies on Qt WebKit API unavailable in Qt WebEngine.
+// The code is useful only for website dictionaries.
+static void expandFrames( QWebView & view )
+{
   // See if we have any iframes in need of expansion
 
-  QList< QWebFrame * > frames = ui.definition->page()->mainFrame()->childFrames();
+  QWebFrame & mainFrame = *view.page()->mainFrame();
+
+  QList< QWebFrame * > frames = mainFrame.childFrames();
 
   bool wereFrames = false;
 
@@ -549,12 +827,12 @@ void ArticleView::loadFinished( bool )
       //DPRINTF( ">>>>>>>>Height = %s\n", (*i)->evaluateJavaScript( "document.body.offsetHeight;" ).toString().toUtf8().data() );
 
       // Set the height
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
+      mainFrame.evaluateJavaScript( QString( "document.getElementById('%1').height = %2;" ).
         arg( (*i)->frameName() ).
         arg( (*i)->contentsSize().height() ) );
 
       // Show it
-      ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
+      mainFrame.evaluateJavaScript( QString( "document.getElementById('%1').style.display = 'block';" ).
         arg( (*i)->frameName() ) );
 
       (*i)->evaluateJavaScript( "var gdLastUrlText;" );
@@ -571,12 +849,13 @@ void ArticleView::loadFinished( bool )
 
     QMouseEvent ev( QEvent::MouseMove, QPoint(), Qt::MouseButton(), Qt::MouseButtons(), Qt::KeyboardModifiers() );
 
-    qApp->sendEvent( ui.definition, &ev );
+    qApp->sendEvent( &view, &ev );
   }
+}
 
-  // Expand collapsed article if only one loaded
-  ui.definition->page()->mainFrame()->evaluateJavaScript( "gdCheckArticlesNumber();" );
-
+// JavaScript code implements this feature in the Qt WebEngine version.
+void ArticleView::initCurrentArticleAndScroll()
+{
   QVariant userDataVariant = ui.definition->history()->currentItem().userData();
   if ( userDataVariant.type() == QVariant::Map )
   {
@@ -597,13 +876,13 @@ void ArticleView::loadFinished( bool )
       moveToCurrentArticle = false;
     }
 
-    const QString currentArticle = userData.value( "currentArticle" ).toString();
-    if( !currentArticle.isEmpty() )
+    QString const savedCurrentArticle = userData.value( "currentArticle" ).toString();
+    if( !savedCurrentArticle.isEmpty() )
     {
       // There's a current article saved, so set it to be current.
       // If a scroll position was stored - even (0, 0) - don't move to the
       // current article.
-      setCurrentArticle( currentArticle, moveToCurrentArticle );
+      setCurrentArticle( savedCurrentArticle, moveToCurrentArticle );
     }
 
     if ( sx != 0 || sy != 0 )
@@ -616,7 +895,7 @@ void ArticleView::loadFinished( bool )
   }
   else
   {
-    QString const scrollTo = Qt4x5::Url::queryItemValue( url, "scrollto" );
+    QString const scrollTo = Qt4x5::Url::queryItemValue( ui.definition->url(), "scrollto" );
     if( isScrollTo( scrollTo ) )
     {
       // There is no active article saved in history, but we have it as a parameter.
@@ -624,13 +903,17 @@ void ArticleView::loadFinished( bool )
       setCurrentArticle( scrollTo, true );
     }
   }
+}
 
-  ui.definition->unsetCursor();
-  //QApplication::restoreOverrideCursor();
+// JavaScript code implements this feature in the Qt WebEngine version.
+static void scrollToGdAnchor( QWebView const & view )
+{
+  QUrl url = view.url();
 
-#if QT_VERSION >= QT_VERSION_CHECK(4, 6, 0)
   if( !Qt4x5::Url::queryItemValue( url, "gdanchor" ).isEmpty() )
   {
+    QWebFrame & mainFrame = *view.page()->mainFrame();
+
     QString anchor = QUrl::fromPercentEncoding( Qt4x5::Url::encodedQueryItemValue( url, "gdanchor" ) );
 
     // Find GD anchor on page
@@ -650,8 +933,8 @@ void ArticleView::loadFinished( bool )
       rx.setMinimal( true );
       rx.setPattern( anchor.left( 34 ) + "[0-9a-f]*_" + originalAnchor );
 
-      QWebElementCollection coll = ui.definition->page()->mainFrame()->findAllElements( "a[name]" );
-      coll += ui.definition->page()->mainFrame()->findAllElements( "a[id]" );
+      QWebElementCollection coll = mainFrame.findAllElements( "a[name]" );
+      coll += mainFrame.findAllElements( "a[id]" );
 
       for( QWebElementCollection::iterator it = coll.begin(); it != coll.end(); ++it )
       {
@@ -664,7 +947,7 @@ void ArticleView::loadFinished( bool )
 
           url.clear();
           url.setFragment( rx.cap( 0 ) );
-          ui.definition->page()->mainFrame()->evaluateJavaScript(
+          mainFrame.evaluateJavaScript(
              QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
 
           break;
@@ -675,26 +958,84 @@ void ArticleView::loadFinished( bool )
     {
       url.clear();
       url.setFragment( anchor );
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
+      mainFrame.evaluateJavaScript(
          QString( "window.location.hash = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
     }
   }
+}
+
+#endif // USE_QTWEBKIT
+
+void ArticleView::loadFinished( bool )
+{
+#ifdef USE_QTWEBKIT
+  expandFrames( *ui.definition );
+
+  // If true, the user has managed to activate an article already.
+  // The code below does not override this explicit user choice.
+  bool const wasCurrentArticleSetExplicitly = evaluateJavaScriptVariableSafe(
+        ui.definition->page()->mainFrame(), "gdWasCurrentArticleSetExplicitly" ).toBool();
+
+  // Don't set the current article or scroll if the user has activated an article already.
+  // However, if this was a back/forward navigation or page reloading, the user also has to
+  // scroll the mouse wheel to prevent QWebPage from restoring its saved scroll position.
+  if( !wasCurrentArticleSetExplicitly )
+  {
+    initCurrentArticleAndScroll();
+    scrollToGdAnchor( *ui.definition );
+  }
 #endif
+
+  ui.definition->unsetCursor();
+  //QApplication::restoreOverrideCursor();
 
   emit pageLoaded( this );
 
   if( Qt4x5::Url::hasQueryItem( ui.definition->url(), "regexp" ) )
     highlightFTSResults();
+
+  isLoading = false;
+  emit pageLoadingStateChanged( this, isLoading );
 }
 
 void ArticleView::handleTitleChanged( QString const & title )
 {
-  if( !title.isEmpty() ) // Qt 5.x WebKit raise signal titleChanges(QString()) while navigation within page
-    emit titleChanged( this, title );
+  // Qt 5.x WebKit raise signal titleChanges(QString()) while navigation within page.
+  // The Qt WebEngine-specific code below assumes title is not empty.
+  if( title.isEmpty() )
+    return;
+
+#ifndef USE_QTWEBKIT
+  // When a page is loaded, QWebEngineView::title first becomes equal to the URL,
+  // then quickly changes to the HTML <title>. Ignore the temporary title change
+  // to prevent the flashing of the main window title.
+
+  auto const url = ui.definition->url().toString();
+  if( title == url )
+    return;
+
+  constexpr QChar leftToRightEmbedding( u'\u202A' );
+  constexpr QChar popDirectionalFormatting( u'\u202C' );
+  Q_ASSERT( !title.isEmpty() );
+  bool const titleMatchesUrl = title.front() == leftToRightEmbedding && title.back() == popDirectionalFormatting
+                               && QStringView{ title.constData() + 1, title.size() - 2 } == url;
+  if( titleMatchesUrl )
+    return;
+#endif
+
+  emit titleChanged( this, title );
 }
 
 void ArticleView::handleUrlChanged( QUrl const & url )
 {
+#ifndef USE_QTWEBKIT
+  isBlankPagePresentInWebHistory = isBlankPagePresentInWebHistory
+          || QUrlQuery{ url }.queryItemValue( QStringLiteral( "blank" ) ) == QLatin1String( "1" );
+#endif
+
+  if( ftsSearchIsOpened && Qt4x5::Url::queryItemValue( url, "regexp" ).isEmpty() )
+    closeSearch(); // ftsSearchFrame does not make sense on a non-FTS-search page => hide it.
+
   QIcon icon;
 
   unsigned group = getGroup( url );
@@ -715,6 +1056,27 @@ void ArticleView::handleUrlChanged( QUrl const & url )
   emit iconChanged( this, icon );
 }
 
+void ArticleView::runJavaScript( TargetFrame targetFrame, QString const & scriptSource )
+{
+#ifdef USE_QTWEBKIT
+  QWebPage * const page = ui.definition->page();
+  Q_ASSERT( page );
+  QWebFrame * const frame = targetFrame == MainFrame ? page->mainFrame() : page->currentFrame();
+  Q_ASSERT( frame );
+  frame->evaluateJavaScript( scriptSource );
+#else
+  // The Qt WebEngine API allows to run JavaScript only on the main frame of a page.
+  // Hopefully the target frame does not matter in the Qt WebEngine version.
+  Q_UNUSED( targetFrame )
+  ui.definition->page()->runJavaScript( scriptSource, QWebEngineScript::MainWorld );
+#endif
+}
+
+void ArticleView::clearPageSelection()
+{
+  runJavaScript( CurrentFrame, "window.getSelection().removeAllRanges();" );
+}
+
 unsigned ArticleView::getGroup( QUrl const & url )
 {
   if ( url.scheme() == "gdlookup" && Qt4x5::Url::hasQueryItem( url, "group" ) )
@@ -723,29 +1085,17 @@ unsigned ArticleView::getGroup( QUrl const & url )
   return 0;
 }
 
-QStringList ArticleView::getArticlesList()
+QStringList ArticleView::getArticleList() const
 {
-  return evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdArticleContents" )
-      .toString().trimmed().split( ' ', Qt4x5::skipEmptyParts() );
+  return articleList;
 }
 
 QString ArticleView::getActiveArticleId()
 {
-  QString currentArticle = getCurrentArticle();
   if ( !isScrollTo( currentArticle ) )
     return QString(); // Incorrect id
 
   return dictionaryIdFromScrollTo( currentArticle );
-}
-
-QString ArticleView::getCurrentArticle()
-{
-  QVariant v = evaluateJavaScriptVariableSafe( ui.definition->page()->mainFrame(), "gdCurrentArticle" );
-
-  if ( v.type() == QVariant::String )
-    return v.toString();
-  else
-    return QString();
 }
 
 void ArticleView::jumpToDictionary( QString const & id, bool force )
@@ -753,7 +1103,7 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
   QString targetArticle = scrollToFromDictionaryId( id );
 
   // jump only if neceessary, or when forced
-  if ( force || targetArticle != getCurrentArticle() )
+  if ( force || targetArticle != currentArticle )
   {
     setCurrentArticle( targetArticle, true );
   }
@@ -762,30 +1112,46 @@ void ArticleView::jumpToDictionary( QString const & id, bool force )
 bool ArticleView::setCurrentArticle( QString const & id, bool moveToIt )
 {
   if ( !isScrollTo( id ) )
-    return false; // Incorrect id
+  {
+    gdWarning( "Attempt to set invalid current article ID: %s", id.toUtf8().constData() );
+    return false;
+  }
 
   if ( !ui.definition->isVisible() )
     return false; // No action on background page, scrollIntoView there don't work
 
-  QString const dictionaryId = dictionaryIdFromScrollTo( id );
-  if( !getArticlesList().contains( dictionaryId ) )
+  if( !articleList.contains( dictionaryIdFromScrollTo( id ) ) )
     return false;
 
-  if ( moveToIt )
-    ui.definition->page()->mainFrame()->evaluateJavaScript( QString( "document.getElementById('%1').scrollIntoView(true);" ).arg( id ) );
+#ifdef USE_QTWEBKIT
+  runJavaScript( MainFrame,
+    QString( "gdOnCppActiveArticleChanged('%1', %2);" ).arg( id, javaScriptBool( moveToIt ) ) );
+#else
+  currentArticleTimestamp = QDateTime::currentDateTimeUtc();
+  ui.definition->page()->runJavaScript( QLatin1String( "gdOnCppActiveArticleChanged('%1', %2, '%3', '%4');" )
+                                        .arg( id, javaScriptBool( moveToIt ), javaScriptDateString( pageTimestamp ),
+                                              javaScriptDateString( currentArticleTimestamp ) ) );
+#endif
 
-  ui.definition->page()->mainFrame()->evaluateJavaScript(
-    QString( "gdMakeArticleActive( '%1' );" ).arg( dictionaryId ) );
+  setValidCurrentArticleNoJs( id );
 
   return true;
 }
 
-void ArticleView::selectCurrentArticle()
+void ArticleView::setValidCurrentArticleNoJs( QString const & id )
 {
-  ui.definition->page()->mainFrame()->evaluateJavaScript(
-        QString( "gdSelectArticle( '%1' );" ).arg( getActiveArticleId() ) );
+  if( currentArticle == id )
+    return; // nothing to do
+  currentArticle = id;
+  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
 }
 
+void ArticleView::selectCurrentArticle()
+{
+  runJavaScript( MainFrame, "gdSelectCurrentArticle();" );
+}
+
+#ifdef USE_QTWEBKIT
 bool ArticleView::isFramedArticle( QString const & ca )
 {
   if ( ca.isEmpty() )
@@ -795,6 +1161,7 @@ bool ArticleView::isFramedArticle( QString const & ca )
                evaluateJavaScript( QString( "!!document.getElementById('gdexpandframe-%1');" )
                                           .arg( dictionaryIdFromScrollTo( ca ) ) ).toBool();
 }
+#endif
 
 bool ArticleView::isExternalLink( QUrl const & url )
 {
@@ -803,6 +1170,7 @@ bool ArticleView::isExternalLink( QUrl const & url )
          url.scheme() == "file";
 }
 
+#ifdef USE_QTWEBKIT
 void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
 {
   // Don't try mangling audio urls, even if they are from the framed websites
@@ -812,16 +1180,14 @@ void ArticleView::tryMangleWebsiteClickedUrl( QUrl & url, Contexts & contexts )
   {
     // Maybe a link inside a website was clicked?
 
-    QString ca = getCurrentArticle();
-
-    if ( isFramedArticle( ca ) )
+    if( isFramedArticle( currentArticle ) )
     {
       QVariant result = evaluateJavaScriptVariableSafe( ui.definition->page()->currentFrame(), "gdLastUrlText" );
 
       if ( result.type() == QVariant::String )
       {
         // Looks this way
-        contexts[ dictionaryIdFromScrollTo( ca ) ] = QString::fromLatin1( url.toEncoded() );
+        contexts[ dictionaryIdFromScrollTo( currentArticle ) ] = QString::fromLatin1( url.toEncoded() );
 
         QUrl target;
 
@@ -855,22 +1221,44 @@ void ArticleView::updateCurrentArticleFromCurrentFrame( QWebFrame * frame )
     {
       QString newCurrent = scrollToFromDictionaryId( frameName.mid( 14 ) );
 
-      if ( getCurrentArticle() != newCurrent )
+      if( currentArticle != newCurrent )
         setCurrentArticle( newCurrent, false );
 
       break;
     }
   }
 }
+#endif // USE_QTWEBKIT
+
+#ifndef USE_QTWEBKIT
+void ArticleView::updateSourceCodeOfInjectedScript( QWebEngineScriptCollection & scripts,
+                                                    QString const & name, QString const & sourceCode )
+{
+  auto script = scripts.findScript( name );
+  Q_ASSERT( !script.isNull() );
+
+  scripts.remove( script );
+  script.setSourceCode( sourceCode );
+  scripts.insert( script );
+}
+
+void ArticleView::updateInjectedPageReloadingScript( bool scrollToCurrentArticle )
+{
+  updateSourceCodeOfInjectedScript( ui.definition->page()->scripts(), pageReloadingScriptName(),
+                                    pageReloadingScriptSourceCode( currentArticle, scrollToCurrentArticle ) );
+}
+#endif
 
 void ArticleView::saveHistoryUserData()
 {
+  // JavaScript code implements this feature in the Qt WebEngine version.
+#ifdef USE_QTWEBKIT
   QMap< QString, QVariant > userData = ui.definition->history()->
                                        currentItem().userData().toMap();
 
   // Save current article, which can be empty
 
-  userData[ "currentArticle" ] = getCurrentArticle();
+  userData[ "currentArticle" ] = currentArticle;
 
   // We also save window position. We restore it when the page is fully loaded,
   // when any hidden frames are expanded.
@@ -879,10 +1267,18 @@ void ArticleView::saveHistoryUserData()
   userData[ "sy" ] = ui.definition->page()->mainFrame()->evaluateJavaScript( "window.scrollY;" ).toDouble();
 
   ui.definition->history()->currentItem().setUserData( userData );
+#endif // USE_QTWEBKIT
 }
 
 void ArticleView::load( QUrl const & url )
 {
+#ifndef USE_QTWEBKIT
+  // Translating the current word again looks like reloading the page to JavaScript code.
+  // Update the script to prevent setting a wrong current article and unwanted scrolling.
+  // After such "reloading" the web engine restores the window position automatically.
+  updateInjectedPageReloadingScript( false );
+#endif
+
   saveHistoryUserData();
   ui.definition->load( url );
 }
@@ -1010,10 +1406,32 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
     return true;
   }
 
-  if ( obj == ui.definition )
+#ifdef USE_QTWEBKIT
+  if ( obj != ui.definition )
+#else
+  if( !ui.definition->isWatched( obj ) )
+#endif
+    return QFrame::eventFilter( obj, ev );
+
+  switch( ev->type() )
   {
-    if ( ev->type() == QEvent::MouseButtonPress ) {
+    case QEvent::MouseButtonPress:
+    {
       QMouseEvent * event = static_cast< QMouseEvent * >( ev );
+
+#ifndef USE_QTWEBKIT
+      if( lastLeftMouseButtonPressEvent && event->button() == Qt::LeftButton
+          // Don't store events synthesized by this class to prevent recursion.
+          && event->source() != Qt::MouseEventSynthesizedByApplication )
+      {
+        // "Select word by single click" option is on. A double click must be generated to select the word
+        // under cursor. But if this click is on a scrollbar, generating a double click prevents dragging it.
+        // We cannot determine if the click is on a scrollbar here. Store the event away; generate a double
+        // click once the JavaScript side confirms this is a click on the page proper, not on its scrollbar.
+        lastLeftMouseButtonPressEvent->assign( obj, *event );
+      }
+#endif
+
       if ( event->button() == Qt::XButton1 ) {
         back();
         return true;
@@ -1022,10 +1440,59 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         forward();
         return true;
       }
+
+      break;
     }
-    else
-    if ( ev->type() == QEvent::KeyPress )
+#ifndef USE_QTWEBKIT
+    case QEvent::MouseButtonDblClick:
     {
+      auto * const event = static_cast< QMouseEvent * >( ev );
+      if( lastLeftMouseButtonPressEvent && event->button() == Qt::LeftButton )
+      {
+        if( lastLeftMouseButtonPressEvent->isValid() )
+        {
+          // This means a double click on a scrollbar or a timing issue. In any case, now that a non-synthesized
+          // double click has occurred, synthesizing another one makes no sense => invalidate the stored event.
+          lastLeftMouseButtonPressEvent->invalidate();
+        }
+        else
+        {
+          // A synthesized double click has already selected a word after the first click.
+          // The web page treats a second non-synthesized click as a separate first click.
+          // Filter it out to prevent immediate deselection of the word.
+          return true;
+        }
+      }
+      break;
+    }
+    case QEvent::MouseButtonRelease:
+      // In the Qt WebEngine version, ArticleWebPage::linkClicked() is emitted several milliseconds after the mouse
+      // button release event, so the Qt WebKit version's ArticleWebView::isMidButtonPressed() approach does not work.
+      // Resort to the following hack: on events that can activate a link, set isNavigationByMiddleMouseButton to true
+      // in the case of the middle mouse button release, to false otherwise.
+      isNavigationByMiddleMouseButton = static_cast< QMouseEvent * >( ev )->button() == Qt::MiddleButton;
+      break;
+    case QEvent::Wheel:
+      if( static_cast< QWheelEvent * >( ev )->modifiers().testFlag( Qt::ControlModifier ) )
+      {
+        // Follow the behavior of the Qt WebKit version:
+        // 1. If this view is in the main window, bypass the widget child of QWebEngineView, which only scales the view,
+        //    and let the event propagate to MainWindow. MainWindow::wheelEvent() scales views in all tabs and in the
+        //    scan popup, as well as updates zoom factor in Preferences (stored on disk, persists across app restarts).
+        // 2. If this view is in the scan popup, the event is also propagated but never handled, and thus ignored.
+        QApplication::sendEvent( ui.definition, ev );
+        return true;
+      }
+      break;
+#endif // USE_QTWEBKIT
+    case QEvent::KeyPress:
+    {
+#ifndef USE_QTWEBKIT
+      // Once a link is focused with [Shift+]Tab key presses, pressing a Return/Enter key activates it.
+      // The last released mouse button must not affect whether the link is opened in a new tab then.
+      isNavigationByMiddleMouseButton = false;
+#endif
+
       QKeyEvent * keyEvent = static_cast< QKeyEvent * >( ev );
 
       if ( keyEvent->modifiers() &
@@ -1050,10 +1517,12 @@ bool ArticleView::eventFilter( QObject * obj, QEvent * ev )
         emit typingEvent( text );
         return true;
       }
+
+      break;
     }
+    default:
+      break;
   }
-  else
-    return QFrame::eventFilter( obj, ev );
 
   return false;
 }
@@ -1170,10 +1639,12 @@ void ArticleView::linkHovered ( const QString & link, const QString & , const QS
   emit statusBarMessage( msg );
 }
 
+#ifdef USE_QTWEBKIT
 void ArticleView::attachToJavaScript()
 {
-  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( "articleview", jsProxy );
+  ui.definition->page()->mainFrame()->addToJavaScriptWindowObject( "gdArticleView", jsProxy );
 }
+#endif
 
 void ArticleView::linkClicked( QUrl const & url_ )
 {
@@ -1183,22 +1654,83 @@ void ArticleView::linkClicked( QUrl const & url_ )
   if( kmod & Qt::AltModifier )
     return;
 
+#ifdef USE_QTWEBKIT
   updateCurrentArticleFromCurrentFrame();
+#endif
 
   QUrl url( url_ );
   Contexts contexts;
 
+#ifdef USE_QTWEBKIT
   tryMangleWebsiteClickedUrl( url, contexts );
+  bool const isNavigationByMiddleMouseButton = ui.definition->isMidButtonPressed();
+#endif
 
   if ( !popupView &&
-       ( ui.definition->isMidButtonPressed() ||
+       ( isNavigationByMiddleMouseButton ||
          ( kmod & ( Qt::ControlModifier | Qt::ShiftModifier ) ) ) )
   {
-    // Mid button or Control/Shift is currently pressed - open the link in new tab
-    emit openLinkInNewTab( url, ui.definition->url(), getCurrentArticle(), contexts );
+    // The link was middle-button-clicked or Control/Shift is currently pressed => open the link in a new tab.
+    emit openLinkInNewTab( url, ui.definition->url(), currentArticle, contexts );
   }
   else
-    openLink( url, ui.definition->url(), getCurrentArticle(), contexts );
+    openLink( url, ui.definition->url(), currentArticle, contexts );
+}
+
+static QUrl replaceScrollToInLinkWithFragment( QUrl const & url, QString const & scrollTo )
+{
+  static QString const scrollToQueryKey = "scrollto";
+
+  QUrl result = url;
+
+#ifdef USE_QTWEBKIT
+  // In the Qt WebKit version, the "scrollto" query item value has no effect in background tabs and
+  // overrides the more precise and useful scrolling to the fragment ID in foreground tabs => remove it.
+  // TODO (Qt WebKit): fix these issues and share code with the Qt WebEngine version in order to set correct current
+  // article instead of keeping the first article active (a new Qt4x5::Url::replaceQueryItem() wrapper could be useful).
+  Q_UNUSED( scrollTo )
+  Qt4x5::Url::removeQueryItem( result, scrollToQueryKey );
+#else
+  QUrlQuery urlQuery( url );
+  urlQuery.removeQueryItem( scrollToQueryKey );
+  if( !scrollTo.isEmpty() )
+    urlQuery.addQueryItem( scrollToQueryKey, scrollTo );
+  result.setQuery( urlQuery );
+#endif
+
+  return result;
+}
+
+void ArticleView::openLinkWithFragment( QUrl const & url, QString const & scrollTo )
+{
+  Q_ASSERT( url.hasFragment() );
+
+  // This must be fragment navigation on the same page, but possibly in a new tab. No need to save
+  // history user data, because its only user - loadFinished() - is not called after navigating back
+  // within the page; navigating back to the initial blank page in the new tab is not allowed.
+
+  // Neither assigning to window.location in the current tab nor navigating from the initial blank page
+  // in the new tab looks like reloading to JavaScript code => no need to update the page-reloading script.
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 )
+  if( url.matches( ui.definition->url(), QUrl::RemoveFragment ) )
+#else
+  QUrl currentUrlWithEqualFragment = ui.definition->url();
+  currentUrlWithEqualFragment.setFragment( url.fragment() );
+  if( url == currentUrlWithEqualFragment )
+#endif
+  {
+    // This is a fragment navigation on the same page and not in a new tab.
+    // The regular loading of the url is slower and causes other issues => assign url to window.location.
+    runJavaScript( MainFrame, QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
+    return;
+  }
+
+  // url's target is a different page (is that possible?) or this link is being opened in a new tab.
+  // Load the url regularly, because assigning it to window.location fails in the Qt WebEngine
+  // version - the new tab's page remains blank and the following error message is printed:
+  // JS error: Not allowed to load local resource: <url> (at :1)
+  ui.definition->load( replaceScrollToInLinkWithFragment( url, scrollTo ) );
 }
 
 void ArticleView::openLink( QUrl const & url, QUrl const & ref,
@@ -1229,10 +1761,7 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   if ( url.scheme() == "gdlookup" ) // Plain html links inherit gdlookup scheme
   {
     if ( url.hasFragment() )
-    {
-      ui.definition->page()->mainFrame()->evaluateJavaScript(
-        QString( "window.location = \"%1\"" ).arg( QString::fromUtf8( url.toEncoded() ) ) );
-    }
+      openLinkWithFragment( url, scrollTo );
     else
     {
       if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
@@ -1508,14 +2037,15 @@ void ArticleView::openLink( QUrl const & url, QUrl const & ref,
   }
 }
 
-ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QString & fileName )
+void ArticleView::saveResource( QUrl const & url, ResourceToSaveHandler & handler )
 {
-  return saveResource( url, ui.definition->url(), fileName );
+  return saveResource( url, ui.definition->url(), &handler );
 }
 
-ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl & ref, const QString & fileName )
+void ArticleView::saveResource( QUrl const & url, QUrl const & ref, ResourceToSaveHandler * handler )
 {
-  ResourceToSaveHandler * handler = new ResourceToSaveHandler( this, fileName );
+  Q_ASSERT( handler );
+
   sptr< Dictionary::DataRequest > req;
 
   if( url.scheme() == "bres" || url.scheme() == "gico" || url.scheme() == "gdau" || url.scheme() == "gdvideo" )
@@ -1565,7 +2095,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
                 if( req->isFinished() && req->dataSize() > 0 )
                 {
                   handler->downloadFinished();
-                  return handler;
+                  return;
                 }
                 break;
               }
@@ -1632,7 +2162,7 @@ ResourceToSaveHandler * ArticleView::saveResource( const QUrl & url, const QUrl 
   // Check already finished downloads
   handler->downloadFinished();
 
-  return handler;
+  return;
 }
 
 void ArticleView::updateMutedContents()
@@ -1665,27 +2195,58 @@ void ArticleView::updateMutedContents()
   }
 }
 
-bool ArticleView::canGoBack()
+bool ArticleView::canGoBack() const
 {
-  // First entry in a history is always an empty page,
-  // so we skip it.
-  return ui.definition->history()->currentItemIndex() > 1;
+#ifndef USE_QTWEBKIT
+  // Don't allow navigating back to page 0 if it is the initial blank page.
+  if( isBlankPagePresentInWebHistory )
+    return ui.definition->history()->currentItemIndex() > 1;
+#endif
+  return ui.definition->history()->canGoBack();
 }
 
-bool ArticleView::canGoForward()
+bool ArticleView::canGoForward() const
 {
   return ui.definition->history()->canGoForward();
 }
 
+#ifndef USE_QTWEBKIT
+void ArticleView::initProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & preferences )
+{
+  Q_ASSERT( profile.scripts()->findScript( profilePreferencesScriptName() ).isNull() );
+  auto const script = createScript( profilePreferencesScriptName(), profilePreferencesScriptSourceCode( preferences ) );
+  profile.scripts()->insert( script );
+}
+
+void ArticleView::updateProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & oldPreferences,
+                                            Config::Preferences const & newPreferences )
+{
+  if( !profilePreferencesChanged( oldPreferences, newPreferences ) )
+    return;
+  updateSourceCodeOfInjectedScript( *profile.scripts(), profilePreferencesScriptName(),
+                                    profilePreferencesScriptSourceCode( newPreferences ) );
+}
+#endif
+
 void ArticleView::setSelectionBySingleClick( bool set )
 {
+#ifdef USE_QTWEBKIT
   ui.definition->setSelectionBySingleClick( set );
+#else
+  if( set == static_cast< bool >( lastLeftMouseButtonPressEvent ) )
+    return; // nothing changed
+
+  if( set )
+    lastLeftMouseButtonPressEvent.reset( new MouseEventInfo{} );
+  else
+    lastLeftMouseButtonPressEvent.reset();
+
+  ui.definition->page()->runJavaScript( selectWordBySingleClickAssignmentScript( set ) );
+#endif
 }
 
 void ArticleView::back()
 {
-  // Don't allow navigating back to page 0, which is usually the initial
-  // empty page
   if ( canGoBack() )
   {
     saveHistoryUserData();
@@ -1701,61 +2262,64 @@ void ArticleView::forward()
 
 void ArticleView::reload()
 {
+  // Reloading occurs in response to changes that may affect content height, so restoring the
+  // current window position can cause uncontrolled jumps. Scrolling to the current article
+  // (i.e. jumping to he top of it) is simple, reliable and predictable, if not ideal.
+#ifdef USE_QTWEBKIT
   QMap< QString, QVariant > userData = ui.definition->history()->currentItem().userData().toMap();
 
   // Save current article, which can be empty
-  userData[ "currentArticle" ] = getCurrentArticle();
+  userData[ "currentArticle" ] = currentArticle;
 
-  // Remove saved window position. Reloading occurs in response to changes that
-  // may affect content height, so restoring the current window position can cause
-  // uncontrolled jumps. Scrolling to the current article (i.e. jumping to the top
-  // of it) is simple, reliable and predictable, if not ideal.
+  // Remove saved window position to request scrolling to the current article.
   userData[ "sx" ].clear();
   userData[ "sy" ].clear();
 
   ui.definition->history()->currentItem().setUserData( userData );
+#else
+  // Scroll to the current article only if the "regexp" query item value is empty.
+  // If it is not empty, highlightFTSResults() will most likely call
+  // QWebEngineView::findText(), which will scroll to the first match instead.
+  bool const scrollToCurrentArticle = QUrlQuery{ ui.definition->url() }
+          .queryItemValue( QStringLiteral( "regexp" ) ).isEmpty();
+  updateInjectedPageReloadingScript( scrollToCurrentArticle );
+#endif // USE_QTWEBKIT
 
   ui.definition->reload();
 }
 
-bool ArticleView::hasSound()
+bool ArticleView::hasSound() const
 {
-  QVariant v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-  if ( v.type() == QVariant::String )
-    return !v.toString().isEmpty();
-  return false;
+  return !firstAudioLink.isEmpty();
 }
 
 void ArticleView::playSound()
 {
-  QVariant v;
-  QString soundScript;
-
-  v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks[gdAudioLinks.current]" );
-
-  if ( v.type() == QVariant::String )
-    soundScript = v.toString();
-
   // fallback to the first one
-  if ( soundScript.isEmpty() )
-  {
-    v = ui.definition->page()->mainFrame()->evaluateJavaScript( "gdAudioLinks.first" );
-    if ( v.type() == QVariant::String )
-      soundScript = v.toString();
-  }
-
+  QString const soundScript = audioLinks.value( currentArticle, firstAudioLink );
   if ( !soundScript.isEmpty() )
     openLink( QUrl::fromEncoded( soundScript.toUtf8() ), ui.definition->url() );
 }
 
+#ifdef USE_QTWEBKIT
 QString ArticleView::toHtml()
 {
   return ui.definition->page()->mainFrame()->toHtml();
 }
-
-QString ArticleView::getTitle()
+#else
+void ArticleView::toHtml( std::function< void( QString const & ) > resultCallback )
 {
+  ui.definition->page()->toHtml( std::move( resultCallback ) );
+}
+#endif
+
+QString ArticleView::getTitle() const
+{
+#ifdef USE_QTWEBKIT
   return ui.definition->page()->mainFrame()->title();
+#else
+  return ui.definition->page()->title();
+#endif
 }
 
 Config::InputPhrase ArticleView::getPhrase() const
@@ -1767,17 +2331,29 @@ Config::InputPhrase ArticleView::getPhrase() const
 
 void ArticleView::print( QPrinter * printer ) const
 {
+#ifdef USE_QTWEBKIT
   ui.definition->print( printer );
+#else
+  // TODO (Qt WebEngine): port this function and its uses to QWebEnginePage::print(). From the documentation:
+  // "It is the users responsibility to ensure the printer remains valid until resultCallback has been called." =>
+  // consider capturing sptr< QPrinter > MainWindow::printer by value and calling sptr::reset() in the resultCallback.
+  Q_UNUSED( printer )
+#endif
 }
 
 void ArticleView::contextMenuRequested( QPoint const & pos )
 {
   // Is that a link? Is there a selection?
 
+#ifdef USE_QTWEBKIT
   QWebHitTestResult r = ui.definition->page()->mainFrame()->
                           hitTestContent( pos );
 
   updateCurrentArticleFromCurrentFrame( r.frame() );
+#else
+  auto const & r = ui.definition->page()->contextMenuData();
+  Q_ASSERT( r.isValid() );
+#endif
 
   QMenu menu( this );
 
@@ -1798,7 +2374,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
   QUrl targetUrl( r.linkUrl() );
   Contexts contexts;
 
+#ifdef USE_QTWEBKIT
   tryMangleWebsiteClickedUrl( targetUrl, contexts );
+#endif
 
   if ( !r.linkUrl().isEmpty() )
   {
@@ -1819,19 +2397,25 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     {
       followLinkExternal = new QAction( tr( "Open Link in &External Browser" ), &menu );
       menu.addAction( followLinkExternal );
-      menu.addAction( ui.definition->pageAction( QWebPage::CopyLinkToClipboard ) );
+      menu.addAction( ui.definition->pageAction( WebPage::CopyLinkToClipboard ) );
     }
   }
 
-#if QT_VERSION >= 0x040600
-  QWebElement el = r.element();
   QUrl imageUrl;
-  if( !popupView && el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
+  if( !popupView )
   {
-    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
+#ifdef USE_QTWEBKIT
+    QWebElement const el = r.element();
+    if( el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
+      imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
+#else
+    if( r.mediaType() == QWebEngineContextMenuData::MediaTypeImage )
+      imageUrl = r.mediaUrl();
+#endif
+
     if( !imageUrl.isEmpty() )
     {
-      menu.addAction( ui.definition->pageAction( QWebPage::CopyImageToClipboard ) );
+      menu.addAction( ui.definition->pageAction( WebPage::CopyImageToClipboard ) );
       saveImageAction = new QAction( tr( "Save &image..." ), &menu );
       menu.addAction( saveImageAction );
     }
@@ -1843,7 +2427,6 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     saveSoundAction = new QAction( tr( "Save s&ound..." ), &menu );
     menu.addAction( saveSoundAction );
   }
-#endif
 
   QString selectedText = ui.definition->selectedText();
   QString text = selectedText.trimmed();
@@ -1853,11 +2436,7 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
     // We don't prompt for selections larger or equal to 60 chars, since
     // it ruins the menu and it's hardly a single word anyway.
 
-    if( text.isRightToLeft() )
-    {
-      text.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
-      text.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
-    }
+    Folding::prepareToEmbedRTL( text );
 
     lookupSelection = new QAction( tr( "&Look up \"%1\"" ).
                                    arg( text ),
@@ -1922,27 +2501,25 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
 
   if ( selectedText.size() )
   {
-    menu.addAction( ui.definition->pageAction( QWebPage::Copy ) );
+    menu.addAction( ui.definition->pageAction( WebPage::Copy ) );
     menu.addAction( &copyAsTextAction );
   }
   else
   {
     menu.addAction( &selectCurrentArticleAction );
-    menu.addAction( ui.definition->pageAction( QWebPage::SelectAll ) );
+    menu.addAction( ui.definition->pageAction( WebPage::SelectAll ) );
   }
 
   map< QAction *, QString > tableOfContents;
 
   // Add table of contents
-  QStringList ids = getArticlesList();
-
-  if ( !menu.isEmpty() && ids.size() )
+  if ( !menu.isEmpty() && !articleList.empty() )
     menu.addSeparator();
 
   unsigned refsAdded = 0;
   bool maxDictionaryRefsReached = false;
 
-  for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd();
+  for( QStringList::const_iterator i = articleList.constBegin(); i != articleList.constEnd();
        ++i, ++refsAdded )
   {
     // Find this dictionary
@@ -1993,13 +2570,13 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       return;
 
     if ( result == followLink )
-      openLink( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
+      openLink( targetUrl, ui.definition->url(), currentArticle, contexts );
     else
     if ( result == followLinkExternal )
       QDesktopServices::openUrl( r.linkUrl() );
     else
     if ( result == lookupSelection )
-      showDefinition( selectedText, getGroup( ui.definition->url() ), getCurrentArticle() );
+      showDefinition( selectedText, getGroup( ui.definition->url() ), currentArticle );
     else
     if ( result == lookupSelectionGr && groupComboBox )
       showDefinition( selectedText, groupComboBox->getCurrentGroup(), QString() );
@@ -2013,14 +2590,14 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       emit sendWordToInputLine( selectedText );
     else
     if ( !popupView && result == followLinkNewTab )
-      emit openLinkInNewTab( targetUrl, ui.definition->url(), getCurrentArticle(), contexts );
+      emit openLinkInNewTab( targetUrl, ui.definition->url(), currentArticle, contexts );
     else
     if ( !popupView && result == lookupSelectionNewTab )
-      emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                   getCurrentArticle(), Contexts() );
+      emit showDefinitionInNewTab( Config::InputPhrase::fromPhrase( selectedText ), getGroup( ui.definition->url() ),
+                                   currentArticle, Contexts() );
     else
     if ( !popupView && result == lookupSelectionNewTabGr && groupComboBox )
-      emit showDefinitionInNewTab( selectedText, groupComboBox->getCurrentGroup(),
+      emit showDefinitionInNewTab( Config::InputPhrase::fromPhrase( selectedText ), groupComboBox->getCurrentGroup(),
                                    QString(), Contexts() );
     else
     if( result == saveImageAction || result == saveSoundAction )
@@ -2072,7 +2649,9 @@ void ArticleView::contextMenuRequested( QPoint const & pos )
       {
         QFileInfo fileInfo( fileName );
         emit storeResourceSavePath( QDir::toNativeSeparators( fileInfo.absoluteDir().absolutePath() ) );
-        saveResource( url, ui.definition->url(), fileName );
+
+        ResourceToSaveHandler * const handler = new ResourceToSaveHandler( this, fileName );
+        saveResource( url, ui.definition->url(), handler );
       }
 #endif
     }
@@ -2193,47 +2772,39 @@ void ArticleView::pasteTriggered()
       // so let's try the currently selected group.
       groupId = groupComboBox->getCurrentGroup();
     }
-    showDefinition( phrase, groupId, getCurrentArticle() );
+    showDefinition( phrase, groupId, currentArticle );
   }
 }
 
 void ArticleView::moveOneArticleUp()
 {
-  QString current = getCurrentArticle();
-
-  if ( current.size() )
+  if( !currentArticle.isEmpty() )
   {
-    QStringList lst = getArticlesList();
-
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
+    int idx = articleList.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
 
     if ( idx != -1 )
     {
       --idx;
 
       if ( idx < 0 )
-        idx = lst.size() - 1;
+        idx = articleList.size() - 1;
 
-      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
+      setCurrentArticle( scrollToFromDictionaryId( articleList.at( idx ) ), true );
     }
   }
 }
 
 void ArticleView::moveOneArticleDown()
 {
-  QString current = getCurrentArticle();
-
-  if ( current.size() )
+  if( !currentArticle.isEmpty() )
   {
-    QStringList lst = getArticlesList();
-
-    int idx = lst.indexOf( dictionaryIdFromScrollTo( current ) );
+    int idx = articleList.indexOf( dictionaryIdFromScrollTo( currentArticle ) );
 
     if ( idx != -1 )
     {
-      idx = ( idx + 1 ) % lst.size();
+      idx = ( idx + 1 ) % articleList.size();
 
-      setCurrentArticle( scrollToFromDictionaryId( lst[ idx ] ), true );
+      setCurrentArticle( scrollToFromDictionaryId( articleList.at( idx ) ), true );
     }
   }
 }
@@ -2258,11 +2829,10 @@ void ArticleView::openSearch()
 
   // Clear any current selection
   if ( ui.definition->selectedText().size() )
-  {
-    ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-  }
+    clearPageSelection();
 
+  // Don't display obsolete status from the previous search.
+  ui.searchStatusLabel->clear();
   if ( ui.searchText->property( "noResults" ).toBool() )
   {
     ui.searchText->setProperty( "noResults", false );
@@ -2309,118 +2879,294 @@ void ArticleView::on_highlightAllButton_clicked()
   performFindOperation( false, false, true );
 }
 
-void ArticleView::onJsActiveArticleChanged(QString const & id)
+#ifdef USE_QTWEBKIT
+void ArticleView::onJsPageInitStarted()
+#else
+void ArticleView::onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
+                                       int activeArticleIndex, bool hasPageInitFinished,
+                                       QDateTime const & pageTimestamp_ )
+#endif
 {
-  if ( !isScrollTo( id ) )
-    return; // Incorrect id
+  // When JavaScript code initialization starts, the previous page is definitely gone.
+  // Clear the data associated with it and prepare to receive the current page's data.
 
-  emit activeArticleChanged( this, dictionaryIdFromScrollTo( id ) );
+  articleList.clear();
+  audioLinks.clear();
+  firstAudioLink.clear();
+  currentArticle.clear();
+
+  emit canGoBackForwardChanged( this );
+  emit pageUnloaded( this );
+
+#ifdef USE_QTWEBKIT
+  // In the Qt WebKit version loadFinished() for the initial Welcome! page is called before JavaScript execution on this
+  // initial page starts. Don't transition into the loading state if the current URL's group is the internal Help group,
+  // which contains the Welcome! page, to prevent being stuck in the loading state at GoldenDict start. Pages in the
+  // Help group are built into GoldenDict and are loaded instantly, so this workaround shouldn't be noticeable.
+  if( Qt4x5::Url::queryItemValue( ui.definition->url(), "group" ).toUInt() != Instances::Group::HelpGroupId )
+#endif
+  {
+    isLoading = true;
+    emit pageLoadingStateChanged( this, isLoading );
+  }
+
+#ifndef USE_QTWEBKIT
+  if( hideSearchFrameOnceJsSavesStateToWebHistory )
+  {
+    hideSearchFrameOnceJsSavesStateToWebHistory = false;
+    closeSearch();
+  }
+
+  // This is the first message from JavaScript on this page.
+  // Initialize our stored timestamps to the page timestamp received from JavaScript.
+  currentArticleTimestamp = pageTimestamp = pageTimestamp_;
+
+  if( loadedArticles.size() == loadedAudioLinks.size() )
+  {
+    for( int i = 0; i != loadedArticles.size(); ++i )
+      onJsArticleLoadedNoTimestamps( loadedArticles.at( i ), loadedAudioLinks.at( i ), i == activeArticleIndex );
+  }
+  else
+    gdWarning( "Loaded item list sizes don't match: %d != %d", loadedArticles.size(), loadedAudioLinks.size() );
+
+  if( hasPageInitFinished )
+    onJsPageInitFinished();
+#endif
 }
 
+#ifndef USE_QTWEBKIT
+void ArticleView::onJsPageInitFinished()
+{
+  if( currentArticle.isEmpty() && !articleList.empty() )
+  {
+    // Deferred JavaScript code silently activates the first article in this case. Do the same here.
+    setValidCurrentArticleNoJs( scrollToFromDictionaryId( articleList.constFirst() ) );
+  }
+
+  // Slots connected to ArticleView::pageLoaded signal, which is emitted from ArticleView::loadFinished(), may
+  // call ArticleView::playSound(), which requires up-to-date values of the current article and the audio links.
+  // So ArticleView::loadFinished() must not be invoked before this moment, even if QWebEngineView::loadFinished
+  // is emitted before gdArticleView becomes available (rarely, but happens). Calling it here works well.
+  loadFinished( true );
+}
+
+void ArticleView::onJsFirstLeftButtonMouseDown()
+{
+  if( !lastLeftMouseButtonPressEvent || !lastLeftMouseButtonPressEvent->isValid() )
+    return; // "Select word by single click" option is off or this is a synthesized mousedown event => nothing to do.
+
+  // The JavaScript mousedown event that invoked this function must represent the same user action as the stored
+  // lastLeftMouseButtonPressEvent. Generate a double click with the stored event's data.
+
+  // When "Select word by single click" option is on and more than one word is selected, clicking on one of the selected
+  // words reduces the selection to this single word in the Qt WebKit version. In the Qt WebEngine version clicking on
+  // one of the selected words has no effect. So the user has to click outside a selection to modify it. If the entire
+  // page is selected (e.g. after the Select All action is triggered), the user can resort to a middle mouse button
+  // click or press the left mouse button, move the cursor, then release the button.
+  // A consequence of this unchanging selection: when "Double-click translates the word clicked" option is on, double
+  // clicking on a selected word translates the entire selection, which can be considered a feature as it allows
+  // translating a phrase, not just a single word, using only the left mouse button.
+  // This selection issue can we worked around by sending an additional mouse release event, but then links are
+  // activated on left mouse button press rather than release, which is a worse bug.
+
+  // Even though a non-synthesized first MouseButtonPress event occurred just a few milliseconds ago, the web page
+  // treats a synthesized MouseButtonPress or MouseButtonDblClick event as a separate first click. Synthesize two
+  // identical events to generate a double click and select the word under cursor.
+  for( int i = 0; i < 2; ++i )
+    lastLeftMouseButtonPressEvent->synthesize( QEvent::MouseButtonPress, Qt::LeftButton );
+
+  // This stored event has served its purpose. Prevent recursion by invalidating it.
+  lastLeftMouseButtonPressEvent->invalidate();
+}
+
+void ArticleView::onJsDoubleClicked( QString const & imageUrl )
+{
+  if( !imageUrl.isEmpty() )
+  {
+    downloadImage( QUrl{ imageUrl } );
+    return;
+  }
+
+  if( cfg.preferences.doubleClickTranslates )
+  {
+    // Sanitize selected text before translating, because multiple words and punctuation
+    // marks can be selected during a prolonged double-click in the Qt WebEngine version.
+    auto const phrase = cfg.preferences.sanitizeInputPhrase( ui.definition->selectedText() );
+    if( phrase.isValid() )
+      translatePossiblyInNewTab( phrase );
+  }
+}
+#endif // USE_QTWEBKIT
+
+void ArticleView::onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive )
+{
+#ifndef USE_QTWEBKIT
+  // When JavaScript does not send the current article timestamp, it is implicitly equal to pageTimestamp.
+  // If currentArticleTimestamp != pageTimestamp, then our current article value is fresher => keep it.
+  // Keep isActive true if id == currentArticle (happens when the user activates an article while it is being loaded).
+  if( isActive && currentArticleTimestamp != pageTimestamp && id != currentArticle )
+    isActive = false;
+#endif
+
+  onJsArticleLoadedNoTimestamps( id, audioLink, isActive );
+}
+
+void ArticleView::onJsArticleLoadedNoTimestamps( QString const & id, QString const & audioLink, bool isActive )
+{
+  if( !isScrollTo( id ) )
+  {
+    gdWarning( "Invalid article ID received from JavaScript: %s", id.toUtf8().constData() );
+    return;
+  }
+
+  articleList.push_back( dictionaryIdFromScrollTo( id ) );
+  if( !audioLink.isEmpty() )
+  {
+    audioLinks.insert( id, audioLink );
+    if( firstAudioLink.isEmpty() )
+      firstAudioLink = audioLink;
+  }
+  if( isActive )
+    currentArticle = id;
+
+  emit articleLoaded( this, articleList.back(), isActive );
+}
+
+#ifdef USE_QTWEBKIT
+void ArticleView::onJsActiveArticleChanged(QString const & id)
+#else
+void ArticleView::onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp_ )
+#endif
+{
+  if ( !isScrollTo( id ) )
+  {
+    gdWarning( "Invalid active article ID received from JavaScript: %s", id.toUtf8().constData() );
+    return;
+  }
+
+#ifndef USE_QTWEBKIT
+  // Compare the received and stored current article timestamps using operator< here and using
+  // operator<= in the JavaScript code to ensure that the current article values are always consistent,
+  // even if the user manages to activate different articles in JavaScript and C++ at the same time.
+  if( currentArticleTimestamp_ < currentArticleTimestamp )
+    return; // Our current article value is fresher => keep it.
+  currentArticleTimestamp = currentArticleTimestamp_;
+#endif
+
+  setValidCurrentArticleNoJs( id );
+}
+
+void ArticleView::onJsLocationHashChanged()
+{
+  emit canGoBackForwardChanged( this ); // Fragment navigation on the same page adds a web history entry.
+}
+
+#ifdef USE_QTWEBKIT
 void ArticleView::doubleClicked( QPoint pos )
 {
-#if QT_VERSION >= 0x040600
   QWebHitTestResult r = ui.definition->page()->mainFrame()->hitTestContent( pos );
   QWebElement el = r.element();
-  QUrl imageUrl;
   if( el.tagName().compare( "img", Qt::CaseInsensitive ) == 0 )
   {
     // Double click on image; download it and transfer to external program
-
-    imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
+    QUrl const imageUrl = QUrl::fromPercentEncoding( el.attribute( "src" ).toLatin1() );
     if( !imageUrl.isEmpty() )
-    {
-      // Download it
-
-      // Clear any pending ones
-      resourceDownloadRequests.clear();
-
-      resourceDownloadUrl = imageUrl;
-      sptr< Dictionary::DataRequest > req;
-
-      if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
-      {
-        // Web resource
-        req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
-      }
-      else
-      if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
-      {
-        // Local resource
-        QString contentType;
-        req = articleNetMgr.getResource( imageUrl, contentType );
-      }
-      else
-      {
-        // Unsupported scheme
-        gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
-        return;
-      }
-
-      if ( !req.get() )
-      {
-        // Request failed, fail
-        gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
-        return;
-      }
-
-      if ( req->isFinished() && req->dataSize() >= 0 )
-      {
-        // Have data ready, handle it
-        resourceDownloadRequests.push_back( req );
-        resourceDownloadFinished();
-        return;
-      }
-      else
-      if ( !req->isFinished() )
-      {
-        // Queue to be handled when done
-        resourceDownloadRequests.push_back( req );
-        connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
-      }
-      if ( resourceDownloadRequests.empty() ) // No requests were queued
-      {
-        gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
-        return;
-      }
-      else
-        resourceDownloadFinished(); // Check any requests finished already
-    }
+      downloadImage( imageUrl );
     return;
   }
-#endif
 
   // We might want to initiate translation of the selected word
-
-  if ( cfg.preferences.doubleClickTranslates )
+  if( cfg.preferences.doubleClickTranslates )
   {
-    QString selectedText = ui.definition->selectedText();
-
+    QString const selectedText = ui.definition->selectedText();
     // Do some checks to make sure there's a sensible selection indeed
-    if ( Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).size() &&
-         selectedText.size() < 60 )
-    {
-      // Initiate translation
-      Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
-      if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
-      { // open in new tab
-        emit showDefinitionInNewTab( selectedText, getGroup( ui.definition->url() ),
-                                     getCurrentArticle(), Contexts() );
-      }
-      else
-      {
-        QUrl const & ref = ui.definition->url();
+    if( !Folding::applyWhitespaceOnly( gd::toWString( selectedText ) ).empty() && selectedText.size() < 60 )
+      translatePossiblyInNewTab( Config::InputPhrase::fromPhrase( selectedText ) );
+  }
+}
+#endif // USE_QTWEBKIT
 
-        if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
-        {
-          QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
-                                              .split( ",", Qt4x5::skipEmptyParts() );
-          showDefinition( selectedText, dictsList, QRegExp(), getGroup( ref ), false );
-        }
-        else
-          showDefinition( selectedText, getGroup( ref ), getCurrentArticle() );
-      }
+void ArticleView::downloadImage( QUrl const & imageUrl )
+{
+  // Clear any pending ones
+  resourceDownloadRequests.clear();
+
+  resourceDownloadUrl = imageUrl;
+  sptr< Dictionary::DataRequest > req;
+
+  if ( imageUrl.scheme() == "http" || imageUrl.scheme() == "https" || imageUrl.scheme() == "ftp" )
+  {
+    // Web resource
+    req = new Dictionary::WebMultimediaDownload( imageUrl, articleNetMgr );
+  }
+  else
+  if ( imageUrl.scheme() == "bres" || imageUrl.scheme() == "gdpicture" )
+  {
+    // Local resource
+    QString contentType;
+    req = articleNetMgr.getResource( imageUrl, contentType );
+  }
+  else
+  {
+    // Unsupported scheme
+    gdWarning( "Unsupported url scheme \"%s\" to download image\n", imageUrl.scheme().toUtf8().data() );
+    return;
+  }
+
+  if ( !req.get() )
+  {
+    // Request failed, fail
+    gdWarning( "Can't create request to download image \"%s\"\n", imageUrl.toString().toUtf8().data() );
+    return;
+  }
+
+  if ( req->isFinished() && req->dataSize() >= 0 )
+  {
+    // Have data ready, handle it
+    resourceDownloadRequests.push_back( req );
+    resourceDownloadFinished();
+    return;
+  }
+  else
+  if ( !req->isFinished() )
+  {
+    // Queue to be handled when done
+    resourceDownloadRequests.push_back( req );
+    connect( req.get(), SIGNAL( finished() ), this, SLOT( resourceDownloadFinished() ) );
+  }
+  if ( resourceDownloadRequests.empty() ) // No requests were queued
+  {
+    gdWarning( "The referenced resource \"%s\" doesn't exist\n", imageUrl.toString().toUtf8().data() ) ;
+    return;
+  }
+  else
+    resourceDownloadFinished(); // Check any requests finished already
+}
+
+void ArticleView::translatePossiblyInNewTab( Config::InputPhrase const & phrase )
+{
+  Q_ASSERT( phrase.isValid() );
+
+  Qt::KeyboardModifiers kmod = QApplication::keyboardModifiers();
+  if (kmod & (Qt::ControlModifier | Qt::ShiftModifier))
+  { // open in new tab
+    // TODO: emitting this signal has no effect in the scan popup's view.
+    //       Should showDefinition() be called if popupView is true?
+    emit showDefinitionInNewTab( phrase, getGroup( ui.definition->url() ),
+                                 currentArticle, Contexts() );
+  }
+  else
+  {
+    QUrl const & ref = ui.definition->url();
+
+    if( Qt4x5::Url::hasQueryItem( ref, "dictionaries" ) )
+    {
+      QStringList dictsList = Qt4x5::Url::queryItemValue(ref, "dictionaries" )
+                                          .split( ",", Qt4x5::skipEmptyParts() );
+      showDefinition( phrase, dictsList, QRegExp(), getGroup( ref ), false );
     }
+    else
+      showDefinition( phrase, getGroup( ref ), currentArticle );
   }
 }
 
@@ -2431,23 +3177,16 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
   if ( restart || checkHighlight )
   {
+#ifdef USE_QTWEBKIT
     if( restart ) {
       // Anyone knows how we reset the search position?
       // For now we resort to this hack:
       if ( ui.definition->selectedText().size() )
-      {
-        ui.definition->page()->currentFrame()->
-               evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-      }
+        clearPageSelection();
     }
 
-    QWebPage::FindFlags f;
-
-    if ( ui.searchCaseSensitive->isChecked() )
-      f |= QWebPage::FindCaseSensitively;
-#if QT_VERSION >= 0x040600
+    QWebPage::FindFlags f = caseSensitivityFindFlags( ui.searchCaseSensitive->isChecked() );
     f |= QWebPage::HighlightAllOccurrences;
-#endif
 
     ui.definition->findText( "", f );
 
@@ -2456,23 +3195,80 @@ void ArticleView::performFindOperation( bool restart, bool backwards, bool check
 
     if( checkHighlight )
       return;
+#else
+    Q_ASSERT_X( !checkHighlight, Q_FUNC_INFO,
+                "Toggling Web Engine page highlighting is not and cannot be implemented." );
+    // Skip UI status update after the special empty-string search to prevent a flashing
+    // of no-results style and status text. When text is empty though, this special
+    // empty-string search is the only one, so the UI status has to be updated then.
+    if( !text.isEmpty() )
+      skipNextFindTextUiStatusUpdate = true;
+    // Searching for an empty string is useful in 3 ways:
+    // 1) clear the search highlight when case sensitivity is toggled;
+    // 2) update the search status text;
+    // 3) search from the beginning of the page rather than from the current match position.
+    ui.definition->findText( QString{}, QWebEnginePage::FindFlags{} );
+    // Clearing the page selection is also necessary to search from the beginning of
+    // the page rather than from the current match position. When text is empty, this
+    // call is also useful: clears the selection of the last active findText() match.
+    clearPageSelection();
+#endif // USE_QTWEBKIT
   }
 
-  QWebPage::FindFlags f;
-
-  if ( ui.searchCaseSensitive->isChecked() )
-    f |= QWebPage::FindCaseSensitively;
-
+  WebPage::FindFlags f = caseSensitivityFindFlags( ui.searchCaseSensitive->isChecked() );
   if ( backwards )
-    f |= QWebPage::FindBackward;
+    f |= WebPage::FindBackward;
 
-  bool setMark = text.size() && !ui.definition->findText( text, f );
+#ifdef USE_QTWEBKIT
+  bool const noResults = !text.isEmpty() && !ui.definition->findText( text, f );
+  updateSearchNoResultsProperty( noResults );
+#else
+  if( !text.isEmpty() )
+    ui.definition->findText( text, f );
+  // findTextFinished() will update the search status text and noResults property asynchronously.
+#endif
+}
 
-  if ( ui.searchText->property( "noResults" ).toBool() != setMark )
+#ifndef USE_QTWEBKIT
+namespace {
+struct FindTextUiStatus
+{
+  QString statusText;
+  bool noResults;
+};
+FindTextUiStatus computeFindTextUiStatus( QString const & searchedText,
+                                          QWebEngineFindTextResult const & result )
+{
+  if( searchedText.isEmpty() )
+    return { QString(), false }; // An empty text is never found. Don't warn about it.
+
+  auto const matchCount = result.numberOfMatches();
+  if( matchCount == 0 )
+    return { searchStatusMessageNoMatches(), true };
+
+  return { searchStatusMessage( result.activeMatch(), matchCount ), false };
+}
+
+} // unnamed namespace
+
+void ArticleView::findTextFinished( QWebEngineFindTextResult const & result )
+{
+  if( !searchIsOpened || skipNextFindTextUiStatusUpdate )
   {
-    ui.searchText->setProperty( "noResults", setMark );
+    skipNextFindTextUiStatusUpdate = false;
+    return;
+  }
+  auto const uiStatus = computeFindTextUiStatus( ui.searchText->text(), result );
+  ui.searchStatusLabel->setText( uiStatus.statusText );
+  updateSearchNoResultsProperty( uiStatus.noResults );
+}
+#endif // USE_QTWEBKIT
 
-    // Reload stylesheet
+void ArticleView::updateSearchNoResultsProperty( bool noResults )
+{
+  if( ui.searchText->property( "noResults" ).toBool() != noResults )
+  {
+    ui.searchText->setProperty( "noResults", noResults );
     reloadStyleSheet();
   }
 }
@@ -2489,13 +3285,16 @@ void ArticleView::reloadStyleSheet()
   }
 }
 
-
 bool ArticleView::closeSearch()
 {
   if ( searchIsOpened )
   {
-    ui.searchFrame->hide();
+    // Give focus to the view to enable keyboard navigation on the page.
+    // Transferring the focus before hiding the search frame works around the highlighting of and especially
+    // the scrolling to the first link on the page when searchFrame has focus in the Qt WebEngine version.
     ui.definition->setFocus();
+
+    ui.searchFrame->hide();
     searchIsOpened = false;
 
     return true;
@@ -2511,12 +3310,10 @@ bool ArticleView::closeSearch()
     ui.ftsSearchFrame->hide();
     ui.definition->setFocus();
 
-    QWebPage::FindFlags flags;
-
-  #if QT_VERSION >= 0x040600
+    WebPage::FindFlags flags;
+#ifdef USE_QTWEBKIT
     flags |= QWebPage::HighlightAllOccurrences;
-  #endif
-
+#endif
     ui.definition->findText( "", flags );
 
     return true;
@@ -2563,7 +3360,7 @@ void ArticleView::copyAsText()
 
 void ArticleView::inspect()
 {
-  ui.definition->triggerPageAction( QWebPage::InspectElement );
+  ui.definition->triggerPageAction( WebPage::InspectElement );
 }
 
 void ArticleView::highlightFTSResults()
@@ -2610,17 +3407,52 @@ void ArticleView::highlightFTSResults()
   regexp.setMinimal( true );
 #endif
 
-  sptr< AccentMarkHandler > marksHandler = ignoreDiacritics ?
-                                           new DiacriticsHandler : new AccentMarkHandler;
-
-  // Clear any current selection
+#ifdef USE_QTWEBKIT
+  // Clear any current selection. QWebView::selectedText() is not empty here if the user full-text-searches
+  // for a common word, picks a result with many large articles in the Full-text search dialog, then quickly
+  // selects text in the first article while the page is still loading.
+  // At this point QWebEngineView::selectedText() is equal to the last highlighted word if the user selects
+  // a second result in the Full-text search dialog without clicking on the article view after the previous
+  // FTS result was displayed there. This existing selection is not a problem in the Qt WebEngine version =>
+  // don't waste CPU time and risk bugs by clearing it.
   if ( ui.definition->selectedText().size() )
-  {
-    ui.definition->page()->currentFrame()->
-           evaluateJavaScript( "window.getSelection().removeAllRanges();_=0;" );
-  }
+    clearPageSelection();
 
   QString pageText = ui.definition->page()->currentFrame()->toPlainText();
+  highlightFTSResults( regexp, ignoreDiacritics, pageText );
+#else
+  ui.definition->page()->toPlainText( [ this, url, regexp, ignoreDiacritics ]( QString const & pageText) {
+    if( pageText.isEmpty() )
+      return; // Most likely this callback is being called during page destruction. Return now to prevent a crash.
+    if( ui.definition->url() != url )
+      return; // Anoter URL has been loaded before this callback got invoked => the highlighting is obsolete.
+    highlightFTSResults( regexp, ignoreDiacritics, pageText );
+  } );
+#endif
+}
+
+// TODO (Qt WebEngine): there are multiple issues with the FTS highlighting and result navigation:
+// 1. Only the words equal to the last found result are highlighted, not all FTS matches as in the Qt WebKit version.
+// 2. QWebEngineView::findText() never finds the end-of-line character. Maybe some other characters too.
+//    This breaks FTS result navigation on a page when such characters are matched in the search.
+// Fixing or working around these QWebEngineView::findText() limitations may prove more difficult than
+// implementing finding and highlighting regular expressions on a page via JavaScript.
+// There seems to be no way to overcome these issues even using the Qt WebEngine's upstream Blink API:
+// https://chromium.googlesource.com/chromium/src/+/HEAD/third_party/blink/public/mojom/frame/find_in_page.mojom
+// One more issue affects the Qt WebKit version too: when the regexp matches at word boundaries (in the "Whole words"
+// or the RegExp mode), QWeb[Engine]View::findText() may find extra results, because the plain-text search cannot be
+// limited by boundaries. These extra results can mess up the FTS result navigation if not all elements of allMatches
+// are equal (some matches could be skipped).
+// So reimplementing this functionality in JavaScript could improve the Qt WebKit version too.
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+void ArticleView::highlightFTSResults( QRegularExpression const & regexp,
+#else
+void ArticleView::highlightFTSResults( QRegExp const & regexp,
+#endif
+                                       bool ignoreDiacritics, QString const & pageText )
+{
+  sptr< AccentMarkHandler > const marksHandler = ignoreDiacritics ?
+                                                 new DiacriticsHandler : new AccentMarkHandler;
   marksHandler->setText( pageText );
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
@@ -2677,17 +3509,15 @@ void ArticleView::highlightFTSResults()
   }
 #endif
 
-  ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( url, "matchcase" );
+  ftsSearchMatchCase = Qt4x5::Url::hasQueryItem( ui.definition->url(), "matchcase" );
 
-  QWebPage::FindFlags flags;
-
-  if( ftsSearchMatchCase )
-    flags |= QWebPage::FindCaseSensitively;
+  WebPage::FindFlags const flags = caseSensitivityFindFlags( ftsSearchMatchCase );
 
   if( allMatches.isEmpty() )
     ui.ftsSearchStatusLabel->setText( searchStatusMessageNoMatches() );
   else
   {
+#ifdef USE_QTWEBKIT
     highlightAllFtsOccurences( flags );
     if( ui.definition->findText( allMatches.at( 0 ), flags ) )
     {
@@ -2695,6 +3525,9 @@ void ArticleView::highlightFTSResults()
                evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
                                    .arg( rangeVarName ) );
     }
+#else
+    ui.definition->findText( allMatches.constFirst(), flags );
+#endif
     Q_ASSERT( ftsPosition == 0 );
     ui.ftsSearchStatusLabel->setText( searchStatusMessage( 1, allMatches.size() ) );
   }
@@ -2706,6 +3539,7 @@ void ArticleView::highlightFTSResults()
   ftsSearchIsOpened = true;
 }
 
+#ifdef USE_QTWEBKIT
 void ArticleView::highlightAllFtsOccurences( QWebPage::FindFlags flags )
 {
   flags |= QWebPage::HighlightAllOccurrences;
@@ -2726,6 +3560,7 @@ void ArticleView::highlightAllFtsOccurences( QWebPage::FindFlags flags )
   for( QSet< QString >::const_iterator it = uniqueMatches.constBegin(); it != uniqueMatches.constEnd(); ++it )
     ui.definition->findText( *it, flags );
 }
+#endif // USE_QTWEBKIT
 
 void ArticleView::performFtsFindOperation( bool backwards )
 {
@@ -2740,12 +3575,16 @@ void ArticleView::performFtsFindOperation( bool backwards )
     return;
   }
 
-  QWebPage::FindFlags flags;
+#ifndef USE_QTWEBKIT
+  // QWebEngineView::findText() always wraps around document, but it does not always scroll to the
+  // wrapped-around first or last result (bug?) => "disable" the wraparound by returning early here.
+  if( ( backwards && ftsPosition == 0 ) || ( !backwards && ftsPosition == allMatches.size() - 1 ) )
+    return;
+#endif
 
-  if( ftsSearchMatchCase )
-    flags |= QWebPage::FindCaseSensitively;
+  WebPage::FindFlags flags = caseSensitivityFindFlags( ftsSearchMatchCase );
 
-
+#ifdef USE_QTWEBKIT
   // Restore saved highlighted selection
   ui.definition->page()->currentFrame()->
          evaluateJavaScript( QString( "var sel=window.getSelection();sel.removeAllRanges();sel.addRange(%1);_=0;" )
@@ -2783,12 +3622,30 @@ void ArticleView::performFtsFindOperation( bool backwards )
       ui.ftsSearchPrevious->setEnabled( res );
   }
 
-  ui.ftsSearchStatusLabel->setText( searchStatusMessage( ftsPosition + 1, allMatches.size() ) );
-
   // Store new highlighted selection
   ui.definition->page()->currentFrame()->
          evaluateJavaScript( QString( "%1=window.getSelection().getRangeAt(0);_=0;" )
                              .arg( rangeVarName ) );
+#else
+  // Clearing selection here ensures that the search continues from the last match,
+  // no matter what the user clicked or selected since the last FTS find operation.
+  clearPageSelection();
+
+  if( backwards )
+  {
+    --ftsPosition;
+    flags |= QWebEnginePage::FindBackward;
+  }
+  else
+    ++ftsPosition;
+
+  ui.definition->findText( allMatches.at( ftsPosition ), flags );
+
+  ui.ftsSearchNext->setEnabled( ftsPosition != allMatches.size() - 1 );
+  ui.ftsSearchPrevious->setEnabled( ftsPosition != 0 );
+#endif // USE_QTWEBKIT
+
+  ui.ftsSearchStatusLabel->setText( searchStatusMessage( ftsPosition + 1, allMatches.size() ) );
 }
 
 void ArticleView::on_ftsSearchPrevious_clicked()
@@ -2801,6 +3658,7 @@ void ArticleView::on_ftsSearchNext_clicked()
   performFtsFindOperation( false );
 }
 
+#ifdef USE_QTWEBKIT
 #ifdef Q_OS_WIN32
 
 void ArticleView::readTag( const QString & from, QString & to, int & count )
@@ -3045,7 +3903,8 @@ QString ArticleView::wordAtPoint( int x, int y )
   return word;
 }
 
-#endif
+#endif // Q_OS_WIN32
+#endif // USE_QTWEBKIT
 
 ResourceToSaveHandler::ResourceToSaveHandler(ArticleView * view, QString const & fileName ) :
   QObject( view ),
@@ -3083,6 +3942,8 @@ void ResourceToSaveHandler::downloadFinished()
         QByteArray resourceData;
         vector< char > const & data = (*i)->getFullData();
         resourceData = QByteArray( data.data(), data.size() );
+
+        emit downloaded( fileName, &resourceData );
 
         // Write data to file
 

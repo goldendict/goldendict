@@ -337,6 +337,7 @@ struct Preferences
   bool hideGoldenDictHeader;
   int maxNetworkCacheSize;
   bool clearNetworkCacheOnExit;
+  bool offTheRecordWebProfile;
 
   qreal zoomFactor;
   qreal helpZoomFactor;
@@ -676,7 +677,7 @@ struct Class
   QByteArray popupWindowState; // Binary state saved by QMainWindow
   QByteArray popupWindowGeometry; // Geometry saved by QMainWindow
   QByteArray dictInfoGeometry; // Geometry of "Dictionary info" window
-  QByteArray inspectorGeometry; // Geometry of WebKit inspector window
+  QByteArray inspectorGeometry; // Geometry of WebKit inspector window or WebEngine dev tools view
   QByteArray dictionariesDialogGeometry; // Geometry of Dictionaries dialog
   QByteArray printPreviewDialogGeometry; // Geometry of Print Preview dialog
   QByteArray helpWindowGeometry; // Geometry of help window
@@ -835,6 +836,17 @@ QString getCacheDir() throw();
 
 /// Returns the article network disk cache directory.
 QString getNetworkCacheDir() throw();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+/// Replaces QStandardPaths::writableLocation( QStandardPaths::CacheLocation )
+/// at the beginning of @p path with the path to GoldenDict's cache directory.
+/// @return true if @p path was changed, false otherwise.
+bool replaceWritableCacheLocationIn( QString & path );
+/// Replaces QStandardPaths::writableLocation( QStandardPaths::DataLocation )
+/// at the beginning of @p path with the path to GoldenDict's data directory.
+/// @return true if @p path was changed, false otherwise.
+bool replaceWritableDataLocationIn( QString & path );
+#endif
 
 }
 

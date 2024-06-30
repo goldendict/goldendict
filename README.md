@@ -94,6 +94,18 @@ If you have problem building with Qt5 Multimedia or experience GStreamer run-tim
 
     qmake "CONFIG+=no_qtmultimedia_player"
 
+### Building with Qt WebEngine instead of Qt WebKit
+
+The Qt WebEngine-based version of GoldenDict is fresh and has not been comprehensively tested. Some aspects work better than
+in the Qt WebKit-based version, but there are downsides and not yet implemented features documented in the description of
+[this pull request](https://github.com/goldendict/goldendict/pull/1542).
+
+Make sure your Qt version is 5.15.2 or later, replace `libqt5webkit5-dev` with `qtwebengine5-dev` in the dependency list
+of the [Installing External Deps on Ubuntu Linux for Qt5](#installing-external-deps-on-ubuntu-linux-for-qt5) section
+and pass `"CONFIG+=use_qtwebengine"` to `qmake` in order to build this version:
+
+    qmake "CONFIG+=use_qtwebengine"
+
 <b>NB:</b> All additional settings for `qmake` that you need must be combined in one `qmake` launch, for example:
 
     qmake "CONFIG+=zim_support" "CONFIG+=no_extra_tiff_handler" "CONFIG+=no_ffmpeg_player"
@@ -113,7 +125,8 @@ To build GoldenDict with Visual Studio take one of next library packs and unpack
 
 To create project files for Visual Studio you can pass `"-tp vc"` option to `qmake`.
 
-Note: In Qt 5.6.0 and later the `Webkit` module was removed from official release builds. You should build it from sources to compile GoldenDict.
+Note: In Qt 5.6.0 and later the `Webkit` module was removed from official release builds.
+You should build it from sources to compile the Qt WebKit version of GoldenDict.
 
 
 ## Installation
