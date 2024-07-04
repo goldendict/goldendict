@@ -2,6 +2,7 @@
  * Part of GoldenDict. Licensed under GPLv3 or later, see the LICENSE file */
 
 #include <stdio.h>
+#include <limits>
 #include <QIcon>
 #include "gdappstyle.hh"
 #include "mainwindow.hh"
@@ -114,7 +115,12 @@ void gdMessageHandler( QtMsgType type, const char *msg_ )
 
 class GDCommandLine
 {
+  static int invalidWordsZoomLevel() { return std::numeric_limits< int >::max(); }
+  static double invalidZoomFactor() { return std::numeric_limits< double >::max(); }
+
   bool showHelp, toggleScanPopup, logFile;
+  int wordsZoomLevel;
+  double zoomFactor;
   QString word, groupName, popupGroupName;
   QVector< QString > arguments;
 public:
@@ -125,6 +131,12 @@ public:
 
   inline bool needToggleScanPopup()
   { return toggleScanPopup; }
+
+  bool needSetWordsZoomLevel() const { return wordsZoomLevel != invalidWordsZoomLevel(); }
+  int getWordsZoomLevel() const { return wordsZoomLevel; }
+
+  bool needSetZoomFactor() const { return zoomFactor != invalidZoomFactor(); }
+  double getZoomFactor() const { return zoomFactor; }
 
   inline bool needSetGroup()
   { return !groupName.isEmpty(); }
@@ -154,7 +166,9 @@ private:
 GDCommandLine::GDCommandLine( int argc, char **argv ):
 showHelp( false ),
 toggleScanPopup( false ),
-logFile( false )
+logFile( false ),
+wordsZoomLevel( invalidWordsZoomLevel() ),
+zoomFactor( invalidZoomFactor() )
 {
   if( argc > 1 )
   {
@@ -189,6 +203,18 @@ logFile( false )
       if( arguments[ i ].compare( "--log-to-file" ) == 0 )
       {
         logFile = true;
+        continue;
+      }
+      else
+      if( arguments[ i ].startsWith( "--words-zoom-level=" ) )
+      {
+        wordsZoomLevel = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 ).toInt();
+        continue;
+      }
+      else
+      if( arguments[ i ].startsWith( "--zoom-factor=" ) )
+      {
+        zoomFactor = arguments[ i ].mid( arguments[ i ].indexOf( '=' ) + 1 ).toDouble();
         continue;
       }
       else
@@ -372,6 +398,17 @@ int main( int argc, char ** argv )
       wasMessage = true;
     }
 
+    if( gdcl.needSetWordsZoomLevel() )
+    {
+      app.sendMessage( "setWordsZoomLevel: " + QString::number( gdcl.getWordsZoomLevel() ) );
+      wasMessage = true;
+    }
+    if( gdcl.needSetZoomFactor() )
+    {
+      app.sendMessage( "setZoomFactor: " + QString::number( gdcl.getZoomFactor() ) );
+      wasMessage = true;
+    }
+
     if( gdcl.needSetGroup() )
     {
       app.sendMessage( QString( "setGroup: " ) + gdcl.getGroupName() );
@@ -446,10 +483,14 @@ int main( int argc, char ** argv )
         "  --log-to-file\t\t\tTurn on debug mode\n"
         "  --toggle-scan-popup\t\tToggle scanning mode on/off\n"
         "  --group-name=GROUP\t\tSet current group of dictionaries in the main window to GROUP\n"
-        "  --popup-group-name=GROUP\tSet current group of dictionaries in the popup window to GROUP\n\n"
-        "If another GoldenDict instance is running, the second instance exits immediately, the options"
-        " --toggle-scan-popup, --group-name, --popup-group-name affect the running instance,"
-        " WORD or URI is translated in the running instance's popup window.\n"
+        "  --popup-group-name=GROUP\tSet current group of dictionaries in the popup window to GROUP\n"
+        "  --zoom-factor=FACTOR\t\tSet the zoom factor for Article View to FACTOR,"
+        " where FACTOR is a real number between 0.1 and 5.0, the default FACTOR is 1.0\n"
+        "  --words-zoom-level=LEVEL\tSet Search Pane/Box font size to"
+        " the default font size plus LEVEL, where LEVEL is an integer (possibly negative)\n"
+        "\nIf another GoldenDict instance is running, the second instance exits immediately, the options"
+        " --toggle-scan-popup, --group-name, --popup-group-name, --zoom-factor and --words-zoom-level affect"
+        " the running instance, WORD or URI is translated in the running instance's popup window.\n"
         "Otherwise, all options affect the initial state of the new instance,"
         " WORD or URI is translated in the new instance's main window.\n\n"
         "Assigning a global keyboard shortcut to the \"goldendict --toggle-scan-popup\""
@@ -554,6 +595,11 @@ int main( int argc, char ** argv )
 
   if( gdcl.needToggleScanPopup() )
     m.toggleScanPopup();
+
+  if( gdcl.needSetWordsZoomLevel() )
+    m.setWordsZoomLevel( gdcl.getWordsZoomLevel() );
+  if( gdcl.needSetZoomFactor() )
+    m.setZoomFactorImmediately( gdcl.getZoomFactor() );
 
   if( gdcl.needSetGroup() )
     m.setGroupByName( gdcl.getGroupName(), true );
