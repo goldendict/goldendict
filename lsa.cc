@@ -164,6 +164,9 @@ public:
   LsaDictionary( string const & id, string const & indexFile,
                  vector< string > const & dictionaryFiles );
 
+  virtual Dictionary::ResourceSearch::Type getResourceSearchType() const
+  { return Dictionary::ResourceSearch::LsaType; }
+
   virtual string getName() throw();
 
   virtual map< Dictionary::Property, string > getProperties() throw()
