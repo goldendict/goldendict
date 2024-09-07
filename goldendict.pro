@@ -609,6 +609,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/cs_CZ.ts \
     locale/de_DE.ts \
     locale/el_GR.ts \
+    locale/hu_HU.ts \
     locale/bg_BG.ts \
     locale/ar_SA.ts \
     locale/lt_LT.ts \
