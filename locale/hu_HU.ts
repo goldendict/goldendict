@@ -1503,1007 +1503,1007 @@ Egy globális gyorsbillentyű hozzárendelése a rendszerbeállításokban a &qu
     <message>
         <location filename="../language.cc" line="56"/>
         <source>Afar</source>
-        <translation type="unfinished"></translation>
+        <translation>Afar</translation>
     </message>
     <message>
         <location filename="../language.cc" line="57"/>
         <source>Abkhazian</source>
-        <translation type="unfinished"></translation>
+        <translation>Abház</translation>
     </message>
     <message>
         <location filename="../language.cc" line="58"/>
         <source>Avestan</source>
-        <translation type="unfinished"></translation>
+        <translation>Avesztai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="59"/>
         <source>Afrikaans</source>
-        <translation type="unfinished"></translation>
+        <translation>Afrikaans</translation>
     </message>
     <message>
         <location filename="../language.cc" line="60"/>
         <source>Akan</source>
-        <translation type="unfinished"></translation>
+        <translation>Akan</translation>
     </message>
     <message>
         <location filename="../language.cc" line="61"/>
         <source>Amharic</source>
-        <translation type="unfinished"></translation>
+        <translation>Amhara</translation>
     </message>
     <message>
         <location filename="../language.cc" line="62"/>
         <source>Aragonese</source>
-        <translation type="unfinished"></translation>
+        <translation>Aragóniai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="63"/>
         <source>Arabic</source>
-        <translation type="unfinished"></translation>
+        <translation>Arab</translation>
     </message>
     <message>
         <location filename="../language.cc" line="64"/>
         <source>Assamese</source>
-        <translation type="unfinished"></translation>
+        <translation>Asszámi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="65"/>
         <source>Avaric</source>
-        <translation type="unfinished"></translation>
+        <translation>Avar</translation>
     </message>
     <message>
         <location filename="../language.cc" line="66"/>
         <source>Aymara</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajmara</translation>
     </message>
     <message>
         <location filename="../language.cc" line="67"/>
         <source>Azerbaijani</source>
-        <translation type="unfinished"></translation>
+        <translation>Azeri</translation>
     </message>
     <message>
         <location filename="../language.cc" line="68"/>
         <source>Bashkir</source>
-        <translation type="unfinished"></translation>
+        <translation>Baskír</translation>
     </message>
     <message>
         <location filename="../language.cc" line="69"/>
         <source>Belarusian</source>
-        <translation type="unfinished"></translation>
+        <translation>Belorusz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="70"/>
         <source>Bulgarian</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolgár</translation>
     </message>
     <message>
         <location filename="../language.cc" line="71"/>
         <source>Bihari</source>
-        <translation type="unfinished"></translation>
+        <translation>Bihári</translation>
     </message>
     <message>
         <location filename="../language.cc" line="72"/>
         <source>Bislama</source>
-        <translation type="unfinished"></translation>
+        <translation>Biszlama</translation>
     </message>
     <message>
         <location filename="../language.cc" line="73"/>
         <source>Bambara</source>
-        <translation type="unfinished"></translation>
+        <translation>Bambara</translation>
     </message>
     <message>
         <location filename="../language.cc" line="74"/>
         <source>Bengali</source>
-        <translation type="unfinished"></translation>
+        <translation>Bengáli</translation>
     </message>
     <message>
         <location filename="../language.cc" line="75"/>
         <source>Tibetan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tibeti</translation>
     </message>
     <message>
         <location filename="../language.cc" line="76"/>
         <source>Breton</source>
-        <translation type="unfinished"></translation>
+        <translation>Breton</translation>
     </message>
     <message>
         <location filename="../language.cc" line="77"/>
         <source>Bosnian</source>
-        <translation type="unfinished"></translation>
+        <translation>Bosnyák</translation>
     </message>
     <message>
         <location filename="../language.cc" line="78"/>
         <source>Catalan</source>
-        <translation type="unfinished"></translation>
+        <translation>Katalán</translation>
     </message>
     <message>
         <location filename="../language.cc" line="79"/>
         <source>Chechen</source>
-        <translation type="unfinished"></translation>
+        <translation>Csecsen</translation>
     </message>
     <message>
         <location filename="../language.cc" line="80"/>
         <source>Chamorro</source>
-        <translation type="unfinished"></translation>
+        <translation>Csamorro</translation>
     </message>
     <message>
         <location filename="../language.cc" line="81"/>
         <source>Corsican</source>
-        <translation type="unfinished"></translation>
+        <translation>Korzikai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="82"/>
         <source>Cree</source>
-        <translation type="unfinished"></translation>
+        <translation>Krí</translation>
     </message>
     <message>
         <location filename="../language.cc" line="83"/>
         <source>Czech</source>
-        <translation type="unfinished"></translation>
+        <translation>Cseh</translation>
     </message>
     <message>
         <location filename="../language.cc" line="84"/>
         <source>Church Slavic</source>
-        <translation type="unfinished"></translation>
+        <translation>Óegyházi szláv</translation>
     </message>
     <message>
         <location filename="../language.cc" line="85"/>
         <source>Chuvash</source>
-        <translation type="unfinished"></translation>
+        <translation>Csuvas</translation>
     </message>
     <message>
         <location filename="../language.cc" line="86"/>
         <source>Welsh</source>
-        <translation type="unfinished"></translation>
+        <translation>Walesi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="87"/>
         <source>Danish</source>
-        <translation type="unfinished"></translation>
+        <translation>Dán</translation>
     </message>
     <message>
         <location filename="../language.cc" line="88"/>
         <source>German</source>
-        <translation type="unfinished"></translation>
+        <translation>Német</translation>
     </message>
     <message>
         <location filename="../language.cc" line="89"/>
         <source>Divehi</source>
-        <translation type="unfinished"></translation>
+        <translation>Maldív</translation>
     </message>
     <message>
         <location filename="../language.cc" line="90"/>
         <source>Dzongkha</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzongkha</translation>
     </message>
     <message>
         <location filename="../language.cc" line="91"/>
         <source>Ewe</source>
-        <translation type="unfinished"></translation>
+        <translation>Eve</translation>
     </message>
     <message>
         <location filename="../language.cc" line="92"/>
         <source>Greek</source>
-        <translation type="unfinished"></translation>
+        <translation>Görög</translation>
     </message>
     <message>
         <location filename="../language.cc" line="93"/>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Angol</translation>
     </message>
     <message>
         <location filename="../language.cc" line="94"/>
         <source>Esperanto</source>
-        <translation type="unfinished"></translation>
+        <translation>Eszperantó</translation>
     </message>
     <message>
         <location filename="../language.cc" line="95"/>
         <source>Spanish</source>
-        <translation type="unfinished"></translation>
+        <translation>Spanyol</translation>
     </message>
     <message>
         <location filename="../language.cc" line="96"/>
         <source>Estonian</source>
-        <translation type="unfinished"></translation>
+        <translation>Észt</translation>
     </message>
     <message>
         <location filename="../language.cc" line="97"/>
         <source>Basque</source>
-        <translation type="unfinished"></translation>
+        <translation>Baszk</translation>
     </message>
     <message>
         <location filename="../language.cc" line="98"/>
         <source>Persian</source>
-        <translation type="unfinished"></translation>
+        <translation>Perzsa</translation>
     </message>
     <message>
         <location filename="../language.cc" line="99"/>
         <source>Fulah</source>
-        <translation type="unfinished"></translation>
+        <translation>Ful</translation>
     </message>
     <message>
         <location filename="../language.cc" line="100"/>
         <source>Finnish</source>
-        <translation type="unfinished"></translation>
+        <translation>Finn</translation>
     </message>
     <message>
         <location filename="../language.cc" line="101"/>
         <source>Fijian</source>
-        <translation type="unfinished"></translation>
+        <translation>Fidzsi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="102"/>
         <source>Faroese</source>
-        <translation type="unfinished"></translation>
+        <translation>Feröeri</translation>
     </message>
     <message>
         <location filename="../language.cc" line="103"/>
         <source>French</source>
-        <translation type="unfinished"></translation>
+        <translation>Francia</translation>
     </message>
     <message>
         <location filename="../language.cc" line="104"/>
         <source>Western Frisian</source>
-        <translation type="unfinished"></translation>
+        <translation>Fríz (nyugati)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="105"/>
         <source>Irish</source>
-        <translation type="unfinished"></translation>
+        <translation>Ír</translation>
     </message>
     <message>
         <location filename="../language.cc" line="106"/>
         <source>Scottish Gaelic</source>
-        <translation type="unfinished"></translation>
+        <translation>Skót gael</translation>
     </message>
     <message>
         <location filename="../language.cc" line="107"/>
         <source>Galician</source>
-        <translation type="unfinished"></translation>
+        <translation>Galiciai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="108"/>
         <source>Guarani</source>
-        <translation type="unfinished"></translation>
+        <translation>Guarani</translation>
     </message>
     <message>
         <location filename="../language.cc" line="109"/>
         <source>Gujarati</source>
-        <translation type="unfinished"></translation>
+        <translation>Gudzsaráti</translation>
     </message>
     <message>
         <location filename="../language.cc" line="110"/>
         <source>Manx</source>
-        <translation type="unfinished"></translation>
+        <translation>Manx</translation>
     </message>
     <message>
         <location filename="../language.cc" line="111"/>
         <source>Hausa</source>
-        <translation type="unfinished"></translation>
+        <translation>Hausza</translation>
     </message>
     <message>
         <location filename="../language.cc" line="112"/>
         <source>Hebrew</source>
-        <translation type="unfinished"></translation>
+        <translation>Héber</translation>
     </message>
     <message>
         <location filename="../language.cc" line="113"/>
         <source>Hindi</source>
-        <translation type="unfinished"></translation>
+        <translation>Hindi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="114"/>
         <source>Hiri Motu</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiri motu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="115"/>
         <source>Croatian</source>
-        <translation type="unfinished"></translation>
+        <translation>Horvát</translation>
     </message>
     <message>
         <location filename="../language.cc" line="116"/>
         <source>Haitian</source>
-        <translation type="unfinished"></translation>
+        <translation>Haiti</translation>
     </message>
     <message>
         <location filename="../language.cc" line="117"/>
         <source>Hungarian</source>
-        <translation type="unfinished"></translation>
+        <translation>Magyar</translation>
     </message>
     <message>
         <location filename="../language.cc" line="118"/>
         <source>Armenian</source>
-        <translation type="unfinished"></translation>
+        <translation>Örmény</translation>
     </message>
     <message>
         <location filename="../language.cc" line="119"/>
         <source>Herero</source>
-        <translation type="unfinished"></translation>
+        <translation>Herero</translation>
     </message>
     <message>
         <location filename="../language.cc" line="120"/>
         <source>Interlingua</source>
-        <translation type="unfinished"></translation>
+        <translation>Interlingva</translation>
     </message>
     <message>
         <location filename="../language.cc" line="121"/>
         <source>Indonesian</source>
-        <translation type="unfinished"></translation>
+        <translation>Indonéz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="122"/>
         <source>Interlingue</source>
-        <translation type="unfinished"></translation>
+        <translation>Interlingue</translation>
     </message>
     <message>
         <location filename="../language.cc" line="123"/>
         <source>Igbo</source>
-        <translation type="unfinished"></translation>
+        <translation>Igbó</translation>
     </message>
     <message>
         <location filename="../language.cc" line="124"/>
         <source>Sichuan Yi</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuoszu (szecsuáni ji)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="125"/>
         <source>Inupiaq</source>
-        <translation type="unfinished"></translation>
+        <translation>Inupiak</translation>
     </message>
     <message>
         <location filename="../language.cc" line="126"/>
         <source>Ido</source>
-        <translation type="unfinished"></translation>
+        <translation>Ido</translation>
     </message>
     <message>
         <location filename="../language.cc" line="127"/>
         <source>Icelandic</source>
-        <translation type="unfinished"></translation>
+        <translation>Izlandi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="128"/>
         <source>Italian</source>
-        <translation type="unfinished"></translation>
+        <translation>Olasz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="129"/>
         <source>Inuktitut</source>
-        <translation type="unfinished"></translation>
+        <translation>Inuktitut</translation>
     </message>
     <message>
         <location filename="../language.cc" line="130"/>
         <source>Japanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Japán</translation>
     </message>
     <message>
         <location filename="../language.cc" line="131"/>
         <source>Javanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Jávai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="132"/>
         <source>Georgian</source>
-        <translation type="unfinished"></translation>
+        <translation>Grúz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="133"/>
         <source>Kongo</source>
-        <translation type="unfinished"></translation>
+        <translation>Kikongo</translation>
     </message>
     <message>
         <location filename="../language.cc" line="134"/>
         <source>Kikuyu</source>
-        <translation type="unfinished"></translation>
+        <translation>Kikuju</translation>
     </message>
     <message>
         <location filename="../language.cc" line="135"/>
         <source>Kwanyama</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvanyama</translation>
     </message>
     <message>
         <location filename="../language.cc" line="136"/>
         <source>Kazakh</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazak</translation>
     </message>
     <message>
         <location filename="../language.cc" line="137"/>
         <source>Kalaallisut</source>
-        <translation type="unfinished"></translation>
+        <translation>Grönlandi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="138"/>
         <source>Khmer</source>
-        <translation type="unfinished"></translation>
+        <translation>Khmer</translation>
     </message>
     <message>
         <location filename="../language.cc" line="139"/>
         <source>Kannada</source>
-        <translation type="unfinished"></translation>
+        <translation>Kannada</translation>
     </message>
     <message>
         <location filename="../language.cc" line="140"/>
         <source>Korean</source>
-        <translation type="unfinished"></translation>
+        <translation>Koreai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="141"/>
         <source>Kanuri</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanuri</translation>
     </message>
     <message>
         <location filename="../language.cc" line="142"/>
         <source>Kashmiri</source>
-        <translation type="unfinished"></translation>
+        <translation>Kasmíri</translation>
     </message>
     <message>
         <location filename="../language.cc" line="143"/>
         <source>Kurdish</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurd</translation>
     </message>
     <message>
         <location filename="../language.cc" line="144"/>
         <source>Komi</source>
-        <translation type="unfinished"></translation>
+        <translation>Komi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="145"/>
         <source>Cornish</source>
-        <translation type="unfinished"></translation>
+        <translation>Korni</translation>
     </message>
     <message>
         <location filename="../language.cc" line="146"/>
         <source>Kirghiz</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirgiz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="147"/>
         <source>Latin</source>
-        <translation type="unfinished"></translation>
+        <translation>Latin</translation>
     </message>
     <message>
         <location filename="../language.cc" line="148"/>
         <source>Luxembourgish</source>
-        <translation type="unfinished"></translation>
+        <translation>Luxemburgi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="149"/>
         <source>Ganda</source>
-        <translation type="unfinished"></translation>
+        <translation>Luganda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="150"/>
         <source>Limburgish</source>
-        <translation type="unfinished"></translation>
+        <translation>Limburgi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="151"/>
         <source>Lingala</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingala</translation>
     </message>
     <message>
         <location filename="../language.cc" line="152"/>
         <source>Lao</source>
-        <translation type="unfinished"></translation>
+        <translation>Lao</translation>
     </message>
     <message>
         <location filename="../language.cc" line="153"/>
         <source>Lithuanian</source>
-        <translation type="unfinished"></translation>
+        <translation>Litván</translation>
     </message>
     <message>
         <location filename="../language.cc" line="154"/>
         <source>Luba-Katanga</source>
-        <translation type="unfinished"></translation>
+        <translation>Luba-katanga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="155"/>
         <source>Latvian</source>
-        <translation type="unfinished"></translation>
+        <translation>Lett</translation>
     </message>
     <message>
         <location filename="../language.cc" line="156"/>
         <source>Malagasy</source>
-        <translation type="unfinished"></translation>
+        <translation>Malgas</translation>
     </message>
     <message>
         <location filename="../language.cc" line="157"/>
         <source>Marshallese</source>
-        <translation type="unfinished"></translation>
+        <translation>Marshall-szigeteki</translation>
     </message>
     <message>
         <location filename="../language.cc" line="158"/>
         <source>Maori</source>
-        <translation type="unfinished"></translation>
+        <translation>Maori</translation>
     </message>
     <message>
         <location filename="../language.cc" line="159"/>
         <source>Macedonian</source>
-        <translation type="unfinished"></translation>
+        <translation>Macedón</translation>
     </message>
     <message>
         <location filename="../language.cc" line="160"/>
         <source>Malayalam</source>
-        <translation type="unfinished"></translation>
+        <translation>Malajálam</translation>
     </message>
     <message>
         <location filename="../language.cc" line="161"/>
         <source>Mongolian</source>
-        <translation type="unfinished"></translation>
+        <translation>Mongol</translation>
     </message>
     <message>
         <location filename="../language.cc" line="162"/>
         <source>Marathi</source>
-        <translation type="unfinished"></translation>
+        <translation>Maráthi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="163"/>
         <source>Malay</source>
-        <translation type="unfinished"></translation>
+        <translation>Maláj</translation>
     </message>
     <message>
         <location filename="../language.cc" line="164"/>
         <source>Maltese</source>
-        <translation type="unfinished"></translation>
+        <translation>Máltai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="165"/>
         <source>Burmese</source>
-        <translation type="unfinished"></translation>
+        <translation>Burmai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="166"/>
         <source>Nauru</source>
-        <translation type="unfinished"></translation>
+        <translation>Naurui</translation>
     </message>
     <message>
         <location filename="../language.cc" line="167"/>
         <source>Norwegian Bokmal</source>
-        <translation type="unfinished"></translation>
+        <translation>Norvég bokmål</translation>
     </message>
     <message>
         <location filename="../language.cc" line="168"/>
         <source>North Ndebele</source>
-        <translation type="unfinished"></translation>
+        <translation>Északi ndebele</translation>
     </message>
     <message>
         <location filename="../language.cc" line="169"/>
         <source>Nepali</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepáli</translation>
     </message>
     <message>
         <location filename="../language.cc" line="170"/>
         <source>Ndonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Ndonga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="171"/>
         <source>Dutch</source>
-        <translation type="unfinished"></translation>
+        <translation>Holland</translation>
     </message>
     <message>
         <location filename="../language.cc" line="172"/>
         <source>Norwegian Nynorsk</source>
-        <translation type="unfinished"></translation>
+        <translation>Norvég nynorsk</translation>
     </message>
     <message>
         <location filename="../language.cc" line="173"/>
         <source>Norwegian</source>
-        <translation type="unfinished"></translation>
+        <translation>Norvég</translation>
     </message>
     <message>
         <location filename="../language.cc" line="174"/>
         <source>South Ndebele</source>
-        <translation type="unfinished"></translation>
+        <translation>Déli ndebele</translation>
     </message>
     <message>
         <location filename="../language.cc" line="175"/>
         <source>Navajo</source>
-        <translation type="unfinished"></translation>
+        <translation>Navahó</translation>
     </message>
     <message>
         <location filename="../language.cc" line="176"/>
         <source>Chichewa</source>
-        <translation type="unfinished"></translation>
+        <translation>Cseva</translation>
     </message>
     <message>
         <location filename="../language.cc" line="177"/>
         <source>Occitan</source>
-        <translation type="unfinished"></translation>
+        <translation>Okcitán</translation>
     </message>
     <message>
         <location filename="../language.cc" line="178"/>
         <source>Ojibwa</source>
-        <translation type="unfinished"></translation>
+        <translation>Odzsibva</translation>
     </message>
     <message>
         <location filename="../language.cc" line="179"/>
         <source>Oromo</source>
-        <translation type="unfinished"></translation>
+        <translation>Oromó</translation>
     </message>
     <message>
         <location filename="../language.cc" line="180"/>
         <source>Oriya</source>
-        <translation type="unfinished"></translation>
+        <translation>Orija</translation>
     </message>
     <message>
         <location filename="../language.cc" line="181"/>
         <source>Ossetian</source>
-        <translation type="unfinished"></translation>
+        <translation>Oszét</translation>
     </message>
     <message>
         <location filename="../language.cc" line="182"/>
         <source>Panjabi</source>
-        <translation type="unfinished"></translation>
+        <translation>Pandzsábi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="183"/>
         <source>Pali</source>
-        <translation type="unfinished"></translation>
+        <translation>Páli</translation>
     </message>
     <message>
         <location filename="../language.cc" line="184"/>
         <source>Polish</source>
-        <translation type="unfinished"></translation>
+        <translation>Lengyel</translation>
     </message>
     <message>
         <location filename="../language.cc" line="185"/>
         <source>Pashto</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="186"/>
         <source>Portuguese</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugál</translation>
     </message>
     <message>
         <location filename="../language.cc" line="187"/>
         <source>Quechua</source>
-        <translation type="unfinished"></translation>
+        <translation>Kecsua</translation>
     </message>
     <message>
         <location filename="../language.cc" line="188"/>
         <source>Raeto-Romance</source>
-        <translation type="unfinished"></translation>
+        <translation>Romans</translation>
     </message>
     <message>
         <location filename="../language.cc" line="189"/>
         <source>Kirundi</source>
-        <translation type="unfinished"></translation>
+        <translation>Rundi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="190"/>
         <source>Romanian</source>
-        <translation type="unfinished"></translation>
+        <translation>Román</translation>
     </message>
     <message>
         <location filename="../language.cc" line="191"/>
         <source>Russian</source>
-        <translation type="unfinished"></translation>
+        <translation>Orosz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="192"/>
         <source>Kinyarwanda</source>
-        <translation type="unfinished"></translation>
+        <translation>Kinyarvanda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="193"/>
         <source>Sanskrit</source>
-        <translation type="unfinished"></translation>
+        <translation>Szanszkrit</translation>
     </message>
     <message>
         <location filename="../language.cc" line="194"/>
         <source>Sardinian</source>
-        <translation type="unfinished"></translation>
+        <translation>Szárd (szardíniai)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="195"/>
         <source>Sindhi</source>
-        <translation type="unfinished"></translation>
+        <translation>Szindhi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="196"/>
         <source>Northern Sami</source>
-        <translation type="unfinished"></translation>
+        <translation>Északi számi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="197"/>
         <source>Sango</source>
-        <translation type="unfinished"></translation>
+        <translation>Szangó</translation>
     </message>
     <message>
         <location filename="../language.cc" line="198"/>
         <source>Serbo-Croatian</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerbhorvát</translation>
     </message>
     <message>
         <location filename="../language.cc" line="199"/>
         <source>Sinhala</source>
-        <translation type="unfinished"></translation>
+        <translation>Szingaléz</translation>
     </message>
     <message>
         <location filename="../language.cc" line="200"/>
         <source>Slovak</source>
-        <translation type="unfinished"></translation>
+        <translation>Szlovák</translation>
     </message>
     <message>
         <location filename="../language.cc" line="201"/>
         <source>Slovenian</source>
-        <translation type="unfinished"></translation>
+        <translation>Szlovén</translation>
     </message>
     <message>
         <location filename="../language.cc" line="202"/>
         <source>Samoan</source>
-        <translation type="unfinished"></translation>
+        <translation>Szamoai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="203"/>
         <source>Shona</source>
-        <translation type="unfinished"></translation>
+        <translation>Sona</translation>
     </message>
     <message>
         <location filename="../language.cc" line="204"/>
         <source>Somali</source>
-        <translation type="unfinished"></translation>
+        <translation>Szomáli</translation>
     </message>
     <message>
         <location filename="../language.cc" line="205"/>
         <source>Albanian</source>
-        <translation type="unfinished"></translation>
+        <translation>Albán</translation>
     </message>
     <message>
         <location filename="../language.cc" line="206"/>
         <source>Serbian</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerb</translation>
     </message>
     <message>
         <location filename="../language.cc" line="207"/>
         <source>Swati</source>
-        <translation type="unfinished"></translation>
+        <translation>Szvázi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="208"/>
         <source>Southern Sotho</source>
-        <translation type="unfinished"></translation>
+        <translation>Déli szoto</translation>
     </message>
     <message>
         <location filename="../language.cc" line="209"/>
         <source>Sundanese</source>
-        <translation type="unfinished"></translation>
+        <translation>Szundai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="210"/>
         <source>Swedish</source>
-        <translation type="unfinished"></translation>
+        <translation>Svéd</translation>
     </message>
     <message>
         <location filename="../language.cc" line="211"/>
         <source>Swahili</source>
-        <translation type="unfinished"></translation>
+        <translation>Szuahéli</translation>
     </message>
     <message>
         <location filename="../language.cc" line="212"/>
         <source>Tamil</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamil</translation>
     </message>
     <message>
         <location filename="../language.cc" line="213"/>
         <source>Telugu</source>
-        <translation type="unfinished"></translation>
+        <translation>Telugu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="214"/>
         <source>Tajik</source>
-        <translation type="unfinished"></translation>
+        <translation>Tádzsik</translation>
     </message>
     <message>
         <location filename="../language.cc" line="215"/>
         <source>Thai</source>
-        <translation type="unfinished"></translation>
+        <translation>Thai (sziámi)</translation>
     </message>
     <message>
         <location filename="../language.cc" line="216"/>
         <source>Tigrinya</source>
-        <translation type="unfinished"></translation>
+        <translation>Tigrinya</translation>
     </message>
     <message>
         <location filename="../language.cc" line="217"/>
         <source>Turkmen</source>
-        <translation type="unfinished"></translation>
+        <translation>Türkmén</translation>
     </message>
     <message>
         <location filename="../language.cc" line="218"/>
         <source>Tagalog</source>
-        <translation type="unfinished"></translation>
+        <translation>Tagalog</translation>
     </message>
     <message>
         <location filename="../language.cc" line="219"/>
         <source>Tswana</source>
-        <translation type="unfinished"></translation>
+        <translation>Csvana</translation>
     </message>
     <message>
         <location filename="../language.cc" line="220"/>
         <source>Tonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="221"/>
         <source>Turkish</source>
-        <translation type="unfinished"></translation>
+        <translation>Török</translation>
     </message>
     <message>
         <location filename="../language.cc" line="222"/>
         <source>Tsonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Conga</translation>
     </message>
     <message>
         <location filename="../language.cc" line="223"/>
         <source>Tatar</source>
-        <translation type="unfinished"></translation>
+        <translation>Tatár</translation>
     </message>
     <message>
         <location filename="../language.cc" line="224"/>
         <source>Twi</source>
-        <translation type="unfinished"></translation>
+        <translation>Tvi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="225"/>
         <source>Tahitian</source>
-        <translation type="unfinished"></translation>
+        <translation>Tahiti</translation>
     </message>
     <message>
         <location filename="../language.cc" line="226"/>
         <source>Uighur</source>
-        <translation type="unfinished"></translation>
+        <translation>Ujgur</translation>
     </message>
     <message>
         <location filename="../language.cc" line="227"/>
         <source>Ukrainian</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrán</translation>
     </message>
     <message>
         <location filename="../language.cc" line="228"/>
         <source>Urdu</source>
-        <translation type="unfinished"></translation>
+        <translation>Urdu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="229"/>
         <source>Uzbek</source>
-        <translation type="unfinished"></translation>
+        <translation>Üzbég</translation>
     </message>
     <message>
         <location filename="../language.cc" line="230"/>
         <source>Venda</source>
-        <translation type="unfinished"></translation>
+        <translation>Venda</translation>
     </message>
     <message>
         <location filename="../language.cc" line="231"/>
         <source>Vietnamese</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnámi</translation>
     </message>
     <message>
         <location filename="../language.cc" line="232"/>
         <source>Volapuk</source>
-        <translation type="unfinished"></translation>
+        <translation>Volapük</translation>
     </message>
     <message>
         <location filename="../language.cc" line="233"/>
         <source>Walloon</source>
-        <translation type="unfinished"></translation>
+        <translation>Vallon</translation>
     </message>
     <message>
         <location filename="../language.cc" line="234"/>
         <source>Wolof</source>
-        <translation type="unfinished"></translation>
+        <translation>Volof</translation>
     </message>
     <message>
         <location filename="../language.cc" line="235"/>
         <source>Xhosa</source>
-        <translation type="unfinished"></translation>
+        <translation>Xhosza</translation>
     </message>
     <message>
         <location filename="../language.cc" line="236"/>
         <source>Yiddish</source>
-        <translation type="unfinished"></translation>
+        <translation>Jiddis</translation>
     </message>
     <message>
         <location filename="../language.cc" line="237"/>
         <source>Yoruba</source>
-        <translation type="unfinished"></translation>
+        <translation>Joruba</translation>
     </message>
     <message>
         <location filename="../language.cc" line="238"/>
         <source>Zhuang</source>
-        <translation type="unfinished"></translation>
+        <translation>Csuang</translation>
     </message>
     <message>
         <location filename="../language.cc" line="239"/>
         <source>Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Kínai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="240"/>
         <source>Zulu</source>
-        <translation type="unfinished"></translation>
+        <translation>Zulu</translation>
     </message>
     <message>
         <location filename="../language.cc" line="241"/>
         <source>Lojban</source>
-        <translation type="unfinished"></translation>
+        <translation>Lojban</translation>
     </message>
     <message>
         <location filename="../language.cc" line="377"/>
         <source>Traditional Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Hagyományos kínai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="378"/>
         <source>Simplified Chinese</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyszerűsített kínai</translation>
     </message>
     <message>
         <location filename="../language.cc" line="379"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb</translation>
     </message>
     <message>
         <location filename="../language.cc" line="380"/>
         <source>Other Simplified Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb egyszerűsített kínai nyelvjárások</translation>
     </message>
     <message>
         <location filename="../language.cc" line="381"/>
         <source>Other Traditional Chinese dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb hagyományos kínai nyelvjárások</translation>
     </message>
     <message>
         <location filename="../language.cc" line="382"/>
         <source>Other Eastern-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb kelet-európai nyelvek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="383"/>
         <source>Other Western-European languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb nyugat-európai nyelvek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="384"/>
         <source>Other Russian languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb orosz nyelvek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="385"/>
         <source>Other Japanese languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb japán nyelvek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="386"/>
         <source>Other Baltic languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb balti nyelvek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="387"/>
         <source>Other Greek languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb görög nyelvek</translation>
     </message>
     <message>
         <location filename="../language.cc" line="388"/>
         <source>Other Korean dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb koreai nyelvjárások</translation>
     </message>
     <message>
         <location filename="../language.cc" line="389"/>
         <source>Other Turkish dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb török nyelvjárások</translation>
     </message>
     <message>
         <location filename="../language.cc" line="390"/>
         <source>Other Thai dialects</source>
-        <translation type="unfinished"></translation>
+        <translation>Egyéb thai nyelvjárások</translation>
     </message>
     <message>
         <location filename="../language.cc" line="391"/>
         <source>Tamazight</source>
-        <translation type="unfinished"></translation>
+        <translation>Berber nyelvek</translation>
     </message>
 </context>
 <context>
