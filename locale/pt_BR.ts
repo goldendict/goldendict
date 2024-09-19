@@ -4875,7 +4875,7 @@ obter sua própria chave.</translation>
     <message>
         <location filename="../sources.ui" line="579"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>Lista de códigos de idioma que você gostaria de ter. Por exemplo: &quot;en, ru, pt_BR&quot;.</translation>
+        <translation>Lista de códigos de idioma que você gostaria de ter. Por exemplo: &quot;en, ru, pt&quot;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="602"/>
