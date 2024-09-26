@@ -621,6 +621,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/zh_TW.ts \
     locale/sq_AL.ts \
     locale/pt_BR.ts \
+    locale/pt_PT.ts \
     locale/es_AR.ts \
     locale/es_BO.ts \
     locale/es_ES.ts \
