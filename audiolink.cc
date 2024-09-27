@@ -3,16 +3,14 @@
 
 #include "audiolink.hh"
 
-std::string addAudioLink( std::string const & url,
-                          std::string const & dictionaryId )
+std::string addAudioLink( std::string const & url)
 {
-    return std::string( "<script type=\"text/javascript\">" +
-                        makeAudioLinkScript( url, dictionaryId ) +
+    return std::string( "<script>" +
+                        makeAudioLinkScript( url ) +
                         "</script>" );
 }
 
-std::string makeAudioLinkScript( std::string const & url,
-                                 std::string const & dictionaryId )
+std::string makeAudioLinkScript( std::string const & url)
 {
   /// Convert "'" to "\'" - this char broke autoplay of audiolinks
 
@@ -33,7 +31,8 @@ std::string makeAudioLinkScript( std::string const & url,
     escaped = ( ch == '\\' );
   }
 
-  std::string audioLinkForDict = "gdAudioLinks['" + dictionaryId + "']";
-  return "gdAudioLinks.first = gdAudioLinks.first || " + ref + ";" +
-         audioLinkForDict + " = " + audioLinkForDict + " || " + ref + ";";
+  // Assign the first audio link of each article to gdJustLoadedAudioLink JavaScript variable.
+  // Once an article finishes loading, the value of gdJustLoadedAudioLink is stored away
+  // and the variable is set to null, before the next article starts loading.
+  return "gdJustLoadedAudioLink = gdJustLoadedAudioLink || " + ref + ';';
 }

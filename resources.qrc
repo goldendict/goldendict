@@ -18,6 +18,7 @@
         <file>icons/wizard.png</file>
         <file>icons/warning.png</file>
         <file>article-style.css</file>
+        <file>article-style-expand-optional-parts.css</file>
         <file>article-style-print.css</file>
         <file>qt-style.css</file>
         <file>icons/icon32_dsl.png</file>
@@ -84,5 +85,6 @@
         <file>icons/star_blue.png</file>
         <file>icons/folder.png</file>
         <file>icons/ontop.png</file>
+        <file>icons/loading.gif</file>
     </qresource>
 </RCC>
