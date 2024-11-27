@@ -402,6 +402,10 @@ int main( int argc, char ** argv )
   app.setStyle(new GdAppStyle);
 #endif
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 7, 0 )
+  app.setDesktopFileName( QStringLiteral( "org.goldendict.GoldenDict" ) );
+#endif
+
   #ifndef Q_OS_MAC
     app.setWindowIcon( QIcon( ":/icons/programicon.png" ) );
   #endif
