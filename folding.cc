@@ -688,6 +688,15 @@ QString unescapeWildcardSymbols( const QString & str )
   return unescaped;
 }
 
+void prepareToEmbedRTL( QString & str )
+{
+  if( str.isRightToLeft() )
+  {
+    str.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
+    str.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+  }
+}
+
 wchar foldedDiacritic( wchar const * in, size_t size, size_t & consumed )
 {
   return foldDiacritic( in, size, consumed );
