@@ -1126,8 +1126,9 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
 void IndexedWords::addWord( wstring const & word, uint32_t articleOffset, unsigned int maxHeadwordSize )
 {
-  wchar const * wordBegin = word.c_str();
-  string::size_type wordSize = word.size();
+  wstring normalizedWord = gd::normalize( word );
+  wchar const * wordBegin = normalizedWord.c_str();
+  string::size_type wordSize = normalizedWord.size();
 
   // Safeguard us against various bugs here. Don't attempt adding words
   // which are freakishly huge.
