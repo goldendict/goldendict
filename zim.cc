@@ -130,7 +130,7 @@ __attribute__((packed))
 enum
 {
   Signature = 0x584D495A, // ZIMX on little-endian, XMIZ on big-endian
-  CurrentFormatVersion = 3 + BtreeIndexing::FormatVersion + Folding::Version
+  CurrentFormatVersion = 4 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 struct IdxHeader
@@ -147,6 +147,7 @@ struct IdxHeader
   quint32 descriptionPtr;
   quint32 langFrom;  // Source language
   quint32 langTo;    // Target language
+  quint32 iconPtr;
 }
 #ifndef _MSC_VER
 __attribute__((packed))
@@ -813,8 +814,23 @@ void ZimDictionary::loadIcon() throw()
 
   if( !loadIconFromFile( fileName ) )
   {
-    // Load failed -- use default icons
-    dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_zim.png");
+    // Load icon from dictionary
+    if( idxHeader.iconPtr != 0xFFFFFFFF )
+    {
+      string pngImage;
+      readArticle( df, idxHeader.iconPtr, pngImage );
+
+      QImage img = QImage::fromData( reinterpret_cast< const uchar *>( pngImage.data() ), pngImage.size() );
+      img.setAlphaChannel( img.createMaskFromColor( QColor( 192, 192, 192 ).rgb(),
+                                                    Qt::MaskOutColor ) );
+
+      dictionaryNativeIcon = dictionaryIcon = QIcon( QPixmap::fromImage( img ) );
+      if( dictionaryIcon.isNull() )
+        dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_zim.png");
+    }
+    else
+      // Load failed -- use default icons
+      dictionaryNativeIcon = dictionaryIcon = QIcon(":/icons/icon32_zim.png");
   }
 
   dictionaryIconLoaded = true;
@@ -1747,6 +1763,7 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
           memset( &idxHeader, 0, sizeof( idxHeader ) );
           idxHeader.namePtr = 0xFFFFFFFF;
           idxHeader.descriptionPtr = 0xFFFFFFFF;
+          idxHeader.iconPtr = 0xFFFFFFFF;
 
           // We write a dummy header first. At the end of the process the header
           // will be rewritten with the right values.
@@ -1871,6 +1888,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
                   idxHeader.langFrom = LangCoder::findIdForLanguageCode3( lang.c_str() );
                 idxHeader.langTo = idxHeader.langFrom;
               }
+              else
+              if( url.compare( "Illustration_48x48@1" ) == 0 )
+                idxHeader.iconPtr = n;
             }
             else
             if( nameSpace == 'X' )
@@ -1879,6 +1899,9 @@ vector< sptr< Dictionary::Class > > makeDictionaries(
             }
             else
             {
+              if( nameSpace == '-' && idxHeader.iconPtr == 0xFFFFFFFF && url.compare( "favicon" ) == 0 )
+                idxHeader.iconPtr = n;
+
               url.insert( url.begin(), '/' );
               url.insert( url.begin(), nameSpace );
               indexedResources.addSingleWord( Utf8::decode( url ), n );
