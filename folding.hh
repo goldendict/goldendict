@@ -85,6 +85,9 @@ QString unescapeWildcardSymbols( QString const & );
 /// Escape all wildcard symbols (for place word to input line)
 QString escapeWildcardSymbols( QString const & );
 
+/// Prepare a possibly right-to-left string @p str to be embedded into another, possibly left-to-right string.
+void prepareToEmbedRTL( QString & str );
+
 /// Return result of foldDiacritic() from "inc_diacritic_folding.hh"
 wchar foldedDiacritic( wchar const * in, size_t size, size_t & consumed );
 

@@ -1,6 +1,6 @@
-#include "articleinspector.hh"
+#ifdef USE_QTWEBKIT
 
-#if QT_VERSION >= 0x040600
+#include "articleinspector.hh"
 
 #include <algorithm>
 
@@ -53,4 +53,4 @@ void ArticleInspector::showEvent( QShowEvent * event )
   QWebInspector::showEvent( event );
 }
 
-#endif // QT_VERSION
+#endif // USE_QTWEBKIT

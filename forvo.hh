@@ -42,14 +42,12 @@ class ForvoArticleRequest: public Dictionary::DataRequest
   typedef std::list< NetReply > NetReplies;
   NetReplies netReplies;
   QString apiKey, languageCode;
-  string dictionaryId;
 
 public:
 
   ForvoArticleRequest( wstring const & word, vector< wstring > const & alts,
                        QString const & apiKey_,
                        QString const & languageCode_,
-                       string const & dictionaryId_,
                        QNetworkAccessManager & mgr );
 
   virtual void cancel();
