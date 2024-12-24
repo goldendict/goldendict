@@ -13,6 +13,9 @@ MultimediaAudioPlayer::MultimediaAudioPlayer() :
   typedef void( QMediaPlayer::* ErrorSignal )( QMediaPlayer::Error );
   connect( &player, static_cast< ErrorSignal >( &QMediaPlayer::error ),
            this, &MultimediaAudioPlayer::onMediaPlayerError );
+
+  connect( &player, &QMediaPlayer::stateChanged,
+           this, &MultimediaAudioPlayer::onMediaPlayerStateChanged );
 }
 
 QString MultimediaAudioPlayer::play( const char * data, int size )
@@ -33,11 +36,18 @@ void MultimediaAudioPlayer::stop()
   player.setMedia( QMediaContent() ); // Forget about audioBuffer.
   audioBuffer.close();
   audioBuffer.setData( QByteArray() ); // Free memory.
+
+  emit stateChanged( StoppedState ); // Always emit the signal as promised by our API.
 }
 
 void MultimediaAudioPlayer::onMediaPlayerError()
 {
   emit error( player.errorString() );
+}
+
+void MultimediaAudioPlayer::onMediaPlayerStateChanged( QMediaPlayer::State state )
+{
+  emit stateChanged( state == QMediaPlayer::PlayingState ? PlayingState : StoppedState );
 }
 
 #endif // MAKE_QTMULTIMEDIA_PLAYER
