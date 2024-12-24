@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="pt_BR">
+<TS version="2.0" language="pt_PT">
 <context>
     <name>About</name>
     <message>
@@ -11,7 +11,7 @@
     <message>
         <location filename="../about.ui" line="66"/>
         <source>GoldenDict dictionary lookup program, version </source>
-        <translation>Dicionário Eletrônico GoldenDict, versão </translation>
+        <translation>Dicionário Eletrónico GoldenDict, versão </translation>
     </message>
     <message>
         <location filename="../about.ui" line="91"/>
@@ -69,7 +69,7 @@
     <message>
         <location filename="../article_maker.cc" line="300"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Welcome to &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;To start working with the program, first visit &lt;b&gt;Edit|Dictionaries&lt;/b&gt; to add some directory paths where to search for the dictionary files, set up various Wikipedia sites or other sources, adjust dictionary order or create dictionary groups.&lt;p&gt;And then you&apos;re ready to look up your words! You can do that in this window by using a pane to the left, or you can &lt;a href=&quot;Working with popup&quot;&gt;look up words from other active applications&lt;/a&gt;. &lt;p&gt;To customize program, check out the available preferences at &lt;b&gt;Edit|Preferences&lt;/b&gt;. All settings there have tooltips, be sure to read them if you are in doubt about anything.&lt;p&gt;Should you need further help, have any questions, suggestions or just wonder what the others think, you are welcome at the program&apos;s &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Check program&apos;s &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; for the updates. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licensed under GPLv3 or later.</source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Bem vindo ao &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Para começar a trabalhar com o programa, primeiro visite &lt;b&gt;Editar|Dicionários&lt;/b&gt; para adicionar alguns caminhos de diretório, onde procuram os arquivos de dicionários, configurar vários sites da Wikipedia ou outras fontes, ajustar a ordem de dicionário ou criar grupos de dicionários.&lt;p&gt;E então você estará pronto para visualizar suas palavras! Você pode fazer isso nesta janela usando o painel à esquerda, ou você pode &lt;a href=&quot;Trabalhando com pop-up&quot;&gt;procurar palavras a partir de outras aplicações ativas&lt;/a&gt;. &lt;p&gt;Para personalizar o programa, confira as preferências disponíveis no &lt;b&gt;Editar|Preferências&lt;/b&gt;. Todas as configurações tem dicas, não deixe de lê-las, se você estiver em dúvida sobre qualquer coisa.&lt;p&gt;Se você precisar de mais ajuda, têm qualquer dúvida, sugestões ou apenas saber o que os outros pensam, você é bem-vindo ao programa de &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt;.&lt;p&gt;Confira o programa do &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; para atualizações. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licenciado sob GPLv3 ou posterior.</translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Bem vindo ao &lt;b&gt;GoldenDict&lt;/b&gt;!&lt;/h3&gt;&lt;p&gt;Para começar a trabalhar com o programa, primeiro aceda ao menu &lt;b&gt;Editar|Dicionários&lt;/b&gt; para adicionar alguns caminhos de directório, onde procuram os ficheiros de dicionários, configurar vários sites da Wikipédia ou outras fontes, ajustar a ordem de dicionário ou criar grupos de dicionários.&lt;p&gt;E depois estará pronto para consultar as suas palavras! Pode fazer isso nesta janela usando o painel à esquerda, ou pode &lt;a href=&quot;Trabalhando com pop-up&quot;&gt;procurar palavras a partir de outros programas &lt;/a&gt;. &lt;p&gt;Para personalizar o programa, confira as preferências disponíveis no &lt;b&gt;Editar|Preferências&lt;/b&gt;. Todas as configurações tem dicas, não se esqueça de lê-las, se tiver alguma dúvida.&lt;p&gt;Se  precisar de mais ajuda, tiver alguma dúvida, sugestões ou apenas saber o que os outros pensam, seja bem-vindo ao &lt;a href=&quot;http://goldendict.org/forum/&quot;&gt;forum&lt;/a&gt; do programa.&lt;p&gt;Confira o programa do &lt;a href=&quot;http://goldendict.org/&quot;&gt;website&lt;/a&gt; para actualizações. &lt;p&gt;(c) 2008-2013 Konstantin Isakov. Licenciado sob GPLv3 ou posterior.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="316"/>
@@ -79,18 +79,18 @@
     <message>
         <location filename="../article_maker.cc" line="318"/>
         <source>&lt;h3 align=&quot;center&quot;&gt;Working with the popup&lt;/h3&gt;To look up words from other active applications, you would need to first activate the &lt;i&gt;&quot;Scan popup functionality&quot;&lt;/i&gt; in &lt;b&gt;Preferences&lt;/b&gt;, and then enable it at any time either by triggering the &apos;Popup&apos; icon above, or by clicking the tray icon down below with your right mouse button and choosing so in the menu you&apos;ve popped. </source>
-        <translation>&lt;h3 align=&quot;center&quot;&gt;Trabalhando com janelas de definições/tradução semiautomáticas&lt;/h3&gt;Para fazer consultas/tradução de palavras da janela de outros aplicativos abertos, primeiramente é necessário habilitar a função de janelas secundárias seguindo estes passos a partir da janela principal:&lt;p&gt;&lt;OL&gt;&lt;LI&gt;Clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;;
-&lt;LI&gt;Clique na guia &lt;b&gt;&lt;i&gt;&quot;Janela de Definições Semiautomáticas&quot;&lt;/b&gt;&lt;/i&gt;;&lt;LI&gt;Marque a opção &lt;i&gt;&quot;Ativar funcionalidades de janelas secundárias de definições semiautomáticas&quot;&lt;/i&gt;;&lt;LI&gt;Em seguida, clique em &quot;OK&quot; para salvar as configurações.&lt;/OL&gt;&lt;p&gt;Com esta opção ativada, você pode marcar ou desmarcar a exibição das janelas secundárias quando quiser. Para fazê-lo, há duas formas:&lt;UL&gt;&lt;LI&gt;Na janela principal, clique no botão de &lt;b&gt;Definições Semiautomáticas&lt;/b&gt;, cujo botão assemelha-se a uma varinha;&lt;LI&gt;No ícone do programa exibido na Área de Notificação (perto do relógio), clique com o botão direito do mouse e marque a opção &lt;b&gt;&lt;i&gt;Definições Semiautomáticas&lt;/b&gt;&lt;/i&gt;.&lt;/UL&gt;&lt;p&gt;Uma vez habilitada esta função, qualquer palavra ou expressão selecionada terá suas definições exibidas (se a palavra/expressão da consulta existir em algum dos dicionários especificados na configuração) imediatamente nos resultados da consulta. </translation>
+        <translation>&lt;h3 align=&quot;center&quot;&gt;Trabalhando com janelas de definições/tradução semiautomáticas&lt;/h3&gt;Para fazer consultas/tradução de palavras da janela de outros programas abertos, primeiro é necessário activar a função de janelas secundárias seguindo estes passos a partir da janela principal:&lt;p&gt;&lt;OL&gt;&lt;LI&gt;Clique em &lt;b&gt;Editar|Configurar&lt;/b&gt;;
+&lt;LI&gt;Clique no separador &lt;b&gt;&lt;i&gt;&quot;Janela de Definições Semiautomáticas&quot;&lt;/b&gt;&lt;/i&gt;;&lt;LI&gt;Marque a opção &lt;i&gt;&quot;Ativar funcionalidades de janelas secundárias de definições semiautomáticas&quot;&lt;/i&gt;;&lt;LI&gt;Em seguida, clique em &quot;OK&quot; para guardar as configurações.&lt;/OL&gt;&lt;p&gt;Com esta opção activada, pode marcar ou desmarcar a exibição das janelas secundárias quando quiser. Para fazê-lo, há duas formas:&lt;UL&gt;&lt;LI&gt;Na janela principal, clique no botão de &lt;b&gt;Definições Semiautomáticas&lt;/b&gt;, cujo botão assemelha-se a uma varinha;&lt;LI&gt;No ícone do programa exibido na Área de Notificação (perto do relógio), clique com o botão direito do rato e marque a opção &lt;b&gt;&lt;i&gt;Definições Semiautomáticas&lt;/b&gt;&lt;/i&gt;.&lt;/UL&gt;&lt;p&gt;Uma vez activada esta função, qualquer palavra ou expressão selecionada terá suas definições exibidas (se a palavra/expressão da consulta existir em algum dos dicionários especificados na configuração) imediatamente nos resultados da consulta. </translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="325"/>
         <source>Then just stop the cursor over the word you want to look up in another application, and a window would pop up which would describe it to you.</source>
-        <translation>Basta pairar o ponteiro do mouse sobre a palavra/expressão exibida em uma janela qualquer e que desejar consultar que será exibida uma janela com as definições/tradução.</translation>
+        <translation>Basta pairar o ponteiro do rato sobre a palavra/expressão exibida numa janela qualquer e que desejar consultar que será exibida uma janela com as definições/tradução.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="328"/>
         <source>Then just select any word you want to look up in another application by your mouse (double-click it or swipe it with mouse with the button pressed), and a window would pop up which would describe the word to you.</source>
-        <translation>Com isso, você pode consultar ou traduzir palavra/expressão da janela de qualquer programa que seja selecionável ou em que se possa clicar duplamente. Alás, um clique duplo do mouse, por exemplo, seleciona uma palavra, ao passo que um clique triplo, uma frase inteira.</translation>
+        <translation>Com isso, pode consultar ou traduzir palavra/expressão da janela de qualquer programa que seja selecionável ou em que se possa clicar duplamente. Alás, um clique duplo do rato, por exemplo, seleciona uma palavra, ao passo que um clique triplo, uma frase inteira.</translation>
     </message>
     <message>
         <location filename="../article_maker.cc" line="410"/>
@@ -167,7 +167,7 @@
         <location filename="../articleview.ui" line="71"/>
         <location filename="../articleview.ui" line="163"/>
         <source>&amp;Previous</source>
-        <translation>A&amp;nterior</translation>
+        <translation>&amp;Anterior</translation>
     </message>
     <message>
         <location filename="../articleview.ui" line="85"/>
@@ -251,7 +251,7 @@
     <message>
         <location filename="../articleview.cc" line="2051"/>
         <source>Save sound</source>
-        <translation>Salvar som</translation>
+        <translation>Guardar som</translation>
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
@@ -260,7 +260,7 @@
     <message>
         <location filename="../articleview.cc" line="2066"/>
         <source>Save image</source>
-        <translation>Salvar imagem</translation>
+        <translation>Guardar imagem</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2068"/>
@@ -275,17 +275,17 @@
     <message>
         <location filename="../articleview.cc" line="222"/>
         <source>Phrase not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Frase não encontrada</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="230"/>
         <source>%1 of %2 matches</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 de %2 encontrados</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1813"/>
         <source>Open Link in New &amp;Tab</source>
-        <translation>Abrir Ligação em Nova Guia (&amp;G)</translation>
+        <translation>Abrir Ligação em Novo Separador (&amp;G)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1820"/>
@@ -295,12 +295,12 @@
     <message>
         <location filename="../articleview.cc" line="1835"/>
         <source>Save &amp;image...</source>
-        <translation>Salvar &amp;imagem...</translation>
+        <translation>Guardar &amp;imagem...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1843"/>
         <source>Save s&amp;ound...</source>
-        <translation>Salvar S&amp;om...</translation>
+        <translation>Guardar S&amp;om...</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1862"/>
@@ -310,7 +310,7 @@
     <message>
         <location filename="../articleview.cc" line="1870"/>
         <source>Look up &quot;%1&quot; in &amp;New Tab</source>
-        <translation>Exibir resultado de &quot;%1&quot; em &amp;nova guia</translation>
+        <translation>Exibir resultado de &quot;%1&quot; em &amp;novo separador</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="1875"/>
@@ -331,12 +331,12 @@
     <message>
         <location filename="../articleview.cc" line="1903"/>
         <source>Look up &quot;%1&quot; in %2 in &amp;New Tab</source>
-        <translation>Exibir o resultado da consulta de &quot;%1&quot; no %2 em &amp;nova aba</translation>
+        <translation>Exibir o resultado da consulta de &quot;%1&quot; no %2 em &amp;novo separador</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2053"/>
         <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiros de áudio (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Todos os ficheiros (*.*)</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="2179"/>
@@ -369,7 +369,7 @@
     <message>
         <location filename="../articleview.cc" line="341"/>
         <source>Select Current Article</source>
-        <translation>Selecionar o Artigo Atual</translation>
+        <translation>Selecionar o Artigo actual</translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="347"/>
@@ -422,7 +422,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../chineseconversion.ui" line="23"/>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
-        <translation>Habilitar conversão entre caracteres de chinês simplificado e tradicional</translation>
+        <translation>Activar conversão entre caracteres de chinês simplificado e tradicional</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="26"/>
@@ -432,7 +432,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../chineseconversion.ui" line="35"/>
         <source>Enable conversion from simplified characters to traditional (Taiwan variant) characters</source>
-        <translation>Habilitar conversão de caracteres de chinês simplificado para tradicional (variante de Taiwan)</translation>
+        <translation>Activar conversão de caracteres de chinês simplificado para tradicional (variante de Taiwan)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="38"/>
@@ -442,7 +442,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../chineseconversion.ui" line="45"/>
         <source>Enable conversion from simplified characters to traditional (Hong Kong variant) characters</source>
-        <translation>Habilitar conversão de caracteres de chinês simplificado para tradicional (variante de Hong Kong)</translation>
+        <translation>Activar conversão de caracteres de chinês simplificado para tradicional (variante de Hong Kong)</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="48"/>
@@ -452,7 +452,7 @@ entre clássico e ortografia escolar em cirílico)</translation>
     <message>
         <location filename="../chineseconversion.ui" line="55"/>
         <source>Enable conversion from traditional characters to simplified characters</source>
-        <translation>Habilitar conversão de caracteres de chinês tradicional para simplificado</translation>
+        <translation>Activar conversão de caracteres de chinês tradicional para simplificado</translation>
     </message>
     <message>
         <location filename="../chineseconversion.ui" line="58"/>
@@ -516,7 +516,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../authentication.ui" line="20"/>
         <source>You need to supply a Username and a Password to access via proxy</source>
-        <translation>Você precisa fornecer um nome de usuário e uma senha para acessar via proxy</translation>
+        <translation>É preciso fornecer um nome de usuário e uma senha para aceder via proxy</translation>
     </message>
     <message>
         <location filename="../authentication.ui" line="30"/>
@@ -659,7 +659,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../dictheadwords.ui" line="53"/>
         <source>Exports headwords to file</source>
-        <translation>Salvar palavras-chave em arquivo</translation>
+        <translation>Guardar palavras-chave em arquivo</translation>
     </message>
     <message>
         <location filename="../dictheadwords.ui" line="56"/>
@@ -729,7 +729,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../dictheadwords.cc" line="299"/>
         <source>Save headwords to file</source>
-        <translation>Salvar palavras-chave em arquivo</translation>
+        <translation>Guardar palavras-chave em arquivo</translation>
     </message>
     <message>
         <location filename="../dictheadwords.cc" line="301"/>
@@ -825,7 +825,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../dictserver.cc" line="277"/>
         <source>Databases: </source>
-        <translation>Bancos de dados: </translation>
+        <translation>Bases de dados: </translation>
     </message>
     <message>
         <location filename="../dictserver.cc" line="278"/>
@@ -835,7 +835,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../dictserver.cc" line="282"/>
         <source>Server databases</source>
-        <translation>Bancos de dados do servidor</translation>
+        <translation>Bases de dados do servidor</translation>
     </message>
 </context>
 <context>
@@ -843,7 +843,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../sources.cc" line="816"/>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="818"/>
@@ -858,7 +858,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../sources.cc" line="822"/>
         <source>Databases</source>
-        <translation>Bancos de dados</translation>
+        <translation>Bases de dados</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="824"/>
@@ -874,8 +874,8 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
         <location filename="../sources.cc" line="859"/>
         <source>Comma-delimited list of databases
 (empty string or &quot;*&quot; matches all databases)</source>
-        <translation>Lista de bancos de dados delimitada por vírgulas
-(cadeia vazia ou &quot;*&quot; corresponde a todos os bancos de dados)</translation>
+        <translation>Lista de bases de dados delimitada por vírgulas
+(cadeia vazia ou &quot;*&quot; corresponde a todas basees de dados)</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="862"/>
@@ -1288,7 +1288,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../groups.ui" line="133"/>
         <source>Tab 2</source>
-        <translation>Guia 2</translation>
+        <translation>Separador 2</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="143"/>
@@ -1323,7 +1323,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../groups.ui" line="173"/>
         <source>Remove current dictionary group</source>
-        <translation>Remove o grupo de dicionários atual</translation>
+        <translation>Remove o grupo de dicionários actual</translation>
     </message>
     <message>
         <location filename="../groups.ui" line="176"/>
@@ -1344,12 +1344,12 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../groups.ui" line="197"/>
         <source>Drag&amp;drop dictionaries to and from the groups, move them inside the groups, reorder the groups using your mouse.</source>
-        <translation>Arraste e solte os &amp;dicionários nos grupos, organize-os e reordene-os com o ponteiro do mouse.</translation>
+        <translation>Arraste e solte os &amp;dicionários nos grupos, organize-os e reordene-os com o ponteiro do rato.</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="29"/>
         <source>Group tabs</source>
-        <translation>Grupo de guias</translation>
+        <translation>Grupo de separadores</translation>
     </message>
     <message>
         <location filename="../groups.cc" line="35"/>
@@ -1486,7 +1486,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../sources.cc" line="1395"/>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="1397"/>
@@ -2694,12 +2694,12 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../mainwindow.ui" line="462"/>
         <source>&amp;Save Article</source>
-        <translation>&amp;Salvar verbete</translation>
+        <translation>&amp;Guardar verbete</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="465"/>
         <source>Save Article</source>
-        <translation>Salva o verbete atual</translation>
+        <translation>Guarda o verbete actual</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="468"/>
@@ -2729,12 +2729,12 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../mainwindow.ui" line="507"/>
         <source>&amp;Rescan Files</source>
-        <translation>&amp;Re-escanear Arquivos</translation>
+        <translation>&amp;Reverificar Arquivos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="530"/>
         <source>&amp;New Tab</source>
-        <translation>&amp;Nova Aba</translation>
+        <translation>&amp;Novo Separador</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="582"/>
@@ -2805,7 +2805,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
         <location filename="../mainwindow.cc" line="1983"/>
         <location filename="../mainwindow.cc" line="4918"/>
         <source>Add current tab to Favorites</source>
-        <translation>Adicionar guia atual aos Favoritos</translation>
+        <translation>Adicionar separador actual aos Favoritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="662"/>
@@ -2830,7 +2830,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../mainwindow.cc" line="630"/>
         <source>New Tab</source>
-        <translation>Nova guia</translation>
+        <translation>Novo separador</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="533"/>
@@ -2878,7 +2878,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../mainwindow.cc" line="343"/>
         <source>Found in Dictionaries:</source>
-        <translation>Achado nos dicionários:</translation>
+        <translation>Encontrado nos dicionários:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="188"/>
@@ -2898,7 +2898,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../mainwindow.cc" line="230"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Pronuncia a palavra da consulta atual (Alt+S)</translation>
+        <translation>Pronuncia a palavra da consulta actual (Alt+S)</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="242"/>
@@ -2938,17 +2938,17 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../mainwindow.cc" line="425"/>
         <source>Close current tab</source>
-        <translation>Fechar a guia atual</translation>
+        <translation>Fechar separador actual</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="435"/>
         <source>Close all tabs</source>
-        <translation>Fechar todas as guias</translation>
+        <translation>Fechar todos os separadores</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="443"/>
         <source>Close all tabs except current</source>
-        <translation>Fechar todas as guias com exceção da atual</translation>
+        <translation>Fechar todos os separador com excepção do actual</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="619"/>
@@ -2980,7 +2980,7 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../mainwindow.cc" line="414"/>
         <source>Opened tabs</source>
-        <translation>Guias abertas</translation>
+        <translation>Separadores abertos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="124"/>
@@ -3000,7 +3000,7 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../mainwindow.cc" line="1602"/>
         <source>Open Tabs List</source>
-        <translation>Abrir a lista de guias</translation>
+        <translation>Abrir a lista de separadores</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1660"/>
@@ -3015,7 +3015,7 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../mainwindow.cc" line="3169"/>
         <source>Failed to initialize hotkeys monitoring mechanism.&lt;br&gt;Make sure your XServer has RECORD extension turned on.</source>
-        <translation>Não foi possível acionar o mecanismo de monitoramento por atalho.&lt;br&gt;Veja se seu XServer está com a extensão RECORD ativada.</translation>
+        <translation>Não foi possível acionar o mecanismo de monitoramento por atalho.&lt;br&gt;Veja se seu XServer está com a extensão RECORD activada.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3327"/>
@@ -3041,12 +3041,12 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
         <location filename="../mainwindow.cc" line="902"/>
         <location filename="../mainwindow.cc" line="3387"/>
         <source>Accessibility API is not enabled</source>
-        <translation>Acessibilidade a API não está habilitada</translation>
+        <translation>Acessibilidade a API não está activada</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="477"/>
         <source>Add all tabs to Favorites</source>
-        <translation>Adicionar todas as guias aos Favoritos</translation>
+        <translation>Adicionar todos os separadores aos Favoritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="1891"/>
@@ -3055,12 +3055,12 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
         <location filename="../mainwindow.cc" line="4926"/>
         <location filename="../mainwindow.cc" line="4948"/>
         <source>Remove current tab from Favorites</source>
-        <translation>Remover a guia atual dos Favoritos</translation>
+        <translation>Remover o separador actual dos Favoritos</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3464"/>
         <source>You have chosen to hide a menubar. Use %1 to show it back.</source>
-        <translation>Você optou por ocultar a barra de menus. Use %1 para exibi-la de novo.</translation>
+        <translation>Optou por ocultar a barra de menus. Use %1 para exibi-la de novo.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3465"/>
@@ -3095,7 +3095,7 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../mainwindow.cc" line="3675"/>
         <source>Save Article As</source>
-        <translation>Salvar Verbete como</translation>
+        <translation>Guardar Verbete como</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3690"/>
@@ -3105,12 +3105,12 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../mainwindow.cc" line="3691"/>
         <source>Can&apos;t save article: %1</source>
-        <translation>Não foi possível salvar o verbete: %1</translation>
+        <translation>Não foi possível guardar o verbete: %1</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3752"/>
         <source>Saving article...</source>
-        <translation>Salvando artigo...</translation>
+        <translation>Guardando artigo...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cc" line="3813"/>
@@ -3270,7 +3270,7 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../sources.cc" line="472"/>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="474"/>
@@ -3315,7 +3315,7 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
     <message>
         <location filename="../orderandprops.ui" line="53"/>
         <source>Inactive (disabled) dictionaries:</source>
-        <translation>Dicionários desativados:</translation>
+        <translation>Dicionários \:</translation>
     </message>
     <message>
         <location filename="../orderandprops.ui" line="67"/>
@@ -3361,17 +3361,17 @@ Para encontrar os símbolos &apos;*&apos;, &apos;?&apos;, &apos;[&apos;, &apos;]
         <location filename="../orderandprops.ui" line="325"/>
         <source>Adjust the order by dragging and dropping items in it. Drop dictionaries to the inactive group to disable their use.</source>
         <translation>Para ordenar os dicionários, arraste-os como desejar.
-Se quiser desativar dicionários, arraste-os para o grupo de desativados.</translation>
+Se quiser desactivar dicionários, arraste-os para o grupo de desactivados.</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="267"/>
         <source>Sort by name</source>
-        <translation>Organizar por nome</translation>
+        <translation>Ordenar por nome</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="269"/>
         <source>Sort by languages</source>
-        <translation>Organizar por idiomas</translation>
+        <translation>Ordenar por idiomas</translation>
     </message>
     <message>
         <location filename="../orderandprops.cc" line="263"/>
@@ -3381,7 +3381,7 @@ Se quiser desativar dicionários, arraste-os para o grupo de desativados.</trans
     <message>
         <location filename="../orderandprops.cc" line="292"/>
         <source>Dictionaries active: %1, inactive: %2</source>
-        <translation>Dicionários ativos: %1, inativos: %2</translation>
+        <translation>Dicionários activos: %1, inactivos: %2</translation>
     </message>
 </context>
 <context>
@@ -3412,72 +3412,72 @@ Se quiser desativar dicionários, arraste-os para o grupo de desativados.</trans
     <message>
         <location filename="../preferences.ui" line="187"/>
         <source>Tabbed browsing</source>
-        <translation>Navegação por guias</translation>
+        <translation>Navegação por separadores</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="193"/>
         <source>Normally, opening a new tab switches to it immediately.
 With this on however, new tabs will be opened without
 switching to them.</source>
-        <translation>Normalmente, ao se abrir uma nova guia, o programa a exibe imediatamente.
-Porém, se está opção for habilitada, novas guias serão abertas sem que o
-programa as exiba nas frente das outras automaticamente.</translation>
+        <translation>Normalmente, ao abrir um novo separador, o programa exibe-o imediatamente.
+Porém, se esta opção for activada, os novos separadores serão abertos
+sem que seja necessário mudar para eles.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="198"/>
         <source>Open new tabs in background</source>
-        <translation>Abrir novas guias em segundo plano</translation>
+        <translation>Abrir novos separadores em segundo plano</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="205"/>
         <source>With this on, new tabs are opened just after the
 current, active one. Otherwise they are added to
 be the last ones.</source>
-        <translation>Se habilitada esta opção, as novas guias abertas
-serão posicionadas ao lado da guia ativa atual.
-Do contrário, serão enfileiradas ao lado da
-última.</translation>
+        <translation>Se activar esta opção, os novos separadores abertos
+serão posicionadas ao lado do separador activo actual.
+Caso contrário, serão posicionados ao lado do
+último.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="210"/>
         <source>Open new tabs after the current one</source>
-        <translation>Abrir novas guias após a atual</translation>
+        <translation>Abrir novos separadores após o actual</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="217"/>
         <source>Select this option if you don&apos;t want to see the main tab bar when only a single tab is opened.</source>
-        <translation>Habilite esta opção se não quiser exibir a guia principal
+        <translation>Active esta opção, se não quiser exibir o separador principal
 quando apenas uma delas estiver aberta.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="220"/>
         <source>Hide single tab</source>
-        <translation>Ocultar guia única</translation>
+        <translation>Ocultar separador</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="227"/>
         <source>Ctrl-Tab navigates tabs in MRU order</source>
-        <translation>Usar Ctrl-Tab para navegar pelas guias de acordo com as mais recentes</translation>
+        <translation>Usar Ctrl-Tab para navegar pelos separadores de acordo com os mais recentes</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="99"/>
         <source>When enabled, an icon appears in the system tray area which can be used
 to open main window and perform other tasks.</source>
-        <translation>Se habilitada esta opção, o programa será exibido
+        <translation>Se activar esta opção, o programa será exibido
 na Área de Notificação como ícone, por meio do qual
-você poderá restaurar a janela principal e executar
+poderá restaurar a janela principal e executar
 outros comandos.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="103"/>
         <source>Enable system tray icon</source>
-        <translation>Habilitar a exibição do GoldenDict como ícone na Área de Notificação</translation>
+        <translation>Activar a exibição do GoldenDict como ícone na Área de Notificação</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="121"/>
         <source>With this on, the application starts directly to system tray without showing
 its main window.</source>
-        <translation>Com isso habilitado, o aplicativo inicia diretamente na bandeja do sistema sem mostrar
+        <translation>Com isto activado, o programa inicia directamente na bandeja do sistema sem mostrar
 sua janela principal.</translation>
     </message>
     <message>
@@ -3489,7 +3489,7 @@ sua janela principal.</translation>
         <location filename="../preferences.ui" line="132"/>
         <source>With this on, an attempt to close main window would hide it instead of closing
 the application.</source>
-        <translation>Com esta opção habilitada, ao se fechar a janela principal do programa,
+        <translation>Com esta opção activada, ao fechar a janela principal do programa,
 ela será exibida como ícone na Área de Notificação, em vez de o programa
 ser fechado.</translation>
     </message>
@@ -3526,7 +3526,7 @@ ser fechado.</translation>
     <message>
         <location filename="../preferences.ui" line="146"/>
         <source>Double-click translates the word clicked</source>
-        <translation>Traduzir palavra/expressão ou exibir definições com um clique duplo do mouse</translation>
+        <translation>Traduzir palavra/expressão ou exibir definições com um clique duplo do rato</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="153"/>
@@ -3543,7 +3543,7 @@ pesquisa. Com isto, porém, a janela principal será ocultada.</translation>
     <message>
         <location filename="../preferences.ui" line="164"/>
         <source>Turn this option on if you want to select words by single mouse click</source>
-        <translation>Habilite esta opção se quiser selecionar palavras com um único clique do mouse</translation>
+        <translation>Active esta opção se quiser selecionar palavras com um único clique do rato</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="167"/>
@@ -3581,33 +3581,33 @@ pesquisa. Com isto, porém, a janela principal será ocultada.</translation>
 you point your mouse on any word on the screen (Windows) or select
 any word with mouse (Linux). When enabled, you can switch it on and
 off from main window or tray icon.</source>
-        <translation>Se habilitada esta opção, será exibida uma janela secundária de definições/
-tradução toda vez que você pairar o ponteiro do mouse sobre uma palavra de
-alguma janela (Windows) ou selecioná-la (Linux). Mas você pode habilitar/
-desabilitar este comando, tanto na janela principal, como pelo ícone do
+        <translation>Se activar esta opção, será exibida uma janela secundária de definições/
+tradução toda vez que pairar o ponteiro do rato sobre uma palavra de
+alguma janela (Windows) ou selecioná-la (Linux). Mas pode activar/
+desactivar este comando, tanto na janela principal, como pelo ícone do
 programa na Área de Notificação.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="405"/>
         <source>Enable scan popup functionality</source>
-        <translation>Habilitar funcionalidades de janela de definições/tradução semiautomáticas</translation>
+        <translation>Activar funcionalidades de janela de definições/tradução semiautomáticas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="417"/>
         <source>Chooses whether the scan popup mode is on by default or not. If checked,
 the program would always start with the scan popup active.</source>
-        <translation>Permite especificar se a janela secundária de definições/tradução semiautomáticas deve ficar ativa por padrão. Se habilitada esta opção, o programa será sempre executado com a janela secundária ativada.</translation>
+        <translation>Permite especificar se a janela secundária de definições/tradução semiautomáticas deve ficar ativa por padrão. Se activar esta opção, o programa será sempre executado com a janela secundária activada.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="421"/>
         <source>Start with scan popup turned on</source>
-        <translation>Executar o GoldenDict com a janela de definições/tradução semiautomáticas habilitada</translation>
+        <translation>Executar o GoldenDict com a janela de definições/tradução semiautomáticas activadas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="428"/>
         <source>With this enabled, the popup would only show up if all chosen keys are
 in the pressed state when the word selection changes.</source>
-        <translation>Se habilitada esta opção, a janela de definições/tradução só aparecerá se todas as
+        <translation>Se activar esta opção, a janela de definições/tradução só aparecerá se todas as
 teclas do atalho estiverem premidas quando a seleção de palavra mudar.</translation>
     </message>
     <message>
@@ -3722,7 +3722,7 @@ maintain the chosen keys pressed while you select
 a word. With this enabled, the chosen keys may also
 be pressed shortly after the selection is done.</source>
         <translation>Normalmente, para ativar uma janela de consulta/tradução,é necessário manter premidas
-as teclas de atalho enquanto se seleciona uma palavra. Se habilitada esta opção, as
+as teclas de atalho enquanto se seleciona uma palavra. Se activar esta opção, as
 teclas de atalho podem ser premidas também pouco depois da seleção da palavra/expressão.</translation>
     </message>
     <message>
@@ -3796,7 +3796,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;DejaVu Sans&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Nota: Parece que você está executando uma versão do X.Org XServer com a extensão RECORD quebrada. Os atalhos de teclado talvez não funcionem no GoldenDict. Isso deve ser consertado no próprio servidor. Veja a documentação no site: &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sugli errori &lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; e deixe um comentário lá, se quiser.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt;Nota: Parece que está a executar uma versão do X.Org XServer com a extensão RECORD quebrada. Os atalhos de teclado talvez não funcionem no GoldenDict. Isso deve ser consertado no próprio servidor. Veja a documentação no site: &lt;/span&gt;&lt;a href=&quot;https://bugs.freedesktop.org/show_bug.cgi?id=20500&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;sugli errori &lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; color:#ff0000;&quot;&gt; e deixe um comentário lá, se quiser.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="871"/>
@@ -3874,7 +3874,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../preferences.ui" line="1680"/>
         <source>Favorites saving interval. If set to 0 Favorites will be saved only during exit.</source>
-        <translation>Intervalo para salvar Favoritos. Se definido como 0, os Favoritos serão salvos apenas durante a saída.</translation>
+        <translation>Intervalo para guardar Favoritos. Se definido como 0, os Favoritos serão guardados apenas durante a saída.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1706"/>
@@ -3911,23 +3911,23 @@ p, li { white-space: pre-wrap; }
         <location filename="../preferences.ui" line="1859"/>
         <source>Turn this option on to enable extra articles search via synonym lists
 from Stardict, Babylon and GLS dictionaries</source>
-        <translation>Ative esta opção para habilitar a pesquisa de artigos extras por meio de listas de sinônimos
+        <translation>Active esta opção para activar a pesquisa de artigos extras por meio de listas de sinónimos
 dos dicionários Stardict, Babylon e GLS</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1863"/>
         <source>Extra search via synonyms</source>
-        <translation>Pesquisa extra via sinônimos</translation>
+        <translation>Pesquisa extra via sinónimos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="936"/>
         <source>Use any external program to play audio files</source>
-        <translation>Usa um aplicativo externo para reproduzir arquivos de áudio</translation>
+        <translation>Usa um programa externo para reproduzir arquivos de áudio</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="685"/>
         <source>Do not show popup when selection or clipboard in one of GoldenDict&apos;s own windows changes</source>
-        <translation>Não mostrar pop-up quando a seleção ou a área de transferência em uma das janelas do GoldenDict mudar</translation>
+        <translation>Não mostrar pop-up quando a seleção ou a área de transferência numa das janelas do GoldenDict mudar</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="688"/>
@@ -3968,7 +3968,7 @@ dos dicionários Stardict, Babylon e GLS</translation>
         <location filename="../preferences.ui" line="996"/>
         <source>Enable if you wish to use a proxy server
 for all program&apos;s network requests.</source>
-        <translation>Habilite esta opção para usar um servidor proxy
+        <translation>Active esta opção para usar um servidor proxy
 para todos os acessos à rede pelo programa.</translation>
     </message>
     <message>
@@ -4006,7 +4006,7 @@ para todos os acessos à rede pelo programa.</translation>
         <source>Enabling this would make GoldenDict block most advertisements
 by disallowing content (images, frames) not originating from the site
 you are browsing. If some site breaks because of this, try disabling this.</source>
-        <translation>Se habilitada esta opção, o GoldenDict bloqueará a maioria das propagadas impedindo a
+        <translation>Se activada esta opção, o GoldenDict bloqueará a maioria das propagadas impedindo a
 transferência de conteúdo para seu PC (de imagens, quadros de HTML etc.) originários do
 site que estiver visitando. Se alguns sites deixarem de funcionar, desative esta opção
 para ver se o problema é solucionado.</translation>
@@ -4021,14 +4021,14 @@ para ver se o problema é solucionado.</translation>
         <source>Enabling this would allow to listen to sound pronunciations from
 online dictionaries that rely on Flash or other web plugins.
 Plugin must be installed for this option to work.</source>
-        <translation>Se você habilitar esta opção, poderá ouvir pronúncias de dicionários online que usam
+        <translation>Se activar esta opção, poderá ouvir pronúncias de dicionários online que usam
 Flash ou outros plugins da web.
 O plugin precisa estar instalado em seu sistema para isto funcionar.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1140"/>
         <source>Enable web plugins</source>
-        <translation>Habilitar plugins da web</translation>
+        <translation>Activar plugins da web</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1147"/>
@@ -4077,14 +4077,14 @@ checks if a new, updated version of GoldenDict
 is available for download. If it is so, the program
 informs the user about it and prompts to open a
 download page.</source>
-        <translation>Se habilitada esta opção, o programa procura atualizações periodicamente
-no servidor do GoldenDict. Se houver atualizações, ele informa ao usuário
+        <translation>Se activar esta opção, o programa procura actualizações periodicamente
+no servidor do GoldenDict. Se houver actualizações, ele informa ao usuário
 e pergunta se ele deseja visitar a página de download.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1234"/>
         <source>Check for new program releases periodically</source>
-        <translation>Procurar atualizações do programa periodicamente</translation>
+        <translation>Procurar actualizações do programa periodicamente</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1432"/>
@@ -4105,7 +4105,7 @@ It is not needed to select this option if you don&apos;t use such programs.</sou
         <translation>Se marcada, o programa tenta usar a tecnologia IAccessibleEx para consultar/traduzir a
 palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam
 (por ex.: o Internet Explorer 9).
-Não é necessário habilitar esta opção se você não usa programas desse tipo.</translation>
+Não é necessário activar esta opção se não usa programas desse tipo.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1452"/>
@@ -4119,7 +4119,7 @@ This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Se marcada, o programa tenta usar a tecnologia UI Automation para consultar/traduzir a
 palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam.
-Não é necessário habilitar esta opção se você não usa esses tipos de programa.</translation>
+Não é necessário activar esta opção se não usa esses tipos de programa.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1464"/>
@@ -4133,7 +4133,7 @@ This technology works only with some programs that support it.
 It is not needed to select this option if you don&apos;t use such programs.</source>
         <translation>Se marcada, o programa tenta usar um comando especial do GoldenDict para consultar/traduzir
 palavra sob o ponteiro. Esta tecnologia só funciona com alguns programas que a aceitam.
-Não é necessário habilitar esta opção se você não usa esses tipos de programas.</translation>
+Não é necessário activar esta opção se não usa esses tipos de programas.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1476"/>
@@ -4183,7 +4183,7 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../preferences.ui" line="1566"/>
         <source>Turn this option on to store history of the translated words</source>
-        <translation>Habilite esta opção se quiser gravar o histórico das palavras traduzidas/pesquisadas</translation>
+        <translation>Active esta opção se quiser gravar o histórico das palavras traduzidas/pesquisadas</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1569"/>
@@ -4203,13 +4203,13 @@ Não é necessário habilitar esta opção se você não usa esses tipos de prog
     <message>
         <location filename="../preferences.ui" line="1624"/>
         <source>History saving interval. If set to 0 history will be saved only during exit.</source>
-        <translation>Intervalo ao salvar o histórico. Se definido histórico como 0, será salvo apenas durante a saída.</translation>
+        <translation>Intervalo ao guardar o histórico. Se definido histórico como 0, será guardado apenas durante a saída.</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1630"/>
         <location filename="../preferences.ui" line="1683"/>
         <source>Save every</source>
-        <translation>Salvar tudo</translation>
+        <translation>Guardar tudo</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1647"/>
@@ -4231,12 +4231,12 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../preferences.ui" line="1790"/>
         <source>Ignore input phrases longer than</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorar frases introduzidas maiores que</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1800"/>
         <source>Input phrases longer than this size will be ignored</source>
-        <translation type="unfinished"></translation>
+        <translation>Frases introduzidas maiores que este tamanho serão ignoradas </translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1823"/>
@@ -4251,7 +4251,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../preferences.ui" line="1833"/>
         <source>Turn this option on to always expand optional parts of articles</source>
-        <translation>Habilite esta opção se quise expandir sempre partes opcionais de artigos</translation>
+        <translation>Active esta opção se quise expandir sempre partes opcionais de artigos</translation>
     </message>
     <message>
         <location filename="../preferences.ui" line="1836"/>
@@ -4297,7 +4297,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../preferences.cc" line="185"/>
         <source> MB</source>
-        <translation type="unfinished"></translation>
+        <translation>MB</translation>
     </message>
     <message>
         <location filename="../preferences.cc" line="667"/>
@@ -4361,7 +4361,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../sources.cc" line="992"/>
         <source>Enabled</source>
-        <translation>Habilitada</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="994"/>
@@ -4404,7 +4404,7 @@ from mouse-over, selection, clipboard or command line</source>
         <location filename="../sdict.cc" line="723"/>
         <location filename="../stardict.cc" line="1164"/>
         <source>Copyright: %1%2</source>
-        <translation>Direitos autorais: %1%2</translation>
+        <translation>Direitos de autor: %1%2</translation>
     </message>
     <message>
         <location filename="../aard.cc" line="591"/>
@@ -4560,7 +4560,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../articleview.cc" line="3104"/>
         <source>Resource saving error: </source>
-        <translation>Erro ao salvar recurso: </translation>
+        <translation>Erro ao guardar recurso: </translation>
     </message>
     <message>
         <location filename="../articleview.cc" line="3130"/>
@@ -4631,7 +4631,7 @@ from mouse-over, selection, clipboard or command line</source>
     <message>
         <location filename="../scanpopup.ui" line="141"/>
         <source>Pronounce Word (Alt+S)</source>
-        <translation>Pronunciar a palavra da consulta atual (Alt+S)</translation>
+        <translation>Pronunciar a palavra da consulta actual (Alt+S)</translation>
     </message>
     <message>
         <location filename="../scanpopup.ui" line="151"/>
@@ -4817,7 +4817,7 @@ dos grupos apropriados para usá-los.</translation>
     <message>
         <location filename="../sources.ui" line="497"/>
         <source>Enable pronunciations from Forvo</source>
-        <translation>Habilitar pronúncias do Forvo</translation>
+        <translation>Activar pronúncias do Forvo</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="527"/>
@@ -4829,7 +4829,7 @@ dos grupos apropriados para usá-los.</translation>
         <source>Use of Forvo currently requires an API key. Leave this field
 blank to use the default key, which may become unavailable
 in the future, or register on the site to get your own key.</source>
-        <translation>O uso do Forvo atualmente requer uma chave API. Deixe este
+        <translation>O uso do Forvo actualmente requer uma chave API. Deixe este
 campo em branco para usar a chave padrão, que poderá
 ficar indisponível no futuro, ou cadastre-se no site para
 obter sua própria chave.</translation>
@@ -4875,7 +4875,7 @@ obter sua própria chave.</translation>
     <message>
         <location filename="../sources.ui" line="579"/>
         <source>List of language codes you would like to have. Example: &quot;en, ru&quot;.</source>
-        <translation>Lista de códigos de idioma que você gostaria de ter. Por exemplo: &quot;en, ru, pt&quot;.</translation>
+        <translation>Lista de códigos de idioma que gostaria de ter. Por exemplo: &quot;en, ru, pt&quot;.</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="602"/>
@@ -4910,7 +4910,7 @@ obter sua própria chave.</translation>
     <message>
         <location filename="../sources.ui" line="737"/>
         <source>Enables to use the Latin alphabet to write the Japanese language</source>
-        <translation>Habilita a romanização do japonês (palavras japonesas escritas em Latim)</translation>
+        <translation>Activa a romanização do japonês (palavras japonesas escritas em Latim)</translation>
     </message>
     <message>
         <location filename="../sources.ui" line="740"/>
@@ -4940,7 +4940,7 @@ usado, baseado na fonologia inglesa</translation>
 kana writing systems. Standardized as ISO 3602
 
 Not implemented yet in GoldenDict.</source>
-        <translation>O sistema mais regular, que tem uma relação deum para
+        <translation>O sistema mais regular, que tnuma relação deum para
 um com sistemas de escrita em kana. Padronizado
 como ISO 3602
 
@@ -5142,7 +5142,7 @@ Ainda não implementado no GoldenDict.</translation>
     <message>
         <location filename="../texttospeechsource.cc" line="233"/>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="../texttospeechsource.cc" line="235"/>
@@ -5171,7 +5171,7 @@ Ainda não implementado no GoldenDict.</translation>
     <message>
         <location filename="../sources.cc" line="639"/>
         <source>Enabled</source>
-        <translation>Habilitado</translation>
+        <translation>Activado</translation>
     </message>
     <message>
         <location filename="../sources.cc" line="641"/>
