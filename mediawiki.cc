@@ -883,8 +883,8 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
                          "<a href=\\3\\5\\1\\2\\3\\4\\5\\6" );
 
   // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
-  // <a href="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest?cb=20190413205440" class="image"><img alt="" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" width="150" height="158" class="thumbimage lazyload" data-image-name="SwKOTOR25cropped.jpg" data-image-key="SwKOTOR25cropped.jpg" data-src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" /></a> 	<noscript><a href="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest?cb=20190413205440" class="image"><img alt="" src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" decoding="async" width="150" height="158" class="thumbimage" data-image-name="SwKOTOR25cropped.jpg" data-image-key="SwKOTOR25cropped.jpg" data-src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" /></a></noscript>
-  QString lazyLinkNoscript = "<a [^>]*class=\"image\">\\s*" + lazyImgTag
+  // <a href="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest?cb=20190413205440" class="mw-file-description image"><img alt="SwKOTOR25cropped" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" loading="lazy" width="150" height="158" class="thumbimage lazyload" data-image-name="SwKOTOR25cropped.jpg" data-image-key="SwKOTOR25cropped.jpg" data-relevant="1" data-src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" /></a> 	<noscript><a href="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest?cb=20190413205440" class="mw-file-description image"><img alt="SwKOTOR25cropped" src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" decoding="async" loading="lazy" width="150" height="158" class="thumbimage" data-image-name="SwKOTOR25cropped.jpg" data-image-key="SwKOTOR25cropped.jpg" data-relevant="1" data-src="https://static.wikia.nocookie.net/starwars/images/e/e2/SwKOTOR25cropped.jpg/revision/latest/scale-to-width-down/150?cb=20190413205440" /></a></noscript>
+  QString lazyLinkNoscript = "<a [^>]*class=\"mw-file-description image\">\\s*" + lazyImgTag
                               + "\\s*</a>\\s*<noscript>(.*?)</noscript>";
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   articleString.replace( QRegularExpression( lazyLinkNoscript ), "\\1" );
@@ -893,16 +893,19 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
   articleString.replace( minimalRegExp, "\\1" );
 #endif
 
-  // data-src -> src for images of class="lazyload" to make era icons and other small icons visible.
+  // data-src -> src for images of class="mw-file-element lazyload"
+  // in order to make era icons and other small icons visible.
   // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
-  // <img alt="SWAJsmall.jpg" src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" width="47" height="15" data-image-name="SWAJsmall.jpg" data-image-key="SWAJsmall.jpg" data-src="https://static.wikia.nocookie.net/starwars/images/e/ee/SWAJsmall.jpg/revision/latest/scale-to-width-down/47?cb=20070219044103" class="lazyload" />
-  const QString dataSrcLazyloadTag = " src=\"data:[^\"]*\"([^>]* )data-(src=\"[^\"]+\") class=\"lazyload\"";
+  // <img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" decoding="async" loading="lazy" width="47" height="15" class="mw-file-element lazyload" data-image-name="SWAJsmall.jpg" data-image-key="SWAJsmall.jpg" data-relevant="0" data-src="https://static.wikia.nocookie.net/starwars/images/e/ee/SWAJsmall.jpg/revision/latest?cb=20070219044103" />
+  const QString dataSrcLazyloadTag = " src=\"data:[^\"]*\"([^>]* )"
+                                     "class=\"mw-file-element lazyload\""
+                                     "([^>]* )data-(src=\"[^\"]+\")";
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   articleString.replace( QRegularExpression( dataSrcLazyloadTag ),
 #else
   articleString.replace( QRegExp( dataSrcLazyloadTag ),
 #endif
-                         "\\1\\2" );
+                         "\\1\\2\\3" );
 
   // This "info-icon" link shows up in GoldenDict as a large empty space under
   // most images -> remove it for compactness.
@@ -915,15 +918,6 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
   minimalRegExp.setPattern( infoIconTag.remove( '?' ) );
   articleString.remove( minimalRegExp );
 #endif
-
-  // The "wds-icon..." image inside this "wds-button..." link shows up in GoldenDict as a large
-  // empty space under a sequence of images -> remove the entire useless button as clicking on
-  // the link has no effect, and editing articles in GoldenDict does not make sense anyway.
-  // An example from the "Star Wars: Episode I The Phantom Menace" article in English Wookieepedia:
-  // <a class="wds-button wikia-photogallery-add"><svg class="wds-icon wds-icon-tiny"><use xlink:href="#wds-icons-image-small"></use></svg><span>Add a photo to this gallery</span></a>
-  // For some reason QRegExp works faster than QRegularExpression in the replacement below on Linux.
-  minimalRegExp.setPattern( "<a class=\"wds-button wikia-photogallery-add\">.*</a>" );
-  articleString.remove( minimalRegExp );
 
   // The "wds-icon..." image inside this "mw-editsection" span shows up in GoldenDict
   // as a large empty space above most captions -> remove the entire useless span as
@@ -939,33 +933,49 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
   minimalRegExp.setPattern( "<span class=\"mw-editsection\".*</span>" );
   articleString.remove( minimalRegExp );
 
-  // Detect most audio links. This replacement chops the "/revision..." ending of the
-  // audio link beyond the audio file extension (usually or even always ".ogg") before
+  // The following two replacements chop the "/revision..." ending of the audio
+  // link beyond the audio file extension (usually or even always ".flac") before
   // passing the link to addAudioLink(). Otherwise, triggering the Pronounce Word
   // action loads the audio file in a browser instead of playing it in GoldenDict.
-  // The "/wiki/Media:..." button links are broken and the "...Quote-audio.png..."
-  // button link leads to an uninteresting audio button image -> replace them with the
-  // link that is passed to addAudioLink(). Leave the "Listen" (and "Hear Han Solo")
-  // links intact to give the user an option of loading the audio file in a browser.
-  // NOTE: the examples for this replacement have been modified by the earlier
-  // {data-src -> src for images of class="lazyload"} replacement.
+
+  // Detect most audio links. The <audio> tag and the two audio buttons do not
+  // work in GoldenDict => remove the second button and enclose the first button
+  // in the link that is passed to addAudioLink(). Leave the "Link" link intact
+  // to give the user an option of loading the audio file in a browser.
   // An example from the "Anakin Skywalker/Legends" article in English Wookieepedia:
-  // <a href="/wiki/Media:TheChoiceIsYours-TPM.ogg" title="(audio)"><img alt="(audio)" decoding="async" width="20" height="20" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/20?cb=20200426203158" /></a> <a href="https://static.wikia.nocookie.net/starwars/images/4/47/TheChoiceIsYours-TPM.ogg/revision/latest?cb=20090917130644" class="internal" title="TheChoiceIsYours-TPM.ogg">Listen</a>
-  // A different example from the "Obi-Wan Kenobi/Legends" article in English Wookieepedia:
-  // <a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20200426203158" class="image" title="(audio)"><img alt="(audio)" decoding="async" width="20" height="20" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/20?cb=20200426203158" /></a> <a href="https://static.wikia.nocookie.net/starwars/images/1/1f/BadFeelingAboutThis-TPM.ogg/revision/latest?cb=20090918153842" class="internal" title="BadFeelingAboutThis-TPM.ogg">Listen</a>
-  // A very rare (unique?) two-line example from the "Han Solo/Legends" article in English Wookieepedia:
-  /* <a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20200426203158" class="image" title="(audio)"><img alt="(audio)" decoding="async" width="30" height="30" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/30?cb=20200426203158" /></a>
-<a href="https://static.wikia.nocookie.net/starwars/images/d/d8/Han.ogg/revision/latest?cb=20051024183653" class="internal" title="Han.ogg">Hear Han Solo</a> */
-  const QString audioUrlTag = "<a href=\"(?:/wiki/Media:|https://static\\.wikia\\.nocookie\\.net"
-                              "/starwars/images/e/ee/Quote-audio\\.png)[^\"]*(\"[^>]*>\\s*<img [^>]*>"
-                              "\\s*</a>\\s*<a href=)(\"[^\"]+)(/revision/latest\\?cb=\\d+\")";
+  // <img src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/20?cb=20250116042720" alt="20?cb=20250116042720" /> <span><audio hidden="" class="ext-audiobutton" data-volume="1.0" preload="metadata"><source src="https://static.wikia.nocookie.net/starwars/images/3/34/TheChoiceIsYours-TPM.flac/revision/latest?cb=20250407192853" type="audio/flac" /><a href="https://static.wikia.nocookie.net/starwars/images/3/34/TheChoiceIsYours-TPM.flac/revision/latest?cb=20250407192853">Link</a></audio><a class="ext-audiobutton" data-state="play" title="Play/Pause">▶️</a></span>
+  const QString audioUrlTag = "(<img src=\"https://static\\.wikia\\.nocookie\\.net"
+                              "/starwars/images/e/ee/Quote-audio\\.png[^>]*>)\\s*"
+                              "<span>\\s*<audio[^>]*>\\s*<source[^>]*>\\s*<a href="
+                              "(\"[^\"]+)(/revision/latest\\?cb=\\d+\"[^>]*>[^<]*</a>)"
+                              "\\s*</audio>\\s*<a[^>]*>[^<]*</a>\\s*</span>";
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   articleString.replace( QRegularExpression( audioUrlTag ),
 #else
   articleString.replace( QRegExp( audioUrlTag ),
 #endif
                          QString::fromStdString( addAudioLink( "\\2\"", this->dictPtr->getId() )
-                                                 + "<a href=\\2\\1\\2\\3" ) );
+                                                 + "<a href=\\2\">\\1</a>&ensp;<a href=\\2\\3" ) );
+
+  // The "...Quote-audio.png..." button link leads to an uninteresting audio
+  // button image => replace it with the link that is passed to addAudioLink().
+  // Leave the "Hear Han Solo" link intact to give the user
+  // an option of loading the audio file in a browser.
+  // NOTE: the example for this replacement has been modified by the earlier
+  // {data-src -> src for images of class="mw-file-element lazyload"} replacement.
+  // A very rare (unique?) two-line example from the "Han Solo/Legends" article in English Wookieepedia:
+  /* <span typeof="mw:File"><a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20250116042720" class="mw-file-description image" title="(audio)"><img alt="(audio)" decoding="async" loading="lazy" width="30" height="30"  data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" data-relevant="0" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/30?cb=20250116042720" /></a></span>
+<a href="https://static.wikia.nocookie.net/starwars/images/7/70/Han.flac/revision/latest?cb=20250410001633" class="internal" title="Han.flac">Hear Han Solo</a> */
+  const QString audioUrlTag2Lines = "<span[^>]*>\\s*<a href=\"https://static\\.wikia\\.nocookie\\.net"
+                                    "/starwars/images/e/ee/Quote-audio\\.png[^\"]*(\"[^>]*>\\s*<img [^>]*>"
+                                    "\\s*</a>)\\s*</span>\\s*<a href=(\"[^\"]+)(/revision/latest\\?cb=\\d+\")";
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  articleString.replace( QRegularExpression( audioUrlTag2Lines ),
+#else
+  articleString.replace( QRegExp( audioUrlTag2Lines ),
+#endif
+                         QString::fromStdString( addAudioLink( "\\2\"", this->dictPtr->getId() )
+                                                 + "<a href=\\2\\1&ensp;<a href=\\2\\3" ) );
 
   // Detect this rare audio link variant. Make the end result look very similar to
   // and work exactly the same as the most common audio link variant (see above).
@@ -1002,7 +1012,7 @@ bool FandomArticleRequest::preprocessArticle( QString & articleString )
 
   // TODO: add support for a particularly complex multiple-<div> audio link variant, if it is not too rare.
   // An example from the "Dash Rendar/Legends" article in English Wookieepedia:
-  // <div class="inline-image-template" style="float:left; margin-left: 5px; height:35px;"><div class="floatnone"><a href="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest?cb=20200426203158" class="image" title="Audio"><img alt="Audio" decoding="async" loading="lazy" width="35" height="35" data-image-name="Quote-audio.png" data-image-key="Quote-audio.png" src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/35?cb=20200426203158" /></a></div></div><div class="inline-image-template" style="margin-left:50px"><b><a href="https://static.wikia.nocookie.net/starwars/images/c/c5/SOTE4.ogg/revision/latest?cb=20070801203532" class="internal" title="SOTE4.ogg">"Beggar's Canyon Chase"</a></b><br /><a href="/wiki/File:SOTE4.ogg" title="File:SOTE4.ogg">(info)</a> &#183; <a href="http://en.wikipedia.org/wiki/Help:Media" class="extiw" title="wikipedia:Help:Media">(help)</a><small><br />A theme for Dash Rendar briefly appears at the end of "Beggar's Canyon Chase."</small></div>
+  // <div class="inline-image-template" style="float:left; margin-left: 5px; height:35px;"><img src="https://static.wikia.nocookie.net/starwars/images/e/ee/Quote-audio.png/revision/latest/scale-to-width-down/35?cb=20250116042720" alt="35?cb=20250116042720" /></div><div class="inline-image-template" style="margin-left:50px"><b><span><audio hidden="" class="ext-audiobutton" data-volume="1.0" preload="metadata"><source src="https://static.wikia.nocookie.net/starwars/images/9/99/SOTE4.flac/revision/latest?cb=20250411214426" type="audio/flac" /><a href="https://static.wikia.nocookie.net/starwars/images/9/99/SOTE4.flac/revision/latest?cb=20250411214426">Link</a></audio><a class="ext-audiobutton" data-state="play" title="Play/Pause">▶️</a></span> to a preview of "Beggar's Canyon Chase"</b><br /><a href="/wiki/File:SOTE4.flac" title="File:SOTE4.flac">(info)</a><small><br />A theme for Dash Rendar briefly appears at the end of "Beggar's Canyon Chase."</small></div>
 
   // Remove absolute height from scrollbox lines to ensure that everything inside
   // the scrollable container is visible and does not overlap the contents below.
