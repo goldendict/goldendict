@@ -4,7 +4,6 @@
 <context>
     <name>
         </name>
-    
     <message>
         <source>XML parse error: %1 at %2,%3</source>
         <translation type="obsolete">Jan wali XML ullarasa: %1 en %2,%3</translation>
@@ -12,7 +11,6 @@
 </context>
 <context>
     <name>About</name>
-    
     <message>
         <source>About</source>
         <translation>Uka jak&apos;atxa</translation>
@@ -52,7 +50,6 @@
 </context>
 <context>
     <name>ArticleMaker</name>
-    
     <message>
         <source>No translation for &lt;b&gt;%1&lt;/b&gt; was found in group &lt;b&gt;%2&lt;/b&gt;.</source>
         <translation>&lt;b&gt;%2&lt;/b&gt; qutuna janiw &lt;b&gt;%1&lt;/b&gt; aru utjkiti.&lt;br&gt;&lt;br&gt;
@@ -138,7 +135,6 @@ programa para estar al corriente de las actualizaciones.
 </context>
 <context>
     <name>ArticleRequest</name>
-    
     <message>
         <source>From </source>
         <translation>Ukata </translation>
@@ -174,7 +170,6 @@ programa para estar al corriente de las actualizaciones.
 </context>
 <context>
     <name>ArticleView</name>
-    
     <message>
         <source>GoldenDict</source>
         <translation type="obsolete">GoldenDict</translation>
@@ -217,7 +212,7 @@ programa para estar al corriente de las actualizaciones.
     </message>
     <message>
         <source>To enable playback of files different than WAV, please go to Edit|Preferences, choose the Audio tab and select &quot;Play via DirectShow&quot; there.</source>
-        <translation type="unfinished">Jaylliyañ sartayañatakix jan WAV ukampikix, por favor vaya a Askichaña&gt;Preferencias, escoja la pestaña &quot;Ist&apos;añataki&quot; y seleccione &quot;DirectShowmpi arst&apos;ayaña&quot;.</translation>
+        <translation type="obsolete">Jaylliyañ sartayañatakix jan WAV ukampikix, por favor vaya a Askichaña&gt;Preferencias, escoja la pestaña &quot;Ist&apos;añataki&quot; y seleccione &quot;DirectShowmpi arst&apos;ayaña&quot;.</translation>
     </message>
     <message>
         <source>Failed to run a player to play sound file: %1</source>
@@ -321,7 +316,7 @@ programa para estar al corriente de las actualizaciones.
     </message>
     <message>
         <source>Sound files (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
-        <translation>Ist&apos;añataki uka wayaqanaka (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Taqpach wayaqanaka (*.*)</translation>
+        <translation type="obsolete">Ist&apos;añataki uka wayaqanaka (*.wav *.ogg *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;Taqpach wayaqanaka (*.*)</translation>
     </message>
     <message>
         <source>Save image</source>
@@ -367,10 +362,21 @@ programa para estar al corriente de las actualizaciones.
         <source>WARNING: Audio Player: %1</source>
         <translation>UKATARAKI: Kirkiyiri: %1</translation>
     </message>
+    <message>
+        <source>Phrase not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 of %2 matches</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sound files (*.wav *.ogg *.oga *.mp3 *.mp4 *.aac *.flac *.mid *.wv *.ape);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BelarusianTranslit</name>
-    
     <message>
         <source>Belarusian transliteration from latin to cyrillic (classic orthography)</source>
         <translation>Beloruso latín ukatxa cirílico ukar mayjt&apos;ayaña (clásico qillqawi)</translation>
@@ -387,7 +393,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>ChineseConversion</name>
-    
     <message>
         <source>Enable conversion between simplified and traditional Chinese characters</source>
         <translation>Chino simplificado ukhamaraki chino tradicional uka tukuyawi naktayaña</translation>
@@ -438,8 +443,36 @@ between classic and school orthography in cyrillic)</source>
     </message>
 </context>
 <context>
+    <name>CommandLineHelp</name>
+    <message>
+        <source>Usage:
+  goldendict [OPTION]... [WORD|URI]
+
+GoldenDict dictionary lookup program
+
+  WORD				A word or quoted phrase to translate
+  URI				&quot;[golden]dict://[/]word or phrase to translate[/]&quot;
+
+Options:
+  -h, --help			Show command-line help and exit
+  --log-to-file			Turn on debug mode
+  --toggle-scan-popup		Toggle scanning mode on/off
+  --group-name=GROUP		Set current group of dictionaries in the main window to GROUP
+  --popup-group-name=GROUP	Set current group of dictionaries in the popup window to GROUP
+
+If another GoldenDict instance is running, the second instance exits immediately, the options --toggle-scan-popup, --group-name, --popup-group-name affect the running instance, WORD or URI is translated in the running instance&apos;s popup window.
+Otherwise, all options affect the initial state of the new instance, WORD or URI is translated in the new instance&apos;s main window.
+
+Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup&quot; command in system preferences emulates a scanning-mode-toggling global hotkey.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>GoldenDict command-line help</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Dialog</name>
-    
     <message>
         <source>Proxy authentication required</source>
         <translation>Autenticación de proxy uk munasi</translation>
@@ -459,7 +492,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictGroupWidget</name>
-    
     <message>
         <source>Form</source>
         <translation>Phuqañataki laphi</translation>
@@ -507,7 +539,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictGroupsWidget</name>
-    
     <message>
         <source>Confirmation</source>
         <translation>Jaysawi</translation>
@@ -545,7 +576,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictHeadwords</name>
-    
     <message>
         <source>Search mode</source>
         <translation>Kunjams thaqhaña</translation>
@@ -637,7 +667,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictInfo</name>
-    
     <message>
         <source>Total articles:</source>
         <translation>Qillqatanak jakhuña:</translation>
@@ -687,7 +716,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictListModel</name>
-    
     <message>
         <source>%1 entries</source>
         <translation>%1 mantañanaka</translation>
@@ -695,7 +723,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictServer</name>
-    
     <message>
         <source>Url: </source>
         <translation>URL: </translation>
@@ -715,7 +742,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictServersModel</name>
-    
     <message>
         <source>Enabled</source>
         <translation>Naktata</translation>
@@ -755,7 +781,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>DictionaryBar</name>
-    
     <message>
         <source>Dictionary Bar</source>
         <translation type="obsolete">Aru-pirwa wak&apos;a</translation>
@@ -791,7 +816,6 @@ between classic and school orthography in cyrillic)</source>
 </context>
 <context>
     <name>EditDictionaries</name>
-    
     <message>
         <source>&amp;Sources</source>
         <translation>&amp;Yatiyaw jalsunaka</translation>
@@ -831,7 +855,6 @@ Se han modificado algunas fuentes.
 </context>
 <context>
     <name>ExternalViewer</name>
-    
     <message>
         <source>the viewer program name is empty</source>
         <translation>programan sutipaxa ch&apos;usawa</translation>
@@ -839,7 +862,6 @@ Se han modificado algunas fuentes.
 </context>
 <context>
     <name>FTS::FtsIndexing</name>
-    
     <message>
         <source>None</source>
         <translation type="obsolete">Ni maya</translation>
@@ -847,7 +869,6 @@ Se han modificado algunas fuentes.
 </context>
 <context>
     <name>FTS::FullTextSearchDialog</name>
-    
     <message>
         <source>Full-text search</source>
         <translation>Taqpach qillqan thaqhaña</translation>
@@ -907,7 +928,6 @@ Se han modificado algunas fuentes.
 </context>
 <context>
     <name>FTS::Indexing</name>
-    
     <message>
         <source>None</source>
         <translation type="obsolete">Ni maya</translation>
@@ -915,7 +935,6 @@ Se han modificado algunas fuentes.
 </context>
 <context>
     <name>FavoritesModel</name>
-    
     <message>
         <source>Error in favorities file</source>
         <translation>Wayaqa munat arunakan pantjasiwa</translation>
@@ -923,7 +942,6 @@ Se han modificado algunas fuentes.
 </context>
 <context>
     <name>FavoritesPaneWidget</name>
-    
     <message>
         <source>&amp;Delete Selected</source>
         <translation>&amp;Ajllitanak chhaqtayaña</translation>
@@ -949,7 +967,6 @@ Todos los items seleccionados serán borrados. ¿Quiere continuar?</translation>
 </context>
 <context>
     <name>Forvo::ForvoArticleRequest</name>
-    
     <message>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>Uyllan phanta XML: %1 al %2,%3</translation>
@@ -985,7 +1002,6 @@ su propia clave de la API para que este error desaparezca.</translation>
 </context>
 <context>
     <name>FullTextSearchDialog</name>
-    
     <message>
         <source>Search</source>
         <translation>Thaqhaña</translation>
@@ -1041,7 +1057,6 @@ su propia clave de la API para que este error desaparezca.</translation>
 </context>
 <context>
     <name>GermanTranslit</name>
-    
     <message>
         <source>German Transliteration</source>
         <translation>Alemana arut qillqantata</translation>
@@ -1049,7 +1064,6 @@ su propia clave de la API para que este error desaparezca.</translation>
 </context>
 <context>
     <name>GreekTranslit</name>
-    
     <message>
         <source>Greek Transliteration</source>
         <translation>Griega arut qillqantata</translation>
@@ -1057,7 +1071,6 @@ su propia clave de la API para que este error desaparezca.</translation>
 </context>
 <context>
     <name>GroupComboBox</name>
-    
     <message>
         <source>Choose a Group (Alt+G)</source>
         <translation>Mä qutu ajlliña (Alt+G)
@@ -1067,7 +1080,6 @@ Elegir un grupo (Alt+G)</translation>
 </context>
 <context>
     <name>GroupSelectorWidget</name>
-    
     <message>
         <source>Form</source>
         <translation type="obsolete">Phuqañataki laphi</translation>
@@ -1079,7 +1091,6 @@ Elegir un grupo (Alt+G)</translation>
 </context>
 <context>
     <name>Groups</name>
-    
     <message>
         <source>Add group</source>
         <translation>Qutu yapaña</translation>
@@ -1223,7 +1234,6 @@ Abrir una lista de grupos</translation>
 </context>
 <context>
     <name>Help::HelpWindow</name>
-    
     <message>
         <source>GoldenDict help</source>
         <translation>GoldenDict yatichawi</translation>
@@ -1275,7 +1285,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>HistoryPaneWidget</name>
-    
     <message>
         <source>&amp;Delete Selected</source>
         <translation>&amp;Ajllitanak chhaqtayaña</translation>
@@ -1299,7 +1308,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>Hunspell</name>
-    
     <message>
         <source>Spelling suggestions: </source>
         <translation>Arunak amuyt&apos;awinaka: </translation>
@@ -2051,7 +2059,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>HunspellDictsModel</name>
-    
     <message>
         <source>Enabled</source>
         <translation>Apnaqañataki</translation>
@@ -2063,7 +2070,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>Initializing</name>
-    
     <message>
         <source>Please wait...</source>
         <translation>Amp suma suyt&apos;am...</translation>
@@ -2083,7 +2089,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>Language</name>
-    
     <message>
         <source>Afar</source>
         <translation>Afar</translation>
@@ -2891,7 +2896,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>LoadDictionaries</name>
-    
     <message>
         <source>Error loading dictionaries</source>
         <translation>Aru-pirwanak ullasinxa pantjiwa</translation>
@@ -2899,7 +2903,6 @@ Tamaño original</translation>
 </context>
 <context>
     <name>Main</name>
-    
     <message>
         <source>Error in configuration file. Continue with default settings?</source>
         <translation>Mayjachat wayaqaxa pantjiwa. Qallta mayjachat apnaqañ muntati?
@@ -2909,7 +2912,6 @@ Error en el archivo de configuración. ¿Continuar con la configuración por def
 </context>
 <context>
     <name>MainWindow</name>
-    
     <message>
         <source>Navigation</source>
         <translation type="obsolete">Thaqhawi</translation>
@@ -2987,7 +2989,7 @@ instale una primero.</translation>
     </message>
     <message>
         <source>Error loading dictionaries</source>
-        <translation type="unfinished">Pantjiw aru-pirwa apaqaña</translation>
+        <translation type="obsolete">Pantjiw aru-pirwa apaqaña</translation>
     </message>
     <message>
         <source>%1 dictionaries, %2 articles, %3 words</source>
@@ -3542,7 +3544,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>Mdx::MdxArticleRequest</name>
-    
     <message>
         <source>Dictionary file was tampered or corrupted</source>
         <translation>Wayaqa aru-pirwa pantjatawa</translation>
@@ -3554,7 +3555,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>MediaWiki::MediaWikiArticleRequest</name>
-    
     <message>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML uyllaña pantja: %1 en %2,%3</translation>
@@ -3562,7 +3562,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>MediaWiki::MediaWikiWordSearchRequest</name>
-    
     <message>
         <source>XML parse error: %1 at %2,%3</source>
         <translation>XML uyllaña pantja: %1 en %2,%3</translation>
@@ -3570,7 +3569,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>MediaWikisModel</name>
-    
     <message>
         <source>Enabled</source>
         <translation>Naktata</translation>
@@ -3590,7 +3588,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>MultimediaAudioPlayer</name>
-    
     <message>
         <source>Couldn&apos;t open audio buffer for reading.</source>
         <translation>Arunak arsũnatakixa búfer de audio janiw jist&apos;aran atkiti.</translation>
@@ -3598,7 +3595,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>OrderAndProps</name>
-    
     <message>
         <source>Form</source>
         <translation>Phuqhañ laphi</translation>
@@ -3670,7 +3666,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>PathsModel</name>
-    
     <message>
         <source>Path</source>
         <translation>Thakhi</translation>
@@ -3682,7 +3677,6 @@ Eliminar la pestaña actual de favoritos</translation>
 </context>
 <context>
     <name>Preferences</name>
-    
     <message>
         <source>Preferences</source>
         <translation>Ajlliñanaka</translation>
@@ -4558,7 +4552,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>ProgramTypeEditor</name>
-    
     <message>
         <source>Audio</source>
         <translation>Ist&apos;añataki</translation>
@@ -4582,7 +4575,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>Programs::RunInstance</name>
-    
     <message>
         <source>No program name was given.</source>
         <translation>Programa sutipax janiw churaskiti.</translation>
@@ -4598,7 +4590,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>ProgramsModel</name>
-    
     <message>
         <source>Enabled</source>
         <translation>Naktata</translation>
@@ -4622,7 +4613,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>QObject</name>
-    
     <message>
         <source>Article loading error</source>
         <translation>Qillqata (artículo) uñachasinxa pantjiwa</translation>
@@ -4734,7 +4724,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>QuickFilterLine</name>
-    
     <message>
         <source>Dictionary search/filter (Ctrl+F)</source>
         <translation>Aru-pirwan thaqhawi / susuña</translation>
@@ -4750,7 +4739,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>ResourceToSaveHandler</name>
-    
     <message>
         <source>ERROR: %1</source>
         <translation>PANTJATA: %1</translation>
@@ -4770,7 +4758,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>Romaji</name>
-    
     <message>
         <source>Hepburn Romaji for Hiragana</source>
         <translation>Romanización hepburn de Hiragana</translation>
@@ -4782,7 +4769,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>RussianTranslit</name>
-    
     <message>
         <source>Russian Transliteration</source>
         <translation>Rusu arut qillqawi</translation>
@@ -4790,7 +4776,6 @@ ukax llikat cachep chhaqtayi.</translation>
 </context>
 <context>
     <name>ScanFlag</name>
-    
     <message>
         <source>MainWindow</source>
         <translation>Nayrankir wintana</translation>
@@ -4887,7 +4872,6 @@ Posterior</translation>
 </context>
 <context>
     <name>SoundDirsModel</name>
-    
     <message>
         <source>Path</source>
         <translation>Thakhi</translation>
@@ -4903,7 +4887,6 @@ Posterior</translation>
 </context>
 <context>
     <name>Sources</name>
-    
     <message>
         <source>(not available in portable version)</source>
         <translation>(móvil ukan janiw lurkiti)</translation>
@@ -5214,10 +5197,13 @@ También puede usar %GD1251% para CP1251, %GDISO1%...%GDISO16% para ISO 8859-1..
         <source>DICT servers:</source>
         <translation>DICT servidores:</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;Dictionary paths cannot be added or removed, because GoldenDict is in portable mode. See the &lt;i&gt;Portable mode&lt;/i&gt; section in GoldenDict Help.&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StylesComboBox</name>
-    
     <message>
         <source>None</source>
         <translation>Ni maya</translation>
@@ -5225,7 +5211,6 @@ También puede usar %GD1251% para CP1251, %GDISO1%...%GDISO16% para ISO 8859-1..
 </context>
 <context>
     <name>TextToSpeechSource</name>
-    
     <message>
         <source>Selected voice engines:</source>
         <translation>Arsuyirinaka ajllita:</translation>
@@ -5290,7 +5275,6 @@ También puede usar %GD1251% para CP1251, %GDISO1%...%GDISO16% para ISO 8859-1..
 </context>
 <context>
     <name>TranslateBox</name>
-    
     <message>
         <source>Type a word or phrase to search dictionaries</source>
         <translation>Aru-pirwanakan thaqhañatakix mä aru qillqaña</translation>
@@ -5302,7 +5286,6 @@ También puede usar %GD1251% para CP1251, %GDISO1%...%GDISO16% para ISO 8859-1..
 </context>
 <context>
     <name>VoiceEnginesModel</name>
-    
     <message>
         <source>Enabled</source>
         <translation>Naktata</translation>
@@ -5322,7 +5305,6 @@ También puede usar %GD1251% para CP1251, %GDISO1%...%GDISO16% para ISO 8859-1..
 </context>
 <context>
     <name>WebSitesModel</name>
-    
     <message>
         <source>Enabled</source>
         <translation>Naktata</translation>
@@ -5352,7 +5334,6 @@ Insertar artículo como un enlace adentro de un &lt;iframe&gt;.</translation>
 </context>
 <context>
     <name>WordFinder</name>
-    
     <message>
         <source>Failed to query some dictionaries.</source>
         <translation>Phantjiw aru pirwa thaqhawi.</translation>
@@ -5360,7 +5341,6 @@ Insertar artículo como un enlace adentro de un &lt;iframe&gt;.</translation>
 </context>
 <context>
     <name>WordList</name>
-    
     <message>
         <source>WARNING: %1</source>
         <translation>UKATARAKI: %1</translation>

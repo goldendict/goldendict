@@ -24,7 +24,7 @@ using gd::wchar;
 /// The algorithm's version.
 enum
 {
-  Version = 5
+  Version = 6
 };
 
 /// Applies the folding algorithm to each character in the given string,

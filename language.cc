@@ -255,7 +255,7 @@ Db::Db()
   iso2ToCountry[ "bo" ] = "cn";
   iso2ToCountry[ "br" ] = "fr";
   iso2ToCountry[ "bs" ] = "ba";
-  iso2ToCountry[ "ca" ] = "ad";
+  iso2ToCountry[ "ca" ] = "ct";
   iso2ToCountry[ "cs" ] = "cz";
   iso2ToCountry[ "cy" ] = "gb";
   iso2ToCountry[ "da" ] = "dk";

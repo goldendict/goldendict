@@ -8,7 +8,11 @@
 #include "categorized_logging.hh"
 #include "gddebug.hh"
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 5, 0 )
+#define TO_LOG_MESSAGE( msg, ap ) QString::vasprintf( msg, ap ).toUtf8().constData()
+#else
 #define TO_LOG_MESSAGE( msg, ap ) QString().vsprintf( msg, ap ).toUtf8().constData()
+#endif
 
 QFile * logFilePtr;
 

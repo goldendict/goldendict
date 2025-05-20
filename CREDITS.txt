@@ -17,6 +17,7 @@ Julian Depetris Chauvin <jdepetris\gmail.com>: Interface enhancements
 Yanina Weingast <yjweingast\gmail.com>: Argentinian Spanish translation
 Tvangeste <i.4m.l33t\yandex.ru>: Interface enhancements
 Zdenko Podobný <zdenop\gmail.com>: Slovak translation
+Ferenc Kempelen <lion\netngine.hu>: Hungarian translation
 Şükrü Yekta Karabulut <sukruyekta\gmail.com>: Turkish translation
 Amos Batto <amosbatto\yahoo.com>: Quechua, Aymara and Bolivian Spanish translations
 Carlos A. Cortijo Bon <carlos_cortijo\yahoo.com>: Spanish from Spain translation
@@ -32,3 +33,4 @@ Nasrollah Noori <nanopqr@gmail.com>: Persian translation
 Vladimir Gerovski: Macedonian Translation
 Nikolay Korotkiy <sikmir\gmail.com>: Finnish translation
 Robin Townsend: Lojban translation
+Joan Montané: Catalan translation

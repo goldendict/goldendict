@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = goldendict
-VERSION = 1.5.0-RC2+git
+VERSION = 1.5.0+git
 
 # Generate version file. We do this here and in a build rule described later.
 # The build rule is required since qmake isn't run each time the project is
@@ -609,6 +609,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/cs_CZ.ts \
     locale/de_DE.ts \
     locale/el_GR.ts \
+    locale/hu_HU.ts \
     locale/bg_BG.ts \
     locale/ar_SA.ts \
     locale/lt_LT.ts \
@@ -623,6 +624,7 @@ TRANSLATIONS += locale/ru_RU.ts \
     locale/es_AR.ts \
     locale/es_BO.ts \
     locale/es_ES.ts \
+    locale/ca_CT.ts \
     locale/sk_SK.ts \
     locale/tr_TR.ts \
     locale/qu_WI.ts \

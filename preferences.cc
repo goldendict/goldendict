@@ -6,6 +6,37 @@
 #include "broken_xrecord.hh"
 #include "mainwindow.hh"
 
+#include <algorithm>
+#include <vector>
+
+namespace {
+struct ComboBoxItem
+{
+  QIcon icon;
+  QString text;
+  QString userData;
+
+  explicit ComboBoxItem( QString const & languageCode, QString const & countryCode, QString const & userData_ ):
+    icon( QString( ":/flags/%1.png" ).arg( countryCode ) ),
+    text( Language::localizedNameForId( LangCoder::code2toInt( languageCode.toLatin1().data() ) ) ),
+    userData( userData_ )
+  {}
+};
+
+bool operator<( ComboBoxItem const & a, ComboBoxItem const & b )
+{
+  return a.text < b.text;
+}
+
+void orderAndAddItems( QComboBox & comboBox, std::vector< ComboBoxItem > & items )
+{
+  // Sort by language name, because otherwise the list looks really weird.
+  std::sort( items.begin(), items.end() );
+  for( std::vector< ComboBoxItem >::iterator i = items.begin(); i != items.end(); ++i )
+    comboBox.addItem( i->icon, i->text, i->userData );
+}
+
+} // unnamed namespace
 
 Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QDialog( parent ), prevInterfaceLanguage( 0 )
@@ -66,8 +97,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QStringList availLocs = QDir( Config::getLocDir() ).entryList( QStringList( "*.qm" ),
                                                                  QDir::Files );
 
-  // We need to sort by language name -- otherwise list looks really weird
-  QMap< QString, QPair< QIcon, QString > > sortedLocs;
+  std::vector< ComboBoxItem > locs;
+  locs.reserve( availLocs.size() );
 
   for( QStringList::iterator i = availLocs.begin(); i != availLocs.end(); ++i )
   {
@@ -77,16 +108,10 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
     if ( lang == "qt" )
       continue; // We skip qt's own localizations
 
-    sortedLocs.insertMulti(
-      Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
-      QPair< QIcon, QString >(
-        QIcon( QString( ":/flags/%1.png" ).arg( i->mid( 3, 2 ).toLower() ) ),
-        i->mid( 0, i->size() - 3 ) ) );
+    locs.push_back( ComboBoxItem( lang, i->mid( 3, 2 ).toLower(), i->mid( 0, i->size() - 3 ) ) );
   }
 
-  for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedLocs.begin();
-       i != sortedLocs.end(); ++i )
-    ui.interfaceLanguage->addItem( i.value().first, i.key(), i.value().second );
+  orderAndAddItems( *ui.interfaceLanguage, locs );
 
   for( int x = 0; x < ui.interfaceLanguage->count(); ++x )
     if ( ui.interfaceLanguage->itemData( x ).toString() == p.interfaceLanguage )
@@ -105,7 +130,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   QStringList availHelps = QDir( Config::getHelpDir() ).entryList( QStringList( "*.qch" ),
                                                                  QDir::Files );
 
-  QMap< QString, QPair< QIcon, QString > > sortedHelps;
+  std::vector< ComboBoxItem > helps;
+  helps.reserve( availHelps.size() );
 
   for( QStringList::iterator i = availHelps.begin(); i != availHelps.end(); ++i )
   {
@@ -122,15 +148,10 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
         reg = lang.toUpper();
     }
 
-    sortedHelps.insertMulti(
-      Language::localizedNameForId( LangCoder::code2toInt( lang.toLatin1().data() ) ),
-      QPair< QIcon, QString >(
-        QIcon( QString( ":/flags/%1.png" ).arg( reg.toLower() ) ), lang + "_" + reg ) );
+    helps.push_back( ComboBoxItem( lang, reg.toLower(), lang + "_" + reg ) );
   }
 
-  for( QMap< QString, QPair< QIcon, QString > >::iterator i = sortedHelps.begin();
-       i != sortedHelps.end(); ++i )
-    ui.helpLanguage->addItem( i.value().first, i.key(), i.value().second );
+  orderAndAddItems( *ui.helpLanguage, helps );
 
   for( int x = 0; x < ui.helpLanguage->count(); ++x )
     if ( ui.helpLanguage->itemData( x ).toString() == p.helpLanguage )
@@ -680,12 +701,19 @@ void Preferences::helpRequested()
 
     if( helpWindow )
     {
-      helpWindow->setWindowFlags( Qt::Window );
+      #ifdef Q_OS_MAC
+        helpWindow->setWindowFlags( Qt::Dialog );
+      #else
+        helpWindow->setWindowFlags( Qt::Window );
+      #endif
 
       connect( helpWindow, SIGNAL( needClose() ),
                this, SLOT( closeHelp() ) );
       helpWindow->showHelpFor( "Preferences" );
       helpWindow->show();
+      #ifdef Q_OS_MAC
+        helpWindow->activateWindow();
+      #endif
     }
   }
   else

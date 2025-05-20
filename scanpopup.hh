@@ -151,6 +151,7 @@ private:
   bool mouseIntercepted;
 
   QPoint startPos; // For window moving
+  QByteArray pinnedGeometry;
 
   QTimer hideTimer; // When mouse leaves the window, a grace period is
                     // given for it to return back. If it doesn't before
@@ -178,6 +179,8 @@ private:
   virtual void leaveEvent( QEvent * event );
   virtual void enterEvent( QEvent * event );
   virtual void showEvent( QShowEvent * );
+  virtual void closeEvent( QCloseEvent * );
+  virtual void moveEvent( QMoveEvent * );
 
   /// Returns inputWord, chopped with appended ... if it's too long/
   QString elideInputWord();

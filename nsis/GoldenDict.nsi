@@ -116,14 +116,27 @@ Section
   SetOutPath $INSTDIR\locale
   File ..\locale\*
 
+  CreateDirectory $INSTDIR\opencc
+  SetOutPath $INSTDIR\opencc
+  File ..\opencc\*
+
   CreateDirectory $INSTDIR\content
   CreateDirectory $INSTDIR\content\morphology
   SetOutPath $INSTDIR\content\morphology
   File ..\content\morphology\*
 
+  CreateDirectory $INSTDIR\help
+  SetOutPath $INSTDIR\help
+  File ..\help\*
+
+  CreateDirectory $INSTDIR\sqldrivers
+  SetOutPath $INSTDIR\sqldrivers
+  File ..\sqldrivers\*
+
   SetOutPath $INSTDIR
   File ..\*.dll
   File ..\LICENSE.txt
+  File ..\mimetex.cgi
   File /oname=$INSTDIR\GoldenDict.exe ..\goldendict.exe
   
   WriteUninstaller "$INSTDIR\Uninstall.exe"

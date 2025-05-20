@@ -1008,7 +1008,7 @@ void MainWindow::mousePressEvent( QMouseEvent *event)
     return;
   }
 
-  if (event->button() != Qt::MidButton)
+  if( event->button() != Qt4x5::middleButton() )
     return QMainWindow::mousePressEvent(event);
 
   // middle clicked
@@ -1229,11 +1229,16 @@ void MainWindow::wheelEvent( QWheelEvent *ev )
 {
   if ( ev->modifiers().testFlag( Qt::ControlModifier ) )
   {
-    if ( ev->delta() > 0 )
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+    int const delta = ev->angleDelta().y();
+#else
+    int const delta = ev->delta();
+#endif
+    if ( delta > 0 )
     {
         zoomin();
     }
-    else if ( ev->delta() < 0 )
+    else if ( delta < 0 )
     {
         zoomout();
     }
@@ -1873,7 +1878,14 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
   if( index == ui.tabWidget->currentIndex() )
   {
     // Set icon for "Add to Favorites" action
-    if( isWordPresentedInFavorites( title, cfg.lastMainGroupId ) )
+    int groupId = 0;
+    ArticleView *view = getCurrentArticleView();
+    if( view )
+      groupId = view->getViewGroup();
+    if( groupId == 0 )
+      groupId = cfg.lastMainGroupId;
+
+    if( isWordPresentedInFavorites( title, groupId ) )
     {
       addToFavorites->setIcon( blueStarIcon );
       addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
@@ -1951,8 +1963,16 @@ void MainWindow::tabSwitched( int )
   }
 
   // Set icon for "Add to Favorites" action
+
+  int groupId = 0;
+  ArticleView *view = getCurrentArticleView();
+  if( view )
+    groupId = view->getViewGroup();
+  if( groupId == 0 )
+    groupId = cfg.lastMainGroupId;
+
   QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
-  if( isWordPresentedInFavorites( unescapeTabHeader( headword ), cfg.lastMainGroupId ) )
+  if( isWordPresentedInFavorites( unescapeTabHeader( headword ), groupId ) )
   {
     addToFavorites->setIcon( blueStarIcon );
     addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
@@ -3981,6 +4001,11 @@ void MainWindow::messageFromAnotherInstanceReceived( QString const & message )
     toggleMainWindow( true );
     return;
   }
+  if( message == "toggleScanPopup" )
+  {
+    toggleScanPopup();
+    return;
+  }
   if( message.left( 15 ) == "translateWord: " )
   {
     if( scanPopup.get() )
@@ -4526,7 +4551,7 @@ void MainWindow::editDictionary( Dictionary::Class * dict )
       QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
       command.replace( "%GDWORD%", headword );
     }
-    if( !QProcess::startDetached( command ) )
+    if( !Qt4x5::Process::startDetached( command ) )
       QApplication::beep();
   }
 }
@@ -4844,16 +4869,33 @@ QString MainWindow::unescapeTabHeader(QString const & header )
   return escaped;
 }
 
-void MainWindow::addCurrentTabToFavorites()
+QString MainWindow::tabFavoritesFolder( int tabNom )
 {
   QString folder;
-  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
+  unsigned groupId = 0;
+  ArticleView * view = 0;
+
+  QWidget * cw = ui.tabWidget->widget( tabNom );
+  if ( cw )
+    view = dynamic_cast< ArticleView * >( cw );
+
+  if( view )
+    groupId = view->getViewGroup();
+  if( groupId == 0 )
+    groupId = cfg.lastMainGroupId;
+
+  Instances::Group const * igrp = groupInstances.findGroup( groupId );
   if( igrp )
     folder = igrp->favoritesFolder;
 
+  return folder;
+}
+
+void MainWindow::addCurrentTabToFavorites()
+{
   QString headword = ui.tabWidget->tabText( ui.tabWidget->currentIndex() );
 
-  ui.favoritesPaneWidget->addHeadword( folder, unescapeTabHeader( headword ) );
+  ui.favoritesPaneWidget->addHeadword( tabFavoritesFolder( ui.tabWidget->currentIndex() ), unescapeTabHeader( headword ) );
 
   addToFavorites->setIcon( blueStarIcon );
   addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
@@ -4861,10 +4903,7 @@ void MainWindow::addCurrentTabToFavorites()
 
 void MainWindow::handleAddToFavoritesButton()
 {
-  QString folder;
-  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
-  if( igrp )
-    folder = igrp->favoritesFolder;
+  QString folder = tabFavoritesFolder( ui.tabWidget->currentIndex() );
   QString headword = unescapeTabHeader( ui.tabWidget->tabText( ui.tabWidget->currentIndex() ) );
 
   if( ui.favoritesPaneWidget->isHeadwordPresent( folder, headword ) )
@@ -4900,15 +4939,10 @@ void MainWindow::addWordToFavorites( QString const & word, unsigned groupId )
 
 void MainWindow::addAllTabsToFavorites()
 {
-  QString folder;
-  Instances::Group const * igrp = groupInstances.findGroup( cfg.lastMainGroupId );
-  if( igrp )
-    folder = igrp->favoritesFolder;
-
   for( int i = 0; i < ui.tabWidget->count(); i++ )
   {
     QString headword = ui.tabWidget->tabText( i );
-    ui.favoritesPaneWidget->addHeadword( folder, unescapeTabHeader( headword ) );
+    ui.favoritesPaneWidget->addHeadword( tabFavoritesFolder( i ), unescapeTabHeader( headword ) );
   }
   addToFavorites->setIcon( blueStarIcon );
   addToFavorites->setToolTip( tr( "Remove current tab from Favorites" ) );
@@ -4922,6 +4956,11 @@ bool MainWindow::isWordPresentedInFavorites( QString const & word, unsigned grou
     folder = igrp->favoritesFolder;
 
   return ui.favoritesPaneWidget->isHeadwordPresent( folder, word );
+}
+
+void MainWindow::toggleScanPopup()
+{
+  enableScanPopup->toggle();
 }
 
 void MainWindow::setGroupByName( QString const & name, bool main_window )

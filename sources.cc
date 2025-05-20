@@ -74,7 +74,11 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
   ui.programs->resizeColumnToContents( 0 );
   // Make sure this thing will be large enough
   ui.programs->setColumnWidth( 1,
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 11, 0 )
+    QFontMetrics( QFont() ).horizontalAdvance(
+#else
     QFontMetrics( QFont() ).width(
+#endif
       ProgramTypeEditor::getNameForType( Config::Program::PrefixMatch ) ) + 16 );
   ui.programs->resizeColumnToContents( 2 );
   ui.programs->resizeColumnToContents( 3 );
@@ -150,6 +154,8 @@ Sources::Sources( QWidget * parent, Config::Class const & cfg):
     ui.hunspellPath->setEnabled( false );
     ui.changeHunspellPath->setEnabled( false );
   }
+  else
+    ui.portableModeNote->hide();
 }
 
 void Sources::fitPathsColumns()

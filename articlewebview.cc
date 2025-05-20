@@ -6,6 +6,7 @@
 #include <QWebFrame>
 #include <QApplication>
 #include "articleinspector.hh"
+#include "qt4x5.hh"
 
 #ifdef Q_OS_WIN32
 #include <qt_windows.h>
@@ -85,7 +86,7 @@ bool ArticleWebView::event( QEvent * event )
 
 void ArticleWebView::mousePressEvent( QMouseEvent * event )
 {
-  if ( event->buttons() & Qt::MidButton )
+  if ( event->buttons() & Qt4x5::middleButton() )
     midButtonPressed = true;
 
   QWebView::mousePressEvent( event );
@@ -100,7 +101,7 @@ void ArticleWebView::mousePressEvent( QMouseEvent * event )
 
 void ArticleWebView::mouseReleaseEvent( QMouseEvent * event )
 {
-  bool noMidButton = !( event->buttons() & Qt::MidButton );
+  bool noMidButton = !( event->buttons() & Qt4x5::middleButton() );
 
   QWebView::mouseReleaseEvent( event );
 

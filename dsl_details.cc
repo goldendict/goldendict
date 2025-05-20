@@ -945,7 +945,7 @@ DslScanner::DslScanner( string const & fileName ) THROW_SPEC( Ex, Iconv::Ex ):
 
   for( ; ; )
   {
-    if ( !readNextLine( str, offset ) )
+    if ( !readNextLineWithoutComments( str, offset ) )
     {
       gzclose( f );
       throw exMalformedDslFile( fileName );

@@ -41,6 +41,7 @@
 #include "decompress.hh"
 #include "gddebug.hh"
 #include "ripemd.hh"
+#include "qt4x5.hh"
 
 namespace Mdict
 {
@@ -389,7 +390,7 @@ bool MdictParser::readHeader( QDataStream & in )
   {
     QString styleSheets = headerAttributes.namedItem( "StyleSheet" ).toAttr().value();
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), QString::KeepEmptyParts );
+    QStringList lines = styleSheets.split( QRegularExpression( "[\r\n]" ), Qt4x5::keepEmptyParts() );
 #else
     QStringList lines = styleSheets.split( QRegExp( "[\r\n]" ), QString::KeepEmptyParts );
 #endif
@@ -520,12 +521,11 @@ bool MdictParser::readRecordBlockInfos()
     r.compressedSize = readNumber( in );
     r.decompressedSize = readNumber( in );
     r.startPos = acc1;
-    r.endPos = acc1 + r.compressedSize;
     r.shadowStartPos = acc2;
     r.shadowEndPos = acc2 + r.decompressedSize;
     recordBlockInfos_.push_back( r );
 
-    acc1 = r.endPos;
+    acc1 += r.compressedSize;
     acc2 = r.shadowEndPos;
   }
 
@@ -618,7 +618,7 @@ bool MdictParser::readRecordBlock( MdictParser::HeadWordIndex & headWordIndex,
 
   for ( HeadWordIndex::const_iterator i = headWordIndex.begin(); i != headWordIndex.end(); ++i )
   {
-    if ( recordBlockInfos_[idx].endPos <= i->first )
+    if ( recordBlockInfos_[idx].shadowEndPos <= i->first )
       idx = RecordIndex::bsearch( recordBlockInfos_, i->first );
 
     if ( idx == ( size_t )( -1 ) )

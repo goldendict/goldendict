@@ -10,7 +10,7 @@
 
 HotKeyEdit::HotKeyEdit( QWidget * parent ):
   QLineEdit( parent ),
-  currentModifiers( 0 ), currentKey1( 0 ), currentKey2( 0 ),
+  currentModifiers(), currentKey1( 0 ), currentKey2( 0 ),
   continuingCombo( false )
 {
   renderCurrentValue();
@@ -87,7 +87,7 @@ void HotKeyEdit::keyPressEvent( QKeyEvent * event )
         // Delete current combo
         currentKey1 = 0;
         currentKey2 = 0;
-        currentModifiers = 0;
+        currentModifiers = Qt::KeyboardModifiers();
         continuingCombo = false;
       }
       else

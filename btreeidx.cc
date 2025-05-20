@@ -1014,9 +1014,25 @@ static uint32_t buildBtreeNode( IndexedWords::const_iterator & nextIndex,
 
     unsigned prevEntry = 0;
 
+    unsigned step = indexSize / ( maxElements + 1 );
+    bool useNonUniformLeaves = ( maxElements >= BtreeMaxElements && step > maxElements && step < BtreeMinElements * maxElements );
+
     for( unsigned x = 0; x < maxElements; ++x )
     {
-      unsigned curEntry = (uint64_t) indexSize * ( x + 1 ) / ( maxElements + 1 );
+      unsigned curEntry;
+
+      if( useNonUniformLeaves )
+      {
+        curEntry = prevEntry + BtreeMinElements * maxElements;
+        if( curEntry > indexSize - ( maxElements - x ) * maxElements )
+        {
+          curEntry = indexSize - ( maxElements - x ) * maxElements;
+          if( curEntry <= prevEntry )
+            curEntry = prevEntry + BtreeMinElements;
+        }
+      }
+      else
+        curEntry = (uint64_t) indexSize * ( x + 1 ) / ( maxElements + 1 );
 
       uint32_t offset = buildBtreeNode( nextIndex,
                                         curEntry - prevEntry,
@@ -1257,7 +1273,6 @@ IndexInfo buildIndex( IndexedWords const & indexedWords, File::Class & file )
 
   GD_DPRINTF( "Building a tree of %u elements\n", (unsigned) btreeMaxElements );
 
-
   uint32_t lastLeafOffset = 0;
 
   uint32_t rootOffset = buildBtreeNode( nextIndex, indexSize,
@@ -1472,8 +1487,9 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
   // Read all chains
 
-  QList< uint32_t >::Iterator begOffsets = offsets.begin();
-  QList< uint32_t >::Iterator endOffsets = offsets.end();
+  typedef QList< uint32_t >::Iterator ListIterator;
+  ListIterator begOffsets = offsets.begin();
+  ListIterator endOffsets = offsets.end();
 
   for( ; ; )
   {
@@ -1481,16 +1497,16 @@ void BtreeIndex::getHeadwordsFromOffsets( QList<uint32_t> & offsets,
 
     for( unsigned i = 0; i < result.size(); i++ )
     {
-      QList< uint32_t >::Iterator it = qBinaryFind( begOffsets, endOffsets,
-                                                    result.at( i ).articleOffset );
+      std::pair< ListIterator, ListIterator > const range = std::equal_range( begOffsets, endOffsets,
+                                                                              result.at( i ).articleOffset );
 
-      if( it != offsets.end() )
+      if( range.first != range.second )
       {
         if( isCancelled && Qt4x5::AtomicInt::loadAcquire( *isCancelled ) )
           return;
 
         headwords.append(  QString::fromUtf8( ( result[ i ].prefix + result[ i ].word ).c_str() ) );
-        offsets.erase( it );
+        offsets.erase( range.first );
         begOffsets = offsets.begin();
         endOffsets = offsets.end();
       }

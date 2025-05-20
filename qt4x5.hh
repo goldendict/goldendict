@@ -9,6 +9,7 @@
 # define IS_QT_5    1
 #endif
 
+#include <QProcess>
 #include <QString>
 #include <QAtomicInt>
 #include <QTextDocument>
@@ -22,12 +23,25 @@ namespace Qt4x5
 {
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 14, 0 )
+inline Qt::SplitBehaviorFlags keepEmptyParts()
+{ return Qt::KeepEmptyParts; }
 inline Qt::SplitBehaviorFlags skipEmptyParts()
 { return Qt::SkipEmptyParts; }
 #else
+inline QString::SplitBehavior keepEmptyParts()
+{ return QString::KeepEmptyParts; }
 inline QString::SplitBehavior skipEmptyParts()
 { return QString::SkipEmptyParts; }
 #endif
+
+inline Qt::MouseButton middleButton()
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 7, 0 )
+  return Qt::MiddleButton;
+#else
+  return Qt::MidButton;
+#endif
+}
 
 inline QString escape( QString const & plain )
 {
@@ -183,6 +197,24 @@ typedef int size_type;
 #else
 typedef uint size_type;
 #endif
+
+}
+
+namespace Process
+{
+
+inline bool startDetached( QString const & command )
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 15, 0 )
+  auto args = QProcess::splitCommand( command );
+  if( args.empty() )
+    return false;
+  auto const program = args.takeFirst();
+  return QProcess::startDetached( program, args );
+#else
+  return QProcess::startDetached( command );
+#endif
+}
 
 }
 

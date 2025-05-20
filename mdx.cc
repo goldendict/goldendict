@@ -65,7 +65,7 @@ using namespace Mdict;
 enum
 {
   kSignature = 0x4349444d,  // MDIC
-  kCurrentFormatVersion = 11 + BtreeIndexing::FormatVersion + Folding::Version
+  kCurrentFormatVersion = 12 + BtreeIndexing::FormatVersion + Folding::Version
 };
 
 DEF_EX( exCorruptDictionary, "dictionary file was tampered or corrupted", std::exception )
@@ -846,8 +846,7 @@ void MddResourceRequest::run()
       for ( vector< sptr< IndexedMdd > >::const_iterator i = dict.mddResources.begin();
             i != dict.mddResources.end(); ++i  )
       {
-        sptr< IndexedMdd > mddResource = *i;
-        if ( mddResource->loadFile( resourceName, data ) )
+        if ( ( *i )->loadFile( resourceName, data ) )
           break;
       }
     }
@@ -1440,8 +1439,7 @@ QString MdxDictionary::getCachedFileName( QString filename )
           for ( vector< sptr< IndexedMdd > >::const_iterator i = mddResources.begin();
                 i != mddResources.end(); ++i )
           {
-            sptr< IndexedMdd > mddResource = *i;
-            if ( mddResource->loadFile( resourceName, data ) )
+            if ( ( *i )->loadFile( resourceName, data ) )
               break;
           }
         }

@@ -195,6 +195,10 @@ public:
   ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
   ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
 
+  /// Return group id of the view
+  unsigned getViewGroup()
+  { return getGroup( ui.definition->url() ); }
+
 signals:
 
   void iconChanged( ArticleView *, QIcon const & icon );
