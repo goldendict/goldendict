@@ -1,9 +1,12 @@
 #ifndef ARTICLEINSPECTOR_HH
 #define ARTICLEINSPECTOR_HH
 
-#include <QtGlobal>
+// TODO (Qt WebKit): drop ArticleInspector and code that uses it in ArticleWebView, share the cleaner
+// alternative implementation in ArticleWebPage with the Qt WebEngine version once Qt 4 is no longer
+// supported. The problem with Qt 4 is: destroying an article inspector when it is closed, then
+// creating another one for the same page causes a crash in QWebInspector::setPage().
 
-#if QT_VERSION >= 0x040600
+#ifdef USE_QTWEBKIT
 
 #include <QWebInspector>
 #include <list>
@@ -32,6 +35,6 @@ private:
   static std::list< ArticleInspector * > openedInspectors;
 };
 
-#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
 #endif // ARTICLEINSPECTOR_HH

@@ -205,7 +205,9 @@ class MdxDictionary: public BtreeIndexing::BtreeDictionary
   QSemaphore deferredInitRunnableExited;
 
   string initError;
+#ifdef USE_QTWEBKIT
   QString cacheDirName;
+#endif
 
 public:
 
@@ -273,7 +275,9 @@ public:
               && ( fts.maxDictionarySize == 0 || getArticleCount() <= fts.maxDictionarySize );
   }
 
+#ifdef USE_QTWEBKIT
   QString getCachedFileName( QString name );
+#endif
 
 protected:
 
@@ -290,7 +294,9 @@ private:
   /// Process resource links (images, audios, etc)
   QString & filterResource( QString const & articleId, QString & article );
 
+#ifdef USE_QTWEBKIT
   void removeDirectory( QString const & directory );
+#endif
 
   friend class MdxHeadwordsRequest;
   friend class MdxArticleRequest;
@@ -338,9 +344,11 @@ MdxDictionary::MdxDictionary( string const & id, string const & indexFile,
       && !FtsHelpers::ftsIndexIsOldOrBad( ftsIdxName, this ) )
     FTS_index_completed.ref();
 
+#ifdef USE_QTWEBKIT
   cacheDirName = QDir::tempPath() + QDir::separator()
                  + QString::fromUtf8( getId().c_str() )
                  + ".cache";
+#endif
 }
 
 MdxDictionary::~MdxDictionary()
@@ -353,7 +361,9 @@ MdxDictionary::~MdxDictionary()
 
   dictFile.close();
 
+#ifdef USE_QTWEBKIT
   removeDirectory( cacheDirName );
+#endif
 }
 
 //////// MdxDictionary::deferredInit()
@@ -1054,7 +1064,11 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
   QString id = QString::fromStdString( getId() );
   QString uniquePrefix = QString::fromLatin1( "g" ) + id + "_" + articleId + "_";
 
+#ifdef USE_QTWEBKIT
   QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source)(?:\\s+[^>]+|\\s*)>)",
+#else
+  QRegularExpression allLinksRe( "(?:<\\s*(a(?:rea)?|img|link|script|source|audio|video)(?:\\s+[^>]+|\\s*)>)",
+#endif
                                  QRegularExpression::CaseInsensitiveOption );
   QRegularExpression wordCrossLink( "([\\s\"']href\\s*=)\\s*([\"'])entry://([^>#]*?)((?:#[^>]*?)?)\\2",
                                     QRegularExpression::CaseInsensitiveOption );
@@ -1117,7 +1131,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         QString newTxt = match.captured( 1 ) + match.captured( 2 )
                          + "gdau://" + id + "/"
                          + match.captured( 3 ) + match.captured( 2 );
-        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + match.captured( 3 ).toUtf8().data() + "\"", getId() ).c_str() )
+        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + match.captured( 3 ).toUtf8().data() + "\"" ).c_str() )
                   + newLink.replace( match.capturedStart(), match.capturedLength(), newTxt );
       }
 
@@ -1178,11 +1192,39 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
           QString newText;
           if( linkType.at( 1 ) == 'o' ) // "source" tag
           {
+            // Quote from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source:
+            //   The <source> HTML element specifies multiple media resources for
+            //   the <picture>, the <audio> element, or the <video> element.
+
             QString filename = match.captured( 3 );
+#ifdef USE_QTWEBKIT
+            // Store the file in a temporary cache directory and reference it in the link,
+            // because gdvideo:// links don't work in the Qt WebKit version for some reason.
+            // TODO (Qt WebKit): this workaround is applied to all <source> elements,
+            // including those nested in <audio> and <picture> elements. Are such elements
+            // present in any MDict dictionaries? If yes, is the workaround needed for them?
             QString newName = getCachedFileName( filename );
             newName.replace( '\\', '/' );
             newText = match.captured( 1 ) + match.captured( 2 )
                       + "file:///" + newName + match.captured( 2 );
+#else
+            QLatin1String scheme;
+            auto const filenameStd = filename.toStdString();
+            if( Filetype::isNameOfSound( filenameStd ) )
+              scheme = QLatin1String{ "gdau" };
+            else
+            if( Filetype::isNameOfVideo( filenameStd ) )
+              scheme = QLatin1String{ "gdvideo" };
+            else
+              scheme = QLatin1String{ "bres" };
+
+            auto const quote = match.capturedView( 2 );
+            // Use % in place of +, because operator+ is missing for QStringView.
+            // TODO: consider whether defining QT_USE_QSTRINGBUILDER in goldendict.pro
+            // to improve performance everywhere is safe enough (see QString documentation).
+            newText = match.capturedView( 1 ) % quote % scheme % QLatin1String{ "://" }
+                      % id % QLatin1Char{ '/' } % filename % quote;
+#endif
           }
           else
           {
@@ -1197,6 +1239,31 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
                                      "\\1\"bres://" + id + "/\\2\"" );
       }
     }
+// The getCachedFileName() workaround in the Qt WebKit version eliminates the preload attribute value requirement.
+#ifndef USE_QTWEBKIT
+    else
+    {
+      Q_ASSERT( linkType == QLatin1String{ "audio" } || linkType == QLatin1String{ "video" } );
+      // If the preload attribute value is not "auto", the video is unplayable
+      // and the following errors appear in GoldenDict's output:
+      // QIODevice::seek (ArticleResourceReply): Cannot call seek on a sequential device
+      // [...:ERROR:batching_media_log.cc(38)] MediaEvent: {"error":"FFmpegDemuxer: open context failed"}
+      // [...:ERROR:batching_media_log.cc(35)] MediaEvent: {"pipeline_error":12}
+      // TODO (Qt WebEngine): is forcing the preload attribute value needed for <audio> elements?
+
+      // Remove all existing preload attributes.
+      static QRegularExpression const preloadRe( QStringLiteral( R"(\spreload\s*=\s*(["'])\w*\1)" ),
+                                                 QRegularExpression::CaseInsensitiveOption );
+      linkTxt.remove( preloadRe );
+
+      // Insert the necessary preload attribute value at the end of the tag.
+      Q_ASSERT( linkTxt.at( linkTxt.size() - 1 ) == QLatin1Char{ '>' } );
+      linkTxt.insert( linkTxt.size() - 1, QLatin1String{ " preload=\"auto\"" } );
+
+      newLink = linkTxt;
+    }
+#endif
+
     if( !newLink.isEmpty() )
     {
       articleNewText += newLink;
@@ -1272,7 +1339,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
         QString newTxt = audioRe.cap( 1 ) + audioRe.cap( 2 )
                          + "gdau://" + id + "/"
                          + audioRe.cap( 3 ) + audioRe.cap( 2 );
-        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + audioRe.cap( 3 ).toUtf8().data() + "\"", getId() ).c_str() )
+        newLink = QString::fromUtf8( addAudioLink( "\"gdau://" + getId() + "/" + audioRe.cap( 3 ).toUtf8().data() + "\"" ).c_str() )
                   + newLink.replace( pos, audioRe.cap().length(), newTxt );
       }
 
@@ -1360,6 +1427,7 @@ QString & MdxDictionary::filterResource( QString const & articleId, QString & ar
 }
 #endif
 
+#ifdef USE_QTWEBKIT
 QString MdxDictionary::getCachedFileName( QString filename )
 {
   QDir dir;
@@ -1506,6 +1574,7 @@ void MdxDictionary::removeDirectory( QString const & directory )
 
   dir.rmdir( directory );
 }
+#endif // USE_QTWEBKIT
 
 static void addEntryToIndex( QString const & word, uint32_t offset, IndexedWords & indexedWords )
 {
