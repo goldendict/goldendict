@@ -192,8 +192,8 @@ unix:!mac {
     locale.files = locale/*.qm
     INSTALLS += target \
         locale
-    icons.path = $$PREFIX/share/pixmaps
-    icons.files = redist/icons/*.*
+    icons.path = $$PREFIX/share/icons/hicolor
+    icons.files = redist/icons/*
     INSTALLS += icons
     desktops.path = $$PREFIX/share/applications
     desktops.files = redist/*.desktop
