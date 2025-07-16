@@ -665,7 +665,7 @@ in the future, or register on the site to get your own key.</string>
             <string>Russian transliteration</string>
            </property>
            <property name="icon">
-            <iconset resource="flags.qrc">
+            <iconset resource="data/flags/flags.qrc">
              <normaloff>:/flags/ru.png</normaloff>:/flags/ru.png</iconset>
            </property>
           </widget>
@@ -676,7 +676,7 @@ in the future, or register on the site to get your own key.</string>
             <string>Greek transliteration</string>
            </property>
            <property name="icon">
-            <iconset resource="flags.qrc">
+            <iconset resource="data/flags/flags.qrc">
              <normaloff>:/flags/gr.png</normaloff>:/flags/gr.png</iconset>
            </property>
           </widget>
@@ -700,7 +700,7 @@ in the future, or register on the site to get your own key.</string>
             <string>German transliteration</string>
            </property>
            <property name="icon">
-            <iconset resource="flags.qrc">
+            <iconset resource="data/flags/flags.qrc">
              <normaloff>:/flags/de.png</normaloff>:/flags/de.png</iconset>
            </property>
           </widget>
@@ -711,7 +711,7 @@ in the future, or register on the site to get your own key.</string>
             <string>Belarusian transliteration</string>
            </property>
            <property name="icon">
-            <iconset resource="flags.qrc">
+            <iconset resource="data/flags/flags.qrc">
              <normaloff>:/flags/by.png</normaloff>:/flags/by.png</iconset>
            </property>
           </widget>
@@ -870,7 +870,7 @@ Not implemented yet in GoldenDict.</string>
   <tabstop>paths</tabstop>
  </tabstops>
  <resources>
-  <include location="flags.qrc"/>
+  <include location="data/flags/flags.qrc"/>
   <include location="data/icons/icons.qrc"/>
  </resources>
  <connections/>

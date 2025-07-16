@@ -1,16 +1,17 @@
 #!/bin/sh
 
-# This script generates ../flags.qrc based on the ../flags dir contents
+# This script generates ../data/flags/flags.qrc based on the ../data/flags dir contents
 
-cd ..
+GOLDENDICT_ROOT="${PWD}/.."
 
-OUT=flags.qrc
+FLAGS_DIR="${GOLDENDICT_ROOT}/data/flags"
+OUT="${FLAGS_DIR}/flags.qrc"
 
 echo "<RCC>" > $OUT
-echo "  <qresource>" >> $OUT
+echo "  <qresource prefix=\"/flags\">" >> $OUT
 
-for x in flags/*.png; do
-	echo "    <file>$x</file>" >> $OUT
+for x in "${FLAGS_DIR}"/*.png; do
+	echo "    <file>$(basename $x)</file>" >> $OUT
 done
 
 echo "  </qresource>" >> $OUT
