@@ -27,7 +27,7 @@ CONFIG( release, debug|release ) {
 }
 
 # DEPENDPATH += . generators
-INCLUDEPATH += .
+INCLUDEPATH += src
 
 QT += core \
       gui \
@@ -261,298 +261,298 @@ mac {
 DEFINES += PROGRAM_VERSION=\\\"$$VERSION\\\"
 
 # Input
-HEADERS += folding.hh \
-    inc_case_folding.hh \
-    inc_diacritic_folding.hh \
-    mainwindow.hh \
-    sptr.hh \
-    dictionary.hh \
-    ex.hh \
-    config.hh \
-    sources.hh \
-    utf8.hh \
-    file.hh \
-    bgl_babylon.hh \
-    bgl.hh \
-    initializing.hh \
-    article_netmgr.hh \
-    dictzip.h \
-    btreeidx.hh \
-    stardict.hh \
-    chunkedstorage.hh \
-    xdxf2html.hh \
-    iconv.hh \
-    lsa.hh \
-    htmlescape.hh \
-    dsl.hh \
-    dsl_details.hh \
-    filetype.hh \
-    fsencoding.hh \
-    groups.hh \
-    groups_widgets.hh \
-    instances.hh \
-    article_maker.hh \
-    scanpopup.hh \
-    articleview.hh \
-    audioplayerinterface.hh \
-    audioplayerfactory.hh \
-    ffmpegaudioplayer.hh \
-    multimediaaudioplayer.hh \
-    externalaudioplayer.hh \
-    externalviewer.hh \
-    wordfinder.hh \
-    groupcombobox.hh \
-    keyboardstate.hh \
-    mouseover.hh \
-    preferences.hh \
-    mutex.hh \
-    mediawiki.hh \
-    sounddir.hh \
-    hunspell.hh \
-    dictdfiles.hh \
-    audiolink.hh \
-    wstring.hh \
-    wstring_qt.hh \
-    processwrapper.hh \
-    hotkeywrapper.hh \
-    searchpanewidget.hh \
-    hotkeyedit.hh \
-    langcoder.hh \
-    editdictionaries.hh \
-    loaddictionaries.hh \
-    transliteration.hh \
-    romaji.hh \
-    belarusiantranslit.hh \
-    russiantranslit.hh \
-    german.hh \
-    website.hh \
-    orderandprops.hh \
-    language.hh \
-    dictionarybar.hh \
-    broken_xrecord.hh \
-    history.hh \
-    atomic_rename.hh \
-    articlewebview.hh \
-    zipfile.hh \
-    indexedzip.hh \
-    termination.hh \
-    greektranslit.hh \
-    webmultimediadownload.hh \
-    forvo.hh \
-    country.hh \
-    about.hh \
-    programs.hh \
-    parsecmdline.hh \
-    dictspanewidget.hh \
-    maintabwidget.hh \
-    mainstatusbar.hh \
-    gdappstyle.hh \
-    ufile.hh \
-    xdxf.hh \
-    sdict.hh \
-    decompress.hh \
-    aard.hh \
-    mruqmenu.hh \
-    dictinfo.hh \
-    zipsounds.hh \
-    stylescombobox.hh \
-    extlineedit.hh \
-    translatebox.hh \
-    historypanewidget.hh \
-    wordlist.hh \
-    mdictparser.hh \
-    mdx.hh \
-    voiceengines.hh \
-    ffmpegaudio.hh \
-    articleinspector.hh \
-    delegate.hh \
-    zim.hh \
-    categorized_logging.hh \
-    gddebug.hh \
-    qt4x5.hh \
-    gestures.hh \
-    tiff.hh \
-    dictheadwords.hh \
-    fulltextsearch.hh \
-    ftshelpers.hh \
-    dictserver.hh \
-    helpwindow.hh \
-    slob.hh \
-    ripemd.hh \
-    gls.hh \
-    splitfile.hh \
-    favoritespanewidget.hh \
-    cpp_features.hh \
-    treeview.hh
+HEADERS += src/folding.hh \
+    src/inc_case_folding.hh \
+    src/inc_diacritic_folding.hh \
+    src/mainwindow.hh \
+    src/sptr.hh \
+    src/dictionary.hh \
+    src/ex.hh \
+    src/config.hh \
+    src/sources.hh \
+    src/utf8.hh \
+    src/file.hh \
+    src/bgl_babylon.hh \
+    src/bgl.hh \
+    src/initializing.hh \
+    src/article_netmgr.hh \
+    src/dictzip.h \
+    src/btreeidx.hh \
+    src/stardict.hh \
+    src/chunkedstorage.hh \
+    src/xdxf2html.hh \
+    src/iconv.hh \
+    src/lsa.hh \
+    src/htmlescape.hh \
+    src/dsl.hh \
+    src/dsl_details.hh \
+    src/filetype.hh \
+    src/fsencoding.hh \
+    src/groups.hh \
+    src/groups_widgets.hh \
+    src/instances.hh \
+    src/article_maker.hh \
+    src/scanpopup.hh \
+    src/articleview.hh \
+    src/audioplayerinterface.hh \
+    src/audioplayerfactory.hh \
+    src/ffmpegaudioplayer.hh \
+    src/multimediaaudioplayer.hh \
+    src/externalaudioplayer.hh \
+    src/externalviewer.hh \
+    src/wordfinder.hh \
+    src/groupcombobox.hh \
+    src/keyboardstate.hh \
+    src/mouseover.hh \
+    src/preferences.hh \
+    src/mutex.hh \
+    src/mediawiki.hh \
+    src/sounddir.hh \
+    src/hunspell.hh \
+    src/dictdfiles.hh \
+    src/audiolink.hh \
+    src/wstring.hh \
+    src/wstring_qt.hh \
+    src/processwrapper.hh \
+    src/hotkeywrapper.hh \
+    src/searchpanewidget.hh \
+    src/hotkeyedit.hh \
+    src/langcoder.hh \
+    src/editdictionaries.hh \
+    src/loaddictionaries.hh \
+    src/transliteration.hh \
+    src/romaji.hh \
+    src/belarusiantranslit.hh \
+    src/russiantranslit.hh \
+    src/german.hh \
+    src/website.hh \
+    src/orderandprops.hh \
+    src/language.hh \
+    src/dictionarybar.hh \
+    src/broken_xrecord.hh \
+    src/history.hh \
+    src/atomic_rename.hh \
+    src/articlewebview.hh \
+    src/zipfile.hh \
+    src/indexedzip.hh \
+    src/termination.hh \
+    src/greektranslit.hh \
+    src/webmultimediadownload.hh \
+    src/forvo.hh \
+    src/country.hh \
+    src/about.hh \
+    src/programs.hh \
+    src/parsecmdline.hh \
+    src/dictspanewidget.hh \
+    src/maintabwidget.hh \
+    src/mainstatusbar.hh \
+    src/gdappstyle.hh \
+    src/ufile.hh \
+    src/xdxf.hh \
+    src/sdict.hh \
+    src/decompress.hh \
+    src/aard.hh \
+    src/mruqmenu.hh \
+    src/dictinfo.hh \
+    src/zipsounds.hh \
+    src/stylescombobox.hh \
+    src/extlineedit.hh \
+    src/translatebox.hh \
+    src/historypanewidget.hh \
+    src/wordlist.hh \
+    src/mdictparser.hh \
+    src/mdx.hh \
+    src/voiceengines.hh \
+    src/ffmpegaudio.hh \
+    src/articleinspector.hh \
+    src/delegate.hh \
+    src/zim.hh \
+    src/categorized_logging.hh \
+    src/gddebug.hh \
+    src/qt4x5.hh \
+    src/gestures.hh \
+    src/tiff.hh \
+    src/dictheadwords.hh \
+    src/fulltextsearch.hh \
+    src/ftshelpers.hh \
+    src/dictserver.hh \
+    src/helpwindow.hh \
+    src/slob.hh \
+    src/ripemd.hh \
+    src/gls.hh \
+    src/splitfile.hh \
+    src/favoritespanewidget.hh \
+    src/cpp_features.hh \
+    src/treeview.hh
 
-FORMS += groups.ui \
-    dictgroupwidget.ui \
-    mainwindow.ui \
-    sources.ui \
-    initializing.ui \
-    scanpopup.ui \
-    articleview.ui \
-    preferences.ui \
-    about.ui \
-    editdictionaries.ui \
-    orderandprops.ui \
-    dictinfo.ui \
-    dictheadwords.ui \
-    authentication.ui \
-    fulltextsearch.ui
+FORMS += src/groups.ui \
+    src/dictgroupwidget.ui \
+    src/mainwindow.ui \
+    src/sources.ui \
+    src/initializing.ui \
+    src/scanpopup.ui \
+    src/articleview.ui \
+    src/preferences.ui \
+    src/about.ui \
+    src/editdictionaries.ui \
+    src/orderandprops.ui \
+    src/dictinfo.ui \
+    src/dictheadwords.ui \
+    src/authentication.ui \
+    src/fulltextsearch.ui
 
-SOURCES += folding.cc \
-    main.cc \
-    dictionary.cc \
-    config.cc \
-    sources.cc \
-    mainwindow.cc \
-    utf8.cc \
-    file.cc \
-    bgl_babylon.cc \
-    bgl.cc \
-    initializing.cc \
-    article_netmgr.cc \
-    dictzip.c \
-    btreeidx.cc \
-    stardict.cc \
-    chunkedstorage.cc \
-    xdxf2html.cc \
-    iconv.cc \
-    lsa.cc \
-    htmlescape.cc \
-    dsl.cc \
-    dsl_details.cc \
-    filetype.cc \
-    fsencoding.cc \
-    groups.cc \
-    groups_widgets.cc \
-    instances.cc \
-    article_maker.cc \
-    scanpopup.cc \
-    articleview.cc \
-    audioplayerfactory.cc \
-    multimediaaudioplayer.cc \
-    externalaudioplayer.cc \
-    externalviewer.cc \
-    wordfinder.cc \
-    groupcombobox.cc \
-    keyboardstate.cc \
-    mouseover.cc \
-    preferences.cc \
-    mutex.cc \
-    mediawiki.cc \
-    sounddir.cc \
-    hunspell.cc \
-    dictdfiles.cc \
-    audiolink.cc \
-    wstring.cc \
-    wstring_qt.cc \
-    processwrapper.cc \
-    hotkeywrapper.cc \
-    hotkeyedit.cc \
-    langcoder.cc \
-    editdictionaries.cc \
-    loaddictionaries.cc \
-    transliteration.cc \
-    romaji.cc \
-    belarusiantranslit.cc \
-    russiantranslit.cc \
-    german.cc \
-    website.cc \
-    orderandprops.cc \
-    language.cc \
-    dictionarybar.cc \
-    broken_xrecord.cc \
-    history.cc \
-    atomic_rename.cc \
-    articlewebview.cc \
-    zipfile.cc \
-    indexedzip.cc \
-    termination.cc \
-    greektranslit.cc \
-    webmultimediadownload.cc \
-    forvo.cc \
-    country.cc \
-    about.cc \
-    programs.cc \
-    parsecmdline.cc \
-    maintabwidget.cc \
-    mainstatusbar.cc \
-    gdappstyle.cc \
-    ufile.cc \
-    xdxf.cc \
-    sdict.cc \
-    decompress.cc \
-    aard.cc \
-    mruqmenu.cc \
-    dictinfo.cc \
-    zipsounds.cc \
-    stylescombobox.cc \
-    extlineedit.cc \
-    translatebox.cc \
-    historypanewidget.cc \
-    wordlist.cc \
-    mdictparser.cc \
-    mdx.cc \
-    voiceengines.cc \
-    ffmpegaudio.cc \
-    articleinspector.cc \
-    delegate.cc \
-    zim.cc \
-    gddebug.cc \
-    gestures.cc \
-    tiff.cc \
-    dictheadwords.cc \
-    fulltextsearch.cc \
-    ftshelpers.cc \
-    dictserver.cc \
-    helpwindow.cc \
-    slob.cc \
-    ripemd.cc \
-    gls.cc \
-    splitfile.cc \
-    favoritespanewidget.cc \
-    treeview.cc
+SOURCES += src/folding.cc \
+    src/main.cc \
+    src/dictionary.cc \
+    src/config.cc \
+    src/sources.cc \
+    src/mainwindow.cc \
+    src/utf8.cc \
+    src/file.cc \
+    src/bgl_babylon.cc \
+    src/bgl.cc \
+    src/initializing.cc \
+    src/article_netmgr.cc \
+    src/dictzip.c \
+    src/btreeidx.cc \
+    src/stardict.cc \
+    src/chunkedstorage.cc \
+    src/xdxf2html.cc \
+    src/iconv.cc \
+    src/lsa.cc \
+    src/htmlescape.cc \
+    src/dsl.cc \
+    src/dsl_details.cc \
+    src/filetype.cc \
+    src/fsencoding.cc \
+    src/groups.cc \
+    src/groups_widgets.cc \
+    src/instances.cc \
+    src/article_maker.cc \
+    src/scanpopup.cc \
+    src/articleview.cc \
+    src/audioplayerfactory.cc \
+    src/multimediaaudioplayer.cc \
+    src/externalaudioplayer.cc \
+    src/externalviewer.cc \
+    src/wordfinder.cc \
+    src/groupcombobox.cc \
+    src/keyboardstate.cc \
+    src/mouseover.cc \
+    src/preferences.cc \
+    src/mutex.cc \
+    src/mediawiki.cc \
+    src/sounddir.cc \
+    src/hunspell.cc \
+    src/dictdfiles.cc \
+    src/audiolink.cc \
+    src/wstring.cc \
+    src/wstring_qt.cc \
+    src/processwrapper.cc \
+    src/hotkeywrapper.cc \
+    src/hotkeyedit.cc \
+    src/langcoder.cc \
+    src/editdictionaries.cc \
+    src/loaddictionaries.cc \
+    src/transliteration.cc \
+    src/romaji.cc \
+    src/belarusiantranslit.cc \
+    src/russiantranslit.cc \
+    src/german.cc \
+    src/website.cc \
+    src/orderandprops.cc \
+    src/language.cc \
+    src/dictionarybar.cc \
+    src/broken_xrecord.cc \
+    src/history.cc \
+    src/atomic_rename.cc \
+    src/articlewebview.cc \
+    src/zipfile.cc \
+    src/indexedzip.cc \
+    src/termination.cc \
+    src/greektranslit.cc \
+    src/webmultimediadownload.cc \
+    src/forvo.cc \
+    src/country.cc \
+    src/about.cc \
+    src/programs.cc \
+    src/parsecmdline.cc \
+    src/maintabwidget.cc \
+    src/mainstatusbar.cc \
+    src/gdappstyle.cc \
+    src/ufile.cc \
+    src/xdxf.cc \
+    src/sdict.cc \
+    src/decompress.cc \
+    src/aard.cc \
+    src/mruqmenu.cc \
+    src/dictinfo.cc \
+    src/zipsounds.cc \
+    src/stylescombobox.cc \
+    src/extlineedit.cc \
+    src/translatebox.cc \
+    src/historypanewidget.cc \
+    src/wordlist.cc \
+    src/mdictparser.cc \
+    src/mdx.cc \
+    src/voiceengines.cc \
+    src/ffmpegaudio.cc \
+    src/articleinspector.cc \
+    src/delegate.cc \
+    src/zim.cc \
+    src/gddebug.cc \
+    src/gestures.cc \
+    src/tiff.cc \
+    src/dictheadwords.cc \
+    src/fulltextsearch.cc \
+    src/ftshelpers.cc \
+    src/dictserver.cc \
+    src/helpwindow.cc \
+    src/slob.cc \
+    src/ripemd.cc \
+    src/gls.cc \
+    src/splitfile.cc \
+    src/favoritespanewidget.cc \
+    src/treeview.cc
 
 win32 {
-    FORMS   += texttospeechsource.ui
-    SOURCES += mouseover_win32/ThTypes.c \
-               wordbyauto.cc \
-               guids.c \
-               x64.cc \
-               speechclient_win.cc \
-               texttospeechsource.cc \
-               speechhlp.cc
-    HEADERS += mouseover_win32/ThTypes.h \
-               wordbyauto.hh \
-               uiauto.hh \
-               x64.hh \
-               texttospeechsource.hh \
-               sapi.hh \
-               sphelper.hh \
-               speechclient.hh \
-               speechhlp.hh \
-               hotkeys.h
+    FORMS   += src/texttospeechsource.ui
+    SOURCES += src/mouseover_win32/ThTypes.c \
+               src/wordbyauto.cc \
+               src/guids.c \
+               src/x64.cc \
+               src/speechclient_win.cc \
+               src/texttospeechsource.cc \
+               src/speechhlp.cc
+    HEADERS += src/mouseover_win32/ThTypes.h \
+               src/wordbyauto.hh \
+               src/uiauto.hh \
+               src/x64.hh \
+               src/texttospeechsource.hh \
+               src/sapi.hh \
+               src/sphelper.hh \
+               src/speechclient.hh \
+               src/speechhlp.hh \
+               src/hotkeys.h
 }
 
 mac {
-    HEADERS += macmouseover.hh \
-               texttospeechsource.hh \
-               speechclient.hh
-    FORMS   += texttospeechsource.ui
-    SOURCES += texttospeechsource.cc
+    HEADERS += src/macmouseover.hh \
+               src/texttospeechsource.hh \
+               src/speechclient.hh
+    FORMS   += src/texttospeechsource.ui
+    SOURCES += src/texttospeechsource.cc
 }
 
 unix:!mac {
-    HEADERS += scanflag.hh
-    FORMS   += scanflag.ui
-    SOURCES += scanflag.cc
+    HEADERS += src/scanflag.hh
+    FORMS   += src/scanflag.ui
+    SOURCES += src/scanflag.cc
 }
 
 greaterThan(QT_MAJOR_VERSION, 4) {
-    HEADERS += wildcard.hh
-    SOURCES += wildcard.cc
+    HEADERS += src/wildcard.hh
+    SOURCES += src/wildcard.cc
 }
 
 CONFIG( zim_support ) {
@@ -570,22 +570,22 @@ CONFIG( no_epwing_support ) {
 }
 
 !CONFIG( no_epwing_support ) {
-  HEADERS += epwing.hh \
-             epwing_book.hh \
-             epwing_charmap.hh
-  SOURCES += epwing.cc \
-             epwing_book.cc \
-             epwing_charmap.cc
+  HEADERS += src/epwing.hh \
+             src/epwing_book.hh \
+             src/epwing_charmap.hh
+  SOURCES += src/epwing.cc \
+             src/epwing_book.cc \
+             src/epwing_charmap.cc
   LIBS += -leb
 }
 
 CONFIG( chinese_conversion_support ) {
   DEFINES += MAKE_CHINESE_CONVERSION_SUPPORT
-  FORMS   += chineseconversion.ui
-  HEADERS += chinese.hh \
-             chineseconversion.hh
-  SOURCES += chinese.cc \
-             chineseconversion.cc
+  FORMS   += src/chineseconversion.ui
+  HEADERS += src/chinese.hh \
+             src/chineseconversion.hh
+  SOURCES += src/chinese.cc \
+             src/chineseconversion.cc
   win32-msvc* {
     Debug:   LIBS += -lopenccd
     Release: LIBS += -lopencc
