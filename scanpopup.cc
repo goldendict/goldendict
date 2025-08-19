@@ -152,7 +152,9 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.translateBox->wordList(), SIGNAL( statusBarMessage( QString const &, int, QPixmap const & ) ),
            this, SLOT( showStatusBarMessage( QString const &, int, QPixmap const & ) ) );
 
-  ui.pronounceButton->hide();
+  ui.pronounceButton->setToolTip( pronounceActionTexts.textFor( AudioPlayerInterface::StoppedState ) );
+  audioPlayerUi.reset( new AudioPlayerUi< QToolButton >( *ui.pronounceButton, &QToolButton::setVisible ) );
+  audioPlayerUi->setPlayable( false );
 
   ui.groupList->fill( groups );
   ui.groupList->setCurrentGroup( cfg.lastPopupGroupId );
@@ -522,6 +524,18 @@ void ScanPopup::translateWord( QString const & word )
       );
 }
 
+void ScanPopup::setPlaybackState( AudioPlayerInterface::State state )
+{
+  audioPlayerUi->setPlaybackState( state );
+
+  QString const & newToolTip = pronounceActionTexts.textFor( state );
+  // The same state - Stopped - is often set repeatedly.
+  // Unfortunately QWidget::setToolTip() doesn't check for string equality and
+  // always sends a ToolTipChange event. Let us optimize for our use case manually.
+  if( ui.pronounceButton->toolTip() != newToolTip )
+    ui.pronounceButton->setToolTip( newToolTip );
+}
+
 #ifdef HAVE_X11
 void ScanPopup::delayShow()
 {
@@ -829,7 +843,7 @@ void ScanPopup::translateInputFinished()
 
 void ScanPopup::showTranslationFor( Config::InputPhrase const & inputPhrase )
 {
-  ui.pronounceButton->hide();
+  audioPlayerUi->setPlayable( false );
 
   unsigned groupId = ui.groupList->getCurrentGroup();
   definition->showDefinition( inputPhrase, groupId );
@@ -1105,9 +1119,15 @@ void ScanPopup::prefixMatchFinished()
   }
 }
 
-void ScanPopup::on_pronounceButton_clicked()
+void ScanPopup::on_pronounceButton_clicked( bool checked )
 {
-  definition->playSound();
+  if( checked )
+  {
+    if( !definition->playSound() ) // This pronunciation request failed before reaching the audio player.
+      ui.pronounceButton->setChecked( false ); // This is the only opportunity to fix the checked state.
+  }
+  else
+    definition->stopPlayback();
 }
 
 void ScanPopup::pinButtonClicked( bool checked )
@@ -1190,7 +1210,7 @@ void ScanPopup::altModePoll()
 
 void ScanPopup::pageLoaded( ArticleView * )
 {
-  ui.pronounceButton->setVisible( definition->hasSound() );
+  audioPlayerUi->setPlayable( definition->hasSound() );
 
   updateBackForwardButtons();
 

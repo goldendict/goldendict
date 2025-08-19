@@ -5,11 +5,15 @@
 #define __SCANPOPUP_HH_INCLUDED__
 
 #include "article_netmgr.hh"
+#include "audioplayerinterface.hh"
+#include "audioplayerui.hh"
 #include "articleview.hh"
 #include "wordfinder.hh"
 #include "keyboardstate.hh"
 #include "config.hh"
 #include "ui_scanpopup.h"
+#include <QScopedPointer>
+#include <QToolButton>
 #include <QDialog>
 #include <QClipboard>
 #include "history.hh"
@@ -49,6 +53,8 @@ public:
   void applyWordsZoomLevel();
   /// Translate the word
   void translateWord( QString const & word );
+
+  void setPlaybackState( AudioPlayerInterface::State state );
 
   void setDictionaryIconSize();
 
@@ -139,6 +145,8 @@ private:
   Config::Events configEvents;
   DictionaryBar dictionaryBar;
   MainStatusBar * mainStatusBar;
+  QScopedPointer< AudioPlayerUi< QToolButton > > audioPlayerUi;
+  PronounceActionTexts pronounceActionTexts;
   /// Fonts saved before words zooming is in effect, so it could be reset back.
   QFont wordListDefaultFont, translateLineDefaultFont, groupListDefaultFont;
 
@@ -198,7 +206,7 @@ private slots:
   void mouseHovered( QString const & , bool forcePopup);
   void currentGroupChanged( QString const & );
   void prefixMatchFinished();
-  void on_pronounceButton_clicked();
+  void on_pronounceButton_clicked( bool checked );
   void pinButtonClicked( bool checked );
   void on_showDictionaryBar_clicked( bool checked );
   void showStatusBarMessage ( QString const &, int, QPixmap const & );
