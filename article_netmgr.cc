@@ -460,9 +460,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
 
     string id = url.host().toStdString();
 
-    bool search = ( id == "search" );
-
-    if ( !search )
+    if ( !Dictionary::ResourceSearch::isSearchHost( url.host() ) )
     {
       for( unsigned x = 0; x < dictionaries.size(); ++x )
         if ( dictionaries[ x ]->getId() == id )

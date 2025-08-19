@@ -256,6 +256,24 @@ enum Feature
 Q_DECLARE_FLAGS( Features, Feature )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Features )
 
+namespace ResourceSearch {
+
+enum Type { NoSearch, LsaType, XdxfType };
+
+inline char const * lsaTypeName()
+{ return "search_lsa"; }
+
+inline char const * xdxfTypeName()
+{ return "search_xdxf"; }
+
+inline Type hostType( QString const & host )
+{ return host == lsaTypeName() ? LsaType : host == xdxfTypeName() ? XdxfType : NoSearch; }
+
+inline bool isSearchHost( QString const & host )
+{ return hostType( host ) != NoSearch; }
+
+}
+
 /// A dictionary. Can be used to query words.
 class Class
 {
@@ -295,6 +313,9 @@ public:
   /// in background.
   /// The default implementation does nothing.
   virtual void deferredInit();
+
+  virtual ResourceSearch::Type getResourceSearchType() const
+  { return ResourceSearch::NoSearch; }
 
   /// Returns the dictionary's id.
   string getId() throw()
