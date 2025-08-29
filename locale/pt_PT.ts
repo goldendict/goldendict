@@ -2173,7 +2173,7 @@ Assigning a global keyboard shortcut to the &quot;goldendict --toggle-scan-popup
     <message>
         <location filename="../language.cc" line="186"/>
         <source>Portuguese</source>
-        <translation>Português brasileiro</translation>
+        <translation>Português</translation>
     </message>
     <message>
         <location filename="../language.cc" line="187"/>
