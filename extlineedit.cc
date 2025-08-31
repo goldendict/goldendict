@@ -9,8 +9,13 @@
 #include <QPropertyAnimation>
 #endif
 
+QPixmap ExtLineEdit::scaledForButtonPixmap( QPixmap const & pixmap )
+{
+  return pixmap.scaled( 18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+}
+
 ExtLineEdit::ExtLineEdit(QWidget *parent) :
-    QLineEdit(parent)
+    QLineEdit(parent), altLeftPixmapVisible( false )
 {
 
   for (int i = 0; i < 2; ++i) {
@@ -58,6 +63,34 @@ void ExtLineEdit::setButtonAutoHide(Side side, bool autohide)
     {
       iconButtons[side]->setOpacity( 1.0 );
     }
+}
+
+void ExtLineEdit::setAlternativeLeftPixmap( QPixmap const & pixmap )
+{
+  Q_ASSERT( pixmap.size() == iconButtons[ Left ]->pixmap().size() );
+
+  if( altLeftPixmapVisible )
+  {
+    // altLeftPixmap is currently swapped with the left button pixmap => set as the left button pixmap.
+    // No need to update margins or button positions because the pixmap size is unchanged.
+    iconButtons[ Left ]->setPixmap( pixmap );
+  }
+  else
+    altLeftPixmap = pixmap;
+}
+
+void ExtLineEdit::setAlternativeLeftPixmapVisible( bool visible )
+{
+  Q_ASSERT( !altLeftPixmap.isNull() );
+
+  if( altLeftPixmapVisible == visible )
+    return; // no change
+  altLeftPixmapVisible = visible;
+
+  // Swap altLeftPixmap and the left button pixmap.
+  QPixmap tmp = iconButtons[ Left ]->pixmap();
+  iconButtons[ Left ]->setPixmap( altLeftPixmap );
+  altLeftPixmap.swap( tmp );
 }
 
 void ExtLineEdit::updateButtons(QString text)
@@ -129,15 +162,19 @@ void ExtLineEdit::resizeEvent(QResizeEvent *)
 
 void ExtLineEdit::setButtonPixmap(Side side, const QPixmap &buttonPixmap)
 {
+  Q_ASSERT( side == Right || altLeftPixmap.isNull() || buttonPixmap.size() == altLeftPixmap.size() );
+
+  if( altLeftPixmapVisible && side == Left )
+  {
+    // altLeftPixmap is currently swapped with the left button pixmap => assign to altLeftPixmap.
+    altLeftPixmap = buttonPixmap;
+    return;
+  }
+
     iconButtons[side]->setPixmap(buttonPixmap);
     updateMargins();
     updateButtonPositions();
     update();
-}
-
-QPixmap ExtLineEdit::buttonPixmap(Side side) const
-{
-    return pixmaps[side];
 }
 
 void ExtLineEdit::setButtonToolTip(Side side, const QString &tip)

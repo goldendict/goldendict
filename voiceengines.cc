@@ -98,9 +98,9 @@ sptr< Dictionary::DataRequest > VoiceEnginesDictionary::getArticle(
 
   string encodedUrl = url.toEncoded().data();
   string ref = string( "\"" ) + encodedUrl + "\"";
-  result += addAudioLink( ref, getId() );
+  result += addAudioLink( ref );
 
-  result += "<td><a href=" + ref + "><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+  result += "<td><a href=" + ref + "><img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
   result += "<td><a href=" + ref + ">" + Html::escape( wordUtf8 ) + "</a></td>";
   result += "</tr></table>";
 

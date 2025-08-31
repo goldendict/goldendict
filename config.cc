@@ -91,6 +91,18 @@ namespace
     return result;
   }
 
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  QString getDataDirPath()
+  {
+    return isPortableVersion() ? portableHomeDirPath()
+#ifdef XDG_BASE_DIRECTORY_COMPLIANCE
+                               : getDataDir().path();
+#else
+                               : QStandardPaths::writableLocation( QStandardPaths::DataLocation );
+#endif
+  }
+#endif // QT_VERSION
+
 }
 
 ProxyServer::ProxyServer(): enabled( false ), useSystemProxy( false ), type( Socks5 ), port( 3128 )
@@ -257,6 +269,7 @@ Preferences::Preferences():
   hideGoldenDictHeader( false ),
   maxNetworkCacheSize( 50 ),
   clearNetworkCacheOnExit( true ),
+  offTheRecordWebProfile( true ),
   zoomFactor( 1 ),
   helpZoomFactor( 1 ),
   wordsZoomLevel( 0 ),
@@ -960,6 +973,9 @@ Class load() THROW_SPEC( exError )
 
     if ( !preferences.namedItem( "clearNetworkCacheOnExit" ).isNull() )
       c.preferences.clearNetworkCacheOnExit = ( preferences.namedItem( "clearNetworkCacheOnExit" ).toElement().text() == "1" );
+
+    if ( !preferences.namedItem( "offTheRecordWebProfile" ).isNull() )
+      c.preferences.offTheRecordWebProfile = ( preferences.namedItem( "offTheRecordWebProfile" ).toElement().text() == "1" );
 
     if ( !preferences.namedItem( "maxStringsInHistory" ).isNull() )
       c.preferences.maxStringsInHistory = preferences.namedItem( "maxStringsInHistory" ).toElement().text().toUInt() ;
@@ -1940,6 +1956,10 @@ void save( Class const & c ) THROW_SPEC( exError )
     opt.appendChild( dd.createTextNode( c.preferences.clearNetworkCacheOnExit ? "1" : "0" ) );
     preferences.appendChild( opt );
 
+    opt = dd.createElement( "offTheRecordWebProfile" );
+    opt.appendChild( dd.createTextNode( c.preferences.offTheRecordWebProfile ? "1" : "0" ) );
+    preferences.appendChild( opt );
+
     opt = dd.createElement( "maxStringsInHistory" );
     opt.appendChild( dd.createTextNode( QString::number( c.preferences.maxStringsInHistory ) ) );
     preferences.appendChild( opt );
@@ -2410,5 +2430,35 @@ QString getNetworkCacheDir() throw()
 {
   return getCacheDir() + "/network";
 }
+
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+
+static bool replaceLocationIn( QString & path, QString const & location, QString const & replacement )
+{
+  if( !path.startsWith( location ) )
+  {
+    gdWarning( "The path %s does not start with the expected location %s",
+               path.toUtf8().constData(), replacement.toUtf8().constData() );
+    return false;
+  }
+
+  if( replacement == location )
+    return false; // nothing to do
+
+  path.replace( 0, location.size(), replacement );
+  return true;
+}
+
+bool replaceWritableCacheLocationIn( QString & path )
+{
+  return replaceLocationIn( path, QStandardPaths::writableLocation( QStandardPaths::CacheLocation ), getCacheDir() );
+}
+
+bool replaceWritableDataLocationIn( QString & path )
+{
+  return replaceLocationIn( path, QStandardPaths::writableLocation( QStandardPaths::DataLocation ), getDataDirPath() );
+}
+
+#endif // QT_VERSION
 
 }

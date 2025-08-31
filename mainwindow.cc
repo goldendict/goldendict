@@ -10,6 +10,7 @@
 #include "loaddictionaries.hh"
 #include "preferences.hh"
 #include "about.hh"
+#include "article_urlschemehandler.hh"
 #include "mruqmenu.hh"
 #include "gestures.hh"
 #include "dictheadwords.hh"
@@ -21,23 +22,22 @@
 #include <QMessageBox>
 #include <QIcon>
 #include <QList>
+#include <QSet>
 #include <QToolBar>
 #include <QCloseEvent>
 #include <QDesktopServices>
 #include <QProcess>
-#include <QCryptographicHash>
 #include <QFileDialog>
 #include <QPrinter>
 #include <QPageSetupDialog>
 #include <QPrintPreviewDialog>
 #include <QPrintDialog>
+#include <QProgressDialog>
 #include <QRunnable>
 #include <QThreadPool>
 #include <QSslConfiguration>
 
 #include <limits.h>
-#include <set>
-#include <map>
 #include "gddebug.hh"
 
 #include "dictinfo.hh"
@@ -46,6 +46,13 @@
 #include "qt4x5.hh"
 #include <QDesktopWidget>
 #include "ui_authentication.h"
+
+#ifndef USE_QTWEBKIT
+#include <QPointer>
+#include <QVersionNumber>
+#include <QWebEngineProfile>
+#include <QWebEngineSettings>
+#endif
 
 #ifdef Q_OS_MAC
 #include "lionsupport.h"
@@ -71,10 +78,7 @@
 
 #define MIN_THREAD_COUNT 4
 
-using std::set;
 using std::wstring;
-using std::map;
-using std::pair;
 
 namespace {
 
@@ -93,6 +97,99 @@ public:
   { return QSize( 1, 1 ); }
 };
 #endif
+
+#ifndef USE_QTWEBKIT
+/// Both compile-time and run-time Qt WebEngine versions may and often do differ from the corresponding
+/// Qt versions. That's because building Qt WebEngine with earlier Qt versions is officially supported.
+/// Patch releases of Qt WebEngine are available as free software and are packaged by GNU/Linux
+/// distributions a year before the patch releases of the corresponding LTS (e.g. 5.15.x) Qt versions.
+QVersionNumber runTimeQtWebEngineVersion( QWebEngineProfile const & webEngineProfile )
+{
+#if QT_VERSION >= QT_VERSION_CHECK( 6, 2, 0 )
+  Q_UNUSED( webEngineProfile )
+  return QVersionNumber::fromString( QLatin1String{ qWebEngineVersion() } );
+#else
+  QString const httpUserAgent = webEngineProfile.httpUserAgent();
+  // httpUserAgent should contain a substring like "QtWebEngine/5.15.10 ". The "5.15.10" part
+  // equals the run-time version of Qt WebEngine. The code below extracts this version.
+
+  QLatin1String const prefix( "QtWebEngine/" );
+  auto webEngineVersionIndex = httpUserAgent.indexOf( prefix );
+  if( webEngineVersionIndex == -1 )
+  {
+    gdWarning( "Failed to parse the Qt WebEngine profile's HTTP User-Agent string: %s",
+               qUtf8Printable( httpUserAgent ) );
+    return QVersionNumber();
+  }
+  webEngineVersionIndex += prefix.size();
+
+  return QVersionNumber::fromString( QStringView{ httpUserAgent }.mid( webEngineVersionIndex ) );
+#endif
+}
+
+StreamingDeviceWorkarounds computeStreamingDeviceWorkarounds( QWebEngineProfile const & webEngineProfile )
+{
+  auto const webEngineVersion = runTimeQtWebEngineVersion( webEngineProfile );
+  if( webEngineVersion.isNull() )
+    return StreamingDeviceWorkarounds::None; // This must be a future version => probably no need for the workarounds.
+
+#if QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 )
+  if( webEngineVersion >= QVersionNumber( 6, 4, 1 ) )
+    return StreamingDeviceWorkarounds::None;
+  if( webEngineVersion >= QVersionNumber( 6, 4, 0 ) )
+    return StreamingDeviceWorkarounds::AtEndOnly;
+#else
+  if( webEngineVersion >= QVersionNumber( 5, 15, 11 ) )
+    return StreamingDeviceWorkarounds::AtEndOnly;
+#endif
+  return StreamingDeviceWorkarounds::AtEndAndReadData;
+}
+
+void setWebEngineProfilePaths( QWebEngineProfile & webEngineProfile )
+{
+  Q_ASSERT( !webEngineProfile.isOffTheRecord() );
+
+  QString cachePath = webEngineProfile.cachePath();
+  if( Config::replaceWritableCacheLocationIn( cachePath ) )
+    webEngineProfile.setCachePath( cachePath );
+
+  QString persistentStoragePath = webEngineProfile.persistentStoragePath();
+  if( Config::replaceWritableDataLocationIn( persistentStoragePath ) )
+    webEngineProfile.setPersistentStoragePath( persistentStoragePath );
+}
+
+void setupWebEngineProfile( QWebEngineProfile & webEngineProfile, ArticleNetworkAccessManager & articleNetMgr )
+{
+  // TODO (Qt WebEngine): should the maximum size of the HTTP cache and whether
+  // it is cleared on exit be configurable similarly to the network cache?
+
+  // TODO (Qt WebEngine): in the Qt WebEngine version articleNetMgr's cache is useful only for downloaded files,
+  // because the page itself is stored separately in the Qt WebEngine profile's cache. In the interest of
+  // reusing the Qt WebEngine profile's cache for both loading pages and downloading files,
+  // Dictionary::WebMultimediaDownload could call QWebEnginePage::download() instead of
+  // QNetworkAccessManager::get() to retrieve files from network. articleNetMgr's cache would become
+  // practically useless then and could be restricted to the Qt WebKit version along with its configuration UI.
+  // QWebEnginePage::download() always stores the downloaded data in a file. A QNetworkReply returned by
+  // QNetworkAccessManager::get() stores the downloaded data in a buffer. This cache reuse requires substantial
+  // refactoring to avoid the overhead of unnecessary reading from and writing to a file, because the users of
+  // WebMultimediaDownload access the data via the DataRequest interface and store it into a file, except for
+  // pronouncing of an external audio link, which passes DataRequest::data to AudioPlayerInterface::play().
+  // This refactoring should eliminate existing code duplication between ArticleView::resourceDownloadFinished()
+  // and ResourceToSaveHandler::downloadFinished() as well as fix minor issues in these functions along the way.
+
+  // TODO (Qt WebEngine): should the configuration UI allow disabling persistent cookies?
+  // Cookies are never stored on disk in the Qt WebKit version according to the documentation for QNetworkCookieJar:
+  // > QNetworkCookieJar does not implement permanent storage: it only keeps the cookies in memory. Once the
+  // > QNetworkCookieJar object is deleted, all cookies it held will be discarded as well. If you want to save the
+  // > cookies, you should derive from this class and implement the saving to disk to your own storage format.
+  // Should the persistent cookies be disabled by default in the Qt WebEngine version too?
+
+  articleNetMgr.setStreamingDeviceWorkarounds( computeStreamingDeviceWorkarounds( webEngineProfile ) );
+
+  auto * const handler = new ArticleUrlSchemeHandler( articleNetMgr );
+  handler->install( webEngineProfile );
+}
+#endif // USE_QTWEBKIT
 
 } // unnamed namespace
 
@@ -133,8 +230,7 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   cfg( cfg_ ),
   history( History::Load(), cfg_.preferences.maxStringsInHistory, cfg_.maxHeadwordSize ),
   dictionaryBar( this, configEvents, cfg.editDictionaryCommandLine, cfg.preferences.maxDictionaryRefsInContextMenu ),
-  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle,
-                cfg.preferences.addonStyle ),
+  articleMaker( dictionaries, groupInstances, cfg.preferences.displayStyle, cfg.preferences.addonStyle, this ),
   articleNetMgr( this, dictionaries, articleMaker,
                  cfg.preferences.disallowContentFromOtherSites, cfg.preferences.hideGoldenDictHeader ),
   dictNetMgr( this ),
@@ -314,6 +410,9 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setTitleBarWidget( &searchPaneTitleBar );
   connect( ui.searchPane->toggleViewAction(), SIGNAL( triggered( bool ) ),
            this, SLOT( updateSearchPaneAndBar( bool ) ) );
+
+  // Bind the loading indicator's height to the translate line's height to prevent UI shifts on loading state changes.
+  ui.loadingIndicatorLabel->setSameHeightWidget( ui.translateLine );
 
   if ( cfg.preferences.searchInDock )
   {
@@ -782,7 +881,6 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
   ui.searchPane->setVisible( cfg.preferences.searchInDock );
 
   applyProxySettings();
-  applyWebSettings();
 
   connect( &dictNetMgr, SIGNAL( proxyAuthenticationRequired( QNetworkProxy, QAuthenticator * ) ),
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
@@ -791,6 +889,20 @@ MainWindow::MainWindow( Config::Class & cfg_ ):
            this, SLOT( proxyAuthentication( QNetworkProxy, QAuthenticator * ) ) );
 
   setupNetworkCache( cfg.preferences.maxNetworkCacheSize );
+
+#ifndef USE_QTWEBKIT
+  if( cfg.preferences.offTheRecordWebProfile )
+    webEngineProfile.reset( new QWebEngineProfile{} );
+  else
+  {
+    webEngineProfile.reset( new QWebEngineProfile{ QStringLiteral( "Article" ) } );
+    setWebEngineProfilePaths( *webEngineProfile );
+  }
+  setupWebEngineProfile( *webEngineProfile, articleNetMgr );
+  ArticleView::initProfilePreferences( *webEngineProfile, cfg.preferences );
+#endif
+
+  applyWebSettings();
 
   makeDictionaries();
 
@@ -995,6 +1107,7 @@ void MainWindow::updateSearchPaneAndBar( bool searchInDock )
 
   updateGroupList();
   applyWordsZoomLevel();
+  updateIsPageLoading();
 
   setTranslateBoxTextAndKeepSuffix( text, WildcardsAreAlreadyEscaped, DisablePopup );
   focusTranslateLine();
@@ -1119,6 +1232,9 @@ void MainWindow::commitData()
 
     if( scanPopup.get() )
       scanPopup->saveConfigData();
+
+    for( int i = 0, count = ui.tabWidget->count(); i < count; ++i )
+      qobject_cast< ArticleView const * >( ui.tabWidget->widget( i ) )->saveConfigData();
 
     // Save any changes in last chosen groups etc
     try
@@ -1337,9 +1453,14 @@ void MainWindow::applyProxySettings()
 
 void MainWindow::applyWebSettings()
 {
+#ifdef USE_QTWEBKIT
   QWebSettings *defaultSettings = QWebSettings::globalSettings();
   defaultSettings->setAttribute(QWebSettings::PluginsEnabled, cfg.preferences.enableWebPlugins);
   defaultSettings->setAttribute( QWebSettings::DeveloperExtrasEnabled, true );
+#else
+  auto * const settings = webEngineProfile->settings();
+  settings->setAttribute( QWebEngineSettings::PluginsEnabled, cfg.preferences.enableWebPlugins );
+#endif
 }
 
 void MainWindow::setupNetworkCache( int maxSize )
@@ -1506,7 +1627,11 @@ void MainWindow::makeScanPopup()
        !cfg.preferences.enableClipboardHotkey )
     return;
 
-  scanPopup = new ScanPopup( 0, cfg, articleNetMgr, audioPlayerFactory.player(),
+  scanPopup = new ScanPopup( 0, cfg, articleNetMgr,
+#ifndef USE_QTWEBKIT
+                             *webEngineProfile,
+#endif
+                             audioPlayerFactory.player(),
                              dictionaries, groupInstances, history );
 
   scanPopup->setStyleSheet( styleSheet() );
@@ -1663,7 +1788,11 @@ void MainWindow::addNewTab()
 ArticleView * MainWindow::createNewTab( bool switchToIt,
                                         QString const & name )
 {
-  ArticleView * view = new ArticleView( this, articleNetMgr, audioPlayerFactory.player(),
+  ArticleView * view = new ArticleView( this, articleNetMgr,
+#ifndef USE_QTWEBKIT
+                                        *webEngineProfile,
+#endif
+                                        audioPlayerFactory.player(),
                                         dictionaries, groupInstances, false, cfg,
                                         *ui.searchInPageAction,
                                         dictionaryBar.toggleViewAction(),
@@ -1675,14 +1804,26 @@ ArticleView * MainWindow::createNewTab( bool switchToIt,
   connect( view, SIGNAL( iconChanged( ArticleView *, QIcon const & ) ),
            this, SLOT( iconChanged( ArticleView *, QIcon const & ) ) );
 
+  connect( view, SIGNAL( pageLoadingStateChanged( ArticleView *, bool ) ),
+           this, SLOT( pageLoadingStateChanged( ArticleView *, bool ) ) );
+
+  connect( view, SIGNAL( canGoBackForwardChanged( ArticleView * ) ),
+           this, SLOT( canGoBackForwardChanged( ArticleView * ) ) );
+
+  connect( view, SIGNAL( pageUnloaded( ArticleView * ) ),
+           this, SLOT( pageUnloaded( ArticleView * ) ) );
+
+  connect( view, SIGNAL( articleLoaded( ArticleView *, QString const &, bool ) ),
+           this, SLOT( articleLoaded( ArticleView *, QString const &, bool ) ) );
+
   connect( view, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
   connect( view, SIGNAL( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ),
            this, SLOT( openLinkInNewTab( QUrl const &, QUrl const &, QString const &, ArticleView::Contexts const & ) ) );
 
-  connect( view, SIGNAL( showDefinitionInNewTab( QString const &, unsigned, QString const &, ArticleView::Contexts const & ) ),
-           this, SLOT( showDefinitionInNewTab( QString const &, unsigned, QString const &, ArticleView::Contexts const & ) ) );
+  connect( view, SIGNAL( showDefinitionInNewTab( Config::InputPhrase const &, unsigned, QString const &, ArticleView::Contexts const & ) ),
+           this, SLOT( showDefinitionInNewTab( Config::InputPhrase const &, unsigned, QString const &, ArticleView::Contexts const & ) ) );
 
   connect( view, SIGNAL( typingEvent( QString const & ) ),
            this, SLOT( typingEvent( QString const & ) ) );
@@ -1865,12 +2006,7 @@ void MainWindow::titleChanged( ArticleView * view, QString const & title )
 {
   QString escaped = title;
   escaped.replace( "&", "&&" );
-
-  if( escaped.isRightToLeft() )
-  {
-    escaped.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
-    escaped.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
-  }
+  Folding::prepareToEmbedRTL( escaped );
 
   int index = ui.tabWidget->indexOf( view );
   ui.tabWidget->setTabText( index, escaped );
@@ -1913,16 +2049,50 @@ void MainWindow::updateWindowTitle()
     QString str = view->getTitle();
     if( !str.isEmpty() )
     {
-      if( str.isRightToLeft() )
+      if( blockUpdateWindowTitle )
       {
-        str.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
-        str.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
+        blockUpdateWindowTitle = false;
+        return;
       }
-      if( !blockUpdateWindowTitle )
-        setWindowTitle( tr( "%1 - %2" ).arg( str, "GoldenDict" ) );
-      blockUpdateWindowTitle = false;
+
+      Folding::prepareToEmbedRTL( str );
+      setWindowTitle( tr( "%1 - %2" ).arg( str, "GoldenDict" ) );
     }
   }
+}
+
+void MainWindow::pageLoadingStateChanged( ArticleView * view, bool isLoading )
+{
+  if( view == getCurrentArticleView() )
+    setIsPageLoading( isLoading );
+  // else: ignore this change in a non-active tab
+}
+
+void MainWindow::canGoBackForwardChanged( ArticleView * view )
+{
+  if( view == getCurrentArticleView() )
+    updateBackForwardButtons( view );
+  // else: ignore this change in a non-active tab
+}
+
+void MainWindow::pageUnloaded( ArticleView * view )
+{
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
+  navPronounce->setEnabled( false );
+  if( ui.dictsList->isVisible() )
+    ui.dictsList->clear();
+}
+
+void MainWindow::articleLoaded( ArticleView * view, QString const & id, bool isActive )
+{
+  if( view != getCurrentArticleView() )
+    return; // It was background action
+
+  navPronounce->setEnabled( view->hasSound() );
+  if( ui.dictsList->isVisible() )
+    appendToFoundInDictsList( id, isActive );
 }
 
 void MainWindow::pageLoaded( ArticleView * view )
@@ -1930,14 +2100,8 @@ void MainWindow::pageLoaded( ArticleView * view )
   if( view != getCurrentArticleView() )
     return; // It was background action
 
-  updateBackForwardButtons();
-
-  updatePronounceAvailability();
-
   if ( cfg.preferences.pronounceOnLoadMain )
     pronounce( view );
-
-  updateFoundInDictsList();
 }
 
 void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPixmap const & icon )
@@ -1951,6 +2115,7 @@ void MainWindow::showStatusBarMessage( QString const & message, int timeout, QPi
 void MainWindow::tabSwitched( int )
 {
   translateBox->setPopupEnabled( false );
+  updateIsPageLoading();
   updateBackForwardButtons();
   updatePronounceAvailability();
   updateFoundInDictsList();
@@ -2024,6 +2189,30 @@ void MainWindow::dictsPaneVisibilityChanged( bool visible )
   }
 }
 
+void MainWindow::appendToFoundInDictsList( QString const & id, bool isActive )
+{
+  QByteArray const idUtf8 = id.toUtf8();
+  for( unsigned x = dictionaries.size(); x--; )
+  {
+    sptr< Dictionary::Class > & dictionary = dictionaries[ x ];
+    if( dictionary->getId() != idUtf8.constData() )
+      continue;
+
+    QString const dictName = QString::fromUtf8( dictionary->getName().c_str() );
+    QListWidgetItem * const item =
+        new QListWidgetItem(
+          dictionary->getIcon().pixmap( 32 ).scaledToHeight( 21, Qt::SmoothTransformation ),
+          dictName, ui.dictsList, QListWidgetItem::Type );
+    item->setData( Qt::UserRole, id );
+    item->setToolTip( dictName );
+
+    ui.dictsList->addItem( item );
+    if( isActive )
+      ui.dictsList->setCurrentItem( item );
+    break;
+  }
+}
+
 void MainWindow::updateFoundInDictsList()
 {
   if (!ui.dictsList->isVisible())
@@ -2038,37 +2227,26 @@ void MainWindow::updateFoundInDictsList()
 
   if ( view )
   {
-    QStringList ids = view->getArticlesList();
+    QStringList const ids = view->getArticleList();
     QString activeId = view->getActiveArticleId();
 
     for( QStringList::const_iterator i = ids.constBegin(); i != ids.constEnd(); ++i)
-    {
-      // Find this dictionary
-
-      for( unsigned x = dictionaries.size(); x--; )
-      {
-        if ( dictionaries[ x ]->getId() == i->toUtf8().data() )
-        {
-          QString dictName = QString::fromUtf8( dictionaries[ x ]->getName().c_str() );
-          QString dictId = QString::fromUtf8( dictionaries[ x ]->getId().c_str() );
-          QListWidgetItem * item =
-              new QListWidgetItem(
-                dictionaries[ x ]->getIcon().pixmap(32).scaledToHeight( 21, Qt::SmoothTransformation ),
-                dictName,
-                ui.dictsList, QListWidgetItem::Type );
-          item->setData(Qt::UserRole, QVariant( dictId ) );
-          item->setToolTip(dictName);
-
-          ui.dictsList->addItem( item );
-          if (dictId == activeId)
-          {
-            ui.dictsList->setCurrentItem(item);
-          }
-          break;
-        }
-      }
-    }
+      appendToFoundInDictsList( *i, *i == activeId );
   }
+}
+
+void MainWindow::updateIsPageLoading()
+{
+  if( ArticleView const * view = getCurrentArticleView() )
+    setIsPageLoading( view->isPageLoading() );
+}
+
+void MainWindow::setIsPageLoading( bool isLoading )
+{
+  if( cfg.preferences.searchInDock )
+    ui.loadingIndicatorLabel->setVisible( isLoading );
+  else
+    translateBox->setIsPageLoading( isLoading );
 }
 
 void MainWindow::updateBackForwardButtons()
@@ -2076,10 +2254,16 @@ void MainWindow::updateBackForwardButtons()
   ArticleView *view = getCurrentArticleView();
 
   if ( view )
-  {
-    navBack->setEnabled(view->canGoBack());
-    navForward->setEnabled(view->canGoForward());
-  }
+    updateBackForwardButtons( view );
+}
+
+void MainWindow::updateBackForwardButtons( ArticleView * view )
+{
+  Q_ASSERT( view );
+  Q_ASSERT( view == getCurrentArticleView() );
+
+  navBack->setEnabled( view->canGoBack() );
+  navForward->setEnabled( view->canGoForward() );
 }
 
 void MainWindow::updatePronounceAvailability()
@@ -2240,6 +2424,10 @@ void MainWindow::editPreferences()
     // See if we need to change help language
     if( cfg.preferences.helpLanguage != p.helpLanguage )
       closeGDHelp();
+
+#ifndef USE_QTWEBKIT
+    ArticleView::updateProfilePreferences( *webEngineProfile, cfg.preferences, p );
+#endif
 
     for( int x = 0; x < ui.tabWidget->count(); ++x )
     {
@@ -2820,13 +3008,13 @@ void MainWindow::openLinkInNewTab( QUrl const & url,
       openLink( url, referrer, fromArticle, contexts );
 }
 
-void MainWindow::showDefinitionInNewTab( QString const & word,
+void MainWindow::showDefinitionInNewTab( Config::InputPhrase const & phrase,
                                          unsigned group,
                                          QString const & fromArticle,
                                          ArticleView::Contexts const & contexts )
 {
-  createNewTab( !cfg.preferences.newTabsOpenInBackground, word )->
-      showDefinition( word, group, fromArticle, contexts );
+  createNewTab( !cfg.preferences.newTabsOpenInBackground, phrase.phrase )->
+      showDefinition( phrase, group, fromArticle, contexts );
 }
 
 void MainWindow::activeArticleChanged( ArticleView const * view, QString const & id )
@@ -3599,49 +3787,312 @@ void MainWindow::printPreviewPaintRequested( QPrinter * printer )
   view->print( printer );
 }
 
-static void filterAndCollectResources( QString & html, QRegExp & rx, const QString & sep,
-                                       const QString & folder, set< QByteArray > & resourceIncluded,
-                                       vector< pair< QUrl, QString > > & downloadResources )
+/// This dialog displays the progress of saving an article. It supports increasing expected
+/// number of operations at any time and ensures that the progress bar never moves back.
+/// The dialog destroys itself when all operations complete or when canceled.
+class ArticleSaveProgressDialog: public QProgressDialog
 {
-  int pos = 0;
-  int queryNom = 1;
-
-  while ( ( pos = rx.indexIn( html, pos ) ) != -1 )
+  Q_OBJECT
+public:
+  explicit ArticleSaveProgressDialog( QWidget * parent = 0 ):
+    QProgressDialog( parent ),
+    progressStepCount( 100 ),
+    operationCount( 1 ), // the first operation is processing and saving the main HTML file
+    completedOperationCount( 0 )
   {
-    QUrl url( rx.cap( 1 ) );
-    QString host = url.host();
-    QString resourcePath = Qt4x5::Url::fullPath( url );
+    setLabelText( tr( "Saving article..." ) );
 
-    if ( !host.startsWith( '/' ) )
-      host.insert( 0, '/' );
-    if ( !resourcePath.startsWith( '/' ) )
-      resourcePath.insert( 0, '/' );
+    setAutoReset( false );
+    setAutoClose( false );
 
-    // Replase query part of url (if exist)
-    int n = resourcePath.indexOf( QLatin1Char( '?' ) );
-    if( n >= 0 )
-    {
-      QString q_str = QString( "_q%1" ).arg( queryNom );
-      resourcePath.replace( n, resourcePath.length() - n, q_str );
-      queryNom += 1;
-    }
+    // Once this modal progress dialog is dismissed, the current tab can be closed and thus the article view destroyed.
+    // Destroy the dialog and its child resource saver when canceled to avoid referencing the view and prevent a crash.
+    // Also the article view is the parent of ResourceToSaveHandler objects. If a ResourceToSaveHandler object is
+    // destroyed along with the view before finishing, it never emits the done() signal. Then completedOperationCount
+    // never reaches operationCount, so the progress dialog and its child resource saver are leaked.
+    connect( this, SIGNAL( canceled() ), this, SLOT( deleteLater() ) );
 
-    QCryptographicHash hash( QCryptographicHash::Md5 );
-    hash.addData( rx.cap().toUtf8() );
-
-    if ( resourceIncluded.insert( hash.result() ).second )
-    {
-      // Gather resource information (url, filename) to be download later
-      downloadResources.push_back( pair<QUrl, QString>( url, folder + host + resourcePath ) );
-    }
-
-    // Modify original url, set to the native one
-    resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
-    QString newUrl = sep + QDir( folder ).dirName() + host + resourcePath + sep;
-    html.replace( pos, rx.cap().length(), newUrl );
-    pos += newUrl.length();
+    setRange( 0, progressStepCount );
+    setValue( 0 );
   }
+
+  void addOperations( int count )
+  {
+    Q_ASSERT( count > 0 );
+    // Forget about already completed operations to reset progress velocity and prevent jumping backwards.
+    // This slows progress down, which harms user experience. Can this be improved while keeping the code simple?
+    operationCount = operationCount - completedOperationCount + count;
+    completedOperationCount = 0;
+    progressStepCount = maximum() - value();
+  }
+
+public slots:
+  void operationCompleted()
+  {
+    if( wasCanceled() )
+      return; // Changing the progress value shows the dialog again. Prevent this by returning early here.
+
+    Q_ASSERT( completedOperationCount < operationCount );
+    ++completedOperationCount;
+
+    // Round progress down so that 100% is reached only when all operations complete.
+    int const progress = progressStepCount * completedOperationCount / operationCount;
+    setValue( maximum() - progressStepCount + progress );
+
+    if( completedOperationCount == operationCount )
+    {
+      close();
+      deleteLater();
+    }
+  }
+
+private:
+  int progressStepCount; ///< The number of available progress steps.
+  int operationCount; ///< The number of operations represented by @a progressStepCount.
+  int completedOperationCount; ///< The number of completed operations, less or equal to @a operationCount.
+};
+
+namespace {
+
+/// Finds custom resource links in an article's HTML, downloads the resources and saves them in the specified resource
+/// destination directory. Finds custom resorce links within downloaded code resources recursively, downloads and saves
+/// them as well. Replaces each custom resource URL with the relative path to the corresponding saved resource file
+/// within the in/out parameter html and within recursively downloaded code resources. Reports progress via the progress
+/// dialog argument. The progress dialog becomes the parent of the ArticleResourceSaver object. Thus both the dialog and
+/// the ArticleResourceSaver object are destroyed once the article's HTML and all referenced resources are saved or
+/// when the dialog is canceled.
+class ArticleResourceSaver: public QObject
+{
+  Q_OBJECT
+public:
+  explicit ArticleResourceSaver( QString & html, QString const & pathFromHtmlToDestinationDir_,
+                                 QString const & resourceDestinationDir_, ArticleView & view_,
+                                 ArticleSaveProgressDialog & progressDialog_ ):
+    QObject( &progressDialog_ ),
+    pathFromHtmlToDestinationDir( pathFromHtmlToDestinationDir_ ),
+    resourceDestinationDir( resourceDestinationDir_ ),
+    view( view_ ),
+    progressDialog( progressDialog_ )
+  {
+    Q_ASSERT( pathFromHtmlToDestinationDir.isEmpty() || pathFromHtmlToDestinationDir.endsWith( QLatin1Char( '/' ) ) );
+    Q_ASSERT( resourceDestinationDir.endsWith( QLatin1Char( '/' ) ) );
+
+    processLinkSource( html, pathFromHtmlToDestinationDir );
+  }
+
+private slots:
+  void resourceDownloaded( QString const & fileName, QByteArray * resourceData )
+  {
+    Q_ASSERT( resourceData );
+
+    if( progressDialog.wasCanceled() )
+      return; // don't start new downloads after cancelation
+
+    QString pathFromLinkSourceToDestinationDir;
+    if( !isLinkSource( fileName, pathFromLinkSourceToDestinationDir ) )
+      return; // nothing to do
+
+    QString linkSource = QString::fromUtf8( *resourceData );
+    // If the link source is modified, update the resource data before it is saved to a file.
+    if( processLinkSource( linkSource, pathFromLinkSourceToDestinationDir ) )
+      *resourceData = linkSource.toUtf8();
+  }
+
+private:
+  QString relativePathFromResourceToDestinationDir( QString const & resourceFileName ) const
+  {
+    Q_ASSERT( resourceFileName.startsWith( resourceDestinationDir ) );
+    int const depthInDestinationDir = resourceFileName.mid( resourceDestinationDir.size() ).count( '/' );
+
+    QString pathToDestinationDir;
+    for( int i = 0; i < depthInDestinationDir; ++i )
+      pathToDestinationDir += QLatin1String( "../" );
+    return pathToDestinationDir;
+  }
+
+  bool isLinkSource( QString const & fileName, QString & pathFromLinkSourceToDestinationDir ) const
+  {
+    if( fileName.endsWith( QLatin1String( ".js" ) ) )
+    {
+      // Links in JavaScript code replace HTML attribute values, and so are relative to the HTML file location.
+      pathFromLinkSourceToDestinationDir = pathFromHtmlToDestinationDir;
+      return true;
+    }
+
+    if( fileName.endsWith( QLatin1String( ".css" ) ) )
+    {
+      // Links in a style sheet are relative to the CSS file they are in.
+      pathFromLinkSourceToDestinationDir = relativePathFromResourceToDestinationDir( fileName );
+      return true;
+    }
+
+    return false;
+  }
+
+  struct Resource
+  {
+    explicit Resource( QUrl const & url_, QString const & destinationFilePath_ ):
+      url( url_ ), destinationFilePath( destinationFilePath_ )
+    {}
+
+    QUrl url;
+    QString destinationFilePath;
+  };
+
+  /// Finds custom resource links within @p linkSource, determines where the resources should be saved and stores each
+  /// unique original resource URL and the corresponding destination path in @p resourcesToDownload. Replaces each
+  /// custom resource URL with the corresponding relative destination path within the in/out parameter @p linkSource.
+  /// @param rx a regular expression that matches a custom resource URL enclosed in quotes.
+  /// @return whether @p linkSource was modified by this function call.
+  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
+                                  QRegExp const & rx, QString const & pathFromLinkSourceToDestinationDir )
+  {
+    bool modified = false;
+    int pos = 0;
+    int queryNom = 1;
+
+    while( ( pos = rx.indexIn( linkSource, pos ) ) != -1 )
+    {
+      QString urlString = rx.cap();
+      Q_ASSERT( urlString.size() > 2 );
+      // Remove the enclosing quotes from the match.
+      urlString.chop( 1 );
+      urlString.remove( 0, 1 );
+
+      QUrl url( urlString );
+      if( url.scheme() == QLatin1String( "gdpicture" ) )
+        url.setScheme( "bres" );
+
+      QString host = url.host();
+      QString resourcePath = Qt4x5::Url::fullPath( url );
+
+#ifdef Q_OS_WIN32
+      // Remove the volume separator ':' to make resourcePath a valid subpath.
+      if( url.scheme() == QLatin1String( "file" ) && resourcePath.size() > 2
+          && resourcePath.at( 0 ) == QLatin1Char( '/' ) && resourcePath.at( 2 ) == QLatin1Char( ':' ) )
+      {
+        resourcePath.remove( 2, 1 );
+      }
+#endif
+
+      // Ensure single slash between path components.
+      Q_ASSERT( !host.startsWith( QLatin1Char( '/' ) ) );
+      Q_ASSERT( !host.endsWith( QLatin1Char( '/' ) ) );
+      if( host.isEmpty() )
+      {
+        if( resourcePath.startsWith( QLatin1Char( '/' ) ) )
+          resourcePath.remove( 0, 1 );
+      }
+      else
+      if( !resourcePath.startsWith( '/' ) )
+        resourcePath.insert( 0, '/' );
+
+      // Replase query part of url (if exist)
+      int n = resourcePath.indexOf( QLatin1Char( '?' ) );
+      if( n >= 0 )
+      {
+        QString q_str = QString( "_q%1" ).arg( queryNom );
+        resourcePath.replace( n, resourcePath.length() - n, q_str );
+        queryNom += 1;
+      }
+
+      QString const pathInDestinationDir = host + resourcePath;
+      // Avoid double lookup in encounteredResources.
+      int const oldResourceCount = encounteredResources.size();
+      encounteredResources.insert( pathInDestinationDir );
+      if( encounteredResources.size() != oldResourceCount )
+      {
+        // This resource was not encountered before => store it in resourcesToDownload.
+        resourcesToDownload.push_back( Resource( url, resourceDestinationDir + pathInDestinationDir ) );
+      }
+
+      // Modify original url, set to the native one
+      resourcePath = QString::fromLatin1( QUrl::toPercentEncoding( resourcePath, "/" ) );
+      QString const newUrl = pathFromLinkSourceToDestinationDir + host + resourcePath;
+      linkSource.replace( pos + 1, urlString.size(), newUrl ); // keep the enclosing quotes
+      modified = true;
+
+      pos += 1 + newUrl.size() + 1; // skip newUrl and the enclosing quotes
+    }
+
+    return modified;
+  }
+
+  /// See the documentation for the other overload called from this one.
+  bool filterAndCollectResources( QString & linkSource, vector< Resource > & resourcesToDownload,
+                                  QString const & pathFromLinkSourceToDestinationDir )
+  {
+    static QRegExp const rx1( "'(?:bres|gdpicture|gico|gdau|gdvideo|qrcx?|file)://[^']+'" );
+    static QRegExp const rx2( rx1.pattern().replace( '\'', '"' ) );
+
+    bool const modified1 = filterAndCollectResources( linkSource, resourcesToDownload, rx1,
+                                                      pathFromLinkSourceToDestinationDir );
+    bool const modified2 = filterAndCollectResources( linkSource, resourcesToDownload, rx2,
+                                                      pathFromLinkSourceToDestinationDir );
+
+    return modified1 || modified2;
+  }
+
+  /// @return whether @p linkSource was modified by this function call.
+  bool processLinkSource( QString & linkSource, QString const & pathFromLinkSourceToDestinationDir )
+  {
+    vector< Resource > resourcesToDownload;
+    bool const modified = filterAndCollectResources( linkSource, resourcesToDownload,
+                                                     pathFromLinkSourceToDestinationDir );
+    int asyncSavedResources = 0;
+
+    // Pull and save resources to files
+    for( vector< Resource >::const_iterator it = resourcesToDownload.begin(); it != resourcesToDownload.end(); ++it )
+    {
+      ResourceToSaveHandler * const handler = new ResourceToSaveHandler( &view, it->destinationFilePath );
+
+      // handler may emit downloaded() synchronously from ArticleView::saveResource() => connect to it now.
+      connect( handler, SIGNAL( downloaded( QString, QByteArray * ) ),
+               this, SLOT( resourceDownloaded( QString, QByteArray * ) ) );
+
+      view.saveResource( it->url, *handler );
+      if( !handler->isEmpty() )
+      {
+        ++asyncSavedResources;
+        connect( handler, SIGNAL( done() ), &progressDialog, SLOT( operationCompleted() ) );
+      }
+      // else: the resource was downloaded and saved synchronously => it should not affect the progress dialog.
+    }
+
+    if( asyncSavedResources != 0)
+      progressDialog.addOperations( asyncSavedResources );
+
+    return modified;
+  }
+
+  QString const pathFromHtmlToDestinationDir;
+  QString const resourceDestinationDir;
+  ArticleView & view;
+  ArticleSaveProgressDialog & progressDialog;
+
+  QSet< QString > encounteredResources; ///< Contains destination subpaths of all encountered custom resource files.
+};
+
+void insertSavedArticleScript( QString & html )
+{
+  QLatin1String const insertBeforeString( "<script" );
+  int const pos = html.indexOf( insertBeforeString );
+  if( pos == -1 )
+  {
+    gdWarning( "Couldn't find \"%s\" in an article's HTML code.", insertBeforeString.latin1() );
+    return;
+  }
+
+#ifdef USE_QTWEBKIT
+#define w "webkit"
+#else
+#define w "webengine"
+#endif
+  html.insert( pos, QLatin1String( "<script src='qrc:///scripts/" w "_saved_article.js'></script>" ) );
+#undef w
 }
+
+} // unnamed namespace
 
 void MainWindow::on_saveArticle_triggered()
 {
@@ -3680,89 +4131,98 @@ void MainWindow::on_saveArticle_triggered()
   // The " (*.html)" part of filters[i] is absent from selectedFilter in Qt 5.
   bool const complete = filters.at( 0 ).startsWith( selectedFilter );
 
-  if ( !fileName.isEmpty() )
+  if( fileName.isEmpty() )
+    return;
+
+#ifdef USE_QTWEBKIT
+  QString html = view->toHtml();
+  saveArticleAs( *view, html, fileName, complete, rxName, 0 );
+#else
+  // QWebEnginePage::save() doesn't even save qrc resources, not to mention custom URL scheme resources.
+  // Our custom page-saving implementation saves a complete web page correctly.
+
+  auto * const progressDialog = new ArticleSaveProgressDialog( this );
+  progressDialog->show();
+
+  view->toHtml( [ this, view, fileName, complete, rxName,
+                  progressDialog = QPointer< ArticleSaveProgressDialog >{ progressDialog } ]( QString const & result ) {
+    if( result.isEmpty() || !progressDialog || progressDialog->wasCanceled() )
+    {
+      // This callback is being called during page destruction or the user canceled the saving of the page.
+      return; // return now to prevent a crash
+    }
+    QString html = result;
+    saveArticleAs( *view, html, fileName, complete, rxName, progressDialog );
+  } );
+#endif
+}
+
+void MainWindow::saveArticleAs( ArticleView & view, QString & html, QString const & fileName, bool complete,
+                                QRegExp const & rxName, ArticleSaveProgressDialog * progressDialog )
+{
+  QFile file( fileName );
+  if ( !file.open( QIODevice::WriteOnly ) )
   {
-
-    QFile file( fileName );
-
-    if ( !file.open( QIODevice::WriteOnly ) )
-    {
-      QMessageBox::critical( this, tr( "Error" ),
-                             tr( "Can't save article: %1" ).arg( file.errorString() ) );
-    }
-    else
-    {
-      QString html = view->toHtml();
-      QFileInfo fi( fileName );
-      cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
-
-      // Convert internal links
-
-      QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
-      int pos = 0;
-      while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
-      {
-        QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
-        QString anchor;
-        name.replace( "?gdanchor=", "#" );
-        int n = name.indexOf( '#' );
-        if( n > 0 )
-        {
-          anchor = name.mid( n );
-          name.truncate( n );
-          anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
-        }
-        name.replace( rxName, "_" );
-        name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
-        html.replace( pos, rx3.cap().length(), name );
-        pos += name.length();
-      }
-
-      // MDict anchors
-      QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
-      html.replace( anchorLinkRe, "\\1" );
-
-      if ( complete )
-      {
-        QString folder = fi.absoluteDir().absolutePath() + "/" + fi.baseName() + "_files";
-        QRegExp rx1( "\"((?:bres|gico|gdau|qrcx|gdvideo)://[^\"]+)\"" );
-        QRegExp rx2( "'((?:bres|gico|gdau|qrcx|gdvideo)://[^']+)'" );
-        set< QByteArray > resourceIncluded;
-        vector< pair< QUrl, QString > > downloadResources;
-
-        filterAndCollectResources( html, rx1, "\"", folder, resourceIncluded, downloadResources );
-        filterAndCollectResources( html, rx2, "'", folder, resourceIncluded, downloadResources );
-
-        ArticleSaveProgressDialog * progressDialog = new ArticleSaveProgressDialog( this );
-        // reserve '1' for saving main html file
-        int maxVal = 1;
-
-        // Pull and save resources to files
-        for ( vector< pair< QUrl, QString > >::const_iterator i = downloadResources.begin();
-              i != downloadResources.end(); ++i )
-        {
-          ResourceToSaveHandler * handler = view->saveResource( i->first, i->second );
-          if( !handler->isEmpty() )
-          {
-            maxVal += 1;
-            connect( handler, SIGNAL( done() ), progressDialog, SLOT( perform() ) );
-          }
-        }
-
-        progressDialog->setLabelText( tr("Saving article...") );
-        progressDialog->setRange( 0, maxVal );
-        progressDialog->setValue( 0 );
-        progressDialog->show();
-
-        file.write( html.toUtf8() );
-        progressDialog->setValue( 1 );
-      }
-      else
-      {
-        file.write( html.toUtf8() );
-      }
-    }
+    QMessageBox::critical( this, tr( "Error" ),
+                           tr( "Can't save article: %1" ).arg( file.errorString() ) );
+    return;
   }
+
+  QFileInfo fi( fileName );
+  cfg.articleSavePath = QDir::toNativeSeparators( fi.absoluteDir().absolutePath() );
+
+  // Convert internal links
+
+  QRegExp rx3( "href=\"(bword:|gdlookup://localhost/)([^\"]+)\"" );
+  int pos = 0;
+  while ( ( pos = rx3.indexIn( html, pos ) ) != -1 )
+  {
+    QString name = QUrl::fromPercentEncoding( rx3.cap( 2 ).simplified().toLatin1() );
+    QString anchor;
+    name.replace( "?gdanchor=", "#" );
+    int n = name.indexOf( '#' );
+    if( n > 0 )
+    {
+      anchor = name.mid( n );
+      name.truncate( n );
+      anchor.replace( QRegExp( "(g[0-9a-f]{32}_)[0-9a-f]+_" ), "\\1" ); // MDict anchors
+    }
+    name.replace( rxName, "_" );
+    name = QString( "href=\"" ) + QUrl::toPercentEncoding( name ) + ".html" + anchor + "\"";
+    html.replace( pos, rx3.cap().length(), name );
+    pos += name.length();
+  }
+
+  // MDict anchors
+  QRegExp anchorLinkRe( "(<\\s*a\\s+[^>]*\\b(?:name|id)\\b\\s*=\\s*[\"']*g[0-9a-f]{32}_)([0-9a-f]+_)(?=[^\"'])", Qt::CaseInsensitive );
+  html.replace( anchorLinkRe, "\\1" );
+
+#ifdef USE_QTWEBKIT
+  Q_ASSERT( !progressDialog );
+
+  if( !complete )
+  {
+    file.write( html.toUtf8() );
+    return;
+  }
+
+  progressDialog = new ArticleSaveProgressDialog( this );
+  progressDialog->show();
+#else
+  Q_ASSERT( progressDialog );
+
+  if( complete )
+#endif
+  {
+    insertSavedArticleScript( html );
+
+    QString pathFromHtmlToDestinationDir = fi.baseName() + "_files/";
+    QString resourceDestinationDir = fi.absoluteDir().absolutePath() + '/' + pathFromHtmlToDestinationDir;
+    new ArticleResourceSaver( html, pathFromHtmlToDestinationDir, resourceDestinationDir, view, *progressDialog );
+  }
+
+  file.write( html.toUtf8() );
+  progressDialog->operationCompleted();
 }
 
 void MainWindow::on_rescanFiles_triggered()
@@ -3853,7 +4313,7 @@ void MainWindow::applyZoomFactor()
   // triggered() signal is no longer emitted, which in turn improves performance.
   adjustCurrentZoomFactor();
 
-#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+#if defined( USE_QTWEBKIT ) && QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
   // Scaling article views asynchronously dramatically improves performance when
   // a zoom action is triggered repeatedly while many or large articles are open
   // in the main window or in scan popup.
@@ -3862,26 +4322,43 @@ void MainWindow::applyZoomFactor()
   // so all of them except for the first one don't change anything and run very fast.
   // In effect, some intermediate zoom factors are skipped when scaling is slow.
   // The slower the scaling, the more steps are skipped.
+
+  // Unfortunately this optimization does not work in the Qt WebEngine version, where
+  // the UI does not completely freeze (e.g. scrolling the page still works) and events
+  // keep being delivered even as the page is being scaled in a separate process.
+  // This issue must have been fixed upstream in Qt 6.4.0 or earlier, because repeated zooming is slow in
+  // Qt WebEngine Widgets Simple Browser Example version 5.15.10 and fast in the same example version 6.4.0.
+
   QTimer::singleShot( 0, this, SLOT( scaleArticlesByCurrentZoomFactor() ) );
 #else
+  // The timer trick above does not help in unfixed Qt WebEngine versions and is not needed in fixed ones.
+
   // The timer trick above usually doesn't improve performance with Qt4
   // due to a different ordering of keyboard and timer events.
   // Sometimes, unpredictably, it does work like with Qt5.
   // Scale article views synchronously to avoid inconsistent or unexpected behavior.
+
   scaleArticlesByCurrentZoomFactor();
 #endif
 }
 
 void MainWindow::adjustCurrentZoomFactor()
 {
-  if ( cfg.preferences.zoomFactor >= 5 )
-    cfg.preferences.zoomFactor = 5;
-  else if ( cfg.preferences.zoomFactor <= 0.1 )
-    cfg.preferences.zoomFactor = 0.1;
+  // Valid values of QWebEngineView's zoom factor are within the range from 0.25 to 5.0. The default factor is 1.0.
+  // zoomin() and zoomout() adjust zoomFactor by the step 0.1. The difference between the maximum and the default
+  // zoom factors, as well as between the default and the minimum zoom factors, should be divisible by this step to
+  // avoid different intermediate factors depending on the starting point (default, minimum or maximum).
+  qreal const minZoomFactor = 0.3;
+  qreal const maxZoomFactor = 5.0;
 
-  zoomIn->setEnabled( cfg.preferences.zoomFactor < 5 );
-  zoomOut->setEnabled( cfg.preferences.zoomFactor > 0.1 );
-  zoomBase->setEnabled( cfg.preferences.zoomFactor != 1.0 );
+  if( cfg.preferences.zoomFactor < minZoomFactor )
+    cfg.preferences.zoomFactor = minZoomFactor;
+  else if( cfg.preferences.zoomFactor > maxZoomFactor )
+    cfg.preferences.zoomFactor = maxZoomFactor;
+
+  zoomIn->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, maxZoomFactor )  );
+  zoomOut->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, minZoomFactor ) );
+  zoomBase->setEnabled( !qFuzzyCompare( cfg.preferences.zoomFactor, 1.0 ) );
 }
 
 void MainWindow::scaleArticlesByCurrentZoomFactor()
@@ -3952,7 +4429,15 @@ void MainWindow::applyWordsZoomLevel()
   }
 
   if ( translateLine->font().pointSize() != ps )
+  {
     translateLine->setFont( font );
+    if( cfg.preferences.searchInDock )
+    {
+      // loadingIndicatorLabel's size hint is bound to ui.translateLine->height(), which depends on the font.
+      // Update the label's geometry to resize it immediately rather than after it is hidden and shown again.
+      ui.loadingIndicatorLabel->updateGeometry();
+    }
+  }
 
   font = groupListDefaultFont;
 
@@ -5021,6 +5506,8 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
     return false;
   *result = 0;
 
+  // TODO (Qt WebEngine): re-enable this code if ArticleView::wordAtPoint() is ported.
+#ifdef USE_QTWEBKIT
   if( !isGoldenDictWindow( message->hwnd ) )
     return true;
 
@@ -5037,6 +5524,7 @@ bool MainWindow::handleGDMessage( MSG * message, long * result )
   str.toWCharArray( lpdata->cwData );
 
   *result = 1;
+#endif // USE_QTWEBKIT
   return true;
 }
 
@@ -5047,6 +5535,4 @@ bool MainWindow::isGoldenDictWindow( HWND hwnd )
 
 #endif
 
-#ifdef X11_MAIN_WINDOW_FOCUS_WORKAROUNDS
 #include "mainwindow.moc"
-#endif

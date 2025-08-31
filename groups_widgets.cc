@@ -1027,8 +1027,7 @@ QuickFilterLine::QuickFilterLine( QWidget * parent ): ExtLineEdit( parent ), m_f
   connect( &m_focusAction, SIGNAL( triggered() ),
            this, SLOT( focusFilterLine() ) );
 
-  QPixmap image(":/icons/system-search.png");
-  setButtonPixmap(ExtLineEdit::Left, image.scaled(18, 18, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+  setButtonPixmap( ExtLineEdit::Left, scaledForButtonPixmap( QPixmap( ":/icons/system-search.png" ) ) );
   setButtonToolTip(ExtLineEdit::Left, tr("Quick Search"));
   setButtonVisible(ExtLineEdit::Left, true);
 

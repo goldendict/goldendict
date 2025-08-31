@@ -607,7 +607,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
         else
         {
           std::string href = "\"gdau://" + getId() + "/" + src.toUtf8().data() + "\"";
-          QString newTag = QString::fromUtf8( ( addAudioLink( href, getId() ) + "<span class=\"sdict_h_wav\"><a href=" + href + ">" ).c_str() );
+          QString newTag = QString::fromUtf8( ( addAudioLink( href ) + "<span class=\"sdict_h_wav\"><a href=" + href + ">" ).c_str() );
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
           newTag += match.captured( 4 );
           if( match.captured( 4 ).indexOf( "<img " ) < 0 )
@@ -615,7 +615,7 @@ string StardictDictionary::handleResource( char type, char const * resource, siz
           newTag += audioRe.cap( 4 );
           if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
 #endif
-            newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
+            newTag += " <img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\">";
           newTag += "</a></span>";
 
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )

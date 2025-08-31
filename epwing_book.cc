@@ -1454,7 +1454,7 @@ QByteArray EpwingBook::handleWave( EB_Hook_Code code, const unsigned int * argv 
 {
 
   if( code == EB_HOOK_END_WAVE )
-    return QByteArray( "<img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>" );
+    return QByteArray( "<img src=\"qrc:///icons/playsound.png\" border=\"0\" align=\"absmiddle\" alt=\"Play\"/></a></span>" );
 
   // Handle EB_HOOK_BEGIN_WAVE
 
@@ -1481,7 +1481,7 @@ QByteArray EpwingBook::handleWave( EB_Hook_Code code, const unsigned int * argv 
   url.setPath( Qt4x5::Url::ensureLeadingSlash( name ) );
 
   string ref = string( "\"" )+ url.toEncoded().data() + "\"";
-  QByteArray result = addAudioLink( ref , dictID.toUtf8().data() ).c_str();
+  QByteArray result = addAudioLink( ref ).c_str();
 
   result += QByteArray( "<span class=\"epwing_wav\"><a href=" ) + ref.c_str() + ">";
 

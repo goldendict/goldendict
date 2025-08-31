@@ -33,10 +33,16 @@ About::About( QWidget * parent ): QDialog( parent )
   QString compilerVersion = QLatin1String( "GCC " ) + QLatin1String( __VERSION__ );
 #endif
 
-  ui.qtVersion->setText( tr( "Based on Qt %1 (%2, %3 bit)" ).arg(
+  QString qtVersionText = tr( "Based on Qt %1 (%2, %3 bit)" ).arg(
                            QLatin1String( qVersion() ),
                            compilerVersion,
-                           QString::number( QSysInfo::WordSize ) ) );
+                           QString::number( QSysInfo::WordSize ) );
+#ifdef USE_QTWEBKIT
+  qtVersionText += QLatin1String( ", Qt WebKit" );
+#else
+  qtVersionText += QLatin1String( ", Qt WebEngine" );
+#endif
+  ui.qtVersion->setText( qtVersionText );
 
   QFile creditsFile( ":/CREDITS.txt" );
 

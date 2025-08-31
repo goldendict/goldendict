@@ -679,11 +679,9 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             url.setHost( QString::fromUtf8( search ? "search" : dictPtr->getId().c_str() ) );
             url.setPath( Qt4x5::Url::ensureLeadingSlash( QString::fromUtf8( filename.c_str() ) ) );
 
-            el_script.setAttribute( "type", "text/javascript" );
             parent.replaceChild( el_script, el );
 
-            QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"",
-                                                                      dictPtr->getId() ).c_str() );
+            QDomText el_txt = dd.createTextNode( makeAudioLinkScript( string( "\"" ) + url.toEncoded().data() + "\"" ).c_str() );
             el_script.appendChild( el_txt );
 
             QDomElement el_span = dd.createElement( "span" );
@@ -695,7 +693,7 @@ string convert( string const & in, DICT_TYPE type, map < string, string > const 
             el_span.appendChild( el_a );
 
             QDomElement el_img = dd.createElement( "img");
-            el_img.setAttribute( "src", "qrcx://localhost/icons/playsound.png" );
+            el_img.setAttribute( "src", "qrc:///icons/playsound.png" );
             el_img.setAttribute( "border", "0" );
             el_img.setAttribute( "align", "absmiddle" );
             el_img.setAttribute( "alt", "Play" );

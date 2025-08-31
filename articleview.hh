@@ -4,7 +4,7 @@
 #ifndef __ARTICLEVIEW_HH_INCLUDED__
 #define __ARTICLEVIEW_HH_INCLUDED__
 
-#include <QWebView>
+#include <QHash>
 #include <QMap>
 #include <QUrl>
 #include <QSet>
@@ -14,6 +14,19 @@
 #include "instances.hh"
 #include "groupcombobox.hh"
 #include "ui_articleview.h"
+
+#ifdef USE_QTWEBKIT
+#include <QWebView>
+#else
+#include <QDateTime>
+
+#include <functional>
+#include <memory>
+
+class QWebEngineFindTextResult;
+class QWebEngineProfile;
+class QWebEngineScriptCollection;
+#endif
 
 class ArticleViewJsProxy;
 class ResourceToSaveHandler;
@@ -35,13 +48,56 @@ class ArticleView: public QFrame
 
   ArticleViewJsProxy * const jsProxy;
 
+  QStringList articleList; ///< All articles currently present in the view as a list of dictionary ids.
+  QHash< QString, QString > audioLinks;
+  QString firstAudioLink;
+  QString currentArticle; ///< Current article in the view, in the form of "gdfrom-xxx"
+                          ///< (scrollTo) id. If empty, there is no current article.
+#ifndef USE_QTWEBKIT
+  // The timestamps are stored here and in JavaScript global variables with "gd" name prefixes.
+  // They prevent timing issues when a current article is passed to/from JavaScript.
+
+  /// The page timestamp is initialized to the current date and time when JavaScript page initialization
+  /// code starts. This timestamp allows JavaScript's gdOnCppActiveArticleChanged() to reject C++'s
+  /// current article updates pertaining to a previously loaded page.
+  QDateTime pageTimestamp;
+  /// currentArticleTimestamp and its JavaScript counterpart are initialized to pageTimestamp. They are
+  /// set to a current date and time when the user activates an article in some way, and are sent to
+  /// the other (JavaScript or C++) side along with the updated current article value. The receiver of
+  /// the current article update message compares the received timestamp value with its own stored
+  /// current article timestamp and rejects the current article change if the stored timestamp is later.
+  QDateTime currentArticleTimestamp;
+#endif
+
   QAction pasteAction, articleUpAction, articleDownAction,
           goBackAction, goForwardAction, selectCurrentArticleAction,
           copyAsTextAction, inspectAction;
   QAction & openSearchAction;
   bool searchIsOpened;
   bool expandOptionalParts;
+  bool isLoading;
+#ifdef USE_QTWEBKIT
+  // The code that uses this variable is not needed in the Qt WebEngine version.
   QString rangeVarName;
+#else
+  /// Depending on how fast a next page is loaded, the blank page is present in or absent from
+  /// web history in the Qt WebEngine version. It is always absent in the Qt WebKit version.
+  /// This cache variable allows to make canGoBack() correct and faster than the alternative -
+  /// an expensive call to QWebEngineHistoryItem::url() and comparing the URL's scheme to "data".
+  bool isBlankPagePresentInWebHistory = false;
+  // The API necessary to implement Search-in-page status is not available in Qt WebKit.
+  bool skipNextFindTextUiStatusUpdate = false;
+  /// Hiding a search frame in showDefinition() results in storing a wrong vertical scroll position in web history.
+  /// Instead, showDefinition() sets this variable to true, and the search frame is hidden later in
+  /// onJsPageInitStarted() - after the previous page stores correct vertical scroll position in web history.
+  bool hideSearchFrameOnceJsSavesStateToWebHistory = false;
+
+  // In the Qt WebKit version ArticleWebView implements the functionality of the following data members.
+  bool isNavigationByMiddleMouseButton = false;
+  class MouseEventInfo;
+  /// @invariant This event info is non-null if and only if "Select word by single click" option is on.
+  std::unique_ptr< MouseEventInfo > lastLeftMouseButtonPressEvent;
+#endif
 
   /// Any resource we've decided to download off the dictionary gets stored here.
   /// Full vector capacity is used for search requests, where we have to make
@@ -63,7 +119,18 @@ class ArticleView: public QFrame
   int ftsPosition;
 
   void highlightFTSResults();
+#if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
+  void highlightFTSResults( QRegularExpression const & regexp,
+#else
+  void highlightFTSResults( QRegExp const & regexp,
+#endif
+                            bool ignoreDiacritics, QString const & pageText );
+
+#ifdef USE_QTWEBKIT
+  // The API necessary to highlight all FTS occurrences is not available in Qt WebEngine.
   void highlightAllFtsOccurences( QWebPage::FindFlags flags );
+#endif
+
   void performFtsFindOperation( bool backwards );
 
 public:
@@ -72,11 +139,14 @@ public:
   /// The groups aren't copied -- rather than that, the reference is kept
   ArticleView( QWidget * parent,
                ArticleNetworkAccessManager &,
+#ifndef USE_QTWEBKIT
+               QWebEngineProfile &,
+#endif
                AudioPlayerPtr const &,
                std::vector< sptr< Dictionary::Class > > const & allDictionaries,
                Instances::Groups const &,
                bool popupView,
-               Config::Class const & cfg,
+               Config::Class & cfg_,
                QAction & openSearchAction_,
                QAction * dictionaryBarToggled = 0,
                GroupComboBox const * groupComboBox = 0 );
@@ -89,6 +159,8 @@ public:
   virtual QSize minimumSizeHint() const;
 
   ~ArticleView();
+
+  void saveConfigData() const;
 
   typedef QMap< QString, QString > Contexts;
 
@@ -104,18 +176,14 @@ public:
   void showDefinition( Config::InputPhrase const & phrase, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
-
   void showDefinition( QString const & word, unsigned group,
                        QString const & scrollTo = QString(),
                        Contexts const & contexts = Contexts() );
 
+  void showDefinition( Config::InputPhrase const & phrase, QStringList const & dictIDs,
+                       QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics );
   void showDefinition( QString const & word, QStringList const & dictIDs,
-                       QRegExp const & searchRegExp, unsigned group,
-                       bool ignoreDiacritics );
-
-  /// Clears the view and sets the application-global waiting cursor,
-  /// which will be restored when some article loads eventually.
-  void showAnticipation();
+                       QRegExp const & searchRegExp, unsigned group, bool ignoreDiacritics );
 
   /// Opens the given link. Supposed to be used in response to
   /// openLinkInNewTab() signal. The link scheme is therefore supposed to be
@@ -131,8 +199,17 @@ public:
   /// The function reloads content if the change affects it.
   void updateMutedContents();
 
-  bool canGoBack();
-  bool canGoForward();
+  bool isPageLoading() const
+  { return isLoading; }
+
+  bool canGoBack() const;
+  bool canGoForward() const;
+
+#ifndef USE_QTWEBKIT
+  static void initProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & preferences );
+  static void updateProfilePreferences( QWebEngineProfile & profile, Config::Preferences const & oldPreferences,
+                                        Config::Preferences const & newPreferences );
+#endif
 
   /// Called when preference changes
   void setSelectionBySingleClick( bool set );
@@ -155,7 +232,7 @@ public:
   void reload();
 
   /// Returns true if there's an audio reference on the page, false otherwise.
-  bool hasSound();
+  bool hasSound() const;
 
   /// Plays the first audio reference on the page, if any.
   void playSound();
@@ -164,10 +241,14 @@ public:
   { ui.definition->setZoomFactor( factor ); }
 
   /// Returns current article's text in .html format
+#ifdef USE_QTWEBKIT
   QString toHtml();
+#else
+  void toHtml( std::function< void( QString const & ) > resultCallback );
+#endif
 
   /// Returns current article's title
-  QString getTitle();
+  QString getTitle() const;
 
   /// Returns the phrase translated by the current article.
   Config::InputPhrase getPhrase() const;
@@ -187,13 +268,12 @@ public:
 
   /// Returns all articles currently present in view, as a list of dictionary
   /// string ids.
-  QStringList getArticlesList();
+  QStringList getArticleList() const;
 
   /// Returns the dictionary id of the currently active article in the view.
   QString getActiveArticleId();
 
-  ResourceToSaveHandler * saveResource( const QUrl & url, const QString & fileName );
-  ResourceToSaveHandler * saveResource( const QUrl & url, const QUrl & ref, const QString & fileName );
+  void saveResource( QUrl const & url, ResourceToSaveHandler & handler );
 
   /// Return group id of the view
   unsigned getViewGroup()
@@ -205,6 +285,13 @@ signals:
 
   void titleChanged( ArticleView *, QString const & title );
 
+  void pageLoadingStateChanged( ArticleView *, bool isLoading );
+
+  /// Is emitted when the return value of canGoBack() or canGoForward() may have changed.
+  void canGoBackForwardChanged( ArticleView * );
+
+  void pageUnloaded( ArticleView * );
+  void articleLoaded( ArticleView *, QString const & id, bool isActive );
   void pageLoaded( ArticleView * );
 
   /// Signals that the following link was requested to be opened in new tab
@@ -212,7 +299,7 @@ signals:
                          QString const & fromArticle,
                          ArticleView::Contexts const & contexts );
   /// Signals that the following definition was requested to be showed in new tab
-  void showDefinitionInNewTab( QString const & word, unsigned group,
+  void showDefinitionInNewTab( Config::InputPhrase const & phrase, unsigned group,
                                QString const & fromArticle,
                                ArticleView::Contexts const & contexts );
 
@@ -255,8 +342,6 @@ public slots:
   void on_searchPrevious_clicked();
   void on_searchNext_clicked();
 
-  void onJsActiveArticleChanged(QString const & id);
-
   /// Handles F3 and Shift+F3 for search navigation
   bool handleF3( QObject * obj, QEvent * ev );
 
@@ -272,9 +357,12 @@ private slots:
   void loadFinished( bool ok );
   void handleTitleChanged( QString const & title );
   void handleUrlChanged( QUrl const & url );
+#ifdef USE_QTWEBKIT
   void attachToJavaScript();
+#endif
   void linkClicked( QUrl const & );
-  void linkHovered( const QString & link, const QString & title, const QString & textContent );
+  void linkHovered( QString const & link, QString const & title = QString(),
+                    QString const & textContent = QString() );
   void contextMenuRequested( QPoint const & );
 
   void resourceDownloadFinished();
@@ -300,8 +388,10 @@ private slots:
   void on_ftsSearchPrevious_clicked();
   void on_ftsSearchNext_clicked();
 
+#ifdef USE_QTWEBKIT
   /// Handles the double-click from the definition.
   void doubleClicked( QPoint pos );
+#endif
 
   /// Handles audio player error message
   void audioPlayerError( QString const & message );
@@ -313,27 +403,78 @@ private slots:
   void inspect();
 
 private:
+  /// <JavaScript interface>
+
+  friend class ArticleViewJsProxy;
+
+#ifdef USE_QTWEBKIT
+  void onJsPageInitStarted();
+
+  void onJsActiveArticleChanged( QString const & id );
+#else
+  /// In the Qt WebEngine version, gdArticleView is not available when a page starts loading. The IDs and the
+  /// audio links of articles loaded before gdArticleView becomes available (if any) are passed to this function.
+  /// @param activeArticleIndex the index of the currently active article ID in @p loadedArticles
+  ///        or -1 if no article is active yet.
+  /// @param hasPageInitFinished true if the page initialization has already finished,
+  ///        in which case onJsPageInitFinished() won't be invoked by this page.
+  void onJsPageInitStarted( QStringList const & loadedArticles, QStringList const & loadedAudioLinks,
+                            int activeArticleIndex, bool hasPageInitFinished, QDateTime const & pageTimestamp_ );
+
+  void onJsPageInitFinished();
+
+  void onJsActiveArticleChanged( QString const & id, QDateTime const & currentArticleTimestamp_ );
+
+  /// Is called on mousedown JavaScript event if it is triggered by the left mouse button and
+  /// the event starts a first click (not a second or a third click in a double- or triple-click)
+  /// and "Select word by single click" option is on (otherwise there is nothing to do).
+  void onJsFirstLeftButtonMouseDown();
+
+  void onJsDoubleClicked( QString const & imageUrl );
+#endif
+
+  void onJsArticleLoaded( QString const & id, QString const & audioLink, bool isActive );
+
+  void onJsLocationHashChanged();
+
+  /// </JavaScript interface>
+
+  /// Handles the article-loaded JavaScript message assuming it is fresh.
+  /// The callers of this function must check timestamps in the Qt WebEngine version.
+  /// This function's single purpose is code reuse. It is not exposed to JavaScript.
+  void onJsArticleLoadedNoTimestamps( QString const & id, QString const & audioLink, bool isActive );
+
+  enum TargetFrame { MainFrame, CurrentFrame };
+  void runJavaScript( TargetFrame targetFrame, QString const & scriptSource );
+
+  /// Clears selection on the current web page. This function can be called to
+  /// reset the start position of the page's findText().
+  void clearPageSelection();
+
+  void downloadImage( QUrl const & imageUrl );
+  void translatePossiblyInNewTab( Config::InputPhrase const & phrase );
 
   /// Deduces group from the url. If there doesn't seem to be any group,
   /// returns 0.
   unsigned getGroup( QUrl const & );
-
-
-  /// Returns current article in the view, in the form of "gdfrom-xxx" id.
-  QString getCurrentArticle();
 
   /// Sets the current article by executing a javascript code.
   /// If moveToIt is true, it moves the focus to it as well.
   /// Returns true in case of success, false otherwise.
   bool setCurrentArticle( QString const &, bool moveToIt = false );
 
-  /// Checks if the given article in form of "gdfrom-xxx" is inside a "website"
-  /// frame.
-  bool isFramedArticle( QString const & );
+  void setValidCurrentArticleNoJs( QString const & id );
 
   /// Checks if the given link is to be opened externally, as opposed to opening
   /// it in-place.
   bool isExternalLink( QUrl const & url );
+
+#ifdef USE_QTWEBKIT
+  // The frame-related functions rely on Qt WebKit API unavailable in Qt WebEngine.
+  // The code is useful only for website dictionaries.
+
+  /// Checks if the given article in form of "gdfrom-xxx" is inside a "website" frame.
+  bool isFramedArticle( QString const & );
 
   /// Sees if the last clicked link is from a website frame. If so, changes url
   /// to point to url text translation instead, and saves the original
@@ -343,6 +484,18 @@ private:
   /// Use the known information about the current frame to update the current
   /// article's value.
   void updateCurrentArticleFromCurrentFrame( QWebFrame * frame = 0 );
+#endif
+
+#ifdef USE_QTWEBKIT
+  void initCurrentArticleAndScroll();
+#else
+  static void updateSourceCodeOfInjectedScript( QWebEngineScriptCollection & scripts,
+                                                QString const & name, QString const & sourceCode );
+
+  /// Injects into JavaScript the current article ID and whether to scroll to it when reloading page.
+  /// Should be called before an action that can be interpreted as page reloading by JavaScript code.
+  void updateInjectedPageReloadingScript( bool scrollToCurrentArticle );
+#endif
 
   /// Saves current article and scroll position for the current history item.
   /// Should be used when leaving the page.
@@ -351,24 +504,37 @@ private:
   /// Loads a page at @p url into view.
   void load( QUrl const & url );
 
+  void openLinkWithFragment( QUrl const & url, QString const & scrollTo );
+
+  void showDefinition( Config::InputPhrase const & phrase, QUrl const & url );
+
   /// Attempts removing last temporary file created.
   void cleanupTemp();
 
   bool eventFilter( QObject * obj, QEvent * ev );
 
   void performFindOperation( bool restart, bool backwards, bool checkHighlight = false );
+#ifndef USE_QTWEBKIT
+  // The API necessary to implement Search-in-page status is not available in Qt WebKit.
+  void findTextFinished( QWebEngineFindTextResult const & result );
+#endif
 
+  void updateSearchNoResultsProperty( bool noResults );
   void reloadStyleSheet();
 
   /// Returns the comma-separated list of dictionary ids which should be muted
   /// for the given group. If there are none, returns empty string.
   QString getMutedForGroup( unsigned group );
 
+  void saveResource( QUrl const & url, QUrl const & ref, ResourceToSaveHandler * handler );
+
 protected:
 
   // We need this to hide the search bar when we're showed
   void showEvent( QShowEvent * );
 
+// TODO (Qt WebEngine): port if this code is useful in the Qt WebEngine version.
+#ifdef USE_QTWEBKIT
 #ifdef Q_OS_WIN32
 
   /// Search inside web page for word under cursor
@@ -380,9 +546,11 @@ private:
 public:
   QString wordAtPoint( int x, int y );
 #endif
-
+#endif // USE_QTWEBKIT
 };
 
+/// Downloads the specified resource and saves it to a file at the specified path.
+/// Emits done() and destroys itself using deleteLater() when finished.
 class ResourceToSaveHandler: public QObject
 {
   Q_OBJECT
@@ -394,6 +562,9 @@ public:
   { return downloadRequests.empty(); }
 
 signals:
+  /// Is emitted when the resource is downloaded. Allows to modify the resource data before it is saved to a file.
+  /// Connect via Qt::DirectConnection, because with Qt::QueuedConnection @p resourceData would be a dangling pointer.
+  void downloaded( QString const & fileName, QByteArray * resourceData );
   void done();
   void statusBarMessage( QString const & message, int timeout = 0, QPixmap const & pixmap = QPixmap() );
 

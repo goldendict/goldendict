@@ -12,6 +12,7 @@ class Preferences: public QDialog
   Q_OBJECT
 
   int prevInterfaceLanguage;
+  bool prevOffTheRecordWebProfile;
 
   Help::HelpWindow * helpWindow;
   Config::Class & cfg;

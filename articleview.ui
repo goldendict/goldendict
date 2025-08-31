@@ -48,13 +48,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="ArticleWebView" name="definition" native="true">
-        <property name="url" stdset="0">
-         <url>
-          <string>about:blank</string>
-         </url>
-        </property>
-       </widget>
+       <widget class="ArticleWebView" name="definition" native="true"/>
       </item>
      </layout>
     </widget>
@@ -223,6 +217,9 @@
            <string>&amp;Case Sensitive</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="searchStatusLabel"/>
         </item>
         <item>
          <spacer name="horizontalSpacer">
