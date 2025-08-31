@@ -82,6 +82,14 @@ If you have problem building with libeb-dev package, you can pass
 
     qmake "CONFIG+=no_epwing_support"
 
+### Building against libebu in place of libeb
+
+[libebu](http://green.ribbon.to/~ikazuhiro/dic/ebu.html) claims to be a modern replacement for libeb.
+Among other things, it supports UTF-8 extension in addition to EUC-JP.
+If you want to build GoldenDict against libebu, pass `"CONFIG+=use_libebu"` to `qmake`:
+
+    qmake "CONFIG+=use_libebu"
+
 ### Building without internal audio players
 
 If you have problem building with FFmpeg/libao (for example, Ubuntu older than 12.04), you can pass
