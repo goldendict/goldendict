@@ -41,7 +41,7 @@ class ForvoArticleRequest: public Dictionary::DataRequest
 
   typedef std::list< NetReply > NetReplies;
   NetReplies netReplies;
-  QString apiKey, languageCode;
+  QString apiKey, languageCode, genderCode;
   string dictionaryId;
 
 public:
@@ -49,6 +49,7 @@ public:
   ForvoArticleRequest( wstring const & word, vector< wstring > const & alts,
                        QString const & apiKey_,
                        QString const & languageCode_,
+                       QString const & genderCode_,
                        string const & dictionaryId_,
                        QNetworkAccessManager & mgr );
 

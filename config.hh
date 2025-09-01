@@ -552,6 +552,12 @@ struct Forvo
   bool enable;
   QString apiKey;
   QString languageCodes;
+  enum Gender
+  {
+    Any = 0,
+    Male,
+    Female
+  } gender;
 
   Forvo(): enable( false )
   {}
@@ -559,7 +565,8 @@ struct Forvo
   bool operator == ( Forvo const & other ) const
   { return enable == other.enable &&
            apiKey == other.apiKey &&
-           languageCodes == other.languageCodes;
+           languageCodes == other.languageCodes &&
+           gender == other.gender;
   }
 
   bool operator != ( Forvo const & other ) const
