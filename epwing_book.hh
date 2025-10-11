@@ -22,7 +22,11 @@
 #include <stub_msvc.h>
 #endif
 
+#ifdef USE_LIBEBU
+#include <ebu/eb.h>
+#else
 #include <eb/eb.h>
+#endif
 
 namespace Epwing {
 
