@@ -824,14 +824,14 @@ void GlsDictionary::loadArticle( uint32_t address,
 QString & GlsDictionary::filterResource( QString & article )
 {
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)",
+  QRegularExpression imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx?):)",
                             QRegularExpression::CaseInsensitiveOption
                             | QRegularExpression::InvertedGreedinessOption );
   QRegularExpression linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)",
                              QRegularExpression::CaseInsensitiveOption
                              | QRegularExpression::InvertedGreedinessOption );
 #else
-  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx):)", Qt::CaseInsensitive );
+  QRegExp imgRe( "(<\\s*img\\s+[^>]*src\\s*=\\s*[\"']+)(?!(?:data|https?|ftp|qrcx?):)", Qt::CaseInsensitive );
   imgRe.setMinimal( true );
   QRegExp linkRe( "(<\\s*link\\s+[^>]*href\\s*=\\s*[\"']+)(?!(?:data|https?|ftp):)", Qt::CaseInsensitive );
   linkRe.setMinimal( true );
@@ -963,18 +963,18 @@ QString & GlsDictionary::filterResource( QString & article )
     else
     {
       std::string href = "\"gdau://" + getId() + "/" + src.toUtf8().data() + "\"";
-      QString newTag = QString::fromUtf8( ( addAudioLink( href, getId() ) + "<span class=\"gls_wav\"><a href=" + href + ">" ).c_str() );
+      QString newTag = QString::fromUtf8( ( addAudioLink( href ) + "<span class=\"gls_wav\"><a href=" + href + ">" ).c_str() );
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
       newTag += match.captured( 4 );
       if( match.captured( 4 ).indexOf( "<img " ) < 0 )
-        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
+        newTag += " <img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\">";
       newTag += "</a></span>";
 
       articleNewText += newTag;
 #else
       newTag += audioRe.cap( 4 );
       if( audioRe.cap( 4 ).indexOf( "<img " ) < 0 )
-        newTag += " <img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\">";
+        newTag += " <img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\">";
       newTag += "</a></span>";
 
       article.replace( pos, audioRe.cap( 0 ).length(), newTag );

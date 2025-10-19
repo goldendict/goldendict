@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <QIcon>
 #include "gdappstyle.hh"
+#include "article_urlschemehandler.hh"
 #include "mainwindow.hh"
 #include "config.hh"
 
@@ -28,7 +29,6 @@
 #include "termination.hh"
 #include "atomic_rename.hh"
 
-#include <QWebSecurityOrigin>
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
@@ -38,6 +38,10 @@
 #include <QUrl>
 
 #include "gddebug.hh"
+
+#ifdef USE_QTWEBKIT
+#include <QWebSecurityOrigin>
+#endif
 
 #if defined( Q_OS_MAC ) && QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
 #include "lionsupport.h"
@@ -355,6 +359,10 @@ int main( int argc, char ** argv )
 
 #endif
 
+#ifndef USE_QTWEBKIT
+  registerArticleUrlSchemes();
+#endif
+
   QHotkeyApplication app( "GoldenDict", argc, argv );
   LogFilePtrGuard logFilePtrGuard;
 
@@ -543,10 +551,11 @@ int main( int argc, char ** argv )
   // and with the main window closed.
   app.setQuitOnLastWindowClosed( false );
 
-#if QT_VERSION >= 0x040600
-  // Add the dictionary scheme we use as local, so that the file:// links would
-  // work in the articles. The function was introduced in Qt 4.6.
+#ifdef USE_QTWEBKIT
+  // registerArticleUrlSchemes() is responsible for similar configuration in the Qt WebEngine version.
+  // Add the dictionary schemes we use as local to make file:// and qrc:// links work in articles.
   QWebSecurityOrigin::addLocalScheme( "gdlookup" );
+  QWebSecurityOrigin::addLocalScheme( "gdpicture" );
 #endif
 
   MainWindow m( cfg );

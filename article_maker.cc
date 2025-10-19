@@ -7,7 +7,7 @@
 #include "utf8.hh"
 #include "wstring_qt.hh"
 #include <limits.h>
-#include <QFile>
+#include <QFileInfo>
 #include <QUrl>
 #include <QTextDocumentFragment>
 #include "folding.hh"
@@ -15,24 +15,407 @@
 #include "gddebug.hh"
 #include "qt4x5.hh"
 
+#include <algorithm>
+
+#ifndef USE_QTWEBKIT
+#include <QColor>
+#include <QFile>
+#include <QMessageBox>
+#include <QVarLengthArray>
+
+#include <cctype>
+#include <regex>
+#endif
+
 using std::vector;
 using std::string;
 using gd::wstring;
 using std::set;
 using std::list;
 
+namespace {
+
+void appendScripts( string & result )
+{
+  result +=
+  // *blocking.js scripts block HTML parser, which is acceptable here,
+  // because the scripts are local, instantly available and fast.
+#ifdef USE_QTWEBKIT
+  // Evaluate webkit_blocking.js now to call gdArticleView.onJsPageInitStarted() ASAP.
+            "<script src='qrc:///scripts/webkit_blocking.js'></script>"
+#else
+  // Create QWebChannel now to make gdArticleView available ASAP.
+            "<script src='qrc:///qtwebchannel/qwebchannel.js'></script>"
+            "<script src='qrc:///scripts/webengine_blocking.js'></script>"
+#endif
+  // Start reading the deferred scripts early so that they are ready when needed.
+            "<script defer src='qrc:///scripts/deferred.js'></script>"
+#ifndef USE_QTWEBKIT
+  // Load webengine_deferred.js in the end because it calls gdArticleView.onJsPageInitFinished().
+            "<script defer src='qrc:///scripts/webengine_deferred.js'></script>"
+#endif
+            "<script>"
+            "const gdExpandArticleTitle = \"";
+  result += ArticleMaker::tr( "Expand article" ).toUtf8().constData();
+  result += "\";\n"
+            "const gdCollapseArticleTitle = \"";
+  result += ArticleMaker::tr( "Collapse article" ).toUtf8().constData();
+  result += "\";\n"
+            "</script>"
+            "<script src='qrc:///scripts/blocking.js'></script>"
+            "\n";
+}
+
+class CssAppender
+{
+public:
+  /// @param needPageBackgroundColor_ whether findPageBackgroundColor() will be called.
+  explicit CssAppender( string & result_, bool needPageBackgroundColor_ ):
+    result( result_ ), needPageBackgroundColor( needPageBackgroundColor_ ), isPrintMedia( false )
+  {}
+
+  /// Style sheets appended after a call to this function apply only while printing.
+  /// @note: style sheets with media="print" are appended after uncoditional style sheets,
+  ///        because print-only CSS needs higher priority to override the style used for printing.
+  void startPrintMedia()
+  { isPrintMedia = true; }
+
+  void appendFile( QString const & fileName )
+  {
+    if( !QFileInfo( fileName ).isFile() )
+      return;
+
+#ifndef USE_QTWEBKIT
+    // We are not looking for printed background color.
+    if( needPageBackgroundColor && !isPrintMedia )
+      cssFiles.push_back( fileName );
+#endif
+
+    result += "<link href=\"";
+    result += Html::escape( localFileNameToHtml( fileName ) );
+    result += "\" rel=\"stylesheet\" media=\"";
+    result += isPrintMedia ? "print" : "all";
+    result += "\" />\n";
+  }
+
+#ifndef USE_QTWEBKIT
+  static constexpr auto getPageBackgroundColorPropertyName()
+  { return QLatin1String( pageBackgroundColorPropertyName, pageBackgroundColorPropertyNameSize ); }
+
+  /// @return The page background color or an empty string if
+  ///         the background color could not be found in the style sheets.
+  /// @warning This function parses the style sheets that have been appended to @a result. Therefore it
+  ///          must be called after appending all style sheets that may override the page background color.
+  string findPageBackgroundColor( vector< QString > & unspecifiedColorFileNames ) const
+  {
+    Q_ASSERT( needPageBackgroundColor );
+
+    string backgroundColor;
+
+    // Iterate in the reverse order because the CSS code lower in the page overrides.
+    std::find_if( cssFiles.crbegin(), cssFiles.crend(),
+                  [ &backgroundColor, &unspecifiedColorFileNames ]( QString const & fileName ) {
+      QFile cssFile( fileName );
+      if( !cssFile.open( QIODevice::ReadOnly | QIODevice::Text ) )
+      {
+        gdWarning( "Couldn't open CSS file \"%s\" for reading: %s (%d)", qUtf8Printable( fileName ),
+                   qUtf8Printable( cssFile.errorString() ), static_cast< int >( cssFile.error() ) );
+        return false;
+      }
+
+      if( !findPageBackgroundColor( cssFile, backgroundColor ) )
+        unspecifiedColorFileNames.push_back( fileName );
+
+      // Empty backgroundColor means that this CSS file does not override page
+      // background color, in which case we look for it in the remaining CSS files.
+      return !backgroundColor.empty();
+    } );
+
+    return backgroundColor;
+  }
+#endif // USE_QTWEBKIT
+
+private:
+  static std::string localFileNameToHtml( QString const & fileName )
+  {
+    string result;
+    if( fileName.startsWith( QLatin1String( ":/" ) ) )
+    {
+      // Replace the local file resource prefix ":/" with "qrc:///" for the web page.
+      result = "qrc:///";
+      result += fileName.toUtf8().constData() + 2;
+    }
+    else
+    {
+      // fileName must be a local filesystem path => convert it into a file URL.
+#ifdef Q_OS_WIN32
+      result = "file:///";
+#else
+      result = "file://";
+#endif
+      result += fileName.toUtf8().constData();
+    }
+    return result;
+  }
+
+  string & result;
+  bool const needPageBackgroundColor;
+  bool isPrintMedia;
+
+#ifndef USE_QTWEBKIT
+  static constexpr char pageBackgroundColorPropertyName[] = "--gd-page-background-color";
+  // - 1 accounts for the terminating null character.
+  static constexpr std::size_t pageBackgroundColorPropertyNameSize = sizeof( pageBackgroundColorPropertyName )
+                                                                      / sizeof( char ) - 1;
+
+  vector< QString > cssFiles;
+
+  /// Finds the page background color in @p cssFile.
+  /// First looks for the page background color CSS property. If the property specification
+  /// is missing, falls back to a slower search of the background color of the <body> element.
+  /// @param[out] backgroundColor is set to the page background color or to an empty string
+  ///             if the CSS file does not override page background color.
+  /// @return true if a valid page background color CSS property specification was found, false otherwise.
+  static bool findPageBackgroundColor( QFile & cssFile, string & backgroundColor )
+  {
+    Q_ASSERT( cssFile.isOpen() );
+
+    // TODO: remove the regex fallback, including this variable, all its uses and findBodyBackgroundColor(),
+    // once users have had some time to add the page background color property into their article style files.
+    string cssCode;
+
+    // At the time of writing, each line in built-in article style files fits into maxReasonableLineLength.
+    constexpr int maxReasonableLineLength = 212;
+    QVarLengthArray< char, maxReasonableLineLength > line( maxReasonableLineLength );
+    int offset = 0;
+
+    while( !cssFile.atEnd() )
+    {
+      int const maxSize = line.size() - offset;
+      int bytesRead = cssFile.readLine( line.data() + offset, maxSize );
+      if( bytesRead == -1 )
+      {
+        gdWarning( "Error while reading CSS file \"%s\": %s (%d)", qUtf8Printable( cssFile.fileName() ),
+                   qUtf8Printable( cssFile.errorString() ), static_cast< int >( cssFile.error() ) );
+        break;
+      }
+
+      Q_ASSERT( bytesRead >= 0 );
+      Q_ASSERT( bytesRead < maxSize ); // QIODevice::readLine() reads up to a maximum of maxSize - 1 bytes.
+      if( bytesRead == maxSize - 1 && line[ line.size() - 2 ] != '\n' && !cssFile.atEnd() )
+      {
+        // This line is longer than line.size() => increase the buffer size until the entire line fits in.
+        Q_ASSERT( line.back() == 0 ); // A terminating '\0' byte is always appended to data.
+        offset = line.size() - 1; // Overwrite the terminating '\0' character during the next iteration.
+        line.resize( line.size() * 2 );
+        continue;
+      }
+
+      bytesRead += offset;
+      Q_ASSERT( bytesRead < line.size() );
+      Q_ASSERT( line[ bytesRead ] == 0 ); // A terminating '\0' byte is always appended to data.
+      // We require the property and its value to be on the same line to be able to process the CSS file line by line.
+      if( findPageBackgroundColorProperty( line.data(), line.data() + bytesRead, backgroundColor ) )
+        return true;
+      offset = 0;
+
+      cssCode.append( line.data(), bytesRead );
+    }
+    gdWarning( "Page background color specification is missing from CSS file \"%s\"",
+               qUtf8Printable( cssFile.fileName() ) );
+
+    backgroundColor = findBodyBackgroundColor( cssCode.data(), cssCode.data() + cssCode.size() );
+    return false;
+  }
+
+  static bool isSpace( char ch )
+  {
+    // The behavior of std::isspace() is undefined if the value of ch
+    // is not representable as unsigned char and is not equal to EOF.
+    return std::isspace( static_cast< unsigned char >( ch ) );
+  }
+
+  /// Finds the page background color CSS property in [@p first, @p last).
+  /// @param[out] backgroundColor is set to the page background color if the CSS property is found, unchanged otherwise.
+  /// @note @p backgroundColor set to an empty string means that the CSS file does not override page background color.
+  /// @return true if a valid page background color CSS property specification was found, false otherwise.
+  static bool findPageBackgroundColorProperty( char const * first, char const * last, string & backgroundColor )
+  {
+    char const * it = std::search( first, last, pageBackgroundColorPropertyName,
+                                   pageBackgroundColorPropertyName + pageBackgroundColorPropertyNameSize );
+    if( it == last )
+      return false;
+    it += pageBackgroundColorPropertyNameSize;
+    Q_ASSERT( it <= last );
+
+    auto const skipWhitespace = [ &it, last ] {
+      it = std::find_if_not( it, last, isSpace );
+    };
+
+    skipWhitespace();
+    if( it == last || *it != ':' )
+    {
+      gdWarning( "Missing colon after %s CSS property name. Ignoring this malformed specification.",
+                 pageBackgroundColorPropertyName );
+      return false;
+    }
+    ++it;
+    skipWhitespace();
+
+    char const * const colorBegin = it;
+
+    auto const isCssPropertyValueEnd = []( char ch ) {
+      return ch == ';' || ch == '}' || isSpace( ch );
+    };
+    it = std::find_if( it, last, isCssPropertyValueEnd );
+
+    backgroundColor.assign( colorBegin, it );
+    return true;
+  }
+
+  /// Finds the background color of the <body> element in [@p first, @p last).
+  /// @return the background color or an empty string if it could not be found.
+  static string findBodyBackgroundColor( char const * first, char const * last )
+  {
+    // This regular expression is simple and efficient. But the result is not always accurate:
+    // 1. The first word after "background:" is considered to be the color, even though this first word could
+    //    be something else, e.g. "border-box".
+    // 2. The code inside CSS comments (/*comment*/) is matched too, not skipped.
+    // Built-in and user-defined style sheets must take this simplified matching into account.
+    // On the bright side, the user can easily override the background color matched here by adding a comment
+    // like /* body{ background:#abcdef } */ at the end of the user-defined article-style.css file.
+    static std::regex const backgroundRegex( R"(\bbody\s*\{[^}]*\bbackground(?:|-color)\s*:\s*([^\s;}]+))",
+                      // CSS code is case-insensitive => regex::icase.
+                      // The regex object is reused (static) and the CSS code can be large => regex::optimize.
+                                             std::regex::icase | std::regex::optimize );
+
+    // Iterate over all matches and return the last one, because the CSS code lower in the page overrides.
+    string::const_iterator::difference_type position = -1, length;
+    for( std::cregex_iterator it( first, last, backgroundRegex ), end; it != end; ++it )
+    {
+      Q_ASSERT( it->size() == 2 );
+
+      position = it->position( 1 );
+      Q_ASSERT( position >= 0 );
+
+      length = it->length( 1 );
+      Q_ASSERT( length > 0 );
+      Q_ASSERT( first + position + length <= last );
+    }
+
+    if( position == -1 )
+      return {};
+    return string( first + position, first + position + length );
+  }
+#endif
+};
+
+#ifndef USE_QTWEBKIT
+constexpr char CssAppender::pageBackgroundColorPropertyName[];
+
+QString wrapInHtmlCodeElement( QLatin1String text )
+{
+  return QLatin1String( "<code>%1</code>" ).arg( text );
+}
+
+QString bodyElementHtmlCode()
+{
+  return wrapInHtmlCodeElement( QLatin1String{ "&lt;body&gt;" } );
+}
+
+QString htmlElementHtmlCode()
+{
+  return wrapInHtmlCodeElement( QLatin1String{ "&lt;html&gt;" } );
+}
+
+QString propertyNameHtmlCode()
+{
+  return wrapInHtmlCodeElement( CssAppender::getPageBackgroundColorPropertyName() );
+}
+
+QString missingSpecificationWarningMessage( vector< QString > const & unspecifiedColorFileNames )
+{
+  Q_ASSERT( !unspecifiedColorFileNames.empty() );
+
+  QString message = ArticleMaker::tr( "<p>Page background color specification is missing from the following CSS files:"
+                                      "</p>" ) + QLatin1String( "<pre>" );
+  for( auto const & fileName : unspecifiedColorFileNames )
+  {
+    message += QLatin1String( "<p style='margin: 0px;'>" );
+    message += fileName;
+    message += QLatin1String( "</p>" );
+  }
+  message += QLatin1String( "</pre>" );
+
+  message += ArticleMaker::tr( "<p>Please insert a page background color specification at the top (or close to the "
+                               "top) of each of these files. For example:</p>" );
+  // Recommend to define the page background color custom property on the :root pseudo-class to allow using it globally
+  // across the CSS file in the future. Do not recommend actually using the custom property value with
+  // `var(--gd-page-background-color)` for now. Custom CSS properties are not supported by Qt 5 WebKit, and it is
+  // important to maintain style sheet compatibility with the Qt WebKit version of GoldenDict while it is widely used.
+  message += QLatin1String( "<pre>:root\n{\n  %1: COLOR;\n}</pre>" )
+              .arg( CssAppender::getPageBackgroundColorPropertyName() );
+
+  message += ArticleMaker::tr( "<p>Replace %1 with the actual page background color specified in the CSS file, that is "
+                               "%2 or %3 background color. If the CSS file does not specify the page background color, "
+                               "replace %1 with an empty string (without quotes).</p>"
+                               "<p>Incorrect or missing page background color specification may cause article page "
+                               "background flashes.</p>"
+                               "<p>Supported page background color specification format is strict: quotes are not "
+                               "allowed, the property name %4 and its value must be on the same line. On the other "
+                               "hand, the surrounding declaration block does not matter to GoldenDict. The property "
+                               "specification can just as well be inside a CSS comment instead of the %5 pseudo-class "
+                               "block.</p>" )
+              .arg( wrapInHtmlCodeElement( QLatin1String{ "COLOR" } ), bodyElementHtmlCode(), htmlElementHtmlCode(),
+                    propertyNameHtmlCode(), wrapInHtmlCodeElement( QLatin1String{ ":root" } ) );
+
+  return message;
+}
+
+QString invalidColorWarningMessage( QString const & pageBackgroundColor )
+{
+  return ArticleMaker::tr( "<p>Invalid page background color is specified in the article style sheets:</p>" )
+         + QLatin1String( "<pre>%1</pre>" ).arg( pageBackgroundColor )
+         + ArticleMaker::tr( "<p>Set %1 to the actual page background color specified in the CSS file, that is %2 or "
+                             "%3 background color. If the CSS file does not specify the page background color, set %1 "
+                             "to an empty string (without quotes).</p>"
+                             "<p>Supported color value formats:</p><ul>"
+                             "<li>#RGB (each of R, G, and B is a single hex digit)</li>"
+                             "<li>#RRGGBB</li>"
+                             "<li>#AARRGGBB</li>"
+                             "<li>#RRRGGGBBB</li>"
+                             "<li>#RRRRGGGGBBBB</li>"
+                             "<li>A name from the list of colors defined in the list of <a href=\""
+                             "https://www.w3.org/TR/SVG11/types.html#ColorKeywords\">SVG color keyword names</a> "
+                             "provided by the World Wide Web Consortium; for example, %4 or %5.</li>"
+                             "<li>%6 - representing the absence of a color.</li></ul>" )
+            .arg( propertyNameHtmlCode(), bodyElementHtmlCode(), htmlElementHtmlCode(),
+                  wrapInHtmlCodeElement( QLatin1String{ "steelblue" } ),
+                  wrapInHtmlCodeElement( QLatin1String{ "gainsboro" } ),
+                  wrapInHtmlCodeElement( QLatin1String{ "transparent" } ) );
+}
+
+#endif // USE_QTWEBKIT
+
+} // unnamed namespace
+
 ArticleMaker::ArticleMaker( vector< sptr< Dictionary::Class > > const & dictionaries_,
                             vector< Instances::Group > const & groups_,
                             QString const & displayStyle_,
-                            QString const & addonStyle_):
+                            QString const & addonStyle_,
+                            QWidget * dialogParent_ ):
   dictionaries( dictionaries_ ),
   groups( groups_ ),
   displayStyle( displayStyle_ ),
   addonStyle( addonStyle_ ),
+#ifndef USE_QTWEBKIT
+  dialogParent( dialogParent_ ),
+#endif
   needExpandOptionalParts( true )
 , collapseBigArticles( true )
 , articleLimitSize( 500 )
 {
+  Q_UNUSED( dialogParent_ )
 }
 
 void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
@@ -41,190 +424,107 @@ void ArticleMaker::setDisplayStyle( QString const & st, QString const & adst )
   addonStyle = adst;
 }
 
+#ifndef USE_QTWEBKIT
+QColor ArticleMaker::colorFromString( string const & pageBackgroundColor ) const
+{
+  if( pageBackgroundColor.empty() )
+  {
+    Q_ASSERT_X( false, Q_FUNC_INFO, "The default built-in style sheet :/article-style.css is unconditionally appended "
+                                    "and specifies a valid page background color, which is parsed correctly." );
+    gdWarning( "Couldn't find the page background color in the article style sheets." );
+    return QColor();
+  }
+
+  auto const pageBackgroundColorQString = QString::fromUtf8( pageBackgroundColor.c_str() );
+  QColor color( pageBackgroundColorQString );
+  if( !color.isValid() )
+  {
+    gdWarning( "Found invalid page background color in the article style sheets: \"%s\"", pageBackgroundColor.c_str() );
+    if( !hasShownBackgroundColorWarningMessage )
+    {
+      hasShownBackgroundColorWarningMessage = true;
+      QMessageBox::warning( dialogParent, "GoldenDict", invalidColorWarningMessage( pageBackgroundColorQString ) );
+    }
+    return QColor();
+  }
+
+  GD_DPRINTF( "Found page background color in the article style sheets: \"%s\" = %s\n", pageBackgroundColor.c_str(),
+              // Print the result of QColor's nontrivial parsing of pageBackgroundColor string.
+              // Print the alpha component only if the color is not fully opaque.
+              qPrintable( color.name( color.alpha() == 255 ? QColor::HexRgb : QColor::HexArgb ) ) );
+  return color;
+}
+#endif
+
+void ArticleMaker::appendCss( string & result, bool expandOptionalParts, QColor * pageBackgroundColor ) const
+{
+  CssAppender cssAppender( result, static_cast< bool >( pageBackgroundColor ) );
+
+  cssAppender.appendFile( ":/article-style.css" );
+  if( !displayStyle.isEmpty() )
+    cssAppender.appendFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
+  cssAppender.appendFile( Config::getUserCssFileName() );
+  if( !addonStyle.isEmpty() )
+    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style.css" );
+
+  // Turn on/off expanding of article optional parts
+  if( expandOptionalParts )
+    cssAppender.appendFile( ":/article-style-expand-optional-parts.css" );
+
+  cssAppender.startPrintMedia();
+
+  cssAppender.appendFile( ":/article-style-print.css" );
+  cssAppender.appendFile( Config::getUserCssPrintFileName() );
+  if( !addonStyle.isEmpty() )
+    cssAppender.appendFile( Config::getStylesDir() + addonStyle + QDir::separator() + "article-style-print.css" );
+
+#ifdef USE_QTWEBKIT
+  Q_ASSERT( !pageBackgroundColor );
+#else
+  if( pageBackgroundColor )
+  {
+    vector< QString > unspecifiedColorFileNames;
+    auto const backgroundColorString = cssAppender.findPageBackgroundColor( unspecifiedColorFileNames );
+    if( !unspecifiedColorFileNames.empty() && !hasShownBackgroundColorWarningMessage )
+    {
+      hasShownBackgroundColorWarningMessage = true;
+      QMessageBox::warning( dialogParent, "GoldenDict",
+                            missingSpecificationWarningMessage( unspecifiedColorFileNames ) );
+    }
+    *pageBackgroundColor = colorFromString( backgroundColorString );
+  }
+#endif
+}
+
 std::string ArticleMaker::makeHtmlHeader( QString const & word,
                                           QString const & icon,
-                                          bool expandOptionalParts ) const
+                                          bool expandOptionalParts,
+                                          QColor * pageBackgroundColor ) const
 {
   string result =
     "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
     "<html><head>"
     "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
 
-  // Add a css stylesheet
-
-  {
-    QFile builtInCssFile( ":/article-style.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-
-    if( !css.isEmpty() )
-    {
-      result += "\n<!-- Built-in css -->\n";
-      result += "<style type=\"text/css\" media=\"all\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
-
-    if ( displayStyle.size() )
-    {
-      // Load an additional stylesheet
-      QFile builtInCssFile( QString( ":/article-style-st-%1.css" ).arg( displayStyle ) );
-      builtInCssFile.open( QFile::ReadOnly );
-      css = builtInCssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- Built-in style css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
-    }
-
-    QFile cssFile( Config::getUserCssFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User css -->\n";
-        result += "<style type=\"text/css\" media=\"all\">\n";
-        result += css.data();
-        result += "</style>\n";
-      }
-    }
-
-    if( !addonStyle.isEmpty() )
-    {
-      QString name = Config::getStylesDir() + addonStyle
-                     + QDir::separator() + "article-style.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style css -->\n";
-          result += "<style type=\"text/css\" media=\"all\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
-    }
-
-    // Turn on/off expanding of article optional parts
-    if( expandOptionalParts )
-    {
-      result += "<!-- Expand optional parts css -->\n";
-      result += "<style type=\"text/css\" media=\"all\">\n";
-      result += "\n.dsl_opt\n{\n  display: inline;\n}\n\n.hidden_expand_opt\n{\n  display: none !important;\n}\n";
-      result += "</style>\n";
-    }
-
-  }
-
-  // Add print-only css
-
-  {
-    QFile builtInCssFile( ":/article-style-print.css" );
-    builtInCssFile.open( QFile::ReadOnly );
-    QByteArray css = builtInCssFile.readAll();
-    if( !css.isEmpty() )
-    {
-      result += "<!-- Built-in print css -->\n";
-      result += "<style type=\"text/css\" media=\"print\">\n";
-      result += css.data();
-      result += "</style>\n";
-    }
-
-    QFile cssFile( Config::getUserCssPrintFileName() );
-
-    if ( cssFile.open( QFile::ReadOnly ) )
-    {
-      css = cssFile.readAll();
-      if( !css.isEmpty() )
-      {
-        result += "<!-- User print css -->\n";
-        result += "<style type=\"text/css\" media=\"print\">\n";
-        result += css.data();
-        result += "</style>\n";
-        css.clear();
-      }
-    }
-
-    if( !addonStyle.isEmpty() )
-    {
-      QString name = Config::getStylesDir() + addonStyle
-                     + QDir::separator() + "article-style-print.css";
-      QFile addonCss( name );
-      if( addonCss.open( QFile::ReadOnly ) )
-      {
-        css = addonCss.readAll();
-        if( !css.isEmpty() )
-        {
-          result += "<!-- Addon style print css -->\n";
-          result += "<style type=\"text/css\" media=\"print\">\n";
-          result += css.data();
-          result += "</style>\n";
-        }
-      }
-    }
-  }
+  appendScripts( result );
+  appendCss( result, expandOptionalParts, pageBackgroundColor );
 
   result += "<title>" + Html::escape( Utf8::encode( gd::toWString( word ) ) ) + "</title>";
 
   // This doesn't seem to be much of influence right now, but we'll keep
   // it anyway.
   if ( icon.size() )
-    result += "<link rel=\"icon\" type=\"image/png\" href=\"qrcx://localhost/flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
+    result += "<link rel=\"icon\" type=\"image/png\" href=\"qrc:///flags/" + Html::escape( icon.toUtf8().data() ) + "\" />\n";
 
-  result += "<script type=\"text/javascript\">"
-            "var gdAudioLinks = { first: null, current: null };"
-            "function gdMakeArticleActive( newId ) {"
-            "if ( gdCurrentArticle != 'gdfrom-' + newId ) {"
-            "el=document.getElementById( gdCurrentArticle ); el.className = el.className.replace(' gdactivearticle','');"
-            "el=document.getElementById( 'gdfrom-' + newId ); el.className = el.className + ' gdactivearticle';"
-            "gdCurrentArticle = 'gdfrom-' + newId; gdAudioLinks.current = newId;"
-            "articleview.onJsActiveArticleChanged(gdCurrentArticle); } }"
-            "var overIframeId = null;"
-            "function gdSelectArticle( id ) {"
-            "var selection = window.getSelection(); var range = document.createRange();"
-            "range.selectNodeContents(document.getElementById('gdfrom-' + id));"
-            "selection.removeAllRanges(); selection.addRange(range); }"
-            "function processIframeMouseOut() { overIframeId = null; top.focus(); }"
-            "function processIframeMouseOver( newId ) { overIframeId = newId; }"
-            "function processIframeClick() { if( overIframeId != null ) { overIframeId = overIframeId.replace( 'gdexpandframe-', '' ); gdMakeArticleActive( overIframeId ) } }"
-            "function init() { window.addEventListener('blur', processIframeClick, false); }"
-            "window.addEventListener('load', init, false);"
-            "function gdExpandOptPart( expanderId, optionalId ) {  var d1=document.getElementById(expanderId); var i = 0; if( d1.alt == '[+]' ) {"
-            "d1.alt = '[-]'; d1.src = 'qrcx://localhost/icons/collapse_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='inline'; } }"
-            "else { d1.alt = '[+]'; d1.src = 'qrcx://localhost/icons/expand_opt.png'; for( i = 0; i < 1000; i++ ) { var d2=document.getElementById( optionalId + i ); if( !d2 ) break; d2.style.display='none'; } } };"
-            "function gdExpandArticle( id ) { elem = document.getElementById('gdarticlefrom-'+id); ico = document.getElementById('expandicon-'+id); art=document.getElementById('gdfrom-'+id);"
-            "ev=window.event; t=null;"
-            "if(ev) t=ev.target || ev.srcElement;"
-            "if(elem.style.display=='inline' && t==ico) {"
-            "elem.style.display='none'; ico.className='gdexpandicon';"
-            "art.className = art.className+' gdcollapsedarticle';"
-            "nm=document.getElementById('gddictname-'+id); nm.style.cursor='pointer';"
-            "if(ev) ev.stopPropagation(); ico.title=''; nm.title=\"";
-  result += tr( "Expand article" ).toUtf8().data();
-  result += "\" } else if(elem.style.display=='none') {"
-            "elem.style.display='inline'; ico.className='gdcollapseicon';"
-            "art.className=art.className.replace(' gdcollapsedarticle','');"
-            "nm=document.getElementById('gddictname-'+id); nm.style.cursor='default';"
-            "nm.title=''; ico.title=\"";
-  result += tr( "Collapse article").toUtf8().data();
-  result += "\" } }"
-            "function gdCheckArticlesNumber() {"
-            "elems=document.getElementsByClassName('gddictname');"
-            "if(elems.length == 1) {"
-              "el=elems.item(0); s=el.id.replace('gddictname-','');"
-              "el=document.getElementById('gdfrom-'+s);"
-              "if(el && el.className.search('gdcollapsedarticle')>0) gdExpandArticle(s);"
-            "} }"
-            "</script>";
-
-  result += "</head><body>";
+  result += "</head><body"
+#ifndef USE_QTWEBKIT
+  // Qt WebEngine API does not provide a way to check whether a mouse click occurs on a page
+  // proper or on its scrollbar. We are only interested in clicks on the page contents
+  // within <body>. Listen to such mouse events and send messages from JavaScript to C++.
+            " onMouseDown='gdBodyMouseDown(event);'"
+            " onMouseUp='gdBodyMouseUp(event);'"
+#endif
+            ">";
 
   return result;
 }
@@ -235,11 +535,7 @@ std::string ArticleMaker::makeNotFoundBody( QString const & word,
   string result( "<div class=\"gdnotfound\"><p>" );
 
   QString str( word );
-  if( str.isRightToLeft() )
-  {
-    str.insert( 0, (ushort)0x202E ); // RLE, Right-to-Left Embedding
-    str.append( (ushort)0x202C ); // PDF, POP DIRECTIONAL FORMATTING
-  }
+  Folding::prepareToEmbedRTL( str );
 
   if ( word.size() )
     result += tr( "No translation for <b>%1</b> was found in group <b>%2</b>." ).
@@ -405,10 +701,15 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeNotFoundTextFor(
   return r;
 }
 
-sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
+string ArticleMaker::makeBlankPageHtmlCode( QColor * pageBackgroundColor ) const
 {
-  string result = makeHtmlHeader( tr( "(untitled)" ), QString(), true ) +
+  return makeHtmlHeader( tr( "(untitled)" ), QString(), true, pageBackgroundColor ) +
     "</body></html>";
+}
+
+sptr< Dictionary::DataRequest > ArticleMaker::makeBlankPage() const
+{
+  string const result = makeBlankPageHtmlCode();
 
   sptr< Dictionary::DataRequestInstant > r =
       new Dictionary::DataRequestInstant( true );
@@ -422,7 +723,7 @@ sptr< Dictionary::DataRequest > ArticleMaker::makeEmptyPage() const
 sptr< Dictionary::DataRequest > ArticleMaker::makePicturePage( string const & url ) const
 {
   string result = makeHtmlHeader( tr( "(picture)" ), QString(), true )
-                  + "<a href=\"javascript: if(history.length>2) history.go(-1)\">"
+                  + "<a href=\"javascript: history.back();\">"
                   + "<img src=\"" + url + "\" /></a>"
                   + "</body></html>";
 
@@ -593,6 +894,15 @@ int ArticleRequest::findEndOfCloseDiv( const QString &str, int pos )
   }
 }
 
+static void appendGdMakeArticleActiveOn( string & result, char const * jsEvent, string const & dictionaryId )
+{
+  result += " on";
+  result += jsEvent;
+  result += "=\"gdMakeArticleActive('";
+  result += dictionaryId;
+  result += "');\"";
+}
+
 void ArticleRequest::bodyFinished()
 {
   if ( bodyDone )
@@ -630,13 +940,7 @@ void ArticleRequest::bodyFinished()
         {
           head += "</div></div><div style=\"clear:both;\"></div><span class=\"gdarticleseparator\"></span>";
         }
-        else
-        {
-          // This is the first article
-          head += "<script type=\"text/javascript\">"
-                  "var gdCurrentArticle=\"" + gdFrom  + "\"; "
-                  "articleview.onJsActiveArticleChanged(gdCurrentArticle)</script>";
-        }
+        // else: this is the first article
 
         bool collapse = false;
         if( articleSizeLimit >= 0 )
@@ -676,17 +980,26 @@ void ArticleRequest::bodyFinished()
         }
 
         string jsVal = Html::escapeForJavaScript( dictId );
-        head += "<script type=\"text/javascript\">var gdArticleContents; "
-          "if ( !gdArticleContents ) gdArticleContents = \"" + jsVal +" \"; "
-          "else gdArticleContents += \"" + jsVal + " \";</script>";
 
         head += string( "<div class=\"gdarticle" ) +
+#ifdef USE_QTWEBKIT
+                // gdCurrentArticleLoaded() initializes " gdactivearticle" in the Qt WebEngine version.
                 ( closePrevSpan ? "" : " gdactivearticle" ) +
+#endif
                 ( collapse ? " gdcollapsedarticle" : "" ) +
-                "\" id=\"" + gdFrom +
-                "\" onClick=\"gdMakeArticleActive( '" + jsVal + "' );\" " +
-                " onContextMenu=\"gdMakeArticleActive( '" + jsVal + "' );\""
-                + ">";
+                "\" id=\"" + gdFrom + '"';
+
+        // Make the article active on left, middle or right mouse button click.
+        appendGdMakeArticleActiveOn( head, "click", jsVal );
+        // A right mouse button click triggers only "contextmenu" JavaScript event.
+        appendGdMakeArticleActiveOn( head, "contextmenu", jsVal );
+        // In the Qt WebKit version both a left and a middle mouse button click triggers "click" JavaScript event.
+        // In the Qt WebEngine version a left mouse button click triggers "click", a middle - "auxclick" event.
+#ifndef USE_QTWEBKIT
+        appendGdMakeArticleActiveOn( head, "auxclick", jsVal );
+#endif
+
+        head += '>';
 
         closePrevSpan = true;
 
@@ -698,7 +1011,7 @@ void ArticleRequest::bodyFinished()
           + "/dicticon.png\"></span><span class=\"gdfromprefix\">"  +
           Html::escape( tr( "From " ).toUtf8().data() ) + "</span><span class=\"gddicttitle\">" +
           Html::escape( activeDict->getName().c_str() ) + "</span>"
-          + "<span class=\"collapse_expand_area\"><img src=\"qrcx://localhost/icons/blank.png\" class=\""
+          + "<span class=\"collapse_expand_area\"><img src=\"qrc:///icons/blank.png\" class=\""
           + ( collapse ? "gdexpandicon" : "gdcollapseicon" )
           + "\" id=\"expandicon-" + Html::escape( dictId ) + "\""
           + ( collapse ? "" : string( " title=\"" ) + tr( "Collapse article" ).toUtf8().data() + "\"" )
@@ -726,7 +1039,9 @@ void ArticleRequest::bodyFinished()
 
         size_t offset = data.size();
 
-        data.resize( data.size() + head.size() + ( req.dataSize() > 0 ? req.dataSize() : 0 ) );
+        string const articleEnding = "<script>gdArticleLoaded(\"" + gdFrom + "\");</script>";
+
+        data.resize( data.size() + head.size() + ( req.dataSize() > 0 ? req.dataSize() : 0 ) + articleEnding.size() );
 
         memcpy( &data.front() + offset, head.data(), head.size() );
 
@@ -740,6 +1055,8 @@ void ArticleRequest::bodyFinished()
         {
           gdWarning( "getDataSlice error: %s\n", e.what() );
         }
+
+        std::copy( articleEnding.begin(), articleEnding.end(), data.end() - articleEnding.size() );
 
         wasUpdated = true;
 

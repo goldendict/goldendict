@@ -39,7 +39,7 @@ void orderAndAddItems( QComboBox & comboBox, std::vector< ComboBoxItem > & items
 } // unnamed namespace
 
 Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
-  QDialog( parent ), prevInterfaceLanguage( 0 )
+  QDialog( parent ), prevInterfaceLanguage( 0 ), prevOffTheRecordWebProfile( false )
 , helpWindow( 0 )
 , cfg( cfg_ )
 , helpAction( this )
@@ -280,6 +280,12 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.ignoreOwnClipboardChanges->hide();
 #endif
 
+#ifdef USE_QTWEBKIT
+  ui.networkTabLayout->removeItem( ui.offTheRecordVerticalSpacer );
+  delete ui.offTheRecordVerticalSpacer;
+  ui.offTheRecordWebProfile->hide();
+#endif
+
   // Sound
 
   ui.pronounceOnLoadMain->setChecked( p.pronounceOnLoadMain );
@@ -352,6 +358,8 @@ Preferences::Preferences( QWidget * parent, Config::Class & cfg_ ):
   ui.hideGoldenDictHeader->setChecked( p.hideGoldenDictHeader );
   ui.maxNetworkCacheSize->setValue( p.maxNetworkCacheSize );
   ui.clearNetworkCacheOnExit->setChecked( p.clearNetworkCacheOnExit );
+  ui.offTheRecordWebProfile->setChecked( p.offTheRecordWebProfile );
+  prevOffTheRecordWebProfile = p.offTheRecordWebProfile;
 
   // Add-on styles
   ui.addonStylesLabel->setVisible( ui.addonStyles->count() > 1 );
@@ -484,6 +492,7 @@ Config::Preferences Preferences::getPreferences()
   p.hideGoldenDictHeader = ui.hideGoldenDictHeader->isChecked();
   p.maxNetworkCacheSize = ui.maxNetworkCacheSize->value();
   p.clearNetworkCacheOnExit = ui.clearNetworkCacheOnExit->isChecked();
+  p.offTheRecordWebProfile = ui.offTheRecordWebProfile->isChecked();
 
   p.addonStyle = ui.addonStyles->getCurrentStyle();
 
@@ -660,6 +669,12 @@ void Preferences::on_buttonBox_accepted()
   if ( prevInterfaceLanguage != ui.interfaceLanguage->currentIndex() )
     QMessageBox::information( this, tr( "Changing Language" ),
                               tr( "Restart the program to apply the language change." ) );
+
+  if( prevOffTheRecordWebProfile != ui.offTheRecordWebProfile->isChecked() )
+  {
+    QMessageBox::information( this, tr( "Changing off-the-record" ),
+                              tr( "Restart the program to apply the off-the-record web profile change." ) );
+  }
 }
 
 void Preferences::on_useExternalPlayer_toggled( bool enabled )

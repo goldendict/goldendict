@@ -6,21 +6,26 @@
 
 #include <QtNetwork>
 
+#ifdef USE_QTWEBKIT
 #if QT_VERSION >= 0x050300  // Qt 5.3+
 #include <QWebSecurityOrigin>
 #include <QSet>
 #include <QMap>
 #include <QPair>
-#endif
+#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
 #include "dictionary.hh"
-#include "article_maker.hh"
 
 using std::vector;
+
+class ArticleMaker;
+class QColor;
 
 /// A custom QNetworkAccessManager version which fetches images from the
 /// dictionaries when requested.
 
+#ifdef USE_QTWEBKIT
 #if QT_VERSION >= 0x050300  // Qt 5.3+
 
 // White lists for QWebSecurityOrigin
@@ -119,6 +124,20 @@ protected:
   { return baseReply->readLine( data, maxSize ); }
   qint64 writeData( const char * data, qint64 maxSize )
   { return baseReply->write( data, maxSize ); }
+
+private slots:
+  void finishedSlot();
+};
+#endif // QT_VERSION
+#endif // USE_QTWEBKIT
+
+#ifndef USE_QTWEBKIT
+/// Signifies workarounds for QTBUG-106461 needed in the current run-time Qt WebEngine version.
+enum class StreamingDeviceWorkarounds
+{
+  None, ///< The bug is completely fixed in Qt WebEngine 6.4.1.
+  AtEndOnly, ///< Busy waiting is fixed in Qt WebEngine 5.15.11 and 6.4.0.
+  AtEndAndReadData
 };
 #endif
 
@@ -128,9 +147,13 @@ class ArticleNetworkAccessManager: public QNetworkAccessManager
   ArticleMaker const & articleMaker;
   bool const & disallowContentFromOtherSites;
   bool const & hideGoldenDictHeader;
-#if QT_VERSION >= 0x050300  // Qt 5.3+
+#if defined( USE_QTWEBKIT ) && QT_VERSION >= 0x050300  // Qt 5.3+
   Origins allOrigins;
 #endif
+#ifndef USE_QTWEBKIT
+  StreamingDeviceWorkarounds streamingDeviceWorkarounds = StreamingDeviceWorkarounds::None;
+#endif
+
 public:
 
   ArticleNetworkAccessManager( QObject * parent,
@@ -144,6 +167,14 @@ public:
     disallowContentFromOtherSites( disallowContentFromOtherSites_ ),
     hideGoldenDictHeader( hideGoldenDictHeader_ )
   {}
+
+#ifndef USE_QTWEBKIT
+  void setStreamingDeviceWorkarounds( StreamingDeviceWorkarounds workarounds )
+  { streamingDeviceWorkarounds = workarounds; }
+#endif
+
+  /// @return articleMaker.makeBlankPageHtmlCode( pageBackgroundColor )
+  std::string makeBlankPage( QColor * pageBackgroundColor = 0 ) const;
 
   /// Tries handling any kind of internal resources referenced by dictionaries.
   /// If it succeeds, the result is a dictionary request object. Otherwise, an
@@ -165,6 +196,9 @@ class ArticleResourceReply: public QNetworkReply
 
   sptr< Dictionary::DataRequest > req;
   qint64 alreadyRead;
+#ifndef USE_QTWEBKIT
+  StreamingDeviceWorkarounds streamingDeviceWorkarounds = StreamingDeviceWorkarounds::None;
+#endif
 
 public:
 
@@ -175,12 +209,23 @@ public:
 
   ~ArticleResourceReply();
 
+#ifndef USE_QTWEBKIT
+  void setStreamingDeviceWorkarounds( StreamingDeviceWorkarounds workarounds )
+  { streamingDeviceWorkarounds = workarounds; }
+#endif
+
 protected:
 
   virtual qint64 bytesAvailable() const;
 
+#ifndef USE_QTWEBKIT
+  bool atEnd() const override;
+#endif
+
   virtual void abort()
   {}
+  virtual void close();
+
   virtual qint64 readData( char * data, qint64 maxSize );
 
   // We use the hackery below to work around the fact that we need to emit
@@ -205,7 +250,7 @@ class BlockedNetworkReply: public QNetworkReply
 
 public:
 
-  BlockedNetworkReply( QObject * parent );
+  explicit BlockedNetworkReply( QNetworkRequest const & request, QObject * parent );
 
   virtual qint64 readData( char *, qint64 )
   {

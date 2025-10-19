@@ -10,12 +10,18 @@
 #include <QUrl>
 
 #include "article_netmgr.hh"
+#include "article_maker.hh"
 #include "wstring_qt.hh"
 #include "gddebug.hh"
 #include "qt4x5.hh"
 
+#ifndef USE_QTWEBKIT
+#include <QThread>
+#endif
+
 using std::string;
 
+#ifdef USE_QTWEBKIT
 #if QT_VERSION >= 0x050300 // Qt 5.3+
 
   // SecurityWhiteList
@@ -91,7 +97,7 @@ using std::string;
 
     connect( baseReply, SIGNAL( encrypted() ), this, SIGNAL( encrypted() ) );
 
-    connect( baseReply, SIGNAL( finished() ), this, SIGNAL( finished() ) );
+    connect( baseReply, SIGNAL( finished() ), this, SLOT( finishedSlot() ) );
 
     connect( baseReply, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ),
              this, SIGNAL( preSharedKeyAuthenticationRequired( QSslPreSharedKeyAuthenticator * ) ) );
@@ -204,7 +210,16 @@ using std::string;
     return size;
   }
 
+  void AllowFrameReply::finishedSlot()
+  {
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+    setFinished( true );
 #endif
+    emit finished();
+  }
+
+#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
 namespace
 {
@@ -238,10 +253,22 @@ namespace
   }
 }
 
+string ArticleNetworkAccessManager::makeBlankPage( QColor * pageBackgroundColor ) const
+{
+  return articleMaker.makeBlankPageHtmlCode( pageBackgroundColor );
+}
+
 QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
                                                             QNetworkRequest const & req,
                                                             QIODevice * outgoingData )
 {
+  // Don't wrap in AllowFrameReply replies for local URL schemes used by the initial blank and Welcome! pages
+  // to prevent the warning "QIODevice::read (QNetworkReplyFileImpl): device not open" at GoldenDict start
+  // as AllowFrameReply::baseReply is not open when AllowFrameReply::readDataFromBase() is invoked then.
+
+  if( req.url().scheme() == QLatin1String( "qrc" ) )
+    return QNetworkAccessManager::createRequest( op, req, outgoingData ); // bypass AllowFrameReply
+
   QNetworkRequest localReq( req );
 
   if( ( localReq.url().scheme() == "gdlookup" || localReq.url().scheme() == "http" ) && localReq.url().host() == "upload.wikimedia.org" )
@@ -257,8 +284,14 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
   {
     if ( localReq.url().scheme() == "qrcx" )
     {
-      // We have to override the local load policy for the qrc scheme, hence
-      // we use qrcx and redirect it here back to qrc
+      // We had to override the local load policy for the qrc URL scheme until QWebSecurityOrigin::addLocalScheme() was
+      // introduced in Qt 4.6. Hence we used a custom qrcx URL scheme and redirected it here back to qrc. Qt versions
+      // older than 4.6 are no longer supported, so GoldenDict itself no longer uses the qrcx scheme. However, qrcx has
+      // been used for many years in our built-in article styles, and so may appear in user-defined article styles.
+      // TODO: deprecate (print a warning or show a warning message box) and eventually remove support for the obsolete
+      // qrcx URL scheme. A recent commit "Add support for qrc:// URL scheme" is the first one where the qrc scheme
+      // works correctly. So the deprecation has to wait until older GoldenDict versions become rarely used.
+
       QUrl newUrl( localReq.url() );
 
       newUrl.setScheme( "qrc" );
@@ -269,6 +302,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
       return QNetworkAccessManager::createRequest( op, localReq, outgoingData );
     }
 
+#ifdef USE_QTWEBKIT
 #if QT_VERSION >= 0x050300 // Qt 5.3+
     // Workaround of same-origin policy
     if( ( localReq.url().scheme().startsWith( "http" ) || localReq.url().scheme() == "ftp" )
@@ -301,14 +335,21 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
         }
       }
     }
-#endif
+#endif // QT_VERSION
+#endif // USE_QTWEBKIT
 
     QString contentType;
 
     sptr< Dictionary::DataRequest > dr = getResource( localReq.url(), contentType );
 
     if ( dr.get() )
-      return new ArticleResourceReply( this, localReq, dr, contentType );
+    {
+      ArticleResourceReply * const reply = new ArticleResourceReply( this, localReq, dr, contentType );
+#ifndef USE_QTWEBKIT
+      reply->setStreamingDeviceWorkarounds( streamingDeviceWorkarounds );
+#endif
+      return reply;
+    }
   }
 
   // Check the Referer. If the user has opted-in to block elements from external
@@ -330,10 +371,14 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
     {
       gdWarning( "Blocking element \"%s\"\n", localReq.url().toEncoded().data() );
 
-      return new BlockedNetworkReply( this );
+      return new BlockedNetworkReply( localReq, this );
     }
   }
 
+  // TODO (Qt WebEngine): obtain a dictionary that contains file:// links for testing and
+  // make this code work in the Qt WebEngine version. Currently it does not work because
+  // GoldenDict does not install an URL scheme handler for the standard "file" scheme.
+  // This looks like an adjustment of a relative path to a dictionary in the portable version.
   if( localReq.url().scheme() == "file" )
   {
     // Check file presence and adjust path if necessary
@@ -350,6 +395,8 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 
       return QNetworkAccessManager::createRequest( op, localReq, outgoingData );
     }
+
+    return QNetworkAccessManager::createRequest( op, localReq, outgoingData ); // bypass AllowFrameReply
   }
 
   QNetworkReply *reply = 0;
@@ -374,7 +421,7 @@ QNetworkReply * ArticleNetworkAccessManager::createRequest( Operation op,
 #endif
   }
 
-#if QT_VERSION >= 0x050300 // Qt 5.3+
+#if defined( USE_QTWEBKIT ) && QT_VERSION >= 0x050300 // Qt 5.3+
   return op == QNetworkAccessManager::GetOperation
          || op == QNetworkAccessManager::HeadOperation ? new AllowFrameReply( reply ) : reply;
 #else
@@ -400,7 +447,11 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
     contentType = "text/html";
 
     if ( Qt4x5::Url::queryItemValue( url, "blank" ) == "1" )
-      return articleMaker.makeEmptyPage();
+    {
+      // This branch is never taken in the Qt WebEngine and Qt 4 WebKit versions.
+      // It is taken in the Qt 5 WebKit version only when the initial blank page is reloaded.
+      return articleMaker.makeBlankPage();
+    }
 
     Config::InputPhrase phrase ( Qt4x5::Url::queryItemValue( url, "word" ).trimmed(),
                                  Qt4x5::Url::queryItemValue( url, "punctuation_suffix" ) );
@@ -469,6 +520,7 @@ sptr< Dictionary::DataRequest > ArticleNetworkAccessManager::getResource(
         {
             if( url.scheme() == "gico" )
             {
+                contentType = "image/png";
                 QByteArray bytes;
                 QBuffer buffer(&bytes);
                 buffer.open(QIODevice::WriteOnly);
@@ -534,6 +586,7 @@ ArticleResourceReply::ArticleResourceReply( QObject * parent,
   QString const & contentType ):
   QNetworkReply( parent ), req( req_ ), alreadyRead( 0 )
 {
+  setUrl( netReq.url() );
   setRequest( netReq );
 
   setOpenMode( ReadOnly );
@@ -590,6 +643,26 @@ qint64 ArticleResourceReply::bytesAvailable() const
   return avail - alreadyRead + QNetworkReply::bytesAvailable();
 }
 
+#ifndef USE_QTWEBKIT
+bool ArticleResourceReply::atEnd() const
+{
+  if( streamingDeviceWorkarounds != StreamingDeviceWorkarounds::None )
+  {
+    // QWebEngineUrlRequestJob finishes and is destroyed as soon as QIODevice::atEnd() returns true.
+    // QNetworkReply::atEnd() returns true while bytesAvailable() returns 0.
+    // Return false if the data request is not finished to work around always-blank web page.
+    return req->isFinished() && QNetworkReply::atEnd();
+  }
+  return QNetworkReply::atEnd();
+}
+#endif
+
+void ArticleResourceReply::close()
+{
+  req->cancel();
+  QNetworkReply::close();
+}
+
 qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
 {
   // From the doc: "This function might be called with a maxSize of 0,
@@ -607,6 +680,20 @@ qint64 ArticleResourceReply::readData( char * out, qint64 maxSize )
     return finished ? -1 : 0;
 
   qint64 left = avail - alreadyRead;
+
+#ifndef USE_QTWEBKIT
+  if( streamingDeviceWorkarounds == StreamingDeviceWorkarounds::AtEndAndReadData && left == 0 && !finished )
+  {
+    // Work around endlessly repeated useless calls to readData(). The sleep duration is a tradeoff.
+    // On the one hand, lowering the duration reduces CPU usage. On the other hand, overly long
+    // sleep duration reduces page content update frequency in the web view.
+    // Waiting on a condition variable is more complex and actually works worse than
+    // simple fixed-duration sleeping, because the web view is not updated until
+    // the data request is finished if readData() returns only when new data arrives.
+    QThread::msleep( 30 );
+    return 0;
+  }
+#endif
   
   qint64 toRead = maxSize < left ? maxSize : left;
 
@@ -643,11 +730,16 @@ void ArticleResourceReply::finishedSlot()
 #endif
   }
 
-  finished();
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+  setFinished( true );
+#endif
+  emit finished();
 }
 
-BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( parent )
+BlockedNetworkReply::BlockedNetworkReply( QNetworkRequest const & request, QObject * parent ):
+  QNetworkReply( parent )
 {
+  setUrl( request.url() );
   setError( QNetworkReply::ContentOperationNotPermittedError, "Content Blocked" );
 
   connect( this, SIGNAL( finishedSignal() ), this, SLOT( finishedSlot() ),
@@ -660,5 +752,9 @@ BlockedNetworkReply::BlockedNetworkReply( QObject * parent ): QNetworkReply( par
 void BlockedNetworkReply::finishedSlot()
 {
   emit readyRead();
+
+#if QT_VERSION >= QT_VERSION_CHECK( 4, 8, 0 )
+  setFinished( true );
+#endif
   emit finished();
 }

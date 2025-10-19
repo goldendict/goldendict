@@ -69,6 +69,9 @@ static bool ownsClipboardMode( QClipboard::Mode mode )
 ScanPopup::ScanPopup( QWidget * parent,
                       Config::Class & cfg_,
                       ArticleNetworkAccessManager & articleNetMgr,
+#ifndef USE_QTWEBKIT
+                      QWebEngineProfile & webEngineProfile,
+#endif
                       AudioPlayerPtr const & audioPlayer_,
                       std::vector< sptr< Dictionary::Class > > const & allDictionaries_,
                       Instances::Groups const & groups_,
@@ -106,7 +109,11 @@ ScanPopup::ScanPopup( QWidget * parent,
 
   ui.queryError->hide();
 
-  definition = new ArticleView( ui.outerFrame, articleNetMgr, audioPlayer_,
+  definition = new ArticleView( ui.outerFrame, articleNetMgr,
+#ifndef USE_QTWEBKIT
+                                webEngineProfile,
+#endif
+                                audioPlayer_,
                                 allDictionaries, groups, true, cfg,
                                 openSearchAction,
                                 dictionaryBar.toggleViewAction()
@@ -266,6 +273,18 @@ ScanPopup::ScanPopup( QWidget * parent,
   connect( ui.pinButton, SIGNAL( clicked( bool ) ),
            this, SLOT( pinButtonClicked( bool ) ) );
 
+  connect( definition, SIGNAL( pageLoadingStateChanged( ArticleView *, bool ) ),
+           this, SLOT( pageLoadingStateChanged( ArticleView *, bool ) ) );
+
+  connect( definition, SIGNAL( canGoBackForwardChanged( ArticleView * ) ),
+           this, SLOT( updateBackForwardButtons() ) );
+
+  connect( definition, SIGNAL( pageUnloaded( ArticleView * ) ),
+           this, SLOT( pageUnloaded() ) );
+
+  connect( definition, SIGNAL( articleLoaded( ArticleView *, QString const &, bool ) ),
+           this, SLOT( articleLoaded() ) );
+
   connect( definition, SIGNAL( pageLoaded( ArticleView * ) ),
            this, SLOT( pageLoaded( ArticleView * ) ) );
 
@@ -362,6 +381,8 @@ ScanPopup::~ScanPopup()
 
 void ScanPopup::saveConfigData()
 {
+  definition->saveConfigData();
+
   // Save state, geometry and pin status
   cfg.popupWindowState = saveState( 1 );
   cfg.popupWindowGeometry = saveGeometry();
@@ -1188,12 +1209,18 @@ void ScanPopup::altModePoll()
   }
 }
 
-void ScanPopup::pageLoaded( ArticleView * )
+void ScanPopup::pageUnloaded()
+{
+  ui.pronounceButton->hide();
+}
+
+void ScanPopup::articleLoaded()
 {
   ui.pronounceButton->setVisible( definition->hasSound() );
+}
 
-  updateBackForwardButtons();
-
+void ScanPopup::pageLoaded( ArticleView * )
+{
   if ( cfg.preferences.pronounceOnLoadPopup )
     definition->playSound();
 }
@@ -1310,6 +1337,11 @@ void ScanPopup::switchExpandOptionalPartsMode()
 {
   if( isVisible() )
     emit switchExpandMode();
+}
+
+void ScanPopup::pageLoadingStateChanged( ArticleView *, bool isLoading )
+{
+  ui.translateBox->setIsPageLoading( isLoading );
 }
 
 void ScanPopup::updateBackForwardButtons()

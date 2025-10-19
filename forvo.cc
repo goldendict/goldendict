@@ -86,8 +86,7 @@ sptr< DataRequest > ForvoDictionary::getArticle( wstring const & word,
     return new DataRequestInstant( false );
   }
   else
-    return new ForvoArticleRequest( word, alts, apiKey, languageCode, getId(),
-                                    netMgr );
+    return new ForvoArticleRequest( word, alts, apiKey, languageCode, netMgr );
 }
 
 void ForvoDictionary::loadIcon() throw()
@@ -135,10 +134,8 @@ ForvoArticleRequest::ForvoArticleRequest( wstring const & str,
                                           vector< wstring > const & alts,
                                           QString const & apiKey_,
                                           QString const & languageCode_,
-                                          string const & dictionaryId_,
                                           QNetworkAccessManager & mgr ):
-  apiKey( apiKey_ ), languageCode( languageCode_ ),
-  dictionaryId( dictionaryId_ )
+  apiKey( apiKey_ ), languageCode( languageCode_ )
 {
   connect( &mgr, SIGNAL( finished( QNetworkReply * ) ),
            this, SLOT( requestFinished( QNetworkReply * ) ),
@@ -263,7 +260,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
 
                 string ref = string( "\"" ) + url.toEncoded().data() + "\"";
 
-                articleBody += addAudioLink( ref, dictionaryId ).c_str();
+                articleBody += addAudioLink( ref ).c_str();
 
                 bool isMale = ( item.namedItem( "sex" ).toElement().text().toLower() != "f" );
 
@@ -304,7 +301,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
                 string addTime =
                     tr( "Added %1" ).arg( item.namedItem( "addtime" ).toElement().text() ).toUtf8().data();
 
-                articleBody += "<td><a href=" + ref + " title=\"" + Html::escape( addTime ) + "\"><img src=\"qrcx://localhost/icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
+                articleBody += "<td><a href=" + ref + " title=\"" + Html::escape( addTime ) + "\"><img src=\"qrc:///icons/playsound.png\" border=\"0\" alt=\"Play\"/></a></td>";
                 articleBody += string( "<td>" ) + tr( "by" ).toUtf8().data() + " <a class='forvo_user' href='"
                                + userProfile + "'>"
                                + Html::escape( user.toUtf8().data() )
@@ -313,7 +310,7 @@ void ForvoArticleRequest::requestFinished( QNetworkReply * r )
                                + " "
                                + tr( "from" ).toUtf8().data()
                                + " "
-                               + "<img src='qrcx://localhost/flags/" + Country::englishNametoIso2( country ).toUtf8().data()
+                               + "<img src='qrc:///flags/" + Country::englishNametoIso2( country ).toUtf8().data()
                                + ".png'/> "
                                + Html::escape( country.toUtf8().data() )
                                + ")</span>"

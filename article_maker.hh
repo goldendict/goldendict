@@ -13,6 +13,9 @@
 #include "instances.hh"
 #include "wordfinder.hh"
 
+class QColor;
+class QWidget;
+
 /// This class generates the article's body for the given lookup request
 class ArticleMaker: public QObject
 {
@@ -22,6 +25,12 @@ class ArticleMaker: public QObject
   std::vector< Instances::Group > const & groups;
 
   QString displayStyle, addonStyle;
+
+#ifndef USE_QTWEBKIT
+  QWidget * dialogParent;
+  /// Ensures that a page background color specification warning message appears at most once per GoldenDict launch.
+  mutable bool hasShownBackgroundColorWarningMessage = false;
+#endif
 
   bool needExpandOptionalParts;
   bool collapseBigArticles;
@@ -36,7 +45,8 @@ public:
   ArticleMaker( std::vector< sptr< Dictionary::Class > > const & dictionaries,
                 std::vector< Instances::Group > const & groups,
                 QString const & displayStyle,
-                QString const & addonStyle);
+                QString const & addonStyle,
+                QWidget * dialogParent_ );
 
   /// Sets the display style to use for any new requests. This affects the
   /// choice of the stylesheet file.
@@ -63,8 +73,14 @@ public:
   /// known that there's no translation.
   sptr< Dictionary::DataRequest > makeNotFoundTextFor( QString const & word, QString const & group ) const;
 
-  /// Creates an 'untitled' page. The result is guaranteed to be instant.
-  sptr< Dictionary::DataRequest > makeEmptyPage() const;
+  /// Creates an 'untitled' page and returns its contents.
+  /// @param pageBackgroundColor if not null, is set to the page's background color
+  ///        specified in style sheets or to an invalid color in case of error.
+  /// @warning pageBackgroundColor must be a null pointer in the Qt WebKit version.
+  std::string makeBlankPageHtmlCode( QColor * pageBackgroundColor = 0 ) const;
+
+  /// Create an 'untitled' page
+  sptr< Dictionary::DataRequest > makeBlankPage() const;
 
   /// Create page with one picture
   sptr< Dictionary::DataRequest > makePicturePage( std::string const & url ) const;
@@ -81,9 +97,16 @@ public:
 
 private:
 
+#ifndef USE_QTWEBKIT
+  QColor colorFromString( std::string const & pageBackgroundColor ) const;
+#endif
+
+  /// Appends CSS style sheets to @p result.
+  void appendCss( std::string & result, bool expandOptionalParts, QColor * pageBackgroundColor ) const;
+
   /// Makes everything up to and including the opening body tag.
   std::string makeHtmlHeader( QString const & word, QString const & icon,
-                              bool expandOptionalParts ) const;
+                              bool expandOptionalParts, QColor * pageBackgroundColor = 0 ) const;
 
   /// Makes the html body for makeNotFoundTextFor()
   static std::string makeNotFoundBody( QString const & word, QString const & group );
