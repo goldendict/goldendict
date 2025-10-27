@@ -44,10 +44,14 @@ namespace
 
   QDir getDataDir()
   {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    QDir dir = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation );
+#else
     QDir dir = QStandardPaths::writableLocation( QStandardPaths::GenericDataLocation );
     dir.mkpath( xdgSubdirName );
     if ( !dir.cd( xdgSubdirName ) )
       throw exCantUseDataDir();
+#endif
 
     return dir;
   }
@@ -2396,11 +2400,7 @@ QString getCacheDir() throw()
 {
   return isPortableVersion() ? portableHomeDirPath() + "/cache"
 #if QT_VERSION >= QT_VERSION_CHECK( 5, 0, 0 )
-  #ifdef HAVE_X11
-                             : QStandardPaths::writableLocation( QStandardPaths::GenericCacheLocation ) + "/goldendict";
-  #else
                              : QStandardPaths::writableLocation( QStandardPaths::CacheLocation );
-  #endif
 #else
                              : QDesktopServices::storageLocation( QDesktopServices::CacheLocation );
 #endif
