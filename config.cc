@@ -346,8 +346,8 @@ WebSites makeDefaultWebSites()
   ws.push_back( WebSite( "b88cb2898e634c6638df618528284c2d", "Google En-En (Oxford)", "https://www.google.com/search?q=define:%GDWORD%&hl=en", false, "", true ) );
   ws.push_back( WebSite( "f376365a0de651fd7505e7e5e683aa45", "Urban Dictionary", "https://www.urbandictionary.com/define.php?term=%GDWORD%", false, "", true ) );
   ws.push_back( WebSite( "324ca0306187df7511b26d3847f4b07c", "Multitran (En)", "https://multitran.ru/c/m.exe?CL=1&l1=1&s=%GD1251%", false, "", true ) );
-  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "http://lingvopro.abbyyonline.com/en/Search/en-ru/%GDWORD%", false, "", true ) );
-  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "http://michaelis.uol.com.br/moderno/ingles/index.php?lingua=portugues-ingles&palavra=%GDISO1%", false, "", true ) );
+  ws.push_back( WebSite( "924db471b105299c82892067c0f10787", "Lingvo (En-Ru)", "https://www.lingvolive.com/en-us/translate/en-ru/%GDWORD%", false, "", true ) );
+  ws.push_back( WebSite( "087a6d65615fb047f4c80eef0a9465db", "Michaelis (Pt-En)", "https://michaelis.uol.com.br/moderno-ingles/busca/ingles-portugues-moderno/%GDWORD%/", false, "", true ) );
 
   return ws;
 }
