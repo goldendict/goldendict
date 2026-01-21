@@ -293,6 +293,7 @@ struct Preferences
   bool autoStart;
   bool doubleClickTranslates;
   bool selectWordBySingleClick;
+  bool autoScrollToTargetArticle;
   bool escKeyHidesMainWindow;
   bool alwaysOnTop;
 
