@@ -123,7 +123,10 @@ public:
   /// contexts is an optional map of context values to be passed for dictionaries.
   /// The only values to pass here are ones obtained from showDefinitionInNewTab()
   /// signal or none at all.
-  void openLink( QUrl const & url, QUrl const & referrer,
+  /// Returns false if the url scheme is unrecognized or the referenced resource
+  /// doesn't exist or if the resource failed to download. Returns true otherwise:
+  /// on success, if some other error occurs or if the resource is being downloaded asynchronously.
+  bool openLink( QUrl const & url, QUrl const & referrer,
                  QString const & scrollTo = QString(),
                  Contexts const & contexts = Contexts() );
 
@@ -157,7 +160,7 @@ public:
   /// Returns true if there's an audio reference on the page, false otherwise.
   bool hasSound();
 
-  /// Plays the first audio reference on the page, if any.
+  /// Plays the first valid audio reference on the page, if any.
   void playSound();
 
   void setZoomFactor( qreal factor )
@@ -277,7 +280,8 @@ private slots:
   void linkHovered( const QString & link, const QString & title, const QString & textContent );
   void contextMenuRequested( QPoint const & );
 
-  void resourceDownloadFinished();
+  /// Returns false if all requests are finished and none has any data; true otherwise.
+  bool resourceDownloadFinished();
 
   /// We handle pasting by attempting to define the word in clipboard.
   void pasteTriggered();
