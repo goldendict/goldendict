@@ -26,6 +26,7 @@ private slots:
   void onViewerDestroyed( QObject * destroyedViewer );
 
 private:
+  /// Returns an error message and resets viewer to null in case of an error.
   QString startViewer();
 
   QString playerCommandLine;

@@ -20,6 +20,8 @@ public:
   {
     connect( &AudioService::instance(), SIGNAL( error( QString ) ),
              this, SIGNAL( error( QString ) ) );
+    connect( &AudioService::instance(), SIGNAL( playbackStopped() ),
+             this, SLOT( onPlaybackStopped() ) );
   }
 
   ~AudioPlayer()
@@ -30,12 +32,20 @@ public:
   virtual QString play( const char * data, int size )
   {
     AudioService::instance().playMemory( data, size );
+    emit stateChanged( PlayingState );
     return QString();
   }
 
   virtual void stop()
   {
     AudioService::instance().stop();
+    emit stateChanged( StoppedState );
+  }
+
+private slots:
+  void onPlaybackStopped()
+  {
+    emit stateChanged( StoppedState );
   }
 };
 

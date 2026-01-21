@@ -24,10 +24,17 @@ public:
 signals:
   void cancelPlaying( bool waitUntilFinished );
   void error( QString const & message );
+  /// Is emitted when playback actually ends (not when stop is requested).
+  void playbackStopped();
+
+private slots:
+  void onThreadDestroyed();
 
 private:
   AudioService();
   ~AudioService();
+
+  int runningThreadCount;
 };
 
 class DecoderThread: public QThread

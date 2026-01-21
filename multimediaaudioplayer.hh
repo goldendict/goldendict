@@ -21,6 +21,7 @@ public:
 
 private slots:
   void onMediaPlayerError();
+  void onMediaPlayerStateChanged( QMediaPlayer::State state );
 
 private:
   QBuffer audioBuffer;
